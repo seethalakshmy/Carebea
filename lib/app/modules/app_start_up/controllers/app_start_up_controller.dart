@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:carebea/app/routes/app_pages.dart' as paths;
 
 class AppStartUpController extends GetxController {
   //TODO: Implement AppStartUpController
@@ -16,6 +17,7 @@ class AppStartUpController extends GetxController {
     super.onReady();
     Future.delayed(const Duration(seconds: 3),(){
       debugPrint("splash screen timer done");
+      Get.toNamed(paths.Routes.LOGIN);
     });
 
   }
