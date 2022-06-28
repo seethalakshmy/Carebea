@@ -5,8 +5,6 @@ import '../controllers/app_start_up_controller.dart';
 class AppStartUpBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<AppStartUpController>(
-      () => AppStartUpController(),
-    );
+    Get.put<AppStartUpController>(AppStartUpController(),);
   }
 }

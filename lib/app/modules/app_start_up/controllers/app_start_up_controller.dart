@@ -8,14 +8,16 @@ class AppStartUpController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    Future.delayed(const Duration(seconds: 3),(){
-      debugPrint("scs");
-    });
+
   }
 
   @override
   void onReady() {
     super.onReady();
+    Future.delayed(const Duration(seconds: 3),(){
+      debugPrint("splash screen timer done");
+    });
+
   }
 
   @override
@@ -23,5 +25,4 @@ class AppStartUpController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
 }
