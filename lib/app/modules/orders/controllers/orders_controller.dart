@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
 
-class DashboardController extends GetxController {
+class OrdersController extends GetxController {
+  //TODO: Implement OrdersController
 
-  final currentScreenIndex = 0.obs;
+  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -18,9 +19,5 @@ class DashboardController extends GetxController {
     super.onClose();
   }
 
-  bottomNavViewChange(int index){
-    currentScreenIndex.value = index;
-
-  }
-
+  void increment() => count.value++;
 }

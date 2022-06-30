@@ -8,13 +8,19 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/orders/bindings/orders_binding.dart';
+import '../modules/orders/views/orders_view.dart';
+import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/profile_view.dart';
+import '../modules/shops/bindings/shops_binding.dart';
+import '../modules/shops/views/shops_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.APP_START_UP;
+  static const INITIAL = Routes.DASHBOARD;
 
   static final routes = [
     GetPage(
@@ -36,6 +42,23 @@ class AppPages {
       name: _Paths.DASHBOARD,
       page: () => const DashboardView(),
       binding: DashboardBinding(),
+      children: [
+        GetPage(
+          name: _Paths.SHOPS,
+          page: () => const ShopsView(),
+          binding: ShopsBinding(),
+        ),
+      ],
+    ),
+    GetPage(
+      name: _Paths.ORDERS,
+      page: () => const OrdersView(),
+      binding: OrdersBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
     ),
   ];
 }
