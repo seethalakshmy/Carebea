@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../utils/assets.dart';
 import '../controllers/home_controller.dart';
 import 'homepage_menu_cards.dart';
+import 'homepage_upcoming_delivery_view.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
@@ -13,11 +14,11 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return  Scaffold(
       body: SafeArea(
-        child: Padding(
+        child: CustomScrollView(
+          slivers: <Widget>[
+        SliverPadding(
           padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-          child: CustomScrollView(
-            slivers: <Widget>[
-          SliverAppBar(
+          sliver: SliverAppBar(
 
           pinned: true,
             leading: Image.asset(Assets.assetsLogo),
@@ -26,25 +27,31 @@ class HomeView extends GetView<HomeController> {
               Image.asset(Assets.assetsScan, width: 40, height: 40,),
             ],
           ),
-              SliverToBoxAdapter(
+        ),
+            SliverPadding(
+              padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+              sliver: SliverToBoxAdapter(
                 child: Text("Dashboard", style: Theme.of(context).textTheme.headlineLarge,),
               ),
-              SliverPadding(
-                padding: const EdgeInsets.only(top: 15),
-                sliver: SliverToBoxAdapter(
-                  child: SearchWidget()
-                ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15),
+              sliver: SliverToBoxAdapter(
+                child: SearchWidget()
               ),
-              SliverPadding(
-                padding: const EdgeInsets.only(top: 20),
-                sliver: SliverToBoxAdapter(
-                  child: HomeMenuCards()
-                ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.only(top: 20, left: 15.0, right: 15.0),
+              sliver: SliverToBoxAdapter(
+                child: HomeMenuCards()
               ),
+            ),
+            SliverToBoxAdapter(
+                child: HomepageUpcomingDeliveryView()
+            )
 
-          ]
+        ]
 
-          ),
         ),
 
       )

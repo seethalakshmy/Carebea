@@ -9,7 +9,7 @@ class HomeMenuCards extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-      height: Get.size.height*.35,
+      height: Get.size.height*.3,
       child: GridView(
           gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,

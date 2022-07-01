@@ -15,7 +15,8 @@ void main() {
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,),
         textTheme: TextTheme(
-          headlineLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black)
+          headlineLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
+          labelLarge: TextStyle(fontWeight: FontWeight.w500, fontSize: 16, color: Colors.black)
         )
       ),
     ),
