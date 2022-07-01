@@ -21,12 +21,12 @@ void main() {
             action: Color(0xff1CA645),
             cardBackground: Color(0xffFFF1F1),
             shadowColor: Color(0x1A000000),
-            regular: TextStyle(
+            medium: TextStyle(
               fontFamily: "Poppins",
               fontWeight: FontWeight.w500,
               color: Color(0xff111111),
             ),
-            medium: TextStyle(
+            regular: TextStyle(
               fontFamily: "Poppins",
               fontWeight: FontWeight.w400,
               color: Color(0xff111111),
