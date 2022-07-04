@@ -1,5 +1,9 @@
+import 'package:carebea/app/modules/shops/views/shop_details.dart';
 import 'package:carebea/app/utils/assets.dart';
+import 'package:carebea/app/utils/theme.dart';
+import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ShopListTile extends StatefulWidget {
   const ShopListTile({Key? key}) : super(key: key);
@@ -11,55 +15,52 @@ class ShopListTile extends StatefulWidget {
 class _ShopListTileState extends State<ShopListTile> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * .15,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+    return InkWell(
+      onTap: () {
+        Get.to(() => const ShopDetails());
+      },
+      child: CustomCard(
+        hasShadow: false,
         color: const Color(0xfffff1f1),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.only(top: 16, bottom: 12, left: 13, right: 13),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Trinity Shop',
-              style: TextStyle(fontSize: 16,
-                  fontWeight: FontWeight.bold),
+              style: customTheme(context).medium.copyWith(fontSize: 13),
             ),
             const SizedBox(
-              height: 10,
+              height: 6,
             ),
             Row(
               children: [
-                //TODO: uncomment
-                // Image.asset(
-                //   Assets.assetsLocationFilled,
-                //   scale: 3,
-                // ),
+                Image.asset(
+                  Assets.assetsLocationFilled,
+                  scale: 3,
+                ),
                 const SizedBox(
                   width: 5,
                 ),
-                const Text(
+                Text(
                   'Akshay Nagar 1st Block Cross,Rammurthy',
-                  style: TextStyle(fontSize: 14),
+                  style: customTheme(context).regular.copyWith(fontSize: 11),
                 ),
               ],
             ),
             Row(
               children: [
-                //TODO : uncomment
-                // Image.asset(
-                //   Assets.assetsPhone,
-                //   scale: 3,
-                // ),
+                Image.asset(
+                  Assets.assetsPhone,
+                  scale: 3,
+                ),
                 const SizedBox(
                   width: 5,
                 ),
-                const Text(
+                Text(
                   '+91 6398541236',
-                  style: TextStyle(fontSize: 14),
+                  style: customTheme(context).regular.copyWith(fontSize: 11),
                 ),
               ],
             ),
@@ -67,15 +68,14 @@ class _ShopListTileState extends State<ShopListTile> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Row(
-                  children: const [
+                  children: [
                     Text(
                       'View Details',
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      style: customTheme(context).medium.copyWith(fontSize: 11),
                     ),
                     Icon(
                       Icons.arrow_forward_ios_sharp,
-                      size: 20,
+                      size: 14,
                     )
                   ],
                 ),
