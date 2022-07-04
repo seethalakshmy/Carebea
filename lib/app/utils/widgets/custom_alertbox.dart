@@ -33,14 +33,14 @@ class CustomAlertbox extends StatelessWidget {
               ),
             Text(
               title,
-              style: Theme.of(context).extension<CustomTheme>()!.medium.copyWith(fontSize: 13, color: Colors.black),
+              style: customTheme(context).medium.copyWith(fontSize: 13, color: Colors.black),
             ),
             const SizedBox(
               height: 12,
             ),
             Text(
               content,
-              style: Theme.of(context).extension<CustomTheme>()!.regular.copyWith(
+              style: customTheme(context).regular.copyWith(
                     fontSize: 12,
                     color: Colors.black,
                   ),
