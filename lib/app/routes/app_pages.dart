@@ -1,3 +1,4 @@
+import 'package:carebea/app/modules/shops/views/list_shops.dart';
 import 'package:get/get.dart';
 
 import '../modules/app_start_up/bindings/app_start_up_binding.dart';
@@ -13,7 +14,6 @@ import '../modules/orders/views/orders_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/shops/bindings/shops_binding.dart';
-import '../modules/shops/views/shops_view.dart';
 
 part 'app_routes.dart';
 
@@ -45,7 +45,7 @@ class AppPages {
       children: [
         GetPage(
           name: _Paths.SHOPS,
-          page: () => const ShopsView(),
+          page: () => const ListShops(),
           binding: ShopsBinding(),
         ),
       ],
