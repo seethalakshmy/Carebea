@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,6 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/assets.dart';
+import '../../../utils/theme.dart';
+import '../../../utils/widgets/custom_button.dart';
+import '../../../utils/widgets/custom_textfield.dart';
 import '../controllers/add_shop_controller.dart';
 
 class AddShopView extends GetView<AddShopController> {
@@ -26,407 +31,353 @@ class AddShopView extends GetView<AddShopController> {
         ],
       ),
       body: SingleChildScrollView(
-        child:Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: const [
-                  Icon(Icons.arrow_back_ios_new,size: 20,),
-                  SizedBox(width: 15,),
-                  Text('Add new shop',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),)
-                ],
-              ),
-              const SizedBox(height: 30,),
-              Form(
-                  child:Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Shop name",style: TextStyle(fontSize: 12),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 5.0),
-                        child:  Container(
-                          height: MediaQuery.of(context).size.height * .08,
-                          decoration: BoxDecoration(
-                            color: Colors.white24,
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: TextFormField(
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]+|\b\s')),
-                            ],
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return 'Shop name can\'t be empty';
-                              }
-                              return null;
-                            },
-                            onChanged: (value){},
-                            decoration: const InputDecoration(
-                              // disabledBorder:InputBorder.none,
-                              border: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              filled: true,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Row(
-                        children: const [
-                          Text(
-                            "Last name",style: TextStyle(fontSize: 12),
-                          ),
-                          SizedBox(width: 10,),
-                          Text('(location should be the last name)',style: TextStyle(color: Colors.black54,fontStyle: FontStyle.italic),)
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 5.0),
-                        child:  Container(
-                          height: MediaQuery.of(context).size.height * .08,
-                          decoration: BoxDecoration(
-                            color: Colors.white24,
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: TextFormField(
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]+|\b\s')),
-                            ],
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return 'Last name can\'t be empty';
-                              }
-                              return null;
-                            },
-                            decoration: const InputDecoration(
-                              // disabledBorder:InputBorder.none,
-                              border: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              filled: true,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const Text(
-                        "Shop category",style: TextStyle(fontSize: 12),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8,bottom: 12),
-                        child: DropdownSearch<String>(
-                          popupProps: const PopupProps.menu(
-                            showSearchBox: true,
-                            showSelectedItems: true,
-                          ),
-                          dropdownDecoratorProps: const DropDownDecoratorProps(
+        child:Form(
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: const [
+                    Icon(Icons.arrow_back_ios_new,size: 20,),
+                    SizedBox(width: 15,),
+                    Text('Add new shop',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),)
+                  ],
+                ),
+                const SizedBox(height: 30,),
+                Text('Shop name'),
+                SizedBox(height: 5,),
+                CustomTextField(
+                  validaton: (value){
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Shop name can\'t be empty';
+                    }
+                    return null;
 
-                          ),
-                          items: const ["Retail", "Wholesale"],
-                          selectedItem: "",
+                  },
 
-                        ),
-                      ),
-                      const Text('Customer type',style: TextStyle(fontSize: 12)),
-                      const CustomerTypeRadioButton(),
-                      Row(
-                        children: const [
-                          Text(
-                            "GST",style: TextStyle(fontSize: 12),
-                          ),
-                          Text("\*",style: TextStyle(color: Colors.blue),)
-
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 5.0),
-                        child:  Container(
-                          height: MediaQuery.of(context).size.height * .08,
-                          decoration: BoxDecoration(
-                            color: Colors.white24,
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: TextFormField(
-                            keyboardType:TextInputType.number,
-                            validator: (value) {
-                              return null;
+                ),
+                SizedBox(height: 5,),
 
 
-                            },
-                            decoration: const InputDecoration(
-                              // disabledBorder:InputBorder.none,
-                              border: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              filled: true,
-                            ),
-                          ),
+                RichText(text: TextSpan(
+                  text: 'Last name',style: TextStyle(color: Colors.black),
+                  children: const <TextSpan>[
+                    TextSpan(
+                        text: '  (location should be the last name)',style: TextStyle(color:Colors.black54,fontStyle: FontStyle.italic)),
+                  ],
+                )),
+                SizedBox(height: 5,),
+                CustomTextField(
+                  validaton: (value){
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Last name can\'t be empty';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 5,),
+
+                const Text(
+                  "Shop category",style: TextStyle(fontSize: 12),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8,bottom: 12),
+                  child: DropdownSearch<String>(
+                    validator: (String? value) {
+                      if (value == null){
+                        return "Shop category  can\'t be empty";
+
+                      }
+                        return null;
+                    },
+                    dropdownDecoratorProps: DropDownDecoratorProps(dropdownSearchDecoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none,
                         ),
-                      ),
-                      const Text('Location',style: TextStyle(fontSize: 12)),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: Row(
-                          children: const [
-                            Icon(Icons.add,color: Colors.purple,),
-                            Text('Add shop location',style: TextStyle(fontSize: 12,color: Colors.purple))
-                          ],
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none,
                         ),
-                      ),
-                      const SizedBox(height: 15,),
-                      const Text(
-                        "Local area/city",style: TextStyle(fontSize: 12),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 5.0),
-                        child:  Container(
-                          height: MediaQuery.of(context).size.height * .08,
-                          decoration: BoxDecoration(
-                            color: Colors.white24,
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: TextFormField(
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]+|\b\s')),
-                            ],
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return 'Area/City can\'t be empty';
-                              }
-                              return null;
-                            },
-                            decoration: const InputDecoration(
-                              // disabledBorder:InputBorder.none,
-                              border: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              filled: true,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Row(
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none,
+                        ),                      filled: true,
+                      fillColor: Theme.of(context).extension<CustomTheme>()!.textFormFieldColor
+                    )),
+                    popupProps: const PopupProps.menu(
+                      showSearchBox: true,
+                      showSelectedItems: true,
+                    ),
+
+                    items: const ["Retail", "Wholesale"],
+                    selectedItem: "",
+
+                  ),
+                ),
+                const Text('Customer type',style: TextStyle(fontSize: 12)),
+                const CustomerTypeRadioButton(),
+                RichText(text: TextSpan(
+                  text: 'GST',style: TextStyle(color: Colors.black),
+                  children: const <TextSpan>[
+                    TextSpan(
+                        text: '\*',style: TextStyle(color:Colors.blue)),
+                  ],
+                )),
+                SizedBox(height: 5,),
+                CustomTextField(
+                  inputType: TextInputType.number,
+                  validaton: (value){
+                    if(value == null || value.trim().isEmpty){
+                      return 'GST  can\'t be empty';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 25,),
+                const Text('Location',style: TextStyle(fontSize: 12)),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: InkWell(
+                    onTap: (){},
+                    child: Row(
+                      children:  [
+                        Icon(Icons.add,color:  Theme.of(context).extension<CustomTheme>()!.primary,),
+                        Text('Add shop location',style: TextStyle(fontSize: 12,color:Theme.of(context).extension<CustomTheme>()!.primary))
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 15,),
+                Text('Local area/city'),
+                SizedBox(height: 5,),
+                CustomTextField(
+                  inputFormatters: [
+
+                    FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]+|\b\s')),
+                  ],
+                  validaton: (value){
+                    if(value == null || value.trim().isEmpty){
+                      return 'Local area/city can\'t be empty';
+
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 15,),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text('Pincode',style: TextStyle(fontSize: 12)),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8),
-                                  child: Container(
-                                    height: MediaQuery.of(context).size.height * .08,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white24,
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    child: TextFormField(
-                                      maxLength: 6,
-                                      keyboardType:TextInputType.number,
-                                      validator: (value) {
-                                        if (value!.isEmpty) return 'pincode can\'t be empty';
-                                        return null;
-                                      },
-                                      decoration: const InputDecoration(
-                                        // disabledBorder:InputBorder.none,
-                                        border: InputBorder.none,
-                                        enabledBorder: InputBorder.none,
-                                        filled: true,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                          Text('Pincode'),
+                          SizedBox(height: 5,),
+                          CustomTextField( maxlength: 6,
+                           inputType: TextInputType.number,
+                            validaton: (value){
+                              if (value!.isEmpty) return 'pincode can\'t be empty';
+                              else if(value.length<6){
+                                return "Pincode must be 6 digits";
 
-                              ],
-
-                            ),
-                          ),
-                          const SizedBox(width: 10,),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text('District',style: TextStyle(fontSize: 12)),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8),
-                                  child: Container(
-                                    height: MediaQuery.of(context).size.height * .08,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white24,
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    child: TextFormField(
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]+|\b\s')),
-                                      ],
-                                      validator: (value) {
-                                        if (value == null || value.trim().isEmpty) {
-                                          return 'District can\'t be empty';
-                                        }
-                                        return null;
-                                      },
-                                      decoration: const InputDecoration(
-                                        // disabledBorder:InputBorder.none,
-                                        border: InputBorder.none,
-                                        enabledBorder: InputBorder.none,
-                                        filled: true,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-
-                              ],
-
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Text('State',style: TextStyle(fontSize: 12)),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8),
-                        child: Container(
-                          height: MediaQuery.of(context).size.height * .08,
-                          decoration: BoxDecoration(
-                            color: Colors.white24,
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: TextFormField(
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]+|\b\s')),
-                            ],
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return 'State can\'t be empty';
                               }
                               return null;
+
                             },
-                            decoration: const InputDecoration(
-                              // disabledBorder:InputBorder.none,
-                              border: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              filled: true,
-                            ),
                           ),
-                        ),
-                      ),
-                      Row(
-                        children: const [
-                          Text('Phone number',style: TextStyle(fontSize: 12)),
-                          Text('\*',style: TextStyle(color: Colors.blue),)
+
                         ],
+
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8),
-                        child: Container(
-                          height: MediaQuery.of(context).size.height * .08,
-                          decoration: BoxDecoration(
-                            color: Colors.white24,
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: TextFormField(
-                            keyboardType: TextInputType.phone,
-                            maxLength: 10,
-                            validator: (value) {
-                              if (value!.isEmpty) return "Phone number can\'t be empty";
-                              if(value == '0000000000') return 'Invalid number';
-                              return null;
-                            },
-                            decoration: const InputDecoration(
-                              // disabledBorder:InputBorder.none,
-                              border: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              filled: true,
+                    ),
+                    const SizedBox(width: 10,),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('District'),
+                            SizedBox(height: 5,),
+                            CustomTextField(
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]+|\b\s')),
+                              ],
+                              validaton: (value){
+                                if(value == null || value.trim().isEmpty){
+                                  return 'District can\'t be empty';
+
+                                }
+                                return null;
+
+                              },
                             ),
-                          ),
-                        ),
-                      ),
-                      const Text(
-                        "Branch",style: TextStyle(fontSize: 12),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8,bottom: 12),
-                        child: DropdownSearch<String>(
-                          popupProps: const PopupProps.menu(
-                            showSearchBox: true,
-                            showSelectedItems: true,
-                          ),
-                          dropdownDecoratorProps: const DropDownDecoratorProps(
 
-                          ),
-                          items: const ["Kalamasseri", "Aluva", "Malappuram"],
-                          selectedItem: "",
-
-                        ),
-                      ),
-                      const Text(
-                        "Zone",style: TextStyle(fontSize: 12),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8,bottom: 12),
-                        child: DropdownSearch<String>(
-                          popupProps: const PopupProps.menu(
-                            showSearchBox: true,
-                            showSelectedItems: true,
-                          ),
-                          dropdownDecoratorProps: const DropDownDecoratorProps(
-
-                          ),
-                          items: const ["A", "B", "C"],
-                          selectedItem: "",
-
-                        ),
-                      ),
-                      const Text(
-                        "Route",style: TextStyle(fontSize: 12),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8,bottom: 12),
-                        child: DropdownSearch<String>(
-                          popupProps: const PopupProps.menu(
-                            showSearchBox: true,
-                            showSelectedItems: true,
-                          ),
-                          dropdownDecoratorProps: const DropDownDecoratorProps(
-
-                          ),
-                          items: const ["x", "y", "z"],
-                          selectedItem: "",
-
-                        ),
-                      ),
-                      Row(
-                        children: const [
-                          Text('Opening balance',style: TextStyle(fontSize: 12)),
-                          Text(' (mandatory only for existing shops)',style: TextStyle(fontStyle: FontStyle.italic,color: Colors.black54),)
-                        ],
-                      ),
-                      Container(
-                        height: MediaQuery.of(context).size.height * .08,
-                        decoration: BoxDecoration(
-                          color: Colors.white24,
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: TextFormField(
-                          inputFormatters: [
-                            FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]|\b\s')),
                           ],
-                          validator: (value) {
-                            return null;
 
-
-                          },
-                          decoration: const InputDecoration(
-                            // disabledBorder:InputBorder.none,
-                            border: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            filled: true,
-                          ),
                         ),
                       ),
-                    ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10,),
+                Text('State'),
+                SizedBox(height: 5,),
+                CustomTextField(
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]+|\b\s')),
+                  ],
+                ),
+                SizedBox(height: 10,),
+                RichText(text: TextSpan(
+                  text: 'Phone number',style: TextStyle(color: Colors.black),
+                  children: const <TextSpan>[
+                    TextSpan(
+                        text: '\*',style: TextStyle(color:Colors.blue)),
+                  ],
+                )),              SizedBox(height: 5,),
+                CustomTextField(
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                  maxlength: 10,
+                  inputType: TextInputType.phone,
+                  validaton: (value) {
+                    if (value!.isEmpty) return null;
+                    else if(value == '0000000000') return 'Invalid number';
+                    else if(value.length<10) return "Mobile number must be 10 digits";
+                    return null;
+                  },
+                ),
+                SizedBox(height: 15,),
+                const Text(
+                  "Branch",style: TextStyle(fontSize: 12),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8,bottom: 12),
+                  child: DropdownSearch<String>(
+                    validator: (String? value) {
+                      if (value == null){
+                        return "Branch  can\'t be empty";
 
-                  )
-              )
-            ],
+                      }
+                      return null;
+                    },
+                    popupProps: const PopupProps.menu(
+                      showSearchBox: true,
+                      showSelectedItems: true,
+                    ),
+                    dropdownDecoratorProps: DropDownDecoratorProps(dropdownSearchDecoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none,
+                        ),                      filled: true,
+                        fillColor: Theme.of(context).extension<CustomTheme>()!.textFormFieldColor
+                    )),
+                    items: const ["Kalamasseri", "Aluva", "Malappuram"],
+                    selectedItem: "",
+
+                  ),
+                ),
+                const Text(
+                  "Zone",style: TextStyle(fontSize: 12),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8,bottom: 12),
+                  child: DropdownSearch<String>(
+                    validator: (String? value) {
+                      if (value == null){
+                        return "Zone  can\'t be empty";
+
+                      }
+                      return null;
+                    },
+                    popupProps: const PopupProps.menu(
+                      showSearchBox: true,
+                      showSelectedItems: true,
+                    ),
+                    dropdownDecoratorProps: DropDownDecoratorProps(dropdownSearchDecoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none,
+                        ),                      filled: true,
+                        fillColor: Theme.of(context).extension<CustomTheme>()!.textFormFieldColor
+                    )),
+                    items: const ["A", "B", "C"],
+                    selectedItem: "",
+
+                  ),
+                ),
+                const Text(
+                  "Route",style: TextStyle(fontSize: 12),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8,bottom: 12),
+                  child: DropdownSearch<String>(
+                    validator: (String? value) {
+                      if (value == null){
+                        return "Route can\'t be empty";
+
+                      }
+                      return null;
+                    },
+                    popupProps: const PopupProps.menu(
+                      showSearchBox: true,
+                      showSelectedItems: true,
+                    ),
+                    dropdownDecoratorProps: DropDownDecoratorProps(dropdownSearchDecoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none,
+                        ),                      filled: true,
+                        fillColor: Theme.of(context).extension<CustomTheme>()!.textFormFieldColor
+                    )),
+                    items: const ["x", "y", "z"],
+                    selectedItem: "",
+
+                  ),
+                ),
+                RichText(text: TextSpan(
+                  text: 'Opening balance',style: TextStyle(color: Colors.black),
+                  children: const <TextSpan>[
+                    TextSpan(
+                        text: '  (mandatory only for existing shops)',style: TextStyle(color:Colors.black54,fontStyle: FontStyle.italic)),
+                  ],
+                )),
+                SizedBox(height: 5,),
+                CustomTextField(
+                ),
+                SizedBox(height: 25,),
+                CustomButton(onTap: () { 
+                  
+                }, title: 'Add Shop',)
+              ],
+            ),
           ),
         ),
       )
@@ -468,7 +419,7 @@ class _CustomerTypeRadioButtonState extends State<CustomerTypeRadioButton> {
               setSelectedRadio(val);
               radioValue = 1;
             },
-            activeColor: Colors.purple),
+            activeColor: Theme.of(context).extension<CustomTheme>()!.primary),
         const Text("B2B"),
         const SizedBox(width: 50,),
         Radio<int>(
@@ -478,7 +429,7 @@ class _CustomerTypeRadioButtonState extends State<CustomerTypeRadioButton> {
             setSelectedRadio(val);
             radioValue = 2;
           },
-          activeColor:Colors.purple,
+          activeColor:Theme.of(context).extension<CustomTheme>()!.primary,
         ),
         const Text("B2C")
 
