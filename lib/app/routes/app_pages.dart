@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/Route_page/bindings/route_page_binding.dart';
+import '../modules/Route_page/views/route_page_view.dart';
 import '../modules/add_shop/bindings/add_shop_binding.dart';
 import '../modules/add_shop/views/add_shop_view.dart';
 import '../modules/app_start_up/bindings/app_start_up_binding.dart';
@@ -22,7 +24,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.ADD_SHOP;
+  static const INITIAL = Routes.ROUTE_PAGE;
 
   static final routes = [
     GetPage(
@@ -66,6 +68,11 @@ class AppPages {
       name: _Paths.ADD_SHOP,
       page: () => const AddShopView(),
       binding: AddShopBinding(),
+    ),
+    GetPage(
+      name: _Paths.ROUTE_PAGE,
+      page: () => const RoutePageView(),
+      binding: RoutePageBinding(),
     ),
   ];
 }
