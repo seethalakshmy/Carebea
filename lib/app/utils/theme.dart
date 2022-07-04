@@ -17,7 +17,6 @@ class CustomTheme extends ThemeExtension<CustomTheme> {
     required this.shadowColor,
     required this.medium,
     required this.regular,
-     
   });
 
   @override
@@ -27,8 +26,8 @@ class CustomTheme extends ThemeExtension<CustomTheme> {
     Color? action,
     Color? cardBackground,
     Color? shadowColor,
-     TextStyle? medium,
-  TextStyle? regular,
+    TextStyle? medium,
+    TextStyle? regular,
   }) =>
       CustomTheme(
         primary: primary ?? this.primary,
@@ -56,3 +55,5 @@ class CustomTheme extends ThemeExtension<CustomTheme> {
     );
   }
 }
+
+CustomTheme customTheme(BuildContext context) => Theme.of(context).extension<CustomTheme>()!;
