@@ -30,7 +30,7 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                   SizedBox(width: 15,),
                   Text('Order ID:#456789',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
                   SizedBox(width: MediaQuery.of(context).size.width*.4,),
-                  Image.asset(Assets.editIcon,
+                  Image.asset(Assets.edit,
                   scale: 3,)
 
                 ],
@@ -54,15 +54,13 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                       children: [
                         Text(
                           'Order ID: #656546',
-                          style: TextStyle(color:Theme.of(context).extension<CustomTheme>()!.secondary,
-                              fontSize: 15),
-                          // style: customTheme(context)
-                          //     .medium
-                          //     .copyWith(fontSize: 12, color: customTheme(context).secondary),
+                          style: customTheme(context)
+                              .medium
+                              .copyWith(fontSize: 12, color: customTheme(context).secondary),
                         ),
                         Text(
                           'Delivery Date : 20/06/2022',
-                          // style: customTheme(context).regular.copyWith(fontSize: 11),
+                          style: customTheme(context).regular.copyWith(fontSize: 11),
                         ),
                       ],
                     ),
@@ -70,13 +68,11 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.greenAccent,
-                        // color: customTheme(context).action.withOpacity(.25),
+                        color: customTheme(context).action.withOpacity(.25),
                       ),
                       child: Text(
                         'Delivered',
-                        style: TextStyle(color: Theme.of(context).extension<CustomTheme>()!.action),
-                        // style: customTheme(context).medium.copyWith(fontSize: 10, color: customTheme(context).action),
+                        style: customTheme(context).medium.copyWith(fontSize: 10, color: customTheme(context).action),
                       ),
                     ),
                   ],
@@ -84,12 +80,17 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                 const Divider(
                   thickness: 1,
                 ),
-                Text("Sales Representative: Akash Kumar",style: TextStyle(fontWeight: FontWeight.w600),),
+                Text("Sales Representative: Akash Kumar",
+                  style: customTheme(context).medium.copyWith(fontSize: 14),
+                ),
                 Text("ordered date:11/06/2022"),
                 SizedBox(height: 10,),
                 Row(children: [
-                  Icon(Icons.location_on,color:Theme.of(context).extension<CustomTheme>()!.primary ,size: 15,),
-                  Text("Trinity Shop",style: TextStyle(fontWeight: FontWeight.w600),)
+                  Image.asset(Assets.assetsLocationFilled,scale: 3,),
+                  SizedBox(width: 5,),
+                  Text("Trinity Shop",
+                    style: customTheme(context).medium.copyWith(fontSize: 14),
+                  )
                 ],),
 
                 Padding(
@@ -98,7 +99,9 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                 ),
                 SizedBox(height: 15,),
 
-                Text("Outstanding amount",style: TextStyle(fontWeight: FontWeight.w600),),
+                Text("Outstanding amount",
+                  style: customTheme(context).medium.copyWith(fontSize: 14),
+                ),
                 Text("₹2,45,000"),
                 SizedBox(height: 10,),
                 Divider(
@@ -109,9 +112,9 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                 Row(
                   children: [
                     Text("Product",style: TextStyle(fontWeight: FontWeight.w600),),
-                    SizedBox(width: MediaQuery.of(context).size.width*.4,),
+                    SizedBox(width: MediaQuery.of(context).size.width*.39,),
                     Text("Qty",style: TextStyle(fontWeight: FontWeight.w600),),
-                    SizedBox(width: MediaQuery.of(context).size.width*.2,),
+                    SizedBox(width: MediaQuery.of(context).size.width*.19,),
                     Text("Price",style: TextStyle(fontWeight: FontWeight.w600),)
                   ],
                 ),
@@ -122,7 +125,9 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                     SizedBox(width: MediaQuery.of(context).size.width*.02,),
                     Text("20x"),
                     SizedBox(width: MediaQuery.of(context).size.width*.19,),
-                    Text("₹951.00")
+                    Text("₹951.00",
+                      style: customTheme(context).regular.copyWith(fontSize: 12),
+                    )
                   ],
                 ),
                 SizedBox(height: 10,),
@@ -133,7 +138,9 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                     SizedBox(width: MediaQuery.of(context).size.width*.02,),
                     Text("20x"),
                     SizedBox(width: MediaQuery.of(context).size.width*.19,),
-                    Text("₹51.00")
+                    Text("₹51.00",
+                      style: customTheme(context).regular.copyWith(fontSize: 12),
+                    )
                   ],
                 ),
                 SizedBox(height: 10,),
@@ -144,57 +151,72 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                     SizedBox(width: MediaQuery.of(context).size.width*.02,),
                     Text("20x"),
                     SizedBox(width: MediaQuery.of(context).size.width*.19,),
-                    Text("₹101.00")
+                    Text("₹101.00",
+                      style: customTheme(context).regular.copyWith(fontSize: 12),
+                    )
                   ],
                 ),
                 SizedBox(height: 10,),
                 Divider(
                   thickness: 1,
                 ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text("Item Total"),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Item Total',
+                          style: customTheme(context).regular.copyWith(fontSize: 12),
+                        ),
+                        SizedBox(height: 10,),
+                        Text('GST',
+                          style: customTheme(context).regular.copyWith(fontSize: 12),
+                        ),
+                        SizedBox(height: 10,),
+                        Text('CGST',
+                          style: customTheme(context).regular.copyWith(fontSize: 12),
+                        ),
+                        SizedBox(height: 10,),
+                        Text('Discount',
+                          style: customTheme(context).regular.copyWith(fontSize: 12),
+                        ),
+                        SizedBox(height: 20,),
+                        Text('Grand Total',style: customTheme(context).medium.copyWith(fontSize: 14),),
+                      ],
+                    ),
                     SizedBox(width:MediaQuery.of(context).size.width*.15,),
-                    Text("₹805.00")
-
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("₹805.00",
+                          style: customTheme(context).regular.copyWith(fontSize: 12),
+                        ),
+                        SizedBox(height: 10,),
+                        Text("₹155.00",
+                          style: customTheme(context).regular.copyWith(fontSize: 12),
+                        ),
+                        SizedBox(height: 10,),
+                        Text("₹15.00",
+                          style: customTheme(context).regular.copyWith(fontSize: 12),
+                        ),
+                        SizedBox(height: 10,),
+                        Text("₹0.00",
+                          style: customTheme(context).regular.copyWith(fontSize: 12),
+                        ),
+                        SizedBox(height: 20,),
+                        Text("₹1245",
+                          style: customTheme(context).medium.copyWith(fontSize: 14),
+                        ),
+                      ],
+                    )
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text("GST"),
-                    SizedBox(width:MediaQuery.of(context).size.width*.15,),
-                    Text("₹155.00")
-
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text("CGSTl"),
-                    SizedBox(width:MediaQuery.of(context).size.width*.15,),
-                    Text("₹15.00")
-
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text("Discount"),
-                    Text("₹0.00")
-
-                  ],
-                ),
-
-
-
-
-
               ],
             ),
           ),
-        )
+        ),
             ],
           ),
         ),

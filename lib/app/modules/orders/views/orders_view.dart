@@ -44,7 +44,7 @@ class _OrdersViewState extends State<OrdersView>with SingleTickerProviderStateMi
               Text('Orders',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
               SizedBox(height: 15,),
               Container(
-                height: MediaQuery.of(context).size.height*.07,
+                height: MediaQuery.of(context).size.height*.05,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
                     color:Color(0xffEEF5FF)
@@ -92,40 +92,35 @@ class _OrdersViewState extends State<OrdersView>with SingleTickerProviderStateMi
                   PopupMenuButton<int>(
 
                     icon:Image.asset(
-                      Assets.filterIcon,),
+                      Assets.filter,),
                     itemBuilder: (context) => [
                       // PopupMenuItem 1
                       PopupMenuItem(
                         value: 1,
-                        // row with 2 children
                         child: Text('Date')
                       ),
                       PopupMenuDivider(),
                       // PopupMenuItem 2
                       PopupMenuItem(
                           value: 2,
-                          // row with 2 children
                           child: Text('Today')
                       ),
                       PopupMenuDivider(),
 
                       PopupMenuItem(
                           value: 1,
-                          // row with 2 children
                           child: Text('This week')
                       ),
                       PopupMenuDivider(),
 
                       PopupMenuItem(
                           value: 1,
-                          // row with 2 children
                           child: Text('This month')
                       ),
                       PopupMenuDivider(),
 
                       PopupMenuItem(
                           value: 1,
-                          // row with 2 children
                           child: Text('This year')
                       ),
                     ],
@@ -157,7 +152,7 @@ class _OrdersViewState extends State<OrdersView>with SingleTickerProviderStateMi
       onPressed: () {},
       label: Text(
         "Create new order",
-        // style: customTheme(context).medium.copyWith(fontSize: 13, color: Colors.white),
+        style: customTheme(context).medium.copyWith(fontSize: 13, color: Colors.white),
       ),
       icon: Icon(Icons.add),
     );

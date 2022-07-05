@@ -27,15 +27,14 @@ class OrderHistoryTile extends StatelessWidget {
                   children: [
                     Text(
                       'Order ID: #656546',
-                      style: TextStyle(color:Theme.of(context).extension<CustomTheme>()!.secondary,
-                      fontSize: 15),
-                      // style: customTheme(context)
-                      //     .medium
-                      //     .copyWith(fontSize: 12, color: customTheme(context).secondary),
+
+                      style: customTheme(context)
+                          .medium
+                          .copyWith(fontSize: 12, color: customTheme(context).secondary),
                     ),
                     Text(
                       'Delivery Date : 20/06/2022',
-                      // style: customTheme(context).regular.copyWith(fontSize: 11),
+                      style: customTheme(context).regular.copyWith(fontSize: 11),
                     ),
                   ],
                 ),
@@ -43,13 +42,11 @@ class OrderHistoryTile extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Colors.greenAccent,
-                    // color: customTheme(context).action.withOpacity(.25),
+                    color: customTheme(context).action.withOpacity(.25),
                   ),
                   child: Text(
                     'Delivered',
-                    style: TextStyle(color: Theme.of(context).extension<CustomTheme>()!.action),
-                    // style: customTheme(context).medium.copyWith(fontSize: 10, color: customTheme(context).action),
+                    style: customTheme(context).medium.copyWith(fontSize: 10, color: customTheme(context).action),
                   ),
                 ),
               ],
@@ -64,8 +61,8 @@ class OrderHistoryTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Trinty Shop',style: TextStyle(fontWeight: FontWeight.w800),
-                  // style: customTheme(context).medium.copyWith(fontSize: 11),
+                  'Trinty Shop',
+                  style: customTheme(context).medium.copyWith(fontSize: 11),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
