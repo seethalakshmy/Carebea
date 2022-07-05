@@ -61,3 +61,5 @@ class CustomTheme extends ThemeExtension<CustomTheme> {
     );
   }
 }
+
+CustomTheme customTheme(BuildContext context) => Theme.of(context).extension<CustomTheme>()!;
