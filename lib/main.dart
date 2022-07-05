@@ -13,6 +13,7 @@ void main() {
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       theme: ThemeData.light().copyWith(
+        scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(backgroundColor: Colors.white, elevation: 0),
         extensions: [
           const CustomTheme(
