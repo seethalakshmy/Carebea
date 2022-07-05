@@ -13,6 +13,7 @@ void main() {
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       theme: ThemeData.light().copyWith(
+        scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(backgroundColor: Colors.white, elevation: 0),
         extensions: [
           const CustomTheme(
@@ -21,6 +22,7 @@ void main() {
             action: Color(0xff1CA645),
             cardBackground: Color(0xffFFF1F1),
             shadowColor: Color(0x1A000000),
+      textFormFieldColor:Color(0xffEFEFEF),
             medium: TextStyle(
               fontFamily: "Poppins",
               fontWeight: FontWeight.w500,
