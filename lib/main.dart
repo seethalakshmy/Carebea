@@ -22,6 +22,7 @@ void main() {
             action: Color(0xff1CA645),
             cardBackground: Color(0xffFFF1F1),
             shadowColor: Color(0x1A000000),
+      textFormFieldColor:Color(0xffEFEFEF),
             medium: TextStyle(
               fontFamily: "Poppins",
               fontWeight: FontWeight.w500,
