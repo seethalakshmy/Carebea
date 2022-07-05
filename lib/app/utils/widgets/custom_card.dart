@@ -32,7 +32,7 @@ class CustomCard extends StatelessWidget {
         color: color ?? Colors.white,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
-          if (hasShadow) BoxShadow(blurRadius: 6, color: Theme.of(context).extension<CustomTheme>()!.shadowColor),
+          if (hasShadow) BoxShadow(blurRadius: 6, color: customTheme(context).shadowColor),
         ],
       ),
       child: child,

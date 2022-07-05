@@ -21,9 +21,8 @@ class CustomButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 15),
-        decoration: BoxDecoration(
-            color: color ?? Theme.of(context).extension<CustomTheme>()!.primary,
-            borderRadius: BorderRadius.circular(5)),
+        decoration:
+            BoxDecoration(color: color ?? customTheme(context).primary, borderRadius: BorderRadius.circular(5)),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,7 +32,7 @@ class CustomButton extends StatelessWidget {
             if (icon != null) const SizedBox(width: 5),
             Text(
               title,
-              style: Theme.of(context).extension<CustomTheme>()!.medium.copyWith(
+              style: customTheme(context).medium.copyWith(
                     color: Colors.white,
                     fontSize: 13,
                   ),
