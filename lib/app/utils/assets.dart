@@ -7,5 +7,7 @@ class Assets {
   static const String homeIcon = 'assets/images/home.png';
   static const String shopIcon = 'assets/images/shop.png';
   static const String orderIcon = 'assets/images/order.png';
+  static const String filterIcon = 'assets/images/filter.png';
+  static const String editIcon = 'assets/images/editIcon.png';
 
 }
