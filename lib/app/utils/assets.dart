@@ -9,5 +9,9 @@ class Assets {
   static const String orderIcon = 'assets/images/order.png';
   static const String mapPinRound = 'assets/images/map_pin_round.png';
   static const String location = 'assets/images/location.png';
-
+  static const String assetsLocationFilled = 'assets/images/location_filled.png';
+  static const String assetsPhone = 'assets/images/phone_filled.png';
+  static const String assetsDirections = 'assets/images/directions.png';
+  static const String filter = 'assets/images/filter.png';
+  static const String edit = 'assets/images/edit.png';
 }
