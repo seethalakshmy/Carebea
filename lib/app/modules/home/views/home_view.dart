@@ -21,41 +21,53 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: CustomScrollView(slivers: <Widget>[
-        SliverPadding(
-          padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-          sliver: SliverAppBar(
-            pinned: true,
-            leading: Image.asset(Assets.assetsLogo),
-            leadingWidth: 30,
-            actions: [
-              _scanner(context),
-            ],
+        appBar: AppBar(
+          title: Image.asset(
+            Assets.assetsLogo,
+            scale: 3,
           ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: _scanner(context),
+            ),
+          ],
         ),
-        SliverPadding(
-          padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-          sliver: SliverToBoxAdapter(
-            child: Text(
-              "Dashboard",
-              style: customTheme(context).medium,
+        body: CustomScrollView(slivers: <Widget>[
+          // SliverPadding(
+          //   padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+          //   sliver: SliverAppBar(
+          //     pinned: true,
+          //     title: Image.asset(
+          //       Assets.assetsLogo,
+          //       scale: 3,
+          //     ),
+          //     actions: [
+          //       _scanner(context),
+          //     ],
+          //   ),
+          // ),
+          SliverPadding(
+            padding: const EdgeInsets.only(left: 15.0, top: 15, right: 15.0),
+            sliver: SliverToBoxAdapter(
+              child: Text(
+                "Dashboard",
+                style: customTheme(context).medium.copyWith(fontSize: 16, color: Colors.black),
+              ),
             ),
           ),
-        ),
-        const SliverPadding(
-          padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 15),
-          sliver: SliverToBoxAdapter(child: SearchWidget()),
-        ),
-        const SliverPadding(
-          padding: EdgeInsets.only(top: 20, left: 15.0, right: 15.0),
-          sliver: SliverToBoxAdapter(child: HomeMenuCards()),
-        ),
-        const SliverPadding(
-            padding: EdgeInsets.only(bottom: 10), sliver: SliverToBoxAdapter(child: HomepageUpcomingDeliveryView())),
-        const SliverToBoxAdapter(child: HomepageLatestShopsAddedView()),
-      ]),
-    ));
+          const SliverPadding(
+            padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 15),
+            sliver: SliverToBoxAdapter(child: SearchWidget()),
+          ),
+          const SliverPadding(
+            padding: EdgeInsets.only(top: 20, left: 15.0, right: 15.0),
+            sliver: SliverToBoxAdapter(child: HomeMenuCards()),
+          ),
+          const SliverPadding(
+              padding: EdgeInsets.only(bottom: 10), sliver: SliverToBoxAdapter(child: HomepageUpcomingDeliveryView())),
+          const SliverToBoxAdapter(child: HomepageLatestShopsAddedView()),
+        ]));
   }
 
   Widget _scanner(BuildContext context) {
