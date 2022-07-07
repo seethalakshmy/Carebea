@@ -12,6 +12,9 @@ abstract class Routes {
   static const PROFILE = _Paths.PROFILE;
   static const ADD_SHOP = _Paths.ADD_SHOP;
   static const ROUTE_PAGE = _Paths.ROUTE_PAGE;
+  static const ORDER_HISTORY = _Paths.ORDER_HISTORY;
+  static const ORDER_HISTORY_DETAILS = _Paths.ORDER_HISTORY_DETAILS;
+  static const ORDER_DETAILS_DELIVERY = _Paths.ORDER_DETAILS_DELIVERY;
 }
 
 abstract class _Paths {
@@ -25,4 +28,7 @@ abstract class _Paths {
   static const PROFILE = '/profile';
   static const ADD_SHOP = '/add-shop';
   static const ROUTE_PAGE = '/route-page';
+  static const ORDER_HISTORY = '/order-history';
+  static const ORDER_HISTORY_DETAILS = '/order-history-details';
+  static const ORDER_DETAILS_DELIVERY = '/order-details-delivery';
 }

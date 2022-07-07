@@ -384,6 +384,7 @@ class AddShopView extends GetView<AddShopController> {
     );
   }
 }
+
 class CustomerTypeRadioButton extends StatefulWidget {
   const CustomerTypeRadioButton({Key? key}) : super(key: key);
 
