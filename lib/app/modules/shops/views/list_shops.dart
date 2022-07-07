@@ -16,7 +16,7 @@ class ListShops extends GetView<ShopsController> {
         appBar: AppBar(
           title: Image.asset(
             Assets.assetsLogo,
-            scale: 3,
+            scale: 4,
           ),
         ),
         floatingActionButton: _addNewShopButton(context),
