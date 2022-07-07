@@ -1,4 +1,3 @@
-import 'package:carebea/app/modules/shops/views/list_shops.dart';
 import 'package:get/get.dart';
 
 import '../modules/Route_page/bindings/route_page_binding.dart';
@@ -9,6 +8,8 @@ import '../modules/app_start_up/bindings/app_start_up_binding.dart';
 import '../modules/app_start_up/views/app_start_up_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
+import '../modules/delivery_invoice_details/bindings/delivery_invoice_details_binding.dart';
+import '../modules/delivery_invoice_details/views/delivery_invoice_details_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -18,13 +19,14 @@ import '../modules/orders/views/orders_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/shops/bindings/shops_binding.dart';
+import '../modules/shops/views/list_shops.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.DASHBOARD;
+  static const INITIAL = Routes.DELIVERY_INVOICE_DETAILS;
 
   static final routes = [
     GetPage(
@@ -73,6 +75,11 @@ class AppPages {
       name: _Paths.ROUTE_PAGE,
       page: () => const RoutePageView(),
       binding: RoutePageBinding(),
+    ),
+    GetPage(
+      name: _Paths.DELIVERY_INVOICE_DETAILS,
+      page: () => const DeliveryInvoiceDetailsView(),
+      binding: DeliveryInvoiceDetailsBinding(),
     ),
   ];
 }
