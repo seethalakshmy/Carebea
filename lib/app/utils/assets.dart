@@ -15,4 +15,7 @@ class Assets {
   static const String filter = 'assets/images/filter.png';
   static const String edit = 'assets/images/edit.png';
   static const String profile = 'assets/images/profile.png';
+  static const String pickup = 'assets/images/pickUpPoint.png';
+  static const String phoneFilled = 'assets/images/phoneFilled.png';
+  static const String successIcon = 'assets/images/Success.png';
 }
