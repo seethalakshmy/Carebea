@@ -2,6 +2,7 @@
 
 import 'package:carebea/app/modules/home/views/latest_shops_added_view.dart';
 import 'package:carebea/app/modules/home/widgets/search_widget.dart';
+import 'package:carebea/app/modules/order_details_delivery/views/order_details_delivery_view.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/custom_alertbox.dart';
 import 'package:carebea/app/utils/widgets/custom_button.dart';
@@ -64,8 +65,13 @@ class HomeView extends GetView<HomeController> {
             padding: EdgeInsets.only(top: 20, left: 15.0, right: 15.0),
             sliver: SliverToBoxAdapter(child: HomeMenuCards()),
           ),
-          const SliverPadding(
-              padding: EdgeInsets.only(bottom: 10), sliver: SliverToBoxAdapter(child: HomepageUpcomingDeliveryView())),
+           SliverPadding(
+              padding: EdgeInsets.only(bottom: 10), sliver: SliverToBoxAdapter(child: InkWell(
+            onTap: (){
+              Get.to(()=>OrderDetailsDeliveryView());
+
+            },
+              child: HomepageUpcomingDeliveryView()))),
           const SliverToBoxAdapter(child: HomepageLatestShopsAddedView()),
         ]));
   }

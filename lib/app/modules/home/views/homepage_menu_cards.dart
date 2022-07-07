@@ -1,8 +1,11 @@
+import 'package:carebea/app/modules/Route_page/views/route_page_view.dart';
 import 'package:carebea/app/modules/home/widgets/home_menu_cards.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../add_shop/views/add_shop_view.dart';
 
 class HomeMenuCards extends StatelessWidget {
   const HomeMenuCards({Key? key}) : super(key: key);
@@ -15,25 +18,38 @@ class HomeMenuCards extends StatelessWidget {
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3, crossAxisSpacing: 10, mainAxisSpacing: 10, childAspectRatio: 12 / 8),
         children: [
-          HomeMenuIndividual(
-            asseticon: Assets.shopIcon,
-            gradients: [Color(0xff0098BA), Color(0xff4163A2)],
-            title: "Create new order",
+          InkWell(
+            onTap: (){},
+            child: HomeMenuIndividual(
+              asseticon: Assets.shopIcon,
+              gradients: [Color(0xff0098BA), Color(0xff4163A2)],
+              title: "Create new order",
+            ),
           ),
-          HomeMenuIndividual(
-            asseticon: Assets.shopIcon,
-            gradients: [Color(0xffA73B6E), Color(0xff985194)],
-            title: "Add new shop",
+          InkWell(
+            onTap: (){
+              Get.to(()=>AddShopView());
+            },
+            child: HomeMenuIndividual(
+              asseticon: Assets.shopIcon,
+              gradients: [Color(0xffA73B6E), Color(0xff985194)],
+              title: "Add new shop",
+            ),
           ),
           HomeMenuIndividual(
             asseticon: Assets.shopIcon,
             gradients: [Color(0xff66DE9D), Color(0xff00B2BE)],
             title: "Reports",
           ),
-          HomeMenuIndividual(
-            asseticon: Assets.shopIcon,
-            backgroundColor: Color(0xffF74254),
-            title: "Route",
+          InkWell(
+            onTap: (){
+              Get.to(()=>RoutePageView());
+            },
+            child: HomeMenuIndividual(
+              asseticon: Assets.shopIcon,
+              backgroundColor: Color(0xffF74254),
+              title: "Route",
+            ),
           ),
           HomeMenuIndividual(
             asseticon: Assets.shopIcon,

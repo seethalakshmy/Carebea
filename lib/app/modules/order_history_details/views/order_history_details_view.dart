@@ -26,7 +26,11 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
             children: [
               Row(
                 children:  [
-                  Icon(Icons.arrow_back_ios_new,size: 20,),
+                  InkWell(
+                    onTap: (){
+                      Get.back();
+                    },
+                      child: Icon(Icons.arrow_back_ios_new,size: 20,)),
                   SizedBox(width: 15,),
                   Text('Order ID:#456789',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
                   SizedBox(width: MediaQuery.of(context).size.width*.4,),
@@ -108,52 +112,73 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                   thickness: 1,
                 ),
                 SizedBox(height: 10,),
+                Row(
+                  children: [
+                    Flexible(
+                      flex: 8,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Product',
+                            style: customTheme(context).medium.copyWith(fontSize: 14),
+                          ),
+                          SizedBox(height: 10,),
+                          Text("Eccelence Hand Wash Total Plus.",
+                            style: customTheme(context).regular.copyWith(fontSize: 12),),
+                          SizedBox(height: 5,),
+                          Text("Eccelence Hand Wash Total Plus.",
+                            style: customTheme(context).regular.copyWith(fontSize: 12),),
+                          SizedBox(height: 5,),
+                          Text("Eccelence Hand Wash Total Plus.",
+                            style: customTheme(context).regular.copyWith(fontSize: 12),),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 40,),
+                    Flexible(
+                      flex: 1,
+                      child: Column(
+                        children: [
+                          Text('Qty',
+                            style: customTheme(context).medium.copyWith(fontSize: 14),
 
-                Row(
-                  children: [
-                    Text("Product",style: TextStyle(fontWeight: FontWeight.w600),),
-                    SizedBox(width: MediaQuery.of(context).size.width*.39,),
-                    Text("Qty",style: TextStyle(fontWeight: FontWeight.w600),),
-                    SizedBox(width: MediaQuery.of(context).size.width*.19,),
-                    Text("Price",style: TextStyle(fontWeight: FontWeight.w600),)
-                  ],
-                ),
-                SizedBox(height: 20,),
-                Row(
-                  children: [
-                    Text("Eccelence Hand Wash Total Plus."),
-                    SizedBox(width: MediaQuery.of(context).size.width*.02,),
-                    Text("20x"),
-                    SizedBox(width: MediaQuery.of(context).size.width*.19,),
-                    Text("₹951.00",
-                      style: customTheme(context).regular.copyWith(fontSize: 12),
-                    )
-                  ],
-                ),
-                SizedBox(height: 10,),
+                          ),
+                          SizedBox(height: 10,),
 
-                Row(
-                  children: [
-                    Text("Eccelence Hand Wash Total Plus."),
-                    SizedBox(width: MediaQuery.of(context).size.width*.02,),
-                    Text("20x"),
-                    SizedBox(width: MediaQuery.of(context).size.width*.19,),
-                    Text("₹51.00",
-                      style: customTheme(context).regular.copyWith(fontSize: 12),
-                    )
-                  ],
-                ),
-                SizedBox(height: 10,),
+                          Text("20x"),
+                          SizedBox(height: 5,),
+                          Text("20x"),
+                          SizedBox(height: 5,),
+                          Text("20x"),
 
-                Row(
-                  children: [
-                    Text("Eccelence Hand Wash Total Plus."),
-                    SizedBox(width: MediaQuery.of(context).size.width*.02,),
-                    Text("20x"),
-                    SizedBox(width: MediaQuery.of(context).size.width*.19,),
-                    Text("₹101.00",
-                      style: customTheme(context).regular.copyWith(fontSize: 12),
-                    )
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 50,),
+
+                    Flexible(
+                      flex: 2,
+                      child: Column(
+                        children: [
+                          Text('Price',
+                            style: customTheme(context).medium.copyWith(fontSize: 14),
+                          ),
+                          SizedBox(height: 10,),
+
+                          Text("₹951",
+                            style: customTheme(context).regular.copyWith(fontSize: 12),
+                          ),
+                          SizedBox(height: 5,),
+                          Text("₹172",
+                            style: customTheme(context).regular.copyWith(fontSize: 12),
+                          ),
+                          SizedBox(height: 5,),
+                          Text("₹51",
+                            style: customTheme(context).regular.copyWith(fontSize: 12),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
                 SizedBox(height: 10,),
