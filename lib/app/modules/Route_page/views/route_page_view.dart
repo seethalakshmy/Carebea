@@ -51,6 +51,7 @@ class RoutePageView extends GetView<RoutePageController> {
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: CustomCard(
+                hasShadow: false,
                 color:Theme.of(context).extension<CustomTheme>()!.cardBackground,
                 height: 100,
                 width: MediaQuery.of(context).size.width,
@@ -74,6 +75,7 @@ class RoutePageView extends GetView<RoutePageController> {
       Padding(
         padding: const EdgeInsets.all(15.0),
         child: CustomCard(
+            hasShadow: false,
             color:Theme.of(context).extension<CustomTheme>()!.cardBackground,
             height: 100,
             width: MediaQuery.of(context).size.width,

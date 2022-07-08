@@ -1,7 +1,11 @@
+import 'package:carebea/app/modules/create_order/views/add_products_view.dart';
 import 'package:carebea/app/modules/create_order/widgets/shop_tile.dart';
+import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
+import 'package:carebea/app/utils/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ShopDetailsView extends StatelessWidget {
   const ShopDetailsView({Key? key}) : super(key: key);
@@ -22,7 +26,16 @@ class ShopDetailsView extends StatelessWidget {
         children: [
           _title(context),
           Padding(padding: EdgeInsets.symmetric(horizontal: 24), child: ShopDetailsTile()),
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: CustomButton(title: 'Add Products', onTap: (){
+              Get.to(AddProductsView());
+            }),
+          ),
+
         ],
+
       ),
     );
   }
@@ -32,15 +45,21 @@ class ShopDetailsView extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       child: Row(
         children: [
-          const Icon(
-            Icons.arrow_back_ios,
-            size: 17,
+          InkWell(
+            onTap: (){
+              Get.back();
+            },
+            child: const Icon(
+              Icons.arrow_back_ios,
+              size: 17,
+            ),
           ),
           const SizedBox(width: 10),
           Text(
             "Create new order",
             style: customTheme(context).medium.copyWith(fontSize: 16, color: Colors.black),
-          )
+          ),
+
         ],
       ),
     );

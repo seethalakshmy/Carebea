@@ -10,7 +10,7 @@ class OrderHistoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-      height: MediaQuery.of(context).size.height*.21,
+      height: MediaQuery.of(context).size.height*.25,
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         mainAxisSize: MainAxisSize.min,
