@@ -10,6 +10,8 @@ import '../modules/create_order/bindings/create_order_binding.dart';
 import '../modules/create_order/views/create_order_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
+import '../modules/delivery_home/bindings/delivery_home_binding.dart';
+import '../modules/delivery_home/views/delivery_home_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -83,6 +85,11 @@ class AppPages {
     ),
     GetPage(
 
+      name: _Paths.DELIVERY_HOME,
+      page: () => const DeliveryHomeView(),
+      binding: DeliveryHomeBinding(),
+),   GetPage(
+
       name: _Paths.CREATE_ORDER,
       page: () => const CreateOrderView(),
       binding: CreateOrderBinding(),
@@ -96,6 +103,7 @@ class AppPages {
       name: _Paths.ORDER_DETAILS_DELIVERY,
       page: () => const OrderDetailsDeliveryView(),
       binding: OrderDetailsDeliveryBinding(),
+
 
     ),
   ];
