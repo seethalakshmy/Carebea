@@ -1,5 +1,6 @@
 import 'package:carebea/app/modules/shops/controllers/shops_controller.dart';
 import 'package:carebea/app/modules/shops/widgets/shop_card.dart';
+import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
@@ -129,7 +130,9 @@ class ListShops extends GetView<ShopsController> {
   FloatingActionButton _addNewShopButton(BuildContext context) {
     return FloatingActionButton.extended(
       backgroundColor: customTheme(context).primary,
-      onPressed: () {},
+      onPressed: () {
+        Get.toNamed(Routes.ADD_SHOP);
+      },
       label: Text(
         "Add new shop",
         style: customTheme(context).medium.copyWith(fontSize: 13, color: Colors.white),
