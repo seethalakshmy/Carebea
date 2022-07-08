@@ -1,76 +1,72 @@
+import 'package:carebea/app/modules/Route_page/views/route_page_view.dart';
+import 'package:carebea/app/modules/home/widgets/home_menu_cards.dart';
 import 'package:carebea/app/utils/assets.dart';
+import 'package:carebea/app/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../add_shop/views/add_shop_view.dart';
 
 class HomeMenuCards extends StatelessWidget {
   const HomeMenuCards({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-    return Container(
-      height: Get.size.height*.3,
+    return SizedBox(
+      height: Get.size.height * .3,
       child: GridView(
-          gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-            childAspectRatio: 12/8
-          ),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3, crossAxisSpacing: 10, mainAxisSpacing: 10, childAspectRatio: 12 / 8),
         children: [
-          HomeMenuIndividual(),
-          HomeMenuIndividual(),
-          HomeMenuIndividual(),
-          HomeMenuIndividual(),
-          HomeMenuIndividual(),
-          HomeMenuIndividual(),
+          InkWell(
+            onTap: (){},
+            child: HomeMenuIndividual(
+              asseticon: Assets.shopIcon,
+              gradients: [Color(0xff0098BA), Color(0xff4163A2)],
+              title: "Create new order",
+            ),
+          ),
+          InkWell(
+            onTap: (){
+              Get.to(()=>AddShopView());
+            },
+            child: HomeMenuIndividual(
+              asseticon: Assets.shopIcon,
+              gradients: [Color(0xffA73B6E), Color(0xff985194)],
+              title: "Add new shop",
+            ),
+          ),
+          HomeMenuIndividual(
+            asseticon: Assets.shopIcon,
+            gradients: [Color(0xff66DE9D), Color(0xff00B2BE)],
+            title: "Reports",
+          ),
+          InkWell(
+            onTap: (){
+              Get.to(()=>RoutePageView());
+            },
+            child: HomeMenuIndividual(
+              asseticon: Assets.shopIcon,
+              backgroundColor: Color(0xffF74254),
+              title: "Route",
+            ),
+          ),
+          HomeMenuIndividual(
+            asseticon: Assets.shopIcon,
+            backgroundColor: Color(0xffD8375C),
+            title: "Today's Delivery",
+            count: 1,
+          ),
+          HomeMenuIndividual(
+            asseticon: Assets.shopIcon,
+            backgroundColor: Color(0xffF3674F),
+            title: "Total Orders",
+            count: 89,
+          ),
         ],
       ),
     );
   }
 }
 
-class HomeMenuIndividual extends StatelessWidget {
-  const HomeMenuIndividual({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return  Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
-        border: Border.all(color: Colors.black)
-      ),
-      child: Stack(
-        children: [
-          Positioned(
-
-            child: Image.asset(Assets.shopIcon, width: 40, height: 40,),
-            right: -10,
-            top: 18,
-          ),
-          Opacity(
-            opacity: .6,
-            child: Container(
-
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.0),
-                gradient: LinearGradient(colors:  [Colors.blue.shade600, Colors.blue.shade900])
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Create New Order"),
-              ],
-            ),
-          ),
-
-        ],
-      ),
-    );
-  }
-}
 

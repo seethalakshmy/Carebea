@@ -29,7 +29,7 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
           automaticallyImplyLeading: false,
           title: Image.asset(
             Assets.assetsLogo,
-            scale: 3,
+            scale: 4,
           ),
         ),
         body: ListView(
