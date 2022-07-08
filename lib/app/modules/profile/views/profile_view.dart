@@ -11,13 +11,14 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 15),
-          child: Image.asset(Assets.assetsLogo),
+        appBar: AppBar(
+          titleSpacing: 15,
+          automaticallyImplyLeading: false,
+          title: Image.asset(
+            Assets.assetsLogo,
+            scale: 4,
+          ),
         ),
-        leadingWidth: 30,
-      ),
       body: Padding(
         padding: const EdgeInsets.only(left: 15,top: 20),
         child: Column(

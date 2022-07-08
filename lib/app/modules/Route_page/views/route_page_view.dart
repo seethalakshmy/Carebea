@@ -48,54 +48,43 @@ class RoutePageView extends GetView<RoutePageController> {
             const Calender(),
             const Divider(),
             const SizedBox(height: 20,),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: CustomCard(
-                hasShadow: false,
-                color:Theme.of(context).extension<CustomTheme>()!.cardBackground,
-                height: 100,
-                width: MediaQuery.of(context).size.width,
-                child: ListTile(
-                  title:  Text('Route:R1',style: customTheme(context).medium.copyWith(fontSize: 12),),
-                  subtitle: Padding(
-                    padding: const EdgeInsets.only(top: 8),
-                    child: Row(
-                      children: [
-                        Image.asset(Assets.assetsLocationFilled,scale: 3,),
-                        const SizedBox(width: 5,),
-                        Text('Akshaya Nagar ist Block ist Cross,Rammurthy .....',style: customTheme(context).medium.copyWith(fontSize: 12),),
-                        const SizedBox(width: 20,),
-                        const Icon(Icons.arrow_forward_ios_rounded,size: 25,color: Colors.black,)
-                      ],
-                    ),
-                  ),
-                )
-              ),
+            Container(
+              height: MediaQuery.of(context).size.height,
+              child: ListView.builder(
+                  // physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: false,
+                  itemCount: 2,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    return   Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: CustomCard(
+                          hasShadow: false,
+                          color:Theme.of(context).extension<CustomTheme>()!.cardBackground,
+                          height: 100,
+                          width: MediaQuery.of(context).size.width,
+                          child: ListTile(
+                            title:  Text('Route:R1',style: customTheme(context).medium.copyWith(fontSize: 12),),
+                            subtitle: Padding(
+                              padding: const EdgeInsets.only(top: 8),
+                              child: Row(
+                                children: [
+                                  Image.asset(Assets.assetsLocationFilled,scale: 3,),
+                                  const SizedBox(width: 5,),
+                                  Text('Akshaya Nagar ist Block ist Cross,Rammurthy .....',style: customTheme(context).medium.copyWith(fontSize: 12),),
+                                  const SizedBox(width: 20,),
+                                  const Icon(Icons.arrow_forward_ios_rounded,size: 25,color: Colors.black,)
+                                ],
+                              ),
+                            ),
+                          )
+                      )
+                      );
+
+                  }),
             ),
-      Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: CustomCard(
-            hasShadow: false,
-            color:Theme.of(context).extension<CustomTheme>()!.cardBackground,
-            height: 100,
-            width: MediaQuery.of(context).size.width,
-            child: ListTile(
-              title:  Text('Route:R1',style: customTheme(context).medium.copyWith(fontSize: 14),),
-              subtitle: Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Row(
-                  children: [
-                    Image.asset(Assets.assetsLocationFilled,scale: 3,),
-                    const SizedBox(width: 5,),
-                    Text('Akshaya Nagar ist Block ist Cross,Rammurthy .....',style: customTheme(context).regular.copyWith(fontSize: 12),),
-                    const SizedBox(width: 20,),
-                    const Icon(Icons.arrow_forward_ios_rounded,size: 25,color: Colors.black,)
-                  ],
-                ),
-              ),
-            )
-        ),
-      ),
+
+
 
           ],
         ),
@@ -125,7 +114,7 @@ class _CalenderState extends State<Calender> {
         headerStyle: const HeaderStyle(
           formatButtonVisible: false,
           titleCentered: true,
-          headerMargin: EdgeInsets.all(40),
+          headerMargin: EdgeInsets.all(10),
           titleTextStyle: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
           leftChevronMargin: EdgeInsets.only(left: 50),
           rightChevronMargin: EdgeInsets.only(right: 50),

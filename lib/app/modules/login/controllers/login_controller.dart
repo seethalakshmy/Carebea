@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
-  final String username = '';
+  String? username ;
   final loginFormKey = GlobalKey<FormState>();
 
   final count = 0.obs;

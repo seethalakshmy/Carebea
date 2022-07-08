@@ -9,7 +9,8 @@ import '../../../utils/theme.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+   LoginView({Key? key}) : super(key: key);
+  TextEditingController userController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +32,7 @@ class LoginView extends GetView<LoginController> {
                   borderRadius: BorderRadius.circular(20),
                   child: Container(
                     color: Colors.white.withOpacity(0.7),
-                    height: MediaQuery.of(context).size.height * .45,
+                    height: MediaQuery.of(context).size.height * .53,
                     width: MediaQuery.of(context).size.width * .9,
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
@@ -72,6 +73,7 @@ class LoginView extends GetView<LoginController> {
                             width: MediaQuery.of(context).size.width * .85,
                             color: Colors.white,
                             child: TextFormField(
+                              controller:userController ,
                               decoration: const InputDecoration(
                                   border: InputBorder.none,
                                   enabledBorder: InputBorder.none,
@@ -83,6 +85,7 @@ class LoginView extends GetView<LoginController> {
                                   return 'Username can\'t be empty';
                                 }
                               },
+                                onChanged: (value)=>controller.username=value
                             ),
                           ),
                           const SizedBox(
@@ -122,13 +125,20 @@ class LoginView extends GetView<LoginController> {
                               'Forgot Password?',
                                 style: customTheme(context)
                                     .medium
-                                    .copyWith(fontSize: 12, color: customTheme(context).primary)                            ),
+                                    .copyWith(fontSize: 12, color: customTheme(context).primary) ),
                           ),
                           const SizedBox(
                             height: 25,
                           ),
                           CustomButton(title: 'LOGIN', onTap: (){
-                            Get.toNamed(Routes.DASHBOARD);
+                            if(userController.text=='1'){
+                              Get.toNamed(Routes.DASHBOARD);
+
+
+                            }
+                            else{
+                              Get.toNamed(Routes.DELIVERY_HOME);
+                            }
                           })
                           // SizedBox(
                           //   width: MediaQuery.of(context).size.width,

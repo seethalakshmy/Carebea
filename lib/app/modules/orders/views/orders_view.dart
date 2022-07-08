@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../../utils/assets.dart';
 import '../../../utils/theme.dart';
 import '../../../utils/widgets/Order_history_tile.dart';
+import '../../create_order/views/create_order_view.dart';
 import '../../dashboard/views/bottom_nav_bar_view.dart';
 import '../controllers/orders_controller.dart';
 class OrdersView extends StatefulWidget {
@@ -28,12 +29,7 @@ class _OrdersViewState extends State<OrdersView>with SingleTickerProviderStateMi
           child: Image.asset(Assets.assetsLogo),
         ),
         leadingWidth: 30,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: Image.asset(Assets.assetsScan, width: 40, height: 40,),
-          ),
-        ],
+
       ),
       floatingActionButton: _createNewOrderButton(context),
 
@@ -180,7 +176,9 @@ class _OrdersViewState extends State<OrdersView>with SingleTickerProviderStateMi
   FloatingActionButton _createNewOrderButton(BuildContext context) {
     return FloatingActionButton.extended(
       backgroundColor:Theme.of(context).extension<CustomTheme>()!.primary,
-      onPressed: () {},
+      onPressed: () {
+        Get.to(CreateOrderView());
+      },
       label: Text(
         "Create new order",
         style: customTheme(context).medium.copyWith(fontSize: 13, color: Colors.white),

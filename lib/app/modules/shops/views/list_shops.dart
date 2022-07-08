@@ -15,11 +15,14 @@ class ListShops extends GetView<ShopsController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Image.asset(
-            Assets.assetsLogo,
-            scale: 4,
-          ),
-        ),
+        titleSpacing: 15,
+        automaticallyImplyLeading: false,
+        title: Image.asset(
+        Assets.assetsLogo,
+        scale: 4,
+    ),
+
+    ),
         floatingActionButton: _addNewShopButton(context),
         body: SingleChildScrollView(
           child: Padding(

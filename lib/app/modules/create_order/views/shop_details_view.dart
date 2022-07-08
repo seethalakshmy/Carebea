@@ -49,9 +49,14 @@ class ShopDetailsView extends StatelessWidget {
             onTap: (){
               Get.back();
             },
-            child: const Icon(
-              Icons.arrow_back_ios,
-              size: 17,
+            child:  InkWell(
+              onTap: (){
+                Get.back();
+              },
+              child: Icon(
+                Icons.arrow_back_ios,
+                size: 17,
+              ),
             ),
           ),
           const SizedBox(width: 10),

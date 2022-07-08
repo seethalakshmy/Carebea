@@ -13,10 +13,12 @@ class DeliveryInvoiceDetailsView extends GetView<DeliveryInvoiceDetailsControlle
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Image.asset(
-            Assets.assetsLogo,
-            scale: 3,
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 15),
+            child: Image.asset(Assets.assetsLogo),
           ),
+          leadingWidth: 40,
+
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -28,13 +30,29 @@ class DeliveryInvoiceDetailsView extends GetView<DeliveryInvoiceDetailsControlle
               const SizedBox(height: 20),
               _billDetails(context),
               const SizedBox(height: 50),
-              Align(
-                alignment: Alignment.centerRight,
-                child: CustomButton(
-                  onTap: () {},
-                  title: "Download Bill",
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: Container(
+                      width: 200,
+                      height: 50,
+                      child: ElevatedButton(onPressed: () {  },
+                        style:ElevatedButton.styleFrom(primary: Color(0xffB00069)),
+                      child:Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.file_download_outlined),
+                          Text('Download Bill'),
+                        ],
+                      ),),
+                      // child: CustomButton(
+                      //   onTap: () {},
+                      //   title: "Download Bill",
+                      // ),
+                    ),
+                  ),
                 ),
-              )
             ],
           ),
         ));
@@ -128,16 +146,24 @@ class DeliveryInvoiceDetailsView extends GetView<DeliveryInvoiceDetailsControlle
           ),
         ),
         const SizedBox(width: 8),
-        Image.asset(
-          Assets.orderIcon,
-          scale: 4,
-          color: customTheme(context).primary,
+        InkWell(
+          onTap: (){
+            Get.back();
+          },
+          child: Image.asset(
+            Assets.orderIcon,
+            scale: 4,
+            color: customTheme(context).primary,
+          ),
         ),
         const SizedBox(width: 8),
         Text(
           'Invoice details',
           style: customTheme(context).medium.copyWith(fontSize: 16),
         ),
+        const SizedBox(width: 150),
+
+        Icon(Icons.share)
       ],
     );
   }
