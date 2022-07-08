@@ -38,8 +38,12 @@ class AddShopView extends GetView<AddShopController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  children: const [
-                    Icon(Icons.arrow_back_ios_new,size: 20,),
+                  children:  [
+                    InkWell(
+                      onTap: (){
+                        Get.back();
+                      },
+                        child: Icon(Icons.arrow_back_ios_new,size: 20,)),
                     SizedBox(width: 15,),
                     Text('Add new shop',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),)
                   ],
@@ -384,6 +388,7 @@ class AddShopView extends GetView<AddShopController> {
     );
   }
 }
+
 class CustomerTypeRadioButton extends StatefulWidget {
   const CustomerTypeRadioButton({Key? key}) : super(key: key);
 

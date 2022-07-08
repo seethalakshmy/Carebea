@@ -6,6 +6,8 @@ import '../modules/add_shop/bindings/add_shop_binding.dart';
 import '../modules/add_shop/views/add_shop_view.dart';
 import '../modules/app_start_up/bindings/app_start_up_binding.dart';
 import '../modules/app_start_up/views/app_start_up_view.dart';
+import '../modules/create_order/bindings/create_order_binding.dart';
+import '../modules/create_order/views/create_order_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/delivery_home/bindings/delivery_home_binding.dart';
@@ -14,6 +16,10 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/order_details_delivery/bindings/order_details_delivery_binding.dart';
+import '../modules/order_details_delivery/views/order_details_delivery_view.dart';
+import '../modules/order_history_details/bindings/order_history_details_binding.dart';
+import '../modules/order_history_details/views/order_history_details_view.dart';
 import '../modules/orders/bindings/orders_binding.dart';
 import '../modules/orders/views/orders_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
@@ -26,7 +32,8 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.DASHBOARD;
+  static const INITIAL = Routes.CREATE_ORDER;
+
 
   static final routes = [
     GetPage(
@@ -77,9 +84,27 @@ class AppPages {
       binding: RoutePageBinding(),
     ),
     GetPage(
+
       name: _Paths.DELIVERY_HOME,
       page: () => const DeliveryHomeView(),
       binding: DeliveryHomeBinding(),
+),   GetPage(
+
+      name: _Paths.CREATE_ORDER,
+      page: () => const CreateOrderView(),
+      binding: CreateOrderBinding(),
+),
+    GetPage(
+      name: _Paths.ORDER_HISTORY_DETAILS,
+      page: () => const OrderHistoryDetailsView(),
+      binding: OrderHistoryDetailsBinding(),
+    ),
+    GetPage(
+      name: _Paths.ORDER_DETAILS_DELIVERY,
+      page: () => const OrderDetailsDeliveryView(),
+      binding: OrderDetailsDeliveryBinding(),
+
+
     ),
   ];
 }

@@ -1,6 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:carebea/app/modules/home/views/search_widget.dart';
+import 'package:carebea/app/modules/home/views/latest_shops_added_view.dart';
+import 'package:carebea/app/modules/home/widgets/search_widget.dart';
+import 'package:carebea/app/modules/order_details_delivery/views/order_details_delivery_view.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/custom_alertbox.dart';
 import 'package:carebea/app/utils/widgets/custom_button.dart';
@@ -21,39 +23,60 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: CustomScrollView(slivers: <Widget>[
-        SliverPadding(
-          padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-          sliver: SliverAppBar(
-            pinned: true,
-            leading: Image.asset(Assets.assetsLogo),
-            leadingWidth: 30,
-            actions: [
-             Scanner(onScanned: (){},)
-            ],
+
+        appBar: AppBar(
+          title: Image.asset(
+            Assets.assetsLogo,
+            scale: 3,
+
           ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: Scanner(onScanned: (){},),
+            ),
+          ],
         ),
-        SliverPadding(
-          padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-          sliver: SliverToBoxAdapter(
-            child: Text(
-              "Dashboard",
-              style: customTheme(context).medium,
+        body: CustomScrollView(slivers: <Widget>[
+          // SliverPadding(
+          //   padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+          //   sliver: SliverAppBar(
+          //     pinned: true,
+          //     title: Image.asset(
+          //       Assets.assetsLogo,
+          //       scale: 3,
+          //     ),
+          //     actions: [
+          //       _scanner(context),
+          //     ],
+          //   ),
+          // ),
+          SliverPadding(
+            padding: const EdgeInsets.only(left: 15.0, top: 15, right: 15.0),
+            sliver: SliverToBoxAdapter(
+              child: Text(
+                "Dashboard",
+                style: customTheme(context).medium.copyWith(fontSize: 16, color: Colors.black),
+              ),
             ),
           ),
-        ),
-        SliverPadding(
-          padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15),
-          sliver: SliverToBoxAdapter(child: SearchWidget()),
-        ),
-        SliverPadding(
-          padding: const EdgeInsets.only(top: 20, left: 15.0, right: 15.0),
-          sliver: SliverToBoxAdapter(child: HomeMenuCards()),
-        ),
-        SliverToBoxAdapter(child: HomepageUpcomingDeliveryView())
-      ]),
-    ));
+          const SliverPadding(
+            padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 15),
+            sliver: SliverToBoxAdapter(child: SearchWidget()),
+          ),
+          const SliverPadding(
+            padding: EdgeInsets.only(top: 20, left: 15.0, right: 15.0),
+            sliver: SliverToBoxAdapter(child: HomeMenuCards()),
+          ),
+           SliverPadding(
+              padding: EdgeInsets.only(bottom: 10), sliver: SliverToBoxAdapter(child: InkWell(
+            onTap: (){
+              Get.to(()=>OrderDetailsDeliveryView());
+
+            },
+              child: HomepageUpcomingDeliveryView()))),
+          const SliverToBoxAdapter(child: HomepageLatestShopsAddedView()),
+        ]));
   }
 
  

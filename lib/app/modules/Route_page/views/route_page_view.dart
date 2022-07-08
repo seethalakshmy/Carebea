@@ -34,10 +34,14 @@ class RoutePageView extends GetView<RoutePageController> {
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Row(
-                children: const [
-                  Icon(Icons.arrow_back_ios_new,size: 20,),
+                children: [
+                  InkWell(
+                      child: Icon(Icons.arrow_back_ios_new,size: 16,),
+                  onTap: (){
+                        Get.back();
+                  },),
                   SizedBox(width: 15,),
-                  Text('Route',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),)
+                  Text('Route',style: customTheme(context).medium.copyWith(fontSize: 16),)
                 ],
               ),
             ),
@@ -51,14 +55,15 @@ class RoutePageView extends GetView<RoutePageController> {
                 height: 100,
                 width: MediaQuery.of(context).size.width,
                 child: ListTile(
-                  title: const Text('Route:R1',style: TextStyle(fontWeight: FontWeight.w600),),
+                  title:  Text('Route:R1',style: customTheme(context).medium.copyWith(fontSize: 12),),
                   subtitle: Padding(
                     padding: const EdgeInsets.only(top: 8),
                     child: Row(
                       children: [
-                        Icon(Icons.location_on,color:Theme.of(context).extension<CustomTheme>()!.primary ),
-                        const Text('Akshaya Nagar ist Block ist Cross,Rammurthy .....',style: TextStyle(color: Colors.black,fontSize: 14),),
+                        Image.asset(Assets.assetsLocationFilled,scale: 3,),
                         const SizedBox(width: 5,),
+                        Text('Akshaya Nagar ist Block ist Cross,Rammurthy .....',style: customTheme(context).medium.copyWith(fontSize: 12),),
+                        const SizedBox(width: 20,),
                         const Icon(Icons.arrow_forward_ios_rounded,size: 25,color: Colors.black,)
                       ],
                     ),
@@ -73,14 +78,15 @@ class RoutePageView extends GetView<RoutePageController> {
             height: 100,
             width: MediaQuery.of(context).size.width,
             child: ListTile(
-              title: const Text('Route:R1',style: TextStyle(fontWeight: FontWeight.w600),),
+              title:  Text('Route:R1',style: customTheme(context).medium.copyWith(fontSize: 14),),
               subtitle: Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: Row(
                   children: [
-                    Icon(Icons.location_on,color:Theme.of(context).extension<CustomTheme>()!.primary ),
-                    const Text('Akshaya Nagar ist Block ist Cross,Rammurthy .....',style: TextStyle(color: Colors.black,fontSize: 14),),
+                    Image.asset(Assets.assetsLocationFilled,scale: 3,),
                     const SizedBox(width: 5,),
+                    Text('Akshaya Nagar ist Block ist Cross,Rammurthy .....',style: customTheme(context).regular.copyWith(fontSize: 12),),
+                    const SizedBox(width: 20,),
                     const Icon(Icons.arrow_forward_ios_rounded,size: 25,color: Colors.black,)
                   ],
                 ),
@@ -118,7 +124,7 @@ class _CalenderState extends State<Calender> {
           formatButtonVisible: false,
           titleCentered: true,
           headerMargin: EdgeInsets.all(40),
-          titleTextStyle: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+          titleTextStyle: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
           leftChevronMargin: EdgeInsets.only(left: 50),
           rightChevronMargin: EdgeInsets.only(right: 50),
 
