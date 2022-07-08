@@ -19,7 +19,7 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.only(left: 20),
-          child: Image.asset(Assets.assetsLogo),
+          child: Image.asset(Assets.assetsLogo,scale: 4,),
         ),
         // leadingWidth: 30,
         actions: [
@@ -60,8 +60,8 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                     return CustomAlertbox(
                       topIcon: Image.asset(
                         Assets.successIcon,
-                        width: 42,
-                        height: 42,
+                        width: 80,
+                        height: 80,
                       ),
                       title: "Delivered Successfully",
                       content: "Your delivery has been successful!",
@@ -100,7 +100,11 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.arrow_back_ios_new,size: 20,),
+                        InkWell(
+                          onTap: (){
+                            Get.back();
+                          },
+                            child: Icon(Icons.arrow_back_ios_new,size: 20,)),
                         SizedBox(width: 10,),
                         Text('Order ID:#456789',
                           style: customTheme(context).medium.copyWith(fontSize: 18),
@@ -181,7 +185,7 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                     Row(
                       children: [
                         Flexible(
-                          flex: 6,
+                          flex: 8,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -189,15 +193,18 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                                 style: customTheme(context).medium.copyWith(fontSize: 14),
                               ),
                               SizedBox(height: 10,),
-                              Text("Eccelence Hand Wash Total Plus."),
+                              Text("Eccelence Hand Wash Total Plus.",
+                                style: customTheme(context).regular.copyWith(fontSize: 12),),
                               SizedBox(height: 5,),
-                              Text("Eccelence Hand Wash Total Plus."),
+                              Text("Eccelence Hand Wash Total Plus.",
+                                style: customTheme(context).regular.copyWith(fontSize: 12),),
                               SizedBox(height: 5,),
-                              Text("Eccelence Hand Wash Total Plus."),
+                              Text("Eccelence Hand Wash Total Plus.",
+                                style: customTheme(context).regular.copyWith(fontSize: 12),),
                             ],
                           ),
                         ),
-                        SizedBox(width: 30,),
+                        SizedBox(width: 40,),
                         Flexible(
                           flex: 1,
                           child: Column(
@@ -208,19 +215,22 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                               ),
                               SizedBox(height: 10,),
 
-                              Text("20x"),
+                              Text("20x",
+                                  style: customTheme(context).regular.copyWith(fontSize: 12)),
                               SizedBox(height: 5,),
-                              Text("20x"),
+                              Text("20x",
+                                  style: customTheme(context).regular.copyWith(fontSize: 12)),
                               SizedBox(height: 5,),
-                              Text("20x"),
+                              Text("20x",
+                                  style: customTheme(context).regular.copyWith(fontSize: 12)),
 
                             ],
                           ),
                         ),
-                        SizedBox(width: 80,),
+                        SizedBox(width: 60,),
 
                         Flexible(
-                          flex: 1,
+                          flex: 2,
                           child: Column(
                             children: [
                               Text('Price',
@@ -229,8 +239,8 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                               SizedBox(height: 10,),
 
                               Text("₹951",
-                                  style: customTheme(context).regular.copyWith(fontSize: 12),
-                                ),
+                                style: customTheme(context).regular.copyWith(fontSize: 12),
+                              ),
                               SizedBox(height: 5,),
                               Text("₹172",
                                 style: customTheme(context).regular.copyWith(fontSize: 12),

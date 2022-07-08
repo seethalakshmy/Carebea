@@ -1,3 +1,4 @@
+import 'package:carebea/app/modules/order_history_details/views/order_history_details_view.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +42,7 @@ class _OrdersViewState extends State<OrdersView>with SingleTickerProviderStateMi
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Orders',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),),
+              Text('Orders',style: customTheme(context).medium.copyWith(fontSize: 16),),
               SizedBox(height: 15,),
               Container(
                 height: MediaQuery.of(context).size.height*.05,
@@ -58,8 +59,8 @@ class _OrdersViewState extends State<OrdersView>with SingleTickerProviderStateMi
                     labelColor: Colors.white,
                     indicatorSize:TabBarIndicatorSize.tab,
                     tabs: [
-                  Text('Completed',),
-                  Text('Outstanding',),
+                  Text('Completed',style: TextStyle(fontSize: 12,)),
+                  Text('Outstanding',style: TextStyle(fontSize: 12,)),
                 ]),
               ),
               SizedBox(height: 15,),
@@ -97,31 +98,46 @@ class _OrdersViewState extends State<OrdersView>with SingleTickerProviderStateMi
                       // PopupMenuItem 1
                       PopupMenuItem(
                         value: 1,
-                        child: Text('Date')
+                          height: 5,
+
+                          child: Text('Date',
+                            style: customTheme(context).regular.copyWith(fontSize: 13))
                       ),
                       PopupMenuDivider(),
                       // PopupMenuItem 2
                       PopupMenuItem(
                           value: 2,
-                          child: Text('Today')
+                          height: 5,
+
+                          child: Text('Today',
+                              style: customTheme(context).regular.copyWith(fontSize: 13)
+                          )
                       ),
                       PopupMenuDivider(),
 
                       PopupMenuItem(
                           value: 1,
-                          child: Text('This week')
+                          height: 5,
+
+                          child: Text('This week',
+                              style: customTheme(context).regular.copyWith(fontSize: 13))
                       ),
                       PopupMenuDivider(),
 
                       PopupMenuItem(
                           value: 1,
-                          child: Text('This month')
+                          height: 5,
+                          child: Text('This month',
+                              style: customTheme(context).regular.copyWith(fontSize: 13))
                       ),
                       PopupMenuDivider(),
 
                       PopupMenuItem(
                           value: 1,
-                          child: Text('This year')
+                          height: 5,
+
+                          child: Text('This year',
+                              style: customTheme(context).regular.copyWith(fontSize: 13))
                       ),
                     ],
                     offset: Offset(0, 100),
@@ -163,7 +179,14 @@ class _OrdersViewState extends State<OrdersView>with SingleTickerProviderStateMi
         scrollDirection: Axis.vertical,
         itemCount: 5,
         itemBuilder: (context, index) {
-          return const  OrderHistoryTile();
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child:  InkWell(
+              onTap: (){
+                Get.to(()=>OrderHistoryDetailsView());
+              },
+                child: OrderHistoryTile()),
+          );
         });
   }
 }

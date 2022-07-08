@@ -62,13 +62,13 @@ class OrderHistoryTile extends StatelessWidget {
               children: [
                 Text(
                   'Trinty Shop',
-                  style: customTheme(context).medium.copyWith(fontSize: 11),
+                  style: customTheme(context).medium.copyWith(fontSize: 14),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
                   child: Column(children: [
                     Text('Total',style: TextStyle(color: Theme.of(context).extension<CustomTheme>()!.secondary),),
-                    Text("₹951",style: TextStyle(fontWeight: FontWeight.w800),)
+                    Text("₹951",style: customTheme(context).medium.copyWith(fontSize: 14),)
                   ],),
                 )
               ],
@@ -76,19 +76,18 @@ class OrderHistoryTile extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 10,top: 20),
-            child: Text('Product'),
+            child: Text('Product',
+            style: customTheme(context).medium.copyWith(fontSize: 12),),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 8,top: 5),
-            child: Expanded(
-              child: Row(
-                children: [
-                  Text('Eccelence Hand Wash Total... 20x'),
-                  SizedBox(width:MediaQuery.of(context).size.width*.15),
-                  Text('View details',style: TextStyle(color: Colors.black54),),
-                  Icon(Icons.arrow_forward_ios_rounded,size: 20,color: Colors.black54,)
-                ],
-              ),
+            child: Row(
+              children: [
+                Text('Eccelence Hand Wash Total... 20x',style: customTheme(context).regular.copyWith(fontSize: 11),),
+                SizedBox(width:MediaQuery.of(context).size.width*.25),
+                Text('View details',style: customTheme(context).medium.copyWith(fontSize: 10),),
+                Icon(Icons.arrow_forward_ios_rounded,size: 20,color: Colors.black54,)
+              ],
             ),
           )
         ],
