@@ -6,6 +6,8 @@ import '../modules/add_shop/bindings/add_shop_binding.dart';
 import '../modules/add_shop/views/add_shop_view.dart';
 import '../modules/app_start_up/bindings/app_start_up_binding.dart';
 import '../modules/app_start_up/views/app_start_up_view.dart';
+import '../modules/create_order/bindings/create_order_binding.dart';
+import '../modules/create_order/views/create_order_view.dart';
 import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -28,7 +30,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.DASHBOARD;
+  static const INITIAL = Routes.CREATE_ORDER;
 
 
   static final routes = [
@@ -80,6 +82,12 @@ class AppPages {
       binding: RoutePageBinding(),
     ),
     GetPage(
+
+      name: _Paths.CREATE_ORDER,
+      page: () => const CreateOrderView(),
+      binding: CreateOrderBinding(),
+),
+    GetPage(
       name: _Paths.ORDER_HISTORY_DETAILS,
       page: () => const OrderHistoryDetailsView(),
       binding: OrderHistoryDetailsBinding(),
@@ -88,6 +96,7 @@ class AppPages {
       name: _Paths.ORDER_DETAILS_DELIVERY,
       page: () => const OrderDetailsDeliveryView(),
       binding: OrderDetailsDeliveryBinding(),
+
     ),
   ];
 }
