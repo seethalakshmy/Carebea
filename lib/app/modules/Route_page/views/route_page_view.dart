@@ -56,7 +56,8 @@ class RoutePageView extends GetView<RoutePageController> {
                     padding: const EdgeInsets.only(top: 8),
                     child: Row(
                       children: [
-                        Icon(Icons.location_on,color:Theme.of(context).extension<CustomTheme>()!.primary ),
+                        Image.asset(Assets.assetsLocationFilled,scale: 3,),
+                        const SizedBox(width: 5,),
                         const Text('Akshaya Nagar ist Block ist Cross,Rammurthy .....',style: TextStyle(color: Colors.black,fontSize: 14),),
                         const SizedBox(width: 5,),
                         const Icon(Icons.arrow_forward_ios_rounded,size: 25,color: Colors.black,)
@@ -78,7 +79,8 @@ class RoutePageView extends GetView<RoutePageController> {
                 padding: const EdgeInsets.only(top: 8),
                 child: Row(
                   children: [
-                    Icon(Icons.location_on,color:Theme.of(context).extension<CustomTheme>()!.primary ),
+                    Image.asset(Assets.assetsLocationFilled,scale: 3,),
+                    const SizedBox(width: 5,),
                     const Text('Akshaya Nagar ist Block ist Cross,Rammurthy .....',style: TextStyle(color: Colors.black,fontSize: 14),),
                     const SizedBox(width: 5,),
                     const Icon(Icons.arrow_forward_ios_rounded,size: 25,color: Colors.black,)

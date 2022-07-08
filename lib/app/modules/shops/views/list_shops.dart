@@ -26,9 +26,9 @@ class ListShops extends GetView<ShopsController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Shops',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  style: customTheme(context).medium.copyWith(fontSize: 16,color: Colors.black),
                 ),
                 const SizedBox(
                   height: 20,
@@ -54,7 +54,7 @@ class ListShops extends GetView<ShopsController> {
                       child: Row(
                         children: [
                           Image.asset(
-                          Assets.filter,
+                            Assets.filter,
                             scale: 3.5,
                           )
                         ],
