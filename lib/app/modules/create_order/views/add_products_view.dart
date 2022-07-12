@@ -1,6 +1,7 @@
 import 'package:carebea/app/modules/create_order/views/check_out_view.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/custom_button.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
@@ -14,14 +15,7 @@ class AddProductsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        titleSpacing: 24,
-        automaticallyImplyLeading: false,
-        title: Image.asset(
-          Assets.assetsLogo,
-          scale: 4,
-        ),
-      ),
+      appBar: appBar(context),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

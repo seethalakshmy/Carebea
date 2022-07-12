@@ -1,6 +1,7 @@
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:carebea/app/utils/widgets/scanner.dart';
@@ -16,22 +17,7 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          titleSpacing: 15,
-          automaticallyImplyLeading: false,
-          title: Image.asset(
-            Assets.assetsLogo,
-            scale: 4,
-          ),
-            actions: [
-              Scanner(
-                onScanned: () {},
-              ),
-              const SizedBox(width: 10),
-              CircleAvatar(),
-              const SizedBox(width: 10),
-            ],
-        ),
+        appBar: appBar(context, showProfile: true, showScanner: true, onScanned: () {}),
         // appBar: AppBar(
         //   title: Image.asset(
         //     Assets.assetsLogo,
@@ -95,7 +81,6 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
             const SizedBox(height: 30),
             Container(
               padding: const EdgeInsets.all(25),
-              
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
                 color: Color(0xffF8F4F2),
@@ -109,9 +94,9 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
                   ),
                   SizedBox(height: 10),
                   InkWell(
-                    onTap: (){
-                      Get.toNamed(Routes.ORDER_DETAILS_DELIVERY);
-                    },
+                      onTap: () {
+                        Get.toNamed(Routes.ORDER_DETAILS_DELIVERY);
+                      },
                       child: OrderDeliveryCard()),
                   SizedBox(height: 10),
                   OrderDeliveryCard()

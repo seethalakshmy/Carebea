@@ -1,3 +1,4 @@
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -11,14 +12,7 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          titleSpacing: 15,
-          automaticallyImplyLeading: false,
-          title: Image.asset(
-            Assets.assetsLogo,
-            scale: 4,
-          ),
-        ),
+        appBar:appBar(context),
       body: Padding(
         padding: const EdgeInsets.only(left: 15,top: 20),
         child: Column(

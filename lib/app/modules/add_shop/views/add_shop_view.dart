@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:carebea/app/routes/app_pages.dart';
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,19 +20,8 @@ class AddShopView extends GetView<AddShopController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: Image.asset(Assets.assetsLogo),
-        ),
-        leadingWidth: 30,
-        // actions: [
-        //   Padding(
-        //     padding: const EdgeInsets.only(right: 8),
-        //     child: Image.asset(Assets.assetsScan, width: 40, height: 40,),
-        //   ),
-        // ],
-      ),
+      appBar: appBar(context),
+  
       body: SingleChildScrollView(
         child:Form(
           child: Padding(

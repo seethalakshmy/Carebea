@@ -1,6 +1,7 @@
 import 'package:carebea/app/modules/create_order/views/shop_details_view.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,14 +16,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          titleSpacing: 24,
-          automaticallyImplyLeading: false,
-          title: Image.asset(
-            Assets.assetsLogo,
-            scale: 4,
-          ),
-        ),
+        appBar:appBar(context),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

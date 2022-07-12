@@ -5,6 +5,7 @@ import 'package:carebea/app/modules/home/widgets/search_widget.dart';
 import 'package:carebea/app/modules/order_details_delivery/views/order_details_delivery_view.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/theme.dart';
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/custom_alertbox.dart';
 import 'package:carebea/app/utils/widgets/custom_button.dart';
 import 'package:carebea/app/utils/widgets/scanner.dart';
@@ -24,19 +25,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: Image.asset(Assets.assetsLogo),
-          ),
-          leadingWidth: 30,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: Scanner(onScanned: () {  },),
-            ),
-          ],
-        ),
+        appBar: appBar(context, showScanner: true, onScanned: () {}),
 
         // appBar: AppBar(
         //   title: Image.asset(
@@ -82,16 +71,15 @@ class HomeView extends GetView<HomeController> {
             padding: EdgeInsets.only(top: 20, left: 15.0, right: 15.0),
             sliver: SliverToBoxAdapter(child: HomeMenuCards()),
           ),
-           SliverPadding(
-              padding: EdgeInsets.only(bottom: 10), sliver: SliverToBoxAdapter(child: InkWell(
-            onTap: (){
-              Get.toNamed(Routes.ORDER_HISTORY_DETAILS);
-
-            },
-              child: HomepageUpcomingDeliveryView()))),
+          SliverPadding(
+              padding: EdgeInsets.only(bottom: 10),
+              sliver: SliverToBoxAdapter(
+                  child: InkWell(
+                      onTap: () {
+                        Get.toNamed(Routes.ORDER_HISTORY_DETAILS);
+                      },
+                      child: HomepageUpcomingDeliveryView()))),
           const SliverToBoxAdapter(child: HomepageLatestShopsAddedView()),
         ]));
   }
-
- 
 }

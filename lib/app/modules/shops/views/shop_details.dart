@@ -1,6 +1,7 @@
 import 'package:carebea/app/modules/shops/widgets/order_tile.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,13 +26,7 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Image.asset(
-            Assets.assetsLogo,
-            scale: 4,
-          ),
-        ),
+        appBar:appBar(context),
         body: ListView(
           children: [
             const SizedBox(

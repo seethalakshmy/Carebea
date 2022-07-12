@@ -1,6 +1,7 @@
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/custom_alertbox.dart';
 import 'package:carebea/app/utils/widgets/custom_button.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
@@ -17,14 +18,7 @@ class CheckoutView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        titleSpacing: 24,
-        automaticallyImplyLeading: false,
-        title: Image.asset(
-          Assets.assetsLogo,
-          scale: 4,
-        ),
-      ),
+      appBar:appBar(context),
       body: ListView(
         children: [
           _title(context),

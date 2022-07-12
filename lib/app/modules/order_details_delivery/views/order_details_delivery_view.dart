@@ -1,4 +1,5 @@
 import 'package:carebea/app/routes/app_pages.dart';
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
@@ -17,20 +18,7 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: Image.asset(Assets.assetsLogo,scale: 4,),
-        ),
-        // leadingWidth: 30,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: CircleAvatar(
-                child: Image.asset(Assets.profile, width: 40, height: 40,)),
-          ),
-        ],
-      ),
+      appBar:appBar(context),
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
         child: CustomButton(title: 'Order Delivered', onTap: () {
