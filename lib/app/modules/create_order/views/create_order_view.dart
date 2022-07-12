@@ -76,10 +76,15 @@ class CreateOrderView extends GetView<CreateOrderController> {
       padding: const EdgeInsets.all(24),
       child: Row(
         children: [
-          const Icon(
-            Icons.arrow_back_ios,
-            size: 17,
+           InkWell(
+             onTap: (){
+               Get.back();
+             },
+             child: Icon(
+              Icons.arrow_back_ios,
+              size: 17,
           ),
+           ),
           const SizedBox(width: 10),
           Text(
             "Create new order",

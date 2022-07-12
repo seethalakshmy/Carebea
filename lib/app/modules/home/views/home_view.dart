@@ -24,20 +24,33 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
         appBar: AppBar(
-          title: Image.asset(
-            Assets.assetsLogo,
-            scale: 3,
-
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: Image.asset(Assets.assetsLogo),
           ),
+          leadingWidth: 30,
           actions: [
             Padding(
-              padding: const EdgeInsets.only(right: 15),
-              child: Scanner(onScanned: (){},),
+              padding: const EdgeInsets.only(right: 8),
+              child: Scanner(onScanned: () {  },),
             ),
           ],
         ),
+
+        // appBar: AppBar(
+        //   title: Image.asset(
+        //     Assets.assetsLogo,
+        //     scale: 3,
+        //
+        //   ),
+        //   actions: [
+        //     Padding(
+        //       padding: const EdgeInsets.only(right: 15),
+        //       child: Scanner(onScanned: (){},),
+        //     ),
+        //   ],
+        // ),
         body: CustomScrollView(slivers: <Widget>[
           // SliverPadding(
           //   padding: const EdgeInsets.only(left: 15.0, right: 15.0),

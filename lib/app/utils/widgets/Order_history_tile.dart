@@ -10,8 +10,8 @@ class OrderHistoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-      height: MediaQuery.of(context).size.height*.25,
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      height: MediaQuery.of(context).size.height*.2,
+      // padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,18 +64,15 @@ class OrderHistoryTile extends StatelessWidget {
                   'Trinty Shop',
                   style: customTheme(context).medium.copyWith(fontSize: 14),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: Column(children: [
-                    Text('Total',style: TextStyle(color: Theme.of(context).extension<CustomTheme>()!.secondary),),
-                    Text("₹951",style: customTheme(context).medium.copyWith(fontSize: 14),)
-                  ],),
-                )
+                Column(children: [
+                  Text('Total',style: TextStyle(color: Theme.of(context).extension<CustomTheme>()!.secondary),),
+                  Text("₹951",style: customTheme(context).medium.copyWith(fontSize: 14),)
+                ],)
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10,top: 20),
+            padding: const EdgeInsets.only(left: 10,top: 5),
             child: Text('Product',
             style: customTheme(context).medium.copyWith(fontSize: 12),),
           ),

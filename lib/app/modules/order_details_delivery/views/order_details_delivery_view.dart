@@ -1,3 +1,4 @@
+import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
@@ -70,6 +71,7 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                             title: "Go to invoice details",
                             onTap: () {
                               Get.back(result: true);
+                              Get.toNamed(Routes.DELIVERY_INVOICE_DETAILS);
                             })
                       ],
                     );

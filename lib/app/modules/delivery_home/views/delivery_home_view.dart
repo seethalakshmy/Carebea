@@ -1,3 +1,4 @@
+import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
@@ -16,19 +17,35 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          titleSpacing: 15,
+          automaticallyImplyLeading: false,
           title: Image.asset(
             Assets.assetsLogo,
-            scale: 3,
+            scale: 4,
           ),
-          actions: [
-            Scanner(
-              onScanned: () {},
-            ),
-            const SizedBox(width: 10),
-            CircleAvatar(),
-            const SizedBox(width: 10),
-          ],
+            actions: [
+              Scanner(
+                onScanned: () {},
+              ),
+              const SizedBox(width: 10),
+              CircleAvatar(),
+              const SizedBox(width: 10),
+            ],
         ),
+        // appBar: AppBar(
+        //   title: Image.asset(
+        //     Assets.assetsLogo,
+        //     scale: 3,
+        //   ),
+        //   actions: [
+        //     Scanner(
+        //       onScanned: () {},
+        //     ),
+        //     const SizedBox(width: 10),
+        //     CircleAvatar(),
+        //     const SizedBox(width: 10),
+        //   ],
+        // ),
         body: ListView(
           children: [
             Padding(
@@ -91,7 +108,11 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
                     style: customTheme(context).medium.copyWith(fontSize: 14),
                   ),
                   SizedBox(height: 10),
-                  OrderDeliveryCard(),
+                  InkWell(
+                    onTap: (){
+                      Get.toNamed(Routes.ORDER_DETAILS_DELIVERY);
+                    },
+                      child: OrderDeliveryCard()),
                   SizedBox(height: 10),
                   OrderDeliveryCard()
                 ],

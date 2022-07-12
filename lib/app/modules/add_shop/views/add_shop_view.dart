@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:carebea/app/routes/app_pages.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +9,7 @@ import 'package:get/get.dart';
 
 import '../../../utils/assets.dart';
 import '../../../utils/theme.dart';
+import '../../../utils/widgets/custom_alertbox.dart';
 import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_textfield.dart';
 import '../controllers/add_shop_controller.dart';
@@ -23,12 +25,12 @@ class AddShopView extends GetView<AddShopController> {
           child: Image.asset(Assets.assetsLogo),
         ),
         leadingWidth: 30,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: Image.asset(Assets.assetsScan, width: 40, height: 40,),
-          ),
-        ],
+        // actions: [
+        //   Padding(
+        //     padding: const EdgeInsets.only(right: 8),
+        //     child: Image.asset(Assets.assetsScan, width: 40, height: 40,),
+        //   ),
+        // ],
       ),
       body: SingleChildScrollView(
         child:Form(
@@ -405,7 +407,28 @@ class AddShopView extends GetView<AddShopController> {
                 CustomTextField(
                 ),
                 SizedBox(height: 25,),
-                CustomButton(onTap: () { 
+                CustomButton(onTap: () {
+                  showDialog<bool>(
+                      context: context,
+                      builder: (ctx) {
+                        return CustomAlertbox(
+                          topIcon: Image.asset(
+                            Assets.successIcon,
+                            width: 80,
+                            height: 80,
+                          ),
+                          title: "Shop added Successful!",
+                          content: "",
+                          actions: [
+                            CustomButton(
+                                title: "Go to Home page",
+                                onTap: () {
+                                  Get.back(result: true);
+                                  Get.offAllNamed(Routes.DASHBOARD);
+                                })
+                          ],
+                        );
+                      });
                   
                 }, title: 'Add Shop',)
               ],

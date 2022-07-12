@@ -1,3 +1,4 @@
+import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/custom_alertbox.dart';
@@ -100,7 +101,7 @@ class CheckoutView extends StatelessWidget {
                 CustomButton(
                     title: "Go to Home page",
                     onTap: () {
-                      Get.until((route) => route.isFirst);
+                      Get.offAllNamed(Routes.DASHBOARD);
                     })
               ],
             ));
