@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "44646503999",
+    "project_id": "carebae-1fd8f",
+    "storage_bucket": "carebae-1fd8f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:44646503999:android:4105b0ae487cf0280b4a8a",
+        "android_client_info": {
+          "package_name": "com.seeroo.carebea.carebea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "44646503999-b5bckp2219eqtdu08dbg6cgsndd0n2p7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSuiLPGYQNN2ExGeknTQz_wBavdfGXjGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "44646503999-b5bckp2219eqtdu08dbg6cgsndd0n2p7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

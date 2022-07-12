@@ -1,5 +1,6 @@
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/widgets/custom_button.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -131,6 +132,7 @@ class LoginView extends GetView<LoginController> {
                             height: 25,
                           ),
                           CustomButton(title: 'LOGIN', onTap: (){
+                            FirebaseCrashlytics.instance.crash();
                             if(userController.text=='1'){
                               Get.toNamed(Routes.DASHBOARD);
 

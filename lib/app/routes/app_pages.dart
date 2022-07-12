@@ -50,7 +50,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.APP_START_UP,
-      page: () => const AppStartUpView(),
+      page: () =>  AppStartUpView(),
       binding: AppStartUpBinding(),
     ),
     GetPage(
