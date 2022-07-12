@@ -1,27 +1,33 @@
+import 'package:carebea/app/routes/app_pages.dart';
+import 'package:carebea/app/utils/widgets/custom_button.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../utils/assets.dart';
+import '../../../utils/theme.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+   LoginView({Key? key}) : super(key: key);
+  TextEditingController userController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            // Center(
-            //     child: Image.asset(
-            //       Assets.assetsLoginBackground,
-            //       fit: BoxFit.fitWidth,
-            //       width: MediaQuery.of(context).size.width,
-            //     )),
-            Form(
-              key: controller.loginFormKey,
-              child: Positioned(
-                top: MediaQuery.of(context).size.height * .2,
+        child: Form(
+          key: controller.loginFormKey,
+          child: Stack(
+            children: [
+              Center(
+                  child: Image.asset(
+                    Assets.assetsLoginBackground,
+                    fit: BoxFit.fitWidth,
+                    width: MediaQuery.of(context).size.width,
+                  )),
+              Positioned(
+                top: MediaQuery.of(context).size.height * .3,
                 left: MediaQuery.of(context).size.height * .023,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
@@ -34,34 +40,31 @@ class LoginView extends GetView<LoginController> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Image.asset(
-                          //   Assets.assetsLogo,
-                          //   scale: 4,
-                          // ),
+                          Image.asset(
+                            Assets.assetsLogo,
+                            scale: 4,
+                          ),
                           const SizedBox(
                             height: 15,
                           ),
-                          const Text(
+                           Text(
                             'Login to your account',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
+                            style: customTheme(context).medium.copyWith(fontSize: 18),
                           ),
 
                           const SizedBox(
                             height: 8,
                           ),
-                          const Text(
+                           Text(
                             'Enter the login credentials sent to you',
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.w300),
+                            style: customTheme(context).regular.copyWith(fontSize: 12),
                           ),
                           const SizedBox(
                             height: 20,
                           ),
-                          const Text(
+                           Text(
                             'Username',
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.w400),
+                            style: customTheme(context).regular.copyWith(fontSize: 12),
                           ),
                           const SizedBox(
                             height: 10,
@@ -71,6 +74,7 @@ class LoginView extends GetView<LoginController> {
                             width: MediaQuery.of(context).size.width * .85,
                             color: Colors.white,
                             child: TextFormField(
+                              controller:userController ,
                               decoration: const InputDecoration(
                                   border: InputBorder.none,
                                   enabledBorder: InputBorder.none,
@@ -82,15 +86,15 @@ class LoginView extends GetView<LoginController> {
                                   return 'Username can\'t be empty';
                                 }
                               },
+                                onChanged: (value)=>controller.username=value
                             ),
                           ),
                           const SizedBox(
                             height: 20,
                           ),
-                          const Text(
+                           Text(
                             'Password',
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.w400),
+                            style: customTheme(context).regular.copyWith(fontSize: 12),
                           ),
                           const SizedBox(
                             height: 10,
@@ -120,35 +124,44 @@ class LoginView extends GetView<LoginController> {
                             alignment: Alignment.centerRight,
                             child: Text(
                               'Forgot Password?',
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: Theme.of(context).primaryColor),
-                            ),
+                                style: customTheme(context)
+                                    .medium
+                                    .copyWith(fontSize: 12, color: customTheme(context).primary) ),
                           ),
                           const SizedBox(
                             height: 25,
                           ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            height: 50,
-                            child: ElevatedButton(
-                                style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)
-                                ),
-                                onPressed: () {
-                                  controller.mobileLogin();
-                                },
-                                child: const Text('LOGIN')),
-                          )
+                          CustomButton(title: 'LOGIN', onTap: (){
+                            FirebaseCrashlytics.instance.crash();
+                            if(userController.text=='1'){
+                              Get.toNamed(Routes.DASHBOARD);
+
+
+                            }
+                            else{
+                              Get.toNamed(Routes.DELIVERY_HOME);
+                            }
+                          })
+                          // SizedBox(
+                          //   width: MediaQuery.of(context).size.width,
+                          //   height: 50,
+                          //   child: ElevatedButton(
+                          //       style: ButtonStyle(
+                          //           backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)
+                          //       ),
+                          //       onPressed: () {
+                          //         controller.mobileLogin();
+                          //       },
+                          //       child: const Text('LOGIN')),
+                          // )
                         ],
                       ),
                     ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

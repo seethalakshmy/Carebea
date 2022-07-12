@@ -5,6 +5,7 @@ import 'package:carebea/app/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../routes/app_pages.dart';
 import '../../add_shop/views/add_shop_view.dart';
 
 class HomeMenuCards extends StatelessWidget {
@@ -13,13 +14,15 @@ class HomeMenuCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: Get.size.height * .3,
+      height: Get.size.height * .23,
       child: GridView(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3, crossAxisSpacing: 10, mainAxisSpacing: 10, childAspectRatio: 12 / 8),
         children: [
           InkWell(
-            onTap: (){},
+            onTap: (){
+              Get.toNamed(Routes.CREATE_ORDER);
+            },
             child: HomeMenuIndividual(
               asseticon: Assets.shopIcon,
               gradients: [Color(0xff0098BA), Color(0xff4163A2)],
@@ -28,7 +31,7 @@ class HomeMenuCards extends StatelessWidget {
           ),
           InkWell(
             onTap: (){
-              Get.to(()=>AddShopView());
+              Get.toNamed(Routes.ADD_SHOP);
             },
             child: HomeMenuIndividual(
               asseticon: Assets.shopIcon,
@@ -43,7 +46,7 @@ class HomeMenuCards extends StatelessWidget {
           ),
           InkWell(
             onTap: (){
-              Get.to(()=>RoutePageView());
+              Get.toNamed(Routes.ROUTE_PAGE);
             },
             child: HomeMenuIndividual(
               asseticon: Assets.shopIcon,

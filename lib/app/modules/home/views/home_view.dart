@@ -3,6 +3,7 @@
 import 'package:carebea/app/modules/home/views/latest_shops_added_view.dart';
 import 'package:carebea/app/modules/home/widgets/search_widget.dart';
 import 'package:carebea/app/modules/order_details_delivery/views/order_details_delivery_view.dart';
+import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/custom_alertbox.dart';
 import 'package:carebea/app/utils/widgets/custom_button.dart';
@@ -23,20 +24,33 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
         appBar: AppBar(
-          title: Image.asset(
-            Assets.assetsLogo,
-            scale: 3,
-
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: Image.asset(Assets.assetsLogo),
           ),
+          leadingWidth: 30,
           actions: [
             Padding(
-              padding: const EdgeInsets.only(right: 15),
-              child: Scanner(onScanned: (){},),
+              padding: const EdgeInsets.only(right: 8),
+              child: Scanner(onScanned: () {  },),
             ),
           ],
         ),
+
+        // appBar: AppBar(
+        //   title: Image.asset(
+        //     Assets.assetsLogo,
+        //     scale: 3,
+        //
+        //   ),
+        //   actions: [
+        //     Padding(
+        //       padding: const EdgeInsets.only(right: 15),
+        //       child: Scanner(onScanned: (){},),
+        //     ),
+        //   ],
+        // ),
         body: CustomScrollView(slivers: <Widget>[
           // SliverPadding(
           //   padding: const EdgeInsets.only(left: 15.0, right: 15.0),
@@ -71,7 +85,7 @@ class HomeView extends GetView<HomeController> {
            SliverPadding(
               padding: EdgeInsets.only(bottom: 10), sliver: SliverToBoxAdapter(child: InkWell(
             onTap: (){
-              Get.to(()=>OrderDetailsDeliveryView());
+              Get.toNamed(Routes.ORDER_HISTORY_DETAILS);
 
             },
               child: HomepageUpcomingDeliveryView()))),

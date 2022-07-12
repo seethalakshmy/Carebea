@@ -34,7 +34,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.DASHBOARD;
+  static const INITIAL = Routes.APP_START_UP;
 
 
   static final routes = [
@@ -45,12 +45,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LOGIN,
-      page: () => const LoginView(),
+      page: () =>  LoginView(),
       binding: LoginBinding(),
     ),
     GetPage(
       name: _Paths.APP_START_UP,
-      page: () => const AppStartUpView(),
+      page: () =>  AppStartUpView(),
       binding: AppStartUpBinding(),
     ),
     GetPage(

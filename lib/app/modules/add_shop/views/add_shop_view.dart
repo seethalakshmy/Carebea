@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:carebea/app/routes/app_pages.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +9,7 @@ import 'package:get/get.dart';
 
 import '../../../utils/assets.dart';
 import '../../../utils/theme.dart';
+import '../../../utils/widgets/custom_alertbox.dart';
 import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_textfield.dart';
 import '../controllers/add_shop_controller.dart';
@@ -23,12 +25,12 @@ class AddShopView extends GetView<AddShopController> {
           child: Image.asset(Assets.assetsLogo),
         ),
         leadingWidth: 30,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: Image.asset(Assets.assetsScan, width: 40, height: 40,),
-          ),
-        ],
+        // actions: [
+        //   Padding(
+        //     padding: const EdgeInsets.only(right: 8),
+        //     child: Image.asset(Assets.assetsScan, width: 40, height: 40,),
+        //   ),
+        // ],
       ),
       body: SingleChildScrollView(
         child:Form(
@@ -45,11 +47,15 @@ class AddShopView extends GetView<AddShopController> {
                       },
                         child: Icon(Icons.arrow_back_ios_new,size: 20,)),
                     SizedBox(width: 15,),
-                    Text('Add new shop',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w500),)
+                    Text('Add new shop',
+                      style: customTheme(context).medium.copyWith(fontSize: 16),
+                    )
                   ],
                 ),
                 const SizedBox(height: 30,),
-                Text('Shop name'),
+                Text('Shop name',
+                  style: customTheme(context).regular.copyWith(fontSize: 12),
+                ),
                 SizedBox(height: 5,),
                 CustomTextField(
                   validaton: (value){
@@ -65,7 +71,9 @@ class AddShopView extends GetView<AddShopController> {
 
 
                 RichText(text: TextSpan(
-                  text: 'Last name',style: TextStyle(color: Colors.black),
+                  text: 'Last name',
+                  style: customTheme(context).regular.copyWith(fontSize: 12),
+
                   children: const <TextSpan>[
                     TextSpan(
                         text: '  (location should be the last name)',style: TextStyle(color:Colors.black54,fontStyle: FontStyle.italic)),
@@ -82,8 +90,10 @@ class AddShopView extends GetView<AddShopController> {
                 ),
                 SizedBox(height: 5,),
 
-                const Text(
-                  "Shop category",style: TextStyle(fontSize: 12),
+                 Text(
+                  "Shop category",
+                  style: customTheme(context).regular.copyWith(fontSize: 12),
+
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8,bottom: 12),
@@ -120,10 +130,13 @@ class AddShopView extends GetView<AddShopController> {
 
                   ),
                 ),
-                const Text('Customer type',style: TextStyle(fontSize: 12)),
+                Text('Customer type',
+                  style: customTheme(context).regular.copyWith(fontSize: 12),
+                ),
                 const CustomerTypeRadioButton(),
                 RichText(text: TextSpan(
-                  text: 'GST',style: TextStyle(color: Colors.black),
+                  text: 'GST',
+                  style: customTheme(context).regular.copyWith(fontSize: 12),
                   children: const <TextSpan>[
                     TextSpan(
                         text: '\*',style: TextStyle(color:Colors.blue)),
@@ -140,7 +153,9 @@ class AddShopView extends GetView<AddShopController> {
                   },
                 ),
                 SizedBox(height: 25,),
-                const Text('Location',style: TextStyle(fontSize: 12)),
+                 Text('Location',
+                  style: customTheme(context).regular.copyWith(fontSize: 12),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: InkWell(
@@ -154,7 +169,9 @@ class AddShopView extends GetView<AddShopController> {
                   ),
                 ),
                 const SizedBox(height: 15,),
-                Text('Local area/city'),
+                Text('Local area/city',
+                  style: customTheme(context).regular.copyWith(fontSize: 12),
+                ),
                 SizedBox(height: 5,),
                 CustomTextField(
                   inputFormatters: [
@@ -176,7 +193,9 @@ class AddShopView extends GetView<AddShopController> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Pincode'),
+                          Text('Pincode',
+                            style: customTheme(context).regular.copyWith(fontSize: 12),
+                          ),
                           SizedBox(height: 5,),
                           CustomTextField( maxlength: 6,
                            inputType: TextInputType.number,
@@ -202,7 +221,9 @@ class AddShopView extends GetView<AddShopController> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('District'),
+                            Text('District',
+                              style: customTheme(context).regular.copyWith(fontSize: 12),
+                            ),
                             SizedBox(height: 5,),
                             CustomTextField(
                               inputFormatters: [
@@ -226,7 +247,9 @@ class AddShopView extends GetView<AddShopController> {
                   ],
                 ),
                 SizedBox(height: 10,),
-                Text('State'),
+                Text('State',
+                  style: customTheme(context).regular.copyWith(fontSize: 12),
+                ),
                 SizedBox(height: 5,),
                 CustomTextField(
                   inputFormatters: [
@@ -235,7 +258,8 @@ class AddShopView extends GetView<AddShopController> {
                 ),
                 SizedBox(height: 10,),
                 RichText(text: TextSpan(
-                  text: 'Phone number',style: TextStyle(color: Colors.black),
+                  text: 'Phone number',
+                  style: customTheme(context).regular.copyWith(fontSize: 12),
                   children: const <TextSpan>[
                     TextSpan(
                         text: '\*',style: TextStyle(color:Colors.blue)),
@@ -255,8 +279,10 @@ class AddShopView extends GetView<AddShopController> {
                   },
                 ),
                 SizedBox(height: 15,),
-                const Text(
-                  "Branch",style: TextStyle(fontSize: 12),
+                 Text(
+                  "Branch",
+                  style: customTheme(context).regular.copyWith(fontSize: 12),
+
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8,bottom: 12),
@@ -292,8 +318,9 @@ class AddShopView extends GetView<AddShopController> {
 
                   ),
                 ),
-                const Text(
-                  "Zone",style: TextStyle(fontSize: 12),
+                 Text(
+                  "Zone",
+                  style: customTheme(context).regular.copyWith(fontSize: 12),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8,bottom: 12),
@@ -329,8 +356,10 @@ class AddShopView extends GetView<AddShopController> {
 
                   ),
                 ),
-                const Text(
-                  "Route",style: TextStyle(fontSize: 12),
+                 Text(
+                  "Route",
+                  style: customTheme(context).regular.copyWith(fontSize: 12),
+
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8,bottom: 12),
@@ -367,7 +396,8 @@ class AddShopView extends GetView<AddShopController> {
                   ),
                 ),
                 RichText(text: TextSpan(
-                  text: 'Opening balance',style: TextStyle(color: Colors.black),
+                  text: 'Opening balance',
+                  style: customTheme(context).regular.copyWith(fontSize: 12),
                   children: const <TextSpan>[
                     TextSpan(
                         text: '  (mandatory only for existing shops)',style: TextStyle(color:Colors.black54,fontStyle: FontStyle.italic)),
@@ -377,7 +407,28 @@ class AddShopView extends GetView<AddShopController> {
                 CustomTextField(
                 ),
                 SizedBox(height: 25,),
-                CustomButton(onTap: () { 
+                CustomButton(onTap: () {
+                  showDialog<bool>(
+                      context: context,
+                      builder: (ctx) {
+                        return CustomAlertbox(
+                          topIcon: Image.asset(
+                            Assets.successIcon,
+                            width: 80,
+                            height: 80,
+                          ),
+                          title: "Shop added Successful!",
+                          content: "",
+                          actions: [
+                            CustomButton(
+                                title: "Go to Home page",
+                                onTap: () {
+                                  Get.back(result: true);
+                                  Get.offAllNamed(Routes.DASHBOARD);
+                                })
+                          ],
+                        );
+                      });
                   
                 }, title: 'Add Shop',)
               ],

@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../../utils/assets.dart';
 import '../../../utils/theme.dart';
 import '../../../utils/widgets/Order_history_tile.dart';
+import '../../create_order/views/create_order_view.dart';
 import '../../dashboard/views/bottom_nav_bar_view.dart';
 import '../controllers/orders_controller.dart';
 class OrdersView extends StatefulWidget {
@@ -17,6 +18,8 @@ class OrdersView extends StatefulWidget {
 }
 
 class _OrdersViewState extends State<OrdersView>with SingleTickerProviderStateMixin {
+  static List<String> category = ['Date', 'Today', 'This week', 'This month','This year'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,12 +29,7 @@ class _OrdersViewState extends State<OrdersView>with SingleTickerProviderStateMi
           child: Image.asset(Assets.assetsLogo),
         ),
         leadingWidth: 30,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: Image.asset(Assets.assetsScan, width: 40, height: 40,),
-          ),
-        ],
+
       ),
       floatingActionButton: _createNewOrderButton(context),
 
@@ -67,84 +65,97 @@ class _OrdersViewState extends State<OrdersView>with SingleTickerProviderStateMi
               Row(
                 children: [
                   Expanded(
-                    child: TextField(
-                      cursorColor: Colors.grey,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide.none,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide.none,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide.none,
-                          ),
-                          fillColor:Color(0xFFEFEFEF),
-                          filled: true,
-
-                          hintText: 'Search for orders',
-                          hintStyle: const TextStyle(color: Colors.grey),
-                          prefixIcon:Icon(Icons.search,color: Colors.grey,)),
-                    ),
+                      child: CustomTextField(
+                        onChanged: (val) {},
+                        hint: 'Search for orders',
+                        fillcolor: Colors.grey[300],
+                        icon: const Icon(
+                          Icons.search,
+                          size: 30,
+                          color: Colors.grey,
+                        ),
+                      )
                   ),
-                  PopupMenuButton<int>(
-
-                    icon:Image.asset(
-                      Assets.filter,),
-                    itemBuilder: (context) => [
-                      // PopupMenuItem 1
-                      PopupMenuItem(
-                        value: 1,
-                          height: 5,
-
-                          child: Text('Date',
-                            style: customTheme(context).regular.copyWith(fontSize: 13))
-                      ),
-                      PopupMenuDivider(),
-                      // PopupMenuItem 2
-                      PopupMenuItem(
-                          value: 2,
-                          height: 5,
-
-                          child: Text('Today',
-                              style: customTheme(context).regular.copyWith(fontSize: 13)
-                          )
-                      ),
-                      PopupMenuDivider(),
-
-                      PopupMenuItem(
-                          value: 1,
-                          height: 5,
-
-                          child: Text('This week',
-                              style: customTheme(context).regular.copyWith(fontSize: 13))
-                      ),
-                      PopupMenuDivider(),
-
-                      PopupMenuItem(
-                          value: 1,
-                          height: 5,
-                          child: Text('This month',
-                              style: customTheme(context).regular.copyWith(fontSize: 13))
-                      ),
-                      PopupMenuDivider(),
-
-                      PopupMenuItem(
-                          value: 1,
-                          height: 5,
-
-                          child: Text('This year',
-                              style: customTheme(context).regular.copyWith(fontSize: 13))
-                      ),
-                    ],
-                    offset: Offset(0, 100),
-                    elevation: 2,
-                    onSelected: (value) {
+                  SizedBox(width: 5,),
+                  PopupMenuButton(
+                    position: PopupMenuPosition.under,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          Assets.filter,
+                          scale: 3.5,
+                        )
+                      ],
+                    ),
+                    onSelected: (element) {},
+                    itemBuilder: (BuildContext context) {
+                      return category.map((e) {
+                        return PopupMenuItem<String>(
+                         value: "1",
+                          child: Text(
+                            e.toString(),
+                            style: TextStyle(fontSize: 14),
+                          ),
+                          onTap: () {},
+                        );
+                      }).toList();
                     },
                   ),
+                  // PopupMenuButton<int>(
+                  //
+                  //   icon:Image.asset(
+                  //     Assets.filter,),
+                  //   itemBuilder: (context) => [
+                  //     // PopupMenuItem 1
+                  //     PopupMenuItem(
+                  //       value: 1,
+                  //         height: 5,
+                  //
+                  //         child: Text('Date',
+                  //           style: customTheme(context).regular.copyWith(fontSize: 13))
+                  //     ),
+                  //     PopupMenuDivider(),
+                  //     // PopupMenuItem 2
+                  //     PopupMenuItem(
+                  //         value: 2,
+                  //         height: 5,
+                  //
+                  //         child: Text('Today',
+                  //             style: customTheme(context).regular.copyWith(fontSize: 13)
+                  //         )
+                  //     ),
+                  //     PopupMenuDivider(),
+                  //
+                  //     PopupMenuItem(
+                  //         value: 1,
+                  //         height: 5,
+                  //
+                  //         child: Text('This week',
+                  //             style: customTheme(context).regular.copyWith(fontSize: 13))
+                  //     ),
+                  //     PopupMenuDivider(),
+                  //
+                  //     PopupMenuItem(
+                  //         value: 1,
+                  //         height: 5,
+                  //         child: Text('This month',
+                  //             style: customTheme(context).regular.copyWith(fontSize: 13))
+                  //     ),
+                  //     PopupMenuDivider(),
+                  //
+                  //     PopupMenuItem(
+                  //         value: 1,
+                  //         height: 5,
+                  //
+                  //         child: Text('This year',
+                  //             style: customTheme(context).regular.copyWith(fontSize: 13))
+                  //     ),
+                  //   ],
+                  //   offset: Offset(0, 100),
+                  //   elevation: 2,
+                  //   onSelected: (value) {
+                  //   },
+                  // ),
                 ],
               ),
               SizedBox(height: 25,),
@@ -165,7 +176,9 @@ class _OrdersViewState extends State<OrdersView>with SingleTickerProviderStateMi
   FloatingActionButton _createNewOrderButton(BuildContext context) {
     return FloatingActionButton.extended(
       backgroundColor:Theme.of(context).extension<CustomTheme>()!.primary,
-      onPressed: () {},
+      onPressed: () {
+        Get.to(CreateOrderView());
+      },
       label: Text(
         "Create new order",
         style: customTheme(context).medium.copyWith(fontSize: 13, color: Colors.white),

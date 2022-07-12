@@ -1,3 +1,4 @@
+import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/custom_alertbox.dart';
@@ -72,8 +73,8 @@ class CheckoutView extends StatelessWidget {
               decoration: BoxDecoration(color: customTheme(context).primary, borderRadius: BorderRadius.circular(7)),
               child: ConfirmationSlider(
                 backgroundColor: customTheme(context).primary,
-                height: 48,
-                width: 200,
+                // height: 48,
+                // width: 200,
                 shadow: BoxShadow(color: Colors.transparent),
                 onConfirmation: () => onConfirm(context),
                 foregroundColor: Colors.transparent,
@@ -91,13 +92,16 @@ class CheckoutView extends StatelessWidget {
     showDialog(
         context: context,
         builder: (_) => CustomAlertbox(
+          topIcon: Image.asset(Assets.successIcon,
+          height: 80,
+          width: 80,),
               title: "Order Successful!",
               content: "Your order placed has been successful!",
               actions: [
                 CustomButton(
                     title: "Go to Home page",
                     onTap: () {
-                      Get.until((route) => route.isFirst);
+                      Get.offAllNamed(Routes.DASHBOARD);
                     })
               ],
             ));
