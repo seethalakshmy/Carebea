@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "44646503999",
-    "project_id": "carebae-1fd8f",
-    "storage_bucket": "carebae-1fd8f.appspot.com"
+    "project_number": "853200531889",
+    "project_id": "carebea-6bfc6",
+    "storage_bucket": "carebea-6bfc6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:44646503999:android:4105b0ae487cf0280b4a8a",
+        "mobilesdk_app_id": "1:853200531889:android:18c31036dc8e1a04b54d90",
         "android_client_info": {
           "package_name": "com.seeroo.carebea.carebea"
         }
       },
       "oauth_client": [
         {
-          "client_id": "44646503999-b5bckp2219eqtdu08dbg6cgsndd0n2p7.apps.googleusercontent.com",
+          "client_id": "853200531889-mn10jh1om3ib76e2pjt0tboagfitmvn1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBSuiLPGYQNN2ExGeknTQz_wBavdfGXjGo"
+          "current_key": "AIzaSyD7Mwm8wp1KGbmkZIVm5_Pnq0xHV84s43Q"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "44646503999-b5bckp2219eqtdu08dbg6cgsndd0n2p7.apps.googleusercontent.com",
+              "client_id": "853200531889-mn10jh1om3ib76e2pjt0tboagfitmvn1.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
