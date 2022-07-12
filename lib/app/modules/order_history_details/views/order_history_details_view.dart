@@ -1,3 +1,4 @@
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -12,13 +13,7 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: Image.asset(Assets.assetsLogo),
-        ),
-        leadingWidth: 30,
-      ),
+      appBar:appBar(context),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(15.0),

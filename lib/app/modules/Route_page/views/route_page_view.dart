@@ -1,5 +1,6 @@
 
 
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -15,19 +16,7 @@ class RoutePageView extends GetView<RoutePageController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: Image.asset(Assets.assetsLogo),
-        ),
-        leadingWidth: 30,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: Image.asset(Assets.assetsScan, width: 40, height: 40,),
-          ),
-        ],
-      ),
+      appBar:appBar(context),
       body:SingleChildScrollView(
         child: Column(
           children: [

@@ -1,4 +1,5 @@
 import 'package:carebea/app/modules/order_history_details/views/order_history_details_view.dart';
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 
@@ -23,14 +24,7 @@ class _OrdersViewState extends State<OrdersView>with SingleTickerProviderStateMi
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: Image.asset(Assets.assetsLogo),
-        ),
-        leadingWidth: 30,
-
-      ),
+      appBar:appBar(context),
       floatingActionButton: _createNewOrderButton(context),
 
       body: DefaultTabController(

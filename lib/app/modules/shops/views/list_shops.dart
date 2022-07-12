@@ -3,6 +3,7 @@ import 'package:carebea/app/modules/shops/widgets/shop_card.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,15 +15,7 @@ class ListShops extends GetView<ShopsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-        titleSpacing: 15,
-        automaticallyImplyLeading: false,
-        title: Image.asset(
-        Assets.assetsLogo,
-        scale: 4,
-    ),
-
-    ),
+        appBar: appBar(context),
         floatingActionButton: _addNewShopButton(context),
         body: SingleChildScrollView(
           child: Padding(

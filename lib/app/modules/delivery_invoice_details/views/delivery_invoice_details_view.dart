@@ -1,5 +1,6 @@
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
@@ -12,14 +13,7 @@ class DeliveryInvoiceDetailsView extends GetView<DeliveryInvoiceDetailsControlle
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: Image.asset(Assets.assetsLogo),
-          ),
-          leadingWidth: 40,
-
-        ),
+        appBar:appBar(context),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
