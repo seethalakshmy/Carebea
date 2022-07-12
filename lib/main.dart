@@ -1,11 +1,38 @@
 import 'package:carebea/app/utils/theme.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
 import 'app/routes/app_pages.dart';
+import 'app/utils/cloudmessaging.dart';
 
-void main() {
+final CloudMessaging cloudMessaging = CloudMessaging();
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+
+  print("background message called");
+  cloudMessaging.backgroundMessageHandler(message);
+}
+
+void main()async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
+  cloudMessaging.initMessaging();
+
+
+  ///for foreground
+
+  FirebaseMessaging.onMessage.listen((value) {
+    // jobListingController.fetchIncompleteJobs(SharedPrefs().getUserType());
+    cloudMessaging.foregroundMessageHandler(value);
+  });
+
+  ///for background
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
