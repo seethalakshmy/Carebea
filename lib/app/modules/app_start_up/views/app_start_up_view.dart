@@ -49,7 +49,6 @@ class _AppStartUpViewState extends State<AppStartUpView> {
       if(SharedPrefs.getUserId()!=null){
         Get.toNamed(Routes.DASHBOARD);
 
-        // Get.off(() => const CitySelection());
 
 
       }
