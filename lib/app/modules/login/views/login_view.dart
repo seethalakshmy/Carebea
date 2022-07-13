@@ -1,23 +1,31 @@
+import 'dart:ffi';
+
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/widgets/custom_button.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 
+import '../../../core/helper.dart';
 import '../../../utils/assets.dart';
 import '../../../utils/theme.dart';
+import '../controllers/login_controller.dart';
+import '../controllers/login_controller.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
    LoginView({Key? key}) : super(key: key);
+   LoginController loginController = Get.put(LoginController());
   TextEditingController userController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
-          key: controller.loginFormKey,
+          key: loginController.loginFormKey,
           child: Stack(
             children: [
               Center(
@@ -74,6 +82,10 @@ class LoginView extends GetView<LoginController> {
                             width: MediaQuery.of(context).size.width * .85,
                             color: Colors.white,
                             child: TextFormField(
+                              keyboardType: TextInputType.emailAddress,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.deny(RegExp(emojiRegexp))
+                              ],
                               controller:userController ,
                               decoration: const InputDecoration(
                                   border: InputBorder.none,
@@ -82,11 +94,11 @@ class LoginView extends GetView<LoginController> {
                                   contentPadding: EdgeInsets.only(left: 5)),
                               cursorColor: Colors.black,
                               validator: (value) {
-                                if(value==null || value.isEmpty){
+                                if(value==null || value.trim().isEmpty){
                                   return 'Username can\'t be empty';
                                 }
                               },
-                                onChanged: (value)=>controller.username=value
+                                onChanged: (value)=>loginController.username=value.trim()
                             ),
                           ),
                           const SizedBox(
@@ -104,6 +116,9 @@ class LoginView extends GetView<LoginController> {
                             width: MediaQuery.of(context).size.width * .85,
                             color: Colors.white,
                             child: TextFormField(
+                              keyboardType: TextInputType.visiblePassword,
+                              obscureText: true,
+                              controller: passwordController,
                               decoration: const InputDecoration(
                                   border: InputBorder.none,
                                   enabledBorder: InputBorder.none,
@@ -111,10 +126,11 @@ class LoginView extends GetView<LoginController> {
                                   contentPadding: EdgeInsets.only(left: 5)),
                               cursorColor: Colors.black,
                               validator: (value) {
-                                if(value==null || value.isEmpty){
+                                if(value==null || value.trim().isEmpty){
                                   return 'Password can\'t be empty';
                                 }
                               },
+                              onChanged: (value)=>loginController.password=value.trim(),
                             ),
                           ),
                           const SizedBox(
@@ -132,15 +148,20 @@ class LoginView extends GetView<LoginController> {
                             height: 25,
                           ),
                           CustomButton(title: 'LOGIN', onTap: (){
-                            FirebaseCrashlytics.instance.crash();
-                            if(userController.text=='1'){
-                              Get.toNamed(Routes.DASHBOARD);
 
 
-                            }
-                            else{
-                              Get.toNamed(Routes.DELIVERY_HOME);
-                            }
+                            loginController.loginWithEmail(username:loginController.username??'' , password:loginController.password??'');
+                            print('username ${loginController.username??''}');
+                            print('password ${loginController.password??''}');
+                            // FirebaseCrashlytics.instance.crash();
+                            // if(userController.text=='1'){
+                            //   Get.toNamed(Routes.DASHBOARD);
+                            //
+                            //
+                            // }
+                            // else{
+                            //   Get.toNamed(Routes.DELIVERY_HOME);
+                            // }
                           })
                           // SizedBox(
                           //   width: MediaQuery.of(context).size.width,

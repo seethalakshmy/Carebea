@@ -1,6 +1,12 @@
+import 'package:carebea/app/modules/login/views/login_view.dart';
+import 'package:carebea/app/modules/profile/widgets/logout_button.dart';
+import 'package:carebea/app/routes/app_pages.dart';
+import 'package:carebea/app/utils/shared_prefs.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/assets.dart';
 import '../../../utils/theme.dart';
@@ -18,6 +24,7 @@ class ProfileView extends GetView<ProfileController> {
             Assets.assetsLogo,
             scale: 4,
           ),
+
         ),
       body: Padding(
         padding: const EdgeInsets.only(left: 15,top: 20),
@@ -62,6 +69,12 @@ class ProfileView extends GetView<ProfileController> {
               style: customTheme(context).regular.copyWith(fontSize: 14),
 
             ),
+            LogoutButton(
+
+            )
+
+
+
 
 
 
