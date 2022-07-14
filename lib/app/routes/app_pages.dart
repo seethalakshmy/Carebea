@@ -1,3 +1,4 @@
+import 'package:carebea/app/modules/forgot_password/views/new_password_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/Route_page/bindings/route_page_binding.dart';
@@ -114,6 +115,11 @@ class AppPages {
     GetPage(
       name: _Paths.FORGOT_PASSWORD,
       page: () => const ForgotPasswordView(),
+      binding: ForgotPasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.NEW_PASSWORD,
+      page: () => const NewPasswordView(),
       binding: ForgotPasswordBinding(),
     ),
   ];

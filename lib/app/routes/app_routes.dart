@@ -19,6 +19,7 @@ abstract class Routes {
   static const ORDER_HISTORY_DETAILS = _Paths.ORDER_HISTORY_DETAILS;
   static const ORDER_DETAILS_DELIVERY = _Paths.ORDER_DETAILS_DELIVERY;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
+  static const NEW_PASSWORD = _Paths.NEW_PASSWORD;
 }
 
 abstract class _Paths {
@@ -39,4 +40,5 @@ abstract class _Paths {
   static const ORDER_HISTORY_DETAILS = '/order-history-details';
   static const ORDER_DETAILS_DELIVERY = '/order-details-delivery';
   static const FORGOT_PASSWORD = '/forgot-password';
+  static const NEW_PASSWORD = '/new-password';
 }
