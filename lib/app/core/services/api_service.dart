@@ -9,11 +9,9 @@ import 'dart:developer' as developer;
 import '../../../model/access_token.dart';
 import '../../utils/shared_prefs.dart';
 
-
-
-
 class ApiService extends GetxService {
-  var baseUrl = "https://bc01-117-193-165-154.in.ngrok.io/api/v1/";//test
+  // var baseUrl = "http://192.168.1.162:8069/api/v1/"; //local
+  var baseUrl = "https://4c40-112-196-178-85.in.ngrok.io/api/v1/"; //test
 
   var xAuthClient = '12345';
   var xAuthToken = '12345';
@@ -78,5 +76,165 @@ class ApiService extends GetxService {
       isInternetOn = true;
     }
     return isInternetOn;
+  }
+
+  Future<http.Response> post(String path, Object body) async {
+    debugPrint("checking connection");
+    if (!(await getConnect())) {
+      return http.Response(
+        json.encode({
+          'status': false,
+          'detail': 'Network error, Please connect to a network!',
+          "body": {"status": false, "message": 'Network error, Please connect to a network!'}
+        }),
+        408,
+      );
+    }
+    debugPrint('**** post request :  $path ****');
+    debugPrint('body : $body');
+    late http.Response res;
+    try {
+      res = await http.post(Uri.parse(baseUrl + path), body: jsonEncode(body), headers: getHeaders());
+    } catch (e) {
+      debugPrint("post request timeout : $e");
+      // timeoutDialog();
+      return http.Response(
+        json.encode({
+          'status': false,
+          'detail': 'Connection timeout',
+          "body": {"status": false, "message": 'Connection timeout'}
+        }),
+        408,
+      );
+    }
+    debugPrint('status code : ${res.statusCode}');
+    debugPrint('response body : ${res.body}');
+    debugPrint('**** post request end : $path ****');
+    if (res.statusCode == 401) {
+      var val = await refreshToken();
+      if (val) return await post(path, body);
+    }
+    return res;
+  }
+
+  Future<http.Response> put(String path, Object body) async {
+    debugPrint("checking connection");
+    if (!(await getConnect())) {
+      return http.Response(
+        json.encode({
+          'status': false,
+          'detail': 'Network error, Please connect to a network!',
+          "body": {"status": false, "message": 'Network error, Please connect to a network!'}
+        }),
+        408,
+      );
+    }
+    debugPrint('**** put request : $path ****');
+    debugPrint('body : $body');
+    http.Response res;
+    try {
+      res = await http.put(Uri.parse(baseUrl + path), body: jsonEncode(body), headers: getHeaders());
+    } catch (e) {
+      debugPrint("put request timeout : $e");
+      // timeoutDialog();
+      return http.Response(
+        json.encode({
+          'status': false,
+          'detail': 'Connection timeout',
+          "body": {
+            "status": false,
+            "message": 'Connection timeout',
+            "body": {"status": false, "message": 'Connection timeout'}
+          },
+        }),
+        408,
+      );
+    }
+    debugPrint('status code : ${res.statusCode}');
+    debugPrint('response body : ${res.body}');
+    debugPrint('**** put request end : $path ****');
+    if (res.statusCode == 401) {
+      var val = await refreshToken();
+      if (val) return await put(path, body);
+    }
+    return res;
+  }
+
+  ///give [path] starting with [/], eg: /test
+  Future<http.Response> get(String path) async {
+    debugPrint("checking connection");
+    if (!(await getConnect())) {
+      return http.Response(
+        json.encode({
+          'status': false,
+          'detail': 'Network error, Please connect to a network!',
+          "body": {"status": false, "message": 'Network error, Please connect to a network!'}
+        }),
+        408,
+      );
+    }
+    debugPrint('**** get request : $path ****');
+    http.Response res;
+    try {
+      res = await http.get(Uri.parse(baseUrl + path), headers: getHeaders());
+    } catch (e) {
+      debugPrint("get request timeout : $e");
+      // timeoutDialog();
+      return http.Response(
+        json.encode({
+          'status': false,
+          'detail': 'Connection timeout',
+          "body": {"status": false, "message": 'Connection timeout'}
+        }),
+        408,
+      );
+    }
+    debugPrint('status code : ${res.statusCode}');
+    debugPrint('response body : ${res.body}');
+    debugPrint('**** get request end : $path ****');
+    if (res.statusCode == 401) {
+      var val = await refreshToken();
+      if (val) return await get(path);
+    }
+    return res;
+  }
+
+  Future<http.Response> delete(String path, Map<String, dynamic> body) async {
+    debugPrint("checking connection");
+    if (!(await getConnect())) {
+      return http.Response(
+        json.encode({
+          'status': false,
+          'detail': 'Network error, Please connect to a network!',
+          "body": {"status": false, "message": 'Network error, Please connect to a network!'}
+        }),
+        408,
+      );
+    }
+    debugPrint('**** delete request : $path ****');
+    debugPrint('body : $body');
+    http.Response res;
+    try {
+      res = await http.delete(Uri.parse(baseUrl + path), headers: getHeaders(), body: jsonEncode(body));
+    } catch (e) {
+      debugPrint("delete request timeout : $e");
+      // timeoutDialog();
+      return http.Response(
+        json.encode({
+          'status': false,
+          'detail': 'Connection timeout',
+          "body": {"status": false, "message": 'Connection timeout'}
+        }),
+        408,
+      );
+    }
+    debugPrint('status code : ${res.statusCode}');
+    debugPrint('response body : ${res.body}');
+    debugPrint('**** delete request end : $path ****');
+    if (res.statusCode == 401) {
+      var val = await refreshToken();
+      if (val) return await delete(path, body);
+    }
+    return res;
   }
 }

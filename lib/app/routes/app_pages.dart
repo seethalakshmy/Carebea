@@ -37,7 +37,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.FORGOT_PASSWORD;
+  static const INITIAL = Routes.APP_START_UP;
 
   static final routes = [
     GetPage(
@@ -52,7 +52,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.APP_START_UP,
-      page: () =>  const AppStartUpView(),
+      page: () => const AppStartUpView(),
       binding: AppStartUpBinding(),
     ),
     GetPage(

@@ -27,12 +27,14 @@ class NewPasswordView extends GetView<ForgotPasswordController> {
                   textcontroller: passwordController,
                   hint: "Enter New Password",
                   validaton: (text) {
+                    passwordController.text.trim();
                     if ((text ?? "").isEmpty) {
                       return "Password can't be empty";
                     }
                     if (text!.length < 6) {
                       return "Password length can't be less than 6";
                     }
+
                     return null;
                   },
                 ),
@@ -41,6 +43,7 @@ class NewPasswordView extends GetView<ForgotPasswordController> {
                   textcontroller: rePasswordController,
                   hint: "Re Enter Password",
                   validaton: (text) {
+                    rePasswordController.text.trim();
                     if ((text ?? "").isEmpty) {
                       return "Password can't be empty";
                     }
@@ -57,7 +60,9 @@ class NewPasswordView extends GetView<ForgotPasswordController> {
                 CustomButton(
                     title: "Confirm",
                     onTap: () {
-                      if (_formKey.currentState!.validate()) {}
+                      if (_formKey.currentState!.validate()) {
+                        controller.updatePassword(password: passwordController.text.trim());
+                      }
                     })
               ],
             ),

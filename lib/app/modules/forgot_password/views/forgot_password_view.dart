@@ -12,6 +12,7 @@ import '../controllers/forgot_password_controller.dart';
 class ForgotPasswordView extends GetView<ForgotPasswordController> {
   const ForgotPasswordView({Key? key}) : super(key: key);
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static final TextEditingController otpController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,16 +25,17 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
               Form(
                 key: _formKey,
                 child: CustomTextField(
+                  textcontroller: otpController,
                   hint: "Enter OTP",
-                  maxlength: 6,
+                  maxlength: 4,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   inputType: TextInputType.number,
                   validaton: (text) {
                     if ((text ?? "").isEmpty) {
                       return "OTP can't be empty";
                     }
-                    if (text!.length < 6) {
-                      return "OTP length can't be less than 6";
+                    if (text!.length < 4) {
+                      return "OTP length can't be less than 4";
                     }
                     return null;
                   },
@@ -44,7 +46,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                   title: "Confirm",
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
-                      Get.offNamed(Routes.NEW_PASSWORD);
+                      controller.verifyOtp(otpController.text);
                     }
                   })
             ],
