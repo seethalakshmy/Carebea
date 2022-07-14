@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import 'app/routes/app_pages.dart';
 import 'app/utils/cloudmessaging.dart';
+import 'app/utils/shared_prefs.dart';
 
 final CloudMessaging cloudMessaging = CloudMessaging();
 
@@ -19,6 +20,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
+  SharedPrefs().init();
+
 
   await Firebase.initializeApp();
   cloudMessaging.initMessaging();
