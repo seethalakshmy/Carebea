@@ -130,7 +130,7 @@ class LoginView extends GetView<LoginController> {
                           ),
                         ),
                         const SizedBox(
-                          height: 25,
+                          height: 15,
                         ),
                         CustomButton(
                             title: 'LOGIN',
