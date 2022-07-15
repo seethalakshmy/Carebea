@@ -1,3 +1,4 @@
+import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:carebea/app/modules/shops/views/shop_details.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
@@ -5,14 +6,13 @@ import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ShopListTile extends StatefulWidget {
-  const ShopListTile({Key? key}) : super(key: key);
+import '../controllers/shops_controller.dart';
 
-  @override
-  State<ShopListTile> createState() => _ShopListTileState();
-}
+class ShopListTile extends StatelessWidget {
+  const ShopListTile({Key? key, required this.shop }) : super(key: key);
+  final ShopList shop;
 
-class _ShopListTileState extends State<ShopListTile> {
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -28,7 +28,8 @@ class _ShopListTileState extends State<ShopListTile> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Trinity Shop',
+              shop.name!,
+              // 'Trinity Shop',
               style: customTheme(context).medium.copyWith(fontSize: 13),
             ),
             const SizedBox(
@@ -44,7 +45,20 @@ class _ShopListTileState extends State<ShopListTile> {
                   width: 5,
                 ),
                 Text(
-                  'Akshay Nagar 1st Block Cross,Rammurthy',
+                  shop.address!.localArea!,
+                  // 'Akshay Nagar 1st Block Cross,Rammurthy',
+                  style: customTheme(context).regular.copyWith(fontSize: 11),
+                ),
+                Text(','),
+                Text(
+                  shop.address!.zip!,
+                  // 'Akshay Nagar 1st Block Cross,Rammurthy',
+                  style: customTheme(context).regular.copyWith(fontSize: 11),
+                ),
+                Text(','),
+                Text(
+                  shop.address!.district!,
+                  // 'Akshay Nagar 1st Block Cross,Rammurthy',
                   style: customTheme(context).regular.copyWith(fontSize: 11),
                 ),
               ],
@@ -59,7 +73,8 @@ class _ShopListTileState extends State<ShopListTile> {
                   width: 5,
                 ),
                 Text(
-                  '+91 6398541236',
+                  shop.phone!,
+                  // '+91 6398541236',
                   style: customTheme(context).regular.copyWith(fontSize: 11),
                 ),
               ],
