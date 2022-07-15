@@ -15,7 +15,7 @@ class ListShops extends GetView<ShopsController> {
   TextEditingController searchTextEditingController = TextEditingController();
 
 
-  static List<String> category = ['Retail', 'Supermarket', 'Wholesale', 'Zone'];
+  // static List<String> category = ['Retail', 'Supermarket', 'Wholesale', 'Zone'];
 
   // List<Category>? category;
 
@@ -63,13 +63,7 @@ class ListShops extends GetView<ShopsController> {
                     children: [
                       Expanded(
                           child: CustomTextField(
-                            onsubmit: (val) {
-                              if (val != null && val.isNotEmpty) {
-                                var key = val;
-                                print("key is $val");
-                                shopsController.openSearchDelegate(key);
-                              }
-                            },
+                         
                             onChanged: (val) {},
                             hint: 'Search for shops',
                             fillcolor: Colors.grey[300],
@@ -95,9 +89,18 @@ class ListShops extends GetView<ShopsController> {
                         onSelected: (element) {},
                         itemBuilder: (BuildContext context) {
                           return [
+                            PopupMenuItem(child:Container(
+                              color: Colors.blue,
+                                child: Text('Category')) ),
 
                             ...buildCategoryFilterItems(),
+                            PopupMenuItem(child:Container(
+                                color: Colors.blue,
+                                child: Text('Zone')) ),
                             ...buildZoneFilterItems(),
+                            PopupMenuItem(child:Container(
+                                color: Colors.blue,
+                                child: Text('Route')) ),
                             ...buildRouteFilterItems()
                           ];
                         },
