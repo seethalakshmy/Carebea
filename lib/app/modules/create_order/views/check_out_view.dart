@@ -18,7 +18,7 @@ class CheckoutView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:appBar(context),
+      appBar: appBar(context),
       body: ListView(
         children: [
           _title(context),
@@ -67,8 +67,12 @@ class CheckoutView extends StatelessWidget {
               decoration: BoxDecoration(color: customTheme(context).primary, borderRadius: BorderRadius.circular(7)),
               child: ConfirmationSlider(
                 backgroundColor: customTheme(context).primary,
-                // height: 48,
-                // width: 200,
+                height: 48,
+                width: 200,
+                sliderButtonContent: Image.asset(
+                  Assets.threeArrow,
+                  scale: 3,
+                ),
                 shadow: BoxShadow(color: Colors.transparent),
                 onConfirmation: () => onConfirm(context),
                 foregroundColor: Colors.transparent,
@@ -86,9 +90,11 @@ class CheckoutView extends StatelessWidget {
     showDialog(
         context: context,
         builder: (_) => CustomAlertbox(
-          topIcon: Image.asset(Assets.successIcon,
-          height: 80,
-          width: 80,),
+              topIcon: Image.asset(
+                Assets.successIcon,
+                height: 80,
+                width: 80,
+              ),
               title: "Order Successful!",
               content: "Your order placed has been successful!",
               actions: [

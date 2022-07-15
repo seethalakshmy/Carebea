@@ -18,9 +18,12 @@ class Assets {
   static const String pickup = 'assets/images/pickUpPoint.png';
   static const String phoneFilled = 'assets/images/phoneFilled.png';
   static const String successIcon = 'assets/images/Success.png';
+  static const String threeArrow = 'assets/images/three_arrow.png';
   static const String orderHomeIcon = 'assets/images/sr-home-icons/order.png';
   static const String newShopHomeIcon = 'assets/images/sr-home-icons/new_shop.png';
   static const String deliveryHomeIcon = 'assets/images/sr-home-icons/delivery.png';
   static const String reportsHomeIcon = 'assets/images/sr-home-icons/reports.png';
   static const String routeHomeIcon = 'assets/images/sr-home-icons/route.png';
+  static const String deliveryHomeIcon2 = 'assets/images/delivery-home-icons/delivery.png';
+  static const String ordersHomeIcon = 'assets/images/delivery-home-icons/orders.png';
 }

@@ -54,14 +54,14 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   HomeTile(
-                    asset: Assets.homeIcon,
+                    asset: Assets.deliveryHomeIcon2,
                     title: "Todays Delivery",
                     count: 2,
                     color: Color(0xffD8375C),
                   ),
                   SizedBox(width: 10),
                   HomeTile(
-                    asset: Assets.homeIcon,
+                    asset: Assets.ordersHomeIcon,
                     title: "Total Orders Delivered",
                     count: 89,
                     color: Color(0xffF3674F),
@@ -72,7 +72,7 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
             const SizedBox(height: 10),
             const Center(
               child: HomeTile(
-                asset: Assets.homeIcon,
+                asset: Assets.ordersHomeIcon,
                 title: "Order History",
                 count: 87,
                 color: Color(0xff00B2BE),
@@ -227,8 +227,9 @@ class HomeTile extends StatelessWidget {
           children: [
             Image.asset(
               asset,
-              scale: 2,
-              color: Colors.white30,
+              scale: 4,
+              alignment: Alignment.centerLeft,
+              color: Colors.white,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
