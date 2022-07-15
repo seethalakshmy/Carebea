@@ -17,7 +17,7 @@ class ShopListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => const ShopDetails());
+        Get.to(() =>  ShopDetails(shopId:shop.id!,shopDetails:shop ,));
       },
       child: CustomCard(
         hasShadow: false,

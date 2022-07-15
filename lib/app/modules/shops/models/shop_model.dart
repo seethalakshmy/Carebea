@@ -100,7 +100,6 @@ class ShopList {
 
   int? id;
   String? name;
-  @JsonKey(name: 'Category')
   String? category;
   String? type;
   String? email;

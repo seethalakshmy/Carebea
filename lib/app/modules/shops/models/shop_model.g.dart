@@ -75,7 +75,7 @@ Map<String, dynamic> _$CategoryToJson(Category instance) => <String, dynamic>{
 ShopList _$ShopListFromJson(Map<String, dynamic> json) => ShopList(
       id: json['id'] as int?,
       name: json['name'] as String?,
-      category: json['Category'] as String?,
+      category: json['category'] as String?,
       type: json['type'] as String?,
       email: json['email'] as String?,
       phone: json['phone'] as String?,
@@ -92,7 +92,7 @@ ShopList _$ShopListFromJson(Map<String, dynamic> json) => ShopList(
 Map<String, dynamic> _$ShopListToJson(ShopList instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'Category': instance.category,
+      'category': instance.category,
       'type': instance.type,
       'email': instance.email,
       'phone': instance.phone,
