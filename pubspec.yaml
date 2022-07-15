@@ -25,6 +25,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/
+    - assets/images/sr-home-icons/
   fonts:
     - family: Poppins
       fonts:
