@@ -136,9 +136,9 @@ class LoginView extends GetView<LoginController> {
                             title: 'LOGIN',
                             onTap: () {
                               if (userController.text == '1') {
-                                Get.toNamed(Routes.DASHBOARD);
+                                Get.offNamed(Routes.DASHBOARD);
                               } else {
-                                Get.toNamed(Routes.DELIVERY_HOME);
+                                Get.offNamed(Routes.DELIVERY_HOME);
                               }
                             })
                         // SizedBox(

@@ -10,7 +10,6 @@ class OrderHistoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomCard(
-      height: MediaQuery.of(context).size.height*.2,
       // padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -27,10 +26,7 @@ class OrderHistoryTile extends StatelessWidget {
                   children: [
                     Text(
                       'Order ID: #656546',
-
-                      style: customTheme(context)
-                          .medium
-                          .copyWith(fontSize: 12, color: customTheme(context).secondary),
+                      style: customTheme(context).medium.copyWith(fontSize: 12, color: customTheme(context).secondary),
                     ),
                     Text(
                       'Delivery Date : 20/06/2022',
@@ -58,32 +54,53 @@ class OrderHistoryTile extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Trinty Shop',
-                  style: customTheme(context).medium.copyWith(fontSize: 14),
+                  style: customTheme(context).medium.copyWith(fontSize: 11),
                 ),
-                Column(children: [
-                  Text('Total',style: TextStyle(color: Theme.of(context).extension<CustomTheme>()!.secondary),),
-                  Text("₹951",style: customTheme(context).medium.copyWith(fontSize: 14),)
-                ],)
+                Column(
+                  children: [
+                    Text(
+                      'Total',
+                      style: customTheme(context).regular.copyWith(fontSize: 10, color: customTheme(context).secondary),
+                    ),
+                    Text(
+                      "₹951",
+                      style: customTheme(context).medium.copyWith(fontSize: 14),
+                    )
+                  ],
+                )
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10,top: 5),
-            child: Text('Product',
-            style: customTheme(context).medium.copyWith(fontSize: 12),),
+            padding: const EdgeInsets.only(left: 10),
+            child: Text(
+              'Product',
+              style: customTheme(context).medium.copyWith(fontSize: 11),
+            ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 8,top: 5),
+            padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
             child: Row(
               children: [
-                Text('Eccelence Hand Wash Total... 20x',style: customTheme(context).regular.copyWith(fontSize: 11),),
-                SizedBox(width:MediaQuery.of(context).size.width*.25),
-                Text('View details',style: customTheme(context).medium.copyWith(fontSize: 10),),
-                Icon(Icons.arrow_forward_ios_rounded,size: 20,color: Colors.black54,)
+                Text(
+                  'Eccelence Hand Wash Total... 20x',
+                  style: customTheme(context).regular.copyWith(fontSize: 11),
+                ),
+                Spacer(),
+                Text(
+                  'View details',
+                  style: customTheme(context).medium.copyWith(fontSize: 10),
+                ),
+                Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 10,
+                  color: Colors.black54,
+                )
               ],
             ),
           )
