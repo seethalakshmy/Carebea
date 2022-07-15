@@ -1,3 +1,4 @@
+import 'package:carebea/app/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,9 +11,10 @@ class BottomNavBarView extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(5.0), topLeft: Radius.circular(5.0))),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [BoxShadow(color: customTheme(context).shadowColor, blurRadius: 10)],
+          borderRadius: const BorderRadius.only(topRight: Radius.circular(12.0), topLeft: Radius.circular(12.0))),
       height: 50,
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
         InkWell(
@@ -22,8 +24,17 @@ class BottomNavBarView extends GetView<DashboardController> {
               Assets.homeIcon,
               height: 30,
               width: 20,
+              color: controller.currentScreenIndex.value == 0 ? customTheme(context).primary : const Color(0xff929292),
             ),
-            Text('Home'),
+            Text(
+              'Home',
+              style: customTheme(context).medium.copyWith(
+                    color: controller.currentScreenIndex.value == 0
+                        ? customTheme(context).primary
+                        : const Color(0xff929292),
+                    fontSize: 12,
+                  ),
+            ),
           ]),
         ),
         InkWell(
@@ -33,8 +44,17 @@ class BottomNavBarView extends GetView<DashboardController> {
               Assets.shopIcon,
               height: 30,
               width: 20,
+              color: controller.currentScreenIndex.value == 1 ? customTheme(context).primary : const Color(0xff929292),
             ),
-            Text('Shops'),
+            Text(
+              'Shops',
+              style: customTheme(context).medium.copyWith(
+                    color: controller.currentScreenIndex.value == 1
+                        ? customTheme(context).primary
+                        : const Color(0xff929292),
+                    fontSize: 12,
+                  ),
+            ),
           ]),
         ),
         InkWell(
@@ -44,18 +64,36 @@ class BottomNavBarView extends GetView<DashboardController> {
               Assets.orderIcon,
               height: 30,
               width: 20,
+              color: controller.currentScreenIndex.value == 2 ? customTheme(context).primary : const Color(0xff929292),
             ),
-            Text('Orders'),
+            Text(
+              'Orders',
+              style: customTheme(context).medium.copyWith(
+                    color: controller.currentScreenIndex.value == 2
+                        ? customTheme(context).primary
+                        : const Color(0xff929292),
+                    fontSize: 12,
+                  ),
+            ),
           ]),
         ),
         InkWell(
           onTap: () => controller.bottomNavViewChange(3),
-          child: Column(children: const [
+          child: Column(children: [
             Icon(
               Icons.account_circle,
               size: 30,
+              color: controller.currentScreenIndex.value == 3 ? customTheme(context).primary : const Color(0xff929292),
             ),
-            Text('Profile'),
+            Text(
+              'Profile',
+              style: customTheme(context).medium.copyWith(
+                    color: controller.currentScreenIndex.value == 3
+                        ? customTheme(context).primary
+                        : const Color(0xff929292),
+                    fontSize: 12,
+                  ),
+            ),
           ]),
         ),
       ]),
