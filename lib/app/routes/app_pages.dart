@@ -62,7 +62,7 @@ class AppPages {
       children: [
         GetPage(
           name: _Paths.SHOPS,
-          page: () => const ListShops(),
+          page: () =>  ListShops(),
           binding: ShopsBinding(),
         ),
       ],

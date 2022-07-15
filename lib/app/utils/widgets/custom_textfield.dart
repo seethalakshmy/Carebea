@@ -6,8 +6,10 @@ import 'package:get/get.dart';
 class CustomTextField extends TextFormField {
   CustomTextField(
       {Key? key,
+        this.initialvalue,
       this.textcontroller,
-      this.fillcolor,
+        this.onsubmit,
+        this.fillcolor,
       this.icon,
       this.inputFormatters,
       this.inputType,
@@ -21,8 +23,10 @@ class CustomTextField extends TextFormField {
       this.validaton})
       : super(
           key: key,
+          initialValue: initialvalue,
           maxLength: maxlength,
           controller: textcontroller,
+          onFieldSubmitted: onsubmit,
           obscureText: obscure,
           onChanged: onChanged,
           onSaved: onsaved,
@@ -67,4 +71,6 @@ class CustomTextField extends TextFormField {
   final Function(String?)? onsaved;
   final int? maxlength;
   final int maxLines;
+  final Function(String?)? onsubmit;
+  final String? initialvalue;
 }

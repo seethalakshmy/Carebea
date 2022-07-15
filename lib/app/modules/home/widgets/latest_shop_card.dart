@@ -17,7 +17,7 @@ class _LatestShopListTileState extends State<LatestShopListTile> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => const ShopDetails());
+        Get.to(() =>  ShopDetails());
       },
       child: CustomCard(
         width: MediaQuery.of(context).size.width,

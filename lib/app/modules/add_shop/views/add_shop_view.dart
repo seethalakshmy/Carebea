@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
@@ -10,7 +9,6 @@ import 'package:get/get.dart';
 
 import '../../../utils/assets.dart';
 import '../../../utils/theme.dart';
-import '../../../utils/widgets/custom_alertbox.dart';
 import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_textfield.dart';
 import '../controllers/add_shop_controller.dart';
@@ -24,6 +22,7 @@ class AddShopView extends GetView<AddShopController> {
   
       body: SingleChildScrollView(
         child:Form(
+          key: controller.addShopFormKey,
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(
@@ -48,6 +47,7 @@ class AddShopView extends GetView<AddShopController> {
                 ),
                 SizedBox(height: 5,),
                 CustomTextField(
+                  textcontroller: controller.name,
                   validaton: (value){
                     if (value == null || value.trim().isEmpty) {
                       return 'Shop name can\'t be empty';
@@ -55,6 +55,8 @@ class AddShopView extends GetView<AddShopController> {
                     return null;
 
                   },
+                  onChanged: (value)=>controller.name.text = value!.trim() ,
+
 
                 ),
                 SizedBox(height: 5,),
@@ -134,6 +136,7 @@ class AddShopView extends GetView<AddShopController> {
                 )),
                 SizedBox(height: 5,),
                 CustomTextField(
+                  textcontroller: controller.gst,
                   inputType: TextInputType.number,
                   validaton: (value){
                     if(value == null || value.trim().isEmpty){
@@ -141,6 +144,7 @@ class AddShopView extends GetView<AddShopController> {
                     }
                     return null;
                   },
+                  onChanged: (value)=>controller.gst.text =value!.trim(),
                 ),
                 SizedBox(height: 25,),
                  Text('Location',
@@ -164,6 +168,7 @@ class AddShopView extends GetView<AddShopController> {
                 ),
                 SizedBox(height: 5,),
                 CustomTextField(
+                  textcontroller: controller.localArea,
                   inputFormatters: [
 
                     FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]+|\b\s')),
@@ -175,6 +180,7 @@ class AddShopView extends GetView<AddShopController> {
                     }
                     return null;
                   },
+                  onChanged: (value)=>controller.localArea.text=value!.trim(),
                 ),
                 SizedBox(height: 15,),
                 Row(
@@ -187,7 +193,9 @@ class AddShopView extends GetView<AddShopController> {
                             style: customTheme(context).regular.copyWith(fontSize: 12),
                           ),
                           SizedBox(height: 5,),
-                          CustomTextField( maxlength: 6,
+                          CustomTextField(
+                            textcontroller: controller.zip,
+                            maxlength: 6,
                            inputType: TextInputType.number,
                             validaton: (value){
                               if (value!.isEmpty) return 'pincode can\'t be empty';
@@ -198,6 +206,7 @@ class AddShopView extends GetView<AddShopController> {
                               return null;
 
                             },
+                            onChanged: (value)=>controller.zip.text= value!,
                           ),
 
                         ],
@@ -216,6 +225,7 @@ class AddShopView extends GetView<AddShopController> {
                             ),
                             SizedBox(height: 5,),
                             CustomTextField(
+                              textcontroller: controller.district,
                               inputFormatters: [
                                 FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]+|\b\s')),
                               ],
@@ -227,6 +237,7 @@ class AddShopView extends GetView<AddShopController> {
                                 return null;
 
                               },
+                              onChanged: (value)=>controller.district.text = value!.trim(),
                             ),
 
                           ],
@@ -242,6 +253,14 @@ class AddShopView extends GetView<AddShopController> {
                 ),
                 SizedBox(height: 5,),
                 CustomTextField(
+                  validaton: (value){
+                    if(value == null || value.trim().isEmpty){
+                      return 'State can\'t be empty';
+
+                    }
+                    return null;
+
+                  },
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]+|\b\s')),
                   ],
@@ -256,17 +275,19 @@ class AddShopView extends GetView<AddShopController> {
                   ],
                 )),              SizedBox(height: 5,),
                 CustomTextField(
+                  textcontroller: controller.phone,
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.digitsOnly
                   ],
                   maxlength: 10,
                   inputType: TextInputType.phone,
                   validaton: (value) {
-                    if (value!.isEmpty) return null;
+                    if (value!.isEmpty) return 'mobile number is required';
                     else if(value == '0000000000') return 'Invalid number';
                     else if(value.length<10) return "Mobile number must be 10 digits";
                     return null;
                   },
+                  onChanged: (value)=>controller.phone.text = value!,
                 ),
                 SizedBox(height: 15,),
                  Text(
@@ -398,27 +419,36 @@ class AddShopView extends GetView<AddShopController> {
                 ),
                 SizedBox(height: 25,),
                 CustomButton(onTap: () {
-                  showDialog<bool>(
-                      context: context,
-                      builder: (ctx) {
-                        return CustomAlertbox(
-                          topIcon: Image.asset(
-                            Assets.successIcon,
-                            width: 80,
-                            height: 80,
-                          ),
-                          title: "Shop added Successful!",
-                          content: "",
-                          actions: [
-                            CustomButton(
-                                title: "Go to Home page",
-                                onTap: () {
-                                  Get.back(result: true);
-                                  Get.offAllNamed(Routes.DASHBOARD);
-                                })
-                          ],
-                        );
-                      });
+                  controller.addShop(
+                      name: controller.name.text,
+                      district:controller.district.text,
+
+                      localArea: controller.localArea.text,
+                      phone: controller.phone.text,
+                      zip: controller.zip.text,
+
+                  );
+                  // showDialog<bool>(
+                  //     context: context,
+                  //     builder: (ctx) {
+                  //       return CustomAlertbox(
+                  //         topIcon: Image.asset(
+                  //           Assets.successIcon,
+                  //           width: 80,
+                  //           height: 80,
+                  //         ),
+                  //         title: "Shop added Successful!",
+                  //         content: "",
+                  //         actions: [
+                  //           CustomButton(
+                  //               title: "Go to Home page",
+                  //               onTap: () {
+                  //                 Get.back(result: true);
+                  //                 Get.offAllNamed(Routes.DASHBOARD);
+                  //               })
+                  //         ],
+                  //       );
+                  //     });
                   
                 }, title: 'Add Shop',)
               ],
