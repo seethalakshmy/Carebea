@@ -34,7 +34,6 @@ class NewPasswordView extends GetView<ForgotPasswordController> {
                     if (text!.length < 6) {
                       return "Password length can't be less than 6";
                     }
-
                     return null;
                   },
                 ),

@@ -20,48 +20,48 @@ class HomeMenuCards extends StatelessWidget {
             crossAxisCount: 3, crossAxisSpacing: 10, mainAxisSpacing: 10, childAspectRatio: 12 / 8),
         children: [
           InkWell(
-            onTap: (){
+            onTap: () {
               Get.toNamed(Routes.CREATE_ORDER);
             },
             child: HomeMenuIndividual(
-              asseticon: Assets.shopIcon,
+              asseticon: Assets.orderHomeIcon,
               gradients: [Color(0xff0098BA), Color(0xff4163A2)],
               title: "Create new order",
             ),
           ),
           InkWell(
-            onTap: (){
+            onTap: () {
               Get.toNamed(Routes.ADD_SHOP);
             },
             child: HomeMenuIndividual(
-              asseticon: Assets.shopIcon,
+              asseticon: Assets.newShopHomeIcon,
               gradients: [Color(0xffA73B6E), Color(0xff985194)],
               title: "Add new shop",
             ),
           ),
           HomeMenuIndividual(
-            asseticon: Assets.shopIcon,
+            asseticon: Assets.reportsHomeIcon,
             gradients: [Color(0xff66DE9D), Color(0xff00B2BE)],
             title: "Reports",
           ),
           InkWell(
-            onTap: (){
+            onTap: () {
               Get.toNamed(Routes.ROUTE_PAGE);
             },
             child: HomeMenuIndividual(
-              asseticon: Assets.shopIcon,
+              asseticon: Assets.routeHomeIcon,
               backgroundColor: Color(0xffF74254),
               title: "Route",
             ),
           ),
           HomeMenuIndividual(
-            asseticon: Assets.shopIcon,
+            asseticon: Assets.deliveryHomeIcon,
             backgroundColor: Color(0xffD8375C),
             title: "Today's Delivery",
             count: 1,
           ),
           HomeMenuIndividual(
-            asseticon: Assets.shopIcon,
+            asseticon: Assets.orderHomeIcon,
             backgroundColor: Color(0xffF3674F),
             title: "Total Orders",
             count: 89,
@@ -71,5 +71,3 @@ class HomeMenuCards extends StatelessWidget {
     );
   }
 }
-
-

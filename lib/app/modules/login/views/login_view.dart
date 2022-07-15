@@ -88,6 +88,7 @@ class LoginView extends GetView<LoginController> {
                                 if (value == null || value.trim().isEmpty) {
                                   return 'Username can\'t be empty';
                                 }
+                                return null;
                               },
                               onChanged: (value) => controller.username = value.trim()),
                         ),
@@ -106,9 +107,6 @@ class LoginView extends GetView<LoginController> {
                           width: MediaQuery.of(context).size.width * .85,
                           color: Colors.white,
                           child: TextFormField(
-                            keyboardType: TextInputType.visiblePassword,
-                            obscureText: true,
-                            controller: passwordController,
                             decoration: const InputDecoration(
                                 border: InputBorder.none,
                                 enabledBorder: InputBorder.none,
@@ -119,6 +117,7 @@ class LoginView extends GetView<LoginController> {
                               if (value == null || value.trim().isEmpty) {
                                 return 'Password can\'t be empty';
                               }
+                              return null;
                             },
                             onChanged: (value) => controller.password = value.trim(),
                           ),
@@ -137,7 +136,7 @@ class LoginView extends GetView<LoginController> {
                           ),
                         ),
                         const SizedBox(
-                          height: 25,
+                          height: 15,
                         ),
                         CustomButton(
                             title: 'LOGIN',

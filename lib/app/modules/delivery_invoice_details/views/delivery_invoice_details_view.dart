@@ -24,32 +24,28 @@ class DeliveryInvoiceDetailsView extends GetView<DeliveryInvoiceDetailsControlle
               const SizedBox(height: 20),
               _billDetails(context),
               const SizedBox(height: 50),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: Container(
-                      width: 200,
-                      height: 50,
-                      child: ElevatedButton(onPressed: () {  },
-                        style:ElevatedButton.styleFrom(primary: Color(0xffB00069)),
-                      child:Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.file_download_outlined),
-                          Text('Download Bill'),
-                        ],
-                      ),),
-                      // child: CustomButton(
-                      //   onTap: () {},
-                      //   title: "Download Bill",
-                      // ),
-                    ),
-                  ),
-                ),
+              _downloadButton(),
             ],
           ),
         ));
+  }
+
+  Align _downloadButton() {
+    return Align(
+      alignment: Alignment.bottomRight,
+      child: Padding(
+        padding: const EdgeInsets.only(right: 24),
+        child: CustomButton(
+          isDense: true,
+          icon: const Icon(
+            Icons.file_download_outlined,
+            color: Colors.white,
+          ),
+          title: "Download Bill",
+          onTap: () {},
+        ),
+      ),
+    );
   }
 
   Widget _billDetails(BuildContext context) {
@@ -141,7 +137,7 @@ class DeliveryInvoiceDetailsView extends GetView<DeliveryInvoiceDetailsControlle
         ),
         const SizedBox(width: 8),
         InkWell(
-          onTap: (){
+          onTap: () {
             Get.back();
           },
           child: Image.asset(
@@ -156,7 +152,6 @@ class DeliveryInvoiceDetailsView extends GetView<DeliveryInvoiceDetailsControlle
           style: customTheme(context).medium.copyWith(fontSize: 16),
         ),
         const SizedBox(width: 150),
-
         Icon(Icons.share)
       ],
     );
