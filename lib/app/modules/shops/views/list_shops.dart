@@ -63,7 +63,7 @@ class ListShops extends GetView<ShopsController> {
                     children: [
                       Expanded(
                           child: CustomTextField(
-                         
+
                             onChanged: (val) {},
                             hint: 'Search for shops',
                             fillcolor: Colors.grey[300],
@@ -145,7 +145,7 @@ class ListShops extends GetView<ShopsController> {
 
                       }
                       return ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
+                          // physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: false,
                           // itemCount: 2,
                           itemCount: shopsController.shopListResponse!
@@ -164,7 +164,8 @@ class ListShops extends GetView<ShopsController> {
                             );
                           });
                     }),
-                  )
+                  ),
+                  SizedBox(height: 60,)
                 ],
               ),
             ),
@@ -221,7 +222,7 @@ class ListShops extends GetView<ShopsController> {
     return FloatingActionButton.extended(
       backgroundColor: customTheme(context).primary,
       onPressed: () {
-        Get.toNamed(Routes.ADD_SHOP);
+        Get.toNamed(Routes.ADD_SHOP,arguments: {'isEdit':false,'shop':shopsController.shopListResponse,'isFromListShop':true});
       },
       label: Text(
         "Add new shop",
