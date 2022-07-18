@@ -98,7 +98,7 @@ class AppPages {
 ),   GetPage(
 
       name: _Paths.CREATE_ORDER,
-      page: () => const CreateOrderView(),
+      page: () => CreateOrderView(),
       binding: CreateOrderBinding(),
 ),
     GetPage(

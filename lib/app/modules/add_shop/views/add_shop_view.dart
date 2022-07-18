@@ -18,273 +18,239 @@ import '../controllers/add_shop_controller.dart';
 import '../controllers/add_shop_controller.dart';
 
 class AddShopView extends GetView<AddShopController> {
-  AddShopView({Key? key, this.isFromShopList = false}) : super(key: key);
-  final bool isFromShopList;
+  AddShopView({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: Image.asset(Assets.assetsLogo),
+    return WillPopScope(
+      onWillPop: ()=>controller.onWillpopClose(),
+      child: Scaffold(
+          appBar: AppBar(
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: Image.asset(Assets.assetsLogo),
+            ),
+            leadingWidth: 30,
+            // actions: [
+            //   Padding(
+            //     padding: const EdgeInsets.only(right: 8),
+            //     child: Image.asset(Assets.assetsScan, width: 40, height: 40,),
+            //   ),
+            // ],
           ),
-          leadingWidth: 30,
-          // actions: [
-          //   Padding(
-          //     padding: const EdgeInsets.only(right: 8),
-          //     child: Image.asset(Assets.assetsScan, width: 40, height: 40,),
-          //   ),
-          // ],
-        ),
-        body: SingleChildScrollView(
-          child: Form(
-            key: addShopFormKey,
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      InkWell(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child: Icon(
-                            Icons.arrow_back_ios_new,
-                            size: 20,
-                          )),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        'Add new shop',
-                        style:
-                            customTheme(context).medium.copyWith(fontSize: 16),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Text(
-                    'Shop name',
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  CustomTextField(
-                    textcontroller: controller.name,
-                    validaton: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return 'Shop name can\'t be empty';
-                      }
-                      return null;
-                    },
-                    // onChanged: (value)=>(controller.name).toString() = value!.trim() ,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  RichText(
-                      text: TextSpan(
-                    text: 'Last name',
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                    children: const <TextSpan>[
-                      TextSpan(
-                          text: '  (location should be the last name)',
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontStyle: FontStyle.italic)),
-                    ],
-                  )),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  CustomTextField(
-                    validaton: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return 'Last name can\'t be empty';
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "Shop category",
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8, bottom: 12),
-                    child: DropdownSearch<String>(
-                      validator: (String? value) {
-                        if (value == null) {
-                          return "Shop category  can\'t be empty";
+          body: SingleChildScrollView(
+            child: Form(
+              key: addShopFormKey,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Icon(
+                              Icons.arrow_back_ios_new,
+                              size: 20,
+                            )),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Text(
+                          'Add new shop',
+                          style:
+                              customTheme(context).medium.copyWith(fontSize: 16),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      'Shop name',
+                      style: customTheme(context).regular.copyWith(fontSize: 12),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    CustomTextField(
+                      textcontroller: controller.name,
+                      validaton: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Shop name can\'t be empty';
                         }
                         return null;
                       },
-                      dropdownDecoratorProps: DropDownDecoratorProps(
-                          dropdownSearchDecoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              filled: true,
-                              fillColor: Theme.of(context)
-                                  .extension<CustomTheme>()!
-                                  .textFormFieldColor)),
-                      popupProps: const PopupProps.menu(
-                        showSearchBox: true,
-                        showSelectedItems: true,
-                      ),
-                      items: const ["Retail", "Wholesale"],
-                      selectedItem: "",
+                      // onChanged: (value)=>(controller.name).toString() = value!.trim() ,
                     ),
-                  ),
-                  Text(
-                    'Customer type',
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                  ),
-                  const CustomerTypeRadioButton(),
-                  RichText(
-                      text: TextSpan(
-                    text: 'GST',
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                    children: const <TextSpan>[
-                      TextSpan(
-                          text: '\*', style: TextStyle(color: Colors.blue)),
-                    ],
-                  )),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  CustomTextField(
-                    // inputFormatters: [
-                    //   FilteringTextInputFormatter.allow(RegExp(gstRegexp))
-                    // ],
-                    textcontroller: controller.gst,
-                    validaton: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return 'GST  can\'t be empty';
-                      }
-                      if(RegExp(gstRegexp).hasMatch(value)){
-                        return 'Invalid Gst';
-                      }
-                      return null;
-                    },
-
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  Text(
-                    'Location',
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20),
-                    child: InkWell(
-                      onTap: () {},
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.add,
-                            color: Theme.of(context)
-                                .extension<CustomTheme>()!
-                                .primary,
-                          ),
-                          Text('Add shop location',
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  color: Theme.of(context)
-                                      .extension<CustomTheme>()!
-                                      .primary))
-                        ],
+                    SizedBox(
+                      height: 5,
+                    ),
+                    RichText(
+                        text: TextSpan(
+                      text: 'Last name',
+                      style: customTheme(context).regular.copyWith(fontSize: 12),
+                      children: const <TextSpan>[
+                        TextSpan(
+                            text: '  (location should be the last name)',
+                            style: TextStyle(
+                                color: Colors.black54,
+                                fontStyle: FontStyle.italic)),
+                      ],
+                    )),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    CustomTextField(
+                      validaton: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Last name can\'t be empty';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      "Shop category",
+                      style: customTheme(context).regular.copyWith(fontSize: 12),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8, bottom: 12),
+                      child: DropdownSearch<String>(
+                        validator: (String? value) {
+                          if (value == null) {
+                            return "Shop category  can\'t be empty";
+                          }
+                          return null;
+                        },
+                        dropdownDecoratorProps: DropDownDecoratorProps(
+                            dropdownSearchDecoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide.none,
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide.none,
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide.none,
+                                ),
+                                filled: true,
+                                fillColor: Theme.of(context)
+                                    .extension<CustomTheme>()!
+                                    .textFormFieldColor)),
+                        popupProps: const PopupProps.menu(
+                          showSearchBox: true,
+                          showSelectedItems: true,
+                        ),
+                        items: const ["Retail", "Wholesale"],
+                        selectedItem: "",
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    'Local area/city',
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  CustomTextField(
-                    textcontroller: controller.localArea,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(
-                          RegExp(r'[a-zA-Z0-9]+|\b\s')),
-                    ],
-                    validaton: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return 'Local area/city can\'t be empty';
-                      }
-                      return null;
-                    },
-                    // onChanged: (value)=>controller.localArea.toString()!=value!.trim(),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                    Text(
+                      'Customer type',
+                      style: customTheme(context).regular.copyWith(fontSize: 12),
+                    ),
+                      CustomerTypeRadioButton(),
+                      RichText(
+                        text: TextSpan(
+                      text: 'GST',
+                      style: customTheme(context).regular.copyWith(fontSize: 12),
+                      children: const <TextSpan>[
+                        TextSpan(
+                            text: '\*', style: TextStyle(color: Colors.blue)),
+                      ],
+                    )),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    CustomTextField(
+                      // inputFormatters: [
+                      //   FilteringTextInputFormatter.allow(RegExp(gstRegexp))
+                      // ],
+                      textcontroller: controller.gst,
+                      validaton: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'GST  can\'t be empty';
+                        }
+                        if (RegExp(gstRegexp).hasMatch(value)) {
+                          return 'Invalid Gst';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Text(
+                      'Location',
+                      style: customTheme(context).regular.copyWith(fontSize: 12),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: InkWell(
+                        onTap: () {},
+                        child: Row(
                           children: [
-                            Text(
-                              'Pincode',
-                              style: customTheme(context)
-                                  .regular
-                                  .copyWith(fontSize: 12),
+                            Icon(
+                              Icons.add,
+                              color: Theme.of(context)
+                                  .extension<CustomTheme>()!
+                                  .primary,
                             ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            CustomTextField(
-                              textcontroller: controller.zip,
-                              maxlength: 6,
-                              inputType: TextInputType.number,
-                              validaton: (value) {
-                                if (value!.isEmpty)
-                                  return 'pincode can\'t be empty';
-                                else if (value.length < 6) {
-                                  return "Pincode must be 6 digits";
-                                }
-                                return null;
-                              },
-                              // onChanged: (value)=>controller.zip.toString()!= value!,
-                            ),
+                            Text('Add shop location',
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: Theme.of(context)
+                                        .extension<CustomTheme>()!
+                                        .primary))
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 20),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      'Local area/city',
+                      style: customTheme(context).regular.copyWith(fontSize: 12),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    CustomTextField(
+                      textcontroller: controller.localArea,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'[a-zA-Z0-9]+|\b\s')),
+                      ],
+                      validaton: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Local area/city can\'t be empty';
+                        }
+                        return null;
+                      },
+                      // onChanged: (value)=>controller.localArea.toString()!=value!.trim(),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'District',
+                                'Pincode',
                                 style: customTheme(context)
                                     .regular
                                     .copyWith(fontSize: 12),
@@ -293,269 +259,304 @@ class AddShopView extends GetView<AddShopController> {
                                 height: 5,
                               ),
                               CustomTextField(
-                                textcontroller: controller.district,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp(r'[a-zA-Z0-9]+|\b\s')),
-                                ],
+                                textcontroller: controller.zip,
+                                maxlength: 6,
+                                inputType: TextInputType.number,
                                 validaton: (value) {
-                                  if (value == null || value.trim().isEmpty) {
-                                    return 'District can\'t be empty';
+                                  if (value!.isEmpty)
+                                    return 'pincode can\'t be empty';
+                                  else if (value.length < 6) {
+                                    return "Pincode must be 6 digits";
                                   }
                                   return null;
                                 },
-                                // onChanged: (value)=>controller.district.toString() =value!.trim(),
+                                // onChanged: (value)=>controller.zip.toString()!= value!,
                               ),
                             ],
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'State',
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  CustomTextField(
-                    validaton: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return 'State can\'t be empty';
-                      }
-                      return null;
-                    },
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(
-                          RegExp(r'[a-zA-Z]+|\b\s')),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  RichText(
-                      text: TextSpan(
-                    text: 'Phone number',
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                    children: const <TextSpan>[
-                      TextSpan(
-                          text: '\*', style: TextStyle(color: Colors.blue)),
-                    ],
-                  )),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  CustomTextField(
-                    textcontroller: controller.phone,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    maxlength: 10,
-                    inputType: TextInputType.phone,
-                    validaton: (value) {
-                      if (value!.isEmpty)
-                        return 'mobile number is required';
-                      else if (value == '0000000000')
-                        return 'Invalid number';
-                      else if (value.length < 10)
-                        return "Mobile number must be 10 digits";
-                      return null;
-                    },
-                    // onChanged: (value)=>controller.phone.text = value!,
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    "Branch",
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8, bottom: 12),
-                    child: DropdownSearch<String>(
-                      validator: (String? value) {
-                        if (value == null) {
-                          return "Branch  can\'t be empty";
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'District',
+                                  style: customTheme(context)
+                                      .regular
+                                      .copyWith(fontSize: 12),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                CustomTextField(
+                                  textcontroller: controller.district,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[a-zA-Z0-9]+|\b\s')),
+                                  ],
+                                  validaton: (value) {
+                                    if (value == null || value.trim().isEmpty) {
+                                      return 'District can\'t be empty';
+                                    }
+                                    return null;
+                                  },
+                                  // onChanged: (value)=>controller.district.toString() =value!.trim(),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'State',
+                      style: customTheme(context).regular.copyWith(fontSize: 12),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    CustomTextField(
+                      validaton: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'State can\'t be empty';
                         }
                         return null;
                       },
-                      popupProps: const PopupProps.menu(
-                        showSearchBox: true,
-                        showSelectedItems: true,
-                      ),
-                      dropdownDecoratorProps: DropDownDecoratorProps(
-                          dropdownSearchDecoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              filled: true,
-                              fillColor: Theme.of(context)
-                                  .extension<CustomTheme>()!
-                                  .textFormFieldColor)),
-                      items: const ["Kalamasseri", "Aluva", "Malappuram"],
-                      selectedItem: "",
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'[a-zA-Z]+|\b\s')),
+                      ],
                     ),
-                  ),
-                  Text(
-                    "Zone",
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8, bottom: 12),
-                    child: DropdownSearch<String>(
-                      validator: (String? value) {
-                        if (value == null) {
-                          return "Zone  can\'t be empty";
-                        }
+                    SizedBox(
+                      height: 10,
+                    ),
+                    RichText(
+                        text: TextSpan(
+                      text: 'Phone number',
+                      style: customTheme(context).regular.copyWith(fontSize: 12),
+                      children: const <TextSpan>[
+                        TextSpan(
+                            text: '\*', style: TextStyle(color: Colors.blue)),
+                      ],
+                    )),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    CustomTextField(
+                      textcontroller: controller.phone,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      maxlength: 10,
+                      inputType: TextInputType.phone,
+                      validaton: (value) {
+                        if (value!.isEmpty)
+                          return 'mobile number is required';
+                        else if (value == '0000000000')
+                          return 'Invalid number';
+                        else if (value.length < 10)
+                          return "Mobile number must be 10 digits";
                         return null;
                       },
-                      popupProps: const PopupProps.menu(
-                        showSearchBox: true,
-                        showSelectedItems: true,
-                      ),
-                      dropdownDecoratorProps: DropDownDecoratorProps(
-                          dropdownSearchDecoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              filled: true,
-                              fillColor: Theme.of(context)
-                                  .extension<CustomTheme>()!
-                                  .textFormFieldColor)),
-                      items: const ["A", "B", "C"],
-                      selectedItem: "",
+                      // onChanged: (value)=>controller.phone.text = value!,
                     ),
-                  ),
-                  Text(
-                    "Route",
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8, bottom: 12),
-                    child: DropdownSearch<String>(
-                      validator: (String? value) {
-                        if (value == null) {
-                          return "Route can\'t be empty";
-                        }
-                        return null;
-                      },
-                      popupProps: const PopupProps.menu(
-                        showSearchBox: true,
-                        showSelectedItems: true,
-                      ),
-                      dropdownDecoratorProps: DropDownDecoratorProps(
-                          dropdownSearchDecoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              filled: true,
-                              fillColor: Theme.of(context)
-                                  .extension<CustomTheme>()!
-                                  .textFormFieldColor)),
-                      items: const ["x", "y", "z"],
-                      selectedItem: "",
+                    SizedBox(
+                      height: 15,
                     ),
-                  ),
-                  RichText(
-                      text: TextSpan(
-                    text: 'Opening balance',
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                    children: const <TextSpan>[
-                      TextSpan(
-                          text: '  (mandatory only for existing shops)',
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontStyle: FontStyle.italic)),
-                    ],
-                  )),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  CustomTextField(),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  (Get.arguments['isEdit'] ?? false)
-                      ? CustomButton(
-                          onTap: () {
-                            controller.updateShop(
-
-                              name: controller.name.text,
-                              district: controller.district.text,
-                              localArea: controller.localArea.text,
-                              phone: controller.phone.text,
-                              zip: controller.zip.text,
-                              customerType: 2,
-                              shopCategoryId: 1,
-                              latitude: 0,
-                              routeId: 1,
-                              longitude: 0,
-                              gst: controller.gst.text,
-                              stateId: 594,
-                              zoneId: 1,
-                              salesPersonId: SharedPrefs.getUserId()!,
-                              shopId: (Get.arguments['shop'] as ShopList ).id!,
-                            );
-                          },
-                          title: 'Update Shop',
-                        )
-                      : CustomButton(
-                          onTap: () {
-                            controller.addShop(
-                              name: controller.name.text,
-                              district: controller.district.text,
-                              localArea: controller.localArea.text,
-                              phone: controller.phone.text,
-                              zip: controller.zip.text,
-                              customerType: 2,
-                              shopCategoryId: 1,
-                              latitude: 0,
-                              routeId: 1,
-                              longitude: 0,
-                              gst: controller.gst.text,
-                              stateId: 354,
-                              zoneId: 1,
-                              salesPersonId: SharedPrefs.getUserId()!,
-                            );
-                          },
-                          title: 'Add Shop',
-                        )
-                ],
+                    Text(
+                      "Branch",
+                      style: customTheme(context).regular.copyWith(fontSize: 12),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8, bottom: 12),
+                      child: DropdownSearch<String>(
+                        validator: (String? value) {
+                          if (value == null) {
+                            return "Branch  can\'t be empty";
+                          }
+                          return null;
+                        },
+                        popupProps: const PopupProps.menu(
+                          showSearchBox: true,
+                          showSelectedItems: true,
+                        ),
+                        dropdownDecoratorProps: DropDownDecoratorProps(
+                            dropdownSearchDecoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide.none,
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide.none,
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide.none,
+                                ),
+                                filled: true,
+                                fillColor: Theme.of(context)
+                                    .extension<CustomTheme>()!
+                                    .textFormFieldColor)),
+                        items: const ["Kalamasseri", "Aluva", "Malappuram"],
+                        selectedItem: "",
+                      ),
+                    ),
+                    Text(
+                      "Zone",
+                      style: customTheme(context).regular.copyWith(fontSize: 12),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8, bottom: 12),
+                      child: DropdownSearch<String>(
+                        validator: (String? value) {
+                          if (value == null) {
+                            return "Zone  can\'t be empty";
+                          }
+                          return null;
+                        },
+                        popupProps: const PopupProps.menu(
+                          showSearchBox: true,
+                          showSelectedItems: true,
+                        ),
+                        dropdownDecoratorProps: DropDownDecoratorProps(
+                            dropdownSearchDecoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide.none,
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide.none,
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide.none,
+                                ),
+                                filled: true,
+                                fillColor: Theme.of(context)
+                                    .extension<CustomTheme>()!
+                                    .textFormFieldColor)),
+                        items: const ["A", "B", "C"],
+                        selectedItem: "",
+                      ),
+                    ),
+                    Text(
+                      "Route",
+                      style: customTheme(context).regular.copyWith(fontSize: 12),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8, bottom: 12),
+                      child: DropdownSearch<String>(
+                        validator: (String? value) {
+                          if (value == null) {
+                            return "Route can\'t be empty";
+                          }
+                          return null;
+                        },
+                        popupProps: const PopupProps.menu(
+                          showSearchBox: true,
+                          showSelectedItems: true,
+                        ),
+                        dropdownDecoratorProps: DropDownDecoratorProps(
+                            dropdownSearchDecoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide.none,
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide.none,
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide.none,
+                                ),
+                                filled: true,
+                                fillColor: Theme.of(context)
+                                    .extension<CustomTheme>()!
+                                    .textFormFieldColor)),
+                        items: const ["x", "y", "z"],
+                        selectedItem: "",
+                      ),
+                    ),
+                    RichText(
+                        text: TextSpan(
+                      text: 'Opening balance',
+                      style: customTheme(context).regular.copyWith(fontSize: 12),
+                      children: const <TextSpan>[
+                        TextSpan(
+                            text: '  (mandatory only for existing shops)',
+                            style: TextStyle(
+                                color: Colors.black54,
+                                fontStyle: FontStyle.italic)),
+                      ],
+                    )),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    CustomTextField(),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    (Get.arguments['isEdit'] ?? false)
+                        ? CustomButton(
+                            onTap: () {
+                              controller.updateShop(
+                                name: controller.name.text,
+                                district: controller.district.text,
+                                localArea: controller.localArea.text,
+                                phone: controller.phone.text,
+                                zip: controller.zip.text,
+                                customerType: 2,
+                                shopCategoryId: 1,
+                                latitude: 0,
+                                routeId: 1,
+                                longitude: 0,
+                                gst: controller.gst.text,
+                                stateId: 594,
+                                zoneId: 1,
+                                salesPersonId: SharedPrefs.getUserId()!,
+                                shopId: (Get.arguments['shop'] as ShopList).id!,
+                              );
+                            },
+                            title: 'Update Shop',
+                          )
+                        : CustomButton(
+                            onTap: () {
+                              controller.addShop(
+                                name: controller.name.text,
+                                district: controller.district.text,
+                                localArea: controller.localArea.text,
+                                phone: controller.phone.text,
+                                zip: controller.zip.text,
+                                customerType: 2,
+                                shopCategoryId: 1,
+                                latitude: 0,
+                                routeId: 1,
+                                longitude: 0,
+                                gst: controller.gst.text,
+                                stateId: 354,
+                                zoneId: 1,
+                                salesPersonId: SharedPrefs.getUserId()!,
+                              );
+                            },
+                            title: 'Add Shop',
+                          )
+                  ],
+                ),
               ),
             ),
-          ),
-        ));
+          )),
+    );
   }
 }
 

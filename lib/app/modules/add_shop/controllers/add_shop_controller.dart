@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:carebea/app/modules/add_shop/models/add_shop_model.dart';
 import 'package:carebea/app/modules/add_shop/repo/add_shop_repo.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,7 @@ class AddShopController extends GetxController {
   TextEditingController zip = TextEditingController();
   TextEditingController district = TextEditingController();
   TextEditingController gst = TextEditingController();
+  DateTime? backbuttonpressedTime;
 
 
   //TODO: Implement AddShopController
@@ -160,4 +163,22 @@ class AddShopController extends GetxController {
     localArea.text = argument.address!.localArea!;
 
   }
+
+  Future<bool> onWillpopClose() async {
+    DateTime currentTime = DateTime.now();
+    bool backButton = backbuttonpressedTime == null ||
+        currentTime.difference(backbuttonpressedTime!) > const Duration(seconds: 3);
+
+    if (backButton) {
+      backbuttonpressedTime = currentTime;
+
+      Get.snackbar('', 'Tap again to close the app',duration:const Duration(seconds: 1) );
+      // SnackBar(content: Text(buildTranslate(context, "tap_back")));
+      return false;
+    } else {
+      Get.back();
+    }
+    return true;
+  }
+
 }
