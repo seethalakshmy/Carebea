@@ -63,7 +63,7 @@ class ListShops extends GetView<ShopsController> {
                     children: [
                       Expanded(
                           child: CustomTextField(
-                         
+
                             onChanged: (val) {},
                             hint: 'Search for shops',
                             fillcolor: Colors.grey[300],
@@ -145,7 +145,7 @@ class ListShops extends GetView<ShopsController> {
 
                       }
                       return ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
+                          // physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: false,
                           // itemCount: 2,
                           itemCount: shopsController.shopListResponse!
@@ -164,7 +164,8 @@ class ListShops extends GetView<ShopsController> {
                             );
                           });
                     }),
-                  )
+                  ),
+                  SizedBox(height: 60,)
                 ],
               ),
             ),

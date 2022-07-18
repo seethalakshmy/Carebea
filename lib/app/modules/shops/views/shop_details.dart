@@ -1,5 +1,6 @@
 import 'package:carebea/app/modules/shops/controllers/shops_controller.dart';
 import 'package:carebea/app/modules/shops/widgets/order_tile.dart';
+import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
@@ -96,7 +97,11 @@ class _ShopDetailsState extends State<ShopDetails>
                         ),
                       ],
                     ),
-                    Image.asset(Assets.edit, scale: 3)
+                    InkWell(
+                      onTap: (){
+                        Get.toNamed(Routes.ADD_SHOP,arguments: {'isEdit':true,'shop':widget.shopDetails});
+                      },
+                        child: Image.asset(Assets.edit, scale: 3))
                   ],
                 ),
               ),
