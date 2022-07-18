@@ -12,7 +12,7 @@ class ShopDetailsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => const AddProductsView());
+        Get.to(() =>  AddProductsView());
       },
       child: CustomCard(
         hasShadow: false,

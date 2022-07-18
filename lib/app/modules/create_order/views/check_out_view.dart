@@ -1,3 +1,4 @@
+import 'package:carebea/app/modules/create_order/controllers/create_order_controller.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
@@ -12,77 +13,80 @@ import 'package:get/get.dart';
 import 'package:slide_to_confirm/slide_to_confirm.dart';
 
 class CheckoutView extends StatelessWidget {
-  const CheckoutView({Key? key}) : super(key: key);
-
+   CheckoutView({Key? key}) : super(key: key);
+  CreateOrderController createOrderController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        titleSpacing: 24,
-        automaticallyImplyLeading: false,
-        title: Image.asset(
-          Assets.assetsLogo,
-          scale: 4,
-        ),
-      ),
-      body: ListView(
-        children: [
-          _title(context),
-          const SizedBox(height: 15),
-          _addressTile(context),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(24, 24, 24, 19),
-            child: _productListing(context),
+    return WillPopScope(
+      onWillPop: ()=>createOrderController.onWillpopClose(),
+      child: Scaffold(
+        appBar: AppBar(
+          titleSpacing: 24,
+          automaticallyImplyLeading: false,
+          title: Image.asset(
+            Assets.assetsLogo,
+            scale: 4,
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(24, 0, 24, 35),
-            child: _paymentMethods(context),
-          ),
-          _billDetails(context),
-          _comments()
-        ],
-      ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.only(left: 23, right: 4),
-        alignment: Alignment.center,
-        height: 55,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [BoxShadow(color: customTheme(context).shadowColor, blurRadius: 10)],
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(7)),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        body: ListView(
           children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Total",
-                  style: customTheme(context).regular.copyWith(fontSize: 11),
-                ),
-                Text(
-                  "₹975",
-                  style: customTheme(context).medium.copyWith(fontSize: 16),
-                ),
-              ],
+            _title(context),
+            const SizedBox(height: 15),
+            _addressTile(context),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 24, 24, 19),
+              child: _productListing(context),
             ),
-            Container(
-              decoration: BoxDecoration(color: customTheme(context).primary, borderRadius: BorderRadius.circular(7)),
-              child: ConfirmationSlider(
-                backgroundColor: customTheme(context).primary,
-                // height: 48,
-                // width: 200,
-                shadow: BoxShadow(color: Colors.transparent),
-                onConfirmation: () => onConfirm(context),
-                foregroundColor: Colors.transparent,
-                text: "Swipe to Confirm",
-                textStyle: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.white),
-              ),
-            )
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 35),
+              child: _paymentMethods(context),
+            ),
+            _billDetails(context),
+            _comments()
           ],
+        ),
+        bottomNavigationBar: Container(
+          padding: const EdgeInsets.only(left: 23, right: 4),
+          alignment: Alignment.center,
+          height: 55,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [BoxShadow(color: customTheme(context).shadowColor, blurRadius: 10)],
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(7)),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Total",
+                    style: customTheme(context).regular.copyWith(fontSize: 11),
+                  ),
+                  Text(
+                    "₹975",
+                    style: customTheme(context).medium.copyWith(fontSize: 16),
+                  ),
+                ],
+              ),
+              Container(
+                decoration: BoxDecoration(color: customTheme(context).primary, borderRadius: BorderRadius.circular(7)),
+                child: ConfirmationSlider(
+                  backgroundColor: customTheme(context).primary,
+                  // height: 48,
+                  // width: 200,
+                  shadow: BoxShadow(color: Colors.transparent),
+                  onConfirmation: () => onConfirm(context),
+                  foregroundColor: Colors.transparent,
+                  text: "Swipe to Confirm",
+                  textStyle: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.white),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -50,11 +50,8 @@ class BottomNavBarView extends GetView<DashboardController> {
         ),
         InkWell(
           onTap: () => controller.bottomNavViewChange(3),
-          child: Column(children: const [
-            Icon(
-              Icons.account_circle,
-              size: 30,
-            ),
+          child: Column(children:  [
+            Image.asset(Assets.profile, width: 20, height: 30,),
             Text('Profile'),
           ]),
         ),
