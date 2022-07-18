@@ -222,7 +222,7 @@ class ListShops extends GetView<ShopsController> {
     return FloatingActionButton.extended(
       backgroundColor: customTheme(context).primary,
       onPressed: () {
-        Get.toNamed(Routes.ADD_SHOP);
+        Get.toNamed(Routes.ADD_SHOP,arguments: {'isEdit':false,'shop':shopsController.shopListResponse,'isFromListShop':true});
       },
       label: Text(
         "Add new shop",
