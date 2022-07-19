@@ -25,7 +25,9 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appBar(context, showScanner: true, onScanned: () {}),
+        appBar: appBar(context, showScanner: true, onScanned: (val) {
+          debugPrint(val);
+        }),
 
         // appBar: AppBar(
         //   title: Image.asset(
