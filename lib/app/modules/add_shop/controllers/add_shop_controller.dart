@@ -12,9 +12,10 @@ import '../../../utils/shared_prefs.dart';
 import '../../../utils/widgets/custom_alertbox.dart';
 import '../../../utils/widgets/custom_button.dart';
 import '../../shops/models/shop_model.dart';
-final addShopFormKey = GlobalKey<FormState>();
 
 class AddShopController extends GetxController {
+  final addShopFormKey = GlobalKey<FormState>();
+
   AddShopRepo addShopRepo = AddShopRepo();
   AddShopResponse addShopResponse = AddShopResponse();
   TextEditingController name = TextEditingController();
@@ -25,15 +26,14 @@ class AddShopController extends GetxController {
   TextEditingController gst = TextEditingController();
   DateTime? backbuttonpressedTime;
 
-
   //TODO: Implement AddShopController
 
   final count = 0.obs;
 
   @override
   void onInit() {
-    if(Get.arguments['isEdit']??false){
-      populate(Get.arguments['shop'] as ShopList );
+    if (Get.arguments['isEdit'] ?? false) {
+      populate(Get.arguments['shop'] as ShopList);
     }
     super.onInit();
   }
@@ -50,10 +50,9 @@ class AddShopController extends GetxController {
 
   void increment() => count.value++;
 
-
   addShop(
       {required int salesPersonId,
-        required String name,
+      required String name,
       required String phone,
       required int shopCategoryId,
       required int customerType,
@@ -61,18 +60,18 @@ class AddShopController extends GetxController {
       required String localArea,
       required String district,
       required String zip,
-     required  int stateId,
+      required int stateId,
       required int zoneId,
-       required int routeId,
+      required int routeId,
       required double latitude,
       required double longitude}) async {
-    if(addShopFormKey.currentState!.validate()){
-      addShopResponse = await addShopRepo.addShop(salesPersonId, name, phone, shopCategoryId, customerType, gst, localArea, district, zip, stateId, zoneId, routeId, latitude, longitude);
+    if (addShopFormKey.currentState!.validate()) {
+      addShopResponse = await addShopRepo.addShop(salesPersonId, name, phone, shopCategoryId, customerType, gst,
+          localArea, district, zip, stateId, zoneId, routeId, latitude, longitude);
 
-      if(addShopResponse.addShopResult!.status == true){
-
+      if (addShopResponse.addShopResult!.status == true) {
         showDialog<bool>(
-            context:Get.context!,
+            context: Get.context!,
             builder: (ctx) {
               return CustomAlertbox(
                 topIcon: Image.asset(
@@ -92,39 +91,33 @@ class AddShopController extends GetxController {
                 ],
               );
             });
-
       }
-
-
-
-
-
     }
   }
 
   updateShop(
       {required int shopId,
-        required int salesPersonId,
-        required String name,
-        required String phone,
-        required int shopCategoryId,
-        required int customerType,
-        required String gst,
-        required String localArea,
-        required String district,
-        required String zip,
-        required  int stateId,
-        required int zoneId,
-        required int routeId,
-        required double latitude,
-        required double longitude}) async {
-    if(addShopFormKey.currentState!.validate()){
-      addShopResponse = await addShopRepo.updateShop(shopId, salesPersonId, name, phone, shopCategoryId, customerType, gst, localArea, district, zip, stateId, zoneId, routeId, latitude, longitude);
+      required int salesPersonId,
+      required String name,
+      required String phone,
+      required int shopCategoryId,
+      required int customerType,
+      required String gst,
+      required String localArea,
+      required String district,
+      required String zip,
+      required int stateId,
+      required int zoneId,
+      required int routeId,
+      required double latitude,
+      required double longitude}) async {
+    if (addShopFormKey.currentState!.validate()) {
+      addShopResponse = await addShopRepo.updateShop(shopId, salesPersonId, name, phone, shopCategoryId, customerType,
+          gst, localArea, district, zip, stateId, zoneId, routeId, latitude, longitude);
 
-      if(addShopResponse.addShopResult!.status == true){
-
+      if (addShopResponse.addShopResult!.status == true) {
         showDialog<bool>(
-            context:Get.context!,
+            context: Get.context!,
             builder: (ctx) {
               return CustomAlertbox(
                 topIcon: Image.asset(
@@ -144,13 +137,7 @@ class AddShopController extends GetxController {
                 ],
               );
             });
-
       }
-
-
-
-
-
     }
   }
 
@@ -161,18 +148,17 @@ class AddShopController extends GetxController {
     district.text = argument.address!.district!;
     zip.text = argument.address!.zip!;
     localArea.text = argument.address!.localArea!;
-
   }
 
   Future<bool> onWillpopClose() async {
     DateTime currentTime = DateTime.now();
-    bool backButton = backbuttonpressedTime == null ||
-        currentTime.difference(backbuttonpressedTime!) > const Duration(seconds: 3);
+    bool backButton =
+        backbuttonpressedTime == null || currentTime.difference(backbuttonpressedTime!) > const Duration(seconds: 3);
 
     if (backButton) {
       backbuttonpressedTime = currentTime;
 
-      Get.snackbar('', 'Tap again to close the app',duration:const Duration(seconds: 1) );
+      Get.snackbar('', 'Tap again to close the app', duration: const Duration(seconds: 1));
       // SnackBar(content: Text(buildTranslate(context, "tap_back")));
       return false;
     } else {
@@ -180,5 +166,4 @@ class AddShopController extends GetxController {
     }
     return true;
   }
-
 }

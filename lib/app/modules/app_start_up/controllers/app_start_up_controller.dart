@@ -9,22 +9,19 @@ class AppStartUpController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
   }
 
   @override
   void onReady() {
     super.onReady();
-    Future.delayed(const Duration(seconds: 3),(){
+    Future.delayed(const Duration(seconds: 3), () {
       debugPrint("splash screen timer done");
-      Get.toNamed(paths.Routes.LOGIN);
+      Get.offNamed(paths.Routes.LOGIN);
     });
-
   }
 
   @override
   void onClose() {
     super.onClose();
   }
-
 }

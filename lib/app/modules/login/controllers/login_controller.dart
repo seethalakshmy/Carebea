@@ -1,6 +1,7 @@
 import 'package:carebea/app/modules/login/data/repo/login_repo.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/shared_prefs.dart';
+import 'package:carebea/app/utils/show_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,37 +37,42 @@ class LoginController extends GetxController {
     if (loginFormKey.currentState!.validate()) {
       debugPrint(" email id validated \n\n");
 
-
       debugPrint("calling loginWithEmail api");
       print('username controller${username}');
       print('password controller${password}');
-      EmailLoginResponse response =
-      await authenticationRepo.loginWithEmail(username, password);
+      EmailLoginResponse response = await authenticationRepo.loginWithEmail(username, password);
 
       debugPrint("EmailLoginResponse $response");
       debugPrint("email login  ${response.toJson()}");
       debugPrint("email login status  ${response.emailLogin?.status}");
 
-
-      if (response.emailLogin!.status!) {
-
-        Get.snackbar('Login Successfuly','');
+      if (response.emailLogin?.status??false) {
+        Get.snackbar('Login Successfuly', '');
         SharedPrefs.setUserId(response.emailLogin!.userId!);
         SharedPrefs.setLoggedInStatus(true);
 
         print("userid ${SharedPrefs.getUserId()}");
 
-
-
-
         Get.toNamed(Routes.DASHBOARD);
-
+      } else {
+        Get.snackbar("Login Failed", response.emailLogin!.message!);
       }
-      else{
-        Get.snackbar("Login Failed",response.emailLogin!.message!);
+    }
+  }
 
-
-      }
+  sendForgotPasswordRequest() async {
+    if ((username ?? "").isEmpty) {
+      showSnackBar(
+        "Enter email to continue",
+      );
+      return;
+    }
+    var response = await authenticationRepo.resetUserPassword(email: username!);
+    if (response.result!.status ?? false) {
+      Get.toNamed(Routes.FORGOT_PASSWORD,
+          arguments: {"userId": response.result!.userId, "email": response.result!.email});
+    } else {
+      showSnackBar(response.result?.message ?? "Something happpend, Please try again!!!");
     }
   }
 }

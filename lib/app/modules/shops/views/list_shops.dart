@@ -4,6 +4,7 @@ import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/global_state_controller.dart';
 import 'package:carebea/app/utils/theme.dart';
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,37 +16,25 @@ class ListShops extends GetView<ShopsController> {
   ShopsController shopsController = Get.put(ShopsController());
   TextEditingController searchTextEditingController = TextEditingController();
 
-
   // static List<String> category = ['Retail', 'Supermarket', 'Wholesale', 'Zone'];
 
   // List<Category>? category;
 
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: ()=> controller.onWillpopClose(),
+      onWillPop: () => controller.onWillpopClose(),
       child: Scaffold(
-          appBar: AppBar(
-            titleSpacing: 15,
-            automaticallyImplyLeading: false,
-            title: Image.asset(
-              Assets.assetsLogo,
-              scale: 4,
-            ),
-
-          ),
+          appBar: appBar(context),
           floatingActionButton: _addNewShopButton(context),
           body: Obx(() {
             if (shopsController.isLoading.value) {
               return const Center(child: CircularProgressIndicator());
             }
             print('${shopsController.shopListResponse!.id}');
-            if (shopsController.shopListResponse!.shopListResult!.shopList!
-                .isEmpty) {
+            if (shopsController.shopListResponse!.shopListResult!.shopList!.isEmpty) {
               Center(
-                child: Text(
-                    shopsController.shopListResponse!.shopListResult!.message!),
+                child: Text(shopsController.shopListResponse!.shopListResult!.message!),
               );
             }
             return SingleChildScrollView(
@@ -56,8 +45,7 @@ class ListShops extends GetView<ShopsController> {
                   children: [
                     Text(
                       'Shops',
-                      style: customTheme(context).medium.copyWith(
-                          fontSize: 16, color: Colors.black),
+                      style: customTheme(context).medium.copyWith(fontSize: 16, color: Colors.black),
                     ),
                     const SizedBox(
                       height: 20,
@@ -66,16 +54,15 @@ class ListShops extends GetView<ShopsController> {
                       children: [
                         Expanded(
                             child: CustomTextField(
-
-                              onChanged: (val) {},
-                              hint: 'Search for shops',
-                              fillcolor: Colors.grey[300],
-                              icon: const Icon(
-                                Icons.search,
-                                size: 30,
-                                color: Colors.grey,
-                              ),
-                            )),
+                          onChanged: (val) {},
+                          hint: 'Search for shops',
+                          fillcolor: Colors.grey[300],
+                          icon: const Icon(
+                            Icons.search,
+                            size: 30,
+                            color: Colors.grey,
+                          ),
+                        )),
                         const SizedBox(
                           width: 5,
                         ),
@@ -92,18 +79,11 @@ class ListShops extends GetView<ShopsController> {
                           onSelected: (element) {},
                           itemBuilder: (BuildContext context) {
                             return [
-                              PopupMenuItem(child:Container(
-                                color: Colors.blue,
-                                  child: Text('Category')) ),
-
+                              PopupMenuItem(child: Container(color: Colors.blue, child: Text('Category'))),
                               ...buildCategoryFilterItems(),
-                              PopupMenuItem(child:Container(
-                                  color: Colors.blue,
-                                  child: Text('Zone')) ),
+                              PopupMenuItem(child: Container(color: Colors.blue, child: Text('Zone'))),
                               ...buildZoneFilterItems(),
-                              PopupMenuItem(child:Container(
-                                  color: Colors.blue,
-                                  child: Text('Route')) ),
+                              PopupMenuItem(child: Container(color: Colors.blue, child: Text('Route'))),
                               ...buildRouteFilterItems()
                             ];
                           },
@@ -138,27 +118,21 @@ class ListShops extends GetView<ShopsController> {
                       height: 10,
                     ),
                     Container(
-                      height: MediaQuery
-                          .of(context)
-                          .size
-                          .height,
+                      height: MediaQuery.of(context).size.height,
                       child: Obx(() {
-                        if(shopsController.isFilterClick.value){
+                        if (shopsController.isFilterClick.value) {
                           return const Center(child: CircularProgressIndicator());
-
                         }
                         return ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             // itemCount: 2,
-                            itemCount: shopsController.shopListResponse!
-                                .shopListResult!.shopList!.length,
+                            itemCount: shopsController.shopListResponse!.shopListResult!.shopList!.length,
                             itemBuilder: (context, index) {
                               return Column(
                                 children: [
                                   ShopListTile(
-                                      shop: shopsController.shopListResponse!
-                                          .shopListResult!.shopList![index]),
+                                      shop: shopsController.shopListResponse!.shopListResult!.shopList![index]),
                                   SizedBox(
                                     height: 20,
                                   )
@@ -176,8 +150,7 @@ class ListShops extends GetView<ShopsController> {
   }
 
   List<PopupMenuItem<int>> buildCategoryFilterItems() =>
-      shopsController.shopListResponse!.shopListResult!.filterVals!.category!
-          .map((e) {
+      shopsController.shopListResponse!.shopListResult!.filterVals!.category!.map((e) {
         return PopupMenuItem<int>(
           value: e.id,
           child: Text(
@@ -191,8 +164,7 @@ class ListShops extends GetView<ShopsController> {
       }).toList();
 
   List<PopupMenuItem<int>> buildZoneFilterItems() =>
-      shopsController.shopListResponse!.shopListResult!.filterVals!.zone!.map((
-          e) {
+      shopsController.shopListResponse!.shopListResult!.filterVals!.zone!.map((e) {
         return PopupMenuItem<int>(
           value: e.id,
           child: Text(
@@ -206,8 +178,7 @@ class ListShops extends GetView<ShopsController> {
       }).toList();
 
   List<PopupMenuItem<int>> buildRouteFilterItems() =>
-      shopsController.shopListResponse!.shopListResult!.filterVals!.route!.map((
-          e) {
+      shopsController.shopListResponse!.shopListResult!.filterVals!.route!.map((e) {
         return PopupMenuItem<int>(
           value: e.id,
           child: Text(
@@ -224,12 +195,12 @@ class ListShops extends GetView<ShopsController> {
     return FloatingActionButton.extended(
       backgroundColor: customTheme(context).primary,
       onPressed: () {
-        Get.toNamed(Routes.ADD_SHOP,arguments: {'isEdit':false,'shop':shopsController.shopListResponse,'isFromListShop':true});
+        Get.toNamed(Routes.ADD_SHOP,
+            arguments: {'isEdit': false, 'shop': shopsController.shopListResponse, 'isFromListShop': true});
       },
       label: Text(
         "Add new shop",
-        style: customTheme(context).medium.copyWith(
-            fontSize: 13, color: Colors.white),
+        style: customTheme(context).medium.copyWith(fontSize: 13, color: Colors.white),
       ),
       icon: Icon(Icons.add),
     );
