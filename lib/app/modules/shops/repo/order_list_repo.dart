@@ -17,8 +17,8 @@ class OrderListRepo{
     return orderDataSource.orderList(salesPersonId: salesPersonId, orderType: orderType, shopId: shopId);
   }
 
-  Future<OrderListResponse> allOrdersList(int salesPersonId,String orderType)async{
-    return orderDataSource.orderList(salesPersonId: salesPersonId, orderType: orderType);
+  Future<OrderListResponse> allOrdersList(int salesPersonId,String orderType,{String? filtername,String? filterid})async{
+    return orderDataSource.orderList(salesPersonId: salesPersonId, orderType: orderType,filterName:filtername,filterId:filterid);
   }
 
 

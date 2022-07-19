@@ -15,7 +15,7 @@ class ShopsController extends GetxController {
   RxBool isOrdersLoading = false.obs;
   RxBool isLoading = false.obs;
   ShopListResponse? shopDetailResponse;
-  List<ShopList>? shopList;
+  List<ShopList> shopList = [];
   FilterVal? filterVals;
   RxBool isFilterClick = false.obs;
   RxBool isShopDetailsLoading = false.obs;
@@ -44,13 +44,13 @@ class ShopsController extends GetxController {
   }
 
   fetchAllShops() async {
-    shopList!.clear();
+    shopList.clear();
     filterSelected("");
 
     isLoading(true);
     var shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!);
     if (shopListResponse.shopListResult?.status ?? false) {
-      shopList = shopListResponse.shopListResult!.shopList;
+      shopList = shopListResponse.shopListResult?.shopList ?? [];
       filterVals = shopListResponse.shopListResult!.filterVals;
     } else {
       shopList = [];
@@ -82,12 +82,12 @@ class ShopsController extends GetxController {
 
   RxString filterSelected = "".obs;
   filterShops(String filterName, int filterId) async {
-    shopList!.clear();
+    shopList.clear();
     isFilterClick(true);
     filterSelected("$filterName-$filterId");
     var shopFilterResponse = await shopListRepo.shopFilter(SharedPrefs.getUserId()!, filterName, filterId);
     if (shopDetailResponse?.shopListResult?.status ?? false) {
-      shopList = shopDetailResponse?.shopListResult?.shopList;
+      shopList = shopDetailResponse?.shopListResult?.shopList ?? [];
     }
     isFilterClick(false);
   }
