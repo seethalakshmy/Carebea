@@ -1,4 +1,6 @@
+import 'package:carebea/app/modules/shops/models/order_list_model.dart';
 import 'package:carebea/app/modules/shops/models/shop_model.dart';
+import 'package:carebea/app/modules/shops/repo/order_list_repo.dart';
 import 'package:carebea/app/modules/shops/repo/shop_list_repo.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +10,8 @@ import '../../../utils/shared_prefs.dart';
 
 class ShopsController extends GetxController {
   ShopListRepo shopListRepo = ShopListRepo();
+  OrderListRepo orderListRepo = OrderListRepo();
+  RxBool isOrdersLoading = false.obs;
   RxBool isLoading = false.obs;
   ShopListResponse? shopListResponse;
   ShopListResponse? shopFilterResponse;
@@ -16,6 +20,7 @@ class ShopsController extends GetxController {
   RxBool isFilterClick = false.obs;
   RxBool isShopDetailsLoading = false.obs;
   DateTime? backbuttonpressedTime;
+  OrderListResponse? orderListResponse;
 
 
   //TODO: Implement ShopsController
@@ -49,6 +54,20 @@ class ShopsController extends GetxController {
 
 
     isLoading(false);
+  }
+
+  fetchOrders(String orderType)async{
+    isOrdersLoading(true);
+
+    orderListResponse = await orderListRepo.orderList(SharedPrefs.getUserId()!, orderType);
+    debugPrint("fetchAllOrders $orderListResponse");
+
+    debugPrint(
+        'fetch order status ${orderListResponse!.orderListResult!.status}');
+
+
+    isOrdersLoading(false);
+
   }
 
   filterShops(String filterName, int filterId) async {

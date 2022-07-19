@@ -25,4 +25,7 @@ Future<ShopListResponse> shopFilter(int salesPersonId,String filterName,int filt
 Future<ShopListResponse> shopSearch(int salesPersonId,String name,String phone,String localArea)async{
     return shopDataSource.shopList(salesPersonId:salesPersonId,name: name,phone: phone,localArea: localArea);
 }
+
+
+
 }

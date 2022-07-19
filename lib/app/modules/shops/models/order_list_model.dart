@@ -89,15 +89,24 @@ class History {
 
   int? id;
   String? name;
+  @JsonKey(name: 'amount_untaxed')
   int? amountUntaxed;
+  @JsonKey(name: 'amount_total')
   double? amountTotal;
+  @JsonKey(name: 'total_lines')
   int? totalLines;
+  @JsonKey(name: 'order_id')
   int? orderId;
+  @JsonKey(name: 'image_url_list')
   List<dynamic>? imageUrlList;
+  @JsonKey(name: 'date_order')
   DateTime? dateOrder;
   String? status;
+  @JsonKey(name: 'user_address')
   String? userAddress;
+  @JsonKey(name: 'amount_tax')
   double? amountTax;
+  @JsonKey(name: 'product_list')
   List<ProductList>? productList;
 
   factory History.fromJson(Map<String, dynamic> json) =>
@@ -140,17 +149,24 @@ class ProductList {
   String? name;
   String? description;
   int? price;
+  @JsonKey(name: 'retail_price')
   int? retailPrice;
+  @JsonKey(name: 'department_price')
   int? departmentPrice;
+  @JsonKey(name: 'wholesale_price')
   int? wholesalePrice;
+  @JsonKey(name: 'supermarket_price')
   int? supermarketPrice;
   String? enLang;
   String? unit;
   int? productId;
   List<dynamic>? productImages;
+  @JsonKey(name: 'product_uom_qty')
   int? productUomQty;
+  @JsonKey(name: 'en_lang')
   String? productListEnLang;
   double? total;
+  @JsonKey(name: 'date_order')
   DateTime? dateOrder;
 
   factory ProductList.fromJson(Map<String, dynamic> json) =>

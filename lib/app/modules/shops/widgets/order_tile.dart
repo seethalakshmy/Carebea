@@ -1,3 +1,4 @@
+import 'package:carebea/app/modules/shops/models/order_list_model.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:carebea/app/utils/widgets/order_status_chip.dart';
@@ -5,8 +6,9 @@ import 'package:flutter/material.dart';
 
 class OrderTile extends StatelessWidget {
   const OrderTile({
-    Key? key,
+    Key? key, required this.order,
   }) : super(key: key);
+  final History order;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,8 @@ class OrderTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Order ID: #656546',
+                      order.name!,
+                      // 'Order ID: #656546',
                       style: customTheme(context).medium.copyWith(fontSize: 12, color: customTheme(context).secondary),
                     ),
                     Text(

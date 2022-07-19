@@ -273,9 +273,9 @@ class _ShopDetailsState extends State<ShopDetails>
     return ListView.separated(
         separatorBuilder: (_, __) => const SizedBox(height: 16),
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: 5,
+        itemCount:shopsController.orderListResponse!.orderListResult!.history!.length,
         itemBuilder: (context, index) {
-          return const OrderTile();
+          return  OrderTile(order:shopsController.orderListResponse!.orderListResult!.history![index]);
         });
   }
 
@@ -285,7 +285,7 @@ class _ShopDetailsState extends State<ShopDetails>
         physics: const NeverScrollableScrollPhysics(),
         itemCount: 5,
         itemBuilder: (context, index) {
-          return const OrderTile();
+          return  OrderTile(order:shopsController.orderListResponse!.orderListResult!.history![index],);
         });
   }
 }

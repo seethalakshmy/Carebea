@@ -66,18 +66,18 @@ Map<String, dynamic> _$DateToJson(Date instance) => <String, dynamic>{
 History _$HistoryFromJson(Map<String, dynamic> json) => History(
       id: json['id'] as int?,
       name: json['name'] as String?,
-      amountUntaxed: json['amountUntaxed'] as int?,
-      amountTotal: (json['amountTotal'] as num?)?.toDouble(),
-      totalLines: json['totalLines'] as int?,
-      orderId: json['orderId'] as int?,
-      imageUrlList: json['imageUrlList'] as List<dynamic>?,
-      dateOrder: json['dateOrder'] == null
+      amountUntaxed: json['amount_untaxed'] as int?,
+      amountTotal: (json['amount_total'] as num?)?.toDouble(),
+      totalLines: json['total_lines'] as int?,
+      orderId: json['order_id'] as int?,
+      imageUrlList: json['image_url_list'] as List<dynamic>?,
+      dateOrder: json['date_order'] == null
           ? null
-          : DateTime.parse(json['dateOrder'] as String),
+          : DateTime.parse(json['date_order'] as String),
       status: json['status'] as String?,
-      userAddress: json['userAddress'] as String?,
-      amountTax: (json['amountTax'] as num?)?.toDouble(),
-      productList: (json['productList'] as List<dynamic>?)
+      userAddress: json['user_address'] as String?,
+      amountTax: (json['amount_tax'] as num?)?.toDouble(),
+      productList: (json['product_list'] as List<dynamic>?)
           ?.map((e) => ProductList.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -85,16 +85,16 @@ History _$HistoryFromJson(Map<String, dynamic> json) => History(
 Map<String, dynamic> _$HistoryToJson(History instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'amountUntaxed': instance.amountUntaxed,
-      'amountTotal': instance.amountTotal,
-      'totalLines': instance.totalLines,
-      'orderId': instance.orderId,
-      'imageUrlList': instance.imageUrlList,
-      'dateOrder': instance.dateOrder?.toIso8601String(),
+      'amount_untaxed': instance.amountUntaxed,
+      'amount_total': instance.amountTotal,
+      'total_lines': instance.totalLines,
+      'order_id': instance.orderId,
+      'image_url_list': instance.imageUrlList,
+      'date_order': instance.dateOrder?.toIso8601String(),
       'status': instance.status,
-      'userAddress': instance.userAddress,
-      'amountTax': instance.amountTax,
-      'productList': instance.productList,
+      'user_address': instance.userAddress,
+      'amount_tax': instance.amountTax,
+      'product_list': instance.productList,
     };
 
 ProductList _$ProductListFromJson(Map<String, dynamic> json) => ProductList(
@@ -107,20 +107,20 @@ ProductList _$ProductListFromJson(Map<String, dynamic> json) => ProductList(
       name: json['name'] as String?,
       description: json['description'] as String?,
       price: json['price'] as int?,
-      retailPrice: json['retailPrice'] as int?,
-      departmentPrice: json['departmentPrice'] as int?,
-      wholesalePrice: json['wholesalePrice'] as int?,
-      supermarketPrice: json['supermarketPrice'] as int?,
+      retailPrice: json['retail_price'] as int?,
+      departmentPrice: json['department_price'] as int?,
+      wholesalePrice: json['wholesale_price'] as int?,
+      supermarketPrice: json['supermarket_price'] as int?,
       enLang: json['enLang'] as String?,
       unit: json['unit'] as String?,
       productId: json['productId'] as int?,
       productImages: json['productImages'] as List<dynamic>?,
-      productUomQty: json['productUomQty'] as int?,
-      productListEnLang: json['productListEnLang'] as String?,
+      productUomQty: json['product_uom_qty'] as int?,
+      productListEnLang: json['en_lang'] as String?,
       total: (json['total'] as num?)?.toDouble(),
-      dateOrder: json['dateOrder'] == null
+      dateOrder: json['date_order'] == null
           ? null
-          : DateTime.parse(json['dateOrder'] as String),
+          : DateTime.parse(json['date_order'] as String),
     );
 
 Map<String, dynamic> _$ProductListToJson(ProductList instance) =>
@@ -134,16 +134,16 @@ Map<String, dynamic> _$ProductListToJson(ProductList instance) =>
       'name': instance.name,
       'description': instance.description,
       'price': instance.price,
-      'retailPrice': instance.retailPrice,
-      'departmentPrice': instance.departmentPrice,
-      'wholesalePrice': instance.wholesalePrice,
-      'supermarketPrice': instance.supermarketPrice,
+      'retail_price': instance.retailPrice,
+      'department_price': instance.departmentPrice,
+      'wholesale_price': instance.wholesalePrice,
+      'supermarket_price': instance.supermarketPrice,
       'enLang': instance.enLang,
       'unit': instance.unit,
       'productId': instance.productId,
       'productImages': instance.productImages,
-      'productUomQty': instance.productUomQty,
-      'productListEnLang': instance.productListEnLang,
+      'product_uom_qty': instance.productUomQty,
+      'en_lang': instance.productListEnLang,
       'total': instance.total,
-      'dateOrder': instance.dateOrder?.toIso8601String(),
+      'date_order': instance.dateOrder?.toIso8601String(),
     };
