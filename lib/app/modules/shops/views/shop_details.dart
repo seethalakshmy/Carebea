@@ -3,6 +3,7 @@ import 'package:carebea/app/modules/shops/widgets/order_tile.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,8 +11,7 @@ import 'package:get/get.dart';
 import '../models/shop_model.dart';
 
 class ShopDetails extends StatefulWidget {
-  ShopDetails({ Key? key,  this.shopId,  this.shopDetails})
-      : super(key: key);
+  ShopDetails({Key? key, this.shopId, this.shopDetails}) : super(key: key);
   final int? shopId;
   ShopList? shopDetails;
 
@@ -19,8 +19,7 @@ class ShopDetails extends StatefulWidget {
   State<ShopDetails> createState() => _ShopDetailsState();
 }
 
-class _ShopDetailsState extends State<ShopDetails>
-    with SingleTickerProviderStateMixin {
+class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStateMixin {
   ShopsController shopsController = Get.find();
   TabController? tabController1;
   List<String> products = ['Eccence hande wash', 'Eccence face wash'];
@@ -34,17 +33,10 @@ class _ShopDetailsState extends State<ShopDetails>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Image.asset(
-            Assets.assetsLogo,
-            scale: 4,
-          ),
-        ),
+        appBar: appBar(context),
         body: Obx(() {
-          if(shopsController.isShopDetailsLoading.value){
+          if (shopsController.isShopDetailsLoading.value) {
             return const Center(child: CircularProgressIndicator());
-
           }
           return ListView(
             children: [
@@ -86,14 +78,12 @@ class _ShopDetailsState extends State<ShopDetails>
                         Text(
                           widget.shopDetails!.name!,
                           // 'Trinity Shop',
-                          style: customTheme(context).medium.copyWith(
-                              fontSize: 14),
+                          style: customTheme(context).medium.copyWith(fontSize: 14),
                         ),
                         Text(
-                         "GST no: ${widget.shopDetails!.gstNo!}",
+                          "GST no: ${widget.shopDetails!.gstNo!}",
                           // 'GST no: 66998964579898',
-                          style: customTheme(context).regular.copyWith(
-                              fontSize: 11),
+                          style: customTheme(context).regular.copyWith(fontSize: 11),
                         ),
                       ],
                     ),
@@ -126,8 +116,7 @@ class _ShopDetailsState extends State<ShopDetails>
                         child: Text(
                           widget.shopDetails!.address!.localArea!,
                           // 'Akshay Nagar 1st Block Cross , Rammurthy Nagar, Bangalore -560016',
-                          style: customTheme(context).regular.copyWith(
-                              fontSize: 11),
+                          style: customTheme(context).regular.copyWith(fontSize: 11),
                         ),
                       ),
                     ),
@@ -157,8 +146,7 @@ class _ShopDetailsState extends State<ShopDetails>
                             Text(
                               widget.shopDetails!.phone!,
                               // '+91 6398541236',
-                              style: customTheme(context).regular.copyWith(
-                                  fontSize: 11),
+                              style: customTheme(context).regular.copyWith(fontSize: 11),
                             ),
                           ],
                         ),
@@ -167,8 +155,7 @@ class _ShopDetailsState extends State<ShopDetails>
                         ),
                         Text(
                           'Category: ${widget.shopDetails!.category!}',
-                          style: customTheme(context).regular.copyWith(
-                              fontSize: 11),
+                          style: customTheme(context).regular.copyWith(fontSize: 11),
                         ),
                       ],
                     ),
@@ -176,16 +163,14 @@ class _ShopDetailsState extends State<ShopDetails>
                       children: [
                         Text(
                           'Branch : CareBae branch',
-                          style: customTheme(context).regular.copyWith(
-                              fontSize: 11),
+                          style: customTheme(context).regular.copyWith(fontSize: 11),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         Text(
                           'Credit Balance : ₹${widget.shopDetails!.credBalance!}',
-                          style: customTheme(context).regular.copyWith(
-                              fontSize: 11),
+                          style: customTheme(context).regular.copyWith(fontSize: 11),
                         ),
                       ],
                     ),
@@ -236,15 +221,13 @@ class _ShopDetailsState extends State<ShopDetails>
                       Tab(
                         child: Text(
                           'Upcoming Orders(2)',
-                          style: customTheme(context).medium.copyWith(
-                              fontSize: 12),
+                          style: customTheme(context).medium.copyWith(fontSize: 12),
                         ),
                       ),
                       Tab(
                         child: Text(
                           'Pending Orders(2)',
-                          style: customTheme(context).medium.copyWith(
-                              fontSize: 12),
+                          style: customTheme(context).medium.copyWith(fontSize: 12),
                         ),
                       ),
                     ],
@@ -255,10 +238,7 @@ class _ShopDetailsState extends State<ShopDetails>
                 height: 20,
               ),
               SizedBox(
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height,
+                height: MediaQuery.of(context).size.height,
                 child: TabBarView(controller: tabController1, children: [
                   _upcomingOrders(),
                   _pendingOrders(),

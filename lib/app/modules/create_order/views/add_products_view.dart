@@ -2,6 +2,7 @@ import 'package:carebea/app/modules/create_order/controllers/create_order_contro
 import 'package:carebea/app/modules/create_order/views/check_out_view.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/custom_button.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
@@ -10,22 +11,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddProductsView extends StatelessWidget {
-   AddProductsView({Key? key}) : super(key: key);
+  AddProductsView({Key? key}) : super(key: key);
   CreateOrderController createOrderController = Get.put(CreateOrderController());
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: ()=> createOrderController.onWillpopClose(),
+      onWillPop: () => createOrderController.onWillpopClose(),
       child: Scaffold(
-        appBar: AppBar(
-          titleSpacing: 24,
-          automaticallyImplyLeading: false,
-          title: Image.asset(
-            Assets.assetsLogo,
-            scale: 4,
-          ),
-        ),
+        appBar: appBar(context),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -40,7 +34,7 @@ class AddProductsView extends StatelessWidget {
         ),
         bottomNavigationBar: InkWell(
           onTap: () {
-            Get.to(() =>  CheckoutView());
+            Get.to(() => CheckoutView());
           },
           child: Container(
             alignment: Alignment.center,

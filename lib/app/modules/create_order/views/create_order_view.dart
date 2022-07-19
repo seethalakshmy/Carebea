@@ -1,6 +1,7 @@
 import 'package:carebea/app/modules/create_order/views/shop_details_view.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
+import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,21 +12,14 @@ import 'package:get/get.dart';
 import '../controllers/create_order_controller.dart';
 
 class CreateOrderView extends GetView<CreateOrderController> {
-   CreateOrderView({Key? key}) : super(key: key);
+  CreateOrderView({Key? key}) : super(key: key);
   CreateOrderController createOrderController = Get.find();
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: ()=>createOrderController.onWillpopClose(),
+      onWillPop: () => createOrderController.onWillpopClose(),
       child: Scaffold(
-          appBar: AppBar(
-            titleSpacing: 24,
-            automaticallyImplyLeading: false,
-            title: Image.asset(
-              Assets.assetsLogo,
-              scale: 4,
-            ),
-          ),
+          appBar: appBar(context),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -80,15 +74,15 @@ class CreateOrderView extends GetView<CreateOrderController> {
       padding: const EdgeInsets.all(24),
       child: Row(
         children: [
-           InkWell(
-             onTap: (){
-               Get.back();
-             },
-             child: Icon(
+          InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: Icon(
               Icons.arrow_back_ios,
               size: 17,
+            ),
           ),
-           ),
           const SizedBox(width: 10),
           Text(
             "Create new order",
@@ -111,7 +105,7 @@ class ShopTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: InkWell(
         onTap: () {
-          Get.to(() =>  ShopDetailsView());
+          Get.to(() => ShopDetailsView());
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

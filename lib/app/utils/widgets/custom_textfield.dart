@@ -19,7 +19,7 @@ class CustomTextField extends TextFormField {
       this.onsaved,
       this.hint,
       this.maxlength,
-      this.maxLines =1,
+      this.maxLines = 1,
       this.validaton})
       : super(
           key: key,
@@ -35,6 +35,7 @@ class CustomTextField extends TextFormField {
           cursorColor: Colors.black,
           inputFormatters: inputFormatters,
           maxLines: maxLines,
+          style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black),
           decoration: InputDecoration(
               isDense: true,
               labelText: label,
