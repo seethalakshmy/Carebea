@@ -5,7 +5,7 @@ import 'package:carebea/app/utils/widgets/order_status_chip.dart';
 import 'package:flutter/material.dart';
 
 class OrderTile extends StatelessWidget {
-  const OrderTile({
+  const OrderTile( {
     Key? key, required this.order,
   }) : super(key: key);
   final History order;
@@ -29,18 +29,18 @@ class OrderTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      order.name!,
-                      // 'Order ID: #656546',
+                      // order.name!,
+                      'Order ID: ${order.orderId}',
                       style: customTheme(context).medium.copyWith(fontSize: 12, color: customTheme(context).secondary),
                     ),
                     Text(
-                      'Delivery Date : 20/06/2022',
+                      'Delivery Date : ${order.dateOrder!.day}/${order.dateOrder!.month}/${order.dateOrder!.year}',
                       style: customTheme(context).regular.copyWith(fontSize: 11),
                     ),
                   ],
                 ),
                 OrderStatusChip(
-                  statusText: "Delivered",
+                  statusText: order.status!,
                   color: customTheme(context).action,
                 ),
               ],
@@ -55,7 +55,50 @@ class OrderTile extends StatelessWidget {
               'Product',
               style: customTheme(context).medium.copyWith(fontSize: 11),
             ),
+
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: ListView.separated(
+                shrinkWrap: true,
+                separatorBuilder: (_,__) => const SizedBox(height: 5),
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: order.productList!.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(order.productList![index].name!,
+                              style: customTheme(context).regular.copyWith(fontSize: 12)),
+                          Text(order.productList![index].productUomQty.toString(),
+                              style: customTheme(context).regular.copyWith(fontSize: 12)),
+                          Text('₹ ${order.productList![index].price}',
+                              style: customTheme(context).regular.copyWith(fontSize: 12)),
+                        ],
+                      ),
+
+                    ],
+                  );
+                }),
+
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10,vertical:20),
+            child: Row(
+              children: [
+                Spacer(),
+                Column(
+                  children: [
+                    Text('Total',style: customTheme(context).regular.copyWith(fontSize: 11),),
+                    Text('₹${order.amountTotal!.toStringAsFixed(2)}',
+                        style: customTheme(context).medium.copyWith(fontSize: 14) )
+                  ],
+                )
+              ],
+            ),
+          )
         ],
       ),
     );

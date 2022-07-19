@@ -90,7 +90,7 @@ class History {
   int? id;
   String? name;
   @JsonKey(name: 'amount_untaxed')
-  int? amountUntaxed;
+  double? amountUntaxed;
   @JsonKey(name: 'amount_total')
   double? amountTotal;
   @JsonKey(name: 'total_lines')
@@ -141,28 +141,28 @@ class ProductList {
   });
 
   List<dynamic>? imageUrl;
-  int? qtyAvailable;
+  double? qtyAvailable;
   String? mlLang;
   String? available;
   int? id;
   int? productTmplId;
   String? name;
   String? description;
-  int? price;
+  double? price;
   @JsonKey(name: 'retail_price')
-  int? retailPrice;
+  double? retailPrice;
   @JsonKey(name: 'department_price')
-  int? departmentPrice;
+  double? departmentPrice;
   @JsonKey(name: 'wholesale_price')
-  int? wholesalePrice;
+  double? wholesalePrice;
   @JsonKey(name: 'supermarket_price')
-  int? supermarketPrice;
+  double? supermarketPrice;
   String? enLang;
   String? unit;
   int? productId;
   List<dynamic>? productImages;
   @JsonKey(name: 'product_uom_qty')
-  int? productUomQty;
+  double? productUomQty;
   @JsonKey(name: 'en_lang')
   String? productListEnLang;
   double? total;

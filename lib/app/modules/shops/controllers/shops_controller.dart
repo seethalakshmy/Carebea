@@ -14,6 +14,7 @@ class ShopsController extends GetxController {
   RxBool isOrdersLoading = false.obs;
   RxBool isLoading = false.obs;
   ShopListResponse? shopListResponse;
+  List<ShopList>? shopList;
   ShopListResponse? shopFilterResponse;
   ShopListResponse? shopSearchResult;
   ShopListResponse? shopDetailResponse;
@@ -21,6 +22,7 @@ class ShopsController extends GetxController {
   RxBool isShopDetailsLoading = false.obs;
   DateTime? backbuttonpressedTime;
   OrderListResponse? orderListResponse;
+  List<History>? orderHistory;
 
 
   //TODO: Implement ShopsController
@@ -46,6 +48,12 @@ class ShopsController extends GetxController {
   fetchAllShops() async {
     isLoading(true);
     shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!);
+    if(shopListResponse!.shopListResult!.status == true){
+      shopList = shopListResponse!.shopListResult!.shopList;
+
+    }else{
+      shopList = [];
+    }
 
     debugPrint("fetchAllShops $shopListResponse");
 
@@ -56,10 +64,16 @@ class ShopsController extends GetxController {
     isLoading(false);
   }
 
-  fetchOrders(String orderType)async{
+  fetchOrders(String orderType,int shopId)async{
     isOrdersLoading(true);
 
-    orderListResponse = await orderListRepo.orderList(SharedPrefs.getUserId()!, orderType);
+    orderListResponse = await orderListRepo.orderList(SharedPrefs.getUserId()!, orderType,shopId);
+    if(orderListResponse!.orderListResult!.status == true){
+      orderHistory = orderListResponse!.orderListResult!.history;
+
+    }else{
+      orderHistory = [];
+    }
     debugPrint("fetchAllOrders $orderListResponse");
 
     debugPrint(
