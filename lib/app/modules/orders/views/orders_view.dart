@@ -1,5 +1,6 @@
 import 'package:carebea/app/modules/order_history_details/views/order_history_details_view.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
+import 'package:carebea/app/utils/widgets/custom_popupmenuitem.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 
@@ -19,18 +20,10 @@ class OrdersView extends StatefulWidget {
   State<OrdersView> createState() => _OrdersViewState();
 }
 
-class _OrdersViewState extends State<OrdersView>
-    with SingleTickerProviderStateMixin {
-  static List<String> category = [
-    'Date',
-    'Today',
-    'This week',
-    'This month',
-    'This year'
-  ];
+class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateMixin {
+  static List<String> category = ['Date', 'Today', 'This week', 'This month', 'This year'];
   OrdersController ordersController = Get.put(OrdersController());
   TabController? tabController1;
-
 
   @override
   Widget build(BuildContext context) {
@@ -52,33 +45,25 @@ class _OrdersViewState extends State<OrdersView>
                   height: 15,
                 ),
                 Container(
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height * .05,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Color(0xffEEF5FF)),
+                  height: MediaQuery.of(context).size.height * .05,
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color: Color(0xffEEF5FF)),
                   child: TabBar(
                       controller: tabController1,
                       onTap: (index) {
                         tabController1!.animateTo(index);
                         if (index == 0) {
                           ordersController.fetchOrdersList(orderType: 'Previous');
-                        }
-                        else {
+                        } else {
                           ordersController.fetchOrdersList(orderType: 'Upcoming');
                         }
                       },
                       unselectedLabelColor: Colors.black,
                       indicator: BoxDecoration(
-                        color: Theme.of(context).extension<CustomTheme>()!
-                            .secondary,
+                        color: Theme.of(context).extension<CustomTheme>()!.secondary,
                         borderRadius: BorderRadius.circular(50),
                       ),
                       labelColor: Colors.white,
-                      labelStyle: customTheme(context).regular.copyWith(
-                          fontSize: 12),
+                      labelStyle: customTheme(context).regular.copyWith(fontSize: 12),
                       indicatorSize: TabBarIndicatorSize.tab,
                       tabs: const [
                         Text('Completed'),
@@ -92,42 +77,41 @@ class _OrdersViewState extends State<OrdersView>
                   children: [
                     Expanded(
                         child: CustomTextField(
-                          onChanged: (val) {},
-                          hint: 'Search for orders',
-                          fillcolor: Colors.grey[300],
-                          icon: const Icon(
-                            Icons.search,
-                            size: 30,
-                            color: Colors.grey,
-                          ),
-                        )),
+                      onChanged: (val) {},
+                      hint: 'Search for orders',
+                      fillcolor: Colors.grey[300],
+                      icon: const Icon(
+                        Icons.search,
+                        size: 30,
+                        color: Colors.grey,
+                      ),
+                    )),
                     SizedBox(
                       width: 5,
                     ),
-                    PopupMenuButton(
-                      position: PopupMenuPosition.under,
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            Assets.filter,
-                            scale: 3.5,
-                          )
-                        ],
-                      ),
-                      onSelected: (element) {},
-                      itemBuilder: (BuildContext context) {
-                        return category.map((e) {
-                          return PopupMenuItem<String>(
-                            value: "1",
-                            child: Text(
-                              e.toString(),
-                              style: TextStyle(fontSize: 14),
+                    PopupMenuButton<String>(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+                        offset: const Offset(0.0, 50),
+                        padding: EdgeInsets.zero,
+                        child: Image.asset(
+                          Assets.filter,
+                          scale: 3.5,
+                        ),
+                        onSelected: (element) {},
+                        itemBuilder: (BuildContext context) {
+                          if (ordersController.filterSelected.value == "") {}
+                          return [
+                            customPopupMenuItem<String>(
+                              context,
+                              name: "Date",
+                              isSelected: true,
+                              showBorder: false,
                             ),
-                            onTap: () {},
-                          );
-                        }).toList();
-                      },
-                    ),
+                            ...(ordersController.filterVals?.date ?? [])
+                                .map((e) => customPopupMenuItem<String>(context, name: e.name!))
+                                .toList()
+                          ];
+                        })
                     // PopupMenuButton<int>(
                     //
                     //   icon:Image.asset(
@@ -193,15 +177,10 @@ class _OrdersViewState extends State<OrdersView>
                     if (ordersController.isOrdersLoaded.value) {
                       return const Center(child: CircularProgressIndicator());
                     }
-                    if(ordersController.allOrders!.isEmpty){
-                      return Align(
-                          alignment: Alignment.topCenter,
-                          child: Text('No Orders'));
+                    if (ordersController.allOrders!.isEmpty) {
+                      return Align(alignment: Alignment.topCenter, child: Text('No Orders'));
                     }
-                    return TabBarView(
-                      controller: tabController1,
-                        physics: NeverScrollableScrollPhysics(),
-                        children: [
+                    return TabBarView(controller: tabController1, physics: NeverScrollableScrollPhysics(), children: [
                       _completedOrders(),
                       _completedOrders(),
                     ]);
@@ -224,8 +203,7 @@ class _OrdersViewState extends State<OrdersView>
       },
       label: Text(
         "Create new order",
-        style: customTheme(context).medium.copyWith(
-            fontSize: 13, color: Colors.white),
+        style: customTheme(context).medium.copyWith(fontSize: 13, color: Colors.white),
       ),
       icon: Icon(Icons.add),
     );
@@ -243,7 +221,7 @@ class _OrdersViewState extends State<OrdersView>
                 onTap: () {
                   Get.to(() => OrderHistoryDetailsView());
                 },
-                child: OrderHistoryTile(orders:ordersController.allOrders![index])),
+                child: OrderHistoryTile(orders: ordersController.allOrders![index])),
           );
         });
   }

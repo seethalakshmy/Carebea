@@ -7,7 +7,8 @@ class OrdersController extends GetxController {
   OrderListRepo orderListRepo = OrderListRepo();
   OrderListResponse? allorderListResponse;
   RxBool isOrdersLoaded = false.obs;
-  List<History>? allOrders;
+  RxBool isFilterClick = false.obs;
+  List<History> allOrders = [];
   FilterVals? filterVals;
 
   @override
@@ -28,16 +29,34 @@ class OrdersController extends GetxController {
 
   fetchOrdersList({required String orderType}) async {
     isOrdersLoaded(true);
-    allOrders!.clear();
+    allOrders.clear();
+    filterSelected("");
     allorderListResponse = await orderListRepo.allOrdersList(SharedPrefs.getUserId()!, orderType);
     print('orderType $orderType');
-    if (allorderListResponse!.orderListResult!.status == true) {
-      allOrders = allorderListResponse!.orderListResult!.history;
+    if (allorderListResponse?.orderListResult?.status ?? false) {
+      allOrders = allorderListResponse?.orderListResult?.history ?? [];
       filterVals = allorderListResponse!.orderListResult!.filterVals;
     } else {
       allOrders = [];
     }
 
     isOrdersLoaded(false);
+  }
+
+  RxString filterSelected = "".obs;
+  filterOrders(String filterName, int filterId, String orderType) async {
+    allOrders.clear();
+    isFilterClick(true);
+    filterSelected("$filterName-$filterId");
+    var orderResponse = await orderListRepo.allOrdersList(SharedPrefs.getUserId()!, orderType,
+        filtername: filterName, filterid: filterId.toString());
+    if (orderResponse.orderListResult?.status ?? false) {
+      allOrders = orderResponse.orderListResult?.history ?? [];
+    }
+    isFilterClick(false);
+  }
+
+  clearFilters(String orderType) async {
+    await fetchOrdersList(orderType: orderType);
   }
 }
