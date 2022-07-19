@@ -1,4 +1,5 @@
 import 'package:carebea/app/modules/order_history_details/views/order_history_details_view.dart';
+import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:appBar(context),
+      appBar: appBar(context),
       floatingActionButton: _createNewOrderButton(context),
       body: DefaultTabController(
         length: 2,
@@ -180,7 +181,7 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
     return FloatingActionButton.extended(
       backgroundColor: Theme.of(context).extension<CustomTheme>()!.primary,
       onPressed: () {
-        Get.to(CreateOrderView());
+        Get.toNamed(Routes.CREATE_ORDER);
       },
       label: Text(
         "Create new order",
