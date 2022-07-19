@@ -24,7 +24,6 @@ class ShopsController extends GetxController {
   OrderListResponse? orderListResponse;
   List<History>? orderHistory;
 
-
   //TODO: Implement ShopsController
 
   final count = 0.obs;
@@ -48,63 +47,57 @@ class ShopsController extends GetxController {
   fetchAllShops() async {
     isLoading(true);
     shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!);
-    if(shopListResponse!.shopListResult!.status == true){
+    if (shopListResponse!.shopListResult!.status == true) {
       shopList = shopListResponse!.shopListResult!.shopList;
-
-    }else{
+    } else {
       shopList = [];
     }
 
     debugPrint("fetchAllShops $shopListResponse");
 
-    debugPrint(
-        'fetch shops status ${shopListResponse!.shopListResult!.status!}');
-
+    debugPrint('fetch shops status ${shopListResponse!.shopListResult!.status!}');
 
     isLoading(false);
   }
 
-  fetchOrders(String orderType,int shopId)async{
+  fetchOrders(String orderType, int shopId) async {
     isOrdersLoading(true);
 
-    orderListResponse = await orderListRepo.orderList(SharedPrefs.getUserId()!, orderType,shopId);
-    if(orderListResponse!.orderListResult!.status == true){
+    orderListResponse = await orderListRepo.orderList(SharedPrefs.getUserId()!, orderType, shopId);
+    if (orderListResponse!.orderListResult!.status == true) {
       orderHistory = orderListResponse!.orderListResult!.history;
-
-    }else{
+    } else {
       orderHistory = [];
     }
     debugPrint("fetchAllOrders $orderListResponse");
 
-    debugPrint(
-        'fetch order status ${orderListResponse!.orderListResult!.status}');
-
+    debugPrint('fetch order status ${orderListResponse!.orderListResult!.status}');
 
     isOrdersLoading(false);
-
   }
 
+  RxString filterSelected = "".obs;
   filterShops(String filterName, int filterId) async {
     isFilterClick(true);
-    shopFilterResponse = await shopListRepo.shopFilter(
-        SharedPrefs.getUserId()!, filterName, filterId);
+    filterSelected("$filterName-$filterId");
+    shopFilterResponse = await shopListRepo.shopFilter(SharedPrefs.getUserId()!, filterName, filterId);
     isFilterClick(false);
   }
 
   shopDetail(int shopId) async {
     isShopDetailsLoading(true);
-    shopDetailResponse =
-    await shopListRepo.shopDetails(SharedPrefs.getUserId()!, shopId);
+    shopDetailResponse = await shopListRepo.shopDetails(SharedPrefs.getUserId()!, shopId);
     isShopDetailsLoading(false);
   }
+
   Future<bool> onWillpopClose() async {
     DateTime currentTime = DateTime.now();
-    bool backButton = backbuttonpressedTime == null ||
-        currentTime.difference(backbuttonpressedTime!) > const Duration(seconds: 3);
+    bool backButton =
+        backbuttonpressedTime == null || currentTime.difference(backbuttonpressedTime!) > const Duration(seconds: 3);
 
     if (backButton) {
       backbuttonpressedTime = currentTime;
-      Get.snackbar('', 'Tap again to close the app',duration:const Duration(seconds: 1) );
+      Get.snackbar('', 'Tap again to close the app', duration: const Duration(seconds: 1));
       // SnackBar(content: Text(buildTranslate(context, "tap_back")));
       return false;
     } else {
@@ -112,6 +105,9 @@ class ShopsController extends GetxController {
     }
     return true;
   }
+
+  void clearFilters() async {
+    filterSelected("");
+    await fetchAllShops();
+  }
 }
-
-
