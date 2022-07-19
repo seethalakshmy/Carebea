@@ -19,13 +19,15 @@ class ShopDetails extends StatefulWidget {
   State<ShopDetails> createState() => _ShopDetailsState();
 }
 
-class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStateMixin {
+class _ShopDetailsState extends State<ShopDetails>
+    with SingleTickerProviderStateMixin {
   ShopsController shopsController = Get.find();
   TabController? tabController1;
   List<String> products = ['Eccence hande wash', 'Eccence face wash'];
 
   @override
   void initState() {
+   shopsController.fetchOrders('Upcoming',widget.shopId!);
     tabController1 = TabController(length: 2, vsync: this);
     super.initState();
   }
@@ -39,6 +41,8 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
             return const Center(child: CircularProgressIndicator());
           }
           return ListView(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
             children: [
               const SizedBox(
                 height: 20,
@@ -78,19 +82,23 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                         Text(
                           widget.shopDetails!.name!,
                           // 'Trinity Shop',
-                          style: customTheme(context).medium.copyWith(fontSize: 14),
+                          style: customTheme(context).medium.copyWith(
+                              fontSize: 14),
                         ),
                         Text(
                           "GST no: ${widget.shopDetails!.gstNo!}",
                           // 'GST no: 66998964579898',
-                          style: customTheme(context).regular.copyWith(fontSize: 11),
+                          style: customTheme(context).regular.copyWith(
+                              fontSize: 11),
                         ),
                       ],
                     ),
                     InkWell(
-                      onTap: (){
-                        Get.toNamed(Routes.ADD_SHOP,arguments: {'isEdit':true,'shop':widget.shopDetails});
-                      },
+                        onTap: () {
+                          Get.toNamed(Routes.ADD_SHOP,
+                              arguments: {'isEdit': true, 'shop': widget
+                                  .shopDetails});
+                        },
                         child: Image.asset(Assets.edit, scale: 3))
                   ],
                 ),
@@ -116,7 +124,8 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                         child: Text(
                           widget.shopDetails!.address!.localArea!,
                           // 'Akshay Nagar 1st Block Cross , Rammurthy Nagar, Bangalore -560016',
-                          style: customTheme(context).regular.copyWith(fontSize: 11),
+                          style: customTheme(context).regular.copyWith(
+                              fontSize: 11),
                         ),
                       ),
                     ),
@@ -146,7 +155,8 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                             Text(
                               widget.shopDetails!.phone!,
                               // '+91 6398541236',
-                              style: customTheme(context).regular.copyWith(fontSize: 11),
+                              style: customTheme(context).regular.copyWith(
+                                  fontSize: 11),
                             ),
                           ],
                         ),
@@ -155,7 +165,8 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                         ),
                         Text(
                           'Category: ${widget.shopDetails!.category!}',
-                          style: customTheme(context).regular.copyWith(fontSize: 11),
+                          style: customTheme(context).regular.copyWith(
+                              fontSize: 11),
                         ),
                       ],
                     ),
@@ -163,14 +174,17 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                       children: [
                         Text(
                           'Branch : CareBae branch',
-                          style: customTheme(context).regular.copyWith(fontSize: 11),
+                          style: customTheme(context).regular.copyWith(
+                              fontSize: 11),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         Text(
-                          'Credit Balance : ₹${widget.shopDetails!.credBalance!}',
-                          style: customTheme(context).regular.copyWith(fontSize: 11),
+                          'Credit Balance : ₹${widget.shopDetails!
+                              .credBalance!}',
+                          style: customTheme(context).regular.copyWith(
+                              fontSize: 11),
                         ),
                       ],
                     ),
@@ -208,64 +222,95 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                 thickness: 1,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: DefaultTabController(
-                  length: 2,
-                  child: TabBar(
-                    indicatorColor: Colors.blueAccent[900],
-                    controller: tabController1,
-                    onTap: (index) {
-                      tabController1!.animateTo(index);
-                    },
-                    tabs: [
-                      Tab(
-                        child: Text(
-                          'Upcoming Orders(2)',
-                          style: customTheme(context).medium.copyWith(fontSize: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: DefaultTabController(
+                    length: 2,
+                    child: TabBar(
+                      indicatorColor: Colors.blueAccent[900],
+                      controller: tabController1,
+                      onTap: (index) {
+                        tabController1!.animateTo(index);
+                        if (index == 0) {
+                          shopsController.fetchOrders('Upcoming',widget.shopId!);
+                        }
+                        else{
+                          shopsController.fetchOrders('Previous',widget.shopId!);
+
+                        }
+                      },
+                      tabs: [
+                        Tab(
+                          child: Text(
+                            'Upcoming Orders(2)',
+                            style: customTheme(context).medium.copyWith(
+                                fontSize: 12),
+                          ),
                         ),
-                      ),
-                      Tab(
-                        child: Text(
-                          'Pending Orders(2)',
-                          style: customTheme(context).medium.copyWith(fontSize: 12),
+                        Tab(
+                          child: Text(
+                            'Previous Orders(2)',
+                            style: customTheme(context).medium.copyWith(
+                                fontSize: 12),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
+                      ],
+                    ),
+                  )
               ),
               const SizedBox(
                 height: 20,
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height,
-                child: TabBarView(controller: tabController1, children: [
-                  _upcomingOrders(),
-                  _pendingOrders(),
-                ]),
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height,
+                child: Obx(() {
+                  if (shopsController.isOrdersLoading.value) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if(shopsController.orderHistory!.isEmpty){
+                    return Align(
+                      alignment: Alignment.topCenter,
+                        child: Text('No Orders'));
+                  }
+                  return TabBarView(controller: tabController1,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                    _upcomingOrders(),
+                    _previousOrders(),
+                  ]);
+                }),
               )
             ],
           );
         }));
   }
 
-  ListView _pendingOrders() {
+  ListView _previousOrders() {
     return ListView.separated(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
         separatorBuilder: (_, __) => const SizedBox(height: 16),
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: 5,
+        itemCount: shopsController.orderHistory!.length,
         itemBuilder: (context, index) {
-          return const OrderTile();
+          return OrderTile(
+              order: shopsController.orderHistory![index],
+          );
         });
   }
 
   ListView _upcomingOrders() {
     return ListView.separated(
+      shrinkWrap: true,
         separatorBuilder: (_, __) => const SizedBox(height: 16),
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: 5,
+        itemCount: shopsController.orderHistory!.length,
         itemBuilder: (context, index) {
-          return const OrderTile();
+          return OrderTile(
+            order: shopsController.orderHistory![index],
+             );
         });
   }
 }
