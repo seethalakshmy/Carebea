@@ -8,10 +8,7 @@ class OrdersController extends GetxController {
   OrderListResponse? allorderListResponse;
   RxBool isOrdersLoaded = false.obs;
   List<History>? allOrders;
-
-  //TODO: Implement OrdersController
-
-  final count = 0.obs;
+  FilterVals? filterVals;
 
   @override
   void onInit() {
@@ -29,22 +26,18 @@ class OrdersController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
-
   fetchOrdersList({required String orderType}) async {
     isOrdersLoaded(true);
+    allOrders!.clear();
     allorderListResponse = await orderListRepo.allOrdersList(SharedPrefs.getUserId()!, orderType);
     print('orderType $orderType');
-    if(allorderListResponse!.orderListResult!.status == true){
+    if (allorderListResponse!.orderListResult!.status == true) {
       allOrders = allorderListResponse!.orderListResult!.history;
-
-    }else{
+      filterVals = allorderListResponse!.orderListResult!.filterVals;
+    } else {
       allOrders = [];
     }
 
     isOrdersLoaded(false);
-
-
-
   }
 }
