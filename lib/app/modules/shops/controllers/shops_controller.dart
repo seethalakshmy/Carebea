@@ -1,4 +1,6 @@
+import 'package:carebea/app/modules/shops/models/order_list_model.dart';
 import 'package:carebea/app/modules/shops/models/shop_model.dart';
+import 'package:carebea/app/modules/shops/repo/order_list_repo.dart';
 import 'package:carebea/app/modules/shops/repo/shop_list_repo.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,14 +10,19 @@ import '../../../utils/shared_prefs.dart';
 
 class ShopsController extends GetxController {
   ShopListRepo shopListRepo = ShopListRepo();
+  OrderListRepo orderListRepo = OrderListRepo();
+  RxBool isOrdersLoading = false.obs;
   RxBool isLoading = false.obs;
   ShopListResponse? shopListResponse;
+  List<ShopList>? shopList;
   ShopListResponse? shopFilterResponse;
   ShopListResponse? shopSearchResult;
   ShopListResponse? shopDetailResponse;
   RxBool isFilterClick = false.obs;
   RxBool isShopDetailsLoading = false.obs;
   DateTime? backbuttonpressedTime;
+  OrderListResponse? orderListResponse;
+  List<History>? orderHistory;
 
 
   //TODO: Implement ShopsController
@@ -41,6 +48,12 @@ class ShopsController extends GetxController {
   fetchAllShops() async {
     isLoading(true);
     shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!);
+    if(shopListResponse!.shopListResult!.status == true){
+      shopList = shopListResponse!.shopListResult!.shopList;
+
+    }else{
+      shopList = [];
+    }
 
     debugPrint("fetchAllShops $shopListResponse");
 
@@ -49,6 +62,26 @@ class ShopsController extends GetxController {
 
 
     isLoading(false);
+  }
+
+  fetchOrders(String orderType,int shopId)async{
+    isOrdersLoading(true);
+
+    orderListResponse = await orderListRepo.orderList(SharedPrefs.getUserId()!, orderType,shopId);
+    if(orderListResponse!.orderListResult!.status == true){
+      orderHistory = orderListResponse!.orderListResult!.history;
+
+    }else{
+      orderHistory = [];
+    }
+    debugPrint("fetchAllOrders $orderListResponse");
+
+    debugPrint(
+        'fetch order status ${orderListResponse!.orderListResult!.status}');
+
+
+    isOrdersLoading(false);
+
   }
 
   filterShops(String filterName, int filterId) async {
