@@ -48,8 +48,10 @@ class ShopsController extends GetxController {
     isLoading(false);
   }
 
+  RxString filterSelected = "".obs;
   filterShops(String filterName, int filterId) async {
     isFilterClick(true);
+    filterSelected("$filterName-$filterId");
     shopFilterResponse = await shopListRepo.shopFilter(SharedPrefs.getUserId()!, filterName, filterId);
     isFilterClick(false);
   }
@@ -74,5 +76,10 @@ class ShopsController extends GetxController {
       Get.back();
     }
     return true;
+  }
+
+  void clearFilters() async {
+    filterSelected("");
+    await fetchAllShops();
   }
 }

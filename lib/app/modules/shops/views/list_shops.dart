@@ -5,6 +5,7 @@ import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/global_state_controller.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
+import 'package:carebea/app/utils/widgets/custom_popupmenuitem.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -66,8 +67,9 @@ class ListShops extends GetView<ShopsController> {
                         const SizedBox(
                           width: 5,
                         ),
-                        PopupMenuButton(
-                          offset: Offset(0.0, 50),
+                        PopupMenuButton<String>(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+                          offset: const Offset(0.0, 50),
                           padding: EdgeInsets.zero,
                           child: Image.asset(
                             Assets.filter,
@@ -75,27 +77,36 @@ class ListShops extends GetView<ShopsController> {
                           ),
                           onSelected: (element) {},
                           itemBuilder: (BuildContext context) {
+                            if (controller.filterSelected.value == "") {}
                             return [
-                              PopupMenuItem(
-                                  height: 0,
-                                  padding: EdgeInsets.symmetric(horizontal: 5),
-                                  child: Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 10),
-                                      alignment: Alignment.centerLeft,
-                                      height: 30,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(4),
-                                        color: customTheme(context).popupButtonColor,
-                                      ),
-                                      child: Text(
-                                        'Category',
-                                        style: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.white),
-                                      ))),
-                              ...buildCategoryFilterItems(),
-                              PopupMenuItem(child: Container(color: Colors.blue, child: Text('Zone'))),
-                              ...buildZoneFilterItems(),
-                              PopupMenuItem(child: Container(color: Colors.blue, child: Text('Route'))),
-                              ...buildRouteFilterItems()
+                              customPopupMenuItem<String>(
+                                context,
+                                name: "Category",
+                                isSelected: true,
+                                showBorder: false,
+                              ),
+                              ...buildCategoryFilterItems(context, controller.filterSelected.value),
+                              customPopupMenuItem<String>(
+                                context,
+                                name: "Zone",
+                                isSelected: true,
+                                showBorder: false,
+                              ),
+                              ...buildZoneFilterItems(context, controller.filterSelected.value),
+                              customPopupMenuItem<String>(
+                                context,
+                                name: "Route",
+                                isSelected: true,
+                                showBorder: false,
+                              ),
+                              ...buildRouteFilterItems(context, controller.filterSelected.value),
+                                customPopupMenuItem<String>(
+                                context,
+                                name: "Clear",
+                                isSelected: true,
+                                showBorder: false,
+                                onTap:controller.clearFilters,
+                              ),
                             ];
                           },
                         ),
@@ -160,42 +171,38 @@ class ListShops extends GetView<ShopsController> {
     );
   }
 
-  List<PopupMenuItem<int>> buildCategoryFilterItems() =>
+ 
+
+  List<PopupMenuItem<String>> buildCategoryFilterItems(BuildContext context, String value) =>
       shopsController.shopListResponse!.shopListResult!.filterVals!.category!.map((e) {
-        return PopupMenuItem<int>(
-          value: e.id,
-          child: Text(
-            e.name!,
-            style: TextStyle(fontSize: 14),
-          ),
+        return customPopupMenuItem<String>(
+          context,
+          name: e.name!,
+          isSelected: value == "Category-${e.id}",
           onTap: () {
             shopsController.filterShops('Category', e.id!);
           },
         );
       }).toList();
 
-  List<PopupMenuItem<int>> buildZoneFilterItems() =>
+  List<PopupMenuItem<String>> buildZoneFilterItems(BuildContext context, String value) =>
       shopsController.shopListResponse!.shopListResult!.filterVals!.zone!.map((e) {
-        return PopupMenuItem<int>(
-          value: e.id,
-          child: Text(
-            e.name!,
-            style: TextStyle(fontSize: 14),
-          ),
+        return customPopupMenuItem<String>(
+          context,
+          name: e.name!,
+          isSelected: value == "Zone-${e.id}",
           onTap: () {
             shopsController.filterShops('Zone', e.id!);
           },
         );
       }).toList();
 
-  List<PopupMenuItem<int>> buildRouteFilterItems() =>
+  List<PopupMenuItem<String>> buildRouteFilterItems(BuildContext context, String value) =>
       shopsController.shopListResponse!.shopListResult!.filterVals!.route!.map((e) {
-        return PopupMenuItem<int>(
-          value: e.id,
-          child: Text(
-            e.name!,
-            style: TextStyle(fontSize: 14),
-          ),
+        return customPopupMenuItem<String>(
+          context,
+          name: e.name!,
+          isSelected: value == "Route-${e.id}",
           onTap: () {
             shopsController.filterShops('Route', e.id!);
           },
