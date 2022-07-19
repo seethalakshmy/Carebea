@@ -26,16 +26,13 @@ class _AppStartUpViewState extends State<AppStartUpView> {
     generateAccessToken();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-          child: Image.asset(Assets.assetsSplashImage),
-        )
-    );
+      child: Image.asset(Assets.assetsSplashImage),
+    ));
   }
-
 
   // generateAccessToken() async {
   //   validTokenPresent = await apiService.getAccessToken();
@@ -46,17 +43,12 @@ class _AppStartUpViewState extends State<AppStartUpView> {
     // validTokenPresent = true;
     if (validTokenPresent == true) {
       print("validTokenPresent ${validTokenPresent}");
-      if(SharedPrefs.getUserId()!=null){
+      print("userid ${SharedPrefs.getUserId()}");
+      if (SharedPrefs.getUserId() != null) {
         Get.offNamed(Routes.DASHBOARD);
-
-
-
-      }
-      else{
+      } else {
         Get.offNamed(Routes.LOGIN);
       }
-
     }
-
   }
 }
