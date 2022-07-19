@@ -17,7 +17,6 @@ class ShopsController extends GetxController {
   RxBool isShopDetailsLoading = false.obs;
   DateTime? backbuttonpressedTime;
 
-
   //TODO: Implement ShopsController
 
   final count = 0.obs;
@@ -44,34 +43,31 @@ class ShopsController extends GetxController {
 
     debugPrint("fetchAllShops $shopListResponse");
 
-    debugPrint(
-        'fetch shops status ${shopListResponse!.shopListResult!.status!}');
-
+    debugPrint('fetch shops status ${shopListResponse!.shopListResult!.status!}');
 
     isLoading(false);
   }
 
   filterShops(String filterName, int filterId) async {
     isFilterClick(true);
-    shopFilterResponse = await shopListRepo.shopFilter(
-        SharedPrefs.getUserId()!, filterName, filterId);
+    shopFilterResponse = await shopListRepo.shopFilter(SharedPrefs.getUserId()!, filterName, filterId);
     isFilterClick(false);
   }
 
   shopDetail(int shopId) async {
     isShopDetailsLoading(true);
-    shopDetailResponse =
-    await shopListRepo.shopDetails(SharedPrefs.getUserId()!, shopId);
+    shopDetailResponse = await shopListRepo.shopDetails(SharedPrefs.getUserId()!, shopId);
     isShopDetailsLoading(false);
   }
+
   Future<bool> onWillpopClose() async {
     DateTime currentTime = DateTime.now();
-    bool backButton = backbuttonpressedTime == null ||
-        currentTime.difference(backbuttonpressedTime!) > const Duration(seconds: 3);
+    bool backButton =
+        backbuttonpressedTime == null || currentTime.difference(backbuttonpressedTime!) > const Duration(seconds: 3);
 
     if (backButton) {
       backbuttonpressedTime = currentTime;
-      Get.snackbar('', 'Tap again to close the app',duration:const Duration(seconds: 1) );
+      Get.snackbar('', 'Tap again to close the app', duration: const Duration(seconds: 1));
       // SnackBar(content: Text(buildTranslate(context, "tap_back")));
       return false;
     } else {
@@ -80,5 +76,3 @@ class ShopsController extends GetxController {
     return true;
   }
 }
-
-

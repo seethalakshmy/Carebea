@@ -67,19 +67,30 @@ class ListShops extends GetView<ShopsController> {
                           width: 5,
                         ),
                         PopupMenuButton(
-                          position: PopupMenuPosition.under,
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                Assets.filter,
-                                scale: 3.5,
-                              )
-                            ],
+                          offset: Offset(0.0, 50),
+                          padding: EdgeInsets.zero,
+                          child: Image.asset(
+                            Assets.filter,
+                            scale: 3.5,
                           ),
                           onSelected: (element) {},
                           itemBuilder: (BuildContext context) {
                             return [
-                              PopupMenuItem(child: Container(color: Colors.blue, child: Text('Category'))),
+                              PopupMenuItem(
+                                  height: 0,
+                                  padding: EdgeInsets.symmetric(horizontal: 5),
+                                  child: Container(
+                                      padding: EdgeInsets.symmetric(horizontal: 10),
+                                      alignment: Alignment.centerLeft,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(4),
+                                        color: customTheme(context).popupButtonColor,
+                                      ),
+                                      child: Text(
+                                        'Category',
+                                        style: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.white),
+                                      ))),
                               ...buildCategoryFilterItems(),
                               PopupMenuItem(child: Container(color: Colors.blue, child: Text('Zone'))),
                               ...buildZoneFilterItems(),
@@ -107,13 +118,13 @@ class ListShops extends GetView<ShopsController> {
                     // SizedBox(
                     //   height: 10,
                     // ),
-                    const Text(
-                      'Last Week',
-                      style: TextStyle(
-                        color: Colors.black26,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    // const Text(
+                    //   'Last Week',
+                    //   style: TextStyle(
+                    //     color: Colors.black26,
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    // ),
                     SizedBox(
                       height: 10,
                     ),
