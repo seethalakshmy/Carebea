@@ -24,6 +24,7 @@ dependencies:
   logger: 1.1.0
   shared_preferences: 2.0.15
   connectivity_plus: 2.3.5
+  fluttertoast: 8.0.9
   flutter: 
     sdk: flutter
 

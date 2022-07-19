@@ -41,5 +41,24 @@ class AddShopRepo{
         routeId: routeId, longitude: longitude, latitude: latitude);
   }
 
+  Future<AddShopResponse> updateShop(
+      int shopId,
+      int salesPersonId,
+      String name,
+      String phone,
+      int shopCategoryId,
+      int customerType,
+      String gst,
+      String localArea,
+      String district,
+      String zip,
+      int stateId,
+      int zoneId,
+      int routeId,
+      double latitude,
+      double longitude) async{
+    return addShopDataSource.updateShop(shopId: shopId, salesPersonId: salesPersonId, name: name, phone: phone, shopCategoryId: shopCategoryId, customerType: customerType, gst: gst, localArea: localArea, district: district, zip: zip, stateId: stateId, zoneId: zoneId, routeId: routeId, latitude: latitude, longitude: longitude);
+  }
+
 
 }

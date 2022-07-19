@@ -1,3 +1,4 @@
+import 'package:carebea/app/modules/create_order/controllers/create_order_controller.dart';
 import 'package:carebea/app/modules/create_order/views/add_products_view.dart';
 import 'package:carebea/app/modules/create_order/widgets/shop_tile.dart';
 import 'package:carebea/app/routes/app_pages.dart';
@@ -9,27 +10,31 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ShopDetailsView extends StatelessWidget {
-  const ShopDetailsView({Key? key}) : super(key: key);
+  ShopDetailsView({Key? key}) : super(key: key);
+  CreateOrderController createOrderController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar:appBar(context),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _title(context),
-          Padding(padding: EdgeInsets.symmetric(horizontal: 24), child: ShopDetailsTile()),
-          Spacer(),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: CustomButton(title: 'Add Products', onTap: (){
-              Get.to(AddProductsView());
-            }),
-          ),
-
-        ],
-
+    return WillPopScope(
+      onWillPop: () => createOrderController.onWillpopClose(),
+      child: Scaffold(
+        appBar: appBar(context),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _title(context),
+            Padding(padding: EdgeInsets.symmetric(horizontal: 24), child: ShopDetailsTile()),
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: CustomButton(
+                  title: 'Add Products',
+                  onTap: () {
+                    Get.to(AddProductsView());
+                  }),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -40,11 +45,11 @@ class ShopDetailsView extends StatelessWidget {
       child: Row(
         children: [
           InkWell(
-            onTap: (){
+            onTap: () {
               Get.back();
             },
-            child:  InkWell(
-              onTap: (){
+            child: InkWell(
+              onTap: () {
                 Get.back();
               },
               child: Icon(
@@ -58,7 +63,6 @@ class ShopDetailsView extends StatelessWidget {
             "Create new order",
             style: customTheme(context).medium.copyWith(fontSize: 16, color: Colors.black),
           ),
-
         ],
       ),
     );

@@ -12,33 +12,37 @@ import 'package:get/get.dart';
 import '../controllers/create_order_controller.dart';
 
 class CreateOrderView extends GetView<CreateOrderController> {
-  const CreateOrderView({Key? key}) : super(key: key);
+  CreateOrderView({Key? key}) : super(key: key);
+  CreateOrderController createOrderController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar:appBar(context),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _title(context),
-            _search(context),
-            CustomCard(
-              hasShadow: false,
-              margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 11),
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              color: const Color(0xffFAFAFA),
-              child: ListView.separated(
-                shrinkWrap: true,
-                itemCount: 5,
-                separatorBuilder: (_, __) => Container(
-                  height: 1,
-                  color: const Color(0xffE1E1E1),
+    return WillPopScope(
+      onWillPop: () => createOrderController.onWillpopClose(),
+      child: Scaffold(
+          appBar: appBar(context),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _title(context),
+              _search(context),
+              CustomCard(
+                hasShadow: false,
+                margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 11),
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                color: const Color(0xffFAFAFA),
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: 5,
+                  separatorBuilder: (_, __) => Container(
+                    height: 1,
+                    color: const Color(0xffE1E1E1),
+                  ),
+                  itemBuilder: (context, index) => const ShopTile(),
                 ),
-                itemBuilder: (context, index) => const ShopTile(),
               ),
-            ),
-          ],
-        ));
+            ],
+          )),
+    );
   }
 
   Padding _search(BuildContext context) {
@@ -70,15 +74,15 @@ class CreateOrderView extends GetView<CreateOrderController> {
       padding: const EdgeInsets.all(24),
       child: Row(
         children: [
-           InkWell(
-             onTap: (){
-               Get.back();
-             },
-             child: Icon(
+          InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: Icon(
               Icons.arrow_back_ios,
               size: 17,
+            ),
           ),
-           ),
           const SizedBox(width: 10),
           Text(
             "Create new order",
@@ -101,7 +105,7 @@ class ShopTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: InkWell(
         onTap: () {
-          Get.to(() => const ShopDetailsView());
+          Get.to(() => ShopDetailsView());
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

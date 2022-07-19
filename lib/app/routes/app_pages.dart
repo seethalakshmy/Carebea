@@ -79,7 +79,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ADD_SHOP,
-      page: () => const AddShopView(),
+      page: () =>  AddShopView(),
       binding: AddShopBinding(),
     ),
     GetPage(
@@ -99,7 +99,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CREATE_ORDER,
-      page: () => const CreateOrderView(),
+      page: () => CreateOrderView(),
       binding: CreateOrderBinding(),
     ),
     GetPage(

@@ -1,3 +1,4 @@
+import 'package:carebea/app/modules/create_order/controllers/create_order_controller.dart';
 import 'package:carebea/app/modules/create_order/views/check_out_view.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
@@ -10,58 +11,62 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddProductsView extends StatelessWidget {
-  const AddProductsView({Key? key}) : super(key: key);
+  AddProductsView({Key? key}) : super(key: key);
+  CreateOrderController createOrderController = Get.put(CreateOrderController());
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar(context),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _title(context),
-          _productsText(context),
-          _search(context),
-          const SizedBox(height: 19),
-          Flexible(
-            child: _productListView(),
-          ),
-        ],
-      ),
-      bottomNavigationBar: InkWell(
-        onTap: () {
-          Get.to(() => const CheckoutView());
-        },
-        child: Container(
-          alignment: Alignment.center,
-          height: 55,
-          decoration: BoxDecoration(
-            color: customTheme(context).primary,
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(7)),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 23, right: 15),
-            child: Row(
-              children: [
-                Text(
-                  "5 items  |  ",
-                  style: customTheme(context).regular.copyWith(fontSize: 13, color: Colors.white),
-                ),
-                Text(
-                  "₹975",
-                  style: customTheme(context).medium.copyWith(fontSize: 13, color: Colors.white),
-                ),
-                const Spacer(),
-                Text(
-                  "Place order   ",
-                  style: customTheme(context).regular.copyWith(fontSize: 13, color: Colors.white),
-                ),
-                const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 13,
-                  color: Colors.white,
-                )
-              ],
+    return WillPopScope(
+      onWillPop: () => createOrderController.onWillpopClose(),
+      child: Scaffold(
+        appBar: appBar(context),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _title(context),
+            _productsText(context),
+            _search(context),
+            const SizedBox(height: 19),
+            Flexible(
+              child: _productListView(),
+            ),
+          ],
+        ),
+        bottomNavigationBar: InkWell(
+          onTap: () {
+            Get.to(() => CheckoutView());
+          },
+          child: Container(
+            alignment: Alignment.center,
+            height: 55,
+            decoration: BoxDecoration(
+              color: customTheme(context).primary,
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(7)),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 23, right: 15),
+              child: Row(
+                children: [
+                  Text(
+                    "5 items  |  ",
+                    style: customTheme(context).regular.copyWith(fontSize: 13, color: Colors.white),
+                  ),
+                  Text(
+                    "₹975",
+                    style: customTheme(context).medium.copyWith(fontSize: 13, color: Colors.white),
+                  ),
+                  const Spacer(),
+                  Text(
+                    "Place order   ",
+                    style: customTheme(context).regular.copyWith(fontSize: 13, color: Colors.white),
+                  ),
+                  const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 13,
+                    color: Colors.white,
+                  )
+                ],
+              ),
             ),
           ),
         ),
