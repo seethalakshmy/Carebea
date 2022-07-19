@@ -2,6 +2,7 @@ import 'package:carebea/app/modules/shops/models/order_list_model.dart';
 import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:carebea/app/modules/shops/repo/order_list_repo.dart';
 import 'package:carebea/app/modules/shops/repo/shop_list_repo.dart';
+import 'package:carebea/app/modules/shops/views/shop_details.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -13,11 +14,9 @@ class ShopsController extends GetxController {
   OrderListRepo orderListRepo = OrderListRepo();
   RxBool isOrdersLoading = false.obs;
   RxBool isLoading = false.obs;
-  ShopListResponse? shopListResponse;
-  List<ShopList>? shopList;
-  ShopListResponse? shopFilterResponse;
-  ShopListResponse? shopSearchResult;
   ShopListResponse? shopDetailResponse;
+  List<ShopList>? shopList;
+  FilterVal? filterVals;
   RxBool isFilterClick = false.obs;
   RxBool isShopDetailsLoading = false.obs;
   DateTime? backbuttonpressedTime;
@@ -45,17 +44,22 @@ class ShopsController extends GetxController {
   }
 
   fetchAllShops() async {
+    shopList!.clear();
+    filterSelected("");
+
     isLoading(true);
-    shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!);
-    if (shopListResponse!.shopListResult!.status == true) {
-      shopList = shopListResponse!.shopListResult!.shopList;
+    var shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!);
+    if (shopListResponse.shopListResult?.status ?? false) {
+      shopList = shopListResponse.shopListResult!.shopList;
+      filterVals = shopListResponse.shopListResult!.filterVals;
     } else {
       shopList = [];
+      filterVals = null;
     }
 
     debugPrint("fetchAllShops $shopListResponse");
 
-    debugPrint('fetch shops status ${shopListResponse!.shopListResult!.status!}');
+    debugPrint('fetch shops status ${shopListResponse.shopListResult!.status!}');
 
     isLoading(false);
   }
@@ -78,9 +82,13 @@ class ShopsController extends GetxController {
 
   RxString filterSelected = "".obs;
   filterShops(String filterName, int filterId) async {
+    shopList!.clear();
     isFilterClick(true);
     filterSelected("$filterName-$filterId");
-    shopFilterResponse = await shopListRepo.shopFilter(SharedPrefs.getUserId()!, filterName, filterId);
+    var shopFilterResponse = await shopListRepo.shopFilter(SharedPrefs.getUserId()!, filterName, filterId);
+    if (shopDetailResponse?.shopListResult?.status ?? false) {
+      shopList = shopDetailResponse?.shopListResult?.shopList;
+    }
     isFilterClick(false);
   }
 
@@ -107,7 +115,6 @@ class ShopsController extends GetxController {
   }
 
   void clearFilters() async {
-    filterSelected("");
     await fetchAllShops();
   }
 }

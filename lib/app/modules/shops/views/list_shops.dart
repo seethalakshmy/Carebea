@@ -32,11 +32,8 @@ class ListShops extends GetView<ShopsController> {
               if (shopsController.isLoading.value) {
                 return const Center(child: CircularProgressIndicator());
               }
-              print('${shopsController.shopListResponse!.id}');
-              if (shopsController.shopListResponse!.shopListResult!.shopList!.isEmpty) {
-                Center(
-                  child: Text(shopsController.shopListResponse!.shopListResult!.message!),
-                );
+              if (shopsController.shopList!.isEmpty) {
+                return Center(child: Text("No shops found!"));
               }
               return SingleChildScrollView(
                 child: Padding(
@@ -145,16 +142,22 @@ class ListShops extends GetView<ShopsController> {
                           if (shopsController.isFilterClick.value) {
                             return const Center(child: CircularProgressIndicator());
                           }
+                          if (shopsController.shopList!.isEmpty) {
+                            return Container(
+                                alignment: Alignment.topCenter,
+                                width: double.infinity,
+                                padding: EdgeInsets.only(top: 50),
+                                child: Text("No shops found!"));
+                          }
                           return ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               // itemCount: 2,
-                              itemCount: shopsController.shopListResponse!.shopListResult!.shopList!.length,
+                              itemCount: shopsController.shopList!.length,
                               itemBuilder: (context, index) {
                                 return Column(
                                   children: [
-                                    ShopListTile(
-                                        shop: shopsController.shopListResponse!.shopListResult!.shopList![index]),
+                                    ShopListTile(shop: shopsController.shopList![index]),
                                     SizedBox(
                                       height: 20,
                                     )
@@ -171,7 +174,7 @@ class ListShops extends GetView<ShopsController> {
   }
 
   List<PopupMenuItem<String>> buildCategoryFilterItems(BuildContext context, String value) =>
-      shopsController.shopListResponse!.shopListResult!.filterVals!.category!.map((e) {
+      shopsController.filterVals!.category!.map((e) {
         return customPopupMenuItem<String>(
           context,
           name: e.name!,
@@ -183,7 +186,7 @@ class ListShops extends GetView<ShopsController> {
       }).toList();
 
   List<PopupMenuItem<String>> buildZoneFilterItems(BuildContext context, String value) =>
-      shopsController.shopListResponse!.shopListResult!.filterVals!.zone!.map((e) {
+      shopsController.filterVals!.zone!.map((e) {
         return customPopupMenuItem<String>(
           context,
           name: e.name!,
@@ -195,7 +198,7 @@ class ListShops extends GetView<ShopsController> {
       }).toList();
 
   List<PopupMenuItem<String>> buildRouteFilterItems(BuildContext context, String value) =>
-      shopsController.shopListResponse!.shopListResult!.filterVals!.route!.map((e) {
+      shopsController.filterVals!.route!.map((e) {
         return customPopupMenuItem<String>(
           context,
           name: e.name!,
@@ -210,8 +213,7 @@ class ListShops extends GetView<ShopsController> {
     return FloatingActionButton.extended(
       backgroundColor: customTheme(context).primary,
       onPressed: () {
-        Get.toNamed(Routes.ADD_SHOP,
-            arguments: {'isEdit': false, 'shop': shopsController.shopListResponse, 'isFromListShop': true});
+        Get.toNamed(Routes.ADD_SHOP, arguments: {'isEdit': false, 'isFromListShop': true});
       },
       label: Text(
         "Add new shop",
