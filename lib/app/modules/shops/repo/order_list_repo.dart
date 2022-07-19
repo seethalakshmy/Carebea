@@ -12,9 +12,13 @@ import '../models/order_list_model.dart';
 class OrderListRepo{
   OrderDataSource orderDataSource = OrderDataSource();
 
-  ///OrderList
+  ///OrderListShopDeatilPage
   Future<OrderListResponse> orderList(int salesPersonId,String orderType,int shopId) async {
     return orderDataSource.orderList(salesPersonId: salesPersonId, orderType: orderType, shopId: shopId);
+  }
+
+  Future<OrderListResponse> allOrdersList(int salesPersonId,String orderType)async{
+    return orderDataSource.orderList(salesPersonId: salesPersonId, orderType: orderType);
   }
 
 

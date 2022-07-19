@@ -22,7 +22,7 @@ class OrderDataSource {
 
 
   Future<OrderListResponse> orderList(
-      {required int salesPersonId,required String orderType,required int shopId}) async {
+      {required int salesPersonId,required String orderType,  int? shopId}) async {
     var response = await http.post(Uri.parse('${apiService.baseUrl}list-orders'),
 
         body:json.encode( {'sales_person_id':salesPersonId,'order_type':orderType,'shop_id':shopId}),
