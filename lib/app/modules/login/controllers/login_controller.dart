@@ -47,7 +47,6 @@ class LoginController extends GetxController {
       debugPrint("email login status  ${response.emailLogin?.status}");
 
       if (response.emailLogin?.status ?? false) {
-        Get.snackbar('Login Successfuly', '');
         SharedPrefs.setUserId(response.emailLogin!.userId!);
         SharedPrefs.setLoggedInStatus(true);
 

@@ -10,23 +10,19 @@ import 'dart:developer' as developer;
 
 import '../models/order_list_model.dart';
 
-
-
 class OrderDataSource {
   ApiService apiService = Get.find();
 
-
-
-
-
-
-
-  Future<OrderListResponse> orderList(
-      {required int salesPersonId,required String orderType,required int shopId}) async {
+  Future<OrderListResponse> orderList({required int salesPersonId, required String orderType, int? shopId}) async {
+    var body = {
+      'sales_person_id': salesPersonId,
+      'order_type': orderType,
+    };
+    if (shopId != null) {
+      body.addAll({'shop_id': shopId});
+    }
     var response = await http.post(Uri.parse('${apiService.baseUrl}list-orders'),
-
-        body:json.encode( {'sales_person_id':salesPersonId,'order_type':orderType,'shop_id':shopId}),
-        headers: apiService.getHeaders());
+        body: json.encode(body), headers: apiService.getHeaders());
     developer.log(" url----${(Uri.parse('${apiService.baseUrl}list-orders'))}");
 
     print("listOrders response statusCode ${response.statusCode} ");
@@ -38,9 +34,4 @@ class OrderDataSource {
       return OrderListResponse(orderListResult: OrderListResult(status: false));
     }
   }
-
-
-
-
-
 }
