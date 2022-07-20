@@ -31,7 +31,7 @@ class OrderHistoryTile extends StatelessWidget {
                       style: customTheme(context).medium.copyWith(fontSize: 12, color: customTheme(context).secondary),
                     ),
                     Text(
-                      'Delivery Date : 20/06/2022',
+                      'Delivery Date : ${orders.dateOrder!.day}/${orders.dateOrder!.month}/${orders.dateOrder!.year}',
                       style: customTheme(context).regular.copyWith(fontSize: 11),
                     ),
                   ],
@@ -43,7 +43,7 @@ class OrderHistoryTile extends StatelessWidget {
                     color: customTheme(context).action.withOpacity(.25),
                   ),
                   child: Text(
-                    'Delivered',
+                    orders.status!,
                     style: customTheme(context).medium.copyWith(fontSize: 10, color: customTheme(context).action),
                   ),
                 ),
@@ -60,7 +60,7 @@ class OrderHistoryTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Trinty Shop',
+                  orders.name!,
                   style: customTheme(context).medium.copyWith(fontSize: 11),
                 ),
                 Column(
@@ -70,7 +70,7 @@ class OrderHistoryTile extends StatelessWidget {
                       style: customTheme(context).regular.copyWith(fontSize: 10, color: customTheme(context).secondary),
                     ),
                     Text(
-                      "₹951",
+                      "₹${orders.amountTotal}",
                       style: customTheme(context).medium.copyWith(fontSize: 14),
                     )
                   ],
@@ -90,7 +90,12 @@ class OrderHistoryTile extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  'Eccelence Hand Wash Total... 20x',
+                  orders.productList!.first.name!,
+                  style: customTheme(context).regular.copyWith(fontSize: 11),
+                ),
+                SizedBox(width: 10,),
+                Text(
+                  orders.productList!.first.productUomQty.toString(),
                   style: customTheme(context).regular.copyWith(fontSize: 11),
                 ),
                 Spacer(),

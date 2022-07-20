@@ -21,6 +21,10 @@ class OrderListRepo{
     return orderDataSource.orderList(salesPersonId: salesPersonId, orderType: orderType,filterName:filtername,filterId:filterid);
   }
 
+  Future<OrderListResponse> orderDetails({int? salesPersonId, int? orderId}){
+    return orderDataSource.orderList(salesPersonId: salesPersonId!,orderId: orderId);
+  }
+
 
 
 

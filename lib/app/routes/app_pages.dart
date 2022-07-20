@@ -95,7 +95,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.DELIVERY_HOME,
-      page: () => const DeliveryHomeView(),
+      page: () =>  DeliveryHomeView(),
       binding: DeliveryHomeBinding(),
     ),
     GetPage(
@@ -105,7 +105,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.ORDER_HISTORY_DETAILS,
-      page: () => const OrderHistoryDetailsView(),
+      page: () =>  OrderHistoryDetailsView(),
       binding: OrderHistoryDetailsBinding(),
     ),
     GetPage(

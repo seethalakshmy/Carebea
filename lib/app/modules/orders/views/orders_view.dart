@@ -227,7 +227,7 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: InkWell(
                 onTap: () {
-                  Get.to(() => OrderHistoryDetailsView());
+                  Get.toNamed(Routes.ORDER_HISTORY_DETAILS,arguments: {'order_id':ordersController.allOrders[index].id});
                 },
                 child: OrderHistoryTile(orders: ordersController.allOrders[index])),
           );
