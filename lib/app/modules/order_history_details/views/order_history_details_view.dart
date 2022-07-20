@@ -18,6 +18,7 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
 
   @override
   Widget build(BuildContext context) {
+    double itemTotal = 0;
     return Scaffold(
         appBar: appBar(context),
         body: Obx(() {
