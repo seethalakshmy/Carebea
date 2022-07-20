@@ -10,7 +10,7 @@ import '../../../model/access_token.dart';
 import '../../utils/shared_prefs.dart';
 
 class ApiService extends GetxService {
-  var baseUrl = "https://9996-117-193-165-154.in.ngrok.io/api/v1/"; //test
+  var baseUrl = "https://c7ab-112-196-178-85.in.ngrok.io/api/v1/"; //test
 
   var xAuthClient = '12345';
   var xAuthToken = '12345';
@@ -28,7 +28,7 @@ class ApiService extends GetxService {
   }
 
   Future<bool> getAccessToken() async {
-    debugPrint("getAccessToken called ");
+    developer.log("getAccessToken called ");
     var endPoint = "${baseUrl}create_access_token";
     var url = Uri.parse(endPoint);
     developer.log(" url----$url");
@@ -49,7 +49,7 @@ class ApiService extends GetxService {
       SharedPrefs.setRefreshToken(result.result!.refreshToken!);
       token = result.result!.accessToken!;
       auth = "Bearer ${result.result!.accessToken}";
-      debugPrint(' Aceess token $auth');
+      developer.log(' Aceess token $auth');
       return true;
     } else {
       return false;
@@ -78,7 +78,7 @@ class ApiService extends GetxService {
   }
 
   Future<http.Response> post(String path, Object body) async {
-    debugPrint("checking connection");
+    developer.log("checking connection");
     if (!(await getConnect())) {
       return http.Response(
         json.encode({
@@ -89,13 +89,13 @@ class ApiService extends GetxService {
         408,
       );
     }
-    debugPrint('**** post request :  $path ****');
-    debugPrint('body : $body');
+    developer.log('**** post request :  $path ****');
+    developer.log('body : $body');
     late http.Response res;
     try {
       res = await http.post(Uri.parse(baseUrl + path), body: jsonEncode(body), headers: getHeaders());
     } catch (e) {
-      debugPrint("post request timeout : $e");
+      developer.log("post request timeout : $e");
       // timeoutDialog();
       return http.Response(
         json.encode({
@@ -106,9 +106,9 @@ class ApiService extends GetxService {
         408,
       );
     }
-    debugPrint('status code : ${res.statusCode}');
-    debugPrint('response body : ${res.body}');
-    debugPrint('**** post request end : $path ****');
+    developer.log('status code : ${res.statusCode}');
+    developer.log('response body : ${res.body}');
+    developer.log('**** post request end : $path ****');
     if (res.statusCode == 401) {
       var val = await refreshToken();
       if (val) return await post(path, body);
@@ -117,7 +117,7 @@ class ApiService extends GetxService {
   }
 
   Future<http.Response> put(String path, Object body) async {
-    debugPrint("checking connection");
+    developer.log("checking connection");
     if (!(await getConnect())) {
       return http.Response(
         json.encode({
@@ -128,13 +128,13 @@ class ApiService extends GetxService {
         408,
       );
     }
-    debugPrint('**** put request : $path ****');
-    debugPrint('body : $body');
+    developer.log('**** put request : $path ****');
+    developer.log('body : $body');
     http.Response res;
     try {
       res = await http.put(Uri.parse(baseUrl + path), body: jsonEncode(body), headers: getHeaders());
     } catch (e) {
-      debugPrint("put request timeout : $e");
+      developer.log("put request timeout : $e");
       // timeoutDialog();
       return http.Response(
         json.encode({
@@ -149,9 +149,9 @@ class ApiService extends GetxService {
         408,
       );
     }
-    debugPrint('status code : ${res.statusCode}');
-    debugPrint('response body : ${res.body}');
-    debugPrint('**** put request end : $path ****');
+    developer.log('status code : ${res.statusCode}');
+    developer.log('response body : ${res.body}');
+    developer.log('**** put request end : $path ****');
     if (res.statusCode == 401) {
       var val = await refreshToken();
       if (val) return await put(path, body);
@@ -161,7 +161,7 @@ class ApiService extends GetxService {
 
   ///give [path] starting with [/], eg: /test
   Future<http.Response> get(String path) async {
-    debugPrint("checking connection");
+    developer.log("checking connection");
     if (!(await getConnect())) {
       return http.Response(
         json.encode({
@@ -172,12 +172,12 @@ class ApiService extends GetxService {
         408,
       );
     }
-    debugPrint('**** get request : $path ****');
+    developer.log('**** get request : $path ****');
     http.Response res;
     try {
       res = await http.get(Uri.parse(baseUrl + path), headers: getHeaders());
     } catch (e) {
-      debugPrint("get request timeout : $e");
+      developer.log("get request timeout : $e");
       // timeoutDialog();
       return http.Response(
         json.encode({
@@ -188,9 +188,9 @@ class ApiService extends GetxService {
         408,
       );
     }
-    debugPrint('status code : ${res.statusCode}');
-    debugPrint('response body : ${res.body}');
-    debugPrint('**** get request end : $path ****');
+    developer.log('status code : ${res.statusCode}');
+    developer.log('response body : ${res.body}');
+    developer.log('**** get request end : $path ****');
     if (res.statusCode == 401) {
       var val = await refreshToken();
       if (val) return await get(path);
@@ -199,7 +199,7 @@ class ApiService extends GetxService {
   }
 
   Future<http.Response> delete(String path, Map<String, dynamic> body) async {
-    debugPrint("checking connection");
+    developer.log("checking connection");
     if (!(await getConnect())) {
       return http.Response(
         json.encode({
@@ -210,13 +210,13 @@ class ApiService extends GetxService {
         408,
       );
     }
-    debugPrint('**** delete request : $path ****');
-    debugPrint('body : $body');
+    developer.log('**** delete request : $path ****');
+    developer.log('body : $body');
     http.Response res;
     try {
       res = await http.delete(Uri.parse(baseUrl + path), headers: getHeaders(), body: jsonEncode(body));
     } catch (e) {
-      debugPrint("delete request timeout : $e");
+      developer.log("delete request timeout : $e");
       // timeoutDialog();
       return http.Response(
         json.encode({
@@ -227,9 +227,9 @@ class ApiService extends GetxService {
         408,
       );
     }
-    debugPrint('status code : ${res.statusCode}');
-    debugPrint('response body : ${res.body}');
-    debugPrint('**** delete request end : $path ****');
+    developer.log('status code : ${res.statusCode}');
+    developer.log('response body : ${res.body}');
+    developer.log('**** delete request end : $path ****');
     if (res.statusCode == 401) {
       var val = await refreshToken();
       if (val) return await delete(path, body);

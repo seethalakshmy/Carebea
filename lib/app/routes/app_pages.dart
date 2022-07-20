@@ -95,7 +95,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.DELIVERY_HOME,
-      page: () => const DeliveryHomeView(),
+      page: () =>  DeliveryHomeView(),
       binding: DeliveryHomeBinding(),
     ),
     GetPage(
