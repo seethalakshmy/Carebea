@@ -1,3 +1,4 @@
+import 'package:carebea/app/modules/home/data/models/home_data_model.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:carebea/app/utils/widgets/order_status_chip.dart';
@@ -6,18 +7,10 @@ import 'package:flutter/material.dart';
 class UpComingDeliveryTile extends StatelessWidget {
   const UpComingDeliveryTile({
     Key? key,
-    required this.orderId,
-    required this.orderStatus,
-    required this.orderStatusColor,
-    required this.title,
-    required this.total,
+    required this.order,
   }) : super(key: key);
 
-  final String orderId;
-  final String orderStatus;
-  final String title;
-  final double total;
-  final Color orderStatusColor;
+  final UpcomingOrdersList order;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +22,13 @@ class UpComingDeliveryTile extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  "Order ID.: #$orderId",
+                  "Order ID.: #${order.orderId}",
                   style: customTheme(context).medium.copyWith(fontSize: 11, color: customTheme(context).secondary),
                 ),
                 const Spacer(),
                 OrderStatusChip(
-                  statusText: orderStatus,
-                  color: orderStatusColor,
+                  statusText: order.status!,
+                  color: customTheme(context).action,
                 ),
                 const SizedBox(width: 2),
                 const Icon(
@@ -52,7 +45,7 @@ class UpComingDeliveryTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  title,
+                  order.shopName!,
                   style: customTheme(context).medium.copyWith(fontSize: 11, color: Colors.black),
                 ),
                 Column(
@@ -64,7 +57,7 @@ class UpComingDeliveryTile extends StatelessWidget {
                       style: customTheme(context).regular.copyWith(fontSize: 10, color: Color(0xff494949)),
                     ),
                     Text(
-                      "₹${total.toStringAsFixed(2)}",
+                      "₹${order.amountTotal!.toStringAsFixed(2)}",
                       style: customTheme(context).medium.copyWith(fontSize: 14, color: Colors.black),
                     ),
                   ],
