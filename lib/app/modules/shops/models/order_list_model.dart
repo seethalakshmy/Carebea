@@ -24,6 +24,7 @@ class OrderListResponse {
 
   Map<String, dynamic> toJson() => _$OrderListResponseToJson(this);
 }
+
 @JsonSerializable()
 class OrderListResult {
   OrderListResult({
@@ -36,25 +37,28 @@ class OrderListResult {
   bool? status;
   String? message;
   List<History>? history;
+  @JsonKey(name: "filter_vals")
   FilterVals? filterVals;
 
   factory OrderListResult.fromJson(Map<String, dynamic> json) => _$OrderListResultFromJson(json);
 
   Map<String, dynamic> toJson() => _$OrderListResultToJson(this);
 }
+
 @JsonSerializable()
 class FilterVals {
   FilterVals({
     this.date,
   });
 
+  @JsonKey(name: "Date")
   List<Date>? date;
 
-  factory FilterVals.fromJson(Map<String, dynamic> json) =>
-      _$FilterValsFromJson(json);
+  factory FilterVals.fromJson(Map<String, dynamic> json) => _$FilterValsFromJson(json);
 
   Map<String, dynamic> toJson() => _$FilterValsToJson(this);
 }
+
 @JsonSerializable()
 class Date {
   Date({
@@ -65,11 +69,11 @@ class Date {
   int? id;
   String? name;
 
-  factory Date.fromJson(Map<String, dynamic> json) =>
-      _$DateFromJson(json);
+  factory Date.fromJson(Map<String, dynamic> json) => _$DateFromJson(json);
 
   Map<String, dynamic> toJson() => _$DateToJson(this);
 }
+
 @JsonSerializable()
 class History {
   History({
@@ -109,11 +113,11 @@ class History {
   @JsonKey(name: 'product_list')
   List<ProductList>? productList;
 
-  factory History.fromJson(Map<String, dynamic> json) =>
-      _$HistoryFromJson(json);
+  factory History.fromJson(Map<String, dynamic> json) => _$HistoryFromJson(json);
 
   Map<String, dynamic> toJson() => _$HistoryToJson(this);
 }
+
 @JsonSerializable()
 class ProductList {
   ProductList({
@@ -169,8 +173,7 @@ class ProductList {
   @JsonKey(name: 'date_order')
   DateTime? dateOrder;
 
-  factory ProductList.fromJson(Map<String, dynamic> json) =>
-      _$ProductListFromJson(json);
+  factory ProductList.fromJson(Map<String, dynamic> json) => _$ProductListFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductListToJson(this);
 }

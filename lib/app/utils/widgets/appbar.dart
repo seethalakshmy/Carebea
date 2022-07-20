@@ -4,7 +4,7 @@ import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/widgets/scanner.dart';
 import 'package:flutter/material.dart';
 
-AppBar appBar(BuildContext context, {VoidCallback? onScanned, bool showScanner = false, bool showProfile = false}) {
+AppBar appBar(BuildContext context, {ValueChanged<String>? onScanned, bool showScanner = false, bool showProfile = false}) {
   if (showScanner && onScanned == null) {
     throw "for showing scanner it requires onScanned not be null";
   }

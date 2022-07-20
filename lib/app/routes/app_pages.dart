@@ -1,3 +1,4 @@
+import 'package:carebea/app/modules/create_order/views/shop_details_view.dart';
 import 'package:carebea/app/modules/forgot_password/views/new_password_view.dart';
 import 'package:get/get.dart';
 
@@ -41,86 +42,90 @@ class AppPages {
 
   static final routes = [
     GetPage(
-      name: _Paths.HOME,
+      name: Routes.HOME,
       page: () => const HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
-      name: _Paths.LOGIN,
+      name: Routes.LOGIN,
       page: () => LoginView(),
       binding: LoginBinding(),
     ),
     GetPage(
-      name: _Paths.APP_START_UP,
+      name: Routes.APP_START_UP,
       page: () => AppStartUpView(),
       binding: AppStartUpBinding(),
     ),
     GetPage(
-      name: _Paths.DASHBOARD,
+      name: Routes.DASHBOARD,
       page: () => const DashboardView(),
       binding: DashboardBinding(),
       children: [
         GetPage(
-          name: _Paths.SHOPS,
-          page: () =>  ListShops(),
+          name: Routes.SHOPS,
+          page: () => ListShops(),
           binding: ShopsBinding(),
         ),
       ],
     ),
     GetPage(
-      name: _Paths.ORDERS,
+      name: Routes.ORDERS,
       page: () => const OrdersView(),
       binding: OrdersBinding(),
     ),
     GetPage(
-      name: _Paths.PROFILE,
-      page: () => const ProfileView(),
+      name: Routes.PROFILE,
+      page: () => ProfileView(),
       binding: ProfileBinding(),
     ),
     GetPage(
-      name: _Paths.ADD_SHOP,
-      page: () =>  AddShopView(),
+      name: Routes.ADD_SHOP,
+      page: () => AddShopView(),
       binding: AddShopBinding(),
     ),
     GetPage(
-      name: _Paths.ROUTE_PAGE,
+      name: Routes.ROUTE_PAGE,
       page: () => const RoutePageView(),
       binding: RoutePageBinding(),
     ),
     GetPage(
-      name: _Paths.DELIVERY_INVOICE_DETAILS,
+      name: Routes.DELIVERY_INVOICE_DETAILS,
       page: () => const DeliveryInvoiceDetailsView(),
       binding: DeliveryInvoiceDetailsBinding(),
     ),
     GetPage(
-      name: _Paths.DELIVERY_HOME,
+      name: Routes.DELIVERY_HOME,
       page: () => const DeliveryHomeView(),
       binding: DeliveryHomeBinding(),
     ),
     GetPage(
-      name: _Paths.CREATE_ORDER,
+      name: Routes.CREATE_ORDER,
       page: () => CreateOrderView(),
       binding: CreateOrderBinding(),
     ),
     GetPage(
-      name: _Paths.ORDER_HISTORY_DETAILS,
+      name: Routes.ORDER_HISTORY_DETAILS,
       page: () => const OrderHistoryDetailsView(),
       binding: OrderHistoryDetailsBinding(),
     ),
     GetPage(
-      name: _Paths.ORDER_DETAILS_DELIVERY,
+      name: Routes.ORDER_DETAILS_DELIVERY,
       page: () => const OrderDetailsDeliveryView(),
       binding: OrderDetailsDeliveryBinding(),
     ),
     GetPage(
-      name: _Paths.FORGOT_PASSWORD,
+      name: Routes.FORGOT_PASSWORD,
       page: () => const ForgotPasswordView(),
       binding: ForgotPasswordBinding(),
     ),
     GetPage(
-      name: _Paths.NEW_PASSWORD,
+      name: Routes.NEW_PASSWORD,
       page: () => const NewPasswordView(),
       binding: ForgotPasswordBinding(),
+    ),
+    GetPage(
+      name: Routes.CREATE_ORDER_SHOP_DETAILS,
+      page: () => const ShopDetailsView(),
     ),
   ];
 }

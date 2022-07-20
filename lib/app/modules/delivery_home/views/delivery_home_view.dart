@@ -17,7 +17,7 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appBar(context, showProfile: true, showScanner: true, onScanned: () {}),
+        appBar: appBar(context, showProfile: true, showScanner: true, onScanned: (val) {}),
         // appBar: AppBar(
         //   title: Image.asset(
         //     Assets.assetsLogo,

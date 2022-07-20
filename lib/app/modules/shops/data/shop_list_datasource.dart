@@ -8,19 +8,9 @@ import 'package:http/http.dart' as http;
 import '../../../core/services/api_service.dart';
 import 'dart:developer' as developer;
 
-import '../models/order_list_model.dart';
-
-
-
 class ShopDataSource {
   ApiService apiService = Get.find();
 
-
-
-
-
-
-  
   Future<ShopListResponse> shopList(
       {required int salesPersonId,
       int? shopId,
@@ -29,24 +19,23 @@ class ShopDataSource {
       String? name,
       String? phone,
       String? localArea}) async {
-    var response = await http.post(Uri.parse('${apiService.baseUrl}list-shops'),
-
-        body:json.encode( {'sales_person_id':salesPersonId,'shop_id':shopId,'filter_name':filterName,'filter_id':filterId,'name':name,'phone':phone,'local_area':localArea}),
-        headers: apiService.getHeaders());
-    developer.log(" url----${(Uri.parse('${apiService.baseUrl}list-shops'))}");
-
-    print("listShops response statusCode ${response.statusCode} ");
-    print("listShops response body  ${response.body}");
-    print("listShops response header ${apiService.getHeaders()}");
+    var response = await apiService.post(
+      'list-shops',
+      {
+        'sales_person_id': salesPersonId,
+        'shop_id': shopId,
+        'filter_name': filterName,
+        'filter_id': filterId,
+        'name': name,
+        'phone': phone,
+        'local_area': localArea
+      },
+    );
+    ;
     if (response.statusCode == 200) {
       return ShopListResponse.fromJson(json.decode(response.body));
     } else {
       return ShopListResponse(shopListResult: ShopListResult(status: false));
     }
   }
-
-
-
-
-
 }

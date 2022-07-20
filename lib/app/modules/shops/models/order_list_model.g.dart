@@ -29,9 +29,9 @@ OrderListResult _$OrderListResultFromJson(Map<String, dynamic> json) =>
       history: (json['history'] as List<dynamic>?)
           ?.map((e) => History.fromJson(e as Map<String, dynamic>))
           .toList(),
-      filterVals: json['filterVals'] == null
+      filterVals: json['filter_vals'] == null
           ? null
-          : FilterVals.fromJson(json['filterVals'] as Map<String, dynamic>),
+          : FilterVals.fromJson(json['filter_vals'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$OrderListResultToJson(OrderListResult instance) =>
@@ -39,18 +39,18 @@ Map<String, dynamic> _$OrderListResultToJson(OrderListResult instance) =>
       'status': instance.status,
       'message': instance.message,
       'history': instance.history,
-      'filterVals': instance.filterVals,
+      'filter_vals': instance.filterVals,
     };
 
 FilterVals _$FilterValsFromJson(Map<String, dynamic> json) => FilterVals(
-      date: (json['date'] as List<dynamic>?)
+      date: (json['Date'] as List<dynamic>?)
           ?.map((e) => Date.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$FilterValsToJson(FilterVals instance) =>
     <String, dynamic>{
-      'date': instance.date,
+      'Date': instance.date,
     };
 
 Date _$DateFromJson(Map<String, dynamic> json) => Date(

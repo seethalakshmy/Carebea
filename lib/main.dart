@@ -18,14 +18,12 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   cloudMessaging.backgroundMessageHandler(message);
 }
 
-void main()async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPrefs().init();
 
-
   await Firebase.initializeApp();
   cloudMessaging.initMessaging();
-
 
   ///for foreground
 
@@ -52,7 +50,8 @@ void main()async {
             action: Color(0xff1CA645),
             cardBackground: Color(0xffFFF1F1),
             shadowColor: Color(0x1A000000),
-      textFormFieldColor:Color(0xffEFEFEF),
+            textFormFieldColor: Color(0xffEFEFEF),
+            popupButtonColor: Color(0xff0098BA),
             medium: TextStyle(
               fontFamily: "Poppins",
               fontWeight: FontWeight.w500,
