@@ -12,9 +12,8 @@ import 'package:get/get.dart';
 import '../models/shop_model.dart';
 
 class ShopDetails extends StatefulWidget {
-  ShopDetails({Key? key, this.shopId, this.shopDetails}) : super(key: key);
+  ShopDetails({Key? key, this.shopId}) : super(key: key);
   final int? shopId;
-  ShopList? shopDetails;
 
   @override
   State<ShopDetails> createState() => _ShopDetailsState();
@@ -27,7 +26,7 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
 
   @override
   void initState() {
-    shopsController.fetchOrders('Upcoming', widget.shopId!);
+    shopsController.fetchShop(widget.shopId);
     tabController1 = TabController(length: 2, vsync: this);
     super.initState();
   }
@@ -40,6 +39,7 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
           if (shopsController.isShopDetailsLoading.value) {
             return Center(child: circularProgressIndicator(context));
           }
+          var shopDetails = shopsController.shop;
           return ListView(
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
@@ -80,12 +80,12 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.shopDetails!.name!,
+                          shopDetails!.name!,
                           // 'Trinity Shop',
                           style: customTheme(context).medium.copyWith(fontSize: 14),
                         ),
                         Text(
-                          "GST no: ${widget.shopDetails!.gstNo!}",
+                          "GST no: ${shopDetails.gstNo!}",
                           // 'GST no: 66998964579898',
                           style: customTheme(context).regular.copyWith(fontSize: 11),
                         ),
@@ -93,7 +93,7 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                     ),
                     InkWell(
                         onTap: () {
-                          Get.toNamed(Routes.ADD_SHOP, arguments: {'isEdit': true, 'shop': widget.shopDetails});
+                          Get.toNamed(Routes.ADD_SHOP, arguments: {'isEdit': true, 'shop': shopDetails});
                         },
                         child: Image.asset(Assets.edit, scale: 3))
                   ],
@@ -118,7 +118,7 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                     Flexible(
                       child: SizedBox(
                         child: Text(
-                          widget.shopDetails!.address!.localArea!,
+                          shopDetails.address!.localArea!,
                           // 'Akshay Nagar 1st Block Cross , Rammurthy Nagar, Bangalore -560016',
                           style: customTheme(context).regular.copyWith(fontSize: 11),
                         ),
@@ -148,7 +148,7 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                               width: 5,
                             ),
                             Text(
-                              widget.shopDetails!.phone!,
+                              shopDetails.phone!,
                               // '+91 6398541236',
                               style: customTheme(context).regular.copyWith(fontSize: 11),
                             ),
@@ -158,7 +158,7 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                           height: 10,
                         ),
                         Text(
-                          'Category: ${widget.shopDetails!.category!}',
+                          'Category: ${shopDetails.category!}',
                           style: customTheme(context).regular.copyWith(fontSize: 11),
                         ),
                       ],
@@ -173,7 +173,7 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                           height: 10,
                         ),
                         Text(
-                          'Credit Balance : ₹${widget.shopDetails!.credBalance!}',
+                          'Credit Balance : ₹${shopDetails.credBalance!}',
                           style: customTheme(context).regular.copyWith(fontSize: 11),
                         ),
                       ],
@@ -229,13 +229,13 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                       tabs: [
                         Tab(
                           child: Text(
-                            'Upcoming Orders(2)',
+                            'Upcoming Orders',
                             style: customTheme(context).medium.copyWith(fontSize: 12),
                           ),
                         ),
                         Tab(
                           child: Text(
-                            'Previous Orders(2)',
+                            'Previous Orders',
                             style: customTheme(context).medium.copyWith(fontSize: 12),
                           ),
                         ),
@@ -249,10 +249,15 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                 height: MediaQuery.of(context).size.height,
                 child: Obx(() {
                   if (shopsController.isOrdersLoading.value) {
-                    return Center(child: circularProgressIndicator(context));
+                    return Align(alignment: Alignment.topCenter, child: circularProgressIndicator(context));
                   }
                   if (shopsController.orderHistory!.isEmpty) {
-                    return Align(alignment: Alignment.topCenter, child: Text('No Orders'));
+                    return Align(
+                        alignment: Alignment.topCenter,
+                        child: Text(
+                          'No Orders Found',
+                          style: customTheme(context).regular,
+                        ));
                   }
                   return TabBarView(controller: tabController1, physics: NeverScrollableScrollPhysics(), children: [
                     _upcomingOrders(),
