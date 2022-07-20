@@ -105,9 +105,15 @@ class History {
   List<dynamic>? imageUrlList;
   @JsonKey(name: 'date_order')
   DateTime? dateOrder;
+  @JsonKey(name: 'delivery_date')
+  DateTime? deliveryDate;
   String? status;
   @JsonKey(name: 'user_address')
   String? userAddress;
+  @JsonKey(name: 'sr_name')
+  String? srName;
+  @JsonKey(name: 'shop_name')
+  String? shopName;
   @JsonKey(name: 'amount_tax')
   double? amountTax;
   @JsonKey(name: 'product_list')
