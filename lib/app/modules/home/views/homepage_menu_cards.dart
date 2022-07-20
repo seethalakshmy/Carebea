@@ -39,10 +39,15 @@ class HomeMenuCards extends StatelessWidget {
               title: "Add new shop",
             ),
           ),
-          HomeMenuIndividual(
-            asseticon: Assets.reportsHomeIcon,
-            gradients: [Color(0xff66DE9D), Color(0xff00B2BE)],
-            title: "Reports",
+          InkWell(
+            onTap: (){
+              Get.toNamed(Routes.DELIVERY_HOME);
+            },
+            child: HomeMenuIndividual(
+              asseticon: Assets.reportsHomeIcon,
+              gradients: [Color(0xff66DE9D), Color(0xff00B2BE)],
+              title: "Reports",
+            ),
           ),
           InkWell(
             onTap: () {

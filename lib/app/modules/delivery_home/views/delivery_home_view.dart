@@ -1,3 +1,4 @@
+import 'package:carebea/app/modules/delivery_home/models/delivery_home_model.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
@@ -14,6 +15,7 @@ import '../controllers/delivery_home_controller.dart';
 
 class DeliveryHomeView extends GetView<DeliveryHomeController> {
    DeliveryHomeView({Key? key}) : super(key: key);
+   DeliveryHomeController deliveryHomeController = DeliveryHomeController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
         //   ],
         // ),
         body: Obx(() {
-          if(!controller.isDeliveryHomePageDataLoaded.value){
+          if(!deliveryHomeController.isDeliveryHomePageDataLoaded.value){
             return CircularProgressIndicator();
           }
           return ListView(
@@ -71,18 +73,18 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
                     HomeTile(
                       asset: Assets.ordersHomeIcon,
                       title: "Total Orders Delivered",
-                      count: 89,
+                      count: controller.deliveryHomePageResponse!.deliveryHomePageResult!.totalOrdersDelivered!,
                       color: Color(0xffF3674F),
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: 10),
-              const Center(
+               Center(
                 child: HomeTile(
                   asset: Assets.ordersHomeIcon,
                   title: "Order History",
-                  count: 87,
+                  count: controller.deliveryHomePageResponse!.deliveryHomePageResult!.orderHistory!,
                   color: Color(0xff00B2BE),
                 ),
               ),
@@ -97,17 +99,30 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Orders to be delivered(2)",
+                      "Orders to be delivered(${controller.deliveryHomePageResponse!.deliveryHomePageResult!.upcomingDeliveryList!.length})",
                       style: customTheme(context).medium.copyWith(fontSize: 14),
                     ),
                     SizedBox(height: 10),
-                    InkWell(
-                        onTap: () {
+                    ListView.separated(
+                      shrinkWrap: true,
+                      itemCount:controller.deliveryHomePageResponse!.deliveryHomePageResult!.upcomingDeliveryList!.length,
+                      separatorBuilder: (_, __) => Container(
+                        height: 1,
+                        color: const Color(0xffE1E1E1),
+                      ),
+                      itemBuilder: (context, index) => InkWell(
+                        onTap: (){
                           Get.toNamed(Routes.ORDER_DETAILS_DELIVERY);
                         },
-                        child: OrderDeliveryCard()),
-                    SizedBox(height: 10),
-                    OrderDeliveryCard()
+                          child: OrderDeliveryCard(order:controller.deliveryHomePageResponse!.deliveryHomePageResult!.upcomingDeliveryList![index])),
+                    ),
+                    // InkWell(
+                    //     onTap: () {
+                    //       Get.toNamed(Routes.ORDER_DETAILS_DELIVERY);
+                    //     },
+                    //     child: OrderDeliveryCard()),
+                    // SizedBox(height: 10),
+                    // OrderDeliveryCard()
                   ],
                 ),
               )
@@ -119,8 +134,9 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
 
 class OrderDeliveryCard extends StatelessWidget {
   const OrderDeliveryCard({
-    Key? key,
+    Key? key, required this.order,
   }) : super(key: key);
+  final UpcomingDeliveryList order;
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +152,7 @@ class OrderDeliveryCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Order ID: #656546',
+                  'Order ID: #${order.orderId}',
                   style: customTheme(context).medium.copyWith(
                       fontSize: 12, color: customTheme(context).secondary),
                 ),
@@ -148,7 +164,7 @@ class OrderDeliveryCard extends StatelessWidget {
                     color: customTheme(context).action.withOpacity(.25),
                   ),
                   child: Text(
-                    'Delivered',
+                    order.status!,
                     style: customTheme(context).medium.copyWith(
                         fontSize: 10, color: customTheme(context).action),
                   ),
@@ -162,7 +178,7 @@ class OrderDeliveryCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
-              'Reach Express',
+              order.shopName!,
               style: customTheme(context).medium.copyWith(fontSize: 12),
             ),
           ),
@@ -205,7 +221,7 @@ class OrderDeliveryCard extends StatelessWidget {
                         fontSize: 11, color: Colors.grey),
                   ),
                   Text(
-                    '₹1245',
+                    '₹${order.amountTotal}',
                     style: customTheme(context).medium.copyWith(fontSize: 14),
                   ),
                 ]),

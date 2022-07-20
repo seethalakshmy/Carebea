@@ -18,7 +18,7 @@ class DeliveryHomePageResponse {
 
   String? jsonrpc;
   dynamic id;
-  @JsonKey(name: 'result')
+  @JsonKey(name:'result')
   DeliveryHomePageResult? deliveryHomePageResult;
 
   factory DeliveryHomePageResponse.fromJson(Map<String, dynamic> json) => _$DeliveryHomePageResponseFromJson(json);

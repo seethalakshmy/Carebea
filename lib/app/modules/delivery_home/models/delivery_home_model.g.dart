@@ -55,7 +55,7 @@ UpcomingDeliveryList _$UpcomingDeliveryListFromJson(
       orderId: json['order_id'] as int?,
       orderName: json['order_name'] as String?,
       shopName: json['shop_name'] as String?,
-      amountTotal: json['amount_total'] as int?,
+      amountTotal: (json['amount_total'] as num?)?.toDouble(),
       status: json['status'] as String?,
     );
 
