@@ -1,6 +1,7 @@
 import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:intl/intl.dart';
 
 ///validate email with regex
 bool validateEmail(String value) {
@@ -92,3 +93,5 @@ String getFullAddress(Address? address) {
 
   return addressString;
 }
+
+String formatDate(DateTime date) => DateFormat(" MM/dd/y").format(date);
