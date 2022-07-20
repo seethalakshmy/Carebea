@@ -38,7 +38,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.APP_START_UP;
+  static const INITIAL = Routes.DELIVERY_HOME;
 
   static final routes = [
     GetPage(
@@ -95,7 +95,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.DELIVERY_HOME,
-      page: () => const DeliveryHomeView(),
+      page: () =>  DeliveryHomeView(),
       binding: DeliveryHomeBinding(),
     ),
     GetPage(
