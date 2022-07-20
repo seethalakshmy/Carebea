@@ -10,10 +10,11 @@ class OrdersController extends GetxController {
   RxBool isFilterClick = false.obs;
   List<History> allOrders = [];
   FilterVals? filterVals;
+  OrderType selectedOrderType = OrderType.previous;
 
   @override
   void onInit() {
-    fetchOrdersList(orderType: 'Previous');
+    fetchOrdersList(orderType: selectedOrderType);
     super.onInit();
   }
 
@@ -27,12 +28,12 @@ class OrdersController extends GetxController {
     super.onClose();
   }
 
-  fetchOrdersList({required String orderType}) async {
+  fetchOrdersList({required OrderType orderType}) async {
     isOrdersLoaded(true);
     allOrders.clear();
     filterSelected("");
-    allorderListResponse = await orderListRepo.allOrdersList(SharedPrefs.getUserId()!, orderType);
-    print('orderType $orderType');
+    selectedOrderType = orderType;
+    allorderListResponse = await orderListRepo.allOrdersList(SharedPrefs.getUserId()!, getOrdertypeString(orderType));
     if (allorderListResponse?.orderListResult?.status ?? false) {
       allOrders = allorderListResponse?.orderListResult?.history ?? [];
       filterVals = allorderListResponse!.orderListResult!.filterVals;
@@ -44,11 +45,12 @@ class OrdersController extends GetxController {
   }
 
   RxString filterSelected = "".obs;
-  filterOrders(String filterName, int filterId, String orderType) async {
+  filterOrders(String filterName, int filterId) async {
     allOrders.clear();
     isFilterClick(true);
     filterSelected("$filterName-$filterId");
-    var orderResponse = await orderListRepo.allOrdersList(SharedPrefs.getUserId()!, orderType,
+    var orderResponse = await orderListRepo.allOrdersList(
+        SharedPrefs.getUserId()!, getOrdertypeString(selectedOrderType),
         filtername: filterName, filterid: filterId.toString());
     if (orderResponse.orderListResult?.status ?? false) {
       allOrders = orderResponse.orderListResult?.history ?? [];
@@ -56,7 +58,16 @@ class OrdersController extends GetxController {
     isFilterClick(false);
   }
 
-  clearFilters(String orderType) async {
-    await fetchOrdersList(orderType: orderType);
+  clearFilters() async {
+    await fetchOrdersList(orderType: selectedOrderType);
   }
+}
+
+enum OrderType { previous, upcoming }
+
+String getOrdertypeString(OrderType orderType) {
+  if (orderType == OrderType.previous) {
+    return "Previous";
+  }
+  return "Upcoming";
 }

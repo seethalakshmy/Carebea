@@ -32,7 +32,7 @@ class ListShops extends GetView<ShopsController> {
               if (shopsController.isLoading.value) {
                 return const Center(child: CircularProgressIndicator());
               }
-              if (shopsController.shopList!.isEmpty) {
+              if (shopsController.shopList.isEmpty) {
                 return Center(child: Text("No shops found!"));
               }
               return SingleChildScrollView(
@@ -142,7 +142,7 @@ class ListShops extends GetView<ShopsController> {
                           if (shopsController.isFilterClick.value) {
                             return const Center(child: CircularProgressIndicator());
                           }
-                          if (shopsController.shopList!.isEmpty) {
+                          if (shopsController.shopList.isEmpty) {
                             return Container(
                                 alignment: Alignment.topCenter,
                                 width: double.infinity,
@@ -153,11 +153,11 @@ class ListShops extends GetView<ShopsController> {
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               // itemCount: 2,
-                              itemCount: shopsController.shopList!.length,
+                              itemCount: shopsController.shopList.length,
                               itemBuilder: (context, index) {
                                 return Column(
                                   children: [
-                                    ShopListTile(shop: shopsController.shopList![index]),
+                                    ShopListTile(shop: shopsController.shopList[index]),
                                     SizedBox(
                                       height: 20,
                                     )

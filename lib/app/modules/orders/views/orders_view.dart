@@ -23,7 +23,13 @@ class OrdersView extends StatefulWidget {
 class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateMixin {
   static List<String> category = ['Date', 'Today', 'This week', 'This month', 'This year'];
   OrdersController ordersController = Get.put(OrdersController());
-  TabController? tabController1;
+  late TabController tabController1;
+
+  @override
+  void initState() {
+    tabController1 = TabController(length: 2, vsync: this);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +56,11 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                   child: TabBar(
                       controller: tabController1,
                       onTap: (index) {
-                        tabController1!.animateTo(index);
+                        tabController1.animateTo(index);
                         if (index == 0) {
-                          ordersController.fetchOrdersList(orderType: 'Previous');
+                          ordersController.fetchOrdersList(orderType: OrderType.previous);
                         } else {
-                          ordersController.fetchOrdersList(orderType: 'Upcoming');
+                          ordersController.fetchOrdersList(orderType: OrderType.upcoming);
                         }
                       },
                       unselectedLabelColor: Colors.black,
@@ -108,7 +114,10 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                               showBorder: false,
                             ),
                             ...(ordersController.filterVals?.date ?? [])
-                                .map((e) => customPopupMenuItem<String>(context, name: e.name!))
+                                .map((e) => customPopupMenuItem<String>(context,
+                                    isSelected: ordersController.filterSelected.value == "Date-${e.id}",
+                                    name: e.name!,
+                                    onTap: () => ordersController.filterOrders("Date", e.id!)))
                                 .toList()
                           ];
                         })
@@ -174,16 +183,14 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                 ),
                 Expanded(
                   child: Obx(() {
-                    if (ordersController.isOrdersLoaded.value) {
+                    if (ordersController.isOrdersLoaded.value || ordersController.isFilterClick.value) {
                       return const Center(child: CircularProgressIndicator());
                     }
-                    if (ordersController.allOrders!.isEmpty) {
+                    if (ordersController.allOrders.isEmpty) {
                       return Align(alignment: Alignment.topCenter, child: Text('No Orders'));
                     }
-                    return TabBarView(controller: tabController1, physics: NeverScrollableScrollPhysics(), children: [
-                      _completedOrders(),
-                      _completedOrders(),
-                    ]);
+
+                    return _completedOrders();
                   }),
                 ),
                 SizedBox(
@@ -213,7 +220,7 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
     return ListView.separated(
         separatorBuilder: (_, __) => const SizedBox(height: 16),
         scrollDirection: Axis.vertical,
-        itemCount: ordersController.allOrders!.length,
+        itemCount: ordersController.allOrders.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -221,7 +228,7 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                 onTap: () {
                   Get.to(() => OrderHistoryDetailsView());
                 },
-                child: OrderHistoryTile(orders: ordersController.allOrders![index])),
+                child: OrderHistoryTile(orders: ordersController.allOrders[index])),
           );
         });
   }

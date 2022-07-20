@@ -33,7 +33,7 @@ class DashboardController extends GetxController {
       _shopsController.fetchAllShops();
     }
     if (index == 2) {
-      _ordersController.fetchOrdersList(orderType: "Previous");
+      _ordersController.fetchOrdersList(orderType: OrderType.previous);
     }
     currentScreenIndex.value = index;
   }
