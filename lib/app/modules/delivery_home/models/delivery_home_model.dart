@@ -67,7 +67,7 @@ class UpcomingDeliveryList {
   @JsonKey(name: 'shop_name')
   String? shopName;
   @JsonKey(name: 'amount_total')
-  int? amountTotal;
+  double? amountTotal;
   String? status;
 
   factory UpcomingDeliveryList.fromJson(Map<String, dynamic> json) => _$UpcomingDeliveryListFromJson(json);
