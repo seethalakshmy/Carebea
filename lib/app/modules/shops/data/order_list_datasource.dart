@@ -11,11 +11,12 @@ import 'dart:developer' as developer;
 import '../models/order_list_model.dart';
 
 class OrderDataSource {
-  ApiService apiService = Get.find();
+  ApiService apiService = ApiService();
 
   Future<OrderListResponse> orderList(
       {required int salesPersonId,
-      required String orderType,
+       String? orderType,
+        int? orderId,
       int? shopId,
       String? filterId,
       String? filterName}) async {
@@ -29,8 +30,14 @@ class OrderDataSource {
     if (filterName != null) {
       body.addAll({"filter_name": filterName, "filter_id": filterId!});
     }
-    var response = await http.post(Uri.parse('${apiService.baseUrl}list-orders'),
-        body: json.encode(body), headers: apiService.getHeaders());
+    if(orderId != null){
+      body.addAll({'order_id': orderId});
+    }
+    if(orderType != null){
+      body.addAll({'order_type': orderType});
+    }
+    var response = await apiService.post('list-orders',
+       body);
     developer.log(" url----${(Uri.parse('${apiService.baseUrl}list-orders'))}");
 
     print("listOrders response statusCode ${response.statusCode} ");
