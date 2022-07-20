@@ -1,5 +1,6 @@
 import 'package:carebea/app/modules/shops/models/order_list_model.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
+import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -20,7 +21,7 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
         appBar: appBar(context),
         body: Obx(() {
           if(controller.isOrderDetailsLoaded.value){
-            return CircularProgressIndicator();
+            return Center(child: circularProgressIndicator(context));
           }
           var orders = controller.orderListDetailResponse!.orderListResult!.history!.first;
           return SingleChildScrollView(

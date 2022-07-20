@@ -3,6 +3,7 @@ import 'package:carebea/app/modules/login/views/login_view.dart';
 import 'package:carebea/app/modules/profile/widgets/logout_button.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/shared_prefs.dart';
+import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -23,7 +24,7 @@ class ProfileView extends GetView<ProfileController> {
       if(profileController.isProfileLoaded.value){
         return Align(
           alignment: Alignment.center,
-            child: CircularProgressIndicator());
+            child: circularProgressIndicator(context));
       }
       return Scaffold(
           appBar: appBar(context),

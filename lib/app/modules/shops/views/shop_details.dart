@@ -4,6 +4,7 @@ import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
+import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,15 +20,14 @@ class ShopDetails extends StatefulWidget {
   State<ShopDetails> createState() => _ShopDetailsState();
 }
 
-class _ShopDetailsState extends State<ShopDetails>
-    with SingleTickerProviderStateMixin {
+class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStateMixin {
   ShopsController shopsController = Get.find();
   TabController? tabController1;
   List<String> products = ['Eccence hande wash', 'Eccence face wash'];
 
   @override
   void initState() {
-   shopsController.fetchOrders('Upcoming',widget.shopId!);
+    shopsController.fetchOrders('Upcoming', widget.shopId!);
     tabController1 = TabController(length: 2, vsync: this);
     super.initState();
   }
@@ -38,7 +38,7 @@ class _ShopDetailsState extends State<ShopDetails>
         appBar: appBar(context),
         body: Obx(() {
           if (shopsController.isShopDetailsLoading.value) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(child: circularProgressIndicator(context));
           }
           return ListView(
             shrinkWrap: true,
@@ -82,22 +82,18 @@ class _ShopDetailsState extends State<ShopDetails>
                         Text(
                           widget.shopDetails!.name!,
                           // 'Trinity Shop',
-                          style: customTheme(context).medium.copyWith(
-                              fontSize: 14),
+                          style: customTheme(context).medium.copyWith(fontSize: 14),
                         ),
                         Text(
                           "GST no: ${widget.shopDetails!.gstNo!}",
                           // 'GST no: 66998964579898',
-                          style: customTheme(context).regular.copyWith(
-                              fontSize: 11),
+                          style: customTheme(context).regular.copyWith(fontSize: 11),
                         ),
                       ],
                     ),
                     InkWell(
                         onTap: () {
-                          Get.toNamed(Routes.ADD_SHOP,
-                              arguments: {'isEdit': true, 'shop': widget
-                                  .shopDetails});
+                          Get.toNamed(Routes.ADD_SHOP, arguments: {'isEdit': true, 'shop': widget.shopDetails});
                         },
                         child: Image.asset(Assets.edit, scale: 3))
                   ],
@@ -124,8 +120,7 @@ class _ShopDetailsState extends State<ShopDetails>
                         child: Text(
                           widget.shopDetails!.address!.localArea!,
                           // 'Akshay Nagar 1st Block Cross , Rammurthy Nagar, Bangalore -560016',
-                          style: customTheme(context).regular.copyWith(
-                              fontSize: 11),
+                          style: customTheme(context).regular.copyWith(fontSize: 11),
                         ),
                       ),
                     ),
@@ -155,8 +150,7 @@ class _ShopDetailsState extends State<ShopDetails>
                             Text(
                               widget.shopDetails!.phone!,
                               // '+91 6398541236',
-                              style: customTheme(context).regular.copyWith(
-                                  fontSize: 11),
+                              style: customTheme(context).regular.copyWith(fontSize: 11),
                             ),
                           ],
                         ),
@@ -165,8 +159,7 @@ class _ShopDetailsState extends State<ShopDetails>
                         ),
                         Text(
                           'Category: ${widget.shopDetails!.category!}',
-                          style: customTheme(context).regular.copyWith(
-                              fontSize: 11),
+                          style: customTheme(context).regular.copyWith(fontSize: 11),
                         ),
                       ],
                     ),
@@ -174,17 +167,14 @@ class _ShopDetailsState extends State<ShopDetails>
                       children: [
                         Text(
                           'Branch : CareBae branch',
-                          style: customTheme(context).regular.copyWith(
-                              fontSize: 11),
+                          style: customTheme(context).regular.copyWith(fontSize: 11),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         Text(
-                          'Credit Balance : ₹${widget.shopDetails!
-                              .credBalance!}',
-                          style: customTheme(context).regular.copyWith(
-                              fontSize: 11),
+                          'Credit Balance : ₹${widget.shopDetails!.credBalance!}',
+                          style: customTheme(context).regular.copyWith(fontSize: 11),
                         ),
                       ],
                     ),
@@ -231,52 +221,40 @@ class _ShopDetailsState extends State<ShopDetails>
                       onTap: (index) {
                         tabController1!.animateTo(index);
                         if (index == 0) {
-                          shopsController.fetchOrders('Upcoming',widget.shopId!);
-                        }
-                        else{
-                          shopsController.fetchOrders('Previous',widget.shopId!);
-
+                          shopsController.fetchOrders('Upcoming', widget.shopId!);
+                        } else {
+                          shopsController.fetchOrders('Previous', widget.shopId!);
                         }
                       },
                       tabs: [
                         Tab(
                           child: Text(
                             'Upcoming Orders(2)',
-                            style: customTheme(context).medium.copyWith(
-                                fontSize: 12),
+                            style: customTheme(context).medium.copyWith(fontSize: 12),
                           ),
                         ),
                         Tab(
                           child: Text(
                             'Previous Orders(2)',
-                            style: customTheme(context).medium.copyWith(
-                                fontSize: 12),
+                            style: customTheme(context).medium.copyWith(fontSize: 12),
                           ),
                         ),
                       ],
                     ),
-                  )
-              ),
+                  )),
               const SizedBox(
                 height: 20,
               ),
               SizedBox(
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height,
+                height: MediaQuery.of(context).size.height,
                 child: Obx(() {
                   if (shopsController.isOrdersLoading.value) {
-                    return const Center(child: CircularProgressIndicator());
+                    return Center(child: circularProgressIndicator(context));
                   }
-                  if(shopsController.orderHistory!.isEmpty){
-                    return Align(
-                      alignment: Alignment.topCenter,
-                        child: Text('No Orders'));
+                  if (shopsController.orderHistory!.isEmpty) {
+                    return Align(alignment: Alignment.topCenter, child: Text('No Orders'));
                   }
-                  return TabBarView(controller: tabController1,
-                      physics: NeverScrollableScrollPhysics(),
-                      children: [
+                  return TabBarView(controller: tabController1, physics: NeverScrollableScrollPhysics(), children: [
                     _upcomingOrders(),
                     _previousOrders(),
                   ]);
@@ -289,28 +267,28 @@ class _ShopDetailsState extends State<ShopDetails>
 
   ListView _previousOrders() {
     return ListView.separated(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-        separatorBuilder: (_, __) => const SizedBox(height: 16),
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: shopsController.orderHistory!.length,
-        itemBuilder: (context, index) {
-          return OrderTile(
-              order: shopsController.orderHistory![index],
-          );
-        });
-  }
-
-  ListView _upcomingOrders() {
-    return ListView.separated(
-      shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
         separatorBuilder: (_, __) => const SizedBox(height: 16),
         physics: const NeverScrollableScrollPhysics(),
         itemCount: shopsController.orderHistory!.length,
         itemBuilder: (context, index) {
           return OrderTile(
             order: shopsController.orderHistory![index],
-             );
+          );
+        });
+  }
+
+  ListView _upcomingOrders() {
+    return ListView.separated(
+        shrinkWrap: true,
+        separatorBuilder: (_, __) => const SizedBox(height: 16),
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: shopsController.orderHistory!.length,
+        itemBuilder: (context, index) {
+          return OrderTile(
+            order: shopsController.orderHistory![index],
+          );
         });
   }
 }

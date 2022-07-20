@@ -5,6 +5,7 @@ import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
+import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,9 +34,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
                     width: double.infinity,
                     height: Get.size.height * .4,
                     alignment: Alignment.center,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation(customTheme(context).primary),
-                    ),
+                    child: circularProgressIndicator(context),
                   );
                 }
                 return CustomCard(
@@ -58,6 +57,8 @@ class CreateOrderView extends GetView<CreateOrderController> {
           )),
     );
   }
+
+
 
   Padding _search(BuildContext context) {
     return Padding(

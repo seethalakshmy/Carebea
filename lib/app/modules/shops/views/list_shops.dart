@@ -5,6 +5,7 @@ import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/global_state_controller.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
+import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:carebea/app/utils/widgets/custom_popupmenuitem.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class ListShops extends GetView<ShopsController> {
             floatingActionButton: _addNewShopButton(context),
             body: Obx(() {
               if (shopsController.isLoading.value) {
-                return const Center(child: CircularProgressIndicator());
+                return  Center(child: circularProgressIndicator(context));
               }
               if (shopsController.shopList.isEmpty) {
                 return Center(child: Text("No shops found!"));
@@ -140,7 +141,7 @@ class ListShops extends GetView<ShopsController> {
                         height: MediaQuery.of(context).size.height,
                         child: Obx(() {
                           if (shopsController.isFilterClick.value) {
-                            return const Center(child: CircularProgressIndicator());
+                            return  Center(child: circularProgressIndicator(context));
                           }
                           if (shopsController.shopList.isEmpty) {
                             return Container(
