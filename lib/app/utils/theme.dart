@@ -7,20 +7,20 @@ class CustomTheme extends ThemeExtension<CustomTheme> {
   final Color cardBackground;
   final Color shadowColor;
   final Color textFormFieldColor;
+  final Color popupButtonColor;
   final TextStyle medium;
   final TextStyle regular;
 
-  const CustomTheme({
-    required this.primary,
-    required this.secondary,
-    required this.action,
-    required this.cardBackground,
-    required this.shadowColor,
-    required this.medium,
-    required this.regular,
-    required this.textFormFieldColor
-     
-  });
+  const CustomTheme(
+      {required this.primary,
+      required this.secondary,
+      required this.action,
+      required this.cardBackground,
+      required this.shadowColor,
+      required this.medium,
+      required this.regular,
+      required this.textFormFieldColor,
+      required this.popupButtonColor});
 
   @override
   CustomTheme copyWith({
@@ -30,8 +30,9 @@ class CustomTheme extends ThemeExtension<CustomTheme> {
     Color? cardBackground,
     Color? shadowColor,
     Color? textFormFieldColor,
-     TextStyle? medium,
-  TextStyle? regular,
+    Color? popupButtonColor,
+    TextStyle? medium,
+    TextStyle? regular,
   }) =>
       CustomTheme(
         primary: primary ?? this.primary,
@@ -42,6 +43,7 @@ class CustomTheme extends ThemeExtension<CustomTheme> {
         textFormFieldColor: textFormFieldColor ?? this.textFormFieldColor,
         medium: medium ?? this.medium,
         regular: regular ?? this.regular,
+        popupButtonColor: popupButtonColor ?? this.popupButtonColor,
       );
 
   @override
@@ -55,7 +57,8 @@ class CustomTheme extends ThemeExtension<CustomTheme> {
       action: Color.lerp(action, other.action, t)!,
       cardBackground: Color.lerp(cardBackground, other.cardBackground, t)!,
       shadowColor: Color.lerp(shadowColor, other.shadowColor, t)!,
-        textFormFieldColor:Color.lerp(textFormFieldColor, other.textFormFieldColor, t)!,
+      textFormFieldColor: Color.lerp(textFormFieldColor, other.textFormFieldColor, t)!,
+      popupButtonColor: Color.lerp(popupButtonColor, other.popupButtonColor, t)!,
       medium: TextStyle.lerp(medium, other.medium, t)!,
       regular: TextStyle.lerp(regular, other.regular, t)!,
     );

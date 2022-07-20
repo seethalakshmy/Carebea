@@ -1,4 +1,7 @@
+import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/modules/create_order/views/shop_details_view.dart';
+import 'package:carebea/app/modules/shops/models/shop_model.dart';
+import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
@@ -12,12 +15,11 @@ import 'package:get/get.dart';
 import '../controllers/create_order_controller.dart';
 
 class CreateOrderView extends GetView<CreateOrderController> {
-  CreateOrderView({Key? key}) : super(key: key);
-  CreateOrderController createOrderController = Get.find();
+  const CreateOrderView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => createOrderController.onWillpopClose(),
+      onWillPop: () => controller.onWillpopClose(),
       child: Scaffold(
           appBar: appBar(context),
           body: Column(
@@ -25,21 +27,33 @@ class CreateOrderView extends GetView<CreateOrderController> {
             children: [
               _title(context),
               _search(context),
-              CustomCard(
-                hasShadow: false,
-                margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 11),
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                color: const Color(0xffFAFAFA),
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: 5,
-                  separatorBuilder: (_, __) => Container(
-                    height: 1,
-                    color: const Color(0xffE1E1E1),
+              Obx(() {
+                if (controller.isLoading.value) {
+                  return Container(
+                    width: double.infinity,
+                    height: Get.size.height * .4,
+                    alignment: Alignment.center,
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation(customTheme(context).primary),
+                    ),
+                  );
+                }
+                return CustomCard(
+                  hasShadow: false,
+                  margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 11),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  color: const Color(0xffFAFAFA),
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: controller.shopList.length,
+                    separatorBuilder: (_, __) => Container(
+                      height: 1,
+                      color: const Color(0xffE1E1E1),
+                    ),
+                    itemBuilder: (context, index) => ShopTile(shop: controller.shopList[index]),
                   ),
-                  itemBuilder: (context, index) => const ShopTile(),
-                ),
-              ),
+                );
+              }),
             ],
           )),
     );
@@ -97,26 +111,27 @@ class CreateOrderView extends GetView<CreateOrderController> {
 class ShopTile extends StatelessWidget {
   const ShopTile({
     Key? key,
+    required this.shop,
   }) : super(key: key);
-
+  final ShopList shop;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: InkWell(
         onTap: () {
-          Get.to(() => ShopDetailsView());
+          Get.toNamed(Routes.CREATE_ORDER_SHOP_DETAILS, arguments: {"shop": shop});
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "Trinity Shop",
+              shop.name!,
               style: customTheme(context).medium.copyWith(fontSize: 14, color: Colors.black),
             ),
             Text(
-              "Akshya Nagar 1st Block 1st Cross, Rammurth",
+              getFullAddress(shop.address),
               style: customTheme(context).regular.copyWith(fontSize: 13, color: Colors.black),
               overflow: TextOverflow.ellipsis,
             ),

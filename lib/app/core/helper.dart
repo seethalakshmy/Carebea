@@ -1,4 +1,4 @@
-
+import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
@@ -58,4 +58,37 @@ onPageChanged(
     debugPrint('stoploading : $stopLoading, $pageNumber');
     function();
   }
+}
+
+String getFullAddress(Address? address) {
+  var addressString = "";
+  if ((address?.localArea ?? "").isNotEmpty) {
+    addressString += address!.localArea!;
+  }
+  if ((address?.district ?? "").isNotEmpty) {
+    if (addressString.isNotEmpty) {
+      addressString += ", ";
+    }
+    addressString += address!.district!;
+  }
+  if ((address?.stateName ?? "").isNotEmpty) {
+    if (addressString.isNotEmpty) {
+      addressString += ", ";
+    }
+    addressString += address!.stateName!;
+  }
+  if ((address?.countryName ?? "").isNotEmpty) {
+    if (addressString.isNotEmpty) {
+      addressString += ", ";
+    }
+    addressString += address!.countryName!;
+  }
+  if ((address?.zip ?? "").isNotEmpty) {
+    if (addressString.isNotEmpty) {
+      addressString += " - ";
+    }
+    addressString += address!.zip!;
+  }
+
+  return addressString;
 }
