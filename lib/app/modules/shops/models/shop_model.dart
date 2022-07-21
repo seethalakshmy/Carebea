@@ -110,7 +110,7 @@ class ShopList {
   String? gstNo;
   Address? address;
   @JsonKey(name: 'cred_balance')
-  int? credBalance;
+  double? credBalance;
   double? latitude;
   double? longitude;
 

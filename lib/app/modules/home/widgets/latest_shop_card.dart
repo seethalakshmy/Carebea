@@ -1,3 +1,4 @@
+import 'package:carebea/app/modules/home/data/models/home_data_model.dart';
 import 'package:carebea/app/modules/shops/views/shop_details.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
@@ -5,19 +6,17 @@ import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LatestShopListTile extends StatefulWidget {
-  const LatestShopListTile({Key? key}) : super(key: key);
+class LatestShopListTile extends StatelessWidget {
+  const LatestShopListTile({Key? key, required this.shop}) : super(key: key);
+  final LatestShopList shop;
 
-  @override
-  State<LatestShopListTile> createState() => _LatestShopListTileState();
-}
-
-class _LatestShopListTileState extends State<LatestShopListTile> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() =>  ShopDetails());
+        Get.to(() => ShopDetails(
+              shopId: shop.id,
+            ));
       },
       child: CustomCard(
         width: MediaQuery.of(context).size.width,
@@ -26,13 +25,14 @@ class _LatestShopListTileState extends State<LatestShopListTile> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Trinity Shop',
+              shop.name!,
               style: customTheme(context).medium.copyWith(fontSize: 13),
             ),
             const SizedBox(
               height: 6,
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(
                   Assets.assetsLocationFilled,
@@ -41,9 +41,11 @@ class _LatestShopListTileState extends State<LatestShopListTile> {
                 const SizedBox(
                   width: 5,
                 ),
-                Text(
-                  'Akshay Nagar 1st Block Cross,Rammurthy',
-                  style: customTheme(context).regular.copyWith(fontSize: 11),
+                Flexible(
+                  child: Text(
+                    shop.userAddress!.split("\n").join(" "),
+                    style: customTheme(context).regular.copyWith(fontSize: 11),
+                  ),
                 ),
               ],
             ),
@@ -57,7 +59,7 @@ class _LatestShopListTileState extends State<LatestShopListTile> {
                   width: 5,
                 ),
                 Text(
-                  '+91 6398541236',
+                  '+91 ${shop.phone}',
                   style: customTheme(context).regular.copyWith(fontSize: 11),
                 ),
               ],

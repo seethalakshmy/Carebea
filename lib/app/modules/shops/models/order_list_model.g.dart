@@ -54,7 +54,6 @@ History _$HistoryFromJson(Map<String, dynamic> json) => History(
       id: json['id'] as int?,
       name: json['name'] as String?,
       amountUntaxed: (json['amount_untaxed'] as num?)?.toDouble(),
-      productTotal: (json['product_total'] as num?)?.toDouble(),
       amountTotal: (json['amount_total'] as num?)?.toDouble(),
       totalLines: json['total_lines'] as int?,
       orderId: json['order_id'] as int?,
@@ -66,18 +65,20 @@ History _$HistoryFromJson(Map<String, dynamic> json) => History(
       productList: (json['product_list'] as List<dynamic>?)
           ?.map((e) => ProductList.fromJson(e as Map<String, dynamic>))
           .toList(),
-    )
-      ..deliveryDate = json['delivery_date'] == null || json['delivery_date'] == "False"
+      deliveryDate: json['delivery_date'] == null || json["delivery_date"] == "False"
           ? null
-          : DateTime.parse(json['delivery_date'] as String)
-      ..srName = json['sr_name'] as String?
-      ..shopName = json['shop_name'] as String?;
+          : DateTime.parse(json['delivery_date'] as String),
+      productTotal: (json['product_total'] as num?)?.toDouble(),
+      shopName: json['shop_name'] as String?,
+      srName: json['sr_name'] as String?,
+    );
 
 Map<String, dynamic> _$HistoryToJson(History instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'amount_untaxed': instance.amountUntaxed,
       'amount_total': instance.amountTotal,
+      'product_total': instance.productTotal,
       'total_lines': instance.totalLines,
       'order_id': instance.orderId,
       'image_url_list': instance.imageUrlList,
