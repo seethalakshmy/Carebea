@@ -4,6 +4,9 @@ import 'package:carebea/app/modules/shops/data/shop_list_datasource.dart';
 import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../models/list_routes_model.dart';
+import '../models/list_state_model.dart';
+
 
 
 
@@ -60,5 +63,11 @@ class AddShopRepo{
     return addShopDataSource.updateShop(shopId: shopId, salesPersonId: salesPersonId, name: name, phone: phone, shopCategoryId: shopCategoryId, customerType: customerType, gst: gst, localArea: localArea, district: district, zip: zip, stateId: stateId, zoneId: zoneId, routeId: routeId, latitude: latitude, longitude: longitude);
   }
 
+  Future<RouteListResponse> routeList(){
+    return addShopDataSource.routeList();
+  }
+  Future<StateListResponse> stateList(){
+    return addShopDataSource.stateList();
+  }
 
 }

@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:carebea/app/modules/add_shop/models/add_shop_model.dart';
+import 'package:carebea/app/modules/add_shop/models/list_routes_model.dart';
+import 'package:carebea/app/modules/add_shop/models/list_state_model.dart';
 import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -13,6 +15,8 @@ import 'dart:developer' as developer;
 
 class AddShopDataSource {
   ApiService apiService = Get.find();
+  final ApiService _apiService = ApiService();
+
 
   Future<AddShopResponse> addShop({
     required int salesPersonId,
@@ -110,6 +114,34 @@ class AddShopDataSource {
     } else {
       return AddShopResponse(addShopResult: AddShopResult(status: false));
     }
+  }
+
+  ///List routes
+  Future<RouteListResponse> routeList() async {
+    var response = await _apiService.post(
+      "list-route",
+      {},
+    );
+
+    if (response.statusCode == 200) {
+      return RouteListResponse.fromJson(json.decode(response.body));
+    }
+
+    return RouteListResponse(routeListResult: RouteListResult.fromJson(json.decode(response.body)));
+  }
+
+  ///list states
+  Future<StateListResponse> stateList() async {
+    var response = await _apiService.post(
+      "list-country-states",
+      {},
+    );
+
+    if (response.statusCode == 200) {
+      return StateListResponse.fromJson(json.decode(response.body));
+    }
+
+    return StateListResponse(stateListResult: StateListResult.fromJson(json.decode(response.body)));
   }
 
 

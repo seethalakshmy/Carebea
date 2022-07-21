@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:carebea/app/modules/add_shop/models/add_shop_model.dart';
+import 'package:carebea/app/modules/add_shop/models/list_state_model.dart';
 import 'package:carebea/app/modules/add_shop/repo/add_shop_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,7 @@ import '../../../utils/shared_prefs.dart';
 import '../../../utils/widgets/custom_alertbox.dart';
 import '../../../utils/widgets/custom_button.dart';
 import '../../shops/models/shop_model.dart';
+import '../models/list_routes_model.dart';
 
 class AddShopController extends GetxController {
   final addShopFormKey = GlobalKey<FormState>();
@@ -24,31 +26,29 @@ class AddShopController extends GetxController {
   TextEditingController zip = TextEditingController();
   TextEditingController district = TextEditingController();
   TextEditingController gst = TextEditingController();
+  TextEditingController stateId = TextEditingController();
   DateTime? backbuttonpressedTime;
+  RxBool isRoutesListLoading = true.obs;
+  RxBool isStateListLoading = true.obs;
+  RouteListResponse? routeListResponse;
+  List<PoolList> poolList = <PoolList>[];
+  List<StateList> stateList = <StateList>[];
+  PoolList? selectedPoolListData;
+  StateList? selectedStateList;
+  StateListResponse? stateListResponse;
 
-  //TODO: Implement AddShopController
-
-  final count = 0.obs;
 
   @override
   void onInit() {
+    fetchRouteList();
+    fetchStateList();
     if (Get.arguments['isEdit'] ?? false) {
       populate(Get.arguments['shop'] as ShopList);
     }
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 
   addShop(
       {required int salesPersonId,
@@ -166,4 +166,21 @@ class AddShopController extends GetxController {
     }
     return true;
   }
+
+  fetchRouteList()async{
+    isRoutesListLoading(true);
+    routeListResponse = await addShopRepo.routeList();
+    poolList = routeListResponse!.routeListResult!.poolList??[];
+    isRoutesListLoading(false);
+  }
+
+  fetchStateList()async{
+    isStateListLoading(true);
+
+    stateListResponse = await addShopRepo.stateList();
+    stateList = stateListResponse!.stateListResult!.stateList??[];
+    isStateListLoading(false);
+  }
+
+
 }
