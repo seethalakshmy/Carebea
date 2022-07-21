@@ -1,6 +1,7 @@
 import 'package:carebea/app/modules/order_history_details/views/order_history_details_view.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
+import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:carebea/app/utils/widgets/custom_popupmenuitem.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
@@ -185,7 +186,7 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                 Expanded(
                   child: Obx(() {
                     if (ordersController.isOrdersLoaded.value || ordersController.isFilterClick.value) {
-                      return const Center(child: CircularProgressIndicator());
+                      return  Center(child: circularProgressIndicator(context));
                     }
                     if (ordersController.allOrders.isEmpty) {
                       return Align(alignment: Alignment.topCenter, child: Text('No Orders'));

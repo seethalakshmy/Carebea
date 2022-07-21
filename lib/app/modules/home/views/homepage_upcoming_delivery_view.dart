@@ -1,12 +1,16 @@
+import 'package:carebea/app/modules/home/controllers/home_controller.dart';
 import 'package:carebea/app/modules/home/widgets/upcoming_delivery_tile.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomepageUpcomingDeliveryView extends GetView {
+class HomepageUpcomingDeliveryView extends GetView<HomeController> {
   const HomepageUpcomingDeliveryView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+        if ((controller.homeData?.result?.upcomingOrdersList?.length ?? 0) == 0) {
+      return const SizedBox.shrink();
+    }
     return Container(
       decoration:
           const BoxDecoration(color: Color(0xffF8F4F2), borderRadius: BorderRadius.vertical(top: Radius.circular(12))),
@@ -28,13 +32,9 @@ class HomepageUpcomingDeliveryView extends GetView {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) => UpComingDeliveryTile(
-                  orderId: "456790",
-                  orderStatus: "Collected",
-                  title: "Reach Express",
-                  total: 105,
-                  orderStatusColor: customTheme(context).secondary),
+             order: controller.homeData!.result!.upcomingOrdersList![index]),
               separatorBuilder: (_, __) => SizedBox(height: 13),
-              itemCount: 2)
+              itemCount: controller.homeData?.result?.upcomingOrdersList?.length ?? 0)
         ],
       ),
     );

@@ -76,20 +76,23 @@ class Date {
 
 @JsonSerializable()
 class History {
-  History({
-    this.id,
-    this.name,
-    this.amountUntaxed,
-    this.amountTotal,
-    this.totalLines,
-    this.orderId,
-    this.imageUrlList,
-    this.dateOrder,
-    this.status,
-    this.userAddress,
-    this.amountTax,
-    this.productList,
-  });
+  History(
+      {this.id,
+      this.name,
+      this.amountUntaxed,
+      this.amountTotal,
+      this.totalLines,
+      this.orderId,
+      this.imageUrlList,
+      this.dateOrder,
+      this.status,
+      this.userAddress,
+      this.amountTax,
+      this.productList,
+      this.deliveryDate,
+      this.productTotal,
+      this.shopName,
+      this.srName});
 
   int? id;
   String? name;
@@ -97,6 +100,8 @@ class History {
   double? amountUntaxed;
   @JsonKey(name: 'amount_total')
   double? amountTotal;
+  @JsonKey(name: 'product_total')
+  double? productTotal;
   @JsonKey(name: 'total_lines')
   int? totalLines;
   @JsonKey(name: 'order_id')
@@ -105,9 +110,15 @@ class History {
   List<dynamic>? imageUrlList;
   @JsonKey(name: 'date_order')
   DateTime? dateOrder;
+  @JsonKey(name: 'delivery_date')
+  DateTime? deliveryDate;
   String? status;
   @JsonKey(name: 'user_address')
   String? userAddress;
+  @JsonKey(name: 'sr_name')
+  String? srName;
+  @JsonKey(name: 'shop_name')
+  String? shopName;
   @JsonKey(name: 'amount_tax')
   double? amountTax;
   @JsonKey(name: 'product_list')

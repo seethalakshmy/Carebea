@@ -15,29 +15,32 @@ class OrderDataSource {
 
   Future<OrderListResponse> orderList(
       {required int salesPersonId,
-       String? orderType,
-        int? orderId,
+      String? orderType,
+      int? orderId,
       int? shopId,
       String? filterId,
       String? filterName}) async {
-    var body = {
+    Map<String, dynamic> body = {
       'sales_person_id': salesPersonId,
-      'order_type': orderType,
     };
     if (shopId != null) {
       body.addAll({'shop_id': shopId});
     }
+    if (orderType != null) {
+      body.addAll({
+        'order_type': orderType,
+      });
+    }
     if (filterName != null) {
       body.addAll({"filter_name": filterName, "filter_id": filterId!});
     }
-    if(orderId != null){
+    if (orderId != null) {
       body.addAll({'order_id': orderId});
     }
-    if(orderType != null){
+    if (orderType != null) {
       body.addAll({'order_type': orderType});
     }
-    var response = await apiService.post('list-orders',
-       body);
+    var response = await apiService.post('list-orders', body);
     developer.log(" url----${(Uri.parse('${apiService.baseUrl}list-orders'))}");
 
     print("listOrders response statusCode ${response.statusCode} ");

@@ -27,7 +27,7 @@ class DashboardController extends GetxController {
 
   bottomNavViewChange(int index) {
     if (index == 0) {
-      // _homeController.
+      _homeController.fetchHomePageData();
     }
     if (index == 1) {
       _shopsController.fetchAllShops();

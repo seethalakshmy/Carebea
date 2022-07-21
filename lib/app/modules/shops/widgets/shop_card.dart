@@ -1,3 +1,4 @@
+import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:carebea/app/modules/shops/views/shop_details.dart';
 import 'package:carebea/app/utils/assets.dart';
@@ -9,15 +10,16 @@ import 'package:get/get.dart';
 import '../controllers/shops_controller.dart';
 
 class ShopListTile extends StatelessWidget {
-  const ShopListTile({Key? key, required this.shop }) : super(key: key);
+  const ShopListTile({Key? key, required this.shop}) : super(key: key);
   final ShopList shop;
-
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() =>  ShopDetails(shopId:shop.id!,shopDetails:shop ,));
+        Get.to(() => ShopDetails(
+              shopId: shop.id!,
+            ));
       },
       child: CustomCard(
         hasShadow: false,
@@ -45,20 +47,7 @@ class ShopListTile extends StatelessWidget {
                   width: 5,
                 ),
                 Text(
-                  shop.address!.localArea!,
-                  // 'Akshay Nagar 1st Block Cross,Rammurthy',
-                  style: customTheme(context).regular.copyWith(fontSize: 11),
-                ),
-                Text(','),
-                Text(
-                  shop.address!.zip!,
-                  // 'Akshay Nagar 1st Block Cross,Rammurthy',
-                  style: customTheme(context).regular.copyWith(fontSize: 11),
-                ),
-                Text(','),
-                Text(
-                  shop.address!.district!,
-                  // 'Akshay Nagar 1st Block Cross,Rammurthy',
+                  getFullAddress(shop.address),
                   style: customTheme(context).regular.copyWith(fontSize: 11),
                 ),
               ],

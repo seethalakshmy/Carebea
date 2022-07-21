@@ -12,8 +12,8 @@ import '../../../utils/shared_prefs.dart';
 class ShopsController extends GetxController {
   ShopListRepo shopListRepo = ShopListRepo();
   OrderListRepo orderListRepo = OrderListRepo();
-  RxBool isOrdersLoading = false.obs;
-  RxBool isLoading = false.obs;
+  RxBool isOrdersLoading = true.obs;
+  RxBool isLoading = true.obs;
   ShopListResponse? shopDetailResponse;
   List<ShopList> shopList = [];
   FilterVal? filterVals;
@@ -116,5 +116,16 @@ class ShopsController extends GetxController {
 
   void clearFilters() async {
     await fetchAllShops();
+  }
+
+  ShopList? shop;
+  void fetchShop(int? shopId) async {
+    isShopDetailsLoading(true);
+    var response = await shopListRepo.shopDetails(SharedPrefs.getUserId()!, shopId!);
+    if (response.shopListResult?.status ?? false) {
+      shop = response.shopListResult?.shopList?.first;
+      await fetchOrders('Upcoming', shopId);
+    }
+    isShopDetailsLoading(false);
   }
 }
