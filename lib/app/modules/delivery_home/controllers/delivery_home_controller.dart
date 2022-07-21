@@ -1,5 +1,6 @@
 import 'package:carebea/app/modules/delivery_home/models/delivery_home_model.dart';
 import 'package:carebea/app/modules/delivery_home/repo/delivery_home_page_repo.dart';
+import 'package:carebea/app/utils/shared_prefs.dart';
 import 'package:get/get.dart';
 import 'dart:developer' as developer;
 
@@ -29,11 +30,10 @@ class DeliveryHomeController extends GetxController {
 
   void increment() => count.value++;
 
-  fetchDeliveryHomePageData()async{
+  fetchDeliveryHomePageData() async {
     isDeliveryHomePageDataLoaded(false);
-    deliveryHomePageResponse = await deliveryHomePageRepo.deliveryHomePageData(salesPersonId: 8);
-    developer.log(deliveryHomePageResponse?.toJson().toString()??'');
+    deliveryHomePageResponse = await deliveryHomePageRepo.deliveryHomePageData(salesPersonId: SharedPrefs.getUserId()!);
+    developer.log(deliveryHomePageResponse?.toJson().toString() ?? '');
     isDeliveryHomePageDataLoaded(true);
   }
-
 }
