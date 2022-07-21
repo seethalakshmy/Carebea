@@ -41,9 +41,11 @@ class LatestShopListTile extends StatelessWidget {
                 const SizedBox(
                   width: 5,
                 ),
-                Text(
-                  shop.userAddress!,
-                  style: customTheme(context).regular.copyWith(fontSize: 11),
+                Flexible(
+                  child: Text(
+                    shop.userAddress!.split("\n").join(" "),
+                    style: customTheme(context).regular.copyWith(fontSize: 11),
+                  ),
                 ),
               ],
             ),

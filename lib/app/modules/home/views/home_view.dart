@@ -73,14 +73,10 @@ class HomeView extends GetView<HomeController> {
               padding: EdgeInsets.only(top: 20, left: 15.0, right: 15.0),
               sliver: SliverToBoxAdapter(child: HomeMenuCards()),
             ),
-            SliverPadding(
+          const  SliverPadding(
                 padding: EdgeInsets.only(bottom: 10),
                 sliver: SliverToBoxAdapter(
-                    child: InkWell(
-                        onTap: () {
-                          Get.toNamed(Routes.ORDER_HISTORY_DETAILS);
-                        },
-                        child: HomepageUpcomingDeliveryView()))),
+                    child: HomepageUpcomingDeliveryView())),
             const SliverToBoxAdapter(child: HomepageLatestShopsAddedView()),
           ]);
         }));

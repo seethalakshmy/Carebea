@@ -7,7 +7,7 @@ class HomeDataSource {
   final ApiService _apiService = ApiService();
 
   Future<HomeData> getHomePageData(int userId) async {
-    var response = await _apiService.post("HomeData", {"sales_person_id": userId});
+    var response = await _apiService.post("get-homepage-data-sr", {"sales_person_id": userId});
 
     return HomeData.fromJson(json.decode(response.body));
   }
