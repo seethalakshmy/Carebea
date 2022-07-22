@@ -86,8 +86,8 @@ class ShopsController extends GetxController {
     isFilterClick(true);
     filterSelected("$filterName-$filterId");
     var shopFilterResponse = await shopListRepo.shopFilter(SharedPrefs.getUserId()!, filterName, filterId);
-    if (shopDetailResponse?.shopListResult?.status ?? false) {
-      shopList = shopDetailResponse?.shopListResult?.shopList ?? [];
+    if (shopFilterResponse.shopListResult?.status ?? false) {
+      shopList = shopFilterResponse.shopListResult?.shopList ?? [];
     }
     isFilterClick(false);
   }

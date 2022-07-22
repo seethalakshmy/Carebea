@@ -31,40 +31,38 @@ class ListShops extends GetView<ShopsController> {
             floatingActionButton: _addNewShopButton(context),
             body: Obx(() {
               if (shopsController.isLoading.value) {
-                return  Center(child: circularProgressIndicator(context));
+                return Center(child: circularProgressIndicator(context));
               }
-              if (shopsController.shopList.isEmpty) {
-                return Center(child: Text("No shops found!"));
-              }
-              return SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Shops',
-                        style: customTheme(context).medium.copyWith(fontSize: 16, color: Colors.black),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                              child: CustomTextField(
-                            onChanged: (val) {},
-                            hint: 'Search for shops',
-                            fillcolor: Colors.grey[300],
-                            icon: const Icon(
-                              Icons.search,
-                              size: 30,
-                              color: Colors.grey,
-                            ),
-                          )),
-                          const SizedBox(
-                            width: 5,
+
+              return Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Shops',
+                      style: customTheme(context).medium.copyWith(fontSize: 16, color: Colors.black),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                            child: CustomTextField(
+                          onChanged: (val) {},
+                          hint: 'Search for shops',
+                          fillcolor: Colors.grey[300],
+                          icon: const Icon(
+                            Icons.search,
+                            size: 30,
+                            color: Colors.grey,
                           ),
+                        )),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        if (controller.filterVals != null)
                           PopupMenuButton<String>(
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
                             offset: const Offset(0.0, 50),
@@ -108,67 +106,57 @@ class ListShops extends GetView<ShopsController> {
                               ];
                             },
                           ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      // const Text(
-                      //   'New',
-                      //   style: TextStyle(
-                      //     color: Colors.black26,
-                      //     fontWeight: FontWeight.bold,
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: 10,
-                      // ),
-                      // ShopListTile(shop:shopsController.shopListResponse!.shopListResult!.shopList[index],),
-                      // SizedBox(
-                      //   height: 10,
-                      // ),
-                      // const Text(
-                      //   'Last Week',
-                      //   style: TextStyle(
-                      //     color: Colors.black26,
-                      //     fontWeight: FontWeight.bold,
-                      //   ),
-                      // ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        height: MediaQuery.of(context).size.height,
-                        child: Obx(() {
-                          if (shopsController.isFilterClick.value) {
-                            return  Center(child: circularProgressIndicator(context));
-                          }
-                          if (shopsController.shopList.isEmpty) {
-                            return Container(
-                                alignment: Alignment.topCenter,
-                                width: double.infinity,
-                                padding: EdgeInsets.only(top: 50),
-                                child: Text("No shops found!"));
-                          }
-                          return ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              // itemCount: 2,
-                              itemCount: shopsController.shopList.length,
-                              itemBuilder: (context, index) {
-                                return Column(
-                                  children: [
-                                    ShopListTile(shop: shopsController.shopList[index]),
-                                    SizedBox(
-                                      height: 20,
-                                    )
-                                  ],
-                                );
-                              });
-                        }),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    // const Text(
+                    //   'New',
+                    //   style: TextStyle(
+                    //     color: Colors.black26,
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 10,
+                    // ),
+                    // ShopListTile(shop:shopsController.shopListResponse!.shopListResult!.shopList[index],),
+                    // SizedBox(
+                    //   height: 10,
+                    // ),
+                    // const Text(
+                    //   'Last Week',
+                    //   style: TextStyle(
+                    //     color: Colors.black26,
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    // ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Flexible(
+                      child: Obx(() {
+                        if (shopsController.isFilterClick.value) {
+                          return Center(child: circularProgressIndicator(context));
+                        }
+                        if (shopsController.shopList.isEmpty) {
+                          return Container(
+                              alignment: Alignment.topCenter,
+                              width: double.infinity,
+                              padding: EdgeInsets.only(top: 50),
+                              child: Text("No shops found!"));
+                        }
+                        return ListView.separated(
+                            separatorBuilder: (_, __) => const SizedBox(height: 20),
+                            shrinkWrap: true,
+                            itemCount: shopsController.shopList.length,
+                            itemBuilder: (context, index) {
+                              return ShopListTile(shop: shopsController.shopList[index]);
+                            });
+                      }),
+                    ),
+                  ],
                 ),
               );
             })));
