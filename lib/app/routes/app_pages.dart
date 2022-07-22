@@ -90,7 +90,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.DELIVERY_INVOICE_DETAILS,
-      page: () => const DeliveryInvoiceDetailsView(),
+      page: () => DeliveryInvoiceDetailsView(),
       binding: DeliveryInvoiceDetailsBinding(),
     ),
     GetPage(
