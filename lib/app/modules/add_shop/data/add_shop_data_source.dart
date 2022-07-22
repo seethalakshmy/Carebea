@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:carebea/app/modules/add_shop/models/add_shop_model.dart';
@@ -10,6 +11,8 @@ import 'package:http/http.dart' as http;
 
 import '../../../core/services/api_service.dart';
 import 'dart:developer' as developer;
+
+import '../models/list_zone_model.dart';
 
 
 
@@ -117,10 +120,10 @@ class AddShopDataSource {
   }
 
   ///List routes
-  Future<RouteListResponse> routeList() async {
+  Future<RouteListResponse> routeList({String? date}) async {
     var response = await _apiService.post(
       "list-route",
-      {},
+      {'date':date},
     );
 
     if (response.statusCode == 200) {
@@ -142,6 +145,21 @@ class AddShopDataSource {
     }
 
     return StateListResponse(stateListResult: StateListResult.fromJson(json.decode(response.body)));
+  }
+
+  ///list zones
+
+  Future<ZoneListResponse> zoneList() async {
+    var response = await _apiService.post(
+      "list-zone",
+      {},
+    );
+
+    if (response.statusCode == 200) {
+      return ZoneListResponse.fromJson(json.decode(response.body));
+    }
+
+    return ZoneListResponse(zoneListResult: ZoneListResult.fromJson(json.decode(response.body)));
   }
 
 

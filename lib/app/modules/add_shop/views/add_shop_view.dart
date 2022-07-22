@@ -1,9 +1,13 @@
-import 'package:carebea/app/modules/add_shop/models/list_routes_model.dart';
+import 'dart:ffi';
+
+import 'package:carebea/app/modules/add_shop/models/list_routes_model.dart' as route;
 import 'package:carebea/app/modules/add_shop/models/list_state_model.dart';
+import 'package:carebea/app/modules/add_shop/models/list_zone_model.dart' as zone;
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/shared_prefs.dart';
 import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
+import 'package:carebea/app/utils/widgets/custom_radio_button.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +20,7 @@ import '../../../utils/widgets/custom_button.dart';
 import '../../../utils/widgets/custom_textfield.dart';
 import '../../shops/models/shop_model.dart';
 import '../controllers/add_shop_controller.dart';
-import 'dart:developer'as developer;
+import 'dart:developer' as developer;
 
 class AddShopView extends GetView<AddShopController> {
   AddShopView({Key? key}) : super(key: key);
@@ -147,7 +151,34 @@ class AddShopView extends GetView<AddShopController> {
                     'Customer type',
                     style: customTheme(context).regular.copyWith(fontSize: 12),
                   ),
-                  CustomerTypeRadioButton(),
+                  SizedBox(height: 10,),
+                  Obx(() {
+                    return Row(
+                      children: [
+                        CustomRadioButton<int>(groupValue: controller
+                            .selectedRadio.value,
+                          color: Theme.of(context).extension<CustomTheme>()!
+                              .primary,
+                          label: 'B2B',
+                          value: 1,
+                          onChanged: (val) {
+                            controller.selectedRadio(val);
+                          },),
+                        SizedBox(width: 50,),
+                        CustomRadioButton<int>(groupValue: controller
+                            .selectedRadio.value,
+                            color: Theme.of(context).extension<CustomTheme>()!
+                                .primary,
+                            label: 'B2C',
+                            value: 2,
+                            onChanged: (val) {
+                              controller.selectedRadio(val);
+                            })
+                      ],
+                    );
+                  }),
+                  SizedBox(height: 10,),
+
                   RichText(
                       text: TextSpan(
                         text: 'GST',
@@ -319,7 +350,7 @@ class AddShopView extends GetView<AddShopController> {
                     height: 5,
                   ),
                   Obx(() {
-                    if(controller.isStateListLoading.value){
+                    if (controller.isStateListLoading.value) {
                       circularProgressIndicator(context);
                     }
                     return DropdownSearch<StateList>(
@@ -457,38 +488,49 @@ class AddShopView extends GetView<AddShopController> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 8, bottom: 12),
-                    child: DropdownSearch<String>(
-                      validator: (String? value) {
-                        if (value == null) {
-                          return "Zone  can\'t be empty";
-                        }
-                        return null;
-                      },
-                      popupProps: const PopupProps.menu(
-                        showSearchBox: true,
-                        // showSelectedItems: true,
-                      ),
-                      dropdownDecoratorProps: DropDownDecoratorProps(
-                          dropdownSearchDecoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              filled: true,
-                              fillColor: Theme.of(context)
-                                  .extension<CustomTheme>()!
-                                  .textFormFieldColor)),
-                      items: const ["A", "B", "C"],
-                      selectedItem: "",
-                    ),
+                    child: Obx(() {
+                      if(controller.isZoneListLoading.value){
+                        return circularProgressIndicator(context);
+
+                      }
+                      return DropdownSearch<zone.PoolList>(
+                        validator: (value) {
+                          if (value?.name == null) {
+                            return "Zone  can\'t be empty";
+                          }
+                          return null;
+                        },
+                        popupProps: const PopupProps.menu(
+                          showSearchBox: true,
+                          // showSelectedItems: true,
+                        ),
+                        dropdownDecoratorProps: DropDownDecoratorProps(
+                            dropdownSearchDecoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide.none,
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide.none,
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide: BorderSide.none,
+                                ),
+                                filled: true,
+                                fillColor: Theme.of(context)
+                                    .extension<CustomTheme>()!
+                                    .textFormFieldColor)),
+                        items: controller.zoneList,
+                        itemAsString: (zone.PoolList? zoneList) =>
+                        zoneList!.name!,
+                        onChanged: (data) {
+                          controller.selectedZone = data;
+                        },
+                        selectedItem: controller.selectedZone,
+                      );
+                    }),
                   ),
                   Text(
                     "Route",
@@ -500,7 +542,7 @@ class AddShopView extends GetView<AddShopController> {
                       if (controller.isRoutesListLoading.value) {
                         return circularProgressIndicator(context);
                       }
-                      return DropdownSearch<PoolList>(
+                      return DropdownSearch<route.PoolList>(
                         validator: (value) {
                           if (value?.name == null) {
                             return "Route can\'t be empty";
@@ -530,13 +572,13 @@ class AddShopView extends GetView<AddShopController> {
                                 fillColor: Theme.of(context)
                                     .extension<CustomTheme>()!
                                     .textFormFieldColor)),
-                        items: controller.poolList,
-                        itemAsString: (PoolList? routeList) =>
+                        items: controller.routeList,
+                        itemAsString: (route.PoolList? routeList) =>
                         routeList!.name!,
                         onChanged: (data) {
-                          controller.selectedPoolListData = data;
+                          controller.selectedRoute = data;
                         },
-                        selectedItem: controller.selectedPoolListData,);
+                        selectedItem: controller.selectedRoute,);
                     }),
                   ),
                   RichText(
@@ -568,14 +610,14 @@ class AddShopView extends GetView<AddShopController> {
                         localArea: controller.localArea.text,
                         phone: controller.phone.text,
                         zip: controller.zip.text,
-                        customerType: 2,
+                        customerType: controller.selectedRadio.value,
                         shopCategoryId: 1,
                         latitude: 0,
-                        routeId: 1,
+                        routeId: controller.selectedRoute!.id!,
                         longitude: 0,
                         gst: controller.gst.text,
                         stateId: controller.selectedStateList!.stateId!,
-                        zoneId: controller.selectedPoolListData!.id!,
+                        zoneId: 1,
                         salesPersonId: SharedPrefs.getUserId()!,
                         shopId: (Get.arguments['shop'] as ShopList).id!,
                       );
@@ -591,14 +633,14 @@ class AddShopView extends GetView<AddShopController> {
                         localArea: controller.localArea.text,
                         phone: controller.phone.text,
                         zip: controller.zip.text,
-                        customerType: 2,
+                        customerType: controller.selectedRadio.value,
                         shopCategoryId: 1,
                         latitude: 0,
-                        routeId: 1,
+                        routeId: controller.selectedRoute!.id!,
                         longitude: 0,
                         gst: controller.gst.text,
                         stateId: controller.selectedStateList!.stateId!,
-                        zoneId: controller.selectedPoolListData!.id!,
+                        zoneId: 1,
                         salesPersonId: SharedPrefs.getUserId()!,
                       );
                     },
@@ -614,58 +656,3 @@ class AddShopView extends GetView<AddShopController> {
   }
 }
 
-class CustomerTypeRadioButton extends StatefulWidget {
-  const CustomerTypeRadioButton({Key? key}) : super(key: key);
-
-  @override
-  State<CustomerTypeRadioButton> createState() =>
-      _CustomerTypeRadioButtonState();
-}
-
-class _CustomerTypeRadioButtonState extends State<CustomerTypeRadioButton> {
-  int? radioValue;
-  int? selectedRadio;
-
-  @override
-  void initState() {
-    super.initState();
-    radioValue = 1;
-  }
-
-  setSelectedRadio(int? val) {
-    setState(() {
-      selectedRadio = val!;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Radio<int>(
-            value: 1,
-            groupValue: radioValue,
-            onChanged: (val) {
-              setSelectedRadio(val);
-              radioValue = 1;
-            },
-            activeColor: Theme.of(context).extension<CustomTheme>()!.primary),
-        const Text("B2B"),
-        const SizedBox(
-          width: 50,
-        ),
-        Radio<int>(
-          value: 2,
-          groupValue: radioValue,
-          onChanged: (val) {
-            setSelectedRadio(val);
-            radioValue = 2;
-          },
-          activeColor: Theme.of(context).extension<CustomTheme>()!.primary,
-        ),
-        const Text("B2C")
-      ],
-    );
-  }
-}
