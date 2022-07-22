@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:carebea/app/modules/create_order/data/repository/create_order_repository.dart';
 import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:carebea/app/modules/shops/repo/shop_list_repo.dart';
 import 'package:carebea/app/utils/shared_prefs.dart';
@@ -8,7 +9,8 @@ import 'package:get/get.dart';
 class CreateOrderController extends GetxController {
   DateTime? backbuttonpressedTime;
   final ShopListRepo _shopRepo = ShopListRepo();
-
+  final CreateOrderRepository _repository = CreateOrderRepository();
+  RxMap<int, int> cartproducts = RxMap();
   RxBool isLoading = true.obs;
 
   RxList<ShopList> shopList = <ShopList>[].obs;
@@ -46,5 +48,22 @@ class CreateOrderController extends GetxController {
       log("error", error: error, stackTrace: stacktrace);
     }
     isLoading(false);
+  }
+
+  updateCartProduct(int id, int count) {
+    if (count == 0) {
+      cartproducts.removeWhere((key, value) => key == id);
+      return;
+    }
+
+    cartproducts[id] = count;
+  }
+
+  RxBool creatingOrder = true.obs;
+  createOrder() async {
+    creatingOrder(true);
+    var res = await _repository.createOrder(
+        shopId: (Get.arguments["shop"] as ShopList).id, salesPersonId: SharedPrefs.getUserId(), products: cartproducts);
+    creatingOrder(false);
   }
 }
