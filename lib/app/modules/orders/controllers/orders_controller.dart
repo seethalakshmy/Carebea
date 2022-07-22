@@ -38,7 +38,7 @@ class OrdersController extends GetxController {
       allOrders = allorderListResponse?.orderListResult?.history ?? [];
       filterVals = allorderListResponse!.orderListResult!.filterVals;
     } else {
-      allOrders = [];
+      // allOrders = [];
     }
 
     isOrdersLoaded(false);

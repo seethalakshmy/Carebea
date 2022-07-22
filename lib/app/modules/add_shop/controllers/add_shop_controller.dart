@@ -1,6 +1,8 @@
 import 'dart:ffi';
 
 import 'package:carebea/app/modules/add_shop/models/add_shop_model.dart';
+import 'package:carebea/app/modules/add_shop/models/list_state_model.dart';
+import 'package:carebea/app/modules/add_shop/models/list_zone_model.dart' as zone_list;
 import 'package:carebea/app/modules/add_shop/repo/add_shop_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +14,8 @@ import '../../../utils/shared_prefs.dart';
 import '../../../utils/widgets/custom_alertbox.dart';
 import '../../../utils/widgets/custom_button.dart';
 import '../../shops/models/shop_model.dart';
+import '../models/list_routes_model.dart' as route_list;
+
 
 class AddShopController extends GetxController {
   final addShopFormKey = GlobalKey<FormState>();
@@ -24,31 +28,36 @@ class AddShopController extends GetxController {
   TextEditingController zip = TextEditingController();
   TextEditingController district = TextEditingController();
   TextEditingController gst = TextEditingController();
+  TextEditingController stateId = TextEditingController();
   DateTime? backbuttonpressedTime;
+  RxBool isRoutesListLoading = true.obs;
+  RxBool isStateListLoading = true.obs;
+  RxBool isZoneListLoading = true.obs;
+  route_list.RouteListResponse? routeListResponse;
+  List< route_list.PoolList> routeList = < route_list.PoolList>[];
+  List<StateList> stateList = <StateList>[];
+  route_list.PoolList? selectedRoute;
+  zone_list.PoolList? selectedZone;
+  StateList? selectedStateList;
+  StateListResponse? stateListResponse;
+  RxInt selectedRadio = 1.obs;
+  zone_list.ZoneListResponse? zoneListResponse;
+  List< zone_list.PoolList> zoneList = <zone_list.PoolList>[];
 
-  //TODO: Implement AddShopController
 
-  final count = 0.obs;
 
   @override
   void onInit() {
+    fetchRouteList();
+    fetchStateList();
+    fetchZoneList();
     if (Get.arguments['isEdit'] ?? false) {
       populate(Get.arguments['shop'] as ShopList);
     }
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 
   addShop(
       {required int salesPersonId,
@@ -166,4 +175,30 @@ class AddShopController extends GetxController {
     }
     return true;
   }
+
+  fetchRouteList()async{
+    isRoutesListLoading(true);
+    routeListResponse = await addShopRepo.routeList();
+    routeList = routeListResponse!.routeListResult!.poolList??[];
+    isRoutesListLoading(false);
+  }
+
+  fetchStateList()async{
+    isStateListLoading(true);
+
+    stateListResponse = await addShopRepo.stateList();
+    stateList = stateListResponse!.stateListResult!.stateList??[];
+    isStateListLoading(false);
+  }
+
+  fetchZoneList()async{
+    isZoneListLoading(true);
+
+    zoneListResponse = await addShopRepo.zoneList();
+    zoneList = zoneListResponse!.zoneListResult!.poolList??[];
+    isZoneListLoading(false);
+  }
+
+
+
 }
