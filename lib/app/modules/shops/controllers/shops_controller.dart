@@ -23,7 +23,15 @@ class ShopsController extends GetxController {
   OrderListResponse? orderListResponse;
   List<History>? orderHistory;
 
-  //TODO: Implement ShopsController
+  Rx<SearchType> selectedSearchtype = Rx(
+    SearchType("Name", "name"),
+  );
+
+  List<SearchType> searchitems = [
+    SearchType("Name", "name"),
+    SearchType("Phone", "phone"),
+    SearchType("Local Area", "local_area"),
+  ];
 
   final count = 0.obs;
 
@@ -128,4 +136,29 @@ class ShopsController extends GetxController {
     }
     isShopDetailsLoading(false);
   }
+
+  Future<void> searchShop(String? query) async {
+    isFilterClick(true);
+    filterSelected("");
+    var shopListResponse;
+    if ((query ?? "").isEmpty) {
+      shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!);
+    } else {
+      shopListResponse = await shopListRepo
+          .shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {selectedSearchtype.value.type!: query});
+    }
+    if (shopListResponse.shopListResult?.status ?? false) {
+      shopList = shopListResponse.shopListResult?.shopList ?? [];
+    } else {
+      shopList = [];
+    }
+    isFilterClick(false);
+  }
+}
+
+class SearchType {
+  final String? title;
+  final String? type;
+
+  SearchType(this.title, this.type);
 }

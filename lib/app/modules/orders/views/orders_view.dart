@@ -1,3 +1,4 @@
+import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/modules/order_history_details/views/order_history_details_view.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
@@ -37,7 +38,7 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(context),
-      floatingActionButton: _createNewOrderButton(context),
+      floatingActionButton: openKeyboardGuard(context, child: _createNewOrderButton(context)),
       body: DefaultTabController(
         length: 2,
         child: Padding(
@@ -85,9 +86,10 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                   children: [
                     Expanded(
                         child: CustomTextField(
-                      onChanged: (val) {},
+                      onChanged: (val) => ordersController.searchOrders(val),
                       hint: 'Search for orders',
-                      fillcolor: Colors.grey[300],
+                              fillcolor: customTheme(context).textFormFieldColor,
+
                       icon: const Icon(
                         Icons.search,
                         size: 30,
@@ -120,7 +122,11 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                                     isSelected: ordersController.filterSelected.value == "Date-${e.id}",
                                     name: e.name!,
                                     onTap: () => ordersController.filterOrders("Date", e.id!)))
-                                .toList()
+                                .toList(),
+                            customPopupMenuItem<String>(context, name: "Clear", isSelected: true, showBorder: false,
+                                onTap: () {
+                              ordersController.clearFilters();
+                            }),
                           ];
                         })
                     // PopupMenuButton<int>(
@@ -186,7 +192,7 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                 Expanded(
                   child: Obx(() {
                     if (ordersController.isOrdersLoaded.value || ordersController.isFilterClick.value) {
-                      return  Center(child: circularProgressIndicator(context));
+                      return Center(child: circularProgressIndicator(context));
                     }
                     if (ordersController.allOrders.isEmpty) {
                       return Align(alignment: Alignment.topCenter, child: Text('No Orders'));
@@ -228,7 +234,8 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: InkWell(
                 onTap: () {
-                  Get.toNamed(Routes.ORDER_HISTORY_DETAILS,arguments: {'order_id':ordersController.allOrders[index].id});
+                  Get.toNamed(Routes.ORDER_HISTORY_DETAILS,
+                      arguments: {'order_id': ordersController.allOrders[index].id});
                 },
                 child: OrderHistoryTile(orders: ordersController.allOrders[index])),
           );

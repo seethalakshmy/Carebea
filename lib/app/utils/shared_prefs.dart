@@ -1,7 +1,4 @@
-
 import 'package:shared_preferences/shared_preferences.dart';
-
-
 
 class SharedPrefs {
   static late SharedPreferences shared;
@@ -12,16 +9,15 @@ class SharedPrefs {
   Future init() async {
     print("SharedPrefs --- init called");
 
-    shared =  await SharedPreferences.getInstance();
+    shared = await SharedPreferences.getInstance();
   }
-
 
   static String getEmail() {
     return shared.getString("email") ?? "null";
   }
 
   static setEmail({required String data}) {
-    shared.setString("email", data) ;
+    shared.setString("email", data);
   }
 
   static bool isSkipped() {
@@ -72,42 +68,36 @@ class SharedPrefs {
     return shared.getInt(key);
   }
 
-
   static setDistrictId({required String data}) {
-    shared.setString("DistrictID", data) ;
-
+    shared.setString("DistrictID", data);
   }
+
   static setCityID({required String data}) {
-    shared.setString("CityID", data) ;
-
+    shared.setString("CityID", data);
   }
-  static setLocalityID({required String data}) {
-    shared.setString("LocalityID", data) ;
 
+  static setLocalityID({required String data}) {
+    shared.setString("LocalityID", data);
   }
 
   static setAreaID({required String data}) {
-    shared.setString("AreaID", data) ;
-
+    shared.setString("AreaID", data);
   }
 
   static setCityName({required String data}) {
-    shared.setString("CityName", data) ;
-
+    shared.setString("CityName", data);
   }
 
   static setDistrictName({required String data}) {
-    shared.setString("DistrictName", data) ;
-
+    shared.setString("DistrictName", data);
   }
-  static setAreaName({required String data}) {
-    shared.setString("AreaName", data) ;
 
+  static setAreaName({required String data}) {
+    shared.setString("AreaName", data);
   }
 
   static setLocalityName({required String data}) {
-    shared.setString("LocalityName", data) ;
-
+    shared.setString("LocalityName", data);
   }
 
   static String getCityID() {
@@ -117,18 +107,23 @@ class SharedPrefs {
   static String getDistrictID() {
     return shared.getString("DistrictID") ?? "null";
   }
+
   static String getLocalityID() {
     return shared.getString("LocalityID") ?? "null";
   }
+
   static String getAreaID() {
     return shared.getString("AreaID") ?? "null";
   }
+
   static String getCityName() {
     return shared.getString("CityName") ?? "null";
   }
+
   static String getDistrictName() {
     return shared.getString("DistrictName") ?? "null";
   }
+
   static String getLocalityName() {
     return shared.getString("LocalityName") ?? "null";
   }
@@ -141,7 +136,7 @@ class SharedPrefs {
     shared.setString('device_type', deveiceType);
   }
 
-  static String  getDeviceType() {
+  static String getDeviceType() {
     return shared.getString('device_type') ?? "null";
   }
 
@@ -149,6 +144,7 @@ class SharedPrefs {
     print("\n\n setDeveiceId deveiceId : $deveiceId");
     shared.setString('deveice_Id', deveiceId);
   }
+
   static String getDeviceId() {
     return shared.getString('deveice_Id') ?? "null";
   }
@@ -157,7 +153,7 @@ class SharedPrefs {
     shared.setString('app_version', appVersion);
   }
 
-  static String  getAppVersion() {
+  static String getAppVersion() {
     return shared.getString('app_version') ?? "";
   }
 
@@ -165,7 +161,7 @@ class SharedPrefs {
     shared.setString('access_token', token);
   }
 
-  static String?  getAccessToken() {
+  static String? getAccessToken() {
     return shared.getString('access_token');
   }
 
@@ -173,20 +169,22 @@ class SharedPrefs {
     shared.setString('refresh_token', token);
   }
 
-  static String?  getRefreshToken() {
+  static String? getRefreshToken() {
     return shared.getString('refresh_token');
   }
+
   setDeviceFCMToken({String? data}) {
-    shared.setString("FCMDeviceToken", data!) ;
-
+    shared.setString("FCMDeviceToken", data!);
   }
-  String getDeviceFCMToken()  {
+
+  String getDeviceFCMToken() {
     return shared.getString("FCMDeviceToken") ?? "null";
-
   }
-  setDevicePlatform( {String? data}) {
+
+  setDevicePlatform({String? data}) {
     shared.setString("DevicePlatform", data!);
   }
+
   String getDevicePlatform() {
     return shared.getString("DevicePlatform") ?? "null";
   }
@@ -214,14 +212,14 @@ class SharedPrefs {
   static int? getGenderId() {
     return shared.getInt('categ_id');
   }
-  static setgenderName({required String data}) {
-    shared.setString("genderName", data) ;
 
+  static setgenderName({required String data}) {
+    shared.setString("genderName", data);
   }
+
   static String getgenderName() {
     return shared.getString("genderName") ?? "null";
   }
-
 
   static void setStateId(int stateId) {
     shared.setInt('state_id', stateId);
@@ -230,20 +228,29 @@ class SharedPrefs {
   static int? getStateId() {
     return shared.getInt('state_id');
   }
-  static setStateName({required String data}) {
-    shared.setString("state_name", data) ;
 
+  static setStateName({required String data}) {
+    shared.setString("state_name", data);
   }
+
   static String getStateName() {
     return shared.getString("state_name") ?? "null";
   }
 
   static setAddressType({required String data}) {
-    shared.setString("address_type", data) ;
-
+    shared.setString("address_type", data);
   }
+
   static String getAddressType() {
     return shared.getString("address_type") ?? "null";
+  }
+
+  static void setUserType(int? userType) {
+    shared.setInt('user_id', userType!);
+  }
+
+  static int getUserType() {
+    return shared.getInt('user_id')!;
   }
 }
 

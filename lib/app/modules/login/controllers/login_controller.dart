@@ -49,10 +49,15 @@ class LoginController extends GetxController {
       if (response.emailLogin?.status ?? false) {
         SharedPrefs.setUserId(response.emailLogin!.userId!);
         SharedPrefs.setLoggedInStatus(true);
+        SharedPrefs.setUserType(response.emailLogin!.userType);
 
         print("userid ${SharedPrefs.getUserId()}");
 
-        Get.toNamed(Routes.DASHBOARD);
+        if (response.emailLogin!.userType != 2) {
+          Get.offNamed(Routes.DELIVERY_HOME);
+        } else {
+          Get.offNamed(Routes.DASHBOARD);
+        }
       } else {
         Get.snackbar("Login Failed", response.emailLogin!.message!);
       }

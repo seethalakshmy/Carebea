@@ -1,3 +1,4 @@
+import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/modules/home/views/home_view.dart';
 import 'package:carebea/app/modules/orders/views/orders_view.dart';
 import 'package:carebea/app/modules/profile/views/profile_view.dart';
@@ -23,7 +24,7 @@ class DashboardView extends GetView<DashboardController> {
               if (controller.currentScreenIndex.value == 1) Expanded(child: ListShops()),
               if (controller.currentScreenIndex.value == 2) Expanded(child: OrdersView()),
               if (controller.currentScreenIndex.value == 3) Expanded(child: ProfileView()),
-              BottomNavBarView()
+              openKeyboardGuard(context, child: BottomNavBarView())
             ],
           );
         }),

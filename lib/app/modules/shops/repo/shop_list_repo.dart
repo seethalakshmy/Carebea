@@ -22,8 +22,8 @@ Future<ShopListResponse> shopFilter(int salesPersonId,String filterName,int filt
     return shopDataSource.shopList(salesPersonId: salesPersonId,filterId: filterId,filterName: filterName);
 }
 ///ShopSearch
-Future<ShopListResponse> shopSearch(int salesPersonId,String name,String phone,String localArea)async{
-    return shopDataSource.shopList(salesPersonId:salesPersonId,name: name,phone: phone,localArea: localArea);
+Future<ShopListResponse> shopSearch({required int salesPersonId,Map<String,dynamic>? query})async{
+    return shopDataSource.shopList(salesPersonId:salesPersonId,query: query);
 }
 
 

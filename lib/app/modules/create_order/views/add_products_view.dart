@@ -123,6 +123,7 @@ class AddProductsView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 23),
       child: CustomTextField(
+        fillcolor: customTheme(context).textFormFieldColor,
         icon: const Icon(
           CupertinoIcons.search,
           color: Color(0xff9F9F9F),
