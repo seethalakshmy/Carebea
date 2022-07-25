@@ -9,6 +9,7 @@ class CustomButton extends StatelessWidget {
     this.color,
     required this.onTap,
     this.isDense = false,
+    this.isLoading = false,
     this.fontSize = 13,
   }) : super(key: key);
 
@@ -18,11 +19,12 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onTap;
   final bool isDense;
   final double fontSize;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: isLoading ? null : onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
         decoration: BoxDecoration(color: color ?? customTheme(context).primary, borderRadius: BorderRadius.circular(5)),
@@ -33,13 +35,22 @@ class CustomButton extends StatelessWidget {
           children: [
             if (icon != null) icon!,
             if (icon != null) const SizedBox(width: 5),
-            Text(
-              title,
-              style: customTheme(context).medium.copyWith(
-                    color: Colors.white,
-                    fontSize: fontSize,
+            isLoading
+                ? SizedBox(
+                    height: fontSize + 4,
+                    width: fontSize + 4,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation(Colors.white),
+                    ),
+                  )
+                : Text(
+                    title,
+                    style: customTheme(context).medium.copyWith(
+                          color: Colors.white,
+                          fontSize: fontSize,
+                        ),
                   ),
-            ),
           ],
         ),
       ),

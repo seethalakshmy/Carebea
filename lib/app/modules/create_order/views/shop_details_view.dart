@@ -35,7 +35,7 @@ class ShopDetailsView extends GetView<CreateOrderController> {
               child: CustomButton(
                   title: 'Add Products',
                   onTap: () {
-                    Get.to(AddProductsView());
+                    Get.to(AddProductsView(),arguments: Get.arguments);
                   }),
             ),
           ],

@@ -1,5 +1,9 @@
+import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
+import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
+import 'package:carebea/app/utils/widgets/custom_card.dart';
+import 'package:carebea/app/utils/widgets/custom_radio_button.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
@@ -14,80 +18,47 @@ import '../../add_shop/views/add_shop_view.dart';
 import '../controllers/order_details_delivery_controller.dart';
 
 class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
-  const OrderDetailsDeliveryView({Key? key}) : super(key: key);
+  OrderDetailsDeliveryView({Key? key}) : super(key: key) {
+    controller.onInit();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: appBar(context),
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CustomButton(
-            title: 'Order Delivered',
-            onTap: () {
-              Get.defaultDialog(
-                  barrierDismissible: false,
-                  title: '',
-                  content: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Payment Method',
-                          style: customTheme(context).medium.copyWith(fontSize: 18),
-                        ),
-                        PaymentMethodRadioButton(),
-                        Text(
-                          'Collect amount',
-                          style: customTheme(context).regular.copyWith(fontSize: 14),
-                        ),
-                        CustomTextField(),
-                      ],
-                    ),
-                  ),
-                  confirm: CustomButton(
-                      title: 'Confirm',
-                      onTap: () {
-                        Get.back();
-                        showDialog<bool>(
-                            context: context,
-                            builder: (ctx) {
-                              return CustomAlertbox(
-                                topIcon: Image.asset(
-                                  Assets.successIcon,
-                                  width: 80,
-                                  height: 80,
-                                ),
-                                title: "Delivered Successfully",
-                                content: "Your delivery has been successful!",
-                                actions: [
-                                  CustomButton(
-                                      title: "Go to invoice details",
-                                      onTap: () {
-                                        Get.back(result: true);
-                                        Get.toNamed(Routes.DELIVERY_INVOICE_DETAILS);
-                                      })
-                                ],
-                              );
-                            });
-                      }));
-            },
-          ),
-        ),
+        floatingActionButton: Obx(() {
+          if (controller.isOrderDetailsLoading.value &&
+              (controller.orderListDetailResponse?.orderListResult?.history ?? []).isEmpty) {
+            return const SizedBox.shrink();
+          }
+          return _floatingActionButton(context);
+        }),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        body: SingleChildScrollView(
-          child: Padding(
+        body: Obx(() {
+          if (controller.isOrderDetailsLoading.value) {
+            return Center(
+              child: circularProgressIndicator(context),
+            );
+          }
+          if ((controller.orderListDetailResponse?.orderListResult?.history ?? []).isEmpty) {
+            return Center(
+              child: Text(
+                "Order data not found",
+                style: customTheme(context).regular,
+              ),
+            );
+          }
+          var order = controller.orderListDetailResponse!.orderListResult!.history!.first;
+          return Container(
+            height: Get.size.height - 30,
             padding: const EdgeInsets.only(top: 30),
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15)),
-                ),
-                elevation: 10,
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15)),
+              ),
+              elevation: 10,
+              child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 25),
+                  padding: const EdgeInsets.only(left: 20, top: 25, right: 20, bottom: 25),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -105,18 +76,19 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                             width: 10,
                           ),
                           Text(
-                            'Order ID:#456789',
+                            'Order ID:#${order.orderId}',
                             style: customTheme(context).medium.copyWith(fontSize: 18),
                           )
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30),
-                        child: Text(
-                          "Delivery Date:20/06/2022",
-                          style: customTheme(context).regular.copyWith(fontSize: 12),
+                      if (order.deliveryDate != null)
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30),
+                          child: Text(
+                            "Delivery Date:${formatDate(order.deliveryDate!)}",
+                            style: customTheme(context).regular.copyWith(fontSize: 12),
+                          ),
                         ),
-                      ),
                       SizedBox(
                         height: 30,
                       ),
@@ -159,7 +131,7 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                                     .copyWith(fontSize: 14, color: customTheme(context).secondary),
                               ),
                               Text(
-                                'Pickup',
+                                "not in api",
                                 style: customTheme(context).medium.copyWith(fontSize: 14),
                               ),
                               SizedBox(
@@ -171,15 +143,22 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                                     .medium
                                     .copyWith(fontSize: 14, color: customTheme(context).secondary),
                               ),
-                              Text(
-                                'Trinity Shop',
-                                style: customTheme(context).medium.copyWith(fontSize: 14),
-                              ),
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    'Akshya Nagar 1st Block 1st Cross,\nRammurthy nagar,Kerala-689145',
-                                    style: customTheme(context).regular.copyWith(fontSize: 14),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        order.shopName!.trim(),
+                                        style: customTheme(context).medium.copyWith(fontSize: 14),
+                                      ),
+                                      Text(
+                                        order.userAddress!.split("\n").join(" ").trim(),
+                                        style: customTheme(context).regular.copyWith(fontSize: 14),
+                                      ),
+                                    ],
                                   ),
                                   const SizedBox(width: 10),
                                   Image.asset(
@@ -199,102 +178,58 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                       SizedBox(
                         height: 10,
                       ),
-                      Row(
+                      Table(
+                        columnWidths: {0: FlexColumnWidth(7), 1: FlexColumnWidth(1), 2: FlexColumnWidth(1)},
+                        border: TableBorder.all(width: 0, color: Colors.transparent),
                         children: [
-                          Flexible(
-                            flex: 8,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Product',
-                                  style: customTheme(context).medium.copyWith(fontSize: 14),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "Eccelence Hand Wash Total Plus.",
-                                  style: customTheme(context).regular.copyWith(fontSize: 12),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  "Eccelence Hand Wash Total Plus.",
-                                  style: customTheme(context).regular.copyWith(fontSize: 12),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  "Eccelence Hand Wash Total Plus.",
-                                  style: customTheme(context).regular.copyWith(fontSize: 12),
-                                ),
-                              ],
+                          TableRow(children: [
+                            Text(
+                              'Product',
+                              style: customTheme(context).medium.copyWith(fontSize: 14),
                             ),
-                          ),
-                          SizedBox(
-                            width: 40,
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: Column(
-                              children: [
-                                Text(
-                                  'Qty',
-                                  style: customTheme(context).medium.copyWith(fontSize: 14),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text("20x", style: customTheme(context).regular.copyWith(fontSize: 12)),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text("20x", style: customTheme(context).regular.copyWith(fontSize: 12)),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text("20x", style: customTheme(context).regular.copyWith(fontSize: 12)),
-                              ],
+                            Text(
+                              'Qty',
+                              style: customTheme(context).medium.copyWith(fontSize: 14),
                             ),
-                          ),
-                          SizedBox(
-                            width: 60,
-                          ),
-                          Flexible(
-                            flex: 2,
-                            child: Column(
-                              children: [
-                                Text(
-                                  'Price',
-                                  style: customTheme(context).medium.copyWith(fontSize: 14),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "₹951",
-                                  style: customTheme(context).regular.copyWith(fontSize: 12),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  "₹172",
-                                  style: customTheme(context).regular.copyWith(fontSize: 12),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  "₹51",
-                                  style: customTheme(context).regular.copyWith(fontSize: 12),
-                                ),
-                              ],
+                            Text(
+                              'Price',
+                              style: customTheme(context).medium.copyWith(fontSize: 14),
                             ),
-                          ),
+                          ]),
+                          TableRow(children: [
+                            Text(
+                              "",
+                              style: customTheme(context).regular.copyWith(fontSize: 5),
+                            ),
+                            Text(
+                              "",
+                              style: customTheme(context).regular.copyWith(fontSize: 5),
+                            ),
+                            Text(
+                              "",
+                              style: customTheme(context).regular.copyWith(fontSize: 5),
+                            ),
+                          ]),
+                          ...List.generate(
+                            order.productList?.length ?? 0,
+                            (index) {
+                              var product = order.productList![index];
+                              return TableRow(children: [
+                                Text(
+                                  product.name!,
+                                  style: customTheme(context).regular.copyWith(fontSize: 12),
+                                ),
+                                Text(
+                                  "${product.productUomQty}x",
+                                  style: customTheme(context).regular.copyWith(fontSize: 12),
+                                ),
+                                Text(
+                                  "₹${product.price?.toStringAsFixed(2) ?? 0}",
+                                  style: customTheme(context).regular.copyWith(fontSize: 12),
+                                ),
+                              ]);
+                            },
+                          )
                         ],
                       ),
                       SizedBox(
@@ -308,7 +243,7 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                           style:
                               customTheme(context).medium.copyWith(fontSize: 14, color: customTheme(context).primary)),
                       Text(
-                        '₹1245',
+                        '₹${order.amountTotal!.toStringAsFixed(2)}',
                         style: customTheme(context).medium.copyWith(fontSize: 16),
                       ),
                     ],
@@ -316,97 +251,92 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                 ),
               ),
             ),
-          ),
-        ));
-  }
-}
-
-class PaymentMethodRadioButton extends StatefulWidget {
-  const PaymentMethodRadioButton({Key? key}) : super(key: key);
-
-  @override
-  State<PaymentMethodRadioButton> createState() => _PaymentMethodRadioButtonState();
-}
-
-class _PaymentMethodRadioButtonState extends State<PaymentMethodRadioButton> {
-  int? radioValue;
-  int? selectedRadio;
-
-  @override
-  void initState() {
-    super.initState();
-    radioValue = 1;
+          );
+        }));
   }
 
-  setSelectedRadio(int? val) {
-    setState(() {
-      selectedRadio = val!;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Radio<int>(
-            splashRadius: 0,
-            value: 1,
-            groupValue: radioValue,
-            onChanged: (val) {
-              setSelectedRadio(val);
-              radioValue = 1;
-            },
-            activeColor: Theme.of(context).extension<CustomTheme>()!.secondary),
-        const Text("COD"),
-        Radio<int>(
-          value: 2,
-          groupValue: radioValue,
-          onChanged: (val) {
-            setSelectedRadio(val);
-            radioValue = 2;
-          },
-          activeColor: Theme.of(context).extension<CustomTheme>()!.secondary,
-        ),
-        const Text("Cheque"),
-        Radio<int>(
-          value: 3,
-          groupValue: radioValue,
-          onChanged: (val) {
-            setSelectedRadio(val);
-            radioValue = 3;
-          },
-          activeColor: Theme.of(context).extension<CustomTheme>()!.secondary,
-        ),
-        const Text("Credit")
-      ],
-    );
-  }
-}
-
-class PaymentMethodAlertDialogue extends StatefulWidget {
-  const PaymentMethodAlertDialogue({Key? key}) : super(key: key);
-
-  @override
-  State<PaymentMethodAlertDialogue> createState() => _PaymentMethodAlertDialogueState();
-}
-
-class _PaymentMethodAlertDialogueState extends State<PaymentMethodAlertDialogue> {
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text("Payment Method"),
-      content: Column(
-        children: [PaymentMethodRadioButton(), CustomTextField()],
+  Padding _floatingActionButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: CustomButton(
+        title: 'Order Delivered',
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (ctx) => Material(
+              type: MaterialType.transparency,
+              color: Colors.transparent,
+              child: Center(
+                child: CustomCard(
+                  padding: const EdgeInsets.all(20),
+                  width: Get.size.width * .8,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "Payment Method",
+                        style: customTheme(context).medium.copyWith(fontSize: 14),
+                      ),
+                      const SizedBox(height: 10),
+                      Obx(() {
+                        if (controller.selectedPaymentMethod.value == PaymentMethods.cheq) {}
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CustomRadioButton<PaymentMethods>(
+                              groupValue: controller.selectedPaymentMethod.value,
+                              value: PaymentMethods.csh1,
+                              onChanged: (val) {
+                                controller.selectedPaymentMethod(val);
+                              },
+                              label: "COD",
+                            ),
+                            CustomRadioButton<PaymentMethods>(
+                              groupValue: controller.selectedPaymentMethod.value,
+                              value: PaymentMethods.cheq,
+                              onChanged: (val) {
+                                controller.selectedPaymentMethod(val);
+                              },
+                              label: "Cheque",
+                            ),
+                            CustomRadioButton<PaymentMethods>(
+                              groupValue: controller.selectedPaymentMethod.value,
+                              value: PaymentMethods.cred,
+                              onChanged: (val) {
+                                controller.selectedPaymentMethod(val);
+                              },
+                              label: "Credit",
+                            ),
+                          ],
+                        );
+                      }),
+                      const SizedBox(height: 13),
+                      Text(
+                        "Collected amount",
+                        style: customTheme(context).regular.copyWith(fontSize: 11),
+                      ),
+                      const SizedBox(height: 5),
+                      CustomTextField(
+                        textcontroller: controller.collectedAmountEditingController,
+                      ),
+                      const SizedBox(height: 20),
+                      Obx(() {
+                        return CustomButton(
+                            isLoading: controller.isConfirmingOrder.value,
+                            title: "Confirm",
+                            onTap: () {
+                              controller.confirmOrder();
+                            });
+                      })
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
       ),
-      actions: [
-        CustomButton(
-            title: 'Confirm',
-            onTap: () {
-              Get.back();
-            })
-      ],
-      elevation: 10,
     );
   }
 }

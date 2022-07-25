@@ -1,5 +1,6 @@
 import 'package:carebea/app/modules/create_order/controllers/create_order_controller.dart';
 import 'package:carebea/app/modules/create_order/views/check_out_view.dart';
+import 'package:carebea/app/modules/create_order/widgets/cart_count_widget.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
@@ -34,7 +35,7 @@ class AddProductsView extends StatelessWidget {
         ),
         bottomNavigationBar: InkWell(
           onTap: () {
-            Get.to(() => CheckoutView());
+            createOrderController.createOrder();
           },
           child: Container(
             alignment: Alignment.center,
@@ -48,7 +49,7 @@ class AddProductsView extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    "5 items  |  ",
+                    "${createOrderController.cartproducts.length} items  |  ",
                     style: customTheme(context).regular.copyWith(fontSize: 13, color: Colors.white),
                   ),
                   Text(
@@ -82,8 +83,8 @@ class AddProductsView extends StatelessWidget {
         return const SizedBox(height: 15);
       },
       itemBuilder: (BuildContext context, int index) {
-        return const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 19),
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 19),
           child: ProductTile(),
         );
       },
@@ -132,9 +133,11 @@ class AddProductsView extends StatelessWidget {
 }
 
 class ProductTile extends StatelessWidget {
-  const ProductTile({
+  ProductTile({
     Key? key,
   }) : super(key: key);
+
+  CreateOrderController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -211,13 +214,20 @@ class ProductTile extends StatelessWidget {
                             alignment: Alignment.bottomRight,
                             child: Padding(
                               padding: const EdgeInsets.only(right: 8.0),
-                              child: CustomButton(
-                                isDense: true,
-                                title: "Add",
-                                onTap: () {},
-                                fontSize: 10,
-                                color: const Color(0xff47BED9),
-                              ),
+                              child: Obx(() {
+                                if (_controller.cartproducts.containsKey(14)) {
+                                  return CartCountWidget(id: 14, count: _controller.cartproducts[14] ?? 0);
+                                }
+                                return CustomButton(
+                                  isDense: true,
+                                  title: "Add",
+                                  onTap: () {
+                                    _controller.updateCartProduct(14, 1);
+                                  },
+                                  fontSize: 10,
+                                  color: const Color(0xff47BED9),
+                                );
+                              }),
                             ),
                           ),
                         ],

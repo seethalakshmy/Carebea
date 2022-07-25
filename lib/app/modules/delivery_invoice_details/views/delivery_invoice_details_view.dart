@@ -1,6 +1,8 @@
+import 'package:carebea/app/modules/delivery_invoice_details/data/models/invoice_details_response.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
+import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:carebea/app/utils/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
@@ -9,46 +11,58 @@ import 'package:get/get.dart';
 import '../controllers/delivery_invoice_details_controller.dart';
 
 class DeliveryInvoiceDetailsView extends GetView<DeliveryInvoiceDetailsController> {
-  const DeliveryInvoiceDetailsView({Key? key}) : super(key: key);
+  DeliveryInvoiceDetailsView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:appBar(context),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _orderDetails(context),
-              const SizedBox(height: 30),
-              const Divider(),
-              const SizedBox(height: 20),
-              _billDetails(context),
-              const SizedBox(height: 50),
-              _downloadButton(),
-            ],
-          ),
-        ));
+        appBar: appBar(context),
+        body: Obx(() {
+          if (controller.isLoading.value) {
+            return Center(
+              child: circularProgressIndicator(context),
+            );
+          }
+          return SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _orderDetails(context, controller.deliveryInvoice),
+                const SizedBox(height: 30),
+                const Divider(),
+                const SizedBox(height: 20),
+                _billDetails(context, controller.deliveryInvoice),
+                const SizedBox(height: 50),
+                _downloadButton(controller.deliveryInvoice!.invoiceId!),
+              ],
+            ),
+          );
+        }));
   }
 
-  Align _downloadButton() {
+  Align _downloadButton(int invoiceId) {
     return Align(
       alignment: Alignment.bottomRight,
       child: Padding(
         padding: const EdgeInsets.only(right: 24),
-        child: CustomButton(
-          isDense: true,
-          icon: const Icon(
-            Icons.file_download_outlined,
-            color: Colors.white,
-          ),
-          title: "Download Bill",
-          onTap: () {},
-        ),
+        child: Obx(() {
+          return CustomButton(
+            isDense: true,
+            isLoading: controller.generatingInvoice.value,
+            icon: const Icon(
+              Icons.file_download_outlined,
+              color: Colors.white,
+            ),
+            title: "Download Bill",
+            onTap: () {
+              controller.generateInvoice();
+            },
+          );
+        }),
       ),
     );
   }
 
-  Widget _billDetails(BuildContext context) {
+  Widget _billDetails(BuildContext context, [InvoiceDetailsResult? deliveryInvoice]) {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
@@ -59,9 +73,9 @@ class DeliveryInvoiceDetailsView extends GetView<DeliveryInvoiceDetailsControlle
               style: customTheme(context).medium.copyWith(fontSize: 13),
             ),
             const SizedBox(height: 10),
-            PaymentTile(title: "Item Total", value: 805),
-            PaymentTile(title: "GST Tax", value: 115),
-            PaymentTile(title: "SCGST Tax", value: 15),
+            PaymentTile(title: "Item Total", value: deliveryInvoice?.itemTotal ?? 0),
+            // PaymentTile(title: "GST Tax", value: 115),
+            // PaymentTile(title: "SCGST Tax", value: 15),
             PaymentTile(title: "Discount", value: 0),
             const Divider(),
             Row(
@@ -78,7 +92,7 @@ class DeliveryInvoiceDetailsView extends GetView<DeliveryInvoiceDetailsControlle
                 Expanded(
                   flex: 1,
                   child: Text(
-                    "₹${(975).toStringAsFixed(2)}",
+                    "₹${(deliveryInvoice?.grandTotal ?? 0).toStringAsFixed(2)}",
                     style: customTheme(context).regular.copyWith(fontSize: 12),
                   ),
                 ),
@@ -88,7 +102,7 @@ class DeliveryInvoiceDetailsView extends GetView<DeliveryInvoiceDetailsControlle
         ));
   }
 
-  Padding _orderDetails(BuildContext context) {
+  Padding _orderDetails(BuildContext context, [InvoiceDetailsResult? deliveryInvoice]) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
@@ -101,22 +115,22 @@ class DeliveryInvoiceDetailsView extends GetView<DeliveryInvoiceDetailsControlle
           const SizedBox(height: 30),
           DetailsTile(
             title: "Order details",
-            content: "Order ID: #56789",
+            content: "Order ID: #${deliveryInvoice!.orderId}",
           ),
           const SizedBox(height: 5),
           DetailsTile(
             title: "Delivered at 20 June 22 at 15.03",
-            content: "Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016",
+            content: deliveryInvoice.userAddress!.split("\n").join(" ").trim(),
           ),
           const SizedBox(height: 5),
           DetailsTile(
             title: "Picked by",
-            content: "Akash Kumar",
+            content: deliveryInvoice.deliveryPersonId!,
           ),
           const SizedBox(height: 5),
           DetailsTile(
             title: "Payment method",
-            content: "Cash on delivery",
+            content: deliveryInvoice.paymentMethod!,
           ),
         ],
       ),
