@@ -19,12 +19,16 @@ class OrderDataSource {
       int? orderId,
       int? shopId,
       String? filterId,
+      String? query,
       String? filterName}) async {
     Map<String, dynamic> body = {
       'sales_person_id': salesPersonId,
     };
     if (shopId != null) {
       body.addAll({'shop_id': shopId});
+    }
+    if (query != null) {
+      body.addAll({'name': query});
     }
     if (orderType != null) {
       body.addAll({

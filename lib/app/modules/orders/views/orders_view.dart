@@ -85,7 +85,7 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                   children: [
                     Expanded(
                         child: CustomTextField(
-                      onChanged: (val) {},
+                      onChanged: (val) => ordersController.searchOrders(val),
                       hint: 'Search for orders',
                       fillcolor: Colors.grey[300],
                       icon: const Icon(
@@ -120,7 +120,11 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                                     isSelected: ordersController.filterSelected.value == "Date-${e.id}",
                                     name: e.name!,
                                     onTap: () => ordersController.filterOrders("Date", e.id!)))
-                                .toList()
+                                .toList(),
+                            customPopupMenuItem<String>(context, name: "Clear", isSelected: true, showBorder: false,
+                                onTap: () {
+                              ordersController.clearFilters();
+                            }),
                           ];
                         })
                     // PopupMenuButton<int>(
@@ -186,7 +190,7 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                 Expanded(
                   child: Obx(() {
                     if (ordersController.isOrdersLoaded.value || ordersController.isFilterClick.value) {
-                      return  Center(child: circularProgressIndicator(context));
+                      return Center(child: circularProgressIndicator(context));
                     }
                     if (ordersController.allOrders.isEmpty) {
                       return Align(alignment: Alignment.topCenter, child: Text('No Orders'));
@@ -228,7 +232,8 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: InkWell(
                 onTap: () {
-                  Get.toNamed(Routes.ORDER_HISTORY_DETAILS,arguments: {'order_id':ordersController.allOrders[index].id});
+                  Get.toNamed(Routes.ORDER_HISTORY_DETAILS,
+                      arguments: {'order_id': ordersController.allOrders[index].id});
                 },
                 child: OrderHistoryTile(orders: ordersController.allOrders[index])),
           );
