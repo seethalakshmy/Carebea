@@ -15,22 +15,21 @@ class ShopDataSource {
       {required int salesPersonId,
       int? shopId,
       String? filterName,
-      int? filterId,
-      String? name,
-      String? phone,
-      String? localArea}) async {
-    var response = await apiService.post(
-      'list-shops',
-      {
-        'sales_person_id': salesPersonId,
-        'shop_id': shopId,
-        'filter_name': filterName,
-        'filter_id': filterId,
-        'name': name,
-        'phone': phone,
-        'local_area': localArea
-      },
-    );
+      int? filterId, Map<String, dynamic>? query
+      }) async {
+    Map<String, dynamic> body = {
+      'sales_person_id': salesPersonId,
+    };
+    if (shopId != null) {
+      body.addAll({'shop_id': shopId});
+    }
+    if (filterName != null) {
+      body.addAll({'filter_name': filterName, 'filter_id': filterId});
+    }
+    if ((query ?? {}).isNotEmpty) {
+      body.addAll(query!);
+    }
+    var response = await apiService.post('list-shops', body);
     ;
     if (response.statusCode == 200) {
       return ShopListResponse.fromJson(json.decode(response.body));

@@ -38,7 +38,7 @@ class OrdersController extends GetxController {
       allOrders = allorderListResponse?.orderListResult?.history ?? [];
       filterVals = allorderListResponse!.orderListResult!.filterVals;
     } else {
-      // allOrders = [];
+      allOrders = [];
     }
 
     isOrdersLoaded(false);
@@ -60,6 +60,18 @@ class OrdersController extends GetxController {
 
   clearFilters() async {
     await fetchOrdersList(orderType: selectedOrderType);
+  }
+
+  Future<void> searchOrders(String? query) async {
+    isFilterClick(true);
+    var temp = await orderListRepo.allOrdersList(SharedPrefs.getUserId()!, getOrdertypeString(selectedOrderType),
+        query: query);
+    if (temp.orderListResult?.status ?? false) {
+      allOrders = temp.orderListResult?.history ?? [];
+    } else {
+      allOrders = [];
+    }
+    isFilterClick(false);
   }
 }
 

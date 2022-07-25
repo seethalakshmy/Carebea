@@ -73,6 +73,8 @@ class CreateOrderView extends GetView<CreateOrderController> {
           ),
           const SizedBox(height: 3),
           CustomTextField(
+        fillcolor: customTheme(context).textFormFieldColor,
+
             icon: const Icon(
               CupertinoIcons.search,
               color: Color(0xff9F9F9F),
