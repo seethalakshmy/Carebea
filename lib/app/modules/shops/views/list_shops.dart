@@ -17,7 +17,7 @@ class ListShops extends GetView<ShopsController> {
   ListShops({Key? key}) : super(key: key);
   ShopsController shopsController = Get.put(ShopsController());
   TextEditingController searchTextEditingController = TextEditingController();
-
+  FocusNode _focusNode = FocusNode();
   // static List<String> category = ['Retail', 'Supermarket', 'Wholesale', 'Zone'];
 
   // List<Category>? category;
@@ -49,16 +49,47 @@ class ListShops extends GetView<ShopsController> {
                     Row(
                       children: [
                         Expanded(
-                            child: CustomTextField(
-                          onChanged: (val) {},
-                          hint: 'Search for shops',
-                          fillcolor: Colors.grey[300],
-                          icon: const Icon(
-                            Icons.search,
-                            size: 30,
-                            color: Colors.grey,
+                          child: CustomTextField(
+                            focusNode: _focusNode,
+                            onChanged: (val) => controller.searchShop(val),
+                            hint: 'Search for shops',
+                            fillcolor: Colors.grey[300],
+                            icon: const Icon(
+                              Icons.search,
+                              size: 30,
+                              color: Colors.grey,
+                            ),
+                            trailing: Obx(() {
+                              return DropdownButton<String>(
+                                hint: Text(
+                                  "Choose",
+                                  style: customTheme(Get.context!)
+                                      .regular
+                                      .copyWith(fontSize: 11, color: const Color(0xff929292)),
+                                ),
+                                value: controller.selectedSearchtype.value.type ?? "",
+                                underline: const SizedBox.shrink(),
+                                isDense: true,
+                                onChanged: (value) {
+                                  _focusNode.requestFocus();
+                                  controller.selectedSearchtype(
+                                      controller.searchitems.singleWhere((element) => element.type == value));
+                                },
+                                items: controller.searchitems
+                                    .map(
+                                      (e) => DropdownMenuItem(
+                                        value: e.type,
+                                        child: Text(e.title!,
+                                            style: customTheme(Get.context!)
+                                                .regular
+                                                .copyWith(fontSize: 11, color: Colors.black)),
+                                      ),
+                                    )
+                                    .toList(),
+                              );
+                            }),
                           ),
-                        )),
+                        ),
                         const SizedBox(
                           width: 5,
                         ),

@@ -6,10 +6,10 @@ import 'package:get/get.dart';
 class CustomTextField extends TextFormField {
   CustomTextField(
       {Key? key,
-        this.initialvalue,
+      this.initialvalue,
       this.textcontroller,
-        this.onsubmit,
-        this.fillcolor,
+      this.onsubmit,
+      this.fillcolor,
       this.icon,
       this.inputFormatters,
       this.inputType,
@@ -20,9 +20,12 @@ class CustomTextField extends TextFormField {
       this.hint,
       this.maxlength,
       this.maxLines = 1,
+      this.trailing,
+      this.focusNode,
       this.validaton})
       : super(
           key: key,
+          focusNode: focusNode,
           initialValue: initialvalue,
           maxLength: maxlength,
           controller: textcontroller,
@@ -37,6 +40,7 @@ class CustomTextField extends TextFormField {
           maxLines: maxLines,
           style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black),
           decoration: InputDecoration(
+              suffix: trailing,
               isDense: true,
               labelText: label,
               border: OutlineInputBorder(
@@ -51,13 +55,13 @@ class CustomTextField extends TextFormField {
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide.none,
               ),
-              fillColor: fillcolor ?? Color(0xFFEFEFEF),
+              fillColor: fillcolor ?? const Color(0xFFEFEFEF),
               filled: true,
               hintText: hint,
-              hintStyle: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Color(0xff929292)),
+              hintStyle: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: const Color(0xff929292)),
               prefixIcon: icon),
         );
-
+  final FocusNode? focusNode;
   final TextEditingController? textcontroller;
   final String? label;
   final String? hint;
@@ -73,4 +77,5 @@ class CustomTextField extends TextFormField {
   final int maxLines;
   final Function(String?)? onsubmit;
   final String? initialvalue;
+  final Widget? trailing;
 }
