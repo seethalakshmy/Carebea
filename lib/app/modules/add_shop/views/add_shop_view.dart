@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:carebea/app/modules/add_shop/models/list_category.dart';
 import 'package:carebea/app/modules/add_shop/models/list_routes_model.dart' as route;
 import 'package:carebea/app/modules/add_shop/models/list_state_model.dart';
 import 'package:carebea/app/modules/add_shop/models/list_zone_model.dart' as zone;
@@ -24,6 +25,7 @@ import 'dart:developer' as developer;
 
 class AddShopView extends GetView<AddShopController> {
   AddShopView({Key? key}) : super(key: key);
+
 
 
   @override
@@ -114,8 +116,8 @@ class AddShopView extends GetView<AddShopController> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 8, bottom: 12),
-                    child: DropdownSearch<String>(
-                      validator: (String? value) {
+                    child: DropdownSearch<CategoryList>(
+                      validator: (value) {
                         if (value == null) {
                           return "Shop category  can\'t be empty";
                         }
@@ -139,12 +141,14 @@ class AddShopView extends GetView<AddShopController> {
                               fillColor: Theme.of(context)
                                   .extension<CustomTheme>()!
                                   .textFormFieldColor)),
-                      popupProps: const PopupProps.menu(
-                        showSearchBox: true,
-                        showSelectedItems: true,
-                      ),
-                      items: const ["Retail", "Wholesale"],
-                      selectedItem: "",
+
+                      items: controller.category,
+                      itemAsString: (categoryList) =>
+                      categoryList.name!,
+                      onChanged: (data){
+                        controller.selectedCategory = data;
+
+                      },
                     ),
                   ),
                   Text(
@@ -198,15 +202,20 @@ class AddShopView extends GetView<AddShopController> {
                     // ],
                     textcontroller: controller.gst,
                     validaton: (value) {
-                      if (value == null || value
-                          .trim()
-                          .isEmpty) {
-                        return 'GST  can\'t be empty';
+                      if(controller.selectedRadio.value == 1){
+
+                        if (value == null || value
+                            .trim()
+                            .isEmpty) {
+                          return 'GST  can\'t be empty';
+                        }
+                        if (RegExp(gstRegexp).hasMatch(value)) {
+                          return 'Invalid Gst';
+                        }
+                        return null;
+
                       }
-                      if (RegExp(gstRegexp).hasMatch(value)) {
-                        return 'Invalid Gst';
-                      }
-                      return null;
+
                     },
                   ),
                   SizedBox(
@@ -604,45 +613,49 @@ class AddShopView extends GetView<AddShopController> {
                   (Get.arguments['isEdit'] ?? false)
                       ? CustomButton(
                     onTap: () {
-                      controller.updateShop(
-                        name: controller.name.text,
-                        district: controller.district.text,
-                        localArea: controller.localArea.text,
-                        phone: controller.phone.text,
-                        zip: controller.zip.text,
-                        customerType: controller.selectedRadio.value,
-                        shopCategoryId: 1,
-                        latitude: 0,
-                        routeId: controller.selectedRoute!.id!,
-                        longitude: 0,
-                        gst: controller.gst.text,
-                        stateId: controller.selectedStateList!.stateId!,
-                        zoneId: 1,
-                        salesPersonId: SharedPrefs.getUserId()!,
-                        shopId: (Get.arguments['shop'] as ShopList).id!,
-                      );
+                      if (controller.addShopFormKey.currentState!.validate()) {
+                        controller.updateShop(
+                          name: controller.name.text,
+                          district: controller.district.text,
+                          localArea: controller.localArea.text,
+                          phone: controller.phone.text,
+                          zip: controller.zip.text,
+                          customerType: controller.selectedRadio.value,
+                          shopCategoryId:controller.selectedCategory!.id!,
+                          latitude: 0,
+                          routeId: controller.selectedRoute!.id!,
+                          longitude: 0,
+                          gst: controller.gst.text,
+                          stateId: controller.selectedStateList!.stateId!,
+                          zoneId: controller.selectedZone!.id!,
+                          salesPersonId: SharedPrefs.getUserId()!,
+                          shopId: (Get.arguments['shop'] as ShopList).id!,
+                        );
+                      }
                     },
                     title: 'Update Shop',
                   )
                       : CustomButton(
 
                     onTap: () {
-                      controller.addShop(
-                        name: controller.name.text,
-                        district: controller.district.text,
-                        localArea: controller.localArea.text,
-                        phone: controller.phone.text,
-                        zip: controller.zip.text,
-                        customerType: controller.selectedRadio.value,
-                        shopCategoryId: 1,
-                        latitude: 0,
-                        routeId: controller.selectedRoute!.id!,
-                        longitude: 0,
-                        gst: controller.gst.text,
-                        stateId: controller.selectedStateList!.stateId!,
-                        zoneId: 1,
-                        salesPersonId: SharedPrefs.getUserId()!,
-                      );
+                      if (controller.addShopFormKey.currentState!.validate()) {
+                        controller.addShop(
+                          name: controller.name.text,
+                          district: controller.district.text,
+                          localArea: controller.localArea.text,
+                          phone: controller.phone.text,
+                          zip: controller.zip.text,
+                          customerType: controller.selectedRadio.value,
+                          shopCategoryId:controller.selectedCategory!.id!,
+                          latitude: 0,
+                          routeId: controller.selectedRoute!.id!,
+                          longitude: 0,
+                          gst: controller.gst.text,
+                          stateId: controller.selectedStateList!.stateId!,
+                          zoneId: controller.selectedZone!.id!,
+                          salesPersonId: SharedPrefs.getUserId()!,
+                        );
+                      }
                     },
                     title: 'Add Shop',
                   )
