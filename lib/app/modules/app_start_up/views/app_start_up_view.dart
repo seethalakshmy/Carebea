@@ -45,7 +45,11 @@ class _AppStartUpViewState extends State<AppStartUpView> {
       print("validTokenPresent ${validTokenPresent}");
       print("userid ${SharedPrefs.getUserId()}");
       if (SharedPrefs.getUserId() != null) {
-        Get.offNamed(Routes.DASHBOARD);
+        if (SharedPrefs.getUserType() == 2) {
+          Get.offNamed(Routes.DELIVERY_HOME);
+        } else {
+          Get.offNamed(Routes.DASHBOARD);
+        }
       } else {
         Get.offNamed(Routes.LOGIN);
       }

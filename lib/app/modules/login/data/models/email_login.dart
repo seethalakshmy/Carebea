@@ -7,7 +7,6 @@ import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 part 'email_login.g.dart';
 
-
 @JsonSerializable()
 class EmailLoginResponse {
   EmailLoginResponse({
@@ -28,17 +27,13 @@ class EmailLoginResponse {
 
 @JsonSerializable()
 class EmailLogin {
-  EmailLogin({
-    this.status,
-    this.userId,
-    this.email,
-    this.name,
-    this.message
-  });
+  EmailLogin({this.status, this.userId, this.email, this.name, this.userType, this.message});
 
   bool? status;
   @JsonKey(name: 'user_id')
   int? userId;
+  @JsonKey(name: 'user_type')
+  int? userType;
   String? email;
   String? name;
   String? message;
@@ -47,5 +42,3 @@ class EmailLogin {
 
   Map<String, dynamic> toJson() => _$EmailLoginToJson(this);
 }
-
-

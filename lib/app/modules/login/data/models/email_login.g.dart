@@ -25,6 +25,7 @@ Map<String, dynamic> _$EmailLoginResponseToJson(EmailLoginResponse instance) =>
 EmailLogin _$EmailLoginFromJson(Map<String, dynamic> json) => EmailLogin(
       status: json['status'] as bool?,
       userId: json['user_id'] as int?,
+      userType: json['user_type'] as int?,
       email: json['email'] as String?,
       name: json['name'] as String?,
       message: json['message'] as String?,
