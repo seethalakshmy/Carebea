@@ -14,6 +14,7 @@ import '../../../utils/shared_prefs.dart';
 import '../../../utils/widgets/custom_alertbox.dart';
 import '../../../utils/widgets/custom_button.dart';
 import '../../shops/models/shop_model.dart';
+import '../models/list_category.dart';
 import '../models/list_routes_model.dart' as route_list;
 
 
@@ -41,8 +42,10 @@ class AddShopController extends GetxController {
   StateList? selectedStateList;
   StateListResponse? stateListResponse;
   RxInt selectedRadio = 1.obs;
+  CategoryList? selectedCategory;
   zone_list.ZoneListResponse? zoneListResponse;
   List< zone_list.PoolList> zoneList = <zone_list.PoolList>[];
+  List<CategoryList> category = [CategoryList(id:1,name:"Retail"), CategoryList(id:2,name:"Department"),CategoryList(id:3,name:"Wholesale"),CategoryList(id:4,name:"Supermarket")];
 
 
 
@@ -197,6 +200,9 @@ class AddShopController extends GetxController {
     zoneListResponse = await addShopRepo.zoneList();
     zoneList = zoneListResponse!.zoneListResult!.poolList??[];
     isZoneListLoading(false);
+  }
+
+  fetchCategory(){
   }
 
 

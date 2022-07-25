@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:carebea/app/core/services/api_service.dart';
+
+import '../model/productlist_model.dart';
 
 class CreateorderDataSource {
   final ApiService _apiService = ApiService();
@@ -13,5 +17,18 @@ class CreateorderDataSource {
       "shop_id": shopId,
       "products": _products,
     });
+  }
+  ///ProductLIst
+
+  Future<ProductListResponse> productList() async {
+    var response = await _apiService.post(
+      'list-products',
+      {},
+    );
+    if (response.statusCode == 200) {
+      return ProductListResponse.fromJson(json.decode(response.body));
+    } else {
+      return ProductListResponse(productListResult: ProductListResult(status: false));
+    }
   }
 }

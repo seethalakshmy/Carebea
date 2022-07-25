@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:carebea/app/modules/create_order/data/repository/create_order_repository.dart';
+import 'package:carebea/app/modules/create_order/data/repository/product_list_repo.dart';
+import 'package:carebea/app/modules/create_order/model/productlist_model.dart';
 import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:carebea/app/modules/shops/repo/shop_list_repo.dart';
 import 'package:carebea/app/utils/shared_prefs.dart';
@@ -12,6 +14,9 @@ class CreateOrderController extends GetxController {
   final CreateOrderRepository _repository = CreateOrderRepository();
   RxMap<int, int> cartproducts = RxMap();
   RxBool isLoading = true.obs;
+  RxBool isProductsLoading = true.obs;
+  final ProductListRepo _productListRepo = ProductListRepo();
+  RxList<ProductList> productList = <ProductList>[].obs;
 
   RxList<ShopList> shopList = <ShopList>[].obs;
 
@@ -19,6 +24,7 @@ class CreateOrderController extends GetxController {
   @override
   void onInit() {
     fetchShops();
+    fetchProducts();
     super.onInit();
   }
 
@@ -66,4 +72,31 @@ class CreateOrderController extends GetxController {
         shopId: (Get.arguments["shop"] as ShopList).id, salesPersonId: SharedPrefs.getUserId(), products: cartproducts);
     creatingOrder(false);
   }
+
+  Future<void> fetchProducts() async {
+    isProductsLoading(true);
+    try {
+      var res = await _productListRepo.productList();
+      productList(res.productListResult?.productList??[]);
+    } catch (error, stacktrace) {
+      log("error", error: error, stackTrace: stacktrace);
+    }
+    isProductsLoading(false);
+  }
+
+
+  productPrice(String category,ProductList product) {
+
+    switch (category) {
+      case 'retail':
+        return product.retailPrice;
+      case 'department shop':
+        return product.departmentPrice;
+      case 'wholesale':
+        return product.wholesalePrice;
+      case 'supermarket':
+        return product.supermarketPrice;
+    }
+  }
+
 }
