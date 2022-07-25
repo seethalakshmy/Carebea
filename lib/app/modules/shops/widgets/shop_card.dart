@@ -38,6 +38,7 @@ class ShopListTile extends StatelessWidget {
               height: 6,
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(
                   Assets.assetsLocationFilled,
@@ -46,9 +47,11 @@ class ShopListTile extends StatelessWidget {
                 const SizedBox(
                   width: 5,
                 ),
-                Text(
-                  getFullAddress(shop.address),
-                  style: customTheme(context).regular.copyWith(fontSize: 11),
+                Flexible(
+                  child: Text(
+                    getFullAddress(shop.address),
+                    style: customTheme(context).regular.copyWith(fontSize: 11),
+                  ),
                 ),
               ],
             ),

@@ -4,10 +4,13 @@ import 'package:carebea/app/modules/profile/widgets/logout_button.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/shared_prefs.dart';
 import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
+import 'package:carebea/app/utils/widgets/custom_alertbox.dart';
+import 'package:carebea/app/utils/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart';
+import 'package:restart_app/restart_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/assets.dart';
@@ -21,10 +24,8 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if(profileController.isProfileLoaded.value){
-        return Align(
-          alignment: Alignment.center,
-            child: circularProgressIndicator(context));
+      if (profileController.isProfileLoaded.value) {
+        return Align(alignment: Alignment.center, child: circularProgressIndicator(context));
       }
       return Scaffold(
           appBar: appBar(context),
@@ -33,62 +34,110 @@ class ProfileView extends GetView<ProfileController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Profile Details',
+                Text(
+                  'Profile Details',
                   style: customTheme(context).medium.copyWith(fontSize: 14),
                 ),
-                SizedBox(height: MediaQuery
-                    .of(context)
-                    .size
-                    .height * .05,),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * .05,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircleAvatar(
                       backgroundColor: Colors.transparent,
                       radius: 50,
-                      child: Image.asset(Assets.profile, fit: BoxFit.contain,),
+                      child: Image.asset(
+                        Assets.profile,
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ],
                 ),
-                SizedBox(height: 10,),
-                Text('Name',
-                  style: customTheme(context).regular.copyWith(
-                      fontSize: 12, color: Colors.grey),
+                SizedBox(
+                  height: 10,
                 ),
-                Text(profileController.profileResponse!.profileResponseResult!
-                    .name!,
-
+                Text(
+                  'Name',
+                  style: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.grey),
+                ),
+                Text(
+                  profileController.profileResponse!.profileResponseResult!.name!,
                   style: customTheme(context).regular.copyWith(fontSize: 14),
-
                 ),
-                SizedBox(height: 10,),
-                Text('Branch',
-                  style: customTheme(context).regular.copyWith(
-                      fontSize: 12, color: Colors.grey),
+                SizedBox(
+                  height: 10,
                 ),
-                Text('Carebae Branch',
+                Text(
+                  'Branch',
+                  style: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.grey),
+                ),
+                Text(
+                  'Carebae Branch',
                   style: customTheme(context).regular.copyWith(fontSize: 14),
-
                 ),
-                SizedBox(height: 10,),
-                Text('Mobile number',
-                  style: customTheme(context).regular.copyWith(
-                      fontSize: 12, color: Colors.grey),
+                SizedBox(
+                  height: 10,
                 ),
-                Text(profileController.profileResponse!.profileResponseResult!
-                    .phone!,
+                Text(
+                  'Mobile number',
+                  style: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.grey),
+                ),
+                Text(
+                  profileController.profileResponse!.profileResponseResult!.phone!,
                   style: customTheme(context).regular.copyWith(fontSize: 14),
-
                 ),
-                LogoutButton(
-
-                )
-
-
+                const Spacer(),
+                Align(
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    onPressed: () {
+                      logout();
+                    },
+                    child: Text(
+                      "Logout",
+                      style: customTheme(context).medium.copyWith(color: customTheme(context).primary),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
               ],
             ),
-          )
-      );
+          ));
+    });
+  }
+
+  void logout() {
+    showDialog<bool>(
+      context: Get.context!,
+      builder: (ctx) => CustomAlertbox(
+        title: "Logout",
+        content: "Are you sure you want to logout?",
+        actions: [
+          Expanded(child: CustomButton(title: "Yes", onTap: () => Get.back(result: true))),
+          const SizedBox(width: 10),
+          Expanded(child: CustomButton(title: "No", onTap: () => Get.back(result: false))),
+        ],
+      ),
+    ).then((value) {
+      if (value ?? false) {
+        var DeveiceId = SharedPrefs.getDeviceId();
+        var DeveiceType = SharedPrefs.getDeviceType();
+        var appVersion = SharedPrefs.getAppVersion();
+        var accessToken = SharedPrefs.getAccessToken();
+        var refreshToken = SharedPrefs.getAccessToken();
+
+        SharedPrefs.shared.clear();
+
+        SharedPrefs.setDeviceId(DeveiceId);
+        SharedPrefs.setDeviceType(DeveiceType);
+        SharedPrefs.setAppVersion(appVersion);
+        SharedPrefs.setAccessToken(accessToken!);
+        SharedPrefs.setRefreshToken(refreshToken!);
+
+        // Get.offAllNamed(Routes.APP_START_UP);
+        Restart.restartApp();
+      }
     });
   }
 }

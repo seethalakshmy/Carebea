@@ -1,4 +1,5 @@
 import 'package:carebea/app/modules/create_order/controllers/create_order_controller.dart';
+import 'package:carebea/app/modules/create_order/widgets/cart_count_widget.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
@@ -14,78 +15,75 @@ import 'package:get/get.dart';
 import 'package:slide_to_confirm/slide_to_confirm.dart';
 
 class CheckoutView extends StatelessWidget {
-   CheckoutView({Key? key}) : super(key: key);
+  CheckoutView({Key? key}) : super(key: key);
   CreateOrderController createOrderController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return WillPopScope
-    (
-            onWillPop: ()=>createOrderController.onWillpopClose(),
+    return WillPopScope(
+      onWillPop: () => createOrderController.onWillpopClose(),
       child: Scaffold(
-        appBar:appBar(context),
-       
-          body: ListView(
+        appBar: appBar(context),
+        body: ListView(
+          children: [
+            _title(context),
+            const SizedBox(height: 15),
+            _addressTile(context),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 24, 24, 19),
+              child: _productListing(context),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 35),
+              child: _paymentMethods(context),
+            ),
+            _billDetails(context),
+            _comments()
+          ],
+        ),
+        bottomNavigationBar: Container(
+          padding: const EdgeInsets.only(left: 23, right: 4),
+          alignment: Alignment.center,
+          height: 55,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [BoxShadow(color: customTheme(context).shadowColor, blurRadius: 10)],
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(7)),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _title(context),
-              const SizedBox(height: 15),
-              _addressTile(context),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24, 24, 24, 19),
-                child: _productListing(context),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Total",
+                    style: customTheme(context).regular.copyWith(fontSize: 11),
+                  ),
+                  Text(
+                    "₹975",
+                    style: customTheme(context).medium.copyWith(fontSize: 16),
+                  ),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24, 0, 24, 35),
-                child: _paymentMethods(context),
-              ),
-              _billDetails(context),
-              _comments()
+              Container(
+                decoration: BoxDecoration(color: customTheme(context).primary, borderRadius: BorderRadius.circular(7)),
+                child: ConfirmationSlider(
+                  backgroundColor: customTheme(context).primary,
+                  // height: 48,
+                  // width: 200,
+                  shadow: BoxShadow(color: Colors.transparent),
+                  onConfirmation: () => onConfirm(context),
+                  foregroundColor: Colors.transparent,
+                  text: "Swipe to Confirm",
+                  textStyle: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.white),
+                ),
+              )
             ],
           ),
-          bottomNavigationBar: Container(
-            padding: const EdgeInsets.only(left: 23, right: 4),
-            alignment: Alignment.center,
-            height: 55,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [BoxShadow(color: customTheme(context).shadowColor, blurRadius: 10)],
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(7)),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Total",
-                      style: customTheme(context).regular.copyWith(fontSize: 11),
-                    ),
-                    Text(
-                      "₹975",
-                      style: customTheme(context).medium.copyWith(fontSize: 16),
-                    ),
-                  ],
-                ),
-                Container(
-                  decoration: BoxDecoration(color: customTheme(context).primary, borderRadius: BorderRadius.circular(7)),
-                  child: ConfirmationSlider(
-                    backgroundColor: customTheme(context).primary,
-                    // height: 48,
-                    // width: 200,
-                    shadow: BoxShadow(color: Colors.transparent),
-                    onConfirmation: () => onConfirm(context),
-                    foregroundColor: Colors.transparent,
-                    text: "Swipe to Confirm",
-                    textStyle: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.white),
-                  ),
-                )
-              ],
-            ),
-          ),
         ),
-    
+      ),
     );
   }
 
@@ -320,6 +318,8 @@ class ProductTile extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  static final CreateOrderController _controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return CustomCard(
@@ -358,34 +358,12 @@ class ProductTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Row(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: customTheme(context).secondary.withOpacity(.2),
-                            child: IconButton(
-                                color: const Color(0xff909090),
-                                onPressed: () {},
-                                icon: const RotatedBox(quarterTurns: 3, child: Icon(Icons.chevron_left))),
-                          ),
-                          const SizedBox(width: 6),
-                          Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(color: Color(0xffF1F1F1), borderRadius: BorderRadius.circular(2)),
-                            child: Text(
-                              "12",
-                              style: customTheme(context).regular.copyWith(fontSize: 12),
-                            ),
-                          ),
-                          const SizedBox(width: 6),
-                          CircleAvatar(
-                            backgroundColor: customTheme(context).secondary.withOpacity(.2),
-                            child: IconButton(
-                                color: customTheme(context).secondary,
-                                onPressed: () {},
-                                icon: RotatedBox(quarterTurns: 1, child: Icon(Icons.chevron_left))),
-                          ),
-                        ],
-                      ),
+                      Obx(() {
+                        return CartCountWidget(
+                          id: 14,
+                          count: _controller.cartproducts[14]!,
+                        );
+                      }),
                       Text(
                         "₹205",
                         style: customTheme(context).medium.copyWith(fontSize: 14),

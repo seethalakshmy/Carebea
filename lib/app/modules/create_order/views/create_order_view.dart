@@ -28,37 +28,37 @@ class CreateOrderView extends GetView<CreateOrderController> {
             children: [
               _title(context),
               _search(context),
-              Obx(() {
-                if (controller.isLoading.value) {
-                  return Container(
-                    width: double.infinity,
-                    height: Get.size.height * .4,
-                    alignment: Alignment.center,
-                    child: circularProgressIndicator(context),
-                  );
-                }
-                return CustomCard(
-                  hasShadow: false,
-                  margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 11),
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  color: const Color(0xffFAFAFA),
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    itemCount: controller.shopList.length,
-                    separatorBuilder: (_, __) => Container(
-                      height: 1,
-                      color: const Color(0xffE1E1E1),
+              Flexible(
+                child: Obx(() {
+                  if (controller.isLoading.value) {
+                    return Container(
+                      width: double.infinity,
+                      height: Get.size.height * .4,
+                      alignment: Alignment.center,
+                      child: circularProgressIndicator(context),
+                    );
+                  }
+                  return CustomCard(
+                    hasShadow: false,
+                    margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 11),
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    color: const Color(0xffFAFAFA),
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: controller.shopList.length,
+                      separatorBuilder: (_, __) => Container(
+                        height: 1,
+                        color: const Color(0xffE1E1E1),
+                      ),
+                      itemBuilder: (context, index) => ShopTile(shop: controller.shopList[index]),
                     ),
-                    itemBuilder: (context, index) => ShopTile(shop: controller.shopList[index]),
-                  ),
-                );
-              }),
+                  );
+                }),
+              ),
             ],
           )),
     );
   }
-
-
 
   Padding _search(BuildContext context) {
     return Padding(
