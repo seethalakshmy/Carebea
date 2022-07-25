@@ -5,7 +5,7 @@
 import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
-
+part 'productlist_model.g.dart';
 
 @JsonSerializable()
 class ProductListResponse {
@@ -40,6 +40,7 @@ class ProductListResult {
   String? category;
   List<dynamic>? childrenCategories;
   String? message;
+  @JsonKey(name: 'product_list')
   List<ProductList>? productList;
 
   factory ProductListResult.fromJson(Map<String, dynamic> json) => _$ProductListResultFromJson(json);
@@ -68,61 +69,29 @@ class ProductList {
     this.productImages,
   });
 
-  List<dynamic> imageUrl;
-  int qtyAvailable;
-  String mlLang;
-  String available;
-  int id;
-  int productTmplId;
-  String name;
-  String description;
-  int price;
-  int retailPrice;
-  int departmentPrice;
-  int wholesalePrice;
-  int supermarketPrice;
-  String enLang;
-  String unit;
-  int productId;
-  List<dynamic> productImages;
+  List<dynamic>? imageUrl;
+  double? qtyAvailable;
+  String? mlLang;
+  String? available;
+  int? id;
+  int? productTmplId;
+  String? name;
+  String? description;
+  double? price;
+  @JsonKey(name: 'retail_price')
+  double? retailPrice;
+  @JsonKey(name: 'department_price')
+  double? departmentPrice;
+  @JsonKey(name: 'wholesale_price')
+  double? wholesalePrice;
+  @JsonKey(name: 'supermarket_price')
+  double? supermarketPrice;
+  String? enLang;
+  String? unit;
+  int? productId;
+  List<dynamic>? productImages;
 
-  factory ProductList.fromJson(Map<String, dynamic> json) => ProductList(
-    imageUrl: List<dynamic>.from(json["imageUrl"].map((x) => x)),
-    qtyAvailable: json["qtyAvailable"],
-    mlLang: json["mlLang"],
-    available: json["available"],
-    id: json["id"],
-    productTmplId: json["productTmplId"],
-    name: json["name"],
-    description: json["description"],
-    price: json["price"],
-    retailPrice: json["retail_price"],
-    departmentPrice: json["department_price"],
-    wholesalePrice: json["wholesale_price"],
-    supermarketPrice: json["supermarket_price"],
-    enLang: json["enLang"],
-    unit: json["unit"],
-    productId: json["productId"],
-    productImages: List<dynamic>.from(json["productImages"].map((x) => x)),
-  );
+  factory ProductList.fromJson(Map<String, dynamic> json) => _$ProductListFromJson(json);
 
-  Map<String, dynamic> toJson() => {
-    "imageUrl": List<dynamic>.from(imageUrl.map((x) => x)),
-    "qtyAvailable": qtyAvailable,
-    "mlLang": mlLang,
-    "available": available,
-    "id": id,
-    "productTmplId": productTmplId,
-    "name": name,
-    "description": description,
-    "price": price,
-    "retail_price": retailPrice,
-    "department_price": departmentPrice,
-    "wholesale_price": wholesalePrice,
-    "supermarket_price": supermarketPrice,
-    "enLang": enLang,
-    "unit": unit,
-    "productId": productId,
-    "productImages": List<dynamic>.from(productImages.map((x) => x)),
-  };
+  Map<String, dynamic> toJson() => _$ProductListToJson(this);
 }
