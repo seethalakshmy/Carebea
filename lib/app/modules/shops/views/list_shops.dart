@@ -1,3 +1,4 @@
+import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/modules/shops/controllers/shops_controller.dart';
 import 'package:carebea/app/modules/shops/widgets/shop_card.dart';
 import 'package:carebea/app/routes/app_pages.dart';
@@ -28,7 +29,7 @@ class ListShops extends GetView<ShopsController> {
         onWillPop: () => controller.onWillpopClose(),
         child: Scaffold(
             appBar: appBar(context),
-            floatingActionButton: _addNewShopButton(context),
+            floatingActionButton: openKeyboardGuard(context, child: _addNewShopButton(context)),
             body: Obx(() {
               if (shopsController.isLoading.value) {
                 return Center(child: circularProgressIndicator(context));
@@ -53,7 +54,7 @@ class ListShops extends GetView<ShopsController> {
                             focusNode: _focusNode,
                             onChanged: (val) => controller.searchShop(val),
                             hint: 'Search for shops',
-                            fillcolor: Colors.grey[300],
+                            fillcolor: customTheme(context).textFormFieldColor,
                             icon: const Icon(
                               Icons.search,
                               size: 30,

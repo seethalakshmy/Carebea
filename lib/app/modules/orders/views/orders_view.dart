@@ -1,3 +1,4 @@
+import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/modules/order_history_details/views/order_history_details_view.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
@@ -37,7 +38,7 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(context),
-      floatingActionButton: _createNewOrderButton(context),
+      floatingActionButton: openKeyboardGuard(context, child: _createNewOrderButton(context)),
       body: DefaultTabController(
         length: 2,
         child: Padding(
@@ -87,7 +88,8 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                         child: CustomTextField(
                       onChanged: (val) => ordersController.searchOrders(val),
                       hint: 'Search for orders',
-                      fillcolor: Colors.grey[300],
+                              fillcolor: customTheme(context).textFormFieldColor,
+
                       icon: const Icon(
                         Icons.search,
                         size: 30,

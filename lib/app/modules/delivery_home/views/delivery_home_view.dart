@@ -53,6 +53,8 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
               Padding(
                   padding: const EdgeInsets.only(left: 15.0, right: 15.0),
                   child: CustomTextField(
+        fillcolor: customTheme(context).textFormFieldColor,
+
                     icon: Icon(CupertinoIcons.search),
                     hint: "Search for shops, orders",
                   )),

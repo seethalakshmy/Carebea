@@ -95,3 +95,10 @@ String getFullAddress(Address? address) {
 }
 
 String formatDate(DateTime date) => DateFormat(" MM/dd/y").format(date);
+
+Widget openKeyboardGuard(BuildContext context, {required Widget child}) {
+  if (MediaQuery.of(context).viewInsets.bottom != 0) {
+    return const SizedBox.shrink();
+  }
+  return child;
+}

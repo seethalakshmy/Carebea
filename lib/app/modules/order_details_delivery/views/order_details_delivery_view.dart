@@ -30,7 +30,7 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
               (controller.orderListDetailResponse?.orderListResult?.history ?? []).isEmpty) {
             return const SizedBox.shrink();
           }
-          return _floatingActionButton(context);
+          return openKeyboardGuard(context,child: _floatingActionButton(context));
         }),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: Obx(() {
