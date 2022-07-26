@@ -59,6 +59,7 @@ class UpcomingDeliveryList {
     this.shopName,
     this.amountTotal,
     this.status,
+    this.shopAddress
   });
 @JsonKey(name: 'order_id')
   int? orderId;
@@ -66,6 +67,8 @@ class UpcomingDeliveryList {
   String? orderName;
   @JsonKey(name: 'shop_name')
   String? shopName;
+  @JsonKey(name: 'shop_address')
+  String? shopAddress;
   @JsonKey(name: 'amount_total')
   double? amountTotal;
   String? status;

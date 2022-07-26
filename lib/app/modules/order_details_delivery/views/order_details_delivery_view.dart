@@ -26,11 +26,12 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
     return Scaffold(
         appBar: appBar(context),
         floatingActionButton: Obx(() {
-          if (controller.isOrderDetailsLoading.value &&
+          if (controller.isOrderDetailsLoading.value ||
               (controller.orderListDetailResponse?.orderListResult?.history ?? []).isEmpty) {
             return const SizedBox.shrink();
           }
-          return openKeyboardGuard(context,child: _floatingActionButton(context));
+
+          return openKeyboardGuard(context, child: _floatingActionButton(context));
         }),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: Obx(() {
@@ -41,9 +42,35 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
           }
           if ((controller.orderListDetailResponse?.orderListResult?.history ?? []).isEmpty) {
             return Center(
-              child: Text(
-                "Order data not found",
-                style: customTheme(context).regular,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, top: 25, right: 20, bottom: 25),
+                    child: Row(
+                      children: [
+                        InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Icon(
+                              Icons.arrow_back_ios_new,
+                              size: 20,
+                            )),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Order ID:#${Get.arguments['order_id']}',
+                          style: customTheme(context).medium.copyWith(fontSize: 18),
+                        )
+                      ],
+                    ),
+                  ),
+                  Text(
+                    "Order data not found",
+                    style: customTheme(context).regular,
+                  ),
+                ],
               ),
             );
           }

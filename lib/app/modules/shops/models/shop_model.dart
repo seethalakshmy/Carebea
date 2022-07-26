@@ -7,7 +7,6 @@ import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 part 'shop_model.g.dart';
 
-
 @JsonSerializable()
 class ShopListResponse {
   ShopListResponse({
@@ -24,8 +23,6 @@ class ShopListResponse {
 
   Map<String, dynamic> toJson() => _$ShopListResponseToJson(this);
 }
-
-
 
 @JsonSerializable()
 class ShopListResult {
@@ -49,6 +46,7 @@ class ShopListResult {
 
   Map<String, dynamic> toJson() => _$ShopListResultToJson(this);
 }
+
 @JsonSerializable()
 class FilterVal {
   FilterVal({
@@ -67,6 +65,7 @@ class FilterVal {
 
   Map<String, dynamic> toJson() => _$FilterValToJson(this);
 }
+
 @JsonSerializable()
 class Category {
   Category({
@@ -81,6 +80,7 @@ class Category {
 
   Map<String, dynamic> toJson() => _$CategoryToJson(this);
 }
+
 @JsonSerializable()
 class ShopList {
   ShopList({
@@ -97,6 +97,7 @@ class ShopList {
     this.credBalance,
     this.latitude,
     this.longitude,
+    this.routeId,this.zoneId,
   });
 
   int? id;
@@ -116,11 +117,16 @@ class ShopList {
   double? credBalance;
   double? latitude;
   double? longitude;
+  @JsonKey(name: "route_id")
+  int? routeId;
+  @JsonKey(name: "zone_id")
+  int? zoneId;
 
   factory ShopList.fromJson(Map<String, dynamic> json) => _$ShopListFromJson(json);
 
   Map<String, dynamic> toJson() => _$ShopListToJson(this);
 }
+
 @JsonSerializable()
 class Address {
   Address({
@@ -150,4 +156,3 @@ class Address {
 
   Map<String, dynamic> toJson() => _$AddressToJson(this);
 }
-
