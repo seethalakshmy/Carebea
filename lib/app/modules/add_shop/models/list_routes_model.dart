@@ -36,9 +36,9 @@ class RouteListResult {
 
   bool? status;
   String? message;
-  @JsonKey(name: 'state_count')
+  @JsonKey(name: 'route_count')
   int? stateCount;
-  @JsonKey(name: 'pool_list')
+  @JsonKey(name: 'route_list')
   List<PoolList>? poolList;
 
   factory RouteListResult.fromJson(Map<String, dynamic> json) => _$RouteListResultFromJson(json);
@@ -50,10 +50,12 @@ class PoolList {
   PoolList({
     this.id,
     this.name,
+    this.address
   });
 
   int? id;
   String? name;
+  String? address;
 
   factory  PoolList.fromJson(Map<String, dynamic> json) => _$PoolListFromJson(json);
 

@@ -86,6 +86,7 @@ class ShopList {
   ShopList({
     this.id,
     this.name,
+    this.lastName,
     this.category,
     this.type,
     this.email,
@@ -100,6 +101,8 @@ class ShopList {
 
   int? id;
   String? name;
+  @JsonKey(name: 'last_name')
+  String? lastName;
   String? category;
   String? type;
   String? email;

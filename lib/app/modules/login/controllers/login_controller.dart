@@ -53,7 +53,7 @@ class LoginController extends GetxController {
 
         print("userid ${SharedPrefs.getUserId()}");
 
-        if (response.emailLogin!.userType != 2) {
+        if (response.emailLogin!.userType == 2) {
           Get.offNamed(Routes.DELIVERY_HOME);
         } else {
           Get.offNamed(Routes.DASHBOARD);

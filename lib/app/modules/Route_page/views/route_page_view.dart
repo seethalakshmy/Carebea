@@ -59,12 +59,15 @@ class RoutePageView extends GetView<RoutePageController> {
                                 hasShadow: false,
                                 color: Theme.of(context).extension<
                                     CustomTheme>()!.cardBackground,
-                                height: 100,
+
                                 width: MediaQuery
                                     .of(context)
                                     .size
                                     .width,
                                 child: ListTile(
+                                  trailing: const Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    size: 15, color: Colors.black,) ,
                                   title: Text('Route:${controller.routeList[index].name}',
                                     style: customTheme(context).medium.copyWith(
                                         fontSize: 12),),
@@ -76,13 +79,11 @@ class RoutePageView extends GetView<RoutePageController> {
                                           scale: 3,),
                                         const SizedBox(width: 5,),
                                         Text(
-                                          'Akshaya Nagar ist Block ist Cross,Rammurthy .....',
+                                          controller.routeList[index].address?.split('\n').join(" ")??'',
                                           style: customTheme(context).medium
                                               .copyWith(fontSize: 12),),
-                                        const SizedBox(width: 20,),
-                                        const Icon(
-                                          Icons.arrow_forward_ios_rounded,
-                                          size: 25, color: Colors.black,)
+
+
                                       ],
                                     ),
                                   ),

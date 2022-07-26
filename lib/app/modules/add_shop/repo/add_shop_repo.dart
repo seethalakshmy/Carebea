@@ -19,6 +19,7 @@ class AddShopRepo {
 
   Future<AddShopResponse> addShop(int salesPersonId,
       String name,
+      String lastName,
       String phone,
       int shopCategoryId,
       int customerType,
@@ -45,12 +46,13 @@ class AddShopRepo {
         zoneId: zoneId,
         routeId: routeId,
         longitude: longitude,
-        latitude: latitude);
+        latitude: latitude, lastName:lastName);
   }
 
   Future<AddShopResponse> updateShop(int shopId,
       int salesPersonId,
       String name,
+      String lastName,
       String phone,
       int shopCategoryId,
       int customerType,
@@ -77,7 +79,7 @@ class AddShopRepo {
         zoneId: zoneId,
         routeId: routeId,
         latitude: latitude,
-        longitude: longitude);
+        longitude: longitude, lastName:lastName);
   }
 
   Future<RouteListResponse> routeList() {
