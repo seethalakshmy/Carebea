@@ -80,11 +80,9 @@ History _$HistoryFromJson(Map<String, dynamic> json) => History(
       productList: (json['product_list'] as List<dynamic>?)
           ?.map((e) => ProductList.fromJson(e as Map<String, dynamic>))
           .toList(),
-      deliveryDate: json['delivery_date'] == null
-          ? null
-          : DateTime.parse(json['delivery_date'] as String),
       productTotal: (json['product_total'] as num?)?.toDouble(),
       shopName: json['shop_name'] as String?,
+      amountDue: (json['amount_due'] as num?)?.toDouble(),
       srName: json['sr_name'] as String?,
     );
 
@@ -98,12 +96,12 @@ Map<String, dynamic> _$HistoryToJson(History instance) => <String, dynamic>{
       'order_id': instance.orderId,
       'image_url_list': instance.imageUrlList,
       'date_order': instance.dateOrder?.toIso8601String(),
-      'delivery_date': instance.deliveryDate?.toIso8601String(),
       'status': instance.status,
       'user_address': instance.userAddress,
       'sr_name': instance.srName,
       'shop_name': instance.shopName,
       'amount_tax': instance.amountTax,
+      'amount_due': instance.amountDue,
       'product_list': instance.productList,
     };
 
