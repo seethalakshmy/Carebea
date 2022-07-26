@@ -88,6 +88,8 @@ ShopList _$ShopListFromJson(Map<String, dynamic> json) => ShopList(
       credBalance: (json['cred_balance'] as num?)?.toDouble(),
       latitude: (json['latitude'] as num?)?.toDouble(),
       longitude: (json['longitude'] as num?)?.toDouble(),
+      routeId: json['route_id'] as int?,
+      zoneId: json['zone_id'] as int?,
     );
 
 Map<String, dynamic> _$ShopListToJson(ShopList instance) => <String, dynamic>{
@@ -104,6 +106,8 @@ Map<String, dynamic> _$ShopListToJson(ShopList instance) => <String, dynamic>{
       'cred_balance': instance.credBalance,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
+      'route_id': instance.routeId,
+      'zone_id': instance.zoneId,
     };
 
 Address _$AddressFromJson(Map<String, dynamic> json) => Address(
