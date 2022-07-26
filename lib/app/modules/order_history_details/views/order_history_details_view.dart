@@ -25,7 +25,7 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
           if (controller.isOrderDetailsLoaded.value) {
             return Center(child: circularProgressIndicator(context));
           }
-          var orders = controller.orderListDetailResponse!.orderListResult!.history!.first;
+
           return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(15.0),
@@ -45,278 +45,290 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                         width: 15,
                       ),
                       Text(
-                        'Order ID: #${orders.orderId}',
+                        'Order ID: #${Get.arguments['order_id']}',
                         style: customTheme(context).medium.copyWith(fontSize: 16),
                       ),
                       const Spacer(),
-                      Image.asset(
-                        Assets.edit,
-                        scale: 3,
-                      )
+                      // Image.asset(
+                      //   Assets.edit,
+                      //   scale: 3,
+                      // )
                     ],
                   ),
                   SizedBox(
                     height: 25,
                   ),
-                  CustomCard(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Order ID: #${orders.id}',
+                  Builder(builder: (context) {
+                    if (!(controller.orderListDetailResponse?.orderListResult?.status ?? false)) {
+                      return Center(
+                        child: Text(
+                          controller.orderListDetailResponse?.orderListResult?.message ??
+                              "Something happend, Please try again",
+                          style: customTheme(context).regular,
+                        ),
+                      );
+                    }
+                    var orders = controller.orderListDetailResponse!.orderListResult!.history!.first;
+                    return CustomCard(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 8),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Order ID: #${orders.id}',
+                                      style: customTheme(context)
+                                          .medium
+                                          .copyWith(fontSize: 12, color: customTheme(context).secondary),
+                                    ),
+                                    if (orders.deliveryDate != null)
+                                      Text(
+                                        'Delivery Date : ${formatDate(orders.deliveryDate!)}',
+                                        style: customTheme(context).regular.copyWith(fontSize: 10),
+                                      ),
+                                  ],
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: customTheme(context).action.withOpacity(.25),
+                                  ),
+                                  child: Text(
+                                    'Delivered',
                                     style: customTheme(context)
                                         .medium
-                                        .copyWith(fontSize: 12, color: customTheme(context).secondary),
+                                        .copyWith(fontSize: 10, color: customTheme(context).action),
                                   ),
-                                  if (orders.deliveryDate != null)
-                                    Text(
-                                      'Delivery Date : ${formatDate(orders.deliveryDate!)}',
-                                      style: customTheme(context).regular.copyWith(fontSize: 10),
-                                    ),
-                                ],
-                              ),
-                              Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: customTheme(context).action.withOpacity(.25),
                                 ),
-                                child: Text(
-                                  'Delivered',
-                                  style: customTheme(context)
-                                      .medium
-                                      .copyWith(fontSize: 10, color: customTheme(context).action),
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          height: .5,
-                          width: MediaQuery.of(context).size.width,
-                          color: Colors.grey,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 14),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Sales Representative: ${orders.srName}",
-                                style: customTheme(context).medium.copyWith(fontSize: 12),
-                              ),
-                              Text(
-                                "ordered date: ${formatDate(orders.dateOrder!)}",
-                                style: customTheme(context).regular.copyWith(fontSize: 11),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Image.asset(
-                                    Assets.assetsLocationFilled,
-                                    scale: 3,
+                          Container(
+                            height: .5,
+                            width: MediaQuery.of(context).size.width,
+                            color: Colors.grey,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 14),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Sales Representative: ${orders.srName}",
+                                  style: customTheme(context).medium.copyWith(fontSize: 12),
+                                ),
+                                Text(
+                                  "ordered date: ${formatDate(orders.dateOrder!)}",
+                                  style: customTheme(context).regular.copyWith(fontSize: 11),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Image.asset(
+                                      Assets.assetsLocationFilled,
+                                      scale: 3,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          orders.shopName!,
+                                          style: customTheme(context).medium.copyWith(fontSize: 11),
+                                        ),
+                                        Text(
+                                          orders.userAddress!.split("\n").join(" "),
+                                          style: customTheme(context).regular.copyWith(fontSize: 11),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Text(
+                                  "Outstanding amount",
+                                  style: customTheme(context).medium.copyWith(fontSize: 11),
+                                ),
+                                Text(
+                                  "₹${orders.amountDue!.toStringAsFixed(2)}",
+                                  style: customTheme(context).regular.copyWith(fontSize: 11),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: .5,
+                            width: MediaQuery.of(context).size.width,
+                            color: Colors.grey,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 14),
+                            child: Table(
+                              columnWidths: {0: FlexColumnWidth(8), 1: FlexColumnWidth(1), 2: FlexColumnWidth(1)},
+                              border: TableBorder.all(width: 0, color: Colors.transparent),
+                              children: [
+                                TableRow(children: [
+                                  Text(
+                                    'Product',
+                                    style: customTheme(context).medium.copyWith(fontSize: 12),
                                   ),
-                                  SizedBox(
-                                    width: 5,
+                                  Text(
+                                    'Qty',
+                                    style: customTheme(context).medium.copyWith(fontSize: 12),
                                   ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
+                                  Text(
+                                    'Price',
+                                    style: customTheme(context).medium.copyWith(fontSize: 12),
+                                  ),
+                                ]),
+                                TableRow(children: [
+                                  Text(
+                                    "",
+                                    style: customTheme(context).regular.copyWith(fontSize: 5),
+                                  ),
+                                  Text(
+                                    "",
+                                    style: customTheme(context).regular.copyWith(fontSize: 5),
+                                  ),
+                                  Text(
+                                    "",
+                                    style: customTheme(context).regular.copyWith(fontSize: 5),
+                                  ),
+                                ]),
+                                ...List.generate(
+                                  orders.productList?.length ?? 0,
+                                  (index) {
+                                    var product = orders.productList![index];
+                                    return TableRow(children: [
                                       Text(
-                                        orders.shopName!,
-                                        style: customTheme(context).medium.copyWith(fontSize: 11),
-                                      ),
-                                      Text(
-                                        orders.userAddress!.split("\n").join(" "),
+                                        product.name!,
                                         style: customTheme(context).regular.copyWith(fontSize: 11),
                                       ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Text(
-                                "Outstanding amount",
-                                style: customTheme(context).medium.copyWith(fontSize: 11),
-                              ),
-                              Text(
-                                "₹",
-                                style: customTheme(context).regular.copyWith(fontSize: 11),
-                              ),
-                            ],
+                                      Text(
+                                        "${product.productUomQty}x",
+                                        style: customTheme(context).regular.copyWith(fontSize: 11),
+                                      ),
+                                      Text(
+                                        "₹${product.price?.toStringAsFixed(2) ?? 0}",
+                                        style: customTheme(context).regular.copyWith(fontSize: 11),
+                                      ),
+                                    ]);
+                                  },
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          height: .5,
-                          width: MediaQuery.of(context).size.width,
-                          color: Colors.grey,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 14),
-                          child: Table(
-                            columnWidths: {0: FlexColumnWidth(8), 1: FlexColumnWidth(1), 2: FlexColumnWidth(1)},
-                            border: TableBorder.all(width: 0, color: Colors.transparent),
-                            children: [
-                              TableRow(children: [
-                                Text(
-                                  'Product',
-                                  style: customTheme(context).medium.copyWith(fontSize: 12),
-                                ),
-                                Text(
-                                  'Qty',
-                                  style: customTheme(context).medium.copyWith(fontSize: 12),
-                                ),
-                                Text(
-                                  'Price',
-                                  style: customTheme(context).medium.copyWith(fontSize: 12),
-                                ),
-                              ]),
-                              TableRow(children: [
-                                Text(
-                                  "",
-                                  style: customTheme(context).regular.copyWith(fontSize: 5),
-                                ),
-                                Text(
-                                  "",
-                                  style: customTheme(context).regular.copyWith(fontSize: 5),
-                                ),
-                                Text(
-                                  "",
-                                  style: customTheme(context).regular.copyWith(fontSize: 5),
-                                ),
-                              ]),
-                              ...List.generate(
-                                orders.productList?.length ?? 0,
-                                (index) {
-                                  var product = orders.productList![index];
-                                  return TableRow(children: [
+                          Container(
+                            height: .5,
+                            width: MediaQuery.of(context).size.width,
+                            color: Colors.grey,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 14),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
                                     Text(
-                                      product.name!,
-                                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                                      'Item Total',
+                                      style: customTheme(context).regular.copyWith(fontSize: 11, color: Colors.grey),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
                                     ),
                                     Text(
-                                      "${product.productUomQty}x",
-                                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                                      'GST',
+                                      style: customTheme(context).regular.copyWith(fontSize: 11, color: Colors.grey),
+                                    ),
+                                    // SizedBox(
+                                    //   height: 5,
+                                    // ),
+                                    // Text(
+                                    //   'CGST',
+                                    //   style: customTheme(context).regular.copyWith(fontSize: 11, color: Colors.grey),
+                                    // ),
+                                    SizedBox(
+                                      height: 5,
                                     ),
                                     Text(
-                                      "₹${product.price?.toStringAsFixed(2) ?? 0}",
+                                      'Discount',
+                                      style: customTheme(context).regular.copyWith(fontSize: 11, color: Colors.grey),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      'Grand Total',
+                                      style: customTheme(context).medium.copyWith(fontSize: 12),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width * .15,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "₹${orders.productTotal?.toStringAsFixed(2) ?? 0}",
                                       style: customTheme(context).regular.copyWith(fontSize: 11),
                                     ),
-                                  ]);
-                                },
-                              )
-                            ],
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      "₹${orders.amountTax?.toStringAsFixed(2) ?? 0}",
+                                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                                    ),
+                                    // SizedBox(
+                                    //   height: 5,
+                                    // ),
+                                    // Text(
+                                    //   "₹15.00",
+                                    //   style: customTheme(context).regular.copyWith(fontSize: 11),
+                                    // ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      "₹0.00",
+                                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "₹${orders.amountTotal?.toStringAsFixed(2) ?? 0}",
+                                      style: customTheme(context).medium.copyWith(fontSize: 12),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          height: .5,
-                          width: MediaQuery.of(context).size.width,
-                          color: Colors.grey,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 14),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Item Total',
-                                    style: customTheme(context).regular.copyWith(fontSize: 11, color: Colors.grey),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    'GST',
-                                    style: customTheme(context).regular.copyWith(fontSize: 11, color: Colors.grey),
-                                  ),
-                                  // SizedBox(
-                                  //   height: 5,
-                                  // ),
-                                  // Text(
-                                  //   'CGST',
-                                  //   style: customTheme(context).regular.copyWith(fontSize: 11, color: Colors.grey),
-                                  // ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    'Discount',
-                                    style: customTheme(context).regular.copyWith(fontSize: 11, color: Colors.grey),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    'Grand Total',
-                                    style: customTheme(context).medium.copyWith(fontSize: 12),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width * .15,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "₹${orders.productTotal?.toStringAsFixed(2) ?? 0}",
-                                    style: customTheme(context).regular.copyWith(fontSize: 11),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    "₹${orders.amountTax?.toStringAsFixed(2) ?? 0}",
-                                    style: customTheme(context).regular.copyWith(fontSize: 11),
-                                  ),
-                                  // SizedBox(
-                                  //   height: 5,
-                                  // ),
-                                  // Text(
-                                  //   "₹15.00",
-                                  //   style: customTheme(context).regular.copyWith(fontSize: 11),
-                                  // ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    "₹0.00",
-                                    style: customTheme(context).regular.copyWith(fontSize: 11),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "₹${orders.amountTotal?.toStringAsFixed(2) ?? 0}",
-                                    style: customTheme(context).medium.copyWith(fontSize: 12),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                        ],
+                      ),
+                    );
+                  }),
                 ],
               ),
             ),
