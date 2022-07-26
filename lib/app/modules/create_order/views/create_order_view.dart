@@ -30,7 +30,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
               _search(context),
               Flexible(
                 child: Obx(() {
-                  if (controller.isLoading.value) {
+                  if (controller.isLoading.value || controller.isSearching.value) {
                     return Container(
                       width: double.infinity,
                       height: Get.size.height * .4,
@@ -73,8 +73,10 @@ class CreateOrderView extends GetView<CreateOrderController> {
           ),
           const SizedBox(height: 3),
           CustomTextField(
-        fillcolor: customTheme(context).textFormFieldColor,
-
+            onChanged: (val) {
+              controller.searchShop(val);
+            },
+            fillcolor: customTheme(context).textFormFieldColor,
             icon: const Icon(
               CupertinoIcons.search,
               color: Color(0xff9F9F9F),

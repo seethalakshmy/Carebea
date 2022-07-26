@@ -55,9 +55,9 @@ UpcomingDeliveryList _$UpcomingDeliveryListFromJson(
       orderId: json['order_id'] as int?,
       orderName: json['order_name'] as String?,
       shopName: json['shop_name'] as String?,
-      shopAddress: json['shop_address'] as String?,
       amountTotal: (json['amount_total'] as num?)?.toDouble(),
       status: json['status'] as String?,
+      shopAddress: json['shop_address'] as String?,
     );
 
 Map<String, dynamic> _$UpcomingDeliveryListToJson(
@@ -66,6 +66,7 @@ Map<String, dynamic> _$UpcomingDeliveryListToJson(
       'order_id': instance.orderId,
       'order_name': instance.orderName,
       'shop_name': instance.shopName,
+      'shop_address': instance.shopAddress,
       'amount_total': instance.amountTotal,
       'status': instance.status,
     };

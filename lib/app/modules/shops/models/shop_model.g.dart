@@ -6,28 +6,37 @@ part of 'shop_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ShopListResponse _$ShopListResponseFromJson(Map<String, dynamic> json) => ShopListResponse(
+ShopListResponse _$ShopListResponseFromJson(Map<String, dynamic> json) =>
+    ShopListResponse(
       jsonrpc: json['jsonrpc'] as String?,
       id: json['id'],
-      shopListResult: json['result'] == null ? null : ShopListResult.fromJson(json['result'] as Map<String, dynamic>),
+      shopListResult: json['result'] == null
+          ? null
+          : ShopListResult.fromJson(json['result'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$ShopListResponseToJson(ShopListResponse instance) => <String, dynamic>{
+Map<String, dynamic> _$ShopListResponseToJson(ShopListResponse instance) =>
+    <String, dynamic>{
       'jsonrpc': instance.jsonrpc,
       'id': instance.id,
       'result': instance.shopListResult,
     };
 
-ShopListResult _$ShopListResultFromJson(Map<String, dynamic> json) => ShopListResult(
+ShopListResult _$ShopListResultFromJson(Map<String, dynamic> json) =>
+    ShopListResult(
       status: json['status'] as bool?,
       shopCount: json['shopCount'] as int?,
       message: json['message'] as String?,
-      shopList:
-          (json['shop_list'] as List<dynamic>?)?.map((e) => ShopList.fromJson(e as Map<String, dynamic>)).toList(),
-      filterVals: json['filter_vals'] == null ? null : FilterVal.fromJson(json['filter_vals'] as Map<String, dynamic>),
+      shopList: (json['shop_list'] as List<dynamic>?)
+          ?.map((e) => ShopList.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      filterVals: json['filter_vals'] == null
+          ? null
+          : FilterVal.fromJson(json['filter_vals'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$ShopListResultToJson(ShopListResult instance) => <String, dynamic>{
+Map<String, dynamic> _$ShopListResultToJson(ShopListResult instance) =>
+    <String, dynamic>{
       'status': instance.status,
       'shopCount': instance.shopCount,
       'message': instance.message,
@@ -36,9 +45,15 @@ Map<String, dynamic> _$ShopListResultToJson(ShopListResult instance) => <String,
     };
 
 FilterVal _$FilterValFromJson(Map<String, dynamic> json) => FilterVal(
-      category: (json['Category'] as List<dynamic>?)?.map((e) => Category.fromJson(e as Map<String, dynamic>)).toList(),
-      zone: (json['Zone'] as List<dynamic>?)?.map((e) => Category.fromJson(e as Map<String, dynamic>)).toList(),
-      route: (json['Route'] as List<dynamic>?)?.map((e) => Category.fromJson(e as Map<String, dynamic>)).toList(),
+      category: (json['Category'] as List<dynamic>?)
+          ?.map((e) => Category.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      zone: (json['Zone'] as List<dynamic>?)
+          ?.map((e) => Category.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      route: (json['Route'] as List<dynamic>?)
+          ?.map((e) => Category.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$FilterValToJson(FilterVal instance) => <String, dynamic>{
@@ -59,8 +74,6 @@ Map<String, dynamic> _$CategoryToJson(Category instance) => <String, dynamic>{
 
 ShopList _$ShopListFromJson(Map<String, dynamic> json) => ShopList(
       id: json['id'] as int?,
-      routeId: json['route_id'] as int?,
-      zoneId: json['zone_id'] as int?,
       name: json['name'] as String?,
       lastName: json['last_name'] as String?,
       category: json['category'] as String?,
@@ -69,10 +82,14 @@ ShopList _$ShopListFromJson(Map<String, dynamic> json) => ShopList(
       phone: json['phone'] as String?,
       altPhone: json['alt_phone'] as String?,
       gstNo: json['gst_no'] as String?,
-      address: json['address'] == null ? null : Address.fromJson(json['address'] as Map<String, dynamic>),
+      address: json['address'] == null
+          ? null
+          : Address.fromJson(json['address'] as Map<String, dynamic>),
       credBalance: (json['cred_balance'] as num?)?.toDouble(),
       latitude: (json['latitude'] as num?)?.toDouble(),
       longitude: (json['longitude'] as num?)?.toDouble(),
+      routeId: json['route_id'] as int?,
+      zoneId: json['zone_id'] as int?,
     );
 
 Map<String, dynamic> _$ShopListToJson(ShopList instance) => <String, dynamic>{
@@ -89,6 +106,8 @@ Map<String, dynamic> _$ShopListToJson(ShopList instance) => <String, dynamic>{
       'cred_balance': instance.credBalance,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
+      'route_id': instance.routeId,
+      'zone_id': instance.zoneId,
     };
 
 Address _$AddressFromJson(Map<String, dynamic> json) => Address(

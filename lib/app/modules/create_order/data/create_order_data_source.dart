@@ -1,13 +1,14 @@
 import 'dart:convert';
 
 import 'package:carebea/app/core/services/api_service.dart';
+import 'package:carebea/app/modules/create_order/model/create_order.dart';
 
 import '../model/productlist_model.dart';
 
 class CreateorderDataSource {
   final ApiService _apiService = ApiService();
 
-  Future createOrder(int salesPersonId, int shopId, Map<int, int> products) async {
+  Future<CreateOrderResponse> createOrder(int salesPersonId, int shopId, Map<int, int> products) async {
     var _products = [];
     products.forEach((key, value) {
       _products.add({"product_id": key, "qty": value});
@@ -17,7 +18,13 @@ class CreateorderDataSource {
       "shop_id": shopId,
       "products": _products,
     });
+
+    if (res.statusCode == 200) {
+      return CreateOrderResponse.fromJson(json.decode(res.body));
+    }
+    return CreateOrderResponse(result: Result(status: false));
   }
+
   ///ProductLIst
 
   Future<ProductListResponse> productList() async {

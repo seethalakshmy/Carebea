@@ -17,8 +17,7 @@ import '../../shops/models/shop_model.dart';
 
 class AddProductsView extends StatelessWidget {
   AddProductsView({Key? key}) : super(key: key);
-  CreateOrderController createOrderController =
-      Get.put(CreateOrderController());
+  CreateOrderController createOrderController = Get.put(CreateOrderController());
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,6 @@ class AddProductsView extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             _title(context),
             _productsText(context),
             _search(context),
@@ -44,51 +42,69 @@ class AddProductsView extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: InkWell(
-          onTap: () {
-            createOrderController.createOrder();
-          },
-          child: Container(
-            alignment: Alignment.center,
-            height: 55,
-            decoration: BoxDecoration(
-              color: customTheme(context).primary,
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(7)),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 23, right: 15),
-              child: Row(
-                children: [
-                  Text(
-                    "${createOrderController.cartproducts.length} items  |  ",
-                    style: customTheme(context)
-                        .regular
-                        .copyWith(fontSize: 13, color: Colors.white),
-                  ),
-                  Text(
-                    "₹975",
-                    style: customTheme(context)
-                        .medium
-                        .copyWith(fontSize: 13, color: Colors.white),
-                  ),
-                  const Spacer(),
-                  Text(
-                    "Place order   ",
-                    style: customTheme(context)
-                        .regular
-                        .copyWith(fontSize: 13, color: Colors.white),
-                  ),
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    size: 13,
-                    color: Colors.white,
-                  )
-                ],
+        bottomNavigationBar: Obx(() {
+          return InkWell(
+            onTap: createOrderController.creatingOrder.value
+                ? null
+                : () {
+                    createOrderController.createOrder();
+                  },
+            child: Container(
+              alignment: Alignment.center,
+              height: 55,
+              decoration: BoxDecoration(
+                color: customTheme(context).primary,
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(7)),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 23, right: 15),
+                child: Row(
+                  children: [
+                    Obx(() {
+                      return Text(
+                        "${createOrderController.cartproducts.length} items  |  ",
+                        style: customTheme(context).regular.copyWith(fontSize: 13, color: Colors.white),
+                      );
+                    }),
+                    Obx(() {
+                      return Text(
+                        "₹${createOrderController.totalCartCost.value.toStringAsFixed(2)}",
+                        style: customTheme(context).medium.copyWith(fontSize: 13, color: Colors.white),
+                      );
+                    }),
+                    const Spacer(),
+                    Obx(() {
+                      if (createOrderController.creatingOrder.value) {
+                        return const SizedBox(
+                          height: 10,
+                          width: 10,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor: AlwaysStoppedAnimation(Colors.white),
+                          ),
+                        );
+                      }
+                      return Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Place order   ",
+                            style: customTheme(context).regular.copyWith(fontSize: 13, color: Colors.white),
+                          ),
+                          const Icon(
+                            Icons.arrow_forward_ios,
+                            size: 13,
+                            color: Colors.white,
+                          ),
+                        ],
+                      );
+                    })
+                  ],
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        }),
       ),
     );
   }
@@ -136,25 +152,25 @@ class AddProductsView extends StatelessWidget {
   Container _title(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 23),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: const BorderRadius.vertical(
             bottom: Radius.circular(20),
           ),
-          boxShadow: [
-            BoxShadow(blurRadius: 10, color: customTheme(context).shadowColor)
-          ]),
+          boxShadow: [BoxShadow(blurRadius: 10, color: customTheme(context).shadowColor)]),
       child: Row(
         children: [
-          InkWell(
-              onTap:(){
+          IconButton(
+              onPressed: () {
                 Get.back();
               },
-              child: Icon(Icons.arrow_back_ios)),
+              icon: Icon(
+                Icons.arrow_back_ios,
+                size: 15,
+              )),
           Text(
-           " ${(Get.arguments['shop'] as ShopList).name}",
-
+            " ${(Get.arguments['shop'] as ShopList).name}",
             style: customTheme(context).medium.copyWith(fontSize: 14),
           ),
         ],
@@ -211,18 +227,12 @@ class ProductTile extends StatelessWidget {
                                         text: product.name,
                                         children: [
                                           TextSpan(
-                                              text:" ${ product.qtyAvailable}"
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  color: Color(0xff929292))),
+                                              text: " ${product.qtyAvailable}".toString(),
+                                              style: TextStyle(color: Color(0xff929292))),
                                           TextSpan(
-                                              text: " ${product.unit}",
-                                              style: TextStyle(
-                                                  color: Color(0xff929292))),
+                                              text: " ${product.unit}", style: TextStyle(color: Color(0xff929292))),
                                         ],
-                                        style: customTheme(context)
-                                            .regular
-                                            .copyWith(fontSize: 11)),
+                                        style: customTheme(context).regular.copyWith(fontSize: 11)),
                                   ),
                                 ),
                               ),
@@ -247,9 +257,7 @@ class ProductTile extends StatelessWidget {
                             children: [
                               Text(
                                 '₹${_controller.productPrice((Get.arguments['shop'] as ShopList).category!, product)}',
-                                style: customTheme(context)
-                                    .medium
-                                    .copyWith(fontSize: 12),
+                                style: customTheme(context).medium.copyWith(fontSize: 12),
                               ),
                               const SizedBox(width: 4),
                               // Text(
@@ -265,30 +273,23 @@ class ProductTile extends StatelessWidget {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Padding(
-                              padding: const EdgeInsets.only(right: 8.0,bottom: 10),
-                              child: (product.available?.toLowerCase() ==
-                                      'unavailable')
+                              padding: const EdgeInsets.only(right: 8.0, bottom: 10),
+                              child: (product.available?.toLowerCase() == 'unavailable')
                                   ? Text(
                                       '${product.available}',
-                                      style: TextStyle(
-                                          color: customTheme(context).primary,
-                                          fontWeight: FontWeight.bold),
+                                      style:
+                                          TextStyle(color: customTheme(context).primary, fontWeight: FontWeight.bold),
                                     )
                                   : Obx(() {
-                                      if (_controller.cartproducts
-                                          .containsKey(product.id)) {
+                                      if (_controller.cartproducts.containsKey(product.id)) {
                                         return CartCountWidget(
-                                            id: product.id!,
-                                            count: _controller
-                                                    .cartproducts[product.id] ??
-                                                0);
+                                            id: product.id!, count: _controller.cartproducts[product.id] ?? 0);
                                       }
                                       return CustomButton(
                                         isDense: true,
                                         title: "Add",
                                         onTap: () {
-                                          _controller.updateCartProduct(
-                                              product.id!, 1);
+                                          _controller.updateCartProduct(product.id!, 1);
                                         },
                                         fontSize: 10,
                                         color: const Color(0xff47BED9),

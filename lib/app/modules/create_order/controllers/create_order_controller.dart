@@ -2,10 +2,13 @@ import 'dart:developer';
 
 import 'package:carebea/app/modules/create_order/data/repository/create_order_repository.dart';
 import 'package:carebea/app/modules/create_order/data/repository/product_list_repo.dart';
+import 'package:carebea/app/modules/create_order/model/create_order.dart';
 import 'package:carebea/app/modules/create_order/model/productlist_model.dart';
+import 'package:carebea/app/modules/create_order/views/check_out_view.dart';
 import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:carebea/app/modules/shops/repo/shop_list_repo.dart';
 import 'package:carebea/app/utils/shared_prefs.dart';
+import 'package:carebea/app/utils/show_snackbar.dart';
 import 'package:get/get.dart';
 
 class CreateOrderController extends GetxController {
@@ -17,8 +20,11 @@ class CreateOrderController extends GetxController {
   RxBool isProductsLoading = true.obs;
   final ProductListRepo _productListRepo = ProductListRepo();
   RxList<ProductList> productList = <ProductList>[].obs;
+  List<ProductList> _products = [];
 
   RxList<ShopList> shopList = <ShopList>[].obs;
+  RxDouble totalCartCost = 0.0.obs;
+  CreateOrderResponse? createOrderResponse;
 
   final count = 0.obs;
   @override
@@ -59,10 +65,13 @@ class CreateOrderController extends GetxController {
   updateCartProduct(int id, int count) {
     if (count == 0) {
       cartproducts.removeWhere((key, value) => key == id);
+      calculateCost();
+
       return;
     }
 
     cartproducts[id] = count;
+    calculateCost();
   }
 
   RxBool creatingOrder = true.obs;
@@ -70,6 +79,13 @@ class CreateOrderController extends GetxController {
     creatingOrder(true);
     var res = await _repository.createOrder(
         shopId: (Get.arguments["shop"] as ShopList).id, salesPersonId: SharedPrefs.getUserId(), products: cartproducts);
+
+    if (res.result?.status ?? false) {
+      Get.to(() => CheckoutView(), arguments: Get.arguments);
+      return;
+    }
+
+    showSnackBar(res.result?.message ?? "Something happend, Please try again!");
     creatingOrder(false);
   }
 
@@ -77,26 +93,58 @@ class CreateOrderController extends GetxController {
     isProductsLoading(true);
     try {
       var res = await _productListRepo.productList();
-      productList(res.productListResult?.productList??[]);
+      productList(res.productListResult?.productList ?? []);
+      _products = productList;
     } catch (error, stacktrace) {
       log("error", error: error, stackTrace: stacktrace);
     }
     isProductsLoading(false);
   }
 
-
-  productPrice(String category,ProductList product) {
-
+  double productPrice(String category, ProductList product) {
     switch (category) {
       case 'retail':
-        return product.retailPrice;
+        return product.retailPrice ?? 0;
       case 'department shop':
-        return product.departmentPrice;
+        return product.departmentPrice ?? 0;
       case 'wholesale':
-        return product.wholesalePrice;
+        return product.wholesalePrice ?? 0;
       case 'supermarket':
-        return product.supermarketPrice;
+        return product.supermarketPrice ?? 0;
     }
+
+    return 0;
   }
 
+  RxBool isSearching = RxBool(false);
+  Future<void> searchShop(String? query) async {
+    isSearching(true);
+    var shopListResponse;
+    if ((query ?? "").isEmpty) {
+      shopListResponse = await _shopRepo.shopList(SharedPrefs.getUserId()!);
+    } else {
+      shopListResponse = await _shopRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {"name": query});
+    }
+    if (shopListResponse.shopListResult?.status ?? false) {
+      shopList(shopListResponse.shopListResult?.shopList ?? []);
+    } else {
+      shopList.clear();
+    }
+    isSearching(false);
+  }
+
+  void calculateCost() {
+    var cost = 0.0;
+    if (cartproducts.isNotEmpty) {
+      for (var i in _products) {
+        if (cartproducts.keys.contains(i.id)) {
+          var c = productPrice((Get.arguments["shop"] as ShopList).category!, i);
+          var t = cartproducts[i.id]! * c;
+          cost += t;
+        }
+      }
+    }
+
+    totalCartCost(cost);
+  }
 }
