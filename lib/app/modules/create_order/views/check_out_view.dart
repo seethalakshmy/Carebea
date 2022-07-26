@@ -1,5 +1,9 @@
+import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/modules/create_order/controllers/create_order_controller.dart';
+import 'package:carebea/app/modules/create_order/model/create_order.dart';
+import 'package:carebea/app/modules/create_order/model/productlist_model.dart';
 import 'package:carebea/app/modules/create_order/widgets/cart_count_widget.dart';
+import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
@@ -27,10 +31,10 @@ class CheckoutView extends StatelessWidget {
           children: [
             _title(context),
             const SizedBox(height: 15),
-            _addressTile(context),
+            _addressTile(context, (Get.arguments["shop"] as ShopList)),
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 24, 24, 19),
-              child: _productListing(context),
+              child: _productListing(context, createOrderController),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 0, 24, 35),
@@ -62,7 +66,7 @@ class CheckoutView extends StatelessWidget {
                     style: customTheme(context).regular.copyWith(fontSize: 11),
                   ),
                   Text(
-                    "₹975",
+                    createOrderController.createOrderResponse!.result!.amountTotal!.toStringAsFixed(2),
                     style: customTheme(context).medium.copyWith(fontSize: 16),
                   ),
                 ],
@@ -74,7 +78,7 @@ class CheckoutView extends StatelessWidget {
                   // height: 48,
                   // width: 200,
                   shadow: BoxShadow(color: Colors.transparent),
-                  onConfirmation: () => onConfirm(context),
+                  onConfirmation: () => createOrderController.confirmOrder(context),
                   foregroundColor: Colors.transparent,
                   text: "Swipe to Confirm",
                   textStyle: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.white),
@@ -87,31 +91,11 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  void onConfirm(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (_) => CustomAlertbox(
-              topIcon: Image.asset(
-                Assets.successIcon,
-                height: 80,
-                width: 80,
-              ),
-              title: "Order Successful!",
-              content: "Your order placed has been successful!",
-              actions: [
-                CustomButton(
-                    title: "Go to Home page",
-                    onTap: () {
-                      Get.offAllNamed(Routes.DASHBOARD);
-                    })
-              ],
-            ));
-  }
-
   Padding _comments() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 19, 24, 10),
       child: CustomTextField(
+        textcontroller: createOrderController.commentController,
         maxLines: 4,
         hint: "Add Comments",
       ),
@@ -129,45 +113,38 @@ class CheckoutView extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CustomRadioButton<String>(
-              groupValue: "hi",
-              value: "hi",
-              onChanged: (value) {},
-              label: "Cash on Delivery",
-            ),
-            CustomRadioButton<String>(
-              groupValue: "hi",
-              value: "2",
-              onChanged: (value) {},
-              label: "Cheque",
-            ),
-            CustomRadioButton<String>(
-              groupValue: "hi",
-              value: "2",
-              onChanged: (value) {},
-              label: "Credit",
-            ),
-          ],
-        ),
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: createOrderController.createOrderResponse!.result!.paymentMethods!
+                .map(
+                  (e) => Obx(() {
+                    return CustomRadioButton<PaymentMethod>(
+                      groupValue: createOrderController.selectedPaymentMethod.value,
+                      value: e,
+                      onChanged: (value) {
+                        createOrderController.selectedPaymentMethod(value);
+                      },
+                      label: e.name,
+                    );
+                  }),
+                )
+                .toList()),
       ],
     );
   }
 
-  Column _productListing(BuildContext context) {
+  Column _productListing(BuildContext context, CreateOrderController createOrderController) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Products (7)",
+          "Products (${createOrderController.selectedProducts.length})",
           style: customTheme(context).regular.copyWith(fontSize: 11),
         ),
         const SizedBox(height: 10),
-        const ProductTile(),
-        const SizedBox(height: 10),
-        const ProductTile(),
+        ...createOrderController.selectedProducts.map((product) {
+          return ProductTile(product: product);
+        }),
         Align(
           alignment: Alignment.centerRight,
           child: TextButton(
@@ -193,7 +170,7 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  CustomCard _addressTile(BuildContext context) {
+  CustomCard _addressTile(BuildContext context, ShopList shop) {
     return CustomCard(
         margin: const EdgeInsets.symmetric(horizontal: 24),
         padding: const EdgeInsets.all(13),
@@ -221,12 +198,12 @@ class CheckoutView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Trinity Shop",
+                        shop.name!,
                         style: customTheme(context).medium.copyWith(fontSize: 12, color: Colors.black),
                       ),
                       Flexible(
                         child: Text(
-                          'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Kerala-689145',
+                          getFullAddress(shop.address),
                           style: customTheme(context).regular.copyWith(fontSize: 11),
                         ),
                       ),
@@ -251,9 +228,9 @@ class CheckoutView extends StatelessWidget {
               style: customTheme(context).regular.copyWith(fontSize: 11, color: Color(0xff767676)),
             ),
             const SizedBox(height: 10),
-            PaymentTile(title: "Item Total", value: 805),
-            PaymentTile(title: "GST Tax", value: 115),
-            PaymentTile(title: "SCGST Tax", value: 15),
+            PaymentTile(title: "Item Total", value: createOrderController.createOrderResponse!.result!.productTotal!),
+            PaymentTile(title: "GST Tax", value: createOrderController.createOrderResponse!.result!.amountTax!),
+            // PaymentTile(title: "SCGST Tax", value: 15),
             PaymentTile(title: "Discount", value: 0),
           ],
         ));
@@ -315,9 +292,10 @@ class PaymentTile extends StatelessWidget {
 
 class ProductTile extends StatelessWidget {
   const ProductTile({
+    required this.product,
     Key? key,
   }) : super(key: key);
-
+  final ProductList product;
   static final CreateOrderController _controller = Get.find();
 
   @override
@@ -335,7 +313,7 @@ class ProductTile extends StatelessWidget {
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Flexible(
                   child: Padding(
@@ -344,14 +322,15 @@ class ProductTile extends StatelessWidget {
                       maxLines: 3,
                       overflow: TextOverflow.visible,
                       text: TextSpan(
-                          text: "Eccelence Hand Wash Total Protect Plus ",
-                          children: const [
-                            TextSpan(text: "500ml", style: TextStyle(color: Color(0xff929292))),
-                          ],
+                          text: product.name,
+                          // children: [
+                          //   TextSpan(text: "500ml", style: TextStyle(color: Color(0xff929292))),
+                          // ],
                           style: customTheme(context).regular.copyWith(fontSize: 12)),
                     ),
                   ),
                 ),
+                const Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(top: 10, bottom: 8, right: 14),
                   child: Row(
@@ -360,12 +339,12 @@ class ProductTile extends StatelessWidget {
                     children: [
                       Obx(() {
                         return CartCountWidget(
-                          id: 14,
-                          count: _controller.cartproducts[14]!,
+                          id: product.id!,
+                          count: _controller.cartproducts[product.id!]!,
                         );
                       }),
                       Text(
-                        "₹205",
+                        "₹${_controller.productPrice(Get.arguments["shop"].category, product).toStringAsFixed(2)}",
                         style: customTheme(context).medium.copyWith(fontSize: 14),
                       ),
                     ],

@@ -26,6 +26,10 @@ class Result {
     this.message,
     this.orderId,
     this.paymentMethods,
+    this.amountTax,
+    this.amountTotal,
+    this.amountUntaxed,
+    this.productTotal,
   });
 
   final bool? status;
@@ -34,6 +38,14 @@ class Result {
   final int? orderId;
   @JsonKey(name: "payment_methods")
   final List<PaymentMethod>? paymentMethods;
+  @JsonKey(name: 'amount_total')
+  final double? amountTotal;
+  @JsonKey(name: 'amount_untaxed')
+  final double? amountUntaxed;
+  @JsonKey(name: 'amount_tax')
+  final double? amountTax;
+  @JsonKey(name: 'product_total')
+  final double? productTotal;
 
   factory Result.fromJson(Map<String, dynamic> json) => _$ResultFromJson(json);
   Map<String, dynamic> toJson() => _$ResultToJson(this);

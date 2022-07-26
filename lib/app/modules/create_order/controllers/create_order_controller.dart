@@ -7,8 +7,13 @@ import 'package:carebea/app/modules/create_order/model/productlist_model.dart';
 import 'package:carebea/app/modules/create_order/views/check_out_view.dart';
 import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:carebea/app/modules/shops/repo/shop_list_repo.dart';
+import 'package:carebea/app/routes/app_pages.dart';
+import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/shared_prefs.dart';
 import 'package:carebea/app/utils/show_snackbar.dart';
+import 'package:carebea/app/utils/widgets/custom_alertbox.dart';
+import 'package:carebea/app/utils/widgets/custom_button.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CreateOrderController extends GetxController {
@@ -21,6 +26,8 @@ class CreateOrderController extends GetxController {
   final ProductListRepo _productListRepo = ProductListRepo();
   RxList<ProductList> productList = <ProductList>[].obs;
   List<ProductList> _products = [];
+  List<ProductList> selectedProducts = [];
+  TextEditingController commentController = TextEditingController();
 
   RxList<ShopList> shopList = <ShopList>[].obs;
   RxDouble totalCartCost = 0.0.obs;
@@ -74,7 +81,8 @@ class CreateOrderController extends GetxController {
     calculateCost();
   }
 
-  RxBool creatingOrder = true.obs;
+  RxBool creatingOrder = false.obs;
+  late Rx<PaymentMethod> selectedPaymentMethod;
   createOrder() async {
     creatingOrder(true);
     var res = await _repository.createOrder(
@@ -82,6 +90,9 @@ class CreateOrderController extends GetxController {
 
     if (res.result?.status ?? false) {
       Get.to(() => CheckoutView(), arguments: Get.arguments);
+      creatingOrder(false);
+      createOrderResponse = res;
+      selectedPaymentMethod = (res.result!.paymentMethods!.first).obs;
       return;
     }
 
@@ -135,16 +146,56 @@ class CreateOrderController extends GetxController {
 
   void calculateCost() {
     var cost = 0.0;
+    List<ProductList> tempSelectedProducts = [];
     if (cartproducts.isNotEmpty) {
       for (var i in _products) {
         if (cartproducts.keys.contains(i.id)) {
+          tempSelectedProducts.add(i);
           var c = productPrice((Get.arguments["shop"] as ShopList).category!, i);
           var t = cartproducts[i.id]! * c;
           cost += t;
         }
       }
     }
-
+    selectedProducts = tempSelectedProducts;
     totalCartCost(cost);
+  }
+
+  confirmOrder(BuildContext context) async {
+    var res = await _repository.confirmOrder(
+      salesPersonId: SharedPrefs.getUserId()!,
+      orderId: createOrderResponse!.result!.orderId!,
+      paymentMethod: selectedPaymentMethod.value.code!,
+      comment: commentController.text,
+    );
+
+    if (res.result?.status ?? false) {
+      return onConfirm(context);
+    }
+
+    showSnackBar(res.result?.message ?? "Something happend, Please try again!");
+  }
+
+  void onConfirm(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (_) => CustomAlertbox(
+              topIcon: Image.asset(
+                Assets.successIcon,
+                height: 80,
+                width: 80,
+              ),
+              title: "Order Successful!",
+              content: "Your order placed has been successful!",
+              actions: [
+                CustomButton(
+                    title: "Go to Home page",
+                    onTap: () {
+                      Get.back();
+                    })
+              ],
+            )).then((value) {
+      Get.offAllNamed(Routes.DASHBOARD);
+    });
   }
 }
