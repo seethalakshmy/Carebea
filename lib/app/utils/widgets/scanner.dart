@@ -175,8 +175,9 @@ class ScannerView extends StatelessWidget {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
       if ((scanData.code ?? "").isNotEmpty) {
-        onScanned.call(scanData.code!);
         Get.back();
+
+        onScanned.call(scanData.code!);
       }
     });
   }
