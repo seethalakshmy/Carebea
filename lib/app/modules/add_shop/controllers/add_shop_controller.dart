@@ -46,7 +46,7 @@ class AddShopController extends GetxController {
   zone_list.ZoneListResponse? zoneListResponse;
   List< zone_list.PoolList> zoneList = <zone_list.PoolList>[];
   List<CategoryList> category = [CategoryList(id:1,name:"Retail"), CategoryList(id:2,name:"Department"),CategoryList(id:3,name:"Wholesale"),CategoryList(id:4,name:"Supermarket")];
-
+  RxBool isAddShopButtonPressed = true.obs;
 
 
   @override
