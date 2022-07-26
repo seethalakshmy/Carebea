@@ -1,13 +1,15 @@
 import 'dart:convert';
 
 import 'package:carebea/app/core/services/api_service.dart';
+import 'package:carebea/app/modules/create_order/model/confirm_order.dart';
+import 'package:carebea/app/modules/create_order/model/create_order.dart';
 
 import '../model/productlist_model.dart';
 
 class CreateorderDataSource {
   final ApiService _apiService = ApiService();
 
-  Future createOrder(int salesPersonId, int shopId, Map<int, int> products) async {
+  Future<CreateOrderResponse> createOrder(int salesPersonId, int shopId, Map<int, int> products) async {
     var _products = [];
     products.forEach((key, value) {
       _products.add({"product_id": key, "qty": value});
@@ -17,7 +19,13 @@ class CreateorderDataSource {
       "shop_id": shopId,
       "products": _products,
     });
+
+    if (res.statusCode == 200) {
+      return CreateOrderResponse.fromJson(json.decode(res.body));
+    }
+    return CreateOrderResponse(result: Result(status: false));
   }
+
   ///ProductLIst
 
   Future<ProductListResponse> productList() async {
@@ -30,5 +38,28 @@ class CreateorderDataSource {
     } else {
       return ProductListResponse(productListResult: ProductListResult(status: false));
     }
+  }
+
+  Future<ConfirmOrderResponse> confirmOrder(
+    int salesPersonId,
+    int orderId,
+    String paymentMethod,
+    String? comment,
+  ) async {
+    var res = await _apiService.post(
+      "order-confirm",
+      {
+        "sales_person_id": salesPersonId,
+        "order_id": orderId,
+        "payment_method": paymentMethod,
+        "comment": comment,
+      },
+    );
+
+    if (res.statusCode == 200) {
+      return ConfirmOrderResponse.fromJson(json.decode(res.body));
+    }
+
+    return ConfirmOrderResponse(result: ConfirmOrderResult.fromJson(json.decode(res.body)));
   }
 }

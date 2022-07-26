@@ -53,8 +53,7 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
               Padding(
                   padding: const EdgeInsets.only(left: 15.0, right: 15.0),
                   child: CustomTextField(
-        fillcolor: customTheme(context).textFormFieldColor,
-
+                    fillcolor: customTheme(context).textFormFieldColor,
                     icon: Icon(CupertinoIcons.search),
                     hint: "Search for shops, orders",
                   )),
@@ -200,7 +199,7 @@ class OrderDeliveryCard extends StatelessWidget {
                 const SizedBox(width: 2),
                 Expanded(
                   child: Text(
-                    "has to added in api",
+                    order.shopAddress?.split("\n").join(" ") ?? "",
                     style: customTheme(context).regular.copyWith(fontSize: 11),
                   ),
                 ),

@@ -17,7 +17,6 @@ import '../../shops/models/shop_model.dart';
 import '../models/list_category.dart';
 import '../models/list_routes_model.dart' as route_list;
 
-
 class AddShopController extends GetxController {
   final addShopFormKey = GlobalKey<FormState>();
 
@@ -36,7 +35,7 @@ class AddShopController extends GetxController {
   RxBool isStateListLoading = true.obs;
   RxBool isZoneListLoading = true.obs;
   route_list.RouteListResponse? routeListResponse;
-  List< route_list.PoolList> routeList = < route_list.PoolList>[];
+  List<route_list.PoolList> routeList = <route_list.PoolList>[];
   List<StateList> stateList = <StateList>[];
   route_list.PoolList? selectedRoute;
   zone_list.PoolList? selectedZone;
@@ -45,28 +44,31 @@ class AddShopController extends GetxController {
   RxInt selectedRadio = 1.obs;
   CategoryList? selectedCategory;
   zone_list.ZoneListResponse? zoneListResponse;
-  List< zone_list.PoolList> zoneList = <zone_list.PoolList>[];
-  List<CategoryList> category = [CategoryList(id:1,name:"Retail"), CategoryList(id:2,name:"Department"),CategoryList(id:3,name:"Wholesale"),CategoryList(id:4,name:"Supermarket")];
+  List<zone_list.PoolList> zoneList = <zone_list.PoolList>[];
+  List<CategoryList> category = [
+    CategoryList(id: 1, name: "Retail"),
+    CategoryList(id: 2, name: "Department"),
+    CategoryList(id: 3, name: "Wholesale"),
+    CategoryList(id: 4, name: "Supermarket")
+  ];
   RxBool isAddShopButtonPressed = false.obs;
-
 
   @override
   void onInit() {
     fetchRouteList();
     fetchStateList();
     fetchZoneList();
+    fetchCategory();
     if (Get.arguments['isEdit'] ?? false) {
       populate(Get.arguments['shop'] as ShopList);
     }
     super.onInit();
   }
 
-
-
   addShop(
       {required int salesPersonId,
       required String name,
-        required String lastName,
+      required String lastName,
       required String phone,
       required int shopCategoryId,
       required int customerType,
@@ -81,12 +83,12 @@ class AddShopController extends GetxController {
       required double longitude}) async {
     isAddShopButtonPressed(true);
     if (addShopFormKey.currentState!.validate()) {
-      addShopResponse = await addShopRepo.addShop(salesPersonId, name,lastName, phone, shopCategoryId, customerType, gst,
-          localArea, district, zip, stateId, zoneId, routeId, latitude, longitude);
+      addShopResponse = await addShopRepo.addShop(salesPersonId, name, lastName, phone, shopCategoryId, customerType,
+          gst, localArea, district, zip, stateId, zoneId, routeId, latitude, longitude);
 
       if (addShopResponse.addShopResult!.status == true) {
         showDialog<bool>(
-          barrierDismissible: false,
+            barrierDismissible: false,
             context: Get.context!,
             builder: (ctx) {
               return CustomAlertbox(
@@ -116,7 +118,7 @@ class AddShopController extends GetxController {
       {required int shopId,
       required int salesPersonId,
       required String name,
-        required String lastName,
+      required String lastName,
       required String phone,
       required int shopCategoryId,
       required int customerType,
@@ -131,12 +133,12 @@ class AddShopController extends GetxController {
       required double longitude}) async {
     isAddShopButtonPressed(true);
     if (addShopFormKey.currentState!.validate()) {
-      addShopResponse = await addShopRepo.updateShop(shopId, salesPersonId, name,lastName, phone, shopCategoryId, customerType,
-          gst, localArea, district, zip, stateId, zoneId, routeId, latitude, longitude);
+      addShopResponse = await addShopRepo.updateShop(shopId, salesPersonId, name, lastName, phone, shopCategoryId,
+          customerType, gst, localArea, district, zip, stateId, zoneId, routeId, latitude, longitude);
 
       if (addShopResponse.addShopResult!.status == true) {
         showDialog<bool>(
-          barrierDismissible: false,
+            barrierDismissible: false,
             context: Get.context!,
             builder: (ctx) {
               return CustomAlertbox(
@@ -189,32 +191,44 @@ class AddShopController extends GetxController {
     return true;
   }
 
-  fetchRouteList()async{
+  fetchRouteList() async {
     isRoutesListLoading(true);
     routeListResponse = await addShopRepo.routeList();
-    routeList = routeListResponse!.routeListResult!.poolList??[];
+    routeList = routeListResponse!.routeListResult!.poolList ?? [];
+    if ((Get.arguments["isEdit"] ?? false) && (Get.arguments["shop"] != null)) {
+      selectedRoute = routeList.singleWhere((element) => element.id == (Get.arguments["shop"] as ShopList).routeId);
+    }
     isRoutesListLoading(false);
   }
 
-  fetchStateList()async{
+  fetchStateList() async {
     isStateListLoading(true);
 
     stateListResponse = await addShopRepo.stateList();
-    stateList = stateListResponse!.stateListResult!.stateList??[];
+    stateList = stateListResponse!.stateListResult!.stateList ?? [];
+    if ((Get.arguments["isEdit"] ?? false) && (Get.arguments["shop"] != null)) {
+      selectedStateList =
+          stateList.singleWhere((element) => element.stateId == (Get.arguments["shop"] as ShopList).address!.stateId);
+    }
     isStateListLoading(false);
   }
 
-  fetchZoneList()async{
+  fetchZoneList() async {
     isZoneListLoading(true);
 
     zoneListResponse = await addShopRepo.zoneList();
-    zoneList = zoneListResponse!.zoneListResult!.poolList??[];
+    zoneList = zoneListResponse!.zoneListResult!.poolList ?? [];
+    if ((Get.arguments["isEdit"] ?? false) && (Get.arguments["shop"] != null)) {
+      selectedZone = zoneList.singleWhere((element) => element.id == (Get.arguments["shop"] as ShopList).zoneId);
+    }
     isZoneListLoading(false);
   }
 
-  fetchCategory(){
+  fetchCategory() {
+    if ((Get.arguments["isEdit"] ?? false) && (Get.arguments["shop"] != null)) {
+      selectedCategory = category.singleWhere(
+          (element) => element.name?.toLowerCase() == (Get.arguments["shop"] as ShopList).category?.toLowerCase());
+    }
+    debugPrint(selectedCategory?.toJson().toString());
   }
-
-
-
 }
