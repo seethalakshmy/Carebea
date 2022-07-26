@@ -75,8 +75,8 @@ class CheckoutView extends StatelessWidget {
                 decoration: BoxDecoration(color: customTheme(context).primary, borderRadius: BorderRadius.circular(7)),
                 child: ConfirmationSlider(
                   backgroundColor: customTheme(context).primary,
-                  // height: 48,
-                  // width: 200,
+                  height: 48,
+                  width: 200,
                   shadow: BoxShadow(color: Colors.transparent),
                   onConfirmation: () => createOrderController.confirmOrder(context),
                   foregroundColor: Colors.transparent,
