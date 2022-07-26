@@ -30,6 +30,7 @@ class AddShopController extends GetxController {
   TextEditingController district = TextEditingController();
   TextEditingController gst = TextEditingController();
   TextEditingController stateId = TextEditingController();
+  TextEditingController lastName = TextEditingController();
   DateTime? backbuttonpressedTime;
   RxBool isRoutesListLoading = true.obs;
   RxBool isStateListLoading = true.obs;
@@ -46,7 +47,7 @@ class AddShopController extends GetxController {
   zone_list.ZoneListResponse? zoneListResponse;
   List< zone_list.PoolList> zoneList = <zone_list.PoolList>[];
   List<CategoryList> category = [CategoryList(id:1,name:"Retail"), CategoryList(id:2,name:"Department"),CategoryList(id:3,name:"Wholesale"),CategoryList(id:4,name:"Supermarket")];
-  RxBool isAddShopButtonPressed = true.obs;
+  RxBool isAddShopButtonPressed = false.obs;
 
 
   @override
@@ -65,6 +66,7 @@ class AddShopController extends GetxController {
   addShop(
       {required int salesPersonId,
       required String name,
+        required String lastName,
       required String phone,
       required int shopCategoryId,
       required int customerType,
@@ -77,12 +79,14 @@ class AddShopController extends GetxController {
       required int routeId,
       required double latitude,
       required double longitude}) async {
+    isAddShopButtonPressed(true);
     if (addShopFormKey.currentState!.validate()) {
-      addShopResponse = await addShopRepo.addShop(salesPersonId, name, phone, shopCategoryId, customerType, gst,
+      addShopResponse = await addShopRepo.addShop(salesPersonId, name,lastName, phone, shopCategoryId, customerType, gst,
           localArea, district, zip, stateId, zoneId, routeId, latitude, longitude);
 
       if (addShopResponse.addShopResult!.status == true) {
         showDialog<bool>(
+          barrierDismissible: false,
             context: Get.context!,
             builder: (ctx) {
               return CustomAlertbox(
@@ -105,12 +109,14 @@ class AddShopController extends GetxController {
             });
       }
     }
+    isAddShopButtonPressed(false);
   }
 
   updateShop(
       {required int shopId,
       required int salesPersonId,
       required String name,
+        required String lastName,
       required String phone,
       required int shopCategoryId,
       required int customerType,
@@ -123,12 +129,14 @@ class AddShopController extends GetxController {
       required int routeId,
       required double latitude,
       required double longitude}) async {
+    isAddShopButtonPressed(true);
     if (addShopFormKey.currentState!.validate()) {
-      addShopResponse = await addShopRepo.updateShop(shopId, salesPersonId, name, phone, shopCategoryId, customerType,
+      addShopResponse = await addShopRepo.updateShop(shopId, salesPersonId, name,lastName, phone, shopCategoryId, customerType,
           gst, localArea, district, zip, stateId, zoneId, routeId, latitude, longitude);
 
       if (addShopResponse.addShopResult!.status == true) {
         showDialog<bool>(
+          barrierDismissible: false,
             context: Get.context!,
             builder: (ctx) {
               return CustomAlertbox(
@@ -151,6 +159,7 @@ class AddShopController extends GetxController {
             });
       }
     }
+    isAddShopButtonPressed(false);
   }
 
   void populate(ShopList argument) {
@@ -160,6 +169,7 @@ class AddShopController extends GetxController {
     district.text = argument.address!.district!;
     zip.text = argument.address!.zip!;
     localArea.text = argument.address!.localArea!;
+    lastName.text = argument.lastName!;
   }
 
   Future<bool> onWillpopClose() async {

@@ -97,6 +97,7 @@ class AddShopView extends GetView<AddShopController> {
                     height: 5,
                   ),
                   CustomTextField(
+                    textcontroller: controller.lastName,
                     validaton: (value) {
                       if (value == null || value
                           .trim()
@@ -157,8 +158,9 @@ class AddShopView extends GetView<AddShopController> {
                   Obx(() {
                     return Row(
                       children: [
-                        CustomRadioButton<int>(groupValue: controller
-                            .selectedRadio.value,
+                        CustomRadioButton<int>(
+                          groupValue: controller
+                              .selectedRadio.value,
                           color: Theme.of(context).extension<CustomTheme>()!
                               .primary,
                           label: 'B2B',
@@ -606,12 +608,41 @@ class AddShopView extends GetView<AddShopController> {
                   ),
                   (Get.arguments['isEdit'] ?? false)
                       ? Obx(() {
-
                     return CustomButton(
+                        onTap: () {
+                          if (controller.addShopFormKey.currentState!
+                              .validate()) {
+                            controller.updateShop(
+                              name: controller.name.text,
+                              district: controller.district.text,
+                              localArea: controller.localArea.text,
+                              phone: controller.phone.text,
+                              zip: controller.zip.text,
+                              customerType: controller.selectedRadio.value,
+                              shopCategoryId: controller.selectedCategory!.id!,
+                              latitude: 0,
+                              routeId: controller.selectedRoute!.id!,
+                              longitude: 0,
+                              gst: controller.gst.text,
+                              stateId: controller.selectedStateList!.stateId!,
+                              zoneId: controller.selectedZone!.id!,
+                              salesPersonId: SharedPrefs.getUserId()!,
+                              shopId: (Get.arguments['shop'] as ShopList).id!,
+                              lastName:controller.lastName.text ,
+                            );
+                          }
+                        },
+                        title: 'Update Shop',
+                        isLoading: controller.isAddShopButtonPressed.value
+                    );
+                  })
+                      : Obx(() {
+                    return CustomButton(
+
                       onTap: () {
                         if (controller.addShopFormKey.currentState!
                             .validate()) {
-                          controller.updateShop(
+                          controller.addShop(
                             name: controller.name.text,
                             district: controller.district.text,
                             localArea: controller.localArea.text,
@@ -626,38 +657,14 @@ class AddShopView extends GetView<AddShopController> {
                             stateId: controller.selectedStateList!.stateId!,
                             zoneId: controller.selectedZone!.id!,
                             salesPersonId: SharedPrefs.getUserId()!,
-                            shopId: (Get.arguments['shop'] as ShopList).id!,
+                            lastName:controller.lastName.text,
                           );
                         }
                       },
-                      title: 'Update Shop',
-                      isLoading:controller.isAddShopButtonPressed.value
+                      title: 'Add Shop',
+                        isLoading: controller.isAddShopButtonPressed.value
                     );
                   })
-                      : CustomButton(
-
-                    onTap: () {
-                      if (controller.addShopFormKey.currentState!.validate()) {
-                        controller.addShop(
-                          name: controller.name.text,
-                          district: controller.district.text,
-                          localArea: controller.localArea.text,
-                          phone: controller.phone.text,
-                          zip: controller.zip.text,
-                          customerType: controller.selectedRadio.value,
-                          shopCategoryId: controller.selectedCategory!.id!,
-                          latitude: 0,
-                          routeId: controller.selectedRoute!.id!,
-                          longitude: 0,
-                          gst: controller.gst.text,
-                          stateId: controller.selectedStateList!.stateId!,
-                          zoneId: controller.selectedZone!.id!,
-                          salesPersonId: SharedPrefs.getUserId()!,
-                        );
-                      }
-                    },
-                    title: 'Add Shop',
-                  )
                 ],
               ),
             ),

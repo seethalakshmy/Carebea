@@ -23,6 +23,7 @@ class AddShopDataSource {
 
   Future<AddShopResponse> addShop({
     required int salesPersonId,
+    required String lastName,
     required String name,
     required String phone,
     required int shopCategoryId,
@@ -42,6 +43,7 @@ class AddShopDataSource {
 
         body:json.encode( {
           'sales_person_id':salesPersonId,
+          'last_name':lastName,
           'name':name,
           'phone':phone,
           'local_area':localArea,
@@ -72,6 +74,7 @@ class AddShopDataSource {
   Future<AddShopResponse> updateShop({
     required int shopId,
     required int salesPersonId,
+    required String lastName,
     required String name,
     required String phone,
     required int shopCategoryId,
@@ -92,6 +95,7 @@ class AddShopDataSource {
         body:json.encode( {
           'shop_id':shopId,
           'sales_person_id':salesPersonId,
+          'last_name':lastName,
           'name':name,
           'phone':phone,
           'local_area':localArea,

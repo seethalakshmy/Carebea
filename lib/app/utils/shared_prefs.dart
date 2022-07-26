@@ -246,11 +246,11 @@ class SharedPrefs {
   }
 
   static void setUserType(int? userType) {
-    shared.setInt('user_id', userType!);
+    shared.setInt('user_type', userType!);
   }
 
   static int getUserType() {
-    return shared.getInt('user_id')!;
+    return shared.getInt('user_type')!;
   }
 }
 
