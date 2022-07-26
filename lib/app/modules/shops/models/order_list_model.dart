@@ -93,6 +93,7 @@ class History {
       this.deliveryDate,
       this.productTotal,
       this.shopName,
+      this.amountDue,
       this.srName});
 
   int? id;
@@ -111,7 +112,7 @@ class History {
   List<dynamic>? imageUrlList;
   @JsonKey(name: 'date_order')
   DateTime? dateOrder;
-  @JsonKey(name: 'delivery_date')
+  @JsonKey(ignore: true)
   DateTime? deliveryDate;
   String? status;
   @JsonKey(name: 'user_address')
@@ -122,10 +123,15 @@ class History {
   String? shopName;
   @JsonKey(name: 'amount_tax')
   double? amountTax;
+  @JsonKey(name: 'amount_due')
+  double? amountDue;
   @JsonKey(name: 'product_list')
   List<ProductList>? productList;
 
-  factory History.fromJson(Map<String, dynamic> json) => _$HistoryFromJson(json);
+  factory History.fromJson(Map<String, dynamic> json) => _$HistoryFromJson(json)
+    ..deliveryDate = json['delivery_date'] == null || json['delivery_date'] == 'False'
+        ? null
+        : DateFormat("y-MM-dd").parse(json['delivery_date']);
 
   Map<String, dynamic> toJson() => _$HistoryToJson(this);
 }
