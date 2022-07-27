@@ -5,8 +5,8 @@ import 'package:carebea/app/utils/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:location/location.dart';
+import 'package:majascan/majascan.dart';
 import 'package:permission_handler/permission_handler.dart' as ph;
-import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class Scanner extends StatelessWidget {
   const Scanner({Key? key, required this.onScanned}) : super(key: key);
@@ -34,9 +34,21 @@ class Scanner extends StatelessWidget {
               }
             }
           }
-          Get.to(() => ScannerView(
-                onScanned: onScanned,
-              ));
+          // String? cameraScanResult = await scanner.scan();
+          String? cameraScanResult = await MajaScan.startScan(
+              barColor: Colors.white,
+              titleColor: Colors.black,
+              qRCornerColor: Colors.white,
+              qRScannerColor: Colors.green,
+              flashlightEnable: true,
+              scanAreaScale: 0.7
+
+              /// value 0.0 to 1.0
+              );
+
+          if (cameraScanResult != null) {
+            onScanned.call(cameraScanResult);
+          }
         });
   }
 
@@ -93,92 +105,5 @@ class Scanner extends StatelessWidget {
             ],
           );
         });
-  }
-}
-
-class ScannerView extends StatelessWidget {
-  ScannerView({Key? key, required this.onScanned}) : super(key: key) {
-    ph.Permission.camera.isGranted.then((value) {
-      if (!value) {
-        ph.Permission.camera.request().then((value) {
-          if (!value.isGranted) {
-            showDialog(
-                context: Get.context!,
-                builder: (ctx) {
-                  return CustomAlertbox(
-                    title: "Camera needs to enabled",
-                    content: "Please enable Camera to continue",
-                    actions: [
-                      CustomButton(
-                          title: "Ok",
-                          onTap: () {
-                            Get.back(result: true);
-                          })
-                    ],
-                  );
-                });
-          }
-        }).then((_) {
-          Get.back();
-        });
-      }
-    });
-  }
-
-  final ValueChanged<String> onScanned;
-
-  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-  QRViewController? controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar(context),
-      body: SizedBox(
-        width: Get.size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    size: 18,
-                  )),
-            ),
-            SizedBox(
-              height: 200,
-              width: 200,
-              child: QRView(
-                key: qrKey,
-                onQRViewCreated: _onQRViewCreated,
-              ),
-            ),
-            IconButton(
-                onPressed: null,
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  size: 18,
-                  color: Colors.transparent,
-                )),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _onQRViewCreated(QRViewController controller) {
-    this.controller = controller;
-    controller.scannedDataStream.listen((scanData) {
-      if ((scanData.code ?? "").isNotEmpty) {
-        Get.back();
-
-        onScanned.call(scanData.code!);
-      }
-    });
   }
 }

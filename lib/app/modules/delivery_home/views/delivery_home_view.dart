@@ -1,3 +1,4 @@
+import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/modules/delivery_home/models/delivery_home_model.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
@@ -204,12 +205,17 @@ class OrderDeliveryCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 5),
-                CircleAvatar(
-                  radius: 17,
-                  backgroundColor: customTheme(context).primary.withOpacity(.2),
-                  child: Image.asset(
-                    Assets.assetsPhone,
-                    scale: 2.5,
+                InkWell(
+                  onTap: () {
+                    callPhone("138626381");
+                  },
+                  child: CircleAvatar(
+                    radius: 17,
+                    backgroundColor: customTheme(context).primary.withOpacity(.2),
+                    child: Image.asset(
+                      Assets.assetsPhone,
+                      scale: 2.5,
+                    ),
                   ),
                 )
               ],

@@ -1,3 +1,4 @@
+import 'package:carebea/app/modules/create_order/model/create_order.dart';
 import 'package:carebea/app/modules/order_details_delivery/data/repository/order_details_repository.dart';
 import 'package:carebea/app/modules/shops/models/order_list_model.dart';
 import 'package:carebea/app/modules/shops/repo/order_list_repo.dart';
@@ -13,7 +14,7 @@ class OrderDetailsDeliveryController extends GetxController {
   OrderListResponse? orderListDetailResponse;
   RxBool isOrderDetailsLoading = true.obs;
   RxBool isConfirmingOrder = false.obs;
-  Rx<PaymentMethods> selectedPaymentMethod = PaymentMethods.csh1.obs;
+  late Rx<PaymentMethod> selectedPaymentMethod;
   TextEditingController collectedAmountEditingController = TextEditingController();
 
   @override
@@ -26,6 +27,9 @@ class OrderDetailsDeliveryController extends GetxController {
     isOrderDetailsLoading(true);
     orderListDetailResponse =
         await orderListRepo.orderDetails(salesPersonId: SharedPrefs.getUserId(), orderId: orderId);
+    if ((orderListDetailResponse?.orderListResult?.paymentMethods ?? []).isNotEmpty) {
+      selectedPaymentMethod = (orderListDetailResponse!.orderListResult!.paymentMethods!.first).obs;
+    }
     isOrderDetailsLoading(false);
   }
 
@@ -34,7 +38,7 @@ class OrderDetailsDeliveryController extends GetxController {
     var res = await orderDetailsRepository.confirmOrder(
         orderId: orderListDetailResponse?.orderListResult?.history?.first.id,
         salesPersonId: SharedPrefs.getUserId(),
-        paymentMethod: _enumToString(selectedPaymentMethod.value),
+        paymentMethod: selectedPaymentMethod.value.code,
         collectedAmount: collectedAmountEditingController.text);
     if (res.result?.status ?? false) {
       Get.back();
@@ -44,19 +48,5 @@ class OrderDetailsDeliveryController extends GetxController {
       showSnackBar(res.result?.message ?? "Something happend, Please try again!");
     }
     isConfirmingOrder(false);
-  }
-}
-
-enum PaymentMethods { cheq, cred, csh1 }
-
-String _enumToString(PaymentMethods method) {
-  switch (method) {
-    case PaymentMethods.cheq:
-      return "CHEQ";
-    case PaymentMethods.cred:
-      return "CRED";
-    case PaymentMethods.csh1:
-    default:
-      return "CSH1";
   }
 }
