@@ -32,7 +32,9 @@ class LoginController extends GetxController {
     super.onClose();
   }
 
+  RxBool isLoading = RxBool(false);
   loginWithEmail({required String username, required String password}) async {
+    isLoading(true);
     debugPrint("in login controller -- loginWithEmail\n\n");
     if (loginFormKey.currentState!.validate()) {
       debugPrint(" email id validated \n\n");
@@ -62,6 +64,7 @@ class LoginController extends GetxController {
         Get.snackbar("Login Failed", response.emailLogin!.message!);
       }
     }
+    isLoading(false);
   }
 
   sendForgotPasswordRequest() async {
