@@ -1,3 +1,4 @@
+import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/modules/home/data/models/home_data_model.dart';
 import 'package:carebea/app/modules/shops/views/shop_details.dart';
 import 'package:carebea/app/utils/assets.dart';
@@ -49,21 +50,22 @@ class LatestShopListTile extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              children: [
-                Image.asset(
-                  Assets.assetsPhone,
-                  scale: 3,
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  '+91 ${shop.phone}',
-                  style: customTheme(context).regular.copyWith(fontSize: 11),
-                ),
-              ],
-            ),
+            if ((shop.phone ?? "").isNotEmpty)
+              Row(
+                children: [
+                  Image.asset(
+                    Assets.assetsPhone,
+                    scale: 3,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    '+91 ${shop.phone}',
+                    style: customTheme(context).regular.copyWith(fontSize: 11),
+                  ),
+                ],
+              ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

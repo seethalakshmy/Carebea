@@ -3,7 +3,7 @@ version: 1.0.0+1
 publish_to: none
 description: Carebea Mobile App.
 environment:
-  sdk: '>=2.17.0 <3.0.0'
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   connectivity_plus: 2.3.5
@@ -24,8 +24,8 @@ dependencies:
   json_serializable: 6.3.1
   location: ^4.4.0
   logger: 1.1.0
+  majascan: ^0.5.0
   permission_handler: ^10.0.0
-  qr_code_scanner: ^1.0.0
   restart_app: ^1.1.0+1
   shared_preferences: 2.0.15
   slide_to_confirm: ^1.1.0

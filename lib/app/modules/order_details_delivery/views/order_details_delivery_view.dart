@@ -1,4 +1,5 @@
 import 'package:carebea/app/core/helper.dart';
+import 'package:carebea/app/modules/create_order/model/create_order.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
@@ -181,16 +182,24 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                                         order.shopName!.trim(),
                                         style: customTheme(context).medium.copyWith(fontSize: 14),
                                       ),
-                                      Text(
-                                        order.userAddress!.split("\n").join(" ").trim(),
-                                        style: customTheme(context).regular.copyWith(fontSize: 14),
+                                      SizedBox(
+                                        width: Get.width * .55,
+                                        child: Text(
+                                          order.userAddress!.split("\n").join(" ").trim(),
+                                          style: customTheme(context).regular.copyWith(fontSize: 14),
+                                        ),
                                       ),
                                     ],
                                   ),
                                   const SizedBox(width: 10),
-                                  Image.asset(
-                                    Assets.phoneFilled,
-                                    scale: 3,
+                                  InkWell(
+                                    onTap: () {
+                                      // callPhone();
+                                    },
+                                    child: Image.asset(
+                                      Assets.phoneFilled,
+                                      scale: 3,
+                                    ),
                                   )
                                 ],
                               ),
@@ -283,6 +292,7 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
   }
 
   Padding _floatingActionButton(BuildContext context) {
+    var paymentMethods = controller.orderListDetailResponse!.orderListResult!.paymentMethods;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: CustomButton(
@@ -307,36 +317,18 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                       ),
                       const SizedBox(height: 10),
                       Obx(() {
-                        if (controller.selectedPaymentMethod.value == PaymentMethods.cheq) {}
+                        if (controller.selectedPaymentMethod.value.name != null) {}
                         return Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomRadioButton<PaymentMethods>(
-                              groupValue: controller.selectedPaymentMethod.value,
-                              value: PaymentMethods.csh1,
-                              onChanged: (val) {
-                                controller.selectedPaymentMethod(val);
-                              },
-                              label: "COD",
-                            ),
-                            CustomRadioButton<PaymentMethods>(
-                              groupValue: controller.selectedPaymentMethod.value,
-                              value: PaymentMethods.cheq,
-                              onChanged: (val) {
-                                controller.selectedPaymentMethod(val);
-                              },
-                              label: "Cheque",
-                            ),
-                            CustomRadioButton<PaymentMethods>(
-                              groupValue: controller.selectedPaymentMethod.value,
-                              value: PaymentMethods.cred,
-                              onChanged: (val) {
-                                controller.selectedPaymentMethod(val);
-                              },
-                              label: "Credit",
-                            ),
-                          ],
-                        );
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: (paymentMethods ?? [])
+                                .map((e) => CustomRadioButton<PaymentMethod>(
+                                    label: e.name,
+                                    groupValue: controller.selectedPaymentMethod.value,
+                                    value: e,
+                                    onChanged: (val) {
+                                      controller.selectedPaymentMethod(e);
+                                    }))
+                                .toList());
                       }),
                       const SizedBox(height: 13),
                       Text(

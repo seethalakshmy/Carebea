@@ -2,6 +2,7 @@ import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 ///validate email with regex
 bool validateEmail(String value) {
@@ -101,4 +102,15 @@ Widget openKeyboardGuard(BuildContext context, {required Widget child}) {
     return const SizedBox.shrink();
   }
   return child;
+}
+
+callPhone(String phone) async {
+  var url = Uri.parse("tel://$phone");
+
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  } else {
+    print('Could not launch $url');
+    throw 'Could not launch $url';
+  }
 }

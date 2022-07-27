@@ -55,22 +55,23 @@ class ShopListTile extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              children: [
-                Image.asset(
-                  Assets.assetsPhone,
-                  scale: 3,
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  shop.phone!,
-                  // '+91 6398541236',
-                  style: customTheme(context).regular.copyWith(fontSize: 11),
-                ),
-              ],
-            ),
+            if ((shop.phone ?? "").isNotEmpty)
+              Row(
+                children: [
+                  Image.asset(
+                    Assets.assetsPhone,
+                    scale: 3,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    "+91 ${shop.phone!}",
+                    // '+91 6398541236',
+                    style: customTheme(context).regular.copyWith(fontSize: 11),
+                  ),
+                ],
+              ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
