@@ -32,7 +32,9 @@ OrderListResult _$OrderListResultFromJson(Map<String, dynamic> json) =>
       filterVals: json['filter_vals'] == null
           ? null
           : FilterVals.fromJson(json['filter_vals'] as Map<String, dynamic>),
-    );
+    )..paymentMethods = (json['payment_methods'] as List<dynamic>?)
+        ?.map((e) => PaymentMethod.fromJson(e as Map<String, dynamic>))
+        .toList();
 
 Map<String, dynamic> _$OrderListResultToJson(OrderListResult instance) =>
     <String, dynamic>{
@@ -40,6 +42,7 @@ Map<String, dynamic> _$OrderListResultToJson(OrderListResult instance) =>
       'message': instance.message,
       'history': instance.history,
       'filter_vals': instance.filterVals,
+      'payment_methods': instance.paymentMethods,
     };
 
 FilterVals _$FilterValsFromJson(Map<String, dynamic> json) => FilterVals(

@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+import 'package:carebea/app/modules/create_order/model/create_order.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'order_list_model.g.dart';
@@ -40,6 +41,8 @@ class OrderListResult {
   List<History>? history;
   @JsonKey(name: "filter_vals")
   FilterVals? filterVals;
+  @JsonKey(name: "payment_methods")
+  List<PaymentMethod>? paymentMethods;
 
   factory OrderListResult.fromJson(Map<String, dynamic> json) => _$OrderListResultFromJson(json);
 
