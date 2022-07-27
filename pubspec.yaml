@@ -25,6 +25,7 @@ dependencies:
   location: ^4.4.0
   logger: 1.1.0
   majascan: ^0.5.0
+  path_provider: ^2.0.11
   permission_handler: ^10.0.0
   restart_app: ^1.1.0+1
   shared_preferences: 2.0.15

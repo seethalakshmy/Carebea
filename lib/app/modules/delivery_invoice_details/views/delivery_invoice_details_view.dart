@@ -165,8 +165,8 @@ class DeliveryInvoiceDetailsView extends GetView<DeliveryInvoiceDetailsControlle
           'Invoice details',
           style: customTheme(context).medium.copyWith(fontSize: 16),
         ),
-        const SizedBox(width: 150),
-        Icon(Icons.share)
+
+        // Icon(Icons.share)
       ],
     );
   }
