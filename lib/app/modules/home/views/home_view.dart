@@ -1,7 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:convert';
+import 'dart:developer' as developer;
 import 'package:carebea/app/modules/home/views/latest_shops_added_view.dart';
 import 'package:carebea/app/modules/home/widgets/search_widget.dart';
+import 'package:carebea/app/modules/shops/views/shop_details.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
@@ -10,6 +13,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../dashboard/models/qr_model.dart';
+import '../../order_history_details/controllers/order_history_details_controller.dart';
 import '../controllers/home_controller.dart';
 import 'homepage_menu_cards.dart';
 import 'homepage_upcoming_delivery_view.dart';
@@ -20,7 +25,20 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: appBar(context, showScanner: true, onScanned: (val) {
-          debugPrint(val);
+        try  {
+            var qr = QrResponse.fromJson(json.decode(val.replaceAll("\'", "\"")));
+            if (qr.type == 1) {
+              Get.to(() => ShopDetails(
+                    shopId: qr.id,
+                  ));
+            } else if (qr.type == 2) {
+              Get.toNamed(Routes.ORDER_HISTORY_DETAILS,
+                  arguments: {'order_id': qr.id});
+            }
+          }
+          catch(e,s){
+          developer.log('error',error: e,stackTrace: s);
+          }
         }),
 
         // appBar: AppBar(
