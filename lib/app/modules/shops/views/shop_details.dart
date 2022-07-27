@@ -138,22 +138,23 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              Assets.assetsPhone,
-                              scale: 3,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              shopDetails.phone!,
-                              // '+91 6398541236',
-                              style: customTheme(context).regular.copyWith(fontSize: 11),
-                            ),
-                          ],
-                        ),
+                        if ((shopDetails.phone ?? "").isNotEmpty)
+                          Row(
+                            children: [
+                              Image.asset(
+                                Assets.assetsPhone,
+                                scale: 3,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "+91 ${shopDetails.phone!}",
+                                // '+91 6398541236',
+                                style: customTheme(context).regular.copyWith(fontSize: 11),
+                              ),
+                            ],
+                          ),
                         const SizedBox(
                           height: 10,
                         ),

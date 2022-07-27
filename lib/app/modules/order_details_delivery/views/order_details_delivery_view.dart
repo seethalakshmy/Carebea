@@ -192,9 +192,14 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                                     ],
                                   ),
                                   const SizedBox(width: 10),
-                                  Image.asset(
-                                    Assets.phoneFilled,
-                                    scale: 3,
+                                  InkWell(
+                                    onTap: () {
+                                      // callPhone();
+                                    },
+                                    child: Image.asset(
+                                      Assets.phoneFilled,
+                                      scale: 3,
+                                    ),
                                   )
                                 ],
                               ),

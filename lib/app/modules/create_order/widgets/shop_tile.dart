@@ -48,9 +48,14 @@ class ShopDetailsTile extends StatelessWidget {
           if ((shop.phone ?? "").isNotEmpty)
             Row(
               children: [
-                Image.asset(
-                  Assets.assetsPhone,
-                  scale: 3,
+                InkWell(
+                  onTap: () {
+                    callPhone(shop.phone!);
+                  },
+                  child: Image.asset(
+                    Assets.assetsPhone,
+                    scale: 3,
+                  ),
                 ),
                 const SizedBox(
                   width: 5,
@@ -64,9 +69,14 @@ class ShopDetailsTile extends StatelessWidget {
           else if ((shop.altPhone ?? "").isNotEmpty)
             Row(
               children: [
-                Image.asset(
-                  Assets.assetsPhone,
-                  scale: 3,
+                InkWell(
+                 onTap: () {
+                    callPhone(shop.altPhone!);
+                  },
+                  child: Image.asset(
+                    Assets.assetsPhone,
+                    scale: 3,
+                  ),
                 ),
                 const SizedBox(
                   width: 5,
