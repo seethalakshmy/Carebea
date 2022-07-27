@@ -161,7 +161,10 @@ class CreateOrderController extends GetxController {
     totalCartCost(cost);
   }
 
+  RxBool isOrderConfirming = RxBool(false);
+
   confirmOrder(BuildContext context) async {
+    isOrderConfirming(true);
     var res = await _repository.confirmOrder(
       salesPersonId: SharedPrefs.getUserId()!,
       orderId: createOrderResponse!.result!.orderId!,
@@ -170,8 +173,11 @@ class CreateOrderController extends GetxController {
     );
 
     if (res.result?.status ?? false) {
+      isOrderConfirming(false);
+
       return onConfirm(context);
     }
+    isOrderConfirming(false);
 
     showSnackBar(res.result?.message ?? "Something happend, Please try again!");
   }
