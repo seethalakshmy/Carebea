@@ -8,13 +8,22 @@ class OrderDetailsDeliveryDataSource {
 
   Future<UpdateOrderStatusResponse> confirmOrder(
       int salesPersonId, int orderId, String? collectedAmount, String paymentMethod) async {
-    var response = await _apiService.post("update-order-status", {
-      "status": "Completed",
-      "collected_amount": collectedAmount,
+    Map<String, dynamic> body = {
+      "status": "Complete",
       "payment_method": paymentMethod,
       "sales_person_id": salesPersonId,
       "order_id": orderId,
-    });
+    };
+    if (paymentMethod == "CHEQ") {
+      body.addAll({
+        "cheq_no": collectedAmount,
+      });
+    } else {
+      body.addAll({
+        "collected_amount": collectedAmount,
+      });
+    }
+    var response = await _apiService.post("update-order-status", body);
 
     return UpdateOrderStatusResponse.fromJson(json.decode(response.body));
   }
