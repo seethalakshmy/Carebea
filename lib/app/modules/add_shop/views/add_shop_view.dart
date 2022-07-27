@@ -116,7 +116,7 @@ class AddShopView extends GetView<AddShopController> {
                     padding: const EdgeInsets.only(top: 8, bottom: 12),
                     child: DropdownSearch<CategoryList>(
                       dropdownBuilder: (context, selectedItem) => Text(
-                        selectedItem!.name!,
+                        selectedItem?.name ?? "",
                         style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black),
                       ),
                       validator: (value) {
@@ -356,7 +356,7 @@ class AddShopView extends GetView<AddShopController> {
                         return null;
                       },
                       dropdownBuilder: (context, selectedItem) => Text(
-                        selectedItem!.stateName!,
+                        selectedItem?.stateName ?? "",
                         style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black),
                       ),
                       popupProps: const PopupProps.menu(
@@ -447,7 +447,7 @@ class AddShopView extends GetView<AddShopController> {
                     padding: const EdgeInsets.only(top: 8, bottom: 12),
                     child: DropdownSearch<String>(
                       dropdownBuilder: (context, selectedItem) => Text(
-                        selectedItem!,
+                        selectedItem ?? "",
                         style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black),
                       ),
                       validator: (String? value) {
@@ -497,7 +497,7 @@ class AddShopView extends GetView<AddShopController> {
                       }
                       return DropdownSearch<zone.PoolList>(
                         dropdownBuilder: (context, selectedItem) => Text(
-                          selectedItem!.name!,
+                          selectedItem?.name ?? "",
                           style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black),
                         ),
                         validator: (value) {
@@ -552,7 +552,7 @@ class AddShopView extends GetView<AddShopController> {
                       }
                       return DropdownSearch<route.PoolList>(
                         dropdownBuilder: (context, selectedItem) => Text(
-                          selectedItem!.name!,
+                          selectedItem?.name ?? "",
                           style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black),
                         ),
                         validator: (value) {
