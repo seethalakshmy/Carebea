@@ -42,13 +42,16 @@ class AddShopView extends GetView<AddShopController> {
                 children: [
                   Row(
                     children: [
+                      SizedBox(
+                        width: 10,
+                      ),
                       InkWell(
                           onTap: () {
                             Get.back();
                           },
                           child: Icon(
                             Icons.arrow_back_ios_new,
-                            size: 20,
+                            size: 17,
                           )),
                       SizedBox(
                         width: 15,

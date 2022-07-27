@@ -55,10 +55,10 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                             },
                             child: Icon(
                               Icons.arrow_back_ios_new,
-                              size: 20,
+                              size: 17,
                             )),
                         SizedBox(
-                          width: 10,
+                          width: 15,
                         ),
                         Text(
                           'Order ID:#${Get.arguments['order_id']}',
@@ -98,10 +98,10 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                               },
                               child: Icon(
                                 Icons.arrow_back_ios_new,
-                                size: 20,
+                                size: 17,
                               )),
                           SizedBox(
-                            width: 10,
+                            width: 15,
                           ),
                           Text(
                             'Order ID:#${order.orderId}',

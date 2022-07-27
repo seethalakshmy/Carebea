@@ -102,7 +102,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
               size: 17,
             ),
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: 15),
           Text(
             "Create new order",
             style: customTheme(context).medium.copyWith(fontSize: 16, color: Colors.black),

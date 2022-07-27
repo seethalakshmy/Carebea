@@ -39,7 +39,7 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                           },
                           child: Icon(
                             Icons.arrow_back_ios_new,
-                            size: 16,
+                            size: 17,
                           )),
                       SizedBox(
                         width: 15,

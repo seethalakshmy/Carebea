@@ -35,7 +35,10 @@ class ShopDetailsView extends GetView<CreateOrderController> {
               child: CustomButton(
                   title: 'Add Products',
                   onTap: () {
-                    Get.to(AddProductsView(),arguments: Get.arguments,);
+                    Get.to(
+                      AddProductsView(),
+                      arguments: Get.arguments,
+                    );
                   }),
             ),
           ],
@@ -63,7 +66,7 @@ class ShopDetailsView extends GetView<CreateOrderController> {
               ),
             ),
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: 15),
           Text(
             "Create new order",
             style: customTheme(context).medium.copyWith(fontSize: 16, color: Colors.black),
