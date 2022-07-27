@@ -3,6 +3,7 @@ import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../utils/assets.dart';
@@ -19,6 +20,7 @@ class RoutePageView extends GetView<RoutePageController> {
         appBar: appBar(context),
         body: SingleChildScrollView(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
                 padding: const EdgeInsets.all(15.0),
@@ -48,15 +50,20 @@ class RoutePageView extends GetView<RoutePageController> {
               const SizedBox(
                 height: 20,
               ),
-              Container(
-                height: MediaQuery.of(context).size.height,
+              Flexible(
                 child: Obx(() {
                   if (controller.isRouteListRoutePageLoading.value) {
-                    return Center(child: circularProgressIndicator(context));
+                    return Padding(padding: const EdgeInsets.only(top: 90), child: circularProgressIndicator(context));
+                  }
+                  if (controller.routeList.isEmpty) {
+                    return const Padding(
+                      padding: EdgeInsets.only(top: 90),
+                      child: Text("Not routes assigned for date"),
+                    );
                   }
                   return ListView.builder(
                       // physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: false,
+                      shrinkWrap: true,
                       itemCount: controller.routeList.length,
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
@@ -73,7 +80,7 @@ class RoutePageView extends GetView<RoutePageController> {
                                     color: Colors.black,
                                   ),
                                   title: Text(
-                                    'Route:${controller.routeList[index].name}',
+                                    'Route:${controller.routeList[index].routeName}',
                                     style: customTheme(context).medium.copyWith(fontSize: 12),
                                   ),
                                   subtitle: Padding(
@@ -87,10 +94,10 @@ class RoutePageView extends GetView<RoutePageController> {
                                         const SizedBox(
                                           width: 5,
                                         ),
-                                        Text(
-                                          controller.routeList[index].address?.split('\n').join(" ") ?? '',
-                                          style: customTheme(context).medium.copyWith(fontSize: 12),
-                                        ),
+                                        // Text(
+                                        //   controller.routeList[index].a?.split('\n').join(" ") ?? '',
+                                        //   style: customTheme(context).medium.copyWith(fontSize: 12),
+                                        // ),
                                       ],
                                     ),
                                   ),
@@ -134,7 +141,7 @@ class _CalenderState extends State<Calender> {
         rightChevronMargin: EdgeInsets.only(right: 50),
       ),
       onDaySelected: (DateTime selectDate, DateTime focusDate) {
-        routePageController.fetchRouteListCalender();
+        routePageController.fetchRouteListCalender(date: DateFormat("dd/MM/yyy").format(selectDate));
         setState(() {
           selectedDate = selectDate;
           focusedDate = focusDate;
