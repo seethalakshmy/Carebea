@@ -133,31 +133,36 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                 SizedBox(
                                   height: 10,
                                 ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Image.asset(
-                                      Assets.assetsLocationFilled,
-                                      scale: 3,
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          orders.shopName!,
-                                          style: customTheme(context).medium.copyWith(fontSize: 11),
-                                        ),
-                                        Text(
-                                          orders.userAddress!.split("\n").join(" "),
-                                          style: customTheme(context).regular.copyWith(fontSize: 11),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                Flexible(
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Image.asset(
+                                        Assets.assetsLocationFilled,
+                                        scale: 3,
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            orders.shopName!,
+                                            style: customTheme(context).medium.copyWith(fontSize: 11),
+                                          ),
+                                          SizedBox(
+                                            width: Get.width * .8,
+                                            child: Text(
+                                              orders.userAddress!.split("\n").join(" "),
+                                              style: customTheme(context).regular.copyWith(fontSize: 11),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 15,
