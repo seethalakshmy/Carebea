@@ -199,7 +199,7 @@ class ProductTile extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(
-                height: 100,
+                height: 120,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -274,13 +274,15 @@ class ProductTile extends StatelessWidget {
                             alignment: Alignment.bottomRight,
                             child: Padding(
                               padding: const EdgeInsets.only(right: 8.0, bottom: 10),
-                              child: (product.available?.toLowerCase() == 'unavailable')
-                                  ? Text(
-                                      '${product.available}',
-                                      style:
-                                          TextStyle(color: customTheme(context).primary, fontWeight: FontWeight.bold),
-                                    )
-                                  : Obx(() {
+                              child:
+                              // (product.available?.toLowerCase() == 'unavailable') ?
+                              // Text(
+                              //         '${product.available}',
+                              //         style:
+                              //             TextStyle(color: customTheme(context).primary, fontWeight: FontWeight.bold),
+                              //       )
+                              //     :
+                                Obx(() {
                                       if (_controller.cartproducts.containsKey(product.id)) {
                                         return CartCountWidget(
                                             id: product.id!, count: _controller.cartproducts[product.id] ?? 0);

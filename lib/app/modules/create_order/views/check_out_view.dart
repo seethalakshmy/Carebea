@@ -228,7 +228,7 @@ class CheckoutView extends StatelessWidget {
               style: customTheme(context).regular.copyWith(fontSize: 11, color: Color(0xff767676)),
             ),
             const SizedBox(height: 10),
-            PaymentTile(title: "Item Total", value: createOrderController.createOrderResponse!.result!.productTotal!),
+            PaymentTile(title: "Item Total", value: createOrderController.createOrderResponse!.result!.amountUntaxed!),
             PaymentTile(title: "GST Tax", value: createOrderController.createOrderResponse!.result!.amountTax!),
             // PaymentTile(title: "SCGST Tax", value: 15),
             PaymentTile(title: "Discount", value: 0),
