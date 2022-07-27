@@ -33,8 +33,10 @@ class CustomButton extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (icon != null) icon!,
-            if (icon != null) const SizedBox(width: 5),
+            if (!isLoading)
+              if (icon != null) icon!,
+            if (!isLoading)
+              if (icon != null) const SizedBox(width: 5),
             isLoading
                 ? SizedBox(
                     height: fontSize + 4,
