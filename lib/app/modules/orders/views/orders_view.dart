@@ -88,8 +88,7 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                         child: CustomTextField(
                       onChanged: (val) => ordersController.searchOrders(val),
                       hint: 'Search for orders',
-                              fillcolor: customTheme(context).textFormFieldColor,
-
+                      fillcolor: customTheme(context).textFormFieldColor,
                       icon: const Icon(
                         Icons.search,
                         size: 30,
@@ -198,7 +197,10 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                       return Align(alignment: Alignment.topCenter, child: Text('No Orders'));
                     }
 
-                    return _completedOrders();
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: _completedOrders(),
+                    );
                   }),
                 ),
                 SizedBox(
@@ -226,12 +228,12 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
 
   ListView _completedOrders() {
     return ListView.separated(
-        separatorBuilder: (_, __) => const SizedBox(height: 16),
+        separatorBuilder: (_, __) => const SizedBox(height: 0),
         scrollDirection: Axis.vertical,
         itemCount: ordersController.allOrders.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
             child: InkWell(
                 onTap: () {
                   Get.toNamed(Routes.ORDER_HISTORY_DETAILS,
