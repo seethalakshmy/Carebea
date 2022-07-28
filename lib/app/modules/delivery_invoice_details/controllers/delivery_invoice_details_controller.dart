@@ -42,7 +42,11 @@ class DeliveryInvoiceDetailsController extends GetxController {
         return;
       }
       if (await getStoragePermission()) {
-        await storePdfTostorage(res.result!.base64Invoice!, Get.arguments["orderId"]);
+        try {
+          await storePdfTostorage(res.result!.base64Invoice!, Get.arguments["orderId"].toString());
+        } catch (e) {
+          showSnackBar("Could't save pdf to storage please try again");
+        }
       }
     } else {
       showSnackBar("Could't generate invoice, Please try again!");
@@ -63,7 +67,8 @@ class DeliveryInvoiceDetailsController extends GetxController {
   Future storePdfTostorage(String base64pdf, String orderID) async {
     var bytes = base64Decode(base64pdf);
     final output = await getDownloadPath();
-    final file = File("/$orderID.pdf");
+    final file = File("$output/Order-$orderID.pdf");
     await file.writeAsBytes(bytes.buffer.asUint8List());
+    showSnackBar("invoice downloded successfully");
   }
 }

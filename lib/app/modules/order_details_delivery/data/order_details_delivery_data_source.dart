@@ -13,7 +13,7 @@ class OrderDetailsDeliveryDataSource {
       "payment_method": paymentMethod,
       "sales_person_id": salesPersonId,
       "order_id": orderId,
-      "collected_amount": collectedAmount,
+      "collected_amount": double.parse(collectedAmount),
     };
     if (paymentMethod == "CHEQ") {
       body.addAll({
