@@ -205,19 +205,20 @@ class OrderDeliveryCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 5),
-                InkWell(
-                  onTap: () {
-                    callPhone("138626381");
-                  },
-                  child: CircleAvatar(
-                    radius: 17,
-                    backgroundColor: customTheme(context).primary.withOpacity(.2),
-                    child: Image.asset(
-                      Assets.assetsPhone,
-                      scale: 2.5,
+                if ((order.shopMobile ?? "").isNotEmpty)
+                  InkWell(
+                    onTap: () {
+                      callPhone(order.shopMobile!);
+                    },
+                    child: CircleAvatar(
+                      radius: 17,
+                      backgroundColor: customTheme(context).primary.withOpacity(.2),
+                      child: Image.asset(
+                        Assets.assetsPhone,
+                        scale: 2.5,
+                      ),
                     ),
-                  ),
-                )
+                  )
               ],
             ),
           ),

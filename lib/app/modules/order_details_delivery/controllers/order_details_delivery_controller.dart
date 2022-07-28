@@ -16,6 +16,7 @@ class OrderDetailsDeliveryController extends GetxController {
   RxBool isConfirmingOrder = false.obs;
   late Rx<PaymentMethod> selectedPaymentMethod;
   TextEditingController collectedAmountEditingController = TextEditingController();
+  TextEditingController cheqNoController = TextEditingController();
 
   @override
   void onInit() {
@@ -28,7 +29,14 @@ class OrderDetailsDeliveryController extends GetxController {
     orderListDetailResponse =
         await orderListRepo.orderDetails(salesPersonId: SharedPrefs.getUserId(), orderId: orderId);
     if ((orderListDetailResponse?.orderListResult?.paymentMethods ?? []).isNotEmpty) {
-      selectedPaymentMethod = (orderListDetailResponse!.orderListResult!.paymentMethods!.first).obs;
+      if (orderListDetailResponse?.orderListResult?.history?.first.paymentMethod != null) {
+        selectedPaymentMethod = orderListDetailResponse!.orderListResult!.paymentMethods!
+            .firstWhere(
+                (element) => element.id == orderListDetailResponse!.orderListResult!.history!.first.paymentMethod!)
+            .obs;
+      } else {
+        selectedPaymentMethod = (orderListDetailResponse!.orderListResult!.paymentMethods!.first).obs;
+      }
     }
     isOrderDetailsLoading(false);
   }
@@ -39,7 +47,9 @@ class OrderDetailsDeliveryController extends GetxController {
         orderId: orderListDetailResponse?.orderListResult?.history?.first.id,
         salesPersonId: SharedPrefs.getUserId(),
         paymentMethod: selectedPaymentMethod.value.code,
-        collectedAmount: collectedAmountEditingController.text);
+        collectedAmount: collectedAmountEditingController.text,
+        cheqNo: cheqNoController.text
+        );
     if (res.result?.status ?? false) {
       Get.back();
       Get.toNamed(Routes.DELIVERY_INVOICE_DETAILS,

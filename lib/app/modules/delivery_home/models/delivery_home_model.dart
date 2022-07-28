@@ -7,7 +7,6 @@ import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 part 'delivery_home_model.g.dart';
 
-
 @JsonSerializable()
 class DeliveryHomePageResponse {
   DeliveryHomePageResponse({
@@ -18,13 +17,14 @@ class DeliveryHomePageResponse {
 
   String? jsonrpc;
   dynamic id;
-  @JsonKey(name:'result')
+  @JsonKey(name: 'result')
   DeliveryHomePageResult? deliveryHomePageResult;
 
   factory DeliveryHomePageResponse.fromJson(Map<String, dynamic> json) => _$DeliveryHomePageResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$DeliveryHomePageResponseToJson(this);
 }
+
 @JsonSerializable()
 class DeliveryHomePageResult {
   DeliveryHomePageResult({
@@ -51,22 +51,18 @@ class DeliveryHomePageResult {
 
   Map<String, dynamic> toJson() => _$DeliveryHomePageResultToJson(this);
 }
+
 @JsonSerializable()
 class UpcomingDeliveryList {
-  UpcomingDeliveryList({
-    this.orderId,
-    this.orderName,
-    this.shopName,
-    this.amountTotal,
-    this.status,
-    this.shopAddress
-  });
-@JsonKey(name: 'order_id')
+  UpcomingDeliveryList({this.orderId, this.orderName, this.shopName, this.amountTotal, this.status, this.shopAddress});
+  @JsonKey(name: 'order_id')
   int? orderId;
   @JsonKey(name: 'order_name')
   String? orderName;
   @JsonKey(name: 'shop_name')
   String? shopName;
+  @JsonKey(name: 'shop_mobile')
+  String? shopMobile;
   @JsonKey(name: 'shop_address')
   String? shopAddress;
   @JsonKey(name: 'amount_total')
