@@ -8,6 +8,7 @@ import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
+import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:carebea/app/utils/widgets/custom_alertbox.dart';
 import 'package:carebea/app/utils/widgets/custom_button.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
@@ -71,19 +72,32 @@ class CheckoutView extends StatelessWidget {
                   ),
                 ],
               ),
-              Container(
-                decoration: BoxDecoration(color: customTheme(context).primary, borderRadius: BorderRadius.circular(7)),
-                child: ConfirmationSlider(
-                  backgroundColor: customTheme(context).primary,
-                  height: 48,
-                  width: 200,
-                  shadow: BoxShadow(color: Colors.transparent),
-                  onConfirmation: () => createOrderController.confirmOrder(context),
-                  foregroundColor: Colors.transparent,
-                  text: "Swipe to Confirm",
-                  textStyle: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.white),
-                ),
-              )
+              Obx(() {
+                if (createOrderController.isOrderConfirming.value) {
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: circularProgressIndicator(context, strokeWidth: 3),
+                    ),
+                  );
+                }
+                return Container(
+                  decoration:
+                      BoxDecoration(color: customTheme(context).primary, borderRadius: BorderRadius.circular(7)),
+                  child: ConfirmationSlider(
+                    backgroundColor: customTheme(context).primary,
+                    height: 48,
+                    width: 200,
+                    shadow: BoxShadow(color: Colors.transparent),
+                    onConfirmation: () => createOrderController.confirmOrder(context),
+                    foregroundColor: Colors.transparent,
+                    text: "Swipe to Confirm",
+                    textStyle: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.white),
+                  ),
+                );
+              })
             ],
           ),
         ),
@@ -141,31 +155,81 @@ class CheckoutView extends StatelessWidget {
           "Products (${createOrderController.selectedProducts.length})",
           style: customTheme(context).regular.copyWith(fontSize: 11),
         ),
-        const SizedBox(height: 10),
-        ...createOrderController.selectedProducts.map((product) {
-          return ProductTile(product: product);
-        }),
-        Align(
-          alignment: Alignment.centerRight,
-          child: TextButton(
-            onPressed: () {},
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Show more",
-                  style: customTheme(context).regular.copyWith(fontSize: 12, color: customTheme(context).primary),
-                ),
-                const SizedBox(width: 2),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 10,
-                  color: customTheme(context).primary,
-                )
-              ],
+        if (createOrderController.selectedProducts.length > 2)
+          ...createOrderController.selectedProducts.sublist(0, 2).map((product) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: ProductTile(
+                product: product,
+                category: Get.arguments["shop"].category,
+              ),
+            );
+          })
+        else
+          ...createOrderController.selectedProducts.map((product) {
+            return Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: ProductTile(
+                product: product,
+                category: Get.arguments["shop"].category,
+              ),
+            );
+          }),
+        if (createOrderController.selectedProducts.length > 2)
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: () {
+                var shop = Get.arguments["shop"];
+                Get.bottomSheet(Container(
+                  decoration:
+                      BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(12))),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        child: Text(
+                          "Products",
+                          style: customTheme(context).medium,
+                        ),
+                      ),
+                      Flexible(
+                        child: ListView.builder(
+                            itemBuilder: (context, index) {
+                              var product = createOrderController.selectedProducts[index];
+                              return Padding(
+                                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                                child: ProductTile(
+                                  product: product,
+                                  category: shop.category,
+                                ),
+                              );
+                            },
+                            itemCount: createOrderController.selectedProducts.length),
+                      ),
+                    ],
+                  ),
+                ));
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Show more",
+                    style: customTheme(context).regular.copyWith(fontSize: 12, color: customTheme(context).primary),
+                  ),
+                  const SizedBox(width: 2),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    size: 10,
+                    color: customTheme(context).primary,
+                  )
+                ],
+              ),
             ),
-          ),
-        )
+          )
       ],
     );
   }
@@ -238,14 +302,18 @@ class CheckoutView extends StatelessWidget {
 
   Padding _title(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 10),
       child: Row(
         children: [
-          const Icon(
-            Icons.arrow_back_ios,
-            size: 17,
+          IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              size: 17,
+            ),
           ),
-          const SizedBox(width: 10),
           Text(
             "Confirm order",
             style: customTheme(context).medium.copyWith(fontSize: 16, color: Colors.black),
@@ -293,9 +361,11 @@ class PaymentTile extends StatelessWidget {
 class ProductTile extends StatelessWidget {
   const ProductTile({
     required this.product,
+    required this.category,
     Key? key,
   }) : super(key: key);
   final ProductList product;
+  final String category;
   static final CreateOrderController _controller = Get.find();
 
   @override
@@ -344,7 +414,7 @@ class ProductTile extends StatelessWidget {
                         );
                       }),
                       Text(
-                        "₹${_controller.productPrice(Get.arguments["shop"].category, product).toStringAsFixed(2)}",
+                        "₹${_controller.productPrice(category, product).toStringAsFixed(2)}",
                         style: customTheme(context).medium.copyWith(fontSize: 14),
                       ),
                     ],

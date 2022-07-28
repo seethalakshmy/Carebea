@@ -3,6 +3,7 @@ import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../utils/assets.dart';
@@ -19,37 +20,50 @@ class RoutePageView extends GetView<RoutePageController> {
         appBar: appBar(context),
         body: SingleChildScrollView(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Row(
                   children: [
                     InkWell(
-                      child: Icon(Icons.arrow_back_ios_new, size: 16,),
+                      child: Icon(
+                        Icons.arrow_back_ios_new,
+                        size: 17,
+                      ),
                       onTap: () {
                         Get.back();
-                      },),
-                    SizedBox(width: 15,),
-                    Text('Route', style: customTheme(context).medium.copyWith(
-                        fontSize: 16),)
+                      },
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Text(
+                      'Route',
+                      style: customTheme(context).medium.copyWith(fontSize: 16),
+                    )
                   ],
                 ),
               ),
-               Calender(),
+              Calender(),
               const Divider(),
-              const SizedBox(height: 20,),
-              Container(
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height,
+              const SizedBox(
+                height: 20,
+              ),
+              Flexible(
                 child: Obx(() {
-                  if(controller.isRouteListRoutePageLoading.value){
-                    return Center(child: circularProgressIndicator(context));
+                  if (controller.isRouteListRoutePageLoading.value) {
+                    return Padding(padding: const EdgeInsets.only(top: 90), child: circularProgressIndicator(context));
+                  }
+                  if (controller.routeList.isEmpty) {
+                    return const Padding(
+                      padding: EdgeInsets.only(top: 90),
+                      child: Text("Not routes assigned for date"),
+                    );
                   }
                   return ListView.builder(
-                    // physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: false,
+                      // physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
                       itemCount: controller.routeList.length,
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
@@ -57,53 +71,48 @@ class RoutePageView extends GetView<RoutePageController> {
                             padding: const EdgeInsets.all(15.0),
                             child: CustomCard(
                                 hasShadow: false,
-                                color: Theme.of(context).extension<
-                                    CustomTheme>()!.cardBackground,
-
-                                width: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width,
+                                color: Theme.of(context).extension<CustomTheme>()!.cardBackground,
+                                width: MediaQuery.of(context).size.width,
                                 child: ListTile(
                                   trailing: const Icon(
                                     Icons.arrow_forward_ios_rounded,
-                                    size: 15, color: Colors.black,) ,
-                                  title: Text('Route:${controller.routeList[index].name}',
-                                    style: customTheme(context).medium.copyWith(
-                                        fontSize: 12),),
+                                    size: 15,
+                                    color: Colors.black,
+                                  ),
+                                  title: Text(
+                                    'Route:${controller.routeList[index].routeName}',
+                                    style: customTheme(context).medium.copyWith(fontSize: 12),
+                                  ),
                                   subtitle: Padding(
                                     padding: const EdgeInsets.only(top: 8),
                                     child: Row(
                                       children: [
-                                        Image.asset(Assets.assetsLocationFilled,
-                                          scale: 3,),
-                                        const SizedBox(width: 5,),
-                                        Text(
-                                          controller.routeList[index].address?.split('\n').join(" ")??'',
-                                          style: customTheme(context).medium
-                                              .copyWith(fontSize: 12),),
-
-
+                                        Image.asset(
+                                          Assets.assetsLocationFilled,
+                                          scale: 3,
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        // Text(
+                                        //   controller.routeList[index].a?.split('\n').join(" ") ?? '',
+                                        //   style: customTheme(context).medium.copyWith(fontSize: 12),
+                                        // ),
                                       ],
                                     ),
                                   ),
-                                )
-                            )
-                        );
+                                )));
                       });
                 }),
               ),
-
-
             ],
           ),
-        )
-    );
+        ));
   }
 }
 
 class Calender extends StatefulWidget {
-   Calender({Key? key}) : super(key: key);
+  Calender({Key? key}) : super(key: key);
 
   @override
   State<Calender> createState() => _CalenderState();
@@ -130,34 +139,22 @@ class _CalenderState extends State<Calender> {
         titleTextStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         leftChevronMargin: EdgeInsets.only(left: 50),
         rightChevronMargin: EdgeInsets.only(right: 50),
-
-
       ),
       onDaySelected: (DateTime selectDate, DateTime focusDate) {
-        routePageController.fetchRouteListCalender();
+        routePageController.fetchRouteListCalender(date: DateFormat("dd/MM/yyy").format(selectDate));
         setState(() {
           selectedDate = selectDate;
           focusedDate = focusDate;
-        }
-        );
+        });
       },
       calendarStyle: CalendarStyle(
           isTodayHighlighted: true,
-          selectedDecoration: BoxDecoration(
-              color: Theme.of(context).extension<CustomTheme>()!.primary,
-              shape: BoxShape.circle),
-          selectedTextStyle: const TextStyle(color: Colors.white)
-
-      ),
+          selectedDecoration:
+              BoxDecoration(color: Theme.of(context).extension<CustomTheme>()!.primary, shape: BoxShape.circle),
+          selectedTextStyle: const TextStyle(color: Colors.white)),
       selectedDayPredicate: (day) {
         return isSameDay(selectedDate, day);
       },
-
-
     );
   }
-
 }
-
-
-

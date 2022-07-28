@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:carebea/app/core/services/api_service.dart';
+import 'package:carebea/app/modules/delivery_invoice_details/data/models/generate_invoice_response.dart';
 import 'package:carebea/app/modules/delivery_invoice_details/data/models/invoice_details_response.dart';
 
 class DeliveryInvoiceDetailsDataSource {
@@ -12,7 +13,13 @@ class DeliveryInvoiceDetailsDataSource {
     return InvoiceDetailsResponse.fromJson(json.decode(res.body));
   }
 
-  Future generateInvoiceBill(int invoiceId) async {
+  Future<GenerateInvoiceResponse> generateInvoiceBill(int invoiceId) async {
     var res = await _apiService.post("generate-invoice", {"invoice_id": invoiceId});
+
+    if (res.statusCode == 200) {
+      return GenerateInvoiceResponse.fromJson(json.decode(res.body));
+    }
+
+    return GenerateInvoiceResponse(result: GenerateInvoiceResult(status: false));
   }
 }

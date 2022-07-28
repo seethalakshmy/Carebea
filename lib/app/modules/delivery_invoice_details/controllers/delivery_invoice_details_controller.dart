@@ -1,9 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/modules/delivery_invoice_details/data/models/invoice_details_response.dart';
 import 'package:carebea/app/modules/delivery_invoice_details/data/repository/delivery_invoice_details_repository.dart';
 import 'package:carebea/app/utils/show_snackbar.dart';
 import 'package:carebea/app/utils/widgets/custom_alertbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class DeliveryInvoiceDetailsController extends GetxController {
   final DeliveryInvoiceDetailsRepository _repository = DeliveryInvoiceDetailsRepository();
@@ -32,6 +37,33 @@ class DeliveryInvoiceDetailsController extends GetxController {
   generateInvoice() async {
     generatingInvoice(true);
     var res = await _repository.generateInvoiceBill(invoiceId: deliveryInvoice!.invoiceId);
+    if (res.result?.status ?? false) {
+      if ((res.result?.base64Invoice ?? "").isEmpty) {
+        return;
+      }
+      if (await getStoragePermission()) {
+        await storePdfTostorage(res.result!.base64Invoice!, Get.arguments["orderId"]);
+      }
+    } else {
+      showSnackBar("Could't generate invoice, Please try again!");
+    }
     generatingInvoice(false);
+  }
+
+  Future<bool> getStoragePermission() async {
+    if (!(await Permission.storage.isGranted)) {
+      var permissionStatus = await Permission.storage.request();
+      if (permissionStatus != PermissionStatus.granted) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  Future storePdfTostorage(String base64pdf, String orderID) async {
+    var bytes = base64Decode(base64pdf);
+    final output = await getDownloadPath();
+    final file = File("/$orderID.pdf");
+    await file.writeAsBytes(bytes.buffer.asUint8List());
   }
 }

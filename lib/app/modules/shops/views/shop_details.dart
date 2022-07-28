@@ -57,10 +57,10 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                       },
                       child: const Icon(
                         Icons.arrow_back_ios,
-                        size: 16,
+                        size: 17,
                       ),
                     ),
-                    const SizedBox(width: 16),
+                    const SizedBox(width: 15),
                     Text(
                       'Shops',
                       style: customTheme(context).medium.copyWith(fontSize: 16),

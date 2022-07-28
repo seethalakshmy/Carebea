@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 
 class OrderHistoryTile extends StatelessWidget {
   const OrderHistoryTile({
-    Key? key, required this.orders,
+    Key? key,
+    required this.orders,
   }) : super(key: key);
   final History orders;
 
@@ -78,26 +79,78 @@ class OrderHistoryTile extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Text(
-              'Product',
-              style: customTheme(context).medium.copyWith(fontSize: 11),
+          if ((orders.productList ?? []).isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                'Product',
+                style: customTheme(context).medium.copyWith(fontSize: 11),
+              ),
             ),
-          ),
+          // Builder(builder: (context) {
+          //   var productList = orders.productList ?? [];
+
+          //   if (productList.length > 2) {
+          //     productList = productList.sublist(0, 2);
+          //   }
+          //   return Column(
+          //       children: (productList)
+          //           .map(
+          //             (e) => Padding(
+          //               padding: const EdgeInsets.only(left: 10, right: 10, bottom: 4),
+          //               child: Row(
+          //                 children: [
+          //                   Text(
+          //                     e.name!,
+          //                     style: customTheme(context).regular.copyWith(fontSize: 11),
+          //                   ),
+          //                   SizedBox(
+          //                     width: 10,
+          //                   ),
+          //                   Text(
+          //                     e.productUomQty.toString(),
+          //                     style: customTheme(context).regular.copyWith(fontSize: 11),
+          //                   ),
+          //                 ],
+          //               ),
+          //             ),
+          //           )
+          //           .toList());
+          // }),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.end,
+          //     children: [
+          //       Text(
+          //         'View details',
+          //         style: customTheme(context).medium.copyWith(fontSize: 10),
+          //       ),
+          //       Icon(
+          //         Icons.arrow_forward_ios_rounded,
+          //         size: 10,
+          //         color: Colors.black54,
+          //       )
+          //     ],
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
             child: Row(
               children: [
-                Text(
-                  orders.productList!.first.name!,
-                  style: customTheme(context).regular.copyWith(fontSize: 11),
+                if ((orders.productList ?? []).isNotEmpty)
+                  Text(
+                    orders.productList!.first.name!,
+                    style: customTheme(context).regular.copyWith(fontSize: 11),
+                  ),
+                SizedBox(
+                  width: 10,
                 ),
-                SizedBox(width: 10,),
-                Text(
-                  orders.productList!.first.productUomQty.toString(),
-                  style: customTheme(context).regular.copyWith(fontSize: 11),
-                ),
+                if ((orders.productList ?? []).isNotEmpty)
+                  Text(
+                    orders.productList!.first.productUomQty.toString(),
+                    style: customTheme(context).regular.copyWith(fontSize: 11),
+                  ),
                 Spacer(),
                 Text(
                   'View details',

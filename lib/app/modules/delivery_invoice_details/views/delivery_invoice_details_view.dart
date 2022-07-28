@@ -146,10 +146,10 @@ class DeliveryInvoiceDetailsView extends GetView<DeliveryInvoiceDetailsControlle
           },
           child: const Icon(
             Icons.arrow_back_ios,
-            size: 16,
+            size: 17,
           ),
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: 15),
         InkWell(
           onTap: () {
             Get.back();
@@ -165,8 +165,8 @@ class DeliveryInvoiceDetailsView extends GetView<DeliveryInvoiceDetailsControlle
           'Invoice details',
           style: customTheme(context).medium.copyWith(fontSize: 16),
         ),
-        const SizedBox(width: 150),
-        Icon(Icons.share)
+
+        // Icon(Icons.share)
       ],
     );
   }

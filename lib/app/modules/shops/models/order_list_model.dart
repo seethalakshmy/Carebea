@@ -97,9 +97,24 @@ class History {
       this.productTotal,
       this.shopName,
       this.amountDue,
-      this.srName});
+      this.srName,
+       this.shopMobile,
+        this.warehouseId,
+        this.warehouseName,
+        this.paymentMethod,});
 
   int? id;
+  @JsonKey(name: 'shop_mobile')
+   String? shopMobile;
+     @JsonKey(name: 'warehouse_id')
+
+   int? warehouseId;
+     @JsonKey(name: 'warehouse_name')
+
+  String? warehouseName;
+    @JsonKey(name: 'payment_method')
+
+   int? paymentMethod;
   String? name;
   @JsonKey(name: 'amount_untaxed')
   double? amountUntaxed;
@@ -180,7 +195,7 @@ class ProductList {
   double? departmentPrice;
   @JsonKey(name: 'wholesale_price')
   double? wholesalePrice;
-  @JsonKey(name: 'supermarket_price')
+  
   double? supermarketPrice;
   String? enLang;
   String? unit;

@@ -55,10 +55,10 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                             },
                             child: Icon(
                               Icons.arrow_back_ios_new,
-                              size: 20,
+                              size: 17,
                             )),
                         SizedBox(
-                          width: 10,
+                          width: 15,
                         ),
                         Text(
                           'Order ID:#${Get.arguments['order_id']}',
@@ -98,10 +98,10 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                               },
                               child: Icon(
                                 Icons.arrow_back_ios_new,
-                                size: 20,
+                                size: 17,
                               )),
                           SizedBox(
-                            width: 10,
+                            width: 15,
                           ),
                           Text(
                             'Order ID:#${order.orderId}',
@@ -159,7 +159,7 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                                     .copyWith(fontSize: 14, color: customTheme(context).secondary),
                               ),
                               Text(
-                                "not in api",
+                                order.warehouseName ?? "",
                                 style: customTheme(context).medium.copyWith(fontSize: 14),
                               ),
                               SizedBox(
@@ -192,15 +192,16 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                                     ],
                                   ),
                                   const SizedBox(width: 10),
-                                  InkWell(
-                                    onTap: () {
-                                      // callPhone();
-                                    },
-                                    child: Image.asset(
-                                      Assets.phoneFilled,
-                                      scale: 3,
-                                    ),
-                                  )
+                                  if ((order.shopMobile ?? "").isNotEmpty)
+                                    InkWell(
+                                      onTap: () {
+                                        callPhone(order.shopMobile!);
+                                      },
+                                      child: Image.asset(
+                                        Assets.phoneFilled,
+                                        scale: 3,
+                                      ),
+                                    )
                                 ],
                               ),
                             ],
