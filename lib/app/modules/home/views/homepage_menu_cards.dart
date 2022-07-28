@@ -32,7 +32,7 @@ class HomeMenuCards extends GetView<HomeController> {
           ),
           InkWell(
             onTap: () {
-              Get.toNamed(Routes.ADD_SHOP);
+              Get.toNamed(Routes.ADD_SHOP, arguments: {"isEdit": false});
             },
             child: HomeMenuIndividual(
               asseticon: Assets.newShopHomeIcon,
