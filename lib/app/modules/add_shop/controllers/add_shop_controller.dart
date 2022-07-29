@@ -136,7 +136,7 @@ class AddShopController extends GetxController {
       addShopResponse = await addShopRepo.updateShop(shopId, salesPersonId, name, lastName, phone, shopCategoryId,
           customerType, gst, localArea, district, zip, stateId, zoneId, routeId, latitude, longitude);
 
-      if (addShopResponse.addShopResult!.status == true) {
+      if (addShopResponse.addShopResult?.status ?? false) {
         showDialog<bool>(
             barrierDismissible: false,
             context: Get.context!,
@@ -172,6 +172,11 @@ class AddShopController extends GetxController {
     zip.text = argument.address!.zip!;
     localArea.text = argument.address!.localArea!;
     lastName.text = argument.lastName!;
+    if ((argument.type ?? "").toLowerCase() == "b2b") {
+      selectedRadio(1);
+    } else if ((argument.type ?? "").toLowerCase() == "b2c") {
+      selectedRadio(2);
+    }
   }
 
   Future<bool> onWillpopClose() async {
@@ -196,7 +201,9 @@ class AddShopController extends GetxController {
     routeListResponse = await addShopRepo.routeList();
     routeList = routeListResponse!.routeListResult!.poolList ?? [];
     if ((Get.arguments["isEdit"] ?? false) && (Get.arguments["shop"] != null)) {
-      selectedRoute = routeList.singleWhere((element) => element.id == (Get.arguments["shop"] as ShopList).routeId);
+      try {
+        selectedRoute = routeList.singleWhere((element) => element.id == (Get.arguments["shop"] as ShopList).routeId);
+      } catch (e) {}
     }
     isRoutesListLoading(false);
   }
@@ -207,8 +214,10 @@ class AddShopController extends GetxController {
     stateListResponse = await addShopRepo.stateList();
     stateList = stateListResponse!.stateListResult!.stateList ?? [];
     if ((Get.arguments["isEdit"] ?? false) && (Get.arguments["shop"] != null)) {
-      selectedStateList =
-          stateList.singleWhere((element) => element.stateId == (Get.arguments["shop"] as ShopList).address!.stateId);
+      try {
+        selectedStateList =
+            stateList.firstWhere((element) => element.stateId == (Get.arguments["shop"] as ShopList).address!.stateId);
+      } catch (e) {}
     }
     isStateListLoading(false);
   }
@@ -219,7 +228,9 @@ class AddShopController extends GetxController {
     zoneListResponse = await addShopRepo.zoneList();
     zoneList = zoneListResponse!.zoneListResult!.poolList ?? [];
     if ((Get.arguments["isEdit"] ?? false) && (Get.arguments["shop"] != null)) {
-      selectedZone = zoneList.singleWhere((element) => element.id == (Get.arguments["shop"] as ShopList).zoneId);
+      try {
+        selectedZone = zoneList.firstWhere((element) => element.id == (Get.arguments["shop"] as ShopList).zoneId);
+      } catch (e) {}
     }
     isZoneListLoading(false);
   }

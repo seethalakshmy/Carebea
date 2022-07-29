@@ -76,9 +76,15 @@ class CreateOrderController extends GetxController {
 
       return;
     }
-
+    sortList();
     cartproducts[id] = count;
     calculateCost();
+  }
+
+  sortList() {
+    // var temp = [...shopList];
+    // temp.sort(((a, b) => cartproducts.keys.contains(a.id) ? 1 : 0));
+    // shopList(temp);
   }
 
   RxBool creatingOrder = false.obs;
@@ -104,6 +110,22 @@ class CreateOrderController extends GetxController {
     isProductsLoading(true);
     try {
       var res = await _productListRepo.productList();
+      productList(res.productListResult?.productList ?? []);
+      _products = productList;
+    } catch (error, stacktrace) {
+      log("error", error: error, stackTrace: stacktrace);
+    }
+    isProductsLoading(false);
+  }
+
+  searchProducts(String? query) async {
+    isProductsLoading(true);
+    try {
+      if ((query ?? "").isEmpty) {
+        fetchProducts();
+        return;
+      }
+      var res = await _productListRepo.searchProductList(query ?? "");
       productList(res.productListResult?.productList ?? []);
       _products = productList;
     } catch (error, stacktrace) {

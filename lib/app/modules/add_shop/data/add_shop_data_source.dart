@@ -14,51 +14,44 @@ import 'dart:developer' as developer;
 
 import '../models/list_zone_model.dart';
 
-
-
 class AddShopDataSource {
   ApiService apiService = Get.find();
   final ApiService _apiService = ApiService();
 
+  Future<AddShopResponse> addShop(
+      {required int salesPersonId,
+      required String lastName,
+      required String name,
+      required String phone,
+      required int shopCategoryId,
+      required int customerType,
+      required String gst,
+      required String localArea,
+      required String district,
+      required String zip,
+      required int stateId,
+      required int zoneId,
+      required int routeId,
+      required double latitude,
+      required double longitude}) async {
+    var response = await _apiService.post('create-shop', {
+      'sales_person_id': salesPersonId,
+      'last_name': lastName,
+      'name': name,
+      'phone': phone,
+      'local_area': localArea,
+      'shop_categ_id': shopCategoryId,
+      'customer_type': customerType,
+      'gst': gst,
+      'district': district,
+      'zip': zip,
+      'state_id': stateId,
+      'zone_id': zoneId,
+      'route_id': routeId,
+      'latitude': latitude,
+      'longitude': longitude
+    });
 
-  Future<AddShopResponse> addShop({
-    required int salesPersonId,
-    required String lastName,
-    required String name,
-    required String phone,
-    required int shopCategoryId,
-    required int customerType,
-    required String gst,
-    required String localArea,
-    required String district,
-    required String zip,
-    required int stateId,
-    required int zoneId,
-    required int routeId,
-    required double latitude,
-    required double longitude
-
-  }) async {
-    var response = await http.post(Uri.parse('${apiService.baseUrl}create-shop'),
-
-        body:json.encode( {
-          'sales_person_id':salesPersonId,
-          'last_name':lastName,
-          'name':name,
-          'phone':phone,
-          'local_area':localArea,
-          'shop_categ_id':shopCategoryId,
-          'customer_type':customerType,
-          'gst':gst,
-          'district':district,
-          'zip':zip,
-          'state_id':stateId,
-          'zone_id':zoneId,
-          'route_id':routeId,
-          'latitude':latitude,
-          'longitude':longitude
-        }),
-        headers: apiService.getHeaders());
     developer.log(" url----${(Uri.parse('${apiService.baseUrl}create-shop'))}");
 
     print("createShops response statusCode ${response.statusCode} ");
@@ -71,44 +64,41 @@ class AddShopDataSource {
     }
   }
 
-  Future<AddShopResponse> updateShop({
-    required int shopId,
-    required int salesPersonId,
-    required String lastName,
-    required String name,
-    required String phone,
-    required int shopCategoryId,
-    required int customerType,
-    required String gst,
-    required String localArea,
-    required String district,
-    required String zip,
-    required int stateId,
-    required int zoneId,
-    required int routeId,
-    required double latitude,
-    required double longitude
-
-  }) async {
+  Future<AddShopResponse> updateShop(
+      {required int shopId,
+      required int salesPersonId,
+      required String lastName,
+      required String name,
+      required String phone,
+      required int shopCategoryId,
+      required int customerType,
+      required String gst,
+      required String localArea,
+      required String district,
+      required String zip,
+      required int stateId,
+      required int zoneId,
+      required int routeId,
+      required double latitude,
+      required double longitude}) async {
     var response = await http.post(Uri.parse('${apiService.baseUrl}update-shop'),
-
-        body:json.encode( {
-          'shop_id':shopId,
-          'sales_person_id':salesPersonId,
-          'last_name':lastName,
-          'name':name,
-          'phone':phone,
-          'local_area':localArea,
-          'shop_categ_id':shopCategoryId,
-          'customer_type':customerType,
-          'gst':gst,
-          'district':district,
-          'zip':zip,
-          'state_id':stateId,
-          'zone_id':zoneId,
-          'route_id':routeId,
-          'latitude':latitude,
-          'longitude':longitude
+        body: json.encode({
+          'shop_id': shopId,
+          'sales_person_id': salesPersonId,
+          'last_name': lastName,
+          'name': name,
+          'phone': phone,
+          'local_area': localArea,
+          'shop_categ_id': shopCategoryId,
+          'customer_type': customerType,
+          'gst': gst,
+          'district': district,
+          'zip': zip,
+          'state_id': stateId,
+          'zone_id': zoneId,
+          'route_id': routeId,
+          'latitude': latitude,
+          'longitude': longitude
         }),
         headers: apiService.getHeaders());
     developer.log(" url----${(Uri.parse('${apiService.baseUrl}update-shop'))}");
@@ -127,7 +117,7 @@ class AddShopDataSource {
   Future<RouteListResponse> routeList({String? date}) async {
     var response = await _apiService.post(
       "list-route",
-      {'date':date},
+      {'date': date},
     );
 
     if (response.statusCode == 200) {
@@ -165,6 +155,4 @@ class AddShopDataSource {
 
     return ZoneListResponse(zoneListResult: ZoneListResult.fromJson(json.decode(response.body)));
   }
-
-
 }

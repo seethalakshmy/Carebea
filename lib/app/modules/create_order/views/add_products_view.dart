@@ -35,7 +35,7 @@ class AddProductsView extends StatelessWidget {
             Flexible(
               child: Obx(() {
                 if (createOrderController.isProductsLoading.value) {
-                  return circularProgressIndicator(context);
+                  return Center(child: circularProgressIndicator(context));
                 }
                 return _productListView();
               }),
@@ -139,6 +139,9 @@ class AddProductsView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 23),
       child: CustomTextField(
+        onChanged: (val) {
+          createOrderController.searchProducts(val);
+        },
         fillcolor: customTheme(context).textFormFieldColor,
         icon: const Icon(
           CupertinoIcons.search,
@@ -275,28 +278,28 @@ class ProductTile extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.only(right: 8.0, bottom: 10),
                               child:
-                              // (product.available?.toLowerCase() == 'unavailable') ?
-                              // Text(
-                              //         '${product.available}',
-                              //         style:
-                              //             TextStyle(color: customTheme(context).primary, fontWeight: FontWeight.bold),
-                              //       )
-                              //     :
-                                Obx(() {
-                                      if (_controller.cartproducts.containsKey(product.id)) {
-                                        return CartCountWidget(
-                                            id: product.id!, count: _controller.cartproducts[product.id] ?? 0);
-                                      }
-                                      return CustomButton(
-                                        isDense: true,
-                                        title: "Add",
-                                        onTap: () {
-                                          _controller.updateCartProduct(product.id!, 1);
-                                        },
-                                        fontSize: 10,
-                                        color: const Color(0xff47BED9),
-                                      );
-                                    }),
+                                  // (product.available?.toLowerCase() == 'unavailable') ?
+                                  // Text(
+                                  //         '${product.available}',
+                                  //         style:
+                                  //             TextStyle(color: customTheme(context).primary, fontWeight: FontWeight.bold),
+                                  //       )
+                                  //     :
+                                  Obx(() {
+                                if (_controller.cartproducts.containsKey(product.id)) {
+                                  return CartCountWidget(
+                                      id: product.id!, count: _controller.cartproducts[product.id] ?? 0);
+                                }
+                                return CustomButton(
+                                  isDense: true,
+                                  title: "Add",
+                                  onTap: () {
+                                    _controller.updateCartProduct(product.id!, 1);
+                                  },
+                                  fontSize: 10,
+                                  color: const Color(0xff47BED9),
+                                );
+                              }),
                             ),
                           ),
                         ],

@@ -39,6 +39,19 @@ class CreateorderDataSource {
       return ProductListResponse(productListResult: ProductListResult(status: false));
     }
   }
+  Future<ProductListResponse> searchProductList(String query) async {
+    var response = await _apiService.post(
+      'list-products',
+      {
+        "name":query
+      },
+    );
+    if (response.statusCode == 200) {
+      return ProductListResponse.fromJson(json.decode(response.body));
+    } else {
+      return ProductListResponse(productListResult: ProductListResult(status: false));
+    }
+  }
 
   Future<ConfirmOrderResponse> confirmOrder(
     int salesPersonId,

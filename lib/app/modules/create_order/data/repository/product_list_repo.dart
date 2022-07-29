@@ -6,12 +6,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../../model/productlist_model.dart';
 
-
-
-
-
-
-class ProductListRepo{
+class ProductListRepo {
   CreateorderDataSource createorderDataSource = CreateorderDataSource();
 
   ///OrderListShopDeatilPage
@@ -19,8 +14,5 @@ class ProductListRepo{
     return createorderDataSource.productList();
   }
 
-
-
-
-
+  Future<ProductListResponse> searchProductList(String query) => createorderDataSource.searchProductList(query);
 }
