@@ -136,7 +136,7 @@ class AddShopController extends GetxController {
       addShopResponse = await addShopRepo.updateShop(shopId, salesPersonId, name, lastName, phone, shopCategoryId,
           customerType, gst, localArea, district, zip, stateId, zoneId, routeId, latitude, longitude);
 
-      if (addShopResponse.addShopResult!.status == true) {
+      if (addShopResponse.addShopResult?.status ?? false) {
         showDialog<bool>(
             barrierDismissible: false,
             context: Get.context!,

@@ -42,18 +42,18 @@ class AddShopView extends GetView<AddShopController> {
                 children: [
                   Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       InkWell(
                           onTap: () {
                             Get.back();
                           },
-                          child: Icon(
+                          child: const Icon(
                             Icons.arrow_back_ios_new,
                             size: 17,
                           )),
-                      SizedBox(
+                      const SizedBox(
                         width: 15,
                       ),
                       Text(
@@ -70,7 +70,7 @@ class AddShopView extends GetView<AddShopController> {
                     'Shop name',
                     style: customTheme(context).regular.copyWith(fontSize: 12),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   CustomTextField(
@@ -83,7 +83,7 @@ class AddShopView extends GetView<AddShopController> {
                     },
                     // onChanged: (value)=>(controller.name).toString() = value!.trim() ,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   RichText(
@@ -96,7 +96,7 @@ class AddShopView extends GetView<AddShopController> {
                           style: TextStyle(color: Colors.black54, fontStyle: FontStyle.italic)),
                     ],
                   )),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   CustomTextField(
@@ -108,7 +108,7 @@ class AddShopView extends GetView<AddShopController> {
                       return null;
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Text(
@@ -161,7 +161,7 @@ class AddShopView extends GetView<AddShopController> {
                     'Customer type',
                     style: customTheme(context).regular.copyWith(fontSize: 12),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Obx(() {
@@ -176,7 +176,7 @@ class AddShopView extends GetView<AddShopController> {
                             controller.selectedRadio(val);
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 50,
                         ),
                         CustomRadioButton<int>(
@@ -190,7 +190,7 @@ class AddShopView extends GetView<AddShopController> {
                       ],
                     );
                   }),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
 
@@ -202,7 +202,7 @@ class AddShopView extends GetView<AddShopController> {
                       TextSpan(text: '\*', style: TextStyle(color: Colors.blue)),
                     ],
                   )),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   CustomTextField(
@@ -222,7 +222,7 @@ class AddShopView extends GetView<AddShopController> {
                       }
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
                   Text(
@@ -253,7 +253,7 @@ class AddShopView extends GetView<AddShopController> {
                     'Local area/city',
                     style: customTheme(context).regular.copyWith(fontSize: 12),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   CustomTextField(
@@ -269,7 +269,7 @@ class AddShopView extends GetView<AddShopController> {
                     },
                     // onChanged: (value)=>controller.localArea.toString()!=value!.trim(),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Row(
@@ -282,7 +282,7 @@ class AddShopView extends GetView<AddShopController> {
                               'Pincode',
                               style: customTheme(context).regular.copyWith(fontSize: 12),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             CustomTextField(
@@ -290,9 +290,9 @@ class AddShopView extends GetView<AddShopController> {
                               maxlength: 6,
                               inputType: TextInputType.number,
                               validaton: (value) {
-                                if (value!.isEmpty)
+                                if (value!.isEmpty) {
                                   return 'pincode can\'t be empty';
-                                else if (value.length < 6) {
+                                } else if (value.length < 6) {
                                   return "Pincode must be 6 digits";
                                 }
                                 return null;
@@ -315,7 +315,7 @@ class AddShopView extends GetView<AddShopController> {
                                 'District',
                                 style: customTheme(context).regular.copyWith(fontSize: 12),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
                               CustomTextField(
@@ -337,14 +337,14 @@ class AddShopView extends GetView<AddShopController> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
                     'State',
                     style: customTheme(context).regular.copyWith(fontSize: 12),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Obx(() {
@@ -410,7 +410,7 @@ class AddShopView extends GetView<AddShopController> {
                   //         RegExp(r'[a-zA-Z]+|\b\s')),
                   //   ],
                   // ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   RichText(
@@ -421,7 +421,7 @@ class AddShopView extends GetView<AddShopController> {
                       TextSpan(text: '\*', style: TextStyle(color: Colors.blue)),
                     ],
                   )),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   CustomTextField(
@@ -430,16 +430,18 @@ class AddShopView extends GetView<AddShopController> {
                     maxlength: 10,
                     inputType: TextInputType.phone,
                     validaton: (value) {
-                      if (value!.isEmpty)
+                      if (value!.isEmpty) {
                         return 'mobile number is required';
-                      else if (value == '0000000000')
+                      }
+                      if (value == '0000000000') {
                         return 'Invalid number';
-                      else if (value.length < 10) return "Mobile number must be 10 digits";
+                      }
+                      if (value.length < 10) return "Mobile number must be 10 digits";
                       return null;
                     },
                     // onChanged: (value)=>controller.phone.text = value!,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Text(
@@ -608,11 +610,11 @@ class AddShopView extends GetView<AddShopController> {
                           style: TextStyle(color: Colors.black54, fontStyle: FontStyle.italic)),
                     ],
                   )),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   CustomTextField(),
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
                   (Get.arguments['isEdit'] ?? false)
