@@ -172,6 +172,11 @@ class AddShopController extends GetxController {
     zip.text = argument.address!.zip!;
     localArea.text = argument.address!.localArea!;
     lastName.text = argument.lastName!;
+    if ((argument.type ?? "").toLowerCase() == "b2b") {
+      selectedRadio(1);
+    } else if ((argument.type ?? "").toLowerCase() == "b2c") {
+      selectedRadio(2);
+    }
   }
 
   Future<bool> onWillpopClose() async {
