@@ -118,6 +118,22 @@ class CreateOrderController extends GetxController {
     isProductsLoading(false);
   }
 
+  searchProducts(String? query) async {
+    isProductsLoading(true);
+    try {
+      if ((query ?? "").isEmpty) {
+        fetchProducts();
+        return;
+      }
+      var res = await _productListRepo.searchProductList(query ?? "");
+      productList(res.productListResult?.productList ?? []);
+      _products = productList;
+    } catch (error, stacktrace) {
+      log("error", error: error, stackTrace: stacktrace);
+    }
+    isProductsLoading(false);
+  }
+
   double productPrice(String category, ProductList product) {
     switch (category) {
       case 'retail':
