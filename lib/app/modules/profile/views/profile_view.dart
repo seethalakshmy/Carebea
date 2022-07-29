@@ -23,89 +23,93 @@ class ProfileView extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      if (profileController.isProfileLoaded.value) {
-        return Align(alignment: Alignment.center, child: circularProgressIndicator(context));
-      }
-      return Scaffold(
-          appBar: appBar(context),
-          body: Padding(
-            padding: const EdgeInsets.only(left: 15, top: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Profile Details',
-                  style: customTheme(context).medium.copyWith(fontSize: 14),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * .05,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.grey,
-                      radius: 50,
-                      child: Icon(Icons.person,color: Colors.black,size: 50,),
-                      // child: Image.asset(
-                      //   Assets.profile,
-                      //   fit: BoxFit.contain,
-                      // ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Name',
-                  style: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.grey),
-                ),
-                Text(
-                  profileController.profileResponse!.profileResponseResult!.name!,
-                  style: customTheme(context).regular.copyWith(fontSize: 14),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Branch',
-                  style: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.grey),
-                ),
-                Text(
-                  'Carebae Branch',
-                  style: customTheme(context).regular.copyWith(fontSize: 14),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Mobile number',
-                  style: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.grey),
-                ),
-                Text(
-                  profileController.profileResponse!.profileResponseResult!.phone!,
-                  style: customTheme(context).regular.copyWith(fontSize: 14),
-                ),
-                const Spacer(),
-                Align(
-                  alignment: Alignment.center,
-                  child: TextButton(
-                    onPressed: () {
-                      logout();
-                    },
-                    child: Text(
-                      "Logout",
-                      style: customTheme(context).medium.copyWith(color: customTheme(context).primary),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-              ],
-            ),
-          ));
-    });
+    return Scaffold(
+        appBar: appBar(context),
+        body: Padding(
+          padding: const EdgeInsets.only(left: 15, top: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Profile Details',
+                style: customTheme(context).medium.copyWith(fontSize: 14),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .05,
+              ),
+              Expanded(
+                child: Obx(() {
+                  if (profileController.isProfileLoaded.value) {
+                    return Align(alignment: Alignment.center, child: circularProgressIndicator(context));
+                  }
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Center(
+                        child: CircleAvatar(
+                          backgroundColor: Colors.grey,
+                          radius: 50,
+                          child: Icon(
+                            Icons.person,
+                            color: Colors.black,
+                            size: 50,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Name',
+                        style: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.grey),
+                      ),
+                      Text(
+                        profileController.profileResponse!.profileResponseResult!.name!,
+                        style: customTheme(context).regular.copyWith(fontSize: 14),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Branch',
+                        style: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.grey),
+                      ),
+                      Text(
+                        'Carebae Branch',
+                        style: customTheme(context).regular.copyWith(fontSize: 14),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Mobile number',
+                        style: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.grey),
+                      ),
+                      Text(
+                        profileController.profileResponse!.profileResponseResult!.phone!,
+                        style: customTheme(context).regular.copyWith(fontSize: 14),
+                      ),
+                      const Spacer(),
+                      Align(
+                        alignment: Alignment.center,
+                        child: TextButton(
+                          onPressed: () {
+                            logout();
+                          },
+                          child: Text(
+                            "Logout",
+                            style: customTheme(context).medium.copyWith(color: customTheme(context).primary),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                }),
+              ),
+              const SizedBox(height: 10),
+            ],
+          ),
+        ));
   }
 
   void logout() {
