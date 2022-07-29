@@ -180,6 +180,8 @@ class CheckoutView extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: TextButton(
               onPressed: () {
+                Get.back();
+                return;
                 var shop = Get.arguments["shop"];
                 Get.bottomSheet(Container(
                   decoration:

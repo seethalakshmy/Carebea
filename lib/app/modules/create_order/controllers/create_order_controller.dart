@@ -76,9 +76,15 @@ class CreateOrderController extends GetxController {
 
       return;
     }
-
+    sortList();
     cartproducts[id] = count;
     calculateCost();
+  }
+
+  sortList() {
+    // var temp = [...shopList];
+    // temp.sort(((a, b) => cartproducts.keys.contains(a.id) ? 1 : 0));
+    // shopList(temp);
   }
 
   RxBool creatingOrder = false.obs;
