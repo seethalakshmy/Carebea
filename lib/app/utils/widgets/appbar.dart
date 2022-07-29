@@ -1,8 +1,10 @@
 import 'dart:ffi';
 
+import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/widgets/scanner.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 AppBar appBar(BuildContext context, {ValueChanged<String>? onScanned, bool showScanner = false, bool showProfile = false}) {
   if (showScanner && onScanned == null) {
@@ -21,8 +23,14 @@ AppBar appBar(BuildContext context, {ValueChanged<String>? onScanned, bool showS
         ),
       if (showScanner) const SizedBox(width: 10),
       if (showProfile)
-        const CircleAvatar(
-          foregroundImage: AssetImage(Assets.profile),
+        InkWell(
+          onTap: (){
+            Get.toNamed(Routes.PROFILE);
+          },
+          child: const CircleAvatar(
+            child: Icon(Icons.person),
+            // foregroundImage: AssetImage(Assets.profile),
+          ),
         ),
       const SizedBox(width: 10),
     ],

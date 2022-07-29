@@ -102,7 +102,7 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                     color: customTheme(context).action.withOpacity(.25),
                                   ),
                                   child: Text(
-                                    'Delivered',
+                                    orders.status!,
                                     style: customTheme(context)
                                         .medium
                                         .copyWith(fontSize: 10, color: customTheme(context).action),

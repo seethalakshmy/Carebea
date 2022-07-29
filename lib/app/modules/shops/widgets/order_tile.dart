@@ -49,40 +49,97 @@ class OrderTile extends StatelessWidget {
           const Divider(
             thickness: 1,
           ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 10),
+          //   child: Text(
+          //     'Product',
+          //     style: customTheme(context).medium.copyWith(fontSize: 11),
+          //   ),
+          //
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 10),
+          //   child: ListView.separated(
+          //       shrinkWrap: true,
+          //       separatorBuilder: (_,__) => const SizedBox(height: 5),
+          //       physics: const NeverScrollableScrollPhysics(),
+          //       itemCount: order.productList!.length,
+          //       itemBuilder: (context, index) {
+          //         return Column(
+          //           children: [
+          //             Row(
+          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //               children: [
+          //                 Text(order.productList![index].name!,
+          //                     style: customTheme(context).regular.copyWith(fontSize: 12)),
+          //                 Text(order.productList![index].productUomQty.toString(),
+          //                     style: customTheme(context).regular.copyWith(fontSize: 12)),
+          //                 Text('₹ ${order.productList![index].price}',
+          //                     style: customTheme(context).regular.copyWith(fontSize: 12)),
+          //               ],
+          //             ),
+          //
+          //           ],
+          //         );
+          //       }),
+          //
+          // ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
-              'Product',
-              style: customTheme(context).medium.copyWith(fontSize: 11),
-            ),
-
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: ListView.separated(
-                shrinkWrap: true,
-                separatorBuilder: (_,__) => const SizedBox(height: 5),
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: order.productList!.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(order.productList![index].name!,
-                              style: customTheme(context).regular.copyWith(fontSize: 12)),
-                          Text(order.productList![index].productUomQty.toString(),
-                              style: customTheme(context).regular.copyWith(fontSize: 12)),
-                          Text('₹ ${order.productList![index].price}',
-                              style: customTheme(context).regular.copyWith(fontSize: 12)),
-                        ],
+            child: Table(
+              columnWidths: {0: FlexColumnWidth(7), 1: FlexColumnWidth(1), 2: FlexColumnWidth(1)},
+              border: TableBorder.all(width: 0, color: Colors.transparent),
+              children: [
+                TableRow(children: [
+                  Text(
+                    'Product',
+                    style: customTheme(context).medium.copyWith(fontSize: 14),
+                  ),
+                  Text(
+                    'Qty',
+                    style: customTheme(context).medium.copyWith(fontSize: 14),
+                  ),
+                  Text(
+                    'Price',
+                    style: customTheme(context).medium.copyWith(fontSize: 14),
+                  ),
+                ]),
+                TableRow(children: [
+                  Text(
+                    "",
+                    style: customTheme(context).regular.copyWith(fontSize: 5),
+                  ),
+                  Text(
+                    "",
+                    style: customTheme(context).regular.copyWith(fontSize: 5),
+                  ),
+                  Text(
+                    "",
+                    style: customTheme(context).regular.copyWith(fontSize: 5),
+                  ),
+                ]),
+                ...List.generate(
+                  order.productList?.length ?? 0,
+                      (index) {
+                    var product = order.productList![index];
+                    return TableRow(children: [
+                      Text(
+                        product.name!,
+                        style: customTheme(context).regular.copyWith(fontSize: 12),
                       ),
-
-                    ],
-                  );
-                }),
-
+                      Text(
+                        "${product.productUomQty}x",
+                        style: customTheme(context).regular.copyWith(fontSize: 12),
+                      ),
+                      Text(
+                        "₹${product.price?.toStringAsFixed(2) ?? 0}",
+                        style: customTheme(context).regular.copyWith(fontSize: 12),
+                      ),
+                    ]);
+                  },
+                )
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10,vertical:20),
