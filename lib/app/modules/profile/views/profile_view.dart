@@ -45,12 +45,13 @@ class ProfileView extends GetView<ProfileController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircleAvatar(
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: Colors.grey,
                       radius: 50,
-                      child: Image.asset(
-                        Assets.profile,
-                        fit: BoxFit.contain,
-                      ),
+                      child: Icon(Icons.person,color: Colors.black,size: 50,),
+                      // child: Image.asset(
+                      //   Assets.profile,
+                      //   fit: BoxFit.contain,
+                      // ),
                     ),
                   ],
                 ),
