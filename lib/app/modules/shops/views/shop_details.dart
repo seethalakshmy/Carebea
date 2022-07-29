@@ -40,9 +40,8 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
             return Center(child: circularProgressIndicator(context));
           }
           var shopDetails = shopsController.shop;
-          return ListView(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+          return Column(
+
             children: [
               const SizedBox(
                 height: 20,
@@ -246,8 +245,8 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
               const SizedBox(
                 height: 20,
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height,
+              Flexible(
+                // height: MediaQuery.of(context).size.height,
                 child: Obx(() {
                   if (shopsController.isOrdersLoading.value) {
                     return Align(alignment: Alignment.topCenter, child: circularProgressIndicator(context));
@@ -276,7 +275,7 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         separatorBuilder: (_, __) => const SizedBox(height: 16),
-        physics: const NeverScrollableScrollPhysics(),
+        // physics: const NeverScrollableScrollPhysics(),
         itemCount: shopsController.orderHistory!.length,
         itemBuilder: (context, index) {
           return OrderTile(
@@ -289,7 +288,7 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
     return ListView.separated(
         shrinkWrap: true,
         separatorBuilder: (_, __) => const SizedBox(height: 16),
-        physics: const NeverScrollableScrollPhysics(),
+        // physics: const NeverScrollableScrollPhysics(),
         itemCount: shopsController.orderHistory!.length,
         itemBuilder: (context, index) {
           return OrderTile(
