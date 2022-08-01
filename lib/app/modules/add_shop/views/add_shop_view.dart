@@ -211,12 +211,12 @@ class AddShopView extends GetView<AddShopController> {
                     // ],
                     textcontroller: controller.gst,
                     validaton: (value) {
-                      if (controller.selectedRadio.value == 1) {
+                      if (controller.selectedRadio.value == 1 || (value != null && value.trim().isNotEmpty)) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'GST  can\'t be empty';
+                          return 'GST Number can\'t be empty';
                         }
-                        if (RegExp(gstRegexp).hasMatch(value)) {
-                          return 'Invalid Gst';
+                        if (!RegExp(gstRegexp).hasMatch(value)) {
+                          return 'Invalid GST Number';
                         }
                         return null;
                       }
