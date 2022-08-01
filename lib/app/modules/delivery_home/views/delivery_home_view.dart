@@ -1,5 +1,6 @@
 import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/modules/delivery_home/models/delivery_home_model.dart';
+import 'package:carebea/app/modules/delivery_home/views/delivery_order_list_view.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
@@ -12,6 +13,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../controllers/delivery_home_controller.dart';
 
@@ -64,29 +68,47 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    HomeTile(
-                      asset: Assets.deliveryHomeIcon2,
-                      title: "Todays Delivery",
-                      count: controller.deliveryHomePageResponse!.deliveryHomePageResult!.todaysDelivery!,
-                      color: Color(0xffD8375C),
+                    InkWell(
+                      onTap:(){
+                        controller.fetchDeliveryOrders("1");
+                        Get.to(()=>DeliveryOrderListView());
+                      },
+                      child: HomeTile(
+                        asset: Assets.deliveryHomeIcon2,
+                        title: "Today's Delivery",
+                        count: controller.deliveryHomePageResponse!.deliveryHomePageResult!.todaysDelivery!,
+                        color: Color(0xffD8375C),
+                      ),
                     ),
                     SizedBox(width: 10),
-                    HomeTile(
-                      asset: Assets.ordersHomeIcon,
-                      title: "Total Orders Delivered",
-                      count: controller.deliveryHomePageResponse!.deliveryHomePageResult!.totalOrdersDelivered!,
-                      color: Color(0xffF3674F),
+                    InkWell(
+                      onTap: (){
+                        controller.fetchDeliveryOrders("2");
+                        Get.to(()=>DeliveryOrderListView());
+                      },
+                      child: HomeTile(
+                        asset: Assets.ordersHomeIcon,
+                        title: "Total Orders Delivered",
+                        count: controller.deliveryHomePageResponse!.deliveryHomePageResult!.totalOrdersDelivered!,
+                        color: Color(0xffF3674F),
+                      ),
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: 10),
               Center(
-                child: HomeTile(
-                  asset: Assets.ordersHomeIcon,
-                  title: "Order History",
-                  count: controller.deliveryHomePageResponse!.deliveryHomePageResult!.orderHistory!,
-                  color: Color(0xff00B2BE),
+                child: InkWell(
+                  onTap: (){
+                    controller.fetchDeliveryAllOrders();
+                    Get.to(()=>DeliveryOrderListView());
+                  },
+                  child: HomeTile(
+                    asset: Assets.ordersHomeIcon,
+                    title: "Order History",
+                    count: controller.deliveryHomePageResponse!.deliveryHomePageResult!.orderHistory!,
+                    color: Color(0xff00B2BE),
+                  ),
                 ),
               ),
               const SizedBox(height: 30),

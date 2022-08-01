@@ -41,9 +41,7 @@ class OrderDataSource {
     if (orderId != null) {
       body.addAll({'order_id': orderId});
     }
-    if (orderType != null) {
-      body.addAll({'order_type': orderType});
-    }
+
     var response = await apiService.post('list-orders', body);
     developer.log(" url----${(Uri.parse('${apiService.baseUrl}list-orders'))}");
 

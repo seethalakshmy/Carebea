@@ -9,6 +9,7 @@ import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../core/helper.dart';
 import '../models/shop_model.dart';
 
 class ShopDetails extends StatefulWidget {
@@ -117,7 +118,7 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                     Flexible(
                       child: SizedBox(
                         child: Text(
-                          shopDetails.address!.localArea!,
+                          getFullAddress(shopDetails.address),
                           // 'Akshay Nagar 1st Block Cross , Rammurthy Nagar, Bangalore -560016',
                           style: customTheme(context).regular.copyWith(fontSize: 11),
                         ),
