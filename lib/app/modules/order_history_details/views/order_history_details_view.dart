@@ -186,7 +186,7 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 14),
                             child: Table(
-                              columnWidths: {0: FlexColumnWidth(8), 1: FlexColumnWidth(1), 2: FlexColumnWidth(1)},
+                              columnWidths: {0: FlexColumnWidth(8), 1: FlexColumnWidth(1), 2: FlexColumnWidth(1.5)},
                               border: TableBorder.all(width: 0, color: Colors.transparent),
                               children: [
                                 TableRow(children: [

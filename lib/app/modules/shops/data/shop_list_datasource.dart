@@ -15,7 +15,8 @@ class ShopDataSource {
       {required int salesPersonId,
       int? shopId,
       String? filterName,
-      int? filterId, Map<String, dynamic>? query
+      int? filterId,
+        Map<String, dynamic>? query
       }) async {
     Map<String, dynamic> body = {
       'sales_person_id': salesPersonId,
