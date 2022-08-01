@@ -79,7 +79,7 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          shopDetails!.name!,
+                          "${shopDetails!.name!} ${shopDetails.lastName}",
                           // 'Trinity Shop',
                           style: customTheme(context).medium.copyWith(fontSize: 14),
                         ),
