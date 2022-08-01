@@ -402,19 +402,19 @@ class ProductTile extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Spacer(),
+                // const Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(top: 10, bottom: 8, right: 14),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Obx(() {
-                        return CartCountWidget(
-                          id: product.id!,
-                          count: _controller.cartproducts[product.id!]!,
-                        );
-                      }),
+                      // Obx(() {
+                      //   return CartCountWidget(
+                      //     id: product.id!,
+                      //     count: _controller.cartproducts[product.id!]!,
+                      //   );
+                      // }),
                       Text(
                         "₹${_controller.productPrice(category, product).toStringAsFixed(2)}",
                         style: customTheme(context).medium.copyWith(fontSize: 14),
