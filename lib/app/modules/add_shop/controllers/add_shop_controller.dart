@@ -124,7 +124,7 @@ class AddShopController extends GetxController {
                   width: 80,
                   height: 80,
                 ),
-                title: "Shop added Successful!",
+                title: "Shop added Successfully!",
                 content: "",
                 actions: [
                   CustomButton(

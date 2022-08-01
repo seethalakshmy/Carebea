@@ -22,6 +22,7 @@ import 'package:slide_to_confirm/slide_to_confirm.dart';
 class CheckoutView extends StatelessWidget {
   CheckoutView({Key? key}) : super(key: key);
   CreateOrderController createOrderController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

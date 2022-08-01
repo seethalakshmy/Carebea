@@ -471,16 +471,16 @@ class AddShopView extends GetView<AddShopController> {
                         selectedItem ?? "",
                         style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black),
                       ),
-                      validator: (String? value) {
+                      validator: (value) {
                         if (value == null) {
                           return "Branch  can\'t be empty";
                         }
                         return null;
                       },
-                      popupProps: const PopupProps.menu(
-                        showSearchBox: true,
-                        showSelectedItems: true,
-                      ),
+                      // popupProps: const PopupProps.menu(
+                      //   showSearchBox: true,
+                      //   showSelectedItems: true,
+                      // ),
                       dropdownDecoratorProps: DropDownDecoratorProps(
                           dropdownSearchDecoration: InputDecoration(
                               // hintText: "Choose",
@@ -503,7 +503,7 @@ class AddShopView extends GetView<AddShopController> {
                               filled: true,
                               fillColor: Theme.of(context).extension<CustomTheme>()!.textFormFieldColor)),
                       items: const ["Kalamasseri", "Aluva", "Malappuram"],
-                      selectedItem: "",
+                      // selectedItem: "",
                     ),
                   ),
                   Text(

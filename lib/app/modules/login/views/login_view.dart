@@ -110,6 +110,7 @@ class LoginView extends GetView<LoginController> {
                             width: MediaQuery.of(context).size.width * .85,
                             color: Colors.white,
                             child: TextFormField(
+                              obscureText: true,
                               decoration: const InputDecoration(
                                   border: InputBorder.none,
                                   enabledBorder: InputBorder.none,

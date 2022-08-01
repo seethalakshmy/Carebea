@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../utils/widgets/custom_textfield.dart';
 import '../../dashboard/models/qr_model.dart';
 import '../../order_history_details/controllers/order_history_details_controller.dart';
 import '../controllers/home_controller.dart';
@@ -21,7 +22,9 @@ import 'homepage_menu_cards.dart';
 import 'homepage_upcoming_delivery_view.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+   HomeView({Key? key}) : super(key: key);
+  FocusNode _focusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,9 +86,50 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
             ),
-            const SliverPadding(
+             SliverPadding(
               padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 15),
-              sliver: SliverToBoxAdapter(child: SearchWidget()),
+              sliver: SliverToBoxAdapter(
+                  child: CustomTextField(
+                    focusNode: _focusNode,
+                    onChanged: (val) => controller.homeSearchShop(val),
+                    hint: 'Search for shops,orders....',
+                    fillcolor: customTheme(context).textFormFieldColor,
+                    icon: const Icon(
+                      Icons.search,
+                      size: 30,
+                      color: Colors.grey,
+                    ),
+                    trailing: Obx(() {
+                      return DropdownButton<String>(
+                        hint: Text(
+                          "Choose",
+                          style: customTheme(Get.context!)
+                              .regular
+                              .copyWith(fontSize: 11, color: const Color(0xff929292)),
+                        ),
+                        value: controller.selectedSearchtype.value.type ?? "",
+                        underline: const SizedBox.shrink(),
+                        isDense: true,
+                        onChanged: (value) {
+                          _focusNode.requestFocus();
+                          controller.selectedSearchtype(
+                              controller.searchitems.singleWhere((element) => element.type == value));
+                        },
+                        items: controller.searchitems
+                            .map(
+                              (e) => DropdownMenuItem(
+                            value: e.type,
+                            child: Text(e.title!,
+                                style: customTheme(Get.context!)
+                                    .regular
+                                    .copyWith(fontSize: 11, color: Colors.black)),
+                          ),
+                        )
+                            .toList(),
+                      );
+                    }),
+                  ),
+              ),
             ),
             const SliverPadding(
               padding: EdgeInsets.only(top: 20, left: 15.0, right: 15.0),
