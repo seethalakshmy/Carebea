@@ -38,6 +38,14 @@ class CreateOrderView extends GetView<CreateOrderController> {
                       child: circularProgressIndicator(context),
                     );
                   }
+                  if (controller.shopList.isEmpty) {
+                    return Center(
+                      child: Text(
+                        "No shops found.",
+                        style: customTheme(context).regular,
+                      ),
+                    );
+                  }
                   return CustomCard(
                     hasShadow: false,
                     margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 11),

@@ -30,7 +30,7 @@ class ShopListTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              shop.name!,
+              "${shop.name!} ${shop.lastName}",
               // 'Trinity Shop',
               style: customTheme(context).medium.copyWith(fontSize: 13),
             ),

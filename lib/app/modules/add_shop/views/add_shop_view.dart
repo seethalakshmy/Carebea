@@ -9,6 +9,7 @@ import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/shared_prefs.dart';
 import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:carebea/app/utils/widgets/custom_radio_button.dart';
+import 'package:carebea/app/utils/widgets/map_location_view.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -211,12 +212,12 @@ class AddShopView extends GetView<AddShopController> {
                     // ],
                     textcontroller: controller.gst,
                     validaton: (value) {
-                      if (controller.selectedRadio.value == 1) {
+                      if (controller.selectedRadio.value == 1 || (value != null && value.trim().isNotEmpty)) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'GST  can\'t be empty';
+                          return 'GST Number can\'t be empty';
                         }
-                        if (RegExp(gstRegexp).hasMatch(value)) {
-                          return 'Invalid Gst';
+                        if (!RegExp(gstRegexp).hasMatch(value)) {
+                          return 'Invalid GST Number';
                         }
                         return null;
                       }
@@ -229,23 +230,38 @@ class AddShopView extends GetView<AddShopController> {
                     'Location',
                     style: customTheme(context).regular.copyWith(fontSize: 12),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20),
-                    child: InkWell(
-                      onTap: () {},
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.add,
-                            color: Theme.of(context).extension<CustomTheme>()!.primary,
-                          ),
-                          Text('Add shop location',
-                              style:
-                                  TextStyle(fontSize: 12, color: Theme.of(context).extension<CustomTheme>()!.primary))
-                        ],
+                  Obx(() {
+                    if (controller.searchingLocation.value) {
+                      return Center(child: circularProgressIndicator(context));
+                    }
+                    if (controller.currentLocation != null) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: MapLocationView(
+                            latitude: controller.currentLocation!.latitude!,
+                            longitude: controller.currentLocation!.longitude!),
+                      );
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: InkWell(
+                        onTap: () {
+                          controller.fetchLocation();
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.add,
+                              color: Theme.of(context).extension<CustomTheme>()!.primary,
+                            ),
+                            Text('Add shop location',
+                                style:
+                                    TextStyle(fontSize: 12, color: Theme.of(context).extension<CustomTheme>()!.primary))
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  }),
                   const SizedBox(
                     height: 15,
                   ),

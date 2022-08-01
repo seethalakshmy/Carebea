@@ -6,6 +6,7 @@ import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
+import 'package:carebea/app/utils/widgets/map_location_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -42,7 +43,6 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
           }
           var shopDetails = shopsController.shop;
           return Column(
-
             children: [
               const SizedBox(
                 height: 20,
@@ -80,7 +80,7 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          shopDetails!.name!,
+                          "${shopDetails!.name!} ${shopDetails.lastName}",
                           // 'Trinity Shop',
                           style: customTheme(context).medium.copyWith(fontSize: 14),
                         ),
@@ -185,27 +185,12 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
               const SizedBox(
                 height: 30,
               ),
-              //TODO: uncommment
-              SizedBox(
-                height: 50,
-                child: Stack(
-                  children: [
-                    // Image.asset(Assets.assetsMap),
-                    Positioned(
-                        top: 20,
-                        left: 50,
-                        child: Image.asset(
-                          Assets.assetsLocationFilled,
-                          scale: 1.5,
-                        )),
-                    Positioned(
-                        right: 20,
-                        top: 10,
-                        child: Image.asset(
-                          Assets.assetsDirections,
-                          scale: 3,
-                        )),
-                  ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: MapLocationView(
+                  latitude: shopDetails.latitude!,
+                  longitude: shopDetails.longitude!,
+                  showNavigation: true,
                 ),
               ),
               const SizedBox(height: 18),

@@ -1,8 +1,14 @@
+import 'dart:convert';
+
+import 'dart:developer' as developer;
+
 import 'package:carebea/app/core/helper.dart';
+import 'package:carebea/app/modules/dashboard/models/qr_model.dart';
 import 'package:carebea/app/modules/delivery_home/models/delivery_home_model.dart';
 import 'package:carebea/app/modules/delivery_home/views/delivery_order_list_view.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
+import 'package:carebea/app/utils/show_snackbar.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
@@ -25,7 +31,19 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appBar(context, showProfile: true, showScanner: true, onScanned: (val) {}),
+        appBar: appBar(context, showProfile: true, showScanner: true, onScanned: (val) {
+          try {
+            var qr = QrResponse.fromJson(json.decode(val.replaceAll("\'", "\"")));
+            if (qr.type == 2) {
+              Get.toNamed(Routes.ORDER_DETAILS_DELIVERY, arguments: {
+                "order_id": qr.id,
+              });
+            }
+          } catch (e, s) {
+            developer.log('error', error: e, stackTrace: s);
+            showSnackBar("Please scan again");
+          }
+        }),
         // appBar: AppBar(
         //   title: Image.asset(
         //     Assets.assetsLogo,
