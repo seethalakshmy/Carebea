@@ -41,6 +41,8 @@ class CustomTextField extends TextFormField {
           style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black),
           decoration: InputDecoration(
               suffix: trailing,
+              suffixIconConstraints: BoxConstraints(minWidth: 0, minHeight: 0),
+              // suffixIcon: Align(alignment: Alignment.centerRight, child: trailing),
               isDense: true,
               labelText: label,
               border: OutlineInputBorder(
