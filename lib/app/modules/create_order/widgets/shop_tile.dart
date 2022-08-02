@@ -21,7 +21,7 @@ class ShopDetailsTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            shop.name!,
+            "${shop.name!} ${shop.lastName}",
             style: customTheme(context).medium.copyWith(fontSize: 13),
           ),
           const SizedBox(
@@ -70,7 +70,7 @@ class ShopDetailsTile extends StatelessWidget {
             Row(
               children: [
                 InkWell(
-                 onTap: () {
+                  onTap: () {
                     callPhone(shop.altPhone!);
                   },
                   child: Image.asset(
