@@ -416,6 +416,7 @@ class ProductTile extends StatelessWidget {
                           count: _controller.cartproducts[product.id!]!,
                         );
                       }),
+
                       Text(
                         "₹${_controller.productPrice(category, product).toStringAsFixed(2)}",
                         style: customTheme(context).medium.copyWith(fontSize: 14),
