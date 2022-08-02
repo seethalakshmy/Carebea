@@ -629,7 +629,9 @@ class AddShopView extends GetView<AddShopController> {
                   const SizedBox(
                     height: 5,
                   ),
-                  CustomTextField(),
+                  CustomTextField(
+                    textcontroller: controller.openingBalanceController,
+                  ),
                   const SizedBox(
                     height: 25,
                   ),
