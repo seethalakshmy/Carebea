@@ -32,7 +32,7 @@ class HomepageLatestShopsAddedView extends GetView<HomeController> {
           ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) => LatestShopListTile(shop:controller.homeData!.result!.latestShopList![index]),
+              itemBuilder: (context, index) => LatestShopListTile(shop:controller.latestShopList[index]),
               separatorBuilder: (_, __) => SizedBox(height: 13),
               itemCount: controller.homeData?.result?.latestShopList?.length ?? 0)
         ],

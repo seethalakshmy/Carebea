@@ -91,7 +91,7 @@ class HomeView extends GetView<HomeController> {
               sliver: SliverToBoxAdapter(
                   child: CustomTextField(
                     focusNode: _focusNode,
-                    onChanged: (val) => controller.homeSearchShop(val),
+                    // onChanged: (val) => controller.homeSearchShop(val),
                     hint: 'Search for shops,orders....',
                     fillcolor: customTheme(context).textFormFieldColor,
                     icon: const Icon(
