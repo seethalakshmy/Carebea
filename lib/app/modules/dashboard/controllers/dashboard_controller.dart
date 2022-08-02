@@ -1,17 +1,20 @@
 import 'package:carebea/app/modules/home/controllers/home_controller.dart';
 import 'package:carebea/app/modules/orders/controllers/orders_controller.dart';
+import 'package:carebea/app/modules/profile/controllers/profile_controller.dart';
 import 'package:carebea/app/modules/shops/controllers/shops_controller.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends GetxController {
-  HomeController _homeController = Get.put(HomeController());
-  ShopsController _shopsController = Get.put(ShopsController());
-  OrdersController _ordersController = Get.put(OrdersController());
+  final HomeController _homeController = Get.put(HomeController());
+  final ShopsController _shopsController = Get.put(ShopsController());
+  final OrdersController _ordersController = Get.put(OrdersController());
+  final ProfileController _profileController = Get.put(ProfileController());
 
   final currentScreenIndex = 0.obs;
   DateTime? backbuttonpressedTime;
   @override
   void onInit() {
+    _profileController.fetchProfileData();
     super.onInit();
   }
 
