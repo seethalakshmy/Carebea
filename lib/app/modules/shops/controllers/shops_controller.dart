@@ -59,6 +59,8 @@ class ShopsController extends GetxController {
     var shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!);
     if (shopListResponse.shopListResult?.status ?? false) {
       shopList = shopListResponse.shopListResult?.shopList ?? [];
+      shopList.sort((a,b)=> b.id!.compareTo(a.id!));
+
       filterVals = shopListResponse.shopListResult!.filterVals;
     } else {
       shopList = [];
