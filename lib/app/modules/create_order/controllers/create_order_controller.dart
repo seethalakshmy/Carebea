@@ -155,11 +155,13 @@ class CreateOrderController extends GetxController {
     var shopListResponse;
     if ((query ?? "").isEmpty) {
       shopListResponse = await _shopRepo.shopList(SharedPrefs.getUserId()!);
+
     } else {
       shopListResponse = await _shopRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {"name": query});
     }
     if (shopListResponse.shopListResult?.status ?? false) {
       shopList(shopListResponse.shopListResult?.shopList ?? []);
+
     } else {
       shopList.clear();
     }
