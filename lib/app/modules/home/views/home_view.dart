@@ -5,12 +5,14 @@ import 'dart:developer' as developer;
 import 'package:carebea/app/modules/home/views/latest_shops_added_view.dart';
 import 'package:carebea/app/modules/home/widgets/search_widget.dart';
 import 'package:carebea/app/modules/shops/views/shop_details.dart';
+import 'package:carebea/app/modules/shops/widgets/shop_card.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/show_snackbar.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 import 'package:get/get.dart';
 
@@ -18,11 +20,12 @@ import '../../../utils/widgets/custom_textfield.dart';
 import '../../dashboard/models/qr_model.dart';
 import '../../order_history_details/controllers/order_history_details_controller.dart';
 import '../controllers/home_controller.dart';
+import '../widgets/latest_shop_card.dart';
 import 'homepage_menu_cards.dart';
 import 'homepage_upcoming_delivery_view.dart';
 
 class HomeView extends GetView<HomeController> {
-   HomeView({Key? key}) : super(key: key);
+  HomeView({Key? key}) : super(key: key);
   FocusNode _focusNode = FocusNode();
 
   @override
@@ -30,13 +33,16 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
         appBar: appBar(context, showScanner: true, onScanned: (val) {
           try {
-            var qr = QrResponse.fromJson(json.decode(val.replaceAll("\'", "\"")));
+            var qr = QrResponse.fromJson(
+                json.decode(val.replaceAll("\'", "\"")));
             if (qr.type == 1) {
-              Get.to(() => ShopDetails(
+              Get.to(() =>
+                  ShopDetails(
                     shopId: qr.id,
                   ));
             } else if (qr.type == 2) {
-              Get.toNamed(Routes.ORDER_HISTORY_DETAILS, arguments: {'order_id': qr.id});
+              Get.toNamed(
+                  Routes.ORDER_HISTORY_DETAILS, arguments: {'order_id': qr.id});
             }
           } catch (e, s) {
             developer.log('error', error: e, stackTrace: s);
@@ -82,53 +88,135 @@ class HomeView extends GetView<HomeController> {
               sliver: SliverToBoxAdapter(
                 child: Text(
                   "Dashboard",
-                  style: customTheme(context).medium.copyWith(fontSize: 16, color: Colors.black),
+                  style: customTheme(context).medium.copyWith(
+                      fontSize: 16, color: Colors.black),
                 ),
               ),
             ),
-             SliverPadding(
+            SliverPadding(
               padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 15),
               sliver: SliverToBoxAdapter(
-                  child: CustomTextField(
-                    focusNode: _focusNode,
-                    // onChanged: (val) => controller.homeSearchShop(val),
-                    hint: 'Search for shops,orders....',
-                    fillcolor: customTheme(context).textFormFieldColor,
-                    icon: const Icon(
-                      Icons.search,
-                      size: 30,
-                      color: Colors.grey,
-                    ),
-                    trailing: Obx(() {
-                      return DropdownButton<String>(
+                  child:
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TypeAheadField(
+                          textFieldConfiguration: TextFieldConfiguration(
+                              autofocus: false,
+                              style: DefaultTextStyle
+                                  .of(context)
+                                  .style
+                                  .copyWith(
+                                  fontStyle: FontStyle.italic
+                              ),
+                              decoration: InputDecoration(
+                                  fillColor: customTheme(context).textFormFieldColor,
+                                  prefixIcon: Icon(Icons.search),
+
+
+                                  label: Text('Search for shops,orders .. '),
+                                  border: OutlineInputBorder()
+                              )
+                          ),
+                          suggestionsCallback: (pattern) async {
+                            return await controller.homeSearchShop(pattern??'');
+                          },
+                          itemBuilder: (context, suggestion) {
+                            return Obx(() {
+                              return ListView.separated(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemBuilder: (context, index) {
+                                    // return Text('hai');
+                                    return ShopListTile(
+                                          shop: controller.shopList[index]);
+                                  },
+                                  separatorBuilder: (_, __) => SizedBox(height: 13),
+                                  itemCount: controller.shopList.length ?? 0);
+                            });
+                          },
+                          onSuggestionSelected: (suggestion) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => ShopDetails()
+                            ));
+                          },
+                        ),
+                      ),
+                      DropdownButton<String>(
                         hint: Text(
                           "Choose",
                           style: customTheme(Get.context!)
                               .regular
-                              .copyWith(fontSize: 11, color: const Color(0xff929292)),
+                              .copyWith(fontSize: 11,
+                              color: const Color(0xff929292)),
                         ),
-                        value: controller.selectedSearchtype.value.type ?? "",
+                        value: controller.selectedSearchtype.value ??
+                            "",
                         underline: const SizedBox.shrink(),
                         isDense: true,
                         onChanged: (value) {
                           _focusNode.requestFocus();
                           controller.selectedSearchtype(
-                              controller.searchitems.singleWhere((element) => element.type == value));
+                          value);
+
                         },
-                        items: controller.searchitems
+                        items: ['Shop','Order']
                             .map(
-                              (e) => DropdownMenuItem(
-                            value: e.type,
-                            child: Text(e.title!,
-                                style: customTheme(Get.context!)
-                                    .regular
-                                    .copyWith(fontSize: 11, color: Colors.black)),
-                          ),
+                              (e) =>
+                              DropdownMenuItem(
+                                value: e,
+                                child: Text(e,
+                                    style: customTheme(Get.context!)
+                                        .regular
+                                        .copyWith(fontSize: 11,
+                                        color: Colors.black)),
+                              ),
                         )
                             .toList(),
-                      );
-                    }),
+                      ),
+                    ],
                   ),
+
+                // CustomTextField(
+                //   focusNode: _focusNode,
+                //   // onChanged: (val) => controller.homeSearchShop(val),
+                //   hint: 'Search for shops,orders....',
+                //   fillcolor: customTheme(context).textFormFieldColor,
+                //   icon: const Icon(
+                //     Icons.search,
+                //     size: 30,
+                //     color: Colors.grey,
+                //   ),
+                //   trailing: Obx(() {
+                //     return DropdownButton<String>(
+                //       hint: Text(
+                //         "Choose",
+                //         style: customTheme(Get.context!)
+                //             .regular
+                //             .copyWith(fontSize: 11, color: const Color(0xff929292)),
+                //       ),
+                //       value: controller.selectedSearchtype.value.type ?? "",
+                //       underline: const SizedBox.shrink(),
+                //       isDense: true,
+                //       onChanged: (value) {
+                //         _focusNode.requestFocus();
+                //         controller.selectedSearchtype(
+                //             controller.searchitems.singleWhere((element) => element.type == value));
+                //       },
+                //       items: controller.searchitems
+                //           .map(
+                //             (e) => DropdownMenuItem(
+                //           value: e.type,
+                //           child: Text(e.title!,
+                //               style: customTheme(Get.context!)
+                //                   .regular
+                //                   .copyWith(fontSize: 11, color: Colors.black)),
+                //         ),
+                //       )
+                //           .toList(),
+                //     );
+                //   }),
+                // ),
               ),
             ),
             const SliverPadding(
@@ -137,7 +225,8 @@ class HomeView extends GetView<HomeController> {
             ),
             const SliverPadding(
                 padding: EdgeInsets.only(bottom: 10),
-                sliver: SliverToBoxAdapter(child: HomepageUpcomingDeliveryView())),
+                sliver: SliverToBoxAdapter(
+                    child: HomepageUpcomingDeliveryView())),
             const SliverToBoxAdapter(child: HomepageLatestShopsAddedView()),
           ]);
         }));

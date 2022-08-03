@@ -11,14 +11,10 @@ class HomeController extends GetxController {
   RxBool isLoading = true.obs;
   HomeData? homeData;
   List<LatestShopList> latestShopList = [];
-  Rx<SearchType> selectedSearchtype = Rx(
-    SearchType("Name", "name"),
-  );
-  List<SearchType> searchitems = [
-    SearchType("Name", "name"),
-    SearchType("Phone", "phone"),
-    SearchType("Local Area", "local_area"),
-  ];
+  List<ShopList> shopList = [];
+  List<UpcomingOrdersList> upcomingOrderList = [];
+  RxString selectedSearchtype = 'Shop'.obs;
+
   @override
   void onInit() {
     fetchHomePageData();  
@@ -39,19 +35,19 @@ class HomeController extends GetxController {
     isLoading(false);
   }
 
-  // Future<void> homeSearchShop(String? query) async {
-  //   var shopListResponse;
-  //   if ((query ?? "").isEmpty) {
-  //     // shopListResponse = await _repository.shopList(SharedPrefs.getUserId()!);
-  //   }
-  //     shopListResponse = await _repository
-  //         .homeShopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {selectedSearchtype.value.type!: query});
-  //   if (shopListResponse.shopListResult?.status ?? false) {
-  //     shopList = shopListResponse.shopListResult?.shopList ?? [];
-  //   } else {
-  //     shopList = [];
-  //   }
-  // }
+   homeSearchShop(String? query) async {
+    var shopListResponse;
+    if ((query ?? "").isEmpty) {
+      // shopListResponse = await _repository.shopList(SharedPrefs.getUserId()!);
+    }
+      shopListResponse = await _repository
+          .homeShopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {"name": query});
+    if (shopListResponse.shopListResult?.status ?? false) {
+      shopList = shopListResponse.shopListResult?.shopList ?? [];
+    } else {
+      shopList = [];
+    }
+  }
 }
 
 class SearchType {
