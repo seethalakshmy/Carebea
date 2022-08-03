@@ -1,5 +1,6 @@
 import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/modules/shops/models/order_list_model.dart';
+import 'package:carebea/app/utils/shared_prefs.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +59,7 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                         width: 15,
                       ),
                       Text(
-                        'Order ID: #${Get.arguments?['order_id']??controller.orderListDetailResponse!.orderListResult!.history!.first.id}',
+                        'Order ID: #${Get.arguments?['order_id'] ?? controller.orderListDetailResponse!.orderListResult!.history!.first.id}',
                         style: customTheme(context).medium.copyWith(fontSize: 16),
                       ),
                       const Spacer(),
@@ -353,8 +354,15 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
           );
         }));
   }
-  Padding _floatingActionButton(BuildContext context) {
+
+  Widget _floatingActionButton(BuildContext context) {
+    if (SharedPrefs.getUserType() != 3) {
+      return const SizedBox.shrink();
+    }
     var paymentMethods = controller.orderListDetailResponse!.orderListResult!.paymentMethods;
+    if (controller.orderListDetailResponse!.orderListResult?.history?.first.status == "done") {
+      return const SizedBox.shrink();
+    }
     GlobalKey<FormState> _formState = GlobalKey<FormState>();
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -387,12 +395,12 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: (paymentMethods ?? [])
                                   .map((e) => CustomRadioButton<PaymentMethod>(
-                                  label: e.name,
-                                  groupValue: controller.selectedPaymentMethod.value,
-                                  value: e,
-                                  onChanged: (val) {
-                                    controller.selectedPaymentMethod(e);
-                                  }))
+                                      label: e.name,
+                                      groupValue: controller.selectedPaymentMethod.value,
+                                      value: e,
+                                      onChanged: (val) {
+                                        controller.selectedPaymentMethod(e);
+                                      }))
                                   .toList());
                         }),
                         const SizedBox(height: 13),
@@ -464,5 +472,3 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
     );
   }
 }
-
-

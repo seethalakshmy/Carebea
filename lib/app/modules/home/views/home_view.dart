@@ -108,6 +108,7 @@ class HomeView extends GetView<HomeController> {
                             autofocus: false,
                             style: DefaultTextStyle.of(context).style.copyWith(fontStyle: FontStyle.italic),
                             decoration: InputDecoration(
+                                isDense: true,
                                 fillColor: customTheme(context).textFormFieldColor,
                                 prefixIcon: Icon(Icons.search),
                                 label: Text('Search for shops,orders .. '),
