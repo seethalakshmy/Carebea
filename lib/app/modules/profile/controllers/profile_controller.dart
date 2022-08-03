@@ -28,12 +28,11 @@ class ProfileController extends GetxController {
 
   void increment() => count.value++;
 
-  fetchProfileData()async{
+  fetchProfileData() async {
     isProfileLoaded(true);
 
     profileResponse = await profileViewRepo.viewProfile(userId: SharedPrefs.getUserId()!);
 
     isProfileLoaded(false);
-
   }
 }

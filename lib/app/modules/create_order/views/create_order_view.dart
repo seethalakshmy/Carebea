@@ -58,7 +58,12 @@ class CreateOrderView extends GetView<CreateOrderController> {
                         height: 1,
                         color: const Color(0xffE1E1E1),
                       ),
-                      itemBuilder: (context, index) => ShopTile(shop: controller.shopList[index]),
+                      itemBuilder: (context, index) => ShopTile(
+                          shop: controller.shopList[index],
+                          onTap: () {
+                            Get.toNamed(Routes.CREATE_ORDER_SHOP_DETAILS,
+                                arguments: {"shop": controller.shopList[index]});
+                          }),
                     ),
                   );
                 }),
@@ -125,16 +130,16 @@ class ShopTile extends StatelessWidget {
   const ShopTile({
     Key? key,
     required this.shop,
+    required this.onTap,
   }) : super(key: key);
   final ShopList shop;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: InkWell(
-        onTap: () {
-          Get.toNamed(Routes.CREATE_ORDER_SHOP_DETAILS, arguments: {"shop": shop});
-        },
+        onTap: onTap,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
