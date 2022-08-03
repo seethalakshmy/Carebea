@@ -159,7 +159,7 @@ class HomeView extends GetView<HomeController> {
                                     CupertinoIcons.search,
                                     color: Color(0xff9F9F9F),
                                   ),
-                                  label: Text('Search for shops,orders .. '),
+                                  hintText: 'Search for shops,orders .. ',
                                   border: OutlineInputBorder(
                                       borderSide: BorderSide.none
                                   ))),
