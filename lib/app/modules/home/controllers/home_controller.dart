@@ -1,5 +1,6 @@
 import 'package:carebea/app/modules/home/data/models/home_data_model.dart';
 import 'package:carebea/app/modules/home/data/repo/home_data_repo.dart';
+import 'package:carebea/app/modules/shops/models/order_list_model.dart';
 import 'package:carebea/app/utils/shared_prefs.dart';
 import 'package:carebea/app/utils/show_snackbar.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,7 @@ class HomeController extends GetxController {
   HomeData? homeData;
   List<LatestShopList> latestShopList = [];
   List<ShopList> shopList = [];
+  List<History> orderList = [];
   List<UpcomingOrdersList> upcomingOrderList = [];
   RxString selectedSearchtype = 'Shop'.obs;
 
@@ -45,6 +47,17 @@ class HomeController extends GetxController {
       return shopListResponse.shopListResult?.shopList ?? [];
     }
     return [];
+  }
+  
+  Future<List<History>> homeSearchOrder(String? query)async{
+    if((query ?? "").isEmpty){
+      return [];
+    }
+    var orderListResponse = await _repository.homeOrderSearch(salesPersonId: SharedPrefs.getUserId()!,query: query);
+    if(orderListResponse.orderListResult?.status ?? false){
+      return orderListResponse.orderListResult?.history ?? [];
+    }
+    return[];
   }
 }
 
