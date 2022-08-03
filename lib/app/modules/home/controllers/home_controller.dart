@@ -17,7 +17,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    fetchHomePageData();  
+    fetchHomePageData();
     super.onInit();
   }
 
@@ -29,24 +29,22 @@ class HomeController extends GetxController {
     } else {
       homeData = response;
       latestShopList = homeData?.result?.latestShopList ?? [];
-      latestShopList.sort((a,b)=> b.id!.compareTo(a.id!));
-
+      latestShopList.sort((a, b) => b.id!.compareTo(a.id!));
     }
     isLoading(false);
   }
 
-   homeSearchShop(String? query) async {
-    var shopListResponse;
+  Future<List<ShopList>> homeSearchShop(String? query) async {
     if ((query ?? "").isEmpty) {
+      return [];
       // shopListResponse = await _repository.shopList(SharedPrefs.getUserId()!);
     }
-      shopListResponse = await _repository
-          .homeShopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {"name": query});
+    var shopListResponse =
+        await _repository.homeShopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {"name": query});
     if (shopListResponse.shopListResult?.status ?? false) {
-      shopList = shopListResponse.shopListResult?.shopList ?? [];
-    } else {
-      shopList = [];
+      return shopListResponse.shopListResult?.shopList ?? [];
     }
+    return [];
   }
 }
 

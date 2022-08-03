@@ -20,9 +20,6 @@ class OrderHistoryDetailsController extends GetxController {
   TextEditingController cheqNoController = TextEditingController();
   RxBool isConfirmingOrder = false.obs;
 
-
-
-
   @override
   void onInit() {
     fetchOrderDetails(Get.arguments['order_id']);
@@ -38,12 +35,13 @@ class OrderHistoryDetailsController extends GetxController {
   fetchOrderDetails(int orderId) async {
     isOrderDetailsLoading(true);
     orderListDetailResponse =
-    await orderListRepo.orderDetails(salesPersonId: SharedPrefs.getUserId(), orderId: orderId);
+        await orderListRepo.orderDetails(salesPersonId: SharedPrefs.getUserId(), orderId: orderId);
     if ((orderListDetailResponse?.orderListResult?.paymentMethods ?? []).isNotEmpty) {
       if (orderListDetailResponse?.orderListResult?.history?.first.paymentMethod != null) {
         selectedPaymentMethod = orderListDetailResponse!.orderListResult!.paymentMethods!
             .firstWhere(
-                (element) => element.id == orderListDetailResponse!.orderListResult!.history!.first.paymentMethod!)
+                (element) => element.id == orderListDetailResponse!.orderListResult!.history!.first.paymentMethod!,
+                orElse: () => PaymentMethod(id: -1))
             .obs;
       } else {
         selectedPaymentMethod = (orderListDetailResponse!.orderListResult!.paymentMethods!.first).obs;
@@ -59,8 +57,7 @@ class OrderHistoryDetailsController extends GetxController {
         salesPersonId: SharedPrefs.getUserId(),
         paymentMethod: selectedPaymentMethod.value.code,
         collectedAmount: collectedAmountEditingController.text,
-        cheqNo: cheqNoController.text
-    );
+        cheqNo: cheqNoController.text);
     if (res.result?.status ?? false) {
       Get.back();
       Get.toNamed(Routes.DELIVERY_INVOICE_DETAILS,
