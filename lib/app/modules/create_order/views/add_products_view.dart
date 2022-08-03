@@ -208,7 +208,7 @@ class ProductTile extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: _image(),
+                      child:_image(),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
@@ -349,7 +349,8 @@ class ProductTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: AspectRatio(
           aspectRatio: 58 / 74,
-          child: Image.asset(
+          child:
+          Image.asset(
             Assets.assetsLoginBackground,
             fit: BoxFit.cover,
           ),

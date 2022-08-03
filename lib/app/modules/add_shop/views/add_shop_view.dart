@@ -311,6 +311,9 @@ class AddShopView extends GetView<AddShopController> {
                                 } else if (value.length < 6) {
                                   return "Pincode must be 6 digits";
                                 }
+                                else if(value == '000000'){
+                                  return "Invalid Pincode";
+                                }
                                 return null;
                               },
                               // onChanged: (value)=>controller.zip.toString()!= value!,
@@ -646,9 +649,9 @@ class AddShopView extends GetView<AddShopController> {
                                     zip: controller.zip.text,
                                     customerType: controller.selectedRadio.value,
                                     shopCategoryId: controller.selectedCategory!.id!,
-                                    latitude: 0,
+                                    latitude: controller.currentLocation!.latitude!,
                                     routeId: controller.selectedRoute!.id!,
-                                    longitude: 0,
+                                    longitude: controller.currentLocation!.longitude!,
                                     gst: controller.gst.text,
                                     stateId: controller.selectedStateList!.stateId!,
                                     zoneId: controller.selectedZone!.id!,
@@ -673,9 +676,9 @@ class AddShopView extends GetView<AddShopController> {
                                     zip: controller.zip.text,
                                     customerType: controller.selectedRadio.value,
                                     shopCategoryId: controller.selectedCategory!.id!,
-                                    latitude: 0,
+                                    latitude: controller.currentLocation!.latitude!,
                                     routeId: controller.selectedRoute!.id!,
-                                    longitude: 0,
+                                    longitude: controller.currentLocation!.longitude!,
                                     gst: controller.gst.text,
                                     stateId: controller.selectedStateList!.stateId!,
                                     zoneId: controller.selectedZone!.id!,
