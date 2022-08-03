@@ -33,6 +33,7 @@ dependencies:
   slide_to_confirm: ^1.1.0
   table_calendar: 3.0.6
   url_launcher: ^6.1.5
+  flutter_typeahead: ^4.0.0
 
 dev_dependencies:
   build_runner: 2.2.0
