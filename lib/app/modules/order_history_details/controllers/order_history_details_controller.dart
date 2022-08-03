@@ -1,3 +1,4 @@
+import 'package:carebea/app/modules/orders/controllers/orders_controller.dart';
 import 'package:carebea/app/modules/shops/models/order_list_model.dart';
 import 'package:carebea/app/modules/shops/repo/order_list_repo.dart';
 import 'package:carebea/app/utils/shared_prefs.dart';
@@ -12,6 +13,7 @@ import '../../order_details_delivery/data/repository/order_details_repository.da
 class OrderHistoryDetailsController extends GetxController {
   OrderListRepo orderListRepo = OrderListRepo();
   OrderDetailsRepository orderDetailsRepository = OrderDetailsRepository();
+  OrdersController _orderlistController = Get.find();
 
   OrderListResponse? orderListDetailResponse;
   RxBool isOrderDetailsLoading = true.obs;
@@ -19,9 +21,6 @@ class OrderHistoryDetailsController extends GetxController {
   TextEditingController collectedAmountEditingController = TextEditingController();
   TextEditingController cheqNoController = TextEditingController();
   RxBool isConfirmingOrder = false.obs;
-
-
-
 
   @override
   void onInit() {
@@ -38,12 +37,13 @@ class OrderHistoryDetailsController extends GetxController {
   fetchOrderDetails(int orderId) async {
     isOrderDetailsLoading(true);
     orderListDetailResponse =
-    await orderListRepo.orderDetails(salesPersonId: SharedPrefs.getUserId(), orderId: orderId);
+        await orderListRepo.orderDetails(salesPersonId: SharedPrefs.getUserId(), orderId: orderId);
     if ((orderListDetailResponse?.orderListResult?.paymentMethods ?? []).isNotEmpty) {
       if (orderListDetailResponse?.orderListResult?.history?.first.paymentMethod != null) {
         selectedPaymentMethod = orderListDetailResponse!.orderListResult!.paymentMethods!
             .firstWhere(
-                (element) => element.id == orderListDetailResponse!.orderListResult!.history!.first.paymentMethod!)
+                (element) => element.id == orderListDetailResponse!.orderListResult!.history!.first.paymentMethod!,
+                orElse: () => PaymentMethod(id: -1))
             .obs;
       } else {
         selectedPaymentMethod = (orderListDetailResponse!.orderListResult!.paymentMethods!.first).obs;
@@ -59,11 +59,11 @@ class OrderHistoryDetailsController extends GetxController {
         salesPersonId: SharedPrefs.getUserId(),
         paymentMethod: selectedPaymentMethod.value.code,
         collectedAmount: collectedAmountEditingController.text,
-        cheqNo: cheqNoController.text
-    );
+        cheqNo: cheqNoController.text);
     if (res.result?.status ?? false) {
+      _orderlistController.fetchOrdersList(orderType: OrderType.upcoming);
       Get.back();
-      Get.toNamed(Routes.DELIVERY_INVOICE_DETAILS,
+      Get.offNamed(Routes.DELIVERY_INVOICE_DETAILS,
           arguments: {"orderId": orderListDetailResponse?.orderListResult?.history?.first.id});
     } else {
       showSnackBar(res.result?.message ?? "Something happend, Please try again!");

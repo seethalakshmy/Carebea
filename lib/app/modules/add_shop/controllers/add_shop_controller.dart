@@ -5,6 +5,7 @@ import 'package:carebea/app/modules/add_shop/models/add_shop_model.dart';
 import 'package:carebea/app/modules/add_shop/models/list_state_model.dart';
 import 'package:carebea/app/modules/add_shop/models/list_zone_model.dart' as zone_list;
 import 'package:carebea/app/modules/add_shop/repo/add_shop_repo.dart';
+import 'package:carebea/app/modules/home/controllers/home_controller.dart';
 import 'package:carebea/app/utils/show_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,7 @@ import '../models/list_routes_model.dart' as route_list;
 
 class AddShopController extends GetxController {
   final addShopFormKey = GlobalKey<FormState>();
+  final homepageController = Get.find<HomeController>();
 
   AddShopRepo addShopRepo = AddShopRepo();
   AddShopResponse addShopResponse = AddShopResponse();
@@ -33,6 +35,8 @@ class AddShopController extends GetxController {
   TextEditingController gst = TextEditingController();
   TextEditingController stateId = TextEditingController();
   TextEditingController lastName = TextEditingController();
+  TextEditingController openingBalanceController = TextEditingController();
+
   DateTime? backbuttonpressedTime;
   RxBool isRoutesListLoading = true.obs;
   RxBool isStateListLoading = true.obs;
@@ -66,8 +70,11 @@ class AddShopController extends GetxController {
     fetchStateList();
     fetchZoneList();
     fetchCategory();
+
     if (Get.arguments['isEdit'] ?? false) {
       populate(Get.arguments['shop'] as ShopList);
+    } else {
+      openingBalanceController.text = homepageController.homeData?.result?.defOpeningCredit ?? "0";
     }
     super.onInit();
   }
@@ -199,6 +206,7 @@ class AddShopController extends GetxController {
     zip.text = argument.address!.zip!;
     localArea.text = argument.address!.localArea!;
     lastName.text = argument.lastName!;
+    openingBalanceController.text = argument.credBalance?.toStringAsFixed(2) ?? "";
     if ((argument.type ?? "").toLowerCase() == "b2b") {
       selectedRadio(1);
     } else if ((argument.type ?? "").toLowerCase() == "b2c") {

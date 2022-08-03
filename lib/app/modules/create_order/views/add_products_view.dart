@@ -288,7 +288,8 @@ class ProductTile extends StatelessWidget {
                                   Obx(() {
                                 if (_controller.cartproducts.containsKey(product.id)) {
                                   return CartCountWidget(
-                                      id: product.id!, count: _controller.cartproducts[product.id] ?? 0);
+                                    id: product.id!,
+                                  );
                                 }
                                 return CustomButton(
                                   isDense: true,

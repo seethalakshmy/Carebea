@@ -11,17 +11,13 @@ class HomeController extends GetxController {
   RxBool isLoading = true.obs;
   HomeData? homeData;
   List<LatestShopList> latestShopList = [];
-  Rx<SearchType> selectedSearchtype = Rx(
-    SearchType("Name", "name"),
-  );
-  List<SearchType> searchitems = [
-    SearchType("Name", "name"),
-    SearchType("Phone", "phone"),
-    SearchType("Local Area", "local_area"),
-  ];
+  List<ShopList> shopList = [];
+  List<UpcomingOrdersList> upcomingOrderList = [];
+  RxString selectedSearchtype = 'Shop'.obs;
+
   @override
   void onInit() {
-    fetchHomePageData();  
+    fetchHomePageData();
     super.onInit();
   }
 
@@ -33,25 +29,23 @@ class HomeController extends GetxController {
     } else {
       homeData = response;
       latestShopList = homeData?.result?.latestShopList ?? [];
-      latestShopList.sort((a,b)=> b.id!.compareTo(a.id!));
-
+      latestShopList.sort((a, b) => b.id!.compareTo(a.id!));
     }
     isLoading(false);
   }
 
-  // Future<void> homeSearchShop(String? query) async {
-  //   var shopListResponse;
-  //   if ((query ?? "").isEmpty) {
-  //     // shopListResponse = await _repository.shopList(SharedPrefs.getUserId()!);
-  //   }
-  //     shopListResponse = await _repository
-  //         .homeShopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {selectedSearchtype.value.type!: query});
-  //   if (shopListResponse.shopListResult?.status ?? false) {
-  //     shopList = shopListResponse.shopListResult?.shopList ?? [];
-  //   } else {
-  //     shopList = [];
-  //   }
-  // }
+  Future<List<ShopList>> homeSearchShop(String? query) async {
+    if ((query ?? "").isEmpty) {
+      return [];
+      // shopListResponse = await _repository.shopList(SharedPrefs.getUserId()!);
+    }
+    var shopListResponse =
+        await _repository.homeShopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {"name": query});
+    if (shopListResponse.shopListResult?.status ?? false) {
+      return shopListResponse.shopListResult?.shopList ?? [];
+    }
+    return [];
+  }
 }
 
 class SearchType {
