@@ -94,7 +94,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
               CupertinoIcons.search,
               color: Color(0xff9F9F9F),
             ),
-            hint: "Search shop or scan",
+            hint: "Search shop",
           ),
         ],
       ),
@@ -145,7 +145,7 @@ class ShopTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              shop.name!,
+              shop.name!+shop.lastName!,
               style: customTheme(context).medium.copyWith(fontSize: 14, color: Colors.black),
             ),
             Text(
