@@ -20,7 +20,7 @@ class CreateOrderController extends GetxController {
   DateTime? backbuttonpressedTime;
   final ShopListRepo _shopRepo = ShopListRepo();
   final CreateOrderRepository _repository = CreateOrderRepository();
-  RxMap<int, int> cartproducts = RxMap();
+  RxMap<int, TextEditingController> cartproducts = RxMap<int, TextEditingController>();
   RxBool isLoading = true.obs;
   RxBool isProductsLoading = true.obs;
   final ProductListRepo _productListRepo = ProductListRepo();
@@ -76,8 +76,11 @@ class CreateOrderController extends GetxController {
 
       return;
     }
-    sortList();
-    cartproducts[id] = count;
+    if (cartproducts.containsKey(id)) {
+      cartproducts[id]!.text = count.toString();
+    } else {
+      cartproducts[id] = TextEditingController(text: count.toString());
+    }
     calculateCost();
   }
 
@@ -91,8 +94,12 @@ class CreateOrderController extends GetxController {
   late Rx<PaymentMethod> selectedPaymentMethod;
   createOrder() async {
     creatingOrder(true);
+    Map<int, int>? _products = {};
+    cartproducts.forEach((key, textEditingControlller) {
+      _products.addAll({key: int.parse(textEditingControlller.text)});
+    });
     var res = await _repository.createOrder(
-        shopId: (Get.arguments["shop"] as ShopList).id, salesPersonId: SharedPrefs.getUserId(), products: cartproducts);
+        shopId: (Get.arguments["shop"] as ShopList).id, salesPersonId: SharedPrefs.getUserId(), products: _products);
 
     if (res.result?.status ?? false) {
       Get.to(() => CheckoutView(), arguments: Get.arguments);
@@ -155,13 +162,11 @@ class CreateOrderController extends GetxController {
     var shopListResponse;
     if ((query ?? "").isEmpty) {
       shopListResponse = await _shopRepo.shopList(SharedPrefs.getUserId()!);
-
     } else {
       shopListResponse = await _shopRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {"name": query});
     }
     if (shopListResponse.shopListResult?.status ?? false) {
       shopList(shopListResponse.shopListResult?.shopList ?? []);
-
     } else {
       shopList.clear();
     }
@@ -176,7 +181,7 @@ class CreateOrderController extends GetxController {
         if (cartproducts.keys.contains(i.id)) {
           tempSelectedProducts.add(i);
           var c = productPrice((Get.arguments["shop"] as ShopList).category!, i);
-          var t = cartproducts[i.id]! * c;
+          var t = int.parse(cartproducts[i.id]!.text) * c;
           cost += t;
         }
       }

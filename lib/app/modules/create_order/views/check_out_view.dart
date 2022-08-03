@@ -342,19 +342,14 @@ class PaymentTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.max,
       children: [
-        Expanded(
-          flex: 5,
-          child: Text(
-            title,
-            style: customTheme(context).regular.copyWith(fontSize: 12),
-          ),
+        Text(
+          title,
+          style: customTheme(context).regular.copyWith(fontSize: 12),
         ),
-        Expanded(
-          flex: 1,
-          child: Text(
-            "₹${value.toStringAsFixed(2)}",
-            style: customTheme(context).regular.copyWith(fontSize: 12),
-          ),
+        const Spacer(),
+        Text(
+          "₹${value.toStringAsFixed(2)}",
+          style: customTheme(context).regular.copyWith(fontSize: 12),
         ),
       ],
     );
