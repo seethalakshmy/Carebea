@@ -122,11 +122,12 @@ class DeliveryInvoiceDetailsView extends GetView<DeliveryInvoiceDetailsControlle
             title: "Delivered at 20 June 22 at 15.03",
             content: deliveryInvoice.userAddress!.split("\n").join(" ").trim(),
           ),
-          const SizedBox(height: 5),
-          DetailsTile(
-            title: "Picked by",
-            content: deliveryInvoice.deliveryPersonId!,
-          ),
+          if (deliveryInvoice.deliveryPersonId != null) const SizedBox(height: 5),
+          if (deliveryInvoice.deliveryPersonId != null)
+            DetailsTile(
+              title: "Picked by",
+              content: deliveryInvoice.deliveryPersonId ?? "",
+            ),
           const SizedBox(height: 5),
           DetailsTile(
             title: "Payment method",

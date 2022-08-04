@@ -32,7 +32,7 @@ InvoiceDetailsResult _$InvoiceDetailsResultFromJson(
       invoiceId: json['invoice_id'] as int?,
       userAddress: json['user_address'] as String?,
       deliveryDate: json['delivery_date'] as bool?,
-      deliveryPersonId: json['delivery_person_id'] as String?,
+     
       paymentMethod: json['payment_method'] as String?,
       itemTotal: (json['item_total'] as num?)?.toDouble(),
       grandTotal: (json['grand_total'] as num?)?.toDouble(),

@@ -42,8 +42,9 @@ class InvoiceDetailsResult {
   final String? userAddress;
   @JsonKey(name: "delivery_date")
   final bool? deliveryDate;
-  @JsonKey(name: "delivery_person_id")
-  final String? deliveryPersonId;
+
+  @JsonKey(name: "delivery_person_id", ignore: true)
+  String? deliveryPersonId;
   @JsonKey(name: "payment_method")
   final String? paymentMethod;
   @JsonKey(name: "item_total")
@@ -53,7 +54,8 @@ class InvoiceDetailsResult {
   final bool? status;
   final String? message;
 
-  factory InvoiceDetailsResult.fromJson(Map<String, dynamic> json) => _$InvoiceDetailsResultFromJson(json);
+  factory InvoiceDetailsResult.fromJson(Map<String, dynamic> json) => _$InvoiceDetailsResultFromJson(json)
+    ..deliveryPersonId = (json["delivery_person_id"].toString() == "false" ? null : json["delivery_person_id"]);
 
   Map<String, dynamic> toJson() => _$InvoiceDetailsResultToJson(this);
 }
