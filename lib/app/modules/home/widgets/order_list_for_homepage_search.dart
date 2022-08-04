@@ -19,55 +19,44 @@ class OrderTileHomePageSearch extends StatelessWidget {
       onTap: () {
         Get.toNamed(Routes.ORDER_HISTORY_DETAILS, arguments: {'order_id': order.id});
       },
-      child: Column(
-        children: [
-          CustomCard(
-            margin: const EdgeInsets.symmetric(horizontal: 24),
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: CustomCard(
+        margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            // order.name!,
-                            'Order ID: ${order.name}',
-                            style:
+                      Text(
+                        // order.name!,
+                        'Order ID: ${order.name}',
+                        style:
                             customTheme(context).medium.copyWith(fontSize: 12, color: customTheme(context).secondary),
-                          ),
-                          Text(
-                            'Delivery Date : ${order.dateOrder!.day}/${order.dateOrder!.month}/${order.dateOrder!.year}',
-                            style: customTheme(context).regular.copyWith(fontSize: 11),
-                          ),
-                        ],
                       ),
-                      OrderStatusChip(
-                        statusText: order.status!,
-                        color: customTheme(context).action,
+                      Text(
+                        'Delivery Date : ${order.dateOrder!.day}/${order.dateOrder!.month}/${order.dateOrder!.year}',
+                        style: customTheme(context).regular.copyWith(fontSize: 11),
                       ),
                     ],
                   ),
-                ),
-
-
-
-
-              ],
+                  OrderStatusChip(
+                    statusText: order.status!,
+                    color: customTheme(context).action,
+                  ),
+                ],
+              ),
             ),
-          ),
-          SizedBox(height: 10,)
-
-        ],
+          ],
+        ),
       ),
-
     );
   }
 }
