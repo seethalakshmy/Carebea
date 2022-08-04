@@ -306,13 +306,14 @@ class AddShopView extends GetView<AddShopController> {
                               maxlength: 6,
                               inputType: TextInputType.number,
                               validaton: (value) {
-                                if (value!.isEmpty) {
+                                if (value== null || value.trim().isEmpty) {
                                   return 'pincode can\'t be empty';
-                                } else if (value.length < 6) {
+                                }
+                                if (value.length < 6) {
                                   return "Pincode must be 6 digits";
                                 }
-                                else if(value == '000000'){
-                                  return "Invalid Pincode";
+                                if (!RegExp(pinRegexp).hasMatch(value)) {
+                                  return 'Invalid Pincode';
                                 }
                                 return null;
                               },
