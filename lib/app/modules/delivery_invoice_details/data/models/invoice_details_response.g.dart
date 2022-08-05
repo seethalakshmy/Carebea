@@ -31,7 +31,7 @@ InvoiceDetailsResult _$InvoiceDetailsResultFromJson(
       orderId: json['order_id'] as int?,
       invoiceId: json['invoice_id'] as int?,
       userAddress: json['user_address'] as String?,
-      deliveryDate: json['delivery_date'] as bool?,
+      
      
       paymentMethod: json['payment_method'] as String?,
       itemTotal: (json['item_total'] as num?)?.toDouble(),

@@ -1,3 +1,4 @@
+import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/modules/shops/models/order_list_model.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
@@ -31,10 +32,11 @@ class OrderHistoryTile extends StatelessWidget {
                       'Order ID: ${orders.orderId}',
                       style: customTheme(context).medium.copyWith(fontSize: 12, color: customTheme(context).secondary),
                     ),
-                    Text(
-                      'Delivery Date : ${orders.dateOrder!.day}/${orders.dateOrder!.month}/${orders.dateOrder!.year}',
-                      style: customTheme(context).regular.copyWith(fontSize: 11),
-                    ),
+                    if (orders.deliveryDate != null)
+                      Text(
+                        'Delivery Date : ${formatDate(orders.deliveryDate!)}',
+                        style: customTheme(context).regular.copyWith(fontSize: 11),
+                      ),
                   ],
                 ),
                 Container(

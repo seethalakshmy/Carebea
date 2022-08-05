@@ -7,6 +7,7 @@ import 'package:carebea/app/utils/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../controllers/delivery_invoice_details_controller.dart';
 
@@ -119,7 +120,8 @@ class DeliveryInvoiceDetailsView extends GetView<DeliveryInvoiceDetailsControlle
           ),
           const SizedBox(height: 5),
           DetailsTile(
-            title: "Delivered at 20 June 22 at 15.03",
+            title:
+                "Delivered at ${deliveryInvoice.deliveryDate == null ? '' : ('${DateFormat("dd MMMM yy").format(deliveryInvoice.deliveryDate!)} at ${DateFormat("HH.mm").format(deliveryInvoice.deliveryDate!)}')}",
             content: deliveryInvoice.userAddress!.split("\n").join(" ").trim(),
           ),
           if (deliveryInvoice.deliveryPersonId != null) const SizedBox(height: 5),

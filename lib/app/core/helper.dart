@@ -98,7 +98,7 @@ String getFullAddress(Address? address) {
   return addressString;
 }
 
-String formatDate(DateTime date) => DateFormat(" MM/dd/y").format(date);
+String formatDate(DateTime date) => DateFormat("dd/MM/y").format(date);
 
 Widget openKeyboardGuard(BuildContext context, {required Widget child}) {
   if (MediaQuery.of(context).viewInsets.bottom != 0) {
