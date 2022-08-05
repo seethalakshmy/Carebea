@@ -208,8 +208,10 @@ class ProductTile extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child:_image(),
-                    ),
+                      child:Image.network(product.productImages.toString(),errorBuilder: (context, error, stackTrace){
+                        return _image();
+                      }
+                      ),                    ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Column(
