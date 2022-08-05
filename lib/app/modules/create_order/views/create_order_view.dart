@@ -145,7 +145,7 @@ class ShopTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              shop.name!+shop.lastName!,
+              "${shop.name!} ${shop.lastName ?? ""}",
               style: customTheme(context).medium.copyWith(fontSize: 14, color: Colors.black),
             ),
             Text(
