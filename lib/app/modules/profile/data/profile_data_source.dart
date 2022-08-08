@@ -11,7 +11,7 @@ class ProfileDataSource {
   Future<ProfileResponse> viewProfile(int userId) async {
     var response = await _apiService.post(
       "view-user-profile",
-      {'user_id':userId},
+      {'user_id': userId},
     );
 
     if (response.statusCode == 200) {
@@ -20,6 +20,4 @@ class ProfileDataSource {
 
     return ProfileResponse(profileResponseResult: ProfileResponseResult.fromJson(json.decode(response.body)));
   }
-
-
 }

@@ -33,7 +33,7 @@ class ProfileResponseResult {
     this.email,
     this.zip,
     this.phone,
-    this.mobile,
+    this.mobile,this.imgUrl,
   });
 
   bool? status;
@@ -43,6 +43,8 @@ class ProfileResponseResult {
   String? zip;
   String? phone;
   String? mobile;
+  @JsonKey(name: "image_url")
+  String? imgUrl;
 
   factory ProfileResponseResult.fromJson(Map<String, dynamic> json) => _$ProfileResponseResultFromJson(json);
 
