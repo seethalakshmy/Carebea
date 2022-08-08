@@ -7,15 +7,19 @@ class OrderDetailsDeliveryDataSource {
   final ApiService _apiService = ApiService();
 
   Future<UpdateOrderStatusResponse> confirmOrder(
-      int salesPersonId, int orderId, String collectedAmount, String paymentMethod, String? cheqNo) async {
+      int? salesPersonId,int? driverId, int orderId, String collectedAmount, String paymentMethod, String? cheqNo) async {
     Map<String, dynamic> body = {
       "status": "Complete",
       "payment_method": paymentMethod,
-      "sales_person_id": salesPersonId,
       "order_id": orderId,
       "collected_amount": double.parse(collectedAmount),
     };
-    if (paymentMethod == "CHEQ") {
+    if(salesPersonId != null){
+      body.addAll({'sales_person_id':salesPersonId});
+    }
+    if(driverId != null){
+      body.addAll({'driver_id':driverId.toString()});
+    }    if (paymentMethod == "CHEQ") {
       body.addAll({
         "cheque_no": cheqNo,
       });

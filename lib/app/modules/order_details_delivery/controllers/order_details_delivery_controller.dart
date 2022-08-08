@@ -27,7 +27,7 @@ class OrderDetailsDeliveryController extends GetxController {
   fetchOrderDetails(int orderId) async {
     isOrderDetailsLoading(true);
     orderListDetailResponse =
-        await orderListRepo.orderDetails(salesPersonId: SharedPrefs.getUserId(), orderId: orderId);
+        await orderListRepo.orderDetailsDelivery(driverId: SharedPrefs.getUserId(), orderId: orderId);
     if ((orderListDetailResponse?.orderListResult?.paymentMethods ?? []).isNotEmpty) {
       if (orderListDetailResponse?.orderListResult?.history?.first.paymentMethod != null) {
         selectedPaymentMethod = orderListDetailResponse!.orderListResult!.paymentMethods!
@@ -45,7 +45,7 @@ class OrderDetailsDeliveryController extends GetxController {
     isConfirmingOrder(true);
     var res = await orderDetailsRepository.confirmOrder(
         orderId: orderListDetailResponse?.orderListResult?.history?.first.id,
-        salesPersonId: SharedPrefs.getUserId(),
+        driverId: SharedPrefs.getUserId(),
         paymentMethod: selectedPaymentMethod.value.code,
         collectedAmount: collectedAmountEditingController.text,
         cheqNo: cheqNoController.text
