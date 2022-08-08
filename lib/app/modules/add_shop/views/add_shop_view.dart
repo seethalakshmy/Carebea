@@ -306,7 +306,7 @@ class AddShopView extends GetView<AddShopController> {
                               maxlength: 6,
                               inputType: TextInputType.number,
                               validaton: (value) {
-                                if (value== null || value.trim().isEmpty) {
+                                if (value == null || value.trim().isEmpty) {
                                   return 'pincode can\'t be empty';
                                 }
                                 if (value.length < 6) {

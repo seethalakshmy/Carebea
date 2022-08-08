@@ -208,10 +208,10 @@ class ProductTile extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child:Image.network(product.productImages.toString(),errorBuilder: (context, error, stackTrace){
-                        return _image();
-                      }
-                      ),                    ),
+                      child: (product.productImages ?? []).isEmpty
+                          ? _placeholder()
+                          : _image(product.productImages?.first ?? ""),
+                    ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Column(
@@ -345,19 +345,32 @@ class ProductTile extends StatelessWidget {
     );
   }
 
-  Widget _image() {
+  Widget _placeholder() {
     return SizedBox(
       height: 100,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: AspectRatio(
           aspectRatio: 58 / 74,
-          child:
-          Image.asset(
+          child: Image.asset(
             Assets.assetsLoginBackground,
             fit: BoxFit.cover,
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _image(String imageUrl) {
+    return SizedBox(
+      height: 100,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: AspectRatio(
+            aspectRatio: 58 / 74,
+            child: Image.network(imageUrl, fit: BoxFit.cover, errorBuilder: (context, error, stackTrace) {
+              return _placeholder();
+            })),
       ),
     );
   }

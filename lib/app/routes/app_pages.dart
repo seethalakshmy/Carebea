@@ -43,7 +43,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: Routes.HOME,
-      page: () =>  HomeView(),
+      page: () => HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
@@ -85,7 +85,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.ROUTE_PAGE,
-      page: () => const RoutePageView(),
+      page: () => RoutePageView(),
       binding: RoutePageBinding(),
     ),
     GetPage(

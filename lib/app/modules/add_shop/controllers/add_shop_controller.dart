@@ -118,9 +118,10 @@ class AddShopController extends GetxController {
           zoneId,
           routeId,
           currentLocation!.latitude!,
-          currentLocation!.longitude!);
+          currentLocation!.longitude!,
+          double.parse(openingBalanceController.text));
 
-      if (addShopResponse.addShopResult!.status == true) {
+      if (addShopResponse.addShopResult?.status ?? false) {
         showDialog<bool>(
             barrierDismissible: false,
             context: Get.context!,
@@ -143,6 +144,8 @@ class AddShopController extends GetxController {
                 ],
               );
             });
+      } else {
+        showSnackBar(addShopResponse.addShopResult?.message ?? "Something happend!");
       }
     }
     isAddShopButtonPressed(false);
@@ -167,8 +170,9 @@ class AddShopController extends GetxController {
       required double longitude}) async {
     isAddShopButtonPressed(true);
     if (addShopFormKey.currentState!.validate()) {
-      addShopResponse = await addShopRepo.updateShop(shopId, salesPersonId, name, lastName, phone, shopCategoryId,
-          customerType, gst, localArea, district, zip, stateId, zoneId, routeId, latitude, longitude);
+      addShopResponse = await addShopRepo.updateShop(shopId, salesPersonId, name, lastName, shopCategoryId,
+          customerType, gst, localArea, district, zip, stateId, zoneId, routeId, latitude, longitude,
+          phone: (Get.arguments["shop"] as ShopList).phone != phone ? phone : null);
 
       if (addShopResponse.addShopResult?.status ?? false) {
         showDialog<bool>(
@@ -193,6 +197,8 @@ class AddShopController extends GetxController {
                 ],
               );
             });
+      } else {
+        showSnackBar(addShopResponse.addShopResult?.message ?? "Something happend!");
       }
     }
     isAddShopButtonPressed(false);

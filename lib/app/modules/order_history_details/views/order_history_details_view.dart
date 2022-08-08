@@ -200,7 +200,7 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 14),
                             child: Table(
-                              columnWidths: {0: FlexColumnWidth(8), 1: FlexColumnWidth(1), 2: FlexColumnWidth(1.5)},
+                              columnWidths: {0: FlexColumnWidth(8), 1: FlexColumnWidth(2), 2: FlexColumnWidth(2)},
                               border: TableBorder.all(width: 0, color: Colors.transparent),
                               children: [
                                 TableRow(children: [
@@ -360,7 +360,7 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
       return const SizedBox.shrink();
     }
     var paymentMethods = controller.orderListDetailResponse!.orderListResult!.paymentMethods;
-    if (controller.orderListDetailResponse!.orderListResult?.history?.first.status == "sale") {
+    if (controller.orderListDetailResponse!.orderListResult?.history?.first.status == "Processing") {
       GlobalKey<FormState> _formState = GlobalKey<FormState>();
       return Padding(
         padding: const EdgeInsets.all(8.0),

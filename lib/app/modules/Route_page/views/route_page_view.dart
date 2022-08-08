@@ -12,7 +12,9 @@ import '../../../utils/widgets/custom_card.dart';
 import '../controllers/route_page_controller.dart';
 
 class RoutePageView extends GetView<RoutePageController> {
-  const RoutePageView({Key? key}) : super(key: key);
+  RoutePageView({Key? key}) : super(key: key) {
+    controller.fetchRouteListCalender(date: DateFormat("dd/MM/yyy").format(DateTime.now()));
+  }
 
   @override
   Widget build(BuildContext context) {

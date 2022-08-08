@@ -18,22 +18,24 @@ class AddShopDataSource {
   ApiService apiService = Get.find();
   final ApiService _apiService = ApiService();
 
-  Future<AddShopResponse> addShop(
-      {required int salesPersonId,
-      required String lastName,
-      required String name,
-      required String phone,
-      required int shopCategoryId,
-      required int customerType,
-      required String gst,
-      required String localArea,
-      required String district,
-      required String zip,
-      required int stateId,
-      required int zoneId,
-      required int routeId,
-      required double latitude,
-      required double longitude}) async {
+  Future<AddShopResponse> addShop({
+    required int salesPersonId,
+    required String lastName,
+    required String name,
+    required String phone,
+    required int shopCategoryId,
+    required int customerType,
+    required String gst,
+    required String localArea,
+    required String district,
+    required String zip,
+    required int stateId,
+    required int zoneId,
+    required int routeId,
+    required double latitude,
+    required double longitude,
+    required double openingBalance,
+  }) async {
     var response = await _apiService.post('create-shop', {
       'sales_person_id': salesPersonId,
       'last_name': lastName,
@@ -49,7 +51,8 @@ class AddShopDataSource {
       'zone_id': zoneId,
       'route_id': routeId,
       'latitude': latitude,
-      'longitude': longitude
+      'longitude': longitude,
+      "opening_balance": openingBalance
     });
 
     developer.log(" url----${(Uri.parse('${apiService.baseUrl}create-shop'))}");
@@ -64,43 +67,49 @@ class AddShopDataSource {
     }
   }
 
-  Future<AddShopResponse> updateShop(
-      {required int shopId,
-      required int salesPersonId,
-      required String lastName,
-      required String name,
-      required String phone,
-      required int shopCategoryId,
-      required int customerType,
-      required String gst,
-      required String localArea,
-      required String district,
-      required String zip,
-      required int stateId,
-      required int zoneId,
-      required int routeId,
-      required double latitude,
-      required double longitude}) async {
+  Future<AddShopResponse> updateShop({
+    required int shopId,
+    required int salesPersonId,
+    required String lastName,
+    required String name,
+    required int shopCategoryId,
+    required int customerType,
+    required String gst,
+    required String localArea,
+    required String district,
+    required String zip,
+    required int stateId,
+    required int zoneId,
+    required int routeId,
+    required double latitude,
+    required double longitude,
+    String? phone,
+  }) async {
+    var body = {
+      'shop_id': shopId,
+      'sales_person_id': salesPersonId,
+      'last_name': lastName,
+      'name': name,
+      'local_area': localArea,
+      'shop_categ_id': shopCategoryId,
+      'customer_type': customerType,
+      'gst': gst,
+      'district': district,
+      'zip': zip,
+      'state_id': stateId,
+      'zone_id': zoneId,
+      'route_id': routeId,
+      'latitude': latitude,
+      'longitude': longitude
+    };
+
+    if (phone != null) {
+      body.addAll({
+        'phone': phone,
+      });
+    }
     var response = await http.post(Uri.parse('${apiService.baseUrl}update-shop'),
-        body: json.encode({
-          'shop_id': shopId,
-          'sales_person_id': salesPersonId,
-          'last_name': lastName,
-          'name': name,
-          'phone': phone,
-          'local_area': localArea,
-          'shop_categ_id': shopCategoryId,
-          'customer_type': customerType,
-          'gst': gst,
-          'district': district,
-          'zip': zip,
-          'state_id': stateId,
-          'zone_id': zoneId,
-          'route_id': routeId,
-          'latitude': latitude,
-          'longitude': longitude
-        }),
-        headers: apiService.getHeaders());
+        body: json.encode(body), headers: apiService.getHeaders());
     developer.log(" url----${(Uri.parse('${apiService.baseUrl}update-shop'))}");
 
     print("updateShops response statusCode ${response.statusCode} ");
