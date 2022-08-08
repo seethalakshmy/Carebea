@@ -33,6 +33,8 @@ class CreateOrderController extends GetxController {
   RxDouble totalCartCost = 0.0.obs;
   CreateOrderResponse? createOrderResponse;
 
+  ShopList? selectedShop;
+
   final count = 0.obs;
   @override
   void onInit() {
@@ -146,6 +148,7 @@ class CreateOrderController extends GetxController {
       case 'retail':
         return product.retailPrice ?? 0;
       case 'department shop':
+      case 'department':
         return product.departmentPrice ?? 0;
       case 'wholesale':
         return product.wholesalePrice ?? 0;

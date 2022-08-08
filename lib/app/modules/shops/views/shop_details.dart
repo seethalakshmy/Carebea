@@ -84,11 +84,12 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                           // 'Trinity Shop',
                           style: customTheme(context).medium.copyWith(fontSize: 14),
                         ),
-                        Text(
-                          "GST no: ${shopDetails.gstNo!}",
-                          // 'GST no: 66998964579898',
-                          style: customTheme(context).regular.copyWith(fontSize: 11),
-                        ),
+                        if ((shopDetails.gstNo ?? "").isNotEmpty)
+                          Text(
+                            "GST no: ${shopDetails.gstNo!}",
+                            // 'GST no: 66998964579898',
+                            style: customTheme(context).regular.copyWith(fontSize: 11),
+                          ),
                       ],
                     ),
                     InkWell(

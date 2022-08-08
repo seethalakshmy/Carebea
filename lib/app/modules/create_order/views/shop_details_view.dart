@@ -35,6 +35,7 @@ class ShopDetailsView extends GetView<CreateOrderController> {
               child: CustomButton(
                   title: 'Add Products',
                   onTap: () {
+                    controller.selectedShop = (Get.arguments["shop"] as ShopList);
                     Get.to(
                       AddProductsView(),
                       arguments: Get.arguments,
