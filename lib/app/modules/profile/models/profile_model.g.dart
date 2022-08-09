@@ -33,6 +33,7 @@ ProfileResponseResult _$ProfileResponseResultFromJson(
       zip: json['zip'] as String?,
       phone: json['phone'] as String?,
       mobile: json['mobile'] as String?,
+      imgUrl: json['image_url'] as String?,
     );
 
 Map<String, dynamic> _$ProfileResponseResultToJson(

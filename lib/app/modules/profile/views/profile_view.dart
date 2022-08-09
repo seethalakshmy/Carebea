@@ -45,11 +45,13 @@ class ProfileView extends GetView<ProfileController> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Center(
+                      Center(
                         child: CircleAvatar(
+                          foregroundImage:
+                              NetworkImage(profileController.profileResponse?.profileResponseResult?.imgUrl ?? ""),
                           backgroundColor: Colors.grey,
                           radius: 50,
-                          child: Icon(
+                          child: const Icon(
                             Icons.person,
                             color: Colors.black,
                             size: 50,
