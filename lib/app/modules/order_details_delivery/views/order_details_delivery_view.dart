@@ -216,7 +216,7 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                         height: 10,
                       ),
                       Table(
-                        columnWidths: {0: FlexColumnWidth(7), 1: FlexColumnWidth(1), 2: FlexColumnWidth(1)},
+                        columnWidths: {0: FlexColumnWidth(8), 1: FlexColumnWidth(2), 2: FlexColumnWidth(2)},
                         border: TableBorder.all(width: 0, color: Colors.transparent),
                         children: [
                           TableRow(children: [
@@ -292,114 +292,132 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
         }));
   }
 
-  Padding _floatingActionButton(BuildContext context) {
+  Widget _floatingActionButton(BuildContext context) {
     var paymentMethods = controller.orderListDetailResponse!.orderListResult!.paymentMethods;
     GlobalKey<FormState> _formState = GlobalKey<FormState>();
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: CustomButton(
-        title: 'Order Delivered',
-        onTap: () {
-          showDialog(
-            context: context,
-            builder: (ctx) => Material(
-              type: MaterialType.transparency,
-              color: Colors.transparent,
-              child: Center(
-                child: CustomCard(
-                  padding: const EdgeInsets.all(20),
-                  width: Get.size.width * .8,
-                  child: Form(
-                    key: _formState,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "Payment Method",
-                          style: customTheme(context).medium.copyWith(fontSize: 14),
-                        ),
-                        const SizedBox(height: 10),
-                        Obx(() {
-                          if (controller.selectedPaymentMethod.value.id != null) {}
-                          return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: (paymentMethods ?? [])
-                                  .map((e) => CustomRadioButton<PaymentMethod>(
-                                      label: e.name,
-                                      groupValue: controller.selectedPaymentMethod.value,
-                                      value: e,
-                                      onChanged: (val) {
-                                        controller.selectedPaymentMethod(e);
-                                      }))
-                                  .toList());
-                        }),
-                        const SizedBox(height: 13),
-                        Text(
-                          "Collected amount",
-                          style: customTheme(context).regular.copyWith(fontSize: 11),
-                        ),
-                        const SizedBox(height: 5),
-                        CustomTextField(
-                          validaton: (val) {
-                            if ((val ?? "").isEmpty) {
-                              return "Collected amount is required";
+    if (controller.orderListDetailResponse!.orderListResult?.history?.first.status == "Processing") {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CustomButton(
+          title: 'Order Delivered',
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (ctx) => Material(
+                type: MaterialType.transparency,
+                color: Colors.transparent,
+                child: Center(
+                  child: CustomCard(
+                    padding: const EdgeInsets.all(20),
+                    width: Get.size.width * .8,
+                    child: Form(
+                      key: _formState,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Payment Method",
+                            style: customTheme(context)
+                                .medium
+                                .copyWith(fontSize: 14),
+                          ),
+                          const SizedBox(height: 10),
+                          Obx(() {
+                            if (controller.selectedPaymentMethod.value.id !=
+                                null) {}
+                            return Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: (paymentMethods ?? [])
+                                    .map((e) =>
+                                        CustomRadioButton<PaymentMethod>(
+                                            label: e.name,
+                                            groupValue: controller
+                                                .selectedPaymentMethod.value,
+                                            value: e,
+                                            onChanged: (val) {
+                                              controller
+                                                  .selectedPaymentMethod(e);
+                                            }))
+                                    .toList());
+                          }),
+                          const SizedBox(height: 13),
+                          Text(
+                            "Collected amount",
+                            style: customTheme(context)
+                                .regular
+                                .copyWith(fontSize: 11),
+                          ),
+                          const SizedBox(height: 5),
+                          CustomTextField(
+                            validaton: (val) {
+                              if ((val ?? "").isEmpty) {
+                                return "Collected amount is required";
+                              }
+                              return null;
+                            },
+                            inputType: TextInputType.number,
+                            textcontroller:
+                                controller.collectedAmountEditingController,
+                          ),
+                          Obx(() {
+                            if (controller.selectedPaymentMethod.value.code !=
+                                "CHEQ") {
+                              return const SizedBox.shrink();
                             }
-                            return null;
-                          },
-                          inputType: TextInputType.number,
-                          textcontroller: controller.collectedAmountEditingController,
-                        ),
-                        Obx(() {
-                          if (controller.selectedPaymentMethod.value.code != "CHEQ") {
-                            return const SizedBox.shrink();
-                          }
 
-                          return Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(height: 13),
-                              Text(
-                                "Cheque No",
-                                style: customTheme(context).regular.copyWith(fontSize: 11),
-                              ),
-                              const SizedBox(height: 5),
-                              CustomTextField(
-                                validaton: (val) {
-                                  if (controller.selectedPaymentMethod.value.code != "CHEQ") {
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 13),
+                                Text(
+                                  "Cheque No",
+                                  style: customTheme(context)
+                                      .regular
+                                      .copyWith(fontSize: 11),
+                                ),
+                                const SizedBox(height: 5),
+                                CustomTextField(
+                                  validaton: (val) {
+                                    if (controller
+                                            .selectedPaymentMethod.value.code !=
+                                        "CHEQ") {
+                                      return null;
+                                    }
+                                    if ((val ?? "").isEmpty) {
+                                      return "Cheque No is required";
+                                    }
                                     return null;
+                                  },
+                                  textcontroller: controller.cheqNoController,
+                                ),
+                              ],
+                            );
+                          }),
+                          const SizedBox(height: 20),
+                          Obx(() {
+                            return CustomButton(
+                                isLoading: controller.isConfirmingOrder.value,
+                                title: "Confirm",
+                                onTap: () {
+                                  if (_formState.currentState!.validate()) {
+                                    controller.confirmOrder();
                                   }
-                                  if ((val ?? "").isEmpty) {
-                                    return "Cheque No is required";
-                                  }
-                                  return null;
-                                },
-                                textcontroller: controller.cheqNoController,
-                              ),
-                            ],
-                          );
-                        }),
-                        const SizedBox(height: 20),
-                        Obx(() {
-                          return CustomButton(
-                              isLoading: controller.isConfirmingOrder.value,
-                              title: "Confirm",
-                              onTap: () {
-                                if (_formState.currentState!.validate()) {
-                                  controller.confirmOrder();
-                                }
-                              });
-                        })
-                      ],
+                                });
+                          })
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
-      ),
-    );
+            );
+          },
+        ),
+      );
+    }
+    return const SizedBox.shrink();
   }
 }
