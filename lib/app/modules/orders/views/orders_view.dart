@@ -98,13 +98,18 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                     SizedBox(
                       width: 5,
                     ),
-                    PopupMenuButton<String>(
+
+                    ordersController.filterVals == null? PopupMenuButton<String>(
+                      enabled: false,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
                         offset: const Offset(0.0, 50),
                         padding: EdgeInsets.zero,
                         child: Image.asset(
                           Assets.filter,
                           scale: 3.5,
+                          color: Colors.grey,
+                          colorBlendMode: BlendMode.saturation,
+
                         ),
                         onSelected: (element) {},
                         itemBuilder: (BuildContext context) {
@@ -126,6 +131,36 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                                 onTap: () {
                               ordersController.clearFilters();
                             }),
+                          ];
+                        }):
+                    PopupMenuButton<String>(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+                        offset: const Offset(0.0, 50),
+                        padding: EdgeInsets.zero,
+                        child: Image.asset(
+                          Assets.filter,
+                          scale: 3.5,
+                        ),
+                        onSelected: (element) {},
+                        itemBuilder: (BuildContext context) {
+                          if (ordersController.filterSelected.value == "") {}
+                          return [
+                            customPopupMenuItem<String>(
+                              context,
+                              name: "Date",
+                              isSelected: true,
+                              showBorder: false,
+                            ),
+                            ...(ordersController.filterVals?.date ?? [])
+                                .map((e) => customPopupMenuItem<String>(context,
+                                isSelected: ordersController.filterSelected.value == "Date-${e.id}",
+                                name: e.name!,
+                                onTap: () => ordersController.filterOrders("Date", e.id!)))
+                                .toList(),
+                            customPopupMenuItem<String>(context, name: "Clear", isSelected: true, showBorder: false,
+                                onTap: () {
+                                  ordersController.clearFilters();
+                                }),
                           ];
                         })
                     // PopupMenuButton<int>(

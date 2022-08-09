@@ -13,7 +13,7 @@ import '../../order_details_delivery/data/repository/order_details_repository.da
 class OrderHistoryDetailsController extends GetxController {
   OrderListRepo orderListRepo = OrderListRepo();
   OrderDetailsRepository orderDetailsRepository = OrderDetailsRepository();
-  OrdersController _orderlistController = Get.find();
+  OrdersController _orderlistController = Get.put(OrdersController());
 
   OrderListResponse? orderListDetailResponse;
   RxBool isOrderDetailsLoading = true.obs;
