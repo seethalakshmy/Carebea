@@ -142,7 +142,7 @@ class ProfileView extends GetView<ProfileController> {
         SharedPrefs.setAccessToken(accessToken!);
         SharedPrefs.setRefreshToken(refreshToken!);
 
-        // Get.offAllNamed(Routes.APP_START_UP);
+        // Get.offNamedUntil(Routes.LOGIN, (route) => route.isFirst);
         Restart.restartApp();
       }
     });

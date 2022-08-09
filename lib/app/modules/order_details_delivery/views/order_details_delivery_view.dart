@@ -8,6 +8,7 @@ import 'package:carebea/app/utils/widgets/custom_radio_button.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 
@@ -216,7 +217,7 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                         height: 10,
                       ),
                       Table(
-                        columnWidths: {0: FlexColumnWidth(7), 1: FlexColumnWidth(1), 2: FlexColumnWidth(1)},
+                        columnWidths: {0: FlexColumnWidth(8), 1: FlexColumnWidth(2), 2: FlexColumnWidth(2)},
                         border: TableBorder.all(width: 0, color: Colors.transparent),
                         children: [
                           TableRow(children: [
@@ -300,6 +301,8 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
       child: CustomButton(
         title: 'Order Delivered',
         onTap: () {
+          controller.collectedAmountEditingController.text =
+              (controller.orderListDetailResponse?.orderListResult?.history?.first.amountTotal ?? 0).toString();
           showDialog(
             context: context,
             builder: (ctx) => Material(
@@ -345,6 +348,12 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                             if ((val ?? "").isEmpty) {
                               return "Collected amount is required";
                             }
+                            if (double.parse(val ?? "0") <
+                                (controller.orderListDetailResponse?.orderListResult?.history?.first.amountTotal ??
+                                    0)) {
+                              return "Collected amount can't be less than total";
+                            }
+
                             return null;
                           },
                           inputType: TextInputType.number,
@@ -366,6 +375,7 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                               ),
                               const SizedBox(height: 5),
                               CustomTextField(
+                                maxlength: 6,
                                 validaton: (val) {
                                   if (controller.selectedPaymentMethod.value.code != "CHEQ") {
                                     return null;
@@ -373,9 +383,14 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                                   if ((val ?? "").isEmpty) {
                                     return "Cheque No is required";
                                   }
+                                  if ((val ?? "").length == 6) {
+                                    return "Cheque No should be 6 digits";
+                                  }
                                   return null;
                                 },
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 textcontroller: controller.cheqNoController,
+                                inputType: TextInputType.number,
                               ),
                             ],
                           );

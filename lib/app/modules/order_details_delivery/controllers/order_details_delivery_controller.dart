@@ -30,10 +30,14 @@ class OrderDetailsDeliveryController extends GetxController {
         await orderListRepo.orderDetailsDelivery(driverId: SharedPrefs.getUserId(), orderId: orderId);
     if ((orderListDetailResponse?.orderListResult?.paymentMethods ?? []).isNotEmpty) {
       if (orderListDetailResponse?.orderListResult?.history?.first.paymentMethod != null) {
-        selectedPaymentMethod = orderListDetailResponse!.orderListResult!.paymentMethods!
-            .firstWhere(
-                (element) => element.id == orderListDetailResponse!.orderListResult!.history!.first.paymentMethod!)
-            .obs;
+        try {
+          selectedPaymentMethod = orderListDetailResponse!.orderListResult!.paymentMethods!
+              .firstWhere(
+                  (element) => element.id == orderListDetailResponse!.orderListResult!.history!.first.paymentMethod!)
+              .obs;
+        } catch (e) {
+          selectedPaymentMethod = (orderListDetailResponse!.orderListResult!.paymentMethods!.first).obs;
+        }
       } else {
         selectedPaymentMethod = (orderListDetailResponse!.orderListResult!.paymentMethods!.first).obs;
       }
@@ -48,8 +52,7 @@ class OrderDetailsDeliveryController extends GetxController {
         driverId: SharedPrefs.getUserId(),
         paymentMethod: selectedPaymentMethod.value.code,
         collectedAmount: collectedAmountEditingController.text,
-        cheqNo: cheqNoController.text
-        );
+        cheqNo: cheqNoController.text);
     if (res.result?.status ?? false) {
       Get.back();
       Get.toNamed(Routes.DELIVERY_INVOICE_DETAILS,

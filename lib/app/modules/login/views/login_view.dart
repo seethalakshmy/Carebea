@@ -72,29 +72,26 @@ class LoginView extends GetView<LoginController> {
                           const SizedBox(
                             height: 10,
                           ),
-                          Container(
-                            height: 50,
-                            width: MediaQuery.of(context).size.width * .85,
-                            color: Colors.white,
-                            child: TextFormField(
-                                keyboardType: TextInputType.emailAddress,
-                                inputFormatters: [FilteringTextInputFormatter.deny(RegExp(emojiRegexp))],
-                                controller: userController,
-                                decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                    enabledBorder: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                    contentPadding: EdgeInsets.only(left: 5)),
-                                cursorColor: Colors.black,
-                                validator: (value) {
-                                  userController.text.trim();
-                                  if (value == null || value.trim().isEmpty) {
-                                    return 'Username can\'t be empty';
-                                  }
-                                  return null;
-                                },
-                                onChanged: (value) => controller.username = value.trim()),
-                          ),
+                          TextFormField(
+                              keyboardType: TextInputType.emailAddress,
+                              inputFormatters: [FilteringTextInputFormatter.deny(RegExp(emojiRegexp))],
+                              controller: userController,
+                              decoration: const InputDecoration(
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: InputBorder.none,
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  contentPadding: EdgeInsets.only(left: 5)),
+                              cursorColor: Colors.black,
+                              validator: (value) {
+                                userController.text.trim();
+                                if (value == null || value.trim().isEmpty) {
+                                  return 'Username can\'t be empty';
+                                }
+                                return null;
+                              },
+                              onChanged: (value) => controller.username = value.trim()),
                           const SizedBox(
                             height: 20,
                           ),
@@ -105,26 +102,23 @@ class LoginView extends GetView<LoginController> {
                           const SizedBox(
                             height: 10,
                           ),
-                          Container(
-                            height: 50,
-                            width: MediaQuery.of(context).size.width * .85,
-                            color: Colors.white,
-                            child: TextFormField(
-                              obscureText: true,
-                              decoration: const InputDecoration(
-                                  border: InputBorder.none,
-                                  enabledBorder: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  contentPadding: EdgeInsets.only(left: 5)),
-                              cursorColor: Colors.black,
-                              validator: (value) {
-                                if (value == null || value.trim().isEmpty) {
-                                  return 'Password can\'t be empty';
-                                }
-                                return null;
-                              },
-                              onChanged: (value) => controller.password = value.trim(),
-                            ),
+                          TextFormField(
+                            obscureText: true,
+                            decoration: const InputDecoration(
+                                fillColor: Colors.white,
+                                filled: true,
+                                border: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                contentPadding: EdgeInsets.only(left: 5)),
+                            cursorColor: Colors.black,
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return 'Password can\'t be empty';
+                              }
+                              return null;
+                            },
+                            onChanged: (value) => controller.password = value.trim(),
                           ),
                           const SizedBox(
                             height: 10,
