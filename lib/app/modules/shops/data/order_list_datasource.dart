@@ -14,7 +14,8 @@ class OrderDataSource {
   ApiService apiService = ApiService();
 
   Future<OrderListResponse> orderList(
-      {required int salesPersonId,
+      { int? salesPersonId,
+        int? driverId,
       String? orderType,
       int? orderId,
       int? shopId,
@@ -22,8 +23,14 @@ class OrderDataSource {
       String? query,
       String? filterName}) async {
     Map<String, dynamic> body = {
-      'sales_person_id': salesPersonId,
+
     };
+    if(salesPersonId != null){
+      body.addAll({'sales_person_id':salesPersonId});
+    }
+    if(driverId != null){
+      body.addAll({'driver_id':driverId.toString()});
+    }
     if (shopId != null) {
       body.addAll({'shop_id': shopId});
     }
