@@ -4,6 +4,6 @@ import 'package:carebea/app/modules/order_details_delivery/data/order_details_de
 class OrderDetailsRepository {
   final OrderDetailsDeliveryDataSource _dataSource = OrderDetailsDeliveryDataSource();
 
-   Future<UpdateOrderStatusResponse>  confirmOrder({int? salesPersonId, int? orderId, String? collectedAmount, String? paymentMethod,String? cheqNo}) =>
-      _dataSource.confirmOrder(salesPersonId!, orderId!, collectedAmount??"", paymentMethod!,cheqNo);
+   Future<UpdateOrderStatusResponse>  confirmOrder({int? salesPersonId,int?driverId, int? orderId, String? collectedAmount, String? paymentMethod,String? cheqNo}) =>
+      _dataSource.confirmOrder(salesPersonId,driverId, orderId!, collectedAmount??"", paymentMethod!,cheqNo);
 }

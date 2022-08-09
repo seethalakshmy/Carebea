@@ -47,7 +47,7 @@ class DeliveryHomeController extends GetxController {
   
   fetchDeliveryOrders(String? filterId) async{
     isDeliveryOrdersLoading(true);
-    orderListResponse = await orderListRepo.orderListDelivery(salesPersonId: SharedPrefs.getUserId()!,filterName: "Category",filterId: filterId );
+    orderListResponse = await orderListRepo.orderListDelivery(driverId: SharedPrefs.getUserId()!,filterName: "Category",filterId: filterId );
     if (orderListResponse?.orderListResult?.status ?? false) {
       orders = orderListResponse?.orderListResult?.history ?? [];
     } else {
@@ -62,7 +62,7 @@ class DeliveryHomeController extends GetxController {
   fetchDeliveryAllOrders()async{
     isDeliveryOrdersLoading(true);
 
-    allOrderListResponse = await orderListRepo.allOrdersDelivery(salesPersonId:SharedPrefs.getUserId()!);
+    allOrderListResponse = await orderListRepo.allOrdersDelivery(driverId:SharedPrefs.getUserId()!);
     if ( allOrderListResponse?.orderListResult?.status ?? false) {
       orders =  allOrderListResponse?.orderListResult?.history ?? [];
     } else {
