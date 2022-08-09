@@ -39,9 +39,13 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
                 "order_id": qr.id,
               });
             }
+            else{
+              showSnackBar("Invalid QrCode");
+
+            }
           } catch (e, s) {
             developer.log('error', error: e, stackTrace: s);
-            showSnackBar("Please scan again");
+            showSnackBar("Invalid QrCode");
           }
         }),
         // appBar: AppBar(

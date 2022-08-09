@@ -32,7 +32,7 @@ class DeliveryOrderListView extends GetView<DeliveryHomeController> {
                         horizontal: 5, vertical: 5),
                     child: InkWell(
                       onTap: () {
-                        Get.toNamed(Routes.ORDER_HISTORY_DETAILS,
+                        Get.toNamed(Routes.ORDER_DETAILS_DELIVERY,
                             arguments: {
                               'order_id': controller.orders[index].id
                             });

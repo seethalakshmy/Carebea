@@ -138,7 +138,7 @@ class CheckoutView extends StatelessWidget {
                       onChanged: (value) {
                         createOrderController.selectedPaymentMethod(value);
                       },
-                      label: e.name,
+                      label:e.name,
                     );
                   }),
                 )

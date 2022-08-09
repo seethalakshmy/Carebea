@@ -2,6 +2,7 @@ import 'package:carebea/app/utils/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 
@@ -34,7 +35,7 @@ void main() async {
 
   ///for background
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  runApp(
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) =>  runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Application",
@@ -66,5 +67,7 @@ void main() async {
         ],
       ),
     ),
-  );
+  ) );
+
+
 }

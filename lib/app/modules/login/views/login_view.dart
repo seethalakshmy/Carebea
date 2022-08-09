@@ -104,6 +104,7 @@ class LoginView extends GetView<LoginController> {
                           ),
                           TextFormField(
                             obscureText: true,
+                            inputFormatters: [FilteringTextInputFormatter.deny(RegExp(" "))],
                             decoration: const InputDecoration(
                                 fillColor: Colors.white,
                                 filled: true,
