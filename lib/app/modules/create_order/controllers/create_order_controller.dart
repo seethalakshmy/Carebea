@@ -38,9 +38,17 @@ class CreateOrderController extends GetxController {
   final count = 0.obs;
   @override
   void onInit() {
+    clearProducts();
     fetchShops();
-    fetchProducts();
     super.onInit();
+  }
+
+  clearProducts() async {
+    selectedProducts.clear();
+    _products.clear();
+    productList.clear();
+    cartproducts.clear();
+    totalCartCost(0);
   }
 
   Future<bool> onWillpopClose() async {
