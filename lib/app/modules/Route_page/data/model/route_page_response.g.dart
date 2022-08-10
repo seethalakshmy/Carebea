@@ -44,7 +44,7 @@ RouteList _$RouteListFromJson(Map<String, dynamic> json) => RouteList(
       routeName: json['route_name'] as String?,
       userAddress: json['user_address'] == null
           ? null
-          : UserAddress.fromJson(json['user_address'] as Map<String, dynamic>),
+          : Address.fromJson(json['user_address'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$RouteListToJson(RouteList instance) => <String, dynamic>{
@@ -53,21 +53,4 @@ Map<String, dynamic> _$RouteListToJson(RouteList instance) => <String, dynamic>{
       'user_address': instance.userAddress,
     };
 
-UserAddress _$UserAddressFromJson(Map<String, dynamic> json) => UserAddress(
-      localArea: json['local_area'] as String?,
-      street2: json['street2'] as String?,
-      district: json['district'] as String?,
-      zip: json['zip'] as String?,
-      stateName: json['state_name'] as String?,
-      countryName: json['country_name'] as String?,
-    );
 
-Map<String, dynamic> _$UserAddressToJson(UserAddress instance) =>
-    <String, dynamic>{
-      'local_area': instance.localArea,
-      'street2': instance.street2,
-      'district': instance.district,
-      'zip': instance.zip,
-      'state_name': instance.stateName,
-      'country_name': instance.countryName,
-    };

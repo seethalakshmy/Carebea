@@ -19,7 +19,6 @@ import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
   ProfileView({Key? key}) : super(key: key);
-  ProfileController profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,7 @@ class ProfileView extends GetView<ProfileController> {
               ),
               Expanded(
                 child: Obx(() {
-                  if (profileController.isProfileLoaded.value) {
+                  if (controller.isProfileLoaded.value) {
                     return Align(alignment: Alignment.center, child: circularProgressIndicator(context));
                   }
                   return Column(
@@ -48,7 +47,7 @@ class ProfileView extends GetView<ProfileController> {
                       Center(
                         child: CircleAvatar(
                           foregroundImage:
-                              NetworkImage(profileController.profileResponse?.profileResponseResult?.imgUrl ?? ""),
+                              NetworkImage(controller.profileResponse?.profileResponseResult?.imgUrl ?? ""),
                           backgroundColor: Colors.grey,
                           radius: 50,
                           child: const Icon(
@@ -66,7 +65,7 @@ class ProfileView extends GetView<ProfileController> {
                         style: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.grey),
                       ),
                       Text(
-                        profileController.profileResponse!.profileResponseResult!.name!,
+                        controller.profileResponse!.profileResponseResult!.name!,
                         style: customTheme(context).regular.copyWith(fontSize: 14),
                       ),
                       const SizedBox(
@@ -88,7 +87,7 @@ class ProfileView extends GetView<ProfileController> {
                         style: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.grey),
                       ),
                       Text(
-                        profileController.profileResponse!.profileResponseResult!.phone!,
+                        controller.profileResponse!.profileResponseResult!.phone!,
                         style: customTheme(context).regular.copyWith(fontSize: 14),
                       ),
                       const Spacer(),
@@ -142,7 +141,7 @@ class ProfileView extends GetView<ProfileController> {
         SharedPrefs.setAccessToken(accessToken!);
         SharedPrefs.setRefreshToken(refreshToken!);
 
-        // Get.offAllNamed(Routes.APP_START_UP);
+        // Get.offNamedUntil(Routes.LOGIN, (route) => route.isFirst);
         Restart.restartApp();
       }
     });

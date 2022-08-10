@@ -173,7 +173,7 @@ class AddProductsView extends StatelessWidget {
                 size: 15,
               )),
           Text(
-            " ${(Get.arguments['shop'] as ShopList).name}",
+            " ${(Get.arguments['shop'] as ShopList).name} ${(Get.arguments['shop'] as ShopList).lastName ?? ""}",
             style: customTheme(context).medium.copyWith(fontSize: 14),
           ),
         ],

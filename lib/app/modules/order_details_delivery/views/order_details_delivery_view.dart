@@ -6,8 +6,10 @@ import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:carebea/app/utils/widgets/custom_radio_button.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
+import 'package:carebea/app/utils/widgets/map_location_view.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 
@@ -26,15 +28,15 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: appBar(context),
-        floatingActionButton: Obx(() {
-          if (controller.isOrderDetailsLoading.value ||
-              (controller.orderListDetailResponse?.orderListResult?.history ?? []).isEmpty) {
-            return const SizedBox.shrink();
-          }
+        // floatingActionButton: Obx(() {
+        //   if (controller.isOrderDetailsLoading.value ||
+        //       (controller.orderListDetailResponse?.orderListResult?.history ?? []).isEmpty) {
+        //     return const SizedBox.shrink();
+        //   }
 
-          return openKeyboardGuard(context, child: _floatingActionButton(context));
-        }),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        //   return openKeyboardGuard(context, child: _floatingActionButton(context));
+        // }),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: Obx(() {
           if (controller.isOrderDetailsLoading.value) {
             return Center(
@@ -283,6 +285,13 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                         '₹${order.amountTotal!.toStringAsFixed(2)}',
                         style: customTheme(context).medium.copyWith(fontSize: 16),
                       ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      _floatingActionButton(context),
+                      SizedBox(
+                        height: 30,
+                      ),
                     ],
                   ),
                 ),
@@ -295,12 +304,15 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
   Widget _floatingActionButton(BuildContext context) {
     var paymentMethods = controller.orderListDetailResponse!.orderListResult!.paymentMethods;
     GlobalKey<FormState> _formState = GlobalKey<FormState>();
+
     if (controller.orderListDetailResponse!.orderListResult?.history?.first.status == "Processing") {
       return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(0),
         child: CustomButton(
           title: 'Order Delivered',
           onTap: () {
+            controller.collectedAmountEditingController.text =
+                (controller.orderListDetailResponse?.orderListResult?.history?.first.amountTotal ?? 0).toString();
             showDialog(
               context: context,
               builder: (ctx) => Material(
@@ -318,36 +330,27 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                         children: [
                           Text(
                             "Payment Method",
-                            style: customTheme(context)
-                                .medium
-                                .copyWith(fontSize: 14),
+                            style: customTheme(context).medium.copyWith(fontSize: 14),
                           ),
                           const SizedBox(height: 10),
                           Obx(() {
-                            if (controller.selectedPaymentMethod.value.id !=
-                                null) {}
+                            if (controller.selectedPaymentMethod.value.id != null) {}
                             return Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: (paymentMethods ?? [])
-                                    .map((e) =>
-                                        CustomRadioButton<PaymentMethod>(
-                                            label: e.name,
-                                            groupValue: controller
-                                                .selectedPaymentMethod.value,
-                                            value: e,
-                                            onChanged: (val) {
-                                              controller
-                                                  .selectedPaymentMethod(e);
-                                            }))
+                                    .map((e) => CustomRadioButton<PaymentMethod>(
+                                        label: e.name,
+                                        groupValue: controller.selectedPaymentMethod.value,
+                                        value: e,
+                                        onChanged: (val) {
+                                          controller.selectedPaymentMethod(e);
+                                        }))
                                     .toList());
                           }),
                           const SizedBox(height: 13),
                           Text(
                             "Collected amount",
-                            style: customTheme(context)
-                                .regular
-                                .copyWith(fontSize: 11),
+                            style: customTheme(context).regular.copyWith(fontSize: 11),
                           ),
                           const SizedBox(height: 5),
                           CustomTextField(
@@ -355,15 +358,19 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                               if ((val ?? "").isEmpty) {
                                 return "Collected amount is required";
                               }
+                              if (double.parse(val ?? "0") <
+                                  (controller.orderListDetailResponse?.orderListResult?.history?.first.amountTotal ??
+                                      0)) {
+                                return "Collected amount can't be less than total";
+                              }
+
                               return null;
                             },
                             inputType: TextInputType.number,
-                            textcontroller:
-                                controller.collectedAmountEditingController,
+                            textcontroller: controller.collectedAmountEditingController,
                           ),
                           Obx(() {
-                            if (controller.selectedPaymentMethod.value.code !=
-                                "CHEQ") {
+                            if (controller.selectedPaymentMethod.value.code != "CHEQ") {
                               return const SizedBox.shrink();
                             }
 
@@ -374,24 +381,26 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                                 const SizedBox(height: 13),
                                 Text(
                                   "Cheque No",
-                                  style: customTheme(context)
-                                      .regular
-                                      .copyWith(fontSize: 11),
+                                  style: customTheme(context).regular.copyWith(fontSize: 11),
                                 ),
                                 const SizedBox(height: 5),
                                 CustomTextField(
+                                  maxlength: 6,
                                   validaton: (val) {
-                                    if (controller
-                                            .selectedPaymentMethod.value.code !=
-                                        "CHEQ") {
+                                    if (controller.selectedPaymentMethod.value.code != "CHEQ") {
                                       return null;
                                     }
                                     if ((val ?? "").isEmpty) {
                                       return "Cheque No is required";
                                     }
+                                    if ((val ?? "").length != 6) {
+                                      return "Invalid Cheque No";
+                                    }
                                     return null;
                                   },
+                                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                   textcontroller: controller.cheqNoController,
+                                  inputType: TextInputType.number,
                                 ),
                               ],
                             );
@@ -418,6 +427,7 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
         ),
       );
     }
+
     return const SizedBox.shrink();
   }
 }

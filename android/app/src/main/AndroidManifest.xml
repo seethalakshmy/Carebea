@@ -34,7 +34,7 @@
         <activity android:name="com.djgeo.majascan.g_scanner.QrCodeScannerActivity"/>
         
          <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyCKSnCRnUFd2m6kfegc0PSrwugVxuXxz0U"/>
+               android:value="AIzaSyBvBTxS_oLdwjMC7Hz9FJPgxCu9KxIM1Rs"/>
 
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

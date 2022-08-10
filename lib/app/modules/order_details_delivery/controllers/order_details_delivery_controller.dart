@@ -1,4 +1,5 @@
 import 'package:carebea/app/modules/create_order/model/create_order.dart';
+import 'package:carebea/app/modules/delivery_home/controllers/delivery_home_controller.dart';
 import 'package:carebea/app/modules/order_details_delivery/data/repository/order_details_repository.dart';
 import 'package:carebea/app/modules/shops/models/order_list_model.dart';
 import 'package:carebea/app/modules/shops/repo/order_list_repo.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OrderDetailsDeliveryController extends GetxController {
+  DeliveryHomeController _deliveryHomeController = Get.find();
   OrderListRepo orderListRepo = OrderListRepo();
   OrderDetailsRepository orderDetailsRepository = OrderDetailsRepository();
   OrderListResponse? orderListDetailResponse;
@@ -30,10 +32,14 @@ class OrderDetailsDeliveryController extends GetxController {
         await orderListRepo.orderDetailsDelivery(driverId: SharedPrefs.getUserId(), orderId: orderId);
     if ((orderListDetailResponse?.orderListResult?.paymentMethods ?? []).isNotEmpty) {
       if (orderListDetailResponse?.orderListResult?.history?.first.paymentMethod != null) {
-        selectedPaymentMethod = orderListDetailResponse!.orderListResult!.paymentMethods!
-            .firstWhere(
-                (element) => element.id == orderListDetailResponse!.orderListResult!.history!.first.paymentMethod!)
-            .obs;
+        try {
+          selectedPaymentMethod = orderListDetailResponse!.orderListResult!.paymentMethods!
+              .firstWhere(
+                  (element) => element.id == orderListDetailResponse!.orderListResult!.history!.first.paymentMethod!)
+              .obs;
+        } catch (e) {
+          selectedPaymentMethod = (orderListDetailResponse!.orderListResult!.paymentMethods!.first).obs;
+        }
       } else {
         selectedPaymentMethod = (orderListDetailResponse!.orderListResult!.paymentMethods!.first).obs;
       }
@@ -48,11 +54,11 @@ class OrderDetailsDeliveryController extends GetxController {
         driverId: SharedPrefs.getUserId(),
         paymentMethod: selectedPaymentMethod.value.code,
         collectedAmount: collectedAmountEditingController.text,
-        cheqNo: cheqNoController.text
-        );
+        cheqNo: cheqNoController.text);
     if (res.result?.status ?? false) {
       Get.back();
-      Get.toNamed(Routes.DELIVERY_INVOICE_DETAILS,
+      _deliveryHomeController.fetchDeliveryHomePageData();
+      Get.offNamed(Routes.DELIVERY_INVOICE_DETAILS,
           arguments: {"orderId": orderListDetailResponse?.orderListResult?.history?.first.id});
     } else {
       showSnackBar(res.result?.message ?? "Something happend, Please try again!");

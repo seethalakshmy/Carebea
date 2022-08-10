@@ -634,6 +634,7 @@ class AddShopView extends GetView<AddShopController> {
                     height: 5,
                   ),
                   CustomTextField(
+                    enabled: !(Get.arguments['isEdit'] ?? false),
                     textcontroller: controller.openingBalanceController,
                   ),
                   const SizedBox(

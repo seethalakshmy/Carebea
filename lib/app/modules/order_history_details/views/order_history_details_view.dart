@@ -4,6 +4,7 @@ import 'package:carebea/app/utils/shared_prefs.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 
@@ -348,6 +349,9 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                       ),
                     );
                   }),
+                  SizedBox(
+                    height: 70,
+                  )
                 ],
               ),
             ),
@@ -367,6 +371,8 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
         child: CustomButton(
           title: 'Order Delivered',
           onTap: () {
+            controller.collectedAmountEditingController.text =
+                (controller.orderListDetailResponse?.orderListResult?.history?.first.amountTotal ?? 0).toString();
             showDialog(
               context: context,
               builder: (ctx) => Material(
@@ -412,6 +418,11 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                               if ((val ?? "").isEmpty) {
                                 return "Collected amount is required";
                               }
+                              if (double.parse(val ?? "0") <
+                                  (controller.orderListDetailResponse?.orderListResult?.history?.first.amountTotal ??
+                                      0)) {
+                                return "Collected amount can't be less than total";
+                              }
                               return null;
                             },
                             inputType: TextInputType.number,
@@ -437,12 +448,18 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                     if (controller.selectedPaymentMethod.value.code != "CHEQ") {
                                       return null;
                                     }
-                                    if ((val ?? "").isEmpty) {
+                                    if ((val ?? "").trim().isEmpty) {
                                       return "Cheque No is required";
+                                    }
+                                    if ((val ?? "").length != 6) {
+                                      return "Invalid Cheque No";
                                     }
                                     return null;
                                   },
+                                  maxlength: 6,
+                                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                   textcontroller: controller.cheqNoController,
+                                  inputType: TextInputType.number,
                                 ),
                               ],
                             );

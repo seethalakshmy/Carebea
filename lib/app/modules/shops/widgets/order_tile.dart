@@ -95,7 +95,7 @@ class OrderTile extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Table(
-                columnWidths: {0: FlexColumnWidth(7), 1: FlexColumnWidth(1), 2: FlexColumnWidth(1)},
+                columnWidths: {0: FlexColumnWidth(8), 1: FlexColumnWidth(2), 2: FlexColumnWidth(2)},
                 border: TableBorder.all(width: 0, color: Colors.transparent),
                 children: [
                   TableRow(children: [

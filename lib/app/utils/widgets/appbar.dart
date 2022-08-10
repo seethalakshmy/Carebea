@@ -6,7 +6,7 @@ import 'package:carebea/app/utils/widgets/scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-AppBar appBar(BuildContext context, {ValueChanged<String>? onScanned, bool showScanner = false, bool showProfile = false}) {
+AppBar appBar(BuildContext context, {ValueChanged<String>? onScanned, bool showScanner = false, bool showProfile = false,String? imageUrl}) {
   if (showScanner && onScanned == null) {
     throw "for showing scanner it requires onScanned not be null";
   }
@@ -27,8 +27,9 @@ AppBar appBar(BuildContext context, {ValueChanged<String>? onScanned, bool showS
           onTap: (){
             Get.toNamed(Routes.PROFILE);
           },
-          child: const CircleAvatar(
-            child: Icon(Icons.person),
+          child:  CircleAvatar(
+            foregroundImage: NetworkImage(imageUrl??""),
+            child:const Icon(Icons.person),
             // foregroundImage: AssetImage(Assets.profile),
           ),
         ),
