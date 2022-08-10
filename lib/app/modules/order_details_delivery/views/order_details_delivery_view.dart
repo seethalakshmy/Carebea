@@ -6,6 +6,7 @@ import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:carebea/app/utils/widgets/custom_radio_button.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
+import 'package:carebea/app/utils/widgets/map_location_view.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,15 +28,15 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: appBar(context),
-        floatingActionButton: Obx(() {
-          if (controller.isOrderDetailsLoading.value ||
-              (controller.orderListDetailResponse?.orderListResult?.history ?? []).isEmpty) {
-            return const SizedBox.shrink();
-          }
+        // floatingActionButton: Obx(() {
+        //   if (controller.isOrderDetailsLoading.value ||
+        //       (controller.orderListDetailResponse?.orderListResult?.history ?? []).isEmpty) {
+        //     return const SizedBox.shrink();
+        //   }
 
-          return openKeyboardGuard(context, child: _floatingActionButton(context));
-        }),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        //   return openKeyboardGuard(context, child: _floatingActionButton(context));
+        // }),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: Obx(() {
           if (controller.isOrderDetailsLoading.value) {
             return Center(
@@ -284,6 +285,13 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                         '₹${order.amountTotal!.toStringAsFixed(2)}',
                         style: customTheme(context).medium.copyWith(fontSize: 16),
                       ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      _floatingActionButton(context),
+                      SizedBox(
+                        height: 30,
+                      ),
                     ],
                   ),
                 ),
@@ -299,7 +307,7 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
 
     if (controller.orderListDetailResponse!.orderListResult?.history?.first.status == "Processing") {
       return Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(0),
         child: CustomButton(
           title: 'Order Delivered',
           onTap: () {
@@ -385,8 +393,8 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                                     if ((val ?? "").isEmpty) {
                                       return "Cheque No is required";
                                     }
-                                    if ((val ?? "").length == 6) {
-                                      return "Cheque No should be 6 digits";
+                                    if ((val ?? "").length != 6) {
+                                      return "Invalid Cheque No";
                                     }
                                     return null;
                                   },

@@ -1,3 +1,4 @@
+import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
@@ -96,10 +97,10 @@ class RoutePageView extends GetView<RoutePageController> {
                                         const SizedBox(
                                           width: 5,
                                         ),
-                                        // Text(
-                                        //   controller.routeList[index].a?.split('\n').join(" ") ?? '',
-                                        //   style: customTheme(context).medium.copyWith(fontSize: 12),
-                                        // ),
+                                        Text(
+                                          getFullAddress(controller.routeList[index].userAddress),
+                                          style: customTheme(context).medium.copyWith(fontSize: 12),
+                                        ),
                                       ],
                                     ),
                                   ),

@@ -4,6 +4,7 @@ import 'package:carebea/app/utils/shared_prefs.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 
@@ -348,6 +349,9 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                       ),
                     );
                   }),
+                  SizedBox(
+                    height: 70,
+                  )
                 ],
               ),
             ),
@@ -444,12 +448,18 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                     if (controller.selectedPaymentMethod.value.code != "CHEQ") {
                                       return null;
                                     }
-                                    if ((val ?? "").isEmpty) {
+                                    if ((val ?? "").trim().isEmpty) {
                                       return "Cheque No is required";
+                                    }
+                                    if ((val ?? "").length != 6) {
+                                      return "Invalid Cheque No";
                                     }
                                     return null;
                                   },
+                                  maxlength: 6,
+                                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                   textcontroller: controller.cheqNoController,
+                                  inputType: TextInputType.number,
                                 ),
                               ],
                             );

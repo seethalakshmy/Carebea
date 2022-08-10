@@ -80,10 +80,16 @@ class BottomNavBarView extends GetView<DashboardController> {
         InkWell(
           onTap: () => controller.bottomNavViewChange(3),
           child: Column(children: [
-            Icon(
-              Icons.account_circle,
-              size: 30,
-              color: controller.currentScreenIndex.value == 3 ? customTheme(context).primary : const Color(0xff929292),
+            CircleAvatar(
+              radius: 15,
+              foregroundImage:
+                  NetworkImage(controller.profileController.profileResponse?.profileResponseResult?.imgUrl ?? ""),
+              child: Icon(
+                Icons.account_circle,
+                size: 30,
+                color:
+                    controller.currentScreenIndex.value == 3 ? customTheme(context).primary : const Color(0xff929292),
+              ),
             ),
             Text(
               'Profile',

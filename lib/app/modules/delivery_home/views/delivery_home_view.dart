@@ -30,157 +30,160 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: appBar(context, showProfile: true, showScanner: true, onScanned: (val) {
-          try {
-            var qr = QrResponse.fromJson(json.decode(val.replaceAll("\'", "\"")));
-            if (qr.type == 2) {
-              Get.toNamed(Routes.ORDER_DETAILS_DELIVERY, arguments: {
-                "order_id": qr.id,
-              });
-            }
-            else{
+    return Obx(() {
+      if (controller.isDeliveryHomePageDataLoaded.value) {}
+      return Scaffold(
+          appBar: appBar(context,
+              showProfile: true,
+              showScanner: true,
+              imageUrl: controller.profileController.profileResponse?.profileResponseResult?.imgUrl, onScanned: (val) {
+            try {
+              var qr = QrResponse.fromJson(json.decode(val.replaceAll("\'", "\"")));
+              if (qr.type == 2) {
+                Get.toNamed(Routes.ORDER_DETAILS_DELIVERY, arguments: {
+                  "order_id": qr.id,
+                });
+              } else {
+                showSnackBar("Invalid QrCode");
+              }
+            } catch (e, s) {
+              developer.log('error', error: e, stackTrace: s);
               showSnackBar("Invalid QrCode");
-
             }
-          } catch (e, s) {
-            developer.log('error', error: e, stackTrace: s);
-            showSnackBar("Invalid QrCode");
-          }
-        }),
-        // appBar: AppBar(
-        //   title: Image.asset(
-        //     Assets.assetsLogo,
-        //     scale: 3,
-        //   ),
-        //   actions: [
-        //     Scanner(
-        //       onScanned: () {},
-        //     ),
-        //     const SizedBox(width: 10),
-        //     CircleAvatar(),
-        //     const SizedBox(width: 10),
-        //   ],
-        // ),
-        body: Obx(() {
-          if (!controller.isDeliveryHomePageDataLoaded.value) {
-            return Center(
-              child: circularProgressIndicator(context),
-            );
-          }
-          return ListView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 15.0, top: 15, bottom: 25, right: 15.0),
-                child: Text(
-                  "Dashboard",
-                  style: customTheme(context).medium,
+          }),
+          // appBar: AppBar(
+          //   title: Image.asset(
+          //     Assets.assetsLogo,
+          //     scale: 3,
+          //   ),
+          //   actions: [
+          //     Scanner(
+          //       onScanned: () {},
+          //     ),
+          //     const SizedBox(width: 10),
+          //     CircleAvatar(),
+          //     const SizedBox(width: 10),
+          //   ],
+          // ),
+          body: Obx(() {
+            if (!controller.isDeliveryHomePageDataLoaded.value) {
+              return Center(
+                child: circularProgressIndicator(context),
+              );
+            }
+            return ListView(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 15.0, top: 15, bottom: 25, right: 15.0),
+                  child: Text(
+                    "Dashboard",
+                    style: customTheme(context).medium,
+                  ),
                 ),
-              ),
-              Padding(
+                Padding(
+                    padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+                    child: CustomTextField(
+                      fillcolor: customTheme(context).textFormFieldColor,
+                      icon: Icon(CupertinoIcons.search),
+                      hint: "Search for shops, orders",
+                    )),
+                const SizedBox(height: 30),
+                Padding(
                   padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-                  child: CustomTextField(
-                    fillcolor: customTheme(context).textFormFieldColor,
-                    icon: Icon(CupertinoIcons.search),
-                    hint: "Search for shops, orders",
-                  )),
-              const SizedBox(height: 30),
-              Padding(
-                padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      onTap:(){
-                        controller.fetchDeliveryOrders("1");
-                        Get.to(()=>DeliveryOrderListView());
-                      },
-                      child: HomeTile(
-                        asset: Assets.deliveryHomeIcon2,
-                        title: "Today's Delivery",
-                        count: controller.deliveryHomePageResponse!.deliveryHomePageResult!.todaysDelivery!,
-                        color: Color(0xffD8375C),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    InkWell(
-                      onTap: (){
-                        controller.fetchDeliveryOrders("2");
-                        Get.to(()=>DeliveryOrderListView());
-                      },
-                      child: HomeTile(
-                        asset: Assets.ordersHomeIcon,
-                        title: "Total Orders Delivered",
-                        count: controller.deliveryHomePageResponse!.deliveryHomePageResult!.totalOrdersDelivered!,
-                        color: Color(0xffF3674F),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              Center(
-                child: InkWell(
-                  onTap: (){
-                    controller.fetchDeliveryAllOrders();
-                    Get.to(()=>DeliveryOrderListView());
-                  },
-                  child: HomeTile(
-                    asset: Assets.ordersHomeIcon,
-                    title: "Order History",
-                    count: controller.deliveryHomePageResponse!.deliveryHomePageResult!.orderHistory!,
-                    color: Color(0xff00B2BE),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 30),
-              if ((controller.deliveryHomePageResponse?.deliveryHomePageResult?.upcomingDeliveryList ?? []).isNotEmpty)
-                Container(
-                  padding: const EdgeInsets.all(25),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-                    color: Color(0xffF8F4F2),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        "Orders to be delivered(${controller.deliveryHomePageResponse!.deliveryHomePageResult!.upcomingDeliveryList!.length})",
-                        style: customTheme(context).medium.copyWith(fontSize: 14),
-                      ),
-                      SizedBox(height: 10),
-                      ListView.separated(
-                        shrinkWrap: true,
-                        itemCount:
-                            controller.deliveryHomePageResponse!.deliveryHomePageResult!.upcomingDeliveryList!.length,
-                        separatorBuilder: (_, __) => Container(
-                          height: 1,
-                          color: const Color(0xffE1E1E1),
+                      InkWell(
+                        onTap: () {
+                          controller.fetchDeliveryOrders("1");
+                          Get.to(() => DeliveryOrderListView());
+                        },
+                        child: HomeTile(
+                          asset: Assets.deliveryHomeIcon2,
+                          title: "Today's Delivery",
+                          count: controller.deliveryHomePageResponse!.deliveryHomePageResult!.todaysDelivery!,
+                          color: Color(0xffD8375C),
                         ),
-                        itemBuilder: (context, index) => InkWell(
-                            onTap: () {
-                              Get.toNamed(Routes.ORDER_DETAILS_DELIVERY, arguments: {
-                                "order_id": controller.deliveryHomePageResponse!.deliveryHomePageResult!
-                                    .upcomingDeliveryList![index].orderId
-                              });
-                            },
-                            child: OrderDeliveryCard(
-                                order: controller
-                                    .deliveryHomePageResponse!.deliveryHomePageResult!.upcomingDeliveryList![index])),
                       ),
-                      // InkWell(
-                      //     onTap: () {
-                      //       Get.toNamed(Routes.ORDER_DETAILS_DELIVERY);
-                      //     },
-                      //     child: OrderDeliveryCard()),
-                      // SizedBox(height: 10),
-                      // OrderDeliveryCard()
+                      SizedBox(width: 10),
+                      InkWell(
+                        onTap: () {
+                          controller.fetchDeliveryOrders("2");
+                          Get.to(() => DeliveryOrderListView());
+                        },
+                        child: HomeTile(
+                          asset: Assets.ordersHomeIcon,
+                          title: "Total Orders Delivered",
+                          count: controller.deliveryHomePageResponse!.deliveryHomePageResult!.totalOrdersDelivered!,
+                          color: Color(0xffF3674F),
+                        ),
+                      ),
                     ],
                   ),
-                )
-            ],
-          );
-        }));
+                ),
+                const SizedBox(height: 10),
+                Center(
+                  child: InkWell(
+                    onTap: () {
+                      controller.fetchDeliveryAllOrders();
+                      Get.to(() => DeliveryOrderListView());
+                    },
+                    child: HomeTile(
+                      asset: Assets.ordersHomeIcon,
+                      title: "Order History",
+                      count: controller.deliveryHomePageResponse!.deliveryHomePageResult!.orderHistory!,
+                      color: Color(0xff00B2BE),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                if ((controller.deliveryHomePageResponse?.deliveryHomePageResult?.upcomingDeliveryList ?? [])
+                    .isNotEmpty)
+                  Container(
+                    padding: const EdgeInsets.all(25),
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                      color: Color(0xffF8F4F2),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Orders to be delivered(${controller.deliveryHomePageResponse!.deliveryHomePageResult!.upcomingDeliveryList!.length})",
+                          style: customTheme(context).medium.copyWith(fontSize: 14),
+                        ),
+                        SizedBox(height: 10),
+                        ListView.separated(
+                          shrinkWrap: true,
+                          itemCount:
+                              controller.deliveryHomePageResponse!.deliveryHomePageResult!.upcomingDeliveryList!.length,
+                          separatorBuilder: (_, __) => SizedBox(height: 10),
+                          physics: NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) => InkWell(
+                              onTap: () {
+                                Get.toNamed(Routes.ORDER_DETAILS_DELIVERY, arguments: {
+                                  "order_id": controller.deliveryHomePageResponse!.deliveryHomePageResult!
+                                      .upcomingDeliveryList![index].orderId
+                                });
+                              },
+                              child: OrderDeliveryCard(
+                                  order: controller
+                                      .deliveryHomePageResponse!.deliveryHomePageResult!.upcomingDeliveryList![index])),
+                        ),
+                        // InkWell(
+                        //     onTap: () {
+                        //       Get.toNamed(Routes.ORDER_DETAILS_DELIVERY);
+                        //     },
+                        //     child: OrderDeliveryCard()),
+                        // SizedBox(height: 10),
+                        // OrderDeliveryCard()
+                      ],
+                    ),
+                  )
+              ],
+            );
+          }));
+    });
   }
 }
 

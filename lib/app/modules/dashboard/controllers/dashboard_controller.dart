@@ -8,13 +8,13 @@ class DashboardController extends GetxController {
   final HomeController _homeController = Get.put(HomeController());
   final ShopsController _shopsController = Get.put(ShopsController());
   final OrdersController _ordersController = Get.put(OrdersController());
-  final ProfileController _profileController = Get.put(ProfileController());
+  final ProfileController profileController = Get.put(ProfileController());
 
   final currentScreenIndex = 0.obs;
   DateTime? backbuttonpressedTime;
   @override
   void onInit() {
-    _profileController.fetchProfileData();
+    profileController.fetchProfileData();
     super.onInit();
   }
 

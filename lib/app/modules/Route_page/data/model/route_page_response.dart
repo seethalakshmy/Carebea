@@ -1,3 +1,4 @@
+import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'route_page_response.g.dart';
@@ -50,35 +51,35 @@ class RouteList {
   @JsonKey(name: "route_name")
   final String? routeName;
   @JsonKey(name: "user_address")
-  final UserAddress? userAddress;
+  final Address? userAddress;
 
   factory RouteList.fromJson(Map<String, dynamic> json) => _$RouteListFromJson(json);
 
   Map<String, dynamic> toJson() => _$RouteListToJson(this);
 }
 
-@JsonSerializable()
-class UserAddress {
-  UserAddress({
-    this.localArea,
-    this.street2,
-    this.district,
-    this.zip,
-    this.stateName,
-    this.countryName,
-  });
+// @JsonSerializable()
+// class UserAddress {
+//   UserAddress({
+//     this.localArea,
+//     this.street2,
+//     this.district,
+//     this.zip,
+//     this.stateName,
+//     this.countryName,
+//   });
 
-  @JsonKey(name: "local_area")
-  final String? localArea;
-  final String? street2;
-  final String? district;
-  final String? zip;
-  @JsonKey(name: "state_name")
-  final String? stateName;
-  @JsonKey(name: "country_name")
-  final String? countryName;
+//   @JsonKey(name: "local_area")
+//   final String? localArea;
+//   final String? street2;
+//   final String? district;
+//   final String? zip;
+//   @JsonKey(name: "state_name")
+//   final String? stateName;
+//   @JsonKey(name: "country_name")
+//   final String? countryName;
 
-  factory UserAddress.fromJson(Map<String, dynamic> json) => _$UserAddressFromJson(json);
+//   factory UserAddress.fromJson(Map<String, dynamic> json) => _$UserAddressFromJson(json);
 
-  Map<String, dynamic> toJson() => _$UserAddressToJson(this);
-}
+//   Map<String, dynamic> toJson() => _$UserAddressToJson(this);
+// }

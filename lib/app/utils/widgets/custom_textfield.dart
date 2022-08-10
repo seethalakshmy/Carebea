@@ -18,6 +18,7 @@ class CustomTextField extends TextFormField {
       this.onChanged,
       this.onsaved,
       this.hint,
+      this.enabled = true,
       this.maxlength,
       this.maxLines = 1,
       this.trailing,
@@ -37,6 +38,7 @@ class CustomTextField extends TextFormField {
           keyboardType: inputType,
           cursorColor: Colors.black,
           inputFormatters: inputFormatters,
+          enabled:enabled ,
           maxLines: maxLines,
           style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black),
           decoration: InputDecoration(
@@ -80,4 +82,6 @@ class CustomTextField extends TextFormField {
   final Function(String?)? onsubmit;
   final String? initialvalue;
   final Widget? trailing;
+  @override
+  final bool enabled;
 }
