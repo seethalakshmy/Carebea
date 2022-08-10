@@ -149,7 +149,7 @@ class HomeView extends GetView<HomeController> {
                               textFieldConfiguration: TextFieldConfiguration(
                                   cursorColor: Colors.grey,
                                   autofocus: false,
-                                  style: DefaultTextStyle.of(context).style.copyWith(fontStyle: FontStyle.italic),
+                                  style: customTheme(context).regular.copyWith(fontSize: 12),
                                   decoration: InputDecoration(
                                       isDense: true,
                                       fillColor: customTheme(context).textFormFieldColor,
@@ -158,10 +158,14 @@ class HomeView extends GetView<HomeController> {
                                         color: Color(0xff9F9F9F),
                                       ),
                                       hintText: 'Search for shops,orders .. ',
+                                      hintStyle:
+                                      customTheme(context).regular.copyWith(fontSize: 12, color: Colors.grey[500]),
                                       border: OutlineInputBorder(borderSide: BorderSide.none))),
                               suggestionsCallback: (pattern) => controller.homeSearchOrder(pattern),
                               itemBuilder: (context, order) => OrderTileHomePageSearch(
-                                order: order,
+                                order: order, onTap:() {
+                                Get.toNamed(Routes.ORDER_HISTORY_DETAILS, arguments: {'order_id': order.id});
+                              },
                               ),
                               onSuggestionSelected: (order) {
                                 Get.toNamed(Routes.ORDER_HISTORY_DETAILS, arguments: {'order_id': order.id});

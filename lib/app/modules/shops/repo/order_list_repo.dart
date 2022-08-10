@@ -37,6 +37,10 @@ class OrderListRepo{
     return orderDataSource.orderList(driverId: driverId,orderId: orderId);
   }
 
+  Future<OrderListResponse> upcomingOrdersDelivery({int? driverId,String? orderType}){
+    return orderDataSource.orderList(driverId: driverId,orderType: orderType);
+  }
+
 
 
 

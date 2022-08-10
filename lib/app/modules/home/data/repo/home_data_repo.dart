@@ -19,8 +19,8 @@ class HomeDataRepository {
   }
 
   ///HomePageOrderSearch
-  Future<OrderListResponse> homeOrderSearch({required int salesPersonId,String? query})async{
-    return _orderDataSource.orderList(salesPersonId: salesPersonId,query: query);
+  Future<OrderListResponse> homeOrderSearch({required int salesPersonId,String? query,String? orderType})async{
+    return _orderDataSource.orderList(salesPersonId: salesPersonId,query: query,orderType: orderType);
   }
 
 
