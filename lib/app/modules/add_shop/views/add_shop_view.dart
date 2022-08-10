@@ -453,7 +453,10 @@ class AddShopView extends GetView<AddShopController> {
                       if (value!.isEmpty) {
                         return 'mobile number is required';
                       }
-                      if (value == '0000000000') {
+                      var splitPhone = value.split('');
+                      var phoneSet = splitPhone.toSet();
+
+                      if (phoneSet.length == 1) {
                         return 'Invalid number';
                       }
                       if (value.length < 10) return "Mobile number must be 10 digits";

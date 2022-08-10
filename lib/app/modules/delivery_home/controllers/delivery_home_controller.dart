@@ -7,8 +7,12 @@ import 'package:carebea/app/utils/shared_prefs.dart';
 import 'package:get/get.dart';
 import 'dart:developer' as developer;
 
+import '../../home/data/repo/home_data_repo.dart';
+
 class DeliveryHomeController extends GetxController {
   DeliveryHomePageRepo deliveryHomePageRepo = DeliveryHomePageRepo();
+  final OrderListRepo _repo = OrderListRepo();
+
   ProfileController profileController = Get.put(ProfileController());
   DeliveryHomePageResponse? deliveryHomePageResponse;
   RxBool isDeliveryHomePageDataLoaded = true.obs;
@@ -71,5 +75,16 @@ class DeliveryHomeController extends GetxController {
       orders = [];
     }
     isDeliveryOrdersLoading(false);
+  }
+  ///DeliverHomeOrderSearch
+  Future<List<History>> homeSearchOrder(String? query)async{
+    if((query ?? "").isEmpty){
+      return [];
+    }
+    var orderListResponse = await _repo.upcomingOrdersDelivery(driverId: SharedPrefs.getUserId(),orderType: "Upcoming");
+    if(orderListResponse.orderListResult?.status ?? false){
+      return orderListResponse.orderListResult?.history ?? [];
+    }
+    return[];
   }
 }

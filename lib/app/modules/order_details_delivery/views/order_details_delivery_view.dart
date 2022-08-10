@@ -278,7 +278,7 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                         'Amount to be Collected',
                         style: customTheme(context).regular.copyWith(fontSize: 14, color: Colors.grey),
                       ),
-                      Text('COD',
+                      Text('Cash',
                           style:
                               customTheme(context).medium.copyWith(fontSize: 14, color: customTheme(context).primary)),
                       Text(
