@@ -6,6 +6,7 @@ import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/modules/dashboard/models/qr_model.dart';
 import 'package:carebea/app/modules/delivery_home/models/delivery_home_model.dart';
 import 'package:carebea/app/modules/delivery_home/views/delivery_order_list_view.dart';
+import 'package:carebea/app/modules/shops/models/order_list_model.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/show_snackbar.dart';
@@ -17,12 +18,14 @@ import 'package:carebea/app/utils/widgets/custom_textfield.dart';
 import 'package:carebea/app/utils/widgets/scanner.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 import 'package:get/get.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../../home/widgets/order_list_for_homepage_search.dart';
 import '../controllers/delivery_home_controller.dart';
 
 class DeliveryHomeView extends GetView<DeliveryHomeController> {
@@ -81,12 +84,39 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
                   ),
                 ),
                 Padding(
-                    padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-                    child: CustomTextField(
-                      fillcolor: customTheme(context).textFormFieldColor,
-                      icon: Icon(CupertinoIcons.search),
-                      hint: "Search for shops, orders",
-                    )),
+                  padding: const EdgeInsets.all(10),
+                  child: TypeAheadField<History>(
+                    loadingBuilder: (context) => Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        circularProgressIndicator(context),
+                      ],
+                    ),
+                    textFieldConfiguration: TextFieldConfiguration(
+                        cursorColor: Colors.grey,
+                        autofocus: false,
+                        style: customTheme(context).regular.copyWith(fontSize: 12),
+                        decoration: InputDecoration(
+                            isDense: true,
+                            filled: true,
+                            fillColor: customTheme(context).textFormFieldColor,
+                            prefixIcon: Icon(
+                              CupertinoIcons.search,
+                              color: Color(0xff9F9F9F),
+                            ),
+                            hintText: 'Search for orders',
+                            hintStyle: customTheme(context).regular.copyWith(fontSize: 12,color: Colors.grey[500]),
+                            border: OutlineInputBorder(borderSide: BorderSide.none))),
+                    suggestionsCallback: (pattern) => controller.homeSearchOrder(pattern),
+                    itemBuilder: (context, order) => OrderTileHomePageSearch(
+                      order: order, onTap:() {
+                      Get.toNamed(Routes.ORDER_DETAILS_DELIVERY, arguments: {'order_id': order.id});
+                    },
+                    ),
+                    onSuggestionSelected: (order) {
+                    },
+                  ),
+                ),
                 const SizedBox(height: 30),
                 Padding(
                   padding: const EdgeInsets.only(left: 15.0, right: 15.0),

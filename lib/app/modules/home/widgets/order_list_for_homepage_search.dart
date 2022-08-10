@@ -9,16 +9,16 @@ import 'package:get/get.dart';
 class OrderTileHomePageSearch extends StatelessWidget {
   const OrderTileHomePageSearch({
     Key? key,
+    required this.onTap,
     required this.order,
   }) : super(key: key);
   final History order;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Get.toNamed(Routes.ORDER_HISTORY_DETAILS, arguments: {'order_id': order.id});
-      },
+      onTap: onTap,
       child: CustomCard(
         margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
         padding: const EdgeInsets.symmetric(vertical: 10),
