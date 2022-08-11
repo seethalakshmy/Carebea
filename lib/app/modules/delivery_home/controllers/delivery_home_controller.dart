@@ -76,15 +76,18 @@ class DeliveryHomeController extends GetxController {
     }
     isDeliveryOrdersLoading(false);
   }
+
   ///DeliverHomeOrderSearch
-  Future<List<History>> homeSearchOrder(String? query)async{
-    if((query ?? "").isEmpty){
+  Future<List<History>> homeSearchOrder(String? query) async {
+    if ((query ?? "").isEmpty) {
       return [];
     }
-    var orderListResponse = await _repo.upcomingOrdersDelivery(driverId: SharedPrefs.getUserId(),orderType: "Upcoming");
-    if(orderListResponse.orderListResult?.status ?? false){
+    var orderListResponse = await _repo.upcomingOrdersDelivery(
+      driverId: SharedPrefs.getUserId(),
+    );
+    if (orderListResponse.orderListResult?.status ?? false) {
       return orderListResponse.orderListResult?.history ?? [];
     }
-    return[];
+    return [];
   }
 }
