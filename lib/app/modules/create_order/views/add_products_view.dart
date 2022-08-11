@@ -220,45 +220,48 @@ class ProductTile extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Flexible(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
-                                  child: RichText(
-                                    maxLines: 3,
-                                    overflow: TextOverflow.visible,
-                                    text: TextSpan(
-                                        text: product.name,
-                                        children: [
-                                          TextSpan(
-                                              text: " ${product.qtyAvailable}".toString(),
-                                              style: TextStyle(color: Color(0xff929292))),
-                                          TextSpan(
-                                              text: " ${product.unit}", style: TextStyle(color: Color(0xff929292))),
-                                        ],
-                                        style: customTheme(context).regular.copyWith(fontSize: 11)),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Flexible(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: RichText(
+                                      maxLines: 3,
+                                      overflow: TextOverflow.visible,
+                                      text: TextSpan(
+                                          text: product.name,
+                                          children: [
+                                            TextSpan(
+                                                text: " ${product.qtyAvailable}".toString(),
+                                                style: TextStyle(color: Color(0xff929292))),
+                                            TextSpan(
+                                                text: " ${product.unit}", style: TextStyle(color: Color(0xff929292))),
+                                          ],
+                                          style: customTheme(context).regular.copyWith(fontSize: 11)),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Spacer(),
-                              // Container(
-                              //   padding: const EdgeInsets.symmetric(
-                              //       horizontal: 4, vertical: 5),
-                              //   decoration: BoxDecoration(
-                              //       color: customTheme(context).primary,
-                              //       borderRadius: const BorderRadius.only(
-                              //           topRight: Radius.circular(10),
-                              //           bottomLeft: Radius.circular(10))),
-                              //   child: Text("BUY 2 GET 1 FREE",
-                              //       style: customTheme(context)
-                              //           .regular
-                              //           .copyWith(
-                              //               fontSize: 10, color: Colors.white)),
-                              // )
-                            ],
+                                // Spacer(),
+                                // Container(
+                                //   padding: const EdgeInsets.symmetric(
+                                //       horizontal: 4, vertical: 5),
+                                //   decoration: BoxDecoration(
+                                //       color: customTheme(context).primary,
+                                //       borderRadius: const BorderRadius.only(
+                                //           topRight: Radius.circular(10),
+                                //           bottomLeft: Radius.circular(10))),
+                                //   child: Text("BUY 2 GET 1 FREE",
+                                //       style: customTheme(context)
+                                //           .regular
+                                //           .copyWith(
+                                //               fontSize: 10, color: Colors.white)),
+                                // )
+                              ],
+                            ),
                           ),
                           Row(
                             children: [
