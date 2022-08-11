@@ -39,6 +39,9 @@ class DeliveryInvoiceDetailsController extends GetxController {
     var res = await _repository.generateInvoiceBill(invoiceId: deliveryInvoice!.invoiceId);
     if (res.result?.status ?? false) {
       if ((res.result?.base64Invoice ?? "").isEmpty) {
+        generatingInvoice(false);
+        showSnackBar("Could't generate invoice, Please try again!");
+
         return;
       }
       if (await getStoragePermission()) {
