@@ -278,9 +278,15 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                         'Amount to be Collected',
                         style: customTheme(context).regular.copyWith(fontSize: 14, color: Colors.grey),
                       ),
-                      Text('Cash',
-                          style:
-                              customTheme(context).medium.copyWith(fontSize: 14, color: customTheme(context).primary)),
+                      if (order.paymentMethod != null)
+                        Text(
+                            controller.orderListDetailResponse!.orderListResult!.paymentMethods!
+                                .singleWhere((element) => element.id == order.paymentMethod,
+                                    orElse: () => PaymentMethod(name: ""))
+                                .name!,
+                            style: customTheme(context)
+                                .medium
+                                .copyWith(fontSize: 14, color: customTheme(context).primary)),
                       Text(
                         '₹${order.amountTotal!.toStringAsFixed(2)}',
                         style: customTheme(context).medium.copyWith(fontSize: 16),

@@ -15,14 +15,16 @@ import 'package:get/get.dart';
 
 import '../../shops/models/shop_model.dart';
 
-class AddProductsView extends StatelessWidget {
-  AddProductsView({Key? key}) : super(key: key);
-  CreateOrderController createOrderController = Get.put(CreateOrderController());
+class AddProductsView extends GetView<CreateOrderController> {
+  AddProductsView({Key? key}) : super(key: key) {
+    controller.clearProducts();
+    controller.fetchProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => createOrderController.onWillpopClose(),
+      onWillPop: () => controller.onWillpopClose(),
       child: Scaffold(
         appBar: appBar(context),
         body: Column(
@@ -34,7 +36,7 @@ class AddProductsView extends StatelessWidget {
             const SizedBox(height: 19),
             Flexible(
               child: Obx(() {
-                if (createOrderController.isProductsLoading.value) {
+                if (controller.isProductsLoading.value) {
                   return Center(child: circularProgressIndicator(context));
                 }
                 return _productListView();
@@ -44,10 +46,10 @@ class AddProductsView extends StatelessWidget {
         ),
         bottomNavigationBar: Obx(() {
           return InkWell(
-            onTap: createOrderController.creatingOrder.value
+            onTap: controller.creatingOrder.value
                 ? null
                 : () {
-                    createOrderController.createOrder();
+                    controller.createOrder();
                   },
             child: Container(
               alignment: Alignment.center,
@@ -62,19 +64,19 @@ class AddProductsView extends StatelessWidget {
                   children: [
                     Obx(() {
                       return Text(
-                        "${createOrderController.cartproducts.length} items  |  ",
+                        "${controller.cartproducts.length} items  |  ",
                         style: customTheme(context).regular.copyWith(fontSize: 13, color: Colors.white),
                       );
                     }),
                     Obx(() {
                       return Text(
-                        "₹${createOrderController.totalCartCost.value.toStringAsFixed(2)}",
+                        "₹${controller.totalCartCost.value.toStringAsFixed(2)}",
                         style: customTheme(context).medium.copyWith(fontSize: 13, color: Colors.white),
                       );
                     }),
                     const Spacer(),
                     Obx(() {
-                      if (createOrderController.creatingOrder.value) {
+                      if (controller.creatingOrder.value) {
                         return const SizedBox(
                           height: 10,
                           width: 10,
@@ -112,14 +114,14 @@ class AddProductsView extends StatelessWidget {
   ListView _productListView() {
     return ListView.separated(
       shrinkWrap: true,
-      itemCount: createOrderController.productList.length,
+      itemCount: controller.productList.length,
       separatorBuilder: (BuildContext context, int index) {
         return const SizedBox(height: 15);
       },
       itemBuilder: (BuildContext context, int index) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 19),
-          child: ProductTile(product: createOrderController.productList[index]),
+          child: ProductTile(product: controller.productList[index]),
         );
       },
     );
@@ -140,7 +142,7 @@ class AddProductsView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 23),
       child: CustomTextField(
         onChanged: (val) {
-          createOrderController.searchProducts(val);
+          controller.searchProducts(val);
         },
         fillcolor: customTheme(context).textFormFieldColor,
         icon: const Icon(
@@ -218,45 +220,48 @@ class ProductTile extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Flexible(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
-                                  child: RichText(
-                                    maxLines: 3,
-                                    overflow: TextOverflow.visible,
-                                    text: TextSpan(
-                                        text: product.name,
-                                        children: [
-                                          TextSpan(
-                                              text: " ${product.qtyAvailable}".toString(),
-                                              style: TextStyle(color: Color(0xff929292))),
-                                          TextSpan(
-                                              text: " ${product.unit}", style: TextStyle(color: Color(0xff929292))),
-                                        ],
-                                        style: customTheme(context).regular.copyWith(fontSize: 11)),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Flexible(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: RichText(
+                                      maxLines: 3,
+                                      overflow: TextOverflow.visible,
+                                      text: TextSpan(
+                                          text: product.name,
+                                          children: [
+                                            TextSpan(
+                                                text: " ${product.qtyAvailable}".toString(),
+                                                style: TextStyle(color: Color(0xff929292))),
+                                            TextSpan(
+                                                text: " ${product.unit}", style: TextStyle(color: Color(0xff929292))),
+                                          ],
+                                          style: customTheme(context).regular.copyWith(fontSize: 11)),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Spacer(),
-                              // Container(
-                              //   padding: const EdgeInsets.symmetric(
-                              //       horizontal: 4, vertical: 5),
-                              //   decoration: BoxDecoration(
-                              //       color: customTheme(context).primary,
-                              //       borderRadius: const BorderRadius.only(
-                              //           topRight: Radius.circular(10),
-                              //           bottomLeft: Radius.circular(10))),
-                              //   child: Text("BUY 2 GET 1 FREE",
-                              //       style: customTheme(context)
-                              //           .regular
-                              //           .copyWith(
-                              //               fontSize: 10, color: Colors.white)),
-                              // )
-                            ],
+                                // Spacer(),
+                                // Container(
+                                //   padding: const EdgeInsets.symmetric(
+                                //       horizontal: 4, vertical: 5),
+                                //   decoration: BoxDecoration(
+                                //       color: customTheme(context).primary,
+                                //       borderRadius: const BorderRadius.only(
+                                //           topRight: Radius.circular(10),
+                                //           bottomLeft: Radius.circular(10))),
+                                //   child: Text("BUY 2 GET 1 FREE",
+                                //       style: customTheme(context)
+                                //           .regular
+                                //           .copyWith(
+                                //               fontSize: 10, color: Colors.white)),
+                                // )
+                              ],
+                            ),
                           ),
                           Row(
                             children: [

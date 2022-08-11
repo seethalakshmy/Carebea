@@ -59,7 +59,7 @@ class ShopsController extends GetxController {
     var shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!);
     if (shopListResponse.shopListResult?.status ?? false) {
       shopList = shopListResponse.shopListResult?.shopList ?? [];
-      shopList.sort((a,b)=> b.id!.compareTo(a.id!));
+      shopList.sort((a, b) => b.id!.compareTo(a.id!));
 
       filterVals = shopListResponse.shopListResult!.filterVals;
     } else {
@@ -82,6 +82,12 @@ class ShopsController extends GetxController {
       orderHistory = orderListResponse!.orderListResult!.history;
     } else {
       orderHistory = [];
+    }
+
+    if (orderType == "Previous") {
+      previousOrderCount(orderHistory?.length ?? 0);
+    } else {
+      upcomingOrderCount(orderHistory?.length ?? 0);
     }
     debugPrint("fetchAllOrders $orderListResponse");
 
@@ -128,12 +134,17 @@ class ShopsController extends GetxController {
     await fetchAllShops();
   }
 
+  RxInt previousOrderCount = 0.obs;
+  RxInt upcomingOrderCount = 0.obs;
   ShopList? shop;
   void fetchShop(int? shopId) async {
     isShopDetailsLoading(true);
+    previousOrderCount(0);
+    upcomingOrderCount(0);
     var response = await shopListRepo.shopDetails(SharedPrefs.getUserId()!, shopId!);
     if (response.shopListResult?.status ?? false) {
       shop = response.shopListResult?.shopList?.first;
+      await fetchOrders('Previous', shopId);
       await fetchOrders('Upcoming', shopId);
     }
     isShopDetailsLoading(false);

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/modules/delivery_invoice_details/data/models/invoice_details_response.dart';
 import 'package:carebea/app/modules/delivery_invoice_details/data/repository/delivery_invoice_details_repository.dart';
+import 'package:carebea/app/utils/cloudmessaging.dart';
 import 'package:carebea/app/utils/show_snackbar.dart';
 import 'package:carebea/app/utils/widgets/custom_alertbox.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class DeliveryInvoiceDetailsController extends GetxController {
   RxBool isLoading = true.obs;
   RxBool generatingInvoice = false.obs;
   InvoiceDetailsResult? deliveryInvoice;
-
+  CloudMessaging _cloudMessaging = CloudMessaging();
   @override
   void onInit() {
     fetchInvoiceDetails();
@@ -39,6 +40,9 @@ class DeliveryInvoiceDetailsController extends GetxController {
     var res = await _repository.generateInvoiceBill(invoiceId: deliveryInvoice!.invoiceId);
     if (res.result?.status ?? false) {
       if ((res.result?.base64Invoice ?? "").isEmpty) {
+        generatingInvoice(false);
+        showSnackBar("Could't generate invoice, Please try again!");
+
         return;
       }
       if (await getStoragePermission()) {
@@ -70,5 +74,6 @@ class DeliveryInvoiceDetailsController extends GetxController {
     final file = File("$output/Order-$orderID.pdf");
     await file.writeAsBytes(bytes.buffer.asUint8List());
     showSnackBar("invoice downloded successfully");
+    _cloudMessaging.showDownloadNotification(file.path);
   }
 }

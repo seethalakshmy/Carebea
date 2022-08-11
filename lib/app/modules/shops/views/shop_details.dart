@@ -215,16 +215,20 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                       },
                       tabs: [
                         Tab(
-                          child: Text(
-                            'Upcoming Orders',
-                            style: customTheme(context).medium.copyWith(fontSize: 12),
-                          ),
+                          child: Obx(() {
+                            return Text(
+                              'Upcoming Orders (${shopsController.upcomingOrderCount.value})',
+                              style: customTheme(context).medium.copyWith(fontSize: 12),
+                            );
+                          }),
                         ),
                         Tab(
-                          child: Text(
-                            'Previous Orders',
-                            style: customTheme(context).medium.copyWith(fontSize: 12),
-                          ),
+                          child: Obx(() {
+                            return Text(
+                              'Previous Orders (${shopsController.previousOrderCount.value})',
+                              style: customTheme(context).medium.copyWith(fontSize: 12),
+                            );
+                          }),
                         ),
                       ],
                     ),

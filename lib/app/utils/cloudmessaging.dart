@@ -1,19 +1,22 @@
+import 'dart:convert';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:open_file/open_file.dart';
 
 class CloudMessaging {
-  /// creating singleton
-  // static final CloudMessaging _singleton = CloudMessaging._internal();
-  // factory CloudMessaging() {
+  // / creating singleton
+  static final CloudMessaging _singleton = CloudMessaging._internal();
+  factory CloudMessaging() {
 
-  //   return _singleton;
-  // }
-  // CloudMessaging._internal();
-
-  CloudMessaging() {
-    initMessaging();
+    return _singleton;
   }
+  CloudMessaging._internal();
+
+  // CloudMessaging() {
+  //   initMessaging();
+  // }
 
   ///creating notification channel
   final AndroidNotificationChannel channel = const AndroidNotificationChannel(
@@ -24,27 +27,28 @@ class CloudMessaging {
       sound: RawResourceAndroidNotificationSound('alert'));
 
   ///initalising plugin
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   Future initMessaging() async {
     String? token = await FirebaseMessaging.instance.getToken();
     print("\n\n Token $token");
-    var initializationSettingsAndroid =
-        const AndroidInitializationSettings("launch_background");
+    var initializationSettingsAndroid = const AndroidInitializationSettings("launch_background");
     var initializationSettingsIOS = const IOSInitializationSettings();
 
-    var initializationSettings = InitializationSettings(
-        android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+    var initializationSettings =
+        InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
 
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: (message) async {
+    await flutterLocalNotificationsPlugin.initialize(initializationSettings, onSelectNotification: (message) async {
       print("on tap $message");
+      if ((message ?? "").isEmpty) return;
+      var msg = json.decode(message!);
+      if (msg["type"] == "invoice") {
+        OpenFile.open(msg["path"]);
+      }
     });
 
     await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
     print(await FirebaseMessaging.instance.getToken());
   }
@@ -67,6 +71,21 @@ class CloudMessaging {
     //     ));
   }
 
+  Future<void> showDownloadNotification(String path) async {
+    await flutterLocalNotificationsPlugin.show(
+        1122,
+        "Invoice downloaded",
+        "Tap to open",
+        NotificationDetails(
+            android: AndroidNotificationDetails(
+              channel.id,
+              channel.name,
+              // channel.description,
+            ),
+            iOS: const IOSNotificationDetails()),
+        payload: json.encode({"path": path, "type": "invoice"}));
+  }
+
   Future<void> foregroundMessageHandler(RemoteMessage message) async {
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = message.notification?.android;
@@ -85,8 +104,7 @@ class CloudMessaging {
                 channel.name,
                 // channel.description,
               ),
-              iOS: const IOSNotificationDetails())
-      );
+              iOS: const IOSNotificationDetails()));
     }
   }
 }
