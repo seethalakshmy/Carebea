@@ -95,9 +95,17 @@ class CreateOrderController extends GetxController {
   }
 
   sortList() {
-    // var temp = [...shopList];
-    // temp.sort(((a, b) => cartproducts.keys.contains(a.id) ? 1 : 0));
-    // shopList(temp);
+    var temp = [...productList];
+    var selected = [];
+    var unselected = [];
+    for (var i in temp) {
+      if (cartproducts.keys.contains(i.id)) {
+        selected.add(i);
+      } else {
+        unselected.add(i);
+      }
+    }
+    productList([...selected.reversed, ...unselected]);
   }
 
   RxBool creatingOrder = false.obs;
@@ -110,6 +118,7 @@ class CreateOrderController extends GetxController {
     });
     var res = await _repository.createOrder(
         shopId: (Get.arguments["shop"] as ShopList).id, salesPersonId: SharedPrefs.getUserId(), products: _products);
+    sortList();
 
     if (res.result?.status ?? false) {
       Get.to(() => CheckoutView(), arguments: Get.arguments);
