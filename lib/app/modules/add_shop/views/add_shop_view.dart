@@ -451,7 +451,7 @@ class AddShopView extends GetView<AddShopController> {
                     inputType: TextInputType.phone,
                     validaton: (value) {
                       if (value!.isEmpty) {
-                        return 'mobile number is required';
+                        return 'Mobile Number is required';
                       }
                       var splitPhone = value.split('');
                       var phoneSet = splitPhone.toSet();
