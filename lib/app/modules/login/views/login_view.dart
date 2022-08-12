@@ -89,6 +89,8 @@ class LoginView extends GetView<LoginController> {
                                 if (value == null || value.trim().isEmpty) {
                                   return 'Username can\'t be empty';
                                 }
+                                if (validateEmail(value))
+                                  return "Invalid email";
                                 return null;
                               },
                               onChanged: (value) => controller.username = value.trim()),
