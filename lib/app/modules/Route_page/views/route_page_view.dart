@@ -83,7 +83,7 @@ class RoutePageView extends GetView<RoutePageController> {
                                     color: Colors.black,
                                   ),
                                   title: Text(
-                                    'Route:${controller.routeList[index].routeName}',
+                                    'Route: ${controller.routeList[index].routeName}',
                                     style: customTheme(context).medium.copyWith(fontSize: 12),
                                   ),
                                   subtitle: Padding(

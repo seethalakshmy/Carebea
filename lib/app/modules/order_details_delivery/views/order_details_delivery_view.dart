@@ -402,6 +402,9 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                                     if ((val ?? "").length != 6) {
                                       return "Invalid Cheque No";
                                     }
+                                    if(val == '000000'){
+                                      return "Invalid Cheque No";
+                                    }
                                     return null;
                                   },
                                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
