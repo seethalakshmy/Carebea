@@ -98,7 +98,7 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Order ID: #${orders.id}',
+                                      'Order ID: #${orders.name}',
                                       style: customTheme(context)
                                           .medium
                                           .copyWith(fontSize: 12, color: customTheme(context).secondary),
@@ -117,7 +117,7 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                     color: customTheme(context).action.withOpacity(.25),
                                   ),
                                   child: Text(
-                                    orders.status!,
+                                    orders.status ?? "",
                                     style: customTheme(context)
                                         .medium
                                         .copyWith(fontSize: 10, color: customTheme(context).action),
@@ -141,10 +141,11 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                   "Sales Representative: ${orders.srName}",
                                   style: customTheme(context).medium.copyWith(fontSize: 12),
                                 ),
-                                Text(
-                                  "ordered date: ${formatDate(orders.dateOrder!)}",
-                                  style: customTheme(context).regular.copyWith(fontSize: 11),
-                                ),
+                                if (orders.dateOrder != null)
+                                  Text(
+                                    "ordered date: ${formatDate(orders.dateOrder!)}",
+                                    style: customTheme(context).regular.copyWith(fontSize: 11),
+                                  ),
                                 SizedBox(
                                   height: 10,
                                 ),
@@ -164,7 +165,7 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            orders.shopName!,
+                                            "${orders.shopName!} ${orders.shopLastName ?? ""}",
                                             style: customTheme(context).medium.copyWith(fontSize: 11),
                                           ),
                                           SizedBox(
@@ -187,7 +188,7 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                   style: customTheme(context).medium.copyWith(fontSize: 11),
                                 ),
                                 Text(
-                                  "₹${orders.amountDue!.toStringAsFixed(2)}",
+                                  "₹${orders.outstandingAmount?.toStringAsFixed(2) ?? 0.00}",
                                   style: customTheme(context).regular.copyWith(fontSize: 11),
                                 ),
                               ],
