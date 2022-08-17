@@ -291,6 +291,12 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                         '₹${order.amountTotal!.toStringAsFixed(2)}',
                         style: customTheme(context).medium.copyWith(fontSize: 16),
                       ),
+                      if (order.shopLatitude != null && order.shopLongitude != null)
+                        SizedBox(
+                          height: 20,
+                        ),
+                      if (order.shopLatitude != null && order.shopLongitude != null)
+                        MapLocationView(latitude: order.shopLatitude!, longitude: order.shopLongitude!),
                       SizedBox(
                         height: 20,
                       ),
@@ -402,7 +408,7 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                                     if ((val ?? "").length != 6) {
                                       return "Invalid Cheque No";
                                     }
-                                    if(val == '000000'){
+                                    if (val == '000000') {
                                       return "Invalid Cheque No";
                                     }
                                     return null;
