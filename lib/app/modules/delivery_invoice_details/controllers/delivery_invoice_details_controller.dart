@@ -10,6 +10,7 @@ import 'package:carebea/app/utils/widgets/custom_alertbox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:share_plus/share_plus.dart';
 
 class DeliveryInvoiceDetailsController extends GetxController {
   final DeliveryInvoiceDetailsRepository _repository = DeliveryInvoiceDetailsRepository();
@@ -68,12 +69,20 @@ class DeliveryInvoiceDetailsController extends GetxController {
     return true;
   }
 
+  File? pdf;
+  RxBool hasPdf = false.obs;
   Future storePdfTostorage(String base64pdf, String orderID) async {
     var bytes = base64Decode(base64pdf);
     final output = await getDownloadPath();
     final file = File("$output/Order-$orderID.pdf");
-    await file.writeAsBytes(bytes.buffer.asUint8List());
+    var temp = await file.writeAsBytes(bytes.buffer.asUint8List());
+    pdf = temp;
+    hasPdf(true);
     showSnackBar("invoice downloded successfully");
     _cloudMessaging.showDownloadNotification(file.path);
+  }
+
+  void sharePdf() {
+    Share.shareFiles([pdf!.path]);
   }
 }
