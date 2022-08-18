@@ -91,6 +91,13 @@ class CheckoutView extends StatelessWidget {
                     backgroundColor: customTheme(context).primary,
                     height: 48,
                     width: 200,
+                    sliderButtonContent: Center(
+                      child: Image.asset(
+                        Assets.threeArrow,
+                        width: 70,
+                        height: 15,
+                      ),
+                    ),
                     shadow: BoxShadow(color: Colors.transparent),
                     onConfirmation: () => createOrderController.confirmOrder(context),
                     foregroundColor: Colors.transparent,
@@ -138,7 +145,7 @@ class CheckoutView extends StatelessWidget {
                       onChanged: (value) {
                         createOrderController.selectedPaymentMethod(value);
                       },
-                      label:e.name,
+                      label: e.name,
                     );
                   }),
                 )
@@ -265,7 +272,7 @@ class CheckoutView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        shop.name!,
+                        "${shop.name!} ${shop.lastName ?? ""}",
                         style: customTheme(context).medium.copyWith(fontSize: 12, color: Colors.black),
                       ),
                       Flexible(
