@@ -14,7 +14,7 @@ import '../controllers/route_page_controller.dart';
 
 class RoutePageView extends GetView<RoutePageController> {
   RoutePageView({Key? key}) : super(key: key) {
-    controller.fetchRouteListCalender(date: DateFormat("dd/MM/yyy").format(DateTime.now()));
+    controller.fetchRouteListCalender(date: DateFormat("dd/MMM/yyy").format(DateTime.now()));
   }
 
   @override
@@ -97,9 +97,13 @@ class RoutePageView extends GetView<RoutePageController> {
                                         const SizedBox(
                                           width: 5,
                                         ),
-                                        Text(
-                                          getFullAddress(controller.routeList[index].userAddress),
-                                          style: customTheme(context).medium.copyWith(fontSize: 12),
+                                        Flexible(
+                                          child: Text(
+                                            getFullAddress(controller.routeList[index].userAddress),
+                                            style: customTheme(context)
+                                                .medium
+                                                .copyWith(fontSize: 12, overflow: TextOverflow.ellipsis),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -144,7 +148,7 @@ class _CalenderState extends State<Calender> {
         rightChevronMargin: EdgeInsets.only(right: 50),
       ),
       onDaySelected: (DateTime selectDate, DateTime focusDate) {
-        routePageController.fetchRouteListCalender(date: DateFormat("dd/MM/yyy").format(selectDate));
+        routePageController.fetchRouteListCalender(date: DateFormat("dd/MMM/yyy").format(selectDate));
         setState(() {
           selectedDate = selectDate;
           focusedDate = focusDate;
