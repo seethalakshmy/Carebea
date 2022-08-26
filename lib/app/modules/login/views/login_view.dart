@@ -15,6 +15,7 @@ class LoginView extends GetView<LoginController> {
   const LoginView({Key? key}) : super(key: key);
   static final TextEditingController userController = TextEditingController();
   static final TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,10 +26,13 @@ class LoginView extends GetView<LoginController> {
             children: [
               Center(
                   child: Image.asset(
-                Assets.assetsLoginBackground,
-                fit: BoxFit.fitWidth,
-                width: MediaQuery.of(context).size.width,
-              )),
+                    Assets.assetsLoginBackground,
+                    fit: BoxFit.fitWidth,
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width,
+                  )),
               Align(
                 alignment: Alignment.center,
                 child: ClipRRect(
@@ -38,7 +42,10 @@ class LoginView extends GetView<LoginController> {
                     child: Container(
                       color: Colors.white.withOpacity(0.7),
                       padding: const EdgeInsets.all(15.0),
-                      width: MediaQuery.of(context).size.width * .9,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width * .9,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +59,8 @@ class LoginView extends GetView<LoginController> {
                           ),
                           Text(
                             'Login to your account',
-                            style: customTheme(context).medium.copyWith(fontSize: 18),
+                            style: customTheme(context).medium.copyWith(
+                                fontSize: 18),
                           ),
 
                           const SizedBox(
@@ -60,21 +68,26 @@ class LoginView extends GetView<LoginController> {
                           ),
                           Text(
                             'Enter the login credentials sent to you',
-                            style: customTheme(context).regular.copyWith(fontSize: 12),
+                            style: customTheme(context).regular.copyWith(
+                                fontSize: 12),
                           ),
                           const SizedBox(
                             height: 20,
                           ),
                           Text(
                             'Username',
-                            style: customTheme(context).regular.copyWith(fontSize: 12),
+                            style: customTheme(context).regular.copyWith(
+                                fontSize: 12),
                           ),
                           const SizedBox(
                             height: 10,
                           ),
                           TextFormField(
                               keyboardType: TextInputType.emailAddress,
-                              inputFormatters: [FilteringTextInputFormatter.deny(RegExp(emojiRegexp))],
+                              inputFormatters: [
+                                FilteringTextInputFormatter.deny(
+                                    RegExp(emojiRegexp))
+                              ],
                               controller: userController,
                               decoration: const InputDecoration(
                                   fillColor: Colors.white,
@@ -86,56 +99,78 @@ class LoginView extends GetView<LoginController> {
                               cursorColor: Colors.black,
                               validator: (value) {
                                 userController.text.trim();
-                                if (value == null || value.trim().isEmpty) {
+                                if (value == null || value
+                                    .trim()
+                                    .isEmpty) {
                                   return 'Username can\'t be empty';
                                 }
                                 if (validateEmail(value))
                                   return "Invalid email";
                                 return null;
                               },
-                              onChanged: (value) => controller.username = value.trim()),
+                              onChanged: (value) =>
+                              controller.username = value.trim()),
                           const SizedBox(
                             height: 20,
                           ),
                           Text(
                             'Password',
-                            style: customTheme(context).regular.copyWith(fontSize: 12),
+                            style: customTheme(context).regular.copyWith(
+                                fontSize: 12),
                           ),
                           const SizedBox(
                             height: 10,
                           ),
-                          TextFormField(
-                            obscureText: true,
-                            inputFormatters: [FilteringTextInputFormatter.deny(RegExp(" "))],
-                            decoration: const InputDecoration(
-                                fillColor: Colors.white,
-                                filled: true,
-                                border: InputBorder.none,
-                                enabledBorder: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                contentPadding: EdgeInsets.only(left: 5)),
-                            cursorColor: Colors.black,
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return 'Password can\'t be empty';
-                              }
-                              return null;
-                            },
-                            onChanged: (value) => controller.password = value.trim(),
-                          ),
+                          Obx(() {
+                            return TextFormField(
+                              obscureText: controller.isVisible.value,
+
+                              inputFormatters: [
+                                FilteringTextInputFormatter.deny(RegExp(" "))
+                              ],
+                              decoration: InputDecoration(
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  border: InputBorder.none,
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  suffix: IconButton(onPressed: () {
+                                    controller.isVisible.value =
+                                    !controller.isVisible.value;
+                                  },
+                                      icon: Icon(
+                                        (controller.isVisible.value) ? Icons
+                                            .remove_red_eye : Icons
+                                            .remove_red_eye_outlined,
+                                      )),
+                                  contentPadding: EdgeInsets.only(left: 5)),
+                              cursorColor: Colors.black,
+                              validator: (value) {
+                                if (value == null || value
+                                    .trim()
+                                    .isEmpty) {
+                                  return 'Password can\'t be empty';
+                                }
+                                return null;
+                              },
+                              onChanged: (value) =>
+                              controller.password = value.trim(),
+                            );
+                          }),
                           const SizedBox(
                             height: 10,
                           ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                              onPressed: onForgotPasswordClicked,
-                              child: Text('Forgot Password?',
-                                  style: customTheme(context)
-                                      .medium
-                                      .copyWith(fontSize: 12, color: customTheme(context).primary)),
-                            ),
-                          ),
+                          // Align(
+                          //   alignment: Alignment.centerRight,
+                          //   child: TextButton(
+                          //     onPressed: onForgotPasswordClicked,
+                          //     child: Text('Forgot Password?',
+                          //         style: customTheme(context)
+                          //             .medium
+                          //             .copyWith(fontSize: 12,
+                          //             color: customTheme(context).primary)),
+                          //   ),
+                          // ),
                           const SizedBox(
                             height: 15,
                           ),
@@ -145,9 +180,12 @@ class LoginView extends GetView<LoginController> {
                                 title: 'LOGIN',
                                 onTap: () {
                                   controller.loginWithEmail(
-                                      username: controller.username ?? '', password: controller.password ?? '');
-                                  print('username ${controller.username ?? ''}');
-                                  print('password ${controller.password ?? ''}');
+                                      username: controller.username ?? '',
+                                      password: controller.password ?? '');
+                                  print(
+                                      'username ${controller.username ?? ''}');
+                                  print(
+                                      'password ${controller.password ?? ''}');
                                   // FirebaseCrashlytics.instance.crash();
                                   // if(userController.text=='1'){
                                   //   Get.toNamed(Routes.DASHBOARD);
