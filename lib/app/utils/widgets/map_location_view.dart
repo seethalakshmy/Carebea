@@ -35,45 +35,48 @@ class _MapLocationViewState extends State<MapLocationView> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 80,
-      width: double.infinity,
-      child: Stack(
-        children: [
-          GoogleMap(
-            mapType: MapType.normal,
-            markers: markers,
-            zoomControlsEnabled: false,
-            compassEnabled: false,
-            rotateGesturesEnabled: false,
-            scrollGesturesEnabled: false,
-            zoomGesturesEnabled: false,
-            liteModeEnabled: false,
-            tiltGesturesEnabled: false,
-            myLocationEnabled: false,
-            myLocationButtonEnabled: false,
-            initialCameraPosition: MapLocationView._kGooglePlex,
-            onMapCreated: (GoogleMapController controller) {
-              widget._controller.complete(controller);
-              _gotoLocation();
-            },
-          ),
-          if (widget.showNavigation)
-            Positioned(
-              right: 10,
-              top: 10,
-              child: InkWell(
-                onTap: () {
-                  navigateTo(widget.latitude, widget.longitude);
-                },
-                child: Image.asset(
-                  "assets/images/directions.png",
-                  height: 20,
-                  width: 20,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(5),
+      child: SizedBox(
+        height: 80,
+        width: double.infinity,
+        child: Stack(
+          children: [
+            GoogleMap(
+              mapType: MapType.normal,
+              markers: markers,
+              zoomControlsEnabled: false,
+              compassEnabled: false,
+              rotateGesturesEnabled: false,
+              scrollGesturesEnabled: false,
+              zoomGesturesEnabled: false,
+              liteModeEnabled: false,
+              tiltGesturesEnabled: false,
+              myLocationEnabled: false,
+              myLocationButtonEnabled: false,
+              initialCameraPosition: MapLocationView._kGooglePlex,
+              onMapCreated: (GoogleMapController controller) {
+                widget._controller.complete(controller);
+                _gotoLocation();
+              },
+            ),
+            if (widget.showNavigation)
+              Positioned(
+                right: 10,
+                top: 10,
+                child: InkWell(
+                  onTap: () {
+                    navigateTo(widget.latitude, widget.longitude);
+                  },
+                  child: Image.asset(
+                    "assets/images/directions.png",
+                    height: 20,
+                    width: 20,
+                  ),
                 ),
-              ),
-            )
-        ],
+              )
+          ],
+        ),
       ),
     );
   }

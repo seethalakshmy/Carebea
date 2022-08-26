@@ -80,46 +80,50 @@ class Date {
 
 @JsonSerializable()
 class History {
-  History(
-      {this.id,
-      this.name,
-      this.amountUntaxed,
-      this.amountTotal,
-      this.totalLines,
-      this.orderId,
-      this.imageUrlList,
-      this.dateOrder,
-      this.status,
-      this.userAddress,
-      this.amountTax,
-      this.productList,
-      this.deliveryDate,
-      this.productTotal,
-      this.shopName,
-      this.amountDue,
-      this.srName,
-       this.shopMobile,
-        this.warehouseId,
-        this.warehouseName,
-        this.paymentMethod,});
+  History({
+    this.id,
+    this.name,
+    this.amountUntaxed,
+    this.amountTotal,
+    this.totalLines,
+    this.orderId,
+    this.imageUrlList,
+    this.dateOrder,
+    this.status,
+    this.userAddress,
+    this.amountTax,
+    this.productList,
+    this.deliveryDate,
+    this.productTotal,
+    this.shopName,
+    this.amountDue,
+    this.outstandingAmount,
+    this.shopLastName,
+    this.srName,
+    this.shopMobile,
+    this.warehouseId,
+    this.warehouseName,
+    this.paymentMethod,this.shopLatitude,this.shopLongitude,
+  });
 
   int? id;
   @JsonKey(name: 'shop_mobile')
-   String? shopMobile;
-     @JsonKey(name: 'warehouse_id')
-
-   int? warehouseId;
-     @JsonKey(name: 'warehouse_name')
-
+  String? shopMobile;
+  @JsonKey(name: 'warehouse_id')
+  int? warehouseId;
+  @JsonKey(name: 'warehouse_name')
   String? warehouseName;
-    @JsonKey(name: 'payment_method')
-
-   int? paymentMethod;
+  @JsonKey(name: 'payment_method')
+  int? paymentMethod;
   String? name;
   @JsonKey(name: 'amount_untaxed')
   double? amountUntaxed;
   @JsonKey(name: 'amount_total')
   double? amountTotal;
+  @JsonKey(name: 'shop_latitude')
+  double? shopLatitude;
+  @JsonKey(name: 'shop_longitude')
+  double? shopLongitude;
   @JsonKey(name: 'product_total')
   double? productTotal;
   @JsonKey(name: 'total_lines')
@@ -139,8 +143,12 @@ class History {
   String? srName;
   @JsonKey(name: 'shop_name')
   String? shopName;
+  @JsonKey(name: 'shop_last_name')
+  String? shopLastName;
   @JsonKey(name: 'amount_tax')
   double? amountTax;
+  @JsonKey(name: 'outstanding_amount')
+  double? outstandingAmount;
   @JsonKey(name: 'amount_due')
   double? amountDue;
   @JsonKey(name: 'product_list')
@@ -195,7 +203,7 @@ class ProductList {
   double? departmentPrice;
   @JsonKey(name: 'wholesale_price')
   double? wholesalePrice;
-  
+
   double? supermarketPrice;
   String? enLang;
   String? unit;
