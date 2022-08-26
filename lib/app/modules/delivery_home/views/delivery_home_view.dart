@@ -126,7 +126,7 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
                       InkWell(
                         onTap: () {
                           controller.fetchDeliveryOrders("1");
-                          Get.to(() => DeliveryOrderListView());
+                          Get.to(() => DeliveryOrderListView("Today's Delivery","delivery"));
                         },
                         child: HomeTile(
                           asset: Assets.deliveryHomeIcon2,
@@ -139,7 +139,7 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
                       InkWell(
                         onTap: () {
                           controller.fetchDeliveryOrders("2");
-                          Get.to(() => DeliveryOrderListView());
+                          Get.to(() => DeliveryOrderListView("Total Orders Delivered","delivery"));
                         },
                         child: HomeTile(
                           asset: Assets.ordersHomeIcon,
@@ -156,7 +156,7 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
                   child: InkWell(
                     onTap: () {
                       controller.fetchDeliveryAllOrders();
-                      Get.to(() => DeliveryOrderListView());
+                      Get.to(() => DeliveryOrderListView('Order History',"delivery"));
                     },
                     child: HomeTile(
                       asset: Assets.ordersHomeIcon,

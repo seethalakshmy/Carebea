@@ -25,12 +25,12 @@ class OrderListRepo{
     return orderDataSource.orderList(salesPersonId: salesPersonId!,orderId: orderId);
   }
 
-  Future<OrderListResponse> orderListDelivery({ int? driverId,String? filterName,String? filterId}){
-    return orderDataSource.orderList(driverId: driverId,filterName: filterName,filterId: filterId);
+  Future<OrderListResponse> orderListDelivery({ int? driverId,String? filterName,String? filterId, int? salesPersonId}){
+    return orderDataSource.orderList(driverId: driverId,filterName: filterName,filterId: filterId,salesPersonId: salesPersonId);
   }
 
-  Future<OrderListResponse> allOrdersDelivery({int? driverId}){
-    return orderDataSource.orderList(driverId: driverId);
+  Future<OrderListResponse> allOrdersDelivery({int? driverId,  int? salesPersonId}){
+    return orderDataSource.orderList(driverId: driverId,salesPersonId: salesPersonId);
   }
 
   Future<OrderListResponse> orderDetailsDelivery({int? driverId, int? orderId}){
