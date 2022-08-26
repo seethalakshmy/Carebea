@@ -1,4 +1,5 @@
 import 'package:carebea/app/modules/Route_page/views/route_page_view.dart';
+import 'package:carebea/app/modules/delivery_home/controllers/homePage_orderListing_controller.dart';
 import 'package:carebea/app/modules/home/controllers/home_controller.dart';
 import 'package:carebea/app/modules/home/widgets/home_menu_cards.dart';
 import 'package:carebea/app/modules/orders/controllers/orders_controller.dart';
@@ -14,8 +15,7 @@ import '../../delivery_home/views/delivery_order_list_view.dart';
 
 class HomeMenuCards extends GetView<HomeController> {
    HomeMenuCards({Key? key}) : super(key: key);
-  DeliveryHomeController deliveryHomeController =Get.put(DeliveryHomeController()) ;
-  OrdersController ordersController = Get.find();
+   HomePageOrderListingController homePageOrderListingController = Get.find();
 
 
   @override
@@ -68,8 +68,7 @@ class HomeMenuCards extends GetView<HomeController> {
           ),
           InkWell(
             onTap: (){
-              ordersController.filterOrders("Category",1);
-    // deliveryHomeController.fetchDeliveryOrders("1");
+              homePageOrderListingController.fetchDeliveryOrders("1");
     Get.to(() => DeliveryOrderListView("Today's Delivery","sr"));
     },
             child: HomeMenuIndividual(
@@ -81,9 +80,8 @@ class HomeMenuCards extends GetView<HomeController> {
           ),
           InkWell(
             onTap: (){
-              deliveryHomeController.fetchDeliveryOrders("1");
+              homePageOrderListingController.fetchDeliveryOrders("2");
 
-              // ordersController.filterOrders("Category",2);
               Get.to(() => DeliveryOrderListView("Total Orders","sr"));
             },
             child: HomeMenuIndividual(
