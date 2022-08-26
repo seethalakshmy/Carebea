@@ -4,6 +4,7 @@ import 'dart:developer' as developer;
 
 import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/modules/dashboard/models/qr_model.dart';
+import 'package:carebea/app/modules/delivery_home/controllers/homePage_orderListing_controller.dart';
 import 'package:carebea/app/modules/delivery_home/models/delivery_home_model.dart';
 import 'package:carebea/app/modules/delivery_home/views/delivery_order_list_view.dart';
 import 'package:carebea/app/modules/shops/models/order_list_model.dart';
@@ -30,6 +31,7 @@ import '../controllers/delivery_home_controller.dart';
 
 class DeliveryHomeView extends GetView<DeliveryHomeController> {
   DeliveryHomeView({Key? key}) : super(key: key);
+  HomePageOrderListingController homePageOrderListingController = Get.put(HomePageOrderListingController());
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +127,7 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
                     children: [
                       InkWell(
                         onTap: () {
-                          controller.fetchDeliveryOrders("1");
+                          homePageOrderListingController.fetchDeliveryOrders("1");
                           Get.to(() => DeliveryOrderListView("Today's Delivery","delivery"));
                         },
                         child: HomeTile(
@@ -138,7 +140,7 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
                       SizedBox(width: 10),
                       InkWell(
                         onTap: () {
-                          controller.fetchDeliveryOrders("2");
+                          homePageOrderListingController.fetchDeliveryOrders("2");
                           Get.to(() => DeliveryOrderListView("Total Orders Delivered","delivery"));
                         },
                         child: HomeTile(
@@ -155,7 +157,7 @@ class DeliveryHomeView extends GetView<DeliveryHomeController> {
                 Center(
                   child: InkWell(
                     onTap: () {
-                      controller.fetchDeliveryAllOrders();
+                      homePageOrderListingController.fetchDeliveryAllOrders();
                       Get.to(() => DeliveryOrderListView('Order History',"delivery"));
                     },
                     child: HomeTile(

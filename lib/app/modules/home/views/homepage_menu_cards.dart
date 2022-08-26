@@ -15,7 +15,7 @@ import '../../delivery_home/views/delivery_order_list_view.dart';
 
 class HomeMenuCards extends GetView<HomeController> {
    HomeMenuCards({Key? key}) : super(key: key);
-   HomePageOrderListingController homePageOrderListingController = Get.find();
+   HomePageOrderListingController homePageOrderListingController = Get.put(HomePageOrderListingController());
 
 
   @override
@@ -68,7 +68,7 @@ class HomeMenuCards extends GetView<HomeController> {
           ),
           InkWell(
             onTap: (){
-              homePageOrderListingController.fetchDeliveryOrders("1");
+              homePageOrderListingController.fetchSrOrders("1");
     Get.to(() => DeliveryOrderListView("Today's Delivery","sr"));
     },
             child: HomeMenuIndividual(
@@ -80,7 +80,7 @@ class HomeMenuCards extends GetView<HomeController> {
           ),
           InkWell(
             onTap: (){
-              homePageOrderListingController.fetchDeliveryOrders("2");
+              homePageOrderListingController.fetchSrAllOrders();
 
               Get.to(() => DeliveryOrderListView("Total Orders","sr"));
             },
