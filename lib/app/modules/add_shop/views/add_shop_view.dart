@@ -230,6 +230,39 @@ class AddShopView extends GetView<AddShopController> {
                     'Location',
                     style: customTheme(context).regular.copyWith(fontSize: 12),
                   ),
+                  (Get.arguments['isEdit'] ?? false)?
+                  Obx(() {
+                    if (controller.searchingLocation.value) {
+                      return Center(child: circularProgressIndicator(context));
+                    }
+                    if (controller.currentLocation != null) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: MapLocationView(
+                            latitude: controller.currentLocation!.latitude!,
+                            longitude: controller.currentLocation!.longitude!),
+                      );
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: InkWell(
+                        onTap: () {
+                          controller.fetchLocation();
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.update_outlined,
+                              color: Theme.of(context).extension<CustomTheme>()!.primary,
+                            ),
+                            Text('Update location',
+                                style:
+                                    TextStyle(fontSize: 12, color: Theme.of(context).extension<CustomTheme>()!.primary))
+                          ],
+                        ),
+                      ),
+                    );
+                  }):
                   Obx(() {
                     if (controller.searchingLocation.value) {
                       return Center(child: circularProgressIndicator(context));
@@ -256,7 +289,7 @@ class AddShopView extends GetView<AddShopController> {
                             ),
                             Text('Add shop location',
                                 style:
-                                    TextStyle(fontSize: 12, color: Theme.of(context).extension<CustomTheme>()!.primary))
+                                TextStyle(fontSize: 12, color: Theme.of(context).extension<CustomTheme>()!.primary))
                           ],
                         ),
                       ),

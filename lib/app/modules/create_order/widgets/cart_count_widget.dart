@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import '../../../utils/assets.dart';
 import '../controllers/create_order_controller.dart';
 
 class CartCountWidget extends StatelessWidget {
@@ -58,6 +59,15 @@ class CartCountWidget extends StatelessWidget {
               },
               icon: RotatedBox(quarterTurns: 1, child: Icon(Icons.chevron_left))),
         ),
+        const SizedBox(width: 6),
+        InkWell(
+          onTap: (){
+            _controller.updateCartProduct(id, 0);
+
+          },
+            child:Image.asset(Assets.deleteIcon,scale: 3,),
+
+        )
       ],
     );
   }
