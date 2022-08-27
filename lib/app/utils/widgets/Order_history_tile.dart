@@ -141,9 +141,12 @@ class OrderHistoryTile extends StatelessWidget {
             child: Row(
               children: [
                 if ((orders.productList ?? []).isNotEmpty)
-                  Text(
-                    orders.productList!.first.name!,
-                    style: customTheme(context).regular.copyWith(fontSize: 11),
+                  Expanded(
+                    flex: 3,
+                    child: Text(
+                      orders.productList!.first.name!,
+                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                    ),
                   ),
                 SizedBox(
                   width: 10,

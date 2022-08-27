@@ -84,25 +84,28 @@ class CheckoutView extends StatelessWidget {
                     ),
                   );
                 }
-                return Container(
-                  decoration:
-                      BoxDecoration(color: customTheme(context).primary, borderRadius: BorderRadius.circular(7)),
-                  child: ConfirmationSlider(
-                    backgroundColor: customTheme(context).primary,
-                    height: 48,
-                    width: 200,
-                    sliderButtonContent: Center(
-                      child: Image.asset(
-                        Assets.threeArrow,
-                        width: 70,
-                        height: 15,
-                      ),
-                    ),
-                    shadow: BoxShadow(color: Colors.transparent),
-                    onConfirmation: () => createOrderController.confirmOrder(context),
-                    foregroundColor: Colors.transparent,
-                    text: "Swipe to Confirm",
-                    textStyle: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.white),
+                return Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: Container(
+                    decoration:
+                        BoxDecoration(color: customTheme(context).primary, borderRadius: BorderRadius.circular(7)),
+                    child:TextButton(onPressed: () {
+                      createOrderController.confirmOrder(context);
+                    },
+                    child:Text('Confirm Order',style:customTheme(context).regular.copyWith(fontSize: 12, color: Colors.white),),
+
+                    )
+
+                    // ConfirmationSlider(
+                    //   backgroundColor: customTheme(context).primary,
+                    //   height: 48,
+                    //   width: 200,
+                    //   shadow: BoxShadow(color: Colors.transparent),
+                    //   onConfirmation: () => createOrderController.confirmOrder(context),
+                    //   foregroundColor: Colors.transparent,
+                    //   text: "Swipe to Confirm",
+                    //   textStyle: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.white),
+                    // ),
                   ),
                 );
               })

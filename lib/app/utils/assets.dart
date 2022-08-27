@@ -26,4 +26,5 @@ class Assets {
   static const String routeHomeIcon = 'assets/images/sr-home-icons/route.png';
   static const String deliveryHomeIcon2 = 'assets/images/delivery-home-icons/delivery.png';
   static const String ordersHomeIcon = 'assets/images/delivery-home-icons/orders.png';
+  static const String deleteIcon = 'assets/images/delete.png';
 }

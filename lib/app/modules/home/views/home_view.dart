@@ -245,9 +245,9 @@ class HomeView extends GetView<HomeController> {
                   // ),
                   ),
             ),
-            const SliverPadding(
+             SliverPadding(
               padding: EdgeInsets.only(top: 20, left: 15.0, right: 15.0),
-              sliver: SliverToBoxAdapter(child: HomeMenuCards()),
+              sliver: SliverToBoxAdapter(child:  HomeMenuCards()),
             ),
             const SliverPadding(
                 padding: EdgeInsets.only(bottom: 10),

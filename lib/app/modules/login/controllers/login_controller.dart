@@ -16,6 +16,8 @@ class LoginController extends GetxController {
   final loginFormKey = GlobalKey<FormState>();
 
   final count = 0.obs;
+  RxBool isVisible = true.obs;
+
 
   @override
   void onInit() {

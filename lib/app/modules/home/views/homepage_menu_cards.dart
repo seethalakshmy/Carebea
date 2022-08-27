@@ -1,6 +1,8 @@
 import 'package:carebea/app/modules/Route_page/views/route_page_view.dart';
+import 'package:carebea/app/modules/delivery_home/controllers/homePage_orderListing_controller.dart';
 import 'package:carebea/app/modules/home/controllers/home_controller.dart';
 import 'package:carebea/app/modules/home/widgets/home_menu_cards.dart';
+import 'package:carebea/app/modules/orders/controllers/orders_controller.dart';
 import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +10,13 @@ import 'package:get/get.dart';
 
 import '../../../routes/app_pages.dart';
 import '../../add_shop/views/add_shop_view.dart';
+import '../../delivery_home/controllers/delivery_home_controller.dart';
+import '../../delivery_home/views/delivery_order_list_view.dart';
 
 class HomeMenuCards extends GetView<HomeController> {
-  const HomeMenuCards({Key? key}) : super(key: key);
+   HomeMenuCards({Key? key}) : super(key: key);
+   HomePageOrderListingController homePageOrderListingController = Get.put(HomePageOrderListingController());
+
 
   @override
   Widget build(BuildContext context) {
@@ -60,17 +66,30 @@ class HomeMenuCards extends GetView<HomeController> {
               title: "Route",
             ),
           ),
-          HomeMenuIndividual(
-            asseticon: Assets.deliveryHomeIcon,
-            backgroundColor: Color(0xffD8375C),
-            title: "Today's Delivery",
-            count: controller.homeData?.result?.todaysDelivery ?? 0,
+          InkWell(
+            onTap: (){
+              homePageOrderListingController.fetchSrOrders("1");
+    Get.to(() => DeliveryOrderListView("Today's Delivery","sr"));
+    },
+            child: HomeMenuIndividual(
+              asseticon: Assets.deliveryHomeIcon,
+              backgroundColor: Color(0xffD8375C),
+              title: "Today's Delivery",
+              count: controller.homeData?.result?.todaysDelivery ?? 0,
+            ),
           ),
-          HomeMenuIndividual(
-            asseticon: Assets.orderHomeIcon,
-            backgroundColor: Color(0xffF3674F),
-            title: "Total Orders",
-            count: controller.homeData?.result?.totalOrders ?? 0,
+          InkWell(
+            onTap: (){
+              homePageOrderListingController.fetchSrAllOrders();
+
+              Get.to(() => DeliveryOrderListView("Total Orders","sr"));
+            },
+            child: HomeMenuIndividual(
+              asseticon: Assets.orderHomeIcon,
+              backgroundColor: Color(0xffF3674F),
+              title: "Total Orders",
+              count: controller.homeData?.result?.totalOrders ?? 0,
+            ),
           ),
         ],
       ),
