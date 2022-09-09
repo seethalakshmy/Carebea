@@ -87,26 +87,29 @@ class CheckoutView extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.only(right: 15),
                   child: Container(
-                    decoration:
-                        BoxDecoration(color: customTheme(context).primary, borderRadius: BorderRadius.circular(7)),
-                    child:TextButton(onPressed: () {
-                      createOrderController.confirmOrder(context);
-                    },
-                    child:Text('Confirm Order',style:customTheme(context).regular.copyWith(fontSize: 12, color: Colors.white),),
+                      decoration:
+                          BoxDecoration(color: customTheme(context).primary, borderRadius: BorderRadius.circular(7)),
+                      child: TextButton(
+                        onPressed: () {
+                          createOrderController.confirmOrder(context);
+                        },
+                        child: Text(
+                          'Confirm Order',
+                          style: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.white),
+                        ),
+                      )
 
-                    )
-
-                    // ConfirmationSlider(
-                    //   backgroundColor: customTheme(context).primary,
-                    //   height: 48,
-                    //   width: 200,
-                    //   shadow: BoxShadow(color: Colors.transparent),
-                    //   onConfirmation: () => createOrderController.confirmOrder(context),
-                    //   foregroundColor: Colors.transparent,
-                    //   text: "Swipe to Confirm",
-                    //   textStyle: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.white),
-                    // ),
-                  ),
+                      // ConfirmationSlider(
+                      //   backgroundColor: customTheme(context).primary,
+                      //   height: 48,
+                      //   width: 200,
+                      //   shadow: BoxShadow(color: Colors.transparent),
+                      //   onConfirmation: () => createOrderController.confirmOrder(context),
+                      //   foregroundColor: Colors.transparent,
+                      //   text: "Swipe to Confirm",
+                      //   textStyle: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.white),
+                      // ),
+                      ),
                 );
               })
             ],
@@ -425,6 +428,7 @@ class ProductTile extends StatelessWidget {
                         "₹${_controller.productPrice(category, product).toStringAsFixed(2)}",
                         style: customTheme(context).medium.copyWith(fontSize: 14),
                       ),
+                      Text("x${_controller.cartproducts[product.id]}"),
                     ],
                   ),
                 ),

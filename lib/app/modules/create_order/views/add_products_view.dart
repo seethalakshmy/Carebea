@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carebea/app/modules/create_order/controllers/create_order_controller.dart';
 import 'package:carebea/app/modules/create_order/model/productlist_model.dart';
 import 'package:carebea/app/modules/create_order/views/check_out_view.dart';
@@ -210,9 +212,7 @@ class ProductTile extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: (product.productImages ?? []).isEmpty
-                          ? _placeholder()
-                          : _image(product.productImages?.first ?? ""),
+                      child: (product.imageUrl ?? []).isEmpty ? _placeholder() : _image(product.imageUrl?.first ?? ""),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
@@ -374,6 +374,7 @@ class ProductTile extends StatelessWidget {
         child: AspectRatio(
             aspectRatio: 58 / 74,
             child: Image.network(imageUrl, fit: BoxFit.cover, errorBuilder: (context, error, stackTrace) {
+              log("image error", error: error, stackTrace: stackTrace);
               return _placeholder();
             })),
       ),

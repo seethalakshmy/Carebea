@@ -24,7 +24,7 @@ void main() async {
   SharedPrefs().init();
 
   await Firebase.initializeApp();
-  await cloudMessaging.initMessaging();
+  // await cloudMessaging.initMessaging();
 
   ///for foreground
 
