@@ -3,7 +3,8 @@ import 'dart:ffi';
 
 import 'package:carebea/app/modules/add_shop/models/add_shop_model.dart';
 import 'package:carebea/app/modules/add_shop/models/list_state_model.dart';
-import 'package:carebea/app/modules/add_shop/models/list_zone_model.dart' as zone_list;
+import 'package:carebea/app/modules/add_shop/models/list_zone_model.dart'
+    as zone_list;
 import 'package:carebea/app/modules/add_shop/repo/add_shop_repo.dart';
 import 'package:carebea/app/modules/home/controllers/home_controller.dart';
 import 'package:carebea/app/utils/show_snackbar.dart';
@@ -37,6 +38,11 @@ class AddShopController extends GetxController {
   TextEditingController lastName = TextEditingController();
   TextEditingController openingBalanceController = TextEditingController();
 
+  final branchName = SharedPrefs.getBranchName();
+  final zoneName = SharedPrefs.getZoneName();
+  final branchId = SharedPrefs.getBranchId();
+  final zoneId = SharedPrefs.getZoneId();
+
   DateTime? backbuttonpressedTime;
   RxBool isRoutesListLoading = true.obs;
   RxBool isStateListLoading = true.obs;
@@ -44,9 +50,9 @@ class AddShopController extends GetxController {
   RxBool searchingLocation = false.obs;
   RxBool hasLocation = false.obs;
   route_list.RouteListResponse? routeListResponse;
-  List<route_list.PoolList> routeList = <route_list.PoolList>[];
+  List<route_list.RouteList> routeList = <route_list.RouteList>[];
   List<StateList> stateList = <StateList>[];
-  route_list.PoolList? selectedRoute;
+  route_list.RouteList? selectedRoute;
   zone_list.PoolList? selectedZone;
   StateList? selectedStateList;
   StateListResponse? stateListResponse;
@@ -74,29 +80,31 @@ class AddShopController extends GetxController {
     if (Get.arguments['isEdit'] ?? false) {
       populate(Get.arguments['shop'] as ShopList);
     } else {
-      openingBalanceController.text = homepageController.homeData?.result?.defOpeningCredit ?? "0";
+      openingBalanceController.text =
+          homepageController.homeData?.result?.defOpeningCredit ?? "0";
     }
     super.onInit();
   }
 
-  addShop(
-      {required int salesPersonId,
-      required String name,
-      required String lastName,
-      required String phone,
-      required int shopCategoryId,
-      required int customerType,
-      required String gst,
-      required String localArea,
-      required String district,
-      required String zip,
-      required int stateId,
-      required int zoneId,
-      required int routeId,
-      required double latitude,
-      required double longitude}) async {
+  addShop({
+    required int salesPersonId,
+    required String name,
+    required String lastName,
+    required String phone,
+    required int shopCategoryId,
+    required int customerType,
+    required String gst,
+    required String localArea,
+    required String district,
+    required String zip,
+    required int stateId,
+    required int zoneId,
+    required int routeId,
+  }) async {
     isAddShopButtonPressed(true);
-    if (currentLocation == null) {
+    print("hi");
+
+    if (currentLocation?.latitude == null) {
       showSnackBar("Please update your location");
       isAddShopButtonPressed(false);
 
@@ -104,6 +112,7 @@ class AddShopController extends GetxController {
     }
     if (addShopFormKey.currentState!.validate()) {
       addShopResponse = await addShopRepo.addShop(
+          branchId!,
           salesPersonId,
           name,
           lastName,
@@ -145,34 +154,53 @@ class AddShopController extends GetxController {
               );
             });
       } else {
-        showSnackBar(addShopResponse.addShopResult?.message ?? "Something happend!");
+        showSnackBar(
+            addShopResponse.addShopResult?.message ?? "Something happend!");
       }
     }
     isAddShopButtonPressed(false);
   }
 
-  updateShop(
-      {required int shopId,
-      required int salesPersonId,
-      required String name,
-      required String lastName,
-      required String phone,
-      required int shopCategoryId,
-      required int customerType,
-      required String gst,
-      required String localArea,
-      required String district,
-      required String zip,
-      required int stateId,
-      required int zoneId,
-      required int routeId,
-      required double latitude,
-      required double longitude}) async {
+  updateShop({
+    required int shopId,
+    required int salesPersonId,
+    required String name,
+    required String lastName,
+    required String phone,
+    required int shopCategoryId,
+    required int customerType,
+    required String gst,
+    required String localArea,
+    required String district,
+    required String zip,
+    required int stateId,
+    required int zoneId,
+    required int routeId,
+    required double latitude,
+    required double longitude,
+  }) async {
     isAddShopButtonPressed(true);
     if (addShopFormKey.currentState!.validate()) {
-      addShopResponse = await addShopRepo.updateShop(shopId, salesPersonId, name, lastName, shopCategoryId,
-          customerType, gst, localArea, district, zip, stateId, zoneId, routeId, latitude, longitude,
-          phone: (Get.arguments["shop"] as ShopList).phone != phone ? phone : null);
+      addShopResponse = await addShopRepo.updateShop(
+          branchId!,
+          shopId,
+          salesPersonId,
+          name,
+          lastName,
+          shopCategoryId,
+          customerType,
+          gst,
+          localArea,
+          district,
+          zip,
+          stateId,
+          zoneId,
+          routeId,
+          latitude,
+          longitude,
+          phone: (Get.arguments["shop"] as ShopList).phone != phone
+              ? phone
+              : null);
 
       if (addShopResponse.addShopResult?.status ?? false) {
         showDialog<bool>(
@@ -198,7 +226,8 @@ class AddShopController extends GetxController {
               );
             });
       } else {
-        showSnackBar(addShopResponse.addShopResult?.message ?? "Something happend!");
+        showSnackBar(
+            addShopResponse.addShopResult?.message ?? "Something happend!");
       }
     }
     isAddShopButtonPressed(false);
@@ -212,13 +241,15 @@ class AddShopController extends GetxController {
     zip.text = argument.address!.zip!;
     localArea.text = argument.address!.localArea!;
     lastName.text = argument.lastName!;
-    openingBalanceController.text = argument.credBalance?.toStringAsFixed(2) ?? "";
+    openingBalanceController.text =
+        argument.credBalance?.toStringAsFixed(2) ?? "";
     if ((argument.type ?? "").toLowerCase() == "b2b") {
       selectedRadio(1);
     } else if ((argument.type ?? "").toLowerCase() == "b2c") {
       selectedRadio(2);
     }
-    currentLocation = LocationData.fromMap({"latitude": argument.latitude, "longitude": argument.longitude});
+    currentLocation = LocationData.fromMap(
+        {"latitude": argument.latitude, "longitude": argument.longitude});
   }
 
   Future<bool> onWillpopClose() async {
@@ -240,11 +271,13 @@ class AddShopController extends GetxController {
 
   fetchRouteList() async {
     isRoutesListLoading(true);
-    routeListResponse = await addShopRepo.routeList();
-    routeList = routeListResponse!.routeListResult!.poolList ?? [];
+    routeListResponse =
+        await addShopRepo.routeList(salesPersonId: SharedPrefs.getUserId());
+    routeList = routeListResponse!.routeListResult!.routeList ?? [];
     if ((Get.arguments["isEdit"] ?? false) && (Get.arguments["shop"] != null)) {
       try {
-        selectedRoute = routeList.singleWhere((element) => element.id == (Get.arguments["shop"] as ShopList).routeId);
+        selectedRoute = routeList.singleWhere((element) =>
+            element.id == (Get.arguments["shop"] as ShopList).routeId);
       } catch (e) {}
     }
     isRoutesListLoading(false);
@@ -257,8 +290,9 @@ class AddShopController extends GetxController {
     stateList = stateListResponse!.stateListResult!.stateList ?? [];
     if ((Get.arguments["isEdit"] ?? false) && (Get.arguments["shop"] != null)) {
       try {
-        selectedStateList =
-            stateList.firstWhere((element) => element.stateId == (Get.arguments["shop"] as ShopList).address!.stateId);
+        selectedStateList = stateList.firstWhere((element) =>
+            element.stateId ==
+            (Get.arguments["shop"] as ShopList).address!.stateId);
       } catch (e) {}
     }
     isStateListLoading(false);
@@ -271,7 +305,8 @@ class AddShopController extends GetxController {
     zoneList = zoneListResponse!.zoneListResult!.poolList ?? [];
     if ((Get.arguments["isEdit"] ?? false) && (Get.arguments["shop"] != null)) {
       try {
-        selectedZone = zoneList.firstWhere((element) => element.id == (Get.arguments["shop"] as ShopList).zoneId);
+        selectedZone = zoneList.firstWhere((element) =>
+            element.id == (Get.arguments["shop"] as ShopList).zoneId);
       } catch (e) {}
     }
     isZoneListLoading(false);
@@ -279,8 +314,9 @@ class AddShopController extends GetxController {
 
   fetchCategory() {
     if ((Get.arguments["isEdit"] ?? false) && (Get.arguments["shop"] != null)) {
-      selectedCategory = category.singleWhere(
-          (element) => element.name?.toLowerCase() == (Get.arguments["shop"] as ShopList).category?.toLowerCase());
+      selectedCategory = category.singleWhere((element) =>
+          element.name?.toLowerCase() ==
+          (Get.arguments["shop"] as ShopList).category?.toLowerCase());
     }
     debugPrint(selectedCategory?.toJson().toString());
   }
@@ -312,7 +348,8 @@ class AddShopController extends GetxController {
   Future<bool> _checkForLocationPermission() async {
     var isLocationServiceEnabled = await _location.serviceEnabled();
     var permissionStatus = await _location.hasPermission();
-    return (permissionStatus == PermissionStatus.granted) && isLocationServiceEnabled;
+    return (permissionStatus == PermissionStatus.granted) &&
+        isLocationServiceEnabled;
   }
 
   Future<bool> getLocationPermissions(BuildContext context) async {
@@ -322,10 +359,12 @@ class AddShopController extends GetxController {
       permissionStatus = await _location.requestPermission();
       if ((permissionStatus != PermissionStatus.granted)) {
         if (permissionStatus == PermissionStatus.deniedForever) {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Location Permission is permanently denied, Please enable it in settings")));
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text(
+                  "Location Permission is permanently denied, Please enable it in settings")));
         } else if (permissionStatus == PermissionStatus.denied) {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Location Permission is required")));
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Location Permission is required")));
         }
         return false;
       }
@@ -334,7 +373,8 @@ class AddShopController extends GetxController {
     if (!(isServiceEnabled)) {
       isServiceEnabled = await _location.requestService();
       if (!isServiceEnabled) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Location Service is required")));
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Location Service is required")));
       }
       return false;
     }

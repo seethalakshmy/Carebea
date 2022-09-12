@@ -20,6 +20,7 @@ class AddShopDataSource {
 
   Future<AddShopResponse> addShop({
     required int salesPersonId,
+    required int branchId,
     required String lastName,
     required String name,
     required String phone,
@@ -37,6 +38,7 @@ class AddShopDataSource {
     required double openingBalance,
   }) async {
     var response = await _apiService.post('create-shop', {
+      'branch_id': branchId,
       'sales_person_id': salesPersonId,
       'last_name': lastName,
       'name': name,
@@ -69,6 +71,7 @@ class AddShopDataSource {
 
   Future<AddShopResponse> updateShop({
     required int shopId,
+    required int branchId,
     required int salesPersonId,
     required String lastName,
     required String name,
@@ -87,6 +90,7 @@ class AddShopDataSource {
   }) async {
     var body = {
       'shop_id': shopId,
+      'branch_id': branchId,
       'sales_person_id': salesPersonId,
       'last_name': lastName,
       'name': name,
@@ -108,8 +112,10 @@ class AddShopDataSource {
         'phone': phone,
       });
     }
-    var response = await http.post(Uri.parse('${apiService.baseUrl}update-shop'),
-        body: json.encode(body), headers: apiService.getHeaders());
+    var response = await http.post(
+        Uri.parse('${apiService.baseUrl}update-shop'),
+        body: json.encode(body),
+        headers: apiService.getHeaders());
     developer.log(" url----${(Uri.parse('${apiService.baseUrl}update-shop'))}");
 
     print("updateShops response statusCode ${response.statusCode} ");
@@ -123,17 +129,19 @@ class AddShopDataSource {
   }
 
   ///List routes
-  Future<RouteListResponse> routeList({String? date}) async {
+  Future<RouteListResponse> routeList(
+      {String? date, int? salesPersonId}) async {
     var response = await _apiService.post(
       "list-route",
-      {'date': date},
+      {'date': date, 'sales_person_id': salesPersonId},
     );
 
     if (response.statusCode == 200) {
       return RouteListResponse.fromJson(json.decode(response.body));
     }
 
-    return RouteListResponse(routeListResult: RouteListResult.fromJson(json.decode(response.body)));
+    return RouteListResponse(
+        routeListResult: RouteListResult.fromJson(json.decode(response.body)));
   }
 
   ///list states
@@ -147,7 +155,8 @@ class AddShopDataSource {
       return StateListResponse.fromJson(json.decode(response.body));
     }
 
-    return StateListResponse(stateListResult: StateListResult.fromJson(json.decode(response.body)));
+    return StateListResponse(
+        stateListResult: StateListResult.fromJson(json.decode(response.body)));
   }
 
   ///list zones
@@ -162,6 +171,7 @@ class AddShopDataSource {
       return ZoneListResponse.fromJson(json.decode(response.body));
     }
 
-    return ZoneListResponse(zoneListResult: ZoneListResult.fromJson(json.decode(response.body)));
+    return ZoneListResponse(
+        zoneListResult: ZoneListResult.fromJson(json.decode(response.body)));
   }
 }

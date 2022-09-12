@@ -31,8 +31,6 @@ InvoiceDetailsResult _$InvoiceDetailsResultFromJson(
       orderId: json['order_id'] as int?,
       invoiceId: json['invoice_id'] as int?,
       userAddress: json['user_address'] as String?,
-      
-     
       paymentMethod: json['payment_method'] as String?,
       itemTotal: (json['item_total'] as num?)?.toDouble(),
       grandTotal: (json['grand_total'] as num?)?.toDouble(),
@@ -46,8 +44,6 @@ Map<String, dynamic> _$InvoiceDetailsResultToJson(
       'order_id': instance.orderId,
       'invoice_id': instance.invoiceId,
       'user_address': instance.userAddress,
-      'delivery_date': instance.deliveryDate,
-      'delivery_person_id': instance.deliveryPersonId,
       'payment_method': instance.paymentMethod,
       'item_total': instance.itemTotal,
       'grand_total': instance.grandTotal,

@@ -46,4 +46,5 @@ Map<String, dynamic> _$ProfileResponseResultToJson(
       'zip': instance.zip,
       'phone': instance.phone,
       'mobile': instance.mobile,
+      'image_url': instance.imgUrl,
     };

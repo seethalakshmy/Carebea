@@ -48,6 +48,22 @@ class SharedPrefs {
     shared.setInt('user_id', userId);
   }
 
+  static void setZoneId(int zoneId) {
+    shared.setInt('zone_id', zoneId);
+  }
+
+  static void setBranchId(int branchId) {
+    shared.setInt('branch_id', branchId);
+  }
+
+  static int? getBranchId() {
+    return shared.getInt('branch_id');
+  }
+
+  static int? getZoneId() {
+    return shared.getInt('zone_id');
+  }
+
   static int? getUserId() {
     return shared.getInt('user_id');
   }
@@ -138,6 +154,22 @@ class SharedPrefs {
 
   static String getDeviceType() {
     return shared.getString('device_type') ?? "null";
+  }
+
+  static void setBranchName(String branchName) {
+    shared.setString('branch_name', branchName);
+  }
+
+  static String getBranchName() {
+    return shared.getString('branch_name') ?? "null";
+  }
+
+  static void setZoneName(String zoneName) {
+    shared.setString('zone_name', zoneName);
+  }
+
+  static String getZoneName() {
+    return shared.getString('zone_name') ?? "null";
   }
 
   static void setDeviceId(String deveiceId) {
