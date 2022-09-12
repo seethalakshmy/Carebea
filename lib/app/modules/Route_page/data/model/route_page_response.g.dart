@@ -52,5 +52,3 @@ Map<String, dynamic> _$RouteListToJson(RouteList instance) => <String, dynamic>{
       'route_name': instance.routeName,
       'user_address': instance.userAddress,
     };
-
-

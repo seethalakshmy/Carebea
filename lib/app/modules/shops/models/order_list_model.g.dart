@@ -6,28 +6,38 @@ part of 'order_list_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-OrderListResponse _$OrderListResponseFromJson(Map<String, dynamic> json) => OrderListResponse(
+OrderListResponse _$OrderListResponseFromJson(Map<String, dynamic> json) =>
+    OrderListResponse(
       jsonrpc: json['jsonrpc'] as String?,
       id: json['id'],
-      orderListResult: json['result'] == null ? null : OrderListResult.fromJson(json['result'] as Map<String, dynamic>),
+      orderListResult: json['result'] == null
+          ? null
+          : OrderListResult.fromJson(json['result'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$OrderListResponseToJson(OrderListResponse instance) => <String, dynamic>{
+Map<String, dynamic> _$OrderListResponseToJson(OrderListResponse instance) =>
+    <String, dynamic>{
       'jsonrpc': instance.jsonrpc,
       'id': instance.id,
       'result': instance.orderListResult,
     };
 
-OrderListResult _$OrderListResultFromJson(Map<String, dynamic> json) => OrderListResult(
+OrderListResult _$OrderListResultFromJson(Map<String, dynamic> json) =>
+    OrderListResult(
       status: json['status'] as bool?,
       message: json['message'] as String?,
-      history: (json['history'] as List<dynamic>?)?.map((e) => History.fromJson(e as Map<String, dynamic>)).toList(),
-      filterVals: json['filter_vals'] == null ? null : FilterVals.fromJson(json['filter_vals'] as Map<String, dynamic>),
+      history: (json['history'] as List<dynamic>?)
+          ?.map((e) => History.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      filterVals: json['filter_vals'] == null
+          ? null
+          : FilterVals.fromJson(json['filter_vals'] as Map<String, dynamic>),
     )..paymentMethods = (json['payment_methods'] as List<dynamic>?)
         ?.map((e) => PaymentMethod.fromJson(e as Map<String, dynamic>))
         .toList();
 
-Map<String, dynamic> _$OrderListResultToJson(OrderListResult instance) => <String, dynamic>{
+Map<String, dynamic> _$OrderListResultToJson(OrderListResult instance) =>
+    <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
       'history': instance.history,
@@ -36,10 +46,13 @@ Map<String, dynamic> _$OrderListResultToJson(OrderListResult instance) => <Strin
     };
 
 FilterVals _$FilterValsFromJson(Map<String, dynamic> json) => FilterVals(
-      date: (json['Date'] as List<dynamic>?)?.map((e) => Date.fromJson(e as Map<String, dynamic>)).toList(),
+      date: (json['Date'] as List<dynamic>?)
+          ?.map((e) => Date.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
-Map<String, dynamic> _$FilterValsToJson(FilterVals instance) => <String, dynamic>{
+Map<String, dynamic> _$FilterValsToJson(FilterVals instance) =>
+    <String, dynamic>{
       'Date': instance.date,
     };
 
@@ -57,12 +70,13 @@ History _$HistoryFromJson(Map<String, dynamic> json) => History(
       id: json['id'] as int?,
       name: json['name'] as String?,
       amountUntaxed: (json['amount_untaxed'] as num?)?.toDouble(),
-      outstandingAmount: (json['outstanding_amount'] as num?)?.toDouble(),
       amountTotal: (json['amount_total'] as num?)?.toDouble(),
       totalLines: json['total_lines'] as int?,
       orderId: json['order_id'] as int?,
       imageUrlList: json['image_url_list'] as List<dynamic>?,
-      dateOrder: json['date_order'] == null ? null : DateTime.parse(json['date_order'] as String),
+      dateOrder: json['date_order'] == null
+          ? null
+          : DateTime.parse(json['date_order'] as String),
       status: json['status'] as String?,
       userAddress: json['user_address'] as String?,
       amountTax: (json['amount_tax'] as num?)?.toDouble(),
@@ -71,8 +85,9 @@ History _$HistoryFromJson(Map<String, dynamic> json) => History(
           .toList(),
       productTotal: (json['product_total'] as num?)?.toDouble(),
       shopName: json['shop_name'] as String?,
-      shopLastName: json['shop_last_name'] as String?,
       amountDue: (json['amount_due'] as num?)?.toDouble(),
+      outstandingAmount: (json['outstanding_amount'] as num?)?.toDouble(),
+      shopLastName: json['shop_last_name'] as String?,
       srName: json['sr_name'] as String?,
       shopMobile: json['shop_mobile'] as String?,
       warehouseId: json['warehouse_id'] as int?,
@@ -91,6 +106,8 @@ Map<String, dynamic> _$HistoryToJson(History instance) => <String, dynamic>{
       'name': instance.name,
       'amount_untaxed': instance.amountUntaxed,
       'amount_total': instance.amountTotal,
+      'shop_latitude': instance.shopLatitude,
+      'shop_longitude': instance.shopLongitude,
       'product_total': instance.productTotal,
       'total_lines': instance.totalLines,
       'order_id': instance.orderId,
@@ -100,7 +117,9 @@ Map<String, dynamic> _$HistoryToJson(History instance) => <String, dynamic>{
       'user_address': instance.userAddress,
       'sr_name': instance.srName,
       'shop_name': instance.shopName,
+      'shop_last_name': instance.shopLastName,
       'amount_tax': instance.amountTax,
+      'outstanding_amount': instance.outstandingAmount,
       'amount_due': instance.amountDue,
       'product_list': instance.productList,
     };
@@ -126,10 +145,13 @@ ProductList _$ProductListFromJson(Map<String, dynamic> json) => ProductList(
       productUomQty: (json['product_uom_qty'] as num?)?.toDouble(),
       productListEnLang: json['en_lang'] as String?,
       total: (json['total'] as num?)?.toDouble(),
-      dateOrder: json['date_order'] == null ? null : DateTime.parse(json['date_order'] as String),
+      dateOrder: json['date_order'] == null
+          ? null
+          : DateTime.parse(json['date_order'] as String),
     );
 
-Map<String, dynamic> _$ProductListToJson(ProductList instance) => <String, dynamic>{
+Map<String, dynamic> _$ProductListToJson(ProductList instance) =>
+    <String, dynamic>{
       'imageUrl': instance.imageUrl,
       'qtyAvailable': instance.qtyAvailable,
       'mlLang': instance.mlLang,

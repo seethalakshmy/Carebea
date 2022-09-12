@@ -26,9 +26,9 @@ RouteListResult _$RouteListResultFromJson(Map<String, dynamic> json) =>
     RouteListResult(
       status: json['status'] as bool?,
       message: json['message'] as String?,
-      stateCount: json['route_count'] as int?,
-      poolList: (json['route_list'] as List<dynamic>?)
-          ?.map((e) => PoolList.fromJson(e as Map<String, dynamic>))
+      routeCount: json['route_count'] as int?,
+      routeList: (json['route_list'] as List<dynamic>?)
+          ?.map((e) => RouteList.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -36,17 +36,17 @@ Map<String, dynamic> _$RouteListResultToJson(RouteListResult instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
-      'route_count': instance.stateCount,
-      'route_list': instance.poolList,
+      'route_count': instance.routeCount,
+      'route_list': instance.routeList,
     };
 
-PoolList _$PoolListFromJson(Map<String, dynamic> json) => PoolList(
+RouteList _$RouteListFromJson(Map<String, dynamic> json) => RouteList(
       id: json['id'] as int?,
       name: json['name'] as String?,
       address: json['address'] as String?,
     );
 
-Map<String, dynamic> _$PoolListToJson(PoolList instance) => <String, dynamic>{
+Map<String, dynamic> _$RouteListToJson(RouteList instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'address': instance.address,
