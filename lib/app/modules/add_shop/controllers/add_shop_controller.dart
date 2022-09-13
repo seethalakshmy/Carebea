@@ -80,8 +80,8 @@ class AddShopController extends GetxController {
     if (Get.arguments['isEdit'] ?? false) {
       populate(Get.arguments['shop'] as ShopList);
     } else {
-      openingBalanceController.text =
-          homepageController.homeData?.result?.defOpeningCredit ?? "0";
+      // openingBalanceController.text =
+      //     homepageController.homeData?.result?.defOpeningCredit ?? "0";
     }
     super.onInit();
   }
@@ -196,8 +196,8 @@ class AddShopController extends GetxController {
           stateId,
           zoneId,
           routeId,
-          latitude,
-          longitude,
+          currentLocation!.latitude!,
+          currentLocation!.longitude!,
           phone: (Get.arguments["shop"] as ShopList).phone != phone
               ? phone
               : null);
@@ -242,7 +242,7 @@ class AddShopController extends GetxController {
     localArea.text = argument.address!.localArea!;
     lastName.text = argument.lastName!;
     openingBalanceController.text =
-        argument.credBalance?.toStringAsFixed(2) ?? "";
+        argument.outStandingAmount?.toStringAsFixed(2) ?? "";
     if ((argument.type ?? "").toLowerCase() == "b2b") {
       selectedRadio(1);
     } else if ((argument.type ?? "").toLowerCase() == "b2c") {
@@ -334,6 +334,8 @@ class AddShopController extends GetxController {
     searchingLocation(true);
     try {
       currentLocation = await _location.getLocation();
+      debugPrint("lat ${currentLocation?.latitude}");
+      debugPrint("long ${currentLocation?.longitude}");
     } catch (e, s) {
       log("location error", error: e, stackTrace: s);
       currentLocation = null;

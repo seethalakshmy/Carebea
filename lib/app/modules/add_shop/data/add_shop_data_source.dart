@@ -112,11 +112,13 @@ class AddShopDataSource {
         'phone': phone,
       });
     }
-    var response = await http.post(
-        Uri.parse('${apiService.baseUrl}update-shop'),
-        body: json.encode(body),
-        headers: apiService.getHeaders());
-    developer.log(" url----${(Uri.parse('${apiService.baseUrl}update-shop'))}");
+    // var response = await http.post(
+    //     Uri.parse('${apiService.baseUrl}update-shop'),
+    //     body: json.encode(body),
+    //     headers: apiService.getHeaders());
+    // developer.log(" url----${(Uri.parse('${apiService.baseUrl}update-shop'))}");
+
+    var response = await apiService.post('update-shop', body);
 
     print("updateShops response statusCode ${response.statusCode} ");
     print("updateShops response body  ${response.body}");

@@ -1,3 +1,4 @@
+import 'package:carebea/app/modules/create_order/model/create_order.dart';
 import 'package:carebea/app/modules/shops/controllers/shops_controller.dart';
 import 'package:carebea/app/modules/shops/widgets/order_tile.dart';
 import 'package:carebea/app/routes/app_pages.dart';
@@ -8,9 +9,13 @@ import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:carebea/app/utils/widgets/map_location_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../core/helper.dart';
+import '../../../utils/widgets/custom_button.dart';
+import '../../../utils/widgets/custom_radio_button.dart';
+import '../../../utils/widgets/custom_textfield.dart';
 import '../models/shop_model.dart';
 
 class ShopDetails extends StatefulWidget {
@@ -21,14 +26,20 @@ class ShopDetails extends StatefulWidget {
   State<ShopDetails> createState() => _ShopDetailsState();
 }
 
-class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStateMixin {
+class _ShopDetailsState extends State<ShopDetails>
+    with SingleTickerProviderStateMixin {
   ShopsController shopsController = Get.find();
   TabController? tabController1;
   List<String> products = ['Eccence hande wash', 'Eccence face wash'];
-
+  GlobalKey<FormState> formState = GlobalKey<FormState>();
+  List<PaymentMethod> paymentMethods = [
+    PaymentMethod.fromJson({"id": 7, "name": "Cash", "code": "CSH1"}),
+    PaymentMethod.fromJson({"id": 11, "name": "Cheque", "code": "CHEQ"}),
+  ];
   @override
   void initState() {
     shopsController.fetchShop(widget.shopId);
+    shopsController.selectedPaymentMethod(paymentMethods.first);
     tabController1 = TabController(length: 2, vsync: this);
     super.initState();
   }
@@ -65,6 +76,175 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                       'Shops',
                       style: customTheme(context).medium.copyWith(fontSize: 16),
                     ),
+                    Spacer(),
+                    shopsController.shop!.outStandingAmount! > 0
+                        ? TextButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (ctx) => Material(
+                                  type: MaterialType.transparency,
+                                  color: Colors.transparent,
+                                  child: Center(
+                                    child: CustomCard(
+                                      padding: const EdgeInsets.all(20),
+                                      width: Get.size.width * .8,
+                                      child: Form(
+                                        key: formState,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              "Payment Method",
+                                              style: customTheme(context)
+                                                  .medium
+                                                  .copyWith(fontSize: 14),
+                                            ),
+                                            const SizedBox(height: 10),
+                                            Obx(() {
+                                              if (shopsController
+                                                      .selectedPaymentMethod
+                                                      .value!
+                                                      .id !=
+                                                  null) {}
+                                              return Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: (paymentMethods ??
+                                                          [])
+                                                      .map((e) => CustomRadioButton<
+                                                              PaymentMethod>(
+                                                          label: e.name,
+                                                          groupValue:
+                                                              shopsController
+                                                                  .selectedPaymentMethod
+                                                                  .value!,
+                                                          value: e,
+                                                          onChanged: (val) {
+                                                            shopsController
+                                                                .selectedPaymentMethod(
+                                                                    e);
+                                                          }))
+                                                      .toList());
+                                            }),
+                                            const SizedBox(height: 13),
+                                            Text(
+                                              "Collected amount",
+                                              style: customTheme(context)
+                                                  .regular
+                                                  .copyWith(fontSize: 11),
+                                            ),
+                                            const SizedBox(height: 5),
+                                            CustomTextField(
+                                              validaton: (val) {
+                                                if ((val ?? "").isEmpty) {
+                                                  return "Collected amount is required";
+                                                }
+                                                if (double.parse(val!) == 0) {
+                                                  return "Collected amount can't be zero";
+                                                }
+                                                // if (double.parse(val ?? "0") <
+                                                //     (
+                                                //     shopsController.collectedAmountEditingController == 0
+                                                //     )) {
+                                                //   return "Collected amount can't be zero";
+                                                // }
+                                                return null;
+                                              },
+                                              inputType: TextInputType.number,
+                                              textcontroller: shopsController
+                                                  .collectedAmountEditingController,
+                                            ),
+                                            Obx(() {
+                                              if (shopsController
+                                                      .selectedPaymentMethod
+                                                      .value!
+                                                      .code !=
+                                                  "CHEQ") {
+                                                return const SizedBox.shrink();
+                                              }
+
+                                              return Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  const SizedBox(height: 13),
+                                                  Text(
+                                                    "Cheque No",
+                                                    style: customTheme(context)
+                                                        .regular
+                                                        .copyWith(fontSize: 11),
+                                                  ),
+                                                  const SizedBox(height: 5),
+                                                  CustomTextField(
+                                                    validaton: (val) {
+                                                      if (shopsController
+                                                              .selectedPaymentMethod
+                                                              .value!
+                                                              .code !=
+                                                          "CHEQ") {
+                                                        return null;
+                                                      }
+                                                      if ((val ?? "")
+                                                          .trim()
+                                                          .isEmpty) {
+                                                        return "Cheque No is required";
+                                                      }
+                                                      if ((val ?? "").length !=
+                                                          6) {
+                                                        return "Invalid Cheque No";
+                                                      }
+                                                      return null;
+                                                    },
+                                                    maxlength: 6,
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .digitsOnly
+                                                    ],
+                                                    textcontroller:
+                                                        shopsController
+                                                            .cheqNoController,
+                                                    inputType:
+                                                        TextInputType.number,
+                                                  ),
+                                                ],
+                                              );
+                                            }),
+                                            const SizedBox(height: 20),
+                                            // Obx(() {
+
+                                            CustomButton(
+                                                // isLoading: controller.isConfirmingOrder.value,
+                                                title: "Confirm",
+                                                onTap: () {
+                                                  if (formState.currentState!
+                                                      .validate()) {
+                                                    shopsController
+                                                        .outstandingAmountPay(
+                                                            shopId:
+                                                                shopsController
+                                                                    .shop!.id!);
+                                                    // controller.confirmOrder();
+                                                  }
+                                                })
+                                            // })
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Text('Pay Now',
+                                style: TextStyle(
+                                  color: customTheme(context).primary,
+                                )))
+                        : Container(),
                   ],
                 ),
               ),
@@ -82,19 +262,24 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                         Text(
                           "${shopDetails!.name!} ${shopDetails.lastName}",
                           // 'Trinity Shop',
-                          style: customTheme(context).medium.copyWith(fontSize: 14),
+                          style: customTheme(context)
+                              .medium
+                              .copyWith(fontSize: 14),
                         ),
                         if ((shopDetails.gstNo ?? "").isNotEmpty)
                           Text(
                             "GST no: ${shopDetails.gstNo!}",
                             // 'GST no: 66998964579898',
-                            style: customTheme(context).regular.copyWith(fontSize: 11),
+                            style: customTheme(context)
+                                .regular
+                                .copyWith(fontSize: 11),
                           ),
                       ],
                     ),
                     InkWell(
                         onTap: () {
-                          Get.toNamed(Routes.ADD_SHOP, arguments: {'isEdit': true, 'shop': shopDetails});
+                          Get.toNamed(Routes.ADD_SHOP,
+                              arguments: {'isEdit': true, 'shop': shopDetails});
                         },
                         child: Image.asset(Assets.edit, scale: 3))
                   ],
@@ -121,7 +306,9 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                         child: Text(
                           getFullAddress(shopDetails.address),
                           // 'Akshay Nagar 1st Block Cross , Rammurthy Nagar, Bangalore -560016',
-                          style: customTheme(context).regular.copyWith(fontSize: 11),
+                          style: customTheme(context)
+                              .regular
+                              .copyWith(fontSize: 11),
                         ),
                       ),
                     ),
@@ -152,7 +339,9 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                               Text(
                                 "+91 ${shopDetails.phone!}",
                                 // '+91 6398541236',
-                                style: customTheme(context).regular.copyWith(fontSize: 11),
+                                style: customTheme(context)
+                                    .regular
+                                    .copyWith(fontSize: 11),
                               ),
                             ],
                           ),
@@ -161,7 +350,9 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                         ),
                         Text(
                           'Category: ${shopDetails.category!}',
-                          style: customTheme(context).regular.copyWith(fontSize: 11),
+                          style: customTheme(context)
+                              .regular
+                              .copyWith(fontSize: 11),
                         ),
                       ],
                     ),
@@ -169,14 +360,18 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                       children: [
                         Text(
                           'Branch : CareBae branch',
-                          style: customTheme(context).regular.copyWith(fontSize: 11),
+                          style: customTheme(context)
+                              .regular
+                              .copyWith(fontSize: 11),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         Text(
                           'Credit Balance : ₹${shopDetails.credBalance!}',
-                          style: customTheme(context).regular.copyWith(fontSize: 11),
+                          style: customTheme(context)
+                              .regular
+                              .copyWith(fontSize: 11),
                         ),
                       ],
                     ),
@@ -208,9 +403,11 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                       onTap: (index) {
                         tabController1!.animateTo(index);
                         if (index == 0) {
-                          shopsController.fetchOrders('Upcoming', widget.shopId!);
+                          shopsController.fetchOrders(
+                              'Upcoming', widget.shopId!);
                         } else {
-                          shopsController.fetchOrders('Previous', widget.shopId!);
+                          shopsController.fetchOrders(
+                              'Previous', widget.shopId!);
                         }
                       },
                       tabs: [
@@ -218,7 +415,9 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                           child: Obx(() {
                             return Text(
                               'Upcoming Orders(${shopsController.upcomingOrderCount.value})',
-                              style: customTheme(context).medium.copyWith(fontSize: 12),
+                              style: customTheme(context)
+                                  .medium
+                                  .copyWith(fontSize: 12),
                             );
                           }),
                         ),
@@ -226,7 +425,9 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                           child: Obx(() {
                             return Text(
                               'Previous Orders(${shopsController.previousOrderCount.value})',
-                              style: customTheme(context).medium.copyWith(fontSize: 12),
+                              style: customTheme(context)
+                                  .medium
+                                  .copyWith(fontSize: 12),
                             );
                           }),
                         ),
@@ -240,7 +441,9 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                 // height: MediaQuery.of(context).size.height,
                 child: Obx(() {
                   if (shopsController.isOrdersLoading.value) {
-                    return Align(alignment: Alignment.topCenter, child: circularProgressIndicator(context));
+                    return Align(
+                        alignment: Alignment.topCenter,
+                        child: circularProgressIndicator(context));
                   }
                   if (shopsController.orderHistory!.isEmpty) {
                     return Align(
@@ -250,10 +453,13 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                           style: customTheme(context).regular,
                         ));
                   }
-                  return TabBarView(controller: tabController1, physics: NeverScrollableScrollPhysics(), children: [
-                    _upcomingOrders(),
-                    _previousOrders(),
-                  ]);
+                  return TabBarView(
+                      controller: tabController1,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        _upcomingOrders(),
+                        _previousOrders(),
+                      ]);
                 }),
               )
             ],

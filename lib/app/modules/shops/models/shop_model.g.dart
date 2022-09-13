@@ -90,6 +90,7 @@ ShopList _$ShopListFromJson(Map<String, dynamic> json) => ShopList(
       longitude: (json['longitude'] as num?)?.toDouble(),
       routeId: json['route_id'] as int?,
       zoneId: json['zone_id'] as int?,
+      outStandingAmount: (json['outstanding_amount'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$ShopListToJson(ShopList instance) => <String, dynamic>{
@@ -108,6 +109,7 @@ Map<String, dynamic> _$ShopListToJson(ShopList instance) => <String, dynamic>{
       'longitude': instance.longitude,
       'route_id': instance.routeId,
       'zone_id': instance.zoneId,
+      'outstanding_amount': instance.outStandingAmount,
     };
 
 Address _$AddressFromJson(Map<String, dynamic> json) => Address(

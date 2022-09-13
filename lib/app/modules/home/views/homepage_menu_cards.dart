@@ -14,9 +14,9 @@ import '../../delivery_home/controllers/delivery_home_controller.dart';
 import '../../delivery_home/views/delivery_order_list_view.dart';
 
 class HomeMenuCards extends GetView<HomeController> {
-   HomeMenuCards({Key? key}) : super(key: key);
-   HomePageOrderListingController homePageOrderListingController = Get.put(HomePageOrderListingController());
-
+  HomeMenuCards({Key? key}) : super(key: key);
+  HomePageOrderListingController homePageOrderListingController =
+      Get.put(HomePageOrderListingController());
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,10 @@ class HomeMenuCards extends GetView<HomeController> {
       height: Get.size.height * .23,
       child: GridView(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, crossAxisSpacing: 10, mainAxisSpacing: 10, childAspectRatio: 12 / 8),
+            crossAxisCount: 3,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            childAspectRatio: 12 / 8),
         children: [
           InkWell(
             onTap: () {
@@ -46,16 +49,16 @@ class HomeMenuCards extends GetView<HomeController> {
               title: "Add new shop",
             ),
           ),
-          InkWell(
-            onTap: () {
-              Get.toNamed(Routes.DELIVERY_HOME);
-            },
-            child: HomeMenuIndividual(
-              asseticon: Assets.reportsHomeIcon,
-              gradients: [Color(0xff66DE9D), Color(0xff00B2BE)],
-              title: "Reports",
-            ),
-          ),
+          // InkWell(
+          //   onTap: () {
+          //     // Get.toNamed(Routes.DELIVERY_HOME);
+          //   },
+          //   child: HomeMenuIndividual(
+          //     asseticon: Assets.reportsHomeIcon,
+          //     gradients: [Color(0xff66DE9D), Color(0xff00B2BE)],
+          //     title: "Reports",
+          //   ),
+          // ),
           InkWell(
             onTap: () {
               Get.toNamed(Routes.ROUTE_PAGE);
@@ -67,10 +70,10 @@ class HomeMenuCards extends GetView<HomeController> {
             ),
           ),
           InkWell(
-            onTap: (){
+            onTap: () {
               homePageOrderListingController.fetchSrOrders("1");
-    Get.to(() => DeliveryOrderListView("Today's Delivery","sr"));
-    },
+              Get.to(() => DeliveryOrderListView("Today's Delivery", "sr"));
+            },
             child: HomeMenuIndividual(
               asseticon: Assets.deliveryHomeIcon,
               backgroundColor: Color(0xffD8375C),
@@ -79,10 +82,10 @@ class HomeMenuCards extends GetView<HomeController> {
             ),
           ),
           InkWell(
-            onTap: (){
+            onTap: () {
               homePageOrderListingController.fetchSrAllOrders();
 
-              Get.to(() => DeliveryOrderListView("Total Orders","sr"));
+              Get.to(() => DeliveryOrderListView("Total Orders", "sr"));
             },
             child: HomeMenuIndividual(
               asseticon: Assets.orderHomeIcon,
