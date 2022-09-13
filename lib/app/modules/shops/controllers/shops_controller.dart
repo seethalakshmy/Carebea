@@ -1,13 +1,17 @@
 import 'package:carebea/app/modules/shops/models/order_list_model.dart';
+import 'package:carebea/app/modules/shops/models/payment_model.dart';
 import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:carebea/app/modules/shops/repo/order_list_repo.dart';
+import 'package:carebea/app/modules/shops/repo/payment_repo.dart';
 import 'package:carebea/app/modules/shops/repo/shop_list_repo.dart';
 import 'package:carebea/app/modules/shops/views/shop_details.dart';
 import 'package:carebea/app/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/shared_prefs.dart';
+import '../../create_order/model/create_order.dart';
 
 class ShopsController extends GetxController {
   ShopListRepo shopListRepo = ShopListRepo();
@@ -22,6 +26,13 @@ class ShopsController extends GetxController {
   DateTime? backbuttonpressedTime;
   OrderListResponse? orderListResponse;
   List<History>? orderHistory;
+  PaymentRepo paymentRepo = PaymentRepo();
+  PaymentResponse? paymentResponse;
+
+  Rx<PaymentMethod?> selectedPaymentMethod = Rx<PaymentMethod?>(null);
+  TextEditingController collectedAmountEditingController =
+      TextEditingController();
+  TextEditingController cheqNoController = TextEditingController();
 
   Rx<SearchType> selectedSearchtype = Rx(
     SearchType("Name", "name"),
@@ -56,7 +67,8 @@ class ShopsController extends GetxController {
     filterSelected("");
 
     isLoading(true);
-    var shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!);
+    var shopListResponse =
+        await shopListRepo.shopList(SharedPrefs.getUserId()!);
     if (shopListResponse.shopListResult?.status ?? false) {
       shopList = shopListResponse.shopListResult?.shopList ?? [];
       shopList.sort((a, b) => b.id!.compareTo(a.id!));
@@ -69,7 +81,8 @@ class ShopsController extends GetxController {
 
     debugPrint("fetchAllShops $shopListResponse");
 
-    debugPrint('fetch shops status ${shopListResponse.shopListResult!.status!}');
+    debugPrint(
+        'fetch shops status ${shopListResponse.shopListResult!.status!}');
 
     isLoading(false);
   }
@@ -77,7 +90,8 @@ class ShopsController extends GetxController {
   fetchOrders(String orderType, int shopId) async {
     isOrdersLoading(true);
 
-    orderListResponse = await orderListRepo.orderList(SharedPrefs.getUserId()!, orderType, shopId);
+    orderListResponse = await orderListRepo.orderList(
+        SharedPrefs.getUserId()!, orderType, shopId);
     if (orderListResponse!.orderListResult!.status == true) {
       orderHistory = orderListResponse!.orderListResult!.history;
     } else {
@@ -91,7 +105,8 @@ class ShopsController extends GetxController {
     }
     debugPrint("fetchAllOrders $orderListResponse");
 
-    debugPrint('fetch order status ${orderListResponse!.orderListResult!.status}');
+    debugPrint(
+        'fetch order status ${orderListResponse!.orderListResult!.status}');
 
     isOrdersLoading(false);
   }
@@ -101,7 +116,8 @@ class ShopsController extends GetxController {
     shopList.clear();
     isFilterClick(true);
     filterSelected("$filterName-$filterId");
-    var shopFilterResponse = await shopListRepo.shopFilter(SharedPrefs.getUserId()!, filterName, filterId);
+    var shopFilterResponse = await shopListRepo.shopFilter(
+        SharedPrefs.getUserId()!, filterName, filterId);
     if (shopFilterResponse.shopListResult?.status ?? false) {
       shopList = shopFilterResponse.shopListResult?.shopList ?? [];
     }
@@ -110,7 +126,8 @@ class ShopsController extends GetxController {
 
   shopDetail(int shopId) async {
     isShopDetailsLoading(true);
-    shopDetailResponse = await shopListRepo.shopDetails(SharedPrefs.getUserId()!, shopId);
+    shopDetailResponse =
+        await shopListRepo.shopDetails(SharedPrefs.getUserId()!, shopId);
     isShopDetailsLoading(false);
   }
 
@@ -141,13 +158,33 @@ class ShopsController extends GetxController {
     isShopDetailsLoading(true);
     previousOrderCount(0);
     upcomingOrderCount(0);
-    var response = await shopListRepo.shopDetails(SharedPrefs.getUserId()!, shopId!);
+    var response =
+        await shopListRepo.shopDetails(SharedPrefs.getUserId()!, shopId!);
     if (response.shopListResult?.status ?? false) {
       shop = response.shopListResult?.shopList?.first;
+      collectedAmountEditingController.text =
+          (shop?.outStandingAmount ?? 0).toString();
       await fetchOrders('Previous', shopId);
       await fetchOrders('Upcoming', shopId);
     }
     isShopDetailsLoading(false);
+  }
+
+  ///
+  void outstandingAmountPay({required int shopId}) async {
+    paymentResponse = await paymentRepo.payAmount(
+        salesPersonId: SharedPrefs.getUserId()!,
+        shopId: shopId,
+        collectedAmount: double.parse(collectedAmountEditingController.text),
+        paymentType: selectedPaymentMethod.value!.name!,
+        chequeNo: cheqNoController.text);
+
+    if (paymentResponse?.paymentResult?.status ?? false) {
+      Get.back();
+      ScaffoldMessenger.of(Get.context!)
+          .showSnackBar(const SnackBar(content: Text("Payment Successful")));
+      fetchShop(shopId);
+    }
   }
 
   Future<void> searchShop(String? query) async {
@@ -157,8 +194,9 @@ class ShopsController extends GetxController {
     if ((query ?? "").isEmpty) {
       shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!);
     } else {
-      shopListResponse = await shopListRepo
-          .shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {selectedSearchtype.value.type!: query});
+      shopListResponse = await shopListRepo.shopSearch(
+          salesPersonId: SharedPrefs.getUserId()!,
+          query: {selectedSearchtype.value.type!: query});
     }
     if (shopListResponse.shopListResult?.status ?? false) {
       shopList = shopListResponse.shopListResult?.shopList ?? [];

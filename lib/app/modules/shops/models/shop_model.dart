@@ -19,7 +19,8 @@ class ShopListResponse {
   dynamic id;
   @JsonKey(name: 'result')
   ShopListResult? shopListResult;
-  factory ShopListResponse.fromJson(Map<String, dynamic> json) => _$ShopListResponseFromJson(json);
+  factory ShopListResponse.fromJson(Map<String, dynamic> json) =>
+      _$ShopListResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$ShopListResponseToJson(this);
 }
@@ -42,7 +43,8 @@ class ShopListResult {
   @JsonKey(name: 'filter_vals')
   FilterVal? filterVals;
 
-  factory ShopListResult.fromJson(Map<String, dynamic> json) => _$ShopListResultFromJson(json);
+  factory ShopListResult.fromJson(Map<String, dynamic> json) =>
+      _$ShopListResultFromJson(json);
 
   Map<String, dynamic> toJson() => _$ShopListResultToJson(this);
 }
@@ -61,7 +63,8 @@ class FilterVal {
   @JsonKey(name: 'Route')
   List<Category>? route;
 
-  factory FilterVal.fromJson(Map<String, dynamic> json) => _$FilterValFromJson(json);
+  factory FilterVal.fromJson(Map<String, dynamic> json) =>
+      _$FilterValFromJson(json);
 
   Map<String, dynamic> toJson() => _$FilterValToJson(this);
 }
@@ -76,29 +79,31 @@ class Category {
   int? id;
   String? name;
 
-  factory Category.fromJson(Map<String, dynamic> json) => _$CategoryFromJson(json);
+  factory Category.fromJson(Map<String, dynamic> json) =>
+      _$CategoryFromJson(json);
 
   Map<String, dynamic> toJson() => _$CategoryToJson(this);
 }
 
 @JsonSerializable()
 class ShopList {
-  ShopList({
-    this.id,
-    this.name,
-    this.lastName,
-    this.category,
-    this.type,
-    this.email,
-    this.phone,
-    this.altPhone,
-    this.gstNo,
-    this.address,
-    this.credBalance,
-    this.latitude,
-    this.longitude,
-    this.routeId,this.zoneId,
-  });
+  ShopList(
+      {this.id,
+      this.name,
+      this.lastName,
+      this.category,
+      this.type,
+      this.email,
+      this.phone,
+      this.altPhone,
+      this.gstNo,
+      this.address,
+      this.credBalance,
+      this.latitude,
+      this.longitude,
+      this.routeId,
+      this.zoneId,
+      this.outStandingAmount});
 
   int? id;
   String? name;
@@ -121,8 +126,11 @@ class ShopList {
   int? routeId;
   @JsonKey(name: "zone_id")
   int? zoneId;
+  @JsonKey(name: 'outstanding_amount')
+  double? outStandingAmount;
 
-  factory ShopList.fromJson(Map<String, dynamic> json) => _$ShopListFromJson(json);
+  factory ShopList.fromJson(Map<String, dynamic> json) =>
+      _$ShopListFromJson(json);
 
   Map<String, dynamic> toJson() => _$ShopListToJson(this);
 }
@@ -152,7 +160,8 @@ class Address {
   int? countryId;
   @JsonKey(name: 'country_name')
   String? countryName;
-  factory Address.fromJson(Map<String, dynamic> json) => _$AddressFromJson(json);
+  factory Address.fromJson(Map<String, dynamic> json) =>
+      _$AddressFromJson(json);
 
   Map<String, dynamic> toJson() => _$AddressToJson(this);
 }
