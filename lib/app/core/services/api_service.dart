@@ -17,6 +17,7 @@ class ApiService extends GetxService {
   var xAuthToken = '12345';
   // var xAuthClient = "Xjfgnf35*\$&dfgkgb\$AViwqALG";
   // var xAuthToken = 'Xjfgnf35*\$&dfgkgb\$AViwqALG';
+
   var auth = '';
   var token = '';
 
