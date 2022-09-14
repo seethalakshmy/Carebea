@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapLocationView extends StatefulWidget {
-  MapLocationView({Key? key, required this.latitude, required this.longitude, this.showNavigation = false})
+  MapLocationView({Key? key, required this.latitude, required this.longitude, this.showNavigation = false, this.height})
       : super(key: key) {
     _controller = Completer<GoogleMapController>();
     BitmapDescriptor.fromAssetImage(ImageConfiguration(devicePixelRatio: 10), 'assets/images/location_filled.png')
@@ -17,6 +17,7 @@ class MapLocationView extends StatefulWidget {
 
   final double latitude;
   final double longitude;
+  final double? height;
   final bool showNavigation;
   late BitmapDescriptor mapPin;
   late Completer<GoogleMapController> _controller;
@@ -38,7 +39,7 @@ class _MapLocationViewState extends State<MapLocationView> {
     return ClipRRect(
       borderRadius: BorderRadius.circular(5),
       child: SizedBox(
-        height: 80,
+        height: widget.height ?? 80,
         width: double.infinity,
         child: Stack(
           children: [
