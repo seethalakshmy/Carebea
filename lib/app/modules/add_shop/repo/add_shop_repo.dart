@@ -14,6 +14,7 @@ class AddShopRepo {
   AddShopDataSource addShopDataSource = AddShopDataSource();
 
   Future<AddShopResponse> addShop(
+    int branchId,
     int salesPersonId,
     String name,
     String lastName,
@@ -48,10 +49,12 @@ class AddShopRepo {
       latitude: latitude,
       lastName: lastName,
       openingBalance: openingBalance,
+      branchId: branchId,
     );
   }
 
   Future<AddShopResponse> updateShop(
+    int branchId,
     int shopId,
     int salesPersonId,
     String name,
@@ -85,11 +88,12 @@ class AddShopRepo {
         routeId: routeId,
         latitude: latitude,
         longitude: longitude,
-        lastName: lastName);
+        lastName: lastName,
+        branchId: branchId);
   }
 
-  Future<RouteListResponse> routeList() {
-    return addShopDataSource.routeList();
+  Future<RouteListResponse> routeList({int? salesPersonId}) {
+    return addShopDataSource.routeList(salesPersonId: salesPersonId);
   }
 
   Future<StateListResponse> stateList() {

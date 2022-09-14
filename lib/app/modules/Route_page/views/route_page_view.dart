@@ -56,7 +56,9 @@ class RoutePageView extends GetView<RoutePageController> {
               Flexible(
                 child: Obx(() {
                   if (controller.isRouteListRoutePageLoading.value) {
-                    return Padding(padding: const EdgeInsets.only(top: 90), child: circularProgressIndicator(context));
+                    return Padding(
+                        padding: const EdgeInsets.only(top: 90),
+                        child: circularProgressIndicator(context));
                   }
                   if (controller.routeList.isEmpty) {
                     return const Padding(
@@ -74,7 +76,9 @@ class RoutePageView extends GetView<RoutePageController> {
                             padding: const EdgeInsets.all(15.0),
                             child: CustomCard(
                                 hasShadow: false,
-                                color: Theme.of(context).extension<CustomTheme>()!.cardBackground,
+                                color: Theme.of(context)
+                                    .extension<CustomTheme>()!
+                                    .cardBackground,
                                 width: MediaQuery.of(context).size.width,
                                 child: ListTile(
                                   trailing: const Icon(
@@ -82,9 +86,14 @@ class RoutePageView extends GetView<RoutePageController> {
                                     size: 15,
                                     color: Colors.black,
                                   ),
-                                  title: Text(
-                                    'Route: ${controller.routeList[index].routeName}',
-                                    style: customTheme(context).medium.copyWith(fontSize: 12),
+                                  title: Padding(
+                                    padding: const EdgeInsets.only(top: 8),
+                                    child: Text(
+                                      'Route: ${controller.routeList[index].routeName}',
+                                      style: customTheme(context)
+                                          .medium
+                                          .copyWith(fontSize: 12),
+                                    ),
                                   ),
                                   subtitle: Padding(
                                     padding: const EdgeInsets.only(top: 8),
@@ -148,7 +157,8 @@ class _CalenderState extends State<Calender> {
         rightChevronMargin: EdgeInsets.only(right: 50),
       ),
       onDaySelected: (DateTime selectDate, DateTime focusDate) {
-        routePageController.fetchRouteListCalender(date: DateFormat("dd/MMM/yyy").format(selectDate));
+        routePageController.fetchRouteListCalender(
+            date: DateFormat("dd/MM/yyy").format(selectDate));
         setState(() {
           selectedDate = selectDate;
           focusedDate = focusDate;
@@ -156,8 +166,9 @@ class _CalenderState extends State<Calender> {
       },
       calendarStyle: CalendarStyle(
           isTodayHighlighted: true,
-          selectedDecoration:
-              BoxDecoration(color: Theme.of(context).extension<CustomTheme>()!.primary, shape: BoxShape.circle),
+          selectedDecoration: BoxDecoration(
+              color: Theme.of(context).extension<CustomTheme>()!.primary,
+              shape: BoxShape.circle),
           selectedTextStyle: const TextStyle(color: Colors.white)),
       selectedDayPredicate: (day) {
         return isSameDay(selectedDate, day);
