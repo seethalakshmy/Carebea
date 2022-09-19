@@ -226,6 +226,7 @@ class CreateOrderController extends GetxController {
 
       return onConfirm(context);
     }
+    clearProducts();
     isOrderConfirming(false);
 
     showSnackBar(res.result?.message ?? "Something happend, Please try again!");

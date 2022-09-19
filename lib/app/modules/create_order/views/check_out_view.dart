@@ -415,7 +415,7 @@ class ProductTile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 10, bottom: 8, right: 14),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       // Obx(() {
@@ -428,7 +428,10 @@ class ProductTile extends StatelessWidget {
                         "₹${_controller.productPrice(category, product).toStringAsFixed(2)}",
                         style: customTheme(context).medium.copyWith(fontSize: 14),
                       ),
-                      Text("x${_controller.cartproducts[product.id]}"),
+                      Text(
+                        " x${_controller.cartproducts[product.id]!.text} ",
+                        style: customTheme(context).regular.copyWith(fontSize: 14),
+                      ),
                     ],
                   ),
                 ),

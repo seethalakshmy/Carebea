@@ -320,7 +320,7 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                           ),
                         if ((shopDetails.outStandingAmount ?? 0) > 0)
                           Text(
-                            'Credit Balance : ₹${shopDetails.outStandingAmount!}',
+                            'Outstanding Amount : ₹${shopDetails.outStandingAmount!}',
                             style: customTheme(context).regular.copyWith(fontSize: 11),
                           ),
                       ],
