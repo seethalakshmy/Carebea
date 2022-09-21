@@ -103,7 +103,7 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                                             if (shopsController.selectedPaymentMethod.value!.id != null) {}
                                             return Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: (paymentMethods ?? [])
+                                                children: (paymentMethods)
                                                     .map((e) => CustomRadioButton<PaymentMethod>(
                                                         label: e.name,
                                                         groupValue: shopsController.selectedPaymentMethod.value!,

@@ -43,6 +43,8 @@ class CartCountWidget extends StatelessWidget {
         Flexible(
             child: CustomTextField(
           textcontroller: _controller.cartproducts[id],
+          autoFocus: true,
+          focusNode: _controller.cartproductsFocusNode[id],
           inputType: TextInputType.number,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           onsubmit: (val) {
@@ -61,12 +63,13 @@ class CartCountWidget extends StatelessWidget {
         ),
         const SizedBox(width: 6),
         InkWell(
-          onTap: (){
+          onTap: () {
             _controller.updateCartProduct(id, 0);
-
           },
-            child:Image.asset(Assets.deleteIcon,scale: 3,),
-
+          child: Image.asset(
+            Assets.deleteIcon,
+            scale: 3,
+          ),
         )
       ],
     );

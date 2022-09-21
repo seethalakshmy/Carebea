@@ -21,6 +21,7 @@ class CreateOrderController extends GetxController {
   final ShopListRepo _shopRepo = ShopListRepo();
   final CreateOrderRepository _repository = CreateOrderRepository();
   RxMap<int, TextEditingController> cartproducts = RxMap<int, TextEditingController>();
+  RxMap<int, FocusNode> cartproductsFocusNode = RxMap<int, FocusNode>();
   RxBool isLoading = true.obs;
   RxBool isProductsLoading = true.obs;
   final ProductListRepo _productListRepo = ProductListRepo();
@@ -113,6 +114,8 @@ class CreateOrderController extends GetxController {
   createOrder() async {
     creatingOrder(true);
     Map<int, int>? _products = {};
+    cartproducts.removeWhere((key, textEditingController) =>
+        textEditingController.text.isEmpty || textEditingController.text.isAlphabetOnly);
     cartproducts.forEach((key, textEditingControlller) {
       _products.addAll({key: int.parse(textEditingControlller.text)});
     });
@@ -138,6 +141,9 @@ class CreateOrderController extends GetxController {
       var res = await _productListRepo.productList();
       productList(res.productListResult?.productList ?? []);
       _products = productList;
+      for (var product in _products) {
+        if (!cartproductsFocusNode.keys.contains(product.id)) cartproductsFocusNode[product.id!] = FocusNode();
+      }
     } catch (error, stacktrace) {
       log("error", error: error, stackTrace: stacktrace);
     }
