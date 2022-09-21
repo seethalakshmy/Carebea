@@ -5,6 +5,7 @@ import 'package:carebea/app/modules/create_order/data/repository/product_list_re
 import 'package:carebea/app/modules/create_order/model/create_order.dart';
 import 'package:carebea/app/modules/create_order/model/productlist_model.dart';
 import 'package:carebea/app/modules/create_order/views/check_out_view.dart';
+import 'package:carebea/app/modules/create_order/views/order_summary_view.dart';
 import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:carebea/app/modules/shops/repo/shop_list_repo.dart';
 import 'package:carebea/app/routes/app_pages.dart';
@@ -111,6 +112,11 @@ class CreateOrderController extends GetxController {
 
   RxBool creatingOrder = false.obs;
   late Rx<PaymentMethod> selectedPaymentMethod;
+  goToOrderSummary() {
+    cartproducts.removeWhere((key, textEditingController) => textEditingController.text.isEmpty);
+    Get.to(() => const OrderSummmaryView(), arguments: Get.arguments);
+  }
+
   createOrder() async {
     creatingOrder(true);
     Map<int, int>? _products = {};
@@ -123,7 +129,7 @@ class CreateOrderController extends GetxController {
     sortList();
 
     if (res.result?.status ?? false) {
-      Get.to(() => CheckoutView(), arguments: Get.arguments);
+      Get.off(() => CheckoutView(), arguments: Get.arguments);
       creatingOrder(false);
       createOrderResponse = res;
       selectedPaymentMethod = (res.result!.paymentMethods!.first).obs;

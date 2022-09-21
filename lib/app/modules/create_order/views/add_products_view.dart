@@ -51,7 +51,7 @@ class AddProductsView extends GetView<CreateOrderController> {
             onTap: controller.creatingOrder.value
                 ? null
                 : () {
-                    controller.createOrder();
+                    controller.goToOrderSummary();
                   },
             child: Container(
               alignment: Alignment.center,
