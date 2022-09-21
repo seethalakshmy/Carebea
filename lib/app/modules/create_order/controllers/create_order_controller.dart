@@ -114,8 +114,7 @@ class CreateOrderController extends GetxController {
   createOrder() async {
     creatingOrder(true);
     Map<int, int>? _products = {};
-    cartproducts.removeWhere((key, textEditingController) =>
-        textEditingController.text.isEmpty || textEditingController.text.isAlphabetOnly);
+    cartproducts.removeWhere((key, textEditingController) => textEditingController.text.isEmpty);
     cartproducts.forEach((key, textEditingControlller) {
       _products.addAll({key: int.parse(textEditingControlller.text)});
     });

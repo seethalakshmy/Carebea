@@ -57,7 +57,10 @@ class CartCountWidget extends StatelessWidget {
           child: IconButton(
               color: customTheme(context).secondary,
               onPressed: () {
-                _controller.updateCartProduct(id, int.parse(_controller.cartproducts[id]!.text) + 1);
+                _controller.updateCartProduct(
+                    id,
+                    (_controller.cartproducts[id]!.text.isEmpty ? 0 : int.parse(_controller.cartproducts[id]!.text)) +
+                        1);
               },
               icon: RotatedBox(quarterTurns: 1, child: Icon(Icons.chevron_left))),
         ),

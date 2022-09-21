@@ -169,83 +169,83 @@ class CheckoutView extends StatelessWidget {
           "Products (${createOrderController.selectedProducts.length})",
           style: customTheme(context).regular.copyWith(fontSize: 11),
         ),
-        if (createOrderController.selectedProducts.length > 2)
-          ...createOrderController.selectedProducts.sublist(0, 2).map((product) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: ProductTile(
-                product: product,
-                category: Get.arguments["shop"].category,
-              ),
-            );
-          })
-        else
-          ...createOrderController.selectedProducts.map((product) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: ProductTile(
-                product: product,
-                category: Get.arguments["shop"].category,
-              ),
-            );
-          }),
-        if (createOrderController.selectedProducts.length > 2)
-          Align(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-              onPressed: () {
-                Get.back();
-                return;
-                var shop = Get.arguments["shop"];
-                Get.bottomSheet(Container(
-                  decoration:
-                      BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(12))),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        child: Text(
-                          "Products",
-                          style: customTheme(context).medium,
-                        ),
-                      ),
-                      Flexible(
-                        child: ListView.builder(
-                            itemBuilder: (context, index) {
-                              var product = createOrderController.selectedProducts[index];
-                              return Padding(
-                                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-                                child: ProductTile(
-                                  product: product,
-                                  category: shop.category,
-                                ),
-                              );
-                            },
-                            itemCount: createOrderController.selectedProducts.length),
-                      ),
-                    ],
-                  ),
-                ));
-              },
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "Show more",
-                    style: customTheme(context).regular.copyWith(fontSize: 12, color: customTheme(context).primary),
-                  ),
-                  const SizedBox(width: 2),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 10,
-                    color: customTheme(context).primary,
-                  )
-                ],
-              ),
+        // if (createOrderController.selectedProducts.length > 2)
+        //   ...createOrderController.selectedProducts.sublist(0, 2).map((product) {
+        //     return Padding(
+        //       padding: const EdgeInsets.only(top: 10),
+        //       child: ProductTile(
+        //         product: product,
+        //         category: Get.arguments["shop"].category,
+        //       ),
+        //     );
+        //   })
+        // else
+        ...createOrderController.selectedProducts.map((product) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: ProductTile(
+              product: product,
+              category: Get.arguments["shop"].category,
             ),
-          )
+          );
+        }),
+        // if (createOrderController.selectedProducts.length > 2)
+        Align(
+          alignment: Alignment.centerRight,
+          child: TextButton(
+            onPressed: () {
+              Get.back();
+              return;
+              var shop = Get.arguments["shop"];
+              Get.bottomSheet(Container(
+                decoration:
+                    BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(12))),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      child: Text(
+                        "Products",
+                        style: customTheme(context).medium,
+                      ),
+                    ),
+                    Flexible(
+                      child: ListView.builder(
+                          itemBuilder: (context, index) {
+                            var product = createOrderController.selectedProducts[index];
+                            return Padding(
+                              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                              child: ProductTile(
+                                product: product,
+                                category: shop.category,
+                              ),
+                            );
+                          },
+                          itemCount: createOrderController.selectedProducts.length),
+                    ),
+                  ],
+                ),
+              ));
+            },
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Add more",
+                  style: customTheme(context).regular.copyWith(fontSize: 12, color: customTheme(context).primary),
+                ),
+                const SizedBox(width: 2),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  size: 10,
+                  color: customTheme(context).primary,
+                )
+              ],
+            ),
+          ),
+        )
       ],
     );
   }
@@ -429,11 +429,15 @@ class ProductTile extends StatelessWidget {
                         style: customTheme(context).medium.copyWith(fontSize: 14),
                       ),
                       Text(
-                        " x${_controller.cartproducts[product.id]!.text} ",
+                        " x ${_controller.cartproducts[product.id]?.text} ",
                         style: customTheme(context).regular.copyWith(fontSize: 14),
                       ),
                     ],
                   ),
+                ),
+                Text(
+                  "Total : ₹${(_controller.productPrice(category, product) * int.parse(_controller.cartproducts[product.id]!.text)).toStringAsFixed(2)}",
+                  style: customTheme(context).medium.copyWith(fontSize: 14),
                 ),
               ],
             ),
