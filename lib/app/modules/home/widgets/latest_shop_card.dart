@@ -26,7 +26,7 @@ class LatestShopListTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              shop.name!,
+              "${shop.name!} ${shop.lastName ?? ""}",
               style: customTheme(context).medium.copyWith(fontSize: 13),
             ),
             const SizedBox(

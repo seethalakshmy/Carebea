@@ -168,8 +168,28 @@ class DeliveryInvoiceDetailsView extends GetView<DeliveryInvoiceDetailsControlle
           'Invoice details',
           style: customTheme(context).medium.copyWith(fontSize: 16),
         ),
-
-        // Icon(Icons.share)
+        Spacer(),
+        Obx(() {
+          if (!controller.hasPdf.value) {
+            return const SizedBox.shrink();
+          }
+          return InkWell(
+            onTap: () {
+              controller.sharePdf();
+            },
+            child: Container(
+                padding: EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: customTheme(context).secondary.withOpacity(.1),
+                ),
+                child: Icon(
+                  Icons.share_outlined,
+                  color: customTheme(context).secondary,
+                  size: 20,
+                )),
+          );
+        })
       ],
     );
   }

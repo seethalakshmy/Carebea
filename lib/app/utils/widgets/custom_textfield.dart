@@ -4,27 +4,28 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class CustomTextField extends TextFormField {
-  CustomTextField(
-      {Key? key,
-      this.initialvalue,
-      this.textcontroller,
-      this.onsubmit,
-      this.fillcolor,
-      this.icon,
-      this.inputFormatters,
-      this.inputType,
-      this.label,
-      this.obscure = false,
-      this.onChanged,
-      this.onsaved,
-      this.hint,
-      this.enabled = true,
-      this.maxlength,
-      this.maxLines = 1,
-      this.trailing,
-      this.focusNode,
-      this.validaton})
-      : super(
+  CustomTextField({
+    Key? key,
+    this.initialvalue,
+    this.textcontroller,
+    this.onsubmit,
+    this.fillcolor,
+    this.icon,
+    this.inputFormatters,
+    this.inputType,
+    this.label,
+    this.obscure = false,
+    this.onChanged,
+    this.onsaved,
+    this.hint,
+    this.enabled = true,
+    this.maxlength,
+    this.maxLines = 1,
+    this.trailing,
+    this.focusNode,
+    this.validaton,
+    this.autoFocus = false,
+  }) : super(
           key: key,
           focusNode: focusNode,
           initialValue: initialvalue,
@@ -38,7 +39,8 @@ class CustomTextField extends TextFormField {
           keyboardType: inputType,
           cursorColor: Colors.black,
           inputFormatters: inputFormatters,
-          enabled:enabled ,
+          enabled: enabled,
+          autofocus: autoFocus,
           maxLines: maxLines,
           style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black),
           decoration: InputDecoration(
@@ -82,6 +84,7 @@ class CustomTextField extends TextFormField {
   final Function(String?)? onsubmit;
   final String? initialvalue;
   final Widget? trailing;
+  final bool autoFocus;
   @override
   final bool enabled;
 }

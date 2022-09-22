@@ -59,12 +59,15 @@ class LatestShopList {
     this.name,
     this.userAddress,
     this.phone,
+    this.lastName
   });
 
   final int? id;
   final String? name;
   @JsonKey(name: "user_address")
   final String? userAddress;
+  @JsonKey(name: "last_name")
+  final String? lastName;
   final String? phone;
 
   factory LatestShopList.fromJson(Map<String, dynamic> json) => _$LatestShopListFromJson(json);

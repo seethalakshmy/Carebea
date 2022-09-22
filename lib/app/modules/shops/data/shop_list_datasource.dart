@@ -12,12 +12,15 @@ class ShopDataSource {
   ApiService apiService = Get.find();
 
   Future<ShopListResponse> shopList(
-      {required int salesPersonId, int? shopId, String? filterName, int? filterId, Map<String, dynamic>? query}) async {
-    Map<String, dynamic> body = {
-      // 'sales_person_id': salesPersonId,
-    };
+      {int? salesPersonId, int? shopId, String? filterName, int? filterId, Map<String, dynamic>? query}) async {
+    Map<String, dynamic> body = {};
     if (shopId != null) {
       body.addAll({'shop_id': shopId});
+    }
+    if (salesPersonId != null) {
+      body.addAll({
+        'sales_person_id': salesPersonId,
+      });
     }
     if (filterName != null) {
       body.addAll({'filter_name': filterName, 'filter_id': filterId});

@@ -5,6 +5,8 @@ import 'package:carebea/app/modules/create_order/data/repository/product_list_re
 import 'package:carebea/app/modules/create_order/model/create_order.dart';
 import 'package:carebea/app/modules/create_order/model/productlist_model.dart';
 import 'package:carebea/app/modules/create_order/views/check_out_view.dart';
+import 'package:carebea/app/modules/create_order/views/order_summary_view.dart';
+import 'package:carebea/app/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:carebea/app/modules/shops/repo/shop_list_repo.dart';
 import 'package:carebea/app/routes/app_pages.dart';
@@ -16,11 +18,14 @@ import 'package:carebea/app/utils/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../orders/controllers/orders_controller.dart';
+
 class CreateOrderController extends GetxController {
   DateTime? backbuttonpressedTime;
   final ShopListRepo _shopRepo = ShopListRepo();
   final CreateOrderRepository _repository = CreateOrderRepository();
   RxMap<int, TextEditingController> cartproducts = RxMap<int, TextEditingController>();
+  RxMap<int, FocusNode> cartproductsFocusNode = RxMap<int, FocusNode>();
   RxBool isLoading = true.obs;
   RxBool isProductsLoading = true.obs;
   final ProductListRepo _productListRepo = ProductListRepo();
@@ -34,6 +39,9 @@ class CreateOrderController extends GetxController {
   CreateOrderResponse? createOrderResponse;
 
   ShopList? selectedShop;
+
+  final DashboardController _dashboardController = Get.find();
+  final OrdersController ordersController = Get.find();
 
   final count = 0.obs;
   @override
@@ -110,9 +118,16 @@ class CreateOrderController extends GetxController {
 
   RxBool creatingOrder = false.obs;
   late Rx<PaymentMethod> selectedPaymentMethod;
+  goToOrderSummary() {
+    cartproducts.removeWhere((key, textEditingController) => textEditingController.text.isEmpty);
+    // Get.to(() => const OrderSummmaryView(), arguments: Get.arguments);
+    createOrder();
+  }
+
   createOrder() async {
     creatingOrder(true);
     Map<int, int>? _products = {};
+    cartproducts.removeWhere((key, textEditingController) => textEditingController.text.isEmpty);
     cartproducts.forEach((key, textEditingControlller) {
       _products.addAll({key: int.parse(textEditingControlller.text)});
     });
@@ -138,6 +153,9 @@ class CreateOrderController extends GetxController {
       var res = await _productListRepo.productList();
       productList(res.productListResult?.productList ?? []);
       _products = productList;
+      for (var product in _products) {
+        if (!cartproductsFocusNode.keys.contains(product.id)) cartproductsFocusNode[product.id!] = FocusNode();
+      }
     } catch (error, stacktrace) {
       log("error", error: error, stackTrace: stacktrace);
     }
@@ -224,15 +242,16 @@ class CreateOrderController extends GetxController {
     if (res.result?.status ?? false) {
       isOrderConfirming(false);
 
-      return onConfirm(context);
+      return onConfirm(context, createOrderResponse!.result!.orderId!);
     }
+    clearProducts();
     isOrderConfirming(false);
 
     showSnackBar(res.result?.message ?? "Something happend, Please try again!");
   }
 
-  void onConfirm(BuildContext context) {
-    showDialog(
+  void onConfirm(BuildContext context, int orderId) {
+    showDialog<bool>(
         context: context,
         builder: (_) => CustomAlertbox(
               topIcon: Image.asset(
@@ -242,15 +261,30 @@ class CreateOrderController extends GetxController {
               ),
               title: "Order Successful!",
               content: "Your order placed has been successful!",
+              isVerticalActions: true,
               actions: [
+                CustomButton(
+                    title: "Go to Order details",
+                    onTap: () {
+                      Get.back<bool>(result: true);
+                    }),
+                const SizedBox(height: 5),
                 CustomButton(
                     title: "Go to Home page",
                     onTap: () {
-                      Get.back();
+                      Get.back<bool>(result: false);
                     })
               ],
             )).then((value) {
-      Get.offAllNamed(Routes.DASHBOARD);
+      navigator!.popUntil((route) => route.isFirst);
+
+      if (value ?? false) {
+        Get.toNamed(Routes.ORDER_HISTORY_DETAILS, arguments: {'order_id': orderId});
+
+        // _dashboardController.currentScreenIndex(2);
+        // ordersController.tabController1.animateTo(1);
+        // ordersController.fetchOrdersList(orderType: OrderType.upcoming);
+      }
     });
   }
 }
