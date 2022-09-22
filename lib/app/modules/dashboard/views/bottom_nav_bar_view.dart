@@ -82,6 +82,8 @@ class BottomNavBarView extends GetView<DashboardController> {
           child: Column(children: [
             CircleAvatar(
               radius: 15,
+              backgroundColor:
+                  controller.currentScreenIndex.value == 3 ? customTheme(context).primary : const Color(0xff929292),
               foregroundImage:
                   NetworkImage(controller.profileController.profileResponse?.profileResponseResult?.imgUrl ?? ""),
               child: Icon(
