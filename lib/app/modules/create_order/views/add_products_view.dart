@@ -8,6 +8,7 @@ import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
+import 'package:carebea/app/utils/widgets/custom_alertbox.dart';
 import 'package:carebea/app/utils/widgets/custom_button.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
@@ -26,7 +27,9 @@ class AddProductsView extends GetView<CreateOrderController> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => controller.onWillpopClose(),
+      onWillPop: () async {
+        return (await backButtonPressGuard(context)) ?? false;
+      },
       child: Scaffold(
         appBar: appBar(context),
         body: Column(
@@ -113,6 +116,34 @@ class AddProductsView extends GetView<CreateOrderController> {
     );
   }
 
+  Future<bool?> backButtonPressGuard(BuildContext context) {
+    return showDialog<bool>(
+        context: context,
+        builder: (_) {
+          return CustomAlertbox(
+            title: "Do you want to remove all products and go back to shop selection.",
+            content: "",
+            actions: [
+              Expanded(
+                child: CustomButton(
+                    title: "Yes",
+                    onTap: () {
+                      Get.back(result: true);
+                    }),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: CustomButton(
+                    title: "No",
+                    onTap: () {
+                      Get.back(result: false);
+                    }),
+              )
+            ],
+          );
+        });
+  }
+
   ListView _productListView() {
     return ListView.separated(
       shrinkWrap: true,
@@ -169,8 +200,10 @@ class AddProductsView extends GetView<CreateOrderController> {
       child: Row(
         children: [
           IconButton(
-              onPressed: () {
-                Get.back();
+              onPressed: () async {
+                if ((await backButtonPressGuard(context)) ?? false) {
+                  Get.back();
+                }
               },
               icon: Icon(
                 Icons.arrow_back_ios,
