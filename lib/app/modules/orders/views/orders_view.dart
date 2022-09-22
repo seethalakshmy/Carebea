@@ -26,11 +26,13 @@ class OrdersView extends StatefulWidget {
 class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateMixin {
   static List<String> category = ['Date', 'Today', 'This week', 'This month', 'This year'];
   OrdersController ordersController = Get.put(OrdersController());
-  late TabController tabController1;
 
   @override
   void initState() {
-    tabController1 = TabController(length: 2, vsync: this);
+    ordersController.tabController1 = TabController(length: 2, vsync: this);
+    ordersController.tabController1.addListener(() {
+      debugPrint("tab index${ordersController.tabController1.index}");
+    });
     super.initState();
   }
 
@@ -57,9 +59,9 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                   height: MediaQuery.of(context).size.height * .05,
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color: Color(0xffEEF5FF)),
                   child: TabBar(
-                      controller: tabController1,
+                      controller: ordersController.tabController1,
                       onTap: (index) {
-                        tabController1.animateTo(index);
+                        ordersController.tabController1.animateTo(index);
                         if (index == 0) {
                           ordersController.fetchOrdersList(orderType: OrderType.previous);
                         } else {
@@ -99,70 +101,70 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                       width: 5,
                     ),
 
-                    ordersController.filterVals == null? PopupMenuButton<String>(
-                      enabled: false,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
-                        offset: const Offset(0.0, 50),
-                        padding: EdgeInsets.zero,
-                        child: Image.asset(
-                          Assets.filter,
-                          scale: 3.5,
-                          color: Colors.grey,
-                          colorBlendMode: BlendMode.saturation,
-
-                        ),
-                        onSelected: (element) {},
-                        itemBuilder: (BuildContext context) {
-                          if (ordersController.filterSelected.value == "") {}
-                          return [
-                            customPopupMenuItem<String>(
-                              context,
-                              name: "Date",
-                              isSelected: true,
-                              showBorder: false,
+                    ordersController.filterVals == null
+                        ? PopupMenuButton<String>(
+                            enabled: false,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+                            offset: const Offset(0.0, 50),
+                            padding: EdgeInsets.zero,
+                            child: Image.asset(
+                              Assets.filter,
+                              scale: 3.5,
+                              color: Colors.grey,
+                              colorBlendMode: BlendMode.saturation,
                             ),
-                            ...(ordersController.filterVals?.date ?? [])
-                                .map((e) => customPopupMenuItem<String>(context,
-                                    isSelected: ordersController.filterSelected.value == "Date-${e.id}",
-                                    name: e.name!,
-                                    onTap: () => ordersController.filterOrders("Date", e.id!)))
-                                .toList(),
-                            customPopupMenuItem<String>(context, name: "Clear", isSelected: true, showBorder: false,
-                                onTap: () {
-                              ordersController.clearFilters();
-                            }),
-                          ];
-                        }):
-                    PopupMenuButton<String>(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
-                        offset: const Offset(0.0, 50),
-                        padding: EdgeInsets.zero,
-                        child: Image.asset(
-                          Assets.filter,
-                          scale: 3.5,
-                        ),
-                        onSelected: (element) {},
-                        itemBuilder: (BuildContext context) {
-                          if (ordersController.filterSelected.value == "") {}
-                          return [
-                            customPopupMenuItem<String>(
-                              context,
-                              name: "Date",
-                              isSelected: true,
-                              showBorder: false,
-                            ),
-                            ...(ordersController.filterVals?.date ?? [])
-                                .map((e) => customPopupMenuItem<String>(context,
-                                isSelected: ordersController.filterSelected.value == "Date-${e.id}",
-                                name: e.name!,
-                                onTap: () => ordersController.filterOrders("Date", e.id!)))
-                                .toList(),
-                            customPopupMenuItem<String>(context, name: "Clear", isSelected: true, showBorder: false,
-                                onTap: () {
+                            onSelected: (element) {},
+                            itemBuilder: (BuildContext context) {
+                              if (ordersController.filterSelected.value == "") {}
+                              return [
+                                customPopupMenuItem<String>(
+                                  context,
+                                  name: "Date",
+                                  isSelected: true,
+                                  showBorder: false,
+                                ),
+                                ...(ordersController.filterVals?.date ?? [])
+                                    .map((e) => customPopupMenuItem<String>(context,
+                                        isSelected: ordersController.filterSelected.value == "Date-${e.id}",
+                                        name: e.name!,
+                                        onTap: () => ordersController.filterOrders("Date", e.id!)))
+                                    .toList(),
+                                customPopupMenuItem<String>(context, name: "Clear", isSelected: true, showBorder: false,
+                                    onTap: () {
                                   ordersController.clearFilters();
                                 }),
-                          ];
-                        })
+                              ];
+                            })
+                        : PopupMenuButton<String>(
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+                            offset: const Offset(0.0, 50),
+                            padding: EdgeInsets.zero,
+                            child: Image.asset(
+                              Assets.filter,
+                              scale: 3.5,
+                            ),
+                            onSelected: (element) {},
+                            itemBuilder: (BuildContext context) {
+                              if (ordersController.filterSelected.value == "") {}
+                              return [
+                                customPopupMenuItem<String>(
+                                  context,
+                                  name: "Date",
+                                  isSelected: true,
+                                  showBorder: false,
+                                ),
+                                ...(ordersController.filterVals?.date ?? [])
+                                    .map((e) => customPopupMenuItem<String>(context,
+                                        isSelected: ordersController.filterSelected.value == "Date-${e.id}",
+                                        name: e.name!,
+                                        onTap: () => ordersController.filterOrders("Date", e.id!)))
+                                    .toList(),
+                                customPopupMenuItem<String>(context, name: "Clear", isSelected: true, showBorder: false,
+                                    onTap: () {
+                                  ordersController.clearFilters();
+                                }),
+                              ];
+                            })
                     // PopupMenuButton<int>(
                     //
                     //   icon:Image.asset(

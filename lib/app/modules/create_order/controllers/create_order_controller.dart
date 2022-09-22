@@ -6,6 +6,7 @@ import 'package:carebea/app/modules/create_order/model/create_order.dart';
 import 'package:carebea/app/modules/create_order/model/productlist_model.dart';
 import 'package:carebea/app/modules/create_order/views/check_out_view.dart';
 import 'package:carebea/app/modules/create_order/views/order_summary_view.dart';
+import 'package:carebea/app/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:carebea/app/modules/shops/repo/shop_list_repo.dart';
 import 'package:carebea/app/routes/app_pages.dart';
@@ -16,6 +17,8 @@ import 'package:carebea/app/utils/widgets/custom_alertbox.dart';
 import 'package:carebea/app/utils/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../orders/controllers/orders_controller.dart';
 
 class CreateOrderController extends GetxController {
   DateTime? backbuttonpressedTime;
@@ -36,6 +39,9 @@ class CreateOrderController extends GetxController {
   CreateOrderResponse? createOrderResponse;
 
   ShopList? selectedShop;
+
+  final DashboardController _dashboardController = Get.find();
+  final OrdersController ordersController = Get.find();
 
   final count = 0.obs;
   @override
@@ -236,7 +242,7 @@ class CreateOrderController extends GetxController {
     if (res.result?.status ?? false) {
       isOrderConfirming(false);
 
-      return onConfirm(context);
+      return onConfirm(context, createOrderResponse!.result!.orderId!);
     }
     clearProducts();
     isOrderConfirming(false);
@@ -244,8 +250,8 @@ class CreateOrderController extends GetxController {
     showSnackBar(res.result?.message ?? "Something happend, Please try again!");
   }
 
-  void onConfirm(BuildContext context) {
-    showDialog(
+  void onConfirm(BuildContext context, int orderId) {
+    showDialog<bool>(
         context: context,
         builder: (_) => CustomAlertbox(
               topIcon: Image.asset(
@@ -255,15 +261,30 @@ class CreateOrderController extends GetxController {
               ),
               title: "Order Successful!",
               content: "Your order placed has been successful!",
+              isVerticalActions: true,
               actions: [
+                CustomButton(
+                    title: "Go to Order details",
+                    onTap: () {
+                      Get.back<bool>(result: true);
+                    }),
+                const SizedBox(height: 5),
                 CustomButton(
                     title: "Go to Home page",
                     onTap: () {
-                      Get.back();
+                      Get.back<bool>(result: false);
                     })
               ],
             )).then((value) {
-      Get.offAllNamed(Routes.DASHBOARD);
+      navigator!.popUntil((route) => route.isFirst);
+
+      if (value ?? false) {
+        Get.toNamed(Routes.ORDER_HISTORY_DETAILS, arguments: {'order_id': orderId});
+
+        // _dashboardController.currentScreenIndex(2);
+        // ordersController.tabController1.animateTo(1);
+        // ordersController.fetchOrdersList(orderType: OrderType.upcoming);
+      }
     });
   }
 }

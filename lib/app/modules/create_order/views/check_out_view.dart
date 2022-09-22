@@ -92,6 +92,7 @@ class CheckoutView extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.only(right: 15),
                   child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
                       decoration:
                           BoxDecoration(color: customTheme(context).primary, borderRadius: BorderRadius.circular(7)),
                       child: TextButton(
@@ -133,7 +134,7 @@ class CheckoutView extends StatelessWidget {
         children: [
           Text(
             'Products (${createOrderController.selectedProducts.length})',
-            style: customTheme(context).medium.copyWith(fontSize: 18),
+            style: customTheme(context).medium.copyWith(fontSize: 15),
           ),
           SizedBox(height: 10),
           Table(

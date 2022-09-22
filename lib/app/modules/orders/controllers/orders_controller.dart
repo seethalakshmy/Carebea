@@ -1,6 +1,7 @@
 import 'package:carebea/app/modules/shops/models/order_list_model.dart';
 import 'package:carebea/app/modules/shops/repo/order_list_repo.dart';
 import 'package:carebea/app/utils/shared_prefs.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OrdersController extends GetxController {
@@ -11,10 +12,11 @@ class OrdersController extends GetxController {
   List<History> allOrders = [];
   FilterVals? filterVals;
   OrderType selectedOrderType = OrderType.previous;
-
+  late TabController tabController1;
   @override
   void onInit() {
     fetchOrdersList(orderType: selectedOrderType);
+
     super.onInit();
   }
 
