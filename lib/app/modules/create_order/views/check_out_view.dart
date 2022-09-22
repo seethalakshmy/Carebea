@@ -34,10 +34,15 @@ class CheckoutView extends StatelessWidget {
             _title(context),
             const SizedBox(height: 15),
             _addressTile(context, (Get.arguments["shop"] as ShopList)),
+            // Padding(
+            //   padding: const EdgeInsets.fromLTRB(24, 24, 24, 19),
+            //   child: _productListing(context, createOrderController),
+            // ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(24, 24, 24, 19),
-              child: _productListing(context, createOrderController),
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: _buildBody(context),
             ),
+            _addMoreButton(context, createOrderController),
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 0, 24, 35),
               child: _paymentMethods(context),
@@ -119,6 +124,77 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
+  Widget _buildBody(BuildContext context) {
+    return CustomCard(
+      margin: EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 14),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Products (${createOrderController.selectedProducts.length})',
+            style: customTheme(context).medium.copyWith(fontSize: 18),
+          ),
+          SizedBox(height: 10),
+          Table(
+            columnWidths: {0: FlexColumnWidth(8), 1: FlexColumnWidth(2), 2: FlexColumnWidth(2)},
+            border: TableBorder.all(width: 0, color: Colors.transparent),
+            children: [
+              TableRow(children: [
+                Text(
+                  'Product',
+                  style: customTheme(context).medium.copyWith(fontSize: 12),
+                ),
+                Text(
+                  'Qty',
+                  style: customTheme(context).medium.copyWith(fontSize: 12),
+                ),
+                Text(
+                  'Price',
+                  style: customTheme(context).medium.copyWith(fontSize: 12),
+                ),
+              ]),
+              TableRow(children: [
+                Text(
+                  "",
+                  style: customTheme(context).regular.copyWith(fontSize: 5),
+                ),
+                Text(
+                  "",
+                  style: customTheme(context).regular.copyWith(fontSize: 5),
+                ),
+                Text(
+                  "",
+                  style: customTheme(context).regular.copyWith(fontSize: 5),
+                ),
+              ]),
+              ...List.generate(
+                createOrderController.selectedProducts.length,
+                (index) {
+                  var product = createOrderController.selectedProducts[index];
+                  return TableRow(children: [
+                    Text(
+                      product.name!,
+                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                    ),
+                    Text(
+                      "${createOrderController.cartproducts[product.id]!.text}x",
+                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                    ),
+                    Text(
+                      "₹${createOrderController.productPrice(Get.arguments["shop"].category, product).toStringAsFixed(2)}",
+                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                    ),
+                  ]);
+                },
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   Padding _comments() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 19, 24, 10),
@@ -190,63 +266,37 @@ class CheckoutView extends StatelessWidget {
           );
         }),
         // if (createOrderController.selectedProducts.length > 2)
-        Align(
-          alignment: Alignment.centerRight,
-          child: TextButton(
-            onPressed: () {
-              Get.back();
-              return;
-              var shop = Get.arguments["shop"];
-              Get.bottomSheet(Container(
-                decoration:
-                    BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(12))),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      child: Text(
-                        "Products",
-                        style: customTheme(context).medium,
-                      ),
-                    ),
-                    Flexible(
-                      child: ListView.builder(
-                          itemBuilder: (context, index) {
-                            var product = createOrderController.selectedProducts[index];
-                            return Padding(
-                              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-                              child: ProductTile(
-                                product: product,
-                                category: shop.category,
-                              ),
-                            );
-                          },
-                          itemCount: createOrderController.selectedProducts.length),
-                    ),
-                  ],
-                ),
-              ));
-            },
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Add more",
-                  style: customTheme(context).regular.copyWith(fontSize: 12, color: customTheme(context).primary),
-                ),
-                const SizedBox(width: 2),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 10,
-                  color: customTheme(context).primary,
-                )
-              ],
-            ),
-          ),
-        )
+        _addMoreButton(context, createOrderController)
       ],
+    );
+  }
+
+  Align _addMoreButton(BuildContext context, CreateOrderController createOrderController) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Padding(
+        padding: EdgeInsets.only(right: 20),
+        child: InkWell(
+          onTap: () {
+            Get.back();
+          },
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "Add more",
+                style: customTheme(context).regular.copyWith(fontSize: 12, color: customTheme(context).primary),
+              ),
+              const SizedBox(width: 2),
+              Icon(
+                Icons.arrow_forward_ios,
+                size: 10,
+                color: customTheme(context).primary,
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -318,7 +368,7 @@ class CheckoutView extends StatelessWidget {
 
   Padding _title(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Row(
         children: [
           IconButton(

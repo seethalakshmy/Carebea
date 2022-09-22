@@ -114,7 +114,8 @@ class CreateOrderController extends GetxController {
   late Rx<PaymentMethod> selectedPaymentMethod;
   goToOrderSummary() {
     cartproducts.removeWhere((key, textEditingController) => textEditingController.text.isEmpty);
-    Get.to(() => const OrderSummmaryView(), arguments: Get.arguments);
+    // Get.to(() => const OrderSummmaryView(), arguments: Get.arguments);
+    createOrder();
   }
 
   createOrder() async {
@@ -129,7 +130,7 @@ class CreateOrderController extends GetxController {
     sortList();
 
     if (res.result?.status ?? false) {
-      Get.off(() => CheckoutView(), arguments: Get.arguments);
+      Get.to(() => CheckoutView(), arguments: Get.arguments);
       creatingOrder(false);
       createOrderResponse = res;
       selectedPaymentMethod = (res.result!.paymentMethods!.first).obs;
