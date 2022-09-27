@@ -36,6 +36,7 @@ class ShopDetailsView extends GetView<CreateOrderController> {
                   title: 'Add Products',
                   onTap: () {
                     controller.selectedShop = (Get.arguments["shop"] as ShopList);
+                    controller.createOrderResponse = null;
                     Get.to(
                       AddProductsView(),
                       arguments: Get.arguments,
