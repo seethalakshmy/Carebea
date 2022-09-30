@@ -6,28 +6,20 @@ part of 'delivery_home_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-DeliveryHomePageResponse _$DeliveryHomePageResponseFromJson(
-        Map<String, dynamic> json) =>
-    DeliveryHomePageResponse(
+DeliveryHomePageResponse _$DeliveryHomePageResponseFromJson(Map<String, dynamic> json) => DeliveryHomePageResponse(
       jsonrpc: json['jsonrpc'] as String?,
       id: json['id'],
-      deliveryHomePageResult: json['result'] == null
-          ? null
-          : DeliveryHomePageResult.fromJson(
-              json['result'] as Map<String, dynamic>),
+      deliveryHomePageResult:
+          json['result'] == null ? null : DeliveryHomePageResult.fromJson(json['result'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$DeliveryHomePageResponseToJson(
-        DeliveryHomePageResponse instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$DeliveryHomePageResponseToJson(DeliveryHomePageResponse instance) => <String, dynamic>{
       'jsonrpc': instance.jsonrpc,
       'id': instance.id,
       'result': instance.deliveryHomePageResult,
     };
 
-DeliveryHomePageResult _$DeliveryHomePageResultFromJson(
-        Map<String, dynamic> json) =>
-    DeliveryHomePageResult(
+DeliveryHomePageResult _$DeliveryHomePageResultFromJson(Map<String, dynamic> json) => DeliveryHomePageResult(
       status: json['status'] as bool?,
       message: json['message'] as String?,
       todaysDelivery: json['todays_delivery'] as int?,
@@ -38,9 +30,7 @@ DeliveryHomePageResult _$DeliveryHomePageResultFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$DeliveryHomePageResultToJson(
-        DeliveryHomePageResult instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$DeliveryHomePageResultToJson(DeliveryHomePageResult instance) => <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
       'todays_delivery': instance.todaysDelivery,
@@ -49,9 +39,7 @@ Map<String, dynamic> _$DeliveryHomePageResultToJson(
       'upcoming_delivery_list': instance.upcomingDeliveryList,
     };
 
-UpcomingDeliveryList _$UpcomingDeliveryListFromJson(
-        Map<String, dynamic> json) =>
-    UpcomingDeliveryList(
+UpcomingDeliveryList _$UpcomingDeliveryListFromJson(Map<String, dynamic> json) => UpcomingDeliveryList(
       orderId: json['order_id'] as int?,
       orderName: json['order_name'] as String?,
       shopName: json['shop_name'] as String?,
@@ -60,9 +48,7 @@ UpcomingDeliveryList _$UpcomingDeliveryListFromJson(
       shopAddress: json['shop_address'] as String?,
     )..shopMobile = json['shop_mobile'] as String?;
 
-Map<String, dynamic> _$UpcomingDeliveryListToJson(
-        UpcomingDeliveryList instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$UpcomingDeliveryListToJson(UpcomingDeliveryList instance) => <String, dynamic>{
       'order_id': instance.orderId,
       'order_name': instance.orderName,
       'shop_name': instance.shopName,

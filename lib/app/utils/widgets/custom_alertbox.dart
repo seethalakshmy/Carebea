@@ -9,12 +9,14 @@ class CustomAlertbox extends StatelessWidget {
     required this.content,
     this.topIcon,
     required this.actions,
+    this.isVerticalActions = false,
   }) : super(key: key);
 
   final Widget? topIcon;
   final String title;
   final String content;
   final List<Widget> actions;
+  final bool isVerticalActions;
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +51,17 @@ class CustomAlertbox extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            actions.length == 1
-                ? actions.first
-                : Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: actions,
-                  )
+            if (isVerticalActions)
+              ...actions
+            else
+              actions.length == 1
+                  ? actions.first
+                  : Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: actions,
+                    )
           ],
         ),
       ),

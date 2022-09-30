@@ -43,6 +43,8 @@ class CartCountWidget extends StatelessWidget {
         Flexible(
             child: CustomTextField(
           textcontroller: _controller.cartproducts[id],
+          autoFocus: true,
+          focusNode: _controller.cartproductsFocusNode[id],
           inputType: TextInputType.number,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           onsubmit: (val) {
@@ -55,18 +57,22 @@ class CartCountWidget extends StatelessWidget {
           child: IconButton(
               color: customTheme(context).secondary,
               onPressed: () {
-                _controller.updateCartProduct(id, int.parse(_controller.cartproducts[id]!.text) + 1);
+                _controller.updateCartProduct(
+                    id,
+                    (_controller.cartproducts[id]!.text.isEmpty ? 0 : int.parse(_controller.cartproducts[id]!.text)) +
+                        1);
               },
               icon: RotatedBox(quarterTurns: 1, child: Icon(Icons.chevron_left))),
         ),
         const SizedBox(width: 6),
         InkWell(
-          onTap: (){
+          onTap: () {
             _controller.updateCartProduct(id, 0);
-
           },
-            child:Image.asset(Assets.deleteIcon,scale: 3,),
-
+          child: Image.asset(
+            Assets.deleteIcon,
+            scale: 3,
+          ),
         )
       ],
     );

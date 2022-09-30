@@ -10,11 +10,12 @@ import '../../../model/access_token.dart';
 import '../../utils/shared_prefs.dart';
 
 class ApiService extends GetxService {
-  // var baseUrl = "https://192.168.1.40:8888/api/v1/"; //test
+  // var baseUrl = "https://9e1a-2401-4900-32f6-df2a-e8ea-3ca9-a886-3df6.in.ngrok.io/api/v1/"; //test
   var baseUrl = "http://15.206.14.111/api/v1/"; //live
+  // var baseUrl = "http://192.168.1.40:8888/api/v1/"; //live
 
-  // var xAuthClient = "1234";
-  // var xAuthToken = '1234';
+  // var xAuthClient = "12345";
+  // var xAuthToken = '12345';
   var xAuthClient = "Xjfgnf35*\$&dfgkgb\$AViwqALG";
   var xAuthToken = 'Xjfgnf35*\$&dfgkgb\$AViwqALG';
 
@@ -88,10 +89,7 @@ class ApiService extends GetxService {
         json.encode({
           'status': false,
           'detail': 'Network error, Please connect to a network!',
-          "body": {
-            "status": false,
-            "message": 'Network error, Please connect to a network!'
-          }
+          "body": {"status": false, "message": 'Network error, Please connect to a network!'}
         }),
         408,
       );
@@ -100,8 +98,7 @@ class ApiService extends GetxService {
     developer.log('body : $body');
     late http.Response res;
     try {
-      res = await http.post(Uri.parse(baseUrl + path),
-          body: jsonEncode(body), headers: getHeaders());
+      res = await http.post(Uri.parse(baseUrl + path), body: jsonEncode(body), headers: getHeaders());
     } catch (e) {
       developer.log("post request timeout : $e");
       // timeoutDialog();
@@ -131,10 +128,7 @@ class ApiService extends GetxService {
         json.encode({
           'status': false,
           'detail': 'Network error, Please connect to a network!',
-          "body": {
-            "status": false,
-            "message": 'Network error, Please connect to a network!'
-          }
+          "body": {"status": false, "message": 'Network error, Please connect to a network!'}
         }),
         408,
       );
@@ -143,8 +137,7 @@ class ApiService extends GetxService {
     developer.log('body : $body');
     http.Response res;
     try {
-      res = await http.put(Uri.parse(baseUrl + path),
-          body: jsonEncode(body), headers: getHeaders());
+      res = await http.put(Uri.parse(baseUrl + path), body: jsonEncode(body), headers: getHeaders());
     } catch (e) {
       developer.log("put request timeout : $e");
       // timeoutDialog();
@@ -179,10 +172,7 @@ class ApiService extends GetxService {
         json.encode({
           'status': false,
           'detail': 'Network error, Please connect to a network!',
-          "body": {
-            "status": false,
-            "message": 'Network error, Please connect to a network!'
-          }
+          "body": {"status": false, "message": 'Network error, Please connect to a network!'}
         }),
         408,
       );
@@ -220,10 +210,7 @@ class ApiService extends GetxService {
         json.encode({
           'status': false,
           'detail': 'Network error, Please connect to a network!',
-          "body": {
-            "status": false,
-            "message": 'Network error, Please connect to a network!'
-          }
+          "body": {"status": false, "message": 'Network error, Please connect to a network!'}
         }),
         408,
       );
@@ -232,8 +219,7 @@ class ApiService extends GetxService {
     developer.log('body : $body');
     http.Response res;
     try {
-      res = await http.delete(Uri.parse(baseUrl + path),
-          headers: getHeaders(), body: jsonEncode(body));
+      res = await http.delete(Uri.parse(baseUrl + path), headers: getHeaders(), body: jsonEncode(body));
     } catch (e) {
       developer.log("delete request timeout : $e");
       // timeoutDialog();

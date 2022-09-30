@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carebea/app/modules/create_order/controllers/create_order_controller.dart';
 import 'package:carebea/app/modules/create_order/model/productlist_model.dart';
 import 'package:carebea/app/modules/create_order/views/check_out_view.dart';
@@ -6,6 +8,7 @@ import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
 import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
+import 'package:carebea/app/utils/widgets/custom_alertbox.dart';
 import 'package:carebea/app/utils/widgets/custom_button.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:carebea/app/utils/widgets/custom_textfield.dart';
@@ -24,7 +27,9 @@ class AddProductsView extends GetView<CreateOrderController> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => controller.onWillpopClose(),
+      onWillPop: () async {
+        return (await backButtonPressGuard(context)) ?? false;
+      },
       child: Scaffold(
         appBar: appBar(context),
         body: Column(
@@ -49,15 +54,14 @@ class AddProductsView extends GetView<CreateOrderController> {
             onTap: controller.creatingOrder.value
                 ? null
                 : () {
-                    controller.createOrder();
+                    controller.goToOrderSummary();
                   },
             child: Container(
               alignment: Alignment.center,
               height: 55,
               decoration: BoxDecoration(
                 color: customTheme(context).primary,
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(7)),
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(7)),
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 23, right: 15),
@@ -66,17 +70,13 @@ class AddProductsView extends GetView<CreateOrderController> {
                     Obx(() {
                       return Text(
                         "${controller.cartproducts.length} items  |  ",
-                        style: customTheme(context)
-                            .regular
-                            .copyWith(fontSize: 13, color: Colors.white),
+                        style: customTheme(context).regular.copyWith(fontSize: 13, color: Colors.white),
                       );
                     }),
                     Obx(() {
                       return Text(
                         "₹${controller.totalCartCost.value.toStringAsFixed(2)}",
-                        style: customTheme(context)
-                            .medium
-                            .copyWith(fontSize: 13, color: Colors.white),
+                        style: customTheme(context).medium.copyWith(fontSize: 13, color: Colors.white),
                       );
                     }),
                     const Spacer(),
@@ -96,9 +96,7 @@ class AddProductsView extends GetView<CreateOrderController> {
                         children: [
                           Text(
                             "Place order   ",
-                            style: customTheme(context)
-                                .regular
-                                .copyWith(fontSize: 13, color: Colors.white),
+                            style: customTheme(context).regular.copyWith(fontSize: 13, color: Colors.white),
                           ),
                           const Icon(
                             Icons.arrow_forward_ios,
@@ -116,6 +114,34 @@ class AddProductsView extends GetView<CreateOrderController> {
         }),
       ),
     );
+  }
+
+  Future<bool?> backButtonPressGuard(BuildContext context) {
+    return showDialog<bool>(
+        context: context,
+        builder: (_) {
+          return CustomAlertbox(
+            title: "Do you want to remove all products and go back to shop selection.",
+            content: "",
+            actions: [
+              Expanded(
+                child: CustomButton(
+                    title: "Yes",
+                    onTap: () {
+                      Get.back(result: true);
+                    }),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: CustomButton(
+                    title: "No",
+                    onTap: () {
+                      Get.back(result: false);
+                    }),
+              )
+            ],
+          );
+        });
   }
 
   ListView _productListView() {
@@ -170,14 +196,14 @@ class AddProductsView extends GetView<CreateOrderController> {
           borderRadius: const BorderRadius.vertical(
             bottom: Radius.circular(20),
           ),
-          boxShadow: [
-            BoxShadow(blurRadius: 10, color: customTheme(context).shadowColor)
-          ]),
+          boxShadow: [BoxShadow(blurRadius: 10, color: customTheme(context).shadowColor)]),
       child: Row(
         children: [
           IconButton(
-              onPressed: () {
-                Get.back();
+              onPressed: () async {
+                if ((await backButtonPressGuard(context)) ?? false) {
+                  Get.back();
+                }
               },
               icon: Icon(
                 Icons.arrow_back_ios,
@@ -219,9 +245,7 @@ class ProductTile extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: (product.productImages ?? []).isEmpty
-                          ? _placeholder()
-                          : _image(product.productImages?.first ?? ""),
+                      child: (product.imageUrl ?? []).isEmpty ? _placeholder() : _image(product.imageUrl?.first ?? ""),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
@@ -245,18 +269,12 @@ class ProductTile extends StatelessWidget {
                                           text: product.name,
                                           children: [
                                             TextSpan(
-                                                text: " ${product.qtyAvailable}"
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    color: Color(0xff929292))),
+                                                text: " ${product.qtyAvailable}".toString(),
+                                                style: TextStyle(color: Color(0xff929292))),
                                             TextSpan(
-                                                text: " ${product.unit}",
-                                                style: TextStyle(
-                                                    color: Color(0xff929292))),
+                                                text: " ${product.unit}", style: TextStyle(color: Color(0xff929292))),
                                           ],
-                                          style: customTheme(context)
-                                              .regular
-                                              .copyWith(fontSize: 11)),
+                                          style: customTheme(context).regular.copyWith(fontSize: 11)),
                                     ),
                                   ),
                                 ),
@@ -282,9 +300,7 @@ class ProductTile extends StatelessWidget {
                             children: [
                               Text(
                                 '₹${_controller.productPrice((Get.arguments['shop'] as ShopList).category!, product)}',
-                                style: customTheme(context)
-                                    .medium
-                                    .copyWith(fontSize: 12),
+                                style: customTheme(context).medium.copyWith(fontSize: 12),
                               ),
                               const SizedBox(width: 4),
                               // Text(
@@ -300,8 +316,7 @@ class ProductTile extends StatelessWidget {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 8.0, bottom: 10),
+                              padding: const EdgeInsets.only(right: 8.0, bottom: 10),
                               child:
                                   // (product.available?.toLowerCase() == 'unavailable') ?
                                   // Text(
@@ -311,8 +326,7 @@ class ProductTile extends StatelessWidget {
                                   //       )
                                   //     :
                                   Obx(() {
-                                if (_controller.cartproducts
-                                    .containsKey(product.id)) {
+                                if (_controller.cartproducts.containsKey(product.id)) {
                                   return CartCountWidget(
                                     id: product.id!,
                                   );
@@ -321,8 +335,10 @@ class ProductTile extends StatelessWidget {
                                   isDense: true,
                                   title: "Add",
                                   onTap: () {
-                                    _controller.updateCartProduct(
-                                        product.id!, 1);
+                                    // _controller.updateCartProduct(
+                                    //     product.id!, 1);
+                                    _controller.cartproducts[product.id!] = TextEditingController();
+                                    _controller.cartproductsFocusNode[product.id]!.requestFocus();
                                   },
                                   fontSize: 10,
                                   color: const Color(0xff47BED9),
@@ -393,8 +409,8 @@ class ProductTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: AspectRatio(
             aspectRatio: 58 / 74,
-            child: Image.network(imageUrl, fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
+            child: Image.network(imageUrl, fit: BoxFit.cover, errorBuilder: (context, error, stackTrace) {
+              log("image error", error: error, stackTrace: stackTrace);
               return _placeholder();
             })),
       ),

@@ -30,8 +30,7 @@ class ShopsController extends GetxController {
   PaymentResponse? paymentResponse;
 
   Rx<PaymentMethod?> selectedPaymentMethod = Rx<PaymentMethod?>(null);
-  TextEditingController collectedAmountEditingController =
-      TextEditingController();
+  TextEditingController collectedAmountEditingController = TextEditingController();
   TextEditingController cheqNoController = TextEditingController();
 
   Rx<SearchType> selectedSearchtype = Rx(
@@ -67,8 +66,7 @@ class ShopsController extends GetxController {
     filterSelected("");
 
     isLoading(true);
-    var shopListResponse =
-        await shopListRepo.shopList(SharedPrefs.getUserId()!);
+    var shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!);
     if (shopListResponse.shopListResult?.status ?? false) {
       shopList = shopListResponse.shopListResult?.shopList ?? [];
       shopList.sort((a, b) => b.id!.compareTo(a.id!));
@@ -81,8 +79,7 @@ class ShopsController extends GetxController {
 
     debugPrint("fetchAllShops $shopListResponse");
 
-    debugPrint(
-        'fetch shops status ${shopListResponse.shopListResult!.status!}');
+    debugPrint('fetch shops status ${shopListResponse.shopListResult!.status!}');
 
     isLoading(false);
   }
@@ -90,8 +87,7 @@ class ShopsController extends GetxController {
   fetchOrders(String orderType, int shopId) async {
     isOrdersLoading(true);
 
-    orderListResponse = await orderListRepo.orderList(
-        SharedPrefs.getUserId()!, orderType, shopId);
+    orderListResponse = await orderListRepo.orderList(SharedPrefs.getUserId()!, orderType, shopId);
     if (orderListResponse!.orderListResult!.status == true) {
       orderHistory = orderListResponse!.orderListResult!.history;
     } else {
@@ -105,8 +101,7 @@ class ShopsController extends GetxController {
     }
     debugPrint("fetchAllOrders $orderListResponse");
 
-    debugPrint(
-        'fetch order status ${orderListResponse!.orderListResult!.status}');
+    debugPrint('fetch order status ${orderListResponse!.orderListResult!.status}');
 
     isOrdersLoading(false);
   }
@@ -116,8 +111,7 @@ class ShopsController extends GetxController {
     shopList.clear();
     isFilterClick(true);
     filterSelected("$filterName-$filterId");
-    var shopFilterResponse = await shopListRepo.shopFilter(
-        SharedPrefs.getUserId()!, filterName, filterId);
+    var shopFilterResponse = await shopListRepo.shopFilter(SharedPrefs.getUserId()!, filterName, filterId);
     if (shopFilterResponse.shopListResult?.status ?? false) {
       shopList = shopFilterResponse.shopListResult?.shopList ?? [];
     }
@@ -126,8 +120,7 @@ class ShopsController extends GetxController {
 
   shopDetail(int shopId) async {
     isShopDetailsLoading(true);
-    shopDetailResponse =
-        await shopListRepo.shopDetails(SharedPrefs.getUserId()!, shopId);
+    shopDetailResponse = await shopListRepo.shopDetails(shopId);
     isShopDetailsLoading(false);
   }
 
@@ -158,12 +151,10 @@ class ShopsController extends GetxController {
     isShopDetailsLoading(true);
     previousOrderCount(0);
     upcomingOrderCount(0);
-    var response =
-        await shopListRepo.shopDetails(SharedPrefs.getUserId()!, shopId!);
+    var response = await shopListRepo.shopDetails(shopId!);
     if (response.shopListResult?.status ?? false) {
       shop = response.shopListResult?.shopList?.first;
-      collectedAmountEditingController.text =
-          (shop?.outStandingAmount ?? 0).toString();
+      collectedAmountEditingController.text = (shop?.outStandingAmount ?? 0).toString();
       await fetchOrders('Previous', shopId);
       await fetchOrders('Upcoming', shopId);
     }
@@ -181,8 +172,7 @@ class ShopsController extends GetxController {
 
     if (paymentResponse?.paymentResult?.status ?? false) {
       Get.back();
-      ScaffoldMessenger.of(Get.context!)
-          .showSnackBar(const SnackBar(content: Text("Payment Successful")));
+      ScaffoldMessenger.of(Get.context!).showSnackBar(const SnackBar(content: Text("Payment Successful")));
       fetchShop(shopId);
     }
   }
@@ -194,9 +184,8 @@ class ShopsController extends GetxController {
     if ((query ?? "").isEmpty) {
       shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!);
     } else {
-      shopListResponse = await shopListRepo.shopSearch(
-          salesPersonId: SharedPrefs.getUserId()!,
-          query: {selectedSearchtype.value.type!: query});
+      shopListResponse = await shopListRepo
+          .shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {selectedSearchtype.value.type!: query});
     }
     if (shopListResponse.shopListResult?.status ?? false) {
       shopList = shopListResponse.shopListResult?.shopList ?? [];

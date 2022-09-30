@@ -1,5 +1,5 @@
 name: carebea
-version: 1.0.9+11
+version: 1.0.14+16
 publish_to: none
 description: Carebea Mobile App.
 environment:
@@ -31,6 +31,7 @@ dependencies:
   path_provider: ^2.0.11
   permission_handler: ^10.0.0
   restart_app: ^1.1.0+1
+  share_plus: ^4.0.10+1
   shared_preferences: 2.0.15
   slide_to_confirm: ^1.1.0
   table_calendar: 3.0.6
