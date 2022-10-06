@@ -405,6 +405,16 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                         value: e,
                                         onChanged: (val) {
                                           controller.selectedPaymentMethod(e);
+                                          if (e.code == "CRED") {
+                                            controller.collectedAmountEditingController.text = (controller
+                                                        .orderListDetailResponse
+                                                        ?.orderListResult
+                                                        ?.history
+                                                        ?.first
+                                                        .amountTotal ??
+                                                    0)
+                                                .toString();
+                                          }
                                         }))
                                     .toList());
                           }),
@@ -414,21 +424,23 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                             style: customTheme(context).regular.copyWith(fontSize: 11),
                           ),
                           const SizedBox(height: 5),
-                          CustomTextField(
-                            validaton: (val) {
-                              if ((val ?? "").isEmpty) {
-                                return "Collected amount is required";
-                              }
-                              if (double.parse(val ?? "0") <
-                                  (controller.orderListDetailResponse?.orderListResult?.history?.first.amountTotal ??
-                                      0)) {
-                                return "Collected amount can't be less than total";
-                              }
-                              return null;
-                            },
-                            inputType: TextInputType.number,
-                            textcontroller: controller.collectedAmountEditingController,
-                          ),
+                          Obx(() {
+                            return CustomTextField(
+                              validaton: (val) {
+                                if ((val ?? "").isEmpty) {
+                                  return "Collected amount is required";
+                                }
+                                if (double.parse(val ?? "0") <= 0) {
+                                  return "Collected amount can't be zero";
+                                }
+
+                                return null;
+                              },
+                              enabled: controller.selectedPaymentMethod.value.code != "CRED",
+                              inputType: TextInputType.number,
+                              textcontroller: controller.collectedAmountEditingController,
+                            );
+                          }),
                           Obx(() {
                             if (controller.selectedPaymentMethod.value.code != "CHEQ") {
                               return const SizedBox.shrink();
