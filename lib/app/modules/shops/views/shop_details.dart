@@ -311,7 +311,7 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                           height: 10,
                         ),
                         Text(
-                          'Credit Balance : ₹${shopDetails.credBalance!}',
+                          'Credit Balance : ₹${shopDetails.credBalance!.toStringAsFixed(2)}',
                           style: customTheme(context).regular.copyWith(fontSize: 11),
                         ),
                         if ((shopDetails.outStandingAmount ?? 0) > 0)
@@ -320,7 +320,7 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
                           ),
                         if ((shopDetails.outStandingAmount ?? 0) > 0)
                           Text(
-                            'Outstanding Amount : ₹${shopDetails.outStandingAmount!}',
+                            'Outstanding Amount : ₹${shopDetails.outStandingAmount!.toStringAsFixed(2)}',
                             style: customTheme(context).regular.copyWith(fontSize: 11),
                           ),
                       ],
