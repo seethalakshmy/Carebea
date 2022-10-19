@@ -21,6 +21,7 @@ class DeliveryHomeController extends GetxController {
   OrderListResponse? orderListResponse;
   OrderListResponse? allOrderListResponse;
   List<History> orders = [];
+  List<List<History>> orderHistoryList = [];
 
   //TODO: Implement DeliveryHomeController
 
@@ -55,27 +56,38 @@ class DeliveryHomeController extends GetxController {
 
   fetchDeliveryOrders(String? filterId) async {
     isDeliveryOrdersLoading(true);
+   orders = [];
+      orderHistoryList = [];
+
     orderListResponse = await orderListRepo.orderListDelivery(
         driverId: SharedPrefs.getUserId()!, filterName: "Category", filterId: filterId);
     if (orderListResponse?.orderListResult?.status ?? false) {
       orders = orderListResponse?.orderListResult?.history ?? [];
+      // sortOrderList();
     } else {
       orders = [];
+      orderHistoryList = [];
     }
     isDeliveryOrdersLoading(false);
   }
 
   fetchDeliveryAllOrders() async {
     isDeliveryOrdersLoading(true);
+   orders = [];
+      orderHistoryList = [];
 
     allOrderListResponse = await orderListRepo.allOrdersDelivery(driverId: SharedPrefs.getUserId()!);
     if (allOrderListResponse?.orderListResult?.status ?? false) {
       orders = allOrderListResponse?.orderListResult?.history ?? [];
+      // sortOrderList();
     } else {
       orders = [];
+      orderHistoryList = [];
     }
     isDeliveryOrdersLoading(false);
   }
+
+
 
   ///DeliverHomeOrderSearch
   Future<List<History>> homeSearchOrder(String? query) async {

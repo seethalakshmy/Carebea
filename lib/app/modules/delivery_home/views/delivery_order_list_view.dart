@@ -21,55 +21,57 @@ class DeliveryOrderListView extends GetView<DeliveryHomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title:Text(title,style: customTheme(context).medium.copyWith(fontSize: 14, color:Colors.black),),
+          title: Text(
+            title,
+            style: customTheme(context).medium.copyWith(fontSize: 14, color: Colors.black),
+          ),
           leading: InkWell(
-            onTap: (){
-              Get.back();
-            },
-              child: Icon(Icons.arrow_back_ios,color: Colors.black,)),
+              onTap: () {
+                Get.back();
+              },
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              )),
         ),
         body: Obx(() {
-          if(homePageOrderListingController.isDeliveryOrdersLoading.value ){
+          if (homePageOrderListingController.isDeliveryOrdersLoading.value) {
             return Center(child: circularProgressIndicator(context));
           }
-          if(homePageOrderListingController.orders.isEmpty ){
-            return Center(child: Text('No orders'),);
+          if (homePageOrderListingController.orders.isEmpty) {
+            return Center(
+              child: Text('No orders'),
+            );
           }
           return ListView.separated(
               separatorBuilder: (_, __) => const SizedBox(height: 0),
               scrollDirection: Axis.vertical,
-              itemCount:homePageOrderListingController.orders.length,
+              itemCount: homePageOrderListingController.orderHistoryList.length,
               itemBuilder: (context, index) {
-                return Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 5, vertical: 5),
-                    child: InkWell(
-                      onTap: () {
-                        if(isFrom == 'delivery'){
-                          Get.toNamed(Routes.ORDER_DETAILS_DELIVERY,
-                              arguments: {
-                                'order_id': homePageOrderListingController.orders[index].id
-                              });
-
-                        }
-                        else{
-                          Get.toNamed(Routes.ORDER_HISTORY_DETAILS,
-                              arguments: {
-                                'order_id': homePageOrderListingController.orders[index].id
-                              });
-
-                        }
-
-
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: OrderHistoryTile(orders: homePageOrderListingController.orders[index]
-                            ),
-                      ),
-                    ));
+                var orderList = homePageOrderListingController.orderHistoryList[index];
+                return ExpansionTile(
+                  title: Text(orderList.first.srName ?? ""),
+                  children: orderList.map((e) {
+                    return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                        child: InkWell(
+                          onTap: () {
+                            if (isFrom == 'delivery') {
+                              Get.toNamed(Routes.ORDER_DETAILS_DELIVERY,
+                                  arguments: {'order_id': homePageOrderListingController.orders[index].id});
+                            } else {
+                              Get.toNamed(Routes.ORDER_HISTORY_DETAILS,
+                                  arguments: {'order_id': homePageOrderListingController.orders[index].id});
+                            }
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: OrderHistoryTile(orders: homePageOrderListingController.orders[index]),
+                          ),
+                        ));
+                  }).toList(),
+                );
               });
-        })
-    );
+        }));
   }
 }
