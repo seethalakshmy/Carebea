@@ -76,6 +76,10 @@ class CreateOrderController extends GetxController {
     return true;
   }
 
+  deleteOrders(int shopId) async {
+    await _repository.deleteOrders(shopId: shopId);
+  }
+
   Future<void> fetchShops() async {
     isLoading(true);
     try {
@@ -132,7 +136,10 @@ class CreateOrderController extends GetxController {
       _products.addAll({key: int.parse(textEditingControlller.text)});
     });
     var res = await _repository.createOrder(
-        shopId: (Get.arguments["shop"] as ShopList).id, salesPersonId: SharedPrefs.getUserId(), products: _products,orderId: createOrderResponse?.result?.orderId);
+        shopId: (Get.arguments["shop"] as ShopList).id,
+        salesPersonId: SharedPrefs.getUserId(),
+        products: _products,
+        orderId: createOrderResponse?.result?.orderId);
     sortList();
 
     if (res.result?.status ?? false) {
