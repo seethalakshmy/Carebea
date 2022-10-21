@@ -66,7 +66,7 @@ class ProductList {
     this.enLang,
     this.unit,
     this.productId,
-    this.productImages,
+    this.productImages,this.offerName
   });
 
   List<dynamic>? imageUrl;
@@ -80,6 +80,8 @@ class ProductList {
   double? price;
   @JsonKey(name: 'retail_price')
   double? retailPrice;
+  @JsonKey(name: 'offer_name')
+  String? offerName;
   @JsonKey(name: 'department_price')
   double? departmentPrice;
   @JsonKey(name: 'wholesale_price')

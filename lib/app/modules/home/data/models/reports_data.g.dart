@@ -24,7 +24,7 @@ Map<String, dynamic> _$ReportsDataToJson(ReportsData instance) =>
 Result _$ResultFromJson(Map<String, dynamic> json) => Result(
       status: json['status'] as bool?,
       message: json['message'] as String?,
-      salesTeam: json['sales_team'] as String?,
+      salesTeam: json['salesTeam'] as String?,
       sales: (json['sales'] as num?)?.toDouble(),
       collectedAmount: json['collected_amount'] as int?,
       outstanding: (json['outstanding'] as num?)?.toDouble(),
@@ -36,7 +36,7 @@ Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
       'message': instance.message,
       'salesTeam': instance.salesTeam,
       'sales': instance.sales,
-      'collectedAmount': instance.collectedAmount,
+      'collected_amount': instance.collectedAmount,
       'outstanding': instance.outstanding,
-      'invoicedTarget': instance.invoicedTarget,
+      'invoiced_target': instance.invoicedTarget,
     };

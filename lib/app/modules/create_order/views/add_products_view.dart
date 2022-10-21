@@ -355,15 +355,16 @@ class ProductTile extends StatelessWidget {
                   ],
                 ),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 8.0, bottom: 8),
-              //   child: Text(
-              //     "*Offer valid until 30 June",
-              //     style: customTheme(context)
-              //         .regular
-              //         .copyWith(fontSize: 11, color: Colors.black),
-              //   ),
-              // )
+              if ((product.offerName ?? "").trim().isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, bottom: 8),
+                  child: Text(
+                    "* ${product.offerName!}",
+                    style: customTheme(context)
+                        .regular
+                        .copyWith(fontSize: 11, color: Colors.black, fontStyle: FontStyle.italic),
+                  ),
+                )
             ],
           ),
         ),

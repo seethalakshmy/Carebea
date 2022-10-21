@@ -128,9 +128,11 @@ class CreateOrderController extends GetxController {
     createOrder();
   }
 
+  List<OfferProduct> offerProducts = [];
   createOrder() async {
     creatingOrder(true);
     Map<int, int>? _products = {};
+    offerProducts.clear();
     cartproducts.removeWhere((key, textEditingController) => textEditingController.text.isEmpty);
     cartproducts.forEach((key, textEditingControlller) {
       _products.addAll({key: int.parse(textEditingControlller.text)});
@@ -146,6 +148,11 @@ class CreateOrderController extends GetxController {
       Get.to(() => CheckoutView(), arguments: Get.arguments);
       creatingOrder(false);
       createOrderResponse = res;
+      for (var product in res.result!.offerProducts!) {
+        if (product.giftProduct ?? false) {
+          offerProducts.add(product);
+        }
+      }
       selectedPaymentMethod = (res.result!.paymentMethods!.first).obs;
       return;
     }
