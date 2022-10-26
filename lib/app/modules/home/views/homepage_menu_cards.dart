@@ -15,25 +15,23 @@ import '../../delivery_home/views/delivery_order_list_view.dart';
 
 class HomeMenuCards extends GetView<HomeController> {
   HomeMenuCards({Key? key}) : super(key: key);
-  HomePageOrderListingController homePageOrderListingController =
-      Get.put(HomePageOrderListingController());
+  HomePageOrderListingController homePageOrderListingController = Get.put(HomePageOrderListingController());
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: Get.size.height * .23,
+      // height: Get.size.height * .23,
       child: GridView(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            childAspectRatio: 12 / 8),
+            crossAxisCount: 3, crossAxisSpacing: 10, mainAxisSpacing: 10, childAspectRatio: 12 / 8),
         children: [
           InkWell(
             onTap: () {
               Get.toNamed(Routes.CREATE_ORDER);
             },
-            child: HomeMenuIndividual(
+            child: const HomeMenuIndividual(
               asseticon: Assets.orderHomeIcon,
               gradients: [Color(0xff0098BA), Color(0xff4163A2)],
               title: "Create new order",
@@ -43,7 +41,7 @@ class HomeMenuCards extends GetView<HomeController> {
             onTap: () {
               Get.toNamed(Routes.ADD_SHOP, arguments: {"isEdit": false});
             },
-            child: HomeMenuIndividual(
+            child: const HomeMenuIndividual(
               asseticon: Assets.newShopHomeIcon,
               gradients: [Color(0xffA73B6E), Color(0xff985194)],
               title: "Add new shop",
@@ -63,7 +61,7 @@ class HomeMenuCards extends GetView<HomeController> {
             onTap: () {
               Get.toNamed(Routes.ROUTE_PAGE);
             },
-            child: HomeMenuIndividual(
+            child: const HomeMenuIndividual(
               asseticon: Assets.routeHomeIcon,
               backgroundColor: Color(0xffF74254),
               title: "Route",
@@ -71,12 +69,12 @@ class HomeMenuCards extends GetView<HomeController> {
           ),
           InkWell(
             onTap: () {
-              homePageOrderListingController.fetchSrOrders("1");
+              homePageOrderListingController.fetchSrOrders(1);
               Get.to(() => DeliveryOrderListView("Today's Delivery", "sr"));
             },
             child: HomeMenuIndividual(
               asseticon: Assets.deliveryHomeIcon,
-              backgroundColor: Color(0xffD8375C),
+              backgroundColor: const Color(0xffD8375C),
               title: "Today's Delivery",
               count: controller.homeData?.result?.todaysDelivery ?? 0,
             ),
@@ -89,10 +87,34 @@ class HomeMenuCards extends GetView<HomeController> {
             },
             child: HomeMenuIndividual(
               asseticon: Assets.orderHomeIcon,
-              backgroundColor: Color(0xffF3674F),
+              backgroundColor: const Color(0xffF3674F),
               title: "Total Orders",
               count: controller.homeData?.result?.totalOrders ?? 0,
             ),
+          ),
+          HomeMenuIndividual(
+            asseticon: Assets.deliveryHomeIcon,
+            backgroundColor: const Color(0xff00B2BE),
+            title: "Collected Amount",
+            amount: controller.reportsData?.result?.collectedAmount?.toDouble() ?? 0,
+          ),
+          HomeMenuIndividual(
+            asseticon: Assets.deliveryHomeIcon,
+            backgroundColor: const Color(0xff985194),
+            title: "Outstanding",
+            amount: controller.reportsData?.result?.outstanding?.toDouble() ?? 0.0,
+          ),
+          HomeMenuIndividual(
+            asseticon: Assets.deliveryHomeIcon,
+            backgroundColor: const Color(0xff66DE9D),
+            title: "Invoiced Target",
+            amount: controller.reportsData?.result?.invoicedTarget ?? 0.0,
+          ),
+          HomeMenuIndividual(
+            asseticon: Assets.deliveryHomeIcon,
+            backgroundColor: const Color(0xff66DE9D),
+            title: "Sale Amount",
+            amount: controller.reportsData?.result?.sales ?? 0.0,
           ),
         ],
       ),

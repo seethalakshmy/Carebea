@@ -117,6 +117,7 @@ class AddProductsView extends GetView<CreateOrderController> {
   }
 
   Future<bool?> backButtonPressGuard(BuildContext context) {
+    var shop = (Get.arguments['shop'] as ShopList);
     return showDialog<bool>(
         context: context,
         builder: (_) {
@@ -128,6 +129,7 @@ class AddProductsView extends GetView<CreateOrderController> {
                 child: CustomButton(
                     title: "Yes",
                     onTap: () {
+                      controller.deleteOrders(shop.id!);
                       Get.back(result: true);
                     }),
               ),
@@ -205,7 +207,7 @@ class AddProductsView extends GetView<CreateOrderController> {
                   Get.back();
                 }
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_ios,
                 size: 15,
               )),
@@ -270,9 +272,10 @@ class ProductTile extends StatelessWidget {
                                           children: [
                                             TextSpan(
                                                 text: " ${product.qtyAvailable}".toString(),
-                                                style: TextStyle(color: Color(0xff929292))),
+                                                style: const TextStyle(color: const Color(0xff929292))),
                                             TextSpan(
-                                                text: " ${product.unit}", style: TextStyle(color: Color(0xff929292))),
+                                                text: " ${product.unit}",
+                                                style: const TextStyle(color: const Color(0xff929292))),
                                           ],
                                           style: customTheme(context).regular.copyWith(fontSize: 11)),
                                     ),
@@ -312,7 +315,7 @@ class ProductTile extends StatelessWidget {
                               // ),
                             ],
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Padding(
@@ -352,15 +355,16 @@ class ProductTile extends StatelessWidget {
                   ],
                 ),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 8.0, bottom: 8),
-              //   child: Text(
-              //     "*Offer valid until 30 June",
-              //     style: customTheme(context)
-              //         .regular
-              //         .copyWith(fontSize: 11, color: Colors.black),
-              //   ),
-              // )
+              if ((product.offerName ?? "").trim().isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, bottom: 8),
+                  child: Text(
+                    "* ${product.offerName!}",
+                    style: customTheme(context)
+                        .regular
+                        .copyWith(fontSize: 11, color: Colors.black, fontStyle: FontStyle.italic),
+                  ),
+                )
             ],
           ),
         ),

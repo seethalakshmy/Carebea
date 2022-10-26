@@ -9,7 +9,9 @@ part of 'home_data_model.dart';
 HomeData _$HomeDataFromJson(Map<String, dynamic> json) => HomeData(
       jsonrpc: json['jsonrpc'] as String?,
       id: json['id'],
-      result: json['result'] == null ? null : Result.fromJson(json['result'] as Map<String, dynamic>),
+      result: json['result'] == null
+          ? null
+          : Result.fromJson(json['result'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$HomeDataToJson(HomeData instance) => <String, dynamic>{
@@ -44,22 +46,26 @@ Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
       'def_opening_credit': instance.defOpeningCredit,
     };
 
-LatestShopList _$LatestShopListFromJson(Map<String, dynamic> json) => LatestShopList(
+LatestShopList _$LatestShopListFromJson(Map<String, dynamic> json) =>
+    LatestShopList(
       id: json['id'] as int?,
       name: json['name'] as String?,
       userAddress: json['user_address'] as String?,
-      lastName: json['last_name'] as String?,
       phone: json['phone'] as String?,
+      lastName: json['last_name'] as String?,
     );
 
-Map<String, dynamic> _$LatestShopListToJson(LatestShopList instance) => <String, dynamic>{
+Map<String, dynamic> _$LatestShopListToJson(LatestShopList instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'user_address': instance.userAddress,
+      'last_name': instance.lastName,
       'phone': instance.phone,
     };
 
-UpcomingOrdersList _$UpcomingOrdersListFromJson(Map<String, dynamic> json) => UpcomingOrdersList(
+UpcomingOrdersList _$UpcomingOrdersListFromJson(Map<String, dynamic> json) =>
+    UpcomingOrdersList(
       orderId: json['order_id'] as int?,
       orderName: json['order_name'] as String?,
       shopName: json['shop_name'] as String?,
@@ -67,7 +73,8 @@ UpcomingOrdersList _$UpcomingOrdersListFromJson(Map<String, dynamic> json) => Up
       status: json['status'] as String?,
     );
 
-Map<String, dynamic> _$UpcomingOrdersListToJson(UpcomingOrdersList instance) => <String, dynamic>{
+Map<String, dynamic> _$UpcomingOrdersListToJson(UpcomingOrdersList instance) =>
+    <String, dynamic>{
       'order_id': instance.orderId,
       'order_name': instance.orderName,
       'shop_name': instance.shopName,

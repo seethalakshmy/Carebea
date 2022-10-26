@@ -28,7 +28,7 @@ class UpComingDeliveryTile extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    "Order ID.: #${order.orderId}",
+                    "Order ID.: #${order.orderName}",
                     style: customTheme(context).medium.copyWith(fontSize: 11, color: customTheme(context).secondary),
                   ),
                   const Spacer(),

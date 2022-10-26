@@ -79,4 +79,16 @@ class CreateorderDataSource {
 
     return ConfirmOrderResponse(result: ConfirmOrderResult.fromJson(json.decode(res.body)));
   }
+
+  Future<bool> deleteOrders(int shopId, int userId) async {
+    try {
+      var res = await _apiService.post("cancel-order", {"shop_id": shopId, "sales_person_id": userId});
+
+      var data = json.decode(res.body);
+
+      return data["result"]["status"] ?? false;
+    } catch (e) {
+      return false;
+    }
+  }
 }

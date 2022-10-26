@@ -160,22 +160,24 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                       SizedBox(
                                         width: 5,
                                       ),
-                                      Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "${orders.shopName!} ${orders.shopLastName ?? ""}",
-                                            style: customTheme(context).medium.copyWith(fontSize: 11),
-                                          ),
-                                          SizedBox(
-                                            width: Get.width * .8,
-                                            child: Text(
-                                              orders.userAddress!.split("\n").join(" "),
-                                              style: customTheme(context).regular.copyWith(fontSize: 11),
+                                      Flexible(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "${orders.shopName!} ${orders.shopLastName ?? ""}",
+                                              style: customTheme(context).medium.copyWith(fontSize: 11),
                                             ),
-                                          ),
-                                        ],
+                                            SizedBox(
+                                              width: Get.width * .8,
+                                              child: Text(
+                                                orders.userAddress!.split("\n").join(" "),
+                                                style: customTheme(context).regular.copyWith(fontSize: 11),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),

@@ -1,5 +1,6 @@
 import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/modules/shops/models/order_list_model.dart';
+import 'package:carebea/app/utils/assets.dart';
 import 'package:carebea/app/utils/theme.dart';
 import 'package:carebea/app/utils/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class OrderHistoryTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Order ID: ${orders.orderId}',
+                      'Order ID: ${orders.name}',
                       style: customTheme(context).medium.copyWith(fontSize: 12, color: customTheme(context).secondary),
                     ),
                     if (orders.deliveryDate != null)
@@ -78,6 +79,47 @@ class OrderHistoryTile extends StatelessWidget {
                     )
                   ],
                 )
+              ],
+            ),
+          ),
+       Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              orders.shopName!,
+              style: customTheme(context).medium.copyWith(fontSize: 12),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image.asset(
+                  Assets.assetsLocationFilled,
+                  scale: 3,
+                ),
+                const SizedBox(width: 2),
+                Expanded(
+                  child: Text(
+                    orders.shopAddress?.split("\n").join(" ") ?? "",
+                    style: customTheme(context).regular.copyWith(fontSize: 11),
+                  ),
+                ),
+                const SizedBox(width: 5),
+                if ((orders.shopMobile ?? "").isNotEmpty)
+                  InkWell(
+                    onTap: () {
+                      callPhone(orders.shopMobile!);
+                    },
+                    child: CircleAvatar(
+                      radius: 17,
+                      backgroundColor: customTheme(context).primary.withOpacity(.2),
+                      child: Image.asset(
+                        Assets.assetsPhone,
+                        scale: 2.5,
+                      ),
+                    ),
+                  )
               ],
             ),
           ),

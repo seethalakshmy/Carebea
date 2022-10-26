@@ -37,7 +37,7 @@ class OrderTile extends StatelessWidget {
                     children: [
                       Text(
                         // order.name!,
-                        'Order ID: ${order.orderId}',
+                        'Order ID: ${order.name}',
                         style:
                             customTheme(context).medium.copyWith(fontSize: 12, color: customTheme(context).secondary),
                       ),

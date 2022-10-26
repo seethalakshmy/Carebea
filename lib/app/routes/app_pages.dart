@@ -125,7 +125,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.CREATE_ORDER_SHOP_DETAILS,
-      page: () => const ShopDetailsView(),
+      page: () => ShopDetailsView(),
     ),
   ];
 }
