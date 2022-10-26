@@ -9,16 +9,21 @@ import '../model/productlist_model.dart';
 class CreateorderDataSource {
   final ApiService _apiService = ApiService();
 
-  Future<CreateOrderResponse> createOrder(int salesPersonId, int shopId, Map<int, int> products) async {
+  Future<CreateOrderResponse> createOrder(int salesPersonId, int shopId, Map<int, int> products, int? orderId) async {
     var _products = [];
     products.forEach((key, value) {
       _products.add({"product_id": key, "qty": value});
     });
-    var res = await _apiService.post("create-order", {
+    var body = {
       "sales_person_id": salesPersonId,
       "shop_id": shopId,
       "products": _products,
-    });
+    };
+    if (orderId != null) {
+      body.addAll({"order_id": orderId});
+    }
+
+    var res = await _apiService.post("create-order", body);
 
     if (res.statusCode == 200) {
       return CreateOrderResponse.fromJson(json.decode(res.body));
@@ -39,12 +44,11 @@ class CreateorderDataSource {
       return ProductListResponse(productListResult: ProductListResult(status: false));
     }
   }
+
   Future<ProductListResponse> searchProductList(String query) async {
     var response = await _apiService.post(
       'list-products',
-      {
-        "name":query
-      },
+      {"name": query},
     );
     if (response.statusCode == 200) {
       return ProductListResponse.fromJson(json.decode(response.body));
