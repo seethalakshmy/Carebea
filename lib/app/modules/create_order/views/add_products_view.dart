@@ -307,7 +307,7 @@ class ProductTile extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                '₹${_controller.productPrice((Get.arguments['shop'] as ShopList).category!, product)}',
+                                '₹${_controller.productPrice((Get.arguments['shop'] as ShopList).category!, product).toStringAsFixed(2)}',
                                 style: customTheme(context).medium.copyWith(fontSize: 12),
                               ),
                               const SizedBox(width: 4),
