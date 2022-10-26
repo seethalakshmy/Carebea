@@ -43,7 +43,6 @@ class HomeMenuIndividual extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 8),
-
                       child: amount != null
                           ? Text(
                               amount!.toStringAsFixed(2),
@@ -58,7 +57,6 @@ class HomeMenuIndividual extends StatelessWidget {
                                     fontSize: 13,
                                     color: Colors.white,
                                   ),
-
                             ),
                     ),
                     _icon(),
@@ -97,7 +95,7 @@ class HomeMenuIndividual extends StatelessWidget {
       child: Text(
         title,
         style: customTheme(context).medium.copyWith(
-              fontSize: 11,
+              fontSize: 10,
               color: Colors.white,
             ),
       ),
