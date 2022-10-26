@@ -27,9 +27,11 @@ class CartCountWidget extends StatelessWidget {
           child: IconButton(
               color: const Color(0xff909090),
               onPressed: () {
-                _controller.updateCartProduct(id, int.parse(_controller.cartproducts[id]!.text) - 1);
+                _controller.updateCartProduct(
+                    id, int.parse(_controller.cartproducts[id]!.text) - 1);
               },
-              icon: const RotatedBox(quarterTurns: 3, child: Icon(Icons.chevron_left))),
+              icon: const RotatedBox(
+                  quarterTurns: 3, child: Icon(Icons.chevron_left))),
         ),
         const SizedBox(width: 6),
         // Container(
@@ -59,10 +61,13 @@ class CartCountWidget extends StatelessWidget {
               onPressed: () {
                 _controller.updateCartProduct(
                     id,
-                    (_controller.cartproducts[id]!.text.isEmpty ? 0 : int.parse(_controller.cartproducts[id]!.text)) +
+                    (_controller.cartproducts[id]!.text.isEmpty
+                            ? 0
+                            : int.parse(_controller.cartproducts[id]!.text)) +
                         1);
               },
-              icon: RotatedBox(quarterTurns: 1, child: Icon(Icons.chevron_left))),
+              icon:
+                  RotatedBox(quarterTurns: 1, child: Icon(Icons.chevron_left))),
         ),
         const SizedBox(width: 6),
         InkWell(

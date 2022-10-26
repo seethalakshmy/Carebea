@@ -29,7 +29,8 @@ class HomeMenuIndividual extends StatelessWidget {
         decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(12.0),
-          gradient: gradients != null ? LinearGradient(colors: gradients!) : null,
+          gradient:
+              gradients != null ? LinearGradient(colors: gradients!) : null,
         ),
         child: Builder(builder: (context) {
           if (count != null || amount != null) {
@@ -42,6 +43,7 @@ class HomeMenuIndividual extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 8),
+
                       child: amount != null
                           ? Text(
                               amount!.toStringAsFixed(2),
@@ -53,9 +55,10 @@ class HomeMenuIndividual extends StatelessWidget {
                           : Text(
                               count.toString(),
                               style: customTheme(context).regular.copyWith(
-                                    fontSize: 28,
+                                    fontSize: 13,
                                     color: Colors.white,
                                   ),
+
                             ),
                     ),
                     _icon(),
@@ -94,7 +97,7 @@ class HomeMenuIndividual extends StatelessWidget {
       child: Text(
         title,
         style: customTheme(context).medium.copyWith(
-              fontSize: 10,
+              fontSize: 11,
               color: Colors.white,
             ),
       ),
