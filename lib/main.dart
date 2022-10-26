@@ -38,7 +38,7 @@ void main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) => runApp(
         GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          title: "Application",
+          title: "Carebea",
           initialRoute: AppPages.INITIAL,
           getPages: AppPages.routes,
           theme: ThemeData.light().copyWith(
