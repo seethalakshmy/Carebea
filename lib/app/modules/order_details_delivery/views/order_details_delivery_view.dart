@@ -106,7 +106,7 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                             width: 15,
                           ),
                           Text(
-                            'Order ID:#${order.orderId}',
+                            'Order ID:#${order.name}',
                             style: customTheme(context).medium.copyWith(fontSize: 18),
                           )
                         ],

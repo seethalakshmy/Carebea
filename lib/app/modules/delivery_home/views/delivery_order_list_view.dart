@@ -38,7 +38,7 @@ class DeliveryOrderListView extends GetView<DeliveryHomeController> {
           if (homePageOrderListingController.isDeliveryOrdersLoading.value) {
             return Center(child: circularProgressIndicator(context));
           }
-          if (homePageOrderListingController.orders.isEmpty) {
+          if (homePageOrderListingController.orderHistoryList.isEmpty) {
             return Center(
               child: Text('No orders'),
             );
@@ -57,16 +57,14 @@ class DeliveryOrderListView extends GetView<DeliveryHomeController> {
                         child: InkWell(
                           onTap: () {
                             if (isFrom == 'delivery') {
-                              Get.toNamed(Routes.ORDER_DETAILS_DELIVERY,
-                                  arguments: {'order_id': homePageOrderListingController.orders[index].id});
+                              Get.toNamed(Routes.ORDER_DETAILS_DELIVERY, arguments: {'order_id': e.id});
                             } else {
-                              Get.toNamed(Routes.ORDER_HISTORY_DETAILS,
-                                  arguments: {'order_id': homePageOrderListingController.orders[index].id});
+                              Get.toNamed(Routes.ORDER_HISTORY_DETAILS, arguments: {'order_id': e.id});
                             }
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: OrderHistoryTile(orders: homePageOrderListingController.orders[index]),
+                            child: OrderHistoryTile(orders: e),
                           ),
                         ));
                   }).toList(),

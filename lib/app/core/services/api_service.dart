@@ -10,7 +10,7 @@ import '../../../model/access_token.dart';
 import '../../utils/shared_prefs.dart';
 
 class ApiService extends GetxService {
-  var baseUrl = "https://1ae9-112-196-178-85.in.ngrok.io/api/v1/"; //test
+  var baseUrl = "https://eca2-117-193-165-154.in.ngrok.io/api/v1/"; //test
   // var baseUrl = "http://15.206.14.111/api/v1/"; //live
   // var baseUrl = "http://192.168.1.40:8888/api/v1/"; //live
 

@@ -74,10 +74,7 @@ class HomeView extends GetView<HomeController> {
             );
           }
           return RefreshIndicator(
-            onRefresh: () => Future.wait([
-              controller.fetchHomePageData(),
-              controller.fetchreports(),
-            ]),
+            onRefresh: () => controller.fetchHomePageData(),
             child: CustomScrollView(slivers: <Widget>[
               // SliverPadding(
               //   padding: const EdgeInsets.only(left: 15.0, right: 15.0),

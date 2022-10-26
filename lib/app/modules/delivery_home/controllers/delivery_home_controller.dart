@@ -54,7 +54,7 @@ class DeliveryHomeController extends GetxController {
     isDeliveryHomePageDataLoaded(true);
   }
 
-  fetchDeliveryOrders(String? filterId) async {
+  fetchDeliveryOrders(int? filterId) async {
     isDeliveryOrdersLoading(true);
    orders = [];
       orderHistoryList = [];

@@ -24,7 +24,7 @@ class HomePageOrderListingController extends GetxController {
   List<History> orders = [];
   List<List<History>> orderHistoryList = [];
 
-  fetchDeliveryOrders(String? filterId) async {
+  fetchDeliveryOrders(int? filterId) async {
     isDeliveryOrdersLoading(true);
     orders = [];
     orderHistoryList = [];
@@ -55,12 +55,12 @@ class HomePageOrderListingController extends GetxController {
     isDeliveryOrdersLoading(false);
   }
 
-  fetchSrOrders(String? filterId) async {
+  fetchSrOrders(int? filterId) async {
     isDeliveryOrdersLoading(true);
     orders = [];
     orderHistoryList = [];
     orderListResponse = await orderListRepo.orderListDelivery(
-        salesPersonId: SharedPrefs.getUserId()!, filterName: "Category", filterId: filterId);
+        salesPersonId: SharedPrefs.getUserId()!, filterName: "Date", filterId: filterId);
     if (orderListResponse?.orderListResult?.status ?? false) {
       orders = orderListResponse?.orderListResult?.history ?? [];
       sortOrderList();
@@ -94,9 +94,13 @@ class HomePageOrderListingController extends GetxController {
     var tempOrders = orders;
     for (var srName in srNames) {
       try {
-        var temp = tempOrders.where((element) => element.srName == srName);
-        tempOrders.removeWhere((element) => element.srName == srName);
-        orderHistoryList.add(temp.toList());
+        List<History> temp = [];
+        for (var order in tempOrders) {
+          if (order.srName == srName) {
+            temp.add(order);
+          }
+        }
+        orderHistoryList.add(temp);
       } catch (e, s) {
         log("error in orders sorting", error: e, stackTrace: s);
       }

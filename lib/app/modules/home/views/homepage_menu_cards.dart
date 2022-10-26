@@ -69,7 +69,7 @@ class HomeMenuCards extends GetView<HomeController> {
           ),
           InkWell(
             onTap: () {
-              homePageOrderListingController.fetchSrOrders("1");
+              homePageOrderListingController.fetchSrOrders(1);
               Get.to(() => DeliveryOrderListView("Today's Delivery", "sr"));
             },
             child: HomeMenuIndividual(
@@ -109,6 +109,12 @@ class HomeMenuCards extends GetView<HomeController> {
             backgroundColor: const Color(0xff66DE9D),
             title: "Invoiced Target",
             amount: controller.reportsData?.result?.invoicedTarget ?? 0.0,
+          ),
+          HomeMenuIndividual(
+            asseticon: Assets.deliveryHomeIcon,
+            backgroundColor: const Color(0xff66DE9D),
+            title: "Sale Amount",
+            amount: controller.reportsData?.result?.sales ?? 0.0,
           ),
         ],
       ),

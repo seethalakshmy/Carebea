@@ -30,7 +30,7 @@ class OrderHistoryTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Order ID: ${orders.orderId}',
+                      'Order ID: ${orders.name}',
                       style: customTheme(context).medium.copyWith(fontSize: 12, color: customTheme(context).secondary),
                     ),
                     if (orders.deliveryDate != null)

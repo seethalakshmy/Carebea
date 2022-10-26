@@ -36,7 +36,7 @@ class Result {
   String? salesTeam;
   double? sales;
   @JsonKey(name: "collected_amount")
-  int? collectedAmount;
+  double? collectedAmount;
   double? outstanding;
   @JsonKey(name: "invoiced_target")
   double? invoicedTarget;

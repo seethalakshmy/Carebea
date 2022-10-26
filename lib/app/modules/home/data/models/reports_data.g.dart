@@ -26,7 +26,7 @@ Result _$ResultFromJson(Map<String, dynamic> json) => Result(
       message: json['message'] as String?,
       salesTeam: json['salesTeam'] as String?,
       sales: (json['sales'] as num?)?.toDouble(),
-      collectedAmount: json['collected_amount'] as int?,
+      collectedAmount: (json['collected_amount'] as num?)?.toDouble(),
       outstanding: (json['outstanding'] as num?)?.toDouble(),
       invoicedTarget: (json['invoiced_target'] as num?)?.toDouble(),
     );

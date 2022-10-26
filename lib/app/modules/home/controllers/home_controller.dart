@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carebea/app/modules/home/data/models/home_data_model.dart';
 import 'package:carebea/app/modules/home/data/models/reports_data.dart';
 import 'package:carebea/app/modules/home/data/repo/home_data_repo.dart';
@@ -22,7 +24,6 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     fetchHomePageData();
-
     super.onInit();
   }
 
@@ -39,6 +40,11 @@ class HomeController extends GetxController {
       homeData = response;
       latestShopList = homeData?.result?.latestShopList ?? [];
       latestShopList.sort((a, b) => b.id!.compareTo(a.id!));
+    }
+    try {
+      await fetchreports();
+    } catch (e, s) {
+      log("error home", error: e, stackTrace: s);
     }
     isLoading(false);
   }
