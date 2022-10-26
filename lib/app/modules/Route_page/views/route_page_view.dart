@@ -14,7 +14,8 @@ import '../controllers/route_page_controller.dart';
 
 class RoutePageView extends GetView<RoutePageController> {
   RoutePageView({Key? key}) : super(key: key) {
-    controller.fetchRouteListCalender(date: DateFormat("dd/MMM/yyy").format(DateTime.now()));
+    controller.fetchRouteListCalender(
+        date: DateFormat("dd/MM/yyy").format(DateTime.now()));
   }
 
   @override
@@ -108,10 +109,14 @@ class RoutePageView extends GetView<RoutePageController> {
                                         ),
                                         Flexible(
                                           child: Text(
-                                            getFullAddress(controller.routeList[index].userAddress),
+                                            getFullAddress(controller
+                                                .routeList[index].userAddress),
                                             style: customTheme(context)
                                                 .medium
-                                                .copyWith(fontSize: 12, overflow: TextOverflow.ellipsis),
+                                                .copyWith(
+                                                    fontSize: 12,
+                                                    overflow:
+                                                        TextOverflow.ellipsis),
                                           ),
                                         ),
                                       ],

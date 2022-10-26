@@ -42,7 +42,9 @@ class CustomTextField extends TextFormField {
           enabled: enabled,
           autofocus: autoFocus,
           maxLines: maxLines,
-          style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black),
+          style: customTheme(Get.context!)
+              .regular
+              .copyWith(fontSize: 14, color: Colors.black),
           decoration: InputDecoration(
               suffix: trailing,
               suffixIconConstraints: BoxConstraints(minWidth: 0, minHeight: 0),
@@ -64,7 +66,9 @@ class CustomTextField extends TextFormField {
               fillColor: fillcolor ?? const Color(0xFFEFEFEF),
               filled: true,
               hintText: hint,
-              hintStyle: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: const Color(0xff929292)),
+              hintStyle: customTheme(Get.context!)
+                  .regular
+                  .copyWith(fontSize: 11, color: const Color(0xff929292)),
               prefixIcon: icon),
         );
   final FocusNode? focusNode;
