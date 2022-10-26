@@ -53,7 +53,7 @@ class OrdersController extends GetxController {
     filterSelected("$filterName-$filterId");
     var orderResponse = await orderListRepo.allOrdersList(
         SharedPrefs.getUserId()!, getOrdertypeString(selectedOrderType),
-        filtername: filterName, filterid: filterId.toString());
+        filtername: filterName, filterid: filterId);
     if (orderResponse.orderListResult?.status ?? false) {
       allOrders = orderResponse.orderListResult?.history ?? [];
     }

@@ -40,8 +40,13 @@ class CheckoutView extends StatelessWidget {
             // ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: _buildBody(context),
+              child: _buildPoductsList(context),
             ),
+            if (createOrderController.offerProducts.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                child: _buildOfferPoductsList(context),
+              ),
             _addMoreButton(context, createOrderController),
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 0, 24, 35),
@@ -136,7 +141,7 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  Widget _buildBody(BuildContext context) {
+  Widget _buildPoductsList(BuildContext context) {
     return CustomCard(
       margin: EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 14),
@@ -203,6 +208,77 @@ class CheckoutView extends StatelessWidget {
                       "₹${createOrderController.productPrice(Get.arguments["shop"].category, product).toStringAsFixed(2)}",
                       style:
                           customTheme(context).regular.copyWith(fontSize: 11),
+                    ),
+                  ]);
+                },
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOfferPoductsList(BuildContext context) {
+    return CustomCard(
+      margin: EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 14),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Offer Products (${createOrderController.offerProducts.length})',
+            style: customTheme(context).medium.copyWith(fontSize: 15),
+          ),
+          SizedBox(height: 10),
+          Table(
+            columnWidths: {0: FlexColumnWidth(8), 1: FlexColumnWidth(2), 2: FlexColumnWidth(2)},
+            border: TableBorder.all(width: 0, color: Colors.transparent),
+            children: [
+              TableRow(children: [
+                Text(
+                  'Product',
+                  style: customTheme(context).medium.copyWith(fontSize: 12),
+                ),
+                Text(
+                  'Qty',
+                  style: customTheme(context).medium.copyWith(fontSize: 12),
+                ),
+                Text(
+                  'Price',
+                  style: customTheme(context).medium.copyWith(fontSize: 12),
+                ),
+              ]),
+              TableRow(children: [
+                Text(
+                  "",
+                  style: customTheme(context).regular.copyWith(fontSize: 5),
+                ),
+                Text(
+                  "",
+                  style: customTheme(context).regular.copyWith(fontSize: 5),
+                ),
+                Text(
+                  "",
+                  style: customTheme(context).regular.copyWith(fontSize: 5),
+                ),
+              ]),
+              ...List.generate(
+                createOrderController.offerProducts.length,
+                (index) {
+                  var product = createOrderController.offerProducts[index];
+                  return TableRow(children: [
+                    Text(
+                      product.productName ?? "",
+                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                    ),
+                    Text(
+                      "${product.offerQuantity}x",
+                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                    ),
+                    Text(
+                      "₹0",
+                      style: customTheme(context).regular.copyWith(fontSize: 11),
                     ),
                   ]);
                 },

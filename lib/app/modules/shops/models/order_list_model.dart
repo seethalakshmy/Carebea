@@ -103,7 +103,7 @@ class History {
     this.shopMobile,
     this.warehouseId,
     this.warehouseName,
-    this.paymentMethod,this.shopLatitude,this.shopLongitude,
+    this.paymentMethod,this.shopLatitude,this.shopLongitude,this.shopAddress
   });
 
   int? id;
@@ -143,6 +143,8 @@ class History {
   String? srName;
   @JsonKey(name: 'shop_name')
   String? shopName;
+  @JsonKey(name: 'shop_address')
+  String? shopAddress;
   @JsonKey(name: 'shop_last_name')
   String? shopLastName;
   @JsonKey(name: 'amount_tax')

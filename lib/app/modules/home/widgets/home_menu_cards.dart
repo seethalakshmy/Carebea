@@ -10,6 +10,7 @@ class HomeMenuIndividual extends StatelessWidget {
     required this.title,
     this.onTap,
     this.count,
+    this.amount,
   }) : super(key: key);
 
   final List<Color>? gradients;
@@ -17,6 +18,7 @@ class HomeMenuIndividual extends StatelessWidget {
   final String title;
   final String? asseticon;
   final int? count;
+  final double? amount;
   final VoidCallback? onTap;
 
   @override
@@ -31,7 +33,7 @@ class HomeMenuIndividual extends StatelessWidget {
               gradients != null ? LinearGradient(colors: gradients!) : null,
         ),
         child: Builder(builder: (context) {
-          if (count != null) {
+          if (count != null || amount != null) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -41,13 +43,23 @@ class HomeMenuIndividual extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 8),
-                      child: Text(
-                        count.toString(),
-                        style: customTheme(context).regular.copyWith(
-                              fontSize: 16,
-                              color: Colors.white,
+
+                      child: amount != null
+                          ? Text(
+                              amount!.toStringAsFixed(2),
+                              style: customTheme(context).regular.copyWith(
+                                    fontSize: 13,
+                                    color: Colors.white,
+                                  ),
+                            )
+                          : Text(
+                              count.toString(),
+                              style: customTheme(context).regular.copyWith(
+                                    fontSize: 13,
+                                    color: Colors.white,
+                                  ),
+
                             ),
-                      ),
                     ),
                     _icon(),
                   ],

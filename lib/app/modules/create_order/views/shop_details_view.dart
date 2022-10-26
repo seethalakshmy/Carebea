@@ -11,7 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ShopDetailsView extends GetView<CreateOrderController> {
-  const ShopDetailsView({Key? key}) : super(key: key);
+  ShopDetailsView({Key? key}) : super(key: key) {
+    controller.deleteOrders((Get.arguments["shop"] as ShopList).id!);
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -95,6 +95,7 @@ History _$HistoryFromJson(Map<String, dynamic> json) => History(
       paymentMethod: json['payment_method'] as int?,
       shopLatitude: (json['shop_latitude'] as num?)?.toDouble(),
       shopLongitude: (json['shop_longitude'] as num?)?.toDouble(),
+      shopAddress: json['shop_address'] as String?,
     );
 
 Map<String, dynamic> _$HistoryToJson(History instance) => <String, dynamic>{
@@ -117,6 +118,7 @@ Map<String, dynamic> _$HistoryToJson(History instance) => <String, dynamic>{
       'user_address': instance.userAddress,
       'sr_name': instance.srName,
       'shop_name': instance.shopName,
+      'shop_address': instance.shopAddress,
       'shop_last_name': instance.shopLastName,
       'amount_tax': instance.amountTax,
       'outstanding_amount': instance.outstandingAmount,

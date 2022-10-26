@@ -30,6 +30,7 @@ class Result {
     this.amountTotal,
     this.amountUntaxed,
     this.productTotal,
+    this.offerProducts
   });
 
   final bool? status;
@@ -38,6 +39,8 @@ class Result {
   final int? orderId;
   @JsonKey(name: "payment_methods")
   final List<PaymentMethod>? paymentMethods;
+  @JsonKey(name: "offer_product_details")
+  final List<OfferProduct>? offerProducts;
   @JsonKey(name: 'amount_total')
   final double? amountTotal;
   @JsonKey(name: 'amount_untaxed')
@@ -66,4 +69,35 @@ class PaymentMethod {
   factory PaymentMethod.fromJson(Map<String, dynamic> json) => _$PaymentMethodFromJson(json);
 
   Map<String, dynamic> toJson() => _$PaymentMethodToJson(this);
+}
+
+@JsonSerializable()
+class OfferProduct {
+  OfferProduct({
+    this.productId,
+    this.productName,
+    this.productUomQty,
+    this.discount,
+    this.giftProduct,
+    this.offerName,
+    this.offerQuantity,
+  });
+
+  @JsonKey(name: "product_id")
+  int? productId;
+  @JsonKey(name: "product_name")
+  String? productName;
+  @JsonKey(name: "product_uom_qty")
+  int? productUomQty;
+  int? discount;
+  @JsonKey(name: "gift_product")
+  bool? giftProduct;
+  @JsonKey(name: "offer_name")
+  String? offerName;
+  @JsonKey(name: "offer_quantity")
+  int? offerQuantity;
+
+  factory OfferProduct.fromJson(Map<String, dynamic> json) => _$OfferProductFromJson(json);
+
+  Map<String, dynamic> toJson() => _$OfferProductToJson(this);
 }

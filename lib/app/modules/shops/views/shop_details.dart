@@ -209,23 +209,26 @@ class _ShopDetailsState extends State<ShopDetails> with SingleTickerProviderStat
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "${shopDetails!.name!} ${shopDetails.lastName}",
-                          // 'Trinity Shop',
-                          style: customTheme(context).medium.copyWith(fontSize: 14),
-                        ),
-                        if ((shopDetails.gstNo ?? "").isNotEmpty)
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
                           Text(
-                            "GST no: ${shopDetails.gstNo!}",
-                            // 'GST no: 66998964579898',
-                            style: customTheme(context).regular.copyWith(fontSize: 11),
+                            "${shopDetails!.name!} ${shopDetails.lastName}",
+                            // 'Trinity Shop',
+                            style: customTheme(context).medium.copyWith(fontSize: 14),
                           ),
-                      ],
+                          if ((shopDetails.gstNo ?? "").isNotEmpty)
+                            Text(
+                              "GST no: ${shopDetails.gstNo!}",
+                              // 'GST no: 66998964579898',
+                              style: customTheme(context).regular.copyWith(fontSize: 11),
+                            ),
+                        ],
+                      ),
                     ),
                     InkWell(
                         onTap: () {

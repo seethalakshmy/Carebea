@@ -19,7 +19,7 @@ class OrderDataSource {
       String? orderType,
       int? orderId,
       int? shopId,
-      String? filterId,
+      int? filterId,
       String? query,
       String? filterName}) async {
     Map<String, dynamic> body = {
