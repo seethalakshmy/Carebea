@@ -57,7 +57,9 @@ class CheckoutView extends StatelessWidget {
           height: 55,
           decoration: BoxDecoration(
             color: Colors.white,
-            boxShadow: [BoxShadow(color: customTheme(context).shadowColor, blurRadius: 10)],
+            boxShadow: [
+              BoxShadow(color: customTheme(context).shadowColor, blurRadius: 10)
+            ],
             borderRadius: const BorderRadius.vertical(top: Radius.circular(7)),
           ),
           child: Row(
@@ -70,11 +72,17 @@ class CheckoutView extends StatelessWidget {
                 children: [
                   Text(
                     "Total",
-                    style: customTheme(context).regular.copyWith(fontSize: 11),
+                    style: customTheme(context)
+                        .regular
+                        .copyWith(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    createOrderController.createOrderResponse!.result!.amountTotal!.toStringAsFixed(2),
-                    style: customTheme(context).medium.copyWith(fontSize: 16),
+                    createOrderController
+                        .createOrderResponse!.result!.amountTotal!
+                        .toStringAsFixed(2),
+                    style: customTheme(context)
+                        .medium
+                        .copyWith(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -93,15 +101,18 @@ class CheckoutView extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 15),
                   child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
-                      decoration:
-                          BoxDecoration(color: customTheme(context).primary, borderRadius: BorderRadius.circular(7)),
+                      decoration: BoxDecoration(
+                          color: customTheme(context).primary,
+                          borderRadius: BorderRadius.circular(7)),
                       child: TextButton(
                         onPressed: () {
                           createOrderController.confirmOrder(context);
                         },
                         child: Text(
                           'Confirm Order',
-                          style: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.white),
+                          style: customTheme(context)
+                              .regular
+                              .copyWith(fontSize: 12, color: Colors.white),
                         ),
                       )
 
@@ -138,7 +149,11 @@ class CheckoutView extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Table(
-            columnWidths: {0: FlexColumnWidth(8), 1: FlexColumnWidth(2), 2: FlexColumnWidth(2)},
+            columnWidths: {
+              0: FlexColumnWidth(8),
+              1: FlexColumnWidth(2),
+              2: FlexColumnWidth(2)
+            },
             border: TableBorder.all(width: 0, color: Colors.transparent),
             children: [
               TableRow(children: [
@@ -176,15 +191,18 @@ class CheckoutView extends StatelessWidget {
                   return TableRow(children: [
                     Text(
                       product.name!,
-                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                      style:
+                          customTheme(context).regular.copyWith(fontSize: 11),
                     ),
                     Text(
                       "${createOrderController.cartproducts[product.id]!.text}x",
-                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                      style:
+                          customTheme(context).regular.copyWith(fontSize: 11),
                     ),
                     Text(
                       "₹${createOrderController.productPrice(Get.arguments["shop"].category, product).toStringAsFixed(2)}",
-                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                      style:
+                          customTheme(context).regular.copyWith(fontSize: 11),
                     ),
                   ]);
                 },
@@ -214,16 +232,20 @@ class CheckoutView extends StatelessWidget {
       children: [
         Text(
           "Payment Method",
-          style: customTheme(context).medium.copyWith(fontSize: 12, color: Colors.black),
+          style: customTheme(context)
+              .medium
+              .copyWith(fontSize: 12, color: Colors.black),
         ),
         const SizedBox(height: 10),
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: createOrderController.createOrderResponse!.result!.paymentMethods!
+            children: createOrderController
+                .createOrderResponse!.result!.paymentMethods!
                 .map(
                   (e) => Obx(() {
                     return CustomRadioButton<PaymentMethod>(
-                      groupValue: createOrderController.selectedPaymentMethod.value,
+                      groupValue:
+                          createOrderController.selectedPaymentMethod.value,
                       value: e,
                       onChanged: (value) {
                         createOrderController.selectedPaymentMethod(value);
@@ -237,7 +259,8 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  Column _productListing(BuildContext context, CreateOrderController createOrderController) {
+  Column _productListing(
+      BuildContext context, CreateOrderController createOrderController) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -272,7 +295,8 @@ class CheckoutView extends StatelessWidget {
     );
   }
 
-  Align _addMoreButton(BuildContext context, CreateOrderController createOrderController) {
+  Align _addMoreButton(
+      BuildContext context, CreateOrderController createOrderController) {
     return Align(
       alignment: Alignment.centerRight,
       child: Padding(
@@ -286,7 +310,8 @@ class CheckoutView extends StatelessWidget {
             children: [
               Text(
                 "Add more",
-                style: customTheme(context).regular.copyWith(fontSize: 12, color: customTheme(context).primary),
+                style: customTheme(context).regular.copyWith(
+                    fontSize: 12, color: customTheme(context).primary),
               ),
               const SizedBox(width: 2),
               Icon(
@@ -310,7 +335,9 @@ class CheckoutView extends StatelessWidget {
           children: [
             Text(
               "Location",
-              style: customTheme(context).regular.copyWith(fontSize: 11, color: Color(0xff767676)),
+              style: customTheme(context)
+                  .regular
+                  .copyWith(fontSize: 11, color: Color(0xff767676)),
             ),
             const SizedBox(height: 10),
             Row(
@@ -330,12 +357,16 @@ class CheckoutView extends StatelessWidget {
                     children: [
                       Text(
                         "${shop.name!} ${shop.lastName ?? ""}",
-                        style: customTheme(context).medium.copyWith(fontSize: 12, color: Colors.black),
+                        style: customTheme(context)
+                            .medium
+                            .copyWith(fontSize: 12, color: Colors.black),
                       ),
                       Flexible(
                         child: Text(
                           getFullAddress(shop.address),
-                          style: customTheme(context).regular.copyWith(fontSize: 11),
+                          style: customTheme(context)
+                              .regular
+                              .copyWith(fontSize: 11),
                         ),
                       ),
                     ],
@@ -356,11 +387,19 @@ class CheckoutView extends StatelessWidget {
           children: [
             Text(
               "Bill Details",
-              style: customTheme(context).regular.copyWith(fontSize: 11, color: Color(0xff767676)),
+              style: customTheme(context)
+                  .regular
+                  .copyWith(fontSize: 11, color: Color(0xff767676)),
             ),
             const SizedBox(height: 10),
-            PaymentTile(title: "Item Total", value: createOrderController.createOrderResponse!.result!.amountUntaxed!),
-            PaymentTile(title: "GST Tax", value: createOrderController.createOrderResponse!.result!.amountTax!),
+            PaymentTile(
+                title: "Item Total",
+                value: createOrderController
+                    .createOrderResponse!.result!.amountUntaxed!),
+            PaymentTile(
+                title: "GST Tax",
+                value: createOrderController
+                    .createOrderResponse!.result!.amountTax!),
             // PaymentTile(title: "SCGST Tax", value: 15),
             PaymentTile(title: "Discount", value: 0),
           ],
@@ -383,7 +422,9 @@ class CheckoutView extends StatelessWidget {
           ),
           Text(
             "Confirm order",
-            style: customTheme(context).medium.copyWith(fontSize: 16, color: Colors.black),
+            style: customTheme(context)
+                .medium
+                .copyWith(fontSize: 16, color: Colors.black),
           )
         ],
       ),
@@ -458,7 +499,9 @@ class ProductTile extends StatelessWidget {
                           // children: [
                           //   TextSpan(text: "500ml", style: TextStyle(color: Color(0xff929292))),
                           // ],
-                          style: customTheme(context).regular.copyWith(fontSize: 12)),
+                          style: customTheme(context)
+                              .regular
+                              .copyWith(fontSize: 12)),
                     ),
                   ),
                 ),
@@ -477,11 +520,13 @@ class ProductTile extends StatelessWidget {
                       // }),
                       Text(
                         "₹${_controller.productPrice(category, product).toStringAsFixed(2)}",
-                        style: customTheme(context).medium.copyWith(fontSize: 14),
+                        style:
+                            customTheme(context).medium.copyWith(fontSize: 14),
                       ),
                       Text(
                         " x ${_controller.cartproducts[product.id]?.text} ",
-                        style: customTheme(context).regular.copyWith(fontSize: 14),
+                        style:
+                            customTheme(context).regular.copyWith(fontSize: 14),
                       ),
                     ],
                   ),

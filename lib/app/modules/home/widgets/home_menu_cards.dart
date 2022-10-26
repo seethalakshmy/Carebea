@@ -27,7 +27,8 @@ class HomeMenuIndividual extends StatelessWidget {
         decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(12.0),
-          gradient: gradients != null ? LinearGradient(colors: gradients!) : null,
+          gradient:
+              gradients != null ? LinearGradient(colors: gradients!) : null,
         ),
         child: Builder(builder: (context) {
           if (count != null) {
@@ -43,7 +44,7 @@ class HomeMenuIndividual extends StatelessWidget {
                       child: Text(
                         count.toString(),
                         style: customTheme(context).regular.copyWith(
-                              fontSize: 28,
+                              fontSize: 16,
                               color: Colors.white,
                             ),
                       ),
@@ -84,7 +85,7 @@ class HomeMenuIndividual extends StatelessWidget {
       child: Text(
         title,
         style: customTheme(context).medium.copyWith(
-              fontSize: 10,
+              fontSize: 11,
               color: Colors.white,
             ),
       ),

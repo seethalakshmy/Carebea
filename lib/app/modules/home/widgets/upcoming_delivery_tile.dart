@@ -18,7 +18,8 @@ class UpComingDeliveryTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(Routes.ORDER_HISTORY_DETAILS, arguments: {"order_id": order.orderId});
+        Get.toNamed(Routes.ORDER_HISTORY_DETAILS,
+            arguments: {"order_id": order.orderId});
       },
       child: CustomCard(
         child: Column(
@@ -29,7 +30,8 @@ class UpComingDeliveryTile extends StatelessWidget {
                 children: [
                   Text(
                     "Order ID.: #${order.orderId}",
-                    style: customTheme(context).medium.copyWith(fontSize: 11, color: customTheme(context).secondary),
+                    style: customTheme(context).medium.copyWith(
+                        fontSize: 11, color: customTheme(context).secondary),
                   ),
                   const Spacer(),
                   OrderStatusChip(
@@ -50,9 +52,13 @@ class UpComingDeliveryTile extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    order.shopName!,
-                    style: customTheme(context).medium.copyWith(fontSize: 11, color: Colors.black),
+                  Flexible(
+                    child: Text(
+                      order.shopName!,
+                      style: customTheme(context)
+                          .medium
+                          .copyWith(fontSize: 12, color: Colors.black),
+                    ),
                   ),
                   Column(
                     mainAxisSize: MainAxisSize.min,
@@ -60,11 +66,15 @@ class UpComingDeliveryTile extends StatelessWidget {
                     children: [
                       Text(
                         "Total",
-                        style: customTheme(context).regular.copyWith(fontSize: 10, color: Color(0xff494949)),
+                        style: customTheme(context)
+                            .regular
+                            .copyWith(fontSize: 10, color: Color(0xff494949)),
                       ),
                       Text(
                         "₹${order.amountTotal!.toStringAsFixed(2)}",
-                        style: customTheme(context).medium.copyWith(fontSize: 14, color: Colors.black),
+                        style: customTheme(context)
+                            .medium
+                            .copyWith(fontSize: 14, color: Colors.black),
                       ),
                     ],
                   )

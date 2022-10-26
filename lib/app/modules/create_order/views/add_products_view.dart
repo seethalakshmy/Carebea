@@ -61,7 +61,8 @@ class AddProductsView extends GetView<CreateOrderController> {
               height: 55,
               decoration: BoxDecoration(
                 color: customTheme(context).primary,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(7)),
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(7)),
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 23, right: 15),
@@ -70,13 +71,17 @@ class AddProductsView extends GetView<CreateOrderController> {
                     Obx(() {
                       return Text(
                         "${controller.cartproducts.length} items  |  ",
-                        style: customTheme(context).regular.copyWith(fontSize: 13, color: Colors.white),
+                        style: customTheme(context)
+                            .regular
+                            .copyWith(fontSize: 13, color: Colors.white),
                       );
                     }),
                     Obx(() {
                       return Text(
                         "₹${controller.totalCartCost.value.toStringAsFixed(2)}",
-                        style: customTheme(context).medium.copyWith(fontSize: 13, color: Colors.white),
+                        style: customTheme(context)
+                            .medium
+                            .copyWith(fontSize: 13, color: Colors.white),
                       );
                     }),
                     const Spacer(),
@@ -96,7 +101,9 @@ class AddProductsView extends GetView<CreateOrderController> {
                         children: [
                           Text(
                             "Place order   ",
-                            style: customTheme(context).regular.copyWith(fontSize: 13, color: Colors.white),
+                            style: customTheme(context)
+                                .regular
+                                .copyWith(fontSize: 13, color: Colors.white),
                           ),
                           const Icon(
                             Icons.arrow_forward_ios,
@@ -121,7 +128,8 @@ class AddProductsView extends GetView<CreateOrderController> {
         context: context,
         builder: (_) {
           return CustomAlertbox(
-            title: "Do you want to remove all products and go back to shop selection.",
+            title:
+                "Do you want to remove all products and go back to shop selection.",
             content: "",
             actions: [
               Expanded(
@@ -196,7 +204,9 @@ class AddProductsView extends GetView<CreateOrderController> {
           borderRadius: const BorderRadius.vertical(
             bottom: Radius.circular(20),
           ),
-          boxShadow: [BoxShadow(blurRadius: 10, color: customTheme(context).shadowColor)]),
+          boxShadow: [
+            BoxShadow(blurRadius: 10, color: customTheme(context).shadowColor)
+          ]),
       child: Row(
         children: [
           IconButton(
@@ -209,9 +219,11 @@ class AddProductsView extends GetView<CreateOrderController> {
                 Icons.arrow_back_ios,
                 size: 15,
               )),
-          Text(
-            " ${(Get.arguments['shop'] as ShopList).name} ${(Get.arguments['shop'] as ShopList).lastName ?? ""}",
-            style: customTheme(context).medium.copyWith(fontSize: 14),
+          Flexible(
+            child: Text(
+              " ${(Get.arguments['shop'] as ShopList).name} ${(Get.arguments['shop'] as ShopList).lastName ?? ""}",
+              style: customTheme(context).medium.copyWith(fontSize: 14),
+            ),
           ),
         ],
       ),
@@ -245,7 +257,9 @@ class ProductTile extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: (product.imageUrl ?? []).isEmpty ? _placeholder() : _image(product.imageUrl?.first ?? ""),
+                      child: (product.imageUrl ?? []).isEmpty
+                          ? _placeholder()
+                          : _image(product.imageUrl?.first ?? ""),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
@@ -269,12 +283,18 @@ class ProductTile extends StatelessWidget {
                                           text: product.name,
                                           children: [
                                             TextSpan(
-                                                text: " ${product.qtyAvailable}".toString(),
-                                                style: TextStyle(color: Color(0xff929292))),
+                                                text: " ${product.qtyAvailable}"
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    color: Color(0xff929292))),
                                             TextSpan(
-                                                text: " ${product.unit}", style: TextStyle(color: Color(0xff929292))),
+                                                text: " ${product.unit}",
+                                                style: TextStyle(
+                                                    color: Color(0xff929292))),
                                           ],
-                                          style: customTheme(context).regular.copyWith(fontSize: 11)),
+                                          style: customTheme(context)
+                                              .regular
+                                              .copyWith(fontSize: 11)),
                                     ),
                                   ),
                                 ),
@@ -300,7 +320,9 @@ class ProductTile extends StatelessWidget {
                             children: [
                               Text(
                                 '₹${_controller.productPrice((Get.arguments['shop'] as ShopList).category!, product)}',
-                                style: customTheme(context).medium.copyWith(fontSize: 12),
+                                style: customTheme(context)
+                                    .medium
+                                    .copyWith(fontSize: 12),
                               ),
                               const SizedBox(width: 4),
                               // Text(
@@ -316,7 +338,8 @@ class ProductTile extends StatelessWidget {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Padding(
-                              padding: const EdgeInsets.only(right: 8.0, bottom: 10),
+                              padding:
+                                  const EdgeInsets.only(right: 8.0, bottom: 10),
                               child:
                                   // (product.available?.toLowerCase() == 'unavailable') ?
                                   // Text(
@@ -326,7 +349,8 @@ class ProductTile extends StatelessWidget {
                                   //       )
                                   //     :
                                   Obx(() {
-                                if (_controller.cartproducts.containsKey(product.id)) {
+                                if (_controller.cartproducts
+                                    .containsKey(product.id)) {
                                   return CartCountWidget(
                                     id: product.id!,
                                   );
@@ -337,8 +361,11 @@ class ProductTile extends StatelessWidget {
                                   onTap: () {
                                     // _controller.updateCartProduct(
                                     //     product.id!, 1);
-                                    _controller.cartproducts[product.id!] = TextEditingController();
-                                    _controller.cartproductsFocusNode[product.id]!.requestFocus();
+                                    _controller.cartproducts[product.id!] =
+                                        TextEditingController();
+                                    _controller
+                                        .cartproductsFocusNode[product.id]!
+                                        .requestFocus();
                                   },
                                   fontSize: 10,
                                   color: const Color(0xff47BED9),
@@ -409,7 +436,8 @@ class ProductTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: AspectRatio(
             aspectRatio: 58 / 74,
-            child: Image.network(imageUrl, fit: BoxFit.cover, errorBuilder: (context, error, stackTrace) {
+            child: Image.network(imageUrl, fit: BoxFit.contain,
+                errorBuilder: (context, error, stackTrace) {
               log("image error", error: error, stackTrace: stackTrace);
               return _placeholder();
             })),
