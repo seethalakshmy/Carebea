@@ -49,6 +49,11 @@ class CartCountWidget extends StatelessWidget {
           focusNode: _controller.cartproductsFocusNode[id],
           inputType: TextInputType.number,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          onChanged: (val) {
+            if ((val ?? "").isEmpty || (val == '0')) {
+              _controller.updateCartProduct(id, 0);
+            }
+          },
           onsubmit: (val) {
             _controller.updateCartProduct(id, int.tryParse(val ?? "0") ?? 0);
           },
