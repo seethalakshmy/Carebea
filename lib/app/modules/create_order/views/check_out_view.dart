@@ -192,6 +192,9 @@ class CheckoutView extends StatelessWidget {
               ...List.generate(
                 createOrderController.selectedProducts.length,
                 (index) {
+                  print(
+                      createOrderController.selectedProducts.length.toString() +
+                          "hai");
                   var product = createOrderController.selectedProducts[index];
                   return TableRow(children: [
                     Text(
@@ -232,7 +235,11 @@ class CheckoutView extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Table(
-            columnWidths: {0: FlexColumnWidth(8), 1: FlexColumnWidth(2), 2: FlexColumnWidth(2)},
+            columnWidths: {
+              0: FlexColumnWidth(8),
+              1: FlexColumnWidth(2),
+              2: FlexColumnWidth(2)
+            },
             border: TableBorder.all(width: 0, color: Colors.transparent),
             children: [
               TableRow(children: [
@@ -270,15 +277,18 @@ class CheckoutView extends StatelessWidget {
                   return TableRow(children: [
                     Text(
                       product.productName ?? "",
-                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                      style:
+                          customTheme(context).regular.copyWith(fontSize: 11),
                     ),
                     Text(
                       "${product.offerQuantity}x",
-                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                      style:
+                          customTheme(context).regular.copyWith(fontSize: 11),
                     ),
                     Text(
                       "₹0",
-                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                      style:
+                          customTheme(context).regular.copyWith(fontSize: 11),
                     ),
                   ]);
                 },
