@@ -29,11 +29,14 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
         appBar: appBar(context),
         floatingActionButton: Obx(() {
           if (controller.isOrderDetailsLoading.value ||
-              (controller.orderListDetailResponse?.orderListResult?.history ?? []).isEmpty) {
+              (controller.orderListDetailResponse?.orderListResult?.history ??
+                      [])
+                  .isEmpty) {
             return const SizedBox.shrink();
           }
 
-          return openKeyboardGuard(context, child: _floatingActionButton(context));
+          return openKeyboardGuard(context,
+              child: _floatingActionButton(context));
         }),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: Obx(() {
@@ -59,10 +62,10 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                       SizedBox(
                         width: 15,
                       ),
-                      Text(
-                        'Order ID: #${Get.arguments?['order_id'] ?? controller.orderListDetailResponse!.orderListResult!.history!.first.id}',
-                        style: customTheme(context).medium.copyWith(fontSize: 16),
-                      ),
+                      // Text(
+                      //   'Order ID: #${Get.arguments?['order_id'] ?? controller.orderListDetailResponse!.orderListResult!.history!.first.id}',
+                      //   style: customTheme(context).medium.copyWith(fontSize: 16),
+                      // ),
                       const Spacer(),
                       // Image.asset(
                       //   Assets.edit,
@@ -74,23 +77,28 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                     height: 25,
                   ),
                   Builder(builder: (context) {
-                    if (!(controller.orderListDetailResponse?.orderListResult?.status ?? false)) {
+                    if (!(controller
+                            .orderListDetailResponse?.orderListResult?.status ??
+                        false)) {
                       return Center(
                         child: Text(
-                          controller.orderListDetailResponse?.orderListResult?.message ??
+                          controller.orderListDetailResponse?.orderListResult
+                                  ?.message ??
                               "Something happend, Please try again",
                           style: customTheme(context).regular,
                         ),
                       );
                     }
-                    var orders = controller.orderListDetailResponse!.orderListResult!.history!.first;
+                    var orders = controller.orderListDetailResponse!
+                        .orderListResult!.history!.first;
                     return CustomCard(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 8),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 11, vertical: 8),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -98,29 +106,37 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Order ID: #${orders.name}',
+                                      'Order ID: ${orders.name}',
                                       style: customTheme(context)
                                           .medium
-                                          .copyWith(fontSize: 12, color: customTheme(context).secondary),
+                                          .copyWith(
+                                              fontSize: 12,
+                                              color: customTheme(context)
+                                                  .secondary),
                                     ),
                                     if (orders.deliveryDate != null)
                                       Text(
                                         'Delivery Date : ${formatDate(orders.deliveryDate!)}',
-                                        style: customTheme(context).regular.copyWith(fontSize: 10),
+                                        style: customTheme(context)
+                                            .regular
+                                            .copyWith(fontSize: 10),
                                       ),
                                   ],
                                 ),
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 6),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
-                                    color: customTheme(context).action.withOpacity(.25),
+                                    color: customTheme(context)
+                                        .action
+                                        .withOpacity(.25),
                                   ),
                                   child: Text(
                                     orders.status ?? "",
-                                    style: customTheme(context)
-                                        .medium
-                                        .copyWith(fontSize: 10, color: customTheme(context).action),
+                                    style: customTheme(context).medium.copyWith(
+                                        fontSize: 10,
+                                        color: customTheme(context).action),
                                   ),
                                 ),
                               ],
@@ -132,26 +148,32 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                             color: Colors.grey,
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 14),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 11, vertical: 14),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   "Sales Representative: ${orders.srName}",
-                                  style: customTheme(context).medium.copyWith(fontSize: 12),
+                                  style: customTheme(context)
+                                      .medium
+                                      .copyWith(fontSize: 12),
                                 ),
                                 if (orders.dateOrder != null)
                                   Text(
                                     "ordered date: ${formatDate(orders.dateOrder!)}",
-                                    style: customTheme(context).regular.copyWith(fontSize: 11),
+                                    style: customTheme(context)
+                                        .regular
+                                        .copyWith(fontSize: 11),
                                   ),
                                 SizedBox(
                                   height: 10,
                                 ),
                                 Flexible(
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Image.asset(
                                         Assets.assetsLocationFilled,
@@ -163,17 +185,24 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                       Flexible(
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               "${orders.shopName!} ${orders.shopLastName ?? ""}",
-                                              style: customTheme(context).medium.copyWith(fontSize: 11),
+                                              style: customTheme(context)
+                                                  .medium
+                                                  .copyWith(fontSize: 11),
                                             ),
                                             SizedBox(
                                               width: Get.width * .8,
                                               child: Text(
-                                                orders.userAddress!.split("\n").join(" "),
-                                                style: customTheme(context).regular.copyWith(fontSize: 11),
+                                                orders.userAddress!
+                                                    .split("\n")
+                                                    .join(" "),
+                                                style: customTheme(context)
+                                                    .regular
+                                                    .copyWith(fontSize: 11),
                                               ),
                                             ),
                                           ],
@@ -187,11 +216,15 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                 ),
                                 Text(
                                   "Outstanding amount",
-                                  style: customTheme(context).medium.copyWith(fontSize: 11),
+                                  style: customTheme(context)
+                                      .medium
+                                      .copyWith(fontSize: 11),
                                 ),
                                 Text(
                                   "₹${orders.outstandingAmount?.toStringAsFixed(2) ?? 0.00}",
-                                  style: customTheme(context).regular.copyWith(fontSize: 11),
+                                  style: customTheme(context)
+                                      .regular
+                                      .copyWith(fontSize: 11),
                                 ),
                               ],
                             ),
@@ -202,37 +235,55 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                             color: Colors.grey,
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 14),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 11, vertical: 14),
                             child: Table(
-                              columnWidths: {0: FlexColumnWidth(8), 1: FlexColumnWidth(2), 2: FlexColumnWidth(2)},
-                              border: TableBorder.all(width: 0, color: Colors.transparent),
+                              columnWidths: {
+                                0: FlexColumnWidth(10),
+                                1: FlexColumnWidth(2),
+                                2: FlexColumnWidth(2)
+                              },
+                              border: TableBorder.all(
+                                  width: 0, color: Colors.transparent),
                               children: [
                                 TableRow(children: [
                                   Text(
                                     'Product',
-                                    style: customTheme(context).medium.copyWith(fontSize: 12),
+                                    style: customTheme(context)
+                                        .medium
+                                        .copyWith(fontSize: 12),
                                   ),
                                   Text(
                                     'Qty',
-                                    style: customTheme(context).medium.copyWith(fontSize: 12),
+                                    style: customTheme(context)
+                                        .medium
+                                        .copyWith(fontSize: 12),
                                   ),
                                   Text(
                                     'Price',
-                                    style: customTheme(context).medium.copyWith(fontSize: 12),
+                                    style: customTheme(context)
+                                        .medium
+                                        .copyWith(fontSize: 12),
                                   ),
                                 ]),
                                 TableRow(children: [
                                   Text(
                                     "",
-                                    style: customTheme(context).regular.copyWith(fontSize: 5),
+                                    style: customTheme(context)
+                                        .regular
+                                        .copyWith(fontSize: 5),
                                   ),
                                   Text(
                                     "",
-                                    style: customTheme(context).regular.copyWith(fontSize: 5),
+                                    style: customTheme(context)
+                                        .regular
+                                        .copyWith(fontSize: 5),
                                   ),
                                   Text(
                                     "",
-                                    style: customTheme(context).regular.copyWith(fontSize: 5),
+                                    style: customTheme(context)
+                                        .regular
+                                        .copyWith(fontSize: 5),
                                   ),
                                 ]),
                                 ...List.generate(
@@ -242,15 +293,21 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                     return TableRow(children: [
                                       Text(
                                         product.name!,
-                                        style: customTheme(context).regular.copyWith(fontSize: 11),
+                                        style: customTheme(context)
+                                            .regular
+                                            .copyWith(fontSize: 11),
                                       ),
                                       Text(
                                         "${product.productUomQty}x",
-                                        style: customTheme(context).regular.copyWith(fontSize: 11),
+                                        style: customTheme(context)
+                                            .regular
+                                            .copyWith(fontSize: 11),
                                       ),
                                       Text(
                                         "₹${product.price?.toStringAsFixed(2) ?? 0}",
-                                        style: customTheme(context).regular.copyWith(fontSize: 11),
+                                        style: customTheme(context)
+                                            .regular
+                                            .copyWith(fontSize: 11),
                                       ),
                                     ]);
                                   },
@@ -264,7 +321,8 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                             color: Colors.grey,
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 14),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 11, vertical: 14),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -273,14 +331,20 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                   children: [
                                     Text(
                                       'Item Total',
-                                      style: customTheme(context).regular.copyWith(fontSize: 11, color: Colors.grey),
+                                      style: customTheme(context)
+                                          .regular
+                                          .copyWith(
+                                              fontSize: 11, color: Colors.grey),
                                     ),
                                     SizedBox(
                                       height: 5,
                                     ),
                                     Text(
                                       'GST',
-                                      style: customTheme(context).regular.copyWith(fontSize: 11, color: Colors.grey),
+                                      style: customTheme(context)
+                                          .regular
+                                          .copyWith(
+                                              fontSize: 11, color: Colors.grey),
                                     ),
                                     // SizedBox(
                                     //   height: 5,
@@ -294,33 +358,43 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                     ),
                                     Text(
                                       'Discount',
-                                      style: customTheme(context).regular.copyWith(fontSize: 11, color: Colors.grey),
+                                      style: customTheme(context)
+                                          .regular
+                                          .copyWith(
+                                              fontSize: 11, color: Colors.grey),
                                     ),
                                     SizedBox(
                                       height: 10,
                                     ),
                                     Text(
                                       'Grand Total',
-                                      style: customTheme(context).medium.copyWith(fontSize: 12),
+                                      style: customTheme(context)
+                                          .medium
+                                          .copyWith(fontSize: 12),
                                     ),
                                   ],
                                 ),
                                 SizedBox(
-                                  width: MediaQuery.of(context).size.width * .15,
+                                  width:
+                                      MediaQuery.of(context).size.width * .15,
                                 ),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       "₹${orders.productTotal?.toStringAsFixed(2) ?? 0}",
-                                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                                      style: customTheme(context)
+                                          .regular
+                                          .copyWith(fontSize: 11),
                                     ),
                                     SizedBox(
                                       height: 5,
                                     ),
                                     Text(
                                       "₹${orders.amountTax?.toStringAsFixed(2) ?? 0}",
-                                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                                      style: customTheme(context)
+                                          .regular
+                                          .copyWith(fontSize: 11),
                                     ),
                                     // SizedBox(
                                     //   height: 5,
@@ -334,14 +408,18 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                     ),
                                     Text(
                                       "₹0.00",
-                                      style: customTheme(context).regular.copyWith(fontSize: 11),
+                                      style: customTheme(context)
+                                          .regular
+                                          .copyWith(fontSize: 11),
                                     ),
                                     SizedBox(
                                       height: 10,
                                     ),
                                     Text(
                                       "₹${orders.amountTotal?.toStringAsFixed(2) ?? 0}",
-                                      style: customTheme(context).medium.copyWith(fontSize: 12),
+                                      style: customTheme(context)
+                                          .medium
+                                          .copyWith(fontSize: 12),
                                     ),
                                   ],
                                 )
@@ -366,16 +444,25 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
     if (SharedPrefs.getUserType() != 3) {
       return const SizedBox.shrink();
     }
-    var paymentMethods = controller.orderListDetailResponse!.orderListResult!.paymentMethods;
-    if (controller.orderListDetailResponse!.orderListResult?.history?.first.status == "Processing") {
+    var paymentMethods =
+        controller.orderListDetailResponse!.orderListResult!.paymentMethods;
+    if (controller
+            .orderListDetailResponse!.orderListResult?.history?.first.status ==
+        "Processing") {
       GlobalKey<FormState> _formState = GlobalKey<FormState>();
       return Padding(
         padding: const EdgeInsets.all(8.0),
         child: CustomButton(
           title: 'Order Delivered',
           onTap: () {
-            controller.collectedAmountEditingController.text =
-                (controller.orderListDetailResponse?.orderListResult?.history?.first.amountTotal ?? 0).toString();
+            controller.collectedAmountEditingController.text = (controller
+                        .orderListDetailResponse
+                        ?.orderListResult
+                        ?.history
+                        ?.first
+                        .amountTotal ??
+                    0)
+                .toString();
             showDialog(
               context: context,
               builder: (ctx) => Material(
@@ -393,37 +480,48 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                         children: [
                           Text(
                             "Payment Method",
-                            style: customTheme(context).medium.copyWith(fontSize: 14),
+                            style: customTheme(context)
+                                .medium
+                                .copyWith(fontSize: 14),
                           ),
                           const SizedBox(height: 10),
                           Obx(() {
-                            if (controller.selectedPaymentMethod.value.id != null) {}
+                            if (controller.selectedPaymentMethod.value.id !=
+                                null) {}
                             return Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: (paymentMethods ?? [])
-                                    .map((e) => CustomRadioButton<PaymentMethod>(
-                                        label: e.name,
-                                        groupValue: controller.selectedPaymentMethod.value,
-                                        value: e,
-                                        onChanged: (val) {
-                                          controller.selectedPaymentMethod(e);
-                                          if (e.code == "CRED") {
-                                            controller.collectedAmountEditingController.text = (controller
-                                                        .orderListDetailResponse
-                                                        ?.orderListResult
-                                                        ?.history
-                                                        ?.first
-                                                        .amountTotal ??
-                                                    0)
-                                                .toString();
-                                          }
-                                        }))
+                                    .map((e) =>
+                                        CustomRadioButton<PaymentMethod>(
+                                            label: e.name,
+                                            groupValue: controller
+                                                .selectedPaymentMethod.value,
+                                            value: e,
+                                            onChanged: (val) {
+                                              controller
+                                                  .selectedPaymentMethod(e);
+                                              if (e.code == "CRED") {
+                                                controller
+                                                    .collectedAmountEditingController
+                                                    .text = (controller
+                                                            .orderListDetailResponse
+                                                            ?.orderListResult
+                                                            ?.history
+                                                            ?.first
+                                                            .amountTotal ??
+                                                        0)
+                                                    .toString();
+                                              }
+                                            }))
                                     .toList());
                           }),
                           const SizedBox(height: 13),
                           Text(
                             "Collected amount",
-                            style: customTheme(context).regular.copyWith(fontSize: 11),
+                            style: customTheme(context)
+                                .regular
+                                .copyWith(fontSize: 11),
                           ),
                           const SizedBox(height: 5),
                           Obx(() {
@@ -438,13 +536,17 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
 
                                 return null;
                               },
-                              enabled: controller.selectedPaymentMethod.value.code != "CRED",
+                              enabled:
+                                  controller.selectedPaymentMethod.value.code !=
+                                      "CRED",
                               inputType: TextInputType.number,
-                              textcontroller: controller.collectedAmountEditingController,
+                              textcontroller:
+                                  controller.collectedAmountEditingController,
                             );
                           }),
                           Obx(() {
-                            if (controller.selectedPaymentMethod.value.code != "CHEQ") {
+                            if (controller.selectedPaymentMethod.value.code !=
+                                "CHEQ") {
                               return const SizedBox.shrink();
                             }
 
@@ -455,12 +557,16 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                 const SizedBox(height: 13),
                                 Text(
                                   "Cheque No",
-                                  style: customTheme(context).regular.copyWith(fontSize: 11),
+                                  style: customTheme(context)
+                                      .regular
+                                      .copyWith(fontSize: 11),
                                 ),
                                 const SizedBox(height: 5),
                                 CustomTextField(
                                   validaton: (val) {
-                                    if (controller.selectedPaymentMethod.value.code != "CHEQ") {
+                                    if (controller
+                                            .selectedPaymentMethod.value.code !=
+                                        "CHEQ") {
                                       return null;
                                     }
                                     if ((val ?? "").trim().isEmpty) {
@@ -472,7 +578,9 @@ class OrderHistoryDetailsView extends GetView<OrderHistoryDetailsController> {
                                     return null;
                                   },
                                   maxlength: 6,
-                                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
                                   textcontroller: controller.cheqNoController,
                                   inputType: TextInputType.number,
                                 ),

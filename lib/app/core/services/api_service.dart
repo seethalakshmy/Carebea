@@ -14,10 +14,10 @@ class ApiService extends GetxService {
   var baseUrl = "http://15.206.14.111/api/v1/"; //live
   // var baseUrl = "http://192.168.1.40:8888/api/v1/"; //live
 
-  // var xAuthClient = "12345";
-  // var xAuthToken = '12345';
-  var xAuthClient = "Xjfgnf35*\$&dfgkgb\$AViwqALG";
-  var xAuthToken = 'Xjfgnf35*\$&dfgkgb\$AViwqALG';
+  var xAuthClient = "12345";
+  var xAuthToken = '12345';
+  // var xAuthClient = "Xjfgnf35*\$&dfgkgb\$AViwqALG";
+  // var xAuthToken = 'Xjfgnf35*\$&dfgkgb\$AViwqALG';
 
   var auth = '';
   var token = '';

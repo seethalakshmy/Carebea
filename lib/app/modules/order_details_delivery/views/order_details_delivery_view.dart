@@ -43,12 +43,15 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
               child: circularProgressIndicator(context),
             );
           }
-          if ((controller.orderListDetailResponse?.orderListResult?.history ?? []).isEmpty) {
+          if ((controller.orderListDetailResponse?.orderListResult?.history ??
+                  [])
+              .isEmpty) {
             return Center(
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 20, top: 25, right: 20, bottom: 25),
+                    padding: const EdgeInsets.only(
+                        left: 20, top: 25, right: 20, bottom: 25),
                     child: Row(
                       children: [
                         InkWell(
@@ -64,7 +67,9 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                         ),
                         Text(
                           'Order ID:#${Get.arguments['order_id']}',
-                          style: customTheme(context).medium.copyWith(fontSize: 18),
+                          style: customTheme(context)
+                              .medium
+                              .copyWith(fontSize: 18),
                         )
                       ],
                     ),
@@ -77,18 +82,22 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
               ),
             );
           }
-          var order = controller.orderListDetailResponse!.orderListResult!.history!.first;
+          var order = controller
+              .orderListDetailResponse!.orderListResult!.history!.first;
           return Container(
             height: Get.size.height - 30,
             padding: const EdgeInsets.only(top: 30),
             child: Card(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15)),
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(15),
+                    topLeft: Radius.circular(15)),
               ),
               elevation: 10,
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 25, right: 20, bottom: 25),
+                  padding: const EdgeInsets.only(
+                      left: 20, top: 25, right: 20, bottom: 25),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -107,7 +116,9 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                           ),
                           Text(
                             'Order ID:#${order.name}',
-                            style: customTheme(context).medium.copyWith(fontSize: 18),
+                            style: customTheme(context)
+                                .medium
+                                .copyWith(fontSize: 18),
                           )
                         ],
                       ),
@@ -116,7 +127,9 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                           padding: const EdgeInsets.only(left: 30),
                           child: Text(
                             "Delivery Date:${formatDate(order.deliveryDate!)}",
-                            style: customTheme(context).regular.copyWith(fontSize: 12),
+                            style: customTheme(context)
+                                .regular
+                                .copyWith(fontSize: 12),
                           ),
                         ),
                       SizedBox(
@@ -156,39 +169,51 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                             children: [
                               Text(
                                 'Pickup point',
-                                style: customTheme(context)
-                                    .medium
-                                    .copyWith(fontSize: 14, color: customTheme(context).secondary),
+                                style: customTheme(context).medium.copyWith(
+                                    fontSize: 14,
+                                    color: customTheme(context).secondary),
                               ),
                               Text(
                                 order.warehouseName ?? "",
-                                style: customTheme(context).medium.copyWith(fontSize: 14),
+                                style: customTheme(context)
+                                    .medium
+                                    .copyWith(fontSize: 14),
                               ),
                               SizedBox(
-                                height: MediaQuery.of(context).size.height * .08,
+                                height:
+                                    MediaQuery.of(context).size.height * .08,
                               ),
                               Text(
                                 'Location to be delivered',
-                                style: customTheme(context)
-                                    .medium
-                                    .copyWith(fontSize: 14, color: customTheme(context).secondary),
+                                style: customTheme(context).medium.copyWith(
+                                    fontSize: 14,
+                                    color: customTheme(context).secondary),
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
                                     mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         order.shopName!.trim(),
-                                        style: customTheme(context).medium.copyWith(fontSize: 14),
+                                        style: customTheme(context)
+                                            .medium
+                                            .copyWith(fontSize: 14),
                                       ),
                                       SizedBox(
                                         width: Get.width * .55,
                                         child: Text(
-                                          order.userAddress!.split("\n").join(" ").trim(),
-                                          style: customTheme(context).regular.copyWith(fontSize: 14),
+                                          order.userAddress!
+                                              .split("\n")
+                                              .join(" ")
+                                              .trim(),
+                                          style: customTheme(context)
+                                              .regular
+                                              .copyWith(fontSize: 14),
                                         ),
                                       ),
                                     ],
@@ -213,40 +238,60 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                       SizedBox(
                         height: 20,
                       ),
-                      Text('Order Details', style: customTheme(context).medium.copyWith(fontSize: 16)),
+                      Text('Order Details',
+                          style: customTheme(context)
+                              .medium
+                              .copyWith(fontSize: 16)),
                       SizedBox(
                         height: 10,
                       ),
                       Table(
-                        columnWidths: {0: FlexColumnWidth(8), 1: FlexColumnWidth(2), 2: FlexColumnWidth(2)},
-                        border: TableBorder.all(width: 0, color: Colors.transparent),
+                        columnWidths: {
+                          0: FlexColumnWidth(8),
+                          1: FlexColumnWidth(2),
+                          2: FlexColumnWidth(2)
+                        },
+                        border: TableBorder.all(
+                            width: 0, color: Colors.transparent),
                         children: [
                           TableRow(children: [
                             Text(
                               'Product',
-                              style: customTheme(context).medium.copyWith(fontSize: 14),
+                              style: customTheme(context)
+                                  .medium
+                                  .copyWith(fontSize: 14),
                             ),
                             Text(
                               'Qty',
-                              style: customTheme(context).medium.copyWith(fontSize: 14),
+                              style: customTheme(context)
+                                  .medium
+                                  .copyWith(fontSize: 14),
                             ),
                             Text(
                               'Price',
-                              style: customTheme(context).medium.copyWith(fontSize: 14),
+                              style: customTheme(context)
+                                  .medium
+                                  .copyWith(fontSize: 14),
                             ),
                           ]),
                           TableRow(children: [
                             Text(
                               "",
-                              style: customTheme(context).regular.copyWith(fontSize: 5),
+                              style: customTheme(context)
+                                  .regular
+                                  .copyWith(fontSize: 5),
                             ),
                             Text(
                               "",
-                              style: customTheme(context).regular.copyWith(fontSize: 5),
+                              style: customTheme(context)
+                                  .regular
+                                  .copyWith(fontSize: 5),
                             ),
                             Text(
                               "",
-                              style: customTheme(context).regular.copyWith(fontSize: 5),
+                              style: customTheme(context)
+                                  .regular
+                                  .copyWith(fontSize: 5),
                             ),
                           ]),
                           ...List.generate(
@@ -256,15 +301,21 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                               return TableRow(children: [
                                 Text(
                                   product.name!,
-                                  style: customTheme(context).regular.copyWith(fontSize: 12),
+                                  style: customTheme(context)
+                                      .regular
+                                      .copyWith(fontSize: 12),
                                 ),
                                 Text(
                                   "${product.productUomQty}x",
-                                  style: customTheme(context).regular.copyWith(fontSize: 12),
+                                  style: customTheme(context)
+                                      .regular
+                                      .copyWith(fontSize: 12),
                                 ),
                                 Text(
                                   "₹${product.price?.toStringAsFixed(2) ?? 0}",
-                                  style: customTheme(context).regular.copyWith(fontSize: 12),
+                                  style: customTheme(context)
+                                      .regular
+                                      .copyWith(fontSize: 12),
                                 ),
                               ]);
                             },
@@ -276,33 +327,43 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                       ),
                       Text(
                         'Amount to be Collected',
-                        style: customTheme(context).regular.copyWith(fontSize: 14, color: Colors.grey),
+                        style: customTheme(context)
+                            .regular
+                            .copyWith(fontSize: 14, color: Colors.grey),
                       ),
                       if (order.paymentMethod != null)
                         Text(
-                            controller.orderListDetailResponse!.orderListResult!.paymentMethods!
-                                .singleWhere((element) => element.id == order.paymentMethod,
+                            controller.orderListDetailResponse!.orderListResult!
+                                .paymentMethods!
+                                .singleWhere(
+                                    (element) =>
+                                        element.id == order.paymentMethod,
                                     orElse: () => PaymentMethod(name: ""))
                                 .name!,
-                            style: customTheme(context)
-                                .medium
-                                .copyWith(fontSize: 14, color: customTheme(context).primary)),
+                            style: customTheme(context).medium.copyWith(
+                                fontSize: 14,
+                                color: customTheme(context).primary)),
                       Text(
                         '₹${order.amountTotal!.toStringAsFixed(2)}',
-                        style: customTheme(context).medium.copyWith(fontSize: 16),
+                        style:
+                            customTheme(context).medium.copyWith(fontSize: 16),
                       ),
-                      if ((order.outstandingAmount ?? 0) != 0) SizedBox(height: 10),
+                      if ((order.outstandingAmount ?? 0) != 0)
+                        SizedBox(height: 10),
                       if ((order.outstandingAmount ?? 0) != 0)
                         Text(
                           'Outstanding Amount to be Collected',
-                          style: customTheme(context).regular.copyWith(fontSize: 14, color: Colors.grey),
+                          style: customTheme(context)
+                              .regular
+                              .copyWith(fontSize: 14, color: Colors.grey),
                         ),
                       if ((order.outstandingAmount ?? 0) != 0)
                         Text(
                           '₹${order.outstandingAmount!.toStringAsFixed(2)}',
                           style: customTheme(context).medium.copyWith(fontSize: 16),
                         ),
-                      if (order.shopLatitude != null && order.shopLongitude != null)
+                      if (order.shopLatitude != null &&
+                          order.shopLongitude != null)
                         SizedBox(
                           height: 20,
                         ),
@@ -329,17 +390,26 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
   }
 
   Widget _floatingActionButton(BuildContext context) {
-    var paymentMethods = controller.orderListDetailResponse!.orderListResult!.paymentMethods;
+    var paymentMethods =
+        controller.orderListDetailResponse!.orderListResult!.paymentMethods;
     GlobalKey<FormState> _formState = GlobalKey<FormState>();
 
-    if (controller.orderListDetailResponse!.orderListResult?.history?.first.status == "Processing") {
+    if (controller
+            .orderListDetailResponse!.orderListResult?.history?.first.status ==
+        "Processing") {
       return Padding(
         padding: const EdgeInsets.all(0),
         child: CustomButton(
           title: 'Order Delivered',
           onTap: () {
-            controller.collectedAmountEditingController.text =
-                (controller.orderListDetailResponse?.orderListResult?.history?.first.amountTotal ?? 0).toString();
+            controller.collectedAmountEditingController.text = (controller
+                        .orderListDetailResponse
+                        ?.orderListResult
+                        ?.history
+                        ?.first
+                        .amountTotal ??
+                    0)
+                .toString();
             showDialog(
               context: context,
               builder: (ctx) => Material(
@@ -357,37 +427,48 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                         children: [
                           Text(
                             "Payment Method",
-                            style: customTheme(context).medium.copyWith(fontSize: 14),
+                            style: customTheme(context)
+                                .medium
+                                .copyWith(fontSize: 14),
                           ),
                           const SizedBox(height: 10),
                           Obx(() {
-                            if (controller.selectedPaymentMethod.value.id != null) {}
+                            if (controller.selectedPaymentMethod.value.id !=
+                                null) {}
                             return Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: (paymentMethods ?? [])
-                                    .map((e) => CustomRadioButton<PaymentMethod>(
-                                        label: e.name,
-                                        groupValue: controller.selectedPaymentMethod.value,
-                                        value: e,
-                                        onChanged: (val) {
-                                          controller.selectedPaymentMethod(e);
-                                          if (e.code == "CRED") {
-                                            controller.collectedAmountEditingController.text = (controller
-                                                        .orderListDetailResponse
-                                                        ?.orderListResult
-                                                        ?.history
-                                                        ?.first
-                                                        .amountTotal ??
-                                                    0)
-                                                .toString();
-                                          }
-                                        }))
+                                    .map((e) =>
+                                        CustomRadioButton<PaymentMethod>(
+                                            label: e.name,
+                                            groupValue: controller
+                                                .selectedPaymentMethod.value,
+                                            value: e,
+                                            onChanged: (val) {
+                                              controller
+                                                  .selectedPaymentMethod(e);
+                                              if (e.code == "CRED") {
+                                                controller
+                                                    .collectedAmountEditingController
+                                                    .text = (controller
+                                                            .orderListDetailResponse
+                                                            ?.orderListResult
+                                                            ?.history
+                                                            ?.first
+                                                            .amountTotal ??
+                                                        0)
+                                                    .toString();
+                                              }
+                                            }))
                                     .toList());
                           }),
                           const SizedBox(height: 13),
                           Text(
                             "Collected amount",
-                            style: customTheme(context).regular.copyWith(fontSize: 11),
+                            style: customTheme(context)
+                                .regular
+                                .copyWith(fontSize: 11),
                           ),
                           const SizedBox(height: 5),
                           Obx(() {
@@ -402,13 +483,17 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
 
                                 return null;
                               },
-                              enabled: controller.selectedPaymentMethod.value.code != "CRED",
+                              enabled:
+                                  controller.selectedPaymentMethod.value.code !=
+                                      "CRED",
                               inputType: TextInputType.number,
-                              textcontroller: controller.collectedAmountEditingController,
+                              textcontroller:
+                                  controller.collectedAmountEditingController,
                             );
                           }),
                           Obx(() {
-                            if (controller.selectedPaymentMethod.value.code != "CHEQ") {
+                            if (controller.selectedPaymentMethod.value.code !=
+                                "CHEQ") {
                               return const SizedBox.shrink();
                             }
 
@@ -419,13 +504,17 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                                 const SizedBox(height: 13),
                                 Text(
                                   "Cheque No",
-                                  style: customTheme(context).regular.copyWith(fontSize: 11),
+                                  style: customTheme(context)
+                                      .regular
+                                      .copyWith(fontSize: 11),
                                 ),
                                 const SizedBox(height: 5),
                                 CustomTextField(
                                   maxlength: 6,
                                   validaton: (val) {
-                                    if (controller.selectedPaymentMethod.value.code != "CHEQ") {
+                                    if (controller
+                                            .selectedPaymentMethod.value.code !=
+                                        "CHEQ") {
                                       return null;
                                     }
                                     if ((val ?? "").isEmpty) {
@@ -439,7 +528,9 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                                     }
                                     return null;
                                   },
-                                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
                                   textcontroller: controller.cheqNoController,
                                   inputType: TextInputType.number,
                                 ),
