@@ -300,14 +300,18 @@ class OrderDetailsDeliveryView extends GetView<OrderDetailsDeliveryController> {
                       if ((order.outstandingAmount ?? 0) != 0)
                         Text(
                           '₹${order.outstandingAmount!.toStringAsFixed(2)}',
-                          style: customTheme(  context).medium.copyWith(fontSize: 16),
+                          style: customTheme(context).medium.copyWith(fontSize: 16),
                         ),
                       if (order.shopLatitude != null && order.shopLongitude != null)
                         SizedBox(
                           height: 20,
                         ),
                       if (order.shopLatitude != null && order.shopLongitude != null)
-                        MapLocationView(latitude: order.shopLatitude!, longitude: order.shopLongitude!),
+                        MapLocationView(
+                          latitude: order.shopLatitude!,
+                          longitude: order.shopLongitude!,
+                          showNavigation: true,
+                        ),
                       SizedBox(
                         height: 20,
                       ),
