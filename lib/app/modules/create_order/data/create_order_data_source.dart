@@ -58,11 +58,7 @@ class CreateorderDataSource {
   }
 
   Future<ConfirmOrderResponse> confirmOrder(
-    int salesPersonId,
-    int orderId,
-    String paymentMethod,
-    String? comment,
-  ) async {
+      int salesPersonId, int orderId, String paymentMethod, String? comment, int paymentTermId) async {
     var res = await _apiService.post(
       "order-confirm",
       {
@@ -70,6 +66,7 @@ class CreateorderDataSource {
         "order_id": orderId,
         "payment_method": paymentMethod,
         "comment": comment,
+        "payment_term_id": paymentTermId,
       },
     );
 

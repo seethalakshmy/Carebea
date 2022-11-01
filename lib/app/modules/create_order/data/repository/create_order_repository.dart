@@ -12,10 +12,11 @@ class CreateOrderRepository {
   Future<ConfirmOrderResponse> confirmOrder({
     required int salesPersonId,
     required int orderId,
+    required int paymentTermId,
     required String paymentMethod,
     String? comment,
   }) =>
-      _dataSource.confirmOrder(salesPersonId, orderId, paymentMethod, comment);
+      _dataSource.confirmOrder(salesPersonId, orderId, paymentMethod, comment,paymentTermId);
 
   Future<bool> deleteOrders({required int shopId}) => _dataSource.deleteOrders(shopId, SharedPrefs.getUserId()!);
 }

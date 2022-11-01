@@ -25,6 +25,9 @@ Result _$ResultFromJson(Map<String, dynamic> json) => Result(
       paymentMethods: (json['payment_methods'] as List<dynamic>?)
           ?.map((e) => PaymentMethod.fromJson(e as Map<String, dynamic>))
           .toList(),
+      paymentTerms: (json['payment_terms'] as List<dynamic>?)
+          ?.map((e) => PaymentTerms.fromJson(e as Map<String, dynamic>))
+          .toList(),
       amountTax: (json['amount_tax'] as num?)?.toDouble(),
       amountTotal: (json['amount_total'] as num?)?.toDouble(),
       amountUntaxed: (json['amount_untaxed'] as num?)?.toDouble(),
@@ -39,6 +42,7 @@ Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
       'message': instance.message,
       'order_id': instance.orderId,
       'payment_methods': instance.paymentMethods,
+      'payment_terms': instance.paymentTerms,
       'offer_product_details': instance.offerProducts,
       'amount_total': instance.amountTotal,
       'amount_untaxed': instance.amountUntaxed,
@@ -61,7 +65,7 @@ Map<String, dynamic> _$PaymentMethodToJson(PaymentMethod instance) => <String, d
 OfferProduct _$OfferProductFromJson(Map<String, dynamic> json) => OfferProduct(
       productId: json['product_id'] as int?,
       productName: json['product_name'] as String?,
-      productUomQty: json['product_uom_qty'] as int?,
+      productUomQty: (json['product_uom_qty'] as num?)?.toInt(),
       discount: json['discount'] as int?,
       giftProduct: json['gift_product'] as bool?,
       offerName: json['offer_name'] as String?,
@@ -76,4 +80,16 @@ Map<String, dynamic> _$OfferProductToJson(OfferProduct instance) => <String, dyn
       'gift_product': instance.giftProduct,
       'offer_name': instance.offerName,
       'offer_quantity': instance.offerQuantity,
+    };
+
+PaymentTerms _$PaymentTermsFromJson(Map<String, dynamic> json) => PaymentTerms(
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+      note: json['note'] as String?,
+    );
+
+Map<String, dynamic> _$PaymentTermsToJson(PaymentTerms instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'note': instance.note,
     };

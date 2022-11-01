@@ -21,17 +21,17 @@ class CreateOrderResponse {
 
 @JsonSerializable()
 class Result {
-  Result({
-    this.status,
-    this.message,
-    this.orderId,
-    this.paymentMethods,
-    this.amountTax,
-    this.amountTotal,
-    this.amountUntaxed,
-    this.productTotal,
-    this.offerProducts
-  });
+  Result(
+      {this.status,
+      this.message,
+      this.orderId,
+      this.paymentMethods,
+      this.paymentTerms,
+      this.amountTax,
+      this.amountTotal,
+      this.amountUntaxed,
+      this.productTotal,
+      this.offerProducts});
 
   final bool? status;
   final String? message;
@@ -39,6 +39,8 @@ class Result {
   final int? orderId;
   @JsonKey(name: "payment_methods")
   final List<PaymentMethod>? paymentMethods;
+  @JsonKey(name: "payment_terms")
+  final List<PaymentTerms>? paymentTerms;
   @JsonKey(name: "offer_product_details")
   final List<OfferProduct>? offerProducts;
   @JsonKey(name: 'amount_total')
@@ -100,4 +102,21 @@ class OfferProduct {
   factory OfferProduct.fromJson(Map<String, dynamic> json) => _$OfferProductFromJson(json);
 
   Map<String, dynamic> toJson() => _$OfferProductToJson(this);
+}
+
+@JsonSerializable()
+class PaymentTerms {
+  PaymentTerms({
+    this.id,
+    this.name,
+    this.note,
+  });
+
+  final int? id;
+  final String? name;
+  final String? note;
+
+  factory PaymentTerms.fromJson(Map<String, dynamic> json) => _$PaymentTermsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PaymentTermsToJson(this);
 }

@@ -40,6 +40,8 @@ class CreateOrderController extends GetxController {
 
   ShopList? selectedShop;
 
+  Rx<PaymentTerms> selectedPaymentTerm = Rx<PaymentTerms>(PaymentTerms());
+
   final DashboardController _dashboardController = Get.find();
   final OrdersController ordersController = Get.find();
 
@@ -154,6 +156,7 @@ class CreateOrderController extends GetxController {
         }
       }
       selectedPaymentMethod = (res.result!.paymentMethods!.first).obs;
+      selectedPaymentTerm = (res.result!.paymentTerms!.first).obs;
       return;
     }
 
@@ -251,6 +254,7 @@ class CreateOrderController extends GetxController {
       orderId: createOrderResponse!.result!.orderId!,
       paymentMethod: selectedPaymentMethod.value.code!,
       comment: commentController.text,
+      paymentTermId: selectedPaymentTerm.value.id!,
     );
 
     if (res.result?.status ?? false) {
