@@ -59,7 +59,7 @@ class OrderDetailsDeliveryController extends GetxController {
       Get.back();
       _deliveryHomeController.fetchDeliveryHomePageData();
       Get.offNamed(Routes.DELIVERY_INVOICE_DETAILS,
-          arguments: {"orderId": orderListDetailResponse?.orderListResult?.history?.first.id});
+          arguments: {"orderId": orderListDetailResponse?.orderListResult?.history?.first.id,"orderName":orderListDetailResponse?.orderListResult?.history?.first.name});
     } else {
       showSnackBar(res.result?.message ?? "Something happend, Please try again!");
     }

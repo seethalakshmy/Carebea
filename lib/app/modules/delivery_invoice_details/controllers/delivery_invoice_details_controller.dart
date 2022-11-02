@@ -48,7 +48,7 @@ class DeliveryInvoiceDetailsController extends GetxController {
       }
       if (await getStoragePermission()) {
         try {
-          await storePdfTostorage(res.result!.base64Invoice!, Get.arguments["orderId"].toString());
+          await storePdfTostorage(res.result!.base64Invoice!, Get.arguments["orderName"].toString());
         } catch (e) {
           showSnackBar("Could't save pdf to storage please try again");
         }
