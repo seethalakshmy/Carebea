@@ -1,0 +1,68 @@
+name: admin_580_tech
+description: A new Flutter project.
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.2 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  auto_route: ^5.0.4
+  flutter_bloc: ^8.1.1
+  json_annotation: ^4.6.0
+  freezed_annotation: ^2.1.0
+  flutter_svg: ^1.1.1+1
+  intl: ^0.17.0
+  fl_chart: ^0.55.1
+  data_table_2: ^2.3.6
+  url_launcher: ^6.1.5
+  google_maps_flutter: ^2.2.1
+  google_maps_flutter_web: ^0.4.0+3
+  hive_flutter: ^1.1.0
+  carousel_slider: ^4.1.1
+  desktop_drop: ^0.4.0
+  flutter_excel: ^1.0.1
+  file_picker: ^5.2.5
+  dropdown_button2: ^1.9.2
+  dropdown_search: ^5.0.6
+  retrofit: ^3.0.1+1
+  dio: 4.0.4
+  pretty_dio_logger: ^1.2.0-beta-1
+  dartz: ^0.10.1
+  flutterx:
+    path: package/flutterx
+
+
+
+
+
+
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  build_runner: ^2.2.0
+  json_serializable: ^6.3.1
+  retrofit_generator: ^4.0.1
+  freezed: ^2.1.0+1
+  auto_route_generator:
+
+
+flutter:
+
+
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/images/
+    - assets/icons/
+
+
+
