@@ -34,6 +34,7 @@ class Assets {
   static const String iconsTrash = 'assets/icons/trash.svg';
   static const String iconsTwitter = 'assets/icons/twitter.svg';
   static const String iconsVerify = 'assets/icons/verify.svg';
+  static const String imagesError500 = 'assets/images/error-500.svg';
   static const String imagesLogoDarkLg = 'assets/images/logo-dark-lg.png';
   static const String imagesLogoLightLg = 'assets/images/logo-light-lg.png';
   static const String imagesLogoSm = 'assets/images/logo-sm.png';
