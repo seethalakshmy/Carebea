@@ -1,20 +1,22 @@
 import 'package:admin_580_tech/core/enum.dart';
-import 'package:admin_580_tech/presenation/chart/all_charts/AllChartistChart/advanced_smil_chart.dart';
-import 'package:admin_580_tech/presenation/chart/all_charts/AllChartistChart/animating_pie_chart.dart';
-import 'package:admin_580_tech/presenation/chart/all_charts/AllChartistChart/line_scatter_chart.dart';
-import 'package:admin_580_tech/presenation/chart/all_charts/AllChartistChart/linechartwitharea.dart';
-import 'package:admin_580_tech/presenation/chart/all_charts/AllChartistChart/overlap_bar.dart';
-import 'package:admin_580_tech/presenation/chart/all_charts/AllChartistChart/simple_line_chart.dart';
-import 'package:admin_580_tech/presenation/chart/all_charts/AllChartistChart/simplepie_chart.dart';
-import 'package:admin_580_tech/presenation/chart/all_charts/AllChartjsChart/charjs_bar_chart.dart';
-import 'package:admin_580_tech/presenation/chart/all_charts/AllChartjsChart/multiple_statics_chart.dart';
-import 'package:admin_580_tech/presenation/chart/all_charts/AllChartjsChart/polar_chart.dart';
-import 'package:admin_580_tech/presenation/chart/all_charts/AllChartjsChart/radar_chart.dart';
-import 'package:admin_580_tech/presenation/chart/all_charts/AllMorrisChart/areachart.dart';
-import 'package:admin_580_tech/presenation/chart/all_charts/AllMorrisChart/barchart.dart';
-import 'package:admin_580_tech/presenation/chart/all_charts/AllMorrisChart/column_chart.dart';
-import 'package:admin_580_tech/presenation/chart/all_charts/AllMorrisChart/line_chart.dart';
-import 'package:admin_580_tech/presenation/chart/all_charts/AllMorrisChart/piechart.dart';
+import '../presenation/already/chart/all_charts/AllMorrisChart/areachart.dart';
+
+import 'package:admin_580_tech/presenation/already/chart/all_charts/AllChartistChart/advanced_smil_chart.dart';
+import 'package:admin_580_tech/presenation/already/chart/all_charts/AllChartistChart/animating_pie_chart.dart';
+import 'package:admin_580_tech/presenation/already/chart/all_charts/AllChartistChart/line_scatter_chart.dart';
+import 'package:admin_580_tech/presenation/already/chart/all_charts/AllChartistChart/linechartwitharea.dart';
+import 'package:admin_580_tech/presenation/already/chart/all_charts/AllChartistChart/overlap_bar.dart';
+import 'package:admin_580_tech/presenation/already/chart/all_charts/AllChartistChart/simple_line_chart.dart';
+import 'package:admin_580_tech/presenation/already/chart/all_charts/AllChartistChart/simplepie_chart.dart';
+import 'package:admin_580_tech/presenation/already/chart/all_charts/AllChartjsChart/charjs_bar_chart.dart';
+import 'package:admin_580_tech/presenation/already/chart/all_charts/AllChartjsChart/multiple_statics_chart.dart';
+import 'package:admin_580_tech/presenation/already/chart/all_charts/AllChartjsChart/polar_chart.dart';
+import 'package:admin_580_tech/presenation/already/chart/all_charts/AllChartjsChart/radar_chart.dart';
+import 'package:admin_580_tech/presenation/already/chart/all_charts/AllMorrisChart/areachart.dart';
+import 'package:admin_580_tech/presenation/already/chart/all_charts/AllMorrisChart/barchart.dart';
+import 'package:admin_580_tech/presenation/already/chart/all_charts/AllMorrisChart/column_chart.dart';
+import 'package:admin_580_tech/presenation/already/chart/all_charts/AllMorrisChart/line_chart.dart';
+import 'package:admin_580_tech/presenation/already/chart/all_charts/AllMorrisChart/piechart.dart';
 
 getChart(ChartType chartType) {
   if (chartType == ChartType.lineChart) {

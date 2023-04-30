@@ -23,7 +23,6 @@ class Strings {
 
   // drawer menu heading
   static const String dashboard = 'Dashboard';
-  static const String caregivers = 'Caregivers';
   static const String calendar = 'Calendar';
   static const String map = 'Map';
   static const String uiElements = 'Widgets';
@@ -687,10 +686,15 @@ class Strings {
   static const String paymentMethod = "Payment method";
 
   /// project
-  static const String caregiver = "Caregiver";
+  static const String caregivers = 'Caregivers';
   static const String recent = "Recent";
-  static const String noInternetConnection = "No internet Connection";
-  static const String somethingWentWrong = "Something Went Wrong";
+  static const String noInternetConnection = "No internet connection";
+  static const String noInternetConnectionSubTitle = "Try to check the network cables, modem, and router or reconnect to Wi-Fi";
+  static const String somethingWentWrong = "Something went wrong on our end.";
+  static const String weAreWorkingToFix = "We're working to fix it, Please try again later.";
+  static const String backToDashBoard = "Back to Dashboard";
+  ///to remove later
+  static const String token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDQ4YWUxMTIzNzFjNmJmYWE1MjgzN2IiLCJlbWFpbCI6ImNhcmVnaXZlcmF1dGhAdGVzdC5jb20iLCJyb2xlcyI6WyI2NDQwOWI3ZDYzZTc3MzZhZGEzNjgxNGEiXSwiaWF0IjoxNjgyNTMxNjEyLCJleHAiOjE2ODI2MTgwMTJ9.iqe7VBwJqInHxjcdOnvgbR7CbvUwSUsMLTt05FY7tGs";
 }
 
 

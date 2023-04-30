@@ -1,17 +1,17 @@
 import 'dart:async';
 
-import 'package:admin_580_tech/domain/caregiver_list/care_givers_response.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:dio/dio.dart';
 
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:retrofit/http.dart';
 
-
+import '../../core/config/environment.dart';
+import '../caregivers/care_givers_response.dart';
 
 part 'api_client.g.dart';
 
-@RestApi(baseUrl:"http://3.109.33.238/api/v1")
+@RestApi()
 abstract class ApiClient {
   factory ApiClient(Dio dio) {
     dio.options = BaseOptions(
@@ -29,15 +29,13 @@ abstract class ApiClient {
         compact: true,
         maxWidth: 200));
 
-    return _ApiClient(dio);
+    return _ApiClient(dio, baseUrl: Environment().config?.apiHost);
   }
 
   @GET("/care-giver/all-registered-caregivers")
   Future<CaregiversResponse> getCareGivers(
+    @Header("Authorization") String token,
     @Query("page") int page,
     @Query("limit") int limit,
   );
-
 }
-
-

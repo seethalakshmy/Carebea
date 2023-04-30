@@ -17,22 +17,23 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ApiErrorHandler {
   String get error => throw _privateConstructorUsedError;
+  bool? get isClientError => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String error) clientFailure,
-    required TResult Function(String error) serverFailure,
+    required TResult Function(String error, bool? isClientError) clientFailure,
+    required TResult Function(String error, bool? isClientError) serverFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String error)? clientFailure,
-    TResult? Function(String error)? serverFailure,
+    TResult? Function(String error, bool? isClientError)? clientFailure,
+    TResult? Function(String error, bool? isClientError)? serverFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String error)? clientFailure,
-    TResult Function(String error)? serverFailure,
+    TResult Function(String error, bool? isClientError)? clientFailure,
+    TResult Function(String error, bool? isClientError)? serverFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -67,7 +68,7 @@ abstract class $ApiErrorHandlerCopyWith<$Res> {
           ApiErrorHandler value, $Res Function(ApiErrorHandler) then) =
       _$ApiErrorHandlerCopyWithImpl<$Res, ApiErrorHandler>;
   @useResult
-  $Res call({String error});
+  $Res call({String error, bool? isClientError});
 }
 
 /// @nodoc
@@ -84,12 +85,17 @@ class _$ApiErrorHandlerCopyWithImpl<$Res, $Val extends ApiErrorHandler>
   @override
   $Res call({
     Object? error = null,
+    Object? isClientError = freezed,
   }) {
     return _then(_value.copyWith(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
+      isClientError: freezed == isClientError
+          ? _value.isClientError
+          : isClientError // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -102,7 +108,7 @@ abstract class _$$ClientFailureCopyWith<$Res>
       __$$ClientFailureCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String error});
+  $Res call({String error, bool? isClientError});
 }
 
 /// @nodoc
@@ -117,12 +123,17 @@ class __$$ClientFailureCopyWithImpl<$Res>
   @override
   $Res call({
     Object? error = null,
+    Object? isClientError = freezed,
   }) {
     return _then(_$ClientFailure(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
+      isClientError: freezed == isClientError
+          ? _value.isClientError
+          : isClientError // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -130,14 +141,16 @@ class __$$ClientFailureCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ClientFailure implements ClientFailure {
-  const _$ClientFailure({required this.error});
+  const _$ClientFailure({required this.error, this.isClientError});
 
   @override
   final String error;
+  @override
+  final bool? isClientError;
 
   @override
   String toString() {
-    return 'ApiErrorHandler.clientFailure(error: $error)';
+    return 'ApiErrorHandler.clientFailure(error: $error, isClientError: $isClientError)';
   }
 
   @override
@@ -145,11 +158,13 @@ class _$ClientFailure implements ClientFailure {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ClientFailure &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.isClientError, isClientError) ||
+                other.isClientError == isClientError));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
+  int get hashCode => Object.hash(runtimeType, error, isClientError);
 
   @JsonKey(ignore: true)
   @override
@@ -160,30 +175,30 @@ class _$ClientFailure implements ClientFailure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String error) clientFailure,
-    required TResult Function(String error) serverFailure,
+    required TResult Function(String error, bool? isClientError) clientFailure,
+    required TResult Function(String error, bool? isClientError) serverFailure,
   }) {
-    return clientFailure(error);
+    return clientFailure(error, isClientError);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String error)? clientFailure,
-    TResult? Function(String error)? serverFailure,
+    TResult? Function(String error, bool? isClientError)? clientFailure,
+    TResult? Function(String error, bool? isClientError)? serverFailure,
   }) {
-    return clientFailure?.call(error);
+    return clientFailure?.call(error, isClientError);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String error)? clientFailure,
-    TResult Function(String error)? serverFailure,
+    TResult Function(String error, bool? isClientError)? clientFailure,
+    TResult Function(String error, bool? isClientError)? serverFailure,
     required TResult orElse(),
   }) {
     if (clientFailure != null) {
-      return clientFailure(error);
+      return clientFailure(error, isClientError);
     }
     return orElse();
   }
@@ -221,10 +236,14 @@ class _$ClientFailure implements ClientFailure {
 }
 
 abstract class ClientFailure implements ApiErrorHandler {
-  const factory ClientFailure({required final String error}) = _$ClientFailure;
+  const factory ClientFailure(
+      {required final String error,
+      final bool? isClientError}) = _$ClientFailure;
 
   @override
   String get error;
+  @override
+  bool? get isClientError;
   @override
   @JsonKey(ignore: true)
   _$$ClientFailureCopyWith<_$ClientFailure> get copyWith =>
@@ -239,7 +258,7 @@ abstract class _$$ServerFailureCopyWith<$Res>
       __$$ServerFailureCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String error});
+  $Res call({String error, bool? isClientError});
 }
 
 /// @nodoc
@@ -254,12 +273,17 @@ class __$$ServerFailureCopyWithImpl<$Res>
   @override
   $Res call({
     Object? error = null,
+    Object? isClientError = freezed,
   }) {
     return _then(_$ServerFailure(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
+      isClientError: freezed == isClientError
+          ? _value.isClientError
+          : isClientError // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -267,14 +291,16 @@ class __$$ServerFailureCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ServerFailure implements ServerFailure {
-  const _$ServerFailure({required this.error});
+  const _$ServerFailure({required this.error, this.isClientError});
 
   @override
   final String error;
+  @override
+  final bool? isClientError;
 
   @override
   String toString() {
-    return 'ApiErrorHandler.serverFailure(error: $error)';
+    return 'ApiErrorHandler.serverFailure(error: $error, isClientError: $isClientError)';
   }
 
   @override
@@ -282,11 +308,13 @@ class _$ServerFailure implements ServerFailure {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ServerFailure &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.isClientError, isClientError) ||
+                other.isClientError == isClientError));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
+  int get hashCode => Object.hash(runtimeType, error, isClientError);
 
   @JsonKey(ignore: true)
   @override
@@ -297,30 +325,30 @@ class _$ServerFailure implements ServerFailure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String error) clientFailure,
-    required TResult Function(String error) serverFailure,
+    required TResult Function(String error, bool? isClientError) clientFailure,
+    required TResult Function(String error, bool? isClientError) serverFailure,
   }) {
-    return serverFailure(error);
+    return serverFailure(error, isClientError);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String error)? clientFailure,
-    TResult? Function(String error)? serverFailure,
+    TResult? Function(String error, bool? isClientError)? clientFailure,
+    TResult? Function(String error, bool? isClientError)? serverFailure,
   }) {
-    return serverFailure?.call(error);
+    return serverFailure?.call(error, isClientError);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String error)? clientFailure,
-    TResult Function(String error)? serverFailure,
+    TResult Function(String error, bool? isClientError)? clientFailure,
+    TResult Function(String error, bool? isClientError)? serverFailure,
     required TResult orElse(),
   }) {
     if (serverFailure != null) {
-      return serverFailure(error);
+      return serverFailure(error, isClientError);
     }
     return orElse();
   }
@@ -358,10 +386,14 @@ class _$ServerFailure implements ServerFailure {
 }
 
 abstract class ServerFailure implements ApiErrorHandler {
-  const factory ServerFailure({required final String error}) = _$ServerFailure;
+  const factory ServerFailure(
+      {required final String error,
+      final bool? isClientError}) = _$ServerFailure;
 
   @override
   String get error;
+  @override
+  bool? get isClientError;
   @override
   @JsonKey(ignore: true)
   _$$ServerFailureCopyWith<_$ServerFailure> get copyWith =>

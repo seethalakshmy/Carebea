@@ -3,7 +3,7 @@ part 'api_error_handler.freezed.dart';
 
 @freezed
 class ApiErrorHandler with _$ApiErrorHandler {
-  const factory ApiErrorHandler.clientFailure({required String error})=ClientFailure;
-  const factory ApiErrorHandler.serverFailure({required String error})=ServerFailure;
+  const factory ApiErrorHandler.clientFailure({required String error, bool? isClientError})=ClientFailure;
+  const factory ApiErrorHandler.serverFailure({required String error,bool? isClientError})=ServerFailure;
 }
 

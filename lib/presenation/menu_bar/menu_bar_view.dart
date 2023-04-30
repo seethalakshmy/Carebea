@@ -5,14 +5,11 @@ import 'package:admin_580_tech/core/hive/hive_utils.dart';
 import 'package:admin_580_tech/core/hover.dart';
 import 'package:admin_580_tech/core/image.dart';
 import 'package:admin_580_tech/core/responsive.dart';
-import 'package:admin_580_tech/core/routes.dart';
 import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/core/text_utils.dart';
 import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/presenation/routes/app_router.gr.dart';
-import 'package:admin_580_tech/presenation/widget/end_drawer.dart';
-import 'package:admin_580_tech/presenation/widget/expantion_tile.dart';
-import 'package:admin_580_tech/presenation/widget/svg_icon.dart';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +18,11 @@ import 'package:flutterx/flutterx.dart';
 import '../../core/const.dart';
 import '../../core/icons.dart';
 import '../../core/string.dart';
+import '../already/dashboard/dash_board_page.dart';
+import '../caregivers/caregivers_page.dart';
+import '../widget/already/end_drawer.dart';
+import '../widget/already/expantion_tile.dart';
+import '../widget/already/svg_icon.dart';
 
 class MenuBarView extends StatefulWidget {
   const MenuBarView({Key? key}) : super(key: key);
@@ -40,9 +42,9 @@ class _MenuBarState extends State<MenuBarView> {
   ValueNotifier<bool> isSubListOpen = ValueNotifier(false);
 
   Map<String, String> mainData = {
-    // Strings.dashboard: IconlyBroken.home,
+    Strings.dashboard: IconlyBroken.home,
     Strings.caregivers: IconlyBroken.charts,
-    Strings.calendar: IconlyBroken.calendar,
+    // Strings.calendar: IconlyBroken.calendar,
     // Strings.map: IconlyBroken.map,
   };
 
@@ -173,23 +175,24 @@ class _MenuBarState extends State<MenuBarView> {
   ];
 
   final List<PageRouteInfo<dynamic>> _routes = const [
-    CareGiverListRoute(),
     DashboardRoute(),
-    GoogleMapsRoute(),
-    ChartRoute(),
-    UserTable(),
-    UserGridRoute(),
-    InvoiceRoute(),
-    CarouselRoute(),
-    TabRoute(),
-    UserFormRoute(),
-    DropFileRoute(),
-    ProfileRoute(),
-    UserDragDropRoute(),
-    DatePickerView(),
-    PaymentRoute(),
-    PaymentSuccessRoute(),
-    DropDownView(),
+    CareGiversRoute(),
+    // DashboardRoute(),
+    // GoogleMapsRoute(),
+    // ChartRoute(),
+    // UserTable(),
+    // UserGridRoute(),
+    // InvoiceRoute(),
+    // CarouselRoute(),
+    // TabRoute(),
+    // UserFormRoute(),
+    // DropFileRoute(),
+    // ProfileRoute(),
+    // UserDragDropRoute(),
+    // DatePickerView(),
+    // PaymentRoute(),
+    // PaymentSuccessRoute(),
+    // DropDownView(),
   ];
 
   // TextDirection _layout = TextDirection.ltr;
@@ -758,155 +761,161 @@ class _MenuBarState extends State<MenuBarView> {
       itemCount: items.length,
       itemBuilder: (context, index) {
         print('item ${items.keys.elementAt(index)}');
-      return FxHover(
-        builder: (isHover) {
-          Color color = isHover
-              ? isDark
-                  ? ColorConst.chartForgoundColor
-                  : ColorConst.primary
-              : isDark
-                  ? ColorConst.white
-                  : ColorConst.black;
-          if (isExpanded) {
-            return isopen
-                ? FxExpansionTile(
-                    leading: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        FxBox.w(22.0),
-                        SvgIcon(
-                          icon: items.values.elementAt(index),
-                          size: 16,
-                          color: children[index]
-                                  .contains(upperCase(tabsRouter.currentPath))
-                              ? isDark
-                                  ? ColorConst.chartForgoundColor
-                                  : ColorConst.primary
-                              : color,
+        return FxHover(
+          builder: (isHover) {
+            Color color = isHover
+                ? isDark
+                    ? ColorConst.chartForgoundColor
+                    : ColorConst.primary
+                : isDark
+                    ? ColorConst.white
+                    : ColorConst.black;
+            if (isExpanded) {
+              return isopen
+                  ? FxExpansionTile(
+                      leading: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          FxBox.w(22.0),
+                          SvgIcon(
+                            icon: items.values.elementAt(index),
+                            size: 16,
+                            color: children[index]
+                                    .contains(upperCase(tabsRouter.currentPath))
+                                ? isDark
+                                    ? ColorConst.chartForgoundColor
+                                    : ColorConst.primary
+                                : color,
+                          ),
+                          FxBox.w(24.0),
+                        ],
+                      ),
+                      title: Text(
+                        items.keys.elementAt(index),
+                        style: TextStyle(
+                            color: children[index]
+                                    .contains(upperCase(tabsRouter.currentPath))
+                                ? isDark
+                                    ? ColorConst.chartForgoundColor
+                                    : ColorConst.primary
+                                : color,
+                            fontSize: 15.7),
+                      ),
+                      trailing: SvgIcon(
+                        icon: IconlyBroken.arrowDown,
+                        size: 16,
+                        color: children[index]
+                                .contains(upperCase(tabsRouter.currentPath))
+                            ? isDark
+                                ? ColorConst.chartForgoundColor
+                                : ColorConst.primary
+                            : color,
+                      ),
+                      children: [_subMenuList(children[index], tabsRouter)],
+                    )
+                  : ListTile(
+                      leading: SvgIcon(
+                        icon: items.values.elementAt(index),
+                        size: isopen ? 16 : 18,
+                        color: items.keys.elementAt(index) ==
+                                upperCase(tabsRouter.currentPath)
+                            ? isDark
+                                ? ColorConst.chartForgoundColor
+                                : ColorConst.primary
+                            : color,
+                      ),
+                      title: isopen
+                          ? Text(
+                              items.keys.elementAt(index).camelCase(),
+                              style: TextStyle(
+                                color: items.keys.elementAt(index) ==
+                                        upperCase(tabsRouter.currentPath)
+                                    ? isDark
+                                        ? ColorConst.chartForgoundColor
+                                        : ColorConst.primary
+                                    : color,
+                                fontSize: 15.7,
+                              ),
+                            )
+                          : null,
+                      mouseCursor: SystemMouseCursors.click,
+                      horizontalTitleGap: 0.0,
+                      onTap: () {
+                        isOpen.value = true;
+                        _scaffoldDrawerKey.currentState?.closeDrawer();
+                      },
+                    );
+            } else {
+              return Row(
+                children: [
+                  if (isopen)
+                    Container(
+                      width: 6.0,
+                      height: 48.0,
+                      decoration: BoxDecoration(
+                        color: items.keys.elementAt(index) ==
+                                upperCase(tabsRouter.currentPath)
+                            ? isDark
+                                ? ColorConst.chartForgoundColor
+                                : ColorConst.primary
+                            : ColorConst.transparent,
+                        borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(6.0),
+                          bottomRight: Radius.circular(6.0),
                         ),
-                        FxBox.w(24.0),
-                      ],
-                    ),
-                    title: Text(
-                      items.keys.elementAt(index),
-                      style: TextStyle(
-                          color: children[index]
-                                  .contains(upperCase(tabsRouter.currentPath))
-                              ? isDark
-                                  ? ColorConst.chartForgoundColor
-                                  : ColorConst.primary
-                              : color,
-                          fontSize: 15.7),
-                    ),
-                    trailing: SvgIcon(
-                      icon: IconlyBroken.arrowDown,
-                      size: 16,
-                      color: children[index]
-                              .contains(upperCase(tabsRouter.currentPath))
-                          ? isDark
-                              ? ColorConst.chartForgoundColor
-                              : ColorConst.primary
-                          : color,
-                    ),
-                    children: [_subMenuList(children[index], tabsRouter)],
-                  )
-                : ListTile(
-                    leading: SvgIcon(
-                      icon: items.values.elementAt(index),
-                      size: isopen ? 16 : 18,
-                      color: items.keys.elementAt(index) ==
-                              upperCase(tabsRouter.currentPath)
-                          ? isDark
-                              ? ColorConst.chartForgoundColor
-                              : ColorConst.primary
-                          : color,
-                    ),
-                    title: isopen
-                        ? Text(
-                            items.keys.elementAt(index).camelCase(),
-                            style: TextStyle(
-                              color: items.keys.elementAt(index) ==
-                                      upperCase(tabsRouter.currentPath)
-                                  ? isDark
-                                      ? ColorConst.chartForgoundColor
-                                      : ColorConst.primary
-                                  : color,
-                              fontSize: 15.7,
-                            ),
-                          )
-                        : null,
-                    mouseCursor: SystemMouseCursors.click,
-                    horizontalTitleGap: 0.0,
-                    onTap: () {
-                      isOpen.value = true;
-                      _scaffoldDrawerKey.currentState?.closeDrawer();
-                    },
-                  );
-          } else {
-            return Row(
-              children: [
-                if (isopen)
-                  Container(
-                    width: 6.0,
-                    height: 48.0,
-                    decoration: BoxDecoration(
-                      color: items.keys.elementAt(index) ==
-                              upperCase(tabsRouter.currentPath)
-                          ? isDark
-                              ? ColorConst.chartForgoundColor
-                              : ColorConst.primary
-                          : ColorConst.transparent,
-                      borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(6.0),
-                        bottomRight: Radius.circular(6.0),
                       ),
                     ),
-                  ),
-                if (isopen) FxBox.w16,
-                Expanded(
-                  child: ListTile(
-                    leading: SvgIcon(
-                      icon: items.values.elementAt(index),
-                      size: isopen ? 16 : 18,
-                      color: items.keys.elementAt(index) ==
-                              upperCase(tabsRouter.currentPath)
-                          ? isDark
-                              ? ColorConst.chartForgoundColor
-                              : ColorConst.primary
-                          : color,
+                  if (isopen) FxBox.w16,
+                  Expanded(
+                    child: ListTile(
+                      leading: SvgIcon(
+                        icon: items.values.elementAt(index),
+                        size: isopen ? 16 : 18,
+                        color: items.keys.elementAt(index) ==
+                                upperCase(tabsRouter.currentPath)
+                            ? isDark
+                                ? ColorConst.chartForgoundColor
+                                : ColorConst.primary
+                            : color,
+                      ),
+                      title: isopen
+                          ? buildText(items, index, tabsRouter, color)
+                          : null,
+                      mouseCursor: SystemMouseCursors.click,
+                      horizontalTitleGap: 0.0,
+                      onTap: () {
+                        isOpen.value = true;
+                        print('index : $index  ${items.keys.elementAt(index)} ${getRouteIndex(items.keys.elementAt(index))}');
+                        tabsRouter.setActiveIndex(
+                            getRouteIndex(items.keys.elementAt(index)));
+                        HiveUtils.set(Strings.selectedmenuIndex,
+                            getRouteIndex(items.keys.elementAt(index)));
+                        _scaffoldDrawerKey.currentState?.closeDrawer();
+                      },
                     ),
-                    title: isopen
-                        ? Text(
-                            items.keys.elementAt(index).capitalize(),
-                            style: TextStyle(
-                              color: items.keys.elementAt(index) ==
-                                      upperCase(tabsRouter.currentPath)
-                                  ? isDark
-                                      ? ColorConst.chartForgoundColor
-                                      : ColorConst.primary
-                                  : color,
-                              fontSize: 15.7,
-                            ),
-                          )
-                        : null,
-                    mouseCursor: SystemMouseCursors.click,
-                    horizontalTitleGap: 0.0,
-                    onTap: () {
-                      isOpen.value = true;
-                      tabsRouter.setActiveIndex(
-                          getRouteIndex(items.keys.elementAt(index)));
-                      HiveUtils.set(Strings.selectedmenuIndex,
-                          getRouteIndex(items.keys.elementAt(index)));
-                      _scaffoldDrawerKey.currentState?.closeDrawer();
-                    },
                   ),
-                ),
-              ],
-            );
-          }
-        },
-      );
+                ],
+              );
+            }
+          },
+        );
       },
+    );
+  }
+
+  Text buildText(Map<String, String> items, int index, TabsRouter tabsRouter,
+      Color color) {
+    print('value == and ${items.keys.elementAt(index)} and ${ upperCase(tabsRouter.currentPath)}');
+    return Text(
+      items.keys.elementAt(index).capitalize(),
+      style: TextStyle(
+        color: items.keys.elementAt(index) == upperCase(tabsRouter.currentPath)
+            ? isDark
+                ? ColorConst.chartForgoundColor
+                : ColorConst.primary
+            : color,
+        fontSize: 15.7,
+      ),
     );
   }
 
@@ -1035,7 +1044,7 @@ class _MenuBarState extends State<MenuBarView> {
                     horizontalTitleGap: 0.0,
                     onTap: () {
                       isOpen.value = true;
-
+                      // print('index : $index  ${items1[index]} ${getRouteIndex(items1[index])}');
                       tabsRouter.setActiveIndex(getRouteIndex(items1[index]));
                       HiveUtils.set(Strings.selectedmenuIndex,
                           getRouteIndex(items1[index]));
@@ -1327,6 +1336,77 @@ class _MenuBarState extends State<MenuBarView> {
       return 'Order';
     } else {
       return '';
+    }
+  }
+
+  int getRouteIndex(String route) {
+    if (route == Strings.caregivers) {
+      return 1;
+    }
+    // else if (route == Strings.dataTable) {
+    //   return 2;
+    // } else if (route == Strings.invoice) {
+    //   return 3;
+    // } else if (route == Strings.carousel) {
+    //   return 4;
+    // } else if (route == Strings.tabs) {
+    //   return 5;
+    // }   else if (route == Strings.formValidation) {
+    //   return 6;
+    // } else if (route == Strings.formFileUpload) {
+    //   return 7;
+    // } else if (route == Strings.map) {
+    //   return 8;
+    // } else if (route == Strings.userProfile) {
+    //   return 9;
+    // } else if (route == Strings.dragDrop) {
+    //   return 10;
+    // } else if (route == Strings.datePicker) {
+    //   return 11;
+    // }  else if (route == '${Strings.payment}/success') {
+    //   return 12;
+    // } else if (route == Strings.dropDown) {
+    //   return 13;
+    // } else if (route == Strings.caregivers) {
+    //   return 14;
+    // }
+    else {
+      return 0;
+    }
+  }
+
+  Widget getRouteWidget(int index) {
+    print('called here.....getRouteWidget $index');
+    if (index == 1) {
+      return  const CareGiversPage();
+    }
+    // else if (index == 2) {
+    //   return  UserTable();
+    // } else if (index == 3) {
+    //   return  InvoicePage();
+    // } else if (index == 4) {
+    //   return CarouselPage();
+    // } else if (index == 5) {
+    //   return UserFormPage();
+    // } else if (index == 6) {
+    //   return DropFilePage();
+    // } else if (index == 7) {
+    //   return GoogleMapsPage();
+    // } else if (index == 8) {
+    //   return ProfilePage();
+    // } else if (index == 9) {
+    //   return UserDragDropPage();
+    // } else if (index == 10) {
+    //   return DatePickerView();
+    // } else if (index == 11) {
+    //   return PaymentSuccessPage();
+    // } else if (index == 12) {
+    //   return DropDownView();
+    // } else if (index == 14) {
+    //   return DropDownView();
+    // }
+    else {
+      return const DashboardPage();
     }
   }
 }

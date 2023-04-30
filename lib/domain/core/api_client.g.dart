@@ -12,9 +12,7 @@ class _ApiClient implements ApiClient {
   _ApiClient(
     this._dio, {
     this.baseUrl,
-  }) {
-    baseUrl ??= 'http://3.109.33.238/api/v1';
-  }
+  });
 
   final Dio _dio;
 
@@ -22,6 +20,7 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<CaregiversResponse> getCareGivers(
+    token,
     page,
     limit,
   ) async {
@@ -30,7 +29,8 @@ class _ApiClient implements ApiClient {
       r'page': page,
       r'limit': limit,
     };
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<CaregiversResponse>(Options(

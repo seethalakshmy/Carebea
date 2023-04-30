@@ -10,6 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_web_plugins/url_strategy.dart';
 
+import 'core/config/environment.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -32,10 +34,19 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    
     init();
+
   }
 
+
+
   Future<void> init() async {
+    String environment =  const String.fromEnvironment(
+      'ENVIRONMENT',
+      defaultValue: Environment.dEV,
+    );
+    Environment().initConfig(environment);
     await HiveUtils.init();
     themeModeBloc.add(const ThemeModeEvent.changeTheme(null));
   }
