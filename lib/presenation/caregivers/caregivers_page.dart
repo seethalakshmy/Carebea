@@ -101,7 +101,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              CustomText(
+              CustomText3(
                 Strings.recent.trim(),
                 style: TS().style(
                   fontSize: FS.font18.val,
@@ -181,7 +181,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              CustomText(
+              CustomText3(
                 Strings.recent.trim(),
                 style: TS().style(
                   fontSize: FS.font18.val,
@@ -337,7 +337,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
   Widget _rowsView({
     String? text,
   }) {
-    return CustomText(
+    return CustomText3(
       '$text',
       softWrap: true,
       style: TS().style(fontSize: DBL.thirteen.val, fontWeight: FW.w500.val),
@@ -347,7 +347,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
 
   Widget _columnsView(
       {String? text, FontWeight? fontWeight = FontWeight.w700}) {
-    return CustomText(
+    return CustomText3(
       '$text',
       softWrap: true,
       style: TS().style(fontSize: DBL.fifteen.val, fontWeight: FW.w700.val),
@@ -366,7 +366,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
         ),
         CustomSizedBox(width: DBL.ten.val),
         CExpanded(
-          child: CustomText(
+          child: CustomText3(
             text,
             style:
                 TS().style(fontSize: DBL.thirteen.val, fontWeight: FW.w500.val),
@@ -380,7 +380,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
     Color? color,
     String text,
   ) {
-    return CustomText(
+    return CustomText3(
       text,
       style: TS().style(
         fontWeight: FW.w700.val,

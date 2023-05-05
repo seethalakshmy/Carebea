@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomText extends StatelessWidget {
-  const CustomText(
+class CustomText3 extends StatelessWidget {
+  const CustomText3(
       this.name,
       {Key? key,
       this.textAlign,

@@ -148,7 +148,6 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _usernameTextBoxWidget() {
     return CustomTextField(
-      hintText: Strings.enterEmail,
       onChanged: (String value) {},
       textCapitalization: TextCapitalization.none,
       textInputAction: TextInputAction.done,
@@ -159,7 +158,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget _passwordTextBoxWidget() {
     return CustomTextField(
       obsecureText: true,
-      hintText: Strings.enterPassword,
       onChanged: (String value) {},
       textCapitalization: TextCapitalization.none,
       textInputAction: TextInputAction.done,

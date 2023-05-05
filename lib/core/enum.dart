@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 /// Use [ChartType] for apply predefine button color
 enum ChartType {
   lineChart,
@@ -18,6 +19,51 @@ enum ChartType {
   polarChart,
   multipleStaticChart,
 }
+
+/// App Strings
+enum AppString {
+  login("Login"),
+  email("Email Address"),
+  emptyEmail("Email address shouldn't be empty"),
+  validEmail("Enter valid email address"),
+  password("Password"),
+  emptyPassword("Password shouldn't be empty"),
+  forgotPassword("Forgot Password ?");
+
+  final String val;
+
+  const AppString(this.val);
+}
+
+
+/// App Colors
+enum AppColor {
+  backgroundColor(Color(0xffE9F0F9)),
+  lightBlue(Color(0xff344280)),
+  darkBlue(Color.fromARGB(255, 54, 64, 152)),
+  black(Color(0xff000000)),
+  white(Color(0xffFFFFFF)),
+  subTitleColor(Color(0xff727E8A)),
+  label(Color(0xff727E8A)),
+  borderColor(Color(0xffBAC0D2));
+  final Color val;
+
+  const AppColor(this.val);
+}
+
+
+/// Assets
+enum Assets {
+  blackLogo("assets/icons/black_logo.svg"),
+  blackLogoPng("assets/images/black_logo.png"),
+  careGiver("assets/images/caregiver.png");
+
+
+  final String val;
+
+  const Assets(this.val);
+}
+
 
 ///font size
 enum FS {
@@ -185,97 +231,9 @@ enum TA {
   const TA(this.val);
 }
 
-enum Assets {
-  appLogo("assets/unidoc_logo.png"),
-  introIcon("assets/images/introicon.png"),
-  nextSvg("assets/icon/next.svg"),
-  lottieAsset("assets/4257-loading-or-empty-state.json"),
-  bell("assets/Bell.png"),
-  appIcon("assets/images/app_icon.png"),
-  addFamilyAss("assets/settings/AddUser.svg"),
-  supportAss("assets/settings/Helpsupport.svg"),
-  sendFeeBackAss("assets/settings/SendFeedback.svg"),
-  aboutUniDocAss("assets/settings/About_us.svg"),
-  notificationSettingsAss("assets/settings/Notificationsettings.svg"),
-  rateUniDocAppAss("assets/settings/RateUiniDocApp.svg"),
-  logoutAss("assets/settings/LogOut.svg"),
-  person('assets/images/person.jpg');
 
-  final String val;
 
-  const Assets(this.val);
-}
 
-enum AppString {
-  one("1"),
-  two("2"),
-  hi("Hi, "),
-  version("V"),
-  currentLocation("Current Location"),
-  specializations("Specializations"),
-  UniDoc("UniDoc"),
-  drAppointmentBooking("Doctor Appointment Booking"),
-  appInUAE("App in UAE"),
-  skip("Skip"),
-  seeAll("See All"),
-  next("Next"),
-  getStarted("Get Started"),
-  myAppointments("My Appointments"),
-  updateNow("UPDATE NOW"),
-  updateAvailable("Update Available"),
-  newVersionAvailable('A new version of app is available.'),
-  upcoming('Upcoming'),
-  completed('Completed'),
-  cancelled('Cancelled'),
-  noCancelledAppointments('No cancelled appointments'),
-  noCompletedAppointments('No completed appointments'),
-  noUpcomingAppointments('No upcoming appointments'),
-  notifications("Notifications"),
-  noNotifications("No Notifications"),
-  back("Back"),
-  notificationDetails("Notification Details"),
-  settings("settings"),
-  g("G"),
-  guest("Guest"),
-  viewProfile("View Profile"),
-  addFamily('Add Family'),
-  support('Support'),
-  sendUsFeedback('Send us Feedback'),
-  aboutUniDoc('About UniDoc'),
-  notificationSettings('Notification Settings'),
-  rateUniDocApp('Rate UniDoc App'),
-  logout('Log Out'),
-  login('Login'),
-  appVersion('App version'),
-  findDoctor('Find Doctor'),
-  noResultFound('No Result Found'),
-  hospitalsNearYou('Hospitals near you'),
-  away("away"),
-  cWithYourInsurancePolicy("Clinics with your insurance policy"),
-  drAvailableNearYou("Doctors available near you"),
-  drOrHospital("Doctor or hospital"),
-  specialities("Specialities"),
-  clear("Clear"),
-  feedback("Feedback"),
-  aboutUs('About UniDoc'),
-  newAppointment("New Appointment"),
-  doctorProfile("Doctor Profile"),
-  hospitalDetails("Hospital Details"),
-  doctorsNearYou("Doctors near you"),
-  toContinue('to continue'),
-  please('Please '),
-  enterYourDetails('enter your details '),
-  phoneWithCountryCode('+971 '),
-  km('Km '),
-  location("Location"),
-  doctorsAvailableNearYou("Doctors available near you"),
-  android("https://play.google.com/store/apps/details?id=com.ae.unidoc"),
-  ios("https://itunes.apple.com/in/app/unidoc-doctor-appointment/id1527263282?mt=8");
-
-  final String val;
-
-  const AppString(this.val);
-}
 
 enum BF {
   contain(BoxFit.contain);
@@ -310,45 +268,43 @@ enum ECrossAxisAlignment {
   const ECrossAxisAlignment(this.val);
 }
 
-enum EMainAxisSize{
+enum EMainAxisSize {
   min(MainAxisSize.min),
   max(MainAxisSize.max);
+
   final MainAxisSize val;
+
   const EMainAxisSize(this.val);
 }
 
-enum EAxis{
+enum EAxis {
   horizontal(Axis.horizontal),
   vertical(Axis.vertical);
+
   final Axis val;
+
   const EAxis(this.val);
 }
 
-enum EFlexFit{
+enum EFlexFit {
   loose(FlexFit.loose),
   tight(FlexFit.tight);
+
   final FlexFit val;
+
   const EFlexFit(this.val);
 }
 
-enum EBoxShape{
+enum EBoxShape {
   rectangle(BoxShape.rectangle),
   circle(BoxShape.circle);
+
   final BoxShape val;
-  const EBoxShape (this.val);
 
+  const EBoxShape(this.val);
 }
 
-/// to do later
-enum CL {
-  white(Colors.white),
-  black(Colors.black),
-  primaryDarkBlue(Color(0xff0C45B0));
 
-  final Color color;
-
-  const CL(this.color);
-}
 
 enum EAlignment {
   topCenter(Alignment.topCenter),
@@ -360,5 +316,3 @@ enum EAlignment {
 
   const EAlignment(this.val);
 }
-
-

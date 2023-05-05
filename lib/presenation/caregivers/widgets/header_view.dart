@@ -24,7 +24,7 @@ class HeaderView extends StatelessWidget {
         child: CustomContainer(
           width: double.infinity,
           padding:  EdgeInsets.all(DBL.twenty.val),
-          child: CustomText(
+          child: CustomText3(
             Strings.caregivers,
             style: TS().defaultStyle(context),
           ),

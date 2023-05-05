@@ -37,13 +37,8 @@ dependencies:
   dartz: ^0.10.1
   flutterx:
     path: package/flutterx
-
-
-
-
-
-
   cupertino_icons: ^1.0.2
+  google_fonts:
 
 dev_dependencies:
   flutter_test:

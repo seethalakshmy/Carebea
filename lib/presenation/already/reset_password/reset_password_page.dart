@@ -180,7 +180,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
   Widget _emailTextBoxWidget() {
     return CustomTextField(
-      hintText: Strings.enterEmail,
+      // hintText: Strings.enterEmail,
       onChanged: (String value) {},
       textCapitalization: TextCapitalization.none,
       textInputAction: TextInputAction.done,

@@ -1,5 +1,6 @@
 
 import 'package:admin_580_tech/core/color.dart';
+import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,6 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     Key? key,
     this.controller,
-    this.hintText,
     this.margin,
     this.textInputAction,
     this.focusNode,
@@ -25,12 +25,13 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.maxLength,
     this.textColor,
+    this.height,
+    this.width,
   })  : assert(controller != null),
         super(key: key);
   final TextEditingController? controller;
   final EdgeInsetsGeometry? margin;
   final TextInputAction? textInputAction;
-  final String? hintText;
   final FocusNode? focusNode;
   final bool? obsecureText;
   final void Function(String)? onChanged;
@@ -46,10 +47,14 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final int? maxLength;
   final Color? textColor;
+  final double?height;
+  final double ?width;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      width: width,
+      height:height,
       child: TextFormField(
         controller: controller,
         focusNode: focusNode,
@@ -67,37 +72,25 @@ class CustomTextField extends StatelessWidget {
         decoration: InputDecoration(
           suffixIconConstraints: const BoxConstraints(minWidth: 30),
           filled: true,
-          hintText: hintText,
-          fillColor: isDark ? ColorConst.darkContainer : ColorConst.white,
-          // fillColor: ColorConst.white,
-
-          hintStyle: TextStyle(
-            color: isDark ? ColorConst.white : ColorConst.lightFontColor,
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
-          isDense: true,
-          isCollapsed: true,
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          fillColor:ColorConst.white,
           suffixIcon: suffixIcon,
           errorText: errorText,
           errorStyle: const TextStyle(fontSize: 11, height: 0.7),
           enabledBorder: OutlineInputBorder(
+
             borderSide: BorderSide(
-              color:
-                  isDark ? ColorConst.lightFontColor : ColorConst.appbarLightBG,
+              color: AppColor.borderColor.val,
             ),
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(5),
           ),
           border: OutlineInputBorder(
             borderSide: const BorderSide(color: ColorConst.lightFontColor),
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(5),
           ),
 
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: ColorConst.primary),
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(5),
           ),
         ),
         validator: validator,

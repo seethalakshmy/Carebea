@@ -6,6 +6,6 @@ TabsRouter? autoecTabRouter;
 int routesLength = 0;
 bool isLg(context) =>
     MediaQuery.of(context).size.width >= 992 &&
-    MediaQuery.of(context).size.width < 1300;
+    MediaQuery.of(context).size.width < 1355;
 
 bool isXl(context) => MediaQuery.of(context).size.width >= 1300;

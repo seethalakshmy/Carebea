@@ -26,10 +26,10 @@ class CachedImage extends StatelessWidget {
       height: height,
       width: width,
       placeholder:  AssetImage(
-        Assets.person.val,
+       " Assets.person.val",
       ),
       imageErrorBuilder: (_, __, ___) => Image.asset(
-        Assets.person.val,
+        "Assets.person.val",
         height: DBL.thirty.val,
         width: DBL.thirty.val,
       ),

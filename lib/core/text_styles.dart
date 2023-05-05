@@ -1,5 +1,6 @@
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 class TS {
@@ -17,6 +18,12 @@ class TS {
           letterSpacing: letterSpacing,
           wordSpacing
           :wordSpacing);
+
+   gPoppins({double? fontSize, FontWeight? fontWeight, Color? color}) =>
+       GoogleFonts.poppins(
+           color: color, fontSize: fontSize, fontWeight: fontWeight);
+
+
 
    defaultStyle(BuildContext context){
      return Theme.of(context)
