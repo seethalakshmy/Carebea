@@ -21,7 +21,7 @@ class TS {
 
    gPoppins({double? fontSize, FontWeight? fontWeight, Color? color}) =>
        GoogleFonts.poppins(
-           color: color, fontSize: fontSize, fontWeight: fontWeight);
+           color: color, fontSize: fontSize, fontWeight: fontWeight,);
 
 
 

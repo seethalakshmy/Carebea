@@ -3,7 +3,11 @@ class Assets {
   Assets._();
 
   static const String iconsBlackLogo = 'assets/icons/black_logo.svg';
+  static const String iconsColorLogo = 'assets/icons/color_logo.svg';
+  static const String iconsDrawer = 'assets/icons/drawer.svg';
   static const String imagesBlackLogo = 'assets/images/black_logo.png';
   static const String imagesCaregiver = 'assets/images/caregiver.png';
+  static const String imagesColorLogo = 'assets/images/color_logo.png';
+  static const String imagesDrawer = 'assets/images/drawer.png';
 
 }

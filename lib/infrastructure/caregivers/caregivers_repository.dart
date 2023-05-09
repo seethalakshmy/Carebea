@@ -22,10 +22,10 @@ class CareGiversRepository implements ICareGiverListRepo {
           await _apiClient.getCareGivers(Strings.token, page, limit);
       return Right(response);
     } on DioError catch (e) {
-      Debug.log("CareGiverListRepository: ${e.message}");
+      CustomLog.log("CareGiverListRepository: ${e.message}");
       if (e.message.contains("SocketException") ||
           e.message.contains("XMLHttpRequest")) {
-        Debug.log("reached here..");
+        CustomLog.log("reached here..");
         return const Left(ClientFailure(error: Strings.noInternetConnection,isClientError:true ));
       } else {
         return const Left(ServerFailure(error: Strings.somethingWentWrong,isClientError: false));

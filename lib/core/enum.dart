@@ -1,24 +1,5 @@
 import 'package:flutter/material.dart';
-
-/// Use [ChartType] for apply predefine button color
-enum ChartType {
-  lineChart,
-  barChart,
-  areaChart,
-  piaChart,
-  colomnChart,
-  advancedSmileChart,
-  lineChartWithArea,
-  simpleLineChart,
-  simplePieChart,
-  animatingPieChart,
-  lineScatterChart,
-  overlapBars,
-  chartJsBarChart,
-  radarChart,
-  polarChart,
-  multipleStaticChart,
-}
+import 'package:flutter/material.dart';
 
 /// App Strings
 enum AppString {
@@ -28,45 +9,59 @@ enum AppString {
   validEmail("Enter valid email address"),
   password("Password"),
   emptyPassword("Password shouldn't be empty"),
-  forgotPassword("Forgot Password ?");
+  passwordLengthError("Password should be at least 8 characters"),
+  emptyConfirmPassword("Confirm password shouldn't be empty"),
+  notMatchConfirmPassword("Confirm password doesn't match"),
+  forgotPassword("Forgot Password ?"),
+  resetPassword("Reset Password"),
+  resetPasswordDescription(
+      "Enter your registered mail id to receive password\nreset link"),
+  sendRestInstructions("Send  reset instructions"),
+  createNewPassword("Please create your new password"),
+  newPassword("New Password"),
+  confirmPassword("Confirm Password"),
+  confirmResetPassword("Confirm Reset Password");
 
   final String val;
 
   const AppString(this.val);
 }
 
-
 /// App Colors
 enum AppColor {
   backgroundColor(Color(0xffE9F0F9)),
   lightBlue(Color(0xff344280)),
-  darkBlue(Color.fromARGB(255, 54, 64, 152)),
+  darkBlue(Color(0xff070329)),
   black(Color(0xff000000)),
   white(Color(0xffFFFFFF)),
   subTitleColor(Color(0xff727E8A)),
   label(Color(0xff727E8A)),
-  borderColor(Color(0xffBAC0D2));
+  borderColor(Color(0xffBAC0D2)),
+  transparent(Colors.transparent);
+
   final Color val;
 
   const AppColor(this.val);
 }
 
-
 /// Assets
-enum Assets {
+enum IMG {
   blackLogo("assets/icons/black_logo.svg"),
+  colorLogo("assets/icons/color_logo.svg"),
+  drawer("assets/icons/drawer.svg"),
+  drawerPng("assets/images/drawer.png"),
+  colorLogoPng("assets/images/color_logo.png"),
   blackLogoPng("assets/images/black_logo.png"),
   careGiver("assets/images/caregiver.png");
 
-
   final String val;
 
-  const Assets(this.val);
+  const IMG(this.val);
 }
-
 
 ///font size
 enum FS {
+  font11(11.0),
   font12(12.0),
   font13(13.0),
   font14(14.0),
@@ -140,12 +135,16 @@ enum DBL {
   twentyOne(21.0),
   twentyTwo(22.0),
   twentyFour(24.0),
+  twentySeven(27.0),
   twentyEight(28.0),
   thirty(30.0),
   thirtyThree(33.0),
   forty(40.0),
   fortyFive(45.0),
+  fortyEight(48.0),
   fifty(50.0),
+  fiftyFive(55.0),
+  sixty(60.0),
   seventy(70.0),
   seventyTwo(72.0),
   eightyNine(89.0),
@@ -159,7 +158,9 @@ enum DBL {
   hundredSeventyNine(179.0),
   hundredNinety(190.0),
   threeHundred(300.0),
-  threeHundredFortyThree(343.0);
+  threeHundredFortyThree(343.0),
+  fourFifty(450.0),
+  fiveFifty(550.0);
 
   final double val;
 
@@ -218,6 +219,16 @@ enum TO {
   const TO(this.val);
 }
 
+enum FIT {
+  fill(BoxFit.fill),
+  contain(BoxFit.contain),
+  cover(BoxFit.cover);
+
+  final BoxFit val;
+
+  const FIT(this.val);
+}
+
 enum TA {
   center(TextAlign.center),
   right(TextAlign.right),
@@ -230,10 +241,6 @@ enum TA {
 
   const TA(this.val);
 }
-
-
-
-
 
 enum BF {
   contain(BoxFit.contain);
@@ -304,15 +311,53 @@ enum EBoxShape {
   const EBoxShape(this.val);
 }
 
-
-
 enum EAlignment {
   topCenter(Alignment.topCenter),
+  topRight(Alignment.topRight),
   bottomCenter(Alignment.bottomCenter),
   centerLeft(Alignment.centerLeft),
+  centerRight(Alignment.centerRight),
   center(Alignment.center);
 
   final Alignment val;
 
   const EAlignment(this.val);
+}
+
+enum EAutoValidate {
+  always(AutovalidateMode.always),
+  disabled(AutovalidateMode.disabled);
+
+  final AutovalidateMode val;
+
+  const EAutoValidate(this.val);
+}
+
+enum ETextInputAction {
+  done(TextInputAction.done),
+  next(TextInputAction.next);
+
+  final TextInputAction val;
+
+  const ETextInputAction(this.val);
+}
+
+/// Use [ChartType] for apply predefine button color
+enum ChartType {
+  lineChart,
+  barChart,
+  areaChart,
+  piaChart,
+  colomnChart,
+  advancedSmileChart,
+  lineChartWithArea,
+  simpleLineChart,
+  simplePieChart,
+  animatingPieChart,
+  lineScatterChart,
+  overlapBars,
+  chartJsBarChart,
+  radarChart,
+  polarChart,
+  multipleStaticChart,
 }

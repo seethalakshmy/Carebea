@@ -3,7 +3,7 @@ import 'package:admin_580_tech/core/custom_text.dart';
 import 'package:admin_580_tech/core/image.dart';
 import 'package:admin_580_tech/core/string.dart';
 import 'package:admin_580_tech/core/theme.dart';
-import 'package:admin_580_tech/presenation/routes/app_router.gr.dart';
+import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
