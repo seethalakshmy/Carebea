@@ -3,7 +3,31 @@ class Assets {
   Assets._();
 
   static const String iconsBlackLogo = 'assets/icons/black_logo.svg';
+  static const String iconsColorLogo = 'assets/icons/color_logo.svg';
+  static const String iconsDrawer = 'assets/icons/drawer.svg';
+  static const String iconsIcActive = 'assets/icons/ic_active.svg';
+  static const String iconsIcArrowDown = 'assets/icons/ic_arrow_down.svg';
+  static const String iconsIcDelete = 'assets/icons/ic_delete.svg';
+  static const String iconsIcEdit = 'assets/icons/ic_edit.svg';
+  static const String iconsIcEmail = 'assets/icons/ic_email.svg';
+  static const String iconsIcEye = 'assets/icons/ic_eye.svg';
+  static const String iconsIcInactive = 'assets/icons/ic_inactive.svg';
+  static const String iconsIcLocation = 'assets/icons/ic_location.svg';
+  static const String iconsIcNotfication = 'assets/icons/ic_notfication.svg';
+  static const String iconsIcNotificationDot = 'assets/icons/ic_notification_dot.svg';
+  static const String iconsIcPerson = 'assets/icons/ic_person.svg';
+  static const String iconsIcPhone = 'assets/icons/ic_phone.svg';
+  static const String iconsIcProfilePlaceHolder = 'assets/icons/ic_profile_place_holder.svg';
+  static const String iconsIcRefresh = 'assets/icons/ic_refresh.svg';
+  static const String iconsIcSearch = 'assets/icons/ic_search.svg';
+  static const String iconsIcSsn = 'assets/icons/ic_ssn.svg';
+  static const String iconsIcWarning = 'assets/icons/ic_warning.svg';
   static const String imagesBlackLogo = 'assets/images/black_logo.png';
   static const String imagesCaregiver = 'assets/images/caregiver.png';
+  static const String imagesColorLogo = 'assets/images/color_logo.png';
+  static const String imagesDrawer = 'assets/images/drawer.png';
+  static const String imagesIcPerson = 'assets/images/ic_person.png';
+  static const String imagesNotification = 'assets/images/notification.png';
+  static const String imagesProfile = 'assets/images/profile.png';
 
 }

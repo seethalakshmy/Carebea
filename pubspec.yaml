@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  auto_route: ^5.0.4
+  auto_route: 5.0.2
   flutter_bloc: ^8.1.1
   json_annotation: ^4.6.0
   freezed_annotation: ^2.1.0
@@ -39,6 +39,11 @@ dependencies:
     path: package/flutterx
   cupertino_icons: ^1.0.2
   google_fonts:
+  flutter_switch: ^0.3.2
+  dotted_border: ^2.0.0+3
+  percent_indicator: ^4.2.3
+  number_paginator: ^0.2.3
+
 
 dev_dependencies:
   flutter_test:
@@ -48,7 +53,10 @@ dev_dependencies:
   json_serializable: ^6.3.1
   retrofit_generator: ^4.0.1
   freezed: ^2.1.0+1
-  auto_route_generator:
+  auto_route_generator: 5.0.2
+
+
+
 
 
 flutter:

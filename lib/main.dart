@@ -1,14 +1,16 @@
 import 'dart:ui';
 
+import 'package:admin_580_tech/application/bloc/form_validation/form_validation_bloc.dart';
 import 'package:admin_580_tech/application/bloc/theme/theme_mode_bloc.dart';
 import 'package:admin_580_tech/core/hive/hive_utils.dart';
 import 'package:admin_580_tech/core/theme.dart';
-import 'package:admin_580_tech/presenation/routes/app_router.gr.dart';
+import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_web_plugins/url_strategy.dart';
+import 'package:retrofit/http.dart';
 
 import 'core/config/environment.dart';
 
@@ -34,15 +36,12 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    
-    init();
 
+    init();
   }
 
-
-
   Future<void> init() async {
-    String environment =  const String.fromEnvironment(
+    String environment = const String.fromEnvironment(
       'ENVIRONMENT',
       defaultValue: Environment.dEV,
     );
@@ -63,8 +62,9 @@ class _MyAppState extends State<MyApp> {
               initial: () => const SizedBox.shrink(),
               success: (themeMode) {
                 return MaterialApp.router(
-                  routerDelegate: AutoRouterDelegate(_appRouter),
+                  routerDelegate: _appRouter.delegate(),
                   routeInformationParser: _appRouter.defaultRouteParser(),
+                  routeInformationProvider: _appRouter.routeInfoProvider(),
                   debugShowCheckedModeBanner: false,
                   theme: ThemeClass.themeData(themeMode, context),
                   scrollBehavior: const MaterialScrollBehavior().copyWith(

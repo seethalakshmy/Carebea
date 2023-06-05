@@ -24,7 +24,19 @@ class PR {
   borderAll({required double width, required Color color}) =>
       Border.all(color: color, width: width);
 
-  roundedRectangleBorder(double r) =>
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(r));
+  roundedRectangleBorderSide({
+    required double radius,
+    required double borderWidth,
+     required Color borderColor,
+  }) =>
+      RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radius),
+          side: BorderSide(color: borderColor, width: borderWidth));
 
+  roundedRectangleBorder(
+    double r,
+  ) =>
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(r),
+      );
 }
