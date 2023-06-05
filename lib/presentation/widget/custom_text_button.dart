@@ -69,7 +69,7 @@ class CTextButton extends StatelessWidget {
             builder: (isHover) {
               Color color = isHover
                   ? AppColor.darkBlue.val
-                  : AppColor.lightBlue.val;
+                  : AppColor.primaryColor.val;
               return CustomText3(
                 text!,
                 style: TS().gPoppins(

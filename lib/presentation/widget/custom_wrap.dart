@@ -8,6 +8,8 @@ class CWrap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
+
+      direction: Axis.horizontal,
       children: children,
     );
   }

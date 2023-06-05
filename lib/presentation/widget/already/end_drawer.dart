@@ -3,7 +3,6 @@ import 'package:admin_580_tech/application/bloc/theme/theme_mode_bloc.dart';
 import 'package:admin_580_tech/core/hive/hive_keys.dart';
 import 'package:admin_580_tech/core/hive/hive_utils.dart';
 import 'package:admin_580_tech/core/icons.dart';
-import 'package:admin_580_tech/core/image.dart';
 import 'package:admin_580_tech/core/string.dart';
 import 'package:admin_580_tech/presentation/widget/already/svg_icon.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,6 +26,7 @@ class _SettingDrawerState extends State<SettingDrawer> {
       child: Column(
         children: [
           Container(
+            color: Colors.green,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             height: 56,
             child: Row(
@@ -75,7 +75,7 @@ class _SettingDrawerState extends State<SettingDrawer> {
                     ),
                   ),
                   child: Image.asset(
-                    Images.light,
+                   "",
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -91,7 +91,7 @@ class _SettingDrawerState extends State<SettingDrawer> {
                     ),
                   ),
                   child: Image.asset(
-                    Images.dark,
+                    "",
                     fit: BoxFit.cover,
                   ),
                 ),

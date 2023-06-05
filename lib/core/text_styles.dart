@@ -22,15 +22,15 @@ class TS {
    gPoppins({double? fontSize, FontWeight? fontWeight, Color? color}) =>
        GoogleFonts.poppins(
            color: color, fontSize: fontSize, fontWeight: fontWeight,);
+   gRoboto({double? fontSize, FontWeight? fontWeight, Color? color}) =>
+       GoogleFonts.roboto(
+         color: color, fontSize: fontSize, fontWeight: fontWeight,);
+   gInter({double? fontSize, FontWeight? fontWeight, Color? color}) =>
+       GoogleFonts.inter(
+         color: color, fontSize: fontSize, fontWeight: fontWeight,);
 
 
 
-   defaultStyle(BuildContext context){
-     return Theme.of(context)
-         .textTheme
-         .bodyLarge!
-         .copyWith(fontWeight: FW.bold.val);
-   }
 }
 
 

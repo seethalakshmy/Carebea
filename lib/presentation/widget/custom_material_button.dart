@@ -94,7 +94,7 @@ class CustomMaterialButton extends StatelessWidget {
           shape: PR().roundedRectangleBorderSide(
               radius: borderRadius,
               borderWidth: borderWidth,
-              borderColor: AppColor.lightBlue.val),
+              borderColor: AppColor.primaryColor.val),
           minWidth: fullWidth ? double.infinity : minWidth,
           height: height,
           textColor: isHover ? hoverTextColor : textColor,

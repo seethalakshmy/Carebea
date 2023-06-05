@@ -25,13 +25,13 @@ class CachedImage extends StatelessWidget {
       fit: fit,
       height: height,
       width: width,
-      placeholder:  AssetImage(
-       " Assets.person.val",
+      placeholder:   AssetImage(
+       IMG.person.val,
       ),
       imageErrorBuilder: (_, __, ___) => Image.asset(
-        "Assets.person.val",
-        height: DBL.thirty.val,
-        width: DBL.thirty.val,
+        IMG.person.val,
+        height: DBL.forty.val,
+        width: DBL.forty.val,
       ),
       image: CachedNetworkImageProvider(imgUrl!),
     );

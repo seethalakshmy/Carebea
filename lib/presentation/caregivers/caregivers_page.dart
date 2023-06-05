@@ -1,33 +1,38 @@
 import 'package:admin_580_tech/core/color.dart';
 import 'package:admin_580_tech/core/enum.dart';
-import 'package:admin_580_tech/core/image.dart';
 import 'package:admin_580_tech/core/properties.dart';
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/string.dart';
 import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/core/theme.dart';
+import 'package:admin_580_tech/domain/caregivers/model/care_givers.dart';
 import 'package:admin_580_tech/presentation/caregivers/widgets/header_view.dart';
 import 'package:admin_580_tech/presentation/widget/cached_image.dart';
+import 'package:admin_580_tech/presentation/widget/custom_align.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
 import 'package:admin_580_tech/presentation/widget/custom_column.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_data_table_2.dart';
 import 'package:admin_580_tech/presentation/widget/custom_row.dart';
+import 'package:admin_580_tech/presentation/widget/custom_selection_area.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
+import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
 import 'package:admin_580_tech/presentation/widget/custom_wrap.dart';
 import 'package:admin_580_tech/presentation/widget/empty_view.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:flutterx/flutterx.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../application/bloc/caregivers/caregivers_bloc.dart';
-import '../../domain/caregivers/care_givers_response.dart';
+import '../../domain/caregivers/model/caregiver_response.dart';
 import '../../infrastructure/caregivers/caregivers_repository.dart';
 import '../widget/custom_expanded.dart';
 import '../widget/custom_text.dart';
+import '../widget/custom_text_field.dart';
 import '../widget/error_view.dart';
 
 class CareGiversPage extends StatefulWidget {
@@ -42,10 +47,14 @@ class _CareGiversPageState extends State<CareGiversPage> {
 
   List<Caregivers> mCareGiverList = [];
   List<int> shimmerList = List.generate(10, (index) => (index));
-  int totalPages = 1;
+  int totalPages = 40;
   final int _dropValue = 10;
   int _page = 1;
   int pageIndex = 0;
+  final int _start = 0;
+  final int _end = 10;
+  final TextEditingController _searchController = TextEditingController();
+  String userId = "6461c0f33ba4fd69bd494df0";
 
   @override
   void initState() {
@@ -55,7 +64,6 @@ class _CareGiversPageState extends State<CareGiversPage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget? view;
     return CustomColumn(
       children: [
         const HeaderView(),
@@ -63,14 +71,17 @@ class _CareGiversPageState extends State<CareGiversPage> {
         BlocProvider(
           create: (context) => _dataTableBloc
             ..add(CareGiversEvent.getCareGivers(
-                page: INT.one.val, limit: INT.ten.val)),
-          child: _bodyView(view),
+              userId: userId,
+              page: INT.one.val,
+              limit: INT.two.val,
+            )),
+          child: _bodyView(),
         ),
       ],
     );
   }
 
-  CustomCard _bodyView(Widget? view) {
+  CustomCard _bodyView() {
     return CustomCard(
       shape: PR().roundedRectangleBorder(DBL.eighteen.val),
       elevation: DBL.seven.val,
@@ -78,17 +89,11 @@ class _CareGiversPageState extends State<CareGiversPage> {
         padding: const EdgeInsets.all(20),
         child: BlocBuilder<CareGiversBloc, CareGiversState>(
           builder: (context, state) {
-            state.when(loading: () {
-              view = loaderView();
-            }, success: (CaregiversResponse? value) {
-              view = _caregiversView(context, value);
-            }, error: (String? msg, bool? isClientError) {
-              view = ErrorView(
-                errorMessage: msg,
-                isClientError: isClientError,
-              );
-            });
-            return view!;
+            return state.isLoading
+                ? loaderView()
+                : state.isError
+                    ? ErrorView(isClientError: false, errorMessage: state.error)
+                    : _caregiversView(context, state.response);
           },
         ),
       ),
@@ -112,8 +117,10 @@ class _CareGiversPageState extends State<CareGiversPage> {
               CustomSizedBox(
                   height: 950,
                   child: Shimmer.fromColors(
-                    baseColor: Colors.grey[400]!,
-                    highlightColor: Colors.grey[300]!,
+                    // baseColor: Colors.grey[400]!,
+                    // highlightColor: Colors.grey[300]!,
+                    baseColor: AppColor.rowBackgroundColor.val,
+                    highlightColor: AppColor.rowBackgroundColor.val,
                     child: CDataTable2(
                       minWidth: 950,
                       dividerThickness: 1.0,
@@ -123,30 +130,33 @@ class _CareGiversPageState extends State<CareGiversPage> {
                         DataColumn2(
                           size: ColumnSize.S,
                           label: _columnsView(
-                              text: Strings.id, fontWeight: FontWeight.bold),
+                            text: Strings.id,
+                          ),
                         ),
                         DataColumn2(
                           size: ColumnSize.L,
                           label: _columnsView(
-                              text: Strings.name, fontWeight: FontWeight.bold),
+                            text: Strings.name,
+                          ),
+                        ),
+                        DataColumn2(
+                          size: ColumnSize.L,
+                          // fixedWidth: 500,
+                          label: _columnsView(
+                            text: Strings.emailID,
+                          ),
                         ),
                         DataColumn2(
                           size: ColumnSize.L,
                           label: _columnsView(
-                              text: Strings.emailID,
-                              fontWeight: FontWeight.bold),
+                            text: Strings.phoneNo.capitalize(),
+                          ),
                         ),
                         DataColumn2(
                           size: ColumnSize.L,
                           label: _columnsView(
-                              text: Strings.phoneNo.capitalize(),
-                              fontWeight: FontWeight.bold),
-                        ),
-                        DataColumn2(
-                          size: ColumnSize.M,
-                          label: _columnsView(
-                              text: Strings.status,
-                              fontWeight: FontWeight.bold),
+                            text: Strings.status,
+                          ),
                         ),
                       ],
                       rows: shimmerList.asMap().entries.map((e) {
@@ -157,8 +167,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
                             DataCell(_rowsView(text: " ")),
                             DataCell(_rowsView(text: " ")),
                             DataCell(_rowsView(text: " ")),
-                            DataCell(_statusBox(
-                                ColorConst.successDark, " " ?? "No status")),
+                            DataCell(_rowsView(text: " ")),
                           ],
                         );
                       }).toList(),
@@ -167,169 +176,229 @@ class _CareGiversPageState extends State<CareGiversPage> {
             ]));
   }
 
-  _caregiversView(BuildContext context, CaregiversResponse? value) {
+  _caregiversView(BuildContext context, CareGiverResponse? value) {
     if (value?.status ?? false) {
       if (value?.data?.caregivers != null &&
           value!.data!.caregivers!.isNotEmpty) {
-        totalPages = value.data!.pagination!.totals ?? 1;
+        totalPages = value.data?.pagination?.totals ?? 1;
         mCareGiverList.clear();
         mCareGiverList.addAll(value.data?.caregivers ?? []);
       }
     }
-
     return mCareGiverList.isNotEmpty
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              CustomText3(
-                Strings.recent.trim(),
-                style: TS().style(
-                  fontSize: FS.font18.val,
-                  fontWeight: FW.bold.val,
+              CAlign(
+                alignment: EAlignment.topRight.val,
+                child: CTextField(
+                  width: DBL.threeFifteen.val,
+                  height: DBL.forty.val,
+                  controller: _searchController,
+                  hintText: AppString.search.val,
+                  hintStyle: TS().gRoboto(
+                      fontSize: FS.font15.val, fontWeight: FW.w500.val),
+                  suffixIcon: CustomSvg(
+                    path: IMG.search.val,
+                    height: 16,
+                    width: 16,
+                  ),
                 ),
               ),
-              CustomSizedBox(height: DBL.ten.val),
+              CustomSizedBox(height: DBL.fifteen.val),
               CustomSizedBox(
-                height: totalPages < _dropValue
-                    ? (totalPages * 48)
-                    : (_dropValue + 1) * 48,
+                height: (_dropValue + 1) * 48,
                 child: _caregiversTable(),
               ),
               CustomSizedBox(height: DBL.twenty.val),
-              Responsive.isMobile(context)
-                  ? CustomColumn(
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  // alignment: Alignment.centerRight,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomRow(
+                      mainAxisAlignment: EMainAxisAlignment.spaceBetween.val,
                       children: _paginationView(),
-                    )
-                  : CustomRow(
-                      mainAxisAlignment: EMainAxisAlignment.end.val,
-                      children: _paginationView(),
-                    )
+                    ),
+                    CustomSizedBox(width: DBL.fifteen.val,),
+                    CustomText3(
+                        "Showing ${_start + 1} to $_end of $totalPages entries"),
+                  ],
+                ),
+              )
             ],
           )
         : const EmptyView(title: "No caregivers found!");
   }
 
-  CDataTable2 _caregiversTable() {
-    return CDataTable2(
-      minWidth: 950,
-      dividerThickness: 1.0,
-      headingRowHeight: 48,
-      dataRowHeight: 48,
-      columns: [
-        DataColumn2(
-          size: ColumnSize.S,
-          label: _columnsView(text: Strings.id, fontWeight: FontWeight.bold),
-        ),
-        DataColumn2(
-          size: ColumnSize.L,
-          label: _columnsView(text: Strings.name, fontWeight: FontWeight.bold),
-        ),
-        DataColumn2(
-          size: ColumnSize.L,
-          label:
-              _columnsView(text: Strings.emailID, fontWeight: FontWeight.bold),
-        ),
-        DataColumn2(
-          size: ColumnSize.L,
-          label: _columnsView(
-              text: Strings.phoneNo.capitalize(), fontWeight: FontWeight.bold),
-        ),
-        DataColumn2(
-          size: ColumnSize.M,
-          label:
-              _columnsView(text: Strings.status, fontWeight: FontWeight.bold),
-        ),
-      ],
-      rows: mCareGiverList.asMap().entries.map((e) {
-        setIndex(e.key);
-        var item = e.value;
-        return DataRow2(
-          cells: [
-            DataCell(_rowsView(text: pageIndex.toString())),
-            DataCell(_tableRowImage(
-                "${item.name?.firstName} ${item.name?.lastName}",
-                item.profile ?? "")),
-            DataCell(_rowsView(text: item.email ?? "")),
-            DataCell(_rowsView(text: item.mobile)),
-            DataCell(_statusBox(
-                ColorConst.successDark, item.onBoardingStatus ?? "No status")),
-          ],
-        );
-      }).toList(),
+  _caregiversTable() {
+    return CSelectionArea(
+      child: CDataTable2(
+        minWidth: 950,
+        dividerThickness: .3,
+        headingRowHeight: 48,
+        dataRowHeight: 60,
+        columns: [
+          DataColumn2(
+            size: ColumnSize.S,
+            fixedWidth: 80,
+            label: _columnsView(
+                text: AppString.id.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(
+                text: AppString.firstName.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(
+                text: AppString.lastName.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(
+                text: AppString.emailAddress.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(
+                text: AppString.phoneNumber.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            // size: ColumnSize.L,
+            fixedWidth: 150,
+            label: _columnsView(
+                text: AppString.status.val, fontWeight: FontWeight.bold),
+          ),
+          const DataColumn2(
+            size: ColumnSize.L,
+            label: CustomText3(""),
+          ),
+        ],
+        rows: mCareGiverList.asMap().entries.map((e) {
+          setIndex(e.key);
+          var item = e.value;
+          return DataRow2(
+            cells: [
+              DataCell(_rowsView(
+                text: pageIndex.toString(),
+              )),
+              DataCell(_tableRowImage(
+                  item.name?.firstName ?? "", item.profile ?? "")),
+              DataCell(_rowsView(text: item.name?.lastName ?? "")),
+              DataCell(_rowsView(text: item.email ?? "")),
+              DataCell(_rowsView(text: item.mobile)),
+              DataCell(_statusBox(e.value)),
+              DataCell(Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                      onTap: () {},
+                      child: CustomSvg(
+                        path: IMG.eye.val,
+                        height:Responsive.isWeb(context)? DBL.fifteen.val:DBL.twelve.val,
+                        width: Responsive.isWeb(context)?DBL.twenty.val:DBL.eighteen.val,
+                      )),
+                  CustomSizedBox(
+                    width: DBL.twentyThree.val,
+                  ),
+                  InkWell(
+                      onTap: () {},
+                      child: CustomSvg(
+                        path: IMG.edit.val,
+                        height:Responsive.isWeb(context)? DBL.fifteen.val:DBL.twelve.val,
+                        width:Responsive.isWeb(context)? DBL.fifteen.val:DBL.twelve.val,
+                      )),
+                  CustomSizedBox(
+                    width: DBL.twentyThree.val,
+                  ),
+                  InkWell(
+                      onTap: () {},
+                      child: CustomSvg(
+                        path: IMG.delete.val,
+                        height:Responsive.isWeb(context)? DBL.nineteen.val:DBL.seventeen.val,
+                        width: Responsive.isWeb(context)? DBL.nineteen.val:DBL.seventeen.val,
+                      )),
+                ],
+              )),
+            ],
+          );
+        }).toList(),
+      ),
     );
   }
 
   List<Widget> _paginationView() {
     return [
-      SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: CustomRow(
-          mainAxisAlignment: EMainAxisAlignment.center.val,
-          children: [
-            FxButton(
-              onPressed: () {
-                if (_page > 1) {
-                  _page = _page - 1;
-                  _dataTableBloc.add(CareGiversEvent.getCareGivers(
-                      page: _page, limit: INT.ten.val));
-                }
-              },
-              text: 'Previous',
-              borderRadius: 0.0,
-              borderWidth: 0.0,
-              color: ColorConst.white,
-              textColor: isDark
-                  ? null
-                  : Theme.of(context).colorScheme.onPrimaryContainer,
-            ),
-            CWrap(
-              children: List.generate(
-                (totalPages / _dropValue).ceil(),
-                (index) {
-                  int pageIndex = index + 1;
-                  return FxButton(
-                    text: pageIndex.toString(),
-                    borderRadius: 0.0,
-                    minWidth: 16.0,
-                    color: _page == pageIndex
-                        ? isDark
-                            ? Theme.of(context).colorScheme.inversePrimary
-                            : Theme.of(context).colorScheme.onPrimaryContainer
-                        : ColorConst.white,
-                    textColor: _page == pageIndex
-                        ? ColorConst.white
-                        : isDark
-                            ? null
-                            : Theme.of(context).colorScheme.onPrimaryContainer,
-                    borderWidth: 0.0,
-                    onPressed: () {
-                      _page = pageIndex;
+      CustomRow(
+        mainAxisAlignment: EMainAxisAlignment.center.val,
+        children: [
+          FxButton(
+            onPressed: () {
+              if (_page > 1) {
+                _page = _page - 1;
+                _dataTableBloc.add(CareGiversEvent.getCareGivers(
+                    userId: userId, page: _page, limit: INT.ten.val));
+              }
+            },
+            text: 'Previous',
+            borderRadius: 0.0,
+            borderWidth: 0.0,
+            color: ColorConst.white,
+            textColor: isDark
+                ? null
+                : Theme.of(context).colorScheme.onPrimaryContainer,
+          ),
+          CWrap(
+            children: List.generate(
+              (totalPages / _dropValue).ceil(),
+              (index) {
+                int pageIndex = index + 1;
+                return FxButton(
+                  text: pageIndex.toString(),
+                  borderRadius: 0.0,
+                  minWidth: 16.0,
+                  color: _page == pageIndex
+                      ? isDark
+                          ? Theme.of(context).colorScheme.inversePrimary
+                          : Theme.of(context).colorScheme.onPrimaryContainer
+                      : ColorConst.white,
+                  textColor: _page == pageIndex
+                      ? ColorConst.white
+                      : isDark
+                          ? null
+                          : Theme.of(context).colorScheme.onPrimaryContainer,
+                  borderWidth: 0.0,
+                  onPressed: () {
+                    _page = pageIndex;
 
-                      _dataTableBloc.add(CareGiversEvent.getCareGivers(
-                          page: _page, limit: INT.ten.val));
-                    },
-                  );
-                },
-              ),
-            ),
-            FxButton(
-              onPressed: () {
-                if (_page <= (totalPages / _dropValue).ceil() - 1) {
-                  _page = _page + 1;
-                  _dataTableBloc.add(CareGiversEvent.getCareGivers(
-                      page: _page, limit: INT.ten.val));
-                }
+                    _dataTableBloc.add(CareGiversEvent.getCareGivers(
+                        userId: userId, page: _page, limit: INT.ten.val));
+                  },
+                );
               },
-              text: Strings.next,
-              borderRadius: 0.0,
-              borderWidth: 0.0,
-              color: ColorConst.white,
-              textColor: isDark
-                  ? null
-                  : Theme.of(context).colorScheme.onPrimaryContainer,
             ),
-          ],
-        ),
+          ),
+          FxButton(
+            onPressed: () {
+              if (_page <= (totalPages / _dropValue).ceil() - 1) {
+                _page = _page + 1;
+                _dataTableBloc.add(CareGiversEvent.getCareGivers(
+                    userId: userId, page: _page, limit: INT.ten.val));
+              }
+            },
+            text: Strings.next,
+            borderRadius: 0.0,
+            borderWidth: 0.0,
+            color: ColorConst.white,
+            textColor: isDark
+                ? null
+                : Theme.of(context).colorScheme.onPrimaryContainer,
+          ),
+        ],
       )
     ];
   }
@@ -340,17 +409,24 @@ class _CareGiversPageState extends State<CareGiversPage> {
     return CustomText3(
       '$text',
       softWrap: true,
-      style: TS().style(fontSize: DBL.thirteen.val, fontWeight: FW.w500.val),
-      textAlign: TA.center.val,
+      style: TS().gRoboto(
+          fontSize:Responsive.isWeb(context)? DBL.thirteenPointFive.val: DBL.twelve.val,
+
+        fontWeight: FW.w400.val,
+          color: AppColor.rowColor.val),
+      textAlign: TA.start.val,
     );
   }
 
   Widget _columnsView(
-      {String? text, FontWeight? fontWeight = FontWeight.w700}) {
+      {String? text, FontWeight? fontWeight = FontWeight.w600}) {
     return CustomText3(
       '$text',
       softWrap: true,
-      style: TS().style(fontSize: DBL.fifteen.val, fontWeight: FW.w700.val),
+      style: TS().gRoboto(
+          fontSize:Responsive.isWeb(context)? DBL.fourteen.val: DBL.twelve.val,
+          fontWeight: fontWeight,
+          color: AppColor.columColor.val),
       textAlign: TA.center.val,
     );
   }
@@ -364,28 +440,48 @@ class _CareGiversPageState extends State<CareGiversPage> {
           child: CachedImage(
               height: DBL.thirty.val, width: DBL.thirty.val, imgUrl: imgUrl),
         ),
-        CustomSizedBox(width: DBL.ten.val),
+        CustomSizedBox(width: DBL.twelve.val),
         CExpanded(
           child: CustomText3(
             text,
-            style:
-                TS().style(fontSize: DBL.thirteen.val, fontWeight: FW.w500.val),
+            style: TS().gRoboto(
+                fontSize:Responsive.isWeb(context)? DBL.fourteen.val: DBL.twelve.val,
+    fontWeight: FW.w400.val,
+                color: AppColor.rowColor.val),
           ),
         ),
       ],
     );
   }
 
-  Widget _statusBox(
-    Color? color,
-    String text,
-  ) {
-    return CustomText3(
-      text,
-      style: TS().style(
-        fontWeight: FW.w700.val,
-        color: color,
-      ),
+  _statusBox(Caregivers item) {
+    return Row(
+      children: [
+        FlutterSwitch(
+          width: 40.0,
+          height: 24.0,
+          valueFontSize: 0,
+          toggleSize: 14.0,
+          value: item.onBoardingStatus ?? false,
+          activeColor: AppColor.green.val,
+          inactiveColor: AppColor.lightGrey.val,
+          borderRadius: 30.0,
+          onToggle: (val) {
+            _dataTableBloc.add(CareGiversEvent.isUserActive(item));
+          },
+        ),
+        const SizedBox(
+          width: 8,
+        ),
+        CustomText3(
+          item.onBoardingStatus! ? "Active" : "Inactive",
+          style: TS().gRoboto(
+              color:
+                  item.onBoardingStatus! ? AppColor.green.val : AppColor.inactive.val,
+              fontSize: 12,
+              fontWeight: FW.w600.val),
+        )
+      ],
     );
   }
 
@@ -396,4 +492,6 @@ class _CareGiversPageState extends State<CareGiversPage> {
       pageIndex = ((_page * _dropValue) - 10) + index + 1;
     }
   }
+
+
 }

@@ -32,7 +32,7 @@ class FxButton extends StatelessWidget {
   final double? hoverElevation;
   final Color? color;
   final Color? hoverColor;
-
+  final TextStyle? textStyle;
   const FxButton({
     Key? key,
     this.buttonType,
@@ -59,6 +59,7 @@ class FxButton extends StatelessWidget {
     this.hoverElevation,
     this.color,
     this.hoverColor,
+    this.textStyle,
   })  : assert((fullWidth && minWidth == null) ||
             (!fullWidth && minWidth != null) ||
             (!fullWidth && minWidth == null)),
@@ -71,7 +72,7 @@ class FxButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final double scale = MediaQuery.maybeOf(context)?.textScaleFactor ?? 1;
     final double gap =
-        scale <= 1 ? 8 : lerpDouble(8, 4, math.min(scale - 1, 1))!;
+        scale <= 1 ? 4 : lerpDouble(8, 4, math.min(scale - 1, 1))!;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return TranslateOnHover(
@@ -120,7 +121,7 @@ class FxButton extends StatelessWidget {
                   ? Flexible(
                       child: Text(
                         text!,
-                        style: TextStyle(fontWeight: textWeight),
+                        style:textStyle,
                       ),
                     )
                   : FxBox.shrink,

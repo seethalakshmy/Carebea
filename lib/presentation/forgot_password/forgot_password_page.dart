@@ -3,7 +3,6 @@ import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
-import 'package:admin_580_tech/presentation/widget/already/custom_text_field.dart';
 import 'package:admin_580_tech/presentation/widget/custom_center.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
@@ -20,6 +19,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../widget/custom_column.dart';
 import '../widget/custom_scroll_view.dart';
+import '../widget/custom_text_field.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
@@ -84,7 +84,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   CustomContainer _part1View(Size size, BuildContext context) {
     return CustomContainer(
       width: DBL.fiveFifty.val,
-      color: AppColor.lightBlue.val,
+      color: AppColor.primaryColor.val,
       height: size.height,
       child: _careGiverView(size),
     );
@@ -152,7 +152,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   }
 
   CustomText3 _emailLabel() {
-    return CustomText3(AppString.email.val,
+    return CustomText3(AppString.emailAddress.val,
         style: TS().style(
             fontWeight: FW.w400.val,
             color: AppColor.label.val,
@@ -193,7 +193,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       borderRadius: DBL.eight.val,
       height: DBL.sixty.val,
       minWidth: DBL.fourFifty.val,
-      color: AppColor.lightBlue.val,
+      color: AppColor.primaryColor.val,
       onPressed: () {
         if (_validateMode != EAutoValidate.always.val) {
           _validationBloc.add(const FormValidationEvent.submit());

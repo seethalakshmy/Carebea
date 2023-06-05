@@ -19,33 +19,35 @@ class _ApiClient implements ApiClient {
   String? baseUrl;
 
   @override
-  Future<CaregiversResponse> getCareGivers(
+  Future<CareGiverResponse> getCareGivers(
     token,
+    userId,
     page,
     limit,
   ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'page': page,
-      r'limit': limit,
-    };
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'page': page,
+      'limit': limit,
+    };
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<CaregiversResponse>(Options(
-      method: 'GET',
+        .fetch<Map<String, dynamic>>(_setStreamType<CareGiverResponse>(Options(
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/care-giver/all-registered-caregivers',
+              '/get-care-givers',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CaregiversResponse.fromJson(_result.data!);
+    final value = CareGiverResponse.fromJson(_result.data!);
     return value;
   }
 

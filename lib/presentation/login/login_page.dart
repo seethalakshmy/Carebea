@@ -2,7 +2,6 @@ import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
-import 'package:admin_580_tech/presentation/widget/already/custom_text_field.dart';
 import 'package:admin_580_tech/presentation/widget/custom_align.dart';
 import 'package:admin_580_tech/presentation/widget/custom_center.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
@@ -22,6 +21,7 @@ import '../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../routes/app_router.gr.dart';
 import '../widget/custom_column.dart';
 import '../widget/custom_scroll_view.dart';
+import '../widget/custom_text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
   CustomContainer _part1View(Size size, BuildContext context) {
     return CustomContainer(
       width: DBL.fiveFifty.val,
-      color: AppColor.lightBlue.val,
+      color: AppColor.primaryColor.val,
       height: size.height,
       child: _careGiverView(size),
     );
@@ -169,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
             onPressed: () {
               context.router.navigate(const ForgotPasswordRoute());
             },
-            color: AppColor.lightBlue.val),
+            color: AppColor.primaryColor.val),
       ),
     );
   }
@@ -183,7 +183,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   CustomText3 _emailLabel() {
-    return CustomText3(AppString.email.val,
+    return CustomText3(AppString.emailAddress.val,
         style: TS().style(
             fontWeight: FW.w400.val,
             color: AppColor.label.val,
@@ -244,7 +244,7 @@ class _LoginPageState extends State<LoginPage> {
       borderRadius: DBL.eight.val,
       height: DBL.sixty.val,
       minWidth: DBL.fourFifty.val,
-      color: AppColor.lightBlue.val,
+      color: AppColor.primaryColor.val,
       onPressed: () {
        checkInputData();
       },
@@ -256,7 +256,7 @@ class _LoginPageState extends State<LoginPage> {
       _validationBloc.add(const FormValidationEvent.submit());
     }
     if(_formKey.currentState!.validate()){
-      context.router.navigate(const MenuBarView());
+      context.router.replace(const MenuBarView());
     }
   }
 
