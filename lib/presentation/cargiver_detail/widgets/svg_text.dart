@@ -1,7 +1,6 @@
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
-import 'package:admin_580_tech/presentation/widget/custom_row.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
@@ -23,7 +22,7 @@ class SVGText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomRow(
+    return Row(
       children: [
         CustomSvg(
           path: path,

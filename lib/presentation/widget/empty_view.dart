@@ -34,7 +34,7 @@ class EmptyView extends StatelessWidget {
             ),
             FxBox.h48,
             Text(
-              title ?? "",
+              title ,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 21,

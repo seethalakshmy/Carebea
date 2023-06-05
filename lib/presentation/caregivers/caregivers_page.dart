@@ -11,10 +11,8 @@ import 'package:admin_580_tech/presentation/caregivers/widgets/header_view.dart'
 import 'package:admin_580_tech/presentation/widget/cached_image.dart';
 import 'package:admin_580_tech/presentation/widget/custom_align.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
-import 'package:admin_580_tech/presentation/widget/custom_column.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_data_table_2.dart';
-import 'package:admin_580_tech/presentation/widget/custom_row.dart';
 import 'package:admin_580_tech/presentation/widget/custom_selection_area.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
@@ -30,7 +28,6 @@ import 'package:shimmer/shimmer.dart';
 import '../../application/bloc/caregivers/caregivers_bloc.dart';
 import '../../domain/caregivers/model/caregiver_response.dart';
 import '../../infrastructure/caregivers/caregivers_repository.dart';
-import '../widget/custom_expanded.dart';
 import '../widget/custom_text.dart';
 import '../widget/custom_text_field.dart';
 import '../widget/error_view.dart';
@@ -64,7 +61,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomColumn(
+    return Column(
       children: [
         const HeaderView(),
         CustomSizedBox(height: DBL.twenty.val),
@@ -217,7 +214,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
                   // alignment: Alignment.centerRight,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CustomRow(
+                    Row(
                       mainAxisAlignment: EMainAxisAlignment.spaceBetween.val,
                       children: _paginationView(),
                     ),
@@ -333,7 +330,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
 
   List<Widget> _paginationView() {
     return [
-      CustomRow(
+      Row(
         mainAxisAlignment: EMainAxisAlignment.center.val,
         children: [
           FxButton(
@@ -432,7 +429,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
   }
 
   Widget _tableRowImage(String text, String imgUrl) {
-    return CustomRow(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         ClipRRect(
@@ -441,7 +438,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
               height: DBL.thirty.val, width: DBL.thirty.val, imgUrl: imgUrl),
         ),
         CustomSizedBox(width: DBL.twelve.val),
-        CExpanded(
+        Expanded(
           child: CustomText3(
             text,
             style: TS().gRoboto(

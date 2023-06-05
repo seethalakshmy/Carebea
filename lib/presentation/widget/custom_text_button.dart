@@ -1,8 +1,7 @@
 import 'dart:math' as math;
 import 'dart:ui' show lerpDouble;
 
-import 'package:admin_580_tech/presentation/widget/custom_flexible.dart';
-import 'package:admin_580_tech/presentation/widget/custom_row.dart';
+
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:flutter/material.dart';
 

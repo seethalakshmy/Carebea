@@ -4,7 +4,7 @@ import 'package:admin_580_tech/core/hive/hive_keys.dart';
 import 'package:admin_580_tech/core/hive/hive_utils.dart';
 import 'package:admin_580_tech/core/icons.dart';
 import 'package:admin_580_tech/core/string.dart';
-import 'package:admin_580_tech/presentation/widget/already/svg_icon.dart';
+import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +26,6 @@ class _SettingDrawerState extends State<SettingDrawer> {
       child: Column(
         children: [
           Container(
-            color: Colors.green,
             padding: const EdgeInsets.symmetric(horizontal: 16),
             height: 56,
             child: Row(
@@ -43,7 +42,7 @@ class _SettingDrawerState extends State<SettingDrawer> {
                   onTap: () {
                     widget.scaffoldKey.currentState!.closeEndDrawer();
                   },
-                  child: const SvgIcon(icon: IconlyBroken.closeSquare),
+                  child: const CustomSvg(path: IconlyBroken.closeSquare),
                 ),
               ],
             ),

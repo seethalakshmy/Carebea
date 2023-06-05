@@ -1,8 +1,6 @@
 import 'dart:math' as math;
 import 'dart:ui' show lerpDouble;
 
-import 'package:admin_580_tech/presentation/widget/custom_flexible.dart';
-import 'package:admin_580_tech/presentation/widget/custom_row.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:flutter/material.dart';
 
@@ -98,7 +96,7 @@ class CustomMaterialButton extends StatelessWidget {
           minWidth: fullWidth ? double.infinity : minWidth,
           height: height,
           textColor: isHover ? hoverTextColor : textColor,
-          child: CustomRow(
+          child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               icon ?? CustomSizedBox.shrink(),
@@ -106,7 +104,7 @@ class CustomMaterialButton extends StatelessWidget {
                   ? CustomSizedBox(width: gap)
                   : CustomSizedBox.shrink(),
               text != null
-                  ? CFlexible(
+                  ? Flexible(
                       child: CustomText3(
                         text!,
                         style: TS().gPoppins(

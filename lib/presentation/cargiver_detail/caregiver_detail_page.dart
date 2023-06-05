@@ -7,9 +7,7 @@ import 'package:admin_580_tech/presentation/cargiver_detail/views/assigned_servi
 import 'package:admin_580_tech/presentation/cargiver_detail/widgets/service_completion_and_rewards.dart';
 import 'package:admin_580_tech/presentation/cargiver_detail/widgets/svg_text.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
-import 'package:admin_580_tech/presentation/widget/custom_column.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
-import 'package:admin_580_tech/presentation/widget/custom_expanded.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
@@ -21,7 +19,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import '../../core/responsive.dart';
-import '../widget/custom_row.dart';
 import '../widget/dotted_container.dart';
 
 class CareGiverDetailPage extends StatefulWidget {
@@ -76,7 +73,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                       left: 25,
                       top: 30,
                       right: 20,
-                      child: CustomColumn(
+                      child: Column(
                           crossAxisAlignment: ECrossAxisAlignment.start.val,
                           children: [
                             Stack(
@@ -225,7 +222,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                                                 CustomSizedBox(
                                                   width: DBL.five.val,
                                                 ),
-                                                CExpanded(
+                                                Expanded(
                                                   child: CustomText3(
                                                     "Pending documents ",
                                                     style: TS().gRoboto(
@@ -245,7 +242,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                                                 CustomSizedBox(
                                                   width: DBL.twentyEight.val,
                                                 ),
-                                                CExpanded(
+                                                Expanded(
                                                   child: CustomText3(
                                                     "COVID - 19 Vaccination  |  BLS CPR/First Aid Certification",
                                                     style: TS().gRoboto(

@@ -17,8 +17,6 @@ import '../../widget/custom_align.dart';
 import '../../widget/custom_card.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_data_table_2.dart';
-import '../../widget/custom_expanded.dart';
-import '../../widget/custom_row.dart';
 import '../../widget/custom_selection_area.dart';
 import '../../widget/custom_sizedbox.dart';
 import '../../widget/custom_svg.dart';
@@ -61,7 +59,7 @@ class _AssignedServicesState extends State<AssignedServices> {
                       isClientError: false, errorMessage: widget.state.error)
                   : _caregiversView(
                       context,
-                      widget.mAssignedServices ?? [],
+                      widget.mAssignedServices,
                     )),
     );
   }
@@ -162,7 +160,7 @@ class _AssignedServicesState extends State<AssignedServices> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   CustomSizedBox(height: DBL.four.val,),
-                  CustomRow(
+                  Row(
                     crossAxisAlignment: ECrossAxisAlignment.center.val,
                     mainAxisAlignment: EMainAxisAlignment.spaceBetween.val,
                     children: [
@@ -332,7 +330,7 @@ class _AssignedServicesState extends State<AssignedServices> {
   }
 
   Widget _tableRowImage(String text, String imgUrl) {
-    return CustomRow(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         ClipRRect(
@@ -341,7 +339,7 @@ class _AssignedServicesState extends State<AssignedServices> {
               height: DBL.thirty.val, width: DBL.thirty.val, imgUrl: imgUrl),
         ),
         CustomSizedBox(width: DBL.twelve.val),
-        CExpanded(
+        Expanded(
           child: CustomText3(
             text,
             style: TS().gRoboto(

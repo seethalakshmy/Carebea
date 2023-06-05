@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
 import 'package:admin_580_tech/infrastructure/caregiver_detail/caregiver_detail_repository.dart';

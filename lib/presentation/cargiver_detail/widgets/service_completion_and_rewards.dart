@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../../../core/enum.dart';
 import '../../../core/responsive.dart';
-import '../../widget/custom_column.dart';
 import '../../widget/custom_sizedbox.dart';
 import '../../widget/custom_text.dart';
 import '../../widget/dotted_container.dart';
@@ -25,7 +24,7 @@ class ServiceRewardAndCompletion extends StatelessWidget {
     return DottedContainer(
       height: height?? DBL.ninetyTwo.val,
       width: DBL.hundredFiftyEight.val,
-      child: CustomColumn(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomText3(title,style: TS().gRoboto(fontWeight: FW.w500.val,fontSize:getFontSize(context, fontSize: FS.font20.val) ,color:AppColor.matBlack.val ),),

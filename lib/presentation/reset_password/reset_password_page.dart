@@ -7,7 +7,6 @@ import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
 import 'package:admin_580_tech/presentation/widget/custom_material_button.dart';
-import 'package:admin_580_tech/presentation/widget/custom_row.dart';
 import 'package:admin_580_tech/presentation/widget/custom_selection_area.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
@@ -17,7 +16,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../core/custom_debugger.dart';
-import '../widget/custom_column.dart';
 import '../widget/custom_scroll_view.dart';
 import '../widget/custom_text_field.dart';
 
@@ -68,7 +66,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
   CScrollView webView(BuildContext context, Size size) {
     return CScrollView(
-        child: CustomRow(
+        child:Row(
           children: [
             _part1View(size, context),
             _part2View(size),
@@ -108,7 +106,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
           child: CForm(
             formKey: _formKey,
             autoValidateMode: _validateMode,
-            child: CustomColumn(
+            child: Column(
               mainAxisAlignment: EMainAxisAlignment.center.val,
               crossAxisAlignment: ECrossAxisAlignment.start.val,
               children: [

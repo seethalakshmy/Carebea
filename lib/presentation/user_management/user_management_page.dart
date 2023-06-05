@@ -19,7 +19,6 @@ import '../widget/custom_align.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_data_table_2.dart';
-import '../widget/custom_expanded.dart';
 import '../widget/custom_icon.dart';
 import '../widget/custom_material_button.dart';
 import '../widget/custom_selection_area.dart';
@@ -452,7 +451,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
               height: DBL.thirty.val, width: DBL.thirty.val, imgUrl: imgUrl),
         ),
         CustomSizedBox(width: DBL.twelve.val),
-        CExpanded(
+        Expanded(
           child: CustomText3(
             text,
             style: TS().gRoboto(
