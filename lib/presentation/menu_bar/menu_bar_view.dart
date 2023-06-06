@@ -26,6 +26,7 @@ import '../../core/const.dart';
 import '../../core/icons.dart';
 import '../../core/string.dart';
 import '../caregivers/caregivers_page.dart';
+import '../transaction_management/transaction_management_page.dart';
 import '../user_management/user_management_page.dart';
 import '../widget/end_drawer.dart';
 
@@ -50,6 +51,7 @@ class _MenuBarState extends State<MenuBarView> {
     AppString.dashboard.val: "",
     AppString.careGiverManagement.val: "",
     AppString.userManagement.val: "",
+    AppString.transactionManagement.val: "",
   };
 
   final List<String> _items = [
@@ -63,7 +65,7 @@ class _MenuBarState extends State<MenuBarView> {
     DashboardRoute(),
     CareGiversRoute(),
     UserManagementRoute(),
-
+    TransactionManagementRoute(),
   ];
 
   // TextDirection _layout = TextDirection.ltr;
@@ -440,6 +442,8 @@ class _MenuBarState extends State<MenuBarView> {
       return 1;
     }else if(route == AppString.userManagement.val){
       return 2;
+    }else if(route==AppString.transactionManagement.val){
+      return 3;
     }
     // else if (route == Strings.dataTable) {
     //   return 2;
@@ -479,6 +483,8 @@ class _MenuBarState extends State<MenuBarView> {
     }
     else if (index == 2) {
       return const UserManagementPage();
+    }else if(index == 3){
+      return const TransactionManagementPage();
     }
     // else if (index == 3) {
     //   return  InvoicePage();

@@ -18,6 +18,7 @@ enum AppString {
   dashboard("Dashboard"),
   careGiverManagement("Caregiver Management"),
   userManagement("User Management"),
+  transactionManagement("Transaction Management"),
   id("ID"),
   slNo("SL No"),
   firstName("First Name"),
@@ -36,10 +37,21 @@ enum AppString {
   active("Active"),
   inActive("Inactive"),
   clientsCustomer("Clients/Customers"),
+  transaction("Transaction"),
   role("Role"),
   previous("Previous"),
   next("Next"),
   create("Create"),
+  transactionId("Transaction Id"),
+  serviceId("Service Id"),
+  transactionType("Transaction Type"),
+  paidFor("Paid For"),
+  paidTo("Paid To"),
+  receivedFrom("Received From"),
+  amount("Amount"),
+  overallTransactions("Overall Transactions"),
+  allTransactions("All Transactions"),
+  cancel("Cancel"),
 
   ///validations
   emptyEmail("Email address shouldn't be empty"),
@@ -133,6 +145,8 @@ enum IMG {
 
 ///font size
 enum FS {
+  font07(07.0),
+  font08(08.0),
   font11(11.0),
   font12(12.0),
   font13(13.0),
@@ -196,6 +210,7 @@ enum DBL {
   ten(10.0),
   eleven(11.0),
   twelve(12.0),
+  twelvePointFive(12.5),
   thirteen(13.0),
   thirteenPointFive(13.5),
   fourteen(14.0),

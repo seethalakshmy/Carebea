@@ -8,6 +8,7 @@ import '../caregivers/caregivers_page.dart';
 import '../dashboard/dashboard_page.dart';
 import '../login/login_page.dart';
 import '../menu_bar/menu_bar_view.dart';
+import '../transaction_management/transaction_management_page.dart';
 
 @AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route',
@@ -35,6 +36,7 @@ import '../menu_bar/menu_bar_view.dart';
         AutoRoute(path: 'caregiver-management', page: CareGiversPage,),
         AutoRoute(path: 'caregiver-detail', page: CareGiverDetailPage,),
         AutoRoute(path: 'user-management', page: UserManagementPage,),
+        AutoRoute(path: 'transaction-management', page: TransactionManagementPage,),
       ],
     ),
   ],
