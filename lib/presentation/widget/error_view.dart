@@ -1,11 +1,14 @@
 import 'package:admin_580_tech/core/color.dart';
+import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/string.dart';
 import 'package:admin_580_tech/core/theme.dart';
-import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
+import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutterx/flutterx.dart';
+
+import '../routes/app_router.gr.dart';
+import 'custom_button.dart';
 
 class ErrorView extends StatelessWidget {
   const ErrorView({
@@ -26,18 +29,18 @@ class ErrorView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            FxBox.h32,
-            SizedBox(
-              height: 300,
-              width: 400,
+            CustomSizedBox(height: DBL.thirty.val,),
+            CustomSizedBox(
+              height: DBL.threeHundred.val,
+              width: DBL.fourHundred.val,
               child: SvgPicture.asset('assets/images/error-500.svg'),
             ),
-            FxBox.h48,
+            CustomSizedBox(height: DBL.fortyEight.val,),
             Text(
               errorMessage ?? "",
-              style: const TextStyle(
+              style:  TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 21,
+                fontSize: FS.font21.val,
               ),
             ),
             Text(
@@ -50,10 +53,10 @@ class ErrorView extends StatelessWidget {
                 fontSize: 14,
               ),
             ),
-            FxBox.h24,
+            CustomSizedBox(height: DBL.twentyFour.val,),
             Visibility(
               visible: !isClientError!,
-              child: FxButton(
+              child: CustomButton(
                 text: Strings.backToDashBoard,
                 borderRadius: 15,
                 padding:

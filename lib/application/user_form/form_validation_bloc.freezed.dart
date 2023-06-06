@@ -469,7 +469,7 @@ mixin _$FormValidationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String value) dropeDownSuccess,
+    required TResult Function(String value) dropDownSuccess,
     required TResult Function(bool value) checkBoxSuccess,
     required TResult Function() formSubmitSuccess,
   }) =>
@@ -477,7 +477,7 @@ mixin _$FormValidationState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String value)? dropeDownSuccess,
+    TResult? Function(String value)? dropDownSuccess,
     TResult? Function(bool value)? checkBoxSuccess,
     TResult? Function()? formSubmitSuccess,
   }) =>
@@ -485,7 +485,7 @@ mixin _$FormValidationState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String value)? dropeDownSuccess,
+    TResult Function(String value)? dropDownSuccess,
     TResult Function(bool value)? checkBoxSuccess,
     TResult Function()? formSubmitSuccess,
     required TResult orElse(),
@@ -494,7 +494,7 @@ mixin _$FormValidationState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_DropDownSuccess value) dropeDownSuccess,
+    required TResult Function(_DropDownSuccess value) dropDownSuccess,
     required TResult Function(_CheckBoxSuccess value) checkBoxSuccess,
     required TResult Function(_FormSubmitSuccess value) formSubmitSuccess,
   }) =>
@@ -502,7 +502,7 @@ mixin _$FormValidationState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_DropDownSuccess value)? dropeDownSuccess,
+    TResult? Function(_DropDownSuccess value)? dropDownSuccess,
     TResult? Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult? Function(_FormSubmitSuccess value)? formSubmitSuccess,
   }) =>
@@ -510,7 +510,7 @@ mixin _$FormValidationState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_DropDownSuccess value)? dropeDownSuccess,
+    TResult Function(_DropDownSuccess value)? dropDownSuccess,
     TResult Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult Function(_FormSubmitSuccess value)? formSubmitSuccess,
     required TResult orElse(),
@@ -574,7 +574,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String value) dropeDownSuccess,
+    required TResult Function(String value) dropDownSuccess,
     required TResult Function(bool value) checkBoxSuccess,
     required TResult Function() formSubmitSuccess,
   }) {
@@ -585,7 +585,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String value)? dropeDownSuccess,
+    TResult? Function(String value)? dropDownSuccess,
     TResult? Function(bool value)? checkBoxSuccess,
     TResult? Function()? formSubmitSuccess,
   }) {
@@ -596,7 +596,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String value)? dropeDownSuccess,
+    TResult Function(String value)? dropDownSuccess,
     TResult Function(bool value)? checkBoxSuccess,
     TResult Function()? formSubmitSuccess,
     required TResult orElse(),
@@ -611,7 +611,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_DropDownSuccess value) dropeDownSuccess,
+    required TResult Function(_DropDownSuccess value) dropDownSuccess,
     required TResult Function(_CheckBoxSuccess value) checkBoxSuccess,
     required TResult Function(_FormSubmitSuccess value) formSubmitSuccess,
   }) {
@@ -622,7 +622,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_DropDownSuccess value)? dropeDownSuccess,
+    TResult? Function(_DropDownSuccess value)? dropDownSuccess,
     TResult? Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult? Function(_FormSubmitSuccess value)? formSubmitSuccess,
   }) {
@@ -633,7 +633,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_DropDownSuccess value)? dropeDownSuccess,
+    TResult Function(_DropDownSuccess value)? dropDownSuccess,
     TResult Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult Function(_FormSubmitSuccess value)? formSubmitSuccess,
     required TResult orElse(),
@@ -690,7 +690,7 @@ class _$_DropDownSuccess implements _DropDownSuccess {
 
   @override
   String toString() {
-    return 'FormValidationState.dropeDownSuccess(value: $value)';
+    return 'FormValidationState.dropDownSuccess(value: $value)';
   }
 
   @override
@@ -714,35 +714,35 @@ class _$_DropDownSuccess implements _DropDownSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String value) dropeDownSuccess,
+    required TResult Function(String value) dropDownSuccess,
     required TResult Function(bool value) checkBoxSuccess,
     required TResult Function() formSubmitSuccess,
   }) {
-    return dropeDownSuccess(value);
+    return dropDownSuccess(value);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String value)? dropeDownSuccess,
+    TResult? Function(String value)? dropDownSuccess,
     TResult? Function(bool value)? checkBoxSuccess,
     TResult? Function()? formSubmitSuccess,
   }) {
-    return dropeDownSuccess?.call(value);
+    return dropDownSuccess?.call(value);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String value)? dropeDownSuccess,
+    TResult Function(String value)? dropDownSuccess,
     TResult Function(bool value)? checkBoxSuccess,
     TResult Function()? formSubmitSuccess,
     required TResult orElse(),
   }) {
-    if (dropeDownSuccess != null) {
-      return dropeDownSuccess(value);
+    if (dropDownSuccess != null) {
+      return dropDownSuccess(value);
     }
     return orElse();
   }
@@ -751,35 +751,35 @@ class _$_DropDownSuccess implements _DropDownSuccess {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_DropDownSuccess value) dropeDownSuccess,
+    required TResult Function(_DropDownSuccess value) dropDownSuccess,
     required TResult Function(_CheckBoxSuccess value) checkBoxSuccess,
     required TResult Function(_FormSubmitSuccess value) formSubmitSuccess,
   }) {
-    return dropeDownSuccess(this);
+    return dropDownSuccess(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_DropDownSuccess value)? dropeDownSuccess,
+    TResult? Function(_DropDownSuccess value)? dropDownSuccess,
     TResult? Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult? Function(_FormSubmitSuccess value)? formSubmitSuccess,
   }) {
-    return dropeDownSuccess?.call(this);
+    return dropDownSuccess?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_DropDownSuccess value)? dropeDownSuccess,
+    TResult Function(_DropDownSuccess value)? dropDownSuccess,
     TResult Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult Function(_FormSubmitSuccess value)? formSubmitSuccess,
     required TResult orElse(),
   }) {
-    if (dropeDownSuccess != null) {
-      return dropeDownSuccess(this);
+    if (dropDownSuccess != null) {
+      return dropDownSuccess(this);
     }
     return orElse();
   }
@@ -859,7 +859,7 @@ class _$_CheckBoxSuccess implements _CheckBoxSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String value) dropeDownSuccess,
+    required TResult Function(String value) dropDownSuccess,
     required TResult Function(bool value) checkBoxSuccess,
     required TResult Function() formSubmitSuccess,
   }) {
@@ -870,7 +870,7 @@ class _$_CheckBoxSuccess implements _CheckBoxSuccess {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String value)? dropeDownSuccess,
+    TResult? Function(String value)? dropDownSuccess,
     TResult? Function(bool value)? checkBoxSuccess,
     TResult? Function()? formSubmitSuccess,
   }) {
@@ -881,7 +881,7 @@ class _$_CheckBoxSuccess implements _CheckBoxSuccess {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String value)? dropeDownSuccess,
+    TResult Function(String value)? dropDownSuccess,
     TResult Function(bool value)? checkBoxSuccess,
     TResult Function()? formSubmitSuccess,
     required TResult orElse(),
@@ -896,7 +896,7 @@ class _$_CheckBoxSuccess implements _CheckBoxSuccess {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_DropDownSuccess value) dropeDownSuccess,
+    required TResult Function(_DropDownSuccess value) dropDownSuccess,
     required TResult Function(_CheckBoxSuccess value) checkBoxSuccess,
     required TResult Function(_FormSubmitSuccess value) formSubmitSuccess,
   }) {
@@ -907,7 +907,7 @@ class _$_CheckBoxSuccess implements _CheckBoxSuccess {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_DropDownSuccess value)? dropeDownSuccess,
+    TResult? Function(_DropDownSuccess value)? dropDownSuccess,
     TResult? Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult? Function(_FormSubmitSuccess value)? formSubmitSuccess,
   }) {
@@ -918,7 +918,7 @@ class _$_CheckBoxSuccess implements _CheckBoxSuccess {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_DropDownSuccess value)? dropeDownSuccess,
+    TResult Function(_DropDownSuccess value)? dropDownSuccess,
     TResult Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult Function(_FormSubmitSuccess value)? formSubmitSuccess,
     required TResult orElse(),
@@ -978,7 +978,7 @@ class _$_FormSubmitSuccess implements _FormSubmitSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(String value) dropeDownSuccess,
+    required TResult Function(String value) dropDownSuccess,
     required TResult Function(bool value) checkBoxSuccess,
     required TResult Function() formSubmitSuccess,
   }) {
@@ -989,7 +989,7 @@ class _$_FormSubmitSuccess implements _FormSubmitSuccess {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(String value)? dropeDownSuccess,
+    TResult? Function(String value)? dropDownSuccess,
     TResult? Function(bool value)? checkBoxSuccess,
     TResult? Function()? formSubmitSuccess,
   }) {
@@ -1000,7 +1000,7 @@ class _$_FormSubmitSuccess implements _FormSubmitSuccess {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(String value)? dropeDownSuccess,
+    TResult Function(String value)? dropDownSuccess,
     TResult Function(bool value)? checkBoxSuccess,
     TResult Function()? formSubmitSuccess,
     required TResult orElse(),
@@ -1015,7 +1015,7 @@ class _$_FormSubmitSuccess implements _FormSubmitSuccess {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_DropDownSuccess value) dropeDownSuccess,
+    required TResult Function(_DropDownSuccess value) dropDownSuccess,
     required TResult Function(_CheckBoxSuccess value) checkBoxSuccess,
     required TResult Function(_FormSubmitSuccess value) formSubmitSuccess,
   }) {
@@ -1026,7 +1026,7 @@ class _$_FormSubmitSuccess implements _FormSubmitSuccess {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_DropDownSuccess value)? dropeDownSuccess,
+    TResult? Function(_DropDownSuccess value)? dropDownSuccess,
     TResult? Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult? Function(_FormSubmitSuccess value)? formSubmitSuccess,
   }) {
@@ -1037,7 +1037,7 @@ class _$_FormSubmitSuccess implements _FormSubmitSuccess {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_DropDownSuccess value)? dropeDownSuccess,
+    TResult Function(_DropDownSuccess value)? dropDownSuccess,
     TResult Function(_CheckBoxSuccess value)? checkBoxSuccess,
     TResult Function(_FormSubmitSuccess value)? formSubmitSuccess,
     required TResult orElse(),

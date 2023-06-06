@@ -80,7 +80,7 @@ class _CustomDropdownState<T> extends State<CustomDropdown<T>>
         child: ElevatedButton(
 
           style: OutlinedButton.styleFrom(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8), side: BorderSide(color: AppColor.borderColor.val,width: 1.5)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color: AppColor.borderColor.val,width: 1)),
             padding: style.padding,
             backgroundColor: style.backgroundColor,
             elevation: style.elevation,
