@@ -161,8 +161,8 @@ class _AssignedServicesState extends State<AssignedServices> {
                 children: <Widget>[
                   CustomSizedBox(height: DBL.four.val,),
                   Row(
-                    crossAxisAlignment: ECrossAxisAlignment.center.val,
-                    mainAxisAlignment: EMainAxisAlignment.spaceBetween.val,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomText3(
                         AppString.serviceList.val,
@@ -311,7 +311,7 @@ class _AssignedServicesState extends State<AssignedServices> {
               : DBL.twelve.val,
           fontWeight: FW.w400.val,
           color: AppColor.rowColor.val),
-      textAlign: TA.start.val,
+      textAlign: TextAlign.start,
     );
   }
 
@@ -325,7 +325,7 @@ class _AssignedServicesState extends State<AssignedServices> {
               Responsive.isWeb(context) ? DBL.fourteen.val : DBL.twelve.val,
           fontWeight: fontWeight,
           color: AppColor.columColor.val),
-      textAlign: TA.center.val,
+      textAlign: TextAlign.center,
     );
   }
 

@@ -1,13 +1,14 @@
 import 'dart:math' as math;
 import 'dart:ui' show lerpDouble;
 
+import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterx/src/constant/color.dart';
-import 'package:flutterx/src/constant/enum.dart';
-import 'package:flutterx/src/utils/hover.dart';
-import 'package:flutterx/src/widget/sizedbox.dart';
 
-class FxButton extends StatelessWidget {
+
+import '../../core/enum.dart';
+import '../../core/on_hover.dart';
+
+class CustomButton extends StatelessWidget {
   final ButtonType? buttonType;
   final bool fullWidth;
   final Widget? icon;
@@ -32,8 +33,8 @@ class FxButton extends StatelessWidget {
   final double? hoverElevation;
   final Color? color;
   final Color? hoverColor;
-  final TextStyle? textStyle;
-  const FxButton({
+
+  const CustomButton({
     Key? key,
     this.buttonType,
     this.fullWidth = false,
@@ -59,7 +60,6 @@ class FxButton extends StatelessWidget {
     this.hoverElevation,
     this.color,
     this.hoverColor,
-    this.textStyle,
   })  : assert((fullWidth && minWidth == null) ||
             (!fullWidth && minWidth != null) ||
             (!fullWidth && minWidth == null)),
@@ -72,7 +72,7 @@ class FxButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final double scale = MediaQuery.maybeOf(context)?.textScaleFactor ?? 1;
     final double gap =
-        scale <= 1 ? 4 : lerpDouble(8, 4, math.min(scale - 1, 1))!;
+        scale <= 1 ? 8 : lerpDouble(8, 4, math.min(scale - 1, 1))!;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return TranslateOnHover(
@@ -113,18 +113,18 @@ class FxButton extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              icon ?? FxBox.shrink,
+              icon ??CustomSizedBox.shrink(),
               icon != null && text != null
                   ? SizedBox(width: gap)
-                  : FxBox.shrink,
+                  : CustomSizedBox.shrink(),
               text != null
                   ? Flexible(
                       child: Text(
                         text!,
-                        style:textStyle,
+                        style: TextStyle(fontWeight: textWeight),
                       ),
                     )
-                  : FxBox.shrink,
+                  : CustomSizedBox.shrink(),
             ],
           ),
         );
@@ -141,13 +141,13 @@ Color? _getButtonColor(
   if (buttonType == ButtonType.secondary) {
     return colorScheme.secondary;
   } else if (buttonType == ButtonType.warning) {
-    return FxColor.warning;
+    return AppColor.warning.val;
   } else if (buttonType == ButtonType.error) {
-    return FxColor.error;
+    return AppColor.error.val;
   } else if (buttonType == ButtonType.success) {
-    return FxColor.success;
+    return AppColor.success.val;
   } else if (buttonType == ButtonType.info) {
-    return FxColor.info;
+    return AppColor.info.val;
   } else {
     return colorScheme.primary;
   }
@@ -161,13 +161,13 @@ Color? _getHoverButtonColor(
   if (buttonType == ButtonType.secondary) {
     return colorScheme.onSecondaryContainer;
   } else if (buttonType == ButtonType.warning) {
-    return FxColor.warningDark;
+    return AppColor.warningDark.val;
   } else if (buttonType == ButtonType.error) {
-    return FxColor.errorDark;
+    return AppColor.errorDark.val;
   } else if (buttonType == ButtonType.success) {
-    return FxColor.successDark;
+    return AppColor.successDark.val;
   } else if (buttonType == ButtonType.info) {
-    return FxColor.infoDark;
+    return AppColor.infoDark.val;
   } else {
     if (colorScheme.brightness == Brightness.dark) {
       return colorScheme.inversePrimary;
@@ -186,10 +186,10 @@ Color? _getFontColor(
     return colorScheme.surface;
   } else if (buttonType == ButtonType.warning ||
       buttonType == ButtonType.info) {
-    return FxColor.dark;
+    return AppColor.dark.val;
   } else if (buttonType == ButtonType.error ||
       buttonType == ButtonType.success) {
-    return FxColor.white;
+    return AppColor.white.val;
   } else {
     return colorScheme.onPrimary;
   }
@@ -204,10 +204,10 @@ Color? _getHoverFontColor(
     return colorScheme.surface;
   } else if (buttonType == ButtonType.warning ||
       buttonType == ButtonType.info) {
-    return FxColor.dark;
+    return AppColor.dark.val;
   } else if (buttonType == ButtonType.error ||
       buttonType == ButtonType.success) {
-    return FxColor.white;
+    return AppColor.white.val;
   } else {
     if (colorScheme.brightness == Brightness.dark) {
       return colorScheme.onPrimaryContainer;

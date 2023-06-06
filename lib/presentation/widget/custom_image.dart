@@ -25,7 +25,7 @@ class CustomImage extends StatelessWidget {
       width: height,
       height: width,
       fit: fit,
-      alignment: alignment??EAlignment.center.val,
+      alignment: alignment??Alignment.center,
     );
   }
 }

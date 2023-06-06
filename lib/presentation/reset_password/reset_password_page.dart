@@ -31,7 +31,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   final FormValidationBloc _validationBloc = FormValidationBloc();
-  AutovalidateMode _validateMode = EAutoValidate.disabled.val;
+  AutovalidateMode _validateMode =AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -51,7 +51,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         builder: (context, state) {
           state.whenOrNull(
             formSubmitSuccess: () {
-              _validateMode = EAutoValidate.always.val;
+              _validateMode = AutovalidateMode.always;
             },
           );
           return Responsive(
@@ -95,7 +95,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     return CustomImage(
       path: IMG.careGiver.val,
       height: size.height,
-      fit: FIT.fill.val,
+      fit: BoxFit.fill,
     );
   }
 
@@ -107,8 +107,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
             formKey: _formKey,
             autoValidateMode: _validateMode,
             child: Column(
-              mainAxisAlignment: EMainAxisAlignment.center.val,
-              crossAxisAlignment: ECrossAxisAlignment.start.val,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _logoView(),
                 CustomSizedBox(height: DBL.ten.val),
@@ -232,7 +232,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       minWidth: DBL.fourFifty.val,
       color: AppColor.primaryColor.val,
       onPressed: () {
-        if (_validateMode != EAutoValidate.always.val) {
+        if (_validateMode != AutovalidateMode.always) {
           _validationBloc.add(const FormValidationEvent.submit());
         }
         if (_formKey.currentState!.validate()) {

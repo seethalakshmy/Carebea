@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 
 import '../../../core/enum.dart';
 import '../../../core/responsive.dart';
-import '../../widget/custom_sizedbox.dart';
-import '../../widget/custom_text.dart';
-import '../../widget/dotted_container.dart';
+import 'custom_sizedbox.dart';
+import 'custom_text.dart';
+import 'dotted_container.dart';
+
 
 class ServiceRewardAndCompletion extends StatelessWidget {
   const ServiceRewardAndCompletion({

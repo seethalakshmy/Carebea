@@ -23,7 +23,7 @@ class BD {
           color: color,
           borderRadius: borderRadius,
           border: border,
-          shape:shape?? EBoxShape.rectangle.val,
+          shape:shape?? BoxShape.rectangle,
           gradient: gradient,
           boxShadow: boxShadow);
 }

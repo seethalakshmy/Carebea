@@ -22,7 +22,7 @@ class CustomListViewBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        scrollDirection:scrollDirection?? EAxis.vertical.val,
+        scrollDirection:scrollDirection?? Axis.vertical,
         itemCount: itemCount,
         physics: physics,
         shrinkWrap: shrinkWrap ?? false,
