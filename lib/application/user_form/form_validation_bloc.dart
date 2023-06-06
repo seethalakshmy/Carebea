@@ -10,7 +10,7 @@ class FormValidationBloc
   FormValidationBloc() : super(const _Initial()) {
     on<FormValidationEvent>((event, emit) {
       if (event is _DropDown) {
-        emit(FormValidationState.dropeDownSuccess(event.value));
+        emit(FormValidationState.dropDownSuccess(event.value));
       } else if (event is _CheckBox) {
         emit(FormValidationState.checkBoxSuccess(event.value));
       } else if (event is _Submit) {

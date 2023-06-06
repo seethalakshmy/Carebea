@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
+
+
 
 /// App Strings
 enum AppString {
@@ -16,8 +17,14 @@ enum AppString {
   confirmPassword("Confirm Password"),
   confirmResetPassword("Confirm Reset Password"),
   dashboard("Dashboard"),
+  showing("Showing"),
+  entries("entries"),
+  to("to"),
+  of("of"),
   careGiverManagement("Caregiver Management"),
   userManagement("User Management"),
+  userManagementDetail("User Management Detail"),
+  careGiverDetail("Caregiver Detail"),
   id("ID"),
   slNo("SL No"),
   firstName("First Name"),
@@ -40,6 +47,8 @@ enum AppString {
   previous("Previous"),
   next("Next"),
   create("Create"),
+  noUsersFound("No Users found!"),
+  logout("Logout"),
 
   ///validations
   emptyEmail("Email address shouldn't be empty"),
@@ -53,6 +62,14 @@ enum AppString {
 
   const AppString(this.val);
 }
+
+
+
+
+
+
+
+
 
 /// App Colors
 enum AppColor {
@@ -89,6 +106,15 @@ enum AppColor {
   lightGrey5(Color(0xffA0A4B7)),
   lightGrey6(Color(0xffA7AAA8)),
   red(Color(0xffE75A77)),
+  success (Color(0xff53a653)),
+  warning ( Color(0xffffcc00)),
+  error ( Color(0xffe10725)),
+  info ( Color(0xff4fc3f7)),
+  successDark(Color(0xff408140)),
+  warningDark(Color(0xffffb800)),
+  errorDark(Color(0xffc7051b)),
+  infoDark (Color(0xff03a9f4)),
+  dark (Color(0xff141414)),
   transparent(Colors.transparent);
 
   final Color val;
@@ -225,24 +251,34 @@ enum DBL {
   sixtyEight(68.0),
   seventy(70.0),
   seventyTwo(72.0),
+  eighty(80.0),
   eightyNine(89.0),
   ninetyTwo(92.0),
   ninetyFive(95.0),
   hundred(100.0),
   oneHundredFour(104.0),
-  hundredThirty(130.0),
-  hundredThirtyEight(138.0),
-  hundredForty(140.0),
-  hundredFiftyEight(158.0),
-  hundredSixty(160.0),
-  hundredSeventySix(176.0),
-  hundredSeventyNine(179.0),
+  oneTwenty(120.0),
+  oneThirty(130.0),
+  oneThirtyEight(138.0),
+  oneForty(140.0),
+  oneFifty(150.0),
+  oneFiftyEight(158.0),
+  oneSixty(160.0),
+  oneSixtySix(166.0),
+  oneSeventySix(176.0),
+  oneSeventyNine(179.0),
+  oneEighty(180.0),
   hundredNinety(190.0),
+  twoHundred(200.0),
+  twoForty(240),
   threeHundred(300.0),
   threeFifteen(315.0),
-  threeHundredFortyThree(343.0),
+  threeFortyThree(343.0),
+  threeNinetyTwo(392.0),
+  fourHundred(400.0),
   fourFifty(450.0),
-  fiveFifty(550.0);
+  fiveFifty(550.0),
+  nineFifty(950.0);
 
   final double val;
 
@@ -277,169 +313,34 @@ enum INT {
   fortyEight(48),
   fifty(50),
   eightyNine(89),
-  hundred(100),
-  hundredForty(140),
-  hundredFiftyEight(158),
-  hundredSeventyNine(179),
-  hundredNinety(190),
-  threeHundred(300),
-  threeHundredFortyThree(343);
+  hundred(100);
 
   final int val;
 
   const INT(this.val);
 }
 
-enum TO {
-  ellipsis(TextOverflow.ellipsis),
-  clip(TextOverflow.clip),
-  fade(TextOverflow.fade),
-  visible(TextOverflow.visible);
+enum ButtonType { secondary, warning, info, success, error }
 
-  final TextOverflow val;
 
-  const TO(this.val);
-}
 
-enum FIT {
-  fill(BoxFit.fill),
-  contain(BoxFit.contain),
-  cover(BoxFit.cover);
 
-  final BoxFit val;
 
-  const FIT(this.val);
-}
 
-enum TA {
-  center(TextAlign.center),
-  right(TextAlign.right),
-  left(TextAlign.left),
-  justify(TextAlign.justify),
-  end(TextAlign.end),
-  start(TextAlign.start);
 
-  final TextAlign val;
 
-  const TA(this.val);
-}
 
-enum BF {
-  contain(BoxFit.contain);
 
-  final BoxFit val;
 
-  const BF(this.val);
-}
 
-enum EMainAxisAlignment {
-  start(MainAxisAlignment.start),
-  end(MainAxisAlignment.end),
-  center(MainAxisAlignment.center),
-  spaceBetween(MainAxisAlignment.spaceBetween),
-  spaceAround(MainAxisAlignment.spaceAround),
-  spaceEvenly(MainAxisAlignment.spaceEvenly);
 
-  final MainAxisAlignment val;
 
-  const EMainAxisAlignment(this.val);
-}
 
-enum ECrossAxisAlignment {
-  start(CrossAxisAlignment.start),
-  end(CrossAxisAlignment.end),
-  center(CrossAxisAlignment.center),
-  stretch(CrossAxisAlignment.stretch),
-  baseline(CrossAxisAlignment.baseline);
 
-  final CrossAxisAlignment val;
 
-  const ECrossAxisAlignment(this.val);
-}
 
-enum EMainAxisSize {
-  min(MainAxisSize.min),
-  max(MainAxisSize.max);
 
-  final MainAxisSize val;
 
-  const EMainAxisSize(this.val);
-}
 
-enum EAxis {
-  horizontal(Axis.horizontal),
-  vertical(Axis.vertical);
 
-  final Axis val;
 
-  const EAxis(this.val);
-}
-
-enum EFlexFit {
-  loose(FlexFit.loose),
-  tight(FlexFit.tight);
-
-  final FlexFit val;
-
-  const EFlexFit(this.val);
-}
-
-enum EBoxShape {
-  rectangle(BoxShape.rectangle),
-  circle(BoxShape.circle);
-
-  final BoxShape val;
-
-  const EBoxShape(this.val);
-}
-
-enum EAlignment {
-  topCenter(Alignment.topCenter),
-  topRight(Alignment.topRight),
-  bottomCenter(Alignment.bottomCenter),
-  centerLeft(Alignment.centerLeft),
-  centerRight(Alignment.centerRight),
-  center(Alignment.center);
-
-  final Alignment val;
-
-  const EAlignment(this.val);
-}
-
-enum EAutoValidate {
-  always(AutovalidateMode.always),
-  disabled(AutovalidateMode.disabled);
-
-  final AutovalidateMode val;
-
-  const EAutoValidate(this.val);
-}
-
-enum ETextInputAction {
-  done(TextInputAction.done),
-  next(TextInputAction.next);
-
-  final TextInputAction val;
-
-  const ETextInputAction(this.val);
-}
-
-/// Use [ChartType] for apply predefine button color
-enum ChartType {
-  lineChart,
-  barChart,
-  areaChart,
-  piaChart,
-  colomnChart,
-  advancedSmileChart,
-  lineChartWithArea,
-  simpleLineChart,
-  simplePieChart,
-  animatingPieChart,
-  lineScatterChart,
-  overlapBars,
-  chartJsBarChart,
-  radarChart,
-  polarChart,
-  multipleStaticChart,
-}

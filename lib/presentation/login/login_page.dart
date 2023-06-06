@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
   final FocusNode _userFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
   final FormValidationBloc _validationBloc = FormValidationBloc();
-  AutovalidateMode _validateMode = EAutoValidate.disabled.val;
+  AutovalidateMode _validateMode = AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
         builder: (context, state) {
           state.whenOrNull(
             formSubmitSuccess: () {
-              _validateMode = EAutoValidate.always.val;
+              _validateMode = AutovalidateMode.always;
             },
           );
           return Responsive(
@@ -101,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
     return CustomImage(
       path: IMG.careGiver.val,
       height: size.height,
-      fit: FIT.fill.val,
+      fit: BoxFit.fill,
     );
   }
 
@@ -113,8 +113,8 @@ class _LoginPageState extends State<LoginPage> {
             formKey: _formKey,
             autoValidateMode: _validateMode,
             child: Column(
-              mainAxisAlignment: EMainAxisAlignment.center.val,
-              crossAxisAlignment: ECrossAxisAlignment.start.val,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _logoView(),
                 CustomSizedBox(height: DBL.ten.val),
@@ -160,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
     return CustomSizedBox(
       width: DBL.fourFifty.val,
       child: CAlign(
-        alignment: EAlignment.centerRight.val,
+        alignment: Alignment.centerRight,
         child: CTextButton(
             text: AppString.forgotPassword.val,
             fontWeight: FW.w400.val,
@@ -202,7 +202,7 @@ class _LoginPageState extends State<LoginPage> {
       width: DBL.fourFifty.val,
       height: DBL.fiftyFive.val,
       onChanged: (String value) {},
-      textInputAction: ETextInputAction.next.val,
+      textInputAction: TextInputAction.next,
       controller: _usernameController,
       validator: (value) {
         if (value == null || value.isEmpty) {
@@ -222,7 +222,7 @@ class _LoginPageState extends State<LoginPage> {
       width: DBL.fourFifty.val,
       height: DBL.fifty.val,
       onChanged: (String value) {},
-      textInputAction: ETextInputAction.done.val,
+      textInputAction: TextInputAction.done,
       onSubmitted: (val){
         checkInputData();
       },
@@ -249,8 +249,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
   checkInputData(){
-    CustomLog.log("called input data");
-    if (_validateMode != EAutoValidate.always.val) {
+    if (_validateMode != AutovalidateMode.always) {
       _validationBloc.add(const FormValidationEvent.submit());
     }
     if(_formKey.currentState!.validate()){

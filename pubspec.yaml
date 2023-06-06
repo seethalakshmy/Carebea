@@ -35,14 +35,11 @@ dependencies:
   cached_network_image: ^3.2.0
   shimmer: ^2.0.0
   dartz: ^0.10.1
-  flutterx:
-    path: package/flutterx
   cupertino_icons: ^1.0.2
   google_fonts:
   flutter_switch: ^0.3.2
   dotted_border: ^2.0.0+3
   percent_indicator: ^4.2.3
-  number_paginator: ^0.2.3
 
 
 dev_dependencies:

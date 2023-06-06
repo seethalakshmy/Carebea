@@ -7,9 +7,9 @@ import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/domain/caregivers/model/care_givers.dart';
-import 'package:admin_580_tech/presentation/caregivers/widgets/header_view.dart';
 import 'package:admin_580_tech/presentation/widget/cached_image.dart';
 import 'package:admin_580_tech/presentation/widget/custom_align.dart';
+import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_data_table_2.dart';
@@ -22,7 +22,6 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import 'package:flutterx/flutterx.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../application/bloc/caregivers/caregivers_bloc.dart';
@@ -31,6 +30,7 @@ import '../../infrastructure/caregivers/caregivers_repository.dart';
 import '../widget/custom_text.dart';
 import '../widget/custom_text_field.dart';
 import '../widget/error_view.dart';
+import '../widget/header_view.dart';
 
 class CareGiversPage extends StatefulWidget {
   const CareGiversPage({Key? key}) : super(key: key);
@@ -63,14 +63,14 @@ class _CareGiversPageState extends State<CareGiversPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const HeaderView(),
+         HeaderView(title:  AppString.careGiverManagement.val,),
         CustomSizedBox(height: DBL.twenty.val),
         BlocProvider(
           create: (context) => _dataTableBloc
             ..add(CareGiversEvent.getCareGivers(
               userId: userId,
               page: INT.one.val,
-              limit: INT.two.val,
+              limit: 10,
             )),
           child: _bodyView(),
         ),
@@ -187,7 +187,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               CAlign(
-                alignment: EAlignment.topRight.val,
+                alignment: Alignment.topRight,
                 child: CTextField(
                   width: DBL.threeFifteen.val,
                   height: DBL.forty.val,
@@ -215,7 +215,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
-                      mainAxisAlignment: EMainAxisAlignment.spaceBetween.val,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: _paginationView(),
                     ),
                     CustomSizedBox(width: DBL.fifteen.val,),
@@ -331,9 +331,9 @@ class _CareGiversPageState extends State<CareGiversPage> {
   List<Widget> _paginationView() {
     return [
       Row(
-        mainAxisAlignment: EMainAxisAlignment.center.val,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          FxButton(
+          CustomButton(
             onPressed: () {
               if (_page > 1) {
                 _page = _page - 1;
@@ -354,7 +354,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
               (totalPages / _dropValue).ceil(),
               (index) {
                 int pageIndex = index + 1;
-                return FxButton(
+                return CustomButton(
                   text: pageIndex.toString(),
                   borderRadius: 0.0,
                   minWidth: 16.0,
@@ -379,7 +379,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
               },
             ),
           ),
-          FxButton(
+          CustomButton(
             onPressed: () {
               if (_page <= (totalPages / _dropValue).ceil() - 1) {
                 _page = _page + 1;
@@ -411,7 +411,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
 
         fontWeight: FW.w400.val,
           color: AppColor.rowColor.val),
-      textAlign: TA.start.val,
+      textAlign: TextAlign.start,
     );
   }
 
@@ -424,7 +424,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
           fontSize:Responsive.isWeb(context)? DBL.fourteen.val: DBL.twelve.val,
           fontWeight: fontWeight,
           color: AppColor.columColor.val),
-      textAlign: TA.center.val,
+      textAlign: TextAlign.center,
     );
   }
 
@@ -492,3 +492,14 @@ class _CareGiversPageState extends State<CareGiversPage> {
 
 
 }
+// CustomSizedBox(width: DBL.ten.val,),
+// FxButton(
+//   onPressed: () {},
+//   text: AppString.create.val,
+//   color: AppColor.primaryColor.val,
+//   height: DBL.fifty.val,
+//   borderRadius: DBL.five.val,
+//     padding:  EdgeInsets.symmetric(horizontal: DBL.twentyTwo.val, vertical: DBL.ten.val),
+//   textStyle: TS().gRoboto(color: AppColor.white.val,fontWeight: FW.w500.val),
+//   icon:CustomIcon(icon: Icons.add,size: DBL.twenty.val,color: AppColor.white.val,)
+// ),

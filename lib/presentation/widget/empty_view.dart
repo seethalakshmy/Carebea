@@ -3,10 +3,13 @@ import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/string.dart';
 import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
+import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutterx/flutterx.dart';
+
+import '../../core/enum.dart';
+import 'custom_sizedbox.dart';
 
 class EmptyView extends StatelessWidget {
   const EmptyView({
@@ -26,13 +29,13 @@ class EmptyView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            FxBox.h32,
+            CustomSizedBox(height: DBL.thirty.val,),
             SizedBox(
               height: 300,
               width: 400,
               child: SvgPicture.asset('assets/images/error-500.svg'),
             ),
-            FxBox.h48,
+            CustomSizedBox(height: DBL.fortyEight.val,),
             Text(
               title ,
               style: const TextStyle(
@@ -48,8 +51,8 @@ class EmptyView extends StatelessWidget {
                 fontSize: 14,
               ),
             ):const SizedBox.shrink(),
-            FxBox.h24,
-            FxButton(
+            CustomSizedBox(height: DBL.twentyFour.val,),
+            CustomButton(
               text: Strings.backToDashBoard,
               borderRadius: 15,
               padding:

@@ -74,7 +74,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                       top: 30,
                       right: 20,
                       child: Column(
-                          crossAxisAlignment: ECrossAxisAlignment.start.val,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Stack(
                               children: [
@@ -82,7 +82,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                                   height: 320,
                                   child: Row(
                                     crossAxisAlignment:
-                                        ECrossAxisAlignment.start.val,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       CustomSizedBox(
                                         width: 200,
@@ -100,8 +100,8 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                                             ),
                                             Row(
                                                 mainAxisAlignment:
-                                                    EMainAxisAlignment
-                                                        .spaceBetween.val,
+                                                MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
                                                   CustomText3(
                                                     "Profile Completion",
@@ -158,7 +158,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                                                   890,
                                           child: Column(
                                             crossAxisAlignment:
-                                                ECrossAxisAlignment.start.val,
+                                            CrossAxisAlignment.start,
                                             children: [
                                               CustomText3(
                                                 "John Simon",

@@ -1,33 +1,30 @@
-import 'package:admin_580_tech/application/bloc/theme/theme_mode_bloc.dart';
 import 'package:admin_580_tech/core/color.dart';
 import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/enum.dart';
-import 'package:admin_580_tech/core/hive/hive_keys.dart';
 import 'package:admin_580_tech/core/hive/hive_utils.dart';
 import 'package:admin_580_tech/core/hover.dart';
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/string_extension.dart';
+import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/core/text_utils.dart';
 import 'package:admin_580_tech/core/theme.dart';
-import 'package:admin_580_tech/generated/assets.dart';
-import 'package:admin_580_tech/presentation/cargiver_detail/caregiver_detail_page.dart';
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
+import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
-
+import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterx/flutterx.dart';
 
-import '../../core/const.dart';
-import '../../core/icons.dart';
 import '../../core/string.dart';
 import '../caregivers/caregivers_page.dart';
 import '../user_management/user_management_page.dart';
-import '../widget/end_drawer.dart';
+import '../user_mangement_detail/user_managemet_detail_page.dart';
+import '../widget/dropdown/dropdown.dart';
+
+TabsRouter? autoTabRouter;
 
 class MenuBarView extends StatefulWidget {
   const MenuBarView({Key? key}) : super(key: key);
@@ -54,29 +51,14 @@ class _MenuBarState extends State<MenuBarView> {
 
   final List<String> _items = [
     Strings.profile,
-    Strings.settings,
-    Strings.lockScreen,
   ];
-
 
   final List<PageRouteInfo<dynamic>> _routes = const [
     DashboardRoute(),
     CareGiversRoute(),
     UserManagementRoute(),
-
+    UserManagementDetailRoute()
   ];
-
-  // TextDirection _layout = TextDirection.ltr;
-
-  // for LTR
-  final ValueNotifier<TextDirection> _layout =
-      ValueNotifier<TextDirection>(TextDirection.ltr);
-  final ValueNotifier<bool> _switchlayout = ValueNotifier<bool>(false);
-
-  // for change language
-  final ValueNotifier<String> _language = ValueNotifier<String>('en');
-
-  //final ValueNotifier<bool> _changeLanguage = ValueNotifier<bool>(false);
 
   @override
   Widget build(BuildContext context) {
@@ -85,24 +67,11 @@ class _MenuBarState extends State<MenuBarView> {
       builder: (context, child, animation) {
         final tabsRouter = AutoTabsRouter.of(context);
         autoTabRouter = tabsRouter;
-        return ValueListenableBuilder<TextDirection>(
-            valueListenable: _layout,
-            builder: (context, value, _) {
-              return Directionality(
-                textDirection: value,
-                child: Scaffold(
-                  key: _scaffoldKey,
-                  endDrawer: Drawer(
-                    width: 280,
-                    child: SafeArea(
-                      child: SettingDrawer(scaffoldKey: _scaffoldKey),
-                    ),
-                  ),
-                  appBar: _appBar(tabsRouter),
-                  body: _bodyView(tabsRouter),
-                ),
-              );
-            });
+        return Scaffold(
+          key: _scaffoldKey,
+          appBar: _appBar(tabsRouter),
+          body: _bodyView(tabsRouter),
+        );
       },
     );
   }
@@ -111,7 +80,6 @@ class _MenuBarState extends State<MenuBarView> {
     return SafeArea(
       child: Scaffold(
         key: _scaffoldDrawerKey,
-        // drawerScrimColor: ColorConst.transparent,
         drawer: _sidebar(tabsRouter),
         body: Row(
           mainAxisSize: MainAxisSize.max,
@@ -120,9 +88,9 @@ class _MenuBarState extends State<MenuBarView> {
             ValueListenableBuilder<bool>(
               valueListenable: isOpen,
               builder: (context, value, child) {
-                return Responsive.isWeb(context) ||Responsive.isTablet(context)
+                return !isXs(context)
                     ? _sidebar(tabsRouter)
-                    : const SizedBox.shrink();
+                    :  CustomSizedBox.shrink();
               },
             ),
             Expanded(
@@ -132,15 +100,13 @@ class _MenuBarState extends State<MenuBarView> {
                   SliverList(
                     delegate: SliverChildListDelegate(
                       [
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              getRouteWidget(tabsRouter.activeIndex),
-                              FxBox.h20,
-                            ],
-                          ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            getRouteWidget(tabsRouter.activeIndex),
+                            CustomSizedBox(height: DBL.twenty.val,),
+
+                          ],
                         ),
                       ],
                     ),
@@ -149,9 +115,9 @@ class _MenuBarState extends State<MenuBarView> {
                     hasScrollBody: false,
                     fillOverscroll: true,
                     child: Column(
-                      children: const <Widget>[
+                      children:  <Widget>[
                         Expanded(
-                          child: SizedBox.shrink(),
+                          child: CustomSizedBox.shrink(),
                         ),
                         // _footer(),
                       ],
@@ -168,10 +134,11 @@ class _MenuBarState extends State<MenuBarView> {
 
   /// appbar
   PreferredSizeWidget _appBar(TabsRouter tabsRouter) => AppBar(
-        toolbarHeight: 70,
-        elevation: 0.0,
-        shadowColor: ColorConst.transparent,
-        leadingWidth: 392,
+
+        toolbarHeight: DBL.seventy.val,
+        elevation: DBL.zero.val,
+        shadowColor: AppColor.transparent.val,
+        leadingWidth: DBL.threeNinetyTwo.val,
         leading: Row(
           children: [
             ValueListenableBuilder<bool>(
@@ -186,16 +153,16 @@ class _MenuBarState extends State<MenuBarView> {
                       tabsRouter
                           .setActiveIndex(getRouteIndex(Strings.dashboard));
                     },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      width: 240,
-                      height: 120,
+                    child: CustomContainer(
+                      padding:  EdgeInsets.symmetric(horizontal: DBL.fifteen.val),
+                      width: DBL.twoForty.val,
+                      height: DBL.oneTwenty.val,
                       color: AppColor.primaryColor.val,
                       child: CustomImage(
                         path: IMG.colorLogoPng.val,
-                        alignment: EAlignment.centerLeft.val,
-                        height: 60,
-                        width: 166,
+                        alignment: Alignment.centerLeft,
+                        height: DBL.sixty.val,
+                        width: DBL.oneSixtySix.val,
                       ),
                     ),
                   );
@@ -205,15 +172,15 @@ class _MenuBarState extends State<MenuBarView> {
                     tabsRouter.setActiveIndex(getRouteIndex(Strings.dashboard));
                     _scaffoldDrawerKey.currentState?.closeDrawer();
                   },
-                  child: Container(
-                    width: 180,
-                    height: 120,
+                  child: CustomContainer(
+                    width: DBL.oneEighty.val,
+                    height: DBL.oneTwenty.val,
                     color: AppColor.primaryColor.val,
                     child: CustomImage(
                       path: IMG.colorLogoPng.val,
-                      alignment: EAlignment.centerLeft.val,
-                      height: 60,
-                      width: 166,
+                      alignment: Alignment.centerLeft,
+                      height: DBL.sixty.val,
+                      width: DBL.oneSixtySix.val,
                     ),
                   ),
                 );
@@ -222,10 +189,10 @@ class _MenuBarState extends State<MenuBarView> {
             CustomSizedBox(
               width: DBL.ten.val,
             ),
-            Responsive.isMobile(context)
+            isXs(context)
                 ? MaterialButton(
                     height: double.infinity,
-                    minWidth: 60,
+                    minWidth: DBL.sixty.val,
                     hoverColor: ColorConst.transparent,
                     onPressed: () async {
                       if (Responsive.isMobile(context) ||
@@ -251,35 +218,43 @@ class _MenuBarState extends State<MenuBarView> {
         ),
         actions: [
           _notification(),
-          CustomSizedBox(width: 40,),
+           CustomSizedBox(
+            width: DBL.forty.val,
+          ),
           _profile(tabsRouter),
-          CustomSizedBox(width: 40,),
+           CustomSizedBox(
+            width: DBL.forty.val,
+          ),
         ],
       );
 
   Widget _notification() {
-    return CustomSvg(path: IMG.notificationDot.val, height: 25,width: 25,);
+    return CustomSvg(
+      path: IMG.notificationDot.val,
+      height: DBL.twentyFive.val,
+      width: DBL.twentyFive.val,
+    );
   }
 
   Widget _profile(TabsRouter tabsRouter) {
     return FxDropdownButton(
       focusColor: Colors.transparent,
-      underline: FxBox.shrink,
+      underline: CustomSizedBox.shrink(),
       customButton: MaterialButton(
         height: double.infinity,
-        minWidth: 60,
+        minWidth: DBL.sixty.val,
         hoverColor: ColorConst.transparent,
         onPressed: null,
         child: CircleAvatar(
-          maxRadius: 16,
+          maxRadius: DBL.sixteen.val,
           backgroundImage: AssetImage(IMG.profile.val),
         ),
       ),
-      customItemsIndexes: const [3],
-      customItemsHeight: 8,
+      customItemsIndexes:  [INT.three.val],
+      customItemsHeight: DBL.eight.val,
       onChanged: (value) {
+        /// Todo check this code
         if (value == 'Profile') {
-          // context.router.push(const MenuBar());
           tabsRouter.setActiveIndex(getRouteIndex(Strings.userProfile));
           _scaffoldDrawerKey.currentState?.closeDrawer();
         }
@@ -288,11 +263,11 @@ class _MenuBarState extends State<MenuBarView> {
         ..._items.map(
           (e) => DropdownMenuItem(
             value: e,
-            child: Text(
+            child: CustomText3(
               e,
-              style: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
+              style:  TS().gRoboto(
+                fontSize: FS.font15.val,
+                fontWeight: FW.bold.val,
               ),
               overflow: TextOverflow.ellipsis,
             ),
@@ -302,22 +277,22 @@ class _MenuBarState extends State<MenuBarView> {
           enabled: false,
           child: Divider(color: ColorConst.lightGrey),
         ),
-        const DropdownMenuItem(
-          value: 'Logout',
+         DropdownMenuItem(
+          value: AppString.logout.val,
           child: Text(
             Strings.logout,
             style: TextStyle(
-              fontSize: 15,
+              fontSize: FS.font15.val,
               fontWeight: FontWeight.bold,
             ),
             overflow: TextOverflow.ellipsis,
           ),
         ),
       ],
-      itemHeight: 48,
-      itemPadding: const EdgeInsets.only(left: 16, right: 16),
-      dropdownWidth: 160,
-      dropdownPadding: const EdgeInsets.symmetric(vertical: 6),
+      itemHeight: DBL.fortyEight.val,
+      itemPadding:  EdgeInsets.only(left: DBL.sixteen.val, right: DBL.sixteen.val),
+      dropdownWidth: DBL.oneSixty.val,
+      dropdownPadding:  EdgeInsets.symmetric(vertical: DBL.six.val),
       dropdownDecoration: BoxDecoration(
         color: isDark ? ColorConst.cardDark : Colors.white,
         border: Border.all(
@@ -325,7 +300,7 @@ class _MenuBarState extends State<MenuBarView> {
               ? ColorConst.lightGrey.withOpacity(0.1)
               : ColorConst.lightGrey.withOpacity(0.5),
         ),
-        borderRadius: BorderRadius.circular(4.0),
+        borderRadius: BorderRadius.circular(DBL.four.val),
       ),
       dropdownElevation: 0,
       offset: const Offset(-108, 0),
@@ -339,14 +314,14 @@ class _MenuBarState extends State<MenuBarView> {
         return ValueListenableBuilder<bool>(
           valueListenable: isOpen,
           builder: (context, value, child) {
-            return Container(
+            return CustomContainer(
               height: MediaQuery.of(context).size.height,
               width: ((Responsive.isWeb(context) ||
                               Responsive.isTablet(context)) &&
                           value ||
                       value1)
-                  ? 240
-                  : 180,
+                  ? DBL.twoForty.val
+                  : DBL.oneEighty.val,
               color: AppColor.backgroundColor.val,
               // color:
               //     isDark ? ColorConst.darkModeBackGround : ColorConst.drawerBG,
@@ -355,13 +330,13 @@ class _MenuBarState extends State<MenuBarView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    FxBox.h8,
+                    CustomSizedBox(height: DBL.eight.val,),
                     _menuList(
                       tabsRouter: tabsRouter,
                       items: mainData,
-                      isopen: value,
+                      isOpened: value,
                     ),
-                    FxBox.h20,
+                    CustomSizedBox(height: DBL.twenty.val,),
                   ],
                 ),
               ),
@@ -374,7 +349,7 @@ class _MenuBarState extends State<MenuBarView> {
   Widget _menuList({
     required TabsRouter tabsRouter,
     required Map<String, String> items,
-    required bool isopen,
+    required bool isOpened,
   }) {
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
@@ -388,20 +363,20 @@ class _MenuBarState extends State<MenuBarView> {
             return ListTile(
               leading: isHover || isSelected(items, index, tabsRouter)
                   ? Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Container(
-                        width: 4,
+                      padding:  EdgeInsets.symmetric(horizontal: DBL.five.val),
+                      child: CustomContainer(
+                        width: DBL.four.val,
                         color: AppColor.primaryColor.val,
-                        height: 25,
+                        height: DBL.twentyFive.val,
                       ),
                     )
-                  : const SizedBox(
-                      width: 10,
+                  :  CustomSizedBox(
+                      width: DBL.ten.val,
                     ),
-              title: isopen ? buildText(items, index, tabsRouter, color) : null,
+              title: isOpened ? buildText(items, index, tabsRouter, color) : null,
               contentPadding: const EdgeInsets.symmetric(horizontal: 0),
               mouseCursor: SystemMouseCursors.click,
-              horizontalTitleGap: 0.0,
+              horizontalTitleGap: DBL.zero.val,
               onTap: () {
                 isOpen.value = true;
                 tabsRouter
@@ -417,29 +392,36 @@ class _MenuBarState extends State<MenuBarView> {
     );
   }
 
-  Text buildText(Map<String, String> items, int index, TabsRouter tabsRouter,
-      Color color) {
-    return Text(
+  CustomText3 buildText(Map<String, String> items, int index,
+      TabsRouter tabsRouter, Color color) {
+    return CustomText3(
       items.keys.elementAt(index).capitalize(),
-      style: TextStyle(
-        color: isSelected(items, index, tabsRouter)
-            ? AppColor.primaryColor.val
-            : color,
-        fontSize: 15.7,
-      ),
+      style: TS().gRoboto(
+          color: isSelected(items, index, tabsRouter)
+              ? AppColor.primaryColor.val
+              : color,
+          fontSize: isXs(context) ? FS.font14.val : FS.font16.val),
     );
   }
 
   bool isSelected(Map<String, String> items, int index, TabsRouter tabsRouter) {
+    CustomLog.log('called is Selected');
     String path = tabsRouter.currentPath.replaceAll("admin/", "");
+    CustomLog.log('path is $path');
+    if (path == "/user-management-detail") {
+      path = "user-management";
+    }
     return items.keys.elementAt(index) == upperCase(path) ? true : false;
   }
 
   int getRouteIndex(String route) {
+    CustomLog.log('route name == $route');
     if (route == AppString.careGiverManagement.val) {
       return 1;
-    }else if(route == AppString.userManagement.val){
+    } else if (route == AppString.userManagement.val) {
       return 2;
+    } else if (route == AppString.userManagementDetail.val) {
+      return 3;
     }
     // else if (route == Strings.dataTable) {
     //   return 2;
@@ -474,11 +456,13 @@ class _MenuBarState extends State<MenuBarView> {
   }
 
   Widget getRouteWidget(int index) {
+    CustomLog.log('index is $index');
     if (index == 1) {
       return const CareGiversPage();
-    }
-    else if (index == 2) {
+    } else if (index == 2) {
       return const UserManagementPage();
+    } else if (index == 3) {
+      return const UserManagementDetailPage();
     }
     // else if (index == 3) {
     //   return  InvoicePage();
@@ -507,4 +491,6 @@ class _MenuBarState extends State<MenuBarView> {
       return const DashboardPage();
     }
   }
+
+  bool isXs(context) => MediaQuery.of(context).size.width <= 805;
 }

@@ -2,7 +2,6 @@ import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
-import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_center.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
@@ -16,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/form_validation/form_validation_bloc.dart';
+import '../routes/app_router.gr.dart';
 import '../widget/custom_scroll_view.dart';
 import '../widget/custom_text_field.dart';
 
@@ -29,7 +29,7 @@ class ForgotPasswordPage extends StatefulWidget {
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final TextEditingController _usernameController = TextEditingController();
   final FormValidationBloc _validationBloc = FormValidationBloc();
-  AutovalidateMode _validateMode = EAutoValidate.disabled.val;
+  AutovalidateMode _validateMode = AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -49,7 +49,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         builder: (context, state) {
           state.whenOrNull(
             formSubmitSuccess: () {
-              _validateMode = EAutoValidate.always.val;
+              _validateMode = AutovalidateMode.always;
             },
           );
           return Responsive(
@@ -92,7 +92,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     return CustomImage(
       path: IMG.careGiver.val,
       height: size.height,
-      fit: FIT.fill.val,
+      fit: BoxFit.fill,
     );
   }
 
@@ -104,8 +104,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             formKey: _formKey,
             autoValidateMode: _validateMode,
             child: Column(
-              mainAxisAlignment: EMainAxisAlignment.center.val,
-              crossAxisAlignment: ECrossAxisAlignment.start.val,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _logoView(),
                 CustomSizedBox(height: DBL.ten.val),
@@ -193,7 +193,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       minWidth: DBL.fourFifty.val,
       color: AppColor.primaryColor.val,
       onPressed: () {
-        if (_validateMode != EAutoValidate.always.val) {
+        if (_validateMode != AutovalidateMode.always) {
           _validationBloc.add(const FormValidationEvent.submit());
         }
 
