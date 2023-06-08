@@ -1,6 +1,7 @@
 import 'package:admin_580_tech/presentation/cargiver_detail/caregiver_detail_page.dart';
 import 'package:admin_580_tech/presentation/forgot_password/forgot_password_page.dart';
 import 'package:admin_580_tech/presentation/reset_password/reset_password_page.dart';
+import 'package:admin_580_tech/presentation/transaction_details/transaction_detail_page.dart';
 import 'package:admin_580_tech/presentation/user_management/user_management_page.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet_detail_page.dart';
 import 'package:auto_route/annotations.dart';
@@ -41,6 +42,7 @@ import '../transaction_management/transaction_management_page.dart';
         AutoRoute(path: 'user-management-detail', page: UserManagementDetailPage,),
         // AutoRoute(path: 'caregiver-detail', page: TestPage,),
         AutoRoute(path: 'transaction-management', page: TransactionManagementPage,),
+        AutoRoute(path: 'transaction-detail', page: TransactionDetailPage,),
       ],
     ),
   ],

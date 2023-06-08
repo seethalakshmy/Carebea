@@ -26,6 +26,7 @@ enum AppString {
   userManagementDetail("User Management Detail"),
   careGiverDetail("Caregiver Detail"),
   transactionManagement("Transaction Management"),
+  transactionDetails("Transaction Details"),
   id("ID"),
   slNo("SL No"),
   firstName("First Name"),
@@ -117,6 +118,7 @@ enum AppColor {
   lightGrey4(Color(0xffB5B5C4)),
   lightGrey5(Color(0xffA0A4B7)),
   lightGrey6(Color(0xffA7AAA8)),
+  lightGrey7(Color(0xffF9F9F9)),
   red(Color(0xffE75A77)),
   success (Color(0xff53a653)),
   warning ( Color(0xffffcc00)),
@@ -171,8 +173,12 @@ enum IMG {
 
 ///font size
 enum FS {
+  font05(05.0),
+  font06(06.0),
+  font065(06.5),
   font07(07.0),
   font08(08.0),
+  font10(10.0),
   font11(11.0),
   font12(12.0),
   font13(13.0),

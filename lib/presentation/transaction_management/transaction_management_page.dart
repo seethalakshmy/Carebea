@@ -1,10 +1,12 @@
 import 'package:admin_580_tech/domain/transaction_management/model/transaction_response.dart';
 import 'package:admin_580_tech/domain/transaction_management/model/transactions.dart';
 import 'package:admin_580_tech/infrastructure/transaction_management/transactions_repository.dart';
+import 'package:admin_580_tech/presentation/menu_bar/menu_bar_view.dart';
+import 'package:admin_580_tech/presentation/transaction_management/widgets/CustomAlertDialog.dart';
+import 'package:admin_580_tech/presentation/transaction_management/widgets/custom_status_widget.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterx/flutterx.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../application/bloc/transaction_management/transaction_management_bloc.dart';
@@ -23,6 +25,7 @@ import '../widget/custom_text_field.dart';
 import '../widget/empty_view.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
+import '../widget/pagination_view.dart';
 
 class TransactionManagementPage extends StatefulWidget {
   const TransactionManagementPage({Key? key}) : super(key: key);
@@ -200,10 +203,10 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
     }
     return mUserList.isNotEmpty
         ? Column(
-            crossAxisAlignment: ECrossAxisAlignment.start.val,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Row(
-                mainAxisAlignment: EMainAxisAlignment.spaceBetween.val,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomText3(
                     AppString.allTransactions.val,
@@ -214,7 +217,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                             : DBL.sixteen.val,
                         fontWeight: FW.w500.val,
                         color: AppColor.black.val),
-                    textAlign: TA.start.val,
+                    textAlign: TextAlign.start,
                   ),
 
                   CTextField(
@@ -272,7 +275,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
               : DBL.twelve.val,
           fontWeight: FW.w400.val,
           color: AppColor.rowColor.val),
-      textAlign: TA.start.val,
+      textAlign: TextAlign.start,
     );
   }
 
@@ -286,7 +289,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
               Responsive.isWeb(context) ? DBL.fourteen.val : DBL.twelve.val,
           fontWeight: fontWeight,
           color: AppColor.columColor.val),
-      textAlign: TA.center.val,
+      textAlign: TextAlign.center,
     );
   }
 
@@ -396,7 +399,10 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   InkWell(
-                      onTap: () {},
+                      onTap: () {
+                       // autoTabRouter!.setActiveIndex(5);
+                        _transactionDetails();
+                      },
                       child: CustomSvg(
                         path: IMG.eye.val,
                         height: Responsive.isWeb(context)
@@ -463,10 +469,35 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
   bool isXs(context) => MediaQuery.of(context).size.width <= 820;
 
   Row _bottomView() {
+    final int totalPages = (_totalItems / _limit).ceil();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _paginationView(),
+        PaginationView(
+            page: _page,
+            totalPages: totalPages,
+            onNextPressed: () {
+              if (_page < totalPages) {
+                _page = _page + 1;
+                _transactionBloc.add(TransactionManagementEvent.getTransactions(
+                    page: _page, limit: _limit));
+                updateData();
+              }
+            },
+            onItemPressed: (i) {
+              _page = i;
+              _transactionBloc.add(TransactionManagementEvent.getTransactions(
+                  page: _page, limit: _limit));
+              updateData();
+            },
+            onPreviousPressed: () {
+              if (_page > 1) {
+                _page = _page - 1;
+                _transactionBloc.add(TransactionManagementEvent.getTransactions(
+                    page: _page, limit: _limit));
+                updateData();
+              }
+            }),
         CustomText3("Showing ${_start + 1} to $_end of $_totalItems entries"),
       ],
     );
@@ -483,106 +514,16 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
     }
   }
 
-  _paginationView() {
-    final int totalPages = (_totalItems / _limit).ceil();
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FxButton(
-              onPressed: () {
-                if (_page > 1) {
-                  _page = _page - 1;
-                  _transactionBloc.add(
-                      TransactionManagementEvent.getTransactions(
-                          page: _page, limit: _limit));
-                }
-              },
-              text: AppString.previous.val,
-              borderRadius: 0.0,
-              borderWidth: 0.0,
-              color: AppColor.white.val,
-              textColor: AppColor.primaryColor.val,
-            ),
-            for (int i = 1; i <= totalPages; i++)
-              if (i == 1 ||
-                  i == totalPages ||
-                  totalPages <= 5 ||
-                  i <= 3 ||
-                  i == _page ||
-                  (i == _page - 1 && _page - 3 > 1) ||
-                  (i == _page + 1 && _page + 3 < totalPages))
-                FxButton(
-                  text: i.toString(),
-                  borderRadius: 0.0,
-                  minWidth: 16.0,
-                  color: _page == i
-                      ? AppColor.primaryColor.val
-                      : AppColor.white.val,
-                  textColor: _page == i
-                      ? AppColor.white.val
-                      : AppColor.primaryColor.val,
-                  borderWidth: 0.0,
-                  onPressed: () {
-                    _page = i;
-                    _transactionBloc.add(
-                        TransactionManagementEvent.getTransactions(
-                            page: _page, limit: _limit));
-                  },
-                ),
-            FxButton(
-              onPressed: () {
-                if (_page < totalPages) {
-                  _page = _page + 1;
-                  _transactionBloc.add(
-                      TransactionManagementEvent.getTransactions(
-                          page: _page, limit: _limit));
-                  updateData();
-                }
-              },
-              text: AppString.next.val,
-              borderRadius: 0.0,
-              borderWidth: 0.0,
-              color: AppColor.white.val,
-              textColor: AppColor.primaryColor.val,
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
   _statusBox(bool isCompleted) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CustomContainer.decoration(
-          width: 110,
-          height: DBL.thirty.val,
-          padding: EdgeInsets.symmetric(
-              vertical: DBL.five.val, horizontal: DBL.five.val),
-          decoration: BoxDecoration(
-              color: isCompleted ? AppColor.darkGreen.val : AppColor.red.val,
-              borderRadius: PR().circularRadius(DBL.eight.val)),
-          child: CustomText3(
-            textAlign: TA.center.val,
-            isCompleted ? AppString.completed.val : AppString.cancel.val,
-            style: TS().gRoboto(
-              fontWeight: FW.w600.val,
-              fontSize: FS.font12.val,
-              color: AppColor.white.val,
-            ),
-          ),
-        ),
-        !isCompleted
-            ?  CustomText3(
-                "Refund under process",
-                style: TextStyle(fontSize: Responsive.isWeb(context)?FS.font08.val:FS.font07.val,fontWeight: FontWeight.w400,color: AppColor.label.val),
-              )
-            : Container()
-      ],
+    return CustomStatusWidget(isCompleted: isCompleted);
+  }
+  _transactionDetails(){
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return  CustomAlertDialog();
+      },
     );
   }
 }
