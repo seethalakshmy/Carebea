@@ -20,7 +20,6 @@ import 'package:flutter/material.dart';
 
 import '../../core/string.dart';
 import '../caregivers/caregivers_page.dart';
-import '../transaction_details/transaction_detail_page.dart';
 import '../transaction_management/transaction_management_page.dart';
 import '../user_management/user_management_page.dart';
 import '../user_mangement_detail/user_managemet_detail_page.dart';
@@ -62,7 +61,6 @@ class _MenuBarState extends State<MenuBarView> {
     UserManagementRoute(),
     UserManagementDetailRoute(),
     TransactionManagementRoute(),
-    TransactionDetailRoute()
   ];
 
   @override
@@ -436,8 +434,6 @@ class _MenuBarState extends State<MenuBarView> {
       return 3;
     } else if (route == AppString.transactionManagement.val) {
       return 4;
-    } else if (route == AppString.transactionDetails.val) {
-      return 5;
     }
     // else if (route == Strings.dataTable) {
     //   return 2;
@@ -481,8 +477,6 @@ class _MenuBarState extends State<MenuBarView> {
       return const UserManagementDetailPage();
     } else if (index == 4) {
       return const TransactionManagementPage();
-    } else if (index == 5) {
-      return const TransactionDetailPage();
     }
     // else if (index == 3) {
     //   return  InvoicePage();

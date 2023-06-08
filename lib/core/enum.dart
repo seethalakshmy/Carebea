@@ -67,6 +67,7 @@ enum AppString {
   noUsersFound("No Users found!"),
   completion("Profile Completion"),
   logout("Logout"),
+  createNew("Create New"),
 
   ///validations
   emptyEmail("Email address shouldn't be empty"),
