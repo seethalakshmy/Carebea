@@ -253,7 +253,7 @@ class _LoginPageState extends State<LoginPage> {
       _validationBloc.add(const FormValidationEvent.submit());
     }
     if(_formKey.currentState!.validate()){
-      context.router.replace(const MenuBarView());
+      context.router.replace(const SideMenuRoute());
     }
   }
 

@@ -7,8 +7,8 @@ import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 
-class CustomAlertDialog extends StatelessWidget {
-  CustomAlertDialog({super.key});
+class TransactionDetailsAlert extends StatelessWidget {
+  TransactionDetailsAlert({super.key});
 
   late BuildContext context;
 
@@ -104,7 +104,7 @@ class CustomAlertDialog extends StatelessWidget {
           width: 350,
           height: 150,
           color: Colors.red,
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text("THis is working"),
@@ -120,52 +120,21 @@ class CustomAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     this.context = context;
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      elevation: 0.0,
-      backgroundColor: Colors.transparent,
+    return Container(height: 400,
       child: Wrap(
         children: [
-          Container(
-            width: 1072,
-            height: 550,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(5.0),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black26,
-                  blurRadius: 10.0,
-                  offset: Offset(0.0, 10.0),
+          Responsive.isWeb(context)
+              ? Row(
+                  children: [_detailsWidget(), _refundDetailsWidget()],
+                )
+              : Container(
+                  height: 480,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [_detailsWidget(), _refundDetailsWidget()],
+                    ),
+                  ),
                 ),
-              ],
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _headerWidget(),
-                Responsive.isWeb(context)
-                    ? Row(
-                        children: [_detailsWidget(), _refundDetailsWidget()],
-                      )
-                    : Container(
-                        height: 480,
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              _detailsWidget(),
-                              _refundDetailsWidget()
-                            ],
-                          ),
-                        ),
-                      )
-              ],
-            ),
-          ),
         ],
       ),
     );

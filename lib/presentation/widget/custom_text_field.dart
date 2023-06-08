@@ -78,7 +78,6 @@ class CTextField extends StatelessWidget {
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle:hintStyle,
-
           suffixIconConstraints:  BoxConstraints(minWidth: DBL.fifty.val),
           filled: true,
           fillColor:ColorConst.white,
@@ -86,19 +85,14 @@ class CTextField extends StatelessWidget {
           isDense: true,
           errorText: errorText,
           errorStyle:  TS().gPoppins(fontSize: FS.font11.val,),
-
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: AppColor.borderColor.val,
             ),
             borderRadius: BorderRadius.circular(5),
           ),
-          border: OutlineInputBorder(
-            borderSide: const BorderSide(color: ColorConst.lightFontColor),
-            borderRadius: BorderRadius.circular(5),
-          ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: ColorConst.primary),
+            borderSide:  BorderSide(color: AppColor.primaryColor.val),
             borderRadius: BorderRadius.circular(5),
           ),
         ),

@@ -19,6 +19,7 @@ mixin _$CareGiversState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
   CareGiverResponse? get response => throw _privateConstructorUsedError;
+  List<Types> get types => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -36,6 +37,7 @@ abstract class $CareGiversStateCopyWith<$Res> {
       {bool isLoading,
       bool isError,
       CareGiverResponse? response,
+      List<Types> types,
       String? error});
 }
 
@@ -55,6 +57,7 @@ class _$CareGiversStateCopyWithImpl<$Res, $Val extends CareGiversState>
     Object? isLoading = null,
     Object? isError = null,
     Object? response = freezed,
+    Object? types = null,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
@@ -70,6 +73,10 @@ class _$CareGiversStateCopyWithImpl<$Res, $Val extends CareGiversState>
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as CareGiverResponse?,
+      types: null == types
+          ? _value.types
+          : types // ignore: cast_nullable_to_non_nullable
+              as List<Types>,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -90,6 +97,7 @@ abstract class _$$_CareGiversStateCopyWith<$Res>
       {bool isLoading,
       bool isError,
       CareGiverResponse? response,
+      List<Types> types,
       String? error});
 }
 
@@ -107,6 +115,7 @@ class __$$_CareGiversStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? isError = null,
     Object? response = freezed,
+    Object? types = null,
     Object? error = freezed,
   }) {
     return _then(_$_CareGiversState(
@@ -122,6 +131,10 @@ class __$$_CareGiversStateCopyWithImpl<$Res>
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as CareGiverResponse?,
+      types: null == types
+          ? _value._types
+          : types // ignore: cast_nullable_to_non_nullable
+              as List<Types>,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -137,7 +150,9 @@ class _$_CareGiversState implements _CareGiversState {
       {required this.isLoading,
       required this.isError,
       required this.response,
-      required this.error});
+      required final List<Types> types,
+      required this.error})
+      : _types = types;
 
   @override
   final bool isLoading;
@@ -145,12 +160,19 @@ class _$_CareGiversState implements _CareGiversState {
   final bool isError;
   @override
   final CareGiverResponse? response;
+  final List<Types> _types;
+  @override
+  List<Types> get types {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_types);
+  }
+
   @override
   final String? error;
 
   @override
   String toString() {
-    return 'CareGiversState(isLoading: $isLoading, isError: $isError, response: $response, error: $error)';
+    return 'CareGiversState(isLoading: $isLoading, isError: $isError, response: $response, types: $types, error: $error)';
   }
 
   @override
@@ -163,12 +185,13 @@ class _$_CareGiversState implements _CareGiversState {
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.response, response) ||
                 other.response == response) &&
+            const DeepCollectionEquality().equals(other._types, _types) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isLoading, isError, response, error);
+  int get hashCode => Object.hash(runtimeType, isLoading, isError, response,
+      const DeepCollectionEquality().hash(_types), error);
 
   @JsonKey(ignore: true)
   @override
@@ -182,6 +205,7 @@ abstract class _CareGiversState implements CareGiversState {
       {required final bool isLoading,
       required final bool isError,
       required final CareGiverResponse? response,
+      required final List<Types> types,
       required final String? error}) = _$_CareGiversState;
 
   @override
@@ -190,6 +214,8 @@ abstract class _CareGiversState implements CareGiversState {
   bool get isError;
   @override
   CareGiverResponse? get response;
+  @override
+  List<Types> get types;
   @override
   String? get error;
   @override
@@ -202,20 +228,29 @@ abstract class _CareGiversState implements CareGiversState {
 mixin _$CareGiversEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, int page, int limit) getCareGivers,
+    required TResult Function(String userId, int page, int limit, int type,
+            String? searchTerm, int? filterId)
+        getCareGivers,
     required TResult Function(Caregivers caregiver) isUserActive,
+    required TResult Function(Types type) isSelectedTab,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, int page, int limit)? getCareGivers,
+    TResult? Function(String userId, int page, int limit, int type,
+            String? searchTerm, int? filterId)?
+        getCareGivers,
     TResult? Function(Caregivers caregiver)? isUserActive,
+    TResult? Function(Types type)? isSelectedTab,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, int page, int limit)? getCareGivers,
+    TResult Function(String userId, int page, int limit, int type,
+            String? searchTerm, int? filterId)?
+        getCareGivers,
     TResult Function(Caregivers caregiver)? isUserActive,
+    TResult Function(Types type)? isSelectedTab,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -223,18 +258,21 @@ mixin _$CareGiversEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetCareGivers value) getCareGivers,
     required TResult Function(_IsUserActive value) isUserActive,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetCareGivers value)? getCareGivers,
     TResult? Function(_IsUserActive value)? isUserActive,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetCareGivers value)? getCareGivers,
     TResult Function(_IsUserActive value)? isUserActive,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -264,7 +302,13 @@ abstract class _$$_GetCareGiversCopyWith<$Res> {
           _$_GetCareGivers value, $Res Function(_$_GetCareGivers) then) =
       __$$_GetCareGiversCopyWithImpl<$Res>;
   @useResult
-  $Res call({String userId, int page, int limit});
+  $Res call(
+      {String userId,
+      int page,
+      int limit,
+      int type,
+      String? searchTerm,
+      int? filterId});
 }
 
 /// @nodoc
@@ -281,6 +325,9 @@ class __$$_GetCareGiversCopyWithImpl<$Res>
     Object? userId = null,
     Object? page = null,
     Object? limit = null,
+    Object? type = null,
+    Object? searchTerm = freezed,
+    Object? filterId = freezed,
   }) {
     return _then(_$_GetCareGivers(
       userId: null == userId
@@ -295,6 +342,18 @@ class __$$_GetCareGiversCopyWithImpl<$Res>
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
               as int,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as int,
+      searchTerm: freezed == searchTerm
+          ? _value.searchTerm
+          : searchTerm // ignore: cast_nullable_to_non_nullable
+              as String?,
+      filterId: freezed == filterId
+          ? _value.filterId
+          : filterId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -303,7 +362,12 @@ class __$$_GetCareGiversCopyWithImpl<$Res>
 
 class _$_GetCareGivers implements _GetCareGivers {
   const _$_GetCareGivers(
-      {required this.userId, required this.page, required this.limit});
+      {required this.userId,
+      required this.page,
+      required this.limit,
+      required this.type,
+      this.searchTerm,
+      this.filterId});
 
   @override
   final String userId;
@@ -311,10 +375,16 @@ class _$_GetCareGivers implements _GetCareGivers {
   final int page;
   @override
   final int limit;
+  @override
+  final int type;
+  @override
+  final String? searchTerm;
+  @override
+  final int? filterId;
 
   @override
   String toString() {
-    return 'CareGiversEvent.getCareGivers(userId: $userId, page: $page, limit: $limit)';
+    return 'CareGiversEvent.getCareGivers(userId: $userId, page: $page, limit: $limit, type: $type, searchTerm: $searchTerm, filterId: $filterId)';
   }
 
   @override
@@ -324,11 +394,17 @@ class _$_GetCareGivers implements _GetCareGivers {
             other is _$_GetCareGivers &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.page, page) || other.page == page) &&
-            (identical(other.limit, limit) || other.limit == limit));
+            (identical(other.limit, limit) || other.limit == limit) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.searchTerm, searchTerm) ||
+                other.searchTerm == searchTerm) &&
+            (identical(other.filterId, filterId) ||
+                other.filterId == filterId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId, page, limit);
+  int get hashCode =>
+      Object.hash(runtimeType, userId, page, limit, type, searchTerm, filterId);
 
   @JsonKey(ignore: true)
   @override
@@ -339,30 +415,39 @@ class _$_GetCareGivers implements _GetCareGivers {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, int page, int limit) getCareGivers,
+    required TResult Function(String userId, int page, int limit, int type,
+            String? searchTerm, int? filterId)
+        getCareGivers,
     required TResult Function(Caregivers caregiver) isUserActive,
+    required TResult Function(Types type) isSelectedTab,
   }) {
-    return getCareGivers(userId, page, limit);
+    return getCareGivers(userId, page, limit, type, searchTerm, filterId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, int page, int limit)? getCareGivers,
+    TResult? Function(String userId, int page, int limit, int type,
+            String? searchTerm, int? filterId)?
+        getCareGivers,
     TResult? Function(Caregivers caregiver)? isUserActive,
+    TResult? Function(Types type)? isSelectedTab,
   }) {
-    return getCareGivers?.call(userId, page, limit);
+    return getCareGivers?.call(userId, page, limit, type, searchTerm, filterId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, int page, int limit)? getCareGivers,
+    TResult Function(String userId, int page, int limit, int type,
+            String? searchTerm, int? filterId)?
+        getCareGivers,
     TResult Function(Caregivers caregiver)? isUserActive,
+    TResult Function(Types type)? isSelectedTab,
     required TResult orElse(),
   }) {
     if (getCareGivers != null) {
-      return getCareGivers(userId, page, limit);
+      return getCareGivers(userId, page, limit, type, searchTerm, filterId);
     }
     return orElse();
   }
@@ -372,6 +457,7 @@ class _$_GetCareGivers implements _GetCareGivers {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetCareGivers value) getCareGivers,
     required TResult Function(_IsUserActive value) isUserActive,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
   }) {
     return getCareGivers(this);
   }
@@ -381,6 +467,7 @@ class _$_GetCareGivers implements _GetCareGivers {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetCareGivers value)? getCareGivers,
     TResult? Function(_IsUserActive value)? isUserActive,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
   }) {
     return getCareGivers?.call(this);
   }
@@ -390,6 +477,7 @@ class _$_GetCareGivers implements _GetCareGivers {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetCareGivers value)? getCareGivers,
     TResult Function(_IsUserActive value)? isUserActive,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
     required TResult orElse(),
   }) {
     if (getCareGivers != null) {
@@ -403,11 +491,17 @@ abstract class _GetCareGivers implements CareGiversEvent {
   const factory _GetCareGivers(
       {required final String userId,
       required final int page,
-      required final int limit}) = _$_GetCareGivers;
+      required final int limit,
+      required final int type,
+      final String? searchTerm,
+      final int? filterId}) = _$_GetCareGivers;
 
   String get userId;
   int get page;
   int get limit;
+  int get type;
+  String? get searchTerm;
+  int? get filterId;
   @JsonKey(ignore: true)
   _$$_GetCareGiversCopyWith<_$_GetCareGivers> get copyWith =>
       throw _privateConstructorUsedError;
@@ -478,8 +572,11 @@ class _$_IsUserActive implements _IsUserActive {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, int page, int limit) getCareGivers,
+    required TResult Function(String userId, int page, int limit, int type,
+            String? searchTerm, int? filterId)
+        getCareGivers,
     required TResult Function(Caregivers caregiver) isUserActive,
+    required TResult Function(Types type) isSelectedTab,
   }) {
     return isUserActive(caregiver);
   }
@@ -487,8 +584,11 @@ class _$_IsUserActive implements _IsUserActive {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, int page, int limit)? getCareGivers,
+    TResult? Function(String userId, int page, int limit, int type,
+            String? searchTerm, int? filterId)?
+        getCareGivers,
     TResult? Function(Caregivers caregiver)? isUserActive,
+    TResult? Function(Types type)? isSelectedTab,
   }) {
     return isUserActive?.call(caregiver);
   }
@@ -496,8 +596,11 @@ class _$_IsUserActive implements _IsUserActive {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, int page, int limit)? getCareGivers,
+    TResult Function(String userId, int page, int limit, int type,
+            String? searchTerm, int? filterId)?
+        getCareGivers,
     TResult Function(Caregivers caregiver)? isUserActive,
+    TResult Function(Types type)? isSelectedTab,
     required TResult orElse(),
   }) {
     if (isUserActive != null) {
@@ -511,6 +614,7 @@ class _$_IsUserActive implements _IsUserActive {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetCareGivers value) getCareGivers,
     required TResult Function(_IsUserActive value) isUserActive,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
   }) {
     return isUserActive(this);
   }
@@ -520,6 +624,7 @@ class _$_IsUserActive implements _IsUserActive {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetCareGivers value)? getCareGivers,
     TResult? Function(_IsUserActive value)? isUserActive,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
   }) {
     return isUserActive?.call(this);
   }
@@ -529,6 +634,7 @@ class _$_IsUserActive implements _IsUserActive {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetCareGivers value)? getCareGivers,
     TResult Function(_IsUserActive value)? isUserActive,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
     required TResult orElse(),
   }) {
     if (isUserActive != null) {
@@ -544,5 +650,150 @@ abstract class _IsUserActive implements CareGiversEvent {
   Caregivers get caregiver;
   @JsonKey(ignore: true)
   _$$_IsUserActiveCopyWith<_$_IsUserActive> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_IsSelectedTabCopyWith<$Res> {
+  factory _$$_IsSelectedTabCopyWith(
+          _$_IsSelectedTab value, $Res Function(_$_IsSelectedTab) then) =
+      __$$_IsSelectedTabCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Types type});
+}
+
+/// @nodoc
+class __$$_IsSelectedTabCopyWithImpl<$Res>
+    extends _$CareGiversEventCopyWithImpl<$Res, _$_IsSelectedTab>
+    implements _$$_IsSelectedTabCopyWith<$Res> {
+  __$$_IsSelectedTabCopyWithImpl(
+      _$_IsSelectedTab _value, $Res Function(_$_IsSelectedTab) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+  }) {
+    return _then(_$_IsSelectedTab(
+      null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as Types,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_IsSelectedTab implements _IsSelectedTab {
+  const _$_IsSelectedTab(this.type);
+
+  @override
+  final Types type;
+
+  @override
+  String toString() {
+    return 'CareGiversEvent.isSelectedTab(type: $type)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_IsSelectedTab &&
+            (identical(other.type, type) || other.type == type));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, type);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_IsSelectedTabCopyWith<_$_IsSelectedTab> get copyWith =>
+      __$$_IsSelectedTabCopyWithImpl<_$_IsSelectedTab>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, int page, int limit, int type,
+            String? searchTerm, int? filterId)
+        getCareGivers,
+    required TResult Function(Caregivers caregiver) isUserActive,
+    required TResult Function(Types type) isSelectedTab,
+  }) {
+    return isSelectedTab(type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, int page, int limit, int type,
+            String? searchTerm, int? filterId)?
+        getCareGivers,
+    TResult? Function(Caregivers caregiver)? isUserActive,
+    TResult? Function(Types type)? isSelectedTab,
+  }) {
+    return isSelectedTab?.call(type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, int page, int limit, int type,
+            String? searchTerm, int? filterId)?
+        getCareGivers,
+    TResult Function(Caregivers caregiver)? isUserActive,
+    TResult Function(Types type)? isSelectedTab,
+    required TResult orElse(),
+  }) {
+    if (isSelectedTab != null) {
+      return isSelectedTab(type);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGivers value) getCareGivers,
+    required TResult Function(_IsUserActive value) isUserActive,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+  }) {
+    return isSelectedTab(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGivers value)? getCareGivers,
+    TResult? Function(_IsUserActive value)? isUserActive,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+  }) {
+    return isSelectedTab?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGivers value)? getCareGivers,
+    TResult Function(_IsUserActive value)? isUserActive,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    required TResult orElse(),
+  }) {
+    if (isSelectedTab != null) {
+      return isSelectedTab(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _IsSelectedTab implements CareGiversEvent {
+  const factory _IsSelectedTab(final Types type) = _$_IsSelectedTab;
+
+  Types get type;
+  @JsonKey(ignore: true)
+  _$$_IsSelectedTabCopyWith<_$_IsSelectedTab> get copyWith =>
       throw _privateConstructorUsedError;
 }

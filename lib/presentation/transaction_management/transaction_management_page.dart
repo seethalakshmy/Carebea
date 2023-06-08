@@ -1,8 +1,7 @@
 import 'package:admin_580_tech/domain/transaction_management/model/transaction_response.dart';
 import 'package:admin_580_tech/domain/transaction_management/model/transactions.dart';
 import 'package:admin_580_tech/infrastructure/transaction_management/transactions_repository.dart';
-import 'package:admin_580_tech/presentation/menu_bar/menu_bar_view.dart';
-import 'package:admin_580_tech/presentation/transaction_management/widgets/CustomAlertDialog.dart';
+import 'package:admin_580_tech/presentation/transaction_management/widgets/transaction_details_alert.dart';
 import 'package:admin_580_tech/presentation/transaction_management/widgets/custom_status_widget.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +13,7 @@ import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
+import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_data_table_2.dart';
@@ -219,7 +219,6 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                         color: AppColor.black.val),
                     textAlign: TextAlign.start,
                   ),
-
                   CTextField(
                     width: DBL.threeFifteen.val,
                     height: DBL.forty.val,
@@ -233,17 +232,6 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                       width: 16,
                     ),
                   ),
-                  // CustomSizedBox(width: DBL.ten.val,),
-                  // FxButton(
-                  //   onPressed: () {},
-                  //   text: AppString.create.val,
-                  //   color: AppColor.primaryColor.val,
-                  //   height: DBL.fifty.val,
-                  //   borderRadius: DBL.five.val,
-                  //     padding:  EdgeInsets.symmetric(horizontal: DBL.twentyTwo.val, vertical: DBL.ten.val),
-                  //   textStyle: TS().gRoboto(color: AppColor.white.val,fontWeight: FW.w500.val),
-                  //   icon:CustomIcon(icon: Icons.add,size: DBL.twenty.val,color: AppColor.white.val,)
-                  // ),
                 ],
               ),
               CustomSizedBox(height: DBL.fifteen.val),
@@ -252,12 +240,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                 child: _usersTable(),
               ),
               CustomSizedBox(height: DBL.twenty.val),
-              isXs(context)
-                  ? SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: _bottomView(),
-                    )
-                  : _bottomView()
+              _paginationView()
             ],
           )
         : const EmptyView(title: "No Transactions found!");
@@ -400,7 +383,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                 children: [
                   InkWell(
                       onTap: () {
-                       // autoTabRouter!.setActiveIndex(5);
+                        // autoTabRouter!.setActiveIndex(5);
                         _transactionDetails();
                       },
                       child: CustomSvg(
@@ -468,39 +451,36 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
 
   bool isXs(context) => MediaQuery.of(context).size.width <= 820;
 
-  Row _bottomView() {
+  _paginationView() {
     final int totalPages = (_totalItems / _limit).ceil();
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        PaginationView(
-            page: _page,
-            totalPages: totalPages,
-            onNextPressed: () {
-              if (_page < totalPages) {
-                _page = _page + 1;
-                _transactionBloc.add(TransactionManagementEvent.getTransactions(
-                    page: _page, limit: _limit));
-                updateData();
-              }
-            },
-            onItemPressed: (i) {
-              _page = i;
-              _transactionBloc.add(TransactionManagementEvent.getTransactions(
-                  page: _page, limit: _limit));
-              updateData();
-            },
-            onPreviousPressed: () {
-              if (_page > 1) {
-                _page = _page - 1;
-                _transactionBloc.add(TransactionManagementEvent.getTransactions(
-                    page: _page, limit: _limit));
-                updateData();
-              }
-            }),
-        CustomText3("Showing ${_start + 1} to $_end of $_totalItems entries"),
-      ],
-    );
+    return PaginationView(
+        page: _page,
+        totalPages: totalPages,
+        end: _end,
+        totalItems: _totalItems,
+        start: _start,
+        onNextPressed: () {
+          if (_page < totalPages) {
+            _page = _page + 1;
+            _transactionBloc.add(TransactionManagementEvent.getTransactions(
+                page: _page, limit: _limit));
+            updateData();
+          }
+        },
+        onItemPressed: (i) {
+          _page = i;
+          _transactionBloc.add(TransactionManagementEvent.getTransactions(
+              page: _page, limit: _limit));
+          updateData();
+        },
+        onPreviousPressed: () {
+          if (_page > 1) {
+            _page = _page - 1;
+            _transactionBloc.add(TransactionManagementEvent.getTransactions(
+                page: _page, limit: _limit));
+            updateData();
+          }
+        });
   }
 
   void updateData() {
@@ -509,20 +489,23 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
       _end = mUserList.length < _limit ? mUserList.length : _limit;
     } else {
       _start = (_page * _limit) - 10;
-      _end = _start + (mUserList.length < _limit ? mUserList.length : _limit);
-      _end = _end < mUserList.length ? _end : mUserList.length;
+      _end = _start + mUserList.length;
     }
   }
 
   _statusBox(bool isCompleted) {
     return CustomStatusWidget(isCompleted: isCompleted);
   }
-  _transactionDetails(){
+
+  _transactionDetails() {
     // show the dialog
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return  CustomAlertDialog();
+        return CustomAlertDialogWidget(
+          heading: AppString.transactionManagement.val,
+          child: TransactionDetailsAlert(),
+        );
       },
     );
   }

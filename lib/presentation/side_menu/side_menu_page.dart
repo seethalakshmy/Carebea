@@ -8,6 +8,7 @@ import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/core/text_utils.dart';
 import 'package:admin_580_tech/core/theme.dart';
+import 'package:admin_580_tech/presentation/cargiver_detail/caregiver_detail_page.dart';
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
@@ -27,14 +28,14 @@ import '../widget/dropdown/dropdown.dart';
 
 TabsRouter? autoTabRouter;
 
-class MenuBarView extends StatefulWidget {
-  const MenuBarView({Key? key}) : super(key: key);
+class SideMenuPage extends StatefulWidget {
+  const SideMenuPage({Key? key}) : super(key: key);
 
   @override
-  State<MenuBarView> createState() => _MenuBarState();
+  State<SideMenuPage> createState() => _MenuBarState();
 }
 
-class _MenuBarState extends State<MenuBarView> {
+class _MenuBarState extends State<SideMenuPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<ScaffoldState> _scaffoldDrawerKey =
       GlobalKey<ScaffoldState>();
@@ -46,7 +47,7 @@ class _MenuBarState extends State<MenuBarView> {
 
   Map<String, String> mainData = {
     AppString.dashboard.val: "",
-    AppString.careGiverManagement.val: "",
+    AppString.careAmbassador.val: "",
     AppString.userManagement.val: "",
     AppString.transactionManagement.val: "",
   };
@@ -58,6 +59,7 @@ class _MenuBarState extends State<MenuBarView> {
   final List<PageRouteInfo<dynamic>> _routes = const [
     DashboardRoute(),
     CareGiversRoute(),
+    CareGiverDetailRoute(),
     UserManagementRoute(),
     UserManagementDetailRoute(),
     TransactionManagementRoute(),
@@ -420,21 +422,26 @@ class _MenuBarState extends State<MenuBarView> {
     CustomLog.log('path is $path');
     if (path == "/user-management-detail") {
       path = "user-management";
+    }else if(path=="/care-ambassador-detail"){
+      path = "care-ambassador";
     }
     return items.keys.elementAt(index) == upperCase(path) ? true : false;
   }
 
   int getRouteIndex(String route) {
     CustomLog.log('route name == $route');
-    if (route == AppString.careGiverManagement.val) {
+    if (route == AppString.careAmbassador.val) {
       return 1;
-    } else if (route == AppString.userManagement.val) {
+    } else if (route == AppString.careAmbassadorDetail.val) {
       return 2;
-    } else if (route == AppString.userManagementDetail.val) {
+    } else if (route == AppString.userManagement.val) {
       return 3;
-    } else if (route == AppString.transactionManagement.val) {
+    } else if (route == AppString.userManagementDetail.val) {
       return 4;
+    } else if (route == AppString.transactionManagement.val) {
+      return 5;
     }
+
     // else if (route == Strings.dataTable) {
     //   return 2;
     // } else if (route == Strings.invoice) {
@@ -472,10 +479,12 @@ class _MenuBarState extends State<MenuBarView> {
     if (index == 1) {
       return const CareGiversPage();
     } else if (index == 2) {
-      return const UserManagementPage();
+      return const CareGiverDetailPage();
     } else if (index == 3) {
-      return const UserManagementDetailPage();
+      return const UserManagementPage();
     } else if (index == 4) {
+      return const UserManagementDetailPage();
+    } else if (index == 5) {
       return const TransactionManagementPage();
     }
     // else if (index == 3) {

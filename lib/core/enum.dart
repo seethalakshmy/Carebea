@@ -21,22 +21,29 @@ enum AppString {
   entries("entries"),
   to("to"),
   of("of"),
-  careGiverManagement("Caregiver Management"),
+  careAmbassador("Care Ambassador"),
   userManagement("User Management"),
   userManagementDetail("User Management Detail"),
-  careGiverDetail("Caregiver Detail"),
+  careAmbassadorDetail("Care Ambassador Detail"),
   transactionManagement("Transaction Management"),
   transactionDetails("Transaction Details"),
   id("ID"),
   slNo("SL No"),
   firstName("First Name"),
+  filter("Filter"),
   lastName("Last Name"),
   name("Name"),
+  newRequest("New Request"),
+  activeCareAmbassador("Active Care Ambassador"),
   phoneNumber("Phone Number"),
   status("Status"),
   search("Search"),
   client("Client"),
+  clientProfiles("Client Profiles"),
+  nameAndAge("Name & Age"),
+  totalServiceCompleted("Total Service Completed"),
   service("Service"),
+  services("Services"),
   serviceCompleted("Services Completed"),
   canceledRequest("Canceled Request"),
   reviewGiven("Review Given"),
@@ -65,8 +72,20 @@ enum AppString {
   allTransactions("All Transactions"),
   cancel("Cancel"),
   noUsersFound("No Users found!"),
-  completion("Profile Completion"),
+  profileCompletion("Profile Completion"),
   logout("Logout"),
+  noProfiles("No Profiles Found!"),
+  creditCardDetails("Credit card details"),
+  paymentMethod("Payment Method"),
+  accountHolderName("Account Holder Name"),
+  accountNumber("Account Number"),
+  expirationDate("Expiration Date"),
+  securityNo("Security NO"),
+  emptyCareGivers("No caregivers found!"),
+  schedules("Schedules"),
+  accountDetails("Account Details"),
+  earnings("Earnings"),
+  newServiceRequest("New Service Request"),
   createNew("Create New"),
 
   ///validations
@@ -83,18 +102,12 @@ enum AppString {
 }
 
 
-
-
-
-
-
-
-
 /// App Colors
 enum AppColor {
   backgroundColor(Color(0xffE9F0F9)),
   primaryColor(Color(0xff344280)),
   darkBlue(Color(0xff070329)),
+  lightBlue1(Color(0xffDAD8EE)),
   black(Color(0xff000000)),
   black2(Color(0xff020E1A)),
   matBlack(Color(0xff324665)),
@@ -124,7 +137,10 @@ enum AppColor {
   lightGrey4(Color(0xffB5B5C4)),
   lightGrey5(Color(0xffA0A4B7)),
   lightGrey6(Color(0xffA7AAA8)),
-  lightGrey7(Color(0xffF9F9F9)),
+  lightGrey7(Color(0xff7E889D)),
+  darkGrey(Color(0xff576A83)),
+  darkGrey2(Color(0xff496379)),
+  lightWhite(Color(0xffEEF4FA)),
   red(Color(0xffE75A77)),
   success (Color(0xff53a653)),
   warning ( Color(0xffffcc00)),
@@ -299,6 +315,7 @@ enum DBL {
   hundredNinety(190.0),
   twoHundred(200.0),
   twoForty(240),
+  twoNinety(290),
   threeHundred(300.0),
   threeFifteen(315.0),
   threeFortyThree(343.0),

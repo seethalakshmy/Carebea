@@ -8,7 +8,8 @@ import 'package:auto_route/annotations.dart';
 import '../caregivers/caregivers_page.dart';
 import '../dashboard/dashboard_page.dart';
 import '../login/login_page.dart';
-import '../menu_bar/menu_bar_view.dart';
+import '../side_menu/side_menu_page.dart';
+import '../test.dart';
 import '../transaction_management/transaction_management_page.dart';
 
 @AdaptiveAutoRouter(
@@ -28,12 +29,12 @@ import '../transaction_management/transaction_management_page.dart';
         maintainState: false,
         path: '/admin/reset-password'),
     AutoRoute(
-      page: MenuBarView,
+      page: SideMenuPage,
       path: "/admin",
       children: [
         AutoRoute(path: 'dashboard', page: DashboardPage, initial: true),
         AutoRoute(
-          path: 'caregiver-management',
+          path: 'care-ambassador',
           page: CareGiversPage,
         ),
         AutoRoute(
@@ -41,7 +42,7 @@ import '../transaction_management/transaction_management_page.dart';
           page: UserManagementPage,
         ),
         AutoRoute(
-          path: 'caregiver-detail',
+          path: 'care-ambassador-detail',
           page: CareGiverDetailPage,
         ),
         AutoRoute(
