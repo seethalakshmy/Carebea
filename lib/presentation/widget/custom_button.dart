@@ -33,6 +33,7 @@ class CustomButton extends StatelessWidget {
   final double? hoverElevation;
   final Color? color;
   final Color? hoverColor;
+  final TextStyle?textStyle;
 
   const CustomButton({
     Key? key,
@@ -60,6 +61,7 @@ class CustomButton extends StatelessWidget {
     this.hoverElevation,
     this.color,
     this.hoverColor,
+    this.textStyle,
   })  : assert((fullWidth && minWidth == null) ||
             (!fullWidth && minWidth != null) ||
             (!fullWidth && minWidth == null)),
@@ -121,7 +123,7 @@ class CustomButton extends StatelessWidget {
                   ? Flexible(
                       child: Text(
                         text!,
-                        style: TextStyle(fontWeight: textWeight),
+                        style: textStyle,
                       ),
                     )
                   : CustomSizedBox.shrink(),

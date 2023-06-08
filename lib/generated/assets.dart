@@ -29,5 +29,7 @@ class Assets {
   static const String imagesIcPerson = 'assets/images/ic_person.png';
   static const String imagesNotification = 'assets/images/notification.png';
   static const String imagesProfile = 'assets/images/profile.png';
+  static const String sampleCareGiverDetailResponse = 'assets/sample/care_giver_detail_response.json';
+  static const String sampleUserDetailResponse = 'assets/sample/user_detail_response.json';
 
 }

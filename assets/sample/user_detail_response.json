@@ -1,0 +1,154 @@
+
+{
+  "status": false,
+  "message": "success",
+  "user": {
+    "id": "12345",
+    "name": {
+      "first_name": "sha",
+      "last_name": "simon",
+      "profile": ""
+    },
+    "phone": "800-123-4567",
+    "email": "jd@example.com",
+    "ssn": "8999-12283-232",
+    "location": "75 69TH ST, Guttenberg NJ USA , 08054 ",
+    "profile_completion": "85",
+    "service_completed": 36,
+    "canceled_request": 5,
+    "total_reviews_given": 40,
+    "sub_profiles": [
+      {
+        "id": "123",
+        "user_id": "#ID123",
+        "total_serivice_completed": 12,
+        "age": 32,
+        "profile": "http_img_url",
+        "name": {
+          "first_name": "sha",
+          "last_name": "simon",
+          "profile": ""
+        }
+      },
+      {
+        "id": "123",
+        "user_id": "#ID123",
+        "total_serivice_completed": 12,
+        "age": 32,
+        "profile": "http_img_url",
+        "name": {
+          "first_name": "sha",
+          "last_name": "simon2",
+          "profile": ""
+        }
+      }
+    ],
+    "payment_method": {
+      "credit_card_details": {
+        "account_holder_name": "sha",
+        "account_number": "XXXXXX78",
+        "expiration_date": "jun 23 2025",
+        "security_number": 903
+      },
+      "ach_details": {
+        "account_holder_name": "sha",
+        "routing_number": "XX63663",
+        "account_number": "XXXXXX78",
+        "account_type": [
+          "checkings",
+          "savings"
+        ]
+      }
+    },
+    "services": [
+      {
+        "id": "1",
+        "user_id": "#123",
+        "start_date_time": "04/26/2023  at 10:00am",
+        "end_date_time": "04/26/2023  at 10:00am",
+        "total_service_fee": "$324",
+        "status": 1,
+        "client": {
+          "first_name": "test client",
+          "last_name": "client last",
+          "profile": "httpimage"
+        },
+        "caregiver": {
+          "first_name": "test caregiver",
+          "last_name": "client caregiver",
+          "profile": "httpimage"
+        }
+      },
+      {
+        "id": "2",
+        "user_id": "#124",
+        "start_date_time": "04/26/2023  at 10:00am",
+        "end_date_time": "04/26/2023  at 10:00am",
+        "total_service_fee": "$324",
+        "status": 2,
+        "client": {
+          "first_name": "test client1",
+          "last_name": "client last2",
+          "profile": "httpimage"
+        },
+        "caregiver": {
+          "first_name": "test caregiver1",
+          "last_name": "client caregiver2",
+          "profile": "httpimage"
+        }
+      }
+    ],
+    "transactions": [
+      {
+        "client": "test",
+        "service_id": "SER123",
+        "transaction_type": "ACH",
+        "date_time": "04/26/2023 10:00am",
+        "amount": "$324",
+        "paid_for": "service",
+        "transaction_id": "#12030923",
+        "status": 1
+      },
+      {
+        "client": "test2",
+        "service_id": "SER124",
+        "transaction_type": "Credit Card",
+        "date_time": "04/26/2023 10:00am",
+        "amount": "$324",
+        "paid_for": "service",
+        "transaction_id": "#12030923",
+        "status": 1
+      }
+    ],
+    "service_request": [
+      {
+        "name": {
+          "first_name": "Alice",
+          "last_name": "simon"
+        },
+        "request_id": "ser12345",
+        "start_date_time": "04/26/2023 10:00am",
+        "end_date_time": "04/26/2023 10:00am",
+        "matching_list_count": 3,
+        "service_need": [
+          "Assist Wakeup",
+          "Assist showering"
+        ]
+      },
+      {
+        "name": {
+          "first_name": "John",
+          "last_name": "simon"
+        },
+        "request_id": "ser12343",
+        "start_date_time": "04/26/2023 10:00am",
+        "end_date_time": "04/26/2023 10:00am",
+        "matching_list_count": 8,
+        "service_need": [
+          "Assist Wakeup",
+          "Assist showering"
+        ]
+      }
+    ]
+  }
+}

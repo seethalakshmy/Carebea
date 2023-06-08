@@ -24,16 +24,24 @@ class _ApiClient implements ApiClient {
     userId,
     page,
     limit,
+    type,
+    searchTerm,
+    filterId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = {
       'user_id': userId,
       'page': page,
       'limit': limit,
+      'type': type,
+      'search_term': searchTerm,
+      'filter_id': filterId,
     };
+    _data.removeWhere((k, v) => v == null);
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<CareGiverResponse>(Options(
       method: 'POST',

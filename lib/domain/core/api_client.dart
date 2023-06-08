@@ -41,5 +41,8 @@ abstract class ApiClient {
       @Field('user_id') String userId,
       @Field('page') int page,
       @Field('limit') int limit,
+      @Field('type') int type,
+      @Field('search_term') String ?searchTerm,
+      @Field('filter_id') int? filterId,
   );
 }

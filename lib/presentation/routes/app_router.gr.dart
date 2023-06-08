@@ -20,11 +20,10 @@ import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart'
 import 'package:admin_580_tech/presentation/forgot_password/forgot_password_page.dart'
     as _i2;
 import 'package:admin_580_tech/presentation/login/login_page.dart' as _i1;
-import 'package:admin_580_tech/presentation/menu_bar/menu_bar_view.dart' as _i4;
 import 'package:admin_580_tech/presentation/reset_password/reset_password_page.dart'
     as _i3;
-import 'package:admin_580_tech/presentation/transaction_details/transaction_detail_page.dart'
-    as _i11;
+import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart'
+    as _i4;
 import 'package:admin_580_tech/presentation/transaction_management/transaction_management_page.dart'
     as _i10;
 import 'package:admin_580_tech/presentation/user_management/user_management_page.dart'
@@ -62,8 +61,10 @@ class AppRouter extends _i12.RootStackRouter {
     },
     MenuBarView.name: (routeData) {
       return _i12.AdaptivePage<dynamic>(
+    SideMenuRoute.name: (routeData) {
+      return _i10.AdaptivePage<dynamic>(
         routeData: routeData,
-        child: const _i4.MenuBarView(),
+        child: const _i4.SideMenuPage(),
       );
     },
     DashboardRoute.name: (routeData) {
@@ -102,12 +103,6 @@ class AppRouter extends _i12.RootStackRouter {
         child: const _i10.TransactionManagementPage(),
       );
     },
-    TransactionDetailRoute.name: (routeData) {
-      return _i12.AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: const _i11.TransactionDetailPage(),
-      );
-    },
   };
 
   @override
@@ -130,50 +125,45 @@ class AppRouter extends _i12.RootStackRouter {
           ResetPasswordRoute.name,
           path: '/admin/reset-password',
         ),
-        _i12.RouteConfig(
-          MenuBarView.name,
+        _i10.RouteConfig(
+          SideMenuRoute.name,
           path: '/admin',
           children: [
             _i12.RouteConfig(
               '#redirect',
               path: '',
-              parent: MenuBarView.name,
+              parent: SideMenuRoute.name,
               redirectTo: 'dashboard',
               fullMatch: true,
             ),
             _i12.RouteConfig(
               DashboardRoute.name,
               path: 'dashboard',
-              parent: MenuBarView.name,
+              parent: SideMenuRoute.name,
             ),
             _i12.RouteConfig(
               CareGiversRoute.name,
-              path: 'caregiver-management',
-              parent: MenuBarView.name,
+              path: 'care-ambassador',
+              parent: SideMenuRoute.name,
             ),
             _i12.RouteConfig(
               UserManagementRoute.name,
               path: 'user-management',
-              parent: MenuBarView.name,
+              parent: SideMenuRoute.name,
             ),
             _i12.RouteConfig(
               CareGiverDetailRoute.name,
-              path: 'caregiver-detail',
-              parent: MenuBarView.name,
+              path: 'care-ambassador-detail',
+              parent: SideMenuRoute.name,
             ),
             _i12.RouteConfig(
               UserManagementDetailRoute.name,
               path: 'user-management-detail',
-              parent: MenuBarView.name,
+              parent: SideMenuRoute.name,
             ),
             _i12.RouteConfig(
               TransactionManagementRoute.name,
               path: 'transaction-management',
-              parent: MenuBarView.name,
-            ),
-            _i12.RouteConfig(
-              TransactionDetailRoute.name,
-              path: 'transaction-detail',
               parent: MenuBarView.name,
             ),
           ],
@@ -218,16 +208,16 @@ class ResetPasswordRoute extends _i12.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.MenuBarView]
-class MenuBarView extends _i12.PageRouteInfo<void> {
-  const MenuBarView({List<_i12.PageRouteInfo>? children})
+/// [_i4.SideMenuPage]
+class SideMenuRoute extends _i10.PageRouteInfo<void> {
+  const SideMenuRoute({List<_i10.PageRouteInfo>? children})
       : super(
-          MenuBarView.name,
+          SideMenuRoute.name,
           path: '/admin',
           initialChildren: children,
         );
 
-  static const String name = 'MenuBarView';
+  static const String name = 'SideMenuRoute';
 }
 
 /// generated route for
@@ -248,7 +238,7 @@ class CareGiversRoute extends _i12.PageRouteInfo<void> {
   const CareGiversRoute()
       : super(
           CareGiversRoute.name,
-          path: 'caregiver-management',
+          path: 'care-ambassador',
         );
 
   static const String name = 'CareGiversRoute';
@@ -272,7 +262,7 @@ class CareGiverDetailRoute extends _i12.PageRouteInfo<void> {
   const CareGiverDetailRoute()
       : super(
           CareGiverDetailRoute.name,
-          path: 'caregiver-detail',
+          path: 'care-ambassador-detail',
         );
 
   static const String name = 'CareGiverDetailRoute';
@@ -302,14 +292,3 @@ class TransactionManagementRoute extends _i12.PageRouteInfo<void> {
   static const String name = 'TransactionManagementRoute';
 }
 
-/// generated route for
-/// [_i11.TransactionDetailPage]
-class TransactionDetailRoute extends _i12.PageRouteInfo<void> {
-  const TransactionDetailRoute()
-      : super(
-          TransactionDetailRoute.name,
-          path: 'transaction-detail',
-        );
-
-  static const String name = 'TransactionDetailRoute';
-}

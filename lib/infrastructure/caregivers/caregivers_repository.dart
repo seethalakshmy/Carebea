@@ -13,10 +13,10 @@ class CareGiversRepository implements ICareGiversRepo {
 
   @override
   Future<Either<ApiErrorHandler, CareGiverResponse>> getCareGivers(
-      {required String userID,required int page, required int limit}) async {
+      {required String userID,required int page, required int limit,required int type,String ?searchTerm, int? filterId}) async {
     try {
       final response =
-          await _apiClient.getCareGivers("",userID, page, limit);
+          await _apiClient.getCareGivers("",userID, page, limit,type,searchTerm,filterId);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
