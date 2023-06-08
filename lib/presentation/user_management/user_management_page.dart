@@ -255,14 +255,14 @@ class _UserManagementPageState extends State<UserManagementPage> {
           ),
           DataColumn2(
             size: ColumnSize.S,
-            fixedWidth: DBL.twoHundred.val,
+            fixedWidth: DBL.eighty.val,
             label: _columnsView(
                 text: AppString.id.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             fixedWidth: Responsive.isWeb(context)
                 ? MediaQuery.of(context).size.width * .17
-                : DBL.twentyOne.val,
+                : DBL.twoHundred.val,
             label: _columnsView(
                 text: AppString.name.val, fontWeight: FontWeight.bold),
           ),
@@ -282,7 +282,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
                 text: AppString.role.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.M,
+            size: ColumnSize.L,
             label: _columnsView(
                 text: AppString.status.val, fontWeight: FontWeight.bold),
           ),
@@ -290,7 +290,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
             // size: ColumnSize.L,
             fixedWidth: Responsive.isWeb(context)
                 ? MediaQuery.of(context).size.width * .1
-                : DBL.oneFifty.val,
+                : DBL.oneSeventy.val,
             label: const CustomText3(""),
           ),
         ],
