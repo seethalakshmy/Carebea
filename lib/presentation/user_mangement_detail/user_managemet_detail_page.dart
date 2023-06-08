@@ -10,6 +10,8 @@ import 'package:admin_580_tech/infrastructure/user_management_detail/user_manage
 import 'package:admin_580_tech/presentation/cargiver_detail/views/assigned_services.dart';
 import 'package:admin_580_tech/presentation/cargiver_detail/widgets/service_completion_and_rewards.dart';
 import 'package:admin_580_tech/presentation/cargiver_detail/widgets/svg_text.dart';
+import 'package:admin_580_tech/presentation/user_mangement_detail/views/payment_method_view.dart';
+import 'package:admin_580_tech/presentation/user_mangement_detail/views/sub_profile_view.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
@@ -58,7 +60,9 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
         ..add(UserManagementDetailEvent.getUserDetail(userId: userId)),
       child: BlocBuilder<UserManagementDetailBloc, UserManagementDetailState>(
         builder: (context, state) {
-          return _bodyView(context, state);
+          return state.isLoading?
+               CircularProgressIndicator():
+           _bodyView(context, state);
         },
       ),
     );
@@ -76,7 +80,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
             SliverAppBar(
                 leading: const SizedBox(),
                 backgroundColor: Colors.white,
-                expandedHeight: isXs2(context) ? 380 : 360,
+                expandedHeight: isXs2(context) ? 325 :isLg2(context)?285: 230,
                 floating: false,
                 toolbarHeight: 50,
                 flexibleSpace: FlexibleSpaceBar(
@@ -91,7 +95,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                             Stack(
                               children: [
                                 CustomSizedBox(
-                                  height: isXs2(context) ? 265 : 330,
+                                  height: isXs2(context) ? 185 :isLg2(context)?255: 180,
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -107,58 +111,60 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                               width: isXs(context) ? 150 : 200,
                                               height: isXs(context) ? 125 : 175,
                                             ),
-                                            CustomSizedBox(
-                                              height: DBL.forty.val,
-                                            ),
-                                            Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  CustomText3(
-                                                    AppString.completion.val,
-                                                    style: TS().gRoboto(
-                                                        fontWeight: FW.w500.val,
-                                                        fontSize: getFontSize(
-                                                          context,
-                                                          fontSize:
-                                                              FS.font14.val,
-                                                        ),
-                                                        color: AppColor
-                                                            .lightGrey4.val),
-                                                  ),
-                                                  CustomSizedBox(
-                                                    width: DBL.five.val,
-                                                  ),
-                                                  CustomText3(
-                                                    response.user
-                                                            ?.profileCompletion ??
-                                                        "",
-                                                    style: TS().gRoboto(
-                                                        fontWeight: FW.w500.val,
-                                                        fontSize: getFontSize(
-                                                          context,
-                                                          fontSize:
-                                                              FS.font14.val,
-                                                        ),
-                                                        color: AppColor
-                                                            .primaryColor.val),
-                                                  )
-                                                ]),
-                                            CustomSizedBox(
-                                              height: DBL.thirteen.val,
-                                            ),
-                                            LinearPercentIndicator(
-                                              padding: const EdgeInsets.all(0),
-                                              barRadius:
-                                                  const Radius.circular(10),
-                                              width:
-                                                  isXs(context) ? 150.0 : 200.0,
-                                              lineHeight: 6.0,
-                                              percent: 0.5,
-                                              progressColor:
-                                                  AppColor.green2.val,
-                                            ),
+
+                                            ///Todo change later
+                                            // CustomSizedBox(
+                                            //   height: DBL.forty.val,
+                                            // ),
+                                            // Row(
+                                            //     mainAxisAlignment:
+                                            //         MainAxisAlignment
+                                            //             .spaceBetween,
+                                            //     children: [
+                                            //       CustomText3(
+                                            //         AppString.profileCompletion.val,
+                                            //         style: TS().gRoboto(
+                                            //             fontWeight: FW.w500.val,
+                                            //             fontSize: getFontSize(
+                                            //               context,
+                                            //               fontSize:
+                                            //                   FS.font14.val,
+                                            //             ),
+                                            //             color: AppColor
+                                            //                 .lightGrey4.val),
+                                            //       ),
+                                            //       CustomSizedBox(
+                                            //         width: DBL.five.val,
+                                            //       ),
+                                            //       CustomText3(
+                                            //         response.user
+                                            //                 ?.profileCompletion ??
+                                            //             "",
+                                            //         style: TS().gRoboto(
+                                            //             fontWeight: FW.w500.val,
+                                            //             fontSize: getFontSize(
+                                            //               context,
+                                            //               fontSize:
+                                            //                   FS.font14.val,
+                                            //             ),
+                                            //             color: AppColor
+                                            //                 .primaryColor.val),
+                                            //       )
+                                            //     ]),
+                                            // CustomSizedBox(
+                                            //   height: DBL.thirteen.val,
+                                            // ),
+                                            // LinearPercentIndicator(
+                                            //   padding: const EdgeInsets.all(0),
+                                            //   barRadius:
+                                            //       const Radius.circular(10),
+                                            //   width:
+                                            //       isXs(context) ? 150.0 : 200.0,
+                                            //   lineHeight: 6.0,
+                                            //   percent: 0.5,
+                                            //   progressColor:
+                                            //       AppColor.green2.val,
+                                            // ),
                                           ],
                                         ),
                                       ),
@@ -238,11 +244,11 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                               name: response.user?.ssn ?? "",
                                               widthGap: DBL.twelve.val,
                                             ),
-                                            CustomSizedBox(
-                                              height: isXs2(context)
-                                                  ? DBL.ten.val
-                                                  : DBL.fourteen.val,
-                                            ),
+                                            // CustomSizedBox(
+                                            //   height: isXs2(context)
+                                            //       ? DBL.ten.val
+                                            //       : DBL.fourteen.val,
+                                            // ),
                                             // Row(children: [
                                             //   CustomSvg(path: IMG.warning.val),
                                             //   CustomSizedBox(
@@ -344,6 +350,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                     : CustomSizedBox.shrink()
                               ],
                             ),
+                            CustomSizedBox(height: isXs2(context)?DBL.eight.val:DBL.zero.val,),
                             isXs2(context)
                                 ? SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
@@ -375,8 +382,9 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
           ];
         },
         body: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: AppColor.primaryColor.val,
           appBar: TabBar(
+            
             isScrollable: true,
             dividerColor: AppColor.transparent.val,
             indicatorColor: AppColor.primaryColor.val,
@@ -385,9 +393,9 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
             labelColor: AppColor.primaryColor.val,
             unselectedLabelColor: AppColor.lightGrey5.val,
             tabs: [
-              Tab(icon: Text("Assigned Services")),
-              Tab(icon: Text("Qualifications & Test Result")),
-              Tab(icon: Text("Preference")),
+              Tab(icon: Text(AppString.clientProfiles.val)),
+              Tab(icon: Text(AppString.paymentMethod.val)),
+              Tab(icon: Text(AppString.services.val)),
               Tab(icon: Text("Services")),
             ],
             controller: tabController,
@@ -399,12 +407,8 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
               child: TabBarView(
                 controller: tabController,
                 children: [
-                  Container(
-                    color: Colors.blue,
-                  ),
-                  Container(
-                    color: Colors.white,
-                  ),
+                  SubProfileView(state: state),
+                  PaymentMethodView(state: state,),
                   Container(
                     color: Colors.white,
                   ),

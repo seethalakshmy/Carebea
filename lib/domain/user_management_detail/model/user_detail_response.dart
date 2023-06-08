@@ -30,7 +30,6 @@ class User {
   String? phone;
   String? email;
   String? ssn;
-  String? profileCompletion;
   int? serviceCompleted;
   int? canceledRequest;
   int? totalReviewsGiven;
@@ -46,7 +45,6 @@ class User {
         this.phone,
         this.email,
         this.ssn,
-        this.profileCompletion,
         this.serviceCompleted,
         this.canceledRequest,
         this.totalReviewsGiven,
@@ -60,11 +58,11 @@ class User {
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    location = json['location'];
     name = json['name'] != null ?  Name.fromJson(json['name']) : null;
     phone = json['phone'];
     email = json['email'];
     ssn = json['ssn'];
-    profileCompletion = json['profile_completion'];
     serviceCompleted = json['service_completed'];
     canceledRequest = json['canceled_request'];
     totalReviewsGiven = json['total_reviews_given'];
@@ -106,7 +104,6 @@ class User {
     data['phones'] = phone;
     data['email'] = email;
     data['ssn'] = ssn;
-    data['profile_completion'] = profileCompletion;
     data['service_completed'] = serviceCompleted;
     data['canceled_request'] = canceledRequest;
     data['total_reviews_given'] = totalReviewsGiven;
@@ -384,7 +381,6 @@ class ServiceRequest {
         this.serviceNeed});
 
   ServiceRequest.fromJson(Map<String, dynamic> json) {
-    clientName = json['client_name'];
     requestId = json['request_id'];
     startDateTime = json['start_date_time'];
     endDateTime = json['end_date_time'];
@@ -395,7 +391,6 @@ class ServiceRequest {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data =  <String, dynamic>{};
-    data['client_name'] = clientName;
     data['request_id'] = requestId;
     data['start_date_time'] = startDateTime;
     data['end_date_time'] = endDateTime;

@@ -8,8 +8,7 @@ import 'package:auto_route/annotations.dart';
 import '../caregivers/caregivers_page.dart';
 import '../dashboard/dashboard_page.dart';
 import '../login/login_page.dart';
-import '../menu_bar/menu_bar_view.dart';
-import '../test.dart';
+import '../side_menu/side_menu_page.dart';
 
 @AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route',
@@ -30,13 +29,13 @@ import '../test.dart';
         path: '/admin/reset-password'
     ),
     AutoRoute(
-      page: MenuBarView,
+      page: SideMenuPage,
       path: "/admin",
       children: [
         AutoRoute(path: 'dashboard', page: DashboardPage,initial: true),
-        AutoRoute(path: 'caregiver-management', page: CareGiversPage,),
+        AutoRoute(path: 'care-ambassador', page: CareGiversPage,),
         AutoRoute(path: 'user-management', page: UserManagementPage,),
-        AutoRoute(path: 'caregiver-detail', page: CareGiverDetailPage,),
+        AutoRoute(path: 'care-ambassador-detail', page: CareGiverDetailPage,),
         AutoRoute(path: 'user-management-detail', page: UserManagementDetailPage,),
         // AutoRoute(path: 'caregiver-detail', page: TestPage,),
       ],

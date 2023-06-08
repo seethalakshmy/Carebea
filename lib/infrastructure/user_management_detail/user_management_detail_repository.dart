@@ -2,9 +2,6 @@ import 'dart:convert';
 
 import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/string.dart';
-import 'package:admin_580_tech/domain/caregiver_detail/i_caregivers_detail_repo.dart';
-import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
-import 'package:admin_580_tech/domain/caregiver_detail/model/data.dart';
 import 'package:admin_580_tech/domain/core/api_client.dart';
 import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.dart';
 import 'package:admin_580_tech/domain/user_management_detail/i_user_management_detail_repo.dart';
@@ -12,8 +9,6 @@ import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_r
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
-
-import '../../domain/caregiver_detail/model/services.dart';
 
 class UserManagementDetailRepository implements IUserDetailRepo {
   final ApiClient _apiClient = ApiClient(Dio());

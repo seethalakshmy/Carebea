@@ -14,7 +14,7 @@ import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
 import '../../domain/user_management/model/user_response.dart';
 import '../../domain/user_management/model/users.dart';
-import '../menu_bar/menu_bar_view.dart';
+import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
@@ -104,7 +104,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
     if (value?.status ?? false) {
       if (value?.data?.users != null && value!.data!.users!.isNotEmpty) {
         ///todo change later
-        _totalItems = value.data?.pagination?.totals ?? 500;
+        _totalItems = value.data?.pagination?.totals ?? 5000;
         mUserList.clear();
         mUserList.addAll(value.data?.users ?? []);
       }
@@ -126,12 +126,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
                 child: _usersTable(),
               ),
               CustomSizedBox(height: DBL.twenty.val),
-              isXs(context)
-                  ? SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: _bottomView(),
-                    )
-                  : _bottomView()
+             _paginationView()
             ],
           )
         : EmptyView(title: AppString.noUsersFound.val);
@@ -200,43 +195,36 @@ class _UserManagementPageState extends State<UserManagementPage> {
     );
   }
 
-  Row _bottomView() {
+   _paginationView() {
     final int totalPages = (_totalItems / _limit).ceil();
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        PaginationView(
-            page: _page,
-            totalPages: totalPages,
-            onNextPressed: () {
-              if (_page < totalPages) {
-                _page = _page + 1;
-                _userBloc.add(UserManagementEvent.getUsers(
-                    userId: userId, page: _page, limit: _limit));
-                updateData();
-              }
-            },
-            onItemPressed: (i) {
-              _page = i;
-              _userBloc.add(UserManagementEvent.getUsers(
-                  userId: userId, page: _page, limit: _limit));
-              updateData();
-            },
-            onPreviousPressed: () {
-              if (_page > 1) {
-                _page = _page - 1;
-                _userBloc.add(UserManagementEvent.getUsers(
-                    userId: userId, page: _page, limit: _limit));
-                updateData();
-              }
-            }),
-        CustomSizedBox(
-          width: DBL.ten.val,
-        ),
-        CustomText3(
-            "${AppString.showing.val} ${_start + 1} ${AppString.to.val} $_end ${AppString.of.val} $_totalItems ${AppString.entries.val}"),
-      ],
-    );
+    return PaginationView(
+        page: _page,
+        totalPages: totalPages,
+        end: _end,
+        totalItems: _totalItems,
+        start: _start,
+        onNextPressed: () {
+          if (_page < totalPages) {
+            _page = _page + 1;
+            _userBloc.add(UserManagementEvent.getUsers(
+                userId: userId, page: _page, limit: _limit));
+            updateData();
+          }
+        },
+        onItemPressed: (i) {
+          _page = i;
+          _userBloc.add(UserManagementEvent.getUsers(
+              userId: userId, page: _page, limit: _limit));
+          updateData();
+        },
+        onPreviousPressed: () {
+          if (_page > 1) {
+            _page = _page - 1;
+            _userBloc.add(UserManagementEvent.getUsers(
+                userId: userId, page: _page, limit: _limit));
+            updateData();
+          }
+        });
   }
 
   _usersTable() {
@@ -317,7 +305,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
                 children: [
                   InkWell(
                       onTap: () {
-                        autoTabRouter!.setActiveIndex(3);
+                        autoTabRouter!.setActiveIndex(4);
                       },
                       child: CustomSvg(
                         path: IMG.eye.val,

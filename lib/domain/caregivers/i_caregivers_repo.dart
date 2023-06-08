@@ -5,5 +5,5 @@ import 'package:dartz/dartz.dart';
 
 abstract class ICareGiversRepo {
   Future<Either<ApiErrorHandler, CareGiverResponse>> getCareGivers(
-      {required String userID,required int page, required int limit});
+      {required String userID,required int page, required int limit, required int type,String ?searchTerm, int filterId});
 }

@@ -8,6 +8,7 @@ import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/core/text_utils.dart';
 import 'package:admin_580_tech/core/theme.dart';
+import 'package:admin_580_tech/presentation/cargiver_detail/caregiver_detail_page.dart';
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
@@ -26,14 +27,14 @@ import '../widget/dropdown/dropdown.dart';
 
 TabsRouter? autoTabRouter;
 
-class MenuBarView extends StatefulWidget {
-  const MenuBarView({Key? key}) : super(key: key);
+class SideMenuPage extends StatefulWidget {
+  const SideMenuPage({Key? key}) : super(key: key);
 
   @override
-  State<MenuBarView> createState() => _MenuBarState();
+  State<SideMenuPage> createState() => _MenuBarState();
 }
 
-class _MenuBarState extends State<MenuBarView> {
+class _MenuBarState extends State<SideMenuPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<ScaffoldState> _scaffoldDrawerKey =
       GlobalKey<ScaffoldState>();
@@ -45,7 +46,7 @@ class _MenuBarState extends State<MenuBarView> {
 
   Map<String, String> mainData = {
     AppString.dashboard.val: "",
-    AppString.careGiverManagement.val: "",
+    AppString.careAmbassador.val: "",
     AppString.userManagement.val: "",
   };
 
@@ -56,8 +57,10 @@ class _MenuBarState extends State<MenuBarView> {
   final List<PageRouteInfo<dynamic>> _routes = const [
     DashboardRoute(),
     CareGiversRoute(),
+    CareGiverDetailRoute(),
     UserManagementRoute(),
-    UserManagementDetailRoute()
+    UserManagementDetailRoute(),
+
   ];
 
   @override
@@ -90,7 +93,7 @@ class _MenuBarState extends State<MenuBarView> {
               builder: (context, value, child) {
                 return !isXs(context)
                     ? _sidebar(tabsRouter)
-                    :  CustomSizedBox.shrink();
+                    : CustomSizedBox.shrink();
               },
             ),
             Expanded(
@@ -104,8 +107,9 @@ class _MenuBarState extends State<MenuBarView> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             getRouteWidget(tabsRouter.activeIndex),
-                            CustomSizedBox(height: DBL.twenty.val,),
-
+                            CustomSizedBox(
+                              height: DBL.twenty.val,
+                            ),
                           ],
                         ),
                       ],
@@ -115,7 +119,7 @@ class _MenuBarState extends State<MenuBarView> {
                     hasScrollBody: false,
                     fillOverscroll: true,
                     child: Column(
-                      children:  <Widget>[
+                      children: <Widget>[
                         Expanded(
                           child: CustomSizedBox.shrink(),
                         ),
@@ -134,7 +138,6 @@ class _MenuBarState extends State<MenuBarView> {
 
   /// appbar
   PreferredSizeWidget _appBar(TabsRouter tabsRouter) => AppBar(
-
         toolbarHeight: DBL.seventy.val,
         elevation: DBL.zero.val,
         shadowColor: AppColor.transparent.val,
@@ -154,7 +157,8 @@ class _MenuBarState extends State<MenuBarView> {
                           .setActiveIndex(getRouteIndex(Strings.dashboard));
                     },
                     child: CustomContainer(
-                      padding:  EdgeInsets.symmetric(horizontal: DBL.fifteen.val),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: DBL.fifteen.val),
                       width: DBL.twoForty.val,
                       height: DBL.oneTwenty.val,
                       color: AppColor.primaryColor.val,
@@ -218,11 +222,11 @@ class _MenuBarState extends State<MenuBarView> {
         ),
         actions: [
           _notification(),
-           CustomSizedBox(
+          CustomSizedBox(
             width: DBL.forty.val,
           ),
           _profile(tabsRouter),
-           CustomSizedBox(
+          CustomSizedBox(
             width: DBL.forty.val,
           ),
         ],
@@ -250,7 +254,7 @@ class _MenuBarState extends State<MenuBarView> {
           backgroundImage: AssetImage(IMG.profile.val),
         ),
       ),
-      customItemsIndexes:  [INT.three.val],
+      customItemsIndexes: [INT.three.val],
       customItemsHeight: DBL.eight.val,
       onChanged: (value) {
         /// Todo check this code
@@ -265,7 +269,7 @@ class _MenuBarState extends State<MenuBarView> {
             value: e,
             child: CustomText3(
               e,
-              style:  TS().gRoboto(
+              style: TS().gRoboto(
                 fontSize: FS.font15.val,
                 fontWeight: FW.bold.val,
               ),
@@ -277,7 +281,7 @@ class _MenuBarState extends State<MenuBarView> {
           enabled: false,
           child: Divider(color: ColorConst.lightGrey),
         ),
-         DropdownMenuItem(
+        DropdownMenuItem(
           value: AppString.logout.val,
           child: Text(
             Strings.logout,
@@ -290,9 +294,10 @@ class _MenuBarState extends State<MenuBarView> {
         ),
       ],
       itemHeight: DBL.fortyEight.val,
-      itemPadding:  EdgeInsets.only(left: DBL.sixteen.val, right: DBL.sixteen.val),
+      itemPadding:
+          EdgeInsets.only(left: DBL.sixteen.val, right: DBL.sixteen.val),
       dropdownWidth: DBL.oneSixty.val,
-      dropdownPadding:  EdgeInsets.symmetric(vertical: DBL.six.val),
+      dropdownPadding: EdgeInsets.symmetric(vertical: DBL.six.val),
       dropdownDecoration: BoxDecoration(
         color: isDark ? ColorConst.cardDark : Colors.white,
         border: Border.all(
@@ -330,13 +335,17 @@ class _MenuBarState extends State<MenuBarView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomSizedBox(height: DBL.eight.val,),
+                    CustomSizedBox(
+                      height: DBL.eight.val,
+                    ),
                     _menuList(
                       tabsRouter: tabsRouter,
                       items: mainData,
                       isOpened: value,
                     ),
-                    CustomSizedBox(height: DBL.twenty.val,),
+                    CustomSizedBox(
+                      height: DBL.twenty.val,
+                    ),
                   ],
                 ),
               ),
@@ -363,17 +372,18 @@ class _MenuBarState extends State<MenuBarView> {
             return ListTile(
               leading: isHover || isSelected(items, index, tabsRouter)
                   ? Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: DBL.five.val),
+                      padding: EdgeInsets.symmetric(horizontal: DBL.five.val),
                       child: CustomContainer(
                         width: DBL.four.val,
                         color: AppColor.primaryColor.val,
                         height: DBL.twentyFive.val,
                       ),
                     )
-                  :  CustomSizedBox(
+                  : CustomSizedBox(
                       width: DBL.ten.val,
                     ),
-              title: isOpened ? buildText(items, index, tabsRouter, color) : null,
+              title:
+                  isOpened ? buildText(items, index, tabsRouter, color) : null,
               contentPadding: const EdgeInsets.symmetric(horizontal: 0),
               mouseCursor: SystemMouseCursors.click,
               horizontalTitleGap: DBL.zero.val,
@@ -410,19 +420,24 @@ class _MenuBarState extends State<MenuBarView> {
     CustomLog.log('path is $path');
     if (path == "/user-management-detail") {
       path = "user-management";
+    }else if(path=="/care-ambassador-detail"){
+      path = "care-ambassador";
     }
     return items.keys.elementAt(index) == upperCase(path) ? true : false;
   }
 
   int getRouteIndex(String route) {
     CustomLog.log('route name == $route');
-    if (route == AppString.careGiverManagement.val) {
+    if (route == AppString.careAmbassador.val) {
       return 1;
-    } else if (route == AppString.userManagement.val) {
-      return 2;
-    } else if (route == AppString.userManagementDetail.val) {
+    } else if (route == AppString.careAmbassadorDetail.val) {
       return 3;
+    } else if (route == AppString.userManagement.val) {
+      return 3;
+    } else if (route == AppString.userManagementDetail.val) {
+      return 4;
     }
+
     // else if (route == Strings.dataTable) {
     //   return 2;
     // } else if (route == Strings.invoice) {
@@ -460,8 +475,10 @@ class _MenuBarState extends State<MenuBarView> {
     if (index == 1) {
       return const CareGiversPage();
     } else if (index == 2) {
-      return const UserManagementPage();
+      return const CareGiverDetailPage();
     } else if (index == 3) {
+      return const UserManagementPage();
+    } else if (index == 4) {
       return const UserManagementDetailPage();
     }
     // else if (index == 3) {
