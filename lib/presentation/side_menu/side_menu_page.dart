@@ -21,6 +21,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/string.dart';
 import '../caregivers/caregivers_page.dart';
+import '../transaction_management/transaction_management_page.dart';
 import '../user_management/user_management_page.dart';
 import '../user_mangement_detail/user_managemet_detail_page.dart';
 import '../widget/dropdown/dropdown.dart';
@@ -48,6 +49,7 @@ class _MenuBarState extends State<SideMenuPage> {
     AppString.dashboard.val: "",
     AppString.careAmbassador.val: "",
     AppString.userManagement.val: "",
+    AppString.transactionManagement.val: "",
   };
 
   final List<String> _items = [
@@ -60,7 +62,7 @@ class _MenuBarState extends State<SideMenuPage> {
     CareGiverDetailRoute(),
     UserManagementRoute(),
     UserManagementDetailRoute(),
-
+    TransactionManagementRoute(),
   ];
 
   @override
@@ -436,6 +438,8 @@ class _MenuBarState extends State<SideMenuPage> {
       return 3;
     } else if (route == AppString.userManagementDetail.val) {
       return 4;
+    } else if (route == AppString.transactionManagement.val) {
+      return 5;
     }
 
     // else if (route == Strings.dataTable) {
@@ -480,6 +484,8 @@ class _MenuBarState extends State<SideMenuPage> {
       return const UserManagementPage();
     } else if (index == 4) {
       return const UserManagementDetailPage();
+    } else if (index == 5) {
+      return const TransactionManagementPage();
     }
     // else if (index == 3) {
     //   return  InvoicePage();
