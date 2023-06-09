@@ -4,11 +4,14 @@ import 'package:admin_580_tech/core/string.dart';
 import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
+import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../core/enum.dart';
+import '../../core/text_styles.dart';
+import 'custom_padding.dart';
 import 'custom_sizedbox.dart';
 
 class EmptyView extends StatelessWidget {
@@ -24,46 +27,42 @@ class EmptyView extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CustomSizedBox(height: DBL.thirty.val,),
-            SizedBox(
-              height: 300,
-              width: 400,
-              child: SvgPicture.asset('assets/images/error-500.svg'),
-            ),
-            CustomSizedBox(height: DBL.fortyEight.val,),
-            Text(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CustomSizedBox(height: DBL.thirty.val,),
+          SvgPicture.asset(IMG.notFound.val),
+          CustomSizedBox(height: DBL.ten.val,),
+            CustomText3(
               title ,
-              style: const TextStyle(
+              style:  TS().gPoppins(
                 fontWeight: FontWeight.bold,
-                fontSize: 21,
+                fontSize: 20,
               ),
+
+          ),
+          subtitle != null?CustomText3(
+            subtitle!,
+            style: TextStyle(
+              color: isDark ? ColorConst.darkFontColor : ColorConst.textColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
             ),
-            subtitle != null?Text(
-              subtitle!,
-              style: TextStyle(
-                color: isDark ? ColorConst.darkFontColor : ColorConst.textColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
-            ):const SizedBox.shrink(),
-            CustomSizedBox(height: DBL.twentyFour.val,),
-            CustomButton(
-              text: Strings.backToDashBoard,
-              borderRadius: 15,
-              padding:
-                  const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
-              onPressed: () {
-                context.router.navigate(const DashboardRoute());
-              },
-              icon: const Icon(Icons.home, size: 15),
-            ),
-          ],
-        ),
+          ):const SizedBox.shrink(),
+          CustomSizedBox(height: DBL.fifteen.val,),
+          CustomButton(
+            color: AppColor.primaryColor.val,
+            text: Strings.backToDashBoard,
+            borderRadius: 15,
+            padding:
+                const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+            onPressed: () {
+              context.router.navigate(const DashboardRoute());
+            },
+            icon: const Icon(Icons.home, size: 15),
+          ),
+        ],
       ),
     );
   }

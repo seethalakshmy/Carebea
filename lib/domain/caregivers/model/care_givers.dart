@@ -8,7 +8,7 @@ class Caregivers {
   String? dob;
   int? gender;
   String? profile;
-  bool? onBoardingStatus;
+  bool? isActive;
 
   Caregivers(
       {this.userId,
@@ -18,7 +18,7 @@ class Caregivers {
       this.dob,
       this.gender,
       this.profile,
-      this.onBoardingStatus});
+      this.isActive});
 
   Caregivers copyWith({ String? userId,
     Name? name,
@@ -36,7 +36,7 @@ class Caregivers {
           mobile: mobile ?? this.mobile,
           dob: dob ?? this.dob,
           profile: profile ?? this.profile,
-          onBoardingStatus: onBoardingStatus ?? this.onBoardingStatus,
+          isActive: onBoardingStatus ?? this.isActive,
           email: email ?? this.email,
           gender: gender ?? this.gender);
 
@@ -48,7 +48,7 @@ class Caregivers {
     dob = json['dob'];
     gender = json['gender'];
     profile = json['profile'];
-    onBoardingStatus = json['on_boarding_status']??false;
+    isActive = json['is_active']??false;
   }
 
   Map<String, dynamic> toJson() {
@@ -62,7 +62,7 @@ class Caregivers {
     data['dob'] = dob;
     data['gender'] = gender;
     data['profile'] = profile;
-    data['on_boarding_status'] = onBoardingStatus;
+    data['on_boarding_status'] = isActive;
     return data;
   }
 }

@@ -146,10 +146,10 @@ class _CareGiversPageState extends State<CareGiversPage> {
 
   _caregiversView(BuildContext context, CareGiverResponse? value) {
     if (value?.status ?? false) {
+      mCareGiverList.clear();
       if (value?.data?.caregivers != null &&
           value!.data!.caregivers!.isNotEmpty) {
         _totalItems = value.data?.pagination?.totals ?? 1;
-        mCareGiverList.clear();
         mCareGiverList.addAll(value.data?.caregivers ?? []);
         updateData();
       }
@@ -457,7 +457,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius:  BorderRadius.all(Radius.circular(DBL.ten.val)),
           child: CachedImage(
               height: DBL.thirty.val, width: DBL.thirty.val, imgUrl: imgUrl),
         ),
@@ -485,7 +485,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
           height: 24.0,
           valueFontSize: 0,
           toggleSize: 14.0,
-          value: item.onBoardingStatus ?? false,
+          value: item.isActive ?? false,
           activeColor: AppColor.green.val,
           inactiveColor: AppColor.lightGrey.val,
           borderRadius: 30.0,
@@ -497,9 +497,9 @@ class _CareGiversPageState extends State<CareGiversPage> {
           width: 8,
         ),
         CustomText3(
-          item.onBoardingStatus! ? "Active" : "Inactive",
+          item.isActive! ? "Active" : "Inactive",
           style: TS().gRoboto(
-              color: item.onBoardingStatus!
+              color: item.isActive!
                   ? AppColor.green.val
                   : AppColor.inactive.val,
               fontSize: 12,

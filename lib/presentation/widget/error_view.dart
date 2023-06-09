@@ -33,7 +33,7 @@ class ErrorView extends StatelessWidget {
             CustomSizedBox(
               height: DBL.threeHundred.val,
               width: DBL.fourHundred.val,
-              child: SvgPicture.asset('assets/images/error-500.svg'),
+              child: SvgPicture.asset(IMG.notFound.val),
             ),
             CustomSizedBox(height: DBL.fortyEight.val,),
             Text(

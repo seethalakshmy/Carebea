@@ -7,7 +7,7 @@ import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
 import 'package:admin_580_tech/infrastructure/caregiver_detail/caregiver_detail_repository.dart';
 import 'package:admin_580_tech/infrastructure/user_management_detail/user_management_detail_repository.dart';
-import 'package:admin_580_tech/presentation/cargiver_detail/views/assigned_services.dart';
+import 'package:admin_580_tech/presentation/cargiver_detail/views/caregiver_service_view.dart';
 import 'package:admin_580_tech/presentation/cargiver_detail/widgets/service_completion_and_rewards.dart';
 import 'package:admin_580_tech/presentation/cargiver_detail/widgets/svg_text.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/views/payment_method_view.dart';

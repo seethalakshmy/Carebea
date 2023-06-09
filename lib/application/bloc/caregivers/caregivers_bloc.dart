@@ -57,7 +57,7 @@ class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
         Data data = response.data ?? Data();
         final index = data.caregivers!.indexOf(item);
         List<Caregivers> careGiverList = data.caregivers!..remove(item);
-        if (item.onBoardingStatus ?? false) {
+        if (item.isActive ?? false) {
           careGiverList.insert(index, item.copyWith(onBoardingStatus: false));
         } else {
           careGiverList.insert(index, item.copyWith(onBoardingStatus: true));
