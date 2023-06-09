@@ -9,6 +9,8 @@ import '../caregivers/caregivers_page.dart';
 import '../dashboard/dashboard_page.dart';
 import '../login/login_page.dart';
 import '../side_menu/side_menu_page.dart';
+import '../test.dart';
+import '../transaction_management/transaction_management_page.dart';
 
 @AdaptiveAutoRouter(
   replaceInRouteName: 'Page,Route',
@@ -19,25 +21,39 @@ import '../side_menu/side_menu_page.dart';
       initial: true,
     ),
     AutoRoute(
-      page: ForgotPasswordPage,
-      maintainState: false,
-      path: '/admin/forgot-password'
-    ),
+        page: ForgotPasswordPage,
+        maintainState: false,
+        path: '/admin/forgot-password'),
     AutoRoute(
         page: ResetPasswordPage,
         maintainState: false,
-        path: '/admin/reset-password'
-    ),
+        path: '/admin/reset-password'),
     AutoRoute(
       page: SideMenuPage,
       path: "/admin",
       children: [
-        AutoRoute(path: 'dashboard', page: DashboardPage,initial: true),
-        AutoRoute(path: 'care-ambassador', page: CareGiversPage,),
-        AutoRoute(path: 'user-management', page: UserManagementPage,),
-        AutoRoute(path: 'care-ambassador-detail', page: CareGiverDetailPage,),
-        AutoRoute(path: 'user-management-detail', page: UserManagementDetailPage,),
+        AutoRoute(path: 'dashboard', page: DashboardPage, initial: true),
+        AutoRoute(
+          path: 'care-ambassador',
+          page: CareGiversPage,
+        ),
+        AutoRoute(
+          path: 'user-management',
+          page: UserManagementPage,
+        ),
+        AutoRoute(
+          path: 'care-ambassador-detail',
+          page: CareGiverDetailPage,
+        ),
+        AutoRoute(
+          path: 'user-management-detail',
+          page: UserManagementDetailPage,
+        ),
         // AutoRoute(path: 'caregiver-detail', page: TestPage,),
+        AutoRoute(
+          path: 'transaction-management',
+          page: TransactionManagementPage,
+        ),
       ],
     ),
   ],

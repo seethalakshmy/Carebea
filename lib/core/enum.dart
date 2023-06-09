@@ -24,6 +24,7 @@ enum AppString {
   careAmbassador("Care Ambassador"),
   userManagement("User Management"),
   userManagementDetail("User Management Detail"),
+  transactionManagement("User Management Detail"),
   careAmbassadorDetail("Care Ambassador Detail"),
   id("ID"),
   slNo("SL No"),
