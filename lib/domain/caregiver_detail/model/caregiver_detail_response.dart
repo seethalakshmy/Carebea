@@ -298,22 +298,22 @@ class DiffTimeslotDates {
 class AccountDetails {
   String? accountHolderName;
   String? accountNumber;
-  String? rotingNumber;
+  String? routingNumber;
 
   AccountDetails(
-      {this.accountHolderName, this.accountNumber, this.rotingNumber});
+      {this.accountHolderName, this.accountNumber, this.routingNumber});
 
   AccountDetails.fromJson(Map<String, dynamic> json) {
     accountHolderName = json['account_holder_name'];
     accountNumber = json['account_number'];
-    rotingNumber = json['roting_number'];
+    routingNumber = json['routing_number'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data =   <String, dynamic>{};
     data['account_holder_name'] =accountHolderName;
     data['account_number'] =accountNumber;
-    data['roting_number'] =rotingNumber;
+    data['roting_number'] =routingNumber;
     return data;
   }
 }
@@ -323,6 +323,7 @@ class Services {
   String? userId;
   String? startDateTime;
   String? endDateTime;
+  String? serviceName;
   String? totalServiceFee;
   int? status;
   Name? client;
@@ -343,6 +344,7 @@ class Services {
     endDateTime = json['end_date_time'];
     totalServiceFee = json['total_service_fee'];
     status = json['status'];
+    serviceName = json['service'];
     client = json['client'] != null ?  Name.fromJson(json['client']) : null;
   }
 

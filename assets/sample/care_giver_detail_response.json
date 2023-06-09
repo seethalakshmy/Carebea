@@ -3,7 +3,7 @@
   "status": false,
   "message": "success",
   "data": {
-    "id": "12345",
+    "user_id": "12345",
     "name": {
       "first_name": "sha",
       "last_name": "simon",
@@ -181,32 +181,62 @@
     "account_details": {
       "account_holder_name": "sha",
       "account_number": "XXXXXX78",
-      "roting_number": "XXXXXX78"
+      "routing_number": "XXXXXX78"
     },
     "services": [
       {
         "id": "1",
         "user_id": "#123",
+        "service": "Tier1",
         "start_date_time": "04/26/2023  at 10:00am",
         "end_date_time": "04/26/2023  at 10:00am",
         "total_service_fee": "$324",
         "status": 1,
         "client": {
-          "first_name": "test client",
-          "last_name": "client last",
+          "first_name": "John",
+          "last_name": "George",
           "profile": "httpimage"
         }
       },
       {
         "id": "2",
         "user_id": "#124",
+        "service": "Tier1",
         "start_date_time": "04/26/2023  at 10:00am",
         "end_date_time": "04/26/2023  at 10:00am",
         "total_service_fee": "$324",
         "status": 2,
         "client": {
-          "first_name": "test client1",
-          "last_name": "client last2",
+          "first_name": "Simon",
+          "last_name": "Andrew",
+          "profile": "httpimage"
+        }
+      },
+      {
+        "id": "2",
+        "user_id": "#125",
+        "service": "Tier1",
+        "start_date_time": "04/26/2023  at 10:00am",
+        "end_date_time": "04/26/2023  at 10:00am",
+        "total_service_fee": "$324",
+        "status": 3,
+        "client": {
+          "first_name": "Simon",
+          "last_name": "Andrew",
+          "profile": "httpimage"
+        }
+      },
+      {
+        "id": "2",
+        "user_id": "#126",
+        "service": "Tier1",
+        "start_date_time": "04/26/2023  at 10:00am",
+        "end_date_time": "04/26/2023  at 10:00am",
+        "total_service_fee": "$324",
+        "status": 4,
+        "client": {
+          "first_name": "Simon",
+          "last_name": "Andrew",
           "profile": "httpimage"
         }
       }

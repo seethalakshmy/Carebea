@@ -6,7 +6,8 @@ import 'package:admin_580_tech/core/properties.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
 import 'package:admin_580_tech/infrastructure/caregiver_detail/caregiver_detail_repository.dart';
-import 'package:admin_580_tech/presentation/cargiver_detail/views/assigned_services.dart';
+import 'package:admin_580_tech/presentation/cargiver_detail/views/account_info_view.dart';
+import 'package:admin_580_tech/presentation/cargiver_detail/views/caregiver_service_view.dart';
 import 'package:admin_580_tech/presentation/cargiver_detail/widgets/service_completion_and_rewards.dart';
 import 'package:admin_580_tech/presentation/cargiver_detail/widgets/svg_text.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
@@ -52,15 +53,15 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
         ..add(CareGiverDetailEvent.getCareGiverDetail(userId: userId)),
       child: BlocBuilder<CaregiverDetailBloc, CareGiverDetailState>(
         builder: (context, state) {
-          return !state.isLoading?(_bodyView(context, state)):SizedBox();
+          return !state.isLoading ? (_bodyView(context, state)) : SizedBox();
         },
       ),
     );
   }
 
-  CustomSizedBox _bodyView(
-      BuildContext context, CareGiverDetailState state) {
-    CustomLog.log('width :${MediaQuery.of(context).size.width} ${state.response}');
+  CustomSizedBox _bodyView(BuildContext context, CareGiverDetailState state) {
+    CustomLog.log(
+        'width :${MediaQuery.of(context).size.width} ${state.response}');
     CareGiverDetailResponse response = state.response!;
     return CustomSizedBox(
       height: MediaQuery.of(context).size.height,
@@ -70,7 +71,11 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
             SliverAppBar(
                 leading: const SizedBox(),
                 backgroundColor: Colors.white,
-                expandedHeight: isXs2(context) ? 325 :isLg2(context)?285: 230,
+                expandedHeight: isXs2(context)
+                    ? 360
+                    : isLg2(context)
+                        ? 315
+                        : 325,
                 floating: false,
                 toolbarHeight: 50,
                 flexibleSpace: FlexibleSpaceBar(
@@ -85,16 +90,20 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                             Stack(
                               children: [
                                 CustomSizedBox(
-                                  height: isXs2(context) ? 185 :isLg2(context)?255: 180,
+                                  height: isXs2(context)
+                                      ? 245
+                                      : isLg2(context)
+                                          ? 255
+                                          : 280,
                                   child: Row(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: [
                                       CustomSizedBox(
                                         width: isXs(context) ? 150 : 200,
                                         child: Column(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                           children: [
                                             CustomSvg(
                                               path: IMG.profilePlaceHolder.val,
@@ -110,7 +119,8 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                                                         .spaceBetween,
                                                 children: [
                                                   CustomText3(
-                                                    AppString.profileCompletion.val,
+                                                    AppString
+                                                        .profileCompletion.val,
                                                     style: TS().gRoboto(
                                                         fontWeight: FW.w500.val,
                                                         fontSize: getFontSize(
@@ -162,31 +172,31 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                                       CustomSizedBox(
                                         width: isXs3(context)
                                             ? MediaQuery.of(context)
-                                            .size
-                                            .width -
-                                            230
+                                                    .size
+                                                    .width -
+                                                230
                                             : isXs2(context)
-                                            ? MediaQuery.of(context)
-                                            .size
-                                            .width -
-                                            470
-                                            : isXs(context)
-                                            ? MediaQuery.of(context)
-                                            .size
-                                            .width -
-                                            635
-                                            : isLg2(context)
-                                            ? MediaQuery.of(context)
-                                            .size
-                                            .width -
-                                            695
-                                            : MediaQuery.of(context)
-                                            .size
-                                            .width -
-                                            1055,
+                                                ? MediaQuery.of(context)
+                                                        .size
+                                                        .width -
+                                                    470
+                                                : isXs(context)
+                                                    ? MediaQuery.of(context)
+                                                            .size
+                                                            .width -
+                                                        635
+                                                    : isLg2(context)
+                                                        ? MediaQuery.of(context)
+                                                                .size
+                                                                .width -
+                                                            695
+                                                        : MediaQuery.of(context)
+                                                                .size
+                                                                .width -
+                                                            1055,
                                         child: Column(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                           children: [
                                             CustomText3(
                                               "${response.data?.name?.firstName} ${response.data?.name?.lastName}",
@@ -205,7 +215,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                                             SVGText(
                                               path: IMG.location.val,
                                               name:
-                                              response.data?.location ?? "",
+                                                  response.data?.location ?? "",
                                               widthGap: DBL.fifteen.val,
                                             ),
                                             CustomSizedBox(
@@ -244,7 +254,8 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                                               ),
                                               Expanded(
                                                 child: CustomText3(
-                                                  AppString.pendingDocuments.val,
+                                                  AppString
+                                                      .pendingDocuments.val,
                                                   style: TS().gRoboto(
                                                       fontWeight: FW.w500.val,
                                                       fontSize: getFontSize(
@@ -277,8 +288,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                                                           .matBlack2.val),
                                                 ),
                                               ),
-                                            ]
-                                            ),
+                                            ]),
                                           ],
                                         ),
                                       ),
@@ -287,97 +297,99 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                                 ),
                                 !isXs2(context)
                                     ? Positioned(
-                                    right: 0,
-                                    top: isLg2(context) ? 5 : 38,
-                                    child: Column(
-                                      children: [
-                                        !isLg2(context)
-                                            ? Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment
-                                              .spaceBetween,
+                                        right: 0,
+                                        top: isLg2(context) ? 5 : 38,
+                                        child: Column(
                                           children: [
-                                            serviceCount(
-                                                response: response),
-                                            CustomSizedBox(
-                                              width: DBL.fifteen.val,
-                                            ),
-                                            cancelledCount(
-                                                response: response),
-                                            CustomSizedBox(
-                                              width: DBL.fifteen.val,
-                                            ),
-                                            reviewsView(
-                                                response: response),
+                                            !isLg2(context)
+                                                ? Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      serviceCount(
+                                                          response: response),
+                                                      CustomSizedBox(
+                                                        width: DBL.fifteen.val,
+                                                      ),
+                                                      cancelledCount(
+                                                          response: response),
+                                                      CustomSizedBox(
+                                                        width: DBL.fifteen.val,
+                                                      ),
+                                                      reviewsView(
+                                                          response: response),
+                                                    ],
+                                                  )
+                                                : CustomSizedBox.shrink(),
+                                            isLg2(context)
+                                                ? Column(
+                                                    children: [
+                                                      serviceCount(
+                                                          height: DBL.sixty.val,
+                                                          response: response),
+                                                      CustomSizedBox(
+                                                        height: DBL.fifteen.val,
+                                                      ),
+                                                      cancelledCount(
+                                                          height: DBL.sixty.val,
+                                                          response: response),
+                                                      CustomSizedBox(
+                                                        height: DBL.fifteen.val,
+                                                      ),
+                                                      reviewsView(
+                                                          height: DBL.sixty.val,
+                                                          response: response),
+                                                    ],
+                                                  )
+                                                : CustomSizedBox.shrink(),
                                           ],
-                                        )
-                                            : CustomSizedBox.shrink(),
-                                        isLg2(context)
-                                            ? Column(
-                                          children: [
-                                            serviceCount(
-                                                height: DBL.sixty.val,
-                                                response: response),
-                                            CustomSizedBox(
-                                              height: DBL.fifteen.val,
-                                            ),
-                                            cancelledCount(
-                                                height: DBL.sixty.val,
-                                                response: response),
-                                            CustomSizedBox(
-                                              height: DBL.fifteen.val,
-                                            ),
-                                            reviewsView(
-                                                height: DBL.sixty.val,
-                                                response: response),
-                                          ],
-                                        )
-                                            : CustomSizedBox.shrink(),
-                                      ],
-                                    ))
+                                        ))
                                     : CustomSizedBox.shrink()
                               ],
                             ),
-                            CustomSizedBox(height: isXs2(context)?DBL.eight.val:DBL.zero.val,),
+                            // CustomSizedBox(height: isXs2(context)?DBL.eight.val:DBL.zero.val,),
                             isXs2(context)
                                 ? SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                children: [
-                                  serviceCount(
-                                      height: DBL.fifty.val,
-                                      response: response),
-                                  CustomSizedBox(
-                                    width: DBL.fifteen.val,
-                                  ),
-                                  cancelledCount(
-                                      height: DBL.fifty.val,
-                                      response: response),
-                                  CustomSizedBox(
-                                    width: DBL.fifteen.val,
-                                  ),
-                                  reviewsView(
-                                      height: DBL.fifty.val,
-                                      response: response),
-                                ],
-                              ),
-                            )
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        serviceCount(
+                                            height: DBL.fifty.val,
+                                            response: response),
+                                        CustomSizedBox(
+                                          width: DBL.fifteen.val,
+                                        ),
+                                        cancelledCount(
+                                            height: DBL.fifty.val,
+                                            response: response),
+                                        CustomSizedBox(
+                                          width: DBL.fifteen.val,
+                                        ),
+                                        reviewsView(
+                                            height: DBL.fifty.val,
+                                            response: response),
+                                      ],
+                                    ),
+                                  )
                                 : CustomSizedBox.shrink()
                           ]),
                     )))
           ];
         },
         body: Scaffold(
+          backgroundColor: AppColor.primaryColor.val,
           appBar: TabBar(
             isScrollable: true,
-            dividerColor: AppColor.white.val,
+            dividerColor: AppColor.transparent.val,
             indicatorColor: AppColor.primaryColor.val,
             indicatorSize: TabBarIndicatorSize.tab,
             indicatorWeight: 2.5,
             labelColor: AppColor.white.val,
             unselectedLabelColor: AppColor.columColor2.val,
+            padding: EdgeInsets.only(left: 20),
             tabs: [
               Tab(icon: Text(AppString.schedules.val)),
               Tab(icon: Text(AppString.accountDetails.val)),
@@ -392,15 +404,19 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
             child: TabBarView(
               controller: tabController,
               children: [
-                Container(),
-                Container(),
+                Container(
+                  color: Colors.white,
+                ),
+                AccountInfoView(
+                  state: state,
+                ),
+               CareGiverServiceView(state: state, services: state.response?.data?.services??[]),
                 Container(
                   color: Colors.white,
                 ),
                 Container(
                   color: Colors.white,
-                ),
-                Container()
+                )
                 /*buildOffersListView(),*/
               ],
             ),
@@ -448,7 +464,4 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
   bool isXs2(context) => MediaQuery.of(context).size.width <= 930;
 
   bool isXs3(context) => MediaQuery.of(context).size.width <= 805;
-
-
-
 }
