@@ -68,7 +68,7 @@ class TransactionDetailsAlert extends StatelessWidget {
           width: 350,
           height: 150,
           color: AppColor.lightGrey7.val,
-          child: const Column(
+          child:  Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text("THis is working"),
@@ -104,9 +104,9 @@ class TransactionDetailsAlert extends StatelessWidget {
           width: 350,
           height: 150,
           color: Colors.red,
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: const [
               Text("THis is working"),
               CustomSizedBox(height: 30),
               Text("THis is working"),
