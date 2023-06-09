@@ -30,12 +30,8 @@ class ErrorView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomSizedBox(height: DBL.thirty.val,),
-            CustomSizedBox(
-              height: DBL.threeHundred.val,
-              width: DBL.fourHundred.val,
-              child: SvgPicture.asset(IMG.notFound.val),
-            ),
-            CustomSizedBox(height: DBL.fortyEight.val,),
+            SvgPicture.asset(IMG.notFound.val),
+            CustomSizedBox(height: DBL.ten.val,),
             Text(
               errorMessage ?? "",
               style:  TextStyle(
@@ -53,10 +49,11 @@ class ErrorView extends StatelessWidget {
                 fontSize: 14,
               ),
             ),
-            CustomSizedBox(height: DBL.twentyFour.val,),
+            CustomSizedBox(height: DBL.fifteen.val,),
             Visibility(
               visible: !isClientError!,
               child: CustomButton(
+                color: AppColor.primaryColor.val,
                 text: Strings.backToDashBoard,
                 borderRadius: 15,
                 padding:

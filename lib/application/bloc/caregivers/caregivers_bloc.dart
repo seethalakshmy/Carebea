@@ -39,7 +39,8 @@ class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
                 searchTerm: event.searchTerm,
                 filterId: event.filterId);
         CareGiversState homeState = homeResult.fold((l) {
-          return state.copyWith(error: l.error, isLoading: false);
+          print('error is ${l.error}');
+          return state.copyWith(error: l.error, isLoading: false,isError: true);
         }, (r) {
           if(state.types.isNotEmpty){
             return state.copyWith(response: r, isLoading: false,);

@@ -433,7 +433,7 @@ class _MenuBarState extends State<SideMenuPage> {
     if (route == AppString.careAmbassador.val) {
       return 1;
     } else if (route == AppString.careAmbassadorDetail.val) {
-      return 3;
+      return 2;
     } else if (route == AppString.userManagement.val) {
       return 3;
     } else if (route == AppString.userManagementDetail.val) {

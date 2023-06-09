@@ -20,8 +20,7 @@ class CareGiversRepository implements ICareGiversRepo {
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
-      if (e.message.contains("SocketException") ||
-          e.message.contains("XMLHttpRequest")) {
+      if (e.message.contains("SocketException") ) {
         CustomLog.log("reached here..");
         return const Left(ClientFailure(
             error: Strings.noInternetConnection, isClientError: true));

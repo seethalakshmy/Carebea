@@ -71,7 +71,6 @@ class _CareGiversPageState extends State<CareGiversPage> {
         HeaderView(
           title: AppString.careAmbassador.val,
         ),
-        CustomSizedBox(height: DBL.twenty.val),
         _rebuildView(),
       ],
     );
@@ -96,7 +95,8 @@ class _CareGiversPageState extends State<CareGiversPage> {
       builder: (context, state) {
         return Column(
           children: [
-            _tabView(state),
+            CustomSizedBox(height: DBL.twenty.val),
+            !state.isError?_tabView(state):CustomSizedBox.shrink(),
             _cardView(state, context),
           ],
         );
@@ -105,6 +105,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
   }
 
   CustomCard _cardView(CareGiversState state, BuildContext context) {
+    print('error msg == ${ state.error}');
     return CustomCard(
       shape: PR().roundedRectangleBorder(DBL.five.val),
       elevation: DBL.seven.val,
