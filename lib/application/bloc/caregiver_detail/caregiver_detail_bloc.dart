@@ -1,4 +1,3 @@
-
 import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
 import 'package:admin_580_tech/infrastructure/caregiver_detail/caregiver_detail_repository.dart';
 import 'package:bloc/bloc.dart';
@@ -19,19 +18,31 @@ class CaregiverDetailBloc
 
   CaregiverDetailBloc(this.careGiverDetailRepository)
       : super(CareGiverDetailState.initial()) {
-    on<CareGiverDetailEvent>((event, emit) async {
-      if (event is _GetCareGiverDetail) {
-        final Either<ApiErrorHandler, CareGiverDetailResponse> result =
-            await careGiverDetailRepository.getCareGiverDetail(
-          userID: event.userId,
-        );
-        var homeState = result.fold((l) {
-          return state.copyWith(error: l.error, isLoading: false);
-        }, (r) {
-          return state.copyWith(response: r, isLoading: false);
-        });
-        emit(homeState);
-      }
+    on<_GetCareGiverDetail>(_getCareGiverDetail);
+    on<_GetSelectedDate>(_getSelectedDate);
+    on<_GetSelectedScheduleServices>(_getScheduleServices);
+  }
+
+  void _getCareGiverDetail(
+      _GetCareGiverDetail event, Emitter<CareGiverDetailState> emit) async {
+    final Either<ApiErrorHandler, CareGiverDetailResponse> result =
+        await careGiverDetailRepository.getCareGiverDetail(
+      userID: event.userId,
+    );
+    var homeState = result.fold((l) {
+      return state.copyWith(error: l.error, isLoading: false);
+    }, (r) {
+      return state.copyWith(response: r, isLoading: false);
     });
+    emit(homeState);
+  }
+
+  void _getSelectedDate(
+      _GetSelectedDate event, Emitter<CareGiverDetailState> emit) {
+    emit(state.copyWith(selectedDate: event.selectedDate));
+  }
+
+  void _getScheduleServices(_GetSelectedScheduleServices event, Emitter<CareGiverDetailState> emit) {
+    emit(state.copyWith(selectedScheduleServices: event.services));
   }
 }

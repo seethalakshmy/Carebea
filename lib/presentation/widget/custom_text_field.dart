@@ -1,5 +1,4 @@
 
-import 'package:admin_580_tech/core/color.dart';
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
@@ -73,14 +72,14 @@ class CTextField extends StatelessWidget {
         onTap: onTap,
         keyboardType: keyBoardType,
         textCapitalization: textCapitalization,
-        cursorColor: ColorConst.lightFontColor,
+        // cursorColor: AppColor.white.val,
         style: TextStyle(fontSize: 15, color: textColor),
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle:hintStyle,
           suffixIconConstraints:  BoxConstraints(minWidth: DBL.fifty.val),
           filled: true,
-          fillColor:ColorConst.white,
+          fillColor :AppColor.white.val,
           suffixIcon: suffixIcon,
           isDense: true,
           errorText: errorText,
@@ -88,20 +87,25 @@ class CTextField extends StatelessWidget {
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: AppColor.borderColor.val,
+              width: 1
             ),
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(DBL.five.val),
           ),
           border: OutlineInputBorder(
-            borderSide:  BorderSide(color: AppColor.primaryColor.val),
-            borderRadius: BorderRadius.circular(5),
+            borderSide:  BorderSide(color: AppColor.primaryColor.val,),
+            borderRadius: BorderRadius.circular(DBL.five.val),
           ),
           disabledBorder:OutlineInputBorder(
             borderSide:  BorderSide(color: AppColor.primaryColor.val),
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(DBL.five.val),
+          ),
+          errorBorder:OutlineInputBorder(
+            borderSide:  BorderSide(color: AppColor.error.val),
+            borderRadius: BorderRadius.circular(DBL.five.val),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide:  BorderSide(color: AppColor.primaryColor.val),
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(DBL.five.val),
           ),
         ),
         validator: validator,

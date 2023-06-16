@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-
-
 /// App Strings
 enum AppString {
   login("Login"),
+  profile("Profile"),
+  selectedMenuIndex("selectedindex"),
+  userProfile("User Profile"),
+  backToDashBoard("Back to Dashboard"),
   emailAddress("Email Address"),
   password("Password"),
   forgotPassword("Forgot Password ?"),
@@ -20,6 +22,7 @@ enum AppString {
   showing("Showing"),
   entries("entries"),
   dateTime("Date/Time"),
+  creditTo("Credit To"),
   to("to"),
   of("of"),
   careAmbassador("Care Ambassador"),
@@ -27,34 +30,68 @@ enum AppString {
   userManagementDetail("User Management Detail"),
   careAmbassadorDetail("Care Ambassador Detail"),
   transactionManagement("Transaction Management"),
+  careAmbassadorProfile("Care Ambassador Profile"),
+  completedServiceRequest("Completed Service Request"),
+  canceledServiceRequest("Canceled Service Request"),
+  onGoingServiceRequest("Ongoing Service Request"),
+  upcomingServiceRequest("Upcoming Service Request"),
   transactionDetails("Transaction Details"),
   id("ID"),
   slNo("SL No"),
   firstName("First Name"),
   filter("Filter"),
   lastName("Last Name"),
+  serviceRequestID("Service Request ID"),
+  requestedStartDateTime("Requested Start Date & Time"),
+  requestedEndDateTime("Requested End Date & Time"),
+  doesClientHavePets("Does the client  have pets?"),
+  isSmokerInHouseHold("Is there a smoker in the household?"),
+  isAdvanceDirective("Does the client have an Advance Directive?"),
   name("Name"),
   newRequest("New Request"),
   activeCareAmbassador("Active Care Ambassador"),
   phoneNumber("Phone Number"),
   status("Status"),
+  serviceFee("Service Fee"),
+  time("Time"),
   search("Search"),
   client("Client"),
   clientProfiles("Client Profiles"),
+  clientName("Client Name"),
   nameAndAge("Name & Age"),
   totalServiceCompleted("Total Service Completed"),
   service("Service"),
+  serviceDetails("Service Details"),
   services("Services"),
   serviceCompleted("Services Completed"),
+  serviceInCompleted("Services Incompleted"),
+  serviceNeeded("Services Needed"),
+  serviceNeededCount("Services Needed Count"),
   canceledRequest("Canceled Request"),
   reviewGiven("Review Given"),
   serviceList("Service List"),
   location("Location"),
-  startDateTime("Start Date & Start Time"),
-  endDateTime("End Date & End Time"),
+  colon(": "),
+  startDateStartTime("Start Date & Start Time"),
+  startDateTime("Start Date & Time"),
+  suspectedThings("The suspected things during the shift"),
+  reportedIssuesByCareAmbassador(
+      "The reported issue by the care ambassador during the shift"),
+  otherIssues("Other issues"),
+  rating("Rating"),
+  averageReviewFromClient("Average Review \nFrom Client"),
+  feedBack("Feedback"),
+  endDateEndTime("End Date & End Time"),
+  endDateTime("End Date & Time"),
   totalServiceFee("Total Service Fee"),
   pending("Pending"),
+  personalDetails1("Personal Details 1"),
+  qualificationTestResult("Qualification & Test Result"),
+  preference("Preference"),
+  agreement("Agreement"),
   pendingDocuments("Pending Documents"),
+  reasonForCancellation("Reason for cancellation :"),
+  reasonForInCompletion("Reason for Incompletion"),
   completed("Completed"),
   canceled("Canceled"),
   onGoing("Ongoing"),
@@ -67,8 +104,8 @@ enum AppString {
   previous("Previous"),
   next("Next"),
   create("Create"),
-  transactionId("Transaction Id"),
-  serviceId("Service Id"),
+  transactionId("Transaction ID"),
+  serviceId("Service ID"),
   transactionType("Transaction Type"),
   paidFor("Paid For"),
   paidTo("Paid To"),
@@ -83,6 +120,7 @@ enum AppString {
   noProfiles("No Profiles Found!"),
   creditCardDetails("Credit card details"),
   paymentMethod("Payment Method"),
+  paymentStatus("Payment Status"),
   accountHolderName("Account Holder Name"),
   accountNumber("Account Number"),
   expirationDate("Expiration Date"),
@@ -93,6 +131,17 @@ enum AppString {
   accountDetails("Account Details"),
   earnings("Earnings"),
   newServiceRequest("New Service Request"),
+  refundStatus("Refund Status"),
+  canceledBy("Canceled by"),
+  notAvailable("Not Available"),
+  timeChange("Time Change"),
+  serviceScheduled("Service Scheduled "),
+  availableInDifferentLocation("Available in Different Location"),
+  noInternetConnection("No internet connection"),
+  noInternetConnectionSubtitle(
+      "Try to check the network cables, modem, and router or reconnect to Wi-Fi"),
+  somethingWentWrong("Something went wrong on our end."),
+  weAreWorkingToFix("We're working to fix it, Please try again later."),
 
   ///validations
   emptyEmail("Email address shouldn't be empty"),
@@ -107,21 +156,26 @@ enum AppString {
   const AppString(this.val);
 }
 
-
 /// App Colors
 enum AppColor {
   backgroundColor(Color(0xffE9F0F9)),
   primaryColor(Color(0xff344280)),
   darkBlue(Color(0xff070329)),
   lightBlue1(Color(0xffDAD8EE)),
+  lightBlue2(Color(0xffF6F9FF)),
   black(Color(0xff000000)),
   black2(Color(0xff020E1A)),
   matBlack(Color(0xff324665)),
   matBlack2(Color(0xff596483)),
+  matBlack3(Color(0xff1F374F)),
+  matBlack4(Color(0xff2A3549)),
   white(Color(0xffFFFFFF)),
   offWhite(Color(0xffE4E8E5)),
   subTitleColor(Color(0xff727E8A)),
   label(Color(0xff727E8A)),
+  label2(Color(0xff626977)),
+  label3(Color(0xff535A69)),
+  label4(Color(0xff596277)),
   menuDisable(Color(0xff0D0D0E)),
   borderColor(Color(0xffBAC0D2)),
   rowBackgroundColor(Color(0xffF3F6F9)),
@@ -130,6 +184,7 @@ enum AppColor {
   rowColor(Color(0xff464E5F)),
   dividerColor(Color(0xffEDF0FC)),
   dividerColor2(Color(0xffDFE8F1)),
+  calendarColor(Color(0xffF9FBFF)),
   darkGreen(Color(0xff479C88)),
   green(Color(0xff42C25F)),
   green2(Color(0xff50CD89)),
@@ -137,6 +192,8 @@ enum AppColor {
   amberAccentLight(Color(0xffFFF0BF)),
   amber(Color(0xffCFA92B)),
   amber2(Color(0xffE7B75A)),
+  amber3(Color(0xffEB9C02)),
+  amber4(Color(0xffFDF1CA)),
   lightGrey(Color(0xffE1E8F0)),
   inactive(Color(0xffB3BDC8)),
   lightGrey2(Color(0xff8793AB)),
@@ -145,22 +202,30 @@ enum AppColor {
   lightGrey5(Color(0xffA0A4B7)),
   lightGrey6(Color(0xffA7AAA8)),
   lightGrey7(Color(0xff7E889D)),
+  lightGrey8(Color(0xFFdee2e6)),
+  lightGrey9(Color(0xffF9F9F9)),
+  lightGrey10(Color(0xff838181)),
   darkGrey(Color(0xff576A83)),
   darkGrey2(Color(0xff496379)),
   lightWhite(Color(0xffEEF4FA)),
+  notAvailable(Color(0xff7C7676)),
+  timeInChange(Color(0xffAE92FE)),
+  availableInDifferent(Color(0xffF3AA1A)),
   red(Color(0xffE75A77)),
-  red2(Color(0xffFD4242)),
+  red2(Color.fromRGBO(253, 66, 66, 0.8)),
+  red3(Color(0xffFDEDEE)),
+  red4(Color(0xffDC0C0C)),
   blue(Color(0xff556DD3)),
-  success (Color(0xff53a653)),
-  warning ( Color(0xffffcc00)),
-  error ( Color(0xffe10725)),
-  info ( Color(0xff4fc3f7)),
+  success(Color(0xff53a653)),
+  warning(Color(0xffffcc00)),
+  error(Color(0xffe10725)),
+  info(Color(0xff4fc3f7)),
   successDark(Color(0xff408140)),
   warningDark(Color(0xffffb800)),
   errorDark(Color(0xffc7051b)),
-  infoDark (Color(0xff03a9f4)),
-  dark (Color(0xff141414)),
-  transparent(Colors.transparent);
+  infoDark(Color(0xff03a9f4)),
+  dark(Color(0xff141414)),
+  transparent(Color(0x00000000));
 
   final Color val;
 
@@ -186,11 +251,11 @@ enum IMG {
   phone("assets/icons/ic_phone.svg"),
   arrowDown("assets/icons/ic_arrow_down.svg"),
   refresh("assets/icons/ic_refresh.svg"),
+  tick("assets/icons/ic_tick.svg"),
   notFound("assets/icons/ic_not_found.svg"),
-
-
   ssn("assets/icons/ic_ssn.svg"),
   warning("assets/icons/ic_warning.svg"),
+  completed("assets/icons/ic_completed.svg"),
   drawerPng("assets/images/drawer.png"),
   colorLogoPng("assets/images/color_logo.png"),
   blackLogoPng("assets/images/black_logo.png"),
@@ -259,6 +324,8 @@ enum FW {
 }
 
 enum DBL {
+  pointTwoFive(.25),
+  pointThree(.3),
   pointFive(.5),
   zero(0.0),
   one(1.0),
@@ -266,6 +333,7 @@ enum DBL {
   three(3.0),
   threePointSeven(3.7),
   four(4.0),
+  fourPointFive(4.5),
   five(5.0),
   six(6.0),
   seven(7.0),
@@ -295,23 +363,27 @@ enum DBL {
   thirty(30.0),
   thirtyThree(33.0),
   thirtyFive(35.0),
+  thirtyEight(38.0),
   forty(40.0),
   fortyFive(45.0),
   fortyEight(48.0),
   fifty(50.0),
   fiftyFive(55.0),
   sixty(60.0),
+  sixtyFive(65.0),
   sixtyEight(68.0),
   seventy(70.0),
   seventyTwo(72.0),
   seventyFive(75.0),
   eighty(80.0),
+  eightyFive(85.0),
   eightyNine(89.0),
   ninetyTwo(92.0),
   ninetyFive(95.0),
   hundred(100.0),
   oneHundredFour(104.0),
   oneTwenty(120.0),
+  oneTwentyFive(125.0),
   oneThirty(130.0),
   oneThirtyEight(138.0),
   oneForty(140.0),
@@ -320,20 +392,34 @@ enum DBL {
   oneSixty(160.0),
   oneSixtySix(166.0),
   oneSeventy(170.0),
+  oneSeventyFive(175.0),
   oneSeventySix(176.0),
   oneSeventyNine(179.0),
   oneEighty(180.0),
   hundredNinety(190.0),
   twoHundred(200.0),
+  twoThirty(230.0),
   twoForty(240),
+  twoFortyFive(245),
+  twoFiftyFive(255),
+  twoSixty(260),
+  twoSeventy(270),
+  twoEighty(280),
   twoNinety(290),
   threeHundred(300.0),
   threeFifteen(315.0),
+  threeTwenty(320.0),
+  threeTwentyFive(325.0),
   threeFortyThree(343.0),
+  threeSixtyFive(365.0),
+  threeEighty(380.0),
   threeNinetyTwo(392.0),
   fourHundred(400.0),
+  fourSeventy(470.0),
   fourFifty(450.0),
   fiveFifty(550.0),
+  fiveTwenty(520.0),
+  eightSixtyFive(865.0),
   nineFifty(950.0);
 
   final double val;
@@ -378,25 +464,30 @@ enum INT {
 
 enum ButtonType { secondary, warning, info, success, error }
 
+enum Status {
+  pending(0),
+  completed(1),
+  canceled(2),
+  ongoing(3),
+  upcoming(4),
+  start(5),
+  acceptReject(6);
 
+  final int val;
 
+  const Status(this.val);
+}
 
+enum Week {
+  monday(1),
+  tuesday(2),
+  wednesday(3),
+  thursday(4),
+  friday(5),
+  saturday(6),
+  sunday(7);
 
+  final int val;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  const Week(this.val);
+}

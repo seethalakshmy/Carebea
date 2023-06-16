@@ -23,7 +23,7 @@ class UserAccountDetails extends StatelessWidget {
         children: [
           CustomSizedBox(
             width: isXS2(context)?DBL.oneEighty.val: DBL.twoHundred.val,
-            child: CustomText3(
+            child: CustomText(
               label,
               style: TS().gRoboto(
                   fontSize: getFontSize(
@@ -49,7 +49,7 @@ class UserAccountDetails extends StatelessWidget {
               right: DBL.five.val,
               top: DBL.twelve.val,
               bottom: DBL.twelve.val,
-              child: CustomText3(
+              child: CustomText(
                 value,
                 style: TS().gRoboto(
                     fontSize: getFontSize(

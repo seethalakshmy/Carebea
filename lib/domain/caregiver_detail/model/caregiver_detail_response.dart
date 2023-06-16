@@ -33,6 +33,9 @@ class Data {
   int? serviceCompleted;
   int? canceledRequest;
   int? totalReviewsGiven;
+  String? reviewsPending;
+  num?rating;
+  int?totalRating;
   Schedule? schedule;
   AccountDetails? accountDetails;
   List<Services>? services;
@@ -50,6 +53,7 @@ class Data {
         this.serviceCompleted,
         this.canceledRequest,
         this.totalReviewsGiven,
+        this.reviewsPending,
         this.schedule,
         this.accountDetails,
         this.services,
@@ -67,6 +71,9 @@ class Data {
     serviceCompleted = json['service_completed'];
     canceledRequest = json['canceled_request'];
     totalReviewsGiven = json['total_reviews_given'];
+    totalRating = json['total_rating'];
+    rating = json['rating'];
+    reviewsPending = json['reviews_pending'];
     schedule = json['schedule'] != null
         ?  Schedule.fromJson(json['schedule'])
         : null;
@@ -415,6 +422,7 @@ class ServiceRequest {
   String? requstedEndDateTime;
   String? status;
   List<String>? serviceNeed;
+  int ?serviceNeededCount;
 
   ServiceRequest(
       {this.name,
@@ -430,6 +438,7 @@ class ServiceRequest {
     requstedStartDateTime = json['requsted_start_date_time'];
     requstedEndDateTime = json['requsted_end_date_time'];
     status = json['status'];
+    serviceNeededCount = json['service_need_count'];
     serviceNeed = json['service_need'].cast<String>();
   }
 

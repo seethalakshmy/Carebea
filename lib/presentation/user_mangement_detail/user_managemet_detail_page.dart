@@ -200,7 +200,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            CustomText3(
+                                            CustomText(
                                               "${response.user?.name?.firstName} ${response.user?.name?.lastName}",
                                               style: TS().gRoboto(
                                                 color: AppColor.rowColor.val,

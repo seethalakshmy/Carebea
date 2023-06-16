@@ -19,24 +19,35 @@ class TableRowImageView extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: CachedImage(
-              height: DBL.thirty.val, width: DBL.thirty.val, imgUrl: imageUrl),
-        ),
+        _buildImage(),
         CustomSizedBox(width: DBL.twelve.val),
-        Expanded(
-          child: CustomText3(
-            name,
-            style: TS().gRoboto(
-                fontSize: Responsive.isWeb(context)
-                    ? DBL.fourteen.val
-                    : DBL.twelve.val,
-                fontWeight: FW.w400.val,
-                color: AppColor.rowColor.val),
-          ),
-        ),
+        _buildText(context),
       ],
+    );
+  }
+
+  Expanded _buildText(BuildContext context) {
+    return Expanded(
+      child: CustomText(
+        name,
+        style: _buildStyle(context),
+      ),
+    );
+  }
+
+  _buildStyle(BuildContext context) {
+    return TS().gRoboto(
+          fontSize:
+              Responsive.isWeb(context) ? DBL.fourteen.val : DBL.twelve.val,
+          fontWeight: FW.w400.val,
+          color: AppColor.rowColor.val);
+  }
+
+  ClipRRect _buildImage() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: CachedImage(
+          height: DBL.thirty.val, width: DBL.thirty.val, imgUrl: imageUrl),
     );
   }
 }

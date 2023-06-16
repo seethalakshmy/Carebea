@@ -19,7 +19,7 @@ class TransactionDetailsAlert extends StatelessWidget {
           width: 200,
           child: ListTile(
             contentPadding: EdgeInsets.zero,
-            title: CustomText3(
+            title: CustomText(
               'Refund Started',
               style: TS().gRoboto(
                   color: AppColor.black.val,
@@ -29,7 +29,7 @@ class TransactionDetailsAlert extends StatelessWidget {
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomText3(
+                CustomText(
                   'Mon,09March 2023 |  3:20PM',
                   style: TS().gRoboto(
                       color: AppColor.black.val,
@@ -44,7 +44,7 @@ class TransactionDetailsAlert extends StatelessWidget {
                     padding: const EdgeInsets.all(5),
                     child: Row(
                       children: [
-                        CustomText3(
+                        CustomText(
                           "Hide Details",
                           style: TS().gRoboto(
                               color: AppColor.error.val,
@@ -84,14 +84,14 @@ class TransactionDetailsAlert extends StatelessWidget {
           width: 200,
           child: ListTile(
             contentPadding: EdgeInsets.zero,
-            title: CustomText3(
+            title: CustomText(
               'Refunded',
               style: TS().gRoboto(
                   color: AppColor.black.val,
                   fontSize: FS.font16.val,
                   fontWeight: FW.w500.val),
             ),
-            subtitle: CustomText3(
+            subtitle: CustomText(
               'Mon,09March 2023 |  3:20PM',
               style: TS().gRoboto(
                   color: AppColor.black.val,
@@ -145,7 +145,7 @@ class TransactionDetailsAlert extends StatelessWidget {
       children: [
         Container(
           width: 160,
-          child: CustomText3(
+          child: CustomText(
             detailName,
             softWrap: true,
             style: TS().gRoboto(
@@ -158,7 +158,7 @@ class TransactionDetailsAlert extends StatelessWidget {
         detail.toLowerCase() == "completed" || detail.toLowerCase() == "cancel"
             ? Row(
                 children: [
-                  CustomText3(
+                  CustomText(
                     ":  ",
                     softWrap: true,
                     style: TS().gRoboto(
@@ -175,7 +175,7 @@ class TransactionDetailsAlert extends StatelessWidget {
                   )
                 ],
               )
-            : CustomText3(
+            : CustomText(
                 ":  " + detail,
                 softWrap: true,
                 style: TS().gRoboto(
@@ -203,7 +203,7 @@ class TransactionDetailsAlert extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          CustomText3(
+          CustomText(
             AppString.transactionDetails.val,
             style: TS().gRoboto(
               color: AppColor.white.val,

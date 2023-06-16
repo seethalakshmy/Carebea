@@ -30,7 +30,7 @@ class SVGText extends StatelessWidget {
           width: width,
         ),
         CustomSizedBox(width:widthGap,),
-        Expanded(child: CustomText3(name, style: TS().gRoboto(fontSize: getFontSize(context), fontWeight: FW.w400.val, color: AppColor.lightGrey2.val ),))
+        Expanded(child: CustomText(name, style: TS().gRoboto(fontSize: getFontSize(context), fontWeight: FW.w400.val, color: AppColor.lightGrey2.val ),))
       ],
     );
   }

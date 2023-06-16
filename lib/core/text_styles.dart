@@ -24,7 +24,7 @@ class TS {
            color: color, fontSize: fontSize, fontWeight: fontWeight,);
    gRoboto({double? fontSize, FontWeight? fontWeight, Color? color}) =>
        GoogleFonts.roboto(
-         color: color, fontSize: fontSize, fontWeight: fontWeight,);
+         color: color, fontSize: fontSize??DBL.twelve.val, fontWeight: fontWeight,);
    gInter({double? fontSize, FontWeight? fontWeight, Color? color}) =>
        GoogleFonts.inter(
          color: color, fontSize: fontSize, fontWeight: fontWeight,);

@@ -7,8 +7,6 @@ import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/color.dart';
-import '../../../core/string.dart';
 import '../../../core/text_styles.dart';
 
 class HeaderView extends StatelessWidget {
@@ -26,15 +24,23 @@ class HeaderView extends StatelessWidget {
         width: double.infinity,
         padding: EdgeInsets.only(
             left: Responsive.isWeb(context) ? DBL.twenty.val : DBL.eight.val),
-        child: CustomText3(
-          title,
-          style: TS().gRoboto(
-              color: AppColor.black.val,
-              fontWeight: FW.w500.val,
-              fontSize:
-                  Responsive.isWeb(context) ? FS.font21.val : FS.font18.val),
-        ),
+        child: buildCustomText(context),
       ),
     );
+  }
+
+  CustomText buildCustomText(BuildContext context) {
+    return CustomText(
+        title,
+        style: buildGRoboto(context),
+      );
+  }
+
+  buildGRoboto(BuildContext context) {
+    return TS().gRoboto(
+          color: AppColor.black.val,
+          fontWeight: FW.w500.val,
+          fontSize:
+              Responsive.isWeb(context) ? FS.font21.val : FS.font18.val);
   }
 }

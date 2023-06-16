@@ -28,9 +28,15 @@ class CDataTable2 extends StatelessWidget {
         headingRowHeight: headingRowHeight,
         dataRowHeight: dataRowHeight,
         showBottomBorder: true,
-        border:  TableBorder(horizontalInside: BorderSide(color: AppColor.dividerColor.val,width: .1,),),
+        border: TableBorder(
+          horizontalInside: BorderSide(
+            color: AppColor.dividerColor.val,
+            width: .1,
+          ),
+        ),
         columns: columns,
-        headingRowColor:MaterialStateProperty.all( AppColor.rowBackgroundColor.val),
+        headingRowColor:
+            MaterialStateProperty.all(AppColor.rowBackgroundColor.val),
         rows: rows);
   }
 }

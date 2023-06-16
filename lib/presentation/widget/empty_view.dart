@@ -1,6 +1,4 @@
-import 'package:admin_580_tech/core/color.dart';
 import 'package:admin_580_tech/core/responsive.dart';
-import 'package:admin_580_tech/core/string.dart';
 import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
@@ -21,7 +19,8 @@ class EmptyView extends StatelessWidget {
     Key? key,
   }) : super(key: key);
   final String title;
-  final String?subtitle;
+  final String? subtitle;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -31,38 +30,58 @@ class EmptyView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CustomSizedBox(height: DBL.thirty.val,),
+          CustomSizedBox(
+            height: DBL.sixty.val,
+          ),
           SvgPicture.asset(IMG.notFound.val),
-          CustomSizedBox(height: DBL.ten.val,),
-            CustomText3(
-              title ,
-              style:  TS().gPoppins(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
-
+          CustomSizedBox(
+            height: DBL.ten.val,
           ),
-          subtitle != null?CustomText3(
-            subtitle!,
-            style: TextStyle(
-              color: isDark ? ColorConst.darkFontColor : ColorConst.textColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ),
-          ):const SizedBox.shrink(),
-          CustomSizedBox(height: DBL.fifteen.val,),
-          CustomButton(
-            color: AppColor.primaryColor.val,
-            text: Strings.backToDashBoard,
-            borderRadius: 15,
-            padding:
-                const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-            onPressed: () {
-              context.router.navigate(const DashboardRoute());
-            },
-            icon: const Icon(Icons.home, size: 15),
+          _buildTitle(),
+          subtitle != null ? _buildSubTitle() : const SizedBox.shrink(),
+          CustomSizedBox(
+            height: DBL.fifteen.val,
           ),
+          _buildButton(context),
         ],
+      ),
+    );
+  }
+
+  CustomButton _buildButton(BuildContext context) {
+    return CustomButton(
+      color: AppColor.primaryColor.val,
+      text: AppString.backToDashBoard.val,
+      borderRadius: DBL.ten.val,
+      textStyle: TS().gPoppins(
+        fontWeight: FW.w500.val,
+        fontSize: FS.font16.val,
+      ),
+      padding:  EdgeInsets.symmetric(vertical: DBL.twentyFive.val, horizontal: DBL.fifty.val),
+      onPressed: () {
+        context.router.navigate(const DashboardRoute());
+      },
+      icon:  Icon(Icons.home, size: DBL.eighteen.val),
+    );
+  }
+
+  CustomText _buildSubTitle() {
+    return CustomText(
+      subtitle!,
+      style: TextStyle(
+        color: AppColor.matBlack.val,
+        fontWeight: FW.bold.val,
+        fontSize: FS.font14.val,
+      ),
+    );
+  }
+
+  CustomText _buildTitle() {
+    return CustomText(
+      title,
+      style: TS().gPoppins(
+        fontWeight: FW.bold.val,
+        fontSize: FS.font20.val,
       ),
     );
   }

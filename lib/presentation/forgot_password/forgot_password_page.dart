@@ -2,7 +2,6 @@ import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
-import 'package:admin_580_tech/presentation/widget/custom_center.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
@@ -16,7 +15,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../routes/app_router.gr.dart';
-import '../widget/custom_scroll_view.dart';
 import '../widget/custom_text_field.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -62,8 +60,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     ));
   }
 
-  CScrollView webView(BuildContext context, Size size) {
-    return CScrollView(
+  SingleChildScrollView webView(BuildContext context, Size size) {
+    return SingleChildScrollView(
         child: Row(
       children: [
         _part1View(size, context),
@@ -96,9 +94,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     );
   }
 
-  CustomCenter _forgotPasswordView(Size size) {
-    return CustomCenter(
-      child: CScrollView(
+  Center _forgotPasswordView(Size size) {
+    return Center(
+      child: SingleChildScrollView(
         child: CSelectionArea(
           child: CForm(
             formKey: _formKey,
@@ -134,8 +132,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     );
   }
 
-  CustomText3 _resetDescription() {
-    return CustomText3(AppString.resetPasswordDescription.val,
+  CustomText _resetDescription() {
+    return CustomText(AppString.resetPasswordDescription.val,
         style: TS().gPoppins(
             color: AppColor.subTitleColor.val,
             fontWeight: FW.w400.val,
@@ -145,20 +143,20 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   CustomImage _logoView() {
     return CustomImage(
       path: IMG.blackLogoPng.val,
-      fit: BoxFit.contain,
+      height: DBL.twoThirty.val,
     );
   }
 
-  CustomText3 _emailLabel() {
-    return CustomText3(AppString.emailAddress.val,
+  CustomText _emailLabel() {
+    return CustomText(AppString.emailAddress.val,
         style: TS().style(
             fontWeight: FW.w400.val,
             color: AppColor.label.val,
             fontSize: DBL.seventeen.val));
   }
 
-  CustomText3 _resetTitle() {
-    return CustomText3(AppString.resetPassword.val,
+  CustomText _resetTitle() {
+    return CustomText(AppString.resetPassword.val,
         style: TS().style(
             fontWeight: FW.w400.val,
             color: AppColor.black.val,

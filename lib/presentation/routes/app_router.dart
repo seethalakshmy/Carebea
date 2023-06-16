@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart';
 import 'package:admin_580_tech/presentation/cargiver_detail/caregiver_detail_page.dart';
 import 'package:admin_580_tech/presentation/forgot_password/forgot_password_page.dart';
 import 'package:admin_580_tech/presentation/reset_password/reset_password_page.dart';
@@ -9,7 +10,6 @@ import '../caregivers/caregivers_page.dart';
 import '../dashboard/dashboard_page.dart';
 import '../login/login_page.dart';
 import '../side_menu/side_menu_page.dart';
-import '../test.dart';
 import '../transaction_management/transaction_management_page.dart';
 
 @AdaptiveAutoRouter(
@@ -53,6 +53,10 @@ import '../transaction_management/transaction_management_page.dart';
         AutoRoute(
           path: 'transaction-management',
           page: TransactionManagementPage,
+        ),
+        AutoRoute(
+          path: 'care-ambassador-profile',
+          page: CareGiverProfilePage,
         ),
       ],
     ),

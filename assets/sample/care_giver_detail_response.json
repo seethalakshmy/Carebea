@@ -18,6 +18,12 @@
     "canceled_request": 5,
     "total_reviews_given": 40,
     "rating": 3.5,
+    "reviews_pending": "2 Review Pending",
+    "total_rating": 36,
+    "pending_documents": [
+     "COVID - 19 Vaccination" ,
+      "BLS CPR/First Aid Certification"
+    ],
     "schedule": {
       "working_days": [
         "Monday",
@@ -151,28 +157,28 @@
         }
       ],
       "not_available_dates": [
-        "2023-05-18T00:00:00.000Z"
+        "2023-06-19T00:00:00.000Z"
       ],
       "diff_location_dates": [
         {
-          "date": "2023-05-10T00:00:00.000Z",
+          "date": "2023-06-20T00:00:00.000Z",
           "start_time": "9:5",
           "end_time": "17:5"
         },
         {
-          "date": "2023-05-12T00:00:00.000Z",
+          "date": "2023-06-21T00:00:00.000Z",
           "start_time": "15.31",
           "end_time": "17.31"
         }
       ],
       "diff_timeslot_dates": [
         {
-          "date": "2023-05-10T00:00:00.000Z",
+          "date": "2023-06-22T00:00:00.000Z",
           "start_time": "9:5",
           "end_time": "17:5"
         },
         {
-          "date": "2023-05-12T00:00:00.000Z",
+          "date": "2023-06-23T00:00:00.000Z",
           "start_time": "15.31",
           "end_time": "17.31"
         }
@@ -260,7 +266,17 @@
         "received_from": "albin john",
         "paid_for": "service",
         "transaction_id": "#12030923",
-        "status": 1
+        "status": 2
+      },
+      {
+        "service_id": "SER124",
+        "transaction_type": "Credit Card",
+        "date_time": "04/26/2023 10:00am",
+        "amount": "$324",
+        "received_from": "albin john",
+        "paid_for": "service",
+        "transaction_id": "#12030923",
+        "status": 0
       }
     ],
     "service_request": [
@@ -273,8 +289,14 @@
         "requsted_start_date_time": "04/26/2023 10:00am",
         "requsted_end_date_time": "04/26/2023 10:00am",
         "status": "waiting for caregiver response",
+        "service_need_count": 4,
         "service_need": [
           "Assist Wakeup",
+          "Assist showering",
+          "Assist showering",
+          "Assist showering",
+          "Assist showering",
+          "Assist showering",
           "Assist showering"
         ]
       },
@@ -287,6 +309,7 @@
         "requsted_start_date_time": "04/26/2023 10:00am",
         "requsted_end_date_time": "04/26/2023 10:00am",
         "status": "waiting for caregiver response",
+        "service_need_count": 4,
         "service_need": [
           "Assist Wakeup",
           "Assist showering"

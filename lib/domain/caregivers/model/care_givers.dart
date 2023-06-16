@@ -27,7 +27,8 @@ class Caregivers {
     String? dob,
     int? gender,
     String? profile,
-    bool? onBoardingStatus,}
+    bool?isActive
+  }
 
   ) =>
       Caregivers(
@@ -36,9 +37,11 @@ class Caregivers {
           mobile: mobile ?? this.mobile,
           dob: dob ?? this.dob,
           profile: profile ?? this.profile,
-          isActive: onBoardingStatus ?? this.isActive,
+          isActive: isActive ?? this.isActive,
           email: email ?? this.email,
-          gender: gender ?? this.gender);
+          gender: gender ?? this.gender,
+
+      );
 
   Caregivers.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];

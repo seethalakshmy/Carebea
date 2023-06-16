@@ -39,10 +39,10 @@ class CustomDropdown<T> extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CustomDropdownState<T> createState() => _CustomDropdownState<T>();
+  CustomDropdownState<T> createState() => CustomDropdownState<T>();
 }
 
-class _CustomDropdownState<T> extends State<CustomDropdown<T>>
+class CustomDropdownState<T> extends State<CustomDropdown<T>>
     with TickerProviderStateMixin {
   final LayerLink _layerLink = LayerLink();
   OverlayEntry? _overlayEntry;
