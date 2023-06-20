@@ -17,11 +17,13 @@ class ServiceDetailCanceledView extends StatelessWidget {
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        RowColonCombo(label: AppString.canceledBy.val, value: canceledBy),
+        RowColonCombo.twoHundred(
+            label: AppString.canceledBy.val, value: canceledBy),
         CustomSizedBox(
           height: DBL.ten.val,
         ),
-        RowColonCombo(label: AppString.refundStatus.val, value: refundStatus),
+        RowColonCombo.twoHundred(
+            label: AppString.refundStatus.val, value: refundStatus),
       ],
     ));
   }

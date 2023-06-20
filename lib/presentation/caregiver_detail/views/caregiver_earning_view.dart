@@ -1,10 +1,7 @@
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
-import 'package:admin_580_tech/presentation/cargiver_detail/widgets/earning_detail_left_view.dart';
 import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
-import 'package:admin_580_tech/presentation/widget/dotted_container.dart';
 import 'package:data_table_2/data_table_2.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
 import '../../../application/bloc/caregiver_detail/caregiver_detail_bloc.dart';
@@ -19,12 +16,12 @@ import '../../widget/custom_sizedbox.dart';
 import '../../widget/custom_text.dart';
 import '../../widget/empty_view.dart';
 import '../../widget/error_view.dart';
-import '../../widget/service_detail_transaction_view.dart';
 import '../../widget/table_actions_view.dart';
 import '../../widget/table_column_view.dart';
 import '../../widget/table_loader_view.dart';
 import '../../widget/table_row_view.dart';
 import '../../widget/table_status_box.dart';
+import '../widgets/earning_detail_left_view.dart';
 
 class CareGiverEarningView extends StatelessWidget {
   const CareGiverEarningView(
@@ -173,7 +170,7 @@ class CareGiverEarningView extends StatelessWidget {
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {
         return CustomAlertDialogWidget(
-          heading: AppString.completedServiceRequest.val,
+          heading: AppString.earnings.val,
           child: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: DBL.twentyFive.val,
@@ -230,7 +227,6 @@ class CareGiverEarningView extends StatelessWidget {
   }
 
   Row _rightView(BuildContext context) {
-
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -264,7 +260,7 @@ class CareGiverEarningView extends StatelessWidget {
             Row(
               children: [
                 CustomText(
-                 "Hide Details",
+                  "Hide Details",
                   style: TS().gRoboto(
                       color: AppColor.red4.val,
                       fontSize: FS.font13.val,
@@ -281,10 +277,10 @@ class CareGiverEarningView extends StatelessWidget {
               height: DBL.twentyTwo.val,
             ),
             CustomContainer(
-              width: isXs(context)?330:400,
+              width: isXs(context) ? 330 : 400,
               color: AppColor.lightGrey9.val,
               padding: EdgeInsets.symmetric(
-                horizontal: isXs(context)? DBL.eight.val: DBL.thirty.val,
+                horizontal: isXs(context) ? DBL.eight.val : DBL.thirty.val,
                 vertical: DBL.twenty.val,
               ),
               child: Column(
@@ -336,7 +332,6 @@ class CareGiverEarningView extends StatelessWidget {
       ],
     );
   }
-
 
   Column refundStatusView(BuildContext context) {
     return Column(

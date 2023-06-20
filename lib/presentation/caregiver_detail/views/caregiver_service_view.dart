@@ -3,7 +3,6 @@ import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_re
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/profile_info.dart';
 import 'package:admin_580_tech/presentation/widget/service_detail_canceled_view.dart';
-import 'package:admin_580_tech/presentation/widget/service_detail_caregiver_view.dart';
 import 'package:admin_580_tech/presentation/widget/service_detail_staus_view.dart';
 import 'package:admin_580_tech/presentation/widget/service_details_date_view.dart';
 import 'package:admin_580_tech/presentation/widget/service_details_rating_view.dart';
@@ -16,14 +15,12 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/enum.dart';
-import '../../../core/text_styles.dart';
 import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_card.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_data_table_2.dart';
 import '../../widget/custom_selection_area.dart';
 import '../../widget/custom_sizedbox.dart';
-import '../../widget/custom_svg.dart';
 import '../../widget/custom_text.dart';
 import '../../widget/empty_view.dart';
 import '../../widget/error_view.dart';
@@ -138,9 +135,9 @@ class CareGiverServiceView extends StatelessWidget {
               DataCell(TableRowImageView(
                   name: "${item.client?.firstName} ${item.client?.lastName}",
                   imageUrl: item.client?.profile ?? "")),
-              DataCell(_tableRowView(item.serviceName??"" )),
-              DataCell(_tableRowView( item.startDateTime ?? "")),
-              DataCell(_tableRowView( item.endDateTime ?? "")),
+              DataCell(_tableRowView(item.serviceName ?? "")),
+              DataCell(_tableRowView(item.startDateTime ?? "")),
+              DataCell(_tableRowView(item.endDateTime ?? "")),
               DataCell(_tableRowView(item.totalServiceFee ?? "")),
               DataCell(TableStatusBox(
                 status: item.status ?? 0,
@@ -159,7 +156,7 @@ class CareGiverServiceView extends StatelessWidget {
     );
   }
 
-  TableRowView _tableRowView(String name) => TableRowView(text:name);
+  TableRowView _tableRowView(String name) => TableRowView(text: name);
 
   TableColumnView _tableColumnView(String name) {
     return TableColumnView(
@@ -180,7 +177,7 @@ class CareGiverServiceView extends StatelessWidget {
         return CustomAlertDialogWidget(
           height: MediaQuery.of(context).size.height * .9,
           width: double.infinity,
-          heading: AppString.completedServiceRequest.val,
+          heading: getTitle(status),
           child: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: DBL.twentyFive.val,
@@ -194,10 +191,16 @@ class CareGiverServiceView extends StatelessWidget {
                       CustomSizedBox(height: DBL.thirty.val),
                       !isLg(context)
                           ? Column(
-                            children: [
-                              status !=1?ProfileInfo():CustomSizedBox.shrink(),
-                            CustomSizedBox(height:  status ==1 ?DBL.zero.val:DBL.twenty.val ,),
-                              Row(
+                              children: [
+                                status != 1
+                                    ? const ProfileInfo()
+                                    : CustomSizedBox.shrink(),
+                                CustomSizedBox(
+                                  height: status == 1
+                                      ? DBL.zero.val
+                                      : DBL.twenty.val,
+                                ),
+                                Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Expanded(
@@ -213,12 +216,15 @@ class CareGiverServiceView extends StatelessWidget {
                                     )
                                   ],
                                 ),
-                            ],
-                          )
+                              ],
+                            )
                           : Column(
                               children: [
-                               if( status != 1)ProfileInfo(),
-                                if( status != 1)CustomSizedBox(height: DBL.twenty.val,),
+                                if (status != 1) const ProfileInfo(),
+                                if (status != 1)
+                                  CustomSizedBox(
+                                    height: DBL.twenty.val,
+                                  ),
                                 _leftView(status),
                                 _rightView(status),
                               ],
@@ -239,18 +245,38 @@ class CareGiverServiceView extends StatelessWidget {
           ServiceDetailReportsView(
             suspectedOtherIssue: "loreum ipsum",
             reportedOtherIssue: "loreum ipsum",
-            suspectedIssues: const ["refused to eat", "poor living conditions", "suspected alcohol abuse"],
-            reportedIssues: ["refused to eat", "poor living conditions", "suspected alcohol abuse"],
+            suspectedIssues: const [
+              "refused to eat",
+              "poor living conditions",
+              "suspected alcohol abuse"
+            ],
+            reportedIssues: [
+              "refused to eat",
+              "poor living conditions",
+              "suspected alcohol abuse"
+            ],
           ),
         // CustomSizedBox(
         //   height: DBL.nine.val,
         // ),
         ServiceDetailServiceListView(
           status: status,
-          completedServices: ["Assist w/Wake up", "Assist w/Showering","Assist w/Wake up"],
+          completedServices: [
+            "Assist w/Wake up",
+            "Assist w/Showering",
+            "Assist w/Wake up"
+          ],
           inCompletedReason: "loreum ipsum",
-          inCompletedServices: ["Assist w/Wake up", "Assist w/Showering","Assist w/Wake up"],
-          serviceNeeded:["Assist w/Wake up", "Assist w/Showering","Assist w/Wake up"],
+          inCompletedServices: [
+            "Assist w/Wake up",
+            "Assist w/Showering",
+            "Assist w/Wake up"
+          ],
+          serviceNeeded: [
+            "Assist w/Wake up",
+            "Assist w/Showering",
+            "Assist w/Wake up"
+          ],
         ),
         CustomSizedBox(
           height: DBL.thirty.val,
@@ -262,9 +288,9 @@ class CareGiverServiceView extends StatelessWidget {
   Column _leftView(int status) {
     return Column(
       children: [
-       status ==1?ProfileInfo():CustomSizedBox.shrink(),
+        status == 1 ? const ProfileInfo() : CustomSizedBox.shrink(),
         CustomSizedBox(
-          height: status ==1?DBL.twenty.val:DBL.zero.val,
+          height: status == 1 ? DBL.twenty.val : DBL.zero.val,
         ),
         ServiceDetailStatusView(
           bookingLeft: "6 days left",
@@ -284,7 +310,9 @@ class CareGiverServiceView extends StatelessWidget {
         ),
         if (status == 1)
           ServiceDetailRatingView(
-              rating: 3, feeBack: "loreum ipsum dolor conshdhgdud hdhry hdhrb jdhhdhdk djd"),
+              rating: 3,
+              feeBack:
+                  "loreum ipsum dolor conshdhgdud hdhry hdhrb jdhhdhdk djd"),
         CustomSizedBox(
           height: DBL.nine.val,
         ),
@@ -303,6 +331,19 @@ class CareGiverServiceView extends StatelessWidget {
         )
       ],
     );
+  }
+
+  String getTitle(int status) {
+    if (status == Status.completed.val) {
+      return AppString.completedServiceRequest.val;
+    } else if (status == Status.canceled.val) {
+      return AppString.canceledServiceRequest.val;
+    } else if (status == Status.ongoing.val) {
+      return AppString.onGoingServiceRequest.val;
+    } else if (status == Status.upcoming.val) {
+      return AppString.upcomingServiceRequest.val;
+    }
+    return "";
   }
 
   bool isLg(BuildContext context) => MediaQuery.of(context).size.width <= 976;

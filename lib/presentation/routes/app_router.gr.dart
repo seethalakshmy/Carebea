@@ -11,12 +11,12 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:admin_580_tech/presentation/caregiver_detail/caregiver_detail_page.dart'
+    as _i8;
 import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart'
     as _i11;
 import 'package:admin_580_tech/presentation/caregivers/caregivers_page.dart'
     as _i6;
-import 'package:admin_580_tech/presentation/cargiver_detail/caregiver_detail_page.dart'
-    as _i8;
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart'
     as _i5;
 import 'package:admin_580_tech/presentation/forgot_password/forgot_password_page.dart'

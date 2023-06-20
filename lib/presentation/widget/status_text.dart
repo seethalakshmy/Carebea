@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import '../../core/text_styles.dart';
 
 class StatusText extends StatelessWidget {
-  const StatusText(this.title, {Key? key, required this.status, this.fontSize})
+  const StatusText(this.value, {Key? key, required this.status, this.fontSize})
       : super(key: key);
-  final String title;
+  final String value;
   final int status;
   final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
     return CustomText(
-      title,
+      value,
       style: _buildTextStyle(),
     );
   }

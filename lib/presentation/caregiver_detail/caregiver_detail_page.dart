@@ -3,13 +3,12 @@ import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
 import 'package:admin_580_tech/infrastructure/caregiver_detail/caregiver_detail_repository.dart';
-import 'package:admin_580_tech/presentation/cargiver_detail/views/account_info_view.dart';
-import 'package:admin_580_tech/presentation/cargiver_detail/views/caregiver_earning_view.dart';
-import 'package:admin_580_tech/presentation/cargiver_detail/views/caregiver_service_request_view.dart';
-import 'package:admin_580_tech/presentation/cargiver_detail/views/caregiver_service_view.dart';
-import 'package:admin_580_tech/presentation/cargiver_detail/views/schedule_view.dart';
-import 'package:admin_580_tech/presentation/cargiver_detail/widgets/service_completion_and_rewards.dart';
-import 'package:admin_580_tech/presentation/cargiver_detail/widgets/svg_text.dart';
+import 'package:admin_580_tech/presentation/caregiver_detail/views/caregiver_bank_account_info_view.dart';
+import 'package:admin_580_tech/presentation/caregiver_detail/views/caregiver_earning_view.dart';
+import 'package:admin_580_tech/presentation/caregiver_detail/views/caregiver_schedule_view.dart';
+import 'package:admin_580_tech/presentation/caregiver_detail/views/caregiver_service_request_view.dart';
+import 'package:admin_580_tech/presentation/caregiver_detail/views/caregiver_service_view.dart';
+import 'package:admin_580_tech/presentation/caregiver_detail/widgets/service_completion_and_rewards.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
@@ -20,6 +19,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import '../../core/custom_debugger.dart';
 import '../../core/responsive.dart';
+import '../widget/svg_text.dart';
 
 class CareGiverDetailPage extends StatefulWidget {
   const CareGiverDetailPage({Key? key}) : super(key: key);
@@ -95,8 +95,9 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
               physics: const NeverScrollableScrollPhysics(),
               controller: tabController,
               children: [
-                ScheduleView(state: state,caregiverDetailBloc: _caregiverDetailBloc),
-                AccountInfoView(
+                CareGiverScheduleView(
+                    state: state, caregiverDetailBloc: _caregiverDetailBloc),
+                CareGiverBankAccountInfoView(
                   state: state,
                 ),
                 CareGiverServiceView(

@@ -32,15 +32,15 @@ class ServiceDetailServiceListView extends StatelessWidget {
         children: [
           status == Status.completed.val
               ? Column(
-            children: [
-              _serviceCompletedView(context),
-              CustomSizedBox(
-                height: DBL.ten.val,
-              ),
-              _serviceUncompletedView(context),
-              _serviceUnCompletedReason(),
-            ],
-          )
+                  children: [
+                    _serviceCompletedView(context),
+                    CustomSizedBox(
+                      height: DBL.ten.val,
+                    ),
+                    _serviceUncompletedView(context),
+                    _serviceUnCompletedReason(),
+                  ],
+                )
               : _serviceNeededView(context),
         ],
       ),
@@ -52,9 +52,9 @@ class ServiceDetailServiceListView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AlertTextLabel(
+          width: DBL.threeEighty.val,
           AppString.serviceNeeded.val,
           isCustomWidth: true,
-          isNotChangeWidth: false,
         ),
         serviceNeeded.isNotEmpty
             ? _buildNeededServiceListView(context)
@@ -94,7 +94,7 @@ class ServiceDetailServiceListView extends StatelessWidget {
   }
 
   _serviceUnCompletedReason() {
-    return RowColonCombo(
+    return RowColonCombo.threeEighty(
         value: inCompletedReason, label: AppString.reasonForInCompletion.val);
   }
 
@@ -103,16 +103,16 @@ class ServiceDetailServiceListView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AlertTextLabel(
+          width: DBL.threeEighty.val,
           AppString.serviceInCompleted.val,
           isCustomWidth: true,
-          isNotChangeWidth: false,
         ),
         inCompletedServices.isNotEmpty
             ? CustomSizedBox(
-          height: DBL.seventy.val,
-          width: isXs(context) ? DBL.oneTwenty.val : DBL.twoHundred.val,
-          child: _buildUnCompletedListView(),
-        )
+                height: DBL.seventy.val,
+                width: isXs(context) ? DBL.oneTwenty.val : DBL.twoHundred.val,
+                child: _buildUnCompletedListView(),
+              )
             : CustomSizedBox.shrink(),
         CustomSizedBox(
           height: DBL.ten.val,
@@ -151,9 +151,9 @@ class ServiceDetailServiceListView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AlertTextLabel(
+          width: DBL.threeEighty.val,
           AppString.serviceCompleted.val,
           isCustomWidth: true,
-          isNotChangeWidth: false,
         ),
         completedServices.isNotEmpty
             ? buildCompletedServiceListView(context)
@@ -192,9 +192,5 @@ class ServiceDetailServiceListView extends StatelessWidget {
     );
   }
 
-  bool isXs(BuildContext context) =>
-      MediaQuery
-          .of(context)
-          .size
-          .width <= 600;
+  bool isXs(BuildContext context) => MediaQuery.of(context).size.width <= 600;
 }
