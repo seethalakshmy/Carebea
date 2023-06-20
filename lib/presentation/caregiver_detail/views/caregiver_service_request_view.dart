@@ -1,15 +1,8 @@
 import 'package:admin_580_tech/application/bloc/caregiver_detail/caregiver_detail_bloc.dart';
 import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
-import 'package:admin_580_tech/presentation/widget/custom_listview_builder.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/profile_info.dart';
-import 'package:admin_580_tech/presentation/widget/service_detail_canceled_view.dart';
-import 'package:admin_580_tech/presentation/widget/service_detail_caregiver_view.dart';
-import 'package:admin_580_tech/presentation/widget/service_detail_staus_view.dart';
-import 'package:admin_580_tech/presentation/widget/service_details_date_view.dart';
-import 'package:admin_580_tech/presentation/widget/service_details_rating_view.dart';
-import 'package:admin_580_tech/presentation/widget/service_details_reports_view.dart';
 import 'package:admin_580_tech/presentation/widget/service_request_left_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_column_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
@@ -18,7 +11,6 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/enum.dart';
-import '../../../core/responsive.dart';
 import '../../../core/text_styles.dart';
 import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_card.dart';
@@ -26,20 +18,19 @@ import '../../widget/custom_container.dart';
 import '../../widget/custom_data_table_2.dart';
 import '../../widget/custom_selection_area.dart';
 import '../../widget/custom_sizedbox.dart';
-import '../../widget/custom_svg.dart';
 import '../../widget/custom_text.dart';
 import '../../widget/empty_view.dart';
 import '../../widget/error_view.dart';
-import '../../widget/service_detail_transaction_view.dart';
 import '../../widget/service_details_service_list_view.dart';
 import '../../widget/table_actions_view.dart';
 
 class CareGiverServiceRequestView extends StatelessWidget {
-  const CareGiverServiceRequestView(
+  CareGiverServiceRequestView(
       {required this.state, required this.serviceRequests, Key? key})
       : super(key: key);
   final CareGiverDetailState state;
   final List<ServiceRequest> serviceRequests;
+  List<String> mPets = ["Cat", "Dog", "Rabbit"];
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +134,7 @@ class CareGiverServiceRequestView extends StatelessWidget {
               DataCell(TableRowView(
                   text: "${item.name?.firstName} ${item.name?.lastName}")),
               DataCell(TableRowView(text: item.requestId ?? "")),
-              DataCell(TableRowView(text:item.serviceNeededCount.toString())),
+              DataCell(TableRowView(text: item.serviceNeededCount.toString())),
               DataCell(TableRowView(text: item.requstedStartDateTime ?? "")),
               DataCell(TableRowView(text: item.requstedEndDateTime ?? "")),
               DataCell(TableRowView(text: item.status ?? "")),
@@ -182,44 +173,34 @@ class CareGiverServiceRequestView extends StatelessWidget {
         return CustomAlertDialogWidget(
           height: MediaQuery.of(context).size.height * .9,
           width: double.infinity,
-          heading: AppString.completedServiceRequest.val,
+          heading: AppString.newServiceRequest.val,
           child: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: DBL.twentyFive.val,
             ),
-            child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Builder(
-                  builder: (context) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomSizedBox(height: DBL.thirty.val),
-                      _topView(),
-                      CustomSizedBox(height: DBL.twenty.val,),
-                      !isLg(context)
-                          ? Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(flex: 3, child: _leftView()),
-                                CustomSizedBox(
-                                  width: DBL.fifty.val,
-                                ),
-                                Expanded(
-                                  flex: 3,
-                                  child: _rightView(),
-                                )
-                              ],
-                            )
-                          : Column(
-                              children: [
-                                _leftView(),
-                                CustomSizedBox(height: DBL.nine.val,),
-                                _rightView(),
-                              ],
-                            )
-                    ],
+            child: Builder(
+              builder: (context) => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomSizedBox(height: DBL.thirty.val),
+                  _topView(),
+                  CustomSizedBox(
+                    height: DBL.twenty.val,
                   ),
-                )),
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        _leftView(),
+                        CustomSizedBox(
+                          height: DBL.nine.val,
+                        ),
+                        _bottomView(),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
         );
       },
@@ -234,40 +215,52 @@ class CareGiverServiceRequestView extends StatelessWidget {
       requestedEndDateTime: "March 5 2023 at 10.00 pm",
       requestedStartDateTime: "March 5 2023 at 5.00 pm",
       serviceRequestID: "#SER12345",
+      mPets: mPets,
     );
   }
 
   _topView() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const ProfileInfo(),
-        CustomSizedBox(
-          height: DBL.twenty.val,
+    return LayoutBuilder(builder: (context, constraint) {
+      return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minWidth: constraint.maxWidth),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const ProfileInfo(),
+              CustomSizedBox(
+                height: DBL.twenty.val,
+              ),
+              CustomButton(
+                color: AppColor.primaryColor.val,
+                borderRadius: DBL.three.val,
+                padding: EdgeInsets.symmetric(
+                    vertical: DBL.twelve.val, horizontal: DBL.twentyFive.val),
+                onPressed: () {},
+                text: "Profile Details",
+                textStyle: TS().gRoboto(fontWeight: FW.w500.val),
+              )
+            ],
+          ),
         ),
-        CustomButton(
-          color: AppColor.primaryColor.val,
-          borderRadius: DBL.three.val,
-          padding: EdgeInsets.symmetric(
-              vertical: DBL.twelve.val, horizontal: DBL.twentyFive.val),
-          onPressed: () {},
-          text: "Profile Details",
-          textStyle: TS().gRoboto(fontWeight: FW.w500.val),
-        )
-      ],
-    );
+      );
+    });
   }
 
-
-
-  _rightView() {
+  _bottomView() {
     return ServiceDetailServiceListView(
       status: 3,
       completedServices: const [],
       inCompletedReason: "",
       inCompletedServices: const [],
-      serviceNeeded: ["Assist w/wake up", "Assist w/Showering","Assist w/wake up", "Assist w/Showering"],
+      serviceNeeded: [
+        "Assist w/wake up",
+        "Assist w/Showering",
+        "Assist w/wake up",
+        "Assist w/Showering"
+      ],
     );
   }
 

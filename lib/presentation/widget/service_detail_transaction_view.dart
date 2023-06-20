@@ -17,11 +17,13 @@ class ServiceDetailTransactionView extends StatelessWidget {
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        RowColonCombo(label: AppString.serviceFee.val, value: serviceFee),
+        RowColonCombo.twoHundred(
+            label: AppString.serviceFee.val, value: serviceFee),
         CustomSizedBox(
           height: DBL.ten.val,
         ),
-        RowColonCombo(label: AppString.transactionId.val, value: transactionId)
+        RowColonCombo.twoHundred(
+            label: AppString.transactionId.val, value: transactionId)
       ],
     ));
   }

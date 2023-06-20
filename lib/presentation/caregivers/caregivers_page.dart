@@ -391,7 +391,11 @@ class _CareGiversPageState extends State<CareGiversPage> {
               DataCell(TableActions(
                 isView: true,
                 onViewTap: () {
-                  autoTabRouter!.setActiveIndex(6);
+                  if (e.key % 2 == 0) {
+                    autoTabRouter!.setActiveIndex(2);
+                  } else {
+                    autoTabRouter!.setActiveIndex(6);
+                  }
                 },
               )),
             ],

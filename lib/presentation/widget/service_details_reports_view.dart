@@ -1,17 +1,12 @@
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/presentation/widget/alert_text_label.dart';
-import 'package:admin_580_tech/presentation/widget/cached_image.dart';
-import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_listview_builder.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:admin_580_tech/presentation/widget/rectangle_border.dart';
 import 'package:admin_580_tech/presentation/widget/row_combo.dart';
-import 'package:admin_580_tech/presentation/widget/table_status_box.dart';
 import 'package:flutter/material.dart';
-
-import 'custom_svg.dart';
 
 class ServiceDetailReportsView extends StatelessWidget {
   const ServiceDetailReportsView({
@@ -36,10 +31,9 @@ class ServiceDetailReportsView extends StatelessWidget {
           CustomSizedBox(
             height: DBL.ten.val,
           ),
-          RowColonCombo(
+          RowColonCombo.threeEighty(
             label: AppString.otherIssues.val,
             value: suspectedOtherIssue,
-            isNotChangeWidth: false,
           ),
           CustomSizedBox(
             height: DBL.ten.val,
@@ -48,10 +42,9 @@ class ServiceDetailReportsView extends StatelessWidget {
           CustomSizedBox(
             height: DBL.ten.val,
           ),
-          RowColonCombo(
+          RowColonCombo.threeEighty(
             label: AppString.otherIssues.val,
             value: reportedOtherIssue,
-            isNotChangeWidth: false,
           ),
         ],
       ),
@@ -63,8 +56,8 @@ class ServiceDetailReportsView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AlertTextLabel(
+          width: DBL.threeEighty.val,
           AppString.reportedIssuesByCareAmbassador.val,
-          isNotChangeWidth: false,
           isCustomWidth: true,
         ),
         reportedIssues.isNotEmpty
@@ -96,8 +89,11 @@ class ServiceDetailReportsView extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AlertTextLabel(AppString.suspectedThings.val,
-            isCustomWidth: true, isNotChangeWidth: false),
+        AlertTextLabel(
+          width: DBL.threeEighty.val,
+          AppString.suspectedThings.val,
+          isCustomWidth: true,
+        ),
         suspectedIssues.isNotEmpty
             ? _buildSuspectedListView(context)
             : CustomSizedBox.shrink()

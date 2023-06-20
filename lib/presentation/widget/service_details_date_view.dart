@@ -20,16 +20,18 @@ class ServiceDetailDateView extends StatelessWidget {
     return RectangleBorder(
       child: Column(
         children: [
-          RowColonCombo(
+          RowColonCombo.twoHundred(
               label: AppString.startDateTime.val, value: startDateTime),
           CustomSizedBox(
             height: DBL.ten.val,
           ),
-          RowColonCombo(label: AppString.endDateTime.val, value: endDateTime),
+          RowColonCombo.twoHundred(
+              label: AppString.endDateTime.val, value: endDateTime),
           CustomSizedBox(
             height: DBL.ten.val,
           ),
-          RowColonCombo(label: AppString.location.val, value: location),
+          RowColonCombo.twoHundred(
+              label: AppString.location.val, value: location),
         ],
       ),
     );

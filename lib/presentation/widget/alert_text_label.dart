@@ -5,21 +5,23 @@ import '../../core/text_styles.dart';
 import 'custom_text.dart';
 
 class AlertTextLabel extends StatelessWidget {
-  const AlertTextLabel(this.name,
-      {Key? key,
-      this.isCustomWidth = false,
-      this.isNotChangeWidth = true,
-      this.isRequiredSpace = false,
-        this.width,
-        this.color
-      })
-      : super(key: key);
+  const AlertTextLabel(
+    this.name, {
+    Key? key,
+    this.isCustomWidth = false,
+    this.isRequiredSpace = false,
+    this.width,
+    this.color,
+    this.fontSize,
+    this.fontWeight,
+  }) : super(key: key);
   final String name;
   final bool isCustomWidth;
-  final bool isNotChangeWidth;
   final bool isRequiredSpace;
   final Color? color;
-  final double ?width;
+  final double? width;
+  final double? fontSize;
+  final FontWeight? fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -34,23 +36,25 @@ class AlertTextLabel extends StatelessWidget {
 
   CustomText _buildCustomText(BuildContext context, Size size) {
     return CustomText(name,
-        width: getWidth(context, size),
-        style: TS()
-            .gRoboto(color:color?? AppColor.matBlack3.val, fontWeight: FW.w400.val));
+        width: isCustomWidth ? getWidth(context, size) : null,
+        style: TS().gRoboto(
+            color: color ?? AppColor.matBlack3.val,
+            fontWeight: fontWeight ?? FW.w400.val,
+            fontSize: fontSize));
   }
 
   double? getWidth(BuildContext context, Size size) {
-    if (isNotChangeWidth) {
+    if (width == 200) {
       return isCustomWidth
           ? isXs(context)
-              ? width??DBL.twoHundred.val
+              ? DBL.twoHundred.val
               : isLg1(context)
                   ? DBL.threeEighty.val
                   : isLg(context)
                       ? size.width * .13
-                      : DBL.twoHundred.val
+                      : width
           : null;
-    } else {
+    } else if (width == 380) {
       return isCustomWidth
           ? isXs(context)
               ? DBL.twoHundred.val
@@ -58,8 +62,20 @@ class AlertTextLabel extends StatelessWidget {
                   ? DBL.threeEighty.val
                   : isLg(context)
                       ? size.width * .2
-                      : DBL.threeEighty.val
+                      : width
           : null;
+    } else if (width == 370) {
+      return isCustomWidth
+          ? isXs(context)
+              ? 190
+              : isLg1(context)
+                  ? DBL.threeSeventeen.val
+                  : isLg(context)
+                      ? size.width * .19
+                      : width
+          : null;
+    } else {
+      return width;
     }
   }
 

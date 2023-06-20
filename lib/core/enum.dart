@@ -8,6 +8,8 @@ enum AppString {
   userProfile("User Profile"),
   backToDashBoard("Back to Dashboard"),
   emailAddress("Email Address"),
+  basicServices("Basic Services"),
+  specialServices("Special Services"),
   password("Password"),
   forgotPassword("Forgot Password ?"),
   resetPassword("Reset Password"),
@@ -32,6 +34,7 @@ enum AppString {
   transactionManagement("Transaction Management"),
   careAmbassadorProfile("Care Ambassador Profile"),
   completedServiceRequest("Completed Service Request"),
+  newServiceRequest("New Service Request"),
   canceledServiceRequest("Canceled Service Request"),
   onGoingServiceRequest("Ongoing Service Request"),
   upcomingServiceRequest("Upcoming Service Request"),
@@ -89,6 +92,7 @@ enum AppString {
   qualificationTestResult("Qualification & Test Result"),
   preference("Preference"),
   agreement("Agreement"),
+  reference("Reference"),
   pendingDocuments("Pending Documents"),
   reasonForCancellation("Reason for cancellation :"),
   reasonForInCompletion("Reason for Incompletion"),
@@ -98,6 +102,8 @@ enum AppString {
   upcoming("Upcoming"),
   active("Active"),
   inActive("Inactive"),
+  inDoor("Indoor"),
+  outDoor("Outdoor"),
   clientsCustomer("Clients/Customers"),
   transaction("Transaction"),
   role("Role"),
@@ -130,18 +136,50 @@ enum AppString {
   schedules("Schedules"),
   accountDetails("Account Details"),
   earnings("Earnings"),
-  newServiceRequest("New Service Request"),
   refundStatus("Refund Status"),
   canceledBy("Canceled by"),
   notAvailable("Not Available"),
   timeChange("Time Change"),
   serviceScheduled("Service Scheduled "),
+  about("About"),
+  hobbies("Hobbies"),
+  whyYouLoveBeingCareAmbassador("Why you love being care ambassador"),
   availableInDifferentLocation("Available in Different Location"),
   noInternetConnection("No internet connection"),
   noInternetConnectionSubtitle(
       "Try to check the network cables, modem, and router or reconnect to Wi-Fi"),
   somethingWentWrong("Something went wrong on our end."),
   weAreWorkingToFix("We're working to fix it, Please try again later."),
+  relationship("Relationship"),
+  addressLine1("Address Line 1"),
+  street("Street"),
+  city("City"),
+  state("State"),
+  zip("Zip"),
+  email("Email"),
+  documentDetails("Document Details"),
+  documentUploaded("Document Uploaded"),
+  documentNumber("Document Number"),
+  hhaDocument("HHA Document"),
+  docNumber("Document Number"),
+  expiryDate("Expiry Date"),
+  bLSCPRAndFirstAidCertification("BLS CPR/First Aid Certification"),
+  tBAndPPDTest("TB/PPD Test"),
+  dob("Date of Birth"),
+  gender("Gender"),
+  mobileNumber("Mobile Number"),
+  alternativeMobileNumber("Alternative Mobile Number"),
+  covid19Vaccination("COVID - 19 Vaccination"),
+  takenDate("Taken Date"),
+  result("Result"),
+  howManyExperience("How many years of experience do you have?"),
+  serveClientsWithPets("Are you willing to serve clients with pets?"),
+  languagesKnown("Languages known"),
+  serveHomeWithSmoker("Are you able to serve a home with a smoker?"),
+  haveAnAppointment("Have an appointment"),
+  viewDetails("View Details"),
+  provideTransportationOrRunErrands(
+      "Are you willing to provide transportation or run errands in your vehicle"),
 
   ///validations
   emptyEmail("Email address shouldn't be empty"),
@@ -165,10 +203,12 @@ enum AppColor {
   lightBlue2(Color(0xffF6F9FF)),
   black(Color(0xff000000)),
   black2(Color(0xff020E1A)),
+  black3(Color(0xff1A1C25)),
   matBlack(Color(0xff324665)),
   matBlack2(Color(0xff596483)),
   matBlack3(Color(0xff1F374F)),
   matBlack4(Color(0xff2A3549)),
+  matBlack5(Color(0xff425970)),
   white(Color(0xffFFFFFF)),
   offWhite(Color(0xffE4E8E5)),
   subTitleColor(Color(0xff727E8A)),
@@ -176,6 +216,9 @@ enum AppColor {
   label2(Color(0xff626977)),
   label3(Color(0xff535A69)),
   label4(Color(0xff596277)),
+  label5(Color(0xff474F5F)),
+  label6(Color(0xff646F83)),
+  label7(Color(0xff323844)),
   menuDisable(Color(0xff0D0D0E)),
   borderColor(Color(0xffBAC0D2)),
   rowBackgroundColor(Color(0xffF3F6F9)),
@@ -184,6 +227,8 @@ enum AppColor {
   rowColor(Color(0xff464E5F)),
   dividerColor(Color(0xffEDF0FC)),
   dividerColor2(Color(0xffDFE8F1)),
+  dividerColor3(Color(0xffE2E5ED)),
+  dividerColor4(Color(0xffE3E9F0)),
   calendarColor(Color(0xffF9FBFF)),
   darkGreen(Color(0xff479C88)),
   green(Color(0xff42C25F)),
@@ -194,6 +239,8 @@ enum AppColor {
   amber2(Color(0xffE7B75A)),
   amber3(Color(0xffEB9C02)),
   amber4(Color(0xffFDF1CA)),
+  indoor(Color(0xffFCEFCF)),
+  outdoor(Color(0xffF6DADA)),
   lightGrey(Color(0xffE1E8F0)),
   inactive(Color(0xffB3BDC8)),
   lightGrey2(Color(0xff8793AB)),
@@ -205,8 +252,10 @@ enum AppColor {
   lightGrey8(Color(0xFFdee2e6)),
   lightGrey9(Color(0xffF9F9F9)),
   lightGrey10(Color(0xff838181)),
+  lightGrey11(Color(0xff9297B2)),
   darkGrey(Color(0xff576A83)),
   darkGrey2(Color(0xff496379)),
+  darkGrey3(Color(0xff5B6D84)),
   lightWhite(Color(0xffEEF4FA)),
   notAvailable(Color(0xff7C7676)),
   timeInChange(Color(0xffAE92FE)),
@@ -279,6 +328,7 @@ enum FS {
   font11(11.0),
   font12(12.0),
   font13(13.0),
+  font13PointFive(13.7),
   font14(14.0),
   font15(15.0),
   font16(16.0),
@@ -308,7 +358,6 @@ enum FS {
   const FS(this.val);
 }
 
-/// font weight
 enum FW {
   w400(FontWeight.w400),
   w500(FontWeight.w500),
@@ -329,6 +378,7 @@ enum DBL {
   pointFive(.5),
   zero(0.0),
   one(1.0),
+  onePointNine(1.9),
   two(2.0),
   three(3.0),
   threePointSeven(3.7),
@@ -365,9 +415,12 @@ enum DBL {
   thirtyFive(35.0),
   thirtyEight(38.0),
   forty(40.0),
+  fortyTwo(42.0),
+  fortyThree(43.0),
   fortyFive(45.0),
   fortyEight(48.0),
   fifty(50.0),
+  fiftyTwo(52.0),
   fiftyFive(55.0),
   sixty(60.0),
   sixtyFive(65.0),
@@ -382,6 +435,7 @@ enum DBL {
   ninetyFive(95.0),
   hundred(100.0),
   oneHundredFour(104.0),
+  oneHundredEight(108.0),
   oneTwenty(120.0),
   oneTwentyFive(125.0),
   oneThirty(130.0),
@@ -411,14 +465,19 @@ enum DBL {
   threeTwenty(320.0),
   threeTwentyFive(325.0),
   threeFortyThree(343.0),
+  threeFifty(350.0),
   threeSixtyFive(365.0),
+  threeSeventeen(370.0),
   threeEighty(380.0),
   threeNinetyTwo(392.0),
   fourHundred(400.0),
+  fourTen(410.0),
   fourSeventy(470.0),
   fourFifty(450.0),
+  fourEighty(480.0),
   fiveFifty(550.0),
   fiveTwenty(520.0),
+  sevenFifty(750.0),
   eightSixtyFive(865.0),
   nineFifty(950.0);
 
@@ -490,4 +549,26 @@ enum Week {
   final int val;
 
   const Week(this.val);
+}
+
+enum Day {
+  mon("Monday"),
+  tue("Tuesday"),
+  wed("Wednesday"),
+  thur("Thursday"),
+  fri("Friday"),
+  sat("Saturday"),
+  sun("Sunday");
+
+  final String val;
+  const Day(this.val);
+}
+
+enum InOut {
+  indoor(1),
+  outdoor(2);
+
+  final int val;
+
+  const InOut(this.val);
 }

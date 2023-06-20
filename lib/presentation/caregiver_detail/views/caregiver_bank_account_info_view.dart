@@ -7,8 +7,9 @@ import '../../../core/enum.dart';
 import '../../user_mangement_detail/widgets/user_account_details.dart';
 import '../../widget/custom_sizedbox.dart';
 
-class AccountInfoView extends StatelessWidget {
-  const AccountInfoView({Key? key, required this.state}) : super(key: key);
+class CareGiverBankAccountInfoView extends StatelessWidget {
+  const CareGiverBankAccountInfoView({Key? key, required this.state})
+      : super(key: key);
   final CareGiverDetailState state;
 
   @override

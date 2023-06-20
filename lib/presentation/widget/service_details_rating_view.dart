@@ -25,7 +25,8 @@ class ServiceDetailRatingView extends StatelessWidget {
           CustomSizedBox(
             height: DBL.ten.val,
           ),
-          RowColonCombo(label: AppString.feedBack.val, value: feeBack),
+          RowColonCombo.twoHundred(
+              label: AppString.feedBack.val, value: feeBack),
           CustomSizedBox(
             height: DBL.ten.val,
           ),
@@ -38,6 +39,7 @@ class ServiceDetailRatingView extends StatelessWidget {
     return Row(
       children: [
         AlertTextLabel(
+          width: DBL.twoHundred.val,
           AppString.rating.val,
           isCustomWidth: true,
         ),

@@ -34,7 +34,8 @@ class ServiceDetailStatusView extends StatelessWidget {
         CustomSizedBox(
           height: DBL.ten.val,
         ),
-        RowColonCombo(label: AppString.serviceId.val, value: serviceId),
+        RowColonCombo.twoHundred(
+            label: AppString.serviceId.val, value: serviceId),
         CustomSizedBox(
           height: status == Status.canceled.val &&
                   cancelReason != null &&
@@ -88,7 +89,8 @@ class ServiceDetailStatusView extends StatelessWidget {
   Row _statusView() {
     return Row(
       children: [
-        AlertTextLabel(AppString.status.val, isCustomWidth: true),
+        AlertTextLabel(AppString.status.val,
+            isCustomWidth: true, width: DBL.twoHundred.val),
         TableStatusBox(status: status),
         if (status == Status.upcoming.val)
           CustomSizedBox(
