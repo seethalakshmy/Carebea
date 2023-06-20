@@ -84,7 +84,7 @@ class CTextField extends StatelessWidget {
           suffixIcon: suffixIcon,
           isDense: true,
           errorText: errorText,
-          errorStyle:  TS().gPoppins(fontSize: FS.font11.val,),
+          errorStyle:  TS().gPoppins(fontSize: FS.font11.val,color: AppColor.red.val),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: AppColor.borderColor.val,
@@ -93,6 +93,10 @@ class CTextField extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderSide:  BorderSide(color: AppColor.primaryColor.val),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          errorBorder:OutlineInputBorder(
+            borderSide:  BorderSide(color: AppColor.red.val),
             borderRadius: BorderRadius.circular(5),
           ),
         ),

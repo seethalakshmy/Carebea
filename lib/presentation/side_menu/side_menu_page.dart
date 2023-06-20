@@ -10,6 +10,7 @@ import 'package:admin_580_tech/core/text_utils.dart';
 import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/presentation/cargiver_detail/caregiver_detail_page.dart';
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
+import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
@@ -20,6 +21,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/string.dart';
+import '../caregiver_creation/caregiver_creation_page.dart';
 import '../caregivers/caregivers_page.dart';
 import '../transaction_management/transaction_management_page.dart';
 import '../user_management/user_management_page.dart';
@@ -63,6 +65,8 @@ class _MenuBarState extends State<SideMenuPage> {
     UserManagementRoute(),
     UserManagementDetailRoute(),
     TransactionManagementRoute(),
+    CaregiverCreationRoute(),
+    OnboardingRoute()
   ];
 
   @override
@@ -422,7 +426,7 @@ class _MenuBarState extends State<SideMenuPage> {
     CustomLog.log('path is $path');
     if (path == "/user-management-detail") {
       path = "user-management";
-    }else if(path=="/care-ambassador-detail"){
+    } else if (path == "/care-ambassador-detail") {
       path = "care-ambassador";
     }
     return items.keys.elementAt(index) == upperCase(path) ? true : false;
@@ -432,7 +436,7 @@ class _MenuBarState extends State<SideMenuPage> {
     CustomLog.log('route name == $route');
     if (route == AppString.careAmbassador.val) {
       return 1;
-    } else if (route == AppString.careAmbassadorDetail.val) {
+    } else if (route == AppString.onBoarding.val) {
       return 2;
     } else if (route == AppString.userManagement.val) {
       return 3;
@@ -440,6 +444,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return 4;
     } else if (route == AppString.transactionManagement.val) {
       return 5;
+    } else if (route == AppString.caregiverCreation.val) {
+      return 6;
+    }else if (route == AppString.onBoarding.val) {
+      return 7;
     }
 
     // else if (route == Strings.dataTable) {
@@ -477,7 +485,7 @@ class _MenuBarState extends State<SideMenuPage> {
   Widget getRouteWidget(int index) {
     CustomLog.log('index is $index');
     if (index == 1) {
-      return const CareGiversPage();
+      return const OnboardingPage();
     } else if (index == 2) {
       return const CareGiverDetailPage();
     } else if (index == 3) {
@@ -486,6 +494,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return const UserManagementDetailPage();
     } else if (index == 5) {
       return const TransactionManagementPage();
+    } else if (index == 6) {
+      return const CaregiverCreationPage();
+    }else if (index == 7) {
+      return const OnboardingPage();
     }
     // else if (index == 3) {
     //   return  InvoicePage();

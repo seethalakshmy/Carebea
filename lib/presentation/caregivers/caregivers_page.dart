@@ -178,7 +178,9 @@ class _CareGiversPageState extends State<CareGiversPage> {
                              width: DBL.ten.val,
                            ),
                            CustomButton(
-                               onPressed: () {},
+                               onPressed: () {
+                                 autoTabRouter!.setActiveIndex(6);
+                               },
                                text: AppString.create.val,
                                color: AppColor.primaryColor.val,
                                height: DBL.fifty.val,

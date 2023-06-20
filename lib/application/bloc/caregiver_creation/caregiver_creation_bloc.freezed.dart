@@ -19,32 +19,38 @@ mixin _$CaregiverCreationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() createCaregiver,
+    required TResult Function() submit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? createCaregiver,
+    TResult? Function()? submit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? createCaregiver,
+    TResult Function()? submit,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_CaregiverCreationEvent value) createCaregiver,
+    required TResult Function(_Submit value) submit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_CaregiverCreationEvent value)? createCaregiver,
+    TResult? Function(_Submit value)? submit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_CaregiverCreationEvent value)? createCaregiver,
+    TResult Function(_Submit value)? submit,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -110,6 +116,7 @@ class _$_CaregiverCreationEvent implements _CaregiverCreationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() createCaregiver,
+    required TResult Function() submit,
   }) {
     return createCaregiver();
   }
@@ -118,6 +125,7 @@ class _$_CaregiverCreationEvent implements _CaregiverCreationEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? createCaregiver,
+    TResult? Function()? submit,
   }) {
     return createCaregiver?.call();
   }
@@ -126,6 +134,7 @@ class _$_CaregiverCreationEvent implements _CaregiverCreationEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? createCaregiver,
+    TResult Function()? submit,
     required TResult orElse(),
   }) {
     if (createCaregiver != null) {
@@ -138,6 +147,7 @@ class _$_CaregiverCreationEvent implements _CaregiverCreationEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_CaregiverCreationEvent value) createCaregiver,
+    required TResult Function(_Submit value) submit,
   }) {
     return createCaregiver(this);
   }
@@ -146,6 +156,7 @@ class _$_CaregiverCreationEvent implements _CaregiverCreationEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_CaregiverCreationEvent value)? createCaregiver,
+    TResult? Function(_Submit value)? submit,
   }) {
     return createCaregiver?.call(this);
   }
@@ -154,6 +165,7 @@ class _$_CaregiverCreationEvent implements _CaregiverCreationEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_CaregiverCreationEvent value)? createCaregiver,
+    TResult Function(_Submit value)? submit,
     required TResult orElse(),
   }) {
     if (createCaregiver != null) {
@@ -168,7 +180,146 @@ abstract class _CaregiverCreationEvent implements CaregiverCreationEvent {
 }
 
 /// @nodoc
-mixin _$CaregiverCreationState {}
+abstract class _$$_SubmitCopyWith<$Res> {
+  factory _$$_SubmitCopyWith(_$_Submit value, $Res Function(_$_Submit) then) =
+      __$$_SubmitCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_SubmitCopyWithImpl<$Res>
+    extends _$CaregiverCreationEventCopyWithImpl<$Res, _$_Submit>
+    implements _$$_SubmitCopyWith<$Res> {
+  __$$_SubmitCopyWithImpl(_$_Submit _value, $Res Function(_$_Submit) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Submit implements _Submit {
+  const _$_Submit();
+
+  @override
+  String toString() {
+    return 'CaregiverCreationEvent.submit()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Submit);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() createCaregiver,
+    required TResult Function() submit,
+  }) {
+    return submit();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? createCaregiver,
+    TResult? Function()? submit,
+  }) {
+    return submit?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? createCaregiver,
+    TResult Function()? submit,
+    required TResult orElse(),
+  }) {
+    if (submit != null) {
+      return submit();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CaregiverCreationEvent value) createCaregiver,
+    required TResult Function(_Submit value) submit,
+  }) {
+    return submit(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CaregiverCreationEvent value)? createCaregiver,
+    TResult? Function(_Submit value)? submit,
+  }) {
+    return submit?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CaregiverCreationEvent value)? createCaregiver,
+    TResult Function(_Submit value)? submit,
+    required TResult orElse(),
+  }) {
+    if (submit != null) {
+      return submit(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Submit implements CaregiverCreationEvent {
+  const factory _Submit() = _$_Submit;
+}
+
+/// @nodoc
+mixin _$CaregiverCreationState {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function() $default, {
+    required TResult Function() formSubmitSuccess,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function()? $default, {
+    TResult? Function()? formSubmitSuccess,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function()? $default, {
+    TResult Function()? formSubmitSuccess,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_Initial value) $default, {
+    required TResult Function(_FormSubmitSuccess value) formSubmitSuccess,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_Initial value)? $default, {
+    TResult? Function(_FormSubmitSuccess value)? formSubmitSuccess,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_Initial value)? $default, {
+    TResult Function(_FormSubmitSuccess value)? formSubmitSuccess,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
 
 /// @nodoc
 abstract class $CaregiverCreationStateCopyWith<$Res> {
@@ -190,26 +341,24 @@ class _$CaregiverCreationStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_CaregiverCreationStateCopyWith<$Res> {
-  factory _$$_CaregiverCreationStateCopyWith(_$_CaregiverCreationState value,
-          $Res Function(_$_CaregiverCreationState) then) =
-      __$$_CaregiverCreationStateCopyWithImpl<$Res>;
+abstract class _$$_InitialCopyWith<$Res> {
+  factory _$$_InitialCopyWith(
+          _$_Initial value, $Res Function(_$_Initial) then) =
+      __$$_InitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_CaregiverCreationStateCopyWithImpl<$Res>
-    extends _$CaregiverCreationStateCopyWithImpl<$Res,
-        _$_CaregiverCreationState>
-    implements _$$_CaregiverCreationStateCopyWith<$Res> {
-  __$$_CaregiverCreationStateCopyWithImpl(_$_CaregiverCreationState _value,
-      $Res Function(_$_CaregiverCreationState) _then)
+class __$$_InitialCopyWithImpl<$Res>
+    extends _$CaregiverCreationStateCopyWithImpl<$Res, _$_Initial>
+    implements _$$_InitialCopyWith<$Res> {
+  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_CaregiverCreationState implements _CaregiverCreationState {
-  const _$_CaregiverCreationState();
+class _$_Initial implements _Initial {
+  const _$_Initial();
 
   @override
   String toString() {
@@ -219,14 +368,177 @@ class _$_CaregiverCreationState implements _CaregiverCreationState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_CaregiverCreationState);
+        (other.runtimeType == runtimeType && other is _$_Initial);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function() $default, {
+    required TResult Function() formSubmitSuccess,
+  }) {
+    return $default();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function()? $default, {
+    TResult? Function()? formSubmitSuccess,
+  }) {
+    return $default?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function()? $default, {
+    TResult Function()? formSubmitSuccess,
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_Initial value) $default, {
+    required TResult Function(_FormSubmitSuccess value) formSubmitSuccess,
+  }) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_Initial value)? $default, {
+    TResult? Function(_FormSubmitSuccess value)? formSubmitSuccess,
+  }) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_Initial value)? $default, {
+    TResult Function(_FormSubmitSuccess value)? formSubmitSuccess,
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
 }
 
-abstract class _CaregiverCreationState implements CaregiverCreationState {
-  const factory _CaregiverCreationState() = _$_CaregiverCreationState;
+abstract class _Initial implements CaregiverCreationState {
+  const factory _Initial() = _$_Initial;
+}
+
+/// @nodoc
+abstract class _$$_FormSubmitSuccessCopyWith<$Res> {
+  factory _$$_FormSubmitSuccessCopyWith(_$_FormSubmitSuccess value,
+          $Res Function(_$_FormSubmitSuccess) then) =
+      __$$_FormSubmitSuccessCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_FormSubmitSuccessCopyWithImpl<$Res>
+    extends _$CaregiverCreationStateCopyWithImpl<$Res, _$_FormSubmitSuccess>
+    implements _$$_FormSubmitSuccessCopyWith<$Res> {
+  __$$_FormSubmitSuccessCopyWithImpl(
+      _$_FormSubmitSuccess _value, $Res Function(_$_FormSubmitSuccess) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_FormSubmitSuccess implements _FormSubmitSuccess {
+  const _$_FormSubmitSuccess();
+
+  @override
+  String toString() {
+    return 'CaregiverCreationState.formSubmitSuccess()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_FormSubmitSuccess);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function() $default, {
+    required TResult Function() formSubmitSuccess,
+  }) {
+    return formSubmitSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function()? $default, {
+    TResult? Function()? formSubmitSuccess,
+  }) {
+    return formSubmitSuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function()? $default, {
+    TResult Function()? formSubmitSuccess,
+    required TResult orElse(),
+  }) {
+    if (formSubmitSuccess != null) {
+      return formSubmitSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_Initial value) $default, {
+    required TResult Function(_FormSubmitSuccess value) formSubmitSuccess,
+  }) {
+    return formSubmitSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_Initial value)? $default, {
+    TResult? Function(_FormSubmitSuccess value)? formSubmitSuccess,
+  }) {
+    return formSubmitSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_Initial value)? $default, {
+    TResult Function(_FormSubmitSuccess value)? formSubmitSuccess,
+    required TResult orElse(),
+  }) {
+    if (formSubmitSuccess != null) {
+      return formSubmitSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FormSubmitSuccess implements CaregiverCreationState {
+  const factory _FormSubmitSuccess() = _$_FormSubmitSuccess;
 }

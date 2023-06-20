@@ -9,9 +9,11 @@ part 'caregiver_creation_state.dart';
 
 class CaregiverCreationBloc
     extends Bloc<CaregiverCreationEvent, CaregiverCreationState> {
-  CaregiverCreationBloc() : super(CaregiverCreationState.initial()) {
+  CaregiverCreationBloc() : super(const _Initial()) {
     on<CaregiverCreationEvent>((event, emit) {
-      // TODO: implement event handler
+      if(event is _Submit){
+        emit(const CaregiverCreationState.formSubmitSuccess());
+      }
     });
   }
 }

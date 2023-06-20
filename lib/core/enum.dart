@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-
-
 /// App Strings
 enum AppString {
   login("Login"),
   emailAddress("Email Address"),
+  email("Email"),
   password("Password"),
   forgotPassword("Forgot Password ?"),
   resetPassword("Reset Password"),
@@ -27,6 +26,8 @@ enum AppString {
   careAmbassadorDetail("Care Ambassador Detail"),
   transactionManagement("Transaction Management"),
   transactionDetails("Transaction Details"),
+  caregiverCreation("Caregiver Creation"),
+  onBoarding("On-boarding"),
   id("ID"),
   slNo("SL No"),
   firstName("First Name"),
@@ -36,6 +37,7 @@ enum AppString {
   newRequest("New Request"),
   activeCareAmbassador("Active Care Ambassador"),
   phoneNumber("Phone Number"),
+  mobileNumber("Mobile Number"),
   status("Status"),
   search("Search"),
   client("Client"),
@@ -71,6 +73,7 @@ enum AppString {
   overallTransactions("Overall Transactions"),
   allTransactions("All Transactions"),
   cancel("Cancel"),
+  save("Save"),
   noUsersFound("No Users found!"),
   profileCompletion("Profile Completion"),
   logout("Logout"),
@@ -87,6 +90,42 @@ enum AppString {
   earnings("Earnings"),
   newServiceRequest("New Service Request"),
   createNew("Create New"),
+  basicDetails("Basic Details"),
+  dateOfBirth("Date of Birth"),
+  ddmmyyyy("dd/mm/yyyy"),
+
+  personalDetails("Personal Details"),
+  qualificationAndTestResult("Qualifications & Test Result"),
+  uploadYourProfilePhoto("Upload Your Profile Photo"),
+  gender("Gender"),
+  address("Address"),
+  addressLine("Address Line1"),
+  street("Street"),
+  state("State"),
+  city("City"),
+  zip("ZIP"),
+  socialSecurityNumber("Social Security Number"),
+  documentDetails("Document Details"),
+  documentInfoMsg(
+      "Document info: This information is collected for security purpose"),
+  selectDocumentType("Select Document Type  to Upload"),
+  documentNo("Document Number"),
+  expiryDate("Expiry Date"),
+  date("Date"),
+  selectCity("Select City"),
+  selectState("Select State"),
+  searchCity("Search City"),
+  searchState("Search State"),
+  back("Back"),
+
+  doYouHaveHHAReg("Do you have HHA registration?"),
+  enterHHANumber("Enter HHA Number"),
+  doYouHaveBLSCertification("Do you have BLS CPR/First Aid Certification?"),
+  enterCertificationNumber("Enter Certification Number"),
+  TBPPDTest("TB/PPD Test"),
+  result("Result"),
+  covid19Vaccination("Covid 19 Vaccination"),
+  clickHereToRegister("Click here to register"),
 
   ///validations
   emptyEmail("Email address shouldn't be empty"),
@@ -94,13 +133,29 @@ enum AppString {
   emptyPassword("Password shouldn't be empty"),
   passwordLengthError("Password should be at least 8 characters"),
   emptyConfirmPassword("Confirm password shouldn't be empty"),
-  notMatchConfirmPassword("Confirm password doesn't match");
+  notMatchConfirmPassword("Confirm password doesn't match"),
+  emptyFName("First name shouldn't be empty"),
+  emptyLName("Last name shouldn't be empty"),
+  emptyMobile("Mobile number shouldn't be empty"),
+  validMobile("Mobile number should be 10 digits"),
+  uploadDocument("Upload the document"),
+  emptyDOB("Date of birth shouldn't be empty"),
+  emptyExpiry("Expiry date shouldn't be empty"),
+  emptyDate("Date shouldn't be empty"),
+  emptyGender("Please select your gender"),
+  emptyStreet("Please enter your street name"),
+  emptyState("Please select your state"),
+  emptyCity("Please select your city"),
+  emptyZip("Please enter zip code"),
+  emptySSN("Please enter social security number"),
+  emptyDocType("Please select the document type"),
+  emptyDocNo("Please enter the document number"),
+  emptyAddress("Please enter your address");
 
   final String val;
 
   const AppString(this.val);
 }
-
 
 /// App Colors
 enum AppColor {
@@ -142,15 +197,16 @@ enum AppColor {
   darkGrey2(Color(0xff496379)),
   lightWhite(Color(0xffEEF4FA)),
   red(Color(0xffE75A77)),
-  success (Color(0xff53a653)),
-  warning ( Color(0xffffcc00)),
-  error ( Color(0xffe10725)),
-  info ( Color(0xff4fc3f7)),
+  success(Color(0xff53a653)),
+  warning(Color(0xffffcc00)),
+  error(Color(0xffe10725)),
   successDark(Color(0xff408140)),
   warningDark(Color(0xffffb800)),
   errorDark(Color(0xffc7051b)),
-  infoDark (Color(0xff03a9f4)),
-  dark (Color(0xff141414)),
+  infoDark(Color(0xff03a9f4)),
+  info(Color(0xff4fc3f7)),
+  skyBlueShade(Color(0xff29AECC)),
+  dark(Color(0xff141414)),
   transparent(Colors.transparent);
 
   final Color val;
@@ -177,7 +233,15 @@ enum IMG {
   phone("assets/icons/ic_phone.svg"),
   arrowDown("assets/icons/ic_arrow_down.svg"),
   refresh("assets/icons/ic_refresh.svg"),
+  calender("assets/icons/calender.svg"),
+  cameraIcon("assets/icons/camera_icon.svg"),
+  userAvatar("assets/icons/user_avatar.svg"),
+  addressSelectionIcon("assets/icons/address_section_icon.svg"),
+  iconClose("assets/icons/close.svg"),
+  iconSearch("assets/icons/search_icon.svg"),
+  iconUpload("assets/icons/uploadIcon.svg"),
 
+  imageNotFound("assets/icons/image_not_found.png"),
 
   ssn("assets/icons/ic_ssn.svg"),
   warning("assets/icons/ic_warning.svg"),
@@ -315,6 +379,8 @@ enum DBL {
   hundredNinety(190.0),
   twoHundred(200.0),
   twoForty(240),
+  twoFiftyFive(255),
+  twoEighty(280),
   twoNinety(290),
   threeHundred(300.0),
   threeFifteen(315.0),
@@ -358,7 +424,9 @@ enum INT {
   fortyEight(48),
   fifty(50),
   eightyNine(89),
-  hundred(100);
+  hundred(100),
+
+  MAX_FILE_SIZE(20000000);
 
   final int val;
 
@@ -366,26 +434,3 @@ enum INT {
 }
 
 enum ButtonType { secondary, warning, info, success, error }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
