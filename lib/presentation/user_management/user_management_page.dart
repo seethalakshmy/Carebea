@@ -185,7 +185,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
             ),
           )
           .toList(),
-      child: CustomText3(
+      child: CustomText(
         AppString.status.val,
         style: TS().gRoboto(
             fontWeight: FW.w500.val,
@@ -279,7 +279,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
             fixedWidth: Responsive.isWeb(context)
                 ? MediaQuery.of(context).size.width * .1
                 : DBL.oneSeventy.val,
-            label: const CustomText3(""),
+            label: const CustomText(""),
           ),
         ],
         rows: mUserList.asMap().entries.map((e) {
@@ -356,7 +356,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
   Widget _rowsView({
     String? text,
   }) {
-    return CustomText3(
+    return CustomText(
       '$text',
       softWrap: true,
       style: TS().gRoboto(
@@ -371,7 +371,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
 
   Widget _columnsView(
       {String? text, FontWeight? fontWeight = FontWeight.w600}) {
-    return CustomText3(
+    return CustomText(
       '$text',
       softWrap: true,
       style: TS().gRoboto(
@@ -394,7 +394,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
         ),
         CustomSizedBox(width: DBL.twelve.val),
         Expanded(
-          child: CustomText3(
+          child: CustomText(
             text,
             style: TS().gRoboto(
                 fontSize: Responsive.isWeb(context)
@@ -417,7 +417,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
       decoration: BoxDecoration(
           color: isActive ? AppColor.green3.val : AppColor.offWhite.val,
           borderRadius: PR().circularRadius(DBL.eight.val)),
-      child: CustomText3(
+      child: CustomText(
         textAlign: TextAlign.center,
         isActive ? AppString.active.val : AppString.inActive.val,
         style: TS().gRoboto(

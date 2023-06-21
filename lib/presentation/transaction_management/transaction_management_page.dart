@@ -208,7 +208,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomText3(
+                  CustomText(
                     AppString.allTransactions.val,
                     softWrap: true,
                     style: TS().gRoboto(
@@ -249,7 +249,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
   Widget _rowsView({
     String? text,
   }) {
-    return CustomText3(
+    return CustomText(
       '$text',
       softWrap: true,
       style: TS().gRoboto(
@@ -264,7 +264,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
 
   Widget _columnsView(
       {String? text, FontWeight? fontWeight = FontWeight.w600}) {
-    return CustomText3(
+    return CustomText(
       '$text',
       softWrap: true,
       style: TS().gRoboto(
@@ -383,7 +383,6 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                 children: [
                   InkWell(
                       onTap: () {
-                        // autoTabRouter!.setActiveIndex(5);
                         _transactionDetails();
                       },
                       child: CustomSvg(

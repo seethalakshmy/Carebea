@@ -7,36 +7,58 @@ import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class SVGText extends StatelessWidget {
-  const SVGText({Key? key,
+  const SVGText({
+    Key? key,
     required this.path,
     required this.name,
     this.height,
     this.widthGap,
-    this.width,})
-      : super(key: key);
+    this.width,
+  }) : super(key: key);
   final double? height;
   final double? width;
   final String path;
   final String name;
-  final double ?widthGap;
+  final double? widthGap;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CustomSvg(
-          path: path,
-          height: height,
-          width: width,
+        _buildCustomSvg(),
+        CustomSizedBox(
+          width: widthGap,
         ),
-        CustomSizedBox(width:widthGap,),
-        Expanded(child: CustomText3(name, style: TS().gRoboto(fontSize: getFontSize(context), fontWeight: FW.w400.val, color: AppColor.lightGrey2.val ),))
+        _buildText(context)
       ],
     );
   }
 
- double getFontSize(BuildContext context){
-   return Responsive.isLg(context)?FS.font14.val: FS.font16.val;
- }
-  
+  Expanded _buildText(BuildContext context) {
+    return Expanded(
+      child: CustomText(
+        name,
+        style: _buildStyle(context),
+      ),
+    );
+  }
+
+  _buildStyle(BuildContext context) {
+   return TS().gRoboto(
+          fontSize: getFontSize(context),
+          fontWeight: FW.w400.val,
+          color: AppColor.lightGrey2.val);
+  }
+
+  CustomSvg _buildCustomSvg() {
+    return CustomSvg(
+      path: path,
+      height: height,
+      width: width,
+    );
+  }
+
+  double getFontSize(BuildContext context) {
+    return Responsive.isLg(context) ? FS.font14.val : FS.font16.val;
+  }
 }

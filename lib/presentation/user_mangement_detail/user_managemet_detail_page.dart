@@ -1,31 +1,23 @@
-import 'package:admin_580_tech/application/bloc/caregiver_detail/caregiver_detail_bloc.dart';
 import 'package:admin_580_tech/application/bloc/user_management_detail/user_management_detail_bloc.dart';
 import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/properties.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
-import 'package:admin_580_tech/infrastructure/caregiver_detail/caregiver_detail_repository.dart';
 import 'package:admin_580_tech/infrastructure/user_management_detail/user_management_detail_repository.dart';
-import 'package:admin_580_tech/presentation/cargiver_detail/views/assigned_services.dart';
-import 'package:admin_580_tech/presentation/cargiver_detail/widgets/service_completion_and_rewards.dart';
-import 'package:admin_580_tech/presentation/cargiver_detail/widgets/svg_text.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/views/payment_method_view.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/views/sub_profile_view.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
-import 'package:admin_580_tech/presentation/widget/custom_container.dart';
-import 'package:admin_580_tech/presentation/widget/custom_image.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import '../../core/responsive.dart';
-import '../widget/dotted_container.dart';
+import '../caregiver_detail/widgets/service_completion_and_rewards.dart';
+import '../caregiver_detail/widgets/svg_text.dart';
 
 class UserManagementDetailPage extends StatefulWidget {
   const UserManagementDetailPage({Key? key}) : super(key: key);
@@ -60,9 +52,9 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
         ..add(UserManagementDetailEvent.getUserDetail(userId: userId)),
       child: BlocBuilder<UserManagementDetailBloc, UserManagementDetailState>(
         builder: (context, state) {
-          return state.isLoading?
-               CircularProgressIndicator():
-           _bodyView(context, state);
+          return state.isLoading
+              ? CircularProgressIndicator()
+              : _bodyView(context, state);
         },
       ),
     );
@@ -80,7 +72,11 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
             SliverAppBar(
                 leading: const SizedBox(),
                 backgroundColor: Colors.white,
-                expandedHeight: isXs2(context) ? 325 :isLg2(context)?285: 230,
+                expandedHeight: isXs2(context)
+                    ? 325
+                    : isLg2(context)
+                        ? 285
+                        : 230,
                 floating: false,
                 toolbarHeight: 50,
                 flexibleSpace: FlexibleSpaceBar(
@@ -95,7 +91,11 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                             Stack(
                               children: [
                                 CustomSizedBox(
-                                  height: isXs2(context) ? 185 :isLg2(context)?255: 180,
+                                  height: isXs2(context)
+                                      ? 185
+                                      : isLg2(context)
+                                          ? 255
+                                          : 180,
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -200,7 +200,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            CustomText3(
+                                            CustomText(
                                               "${response.user?.name?.firstName} ${response.user?.name?.lastName}",
                                               style: TS().gRoboto(
                                                 color: AppColor.rowColor.val,
@@ -350,7 +350,10 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                     : CustomSizedBox.shrink()
                               ],
                             ),
-                            CustomSizedBox(height: isXs2(context)?DBL.eight.val:DBL.zero.val,),
+                            CustomSizedBox(
+                              height:
+                                  isXs2(context) ? DBL.eight.val : DBL.zero.val,
+                            ),
                             isXs2(context)
                                 ? SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
@@ -384,7 +387,6 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
         body: Scaffold(
           backgroundColor: AppColor.primaryColor.val,
           appBar: TabBar(
-            
             isScrollable: true,
             dividerColor: AppColor.transparent.val,
             indicatorColor: AppColor.primaryColor.val,
@@ -408,7 +410,9 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                 controller: tabController,
                 children: [
                   SubProfileView(state: state),
-                  PaymentMethodView(state: state,),
+                  PaymentMethodView(
+                    state: state,
+                  ),
                   Container(
                     color: Colors.white,
                   ),

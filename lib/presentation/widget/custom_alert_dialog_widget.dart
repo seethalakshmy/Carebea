@@ -6,42 +6,48 @@ import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class CustomAlertDialogWidget extends StatelessWidget {
-  CustomAlertDialogWidget({super.key, this.heading, this.child});
+  const CustomAlertDialogWidget(
+      {super.key, required this.heading, required this.child, this.height, this.width});
 
-  late BuildContext context;
-  String? heading;
-  Widget? child;
+  final String heading;
+  final Widget child;
+  final double?height;
+  final double?width;
 
   @override
   Widget build(BuildContext context) {
-    this.context = context;
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(DBL.ten.val),
       ),
-      elevation: 0.0,
+      elevation: DBL.zero.val,
       backgroundColor: Colors.transparent,
       child: Wrap(
         children: [
           Container(
-            width: 1072,
-            height: 550,
+            width: width??1072,
+            height: height??550,
             decoration: BoxDecoration(
               color: Colors.white,
               shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(5.0),
-              boxShadow: const [
+              borderRadius: BorderRadius.circular(DBL.five.val),
+              boxShadow: [
                 BoxShadow(
                   color: Colors.black26,
-                  blurRadius: 10.0,
-                  offset: Offset(0.0, 10.0),
+                  blurRadius: DBL.ten.val,
+                  offset: Offset(DBL.zero.val, DBL.ten.val),
                 ),
               ],
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [_headerWidget(heading ?? ""), child ?? Container()],
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _headerWidget(context, heading ?? ""),
+                  child
+                ],
+              ),
             ),
           ),
         ],
@@ -49,34 +55,37 @@ class CustomAlertDialogWidget extends StatelessWidget {
     );
   }
 
-  Widget _headerWidget(String heading) {
+  Widget _headerWidget(
+    BuildContext context,
+    String heading,
+  ) {
     return Container(
       width: double.infinity,
-      height: 68,
-      padding: const EdgeInsets.all(20),
+      height: DBL.sixtyEight.val,
+      padding: EdgeInsets.all(DBL.twenty.val),
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(5),
-          topLeft: Radius.circular(5),
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(DBL.five.val),
+          topLeft: Radius.circular(DBL.five.val),
         ),
         color: AppColor.primaryColor.val,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          CustomText3(
+          CustomText(
             heading,
             style: TS().gRoboto(
               color: AppColor.white.val,
               fontWeight: FW.w500.val,
               fontSize:
-                  Responsive.isWeb(context) ? FS.font22.val : FS.font18.val,
+                  Responsive.isWeb(context) ? FS.font20.val : FS.font18.val,
             ),
           ),
           InkWell(
             child: CustomIcon(
               icon: Icons.close,
-              size: 16.5,
+              size: DBL.eighteen.val,
               color: AppColor.white.val,
             ),
             onTap: () {

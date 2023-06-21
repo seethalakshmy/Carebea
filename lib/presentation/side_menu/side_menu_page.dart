@@ -1,4 +1,3 @@
-import 'package:admin_580_tech/core/color.dart';
 import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/hive/hive_utils.dart';
@@ -8,7 +7,7 @@ import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/core/text_utils.dart';
 import 'package:admin_580_tech/core/theme.dart';
-import 'package:admin_580_tech/presentation/cargiver_detail/caregiver_detail_page.dart';
+import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart';
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
@@ -22,6 +21,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/string.dart';
 import '../caregiver_creation/caregiver_creation_page.dart';
+import '../caregiver_detail/caregiver_detail_page.dart';
 import '../caregivers/caregivers_page.dart';
 import '../transaction_management/transaction_management_page.dart';
 import '../user_management/user_management_page.dart';
@@ -55,7 +55,7 @@ class _MenuBarState extends State<SideMenuPage> {
   };
 
   final List<String> _items = [
-    Strings.profile,
+    AppString.profile.val,
   ];
 
   final List<PageRouteInfo<dynamic>> _routes = const [
@@ -65,6 +65,7 @@ class _MenuBarState extends State<SideMenuPage> {
     UserManagementRoute(),
     UserManagementDetailRoute(),
     TransactionManagementRoute(),
+    CareGiverProfileRoute(),
     CaregiverCreationRoute(),
     OnboardingRoute()
   ];
@@ -159,8 +160,8 @@ class _MenuBarState extends State<SideMenuPage> {
                   _scaffoldDrawerKey.currentState!.closeDrawer();
                   return InkWell(
                     onTap: () {
-                      tabsRouter
-                          .setActiveIndex(getRouteIndex(Strings.dashboard));
+                      tabsRouter.setActiveIndex(
+                          getRouteIndex(AppString.dashboard.val));
                     },
                     child: CustomContainer(
                       padding:
@@ -179,7 +180,8 @@ class _MenuBarState extends State<SideMenuPage> {
                 }
                 return InkWell(
                   onTap: () {
-                    tabsRouter.setActiveIndex(getRouteIndex(Strings.dashboard));
+                    tabsRouter
+                        .setActiveIndex(getRouteIndex(AppString.dashboard.val));
                     _scaffoldDrawerKey.currentState?.closeDrawer();
                   },
                   child: CustomContainer(
@@ -203,7 +205,7 @@ class _MenuBarState extends State<SideMenuPage> {
                 ? MaterialButton(
                     height: double.infinity,
                     minWidth: DBL.sixty.val,
-                    hoverColor: ColorConst.transparent,
+                    hoverColor: AppColor.transparent.val,
                     onPressed: () async {
                       if (Responsive.isMobile(context) ||
                           Responsive.isTablet(context)) {
@@ -253,7 +255,7 @@ class _MenuBarState extends State<SideMenuPage> {
       customButton: MaterialButton(
         height: double.infinity,
         minWidth: DBL.sixty.val,
-        hoverColor: ColorConst.transparent,
+        hoverColor: AppColor.transparent.val,
         onPressed: null,
         child: CircleAvatar(
           maxRadius: DBL.sixteen.val,
@@ -265,7 +267,7 @@ class _MenuBarState extends State<SideMenuPage> {
       onChanged: (value) {
         /// Todo check this code
         if (value == 'Profile') {
-          tabsRouter.setActiveIndex(getRouteIndex(Strings.userProfile));
+          tabsRouter.setActiveIndex(getRouteIndex(AppString.userProfile.val));
           _scaffoldDrawerKey.currentState?.closeDrawer();
         }
       },
@@ -273,7 +275,7 @@ class _MenuBarState extends State<SideMenuPage> {
         ..._items.map(
           (e) => DropdownMenuItem(
             value: e,
-            child: CustomText3(
+            child: CustomText(
               e,
               style: TS().gRoboto(
                 fontSize: FS.font15.val,
@@ -283,14 +285,14 @@ class _MenuBarState extends State<SideMenuPage> {
             ),
           ),
         ),
-        const DropdownMenuItem<Divider>(
+        DropdownMenuItem<Divider>(
           enabled: false,
-          child: Divider(color: ColorConst.lightGrey),
+          child: Divider(color: AppColor.lightGrey8.val),
         ),
         DropdownMenuItem(
           value: AppString.logout.val,
           child: Text(
-            Strings.logout,
+            AppString.logout.val,
             style: TextStyle(
               fontSize: FS.font15.val,
               fontWeight: FontWeight.bold,
@@ -305,11 +307,9 @@ class _MenuBarState extends State<SideMenuPage> {
       dropdownWidth: DBL.oneSixty.val,
       dropdownPadding: EdgeInsets.symmetric(vertical: DBL.six.val),
       dropdownDecoration: BoxDecoration(
-        color: isDark ? ColorConst.cardDark : Colors.white,
+        color: isDark ? AppColor.dark.val : AppColor.white.val,
         border: Border.all(
-          color: isDark
-              ? ColorConst.lightGrey.withOpacity(0.1)
-              : ColorConst.lightGrey.withOpacity(0.5),
+          color: AppColor.lightGrey8.val.withOpacity(0.5),
         ),
         borderRadius: BorderRadius.circular(DBL.four.val),
       ),
@@ -397,7 +397,7 @@ class _MenuBarState extends State<SideMenuPage> {
                 isOpen.value = true;
                 tabsRouter
                     .setActiveIndex(getRouteIndex(items.keys.elementAt(index)));
-                HiveUtils.set(Strings.selectedmenuIndex,
+                HiveUtils.set(AppString.selectedMenuIndex.val,
                     getRouteIndex(items.keys.elementAt(index)));
                 _scaffoldDrawerKey.currentState?.closeDrawer();
               },
@@ -408,9 +408,9 @@ class _MenuBarState extends State<SideMenuPage> {
     );
   }
 
-  CustomText3 buildText(Map<String, String> items, int index,
+  CustomText buildText(Map<String, String> items, int index,
       TabsRouter tabsRouter, Color color) {
-    return CustomText3(
+    return CustomText(
       items.keys.elementAt(index).capitalize(),
       style: TS().gRoboto(
           color: isSelected(items, index, tabsRouter)
@@ -421,11 +421,12 @@ class _MenuBarState extends State<SideMenuPage> {
   }
 
   bool isSelected(Map<String, String> items, int index, TabsRouter tabsRouter) {
-    CustomLog.log('called is Selected');
     String path = tabsRouter.currentPath.replaceAll("admin/", "");
     CustomLog.log('path is $path');
     if (path == "/user-management-detail") {
       path = "user-management";
+    } else if (path == "/care-ambassador-detail" ||
+        path == "/care-ambassador-profile") {
     } else if (path == "/care-ambassador-detail") {
       path = "care-ambassador";
     }
@@ -436,7 +437,7 @@ class _MenuBarState extends State<SideMenuPage> {
     CustomLog.log('route name == $route');
     if (route == AppString.careAmbassador.val) {
       return 1;
-    } else if (route == AppString.onBoarding.val) {
+    } else if (route == AppString.careAmbassadorDetail.val) {
       return 2;
     } else if (route == AppString.userManagement.val) {
       return 3;
@@ -444,10 +445,12 @@ class _MenuBarState extends State<SideMenuPage> {
       return 4;
     } else if (route == AppString.transactionManagement.val) {
       return 5;
-    } else if (route == AppString.caregiverCreation.val) {
+    } else if (route == AppString.careAmbassadorProfile.val) {
       return 6;
-    }else if (route == AppString.onBoarding.val) {
+    } else if (route == AppString.caregiverCreation.val) {
       return 7;
+    }else if (route == AppString.onBoarding.val) {
+      return 8;
     }
 
     // else if (route == Strings.dataTable) {
@@ -485,7 +488,7 @@ class _MenuBarState extends State<SideMenuPage> {
   Widget getRouteWidget(int index) {
     CustomLog.log('index is $index');
     if (index == 1) {
-      return const OnboardingPage();
+      return const CareGiversPage();
     } else if (index == 2) {
       return const CareGiverDetailPage();
     } else if (index == 3) {
@@ -495,8 +498,10 @@ class _MenuBarState extends State<SideMenuPage> {
     } else if (index == 5) {
       return const TransactionManagementPage();
     } else if (index == 6) {
+      return const CareGiverProfilePage();
+    } else if (index == 7) {
       return const CaregiverCreationPage();
-    }else if (index == 7) {
+    }else if (index == 8) {
       return const OnboardingPage();
     }
     // else if (index == 3) {

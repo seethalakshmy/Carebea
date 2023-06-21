@@ -12,7 +12,6 @@ import '../../widget/custom_card.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_data_table_2.dart';
 import '../../widget/custom_padding.dart';
-import '../../widget/custom_scroll_view.dart';
 import '../../widget/custom_selection_area.dart';
 import '../../widget/custom_sizedbox.dart';
 import '../../widget/custom_svg.dart';
@@ -38,7 +37,7 @@ class SubProfileView extends StatelessWidget {
                       ? CustomPadding.only(
                           left: DBL.twenty.val,
                           right: DBL.nineteen.val,
-                          child: CScrollView(
+                          child: SingleChildScrollView(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
@@ -91,7 +90,7 @@ class SubProfileView extends StatelessWidget {
           ),
           const DataColumn2(
             size: ColumnSize.L,
-            label: CustomText3(""),
+            label: CustomText(""),
           ),
         ],
         rows: profiles.asMap().entries.map((e) {
@@ -138,7 +137,7 @@ class SubProfileView extends StatelessWidget {
     BuildContext context, {
     String? text,
   }) {
-    return CustomText3(
+    return CustomText(
       '$text',
       softWrap: true,
       style: TS().gRoboto(
@@ -153,7 +152,7 @@ class SubProfileView extends StatelessWidget {
 
   Widget _columnsView(BuildContext context,
       {String? text, FontWeight? fontWeight = FontWeight.w600}) {
-    return CustomText3(
+    return CustomText(
       '$text',
       softWrap: true,
       style: TS().gRoboto(
@@ -181,7 +180,7 @@ class SubProfileView extends StatelessWidget {
             CustomSizedBox(height: DBL.ten.val,),
             Expanded(
               flex: 1,
-              child: CustomText3(
+              child: CustomText(
                 name,
                 style: TS().gRoboto(
                     fontSize: Responsive.isWeb(context)
@@ -196,7 +195,7 @@ class SubProfileView extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: CustomText3(
+              child: CustomText(
                 "(${age.toString()})",
                 style: TS().gRoboto(
                     fontSize: Responsive.isWeb(context)

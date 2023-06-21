@@ -41,8 +41,7 @@ class PaginationView extends StatelessWidget {
                 width: DBL.fifteen.val,
               ),
               // const Spacer(),
-              CustomText3(
-                  "${AppString.showing.val} ${start + 1} ${AppString.to.val} $end ${AppString.of.val} $totalItems ${AppString.entries.val}"),
+              buildCustomText(),
             ],
           ),
         ),
@@ -50,55 +49,56 @@ class PaginationView extends StatelessWidget {
     });
   }
 
+  CustomText buildCustomText() {
+    return CustomText(
+        "${AppString.showing.val} ${start + 1} ${AppString.to.val} $end ${AppString.of.val} $totalItems ${AppString.entries.val}");
+  }
+
   Row _buildPagination() {
     return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        CustomButton(
+          onPressed: () {
+            onPreviousPressed();
+          },
+          text: AppString.previous.val,
+          borderRadius: 0.0,
+          borderWidth: 0.0,
+          color: AppColor.white.val,
+          textColor: AppColor.primaryColor.val,
+        ),
+        for (int i = 1; i <= totalPages; i++)
+          if (i == 1 ||
+              i == totalPages ||
+              totalPages <= 5 ||
+              i <= 3 ||
+              i == page ||
+              (i == page - 1 && page - 3 > 1) ||
+              (i == page + 1 && page + 3 < totalPages))
             CustomButton(
-              onPressed: () {
-                onPreviousPressed();
-              },
-              text: AppString.previous.val,
+              text: i.toString(),
               borderRadius: 0.0,
+              minWidth: 16.0,
+              color: page == i ? AppColor.primaryColor.val : AppColor.white.val,
+              textColor:
+                  page == i ? AppColor.white.val : AppColor.primaryColor.val,
               borderWidth: 0.0,
-              color: AppColor.white.val,
-              textColor: AppColor.primaryColor.val,
-            ),
-            for (int i = 1; i <= totalPages; i++)
-              if (i == 1 ||
-                  i == totalPages ||
-                  totalPages <= 5 ||
-                  i <= 3 ||
-                  i == page ||
-                  (i == page - 1 && page - 3 > 1) ||
-                  (i == page + 1 && page + 3 < totalPages))
-                CustomButton(
-                  text: i.toString(),
-                  borderRadius: 0.0,
-                  minWidth: 16.0,
-                  color: page == i
-                      ? AppColor.primaryColor.val
-                      : AppColor.white.val,
-                  textColor: page == i
-                      ? AppColor.white.val
-                      : AppColor.primaryColor.val,
-                  borderWidth: 0.0,
-                  onPressed: () {
-                    onItemPressed(i);
-                  },
-                ),
-            CustomButton(
               onPressed: () {
-                onNextPressed();
+                onItemPressed(i);
               },
-              text: AppString.next.val,
-              borderRadius: 0.0,
-              borderWidth: 0.0,
-              color: AppColor.white.val,
-              textColor: AppColor.primaryColor.val,
             ),
-
-          ],
-        );
+        CustomButton(
+          onPressed: () {
+            onNextPressed();
+          },
+          text: AppString.next.val,
+          borderRadius: 0.0,
+          borderWidth: 0.0,
+          color: AppColor.white.val,
+          textColor: AppColor.primaryColor.val,
+        ),
+      ],
+    );
   }
 }

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../core/enum.dart';
-
-
 class CustomListViewBuilder extends StatelessWidget {
   const CustomListViewBuilder({
     Key? key,
@@ -11,20 +8,22 @@ class CustomListViewBuilder extends StatelessWidget {
     this.shrinkWrap,
     required this.itemBuilder,
     this.physics,
+    this.padding,
   }) : super(key: key);
   final int itemCount;
   final Axis? scrollDirection;
   final bool? shrinkWrap;
   final NullableIndexedWidgetBuilder itemBuilder;
-
+  final EdgeInsetsGeometry? padding;
   final ScrollPhysics? physics;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        scrollDirection:scrollDirection?? Axis.vertical,
+        scrollDirection: scrollDirection ?? Axis.vertical,
         itemCount: itemCount,
         physics: physics,
+        padding: padding,
         shrinkWrap: shrinkWrap ?? false,
         itemBuilder: itemBuilder);
   }

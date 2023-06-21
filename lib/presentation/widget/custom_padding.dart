@@ -20,8 +20,19 @@ class CustomPadding extends StatelessWidget {
         horizontal = null,
         vertical = null;
 
+  CustomPadding.symmetric(
+      {super.key, this.horizontal=0.0, this.vertical=0.0, this.child})
+      : edgeInsets =
+            EdgeInsets.symmetric(horizontal: horizontal!, vertical: vertical!),
+        top = null,
+        bottom = null,
+        right = null,
+        padding = null,
+        left = null;
+
   CustomPadding.only(
-      {super.key, this.top = 0.0,
+      {super.key,
+      this.top = 0.0,
       this.bottom = 0.0,
       this.right = 0.0,
       this.left = 0.0,
@@ -32,7 +43,8 @@ class CustomPadding extends StatelessWidget {
         padding = null,
         vertical = null;
 
-  CustomPadding.lTRB(this.left, this.top, this.right, this.bottom, {super.key, this.child})
+  CustomPadding.lTRB(this.left, this.top, this.right, this.bottom,
+      {super.key, this.child})
       : edgeInsets = EdgeInsets.fromLTRB(left!, top!, right!, bottom!),
         horizontal = null,
         padding = null,

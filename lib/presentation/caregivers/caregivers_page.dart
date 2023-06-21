@@ -6,7 +6,6 @@ import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/caregivers/model/care_givers.dart';
 import 'package:admin_580_tech/domain/caregivers/model/types.dart';
 import 'package:admin_580_tech/presentation/caregivers/widgets/tab_item.dart';
-import 'package:admin_580_tech/presentation/widget/cached_image.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
@@ -18,10 +17,12 @@ import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
 import 'package:admin_580_tech/presentation/widget/empty_view.dart';
 import 'package:admin_580_tech/presentation/widget/pagination_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
+import 'package:admin_580_tech/presentation/widget/table_row_image_view.dart';
+import 'package:admin_580_tech/presentation/widget/table_row_view.dart';
+import 'package:admin_580_tech/presentation/widget/table_switch_box.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 
 import '../../application/bloc/caregivers/caregivers_bloc.dart';
 import '../../domain/caregivers/model/caregiver_response.dart';
@@ -33,6 +34,8 @@ import '../widget/custom_text.dart';
 import '../widget/custom_text_field.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
+import '../widget/table_actions_view.dart';
+import '../widget/table_column_view.dart';
 
 class CareGiversPage extends StatefulWidget {
   const CareGiversPage({Key? key}) : super(key: key);
@@ -48,7 +51,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
   int _totalItems = 1;
   final int _limit = 10;
   int _page = 1;
-  int pageIndex = 0;
+  int _pageIndex = 0;
   int _start = 0;
   int _end = 10;
   final TextEditingController _searchController = TextEditingController();
@@ -64,6 +67,13 @@ class _CareGiversPageState extends State<CareGiversPage> {
   }
 
   @override
+  void dispose() {
+    _searchController.dispose();
+    _searchNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     CustomLog.log('width == ${MediaQuery.of(context).size.width}');
     return Column(
@@ -71,7 +81,6 @@ class _CareGiversPageState extends State<CareGiversPage> {
         HeaderView(
           title: AppString.careAmbassador.val,
         ),
-        CustomSizedBox(height: DBL.twenty.val),
         _rebuildView(),
       ],
     );
@@ -96,7 +105,8 @@ class _CareGiversPageState extends State<CareGiversPage> {
       builder: (context, state) {
         return Column(
           children: [
-            _tabView(state),
+            CustomSizedBox(height: DBL.twenty.val),
+            !state.isError ? _tabView(state) : CustomSizedBox.shrink(),
             _cardView(state, context),
           ],
         );
@@ -109,7 +119,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
       shape: PR().roundedRectangleBorder(DBL.five.val),
       elevation: DBL.seven.val,
       child: CustomContainer(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.all(DBL.twenty.val),
           child: state.isLoading
               ? const TableLoaderView()
               : state.isError
@@ -130,15 +140,15 @@ class _CareGiversPageState extends State<CareGiversPage> {
                 item: item,
                 onTap: () {
                   _tabType = item.id!;
-                  resetValues();
+                  _resetValues();
                   _careGiversBloc.add(CareGiversEvent.isSelectedTab(item));
-                  getCareGiverEvent();
+                  _getCareGiverEvent();
                 },
               );
             }));
   }
 
-  resetValues() {
+  _resetValues() {
     _page = 1;
     _searchController.clear();
     _filterId = null;
@@ -146,12 +156,12 @@ class _CareGiversPageState extends State<CareGiversPage> {
 
   _caregiversView(BuildContext context, CareGiverResponse? value) {
     if (value?.status ?? false) {
+      mCareGiverList.clear();
       if (value?.data?.caregivers != null &&
           value!.data!.caregivers!.isNotEmpty) {
         _totalItems = value.data?.pagination?.totals ?? 1;
-        mCareGiverList.clear();
         mCareGiverList.addAll(value.data?.caregivers ?? []);
-        updateData();
+        _updateData();
       }
     }
     return mCareGiverList.isNotEmpty
@@ -159,49 +169,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               LayoutBuilder(builder: (context, constraints) {
-                return SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(minWidth: constraints.maxWidth),
-                    child: Row(
-                      mainAxisAlignment: _tabType == 1
-                          ? MainAxisAlignment.end
-                          : MainAxisAlignment.spaceBetween,
-                      children: [
-                        _tabType != 1
-                            ? _statusDropDown(context)
-                            : CustomSizedBox.shrink(),
-                       Row(
-                         children: [
-                           _searchField(),
-                           CustomSizedBox(
-                             width: DBL.ten.val,
-                           ),
-                           CustomButton(
-                               onPressed: () {
-                                 autoTabRouter!.setActiveIndex(6);
-                               },
-                               text: AppString.create.val,
-                               color: AppColor.primaryColor.val,
-                               height: DBL.fifty.val,
-                               borderRadius: DBL.five.val,
-                               padding: EdgeInsets.symmetric(
-                                   horizontal: DBL.twentyTwo.val,
-                                   vertical: DBL.ten.val),
-                               textStyle: TS().gRoboto(
-                                   color: AppColor.white.val,
-                                   fontWeight: FW.w500.val),
-                               icon: CustomIcon(
-                                 icon: Icons.add,
-                                 size: DBL.twenty.val,
-                                 color: AppColor.white.val,
-                               ))
-                         ],
-                       ),
-                      ],
-                    ),
-                  ),
-                );
+                return _tableActionView(constraints, context);
               }),
               CustomSizedBox(height: DBL.fifteen.val),
               CustomSizedBox(
@@ -215,10 +183,57 @@ class _CareGiversPageState extends State<CareGiversPage> {
         : EmptyView(title: AppString.emptyCareGivers.val);
   }
 
+  SingleChildScrollView _tableActionView(
+      BoxConstraints constraints, BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(minWidth: constraints.maxWidth),
+        child: Row(
+          mainAxisAlignment: _tabType == 1
+              ? MainAxisAlignment.end
+              : MainAxisAlignment.spaceBetween,
+          children: [
+            _tabType != 1 ? _statusDropDown(context) : CustomSizedBox.shrink(),
+            Row(
+              children: [
+                _searchField(),
+                CustomSizedBox(
+                  width: DBL.ten.val,
+                ),
+                _caregiverCreate()
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  CustomButton _caregiverCreate() {
+    return CustomButton(
+        onPressed: () {},
+        text: AppString.create.val,
+        color: AppColor.primaryColor.val,
+        height: DBL.fifty.val,
+        borderRadius: DBL.five.val,
+        padding: EdgeInsets.symmetric(
+            horizontal: DBL.twentyTwo.val, vertical: DBL.ten.val),
+        textStyle: TS().gRoboto(
+            color: AppColor.white.val,
+            fontWeight: FW.w600.val,
+            fontSize: FS.font16.val),
+        icon: CustomIcon(
+          icon: Icons.add,
+          size: DBL.twenty.val,
+          color: AppColor.white.val,
+        ));
+  }
+
   _statusDropDown(BuildContext context) {
     return Row(
       children: [
-        CustomText3(
+        CustomText(
           AppString.filter.val,
           style: TS()
               .gRoboto(fontSize: FS.font15.val, color: AppColor.rowColor.val),
@@ -230,7 +245,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
           onChange: (int value, int index) {
             CustomLog.log("val:::${value.toString()}");
             _filterId = value;
-            getCareGiverEvent();
+            _getCareGiverEvent();
           },
           dropdownButtonStyle: DropdownButtonStyle(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -245,7 +260,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
           ),
           dropdownStyle: DropdownStyle(
             borderRadius: BorderRadius.circular(DBL.zero.val),
-            elevation: 2,
+            elevation: DBL.two.val,
             color: AppColor.white.val,
             padding: EdgeInsets.all(DBL.five.val),
           ),
@@ -268,7 +283,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
                 ),
               )
               .toList(),
-          child: CustomText3(
+          child: CustomText(
             AppString.status.val,
             style: TS().gRoboto(
                 fontWeight: FW.w500.val,
@@ -286,23 +301,23 @@ class _CareGiversPageState extends State<CareGiversPage> {
   _searchField() {
     return CTextField(
       focusNode: _searchNode,
-      width: isXs2(context) ? DBL.threeFifteen.val : DBL.threeHundred.val,
+      width: _isXs(context) ? DBL.threeFifteen.val : DBL.threeHundred.val,
       height: DBL.forty.val,
       controller: _searchController,
       hintText: AppString.search.val,
       hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
       onSubmitted: (String value) {
         _searchNode.requestFocus();
-        getCareGiverEvent();
+        _getCareGiverEvent();
       },
       suffixIcon: InkWell(
         onTap: () {
-          getCareGiverEvent();
+          _getCareGiverEvent();
         },
         child: CustomSvg(
           path: IMG.search.val,
-          height: 16,
-          width: 16,
+          height: DBL.sixteen.val,
+          width: DBL.sixteen.val,
         ),
       ),
     );
@@ -311,111 +326,77 @@ class _CareGiversPageState extends State<CareGiversPage> {
   _caregiversTable() {
     return CSelectionArea(
       child: CDataTable2(
-        minWidth: 950,
-        dividerThickness: .3,
-        headingRowHeight: 48,
-        dataRowHeight: 60,
+        minWidth: DBL.nineFifty.val,
+        dividerThickness: DBL.pointThree.val,
+        headingRowHeight: DBL.fortyEight.val,
+        dataRowHeight: DBL.sixty.val,
         columns: [
           DataColumn2(
             size: ColumnSize.S,
-            fixedWidth: 80,
-            label: _columnsView(
-                text: AppString.id.val, fontWeight: FontWeight.bold),
+            fixedWidth: DBL.eighty.val,
+            label: _tableColumnView(AppString.id.val),
           ),
           DataColumn2(
             size: ColumnSize.L,
-            label: _columnsView(
-                text: AppString.firstName.val, fontWeight: FontWeight.bold),
+            label: _tableColumnView(
+              AppString.firstName.val,
+            ),
           ),
           DataColumn2(
             size: ColumnSize.L,
-            label: _columnsView(
-                text: AppString.lastName.val, fontWeight: FontWeight.bold),
+            label: _tableColumnView(
+              AppString.lastName.val,
+            ),
           ),
           DataColumn2(
             size: ColumnSize.L,
-            label: _columnsView(
-                text: AppString.emailAddress.val, fontWeight: FontWeight.bold),
+            label: _tableColumnView(
+              AppString.emailAddress.val,
+            ),
           ),
           DataColumn2(
             size: ColumnSize.L,
-            label: _columnsView(
-                text: AppString.phoneNumber.val, fontWeight: FontWeight.bold),
+            label: _tableColumnView(
+              AppString.phoneNumber.val,
+            ),
           ),
           _tabType != 1
               ? DataColumn2(
-                  // size: ColumnSize.L,
-                  fixedWidth: 150,
-                  label: _columnsView(
-                      text: AppString.status.val, fontWeight: FontWeight.bold),
+                  fixedWidth: DBL.oneFifty.val,
+                  label: _tableColumnView(AppString.status.val),
                 )
-              : const DataColumn2(fixedWidth: 0, label: CustomText3("")),
+              : DataColumn2(
+                  fixedWidth: DBL.zero.val, label: const CustomText("")),
           const DataColumn2(
             size: ColumnSize.L,
-            label: CustomText3(""),
+            label: CustomText(""),
           ),
         ],
         rows: mCareGiverList.asMap().entries.map((e) {
-          setIndex(e.key);
+          _setIndex(e.key);
           var item = e.value;
           return DataRow2(
             cells: [
-              DataCell(_rowsView(
-                text: pageIndex.toString(),
+              DataCell(_tableRowView(_pageIndex.toString())),
+              DataCell(TableRowImageView(
+                name: item.name?.firstName ?? "",
+                imageUrl: item.profile ?? "",
               )),
-              DataCell(_tableRowImage(
-                  item.name?.firstName ?? "", item.profile ?? "")),
-              DataCell(_rowsView(text: item.name?.lastName ?? "")),
-              DataCell(_rowsView(text: item.email ?? "")),
-              DataCell(_rowsView(text: item.mobile)),
+              DataCell(_tableRowView(item.name?.lastName ?? "")),
+              DataCell(_tableRowView(item.email ?? "")),
+              DataCell(_tableRowView(item.mobile ?? "")),
               _tabType != 1
-                  ? DataCell(_statusBox(e.value))
-                  : DataCell(_rowsView(text: "")),
-              DataCell(Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  InkWell(
-                      onTap: () {
-                        autoTabRouter!.setActiveIndex(2);
-                      },
-                      child: CustomSvg(
-                        path: IMG.eye.val,
-                        height: Responsive.isWeb(context)
-                            ? DBL.fifteen.val
-                            : DBL.twelve.val,
-                        width: Responsive.isWeb(context)
-                            ? DBL.twenty.val
-                            : DBL.eighteen.val,
-                      )),
-                  CustomSizedBox(
-                    width: DBL.twentyThree.val,
-                  ),
-                  InkWell(
-                      onTap: () {},
-                      child: CustomSvg(
-                        path: IMG.edit.val,
-                        height: Responsive.isWeb(context)
-                            ? DBL.fifteen.val
-                            : DBL.twelve.val,
-                        width: Responsive.isWeb(context)
-                            ? DBL.fifteen.val
-                            : DBL.twelve.val,
-                      )),
-                  CustomSizedBox(
-                    width: DBL.twentyThree.val,
-                  ),
-                  InkWell(
-                      onTap: () {},
-                      child: CustomSvg(
-                        path: IMG.delete.val,
-                        height: Responsive.isWeb(context)
-                            ? DBL.nineteen.val
-                            : DBL.seventeen.val,
-                        width: Responsive.isWeb(context)
-                            ? DBL.nineteen.val
-                            : DBL.seventeen.val,
-                      )),
-                ],
+                  ? DataCell(_tableSwitchBox(e, item))
+                  : DataCell(_tableRowView("")),
+              DataCell(TableActions(
+                isView: true,
+                onViewTap: () {
+                  if (e.key % 2 == 0) {
+                    autoTabRouter!.setActiveIndex(2);
+                  } else {
+                    autoTabRouter!.setActiveIndex(6);
+                  }
+                },
               )),
             ],
           );
@@ -424,98 +405,32 @@ class _CareGiversPageState extends State<CareGiversPage> {
     );
   }
 
-  Widget _rowsView({
-    String? text,
-  }) {
-    return CustomText3(
-      '$text',
-      softWrap: true,
-      style: TS().gRoboto(
-          fontSize: Responsive.isWeb(context)
-              ? DBL.thirteenPointFive.val
-              : DBL.twelve.val,
-          fontWeight: FW.w400.val,
-          color: AppColor.rowColor.val),
-      textAlign: TextAlign.start,
+  TableRowView _tableRowView(String name) {
+    return TableRowView(
+      text: name,
     );
   }
 
-  Widget _columnsView(
-      {String? text, FontWeight? fontWeight = FontWeight.w600}) {
-    return CustomText3(
-      '$text',
-      softWrap: true,
-      style: TS().gRoboto(
-          fontSize:
-              Responsive.isWeb(context) ? DBL.fourteen.val : DBL.twelve.val,
-          fontWeight: fontWeight,
-          color: AppColor.columColor.val),
-      textAlign: TextAlign.center,
+  TableColumnView _tableColumnView(String name) {
+    return TableColumnView(
+      text: name,
     );
   }
 
-  Widget _tableRowImage(String text, String imgUrl) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: CachedImage(
-              height: DBL.thirty.val, width: DBL.thirty.val, imgUrl: imgUrl),
-        ),
-        CustomSizedBox(width: DBL.twelve.val),
-        Expanded(
-          child: CustomText3(
-            text,
-            style: TS().gRoboto(
-                fontSize: Responsive.isWeb(context)
-                    ? DBL.fourteen.val
-                    : DBL.twelve.val,
-                fontWeight: FW.w400.val,
-                color: AppColor.rowColor.val),
-          ),
-        ),
-      ],
+  TableSwitchBox _tableSwitchBox(MapEntry<int, Caregivers> e, Caregivers item) {
+    return TableSwitchBox(
+      value: e.value.isActive!,
+      onToggle: () {
+        _careGiversBloc.add(CareGiversEvent.isUserActive(item));
+      },
     );
   }
 
-  _statusBox(Caregivers item) {
-    return Row(
-      children: [
-        FlutterSwitch(
-          width: 40.0,
-          height: 24.0,
-          valueFontSize: 0,
-          toggleSize: 14.0,
-          value: item.onBoardingStatus ?? false,
-          activeColor: AppColor.green.val,
-          inactiveColor: AppColor.lightGrey.val,
-          borderRadius: 30.0,
-          onToggle: (val) {
-            _careGiversBloc.add(CareGiversEvent.isUserActive(item));
-          },
-        ),
-        const SizedBox(
-          width: 8,
-        ),
-        CustomText3(
-          item.onBoardingStatus! ? "Active" : "Inactive",
-          style: TS().gRoboto(
-              color: item.onBoardingStatus!
-                  ? AppColor.green.val
-                  : AppColor.inactive.val,
-              fontSize: 12,
-              fontWeight: FW.w600.val),
-        )
-      ],
-    );
-  }
-
-  setIndex(int index) {
+  _setIndex(int index) {
     if (_page == 1) {
-      pageIndex = index + 1;
+      _pageIndex = index + 1;
     } else {
-      pageIndex = ((_page * _limit) - 10) + index + 1;
+      _pageIndex = ((_page * _limit) - 10) + index + 1;
     }
   }
 
@@ -530,22 +445,22 @@ class _CareGiversPageState extends State<CareGiversPage> {
         onNextPressed: () {
           if (_page < totalPages) {
             _page = _page + 1;
-            getCareGiverEvent();
+            _getCareGiverEvent();
           }
         },
         onItemPressed: (i) {
           _page = i;
-          getCareGiverEvent();
+          _getCareGiverEvent();
         },
         onPreviousPressed: () {
           if (_page > 1) {
             _page = _page - 1;
-            getCareGiverEvent();
+            _getCareGiverEvent();
           }
         });
   }
 
-  void updateData() {
+  void _updateData() {
     if (_page == 1) {
       _start = 0;
       _end = mCareGiverList.length < _limit ? mCareGiverList.length : _limit;
@@ -555,7 +470,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
     }
   }
 
-  getCareGiverEvent() {
+  _getCareGiverEvent() {
     _careGiversBloc.add(CareGiversEvent.getCareGivers(
         userId: _userId,
         page: _page,
@@ -567,7 +482,5 @@ class _CareGiversPageState extends State<CareGiversPage> {
             : null));
   }
 
-  bool isXs(context) => MediaQuery.of(context).size.width <= 810;
-
-  bool isXs2(context) => MediaQuery.of(context).size.width <= 544;
+  bool _isXs(context) => MediaQuery.of(context).size.width <= 544;
 }

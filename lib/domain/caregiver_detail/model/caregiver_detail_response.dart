@@ -33,6 +33,9 @@ class Data {
   int? serviceCompleted;
   int? canceledRequest;
   int? totalReviewsGiven;
+  String? reviewsPending;
+  num?rating;
+  int?totalRating;
   Schedule? schedule;
   AccountDetails? accountDetails;
   List<Services>? services;
@@ -50,6 +53,7 @@ class Data {
         this.serviceCompleted,
         this.canceledRequest,
         this.totalReviewsGiven,
+        this.reviewsPending,
         this.schedule,
         this.accountDetails,
         this.services,
@@ -67,6 +71,9 @@ class Data {
     serviceCompleted = json['service_completed'];
     canceledRequest = json['canceled_request'];
     totalReviewsGiven = json['total_reviews_given'];
+    totalRating = json['total_rating'];
+    rating = json['rating'];
+    reviewsPending = json['reviews_pending'];
     schedule = json['schedule'] != null
         ?  Schedule.fromJson(json['schedule'])
         : null;
@@ -298,22 +305,22 @@ class DiffTimeslotDates {
 class AccountDetails {
   String? accountHolderName;
   String? accountNumber;
-  String? rotingNumber;
+  String? routingNumber;
 
   AccountDetails(
-      {this.accountHolderName, this.accountNumber, this.rotingNumber});
+      {this.accountHolderName, this.accountNumber, this.routingNumber});
 
   AccountDetails.fromJson(Map<String, dynamic> json) {
     accountHolderName = json['account_holder_name'];
     accountNumber = json['account_number'];
-    rotingNumber = json['roting_number'];
+    routingNumber = json['routing_number'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data =   <String, dynamic>{};
     data['account_holder_name'] =accountHolderName;
     data['account_number'] =accountNumber;
-    data['roting_number'] =rotingNumber;
+    data['roting_number'] =routingNumber;
     return data;
   }
 }
@@ -323,6 +330,7 @@ class Services {
   String? userId;
   String? startDateTime;
   String? endDateTime;
+  String? serviceName;
   String? totalServiceFee;
   int? status;
   Name? client;
@@ -343,6 +351,7 @@ class Services {
     endDateTime = json['end_date_time'];
     totalServiceFee = json['total_service_fee'];
     status = json['status'];
+    serviceName = json['service'];
     client = json['client'] != null ?  Name.fromJson(json['client']) : null;
   }
 
@@ -413,6 +422,7 @@ class ServiceRequest {
   String? requstedEndDateTime;
   String? status;
   List<String>? serviceNeed;
+  int ?serviceNeededCount;
 
   ServiceRequest(
       {this.name,
@@ -428,6 +438,7 @@ class ServiceRequest {
     requstedStartDateTime = json['requsted_start_date_time'];
     requstedEndDateTime = json['requsted_end_date_time'];
     status = json['status'];
+    serviceNeededCount = json['service_need_count'];
     serviceNeed = json['service_need'].cast<String>();
   }
 

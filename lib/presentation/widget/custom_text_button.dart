@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 import 'dart:ui' show lerpDouble;
 
-
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:flutter/material.dart';
 
@@ -46,38 +45,29 @@ class CTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double scale = MediaQuery.maybeOf(context)?.textScaleFactor ?? 1;
-    final double gap =
-        scale <= 1 ? 8 : lerpDouble(8, 4, math.min(scale - 1, 1))!;
-
     return TranslateOnHover(
       builder: (isHover) {
         return TextButton(
-          autofocus: autofocus,
-          onPressed: onPressed,
-          onLongPress: onLongPress,
-
-          style: ButtonStyle(
-            
-            mouseCursor: MaterialStatePropertyAll(mouseCursor),
-            maximumSize: MaterialStatePropertyAll(
-                Size(width ?? DBL.fourFifty.val, height ?? DBL.fifty.val)),
-            overlayColor: MaterialStatePropertyAll(AppColor.transparent.val),
-          ),
-          child: FxHover(
-            builder: (isHover) {
-              Color color = isHover
-                  ? AppColor.darkBlue.val
-                  : AppColor.primaryColor.val;
-              return CustomText3(
-                text!,
-                style: TS().gPoppins(
-                    fontWeight: fontWeight ?? FW.w600.val,
-                    color: color),
-              );
-            },
-          )
-        );
+            autofocus: autofocus,
+            onPressed: onPressed,
+            onLongPress: onLongPress,
+            style: ButtonStyle(
+              mouseCursor: MaterialStatePropertyAll(mouseCursor),
+              maximumSize: MaterialStatePropertyAll(
+                  Size(width ?? DBL.fourFifty.val, height ?? DBL.fifty.val)),
+              overlayColor: MaterialStatePropertyAll(AppColor.transparent.val),
+            ),
+            child: FxHover(
+              builder: (isHover) {
+                Color color =
+                    isHover ? AppColor.darkBlue.val : AppColor.primaryColor.val;
+                return CustomText(
+                  text!,
+                  style: TS().gPoppins(
+                      fontWeight: fontWeight ?? FW.w600.val, color: color),
+                );
+              },
+            ));
       },
     );
   }

@@ -28,7 +28,7 @@ class CustomStatusWidget extends StatelessWidget {
           decoration: BoxDecoration(
               color: isCompleted ? AppColor.darkGreen.val : AppColor.red.val,
               borderRadius: PR().circularRadius(DBL.eight.val)),
-          child: CustomText3(
+          child: CustomText(
             textAlign: TextAlign.center,
             isCompleted ? AppString.completed.val : AppString.cancel.val,
             style: TS().gRoboto(
@@ -39,7 +39,7 @@ class CustomStatusWidget extends StatelessWidget {
           ),
         ),
         !isCompleted
-            ? CustomText3(
+            ? CustomText(
                 "Refund under process",
                 style: TextStyle(
                     fontSize: Responsive.isWeb(context)?FS.font07.val:FS.font065.val,

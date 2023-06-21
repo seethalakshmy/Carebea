@@ -19,8 +19,8 @@ class DottedContainer extends StatelessWidget {
     return DottedBorder(
       color: AppColor.lightGrey3.val,
       borderType: BorderType.RRect,
-      radius: const Radius.circular(5),
-      padding: const EdgeInsets.all(6),
+      radius:  Radius.circular(DBL.five.val),
+      padding:  EdgeInsets.all(DBL.six.val),
       child: CustomSizedBox(
         height: height,
         width: width,
