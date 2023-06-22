@@ -35,10 +35,9 @@ class _DocumentDetailsViewState extends State<DocumentDetailsView> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment:
-          Responsive.isLargeWeb(context) || Responsive.isWeb(context)
-              ? CrossAxisAlignment.start
-              : CrossAxisAlignment.center,
+      crossAxisAlignment: Responsive.isWeb(context)
+          ? CrossAxisAlignment.start
+          : CrossAxisAlignment.center,
       children: [
         CustomText(
           AppString.documentDetails.val,

@@ -43,6 +43,7 @@ class ItemRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("width is : ${MediaQuery.of(context).size.width}");
     return CustomContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,16 +61,16 @@ class ItemRowWidget extends StatelessWidget {
             onChanged: onChanged,
           ),
           CustomContainer(height: DBL.fifteen.val),
-          selectedValue == 0 ? _yesCaseWidget() : _noCaseWidget()
+          selectedValue == 0 ? _yesCaseWidget(context) : _noCaseWidget(),
         ],
       ),
     );
   }
 
-  _yesCaseWidget() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      mainAxisAlignment: MainAxisAlignment.start,
+  _yesCaseWidget(BuildContext context) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.end,
+      runSpacing: DBL.twenty.val,
       children: [
         question == AppString.TBPPDTest.val ||
                 question == AppString.covid19Vaccination.val
@@ -137,11 +138,12 @@ class ItemRowWidget extends StatelessWidget {
                     width: DBL.twoEighty.val,
                   )
                 : const CustomSizedBox(),
-        CustomSizedBox(width: DBL.forty.val),
+        MediaQuery.of(context).size.width >= 650 &&
+                MediaQuery.of(context).size.width <= 690
+            ? const CustomSizedBox()
+            : CustomSizedBox(width: DBL.forty.val),
         CustomContainer(
-            padding: const EdgeInsets.only(top: 20),
             width: DBL.twoHundred.val,
-            height: 82,
             child: UploadDocumentWidget(onTap: onUpoladTap))
       ],
     );
