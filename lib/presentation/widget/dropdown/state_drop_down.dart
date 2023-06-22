@@ -34,7 +34,7 @@ class StateDropDown extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 10),
-                      child: CustomText3(
+                      child: CustomText(
                         e ?? "",
                         style: TS().gRoboto(color: AppColor.black.val),
                       ),
@@ -44,7 +44,7 @@ class StateDropDown extends StatelessWidget {
           onChange: (value, index) {
             onChange(items[index]);
           },
-          child: CustomText3(selectedValue ?? "")),
+          child: CustomText(selectedValue ?? "")),
     );
   }
 }

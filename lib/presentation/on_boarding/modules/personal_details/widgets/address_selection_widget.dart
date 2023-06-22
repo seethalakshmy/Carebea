@@ -53,7 +53,7 @@ class AddressSelectionWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4)),
             child: Row(
               children: [
-                Expanded(child: CustomText3(address)),
+                Expanded(child: CustomText(address)),
                 CommonImageView(
                   svgPath: IMG.addressSelectionIcon.val,
                 )

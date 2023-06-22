@@ -21,6 +21,9 @@ mixin _$OnboardingEvent {
     required TResult Function() personalDetails,
     required TResult Function() submit,
     required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +31,9 @@ mixin _$OnboardingEvent {
     TResult? Function()? personalDetails,
     TResult? Function()? submit,
     TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +41,9 @@ mixin _$OnboardingEvent {
     TResult Function()? personalDetails,
     TResult Function()? submit,
     TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -42,21 +51,30 @@ mixin _$OnboardingEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_OnboardingEvent value) personalDetails,
     required TResult Function(_Submit value) submit,
-    required TResult Function(radioHHASelected value) radioHHA,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_OnboardingEvent value)? personalDetails,
     TResult? Function(_Submit value)? submit,
-    TResult? Function(radioHHASelected value)? radioHHA,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_OnboardingEvent value)? personalDetails,
     TResult Function(_Submit value)? submit,
-    TResult Function(radioHHASelected value)? radioHHA,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,6 +139,9 @@ class _$_OnboardingEvent implements _OnboardingEvent {
     required TResult Function() personalDetails,
     required TResult Function() submit,
     required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
   }) {
     return personalDetails();
   }
@@ -131,6 +152,9 @@ class _$_OnboardingEvent implements _OnboardingEvent {
     TResult? Function()? personalDetails,
     TResult? Function()? submit,
     TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
   }) {
     return personalDetails?.call();
   }
@@ -141,6 +165,9 @@ class _$_OnboardingEvent implements _OnboardingEvent {
     TResult Function()? personalDetails,
     TResult Function()? submit,
     TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
     required TResult orElse(),
   }) {
     if (personalDetails != null) {
@@ -154,7 +181,10 @@ class _$_OnboardingEvent implements _OnboardingEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_OnboardingEvent value) personalDetails,
     required TResult Function(_Submit value) submit,
-    required TResult Function(radioHHASelected value) radioHHA,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
   }) {
     return personalDetails(this);
   }
@@ -164,7 +194,10 @@ class _$_OnboardingEvent implements _OnboardingEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_OnboardingEvent value)? personalDetails,
     TResult? Function(_Submit value)? submit,
-    TResult? Function(radioHHASelected value)? radioHHA,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
   }) {
     return personalDetails?.call(this);
   }
@@ -174,7 +207,10 @@ class _$_OnboardingEvent implements _OnboardingEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_OnboardingEvent value)? personalDetails,
     TResult Function(_Submit value)? submit,
-    TResult Function(radioHHASelected value)? radioHHA,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
     required TResult orElse(),
   }) {
     if (personalDetails != null) {
@@ -227,6 +263,9 @@ class _$_Submit implements _Submit {
     required TResult Function() personalDetails,
     required TResult Function() submit,
     required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
   }) {
     return submit();
   }
@@ -237,6 +276,9 @@ class _$_Submit implements _Submit {
     TResult? Function()? personalDetails,
     TResult? Function()? submit,
     TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
   }) {
     return submit?.call();
   }
@@ -247,6 +289,9 @@ class _$_Submit implements _Submit {
     TResult Function()? personalDetails,
     TResult Function()? submit,
     TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -260,7 +305,10 @@ class _$_Submit implements _Submit {
   TResult map<TResult extends Object?>({
     required TResult Function(_OnboardingEvent value) personalDetails,
     required TResult Function(_Submit value) submit,
-    required TResult Function(radioHHASelected value) radioHHA,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
   }) {
     return submit(this);
   }
@@ -270,7 +318,10 @@ class _$_Submit implements _Submit {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_OnboardingEvent value)? personalDetails,
     TResult? Function(_Submit value)? submit,
-    TResult? Function(radioHHASelected value)? radioHHA,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
   }) {
     return submit?.call(this);
   }
@@ -280,7 +331,10 @@ class _$_Submit implements _Submit {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_OnboardingEvent value)? personalDetails,
     TResult Function(_Submit value)? submit,
-    TResult Function(radioHHASelected value)? radioHHA,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -295,20 +349,20 @@ abstract class _Submit implements OnboardingEvent {
 }
 
 /// @nodoc
-abstract class _$$radioHHASelectedCopyWith<$Res> {
-  factory _$$radioHHASelectedCopyWith(
-          _$radioHHASelected value, $Res Function(_$radioHHASelected) then) =
-      __$$radioHHASelectedCopyWithImpl<$Res>;
+abstract class _$$_RadioHHASelectedCopyWith<$Res> {
+  factory _$$_RadioHHASelectedCopyWith(
+          _$_RadioHHASelected value, $Res Function(_$_RadioHHASelected) then) =
+      __$$_RadioHHASelectedCopyWithImpl<$Res>;
   @useResult
   $Res call({int isSelected});
 }
 
 /// @nodoc
-class __$$radioHHASelectedCopyWithImpl<$Res>
-    extends _$OnboardingEventCopyWithImpl<$Res, _$radioHHASelected>
-    implements _$$radioHHASelectedCopyWith<$Res> {
-  __$$radioHHASelectedCopyWithImpl(
-      _$radioHHASelected _value, $Res Function(_$radioHHASelected) _then)
+class __$$_RadioHHASelectedCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_RadioHHASelected>
+    implements _$$_RadioHHASelectedCopyWith<$Res> {
+  __$$_RadioHHASelectedCopyWithImpl(
+      _$_RadioHHASelected _value, $Res Function(_$_RadioHHASelected) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -316,7 +370,7 @@ class __$$radioHHASelectedCopyWithImpl<$Res>
   $Res call({
     Object? isSelected = null,
   }) {
-    return _then(_$radioHHASelected(
+    return _then(_$_RadioHHASelected(
       null == isSelected
           ? _value.isSelected
           : isSelected // ignore: cast_nullable_to_non_nullable
@@ -327,8 +381,8 @@ class __$$radioHHASelectedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$radioHHASelected implements radioHHASelected {
-  const _$radioHHASelected(this.isSelected);
+class _$_RadioHHASelected implements _RadioHHASelected {
+  const _$_RadioHHASelected(this.isSelected);
 
   @override
   final int isSelected;
@@ -342,7 +396,7 @@ class _$radioHHASelected implements radioHHASelected {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$radioHHASelected &&
+            other is _$_RadioHHASelected &&
             (identical(other.isSelected, isSelected) ||
                 other.isSelected == isSelected));
   }
@@ -353,8 +407,8 @@ class _$radioHHASelected implements radioHHASelected {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$radioHHASelectedCopyWith<_$radioHHASelected> get copyWith =>
-      __$$radioHHASelectedCopyWithImpl<_$radioHHASelected>(this, _$identity);
+  _$$_RadioHHASelectedCopyWith<_$_RadioHHASelected> get copyWith =>
+      __$$_RadioHHASelectedCopyWithImpl<_$_RadioHHASelected>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -362,6 +416,9 @@ class _$radioHHASelected implements radioHHASelected {
     required TResult Function() personalDetails,
     required TResult Function() submit,
     required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
   }) {
     return radioHHA(isSelected);
   }
@@ -372,6 +429,9 @@ class _$radioHHASelected implements radioHHASelected {
     TResult? Function()? personalDetails,
     TResult? Function()? submit,
     TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
   }) {
     return radioHHA?.call(isSelected);
   }
@@ -382,6 +442,9 @@ class _$radioHHASelected implements radioHHASelected {
     TResult Function()? personalDetails,
     TResult Function()? submit,
     TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
     required TResult orElse(),
   }) {
     if (radioHHA != null) {
@@ -395,7 +458,10 @@ class _$radioHHASelected implements radioHHASelected {
   TResult map<TResult extends Object?>({
     required TResult Function(_OnboardingEvent value) personalDetails,
     required TResult Function(_Submit value) submit,
-    required TResult Function(radioHHASelected value) radioHHA,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
   }) {
     return radioHHA(this);
   }
@@ -405,7 +471,10 @@ class _$radioHHASelected implements radioHHASelected {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_OnboardingEvent value)? personalDetails,
     TResult? Function(_Submit value)? submit,
-    TResult? Function(radioHHASelected value)? radioHHA,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
   }) {
     return radioHHA?.call(this);
   }
@@ -415,7 +484,10 @@ class _$radioHHASelected implements radioHHASelected {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_OnboardingEvent value)? personalDetails,
     TResult Function(_Submit value)? submit,
-    TResult Function(radioHHASelected value)? radioHHA,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
     required TResult orElse(),
   }) {
     if (radioHHA != null) {
@@ -425,18 +497,497 @@ class _$radioHHASelected implements radioHHASelected {
   }
 }
 
-abstract class radioHHASelected implements OnboardingEvent {
-  const factory radioHHASelected(final int isSelected) = _$radioHHASelected;
+abstract class _RadioHHASelected implements OnboardingEvent {
+  const factory _RadioHHASelected(final int isSelected) = _$_RadioHHASelected;
 
   int get isSelected;
   @JsonKey(ignore: true)
-  _$$radioHHASelectedCopyWith<_$radioHHASelected> get copyWith =>
+  _$$_RadioHHASelectedCopyWith<_$_RadioHHASelected> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_RadioBLSSelectedCopyWith<$Res> {
+  factory _$$_RadioBLSSelectedCopyWith(
+          _$_RadioBLSSelected value, $Res Function(_$_RadioBLSSelected) then) =
+      __$$_RadioBLSSelectedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int isSelected});
+}
+
+/// @nodoc
+class __$$_RadioBLSSelectedCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_RadioBLSSelected>
+    implements _$$_RadioBLSSelectedCopyWith<$Res> {
+  __$$_RadioBLSSelectedCopyWithImpl(
+      _$_RadioBLSSelected _value, $Res Function(_$_RadioBLSSelected) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isSelected = null,
+  }) {
+    return _then(_$_RadioBLSSelected(
+      null == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_RadioBLSSelected implements _RadioBLSSelected {
+  const _$_RadioBLSSelected(this.isSelected);
+
+  @override
+  final int isSelected;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.radioBLS(isSelected: $isSelected)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_RadioBLSSelected &&
+            (identical(other.isSelected, isSelected) ||
+                other.isSelected == isSelected));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isSelected);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RadioBLSSelectedCopyWith<_$_RadioBLSSelected> get copyWith =>
+      __$$_RadioBLSSelectedCopyWithImpl<_$_RadioBLSSelected>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() personalDetails,
+    required TResult Function() submit,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+  }) {
+    return radioBLS(isSelected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? personalDetails,
+    TResult? Function()? submit,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+  }) {
+    return radioBLS?.call(isSelected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? personalDetails,
+    TResult Function()? submit,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    required TResult orElse(),
+  }) {
+    if (radioBLS != null) {
+      return radioBLS(isSelected);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnboardingEvent value) personalDetails,
+    required TResult Function(_Submit value) submit,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+  }) {
+    return radioBLS(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnboardingEvent value)? personalDetails,
+    TResult? Function(_Submit value)? submit,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+  }) {
+    return radioBLS?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnboardingEvent value)? personalDetails,
+    TResult Function(_Submit value)? submit,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    required TResult orElse(),
+  }) {
+    if (radioBLS != null) {
+      return radioBLS(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RadioBLSSelected implements OnboardingEvent {
+  const factory _RadioBLSSelected(final int isSelected) = _$_RadioBLSSelected;
+
+  int get isSelected;
+  @JsonKey(ignore: true)
+  _$$_RadioBLSSelectedCopyWith<_$_RadioBLSSelected> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_RadioTBSelectedCopyWith<$Res> {
+  factory _$$_RadioTBSelectedCopyWith(
+          _$_RadioTBSelected value, $Res Function(_$_RadioTBSelected) then) =
+      __$$_RadioTBSelectedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int isSelected});
+}
+
+/// @nodoc
+class __$$_RadioTBSelectedCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_RadioTBSelected>
+    implements _$$_RadioTBSelectedCopyWith<$Res> {
+  __$$_RadioTBSelectedCopyWithImpl(
+      _$_RadioTBSelected _value, $Res Function(_$_RadioTBSelected) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isSelected = null,
+  }) {
+    return _then(_$_RadioTBSelected(
+      null == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_RadioTBSelected implements _RadioTBSelected {
+  const _$_RadioTBSelected(this.isSelected);
+
+  @override
+  final int isSelected;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.radioTB(isSelected: $isSelected)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_RadioTBSelected &&
+            (identical(other.isSelected, isSelected) ||
+                other.isSelected == isSelected));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isSelected);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RadioTBSelectedCopyWith<_$_RadioTBSelected> get copyWith =>
+      __$$_RadioTBSelectedCopyWithImpl<_$_RadioTBSelected>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() personalDetails,
+    required TResult Function() submit,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+  }) {
+    return radioTB(isSelected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? personalDetails,
+    TResult? Function()? submit,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+  }) {
+    return radioTB?.call(isSelected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? personalDetails,
+    TResult Function()? submit,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    required TResult orElse(),
+  }) {
+    if (radioTB != null) {
+      return radioTB(isSelected);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnboardingEvent value) personalDetails,
+    required TResult Function(_Submit value) submit,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+  }) {
+    return radioTB(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnboardingEvent value)? personalDetails,
+    TResult? Function(_Submit value)? submit,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+  }) {
+    return radioTB?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnboardingEvent value)? personalDetails,
+    TResult Function(_Submit value)? submit,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    required TResult orElse(),
+  }) {
+    if (radioTB != null) {
+      return radioTB(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RadioTBSelected implements OnboardingEvent {
+  const factory _RadioTBSelected(final int isSelected) = _$_RadioTBSelected;
+
+  int get isSelected;
+  @JsonKey(ignore: true)
+  _$$_RadioTBSelectedCopyWith<_$_RadioTBSelected> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_RadioCovidSelectedCopyWith<$Res> {
+  factory _$$_RadioCovidSelectedCopyWith(_$_RadioCovidSelected value,
+          $Res Function(_$_RadioCovidSelected) then) =
+      __$$_RadioCovidSelectedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int isSelected});
+}
+
+/// @nodoc
+class __$$_RadioCovidSelectedCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_RadioCovidSelected>
+    implements _$$_RadioCovidSelectedCopyWith<$Res> {
+  __$$_RadioCovidSelectedCopyWithImpl(
+      _$_RadioCovidSelected _value, $Res Function(_$_RadioCovidSelected) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isSelected = null,
+  }) {
+    return _then(_$_RadioCovidSelected(
+      null == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_RadioCovidSelected implements _RadioCovidSelected {
+  const _$_RadioCovidSelected(this.isSelected);
+
+  @override
+  final int isSelected;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.radioCovid(isSelected: $isSelected)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_RadioCovidSelected &&
+            (identical(other.isSelected, isSelected) ||
+                other.isSelected == isSelected));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isSelected);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RadioCovidSelectedCopyWith<_$_RadioCovidSelected> get copyWith =>
+      __$$_RadioCovidSelectedCopyWithImpl<_$_RadioCovidSelected>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() personalDetails,
+    required TResult Function() submit,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+  }) {
+    return radioCovid(isSelected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? personalDetails,
+    TResult? Function()? submit,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+  }) {
+    return radioCovid?.call(isSelected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? personalDetails,
+    TResult Function()? submit,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    required TResult orElse(),
+  }) {
+    if (radioCovid != null) {
+      return radioCovid(isSelected);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnboardingEvent value) personalDetails,
+    required TResult Function(_Submit value) submit,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+  }) {
+    return radioCovid(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnboardingEvent value)? personalDetails,
+    TResult? Function(_Submit value)? submit,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+  }) {
+    return radioCovid?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnboardingEvent value)? personalDetails,
+    TResult Function(_Submit value)? submit,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    required TResult orElse(),
+  }) {
+    if (radioCovid != null) {
+      return radioCovid(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RadioCovidSelected implements OnboardingEvent {
+  const factory _RadioCovidSelected(final int isSelected) =
+      _$_RadioCovidSelected;
+
+  int get isSelected;
+  @JsonKey(ignore: true)
+  _$$_RadioCovidSelectedCopyWith<_$_RadioCovidSelected> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 mixin _$OnboardingState {
-  int get isSelected => throw _privateConstructorUsedError;
+  int get isHHASelected => throw _privateConstructorUsedError;
+  int get isBLSSelected => throw _privateConstructorUsedError;
+  int get isTBSelected => throw _privateConstructorUsedError;
+  int get isCovidSelected => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OnboardingStateCopyWith<OnboardingState> get copyWith =>
@@ -449,7 +1000,11 @@ abstract class $OnboardingStateCopyWith<$Res> {
           OnboardingState value, $Res Function(OnboardingState) then) =
       _$OnboardingStateCopyWithImpl<$Res, OnboardingState>;
   @useResult
-  $Res call({int isSelected});
+  $Res call(
+      {int isHHASelected,
+      int isBLSSelected,
+      int isTBSelected,
+      int isCovidSelected});
 }
 
 /// @nodoc
@@ -465,45 +1020,79 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isSelected = null,
+    Object? isHHASelected = null,
+    Object? isBLSSelected = null,
+    Object? isTBSelected = null,
+    Object? isCovidSelected = null,
   }) {
     return _then(_value.copyWith(
-      isSelected: null == isSelected
-          ? _value.isSelected
-          : isSelected // ignore: cast_nullable_to_non_nullable
+      isHHASelected: null == isHHASelected
+          ? _value.isHHASelected
+          : isHHASelected // ignore: cast_nullable_to_non_nullable
+              as int,
+      isBLSSelected: null == isBLSSelected
+          ? _value.isBLSSelected
+          : isBLSSelected // ignore: cast_nullable_to_non_nullable
+              as int,
+      isTBSelected: null == isTBSelected
+          ? _value.isTBSelected
+          : isTBSelected // ignore: cast_nullable_to_non_nullable
+              as int,
+      isCovidSelected: null == isCovidSelected
+          ? _value.isCovidSelected
+          : isCovidSelected // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_careGiverStateCopyWith<$Res>
+abstract class _$$_OnboardingStateCopyWith<$Res>
     implements $OnboardingStateCopyWith<$Res> {
-  factory _$$_careGiverStateCopyWith(
-          _$_careGiverState value, $Res Function(_$_careGiverState) then) =
-      __$$_careGiverStateCopyWithImpl<$Res>;
+  factory _$$_OnboardingStateCopyWith(
+          _$_OnboardingState value, $Res Function(_$_OnboardingState) then) =
+      __$$_OnboardingStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int isSelected});
+  $Res call(
+      {int isHHASelected,
+      int isBLSSelected,
+      int isTBSelected,
+      int isCovidSelected});
 }
 
 /// @nodoc
-class __$$_careGiverStateCopyWithImpl<$Res>
-    extends _$OnboardingStateCopyWithImpl<$Res, _$_careGiverState>
-    implements _$$_careGiverStateCopyWith<$Res> {
-  __$$_careGiverStateCopyWithImpl(
-      _$_careGiverState _value, $Res Function(_$_careGiverState) _then)
+class __$$_OnboardingStateCopyWithImpl<$Res>
+    extends _$OnboardingStateCopyWithImpl<$Res, _$_OnboardingState>
+    implements _$$_OnboardingStateCopyWith<$Res> {
+  __$$_OnboardingStateCopyWithImpl(
+      _$_OnboardingState _value, $Res Function(_$_OnboardingState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isSelected = null,
+    Object? isHHASelected = null,
+    Object? isBLSSelected = null,
+    Object? isTBSelected = null,
+    Object? isCovidSelected = null,
   }) {
-    return _then(_$_careGiverState(
-      isSelected: null == isSelected
-          ? _value.isSelected
-          : isSelected // ignore: cast_nullable_to_non_nullable
+    return _then(_$_OnboardingState(
+      isHHASelected: null == isHHASelected
+          ? _value.isHHASelected
+          : isHHASelected // ignore: cast_nullable_to_non_nullable
+              as int,
+      isBLSSelected: null == isBLSSelected
+          ? _value.isBLSSelected
+          : isBLSSelected // ignore: cast_nullable_to_non_nullable
+              as int,
+      isTBSelected: null == isTBSelected
+          ? _value.isTBSelected
+          : isTBSelected // ignore: cast_nullable_to_non_nullable
+              as int,
+      isCovidSelected: null == isCovidSelected
+          ? _value.isCovidSelected
+          : isCovidSelected // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -511,44 +1100,70 @@ class __$$_careGiverStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_careGiverState implements _careGiverState {
-  const _$_careGiverState({required this.isSelected});
+class _$_OnboardingState implements _OnboardingState {
+  const _$_OnboardingState(
+      {required this.isHHASelected,
+      required this.isBLSSelected,
+      required this.isTBSelected,
+      required this.isCovidSelected});
 
   @override
-  final int isSelected;
+  final int isHHASelected;
+  @override
+  final int isBLSSelected;
+  @override
+  final int isTBSelected;
+  @override
+  final int isCovidSelected;
 
   @override
   String toString() {
-    return 'OnboardingState(isSelected: $isSelected)';
+    return 'OnboardingState(isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_careGiverState &&
-            (identical(other.isSelected, isSelected) ||
-                other.isSelected == isSelected));
+            other is _$_OnboardingState &&
+            (identical(other.isHHASelected, isHHASelected) ||
+                other.isHHASelected == isHHASelected) &&
+            (identical(other.isBLSSelected, isBLSSelected) ||
+                other.isBLSSelected == isBLSSelected) &&
+            (identical(other.isTBSelected, isTBSelected) ||
+                other.isTBSelected == isTBSelected) &&
+            (identical(other.isCovidSelected, isCovidSelected) ||
+                other.isCovidSelected == isCovidSelected));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isSelected);
+  int get hashCode => Object.hash(
+      runtimeType, isHHASelected, isBLSSelected, isTBSelected, isCovidSelected);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_careGiverStateCopyWith<_$_careGiverState> get copyWith =>
-      __$$_careGiverStateCopyWithImpl<_$_careGiverState>(this, _$identity);
+  _$$_OnboardingStateCopyWith<_$_OnboardingState> get copyWith =>
+      __$$_OnboardingStateCopyWithImpl<_$_OnboardingState>(this, _$identity);
 }
 
-abstract class _careGiverState implements OnboardingState {
-  const factory _careGiverState({required final int isSelected}) =
-      _$_careGiverState;
+abstract class _OnboardingState implements OnboardingState {
+  const factory _OnboardingState(
+      {required final int isHHASelected,
+      required final int isBLSSelected,
+      required final int isTBSelected,
+      required final int isCovidSelected}) = _$_OnboardingState;
 
   @override
-  int get isSelected;
+  int get isHHASelected;
+  @override
+  int get isBLSSelected;
+  @override
+  int get isTBSelected;
+  @override
+  int get isCovidSelected;
   @override
   @JsonKey(ignore: true)
-  _$$_careGiverStateCopyWith<_$_careGiverState> get copyWith =>
+  _$$_OnboardingStateCopyWith<_$_OnboardingState> get copyWith =>
       throw _privateConstructorUsedError;
 }

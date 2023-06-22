@@ -61,7 +61,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
         onboardingBloc: _onboardingBloc,
         pageController: controller,
       ),
-      QualificationView(),
+      QualificationView(
+          state: _onboardingBloc.state, onboardingBloc: _onboardingBloc),
     ];
     setState(() {
       totalPages = pages.length;
@@ -81,7 +82,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),
-                  child: CustomText3(
+                  child: CustomText(
                     "Step ${currentPage + 1}/$totalPages",
                     softWrap: true,
                     style: TS().gRoboto(

@@ -11,124 +11,115 @@ import '../../../widget/custom_sizedbox.dart';
 import '../../../widget/custom_text.dart';
 import '../../widgets/common_padding_widget.dart';
 
-class QualificationView extends StatefulWidget {
-  QualificationView({Key? key}) : super(key: key);
-  final OnboardingBloc onboardingBloc = OnboardingBloc();
+class QualificationView extends StatelessWidget {
+  QualificationView(
+      {Key? key, required this.state, required this.onboardingBloc})
+      : super(key: key);
+  final OnboardingBloc onboardingBloc;
+  final OnboardingState state;
 
-  @override
-  State<QualificationView> createState() => _QualificationViewState();
-}
+  final TextEditingController hhaController = TextEditingController();
+  final TextEditingController blsController = TextEditingController();
+  final TextEditingController tbPpdController = TextEditingController();
+  final TextEditingController covidController = TextEditingController();
 
-class _QualificationViewState extends State<QualificationView> {
-  TextEditingController hhaController = TextEditingController();
-  TextEditingController blsController = TextEditingController();
-  TextEditingController tbPpdController = TextEditingController();
-  TextEditingController covidController = TextEditingController();
-
-  TextEditingController hhaDateController = TextEditingController();
-  TextEditingController blsDateController = TextEditingController();
-  TextEditingController tbPpdDateController = TextEditingController();
-  TextEditingController covidDateController = TextEditingController();
-
-  @override
-  void dispose() {
-    hhaController.dispose();
-    super.dispose();
-  }
+  final TextEditingController hhaDateController = TextEditingController();
+  final TextEditingController blsDateController = TextEditingController();
+  final TextEditingController tbPpdDateController = TextEditingController();
+  final TextEditingController covidDateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OnboardingBloc, OnboardingState>(
       builder: (context, state) {
-        print("state.isSelected in quali view: ${state.isSelected}");
         return CommonPaddingWidget(
           child: CustomContainer(
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _topArea(),
-                  ItemRowWidget(
-                    question: AppString.doYouHaveHHAReg.val,
-                    radioGroup: state.isSelected,
-                    textLabel: AppString.enterHHANumber.val,
-                    textController: hhaController,
-                    datePickerLabel: AppString.expiryDate.val,
-                    dateController: hhaDateController,
-                    datePickerValidation: AppString.emptyExpiry.val,
-                    onTap: () {},
-                    onYesChanged: (val) {
-                      print("selected value in yes : $val");
-                      widget.onboardingBloc.add(OnboardingEvent.radioHHA(val!));
-                    },
-                    onNoChanged: (val) {
-                      print("selected value in no : $val");
-                      widget.onboardingBloc.add(OnboardingEvent.radioHHA(val!));
-                    },
-                  ),
-                  /*CustomSizedBox(height: DBL.twenty.val),
-                ItemRowWidget(
-                  question: AppString.doYouHaveBLSCertification.val,
-                  radioGroup: OnboardingState.hhaNoSelected(),
-                  textLabel: AppString.enterCertificationNumber.val,
-                  textController: blsController,
-                  datePickerLabel: AppString.expiryDate.val,
-                  dateController: blsDateController,
-                  datePickerValidation: AppString.emptyExpiry.val,
-                  onTap: () {},
-                  onChanged: () {
-                    context
-                        .read<OnboardingBloc>()
-                        .add(OnboardingEvent.radioHHANo());
-                  },
-                ),
-                CustomSizedBox(height: DBL.twenty.val),
-                ItemRowWidget(
-                  question: AppString.TBPPDTest.val,
-                  radioGroup: OnboardingState.hhaNoSelected(),
-                  textLabel: AppString.result.val,
-                  textController: tbPpdController,
-                  datePickerLabel: AppString.date.val,
-                  dateController: tbPpdDateController,
-                  datePickerValidation: AppString.emptyDate.val,
-                  onTap: () {},
-                  onChanged: () {
-                    print("TB radio working");
-                    context
-                        .read<OnboardingBloc>()
-                        .add(OnboardingEvent.radioHHANo());
-                  },
-                ),
-                CustomSizedBox(height: DBL.twenty.val),
-                ItemRowWidget(
-                  question: AppString.covid19Vaccination.val,
-                  radioGroup: OnboardingState.hhaNoSelected(),
-                  textLabel: "",
-                  textController: covidController,
-                  datePickerLabel: AppString.date.val,
-                  dateController: covidDateController,
-                  datePickerValidation: AppString.emptyDate.val,
-                  onTap: () {},
-                  onChanged: () {
-                    print("covid radio working");
-                    context
-                        .read<OnboardingBloc>()
-                        .add(OnboardingEvent.radioHHANo());
-                  },
-                ),*/
-                ],
-              )),
+              child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.start,
+            children: [
+              _topArea(context),
+              ItemRowWidget(
+                onRegisterTap: () {},
+                selectedValue: state.isHHASelected,
+                state: state,
+                question: AppString.doYouHaveHHAReg.val,
+                radioGroup: state.isHHASelected,
+                textLabel: AppString.enterHHANumber.val,
+                textController: hhaController,
+                datePickerLabel: AppString.expiryDate.val,
+                dateController: hhaDateController,
+                datePickerValidation: AppString.emptyExpiry.val,
+                onUpoladTap: () {},
+                onChanged: (val) {
+                  print("selected value in yes : $val");
+                  onboardingBloc.add(OnboardingEvent.radioHHA(val ?? 0));
+                },
+              ),
+              CustomSizedBox(height: DBL.twenty.val),
+              ItemRowWidget(
+                onRegisterTap: () {},
+                selectedValue: state.isBLSSelected,
+                state: state,
+                question: AppString.doYouHaveBLSCertification.val,
+                radioGroup: state.isBLSSelected,
+                textLabel: AppString.enterCertificationNumber.val,
+                textController: blsController,
+                datePickerLabel: AppString.expiryDate.val,
+                dateController: blsDateController,
+                datePickerValidation: AppString.emptyExpiry.val,
+                onUpoladTap: () {},
+                onChanged: (val) {
+                  onboardingBloc.add(OnboardingEvent.radioBLS(val ?? 0));
+                },
+              ),
+              CustomSizedBox(height: DBL.twenty.val),
+              ItemRowWidget(
+                onRegisterTap: () {},
+                selectedValue: state.isTBSelected,
+                state: state,
+                question: AppString.TBPPDTest.val,
+                radioGroup: state.isTBSelected,
+                textLabel: AppString.result.val,
+                textController: tbPpdController,
+                datePickerLabel: AppString.date.val,
+                dateController: tbPpdDateController,
+                datePickerValidation: AppString.emptyDate.val,
+                onUpoladTap: () {},
+                onChanged: (val) {
+                  onboardingBloc.add(OnboardingEvent.radioTB(val ?? 0));
+                },
+              ),
+              CustomSizedBox(height: DBL.twenty.val),
+              ItemRowWidget(
+                onRegisterTap: () {},
+                selectedValue: state.isCovidSelected,
+                state: state,
+                question: AppString.covid19Vaccination.val,
+                radioGroup: state.isCovidSelected,
+                textLabel: "",
+                textController: covidController,
+                datePickerLabel: AppString.date.val,
+                dateController: covidDateController,
+                datePickerValidation: AppString.emptyDate.val,
+                onUpoladTap: () {},
+                onChanged: (val) {
+                  print("covid radio working");
+                  onboardingBloc.add(OnboardingEvent.radioCovid(val ?? 0));
+                },
+              ),
+            ],
+          )),
         );
       },
     );
   }
 
-  _topArea() {
+  _topArea(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomSizedBox(height: DBL.ten.val),
-        CustomText3(
+        CustomText(
           AppString.qualificationAndTestResult.val,
           softWrap: true,
           style: TS().gRoboto(

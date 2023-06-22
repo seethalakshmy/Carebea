@@ -23,19 +23,23 @@ class DocumentTypeDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomSizedBox(width: DBL.twoEighty.val,
+    return CustomSizedBox(
+      width: DBL.twoEighty.val,
       child: DropdownWidget(
           hint: AppString.selectDocumentType.val,
           errorText: errorText,
-          child: CustomText3( selectedValue ?? ""),
+          child: CustomText(selectedValue ?? ""),
           items: items
               .map((e) => DropdownItem(
                     value: e.name ?? "",
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 10),
-                      child: CustomText3( e.name ?? "",
-                        style: TS().gRoboto(color: AppColor.black.val,),
+                      child: CustomText(
+                        e.name ?? "",
+                        style: TS().gRoboto(
+                          color: AppColor.black.val,
+                        ),
                       ),
                     ),
                   ))

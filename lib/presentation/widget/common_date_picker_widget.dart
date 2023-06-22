@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/enum.dart';
 import '../../core/text_styles.dart';
 import '../../core/utility.dart';
-import '../cargiver_detail/widgets/svg_text.dart';
+import '../caregiver_detail/widgets/svg_text.dart';
 import 'custom_container.dart';
 import 'custom_sizedbox.dart';
 import 'custom_text.dart';
@@ -32,7 +32,7 @@ class _CommonDatePickerWidgetState extends State<CommonDatePickerWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText3(widget.label,
+        CustomText(widget.label,
             style: TS().gRoboto(
                 fontWeight: FW.w400.val,
                 color: AppColor.label.val,

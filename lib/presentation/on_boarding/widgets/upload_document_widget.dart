@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/enum.dart';
 import '../../../core/text_styles.dart';
-import '../../cargiver_detail/widgets/svg_text.dart';
+import '../../caregiver_detail/widgets/svg_text.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_sizedbox.dart';
 import '../../widget/custom_text.dart';
@@ -38,7 +38,7 @@ class UploadDocumentWidget extends StatelessWidget {
                     name: "",
                   ),
                 ),
-                CustomText3(
+                CustomText(
                   AppString.uploadDocument.val,
                   style: TS().gRoboto(
                       fontWeight: FW.w500.val,

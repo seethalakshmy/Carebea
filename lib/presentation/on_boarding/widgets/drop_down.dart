@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../core/enum.dart';
 import '../../../core/text_styles.dart';
-import '../../widget/custom_sizedbox.dart';
 
 class DropdownWidget<T> extends StatefulWidget {
   /// the child widget for the button, this will be ignored if text is supplied
@@ -145,9 +144,10 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
         SizedBox(
           height: 6,
         ),
-        CustomText3(
+        CustomText(
           widget.errorText ?? "",
-          style: TS().gPoppins(fontSize: FS.font11.val,color: AppColor.red.val),
+          style:
+              TS().gPoppins(fontSize: FS.font11.val, color: AppColor.red.val),
         ),
       ],
     );

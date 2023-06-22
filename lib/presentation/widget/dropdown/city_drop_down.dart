@@ -1,4 +1,3 @@
-import 'package:admin_580_tech/core/custom_text.dart';
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +15,8 @@ class CityDropDown extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomText3(
-           AppString.city.val,
+        CustomText(
+          AppString.city.val,
           style: TS().gRoboto(color: AppColor.label.val),
         ),
         SizedBox(
@@ -37,8 +36,8 @@ class CityDropDown extends StatelessWidget {
           height: 50,
           child: Row(
             children: [
-              CustomText3(
-                 cityName,
+              CustomText(
+                cityName,
                 style: TS().gRoboto(color: AppColor.black.val),
               ),
               Spacer(),
@@ -52,10 +51,8 @@ class CityDropDown extends StatelessWidget {
         SizedBox(
           height: 4,
         ),
-        CustomText3(
-           errorText ?? "",
-          style: TS().gRoboto(color: AppColor.red.val)
-        )
+        CustomText(errorText ?? "",
+            style: TS().gRoboto(color: AppColor.red.val))
       ],
     );
   }

@@ -119,7 +119,7 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
           ? CrossAxisAlignment.start
           : CrossAxisAlignment.center,
       children: [
-        CustomText3(
+        CustomText(
           AppString.basicDetails.val,
           style: TS().gRoboto(
               fontSize:
@@ -254,12 +254,12 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        CustomText3(labelName,
+        CustomText(labelName,
             style: TS().gRoboto(
                 fontWeight: FW.w400.val,
                 color: AppColor.label.val,
                 fontSize: FS.font16.val)),
-        CustomText3(
+        CustomText(
           "*",
           style: TS().gRoboto(color: AppColor.error.val),
         )

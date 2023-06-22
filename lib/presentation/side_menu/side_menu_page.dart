@@ -19,7 +19,6 @@ import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/string.dart';
 import '../caregiver_creation/caregiver_creation_page.dart';
 import '../caregiver_detail/caregiver_detail_page.dart';
 import '../caregivers/caregivers_page.dart';
@@ -449,7 +448,7 @@ class _MenuBarState extends State<SideMenuPage> {
       return 6;
     } else if (route == AppString.caregiverCreation.val) {
       return 7;
-    }else if (route == AppString.onBoarding.val) {
+    } else if (route == AppString.onBoarding.val) {
       return 8;
     }
 
@@ -501,7 +500,7 @@ class _MenuBarState extends State<SideMenuPage> {
       return const CareGiverProfilePage();
     } else if (index == 7) {
       return const CaregiverCreationPage();
-    }else if (index == 8) {
+    } else if (index == 8) {
       return const OnboardingPage();
     }
     // else if (index == 3) {

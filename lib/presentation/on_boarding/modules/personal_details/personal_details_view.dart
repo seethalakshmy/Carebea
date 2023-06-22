@@ -9,7 +9,7 @@ import '../../../../application/bloc/onboarding/onboarding_bloc.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
-import '../../../cargiver_detail/widgets/svg_text.dart';
+import '../../../caregiver_detail/widgets/svg_text.dart';
 import '../../../widget/common_date_picker_widget.dart';
 import '../../../widget/custom_button.dart';
 import '../../../widget/custom_container.dart';
@@ -58,7 +58,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomSizedBox(height: DBL.ten.val),
-            CustomText3(
+            CustomText(
               AppString.personalDetails.val,
               softWrap: true,
               style: TS().gRoboto(
@@ -190,7 +190,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         ),
         CustomSizedBox(height: DBL.six.val),
         Center(
-          child: CustomText3(
+          child: CustomText(
             AppString.uploadYourProfilePhoto.val,
             style: TS().gRoboto(
                 fontSize: FS.font14.val,
@@ -461,7 +461,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   }
 
   _labelWidget(String label) {
-    return CustomText3(label,
+    return CustomText(label,
         style: TS().gRoboto(
             fontWeight: FW.w400.val,
             color: AppColor.label.val,

@@ -40,7 +40,7 @@ class _DocumentDetailsViewState extends State<DocumentDetailsView> {
               ? CrossAxisAlignment.start
               : CrossAxisAlignment.center,
       children: [
-        CustomText3(
+        CustomText(
           AppString.documentDetails.val,
           style: TS().gRoboto(
             fontWeight: FW.w500.val,
@@ -49,7 +49,7 @@ class _DocumentDetailsViewState extends State<DocumentDetailsView> {
           ),
         ),
         CustomSizedBox(height: DBL.eight.val),
-        CustomText3(
+        CustomText(
           AppString.documentInfoMsg.val,
           style: TS().gRoboto(
             fontSize: FS.font11.val,
@@ -86,7 +86,7 @@ class _DocumentDetailsViewState extends State<DocumentDetailsView> {
   }
 
   _labelWidget(String label) {
-    return CustomText3(label,
+    return CustomText(label,
         style: TS().gRoboto(
             fontWeight: FW.w400.val,
             color: AppColor.label.val,
