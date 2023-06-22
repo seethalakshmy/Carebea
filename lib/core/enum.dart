@@ -8,6 +8,7 @@ enum AppString {
   userProfile("User Profile"),
   backToDashBoard("Back to Dashboard"),
   emailAddress("Email Address"),
+  email("Email"),
   basicServices("Basic Services"),
   specialServices("Special Services"),
   password("Password"),
@@ -39,6 +40,8 @@ enum AppString {
   onGoingServiceRequest("Ongoing Service Request"),
   upcomingServiceRequest("Upcoming Service Request"),
   transactionDetails("Transaction Details"),
+  caregiverCreation("Caregiver Creation"),
+  onBoarding("On-boarding"),
   id("ID"),
   slNo("SL No"),
   firstName("First Name"),
@@ -54,6 +57,7 @@ enum AppString {
   newRequest("New Request"),
   activeCareAmbassador("Active Care Ambassador"),
   phoneNumber("Phone Number"),
+  mobileNumber("Mobile Number"),
   status("Status"),
   serviceFee("Service Fee"),
   time("Time"),
@@ -120,6 +124,9 @@ enum AppString {
   overallTransactions("Overall Transactions"),
   allTransactions("All Transactions"),
   cancel("Cancel"),
+  save("Save"),
+  yes("Yes"),
+  no("No"),
   noUsersFound("No Users found!"),
   profileCompletion("Profile Completion"),
   logout("Logout"),
@@ -156,7 +163,6 @@ enum AppString {
   city("City"),
   state("State"),
   zip("Zip"),
-  email("Email"),
   documentDetails("Document Details"),
   documentUploaded("Document Uploaded"),
   documentNumber("Document Number"),
@@ -167,7 +173,6 @@ enum AppString {
   tBAndPPDTest("TB/PPD Test"),
   dob("Date of Birth"),
   gender("Gender"),
-  mobileNumber("Mobile Number"),
   alternativeMobileNumber("Alternative Mobile Number"),
   covid19Vaccination("COVID - 19 Vaccination"),
   takenDate("Taken Date"),
@@ -180,6 +185,36 @@ enum AppString {
   viewDetails("View Details"),
   provideTransportationOrRunErrands(
       "Are you willing to provide transportation or run errands in your vehicle"),
+  createNew("Create New"),
+  basicDetails("Basic Details"),
+  dateOfBirth("Date of Birth"),
+  ddmmyyyy("dd/mm/yyyy"),
+
+  personalDetails("Personal Details"),
+  qualificationAndTestResult("Qualifications & Test Result"),
+  uploadYourProfilePhoto("Upload Your Profile Photo"),
+  address("Address"),
+  addressLine("Address Line1"),
+  socialSecurityNumber("Social Security Number"),
+  documentInfoMsg(
+      "Document info: This information is collected for security purpose"),
+  selectDocumentType("Select Document Type  to Upload"),
+  documentNo("Document Number"),
+  date("Date"),
+  selectCity("Select City"),
+  selectState("Select State"),
+  searchCity("Search City"),
+  searchState("Search State"),
+  back("Back"),
+
+  doYouHaveHHAReg("Do you have HHA registration?"),
+  enterHHANumber("Enter HHA Number"),
+  doYouHaveBLSCertification("Do you have BLS CPR/First Aid Certification?"),
+  enterCertificationNumber("Enter Certification Number"),
+  TBPPDTest("TB/PPD Test"),
+  clickHereToRegister("Click here to register"),
+  pleaseVisitDoctorProvideTBTest(
+      "Please visit your doctor that provide TB testing"),
 
   ///validations
   emptyEmail("Email address shouldn't be empty"),
@@ -187,7 +222,24 @@ enum AppString {
   emptyPassword("Password shouldn't be empty"),
   passwordLengthError("Password should be at least 8 characters"),
   emptyConfirmPassword("Confirm password shouldn't be empty"),
-  notMatchConfirmPassword("Confirm password doesn't match");
+  notMatchConfirmPassword("Confirm password doesn't match"),
+  emptyFName("First name shouldn't be empty"),
+  emptyLName("Last name shouldn't be empty"),
+  emptyMobile("Mobile number shouldn't be empty"),
+  validMobile("Mobile number should be 10 digits"),
+  uploadDocument("Upload the document"),
+  emptyDOB("Date of birth shouldn't be empty"),
+  emptyExpiry("Expiry date shouldn't be empty"),
+  emptyDate("Date shouldn't be empty"),
+  emptyGender("Please select your gender"),
+  emptyStreet("Please enter your street name"),
+  emptyState("Please select your state"),
+  emptyCity("Please select your city"),
+  emptyZip("Please enter zip code"),
+  emptySSN("Please enter social security number"),
+  emptyDocType("Please select the document type"),
+  emptyDocNo("Please enter the document number"),
+  emptyAddress("Please enter your address");
 
   final String val;
 
@@ -204,6 +256,7 @@ enum AppColor {
   black(Color(0xff000000)),
   black2(Color(0xff020E1A)),
   black3(Color(0xff1A1C25)),
+  black4(Color(0xff444444)),
   matBlack(Color(0xff324665)),
   matBlack2(Color(0xff596483)),
   matBlack3(Color(0xff1F374F)),
@@ -273,8 +326,9 @@ enum AppColor {
   warningDark(Color(0xffffb800)),
   errorDark(Color(0xffc7051b)),
   infoDark(Color(0xff03a9f4)),
+  skyBlueShade(Color(0xff29AECC)),
   dark(Color(0xff141414)),
-  transparent(Color(0x00000000));
+  transparent(Colors.transparent);
 
   final Color val;
 
@@ -302,6 +356,17 @@ enum IMG {
   refresh("assets/icons/ic_refresh.svg"),
   tick("assets/icons/ic_tick.svg"),
   notFound("assets/icons/ic_not_found.svg"),
+  calender("assets/icons/calender.svg"),
+  cameraIcon("assets/icons/camera_icon.svg"),
+  userAvatar("assets/icons/user_avatar.svg"),
+  addressSelectionIcon("assets/icons/address_section_icon.svg"),
+  iconClose("assets/icons/close.svg"),
+  iconSearch("assets/icons/search_icon.svg"),
+  iconUpload("assets/icons/uploadIcon.svg"),
+  exclamation("assets/icons/exclamation.svg"),
+
+  imageNotFound("assets/icons/image_not_found.png"),
+
   ssn("assets/icons/ic_ssn.svg"),
   warning("assets/icons/ic_warning.svg"),
   completed("assets/icons/ic_completed.svg"),
@@ -514,7 +579,9 @@ enum INT {
   fortyEight(48),
   fifty(50),
   eightyNine(89),
-  hundred(100);
+  hundred(100),
+
+  MAX_FILE_SIZE(20000000);
 
   final int val;
 

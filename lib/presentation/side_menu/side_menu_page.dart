@@ -9,6 +9,7 @@ import 'package:admin_580_tech/core/text_utils.dart';
 import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart';
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
+import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
@@ -18,6 +19,7 @@ import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../caregiver_creation/caregiver_creation_page.dart';
 import '../caregiver_detail/caregiver_detail_page.dart';
 import '../caregivers/caregivers_page.dart';
 import '../transaction_management/transaction_management_page.dart';
@@ -63,6 +65,8 @@ class _MenuBarState extends State<SideMenuPage> {
     UserManagementDetailRoute(),
     TransactionManagementRoute(),
     CareGiverProfileRoute(),
+    CaregiverCreationRoute(),
+    OnboardingRoute()
   ];
 
   @override
@@ -422,6 +426,7 @@ class _MenuBarState extends State<SideMenuPage> {
       path = "user-management";
     } else if (path == "/care-ambassador-detail" ||
         path == "/care-ambassador-profile") {
+    } else if (path == "/care-ambassador-detail") {
       path = "care-ambassador";
     }
     return items.keys.elementAt(index) == upperCase(path) ? true : false;
@@ -441,6 +446,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return 5;
     } else if (route == AppString.careAmbassadorProfile.val) {
       return 6;
+    } else if (route == AppString.caregiverCreation.val) {
+      return 7;
+    } else if (route == AppString.onBoarding.val) {
+      return 8;
     }
 
     // else if (route == Strings.dataTable) {
@@ -489,6 +498,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return const TransactionManagementPage();
     } else if (index == 6) {
       return const CareGiverProfilePage();
+    } else if (index == 7) {
+      return const CaregiverCreationPage();
+    } else if (index == 8) {
+      return const OnboardingPage();
     }
     // else if (index == 3) {
     //   return  InvoicePage();

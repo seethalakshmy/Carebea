@@ -27,7 +27,12 @@ class Responsive extends StatelessWidget {
           MediaQuery.of(context).size.width >= 650;
 
   static bool isWeb(BuildContext context) =>
+      MediaQuery.of(context).size.width < 1350 &&
       MediaQuery.of(context).size.width >= 1100;
+
+  static bool isLargeWeb(BuildContext context) =>
+      MediaQuery.of(context).size.width < 1800 &&
+      MediaQuery.of(context).size.width >= 1350;
 
  static bool isLg(context) =>
       MediaQuery.of(context).size.width <= 1250 ;

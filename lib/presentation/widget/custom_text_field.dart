@@ -1,6 +1,4 @@
-
 import 'package:admin_580_tech/core/enum.dart';
-import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:flutter/material.dart';
 
@@ -51,10 +49,10 @@ class CTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final int? maxLength;
   final Color? textColor;
-  final double?height;
-  final double ?width;
-  final String?hintText;
-  final TextStyle?hintStyle;
+  final double? height;
+  final double? width;
+  final String? hintText;
+  final TextStyle? hintStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +66,7 @@ class CTextField extends StatelessWidget {
         onChanged: onChanged,
         onFieldSubmitted: onSubmitted,
         maxLines: INT.one.val,
-        minLines:INT.one.val,
+        minLines: INT.one.val,
         onTap: onTap,
         keyboardType: keyBoardType,
         textCapitalization: textCapitalization,
@@ -76,35 +74,35 @@ class CTextField extends StatelessWidget {
         style: TextStyle(fontSize: 15, color: textColor),
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle:hintStyle,
-          suffixIconConstraints:  BoxConstraints(minWidth: DBL.fifty.val),
+          hintStyle: hintStyle,
+          suffixIconConstraints: BoxConstraints(minWidth: DBL.fifty.val),
           filled: true,
-          fillColor :AppColor.white.val,
+          fillColor: AppColor.white.val,
           suffixIcon: suffixIcon,
           isDense: true,
           errorText: errorText,
-          errorStyle:  TS().gPoppins(fontSize: FS.font11.val,),
+          errorStyle:
+              TS().gPoppins(fontSize: FS.font11.val, color: AppColor.red.val),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: AppColor.borderColor.val,
-              width: 1
-            ),
+            borderSide: BorderSide(color: AppColor.borderColor.val, width: 1),
             borderRadius: BorderRadius.circular(DBL.five.val),
           ),
           border: OutlineInputBorder(
-            borderSide:  BorderSide(color: AppColor.primaryColor.val,),
+            borderSide: BorderSide(
+              color: AppColor.primaryColor.val,
+            ),
             borderRadius: BorderRadius.circular(DBL.five.val),
           ),
-          disabledBorder:OutlineInputBorder(
-            borderSide:  BorderSide(color: AppColor.primaryColor.val),
+          disabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColor.primaryColor.val),
             borderRadius: BorderRadius.circular(DBL.five.val),
           ),
-          errorBorder:OutlineInputBorder(
-            borderSide:  BorderSide(color: AppColor.error.val),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColor.error.val),
             borderRadius: BorderRadius.circular(DBL.five.val),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide:  BorderSide(color: AppColor.primaryColor.val),
+            borderSide: BorderSide(color: AppColor.primaryColor.val),
             borderRadius: BorderRadius.circular(DBL.five.val),
           ),
         ),
