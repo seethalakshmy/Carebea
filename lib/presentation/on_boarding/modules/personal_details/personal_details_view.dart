@@ -11,6 +11,7 @@ import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
 import '../../../caregiver_detail/widgets/svg_text.dart';
 import '../../../widget/common_date_picker_widget.dart';
+import '../../../widget/common_next_or_cancel_buttons.dart';
 import '../../../widget/custom_button.dart';
 import '../../../widget/custom_container.dart';
 import '../../../widget/custom_sizedbox.dart';
@@ -418,46 +419,16 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   }
 
   _nextPrevButtonWidget() {
-    return CustomContainer(
-      width: MediaQuery.of(context).size.width,
-      alignment: Alignment.centerRight,
-      child: Row(
-        mainAxisAlignment: Responsive.isWeb(context) ||
-                Responsive.isLargeWeb(context) ||
-                Responsive.isTablet(context)
-            ? MainAxisAlignment.end
-            : MainAxisAlignment.center,
-        children: [
-          CustomButton(
-            height: 45,
-            minWidth: 120,
-            onPressed: () {
-              // context.router.navigate(const CareGiversRoute());
-            },
-            text: AppString.back.val,
-            color: AppColor.white.val,
-            textColor: AppColor.primaryColor.val,
-            borderWidth: 1,
-          ),
-          const CustomSizedBox(width: 20),
-          CustomButton(
-            height: 45,
-            minWidth: 120,
-            onPressed: () {
-              //checkInputData();
-              setState(() {
-                nextClicked = true;
-                widget.pageController
-                    .jumpToPage(widget.pageController.page!.toInt() + 1);
-              });
-            },
-            text: AppString.next.val,
-            color: AppColor.primaryColor.val,
-            textColor: AppColor.white.val,
-          ),
-        ],
-      ),
-    );
+    return CommonNextOrCancelButtons(leftButtonName: AppString.back.val,rightButtonName: AppString.next.val,onLeftButtonPressed: () {
+      // context.router.navigate(const CareGiversRoute());
+    },onRightButtonPressed: () {
+      //checkInputData();
+      setState(() {
+        nextClicked = true;
+        widget.pageController
+            .jumpToPage(widget.pageController.page!.toInt() + 1);
+      });
+    },);
   }
 
   _labelWidget(String label) {

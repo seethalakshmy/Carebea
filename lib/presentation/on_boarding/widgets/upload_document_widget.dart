@@ -4,7 +4,6 @@ import '../../../core/enum.dart';
 import '../../../core/text_styles.dart';
 import '../../caregiver_detail/widgets/svg_text.dart';
 import '../../widget/custom_container.dart';
-import '../../widget/custom_sizedbox.dart';
 import '../../widget/custom_text.dart';
 
 class UploadDocumentWidget extends StatelessWidget {
@@ -23,10 +22,12 @@ class UploadDocumentWidget extends StatelessWidget {
       splashColor: Colors.transparent,
       child: CustomContainer(
         width: width ?? double.infinity,
+        height: 50,
+        alignment: Alignment.center,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomSizedBox(height: DBL.twenty.val),
             Row(
               children: [
                 CustomContainer(
