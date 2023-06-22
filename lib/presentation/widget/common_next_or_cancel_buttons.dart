@@ -26,11 +26,10 @@ class CommonNextOrCancelButtons extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       alignment: Alignment.centerRight,
       child: Row(
-        mainAxisAlignment: Responsive.isWeb(context) ||
-                Responsive.isLargeWeb(context) ||
-                Responsive.isTablet(context)
-            ? MainAxisAlignment.end
-            : MainAxisAlignment.center,
+        mainAxisAlignment:
+            Responsive.isWeb(context) || Responsive.isTablet(context)
+                ? MainAxisAlignment.end
+                : MainAxisAlignment.center,
         children: [
           CustomButton(
             height: 45,

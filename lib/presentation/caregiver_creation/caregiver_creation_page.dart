@@ -214,10 +214,9 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
                 ),
               ),
               Row(
-                mainAxisAlignment:
-                    Responsive.isWeb(context) || Responsive.isLargeWeb(context)
-                        ? MainAxisAlignment.end
-                        : MainAxisAlignment.center,
+                mainAxisAlignment: Responsive.isWeb(context)
+                    ? MainAxisAlignment.end
+                    : MainAxisAlignment.center,
                 children: [
                   CustomButton(
                     height: 45,

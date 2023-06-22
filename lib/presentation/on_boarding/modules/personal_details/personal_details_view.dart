@@ -12,7 +12,6 @@ import '../../../../core/text_styles.dart';
 import '../../../caregiver_detail/widgets/svg_text.dart';
 import '../../../widget/common_date_picker_widget.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
-import '../../../widget/custom_button.dart';
 import '../../../widget/custom_container.dart';
 import '../../../widget/custom_sizedbox.dart';
 import '../../../widget/custom_text.dart';
@@ -77,7 +76,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
               color: AppColor.lightGrey.val,
             ),
             CustomSizedBox(height: DBL.twenty.val),
-            Responsive.isLargeWeb(context) || Responsive.isWeb(context)
+            Responsive.isWeb(context)
                 ? Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -137,16 +136,16 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
       FocusNode _dateFocusNode,
       TextEditingController _dateController) {
     return CustomContainer(
-      height: Responsive.isLargeWeb(context)
+      height: /*Responsive.isLargeWeb(context)
           ? 750
-          : Responsive.isWeb(context)
-              ? 650
-              : 550,
+          : */
+          Responsive.isWeb(context) ? 650 : 550,
       alignment:
           Responsive.isWeb(context) ? Alignment.centerLeft : Alignment.center,
-      width: Responsive.isLargeWeb(context)
+      width: /*Responsive.isLargeWeb(context)
           ? MediaQuery.of(context).size.width * 0.6
-          : Responsive.isWeb(context)
+          : */
+          Responsive.isWeb(context)
               ? MediaQuery.of(context).size.width * 0.52
               : MediaQuery.of(context).size.width,
       child: SingleChildScrollView(
@@ -154,10 +153,9 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           formKey: _formKey,
           autoValidateMode: _validateMode,
           child: Wrap(
-            alignment:
-                Responsive.isLargeWeb(context) || Responsive.isWeb(context)
-                    ? WrapAlignment.start
-                    : WrapAlignment.center,
+            alignment: Responsive.isWeb(context)
+                ? WrapAlignment.start
+                : WrapAlignment.center,
             spacing: 20,
             children: [
               _dateWidget(),
@@ -419,16 +417,21 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   }
 
   _nextPrevButtonWidget() {
-    return CommonNextOrCancelButtons(leftButtonName: AppString.back.val,rightButtonName: AppString.next.val,onLeftButtonPressed: () {
-      // context.router.navigate(const CareGiversRoute());
-    },onRightButtonPressed: () {
-      //checkInputData();
-      setState(() {
-        nextClicked = true;
-        widget.pageController
-            .jumpToPage(widget.pageController.page!.toInt() + 1);
-      });
-    },);
+    return CommonNextOrCancelButtons(
+      leftButtonName: AppString.back.val,
+      rightButtonName: AppString.next.val,
+      onLeftButtonPressed: () {
+        // context.router.navigate(const CareGiversRoute());
+      },
+      onRightButtonPressed: () {
+        //checkInputData();
+        setState(() {
+          nextClicked = true;
+          widget.pageController
+              .jumpToPage(widget.pageController.page!.toInt() + 1);
+        });
+      },
+    );
   }
 
   _labelWidget(String label) {
