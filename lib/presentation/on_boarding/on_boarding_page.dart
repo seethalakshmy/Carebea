@@ -13,6 +13,7 @@ import '../widget/custom_sizedbox.dart';
 import '../widget/custom_text.dart';
 import '../widget/header_view.dart';
 import 'modules/personal_details/personal_details_view.dart';
+import 'modules/preference/preference_view.dart';
 import 'modules/qualification_details/qialification_view.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -62,7 +63,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
         pageController: controller,
       ),
       QualificationView(
-          state: _onboardingBloc.state, onboardingBloc: _onboardingBloc),
+          state: _onboardingBloc.state,
+          onboardingBloc: _onboardingBloc,
+          pageController: controller),
+      const PreferenceView(),
     ];
     setState(() {
       totalPages = pages.length;
