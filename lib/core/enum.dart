@@ -210,6 +210,11 @@ enum AppString {
   backGroundVerification("Background Verification"),
   certificateVerification("Certificate Verification"),
 
+  lessThanAYear("Less than 1 year"),
+  oneToTwoYear("1 - 2 year"),
+  twoToFiveYear("2 - 5 year"),
+  fiveAndMore("5 and more"),
+
   doYouHaveHHAReg("Do you have HHA registration?"),
   enterHHANumber("Enter HHA Number"),
   doYouHaveBLSCertification("Do you have BLS CPR/First Aid Certification?"),
@@ -218,6 +223,9 @@ enum AppString {
   clickHereToRegister("Click here to register"),
   pleaseVisitDoctorProvideTBTest(
       "Please visit your doctor that provide TB testing"),
+
+  knownLanguages("Select your known languages"),
+  ifOthersPlzSpecify("If others, please specify"),
 
   ///validations
   emptyEmail("Email address shouldn't be empty"),
@@ -242,7 +250,10 @@ enum AppString {
   emptySSN("Please enter social security number"),
   emptyDocType("Please select the document type"),
   emptyDocNo("Please enter the document number"),
-  emptyAddress("Please enter your address");
+  emptyAddress("Please enter your address"),
+  emptyHHANo("Please enter HHA number"),
+  emptyBLSNo("Please enter BLS certification number"),
+  emptyTBNo("Please enter TB result number");
 
   final String val;
 

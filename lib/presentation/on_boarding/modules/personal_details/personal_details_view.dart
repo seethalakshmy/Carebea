@@ -3,6 +3,7 @@ import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/profile_picture_widget.dart';
 import 'package:admin_580_tech/presentation/on_boarding/widgets/upload_document_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../application/bloc/onboarding/onboarding_bloc.dart';
@@ -10,6 +11,7 @@ import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
 import '../../../caregiver_detail/widgets/svg_text.dart';
+import '../../../routes/app_router.gr.dart';
 import '../../../widget/common_date_picker_widget.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
 import '../../../widget/custom_container.dart';
@@ -52,8 +54,12 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomContainer(
-      child: CommonPaddingWidget(
+    final isLargeWeb = MediaQuery.of(context).size.width > 1350 &&
+        MediaQuery.of(context).size.width < 1800;
+    final isWeb = MediaQuery.of(context).size.width >= 1100 &&
+        MediaQuery.of(context).size.width <= 1350;
+    return CommonPaddingWidget(
+      child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -89,7 +95,9 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                           socialSecurityNumberController,
                           context,
                           _dateFocusNode,
-                          _dateController)
+                          _dateController,
+                          isLargeWeb,
+                          isWeb),
                     ],
                   )
                 : Column(
@@ -106,7 +114,9 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                           socialSecurityNumberController,
                           context,
                           _dateFocusNode,
-                          _dateController)
+                          _dateController,
+                          isLargeWeb,
+                          isWeb),
                     ],
                   ),
 
@@ -121,6 +131,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
 
                   }
                 }),*/
+            _nextPrevButtonWidget(),
           ],
         ),
       ),
@@ -133,19 +144,21 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
       TextEditingController zipController,
       TextEditingController socialSecurityNumberController,
       BuildContext context,
-      FocusNode _dateFocusNode,
-      TextEditingController _dateController) {
+      FocusNode dateFocusNode,
+      TextEditingController dateController,
+      bool isLargeWeb,
+      bool isWeb) {
     return CustomContainer(
-      height: /*Responsive.isLargeWeb(context)
+      height: isLargeWeb
           ? 750
-          : */
-          Responsive.isWeb(context) ? 650 : 550,
+          : Responsive.isWeb(context)
+              ? 650
+              : 550,
       alignment:
           Responsive.isWeb(context) ? Alignment.centerLeft : Alignment.center,
-      width: /*Responsive.isLargeWeb(context)
+      width: isLargeWeb
           ? MediaQuery.of(context).size.width * 0.6
-          : */
-          Responsive.isWeb(context)
+          : isWeb
               ? MediaQuery.of(context).size.width * 0.52
               : MediaQuery.of(context).size.width,
       child: SingleChildScrollView(
@@ -172,8 +185,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                 nextClicked: nextClicked,
               ),
               _uploadDocumentWidget(),
-              _nextPrevButtonWidget(),
-              CustomSizedBox(height: DBL.thirtyFive.val),
+
+              //  CustomSizedBox(height: DBL.thirtyFive.val),
             ],
           ),
         ),
@@ -227,7 +240,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         CustomSizedBox(height: DBL.twelve.val),
         GenderDropDown(
           onChange: (value) {},
-          items: [],
+          items: const [],
           errorText: nextClicked
               ? selectedGender == ""
                   ? AppString.emptyGender.val
@@ -331,7 +344,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                   : ""
               : "",
           stateName: "",
-          items: [],
+          items: const [],
           onChange: (value) {},
           selectedValue: selectedState,
         ),
@@ -352,7 +365,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                   : ""
               : "",
           stateName: "",
-          items: [],
+          items: const [],
           onChange: (value) {},
           selectedValue: "",
         ),
@@ -424,7 +437,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         // context.router.navigate(const CareGiversRoute());
       },
       onRightButtonPressed: () {
-        //checkInputData();
+        checkInputData();
         setState(() {
           nextClicked = true;
           widget.pageController
@@ -496,27 +509,29 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
     }
     if (_formKey.currentState!.validate()) {
       setState(() {
-        // context.router.navigate(const OnboardingRoute());
+        context.router.navigate(const OnboardingRoute());
       });
     }
   }
-}
 
-String _formatSSN(String ssn) {
-  ssn = ssn.replaceAll(RegExp(r'[^0-9]'), ''); // Remove non-numeric characters
-  if (ssn.length > 3) {
-    ssn = ssn.substring(0, 3) + '-' + ssn.substring(3);
+  String _formatSSN(String ssn) {
+    ssn =
+        ssn.replaceAll(RegExp(r'[^0-9]'), ''); // Remove non-numeric characters
+    if (ssn.length > 3) {
+      ssn = '${ssn.substring(0, 3)}-${ssn.substring(3)}';
+    }
+    if (ssn.length > 6) {
+      ssn = '${ssn.substring(0, 6)}-${ssn.substring(6)}';
+    }
+    return ssn;
   }
-  if (ssn.length > 6) {
-    ssn = ssn.substring(0, 6) + '-' + ssn.substring(6);
-  }
-  return ssn;
-}
 
-String _formatZip(String zip) {
-  zip = zip.replaceAll(RegExp(r'[^0-9]'), ''); // Remove non-numeric characters
-  if (zip.length > 5) {
-    zip = zip.substring(0, 5) + '-' + zip.substring(5);
+  String _formatZip(String zip) {
+    zip =
+        zip.replaceAll(RegExp(r'[^0-9]'), ''); // Remove non-numeric characters
+    if (zip.length > 5) {
+      zip = '${zip.substring(0, 5)}-${zip.substring(5)}';
+    }
+    return zip;
   }
-  return zip;
 }

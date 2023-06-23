@@ -13,7 +13,7 @@ import '../../../../widget/custom_text_field.dart';
 import '../../../widgets/upload_document_widget.dart';
 
 class ItemRowWidget extends StatelessWidget {
-  const ItemRowWidget({
+  ItemRowWidget({
     Key? key,
     required this.radioGroup,
     required this.textController,
@@ -27,6 +27,7 @@ class ItemRowWidget extends StatelessWidget {
     required this.onChanged,
     required this.state,
     required this.selectedValue,
+    required this.validator,
   }) : super(key: key);
   final String question;
   final int radioGroup;
@@ -40,10 +41,10 @@ class ItemRowWidget extends StatelessWidget {
   final Function() onUpoladTap;
   final Function() onRegisterTap;
   final OnboardingState state;
+  final FormFieldValidator<String> validator;
 
   @override
   Widget build(BuildContext context) {
-    print("width is : ${MediaQuery.of(context).size.width}");
     return CustomContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,6 +92,7 @@ class ItemRowWidget extends StatelessWidget {
                   CTextField(
                     width: DBL.twoEighty.val,
                     controller: textController,
+                    validator: validator,
                   )
                 ],
               ),
@@ -130,6 +132,7 @@ class ItemRowWidget extends StatelessWidget {
                   CTextField(
                     width: DBL.twoEighty.val,
                     controller: textController,
+                    validator: validator,
                   )
                 ],
               )
