@@ -1,9 +1,12 @@
 import 'dart:ui';
 
+import 'package:admin_580_tech/application/bloc/caregivers/caregivers_bloc.dart';
 import 'package:admin_580_tech/core/hive/hive_utils.dart';
 import 'package:admin_580_tech/core/theme.dart';
+import 'package:admin_580_tech/infrastructure/caregivers/caregivers_repository.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 
 import 'core/config/environment.dart';
@@ -45,22 +48,28 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerDelegate: _appRouter.delegate(),
-      routeInformationParser: _appRouter.defaultRouteParser(),
-      routeInformationProvider: _appRouter.routeInfoProvider(),
-      debugShowCheckedModeBanner: false,
-      theme: ThemeClass.themeData( context),
-      scrollBehavior: const MaterialScrollBehavior().copyWith(
-        dragDevices: {
-          PointerDeviceKind.mouse,
-          PointerDeviceKind.touch,
-          PointerDeviceKind.stylus,
-          PointerDeviceKind.trackpad,
-          PointerDeviceKind.unknown
-        },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) => CareGiversBloc(CareGiversRepository())),
+      ],
+      child: MaterialApp.router(
+        routerDelegate: _appRouter.delegate(),
+        routeInformationParser: _appRouter.defaultRouteParser(),
+        routeInformationProvider: _appRouter.routeInfoProvider(),
+        debugShowCheckedModeBanner: false,
+        theme: ThemeClass.themeData(context),
+        scrollBehavior: const MaterialScrollBehavior().copyWith(
+          dragDevices: {
+            PointerDeviceKind.mouse,
+            PointerDeviceKind.touch,
+            PointerDeviceKind.stylus,
+            PointerDeviceKind.trackpad,
+            PointerDeviceKind.unknown
+          },
+        ),
+        title: 'Amagi Admin',
       ),
-      title: 'Amagi Admin',
     );
   }
 }

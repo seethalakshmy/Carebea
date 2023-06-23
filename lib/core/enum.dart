@@ -206,6 +206,9 @@ enum AppString {
   searchCity("Search City"),
   searchState("Search State"),
   back("Back"),
+  verificationProcess("Verification Process"),
+  backGroundVerification("Background Verification"),
+  certificateVerification("Certificate Verification"),
 
   doYouHaveHHAReg("Do you have HHA registration?"),
   enterHHANumber("Enter HHA Number"),
@@ -638,4 +641,13 @@ enum InOut {
   final int val;
 
   const InOut(this.val);
+}
+
+enum Verification {
+  verificationStart(0),
+  verificationStarted(1),
+  trainingStarted(2);
+
+  final int val;
+  const Verification(this.val);
 }

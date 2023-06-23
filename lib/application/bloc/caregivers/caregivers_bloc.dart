@@ -8,12 +8,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../domain/caregivers/model/Data.dart';
 import '../../../domain/caregivers/model/care_givers.dart';
 import '../../../domain/caregivers/model/types.dart';
+import '../../../domain/caregivers/model/verification_types.dart';
 import '../../../infrastructure/caregivers/caregivers_repository.dart';
 
 part 'caregivers_bloc.freezed.dart';
-
 part 'caregivers_event.dart';
-
 part 'caregivers_state.dart';
 
 class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
@@ -24,12 +23,21 @@ class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
     on<_GetCareGivers>(_getCareGivers);
     on<_IsUserActive>(_getUserActive);
     on<_IsSelectedTab>(_getSelectedTab);
+    on<_IsSelectedVerificationTab>(_getVerificationSelectedTab);
   }
 
   _getCareGivers(_GetCareGivers event, Emitter<CareGiversState> emit) async {
     final List<Types> typeList = [
       Types(id: 1, title: AppString.newRequest.val, isSelected: true),
       Types(id: 2, title: AppString.activeCareAmbassador.val, isSelected: false)
+    ];
+    final List<VerificationTypes> verificationTypeList = [
+      VerificationTypes(
+          id: 1, title: AppString.backGroundVerification.val, isSelected: true),
+      VerificationTypes(
+          id: 2,
+          title: AppString.certificateVerification.val,
+          isSelected: false)
     ];
     final Either<ApiErrorHandler, CareGiverResponse> homeResult =
         await careGiverListRepository.getCareGivers(
@@ -48,7 +56,11 @@ class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
           isLoading: false,
         );
       } else {
-        return state.copyWith(response: r, isLoading: false, types: typeList);
+        return state.copyWith(
+            response: r,
+            isLoading: false,
+            types: typeList,
+            verificationTypes: verificationTypeList);
       }
     });
     emit(
@@ -87,6 +99,24 @@ class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
       List<Types> types = List.from(typeList)..removeAt(index);
       types.insert(index, item.copyWith(isSelected: true));
       emit(state.copyWith(types: types, isLoading: true));
+    }
+  }
+
+  _getVerificationSelectedTab(
+      _IsSelectedVerificationTab event, Emitter<CareGiversState> emit) {
+    final state = this.state;
+    final verificationTypeList = state.verificationTypes;
+    VerificationTypes item = event.type;
+    final index = verificationTypeList.indexOf(item);
+    if (!item.isSelected) {
+      for (var element in verificationTypeList) {
+        element.isSelected = false;
+      }
+      List<VerificationTypes> verificationTypes =
+          List.from(verificationTypeList)..removeAt(index);
+      verificationTypes.insert(index, item.copyWith(isSelected: true));
+      emit(state.copyWith(
+          verificationTypes: verificationTypes, isLoading: false));
     }
   }
 }

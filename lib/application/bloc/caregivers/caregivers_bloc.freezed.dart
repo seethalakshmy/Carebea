@@ -23,6 +23,7 @@ mixin _$CareGiversEvent {
         getCareGivers,
     required TResult Function(Caregivers caregiver) isUserActive,
     required TResult Function(Types type) isSelectedTab,
+    required TResult Function(VerificationTypes type) isSelectedVerificationTab,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$CareGiversEvent {
         getCareGivers,
     TResult? Function(Caregivers caregiver)? isUserActive,
     TResult? Function(Types type)? isSelectedTab,
+    TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$CareGiversEvent {
         getCareGivers,
     TResult Function(Caregivers caregiver)? isUserActive,
     TResult Function(Types type)? isSelectedTab,
+    TResult Function(VerificationTypes type)? isSelectedVerificationTab,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -49,6 +52,8 @@ mixin _$CareGiversEvent {
     required TResult Function(_GetCareGivers value) getCareGivers,
     required TResult Function(_IsUserActive value) isUserActive,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_IsSelectedVerificationTab value)
+        isSelectedVerificationTab,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +61,8 @@ mixin _$CareGiversEvent {
     TResult? Function(_GetCareGivers value)? getCareGivers,
     TResult? Function(_IsUserActive value)? isUserActive,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_IsSelectedVerificationTab value)?
+        isSelectedVerificationTab,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +70,8 @@ mixin _$CareGiversEvent {
     TResult Function(_GetCareGivers value)? getCareGivers,
     TResult Function(_IsUserActive value)? isUserActive,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_IsSelectedVerificationTab value)?
+        isSelectedVerificationTab,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -210,6 +219,7 @@ class _$_GetCareGivers implements _GetCareGivers {
         getCareGivers,
     required TResult Function(Caregivers caregiver) isUserActive,
     required TResult Function(Types type) isSelectedTab,
+    required TResult Function(VerificationTypes type) isSelectedVerificationTab,
   }) {
     return getCareGivers(userId, page, limit, type, searchTerm, filterId);
   }
@@ -222,6 +232,7 @@ class _$_GetCareGivers implements _GetCareGivers {
         getCareGivers,
     TResult? Function(Caregivers caregiver)? isUserActive,
     TResult? Function(Types type)? isSelectedTab,
+    TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
   }) {
     return getCareGivers?.call(userId, page, limit, type, searchTerm, filterId);
   }
@@ -234,6 +245,7 @@ class _$_GetCareGivers implements _GetCareGivers {
         getCareGivers,
     TResult Function(Caregivers caregiver)? isUserActive,
     TResult Function(Types type)? isSelectedTab,
+    TResult Function(VerificationTypes type)? isSelectedVerificationTab,
     required TResult orElse(),
   }) {
     if (getCareGivers != null) {
@@ -248,6 +260,8 @@ class _$_GetCareGivers implements _GetCareGivers {
     required TResult Function(_GetCareGivers value) getCareGivers,
     required TResult Function(_IsUserActive value) isUserActive,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_IsSelectedVerificationTab value)
+        isSelectedVerificationTab,
   }) {
     return getCareGivers(this);
   }
@@ -258,6 +272,8 @@ class _$_GetCareGivers implements _GetCareGivers {
     TResult? Function(_GetCareGivers value)? getCareGivers,
     TResult? Function(_IsUserActive value)? isUserActive,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_IsSelectedVerificationTab value)?
+        isSelectedVerificationTab,
   }) {
     return getCareGivers?.call(this);
   }
@@ -268,6 +284,8 @@ class _$_GetCareGivers implements _GetCareGivers {
     TResult Function(_GetCareGivers value)? getCareGivers,
     TResult Function(_IsUserActive value)? isUserActive,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_IsSelectedVerificationTab value)?
+        isSelectedVerificationTab,
     required TResult orElse(),
   }) {
     if (getCareGivers != null) {
@@ -367,6 +385,7 @@ class _$_IsUserActive implements _IsUserActive {
         getCareGivers,
     required TResult Function(Caregivers caregiver) isUserActive,
     required TResult Function(Types type) isSelectedTab,
+    required TResult Function(VerificationTypes type) isSelectedVerificationTab,
   }) {
     return isUserActive(caregiver);
   }
@@ -379,6 +398,7 @@ class _$_IsUserActive implements _IsUserActive {
         getCareGivers,
     TResult? Function(Caregivers caregiver)? isUserActive,
     TResult? Function(Types type)? isSelectedTab,
+    TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
   }) {
     return isUserActive?.call(caregiver);
   }
@@ -391,6 +411,7 @@ class _$_IsUserActive implements _IsUserActive {
         getCareGivers,
     TResult Function(Caregivers caregiver)? isUserActive,
     TResult Function(Types type)? isSelectedTab,
+    TResult Function(VerificationTypes type)? isSelectedVerificationTab,
     required TResult orElse(),
   }) {
     if (isUserActive != null) {
@@ -405,6 +426,8 @@ class _$_IsUserActive implements _IsUserActive {
     required TResult Function(_GetCareGivers value) getCareGivers,
     required TResult Function(_IsUserActive value) isUserActive,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_IsSelectedVerificationTab value)
+        isSelectedVerificationTab,
   }) {
     return isUserActive(this);
   }
@@ -415,6 +438,8 @@ class _$_IsUserActive implements _IsUserActive {
     TResult? Function(_GetCareGivers value)? getCareGivers,
     TResult? Function(_IsUserActive value)? isUserActive,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_IsSelectedVerificationTab value)?
+        isSelectedVerificationTab,
   }) {
     return isUserActive?.call(this);
   }
@@ -425,6 +450,8 @@ class _$_IsUserActive implements _IsUserActive {
     TResult Function(_GetCareGivers value)? getCareGivers,
     TResult Function(_IsUserActive value)? isUserActive,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_IsSelectedVerificationTab value)?
+        isSelectedVerificationTab,
     required TResult orElse(),
   }) {
     if (isUserActive != null) {
@@ -512,6 +539,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
         getCareGivers,
     required TResult Function(Caregivers caregiver) isUserActive,
     required TResult Function(Types type) isSelectedTab,
+    required TResult Function(VerificationTypes type) isSelectedVerificationTab,
   }) {
     return isSelectedTab(type);
   }
@@ -524,6 +552,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
         getCareGivers,
     TResult? Function(Caregivers caregiver)? isUserActive,
     TResult? Function(Types type)? isSelectedTab,
+    TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
   }) {
     return isSelectedTab?.call(type);
   }
@@ -536,6 +565,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
         getCareGivers,
     TResult Function(Caregivers caregiver)? isUserActive,
     TResult Function(Types type)? isSelectedTab,
+    TResult Function(VerificationTypes type)? isSelectedVerificationTab,
     required TResult orElse(),
   }) {
     if (isSelectedTab != null) {
@@ -550,6 +580,8 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     required TResult Function(_GetCareGivers value) getCareGivers,
     required TResult Function(_IsUserActive value) isUserActive,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_IsSelectedVerificationTab value)
+        isSelectedVerificationTab,
   }) {
     return isSelectedTab(this);
   }
@@ -560,6 +592,8 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     TResult? Function(_GetCareGivers value)? getCareGivers,
     TResult? Function(_IsUserActive value)? isUserActive,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_IsSelectedVerificationTab value)?
+        isSelectedVerificationTab,
   }) {
     return isSelectedTab?.call(this);
   }
@@ -570,6 +604,8 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     TResult Function(_GetCareGivers value)? getCareGivers,
     TResult Function(_IsUserActive value)? isUserActive,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_IsSelectedVerificationTab value)?
+        isSelectedVerificationTab,
     required TResult orElse(),
   }) {
     if (isSelectedTab != null) {
@@ -589,12 +625,172 @@ abstract class _IsSelectedTab implements CareGiversEvent {
 }
 
 /// @nodoc
+abstract class _$$_IsSelectedVerificationTabCopyWith<$Res> {
+  factory _$$_IsSelectedVerificationTabCopyWith(
+          _$_IsSelectedVerificationTab value,
+          $Res Function(_$_IsSelectedVerificationTab) then) =
+      __$$_IsSelectedVerificationTabCopyWithImpl<$Res>;
+  @useResult
+  $Res call({VerificationTypes type});
+}
+
+/// @nodoc
+class __$$_IsSelectedVerificationTabCopyWithImpl<$Res>
+    extends _$CareGiversEventCopyWithImpl<$Res, _$_IsSelectedVerificationTab>
+    implements _$$_IsSelectedVerificationTabCopyWith<$Res> {
+  __$$_IsSelectedVerificationTabCopyWithImpl(
+      _$_IsSelectedVerificationTab _value,
+      $Res Function(_$_IsSelectedVerificationTab) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+  }) {
+    return _then(_$_IsSelectedVerificationTab(
+      null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as VerificationTypes,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
+  const _$_IsSelectedVerificationTab(this.type);
+
+  @override
+  final VerificationTypes type;
+
+  @override
+  String toString() {
+    return 'CareGiversEvent.isSelectedVerificationTab(type: $type)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_IsSelectedVerificationTab &&
+            (identical(other.type, type) || other.type == type));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, type);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_IsSelectedVerificationTabCopyWith<_$_IsSelectedVerificationTab>
+      get copyWith => __$$_IsSelectedVerificationTabCopyWithImpl<
+          _$_IsSelectedVerificationTab>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, int page, int limit, int type,
+            String? searchTerm, int? filterId)
+        getCareGivers,
+    required TResult Function(Caregivers caregiver) isUserActive,
+    required TResult Function(Types type) isSelectedTab,
+    required TResult Function(VerificationTypes type) isSelectedVerificationTab,
+  }) {
+    return isSelectedVerificationTab(type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, int page, int limit, int type,
+            String? searchTerm, int? filterId)?
+        getCareGivers,
+    TResult? Function(Caregivers caregiver)? isUserActive,
+    TResult? Function(Types type)? isSelectedTab,
+    TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
+  }) {
+    return isSelectedVerificationTab?.call(type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, int page, int limit, int type,
+            String? searchTerm, int? filterId)?
+        getCareGivers,
+    TResult Function(Caregivers caregiver)? isUserActive,
+    TResult Function(Types type)? isSelectedTab,
+    TResult Function(VerificationTypes type)? isSelectedVerificationTab,
+    required TResult orElse(),
+  }) {
+    if (isSelectedVerificationTab != null) {
+      return isSelectedVerificationTab(type);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGivers value) getCareGivers,
+    required TResult Function(_IsUserActive value) isUserActive,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_IsSelectedVerificationTab value)
+        isSelectedVerificationTab,
+  }) {
+    return isSelectedVerificationTab(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGivers value)? getCareGivers,
+    TResult? Function(_IsUserActive value)? isUserActive,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_IsSelectedVerificationTab value)?
+        isSelectedVerificationTab,
+  }) {
+    return isSelectedVerificationTab?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGivers value)? getCareGivers,
+    TResult Function(_IsUserActive value)? isUserActive,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_IsSelectedVerificationTab value)?
+        isSelectedVerificationTab,
+    required TResult orElse(),
+  }) {
+    if (isSelectedVerificationTab != null) {
+      return isSelectedVerificationTab(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _IsSelectedVerificationTab implements CareGiversEvent {
+  const factory _IsSelectedVerificationTab(final VerificationTypes type) =
+      _$_IsSelectedVerificationTab;
+
+  VerificationTypes get type;
+  @JsonKey(ignore: true)
+  _$$_IsSelectedVerificationTabCopyWith<_$_IsSelectedVerificationTab>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$CareGiversState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
   CareGiverResponse? get response => throw _privateConstructorUsedError;
   List<Types> get types => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+  List<VerificationTypes> get verificationTypes =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CareGiversStateCopyWith<CareGiversState> get copyWith =>
@@ -612,7 +808,8 @@ abstract class $CareGiversStateCopyWith<$Res> {
       bool isError,
       CareGiverResponse? response,
       List<Types> types,
-      String? error});
+      String? error,
+      List<VerificationTypes> verificationTypes});
 }
 
 /// @nodoc
@@ -633,6 +830,7 @@ class _$CareGiversStateCopyWithImpl<$Res, $Val extends CareGiversState>
     Object? response = freezed,
     Object? types = null,
     Object? error = freezed,
+    Object? verificationTypes = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -655,6 +853,10 @@ class _$CareGiversStateCopyWithImpl<$Res, $Val extends CareGiversState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      verificationTypes: null == verificationTypes
+          ? _value.verificationTypes
+          : verificationTypes // ignore: cast_nullable_to_non_nullable
+              as List<VerificationTypes>,
     ) as $Val);
   }
 }
@@ -672,7 +874,8 @@ abstract class _$$_CareGiversStateCopyWith<$Res>
       bool isError,
       CareGiverResponse? response,
       List<Types> types,
-      String? error});
+      String? error,
+      List<VerificationTypes> verificationTypes});
 }
 
 /// @nodoc
@@ -691,6 +894,7 @@ class __$$_CareGiversStateCopyWithImpl<$Res>
     Object? response = freezed,
     Object? types = null,
     Object? error = freezed,
+    Object? verificationTypes = null,
   }) {
     return _then(_$_CareGiversState(
       isLoading: null == isLoading
@@ -713,6 +917,10 @@ class __$$_CareGiversStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      verificationTypes: null == verificationTypes
+          ? _value._verificationTypes
+          : verificationTypes // ignore: cast_nullable_to_non_nullable
+              as List<VerificationTypes>,
     ));
   }
 }
@@ -725,8 +933,10 @@ class _$_CareGiversState implements _CareGiversState {
       required this.isError,
       required this.response,
       required final List<Types> types,
-      required this.error})
-      : _types = types;
+      required this.error,
+      required final List<VerificationTypes> verificationTypes})
+      : _types = types,
+        _verificationTypes = verificationTypes;
 
   @override
   final bool isLoading;
@@ -743,10 +953,16 @@ class _$_CareGiversState implements _CareGiversState {
 
   @override
   final String? error;
+  final List<VerificationTypes> _verificationTypes;
+  @override
+  List<VerificationTypes> get verificationTypes {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_verificationTypes);
+  }
 
   @override
   String toString() {
-    return 'CareGiversState(isLoading: $isLoading, isError: $isError, response: $response, types: $types, error: $error)';
+    return 'CareGiversState(isLoading: $isLoading, isError: $isError, response: $response, types: $types, error: $error, verificationTypes: $verificationTypes)';
   }
 
   @override
@@ -760,12 +976,20 @@ class _$_CareGiversState implements _CareGiversState {
             (identical(other.response, response) ||
                 other.response == response) &&
             const DeepCollectionEquality().equals(other._types, _types) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            const DeepCollectionEquality()
+                .equals(other._verificationTypes, _verificationTypes));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isError, response,
-      const DeepCollectionEquality().hash(_types), error);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      isError,
+      response,
+      const DeepCollectionEquality().hash(_types),
+      error,
+      const DeepCollectionEquality().hash(_verificationTypes));
 
   @JsonKey(ignore: true)
   @override
@@ -776,11 +1000,13 @@ class _$_CareGiversState implements _CareGiversState {
 
 abstract class _CareGiversState implements CareGiversState {
   const factory _CareGiversState(
-      {required final bool isLoading,
-      required final bool isError,
-      required final CareGiverResponse? response,
-      required final List<Types> types,
-      required final String? error}) = _$_CareGiversState;
+          {required final bool isLoading,
+          required final bool isError,
+          required final CareGiverResponse? response,
+          required final List<Types> types,
+          required final String? error,
+          required final List<VerificationTypes> verificationTypes}) =
+      _$_CareGiversState;
 
   @override
   bool get isLoading;
@@ -792,6 +1018,8 @@ abstract class _CareGiversState implements CareGiversState {
   List<Types> get types;
   @override
   String? get error;
+  @override
+  List<VerificationTypes> get verificationTypes;
   @override
   @JsonKey(ignore: true)
   _$$_CareGiversStateCopyWith<_$_CareGiversState> get copyWith =>

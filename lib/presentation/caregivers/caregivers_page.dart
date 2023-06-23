@@ -5,6 +5,7 @@ import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/caregivers/model/care_givers.dart';
 import 'package:admin_580_tech/domain/caregivers/model/types.dart';
+import 'package:admin_580_tech/domain/caregivers/model/verification_types.dart';
 import 'package:admin_580_tech/presentation/caregivers/widgets/tab_item.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
@@ -28,12 +29,14 @@ import '../../application/bloc/caregivers/caregivers_bloc.dart';
 import '../../domain/caregivers/model/caregiver_response.dart';
 import '../../infrastructure/caregivers/caregivers_repository.dart';
 import '../side_menu/side_menu_page.dart';
+import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/custom_dropdown.dart';
 import '../widget/custom_icon.dart';
 import '../widget/custom_text.dart';
 import '../widget/custom_text_field.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
+import '../widget/row_combo.dart';
 import '../widget/table_actions_view.dart';
 import '../widget/table_column_view.dart';
 
@@ -81,14 +84,14 @@ class _CareGiversPageState extends State<CareGiversPage> {
         HeaderView(
           title: AppString.careAmbassador.val,
         ),
-        _rebuildView(),
+        _rebuildView(context),
       ],
     );
   }
 
-  BlocProvider<CareGiversBloc> _rebuildView() {
+  BlocProvider<CareGiversBloc> _rebuildView(BuildContext context) {
     return BlocProvider(
-      create: (context) => _careGiversBloc
+      create: (_) => _careGiversBloc
         ..add(CareGiversEvent.getCareGivers(
           userId: _userId,
           page: _page,
@@ -96,13 +99,13 @@ class _CareGiversPageState extends State<CareGiversPage> {
           type: _tabType,
           filterId: _filterId,
         )),
-      child: _bodyView(),
+      child: _bodyView(context),
     );
   }
 
-  _bodyView() {
+  _bodyView(BuildContext context) {
     return BlocBuilder<CareGiversBloc, CareGiversState>(
-      builder: (context, state) {
+      builder: (_, state) {
         return Column(
           children: [
             CustomSizedBox(height: DBL.twenty.val),
@@ -124,7 +127,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
               ? const TableLoaderView()
               : state.isError
                   ? ErrorView(isClientError: false, errorMessage: state.error)
-                  : _caregiversView(context, state.response)),
+                  : _caregiversView(context, state)),
     );
   }
 
@@ -148,13 +151,63 @@ class _CareGiversPageState extends State<CareGiversPage> {
             }));
   }
 
+  CustomContainer _verificationTabView(CareGiversState state) {
+    return CustomContainer(
+        height: DBL.fiftyFive.val,
+        width: 450,
+        color: AppColor.backgroundColor.val,
+        child: CustomListViewBuilder(
+            itemCount: state.verificationTypes.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              VerificationTypes item = state.verificationTypes[index];
+              return InkWell(
+                onTap: () {
+                  _careGiversBloc
+                      .add(CareGiversEvent.isSelectedVerificationTab(item));
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      left: DBL.thirty.val, top: DBL.fifteen.val),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CustomText(
+                        item.title ?? "",
+                        style: TS().gRoboto(
+                            fontSize: FS.font16.val,
+                            color: item.isSelected
+                                ? AppColor.primaryColor.val
+                                : AppColor.lightGrey11.val,
+                            fontWeight: FW.w600.val),
+                      ),
+                      CustomSizedBox(
+                        height: DBL.fifteen.val,
+                      ),
+                      item.isSelected
+                          ? CustomContainer.decoration(
+                              width: 190,
+                              height: 3,
+                              decoration: BoxDecoration(
+                                color: AppColor.primaryColor.val,
+                              ),
+                            )
+                          : CustomSizedBox.shrink()
+                    ],
+                  ),
+                ),
+              );
+            }));
+  }
+
   _resetValues() {
     _page = 1;
     _searchController.clear();
     _filterId = null;
   }
 
-  _caregiversView(BuildContext context, CareGiverResponse? value) {
+  _caregiversView(BuildContext context, CareGiversState state) {
+    CareGiverResponse? value = state.response;
     if (value?.status ?? false) {
       mCareGiverList.clear();
       if (value?.data?.caregivers != null &&
@@ -174,7 +227,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
               CustomSizedBox(height: DBL.fifteen.val),
               CustomSizedBox(
                 height: (_limit + 1) * 48,
-                child: _caregiversTable(),
+                child: _caregiversTable(state, context),
               ),
               CustomSizedBox(height: DBL.twenty.val),
               _paginationView()
@@ -325,7 +378,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
     );
   }
 
-  _caregiversTable() {
+  _caregiversTable(CareGiversState state, BuildContext context) {
     return CSelectionArea(
       child: CDataTable2(
         minWidth: DBL.nineFifty.val,
@@ -394,7 +447,8 @@ class _CareGiversPageState extends State<CareGiversPage> {
                 isView: true,
                 onViewTap: () {
                   if (e.key % 2 == 0) {
-                    autoTabRouter!.setActiveIndex(2);
+                    // autoTabRouter!.setActiveIndex(2);
+                    _verificationPopup(context, state);
                   } else {
                     autoTabRouter!.setActiveIndex(6);
                   }
@@ -485,4 +539,247 @@ class _CareGiversPageState extends State<CareGiversPage> {
   }
 
   bool _isXs(context) => MediaQuery.of(context).size.width <= 544;
+
+  _verificationPopup(BuildContext context, CareGiversState state) {
+    showGeneralDialog(
+      context: context,
+      pageBuilder: (BuildContext buildContext, Animation animation,
+          Animation secondaryAnimation) {
+        return CustomAlertDialogWidget(
+          height: MediaQuery.of(context).size.height,
+          width: double.infinity,
+          heading: AppString.verificationProcess.val,
+          child: BlocBuilder<CareGiversBloc, CareGiversState>(
+            builder: (_, state) {
+              return Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: DBL.twentyFive.val,
+                  ),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        CustomSizedBox(
+                          height: DBL.twelve.val,
+                        ),
+                        CustomSvg(
+                          width: DBL.oneFifty.val,
+                          path: IMG.profilePlaceHolder.val,
+                        ),
+                        CustomSizedBox(
+                          height: DBL.twelve.val,
+                        ),
+                        CustomText(
+                          "John Simon",
+                          style: TS().gRoboto(
+                            color: AppColor.black2.val,
+                            fontWeight: FW.w600.val,
+                            fontSize: FS.font16.val,
+                          ),
+                        ),
+                        Divider(
+                          color: AppColor.lightBlue2.val,
+                        ),
+                        CustomSizedBox(
+                          height: DBL.ten.val,
+                        ),
+                        _verificationTabView(state),
+                        CustomSizedBox(
+                          height: DBL.twentyFive.val,
+                        ),
+                        _backgroundVerificationTopView(context),
+                      ],
+                    ),
+                  ));
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Column _backgroundVerificationTopView(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: RowColonCombo.twoHundred(
+                  label: AppString.dob.val,
+                  value: "01/05/1985",
+                  fontSize: FS.font13PointFive.val),
+            ),
+            !isLg(context)
+                ? Expanded(
+                    child: _mobileNumberView(),
+                  )
+                : CustomSizedBox.shrink(),
+          ],
+        ),
+        CustomSizedBox(
+          height: DBL.six.val,
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: RowColonCombo.twoHundred(
+                  label: AppString.gender.val,
+                  value: "Male",
+                  fontSize: FS.font13PointFive.val),
+            ),
+            !isLg(context)
+                ? Expanded(
+                    child: _alterNativeMobileNumberView(),
+                  )
+                : CustomSizedBox.shrink(),
+          ],
+        ),
+        CustomSizedBox(
+          height: DBL.six.val,
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: RowColonCombo.twoHundred(
+                  label: AppString.addressLine1.val,
+                  value: "Apartment #20 ",
+                  fontSize: FS.font13PointFive.val),
+            ),
+            !isLg(context)
+                ? Expanded(
+                    child: _emailView(),
+                  )
+                : CustomSizedBox.shrink(),
+          ],
+        ),
+        CustomSizedBox(
+          height: DBL.six.val,
+        ),
+        RowColonCombo.twoHundred(
+            label: AppString.city.val,
+            value: "New York",
+            fontSize: FS.font13PointFive.val),
+        CustomSizedBox(
+          height: DBL.six.val,
+        ),
+        RowColonCombo.twoHundred(
+            label: AppString.street.val,
+            value: "495 Grove Street ",
+            fontSize: FS.font13PointFive.val),
+        CustomSizedBox(
+          height: DBL.six.val,
+        ),
+        RowColonCombo.twoHundred(
+            label: AppString.zip.val,
+            value: "08601",
+            fontSize: FS.font13PointFive.val),
+        CustomSizedBox(
+          height: DBL.six.val,
+        ),
+        RowColonCombo.twoHundred(
+            label: AppString.state.val,
+            value: "New Jersey ",
+            fontSize: FS.font13PointFive.val),
+        isLg(context)
+            ? CustomSizedBox(
+                height: DBL.six.val,
+              )
+            : CustomSizedBox.shrink(),
+        isLg(context)
+            ? _backgroundVerificationRightView()
+            : CustomSizedBox.shrink(),
+        CustomSizedBox(
+          height: DBL.ten.val,
+        ),
+        Divider(
+          color: AppColor.dividerColor4.val,
+        ),
+        CustomSizedBox(
+          height: DBL.three.val,
+        ),
+        HeaderView(
+          title: AppString.documentDetails.val,
+          color: AppColor.matBlack3.val,
+          fontSize: FS.font18.val,
+          topPadding: DBL.zero.val,
+          sidePadding: DBL.zero.val,
+        ),
+        CustomSizedBox(
+          height: DBL.ten.val,
+        ),
+        RowColonCombo.twoHundred(
+            label: AppString.documentUploaded.val,
+            value: "Passport",
+            fontSize: FS.font13PointFive.val),
+        CustomSizedBox(
+          height: DBL.six.val,
+        ),
+        CustomSizedBox(
+          height: DBL.six.val,
+        ),
+        RowColonCombo.twoHundred(
+            label: AppString.docNumber.val,
+            value: "U123456789",
+            fontSize: FS.font13PointFive.val),
+        CustomSizedBox(
+          height: DBL.six.val,
+        ),
+        CustomSizedBox(
+          height: DBL.six.val,
+        ),
+        RowColonCombo.twoHundred(
+            label: AppString.expiryDate.val,
+            value: "05/12/2031",
+            fontSize: FS.font13PointFive.val),
+        CustomSizedBox(
+          height: DBL.six.val,
+        ),
+      ],
+    );
+  }
+
+  RowColonCombo _emailView() {
+    return RowColonCombo.twoHundred(
+        label: AppString.email.val,
+        value: "josephgeorge@gmail.com",
+        fontSize: FS.font13PointFive.val);
+  }
+
+  RowColonCombo _alterNativeMobileNumberView() {
+    return RowColonCombo.twoHundred(
+        label: AppString.alternativeMobileNumber.val,
+        value: "14845691319",
+        fontSize: FS.font13PointFive.val);
+  }
+
+  RowColonCombo _mobileNumberView() {
+    return RowColonCombo.twoHundred(
+        label: AppString.mobileNumber.val,
+        value: "14845691319",
+        fontSize: FS.font13PointFive.val);
+  }
+
+  Column _backgroundVerificationRightView() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _mobileNumberView(),
+        CustomSizedBox(
+          height: DBL.six.val,
+        ),
+        _alterNativeMobileNumberView(),
+        CustomSizedBox(
+          height: DBL.six.val,
+        ),
+        _emailView(),
+        CustomSizedBox(
+          height: DBL.six.val,
+        ),
+      ],
+    );
+  }
+
+  bool isLg(BuildContext context) => MediaQuery.of(context).size.width <= 1236;
 }
