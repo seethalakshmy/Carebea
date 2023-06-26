@@ -10,7 +10,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   OnboardingBloc() : super(OnboardingState.initial()) {
     on<OnboardingEvent>((event, emit) async {
       if (event is _Submit) {
-        //emit(const OnboardingState.formSubmitSuccess());
+        emit(state.copyWith(isFormSubmitSuccess: true));
       } else if (event is _RadioHHASelected) {
         emit(state.copyWith(isHHASelected: event.isSelected));
       } else if (event is _RadioBLSSelected) {
@@ -19,6 +19,16 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
         emit(state.copyWith(isTBSelected: event.isSelected));
       } else if (event is _RadioCovidSelected) {
         emit(state.copyWith(isCovidSelected: event.isSelected));
+      } else if (event is _RadioExperienceSelected) {
+        emit(state.copyWith(isExperianceSelected: event.isSelected));
+      } else if (event is _RadioSmokerSelected) {
+        emit(state.copyWith(isSmokerSelected: event.isSelected));
+      } else if (event is _RadioTransportationSelected) {
+        emit(state.copyWith(isTransportationSelected: event.isSelected));
+      } else if (event is _RadioPetSelected) {
+        emit(state.copyWith(isPetsSelected: event.isSelected));
+      } else if (event is _RadioLanguageSelected) {
+        emit(state.copyWith(isLanguagesSelected: event.isSelected));
       }
     });
   }

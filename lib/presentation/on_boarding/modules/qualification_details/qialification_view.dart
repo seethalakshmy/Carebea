@@ -157,7 +157,9 @@ class _QualificationViewState extends State<QualificationView> {
                     ),
                     CustomSizedBox(height: DBL.twenty.val),
                     ItemRowWidget(
-                      validator: (val) {return null;},
+                      validator: (val) {
+                        return null;
+                      },
                       onRegisterTap: () {},
                       selectedValue: onboardingState.isCovidSelected,
                       state: onboardingState,
@@ -181,7 +183,10 @@ class _QualificationViewState extends State<QualificationView> {
                         return CommonNextOrCancelButtons(
                           rightButtonName: AppString.next.val,
                           leftButtonName: AppString.back.val,
-                          onLeftButtonPressed: () {},
+                          onLeftButtonPressed: () {
+                            widget.pageController.jumpToPage(
+                                widget.pageController.page!.toInt() - 1);
+                          },
                           onRightButtonPressed: () {
                             checkInputData();
                           },

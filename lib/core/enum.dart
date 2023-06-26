@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 /// App Strings
 enum AppString {
   login("Login"),
+  select("Select"),
+  ok("Ok"),
   profile("Profile"),
   selectedMenuIndex("selectedindex"),
   userProfile("User Profile"),
@@ -70,6 +72,8 @@ enum AppString {
   service("Service"),
   serviceDetails("Service Details"),
   services("Services"),
+  selectAllServices("Select all the services you are able to do"),
+  addMoreReference("Add more reference"),
   serviceCompleted("Services Completed"),
   serviceInCompleted("Services Incompleted"),
   serviceNeeded("Services Needed"),
@@ -97,6 +101,15 @@ enum AppString {
   preference("Preference"),
   agreement("Agreement"),
   reference("Reference"),
+  buildYourProfile("Build Your Profile"),
+  tellAboutYou("Tell about you"),
+  addBankAccountDetails("Add your banck account details"),
+  aboutYou("About You"),
+  tourHobbies("Tour Hobbies"),
+  homeHealthAidAgreement("Home Health Aid Agreement"),
+  setupCompensation("Setup Compensation Method"),
+  loveBeingCaregiver("Why you love being a caregiver"),
+  provideDigitalSign("Provide your digital signature"),
   pendingDocuments("Pending Documents"),
   reasonForCancellation("Reason for cancellation :"),
   reasonForInCompletion("Reason for Incompletion"),
@@ -180,6 +193,9 @@ enum AppString {
   howManyExperience("How many years of experience do you have?"),
   serveClientsWithPets("Are you willing to serve clients with pets?"),
   languagesKnown("Languages known"),
+  chooseLanguages("Choose languages"),
+  searchLanguages("Search languages"),
+  done("Done"),
   serveHomeWithSmoker("Are you able to serve a home with a smoker?"),
   haveAnAppointment("Have an appointment"),
   viewDetails("View Details"),
@@ -231,8 +247,15 @@ enum AppString {
   passwordLengthError("Password should be at least 8 characters"),
   emptyConfirmPassword("Confirm password shouldn't be empty"),
   notMatchConfirmPassword("Confirm password doesn't match"),
+  emptyName("Name shouldn't be empty"),
+  emptyRoutingNo("Routing number shouldn't be empty"),
+  emptyAcNo("Account number shouldn't be empty"),
   emptyFName("First name shouldn't be empty"),
   emptyLName("Last name shouldn't be empty"),
+  emptyPhone("Phone number shouldn't be empty"),
+  emptyAbout("Please write something about you"),
+  emptyHobbies("Please write something about your hobbies"),
+  emptyLoveCaregiver("Please write the reason"),
   emptyMobile("Mobile number shouldn't be empty"),
   validMobile("Mobile number should be 10 digits"),
   uploadDocument("Upload the document"),
@@ -243,6 +266,7 @@ enum AppString {
   emptyStreet("Please enter your street name"),
   emptyState("Please select your state"),
   emptyCity("Please select your city"),
+  emptyRelationship("Please select your relationship"),
   emptyZip("Please enter zip code"),
   emptySSN("Please enter social security number"),
   emptyDocType("Please select the document type"),
@@ -250,7 +274,12 @@ enum AppString {
   emptyAddress("Please enter your address"),
   emptyHHANo("Please enter HHA number"),
   emptyBLSNo("Please enter BLS certification number"),
-  emptyTBNo("Please enter TB result number");
+  emptyTBNo("Please enter TB result number"),
+
+  agreementChckboxText(
+      "I have read and agree to the home health aid agreement"),
+  dummyAgreementText(
+      "Gives the caregiver the right to make healthcare decisions on someone else’s behalf. This is common if the patient is not able to speak for themselves and a caregiver is assigned the duty of making decisions for the benefit of the patient. This form also includes a living will that allows the patient to make end-of-life decisions if they should be in a state of incapacitation for a longer period of time.");
 
   final String val;
 
@@ -325,6 +354,7 @@ enum AppColor {
   timeInChange(Color(0xffAE92FE)),
   availableInDifferent(Color(0xffF3AA1A)),
   red(Color(0xffE75A77)),
+  red1(Color(0x4d3A0202)),
   red2(Color.fromRGBO(253, 66, 66, 0.8)),
   red3(Color(0xffFDEDEE)),
   red4(Color(0xffDC0C0C)),
@@ -375,6 +405,8 @@ enum IMG {
   iconSearch("assets/icons/search_icon.svg"),
   iconUpload("assets/icons/uploadIcon.svg"),
   exclamation("assets/icons/exclamation.svg"),
+  roundClose("assets/icons/round_close.svg"),
+  roundAdd("assets/icons/plus-circle.svg"),
 
   imageNotFound("assets/icons/image_not_found.png"),
 

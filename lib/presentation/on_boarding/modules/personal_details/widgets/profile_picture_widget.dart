@@ -14,7 +14,7 @@ class ProfilePictureWidget extends StatefulWidget {
 }
 
 class _ProfilePictureWidgetState extends State<ProfilePictureWidget> {
-  String? pickedFile = "";
+  dynamic pickedFile = "";
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,10 @@ class _ProfilePictureWidgetState extends State<ProfilePictureWidget> {
             onTap: () async {
               XFile? pickedFileData = (await Utility.getFromGallery())!;
               print("pickedFileData : " + pickedFileData.path);
-
+              /*setState(() {
+                pickedFile = pickedFileData.readAsBytes();
+                print("pickedFile : " + pickedFile.toString());
+              });*/
               setState(() {
                 pickedFile = pickedFileData.path.replaceAll("blob:", "");
                 print("pickedFile : " + pickedFile!);
