@@ -164,8 +164,8 @@ class _SetupCompensationViewState extends State<SetupCompensationView> {
                   child: DetailsTextFieldWithLabel(
                     width: DBL.threeFifty.val,
                     labelName: AppString.routingNo.val,
-                    controller: nameController,
-                    focusNode: nameFocusNode,
+                    controller: routingController,
+                    focusNode: routingFocusNode,
                     textInputAction: TextInputAction.next,
                     textInputType: TextInputType.text,
                     isMandatory: false,
@@ -183,8 +183,8 @@ class _SetupCompensationViewState extends State<SetupCompensationView> {
                   child: DetailsTextFieldWithLabel(
                     width: DBL.threeFifty.val,
                     labelName: AppString.accountNumber.val,
-                    controller: nameController,
-                    focusNode: nameFocusNode,
+                    controller: acNoController,
+                    focusNode: acNoFocusNode,
                     textInputAction: TextInputAction.next,
                     textInputType: TextInputType.text,
                     isMandatory: false,
