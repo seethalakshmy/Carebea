@@ -5,6 +5,7 @@ import 'package:admin_580_tech/domain/caregiver_verification/model/reject_params
 import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/widgets/custom_check_text_field.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/widgets/file_preview.dart';
+import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:auto_route/auto_route.dart';
@@ -62,11 +63,12 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
   @override
   void initState() {
     String testID =
-        AutoTabsRouter.of(context).routeData.queryParams.getString('id', '') ??
+        context.routeData.queryParams.getString('id', '') ??
             "";
     // String testID = widget.id ?? "empty";
-    print('test id::: $testID');
-    userId = "6482e5dfe5aa3d7cc489bb21";
+    print('test id::: ${autoTabRouter?.currentChild?.queryParams.getString('id','')}');
+    print(' id::: ${widget.id}');
+    userId = autoTabRouter?.currentChild?.queryParams.getString('id','') ?? "";
     print('userID ${userId}');
     super.initState();
     context
