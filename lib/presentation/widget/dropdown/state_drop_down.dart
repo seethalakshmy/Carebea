@@ -35,7 +35,7 @@ class StateDropDown extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 10),
                       child: CustomText(
-                        e ?? "",
+                        e,
                         style: TS().gRoboto(color: AppColor.black.val),
                       ),
                     ),

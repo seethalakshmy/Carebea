@@ -1,5 +1,6 @@
 import 'package:admin_580_tech/application/bloc/caregiver_creation/caregiver_creation_bloc.dart';
 import 'package:admin_580_tech/core/responsive.dart';
+import 'package:admin_580_tech/presentation/caregiver_creation/widgets/details_text_field_with_label.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
@@ -8,6 +9,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
@@ -26,6 +28,7 @@ class CaregiverCreationPage extends StatefulWidget {
 
 class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
   late CaregiverCreationBloc _creationBloc;
+  final FormValidationBloc _validationBloc = FormValidationBloc();
 
   final TextEditingController _fNameController = TextEditingController();
   final TextEditingController _lNameController = TextEditingController();
@@ -61,19 +64,18 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
     );
   }
 
-  BlocProvider<CaregiverCreationBloc> _rebuildView() {
-    return BlocProvider(
-      create: (context) =>
-          _creationBloc..add(const CaregiverCreationEvent.createCaregiver()),
-      child: _bodyView(),
-    );
+  MultiBlocProvider _rebuildView() {
+    return MultiBlocProvider(providers: [
+      BlocProvider(create: (context) => FormValidationBloc()),
+      BlocProvider(create: (context) => CaregiverCreationBloc()),
+    ], child: _bodyView());
   }
 
   _bodyView() {
     return BlocBuilder<CaregiverCreationBloc, CaregiverCreationState>(
       buildWhen: (previous, current) => previous != current,
-      builder: (context, state) {
-        state.whenOrNull(() => _validateMode = AutovalidateMode.disabled);
+      bloc: _creationBloc,
+      builder: (context, creationState) {
         return CustomCard(
           shape: PR().roundedRectangleBorder(DBL.eighteen.val),
           elevation: DBL.seven.val,
@@ -141,45 +143,45 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
             children: [
               CustomSizedBox(
                 width: DBL.twoEighty.val,
-                child: _caregiverDetailsItem(
-                  AppString.firstName.val,
-                  _fNameFocusNode,
-                  _fNameController,
-                  (value) {
+                child: DetailsTextFieldWithLabel(
+                  labelName: AppString.firstName.val,
+                  focusNode: _fNameFocusNode,
+                  controller: _fNameController,
+                  validator: (value) {
                     if (value == null || value.isEmpty) {
                       return AppString.emptyFName.val;
                     }
                     return null;
                   },
-                  TextInputAction.next,
-                  TextInputType.name,
-                  const CustomContainer(width: 0),
+                  textInputAction: TextInputAction.next,
+                  textInputType: TextInputType.name,
+                  suffixIcon: const CustomContainer(width: 0),
                 ),
               ),
               CustomSizedBox(
                 width: DBL.twoEighty.val,
-                child: _caregiverDetailsItem(
-                  AppString.lastName.val,
-                  _lNameFocusNode,
-                  _lNameController,
-                  (value) {
+                child: DetailsTextFieldWithLabel(
+                  labelName: AppString.lastName.val,
+                  focusNode: _lNameFocusNode,
+                  controller: _lNameController,
+                  validator: (value) {
                     if (value == null || value.isEmpty) {
                       return AppString.emptyLName.val;
                     }
                     return null;
                   },
-                  TextInputAction.next,
-                  TextInputType.name,
-                  const CustomContainer(width: 0),
+                  textInputAction: TextInputAction.next,
+                  textInputType: TextInputType.name,
+                  suffixIcon: const CustomContainer(width: 0),
                 ),
               ),
               CustomSizedBox(
                 width: DBL.twoEighty.val,
-                child: _caregiverDetailsItem(
-                  AppString.emailAddress.val,
-                  _emailFocusNode,
-                  _emailController,
-                  (value) {
+                child: DetailsTextFieldWithLabel(
+                  labelName: AppString.emailAddress.val,
+                  focusNode: _emailFocusNode,
+                  controller: _emailController,
+                  validator: (value) {
                     if (value == null || value.isEmpty) {
                       return AppString.emptyEmail.val;
                     } else if (!RegExp(
@@ -189,18 +191,18 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
                     }
                     return null;
                   },
-                  TextInputAction.next,
-                  TextInputType.text,
-                  const CustomContainer(width: 0),
+                  textInputAction: TextInputAction.next,
+                  textInputType: TextInputType.text,
+                  suffixIcon: const CustomContainer(width: 0),
                 ),
               ),
               CustomSizedBox(
                 width: DBL.twoEighty.val,
-                child: _caregiverDetailsItem(
-                  AppString.mobileNumber.val,
-                  _mobileFocusNode,
-                  _mobileController,
-                  (value) {
+                child: DetailsTextFieldWithLabel(
+                  labelName: AppString.mobileNumber.val,
+                  focusNode: _mobileFocusNode,
+                  controller: _mobileController,
+                  validator: (value) {
                     if (value == null || value.isEmpty) {
                       return AppString.emptyMobile.val;
                     } else if (value.toString().length != 10) {
@@ -208,39 +210,44 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
                     }
                     return null;
                   },
-                  TextInputAction.done,
-                  TextInputType.number,
-                  const CustomContainer(width: 0),
+                  textInputAction: TextInputAction.done,
+                  textInputType: TextInputType.number,
+                  suffixIcon: const CustomContainer(width: 0),
                 ),
               ),
-              Row(
-                mainAxisAlignment: Responsive.isWeb(context)
-                    ? MainAxisAlignment.end
-                    : MainAxisAlignment.center,
-                children: [
-                  CustomButton(
-                    height: 45,
-                    minWidth: 120,
-                    onPressed: () {
-                      context.router.navigate(const CareGiversRoute());
-                    },
-                    text: AppString.cancel.val,
-                    color: AppColor.white.val,
-                    textColor: AppColor.primaryColor.val,
-                    borderWidth: 1,
-                  ),
-                  const CustomSizedBox(width: 20),
-                  CustomButton(
-                    height: 45,
-                    minWidth: 120,
-                    onPressed: () {
-                      checkInputData();
-                    },
-                    text: AppString.save.val,
-                    color: AppColor.primaryColor.val,
-                    textColor: AppColor.white.val,
-                  ),
-                ],
+              BlocBuilder<FormValidationBloc, FormValidationState>(
+                bloc: _validationBloc,
+                builder: (context, state) {
+                  return Row(
+                    mainAxisAlignment: Responsive.isWeb(context)
+                        ? MainAxisAlignment.end
+                        : MainAxisAlignment.center,
+                    children: [
+                      CustomButton(
+                        height: 45,
+                        minWidth: 120,
+                        onPressed: () {
+                          context.router.navigate(const CareGiversRoute());
+                        },
+                        text: AppString.cancel.val,
+                        color: AppColor.white.val,
+                        textColor: AppColor.primaryColor.val,
+                        borderWidth: 1,
+                      ),
+                      const CustomSizedBox(width: 20),
+                      CustomButton(
+                        height: 45,
+                        minWidth: 120,
+                        onPressed: () {
+                          checkInputData();
+                        },
+                        text: AppString.save.val,
+                        color: AppColor.primaryColor.val,
+                        textColor: AppColor.white.val,
+                      ),
+                    ],
+                  );
+                },
               )
             ],
           ),
@@ -308,7 +315,7 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
 
   checkInputData() {
     if (_validateMode != AutovalidateMode.always) {
-      _creationBloc.add(const CaregiverCreationEvent.submit());
+      _validationBloc.add(const FormValidationEvent.submit());
     }
     if (_formKey.currentState!.validate()) {
       setState(() {

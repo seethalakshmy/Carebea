@@ -1,41 +1,63 @@
+import 'package:admin_580_tech/presentation/on_boarding/modules/preference/widgets/sample_dropdown.dart';
 import 'package:admin_580_tech/presentation/on_boarding/widgets/common_padding_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../application/bloc/onboarding/onboarding_bloc.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
+import '../../../widget/common_next_or_cancel_buttons.dart';
 import '../../../widget/custom_sizedbox.dart';
 import '../../../widget/custom_text.dart';
 
-class PreferenceView extends StatefulWidget {
-  const PreferenceView({Key? key}) : super(key: key);
+class PreferenceView extends StatelessWidget {
+  const PreferenceView(
+      {Key? key, required this.onboardingBloc, required this.pageController})
+      : super(key: key);
+  final OnboardingBloc onboardingBloc;
+  final PageController pageController;
 
-  @override
-  State<PreferenceView> createState() => _PreferenceViewState();
-}
-
-class _PreferenceViewState extends State<PreferenceView> {
   @override
   Widget build(BuildContext context) {
-    return CommonPaddingWidget(
-        child: CustomContainer(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _topArea(context),
-          _experienceWidget(),
-          CustomSizedBox(height: DBL.twenty.val),
-          _smokerWidget(),
-          CustomSizedBox(height: DBL.twenty.val),
-          _transportationWidget(),
-          CustomSizedBox(height: DBL.twenty.val),
-          _petsWidget(),
-          CustomSizedBox(height: DBL.twenty.val),
-          _knownLanguagesWidget()
-        ],
-      ),
-    ));
+    return BlocBuilder<OnboardingBloc, OnboardingState>(
+      builder: (context, state) {
+        return CommonPaddingWidget(
+            child: CustomContainer(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _topArea(context),
+              _experienceWidget(state, context),
+              CustomSizedBox(height: DBL.twenty.val),
+              _smokerWidget(state),
+              CustomSizedBox(height: DBL.twenty.val),
+              _transportationWidget(state),
+              CustomSizedBox(height: DBL.twenty.val),
+              _petsWidget(state),
+              state.isPetsSelected == 0
+                  ? SampleDropdown(
+                      isFromLangauge: false,
+                    )
+                  : Container(),
+              CustomSizedBox(height: DBL.twenty.val),
+              _knownLanguagesWidget(),
+              CommonNextOrCancelButtons(
+                leftButtonName: AppString.back.val,
+                rightButtonName: AppString.next.val,
+                onLeftButtonPressed: () {
+                  pageController.jumpToPage(pageController.page!.toInt() - 1);
+                },
+                onRightButtonPressed: () {
+                  pageController.jumpToPage(pageController.page!.toInt() + 1);
+                },
+              )
+            ],
+          ),
+        ));
+      },
+    );
   }
 
   _topArea(BuildContext context) {
@@ -65,8 +87,7 @@ class _PreferenceViewState extends State<PreferenceView> {
     );
   }
 
-  _experienceWidget() {
-    int experiance = 1;
+  _experienceWidget(OnboardingState state, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -75,9 +96,15 @@ class _PreferenceViewState extends State<PreferenceView> {
           style: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w400.val),
         ),
         CustomSizedBox(height: DBL.ten.val),
-        Row(
+        Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            Radio(value: 0, groupValue: experiance, onChanged: (val) {}),
+            Radio(
+                value: 0,
+                groupValue: state.isExperianceSelected,
+                onChanged: (val) {
+                  onboardingBloc.add(OnboardingEvent.radioExperience(val ?? 0));
+                }),
             CustomText(
               AppString.lessThanAYear.val,
               style: TS().gRoboto(
@@ -87,7 +114,12 @@ class _PreferenceViewState extends State<PreferenceView> {
               ),
             ),
             CustomSizedBox(width: DBL.twelve.val),
-            Radio(value: 1, groupValue: experiance, onChanged: (val) {}),
+            Radio(
+                value: 1,
+                groupValue: state.isExperianceSelected,
+                onChanged: (val) {
+                  onboardingBloc.add(OnboardingEvent.radioExperience(val ?? 1));
+                }),
             CustomText(
               AppString.oneToTwoYear.val,
               style: TS().gRoboto(
@@ -97,7 +129,12 @@ class _PreferenceViewState extends State<PreferenceView> {
               ),
             ),
             CustomSizedBox(width: DBL.twelve.val),
-            Radio(value: 2, groupValue: experiance, onChanged: (val) {}),
+            Radio(
+                value: 2,
+                groupValue: state.isExperianceSelected,
+                onChanged: (val) {
+                  onboardingBloc.add(OnboardingEvent.radioExperience(val ?? 2));
+                }),
             CustomText(
               AppString.twoToFiveYear.val,
               style: TS().gRoboto(
@@ -106,8 +143,19 @@ class _PreferenceViewState extends State<PreferenceView> {
                 color: AppColor.matBlack2.val,
               ),
             ),
-            CustomSizedBox(width: DBL.twelve.val),
-            Radio(value: 3, groupValue: experiance, onChanged: (val) {}),
+            CustomSizedBox(
+                width: MediaQuery.of(context).size.width < 501
+                    ? DBL.sixty.val
+                    : MediaQuery.of(context).size.width > 501 &&
+                            MediaQuery.of(context).size.width < 520
+                        ? DBL.eighty.val
+                        : DBL.twelve.val),
+            Radio(
+                value: 3,
+                groupValue: state.isExperianceSelected,
+                onChanged: (val) {
+                  onboardingBloc.add(OnboardingEvent.radioExperience(val ?? 3));
+                }),
             CustomText(
               AppString.fiveAndMore.val,
               style: TS().gRoboto(
@@ -122,19 +170,26 @@ class _PreferenceViewState extends State<PreferenceView> {
     );
   }
 
-  _smokerWidget() {
+  _smokerWidget(OnboardingState state) {
     return _yesOrNoWidgetWithTitle(
-        AppString.serveHomeWithSmoker.val, 0, (val) {});
+        AppString.serveHomeWithSmoker.val, state.isSmokerSelected, (val) {
+      onboardingBloc.add(OnboardingEvent.radioSmoker(val!));
+    });
   }
 
-  _transportationWidget() {
+  _transportationWidget(OnboardingState state) {
     return _yesOrNoWidgetWithTitle(
-        AppString.provideTransportationOrRunErrands.val, 0, (val) {});
+        AppString.provideTransportationOrRunErrands.val,
+        state.isTransportationSelected, (val) {
+      onboardingBloc.add(OnboardingEvent.radioTransportation(val!));
+    });
   }
 
-  _petsWidget() {
+  _petsWidget(OnboardingState state) {
     return _yesOrNoWidgetWithTitle(
-        AppString.serveClientsWithPets.val, 1, (val) {});
+        AppString.serveClientsWithPets.val, state.isPetsSelected, (val) {
+      onboardingBloc.add(OnboardingEvent.radioPet(val!));
+    });
   }
 
   _knownLanguagesWidget() {
@@ -146,6 +201,10 @@ class _PreferenceViewState extends State<PreferenceView> {
           style: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w400.val),
         ),
         CustomSizedBox(height: DBL.ten.val),
+        //SelectLanguagesWidget()
+        SampleDropdown(
+          isFromLangauge: true,
+        )
       ],
     );
   }

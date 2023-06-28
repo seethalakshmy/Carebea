@@ -3,15 +3,15 @@ import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/profile_picture_widget.dart';
 import 'package:admin_580_tech/presentation/on_boarding/widgets/upload_document_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../../../application/bloc/onboarding/onboarding_bloc.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
 import '../../../caregiver_detail/widgets/svg_text.dart';
-import '../../../routes/app_router.gr.dart';
 import '../../../widget/common_date_picker_widget.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
 import '../../../widget/custom_container.dart';
@@ -21,6 +21,7 @@ import '../../../widget/custom_text_field.dart';
 import '../../../widget/dropdown/state_drop_down.dart';
 import '../../widgets/common_padding_widget.dart';
 import '../../widgets/gender_drop_down.dart';
+import 'models/gender_list_response.dart';
 import 'widgets/document_details_view.dart';
 
 class PersonalDetailsView extends StatefulWidget {
@@ -50,6 +51,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   bool nextClicked = false;
 
   AutovalidateMode _validateMode = AutovalidateMode.disabled;
+  FormValidationBloc formValidationBloc = FormValidationBloc();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -58,82 +60,93 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         MediaQuery.of(context).size.width < 1800;
     final isWeb = MediaQuery.of(context).size.width >= 1100 &&
         MediaQuery.of(context).size.width <= 1350;
-    return CommonPaddingWidget(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomSizedBox(height: DBL.ten.val),
-            CustomText(
-              AppString.personalDetails.val,
-              softWrap: true,
-              style: TS().gRoboto(
-                  fontSize: Responsive.isWeb(context)
-                      ? DBL.nineteen.val
-                      : DBL.sixteen.val,
-                  fontWeight: FW.w500.val,
-                  color: AppColor.primaryColor.val),
-              textAlign: TextAlign.start,
-            ),
-            CustomSizedBox(height: DBL.fifteen.val),
-            CustomContainer(
-              width: MediaQuery.of(context).size.width * 0.8,
-              height: DBL.one.val,
-              color: AppColor.lightGrey.val,
-            ),
-            CustomSizedBox(height: DBL.twenty.val),
-            Responsive.isWeb(context)
-                ? Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _profilePicWidget(),
-                      CustomSizedBox(width: DBL.twenty.val),
-                      _personalDetailsWidget(
-                          addressLineController,
-                          streetController,
-                          zipController,
-                          socialSecurityNumberController,
-                          context,
-                          _dateFocusNode,
-                          _dateController,
-                          isLargeWeb,
-                          isWeb),
-                    ],
-                  )
-                : Column(
-                    crossAxisAlignment: Responsive.isWeb(context)
-                        ? CrossAxisAlignment.start
-                        : CrossAxisAlignment.center,
-                    children: [
-                      _profilePicWidget(),
-                      CustomSizedBox(height: DBL.twentyFive.val),
-                      _personalDetailsWidget(
-                          addressLineController,
-                          streetController,
-                          zipController,
-                          socialSecurityNumberController,
-                          context,
-                          _dateFocusNode,
-                          _dateController,
-                          isLargeWeb,
-                          isWeb),
-                    ],
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => FormValidationBloc()),
+        BlocProvider(create: (context) => OnboardingBloc())
+      ],
+      child: BlocBuilder<OnboardingBloc, OnboardingState>(
+        bloc: widget.onboardingBloc,
+        builder: (context, state) {
+          return CommonPaddingWidget(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomSizedBox(height: DBL.ten.val),
+                  CustomText(
+                    AppString.personalDetails.val,
+                    softWrap: true,
+                    style: TS().gRoboto(
+                        fontSize: Responsive.isWeb(context)
+                            ? DBL.nineteen.val
+                            : DBL.sixteen.val,
+                        fontWeight: FW.w500.val,
+                        color: AppColor.primaryColor.val),
+                    textAlign: TextAlign.start,
                   ),
+                  CustomSizedBox(height: DBL.fifteen.val),
+                  CustomContainer(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    height: DBL.one.val,
+                    color: AppColor.lightGrey.val,
+                  ),
+                  CustomSizedBox(height: DBL.twenty.val),
+                  Responsive.isWeb(context)
+                      ? Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _profilePicWidget(),
+                            CustomSizedBox(width: DBL.twenty.val),
+                            _personalDetailsWidget(
+                                addressLineController,
+                                streetController,
+                                zipController,
+                                socialSecurityNumberController,
+                                context,
+                                _dateFocusNode,
+                                _dateController,
+                                isLargeWeb,
+                                isWeb),
+                          ],
+                        )
+                      : Column(
+                          crossAxisAlignment: Responsive.isWeb(context)
+                              ? CrossAxisAlignment.start
+                              : CrossAxisAlignment.center,
+                          children: [
+                            _profilePicWidget(),
+                            CustomSizedBox(height: DBL.twentyFive.val),
+                            _personalDetailsWidget(
+                                addressLineController,
+                                streetController,
+                                zipController,
+                                socialSecurityNumberController,
+                                context,
+                                _dateFocusNode,
+                                _dateController,
+                                isLargeWeb,
+                                isWeb),
+                          ],
+                        ),
 
-            /*NextAndPreviousButton(
-                isLoading: controller.isLoading.value,
-                nextButtonText: Get.parameters['is_from_profile'] != null
-                    ? LocaleKeys.save.tr
-                    : LocaleKeys.next.tr,
-                isHasPreviousButton:
-                    Get.parameters['is_from_profile'] != null ? true : false,
-                onNext: () {
+                  /*NextAndPreviousButton(
+                  isLoading: controller.isLoading.value,
+                  nextButtonText: Get.parameters['is_from_profile'] != null
+                      ? LocaleKeys.save.tr
+                      : LocaleKeys.next.tr,
+                  isHasPreviousButton:
+                      Get.parameters['is_from_profile'] != null ? true : false,
+                  onNext: () {
 
-                  }
-                }),*/
-            _nextPrevButtonWidget(),
-          ],
-        ),
+                    }
+                  }),*/
+                  _nextPrevButtonWidget(),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -183,6 +196,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
               DocumentDetailsView(
                 onboardingBloc: widget.onboardingBloc,
                 nextClicked: nextClicked,
+                pageController: widget.pageController,
               ),
               _uploadDocumentWidget(),
 
@@ -239,12 +253,16 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         _labelWidget(AppString.gender.val),
         CustomSizedBox(height: DBL.twelve.val),
         GenderDropDown(
-          onChange: (value) {},
-          items: const [],
-          errorText: nextClicked
-              ? selectedGender == ""
-                  ? AppString.emptyGender.val
-                  : ""
+          onChange: (value) {
+            selectedGender = value.toString();
+          },
+          items: [
+            Gender(id: 0, name: "Male"),
+            Gender(id: 1, name: "Female"),
+            Gender(id: 2, name: "Others")
+          ],
+          errorText: nextClicked && selectedGender.isEmpty
+              ? AppString.emptyGender.val
               : "",
           selectedValue: selectedGender,
         ),
@@ -339,13 +357,15 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         CustomSizedBox(height: DBL.twelve.val),
         StateDropDown(
           errorText: nextClicked
-              ? selectedState == ""
+              ? selectedState.isEmpty
                   ? AppString.emptyState.val
                   : ""
               : "",
           stateName: "",
-          items: const [],
-          onChange: (value) {},
+          items: ["Kerala", "Karnataka", "Tamil Nadu"],
+          onChange: (value) {
+            selectedState = value;
+          },
           selectedValue: selectedState,
         ),
       ],
@@ -360,14 +380,16 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         CustomSizedBox(height: DBL.twelve.val),
         StateDropDown(
           errorText: nextClicked
-              ? selectedCity == ""
+              ? selectedCity.isEmpty
                   ? AppString.emptyCity.val
                   : ""
               : "",
           stateName: "",
-          items: const [],
-          onChange: (value) {},
-          selectedValue: "",
+          items: ["Kannur", "Wayanad", "Ernakulam"],
+          onChange: (value) {
+            selectedCity = value;
+          },
+          selectedValue: selectedCity,
         ),
       ],
     );
@@ -430,19 +452,22 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   }
 
   _nextPrevButtonWidget() {
-    return CommonNextOrCancelButtons(
-      leftButtonName: AppString.back.val,
-      rightButtonName: AppString.next.val,
-      onLeftButtonPressed: () {
-        // context.router.navigate(const CareGiversRoute());
-      },
-      onRightButtonPressed: () {
-        checkInputData();
-        setState(() {
-          nextClicked = true;
-          widget.pageController
-              .jumpToPage(widget.pageController.page!.toInt() + 1);
-        });
+    return BlocBuilder<FormValidationBloc, FormValidationState>(
+      bloc: formValidationBloc,
+      builder: (context, state) {
+        return CommonNextOrCancelButtons(
+          leftButtonName: AppString.back.val,
+          rightButtonName: AppString.next.val,
+          onLeftButtonPressed: () {
+            // context.router.navigate(const CareGiversRoute());
+          },
+          onRightButtonPressed: () {
+            setState(() {
+              nextClicked = true;
+            });
+            checkInputData();
+          },
+        );
       },
     );
   }
@@ -505,12 +530,11 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
 
   checkInputData() {
     if (_validateMode != AutovalidateMode.always) {
-      widget.onboardingBloc.add(const OnboardingEvent.submit());
+      formValidationBloc.add(const FormValidationEvent.submit());
+      formValidationBloc.add(const FormValidationEvent.dropDown("true"));
     }
     if (_formKey.currentState!.validate()) {
-      setState(() {
-        context.router.navigate(const OnboardingRoute());
-      });
+      widget.pageController.jumpToPage(widget.pageController.page!.toInt() + 1);
     }
   }
 

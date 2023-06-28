@@ -24,11 +24,13 @@ class CTextField extends StatelessWidget {
     this.suffixIcon,
     this.validator,
     this.maxLength,
+    this.maxLines,
     this.textColor,
     this.height,
     this.width,
     this.hintText,
     this.hintStyle,
+    this.textAlignVertical,
   })  : assert(controller != null),
         super(key: key);
   final TextEditingController? controller;
@@ -48,24 +50,28 @@ class CTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final String? Function(String?)? validator;
   final int? maxLength;
+  final int? maxLines;
   final Color? textColor;
   final double? height;
   final double? width;
   final String? hintText;
   final TextStyle? hintStyle;
+  final TextAlignVertical? textAlignVertical;
 
   @override
   Widget build(BuildContext context) {
     return CustomSizedBox(
       width: width,
+      height: height,
       child: TextFormField(
+        textAlignVertical: textAlignVertical ?? TextAlignVertical.center,
         controller: controller,
         focusNode: focusNode,
         textInputAction: textInputAction,
         obscureText: obscureText!,
         onChanged: onChanged,
         onFieldSubmitted: onSubmitted,
-        maxLines: INT.one.val,
+        maxLines: maxLines ?? INT.one.val,
         minLines: INT.one.val,
         onTap: onTap,
         keyboardType: keyBoardType,
