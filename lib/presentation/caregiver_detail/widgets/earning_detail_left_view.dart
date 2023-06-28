@@ -55,7 +55,7 @@ class EarnDetailLeftView extends StatelessWidget {
             AlertTextLabel(
               AppString.paymentStatus.val,
               isCustomWidth: true,
-              width: DBL.twoHundred.val,
+              customWidth: DBL.twoHundred.val,
             ),
             AlertTextLabel(AppString.colon.val, isRequiredSpace: true),
             TableStatusBox(
@@ -76,7 +76,7 @@ class EarnDetailLeftView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AlertTextLabel(AppString.amount.val,
-                isCustomWidth: true, width: DBL.twoHundred.val),
+                isCustomWidth: true, customWidth: DBL.twoHundred.val),
             AlertTextLabel(AppString.colon.val, isRequiredSpace: true),
             StatusText(amount, status: status),
           ],

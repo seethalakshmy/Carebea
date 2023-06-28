@@ -46,7 +46,6 @@ class TableLoaderView extends StatelessWidget {
         DataColumn2(size: ColumnSize.L, label: _buildTableColumnView()),
       ],
       rows: shimmerList.asMap().entries.map((e) {
-        int pageIndex = e.key + 1;
         return DataRow2(
           cells: [
             DataCell(_buildTableRowView()),

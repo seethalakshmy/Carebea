@@ -5,8 +5,8 @@ import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/caregivers/model/care_givers.dart';
 import 'package:admin_580_tech/domain/caregivers/model/types.dart';
-import 'package:admin_580_tech/domain/caregivers/model/verification_types.dart';
 import 'package:admin_580_tech/presentation/caregivers/widgets/tab_item.dart';
+import 'package:admin_580_tech/presentation/caregivers/widgets/table_verification_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
@@ -29,16 +29,17 @@ import '../../application/bloc/caregivers/caregivers_bloc.dart';
 import '../../domain/caregivers/model/caregiver_response.dart';
 import '../../infrastructure/caregivers/caregivers_repository.dart';
 import '../side_menu/side_menu_page.dart';
-import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/custom_dropdown.dart';
 import '../widget/custom_icon.dart';
 import '../widget/custom_text.dart';
 import '../widget/custom_text_field.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
-import '../widget/row_combo.dart';
 import '../widget/table_actions_view.dart';
 import '../widget/table_column_view.dart';
+
+/// todo change change this method
+ValueNotifier<String> caregiverID = ValueNotifier<String>("");
 
 class CareGiversPage extends StatefulWidget {
   const CareGiversPage({Key? key}) : super(key: key);
@@ -48,8 +49,6 @@ class CareGiversPage extends StatefulWidget {
 }
 
 class _CareGiversPageState extends State<CareGiversPage> {
-  late CareGiversBloc _careGiversBloc;
-
   List<Caregivers> mCareGiverList = [];
   int _totalItems = 1;
   final int _limit = 10;
@@ -62,6 +61,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
   final String _userId = "6461c0f33ba4fd69bd494df0";
   int _tabType = 1;
   int? _filterId;
+  late CareGiversBloc _careGiversBloc;
 
   @override
   void initState() {
@@ -84,14 +84,14 @@ class _CareGiversPageState extends State<CareGiversPage> {
         HeaderView(
           title: AppString.careAmbassador.val,
         ),
-        _rebuildView(context),
+        _rebuildView(),
       ],
     );
   }
 
-  BlocProvider<CareGiversBloc> _rebuildView(BuildContext context) {
+  BlocProvider<CareGiversBloc> _rebuildView() {
     return BlocProvider(
-      create: (_) => _careGiversBloc
+      create: (context) => _careGiversBloc
         ..add(CareGiversEvent.getCareGivers(
           userId: _userId,
           page: _page,
@@ -99,11 +99,11 @@ class _CareGiversPageState extends State<CareGiversPage> {
           type: _tabType,
           filterId: _filterId,
         )),
-      child: _bodyView(context),
+      child: _bodyView(),
     );
   }
 
-  _bodyView(BuildContext context) {
+  _bodyView() {
     return BlocBuilder<CareGiversBloc, CareGiversState>(
       builder: (_, state) {
         return Column(
@@ -144,58 +144,11 @@ class _CareGiversPageState extends State<CareGiversPage> {
                 onTap: () {
                   _tabType = item.id!;
                   _resetValues();
-                  _careGiversBloc.add(CareGiversEvent.isSelectedTab(item));
+                  context
+                      .read<CareGiversBloc>()
+                      .add(CareGiversEvent.isSelectedTab(item));
                   _getCareGiverEvent();
                 },
-              );
-            }));
-  }
-
-  CustomContainer _verificationTabView(CareGiversState state) {
-    return CustomContainer(
-        height: DBL.fiftyFive.val,
-        width: 450,
-        color: AppColor.backgroundColor.val,
-        child: CustomListViewBuilder(
-            itemCount: state.verificationTypes.length,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              VerificationTypes item = state.verificationTypes[index];
-              return InkWell(
-                onTap: () {
-                  _careGiversBloc
-                      .add(CareGiversEvent.isSelectedVerificationTab(item));
-                },
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      left: DBL.thirty.val, top: DBL.fifteen.val),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CustomText(
-                        item.title ?? "",
-                        style: TS().gRoboto(
-                            fontSize: FS.font16.val,
-                            color: item.isSelected
-                                ? AppColor.primaryColor.val
-                                : AppColor.lightGrey11.val,
-                            fontWeight: FW.w600.val),
-                      ),
-                      CustomSizedBox(
-                        height: DBL.fifteen.val,
-                      ),
-                      item.isSelected
-                          ? CustomContainer.decoration(
-                              width: 190,
-                              height: 3,
-                              decoration: BoxDecoration(
-                                color: AppColor.primaryColor.val,
-                              ),
-                            )
-                          : CustomSizedBox.shrink()
-                    ],
-                  ),
-                ),
               );
             }));
   }
@@ -217,23 +170,27 @@ class _CareGiversPageState extends State<CareGiversPage> {
         _updateData();
       }
     }
-    return mCareGiverList.isNotEmpty
-        ? Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              LayoutBuilder(builder: (context, constraints) {
-                return _tableActionView(constraints, context);
-              }),
-              CustomSizedBox(height: DBL.fifteen.val),
-              CustomSizedBox(
-                height: (_limit + 1) * 48,
-                child: _caregiversTable(state, context),
-              ),
-              CustomSizedBox(height: DBL.twenty.val),
-              _paginationView()
-            ],
-          )
-        : EmptyView(title: AppString.emptyCareGivers.val);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        LayoutBuilder(builder: (context, constraints) {
+          return _tableActionView(constraints, context);
+        }),
+        mCareGiverList.isNotEmpty
+            ? Column(
+                children: [
+                  CustomSizedBox(height: DBL.fifteen.val),
+                  CustomSizedBox(
+                    height: (_limit + 1) * 48,
+                    child: _caregiversTable(state, context),
+                  ),
+                  CustomSizedBox(height: DBL.twenty.val),
+                  _paginationView()
+                ],
+              )
+            : EmptyView(title: AppString.emptyCareGivers.val),
+      ],
+    );
   }
 
   SingleChildScrollView _tableActionView(
@@ -415,17 +372,24 @@ class _CareGiversPageState extends State<CareGiversPage> {
               AppString.phoneNumber.val,
             ),
           ),
-          _tabType != 1
+          _tabType == 1
               ? DataColumn2(
-                  fixedWidth: DBL.oneFifty.val,
+                  size: ColumnSize.L,
                   label: _tableColumnView(AppString.status.val),
                 )
               : DataColumn2(
-                  fixedWidth: DBL.zero.val, label: const CustomText("")),
-          const DataColumn2(
-            size: ColumnSize.L,
-            label: CustomText(""),
-          ),
+                  fixedWidth: DBL.oneFifty.val,
+                  label: _tableColumnView(AppString.status.val),
+                ),
+          _tabType == 1
+              ? const DataColumn2(
+                  fixedWidth: 0,
+                  label: CustomText(""),
+                )
+              : const DataColumn2(
+                  size: ColumnSize.L,
+                  label: CustomText(""),
+                ),
         ],
         rows: mCareGiverList.asMap().entries.map((e) {
           _setIndex(e.key);
@@ -440,20 +404,15 @@ class _CareGiversPageState extends State<CareGiversPage> {
               DataCell(_tableRowView(item.name?.lastName ?? "")),
               DataCell(_tableRowView(item.email ?? "")),
               DataCell(_tableRowView(item.mobile ?? "")),
-              _tabType != 1
-                  ? DataCell(_tableSwitchBox(e, item))
-                  : DataCell(_tableRowView("")),
-              DataCell(TableActions(
-                isView: true,
-                onViewTap: () {
-                  if (e.key % 2 == 0) {
-                    // autoTabRouter!.setActiveIndex(2);
-                    _verificationPopup(context, state);
-                  } else {
-                    autoTabRouter!.setActiveIndex(6);
-                  }
-                },
-              )),
+              _tabType == 1
+                  ? DataCell(_tableVerificationButton(item))
+                  : DataCell(_tableSwitchBox(item)),
+              _tabType == 1
+                  ? DataCell(_tableRowView(""))
+                  : DataCell(TableActions(
+                      isView: true,
+                      onViewTap: () {},
+                    )),
             ],
           );
         }).toList(),
@@ -473,12 +432,18 @@ class _CareGiversPageState extends State<CareGiversPage> {
     );
   }
 
-  TableSwitchBox _tableSwitchBox(MapEntry<int, Caregivers> e, Caregivers item) {
+  TableSwitchBox _tableSwitchBox(Caregivers item) {
     return TableSwitchBox(
-      value: e.value.isActive!,
+      value: item.isActive!,
       onToggle: () {
         _careGiversBloc.add(CareGiversEvent.isUserActive(item));
       },
+    );
+  }
+
+  TableVerificationButton _tableVerificationButton(Caregivers item) {
+    return TableVerificationButton(
+      caregiver: item,
     );
   }
 
@@ -540,246 +505,14 @@ class _CareGiversPageState extends State<CareGiversPage> {
 
   bool _isXs(context) => MediaQuery.of(context).size.width <= 544;
 
-  _verificationPopup(BuildContext context, CareGiversState state) {
-    showGeneralDialog(
-      context: context,
-      pageBuilder: (BuildContext buildContext, Animation animation,
-          Animation secondaryAnimation) {
-        return CustomAlertDialogWidget(
-          height: MediaQuery.of(context).size.height,
-          width: double.infinity,
-          heading: AppString.verificationProcess.val,
-          child: BlocBuilder<CareGiversBloc, CareGiversState>(
-            builder: (_, state) {
-              return Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: DBL.twentyFive.val,
-                  ),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        CustomSizedBox(
-                          height: DBL.twelve.val,
-                        ),
-                        CustomSvg(
-                          width: DBL.oneFifty.val,
-                          path: IMG.profilePlaceHolder.val,
-                        ),
-                        CustomSizedBox(
-                          height: DBL.twelve.val,
-                        ),
-                        CustomText(
-                          "John Simon",
-                          style: TS().gRoboto(
-                            color: AppColor.black2.val,
-                            fontWeight: FW.w600.val,
-                            fontSize: FS.font16.val,
-                          ),
-                        ),
-                        Divider(
-                          color: AppColor.lightBlue2.val,
-                        ),
-                        CustomSizedBox(
-                          height: DBL.ten.val,
-                        ),
-                        _verificationTabView(state),
-                        CustomSizedBox(
-                          height: DBL.twentyFive.val,
-                        ),
-                        _backgroundVerificationTopView(context),
-                      ],
-                    ),
-                  ));
-            },
-          ),
-        );
-      },
-    );
-  }
+  bool isLarge(BuildContext context) =>
+      MediaQuery.of(context).size.width <= 1236;
 
-  Column _backgroundVerificationTopView(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: RowColonCombo.twoHundred(
-                  label: AppString.dob.val,
-                  value: "01/05/1985",
-                  fontSize: FS.font13PointFive.val),
-            ),
-            !isLg(context)
-                ? Expanded(
-                    child: _mobileNumberView(),
-                  )
-                : CustomSizedBox.shrink(),
-          ],
-        ),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: RowColonCombo.twoHundred(
-                  label: AppString.gender.val,
-                  value: "Male",
-                  fontSize: FS.font13PointFive.val),
-            ),
-            !isLg(context)
-                ? Expanded(
-                    child: _alterNativeMobileNumberView(),
-                  )
-                : CustomSizedBox.shrink(),
-          ],
-        ),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: RowColonCombo.twoHundred(
-                  label: AppString.addressLine1.val,
-                  value: "Apartment #20 ",
-                  fontSize: FS.font13PointFive.val),
-            ),
-            !isLg(context)
-                ? Expanded(
-                    child: _emailView(),
-                  )
-                : CustomSizedBox.shrink(),
-          ],
-        ),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-        RowColonCombo.twoHundred(
-            label: AppString.city.val,
-            value: "New York",
-            fontSize: FS.font13PointFive.val),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-        RowColonCombo.twoHundred(
-            label: AppString.street.val,
-            value: "495 Grove Street ",
-            fontSize: FS.font13PointFive.val),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-        RowColonCombo.twoHundred(
-            label: AppString.zip.val,
-            value: "08601",
-            fontSize: FS.font13PointFive.val),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-        RowColonCombo.twoHundred(
-            label: AppString.state.val,
-            value: "New Jersey ",
-            fontSize: FS.font13PointFive.val),
-        isLg(context)
-            ? CustomSizedBox(
-                height: DBL.six.val,
-              )
-            : CustomSizedBox.shrink(),
-        isLg(context)
-            ? _backgroundVerificationRightView()
-            : CustomSizedBox.shrink(),
-        CustomSizedBox(
-          height: DBL.ten.val,
-        ),
-        Divider(
-          color: AppColor.dividerColor4.val,
-        ),
-        CustomSizedBox(
-          height: DBL.three.val,
-        ),
-        HeaderView(
-          title: AppString.documentDetails.val,
-          color: AppColor.matBlack3.val,
-          fontSize: FS.font18.val,
-          topPadding: DBL.zero.val,
-          sidePadding: DBL.zero.val,
-        ),
-        CustomSizedBox(
-          height: DBL.ten.val,
-        ),
-        RowColonCombo.twoHundred(
-            label: AppString.documentUploaded.val,
-            value: "Passport",
-            fontSize: FS.font13PointFive.val),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-        RowColonCombo.twoHundred(
-            label: AppString.docNumber.val,
-            value: "U123456789",
-            fontSize: FS.font13PointFive.val),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-        RowColonCombo.twoHundred(
-            label: AppString.expiryDate.val,
-            value: "05/12/2031",
-            fontSize: FS.font13PointFive.val),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-      ],
-    );
-  }
+  bool isLg(BuildContext context) => MediaQuery.of(context).size.width <= 1370;
 
-  RowColonCombo _emailView() {
-    return RowColonCombo.twoHundred(
-        label: AppString.email.val,
-        value: "josephgeorge@gmail.com",
-        fontSize: FS.font13PointFive.val);
-  }
+  bool isLg1(BuildContext context) => MediaQuery.of(context).size.width <= 976;
 
-  RowColonCombo _alterNativeMobileNumberView() {
-    return RowColonCombo.twoHundred(
-        label: AppString.alternativeMobileNumber.val,
-        value: "14845691319",
-        fontSize: FS.font13PointFive.val);
-  }
+  bool isXs(BuildContext context) => MediaQuery.of(context).size.width <= 760;
 
-  RowColonCombo _mobileNumberView() {
-    return RowColonCombo.twoHundred(
-        label: AppString.mobileNumber.val,
-        value: "14845691319",
-        fontSize: FS.font13PointFive.val);
-  }
-
-  Column _backgroundVerificationRightView() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _mobileNumberView(),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-        _alterNativeMobileNumberView(),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-        _emailView(),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-      ],
-    );
-  }
-
-  bool isLg(BuildContext context) => MediaQuery.of(context).size.width <= 1236;
+  bool isXs1(BuildContext context) => MediaQuery.of(context).size.width <= 780;
 }

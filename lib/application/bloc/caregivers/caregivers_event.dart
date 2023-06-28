@@ -12,6 +12,4 @@ class CareGiversEvent with _$CareGiversEvent {
   const factory CareGiversEvent.isUserActive(Caregivers caregiver) =
       _IsUserActive;
   const factory CareGiversEvent.isSelectedTab(Types type) = _IsSelectedTab;
-  const factory CareGiversEvent.isSelectedVerificationTab(
-      VerificationTypes type) = _IsSelectedVerificationTab;
 }

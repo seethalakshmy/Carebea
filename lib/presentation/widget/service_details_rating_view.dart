@@ -39,7 +39,7 @@ class ServiceDetailRatingView extends StatelessWidget {
     return Row(
       children: [
         AlertTextLabel(
-          width: DBL.twoHundred.val,
+          customWidth: DBL.twoHundred.val,
           AppString.rating.val,
           isCustomWidth: true,
         ),

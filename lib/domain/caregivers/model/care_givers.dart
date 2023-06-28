@@ -9,38 +9,40 @@ class Caregivers {
   int? gender;
   String? profile;
   bool? isActive;
+  int? verificationStatus;
 
-  Caregivers(
-      {this.userId,
-      this.name,
-      this.email,
-      this.mobile,
-      this.dob,
-      this.gender,
-      this.profile,
-      this.isActive});
+  Caregivers({
+    this.userId,
+    this.name,
+    this.email,
+    this.mobile,
+    this.dob,
+    this.gender,
+    this.profile,
+    this.isActive,
+    this.verificationStatus,
+  });
 
-  Caregivers copyWith({ String? userId,
-    Name? name,
-    String? email,
-    String? mobile,
-    String? dob,
-    int? gender,
-    String? profile,
-    bool?isActive
-  }
-
-  ) =>
+  Caregivers copyWith(
+          {String? userId,
+          Name? name,
+          String? email,
+          String? mobile,
+          String? dob,
+          int? gender,
+          String? profile,
+          bool? isActive,
+          int? verificationStatus}) =>
       Caregivers(
-          userId: userId ?? this.userId,
-          name: name ?? this.name,
-          mobile: mobile ?? this.mobile,
-          dob: dob ?? this.dob,
-          profile: profile ?? this.profile,
-          isActive: isActive ?? this.isActive,
-          email: email ?? this.email,
-          gender: gender ?? this.gender,
-
+        userId: userId ?? this.userId,
+        name: name ?? this.name,
+        mobile: mobile ?? this.mobile,
+        dob: dob ?? this.dob,
+        profile: profile ?? this.profile,
+        isActive: isActive ?? this.isActive,
+        email: email ?? this.email,
+        gender: gender ?? this.gender,
+        verificationStatus: verificationStatus ?? this.verificationStatus,
       );
 
   Caregivers.fromJson(Map<String, dynamic> json) {
@@ -51,7 +53,8 @@ class Caregivers {
     dob = json['dob'];
     gender = json['gender'];
     profile = json['profile'];
-    isActive = json['is_active']??false;
+    isActive = json['is_active'] ?? false;
+    verificationStatus = json['verification_status'] ?? false;
   }
 
   Map<String, dynamic> toJson() {

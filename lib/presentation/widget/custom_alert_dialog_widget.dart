@@ -7,12 +7,16 @@ import 'package:flutter/material.dart';
 
 class CustomAlertDialogWidget extends StatelessWidget {
   const CustomAlertDialogWidget(
-      {super.key, required this.heading, required this.child, this.height, this.width});
+      {super.key,
+      required this.heading,
+      required this.child,
+      this.height,
+      this.width});
 
   final String heading;
   final Widget child;
-  final double?height;
-  final double?width;
+  final double? height;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +29,8 @@ class CustomAlertDialogWidget extends StatelessWidget {
       child: Wrap(
         children: [
           Container(
-            width: width??1072,
-            height: height??550,
+            width: width ?? 1072,
+            height: height ?? 550,
             decoration: BoxDecoration(
               color: Colors.white,
               shape: BoxShape.rectangle,
@@ -43,10 +47,7 @@ class CustomAlertDialogWidget extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _headerWidget(context, heading ?? ""),
-                  child
-                ],
+                children: [_headerWidget(context, heading), child],
               ),
             ),
           ),

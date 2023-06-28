@@ -32,6 +32,7 @@ enum AppString {
   userManagement("User Management"),
   userManagementDetail("User Management Detail"),
   careAmbassadorDetail("Care Ambassador Detail"),
+  careAmbassadorVerification("Care Ambassador Verification"),
   transactionManagement("Transaction Management"),
   careAmbassadorProfile("Care Ambassador Profile"),
   completedServiceRequest("Completed Service Request"),
@@ -86,6 +87,7 @@ enum AppString {
       "The reported issue by the care ambassador during the shift"),
   otherIssues("Other issues"),
   rating("Rating"),
+  submit("Submit"),
   averageReviewFromClient("Average Review \nFrom Client"),
   feedBack("Feedback"),
   endDateEndTime("End Date & End Time"),
@@ -164,6 +166,7 @@ enum AppString {
   state("State"),
   zip("Zip"),
   documentDetails("Document Details"),
+  certificateVerification("Certificate Verification"),
   documentUploaded("Document Uploaded"),
   documentNumber("Document Number"),
   hhaDocument("HHA Document"),
@@ -189,7 +192,6 @@ enum AppString {
   basicDetails("Basic Details"),
   dateOfBirth("Date of Birth"),
   ddmmyyyy("dd/mm/yyyy"),
-
   personalDetails("Personal Details"),
   qualificationAndTestResult("Qualifications & Test Result"),
   uploadYourProfilePhoto("Upload Your Profile Photo"),
@@ -208,13 +210,10 @@ enum AppString {
   back("Back"),
   verificationProcess("Verification Process"),
   backGroundVerification("Background Verification"),
-  certificateVerification("Certificate Verification"),
-
   lessThanAYear("Less than 1 year"),
   oneToTwoYear("1 - 2 year"),
   twoToFiveYear("2 - 5 year"),
   fiveAndMore("5 and more"),
-
   doYouHaveHHAReg("Do you have HHA registration?"),
   enterHHANumber("Enter HHA Number"),
   doYouHaveBLSCertification("Do you have BLS CPR/First Aid Certification?"),
@@ -223,14 +222,33 @@ enum AppString {
   clickHereToRegister("Click here to register"),
   pleaseVisitDoctorProvideTBTest(
       "Please visit your doctor that provide TB testing"),
-
   knownLanguages("Select your known languages"),
   ifOthersPlzSpecify("If others, please specify"),
+  backgroundCheckStatus("Background Check Status"),
+  approve("Approve"),
+  approved("Approved"),
+  rejected("Rejected"),
+  reject("Reject"),
+  startVerification("Start Verification"),
+  startedVerification("Started Verification"),
+  trainingStarted("Training Started"),
+  enterTheReason("Enter the reason"),
+  acceptThisCareAmbassador("Do you want to accept this care ambassador?"),
+  selectRejectedDocument("Select rejected document and mentioned the reason"),
+
+  ///paths
+  careAmbassadorVerificationPath("/care-ambassador-verification"),
+  careAmbassadorCreationPath("/care-ambassador-creation"),
+  careAmbassadorProfilePath("/care-ambassador-profile"),
+  careAmbassadorDetailPath("/care-ambassador-detail"),
 
   ///validations
   emptyEmail("Email address shouldn't be empty"),
+  emptyReason("Reason shouldn't be empty"),
   validEmail("Enter valid email address"),
   emptyPassword("Password shouldn't be empty"),
+  emptyRejectedDocument(
+      "Please Select rejected document and mentioned the reason"),
   passwordLengthError("Password should be at least 8 characters"),
   emptyConfirmPassword("Confirm password shouldn't be empty"),
   notMatchConfirmPassword("Confirm password doesn't match"),
@@ -267,6 +285,7 @@ enum AppColor {
   darkBlue(Color(0xff070329)),
   lightBlue1(Color(0xffDAD8EE)),
   lightBlue2(Color(0xffF6F9FF)),
+  lightBlue3(Color(0xffF0F3FF)),
   black(Color(0xff000000)),
   black2(Color(0xff020E1A)),
   black3(Color(0xff1A1C25)),
@@ -330,7 +349,8 @@ enum AppColor {
   red(Color(0xffE75A77)),
   red2(Color.fromRGBO(253, 66, 66, 0.8)),
   red3(Color(0xffFDEDEE)),
-  red4(Color(0xffDC0C0C)),
+  red4(Color(0xffFDEDEE)),
+  red5(Color(0xffFF2727)),
   blue(Color(0xff556DD3)),
   success(Color(0xff53a653)),
   warning(Color(0xffffcc00)),
@@ -378,13 +398,14 @@ enum IMG {
   iconSearch("assets/icons/search_icon.svg"),
   iconUpload("assets/icons/uploadIcon.svg"),
   exclamation("assets/icons/exclamation.svg"),
-
+  file("assets/icons/ic_file.svg"),
   imageNotFound("assets/icons/image_not_found.png"),
-
   ssn("assets/icons/ic_ssn.svg"),
   warning("assets/icons/ic_warning.svg"),
   completed("assets/icons/ic_completed.svg"),
   drawerPng("assets/images/drawer.png"),
+  unCheckBox("assets/icons/ic_uncheck.svg"),
+  checkBox("assets/icons/ic_check.svg"),
   colorLogoPng("assets/images/color_logo.png"),
   blackLogoPng("assets/images/black_logo.png"),
   careGiver("assets/images/caregiver.png"),
@@ -529,7 +550,7 @@ enum DBL {
   oneSeventySix(176.0),
   oneSeventyNine(179.0),
   oneEighty(180.0),
-  hundredNinety(190.0),
+  oneNinety(190.0),
   twoHundred(200.0),
   twoThirty(230.0),
   twoForty(240),
@@ -594,7 +615,6 @@ enum INT {
   fifty(50),
   eightyNine(89),
   hundred(100),
-
   MAX_FILE_SIZE(20000000);
 
   final int val;
@@ -642,6 +662,7 @@ enum Day {
   sun("Sunday");
 
   final String val;
+
   const Day(this.val);
 }
 
@@ -655,10 +676,23 @@ enum InOut {
 }
 
 enum Verification {
-  verificationStart(0),
-  verificationStarted(1),
-  trainingStarted(2);
+  startVerification(1),
+  startedVerification(2),
+  trainingStarted(3);
 
   final int val;
+
   const Verification(this.val);
 }
+
+enum Approve {
+  approveOrReject(0),
+  approved(1),
+  rejected(2);
+
+  final int val;
+
+  const Approve(this.val);
+}
+
+enum ToastPosition { top, bottom, topLeft, topRight, bottomLeft, bottomRight }

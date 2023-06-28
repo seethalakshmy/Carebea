@@ -1,4 +1,5 @@
 import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart';
+import 'package:admin_580_tech/presentation/caregiver_verification/caregiver_verification_page.dart';
 import 'package:admin_580_tech/presentation/forgot_password/forgot_password_page.dart';
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
 import 'package:admin_580_tech/presentation/reset_password/reset_password_page.dart';
@@ -61,12 +62,16 @@ import '../transaction_management/transaction_management_page.dart';
           page: CareGiverProfilePage,
         ),
         AutoRoute(
-          path: 'caregiver-creation',
+          path: 'care-ambassador-creation',
           page: CaregiverCreationPage,
         ),
         AutoRoute(
           path: 'caregiver-on_boarding',
           page: OnboardingPage,
+        ),
+        AutoRoute(
+          path: 'care-ambassador-verification',
+          page: CaregiverVerificationPage,
         ),
       ],
     ),
