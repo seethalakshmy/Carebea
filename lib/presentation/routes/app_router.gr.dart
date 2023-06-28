@@ -95,6 +95,7 @@ class AppRouter extends _i15.RootStackRouter {
       return _i15.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i8.CareGiverDetailPage(),
+        maintainState: false,
       );
     },
     UserManagementDetailRoute.name: (routeData) {
@@ -141,6 +142,7 @@ class AppRouter extends _i15.RootStackRouter {
           key: args.key,
           id: args.id,
         ),
+        maintainState: false,
       );
     },
   };

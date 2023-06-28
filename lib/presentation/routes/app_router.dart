@@ -45,9 +45,9 @@ import '../transaction_management/transaction_management_page.dart';
           page: UserManagementPage,
         ),
         AutoRoute(
-          path: 'care-ambassador-detail',
-          page: CareGiverDetailPage,
-        ),
+            path: 'care-ambassador-detail',
+            page: CareGiverDetailPage,
+            maintainState: false),
         AutoRoute(
           path: 'user-management-detail',
           page: UserManagementDetailPage,
@@ -70,9 +70,9 @@ import '../transaction_management/transaction_management_page.dart';
           page: OnboardingPage,
         ),
         AutoRoute(
-          path: 'care-ambassador-verification',
-          page: CaregiverVerificationPage,
-        ),
+            path: 'care-ambassador-verification',
+            page: CaregiverVerificationPage,
+            maintainState: false),
       ],
     ),
   ],
