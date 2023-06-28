@@ -25,10 +25,11 @@ class TableVerificationButton extends StatelessWidget {
           autoTabRouter?.setActiveIndex(6);
         } else {
           caregiverID.value = caregiver.userId ?? "";
-          // autoTabRouter?.setActiveIndex(9);
+         // autoTabRouter?.setActiveIndex(9);
+          autoTabRouter?.navigate(CaregiverVerificationRoute(id: caregiver.userId));
 
-          context.router
-              .navigate(CaregiverVerificationRoute(id: caregiver.userId));
+        /*  context.router
+              .navigate(CaregiverVerificationRoute(id: caregiver.userId));*/
           // AutoRouter.of(context).push(CaregiverVerificationRoute());
         }
       },
