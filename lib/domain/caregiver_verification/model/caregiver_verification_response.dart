@@ -176,7 +176,7 @@ class DocumentDetails {
       this.expiryDate});
 
   DocumentDetails.fromJson(Map<String, dynamic> json) {
-    docUrl = json['doc_url'];
+    // docUrl = json['doc_url'];
     documentUploaded = json['document_uploaded'];
     documentNumber = json['doument_number'];
     expiryDate = json['expiry_date'];
@@ -199,7 +199,7 @@ class CertificateVerification {
   CertificateVerification({this.approvalStatus, this.qualificationAndTest});
 
   CertificateVerification.fromJson(Map<String, dynamic> json) {
-    approvalStatus = json['approval_status '];
+    approvalStatus = json['certificate_verification'];
     qualificationAndTest = json['qualification_and_test'] != null
         ? QualificationAndTest.fromJson(json['qualification_and_test'])
         : null;
@@ -207,7 +207,7 @@ class CertificateVerification {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['approval_status '] = approvalStatus;
+    data['certificate_verification'] = approvalStatus;
     if (qualificationAndTest != null) {
       data['qualification_and_test'] = qualificationAndTest!.toJson();
     }
@@ -253,15 +253,15 @@ class QualificationAndTest {
     isHhaDocument = json['is_hha_document'];
     hhaDocumentNumber = json['hha_document_number'];
     hhaExpiryDate = json['hha_expiry_date'];
-    hhaDocUrl = json['hha_doc_url'];
+    // hhaDocUrl = json['hha_doc_url'];
     isBlsFirstAidCertification = json['is_bls_first_aid_certification'];
     blsDocumentNumber = json['bls_document_number'];
     blsExpiryDate = json['bls_expiry_date'];
-    blsDocUrl = json['bls_doc_url'];
+    // blsDocUrl = json['bls_doc_url'];
     isTbPpdTest = json['is_tb_ppd_test'];
     tbResult = json['tb_result'];
     tbTakenDate = json['tb_taken_date'];
-    tbDocUrl = json['tb_doc_url'];
+    // tbDocUrl = json['tb_doc_url'];
     isCovidVaccination = json['is_covid_vaccination'];
     covidTakenDate = json['covid_taken_date'];
     covidDocUrl = json['covid_doc_url'];

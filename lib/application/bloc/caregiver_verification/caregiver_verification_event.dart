@@ -30,12 +30,13 @@ class CareGiverVerificationEvent with _$CareGiverVerificationEvent {
   const factory CareGiverVerificationEvent.careGiverBackgroundVerify(
       {required String userID,
       required int status,
+      required BuildContext context,
       String? rejectReason}) = _CareGiverBackgroundVerify;
 
-  const factory CareGiverVerificationEvent.careGiverCertificateApprove({
-    required String userID,
-    required int status,
-  }) = _CareGiverCertificateApprove;
+  const factory CareGiverVerificationEvent.careGiverCertificateApprove(
+      {required String userID,
+      required int status,
+      required BuildContext context}) = _CareGiverCertificateApprove;
 
   const factory CareGiverVerificationEvent.careGiverCertificateReject(
       {required String userID,

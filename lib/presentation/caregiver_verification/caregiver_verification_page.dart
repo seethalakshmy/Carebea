@@ -2,7 +2,6 @@ import 'package:admin_580_tech/application/bloc/form_validation/form_validation_
 import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_verification_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/reject_params.dart';
-import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/widgets/custom_check_text_field.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/widgets/file_preview.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
@@ -281,6 +280,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
   }
 
   _certificateVerificationView(CareGiverVerificationState state) {
+    QualificationAndTest? qualificationAndTest =
+        state.response?.data?.certificateVerification?.qualificationAndTest;
     return CustomPadding.symmetric(
       horizontal: DBL.fifty.val,
       vertical: DBL.three.val,
@@ -300,7 +301,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: _hhaRowCombo()),
+              Expanded(child: _hhaRowCombo(qualificationAndTest)),
               !isXs1(context)
                   ? FilePreview(
                       fileName: "HHA Document",
@@ -320,7 +321,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: _blsRowCombo()),
+              Expanded(child: _blsRowCombo(qualificationAndTest)),
               !isXs1(context)
                   ? FilePreview(
                       fileName: "BLS Document",
@@ -340,7 +341,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: _tbAndPptRowCombo()),
+              Expanded(child: _tbAndPptRowCombo(qualificationAndTest)),
               !isXs1(context)
                   ? FilePreview(
                       fileName: "TB Document",
@@ -360,7 +361,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: _covid19RowCombo()),
+              Expanded(child: _covid19RowCombo(qualificationAndTest)),
               !isXs1(context)
                   ? FilePreview(
                       fileName: "Covid Document",
@@ -408,15 +409,18 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
 
   ApprovalStatusBox _certificateApprovalStatusBox(
       CareGiverVerificationState state) {
+    int status =
+        state.response?.data?.certificateVerification?.approvalStatus ?? 0;
+    print('status is $status');
     return ApprovalStatusBox(
       careGiversVerificationState: state,
       textEditingController: _reasonController,
       focusNode: _reasonNode,
-      status: 0,
+      status: status,
       onTapApprove: () {
         context.read<CareGiverVerificationBloc>().add(
             CareGiverVerificationEvent.careGiverCertificateApprove(
-                userID: userId, status: 1));
+                userID: userId, status: 1, context: context));
       },
       onTapReject: () {
         _certificateRejectPopUp(
@@ -426,49 +430,70 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
     );
   }
 
-  _hhaRowCombo() {
-    return Column(
-      children: [
-        titleView(label: AppString.hhaDocument.val, value: "Yes"),
-        CustomSizedBox(height: DBL.eight.val),
-        _subTitleVIew(label: AppString.docNumber.val, value: "U123456789"),
-        CustomSizedBox(height: DBL.eight.val),
-        _subTitleVIew(label: AppString.expiryDate.val, value: "05/12/2031"),
-      ],
-    );
-  }
-
-  _blsRowCombo() {
+  _hhaRowCombo(QualificationAndTest? qualificationAndTest) {
     return Column(
       children: [
         titleView(
-            label: AppString.bLSCPRAndFirstAidCertification.val, value: "Yes"),
+            label: AppString.hhaDocument.val,
+            value: qualificationAndTest?.isHhaDocument ?? ""),
         CustomSizedBox(height: DBL.eight.val),
-        _subTitleVIew(label: AppString.docNumber.val, value: "U123456789"),
+        _subTitleVIew(
+            label: AppString.docNumber.val,
+            value: qualificationAndTest?.hhaDocumentNumber ?? ""),
         CustomSizedBox(height: DBL.eight.val),
-        _subTitleVIew(label: AppString.expiryDate.val, value: "05/12/2031"),
+        _subTitleVIew(
+            label: AppString.expiryDate.val,
+            value: qualificationAndTest?.hhaExpiryDate ?? ""),
       ],
     );
   }
 
-  _tbAndPptRowCombo() {
+  _blsRowCombo(QualificationAndTest? qualificationAndTest) {
     return Column(
       children: [
-        titleView(label: AppString.tBAndPPDTest.val, value: "Yes"),
+        titleView(
+            label: AppString.bLSCPRAndFirstAidCertification.val,
+            value: qualificationAndTest?.isBlsFirstAidCertification ?? ""),
         CustomSizedBox(height: DBL.eight.val),
-        _subTitleVIew(label: AppString.takenDate.val, value: "05/12/2031"),
+        _subTitleVIew(
+            label: AppString.docNumber.val,
+            value: qualificationAndTest?.blsDocumentNumber ?? ""),
         CustomSizedBox(height: DBL.eight.val),
-        _subTitleVIew(label: AppString.result.val, value: "Negative"),
+        _subTitleVIew(
+            label: AppString.expiryDate.val,
+            value: qualificationAndTest?.blsExpiryDate ?? ""),
       ],
     );
   }
 
-  _covid19RowCombo() {
+  _tbAndPptRowCombo(QualificationAndTest? qualificationAndTest) {
     return Column(
       children: [
-        titleView(label: AppString.covid19Vaccination.val, value: "Yes"),
+        titleView(
+            label: AppString.tBAndPPDTest.val,
+            value: qualificationAndTest?.isTbPpdTest ?? ""),
         CustomSizedBox(height: DBL.eight.val),
-        _subTitleVIew(label: AppString.takenDate.val, value: "05/12/2031"),
+        _subTitleVIew(
+            label: AppString.takenDate.val,
+            value: qualificationAndTest?.tbTakenDate ?? ""),
+        CustomSizedBox(height: DBL.eight.val),
+        _subTitleVIew(
+            label: AppString.result.val,
+            value: qualificationAndTest?.tbResult ?? ""),
+      ],
+    );
+  }
+
+  _covid19RowCombo(QualificationAndTest? qualificationAndTest) {
+    return Column(
+      children: [
+        titleView(
+            label: AppString.covid19Vaccination.val,
+            value: qualificationAndTest?.isCovidVaccination ?? ""),
+        CustomSizedBox(height: DBL.eight.val),
+        _subTitleVIew(
+            label: AppString.takenDate.val,
+            value: qualificationAndTest?.covidTakenDate ?? ""),
       ],
     );
   }
@@ -577,47 +602,25 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
 
   _backgroundVerifyApprovalStatusBox(
       CareGiverVerificationState state, int status) {
-    return BlocListener<CareGiverVerificationBloc, CareGiverVerificationState>(
-      listenWhen: (pre, cu) {
-        return pre != cu;
+    return ApprovalStatusBox(
+      careGiversVerificationState: state,
+      textEditingController: _reasonController,
+      focusNode: _reasonNode,
+      status: status,
+      onTapApprove: () {
+        context.read<CareGiverVerificationBloc>().add(
+            CareGiverVerificationEvent.careGiverBackgroundVerify(
+                userID: userId, status: 1, context: context));
       },
-      listener: (context, state) {
-        VerifyResponse? response = state.backgroundVerifyResponse;
-        if (response?.status != null && response!.status!) {
-          showTopSnackBar(
-            Overlay.of(context),
-            CustomSnackBar.success(
-              message: response.message ?? "Success",
-            ),
-          );
-        } else if (response?.status != null && !response!.status!) {
-          showTopSnackBar(
-            Overlay.of(context),
-            CustomSnackBar.error(
-              message: response.message ?? "Failure",
-            ),
-          );
-        }
+      onTapReject: () {
+        _reasonNode.requestFocus();
+        context.read<CareGiverVerificationBloc>().add(
+            CareGiverVerificationEvent.careGiverBackgroundVerify(
+                userID: userId,
+                status: 2,
+                rejectReason: _reasonController.text.trim(),
+                context: context));
       },
-      child: ApprovalStatusBox(
-        careGiversVerificationState: state,
-        textEditingController: _reasonController,
-        focusNode: _reasonNode,
-        status: status,
-        onTapApprove: () {
-          context.read<CareGiverVerificationBloc>().add(
-              CareGiverVerificationEvent.careGiverBackgroundVerify(
-                  userID: userId, status: 1));
-        },
-        onTapReject: () {
-          _reasonNode.requestFocus();
-          context.read<CareGiverVerificationBloc>().add(
-              CareGiverVerificationEvent.careGiverBackgroundVerify(
-                  userID: userId,
-                  status: 2,
-                  rejectReason: _reasonController.text.trim()));
-        },
-      ),
     );
   }
 

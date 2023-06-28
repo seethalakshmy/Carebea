@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/core/custom_snackbar.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_verification_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/reject_params.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
@@ -5,8 +6,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../../core/enum.dart';
 import '../../../domain/caregivers/model/verification_types.dart';
@@ -39,8 +38,12 @@ class CareGiverVerificationBloc
   _getCareGiverVerificationData(_GetVerificationData event,
       Emitter<CareGiverVerificationState> emit) async {
     emit(state.copyWith(
-      isLoading: true,
-    ));
+        isLoading: true,
+        response: null,
+        certificateVerifyRejectResponse: null,
+        verificationTypes: [],
+        backgroundVerifyResponse: null,
+        selectedVerificationIndex: 0));
     final List<VerificationTypes> verificationTypeList = [
       VerificationTypes(
           id: 1, title: AppString.backGroundVerification.val, isSelected: true),
@@ -77,8 +80,14 @@ class CareGiverVerificationBloc
             status: event.status,
             rejectReason: event.rejectReason);
     CareGiverVerificationState caregiverVerificationState = result.fold((l) {
+      CSnackBar.showError(event.context, msg: l.error);
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
+      if (r.status ?? false) {
+        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+      } else {
+        CSnackBar.showError(event.context, msg: r.message ?? "");
+      }
       return state.copyWith(
         isLoading: false,
         backgroundVerifyResponse: r,
@@ -93,8 +102,15 @@ class CareGiverVerificationBloc
       userID: event.userID,
     );
     CareGiverVerificationState caregiverVerificationState2 = result2.fold((l) {
+      CSnackBar.showError(event.context, msg: l.error);
+
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
+      if (r.status ?? false) {
+        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+      } else {
+        CSnackBar.showError(event.context, msg: r.message ?? "");
+      }
       return state.copyWith(
         isLoading: false,
         response: r,
@@ -112,8 +128,15 @@ class CareGiverVerificationBloc
         await careGiverVerificationRepository.careGiverCertificateApprove(
             userID: event.userID, status: event.status);
     CareGiverVerificationState caregiverVerificationState = result.fold((l) {
+      CSnackBar.showError(event.context, msg: l.error);
+
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
+      if (r.status ?? false) {
+        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+      } else {
+        CSnackBar.showError(event.context, msg: r.message ?? "");
+      }
       return state.copyWith(
         isLoading: false,
         certificateVerifyApproveResponse: r,
@@ -147,14 +170,15 @@ class CareGiverVerificationBloc
         await careGiverVerificationRepository.careGiverCertificateReject(
             params: event.params);
     CareGiverVerificationState caregiverVerificationState = result.fold((l) {
+      CSnackBar.showError(event.context, msg: l.error);
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
-      showTopSnackBar(
-        Overlay.of(event.context),
-        const CustomSnackBar.success(
-          message: "Success",
-        ),
-      );
+      if (r.status ?? false) {
+        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        Navigator.pop(event.context);
+      } else {
+        CSnackBar.showError(event.context, msg: r.message ?? "");
+      }
       return state.copyWith(
         isLoading: false,
         certificateVerifyRejectResponse: r,
