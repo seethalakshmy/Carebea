@@ -29,11 +29,14 @@ mixin _$CareGiverVerificationEvent {
     required TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, BuildContext context)
+    required TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
+    required TResult Function(String userId, BuildContext context)
+        careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) =>
       throw _privateConstructorUsedError;
@@ -50,11 +53,14 @@ mixin _$CareGiverVerificationEvent {
     TResult? Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, BuildContext context)?
+    TResult? Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult? Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) =>
       throw _privateConstructorUsedError;
@@ -71,11 +77,14 @@ mixin _$CareGiverVerificationEvent {
     TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, BuildContext context)?
+    TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
   }) =>
@@ -98,6 +107,8 @@ mixin _$CareGiverVerificationEvent {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
+    required TResult Function(_CareGiverTrainingVerify value)
+        careGiverTrainingVerify,
     required TResult Function(_IsWebViewLoading value) isWebViewLoading,
   }) =>
       throw _privateConstructorUsedError;
@@ -119,6 +130,7 @@ mixin _$CareGiverVerificationEvent {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult? Function(_IsWebViewLoading value)? isWebViewLoading,
   }) =>
       throw _privateConstructorUsedError;
@@ -140,6 +152,7 @@ mixin _$CareGiverVerificationEvent {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult Function(_IsWebViewLoading value)? isWebViewLoading,
     required TResult orElse(),
   }) =>
@@ -243,11 +256,14 @@ class _$_GetVerificationData implements _GetVerificationData {
     required TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, BuildContext context)
+    required TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
+    required TResult Function(String userId, BuildContext context)
+        careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
     return getVerificationData(userId);
@@ -267,11 +283,14 @@ class _$_GetVerificationData implements _GetVerificationData {
     TResult? Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, BuildContext context)?
+    TResult? Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult? Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
     return getVerificationData?.call(userId);
@@ -291,11 +310,14 @@ class _$_GetVerificationData implements _GetVerificationData {
     TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, BuildContext context)?
+    TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -324,6 +346,8 @@ class _$_GetVerificationData implements _GetVerificationData {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
+    required TResult Function(_CareGiverTrainingVerify value)
+        careGiverTrainingVerify,
     required TResult Function(_IsWebViewLoading value) isWebViewLoading,
   }) {
     return getVerificationData(this);
@@ -348,6 +372,7 @@ class _$_GetVerificationData implements _GetVerificationData {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult? Function(_IsWebViewLoading value)? isWebViewLoading,
   }) {
     return getVerificationData?.call(this);
@@ -372,6 +397,7 @@ class _$_GetVerificationData implements _GetVerificationData {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult Function(_IsWebViewLoading value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -471,11 +497,14 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
     required TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, BuildContext context)
+    required TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
+    required TResult Function(String userId, BuildContext context)
+        careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
     return isSelectedVerificationTab(type);
@@ -495,11 +524,14 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
     TResult? Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, BuildContext context)?
+    TResult? Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult? Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
     return isSelectedVerificationTab?.call(type);
@@ -519,11 +551,14 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
     TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, BuildContext context)?
+    TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -552,6 +587,8 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
+    required TResult Function(_CareGiverTrainingVerify value)
+        careGiverTrainingVerify,
     required TResult Function(_IsWebViewLoading value) isWebViewLoading,
   }) {
     return isSelectedVerificationTab(this);
@@ -576,6 +613,7 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult? Function(_IsWebViewLoading value)? isWebViewLoading,
   }) {
     return isSelectedVerificationTab?.call(this);
@@ -600,6 +638,7 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult Function(_IsWebViewLoading value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -696,11 +735,14 @@ class _$_IsTappedReason implements _IsTappedReason {
     required TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, BuildContext context)
+    required TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
+    required TResult Function(String userId, BuildContext context)
+        careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
     return isTappedReason(value);
@@ -720,11 +762,14 @@ class _$_IsTappedReason implements _IsTappedReason {
     TResult? Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, BuildContext context)?
+    TResult? Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult? Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
     return isTappedReason?.call(value);
@@ -744,11 +789,14 @@ class _$_IsTappedReason implements _IsTappedReason {
     TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, BuildContext context)?
+    TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -777,6 +825,8 @@ class _$_IsTappedReason implements _IsTappedReason {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
+    required TResult Function(_CareGiverTrainingVerify value)
+        careGiverTrainingVerify,
     required TResult Function(_IsWebViewLoading value) isWebViewLoading,
   }) {
     return isTappedReason(this);
@@ -801,6 +851,7 @@ class _$_IsTappedReason implements _IsTappedReason {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult? Function(_IsWebViewLoading value)? isWebViewLoading,
   }) {
     return isTappedReason?.call(this);
@@ -825,6 +876,7 @@ class _$_IsTappedReason implements _IsTappedReason {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult Function(_IsWebViewLoading value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -920,11 +972,14 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
     required TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, BuildContext context)
+    required TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
+    required TResult Function(String userId, BuildContext context)
+        careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
     return isTappedHHaReason(value);
@@ -944,11 +999,14 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
     TResult? Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, BuildContext context)?
+    TResult? Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult? Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
     return isTappedHHaReason?.call(value);
@@ -968,11 +1026,14 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
     TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, BuildContext context)?
+    TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -1001,6 +1062,8 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
+    required TResult Function(_CareGiverTrainingVerify value)
+        careGiverTrainingVerify,
     required TResult Function(_IsWebViewLoading value) isWebViewLoading,
   }) {
     return isTappedHHaReason(this);
@@ -1025,6 +1088,7 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult? Function(_IsWebViewLoading value)? isWebViewLoading,
   }) {
     return isTappedHHaReason?.call(this);
@@ -1049,6 +1113,7 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult Function(_IsWebViewLoading value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -1144,11 +1209,14 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
     required TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, BuildContext context)
+    required TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
+    required TResult Function(String userId, BuildContext context)
+        careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
     return isTappedBlsReason(value);
@@ -1168,11 +1236,14 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
     TResult? Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, BuildContext context)?
+    TResult? Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult? Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
     return isTappedBlsReason?.call(value);
@@ -1192,11 +1263,14 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
     TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, BuildContext context)?
+    TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -1225,6 +1299,8 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
+    required TResult Function(_CareGiverTrainingVerify value)
+        careGiverTrainingVerify,
     required TResult Function(_IsWebViewLoading value) isWebViewLoading,
   }) {
     return isTappedBlsReason(this);
@@ -1249,6 +1325,7 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult? Function(_IsWebViewLoading value)? isWebViewLoading,
   }) {
     return isTappedBlsReason?.call(this);
@@ -1273,6 +1350,7 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult Function(_IsWebViewLoading value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -1367,11 +1445,14 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
     required TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, BuildContext context)
+    required TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
+    required TResult Function(String userId, BuildContext context)
+        careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
     return isTappedTbReason(value);
@@ -1391,11 +1472,14 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
     TResult? Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, BuildContext context)?
+    TResult? Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult? Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
     return isTappedTbReason?.call(value);
@@ -1415,11 +1499,14 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
     TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, BuildContext context)?
+    TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -1448,6 +1535,8 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
+    required TResult Function(_CareGiverTrainingVerify value)
+        careGiverTrainingVerify,
     required TResult Function(_IsWebViewLoading value) isWebViewLoading,
   }) {
     return isTappedTbReason(this);
@@ -1472,6 +1561,7 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult? Function(_IsWebViewLoading value)? isWebViewLoading,
   }) {
     return isTappedTbReason?.call(this);
@@ -1496,6 +1586,7 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult Function(_IsWebViewLoading value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -1592,11 +1683,14 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
     required TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, BuildContext context)
+    required TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
+    required TResult Function(String userId, BuildContext context)
+        careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
     return isTappedCovidReason(value);
@@ -1616,11 +1710,14 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
     TResult? Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, BuildContext context)?
+    TResult? Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult? Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
     return isTappedCovidReason?.call(value);
@@ -1640,11 +1737,14 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
     TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, BuildContext context)?
+    TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -1673,6 +1773,8 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
+    required TResult Function(_CareGiverTrainingVerify value)
+        careGiverTrainingVerify,
     required TResult Function(_IsWebViewLoading value) isWebViewLoading,
   }) {
     return isTappedCovidReason(this);
@@ -1697,6 +1799,7 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult? Function(_IsWebViewLoading value)? isWebViewLoading,
   }) {
     return isTappedCovidReason?.call(this);
@@ -1721,6 +1824,7 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult Function(_IsWebViewLoading value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -1819,11 +1923,14 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
     required TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, BuildContext context)
+    required TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
+    required TResult Function(String userId, BuildContext context)
+        careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
     return getCareGiverVerificationData(userId);
@@ -1843,11 +1950,14 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
     TResult? Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, BuildContext context)?
+    TResult? Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult? Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
     return getCareGiverVerificationData?.call(userId);
@@ -1867,11 +1977,14 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
     TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, BuildContext context)?
+    TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -1900,6 +2013,8 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
+    required TResult Function(_CareGiverTrainingVerify value)
+        careGiverTrainingVerify,
     required TResult Function(_IsWebViewLoading value) isWebViewLoading,
   }) {
     return getCareGiverVerificationData(this);
@@ -1924,6 +2039,7 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult? Function(_IsWebViewLoading value)? isWebViewLoading,
   }) {
     return getCareGiverVerificationData?.call(this);
@@ -1948,6 +2064,7 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult Function(_IsWebViewLoading value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -2079,11 +2196,14 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
     required TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, BuildContext context)
+    required TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
+    required TResult Function(String userId, BuildContext context)
+        careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
     return careGiverBackgroundVerify(userID, status, context, rejectReason);
@@ -2103,11 +2223,14 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
     TResult? Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, BuildContext context)?
+    TResult? Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult? Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
     return careGiverBackgroundVerify?.call(
@@ -2128,11 +2251,14 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
     TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, BuildContext context)?
+    TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -2161,6 +2287,8 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
+    required TResult Function(_CareGiverTrainingVerify value)
+        careGiverTrainingVerify,
     required TResult Function(_IsWebViewLoading value) isWebViewLoading,
   }) {
     return careGiverBackgroundVerify(this);
@@ -2185,6 +2313,7 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult? Function(_IsWebViewLoading value)? isWebViewLoading,
   }) {
     return careGiverBackgroundVerify?.call(this);
@@ -2209,6 +2338,7 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult Function(_IsWebViewLoading value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -2243,7 +2373,12 @@ abstract class _$$_CareGiverCertificateApproveCopyWith<$Res> {
           $Res Function(_$_CareGiverCertificateApprove) then) =
       __$$_CareGiverCertificateApproveCopyWithImpl<$Res>;
   @useResult
-  $Res call({String userID, int status, BuildContext context});
+  $Res call(
+      {String userID,
+      int status,
+      String profileUrl,
+      String userName,
+      BuildContext context});
 }
 
 /// @nodoc
@@ -2261,6 +2396,8 @@ class __$$_CareGiverCertificateApproveCopyWithImpl<$Res>
   $Res call({
     Object? userID = null,
     Object? status = null,
+    Object? profileUrl = null,
+    Object? userName = null,
     Object? context = null,
   }) {
     return _then(_$_CareGiverCertificateApprove(
@@ -2272,6 +2409,14 @@ class __$$_CareGiverCertificateApproveCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as int,
+      profileUrl: null == profileUrl
+          ? _value.profileUrl
+          : profileUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
       context: null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
@@ -2284,18 +2429,26 @@ class __$$_CareGiverCertificateApproveCopyWithImpl<$Res>
 
 class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
   const _$_CareGiverCertificateApprove(
-      {required this.userID, required this.status, required this.context});
+      {required this.userID,
+      required this.status,
+      required this.profileUrl,
+      required this.userName,
+      required this.context});
 
   @override
   final String userID;
   @override
   final int status;
   @override
+  final String profileUrl;
+  @override
+  final String userName;
+  @override
   final BuildContext context;
 
   @override
   String toString() {
-    return 'CareGiverVerificationEvent.careGiverCertificateApprove(userID: $userID, status: $status, context: $context)';
+    return 'CareGiverVerificationEvent.careGiverCertificateApprove(userID: $userID, status: $status, profileUrl: $profileUrl, userName: $userName, context: $context)';
   }
 
   @override
@@ -2305,11 +2458,16 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
             other is _$_CareGiverCertificateApprove &&
             (identical(other.userID, userID) || other.userID == userID) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.profileUrl, profileUrl) ||
+                other.profileUrl == profileUrl) &&
+            (identical(other.userName, userName) ||
+                other.userName == userName) &&
             (identical(other.context, context) || other.context == context));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userID, status, context);
+  int get hashCode =>
+      Object.hash(runtimeType, userID, status, profileUrl, userName, context);
 
   @JsonKey(ignore: true)
   @override
@@ -2332,14 +2490,18 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
     required TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, BuildContext context)
+    required TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
+    required TResult Function(String userId, BuildContext context)
+        careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
-    return careGiverCertificateApprove(userID, status, context);
+    return careGiverCertificateApprove(
+        userID, status, profileUrl, userName, context);
   }
 
   @override
@@ -2356,14 +2518,18 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
     TResult? Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, BuildContext context)?
+    TResult? Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult? Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
-    return careGiverCertificateApprove?.call(userID, status, context);
+    return careGiverCertificateApprove?.call(
+        userID, status, profileUrl, userName, context);
   }
 
   @override
@@ -2380,16 +2546,20 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
     TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, BuildContext context)?
+    TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
   }) {
     if (careGiverCertificateApprove != null) {
-      return careGiverCertificateApprove(userID, status, context);
+      return careGiverCertificateApprove(
+          userID, status, profileUrl, userName, context);
     }
     return orElse();
   }
@@ -2413,6 +2583,8 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
+    required TResult Function(_CareGiverTrainingVerify value)
+        careGiverTrainingVerify,
     required TResult Function(_IsWebViewLoading value) isWebViewLoading,
   }) {
     return careGiverCertificateApprove(this);
@@ -2437,6 +2609,7 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult? Function(_IsWebViewLoading value)? isWebViewLoading,
   }) {
     return careGiverCertificateApprove?.call(this);
@@ -2461,6 +2634,7 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult Function(_IsWebViewLoading value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -2476,10 +2650,14 @@ abstract class _CareGiverCertificateApprove
   const factory _CareGiverCertificateApprove(
       {required final String userID,
       required final int status,
+      required final String profileUrl,
+      required final String userName,
       required final BuildContext context}) = _$_CareGiverCertificateApprove;
 
   String get userID;
   int get status;
+  String get profileUrl;
+  String get userName;
   BuildContext get context;
   @JsonKey(ignore: true)
   _$$_CareGiverCertificateApproveCopyWith<_$_CareGiverCertificateApprove>
@@ -2582,11 +2760,14 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
     required TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, BuildContext context)
+    required TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
+    required TResult Function(String userId, BuildContext context)
+        careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
     return careGiverCertificateReject(userID, params, context);
@@ -2606,11 +2787,14 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
     TResult? Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, BuildContext context)?
+    TResult? Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult? Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
     return careGiverCertificateReject?.call(userID, params, context);
@@ -2630,11 +2814,14 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
     TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, BuildContext context)?
+    TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -2663,6 +2850,8 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
+    required TResult Function(_CareGiverTrainingVerify value)
+        careGiverTrainingVerify,
     required TResult Function(_IsWebViewLoading value) isWebViewLoading,
   }) {
     return careGiverCertificateReject(this);
@@ -2687,6 +2876,7 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult? Function(_IsWebViewLoading value)? isWebViewLoading,
   }) {
     return careGiverCertificateReject?.call(this);
@@ -2711,6 +2901,7 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult Function(_IsWebViewLoading value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -2733,6 +2924,257 @@ abstract class _CareGiverCertificateReject
   BuildContext get context;
   @JsonKey(ignore: true)
   _$$_CareGiverCertificateRejectCopyWith<_$_CareGiverCertificateReject>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_CareGiverTrainingVerifyCopyWith<$Res> {
+  factory _$$_CareGiverTrainingVerifyCopyWith(_$_CareGiverTrainingVerify value,
+          $Res Function(_$_CareGiverTrainingVerify) then) =
+      __$$_CareGiverTrainingVerifyCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String userId, BuildContext context});
+}
+
+/// @nodoc
+class __$$_CareGiverTrainingVerifyCopyWithImpl<$Res>
+    extends _$CareGiverVerificationEventCopyWithImpl<$Res,
+        _$_CareGiverTrainingVerify>
+    implements _$$_CareGiverTrainingVerifyCopyWith<$Res> {
+  __$$_CareGiverTrainingVerifyCopyWithImpl(_$_CareGiverTrainingVerify _value,
+      $Res Function(_$_CareGiverTrainingVerify) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? context = null,
+  }) {
+    return _then(_$_CareGiverTrainingVerify(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
+  const _$_CareGiverTrainingVerify(
+      {required this.userId, required this.context});
+
+  @override
+  final String userId;
+  @override
+  final BuildContext context;
+
+  @override
+  String toString() {
+    return 'CareGiverVerificationEvent.careGiverTrainingVerify(userId: $userId, context: $context)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CareGiverTrainingVerify &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userId, context);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CareGiverTrainingVerifyCopyWith<_$_CareGiverTrainingVerify>
+      get copyWith =>
+          __$$_CareGiverTrainingVerifyCopyWithImpl<_$_CareGiverTrainingVerify>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId) getVerificationData,
+    required TResult Function(VerificationTypes type) isSelectedVerificationTab,
+    required TResult Function(bool value) isTappedReason,
+    required TResult Function(bool value) isTappedHHaReason,
+    required TResult Function(bool value) isTappedBlsReason,
+    required TResult Function(bool value) isTappedTbReason,
+    required TResult Function(bool value) isTappedCovidReason,
+    required TResult Function(String userId) getCareGiverVerificationData,
+    required TResult Function(String userID, int status, BuildContext context,
+            String? rejectReason)
+        careGiverBackgroundVerify,
+    required TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)
+        careGiverCertificateApprove,
+    required TResult Function(
+            String userID, RejectionParams params, BuildContext context)
+        careGiverCertificateReject,
+    required TResult Function(String userId, BuildContext context)
+        careGiverTrainingVerify,
+    required TResult Function(bool value) isWebViewLoading,
+  }) {
+    return careGiverTrainingVerify(userId, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId)? getVerificationData,
+    TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
+    TResult? Function(bool value)? isTappedReason,
+    TResult? Function(bool value)? isTappedHHaReason,
+    TResult? Function(bool value)? isTappedBlsReason,
+    TResult? Function(bool value)? isTappedTbReason,
+    TResult? Function(bool value)? isTappedCovidReason,
+    TResult? Function(String userId)? getCareGiverVerificationData,
+    TResult? Function(String userID, int status, BuildContext context,
+            String? rejectReason)?
+        careGiverBackgroundVerify,
+    TResult? Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
+        careGiverCertificateApprove,
+    TResult? Function(
+            String userID, RejectionParams params, BuildContext context)?
+        careGiverCertificateReject,
+    TResult? Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
+    TResult? Function(bool value)? isWebViewLoading,
+  }) {
+    return careGiverTrainingVerify?.call(userId, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId)? getVerificationData,
+    TResult Function(VerificationTypes type)? isSelectedVerificationTab,
+    TResult Function(bool value)? isTappedReason,
+    TResult Function(bool value)? isTappedHHaReason,
+    TResult Function(bool value)? isTappedBlsReason,
+    TResult Function(bool value)? isTappedTbReason,
+    TResult Function(bool value)? isTappedCovidReason,
+    TResult Function(String userId)? getCareGiverVerificationData,
+    TResult Function(String userID, int status, BuildContext context,
+            String? rejectReason)?
+        careGiverBackgroundVerify,
+    TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
+        careGiverCertificateApprove,
+    TResult Function(
+            String userID, RejectionParams params, BuildContext context)?
+        careGiverCertificateReject,
+    TResult Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
+    TResult Function(bool value)? isWebViewLoading,
+    required TResult orElse(),
+  }) {
+    if (careGiverTrainingVerify != null) {
+      return careGiverTrainingVerify(userId, context);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetVerificationData value) getVerificationData,
+    required TResult Function(_IsSelectedVerificationTab value)
+        isSelectedVerificationTab,
+    required TResult Function(_IsTappedReason value) isTappedReason,
+    required TResult Function(_IsTappedHHaReason value) isTappedHHaReason,
+    required TResult Function(_IsTappedBlsReason value) isTappedBlsReason,
+    required TResult Function(_IsTappedTbReason value) isTappedTbReason,
+    required TResult Function(_IsTappedCovidReason value) isTappedCovidReason,
+    required TResult Function(_GetCareGiverVerificationData value)
+        getCareGiverVerificationData,
+    required TResult Function(_CareGiverBackgroundVerify value)
+        careGiverBackgroundVerify,
+    required TResult Function(_CareGiverCertificateApprove value)
+        careGiverCertificateApprove,
+    required TResult Function(_CareGiverCertificateReject value)
+        careGiverCertificateReject,
+    required TResult Function(_CareGiverTrainingVerify value)
+        careGiverTrainingVerify,
+    required TResult Function(_IsWebViewLoading value) isWebViewLoading,
+  }) {
+    return careGiverTrainingVerify(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetVerificationData value)? getVerificationData,
+    TResult? Function(_IsSelectedVerificationTab value)?
+        isSelectedVerificationTab,
+    TResult? Function(_IsTappedReason value)? isTappedReason,
+    TResult? Function(_IsTappedHHaReason value)? isTappedHHaReason,
+    TResult? Function(_IsTappedBlsReason value)? isTappedBlsReason,
+    TResult? Function(_IsTappedTbReason value)? isTappedTbReason,
+    TResult? Function(_IsTappedCovidReason value)? isTappedCovidReason,
+    TResult? Function(_GetCareGiverVerificationData value)?
+        getCareGiverVerificationData,
+    TResult? Function(_CareGiverBackgroundVerify value)?
+        careGiverBackgroundVerify,
+    TResult? Function(_CareGiverCertificateApprove value)?
+        careGiverCertificateApprove,
+    TResult? Function(_CareGiverCertificateReject value)?
+        careGiverCertificateReject,
+    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult? Function(_IsWebViewLoading value)? isWebViewLoading,
+  }) {
+    return careGiverTrainingVerify?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetVerificationData value)? getVerificationData,
+    TResult Function(_IsSelectedVerificationTab value)?
+        isSelectedVerificationTab,
+    TResult Function(_IsTappedReason value)? isTappedReason,
+    TResult Function(_IsTappedHHaReason value)? isTappedHHaReason,
+    TResult Function(_IsTappedBlsReason value)? isTappedBlsReason,
+    TResult Function(_IsTappedTbReason value)? isTappedTbReason,
+    TResult Function(_IsTappedCovidReason value)? isTappedCovidReason,
+    TResult Function(_GetCareGiverVerificationData value)?
+        getCareGiverVerificationData,
+    TResult Function(_CareGiverBackgroundVerify value)?
+        careGiverBackgroundVerify,
+    TResult Function(_CareGiverCertificateApprove value)?
+        careGiverCertificateApprove,
+    TResult Function(_CareGiverCertificateReject value)?
+        careGiverCertificateReject,
+    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult Function(_IsWebViewLoading value)? isWebViewLoading,
+    required TResult orElse(),
+  }) {
+    if (careGiverTrainingVerify != null) {
+      return careGiverTrainingVerify(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CareGiverTrainingVerify implements CareGiverVerificationEvent {
+  const factory _CareGiverTrainingVerify(
+      {required final String userId,
+      required final BuildContext context}) = _$_CareGiverTrainingVerify;
+
+  String get userId;
+  BuildContext get context;
+  @JsonKey(ignore: true)
+  _$$_CareGiverTrainingVerifyCopyWith<_$_CareGiverTrainingVerify>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -2811,11 +3253,14 @@ class _$_IsWebViewLoading implements _IsWebViewLoading {
     required TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, BuildContext context)
+    required TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
+    required TResult Function(String userId, BuildContext context)
+        careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
     return isWebViewLoading(value);
@@ -2835,11 +3280,14 @@ class _$_IsWebViewLoading implements _IsWebViewLoading {
     TResult? Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, BuildContext context)?
+    TResult? Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult? Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
     return isWebViewLoading?.call(value);
@@ -2859,11 +3307,14 @@ class _$_IsWebViewLoading implements _IsWebViewLoading {
     TResult Function(String userID, int status, BuildContext context,
             String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, BuildContext context)?
+    TResult Function(String userID, int status, String profileUrl,
+            String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
+    TResult Function(String userId, BuildContext context)?
+        careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -2892,6 +3343,8 @@ class _$_IsWebViewLoading implements _IsWebViewLoading {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
+    required TResult Function(_CareGiverTrainingVerify value)
+        careGiverTrainingVerify,
     required TResult Function(_IsWebViewLoading value) isWebViewLoading,
   }) {
     return isWebViewLoading(this);
@@ -2916,6 +3369,7 @@ class _$_IsWebViewLoading implements _IsWebViewLoading {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult? Function(_IsWebViewLoading value)? isWebViewLoading,
   }) {
     return isWebViewLoading?.call(this);
@@ -2940,6 +3394,7 @@ class _$_IsWebViewLoading implements _IsWebViewLoading {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
+    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
     TResult Function(_IsWebViewLoading value)? isWebViewLoading,
     required TResult orElse(),
   }) {
@@ -2976,6 +3431,8 @@ mixin _$CareGiverVerificationState {
       throw _privateConstructorUsedError;
   VerifyResponse? get certificateVerifyRejectResponse =>
       throw _privateConstructorUsedError;
+  VerifyResponse? get sendTrainingResponse =>
+      throw _privateConstructorUsedError;
   bool get isBackGroundVerificationReasonFieldTapped =>
       throw _privateConstructorUsedError;
   bool get isHHaReasonFieldTapped => throw _privateConstructorUsedError;
@@ -3006,6 +3463,7 @@ abstract class $CareGiverVerificationStateCopyWith<$Res> {
       VerifyResponse? backgroundVerifyResponse,
       VerifyResponse? certificateVerifyApproveResponse,
       VerifyResponse? certificateVerifyRejectResponse,
+      VerifyResponse? sendTrainingResponse,
       bool isBackGroundVerificationReasonFieldTapped,
       bool isHHaReasonFieldTapped,
       bool isBlsReasonFieldTapped,
@@ -3037,6 +3495,7 @@ class _$CareGiverVerificationStateCopyWithImpl<$Res,
     Object? backgroundVerifyResponse = freezed,
     Object? certificateVerifyApproveResponse = freezed,
     Object? certificateVerifyRejectResponse = freezed,
+    Object? sendTrainingResponse = freezed,
     Object? isBackGroundVerificationReasonFieldTapped = null,
     Object? isHHaReasonFieldTapped = null,
     Object? isBlsReasonFieldTapped = null,
@@ -3086,6 +3545,10 @@ class _$CareGiverVerificationStateCopyWithImpl<$Res,
           ? _value.certificateVerifyRejectResponse
           : certificateVerifyRejectResponse // ignore: cast_nullable_to_non_nullable
               as VerifyResponse?,
+      sendTrainingResponse: freezed == sendTrainingResponse
+          ? _value.sendTrainingResponse
+          : sendTrainingResponse // ignore: cast_nullable_to_non_nullable
+              as VerifyResponse?,
       isBackGroundVerificationReasonFieldTapped: null ==
               isBackGroundVerificationReasonFieldTapped
           ? _value.isBackGroundVerificationReasonFieldTapped
@@ -3131,6 +3594,7 @@ abstract class _$$_CareGiverVerificationStateCopyWith<$Res>
       VerifyResponse? backgroundVerifyResponse,
       VerifyResponse? certificateVerifyApproveResponse,
       VerifyResponse? certificateVerifyRejectResponse,
+      VerifyResponse? sendTrainingResponse,
       bool isBackGroundVerificationReasonFieldTapped,
       bool isHHaReasonFieldTapped,
       bool isBlsReasonFieldTapped,
@@ -3161,6 +3625,7 @@ class __$$_CareGiverVerificationStateCopyWithImpl<$Res>
     Object? backgroundVerifyResponse = freezed,
     Object? certificateVerifyApproveResponse = freezed,
     Object? certificateVerifyRejectResponse = freezed,
+    Object? sendTrainingResponse = freezed,
     Object? isBackGroundVerificationReasonFieldTapped = null,
     Object? isHHaReasonFieldTapped = null,
     Object? isBlsReasonFieldTapped = null,
@@ -3210,6 +3675,10 @@ class __$$_CareGiverVerificationStateCopyWithImpl<$Res>
           ? _value.certificateVerifyRejectResponse
           : certificateVerifyRejectResponse // ignore: cast_nullable_to_non_nullable
               as VerifyResponse?,
+      sendTrainingResponse: freezed == sendTrainingResponse
+          ? _value.sendTrainingResponse
+          : sendTrainingResponse // ignore: cast_nullable_to_non_nullable
+              as VerifyResponse?,
       isBackGroundVerificationReasonFieldTapped: null ==
               isBackGroundVerificationReasonFieldTapped
           ? _value.isBackGroundVerificationReasonFieldTapped
@@ -3249,6 +3718,7 @@ class _$_CareGiverVerificationState implements _CareGiverVerificationState {
       required this.backgroundVerifyResponse,
       required this.certificateVerifyApproveResponse,
       required this.certificateVerifyRejectResponse,
+      required this.sendTrainingResponse,
       this.isBackGroundVerificationReasonFieldTapped = false,
       this.isHHaReasonFieldTapped = false,
       this.isBlsReasonFieldTapped = false,
@@ -3282,6 +3752,8 @@ class _$_CareGiverVerificationState implements _CareGiverVerificationState {
   @override
   final VerifyResponse? certificateVerifyRejectResponse;
   @override
+  final VerifyResponse? sendTrainingResponse;
+  @override
   @JsonKey()
   final bool isBackGroundVerificationReasonFieldTapped;
   @override
@@ -3299,7 +3771,7 @@ class _$_CareGiverVerificationState implements _CareGiverVerificationState {
 
   @override
   String toString() {
-    return 'CareGiverVerificationState(isLoading: $isLoading, isWebViewLoading: $isWebViewLoading, isError: $isError, error: $error, selectedVerificationIndex: $selectedVerificationIndex, verificationTypes: $verificationTypes, response: $response, backgroundVerifyResponse: $backgroundVerifyResponse, certificateVerifyApproveResponse: $certificateVerifyApproveResponse, certificateVerifyRejectResponse: $certificateVerifyRejectResponse, isBackGroundVerificationReasonFieldTapped: $isBackGroundVerificationReasonFieldTapped, isHHaReasonFieldTapped: $isHHaReasonFieldTapped, isBlsReasonFieldTapped: $isBlsReasonFieldTapped, isTBReasonFieldTapped: $isTBReasonFieldTapped, isCovidReasonFieldTapped: $isCovidReasonFieldTapped)';
+    return 'CareGiverVerificationState(isLoading: $isLoading, isWebViewLoading: $isWebViewLoading, isError: $isError, error: $error, selectedVerificationIndex: $selectedVerificationIndex, verificationTypes: $verificationTypes, response: $response, backgroundVerifyResponse: $backgroundVerifyResponse, certificateVerifyApproveResponse: $certificateVerifyApproveResponse, certificateVerifyRejectResponse: $certificateVerifyRejectResponse, sendTrainingResponse: $sendTrainingResponse, isBackGroundVerificationReasonFieldTapped: $isBackGroundVerificationReasonFieldTapped, isHHaReasonFieldTapped: $isHHaReasonFieldTapped, isBlsReasonFieldTapped: $isBlsReasonFieldTapped, isTBReasonFieldTapped: $isTBReasonFieldTapped, isCovidReasonFieldTapped: $isCovidReasonFieldTapped)';
   }
 
   @override
@@ -3328,6 +3800,8 @@ class _$_CareGiverVerificationState implements _CareGiverVerificationState {
             (identical(other.certificateVerifyRejectResponse, certificateVerifyRejectResponse) ||
                 other.certificateVerifyRejectResponse ==
                     certificateVerifyRejectResponse) &&
+            (identical(other.sendTrainingResponse, sendTrainingResponse) ||
+                other.sendTrainingResponse == sendTrainingResponse) &&
             (identical(other.isBackGroundVerificationReasonFieldTapped,
                     isBackGroundVerificationReasonFieldTapped) ||
                 other.isBackGroundVerificationReasonFieldTapped ==
@@ -3338,8 +3812,7 @@ class _$_CareGiverVerificationState implements _CareGiverVerificationState {
                 other.isBlsReasonFieldTapped == isBlsReasonFieldTapped) &&
             (identical(other.isTBReasonFieldTapped, isTBReasonFieldTapped) ||
                 other.isTBReasonFieldTapped == isTBReasonFieldTapped) &&
-            (identical(
-                    other.isCovidReasonFieldTapped, isCovidReasonFieldTapped) ||
+            (identical(other.isCovidReasonFieldTapped, isCovidReasonFieldTapped) ||
                 other.isCovidReasonFieldTapped == isCovidReasonFieldTapped));
   }
 
@@ -3356,6 +3829,7 @@ class _$_CareGiverVerificationState implements _CareGiverVerificationState {
       backgroundVerifyResponse,
       certificateVerifyApproveResponse,
       certificateVerifyRejectResponse,
+      sendTrainingResponse,
       isBackGroundVerificationReasonFieldTapped,
       isHHaReasonFieldTapped,
       isBlsReasonFieldTapped,
@@ -3383,6 +3857,7 @@ abstract class _CareGiverVerificationState
       required final VerifyResponse? backgroundVerifyResponse,
       required final VerifyResponse? certificateVerifyApproveResponse,
       required final VerifyResponse? certificateVerifyRejectResponse,
+      required final VerifyResponse? sendTrainingResponse,
       final bool isBackGroundVerificationReasonFieldTapped,
       final bool isHHaReasonFieldTapped,
       final bool isBlsReasonFieldTapped,
@@ -3409,6 +3884,8 @@ abstract class _CareGiverVerificationState
   VerifyResponse? get certificateVerifyApproveResponse;
   @override
   VerifyResponse? get certificateVerifyRejectResponse;
+  @override
+  VerifyResponse? get sendTrainingResponse;
   @override
   bool get isBackGroundVerificationReasonFieldTapped;
   @override

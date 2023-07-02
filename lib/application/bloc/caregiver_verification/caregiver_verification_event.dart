@@ -36,12 +36,19 @@ class CareGiverVerificationEvent with _$CareGiverVerificationEvent {
   const factory CareGiverVerificationEvent.careGiverCertificateApprove(
       {required String userID,
       required int status,
+      required String profileUrl,
+      required String userName,
       required BuildContext context}) = _CareGiverCertificateApprove;
 
   const factory CareGiverVerificationEvent.careGiverCertificateReject(
       {required String userID,
       required RejectionParams params,
       required BuildContext context}) = _CareGiverCertificateReject;
+
+  const factory CareGiverVerificationEvent.careGiverTrainingVerify({
+    required String userId,
+    required BuildContext context,
+  }) = _CareGiverTrainingVerify;
 
   const factory CareGiverVerificationEvent.isWebViewLoading(bool value) =
       _IsWebViewLoading;

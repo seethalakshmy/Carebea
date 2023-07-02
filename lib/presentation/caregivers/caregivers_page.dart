@@ -38,9 +38,6 @@ import '../widget/header_view.dart';
 import '../widget/table_actions_view.dart';
 import '../widget/table_column_view.dart';
 
-/// todo change change this method
-ValueNotifier<String> caregiverID = ValueNotifier<String>("");
-
 class CareGiversPage extends StatefulWidget {
   const CareGiversPage({Key? key}) : super(key: key);
 

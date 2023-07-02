@@ -75,4 +75,10 @@ abstract class ApiClient {
   Future<VerifyResponse> careGiverCertificateReject(
       @Header("Authorization") String token,
       @Body() RejectionParams rejectionParams);
+
+  @POST("/caregiver-start-training")
+  Future<VerifyResponse> careGiverSendTrainingRequest(
+    @Header("Authorization") String token,
+    @Field('user_id') String userId,
+  );
 }

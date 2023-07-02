@@ -1,16 +1,25 @@
+import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/custom_snackbar.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_verification_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/reject_params.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
+import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart';
+import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/enum.dart';
+import '../../../core/text_styles.dart';
 import '../../../domain/caregivers/model/verification_types.dart';
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
 import '../../../infrastructure/caregiver_verification/caregivers_verification_repository.dart';
+import '../../../presentation/widget/cached_image.dart';
+import '../../../presentation/widget/custom_alert_dialog_widget.dart';
+import '../../../presentation/widget/custom_container.dart';
+import '../../../presentation/widget/custom_sizedbox.dart';
+import '../../../presentation/widget/custom_text.dart';
 
 part 'caregiver_verification_bloc.freezed.dart';
 part 'caregiver_verification_event.dart';
@@ -26,6 +35,7 @@ class CareGiverVerificationBloc
     on<_CareGiverBackgroundVerify>(_careGiverBackgroundVerify);
     on<_CareGiverCertificateApprove>(_careGiverCertificateApprove);
     on<_CareGiverCertificateReject>(_careGiverCertificateReject);
+    on<_CareGiverTrainingVerify>(_careGiverSendTrainingRequest);
     on<_IsSelectedVerificationTab>(_getVerificationSelectedTab);
     on<_IsTappedReason>(_getTappedReason);
     on<_IsTappedHHaReason>(_getTappedHHaReason);
@@ -38,12 +48,22 @@ class CareGiverVerificationBloc
   _getCareGiverVerificationData(_GetVerificationData event,
       Emitter<CareGiverVerificationState> emit) async {
     emit(state.copyWith(
-        isLoading: true,
-        response: null,
-        certificateVerifyRejectResponse: null,
-        verificationTypes: [],
-        backgroundVerifyResponse: null,
-        selectedVerificationIndex: 0));
+      isLoading: true,
+      response: null,
+      certificateVerifyRejectResponse: null,
+      certificateVerifyApproveResponse: null,
+      verificationTypes: [],
+      backgroundVerifyResponse: null,
+      selectedVerificationIndex: 0,
+      sendTrainingResponse: null,
+      isError: false,
+      error: null,
+      isBackGroundVerificationReasonFieldTapped: false,
+      isBlsReasonFieldTapped: false,
+      isCovidReasonFieldTapped: false,
+      isHHaReasonFieldTapped: false,
+      isTBReasonFieldTapped: false,
+    ));
     final List<VerificationTypes> verificationTypeList = [
       VerificationTypes(
           id: 1, title: AppString.backGroundVerification.val, isSelected: true),
@@ -107,7 +127,8 @@ class CareGiverVerificationBloc
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CustomLog.log(
+            "_careGiverBackgroundVerify:CaregiverVerificationResponse is success");
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
@@ -133,7 +154,13 @@ class CareGiverVerificationBloc
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        _approvalPopUp(
+          event.context,
+          userId: event.userID,
+          imgUrl: event.profileUrl,
+          msg: AppString.qualifiedForCareAmbassador.val,
+          userName: event.userName,
+        );
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
@@ -153,6 +180,12 @@ class CareGiverVerificationBloc
     CareGiverVerificationState caregiverVerificationState2 = result2.fold((l) {
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
+      if (r.status ?? false) {
+        CustomLog.log(
+            "_careGiverCertificateApprove:CaregiverVerificationResponse is success");
+      } else {
+        CSnackBar.showError(event.context, msg: r.message ?? "");
+      }
       return state.copyWith(
         isLoading: false,
         response: r,
@@ -195,6 +228,12 @@ class CareGiverVerificationBloc
     CareGiverVerificationState caregiverVerificationState2 = result2.fold((l) {
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
+      if (r.status ?? false) {
+        CustomLog.log(
+            "_careGiverCertificateApprove:CaregiverVerificationResponse is success");
+      } else {
+        CSnackBar.showError(event.context, msg: r.message ?? "");
+      }
       return state.copyWith(
         isLoading: false,
         response: r,
@@ -203,6 +242,33 @@ class CareGiverVerificationBloc
     });
     emit(
       caregiverVerificationState2,
+    );
+  }
+
+  _careGiverSendTrainingRequest(_CareGiverTrainingVerify event,
+      Emitter<CareGiverVerificationState> emit) async {
+    final Either<ApiErrorHandler, VerifyResponse> result =
+        await careGiverVerificationRepository.careGiverSendTrainingRequest(
+            userID: event.userId);
+    CareGiverVerificationState caregiverVerificationState = result.fold((l) {
+      CSnackBar.showError(event.context, msg: l.error);
+
+      return state.copyWith(error: l.error, isLoading: false, isError: true);
+    }, (r) {
+      if (r.status ?? false) {
+        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        autoTabRouter?.setActiveIndex(1);
+      } else {
+        CSnackBar.showError(event.context, msg: r.message ?? "");
+      }
+      return state.copyWith(
+        isLoading: false,
+        certificateVerifyApproveResponse: r,
+        isError: false,
+      );
+    });
+    emit(
+      caregiverVerificationState,
     );
   }
 
@@ -255,5 +321,97 @@ class CareGiverVerificationBloc
   _webViewLoading(
       _IsWebViewLoading event, Emitter<CareGiverVerificationState> emit) {
     emit(state.copyWith(isWebViewLoading: event.value));
+  }
+
+  _approvalPopUp(
+    BuildContext context, {
+    required String userName,
+    required String imgUrl,
+    required String msg,
+    required userId,
+  }) {
+    showGeneralDialog(
+      context: context,
+      pageBuilder: (BuildContext buildContext, Animation animation,
+          Animation secondaryAnimation) {
+        return CustomAlertDialogWidget(
+            width: 800,
+            height: 400,
+            heading: AppString.verificationProcess.val,
+            child: Column(
+              children: [
+                CustomSizedBox(
+                  height: DBL.four.val,
+                ),
+                CachedImage(
+                  imgUrl: imgUrl,
+                  height: DBL.oneFifty.val,
+                  width: DBL.oneFifty.val,
+                  isDetailPage: true,
+                  fit: BoxFit.contain,
+                ),
+                CustomSizedBox(
+                  height: DBL.four.val,
+                ),
+                CustomText(
+                  userName,
+                  style: TS().gRoboto(
+                    color: AppColor.black2.val,
+                    fontWeight: FW.w600.val,
+                    fontSize: FS.font16.val,
+                  ),
+                ),
+                CustomSizedBox(
+                  height: DBL.eight.val,
+                ),
+                _buildDivider(context, color: AppColor.lightBlue2.val),
+                CustomSizedBox(
+                  height: DBL.ten.val,
+                ),
+                CustomText(
+                  msg,
+                  style: TS().gRoboto(
+                    color: AppColor.black5.val,
+                    fontWeight: FW.w500.val,
+                    fontSize: FS.font21.val,
+                  ),
+                ),
+                CustomSizedBox(
+                  height: DBL.fifteen.val,
+                ),
+                _trainingRequestButton(userId: userId, context: context),
+              ],
+            ));
+      },
+    );
+  }
+
+  CustomContainer _buildDivider(BuildContext context, {Color? color}) {
+    return CustomContainer(
+      height: 1.2,
+      width: MediaQuery.of(context).size.width,
+      color: color ?? AppColor.dividerColor.val,
+    );
+  }
+
+  CustomButton _trainingRequestButton(
+      {required String userId, required BuildContext context}) {
+    return CustomButton(
+      text: AppString.sendTrainingRequest.val,
+      onPressed: () {
+        Navigator.of(context).pop();
+        add(_CareGiverTrainingVerify(userId: userId, context: context));
+      },
+      color: AppColor.white.val,
+      borderRadius: DBL.five.val,
+      borderColor: AppColor.primaryColor.val,
+      hoverColor: AppColor.offWhite.val.withOpacity(0.2),
+      textStyle: TS().gRoboto(
+          fontWeight: FW.w500.val,
+          color: AppColor.primaryColor.val,
+          fontSize: FS.font16.val),
+      padding: EdgeInsets.symmetric(
+          horizontal: DBL.thirtyFive.val, vertical: DBL.eighteen.val),
+    );
   }
 }

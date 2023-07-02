@@ -20,4 +20,7 @@ abstract class ICareGiverVerificationRepo {
   });
   Future<Either<ApiErrorHandler, VerifyResponse>> careGiverCertificateReject(
       {required RejectionParams params});
+  Future<Either<ApiErrorHandler, VerifyResponse>> careGiverSendTrainingRequest({
+    required String userID,
+  });
 }

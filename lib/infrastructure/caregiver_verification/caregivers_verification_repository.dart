@@ -11,6 +11,7 @@ import 'package:dio/dio.dart';
 
 class CareGiverVerificationRepository implements ICareGiverVerificationRepo {
   final ApiClient _apiClient = ApiClient(Dio());
+
   @override
   Future<Either<ApiErrorHandler, CaregiverVerificationResponse>>
       getCareGiverVerificationData({required String userID}) async {
@@ -83,6 +84,28 @@ class CareGiverVerificationRepository implements ICareGiverVerificationRepo {
       {required RejectionParams params}) async {
     try {
       final response = await _apiClient.careGiverCertificateReject("", params);
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverVerificationRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, VerifyResponse>> careGiverSendTrainingRequest(
+      {required String userID}) async {
+    try {
+      final response = await _apiClient.careGiverSendTrainingRequest(
+        "",
+        userID,
+      );
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverVerificationRepository: ${e.message}");

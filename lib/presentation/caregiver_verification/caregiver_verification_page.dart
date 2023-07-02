@@ -1,5 +1,6 @@
 import 'package:admin_580_tech/application/bloc/form_validation/form_validation_bloc.dart';
 import 'package:admin_580_tech/core/custom_debugger.dart';
+import 'package:admin_580_tech/core/custom_snackbar.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_verification_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/reject_params.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/widgets/custom_check_text_field.dart';
@@ -10,20 +11,19 @@ import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:webviewx/webviewx.dart';
 
 import '../../application/bloc/caregiver_verification/caregiver_verification_bloc.dart';
 import '../../core/enum.dart';
+import '../../core/string_extension.dart';
 import '../../core/text_styles.dart';
 import '../../domain/caregivers/model/verification_types.dart';
+import '../widget/cached_image.dart';
 import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_listview_builder.dart';
 import '../widget/custom_padding.dart';
 import '../widget/custom_sizedbox.dart';
-import '../widget/custom_svg.dart';
 import '../widget/custom_text.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
@@ -61,13 +61,12 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
 
   @override
   void initState() {
-    String testID =
-        context.routeData.queryParams.getString('id', '') ??
-            "";
+    String testID = context.routeData.queryParams.getString('id', '') ?? "";
     // String testID = widget.id ?? "empty";
-    print('test id::: ${autoTabRouter?.currentChild?.queryParams.getString('id','')}');
+    print(
+        'test id::: ${autoTabRouter?.currentChild?.queryParams.getString('id', '')}');
     print(' id::: ${widget.id}');
-    userId = autoTabRouter?.currentChild?.queryParams.getString('id','') ?? "";
+    userId = autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
     print('userID ${userId}');
     super.initState();
     context
@@ -100,12 +99,15 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
               CustomSizedBox(
                 height: DBL.four.val,
               ),
-              CustomSvg(
+              CachedImage(
+                imgUrl: caregiver?.profile ?? "",
+                height: DBL.oneFifty.val,
                 width: DBL.oneFifty.val,
-                path: IMG.profilePlaceHolder.val,
+                isDetailPage: true,
+                fit: BoxFit.contain,
               ),
               CustomSizedBox(
-                height: DBL.four.val,
+                height: DBL.three.val,
               ),
               CustomText(
                 "${caregiver?.firstName} ${caregiver?.lastName}",
@@ -118,6 +120,31 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
               CustomSizedBox(
                 height: DBL.two.val,
               ),
+              isSendTrainingRequest(state)
+                  ? Column(
+                      children: [
+                        CustomSizedBox(
+                          height: DBL.six.val,
+                        ),
+                        CustomText(
+                          AppString.qualifiedForCareAmbassador.val,
+                          style: TS().gRoboto(
+                              color: AppColor.primaryColor.val,
+                              fontWeight: FW.w500.val,
+                              fontSize: isLg3(context)
+                                  ? FS.font18.val
+                                  : FS.font22.val),
+                        ),
+                        CustomSizedBox(
+                          height: DBL.five.val,
+                        ),
+                        _trainingRequestButton(),
+                        CustomSizedBox(
+                          height: DBL.eight.val,
+                        ),
+                      ],
+                    )
+                  : CustomSizedBox.shrink(),
               _buildDivider(context, color: AppColor.lightBlue2.val),
               _verificationTabView(),
               CustomSizedBox(
@@ -133,6 +160,27 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
               ),
             ],
           )),
+    );
+  }
+
+  CustomButton _trainingRequestButton() {
+    return CustomButton(
+      text: AppString.sendTrainingRequest.val,
+      onPressed: () {
+        context.read<CareGiverVerificationBloc>().add(
+            CareGiverVerificationEvent.careGiverTrainingVerify(
+                userId: userId, context: context));
+      },
+      color: AppColor.white.val,
+      borderRadius: DBL.five.val,
+      borderColor: AppColor.primaryColor.val,
+      hoverColor: AppColor.offWhite.val.withOpacity(0.2),
+      textStyle: TS().gRoboto(
+          fontWeight: FW.w500.val,
+          color: AppColor.primaryColor.val,
+          fontSize: FS.font16.val),
+      padding: EdgeInsets.symmetric(
+          horizontal: DBL.thirtyFive.val, vertical: DBL.eighteen.val),
     );
   }
 
@@ -169,6 +217,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
               Expanded(
                 flex: 1,
                 child: RowColonCombo.twoHundred(
+                    customWidthLg1: DBL.twoHundred.val,
                     label: AppString.dob.val,
                     value: personalDetails?.dob ?? "",
                     fontSize: FS.font13PointFive.val),
@@ -189,6 +238,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
               Expanded(
                 flex: 1,
                 child: RowColonCombo.twoHundred(
+                    customWidthLg1: DBL.twoHundred.val,
                     label: AppString.gender.val,
                     value: personalDetails?.gender ?? "",
                     fontSize: FS.font13PointFive.val),
@@ -209,6 +259,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
               Expanded(
                 flex: 1,
                 child: RowColonCombo.twoHundred(
+                    customWidthLg1: DBL.twoHundred.val,
                     label: AppString.addressLine1.val,
                     value: personalDetails?.addressLine ?? "",
                     fontSize: FS.font13PointFive.val),
@@ -225,6 +276,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
             height: DBL.six.val,
           ),
           RowColonCombo.twoHundred(
+              customWidthLg1: DBL.twoHundred.val,
               label: AppString.city.val,
               value: personalDetails?.city ?? "",
               fontSize: FS.font13PointFive.val),
@@ -232,6 +284,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
             height: DBL.six.val,
           ),
           RowColonCombo.twoHundred(
+              customWidthLg1: DBL.twoHundred.val,
               label: AppString.street.val,
               value: personalDetails?.street ?? "",
               fontSize: FS.font13PointFive.val),
@@ -239,6 +292,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
             height: DBL.six.val,
           ),
           RowColonCombo.twoHundred(
+              customWidthLg1: DBL.twoHundred.val,
               label: AppString.zip.val,
               value: personalDetails?.zip ?? "",
               fontSize: FS.font13PointFive.val),
@@ -246,6 +300,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
             height: DBL.six.val,
           ),
           RowColonCombo.twoHundred(
+              customWidthLg1: DBL.twoHundred.val,
               label: AppString.state.val,
               value: personalDetails?.zip ?? "",
               fontSize: FS.font13PointFive.val),
@@ -305,10 +360,10 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
             children: [
               Expanded(child: _hhaRowCombo(qualificationAndTest)),
               !isXs1(context)
-                  ? FilePreview(
-                      fileName: "HHA Document",
-                      onTap: () {},
-                      width: null,
+                  ? CustomSizedBox(
+                      width: DBL.twoHundred.val,
+                      child:
+                          _hhaDocListView(qualificationAndTest, Axis.vertical),
                     )
                   : CustomSizedBox.shrink()
             ],
@@ -325,10 +380,10 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
             children: [
               Expanded(child: _blsRowCombo(qualificationAndTest)),
               !isXs1(context)
-                  ? FilePreview(
-                      fileName: "BLS Document",
-                      onTap: () {},
-                      width: null,
+                  ? CustomSizedBox(
+                      width: DBL.twoHundred.val,
+                      child:
+                          _blsDocListView(qualificationAndTest, Axis.vertical),
                     )
                   : CustomSizedBox.shrink()
             ],
@@ -345,10 +400,10 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
             children: [
               Expanded(child: _tbAndPptRowCombo(qualificationAndTest)),
               !isXs1(context)
-                  ? FilePreview(
-                      fileName: "TB Document",
-                      onTap: () {},
-                      width: null,
+                  ? CustomSizedBox(
+                      width: DBL.twoHundred.val,
+                      child:
+                          _tbDocListView(qualificationAndTest, Axis.vertical),
                     )
                   : CustomSizedBox.shrink()
             ],
@@ -365,10 +420,10 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
             children: [
               Expanded(child: _covid19RowCombo(qualificationAndTest)),
               !isXs1(context)
-                  ? FilePreview(
-                      fileName: "Covid Document",
-                      onTap: () {},
-                      width: null,
+                  ? CustomSizedBox(
+                      width: DBL.twoHundred.val,
+                      child:
+                          _covidListView(qualificationAndTest, Axis.vertical),
                     )
                   : CustomSizedBox.shrink()
             ],
@@ -376,29 +431,39 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
           CustomSizedBox(height: DBL.fifteen.val),
           Row(
             children: [
-              Expanded(
+              CustomSizedBox(
+                width: isLg3(context) ? 360 : 500,
                 child: CustomText(
                   AppString.acceptThisCareAmbassador.val,
                   style: TS().gRoboto(
                       color: AppColor.primaryColor.val,
                       fontWeight: FW.w500.val,
-                      fontSize: isLg2(context) ? FS.font18.val : FS.font22.val),
+                      fontSize: isLg3(context) ? FS.font17.val : FS.font22.val),
                 ),
               ),
               CustomSizedBox(
-                width: isLg2(context) ? DBL.seven.val : DBL.twelve.val,
+                width: isLg3(context) ? DBL.seven.val : DBL.twelve.val,
               ),
               !isXs2(context)
-                  ? Expanded(
-                      child: _certificateApprovalStatusBox(state),
-                    )
+                  ? state.response?.data?.certificateVerification
+                              ?.approvalStatus ==
+                          Approve.approveOrReject.val
+                      ? !isLg4(context)
+                          ? Expanded(
+                              child: _certificateApprovalStatusBox(state))
+                          : CustomSizedBox.shrink()
+                      : _certificateApprovalStatusBox(state)
                   : CustomSizedBox.shrink()
             ],
           ),
           CustomSizedBox(
             height: DBL.fifteen.val,
           ),
-          isXs2(context)
+          (isXs2(context)) ||
+                  (state.response?.data?.certificateVerification
+                              ?.approvalStatus ==
+                          Approve.approveOrReject.val &&
+                      isLg4(context))
               ? _certificateApprovalStatusBox(state)
               : CustomSizedBox.shrink(),
           CustomSizedBox(
@@ -409,11 +474,71 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
     );
   }
 
+  CustomListViewBuilder _covidListView(
+      QualificationAndTest? qualificationAndTest, Axis scrollDirection) {
+    return CustomListViewBuilder(
+        scrollDirection: scrollDirection,
+        shrinkWrap: true,
+        itemCount: qualificationAndTest?.covidDocUrl?.length ?? 0,
+        itemBuilder: (context, index) => FilePreview(
+            fileName:
+                "Covid Doc ${qualificationAndTest!.covidDocUrl!.length > 1 ? index + 1 : ""}",
+            onTap: () {
+              _docImagePreviewPopUp(context,
+                  "https://amagicareambassabor185017-dev.s3.amazonaws.com/public/ProfilePictures/647843367fddd99053db2997/1685603365732.jpg?AWSAccessKeyId=AKIAU2IGCHB5VV5VF2UG&Expires=1688285465&Signature=KQ4dxWRcLG9I3qd8V5QZVpsqIRg%3D");
+            }));
+  }
+
+  CustomListViewBuilder _tbDocListView(
+      QualificationAndTest? qualificationAndTest, Axis scrollDirection) {
+    return CustomListViewBuilder(
+        scrollDirection: scrollDirection,
+        shrinkWrap: true,
+        itemCount: qualificationAndTest?.tbDocUrl?.length ?? 0,
+        itemBuilder: (context, index) => FilePreview(
+            fileName:
+                "TB Doc ${qualificationAndTest!.tbDocUrl!.length > 1 ? index + 1 : ""}",
+            onTap: () {
+              _docImagePreviewPopUp(context,
+                  "https://amagicareambassabor185017-dev.s3.amazonaws.com/public/ProfilePictures/647843367fddd99053db2997/1685603365732.jpg?AWSAccessKeyId=AKIAU2IGCHB5VV5VF2UG&Expires=1688285465&Signature=KQ4dxWRcLG9I3qd8V5QZVpsqIRg%3D");
+            }));
+  }
+
+  CustomListViewBuilder _blsDocListView(
+      QualificationAndTest? qualificationAndTest, Axis scrollDirection) {
+    return CustomListViewBuilder(
+        scrollDirection: scrollDirection,
+        shrinkWrap: true,
+        itemCount: qualificationAndTest?.blsDocUrl?.length ?? 0,
+        itemBuilder: (context, index) => FilePreview(
+            fileName:
+                "BLS Doc ${qualificationAndTest!.blsDocUrl!.length > 1 ? index + 1 : ""}",
+            onTap: () {
+              _docImagePreviewPopUp(context,
+                  "https://amagicareambassabor185017-dev.s3.amazonaws.com/public/ProfilePictures/647843367fddd99053db2997/1685603365732.jpg?AWSAccessKeyId=AKIAU2IGCHB5VV5VF2UG&Expires=1688285465&Signature=KQ4dxWRcLG9I3qd8V5QZVpsqIRg%3D");
+            }));
+  }
+
+  CustomListViewBuilder _hhaDocListView(
+      QualificationAndTest? qualificationAndTest, Axis scrollDirection) {
+    return CustomListViewBuilder(
+        scrollDirection: scrollDirection,
+        shrinkWrap: true,
+        itemCount: qualificationAndTest?.hhaDocUrl?.length ?? 0,
+        itemBuilder: (context, index) => FilePreview(
+            fileName:
+                "HHA Doc ${qualificationAndTest!.hhaDocUrl!.length > 1 ? index + 1 : ""}",
+            onTap: () {
+              _docImagePreviewPopUp(context,
+                  "https://amagicareambassabor185017-dev.s3.amazonaws.com/public/ProfilePictures/647843367fddd99053db2997/1685603365732.jpg?AWSAccessKeyId=AKIAU2IGCHB5VV5VF2UG&Expires=1688285465&Signature=KQ4dxWRcLG9I3qd8V5QZVpsqIRg%3D");
+            }));
+  }
+
   ApprovalStatusBox _certificateApprovalStatusBox(
       CareGiverVerificationState state) {
     int status =
         state.response?.data?.certificateVerification?.approvalStatus ?? 0;
-    print('status is $status');
+
     return ApprovalStatusBox(
       careGiversVerificationState: state,
       textEditingController: _reasonController,
@@ -422,7 +547,12 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
       onTapApprove: () {
         context.read<CareGiverVerificationBloc>().add(
             CareGiverVerificationEvent.careGiverCertificateApprove(
-                userID: userId, status: 1, context: context));
+                userID: userId,
+                status: 1,
+                context: context,
+                profileUrl: "",
+                userName:
+                    "${state.response?.data?.caregiver?.firstName} ${state.response?.data?.caregiver?.lastName}"));
       },
       onTapReject: () {
         _certificateRejectPopUp(
@@ -520,6 +650,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
           height: DBL.ten.val,
         ),
         RowColonCombo.twoHundred(
+            customWidthLg1: DBL.twoHundred.val,
             label: AppString.documentUploaded.val,
             value: documentDetails?.documentUploaded ?? "",
             fontSize: FS.font13PointFive.val),
@@ -530,6 +661,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
           height: DBL.six.val,
         ),
         RowColonCombo.twoHundred(
+            customWidthLg1: DBL.twoHundred.val,
             label: AppString.docNumber.val,
             value: documentDetails?.documentNumber ?? "",
             fontSize: FS.font13PointFive.val),
@@ -537,17 +669,26 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
           height: DBL.six.val,
         ),
         RowColonCombo.twoHundred(
+            customWidthLg1: DBL.twoHundred.val,
             label: AppString.expiryDate.val,
             value: documentDetails?.expiryDate ?? "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
-          height: DBL.twentyFive.val,
+          height: DBL.eighteen.val,
         ),
-        FilePreview(
-            fileName: "Passport Doc",
-            onTap: () {
-              _documentPreviewPopUp(context, documentDetails?.docUrl ?? "");
-            }),
+        SizedBox(
+          height: 50,
+          child: CustomListViewBuilder(
+              scrollDirection: Axis.horizontal,
+              itemCount: documentDetails?.docUrl?.length ?? 0,
+              itemBuilder: (context, index) => FilePreview(
+                  fileName:
+                      "Passport Doc ${documentDetails!.docUrl!.length > 1 ? index + 1 : ""}",
+                  onTap: () {
+                    _docImagePreviewPopUp(context,
+                        "https://amagicareambassabor185017-dev.s3.amazonaws.com/public/ProfilePictures/647843367fddd99053db2997/1685603365732.jpg?AWSAccessKeyId=AKIAU2IGCHB5VV5VF2UG&Expires=1688285465&Signature=KQ4dxWRcLG9I3qd8V5QZVpsqIRg%3D");
+                  })),
+        ),
         CustomSizedBox(
           height: isLarge(context) ? DBL.fifteen.val : DBL.zero.val,
         ),
@@ -628,6 +769,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
 
   RowColonCombo _emailView(PersonalDetails? personalDetails) {
     return RowColonCombo.twoHundred(
+        customWidthLg1: DBL.twoHundred.val,
         label: AppString.email.val,
         value: personalDetails?.email ?? "",
         fontSize: FS.font13PointFive.val);
@@ -635,6 +777,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
 
   RowColonCombo _alterNativeMobileNumberView(PersonalDetails? personalDetails) {
     return RowColonCombo.twoHundred(
+        customWidthLg1: DBL.twoHundred.val,
         label: AppString.alternativeMobileNumber.val,
         value: personalDetails?.alternativeMobileNumber ?? "",
         fontSize: FS.font13PointFive.val);
@@ -642,6 +785,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
 
   RowColonCombo _mobileNumberView(PersonalDetails? personalDetails) {
     return RowColonCombo.twoHundred(
+        customWidthLg1: DBL.twoHundred.val,
         label: AppString.mobileNumber.val,
         value: personalDetails?.mobileNumber ?? "",
         fontSize: FS.font13PointFive.val);
@@ -762,7 +906,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
     );
   }
 
-  _documentPreviewPopUp(BuildContext context, String url) {
+  _docImagePreviewPopUp(BuildContext context, String url) {
+    print('url is $url');
     showGeneralDialog(
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
@@ -771,29 +916,30 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
             width: 800,
             height: 800,
             heading: AppString.verificationProcess.val,
-            child: WebViewX(
-                width: 800,
-                height: 800,
-                initialContent:
-                    'https://docs.google.com/gview?embedded=true&url=$url',
-                initialSourceType: SourceType.url,
-                webSpecificParams: const WebSpecificParams(),
-                onPageStarted: (value) {
-                  print('web:finish val ${value}');
-                },
-                onWebViewCreated: (value) {
-                  print('web:created val ${value}');
-                  // context.read<CareGiverVerificationBloc>().add(
-                  //     const CareGiverVerificationEvent.isWebViewLoading(
-                  //         true));
-                },
-                onPageFinished: (value) {
-                  print('web:finshed val ${value}');
-                  // context.read<CareGiverVerificationBloc>().add(
-                  //     const CareGiverVerificationEvent.isWebViewLoading(
-                  //         false));
-                },
-                javascriptMode: JavascriptMode.unrestricted));
+            child: true.isPdf(url)
+                ? WebViewX(
+                    width: 800,
+                    height: 800,
+                    initialContent:
+                        'https://docs.google.com/gview?embedded=true&url=$url',
+                    initialSourceType: SourceType.url,
+                    webSpecificParams: const WebSpecificParams(),
+                    onPageStarted: (value) {
+                      print('val : value');
+                    },
+                    onWebViewCreated: (value) {
+                      print('val : value');
+                    },
+                    onPageFinished: (value) {
+                      print('val : value');
+                    },
+                    javascriptMode: JavascriptMode.unrestricted)
+                : CachedImage(
+                    imgUrl: url,
+                    width: 800,
+                    height: 800,
+                    isDocImage: true,
+                  ));
       },
     );
   }
@@ -934,12 +1080,9 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                                       _tbReasonController.text.isEmpty &&
                                       _blsReasonController.text.isEmpty &&
                                       _covid19ReasonController.text.isEmpty) {
-                                    showTopSnackBar(
-                                      Overlay.of(context),
-                                      CustomSnackBar.error(
-                                        message:
-                                            AppString.emptyRejectedDocument.val,
-                                      ),
+                                    CSnackBar.showError(
+                                      context,
+                                      msg: AppString.emptyRejectedDocument.val,
                                     );
                                   } else {
                                     rejectionParams = RejectionParams(
@@ -987,6 +1130,15 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
     );
   }
 
+  bool isSendTrainingRequest(CareGiverVerificationState state) {
+    PersonalDetails? personalDetails =
+        state.response?.data?.backgroundVerification?.personalDetails;
+    CertificateVerification? certificateVerification =
+        state.response?.data?.certificateVerification;
+    return personalDetails?.approvalStatus == Approve.approved.val &&
+        certificateVerification?.approvalStatus == Approve.approved.val;
+  }
+
   bool isLarge(BuildContext context) =>
       MediaQuery.of(context).size.width <= 1236;
 
@@ -994,11 +1146,16 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
 
   bool isLg1(BuildContext context) => MediaQuery.of(context).size.width <= 976;
 
-  bool isLg2(BuildContext context) => MediaQuery.of(context).size.width <= 1025;
+  bool isLg2(BuildContext context) => MediaQuery.of(context).size.width <= 945;
+
+  bool isLg3(BuildContext context) => MediaQuery.of(context).size.width <= 1025;
+
+  bool isLg4(BuildContext context) => MediaQuery.of(context).size.width <= 1090;
 
   bool isXs(BuildContext context) => MediaQuery.of(context).size.width <= 760;
 
   bool isXs1(BuildContext context) => MediaQuery.of(context).size.width <= 780;
 
-  bool isXs2(BuildContext context) => MediaQuery.of(context).size.width <= 580;
+  // bool isXs2(BuildContext context) => MediaQuery.of(context).size.width <= 580;
+  bool isXs2(BuildContext context) => MediaQuery.of(context).size.width <= 820;
 }

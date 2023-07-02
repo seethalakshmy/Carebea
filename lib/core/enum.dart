@@ -41,6 +41,7 @@ enum AppString {
   onGoingServiceRequest("Ongoing Service Request"),
   upcomingServiceRequest("Upcoming Service Request"),
   transactionDetails("Transaction Details"),
+  qualifiedForCareAmbassador("Qualified for care ambassador's training ."),
   caregiverCreation("Caregiver Creation"),
   onBoarding("On-boarding"),
   id("ID"),
@@ -69,6 +70,7 @@ enum AppString {
   nameAndAge("Name & Age"),
   totalServiceCompleted("Total Service Completed"),
   service("Service"),
+  sendTrainingRequest("Send Training Request"),
   serviceDetails("Service Details"),
   services("Services"),
   serviceCompleted("Services Completed"),
@@ -290,6 +292,7 @@ enum AppColor {
   black2(Color(0xff020E1A)),
   black3(Color(0xff1A1C25)),
   black4(Color(0xff444444)),
+  black5(Color(0xff494949)),
   matBlack(Color(0xff324665)),
   matBlack2(Color(0xff596483)),
   matBlack3(Color(0xff1F374F)),
@@ -696,3 +699,5 @@ enum Approve {
 }
 
 enum ToastPosition { top, bottom, topLeft, topRight, bottomLeft, bottomRight }
+
+enum SnackBarState { error, success, info, warning }

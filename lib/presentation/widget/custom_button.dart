@@ -4,7 +4,6 @@ import 'dart:ui' show lerpDouble;
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:flutter/material.dart';
 
-
 import '../../core/enum.dart';
 import '../../core/on_hover.dart';
 
@@ -32,8 +31,9 @@ class CustomButton extends StatelessWidget {
   final double? elevation;
   final double? hoverElevation;
   final Color? color;
+  final Color? borderColor;
   final Color? hoverColor;
-  final TextStyle?textStyle;
+  final TextStyle? textStyle;
 
   const CustomButton({
     Key? key,
@@ -61,6 +61,7 @@ class CustomButton extends StatelessWidget {
     this.hoverElevation,
     this.color,
     this.hoverColor,
+    this.borderColor,
     this.textStyle,
   })  : assert((fullWidth && minWidth == null) ||
             (!fullWidth && minWidth != null) ||
@@ -101,8 +102,10 @@ class CustomButton extends StatelessWidget {
             side: BorderSide(
               width: borderWidth,
               color: isOutlineButton
-                  ? color ?? _getButtonColor(colorScheme, buttonType, false)!
-                  : color ?? _getButtonColor(colorScheme, buttonType, true)!,
+                  ? borderColor ??
+                      _getButtonColor(colorScheme, buttonType, false)!
+                  : borderColor ??
+                      _getButtonColor(colorScheme, buttonType, true)!,
             ),
           ),
           minWidth: fullWidth ? double.infinity : minWidth,
@@ -115,7 +118,7 @@ class CustomButton extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              icon ??CustomSizedBox.shrink(),
+              icon ?? CustomSizedBox.shrink(),
               icon != null && text != null
                   ? SizedBox(width: gap)
                   : CustomSizedBox.shrink(),

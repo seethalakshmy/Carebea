@@ -1,5 +1,4 @@
-import 'package:admin_580_tech/presentation/caregivers/caregivers_page.dart';
-import 'package:auto_route/auto_route.dart';
+import 'package:admin_580_tech/core/hover.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/enum.dart';
@@ -24,22 +23,21 @@ class TableVerificationButton extends StatelessWidget {
         if (caregiver.verificationStatus == 3) {
           autoTabRouter?.setActiveIndex(6);
         } else {
-          caregiverID.value = caregiver.userId ?? "";
-         // autoTabRouter?.setActiveIndex(9);
-          autoTabRouter?.navigate(CaregiverVerificationRoute(id: caregiver.userId));
-
-        /*  context.router
-              .navigate(CaregiverVerificationRoute(id: caregiver.userId));*/
-          // AutoRouter.of(context).push(CaregiverVerificationRoute());
+          autoTabRouter
+              ?.navigate(CaregiverVerificationRoute(id: caregiver.userId));
         }
       },
-      child: CustomContainer.decoration(
-        height: height ?? DBL.thirtyFive.val,
-        width: DBL.oneThirty.val,
-        padding: EdgeInsets.symmetric(horizontal: DBL.five.val),
-        decoration: _buildBoxDecoration(),
-        child: _buildText(),
-      ),
+      child: FxHover(builder: (isHover) {
+        return SelectionContainer.disabled(
+          child: CustomContainer.decoration(
+            height: height ?? DBL.thirtyFive.val,
+            width: DBL.oneThirty.val,
+            padding: EdgeInsets.symmetric(horizontal: DBL.five.val),
+            decoration: _buildBoxDecoration(isHover),
+            child: _buildText(),
+          ),
+        );
+      }),
     );
   }
 
@@ -52,9 +50,9 @@ class TableVerificationButton extends StatelessWidget {
     );
   }
 
-  BoxDecoration _buildBoxDecoration() {
+  BoxDecoration _buildBoxDecoration(bool isHover) {
     return BoxDecoration(
-        color: _getColor(),
+        color: _getColor(isHover),
         borderRadius: BorderRadius.circular(DBL.five.val),
         border: _getBorderColor());
   }
@@ -81,12 +79,20 @@ class TableVerificationButton extends StatelessWidget {
                 : AppColor.white.val);
   }
 
-  Color _getColor() {
-    return caregiver.verificationStatus == Verification.startVerification.val
-        ? AppColor.white.val
-        : caregiver.verificationStatus == Verification.startedVerification.val
-            ? AppColor.primaryColor.val
-            : AppColor.amber2.val;
+  Color _getColor(bool isHover) {
+    if (caregiver.verificationStatus == Verification.startVerification.val) {
+      return isHover
+          ? AppColor.offWhite.val.withOpacity(0.2)
+          : AppColor.white.val;
+    } else if (caregiver.verificationStatus ==
+        Verification.startedVerification.val) {
+      return isHover ? AppColor.darkBlue.val : AppColor.primaryColor.val;
+    } else if (caregiver.verificationStatus ==
+        Verification.trainingStarted.val) {
+      return isHover ? AppColor.amber3.val : AppColor.amber2.val;
+    } else {
+      return AppColor.primaryColor.val;
+    }
   }
 
   String _getStatusText() {

@@ -33,3 +33,12 @@ extension StringExtension on String {
   String _capitalizeFirst() =>
       this[0].toUpperCase() + substring(1).toLowerCase();
 }
+
+extension BoolExtension on bool {
+  bool isPdf(String url) => url.toLowerCase().endsWith(".pdf");
+
+  bool isImage(String url) {
+    List<String> imgExtension = ['.jpg', '.jpeg'];
+    return imgExtension.any((element) => url.toLowerCase().endsWith(element));
+  }
+}
