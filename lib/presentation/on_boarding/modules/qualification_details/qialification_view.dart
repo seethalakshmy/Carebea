@@ -2,6 +2,7 @@ import 'package:admin_580_tech/application/bloc/form_validation/form_validation_
 import 'package:admin_580_tech/application/bloc/onboarding/onboarding_bloc.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/qualification_details/widgets/item_row_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -50,6 +51,15 @@ class _QualificationViewState extends State<QualificationView> {
   final _formKey = GlobalKey<FormState>();
   final FormValidationBloc _validationBloc = FormValidationBloc();
 
+  List<PlatformFile> hhaBytesList = [];
+  List<PlatformFile> blsBytesList = [];
+  List<PlatformFile> tbBytesList = [];
+  List<PlatformFile> covidBytesList = [];
+  bool hhaListUpdated = false;
+  bool blsListUpdated = false;
+  bool tbListUpdated = false;
+  bool covidListUpdated = false;
+
   @override
   void dispose() {
     hhaController.dispose();
@@ -84,6 +94,9 @@ class _QualificationViewState extends State<QualificationView> {
                   children: [
                     _topArea(context),
                     ItemRowWidget(
+                      whichDocument: 1,
+                      documentList: hhaBytesList,
+                      onboardingBloc: widget.onboardingBloc,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return AppString.emptyHHANo.val;
@@ -100,15 +113,40 @@ class _QualificationViewState extends State<QualificationView> {
                       datePickerLabel: AppString.expiryDate.val,
                       dateController: hhaDateController,
                       datePickerValidation: AppString.emptyExpiry.val,
-                      onUpoladTap: () {},
+                      onUpoladTap: () async {
+                        FilePickerResult? result =
+                            await FilePicker.platform.pickFiles(
+                          type: FileType.custom,
+                          allowedExtensions: ['jpg', 'png', 'pdf', 'doc'],
+                        );
+                        if (result != null) {
+                          for (PlatformFile file in result.files) {
+                            hhaBytesList.add(file);
+                            hhaListUpdated = !hhaListUpdated;
+                            // Break the loop after adding 2 items
+                            if (hhaBytesList.length == 2) {
+                              break;
+                            }
+                          }
+
+                          widget.onboardingBloc.add(
+                            OnboardingEvent.hhaDocumentUpload(
+                                hhaBytesList, hhaListUpdated),
+                          );
+                        } else {
+                          // User canceled the picker
+                        }
+                      },
                       onChanged: (val) {
-                        print("selected value in yes : $val");
                         widget.onboardingBloc
                             .add(OnboardingEvent.radioHHA(val ?? 0));
                       },
                     ),
                     CustomSizedBox(height: DBL.twenty.val),
                     ItemRowWidget(
+                      whichDocument: 2,
+                      documentList: blsBytesList,
+                      onboardingBloc: widget.onboardingBloc,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return AppString.emptyBLSNo.val;
@@ -125,7 +163,30 @@ class _QualificationViewState extends State<QualificationView> {
                       datePickerLabel: AppString.expiryDate.val,
                       dateController: blsDateController,
                       datePickerValidation: AppString.emptyExpiry.val,
-                      onUpoladTap: () {},
+                      onUpoladTap: () async {
+                        FilePickerResult? result =
+                            await FilePicker.platform.pickFiles(
+                          type: FileType.custom,
+                          allowedExtensions: ['jpg', 'png', 'pdf', 'doc'],
+                        );
+                        if (result != null) {
+                          for (PlatformFile file in result.files) {
+                            blsBytesList.add(file);
+                            blsListUpdated = !blsListUpdated;
+                            // Break the loop after adding 2 items
+                            if (blsBytesList.length == 2) {
+                              break;
+                            }
+                          }
+
+                          widget.onboardingBloc.add(
+                            OnboardingEvent.blsDocumentUpload(
+                                blsBytesList, blsListUpdated),
+                          );
+                        } else {
+                          // User canceled the picker
+                        }
+                      },
                       onChanged: (val) {
                         widget.onboardingBloc
                             .add(OnboardingEvent.radioBLS(val ?? 0));
@@ -133,6 +194,9 @@ class _QualificationViewState extends State<QualificationView> {
                     ),
                     CustomSizedBox(height: DBL.twenty.val),
                     ItemRowWidget(
+                      whichDocument: 3,
+                      documentList: tbBytesList,
+                      onboardingBloc: widget.onboardingBloc,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return AppString.emptyTBNo.val;
@@ -149,7 +213,31 @@ class _QualificationViewState extends State<QualificationView> {
                       datePickerLabel: AppString.date.val,
                       dateController: tbPpdDateController,
                       datePickerValidation: AppString.emptyDate.val,
-                      onUpoladTap: () {},
+                      onUpoladTap: () async {
+                        FilePickerResult? result =
+                            await FilePicker.platform.pickFiles(
+                          type: FileType.custom,
+                          allowedExtensions: ['jpg', 'png', 'pdf', 'doc'],
+                        );
+                        if (result != null) {
+                          for (PlatformFile file in result.files) {
+                            tbBytesList.add(file);
+                            tbListUpdated = !tbListUpdated;
+
+                            // Break the loop after adding 2 items
+                            if (tbBytesList.length == 2) {
+                              break;
+                            }
+                          }
+
+                          widget.onboardingBloc.add(
+                            OnboardingEvent.tbDocumentUpload(
+                                tbBytesList, tbListUpdated),
+                          );
+                        } else {
+                          // User canceled the picker
+                        }
+                      },
                       onChanged: (val) {
                         widget.onboardingBloc
                             .add(OnboardingEvent.radioTB(val ?? 0));
@@ -157,6 +245,9 @@ class _QualificationViewState extends State<QualificationView> {
                     ),
                     CustomSizedBox(height: DBL.twenty.val),
                     ItemRowWidget(
+                      whichDocument: 4,
+                      documentList: covidBytesList,
+                      onboardingBloc: widget.onboardingBloc,
                       validator: (val) {
                         return null;
                       },
@@ -170,9 +261,31 @@ class _QualificationViewState extends State<QualificationView> {
                       datePickerLabel: AppString.date.val,
                       dateController: covidDateController,
                       datePickerValidation: AppString.emptyDate.val,
-                      onUpoladTap: () {},
+                      onUpoladTap: () async {
+                        FilePickerResult? result =
+                            await FilePicker.platform.pickFiles(
+                          type: FileType.custom,
+                          allowedExtensions: ['jpg', 'png', 'pdf', 'doc'],
+                        );
+                        if (result != null) {
+                          for (PlatformFile file in result.files) {
+                            covidBytesList.add(file);
+                            covidListUpdated = !covidListUpdated;
+                            // Break the loop after adding 2 items
+                            if (covidBytesList.length == 2) {
+                              break;
+                            }
+                          }
+
+                          widget.onboardingBloc.add(
+                            OnboardingEvent.covidDocumentUpload(
+                                covidBytesList, covidListUpdated),
+                          );
+                        } else {
+                          // User canceled the picker
+                        }
+                      },
                       onChanged: (val) {
-                        print("covid radio working");
                         widget.onboardingBloc
                             .add(OnboardingEvent.radioCovid(val ?? 0));
                       },

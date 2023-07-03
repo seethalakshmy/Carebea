@@ -29,6 +29,17 @@ mixin _$OnboardingEvent {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,6 +55,17 @@ mixin _$OnboardingEvent {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,6 +81,17 @@ mixin _$OnboardingEvent {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -76,6 +109,16 @@ mixin _$OnboardingEvent {
         radioTransportation,
     required TResult Function(_RadioPetSelected value) radioPet,
     required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -91,6 +134,13 @@ mixin _$OnboardingEvent {
     TResult? Function(_RadioTransportationSelected value)? radioTransportation,
     TResult? Function(_RadioPetSelected value)? radioPet,
     TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -106,6 +156,13 @@ mixin _$OnboardingEvent {
     TResult Function(_RadioTransportationSelected value)? radioTransportation,
     TResult Function(_RadioPetSelected value)? radioPet,
     TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -178,6 +235,17 @@ class _$_OnboardingEvent implements _OnboardingEvent {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
   }) {
     return personalDetails();
   }
@@ -196,6 +264,17 @@ class _$_OnboardingEvent implements _OnboardingEvent {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
   }) {
     return personalDetails?.call();
   }
@@ -214,6 +293,17 @@ class _$_OnboardingEvent implements _OnboardingEvent {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (personalDetails != null) {
@@ -237,6 +327,16 @@ class _$_OnboardingEvent implements _OnboardingEvent {
         radioTransportation,
     required TResult Function(_RadioPetSelected value) radioPet,
     required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
   }) {
     return personalDetails(this);
   }
@@ -255,6 +355,13 @@ class _$_OnboardingEvent implements _OnboardingEvent {
     TResult? Function(_RadioTransportationSelected value)? radioTransportation,
     TResult? Function(_RadioPetSelected value)? radioPet,
     TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
   }) {
     return personalDetails?.call(this);
   }
@@ -273,6 +380,13 @@ class _$_OnboardingEvent implements _OnboardingEvent {
     TResult Function(_RadioTransportationSelected value)? radioTransportation,
     TResult Function(_RadioPetSelected value)? radioPet,
     TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (personalDetails != null) {
@@ -360,6 +474,17 @@ class _$_Submit implements _Submit {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
   }) {
     return submit(isSubmitted);
   }
@@ -378,6 +503,17 @@ class _$_Submit implements _Submit {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
   }) {
     return submit?.call(isSubmitted);
   }
@@ -396,6 +532,17 @@ class _$_Submit implements _Submit {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -419,6 +566,16 @@ class _$_Submit implements _Submit {
         radioTransportation,
     required TResult Function(_RadioPetSelected value) radioPet,
     required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
   }) {
     return submit(this);
   }
@@ -437,6 +594,13 @@ class _$_Submit implements _Submit {
     TResult? Function(_RadioTransportationSelected value)? radioTransportation,
     TResult? Function(_RadioPetSelected value)? radioPet,
     TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
   }) {
     return submit?.call(this);
   }
@@ -455,6 +619,13 @@ class _$_Submit implements _Submit {
     TResult Function(_RadioTransportationSelected value)? radioTransportation,
     TResult Function(_RadioPetSelected value)? radioPet,
     TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (submit != null) {
@@ -549,6 +720,17 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
   }) {
     return radioHHA(isSelected);
   }
@@ -567,6 +749,17 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
   }) {
     return radioHHA?.call(isSelected);
   }
@@ -585,6 +778,17 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (radioHHA != null) {
@@ -608,6 +812,16 @@ class _$_RadioHHASelected implements _RadioHHASelected {
         radioTransportation,
     required TResult Function(_RadioPetSelected value) radioPet,
     required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
   }) {
     return radioHHA(this);
   }
@@ -626,6 +840,13 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult? Function(_RadioTransportationSelected value)? radioTransportation,
     TResult? Function(_RadioPetSelected value)? radioPet,
     TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
   }) {
     return radioHHA?.call(this);
   }
@@ -644,6 +865,13 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult Function(_RadioTransportationSelected value)? radioTransportation,
     TResult Function(_RadioPetSelected value)? radioPet,
     TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (radioHHA != null) {
@@ -738,6 +966,17 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
   }) {
     return radioBLS(isSelected);
   }
@@ -756,6 +995,17 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
   }) {
     return radioBLS?.call(isSelected);
   }
@@ -774,6 +1024,17 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (radioBLS != null) {
@@ -797,6 +1058,16 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
         radioTransportation,
     required TResult Function(_RadioPetSelected value) radioPet,
     required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
   }) {
     return radioBLS(this);
   }
@@ -815,6 +1086,13 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult? Function(_RadioTransportationSelected value)? radioTransportation,
     TResult? Function(_RadioPetSelected value)? radioPet,
     TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
   }) {
     return radioBLS?.call(this);
   }
@@ -833,6 +1111,13 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult Function(_RadioTransportationSelected value)? radioTransportation,
     TResult Function(_RadioPetSelected value)? radioPet,
     TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (radioBLS != null) {
@@ -927,6 +1212,17 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
   }) {
     return radioTB(isSelected);
   }
@@ -945,6 +1241,17 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
   }) {
     return radioTB?.call(isSelected);
   }
@@ -963,6 +1270,17 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (radioTB != null) {
@@ -986,6 +1304,16 @@ class _$_RadioTBSelected implements _RadioTBSelected {
         radioTransportation,
     required TResult Function(_RadioPetSelected value) radioPet,
     required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
   }) {
     return radioTB(this);
   }
@@ -1004,6 +1332,13 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult? Function(_RadioTransportationSelected value)? radioTransportation,
     TResult? Function(_RadioPetSelected value)? radioPet,
     TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
   }) {
     return radioTB?.call(this);
   }
@@ -1022,6 +1357,13 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult Function(_RadioTransportationSelected value)? radioTransportation,
     TResult Function(_RadioPetSelected value)? radioPet,
     TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (radioTB != null) {
@@ -1117,6 +1459,17 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
   }) {
     return radioCovid(isSelected);
   }
@@ -1135,6 +1488,17 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
   }) {
     return radioCovid?.call(isSelected);
   }
@@ -1153,6 +1517,17 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (radioCovid != null) {
@@ -1176,6 +1551,16 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
         radioTransportation,
     required TResult Function(_RadioPetSelected value) radioPet,
     required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
   }) {
     return radioCovid(this);
   }
@@ -1194,6 +1579,13 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult? Function(_RadioTransportationSelected value)? radioTransportation,
     TResult? Function(_RadioPetSelected value)? radioPet,
     TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
   }) {
     return radioCovid?.call(this);
   }
@@ -1212,6 +1604,13 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult Function(_RadioTransportationSelected value)? radioTransportation,
     TResult Function(_RadioPetSelected value)? radioPet,
     TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (radioCovid != null) {
@@ -1309,6 +1708,17 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
   }) {
     return radioExperience(isSelected);
   }
@@ -1327,6 +1737,17 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
   }) {
     return radioExperience?.call(isSelected);
   }
@@ -1345,6 +1766,17 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (radioExperience != null) {
@@ -1368,6 +1800,16 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
         radioTransportation,
     required TResult Function(_RadioPetSelected value) radioPet,
     required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
   }) {
     return radioExperience(this);
   }
@@ -1386,6 +1828,13 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult? Function(_RadioTransportationSelected value)? radioTransportation,
     TResult? Function(_RadioPetSelected value)? radioPet,
     TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
   }) {
     return radioExperience?.call(this);
   }
@@ -1404,6 +1853,13 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult Function(_RadioTransportationSelected value)? radioTransportation,
     TResult Function(_RadioPetSelected value)? radioPet,
     TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (radioExperience != null) {
@@ -1500,6 +1956,17 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
   }) {
     return radioSmoker(isSelected);
   }
@@ -1518,6 +1985,17 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
   }) {
     return radioSmoker?.call(isSelected);
   }
@@ -1536,6 +2014,17 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (radioSmoker != null) {
@@ -1559,6 +2048,16 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
         radioTransportation,
     required TResult Function(_RadioPetSelected value) radioPet,
     required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
   }) {
     return radioSmoker(this);
   }
@@ -1577,6 +2076,13 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult? Function(_RadioTransportationSelected value)? radioTransportation,
     TResult? Function(_RadioPetSelected value)? radioPet,
     TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
   }) {
     return radioSmoker?.call(this);
   }
@@ -1595,6 +2101,13 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult Function(_RadioTransportationSelected value)? radioTransportation,
     TResult Function(_RadioPetSelected value)? radioPet,
     TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (radioSmoker != null) {
@@ -1693,6 +2206,17 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
   }) {
     return radioTransportation(isSelected);
   }
@@ -1711,6 +2235,17 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
   }) {
     return radioTransportation?.call(isSelected);
   }
@@ -1729,6 +2264,17 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (radioTransportation != null) {
@@ -1752,6 +2298,16 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
         radioTransportation,
     required TResult Function(_RadioPetSelected value) radioPet,
     required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
   }) {
     return radioTransportation(this);
   }
@@ -1770,6 +2326,13 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult? Function(_RadioTransportationSelected value)? radioTransportation,
     TResult? Function(_RadioPetSelected value)? radioPet,
     TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
   }) {
     return radioTransportation?.call(this);
   }
@@ -1788,6 +2351,13 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult Function(_RadioTransportationSelected value)? radioTransportation,
     TResult Function(_RadioPetSelected value)? radioPet,
     TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (radioTransportation != null) {
@@ -1883,6 +2453,17 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
   }) {
     return radioPet(isSelected);
   }
@@ -1901,6 +2482,17 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
   }) {
     return radioPet?.call(isSelected);
   }
@@ -1919,6 +2511,17 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (radioPet != null) {
@@ -1942,6 +2545,16 @@ class _$_RadioPetSelected implements _RadioPetSelected {
         radioTransportation,
     required TResult Function(_RadioPetSelected value) radioPet,
     required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
   }) {
     return radioPet(this);
   }
@@ -1960,6 +2573,13 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult? Function(_RadioTransportationSelected value)? radioTransportation,
     TResult? Function(_RadioPetSelected value)? radioPet,
     TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
   }) {
     return radioPet?.call(this);
   }
@@ -1978,6 +2598,13 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult Function(_RadioTransportationSelected value)? radioTransportation,
     TResult Function(_RadioPetSelected value)? radioPet,
     TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (radioPet != null) {
@@ -2073,6 +2700,17 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
   }) {
     return radioLanguage(isSelected);
   }
@@ -2091,6 +2729,17 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
   }) {
     return radioLanguage?.call(isSelected);
   }
@@ -2109,6 +2758,17 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (radioLanguage != null) {
@@ -2132,6 +2792,16 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
         radioTransportation,
     required TResult Function(_RadioPetSelected value) radioPet,
     required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
   }) {
     return radioLanguage(this);
   }
@@ -2150,6 +2820,13 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult? Function(_RadioTransportationSelected value)? radioTransportation,
     TResult? Function(_RadioPetSelected value)? radioPet,
     TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
   }) {
     return radioLanguage?.call(this);
   }
@@ -2168,6 +2845,13 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult Function(_RadioTransportationSelected value)? radioTransportation,
     TResult Function(_RadioPetSelected value)? radioPet,
     TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     required TResult orElse(),
   }) {
     if (radioLanguage != null) {
@@ -2188,12 +2872,1615 @@ abstract class _RadioLanguageSelected implements OnboardingEvent {
 }
 
 /// @nodoc
+abstract class _$$_ProfilePicSelectedCopyWith<$Res> {
+  factory _$$_ProfilePicSelectedCopyWith(_$_ProfilePicSelected value,
+          $Res Function(_$_ProfilePicSelected) then) =
+      __$$_ProfilePicSelectedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Uint8List bytes});
+}
+
+/// @nodoc
+class __$$_ProfilePicSelectedCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_ProfilePicSelected>
+    implements _$$_ProfilePicSelectedCopyWith<$Res> {
+  __$$_ProfilePicSelectedCopyWithImpl(
+      _$_ProfilePicSelected _value, $Res Function(_$_ProfilePicSelected) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bytes = null,
+  }) {
+    return _then(_$_ProfilePicSelected(
+      null == bytes
+          ? _value.bytes
+          : bytes // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ProfilePicSelected implements _ProfilePicSelected {
+  const _$_ProfilePicSelected(this.bytes);
+
+  @override
+  final Uint8List bytes;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.profilePicSelection(bytes: $bytes)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ProfilePicSelected &&
+            const DeepCollectionEquality().equals(other.bytes, bytes));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(bytes));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ProfilePicSelectedCopyWith<_$_ProfilePicSelected> get copyWith =>
+      __$$_ProfilePicSelectedCopyWithImpl<_$_ProfilePicSelected>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() personalDetails,
+    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+  }) {
+    return profilePicSelection(bytes);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? personalDetails,
+    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+  }) {
+    return profilePicSelection?.call(bytes);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? personalDetails,
+    TResult Function(bool isSubmitted)? submit,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (profilePicSelection != null) {
+      return profilePicSelection(bytes);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnboardingEvent value) personalDetails,
+    required TResult Function(_Submit value) submit,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+  }) {
+    return profilePicSelection(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnboardingEvent value)? personalDetails,
+    TResult? Function(_Submit value)? submit,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+  }) {
+    return profilePicSelection?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnboardingEvent value)? personalDetails,
+    TResult Function(_Submit value)? submit,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (profilePicSelection != null) {
+      return profilePicSelection(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ProfilePicSelected implements OnboardingEvent {
+  const factory _ProfilePicSelected(final Uint8List bytes) =
+      _$_ProfilePicSelected;
+
+  Uint8List get bytes;
+  @JsonKey(ignore: true)
+  _$$_ProfilePicSelectedCopyWith<_$_ProfilePicSelected> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SecurityDocumentUploadSelectedCopyWith<$Res> {
+  factory _$$_SecurityDocumentUploadSelectedCopyWith(
+          _$_SecurityDocumentUploadSelected value,
+          $Res Function(_$_SecurityDocumentUploadSelected) then) =
+      __$$_SecurityDocumentUploadSelectedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<PlatformFile> bytesList, bool listUpdated});
+}
+
+/// @nodoc
+class __$$_SecurityDocumentUploadSelectedCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res,
+        _$_SecurityDocumentUploadSelected>
+    implements _$$_SecurityDocumentUploadSelectedCopyWith<$Res> {
+  __$$_SecurityDocumentUploadSelectedCopyWithImpl(
+      _$_SecurityDocumentUploadSelected _value,
+      $Res Function(_$_SecurityDocumentUploadSelected) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bytesList = null,
+    Object? listUpdated = null,
+  }) {
+    return _then(_$_SecurityDocumentUploadSelected(
+      null == bytesList
+          ? _value._bytesList
+          : bytesList // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>,
+      null == listUpdated
+          ? _value.listUpdated
+          : listUpdated // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SecurityDocumentUploadSelected
+    implements _SecurityDocumentUploadSelected {
+  const _$_SecurityDocumentUploadSelected(
+      final List<PlatformFile> bytesList, this.listUpdated)
+      : _bytesList = bytesList;
+
+  final List<PlatformFile> _bytesList;
+  @override
+  List<PlatformFile> get bytesList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bytesList);
+  }
+
+  @override
+  final bool listUpdated;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.securityDocumentUpload(bytesList: $bytesList, listUpdated: $listUpdated)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SecurityDocumentUploadSelected &&
+            const DeepCollectionEquality()
+                .equals(other._bytesList, _bytesList) &&
+            (identical(other.listUpdated, listUpdated) ||
+                other.listUpdated == listUpdated));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_bytesList), listUpdated);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SecurityDocumentUploadSelectedCopyWith<_$_SecurityDocumentUploadSelected>
+      get copyWith => __$$_SecurityDocumentUploadSelectedCopyWithImpl<
+          _$_SecurityDocumentUploadSelected>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() personalDetails,
+    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+  }) {
+    return securityDocumentUpload(bytesList, listUpdated);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? personalDetails,
+    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+  }) {
+    return securityDocumentUpload?.call(bytesList, listUpdated);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? personalDetails,
+    TResult Function(bool isSubmitted)? submit,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (securityDocumentUpload != null) {
+      return securityDocumentUpload(bytesList, listUpdated);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnboardingEvent value) personalDetails,
+    required TResult Function(_Submit value) submit,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+  }) {
+    return securityDocumentUpload(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnboardingEvent value)? personalDetails,
+    TResult? Function(_Submit value)? submit,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+  }) {
+    return securityDocumentUpload?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnboardingEvent value)? personalDetails,
+    TResult Function(_Submit value)? submit,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (securityDocumentUpload != null) {
+      return securityDocumentUpload(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SecurityDocumentUploadSelected implements OnboardingEvent {
+  const factory _SecurityDocumentUploadSelected(
+          final List<PlatformFile> bytesList, final bool listUpdated) =
+      _$_SecurityDocumentUploadSelected;
+
+  List<PlatformFile> get bytesList;
+  bool get listUpdated;
+  @JsonKey(ignore: true)
+  _$$_SecurityDocumentUploadSelectedCopyWith<_$_SecurityDocumentUploadSelected>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_HHADocumentUploadSelectedCopyWith<$Res> {
+  factory _$$_HHADocumentUploadSelectedCopyWith(
+          _$_HHADocumentUploadSelected value,
+          $Res Function(_$_HHADocumentUploadSelected) then) =
+      __$$_HHADocumentUploadSelectedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<PlatformFile> bytesList, bool listUpdated});
+}
+
+/// @nodoc
+class __$$_HHADocumentUploadSelectedCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_HHADocumentUploadSelected>
+    implements _$$_HHADocumentUploadSelectedCopyWith<$Res> {
+  __$$_HHADocumentUploadSelectedCopyWithImpl(
+      _$_HHADocumentUploadSelected _value,
+      $Res Function(_$_HHADocumentUploadSelected) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bytesList = null,
+    Object? listUpdated = null,
+  }) {
+    return _then(_$_HHADocumentUploadSelected(
+      null == bytesList
+          ? _value._bytesList
+          : bytesList // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>,
+      null == listUpdated
+          ? _value.listUpdated
+          : listUpdated // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
+  const _$_HHADocumentUploadSelected(
+      final List<PlatformFile> bytesList, this.listUpdated)
+      : _bytesList = bytesList;
+
+  final List<PlatformFile> _bytesList;
+  @override
+  List<PlatformFile> get bytesList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bytesList);
+  }
+
+  @override
+  final bool listUpdated;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.hhaDocumentUpload(bytesList: $bytesList, listUpdated: $listUpdated)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_HHADocumentUploadSelected &&
+            const DeepCollectionEquality()
+                .equals(other._bytesList, _bytesList) &&
+            (identical(other.listUpdated, listUpdated) ||
+                other.listUpdated == listUpdated));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_bytesList), listUpdated);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_HHADocumentUploadSelectedCopyWith<_$_HHADocumentUploadSelected>
+      get copyWith => __$$_HHADocumentUploadSelectedCopyWithImpl<
+          _$_HHADocumentUploadSelected>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() personalDetails,
+    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+  }) {
+    return hhaDocumentUpload(bytesList, listUpdated);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? personalDetails,
+    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+  }) {
+    return hhaDocumentUpload?.call(bytesList, listUpdated);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? personalDetails,
+    TResult Function(bool isSubmitted)? submit,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (hhaDocumentUpload != null) {
+      return hhaDocumentUpload(bytesList, listUpdated);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnboardingEvent value) personalDetails,
+    required TResult Function(_Submit value) submit,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+  }) {
+    return hhaDocumentUpload(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnboardingEvent value)? personalDetails,
+    TResult? Function(_Submit value)? submit,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+  }) {
+    return hhaDocumentUpload?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnboardingEvent value)? personalDetails,
+    TResult Function(_Submit value)? submit,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (hhaDocumentUpload != null) {
+      return hhaDocumentUpload(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _HHADocumentUploadSelected implements OnboardingEvent {
+  const factory _HHADocumentUploadSelected(
+          final List<PlatformFile> bytesList, final bool listUpdated) =
+      _$_HHADocumentUploadSelected;
+
+  List<PlatformFile> get bytesList;
+  bool get listUpdated;
+  @JsonKey(ignore: true)
+  _$$_HHADocumentUploadSelectedCopyWith<_$_HHADocumentUploadSelected>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_BLSDocumentUploadSelectedCopyWith<$Res> {
+  factory _$$_BLSDocumentUploadSelectedCopyWith(
+          _$_BLSDocumentUploadSelected value,
+          $Res Function(_$_BLSDocumentUploadSelected) then) =
+      __$$_BLSDocumentUploadSelectedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<PlatformFile> bytesList, bool listUpdated});
+}
+
+/// @nodoc
+class __$$_BLSDocumentUploadSelectedCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_BLSDocumentUploadSelected>
+    implements _$$_BLSDocumentUploadSelectedCopyWith<$Res> {
+  __$$_BLSDocumentUploadSelectedCopyWithImpl(
+      _$_BLSDocumentUploadSelected _value,
+      $Res Function(_$_BLSDocumentUploadSelected) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bytesList = null,
+    Object? listUpdated = null,
+  }) {
+    return _then(_$_BLSDocumentUploadSelected(
+      null == bytesList
+          ? _value._bytesList
+          : bytesList // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>,
+      null == listUpdated
+          ? _value.listUpdated
+          : listUpdated // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
+  const _$_BLSDocumentUploadSelected(
+      final List<PlatformFile> bytesList, this.listUpdated)
+      : _bytesList = bytesList;
+
+  final List<PlatformFile> _bytesList;
+  @override
+  List<PlatformFile> get bytesList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bytesList);
+  }
+
+  @override
+  final bool listUpdated;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.blsDocumentUpload(bytesList: $bytesList, listUpdated: $listUpdated)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_BLSDocumentUploadSelected &&
+            const DeepCollectionEquality()
+                .equals(other._bytesList, _bytesList) &&
+            (identical(other.listUpdated, listUpdated) ||
+                other.listUpdated == listUpdated));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_bytesList), listUpdated);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_BLSDocumentUploadSelectedCopyWith<_$_BLSDocumentUploadSelected>
+      get copyWith => __$$_BLSDocumentUploadSelectedCopyWithImpl<
+          _$_BLSDocumentUploadSelected>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() personalDetails,
+    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+  }) {
+    return blsDocumentUpload(bytesList, listUpdated);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? personalDetails,
+    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+  }) {
+    return blsDocumentUpload?.call(bytesList, listUpdated);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? personalDetails,
+    TResult Function(bool isSubmitted)? submit,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (blsDocumentUpload != null) {
+      return blsDocumentUpload(bytesList, listUpdated);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnboardingEvent value) personalDetails,
+    required TResult Function(_Submit value) submit,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+  }) {
+    return blsDocumentUpload(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnboardingEvent value)? personalDetails,
+    TResult? Function(_Submit value)? submit,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+  }) {
+    return blsDocumentUpload?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnboardingEvent value)? personalDetails,
+    TResult Function(_Submit value)? submit,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (blsDocumentUpload != null) {
+      return blsDocumentUpload(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _BLSDocumentUploadSelected implements OnboardingEvent {
+  const factory _BLSDocumentUploadSelected(
+          final List<PlatformFile> bytesList, final bool listUpdated) =
+      _$_BLSDocumentUploadSelected;
+
+  List<PlatformFile> get bytesList;
+  bool get listUpdated;
+  @JsonKey(ignore: true)
+  _$$_BLSDocumentUploadSelectedCopyWith<_$_BLSDocumentUploadSelected>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_TBDocumentUploadSelectedCopyWith<$Res> {
+  factory _$$_TBDocumentUploadSelectedCopyWith(
+          _$_TBDocumentUploadSelected value,
+          $Res Function(_$_TBDocumentUploadSelected) then) =
+      __$$_TBDocumentUploadSelectedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<PlatformFile> bytesList, bool listUpdated});
+}
+
+/// @nodoc
+class __$$_TBDocumentUploadSelectedCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_TBDocumentUploadSelected>
+    implements _$$_TBDocumentUploadSelectedCopyWith<$Res> {
+  __$$_TBDocumentUploadSelectedCopyWithImpl(_$_TBDocumentUploadSelected _value,
+      $Res Function(_$_TBDocumentUploadSelected) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bytesList = null,
+    Object? listUpdated = null,
+  }) {
+    return _then(_$_TBDocumentUploadSelected(
+      null == bytesList
+          ? _value._bytesList
+          : bytesList // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>,
+      null == listUpdated
+          ? _value.listUpdated
+          : listUpdated // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
+  const _$_TBDocumentUploadSelected(
+      final List<PlatformFile> bytesList, this.listUpdated)
+      : _bytesList = bytesList;
+
+  final List<PlatformFile> _bytesList;
+  @override
+  List<PlatformFile> get bytesList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bytesList);
+  }
+
+  @override
+  final bool listUpdated;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.tbDocumentUpload(bytesList: $bytesList, listUpdated: $listUpdated)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_TBDocumentUploadSelected &&
+            const DeepCollectionEquality()
+                .equals(other._bytesList, _bytesList) &&
+            (identical(other.listUpdated, listUpdated) ||
+                other.listUpdated == listUpdated));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_bytesList), listUpdated);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_TBDocumentUploadSelectedCopyWith<_$_TBDocumentUploadSelected>
+      get copyWith => __$$_TBDocumentUploadSelectedCopyWithImpl<
+          _$_TBDocumentUploadSelected>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() personalDetails,
+    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+  }) {
+    return tbDocumentUpload(bytesList, listUpdated);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? personalDetails,
+    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+  }) {
+    return tbDocumentUpload?.call(bytesList, listUpdated);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? personalDetails,
+    TResult Function(bool isSubmitted)? submit,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (tbDocumentUpload != null) {
+      return tbDocumentUpload(bytesList, listUpdated);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnboardingEvent value) personalDetails,
+    required TResult Function(_Submit value) submit,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+  }) {
+    return tbDocumentUpload(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnboardingEvent value)? personalDetails,
+    TResult? Function(_Submit value)? submit,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+  }) {
+    return tbDocumentUpload?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnboardingEvent value)? personalDetails,
+    TResult Function(_Submit value)? submit,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (tbDocumentUpload != null) {
+      return tbDocumentUpload(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _TBDocumentUploadSelected implements OnboardingEvent {
+  const factory _TBDocumentUploadSelected(
+          final List<PlatformFile> bytesList, final bool listUpdated) =
+      _$_TBDocumentUploadSelected;
+
+  List<PlatformFile> get bytesList;
+  bool get listUpdated;
+  @JsonKey(ignore: true)
+  _$$_TBDocumentUploadSelectedCopyWith<_$_TBDocumentUploadSelected>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_CovidDocumentUploadSelectedCopyWith<$Res> {
+  factory _$$_CovidDocumentUploadSelectedCopyWith(
+          _$_CovidDocumentUploadSelected value,
+          $Res Function(_$_CovidDocumentUploadSelected) then) =
+      __$$_CovidDocumentUploadSelectedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<PlatformFile> bytesList, bool listUpdated});
+}
+
+/// @nodoc
+class __$$_CovidDocumentUploadSelectedCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_CovidDocumentUploadSelected>
+    implements _$$_CovidDocumentUploadSelectedCopyWith<$Res> {
+  __$$_CovidDocumentUploadSelectedCopyWithImpl(
+      _$_CovidDocumentUploadSelected _value,
+      $Res Function(_$_CovidDocumentUploadSelected) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bytesList = null,
+    Object? listUpdated = null,
+  }) {
+    return _then(_$_CovidDocumentUploadSelected(
+      null == bytesList
+          ? _value._bytesList
+          : bytesList // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>,
+      null == listUpdated
+          ? _value.listUpdated
+          : listUpdated // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
+  const _$_CovidDocumentUploadSelected(
+      final List<PlatformFile> bytesList, this.listUpdated)
+      : _bytesList = bytesList;
+
+  final List<PlatformFile> _bytesList;
+  @override
+  List<PlatformFile> get bytesList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bytesList);
+  }
+
+  @override
+  final bool listUpdated;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.covidDocumentUpload(bytesList: $bytesList, listUpdated: $listUpdated)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CovidDocumentUploadSelected &&
+            const DeepCollectionEquality()
+                .equals(other._bytesList, _bytesList) &&
+            (identical(other.listUpdated, listUpdated) ||
+                other.listUpdated == listUpdated));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_bytesList), listUpdated);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CovidDocumentUploadSelectedCopyWith<_$_CovidDocumentUploadSelected>
+      get copyWith => __$$_CovidDocumentUploadSelectedCopyWithImpl<
+          _$_CovidDocumentUploadSelected>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() personalDetails,
+    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+  }) {
+    return covidDocumentUpload(bytesList, listUpdated);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? personalDetails,
+    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+  }) {
+    return covidDocumentUpload?.call(bytesList, listUpdated);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? personalDetails,
+    TResult Function(bool isSubmitted)? submit,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (covidDocumentUpload != null) {
+      return covidDocumentUpload(bytesList, listUpdated);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_OnboardingEvent value) personalDetails,
+    required TResult Function(_Submit value) submit,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+  }) {
+    return covidDocumentUpload(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_OnboardingEvent value)? personalDetails,
+    TResult? Function(_Submit value)? submit,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+  }) {
+    return covidDocumentUpload?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_OnboardingEvent value)? personalDetails,
+    TResult Function(_Submit value)? submit,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (covidDocumentUpload != null) {
+      return covidDocumentUpload(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CovidDocumentUploadSelected implements OnboardingEvent {
+  const factory _CovidDocumentUploadSelected(
+          final List<PlatformFile> bytesList, final bool listUpdated) =
+      _$_CovidDocumentUploadSelected;
+
+  List<PlatformFile> get bytesList;
+  bool get listUpdated;
+  @JsonKey(ignore: true)
+  _$$_CovidDocumentUploadSelectedCopyWith<_$_CovidDocumentUploadSelected>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$OnboardingState {
+  Uint8List get pickedProfilePic => throw _privateConstructorUsedError;
+  List<PlatformFile> get securityDocumentList =>
+      throw _privateConstructorUsedError;
+  List<PlatformFile> get hhaDocumentList => throw _privateConstructorUsedError;
+  List<PlatformFile> get blsDocumentList => throw _privateConstructorUsedError;
+  List<PlatformFile> get tbDocumentList => throw _privateConstructorUsedError;
+  List<PlatformFile> get covidDocumentList =>
+      throw _privateConstructorUsedError;
   int get isHHASelected => throw _privateConstructorUsedError;
   int get isBLSSelected => throw _privateConstructorUsedError;
   int get isTBSelected => throw _privateConstructorUsedError;
   int get isCovidSelected => throw _privateConstructorUsedError;
   bool get isFormSubmitSuccess => throw _privateConstructorUsedError;
+  bool get listUpdated => throw _privateConstructorUsedError;
   int get isExperianceSelected => throw _privateConstructorUsedError;
   int get isSmokerSelected => throw _privateConstructorUsedError;
   int get isTransportationSelected => throw _privateConstructorUsedError;
@@ -2212,11 +4499,18 @@ abstract class $OnboardingStateCopyWith<$Res> {
       _$OnboardingStateCopyWithImpl<$Res, OnboardingState>;
   @useResult
   $Res call(
-      {int isHHASelected,
+      {Uint8List pickedProfilePic,
+      List<PlatformFile> securityDocumentList,
+      List<PlatformFile> hhaDocumentList,
+      List<PlatformFile> blsDocumentList,
+      List<PlatformFile> tbDocumentList,
+      List<PlatformFile> covidDocumentList,
+      int isHHASelected,
       int isBLSSelected,
       int isTBSelected,
       int isCovidSelected,
       bool isFormSubmitSuccess,
+      bool listUpdated,
       int isExperianceSelected,
       int isSmokerSelected,
       int isTransportationSelected,
@@ -2237,11 +4531,18 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? pickedProfilePic = null,
+    Object? securityDocumentList = null,
+    Object? hhaDocumentList = null,
+    Object? blsDocumentList = null,
+    Object? tbDocumentList = null,
+    Object? covidDocumentList = null,
     Object? isHHASelected = null,
     Object? isBLSSelected = null,
     Object? isTBSelected = null,
     Object? isCovidSelected = null,
     Object? isFormSubmitSuccess = null,
+    Object? listUpdated = null,
     Object? isExperianceSelected = null,
     Object? isSmokerSelected = null,
     Object? isTransportationSelected = null,
@@ -2249,6 +4550,30 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
     Object? isLanguagesSelected = null,
   }) {
     return _then(_value.copyWith(
+      pickedProfilePic: null == pickedProfilePic
+          ? _value.pickedProfilePic
+          : pickedProfilePic // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+      securityDocumentList: null == securityDocumentList
+          ? _value.securityDocumentList
+          : securityDocumentList // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>,
+      hhaDocumentList: null == hhaDocumentList
+          ? _value.hhaDocumentList
+          : hhaDocumentList // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>,
+      blsDocumentList: null == blsDocumentList
+          ? _value.blsDocumentList
+          : blsDocumentList // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>,
+      tbDocumentList: null == tbDocumentList
+          ? _value.tbDocumentList
+          : tbDocumentList // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>,
+      covidDocumentList: null == covidDocumentList
+          ? _value.covidDocumentList
+          : covidDocumentList // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>,
       isHHASelected: null == isHHASelected
           ? _value.isHHASelected
           : isHHASelected // ignore: cast_nullable_to_non_nullable
@@ -2268,6 +4593,10 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
       isFormSubmitSuccess: null == isFormSubmitSuccess
           ? _value.isFormSubmitSuccess
           : isFormSubmitSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      listUpdated: null == listUpdated
+          ? _value.listUpdated
+          : listUpdated // ignore: cast_nullable_to_non_nullable
               as bool,
       isExperianceSelected: null == isExperianceSelected
           ? _value.isExperianceSelected
@@ -2302,11 +4631,18 @@ abstract class _$$_OnboardingStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int isHHASelected,
+      {Uint8List pickedProfilePic,
+      List<PlatformFile> securityDocumentList,
+      List<PlatformFile> hhaDocumentList,
+      List<PlatformFile> blsDocumentList,
+      List<PlatformFile> tbDocumentList,
+      List<PlatformFile> covidDocumentList,
+      int isHHASelected,
       int isBLSSelected,
       int isTBSelected,
       int isCovidSelected,
       bool isFormSubmitSuccess,
+      bool listUpdated,
       int isExperianceSelected,
       int isSmokerSelected,
       int isTransportationSelected,
@@ -2325,11 +4661,18 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? pickedProfilePic = null,
+    Object? securityDocumentList = null,
+    Object? hhaDocumentList = null,
+    Object? blsDocumentList = null,
+    Object? tbDocumentList = null,
+    Object? covidDocumentList = null,
     Object? isHHASelected = null,
     Object? isBLSSelected = null,
     Object? isTBSelected = null,
     Object? isCovidSelected = null,
     Object? isFormSubmitSuccess = null,
+    Object? listUpdated = null,
     Object? isExperianceSelected = null,
     Object? isSmokerSelected = null,
     Object? isTransportationSelected = null,
@@ -2337,6 +4680,30 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
     Object? isLanguagesSelected = null,
   }) {
     return _then(_$_OnboardingState(
+      pickedProfilePic: null == pickedProfilePic
+          ? _value.pickedProfilePic
+          : pickedProfilePic // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+      securityDocumentList: null == securityDocumentList
+          ? _value._securityDocumentList
+          : securityDocumentList // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>,
+      hhaDocumentList: null == hhaDocumentList
+          ? _value._hhaDocumentList
+          : hhaDocumentList // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>,
+      blsDocumentList: null == blsDocumentList
+          ? _value._blsDocumentList
+          : blsDocumentList // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>,
+      tbDocumentList: null == tbDocumentList
+          ? _value._tbDocumentList
+          : tbDocumentList // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>,
+      covidDocumentList: null == covidDocumentList
+          ? _value._covidDocumentList
+          : covidDocumentList // ignore: cast_nullable_to_non_nullable
+              as List<PlatformFile>,
       isHHASelected: null == isHHASelected
           ? _value.isHHASelected
           : isHHASelected // ignore: cast_nullable_to_non_nullable
@@ -2356,6 +4723,10 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
       isFormSubmitSuccess: null == isFormSubmitSuccess
           ? _value.isFormSubmitSuccess
           : isFormSubmitSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      listUpdated: null == listUpdated
+          ? _value.listUpdated
+          : listUpdated // ignore: cast_nullable_to_non_nullable
               as bool,
       isExperianceSelected: null == isExperianceSelected
           ? _value.isExperianceSelected
@@ -2385,16 +4756,65 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
 
 class _$_OnboardingState implements _OnboardingState {
   const _$_OnboardingState(
-      {required this.isHHASelected,
+      {required this.pickedProfilePic,
+      required final List<PlatformFile> securityDocumentList,
+      required final List<PlatformFile> hhaDocumentList,
+      required final List<PlatformFile> blsDocumentList,
+      required final List<PlatformFile> tbDocumentList,
+      required final List<PlatformFile> covidDocumentList,
+      required this.isHHASelected,
       required this.isBLSSelected,
       required this.isTBSelected,
       required this.isCovidSelected,
       required this.isFormSubmitSuccess,
+      required this.listUpdated,
       required this.isExperianceSelected,
       required this.isSmokerSelected,
       required this.isTransportationSelected,
       required this.isPetsSelected,
-      required this.isLanguagesSelected});
+      required this.isLanguagesSelected})
+      : _securityDocumentList = securityDocumentList,
+        _hhaDocumentList = hhaDocumentList,
+        _blsDocumentList = blsDocumentList,
+        _tbDocumentList = tbDocumentList,
+        _covidDocumentList = covidDocumentList;
+
+  @override
+  final Uint8List pickedProfilePic;
+  final List<PlatformFile> _securityDocumentList;
+  @override
+  List<PlatformFile> get securityDocumentList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_securityDocumentList);
+  }
+
+  final List<PlatformFile> _hhaDocumentList;
+  @override
+  List<PlatformFile> get hhaDocumentList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_hhaDocumentList);
+  }
+
+  final List<PlatformFile> _blsDocumentList;
+  @override
+  List<PlatformFile> get blsDocumentList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_blsDocumentList);
+  }
+
+  final List<PlatformFile> _tbDocumentList;
+  @override
+  List<PlatformFile> get tbDocumentList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tbDocumentList);
+  }
+
+  final List<PlatformFile> _covidDocumentList;
+  @override
+  List<PlatformFile> get covidDocumentList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_covidDocumentList);
+  }
 
   @override
   final int isHHASelected;
@@ -2406,6 +4826,8 @@ class _$_OnboardingState implements _OnboardingState {
   final int isCovidSelected;
   @override
   final bool isFormSubmitSuccess;
+  @override
+  final bool listUpdated;
   @override
   final int isExperianceSelected;
   @override
@@ -2419,7 +4841,7 @@ class _$_OnboardingState implements _OnboardingState {
 
   @override
   String toString() {
-    return 'OnboardingState(isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected, isFormSubmitSuccess: $isFormSubmitSuccess, isExperianceSelected: $isExperianceSelected, isSmokerSelected: $isSmokerSelected, isTransportationSelected: $isTransportationSelected, isPetsSelected: $isPetsSelected, isLanguagesSelected: $isLanguagesSelected)';
+    return 'OnboardingState(pickedProfilePic: $pickedProfilePic, securityDocumentList: $securityDocumentList, hhaDocumentList: $hhaDocumentList, blsDocumentList: $blsDocumentList, tbDocumentList: $tbDocumentList, covidDocumentList: $covidDocumentList, isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected, isFormSubmitSuccess: $isFormSubmitSuccess, listUpdated: $listUpdated, isExperianceSelected: $isExperianceSelected, isSmokerSelected: $isSmokerSelected, isTransportationSelected: $isTransportationSelected, isPetsSelected: $isPetsSelected, isLanguagesSelected: $isLanguagesSelected)';
   }
 
   @override
@@ -2427,6 +4849,18 @@ class _$_OnboardingState implements _OnboardingState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OnboardingState &&
+            const DeepCollectionEquality()
+                .equals(other.pickedProfilePic, pickedProfilePic) &&
+            const DeepCollectionEquality()
+                .equals(other._securityDocumentList, _securityDocumentList) &&
+            const DeepCollectionEquality()
+                .equals(other._hhaDocumentList, _hhaDocumentList) &&
+            const DeepCollectionEquality()
+                .equals(other._blsDocumentList, _blsDocumentList) &&
+            const DeepCollectionEquality()
+                .equals(other._tbDocumentList, _tbDocumentList) &&
+            const DeepCollectionEquality()
+                .equals(other._covidDocumentList, _covidDocumentList) &&
             (identical(other.isHHASelected, isHHASelected) ||
                 other.isHHASelected == isHHASelected) &&
             (identical(other.isBLSSelected, isBLSSelected) ||
@@ -2437,6 +4871,8 @@ class _$_OnboardingState implements _OnboardingState {
                 other.isCovidSelected == isCovidSelected) &&
             (identical(other.isFormSubmitSuccess, isFormSubmitSuccess) ||
                 other.isFormSubmitSuccess == isFormSubmitSuccess) &&
+            (identical(other.listUpdated, listUpdated) ||
+                other.listUpdated == listUpdated) &&
             (identical(other.isExperianceSelected, isExperianceSelected) ||
                 other.isExperianceSelected == isExperianceSelected) &&
             (identical(other.isSmokerSelected, isSmokerSelected) ||
@@ -2453,11 +4889,18 @@ class _$_OnboardingState implements _OnboardingState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(pickedProfilePic),
+      const DeepCollectionEquality().hash(_securityDocumentList),
+      const DeepCollectionEquality().hash(_hhaDocumentList),
+      const DeepCollectionEquality().hash(_blsDocumentList),
+      const DeepCollectionEquality().hash(_tbDocumentList),
+      const DeepCollectionEquality().hash(_covidDocumentList),
       isHHASelected,
       isBLSSelected,
       isTBSelected,
       isCovidSelected,
       isFormSubmitSuccess,
+      listUpdated,
       isExperianceSelected,
       isSmokerSelected,
       isTransportationSelected,
@@ -2473,17 +4916,36 @@ class _$_OnboardingState implements _OnboardingState {
 
 abstract class _OnboardingState implements OnboardingState {
   const factory _OnboardingState(
-      {required final int isHHASelected,
+      {required final Uint8List pickedProfilePic,
+      required final List<PlatformFile> securityDocumentList,
+      required final List<PlatformFile> hhaDocumentList,
+      required final List<PlatformFile> blsDocumentList,
+      required final List<PlatformFile> tbDocumentList,
+      required final List<PlatformFile> covidDocumentList,
+      required final int isHHASelected,
       required final int isBLSSelected,
       required final int isTBSelected,
       required final int isCovidSelected,
       required final bool isFormSubmitSuccess,
+      required final bool listUpdated,
       required final int isExperianceSelected,
       required final int isSmokerSelected,
       required final int isTransportationSelected,
       required final int isPetsSelected,
       required final int isLanguagesSelected}) = _$_OnboardingState;
 
+  @override
+  Uint8List get pickedProfilePic;
+  @override
+  List<PlatformFile> get securityDocumentList;
+  @override
+  List<PlatformFile> get hhaDocumentList;
+  @override
+  List<PlatformFile> get blsDocumentList;
+  @override
+  List<PlatformFile> get tbDocumentList;
+  @override
+  List<PlatformFile> get covidDocumentList;
   @override
   int get isHHASelected;
   @override
@@ -2494,6 +4956,8 @@ abstract class _OnboardingState implements OnboardingState {
   int get isCovidSelected;
   @override
   bool get isFormSubmitSuccess;
+  @override
+  bool get listUpdated;
   @override
   int get isExperianceSelected;
   @override
