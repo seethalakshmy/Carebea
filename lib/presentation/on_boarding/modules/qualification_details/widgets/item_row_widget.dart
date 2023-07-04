@@ -1,5 +1,6 @@
 import 'package:admin_580_tech/presentation/caregiver_detail/widgets/svg_text.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/qualification_details/widgets/yes_no_radio_button_widget.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../application/bloc/onboarding/onboarding_bloc.dart';
@@ -10,25 +11,30 @@ import '../../../../widget/custom_container.dart';
 import '../../../../widget/custom_sizedbox.dart';
 import '../../../../widget/custom_text.dart';
 import '../../../../widget/custom_text_field.dart';
+import '../../../widgets/file_preview_widget.dart';
+import '../../../widgets/image_preview_widget.dart';
 import '../../../widgets/upload_document_widget.dart';
 
 class ItemRowWidget extends StatelessWidget {
-  ItemRowWidget({
-    Key? key,
-    required this.radioGroup,
-    required this.textController,
-    required this.question,
-    required this.dateController,
-    required this.datePickerLabel,
-    required this.onUpoladTap,
-    required this.onRegisterTap,
-    required this.datePickerValidation,
-    required this.textLabel,
-    required this.onChanged,
-    required this.state,
-    required this.selectedValue,
-    required this.validator,
-  }) : super(key: key);
+  const ItemRowWidget(
+      {Key? key,
+      required this.radioGroup,
+      required this.textController,
+      required this.question,
+      required this.dateController,
+      required this.datePickerLabel,
+      required this.onUpoladTap,
+      required this.onRegisterTap,
+      required this.datePickerValidation,
+      required this.textLabel,
+      required this.onChanged,
+      required this.state,
+      required this.onboardingBloc,
+      required this.selectedValue,
+      required this.validator,
+      required this.documentList,
+      required this.whichDocument})
+      : super(key: key);
   final String question;
   final int radioGroup;
   final int selectedValue;
@@ -41,7 +47,10 @@ class ItemRowWidget extends StatelessWidget {
   final Function() onUpoladTap;
   final Function() onRegisterTap;
   final OnboardingState state;
+  final OnboardingBloc onboardingBloc;
   final FormFieldValidator<String> validator;
+  final List<PlatformFile> documentList;
+  final int whichDocument;
 
   @override
   Widget build(BuildContext context) {
@@ -145,39 +154,69 @@ class ItemRowWidget extends StatelessWidget {
                 MediaQuery.of(context).size.width <= 690
             ? const CustomSizedBox()
             : CustomSizedBox(width: DBL.forty.val),
-        CustomContainer(
-            width: DBL.twoHundred.val,
-            child: UploadDocumentWidget(onTap: onUpoladTap))
+        documentList.length > 1
+            ? const CustomContainer()
+            : CustomContainer(
+                width: DBL.twoHundred.val,
+                child: UploadDocumentWidget(onTap: onUpoladTap)),
+        documentList.isNotEmpty
+            ? _previewShowingWidget(state)
+            : const CustomContainer(),
       ],
     );
+  }
+
+  _previewShowingWidget(OnboardingState state) {
+    return CustomContainer(
+      height: DBL.hundred.val,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: documentList.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return Container(
+              margin: EdgeInsets.all(DBL.ten.val),
+              child: documentList[index].name.endsWith(".png") ||
+                      documentList[index].name.endsWith(".jpg")
+                  ? ImagePreviewWidget(
+                      bytes: documentList[index].bytes!,
+                      onRemoveTap: () {
+                        _removeSelectedFiles(index, state);
+                      },
+                    )
+                  : FilePreviewWidget(
+                      fileName: documentList[index].name,
+                      onRemoveTap: () {
+                        _removeSelectedFiles(index, state);
+                      },
+                    ),
+            );
+          }),
+    );
+  }
+
+  _removeSelectedFiles(int index, OnboardingState state) {
+    documentList.removeAt(index);
+
+    if (whichDocument == 1) {
+      onboardingBloc.add(
+          OnboardingEvent.hhaDocumentUpload(documentList, state.listUpdated));
+    } else if (whichDocument == 2) {
+      onboardingBloc.add(
+          OnboardingEvent.blsDocumentUpload(documentList, state.listUpdated));
+    } else if (whichDocument == 3) {
+      onboardingBloc.add(
+          OnboardingEvent.tbDocumentUpload(documentList, state.listUpdated));
+    } else {
+      onboardingBloc.add(
+          OnboardingEvent.covidDocumentUpload(documentList, state.listUpdated));
+    }
   }
 
   _noCaseWidget() {
     return question == AppString.doYouHaveHHAReg.val ||
             question == AppString.doYouHaveBLSCertification.val
-        ? InkWell(
-            onTap: onRegisterTap,
-            child: CustomContainer(
-              width: DBL.oneForty.val,
-              padding: EdgeInsets.only(bottom: DBL.twenty.val),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomText(
-                    AppString.clickHereToRegister.val,
-                    style: TS().gRoboto(
-                        fontSize: FS.font14.val,
-                        fontWeight: FW.w500.val,
-                        color: AppColor.primaryColor.val),
-                  ),
-                  CustomContainer(
-                    height: DBL.one.val,
-                    color: AppColor.primaryColor.val,
-                  )
-                ],
-              ),
-            ),
-          )
+        ? const CustomContainer()
         : question == AppString.tBAndPPDTest.val
             ? CustomContainer(
                 width: DBL.threeFortyThree.val,
@@ -209,5 +248,31 @@ class ItemRowWidget extends StatelessWidget {
                 ),
               )
             : CustomContainer();
+  }
+
+  _clickToRegisterWidget() {
+    return InkWell(
+      onTap: onRegisterTap,
+      child: CustomContainer(
+        width: DBL.oneForty.val,
+        padding: EdgeInsets.only(bottom: DBL.twenty.val),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomText(
+              AppString.clickHereToRegister.val,
+              style: TS().gRoboto(
+                  fontSize: FS.font14.val,
+                  fontWeight: FW.w500.val,
+                  color: AppColor.primaryColor.val),
+            ),
+            CustomContainer(
+              height: DBL.one.val,
+              color: AppColor.primaryColor.val,
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -14,7 +14,6 @@ import '../widget/custom_sizedbox.dart';
 import '../widget/custom_text.dart';
 import '../widget/header_view.dart';
 import 'modules/build_profile/build_profile_view.dart';
-import 'modules/health_aid_agreement/agreement_view.dart';
 import 'modules/personal_details/personal_details_view.dart';
 import 'modules/preference/preference_view.dart';
 import 'modules/qualification_details/qialification_view.dart';
@@ -62,14 +61,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   Widget _bodyView() {
     List<Widget> pages = [
-      PersonalDetailsView(
-        onboardingBloc: _onboardingBloc,
-        pageController: controller,
-      ),
       QualificationView(
           state: _onboardingBloc.state,
           onboardingBloc: _onboardingBloc,
           pageController: controller),
+      PersonalDetailsView(
+        onboardingBloc: _onboardingBloc,
+        pageController: controller,
+      ),
       PreferenceView(
         onboardingBloc: _onboardingBloc,
         pageController: controller,
@@ -81,7 +80,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       ),
       BuildProfileView(
           pageController: controller, onboardingBloc: _onboardingBloc),
-      HomeHealthAidAgreementView(pageController: controller),
+      //HomeHealthAidAgreementView(pageController: controller),
       SetupCompensationView(
           pageController: controller, onboardingBloc: _onboardingBloc),
     ];

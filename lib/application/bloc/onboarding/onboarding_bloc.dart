@@ -1,4 +1,7 @@
+import 'dart:typed_data';
+
 import 'package:bloc/bloc.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -29,6 +32,25 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
         emit(state.copyWith(isPetsSelected: event.isSelected));
       } else if (event is _RadioLanguageSelected) {
         emit(state.copyWith(isLanguagesSelected: event.isSelected));
+      } else if (event is _ProfilePicSelected) {
+        emit(state.copyWith(pickedProfilePic: event.bytes));
+      } else if (event is _SecurityDocumentUploadSelected) {
+        emit(state.copyWith(
+            securityDocumentList: event.bytesList,
+            listUpdated: !event.listUpdated));
+      } else if (event is _HHADocumentUploadSelected) {
+        emit(state.copyWith(
+            hhaDocumentList: event.bytesList, listUpdated: !event.listUpdated));
+      } else if (event is _BLSDocumentUploadSelected) {
+        emit(state.copyWith(
+            blsDocumentList: event.bytesList, listUpdated: !event.listUpdated));
+      } else if (event is _TBDocumentUploadSelected) {
+        emit(state.copyWith(
+            tbDocumentList: event.bytesList, listUpdated: !event.listUpdated));
+      } else if (event is _CovidDocumentUploadSelected) {
+        emit(state.copyWith(
+            covidDocumentList: event.bytesList,
+            listUpdated: !event.listUpdated));
       }
     });
   }

@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class CommonImageView extends StatelessWidget {
   String? imagePath;
   String? svgPath;
   File? file;
+  Uint8List? bytes;
   double? height;
   double? width;
   Color? color;
@@ -27,6 +29,7 @@ class CommonImageView extends StatelessWidget {
     this.imagePath,
     this.svgPath,
     this.file,
+    this.bytes,
     this.height,
     this.width,
     this.color,
@@ -56,6 +59,14 @@ class CommonImageView extends StatelessWidget {
     } else if (file != null && file!.path.isNotEmpty) {
       return Image.file(
         file!,
+        height: height,
+        width: width,
+        fit: fit,
+        color: color,
+      );
+    } else if (bytes != null) {
+      return Image.memory(
+        bytes!,
         height: height,
         width: width,
         fit: fit,

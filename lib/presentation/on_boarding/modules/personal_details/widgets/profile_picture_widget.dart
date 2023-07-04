@@ -1,42 +1,49 @@
+import 'dart:typed_data';
+
+import 'package:admin_580_tech/application/bloc/onboarding/onboarding_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../../core/enum.dart';
 import '../../../../../core/utility.dart';
 import '../../../../widget/commonImageview.dart';
 
-class ProfilePictureWidget extends StatefulWidget {
-  ProfilePictureWidget({Key? key, required this.size}) : super(key: key);
-  double size;
-
-  @override
-  State<ProfilePictureWidget> createState() => _ProfilePictureWidgetState();
-}
-
-class _ProfilePictureWidgetState extends State<ProfilePictureWidget> {
-  dynamic pickedFile = "";
+class ProfilePictureWidget extends StatelessWidget {
+  const ProfilePictureWidget(
+      {Key? key, required this.size, required this.onboardingBloc})
+      : super(key: key);
+  final double size;
+  final OnboardingBloc onboardingBloc;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(100),
-          child: Container(
-            height: widget.size,
-            width: widget.size,
-            padding: const EdgeInsets.all(40),
-            color: AppColor.skyBlueShade.val,
-            child: pickedFile == "" || pickedFile!.isEmpty
-                ? CommonImageView(
-                    svgPath: IMG.userAvatar.val,
-                  )
-                : CommonImageView(
-                    url: pickedFile!,
-                    fit: BoxFit.cover,
-                    isCircleImage: false,
-                  ),
-          ),
+        BlocBuilder<OnboardingBloc, OnboardingState>(
+          bloc: onboardingBloc,
+          builder: (context, state) {
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: Container(
+                height: size,
+                width: size,
+                padding: state.pickedProfilePic.isEmpty
+                    ? const EdgeInsets.all(40)
+                    : const EdgeInsets.all(0),
+                color: AppColor.skyBlueShade.val,
+                child: state.pickedProfilePic.isEmpty
+                    ? CommonImageView(
+                        svgPath: IMG.userAvatar.val,
+                      )
+                    : CommonImageView(
+                        bytes: state.pickedProfilePic,
+                        fit: BoxFit.cover,
+                        isCircleImage: false,
+                      ),
+              ),
+            );
+          },
         ),
         Positioned(
           bottom: 10,
@@ -44,15 +51,8 @@ class _ProfilePictureWidgetState extends State<ProfilePictureWidget> {
           child: InkWell(
             onTap: () async {
               XFile? pickedFileData = (await Utility.getFromGallery())!;
-              print("pickedFileData : " + pickedFileData.path);
-              /*setState(() {
-                pickedFile = pickedFileData.readAsBytes();
-                print("pickedFile : " + pickedFile.toString());
-              });*/
-              setState(() {
-                pickedFile = pickedFileData.path.replaceAll("blob:", "");
-                print("pickedFile : " + pickedFile!);
-              });
+              Uint8List bytes = await pickedFileData.readAsBytes();
+              onboardingBloc.add(OnboardingEvent.profilePicSelection(bytes));
             },
             child: Container(
               width: 31,

@@ -1,8 +1,8 @@
-import 'package:admin_580_tech/core/utility.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/address_selection_widget.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/profile_picture_widget.dart';
 import 'package:admin_580_tech/presentation/on_boarding/widgets/upload_document_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,7 +11,6 @@ import '../../../../application/bloc/onboarding/onboarding_bloc.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
-import '../../../caregiver_detail/widgets/svg_text.dart';
 import '../../../widget/common_date_picker_widget.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
 import '../../../widget/custom_container.dart';
@@ -20,16 +19,18 @@ import '../../../widget/custom_text.dart';
 import '../../../widget/custom_text_field.dart';
 import '../../../widget/dropdown/state_drop_down.dart';
 import '../../widgets/common_padding_widget.dart';
+import '../../widgets/file_preview_widget.dart';
 import '../../widgets/gender_drop_down.dart';
+import '../../widgets/image_preview_widget.dart';
 import 'models/gender_list_response.dart';
 import 'widgets/document_details_view.dart';
 
 class PersonalDetailsView extends StatefulWidget {
-  PersonalDetailsView(
+  const PersonalDetailsView(
       {Key? key, required this.onboardingBloc, required this.pageController})
       : super(key: key);
-  OnboardingBloc onboardingBloc;
-  PageController pageController;
+  final OnboardingBloc onboardingBloc;
+  final PageController pageController;
 
   @override
   State<PersonalDetailsView> createState() => _PersonalDetailsViewState();
@@ -49,6 +50,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   String selectedState = "";
   String selectedCity = "";
   bool nextClicked = false;
+  List<PlatformFile> bytesList = [];
+  bool listUpdated = false;
 
   AutovalidateMode _validateMode = AutovalidateMode.disabled;
   FormValidationBloc formValidationBloc = FormValidationBloc();
@@ -65,72 +68,69 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         BlocProvider(create: (context) => FormValidationBloc()),
         BlocProvider(create: (context) => OnboardingBloc())
       ],
-      child: BlocBuilder<OnboardingBloc, OnboardingState>(
-        bloc: widget.onboardingBloc,
-        builder: (context, state) {
-          return CommonPaddingWidget(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomSizedBox(height: DBL.ten.val),
-                  CustomText(
-                    AppString.personalDetails.val,
-                    softWrap: true,
-                    style: TS().gRoboto(
-                        fontSize: Responsive.isWeb(context)
-                            ? DBL.nineteen.val
-                            : DBL.sixteen.val,
-                        fontWeight: FW.w500.val,
-                        color: AppColor.primaryColor.val),
-                    textAlign: TextAlign.start,
-                  ),
-                  CustomSizedBox(height: DBL.fifteen.val),
-                  CustomContainer(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    height: DBL.one.val,
-                    color: AppColor.lightGrey.val,
-                  ),
-                  CustomSizedBox(height: DBL.twenty.val),
-                  Responsive.isWeb(context)
-                      ? Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _profilePicWidget(),
-                            CustomSizedBox(width: DBL.twenty.val),
-                            _personalDetailsWidget(
-                                addressLineController,
-                                streetController,
-                                zipController,
-                                socialSecurityNumberController,
-                                context,
-                                _dateFocusNode,
-                                _dateController,
-                                isLargeWeb,
-                                isWeb),
-                          ],
-                        )
-                      : Column(
-                          crossAxisAlignment: Responsive.isWeb(context)
-                              ? CrossAxisAlignment.start
-                              : CrossAxisAlignment.center,
-                          children: [
-                            _profilePicWidget(),
-                            CustomSizedBox(height: DBL.twentyFive.val),
-                            _personalDetailsWidget(
-                                addressLineController,
-                                streetController,
-                                zipController,
-                                socialSecurityNumberController,
-                                context,
-                                _dateFocusNode,
-                                _dateController,
-                                isLargeWeb,
-                                isWeb),
-                          ],
-                        ),
+      child: CommonPaddingWidget(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomSizedBox(height: DBL.ten.val),
+              CustomText(
+                AppString.personalDetails.val,
+                softWrap: true,
+                style: TS().gRoboto(
+                    fontSize: Responsive.isWeb(context)
+                        ? DBL.nineteen.val
+                        : DBL.sixteen.val,
+                    fontWeight: FW.w500.val,
+                    color: AppColor.primaryColor.val),
+                textAlign: TextAlign.start,
+              ),
+              CustomSizedBox(height: DBL.fifteen.val),
+              CustomContainer(
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: DBL.one.val,
+                color: AppColor.lightGrey.val,
+              ),
+              CustomSizedBox(height: DBL.twenty.val),
+              Responsive.isWeb(context)
+                  ? Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _profilePicWidget(),
+                        CustomSizedBox(width: DBL.twenty.val),
+                        _personalDetailsWidget(
+                            addressLineController,
+                            streetController,
+                            zipController,
+                            socialSecurityNumberController,
+                            context,
+                            _dateFocusNode,
+                            _dateController,
+                            isLargeWeb,
+                            isWeb),
+                      ],
+                    )
+                  : Column(
+                      crossAxisAlignment: Responsive.isWeb(context)
+                          ? CrossAxisAlignment.start
+                          : CrossAxisAlignment.center,
+                      children: [
+                        _profilePicWidget(),
+                        CustomSizedBox(height: DBL.twentyFive.val),
+                        _personalDetailsWidget(
+                            addressLineController,
+                            streetController,
+                            zipController,
+                            socialSecurityNumberController,
+                            context,
+                            _dateFocusNode,
+                            _dateController,
+                            isLargeWeb,
+                            isWeb),
+                      ],
+                    ),
 
-                  /*NextAndPreviousButton(
+              /*NextAndPreviousButton(
                   isLoading: controller.isLoading.value,
                   nextButtonText: Get.parameters['is_from_profile'] != null
                       ? LocaleKeys.save.tr
@@ -141,12 +141,10 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
 
                     }
                   }),*/
-                  _nextPrevButtonWidget(),
-                ],
-              ),
-            ),
-          );
-        },
+              _nextPrevButtonWidget(),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -178,33 +176,77 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         child: CForm(
           formKey: _formKey,
           autoValidateMode: _validateMode,
-          child: Wrap(
-            alignment: Responsive.isWeb(context)
-                ? WrapAlignment.start
-                : WrapAlignment.center,
-            spacing: 20,
-            children: [
-              _dateWidget(),
-              _genderWidget(),
-              _addressLineWidget(),
-              _locationWidget(),
-              _streetWidget(),
-              _stateWidget(),
-              _cityWidget(),
-              _zipWidget(),
-              _socialSecurityNoWidget(),
-              DocumentDetailsView(
-                onboardingBloc: widget.onboardingBloc,
-                nextClicked: nextClicked,
-                pageController: widget.pageController,
-              ),
-              _uploadDocumentWidget(),
-
-              //  CustomSizedBox(height: DBL.thirtyFive.val),
-            ],
+          child: BlocBuilder<OnboardingBloc, OnboardingState>(
+            bloc: widget.onboardingBloc,
+            builder: (context, state) {
+              return Wrap(
+                alignment: Responsive.isWeb(context)
+                    ? WrapAlignment.start
+                    : WrapAlignment.center,
+                spacing: 20,
+                children: [
+                  _dateWidget(),
+                  _genderWidget(),
+                  _addressLineWidget(),
+                  _locationWidget(),
+                  _streetWidget(),
+                  _stateWidget(),
+                  _cityWidget(),
+                  _zipWidget(),
+                  _socialSecurityNoWidget(),
+                  DocumentDetailsView(
+                    onboardingBloc: widget.onboardingBloc,
+                    nextClicked: nextClicked,
+                    pageController: widget.pageController,
+                  ),
+                  state.securityDocumentList.length > 1
+                      ? CustomContainer(height: DBL.twenty.val)
+                      : _uploadDocumentWidget(),
+                  state.securityDocumentList.isNotEmpty
+                      ? _previewShowingWidget(state)
+                      : const CustomContainer(),
+                ],
+              );
+            },
           ),
         ),
       ),
+    );
+  }
+
+  _removeSelectedFiles(int index, OnboardingState state) {
+    bytesList.removeAt(index);
+
+    widget.onboardingBloc.add(
+        OnboardingEvent.securityDocumentUpload(bytesList, state.listUpdated));
+  }
+
+  _previewShowingWidget(OnboardingState state) {
+    return CustomContainer(
+      height: DBL.hundred.val,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: state.securityDocumentList.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return Container(
+              margin: EdgeInsets.all(DBL.ten.val),
+              child: state.securityDocumentList[index].name.endsWith(".png") ||
+                      state.securityDocumentList[index].name.endsWith(".jpg")
+                  ? ImagePreviewWidget(
+                      bytes: state.securityDocumentList[index].bytes!,
+                      onRemoveTap: () {
+                        _removeSelectedFiles(index, state);
+                      },
+                    )
+                  : FilePreviewWidget(
+                      fileName: state.securityDocumentList[index].name,
+                      onRemoveTap: () {
+                        _removeSelectedFiles(index, state);
+                      },
+                    ),
+            );
+          }),
     );
   }
 
@@ -212,6 +254,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
     return Column(
       children: [
         ProfilePictureWidget(
+          onboardingBloc: widget.onboardingBloc,
           size: Responsive.isWeb(context) ? 180 : 140,
         ),
         CustomSizedBox(height: DBL.six.val),
@@ -362,7 +405,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                   : ""
               : "",
           stateName: "",
-          items: ["Kerala", "Karnataka", "Tamil Nadu"],
+          items: const ["Kerala", "Karnataka", "Tamil Nadu"],
           onChange: (value) {
             selectedState = value;
           },
@@ -385,7 +428,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                   : ""
               : "",
           stateName: "",
-          items: ["Kannur", "Wayanad", "Ernakulam"],
+          items: const ["Kannur", "Wayanad", "Ernakulam"],
           onChange: (value) {
             selectedCity = value;
           },
@@ -447,7 +490,28 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
 
   _uploadDocumentWidget() {
     return UploadDocumentWidget(
-      onTap: () {},
+      onTap: () async {
+        FilePickerResult? result = await FilePicker.platform.pickFiles(
+          type: FileType.custom,
+          allowedExtensions: ['jpg', 'png', 'pdf', 'doc'],
+        );
+        if (result != null) {
+          for (PlatformFile file in result.files) {
+            bytesList.add(file);
+            listUpdated = !listUpdated;
+            // Break the loop after adding 2 items
+            if (bytesList.length == 2) {
+              break;
+            }
+          }
+
+          widget.onboardingBloc.add(
+            OnboardingEvent.securityDocumentUpload(bytesList, listUpdated),
+          );
+        } else {
+          // User canceled the picker
+        }
+      },
     );
   }
 
@@ -478,54 +542,6 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
             fontWeight: FW.w400.val,
             color: AppColor.label.val,
             fontSize: FS.font16.val));
-  }
-
-  _datePicker() {
-    return InkWell(
-      focusColor: Colors.transparent,
-      hoverColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      splashColor: Colors.transparent,
-      onTap: () async {
-        String date = await Utility.selectDate(context);
-        setState(() {
-          _dateController.text = date;
-        });
-      },
-      child: IgnorePointer(
-        child: CustomSizedBox(
-          width: DBL.twoEighty.val,
-          child: CTextField(
-            hintText: AppString.ddmmyyyy.val,
-            hintStyle: TS().gRoboto(
-                fontWeight: FW.w400.val,
-                color: AppColor.label.val,
-                fontSize: FS.font16.val),
-            focusNode: _dateFocusNode,
-            controller: _dateController,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return AppString.emptyDOB.val;
-              }
-              return null;
-            },
-            onTap: () {},
-            onChanged: (val) {},
-            textInputAction: TextInputAction.next,
-            keyBoardType: TextInputType.text,
-            suffixIcon: CustomContainer(
-              alignment: Alignment.center,
-              width: 30,
-              height: 30,
-              child: SVGText(
-                path: IMG.calender.val,
-                name: "",
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
   }
 
   checkInputData() {
