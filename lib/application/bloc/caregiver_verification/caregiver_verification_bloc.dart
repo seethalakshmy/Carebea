@@ -3,8 +3,8 @@ import 'package:admin_580_tech/core/custom_snackbar.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_verification_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/reject_params.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
+import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart';
-import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +17,7 @@ import '../../../domain/core/api_error_handler/api_error_handler.dart';
 import '../../../infrastructure/caregiver_verification/caregivers_verification_repository.dart';
 import '../../../presentation/widget/cached_image.dart';
 import '../../../presentation/widget/custom_alert_dialog_widget.dart';
+import '../../../presentation/widget/custom_button.dart';
 import '../../../presentation/widget/custom_container.dart';
 import '../../../presentation/widget/custom_sizedbox.dart';
 import '../../../presentation/widget/custom_text.dart';
@@ -257,7 +258,7 @@ class CareGiverVerificationBloc
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
-        autoTabRouter?.setActiveIndex(1);
+        autoTabRouter?.navigate(CareGiversRoute(page: event.page));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }

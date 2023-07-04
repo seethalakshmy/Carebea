@@ -48,6 +48,7 @@ class CareGiverVerificationEvent with _$CareGiverVerificationEvent {
   const factory CareGiverVerificationEvent.careGiverTrainingVerify({
     required String userId,
     required BuildContext context,
+    int? page,
   }) = _CareGiverTrainingVerify;
 
   const factory CareGiverVerificationEvent.isWebViewLoading(bool value) =

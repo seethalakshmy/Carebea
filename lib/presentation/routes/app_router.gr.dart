@@ -80,9 +80,15 @@ class AppRouter extends _i15.RootStackRouter {
       );
     },
     CareGiversRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<CareGiversRouteArgs>(
+          orElse: () => CareGiversRouteArgs(page: queryParams.optInt('page')));
       return _i15.AdaptivePage<dynamic>(
         routeData: routeData,
-        child: const _i6.CareGiversPage(),
+        child: _i6.CareGiversPage(
+          key: args.key,
+          page: args.page,
+        ),
       );
     },
     UserManagementRoute.name: (routeData) {
@@ -111,9 +117,19 @@ class AppRouter extends _i15.RootStackRouter {
       );
     },
     CareGiverProfileRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<CareGiverProfileRouteArgs>(
+          orElse: () => CareGiverProfileRouteArgs(
+                  id: queryParams.optString(
+                'id',
+                '',
+              )));
       return _i15.AdaptivePage<dynamic>(
         routeData: routeData,
-        child: const _i11.CareGiverProfilePage(),
+        child: _i11.CareGiverProfilePage(
+          key: args.key,
+          id: args.id,
+        ),
       );
     },
     CaregiverCreationRoute.name: (routeData) {
@@ -132,15 +148,18 @@ class AppRouter extends _i15.RootStackRouter {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<CaregiverVerificationRouteArgs>(
           orElse: () => CaregiverVerificationRouteArgs(
-                  id: queryParams.optString(
-                'id',
-                '',
-              )));
+                id: queryParams.optString(
+                  'id',
+                  '',
+                ),
+                page: queryParams.optInt('page'),
+              ));
       return _i15.AdaptivePage<dynamic>(
         routeData: routeData,
         child: _i14.CaregiverVerificationPage(
           key: args.key,
           id: args.id,
+          page: args.page,
         ),
         maintainState: false,
       );
@@ -296,14 +315,37 @@ class DashboardRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.CareGiversPage]
-class CareGiversRoute extends _i15.PageRouteInfo<void> {
-  const CareGiversRoute()
-      : super(
+class CareGiversRoute extends _i15.PageRouteInfo<CareGiversRouteArgs> {
+  CareGiversRoute({
+    _i16.Key? key,
+    int? page,
+  }) : super(
           CareGiversRoute.name,
           path: 'care-ambassador',
+          args: CareGiversRouteArgs(
+            key: key,
+            page: page,
+          ),
+          rawQueryParams: {'page': page},
         );
 
   static const String name = 'CareGiversRoute';
+}
+
+class CareGiversRouteArgs {
+  const CareGiversRouteArgs({
+    this.key,
+    this.page,
+  });
+
+  final _i16.Key? key;
+
+  final int? page;
+
+  @override
+  String toString() {
+    return 'CareGiversRouteArgs{key: $key, page: $page}';
+  }
 }
 
 /// generated route for
@@ -356,14 +398,38 @@ class TransactionManagementRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i11.CareGiverProfilePage]
-class CareGiverProfileRoute extends _i15.PageRouteInfo<void> {
-  const CareGiverProfileRoute()
-      : super(
+class CareGiverProfileRoute
+    extends _i15.PageRouteInfo<CareGiverProfileRouteArgs> {
+  CareGiverProfileRoute({
+    _i16.Key? key,
+    String? id = '',
+  }) : super(
           CareGiverProfileRoute.name,
           path: 'care-ambassador-profile',
+          args: CareGiverProfileRouteArgs(
+            key: key,
+            id: id,
+          ),
+          rawQueryParams: {'id': id},
         );
 
   static const String name = 'CareGiverProfileRoute';
+}
+
+class CareGiverProfileRouteArgs {
+  const CareGiverProfileRouteArgs({
+    this.key,
+    this.id = '',
+  });
+
+  final _i16.Key? key;
+
+  final String? id;
+
+  @override
+  String toString() {
+    return 'CareGiverProfileRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for
@@ -397,14 +463,19 @@ class CaregiverVerificationRoute
   CaregiverVerificationRoute({
     _i16.Key? key,
     String? id = '',
+    int? page,
   }) : super(
           CaregiverVerificationRoute.name,
           path: 'care-ambassador-verification',
           args: CaregiverVerificationRouteArgs(
             key: key,
             id: id,
+            page: page,
           ),
-          rawQueryParams: {'id': id},
+          rawQueryParams: {
+            'id': id,
+            'page': page,
+          },
         );
 
   static const String name = 'CaregiverVerificationRoute';
@@ -414,14 +485,17 @@ class CaregiverVerificationRouteArgs {
   const CaregiverVerificationRouteArgs({
     this.key,
     this.id = '',
+    this.page,
   });
 
   final _i16.Key? key;
 
   final String? id;
 
+  final int? page;
+
   @override
   String toString() {
-    return 'CaregiverVerificationRouteArgs{key: $key, id: $id}';
+    return 'CaregiverVerificationRouteArgs{key: $key, id: $id, page: $page}';
   }
 }

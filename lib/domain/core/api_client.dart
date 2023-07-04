@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:admin_580_tech/domain/caregiver_profile/model/caregiver_profile_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_verification_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
 import 'package:dio/dio.dart';
@@ -38,14 +39,13 @@ abstract class ApiClient {
 
   @POST("/get-care-givers")
   Future<CareGiverResponse> getCareGivers(
-    @Header("Authorization") String token,
-    @Field('user_id') String userId,
-    @Field('page') int page,
-    @Field('limit') int limit,
-    @Field('type') int type,
-    @Field('search_term') String? searchTerm,
-    @Field('filter_id') int? filterId,
-  );
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit,
+      @Field('type') int type,
+      @Field('search_term') String? searchTerm,
+      @Field('filter_id') int? filterId);
 
   @POST("/get-caregiver-verification")
   Future<CaregiverVerificationResponse> getCareGiverVerificationData(
@@ -53,11 +53,10 @@ abstract class ApiClient {
 
   @POST("/caregiver-background-verify")
   Future<VerifyResponse> careGiverBackgroundVerify(
-    @Header("Authorization") String token,
-    @Field('user_id') String userId,
-    @Field('status') int status,
-    @Field('reject_reason') String? reason,
-  );
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('status') int status,
+      @Field('reject_reason') String? reason);
 
   @POST("/caregiver-certificate-verification")
   Future<VerifyResponse> careGiverCertificateApprove(
@@ -78,7 +77,15 @@ abstract class ApiClient {
 
   @POST("/caregiver-start-training")
   Future<VerifyResponse> careGiverSendTrainingRequest(
-    @Header("Authorization") String token,
-    @Field('user_id') String userId,
-  );
+      @Header("Authorization") String token, @Field('user_id') String userId);
+
+  @POST("/get-care-giver-profile")
+  Future<CaregiverProfileResponse> getCareGiverProfile(
+      @Header("Authorization") String token, @Field('user_id') String userId);
+
+  @POST("/caregiver-intervie-verification")
+  Future<VerifyResponse> careGiverInterViewVerify(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('status') bool status);
 }

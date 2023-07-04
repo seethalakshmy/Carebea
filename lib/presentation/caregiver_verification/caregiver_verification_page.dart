@@ -11,11 +11,10 @@ import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:webviewx/webviewx.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../application/bloc/caregiver_verification/caregiver_verification_bloc.dart';
 import '../../core/enum.dart';
-import '../../core/string_extension.dart';
 import '../../core/text_styles.dart';
 import '../../domain/caregivers/model/verification_types.dart';
 import '../widget/cached_image.dart';
@@ -32,10 +31,12 @@ import '../widget/row_combo.dart';
 import 'widgets/approval_status_box.dart';
 
 class CaregiverVerificationPage extends StatefulWidget {
-  const CaregiverVerificationPage({Key? key, @QueryParam('id') this.id = ''})
+  const CaregiverVerificationPage(
+      {Key? key, @QueryParam('id') this.id = '', @QueryParam('page') this.page})
       : super(key: key);
 
   final String? id;
+  final int? page;
 
   @override
   State<CaregiverVerificationPage> createState() =>
@@ -55,19 +56,16 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
       TextEditingController();
   final FocusNode _covid19ReasonNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
+
   AutovalidateMode _validateMode = AutovalidateMode.disabled;
   String userId = "";
+  int? _page;
   RejectionParams? rejectionParams;
 
   @override
   void initState() {
-    String testID = context.routeData.queryParams.getString('id', '') ?? "";
-    // String testID = widget.id ?? "empty";
-    print(
-        'test id::: ${autoTabRouter?.currentChild?.queryParams.getString('id', '')}');
-    print(' id::: ${widget.id}');
     userId = autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
-    print('userID ${userId}');
+    _page = autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
     super.initState();
     context
         .read<CareGiverVerificationBloc>()
@@ -86,6 +84,19 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                 : _bodyView(context, state);
       },
     );
+    // return PdfViewer.openFutureFile(
+    //   // Accepting function that returns Future<String> of PDF file path
+    //   () async => (await DefaultCacheManager().getSingleFile(
+    //           'https://github.com/espresso3389/flutter_pdf_render/raw/master/example/assets/hello.pdf'))
+    //       .path,
+    //   viewerController: controller,
+    //   onError: (err) => print(err),
+    //   params: const PdfViewerParams(
+    //     padding: 10,
+    //     minScale: 1.0,
+    //     // scrollDirection: Axis.horizontal,
+    //   ),
+    // );
   }
 
   Center _bodyView(BuildContext context, CareGiverVerificationState state) {
@@ -104,7 +115,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                 height: DBL.oneFifty.val,
                 width: DBL.oneFifty.val,
                 isDetailPage: true,
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
               ),
               CustomSizedBox(
                 height: DBL.three.val,
@@ -169,7 +180,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
       onPressed: () {
         context.read<CareGiverVerificationBloc>().add(
             CareGiverVerificationEvent.careGiverTrainingVerify(
-                userId: userId, context: context));
+                userId: userId, context: context, page: _page));
       },
       color: AppColor.white.val,
       borderRadius: DBL.five.val,
@@ -369,6 +380,18 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
             ],
           ),
           CustomSizedBox(
+            height: isXs1(context) ? DBL.ten.val : DBL.zero.val,
+          ),
+          isXs1(context)
+              ? CustomSizedBox(
+                  height: (qualificationAndTest?.hhaDocUrl != null &&
+                          qualificationAndTest!.hhaDocUrl!.isNotEmpty)
+                      ? DBL.fifty.val
+                      : DBL.zero.val,
+                  child: _hhaDocListView(qualificationAndTest, Axis.horizontal),
+                )
+              : CustomSizedBox.shrink(),
+          CustomSizedBox(
             height: DBL.eight.val,
           ),
           _buildDivider(context),
@@ -388,6 +411,18 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                   : CustomSizedBox.shrink()
             ],
           ),
+          CustomSizedBox(
+            height: isXs1(context) ? DBL.ten.val : DBL.zero.val,
+          ),
+          isXs1(context)
+              ? CustomSizedBox(
+                  height: (qualificationAndTest?.blsDocUrl != null &&
+                          qualificationAndTest!.blsDocUrl!.isNotEmpty)
+                      ? DBL.fifty.val
+                      : DBL.zero.val,
+                  child: _blsDocListView(qualificationAndTest, Axis.horizontal),
+                )
+              : CustomSizedBox.shrink(),
           CustomSizedBox(
             height: DBL.eight.val,
           ),
@@ -409,6 +444,18 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
             ],
           ),
           CustomSizedBox(
+            height: isXs1(context) ? DBL.ten.val : DBL.zero.val,
+          ),
+          isXs1(context)
+              ? CustomSizedBox(
+                  height: (qualificationAndTest?.tbDocUrl != null &&
+                          qualificationAndTest!.tbDocUrl!.isNotEmpty)
+                      ? DBL.fifty.val
+                      : DBL.zero.val,
+                  child: _tbDocListView(qualificationAndTest, Axis.horizontal),
+                )
+              : CustomSizedBox.shrink(),
+          CustomSizedBox(
             height: DBL.eight.val,
           ),
           _buildDivider(context),
@@ -428,7 +475,23 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                   : CustomSizedBox.shrink()
             ],
           ),
-          CustomSizedBox(height: DBL.fifteen.val),
+          CustomSizedBox(
+            height: isXs1(context) ? DBL.ten.val : DBL.zero.val,
+          ),
+          isXs1(context)
+              ? CustomSizedBox(
+                  height: (qualificationAndTest?.covidDocUrl != null &&
+                          qualificationAndTest!.covidDocUrl!.isNotEmpty)
+                      ? DBL.fifty.val
+                      : DBL.zero.val,
+                  child: _covidListView(qualificationAndTest, Axis.horizontal),
+                )
+              : CustomSizedBox.shrink(),
+          CustomSizedBox(
+            height: DBL.eight.val,
+          ),
+          _buildDivider(context),
+          CustomSizedBox(height: DBL.ten.val),
           Row(
             children: [
               CustomSizedBox(
@@ -480,13 +543,15 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         scrollDirection: scrollDirection,
         shrinkWrap: true,
         itemCount: qualificationAndTest?.covidDocUrl?.length ?? 0,
-        itemBuilder: (context, index) => FilePreview(
-            fileName:
-                "Covid Doc ${qualificationAndTest!.covidDocUrl!.length > 1 ? index + 1 : ""}",
-            onTap: () {
-              _docImagePreviewPopUp(context,
-                  "https://amagicareambassabor185017-dev.s3.amazonaws.com/public/ProfilePictures/647843367fddd99053db2997/1685603365732.jpg?AWSAccessKeyId=AKIAU2IGCHB5VV5VF2UG&Expires=1688285465&Signature=KQ4dxWRcLG9I3qd8V5QZVpsqIRg%3D");
-            }));
+        itemBuilder: (context, index) {
+          Doc? item = qualificationAndTest?.covidDocUrl![index];
+          return FilePreview(
+              fileName:
+                  "Covid Doc ${qualificationAndTest!.covidDocUrl!.length > 1 ? index + 1 : ""}",
+              onTap: () {
+                _launchUrl(item?.document ?? "");
+              });
+        });
   }
 
   CustomListViewBuilder _tbDocListView(
@@ -495,13 +560,15 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         scrollDirection: scrollDirection,
         shrinkWrap: true,
         itemCount: qualificationAndTest?.tbDocUrl?.length ?? 0,
-        itemBuilder: (context, index) => FilePreview(
-            fileName:
-                "TB Doc ${qualificationAndTest!.tbDocUrl!.length > 1 ? index + 1 : ""}",
-            onTap: () {
-              _docImagePreviewPopUp(context,
-                  "https://amagicareambassabor185017-dev.s3.amazonaws.com/public/ProfilePictures/647843367fddd99053db2997/1685603365732.jpg?AWSAccessKeyId=AKIAU2IGCHB5VV5VF2UG&Expires=1688285465&Signature=KQ4dxWRcLG9I3qd8V5QZVpsqIRg%3D");
-            }));
+        itemBuilder: (context, index) {
+          Doc? item = qualificationAndTest?.tbDocUrl![index];
+          return FilePreview(
+              fileName:
+                  "TB Doc ${qualificationAndTest!.tbDocUrl!.length > 1 ? index + 1 : ""}",
+              onTap: () {
+                _launchUrl(item?.document ?? "");
+              });
+        });
   }
 
   CustomListViewBuilder _blsDocListView(
@@ -510,13 +577,16 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         scrollDirection: scrollDirection,
         shrinkWrap: true,
         itemCount: qualificationAndTest?.blsDocUrl?.length ?? 0,
-        itemBuilder: (context, index) => FilePreview(
-            fileName:
-                "BLS Doc ${qualificationAndTest!.blsDocUrl!.length > 1 ? index + 1 : ""}",
-            onTap: () {
-              _docImagePreviewPopUp(context,
-                  "https://amagicareambassabor185017-dev.s3.amazonaws.com/public/ProfilePictures/647843367fddd99053db2997/1685603365732.jpg?AWSAccessKeyId=AKIAU2IGCHB5VV5VF2UG&Expires=1688285465&Signature=KQ4dxWRcLG9I3qd8V5QZVpsqIRg%3D");
-            }));
+        itemBuilder: (context, index) {
+          Doc? item = qualificationAndTest?.blsDocUrl![index];
+
+          return FilePreview(
+              fileName:
+                  "BLS Doc ${qualificationAndTest!.blsDocUrl!.length > 1 ? index + 1 : ""}",
+              onTap: () {
+                _launchUrl(item?.document ?? "");
+              });
+        });
   }
 
   CustomListViewBuilder _hhaDocListView(
@@ -525,13 +595,16 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         scrollDirection: scrollDirection,
         shrinkWrap: true,
         itemCount: qualificationAndTest?.hhaDocUrl?.length ?? 0,
-        itemBuilder: (context, index) => FilePreview(
-            fileName:
-                "HHA Doc ${qualificationAndTest!.hhaDocUrl!.length > 1 ? index + 1 : ""}",
-            onTap: () {
-              _docImagePreviewPopUp(context,
-                  "https://amagicareambassabor185017-dev.s3.amazonaws.com/public/ProfilePictures/647843367fddd99053db2997/1685603365732.jpg?AWSAccessKeyId=AKIAU2IGCHB5VV5VF2UG&Expires=1688285465&Signature=KQ4dxWRcLG9I3qd8V5QZVpsqIRg%3D");
-            }));
+        itemBuilder: (_, index) {
+          Doc? item = qualificationAndTest?.hhaDocUrl![index];
+
+          return FilePreview(
+              fileName:
+                  "HHA Doc ${qualificationAndTest!.hhaDocUrl!.length > 1 ? index + 1 : ""}",
+              onTap: () {
+                _launchUrl(item?.document ?? "");
+              });
+        });
   }
 
   ApprovalStatusBox _certificateApprovalStatusBox(
@@ -676,19 +749,20 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         CustomSizedBox(
           height: DBL.eighteen.val,
         ),
-        SizedBox(
-          height: 50,
-          child: CustomListViewBuilder(
-              scrollDirection: Axis.horizontal,
-              itemCount: documentDetails?.docUrl?.length ?? 0,
-              itemBuilder: (context, index) => FilePreview(
-                  fileName:
-                      "Passport Doc ${documentDetails!.docUrl!.length > 1 ? index + 1 : ""}",
-                  onTap: () {
-                    _docImagePreviewPopUp(context,
-                        "https://amagicareambassabor185017-dev.s3.amazonaws.com/public/ProfilePictures/647843367fddd99053db2997/1685603365732.jpg?AWSAccessKeyId=AKIAU2IGCHB5VV5VF2UG&Expires=1688285465&Signature=KQ4dxWRcLG9I3qd8V5QZVpsqIRg%3D");
-                  })),
-        ),
+        CustomSizedBox(
+            height: DBL.fifty.val,
+            child: CustomListViewBuilder(
+                scrollDirection: Axis.horizontal,
+                itemCount: documentDetails?.docUrl?.length ?? 0,
+                itemBuilder: (context, index) {
+                  Doc? item = documentDetails?.docUrl![index];
+                  return FilePreview(
+                      fileName:
+                          "Passport Doc ${documentDetails!.docUrl!.length > 1 ? index + 1 : ""}",
+                      onTap: () {
+                        _launchUrl(item?.document ?? "");
+                      });
+                })),
         CustomSizedBox(
           height: isLarge(context) ? DBL.fifteen.val : DBL.zero.val,
         ),
@@ -906,43 +980,67 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
     );
   }
 
-  _docImagePreviewPopUp(BuildContext context, String url) {
-    print('url is $url');
-    showGeneralDialog(
-      context: context,
-      pageBuilder: (BuildContext buildContext, Animation animation,
-          Animation secondaryAnimation) {
-        return CustomAlertDialogWidget(
-            width: 800,
-            height: 800,
-            heading: AppString.verificationProcess.val,
-            child: true.isPdf(url)
-                ? WebViewX(
-                    width: 800,
-                    height: 800,
-                    initialContent:
-                        'https://docs.google.com/gview?embedded=true&url=$url',
-                    initialSourceType: SourceType.url,
-                    webSpecificParams: const WebSpecificParams(),
-                    onPageStarted: (value) {
-                      print('val : value');
-                    },
-                    onWebViewCreated: (value) {
-                      print('val : value');
-                    },
-                    onPageFinished: (value) {
-                      print('val : value');
-                    },
-                    javascriptMode: JavascriptMode.unrestricted)
-                : CachedImage(
-                    imgUrl: url,
-                    width: 800,
-                    height: 800,
-                    isDocImage: true,
-                  ));
-      },
-    );
-  }
+  // _docImagePreviewPopUp(BuildContext contextt,
+  //     {required String url, required String fileName}) {
+  //   bool isLoading = true;
+  //   showGeneralDialog(
+  //     context: context,
+  //     pageBuilder: (BuildContext buildContext, Animation animation,
+  //         Animation secondaryAnimation) {
+  //       print('pdf:: $fileName - ${true.isPdf(fileName)}');
+  //       CustomLog.log("url is ${url}");
+  //       return CustomAlertDialogWidget(
+  //           width: 800,
+  //           height: 800,
+  //           heading: AppString.verificationProcess.val,
+  //           child: true.isPdf(fileName)
+  //               ? isLoading
+  //                   ? CircularProgressIndicator()
+  //                   : Stack(
+  //                       children: [
+  //                         WebViewX(
+  //                             width: 800,
+  //                             height: 800,
+  //                             initialContent:
+  //                                 'https://docs.google.com/gview?embedded=true&url=https://aljamia-dev.s3.ap-south-1.amazonaws.com/aljamia-media-files/coursepdf/0ldbhiz3p58eedtqkm3y9fb.pdf',
+  //                             initialSourceType: SourceType.url,
+  //                             webSpecificParams: const WebSpecificParams(),
+  //                             onPageStarted: (value) {
+  //                               setState(() {
+  //                                 isLoading = true;
+  //                               });
+  //                               // print('val : value started $value');
+  //                             },
+  //                             onWebViewCreated: (value) {
+  //                               setState(() {
+  //                                 isLoading = true;
+  //                               });
+  //                               // print('val : value created $value');
+  //                             },
+  //                             onPageFinished: (value) {
+  //                               setState(() {
+  //                                 isLoading = false;
+  //                               });
+  //                               // print('val : value finsihed $value');
+  //                             },
+  //                             javascriptMode: JavascriptMode.unrestricted),
+  //                         if (isLoading)
+  //                           Container(
+  //                             color: Colors.white,
+  //                             child: Center(child: CircularProgressIndicator()),
+  //                           ),
+  //                       ],
+  //                     )
+  //               : CachedImage(
+  //                   imgUrl: url,
+  //                   width: 800,
+  //                   height: 800,
+  //                   isDocImage: true,
+  //                   fit: BoxFit.contain,
+  //                 ));
+  //     },
+  //   );
+  // }
 
   _certificateRejectPopUp(BuildContext context) {
     showGeneralDialog(
@@ -1128,6 +1226,12 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         );
       },
     );
+  }
+
+  Future<void> _launchUrl(String url) async {
+    if (!await launchUrl(Uri.parse(url))) {
+      throw Exception('Could not launch $url}');
+    }
   }
 
   bool isSendTrainingRequest(CareGiverVerificationState state) {

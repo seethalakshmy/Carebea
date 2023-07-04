@@ -6,7 +6,6 @@ import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/caregivers/model/care_givers.dart';
 import 'package:admin_580_tech/domain/caregivers/model/types.dart';
 import 'package:admin_580_tech/presentation/caregivers/widgets/tab_item.dart';
-import 'package:admin_580_tech/presentation/caregivers/widgets/table_verification_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
@@ -21,6 +20,8 @@ import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_row_image_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_row_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_switch_box.dart';
+import 'package:admin_580_tech/presentation/widget/table_verification_button.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,8 +40,9 @@ import '../widget/table_actions_view.dart';
 import '../widget/table_column_view.dart';
 
 class CareGiversPage extends StatefulWidget {
-  const CareGiversPage({Key? key}) : super(key: key);
-
+  const CareGiversPage({Key? key, @QueryParam('page') this.page})
+      : super(key: key);
+  final int? page;
   @override
   State<CareGiversPage> createState() => _CareGiversPageState();
 }
@@ -62,6 +64,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
 
   @override
   void initState() {
+    // int  =autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
     super.initState();
     _careGiversBloc = CareGiversBloc(CareGiversRepository());
   }
@@ -182,7 +185,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
                     child: _caregiversTable(state, context),
                   ),
                   CustomSizedBox(height: DBL.twenty.val),
-                  _paginationView()
+                  if (_totalItems > 10) _paginationView()
                 ],
               )
             : EmptyView(title: AppString.emptyCareGivers.val),
@@ -440,7 +443,9 @@ class _CareGiversPageState extends State<CareGiversPage> {
 
   TableVerificationButton _tableVerificationButton(Caregivers item) {
     return TableVerificationButton(
-      caregiver: item,
+      verificationStatus: item.verificationStatus ?? 0,
+      userId: item.userId,
+      page: _page,
     );
   }
 

@@ -35,7 +35,7 @@ mixin _$CareGiverVerificationEvent {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context)
+    required TResult Function(String userId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) =>
@@ -59,7 +59,7 @@ mixin _$CareGiverVerificationEvent {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context)?
+    TResult? Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) =>
@@ -83,7 +83,7 @@ mixin _$CareGiverVerificationEvent {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context)?
+    TResult Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
@@ -262,7 +262,7 @@ class _$_GetVerificationData implements _GetVerificationData {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context)
+    required TResult Function(String userId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
@@ -289,7 +289,7 @@ class _$_GetVerificationData implements _GetVerificationData {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context)?
+    TResult? Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
@@ -316,7 +316,7 @@ class _$_GetVerificationData implements _GetVerificationData {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context)?
+    TResult Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
@@ -503,7 +503,7 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context)
+    required TResult Function(String userId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
@@ -530,7 +530,7 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context)?
+    TResult? Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
@@ -557,7 +557,7 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context)?
+    TResult Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
@@ -741,7 +741,7 @@ class _$_IsTappedReason implements _IsTappedReason {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context)
+    required TResult Function(String userId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
@@ -768,7 +768,7 @@ class _$_IsTappedReason implements _IsTappedReason {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context)?
+    TResult? Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
@@ -795,7 +795,7 @@ class _$_IsTappedReason implements _IsTappedReason {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context)?
+    TResult Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
@@ -978,7 +978,7 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context)
+    required TResult Function(String userId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
@@ -1005,7 +1005,7 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context)?
+    TResult? Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
@@ -1032,7 +1032,7 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context)?
+    TResult Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
@@ -1215,7 +1215,7 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context)
+    required TResult Function(String userId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
@@ -1242,7 +1242,7 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context)?
+    TResult? Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
@@ -1269,7 +1269,7 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context)?
+    TResult Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
@@ -1451,7 +1451,7 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context)
+    required TResult Function(String userId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
@@ -1478,7 +1478,7 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context)?
+    TResult? Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
@@ -1505,7 +1505,7 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context)?
+    TResult Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
@@ -1689,7 +1689,7 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context)
+    required TResult Function(String userId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
@@ -1716,7 +1716,7 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context)?
+    TResult? Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
@@ -1743,7 +1743,7 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context)?
+    TResult Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
@@ -1929,7 +1929,7 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context)
+    required TResult Function(String userId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
@@ -1956,7 +1956,7 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context)?
+    TResult? Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
@@ -1983,7 +1983,7 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context)?
+    TResult Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
@@ -2202,7 +2202,7 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context)
+    required TResult Function(String userId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
@@ -2229,7 +2229,7 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context)?
+    TResult? Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
@@ -2257,7 +2257,7 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context)?
+    TResult Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
@@ -2496,7 +2496,7 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context)
+    required TResult Function(String userId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
@@ -2524,7 +2524,7 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context)?
+    TResult? Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
@@ -2552,7 +2552,7 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context)?
+    TResult Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
@@ -2766,7 +2766,7 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context)
+    required TResult Function(String userId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
@@ -2793,7 +2793,7 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context)?
+    TResult? Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
@@ -2820,7 +2820,7 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context)?
+    TResult Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
@@ -2933,7 +2933,7 @@ abstract class _$$_CareGiverTrainingVerifyCopyWith<$Res> {
           $Res Function(_$_CareGiverTrainingVerify) then) =
       __$$_CareGiverTrainingVerifyCopyWithImpl<$Res>;
   @useResult
-  $Res call({String userId, BuildContext context});
+  $Res call({String userId, BuildContext context, int? page});
 }
 
 /// @nodoc
@@ -2950,6 +2950,7 @@ class __$$_CareGiverTrainingVerifyCopyWithImpl<$Res>
   $Res call({
     Object? userId = null,
     Object? context = null,
+    Object? page = freezed,
   }) {
     return _then(_$_CareGiverTrainingVerify(
       userId: null == userId
@@ -2960,6 +2961,10 @@ class __$$_CareGiverTrainingVerifyCopyWithImpl<$Res>
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
               as BuildContext,
+      page: freezed == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -2968,16 +2973,18 @@ class __$$_CareGiverTrainingVerifyCopyWithImpl<$Res>
 
 class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
   const _$_CareGiverTrainingVerify(
-      {required this.userId, required this.context});
+      {required this.userId, required this.context, this.page});
 
   @override
   final String userId;
   @override
   final BuildContext context;
+  @override
+  final int? page;
 
   @override
   String toString() {
-    return 'CareGiverVerificationEvent.careGiverTrainingVerify(userId: $userId, context: $context)';
+    return 'CareGiverVerificationEvent.careGiverTrainingVerify(userId: $userId, context: $context, page: $page)';
   }
 
   @override
@@ -2986,11 +2993,12 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
         (other.runtimeType == runtimeType &&
             other is _$_CareGiverTrainingVerify &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.context, context) || other.context == context));
+            (identical(other.context, context) || other.context == context) &&
+            (identical(other.page, page) || other.page == page));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId, context);
+  int get hashCode => Object.hash(runtimeType, userId, context, page);
 
   @JsonKey(ignore: true)
   @override
@@ -3020,11 +3028,11 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context)
+    required TResult Function(String userId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
-    return careGiverTrainingVerify(userId, context);
+    return careGiverTrainingVerify(userId, context, page);
   }
 
   @override
@@ -3047,11 +3055,11 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context)?
+    TResult? Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
-    return careGiverTrainingVerify?.call(userId, context);
+    return careGiverTrainingVerify?.call(userId, context, page);
   }
 
   @override
@@ -3074,13 +3082,13 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context)?
+    TResult Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),
   }) {
     if (careGiverTrainingVerify != null) {
-      return careGiverTrainingVerify(userId, context);
+      return careGiverTrainingVerify(userId, context, page);
     }
     return orElse();
   }
@@ -3169,10 +3177,12 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
 abstract class _CareGiverTrainingVerify implements CareGiverVerificationEvent {
   const factory _CareGiverTrainingVerify(
       {required final String userId,
-      required final BuildContext context}) = _$_CareGiverTrainingVerify;
+      required final BuildContext context,
+      final int? page}) = _$_CareGiverTrainingVerify;
 
   String get userId;
   BuildContext get context;
+  int? get page;
   @JsonKey(ignore: true)
   _$$_CareGiverTrainingVerifyCopyWith<_$_CareGiverTrainingVerify>
       get copyWith => throw _privateConstructorUsedError;
@@ -3259,7 +3269,7 @@ class _$_IsWebViewLoading implements _IsWebViewLoading {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context)
+    required TResult Function(String userId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(bool value) isWebViewLoading,
   }) {
@@ -3286,7 +3296,7 @@ class _$_IsWebViewLoading implements _IsWebViewLoading {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context)?
+    TResult? Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(bool value)? isWebViewLoading,
   }) {
@@ -3313,7 +3323,7 @@ class _$_IsWebViewLoading implements _IsWebViewLoading {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context)?
+    TResult Function(String userId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(bool value)? isWebViewLoading,
     required TResult orElse(),

@@ -222,7 +222,7 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
                     height: 45,
                     minWidth: 120,
                     onPressed: () {
-                      context.router.navigate(const CareGiversRoute());
+                      context.router.navigate(CareGiversRoute());
                     },
                     text: AppString.cancel.val,
                     color: AppColor.white.val,

@@ -1,6 +1,8 @@
+import 'package:admin_580_tech/application/bloc/caregiver-profile/caregiver_profile_bloc.dart';
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_listview_builder.dart';
+import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:admin_580_tech/presentation/widget/dot_text_list_item.dart';
 import 'package:flutter/material.dart';
 
@@ -8,21 +10,16 @@ import '../../widget/custom_sizedbox.dart';
 import '../../widget/header_view.dart';
 
 class CareGiverProvidedServices extends StatelessWidget {
-  CareGiverProvidedServices({Key? key}) : super(key: key);
-  List<String> mBasicServices = [
-    "Assist w/ wake Up",
-    "Assist w/ wake Up",
-    "Assist w/ wake Up"
-  ];
-  List<String> mSpecialServices = [
-    "Bed bath",
-    "Assist w/ wake Up",
-    "Change Depends",
-    "Memory care"
-  ];
+  const CareGiverProvidedServices({Key? key, required this.state})
+      : super(key: key);
+  final CareGiverProfileState state;
 
   @override
   Widget build(BuildContext context) {
+    final List<String> basicServices =
+        state.response?.data?.services?.basicServices ?? [];
+    final List<String> specialServices =
+        state.response?.data?.services?.specialServices ?? [];
     return CustomContainer(
       padding: EdgeInsets.symmetric(
           horizontal: DBL.twentyFive.val, vertical: DBL.twentyFive.val),
@@ -31,21 +28,21 @@ class CareGiverProvidedServices extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _basicServicesView(),
+            _basicServicesView(basicServices),
             Divider(
               color: AppColor.dividerColor3.val,
             ),
             CustomSizedBox(
               height: DBL.eight.val,
             ),
-            _specialServicesView(),
+            _specialServicesView(specialServices),
           ],
         ),
       ),
     );
   }
 
-  _basicServicesView() {
+  _basicServicesView(List<String> services) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -59,23 +56,31 @@ class CareGiverProvidedServices extends StatelessWidget {
         CustomSizedBox(
           height: DBL.eight.val,
         ),
-        CustomSizedBox(
-          height: DBL.forty.val,
-          child: CustomListViewBuilder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: mBasicServices.length,
-              itemBuilder: (context, index) => DotTextListItem(
-                    isForHorizontalView: true,
-                    value: mBasicServices[index],
-                    color: AppColor.label6.val,
-                  )),
-        ),
+        services.isNotEmpty
+            ? CustomSizedBox(
+                height: DBL.forty.val,
+                child: CustomListViewBuilder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: services.length,
+                    itemBuilder: (context, index) => DotTextListItem(
+                          isForHorizontalView: true,
+                          value: services[index],
+                          color: AppColor.label6.val,
+                        )),
+              )
+            : _emptyView(),
       ],
     );
   }
 
-  _specialServicesView() {
+  Center _emptyView() {
+    return Center(
+      child: CustomText(AppString.notServices.val),
+    );
+  }
+
+  _specialServicesView(List<String> services) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -89,18 +94,20 @@ class CareGiverProvidedServices extends StatelessWidget {
         CustomSizedBox(
           height: DBL.eight.val,
         ),
-        CustomSizedBox(
-          height: DBL.forty.val,
-          child: CustomListViewBuilder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: mSpecialServices.length,
-              itemBuilder: (context, index) => DotTextListItem(
-                    isForHorizontalView: true,
-                    value: mSpecialServices[index],
-                    color: AppColor.red.val,
-                  )),
-        ),
+        services.isNotEmpty
+            ? CustomSizedBox(
+                height: DBL.forty.val,
+                child: CustomListViewBuilder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: services.length,
+                    itemBuilder: (context, index) => DotTextListItem(
+                          isForHorizontalView: true,
+                          value: services[index],
+                          color: AppColor.red.val,
+                        )),
+              )
+            : _emptyView(),
       ],
     );
   }

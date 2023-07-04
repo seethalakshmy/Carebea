@@ -113,6 +113,10 @@ enum AppString {
   inDoor("Indoor"),
   outDoor("Outdoor"),
   clientsCustomer("Clients/Customers"),
+  isCompletedTraining(
+      "Is the Care ambassadors  Completed the training process?"),
+  isCompletedInterView(
+      "Is the Care ambassadors  Completed the interview process?"),
   transaction("Transaction"),
   role("Role"),
   previous("Previous"),
@@ -150,6 +154,7 @@ enum AppString {
   refundStatus("Refund Status"),
   canceledBy("Canceled by"),
   notAvailable("Not Available"),
+  notServices("No Services"),
   timeChange("Time Change"),
   serviceScheduled("Service Scheduled "),
   about("About"),
@@ -234,6 +239,7 @@ enum AppString {
   startVerification("Start Verification"),
   startedVerification("Started Verification"),
   trainingStarted("Training Started"),
+  interviewStarted("Interview Started"),
   enterTheReason("Enter the reason"),
   acceptThisCareAmbassador("Do you want to accept this care ambassador?"),
   selectRejectedDocument("Select rejected document and mentioned the reason"),
@@ -320,6 +326,7 @@ enum AppColor {
   dividerColor4(Color(0xffE3E9F0)),
   calendarColor(Color(0xffF9FBFF)),
   darkGreen(Color(0xff479C88)),
+  darkGreen2(Color(0xff075948)),
   green(Color(0xff42C25F)),
   green2(Color(0xff50CD89)),
   green3(Color(0xffC9F7D3)),
@@ -567,6 +574,7 @@ enum DBL {
   threeFifteen(315.0),
   threeTwenty(320.0),
   threeTwentyFive(325.0),
+  threeThirty(330.0),
   threeFortyThree(343.0),
   threeFifty(350.0),
   threeSixtyFive(365.0),
@@ -681,7 +689,8 @@ enum InOut {
 enum Verification {
   startVerification(1),
   startedVerification(2),
-  trainingStarted(3);
+  trainingStarted(3),
+  interViewStarted(4);
 
   final int val;
 

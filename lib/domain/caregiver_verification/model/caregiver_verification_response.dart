@@ -164,7 +164,7 @@ class PersonalDetails {
 }
 
 class DocumentDetails {
-  List<String>? docUrl;
+  List<Doc>? docUrl;
   String? documentUploaded;
   String? documentNumber;
   String? expiryDate;
@@ -176,7 +176,12 @@ class DocumentDetails {
       this.expiryDate});
 
   DocumentDetails.fromJson(Map<String, dynamic> json) {
-    docUrl = json['doc_url'].cast<String>();
+    if (json['doc_url'] != null) {
+      docUrl = <Doc>[];
+      json['doc_url'].forEach((v) {
+        docUrl!.add(Doc.fromJson(v));
+      });
+    }
     documentUploaded = json['document_uploaded'];
     documentNumber = json['doument_number'];
     expiryDate = json['expiry_date'];
@@ -218,18 +223,18 @@ class QualificationAndTest {
   String? isHhaDocument;
   String? hhaDocumentNumber;
   String? hhaExpiryDate;
-  List<String>? hhaDocUrl;
+  List<Doc>? hhaDocUrl;
   String? isBlsFirstAidCertification;
   String? blsDocumentNumber;
   String? blsExpiryDate;
-  List<String>? blsDocUrl;
+  List<Doc>? blsDocUrl;
   String? isTbPpdTest;
   String? tbResult;
   String? tbTakenDate;
-  List<String>? tbDocUrl;
+  List<Doc>? tbDocUrl;
   String? isCovidVaccination;
   String? covidTakenDate;
-  List<String>? covidDocUrl;
+  List<Doc>? covidDocUrl;
 
   QualificationAndTest(
       {this.isHhaDocument,
@@ -252,18 +257,40 @@ class QualificationAndTest {
     isHhaDocument = json['is_hha_document'];
     hhaDocumentNumber = json['hha_document_number'];
     hhaExpiryDate = json['hha_expiry_date'];
-    hhaDocUrl = json['hha_doc_url'].cast<String>();
+    if (json['hha_doc_url'] != null) {
+      hhaDocUrl = <Doc>[];
+      json['hha_doc_url'].forEach((v) {
+        hhaDocUrl!.add(Doc.fromJson(v));
+      });
+    }
+
     isBlsFirstAidCertification = json['is_bls_first_aid_certification'];
     blsDocumentNumber = json['bls_document_number'];
     blsExpiryDate = json['bls_expiry_date'];
-    blsDocUrl = json['bls_doc_url'].cast<String>();
+
+    if (json['bls_doc_url'] != null) {
+      blsDocUrl = <Doc>[];
+      json['bls_doc_url'].forEach((v) {
+        blsDocUrl!.add(Doc.fromJson(v));
+      });
+    }
     isTbPpdTest = json['is_tb_ppd_test'];
     tbResult = json['tb_result'];
     tbTakenDate = json['tb_taken_date'];
-    tbDocUrl = json['tb_doc_url'].cast<String>();
+    if (json['tb_doc_url'] != null) {
+      tbDocUrl = <Doc>[];
+      json['tb_doc_url'].forEach((v) {
+        tbDocUrl!.add(Doc.fromJson(v));
+      });
+    }
     isCovidVaccination = json['is_covid_vaccination'];
     covidTakenDate = json['covid_taken_date'];
-    covidDocUrl = json['covid_doc_url'].cast<String>();
+    if (json['covid_doc_url'] != null) {
+      covidDocUrl = <Doc>[];
+      json['covid_doc_url'].forEach((v) {
+        covidDocUrl!.add(Doc.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -280,5 +307,20 @@ class QualificationAndTest {
     data['is_covid_vaccination'] = isCovidVaccination;
     data['covid_taken_date'] = covidTakenDate;
     return data;
+  }
+}
+
+class Doc {
+  String? document;
+  String? fileName;
+
+  Doc({
+    this.document,
+    this.fileName,
+  });
+
+  Doc.fromJson(Map<String, dynamic> json) {
+    document = json['document'];
+    fileName = json['reference'];
   }
 }

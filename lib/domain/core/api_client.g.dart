@@ -238,6 +238,64 @@ class _ApiClient implements ApiClient {
     return value;
   }
 
+  @override
+  Future<CaregiverProfileResponse> getCareGiverProfile(
+    token,
+    userId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {'user_id': userId};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<CaregiverProfileResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/get-care-giver-profile',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CaregiverProfileResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<VerifyResponse> careGiverInterViewVerify(
+    token,
+    userId,
+    status,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'status': status,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<VerifyResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/caregiver-intervie-verification',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VerifyResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

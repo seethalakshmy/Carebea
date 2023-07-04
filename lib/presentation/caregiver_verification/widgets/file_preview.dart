@@ -22,9 +22,7 @@ class FilePreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-        top: DBL.eight.val,
-      ),
+      padding: EdgeInsets.only(top: DBL.eight.val, left: DBL.five.val),
       child: InkWell(
         onTap: () {
           onTap();

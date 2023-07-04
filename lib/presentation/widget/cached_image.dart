@@ -42,14 +42,16 @@ class CachedImage extends StatelessWidget {
             width: width,
             height: height,
             placeholder: (context, url) =>
-                isDocImage ? buildProgress() : _personView(),
+                isDocImage || isDetailPage ? buildProgress() : _personView(),
             errorWidget: (context, url, error) => _personView(),
           );
   }
 
   Center buildProgress() {
     return const Center(
-      child: CircularProgressIndicator(),
+      child: CircularProgressIndicator(
+        strokeWidth: 2,
+      ),
     );
   }
 
