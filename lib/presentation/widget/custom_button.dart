@@ -4,7 +4,6 @@ import 'dart:ui' show lerpDouble;
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:flutter/material.dart';
 
-
 import '../../core/enum.dart';
 import '../../core/on_hover.dart';
 
@@ -33,7 +32,7 @@ class CustomButton extends StatelessWidget {
   final double? hoverElevation;
   final Color? color;
   final Color? hoverColor;
-  final TextStyle?textStyle;
+  final TextStyle? textStyle;
 
   const CustomButton({
     Key? key,
@@ -42,7 +41,7 @@ class CustomButton extends StatelessWidget {
     this.icon,
     this.isOutlineButton = false,
     this.borderWidth = 1.0,
-    this.borderRadius = 12.0,
+    this.borderRadius = 05.0,
     required this.onPressed,
     this.onLongPress,
     this.onHighlightChanged,
@@ -115,7 +114,7 @@ class CustomButton extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              icon ??CustomSizedBox.shrink(),
+              icon ?? CustomSizedBox.shrink(),
               icon != null && text != null
                   ? SizedBox(width: gap)
                   : CustomSizedBox.shrink(),
