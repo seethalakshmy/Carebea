@@ -1,6 +1,7 @@
 import 'package:admin_580_tech/application/bloc/form_validation/form_validation_bloc.dart';
 import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/custom_snackbar.dart';
+import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_verification_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/reject_params.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/widgets/custom_check_text_field.dart';
@@ -57,7 +58,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
   final FocusNode _covid19ReasonNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
 
-  AutovalidateMode _validateMode = AutovalidateMode.disabled;
+  final AutovalidateMode _validateMode = AutovalidateMode.disabled;
   String userId = "";
   int? _page;
   RejectionParams? rejectionParams;
@@ -73,6 +74,20 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _tbReasonController.dispose();
+    _blsReasonController.dispose();
+    _hhaReasonController.dispose();
+    _covid19ReasonController.dispose();
+    _reasonController.dispose();
+    _reasonNode.dispose();
+    _tbReasonNode.dispose();
+    _blsReasonNode.dispose();
+    _hhaReasonNode.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     CustomLog.log("width == ${MediaQuery.of(context).size.width}");
     return BlocBuilder<CareGiverVerificationBloc, CareGiverVerificationState>(
@@ -84,19 +99,6 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                 : _bodyView(context, state);
       },
     );
-    // return PdfViewer.openFutureFile(
-    //   // Accepting function that returns Future<String> of PDF file path
-    //   () async => (await DefaultCacheManager().getSingleFile(
-    //           'https://github.com/espresso3389/flutter_pdf_render/raw/master/example/assets/hello.pdf'))
-    //       .path,
-    //   viewerController: controller,
-    //   onError: (err) => print(err),
-    //   params: const PdfViewerParams(
-    //     padding: 10,
-    //     minScale: 1.0,
-    //     // scrollDirection: Axis.horizontal,
-    //   ),
-    // );
   }
 
   Center _bodyView(BuildContext context, CareGiverVerificationState state) {
@@ -549,7 +551,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
               fileName:
                   "Covid Doc ${qualificationAndTest!.covidDocUrl!.length > 1 ? index + 1 : ""}",
               onTap: () {
-                _launchUrl(item?.document ?? "");
+                _docImagePreviewPopUp(
+                    url: item?.document ?? "", fileName: item?.fileName ?? "");
               });
         });
   }
@@ -566,7 +569,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
               fileName:
                   "TB Doc ${qualificationAndTest!.tbDocUrl!.length > 1 ? index + 1 : ""}",
               onTap: () {
-                _launchUrl(item?.document ?? "");
+                _docImagePreviewPopUp(
+                    url: item?.document ?? "", fileName: item?.fileName ?? "");
               });
         });
   }
@@ -584,7 +588,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
               fileName:
                   "BLS Doc ${qualificationAndTest!.blsDocUrl!.length > 1 ? index + 1 : ""}",
               onTap: () {
-                _launchUrl(item?.document ?? "");
+                _docImagePreviewPopUp(
+                    url: item?.document ?? "", fileName: item?.fileName ?? "");
               });
         });
   }
@@ -602,7 +607,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
               fileName:
                   "HHA Doc ${qualificationAndTest!.hhaDocUrl!.length > 1 ? index + 1 : ""}",
               onTap: () {
-                _launchUrl(item?.document ?? "");
+                _docImagePreviewPopUp(
+                    url: item?.document ?? "", fileName: item?.fileName ?? "");
               });
         });
   }
@@ -760,7 +766,9 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                       fileName:
                           "Passport Doc ${documentDetails!.docUrl!.length > 1 ? index + 1 : ""}",
                       onTap: () {
-                        _launchUrl(item?.document ?? "");
+                        _docImagePreviewPopUp(
+                            url: item?.document ?? "",
+                            fileName: item?.fileName ?? "");
                       });
                 })),
         CustomSizedBox(
@@ -980,67 +988,30 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
     );
   }
 
-  // _docImagePreviewPopUp(BuildContext contextt,
-  //     {required String url, required String fileName}) {
-  //   bool isLoading = true;
-  //   showGeneralDialog(
-  //     context: context,
-  //     pageBuilder: (BuildContext buildContext, Animation animation,
-  //         Animation secondaryAnimation) {
-  //       print('pdf:: $fileName - ${true.isPdf(fileName)}');
-  //       CustomLog.log("url is ${url}");
-  //       return CustomAlertDialogWidget(
-  //           width: 800,
-  //           height: 800,
-  //           heading: AppString.verificationProcess.val,
-  //           child: true.isPdf(fileName)
-  //               ? isLoading
-  //                   ? CircularProgressIndicator()
-  //                   : Stack(
-  //                       children: [
-  //                         WebViewX(
-  //                             width: 800,
-  //                             height: 800,
-  //                             initialContent:
-  //                                 'https://docs.google.com/gview?embedded=true&url=https://aljamia-dev.s3.ap-south-1.amazonaws.com/aljamia-media-files/coursepdf/0ldbhiz3p58eedtqkm3y9fb.pdf',
-  //                             initialSourceType: SourceType.url,
-  //                             webSpecificParams: const WebSpecificParams(),
-  //                             onPageStarted: (value) {
-  //                               setState(() {
-  //                                 isLoading = true;
-  //                               });
-  //                               // print('val : value started $value');
-  //                             },
-  //                             onWebViewCreated: (value) {
-  //                               setState(() {
-  //                                 isLoading = true;
-  //                               });
-  //                               // print('val : value created $value');
-  //                             },
-  //                             onPageFinished: (value) {
-  //                               setState(() {
-  //                                 isLoading = false;
-  //                               });
-  //                               // print('val : value finsihed $value');
-  //                             },
-  //                             javascriptMode: JavascriptMode.unrestricted),
-  //                         if (isLoading)
-  //                           Container(
-  //                             color: Colors.white,
-  //                             child: Center(child: CircularProgressIndicator()),
-  //                           ),
-  //                       ],
-  //                     )
-  //               : CachedImage(
-  //                   imgUrl: url,
-  //                   width: 800,
-  //                   height: 800,
-  //                   isDocImage: true,
-  //                   fit: BoxFit.contain,
-  //                 ));
-  //     },
-  //   );
-  // }
+  _docImagePreviewPopUp({required String url, required String fileName}) {
+    if (true.isPdf(url)) {
+      _launchUrl(url);
+    } else {
+      showGeneralDialog(
+        context: context,
+        pageBuilder: (BuildContext buildContext, Animation animation,
+            Animation secondaryAnimation) {
+          CustomLog.log("url is ${url}");
+          return CustomAlertDialogWidget(
+              width: 800,
+              height: 800,
+              heading: AppString.verificationProcess.val,
+              child: CachedImage(
+                imgUrl: url,
+                width: 800,
+                height: 800,
+                isDocImage: true,
+                fit: BoxFit.contain,
+              ));
+        },
+      );
+    }
+  }
 
   _certificateRejectPopUp(BuildContext context) {
     showGeneralDialog(

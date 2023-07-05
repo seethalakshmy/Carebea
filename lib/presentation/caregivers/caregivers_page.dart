@@ -6,6 +6,7 @@ import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/caregivers/model/care_givers.dart';
 import 'package:admin_580_tech/domain/caregivers/model/types.dart';
 import 'package:admin_580_tech/presentation/caregivers/widgets/tab_item.dart';
+import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
@@ -43,6 +44,7 @@ class CareGiversPage extends StatefulWidget {
   const CareGiversPage({Key? key, @QueryParam('page') this.page})
       : super(key: key);
   final int? page;
+
   @override
   State<CareGiversPage> createState() => _CareGiversPageState();
 }
@@ -411,7 +413,11 @@ class _CareGiversPageState extends State<CareGiversPage> {
                   ? DataCell(_tableRowView(""))
                   : DataCell(TableActions(
                       isView: true,
-                      onViewTap: () {},
+                      onViewTap: () {
+                        autoTabRouter?.navigate(CareGiverDetailRoute(
+                          id: item.userId,
+                        ));
+                      },
                     )),
             ],
           );
@@ -436,7 +442,11 @@ class _CareGiversPageState extends State<CareGiversPage> {
     return TableSwitchBox(
       value: item.isActive!,
       onToggle: () {
-        _careGiversBloc.add(CareGiversEvent.isUserActive(item));
+        _careGiversBloc.add(CareGiversEvent.isUserActive(
+            caregiver: item,
+            status: item.isActive ?? false,
+            userId: item.userId ?? "",
+            context: context));
       },
     );
   }

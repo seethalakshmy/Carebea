@@ -1,4 +1,5 @@
 import 'package:admin_580_tech/application/bloc/caregiver_detail/caregiver_detail_bloc.dart';
+import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/profile_info.dart';
@@ -69,7 +70,10 @@ class CareGiverServiceView extends StatelessWidget {
               ),
             ),
           )
-        : const EmptyView(title: "No Services found!");
+        : const EmptyView(
+            title: "No Services found!",
+            isUnderTab: true,
+          );
   }
 
   _servicesTable(BuildContext context) {
@@ -127,6 +131,7 @@ class CareGiverServiceView extends StatelessWidget {
         rows: services.asMap().entries.map((e) {
           getIndex(e.key);
           var item = e.value;
+
           return DataRow2(
             cells: [
               DataCell(TableRowView(
@@ -135,10 +140,12 @@ class CareGiverServiceView extends StatelessWidget {
               DataCell(TableRowImageView(
                   name: "${item.client?.firstName} ${item.client?.lastName}",
                   imageUrl: item.client?.profile ?? "")),
-              DataCell(_tableRowView(item.serviceName ?? "")),
-              DataCell(_tableRowView(item.startDateTime ?? "")),
-              DataCell(_tableRowView(item.endDateTime ?? "")),
-              DataCell(_tableRowView(item.totalServiceFee ?? "")),
+              DataCell(_tableRowView(item.service ?? "")),
+              DataCell(
+                  _tableRowView(item.startDateTime?.parseWithFormat() ?? "")),
+              DataCell(
+                  _tableRowView(item.endDateTime?.parseWithFormat() ?? "")),
+              DataCell(_tableRowView(item.totalServiceFee.toString() ?? "")),
               DataCell(TableStatusBox(
                 status: item.status ?? 0,
               )),

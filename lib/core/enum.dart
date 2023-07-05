@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 enum AppString {
   login("Login"),
   profile("Profile"),
+  profileDetails("profile details"),
   selectedMenuIndex("selectedindex"),
   userProfile("User Profile"),
   backToDashBoard("Back to Dashboard"),
@@ -12,6 +13,7 @@ enum AppString {
   basicServices("Basic Services"),
   specialServices("Special Services"),
   password("Password"),
+  reviewPending("Review Pending"),
   forgotPassword("Forgot Password ?"),
   resetPassword("Reset Password"),
   resetPasswordDescription(
@@ -256,7 +258,7 @@ enum AppString {
   validEmail("Enter valid email address"),
   emptyPassword("Password shouldn't be empty"),
   emptyRejectedDocument(
-      "Please Select rejected document and mentioned the reason"),
+      "Please Select rejected document and mention the reason"),
   passwordLengthError("Password should be at least 8 characters"),
   emptyConfirmPassword("Confirm password shouldn't be empty"),
   notMatchConfirmPassword("Confirm password doesn't match"),

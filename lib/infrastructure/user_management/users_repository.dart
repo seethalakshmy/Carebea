@@ -12,7 +12,7 @@ import '../../domain/core/api_client.dart';
 import '../../domain/user_management/model/users.dart';
 
 class UsersRepository implements IUsersRepo {
-  final ApiClient _apiClient = ApiClient(Dio());
+  final ApiClient _apiClient = ApiClient();
   List<Users> mUsers = [
     Users(
       userId: "#ID111",
@@ -116,12 +116,12 @@ class UsersRepository implements IUsersRepo {
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
-      if (e.message.contains("SocketException") ) {
+      if (e.message.contains("SocketException")) {
         CustomLog.log("reached here..");
-        return  Left(ClientFailure(
+        return Left(ClientFailure(
             error: AppString.noInternetConnection.val, isClientError: true));
       } else {
-        return  Left(ServerFailure(
+        return Left(ServerFailure(
             error: AppString.somethingWentWrong.val, isClientError: false));
       }
     }

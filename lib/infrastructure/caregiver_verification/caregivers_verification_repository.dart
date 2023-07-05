@@ -10,7 +10,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 class CareGiverVerificationRepository implements ICareGiverVerificationRepo {
-  final ApiClient _apiClient = ApiClient(Dio());
+  final ApiClient _apiClient = ApiClient();
 
   @override
   Future<Either<ApiErrorHandler, CaregiverVerificationResponse>>

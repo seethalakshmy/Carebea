@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
 import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
@@ -129,9 +130,9 @@ class CareGiverEarningView extends StatelessWidget {
                 item.serviceId.toString(),
               )),
               DataCell(_tableRowView(item.transactionType.toString())),
-              DataCell(_tableRowView(item.dateTime ?? "")),
+              DataCell(_tableRowView(item.dateTime?.parseWithFormat() ?? "")),
               DataCell(_tableRowView(item.amount ?? "")),
-              DataCell(_tableRowView(item.receivedFrom ?? "")),
+              DataCell(_tableRowView(item.recievedFrom ?? "")),
               DataCell(_tableRowView(item.paidFor ?? "")),
               DataCell(_tableRowView(item.transactionId ?? "")),
               DataCell(TableStatusBox(

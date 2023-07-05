@@ -9,7 +9,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 class CareGiverProfileRepository implements ICareGiverProfileRepo {
-  final ApiClient _apiClient = ApiClient(Dio());
+  final ApiClient _apiClient = ApiClient();
 
   @override
   Future<Either<ApiErrorHandler, CaregiverProfileResponse>> getCareGiverProfile(

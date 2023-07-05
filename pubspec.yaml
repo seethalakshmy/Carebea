@@ -44,6 +44,7 @@ dependencies:
   flutter_rating_bar: 4.0.1
   table_calendar:
   webviewx: ^0.2.2
+  get_it:
   top_snackbar_flutter: ^3.0.0+1
 
 

@@ -98,9 +98,19 @@ class AppRouter extends _i15.RootStackRouter {
       );
     },
     CareGiverDetailRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<CareGiverDetailRouteArgs>(
+          orElse: () => CareGiverDetailRouteArgs(
+                  id: queryParams.optString(
+                'id',
+                '',
+              )));
       return _i15.AdaptivePage<dynamic>(
         routeData: routeData,
-        child: const _i8.CareGiverDetailPage(),
+        child: _i8.CareGiverDetailPage(
+          key: args.key,
+          id: args.id,
+        ),
         maintainState: false,
       );
     },
@@ -362,14 +372,38 @@ class UserManagementRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i8.CareGiverDetailPage]
-class CareGiverDetailRoute extends _i15.PageRouteInfo<void> {
-  const CareGiverDetailRoute()
-      : super(
+class CareGiverDetailRoute
+    extends _i15.PageRouteInfo<CareGiverDetailRouteArgs> {
+  CareGiverDetailRoute({
+    _i16.Key? key,
+    String? id = '',
+  }) : super(
           CareGiverDetailRoute.name,
           path: 'care-ambassador-detail',
+          args: CareGiverDetailRouteArgs(
+            key: key,
+            id: id,
+          ),
+          rawQueryParams: {'id': id},
         );
 
   static const String name = 'CareGiverDetailRoute';
+}
+
+class CareGiverDetailRouteArgs {
+  const CareGiverDetailRouteArgs({
+    this.key,
+    this.id = '',
+  });
+
+  final _i16.Key? key;
+
+  final String? id;
+
+  @override
+  String toString() {
+    return 'CareGiverDetailRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for

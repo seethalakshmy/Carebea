@@ -30,7 +30,7 @@ class CareGiverBankAccountInfoView extends StatelessWidget {
           ),
           UserAccountDetails(
               label: AppString.accountHolderName.val,
-              value: value?.accountHolderName ?? ""),
+              value: value?.accName ?? ""),
           CustomSizedBox(
             height: DBL.thirty.val,
           ),
@@ -42,7 +42,7 @@ class CareGiverBankAccountInfoView extends StatelessWidget {
           ),
           UserAccountDetails(
               label: AppString.accountNumber.val,
-              value: value?.accountNumber ?? ""),
+              value: value?.accNumber ?? ""),
         ],
       ),
     );

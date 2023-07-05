@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
 import 'package:admin_580_tech/domain/caregiver_profile/model/caregiver_profile_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_verification_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
@@ -16,7 +17,8 @@ part 'api_client.g.dart';
 
 @RestApi()
 abstract class ApiClient {
-  factory ApiClient(Dio dio) {
+  factory ApiClient() {
+    Dio dio = Dio();
     dio.options = BaseOptions(
       receiveTimeout: 5000,
       connectTimeout: 5000,
@@ -85,6 +87,16 @@ abstract class ApiClient {
 
   @POST("/caregiver-intervie-verification")
   Future<VerifyResponse> careGiverInterViewVerify(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('status') bool status);
+  @POST("/get-care-giver-by-id")
+  Future<CareGiverDetailResponse> getCareGiverDetail(
+    @Header("Authorization") String token,
+    @Field('user_id') String userId,
+  );
+  @POST("/change-caregiver-status")
+  Future<VerifyResponse> careGiverActiveOrInactive(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('status') bool status);

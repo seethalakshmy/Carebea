@@ -9,7 +9,10 @@ class CareGiversEvent with _$CareGiversEvent {
       required int type,
       String? searchTerm,
       int? filterId}) = _GetCareGivers;
-  const factory CareGiversEvent.isUserActive(Caregivers caregiver) =
-      _IsUserActive;
+  const factory CareGiversEvent.isUserActive(
+      {required Caregivers caregiver,
+      required String userId,
+      required bool status,
+      required BuildContext context}) = _IsUserActive;
   const factory CareGiversEvent.isSelectedTab(Types type) = _IsSelectedTab;
 }

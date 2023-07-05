@@ -1,5 +1,5 @@
 import 'package:admin_580_tech/application/bloc/caregiver_detail/caregiver_detail_bloc.dart';
-import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
+import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/profile_info.dart';
@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/enum.dart';
 import '../../../core/text_styles.dart';
+import '../../../domain/caregiver_detail/model/caregiver_detail_response.dart';
 import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_card.dart';
 import '../../widget/custom_container.dart';
@@ -26,10 +27,10 @@ import '../../widget/table_actions_view.dart';
 
 class CareGiverServiceRequestView extends StatelessWidget {
   CareGiverServiceRequestView(
-      {required this.state, required this.serviceRequests, Key? key})
+      {required this.state, required this.serviceRequested, Key? key})
       : super(key: key);
   final CareGiverDetailState state;
-  final List<ServiceRequest> serviceRequests;
+  List<ServiceRequested> serviceRequested;
   List<String> mPets = ["Cat", "Dog", "Rabbit"];
 
   @override
@@ -41,11 +42,11 @@ class CareGiverServiceRequestView extends StatelessWidget {
               ? const TableLoaderView()
               : state.isError
                   ? ErrorView(isClientError: false, errorMessage: state.error)
-                  : _serviceRequestView(context, serviceRequests)),
+                  : _serviceRequestView(context, serviceRequested)),
     );
   }
 
-  _serviceRequestView(BuildContext context, List<ServiceRequest> services) {
+  _serviceRequestView(BuildContext context, List<ServiceRequested> services) {
     return services.isNotEmpty
         ? CustomPadding.only(
             left: DBL.twenty.val,
@@ -123,7 +124,7 @@ class CareGiverServiceRequestView extends StatelessWidget {
             label: CustomText(""),
           ),
         ],
-        rows: serviceRequests.asMap().entries.map((e) {
+        rows: serviceRequested.asMap().entries.map((e) {
           getIndex(e.key);
           var item = e.value;
           return DataRow2(
@@ -131,12 +132,14 @@ class CareGiverServiceRequestView extends StatelessWidget {
               DataCell(TableRowView(
                 text: getIndex(e.key).toString(),
               )),
+              DataCell(
+                  TableRowView(text: "${item.firstName} ${item.lastName}")),
+              DataCell(TableRowView(text: item.serviceId ?? "")),
+              DataCell(TableRowView(text: item.servicesNeeded ?? "")),
               DataCell(TableRowView(
-                  text: "${item.name?.firstName} ${item.name?.lastName}")),
-              DataCell(TableRowView(text: item.requestId ?? "")),
-              DataCell(TableRowView(text: item.serviceNeededCount.toString())),
-              DataCell(TableRowView(text: item.requstedStartDateTime ?? "")),
-              DataCell(TableRowView(text: item.requstedEndDateTime ?? "")),
+                  text: item.startDateTime?.parseWithFormat() ?? "")),
+              DataCell(TableRowView(
+                  text: item.endDateTime?.parseWithFormat() ?? "")),
               DataCell(TableRowView(text: item.status ?? "")),
               DataCell(TableActions(
                 isEdit: false,

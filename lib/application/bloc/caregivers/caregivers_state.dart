@@ -6,6 +6,7 @@ class CareGiversState with _$CareGiversState {
     required bool isLoading,
     required bool isError,
     required CareGiverResponse? response,
+    required VerifyResponse? activeOrInactiveResponse,
     required List<Types> types,
     required String? error,
   }) = _CareGiversState;
@@ -16,6 +17,7 @@ class CareGiversState with _$CareGiversState {
       isError: false,
       response: null,
       error: null,
+      activeOrInactiveResponse: null,
       types: [],
     );
   }
