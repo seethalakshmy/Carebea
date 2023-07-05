@@ -1,16 +1,19 @@
 import 'dart:ui';
 
+import 'package:admin_580_tech/application/bloc/caregiver_verification/caregiver_verification_bloc.dart';
 import 'package:admin_580_tech/core/hive/hive_utils.dart';
 import 'package:admin_580_tech/core/theme.dart';
+import 'package:admin_580_tech/infrastructure/caregiver_verification/caregivers_verification_repository.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 
+import 'application/bloc/form_validation/form_validation_bloc.dart';
 import 'core/config/environment.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   usePathUrlStrategy();
   runApp(
     const MyApp(),
@@ -45,22 +48,30 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerDelegate: _appRouter.delegate(),
-      routeInformationParser: _appRouter.defaultRouteParser(),
-      routeInformationProvider: _appRouter.routeInfoProvider(),
-      debugShowCheckedModeBanner: false,
-      theme: ThemeClass.themeData( context),
-      scrollBehavior: const MaterialScrollBehavior().copyWith(
-        dragDevices: {
-          PointerDeviceKind.mouse,
-          PointerDeviceKind.touch,
-          PointerDeviceKind.stylus,
-          PointerDeviceKind.trackpad,
-          PointerDeviceKind.unknown
-        },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (_) =>
+                CareGiverVerificationBloc(CareGiverVerificationRepository())),
+        BlocProvider(create: (_) => FormValidationBloc()),
+      ],
+      child: MaterialApp.router(
+        routerDelegate: _appRouter.delegate(),
+        routeInformationParser: _appRouter.defaultRouteParser(),
+        routeInformationProvider: _appRouter.routeInfoProvider(),
+        debugShowCheckedModeBanner: false,
+        theme: ThemeClass.themeData(context),
+        scrollBehavior: const MaterialScrollBehavior().copyWith(
+          dragDevices: {
+            PointerDeviceKind.mouse,
+            PointerDeviceKind.touch,
+            PointerDeviceKind.stylus,
+            PointerDeviceKind.trackpad,
+            PointerDeviceKind.unknown
+          },
+        ),
+        title: 'Amagi Admin',
       ),
-      title: 'Amagi Admin',
     );
   }
 }

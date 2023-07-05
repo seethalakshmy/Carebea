@@ -168,20 +168,20 @@ class CareGiverScheduleView extends StatelessWidget {
                 children: [
                   buildRow(context,
                       label: AppString.clientName.val,
-                      val: item.clientName ?? ""),
+                      val: item.userName ?? ""),
                   CustomSizedBox(
                     height: DBL.five.val,
                   ),
                   buildRow(context,
                       label: AppString.time.val,
                       val:
-                          "${item.fromTime} ${AppString.to.val} ${item.toTime}"),
+                          "${item.startTime} ${AppString.to.val} ${item.endTime}"),
                   CustomSizedBox(
                     height: DBL.five.val,
                   ),
                   buildRow(context,
                       label: AppString.serviceFee.val,
-                      val: item.serviceFee.toString() ?? ""),
+                      val: item.serviceFee.toString()),
                   CustomSizedBox(
                     height: DBL.twenty.val,
                   ),
@@ -486,7 +486,7 @@ class CareGiverScheduleView extends StatelessWidget {
     List<int> holidays = [];
     List<int> workingDays = [];
     List<DateTime?> notAvailableDays = (scheduleData.notAvailableDates ?? [])
-        .map((e) => DateTime.tryParse(e ?? ""))
+        .map((e) => DateTime.tryParse(e))
         .toList();
     List<DateTime?> availableOnOtherDate =
         (scheduleData.diffLocationDates ?? [])

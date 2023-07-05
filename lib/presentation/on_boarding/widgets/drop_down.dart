@@ -238,7 +238,7 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
       });
     } else {
       this._overlayEntry = this._createOverlayEntry();
-      Overlay.of(context)!.insert(this._overlayEntry!);
+      Overlay.of(context).insert(this._overlayEntry!);
       setState(() {
         _isOpen = true;
         // borderColor = AppColor.primaryColor;

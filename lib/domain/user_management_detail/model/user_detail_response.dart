@@ -1,4 +1,3 @@
-
 class UserDetailResponse {
   bool? status;
   String? message;
@@ -9,11 +8,11 @@ class UserDetailResponse {
   UserDetailResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    user = json['user'] != null ?  User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
     data['message'] = message;
     if (user != null) {
@@ -25,7 +24,7 @@ class UserDetailResponse {
 
 class User {
   String? id;
-  String?location;
+  String? location;
   Name? name;
   String? phone;
   String? email;
@@ -39,27 +38,27 @@ class User {
   List<Transactions>? transactions;
   List<ServiceRequest>? serviceRequest;
 
-  User(
-      {this.id,
-        this.name,
-        this.phone,
-        this.email,
-        this.ssn,
-        this.serviceCompleted,
-        this.canceledRequest,
-        this.totalReviewsGiven,
-        this.subProfiles,
-        this.paymentMethod,
-        this.services,
-        this.transactions,
-        this.serviceRequest,
-        this.location,
-      });
+  User({
+    this.id,
+    this.name,
+    this.phone,
+    this.email,
+    this.ssn,
+    this.serviceCompleted,
+    this.canceledRequest,
+    this.totalReviewsGiven,
+    this.subProfiles,
+    this.paymentMethod,
+    this.services,
+    this.transactions,
+    this.serviceRequest,
+    this.location,
+  });
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     location = json['location'];
-    name = json['name'] != null ?  Name.fromJson(json['name']) : null;
+    name = json['name'] != null ? Name.fromJson(json['name']) : null;
     phone = json['phone'];
     email = json['email'];
     ssn = json['ssn'];
@@ -69,34 +68,34 @@ class User {
     if (json['sub_profiles'] != null) {
       subProfiles = <SubProfiles>[];
       json['sub_profiles'].forEach((v) {
-        subProfiles!.add( SubProfiles.fromJson(v));
+        subProfiles!.add(SubProfiles.fromJson(v));
       });
     }
     paymentMethod = json['payment_method'] != null
-        ?  PaymentMethod.fromJson(json['payment_method'])
+        ? PaymentMethod.fromJson(json['payment_method'])
         : null;
     if (json['services'] != null) {
       services = <Services>[];
       json['services'].forEach((v) {
-        services!.add( Services.fromJson(v));
+        services!.add(Services.fromJson(v));
       });
     }
     if (json['transactions'] != null) {
       transactions = <Transactions>[];
       json['transactions'].forEach((v) {
-        transactions!.add( Transactions.fromJson(v));
+        transactions!.add(Transactions.fromJson(v));
       });
     }
     if (json['service_request'] != null) {
       serviceRequest = <ServiceRequest>[];
       json['service_request'].forEach((v) {
-        serviceRequest!.add( ServiceRequest.fromJson(v));
+        serviceRequest!.add(ServiceRequest.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     if (name != null) {
       data['name'] = name!.toJson();
@@ -120,8 +119,7 @@ class User {
       data['transactions'] = transactions!.map((v) => v.toJson()).toList();
     }
     if (serviceRequest != null) {
-      data['service_request'] =
-          serviceRequest!.map((v) => v.toJson()).toList();
+      data['service_request'] = serviceRequest!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -141,7 +139,7 @@ class Name {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['first_name'] = firstName;
     data['last_name'] = lastName;
     data['profile'] = profile;
@@ -157,22 +155,18 @@ class SubProfiles {
   Name? name;
 
   SubProfiles(
-      {this.id,
-        this.userId,
-        this.totalSeriviceCompleted,
-        this.age,
-        this.name});
+      {this.id, this.userId, this.totalSeriviceCompleted, this.age, this.name});
 
   SubProfiles.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
     totalSeriviceCompleted = json['total_serivice_completed'];
     age = json['age'];
-    name = json['name'] != null ?  Name.fromJson(json['name']) : null;
+    name = json['name'] != null ? Name.fromJson(json['name']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['user_id'] = userId;
     data['total_serivice_completed'] = totalSeriviceCompleted;
@@ -192,15 +186,15 @@ class PaymentMethod {
 
   PaymentMethod.fromJson(Map<String, dynamic> json) {
     creditCardDetails = json['credit_card_details'] != null
-        ?  CreditCardDetails.fromJson(json['credit_card_details'])
+        ? CreditCardDetails.fromJson(json['credit_card_details'])
         : null;
     achDetails = json['ach_details'] != null
-        ?  AchDetails.fromJson(json['ach_details'])
+        ? AchDetails.fromJson(json['ach_details'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (creditCardDetails != null) {
       data['credit_card_details'] = creditCardDetails!.toJson();
     }
@@ -219,9 +213,9 @@ class CreditCardDetails {
 
   CreditCardDetails(
       {this.accountHolderName,
-        this.accountNumber,
-        this.expirationDate,
-        this.securityNumber});
+      this.accountNumber,
+      this.expirationDate,
+      this.securityNumber});
 
   CreditCardDetails.fromJson(Map<String, dynamic> json) {
     accountHolderName = json['account_holder_name'];
@@ -231,7 +225,7 @@ class CreditCardDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['account_holder_name'] = accountHolderName;
     data['account_number'] = accountNumber;
     data['expiration_date'] = expirationDate;
@@ -248,9 +242,9 @@ class AchDetails {
 
   AchDetails(
       {this.accountHolderName,
-        this.routingNumber,
-        this.accountNumber,
-        this.accountType});
+      this.routingNumber,
+      this.accountNumber,
+      this.accountType});
 
   AchDetails.fromJson(Map<String, dynamic> json) {
     accountHolderName = json['account_holder_name'];
@@ -260,7 +254,7 @@ class AchDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['account_holder_name'] = accountHolderName;
     data['routing_number'] = routingNumber;
     data['account_number'] = accountNumber;
@@ -281,13 +275,13 @@ class Services {
 
   Services(
       {this.id,
-        this.userId,
-        this.startDateTime,
-        this.endDateTime,
-        this.totalServiceFee,
-        this.status,
-        this.client,
-        this.caregiver});
+      this.userId,
+      this.startDateTime,
+      this.endDateTime,
+      this.totalServiceFee,
+      this.status,
+      this.client,
+      this.caregiver});
 
   Services.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -296,13 +290,13 @@ class Services {
     endDateTime = json['end_date_time'];
     totalServiceFee = json['total_service_fee'];
     status = json['status'];
-    client = json['client'] != null ?  Name.fromJson(json['client']) : null;
+    client = json['client'] != null ? Name.fromJson(json['client']) : null;
     caregiver =
-    json['caregiver'] != null ?  Name.fromJson(json['caregiver']) : null;
+        json['caregiver'] != null ? Name.fromJson(json['caregiver']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['user_id'] = userId;
     data['start_date_time'] = startDateTime;
@@ -331,13 +325,13 @@ class Transactions {
 
   Transactions(
       {this.client,
-        this.serviceId,
-        this.transactionType,
-        this.dateTime,
-        this.amount,
-        this.paidFor,
-        this.transactionId,
-        this.status});
+      this.serviceId,
+      this.transactionType,
+      this.dateTime,
+      this.amount,
+      this.paidFor,
+      this.transactionId,
+      this.status});
 
   Transactions.fromJson(Map<String, dynamic> json) {
     client = json['client'];
@@ -351,7 +345,7 @@ class Transactions {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['client'] = client;
     data['service_id'] = serviceId;
     data['transaction_type'] = transactionType;
@@ -365,32 +359,35 @@ class Transactions {
 }
 
 class ServiceRequest {
-   ServiceRequestName ?clientName;
+  ServiceRequestName? clientName;
   String? requestId;
   String? startDateTime;
   String? endDateTime;
   int? matchingListCount;
-  List<String>? serviceNeed;
+  String? serviceNeed;
+  String? status;
 
   ServiceRequest(
       {this.clientName,
-        this.requestId,
-        this.startDateTime,
-        this.endDateTime,
-        this.matchingListCount,
-        this.serviceNeed});
+      this.requestId,
+      this.startDateTime,
+      this.endDateTime,
+      this.matchingListCount,
+      this.serviceNeed});
 
   ServiceRequest.fromJson(Map<String, dynamic> json) {
     requestId = json['request_id'];
     startDateTime = json['start_date_time'];
     endDateTime = json['end_date_time'];
     matchingListCount = json['matching_list_count'];
-    serviceNeed = json['service_need'].cast<String>();
-    clientName = json['name'] != null ?  ServiceRequestName.fromJson(json['name']) : null;
+    serviceNeed = json['service_need'];
+    status = json['status'];
+    clientName =
+        json['name'] != null ? ServiceRequestName.fromJson(json['name']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['request_id'] = requestId;
     data['start_date_time'] = startDateTime;
     data['end_date_time'] = endDateTime;
@@ -407,7 +404,10 @@ class ServiceRequestName {
   String? firstName;
   String? lastName;
 
-  ServiceRequestName({this.firstName, this.lastName,});
+  ServiceRequestName({
+    this.firstName,
+    this.lastName,
+  });
 
   ServiceRequestName.fromJson(Map<String, dynamic> json) {
     firstName = json['first_name'];
@@ -415,7 +415,7 @@ class ServiceRequestName {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['first_name'] = firstName;
     data['last_name'] = lastName;
     return data;

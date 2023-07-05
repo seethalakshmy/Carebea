@@ -6,6 +6,7 @@ import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/caregivers/model/care_givers.dart';
 import 'package:admin_580_tech/domain/caregivers/model/types.dart';
 import 'package:admin_580_tech/presentation/caregivers/widgets/tab_item.dart';
+import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
@@ -20,6 +21,8 @@ import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_row_image_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_row_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_switch_box.dart';
+import 'package:admin_580_tech/presentation/widget/table_verification_button.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,15 +41,15 @@ import '../widget/table_actions_view.dart';
 import '../widget/table_column_view.dart';
 
 class CareGiversPage extends StatefulWidget {
-  const CareGiversPage({Key? key}) : super(key: key);
+  const CareGiversPage({Key? key, @QueryParam('page') this.page})
+      : super(key: key);
+  final int? page;
 
   @override
   State<CareGiversPage> createState() => _CareGiversPageState();
 }
 
 class _CareGiversPageState extends State<CareGiversPage> {
-  late CareGiversBloc _careGiversBloc;
-
   List<Caregivers> mCareGiverList = [];
   int _totalItems = 1;
   final int _limit = 10;
@@ -59,9 +62,11 @@ class _CareGiversPageState extends State<CareGiversPage> {
   final String _userId = "6461c0f33ba4fd69bd494df0";
   int _tabType = 1;
   int? _filterId;
+  late CareGiversBloc _careGiversBloc;
 
   @override
   void initState() {
+    // int  =autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
     super.initState();
     _careGiversBloc = CareGiversBloc(CareGiversRepository());
   }
@@ -102,7 +107,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
 
   _bodyView() {
     return BlocBuilder<CareGiversBloc, CareGiversState>(
-      builder: (context, state) {
+      builder: (_, state) {
         return Column(
           children: [
             CustomSizedBox(height: DBL.twenty.val),
@@ -124,7 +129,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
               ? const TableLoaderView()
               : state.isError
                   ? ErrorView(isClientError: false, errorMessage: state.error)
-                  : _caregiversView(context, state.response)),
+                  : _caregiversView(context, state)),
     );
   }
 
@@ -141,7 +146,9 @@ class _CareGiversPageState extends State<CareGiversPage> {
                 onTap: () {
                   _tabType = item.id!;
                   _resetValues();
-                  _careGiversBloc.add(CareGiversEvent.isSelectedTab(item));
+                  context
+                      .read<CareGiversBloc>()
+                      .add(CareGiversEvent.isSelectedTab(item));
                   _getCareGiverEvent();
                 },
               );
@@ -154,7 +161,8 @@ class _CareGiversPageState extends State<CareGiversPage> {
     _filterId = null;
   }
 
-  _caregiversView(BuildContext context, CareGiverResponse? value) {
+  _caregiversView(BuildContext context, CareGiversState state) {
+    CareGiverResponse? value = state.response;
     if (value?.status ?? false) {
       mCareGiverList.clear();
       if (value?.data?.caregivers != null &&
@@ -164,23 +172,27 @@ class _CareGiversPageState extends State<CareGiversPage> {
         _updateData();
       }
     }
-    return mCareGiverList.isNotEmpty
-        ? Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              LayoutBuilder(builder: (context, constraints) {
-                return _tableActionView(constraints, context);
-              }),
-              CustomSizedBox(height: DBL.fifteen.val),
-              CustomSizedBox(
-                height: (_limit + 1) * 48,
-                child: _caregiversTable(),
-              ),
-              CustomSizedBox(height: DBL.twenty.val),
-              _paginationView()
-            ],
-          )
-        : EmptyView(title: AppString.emptyCareGivers.val);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        LayoutBuilder(builder: (context, constraints) {
+          return _tableActionView(constraints, context);
+        }),
+        mCareGiverList.isNotEmpty
+            ? Column(
+                children: [
+                  CustomSizedBox(height: DBL.fifteen.val),
+                  CustomSizedBox(
+                    height: (_limit + 1) * 48,
+                    child: _caregiversTable(state, context),
+                  ),
+                  CustomSizedBox(height: DBL.twenty.val),
+                  if (_totalItems > 10) _paginationView()
+                ],
+              )
+            : EmptyView(title: AppString.emptyCareGivers.val),
+      ],
+    );
   }
 
   SingleChildScrollView _tableActionView(
@@ -325,7 +337,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
     );
   }
 
-  _caregiversTable() {
+  _caregiversTable(CareGiversState state, BuildContext context) {
     return CSelectionArea(
       child: CDataTable2(
         minWidth: DBL.nineFifty.val,
@@ -362,17 +374,24 @@ class _CareGiversPageState extends State<CareGiversPage> {
               AppString.phoneNumber.val,
             ),
           ),
-          _tabType != 1
+          _tabType == 1
               ? DataColumn2(
-                  fixedWidth: DBL.oneFifty.val,
+                  size: ColumnSize.L,
                   label: _tableColumnView(AppString.status.val),
                 )
               : DataColumn2(
-                  fixedWidth: DBL.zero.val, label: const CustomText("")),
-          const DataColumn2(
-            size: ColumnSize.L,
-            label: CustomText(""),
-          ),
+                  fixedWidth: DBL.oneFifty.val,
+                  label: _tableColumnView(AppString.status.val),
+                ),
+          _tabType == 1
+              ? const DataColumn2(
+                  fixedWidth: 0,
+                  label: CustomText(""),
+                )
+              : const DataColumn2(
+                  size: ColumnSize.L,
+                  label: CustomText(""),
+                ),
         ],
         rows: mCareGiverList.asMap().entries.map((e) {
           _setIndex(e.key);
@@ -387,19 +406,19 @@ class _CareGiversPageState extends State<CareGiversPage> {
               DataCell(_tableRowView(item.name?.lastName ?? "")),
               DataCell(_tableRowView(item.email ?? "")),
               DataCell(_tableRowView(item.mobile ?? "")),
-              _tabType != 1
-                  ? DataCell(_tableSwitchBox(e, item))
-                  : DataCell(_tableRowView("")),
-              DataCell(TableActions(
-                isView: true,
-                onViewTap: () {
-                  if (e.key % 2 == 0) {
-                    autoTabRouter!.setActiveIndex(2);
-                  } else {
-                    autoTabRouter!.setActiveIndex(6);
-                  }
-                },
-              )),
+              _tabType == 1
+                  ? DataCell(_tableVerificationButton(item))
+                  : DataCell(_tableSwitchBox(item)),
+              _tabType == 1
+                  ? DataCell(_tableRowView(""))
+                  : DataCell(TableActions(
+                      isView: true,
+                      onViewTap: () {
+                        autoTabRouter?.navigate(CareGiverDetailRoute(
+                          id: item.userId,
+                        ));
+                      },
+                    )),
             ],
           );
         }).toList(),
@@ -419,12 +438,24 @@ class _CareGiversPageState extends State<CareGiversPage> {
     );
   }
 
-  TableSwitchBox _tableSwitchBox(MapEntry<int, Caregivers> e, Caregivers item) {
+  TableSwitchBox _tableSwitchBox(Caregivers item) {
     return TableSwitchBox(
-      value: e.value.isActive!,
+      value: item.isActive!,
       onToggle: () {
-        _careGiversBloc.add(CareGiversEvent.isUserActive(item));
+        _careGiversBloc.add(CareGiversEvent.isUserActive(
+            caregiver: item,
+            status: item.isActive ?? false,
+            userId: item.userId ?? "",
+            context: context));
       },
+    );
+  }
+
+  TableVerificationButton _tableVerificationButton(Caregivers item) {
+    return TableVerificationButton(
+      verificationStatus: item.verificationStatus ?? 0,
+      userId: item.userId,
+      page: _page,
     );
   }
 
@@ -485,4 +516,15 @@ class _CareGiversPageState extends State<CareGiversPage> {
   }
 
   bool _isXs(context) => MediaQuery.of(context).size.width <= 544;
+
+  bool isLarge(BuildContext context) =>
+      MediaQuery.of(context).size.width <= 1236;
+
+  bool isLg(BuildContext context) => MediaQuery.of(context).size.width <= 1370;
+
+  bool isLg1(BuildContext context) => MediaQuery.of(context).size.width <= 976;
+
+  bool isXs(BuildContext context) => MediaQuery.of(context).size.width <= 760;
+
+  bool isXs1(BuildContext context) => MediaQuery.of(context).size.width <= 780;
 }

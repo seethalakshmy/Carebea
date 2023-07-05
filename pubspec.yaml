@@ -43,6 +43,9 @@ dependencies:
   percent_indicator: ^4.2.3
   flutter_rating_bar: 4.0.1
   table_calendar:
+  webviewx: ^0.2.2
+  get_it:
+  top_snackbar_flutter: ^3.0.0+1
   flutter_staggered_grid_view: ^0.6.2
   shared_preferences: ^2.2.0
 

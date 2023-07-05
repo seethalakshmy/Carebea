@@ -5,33 +5,34 @@ import 'package:flutter/material.dart';
 import '../../../core/text_styles.dart';
 
 class CTextField extends StatelessWidget {
-  const CTextField({
-    Key? key,
-    this.controller,
-    this.margin,
-    this.textInputAction,
-    this.focusNode,
-    this.onChanged,
-    this.obscureText = false,
-    this.onTap,
-    this.onSubmitted,
-    this.keyBoardType,
-    this.textCapitalization = TextCapitalization.none,
-    this.errorText,
-    this.changeColor,
-    this.readOnly = false,
-    this.onIconTap,
-    this.suffixIcon,
-    this.validator,
-    this.maxLength,
-    this.maxLines,
-    this.textColor,
-    this.height,
-    this.width,
-    this.hintText,
-    this.hintStyle,
-    this.textAlignVertical,
-  })  : assert(controller != null),
+  const CTextField(
+      {Key? key,
+      this.controller,
+      this.margin,
+      this.textInputAction,
+      this.focusNode,
+      this.onChanged,
+      this.obscureText = false,
+      this.onTap,
+      this.onSubmitted,
+      this.keyBoardType,
+      this.textCapitalization = TextCapitalization.none,
+      this.errorText,
+      this.changeColor,
+      this.readOnly = false,
+      this.onIconTap,
+      this.suffixIcon,
+      this.validator,
+      this.maxLength,
+      this.textColor,
+      this.height,
+      this.width,
+      this.hintText,
+      this.hintStyle,
+      this.fillColor,
+      this.maxLines,
+      this.borderColor})
+      : assert(controller != null),
         super(key: key);
   final TextEditingController? controller;
   final EdgeInsetsGeometry? margin;
@@ -50,12 +51,14 @@ class CTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final String? Function(String?)? validator;
   final int? maxLength;
-  final int? maxLines;
   final Color? textColor;
   final double? height;
   final double? width;
   final String? hintText;
   final TextStyle? hintStyle;
+  final Color? fillColor;
+  final int? maxLines;
+  final Color? borderColor;
   final TextAlignVertical? textAlignVertical;
 
   @override
@@ -83,14 +86,15 @@ class CTextField extends StatelessWidget {
           hintStyle: hintStyle,
           suffixIconConstraints: BoxConstraints(minWidth: DBL.fifty.val),
           filled: true,
-          fillColor: AppColor.white.val,
+          fillColor: fillColor ?? AppColor.white.val,
           suffixIcon: suffixIcon,
           isDense: true,
           errorText: errorText,
           errorStyle:
               TS().gPoppins(fontSize: FS.font11.val, color: AppColor.red.val),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.borderColor.val, width: 1),
+            borderSide: BorderSide(
+                color: borderColor ?? AppColor.borderColor.val, width: 1),
             borderRadius: BorderRadius.circular(DBL.five.val),
           ),
           border: OutlineInputBorder(

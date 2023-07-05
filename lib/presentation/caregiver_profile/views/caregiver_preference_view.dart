@@ -1,3 +1,5 @@
+import 'package:admin_580_tech/application/bloc/caregiver-profile/caregiver_profile_bloc.dart';
+import 'package:admin_580_tech/domain/caregiver_profile/model/caregiver_profile_response.dart';
 import 'package:admin_580_tech/presentation/widget/custom_listview_builder.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/pets_item.dart';
@@ -8,14 +10,13 @@ import '../../widget/custom_container.dart';
 import '../../widget/row_combo.dart';
 
 class CareGiverPreferenceView extends StatelessWidget {
-  CareGiverPreferenceView({Key? key}) : super(key: key);
-  List<String> mPets = [
-    "Cat",
-    "Dog",
-  ];
+  const CareGiverPreferenceView({Key? key, required this.state})
+      : super(key: key);
+  final CareGiverProfileState state;
 
   @override
   Widget build(BuildContext context) {
+    Preference? preference = state.response?.data?.preference;
     return CustomContainer(
       padding: EdgeInsets.symmetric(
           horizontal: DBL.twentyFive.val, vertical: DBL.twentyFive.val),
@@ -25,14 +26,14 @@ class CareGiverPreferenceView extends StatelessWidget {
           children: [
             RowColonCombo.threeEighty(
                 label: AppString.howManyExperience.val,
-                value: "2-5 Years",
+                value: preference?.experience ?? "",
                 fontSize: FS.font13PointFive.val),
             CustomSizedBox(
               height: DBL.twenty.val,
             ),
             RowColonCombo.threeEighty(
                 label: AppString.serveClientsWithPets.val,
-                value: "Yes",
+                value: preference?.serveWithPets ?? "",
                 fontSize: FS.font13PointFive.val),
             CustomSizedBox(
               width: DBL.threeEighty.val,
@@ -42,18 +43,27 @@ class CareGiverPreferenceView extends StatelessWidget {
             ),
             RowColonCombo.threeEighty(
                 label: AppString.serveHomeWithSmoker.val,
-                value: "Yes",
+                value: preference?.serveHomeWithSmoker ?? "",
                 fontSize: FS.font13PointFive.val),
             CustomSizedBox(
               height: DBL.fourteen.val,
             ),
-            petsList(context, MediaQuery.of(context).size),
+            petsList(context, MediaQuery.of(context).size, preference),
+            CustomSizedBox(
+              height: DBL.fourteen.val,
+            ),
+            RowColonCombo.threeEighty(
+                label: AppString.languagesKnown.val,
+                value: preference?.languages != null
+                    ? preference!.languages!.join(",")
+                    : "",
+                fontSize: FS.font13PointFive.val),
             CustomSizedBox(
               height: DBL.fourteen.val,
             ),
             RowColonCombo.threeEighty(
                 label: AppString.provideTransportationOrRunErrands.val,
-                value: "Yes",
+                value: preference?.provideTranspotationOrRunErrands ?? "",
                 fontSize: FS.font13PointFive.val),
             CustomSizedBox(
               height: DBL.twenty.val,
@@ -64,7 +74,7 @@ class CareGiverPreferenceView extends StatelessWidget {
     );
   }
 
-  Row petsList(BuildContext context, Size size) {
+  Row petsList(BuildContext context, Size size, Preference? preference) {
     return Row(
       children: [
         CustomSizedBox(
@@ -75,9 +85,12 @@ class CareGiverPreferenceView extends StatelessWidget {
           child: CustomListViewBuilder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemCount: mPets.length,
-            itemBuilder: (context, index) =>
-                PetItem(name: mPets[index], inOutStatus: index == 0 ? 1 : 2),
+            itemCount: preference?.pets?.length ?? 0,
+            itemBuilder: (context, index) {
+              Pets pets = preference!.pets![index];
+              return PetItem(
+                  name: pets.name ?? "", inOutStatus: pets.inOutStatus ?? 0);
+            },
           ),
         ),
       ],
