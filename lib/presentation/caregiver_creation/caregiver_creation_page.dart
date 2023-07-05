@@ -1,5 +1,6 @@
 import 'package:admin_580_tech/application/bloc/caregiver_creation/caregiver_creation_bloc.dart';
 import 'package:admin_580_tech/core/responsive.dart';
+import 'package:admin_580_tech/infrastructure/caregiver_creation/caregiver_creation_repository.dart';
 import 'package:admin_580_tech/presentation/caregiver_creation/widgets/details_text_field_with_label.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
@@ -13,6 +14,7 @@ import '../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
+import '../widget/common_button_loader_widget.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_sizedbox.dart';
@@ -48,7 +50,7 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
   @override
   void initState() {
     super.initState();
-    _creationBloc = CaregiverCreationBloc();
+    _creationBloc = CaregiverCreationBloc(CaregiverCreationRepository());
   }
 
   @override
@@ -67,12 +69,23 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
   MultiBlocProvider _rebuildView() {
     return MultiBlocProvider(providers: [
       BlocProvider(create: (context) => FormValidationBloc()),
-      BlocProvider(create: (context) => CaregiverCreationBloc()),
+      BlocProvider(
+          create: (context) =>
+              CaregiverCreationBloc(CaregiverCreationRepository())),
     ], child: _bodyView());
   }
 
   _bodyView() {
-    return BlocBuilder<CaregiverCreationBloc, CaregiverCreationState>(
+    return BlocConsumer<CaregiverCreationBloc, CaregiverCreationState>(
+      listener: (context, listenerState) {
+        return listenerState.failureOrSuccessOption?.fold(
+            () {},
+            (some) => some.fold((l) {}, (r) {
+                  if (r.status!) {
+                    context.router.navigate(const OnboardingRoute());
+                  } else {}
+                }));
+      },
       buildWhen: (previous, current) => previous != current,
       bloc: _creationBloc,
       builder: (context, creationState) {
@@ -235,16 +248,18 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
                         borderWidth: 1,
                       ),
                       const CustomSizedBox(width: 20),
-                      CustomButton(
-                        height: 45,
-                        minWidth: 120,
-                        onPressed: () {
-                          checkInputData();
-                        },
-                        text: AppString.save.val,
-                        color: AppColor.primaryColor.val,
-                        textColor: AppColor.white.val,
-                      ),
+                      _creationBloc.state.isLoading
+                          ? const CommonButtonLoaderWidget()
+                          : CustomButton(
+                              height: 45,
+                              minWidth: 120,
+                              onPressed: () {
+                                checkInputData();
+                              },
+                              text: AppString.save.val,
+                              color: AppColor.primaryColor.val,
+                              textColor: AppColor.white.val,
+                            ),
                     ],
                   );
                 },
@@ -318,9 +333,11 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
       _validationBloc.add(const FormValidationEvent.submit());
     }
     if (_formKey.currentState!.validate()) {
-      setState(() {
-        context.router.navigate(const OnboardingRoute());
-      });
+      _creationBloc.add(CaregiverCreationEvent.createCaregiver(
+          firstName: _fNameController.text.trim(),
+          lastName: _lNameController.text.trim(),
+          email: _emailController.text.trim(),
+          mobileNo: _mobileController.text.trim()));
     }
   }
 

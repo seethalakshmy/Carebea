@@ -10,9 +10,8 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 
-
 class CareGiverDetailRepository implements ICareGiverDetailRepo {
-  final ApiClient _apiClient = ApiClient(Dio());
+  final ApiClient _apiClient = ApiClient();
 
   @override
   Future<Either<ApiErrorHandler, CareGiverDetailResponse>> getCareGiverDetail(
@@ -27,10 +26,10 @@ class CareGiverDetailRepository implements ICareGiverDetailRepo {
       if (e.message.contains("SocketException") ||
           e.message.contains("XMLHttpRequest")) {
         CustomLog.log("reached here..");
-        return  Left(ClientFailure(
+        return Left(ClientFailure(
             error: AppString.noInternetConnection.val, isClientError: true));
       } else {
-        return  Left(ServerFailure(
+        return Left(ServerFailure(
             error: AppString.somethingWentWrong.val, isClientError: false));
       }
     }

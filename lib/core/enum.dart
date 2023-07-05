@@ -42,7 +42,7 @@ enum AppString {
   onGoingServiceRequest("Ongoing Service Request"),
   upcomingServiceRequest("Upcoming Service Request"),
   transactionDetails("Transaction Details"),
-  caregiverCreation("Caregiver Creation"),
+  caregiverCreation("Care Ambassador Creation"),
   onBoarding("On-boarding"),
   id("ID"),
   slNo("SL No"),
@@ -108,7 +108,7 @@ enum AppString {
   tourHobbies("Tour Hobbies"),
   homeHealthAidAgreement("Home Health Aid Agreement"),
   setupCompensation("Setup Compensation Method"),
-  loveBeingCaregiver("Why you love being a caregiver"),
+  loveBeingCaregiver("Why you love being a care ambassador"),
   provideDigitalSign("Provide your digital signature"),
   pendingDocuments("Pending Documents"),
   reasonForCancellation("Reason for cancellation :"),
@@ -279,7 +279,7 @@ enum AppString {
   agreementChckboxText(
       "I have read and agree to the home health aid agreement"),
   dummyAgreementText(
-      "Gives the caregiver the right to make healthcare decisions on someone else’s behalf. This is common if the patient is not able to speak for themselves and a caregiver is assigned the duty of making decisions for the benefit of the patient. This form also includes a living will that allows the patient to make end-of-life decisions if they should be in a state of incapacitation for a longer period of time.");
+      "Gives the care ambassador the right to make healthcare decisions on someone else’s behalf. This is common if the patient is not able to speak for themselves and a care ambassador is assigned the duty of making decisions for the benefit of the patient. This form also includes a living will that allows the patient to make end-of-life decisions if they should be in a state of incapacitation for a longer period of time.");
 
   final String val;
 

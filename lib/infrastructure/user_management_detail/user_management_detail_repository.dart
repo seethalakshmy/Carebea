@@ -12,7 +12,7 @@ import 'package:flutter/services.dart';
 import '../../core/enum.dart';
 
 class UserManagementDetailRepository implements IUserDetailRepo {
-  final ApiClient _apiClient = ApiClient(Dio());
+  final ApiClient _apiClient = ApiClient();
 
   @override
   Future<Either<ApiErrorHandler, UserDetailResponse>> getUserDetail(
@@ -25,12 +25,12 @@ class UserManagementDetailRepository implements IUserDetailRepo {
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
-      if (e.message.contains("SocketException") ) {
+      if (e.message.contains("SocketException")) {
         CustomLog.log("reached here..");
-        return  Left(ClientFailure(
+        return Left(ClientFailure(
             error: AppString.noInternetConnection.val, isClientError: true));
       } else {
-        return  Left(ServerFailure(
+        return Left(ServerFailure(
             error: AppString.somethingWentWrong.val, isClientError: false));
       }
     }

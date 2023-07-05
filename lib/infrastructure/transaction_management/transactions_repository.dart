@@ -11,7 +11,7 @@ import '../../domain/core/api_error_handler/api_error_handler.dart';
 import '../../domain/transaction_management/model/transactions.dart';
 
 class TransactionsRepository implements ITransactionsRepo {
-  final ApiClient _apiClient = ApiClient(Dio());
+  final ApiClient _apiClient = ApiClient();
   List<Transactions> mTransactions = [
     Transactions(
         transactionId: "00989090909",
@@ -119,19 +119,19 @@ class TransactionsRepository implements ITransactionsRepo {
   Future<Either<ApiErrorHandler, TransactionResponse>> getTransactions(
       {required int page, required int limit}) async {
     try {
-      final response =
-      TransactionResponse(status: true, data: TransactionData(transactions: mTransactions));
+      final response = TransactionResponse(
+          status: true, data: TransactionData(transactions: mTransactions));
 
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
 
-      if (e.message.contains("SocketException") ) {
+      if (e.message.contains("SocketException")) {
         CustomLog.log("reached here..");
-        return  Left(ClientFailure(
+        return Left(ClientFailure(
             error: AppString.noInternetConnection.val, isClientError: true));
       } else {
-        return  Left(ServerFailure(
+        return Left(ServerFailure(
             error: AppString.somethingWentWrong.val, isClientError: false));
       }
     }
