@@ -9,6 +9,7 @@ import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../core/enum.dart';
@@ -78,13 +79,21 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
   _bodyView() {
     return BlocConsumer<CaregiverCreationBloc, CaregiverCreationState>(
       listener: (context, listenerState) {
-        return listenerState.failureOrSuccessOption?.fold(
-            () {},
-            (some) => some.fold((l) {}, (r) {
-                  if (r.status!) {
-                    context.router.navigate(const OnboardingRoute());
-                  } else {}
-                }));
+        final router = context.router;
+
+        return listenerState.failureOrSuccessOption.fold(
+          () {},
+          (some) => some.fold(
+            (l) {},
+            (r) async {
+              if (r.status!) {
+                final sharedPref = await SharedPreferences.getInstance();
+                await sharedPref.setString(AppString.userId.val, r.data!.id!);
+                router.navigate(const OnboardingRoute());
+              } else {}
+            },
+          ),
+        );
       },
       buildWhen: (previous, current) => previous != current,
       bloc: _creationBloc,

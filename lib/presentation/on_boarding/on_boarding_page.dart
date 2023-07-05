@@ -9,6 +9,7 @@ import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
+import '../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_text.dart';
@@ -35,7 +36,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   void initState() {
     super.initState();
-    _onboardingBloc = OnboardingBloc();
+    _onboardingBloc = OnboardingBloc(OnBoardingRepository());
   }
 
   @override
@@ -53,8 +54,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   Widget _rebuildView() {
     return BlocProvider(
-      create: (context) =>
-          _onboardingBloc..add(const OnboardingEvent.personalDetails()),
+      create: (context) => _onboardingBloc,
       child: _bodyView(),
     );
   }

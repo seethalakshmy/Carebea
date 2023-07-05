@@ -295,10 +295,8 @@ abstract class _CreateCaregiver implements CaregiverCreationEvent {
 /// @nodoc
 mixin _$CaregiverCreationState {
   bool get isLoading => throw _privateConstructorUsedError;
-  bool get isError => throw _privateConstructorUsedError;
-  Option<Either<ApiErrorHandler, CaregiverCreationResponse>>?
+  Option<Either<ApiErrorHandler, CaregiverCreationResponse>>
       get failureOrSuccessOption => throw _privateConstructorUsedError;
-  String? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CaregiverCreationStateCopyWith<CaregiverCreationState> get copyWith =>
@@ -313,10 +311,8 @@ abstract class $CaregiverCreationStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
-      bool isError,
-      Option<Either<ApiErrorHandler, CaregiverCreationResponse>>?
-          failureOrSuccessOption,
-      String? error});
+      Option<Either<ApiErrorHandler, CaregiverCreationResponse>>
+          failureOrSuccessOption});
 }
 
 /// @nodoc
@@ -334,27 +330,17 @@ class _$CaregiverCreationStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? isLoading = null,
-    Object? isError = null,
-    Object? failureOrSuccessOption = freezed,
-    Object? error = freezed,
+    Object? failureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      isError: null == isError
-          ? _value.isError
-          : isError // ignore: cast_nullable_to_non_nullable
-              as bool,
-      failureOrSuccessOption: freezed == failureOrSuccessOption
+      failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<ApiErrorHandler, CaregiverCreationResponse>>?,
-      error: freezed == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Option<Either<ApiErrorHandler, CaregiverCreationResponse>>,
     ) as $Val);
   }
 }
@@ -369,10 +355,8 @@ abstract class _$$_InitialCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
-      bool isError,
-      Option<Either<ApiErrorHandler, CaregiverCreationResponse>>?
-          failureOrSuccessOption,
-      String? error});
+      Option<Either<ApiErrorHandler, CaregiverCreationResponse>>
+          failureOrSuccessOption});
 }
 
 /// @nodoc
@@ -386,27 +370,17 @@ class __$$_InitialCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
-    Object? isError = null,
-    Object? failureOrSuccessOption = freezed,
-    Object? error = freezed,
+    Object? failureOrSuccessOption = null,
   }) {
     return _then(_$_Initial(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      isError: null == isError
-          ? _value.isError
-          : isError // ignore: cast_nullable_to_non_nullable
-              as bool,
-      failureOrSuccessOption: freezed == failureOrSuccessOption
+      failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<ApiErrorHandler, CaregiverCreationResponse>>?,
-      error: freezed == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Option<Either<ApiErrorHandler, CaregiverCreationResponse>>,
     ));
   }
 }
@@ -415,24 +389,17 @@ class __$$_InitialCopyWithImpl<$Res>
 
 class _$_Initial implements _Initial {
   const _$_Initial(
-      {required this.isLoading,
-      required this.isError,
-      required this.failureOrSuccessOption,
-      required this.error});
+      {required this.isLoading, required this.failureOrSuccessOption});
 
   @override
   final bool isLoading;
   @override
-  final bool isError;
-  @override
-  final Option<Either<ApiErrorHandler, CaregiverCreationResponse>>?
+  final Option<Either<ApiErrorHandler, CaregiverCreationResponse>>
       failureOrSuccessOption;
-  @override
-  final String? error;
 
   @override
   String toString() {
-    return 'CaregiverCreationState(isLoading: $isLoading, isError: $isError, failureOrSuccessOption: $failureOrSuccessOption, error: $error)';
+    return 'CaregiverCreationState(isLoading: $isLoading, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -442,15 +409,13 @@ class _$_Initial implements _Initial {
             other is _$_Initial &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
-                other.failureOrSuccessOption == failureOrSuccessOption) &&
-            (identical(other.error, error) || other.error == error));
+                other.failureOrSuccessOption == failureOrSuccessOption));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isLoading, isError, failureOrSuccessOption, error);
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, failureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -462,20 +427,14 @@ class _$_Initial implements _Initial {
 abstract class _Initial implements CaregiverCreationState {
   const factory _Initial(
       {required final bool isLoading,
-      required final bool isError,
-      required final Option<Either<ApiErrorHandler, CaregiverCreationResponse>>?
-          failureOrSuccessOption,
-      required final String? error}) = _$_Initial;
+      required final Option<Either<ApiErrorHandler, CaregiverCreationResponse>>
+          failureOrSuccessOption}) = _$_Initial;
 
   @override
   bool get isLoading;
   @override
-  bool get isError;
-  @override
-  Option<Either<ApiErrorHandler, CaregiverCreationResponse>>?
+  Option<Either<ApiErrorHandler, CaregiverCreationResponse>>
       get failureOrSuccessOption;
-  @override
-  String? get error;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>

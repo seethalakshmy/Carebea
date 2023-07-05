@@ -30,10 +30,7 @@ class CaregiverCreationBloc
             mobileNo: event.mobileNo);
     CaregiverCreationState creationState = result.fold((l) {
       return state.copyWith(
-          error: l.error,
-          isLoading: false,
-          isError: true,
-          failureOrSuccessOption: Some(Left(l)));
+          isLoading: false, failureOrSuccessOption: Some(Left(l)));
     }, (r) {
       return state.copyWith(
           failureOrSuccessOption: Some(Right(r)), isLoading: false);

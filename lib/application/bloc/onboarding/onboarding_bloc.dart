@@ -1,20 +1,25 @@
 import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../../domain/core/api_error_handler/api_error_handler.dart';
+import '../../../infrastructure/on_boarding/on_boarding_repository.dart';
+import '../../../presentation/on_boarding/modules/personal_details/models/personal_details_response.dart';
 
 part 'onboarding_bloc.freezed.dart';
 part 'onboarding_event.dart';
 part 'onboarding_state.dart';
 
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
-  OnboardingBloc() : super(OnboardingState.initial()) {
+  OnBoardingRepository onboardingRepository;
+
+  OnboardingBloc(this.onboardingRepository) : super(OnboardingState.initial()) {
     on<OnboardingEvent>((event, emit) async {
-      if (event is _Submit) {
-        emit(state.copyWith(isFormSubmitSuccess: true));
-      } else if (event is _RadioHHASelected) {
+      if (event is _RadioHHASelected) {
         emit(state.copyWith(isHHASelected: event.isSelected));
       } else if (event is _RadioBLSSelected) {
         emit(state.copyWith(isBLSSelected: event.isSelected));
@@ -53,5 +58,28 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
             listUpdated: !event.listUpdated));
       }
     });
+    on<_GetPersonalDetails>(_getPersonalData);
+  }
+  _getPersonalData(
+      _GetPersonalDetails event, Emitter<OnboardingState> emit) async {
+    emit(state.copyWith(isLoading: true));
+    final Either<ApiErrorHandler, PersonalDetailsResponse> result =
+        await onboardingRepository.personalDetailsSubmit(
+            userId: event.userId,
+            dob: event.dob,
+            genderId: event.genderId,
+            street: event.street,
+            cityId: event.cityId,
+            stateId: event.stateId,
+            latitude: event.latitude,
+            longitude: event.longitude,
+            zip: event.zip,
+            address: event.address,
+            socialSecurityNo: event.socialSecurityNo,
+            documentId: event.documentId,
+            documentNo: event.documentNo,
+            expiryDate: event.expiryDate,
+            documentList: event.documentList,
+            profilePic: event.profilePic);
   }
 }

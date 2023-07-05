@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/infrastructure/on_boarding/on_boarding_repository.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/address_selection_widget.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/profile_picture_widget.dart';
 import 'package:admin_580_tech/presentation/on_boarding/widgets/upload_document_widget.dart';
@@ -66,7 +67,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => FormValidationBloc()),
-        BlocProvider(create: (context) => OnboardingBloc())
+        BlocProvider(
+            create: (context) => OnboardingBloc(OnBoardingRepository()))
       ],
       child: CommonPaddingWidget(
         child: SingleChildScrollView(
@@ -549,7 +551,26 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
       formValidationBloc.add(const FormValidationEvent.submit());
       formValidationBloc.add(const FormValidationEvent.dropDown("true"));
     }
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate()) async{
+      final sharedPref = await SharedPreferences.getInstance();
+      widget.onboardingBloc.add(OnboardingEvent.personalDetails(
+          userId: userId,
+          dob: dob,
+          genderId: genderId,
+          street: streetController.text.trim(),
+          cityId: cityId,
+          stateId: stateId,
+          latitude: 80.0,
+          longitude: 80.0,
+          zip: zipController.text.trim(),
+          address: addressLineController.text.trim(),
+          socialSecurityNo: socialSecurityNumberController.text.trim(),
+          documentId: document,
+          documentNo: documen,
+          expiryDate: expiryDate,
+          documentList: documentList,
+          profilePic: profilePic));
+
       widget.pageController.jumpToPage(widget.pageController.page!.toInt() + 1);
     }
   }

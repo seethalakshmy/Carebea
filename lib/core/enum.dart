@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 /// App Strings
 enum AppString {
+  userId("USER ID"),
   login("Login"),
   select("Select"),
   ok("Ok"),

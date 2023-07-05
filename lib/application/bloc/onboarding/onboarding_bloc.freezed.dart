@@ -18,8 +18,24 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$OnboardingEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() personalDetails,
-    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -44,8 +60,24 @@ mixin _$OnboardingEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? personalDetails,
-    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -70,8 +102,24 @@ mixin _$OnboardingEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? personalDetails,
-    TResult Function(bool isSubmitted)? submit,
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -97,8 +145,7 @@ mixin _$OnboardingEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardingEvent value) personalDetails,
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -123,8 +170,7 @@ mixin _$OnboardingEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardingEvent value)? personalDetails,
-    TResult? Function(_Submit value)? submit,
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -145,8 +191,7 @@ mixin _$OnboardingEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardingEvent value)? personalDetails,
-    TResult Function(_Submit value)? submit,
+    TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -187,45 +232,272 @@ class _$OnboardingEventCopyWithImpl<$Res, $Val extends OnboardingEvent>
 }
 
 /// @nodoc
-abstract class _$$_OnboardingEventCopyWith<$Res> {
-  factory _$$_OnboardingEventCopyWith(
-          _$_OnboardingEvent value, $Res Function(_$_OnboardingEvent) then) =
-      __$$_OnboardingEventCopyWithImpl<$Res>;
+abstract class _$$_GetPersonalDetailsCopyWith<$Res> {
+  factory _$$_GetPersonalDetailsCopyWith(_$_GetPersonalDetails value,
+          $Res Function(_$_GetPersonalDetails) then) =
+      __$$_GetPersonalDetailsCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String userId,
+      String dob,
+      int genderId,
+      String street,
+      String cityId,
+      String stateId,
+      double latitude,
+      double longitude,
+      String zip,
+      String address,
+      String socialSecurityNo,
+      String documentId,
+      String documentNo,
+      String expiryDate,
+      List<String> documentList,
+      String profilePic});
 }
 
 /// @nodoc
-class __$$_OnboardingEventCopyWithImpl<$Res>
-    extends _$OnboardingEventCopyWithImpl<$Res, _$_OnboardingEvent>
-    implements _$$_OnboardingEventCopyWith<$Res> {
-  __$$_OnboardingEventCopyWithImpl(
-      _$_OnboardingEvent _value, $Res Function(_$_OnboardingEvent) _then)
+class __$$_GetPersonalDetailsCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_GetPersonalDetails>
+    implements _$$_GetPersonalDetailsCopyWith<$Res> {
+  __$$_GetPersonalDetailsCopyWithImpl(
+      _$_GetPersonalDetails _value, $Res Function(_$_GetPersonalDetails) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? dob = null,
+    Object? genderId = null,
+    Object? street = null,
+    Object? cityId = null,
+    Object? stateId = null,
+    Object? latitude = null,
+    Object? longitude = null,
+    Object? zip = null,
+    Object? address = null,
+    Object? socialSecurityNo = null,
+    Object? documentId = null,
+    Object? documentNo = null,
+    Object? expiryDate = null,
+    Object? documentList = null,
+    Object? profilePic = null,
+  }) {
+    return _then(_$_GetPersonalDetails(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      dob: null == dob
+          ? _value.dob
+          : dob // ignore: cast_nullable_to_non_nullable
+              as String,
+      genderId: null == genderId
+          ? _value.genderId
+          : genderId // ignore: cast_nullable_to_non_nullable
+              as int,
+      street: null == street
+          ? _value.street
+          : street // ignore: cast_nullable_to_non_nullable
+              as String,
+      cityId: null == cityId
+          ? _value.cityId
+          : cityId // ignore: cast_nullable_to_non_nullable
+              as String,
+      stateId: null == stateId
+          ? _value.stateId
+          : stateId // ignore: cast_nullable_to_non_nullable
+              as String,
+      latitude: null == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      longitude: null == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
+      zip: null == zip
+          ? _value.zip
+          : zip // ignore: cast_nullable_to_non_nullable
+              as String,
+      address: null == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
+      socialSecurityNo: null == socialSecurityNo
+          ? _value.socialSecurityNo
+          : socialSecurityNo // ignore: cast_nullable_to_non_nullable
+              as String,
+      documentId: null == documentId
+          ? _value.documentId
+          : documentId // ignore: cast_nullable_to_non_nullable
+              as String,
+      documentNo: null == documentNo
+          ? _value.documentNo
+          : documentNo // ignore: cast_nullable_to_non_nullable
+              as String,
+      expiryDate: null == expiryDate
+          ? _value.expiryDate
+          : expiryDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      documentList: null == documentList
+          ? _value._documentList
+          : documentList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      profilePic: null == profilePic
+          ? _value.profilePic
+          : profilePic // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$_OnboardingEvent implements _OnboardingEvent {
-  const _$_OnboardingEvent();
+class _$_GetPersonalDetails implements _GetPersonalDetails {
+  const _$_GetPersonalDetails(
+      {required this.userId,
+      required this.dob,
+      required this.genderId,
+      required this.street,
+      required this.cityId,
+      required this.stateId,
+      required this.latitude,
+      required this.longitude,
+      required this.zip,
+      required this.address,
+      required this.socialSecurityNo,
+      required this.documentId,
+      required this.documentNo,
+      required this.expiryDate,
+      required final List<String> documentList,
+      required this.profilePic})
+      : _documentList = documentList;
+
+  @override
+  final String userId;
+  @override
+  final String dob;
+  @override
+  final int genderId;
+  @override
+  final String street;
+  @override
+  final String cityId;
+  @override
+  final String stateId;
+  @override
+  final double latitude;
+  @override
+  final double longitude;
+  @override
+  final String zip;
+  @override
+  final String address;
+  @override
+  final String socialSecurityNo;
+  @override
+  final String documentId;
+  @override
+  final String documentNo;
+  @override
+  final String expiryDate;
+  final List<String> _documentList;
+  @override
+  List<String> get documentList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_documentList);
+  }
+
+  @override
+  final String profilePic;
 
   @override
   String toString() {
-    return 'OnboardingEvent.personalDetails()';
+    return 'OnboardingEvent.personalDetails(userId: $userId, dob: $dob, genderId: $genderId, street: $street, cityId: $cityId, stateId: $stateId, latitude: $latitude, longitude: $longitude, zip: $zip, address: $address, socialSecurityNo: $socialSecurityNo, documentId: $documentId, documentNo: $documentNo, expiryDate: $expiryDate, documentList: $documentList, profilePic: $profilePic)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_OnboardingEvent);
+        (other.runtimeType == runtimeType &&
+            other is _$_GetPersonalDetails &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.dob, dob) || other.dob == dob) &&
+            (identical(other.genderId, genderId) ||
+                other.genderId == genderId) &&
+            (identical(other.street, street) || other.street == street) &&
+            (identical(other.cityId, cityId) || other.cityId == cityId) &&
+            (identical(other.stateId, stateId) || other.stateId == stateId) &&
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude) &&
+            (identical(other.zip, zip) || other.zip == zip) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.socialSecurityNo, socialSecurityNo) ||
+                other.socialSecurityNo == socialSecurityNo) &&
+            (identical(other.documentId, documentId) ||
+                other.documentId == documentId) &&
+            (identical(other.documentNo, documentNo) ||
+                other.documentNo == documentNo) &&
+            (identical(other.expiryDate, expiryDate) ||
+                other.expiryDate == expiryDate) &&
+            const DeepCollectionEquality()
+                .equals(other._documentList, _documentList) &&
+            (identical(other.profilePic, profilePic) ||
+                other.profilePic == profilePic));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      userId,
+      dob,
+      genderId,
+      street,
+      cityId,
+      stateId,
+      latitude,
+      longitude,
+      zip,
+      address,
+      socialSecurityNo,
+      documentId,
+      documentNo,
+      expiryDate,
+      const DeepCollectionEquality().hash(_documentList),
+      profilePic);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetPersonalDetailsCopyWith<_$_GetPersonalDetails> get copyWith =>
+      __$$_GetPersonalDetailsCopyWithImpl<_$_GetPersonalDetails>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() personalDetails,
-    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -247,14 +519,46 @@ class _$_OnboardingEvent implements _OnboardingEvent {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
   }) {
-    return personalDetails();
+    return personalDetails(
+        userId,
+        dob,
+        genderId,
+        street,
+        cityId,
+        stateId,
+        latitude,
+        longitude,
+        zip,
+        address,
+        socialSecurityNo,
+        documentId,
+        documentNo,
+        expiryDate,
+        documentList,
+        profilePic);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? personalDetails,
-    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -276,14 +580,46 @@ class _$_OnboardingEvent implements _OnboardingEvent {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
   }) {
-    return personalDetails?.call();
+    return personalDetails?.call(
+        userId,
+        dob,
+        genderId,
+        street,
+        cityId,
+        stateId,
+        latitude,
+        longitude,
+        zip,
+        address,
+        socialSecurityNo,
+        documentId,
+        documentNo,
+        expiryDate,
+        documentList,
+        profilePic);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? personalDetails,
-    TResult Function(bool isSubmitted)? submit,
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -307,7 +643,23 @@ class _$_OnboardingEvent implements _OnboardingEvent {
     required TResult orElse(),
   }) {
     if (personalDetails != null) {
-      return personalDetails();
+      return personalDetails(
+          userId,
+          dob,
+          genderId,
+          street,
+          cityId,
+          stateId,
+          latitude,
+          longitude,
+          zip,
+          address,
+          socialSecurityNo,
+          documentId,
+          documentNo,
+          expiryDate,
+          documentList,
+          profilePic);
     }
     return orElse();
   }
@@ -315,8 +667,7 @@ class _$_OnboardingEvent implements _OnboardingEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardingEvent value) personalDetails,
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -344,8 +695,7 @@ class _$_OnboardingEvent implements _OnboardingEvent {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardingEvent value)? personalDetails,
-    TResult? Function(_Submit value)? submit,
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -369,8 +719,7 @@ class _$_OnboardingEvent implements _OnboardingEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardingEvent value)? personalDetails,
-    TResult Function(_Submit value)? submit,
+    TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -396,251 +745,43 @@ class _$_OnboardingEvent implements _OnboardingEvent {
   }
 }
 
-abstract class _OnboardingEvent implements OnboardingEvent {
-  const factory _OnboardingEvent() = _$_OnboardingEvent;
-}
+abstract class _GetPersonalDetails implements OnboardingEvent {
+  const factory _GetPersonalDetails(
+      {required final String userId,
+      required final String dob,
+      required final int genderId,
+      required final String street,
+      required final String cityId,
+      required final String stateId,
+      required final double latitude,
+      required final double longitude,
+      required final String zip,
+      required final String address,
+      required final String socialSecurityNo,
+      required final String documentId,
+      required final String documentNo,
+      required final String expiryDate,
+      required final List<String> documentList,
+      required final String profilePic}) = _$_GetPersonalDetails;
 
-/// @nodoc
-abstract class _$$_SubmitCopyWith<$Res> {
-  factory _$$_SubmitCopyWith(_$_Submit value, $Res Function(_$_Submit) then) =
-      __$$_SubmitCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool isSubmitted});
-}
-
-/// @nodoc
-class __$$_SubmitCopyWithImpl<$Res>
-    extends _$OnboardingEventCopyWithImpl<$Res, _$_Submit>
-    implements _$$_SubmitCopyWith<$Res> {
-  __$$_SubmitCopyWithImpl(_$_Submit _value, $Res Function(_$_Submit) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isSubmitted = null,
-  }) {
-    return _then(_$_Submit(
-      null == isSubmitted
-          ? _value.isSubmitted
-          : isSubmitted // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_Submit implements _Submit {
-  const _$_Submit(this.isSubmitted);
-
-  @override
-  final bool isSubmitted;
-
-  @override
-  String toString() {
-    return 'OnboardingEvent.submit(isSubmitted: $isSubmitted)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Submit &&
-            (identical(other.isSubmitted, isSubmitted) ||
-                other.isSubmitted == isSubmitted));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, isSubmitted);
-
+  String get userId;
+  String get dob;
+  int get genderId;
+  String get street;
+  String get cityId;
+  String get stateId;
+  double get latitude;
+  double get longitude;
+  String get zip;
+  String get address;
+  String get socialSecurityNo;
+  String get documentId;
+  String get documentNo;
+  String get expiryDate;
+  List<String> get documentList;
+  String get profilePic;
   @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_SubmitCopyWith<_$_Submit> get copyWith =>
-      __$$_SubmitCopyWithImpl<_$_Submit>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() personalDetails,
-    required TResult Function(bool isSubmitted) submit,
-    required TResult Function(int isSelected) radioHHA,
-    required TResult Function(int isSelected) radioBLS,
-    required TResult Function(int isSelected) radioTB,
-    required TResult Function(int isSelected) radioCovid,
-    required TResult Function(int isSelected) radioExperience,
-    required TResult Function(int isSelected) radioSmoker,
-    required TResult Function(int isSelected) radioTransportation,
-    required TResult Function(int isSelected) radioPet,
-    required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
-    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
-        securityDocumentUpload,
-    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
-        hhaDocumentUpload,
-    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
-        blsDocumentUpload,
-    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
-        tbDocumentUpload,
-    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
-        covidDocumentUpload,
-  }) {
-    return submit(isSubmitted);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? personalDetails,
-    TResult? Function(bool isSubmitted)? submit,
-    TResult? Function(int isSelected)? radioHHA,
-    TResult? Function(int isSelected)? radioBLS,
-    TResult? Function(int isSelected)? radioTB,
-    TResult? Function(int isSelected)? radioCovid,
-    TResult? Function(int isSelected)? radioExperience,
-    TResult? Function(int isSelected)? radioSmoker,
-    TResult? Function(int isSelected)? radioTransportation,
-    TResult? Function(int isSelected)? radioPet,
-    TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
-    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
-        securityDocumentUpload,
-    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
-        hhaDocumentUpload,
-    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
-        blsDocumentUpload,
-    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
-        tbDocumentUpload,
-    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
-        covidDocumentUpload,
-  }) {
-    return submit?.call(isSubmitted);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? personalDetails,
-    TResult Function(bool isSubmitted)? submit,
-    TResult Function(int isSelected)? radioHHA,
-    TResult Function(int isSelected)? radioBLS,
-    TResult Function(int isSelected)? radioTB,
-    TResult Function(int isSelected)? radioCovid,
-    TResult Function(int isSelected)? radioExperience,
-    TResult Function(int isSelected)? radioSmoker,
-    TResult Function(int isSelected)? radioTransportation,
-    TResult Function(int isSelected)? radioPet,
-    TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
-    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
-        securityDocumentUpload,
-    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
-        hhaDocumentUpload,
-    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
-        blsDocumentUpload,
-    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
-        tbDocumentUpload,
-    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
-        covidDocumentUpload,
-    required TResult orElse(),
-  }) {
-    if (submit != null) {
-      return submit(isSubmitted);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardingEvent value) personalDetails,
-    required TResult Function(_Submit value) submit,
-    required TResult Function(_RadioHHASelected value) radioHHA,
-    required TResult Function(_RadioBLSSelected value) radioBLS,
-    required TResult Function(_RadioTBSelected value) radioTB,
-    required TResult Function(_RadioCovidSelected value) radioCovid,
-    required TResult Function(_RadioExperienceSelected value) radioExperience,
-    required TResult Function(_RadioSmokerSelected value) radioSmoker,
-    required TResult Function(_RadioTransportationSelected value)
-        radioTransportation,
-    required TResult Function(_RadioPetSelected value) radioPet,
-    required TResult Function(_RadioLanguageSelected value) radioLanguage,
-    required TResult Function(_ProfilePicSelected value) profilePicSelection,
-    required TResult Function(_SecurityDocumentUploadSelected value)
-        securityDocumentUpload,
-    required TResult Function(_HHADocumentUploadSelected value)
-        hhaDocumentUpload,
-    required TResult Function(_BLSDocumentUploadSelected value)
-        blsDocumentUpload,
-    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
-    required TResult Function(_CovidDocumentUploadSelected value)
-        covidDocumentUpload,
-  }) {
-    return submit(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardingEvent value)? personalDetails,
-    TResult? Function(_Submit value)? submit,
-    TResult? Function(_RadioHHASelected value)? radioHHA,
-    TResult? Function(_RadioBLSSelected value)? radioBLS,
-    TResult? Function(_RadioTBSelected value)? radioTB,
-    TResult? Function(_RadioCovidSelected value)? radioCovid,
-    TResult? Function(_RadioExperienceSelected value)? radioExperience,
-    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
-    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
-    TResult? Function(_RadioPetSelected value)? radioPet,
-    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
-    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
-    TResult? Function(_SecurityDocumentUploadSelected value)?
-        securityDocumentUpload,
-    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
-    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
-    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
-    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
-  }) {
-    return submit?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardingEvent value)? personalDetails,
-    TResult Function(_Submit value)? submit,
-    TResult Function(_RadioHHASelected value)? radioHHA,
-    TResult Function(_RadioBLSSelected value)? radioBLS,
-    TResult Function(_RadioTBSelected value)? radioTB,
-    TResult Function(_RadioCovidSelected value)? radioCovid,
-    TResult Function(_RadioExperienceSelected value)? radioExperience,
-    TResult Function(_RadioSmokerSelected value)? radioSmoker,
-    TResult Function(_RadioTransportationSelected value)? radioTransportation,
-    TResult Function(_RadioPetSelected value)? radioPet,
-    TResult Function(_RadioLanguageSelected value)? radioLanguage,
-    TResult Function(_ProfilePicSelected value)? profilePicSelection,
-    TResult Function(_SecurityDocumentUploadSelected value)?
-        securityDocumentUpload,
-    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
-    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
-    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
-    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
-    required TResult orElse(),
-  }) {
-    if (submit != null) {
-      return submit(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Submit implements OnboardingEvent {
-  const factory _Submit(final bool isSubmitted) = _$_Submit;
-
-  bool get isSubmitted;
-  @JsonKey(ignore: true)
-  _$$_SubmitCopyWith<_$_Submit> get copyWith =>
+  _$$_GetPersonalDetailsCopyWith<_$_GetPersonalDetails> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -709,8 +850,24 @@ class _$_RadioHHASelected implements _RadioHHASelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() personalDetails,
-    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -738,8 +895,24 @@ class _$_RadioHHASelected implements _RadioHHASelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? personalDetails,
-    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -767,8 +940,24 @@ class _$_RadioHHASelected implements _RadioHHASelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? personalDetails,
-    TResult Function(bool isSubmitted)? submit,
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -800,8 +989,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardingEvent value) personalDetails,
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -829,8 +1017,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardingEvent value)? personalDetails,
-    TResult? Function(_Submit value)? submit,
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -854,8 +1041,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardingEvent value)? personalDetails,
-    TResult Function(_Submit value)? submit,
+    TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -955,8 +1141,24 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() personalDetails,
-    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -984,8 +1186,24 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? personalDetails,
-    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -1013,8 +1231,24 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? personalDetails,
-    TResult Function(bool isSubmitted)? submit,
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -1046,8 +1280,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardingEvent value) personalDetails,
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -1075,8 +1308,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardingEvent value)? personalDetails,
-    TResult? Function(_Submit value)? submit,
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -1100,8 +1332,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardingEvent value)? personalDetails,
-    TResult Function(_Submit value)? submit,
+    TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -1201,8 +1432,24 @@ class _$_RadioTBSelected implements _RadioTBSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() personalDetails,
-    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -1230,8 +1477,24 @@ class _$_RadioTBSelected implements _RadioTBSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? personalDetails,
-    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -1259,8 +1522,24 @@ class _$_RadioTBSelected implements _RadioTBSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? personalDetails,
-    TResult Function(bool isSubmitted)? submit,
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -1292,8 +1571,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardingEvent value) personalDetails,
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -1321,8 +1599,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardingEvent value)? personalDetails,
-    TResult? Function(_Submit value)? submit,
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -1346,8 +1623,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardingEvent value)? personalDetails,
-    TResult Function(_Submit value)? submit,
+    TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -1448,8 +1724,24 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() personalDetails,
-    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -1477,8 +1769,24 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? personalDetails,
-    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -1506,8 +1814,24 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? personalDetails,
-    TResult Function(bool isSubmitted)? submit,
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -1539,8 +1863,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardingEvent value) personalDetails,
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -1568,8 +1891,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardingEvent value)? personalDetails,
-    TResult? Function(_Submit value)? submit,
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -1593,8 +1915,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardingEvent value)? personalDetails,
-    TResult Function(_Submit value)? submit,
+    TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -1697,8 +2018,24 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() personalDetails,
-    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -1726,8 +2063,24 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? personalDetails,
-    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -1755,8 +2108,24 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? personalDetails,
-    TResult Function(bool isSubmitted)? submit,
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -1788,8 +2157,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardingEvent value) personalDetails,
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -1817,8 +2185,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardingEvent value)? personalDetails,
-    TResult? Function(_Submit value)? submit,
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -1842,8 +2209,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardingEvent value)? personalDetails,
-    TResult Function(_Submit value)? submit,
+    TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -1945,8 +2311,24 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() personalDetails,
-    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -1974,8 +2356,24 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? personalDetails,
-    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -2003,8 +2401,24 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? personalDetails,
-    TResult Function(bool isSubmitted)? submit,
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -2036,8 +2450,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardingEvent value) personalDetails,
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -2065,8 +2478,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardingEvent value)? personalDetails,
-    TResult? Function(_Submit value)? submit,
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -2090,8 +2502,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardingEvent value)? personalDetails,
-    TResult Function(_Submit value)? submit,
+    TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -2195,8 +2606,24 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() personalDetails,
-    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -2224,8 +2651,24 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? personalDetails,
-    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -2253,8 +2696,24 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? personalDetails,
-    TResult Function(bool isSubmitted)? submit,
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -2286,8 +2745,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardingEvent value) personalDetails,
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -2315,8 +2773,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardingEvent value)? personalDetails,
-    TResult? Function(_Submit value)? submit,
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -2340,8 +2797,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardingEvent value)? personalDetails,
-    TResult Function(_Submit value)? submit,
+    TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -2442,8 +2898,24 @@ class _$_RadioPetSelected implements _RadioPetSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() personalDetails,
-    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -2471,8 +2943,24 @@ class _$_RadioPetSelected implements _RadioPetSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? personalDetails,
-    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -2500,8 +2988,24 @@ class _$_RadioPetSelected implements _RadioPetSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? personalDetails,
-    TResult Function(bool isSubmitted)? submit,
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -2533,8 +3037,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardingEvent value) personalDetails,
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -2562,8 +3065,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardingEvent value)? personalDetails,
-    TResult? Function(_Submit value)? submit,
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -2587,8 +3089,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardingEvent value)? personalDetails,
-    TResult Function(_Submit value)? submit,
+    TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -2689,8 +3190,24 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() personalDetails,
-    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -2718,8 +3235,24 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? personalDetails,
-    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -2747,8 +3280,24 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? personalDetails,
-    TResult Function(bool isSubmitted)? submit,
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -2780,8 +3329,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardingEvent value) personalDetails,
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -2809,8 +3357,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardingEvent value)? personalDetails,
-    TResult? Function(_Submit value)? submit,
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -2834,8 +3381,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardingEvent value)? personalDetails,
-    TResult Function(_Submit value)? submit,
+    TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -2937,8 +3483,24 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() personalDetails,
-    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -2966,8 +3528,24 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? personalDetails,
-    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -2995,8 +3573,24 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? personalDetails,
-    TResult Function(bool isSubmitted)? submit,
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -3028,8 +3622,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardingEvent value) personalDetails,
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -3057,8 +3650,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardingEvent value)? personalDetails,
-    TResult? Function(_Submit value)? submit,
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -3082,8 +3674,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardingEvent value)? personalDetails,
-    TResult Function(_Submit value)? submit,
+    TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -3206,8 +3797,24 @@ class _$_SecurityDocumentUploadSelected
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() personalDetails,
-    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -3235,8 +3842,24 @@ class _$_SecurityDocumentUploadSelected
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? personalDetails,
-    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -3264,8 +3887,24 @@ class _$_SecurityDocumentUploadSelected
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? personalDetails,
-    TResult Function(bool isSubmitted)? submit,
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -3297,8 +3936,7 @@ class _$_SecurityDocumentUploadSelected
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardingEvent value) personalDetails,
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -3326,8 +3964,7 @@ class _$_SecurityDocumentUploadSelected
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardingEvent value)? personalDetails,
-    TResult? Function(_Submit value)? submit,
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -3351,8 +3988,7 @@ class _$_SecurityDocumentUploadSelected
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardingEvent value)? personalDetails,
-    TResult Function(_Submit value)? submit,
+    TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -3475,8 +4111,24 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() personalDetails,
-    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -3504,8 +4156,24 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? personalDetails,
-    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -3533,8 +4201,24 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? personalDetails,
-    TResult Function(bool isSubmitted)? submit,
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -3566,8 +4250,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardingEvent value) personalDetails,
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -3595,8 +4278,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardingEvent value)? personalDetails,
-    TResult? Function(_Submit value)? submit,
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -3620,8 +4302,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardingEvent value)? personalDetails,
-    TResult Function(_Submit value)? submit,
+    TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -3744,8 +4425,24 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() personalDetails,
-    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -3773,8 +4470,24 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? personalDetails,
-    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -3802,8 +4515,24 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? personalDetails,
-    TResult Function(bool isSubmitted)? submit,
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -3835,8 +4564,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardingEvent value) personalDetails,
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -3864,8 +4592,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardingEvent value)? personalDetails,
-    TResult? Function(_Submit value)? submit,
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -3889,8 +4616,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardingEvent value)? personalDetails,
-    TResult Function(_Submit value)? submit,
+    TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -4012,8 +4738,24 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() personalDetails,
-    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -4041,8 +4783,24 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? personalDetails,
-    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -4070,8 +4828,24 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? personalDetails,
-    TResult Function(bool isSubmitted)? submit,
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -4103,8 +4877,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardingEvent value) personalDetails,
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -4132,8 +4905,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardingEvent value)? personalDetails,
-    TResult? Function(_Submit value)? submit,
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -4157,8 +4929,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardingEvent value)? personalDetails,
-    TResult Function(_Submit value)? submit,
+    TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -4281,8 +5052,24 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() personalDetails,
-    required TResult Function(bool isSubmitted) submit,
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -4310,8 +5097,24 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? personalDetails,
-    TResult? Function(bool isSubmitted)? submit,
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -4339,8 +5142,24 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? personalDetails,
-    TResult Function(bool isSubmitted)? submit,
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -4372,8 +5191,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_OnboardingEvent value) personalDetails,
-    required TResult Function(_Submit value) submit,
+    required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -4401,8 +5219,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_OnboardingEvent value)? personalDetails,
-    TResult? Function(_Submit value)? submit,
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -4426,8 +5243,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_OnboardingEvent value)? personalDetails,
-    TResult Function(_Submit value)? submit,
+    TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -4486,6 +5302,9 @@ mixin _$OnboardingState {
   int get isTransportationSelected => throw _privateConstructorUsedError;
   int get isPetsSelected => throw _privateConstructorUsedError;
   int get isLanguagesSelected => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
+      get personalDetailsOption => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OnboardingStateCopyWith<OnboardingState> get copyWith =>
@@ -4515,7 +5334,10 @@ abstract class $OnboardingStateCopyWith<$Res> {
       int isSmokerSelected,
       int isTransportationSelected,
       int isPetsSelected,
-      int isLanguagesSelected});
+      int isLanguagesSelected,
+      bool isLoading,
+      Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
+          personalDetailsOption});
 }
 
 /// @nodoc
@@ -4548,6 +5370,8 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
     Object? isTransportationSelected = null,
     Object? isPetsSelected = null,
     Object? isLanguagesSelected = null,
+    Object? isLoading = null,
+    Object? personalDetailsOption = null,
   }) {
     return _then(_value.copyWith(
       pickedProfilePic: null == pickedProfilePic
@@ -4618,6 +5442,14 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
           ? _value.isLanguagesSelected
           : isLanguagesSelected // ignore: cast_nullable_to_non_nullable
               as int,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      personalDetailsOption: null == personalDetailsOption
+          ? _value.personalDetailsOption
+          : personalDetailsOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, PersonalDetailsResponse>>,
     ) as $Val);
   }
 }
@@ -4647,7 +5479,10 @@ abstract class _$$_OnboardingStateCopyWith<$Res>
       int isSmokerSelected,
       int isTransportationSelected,
       int isPetsSelected,
-      int isLanguagesSelected});
+      int isLanguagesSelected,
+      bool isLoading,
+      Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
+          personalDetailsOption});
 }
 
 /// @nodoc
@@ -4678,6 +5513,8 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
     Object? isTransportationSelected = null,
     Object? isPetsSelected = null,
     Object? isLanguagesSelected = null,
+    Object? isLoading = null,
+    Object? personalDetailsOption = null,
   }) {
     return _then(_$_OnboardingState(
       pickedProfilePic: null == pickedProfilePic
@@ -4748,6 +5585,14 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
           ? _value.isLanguagesSelected
           : isLanguagesSelected // ignore: cast_nullable_to_non_nullable
               as int,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      personalDetailsOption: null == personalDetailsOption
+          ? _value.personalDetailsOption
+          : personalDetailsOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, PersonalDetailsResponse>>,
     ));
   }
 }
@@ -4772,7 +5617,9 @@ class _$_OnboardingState implements _OnboardingState {
       required this.isSmokerSelected,
       required this.isTransportationSelected,
       required this.isPetsSelected,
-      required this.isLanguagesSelected})
+      required this.isLanguagesSelected,
+      required this.isLoading,
+      required this.personalDetailsOption})
       : _securityDocumentList = securityDocumentList,
         _hhaDocumentList = hhaDocumentList,
         _blsDocumentList = blsDocumentList,
@@ -4838,10 +5685,15 @@ class _$_OnboardingState implements _OnboardingState {
   final int isPetsSelected;
   @override
   final int isLanguagesSelected;
+  @override
+  final bool isLoading;
+  @override
+  final Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
+      personalDetailsOption;
 
   @override
   String toString() {
-    return 'OnboardingState(pickedProfilePic: $pickedProfilePic, securityDocumentList: $securityDocumentList, hhaDocumentList: $hhaDocumentList, blsDocumentList: $blsDocumentList, tbDocumentList: $tbDocumentList, covidDocumentList: $covidDocumentList, isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected, isFormSubmitSuccess: $isFormSubmitSuccess, listUpdated: $listUpdated, isExperianceSelected: $isExperianceSelected, isSmokerSelected: $isSmokerSelected, isTransportationSelected: $isTransportationSelected, isPetsSelected: $isPetsSelected, isLanguagesSelected: $isLanguagesSelected)';
+    return 'OnboardingState(pickedProfilePic: $pickedProfilePic, securityDocumentList: $securityDocumentList, hhaDocumentList: $hhaDocumentList, blsDocumentList: $blsDocumentList, tbDocumentList: $tbDocumentList, covidDocumentList: $covidDocumentList, isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected, isFormSubmitSuccess: $isFormSubmitSuccess, listUpdated: $listUpdated, isExperianceSelected: $isExperianceSelected, isSmokerSelected: $isSmokerSelected, isTransportationSelected: $isTransportationSelected, isPetsSelected: $isPetsSelected, isLanguagesSelected: $isLanguagesSelected, isLoading: $isLoading, personalDetailsOption: $personalDetailsOption)';
   }
 
   @override
@@ -4883,29 +5735,36 @@ class _$_OnboardingState implements _OnboardingState {
             (identical(other.isPetsSelected, isPetsSelected) ||
                 other.isPetsSelected == isPetsSelected) &&
             (identical(other.isLanguagesSelected, isLanguagesSelected) ||
-                other.isLanguagesSelected == isLanguagesSelected));
+                other.isLanguagesSelected == isLanguagesSelected) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.personalDetailsOption, personalDetailsOption) ||
+                other.personalDetailsOption == personalDetailsOption));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(pickedProfilePic),
-      const DeepCollectionEquality().hash(_securityDocumentList),
-      const DeepCollectionEquality().hash(_hhaDocumentList),
-      const DeepCollectionEquality().hash(_blsDocumentList),
-      const DeepCollectionEquality().hash(_tbDocumentList),
-      const DeepCollectionEquality().hash(_covidDocumentList),
-      isHHASelected,
-      isBLSSelected,
-      isTBSelected,
-      isCovidSelected,
-      isFormSubmitSuccess,
-      listUpdated,
-      isExperianceSelected,
-      isSmokerSelected,
-      isTransportationSelected,
-      isPetsSelected,
-      isLanguagesSelected);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(pickedProfilePic),
+        const DeepCollectionEquality().hash(_securityDocumentList),
+        const DeepCollectionEquality().hash(_hhaDocumentList),
+        const DeepCollectionEquality().hash(_blsDocumentList),
+        const DeepCollectionEquality().hash(_tbDocumentList),
+        const DeepCollectionEquality().hash(_covidDocumentList),
+        isHHASelected,
+        isBLSSelected,
+        isTBSelected,
+        isCovidSelected,
+        isFormSubmitSuccess,
+        listUpdated,
+        isExperianceSelected,
+        isSmokerSelected,
+        isTransportationSelected,
+        isPetsSelected,
+        isLanguagesSelected,
+        isLoading,
+        personalDetailsOption
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -4932,7 +5791,10 @@ abstract class _OnboardingState implements OnboardingState {
       required final int isSmokerSelected,
       required final int isTransportationSelected,
       required final int isPetsSelected,
-      required final int isLanguagesSelected}) = _$_OnboardingState;
+      required final int isLanguagesSelected,
+      required final bool isLoading,
+      required final Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
+          personalDetailsOption}) = _$_OnboardingState;
 
   @override
   Uint8List get pickedProfilePic;
@@ -4968,6 +5830,11 @@ abstract class _OnboardingState implements OnboardingState {
   int get isPetsSelected;
   @override
   int get isLanguagesSelected;
+  @override
+  bool get isLoading;
+  @override
+  Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
+      get personalDetailsOption;
   @override
   @JsonKey(ignore: true)
   _$$_OnboardingStateCopyWith<_$_OnboardingState> get copyWith =>

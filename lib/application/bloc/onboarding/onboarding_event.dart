@@ -2,9 +2,23 @@ part of 'onboarding_bloc.dart';
 
 @freezed
 class OnboardingEvent with _$OnboardingEvent {
-  const factory OnboardingEvent.personalDetails() = _OnboardingEvent;
-
-  const factory OnboardingEvent.submit(bool isSubmitted) = _Submit;
+  const factory OnboardingEvent.personalDetails(
+      {required String userId,
+      required String dob,
+      required int genderId,
+      required String street,
+      required String cityId,
+      required String stateId,
+      required double latitude,
+      required double longitude,
+      required String zip,
+      required String address,
+      required String socialSecurityNo,
+      required String documentId,
+      required String documentNo,
+      required String expiryDate,
+      required List<String> documentList,
+      required String profilePic}) = _GetPersonalDetails;
 
   const factory OnboardingEvent.radioHHA(int isSelected) = _RadioHHASelected;
 
