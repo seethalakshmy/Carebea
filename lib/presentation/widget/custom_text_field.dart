@@ -31,6 +31,7 @@ class CTextField extends StatelessWidget {
       this.hintStyle,
       this.fillColor,
       this.maxLines,
+      this.textAlignVertical,
       this.borderColor})
       : assert(controller != null),
         super(key: key);

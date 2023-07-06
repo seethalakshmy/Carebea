@@ -11,6 +11,7 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 
 import 'application/bloc/form_validation/form_validation_bloc.dart';
 import 'core/config/environment.dart';
+import 'infrastructure/shared_preference/shared_preff_util.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +34,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
     init();
   }
 
@@ -44,6 +44,7 @@ class _MyAppState extends State<MyApp> {
     );
     Environment().initConfig(environment);
     await HiveUtils.init();
+    SharedPreffUtil().init();
   }
 
   @override

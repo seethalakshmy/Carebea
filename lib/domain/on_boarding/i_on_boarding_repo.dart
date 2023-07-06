@@ -1,11 +1,20 @@
 import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.dart';
+import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/models/document_list_response.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/models/personal_details_response.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
 import 'package:dartz/dartz.dart';
 
+import '../../presentation/on_boarding/modules/personal_details/models/city_list_response.dart';
+import '../../presentation/on_boarding/modules/personal_details/models/gender_list_response.dart';
+import '../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
 import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_response.dart';
 
 abstract class IOnBoardingRepo {
+  Future<Either<ApiErrorHandler, GenderListResponse>> getGenderList();
+  Future<Either<ApiErrorHandler, CityListResponse>> getCityList();
+  Future<Either<ApiErrorHandler, StateListReponse>> getStateList();
+  Future<Either<ApiErrorHandler, DocumentListResponse>> getDocumentList();
+
   Future<Either<ApiErrorHandler, PersonalDetailsResponse>>
       personalDetailsSubmit(
           {required String userId,

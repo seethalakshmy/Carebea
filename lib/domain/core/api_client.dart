@@ -1,23 +1,27 @@
 import 'dart:async';
 
-import 'package:admin_580_tech/presentation/on_boarding/modules/services/models/get_service_response.dart';
-import 'package:admin_580_tech/presentation/on_boarding/modules/services/models/service_list_response.dart';
 import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
 import 'package:admin_580_tech/domain/caregiver_profile/model/caregiver_profile_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_verification_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
+import 'package:admin_580_tech/presentation/on_boarding/modules/services/models/get_service_response.dart';
+import 'package:admin_580_tech/presentation/on_boarding/modules/services/models/service_list_response.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:retrofit/http.dart';
 
 import '../../core/config/environment.dart';
-import '../caregiver_verification/model/reject_params.dart';
 import '../../presentation/caregiver_creation/models/caregiver_creation_response.dart';
+import '../../presentation/on_boarding/modules/personal_details/models/city_list_response.dart';
+import '../../presentation/on_boarding/modules/personal_details/models/document_list_response.dart';
+import '../../presentation/on_boarding/modules/personal_details/models/gender_list_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/personal_details_response.dart';
+import '../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
 import '../../presentation/on_boarding/modules/preference/models/get_preference_response.dart';
 import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
 import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_response.dart';
+import '../caregiver_verification/model/reject_params.dart';
 import '../caregivers/model/caregiver_response.dart';
 
 part 'api_client.g.dart';
@@ -46,7 +50,7 @@ abstract class ApiClient {
     return _ApiClient(dio, baseUrl: Environment().config?.apiHost);
   }
 
-  @POST("/get-care-givers")
+  @POST("/admin/get-care-givers")
   Future<CareGiverResponse> getCareGivers(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
@@ -56,54 +60,55 @@ abstract class ApiClient {
       @Field('search_term') String? searchTerm,
       @Field('filter_id') int? filterId);
 
-  @POST("/get-caregiver-verification")
+  @POST("/admin/get-caregiver-verification")
   Future<CaregiverVerificationResponse> getCareGiverVerificationData(
       @Header("Authorization") String token, @Field('user_id') String userId);
 
-  @POST("/caregiver-background-verify")
+  @POST("/admin/caregiver-background-verify")
   Future<VerifyResponse> careGiverBackgroundVerify(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('status') int status,
       @Field('reject_reason') String? reason);
 
-  @POST("/caregiver-certificate-verification")
+  @POST("/admin/caregiver-certificate-verification")
   Future<VerifyResponse> careGiverCertificateApprove(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('status') int status);
 
-  @POST("/caregiver-training-verification")
+  @POST("/admin/caregiver-training-verification")
   Future<VerifyResponse> careGiverTrainingVerify(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('status') bool status);
 
-  @POST("/reject-qualification-document")
+  @POST("/admin/reject-qualification-document")
   Future<VerifyResponse> careGiverCertificateReject(
       @Header("Authorization") String token,
       @Body() RejectionParams rejectionParams);
 
-  @POST("/caregiver-start-training")
+  @POST("/admin/caregiver-start-training")
   Future<VerifyResponse> careGiverSendTrainingRequest(
       @Header("Authorization") String token, @Field('user_id') String userId);
 
-  @POST("/get-care-giver-profile")
+  @POST("/admin/get-care-giver-profile")
   Future<CaregiverProfileResponse> getCareGiverProfile(
       @Header("Authorization") String token, @Field('user_id') String userId);
 
-  @POST("/caregiver-intervie-verification")
+  @POST("/admin/caregiver-intervie-verification")
   Future<VerifyResponse> careGiverInterViewVerify(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('status') bool status);
-  @POST("/get-care-giver-by-id")
+
+  @POST("/admin/get-care-giver-by-id")
   Future<CareGiverDetailResponse> getCareGiverDetail(
     @Header("Authorization") String token,
     @Field('user_id') String userId,
   );
 
-  @POST("/admin-create-caregiver")
+  @POST("/admin/admin-create-caregiver")
   Future<CaregiverCreationResponse> createCaregiver(
     @Field('first_name') String firstName,
     @Field('last_name') String lastName,
@@ -111,7 +116,7 @@ abstract class ApiClient {
     @Field('email') String email,
   );
 
-  @POST("/admin-cg-personal-details")
+  @POST("/admin/admin-cg-personal-details")
   Future<PersonalDetailsResponse> getPersonalDetails(
     @Field('user_id') String userId,
     @Field('dob') String dob,
@@ -131,7 +136,7 @@ abstract class ApiClient {
     @Field('profile_picture') String profilePicture,
   );
 
-  @POST("/admin-cg-qualification")
+  @POST("/admin/admin-cg-qualification")
   Future<CommentsAndReviewResponseModel> getQualifications(
     @Field('user_id') String userId,
     @Field('have_hha_registration') bool haveHHARegistration,
@@ -145,7 +150,7 @@ abstract class ApiClient {
     @Field('covid_vaccination_details') CovidVaccinationDetails covidDetails,
   );
 
-  @POST("/admin-cg-preferences")
+  @POST("/admin/admin-cg-preferences")
   Future<GetPreferenceResponse> getPreferences(
     @Field('user_id') String userId,
     @Field('years_of_experience') String yearsOfExperience,
@@ -156,14 +161,27 @@ abstract class ApiClient {
     @Field('known_languages') List<String> knownLanguages,
   );
 
-  @POST("/admin-cg-services")
+  @POST("/admin/admin-cg-services")
   Future<GetServiceResponse> getServices(
     @Field('user_id') String userId,
     @Field('services') ServicesModel services,
   );
-  @POST("/change-caregiver-status")
+
+  @POST("/admin/change-caregiver-status")
   Future<VerifyResponse> careGiverActiveOrInactive(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('status') bool status);
+
+  @GET("/common-data/get-gender")
+  Future<GenderListResponse> getGenderList();
+
+  @GET("/common-data/get-cities")
+  Future<CityListResponse> getCityList();
+
+  @GET("/common-data/get-states")
+  Future<StateListReponse> getStateList();
+
+  @GET("/common-data/get-documents")
+  Future<DocumentListResponse> getDocumentsList();
 }

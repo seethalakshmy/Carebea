@@ -240,8 +240,7 @@ class _ReferenceViewState extends State<ReferenceView> {
                   ? AppString.emptyRelationship.val
                   : ""
               : "",
-          stateName: "",
-          items: ["Relation 1", "Relation 2", "Relation 3"],
+          items: [],
           onChange: (value) {
             selectedRelation = value;
           },
@@ -263,8 +262,7 @@ class _ReferenceViewState extends State<ReferenceView> {
                   ? AppString.emptyAddress.val
                   : ""
               : "",
-          stateName: "",
-          items: ["Address 1", "Address 2", "Address 3"],
+          items: [],
           onChange: (value) {
             selectedAddress = value;
           },
@@ -286,8 +284,7 @@ class _ReferenceViewState extends State<ReferenceView> {
                   ? AppString.emptyState.val
                   : ""
               : "",
-          stateName: "",
-          items: ["Kerala", "Karnataka", "Tamil Nadu"],
+          items: [],
           onChange: (value) {
             selectedState = value;
           },
@@ -309,8 +306,7 @@ class _ReferenceViewState extends State<ReferenceView> {
                   ? AppString.emptyCity.val
                   : ""
               : "",
-          stateName: "",
-          items: ["Kannur", "Wayanad", "Ernakulam"],
+          items: [],
           onChange: (value) {
             selectedCity = value;
           },

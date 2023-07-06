@@ -29,7 +29,7 @@ class Utility {
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime(1940),
-        lastDate: DateTime(2024));
+        lastDate: DateTime(DateTime.now().year - 18));
 
     String selectedDate = formatter.format(picked!);
     return selectedDate;

@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/models/document_list_response.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:file_picker/file_picker.dart';
@@ -8,7 +9,10 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
 import '../../../infrastructure/on_boarding/on_boarding_repository.dart';
+import '../../../presentation/on_boarding/modules/personal_details/models/city_list_response.dart';
+import '../../../presentation/on_boarding/modules/personal_details/models/gender_list_response.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/personal_details_response.dart';
+import '../../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
 
 part 'onboarding_bloc.freezed.dart';
 part 'onboarding_event.dart';
@@ -16,6 +20,10 @@ part 'onboarding_state.dart';
 
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   OnBoardingRepository onboardingRepository;
+  List<Gender> genderList = [];
+  List<City> cityList = [];
+  List<StateItem> stateList = [];
+  List<DocumentType> documentList = [];
 
   OnboardingBloc(this.onboardingRepository) : super(OnboardingState.initial()) {
     on<OnboardingEvent>((event, emit) async {
@@ -58,11 +66,61 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
             listUpdated: !event.listUpdated));
       }
     });
+    on<_CommonDataLists>(_getCommonLists);
     on<_GetPersonalDetails>(_getPersonalData);
   }
+
+  _getCommonLists(_CommonDataLists event, Emitter<OnboardingState> emit) async {
+    emit(state.copyWith(isLoading: true));
+    final Either<ApiErrorHandler, CityListResponse> cityResult =
+        await onboardingRepository.getCityList();
+    OnboardingState cityState = cityResult.fold((l) {
+      return state.copyWith(isLoading: false, cityOption: Some(Left(l)));
+    }, (r) {
+      cityList.clear();
+      cityList.addAll(r.data!);
+      return state.copyWith(isLoading: false, cityOption: Some(Right(r)));
+    });
+    emit(cityState);
+
+    final Either<ApiErrorHandler, StateListReponse> stateResult =
+        await onboardingRepository.getStateList();
+    OnboardingState stateState = stateResult.fold((l) {
+      return state.copyWith(isLoading: false, stateOption: Some(Left(l)));
+    }, (r) {
+      stateList.clear();
+      stateList.addAll(r.data!);
+      return state.copyWith(isLoading: false, stateOption: Some(Right(r)));
+    });
+    emit(stateState);
+
+    final Either<ApiErrorHandler, GenderListResponse> genderResult =
+        await onboardingRepository.getGenderList();
+    OnboardingState genderState = genderResult.fold((l) {
+      return state.copyWith(isLoading: false, genderOption: Some(Left(l)));
+    }, (r) {
+      genderList.clear();
+      genderList.addAll(r.gender!);
+      return state.copyWith(isLoading: false, genderOption: Some(Right(r)));
+    });
+    emit(genderState);
+
+    final Either<ApiErrorHandler, DocumentListResponse> documentResult =
+        await onboardingRepository.getDocumentList();
+    OnboardingState documentState = documentResult.fold((l) {
+      return state.copyWith(isLoading: false, documentOption: Some(Left(l)));
+    }, (r) {
+      documentList.clear();
+      documentList.addAll(r.data!);
+      return state.copyWith(isLoading: false, documentOption: Some(Right(r)));
+    });
+    emit(documentState);
+  }
+
   _getPersonalData(
       _GetPersonalDetails event, Emitter<OnboardingState> emit) async {
     emit(state.copyWith(isLoading: true));
+
     final Either<ApiErrorHandler, PersonalDetailsResponse> result =
         await onboardingRepository.personalDetailsSubmit(
             userId: event.userId,

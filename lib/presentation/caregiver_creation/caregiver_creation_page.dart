@@ -9,12 +9,12 @@ import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
+import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../widget/common_button_loader_widget.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
@@ -87,8 +87,7 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
             (l) {},
             (r) async {
               if (r.status!) {
-                final sharedPref = await SharedPreferences.getInstance();
-                await sharedPref.setString(AppString.userId.val, r.data!.id!);
+                SharedPreffUtil().setUserId = r.data?.id ?? "";
                 router.navigate(const OnboardingRoute());
               } else {}
             },
@@ -249,7 +248,7 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
                         height: 45,
                         minWidth: 120,
                         onPressed: () {
-                          context.router.navigate(const CareGiversRoute());
+                          context.router.navigate(CareGiversRoute());
                         },
                         text: AppString.cancel.val,
                         color: AppColor.white.val,

@@ -2,6 +2,7 @@ import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../application/bloc/onboarding/onboarding_bloc.dart';
 import '../../../../../core/enum.dart';
@@ -9,28 +10,27 @@ import '../../../../../core/text_styles.dart';
 import '../../../../widget/common_date_picker_widget.dart';
 import '../../../../widget/custom_text_field.dart';
 import '../../../widgets/dialog/document_type_dropdown.dart';
-import '../models/document_list_response.dart';
 
 // ignore: must_be_immutable
-class DocumentDetailsView extends StatefulWidget {
+class DocumentDetailsView extends StatelessWidget {
   DocumentDetailsView(
       {Key? key,
       required this.onboardingBloc,
       required this.nextClicked,
-      required this.pageController})
+      required this.pageController,
+      required this.dateController,
+      required this.onChanged,
+      required this.documentNumberController})
       : super(key: key);
   OnboardingBloc onboardingBloc;
   bool nextClicked;
   PageController pageController;
+  TextEditingController documentNumberController;
+  TextEditingController dateController;
+  final Function onChanged;
 
-  @override
-  State<DocumentDetailsView> createState() => _DocumentDetailsViewState();
-}
-
-class _DocumentDetailsViewState extends State<DocumentDetailsView> {
-  TextEditingController documentNumberController = TextEditingController();
-  final TextEditingController _dateController = TextEditingController();
   String selectedDate = "";
+
   String selectedDocumentType = "";
 
   @override
@@ -66,7 +66,7 @@ class _DocumentDetailsViewState extends State<DocumentDetailsView> {
             _documentDetailsWidget(),
             _documentNoWidget(),
             CommonDatePickerWidget(
-              dateController: _dateController,
+              dateController: dateController,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return AppString.emptyExpiry.val;
@@ -90,27 +90,28 @@ class _DocumentDetailsViewState extends State<DocumentDetailsView> {
   }
 
   _documentDetailsWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _labelWidget(AppString.selectDocumentType.val),
-        CustomSizedBox(height: DBL.twelve.val),
-        DocumentTypeDropDown(
-          selectedValue: selectedDocumentType,
-          items: [
-            DocumentType(id: "0", name: "Passport"),
-            DocumentType(id: "1", name: "Driving License"),
-            DocumentType(id: "2", name: "Voter ID"),
-            DocumentType(id: "3", name: "Others")
+    return BlocBuilder<OnboardingBloc, OnboardingState>(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _labelWidget(AppString.selectDocumentType.val),
+            CustomSizedBox(height: DBL.twelve.val),
+            DocumentTypeDropDown(
+              selectedValue: selectedDocumentType,
+              items: onboardingBloc.documentList,
+              onChange: (value) {
+                onChanged(value);
+              },
+              errorText: nextClicked
+                  ? selectedDocumentType == ""
+                      ? AppString.emptyDocType.val
+                      : ""
+                  : "",
+            ),
           ],
-          onChange: (value) {},
-          errorText: widget.nextClicked
-              ? selectedDocumentType == ""
-                  ? AppString.emptyDocType.val
-                  : ""
-              : "",
-        ),
-      ],
+        );
+      },
     );
   }
 

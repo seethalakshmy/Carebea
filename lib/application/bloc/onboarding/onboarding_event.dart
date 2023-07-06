@@ -20,6 +20,8 @@ class OnboardingEvent with _$OnboardingEvent {
       required List<String> documentList,
       required String profilePic}) = _GetPersonalDetails;
 
+  const factory OnboardingEvent.commonData()=_CommonDataLists;
+
   const factory OnboardingEvent.radioHHA(int isSelected) = _RadioHHASelected;
 
   const factory OnboardingEvent.radioBLS(int isSelected) = _RadioBLSSelected;
