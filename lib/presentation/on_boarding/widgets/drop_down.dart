@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/enum.dart';
 import '../../../core/text_styles.dart';
+import '../../widget/custom_text_field.dart';
 
 class DropdownWidget<T> extends StatefulWidget {
   /// the child widget for the button, this will be ignored if text is supplied
@@ -30,6 +31,9 @@ class DropdownWidget<T> extends StatefulWidget {
   final String? hint;
   final String? errorText;
   final T? selectedValue;
+  final Function? onSearchChanged;
+  final TextEditingController? searchController;
+  bool? showSearchBox = false;
 
   DropdownWidget({
     Key? key,
@@ -45,6 +49,9 @@ class DropdownWidget<T> extends StatefulWidget {
     this.hint,
     this.errorText,
     this.selectedValue,
+    this.onSearchChanged,
+    this.searchController,
+    this.showSearchBox,
   }) : super(key: key);
 
   @override
@@ -62,6 +69,7 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
   Animation<double>? _rotateAnimation;
 
   Color borderColor = AppColor.borderColor.val;
+  TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
@@ -81,6 +89,12 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
       parent: _animationController!,
       curve: Curves.easeInOut,
     ));
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -199,21 +213,43 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           //color: Colors.white,
                           constraints: BoxConstraints(maxHeight: 200),
-                          child: ListView(
-                            padding:
-                                widget.dropdownStyle.padding ?? EdgeInsets.zero,
-                            shrinkWrap: true,
-                            children: widget.items.asMap().entries.map((item) {
-                              return InkWell(
-                                // hoverColor: AppColors.textGrey,
-                                onTap: () {
-                                  setState(() => _currentIndex = item.key);
-                                  widget.onChange(item.value.value!, item.key);
-                                  _toggleDropdown();
-                                },
-                                child: item.value,
-                              );
-                            }).toList(),
+                          child: Column(
+                            children: [
+                              widget.showSearchBox!
+                                  ? CTextField(
+                                      onChanged: (val) {
+                                        widget.onSearchChanged!(val);
+                                      },
+                                      controller: widget.searchController ??
+                                          searchController,
+                                      suffixIcon: Icon(
+                                        Icons.search,
+                                        color: AppColor.lightGrey3.val,
+                                        size: 25,
+                                      ))
+                                  : Container(),
+                              Expanded(
+                                child: ListView(
+                                  padding: widget.dropdownStyle.padding ??
+                                      EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  children:
+                                      widget.items.asMap().entries.map((item) {
+                                    return InkWell(
+                                      // hoverColor: AppColors.textGrey,
+                                      onTap: () {
+                                        setState(
+                                            () => _currentIndex = item.key);
+                                        widget.onChange(
+                                            item.value.value!, item.key);
+                                        _toggleDropdown();
+                                      },
+                                      child: item.value,
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),

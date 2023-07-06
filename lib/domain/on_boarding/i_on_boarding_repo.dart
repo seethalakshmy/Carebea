@@ -11,8 +11,18 @@ import '../../presentation/on_boarding/modules/qualification_details/models/qual
 
 abstract class IOnBoardingRepo {
   Future<Either<ApiErrorHandler, GenderListResponse>> getGenderList();
-  Future<Either<ApiErrorHandler, CityListResponse>> getCityList();
-  Future<Either<ApiErrorHandler, StateListReponse>> getStateList();
+
+  Future<Either<ApiErrorHandler, CityListResponse>> getCityList({
+    required String stateId,
+    required String page,
+    required String searchKey,
+  });
+
+  Future<Either<ApiErrorHandler, StateListReponse>> getStateList({
+    required String page,
+    required String searchKey,
+  });
+
   Future<Either<ApiErrorHandler, DocumentListResponse>> getDocumentList();
 
   Future<Either<ApiErrorHandler, PersonalDetailsResponse>>

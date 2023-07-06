@@ -48,6 +48,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   final TextEditingController documentNumberController =
       TextEditingController();
   final TextEditingController expiryDateController = TextEditingController();
+  final TextEditingController citySearchController = TextEditingController();
+  final TextEditingController stateSearchController = TextEditingController();
 
   final FocusNode _dateFocusNode = FocusNode();
   String selectedDate = "";
@@ -289,6 +291,9 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CommonDatePickerWidget(
+            initialDate: DateTime(DateTime.now().year - 18),
+            lastDate: DateTime(DateTime.now().year - 18),
+            firstDate: DateTime(1950),
             dateController: dobController,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -414,6 +419,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         _labelWidget(AppString.state.val),
         CustomSizedBox(height: DBL.twelve.val),
         StateDropDown(
+          onSearchChanged: (val) {},
+          searchController: stateSearchController,
           errorText: nextClicked
               ? selectedState.isEmpty
                   ? AppString.emptyState.val
@@ -423,6 +430,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           onChange: (value) {
             selectedState = value.toString();
             print("state value in onchanged : $value");
+            widget.onboardingBloc.stateId = value;
+            widget.onboardingBloc.add(const OnboardingEvent.cityList(""));
           },
           selectedValue: selectedState,
         ),
@@ -439,6 +448,10 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
             _labelWidget(AppString.city.val),
             CustomSizedBox(height: DBL.twelve.val),
             CityDropDown(
+              searchController: citySearchController,
+              onSearchChanged: (val) {
+                widget.onboardingBloc.add(OnboardingEvent.cityList(val));
+              },
               errorText: nextClicked
                   ? selectedCity.isEmpty
                       ? AppString.emptyCity.val

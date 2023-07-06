@@ -13,18 +13,27 @@ class StateDropDown extends StatelessWidget {
       this.errorText,
       required this.items,
       required this.onChange,
-      required this.selectedValue})
+      required this.selectedValue,
+      this.onSearchChanged,
+      this.searchController})
       : super(key: key);
   final String? errorText;
   final Function onChange;
   final List<StateItem> items;
   final String? selectedValue;
+  final TextEditingController? searchController;
+  final Function? onSearchChanged;
 
   @override
   Widget build(BuildContext context) {
     return CustomSizedBox(
       width: DBL.twoEighty.val,
       child: DropdownWidget(
+          showSearchBox: true,
+          searchController: searchController,
+          onSearchChanged: (val) {
+            onSearchChanged!(val);
+          },
           hint: AppString.state.val,
           errorText: errorText,
           items: items

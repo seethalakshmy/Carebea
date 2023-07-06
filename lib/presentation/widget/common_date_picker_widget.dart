@@ -15,12 +15,18 @@ class CommonDatePickerWidget extends StatefulWidget {
       required this.label,
       required this.dateController,
       required this.validator,
+      required this.lastDate,
+      required this.initialDate,
+      required this.firstDate,
       this.labelSize})
       : super(key: key);
   final String label;
   final TextEditingController dateController;
   final FormFieldValidator<String> validator;
   final double? labelSize;
+  final DateTime initialDate;
+  final DateTime firstDate;
+  final DateTime lastDate;
 
   @override
   State<CommonDatePickerWidget> createState() => _CommonDatePickerWidgetState();
@@ -50,7 +56,12 @@ class _CommonDatePickerWidgetState extends State<CommonDatePickerWidget> {
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
       onTap: () async {
-        String date = await Utility.selectDate(context);
+        String date = await Utility.selectDate(
+          context,
+          widget.initialDate,
+          widget.firstDate,
+          widget.lastDate,
+        );
         setState(() {
           widget.dateController.text = date;
         });
