@@ -21,7 +21,9 @@ mixin _$CareGiversEvent {
     required TResult Function(String userId, int page, int limit, int type,
             String? searchTerm, int? filterId)
         getCareGivers,
-    required TResult Function(Caregivers caregiver) isUserActive,
+    required TResult Function(Caregivers caregiver, String userId, bool status,
+            BuildContext context)
+        isUserActive,
     required TResult Function(Types type) isSelectedTab,
   }) =>
       throw _privateConstructorUsedError;
@@ -30,7 +32,9 @@ mixin _$CareGiversEvent {
     TResult? Function(String userId, int page, int limit, int type,
             String? searchTerm, int? filterId)?
         getCareGivers,
-    TResult? Function(Caregivers caregiver)? isUserActive,
+    TResult? Function(Caregivers caregiver, String userId, bool status,
+            BuildContext context)?
+        isUserActive,
     TResult? Function(Types type)? isSelectedTab,
   }) =>
       throw _privateConstructorUsedError;
@@ -39,7 +43,9 @@ mixin _$CareGiversEvent {
     TResult Function(String userId, int page, int limit, int type,
             String? searchTerm, int? filterId)?
         getCareGivers,
-    TResult Function(Caregivers caregiver)? isUserActive,
+    TResult Function(Caregivers caregiver, String userId, bool status,
+            BuildContext context)?
+        isUserActive,
     TResult Function(Types type)? isSelectedTab,
     required TResult orElse(),
   }) =>
@@ -208,7 +214,9 @@ class _$_GetCareGivers implements _GetCareGivers {
     required TResult Function(String userId, int page, int limit, int type,
             String? searchTerm, int? filterId)
         getCareGivers,
-    required TResult Function(Caregivers caregiver) isUserActive,
+    required TResult Function(Caregivers caregiver, String userId, bool status,
+            BuildContext context)
+        isUserActive,
     required TResult Function(Types type) isSelectedTab,
   }) {
     return getCareGivers(userId, page, limit, type, searchTerm, filterId);
@@ -220,7 +228,9 @@ class _$_GetCareGivers implements _GetCareGivers {
     TResult? Function(String userId, int page, int limit, int type,
             String? searchTerm, int? filterId)?
         getCareGivers,
-    TResult? Function(Caregivers caregiver)? isUserActive,
+    TResult? Function(Caregivers caregiver, String userId, bool status,
+            BuildContext context)?
+        isUserActive,
     TResult? Function(Types type)? isSelectedTab,
   }) {
     return getCareGivers?.call(userId, page, limit, type, searchTerm, filterId);
@@ -232,7 +242,9 @@ class _$_GetCareGivers implements _GetCareGivers {
     TResult Function(String userId, int page, int limit, int type,
             String? searchTerm, int? filterId)?
         getCareGivers,
-    TResult Function(Caregivers caregiver)? isUserActive,
+    TResult Function(Caregivers caregiver, String userId, bool status,
+            BuildContext context)?
+        isUserActive,
     TResult Function(Types type)? isSelectedTab,
     required TResult orElse(),
   }) {
@@ -303,7 +315,8 @@ abstract class _$$_IsUserActiveCopyWith<$Res> {
           _$_IsUserActive value, $Res Function(_$_IsUserActive) then) =
       __$$_IsUserActiveCopyWithImpl<$Res>;
   @useResult
-  $Res call({Caregivers caregiver});
+  $Res call(
+      {Caregivers caregiver, String userId, bool status, BuildContext context});
 }
 
 /// @nodoc
@@ -318,12 +331,27 @@ class __$$_IsUserActiveCopyWithImpl<$Res>
   @override
   $Res call({
     Object? caregiver = null,
+    Object? userId = null,
+    Object? status = null,
+    Object? context = null,
   }) {
     return _then(_$_IsUserActive(
-      null == caregiver
+      caregiver: null == caregiver
           ? _value.caregiver
           : caregiver // ignore: cast_nullable_to_non_nullable
               as Caregivers,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as bool,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ));
   }
 }
@@ -331,14 +359,24 @@ class __$$_IsUserActiveCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_IsUserActive implements _IsUserActive {
-  const _$_IsUserActive(this.caregiver);
+  const _$_IsUserActive(
+      {required this.caregiver,
+      required this.userId,
+      required this.status,
+      required this.context});
 
   @override
   final Caregivers caregiver;
+  @override
+  final String userId;
+  @override
+  final bool status;
+  @override
+  final BuildContext context;
 
   @override
   String toString() {
-    return 'CareGiversEvent.isUserActive(caregiver: $caregiver)';
+    return 'CareGiversEvent.isUserActive(caregiver: $caregiver, userId: $userId, status: $status, context: $context)';
   }
 
   @override
@@ -347,11 +385,15 @@ class _$_IsUserActive implements _IsUserActive {
         (other.runtimeType == runtimeType &&
             other is _$_IsUserActive &&
             (identical(other.caregiver, caregiver) ||
-                other.caregiver == caregiver));
+                other.caregiver == caregiver) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.context, context) || other.context == context));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, caregiver);
+  int get hashCode =>
+      Object.hash(runtimeType, caregiver, userId, status, context);
 
   @JsonKey(ignore: true)
   @override
@@ -365,10 +407,12 @@ class _$_IsUserActive implements _IsUserActive {
     required TResult Function(String userId, int page, int limit, int type,
             String? searchTerm, int? filterId)
         getCareGivers,
-    required TResult Function(Caregivers caregiver) isUserActive,
+    required TResult Function(Caregivers caregiver, String userId, bool status,
+            BuildContext context)
+        isUserActive,
     required TResult Function(Types type) isSelectedTab,
   }) {
-    return isUserActive(caregiver);
+    return isUserActive(caregiver, userId, status, context);
   }
 
   @override
@@ -377,10 +421,12 @@ class _$_IsUserActive implements _IsUserActive {
     TResult? Function(String userId, int page, int limit, int type,
             String? searchTerm, int? filterId)?
         getCareGivers,
-    TResult? Function(Caregivers caregiver)? isUserActive,
+    TResult? Function(Caregivers caregiver, String userId, bool status,
+            BuildContext context)?
+        isUserActive,
     TResult? Function(Types type)? isSelectedTab,
   }) {
-    return isUserActive?.call(caregiver);
+    return isUserActive?.call(caregiver, userId, status, context);
   }
 
   @override
@@ -389,12 +435,14 @@ class _$_IsUserActive implements _IsUserActive {
     TResult Function(String userId, int page, int limit, int type,
             String? searchTerm, int? filterId)?
         getCareGivers,
-    TResult Function(Caregivers caregiver)? isUserActive,
+    TResult Function(Caregivers caregiver, String userId, bool status,
+            BuildContext context)?
+        isUserActive,
     TResult Function(Types type)? isSelectedTab,
     required TResult orElse(),
   }) {
     if (isUserActive != null) {
-      return isUserActive(caregiver);
+      return isUserActive(caregiver, userId, status, context);
     }
     return orElse();
   }
@@ -435,9 +483,16 @@ class _$_IsUserActive implements _IsUserActive {
 }
 
 abstract class _IsUserActive implements CareGiversEvent {
-  const factory _IsUserActive(final Caregivers caregiver) = _$_IsUserActive;
+  const factory _IsUserActive(
+      {required final Caregivers caregiver,
+      required final String userId,
+      required final bool status,
+      required final BuildContext context}) = _$_IsUserActive;
 
   Caregivers get caregiver;
+  String get userId;
+  bool get status;
+  BuildContext get context;
   @JsonKey(ignore: true)
   _$$_IsUserActiveCopyWith<_$_IsUserActive> get copyWith =>
       throw _privateConstructorUsedError;
@@ -510,7 +565,9 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     required TResult Function(String userId, int page, int limit, int type,
             String? searchTerm, int? filterId)
         getCareGivers,
-    required TResult Function(Caregivers caregiver) isUserActive,
+    required TResult Function(Caregivers caregiver, String userId, bool status,
+            BuildContext context)
+        isUserActive,
     required TResult Function(Types type) isSelectedTab,
   }) {
     return isSelectedTab(type);
@@ -522,7 +579,9 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     TResult? Function(String userId, int page, int limit, int type,
             String? searchTerm, int? filterId)?
         getCareGivers,
-    TResult? Function(Caregivers caregiver)? isUserActive,
+    TResult? Function(Caregivers caregiver, String userId, bool status,
+            BuildContext context)?
+        isUserActive,
     TResult? Function(Types type)? isSelectedTab,
   }) {
     return isSelectedTab?.call(type);
@@ -534,7 +593,9 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     TResult Function(String userId, int page, int limit, int type,
             String? searchTerm, int? filterId)?
         getCareGivers,
-    TResult Function(Caregivers caregiver)? isUserActive,
+    TResult Function(Caregivers caregiver, String userId, bool status,
+            BuildContext context)?
+        isUserActive,
     TResult Function(Types type)? isSelectedTab,
     required TResult orElse(),
   }) {
@@ -593,6 +654,8 @@ mixin _$CareGiversState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
   CareGiverResponse? get response => throw _privateConstructorUsedError;
+  VerifyResponse? get activeOrInactiveResponse =>
+      throw _privateConstructorUsedError;
   List<Types> get types => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
@@ -611,6 +674,7 @@ abstract class $CareGiversStateCopyWith<$Res> {
       {bool isLoading,
       bool isError,
       CareGiverResponse? response,
+      VerifyResponse? activeOrInactiveResponse,
       List<Types> types,
       String? error});
 }
@@ -631,6 +695,7 @@ class _$CareGiversStateCopyWithImpl<$Res, $Val extends CareGiversState>
     Object? isLoading = null,
     Object? isError = null,
     Object? response = freezed,
+    Object? activeOrInactiveResponse = freezed,
     Object? types = null,
     Object? error = freezed,
   }) {
@@ -647,6 +712,10 @@ class _$CareGiversStateCopyWithImpl<$Res, $Val extends CareGiversState>
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as CareGiverResponse?,
+      activeOrInactiveResponse: freezed == activeOrInactiveResponse
+          ? _value.activeOrInactiveResponse
+          : activeOrInactiveResponse // ignore: cast_nullable_to_non_nullable
+              as VerifyResponse?,
       types: null == types
           ? _value.types
           : types // ignore: cast_nullable_to_non_nullable
@@ -671,6 +740,7 @@ abstract class _$$_CareGiversStateCopyWith<$Res>
       {bool isLoading,
       bool isError,
       CareGiverResponse? response,
+      VerifyResponse? activeOrInactiveResponse,
       List<Types> types,
       String? error});
 }
@@ -689,6 +759,7 @@ class __$$_CareGiversStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? isError = null,
     Object? response = freezed,
+    Object? activeOrInactiveResponse = freezed,
     Object? types = null,
     Object? error = freezed,
   }) {
@@ -705,6 +776,10 @@ class __$$_CareGiversStateCopyWithImpl<$Res>
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as CareGiverResponse?,
+      activeOrInactiveResponse: freezed == activeOrInactiveResponse
+          ? _value.activeOrInactiveResponse
+          : activeOrInactiveResponse // ignore: cast_nullable_to_non_nullable
+              as VerifyResponse?,
       types: null == types
           ? _value._types
           : types // ignore: cast_nullable_to_non_nullable
@@ -724,6 +799,7 @@ class _$_CareGiversState implements _CareGiversState {
       {required this.isLoading,
       required this.isError,
       required this.response,
+      required this.activeOrInactiveResponse,
       required final List<Types> types,
       required this.error})
       : _types = types;
@@ -734,6 +810,8 @@ class _$_CareGiversState implements _CareGiversState {
   final bool isError;
   @override
   final CareGiverResponse? response;
+  @override
+  final VerifyResponse? activeOrInactiveResponse;
   final List<Types> _types;
   @override
   List<Types> get types {
@@ -746,7 +824,7 @@ class _$_CareGiversState implements _CareGiversState {
 
   @override
   String toString() {
-    return 'CareGiversState(isLoading: $isLoading, isError: $isError, response: $response, types: $types, error: $error)';
+    return 'CareGiversState(isLoading: $isLoading, isError: $isError, response: $response, activeOrInactiveResponse: $activeOrInactiveResponse, types: $types, error: $error)';
   }
 
   @override
@@ -759,13 +837,22 @@ class _$_CareGiversState implements _CareGiversState {
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.response, response) ||
                 other.response == response) &&
+            (identical(
+                    other.activeOrInactiveResponse, activeOrInactiveResponse) ||
+                other.activeOrInactiveResponse == activeOrInactiveResponse) &&
             const DeepCollectionEquality().equals(other._types, _types) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isError, response,
-      const DeepCollectionEquality().hash(_types), error);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      isError,
+      response,
+      activeOrInactiveResponse,
+      const DeepCollectionEquality().hash(_types),
+      error);
 
   @JsonKey(ignore: true)
   @override
@@ -779,6 +866,7 @@ abstract class _CareGiversState implements CareGiversState {
       {required final bool isLoading,
       required final bool isError,
       required final CareGiverResponse? response,
+      required final VerifyResponse? activeOrInactiveResponse,
       required final List<Types> types,
       required final String? error}) = _$_CareGiversState;
 
@@ -788,6 +876,8 @@ abstract class _CareGiversState implements CareGiversState {
   bool get isError;
   @override
   CareGiverResponse? get response;
+  @override
+  VerifyResponse? get activeOrInactiveResponse;
   @override
   List<Types> get types;
   @override

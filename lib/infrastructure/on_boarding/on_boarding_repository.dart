@@ -8,10 +8,87 @@ import 'package:dio/dio.dart';
 import '../../core/custom_debugger.dart';
 import '../../core/enum.dart';
 import '../../domain/on_boarding/i_on_boarding_repo.dart';
+import '../../presentation/on_boarding/modules/personal_details/models/city_list_response.dart';
+import '../../presentation/on_boarding/modules/personal_details/models/document_list_response.dart';
+import '../../presentation/on_boarding/modules/personal_details/models/gender_list_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/personal_details_response.dart';
+import '../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
 
 class OnBoardingRepository implements IOnBoardingRepo {
   ApiClient apiClient = ApiClient();
+
+  @override
+  Future<Either<ApiErrorHandler, GenderListResponse>> getGenderList() async {
+    try {
+      final response = await apiClient.getGenderList();
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, CityListResponse>> getCityList() async {
+    try {
+      final response = await apiClient.getCityList();
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, StateListReponse>> getStateList() async {
+    try {
+      final response = await apiClient.getStateList();
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, DocumentListResponse>>
+      getDocumentList() async {
+    try {
+      final response = await apiClient.getDocumentsList();
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
 
   @override
   Future<Either<ApiErrorHandler, PersonalDetailsResponse>>

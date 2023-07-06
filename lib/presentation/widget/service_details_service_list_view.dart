@@ -52,7 +52,7 @@ class ServiceDetailServiceListView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AlertTextLabel(
-          width: DBL.threeEighty.val,
+          customWidth: DBL.threeEighty.val,
           AppString.serviceNeeded.val,
           isCustomWidth: true,
         ),
@@ -103,7 +103,7 @@ class ServiceDetailServiceListView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AlertTextLabel(
-          width: DBL.threeEighty.val,
+          customWidth: DBL.threeEighty.val,
           AppString.serviceInCompleted.val,
           isCustomWidth: true,
         ),
@@ -151,7 +151,7 @@ class ServiceDetailServiceListView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AlertTextLabel(
-          width: DBL.threeEighty.val,
+          customWidth: DBL.threeEighty.val,
           AppString.serviceCompleted.val,
           isCustomWidth: true,
         ),

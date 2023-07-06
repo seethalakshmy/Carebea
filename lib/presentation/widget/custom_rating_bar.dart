@@ -16,7 +16,7 @@ class CustomRatingBar extends StatelessWidget {
         icon: Icons.star,
         color: AppColor.amber3.val,
       ),
-      itemCount: INT.four.val,
+      itemCount: INT.five.val,
       itemSize: DBL.twenty.val,
       unratedColor: Colors.amber.withAlpha(50),
       direction: Axis.horizontal,
