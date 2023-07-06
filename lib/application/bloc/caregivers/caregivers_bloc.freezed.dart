@@ -15,216 +15,6 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$CareGiversState {
-  bool get isLoading => throw _privateConstructorUsedError;
-  bool get isError => throw _privateConstructorUsedError;
-  CareGiverResponse? get response => throw _privateConstructorUsedError;
-  List<Types> get types => throw _privateConstructorUsedError;
-  String? get error => throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $CareGiversStateCopyWith<CareGiversState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $CareGiversStateCopyWith<$Res> {
-  factory $CareGiversStateCopyWith(
-          CareGiversState value, $Res Function(CareGiversState) then) =
-      _$CareGiversStateCopyWithImpl<$Res, CareGiversState>;
-  @useResult
-  $Res call(
-      {bool isLoading,
-      bool isError,
-      CareGiverResponse? response,
-      List<Types> types,
-      String? error});
-}
-
-/// @nodoc
-class _$CareGiversStateCopyWithImpl<$Res, $Val extends CareGiversState>
-    implements $CareGiversStateCopyWith<$Res> {
-  _$CareGiversStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isLoading = null,
-    Object? isError = null,
-    Object? response = freezed,
-    Object? types = null,
-    Object? error = freezed,
-  }) {
-    return _then(_value.copyWith(
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isError: null == isError
-          ? _value.isError
-          : isError // ignore: cast_nullable_to_non_nullable
-              as bool,
-      response: freezed == response
-          ? _value.response
-          : response // ignore: cast_nullable_to_non_nullable
-              as CareGiverResponse?,
-      types: null == types
-          ? _value.types
-          : types // ignore: cast_nullable_to_non_nullable
-              as List<Types>,
-      error: freezed == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$_CareGiversStateCopyWith<$Res>
-    implements $CareGiversStateCopyWith<$Res> {
-  factory _$$_CareGiversStateCopyWith(
-          _$_CareGiversState value, $Res Function(_$_CareGiversState) then) =
-      __$$_CareGiversStateCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {bool isLoading,
-      bool isError,
-      CareGiverResponse? response,
-      List<Types> types,
-      String? error});
-}
-
-/// @nodoc
-class __$$_CareGiversStateCopyWithImpl<$Res>
-    extends _$CareGiversStateCopyWithImpl<$Res, _$_CareGiversState>
-    implements _$$_CareGiversStateCopyWith<$Res> {
-  __$$_CareGiversStateCopyWithImpl(
-      _$_CareGiversState _value, $Res Function(_$_CareGiversState) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isLoading = null,
-    Object? isError = null,
-    Object? response = freezed,
-    Object? types = null,
-    Object? error = freezed,
-  }) {
-    return _then(_$_CareGiversState(
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isError: null == isError
-          ? _value.isError
-          : isError // ignore: cast_nullable_to_non_nullable
-              as bool,
-      response: freezed == response
-          ? _value.response
-          : response // ignore: cast_nullable_to_non_nullable
-              as CareGiverResponse?,
-      types: null == types
-          ? _value._types
-          : types // ignore: cast_nullable_to_non_nullable
-              as List<Types>,
-      error: freezed == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_CareGiversState implements _CareGiversState {
-  const _$_CareGiversState(
-      {required this.isLoading,
-      required this.isError,
-      required this.response,
-      required final List<Types> types,
-      required this.error})
-      : _types = types;
-
-  @override
-  final bool isLoading;
-  @override
-  final bool isError;
-  @override
-  final CareGiverResponse? response;
-  final List<Types> _types;
-  @override
-  List<Types> get types {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_types);
-  }
-
-  @override
-  final String? error;
-
-  @override
-  String toString() {
-    return 'CareGiversState(isLoading: $isLoading, isError: $isError, response: $response, types: $types, error: $error)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_CareGiversState &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
-            (identical(other.isError, isError) || other.isError == isError) &&
-            (identical(other.response, response) ||
-                other.response == response) &&
-            const DeepCollectionEquality().equals(other._types, _types) &&
-            (identical(other.error, error) || other.error == error));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isError, response,
-      const DeepCollectionEquality().hash(_types), error);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_CareGiversStateCopyWith<_$_CareGiversState> get copyWith =>
-      __$$_CareGiversStateCopyWithImpl<_$_CareGiversState>(this, _$identity);
-}
-
-abstract class _CareGiversState implements CareGiversState {
-  const factory _CareGiversState(
-      {required final bool isLoading,
-      required final bool isError,
-      required final CareGiverResponse? response,
-      required final List<Types> types,
-      required final String? error}) = _$_CareGiversState;
-
-  @override
-  bool get isLoading;
-  @override
-  bool get isError;
-  @override
-  CareGiverResponse? get response;
-  @override
-  List<Types> get types;
-  @override
-  String? get error;
-  @override
-  @JsonKey(ignore: true)
-  _$$_CareGiversStateCopyWith<_$_CareGiversState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 mixin _$CareGiversEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -795,5 +585,215 @@ abstract class _IsSelectedTab implements CareGiversEvent {
   Types get type;
   @JsonKey(ignore: true)
   _$$_IsSelectedTabCopyWith<_$_IsSelectedTab> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$CareGiversState {
+  bool get isLoading => throw _privateConstructorUsedError;
+  bool get isError => throw _privateConstructorUsedError;
+  CareGiverResponse? get response => throw _privateConstructorUsedError;
+  List<Types> get types => throw _privateConstructorUsedError;
+  String? get error => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $CareGiversStateCopyWith<CareGiversState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CareGiversStateCopyWith<$Res> {
+  factory $CareGiversStateCopyWith(
+          CareGiversState value, $Res Function(CareGiversState) then) =
+      _$CareGiversStateCopyWithImpl<$Res, CareGiversState>;
+  @useResult
+  $Res call(
+      {bool isLoading,
+      bool isError,
+      CareGiverResponse? response,
+      List<Types> types,
+      String? error});
+}
+
+/// @nodoc
+class _$CareGiversStateCopyWithImpl<$Res, $Val extends CareGiversState>
+    implements $CareGiversStateCopyWith<$Res> {
+  _$CareGiversStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isLoading = null,
+    Object? isError = null,
+    Object? response = freezed,
+    Object? types = null,
+    Object? error = freezed,
+  }) {
+    return _then(_value.copyWith(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isError: null == isError
+          ? _value.isError
+          : isError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      response: freezed == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as CareGiverResponse?,
+      types: null == types
+          ? _value.types
+          : types // ignore: cast_nullable_to_non_nullable
+              as List<Types>,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_CareGiversStateCopyWith<$Res>
+    implements $CareGiversStateCopyWith<$Res> {
+  factory _$$_CareGiversStateCopyWith(
+          _$_CareGiversState value, $Res Function(_$_CareGiversState) then) =
+      __$$_CareGiversStateCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {bool isLoading,
+      bool isError,
+      CareGiverResponse? response,
+      List<Types> types,
+      String? error});
+}
+
+/// @nodoc
+class __$$_CareGiversStateCopyWithImpl<$Res>
+    extends _$CareGiversStateCopyWithImpl<$Res, _$_CareGiversState>
+    implements _$$_CareGiversStateCopyWith<$Res> {
+  __$$_CareGiversStateCopyWithImpl(
+      _$_CareGiversState _value, $Res Function(_$_CareGiversState) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isLoading = null,
+    Object? isError = null,
+    Object? response = freezed,
+    Object? types = null,
+    Object? error = freezed,
+  }) {
+    return _then(_$_CareGiversState(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isError: null == isError
+          ? _value.isError
+          : isError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      response: freezed == response
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as CareGiverResponse?,
+      types: null == types
+          ? _value._types
+          : types // ignore: cast_nullable_to_non_nullable
+              as List<Types>,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_CareGiversState implements _CareGiversState {
+  const _$_CareGiversState(
+      {required this.isLoading,
+      required this.isError,
+      required this.response,
+      required final List<Types> types,
+      required this.error})
+      : _types = types;
+
+  @override
+  final bool isLoading;
+  @override
+  final bool isError;
+  @override
+  final CareGiverResponse? response;
+  final List<Types> _types;
+  @override
+  List<Types> get types {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_types);
+  }
+
+  @override
+  final String? error;
+
+  @override
+  String toString() {
+    return 'CareGiversState(isLoading: $isLoading, isError: $isError, response: $response, types: $types, error: $error)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CareGiversState &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.isError, isError) || other.isError == isError) &&
+            (identical(other.response, response) ||
+                other.response == response) &&
+            const DeepCollectionEquality().equals(other._types, _types) &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isLoading, isError, response,
+      const DeepCollectionEquality().hash(_types), error);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CareGiversStateCopyWith<_$_CareGiversState> get copyWith =>
+      __$$_CareGiversStateCopyWithImpl<_$_CareGiversState>(this, _$identity);
+}
+
+abstract class _CareGiversState implements CareGiversState {
+  const factory _CareGiversState(
+      {required final bool isLoading,
+      required final bool isError,
+      required final CareGiverResponse? response,
+      required final List<Types> types,
+      required final String? error}) = _$_CareGiversState;
+
+  @override
+  bool get isLoading;
+  @override
+  bool get isError;
+  @override
+  CareGiverResponse? get response;
+  @override
+  List<Types> get types;
+  @override
+  String? get error;
+  @override
+  @JsonKey(ignore: true)
+  _$$_CareGiversStateCopyWith<_$_CareGiversState> get copyWith =>
       throw _privateConstructorUsedError;
 }

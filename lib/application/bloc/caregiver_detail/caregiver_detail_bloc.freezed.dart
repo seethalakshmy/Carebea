@@ -16,42 +16,53 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CareGiverDetailEvent {
-  String get userId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) getCareGiverDetail,
+    required TResult Function(DateTime selectedDate) getSelectedDate,
+    required TResult Function(List<ServiceDates> services)
+        getSelectedScheduleServices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? getCareGiverDetail,
+    TResult? Function(DateTime selectedDate)? getSelectedDate,
+    TResult? Function(List<ServiceDates> services)? getSelectedScheduleServices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? getCareGiverDetail,
+    TResult Function(DateTime selectedDate)? getSelectedDate,
+    TResult Function(List<ServiceDates> services)? getSelectedScheduleServices,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetCareGiverDetail value) getCareGiverDetail,
+    required TResult Function(_GetSelectedDate value) getSelectedDate,
+    required TResult Function(_GetSelectedScheduleServices value)
+        getSelectedScheduleServices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult? Function(_GetSelectedDate value)? getSelectedDate,
+    TResult? Function(_GetSelectedScheduleServices value)?
+        getSelectedScheduleServices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult Function(_GetSelectedDate value)? getSelectedDate,
+    TResult Function(_GetSelectedScheduleServices value)?
+        getSelectedScheduleServices,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $CareGiverDetailEventCopyWith<CareGiverDetailEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -60,8 +71,6 @@ abstract class $CareGiverDetailEventCopyWith<$Res> {
   factory $CareGiverDetailEventCopyWith(CareGiverDetailEvent value,
           $Res Function(CareGiverDetailEvent) then) =
       _$CareGiverDetailEventCopyWithImpl<$Res, CareGiverDetailEvent>;
-  @useResult
-  $Res call({String userId});
 }
 
 /// @nodoc
@@ -74,28 +83,13 @@ class _$CareGiverDetailEventCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? userId = null,
-  }) {
-    return _then(_value.copyWith(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_GetCareGiverDetailCopyWith<$Res>
-    implements $CareGiverDetailEventCopyWith<$Res> {
+abstract class _$$_GetCareGiverDetailCopyWith<$Res> {
   factory _$$_GetCareGiverDetailCopyWith(_$_GetCareGiverDetail value,
           $Res Function(_$_GetCareGiverDetail) then) =
       __$$_GetCareGiverDetailCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({String userId});
 }
@@ -157,6 +151,9 @@ class _$_GetCareGiverDetail implements _GetCareGiverDetail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) getCareGiverDetail,
+    required TResult Function(DateTime selectedDate) getSelectedDate,
+    required TResult Function(List<ServiceDates> services)
+        getSelectedScheduleServices,
   }) {
     return getCareGiverDetail(userId);
   }
@@ -165,6 +162,8 @@ class _$_GetCareGiverDetail implements _GetCareGiverDetail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? getCareGiverDetail,
+    TResult? Function(DateTime selectedDate)? getSelectedDate,
+    TResult? Function(List<ServiceDates> services)? getSelectedScheduleServices,
   }) {
     return getCareGiverDetail?.call(userId);
   }
@@ -173,6 +172,8 @@ class _$_GetCareGiverDetail implements _GetCareGiverDetail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? getCareGiverDetail,
+    TResult Function(DateTime selectedDate)? getSelectedDate,
+    TResult Function(List<ServiceDates> services)? getSelectedScheduleServices,
     required TResult orElse(),
   }) {
     if (getCareGiverDetail != null) {
@@ -185,6 +186,9 @@ class _$_GetCareGiverDetail implements _GetCareGiverDetail {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetCareGiverDetail value) getCareGiverDetail,
+    required TResult Function(_GetSelectedDate value) getSelectedDate,
+    required TResult Function(_GetSelectedScheduleServices value)
+        getSelectedScheduleServices,
   }) {
     return getCareGiverDetail(this);
   }
@@ -193,6 +197,9 @@ class _$_GetCareGiverDetail implements _GetCareGiverDetail {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult? Function(_GetSelectedDate value)? getSelectedDate,
+    TResult? Function(_GetSelectedScheduleServices value)?
+        getSelectedScheduleServices,
   }) {
     return getCareGiverDetail?.call(this);
   }
@@ -201,6 +208,9 @@ class _$_GetCareGiverDetail implements _GetCareGiverDetail {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult Function(_GetSelectedDate value)? getSelectedDate,
+    TResult Function(_GetSelectedScheduleServices value)?
+        getSelectedScheduleServices,
     required TResult orElse(),
   }) {
     if (getCareGiverDetail != null) {
@@ -214,12 +224,311 @@ abstract class _GetCareGiverDetail implements CareGiverDetailEvent {
   const factory _GetCareGiverDetail({required final String userId}) =
       _$_GetCareGiverDetail;
 
-  @override
   String get userId;
-  @override
   @JsonKey(ignore: true)
   _$$_GetCareGiverDetailCopyWith<_$_GetCareGiverDetail> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_GetSelectedDateCopyWith<$Res> {
+  factory _$$_GetSelectedDateCopyWith(
+          _$_GetSelectedDate value, $Res Function(_$_GetSelectedDate) then) =
+      __$$_GetSelectedDateCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DateTime selectedDate});
+}
+
+/// @nodoc
+class __$$_GetSelectedDateCopyWithImpl<$Res>
+    extends _$CareGiverDetailEventCopyWithImpl<$Res, _$_GetSelectedDate>
+    implements _$$_GetSelectedDateCopyWith<$Res> {
+  __$$_GetSelectedDateCopyWithImpl(
+      _$_GetSelectedDate _value, $Res Function(_$_GetSelectedDate) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? selectedDate = null,
+  }) {
+    return _then(_$_GetSelectedDate(
+      selectedDate: null == selectedDate
+          ? _value.selectedDate
+          : selectedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetSelectedDate implements _GetSelectedDate {
+  const _$_GetSelectedDate({required this.selectedDate});
+
+  @override
+  final DateTime selectedDate;
+
+  @override
+  String toString() {
+    return 'CareGiverDetailEvent.getSelectedDate(selectedDate: $selectedDate)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetSelectedDate &&
+            (identical(other.selectedDate, selectedDate) ||
+                other.selectedDate == selectedDate));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, selectedDate);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetSelectedDateCopyWith<_$_GetSelectedDate> get copyWith =>
+      __$$_GetSelectedDateCopyWithImpl<_$_GetSelectedDate>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId) getCareGiverDetail,
+    required TResult Function(DateTime selectedDate) getSelectedDate,
+    required TResult Function(List<ServiceDates> services)
+        getSelectedScheduleServices,
+  }) {
+    return getSelectedDate(selectedDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId)? getCareGiverDetail,
+    TResult? Function(DateTime selectedDate)? getSelectedDate,
+    TResult? Function(List<ServiceDates> services)? getSelectedScheduleServices,
+  }) {
+    return getSelectedDate?.call(selectedDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId)? getCareGiverDetail,
+    TResult Function(DateTime selectedDate)? getSelectedDate,
+    TResult Function(List<ServiceDates> services)? getSelectedScheduleServices,
+    required TResult orElse(),
+  }) {
+    if (getSelectedDate != null) {
+      return getSelectedDate(selectedDate);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverDetail value) getCareGiverDetail,
+    required TResult Function(_GetSelectedDate value) getSelectedDate,
+    required TResult Function(_GetSelectedScheduleServices value)
+        getSelectedScheduleServices,
+  }) {
+    return getSelectedDate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult? Function(_GetSelectedDate value)? getSelectedDate,
+    TResult? Function(_GetSelectedScheduleServices value)?
+        getSelectedScheduleServices,
+  }) {
+    return getSelectedDate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult Function(_GetSelectedDate value)? getSelectedDate,
+    TResult Function(_GetSelectedScheduleServices value)?
+        getSelectedScheduleServices,
+    required TResult orElse(),
+  }) {
+    if (getSelectedDate != null) {
+      return getSelectedDate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetSelectedDate implements CareGiverDetailEvent {
+  const factory _GetSelectedDate({required final DateTime selectedDate}) =
+      _$_GetSelectedDate;
+
+  DateTime get selectedDate;
+  @JsonKey(ignore: true)
+  _$$_GetSelectedDateCopyWith<_$_GetSelectedDate> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_GetSelectedScheduleServicesCopyWith<$Res> {
+  factory _$$_GetSelectedScheduleServicesCopyWith(
+          _$_GetSelectedScheduleServices value,
+          $Res Function(_$_GetSelectedScheduleServices) then) =
+      __$$_GetSelectedScheduleServicesCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<ServiceDates> services});
+}
+
+/// @nodoc
+class __$$_GetSelectedScheduleServicesCopyWithImpl<$Res>
+    extends _$CareGiverDetailEventCopyWithImpl<$Res,
+        _$_GetSelectedScheduleServices>
+    implements _$$_GetSelectedScheduleServicesCopyWith<$Res> {
+  __$$_GetSelectedScheduleServicesCopyWithImpl(
+      _$_GetSelectedScheduleServices _value,
+      $Res Function(_$_GetSelectedScheduleServices) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? services = null,
+  }) {
+    return _then(_$_GetSelectedScheduleServices(
+      services: null == services
+          ? _value._services
+          : services // ignore: cast_nullable_to_non_nullable
+              as List<ServiceDates>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetSelectedScheduleServices implements _GetSelectedScheduleServices {
+  const _$_GetSelectedScheduleServices(
+      {required final List<ServiceDates> services})
+      : _services = services;
+
+  final List<ServiceDates> _services;
+  @override
+  List<ServiceDates> get services {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_services);
+  }
+
+  @override
+  String toString() {
+    return 'CareGiverDetailEvent.getSelectedScheduleServices(services: $services)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetSelectedScheduleServices &&
+            const DeepCollectionEquality().equals(other._services, _services));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_services));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetSelectedScheduleServicesCopyWith<_$_GetSelectedScheduleServices>
+      get copyWith => __$$_GetSelectedScheduleServicesCopyWithImpl<
+          _$_GetSelectedScheduleServices>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId) getCareGiverDetail,
+    required TResult Function(DateTime selectedDate) getSelectedDate,
+    required TResult Function(List<ServiceDates> services)
+        getSelectedScheduleServices,
+  }) {
+    return getSelectedScheduleServices(services);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId)? getCareGiverDetail,
+    TResult? Function(DateTime selectedDate)? getSelectedDate,
+    TResult? Function(List<ServiceDates> services)? getSelectedScheduleServices,
+  }) {
+    return getSelectedScheduleServices?.call(services);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId)? getCareGiverDetail,
+    TResult Function(DateTime selectedDate)? getSelectedDate,
+    TResult Function(List<ServiceDates> services)? getSelectedScheduleServices,
+    required TResult orElse(),
+  }) {
+    if (getSelectedScheduleServices != null) {
+      return getSelectedScheduleServices(services);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverDetail value) getCareGiverDetail,
+    required TResult Function(_GetSelectedDate value) getSelectedDate,
+    required TResult Function(_GetSelectedScheduleServices value)
+        getSelectedScheduleServices,
+  }) {
+    return getSelectedScheduleServices(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult? Function(_GetSelectedDate value)? getSelectedDate,
+    TResult? Function(_GetSelectedScheduleServices value)?
+        getSelectedScheduleServices,
+  }) {
+    return getSelectedScheduleServices?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult Function(_GetSelectedDate value)? getSelectedDate,
+    TResult Function(_GetSelectedScheduleServices value)?
+        getSelectedScheduleServices,
+    required TResult orElse(),
+  }) {
+    if (getSelectedScheduleServices != null) {
+      return getSelectedScheduleServices(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetSelectedScheduleServices implements CareGiverDetailEvent {
+  const factory _GetSelectedScheduleServices(
+          {required final List<ServiceDates> services}) =
+      _$_GetSelectedScheduleServices;
+
+  List<ServiceDates> get services;
+  @JsonKey(ignore: true)
+  _$$_GetSelectedScheduleServicesCopyWith<_$_GetSelectedScheduleServices>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -228,6 +537,9 @@ mixin _$CareGiverDetailState {
   bool get isError => throw _privateConstructorUsedError;
   CareGiverDetailResponse? get response => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+  DateTime get selectedDate => throw _privateConstructorUsedError;
+  List<ServiceDates> get selectedScheduleServices =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CareGiverDetailStateCopyWith<CareGiverDetailState> get copyWith =>
@@ -244,7 +556,9 @@ abstract class $CareGiverDetailStateCopyWith<$Res> {
       {bool isLoading,
       bool isError,
       CareGiverDetailResponse? response,
-      String? error});
+      String? error,
+      DateTime selectedDate,
+      List<ServiceDates> selectedScheduleServices});
 }
 
 /// @nodoc
@@ -265,6 +579,8 @@ class _$CareGiverDetailStateCopyWithImpl<$Res,
     Object? isError = null,
     Object? response = freezed,
     Object? error = freezed,
+    Object? selectedDate = null,
+    Object? selectedScheduleServices = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -283,6 +599,14 @@ class _$CareGiverDetailStateCopyWithImpl<$Res,
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      selectedDate: null == selectedDate
+          ? _value.selectedDate
+          : selectedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      selectedScheduleServices: null == selectedScheduleServices
+          ? _value.selectedScheduleServices
+          : selectedScheduleServices // ignore: cast_nullable_to_non_nullable
+              as List<ServiceDates>,
     ) as $Val);
   }
 }
@@ -299,7 +623,9 @@ abstract class _$$_CareGiversDetailStateCopyWith<$Res>
       {bool isLoading,
       bool isError,
       CareGiverDetailResponse? response,
-      String? error});
+      String? error,
+      DateTime selectedDate,
+      List<ServiceDates> selectedScheduleServices});
 }
 
 /// @nodoc
@@ -317,6 +643,8 @@ class __$$_CareGiversDetailStateCopyWithImpl<$Res>
     Object? isError = null,
     Object? response = freezed,
     Object? error = freezed,
+    Object? selectedDate = null,
+    Object? selectedScheduleServices = null,
   }) {
     return _then(_$_CareGiversDetailState(
       isLoading: null == isLoading
@@ -335,6 +663,14 @@ class __$$_CareGiversDetailStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      selectedDate: null == selectedDate
+          ? _value.selectedDate
+          : selectedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      selectedScheduleServices: null == selectedScheduleServices
+          ? _value._selectedScheduleServices
+          : selectedScheduleServices // ignore: cast_nullable_to_non_nullable
+              as List<ServiceDates>,
     ));
   }
 }
@@ -346,7 +682,10 @@ class _$_CareGiversDetailState implements _CareGiversDetailState {
       {required this.isLoading,
       required this.isError,
       required this.response,
-      required this.error});
+      required this.error,
+      required this.selectedDate,
+      required final List<ServiceDates> selectedScheduleServices})
+      : _selectedScheduleServices = selectedScheduleServices;
 
   @override
   final bool isLoading;
@@ -356,10 +695,18 @@ class _$_CareGiversDetailState implements _CareGiversDetailState {
   final CareGiverDetailResponse? response;
   @override
   final String? error;
+  @override
+  final DateTime selectedDate;
+  final List<ServiceDates> _selectedScheduleServices;
+  @override
+  List<ServiceDates> get selectedScheduleServices {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_selectedScheduleServices);
+  }
 
   @override
   String toString() {
-    return 'CareGiverDetailState(isLoading: $isLoading, isError: $isError, response: $response, error: $error)';
+    return 'CareGiverDetailState(isLoading: $isLoading, isError: $isError, response: $response, error: $error, selectedDate: $selectedDate, selectedScheduleServices: $selectedScheduleServices)';
   }
 
   @override
@@ -372,12 +719,22 @@ class _$_CareGiversDetailState implements _CareGiversDetailState {
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.response, response) ||
                 other.response == response) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.selectedDate, selectedDate) ||
+                other.selectedDate == selectedDate) &&
+            const DeepCollectionEquality().equals(
+                other._selectedScheduleServices, _selectedScheduleServices));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isLoading, isError, response, error);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      isError,
+      response,
+      error,
+      selectedDate,
+      const DeepCollectionEquality().hash(_selectedScheduleServices));
 
   @JsonKey(ignore: true)
   @override
@@ -389,10 +746,13 @@ class _$_CareGiversDetailState implements _CareGiversDetailState {
 
 abstract class _CareGiversDetailState implements CareGiverDetailState {
   const factory _CareGiversDetailState(
-      {required final bool isLoading,
-      required final bool isError,
-      required final CareGiverDetailResponse? response,
-      required final String? error}) = _$_CareGiversDetailState;
+          {required final bool isLoading,
+          required final bool isError,
+          required final CareGiverDetailResponse? response,
+          required final String? error,
+          required final DateTime selectedDate,
+          required final List<ServiceDates> selectedScheduleServices}) =
+      _$_CareGiversDetailState;
 
   @override
   bool get isLoading;
@@ -402,6 +762,10 @@ abstract class _CareGiversDetailState implements CareGiverDetailState {
   CareGiverDetailResponse? get response;
   @override
   String? get error;
+  @override
+  DateTime get selectedDate;
+  @override
+  List<ServiceDates> get selectedScheduleServices;
   @override
   @JsonKey(ignore: true)
   _$$_CareGiversDetailStateCopyWith<_$_CareGiversDetailState> get copyWith =>

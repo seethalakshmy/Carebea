@@ -1,7 +1,4 @@
-
-import 'package:admin_580_tech/core/color.dart';
 import 'package:admin_580_tech/core/enum.dart';
-import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:flutter/material.dart';
 
@@ -27,11 +24,13 @@ class CTextField extends StatelessWidget {
     this.suffixIcon,
     this.validator,
     this.maxLength,
+    this.maxLines,
     this.textColor,
     this.height,
     this.width,
     this.hintText,
     this.hintStyle,
+    this.textAlignVertical,
   })  : assert(controller != null),
         super(key: key);
   final TextEditingController? controller;
@@ -51,49 +50,66 @@ class CTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final String? Function(String?)? validator;
   final int? maxLength;
+  final int? maxLines;
   final Color? textColor;
-  final double?height;
-  final double ?width;
-  final String?hintText;
-  final TextStyle?hintStyle;
+  final double? height;
+  final double? width;
+  final String? hintText;
+  final TextStyle? hintStyle;
+  final TextAlignVertical? textAlignVertical;
 
   @override
   Widget build(BuildContext context) {
     return CustomSizedBox(
       width: width,
+      height: height,
       child: TextFormField(
+        textAlignVertical: textAlignVertical ?? TextAlignVertical.center,
         controller: controller,
         focusNode: focusNode,
         textInputAction: textInputAction,
         obscureText: obscureText!,
         onChanged: onChanged,
         onFieldSubmitted: onSubmitted,
-        maxLines: INT.one.val,
-        minLines:INT.one.val,
+        maxLines: maxLines ?? INT.one.val,
+        minLines: INT.one.val,
         onTap: onTap,
         keyboardType: keyBoardType,
         textCapitalization: textCapitalization,
-        cursorColor: ColorConst.lightFontColor,
+        // cursorColor: AppColor.white.val,
         style: TextStyle(fontSize: 15, color: textColor),
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle:hintStyle,
-          suffixIconConstraints:  BoxConstraints(minWidth: DBL.fifty.val),
+          hintStyle: hintStyle,
+          suffixIconConstraints: BoxConstraints(minWidth: DBL.fifty.val),
           filled: true,
-          fillColor:ColorConst.white,
+          fillColor: AppColor.white.val,
           suffixIcon: suffixIcon,
           isDense: true,
           errorText: errorText,
-          errorStyle:  TS().gPoppins(fontSize: FS.font11.val,),
+          errorStyle:
+              TS().gPoppins(fontSize: FS.font11.val, color: AppColor.red.val),
           enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColor.borderColor.val, width: 1),
+            borderRadius: BorderRadius.circular(DBL.five.val),
+          ),
+          border: OutlineInputBorder(
             borderSide: BorderSide(
-              color: AppColor.borderColor.val,
+              color: AppColor.primaryColor.val,
             ),
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(DBL.five.val),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColor.primaryColor.val),
+            borderRadius: BorderRadius.circular(DBL.five.val),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColor.error.val),
+            borderRadius: BorderRadius.circular(DBL.five.val),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide:  BorderSide(color: AppColor.primaryColor.val),
-            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide(color: AppColor.primaryColor.val),
+            borderRadius: BorderRadius.circular(DBL.five.val),
           ),
         ),
         validator: validator,

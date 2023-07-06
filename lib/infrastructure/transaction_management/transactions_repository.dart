@@ -6,12 +6,12 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 import '../../core/custom_debugger.dart';
-import '../../core/string.dart';
+import '../../core/enum.dart';
 import '../../domain/core/api_error_handler/api_error_handler.dart';
 import '../../domain/transaction_management/model/transactions.dart';
 
 class TransactionsRepository implements ITransactionsRepo {
-  final ApiClient _apiClient = ApiClient(Dio());
+  final ApiClient _apiClient = ApiClient();
   List<Transactions> mTransactions = [
     Transactions(
         transactionId: "00989090909",
@@ -119,20 +119,20 @@ class TransactionsRepository implements ITransactionsRepo {
   Future<Either<ApiErrorHandler, TransactionResponse>> getTransactions(
       {required int page, required int limit}) async {
     try {
-      final response =
-      TransactionResponse(status: true, data: TransactionData(transactions: mTransactions));
+      final response = TransactionResponse(
+          status: true, data: TransactionData(transactions: mTransactions));
 
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
-      if (e.message.contains("SocketException") ||
-          e.message.contains("XMLHttpRequest")) {
+
+      if (e.message.contains("SocketException")) {
         CustomLog.log("reached here..");
-        return const Left(ClientFailure(
-            error: Strings.noInternetConnection, isClientError: true));
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
       } else {
-        return const Left(ServerFailure(
-            error: Strings.somethingWentWrong, isClientError: false));
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
       }
     }
   }

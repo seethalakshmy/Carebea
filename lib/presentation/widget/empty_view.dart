@@ -1,14 +1,15 @@
-import 'package:admin_580_tech/core/color.dart';
 import 'package:admin_580_tech/core/responsive.dart';
-import 'package:admin_580_tech/core/string.dart';
 import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
+import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../core/enum.dart';
+import '../../core/text_styles.dart';
+import 'custom_padding.dart';
 import 'custom_sizedbox.dart';
 
 class EmptyView extends StatelessWidget {
@@ -18,52 +19,69 @@ class EmptyView extends StatelessWidget {
     Key? key,
   }) : super(key: key);
   final String title;
-  final String?subtitle;
+  final String? subtitle;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CustomSizedBox(height: DBL.thirty.val,),
-            SizedBox(
-              height: 300,
-              width: 400,
-              child: SvgPicture.asset('assets/images/error-500.svg'),
-            ),
-            CustomSizedBox(height: DBL.fortyEight.val,),
-            Text(
-              title ,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 21,
-              ),
-            ),
-            subtitle != null?Text(
-              subtitle!,
-              style: TextStyle(
-                color: isDark ? ColorConst.darkFontColor : ColorConst.textColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
-            ):const SizedBox.shrink(),
-            CustomSizedBox(height: DBL.twentyFour.val,),
-            CustomButton(
-              text: Strings.backToDashBoard,
-              borderRadius: 15,
-              padding:
-                  const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
-              onPressed: () {
-                context.router.navigate(const DashboardRoute());
-              },
-              icon: const Icon(Icons.home, size: 15),
-            ),
-          ],
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CustomSizedBox(
+            height: DBL.sixty.val,
+          ),
+          SvgPicture.asset(IMG.notFound.val),
+          CustomSizedBox(
+            height: DBL.ten.val,
+          ),
+          _buildTitle(),
+          subtitle != null ? _buildSubTitle() : const SizedBox.shrink(),
+          CustomSizedBox(
+            height: DBL.fifteen.val,
+          ),
+          _buildButton(context),
+        ],
+      ),
+    );
+  }
+
+  CustomButton _buildButton(BuildContext context) {
+    return CustomButton(
+      color: AppColor.primaryColor.val,
+      text: AppString.backToDashBoard.val,
+      borderRadius: DBL.ten.val,
+      textStyle: TS().gPoppins(
+        fontWeight: FW.w500.val,
+        fontSize: FS.font16.val,
+      ),
+      padding:  EdgeInsets.symmetric(vertical: DBL.twentyFive.val, horizontal: DBL.fifty.val),
+      onPressed: () {
+        context.router.navigate(const DashboardRoute());
+      },
+      icon:  Icon(Icons.home, size: DBL.eighteen.val),
+    );
+  }
+
+  CustomText _buildSubTitle() {
+    return CustomText(
+      subtitle!,
+      style: TextStyle(
+        color: AppColor.matBlack.val,
+        fontWeight: FW.bold.val,
+        fontSize: FS.font14.val,
+      ),
+    );
+  }
+
+  CustomText _buildTitle() {
+    return CustomText(
+      title,
+      style: TS().gPoppins(
+        fontWeight: FW.bold.val,
+        fontSize: FS.font20.val,
       ),
     );
   }

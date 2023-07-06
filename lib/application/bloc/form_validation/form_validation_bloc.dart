@@ -8,14 +8,18 @@ part 'form_validation_bloc.freezed.dart';
 class FormValidationBloc
     extends Bloc<FormValidationEvent, FormValidationState> {
   FormValidationBloc() : super(const _Initial()) {
-    on<FormValidationEvent>((event, emit) {
-      if (event is _DropDown) {
-        emit(FormValidationState.dropDownSuccess(event.value));
-      } else if (event is _CheckBox) {
-        emit(FormValidationState.checkBoxSuccess(event.value));
-      } else if (event is _Submit) {
-        emit(const FormValidationState.formSubmitSuccess());
-      }
-    });
+   on<_DropDown>(_dropDownSuccess);
+   on<_CheckBox>(_checkBoxSuccess);
+   on<_Submit>(_formSubmitSuccess);
   }
+  _dropDownSuccess(_DropDown event,Emitter<FormValidationState> emit){
+    emit(FormValidationState.dropDownSuccess(event.value));
+  }
+  _checkBoxSuccess(_CheckBox event,Emitter<FormValidationState> emit){
+    emit(FormValidationState.checkBoxSuccess(event.value));
+  }
+  _formSubmitSuccess(_Submit event,Emitter<FormValidationState> emit){
+    emit(const FormValidationState.formSubmitSuccess());
+  }
+
 }

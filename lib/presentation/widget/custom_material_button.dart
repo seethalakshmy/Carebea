@@ -105,7 +105,7 @@ class CustomMaterialButton extends StatelessWidget {
                   : CustomSizedBox.shrink(),
               text != null
                   ? Flexible(
-                      child: CustomText3(
+                      child: CustomText(
                         text!,
                         style: TS().gPoppins(
                             fontWeight: FW.w600.val, color: AppColor.white.val),

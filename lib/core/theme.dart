@@ -1,39 +1,32 @@
+import 'package:admin_580_tech/core/enum.dart';
 import 'package:flutter/material.dart';
 
-import 'color.dart';
 
 class ThemeClass {
-  static ThemeData themeData(bool isDarkTheme, BuildContext context) {
-    isDark = isDarkTheme;
+  static ThemeData themeData(BuildContext context) {
     return ThemeData(
       useMaterial3: true,
-      fontFamily: "Nunito",
+      fontFamily: "Roboto",
       applyElevationOverlayColor: false,
-      brightness: isDarkTheme ? Brightness.dark : Brightness.light,
-      colorSchemeSeed: ColorConst.primary,
+      brightness: Brightness.light,
+      colorSchemeSeed: AppColor.primaryColor.val,
       appBarTheme: AppBarTheme(
-        elevation: 0.0,
-        backgroundColor:
-            isDarkTheme ? ColorConst.scaffoldDark : ColorConst.drawerBG,
-      ),
-      scaffoldBackgroundColor:
-          isDarkTheme ? ColorConst.scaffoldDark : ColorConst.drawerBG,
+          elevation: 0.0, backgroundColor: AppColor.backgroundColor.val),
+      scaffoldBackgroundColor: AppColor.backgroundColor.val,
       cardTheme: CardTheme.of(context).copyWith(
         margin: EdgeInsets.zero,
-        color: isDarkTheme ? ColorConst.cardDark : Colors.white,
-        surfaceTintColor: isDarkTheme ? ColorConst.cardDark : Colors.white,
+        color: AppColor.white.val,
+        surfaceTintColor: AppColor.white.val,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4.0),
+          borderRadius: BorderRadius.circular(DBL.four.val),
         ),
-        elevation: 10.0,
-        shadowColor: isDarkTheme
-            ? Colors.transparent
-            : Colors.grey.shade50.withOpacity(0.25),
+        elevation: DBL.ten.val,
+        shadowColor: Colors.grey.shade50.withOpacity(DBL.pointTwoFive.val),
       ),
-      checkboxTheme: const CheckboxThemeData(
+      checkboxTheme: CheckboxThemeData(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
-            Radius.circular(4.0),
+            Radius.circular(DBL.four.val),
           ),
         ),
         materialTapTargetSize: MaterialTapTargetSize.padded,

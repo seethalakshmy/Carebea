@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:admin_580_tech/core/custom_debugger.dart';
-import 'package:admin_580_tech/core/string.dart';
 import 'package:admin_580_tech/domain/core/api_client.dart';
 import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.dart';
 import 'package:admin_580_tech/domain/user_management_detail/i_user_management_detail_repo.dart';
@@ -10,8 +9,10 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 
+import '../../core/enum.dart';
+
 class UserManagementDetailRepository implements IUserDetailRepo {
-  final ApiClient _apiClient = ApiClient(Dio());
+  final ApiClient _apiClient = ApiClient();
 
   @override
   Future<Either<ApiErrorHandler, UserDetailResponse>> getUserDetail(
@@ -24,14 +25,13 @@ class UserManagementDetailRepository implements IUserDetailRepo {
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
-      if (e.message.contains("SocketException") ||
-          e.message.contains("XMLHttpRequest")) {
+      if (e.message.contains("SocketException")) {
         CustomLog.log("reached here..");
-        return const Left(ClientFailure(
-            error: Strings.noInternetConnection, isClientError: true));
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
       } else {
-        return const Left(ServerFailure(
-            error: Strings.somethingWentWrong, isClientError: false));
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
       }
     }
   }

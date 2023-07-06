@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:admin_580_tech/core/custom_debugger.dart';
-import 'package:admin_580_tech/core/string.dart';
+import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/domain/caregiver_detail/i_caregivers_detail_repo.dart';
 import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
 import 'package:admin_580_tech/domain/core/api_client.dart';
@@ -10,9 +10,8 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 
-
 class CareGiverDetailRepository implements ICareGiverDetailRepo {
-  final ApiClient _apiClient = ApiClient(Dio());
+  final ApiClient _apiClient = ApiClient();
 
   @override
   Future<Either<ApiErrorHandler, CareGiverDetailResponse>> getCareGiverDetail(
@@ -27,11 +26,11 @@ class CareGiverDetailRepository implements ICareGiverDetailRepo {
       if (e.message.contains("SocketException") ||
           e.message.contains("XMLHttpRequest")) {
         CustomLog.log("reached here..");
-        return const Left(ClientFailure(
-            error: Strings.noInternetConnection, isClientError: true));
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
       } else {
-        return const Left(ServerFailure(
-            error: Strings.somethingWentWrong, isClientError: false));
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
       }
     }
   }

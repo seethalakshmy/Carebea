@@ -7,12 +7,12 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 import '../../core/custom_debugger.dart';
-import '../../core/string.dart';
+import '../../core/enum.dart';
 import '../../domain/core/api_client.dart';
 import '../../domain/user_management/model/users.dart';
 
 class UsersRepository implements IUsersRepo {
-  final ApiClient _apiClient = ApiClient(Dio());
+  final ApiClient _apiClient = ApiClient();
   List<Users> mUsers = [
     Users(
       userId: "#ID111",
@@ -116,14 +116,13 @@ class UsersRepository implements IUsersRepo {
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
-      if (e.message.contains("SocketException") ||
-          e.message.contains("XMLHttpRequest")) {
+      if (e.message.contains("SocketException")) {
         CustomLog.log("reached here..");
-        return const Left(ClientFailure(
-            error: Strings.noInternetConnection, isClientError: true));
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
       } else {
-        return const Left(ServerFailure(
-            error: Strings.somethingWentWrong, isClientError: false));
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
       }
     }
   }
