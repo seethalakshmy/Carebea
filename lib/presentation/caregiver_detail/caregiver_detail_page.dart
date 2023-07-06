@@ -347,13 +347,14 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
           CustomSizedBox(
             height: isXs2(context) ? DBL.ten.val : DBL.fourteen.val,
           ),
-          Row(children: [
-            CustomSvg(path: IMG.warning.val),
-            CustomSizedBox(
-              width: DBL.five.val,
-            ),
-            response.data!.pendingDocs != null
-                ? Expanded(
+          response.data!.pendingDocs != null &&
+                  response.data!.pendingDocs!.isNotEmpty
+              ? Row(children: [
+                  CustomSvg(path: IMG.warning.val),
+                  CustomSizedBox(
+                    width: DBL.five.val,
+                  ),
+                  Expanded(
                     child: CustomText(
                       AppString.pendingDocuments.val,
                       style: TS().gRoboto(
@@ -363,9 +364,10 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                           color: AppColor.red.val),
                     ),
                   )
-                : CustomSizedBox.shrink(),
-          ]),
-          response.data!.pendingDocs != null
+                ])
+              : CustomSizedBox.shrink(),
+          response.data!.pendingDocs != null &&
+                  response.data!.pendingDocs!.isNotEmpty
               ? CustomSizedBox(
                   height: isXs2(context) ? DBL.five.val : DBL.thirteen.val,
                 )

@@ -33,6 +33,7 @@ class CustomMaterialButton extends StatelessWidget {
   final double? hoverElevation;
   final Color? color;
   final Color? hoverColor;
+  final bool isLoading;
 
   const CustomMaterialButton({
     Key? key,
@@ -58,6 +59,7 @@ class CustomMaterialButton extends StatelessWidget {
     this.hoverElevation,
     this.color,
     this.hoverColor,
+    this.isLoading = false,
   })  : assert((fullWidth && minWidth == null) ||
             (!fullWidth && minWidth != null) ||
             (!fullWidth && minWidth == null)),
@@ -104,18 +106,30 @@ class CustomMaterialButton extends StatelessWidget {
                   ? CustomSizedBox(width: gap)
                   : CustomSizedBox.shrink(),
               text != null
-                  ? Flexible(
-                      child: CustomText(
-                        text!,
-                        style: TS().gPoppins(
-                            fontWeight: FW.w600.val, color: AppColor.white.val),
-                      ),
-                    )
+                  ? isLoading
+                      ? buildProgress()
+                      : Flexible(
+                          child: CustomText(
+                            text!,
+                            style: TS().gPoppins(
+                                fontWeight: FW.w600.val,
+                                color: AppColor.white.val),
+                          ),
+                        )
                   : CustomSizedBox.shrink(),
             ],
           ),
         );
       },
+    );
+  }
+
+  Center buildProgress() {
+    return Center(
+      child: CircularProgressIndicator(
+        color: AppColor.white.val,
+        strokeWidth: 4,
+      ),
     );
   }
 }

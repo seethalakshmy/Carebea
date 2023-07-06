@@ -658,6 +658,7 @@ mixin _$CareGiversState {
       throw _privateConstructorUsedError;
   List<Types> get types => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+  bool get isClientError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CareGiversStateCopyWith<CareGiversState> get copyWith =>
@@ -676,7 +677,8 @@ abstract class $CareGiversStateCopyWith<$Res> {
       CareGiverResponse? response,
       VerifyResponse? activeOrInactiveResponse,
       List<Types> types,
-      String? error});
+      String? error,
+      bool isClientError});
 }
 
 /// @nodoc
@@ -698,6 +700,7 @@ class _$CareGiversStateCopyWithImpl<$Res, $Val extends CareGiversState>
     Object? activeOrInactiveResponse = freezed,
     Object? types = null,
     Object? error = freezed,
+    Object? isClientError = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -724,6 +727,10 @@ class _$CareGiversStateCopyWithImpl<$Res, $Val extends CareGiversState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      isClientError: null == isClientError
+          ? _value.isClientError
+          : isClientError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -742,7 +749,8 @@ abstract class _$$_CareGiversStateCopyWith<$Res>
       CareGiverResponse? response,
       VerifyResponse? activeOrInactiveResponse,
       List<Types> types,
-      String? error});
+      String? error,
+      bool isClientError});
 }
 
 /// @nodoc
@@ -762,6 +770,7 @@ class __$$_CareGiversStateCopyWithImpl<$Res>
     Object? activeOrInactiveResponse = freezed,
     Object? types = null,
     Object? error = freezed,
+    Object? isClientError = null,
   }) {
     return _then(_$_CareGiversState(
       isLoading: null == isLoading
@@ -788,6 +797,10 @@ class __$$_CareGiversStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      isClientError: null == isClientError
+          ? _value.isClientError
+          : isClientError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -801,7 +814,8 @@ class _$_CareGiversState implements _CareGiversState {
       required this.response,
       required this.activeOrInactiveResponse,
       required final List<Types> types,
-      required this.error})
+      required this.error,
+      this.isClientError = false})
       : _types = types;
 
   @override
@@ -821,10 +835,13 @@ class _$_CareGiversState implements _CareGiversState {
 
   @override
   final String? error;
+  @override
+  @JsonKey()
+  final bool isClientError;
 
   @override
   String toString() {
-    return 'CareGiversState(isLoading: $isLoading, isError: $isError, response: $response, activeOrInactiveResponse: $activeOrInactiveResponse, types: $types, error: $error)';
+    return 'CareGiversState(isLoading: $isLoading, isError: $isError, response: $response, activeOrInactiveResponse: $activeOrInactiveResponse, types: $types, error: $error, isClientError: $isClientError)';
   }
 
   @override
@@ -841,7 +858,9 @@ class _$_CareGiversState implements _CareGiversState {
                     other.activeOrInactiveResponse, activeOrInactiveResponse) ||
                 other.activeOrInactiveResponse == activeOrInactiveResponse) &&
             const DeepCollectionEquality().equals(other._types, _types) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.isClientError, isClientError) ||
+                other.isClientError == isClientError));
   }
 
   @override
@@ -852,7 +871,8 @@ class _$_CareGiversState implements _CareGiversState {
       response,
       activeOrInactiveResponse,
       const DeepCollectionEquality().hash(_types),
-      error);
+      error,
+      isClientError);
 
   @JsonKey(ignore: true)
   @override
@@ -868,7 +888,8 @@ abstract class _CareGiversState implements CareGiversState {
       required final CareGiverResponse? response,
       required final VerifyResponse? activeOrInactiveResponse,
       required final List<Types> types,
-      required final String? error}) = _$_CareGiversState;
+      required final String? error,
+      final bool isClientError}) = _$_CareGiversState;
 
   @override
   bool get isLoading;
@@ -882,6 +903,8 @@ abstract class _CareGiversState implements CareGiversState {
   List<Types> get types;
   @override
   String? get error;
+  @override
+  bool get isClientError;
   @override
   @JsonKey(ignore: true)
   _$$_CareGiversStateCopyWith<_$_CareGiversState> get copyWith =>

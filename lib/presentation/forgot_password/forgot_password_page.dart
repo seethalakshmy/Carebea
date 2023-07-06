@@ -166,7 +166,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   CTextField _emailTextFormView() {
     return CTextField(
       width: DBL.fourFifty.val,
-      height: DBL.fiftyFive.val,
       onChanged: (String value) {},
       textCapitalization: TextCapitalization.none,
       textInputAction: TextInputAction.done,

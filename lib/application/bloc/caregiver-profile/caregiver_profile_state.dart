@@ -9,6 +9,7 @@ class CareGiverProfileState with _$CareGiverProfileState {
     required VerifyResponse? trainingVerifyResponse,
     required VerifyResponse? interViewVerifyResponse,
     required String? error,
+    @Default(false) bool isClientError,
   }) = _CareGiverProfileState;
 
   factory CareGiverProfileState.initial() {
