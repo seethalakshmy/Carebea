@@ -43,19 +43,23 @@ class CaregiverDetailBloc
 
   void _getCareGiverServiceList(_GetCareGiverServiceList event,
       Emitter<CareGiverDetailState> emit) async {
+    emit(state.copyWith(isLoadingServices: true));
     final Either<ApiErrorHandler, CareGiverServiceListResponse> result =
         await careGiverDetailRepository.getCareGiverServiceList(
             userID: event.userId, page: event.page, limit: event.page);
     var homeState = result.fold((l) {
-      return state.copyWith(error: l.error, isLoading: false);
+      return state.copyWith(
+          error: l.error, isLoading: false, isLoadingServices: false);
     }, (r) {
-      return state.copyWith(serviceListResponse: r, isLoading: false);
+      return state.copyWith(
+          serviceListResponse: r, isLoading: false, isLoadingServices: false);
     });
     emit(homeState);
   }
 
   void _getCareGiverEarningList(_GetCareGiverEarningList event,
       Emitter<CareGiverDetailState> emit) async {
+    emit(state.copyWith(isLoadingEarnings: true));
     final Either<ApiErrorHandler, CareGiverEarningsListResponse> result =
         await careGiverDetailRepository.getCareGiverEarningsList(
             userID: event.userId, page: event.page, limit: event.page);
@@ -69,6 +73,7 @@ class CaregiverDetailBloc
 
   void _getCareGiverServiceRequestList(_GetCareGiverServiceRequestList event,
       Emitter<CareGiverDetailState> emit) async {
+    emit(state.copyWith(isLoadingServiceRequest: true));
     final Either<ApiErrorHandler, CareGiverServiceRequestListResponse> result =
         await careGiverDetailRepository.getCareGiverServiceRequestedList(
             userID: event.userId, page: event.page, limit: event.page);

@@ -4,6 +4,9 @@ part of 'caregiver_detail_bloc.dart';
 class CareGiverDetailState with _$CareGiverDetailState {
   const factory CareGiverDetailState({
     required bool isLoading,
+    @Default(false) bool isLoadingServices,
+    @Default(false) isLoadingEarnings,
+    @Default(false) isLoadingServiceRequest,
     required bool isError,
     required CareGiverDetailResponse? response,
     required CareGiverServiceListResponse? serviceListResponse,

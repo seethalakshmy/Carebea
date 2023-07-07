@@ -52,6 +52,13 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
   int _end = 10;
 
   @override
+  void initState() {
+    super.initState();
+    widget.bloc.add(CareGiverDetailEvent.getCareGiverServiceList(
+        userId: "64a3037835cc7cda8a36cb25", page: _page, limit: _limit));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CustomCard(
       elevation: DBL.seven.val,
@@ -66,9 +73,10 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
               services.addAll(value.data?.services ?? []);
               _updateData();
             }
+            print('serLeng:: ${services.length}');
           }
           return CustomContainer(
-              child: state.isLoading
+              child: state.isLoadingServices
                   ? const TableLoaderView()
                   : state.isError
                       ? ErrorView(

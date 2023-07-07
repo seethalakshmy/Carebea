@@ -32,9 +32,9 @@ class Data {
 
   Data.fromJson(Map<String, dynamic> json) {
     totalCount = json['totalCount'];
-    if (json['services'] != null) {
+    if (json['serviceResult'] != null) {
       services = <Services>[];
-      json['services'].forEach((v) {
+      json['serviceResult'].forEach((v) {
         services!.add(Services.fromJson(v));
       });
     }

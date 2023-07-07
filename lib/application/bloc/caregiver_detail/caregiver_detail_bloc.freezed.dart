@@ -1262,6 +1262,9 @@ abstract class _GetSelectedScheduleServices implements CareGiverDetailEvent {
 /// @nodoc
 mixin _$CareGiverDetailState {
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isLoadingServices => throw _privateConstructorUsedError;
+  dynamic get isLoadingEarnings => throw _privateConstructorUsedError;
+  dynamic get isLoadingServiceRequest => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
   CareGiverDetailResponse? get response => throw _privateConstructorUsedError;
   CareGiverServiceListResponse? get serviceListResponse =>
@@ -1288,6 +1291,9 @@ abstract class $CareGiverDetailStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
+      bool isLoadingServices,
+      dynamic isLoadingEarnings,
+      dynamic isLoadingServiceRequest,
       bool isError,
       CareGiverDetailResponse? response,
       CareGiverServiceListResponse? serviceListResponse,
@@ -1313,6 +1319,9 @@ class _$CareGiverDetailStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isLoadingServices = null,
+    Object? isLoadingEarnings = null,
+    Object? isLoadingServiceRequest = null,
     Object? isError = null,
     Object? response = freezed,
     Object? serviceListResponse = freezed,
@@ -1327,6 +1336,18 @@ class _$CareGiverDetailStateCopyWithImpl<$Res,
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoadingServices: null == isLoadingServices
+          ? _value.isLoadingServices
+          : isLoadingServices // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingEarnings: null == isLoadingEarnings
+          ? _value.isLoadingEarnings
+          : isLoadingEarnings // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      isLoadingServiceRequest: null == isLoadingServiceRequest
+          ? _value.isLoadingServiceRequest
+          : isLoadingServiceRequest // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       isError: null == isError
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
@@ -1373,6 +1394,9 @@ abstract class _$$_CareGiversDetailStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
+      bool isLoadingServices,
+      dynamic isLoadingEarnings,
+      dynamic isLoadingServiceRequest,
       bool isError,
       CareGiverDetailResponse? response,
       CareGiverServiceListResponse? serviceListResponse,
@@ -1395,6 +1419,9 @@ class __$$_CareGiversDetailStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isLoadingServices = null,
+    Object? isLoadingEarnings = null,
+    Object? isLoadingServiceRequest = null,
     Object? isError = null,
     Object? response = freezed,
     Object? serviceListResponse = freezed,
@@ -1409,6 +1436,16 @@ class __$$_CareGiversDetailStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoadingServices: null == isLoadingServices
+          ? _value.isLoadingServices
+          : isLoadingServices // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingEarnings: null == isLoadingEarnings
+          ? _value.isLoadingEarnings
+          : isLoadingEarnings,
+      isLoadingServiceRequest: null == isLoadingServiceRequest
+          ? _value.isLoadingServiceRequest
+          : isLoadingServiceRequest,
       isError: null == isError
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
@@ -1450,6 +1487,9 @@ class __$$_CareGiversDetailStateCopyWithImpl<$Res>
 class _$_CareGiversDetailState implements _CareGiversDetailState {
   const _$_CareGiversDetailState(
       {required this.isLoading,
+      this.isLoadingServices = false,
+      this.isLoadingEarnings = false,
+      this.isLoadingServiceRequest = false,
       required this.isError,
       required this.response,
       required this.serviceListResponse,
@@ -1462,6 +1502,15 @@ class _$_CareGiversDetailState implements _CareGiversDetailState {
 
   @override
   final bool isLoading;
+  @override
+  @JsonKey()
+  final bool isLoadingServices;
+  @override
+  @JsonKey()
+  final dynamic isLoadingEarnings;
+  @override
+  @JsonKey()
+  final dynamic isLoadingServiceRequest;
   @override
   final bool isError;
   @override
@@ -1485,7 +1534,7 @@ class _$_CareGiversDetailState implements _CareGiversDetailState {
 
   @override
   String toString() {
-    return 'CareGiverDetailState(isLoading: $isLoading, isError: $isError, response: $response, serviceListResponse: $serviceListResponse, earningsListResponse: $earningsListResponse, serviceRequestListResponse: $serviceRequestListResponse, error: $error, selectedDate: $selectedDate, selectedScheduleServices: $selectedScheduleServices)';
+    return 'CareGiverDetailState(isLoading: $isLoading, isLoadingServices: $isLoadingServices, isLoadingEarnings: $isLoadingEarnings, isLoadingServiceRequest: $isLoadingServiceRequest, isError: $isError, response: $response, serviceListResponse: $serviceListResponse, earningsListResponse: $earningsListResponse, serviceRequestListResponse: $serviceRequestListResponse, error: $error, selectedDate: $selectedDate, selectedScheduleServices: $selectedScheduleServices)';
   }
 
   @override
@@ -1495,6 +1544,12 @@ class _$_CareGiversDetailState implements _CareGiversDetailState {
             other is _$_CareGiversDetailState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isLoadingServices, isLoadingServices) ||
+                other.isLoadingServices == isLoadingServices) &&
+            const DeepCollectionEquality()
+                .equals(other.isLoadingEarnings, isLoadingEarnings) &&
+            const DeepCollectionEquality().equals(
+                other.isLoadingServiceRequest, isLoadingServiceRequest) &&
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.response, response) ||
                 other.response == response) &&
@@ -1517,6 +1572,9 @@ class _$_CareGiversDetailState implements _CareGiversDetailState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
+      isLoadingServices,
+      const DeepCollectionEquality().hash(isLoadingEarnings),
+      const DeepCollectionEquality().hash(isLoadingServiceRequest),
       isError,
       response,
       serviceListResponse,
@@ -1537,6 +1595,9 @@ class _$_CareGiversDetailState implements _CareGiversDetailState {
 abstract class _CareGiversDetailState implements CareGiverDetailState {
   const factory _CareGiversDetailState(
           {required final bool isLoading,
+          final bool isLoadingServices,
+          final dynamic isLoadingEarnings,
+          final dynamic isLoadingServiceRequest,
           required final bool isError,
           required final CareGiverDetailResponse? response,
           required final CareGiverServiceListResponse? serviceListResponse,
@@ -1550,6 +1611,12 @@ abstract class _CareGiversDetailState implements CareGiverDetailState {
 
   @override
   bool get isLoading;
+  @override
+  bool get isLoadingServices;
+  @override
+  dynamic get isLoadingEarnings;
+  @override
+  dynamic get isLoadingServiceRequest;
   @override
   bool get isError;
   @override
