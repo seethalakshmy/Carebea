@@ -38,7 +38,6 @@ class Data {
   List<String>? pendingDocs;
   Schedule? schedule;
   AccountDetails? accountDetails;
-  List<Services>? services;
   List<ServiceRequested>? serviceRequested;
   List<Earnings>? earnings;
 
@@ -56,7 +55,6 @@ class Data {
       this.pendingDocs,
       this.schedule,
       this.accountDetails,
-      this.services,
       this.serviceRequested,
       this.earnings});
 
@@ -80,12 +78,6 @@ class Data {
     accountDetails = json['account_details'] != null
         ? AccountDetails.fromJson(json['account_details'])
         : null;
-    if (json['services'] != null) {
-      services = <Services>[];
-      json['services'].forEach((v) {
-        services!.add(Services.fromJson(v));
-      });
-    }
     if (json['service_requested'] != null) {
       serviceRequested = <ServiceRequested>[];
       json['service_requested'].forEach((v) {
@@ -122,9 +114,6 @@ class Data {
     }
     if (accountDetails != null) {
       data['account_details'] = accountDetails!.toJson();
-    }
-    if (services != null) {
-      data['services'] = services!.map((v) => v.toJson()).toList();
     }
     if (serviceRequested != null) {
       data['service_requested'] =
@@ -369,53 +358,6 @@ class AccountDetails {
     data['accNumber'] = accNumber;
     data['routingNumber'] = routingNumber;
     data['accName'] = accName;
-    return data;
-  }
-}
-
-class Services {
-  String? id;
-  String? userId;
-  String? startDateTime;
-  String? endDateTime;
-  String? totalServiceFee;
-  int? status;
-  String? service;
-  Name? client;
-
-  Services(
-      {this.id,
-      this.userId,
-      this.startDateTime,
-      this.endDateTime,
-      this.totalServiceFee,
-      this.status,
-      this.service,
-      this.client});
-
-  Services.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    userId = json['user_id'];
-    startDateTime = json['start_date_time'];
-    endDateTime = json['end_date_time'];
-    totalServiceFee = json['total_service_fee'];
-    status = json['status'];
-    service = json['service'];
-    client = json['client'] != null ? Name.fromJson(json['client']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['user_id'] = userId;
-    data['start_date_time'] = startDateTime;
-    data['end_date_time'] = endDateTime;
-    data['total_service_fee'] = totalServiceFee;
-    data['status'] = status;
-    data['service'] = service;
-    if (client != null) {
-      data['client'] = client!.toJson();
-    }
     return data;
   }
 }

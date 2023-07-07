@@ -39,14 +39,14 @@ class SharedPreffUtil {
   }
 
   set setUserId(String value) {
-    _prefs!.setString(userId, value);
+    _prefs?.setString(userId, value);
   }
 
   get getUserId {
-    if (_prefs == null || _prefs!.getString(userId) == null) {
-      return "";
-    }
-    return _prefs!.getString(userId) ?? "";
+    // if (_prefs == null || _prefs!.getString(userId) == null) {
+    //   return "";
+    // }
+    return _prefs?.getString(userId) ?? "";
   }
 
   set setTokenType(String value) {

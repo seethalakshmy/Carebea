@@ -112,8 +112,9 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                   state: state,
                 ),
                 CareGiverServiceView(
-                    state: state,
-                    services: state.response?.data?.services ?? []),
+                  bloc: _caregiverDetailBloc,
+                  userId: userId,
+                ),
                 CareGiverEarningView(
                     state: state,
                     earnings: state.response?.data?.earnings ?? []),

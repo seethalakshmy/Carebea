@@ -1,6 +1,4 @@
 import 'package:admin_580_tech/application/bloc/caregiver_detail/caregiver_detail_bloc.dart';
-import 'package:admin_580_tech/core/string_extension.dart';
-import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/profile_info.dart';
 import 'package:admin_580_tech/presentation/widget/service_detail_canceled_view.dart';
@@ -14,8 +12,11 @@ import 'package:admin_580_tech/presentation/widget/table_row_image_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_row_view.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/enum.dart';
+import '../../../core/string_extension.dart';
+import '../../../domain/caregiver_detail/model/caregiver_service_list_response.dart';
 import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_card.dart';
 import '../../widget/custom_container.dart';
@@ -25,32 +26,96 @@ import '../../widget/custom_sizedbox.dart';
 import '../../widget/custom_text.dart';
 import '../../widget/empty_view.dart';
 import '../../widget/error_view.dart';
+import '../../widget/pagination_view.dart';
 import '../../widget/service_detail_transaction_view.dart';
 import '../../widget/service_details_service_list_view.dart';
 import '../../widget/table_actions_view.dart';
 import '../../widget/table_status_box.dart';
 
-class CareGiverServiceView extends StatelessWidget {
+class CareGiverServiceView extends StatefulWidget {
   const CareGiverServiceView(
-      {required this.state, required this.services, Key? key})
+      {required this.bloc, Key? key, required this.userId})
       : super(key: key);
-  final CareGiverDetailState state;
-  final List<Services> services;
+  final CaregiverDetailBloc bloc;
+  final String userId;
+
+  @override
+  State<CareGiverServiceView> createState() => _CareGiverServiceViewState();
+}
+
+class _CareGiverServiceViewState extends State<CareGiverServiceView> {
+  int _totalItems = 1;
+  final int _limit = 10;
+  int _page = 1;
+  List<Services> services = [];
+  int _start = 0;
+  int _end = 10;
 
   @override
   Widget build(BuildContext context) {
     return CustomCard(
       elevation: DBL.seven.val,
-      child: CustomContainer(
-          child: state.isLoading
-              ? const TableLoaderView()
-              : state.isError
-                  ? ErrorView(isClientError: false, errorMessage: state.error)
-                  : _serviceView(context, services)),
+      child: BlocBuilder<CaregiverDetailBloc, CareGiverDetailState>(
+        builder: (context, state) {
+          CareGiverServiceListResponse? value = state.serviceListResponse;
+          if (value?.status ?? false) {
+            services.clear();
+            if (value?.data?.services != null &&
+                value!.data!.services!.isNotEmpty) {
+              _totalItems = value.data?.totalCount ?? 1;
+              services.addAll(value.data?.services ?? []);
+              _updateData();
+            }
+          }
+          return CustomContainer(
+              child: state.isLoading
+                  ? const TableLoaderView()
+                  : state.isError
+                      ? ErrorView(
+                          isClientError: false, errorMessage: state.error)
+                      : _serviceView(
+                          context,
+                        ));
+        },
+      ),
     );
   }
 
-  _serviceView(BuildContext context, List<Services> services) {
+  _paginationView() {
+    final int totalPages = (_totalItems / _limit).ceil();
+    return PaginationView(
+        page: _page,
+        start: _start,
+        end: _end,
+        totalItems: _totalItems,
+        totalPages: totalPages,
+        onNextPressed: () {
+          if (_page < totalPages) {
+            _page = _page + 1;
+            _getCareGiverEvent();
+          }
+        },
+        onItemPressed: (i) {
+          _page = i;
+          _getCareGiverEvent();
+        },
+        onPreviousPressed: () {
+          if (_page > 1) {
+            _page = _page - 1;
+            _getCareGiverEvent();
+          }
+        });
+  }
+
+  _getCareGiverEvent() {
+    widget.bloc.add(CareGiverDetailEvent.getCareGiverServiceList(
+      userId: widget.userId,
+      page: _page,
+      limit: _limit,
+    ));
+  }
+
+  _serviceView(BuildContext context) {
     return services.isNotEmpty
         ? CustomPadding.only(
             left: DBL.twenty.val,
@@ -243,6 +308,16 @@ class CareGiverServiceView extends StatelessWidget {
         );
       },
     );
+  }
+
+  void _updateData() {
+    if (_page == 1) {
+      _start = 0;
+      _end = services.length < _limit ? services.length : _limit;
+    } else {
+      _start = (_page * _limit) - 10;
+      _end = _start + services.length;
+    }
   }
 
   Column _rightView(int status) {

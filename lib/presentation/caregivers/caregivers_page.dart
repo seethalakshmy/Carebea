@@ -64,10 +64,12 @@ class _CareGiversPageState extends State<CareGiversPage> {
   int _tabType = 1;
   int? _filterId;
   late CareGiversBloc _careGiversBloc;
+  SharedPreffUtil sharedPrefUtil = SharedPreffUtil();
 
   @override
   void initState() {
-    _adminUserId = SharedPreffUtil().getUserId;
+    _adminUserId = sharedPrefUtil.getUserId;
+    print('userId :: $_adminUserId');
     // int  =autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
     super.initState();
     _careGiversBloc = CareGiversBloc(CareGiversRepository());

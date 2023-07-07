@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
+import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_earning_list_response.dart';
+import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_service_list_response.dart';
+import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_service_request_list_response.dart';
 import 'package:admin_580_tech/domain/caregiver_profile/model/caregiver_profile_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_verification_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
@@ -191,4 +194,22 @@ abstract class ApiClient {
     @Field('email') String email,
     @Field('password') String password,
   );
+  @POST("/admin/admin-cg-get-services")
+  Future<CareGiverServiceListResponse> getCareGiverServiceList(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit);
+  @POST("/admin/admin-cg-get-earnings")
+  Future<CareGiverEarningsListResponse> getCareGiverEarningList(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit);
+  @POST("/admin/admin-cg-get-service-requests")
+  Future<CareGiverServiceRequestListResponse> getCareGiverRequestList(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit);
 }

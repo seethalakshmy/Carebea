@@ -42,6 +42,11 @@ class _MenuBarState extends State<SideMenuPage> {
   final GlobalKey<ScaffoldState> _scaffoldDrawerKey =
       GlobalKey<ScaffoldState>();
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   final ScrollController _scrollController = ScrollController();
 
   ValueNotifier<bool> isOpen = ValueNotifier(true);

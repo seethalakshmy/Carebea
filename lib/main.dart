@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
     );
     Environment().initConfig(environment);
     await HiveUtils.init();
-    SharedPreffUtil().init();
+    await SharedPreffUtil().init();
   }
 
   @override

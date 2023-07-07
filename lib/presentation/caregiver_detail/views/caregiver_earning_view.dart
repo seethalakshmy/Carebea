@@ -64,7 +64,10 @@ class CareGiverEarningView extends StatelessWidget {
               ),
             ),
           )
-        : const EmptyView(title: "No Services found!");
+        : const EmptyView(
+            title: "No Services found!",
+            isUnderTab: true,
+          );
   }
 
   _earnTable(BuildContext context) {
