@@ -8,6 +8,7 @@ import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/core/text_utils.dart';
 import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart';
+import 'package:admin_580_tech/presentation/caregiver_verification/caregiver_verification_page.dart';
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
@@ -57,18 +58,6 @@ class _MenuBarState extends State<SideMenuPage> {
     AppString.profile.val,
   ];
 
-  final List<PageRouteInfo<dynamic>> _routes = const [
-    DashboardRoute(),
-    CareGiversRoute(),
-    CareGiverDetailRoute(),
-    UserManagementRoute(),
-    UserManagementDetailRoute(),
-    TransactionManagementRoute(),
-    CareGiverProfileRoute(),
-    CaregiverCreationRoute(),
-    OnboardingRoute()
-  ];
-
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter(
@@ -112,7 +101,9 @@ class _MenuBarState extends State<SideMenuPage> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            getRouteWidget(tabsRouter.activeIndex),
+                            getRouteWidget(
+                              tabsRouter.activeIndex,
+                            ),
                             CustomSizedBox(
                               height: DBL.twenty.val,
                             ),
@@ -399,6 +390,7 @@ class _MenuBarState extends State<SideMenuPage> {
                 HiveUtils.set(AppString.selectedMenuIndex.val,
                     getRouteIndex(items.keys.elementAt(index)));
                 _scaffoldDrawerKey.currentState?.closeDrawer();
+                print('tapped here....');
               },
             );
           },
@@ -424,13 +416,27 @@ class _MenuBarState extends State<SideMenuPage> {
     CustomLog.log('path is $path');
     if (path == "/user-management-detail") {
       path = "user-management";
-    } else if (path == "/care-ambassador-detail" ||
-        path == "/care-ambassador-profile") {
-    } else if (path == "/care-ambassador-detail") {
+    } else if (path == AppString.careAmbassadorVerificationPath.val ||
+        path == AppString.careAmbassadorDetailPath.val ||
+        path == AppString.careAmbassadorProfilePath.val ||
+        path == AppString.careAmbassadorCreationPath.val) {
       path = "care-ambassador";
     }
     return items.keys.elementAt(index) == upperCase(path) ? true : false;
   }
+
+  final List<PageRouteInfo<dynamic>> _routes = [
+    DashboardRoute(),
+    CareGiversRoute(),
+    CareGiverDetailRoute(),
+    UserManagementRoute(),
+    UserManagementDetailRoute(),
+    TransactionManagementRoute(),
+    CareGiverProfileRoute(),
+    CaregiverCreationRoute(),
+    OnboardingRoute(),
+    CaregiverVerificationRoute(),
+  ];
 
   int getRouteIndex(String route) {
     CustomLog.log('route name == $route');
@@ -450,36 +456,9 @@ class _MenuBarState extends State<SideMenuPage> {
       return 7;
     } else if (route == AppString.onBoarding.val) {
       return 8;
-    }
-
-    // else if (route == Strings.dataTable) {
-    //   return 2;
-    // } else if (route == Strings.invoice) {
-    //   return 3;
-    // } else if (route == Strings.carousel) {
-    //   return 4;
-    // } else if (route == Strings.tabs) {
-    //   return 5;
-    // }   else if (route == Strings.formValidation) {
-    //   return 6;
-    // } else if (route == Strings.formFileUpload) {
-    //   return 7;
-    // } else if (route == Strings.map) {
-    //   return 8;
-    // } else if (route == Strings.userProfile) {
-    //   return 9;
-    // } else if (route == Strings.dragDrop) {
-    //   return 10;
-    // } else if (route == Strings.datePicker) {
-    //   return 11;
-    // }  else if (route == '${Strings.payment}/success') {
-    //   return 12;
-    // } else if (route == Strings.dropDown) {
-    //   return 13;
-    // } else if (route == Strings.caregivers) {
-    //   return 14;
-    // }
-    else {
+    } else if (route == AppString.careAmbassadorVerification.val) {
+      return 9;
+    } else {
       return 0;
     }
   }
@@ -502,31 +481,9 @@ class _MenuBarState extends State<SideMenuPage> {
       return const CaregiverCreationPage();
     } else if (index == 8) {
       return const OnboardingPage();
-    }
-    // else if (index == 3) {
-    //   return  InvoicePage();
-    // } else if (index == 4) {
-    //   return CarouselPage();
-    // } else if (index == 5) {
-    //   return UserFormPage();
-    // } else if (index == 6) {
-    //   return DropFilePage();
-    // } else if (index == 7) {
-    //   return GoogleMapsPage();
-    // } else if (index == 8) {
-    //   return ProfilePage();
-    // } else if (index == 9) {
-    //   return UserDragDropPage();
-    // } else if (index == 10) {
-    //   return DatePickerView();
-    // } else if (index == 11) {
-    //   return PaymentSuccessPage();
-    // } else if (index == 12) {
-    //   return DropDownView();
-    // } else if (index == 14) {
-    //   return DropDownView();
-    // }
-    else {
+    } else if (index == 9) {
+      return const CaregiverVerificationPage();
+    } else {
       return const DashboardPage();
     }
   }

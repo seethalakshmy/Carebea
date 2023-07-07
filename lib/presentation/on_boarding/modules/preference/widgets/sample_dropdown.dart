@@ -8,7 +8,7 @@ import '../../../../widget/custom_button.dart';
 import '../../../../widget/custom_sizedbox.dart';
 
 class SampleDropdown extends StatefulWidget {
-  SampleDropdown({super.key, required this.isFromLangauge});
+  const SampleDropdown({super.key, required this.isFromLangauge});
   final bool isFromLangauge;
 
   @override
@@ -137,7 +137,7 @@ class _SampleDropdownState extends State<SampleDropdown> {
                           bool isSelected = selectedItems.contains(item);
 
                           return ListTile(
-                            titleAlignment: ListTileTitleAlignment.center,
+                            // titleAlignment: ListTileTitleAlignment.center,
                             leading: Checkbox(
                               value: selectedItems.contains(item),
                               onChanged: (value) {

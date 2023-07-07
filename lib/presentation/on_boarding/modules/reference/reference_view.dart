@@ -10,6 +10,7 @@ import '../../../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
+import '../../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
 import '../../../widget/custom_form.dart';
 import '../../../widget/custom_sizedbox.dart';
@@ -66,7 +67,8 @@ class _ReferenceViewState extends State<ReferenceView> {
     return MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => FormValidationBloc()),
-          BlocProvider(create: (context) => OnboardingBloc()),
+          BlocProvider(
+              create: (context) => OnboardingBloc(OnBoardingRepository())),
         ],
         child: BlocBuilder<OnboardingBloc, OnboardingState>(
           bloc: widget.onboardingBloc,
@@ -238,8 +240,7 @@ class _ReferenceViewState extends State<ReferenceView> {
                   ? AppString.emptyRelationship.val
                   : ""
               : "",
-          stateName: "",
-          items: ["Relation 1", "Relation 2", "Relation 3"],
+          items: [],
           onChange: (value) {
             selectedRelation = value;
           },
@@ -261,8 +262,7 @@ class _ReferenceViewState extends State<ReferenceView> {
                   ? AppString.emptyAddress.val
                   : ""
               : "",
-          stateName: "",
-          items: ["Address 1", "Address 2", "Address 3"],
+          items: [],
           onChange: (value) {
             selectedAddress = value;
           },
@@ -284,8 +284,7 @@ class _ReferenceViewState extends State<ReferenceView> {
                   ? AppString.emptyState.val
                   : ""
               : "",
-          stateName: "",
-          items: ["Kerala", "Karnataka", "Tamil Nadu"],
+          items: [],
           onChange: (value) {
             selectedState = value;
           },
@@ -307,8 +306,7 @@ class _ReferenceViewState extends State<ReferenceView> {
                   ? AppString.emptyCity.val
                   : ""
               : "",
-          stateName: "",
-          items: ["Kannur", "Wayanad", "Ernakulam"],
+          items: [],
           onChange: (value) {
             selectedCity = value;
           },

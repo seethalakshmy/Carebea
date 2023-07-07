@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/application/bloc/caregiver-profile/caregiver_profile_bloc.dart';
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
@@ -6,50 +7,27 @@ import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:admin_580_tech/presentation/widget/row_combo.dart';
 import 'package:flutter/material.dart';
 
+import '../../../domain/caregiver_profile/model/caregiver_profile_response.dart';
 import '../../widget/custom_container.dart';
 
 /// todo need to change to stateless when apply bloc api
 
 class CareGiverReferenceView extends StatefulWidget {
-  const CareGiverReferenceView({Key? key}) : super(key: key);
-
+  const CareGiverReferenceView({Key? key, required this.state})
+      : super(key: key);
+  final CareGiverProfileState state;
   @override
   State<CareGiverReferenceView> createState() => _CareGiverReferenceViewState();
 }
 
 class _CareGiverReferenceViewState extends State<CareGiverReferenceView> {
-  final List<Reference> _mReference = [
-    Reference(
-        isExpanded: false,
-        name: "Alex Thomas",
-        relationShip: "Colleague",
-        address: "Apartment #47",
-        city: "321 Grove Street",
-        street: "Trenton",
-        state: "New Jersey",
-        zip: "08601",
-        phoneNumber: "18798514789"),
-    Reference(
-        isExpanded: false,
-        name: "Alex Thomas",
-        relationShip: "Colleague",
-        address: "Apartment #47",
-        city: "321 Grove Street",
-        street: "Trenton",
-        state: "New Jersey",
-        zip: "08601",
-        phoneNumber: "18798514789"),
-    Reference(
-        isExpanded: false,
-        name: "Alex Thomas",
-        relationShip: "Colleague",
-        address: "Apartment #47",
-        city: "321 Grove Street",
-        street: "Trenton",
-        state: "New Jersey",
-        zip: "08601",
-        phoneNumber: "18798514789")
-  ];
+  List<Reference>? _mReference = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _mReference = widget.state.response?.data?.reference ?? [];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,11 +47,11 @@ class _CareGiverReferenceViewState extends State<CareGiverReferenceView> {
           dividerColor: AppColor.dividerColor2.val,
           expansionCallback: (int index, bool isExpanded) {
             setState(() {
-              _mReference[index].isExpanded = !isExpanded;
+              _mReference![index].isExpanded = !isExpanded;
             });
           },
-          children: _mReference.map((e) {
-            final int index = _mReference.indexOf(e);
+          children: _mReference!.map((e) {
+            final int index = _mReference!.indexOf(e);
             return ExpansionPanel(
                 canTapOnHeader: true,
                 backgroundColor: AppColor.white.val,
@@ -123,7 +101,7 @@ class _CareGiverReferenceViewState extends State<CareGiverReferenceView> {
         ),
         RowColonCombo.twoHundred(
             label: AppString.relationship.val,
-            value: e.relationShip ?? "",
+            value: e.relationship ?? "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.eight.val,
@@ -166,7 +144,7 @@ class _CareGiverReferenceViewState extends State<CareGiverReferenceView> {
         ),
         RowColonCombo.twoHundred(
             label: AppString.phoneNumber.val,
-            value: e.phoneNumber ?? "",
+            value: e.phone ?? "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.eight.val,
@@ -176,28 +154,4 @@ class _CareGiverReferenceViewState extends State<CareGiverReferenceView> {
   }
 
   bool isLg(BuildContext context) => MediaQuery.of(context).size.width <= 1236;
-}
-
-/// todo need to change later
-class Reference {
-  String? name;
-  String? relationShip;
-  String? address;
-  String? city;
-  String? street;
-  String? state;
-  String? zip;
-  String? phoneNumber;
-  bool isExpanded;
-
-  Reference(
-      {required this.name,
-      required this.relationShip,
-      required this.address,
-      required this.city,
-      required this.street,
-      required this.state,
-      required this.zip,
-      required this.phoneNumber,
-      required this.isExpanded});
 }

@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/infrastructure/on_boarding/on_boarding_repository.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/address_selection_widget.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/profile_picture_widget.dart';
 import 'package:admin_580_tech/presentation/on_boarding/widgets/upload_document_widget.dart';
@@ -11,18 +12,19 @@ import '../../../../application/bloc/onboarding/onboarding_bloc.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
+import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../../widget/common_date_picker_widget.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
 import '../../../widget/custom_container.dart';
 import '../../../widget/custom_sizedbox.dart';
 import '../../../widget/custom_text.dart';
 import '../../../widget/custom_text_field.dart';
+import '../../../widget/dropdown/city_drop_down.dart';
 import '../../../widget/dropdown/state_drop_down.dart';
 import '../../widgets/common_padding_widget.dart';
 import '../../widgets/file_preview_widget.dart';
 import '../../widgets/gender_drop_down.dart';
 import '../../widgets/image_preview_widget.dart';
-import 'models/gender_list_response.dart';
 import 'widgets/document_details_view.dart';
 
 class PersonalDetailsView extends StatefulWidget {
@@ -42,13 +44,17 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   TextEditingController zipController = TextEditingController();
   TextEditingController socialSecurityNumberController =
       TextEditingController();
-  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController dobController = TextEditingController();
+  final TextEditingController documentNumberController =
+      TextEditingController();
+  final TextEditingController expiryDateController = TextEditingController();
 
   final FocusNode _dateFocusNode = FocusNode();
   String selectedDate = "";
   String selectedGender = "";
   String selectedState = "";
   String selectedCity = "";
+  String selectedDocument = "";
   bool nextClicked = false;
   List<PlatformFile> bytesList = [];
   bool listUpdated = false;
@@ -59,6 +65,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
 
   @override
   Widget build(BuildContext context) {
+    widget.onboardingBloc.add(const OnboardingEvent.commonData());
     final isLargeWeb = MediaQuery.of(context).size.width > 1350 &&
         MediaQuery.of(context).size.width < 1800;
     final isWeb = MediaQuery.of(context).size.width >= 1100 &&
@@ -66,7 +73,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => FormValidationBloc()),
-        BlocProvider(create: (context) => OnboardingBloc())
+        BlocProvider(
+            create: (context) => OnboardingBloc(OnBoardingRepository()))
       ],
       child: CommonPaddingWidget(
         child: SingleChildScrollView(
@@ -105,7 +113,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                             socialSecurityNumberController,
                             context,
                             _dateFocusNode,
-                            _dateController,
+                            dobController,
                             isLargeWeb,
                             isWeb),
                       ],
@@ -124,7 +132,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                             socialSecurityNumberController,
                             context,
                             _dateFocusNode,
-                            _dateController,
+                            dobController,
                             isLargeWeb,
                             isWeb),
                       ],
@@ -195,6 +203,11 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                   _zipWidget(),
                   _socialSecurityNoWidget(),
                   DocumentDetailsView(
+                    onChanged: (value) {
+                      selectedDocument = value;
+                    },
+                    dateController: expiryDateController,
+                    documentNumberController: documentNumberController,
                     onboardingBloc: widget.onboardingBloc,
                     nextClicked: nextClicked,
                     pageController: widget.pageController,
@@ -276,7 +289,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CommonDatePickerWidget(
-            dateController: _dateController,
+            dateController: dobController,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return AppString.emptyDOB.val;
@@ -290,26 +303,28 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   }
 
   _genderWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _labelWidget(AppString.gender.val),
-        CustomSizedBox(height: DBL.twelve.val),
-        GenderDropDown(
-          onChange: (value) {
-            selectedGender = value.toString();
-          },
-          items: [
-            Gender(id: 0, name: "Male"),
-            Gender(id: 1, name: "Female"),
-            Gender(id: 2, name: "Others")
+    return BlocBuilder<OnboardingBloc, OnboardingState>(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _labelWidget(AppString.gender.val),
+            CustomSizedBox(height: DBL.twelve.val),
+            GenderDropDown(
+              onChange: (value) {
+                selectedGender = value.toString();
+                print("gender onchanged value: $value");
+                state.copyWith(selectedGenderId: value);
+              },
+              items: widget.onboardingBloc.genderList,
+              errorText: nextClicked && selectedGender.isEmpty
+                  ? AppString.emptyGender.val
+                  : "",
+              selectedValue: selectedGender,
+            ),
           ],
-          errorText: nextClicked && selectedGender.isEmpty
-              ? AppString.emptyGender.val
-              : "",
-          selectedValue: selectedGender,
-        ),
-      ],
+        );
+      },
     );
   }
 
@@ -404,10 +419,10 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                   ? AppString.emptyState.val
                   : ""
               : "",
-          stateName: "",
-          items: const ["Kerala", "Karnataka", "Tamil Nadu"],
+          items: widget.onboardingBloc.stateList,
           onChange: (value) {
-            selectedState = value;
+            selectedState = value.toString();
+            print("state value in onchanged : $value");
           },
           selectedValue: selectedState,
         ),
@@ -416,25 +431,29 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   }
 
   _cityWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _labelWidget(AppString.city.val),
-        CustomSizedBox(height: DBL.twelve.val),
-        StateDropDown(
-          errorText: nextClicked
-              ? selectedCity.isEmpty
-                  ? AppString.emptyCity.val
-                  : ""
-              : "",
-          stateName: "",
-          items: const ["Kannur", "Wayanad", "Ernakulam"],
-          onChange: (value) {
-            selectedCity = value;
-          },
-          selectedValue: selectedCity,
-        ),
-      ],
+    return BlocBuilder<OnboardingBloc, OnboardingState>(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _labelWidget(AppString.city.val),
+            CustomSizedBox(height: DBL.twelve.val),
+            CityDropDown(
+              errorText: nextClicked
+                  ? selectedCity.isEmpty
+                      ? AppString.emptyCity.val
+                      : ""
+                  : "",
+              items: widget.onboardingBloc.cityList,
+              onChange: (value) {
+                selectedCity = value.toString();
+                print("city value in onchanged : $value");
+              },
+              selectedValue: selectedCity,
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -549,7 +568,28 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
       formValidationBloc.add(const FormValidationEvent.submit());
       formValidationBloc.add(const FormValidationEvent.dropDown("true"));
     }
+    final userId = SharedPreffUtil().getUserId;
+    print("UserId : $userId");
+
     if (_formKey.currentState!.validate()) {
+      widget.onboardingBloc.add(OnboardingEvent.personalDetails(
+          userId: userId,
+          dob: dobController.text.trim(),
+          genderId: int.parse(selectedGender),
+          street: streetController.text.trim(),
+          cityId: selectedCity,
+          stateId: selectedState,
+          latitude: 80.0,
+          longitude: 80.0,
+          zip: zipController.text.trim(),
+          address: addressLineController.text.trim(),
+          socialSecurityNo: socialSecurityNumberController.text.trim(),
+          documentId: selectedDocument,
+          documentNo: documentNumberController.text.trim(),
+          expiryDate: expiryDateController.text.trim(),
+          documentList: [],
+          profilePic: "sghghljgshjyg"));
+
       widget.pageController.jumpToPage(widget.pageController.page!.toInt() + 1);
     }
   }

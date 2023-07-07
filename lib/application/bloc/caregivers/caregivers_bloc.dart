@@ -1,19 +1,20 @@
 import 'package:admin_580_tech/core/enum.dart';
+import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
 import 'package:admin_580_tech/domain/caregivers/model/caregiver_response.dart';
 import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../core/custom_snackbar.dart';
 import '../../../domain/caregivers/model/Data.dart';
 import '../../../domain/caregivers/model/care_givers.dart';
 import '../../../domain/caregivers/model/types.dart';
 import '../../../infrastructure/caregivers/caregivers_repository.dart';
 
 part 'caregivers_bloc.freezed.dart';
-
 part 'caregivers_event.dart';
-
 part 'caregivers_state.dart';
 
 class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
@@ -40,7 +41,12 @@ class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
             searchTerm: event.searchTerm,
             filterId: event.filterId);
     CareGiversState homeState = homeResult.fold((l) {
-      return state.copyWith(error: l.error, isLoading: false, isError: true);
+      return state.copyWith(
+        error: l.error,
+        isLoading: false,
+        isError: true,
+        isClientError: l.isClientError ?? false,
+      );
     }, (r) {
       if (state.types.isNotEmpty) {
         return state.copyWith(
@@ -48,7 +54,11 @@ class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
           isLoading: false,
         );
       } else {
-        return state.copyWith(response: r, isLoading: false, types: typeList);
+        return state.copyWith(
+          response: r,
+          isLoading: false,
+          types: typeList,
+        );
       }
     });
     emit(
@@ -56,23 +66,50 @@ class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
     );
   }
 
-  _getUserActive(_IsUserActive event, Emitter<CareGiversState> emit) {
-    final state = this.state;
-    Caregivers item = event.caregiver;
-    CareGiverResponse response = state.response ?? CareGiverResponse();
-    Data data = response.data ?? Data();
-    final index = data.caregivers!.indexOf(item);
-    List<Caregivers> careGiverList = data.caregivers!..remove(item);
-
-    if (item.isActive ?? false) {
-      careGiverList.insert(index, item.copyWith(isActive: false));
-    } else {
-      careGiverList.insert(index, item.copyWith(isActive: true));
-    }
-    final updatedResponse = response.copyWith(
-      data: data.copyWith(caregivers: careGiverList),
+  _getUserActive(_IsUserActive event, Emitter<CareGiversState> emit) async {
+    final Either<ApiErrorHandler, VerifyResponse> result =
+        await careGiverListRepository.careGiverActiveOrInactive(
+      userID: event.userId,
+      status: event.status,
     );
-    emit(state.copyWith(response: updatedResponse));
+    var userState = result.fold((l) {
+      CSnackBar.showError(event.context, msg: l.error);
+      return state.copyWith(error: l.error, isLoading: false, isError: true);
+    }, (r) {
+      if (r.status ?? false) {
+        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        final state = this.state;
+        Caregivers item = event.caregiver;
+        CareGiverResponse response = state.response ?? CareGiverResponse();
+        Data data = response.data ?? Data();
+        final index = data.caregivers!.indexOf(item);
+        List<Caregivers> careGiverList = data.caregivers!..remove(item);
+
+        if (item.isActive ?? false) {
+          careGiverList.insert(index, item.copyWith(isActive: false));
+        } else {
+          careGiverList.insert(index, item.copyWith(isActive: true));
+        }
+        final updatedResponse = response.copyWith(
+          data: data.copyWith(caregivers: careGiverList),
+        );
+
+        return state.copyWith(
+          isLoading: false,
+          response: updatedResponse,
+          activeOrInactiveResponse: r,
+          isError: false,
+        );
+      } else {
+        CSnackBar.showError(event.context, msg: r.message ?? "");
+        return state.copyWith(
+          isLoading: false,
+          activeOrInactiveResponse: r,
+          isError: false,
+        );
+      }
+    });
+    emit(userState);
   }
 
   _getSelectedTab(_IsSelectedTab event, Emitter<CareGiversState> emit) {

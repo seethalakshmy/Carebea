@@ -1,6 +1,7 @@
+import 'package:admin_580_tech/application/bloc/caregiver-profile/caregiver_profile_bloc.dart';
 import 'package:admin_580_tech/core/enum.dart';
+import 'package:admin_580_tech/domain/caregiver_profile/model/caregiver_profile_response.dart';
 import 'package:admin_580_tech/presentation/widget/check_text_list_item.dart';
-import 'package:admin_580_tech/presentation/widget/custom_listview_builder.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/header_view.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,8 @@ import '../../widget/custom_container.dart';
 import '../../widget/custom_text.dart';
 
 class CaregiverProfileView extends StatelessWidget {
-  CaregiverProfileView({Key? key}) : super(key: key);
+  CaregiverProfileView({Key? key, required this.state}) : super(key: key);
+  final CareGiverProfileState state;
   String content =
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been "
       "the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it "
@@ -27,6 +29,7 @@ class CaregiverProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Profile? profile = state.response?.data?.profile;
     return CustomContainer(
       padding: EdgeInsets.symmetric(
           horizontal: DBL.twentyFive.val, vertical: DBL.twentyFive.val),
@@ -35,23 +38,24 @@ class CaregiverProfileView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            aboutView(),
+            aboutView(profile?.about ?? ""),
             CustomSizedBox(
               height: DBL.fifteen.val,
             ),
-            _hobbiesView(),
+            _hobbiesView(profile?.hobbies ?? ""),
             CustomSizedBox(
               height: DBL.fifteen.val,
             ),
-            _whyCareGiver(),
+            _whyCareGiver(profile?.description ?? ""),
           ],
         ),
       ),
     );
   }
 
-  aboutView() {
+  aboutView(String about) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         HeaderView(
           title: AppString.about.val,
@@ -64,7 +68,7 @@ class CaregiverProfileView extends StatelessWidget {
           height: DBL.eight.val,
         ),
         CustomText(
-          content,
+          about,
           style: TS().gRoboto(
             fontSize: FS.font13PointFive.val,
             fontWeight: FW.w400.val,
@@ -76,8 +80,9 @@ class CaregiverProfileView extends StatelessWidget {
     );
   }
 
-  _hobbiesView() {
+  _hobbiesView(String hobbies) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         HeaderView(
           title: AppString.hobbies.val,
@@ -89,17 +94,19 @@ class CaregiverProfileView extends StatelessWidget {
         CustomSizedBox(
           height: DBL.eight.val,
         ),
-        CustomListViewBuilder(
-            itemCount: mHobbies.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) =>
-                CheckTextListItem(value: mHobbies[index])),
+        CheckTextListItem(value: hobbies)
+        // CustomListViewBuilder(
+        //     itemCount: mHobbies.length,
+        //     shrinkWrap: true,
+        //     itemBuilder: (context, index) =>
+        //         CheckTextListItem(value: mHobbies[index])),
       ],
     );
   }
 
-  _whyCareGiver() {
+  _whyCareGiver(String des) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         HeaderView(
           title: AppString.whyYouLoveBeingCareAmbassador.val,
@@ -112,7 +119,7 @@ class CaregiverProfileView extends StatelessWidget {
           height: DBL.eight.val,
         ),
         CustomText(
-          content2,
+          des,
           style: TS().gRoboto(
             fontSize: FS.font13PointFive.val,
             fontWeight: FW.w400.val,

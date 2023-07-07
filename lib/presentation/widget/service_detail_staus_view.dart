@@ -90,7 +90,7 @@ class ServiceDetailStatusView extends StatelessWidget {
     return Row(
       children: [
         AlertTextLabel(AppString.status.val,
-            isCustomWidth: true, width: DBL.twoHundred.val),
+            isCustomWidth: true, customWidth: DBL.twoHundred.val),
         TableStatusBox(status: status),
         if (status == Status.upcoming.val)
           CustomSizedBox(

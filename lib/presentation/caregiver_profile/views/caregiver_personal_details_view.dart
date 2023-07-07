@@ -1,3 +1,5 @@
+import 'package:admin_580_tech/application/bloc/caregiver-profile/caregiver_profile_bloc.dart';
+import 'package:admin_580_tech/domain/caregiver_profile/model/caregiver_profile_response.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/enum.dart';
@@ -7,7 +9,9 @@ import '../../widget/header_view.dart';
 import '../../widget/row_combo.dart';
 
 class CaregiverPersonalDetailsView extends StatelessWidget {
-  const CaregiverPersonalDetailsView({Key? key}) : super(key: key);
+  const CaregiverPersonalDetailsView({Key? key, required this.state})
+      : super(key: key);
+  final CareGiverProfileState state;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +26,9 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
   }
 
   Column _topView(BuildContext context) {
+    PersonalDetails? personalDetails = state.response?.data?.personalDetails;
+    DocumentDetails? documentDetails = state.response?.data?.documentDetails;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -30,12 +37,12 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
             Expanded(
               child: RowColonCombo.twoHundred(
                   label: AppString.dob.val,
-                  value: "01/05/1985",
+                  value: personalDetails?.dob ?? "",
                   fontSize: FS.font13PointFive.val),
             ),
             !isLg(context)
                 ? Expanded(
-                    child: _mobileNumberView(),
+                    child: _mobileNumberView(personalDetails),
                   )
                 : CustomSizedBox.shrink(),
           ],
@@ -48,12 +55,12 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
             Expanded(
               child: RowColonCombo.twoHundred(
                   label: AppString.gender.val,
-                  value: "Male",
+                  value: personalDetails?.gender ?? "",
                   fontSize: FS.font13PointFive.val),
             ),
             !isLg(context)
                 ? Expanded(
-                    child: _alterNativeMobileNumberView(),
+                    child: _alterNativeMobileNumberView(personalDetails),
                   )
                 : CustomSizedBox.shrink(),
           ],
@@ -66,12 +73,12 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
             Expanded(
               child: RowColonCombo.twoHundred(
                   label: AppString.addressLine1.val,
-                  value: "Apartment #20 ",
+                  value: personalDetails?.addressLine ?? "",
                   fontSize: FS.font13PointFive.val),
             ),
             !isLg(context)
                 ? Expanded(
-                    child: _emailView(),
+                    child: _emailView(personalDetails),
                   )
                 : CustomSizedBox.shrink(),
           ],
@@ -81,35 +88,35 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
         ),
         RowColonCombo.twoHundred(
             label: AppString.city.val,
-            value: "New York",
+            value: personalDetails?.city ?? "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.six.val,
         ),
         RowColonCombo.twoHundred(
             label: AppString.street.val,
-            value: "495 Grove Street ",
+            value: personalDetails?.street ?? "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.six.val,
         ),
         RowColonCombo.twoHundred(
             label: AppString.zip.val,
-            value: "08601",
+            value: personalDetails?.zip ?? "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.six.val,
         ),
         RowColonCombo.twoHundred(
             label: AppString.state.val,
-            value: "New Jersey ",
+            value: personalDetails?.state ?? "",
             fontSize: FS.font13PointFive.val),
         isLg(context)
             ? CustomSizedBox(
                 height: DBL.six.val,
               )
             : CustomSizedBox.shrink(),
-        isLg(context) ? _rightView() : CustomSizedBox.shrink(),
+        isLg(context) ? _rightView(personalDetails) : CustomSizedBox.shrink(),
         CustomSizedBox(
           height: DBL.ten.val,
         ),
@@ -131,7 +138,7 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
         ),
         RowColonCombo.twoHundred(
             label: AppString.documentUploaded.val,
-            value: "Passport",
+            value: documentDetails?.documentUploaded ?? "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.six.val,
@@ -141,7 +148,7 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
         ),
         RowColonCombo.twoHundred(
             label: AppString.docNumber.val,
-            value: "U123456789",
+            value: documentDetails?.doumentNumber ?? "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.six.val,
@@ -151,7 +158,7 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
         ),
         RowColonCombo.twoHundred(
             label: AppString.expiryDate.val,
-            value: "05/12/2031",
+            value: documentDetails?.expiryDate ?? "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.six.val,
@@ -160,40 +167,40 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
     );
   }
 
-  RowColonCombo _emailView() {
+  RowColonCombo _emailView(PersonalDetails? personalDetails) {
     return RowColonCombo.twoHundred(
         label: AppString.email.val,
-        value: "josephgeorge@gmail.com",
+        value: personalDetails?.email ?? "",
         fontSize: FS.font13PointFive.val);
   }
 
-  RowColonCombo _alterNativeMobileNumberView() {
+  RowColonCombo _alterNativeMobileNumberView(PersonalDetails? personalDetails) {
     return RowColonCombo.twoHundred(
         label: AppString.alternativeMobileNumber.val,
-        value: "14845691319",
+        value: personalDetails?.alternativeMobileNumber ?? "",
         fontSize: FS.font13PointFive.val);
   }
 
-  RowColonCombo _mobileNumberView() {
+  RowColonCombo _mobileNumberView(PersonalDetails? personalDetails) {
     return RowColonCombo.twoHundred(
         label: AppString.mobileNumber.val,
-        value: "14845691319",
+        value: personalDetails?.mobile ?? "",
         fontSize: FS.font13PointFive.val);
   }
 
-  Column _rightView() {
+  Column _rightView(PersonalDetails? personalDetails) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _mobileNumberView(),
+        _mobileNumberView(personalDetails),
         CustomSizedBox(
           height: DBL.six.val,
         ),
-        _alterNativeMobileNumberView(),
+        _alterNativeMobileNumberView(personalDetails),
         CustomSizedBox(
           height: DBL.six.val,
         ),
-        _emailView(),
+        _emailView(personalDetails),
         CustomSizedBox(
           height: DBL.six.val,
         ),

@@ -14,6 +14,7 @@ import '../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
+import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../widget/common_button_loader_widget.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
@@ -78,13 +79,20 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
   _bodyView() {
     return BlocConsumer<CaregiverCreationBloc, CaregiverCreationState>(
       listener: (context, listenerState) {
-        return listenerState.failureOrSuccessOption?.fold(
-            () {},
-            (some) => some.fold((l) {}, (r) {
-                  if (r.status!) {
-                    context.router.navigate(const OnboardingRoute());
-                  } else {}
-                }));
+        final router = context.router;
+
+        return listenerState.failureOrSuccessOption.fold(
+          () {},
+          (some) => some.fold(
+            (l) {},
+            (r) async {
+              if (r.status!) {
+                SharedPreffUtil().setUserId = r.data?.id ?? "";
+                router.navigate(const OnboardingRoute());
+              } else {}
+            },
+          ),
+        );
       },
       buildWhen: (previous, current) => previous != current,
       bloc: _creationBloc,
@@ -240,7 +248,7 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
                         height: 45,
                         minWidth: 120,
                         onPressed: () {
-                          context.router.navigate(const CareGiversRoute());
+                          context.router.navigate(CareGiversRoute());
                         },
                         text: AppString.cancel.val,
                         color: AppColor.white.val,

@@ -7,6 +7,7 @@ import '../../../../application/bloc/onboarding/onboarding_bloc.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
+import '../../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../caregiver_creation/widgets/details_text_field_with_label.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
 import '../../../widget/custom_form.dart';
@@ -53,7 +54,8 @@ class _SetupCompensationViewState extends State<SetupCompensationView> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => FormValidationBloc()),
-        BlocProvider(create: (context) => OnboardingBloc()),
+        BlocProvider(
+            create: (context) => OnboardingBloc(OnBoardingRepository())),
       ],
       child: BlocBuilder<OnboardingBloc, OnboardingState>(
         bloc: widget.onboardingBloc,

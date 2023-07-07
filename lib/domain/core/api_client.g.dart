@@ -50,12 +50,276 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/get-care-givers',
+              '/admin/get-care-givers',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = CareGiverResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CaregiverVerificationResponse> getCareGiverVerificationData(
+    token,
+    userId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {'user_id': userId};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<CaregiverVerificationResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-caregiver-verification',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CaregiverVerificationResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<VerifyResponse> careGiverBackgroundVerify(
+    token,
+    userId,
+    status,
+    reason,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'status': status,
+      'reject_reason': reason,
+    };
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<VerifyResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/caregiver-background-verify',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VerifyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<VerifyResponse> careGiverCertificateApprove(
+    token,
+    userId,
+    status,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'status': status,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<VerifyResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/caregiver-certificate-verification',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VerifyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<VerifyResponse> careGiverTrainingVerify(
+    token,
+    userId,
+    status,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'status': status,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<VerifyResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/caregiver-training-verification',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VerifyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<VerifyResponse> careGiverCertificateReject(
+    token,
+    rejectionParams,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(rejectionParams.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<VerifyResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/reject-qualification-document',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VerifyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<VerifyResponse> careGiverSendTrainingRequest(
+    token,
+    userId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {'user_id': userId};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<VerifyResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/caregiver-start-training',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VerifyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CaregiverProfileResponse> getCareGiverProfile(
+    token,
+    userId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {'user_id': userId};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<CaregiverProfileResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-care-giver-profile',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CaregiverProfileResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<VerifyResponse> careGiverInterViewVerify(
+    token,
+    userId,
+    status,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'status': status,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<VerifyResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/caregiver-intervie-verification',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VerifyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CareGiverDetailResponse> getCareGiverDetail(
+    token,
+    userId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {'user_id': userId};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<CareGiverDetailResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-care-giver-by-id',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CareGiverDetailResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -83,7 +347,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/admin-create-caregiver',
+              '/admin/admin-create-caregiver',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -140,7 +404,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/admin-cg-personal-details',
+              '/admin/admin-cg-personal-details',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -183,7 +447,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/admin-cg-qualification',
+              '/admin/admin-cg-qualification',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -222,7 +486,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/admin-cg-preferences',
+              '/admin/admin-cg-preferences',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -251,12 +515,164 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/admin-cg-services',
+              '/admin/admin-cg-services',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = GetServiceResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<VerifyResponse> careGiverActiveOrInactive(
+    token,
+    userId,
+    status,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'status': status,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<VerifyResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/change-caregiver-status',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VerifyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GenderListResponse> getGenderList() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<GenderListResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/common-data/get-gender',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GenderListResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CityListResponse> getCityList() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CityListResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/common-data/get-cities',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CityListResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<StateListReponse> getStateList() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<StateListReponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/common-data/get-states',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = StateListReponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DocumentListResponse> getDocumentsList() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DocumentListResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/common-data/get-documents',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = DocumentListResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<LoginResponse> login(
+    email,
+    password,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'email': email,
+      'password': password,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<LoginResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/super-admin/login',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = LoginResponse.fromJson(_result.data!);
     return value;
   }
 

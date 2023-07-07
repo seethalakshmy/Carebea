@@ -56,7 +56,7 @@ class ServiceDetailReportsView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AlertTextLabel(
-          width: DBL.threeEighty.val,
+          customWidth: DBL.threeEighty.val,
           AppString.reportedIssuesByCareAmbassador.val,
           isCustomWidth: true,
         ),
@@ -90,7 +90,7 @@ class ServiceDetailReportsView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AlertTextLabel(
-          width: DBL.threeEighty.val,
+          customWidth: DBL.threeEighty.val,
           AppString.suspectedThings.val,
           isCustomWidth: true,
         ),

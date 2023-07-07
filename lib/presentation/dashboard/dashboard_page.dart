@@ -1,4 +1,3 @@
-
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +12,14 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     print("width: ${MediaQuery.of(context).size.width}");
-    return const CustomSizedBox(height: 350, child: Center(child: Text("DASHBOARD")),);
+    return CustomSizedBox(
+      height: 350,
+      child: InkWell(
+          // onTap: () {
+          //   CSnackBar.showError(context,
+          //       msg: "test purpose to show something ok");
+          // },
+          child: Center(child: Text("DASHBOARD"))),
+    );
   }
 }

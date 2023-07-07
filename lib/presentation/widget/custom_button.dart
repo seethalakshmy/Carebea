@@ -31,6 +31,7 @@ class CustomButton extends StatelessWidget {
   final double? elevation;
   final double? hoverElevation;
   final Color? color;
+  final Color? borderColor;
   final Color? hoverColor;
   final TextStyle? textStyle;
 
@@ -60,6 +61,7 @@ class CustomButton extends StatelessWidget {
     this.hoverElevation,
     this.color,
     this.hoverColor,
+    this.borderColor,
     this.textStyle,
   })  : assert((fullWidth && minWidth == null) ||
             (!fullWidth && minWidth != null) ||
@@ -100,8 +102,10 @@ class CustomButton extends StatelessWidget {
             side: BorderSide(
               width: borderWidth,
               color: isOutlineButton
-                  ? color ?? _getButtonColor(colorScheme, buttonType, false)!
-                  : color ?? _getButtonColor(colorScheme, buttonType, true)!,
+                  ? borderColor ??
+                      _getButtonColor(colorScheme, buttonType, false)!
+                  : borderColor ??
+                      _getButtonColor(colorScheme, buttonType, true)!,
             ),
           ),
           minWidth: fullWidth ? double.infinity : minWidth,

@@ -9,20 +9,29 @@ import 'package:admin_580_tech/presentation/caregiver_detail/views/caregiver_sch
 import 'package:admin_580_tech/presentation/caregiver_detail/views/caregiver_service_request_view.dart';
 import 'package:admin_580_tech/presentation/caregiver_detail/views/caregiver_service_view.dart';
 import 'package:admin_580_tech/presentation/caregiver_detail/widgets/service_completion_and_rewards.dart';
+import 'package:admin_580_tech/presentation/widget/cached_image.dart';
+import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
+import 'package:admin_580_tech/presentation/widget/loader_view.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import '../../core/custom_debugger.dart';
 import '../../core/responsive.dart';
+import '../routes/app_router.gr.dart';
+import '../side_menu/side_menu_page.dart';
 import '../widget/svg_text.dart';
 
 class CareGiverDetailPage extends StatefulWidget {
-  const CareGiverDetailPage({Key? key}) : super(key: key);
+  const CareGiverDetailPage({Key? key, @QueryParam('id') this.id = ''})
+      : super(key: key);
+
+  final String? id;
 
   @override
   State<CareGiverDetailPage> createState() => _CareGiverDetailPageState();
@@ -32,10 +41,12 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
   late CaregiverDetailBloc _caregiverDetailBloc;
-  String userId = "6461c0f33ba4fd69bd494df0";
+  String userId = "";
 
   @override
   void initState() {
+    userId = autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
+    // userId = "647ef1af92fc3adb1376698a";
     tabController = TabController(vsync: this, length: 5);
     _caregiverDetailBloc = CaregiverDetailBloc(CareGiverDetailRepository());
     super.initState();
@@ -50,7 +61,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
         builder: (context, state) {
           return !state.isLoading
               ? (_bodyView(context, state))
-              : CustomSizedBox.shrink();
+              : const LoaderView();
         },
       ),
     );
@@ -108,7 +119,8 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                     earnings: state.response?.data?.earnings ?? []),
                 CareGiverServiceRequestView(
                     state: state,
-                    serviceRequests: state.response?.data?.serviceRequest ?? [])
+                    serviceRequested:
+                        state.response?.data?.serviceRequested ?? [])
                 /*buildOffersListView(),*/
               ],
             ),
@@ -172,15 +184,21 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                     ],
                   ),
                 ),
-                !isXs2(context)
-                    ? Positioned(
-                        right: DBL.zero.val,
-                        top:
-                            isLg2(context) ? DBL.five.val : DBL.thirtyEight.val,
-                        child: !isLg2(context)
+                Positioned(
+                    right: DBL.zero.val,
+                    top: isLg2(context) ? DBL.oneThirtyEight.val : DBL.two.val,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        _profileDetailButton(),
+                        CustomSizedBox(
+                          height: DBL.twelve.val,
+                        ),
+                        !isLg2(context)
                             ? _aboutServiceCompletionColumn(response)
-                            : CustomSizedBox.shrink())
-                    : CustomSizedBox.shrink()
+                            : CustomSizedBox.shrink(),
+                      ],
+                    ))
               ],
             ),
             // CustomSizedBox(height: isXs2(context)?DBL.eight.val:DBL.zero.val,),
@@ -189,6 +207,24 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                 : CustomSizedBox.shrink()
           ]),
         ));
+  }
+
+  CustomButton _profileDetailButton() {
+    return CustomButton(
+      onPressed: () {
+        autoTabRouter?.navigate(CareGiverProfileRoute(
+          id: userId,
+        ));
+      },
+      text: AppString.profileDetails.val,
+      borderRadius: 3,
+      padding: EdgeInsets.symmetric(
+          horizontal: DBL.twentyFive.val, vertical: DBL.eighteen.val),
+      textStyle: TS().gRoboto(
+          color: AppColor.white.val,
+          fontSize: FS.font14.val,
+          fontWeight: FW.w600.val),
+    );
   }
 
   SingleChildScrollView _aboutServiceCompletionRow(
@@ -247,6 +283,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
 
   CustomSizedBox _topRightView(
       BuildContext context, CareGiverDetailResponse response) {
+    Location? location = response.data?.location;
     return CustomSizedBox(
       width: isXs3(context)
           ? MediaQuery.of(context).size.width - DBL.twoThirty.val
@@ -280,7 +317,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
           ),
           SVGText(
             path: IMG.location.val,
-            name: response.data?.location ?? "",
+            name: location?.address ?? "",
             widthGap: DBL.fifteen.val,
           ),
           CustomSizedBox(
@@ -310,41 +347,50 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
           CustomSizedBox(
             height: isXs2(context) ? DBL.ten.val : DBL.fourteen.val,
           ),
-          Row(children: [
-            CustomSvg(path: IMG.warning.val),
-            CustomSizedBox(
-              width: DBL.five.val,
-            ),
-            Expanded(
-              child: CustomText(
-                AppString.pendingDocuments.val,
-                style: TS().gRoboto(
-                    fontWeight: FW.w500.val,
-                    fontSize: getFontSize(context, fontSize: FS.font14.val),
-                    color: AppColor.red.val),
-              ),
-            )
-          ]),
-          CustomSizedBox(
-            height: isXs2(context) ? DBL.five.val : DBL.thirteen.val,
-          ),
-          Row(children: [
-            CustomSizedBox(
-              width: DBL.twentyEight.val,
-            ),
-            Expanded(
-              child: CustomText(
-                "COVID - 19 Vaccination  |  BLS CPR/First Aid Certification",
-                style: TS().gRoboto(
-                    fontSize: getFontSize(
-                      context,
-                      fontSize: FS.font14.val,
+          response.data!.pendingDocs != null &&
+                  response.data!.pendingDocs!.isNotEmpty
+              ? Row(children: [
+                  CustomSvg(path: IMG.warning.val),
+                  CustomSizedBox(
+                    width: DBL.five.val,
+                  ),
+                  Expanded(
+                    child: CustomText(
+                      AppString.pendingDocuments.val,
+                      style: TS().gRoboto(
+                          fontWeight: FW.w500.val,
+                          fontSize:
+                              getFontSize(context, fontSize: FS.font14.val),
+                          color: AppColor.red.val),
                     ),
-                    fontWeight: FW.w400.val,
-                    color: AppColor.matBlack2.val),
-              ),
-            ),
-          ]),
+                  )
+                ])
+              : CustomSizedBox.shrink(),
+          response.data!.pendingDocs != null &&
+                  response.data!.pendingDocs!.isNotEmpty
+              ? CustomSizedBox(
+                  height: isXs2(context) ? DBL.five.val : DBL.thirteen.val,
+                )
+              : CustomSizedBox.shrink(),
+          response.data!.pendingDocs != null
+              ? Row(children: [
+                  CustomSizedBox(
+                    width: DBL.twentyEight.val,
+                  ),
+                  Expanded(
+                    child: CustomText(
+                      response.data!.pendingDocs!.join("   |   "),
+                      style: TS().gRoboto(
+                          fontSize: getFontSize(
+                            context,
+                            fontSize: FS.font14.val,
+                          ),
+                          fontWeight: FW.w400.val,
+                          color: AppColor.matBlack2.val),
+                    ),
+                  ),
+                ])
+              : CustomSizedBox.shrink(),
         ],
       ),
     );
@@ -357,7 +403,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _profileImageView(context),
+          _profileImageView(context, response.data?.name?.profile ?? ""),
           CustomSizedBox(
             height: isLg2(context) ? DBL.fourteen.val : DBL.twenty.val,
           ),
@@ -411,12 +457,17 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
     ]);
   }
 
-  CustomSvg _profileImageView(BuildContext context) {
-    return CustomSvg(
-      path: IMG.profilePlaceHolder.val,
-      width: isXs(context) ? DBL.oneFifty.val : DBL.twoHundred.val,
-      height: isXs(context) ? DBL.oneTwentyFive.val : DBL.oneSeventyFive.val,
+  _profileImageView(BuildContext context, String url) {
+    return CachedImage(
+      imgUrl: url,
+      height: DBL.oneSeventyFive.val,
+      width: DBL.twoHundred.val,
     );
+    // return CustomSvg(
+    //   path: IMG.profilePlaceHolder.val,
+    //   width: isXs(context) ? DBL.oneFifty.val : DBL.twoHundred.val,
+    //   height: isXs(context) ? DBL.oneTwentyFive.val : DBL.oneSeventyFive.val,
+    // );
   }
 
   ServiceRewardAndCompletion reviewsView(
@@ -425,7 +476,8 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
       height: height,
       title: response.data?.totalReviewsGiven.toString() ?? "",
       subTitle: AppString.reviewGiven.val,
-      subTitle2: "(${response.data?.reviewsPending})",
+      subTitle2:
+          "(${response.data?.reviewPending} ${AppString.reviewPending.val})",
     );
   }
 
@@ -435,8 +487,8 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
       title: "",
       isShowRating: true,
       height: height,
-      rating: response.data?.rating ?? DBL.zero.val,
-      subTitle: response.data!.totalRating.toString(),
+      rating: num.parse(response.data?.rating ?? "0"),
+      subTitle: response.data!.totalReviewsGiven.toString(),
     );
   }
 
@@ -444,7 +496,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
       {double? height, required CareGiverDetailResponse response}) {
     return ServiceRewardAndCompletion(
       height: height,
-      title: response.data?.canceledRequest.toString() ?? "",
+      title: response.data?.cancelledRequests.toString() ?? "",
       subTitle: AppString.canceledRequest.val,
     );
   }

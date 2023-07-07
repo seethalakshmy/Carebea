@@ -11,6 +11,7 @@ class RowColonCombo extends StatelessWidget {
     this.fontSize,
     this.color,
     this.width,
+    this.customWidthLg1,
     this.fontWeight,
   });
 
@@ -19,6 +20,8 @@ class RowColonCombo extends StatelessWidget {
   final Color? color;
   final double? fontSize;
   final double? width;
+  final double? customWidthLg1;
+
   final FontWeight? fontWeight;
   RowColonCombo.twoHundred({
     super.key,
@@ -27,6 +30,7 @@ class RowColonCombo extends StatelessWidget {
     this.color,
     this.fontSize,
     this.fontWeight,
+    this.customWidthLg1,
   }) : width = DBL.twoHundred.val;
 
   RowColonCombo.threeEighty({
@@ -36,6 +40,7 @@ class RowColonCombo extends StatelessWidget {
     this.color,
     this.fontSize,
     this.fontWeight,
+    this.customWidthLg1,
   }) : width = DBL.threeEighty.val;
 
   RowColonCombo.threeSeventy({
@@ -45,6 +50,7 @@ class RowColonCombo extends StatelessWidget {
     this.color,
     this.fontSize,
     this.fontWeight,
+    this.customWidthLg1,
   }) : width = DBL.threeSeventeen.val;
 
   @override
@@ -55,7 +61,8 @@ class RowColonCombo extends StatelessWidget {
         AlertTextLabel(
           label,
           isCustomWidth: true,
-          width: width,
+          customWidth: width,
+          customWidthLg1: customWidthLg1,
           color: color,
           fontWeight: fontWeight,
           fontSize: fontSize,

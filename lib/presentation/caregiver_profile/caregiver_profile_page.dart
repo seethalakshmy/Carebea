@@ -1,5 +1,6 @@
 import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/enum.dart';
+import 'package:admin_580_tech/infrastructure/caregiver_profile/caregiver_profile_repository.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/views/caregiver_agreement_view.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/views/caregiver_personal_details_view.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/views/caregiver_preference_view.dart';
@@ -9,17 +10,28 @@ import 'package:admin_580_tech/presentation/caregiver_profile/views/caregiver_qu
 import 'package:admin_580_tech/presentation/caregiver_profile/views/caregiver_reference_view.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
-import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
+import 'package:admin_580_tech/presentation/widget/loader_view.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
+import '../../application/bloc/caregiver-profile/caregiver_profile_bloc.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
 import '../caregiver_detail/widgets/service_completion_and_rewards.dart';
+import '../side_menu/side_menu_page.dart';
+import '../widget/cached_image.dart';
+import '../widget/custom_button.dart';
 import '../widget/custom_text.dart';
+import '../widget/error_view.dart';
+import '../widget/table_verification_button.dart';
 
 class CareGiverProfilePage extends StatefulWidget {
-  const CareGiverProfilePage({Key? key}) : super(key: key);
+  const CareGiverProfilePage({Key? key, @QueryParam('id') this.id = ''})
+      : super(key: key);
+
+  final String? id;
 
   @override
   State<CareGiverProfilePage> createState() => _CareGiverProfilePageState();
@@ -28,12 +40,15 @@ class CareGiverProfilePage extends StatefulWidget {
 class _CareGiverProfilePageState extends State<CareGiverProfilePage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
-  String userId = "6461c0f33ba4fd69bd494df0";
+  String _userId = "";
+  late CareGiverProfileBloc _careGiverProfileBloc;
 
   @override
   void initState() {
     tabController = TabController(vsync: this, length: 7);
-
+    _userId =
+        autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
+    _careGiverProfileBloc = CareGiverProfileBloc(CareGiverProfileRepository());
     super.initState();
   }
 
@@ -45,13 +60,30 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
 
   @override
   Widget build(BuildContext context) {
-    return _bodyView(
-      context,
+    return _rebuildView();
+  }
+
+  BlocProvider<CareGiverProfileBloc> _rebuildView() {
+    return BlocProvider(
+      create: (context) => _careGiverProfileBloc
+        ..add(CareGiverProfileEvent.getCareGiverProfile(userId: _userId)),
+      child: BlocBuilder<CareGiverProfileBloc, CareGiverProfileState>(
+        builder: (context, state) {
+          return state.isLoading
+              ? (const LoaderView())
+              : state.isError
+                  ? ErrorView(
+                      isClientError: state.isClientError,
+                      errorMessage: state.error)
+                  : _bodyView(state);
+        },
+      ),
     );
   }
 
-  CustomSizedBox _bodyView(BuildContext contex) {
+  CustomSizedBox _bodyView(CareGiverProfileState state) {
     CustomLog.log('width :${MediaQuery.of(context).size.width}');
+    int status = state.response?.data?.verificationStatus ?? 0;
     return CustomSizedBox(
       height: MediaQuery.of(context).size.height,
       child: NestedScrollView(
@@ -61,10 +93,12 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
             SliverAppBar(
                 leading: const SizedBox(),
                 backgroundColor: Colors.white,
-                expandedHeight: DBL.twoEighty.val,
+                expandedHeight: isInterViewOrTraining(status)
+                    ? DBL.threeThirty.val
+                    : DBL.twoEighty.val,
                 floating: false,
                 toolbarHeight: DBL.fifty.val,
-                flexibleSpace: _buildFlexibleSpaceBar(context))
+                flexibleSpace: _buildFlexibleSpaceBar(context, state, status))
           ];
         },
         body: Scaffold(
@@ -94,13 +128,27 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
             physics: const NeverScrollableScrollPhysics(),
             controller: tabController,
             children: [
-              CaregiverPersonalDetailsView(),
-              CaregiverQualificationAndTestResultView(),
-              CareGiverPreferenceView(),
-              CareGiverProvidedServices(),
-              CareGiverReferenceView(),
-              CaregiverProfileView(),
-              CareGiverAgreementView()
+              CaregiverPersonalDetailsView(
+                state: state,
+              ),
+              CaregiverQualificationAndTestResultView(
+                state: state,
+              ),
+              CareGiverPreferenceView(
+                state: state,
+              ),
+              CareGiverProvidedServices(
+                state: state,
+              ),
+              CareGiverReferenceView(
+                state: state,
+              ),
+              CaregiverProfileView(
+                state: state,
+              ),
+              CareGiverAgreementView(
+                state: state,
+              )
               /*buildOffersListView(),*/
             ],
           ),
@@ -109,7 +157,8 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
     );
   }
 
-  FlexibleSpaceBar _buildFlexibleSpaceBar(BuildContext context) {
+  FlexibleSpaceBar _buildFlexibleSpaceBar(
+      BuildContext context, CareGiverProfileState state, int status) {
     return FlexibleSpaceBar(
         centerTitle: true,
         background: CustomPadding.only(
@@ -118,15 +167,31 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
           right: DBL.twenty.val,
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            CustomSvg(
-              width: DBL.twoHundred.val,
-              path: IMG.profilePlaceHolder.val,
+            Row(
+              children: [
+                CachedImage(
+                  imgUrl: state.response?.data?.name?.profile ?? "",
+                  height: DBL.oneFifty.val,
+                  width: DBL.oneFifty.val,
+                  isDetailPage: true,
+                  fit: BoxFit.cover,
+                ),
+                CustomSizedBox(
+                  width: DBL.twentyFive.val,
+                ),
+                isInterViewOrTraining(status) || isInterViewCompleted(status)
+                    ? TableVerificationButton(
+                        verificationStatus: status,
+                        isHover: false,
+                      )
+                    : CustomSizedBox.shrink()
+              ],
             ),
             CustomSizedBox(
               height: DBL.five.val,
             ),
             CustomText(
-              "Joseph George",
+              "${state.response?.data?.name?.firstName} ${state.response?.data?.name?.lastName}",
               style: TS().gRoboto(
                 color: AppColor.rowColor.val,
                 fontWeight: FW.w600.val,
@@ -139,36 +204,36 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
             CustomSizedBox(
               height: DBL.seven.val,
             ),
+
             CustomSizedBox(
-              width: DBL.twoHundred.val,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomText(
-                      AppString.profileCompletion.val,
-                      style: TS().gRoboto(
-                          fontWeight: FW.w500.val,
-                          fontSize: getFontSize(
-                            context,
-                            fontSize: FS.font14.val,
-                          ),
-                          color: AppColor.lightGrey4.val),
-                    ),
-                    CustomSizedBox(
-                      width: DBL.five.val,
-                    ),
-                    CustomText(
-                      "85%",
-                      style: TS().gRoboto(
-                          fontWeight: FW.w500.val,
-                          fontSize: getFontSize(
-                            context,
-                            fontSize: FS.font14.val,
-                          ),
-                          color: AppColor.primaryColor.val),
-                    )
-                  ]),
-            ),
+                width: DBL.twoHundred.val,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomText(
+                        AppString.profileCompletion.val,
+                        style: TS().gRoboto(
+                            fontWeight: FW.w500.val,
+                            fontSize: getFontSize(
+                              context,
+                              fontSize: FS.font14.val,
+                            ),
+                            color: AppColor.lightGrey4.val),
+                      ),
+                      CustomSizedBox(
+                        width: DBL.five.val,
+                      ),
+                      CustomText(
+                        state.response?.data?.profileCompletion ?? "",
+                        style: TS().gRoboto(
+                            fontWeight: FW.w500.val,
+                            fontSize: getFontSize(
+                              context,
+                              fontSize: FS.font14.val,
+                            ),
+                            color: AppColor.primaryColor.val),
+                      ),
+                    ])),
             CustomSizedBox(
               height: DBL.thirteen.val,
             ),
@@ -184,6 +249,37 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
               percent: DBL.pointFive.val,
               progressColor: AppColor.green2.val,
             ),
+            CustomSizedBox(
+              height: DBL.ten.val,
+            ),
+            isInterViewOrTraining(status)
+                ? SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        CustomText(
+                          status == Verification.trainingStarted.val
+                              ? AppString.isCompletedTraining.val
+                              : AppString.isCompletedInterView.val,
+                          style: TS().gRoboto(
+                              color: AppColor.primaryColor.val,
+                              fontWeight: FW.w500.val,
+                              fontSize: isLg3(context)
+                                  ? FS.font18.val
+                                  : FS.font22.val),
+                        ),
+                        CustomSizedBox(
+                          width: DBL.twenty.val,
+                        ),
+                        _noButton(status),
+                        CustomSizedBox(
+                          width: DBL.ten.val,
+                        ),
+                        _yesButton(status),
+                      ],
+                    ),
+                  )
+                : CustomSizedBox.shrink()
 
             ///todo after getting new design have to modify this
             // isXs2(context)
@@ -254,11 +350,73 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
     );
   }
 
+  CustomButton _noButton(int status) {
+    return CustomButton(
+      text: AppString.no.val,
+      onPressed: () {
+        if (status == Verification.trainingStarted.val) {
+          _careGiverProfileBloc.add(
+              CareGiverProfileEvent.careGiverTrainingVerify(
+                  userId: _userId, status: false, context: context));
+        } else {
+          _careGiverProfileBloc.add(
+              CareGiverProfileEvent.careGiverInterViewVerify(
+                  userId: _userId, status: false, context: context));
+        }
+      },
+      color: AppColor.white.val,
+      borderRadius: DBL.five.val,
+      borderColor: AppColor.primaryColor.val,
+      hoverColor: AppColor.offWhite.val.withOpacity(0.2),
+      textStyle: TS().gRoboto(
+          fontWeight: FW.w500.val,
+          color: AppColor.primaryColor.val,
+          fontSize: FS.font16.val),
+      padding: EdgeInsets.symmetric(
+          horizontal: DBL.thirtyFive.val, vertical: DBL.eighteen.val),
+    );
+  }
+
+  CustomButton _yesButton(int status) {
+    return CustomButton(
+      text: AppString.yes.val,
+      onPressed: () {
+        if (status == Verification.trainingStarted.val) {
+          _careGiverProfileBloc.add(
+              CareGiverProfileEvent.careGiverTrainingVerify(
+                  userId: _userId, status: true, context: context));
+        } else {
+          _careGiverProfileBloc.add(
+              CareGiverProfileEvent.careGiverInterViewVerify(
+                  userId: _userId, status: true, context: context));
+        }
+      },
+      borderRadius: DBL.five.val,
+      textStyle: TS().gRoboto(
+          fontWeight: FW.w500.val,
+          color: AppColor.white.val,
+          fontSize: FS.font16.val),
+      padding: EdgeInsets.symmetric(
+          horizontal: DBL.thirtyFive.val, vertical: DBL.eighteen.val),
+    );
+  }
+
+  bool isInterViewOrTraining(int status) {
+    return status == Verification.trainingStarted.val ||
+        status == Verification.interViewStarted.val;
+  }
+
+  bool isInterViewCompleted(int status) {
+    return status == Verification.interViewCompleted.val;
+  }
+
   double getFontSize(BuildContext context, {required double fontSize}) {
     return Responsive.isLg(context) ? fontSize - 2 : fontSize;
   }
 
   bool isLg2(context) => MediaQuery.of(context).size.width <= 1385;
+
+  bool isLg3(BuildContext context) => MediaQuery.of(context).size.width <= 1025;
 
   bool isXs(context) => MediaQuery.of(context).size.width <= 990;
 

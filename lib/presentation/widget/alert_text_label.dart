@@ -10,7 +10,8 @@ class AlertTextLabel extends StatelessWidget {
     Key? key,
     this.isCustomWidth = false,
     this.isRequiredSpace = false,
-    this.width,
+    this.customWidth,
+    this.customWidthLg1,
     this.color,
     this.fontSize,
     this.fontWeight,
@@ -19,7 +20,8 @@ class AlertTextLabel extends StatelessWidget {
   final bool isCustomWidth;
   final bool isRequiredSpace;
   final Color? color;
-  final double? width;
+  final double? customWidth;
+  final double? customWidthLg1;
   final double? fontSize;
   final FontWeight? fontWeight;
 
@@ -44,38 +46,38 @@ class AlertTextLabel extends StatelessWidget {
   }
 
   double? getWidth(BuildContext context, Size size) {
-    if (width == 200) {
+    if (customWidth == 200) {
       return isCustomWidth
           ? isXs(context)
               ? DBL.twoHundred.val
               : isLg1(context)
-                  ? DBL.threeEighty.val
+                  ? customWidthLg1 ?? DBL.threeEighty.val
                   : isLg(context)
                       ? size.width * .13
-                      : width
+                      : customWidth
           : null;
-    } else if (width == 380) {
+    } else if (customWidth == 380) {
       return isCustomWidth
           ? isXs(context)
               ? DBL.twoHundred.val
               : isLg1(context)
-                  ? DBL.threeEighty.val
+                  ? customWidthLg1 ?? DBL.threeEighty.val
                   : isLg(context)
                       ? size.width * .2
-                      : width
+                      : customWidth
           : null;
-    } else if (width == 370) {
+    } else if (customWidth == 370) {
       return isCustomWidth
           ? isXs(context)
               ? 190
               : isLg1(context)
-                  ? DBL.threeSeventeen.val
+                  ? customWidthLg1 // DBL.threeSeventeen.val
                   : isLg(context)
                       ? size.width * .19
-                      : width
+                      : customWidth
           : null;
     } else {
-      return width;
+      return customWidth;
     }
   }
 
