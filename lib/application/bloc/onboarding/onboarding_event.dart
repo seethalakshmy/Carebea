@@ -21,7 +21,8 @@ class OnboardingEvent with _$OnboardingEvent {
       required String profilePic}) = _GetPersonalDetails;
 
   const factory OnboardingEvent.commonData() = _CommonDataLists;
-  const factory OnboardingEvent.cityList(String searchKey) = _CityLists;
+  const factory OnboardingEvent.cityList() = _CityLists;
+  const factory OnboardingEvent.stateList() = _StateLists;
 
   const factory OnboardingEvent.radioHHA(int isSelected) = _RadioHHASelected;
 

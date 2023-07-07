@@ -37,7 +37,8 @@ mixin _$OnboardingEvent {
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -81,7 +82,8 @@ mixin _$OnboardingEvent {
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -125,7 +127,8 @@ mixin _$OnboardingEvent {
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -154,6 +157,7 @@ mixin _$OnboardingEvent {
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -181,6 +185,7 @@ mixin _$OnboardingEvent {
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -204,6 +209,7 @@ mixin _$OnboardingEvent {
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -511,7 +517,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -574,7 +581,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -637,7 +645,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -688,6 +697,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -718,6 +728,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -744,6 +755,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -866,7 +878,8 @@ class _$_CommonDataLists implements _CommonDataLists {
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -913,7 +926,8 @@ class _$_CommonDataLists implements _CommonDataLists {
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -960,7 +974,8 @@ class _$_CommonDataLists implements _CommonDataLists {
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -995,6 +1010,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -1025,6 +1041,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -1051,6 +1068,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -1085,8 +1103,6 @@ abstract class _$$_CityListsCopyWith<$Res> {
   factory _$$_CityListsCopyWith(
           _$_CityLists value, $Res Function(_$_CityLists) then) =
       __$$_CityListsCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String searchKey});
 }
 
 /// @nodoc
@@ -1096,51 +1112,26 @@ class __$$_CityListsCopyWithImpl<$Res>
   __$$_CityListsCopyWithImpl(
       _$_CityLists _value, $Res Function(_$_CityLists) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? searchKey = null,
-  }) {
-    return _then(_$_CityLists(
-      null == searchKey
-          ? _value.searchKey
-          : searchKey // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_CityLists implements _CityLists {
-  const _$_CityLists(this.searchKey);
-
-  @override
-  final String searchKey;
+  const _$_CityLists();
 
   @override
   String toString() {
-    return 'OnboardingEvent.cityList(searchKey: $searchKey)';
+    return 'OnboardingEvent.cityList()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_CityLists &&
-            (identical(other.searchKey, searchKey) ||
-                other.searchKey == searchKey));
+        (other.runtimeType == runtimeType && other is _$_CityLists);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, searchKey);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_CityListsCopyWith<_$_CityLists> get copyWith =>
-      __$$_CityListsCopyWithImpl<_$_CityLists>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
@@ -1164,7 +1155,8 @@ class _$_CityLists implements _CityLists {
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -1186,7 +1178,7 @@ class _$_CityLists implements _CityLists {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
   }) {
-    return cityList(searchKey);
+    return cityList();
   }
 
   @override
@@ -1211,7 +1203,8 @@ class _$_CityLists implements _CityLists {
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -1233,7 +1226,7 @@ class _$_CityLists implements _CityLists {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
   }) {
-    return cityList?.call(searchKey);
+    return cityList?.call();
   }
 
   @override
@@ -1258,7 +1251,8 @@ class _$_CityLists implements _CityLists {
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -1282,7 +1276,7 @@ class _$_CityLists implements _CityLists {
     required TResult orElse(),
   }) {
     if (cityList != null) {
-      return cityList(searchKey);
+      return cityList();
     }
     return orElse();
   }
@@ -1293,6 +1287,7 @@ class _$_CityLists implements _CityLists {
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -1323,6 +1318,7 @@ class _$_CityLists implements _CityLists {
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -1349,6 +1345,7 @@ class _$_CityLists implements _CityLists {
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -1375,12 +1372,284 @@ class _$_CityLists implements _CityLists {
 }
 
 abstract class _CityLists implements OnboardingEvent {
-  const factory _CityLists(final String searchKey) = _$_CityLists;
+  const factory _CityLists() = _$_CityLists;
+}
 
-  String get searchKey;
-  @JsonKey(ignore: true)
-  _$$_CityListsCopyWith<_$_CityLists> get copyWith =>
-      throw _privateConstructorUsedError;
+/// @nodoc
+abstract class _$$_StateListsCopyWith<$Res> {
+  factory _$$_StateListsCopyWith(
+          _$_StateLists value, $Res Function(_$_StateLists) then) =
+      __$$_StateListsCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_StateListsCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_StateLists>
+    implements _$$_StateListsCopyWith<$Res> {
+  __$$_StateListsCopyWithImpl(
+      _$_StateLists _value, $Res Function(_$_StateLists) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_StateLists implements _StateLists {
+  const _$_StateLists();
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.stateList()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_StateLists);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
+    required TResult Function() commonData,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+  }) {
+    return stateList();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult? Function()? commonData,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+  }) {
+    return stateList?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult Function()? commonData,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (stateList != null) {
+      return stateList();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_CommonDataLists value) commonData,
+    required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+  }) {
+    return stateList(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_CommonDataLists value)? commonData,
+    TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+  }) {
+    return stateList?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_CommonDataLists value)? commonData,
+    TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (stateList != null) {
+      return stateList(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _StateLists implements OnboardingEvent {
+  const factory _StateLists() = _$_StateLists;
 }
 
 /// @nodoc
@@ -1467,7 +1736,8 @@ class _$_RadioHHASelected implements _RadioHHASelected {
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -1514,7 +1784,8 @@ class _$_RadioHHASelected implements _RadioHHASelected {
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -1561,7 +1832,8 @@ class _$_RadioHHASelected implements _RadioHHASelected {
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -1596,6 +1868,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -1626,6 +1899,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -1652,6 +1926,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -1770,7 +2045,8 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -1817,7 +2093,8 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -1864,7 +2141,8 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -1899,6 +2177,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -1929,6 +2208,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -1955,6 +2235,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -2073,7 +2354,8 @@ class _$_RadioTBSelected implements _RadioTBSelected {
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -2120,7 +2402,8 @@ class _$_RadioTBSelected implements _RadioTBSelected {
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -2167,7 +2450,8 @@ class _$_RadioTBSelected implements _RadioTBSelected {
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -2202,6 +2486,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -2232,6 +2517,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -2258,6 +2544,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -2377,7 +2664,8 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -2424,7 +2712,8 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -2471,7 +2760,8 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -2506,6 +2796,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -2536,6 +2827,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -2562,6 +2854,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -2683,7 +2976,8 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -2730,7 +3024,8 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -2777,7 +3072,8 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -2812,6 +3108,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -2842,6 +3139,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -2868,6 +3166,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -2988,7 +3287,8 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -3035,7 +3335,8 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -3082,7 +3383,8 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -3117,6 +3419,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -3147,6 +3450,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -3173,6 +3477,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -3295,7 +3600,8 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -3342,7 +3648,8 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -3389,7 +3696,8 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -3424,6 +3732,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -3454,6 +3763,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -3480,6 +3790,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -3599,7 +3910,8 @@ class _$_RadioPetSelected implements _RadioPetSelected {
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -3646,7 +3958,8 @@ class _$_RadioPetSelected implements _RadioPetSelected {
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -3693,7 +4006,8 @@ class _$_RadioPetSelected implements _RadioPetSelected {
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -3728,6 +4042,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -3758,6 +4073,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -3784,6 +4100,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -3903,7 +4220,8 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -3950,7 +4268,8 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -3997,7 +4316,8 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -4032,6 +4352,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -4062,6 +4383,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -4088,6 +4410,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -4208,7 +4531,8 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -4255,7 +4579,8 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -4302,7 +4627,8 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -4337,6 +4663,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -4367,6 +4694,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -4393,6 +4721,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -4534,7 +4863,8 @@ class _$_SecurityDocumentUploadSelected
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -4581,7 +4911,8 @@ class _$_SecurityDocumentUploadSelected
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -4628,7 +4959,8 @@ class _$_SecurityDocumentUploadSelected
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -4663,6 +4995,7 @@ class _$_SecurityDocumentUploadSelected
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -4693,6 +5026,7 @@ class _$_SecurityDocumentUploadSelected
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -4719,6 +5053,7 @@ class _$_SecurityDocumentUploadSelected
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -4860,7 +5195,8 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -4907,7 +5243,8 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -4954,7 +5291,8 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -4989,6 +5327,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -5019,6 +5358,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -5045,6 +5385,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -5186,7 +5527,8 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -5233,7 +5575,8 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -5280,7 +5623,8 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -5315,6 +5659,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -5345,6 +5690,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -5371,6 +5717,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -5511,7 +5858,8 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -5558,7 +5906,8 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -5605,7 +5954,8 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -5640,6 +5990,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -5670,6 +6021,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -5696,6 +6048,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -5837,7 +6190,8 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
             String profilePic)
         personalDetails,
     required TResult Function() commonData,
-    required TResult Function(String searchKey) cityList,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -5884,7 +6238,8 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
             String profilePic)?
         personalDetails,
     TResult? Function()? commonData,
-    TResult? Function(String searchKey)? cityList,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -5931,7 +6286,8 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
             String profilePic)?
         personalDetails,
     TResult Function()? commonData,
-    TResult Function(String searchKey)? cityList,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -5966,6 +6322,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     required TResult Function(_GetPersonalDetails value) personalDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -5996,6 +6353,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult? Function(_GetPersonalDetails value)? personalDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -6022,6 +6380,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult Function(_GetPersonalDetails value)? personalDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,

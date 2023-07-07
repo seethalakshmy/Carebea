@@ -186,7 +186,15 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         child: CForm(
           formKey: _formKey,
           autoValidateMode: _validateMode,
-          child: BlocBuilder<OnboardingBloc, OnboardingState>(
+          child: BlocConsumer<OnboardingBloc, OnboardingState>(
+            listener: (context, listenerState) {
+              return listenerState.personalDetailsOption.fold(() {}, (some) {
+                some.fold((l) {}, (r) {
+                  widget.pageController
+                      .jumpToPage(widget.pageController.page!.toInt() + 1);
+                });
+              });
+            },
             bloc: widget.onboardingBloc,
             builder: (context, state) {
               return Wrap(
@@ -196,7 +204,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                 spacing: 20,
                 children: [
                   _dateWidget(),
-                  _genderWidget(),
+                  _genderWidget(state),
                   _addressLineWidget(),
                   _locationWidget(),
                   _streetWidget(),
@@ -307,29 +315,25 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
     );
   }
 
-  _genderWidget() {
-    return BlocBuilder<OnboardingBloc, OnboardingState>(
-      builder: (context, state) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _labelWidget(AppString.gender.val),
-            CustomSizedBox(height: DBL.twelve.val),
-            GenderDropDown(
-              onChange: (value) {
-                selectedGender = value.toString();
-                print("gender onchanged value: $value");
-                state.copyWith(selectedGenderId: value);
-              },
-              items: widget.onboardingBloc.genderList,
-              errorText: nextClicked && selectedGender.isEmpty
-                  ? AppString.emptyGender.val
-                  : "",
-              selectedValue: selectedGender,
-            ),
-          ],
-        );
-      },
+  _genderWidget(OnboardingState state) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _labelWidget(AppString.gender.val),
+        CustomSizedBox(height: DBL.twelve.val),
+        GenderDropDown(
+          onChange: (value) {
+            selectedGender = value.toString();
+            print("gender onchanged value: $value");
+            state.copyWith(selectedGenderId: value);
+          },
+          items: widget.onboardingBloc.genderList,
+          errorText: nextClicked && selectedGender.isEmpty
+              ? AppString.emptyGender.val
+              : "",
+          selectedValue: selectedGender,
+        ),
+      ],
     );
   }
 
@@ -419,7 +423,10 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         _labelWidget(AppString.state.val),
         CustomSizedBox(height: DBL.twelve.val),
         StateDropDown(
-          onSearchChanged: (val) {},
+          onSearchChanged: (val) {
+            widget.onboardingBloc.add(const OnboardingEvent.stateList());
+            widget.onboardingBloc.stateSearchKey = val;
+          },
           searchController: stateSearchController,
           errorText: nextClicked
               ? selectedState.isEmpty
@@ -431,7 +438,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
             selectedState = value.toString();
             print("state value in onchanged : $value");
             widget.onboardingBloc.stateId = value;
-            widget.onboardingBloc.add(const OnboardingEvent.cityList(""));
+            widget.onboardingBloc.add(const OnboardingEvent.cityList());
           },
           selectedValue: selectedState,
         ),
@@ -440,33 +447,30 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   }
 
   _cityWidget() {
-    return BlocBuilder<OnboardingBloc, OnboardingState>(
-      builder: (context, state) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _labelWidget(AppString.city.val),
-            CustomSizedBox(height: DBL.twelve.val),
-            CityDropDown(
-              searchController: citySearchController,
-              onSearchChanged: (val) {
-                widget.onboardingBloc.add(OnboardingEvent.cityList(val));
-              },
-              errorText: nextClicked
-                  ? selectedCity.isEmpty
-                      ? AppString.emptyCity.val
-                      : ""
-                  : "",
-              items: widget.onboardingBloc.cityList,
-              onChange: (value) {
-                selectedCity = value.toString();
-                print("city value in onchanged : $value");
-              },
-              selectedValue: selectedCity,
-            ),
-          ],
-        );
-      },
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _labelWidget(AppString.city.val),
+        CustomSizedBox(height: DBL.twelve.val),
+        CityDropDown(
+          searchController: citySearchController,
+          onSearchChanged: (val) {
+            widget.onboardingBloc.add(const OnboardingEvent.cityList());
+            widget.onboardingBloc.citySearchKey = val;
+          },
+          errorText: nextClicked
+              ? selectedCity.isEmpty
+                  ? AppString.emptyCity.val
+                  : ""
+              : "",
+          items: widget.onboardingBloc.cityList,
+          onChange: (value) {
+            selectedCity = value.toString();
+            print("city value in onchanged : $value");
+          },
+          selectedValue: selectedCity,
+        ),
+      ],
     );
   }
 
@@ -479,6 +483,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           _labelWidget(AppString.zip.val),
           CustomSizedBox(height: DBL.twelve.val),
           CTextField(
+            maxLength: 10,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return AppString.emptyZip.val;
@@ -486,7 +491,10 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
               return null;
             },
             controller: zipController,
-            onChanged: (value) {},
+            onChanged: (value) {
+              final formattedZip = _formatZip(value);
+              zipController.value = TextEditingValue(text: formattedZip);
+            },
             onTap: () {},
           ),
           CustomSizedBox(height: DBL.twenty.val),
@@ -552,6 +560,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
       bloc: formValidationBloc,
       builder: (context, state) {
         return CommonNextOrCancelButtons(
+          isLoading: widget.onboardingBloc.state.isLoading,
           leftButtonName: AppString.back.val,
           rightButtonName: AppString.next.val,
           onLeftButtonPressed: () {
@@ -601,9 +610,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           documentNo: documentNumberController.text.trim(),
           expiryDate: expiryDateController.text.trim(),
           documentList: [],
-          profilePic: "sghghljgshjyg"));
-
-      widget.pageController.jumpToPage(widget.pageController.page!.toInt() + 1);
+          profilePic: widget.onboardingBloc.profileUrl));
     }
   }
 

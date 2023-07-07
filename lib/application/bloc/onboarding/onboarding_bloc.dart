@@ -25,6 +25,9 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   List<StateItem> stateList = [];
   List<DocumentType> documentList = [];
   String stateId = "";
+  String citySearchKey = "";
+  String stateSearchKey = "";
+  String profileUrl = "";
 
   OnboardingBloc(this.onboardingRepository) : super(OnboardingState.initial()) {
     on<OnboardingEvent>((event, emit) async {
@@ -69,6 +72,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     });
     on<_CommonDataLists>(_getCommonLists);
     on<_CityLists>(_getCityList);
+    on<_StateLists>(_getStateList);
     on<_GetPersonalDetails>(_getPersonalData);
   }
 
@@ -82,6 +86,10 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
 
   _getCityList(_CityLists event, Emitter<OnboardingState> emit) async {
     await getCityResult(emit);
+  }
+
+  _getStateList(_StateLists event, Emitter<OnboardingState> emit) async {
+    await getStateResult(emit);
   }
 
   Future<void> getDocumentTypeResult(Emitter<OnboardingState> emit) async {
@@ -112,7 +120,8 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
 
   Future<void> getStateResult(Emitter<OnboardingState> emit) async {
     final Either<ApiErrorHandler, StateListReponse> stateResult =
-        await onboardingRepository.getStateList(page: "1", searchKey: "");
+        await onboardingRepository.getStateList(
+            page: "1", searchKey: stateSearchKey);
     OnboardingState stateState = stateResult.fold((l) {
       return state.copyWith(isLoading: false, stateOption: Some(Left(l)));
     }, (r) {
@@ -126,7 +135,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   Future<void> getCityResult(Emitter<OnboardingState> emit) async {
     final Either<ApiErrorHandler, CityListResponse> cityResult =
         await onboardingRepository.getCityList(
-            stateId: stateId, page: "1", searchKey: "");
+            stateId: stateId, page: "1", searchKey: citySearchKey);
     OnboardingState cityState = cityResult.fold((l) {
       return state.copyWith(isLoading: false, cityOption: Some(Left(l)));
     }, (r) {
@@ -159,5 +168,13 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
             expiryDate: event.expiryDate,
             documentList: event.documentList,
             profilePic: event.profilePic);
+    OnboardingState peronalState = result.fold((l) {
+      return state.copyWith(
+          isLoading: false, personalDetailsOption: Some(Left(l)));
+    }, (r) {
+      return state.copyWith(
+          isLoading: false, personalDetailsOption: Some(Right(r)));
+    });
+    emit(peronalState);
   }
 }
