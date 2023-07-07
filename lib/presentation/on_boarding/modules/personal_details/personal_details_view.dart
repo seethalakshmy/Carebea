@@ -1,10 +1,12 @@
 import 'package:admin_580_tech/infrastructure/on_boarding/on_boarding_repository.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/address_selection_widget.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/profile_picture_widget.dart';
+import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/zip_code_formatter.dart';
 import 'package:admin_580_tech/presentation/on_boarding/widgets/upload_document_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/bloc/form_validation/form_validation_bloc.dart';
@@ -490,11 +492,13 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
               }
               return null;
             },
+            inputFormatter: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(5),
+              ZipCodeFormatter(),
+            ],
             controller: zipController,
-            onChanged: (value) {
-              final formattedZip = _formatZip(value);
-              zipController.value = TextEditingValue(text: formattedZip);
-            },
+            onChanged: (value) {},
             onTap: () {},
           ),
           CustomSizedBox(height: DBL.twenty.val),

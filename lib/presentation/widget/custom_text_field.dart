@@ -1,6 +1,7 @@
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../core/text_styles.dart';
 
@@ -32,6 +33,7 @@ class CTextField extends StatelessWidget {
       this.fillColor,
       this.maxLines,
       this.textAlignVertical,
+      this.inputFormatter,
       this.borderColor})
       : assert(controller != null),
         super(key: key);
@@ -61,6 +63,7 @@ class CTextField extends StatelessWidget {
   final int? maxLines;
   final Color? borderColor;
   final TextAlignVertical? textAlignVertical;
+  final List<TextInputFormatter>? inputFormatter;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +72,7 @@ class CTextField extends StatelessWidget {
       height: height,
       child: TextFormField(
         textAlignVertical: textAlignVertical ?? TextAlignVertical.center,
-
+        inputFormatters: inputFormatter!,
         controller: controller,
         focusNode: focusNode,
         textInputAction: textInputAction,
