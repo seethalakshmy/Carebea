@@ -4,6 +4,7 @@ import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_re
 import 'package:admin_580_tech/domain/caregiver_profile/model/caregiver_profile_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_verification_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
+import 'package:admin_580_tech/domain/login/login_response.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/services/models/get_service_response.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/services/models/service_list_response.dart';
 import 'package:dio/dio.dart';
@@ -143,7 +144,7 @@ abstract class ApiClient {
     @Field('have_details') HhaDetails hhaDetails,
     @Field('bls_or_first_aid_certificate') bool haveBLSCertificate,
     @Field('bls_or_first_aid_certificate_details')
-    BlsOrFirstAidCertificateDetails blsDetails,
+        BlsOrFirstAidCertificateDetails blsDetails,
     @Field('tb_or_ppd_test') bool haveTBTest,
     @Field('tb_or_ppd_test_details') TbOrPpdTestDetails tbDetails,
     @Field('covid_vaccination') bool haveCovidVaccination,
@@ -193,4 +194,10 @@ abstract class ApiClient {
 
   @GET("/common-data/get-documents")
   Future<DocumentListResponse> getDocumentsList();
+
+  @POST("/super-admin/login")
+  Future<LoginResponse> login(
+    @Field('email') String email,
+    @Field('password') String password,
+  );
 }

@@ -79,9 +79,11 @@ class TableVerificationButton extends StatelessWidget {
             ? AppColor.primaryColor.val
             : verificationStatus == Verification.startedVerification.val
                 ? AppColor.primaryColor.val
-                : verificationStatus == Verification.interViewStarted.val
-                    ? AppColor.darkGreen.val
-                    : AppColor.amber2.val,
+                : verificationStatus == Verification.trainingStarted.val
+                    ? AppColor.amber.val
+                    : verificationStatus == Verification.trainingStarted.val
+                        ? AppColor.darkGreen.val
+                        : AppColor.darkGreen.val,
         width: 1.2);
   }
 
@@ -105,6 +107,8 @@ class TableVerificationButton extends StatelessWidget {
       return isHover ? AppColor.amber3.val : AppColor.amber2.val;
     } else if (verificationStatus == Verification.interViewStarted.val) {
       return isHover ? AppColor.darkGreen2.val : AppColor.darkGreen.val;
+    } else if (verificationStatus == Verification.interViewCompleted.val) {
+      return isHover ? AppColor.darkGreen2.val : AppColor.darkGreen.val;
     } else {
       return AppColor.primaryColor.val;
     }
@@ -115,8 +119,10 @@ class TableVerificationButton extends StatelessWidget {
         ? AppString.startVerification.val
         : verificationStatus == Verification.startedVerification.val
             ? AppString.startedVerification.val
-            : verificationStatus == Verification.interViewStarted.val
-                ? AppString.interviewStarted.val
-                : AppString.trainingStarted.val;
+            : verificationStatus == Verification.trainingStarted.val
+                ? AppString.trainingStarted.val
+                : verificationStatus == Verification.interViewStarted.val
+                    ? AppString.interviewStarted.val
+                    : AppString.interviewCompleted.val;
   }
 }

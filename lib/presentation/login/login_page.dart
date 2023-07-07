@@ -1,7 +1,7 @@
-import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
+import 'package:admin_580_tech/infrastructure/login/login_repository.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/form_validation/form_validation_bloc.dart';
+import '../../application/bloc/login/login_bloc.dart';
 import '../routes/app_router.gr.dart';
 import '../widget/custom_text_field.dart';
 
@@ -30,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   final FocusNode _userFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
-  final FormValidationBloc _validationBloc = FormValidationBloc();
+  final LoginBloc _loginBloc = LoginBloc(LoginRepository());
   AutovalidateMode _validateMode = AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
 
@@ -49,9 +50,9 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(body: _rebuildView(size));
   }
 
-  BlocProvider<FormValidationBloc> _rebuildView(Size size) {
+  BlocProvider<LoginBloc> _rebuildView(Size size) {
     return BlocProvider(
-      create: (context) => _validationBloc,
+      create: (context) => _loginBloc,
       child: BlocBuilder<FormValidationBloc, FormValidationState>(
         buildWhen: (previous, current) => previous != current,
         builder: (context, state) {
@@ -155,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
 
   CustomImage _logoView() {
     return CustomImage(
-     height: DBL.twoThirty.val,
+      height: DBL.twoThirty.val,
       path: IMG.blackLogoPng.val,
     );
   }
@@ -204,7 +205,6 @@ class _LoginPageState extends State<LoginPage> {
     return CTextField(
       focusNode: _userFocusNode,
       width: DBL.fourFifty.val,
-      height: DBL.fiftyFive.val,
       onChanged: (String value) {},
       textInputAction: TextInputAction.next,
       controller: _usernameController,
@@ -212,7 +212,7 @@ class _LoginPageState extends State<LoginPage> {
         if (value == null || value.isEmpty) {
           return AppString.emptyEmail.val;
         } else if (!RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
-            .hasMatch(value)) {
+            .hasMatch(value.trim())) {
           return AppString.validEmail.val;
         }
         return null;
@@ -224,7 +224,6 @@ class _LoginPageState extends State<LoginPage> {
     return CTextField(
       obscureText: true,
       width: DBL.fourFifty.val,
-      height: DBL.fifty.val,
       onChanged: (String value) {},
       textInputAction: TextInputAction.done,
       onSubmitted: (val) {
@@ -241,24 +240,34 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _loginButton() {
-    return CustomMaterialButton(
-      text: AppString.login.val.toUpperCase(),
-      borderRadius: DBL.eight.val,
-      height: DBL.sixty.val,
-      minWidth: DBL.fourFifty.val,
-      color: AppColor.primaryColor.val,
-      onPressed: () {
-        checkInputData();
+    return BlocBuilder<LoginBloc, LoginState>(
+      builder: (context, state) {
+        return CustomMaterialButton(
+          text: AppString.login.val.toUpperCase(),
+          borderRadius: DBL.eight.val,
+          height: DBL.sixty.val,
+          minWidth: DBL.fourFifty.val,
+          isLoading: state.isLoading,
+          color: AppColor.primaryColor.val,
+          onPressed: () {
+            checkInputData();
+          },
+        );
       },
     );
   }
 
   checkInputData() {
     if (_validateMode != AutovalidateMode.always) {
-      _validationBloc.add(const FormValidationEvent.submit());
+      context
+          .read<FormValidationBloc>()
+          .add(const FormValidationEvent.submit());
     }
     if (_formKey.currentState!.validate()) {
-      context.router.replace(const SideMenuRoute());
+      _loginBloc.add(LoginEvent.login(
+          context: context,
+          email: _usernameController.text.trim(),
+          password: _passwordController.text.trim()));
     }
   }
 

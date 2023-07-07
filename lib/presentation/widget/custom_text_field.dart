@@ -3,8 +3,6 @@ import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../core/text_styles.dart';
-
 class CTextField extends StatelessWidget {
   const CTextField(
       {Key? key,
@@ -69,7 +67,6 @@ class CTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomSizedBox(
       width: width,
-      height: height,
       child: TextFormField(
         textAlignVertical: textAlignVertical ?? TextAlignVertical.center,
         inputFormatters: inputFormatter!,
@@ -96,8 +93,8 @@ class CTextField extends StatelessWidget {
           suffixIcon: suffixIcon,
           isDense: true,
           errorText: errorText,
-          errorStyle:
-              TS().gPoppins(fontSize: FS.font11.val, color: AppColor.red.val),
+          // errorStyle:
+          //     TS().gPoppins(fontSize: FS.font11.val, color: AppColor.red.val,),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
                 color: borderColor ?? AppColor.borderColor.val, width: 1),

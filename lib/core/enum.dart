@@ -259,6 +259,7 @@ enum AppString {
   startedVerification("Started Verification"),
   trainingStarted("Training Started"),
   interviewStarted("Interview Started"),
+  interviewCompleted("Interview Completed"),
   enterTheReason("Enter the reason"),
   acceptThisCareAmbassador("Do you want to accept this care ambassador?"),
   selectRejectedDocument("Select rejected document and mentioned the reason"),
@@ -331,6 +332,7 @@ enum AppColor {
   black3(Color(0xff1A1C25)),
   black4(Color(0xff444444)),
   black5(Color(0xff494949)),
+  black6(Color(0x15000000)),
   matBlack(Color(0xff324665)),
   matBlack2(Color(0xff596483)),
   matBlack3(Color(0xff1F374F)),
@@ -726,7 +728,8 @@ enum Verification {
   startVerification(1),
   startedVerification(2),
   trainingStarted(3),
-  interViewStarted(4);
+  interViewStarted(4),
+  interViewCompleted(5);
 
   final int val;
 

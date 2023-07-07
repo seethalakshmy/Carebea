@@ -628,6 +628,7 @@ mixin _$CareGiverProfileState {
   VerifyResponse? get interViewVerifyResponse =>
       throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+  bool get isClientError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CareGiverProfileStateCopyWith<CareGiverProfileState> get copyWith =>
@@ -646,7 +647,8 @@ abstract class $CareGiverProfileStateCopyWith<$Res> {
       CaregiverProfileResponse? response,
       VerifyResponse? trainingVerifyResponse,
       VerifyResponse? interViewVerifyResponse,
-      String? error});
+      String? error,
+      bool isClientError});
 }
 
 /// @nodoc
@@ -669,6 +671,7 @@ class _$CareGiverProfileStateCopyWithImpl<$Res,
     Object? trainingVerifyResponse = freezed,
     Object? interViewVerifyResponse = freezed,
     Object? error = freezed,
+    Object? isClientError = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -695,6 +698,10 @@ class _$CareGiverProfileStateCopyWithImpl<$Res,
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      isClientError: null == isClientError
+          ? _value.isClientError
+          : isClientError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -713,7 +720,8 @@ abstract class _$$_CareGiverProfileStateCopyWith<$Res>
       CaregiverProfileResponse? response,
       VerifyResponse? trainingVerifyResponse,
       VerifyResponse? interViewVerifyResponse,
-      String? error});
+      String? error,
+      bool isClientError});
 }
 
 /// @nodoc
@@ -733,6 +741,7 @@ class __$$_CareGiverProfileStateCopyWithImpl<$Res>
     Object? trainingVerifyResponse = freezed,
     Object? interViewVerifyResponse = freezed,
     Object? error = freezed,
+    Object? isClientError = null,
   }) {
     return _then(_$_CareGiverProfileState(
       isLoading: null == isLoading
@@ -759,6 +768,10 @@ class __$$_CareGiverProfileStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      isClientError: null == isClientError
+          ? _value.isClientError
+          : isClientError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -772,7 +785,8 @@ class _$_CareGiverProfileState implements _CareGiverProfileState {
       required this.response,
       required this.trainingVerifyResponse,
       required this.interViewVerifyResponse,
-      required this.error});
+      required this.error,
+      this.isClientError = false});
 
   @override
   final bool isLoading;
@@ -786,10 +800,13 @@ class _$_CareGiverProfileState implements _CareGiverProfileState {
   final VerifyResponse? interViewVerifyResponse;
   @override
   final String? error;
+  @override
+  @JsonKey()
+  final bool isClientError;
 
   @override
   String toString() {
-    return 'CareGiverProfileState(isLoading: $isLoading, isError: $isError, response: $response, trainingVerifyResponse: $trainingVerifyResponse, interViewVerifyResponse: $interViewVerifyResponse, error: $error)';
+    return 'CareGiverProfileState(isLoading: $isLoading, isError: $isError, response: $response, trainingVerifyResponse: $trainingVerifyResponse, interViewVerifyResponse: $interViewVerifyResponse, error: $error, isClientError: $isClientError)';
   }
 
   @override
@@ -807,12 +824,14 @@ class _$_CareGiverProfileState implements _CareGiverProfileState {
             (identical(
                     other.interViewVerifyResponse, interViewVerifyResponse) ||
                 other.interViewVerifyResponse == interViewVerifyResponse) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.isClientError, isClientError) ||
+                other.isClientError == isClientError));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isLoading, isError, response,
-      trainingVerifyResponse, interViewVerifyResponse, error);
+      trainingVerifyResponse, interViewVerifyResponse, error, isClientError);
 
   @JsonKey(ignore: true)
   @override
@@ -829,7 +848,8 @@ abstract class _CareGiverProfileState implements CareGiverProfileState {
       required final CaregiverProfileResponse? response,
       required final VerifyResponse? trainingVerifyResponse,
       required final VerifyResponse? interViewVerifyResponse,
-      required final String? error}) = _$_CareGiverProfileState;
+      required final String? error,
+      final bool isClientError}) = _$_CareGiverProfileState;
 
   @override
   bool get isLoading;
@@ -843,6 +863,8 @@ abstract class _CareGiverProfileState implements CareGiverProfileState {
   VerifyResponse? get interViewVerifyResponse;
   @override
   String? get error;
+  @override
+  bool get isClientError;
   @override
   @JsonKey(ignore: true)
   _$$_CareGiverProfileStateCopyWith<_$_CareGiverProfileState> get copyWith =>
