@@ -1,8 +1,12 @@
+import 'package:admin_580_tech/infrastructure/on_boarding/on_boarding_repository.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../application/bloc/onboarding/onboarding_bloc.dart';
 import '../../../core/enum.dart';
 import '../../../core/text_styles.dart';
+import '../../widget/custom_text_field.dart';
 
 class DropdownWidget<T> extends StatefulWidget {
   /// the child widget for the button, this will be ignored if text is supplied
@@ -30,6 +34,9 @@ class DropdownWidget<T> extends StatefulWidget {
   final String? hint;
   final String? errorText;
   final T? selectedValue;
+  final Function? onSearchChanged;
+  final TextEditingController? searchController;
+  final bool showSearchBox;
 
   DropdownWidget({
     Key? key,
@@ -45,6 +52,9 @@ class DropdownWidget<T> extends StatefulWidget {
     this.hint,
     this.errorText,
     this.selectedValue,
+    this.onSearchChanged,
+    this.searchController,
+    required this.showSearchBox,
   }) : super(key: key);
 
   @override
@@ -87,69 +97,77 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
   Widget build(BuildContext context) {
     var style = widget.dropdownButtonStyle;
     // link the overlay to the button
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CompositedTransformTarget(
-          link: this._layerLink,
-          child: InkWell(
-            onTap: _toggleDropdown,
-            child: Container(
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(6),
-                  border: Border.all(
-                      color: (widget.errorText != null &&
-                              widget.errorText!.isNotEmpty)
-                          ? AppColor.red.val
-                          : borderColor,
-                      width: 1)),
-              height: DBL.fortyEight.val,
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                textDirection:
-                    widget.leadingIcon ? TextDirection.rtl : TextDirection.ltr,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  if (_currentIndex == -1) ...[
-                    widget.child,
-                  ] else ...[
-                    Text(
-                      _isOpen
-                          ? ""
-                          : widget.items[_currentIndex].value.toString(),
-                      style: TextStyle(color: Colors.black),
-                    )
-                  ],
-                  if (!widget.hideIcon) Spacer(),
-                  RotationTransition(
-                    turns: _rotateAnimation!,
-                    child: widget.icon ??
-                        Icon(
-                          Icons.keyboard_arrow_down,
-                          color: AppColor.darkBlue.val,
+    return BlocProvider(
+      create: (context) => OnboardingBloc(OnBoardingRepository()),
+      child: BlocBuilder<OnboardingBloc, OnboardingState>(
+        builder: (context, state) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CompositedTransformTarget(
+                link: this._layerLink,
+                child: InkWell(
+                  onTap: _toggleDropdown,
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(
+                            color: (widget.errorText != null &&
+                                    widget.errorText!.isNotEmpty)
+                                ? AppColor.red.val
+                                : borderColor,
+                            width: 1)),
+                    height: DBL.fortyEight.val,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      textDirection: widget.leadingIcon
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        const SizedBox(
+                          width: 10,
                         ),
+                        if (_currentIndex == -1) ...[
+                          widget.child,
+                        ] else ...[
+                          Text(
+                            _isOpen
+                                ? ""
+                                : widget.items[_currentIndex].value.toString(),
+                            style: TextStyle(color: Colors.black),
+                          )
+                        ],
+                        if (!widget.hideIcon) Spacer(),
+                        RotationTransition(
+                          turns: _rotateAnimation!,
+                          child: widget.icon ??
+                              Icon(
+                                Icons.keyboard_arrow_down,
+                                color: AppColor.darkBlue.val,
+                              ),
+                        ),
+                      ],
+                    ),
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 6,
-        ),
-        CustomText(
-          widget.errorText ?? "",
-          style:
-              TS().gPoppins(fontSize: FS.font11.val, color: AppColor.red.val),
-        ),
-      ],
+              SizedBox(
+                height: 6,
+              ),
+              CustomText(
+                widget.errorText ?? "",
+                style: TS()
+                    .gPoppins(fontSize: FS.font11.val, color: AppColor.red.val),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 
@@ -199,21 +217,41 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           //color: Colors.white,
                           constraints: BoxConstraints(maxHeight: 200),
-                          child: ListView(
-                            padding:
-                                widget.dropdownStyle.padding ?? EdgeInsets.zero,
-                            shrinkWrap: true,
-                            children: widget.items.asMap().entries.map((item) {
-                              return InkWell(
-                                // hoverColor: AppColors.textGrey,
-                                onTap: () {
-                                  setState(() => _currentIndex = item.key);
-                                  widget.onChange(item.value.value!, item.key);
-                                  _toggleDropdown();
-                                },
-                                child: item.value,
-                              );
-                            }).toList(),
+                          child: Column(
+                            children: [
+                              widget.showSearchBox
+                                  ? CTextField(
+                                      onChanged: (val) {
+                                        widget.onSearchChanged!(val);
+                                      },
+                                      controller: widget.searchController,
+                                      suffixIcon: Icon(
+                                        Icons.search,
+                                        color: AppColor.lightGrey3.val,
+                                        size: 25,
+                                      ))
+                                  : Container(),
+                              Flexible(
+                                child: ListView(
+                                  padding: widget.dropdownStyle.padding ??
+                                      EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  children:
+                                      widget.items.asMap().entries.map((item) {
+                                    return InkWell(
+                                      // hoverColor: AppColors.textGrey,
+                                      onTap: () {
+                                        _currentIndex = item.key;
+                                        widget.onChange(
+                                            item.value.value!, item.key);
+                                        _toggleDropdown();
+                                      },
+                                      child: item.value,
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),

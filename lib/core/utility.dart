@@ -23,13 +23,14 @@ class Utility {
     }
   }
 
-  static Future<String> selectDate(BuildContext context) async {
+  static Future<String> selectDate(BuildContext context, DateTime initialDate,
+      DateTime firstDate, DateTime lastDate) async {
     final DateFormat formatter = DateFormat('dd/MM/yyyy');
     DateTime? picked = await showDatePicker(
         context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(1940),
-        lastDate: DateTime(DateTime.now().year - 18));
+        initialDate: initialDate,
+        firstDate: firstDate,
+        lastDate: lastDate);
 
     String selectedDate = formatter.format(picked!);
     return selectedDate;

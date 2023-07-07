@@ -176,11 +176,20 @@ abstract class ApiClient {
   @GET("/common-data/get-gender")
   Future<GenderListResponse> getGenderList();
 
-  @GET("/common-data/get-cities")
-  Future<CityListResponse> getCityList();
+  @GET("/common-data/get-cities?")
+  Future<CityListResponse> getCityList(
+    @Query("state_id") String stateId,
+    @Query("page") String pageNo,
+    @Query("limit") String limit,
+    @Query("search_term") String searchQuery,
+  );
 
-  @GET("/common-data/get-states")
-  Future<StateListReponse> getStateList();
+  @GET("/common-data/get-states?")
+  Future<StateListReponse> getStateList(
+    @Query("page") String pageNo,
+    @Query("limit") String limit,
+    @Query("search_term") String searchQuery,
+  );
 
   @GET("/common-data/get-documents")
   Future<DocumentListResponse> getDocumentsList();

@@ -66,6 +66,9 @@ class DocumentDetailsView extends StatelessWidget {
             _documentDetailsWidget(),
             _documentNoWidget(),
             CommonDatePickerWidget(
+              initialDate: DateTime.now(),
+              firstDate: DateTime.now(),
+              lastDate: DateTime(3000),
               dateController: dateController,
               validator: (value) {
                 if (value == null || value.isEmpty) {

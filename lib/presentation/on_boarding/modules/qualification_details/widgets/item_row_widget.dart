@@ -110,6 +110,9 @@ class ItemRowWidget extends StatelessWidget {
             ? const CustomSizedBox()
             : CustomSizedBox(width: DBL.ten.val),
         CommonDatePickerWidget(
+          initialDate: DateTime.now(),
+          firstDate: DateTime.now(),
+          lastDate: DateTime(3000),
           label: datePickerLabel,
           dateController: dateController,
           labelSize: FS.font14.val,

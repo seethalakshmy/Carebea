@@ -36,9 +36,14 @@ class OnBoardingRepository implements IOnBoardingRepo {
   }
 
   @override
-  Future<Either<ApiErrorHandler, CityListResponse>> getCityList() async {
+  Future<Either<ApiErrorHandler, CityListResponse>> getCityList({
+    required String stateId,
+    required String page,
+    required String searchKey,
+  }) async {
     try {
-      final response = await apiClient.getCityList();
+      final response =
+          await apiClient.getCityList(stateId, page, "15", searchKey);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
@@ -54,9 +59,12 @@ class OnBoardingRepository implements IOnBoardingRepo {
   }
 
   @override
-  Future<Either<ApiErrorHandler, StateListReponse>> getStateList() async {
+  Future<Either<ApiErrorHandler, StateListReponse>> getStateList({
+    required String page,
+    required String searchKey,
+  }) async {
     try {
-      final response = await apiClient.getStateList();
+      final response = await apiClient.getStateList(page, "15", searchKey);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");

@@ -26,6 +26,7 @@ class GenderDropDown extends StatelessWidget {
     return CustomSizedBox(
       width: DBL.twoEighty.val,
       child: DropdownWidget(
+          showSearchBox: false,
           hint: AppString.gender.val,
           errorText: errorText,
           items: items
