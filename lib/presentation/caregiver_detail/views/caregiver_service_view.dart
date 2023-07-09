@@ -50,12 +50,12 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
   List<Services> services = [];
   int _start = 0;
   int _end = 10;
+  int _pageIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    widget.bloc.add(CareGiverDetailEvent.getCareGiverServiceList(
-        userId: "64a3037835cc7cda8a36cb25", page: _page, limit: _limit));
+    _getCareGiverServices();
   }
 
   @override
@@ -100,22 +100,22 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
         onNextPressed: () {
           if (_page < totalPages) {
             _page = _page + 1;
-            _getCareGiverEvent();
+            _getCareGiverServices();
           }
         },
         onItemPressed: (i) {
           _page = i;
-          _getCareGiverEvent();
+          _getCareGiverServices();
         },
         onPreviousPressed: () {
           if (_page > 1) {
             _page = _page - 1;
-            _getCareGiverEvent();
+            _getCareGiverServices();
           }
         });
   }
 
-  _getCareGiverEvent() {
+  _getCareGiverServices() {
     widget.bloc.add(CareGiverDetailEvent.getCareGiverServiceList(
       userId: widget.userId,
       page: _page,
@@ -139,6 +139,8 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
                     height: (INT.ten.val + 1) * 48,
                     child: _servicesTable(context),
                   ),
+                  CustomSizedBox(height: DBL.twenty.val),
+                  if (_totalItems > 10) _paginationView()
                 ],
               ),
             ),
@@ -202,13 +204,13 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
           ),
         ],
         rows: services.asMap().entries.map((e) {
-          getIndex(e.key);
+          _setIndex(e.key);
           var item = e.value;
 
           return DataRow2(
             cells: [
               DataCell(TableRowView(
-                text: getIndex(e.key).toString(),
+                text: _pageIndex.toString(),
               )),
               DataCell(TableRowImageView(
                   name: "${item.client?.firstName} ${item.client?.lastName}",
@@ -245,8 +247,12 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
     );
   }
 
-  int getIndex(int index) {
-    return index + 1;
+  _setIndex(int index) {
+    if (_page == 1) {
+      _pageIndex = index + 1;
+    } else {
+      _pageIndex = ((_page * _limit) - 10) + index + 1;
+    }
   }
 
   _serviceDetailPopUp(BuildContext context, int status) {

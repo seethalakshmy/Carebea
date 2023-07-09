@@ -116,12 +116,13 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                   userId: userId,
                 ),
                 CareGiverEarningView(
-                    state: state,
-                    earnings: state.response?.data?.earnings ?? []),
+                  bloc: _caregiverDetailBloc,
+                  userId: userId,
+                ),
                 CareGiverServiceRequestView(
-                    state: state,
-                    serviceRequested:
-                        state.response?.data?.serviceRequested ?? [])
+                  bloc: _caregiverDetailBloc,
+                  userId: userId,
+                )
                 /*buildOffersListView(),*/
               ],
             ),

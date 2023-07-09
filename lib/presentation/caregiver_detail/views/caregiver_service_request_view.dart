@@ -1,5 +1,6 @@
 import 'package:admin_580_tech/application/bloc/caregiver_detail/caregiver_detail_bloc.dart';
 import 'package:admin_580_tech/core/string_extension.dart';
+import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_service_request_list_response.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/profile_info.dart';
@@ -9,10 +10,10 @@ import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_row_view.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/enum.dart';
 import '../../../core/text_styles.dart';
-import '../../../domain/caregiver_detail/model/caregiver_detail_response.dart';
 import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_card.dart';
 import '../../widget/custom_container.dart';
@@ -22,32 +23,75 @@ import '../../widget/custom_sizedbox.dart';
 import '../../widget/custom_text.dart';
 import '../../widget/empty_view.dart';
 import '../../widget/error_view.dart';
+import '../../widget/pagination_view.dart';
 import '../../widget/service_details_service_list_view.dart';
 import '../../widget/table_actions_view.dart';
 
-class CareGiverServiceRequestView extends StatelessWidget {
-  CareGiverServiceRequestView(
-      {required this.state, required this.serviceRequested, Key? key})
+class CareGiverServiceRequestView extends StatefulWidget {
+  const CareGiverServiceRequestView(
+      {required this.bloc, required this.userId, Key? key})
       : super(key: key);
-  final CareGiverDetailState state;
-  List<ServiceRequested> serviceRequested;
+  final CaregiverDetailBloc bloc;
+  final String userId;
+
+  @override
+  State<CareGiverServiceRequestView> createState() =>
+      _CareGiverServiceRequestViewState();
+}
+
+class _CareGiverServiceRequestViewState
+    extends State<CareGiverServiceRequestView> {
   List<String> mPets = ["Cat", "Dog", "Rabbit"];
+  int _totalItems = 1;
+  final int _limit = 10;
+  int _page = 1;
+  int _pageIndex = 0;
+  List<ServiceRequested> serviceRequested = [];
+  int _start = 0;
+  int _end = 10;
+
+  @override
+  void initState() {
+    super.initState();
+    _getCareGiverServiceRequests();
+  }
 
   @override
   Widget build(BuildContext context) {
     return CustomCard(
       elevation: DBL.seven.val,
-      child: CustomContainer(
-          child: state.isLoading
-              ? const TableLoaderView()
-              : state.isError
-                  ? ErrorView(isClientError: false, errorMessage: state.error)
-                  : _serviceRequestView(context, serviceRequested)),
+      child: BlocBuilder<CaregiverDetailBloc, CareGiverDetailState>(
+        builder: (context, state) {
+          CareGiverServiceRequestListResponse? value =
+              state.serviceRequestListResponse;
+          if (value?.status ?? false) {
+            serviceRequested.clear();
+            if (value?.data?.serviceRequested != null &&
+                value!.data!.serviceRequested!.isNotEmpty) {
+              _totalItems = value.data?.totalCount ?? 1;
+              serviceRequested.addAll(value.data?.serviceRequested ?? []);
+              _updateData();
+            }
+          }
+          return CustomContainer(
+              child: state.isLoadingServiceRequest
+                  ? const TableLoaderView()
+                  : state.isError
+                      ? ErrorView(
+                          isClientError: false,
+                          errorMessage: state.error,
+                          isUnderTab: true,
+                        )
+                      : _serviceRequestView(context));
+        },
+      ),
     );
   }
 
-  _serviceRequestView(BuildContext context, List<ServiceRequested> services) {
-    return services.isNotEmpty
+  _serviceRequestView(
+    BuildContext context,
+  ) {
+    return serviceRequested.isNotEmpty
         ? CustomPadding.only(
             left: DBL.twenty.val,
             right: DBL.nineteen.val,
@@ -62,6 +106,8 @@ class CareGiverServiceRequestView extends StatelessWidget {
                     height: (INT.ten.val + 1) * 48,
                     child: _servicesTable(context),
                   ),
+                  CustomSizedBox(height: DBL.twenty.val),
+                  if (_totalItems > 10) _paginationView()
                 ],
               ),
             ),
@@ -128,12 +174,12 @@ class CareGiverServiceRequestView extends StatelessWidget {
           ),
         ],
         rows: serviceRequested.asMap().entries.map((e) {
-          getIndex(e.key);
           var item = e.value;
+          _setIndex(e.key);
           return DataRow2(
             cells: [
               DataCell(TableRowView(
-                text: getIndex(e.key).toString(),
+                text: _pageIndex.toString(),
               )),
               DataCell(
                   TableRowView(text: "${item.firstName} ${item.lastName}")),
@@ -158,6 +204,14 @@ class CareGiverServiceRequestView extends StatelessWidget {
     );
   }
 
+  _setIndex(int index) {
+    if (_page == 1) {
+      _pageIndex = index + 1;
+    } else {
+      _pageIndex = ((_page * _limit) - 10) + index + 1;
+    }
+  }
+
   TableColumnView _tableColumnView(String name) {
     return TableColumnView(
       text: name,
@@ -165,8 +219,49 @@ class CareGiverServiceRequestView extends StatelessWidget {
     );
   }
 
-  int getIndex(int index) {
-    return index + 1;
+  _paginationView() {
+    final int totalPages = (_totalItems / _limit).ceil();
+    return PaginationView(
+        page: _page,
+        start: _start,
+        end: _end,
+        totalItems: _totalItems,
+        totalPages: totalPages,
+        onNextPressed: () {
+          if (_page < totalPages) {
+            _page = _page + 1;
+            _getCareGiverServiceRequests();
+          }
+        },
+        onItemPressed: (i) {
+          _page = i;
+          _getCareGiverServiceRequests();
+        },
+        onPreviousPressed: () {
+          if (_page > 1) {
+            _page = _page - 1;
+            _getCareGiverServiceRequests();
+          }
+        });
+  }
+
+  _getCareGiverServiceRequests() {
+    widget.bloc.add(CareGiverDetailEvent.getCareGiverServiceRequestList(
+      userId: widget.userId,
+      page: _page,
+      limit: _limit,
+    ));
+  }
+
+  void _updateData() {
+    if (_page == 1) {
+      _start = 0;
+      _end =
+          serviceRequested.length < _limit ? serviceRequested.length : _limit;
+    } else {
+      _start = (_page * _limit) - 10;
+      _end = _start + serviceRequested.length;
+    }
   }
 
   _serviceRequestPopUp(

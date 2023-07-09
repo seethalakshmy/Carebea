@@ -64,9 +64,11 @@ class CaregiverDetailBloc
         await careGiverDetailRepository.getCareGiverEarningsList(
             userID: event.userId, page: event.page, limit: event.page);
     var homeState = result.fold((l) {
-      return state.copyWith(error: l.error, isLoading: false);
+      return state.copyWith(
+          error: l.error, isLoading: false, isLoadingEarnings: false);
     }, (r) {
-      return state.copyWith(earningsListResponse: r, isLoading: false);
+      return state.copyWith(
+          earningsListResponse: r, isLoading: false, isLoadingEarnings: false);
     });
     emit(homeState);
   }
@@ -78,9 +80,13 @@ class CaregiverDetailBloc
         await careGiverDetailRepository.getCareGiverServiceRequestedList(
             userID: event.userId, page: event.page, limit: event.page);
     var homeState = result.fold((l) {
-      return state.copyWith(error: l.error, isLoading: false);
+      return state.copyWith(
+          error: l.error, isLoading: false, isLoadingServiceRequest: false);
     }, (r) {
-      return state.copyWith(serviceRequestListResponse: r, isLoading: false);
+      return state.copyWith(
+          serviceRequestListResponse: r,
+          isLoading: false,
+          isLoadingServiceRequest: false);
     });
     emit(homeState);
   }
