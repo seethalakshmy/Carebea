@@ -24,6 +24,10 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   List<City> cityList = [];
   List<StateItem> stateList = [];
   List<DocumentType> documentList = [];
+  String stateId = "";
+  String citySearchKey = "";
+  String stateSearchKey = "";
+  String profileUrl = "";
 
   OnboardingBloc(this.onboardingRepository) : super(OnboardingState.initial()) {
     on<OnboardingEvent>((event, emit) async {
@@ -67,44 +71,28 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
       }
     });
     on<_CommonDataLists>(_getCommonLists);
+    on<_CityLists>(_getCityList);
+    on<_StateLists>(_getStateList);
     on<_GetPersonalDetails>(_getPersonalData);
   }
 
   _getCommonLists(_CommonDataLists event, Emitter<OnboardingState> emit) async {
     emit(state.copyWith(isLoading: true));
-    final Either<ApiErrorHandler, CityListResponse> cityResult =
-        await onboardingRepository.getCityList();
-    OnboardingState cityState = cityResult.fold((l) {
-      return state.copyWith(isLoading: false, cityOption: Some(Left(l)));
-    }, (r) {
-      cityList.clear();
-      cityList.addAll(r.data!);
-      return state.copyWith(isLoading: false, cityOption: Some(Right(r)));
-    });
-    emit(cityState);
 
-    final Either<ApiErrorHandler, StateListReponse> stateResult =
-        await onboardingRepository.getStateList();
-    OnboardingState stateState = stateResult.fold((l) {
-      return state.copyWith(isLoading: false, stateOption: Some(Left(l)));
-    }, (r) {
-      stateList.clear();
-      stateList.addAll(r.data!);
-      return state.copyWith(isLoading: false, stateOption: Some(Right(r)));
-    });
-    emit(stateState);
+    await getGenderResult(emit);
+    await getStateResult(emit);
+    await getDocumentTypeResult(emit);
+  }
 
-    final Either<ApiErrorHandler, GenderListResponse> genderResult =
-        await onboardingRepository.getGenderList();
-    OnboardingState genderState = genderResult.fold((l) {
-      return state.copyWith(isLoading: false, genderOption: Some(Left(l)));
-    }, (r) {
-      genderList.clear();
-      genderList.addAll(r.gender!);
-      return state.copyWith(isLoading: false, genderOption: Some(Right(r)));
-    });
-    emit(genderState);
+  _getCityList(_CityLists event, Emitter<OnboardingState> emit) async {
+    await getCityResult(emit);
+  }
 
+  _getStateList(_StateLists event, Emitter<OnboardingState> emit) async {
+    await getStateResult(emit);
+  }
+
+  Future<void> getDocumentTypeResult(Emitter<OnboardingState> emit) async {
     final Either<ApiErrorHandler, DocumentListResponse> documentResult =
         await onboardingRepository.getDocumentList();
     OnboardingState documentState = documentResult.fold((l) {
@@ -115,6 +103,47 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
       return state.copyWith(isLoading: false, documentOption: Some(Right(r)));
     });
     emit(documentState);
+  }
+
+  Future<void> getGenderResult(Emitter<OnboardingState> emit) async {
+    final Either<ApiErrorHandler, GenderListResponse> genderResult =
+        await onboardingRepository.getGenderList();
+    OnboardingState genderState = genderResult.fold((l) {
+      return state.copyWith(isLoading: false, genderOption: Some(Left(l)));
+    }, (r) {
+      genderList.clear();
+      genderList.addAll(r.gender!);
+      return state.copyWith(isLoading: false, genderOption: Some(Right(r)));
+    });
+    emit(genderState);
+  }
+
+  Future<void> getStateResult(Emitter<OnboardingState> emit) async {
+    final Either<ApiErrorHandler, StateListReponse> stateResult =
+        await onboardingRepository.getStateList(
+            page: "1", searchKey: stateSearchKey);
+    OnboardingState stateState = stateResult.fold((l) {
+      return state.copyWith(isLoading: false, stateOption: Some(Left(l)));
+    }, (r) {
+      stateList.clear();
+      stateList.addAll(r.data!);
+      return state.copyWith(isLoading: false, stateOption: Some(Right(r)));
+    });
+    emit(stateState);
+  }
+
+  Future<void> getCityResult(Emitter<OnboardingState> emit) async {
+    final Either<ApiErrorHandler, CityListResponse> cityResult =
+        await onboardingRepository.getCityList(
+            stateId: stateId, page: "1", searchKey: citySearchKey);
+    OnboardingState cityState = cityResult.fold((l) {
+      return state.copyWith(isLoading: false, cityOption: Some(Left(l)));
+    }, (r) {
+      cityList.clear();
+      cityList.addAll(r.data!);
+      return state.copyWith(isLoading: false, cityOption: Some(Right(r)));
+    });
+    emit(cityState);
   }
 
   _getPersonalData(
@@ -139,5 +168,13 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
             expiryDate: event.expiryDate,
             documentList: event.documentList,
             profilePic: event.profilePic);
+    OnboardingState peronalState = result.fold((l) {
+      return state.copyWith(
+          isLoading: false, personalDetailsOption: Some(Left(l)));
+    }, (r) {
+      return state.copyWith(
+          isLoading: false, personalDetailsOption: Some(Right(r)));
+    });
+    emit(peronalState);
   }
 }

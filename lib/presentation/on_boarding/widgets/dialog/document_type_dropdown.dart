@@ -26,6 +26,7 @@ class DocumentTypeDropDown extends StatelessWidget {
     return CustomSizedBox(
       width: DBL.twoEighty.val,
       child: DropdownWidget(
+          showSearchBox: false,
           hint: AppString.selectDocumentType.val,
           errorText: errorText,
           child: CustomText(selectedValue ?? ""),

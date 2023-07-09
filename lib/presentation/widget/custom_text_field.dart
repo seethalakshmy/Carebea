@@ -66,6 +66,7 @@ class CTextField extends StatelessWidget {
       width: width,
       child: TextFormField(
         textAlignVertical: textAlignVertical ?? TextAlignVertical.center,
+
         controller: controller,
         focusNode: focusNode,
         textInputAction: textInputAction,
@@ -80,6 +81,7 @@ class CTextField extends StatelessWidget {
         // cursorColor: AppColor.white.val,
         style: TextStyle(fontSize: 15, color: textColor),
         decoration: InputDecoration(
+          counter: Offstage(),
           hintText: hintText,
           hintStyle: hintStyle,
           suffixIconConstraints: BoxConstraints(minWidth: DBL.fifty.val),

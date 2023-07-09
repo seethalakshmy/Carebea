@@ -579,9 +579,19 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<CityListResponse> getCityList() async {
+  Future<CityListResponse> getCityList(
+    stateId,
+    pageNo,
+    limit,
+    searchQuery,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'state_id': stateId,
+      r'page': pageNo,
+      r'limit': limit,
+      r'search_term': searchQuery,
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
@@ -592,7 +602,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/common-data/get-cities',
+              '/common-data/get-cities?',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -602,9 +612,17 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<StateListReponse> getStateList() async {
+  Future<StateListReponse> getStateList(
+    pageNo,
+    limit,
+    searchQuery,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': pageNo,
+      r'limit': limit,
+      r'search_term': searchQuery,
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
@@ -615,7 +633,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/common-data/get-states',
+              '/common-data/get-states?',
               queryParameters: queryParameters,
               data: _data,
             )
