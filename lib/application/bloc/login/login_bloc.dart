@@ -37,6 +37,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }, (r) {
       if (r.status ?? false) {
         SharedPreffUtil sharedPrefUtil = SharedPreffUtil();
+        sharedPrefUtil.setLogin = true;
         sharedPrefUtil.setUserId = r.data?.userId ?? "";
         sharedPrefUtil.setAccessToken = r.data?.accessToken ?? "";
         event.context.router.replace(const SideMenuRoute());

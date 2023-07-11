@@ -1,7 +1,6 @@
 import 'package:admin_580_tech/application/bloc/caregiver-profile/caregiver_profile_bloc.dart';
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/domain/caregiver_profile/model/caregiver_profile_response.dart';
-import 'package:admin_580_tech/presentation/widget/check_text_list_item.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/header_view.dart';
 import 'package:flutter/material.dart';
@@ -11,21 +10,8 @@ import '../../widget/custom_container.dart';
 import '../../widget/custom_text.dart';
 
 class CaregiverProfileView extends StatelessWidget {
-  CaregiverProfileView({Key? key, required this.state}) : super(key: key);
+  const CaregiverProfileView({Key? key, required this.state}) : super(key: key);
   final CareGiverProfileState state;
-  String content =
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been "
-      "the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it "
-      "to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, "
-      "remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, "
-      "and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum";
-  List<String> mHobbies = [
-    "Lorem ipsum dolor sit amet consectetur.",
-    "Lorem ipsum dolor sit amet consectetur.",
-    "Lorem ipsum dolor sit amet consectetur."
-  ];
-  String content2 =
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ";
 
   @override
   Widget build(BuildContext context) {
@@ -94,12 +80,9 @@ class CaregiverProfileView extends StatelessWidget {
         CustomSizedBox(
           height: DBL.eight.val,
         ),
-        CheckTextListItem(value: hobbies)
-        // CustomListViewBuilder(
-        //     itemCount: mHobbies.length,
-        //     shrinkWrap: true,
-        //     itemBuilder: (context, index) =>
-        //         CheckTextListItem(value: mHobbies[index])),
+        CustomText(hobbies,
+            style: TS().gRoboto(
+                color: AppColor.matBlack3.val, fontWeight: FW.w400.val)),
       ],
     );
   }

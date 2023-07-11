@@ -16,7 +16,7 @@ import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:admin_580_tech/presentation/widget/loader_view.dart';
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -28,10 +28,16 @@ import '../side_menu/side_menu_page.dart';
 import '../widget/svg_text.dart';
 
 class CareGiverDetailPage extends StatefulWidget {
-  const CareGiverDetailPage({Key? key, @QueryParam('id') this.id = ''})
+  const CareGiverDetailPage(
+      {Key? key,
+      @QueryParam('id') this.id = '',
+      @QueryParam('page') this.page,
+      @QueryParam('tab') this.tab})
       : super(key: key);
 
   final String? id;
+  final int? tab;
+  final int? page;
 
   @override
   State<CareGiverDetailPage> createState() => _CareGiverDetailPageState();
@@ -42,11 +48,15 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
   late TabController tabController;
   late CaregiverDetailBloc _caregiverDetailBloc;
   String userId = "";
+  int? _page;
+  int? _tab;
 
   @override
   void initState() {
     userId = autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
-    // userId = "647ef1af92fc3adb1376698a";
+    _page = autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
+    _tab = autoTabRouter?.currentChild?.queryParams.getInt('tab', 0);
+
     tabController = TabController(vsync: this, length: 5);
     _caregiverDetailBloc = CaregiverDetailBloc(CareGiverDetailRepository());
     super.initState();
@@ -67,34 +77,36 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
     );
   }
 
-  CustomSizedBox _bodyView(BuildContext context, CareGiverDetailState state) {
+  _bodyView(BuildContext context, CareGiverDetailState state) {
     CustomLog.log(
         'width :${MediaQuery.of(context).size.width} ${state.response}');
     CareGiverDetailResponse response = state.response!;
     return CustomSizedBox(
       height: MediaQuery.of(context).size.height,
-      child: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [
-            SliverAppBar(
-                leading: const SizedBox(),
-                backgroundColor: Colors.white,
-                expandedHeight: isXs2(context)
-                    ? DBL.threeSixtyFive.val
-                    : isLg2(context)
-                        ? DBL.threeEighty.val
-                        : DBL.threeFifteen.val,
-                floating: false,
-                toolbarHeight: DBL.fifty.val,
-                flexibleSpace: _flexibleSpaceBar(context, response))
-          ];
-        },
-        body: _bodyTabs(state),
+      child: Scaffold(
+        body: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return [
+              SliverAppBar(
+                  leading: const SizedBox(),
+                  backgroundColor: Colors.white,
+                  expandedHeight: isXs2(context)
+                      ? DBL.threeEighty.val
+                      : isLg2(context)
+                          ? DBL.fourHundred.val
+                          : DBL.threeFifteen.val,
+                  floating: false,
+                  toolbarHeight: DBL.fifty.val,
+                  flexibleSpace: _flexibleSpaceBar(context, response))
+            ];
+          },
+          body: _bodyTabs(state),
+        ),
       ),
     );
   }
 
-  Scaffold _bodyTabs(CareGiverDetailState state) {
+  _bodyTabs(CareGiverDetailState state) {
     return Scaffold(
       backgroundColor: AppColor.primaryColor.val,
       appBar: _tabBar(),
@@ -171,7 +183,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
               children: [
                 CustomSizedBox(
                   height: isXs2(context)
-                      ? DBL.twoFortyFive.val
+                      ? DBL.twoFiftyFive.val
                       : isLg2(context)
                           ? DBL.twoFiftyFive.val
                           : DBL.twoEighty.val,
@@ -319,7 +331,8 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
           ),
           SVGText(
             path: IMG.location.val,
-            name: location?.address ?? "",
+            name:
+                "${location?.address ?? ""}, ${location?.streetName ?? ""}, ${location?.city ?? ""}, ${location?.state ?? ""}, ${location?.zipCode ?? ""}, ",
             widthGap: DBL.fifteen.val,
           ),
           CustomSizedBox(
@@ -409,25 +422,28 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
           CustomSizedBox(
             height: isLg2(context) ? DBL.fourteen.val : DBL.twenty.val,
           ),
-          _profileCompletion(context, response),
-          CustomSizedBox(
-            height: isLg2(context) ? DBL.fifteen.val : DBL.twenty.val,
-          ),
-          _profileCompletionPercentage(context),
+          // _profileCompletion(context, response),
+          // CustomSizedBox(
+          //   height: isLg2(context) ? DBL.fifteen.val : DBL.twenty.val,
+          // ),
         ],
       ),
     );
   }
 
-  LinearPercentIndicator _profileCompletionPercentage(BuildContext context) {
-    return LinearPercentIndicator(
-      padding: EdgeInsets.all(DBL.zero.val),
-      barRadius: Radius.circular(DBL.ten.val),
-      width: isXs(context) ? DBL.oneFifty.val : DBL.twoHundred.val,
-      lineHeight: DBL.six.val,
-      percent: DBL.pointFive.val,
-      progressColor: AppColor.green2.val,
-    );
+  _profileCompletionPercentage(
+      BuildContext context, CareGiverDetailResponse response) {
+    return response.data?.profileCompletion != null
+        ? LinearPercentIndicator(
+            padding: EdgeInsets.all(DBL.zero.val),
+            barRadius: Radius.circular(DBL.ten.val),
+            width: isXs(context) ? DBL.oneFifty.val : DBL.twoHundred.val,
+            lineHeight: DBL.six.val,
+            percent:
+                double.parse(response.data?.profileCompletion ?? "0.0") / 100,
+            progressColor: AppColor.green2.val,
+          )
+        : CustomSizedBox.shrink();
   }
 
   Row _profileCompletion(
@@ -464,12 +480,8 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
       imgUrl: url,
       height: DBL.oneSeventyFive.val,
       width: DBL.twoHundred.val,
+      isDetailPage: true,
     );
-    // return CustomSvg(
-    //   path: IMG.profilePlaceHolder.val,
-    //   width: isXs(context) ? DBL.oneFifty.val : DBL.twoHundred.val,
-    //   height: isXs(context) ? DBL.oneTwentyFive.val : DBL.oneSeventyFive.val,
-    // );
   }
 
   ServiceRewardAndCompletion reviewsView(

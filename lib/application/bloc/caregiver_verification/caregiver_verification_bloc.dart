@@ -153,6 +153,7 @@ class CareGiverVerificationBloc
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
+        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
         _approvalPopUp(
           event.context,
           userId: event.userID,
@@ -256,8 +257,6 @@ class CareGiverVerificationBloc
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
-
-        // autoTabRouter?.navigate(CareGiversRoute(page: event.page));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
@@ -269,6 +268,22 @@ class CareGiverVerificationBloc
     });
     emit(
       caregiverVerificationState,
+    );
+    final Either<ApiErrorHandler, CaregiverVerificationResponse> result2 =
+        await careGiverVerificationRepository.getCareGiverVerificationData(
+      userID: event.userId,
+    );
+    CareGiverVerificationState caregiverVerificationState2 = result2.fold((l) {
+      return state.copyWith(error: l.error, isLoading: false, isError: true);
+    }, (r) {
+      return state.copyWith(
+        isLoading: false,
+        response: r,
+        isError: false,
+      );
+    });
+    emit(
+      caregiverVerificationState2,
     );
   }
 

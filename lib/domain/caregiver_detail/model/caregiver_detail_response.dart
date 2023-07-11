@@ -266,7 +266,7 @@ class ServiceDates {
   String? startTime;
   String? endTime;
   String? bookingId;
-  String? userName;
+  String? clientName;
   String? serviceFee;
 
   ServiceDates(
@@ -275,15 +275,15 @@ class ServiceDates {
       this.startTime,
       this.endTime,
       this.bookingId,
-      this.userName});
+      this.clientName});
 
   ServiceDates.fromJson(Map<String, dynamic> json) {
     date = json['date'];
     serviceId = json['serviceId'];
-    startTime = json['startTime'];
-    endTime = json['endTime'];
+    startTime = json['from_time'];
+    endTime = json['to_time'];
     bookingId = json['bookingId'];
-    userName = json['userName'];
+    clientName = json['client_name'];
     serviceFee = json['service_fee'];
   }
 
@@ -294,7 +294,7 @@ class ServiceDates {
     data['startTime'] = startTime;
     data['endTime'] = endTime;
     data['bookingId'] = bookingId;
-    data['userName'] = userName;
+    data['userName'] = clientName;
     return data;
   }
 }

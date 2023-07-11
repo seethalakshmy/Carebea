@@ -14,7 +14,6 @@ import 'package:admin_580_tech/presentation/widget/loader_view.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import '../../application/bloc/caregiver-profile/caregiver_profile_bloc.dart';
 import '../../core/responsive.dart';
@@ -94,8 +93,8 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
                 leading: const SizedBox(),
                 backgroundColor: Colors.white,
                 expandedHeight: isInterViewOrTraining(status)
-                    ? DBL.threeThirty.val
-                    : DBL.twoEighty.val,
+                    ? DBL.threeFifteen.val
+                    : DBL.twoFiftyFive.val,
                 floating: false,
                 toolbarHeight: DBL.fifty.val,
                 flexibleSpace: _buildFlexibleSpaceBar(context, state, status))
@@ -223,32 +222,36 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
                       CustomSizedBox(
                         width: DBL.five.val,
                       ),
-                      CustomText(
-                        state.response?.data?.profileCompletion ?? "",
-                        style: TS().gRoboto(
-                            fontWeight: FW.w500.val,
-                            fontSize: getFontSize(
-                              context,
-                              fontSize: FS.font14.val,
-                            ),
-                            color: AppColor.primaryColor.val),
-                      ),
+                      // CustomText(
+                      //   state.response?.data?.profileCompletion ?? "",
+                      //   style: TS().gRoboto(
+                      //       fontWeight: FW.w500.val,
+                      //       fontSize: getFontSize(
+                      //         context,
+                      //         fontSize: FS.font14.val,
+                      //       ),
+                      //       color: AppColor.primaryColor.val),
+                      // ),
                     ])),
-            CustomSizedBox(
-              height: DBL.thirteen.val,
-            ),
-            CustomSizedBox(
-              height: isXs2(context) ? DBL.eight.val : DBL.zero.val,
-            ),
+            // CustomSizedBox(
+            //   height: DBL.thirteen.val,
+            // ),
+            // CustomSizedBox(
+            //   height: isXs2(context) ? DBL.eight.val : DBL.zero.val,
+            // ),
 
-            LinearPercentIndicator(
-              padding: EdgeInsets.all(DBL.zero.val),
-              barRadius: Radius.circular(DBL.ten.val),
-              width: DBL.twoHundred.val,
-              lineHeight: DBL.six.val,
-              percent: DBL.pointFive.val,
-              progressColor: AppColor.green2.val,
-            ),
+            // state.response?.data?.profileCompletion != null
+            //     ? LinearPercentIndicator(
+            //         padding: EdgeInsets.all(DBL.zero.val),
+            //         barRadius: Radius.circular(DBL.ten.val),
+            //         width: DBL.twoHundred.val,
+            //         lineHeight: DBL.six.val,
+            //         percent: double.parse(
+            //                 state.response?.data?.profileCompletion ?? "0.0") /
+            //             100,
+            //         progressColor: AppColor.green2.val,
+            //       )
+            //     : CustomSizedBox.shrink(),
             CustomSizedBox(
               height: DBL.ten.val,
             ),

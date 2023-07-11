@@ -23,6 +23,7 @@ import 'package:flutter/material.dart';
 import '../caregiver_creation/caregiver_creation_page.dart';
 import '../caregiver_detail/caregiver_detail_page.dart';
 import '../caregivers/caregivers_page.dart';
+import '../role_management/role_management_page.dart';
 import '../transaction_management/transaction_management_page.dart';
 import '../user_management/user_management_page.dart';
 import '../user_mangement_detail/user_managemet_detail_page.dart';
@@ -54,6 +55,7 @@ class _MenuBarState extends State<SideMenuPage> {
 
   Map<String, String> mainData = {
     AppString.dashboard.val: "",
+    AppString.roleManagement.val: "",
     AppString.careAmbassador.val: "",
     AppString.userManagement.val: "",
     AppString.transactionManagement.val: "",
@@ -441,6 +443,7 @@ class _MenuBarState extends State<SideMenuPage> {
     CaregiverCreationRoute(),
     OnboardingRoute(),
     CaregiverVerificationRoute(),
+    RoleManagementRoute()
   ];
 
   int getRouteIndex(String route) {
@@ -463,6 +466,8 @@ class _MenuBarState extends State<SideMenuPage> {
       return 8;
     } else if (route == AppString.careAmbassadorVerification.val) {
       return 9;
+    } else if (route == AppString.roleManagement.val) {
+      return 10;
     } else {
       return 0;
     }
@@ -488,6 +493,8 @@ class _MenuBarState extends State<SideMenuPage> {
       return const OnboardingPage();
     } else if (index == 9) {
       return const CaregiverVerificationPage();
+    } else if (index == 10) {
+      return const RoleManagementPage();
     } else {
       return const DashboardPage();
     }

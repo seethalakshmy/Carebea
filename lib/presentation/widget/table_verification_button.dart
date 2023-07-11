@@ -15,6 +15,7 @@ class TableVerificationButton extends StatelessWidget {
       required this.verificationStatus,
       this.isHover = true,
       this.page,
+      this.tab,
       this.userId})
       : super(key: key);
   final int verificationStatus;
@@ -22,6 +23,7 @@ class TableVerificationButton extends StatelessWidget {
   final bool isHover;
   final String? userId;
   final int? page;
+  final int? tab;
 
   @override
   Widget build(BuildContext context) {

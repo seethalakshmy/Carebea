@@ -12,6 +12,8 @@ class SharedPreffUtil {
   final userEmail = 'email_id';
   final setPasswordToken = 'set_password_token';
   final currentPassword = 'current_password';
+  final _page = '_page';
+  final _tab = '_tab';
 
   static final SharedPreffUtil _instance = SharedPreffUtil._ctor();
 
@@ -72,14 +74,27 @@ class SharedPreffUtil {
   }
 
   set setLogin(bool value) {
-    _prefs!.setBool(loggedUser, value);
+    _prefs?.setBool(loggedUser, value);
   }
 
   get getLogin {
-    if (_prefs == null || _prefs!.getBool(loggedUser) == null) {
-      return false;
-    }
-    return _prefs!.getBool(loggedUser) ?? false;
+    return _prefs?.getBool(loggedUser) ?? false;
+  }
+
+  get getPage {
+    return _prefs?.getInt(_page) ?? 0;
+  }
+
+  set setPage(int value) {
+    _prefs?.setInt(_page, value);
+  }
+
+  get getTab {
+    return _prefs?.getInt(_page) ?? 0;
+  }
+
+  set setTab(int value) {
+    _prefs?.setInt(_page, value);
   }
 
   set setUserEmail(String value) {

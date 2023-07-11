@@ -1,4 +1,5 @@
 import 'package:admin_580_tech/application/bloc/caregiver-profile/caregiver_profile_bloc.dart';
+import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/domain/caregiver_profile/model/caregiver_profile_response.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +38,9 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
             Expanded(
               child: RowColonCombo.twoHundred(
                   label: AppString.dob.val,
-                  value: personalDetails?.dob ?? "",
+                  value: personalDetails?.dob?.parseWithFormat(
+                          dateFormat: AppString.mmDDYYY.val) ??
+                      "",
                   fontSize: FS.font13PointFive.val),
             ),
             !isLg(context)
@@ -60,7 +63,7 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
             ),
             !isLg(context)
                 ? Expanded(
-                    child: _alterNativeMobileNumberView(personalDetails),
+                    child: _emailView(personalDetails),
                   )
                 : CustomSizedBox.shrink(),
           ],
@@ -68,21 +71,10 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
         CustomSizedBox(
           height: DBL.six.val,
         ),
-        Row(
-          children: [
-            Expanded(
-              child: RowColonCombo.twoHundred(
-                  label: AppString.addressLine1.val,
-                  value: personalDetails?.addressLine ?? "",
-                  fontSize: FS.font13PointFive.val),
-            ),
-            !isLg(context)
-                ? Expanded(
-                    child: _emailView(personalDetails),
-                  )
-                : CustomSizedBox.shrink(),
-          ],
-        ),
+        RowColonCombo.twoHundred(
+            label: AppString.addressLine1.val,
+            value: personalDetails?.addressLine ?? "",
+            fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.six.val,
         ),
@@ -158,7 +150,9 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
         ),
         RowColonCombo.twoHundred(
             label: AppString.expiryDate.val,
-            value: documentDetails?.expiryDate ?? "",
+            value: documentDetails?.expiryDate
+                    ?.parseWithFormat(dateFormat: AppString.mmDDYYY.val) ??
+                "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.six.val,
@@ -193,10 +187,10 @@ class CaregiverPersonalDetailsView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _mobileNumberView(personalDetails),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-        _alterNativeMobileNumberView(personalDetails),
+        // CustomSizedBox(
+        //   height: DBL.six.val,
+        // ),
+        // _alterNativeMobileNumberView(personalDetails),
         CustomSizedBox(
           height: DBL.six.val,
         ),

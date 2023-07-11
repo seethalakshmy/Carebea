@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/core/enum.dart';
 import 'package:intl/intl.dart';
 
 extension Range on num {
@@ -38,19 +39,23 @@ extension StringExtension on String {
   String parseWithFormat({
     String? dateFormat,
   }) {
-    if (isNotEmpty) {
-      DateTime dateTime = DateTime.parse(this);
-      DateFormat outputFormat =
-          DateFormat(dateFormat ?? "MM/dd/yyyy  'at' hh:mm a");
-      String formattedDateTime = outputFormat.format(dateTime);
-      if (formattedDateTime.contains("AM")) {
-        formattedDateTime = formattedDateTime.replaceFirst('AM', 'am');
-      } else if (formattedDateTime.contains("PM")) {
-        formattedDateTime = formattedDateTime.replaceFirst('PM', 'pm');
+    try {
+      if (isNotEmpty) {
+        DateTime dateTime = DateTime.parse(this);
+        DateFormat outputFormat =
+            DateFormat(dateFormat ?? AppString.mmDDYYYTimeZone.val);
+        String formattedDateTime = outputFormat.format(dateTime);
+        if (formattedDateTime.contains("AM")) {
+          formattedDateTime = formattedDateTime.replaceFirst('AM', 'am');
+        } else if (formattedDateTime.contains("PM")) {
+          formattedDateTime = formattedDateTime.replaceFirst('PM', 'pm');
+        }
+        return formattedDateTime;
       }
-      return formattedDateTime;
+      return "";
+    } catch (e) {
+      return "";
     }
-    return "";
   }
 }
 
