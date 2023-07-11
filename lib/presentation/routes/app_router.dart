@@ -20,25 +20,26 @@ import '../transaction_management/transaction_management_page.dart';
   routes: <AutoRoute>[
     AutoRoute(
       page: LoginPage,
-      path: '/admin/login',
+      path: 'admin/login',
       initial: true,
     ),
     AutoRoute(
         page: ForgotPasswordPage,
         maintainState: false,
-        path: '/admin/forgot-password'),
+        path: 'admin/forgot-password'),
     AutoRoute(
         page: ResetPasswordPage,
         maintainState: false,
-        path: '/admin/reset-password'),
+        path: 'admin/reset-password'),
     AutoRoute(
       page: SideMenuPage,
-      path: "/admin",
+      path: "admin/main",
       children: [
         AutoRoute(path: 'dashboard', page: DashboardPage, initial: true),
         AutoRoute(
           path: 'care-ambassador',
           page: CareGiversPage,
+          maintainState: true
         ),
         AutoRoute(
           path: 'user-management',
@@ -47,7 +48,7 @@ import '../transaction_management/transaction_management_page.dart';
         AutoRoute(
             path: 'care-ambassador-detail',
             page: CareGiverDetailPage,
-            maintainState: false),
+            maintainState: true),
         AutoRoute(
           path: 'user-management-detail',
           page: UserManagementDetailPage,

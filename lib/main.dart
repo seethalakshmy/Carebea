@@ -15,7 +15,7 @@ import 'infrastructure/shared_preference/shared_preff_util.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  usePathUrlStrategy();
+  //usePathUrlStrategy();
   runApp(
     const MyApp(),
   );
