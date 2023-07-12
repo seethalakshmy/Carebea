@@ -111,7 +111,6 @@ class AppRouter extends _i15.RootStackRouter {
           key: args.key,
           id: args.id,
         ),
-        maintainState: false,
       );
     },
     UserManagementDetailRoute.name: (routeData) {
@@ -181,24 +180,24 @@ class AppRouter extends _i15.RootStackRouter {
         _i15.RouteConfig(
           '/#redirect',
           path: '/',
-          redirectTo: '/admin/login',
+          redirectTo: 'admin/login',
           fullMatch: true,
         ),
         _i15.RouteConfig(
           LoginRoute.name,
-          path: '/admin/login',
+          path: 'admin/login',
         ),
         _i15.RouteConfig(
           ForgotPasswordRoute.name,
-          path: '/admin/forgot-password',
+          path: 'admin/forgot-password',
         ),
         _i15.RouteConfig(
           ResetPasswordRoute.name,
-          path: '/admin/reset-password',
+          path: 'admin/reset-password',
         ),
         _i15.RouteConfig(
           SideMenuRoute.name,
-          path: '/admin',
+          path: 'admin/main',
           children: [
             _i15.RouteConfig(
               '#redirect',
@@ -268,7 +267,7 @@ class LoginRoute extends _i15.PageRouteInfo<void> {
   const LoginRoute()
       : super(
           LoginRoute.name,
-          path: '/admin/login',
+          path: 'admin/login',
         );
 
   static const String name = 'LoginRoute';
@@ -280,7 +279,7 @@ class ForgotPasswordRoute extends _i15.PageRouteInfo<void> {
   const ForgotPasswordRoute()
       : super(
           ForgotPasswordRoute.name,
-          path: '/admin/forgot-password',
+          path: 'admin/forgot-password',
         );
 
   static const String name = 'ForgotPasswordRoute';
@@ -292,7 +291,7 @@ class ResetPasswordRoute extends _i15.PageRouteInfo<void> {
   const ResetPasswordRoute()
       : super(
           ResetPasswordRoute.name,
-          path: '/admin/reset-password',
+          path: 'admin/reset-password',
         );
 
   static const String name = 'ResetPasswordRoute';
@@ -304,7 +303,7 @@ class SideMenuRoute extends _i15.PageRouteInfo<void> {
   const SideMenuRoute({List<_i15.PageRouteInfo>? children})
       : super(
           SideMenuRoute.name,
-          path: '/admin',
+          path: 'admin/main',
           initialChildren: children,
         );
 

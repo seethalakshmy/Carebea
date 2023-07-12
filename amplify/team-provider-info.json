@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amagiadminfrontend-dev-180413-authRole",
+      "UnauthRoleArn": "arn:aws:iam::331262081147:role/amplify-amagiadminfrontend-dev-180413-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::331262081147:role/amplify-amagiadminfrontend-dev-180413-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-amagiadminfrontend-dev-180413-deployment",
+      "UnauthRoleName": "amplify-amagiadminfrontend-dev-180413-unauthRole",
+      "StackName": "amplify-amagiadminfrontend-dev-180413",
+      "StackId": "arn:aws:cloudformation:us-east-1:331262081147:stack/amplify-amagiadminfrontend-dev-180413/96bc9ac0-1cc2-11ee-847f-1284cfa3114f",
+      "AmplifyAppId": "d14gxk8kz2xamp"
+    },
+    "categories": {
+      "auth": {
+        "amagiadminfrontendd9bb47fb": {}
+      },
+      "storage": {
+        "amagiadminfrontend3c3c86d8": {
+          "bucketName": "amagicareambassabor185017-dev",
+          "region": "us-east-1"
+        }
+      }
+    }
+  }
+}
