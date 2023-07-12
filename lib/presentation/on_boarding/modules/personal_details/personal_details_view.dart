@@ -1,9 +1,13 @@
+import 'package:admin_580_tech/core/custom_snackbar.dart';
 import 'package:admin_580_tech/infrastructure/on_boarding/on_boarding_repository.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/address_selection_widget.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/profile_picture_widget.dart';
+import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/social_security_number_formatter.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/zip_code_formatter.dart';
 import 'package:admin_580_tech/presentation/on_boarding/widgets/upload_document_widget.dart';
+import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -59,8 +63,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   String selectedState = "";
   String selectedCity = "";
   String selectedDocument = "";
-  bool nextClicked = false;
   List<PlatformFile> bytesList = [];
+  List<String> docPathList = [];
   bool listUpdated = false;
 
   AutovalidateMode _validateMode = AutovalidateMode.disabled;
@@ -68,8 +72,13 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   final _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     widget.onboardingBloc.add(const OnboardingEvent.commonData());
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final isLargeWeb = MediaQuery.of(context).size.width > 1350 &&
         MediaQuery.of(context).size.width < 1800;
     final isWeb = MediaQuery.of(context).size.width >= 1100 &&
@@ -189,9 +198,12 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           formKey: _formKey,
           autoValidateMode: _validateMode,
           child: BlocConsumer<OnboardingBloc, OnboardingState>(
+            buildWhen: (previous, current) => previous != current,
             listener: (context, listenerState) {
               return listenerState.personalDetailsOption.fold(() {}, (some) {
-                some.fold((l) {}, (r) {
+                some.fold((l) {
+                  CSnackBar.showError(context, msg: l.error);
+                }, (r) {
                   widget.pageController
                       .jumpToPage(widget.pageController.page!.toInt() + 1);
                 });
@@ -218,10 +230,11 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                     onChanged: (value) {
                       selectedDocument = value;
                     },
+                    selectedDocumentType: selectedDocument,
                     dateController: expiryDateController,
                     documentNumberController: documentNumberController,
                     onboardingBloc: widget.onboardingBloc,
-                    nextClicked: nextClicked,
+                    nextClicked: widget.onboardingBloc.state.nextClicked,
                     pageController: widget.pageController,
                   ),
                   state.securityDocumentList.length > 1
@@ -326,13 +339,13 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         GenderDropDown(
           onChange: (value) {
             selectedGender = value.toString();
-            print("gender onchanged value: $value");
             state.copyWith(selectedGenderId: value);
           },
           items: widget.onboardingBloc.genderList,
-          errorText: nextClicked && selectedGender.isEmpty
-              ? AppString.emptyGender.val
-              : "",
+          errorText:
+              widget.onboardingBloc.state.nextClicked && selectedGender.isEmpty
+                  ? AppString.emptyGender.val
+                  : "",
           selectedValue: selectedGender,
         ),
       ],
@@ -430,7 +443,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
             widget.onboardingBloc.stateSearchKey = val;
           },
           searchController: stateSearchController,
-          errorText: nextClicked
+          errorText: widget.onboardingBloc.state.nextClicked
               ? selectedState.isEmpty
                   ? AppString.emptyState.val
                   : ""
@@ -438,7 +451,6 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           items: widget.onboardingBloc.stateList,
           onChange: (value) {
             selectedState = value.toString();
-            print("state value in onchanged : $value");
             widget.onboardingBloc.stateId = value;
             widget.onboardingBloc.add(const OnboardingEvent.cityList());
           },
@@ -460,7 +472,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
             widget.onboardingBloc.add(const OnboardingEvent.cityList());
             widget.onboardingBloc.citySearchKey = val;
           },
-          errorText: nextClicked
+          errorText: widget.onboardingBloc.state.nextClicked
               ? selectedCity.isEmpty
                   ? AppString.emptyCity.val
                   : ""
@@ -468,7 +480,6 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           items: widget.onboardingBloc.cityList,
           onChange: (value) {
             selectedCity = value.toString();
-            print("city value in onchanged : $value");
           },
           selectedValue: selectedCity,
         ),
@@ -489,12 +500,14 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return AppString.emptyZip.val;
+              } else if (value.length < 10) {
+                return AppString.invalidZip.val;
               }
               return null;
             },
             inputFormatter: [
               FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(5),
+              LengthLimitingTextInputFormatter(9),
               ZipCodeFormatter(),
             ],
             controller: zipController,
@@ -519,9 +532,16 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return AppString.emptySSN.val;
+              } else if (value.length < 10) {
+                return AppString.invalidSSN.val;
               }
               return null;
             },
+            inputFormatter: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(9),
+              SocialSecurityNumberFormatter(),
+            ],
             controller: socialSecurityNumberController,
             onChanged: (value) {},
             onTap: () {},
@@ -548,7 +568,10 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
               break;
             }
           }
-
+          for (int i = 0; i < bytesList.length; i++) {
+            //docPathList.add(bytesList[i].path!);
+          }
+          print("docPathList : $docPathList");
           widget.onboardingBloc.add(
             OnboardingEvent.securityDocumentUpload(bytesList, listUpdated),
           );
@@ -568,12 +591,22 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           leftButtonName: AppString.back.val,
           rightButtonName: AppString.next.val,
           onLeftButtonPressed: () {
-            // context.router.navigate(const CareGiversRoute());
+            context.router.navigate(const CaregiverCreationRoute());
           },
           onRightButtonPressed: () {
-            setState(() {
-              nextClicked = true;
-            });
+            if (selectedGender.isEmpty &&
+                selectedState.isEmpty &&
+                selectedDocument.isEmpty &&
+                selectedCity.isEmpty) {
+              widget.onboardingBloc.emit(
+                  widget.onboardingBloc.state.copyWith(nextClicked: true));
+            } else {
+              widget.onboardingBloc.emit(
+                  widget.onboardingBloc.state.copyWith(nextClicked: false));
+            }
+            if (widget.onboardingBloc.profileUrl.isEmpty) {
+              CSnackBar.showError(context, msg: AppString.emptyProfilePic.val);
+            }
             checkInputData();
           },
         );
@@ -595,9 +628,9 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
       formValidationBloc.add(const FormValidationEvent.dropDown("true"));
     }
     final userId = SharedPreffUtil().getUserId;
-    print("UserId : $userId");
 
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate() &&
+        widget.onboardingBloc.profileUrl.isNotEmpty) {
       widget.onboardingBloc.add(OnboardingEvent.personalDetails(
           userId: userId,
           dob: dobController.text.trim(),
@@ -616,26 +649,5 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           documentList: [],
           profilePic: widget.onboardingBloc.profileUrl));
     }
-  }
-
-  String _formatSSN(String ssn) {
-    ssn =
-        ssn.replaceAll(RegExp(r'[^0-9]'), ''); // Remove non-numeric characters
-    if (ssn.length > 3) {
-      ssn = '${ssn.substring(0, 3)}-${ssn.substring(3)}';
-    }
-    if (ssn.length > 6) {
-      ssn = '${ssn.substring(0, 6)}-${ssn.substring(6)}';
-    }
-    return ssn;
-  }
-
-  String _formatZip(String zip) {
-    zip =
-        zip.replaceAll(RegExp(r'[^0-9]'), ''); // Remove non-numeric characters
-    if (zip.length > 5) {
-      zip = '${zip.substring(0, 5)}-${zip.substring(5)}';
-    }
-    return zip;
   }
 }

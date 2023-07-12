@@ -13,14 +13,19 @@ import '../../../widget/custom_sizedbox.dart';
 import '../../../widget/custom_text.dart';
 
 class PreferenceView extends StatelessWidget {
-  const PreferenceView(
+  PreferenceView(
       {Key? key, required this.onboardingBloc, required this.pageController})
       : super(key: key);
   final OnboardingBloc onboardingBloc;
   final PageController pageController;
 
+  final petSearchController = TextEditingController();
+  final languageSearchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    onboardingBloc.add(OnboardingEvent.petsList());
+    onboardingBloc.add(OnboardingEvent.languageList());
     return BlocBuilder<OnboardingBloc, OnboardingState>(
       builder: (context, state) {
         return CommonPaddingWidget(
@@ -38,6 +43,9 @@ class PreferenceView extends StatelessWidget {
               _petsWidget(state),
               state.isPetsSelected == 0
                   ? SampleDropdown(
+                      onboardingBloc: onboardingBloc,
+                      searchController: petSearchController,
+                      petList: onboardingBloc.petsList,
                       isFromLangauge: false,
                     )
                   : Container(),
@@ -203,7 +211,10 @@ class PreferenceView extends StatelessWidget {
         CustomSizedBox(height: DBL.ten.val),
         //SelectLanguagesWidget()
         SampleDropdown(
+          onboardingBloc: onboardingBloc,
+          searchController: languageSearchController,
           isFromLangauge: true,
+          languageList: onboardingBloc.languageList,
         )
       ],
     );

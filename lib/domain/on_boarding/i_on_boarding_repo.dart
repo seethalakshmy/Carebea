@@ -7,7 +7,9 @@ import 'package:dartz/dartz.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/city_list_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/gender_list_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
-import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_response.dart';
+import '../../presentation/on_boarding/modules/preference/models/language_list_response.dart';
+import 'models/common_response.dart';
+import 'models/preferences/pet_list_response.dart';
 
 abstract class IOnBoardingRepo {
   Future<Either<ApiErrorHandler, GenderListResponse>> getGenderList();
@@ -24,6 +26,14 @@ abstract class IOnBoardingRepo {
   });
 
   Future<Either<ApiErrorHandler, DocumentListResponse>> getDocumentList();
+
+  Future<Either<ApiErrorHandler, PetListResponse>> getPetList(
+      {required String searchKey});
+
+  Future<Either<ApiErrorHandler, LanguageListResponse>> getLanguageList({
+    required String page,
+    required String searchKey,
+  });
 
   Future<Either<ApiErrorHandler, PersonalDetailsResponse>>
       personalDetailsSubmit(
@@ -44,16 +54,15 @@ abstract class IOnBoardingRepo {
           required List<String> documentList,
           required String profilePic});
 
-  Future<Either<ApiErrorHandler, CommentsAndReviewResponseModel>>
-      qualificationSubmit({
+  Future<Either<ApiErrorHandler, CommonResponse>> qualificationSubmit({
     required String userId,
     required bool haveHHARegistration,
-    HhaDetails? hhaDetails,
+    required HhaDetails hhaDetails,
     required bool haveBLSCertificate,
-    BlsOrFirstAidCertificateDetails? blsDetails,
+    required BlsOrFirstAidCertificateDetails blsDetails,
     required bool haveTBTest,
-    TbOrPpdTestDetails? tbDetails,
+    required TbOrPpdTestDetails tbDetails,
     required bool haveCovidVaccination,
-    CovidVaccinationDetails? covidDetails,
+    required CovidVaccinationDetails covidDetails,
   });
 }

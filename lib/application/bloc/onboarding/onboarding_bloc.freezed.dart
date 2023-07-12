@@ -36,9 +36,22 @@ mixin _$OnboardingEvent {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -81,9 +94,22 @@ mixin _$OnboardingEvent {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -126,9 +152,22 @@ mixin _$OnboardingEvent {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -155,9 +194,13 @@ mixin _$OnboardingEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -183,9 +226,12 @@ mixin _$OnboardingEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -207,9 +253,12 @@ mixin _$OnboardingEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -516,9 +565,22 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -580,9 +642,22 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -644,9 +719,22 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -695,9 +783,13 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -726,9 +818,12 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -753,9 +848,12 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -822,6 +920,510 @@ abstract class _GetPersonalDetails implements OnboardingEvent {
 }
 
 /// @nodoc
+abstract class _$$_GetQualificationDetailsCopyWith<$Res> {
+  factory _$$_GetQualificationDetailsCopyWith(_$_GetQualificationDetails value,
+          $Res Function(_$_GetQualificationDetails) then) =
+      __$$_GetQualificationDetailsCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String userId,
+      bool haveHhaRegistration,
+      HhaDetails hhaDetails,
+      bool haveBlsCertificate,
+      BlsOrFirstAidCertificateDetails blsDetails,
+      bool haveTbTest,
+      TbOrPpdTestDetails tbDetails,
+      bool haveCovidVaccination,
+      CovidVaccinationDetails covidDetails});
+}
+
+/// @nodoc
+class __$$_GetQualificationDetailsCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_GetQualificationDetails>
+    implements _$$_GetQualificationDetailsCopyWith<$Res> {
+  __$$_GetQualificationDetailsCopyWithImpl(_$_GetQualificationDetails _value,
+      $Res Function(_$_GetQualificationDetails) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? haveHhaRegistration = null,
+    Object? hhaDetails = null,
+    Object? haveBlsCertificate = null,
+    Object? blsDetails = null,
+    Object? haveTbTest = null,
+    Object? tbDetails = null,
+    Object? haveCovidVaccination = null,
+    Object? covidDetails = null,
+  }) {
+    return _then(_$_GetQualificationDetails(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      haveHhaRegistration: null == haveHhaRegistration
+          ? _value.haveHhaRegistration
+          : haveHhaRegistration // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hhaDetails: null == hhaDetails
+          ? _value.hhaDetails
+          : hhaDetails // ignore: cast_nullable_to_non_nullable
+              as HhaDetails,
+      haveBlsCertificate: null == haveBlsCertificate
+          ? _value.haveBlsCertificate
+          : haveBlsCertificate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      blsDetails: null == blsDetails
+          ? _value.blsDetails
+          : blsDetails // ignore: cast_nullable_to_non_nullable
+              as BlsOrFirstAidCertificateDetails,
+      haveTbTest: null == haveTbTest
+          ? _value.haveTbTest
+          : haveTbTest // ignore: cast_nullable_to_non_nullable
+              as bool,
+      tbDetails: null == tbDetails
+          ? _value.tbDetails
+          : tbDetails // ignore: cast_nullable_to_non_nullable
+              as TbOrPpdTestDetails,
+      haveCovidVaccination: null == haveCovidVaccination
+          ? _value.haveCovidVaccination
+          : haveCovidVaccination // ignore: cast_nullable_to_non_nullable
+              as bool,
+      covidDetails: null == covidDetails
+          ? _value.covidDetails
+          : covidDetails // ignore: cast_nullable_to_non_nullable
+              as CovidVaccinationDetails,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetQualificationDetails implements _GetQualificationDetails {
+  const _$_GetQualificationDetails(
+      {required this.userId,
+      required this.haveHhaRegistration,
+      required this.hhaDetails,
+      required this.haveBlsCertificate,
+      required this.blsDetails,
+      required this.haveTbTest,
+      required this.tbDetails,
+      required this.haveCovidVaccination,
+      required this.covidDetails});
+
+  @override
+  final String userId;
+  @override
+  final bool haveHhaRegistration;
+  @override
+  final HhaDetails hhaDetails;
+  @override
+  final bool haveBlsCertificate;
+  @override
+  final BlsOrFirstAidCertificateDetails blsDetails;
+  @override
+  final bool haveTbTest;
+  @override
+  final TbOrPpdTestDetails tbDetails;
+  @override
+  final bool haveCovidVaccination;
+  @override
+  final CovidVaccinationDetails covidDetails;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.qualificationDetails(userId: $userId, haveHhaRegistration: $haveHhaRegistration, hhaDetails: $hhaDetails, haveBlsCertificate: $haveBlsCertificate, blsDetails: $blsDetails, haveTbTest: $haveTbTest, tbDetails: $tbDetails, haveCovidVaccination: $haveCovidVaccination, covidDetails: $covidDetails)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetQualificationDetails &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.haveHhaRegistration, haveHhaRegistration) ||
+                other.haveHhaRegistration == haveHhaRegistration) &&
+            (identical(other.hhaDetails, hhaDetails) ||
+                other.hhaDetails == hhaDetails) &&
+            (identical(other.haveBlsCertificate, haveBlsCertificate) ||
+                other.haveBlsCertificate == haveBlsCertificate) &&
+            (identical(other.blsDetails, blsDetails) ||
+                other.blsDetails == blsDetails) &&
+            (identical(other.haveTbTest, haveTbTest) ||
+                other.haveTbTest == haveTbTest) &&
+            (identical(other.tbDetails, tbDetails) ||
+                other.tbDetails == tbDetails) &&
+            (identical(other.haveCovidVaccination, haveCovidVaccination) ||
+                other.haveCovidVaccination == haveCovidVaccination) &&
+            (identical(other.covidDetails, covidDetails) ||
+                other.covidDetails == covidDetails));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      userId,
+      haveHhaRegistration,
+      hhaDetails,
+      haveBlsCertificate,
+      blsDetails,
+      haveTbTest,
+      tbDetails,
+      haveCovidVaccination,
+      covidDetails);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetQualificationDetailsCopyWith<_$_GetQualificationDetails>
+      get copyWith =>
+          __$$_GetQualificationDetailsCopyWithImpl<_$_GetQualificationDetails>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
+    required TResult Function() commonData,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+  }) {
+    return qualificationDetails(
+        userId,
+        haveHhaRegistration,
+        hhaDetails,
+        haveBlsCertificate,
+        blsDetails,
+        haveTbTest,
+        tbDetails,
+        haveCovidVaccination,
+        covidDetails);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult? Function()? commonData,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+  }) {
+    return qualificationDetails?.call(
+        userId,
+        haveHhaRegistration,
+        hhaDetails,
+        haveBlsCertificate,
+        blsDetails,
+        haveTbTest,
+        tbDetails,
+        haveCovidVaccination,
+        covidDetails);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult Function()? commonData,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (qualificationDetails != null) {
+      return qualificationDetails(
+          userId,
+          haveHhaRegistration,
+          hhaDetails,
+          haveBlsCertificate,
+          blsDetails,
+          haveTbTest,
+          tbDetails,
+          haveCovidVaccination,
+          covidDetails);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
+    required TResult Function(_CommonDataLists value) commonData,
+    required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+  }) {
+    return qualificationDetails(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult? Function(_CommonDataLists value)? commonData,
+    TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+  }) {
+    return qualificationDetails?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult Function(_CommonDataLists value)? commonData,
+    TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (qualificationDetails != null) {
+      return qualificationDetails(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetQualificationDetails implements OnboardingEvent {
+  const factory _GetQualificationDetails(
+          {required final String userId,
+          required final bool haveHhaRegistration,
+          required final HhaDetails hhaDetails,
+          required final bool haveBlsCertificate,
+          required final BlsOrFirstAidCertificateDetails blsDetails,
+          required final bool haveTbTest,
+          required final TbOrPpdTestDetails tbDetails,
+          required final bool haveCovidVaccination,
+          required final CovidVaccinationDetails covidDetails}) =
+      _$_GetQualificationDetails;
+
+  String get userId;
+  bool get haveHhaRegistration;
+  HhaDetails get hhaDetails;
+  bool get haveBlsCertificate;
+  BlsOrFirstAidCertificateDetails get blsDetails;
+  bool get haveTbTest;
+  TbOrPpdTestDetails get tbDetails;
+  bool get haveCovidVaccination;
+  CovidVaccinationDetails get covidDetails;
+  @JsonKey(ignore: true)
+  _$$_GetQualificationDetailsCopyWith<_$_GetQualificationDetails>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 abstract class _$$_CommonDataListsCopyWith<$Res> {
   factory _$$_CommonDataListsCopyWith(
           _$_CommonDataLists value, $Res Function(_$_CommonDataLists) then) =
@@ -877,9 +1479,22 @@ class _$_CommonDataLists implements _CommonDataLists {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -925,9 +1540,22 @@ class _$_CommonDataLists implements _CommonDataLists {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -973,9 +1601,22 @@ class _$_CommonDataLists implements _CommonDataLists {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -1008,9 +1649,13 @@ class _$_CommonDataLists implements _CommonDataLists {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -1039,9 +1684,12 @@ class _$_CommonDataLists implements _CommonDataLists {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -1066,9 +1714,12 @@ class _$_CommonDataLists implements _CommonDataLists {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -1154,9 +1805,22 @@ class _$_CityLists implements _CityLists {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -1202,9 +1866,22 @@ class _$_CityLists implements _CityLists {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -1250,9 +1927,22 @@ class _$_CityLists implements _CityLists {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -1285,9 +1975,13 @@ class _$_CityLists implements _CityLists {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -1316,9 +2010,12 @@ class _$_CityLists implements _CityLists {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -1343,9 +2040,12 @@ class _$_CityLists implements _CityLists {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -1431,9 +2131,22 @@ class _$_StateLists implements _StateLists {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -1479,9 +2192,22 @@ class _$_StateLists implements _StateLists {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -1527,9 +2253,22 @@ class _$_StateLists implements _StateLists {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -1562,9 +2301,13 @@ class _$_StateLists implements _StateLists {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -1593,9 +2336,12 @@ class _$_StateLists implements _StateLists {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -1620,9 +2366,12 @@ class _$_StateLists implements _StateLists {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -1650,6 +2399,658 @@ class _$_StateLists implements _StateLists {
 
 abstract class _StateLists implements OnboardingEvent {
   const factory _StateLists() = _$_StateLists;
+}
+
+/// @nodoc
+abstract class _$$_GetPetListCopyWith<$Res> {
+  factory _$$_GetPetListCopyWith(
+          _$_GetPetList value, $Res Function(_$_GetPetList) then) =
+      __$$_GetPetListCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_GetPetListCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_GetPetList>
+    implements _$$_GetPetListCopyWith<$Res> {
+  __$$_GetPetListCopyWithImpl(
+      _$_GetPetList _value, $Res Function(_$_GetPetList) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_GetPetList implements _GetPetList {
+  const _$_GetPetList();
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.petsList()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_GetPetList);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
+    required TResult Function() commonData,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+  }) {
+    return petsList();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult? Function()? commonData,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+  }) {
+    return petsList?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult Function()? commonData,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (petsList != null) {
+      return petsList();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
+    required TResult Function(_CommonDataLists value) commonData,
+    required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+  }) {
+    return petsList(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult? Function(_CommonDataLists value)? commonData,
+    TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+  }) {
+    return petsList?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult Function(_CommonDataLists value)? commonData,
+    TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (petsList != null) {
+      return petsList(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetPetList implements OnboardingEvent {
+  const factory _GetPetList() = _$_GetPetList;
+}
+
+/// @nodoc
+abstract class _$$_GetLanguageListCopyWith<$Res> {
+  factory _$$_GetLanguageListCopyWith(
+          _$_GetLanguageList value, $Res Function(_$_GetLanguageList) then) =
+      __$$_GetLanguageListCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_GetLanguageListCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_GetLanguageList>
+    implements _$$_GetLanguageListCopyWith<$Res> {
+  __$$_GetLanguageListCopyWithImpl(
+      _$_GetLanguageList _value, $Res Function(_$_GetLanguageList) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_GetLanguageList implements _GetLanguageList {
+  const _$_GetLanguageList();
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.languageList()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_GetLanguageList);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
+    required TResult Function() commonData,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+  }) {
+    return languageList();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult? Function()? commonData,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+  }) {
+    return languageList?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult Function()? commonData,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (languageList != null) {
+      return languageList();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
+    required TResult Function(_CommonDataLists value) commonData,
+    required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+  }) {
+    return languageList(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult? Function(_CommonDataLists value)? commonData,
+    TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+  }) {
+    return languageList?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult Function(_CommonDataLists value)? commonData,
+    TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (languageList != null) {
+      return languageList(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetLanguageList implements OnboardingEvent {
+  const factory _GetLanguageList() = _$_GetLanguageList;
 }
 
 /// @nodoc
@@ -1735,9 +3136,22 @@ class _$_RadioHHASelected implements _RadioHHASelected {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -1783,9 +3197,22 @@ class _$_RadioHHASelected implements _RadioHHASelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -1831,9 +3258,22 @@ class _$_RadioHHASelected implements _RadioHHASelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -1866,9 +3306,13 @@ class _$_RadioHHASelected implements _RadioHHASelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -1897,9 +3341,12 @@ class _$_RadioHHASelected implements _RadioHHASelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -1924,9 +3371,12 @@ class _$_RadioHHASelected implements _RadioHHASelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -2044,9 +3494,22 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -2092,9 +3555,22 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -2140,9 +3616,22 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -2175,9 +3664,13 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -2206,9 +3699,12 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -2233,9 +3729,12 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -2353,9 +3852,22 @@ class _$_RadioTBSelected implements _RadioTBSelected {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -2401,9 +3913,22 @@ class _$_RadioTBSelected implements _RadioTBSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -2449,9 +3974,22 @@ class _$_RadioTBSelected implements _RadioTBSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -2484,9 +4022,13 @@ class _$_RadioTBSelected implements _RadioTBSelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -2515,9 +4057,12 @@ class _$_RadioTBSelected implements _RadioTBSelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -2542,9 +4087,12 @@ class _$_RadioTBSelected implements _RadioTBSelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -2663,9 +4211,22 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -2711,9 +4272,22 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -2759,9 +4333,22 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -2794,9 +4381,13 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -2825,9 +4416,12 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -2852,9 +4446,12 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -2975,9 +4572,22 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -3023,9 +4633,22 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -3071,9 +4694,22 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -3106,9 +4742,13 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -3137,9 +4777,12 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -3164,9 +4807,12 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -3286,9 +4932,22 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -3334,9 +4993,22 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -3382,9 +5054,22 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -3417,9 +5102,13 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -3448,9 +5137,12 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -3475,9 +5167,12 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -3599,9 +5294,22 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -3647,9 +5355,22 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -3695,9 +5416,22 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -3730,9 +5464,13 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -3761,9 +5499,12 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -3788,9 +5529,12 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -3909,9 +5653,22 @@ class _$_RadioPetSelected implements _RadioPetSelected {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -3957,9 +5714,22 @@ class _$_RadioPetSelected implements _RadioPetSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -4005,9 +5775,22 @@ class _$_RadioPetSelected implements _RadioPetSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -4040,9 +5823,13 @@ class _$_RadioPetSelected implements _RadioPetSelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -4071,9 +5858,12 @@ class _$_RadioPetSelected implements _RadioPetSelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -4098,9 +5888,12 @@ class _$_RadioPetSelected implements _RadioPetSelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -4219,9 +6012,22 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -4267,9 +6073,22 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -4315,9 +6134,22 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -4350,9 +6182,13 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -4381,9 +6217,12 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -4408,9 +6247,12 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -4530,9 +6372,22 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -4578,9 +6433,22 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -4626,9 +6494,22 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -4661,9 +6542,13 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -4692,9 +6577,12 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -4719,9 +6607,12 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -4862,9 +6753,22 @@ class _$_SecurityDocumentUploadSelected
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -4910,9 +6814,22 @@ class _$_SecurityDocumentUploadSelected
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -4958,9 +6875,22 @@ class _$_SecurityDocumentUploadSelected
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -4993,9 +6923,13 @@ class _$_SecurityDocumentUploadSelected
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -5024,9 +6958,12 @@ class _$_SecurityDocumentUploadSelected
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -5051,9 +6988,12 @@ class _$_SecurityDocumentUploadSelected
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -5194,9 +7134,22 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -5242,9 +7195,22 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -5290,9 +7256,22 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -5325,9 +7304,13 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -5356,9 +7339,12 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -5383,9 +7369,12 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -5526,9 +7515,22 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -5574,9 +7576,22 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -5622,9 +7637,22 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -5657,9 +7685,13 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -5688,9 +7720,12 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -5715,9 +7750,12 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -5857,9 +7895,22 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -5905,9 +7956,22 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -5953,9 +8017,22 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -5988,9 +8065,13 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -6019,9 +8100,12 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -6046,9 +8130,12 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -6189,9 +8276,22 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
             List<String> documentList,
             String profilePic)
         personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() petsList,
+    required TResult Function() languageList,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -6237,9 +8337,22 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? petsList,
+    TResult? Function()? languageList,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -6285,9 +8398,22 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
             List<String> documentList,
             String profilePic)?
         personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? petsList,
+    TResult Function()? languageList,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -6320,9 +8446,13 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -6351,9 +8481,12 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -6378,9 +8511,12 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -6440,9 +8576,12 @@ mixin _$OnboardingState {
   int get isPetsSelected => throw _privateConstructorUsedError;
   int get isLanguagesSelected => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get nextClicked => throw _privateConstructorUsedError;
   int get selectedGenderId => throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
       get personalDetailsOption => throw _privateConstructorUsedError;
+  Option<Either<ApiErrorHandler, CommonResponse>>
+      get qualificationDetailsOption => throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, GenderListResponse>> get genderOption =>
       throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, DocumentListResponse>> get documentOption =>
@@ -6451,6 +8590,10 @@ mixin _$OnboardingState {
       throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, CityListResponse>> get cityOption =>
       throw _privateConstructorUsedError;
+  Option<Either<ApiErrorHandler, PetListResponse>> get petListOption =>
+      throw _privateConstructorUsedError;
+  Option<Either<ApiErrorHandler, LanguageListResponse>>
+      get languageListOption => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OnboardingStateCopyWith<OnboardingState> get copyWith =>
@@ -6482,13 +8625,19 @@ abstract class $OnboardingStateCopyWith<$Res> {
       int isPetsSelected,
       int isLanguagesSelected,
       bool isLoading,
+      bool nextClicked,
       int selectedGenderId,
       Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
           personalDetailsOption,
+      Option<Either<ApiErrorHandler, CommonResponse>>
+          qualificationDetailsOption,
       Option<Either<ApiErrorHandler, GenderListResponse>> genderOption,
       Option<Either<ApiErrorHandler, DocumentListResponse>> documentOption,
       Option<Either<ApiErrorHandler, StateListReponse>> stateOption,
-      Option<Either<ApiErrorHandler, CityListResponse>> cityOption});
+      Option<Either<ApiErrorHandler, CityListResponse>> cityOption,
+      Option<Either<ApiErrorHandler, PetListResponse>> petListOption,
+      Option<Either<ApiErrorHandler, LanguageListResponse>>
+          languageListOption});
 }
 
 /// @nodoc
@@ -6522,12 +8671,16 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
     Object? isPetsSelected = null,
     Object? isLanguagesSelected = null,
     Object? isLoading = null,
+    Object? nextClicked = null,
     Object? selectedGenderId = null,
     Object? personalDetailsOption = null,
+    Object? qualificationDetailsOption = null,
     Object? genderOption = null,
     Object? documentOption = null,
     Object? stateOption = null,
     Object? cityOption = null,
+    Object? petListOption = null,
+    Object? languageListOption = null,
   }) {
     return _then(_value.copyWith(
       pickedProfilePic: null == pickedProfilePic
@@ -6602,6 +8755,10 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      nextClicked: null == nextClicked
+          ? _value.nextClicked
+          : nextClicked // ignore: cast_nullable_to_non_nullable
+              as bool,
       selectedGenderId: null == selectedGenderId
           ? _value.selectedGenderId
           : selectedGenderId // ignore: cast_nullable_to_non_nullable
@@ -6610,6 +8767,10 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
           ? _value.personalDetailsOption
           : personalDetailsOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiErrorHandler, PersonalDetailsResponse>>,
+      qualificationDetailsOption: null == qualificationDetailsOption
+          ? _value.qualificationDetailsOption
+          : qualificationDetailsOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, CommonResponse>>,
       genderOption: null == genderOption
           ? _value.genderOption
           : genderOption // ignore: cast_nullable_to_non_nullable
@@ -6626,6 +8787,14 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
           ? _value.cityOption
           : cityOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiErrorHandler, CityListResponse>>,
+      petListOption: null == petListOption
+          ? _value.petListOption
+          : petListOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, PetListResponse>>,
+      languageListOption: null == languageListOption
+          ? _value.languageListOption
+          : languageListOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, LanguageListResponse>>,
     ) as $Val);
   }
 }
@@ -6657,13 +8826,19 @@ abstract class _$$_OnboardingStateCopyWith<$Res>
       int isPetsSelected,
       int isLanguagesSelected,
       bool isLoading,
+      bool nextClicked,
       int selectedGenderId,
       Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
           personalDetailsOption,
+      Option<Either<ApiErrorHandler, CommonResponse>>
+          qualificationDetailsOption,
       Option<Either<ApiErrorHandler, GenderListResponse>> genderOption,
       Option<Either<ApiErrorHandler, DocumentListResponse>> documentOption,
       Option<Either<ApiErrorHandler, StateListReponse>> stateOption,
-      Option<Either<ApiErrorHandler, CityListResponse>> cityOption});
+      Option<Either<ApiErrorHandler, CityListResponse>> cityOption,
+      Option<Either<ApiErrorHandler, PetListResponse>> petListOption,
+      Option<Either<ApiErrorHandler, LanguageListResponse>>
+          languageListOption});
 }
 
 /// @nodoc
@@ -6695,12 +8870,16 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
     Object? isPetsSelected = null,
     Object? isLanguagesSelected = null,
     Object? isLoading = null,
+    Object? nextClicked = null,
     Object? selectedGenderId = null,
     Object? personalDetailsOption = null,
+    Object? qualificationDetailsOption = null,
     Object? genderOption = null,
     Object? documentOption = null,
     Object? stateOption = null,
     Object? cityOption = null,
+    Object? petListOption = null,
+    Object? languageListOption = null,
   }) {
     return _then(_$_OnboardingState(
       pickedProfilePic: null == pickedProfilePic
@@ -6775,6 +8954,10 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      nextClicked: null == nextClicked
+          ? _value.nextClicked
+          : nextClicked // ignore: cast_nullable_to_non_nullable
+              as bool,
       selectedGenderId: null == selectedGenderId
           ? _value.selectedGenderId
           : selectedGenderId // ignore: cast_nullable_to_non_nullable
@@ -6783,6 +8966,10 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
           ? _value.personalDetailsOption
           : personalDetailsOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiErrorHandler, PersonalDetailsResponse>>,
+      qualificationDetailsOption: null == qualificationDetailsOption
+          ? _value.qualificationDetailsOption
+          : qualificationDetailsOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, CommonResponse>>,
       genderOption: null == genderOption
           ? _value.genderOption
           : genderOption // ignore: cast_nullable_to_non_nullable
@@ -6799,6 +8986,14 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
           ? _value.cityOption
           : cityOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiErrorHandler, CityListResponse>>,
+      petListOption: null == petListOption
+          ? _value.petListOption
+          : petListOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, PetListResponse>>,
+      languageListOption: null == languageListOption
+          ? _value.languageListOption
+          : languageListOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, LanguageListResponse>>,
     ));
   }
 }
@@ -6825,12 +9020,16 @@ class _$_OnboardingState implements _OnboardingState {
       required this.isPetsSelected,
       required this.isLanguagesSelected,
       required this.isLoading,
+      required this.nextClicked,
       required this.selectedGenderId,
       required this.personalDetailsOption,
+      required this.qualificationDetailsOption,
       required this.genderOption,
       required this.documentOption,
       required this.stateOption,
-      required this.cityOption})
+      required this.cityOption,
+      required this.petListOption,
+      required this.languageListOption})
       : _securityDocumentList = securityDocumentList,
         _hhaDocumentList = hhaDocumentList,
         _blsDocumentList = blsDocumentList,
@@ -6899,10 +9098,15 @@ class _$_OnboardingState implements _OnboardingState {
   @override
   final bool isLoading;
   @override
+  final bool nextClicked;
+  @override
   final int selectedGenderId;
   @override
   final Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
       personalDetailsOption;
+  @override
+  final Option<Either<ApiErrorHandler, CommonResponse>>
+      qualificationDetailsOption;
   @override
   final Option<Either<ApiErrorHandler, GenderListResponse>> genderOption;
   @override
@@ -6911,10 +9115,15 @@ class _$_OnboardingState implements _OnboardingState {
   final Option<Either<ApiErrorHandler, StateListReponse>> stateOption;
   @override
   final Option<Either<ApiErrorHandler, CityListResponse>> cityOption;
+  @override
+  final Option<Either<ApiErrorHandler, PetListResponse>> petListOption;
+  @override
+  final Option<Either<ApiErrorHandler, LanguageListResponse>>
+      languageListOption;
 
   @override
   String toString() {
-    return 'OnboardingState(pickedProfilePic: $pickedProfilePic, securityDocumentList: $securityDocumentList, hhaDocumentList: $hhaDocumentList, blsDocumentList: $blsDocumentList, tbDocumentList: $tbDocumentList, covidDocumentList: $covidDocumentList, isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected, isFormSubmitSuccess: $isFormSubmitSuccess, listUpdated: $listUpdated, isExperianceSelected: $isExperianceSelected, isSmokerSelected: $isSmokerSelected, isTransportationSelected: $isTransportationSelected, isPetsSelected: $isPetsSelected, isLanguagesSelected: $isLanguagesSelected, isLoading: $isLoading, selectedGenderId: $selectedGenderId, personalDetailsOption: $personalDetailsOption, genderOption: $genderOption, documentOption: $documentOption, stateOption: $stateOption, cityOption: $cityOption)';
+    return 'OnboardingState(pickedProfilePic: $pickedProfilePic, securityDocumentList: $securityDocumentList, hhaDocumentList: $hhaDocumentList, blsDocumentList: $blsDocumentList, tbDocumentList: $tbDocumentList, covidDocumentList: $covidDocumentList, isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected, isFormSubmitSuccess: $isFormSubmitSuccess, listUpdated: $listUpdated, isExperianceSelected: $isExperianceSelected, isSmokerSelected: $isSmokerSelected, isTransportationSelected: $isTransportationSelected, isPetsSelected: $isPetsSelected, isLanguagesSelected: $isLanguagesSelected, isLoading: $isLoading, nextClicked: $nextClicked, selectedGenderId: $selectedGenderId, personalDetailsOption: $personalDetailsOption, qualificationDetailsOption: $qualificationDetailsOption, genderOption: $genderOption, documentOption: $documentOption, stateOption: $stateOption, cityOption: $cityOption, petListOption: $petListOption, languageListOption: $languageListOption)';
   }
 
   @override
@@ -6959,10 +9168,16 @@ class _$_OnboardingState implements _OnboardingState {
                 other.isLanguagesSelected == isLanguagesSelected) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.nextClicked, nextClicked) ||
+                other.nextClicked == nextClicked) &&
             (identical(other.selectedGenderId, selectedGenderId) ||
                 other.selectedGenderId == selectedGenderId) &&
             (identical(other.personalDetailsOption, personalDetailsOption) ||
                 other.personalDetailsOption == personalDetailsOption) &&
+            (identical(other.qualificationDetailsOption,
+                    qualificationDetailsOption) ||
+                other.qualificationDetailsOption ==
+                    qualificationDetailsOption) &&
             (identical(other.genderOption, genderOption) ||
                 other.genderOption == genderOption) &&
             (identical(other.documentOption, documentOption) ||
@@ -6970,7 +9185,11 @@ class _$_OnboardingState implements _OnboardingState {
             (identical(other.stateOption, stateOption) ||
                 other.stateOption == stateOption) &&
             (identical(other.cityOption, cityOption) ||
-                other.cityOption == cityOption));
+                other.cityOption == cityOption) &&
+            (identical(other.petListOption, petListOption) ||
+                other.petListOption == petListOption) &&
+            (identical(other.languageListOption, languageListOption) ||
+                other.languageListOption == languageListOption));
   }
 
   @override
@@ -6994,12 +9213,16 @@ class _$_OnboardingState implements _OnboardingState {
         isPetsSelected,
         isLanguagesSelected,
         isLoading,
+        nextClicked,
         selectedGenderId,
         personalDetailsOption,
+        qualificationDetailsOption,
         genderOption,
         documentOption,
         stateOption,
-        cityOption
+        cityOption,
+        petListOption,
+        languageListOption
       ]);
 
   @JsonKey(ignore: true)
@@ -7029,9 +9252,12 @@ abstract class _OnboardingState implements OnboardingState {
       required final int isPetsSelected,
       required final int isLanguagesSelected,
       required final bool isLoading,
+      required final bool nextClicked,
       required final int selectedGenderId,
       required final Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
           personalDetailsOption,
+      required final Option<Either<ApiErrorHandler, CommonResponse>>
+          qualificationDetailsOption,
       required final Option<Either<ApiErrorHandler, GenderListResponse>>
           genderOption,
       required final Option<Either<ApiErrorHandler, DocumentListResponse>>
@@ -7039,7 +9265,11 @@ abstract class _OnboardingState implements OnboardingState {
       required final Option<Either<ApiErrorHandler, StateListReponse>>
           stateOption,
       required final Option<Either<ApiErrorHandler, CityListResponse>>
-          cityOption}) = _$_OnboardingState;
+          cityOption,
+      required final Option<Either<ApiErrorHandler, PetListResponse>>
+          petListOption,
+      required final Option<Either<ApiErrorHandler, LanguageListResponse>>
+          languageListOption}) = _$_OnboardingState;
 
   @override
   Uint8List get pickedProfilePic;
@@ -7078,10 +9308,15 @@ abstract class _OnboardingState implements OnboardingState {
   @override
   bool get isLoading;
   @override
+  bool get nextClicked;
+  @override
   int get selectedGenderId;
   @override
   Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
       get personalDetailsOption;
+  @override
+  Option<Either<ApiErrorHandler, CommonResponse>>
+      get qualificationDetailsOption;
   @override
   Option<Either<ApiErrorHandler, GenderListResponse>> get genderOption;
   @override
@@ -7090,6 +9325,10 @@ abstract class _OnboardingState implements OnboardingState {
   Option<Either<ApiErrorHandler, StateListReponse>> get stateOption;
   @override
   Option<Either<ApiErrorHandler, CityListResponse>> get cityOption;
+  @override
+  Option<Either<ApiErrorHandler, PetListResponse>> get petListOption;
+  @override
+  Option<Either<ApiErrorHandler, LanguageListResponse>> get languageListOption;
   @override
   @JsonKey(ignore: true)
   _$$_OnboardingStateCopyWith<_$_OnboardingState> get copyWith =>

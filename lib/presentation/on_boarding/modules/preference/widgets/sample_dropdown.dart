@@ -1,40 +1,38 @@
+import 'package:admin_580_tech/application/bloc/onboarding/onboarding_bloc.dart';
+import 'package:admin_580_tech/domain/on_boarding/models/preferences/preference_language_model.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/enum.dart';
 import '../../../../../core/text_styles.dart';
+import '../../../../../domain/on_boarding/models/preferences/pets_model.dart';
+import '../../../../../domain/on_boarding/models/preferences/pets_type.dart';
 import '../../../../widget/custom_button.dart';
 import '../../../../widget/custom_sizedbox.dart';
 
 class SampleDropdown extends StatefulWidget {
-  const SampleDropdown({super.key, required this.isFromLangauge});
+  const SampleDropdown(
+      {super.key,
+      required this.isFromLangauge,
+      this.petList,
+      this.languageList,
+      required this.searchController,
+      required this.onboardingBloc});
+
   final bool isFromLangauge;
+  final List<PetsModel>? petList;
+  final List<PreferenceLanguageModel>? languageList;
+  final TextEditingController searchController;
+  final OnboardingBloc onboardingBloc;
 
   @override
   State<SampleDropdown> createState() => _SampleDropdownState();
 }
 
 class _SampleDropdownState extends State<SampleDropdown> {
-  List<Map<String, dynamic>> items = [
-    {'name': 'Cat', 'type': 'indoor'},
-    {'name': 'Dog', 'type': 'indoor'},
-    {'name': 'Iguana', 'type': 'indoor'},
-    {'name': 'Python', 'type': 'outdoor'},
-    {'name': 'Parrot', 'type': 'indoor'},
-    {'name': 'Rabbit', 'type': 'indoor'},
-    {'name': 'Horse', 'type': 'indoor'},
-  ];
-  List<Map<String, dynamic>> languages = [
-    {'name': 'English', 'type': ''},
-    {'name': 'Hindi', 'type': ''},
-    {'name': 'French', 'type': ''},
-    {'name': 'German', 'type': ''},
-    {'name': 'Spanish', 'type': ''},
-    {'name': 'Others', 'type': ''},
-  ];
-
-  List<Map<String, dynamic>> selectedItems = [];
+  List<PetsModel> selectedPetItems = [];
+  List<PreferenceLanguageModel> selectedLanguageItems = [];
 
   @override
   Widget build(BuildContext context) {
@@ -105,8 +103,16 @@ class _SampleDropdownState extends State<SampleDropdown> {
                       CustomSizedBox(height: DBL.sixteen.val),
                       Container(
                         color: AppColor.offWhite.val,
-                        child: const TextField(
-                          decoration: InputDecoration(
+                        child: TextFormField(
+                          controller: widget.searchController,
+                          onChanged: (val) {
+                            setState(() {
+                              widget.onboardingBloc.petSearchKey = val;
+                            });
+                            widget.onboardingBloc
+                                .add(OnboardingEvent.petsList());
+                          },
+                          decoration: const InputDecoration(
                               hintText: 'Search...',
                               prefixIcon: Icon(Icons.search),
                               enabledBorder: InputBorder.none,
@@ -128,46 +134,70 @@ class _SampleDropdownState extends State<SampleDropdown> {
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         itemCount: widget.isFromLangauge
-                            ? languages.length
-                            : items.length,
+                            ? widget.languageList!.length
+                            : widget.petList!.length,
                         itemBuilder: (context, index) {
                           final item = widget.isFromLangauge
-                              ? languages[index]
-                              : items[index];
-                          bool isSelected = selectedItems.contains(item);
+                              ? widget.languageList![index]
+                              : widget.petList![index];
+                          bool isSelected = false;
+                          if (widget.isFromLangauge) {
+                            isSelected = selectedLanguageItems.contains(item);
+                          } else {
+                            isSelected = selectedPetItems.contains(item);
+                          }
 
                           return ListTile(
                             // titleAlignment: ListTileTitleAlignment.center,
                             leading: Checkbox(
-                              value: selectedItems.contains(item),
+                              value: widget.isFromLangauge
+                                  ? selectedLanguageItems.contains(item)
+                                  : selectedPetItems.contains(item),
                               onChanged: (value) {
                                 setState(() {
                                   if (isSelected) {
-                                    selectedItems.removeWhere((item) =>
-                                        item['name'] == items[index]['name']);
+                                    if (!widget.isFromLangauge) {
+                                      selectedPetItems.removeWhere((item) =>
+                                          item.name ==
+                                          widget.petList![index].name);
+                                    } else {
+                                      selectedLanguageItems.removeWhere(
+                                          (item) =>
+                                              item.name ==
+                                              widget.languageList![index].name);
+                                    }
                                   } else {
-                                    selectedItems.add(items[index]);
+                                    if (!widget.isFromLangauge) {
+                                      selectedPetItems
+                                          .add(widget.petList![index]);
+                                    } else {
+                                      selectedLanguageItems
+                                          .add(widget.languageList![index]);
+                                    }
                                   }
                                 });
                               },
                             ),
                             title: CustomText(
-                              item['name'],
+                              !widget.isFromLangauge
+                                  ? widget.petList![index].name
+                                  : widget.languageList![index].name,
                               style: TS().gRoboto(
                                   color: AppColor.primaryColor.val,
-                                  fontSize: FS.font16.val,
+                                  fontSize: FS.font14.val,
                                   fontWeight: FW.w400.val),
                             ),
                             trailing: widget.isFromLangauge
                                 ? Container(width: 230)
                                 : CustomContainer(
-                                    width: 230.0,
+                                    width: 245.0,
                                     child: ButtonBar(
                                       children: [
                                         InkWell(
                                           onTap: () {
                                             setState(() {
-                                              item['type'] = 'indoor';
+                                              widget.petList![index].type =
+                                                  PetsType.INDOOR;
                                             });
                                           },
                                           child: Container(
@@ -180,9 +210,11 @@ class _SampleDropdownState extends State<SampleDropdown> {
                                               border: Border.all(
                                                 color: AppColor.amber2.val,
                                               ),
-                                              color: item['type'] == 'indoor'
-                                                  ? AppColor.indoor.val
-                                                  : AppColor.white.val,
+                                              color:
+                                                  widget.petList![index].type ==
+                                                          PetsType.INDOOR
+                                                      ? AppColor.indoor.val
+                                                      : AppColor.white.val,
                                             ),
                                             child: CustomText(
                                               AppString.inDoor.val,
@@ -195,7 +227,8 @@ class _SampleDropdownState extends State<SampleDropdown> {
                                         InkWell(
                                           onTap: () {
                                             setState(() {
-                                              item['type'] = 'outdoor';
+                                              widget.petList![index].type =
+                                                  PetsType.OUTDOOR;
                                             });
                                           },
                                           child: Container(
@@ -208,12 +241,45 @@ class _SampleDropdownState extends State<SampleDropdown> {
                                               border: Border.all(
                                                 color: AppColor.red1.val,
                                               ),
-                                              color: item['type'] == 'outdoor'
-                                                  ? AppColor.outdoor.val
-                                                  : AppColor.white.val,
+                                              color:
+                                                  widget.petList![index].type ==
+                                                          PetsType.OUTDOOR
+                                                      ? AppColor.outdoor.val
+                                                      : AppColor.white.val,
                                             ),
                                             child: CustomText(
                                               AppString.outDoor.val,
+                                              style: TS().gRoboto(
+                                                  fontSize: FS.font13.val,
+                                                  fontWeight: FW.w400.val),
+                                            ),
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              widget.petList![index].type =
+                                                  PetsType.BOTH;
+                                            });
+                                          },
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            width: 70,
+                                            height: 30,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              border: Border.all(
+                                                color: AppColor.blue1.val,
+                                              ),
+                                              color:
+                                                  widget.petList![index].type ==
+                                                          PetsType.BOTH
+                                                      ? AppColor.both.val
+                                                      : AppColor.white.val,
+                                            ),
+                                            child: CustomText(
+                                              AppString.both.val,
                                               style: TS().gRoboto(
                                                   fontSize: FS.font13.val,
                                                   fontWeight: FW.w400.val),
@@ -227,10 +293,23 @@ class _SampleDropdownState extends State<SampleDropdown> {
                             onTap: () {
                               setState(() {
                                 if (isSelected) {
-                                  selectedItems.remove(item);
+                                  if (!widget.isFromLangauge) {
+                                    selectedPetItems.remove(item);
+                                  } else {
+                                    selectedLanguageItems.remove(item);
+                                  }
                                 } else {
-                                  if (!selectedItems.contains(item)) {
-                                    selectedItems.add(item);
+                                  if (!widget.isFromLangauge) {
+                                    if (!selectedPetItems.contains(item)) {
+                                      selectedPetItems
+                                          .add(widget.petList![index]);
+                                    } else {
+                                      if (!selectedLanguageItems
+                                          .contains(item)) {
+                                        selectedLanguageItems
+                                            .add(widget.languageList![index]);
+                                      }
+                                    }
                                   }
                                 }
                               });
@@ -246,7 +325,11 @@ class _SampleDropdownState extends State<SampleDropdown> {
                 CustomButton(
                   text: AppString.ok.val,
                   onPressed: () {
-                    Navigator.of(context).pop(selectedItems);
+                    if (widget.isFromLangauge) {
+                      Navigator.of(context).pop(selectedLanguageItems);
+                    } else {
+                      Navigator.of(context).pop(selectedPetItems);
+                    }
                   },
                 ),
               ],
@@ -257,15 +340,27 @@ class _SampleDropdownState extends State<SampleDropdown> {
     ).then((value) {
       setState(() {
         if (value != null) {
-          selectedItems = List<Map<String, dynamic>>.from(value);
+          if (widget.isFromLangauge) {
+            selectedLanguageItems = List<PreferenceLanguageModel>.from(value);
+          } else {
+            selectedPetItems = List<PetsModel>.from(value);
+          }
         }
       });
     });
   }
 
   List<Widget> generateSelectedItemsList() {
-    return List<Widget>.generate(selectedItems.length, (index) {
-      final item = selectedItems[index];
+    return List<Widget>.generate(
+        widget.isFromLangauge
+            ? selectedLanguageItems.length
+            : selectedPetItems.length, (index) {
+      var item;
+      if (widget.isFromLangauge) {
+        item = selectedLanguageItems[index];
+      } else {
+        item = selectedPetItems[index];
+      }
 
       return Container(
         width: 90,
@@ -274,26 +369,34 @@ class _SampleDropdownState extends State<SampleDropdown> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: item['type'] == 'indoor'
+            color: widget.petList![index].type == PetsType.INDOOR
                 ? AppColor.amber2.val
-                : AppColor.red1.val,
+                : widget.petList![index].type == PetsType.OUTDOOR
+                    ? AppColor.red1.val
+                    : AppColor.blue1.val,
           ),
-          color: item['type'] == 'indoor'
+          color: widget.petList![index].type == PetsType.INDOOR
               ? AppColor.indoor.val
-              : AppColor.outdoor.val,
+              : widget.petList![index].type == PetsType.OUTDOOR
+                  ? AppColor.outdoor.val
+                  : AppColor.both.val,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              item['name'],
+              item.name,
               style: const TextStyle(fontSize: 13),
             ),
             InkWell(
               borderRadius: BorderRadius.circular(50),
               onTap: () {
                 setState(() {
-                  selectedItems.remove(item);
+                  if (widget.isFromLangauge) {
+                    selectedLanguageItems.remove(item);
+                  } else {
+                    selectedPetItems.remove(item);
+                  }
                 });
               },
               child: Container(

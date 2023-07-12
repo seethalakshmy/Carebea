@@ -69,7 +69,7 @@ class CTextField extends StatelessWidget {
       width: width,
       child: TextFormField(
         textAlignVertical: textAlignVertical ?? TextAlignVertical.center,
-        inputFormatters: inputFormatter!,
+        inputFormatters: inputFormatter ?? [],
         controller: controller,
         focusNode: focusNode,
         textInputAction: textInputAction,
