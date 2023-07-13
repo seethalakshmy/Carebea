@@ -64,26 +64,20 @@ class ListShops extends GetView<ShopsController> {
                               return DropdownButton<String>(
                                 hint: Text(
                                   "Choose",
-                                  style: customTheme(Get.context!)
-                                      .regular
-                                      .copyWith(fontSize: 11, color: const Color(0xff929292)),
+                                  style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: const Color(0xff929292)),
                                 ),
                                 value: controller.selectedSearchtype.value.type ?? "",
                                 underline: const SizedBox.shrink(),
                                 isDense: true,
                                 onChanged: (value) {
                                   _focusNode.requestFocus();
-                                  controller.selectedSearchtype(
-                                      controller.searchitems.singleWhere((element) => element.type == value));
+                                  controller.selectedSearchtype(controller.searchitems.singleWhere((element) => element.type == value));
                                 },
                                 items: controller.searchitems
                                     .map(
                                       (e) => DropdownMenuItem(
                                         value: e.type,
-                                        child: Text(e.title!,
-                                            style: customTheme(Get.context!)
-                                                .regular
-                                                .copyWith(fontSize: 11, color: Colors.black)),
+                                        child: Text(e.title!, style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black)),
                                       ),
                                     )
                                     .toList(),
@@ -173,13 +167,10 @@ class ListShops extends GetView<ShopsController> {
                           return Center(child: circularProgressIndicator(context));
                         }
                         if (shopsController.shopList.isEmpty) {
-                          return Container(
-                              alignment: Alignment.topCenter,
-                              width: double.infinity,
-                              padding: EdgeInsets.only(top: 50),
-                              child: Text("No shops found!"));
+                          return Container(alignment: Alignment.topCenter, width: double.infinity, padding: EdgeInsets.only(top: 50), child: Text("No shops found!"));
                         }
                         return ListView.separated(
+                            controller: controller.scrollController,
                             separatorBuilder: (_, __) => const SizedBox(height: 20),
                             shrinkWrap: true,
                             itemCount: shopsController.shopList.length,
@@ -194,8 +185,7 @@ class ListShops extends GetView<ShopsController> {
             })));
   }
 
-  List<PopupMenuItem<String>> buildCategoryFilterItems(BuildContext context, String value) =>
-      shopsController.filterVals!.category!.map((e) {
+  List<PopupMenuItem<String>> buildCategoryFilterItems(BuildContext context, String value) => shopsController.filterVals!.category!.map((e) {
         return customPopupMenuItem<String>(
           context,
           name: e.name!,
@@ -206,8 +196,7 @@ class ListShops extends GetView<ShopsController> {
         );
       }).toList();
 
-  List<PopupMenuItem<String>> buildZoneFilterItems(BuildContext context, String value) =>
-      shopsController.filterVals!.zone!.map((e) {
+  List<PopupMenuItem<String>> buildZoneFilterItems(BuildContext context, String value) => shopsController.filterVals!.zone!.map((e) {
         return customPopupMenuItem<String>(
           context,
           name: e.name!,
@@ -218,8 +207,7 @@ class ListShops extends GetView<ShopsController> {
         );
       }).toList();
 
-  List<PopupMenuItem<String>> buildRouteFilterItems(BuildContext context, String value) =>
-      shopsController.filterVals!.route!.map((e) {
+  List<PopupMenuItem<String>> buildRouteFilterItems(BuildContext context, String value) => shopsController.filterVals!.route!.map((e) {
         return customPopupMenuItem<String>(
           context,
           name: e.name!,
