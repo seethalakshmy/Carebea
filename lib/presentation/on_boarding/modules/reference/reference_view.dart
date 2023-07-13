@@ -1,5 +1,6 @@
 import 'package:admin_580_tech/application/bloc/onboarding/onboarding_bloc.dart';
 import 'package:admin_580_tech/presentation/caregiver_creation/widgets/details_text_field_with_label.dart';
+import 'package:admin_580_tech/presentation/on_boarding/modules/reference/widgets/referenceList.dart';
 import 'package:admin_580_tech/presentation/on_boarding/widgets/common_padding_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/svg_text.dart';
@@ -15,6 +16,7 @@ import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
 import '../../../widget/custom_button.dart';
 import '../../../widget/custom_form.dart';
+import '../../../widget/custom_listview_builder.dart';
 import '../../../widget/custom_sizedbox.dart';
 import '../../../widget/custom_text.dart';
 import '../../../widget/dropdown/city_drop_down.dart';
@@ -85,12 +87,51 @@ class _ReferenceViewState extends State<ReferenceView> {
                 _topArea(context),
                 Flexible(
                   child: CustomContainer(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    child: ListView(
-                      shrinkWrap: true,
-                      children: [],
-                    ),
-                  ),
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child: Container(
+                        height: 100,
+                        color: Colors.red,
+                        child: CustomListViewBuilder(
+                          itemCount: widget.onboardingBloc.reference.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            Container(
+                              decoration: BoxDecoration(
+                                border: const Border(
+                                    left: BorderSide(
+                                        width: 10, color: Colors.blueAccent)),
+                              ),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 20, top: 10),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    ReferenceListContent(
+                                        title: 'Name',
+                                        subTitle: widget.onboardingBloc
+                                                .reference[index].name ??
+                                            ""),
+                                    ReferenceListContent(
+                                        title: "City",
+                                        subTitle: widget.onboardingBloc
+                                                .reference[index].city ??
+                                            ''),
+                                    // ReferenceListContent(
+                                    //     title: LocaleKeys.frequency.tr,
+                                    //     subTitle: item.frequency ?? ""),
+                                    // ReferenceListContent(
+                                    //     title: LocaleKeys.expiration_date.tr,
+                                    //     subTitle: item.expiry ?? ""),
+                                    // ReferenceListContent(
+                                    //     title: LocaleKeys.prescribing_doctor.tr,
+                                    //     subTitle: item.prescribingDoctor ?? ""),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      )),
                 ),
                 CustomSizedBox(height: DBL.twenty.val),
                 _moreReferenceWidget(() {
@@ -159,11 +200,12 @@ class _ReferenceViewState extends State<ReferenceView> {
                   : ""
               : "",
           items: widget.onboardingBloc.relationList,
-          onChange: (value) {
-            widget.onboardingBloc.selectedRelation = value.toString();
-            print("state value in onchanged : $value");
-            widget.onboardingBloc.relationId = value;
+          onChange: (id, name) {
+            widget.onboardingBloc.selectedRelation = name.toString();
+            print(" value in onchanged : ${name}");
+            widget.onboardingBloc.relationId = id;
             widget.onboardingBloc.add(const OnboardingEvent.relationList());
+            print("relation ${widget.onboardingBloc.relationId}");
           },
           selectedValue: widget.onboardingBloc.selectedRelation,
         ),
@@ -190,10 +232,10 @@ class _ReferenceViewState extends State<ReferenceView> {
                   : ""
               : "",
           items: widget.onboardingBloc.stateList,
-          onChange: (value) {
-            widget.onboardingBloc.selectedState = value.toString();
-            print("state value in onchanged : $value");
-            widget.onboardingBloc.stateId = value;
+          onChange: (id, name) {
+            widget.onboardingBloc.selectedState = name.toString();
+            print("state value in onchanged : $name");
+            widget.onboardingBloc.stateId = id;
             widget.onboardingBloc.add(const OnboardingEvent.cityList());
           },
           selectedValue: widget.onboardingBloc.selectedState,
@@ -220,9 +262,10 @@ class _ReferenceViewState extends State<ReferenceView> {
                   : ""
               : "",
           items: widget.onboardingBloc.cityList,
-          onChange: (value) {
-            widget.onboardingBloc.selectedCity = value.toString();
-            print("city value in onchanged : $value");
+          onChange: (id, name) {
+            widget.onboardingBloc.selectedCity = name.toString();
+            widget.onboardingBloc.selectedCityId = id;
+            print("city value in onchanged : $name");
           },
           selectedValue: widget.onboardingBloc.selectedCity,
         ),

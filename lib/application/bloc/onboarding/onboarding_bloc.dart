@@ -37,6 +37,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   String profileUrl = "";
   String selectedState = "";
   String selectedCity = "";
+  String selectedCityId = "";
   String selectedRelation = "";
   List<GetReferences> reference = List<GetReferences>.empty(growable: true);
   final TextEditingController nameController = TextEditingController();
@@ -105,9 +106,11 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
         street: streetController.text,
         stateName: selectedState,
         cityName: selectedCity,
+        city: selectedCityId,
+        state: stateId,
         phone: phoneController.text,
-        relationName: relationId,
-        relationship: selectedRelation,
+        relationName: selectedRelation,
+        relationship: relationId,
         zip: zipController.text));
     print(reference.first.name);
 

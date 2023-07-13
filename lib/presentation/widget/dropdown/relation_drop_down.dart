@@ -51,7 +51,7 @@ class RelationDropDown extends StatelessWidget {
                   ))
               .toList(),
           onChange: (value, index) {
-            onChange(items[index].id);
+            onChange(items[index].id, items[index].relationship);
           },
           child: CustomText(selectedValue ?? "")),
     );
