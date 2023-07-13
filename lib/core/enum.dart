@@ -133,6 +133,7 @@ enum AppString {
   inActive("Inactive"),
   inDoor("Indoor"),
   outDoor("Outdoor"),
+  both("Both"),
   clientsCustomer("Clients/Customers"),
   isCompletedTraining(
       "Is the Care ambassadors  Completed the training process?"),
@@ -316,7 +317,9 @@ enum AppString {
   emptyCity("Please select your city"),
   emptyRelationship("Please select your relationship"),
   emptyZip("Please enter zip code"),
+  invalidZip("Please enter valid zip code"),
   emptySSN("Please enter social security number"),
+  invalidSSN("Please enter valid social security number"),
   emptyDocType("Please select the document type"),
   emptyDocNo("Please enter the document number"),
   emptyAddress("Please enter your address"),
@@ -325,6 +328,8 @@ enum AppString {
   emptyTBNo("Please enter TB result number"),
   emptyRole("Role name shouldn't be empty"),
   emptyModule("You Should Select at least one module"),
+  emptyProfilePic("Please select your profile picture"),
+
   agreementChckboxText(
       "I have read and agree to the home health aid agreement"),
   dummyAgreementText(
@@ -388,6 +393,7 @@ enum AppColor {
   amber4(Color(0xffFDF1CA)),
   indoor(Color(0xffFCEFCF)),
   outdoor(Color(0xffF6DADA)),
+  both(Color(0xffC6DEF4)),
   lightGrey(Color(0xffE1E8F0)),
   inactive(Color(0xffB3BDC8)),
   lightGrey2(Color(0xff8793AB)),
@@ -411,6 +417,7 @@ enum AppColor {
   availableInDifferent(Color(0xffF3AA1A)),
   red(Color(0xffE75A77)),
   red1(Color(0x4d3A0202)),
+  blue1(Color(0x4d02263a)),
   red2(Color.fromRGBO(253, 66, 66, 0.8)),
   red3(Color(0xffFDEDEE)),
   red4(Color(0xffFDEDEE)),

@@ -1,15 +1,18 @@
 import 'package:admin_580_tech/application/bloc/form_validation/form_validation_bloc.dart';
 import 'package:admin_580_tech/application/bloc/onboarding/onboarding_bloc.dart';
+import 'package:admin_580_tech/presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/qualification_details/widgets/item_row_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/custom_snackbar.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
 import '../../../../infrastructure/on_boarding/on_boarding_repository.dart';
+import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
 import '../../../widget/custom_container.dart';
 import '../../../widget/custom_sizedbox.dart';
@@ -82,7 +85,18 @@ class _QualificationViewState extends State<QualificationView> {
         BlocProvider(
             create: (context) => OnboardingBloc(OnBoardingRepository()))
       ],
-      child: BlocBuilder<OnboardingBloc, OnboardingState>(
+      child: BlocConsumer<OnboardingBloc, OnboardingState>(
+        listenWhen: (previous, current) => previous != current,
+        listener: (context, listenerState) {
+          return listenerState.qualificationDetailsOption.fold(() {}, (some) {
+            some.fold((l) {
+              CSnackBar.showError(context, msg: l.error);
+            }, (r) {
+              widget.pageController
+                  .jumpToPage(widget.pageController.page!.toInt() + 1);
+            });
+          });
+        },
         bloc: widget.onboardingBloc,
         builder: (context, onboardingState) {
           return CommonPaddingWidget(
@@ -296,6 +310,7 @@ class _QualificationViewState extends State<QualificationView> {
                       bloc: _validationBloc,
                       builder: (context, validationState) {
                         return CommonNextOrCancelButtons(
+                          isLoading: widget.onboardingBloc.state.isLoading,
                           rightButtonName: AppString.next.val,
                           leftButtonName: AppString.back.val,
                           onLeftButtonPressed: () {
@@ -322,8 +337,45 @@ class _QualificationViewState extends State<QualificationView> {
     if (_validateMode != AutovalidateMode.always) {
       _validationBloc.add(const FormValidationEvent.submit());
     }
+    final userId = SharedPreffUtil().getUserId;
+
     if (_formKey.currentState!.validate()) {
-      widget.pageController.jumpToPage(widget.pageController.page!.toInt() + 1);
+      print("hha expiry date : ${hhaDateController.text.trim()}");
+      widget.onboardingBloc.add(
+        OnboardingEvent.qualificationDetails(
+            userId: userId,
+            haveHhaRegistration:
+                widget.onboardingBloc.state.isHHASelected == 0 ? true : false,
+            hhaDetails: widget.onboardingBloc.state.isHHASelected == 0
+                ? HhaDetails(
+                    document: [],
+                    expiryDate: hhaDateController.text.trim(),
+                    hhaNumber: hhaController.text.trim())
+                : HhaDetails(hhaNumber: "", expiryDate: "", document: []),
+            haveBlsCertificate:
+                widget.onboardingBloc.state.isBLSSelected == 0 ? true : false,
+            blsDetails: widget.onboardingBloc.state.isBLSSelected == 0
+                ? BlsOrFirstAidCertificateDetails(
+                    document: [],
+                    certificationNumber: blsController.text.trim(),
+                    expiryDate: blsDateController.text.trim())
+                : BlsOrFirstAidCertificateDetails(
+                    document: [], certificationNumber: "", expiryDate: ""),
+            haveTbTest:
+                widget.onboardingBloc.state.isTBSelected == 0 ? true : false,
+            tbDetails: widget.onboardingBloc.state.isTBSelected == 0
+                ? TbOrPpdTestDetails(
+                    document: [],
+                    result: tbPpdController.text.trim(),
+                    date: tbPpdDateController.text.trim())
+                : TbOrPpdTestDetails(document: [], result: "", date: ""),
+            haveCovidVaccination:
+                widget.onboardingBloc.state.isCovidSelected == 0 ? true : false,
+            covidDetails: widget.onboardingBloc.state.isCovidSelected == 0
+                ? CovidVaccinationDetails(
+                    document: [], date: covidDateController.text.trim())
+                : CovidVaccinationDetails(document: [], date: "")),
+      );
     }
   }
 

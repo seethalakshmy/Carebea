@@ -43,7 +43,7 @@ class CommonNextOrCancelButtons extends StatelessWidget {
             isOutlineButton: true,
           ),
           const CustomSizedBox(width: 20),
-          isLoading!
+          isLoading ?? false
               ? const CommonButtonLoaderWidget()
               : CustomButton(
                   height: 45,

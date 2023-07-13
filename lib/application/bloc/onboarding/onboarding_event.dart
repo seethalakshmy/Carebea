@@ -20,9 +20,25 @@ class OnboardingEvent with _$OnboardingEvent {
       required List<String> documentList,
       required String profilePic}) = _GetPersonalDetails;
 
+  const factory OnboardingEvent.qualificationDetails({
+    required String userId,
+    required bool haveHhaRegistration,
+    required HhaDetails hhaDetails,
+    required bool haveBlsCertificate,
+    required BlsOrFirstAidCertificateDetails blsDetails,
+    required bool haveTbTest,
+    required TbOrPpdTestDetails tbDetails,
+    required bool haveCovidVaccination,
+    required CovidVaccinationDetails covidDetails,
+  }) = _GetQualificationDetails;
+
   const factory OnboardingEvent.commonData() = _CommonDataLists;
+
   const factory OnboardingEvent.cityList() = _CityLists;
+
   const factory OnboardingEvent.stateList() = _StateLists;
+  const factory OnboardingEvent.petsList() = _GetPetList;
+  const factory OnboardingEvent.languageList() = _GetLanguageList;
 
   const factory OnboardingEvent.radioHHA(int isSelected) = _RadioHHASelected;
 

@@ -366,6 +366,7 @@ class HhaDetails {
     _hhaNumber = json['hha_number'];
     _expiryDate = json['expiry_date'];
     _document = json['document'];
+    print("hha details in fromJson: $_hhaNumber, $_expiryDate, $_document");
   }
 
   String? _hhaNumber;

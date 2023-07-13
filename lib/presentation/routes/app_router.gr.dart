@@ -208,24 +208,24 @@ class AppRouter extends _i17.RootStackRouter {
         _i17.RouteConfig(
           '/#redirect',
           path: '/',
-          redirectTo: '/admin/login',
+          redirectTo: 'admin/login',
           fullMatch: true,
         ),
         _i17.RouteConfig(
           LoginRoute.name,
-          path: '/admin/login',
+          path: 'admin/login',
         ),
         _i17.RouteConfig(
           ForgotPasswordRoute.name,
-          path: '/admin/forgot-password',
+          path: 'admin/forgot-password',
         ),
         _i17.RouteConfig(
           ResetPasswordRoute.name,
-          path: '/admin/reset-password',
+          path: 'admin/reset-password',
         ),
         _i17.RouteConfig(
           SideMenuRoute.name,
-          path: '/admin',
+          path: 'admin/main',
           children: [
             _i17.RouteConfig(
               '#redirect',
@@ -305,7 +305,7 @@ class LoginRoute extends _i17.PageRouteInfo<void> {
   const LoginRoute()
       : super(
           LoginRoute.name,
-          path: '/admin/login',
+          path: 'admin/login',
         );
 
   static const String name = 'LoginRoute';
@@ -317,7 +317,7 @@ class ForgotPasswordRoute extends _i17.PageRouteInfo<void> {
   const ForgotPasswordRoute()
       : super(
           ForgotPasswordRoute.name,
-          path: '/admin/forgot-password',
+          path: 'admin/forgot-password',
         );
 
   static const String name = 'ForgotPasswordRoute';
@@ -329,7 +329,7 @@ class ResetPasswordRoute extends _i17.PageRouteInfo<void> {
   const ResetPasswordRoute()
       : super(
           ResetPasswordRoute.name,
-          path: '/admin/reset-password',
+          path: 'admin/reset-password',
         );
 
   static const String name = 'ResetPasswordRoute';
@@ -341,7 +341,7 @@ class SideMenuRoute extends _i17.PageRouteInfo<void> {
   const SideMenuRoute({List<_i17.PageRouteInfo>? children})
       : super(
           SideMenuRoute.name,
-          path: '/admin',
+          path: 'admin/main',
           initialChildren: children,
         );
 

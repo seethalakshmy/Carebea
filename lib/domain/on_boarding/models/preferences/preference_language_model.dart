@@ -1,4 +1,4 @@
-import 'package:admin_580_tech/presentation/on_boarding/modules/preference/models/pets_type.dart';
+import 'package:admin_580_tech/domain/on_boarding/models/preferences/pets_type.dart';
 
 class PreferenceLanguageModel {
   String name;
