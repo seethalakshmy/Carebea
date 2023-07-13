@@ -414,7 +414,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<CommentsAndReviewResponseModel> getQualifications(
+  Future<CommonResponse> getQualifications(
     userId,
     haveHHARegistration,
     hhaDetails,
@@ -431,7 +431,7 @@ class _ApiClient implements ApiClient {
     final _data = {
       'user_id': userId,
       'have_hha_registration': haveHHARegistration,
-      'have_details': hhaDetails,
+      'hha_details': hhaDetails,
       'bls_or_first_aid_certificate': haveBLSCertificate,
       'bls_or_first_aid_certificate_details': blsDetails,
       'tb_or_ppd_test': haveTBTest,
@@ -439,8 +439,8 @@ class _ApiClient implements ApiClient {
       'covid_vaccination': haveCovidVaccination,
       'covid_vaccination_details': covidDetails,
     };
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<CommentsAndReviewResponseModel>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -452,7 +452,7 @@ class _ApiClient implements ApiClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CommentsAndReviewResponseModel.fromJson(_result.data!);
+    final value = CommonResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -662,6 +662,89 @@ class _ApiClient implements ApiClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = DocumentListResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<PetListResponse> getPetList(searchQuery) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'search_term': searchQuery};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<PetListResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/common-data/get-pets?',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PetListResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<LanguageListResponse> getLanguageList(
+    pageNo,
+    limit,
+    searchQuery,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': pageNo,
+      r'limit': limit,
+      r'search_term': searchQuery,
+    };
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<LanguageListResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/common-data/get-languages?',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = LanguageListResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<LoginResponse> login(
+    email,
+    password,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'email': email,
+      'password': password,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<LoginResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/super-admin/login',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = LoginResponse.fromJson(_result.data!);
     return value;
   }
 

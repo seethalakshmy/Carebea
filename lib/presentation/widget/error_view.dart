@@ -1,6 +1,5 @@
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
-import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:auto_route/auto_route.dart';
@@ -24,48 +23,59 @@ class ErrorView extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CustomSizedBox(height: DBL.fiftyFive.val,),
-            SvgPicture.asset(IMG.notFound.val),
-            CustomSizedBox(height: DBL.ten.val,),
-            _buildTitle(),
-            _buildSubtitle(),
-            CustomSizedBox(height: DBL.fifteen.val,),
-            Visibility(
-              visible: !isClientError!,
-              child: _buildButton(context),
+      child: LayoutBuilder(builder: (context, constraints) {
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CustomSizedBox(
+                  height: DBL.sixty.val,
+                ),
+                SvgPicture.asset(IMG.notFound.val),
+                CustomSizedBox(
+                  height: DBL.ten.val,
+                ),
+                _buildTitle(),
+                _buildSubtitle(),
+                CustomSizedBox(
+                  height: DBL.fifteen.val,
+                ),
+                Visibility(
+                  visible: !isClientError!,
+                  child: _buildButton(context),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      }),
     );
   }
 
   CustomText _buildSubtitle() {
     return CustomText(
-            isClientError!
-                ? AppString.noInternetConnectionSubtitle.val
-                : AppString.weAreWorkingToFix.val,
-            style:  TS().gPoppins(
-              color: AppColor.matBlack.val,
-              fontWeight: FontWeight.bold,
-              fontSize: FS.font14.val,
-            ),
-          );
+      isClientError!
+          ? AppString.noInternetConnectionSubtitle.val
+          : AppString.weAreWorkingToFix.val,
+      style: TS().gPoppins(
+        color: AppColor.matBlack.val,
+        fontWeight: FontWeight.bold,
+        fontSize: FS.font14.val,
+      ),
+    );
   }
 
   CustomText _buildTitle() {
     return CustomText(
-            errorMessage ?? "",
-            style:  TS().gPoppins(
-              fontWeight: FW.bold.val,
-              fontSize: FS.font21.val,
-            ),
-          );
+      errorMessage ?? "",
+      style: TS().gPoppins(
+        fontWeight: FW.bold.val,
+        fontSize: FS.font21.val,
+      ),
+    );
   }
 
   CustomButton _buildButton(BuildContext context) {
@@ -76,11 +86,12 @@ class ErrorView extends StatelessWidget {
         fontWeight: FW.w500.val,
         fontSize: FS.font16.val,
       ),
-      padding:  EdgeInsets.symmetric(vertical: DBL.twentyFive.val, horizontal: DBL.fifty.val),
+      padding: EdgeInsets.symmetric(
+          vertical: DBL.twentyFive.val, horizontal: DBL.fifty.val),
       onPressed: () {
         context.router.navigate(const DashboardRoute());
       },
-      icon:  Icon(Icons.home, size: DBL.eighteen.val),
+      icon: Icon(Icons.home, size: DBL.eighteen.val),
     );
   }
 }

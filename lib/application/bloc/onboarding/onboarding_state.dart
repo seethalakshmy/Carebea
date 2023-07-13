@@ -21,15 +21,20 @@ class OnboardingState with _$OnboardingState {
       required int isPetsSelected,
       required int isLanguagesSelected,
       required bool isLoading,
+      required bool nextClicked,
       required int selectedGenderId,
       required Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
           personalDetailsOption,
+      required Option<Either<ApiErrorHandler, CommonResponse>>
+          qualificationDetailsOption,
       required Option<Either<ApiErrorHandler, GenderListResponse>> genderOption,
       required Option<Either<ApiErrorHandler, DocumentListResponse>>
           documentOption,
       required Option<Either<ApiErrorHandler, StateListReponse>> stateOption,
-      required Option<Either<ApiErrorHandler, CityListResponse>>
-          cityOption}) = _OnboardingState;
+      required Option<Either<ApiErrorHandler, CityListResponse>> cityOption,
+      required Option<Either<ApiErrorHandler, PetListResponse>> petListOption,
+      required Option<Either<ApiErrorHandler, LanguageListResponse>>
+          languageListOption}) = _OnboardingState;
 
   //const factory OnboardingState.formSubmitSuccess() = _FormSubmitSuccess;
 
@@ -53,12 +58,16 @@ class OnboardingState with _$OnboardingState {
       isSmokerSelected: 0,
       isTransportationSelected: 0,
       isLoading: false,
+      nextClicked: false,
       selectedGenderId: 0,
       personalDetailsOption: const None(),
+      qualificationDetailsOption: const None(),
       genderOption: const None(),
       cityOption: const None(),
       stateOption: const None(),
       documentOption: const None(),
+      petListOption: const None(),
+      languageListOption: const None(),
     );
   }
 }

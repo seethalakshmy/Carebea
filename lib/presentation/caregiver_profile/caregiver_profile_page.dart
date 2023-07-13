@@ -24,6 +24,7 @@ import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';
 import '../widget/custom_button.dart';
 import '../widget/custom_text.dart';
+import '../widget/error_view.dart';
 import '../widget/table_verification_button.dart';
 
 class CareGiverProfilePage extends StatefulWidget {
@@ -68,7 +69,13 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
         ..add(CareGiverProfileEvent.getCareGiverProfile(userId: _userId)),
       child: BlocBuilder<CareGiverProfileBloc, CareGiverProfileState>(
         builder: (context, state) {
-          return !state.isLoading ? (_bodyView(state)) : const LoaderView();
+          return state.isLoading
+              ? (const LoaderView())
+              : state.isError
+                  ? ErrorView(
+                      isClientError: state.isClientError,
+                      errorMessage: state.error)
+                  : _bodyView(state);
         },
       ),
     );
@@ -172,7 +179,7 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
                 CustomSizedBox(
                   width: DBL.twentyFive.val,
                 ),
-                isInterViewOrTraining(status)
+                isInterViewOrTraining(status) || isInterViewCompleted(status)
                     ? TableVerificationButton(
                         verificationStatus: status,
                         isHover: false,
@@ -397,6 +404,10 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
   bool isInterViewOrTraining(int status) {
     return status == Verification.trainingStarted.val ||
         status == Verification.interViewStarted.val;
+  }
+
+  bool isInterViewCompleted(int status) {
+    return status == Verification.interViewCompleted.val;
   }
 
   double getFontSize(BuildContext context, {required double fontSize}) {

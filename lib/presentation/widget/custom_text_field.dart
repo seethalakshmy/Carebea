@@ -1,8 +1,7 @@
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:flutter/material.dart';
-
-import '../../../core/text_styles.dart';
+import 'package:flutter/services.dart';
 
 class CTextField extends StatelessWidget {
   const CTextField(
@@ -32,6 +31,7 @@ class CTextField extends StatelessWidget {
       this.fillColor,
       this.maxLines,
       this.textAlignVertical,
+      this.inputFormatter,
       this.borderColor})
       : assert(controller != null),
         super(key: key);
@@ -61,15 +61,15 @@ class CTextField extends StatelessWidget {
   final int? maxLines;
   final Color? borderColor;
   final TextAlignVertical? textAlignVertical;
+  final List<TextInputFormatter>? inputFormatter;
 
   @override
   Widget build(BuildContext context) {
     return CustomSizedBox(
       width: width,
-      height: height,
       child: TextFormField(
         textAlignVertical: textAlignVertical ?? TextAlignVertical.center,
-
+        inputFormatters: inputFormatter ?? [],
         controller: controller,
         focusNode: focusNode,
         textInputAction: textInputAction,
@@ -93,8 +93,8 @@ class CTextField extends StatelessWidget {
           suffixIcon: suffixIcon,
           isDense: true,
           errorText: errorText,
-          errorStyle:
-              TS().gPoppins(fontSize: FS.font11.val, color: AppColor.red.val),
+          // errorStyle:
+          //     TS().gPoppins(fontSize: FS.font11.val, color: AppColor.red.val,),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
                 color: borderColor ?? AppColor.borderColor.val, width: 1),

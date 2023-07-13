@@ -4,6 +4,7 @@ import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_re
 import 'package:admin_580_tech/domain/caregiver_profile/model/caregiver_profile_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_verification_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
+import 'package:admin_580_tech/domain/login/login_response.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/services/models/get_service_response.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/services/models/service_list_response.dart';
 import 'package:dio/dio.dart';
@@ -19,10 +20,12 @@ import '../../presentation/on_boarding/modules/personal_details/models/gender_li
 import '../../presentation/on_boarding/modules/personal_details/models/personal_details_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
 import '../../presentation/on_boarding/modules/preference/models/get_preference_response.dart';
+import '../../presentation/on_boarding/modules/preference/models/language_list_response.dart';
 import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
-import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_response.dart';
 import '../caregiver_verification/model/reject_params.dart';
 import '../caregivers/model/caregiver_response.dart';
+import '../on_boarding/models/common_response.dart';
+import '../on_boarding/models/preferences/pet_list_response.dart';
 
 part 'api_client.g.dart';
 
@@ -137,10 +140,10 @@ abstract class ApiClient {
   );
 
   @POST("/admin/admin-cg-qualification")
-  Future<CommentsAndReviewResponseModel> getQualifications(
+  Future<CommonResponse> getQualifications(
     @Field('user_id') String userId,
     @Field('have_hha_registration') bool haveHHARegistration,
-    @Field('have_details') HhaDetails hhaDetails,
+    @Field('hha_details') HhaDetails hhaDetails,
     @Field('bls_or_first_aid_certificate') bool haveBLSCertificate,
     @Field('bls_or_first_aid_certificate_details')
     BlsOrFirstAidCertificateDetails blsDetails,
@@ -193,4 +196,20 @@ abstract class ApiClient {
 
   @GET("/common-data/get-documents")
   Future<DocumentListResponse> getDocumentsList();
+
+  @GET("/common-data/get-pets?")
+  Future<PetListResponse> getPetList(@Query("search_term") String searchQuery);
+
+  @GET("/common-data/get-languages?")
+  Future<LanguageListResponse> getLanguageList(
+    @Query("page") String pageNo,
+    @Query("limit") String limit,
+    @Query("search_term") String searchQuery,
+  );
+
+  @POST("/super-admin/login")
+  Future<LoginResponse> login(
+    @Field('email') String email,
+    @Field('password') String password,
+  );
 }

@@ -8,6 +8,7 @@ import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/form_validation/form_validation_bloc.dart';
@@ -15,6 +16,7 @@ import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../on_boarding/modules/personal_details/widgets/mobile_number_formatter.dart';
 import '../widget/common_button_loader_widget.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
@@ -220,13 +222,18 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
               CustomSizedBox(
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
+                  inputFormatter: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(10),
+                    MobileNumberFormatter(),
+                  ],
                   labelName: AppString.mobileNumber.val,
                   focusNode: _mobileFocusNode,
                   controller: _mobileController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return AppString.emptyMobile.val;
-                    } else if (value.toString().length != 10) {
+                    } else if (value.toString().length != 12) {
                       return AppString.validMobile.val;
                     }
                     return null;

@@ -53,8 +53,6 @@ class ProfilePictureWidget extends StatelessWidget {
               XFile? pickedFileData = (await Utility.getFromGallery())!;
               Uint8List bytes = await pickedFileData.readAsBytes();
               onboardingBloc.add(OnboardingEvent.profilePicSelection(bytes));
-              print(
-                  "pickedFileData in profilepicwidget ${pickedFileData.path}");
               onboardingBloc.profileUrl = pickedFileData.path;
             },
             child: Container(

@@ -5,6 +5,7 @@ import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/caregivers/model/care_givers.dart';
 import 'package:admin_580_tech/domain/caregivers/model/types.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/caregivers/widgets/tab_item.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
@@ -59,13 +60,14 @@ class _CareGiversPageState extends State<CareGiversPage> {
   int _end = 10;
   final TextEditingController _searchController = TextEditingController();
   final _searchNode = FocusNode();
-  final String _userId = "6461c0f33ba4fd69bd494df0";
+  String _adminUserId = "";
   int _tabType = 1;
   int? _filterId;
   late CareGiversBloc _careGiversBloc;
 
   @override
   void initState() {
+    _adminUserId = SharedPreffUtil().getUserId;
     // int  =autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
     super.initState();
     _careGiversBloc = CareGiversBloc(CareGiversRepository());
@@ -95,7 +97,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
     return BlocProvider(
       create: (context) => _careGiversBloc
         ..add(CareGiversEvent.getCareGivers(
-          userId: _userId,
+          userId: _adminUserId,
           page: _page,
           limit: _limit,
           type: _tabType,
@@ -128,7 +130,9 @@ class _CareGiversPageState extends State<CareGiversPage> {
           child: state.isLoading
               ? const TableLoaderView()
               : state.isError
-                  ? ErrorView(isClientError: false, errorMessage: state.error)
+                  ? ErrorView(
+                      isClientError: state.isClientError,
+                      errorMessage: state.error)
                   : _caregiversView(context, state)),
     );
   }
@@ -396,7 +400,27 @@ class _CareGiversPageState extends State<CareGiversPage> {
         rows: mCareGiverList.asMap().entries.map((e) {
           _setIndex(e.key);
           var item = e.value;
+          int? verificationStatus = item.verificationStatus;
+          String? userId = item.userId;
           return DataRow2(
+            onTap: () {
+              print('tab type == $_tabType');
+              if (_tabType == 2) {
+                autoTabRouter?.navigate(CareGiverDetailRoute(
+                  id: item.userId,
+                ));
+              } else {
+                if (verificationStatus == Verification.trainingStarted.val ||
+                    verificationStatus == Verification.interViewStarted.val) {
+                  autoTabRouter?.navigate(CareGiverProfileRoute(
+                    id: item.userId,
+                  ));
+                } else {
+                  autoTabRouter?.navigate(
+                      CaregiverVerificationRoute(id: userId, page: _page));
+                }
+              }
+            },
             cells: [
               DataCell(_tableRowView(_pageIndex.toString())),
               DataCell(TableRowImageView(
@@ -505,7 +529,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
 
   _getCareGiverEvent() {
     _careGiversBloc.add(CareGiversEvent.getCareGivers(
-        userId: _userId,
+        userId: _adminUserId,
         page: _page,
         limit: _limit,
         type: _tabType,

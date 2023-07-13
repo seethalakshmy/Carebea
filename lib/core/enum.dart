@@ -128,6 +128,7 @@ enum AppString {
   inActive("Inactive"),
   inDoor("Indoor"),
   outDoor("Outdoor"),
+  both("Both"),
   clientsCustomer("Clients/Customers"),
   isCompletedTraining(
       "Is the Care ambassadors  Completed the training process?"),
@@ -259,6 +260,7 @@ enum AppString {
   startedVerification("Started Verification"),
   trainingStarted("Training Started"),
   interviewStarted("Interview Started"),
+  interviewCompleted("Interview Completed"),
   enterTheReason("Enter the reason"),
   acceptThisCareAmbassador("Do you want to accept this care ambassador?"),
   selectRejectedDocument("Select rejected document and mentioned the reason"),
@@ -300,13 +302,16 @@ enum AppString {
   emptyCity("Please select your city"),
   emptyRelationship("Please select your relationship"),
   emptyZip("Please enter zip code"),
+  invalidZip("Please enter valid zip code"),
   emptySSN("Please enter social security number"),
+  invalidSSN("Please enter valid social security number"),
   emptyDocType("Please select the document type"),
   emptyDocNo("Please enter the document number"),
   emptyAddress("Please enter your address"),
   emptyHHANo("Please enter HHA number"),
   emptyBLSNo("Please enter BLS certification number"),
   emptyTBNo("Please enter TB result number"),
+  emptyProfilePic("Please select your profile picture"),
 
   agreementChckboxText(
       "I have read and agree to the home health aid agreement"),
@@ -331,6 +336,7 @@ enum AppColor {
   black3(Color(0xff1A1C25)),
   black4(Color(0xff444444)),
   black5(Color(0xff494949)),
+  black6(Color(0x15000000)),
   matBlack(Color(0xff324665)),
   matBlack2(Color(0xff596483)),
   matBlack3(Color(0xff1F374F)),
@@ -369,6 +375,7 @@ enum AppColor {
   amber4(Color(0xffFDF1CA)),
   indoor(Color(0xffFCEFCF)),
   outdoor(Color(0xffF6DADA)),
+  both(Color(0xffC6DEF4)),
   lightGrey(Color(0xffE1E8F0)),
   inactive(Color(0xffB3BDC8)),
   lightGrey2(Color(0xff8793AB)),
@@ -390,6 +397,7 @@ enum AppColor {
   availableInDifferent(Color(0xffF3AA1A)),
   red(Color(0xffE75A77)),
   red1(Color(0x4d3A0202)),
+  blue1(Color(0x4d02263a)),
   red2(Color.fromRGBO(253, 66, 66, 0.8)),
   red3(Color(0xffFDEDEE)),
   red4(Color(0xffFDEDEE)),
@@ -726,7 +734,8 @@ enum Verification {
   startVerification(1),
   startedVerification(2),
   trainingStarted(3),
-  interViewStarted(4);
+  interViewStarted(4),
+  interViewCompleted(5);
 
   final int val;
 
