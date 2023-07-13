@@ -7,7 +7,9 @@ import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_service_r
 import 'package:admin_580_tech/domain/caregiver_profile/model/caregiver_profile_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_verification_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
+import 'package:admin_580_tech/domain/common_response/common_response.dart';
 import 'package:admin_580_tech/domain/login/login_response.dart';
+import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/services/models/get_service_response.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/services/models/service_list_response.dart';
 import 'package:dio/dio.dart';
@@ -27,6 +29,8 @@ import '../../presentation/on_boarding/modules/qualification_details/models/qual
 import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_response.dart';
 import '../caregiver_verification/model/reject_params.dart';
 import '../caregivers/model/caregiver_response.dart';
+import '../role_creation/model/module_response.dart';
+import '../role_creation/model/view_role_response.dart';
 
 part 'api_client.g.dart';
 
@@ -147,7 +151,7 @@ abstract class ApiClient {
     @Field('have_details') HhaDetails hhaDetails,
     @Field('bls_or_first_aid_certificate') bool haveBLSCertificate,
     @Field('bls_or_first_aid_certificate_details')
-        BlsOrFirstAidCertificateDetails blsDetails,
+    BlsOrFirstAidCertificateDetails blsDetails,
     @Field('tb_or_ppd_test') bool haveTBTest,
     @Field('tb_or_ppd_test_details') TbOrPpdTestDetails tbDetails,
     @Field('covid_vaccination') bool haveCovidVaccination,
@@ -203,22 +207,64 @@ abstract class ApiClient {
     @Field('email') String email,
     @Field('password') String password,
   );
+
   @POST("/admin/admin-cg-get-services")
   Future<CareGiverServiceListResponse> getCareGiverServiceList(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('page') int page,
       @Field('limit') int limit);
+
   @POST("/admin/admin-cg-get-earnings")
   Future<CareGiverEarningsListResponse> getCareGiverEarningList(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('page') int page,
       @Field('limit') int limit);
+
   @POST("/admin/admin-cg-get-service-requests")
   Future<CareGiverServiceRequestListResponse> getCareGiverRequestList(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('page') int page,
       @Field('limit') int limit);
+
+  @POST("/admin/add-role")
+  Future<CommonResponse> addRoleUpdateRole(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('role') String role,
+      @Field('role_id') String? roleId,
+      @Field('assigned_modules') List<String> moduleID,
+      @Field('view') int view,
+      @Field('delete') int delete,
+      @Field('edit') int edit);
+
+  @POST("/admin/get-modules")
+  Future<ModuleResponse> getModules(
+      @Header("Authorization") String token, @Field('user_id') String userId);
+
+  @POST("/admin/delete-role")
+  Future<CommonResponse> deleteRole(@Header("Authorization") String token,
+      @Field('user_id') String userId, @Field('role_id') String roleId);
+
+  @POST("/admin/view-role")
+  Future<ViewRoleResponse> viewRole(@Header("Authorization") String token,
+      @Field('user_id') String userId, @Field('role_id') String roleId);
+
+  @POST("/admin/get-roles")
+  Future<GetRoleResponse> getRoles(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit,
+      @Field('search_term') String? searchTerm);
+
+  @POST("/admin/super-admin/create-admin")
+  Future<CommonResponse> addAdmin(
+      @Header("Authorization") String token,
+      @Field('first_name') String firstName,
+      @Field('last_name') String lastName,
+      @Field('mobile_number') String? mobileNumber,
+      @Field('user_role_id') String? roleId);
 }

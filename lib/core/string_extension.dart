@@ -1,5 +1,6 @@
-import 'package:admin_580_tech/core/enum.dart';
 import 'package:intl/intl.dart';
+
+import 'enum.dart';
 
 extension Range on num {
   bool isBetween(num from, num to) {

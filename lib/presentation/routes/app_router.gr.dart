@@ -30,8 +30,9 @@ import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart'
     as _i13;
 import 'package:admin_580_tech/presentation/reset_password/reset_password_page.dart'
     as _i3;
-import 'package:admin_580_tech/presentation/role_management/role_management_page.dart'
-    as _i15;
+import 'package:admin_580_tech/presentation/role_creation/role_creation_page.dart'
+    as _i16;
+import 'package:admin_580_tech/presentation/roles/role_page.dart' as _i15;
 import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart'
     as _i4;
 import 'package:admin_580_tech/presentation/transaction_management/transaction_management_page.dart'
@@ -40,43 +41,43 @@ import 'package:admin_580_tech/presentation/user_management/user_management_page
     as _i7;
 import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet_detail_page.dart'
     as _i9;
-import 'package:auto_route/auto_route.dart' as _i16;
-import 'package:flutter/material.dart' as _i17;
+import 'package:auto_route/auto_route.dart' as _i17;
+import 'package:flutter/material.dart' as _i18;
 
-class AppRouter extends _i16.RootStackRouter {
-  AppRouter([_i17.GlobalKey<_i17.NavigatorState>? navigatorKey])
+class AppRouter extends _i17.RootStackRouter {
+  AppRouter([_i18.GlobalKey<_i18.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i16.PageFactory> pagesMap = {
+  final Map<String, _i17.PageFactory> pagesMap = {
     LoginRoute.name: (routeData) {
-      return _i16.AdaptivePage<dynamic>(
+      return _i17.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i1.LoginPage(),
       );
     },
     ForgotPasswordRoute.name: (routeData) {
-      return _i16.AdaptivePage<dynamic>(
+      return _i17.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i2.ForgotPasswordPage(),
         maintainState: false,
       );
     },
     ResetPasswordRoute.name: (routeData) {
-      return _i16.AdaptivePage<dynamic>(
+      return _i17.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i3.ResetPasswordPage(),
         maintainState: false,
       );
     },
     SideMenuRoute.name: (routeData) {
-      return _i16.AdaptivePage<dynamic>(
+      return _i17.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i4.SideMenuPage(),
       );
     },
     DashboardRoute.name: (routeData) {
-      return _i16.AdaptivePage<dynamic>(
+      return _i17.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i5.DashboardPage(),
       );
@@ -88,7 +89,7 @@ class AppRouter extends _i16.RootStackRouter {
                 page: queryParams.optInt('page'),
                 tab: queryParams.optInt('tab'),
               ));
-      return _i16.AdaptivePage<dynamic>(
+      return _i17.AdaptivePage<dynamic>(
         routeData: routeData,
         child: _i6.CareGiversPage(
           key: args.key,
@@ -98,7 +99,7 @@ class AppRouter extends _i16.RootStackRouter {
       );
     },
     UserManagementRoute.name: (routeData) {
-      return _i16.AdaptivePage<dynamic>(
+      return _i17.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i7.UserManagementPage(),
       );
@@ -114,7 +115,7 @@ class AppRouter extends _i16.RootStackRouter {
                 page: queryParams.optInt('page'),
                 tab: queryParams.optInt('tab'),
               ));
-      return _i16.AdaptivePage<dynamic>(
+      return _i17.AdaptivePage<dynamic>(
         routeData: routeData,
         child: _i8.CareGiverDetailPage(
           key: args.key,
@@ -125,13 +126,13 @@ class AppRouter extends _i16.RootStackRouter {
       );
     },
     UserManagementDetailRoute.name: (routeData) {
-      return _i16.AdaptivePage<dynamic>(
+      return _i17.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i9.UserManagementDetailPage(),
       );
     },
     TransactionManagementRoute.name: (routeData) {
-      return _i16.AdaptivePage<dynamic>(
+      return _i17.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i10.TransactionManagementPage(),
       );
@@ -144,7 +145,7 @@ class AppRouter extends _i16.RootStackRouter {
                 'id',
                 '',
               )));
-      return _i16.AdaptivePage<dynamic>(
+      return _i17.AdaptivePage<dynamic>(
         routeData: routeData,
         child: _i11.CareGiverProfilePage(
           key: args.key,
@@ -153,13 +154,13 @@ class AppRouter extends _i16.RootStackRouter {
       );
     },
     CaregiverCreationRoute.name: (routeData) {
-      return _i16.AdaptivePage<dynamic>(
+      return _i17.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i12.CaregiverCreationPage(),
       );
     },
     OnboardingRoute.name: (routeData) {
-      return _i16.AdaptivePage<dynamic>(
+      return _i17.AdaptivePage<dynamic>(
         routeData: routeData,
         child: const _i13.OnboardingPage(),
       );
@@ -175,7 +176,7 @@ class AppRouter extends _i16.RootStackRouter {
                 page: queryParams.optInt('page'),
                 tab: queryParams.optInt('tab'),
               ));
-      return _i16.AdaptivePage<dynamic>(
+      return _i17.AdaptivePage<dynamic>(
         routeData: routeData,
         child: _i14.CaregiverVerificationPage(
           key: args.key,
@@ -186,99 +187,111 @@ class AppRouter extends _i16.RootStackRouter {
         maintainState: false,
       );
     },
-    RoleManagementRoute.name: (routeData) {
-      return _i16.AdaptivePage<dynamic>(
+    RolesRoute.name: (routeData) {
+      return _i17.AdaptivePage<dynamic>(
         routeData: routeData,
-        child: const _i15.RoleManagementPage(),
+        child: const _i15.RolesPage(),
+        maintainState: false,
+      );
+    },
+    RoleCreationRoute.name: (routeData) {
+      return _i17.AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const _i16.RoleCreationPage(),
         maintainState: false,
       );
     },
   };
 
   @override
-  List<_i16.RouteConfig> get routes => [
-        _i16.RouteConfig(
+  List<_i17.RouteConfig> get routes => [
+        _i17.RouteConfig(
           '/#redirect',
           path: '/',
           redirectTo: '/admin/login',
           fullMatch: true,
         ),
-        _i16.RouteConfig(
+        _i17.RouteConfig(
           LoginRoute.name,
           path: '/admin/login',
         ),
-        _i16.RouteConfig(
+        _i17.RouteConfig(
           ForgotPasswordRoute.name,
           path: '/admin/forgot-password',
         ),
-        _i16.RouteConfig(
+        _i17.RouteConfig(
           ResetPasswordRoute.name,
           path: '/admin/reset-password',
         ),
-        _i16.RouteConfig(
+        _i17.RouteConfig(
           SideMenuRoute.name,
           path: '/admin',
           children: [
-            _i16.RouteConfig(
+            _i17.RouteConfig(
               '#redirect',
               path: '',
               parent: SideMenuRoute.name,
               redirectTo: 'dashboard',
               fullMatch: true,
             ),
-            _i16.RouteConfig(
+            _i17.RouteConfig(
               DashboardRoute.name,
               path: 'dashboard',
               parent: SideMenuRoute.name,
             ),
-            _i16.RouteConfig(
+            _i17.RouteConfig(
               CareGiversRoute.name,
               path: 'care-ambassador',
               parent: SideMenuRoute.name,
             ),
-            _i16.RouteConfig(
+            _i17.RouteConfig(
               UserManagementRoute.name,
               path: 'user-management',
               parent: SideMenuRoute.name,
             ),
-            _i16.RouteConfig(
+            _i17.RouteConfig(
               CareGiverDetailRoute.name,
               path: 'care-ambassador-detail',
               parent: SideMenuRoute.name,
             ),
-            _i16.RouteConfig(
+            _i17.RouteConfig(
               UserManagementDetailRoute.name,
               path: 'user-management-detail',
               parent: SideMenuRoute.name,
             ),
-            _i16.RouteConfig(
+            _i17.RouteConfig(
               TransactionManagementRoute.name,
               path: 'transaction-management',
               parent: SideMenuRoute.name,
             ),
-            _i16.RouteConfig(
+            _i17.RouteConfig(
               CareGiverProfileRoute.name,
               path: 'care-ambassador-profile',
               parent: SideMenuRoute.name,
             ),
-            _i16.RouteConfig(
+            _i17.RouteConfig(
               CaregiverCreationRoute.name,
               path: 'care-ambassador-creation',
               parent: SideMenuRoute.name,
             ),
-            _i16.RouteConfig(
+            _i17.RouteConfig(
               OnboardingRoute.name,
               path: 'caregiver-on_boarding',
               parent: SideMenuRoute.name,
             ),
-            _i16.RouteConfig(
+            _i17.RouteConfig(
               CaregiverVerificationRoute.name,
               path: 'care-ambassador-verification',
               parent: SideMenuRoute.name,
             ),
-            _i16.RouteConfig(
-              RoleManagementRoute.name,
+            _i17.RouteConfig(
+              RolesRoute.name,
               path: 'role-management',
+              parent: SideMenuRoute.name,
+            ),
+            _i17.RouteConfig(
+              RoleCreationRoute.name,
+              path: 'role_manage',
               parent: SideMenuRoute.name,
             ),
           ],
@@ -288,7 +301,7 @@ class AppRouter extends _i16.RootStackRouter {
 
 /// generated route for
 /// [_i1.LoginPage]
-class LoginRoute extends _i16.PageRouteInfo<void> {
+class LoginRoute extends _i17.PageRouteInfo<void> {
   const LoginRoute()
       : super(
           LoginRoute.name,
@@ -300,7 +313,7 @@ class LoginRoute extends _i16.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.ForgotPasswordPage]
-class ForgotPasswordRoute extends _i16.PageRouteInfo<void> {
+class ForgotPasswordRoute extends _i17.PageRouteInfo<void> {
   const ForgotPasswordRoute()
       : super(
           ForgotPasswordRoute.name,
@@ -312,7 +325,7 @@ class ForgotPasswordRoute extends _i16.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.ResetPasswordPage]
-class ResetPasswordRoute extends _i16.PageRouteInfo<void> {
+class ResetPasswordRoute extends _i17.PageRouteInfo<void> {
   const ResetPasswordRoute()
       : super(
           ResetPasswordRoute.name,
@@ -324,8 +337,8 @@ class ResetPasswordRoute extends _i16.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.SideMenuPage]
-class SideMenuRoute extends _i16.PageRouteInfo<void> {
-  const SideMenuRoute({List<_i16.PageRouteInfo>? children})
+class SideMenuRoute extends _i17.PageRouteInfo<void> {
+  const SideMenuRoute({List<_i17.PageRouteInfo>? children})
       : super(
           SideMenuRoute.name,
           path: '/admin',
@@ -337,7 +350,7 @@ class SideMenuRoute extends _i16.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.DashboardPage]
-class DashboardRoute extends _i16.PageRouteInfo<void> {
+class DashboardRoute extends _i17.PageRouteInfo<void> {
   const DashboardRoute()
       : super(
           DashboardRoute.name,
@@ -349,9 +362,9 @@ class DashboardRoute extends _i16.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.CareGiversPage]
-class CareGiversRoute extends _i16.PageRouteInfo<CareGiversRouteArgs> {
+class CareGiversRoute extends _i17.PageRouteInfo<CareGiversRouteArgs> {
   CareGiversRoute({
-    _i17.Key? key,
+    _i18.Key? key,
     int? page,
     int? tab,
   }) : super(
@@ -378,7 +391,7 @@ class CareGiversRouteArgs {
     this.tab,
   });
 
-  final _i17.Key? key;
+  final _i18.Key? key;
 
   final int? page;
 
@@ -392,7 +405,7 @@ class CareGiversRouteArgs {
 
 /// generated route for
 /// [_i7.UserManagementPage]
-class UserManagementRoute extends _i16.PageRouteInfo<void> {
+class UserManagementRoute extends _i17.PageRouteInfo<void> {
   const UserManagementRoute()
       : super(
           UserManagementRoute.name,
@@ -405,9 +418,9 @@ class UserManagementRoute extends _i16.PageRouteInfo<void> {
 /// generated route for
 /// [_i8.CareGiverDetailPage]
 class CareGiverDetailRoute
-    extends _i16.PageRouteInfo<CareGiverDetailRouteArgs> {
+    extends _i17.PageRouteInfo<CareGiverDetailRouteArgs> {
   CareGiverDetailRoute({
-    _i17.Key? key,
+    _i18.Key? key,
     String? id = '',
     int? page,
     int? tab,
@@ -438,7 +451,7 @@ class CareGiverDetailRouteArgs {
     this.tab,
   });
 
-  final _i17.Key? key;
+  final _i18.Key? key;
 
   final String? id;
 
@@ -454,7 +467,7 @@ class CareGiverDetailRouteArgs {
 
 /// generated route for
 /// [_i9.UserManagementDetailPage]
-class UserManagementDetailRoute extends _i16.PageRouteInfo<void> {
+class UserManagementDetailRoute extends _i17.PageRouteInfo<void> {
   const UserManagementDetailRoute()
       : super(
           UserManagementDetailRoute.name,
@@ -466,7 +479,7 @@ class UserManagementDetailRoute extends _i16.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i10.TransactionManagementPage]
-class TransactionManagementRoute extends _i16.PageRouteInfo<void> {
+class TransactionManagementRoute extends _i17.PageRouteInfo<void> {
   const TransactionManagementRoute()
       : super(
           TransactionManagementRoute.name,
@@ -479,9 +492,9 @@ class TransactionManagementRoute extends _i16.PageRouteInfo<void> {
 /// generated route for
 /// [_i11.CareGiverProfilePage]
 class CareGiverProfileRoute
-    extends _i16.PageRouteInfo<CareGiverProfileRouteArgs> {
+    extends _i17.PageRouteInfo<CareGiverProfileRouteArgs> {
   CareGiverProfileRoute({
-    _i17.Key? key,
+    _i18.Key? key,
     String? id = '',
   }) : super(
           CareGiverProfileRoute.name,
@@ -502,7 +515,7 @@ class CareGiverProfileRouteArgs {
     this.id = '',
   });
 
-  final _i17.Key? key;
+  final _i18.Key? key;
 
   final String? id;
 
@@ -514,7 +527,7 @@ class CareGiverProfileRouteArgs {
 
 /// generated route for
 /// [_i12.CaregiverCreationPage]
-class CaregiverCreationRoute extends _i16.PageRouteInfo<void> {
+class CaregiverCreationRoute extends _i17.PageRouteInfo<void> {
   const CaregiverCreationRoute()
       : super(
           CaregiverCreationRoute.name,
@@ -526,7 +539,7 @@ class CaregiverCreationRoute extends _i16.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i13.OnboardingPage]
-class OnboardingRoute extends _i16.PageRouteInfo<void> {
+class OnboardingRoute extends _i17.PageRouteInfo<void> {
   const OnboardingRoute()
       : super(
           OnboardingRoute.name,
@@ -539,9 +552,9 @@ class OnboardingRoute extends _i16.PageRouteInfo<void> {
 /// generated route for
 /// [_i14.CaregiverVerificationPage]
 class CaregiverVerificationRoute
-    extends _i16.PageRouteInfo<CaregiverVerificationRouteArgs> {
+    extends _i17.PageRouteInfo<CaregiverVerificationRouteArgs> {
   CaregiverVerificationRoute({
-    _i17.Key? key,
+    _i18.Key? key,
     String? id = '',
     int? page,
     int? tab,
@@ -572,7 +585,7 @@ class CaregiverVerificationRouteArgs {
     this.tab,
   });
 
-  final _i17.Key? key;
+  final _i18.Key? key;
 
   final String? id;
 
@@ -587,13 +600,25 @@ class CaregiverVerificationRouteArgs {
 }
 
 /// generated route for
-/// [_i15.RoleManagementPage]
-class RoleManagementRoute extends _i16.PageRouteInfo<void> {
-  const RoleManagementRoute()
+/// [_i15.RolesPage]
+class RolesRoute extends _i17.PageRouteInfo<void> {
+  const RolesRoute()
       : super(
-          RoleManagementRoute.name,
+          RolesRoute.name,
           path: 'role-management',
         );
 
-  static const String name = 'RoleManagementRoute';
+  static const String name = 'RolesRoute';
+}
+
+/// generated route for
+/// [_i16.RoleCreationPage]
+class RoleCreationRoute extends _i17.PageRouteInfo<void> {
+  const RoleCreationRoute()
+      : super(
+          RoleCreationRoute.name,
+          path: 'role_manage',
+        );
+
+  static const String name = 'RoleCreationRoute';
 }

@@ -11,6 +11,7 @@ import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_
 import 'package:admin_580_tech/presentation/caregiver_verification/caregiver_verification_page.dart';
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
+import 'package:admin_580_tech/presentation/roles/role_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
@@ -23,7 +24,7 @@ import 'package:flutter/material.dart';
 import '../caregiver_creation/caregiver_creation_page.dart';
 import '../caregiver_detail/caregiver_detail_page.dart';
 import '../caregivers/caregivers_page.dart';
-import '../role_management/role_management_page.dart';
+import '../role_creation/role_creation_page.dart';
 import '../transaction_management/transaction_management_page.dart';
 import '../user_management/user_management_page.dart';
 import '../user_mangement_detail/user_managemet_detail_page.dart';
@@ -443,7 +444,8 @@ class _MenuBarState extends State<SideMenuPage> {
     CaregiverCreationRoute(),
     OnboardingRoute(),
     CaregiverVerificationRoute(),
-    RoleManagementRoute()
+    RolesRoute(),
+    RoleCreationRoute()
   ];
 
   int getRouteIndex(String route) {
@@ -468,6 +470,8 @@ class _MenuBarState extends State<SideMenuPage> {
       return 9;
     } else if (route == AppString.roleManagement.val) {
       return 10;
+    } else if (route == AppString.roleManage.val) {
+      return 11;
     } else {
       return 0;
     }
@@ -494,7 +498,9 @@ class _MenuBarState extends State<SideMenuPage> {
     } else if (index == 9) {
       return const CaregiverVerificationPage();
     } else if (index == 10) {
-      return const RoleManagementPage();
+      return const RolesPage();
+    } else if (index == 11) {
+      return const RoleCreationPage();
     } else {
       return const DashboardPage();
     }

@@ -52,9 +52,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
         ..add(UserManagementDetailEvent.getUserDetail(userId: userId)),
       child: BlocBuilder<UserManagementDetailBloc, UserManagementDetailState>(
         builder: (context, state) {
-          return state.isLoading
-              ? CircularProgressIndicator()
-              : _bodyView(context, state);
+          return _bodyView(context, state);
         },
       ),
     );

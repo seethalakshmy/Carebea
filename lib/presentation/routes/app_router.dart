@@ -3,6 +3,7 @@ import 'package:admin_580_tech/presentation/caregiver_verification/caregiver_ver
 import 'package:admin_580_tech/presentation/forgot_password/forgot_password_page.dart';
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
 import 'package:admin_580_tech/presentation/reset_password/reset_password_page.dart';
+import 'package:admin_580_tech/presentation/roles/role_page.dart';
 import 'package:admin_580_tech/presentation/user_management/user_management_page.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet_detail_page.dart';
 import 'package:auto_route/auto_route.dart';
@@ -12,7 +13,7 @@ import '../caregiver_detail/caregiver_detail_page.dart';
 import '../caregivers/caregivers_page.dart';
 import '../dashboard/dashboard_page.dart';
 import '../login/login_page.dart';
-import '../role_management/role_management_page.dart';
+import '../role_creation/role_creation_page.dart';
 import '../side_menu/side_menu_page.dart';
 import '../transaction_management/transaction_management_page.dart';
 
@@ -75,9 +76,9 @@ import '../transaction_management/transaction_management_page.dart';
             page: CaregiverVerificationPage,
             maintainState: false),
         AutoRoute(
-            path: 'role-management',
-            page: RoleManagementPage,
-            maintainState: false),
+            path: 'role-management', page: RolesPage, maintainState: false),
+        AutoRoute(
+            path: "role_manage", page: RoleCreationPage, maintainState: false),
       ],
     ),
   ],
