@@ -11,10 +11,14 @@ import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
 import '../../../../infrastructure/on_boarding/on_boarding_repository.dart';
+import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
+import '../../../widget/custom_button.dart';
 import '../../../widget/custom_form.dart';
 import '../../../widget/custom_sizedbox.dart';
 import '../../../widget/custom_text.dart';
+import '../../../widget/dropdown/city_drop_down.dart';
+import '../../../widget/dropdown/relation_drop_down.dart';
 import '../../../widget/dropdown/state_drop_down.dart';
 
 class ReferenceView extends StatefulWidget {
@@ -29,36 +33,37 @@ class ReferenceView extends StatefulWidget {
 }
 
 class _ReferenceViewState extends State<ReferenceView> {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController streetController = TextEditingController();
-  final TextEditingController zipController = TextEditingController();
-
   final FocusNode nameFocusNode = FocusNode();
   final FocusNode phoneFocusNode = FocusNode();
   final FocusNode streetFocusNode = FocusNode();
+  final FocusNode addressFocusNode = FocusNode();
   final FocusNode zipFocusNode = FocusNode();
 
   bool nextClicked = false;
-  String selectedState = "";
-  String selectedCity = "";
-  String selectedRelation = "";
-  String selectedAddress = "";
+
   final FormValidationBloc formValidationBloc = FormValidationBloc();
   AutovalidateMode _validateMode = AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    widget.onboardingBloc.add(OnboardingEvent.relationList());
+    super.initState();
+  }
+
+  @override
   void dispose() {
-    nameController.dispose();
-    phoneController.dispose();
-    streetController.dispose();
-    zipController.dispose();
+    widget.onboardingBloc.nameController.dispose();
+    // phoneController.dispose();
+    // streetController.dispose();
+    // zipController.dispose();
+    // addressController.dispose();
 
     nameFocusNode.dispose();
     phoneFocusNode.dispose();
     streetFocusNode.dispose();
     zipFocusNode.dispose();
+    addressFocusNode.dispose();
     super.dispose();
   }
 
@@ -83,95 +88,7 @@ class _ReferenceViewState extends State<ReferenceView> {
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: ListView(
                       shrinkWrap: true,
-                      children: [
-                        CForm(
-                          formKey: _formKey,
-                          autoValidateMode: _validateMode,
-                          child: Wrap(
-                            spacing: DBL.twenty.val,
-                            runSpacing: DBL.twenty.val,
-                            alignment: WrapAlignment.start,
-                            children: [
-                              CustomSizedBox(
-                                width: DBL.twoEighty.val,
-                                child: DetailsTextFieldWithLabel(
-                                    isMandatory: false,
-                                    controller: nameController,
-                                    textInputAction: TextInputAction.next,
-                                    textInputType: TextInputType.name,
-                                    focusNode: nameFocusNode,
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return AppString.emptyName.val;
-                                      }
-                                      return null;
-                                    },
-                                    labelName: AppString.name.val,
-                                    suffixIcon:
-                                        const CustomContainer(width: 0)),
-                              ),
-                              CustomSizedBox(
-                                width: DBL.twoEighty.val,
-                                child: DetailsTextFieldWithLabel(
-                                    isMandatory: false,
-                                    controller: phoneController,
-                                    textInputAction: TextInputAction.next,
-                                    textInputType: TextInputType.name,
-                                    focusNode: phoneFocusNode,
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return AppString.emptyPhone.val;
-                                      }
-                                      return null;
-                                    },
-                                    labelName: AppString.phoneNumber.val,
-                                    suffixIcon:
-                                        CustomContainer(width: DBL.zero.val)),
-                              ),
-                              _relationWidget(),
-                              _addressWidget(),
-                              CustomSizedBox(
-                                width: DBL.twoEighty.val,
-                                child: DetailsTextFieldWithLabel(
-                                    isMandatory: false,
-                                    controller: streetController,
-                                    textInputAction: TextInputAction.next,
-                                    textInputType: TextInputType.name,
-                                    focusNode: streetFocusNode,
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return AppString.emptyStreet.val;
-                                      }
-                                      return null;
-                                    },
-                                    labelName: AppString.street.val,
-                                    suffixIcon:
-                                        const CustomContainer(width: 0)),
-                              ),
-                              _cityWidget(),
-                              _stateWidget(),
-                              CustomSizedBox(
-                                width: DBL.twoEighty.val,
-                                child: DetailsTextFieldWithLabel(
-                                    isMandatory: false,
-                                    controller: zipController,
-                                    textInputAction: TextInputAction.next,
-                                    textInputType: TextInputType.name,
-                                    focusNode: zipFocusNode,
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return AppString.emptyZip.val;
-                                      }
-                                      return null;
-                                    },
-                                    labelName: AppString.zip.val,
-                                    suffixIcon:
-                                        const CustomContainer(width: 0)),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
+                      children: [],
                     ),
                   ),
                 ),
@@ -183,6 +100,7 @@ class _ReferenceViewState extends State<ReferenceView> {
                   bloc: formValidationBloc,
                   builder: (context, state) {
                     return CommonNextOrCancelButtons(
+                      isLoading: false,
                       leftButtonName: AppString.back.val,
                       rightButtonName: AppString.next.val,
                       onLeftButtonPressed: () {
@@ -234,61 +152,51 @@ class _ReferenceViewState extends State<ReferenceView> {
       children: [
         _labelWidget(AppString.relationship.val),
         CustomSizedBox(height: DBL.twelve.val),
-        StateDropDown(
+        RelationDropDown(
           errorText: nextClicked
-              ? selectedRelation.isEmpty
+              ? widget.onboardingBloc.selectedRelation.isEmpty
                   ? AppString.emptyRelationship.val
                   : ""
               : "",
-          items: [],
+          items: widget.onboardingBloc.relationList,
           onChange: (value) {
-            selectedRelation = value;
+            widget.onboardingBloc.selectedRelation = value.toString();
+            print("state value in onchanged : $value");
+            widget.onboardingBloc.relationId = value;
+            widget.onboardingBloc.add(const OnboardingEvent.relationList());
           },
-          selectedValue: selectedRelation,
-        ),
-      ],
-    );
-  }
-
-  _addressWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _labelWidget(AppString.address.val),
-        CustomSizedBox(height: DBL.twelve.val),
-        StateDropDown(
-          errorText: nextClicked
-              ? selectedAddress.isEmpty
-                  ? AppString.emptyAddress.val
-                  : ""
-              : "",
-          items: [],
-          onChange: (value) {
-            selectedAddress = value;
-          },
-          selectedValue: selectedAddress,
+          selectedValue: widget.onboardingBloc.selectedRelation,
         ),
       ],
     );
   }
 
   _stateWidget() {
+    print('statelist ${widget.onboardingBloc.stateList}');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _labelWidget(AppString.state.val),
         CustomSizedBox(height: DBL.twelve.val),
         StateDropDown(
+          onSearchChanged: (val) {
+            widget.onboardingBloc.add(const OnboardingEvent.stateList());
+            widget.onboardingBloc.stateSearchKey = val;
+          },
+          searchController: widget.onboardingBloc.stateSearchController,
           errorText: nextClicked
-              ? selectedState.isEmpty
+              ? widget.onboardingBloc.selectedState.isEmpty
                   ? AppString.emptyState.val
                   : ""
               : "",
-          items: [],
+          items: widget.onboardingBloc.stateList,
           onChange: (value) {
-            selectedState = value;
+            widget.onboardingBloc.selectedState = value.toString();
+            print("state value in onchanged : $value");
+            widget.onboardingBloc.stateId = value;
+            widget.onboardingBloc.add(const OnboardingEvent.cityList());
           },
-          selectedValue: selectedState,
+          selectedValue: widget.onboardingBloc.selectedState,
         ),
       ],
     );
@@ -300,17 +208,23 @@ class _ReferenceViewState extends State<ReferenceView> {
       children: [
         _labelWidget(AppString.city.val),
         CustomSizedBox(height: DBL.twelve.val),
-        StateDropDown(
+        CityDropDown(
+          searchController: widget.onboardingBloc.citySearchController,
+          onSearchChanged: (val) {
+            widget.onboardingBloc.add(const OnboardingEvent.cityList());
+            widget.onboardingBloc.citySearchKey = val;
+          },
           errorText: nextClicked
-              ? selectedCity.isEmpty
+              ? widget.onboardingBloc.selectedCity.isEmpty
                   ? AppString.emptyCity.val
                   : ""
               : "",
-          items: [],
+          items: widget.onboardingBloc.cityList,
           onChange: (value) {
-            selectedCity = value;
+            widget.onboardingBloc.selectedCity = value.toString();
+            print("city value in onchanged : $value");
           },
-          selectedValue: selectedCity,
+          selectedValue: widget.onboardingBloc.selectedCity,
         ),
       ],
     );
@@ -326,7 +240,167 @@ class _ReferenceViewState extends State<ReferenceView> {
 
   _moreReferenceWidget(Function() onTap) {
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: Responsive.isMobile(context) ? 24 : 100,
+                    vertical: Responsive.isMobile(context) ? 24 : 100),
+                child: Material(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: SizedBox(
+                                  height: 64,
+                                  width: 64,
+                                  child: SVGText(
+                                      path: IMG.iconClose.val, name: '')),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  Responsive.isMobile(context) ? 24 : 48,
+                              vertical: Responsive.isMobile(context) ? 24 : 48),
+                          child: CForm(
+                            formKey: _formKey,
+                            autoValidateMode: _validateMode,
+                            child: Wrap(
+                              spacing: DBL.twenty.val,
+                              runSpacing: DBL.twenty.val,
+                              alignment: WrapAlignment.start,
+                              children: [
+                                CustomSizedBox(
+                                  width: DBL.twoEighty.val,
+                                  child: DetailsTextFieldWithLabel(
+                                      isMandatory: false,
+                                      controller:
+                                          widget.onboardingBloc.nameController,
+                                      textInputAction: TextInputAction.next,
+                                      textInputType: TextInputType.name,
+                                      focusNode: nameFocusNode,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return AppString.emptyName.val;
+                                        }
+                                        return null;
+                                      },
+                                      labelName: AppString.name.val,
+                                      suffixIcon:
+                                          const CustomContainer(width: 0)),
+                                ),
+                                CustomSizedBox(
+                                  width: DBL.twoEighty.val,
+                                  child: DetailsTextFieldWithLabel(
+                                      isMandatory: false,
+                                      controller:
+                                          widget.onboardingBloc.phoneController,
+                                      textInputAction: TextInputAction.next,
+                                      textInputType: TextInputType.name,
+                                      focusNode: phoneFocusNode,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return AppString.emptyPhone.val;
+                                        }
+                                        return null;
+                                      },
+                                      labelName: AppString.phoneNumber.val,
+                                      suffixIcon:
+                                          CustomContainer(width: DBL.zero.val)),
+                                ),
+                                _relationWidget(),
+                                CustomSizedBox(
+                                  width: DBL.twoEighty.val,
+                                  child: DetailsTextFieldWithLabel(
+                                      isMandatory: false,
+                                      controller: widget
+                                          .onboardingBloc.streetController,
+                                      textInputAction: TextInputAction.next,
+                                      textInputType: TextInputType.name,
+                                      focusNode: streetFocusNode,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return AppString.emptyStreet.val;
+                                        }
+                                        return null;
+                                      },
+                                      labelName: AppString.street.val,
+                                      suffixIcon:
+                                          const CustomContainer(width: 0)),
+                                ),
+                                // _addressWidget(),
+                                CustomSizedBox(
+                                  width: DBL.twoEighty.val,
+                                  child: DetailsTextFieldWithLabel(
+                                      isMandatory: false,
+                                      controller: widget
+                                          .onboardingBloc.addressController,
+                                      textInputAction: TextInputAction.next,
+                                      textInputType: TextInputType.name,
+                                      focusNode: addressFocusNode,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return AppString.emptyAddress.val;
+                                        }
+                                        return null;
+                                      },
+                                      labelName: AppString.address.val,
+                                      suffixIcon:
+                                          const CustomContainer(width: 0)),
+                                ),
+                                _cityWidget(),
+                                _stateWidget(),
+                                CustomSizedBox(
+                                  width: DBL.twoEighty.val,
+                                  child: DetailsTextFieldWithLabel(
+                                      isMandatory: false,
+                                      controller:
+                                          widget.onboardingBloc.zipController,
+                                      textInputAction: TextInputAction.next,
+                                      textInputType: TextInputType.name,
+                                      focusNode: zipFocusNode,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return AppString.emptyZip.val;
+                                        }
+                                        return null;
+                                      },
+                                      labelName: AppString.zip.val,
+                                      suffixIcon:
+                                          const CustomContainer(width: 0)),
+                                ),
+                                CustomButton(
+                                  text: 'Save',
+                                  icon: SizedBox(),
+                                  onPressed: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      widget.onboardingBloc
+                                          .addToReferenceList();
+                                      Navigator.pop(context);
+                                    }
+                                  },
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            });
+      },
       child: CustomContainer(
         alignment: Alignment.centerLeft,
         height: DBL.fifty.val,
@@ -374,11 +448,16 @@ class _ReferenceViewState extends State<ReferenceView> {
       });
       formValidationBloc.add(const FormValidationEvent.submit());
     }
-    if (_formKey.currentState!.validate()) {
-      setState(() {
-        widget.pageController
-            .jumpToPage(widget.pageController.page!.toInt() + 1);
-      });
-    }
+    // if (_formKey.currentState!.validate()) {
+    print('hello');
+    widget.onboardingBloc.add(OnboardingEvent.submitReference(
+        userId: SharedPreffUtil().getUserId,
+        referenceList:
+            widget.onboardingBloc.reference.map((e) => e.toJson()).toList()));
+    // setState(() {
+    //   widget.pageController
+    //       .jumpToPage(widget.pageController.page!.toInt() + 1);
+    // });
+    // }
   }
 }

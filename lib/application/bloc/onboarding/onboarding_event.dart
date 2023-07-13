@@ -23,6 +23,9 @@ class OnboardingEvent with _$OnboardingEvent {
   const factory OnboardingEvent.commonData() = _CommonDataLists;
   const factory OnboardingEvent.cityList() = _CityLists;
   const factory OnboardingEvent.stateList() = _StateLists;
+  const factory OnboardingEvent.relationList() = _RelationList;
+  const factory OnboardingEvent.submitReference(
+      {required String userId, required List referenceList}) = _SubmitReference;
 
   const factory OnboardingEvent.radioHHA(int isSelected) = _RadioHHASelected;
 

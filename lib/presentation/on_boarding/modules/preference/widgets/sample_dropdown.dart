@@ -137,7 +137,7 @@ class _SampleDropdownState extends State<SampleDropdown> {
                           bool isSelected = selectedItems.contains(item);
 
                           return ListTile(
-                            titleAlignment: ListTileTitleAlignment.center,
+                            // titleAlignment: ListTileTitleAlignment.center,
                             leading: Checkbox(
                               value: selectedItems.contains(item),
                               onChanged: (value) {

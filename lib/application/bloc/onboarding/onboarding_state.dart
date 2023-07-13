@@ -28,37 +28,40 @@ class OnboardingState with _$OnboardingState {
       required Option<Either<ApiErrorHandler, DocumentListResponse>>
           documentOption,
       required Option<Either<ApiErrorHandler, StateListReponse>> stateOption,
-      required Option<Either<ApiErrorHandler, CityListResponse>>
-          cityOption}) = _OnboardingState;
+      required Option<Either<ApiErrorHandler, CityListResponse>> cityOption,
+      required Option<Either<ApiErrorHandler, RelationResponse>> relationOption,
+      required Option<Either<ApiErrorHandler, CommonResponse>>
+          referenceOption}) = _OnboardingState;
 
   //const factory OnboardingState.formSubmitSuccess() = _FormSubmitSuccess;
 
   factory OnboardingState.initial() {
     return OnboardingState(
-      pickedProfilePic: Uint8List(0),
-      securityDocumentList: [],
-      blsDocumentList: [],
-      covidDocumentList: [],
-      hhaDocumentList: [],
-      tbDocumentList: [],
-      isHHASelected: 0,
-      isBLSSelected: 0,
-      isTBSelected: 0,
-      isCovidSelected: 0,
-      isFormSubmitSuccess: false,
-      listUpdated: false,
-      isExperianceSelected: 0,
-      isLanguagesSelected: 0,
-      isPetsSelected: 0,
-      isSmokerSelected: 0,
-      isTransportationSelected: 0,
-      isLoading: false,
-      selectedGenderId: 0,
-      personalDetailsOption: const None(),
-      genderOption: const None(),
-      cityOption: const None(),
-      stateOption: const None(),
-      documentOption: const None(),
-    );
+        pickedProfilePic: Uint8List(0),
+        securityDocumentList: [],
+        blsDocumentList: [],
+        covidDocumentList: [],
+        hhaDocumentList: [],
+        tbDocumentList: [],
+        isHHASelected: 0,
+        isBLSSelected: 0,
+        isTBSelected: 0,
+        isCovidSelected: 0,
+        isFormSubmitSuccess: false,
+        listUpdated: false,
+        isExperianceSelected: 0,
+        isLanguagesSelected: 0,
+        isPetsSelected: 0,
+        isSmokerSelected: 0,
+        isTransportationSelected: 0,
+        isLoading: false,
+        selectedGenderId: 0,
+        personalDetailsOption: const None(),
+        genderOption: const None(),
+        cityOption: const None(),
+        stateOption: const None(),
+        documentOption: const None(),
+        referenceOption: const None(),
+        relationOption: const None());
   }
 }

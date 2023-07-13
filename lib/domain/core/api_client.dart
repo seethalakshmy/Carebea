@@ -21,8 +21,10 @@ import '../../presentation/on_boarding/modules/personal_details/models/state_lis
 import '../../presentation/on_boarding/modules/preference/models/get_preference_response.dart';
 import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
 import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_response.dart';
+import '../../presentation/on_boarding/modules/reference/models/relation_response.dart';
 import '../caregiver_verification/model/reject_params.dart';
 import '../caregivers/model/caregiver_response.dart';
+import '../on_boarding/models/common_response.dart';
 
 part 'api_client.g.dart';
 
@@ -143,7 +145,7 @@ abstract class ApiClient {
     @Field('have_details') HhaDetails hhaDetails,
     @Field('bls_or_first_aid_certificate') bool haveBLSCertificate,
     @Field('bls_or_first_aid_certificate_details')
-    BlsOrFirstAidCertificateDetails blsDetails,
+        BlsOrFirstAidCertificateDetails blsDetails,
     @Field('tb_or_ppd_test') bool haveTBTest,
     @Field('tb_or_ppd_test_details') TbOrPpdTestDetails tbDetails,
     @Field('covid_vaccination') bool haveCovidVaccination,
@@ -193,4 +195,11 @@ abstract class ApiClient {
 
   @GET("/common-data/get-documents")
   Future<DocumentListResponse> getDocumentsList();
+
+  @GET("/common-data/get-relationships")
+  Future<RelationResponse> getRelationList();
+
+  @POST("/admin/admin-cg-references")
+  Future<CommonResponse> submitReference(
+      @Field('user_id') String userId, @Field('references') List referenceList);
 }
