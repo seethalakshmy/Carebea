@@ -97,6 +97,11 @@ class OrdersController extends GetxController {
     isFilterClick(true);
     pageNumber = 0;
     this.query = query;
+    if (query?.isEmpty ?? true) {
+      await fetchOrdersList(orderType: selectedOrderType);
+      isFilterClick(false);
+      return;
+    }
     var temp = await orderListRepo.allOrdersList(
       SharedPrefs.getUserId()!,
       getOrdertypeString(selectedOrderType),
@@ -148,7 +153,23 @@ class OrdersController extends GetxController {
 
   _paginateFilterOrders() {}
 
-  _paginateSearchOrders() {}
+  Future<void> _paginateSearchOrders() async {
+    var allorderListResponse = await orderListRepo.allOrdersList(
+      SharedPrefs.getUserId()!,
+      getOrdertypeString(selectedOrderType),
+      query: query,
+      pageNumber: pageNumber,
+      pageSize: pageSize,
+    );
+    if (allorderListResponse.orderListResult?.status ?? false) {
+      allOrders.addAll(allorderListResponse.orderListResult?.history ?? []);
+      if ((allorderListResponse.orderListResult?.history ?? []).isNotEmpty) {
+        pageNumber += 1;
+      }
+    } else {
+      allOrders.clear();
+    }
+  }
 }
 
 enum OrderType { previous, upcoming }
