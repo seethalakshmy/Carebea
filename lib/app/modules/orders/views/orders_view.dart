@@ -125,12 +125,9 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                                 ),
                                 ...(ordersController.filterVals?.date ?? [])
                                     .map((e) => customPopupMenuItem<String>(context,
-                                        isSelected: ordersController.filterSelected.value == "Date-${e.id}",
-                                        name: e.name!,
-                                        onTap: () => ordersController.filterOrders("Date", e.id!)))
+                                        isSelected: ordersController.filterSelected.value == "Date-${e.id}", name: e.name!, onTap: () => ordersController.filterOrders("Date", e.id!)))
                                     .toList(),
-                                customPopupMenuItem<String>(context, name: "Clear", isSelected: true, showBorder: false,
-                                    onTap: () {
+                                customPopupMenuItem<String>(context, name: "Clear", isSelected: true, showBorder: false, onTap: () {
                                   ordersController.clearFilters();
                                 }),
                               ];
@@ -155,12 +152,9 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                                 ),
                                 ...(ordersController.filterVals?.date ?? [])
                                     .map((e) => customPopupMenuItem<String>(context,
-                                        isSelected: ordersController.filterSelected.value == "Date-${e.id}",
-                                        name: e.name!,
-                                        onTap: () => ordersController.filterOrders("Date", e.id!)))
+                                        isSelected: ordersController.filterSelected.value == "Date-${e.id}", name: e.name!, onTap: () => ordersController.filterOrders("Date", e.id!)))
                                     .toList(),
-                                customPopupMenuItem<String>(context, name: "Clear", isSelected: true, showBorder: false,
-                                    onTap: () {
+                                customPopupMenuItem<String>(context, name: "Clear", isSelected: true, showBorder: false, onTap: () {
                                   ordersController.clearFilters();
                                 }),
                               ];
@@ -265,6 +259,7 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
 
   ListView _completedOrders() {
     return ListView.separated(
+        controller: ordersController.scrollController,
         separatorBuilder: (_, __) => const SizedBox(height: 0),
         scrollDirection: Axis.vertical,
         itemCount: ordersController.allOrders.length,
@@ -273,8 +268,7 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
             child: InkWell(
                 onTap: () {
-                  Get.toNamed(Routes.ORDER_HISTORY_DETAILS,
-                      arguments: {'order_id': ordersController.allOrders[index].id});
+                  Get.toNamed(Routes.ORDER_HISTORY_DETAILS, arguments: {'order_id': ordersController.allOrders[index].id});
                 },
                 child: OrderHistoryTile(orders: ordersController.allOrders[index])),
           );

@@ -13,23 +13,27 @@ import '../models/order_list_model.dart';
 class OrderDataSource {
   ApiService apiService = ApiService();
 
-  Future<OrderListResponse> orderList(
-      { int? salesPersonId,
-        int? driverId,
-      String? orderType,
-      int? orderId,
-      int? shopId,
-      int? filterId,
-      String? query,
-      String? filterName}) async {
-    Map<String, dynamic> body = {
-
-    };
-    if(salesPersonId != null){
-      body.addAll({'sales_person_id':salesPersonId});
+  Future<OrderListResponse> orderList({
+    int? salesPersonId,
+    int? driverId,
+    String? orderType,
+    int? orderId,
+    int? shopId,
+    int? filterId,
+    String? query,
+    String? filterName,
+    int? pageNumber,
+    int? pageSize,
+  }) async {
+    Map<String, dynamic> body = {};
+    if (pageNumber != null && pageSize != null) {
+      body.addAll({"limit": pageSize, "page_number": pageNumber});
     }
-    if(driverId != null){
-      body.addAll({'driver_id':driverId.toString()});
+    if (salesPersonId != null) {
+      body.addAll({'sales_person_id': salesPersonId});
+    }
+    if (driverId != null) {
+      body.addAll({'driver_id': driverId.toString()});
     }
     if (shopId != null) {
       body.addAll({'shop_id': shopId});
