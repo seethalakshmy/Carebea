@@ -56,12 +56,14 @@ class CreateOrderController extends GetxController {
   void onInit() {
     clearProducts();
     shopScrollController.addListener(() {
-      if (((shopScrollController.position.maxScrollExtent * .5) <= shopScrollController.position.pixels) && !isPaginating.value) {
+      if (((shopScrollController.position.maxScrollExtent * .3) <= shopScrollController.position.pixels) && !isPaginating.value) {
         paginateShops();
       }
     });
     productScrollController.addListener(() {
-      if (((productScrollController.position.maxScrollExtent * .7) <= productScrollController.position.pixels) && !isPaginating.value) {}
+      if (((productScrollController.position.maxScrollExtent * .7) <= productScrollController.position.pixels) && !isPaginating.value) {
+        paginateProducts();
+      }
     });
     fetchShops();
     super.onInit();
@@ -177,11 +179,19 @@ class CreateOrderController extends GetxController {
     creatingOrder(false);
   }
 
+  int productPageNumber = 0;
+  int productPageSize = 10;
   Future<void> fetchProducts() async {
     isProductsLoading(true);
+    productQuery = null;
     try {
-      var res = await _productListRepo.productList();
+      productPageNumber = 0;
+      var res = await _productListRepo.productList(pageNumber: productPageNumber, pageSize: productPageSize);
       productList(res.productListResult?.productList ?? []);
+      if (productList.isEmpty) {
+        throw "";
+      }
+      productPageNumber = 1;
       _products = productList;
       for (var product in _products) {
         if (!cartproductsFocusNode.keys.contains(product.id)) cartproductsFocusNode[product.id!] = FocusNode();
@@ -192,6 +202,7 @@ class CreateOrderController extends GetxController {
     isProductsLoading(false);
   }
 
+  String? productQuery;
   searchProducts(String? query) async {
     isProductsLoading(true);
     try {
@@ -199,9 +210,18 @@ class CreateOrderController extends GetxController {
         fetchProducts();
         return;
       }
-      var res = await _productListRepo.searchProductList(query ?? "");
+      productQuery = query;
+      pageNumber = 0;
+      var res = await _productListRepo.searchProductList(query ?? "", pageNumber: productPageNumber, pageSize: productPageSize);
       productList(res.productListResult?.productList ?? []);
+      if (productList.isEmpty) {
+        throw "";
+      }
+      pageNumber = 1;
       _products = productList;
+      for (var product in _products) {
+        if (!cartproductsFocusNode.keys.contains(product.id)) cartproductsFocusNode[product.id!] = FocusNode();
+      }
     } catch (error, stacktrace) {
       log("error", error: error, stackTrace: stacktrace);
     }
@@ -353,6 +373,41 @@ class CreateOrderController extends GetxController {
     if ((shopListResponse.shopListResult?.status ?? false) && ((shopListResponse.shopListResult!.shopCount ?? 0) > 0)) {
       pageNumber += 1;
       shopList.addAll(shopListResponse.shopListResult!.shopList!);
+    }
+  }
+
+  paginateProducts() async {
+    if (isPaginating.value) {
+      return;
+    }
+    isPaginating(true);
+    if (query?.isNotEmpty ?? false) {
+      await _paginateSearchProducts();
+    } else {
+      await _paginateProducts();
+    }
+
+    isPaginating(false);
+  }
+
+  Future<void> _paginateSearchProducts() async {}
+
+  Future<void> _paginateProducts() async {
+    try {
+      var res = await _productListRepo.productList(pageNumber: productPageNumber, pageSize: productPageSize);
+      var tempProductList = res.productListResult?.productList ?? [];
+      tempProductList = tempProductList.where((outer) => productList.firstWhereOrNull((inner) => inner.id == outer.id) == null).toList();
+      productList.addAll(tempProductList);
+      if (tempProductList.isEmpty) {
+        throw "";
+      }
+      productPageNumber += 1;
+      _products.addAll(res.productListResult!.productList!);
+      for (var product in _products) {
+        if (!cartproductsFocusNode.keys.contains(product.id)) cartproductsFocusNode[product.id!] = FocusNode();
+      }
+    } catch (error, stacktrace) {
+      log("error", error: error, stackTrace: stacktrace);
     }
   }
 }

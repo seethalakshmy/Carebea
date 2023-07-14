@@ -10,9 +10,9 @@ class ProductListRepo {
   CreateorderDataSource createorderDataSource = CreateorderDataSource();
 
   ///OrderListShopDeatilPage
-  Future<ProductListResponse> productList() async {
-    return createorderDataSource.productList();
+  Future<ProductListResponse> productList({required int pageSize, required int pageNumber}) async {
+    return createorderDataSource.productList(pageNumber: pageNumber,pageSize: pageSize);
   }
 
-  Future<ProductListResponse> searchProductList(String query) => createorderDataSource.searchProductList(query);
+  Future<ProductListResponse> searchProductList(String query, {required int pageSize, required int pageNumber}) => createorderDataSource.searchProductList(query, pageNumber: pageNumber, pageSize: pageSize);
 }

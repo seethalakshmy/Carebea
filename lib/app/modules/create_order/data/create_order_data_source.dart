@@ -33,10 +33,10 @@ class CreateorderDataSource {
 
   ///ProductLIst
 
-  Future<ProductListResponse> productList() async {
+  Future<ProductListResponse> productList({required int pageSize, required int pageNumber}) async {
     var response = await _apiService.post(
       'list-products',
-      {},
+      {"limit": pageSize, "page_number": pageNumber},
     );
     if (response.statusCode == 200) {
       return ProductListResponse.fromJson(json.decode(response.body));
@@ -45,10 +45,10 @@ class CreateorderDataSource {
     }
   }
 
-  Future<ProductListResponse> searchProductList(String query) async {
+  Future<ProductListResponse> searchProductList(String query, {required int pageSize, required int pageNumber}) async {
     var response = await _apiService.post(
       'list-products',
-      {"name": query},
+      {"name": query, "limit": pageSize, "page_number": pageNumber},
     );
     if (response.statusCode == 200) {
       return ProductListResponse.fromJson(json.decode(response.body));
@@ -57,8 +57,7 @@ class CreateorderDataSource {
     }
   }
 
-  Future<ConfirmOrderResponse> confirmOrder(
-      int salesPersonId, int orderId, String paymentMethod, String? comment, int paymentTermId) async {
+  Future<ConfirmOrderResponse> confirmOrder(int salesPersonId, int orderId, String paymentMethod, String? comment, int paymentTermId) async {
     var res = await _apiService.post(
       "order-confirm",
       {
