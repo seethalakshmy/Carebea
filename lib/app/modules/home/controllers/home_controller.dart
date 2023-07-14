@@ -6,6 +6,7 @@ import 'package:carebea/app/modules/home/data/repo/home_data_repo.dart';
 import 'package:carebea/app/modules/shops/models/order_list_model.dart';
 import 'package:carebea/app/utils/shared_prefs.dart';
 import 'package:carebea/app/utils/show_snackbar.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../shops/models/shop_model.dart';
@@ -21,8 +22,11 @@ class HomeController extends GetxController {
   RxString selectedSearchtype = 'Shop'.obs;
   ReportsData? reportsData;
 
+  ScrollController scrollController = ScrollController();
+
   @override
   void onInit() {
+
     fetchHomePageData();
     super.onInit();
   }
@@ -49,13 +53,15 @@ class HomeController extends GetxController {
     isLoading(false);
   }
 
+  int pageNumber = 0;
+  int pageSize = 20;
+
   Future<List<ShopList>> homeSearchShop(String? query) async {
     if ((query ?? "").isEmpty) {
       return [];
       // shopListResponse = await _repository.shopList(SharedPrefs.getUserId()!);
     }
-    var shopListResponse =
-        await _repository.homeShopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {"name": query});
+    var shopListResponse = await _repository.homeShopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {"name": query}, pageNumber: pageNumber, pageSize: pageSize);
     if (shopListResponse.shopListResult?.status ?? false) {
       return shopListResponse.shopListResult?.shopList ?? [];
     }
@@ -63,15 +69,18 @@ class HomeController extends GetxController {
   }
 
   Future<List<History>> homeSearchOrder(String? query) async {
+    pageNumber = 0;
     if ((query ?? "").isEmpty) {
       return [];
     }
-    var orderListResponse = await _repository.homeOrderSearch(salesPersonId: SharedPrefs.getUserId()!, query: query);
+    var orderListResponse = await _repository.homeOrderSearch(salesPersonId: SharedPrefs.getUserId()!, query: query,pageNumber:pageNumber,pageSize:pageSize);
     if (orderListResponse.orderListResult?.status ?? false) {
       return orderListResponse.orderListResult?.history ?? [];
     }
     return [];
   }
+
+  paginate() {}
 }
 
 class SearchType {

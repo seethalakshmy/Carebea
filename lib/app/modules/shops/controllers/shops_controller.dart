@@ -31,6 +31,7 @@ class ShopsController extends GetxController {
 
   int pageNumber = 0;
   int pageSize = 10;
+    ScrollController scrollController = ScrollController();
 
   Rx<PaymentMethod?> selectedPaymentMethod = Rx<PaymentMethod?>(null);
   TextEditingController collectedAmountEditingController = TextEditingController();
@@ -47,7 +48,7 @@ class ShopsController extends GetxController {
   ];
 
   final count = 0.obs;
-  ScrollController scrollController = ScrollController();
+
 
   @override
   void onInit() {

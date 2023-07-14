@@ -16,13 +16,13 @@ class HomeDataRepository {
   Future<HomeData> getHomePageData({required int userId}) => _dataSource.getHomePageData(userId);
 
   ///HomePageSearch
-  Future<ShopListResponse> homeShopSearch({required int salesPersonId, Map<String, dynamic>? query}) async {
-    return _shopDataSource.shopList(salesPersonId: salesPersonId, query: query);
+  Future<ShopListResponse> homeShopSearch({required int salesPersonId, Map<String, dynamic>? query, required int pageNumber, required int pageSize}) async {
+    return _shopDataSource.shopList(salesPersonId: salesPersonId, query: query, pageNumber: pageNumber, pageSize: pageSize);
   }
 
   ///HomePageOrderSearch
-  Future<OrderListResponse> homeOrderSearch({required int salesPersonId, String? query, String? orderType}) async {
-    return _orderDataSource.orderList(salesPersonId: salesPersonId, query: query, orderType: orderType);
+  Future<OrderListResponse> homeOrderSearch({required int salesPersonId, String? query, String? orderType, int? pageNumber, int? pageSize}) async {
+    return _orderDataSource.orderList(salesPersonId: salesPersonId, query: query, orderType: orderType, pageNumber: pageNumber, pageSize: pageSize);
   }
 
   Future<ReportsData> getReports() => _dataSource.getReports(SharedPrefs.getUserId()!);
