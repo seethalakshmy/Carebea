@@ -45,10 +45,24 @@ class CreateOrderController extends GetxController {
   final DashboardController _dashboardController = Get.find();
   final OrdersController ordersController = Get.find();
 
+  ScrollController shopScrollController = ScrollController();
+  ScrollController productScrollController = ScrollController();
+
+  int pageNumber = 0;
+  int pageSize = 10;
+
   final count = 0.obs;
   @override
   void onInit() {
     clearProducts();
+    shopScrollController.addListener(() {
+      if (((shopScrollController.position.maxScrollExtent * .5) <= shopScrollController.position.pixels) && !isPaginating.value) {
+        paginateShops();
+      }
+    });
+    productScrollController.addListener(() {
+      if (((productScrollController.position.maxScrollExtent * .7) <= productScrollController.position.pixels) && !isPaginating.value) {}
+    });
     fetchShops();
     super.onInit();
   }
@@ -83,10 +97,13 @@ class CreateOrderController extends GetxController {
   }
 
   Future<void> fetchShops() async {
+    query = null;
     isLoading(true);
     try {
-      var res = await _shopRepo.shopList(SharedPrefs.getUserId()!);
+      pageNumber = 0;
+      var res = await _shopRepo.shopList(SharedPrefs.getUserId()!, pageNumber: pageNumber, pageSize: pageSize);
       shopList(res.shopListResult?.shopList ?? []);
+      pageNumber = 1;
     } catch (error, stacktrace) {
       log("error", error: error, stackTrace: stacktrace);
     }
@@ -139,11 +156,7 @@ class CreateOrderController extends GetxController {
     cartproducts.forEach((key, textEditingControlller) {
       _products.addAll({key: int.parse(textEditingControlller.text)});
     });
-    var res = await _repository.createOrder(
-        shopId: (Get.arguments["shop"] as ShopList).id,
-        salesPersonId: SharedPrefs.getUserId(),
-        products: _products,
-        orderId: createOrderResponse?.result?.orderId);
+    var res = await _repository.createOrder(shopId: (Get.arguments["shop"] as ShopList).id, salesPersonId: SharedPrefs.getUserId(), products: _products, orderId: createOrderResponse?.result?.orderId);
     sortList();
 
     if (res.result?.status ?? false) {
@@ -212,19 +225,28 @@ class CreateOrderController extends GetxController {
   }
 
   RxBool isSearching = RxBool(false);
+  String? query;
   Future<void> searchShop(String? query) async {
     isSearching(true);
-    var shopListResponse;
+
     if ((query ?? "").isEmpty) {
-      shopListResponse = await _shopRepo.shopList(SharedPrefs.getUserId()!);
+      await fetchShops();
     } else {
-      shopListResponse = await _shopRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {"name": query});
+      if (this.query == query) {
+        isSearching(false);
+        return;
+      }
+      this.query = query;
+      pageNumber = 0;
+      var shopListResponse = await _shopRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {"name": query}, pageNumber: pageNumber, pageSize: pageSize);
+      if (shopListResponse.shopListResult?.status ?? false) {
+        pageNumber = 1;
+        shopList(shopListResponse.shopListResult?.shopList ?? []);
+      } else {
+        shopList.clear();
+      }
     }
-    if (shopListResponse.shopListResult?.status ?? false) {
-      shopList(shopListResponse.shopListResult?.shopList ?? []);
-    } else {
-      shopList.clear();
-    }
+
     isSearching(false);
   }
 
@@ -304,5 +326,33 @@ class CreateOrderController extends GetxController {
         // ordersController.fetchOrdersList(orderType: OrderType.upcoming);
       }
     });
+  }
+
+  RxBool isPaginating = false.obs;
+  paginateShops() async {
+    isPaginating(true);
+    if (query?.isNotEmpty ?? false) {
+      await _paginateSearchShop();
+    } else {
+      await _paginateShopList();
+    }
+
+    isPaginating(false);
+  }
+
+  Future<void> _paginateShopList() async {
+    var shopListResponse = await _shopRepo.shopList(SharedPrefs.getUserId()!, pageNumber: pageNumber, pageSize: pageSize);
+    if ((shopListResponse.shopListResult?.status ?? false) && ((shopListResponse.shopListResult!.shopCount ?? 0) > 0)) {
+      pageNumber += 1;
+      shopList.addAll(shopListResponse.shopListResult!.shopList!);
+    }
+  }
+
+  Future<void> _paginateSearchShop() async {
+    var shopListResponse = await _shopRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {"name": query}, pageNumber: pageNumber, pageSize: pageSize);
+    if ((shopListResponse.shopListResult?.status ?? false) && ((shopListResponse.shopListResult!.shopCount ?? 0) > 0)) {
+      pageNumber += 1;
+      shopList.addAll(shopListResponse.shopListResult!.shopList!);
+    }
   }
 }

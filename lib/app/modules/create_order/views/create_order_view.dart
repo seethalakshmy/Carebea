@@ -30,8 +30,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
               _search(context),
               Flexible(
                 child: Obx(() {
-                  if (controller.isLoading.value ||
-                      controller.isSearching.value) {
+                  if (controller.isLoading.value || controller.isSearching.value) {
                     return Container(
                       width: double.infinity,
                       height: Get.size.height * .4,
@@ -49,11 +48,11 @@ class CreateOrderView extends GetView<CreateOrderController> {
                   }
                   return CustomCard(
                     hasShadow: false,
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 11),
+                    margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 11),
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     color: const Color(0xffFAFAFA),
                     child: ListView.separated(
+                      controller: controller.shopScrollController,
                       shrinkWrap: true,
                       itemCount: controller.shopList.length,
                       separatorBuilder: (_, __) => Container(
@@ -63,10 +62,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
                       itemBuilder: (context, index) => ShopTile(
                           shop: controller.shopList[index],
                           onTap: () {
-                            Get.toNamed(Routes.CREATE_ORDER_SHOP_DETAILS,
-                                arguments: {
-                                  "shop": controller.shopList[index]
-                                });
+                            Get.toNamed(Routes.CREATE_ORDER_SHOP_DETAILS, arguments: {"shop": controller.shopList[index]});
                           }),
                     ),
                   );
@@ -86,13 +82,11 @@ class CreateOrderView extends GetView<CreateOrderController> {
         children: [
           Text(
             "Shop name",
-            style: customTheme(context)
-                .regular
-                .copyWith(fontSize: 11, color: Colors.black),
+            style: customTheme(context).regular.copyWith(fontSize: 11, color: Colors.black),
           ),
           const SizedBox(height: 3),
           CustomTextField(
-            onsubmit: (val) {
+            onChanged: (val) {
               controller.searchShop(val);
             },
             fillcolor: customTheme(context).textFormFieldColor,
@@ -124,9 +118,7 @@ class CreateOrderView extends GetView<CreateOrderController> {
           const SizedBox(width: 15),
           Text(
             "Create new order",
-            style: customTheme(context)
-                .medium
-                .copyWith(fontSize: 16, color: Colors.black),
+            style: customTheme(context).medium.copyWith(fontSize: 16, color: Colors.black),
           )
         ],
       ),
@@ -154,15 +146,11 @@ class ShopTile extends StatelessWidget {
           children: [
             Text(
               "${shop.name!} ${shop.lastName ?? ""}",
-              style: customTheme(context)
-                  .medium
-                  .copyWith(fontSize: 14, color: Colors.black),
+              style: customTheme(context).medium.copyWith(fontSize: 14, color: Colors.black),
             ),
             Text(
               getFullAddress(shop.address),
-              style: customTheme(context)
-                  .regular
-                  .copyWith(fontSize: 13, color: Colors.black),
+              style: customTheme(context).regular.copyWith(fontSize: 13, color: Colors.black),
               overflow: TextOverflow.ellipsis,
             ),
           ],
