@@ -14,11 +14,11 @@ import 'package:get/get.dart';
 
 import '../models/shop_model.dart';
 
-class ListShops extends GetView<ShopsController> {
+class ListShops extends StatelessWidget {
   ListShops({Key? key}) : super(key: key);
-  ShopsController shopsController = Get.put(ShopsController());
-  TextEditingController searchTextEditingController = TextEditingController();
-  FocusNode _focusNode = FocusNode();
+  ShopsController controller = Get.put(ShopsController());
+  // TextEditingController searchTextEditingController = TextEditingController();
+  // FocusNode _focusNode = FocusNode();
   // static List<String> category = ['Retail', 'Supermarket', 'Wholesale', 'Zone'];
 
   // List<Category>? category;
@@ -31,7 +31,7 @@ class ListShops extends GetView<ShopsController> {
             appBar: appBar(context),
             floatingActionButton: openKeyboardGuard(context, child: _addNewShopButton(context)),
             body: Obx(() {
-              if (shopsController.isLoading.value) {
+              if (controller.isLoading.value) {
                 return Center(child: circularProgressIndicator(context));
               }
 
@@ -51,8 +51,11 @@ class ListShops extends GetView<ShopsController> {
                       children: [
                         Expanded(
                           child: CustomTextField(
-                            focusNode: _focusNode,
-                            onChanged: (val) => controller.searchShop(val),
+                            key: const ValueKey("search"),
+                            // focusNode: _focusNode,
+                            onChanged: (val) {
+                              controller.searchShop(val);
+                            },
                             hint: 'Search for shops',
                             fillcolor: customTheme(context).textFormFieldColor,
                             icon: const Icon(
@@ -70,7 +73,7 @@ class ListShops extends GetView<ShopsController> {
                                 underline: const SizedBox.shrink(),
                                 isDense: true,
                                 onChanged: (value) {
-                                  _focusNode.requestFocus();
+                                  // _focusNode.requestFocus();
                                   controller.selectedSearchtype(controller.searchitems.singleWhere((element) => element.type == value));
                                 },
                                 items: controller.searchitems
@@ -147,7 +150,7 @@ class ListShops extends GetView<ShopsController> {
                     // SizedBox(
                     //   height: 10,
                     // ),
-                    // ShopListTile(shop:shopsController.shopListResponse!.shopListResult!.shopList[index],),
+                    // ShopListTile(shop:controller.shopListResponse!.shopListResult!.shopList[index],),
                     // SizedBox(
                     //   height: 10,
                     // ),
@@ -163,19 +166,19 @@ class ListShops extends GetView<ShopsController> {
                     ),
                     Flexible(
                       child: Obx(() {
-                        if (shopsController.isFilterClick.value) {
+                        if (controller.isFilterClick.value) {
                           return Center(child: circularProgressIndicator(context));
                         }
-                        if (shopsController.shopList.isEmpty) {
+                        if (controller.shopList.isEmpty) {
                           return Container(alignment: Alignment.topCenter, width: double.infinity, padding: EdgeInsets.only(top: 50), child: Text("No shops found!"));
                         }
                         return ListView.separated(
                             controller: controller.scrollController,
                             separatorBuilder: (_, __) => const SizedBox(height: 20),
                             shrinkWrap: true,
-                            itemCount: shopsController.shopList.length,
+                            itemCount: controller.shopList.length,
                             itemBuilder: (context, index) {
-                              return ShopListTile(shop: shopsController.shopList[index]);
+                              return ShopListTile(shop: controller.shopList[index]);
                             });
                       }),
                     ),
@@ -185,35 +188,35 @@ class ListShops extends GetView<ShopsController> {
             })));
   }
 
-  List<PopupMenuItem<String>> buildCategoryFilterItems(BuildContext context, String value) => shopsController.filterVals!.category!.map((e) {
+  List<PopupMenuItem<String>> buildCategoryFilterItems(BuildContext context, String value) => controller.filterVals!.category!.map((e) {
         return customPopupMenuItem<String>(
           context,
           name: e.name!,
           isSelected: value == "Category-${e.id}",
           onTap: () {
-            shopsController.filterShops('Category', e.id!);
+            controller.filterShops('Category', e.id!);
           },
         );
       }).toList();
 
-  List<PopupMenuItem<String>> buildZoneFilterItems(BuildContext context, String value) => shopsController.filterVals!.zone!.map((e) {
+  List<PopupMenuItem<String>> buildZoneFilterItems(BuildContext context, String value) => controller.filterVals!.zone!.map((e) {
         return customPopupMenuItem<String>(
           context,
           name: e.name!,
           isSelected: value == "Zone-${e.id}",
           onTap: () {
-            shopsController.filterShops('Zone', e.id!);
+            controller.filterShops('Zone', e.id!);
           },
         );
       }).toList();
 
-  List<PopupMenuItem<String>> buildRouteFilterItems(BuildContext context, String value) => shopsController.filterVals!.route!.map((e) {
+  List<PopupMenuItem<String>> buildRouteFilterItems(BuildContext context, String value) => controller.filterVals!.route!.map((e) {
         return customPopupMenuItem<String>(
           context,
           name: e.name!,
           isSelected: value == "Route-${e.id}",
           onTap: () {
-            shopsController.filterShops('Route', e.id!);
+            controller.filterShops('Route', e.id!);
           },
         );
       }).toList();

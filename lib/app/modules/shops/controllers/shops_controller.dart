@@ -53,7 +53,7 @@ class ShopsController extends GetxController {
   void onInit() {
     scrollController.addListener(() {
       if (((scrollController.position.maxScrollExtent * .7) <= scrollController.position.pixels) && !isPaginating.value) {
-        paginateShopList();
+        paginate();
       }
     });
     fetchAllShops();
@@ -187,30 +187,53 @@ class ShopsController extends GetxController {
     }
   }
 
+  String? query;
   Future<void> searchShop(String? query) async {
+    if (this.query == query) {
+      return;
+    }
     isFilterClick(true);
     filterSelected("");
+    this.query = query;
+    pageNumber = 0;
     var shopListResponse;
     if ((query ?? "").isEmpty) {
-      shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!, pageNumber: pageNumber, pageSize: pageSize);
+      await fetchAllShops();
     } else {
       shopListResponse = await shopListRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {selectedSearchtype.value.type!: query}, pageNumber: pageNumber, pageSize: pageSize);
+      if (shopListResponse.shopListResult?.status ?? false) {
+        shopList(shopListResponse.shopListResult?.shopList ?? []);
+      } else {
+        shopList.clear();
+      }
     }
-    if (shopListResponse.shopListResult?.status ?? false) {
-      shopList(shopListResponse.shopListResult?.shopList ?? []);
-    } else {
-      shopList.clear();
-    }
+
     isFilterClick(false);
   }
 
   RxBool isPaginating = false.obs;
-  Future<void> paginateShopList() async {
-    isPaginating(true);
+  Future<void> _paginateShopList() async {
     var shopListResponse = await shopListRepo.shopList(SharedPrefs.getUserId()!, pageNumber: pageNumber, pageSize: pageSize);
     if ((shopListResponse.shopListResult?.status ?? false) && ((shopListResponse.shopListResult!.shopCount ?? 0) > 0)) {
       pageNumber += 1;
       shopList.addAll(shopListResponse.shopListResult!.shopList!);
+    }
+  }
+
+  Future<void> _paginateSearchShop() async {
+    var shopListResponse = await shopListRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {selectedSearchtype.value.type!: query}, pageNumber: pageNumber, pageSize: pageSize);
+    if ((shopListResponse.shopListResult?.status ?? false) && ((shopListResponse.shopListResult!.shopCount ?? 0) > 0)) {
+      pageNumber += 1;
+      shopList.addAll(shopListResponse.shopListResult!.shopList!);
+    }
+  }
+
+  paginate() async {
+    isPaginating(true);
+    if (query?.isNotEmpty ?? false) {
+      await _paginateSearchShop();
+    } else {
+      await _paginateShopList();
     }
 
     isPaginating(false);
