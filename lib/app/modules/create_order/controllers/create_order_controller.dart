@@ -210,14 +210,18 @@ class CreateOrderController extends GetxController {
         fetchProducts();
         return;
       }
+      if (productQuery == query) {
+        isProductsLoading(false);
+        return;
+      }
       productQuery = query;
-      pageNumber = 0;
+      productPageNumber = 0;
       var res = await _productListRepo.searchProductList(query ?? "", pageNumber: productPageNumber, pageSize: productPageSize);
       productList(res.productListResult?.productList ?? []);
       if (productList.isEmpty) {
         throw "";
       }
-      pageNumber = 1;
+      productPageNumber = 1;
       _products = productList;
       for (var product in _products) {
         if (!cartproductsFocusNode.keys.contains(product.id)) cartproductsFocusNode[product.id!] = FocusNode();
@@ -381,7 +385,7 @@ class CreateOrderController extends GetxController {
       return;
     }
     isPaginating(true);
-    if (query?.isNotEmpty ?? false) {
+    if (productQuery?.isNotEmpty ?? false) {
       await _paginateSearchProducts();
     } else {
       await _paginateProducts();
@@ -390,19 +394,42 @@ class CreateOrderController extends GetxController {
     isPaginating(false);
   }
 
-  Future<void> _paginateSearchProducts() async {}
+  Future<void> _paginateSearchProducts() async {
+    try {
+      var res = await _productListRepo.searchProductList(productQuery ?? "", pageNumber: productPageNumber, pageSize: productPageSize);
+      var tempProductList = res.productListResult?.productList ?? [];
+      tempProductList = tempProductList.where((outer) => productList.firstWhereOrNull((inner) => inner.id == outer.id) == null).toList();
+      if (tempProductList.isEmpty) {
+        throw "";
+      }
+      productList.addAll(tempProductList);
+
+      productList(productList.toSet().toList());
+      productPageNumber += 1;
+      _products.addAll(tempProductList);
+      _products = _products.toSet().toList();
+      for (var product in _products) {
+        if (!cartproductsFocusNode.keys.contains(product.id)) cartproductsFocusNode[product.id!] = FocusNode();
+      }
+    } catch (error, stacktrace) {
+      log("error", error: error, stackTrace: stacktrace);
+    }
+  }
 
   Future<void> _paginateProducts() async {
     try {
       var res = await _productListRepo.productList(pageNumber: productPageNumber, pageSize: productPageSize);
       var tempProductList = res.productListResult?.productList ?? [];
-      tempProductList = tempProductList.where((outer) => productList.firstWhereOrNull((inner) => inner.id == outer.id) == null).toList();
-      productList.addAll(tempProductList);
+      // tempProductList = tempProductList.where((outer) => productList.firstWhereOrNull((inner) => inner.id == outer.id) == null).toList();
       if (tempProductList.isEmpty) {
         throw "";
       }
+      productList.addAll(tempProductList);
+
+      productList(productList.toSet().toList());
       productPageNumber += 1;
-      _products.addAll(res.productListResult!.productList!);
+      _products.addAll(tempProductList);
+      _products = _products.toSet().toList();
       for (var product in _products) {
         if (!cartproductsFocusNode.keys.contains(product.id)) cartproductsFocusNode[product.id!] = FocusNode();
       }
