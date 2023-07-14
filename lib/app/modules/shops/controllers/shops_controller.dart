@@ -191,17 +191,19 @@ class ShopsController extends GetxController {
 
   String? query;
   Future<void> searchShop(String? query) async {
-    if (this.query == query) {
-      return;
-    }
     isFilterClick(true);
     filterSelected("");
-    this.query = query;
     pageNumber = 0;
     var shopListResponse;
     if ((query ?? "").isEmpty) {
       await fetchAllShops();
     } else {
+      if (this.query == query) {
+        isFilterClick(false);
+        return;
+      }
+      this.query = query;
+
       shopListResponse = await shopListRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {selectedSearchtype.value.type!: query}, pageNumber: pageNumber, pageSize: pageSize);
       if (shopListResponse.shopListResult?.status ?? false) {
         pageNumber = 1;
