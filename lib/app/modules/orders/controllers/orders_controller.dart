@@ -80,7 +80,7 @@ class OrdersController extends GetxController {
       pageSize: pageSize,
     );
     if (orderResponse.orderListResult?.status ?? false) {
-      allOrders(allorderListResponse?.orderListResult?.history ?? []);
+      allOrders(orderResponse.orderListResult?.history ?? []);
       if (allOrders.isNotEmpty) {
         pageNumber = 1;
       }
@@ -151,7 +151,25 @@ class OrdersController extends GetxController {
     }
   }
 
-  _paginateFilterOrders() {}
+  Future<void> _paginateFilterOrders() async {
+    var split = filterSelected.split("-");
+    var allorderListResponse = await orderListRepo.allOrdersList(
+      SharedPrefs.getUserId()!,
+      getOrdertypeString(selectedOrderType),
+      filtername: split.first,
+      filterid: int.parse(split.last),
+      pageNumber: pageNumber,
+      pageSize: pageSize,
+    );
+    if (allorderListResponse.orderListResult?.status ?? false) {
+      allOrders.addAll(allorderListResponse.orderListResult?.history ?? []);
+      if ((allorderListResponse.orderListResult?.history ?? []).isNotEmpty) {
+        pageNumber += 1;
+      }
+    } else {
+      allOrders.clear();
+    }
+  }
 
   Future<void> _paginateSearchOrders() async {
     var allorderListResponse = await orderListRepo.allOrdersList(
