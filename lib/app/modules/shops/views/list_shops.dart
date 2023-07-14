@@ -118,13 +118,14 @@ class ListShops extends StatelessWidget {
                                   showBorder: false,
                                 ),
                                 ...buildZoneFilterItems(context, controller.filterSelected.value),
-                                customPopupMenuItem<String>(
-                                  context,
-                                  name: "Route",
-                                  isSelected: true,
-                                  showBorder: false,
-                                ),
-                                ...buildRouteFilterItems(context, controller.filterSelected.value),
+                                if (controller.filterVals?.route?.isNotEmpty ?? false)
+                                  customPopupMenuItem<String>(
+                                    context,
+                                    name: "Route",
+                                    isSelected: true,
+                                    showBorder: false,
+                                  ),
+                                if (controller.filterVals?.route?.isNotEmpty ?? false) ...buildRouteFilterItems(context, controller.filterSelected.value),
                                 customPopupMenuItem<String>(
                                   context,
                                   name: "Clear",

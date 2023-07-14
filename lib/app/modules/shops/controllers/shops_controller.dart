@@ -121,8 +121,10 @@ class ShopsController extends GetxController {
     shopList.clear();
     isFilterClick(true);
     filterSelected("$filterName-$filterId");
+    pageNumber = 0;
     var shopFilterResponse = await shopListRepo.shopFilter(SharedPrefs.getUserId()!, filterName, filterId, pageNumber: pageNumber, pageSize: pageSize);
     if (shopFilterResponse.shopListResult?.status ?? false) {
+      pageNumber = 1;
       shopList(shopFilterResponse.shopListResult?.shopList ?? []);
     }
     isFilterClick(false);
@@ -202,6 +204,7 @@ class ShopsController extends GetxController {
     } else {
       shopListResponse = await shopListRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {selectedSearchtype.value.type!: query}, pageNumber: pageNumber, pageSize: pageSize);
       if (shopListResponse.shopListResult?.status ?? false) {
+        pageNumber = 1;
         shopList(shopListResponse.shopListResult?.shopList ?? []);
       } else {
         shopList.clear();
@@ -228,10 +231,21 @@ class ShopsController extends GetxController {
     }
   }
 
+  Future<void> _paginateFilterShops() async {
+    var split = filterSelected.split("-");
+    var shopListResponse = await shopListRepo.shopFilter(SharedPrefs.getUserId()!, split.first, int.parse(split.last), pageNumber: pageNumber, pageSize: pageSize);
+    if ((shopListResponse.shopListResult?.status ?? false) && ((shopListResponse.shopListResult!.shopCount ?? 0) > 0)) {
+      pageNumber += 1;
+      shopList.addAll(shopListResponse.shopListResult!.shopList!);
+    }
+  }
+
   paginate() async {
     isPaginating(true);
     if (query?.isNotEmpty ?? false) {
       await _paginateSearchShop();
+    } else if (filterSelected.isNotEmpty) {
+      await _paginateFilterShops();
     } else {
       await _paginateShopList();
     }
