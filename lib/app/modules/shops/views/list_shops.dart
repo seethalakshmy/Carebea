@@ -51,6 +51,7 @@ class ListShops extends StatelessWidget {
                       children: [
                         Expanded(
                           child: CustomTextField(
+                            textcontroller:controller.searchEditingController,
                             key: const ValueKey("search"),
                             // focusNode: _focusNode,
                             onChanged: (val) {
@@ -100,7 +101,10 @@ class ListShops extends StatelessWidget {
                               Assets.filter,
                               scale: 3.5,
                             ),
-                            onSelected: (element) {},
+                            onSelected: (element) {
+                              print("datas ${controller.searchEditingController.text}");
+                              controller.searchEditingController.text == "";
+                            },
                             itemBuilder: (BuildContext context) {
                               if (controller.filterSelected.value == "") {}
                               return [
@@ -195,6 +199,8 @@ class ListShops extends StatelessWidget {
           name: e.name!,
           isSelected: value == "Category-${e.id}",
           onTap: () {
+            print("search ${controller.searchEditingController.value}");
+            controller.searchEditingController.text = "";
             controller.filterShops('Category', e.id!);
           },
         );
