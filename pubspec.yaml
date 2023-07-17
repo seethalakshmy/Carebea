@@ -1,5 +1,5 @@
 name: carebea
-version: 1.2.21+23
+version: 1.2.23+25
 publish_to: none
 description: Carebea Mobile App.
 environment:

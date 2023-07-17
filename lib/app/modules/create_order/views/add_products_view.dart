@@ -148,6 +148,7 @@ class AddProductsView extends GetView<CreateOrderController> {
 
   ListView _productListView() {
     return ListView.separated(
+      controller: controller.productScrollController,
       shrinkWrap: true,
       itemCount: controller.productList.length,
       separatorBuilder: (BuildContext context, int index) {
@@ -213,8 +214,7 @@ class AddProductsView extends GetView<CreateOrderController> {
               )),
           Flexible(
             child: Text(
-              "${(Get.arguments['shop'] as ShopList).name} ${(Get.arguments['shop'] as ShopList).lastName ?? ""}"
-                  .trim(),
+              "${(Get.arguments['shop'] as ShopList).name} ${(Get.arguments['shop'] as ShopList).lastName ?? ""}".trim(),
               style: customTheme(context).medium.copyWith(
                     fontSize: 14,
                   ),
@@ -275,12 +275,8 @@ class ProductTile extends StatelessWidget {
                                       text: TextSpan(
                                           text: product.name,
                                           children: [
-                                            TextSpan(
-                                                text: " ${product.qtyAvailable?.toStringAsFixed(2)}",
-                                                style: const TextStyle(color: const Color(0xff929292))),
-                                            TextSpan(
-                                                text: " ${product.unit}",
-                                                style: const TextStyle(color: const Color(0xff929292))),
+                                            TextSpan(text: " ${product.qtyAvailable?.toStringAsFixed(2)}", style: const TextStyle(color: const Color(0xff929292))),
+                                            TextSpan(text: " ${product.unit}", style: const TextStyle(color: const Color(0xff929292))),
                                           ],
                                           style: customTheme(context).regular.copyWith(fontSize: 11)),
                                     ),
@@ -365,9 +361,7 @@ class ProductTile extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 8.0, bottom: 8),
                   child: Text(
                     "* ${product.offerName!}",
-                    style: customTheme(context)
-                        .regular
-                        .copyWith(fontSize: 11, color: Colors.black, fontStyle: FontStyle.italic),
+                    style: customTheme(context).regular.copyWith(fontSize: 11, color: Colors.black, fontStyle: FontStyle.italic),
                   ),
                 )
             ],

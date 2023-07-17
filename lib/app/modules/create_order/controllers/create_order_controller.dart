@@ -45,10 +45,26 @@ class CreateOrderController extends GetxController {
   final DashboardController _dashboardController = Get.find();
   final OrdersController ordersController = Get.find();
 
+  ScrollController shopScrollController = ScrollController();
+  ScrollController productScrollController = ScrollController();
+
+  int pageNumber = 0;
+  int pageSize = 10;
+
   final count = 0.obs;
   @override
   void onInit() {
     clearProducts();
+    shopScrollController.addListener(() {
+      if (((shopScrollController.position.maxScrollExtent * .3) <= shopScrollController.position.pixels) && !isPaginating.value) {
+        paginateShops();
+      }
+    });
+    productScrollController.addListener(() {
+      if (((productScrollController.position.maxScrollExtent * .7) <= productScrollController.position.pixels) && !isPaginating.value) {
+        paginateProducts();
+      }
+    });
     fetchShops();
     super.onInit();
   }
@@ -83,10 +99,13 @@ class CreateOrderController extends GetxController {
   }
 
   Future<void> fetchShops() async {
+    query = null;
     isLoading(true);
     try {
-      var res = await _shopRepo.shopList(SharedPrefs.getUserId()!);
+      pageNumber = 0;
+      var res = await _shopRepo.shopList(SharedPrefs.getUserId()!, pageNumber: pageNumber, pageSize: pageSize);
       shopList(res.shopListResult?.shopList ?? []);
+      pageNumber = 1;
     } catch (error, stacktrace) {
       log("error", error: error, stackTrace: stacktrace);
     }
@@ -139,11 +158,7 @@ class CreateOrderController extends GetxController {
     cartproducts.forEach((key, textEditingControlller) {
       _products.addAll({key: int.parse(textEditingControlller.text)});
     });
-    var res = await _repository.createOrder(
-        shopId: (Get.arguments["shop"] as ShopList).id,
-        salesPersonId: SharedPrefs.getUserId(),
-        products: _products,
-        orderId: createOrderResponse?.result?.orderId);
+    var res = await _repository.createOrder(shopId: (Get.arguments["shop"] as ShopList).id, salesPersonId: SharedPrefs.getUserId(), products: _products, orderId: createOrderResponse?.result?.orderId);
     sortList();
 
     if (res.result?.status ?? false) {
@@ -164,11 +179,19 @@ class CreateOrderController extends GetxController {
     creatingOrder(false);
   }
 
+  int productPageNumber = 0;
+  int productPageSize = 10;
   Future<void> fetchProducts() async {
     isProductsLoading(true);
+    productQuery = null;
     try {
-      var res = await _productListRepo.productList();
+      productPageNumber = 0;
+      var res = await _productListRepo.productList(pageNumber: productPageNumber, pageSize: productPageSize);
       productList(res.productListResult?.productList ?? []);
+      if (productList.isEmpty) {
+        throw "";
+      }
+      productPageNumber = 1;
       _products = productList;
       for (var product in _products) {
         if (!cartproductsFocusNode.keys.contains(product.id)) cartproductsFocusNode[product.id!] = FocusNode();
@@ -179,6 +202,7 @@ class CreateOrderController extends GetxController {
     isProductsLoading(false);
   }
 
+  String? productQuery;
   searchProducts(String? query) async {
     isProductsLoading(true);
     try {
@@ -186,9 +210,22 @@ class CreateOrderController extends GetxController {
         fetchProducts();
         return;
       }
-      var res = await _productListRepo.searchProductList(query ?? "");
+      if (productQuery == query) {
+        isProductsLoading(false);
+        return;
+      }
+      productQuery = query;
+      productPageNumber = 0;
+      var res = await _productListRepo.searchProductList(query ?? "", pageNumber: productPageNumber, pageSize: productPageSize);
       productList(res.productListResult?.productList ?? []);
+      if (productList.isEmpty) {
+        throw "";
+      }
+      productPageNumber = 1;
       _products = productList;
+      for (var product in _products) {
+        if (!cartproductsFocusNode.keys.contains(product.id)) cartproductsFocusNode[product.id!] = FocusNode();
+      }
     } catch (error, stacktrace) {
       log("error", error: error, stackTrace: stacktrace);
     }
@@ -212,19 +249,28 @@ class CreateOrderController extends GetxController {
   }
 
   RxBool isSearching = RxBool(false);
+  String? query;
   Future<void> searchShop(String? query) async {
     isSearching(true);
-    var shopListResponse;
+
     if ((query ?? "").isEmpty) {
-      shopListResponse = await _shopRepo.shopList(SharedPrefs.getUserId()!);
+      await fetchShops();
     } else {
-      shopListResponse = await _shopRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {"name": query});
+      if (this.query == query) {
+        isSearching(false);
+        return;
+      }
+      this.query = query;
+      pageNumber = 0;
+      var shopListResponse = await _shopRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {"name": query}, pageNumber: pageNumber, pageSize: pageSize);
+      if (shopListResponse.shopListResult?.status ?? false) {
+        pageNumber = 1;
+        shopList(shopListResponse.shopListResult?.shopList ?? []);
+      } else {
+        shopList.clear();
+      }
     }
-    if (shopListResponse.shopListResult?.status ?? false) {
-      shopList(shopListResponse.shopListResult?.shopList ?? []);
-    } else {
-      shopList.clear();
-    }
+
     isSearching(false);
   }
 
@@ -304,5 +350,91 @@ class CreateOrderController extends GetxController {
         // ordersController.fetchOrdersList(orderType: OrderType.upcoming);
       }
     });
+  }
+
+  RxBool isPaginating = false.obs;
+  paginateShops() async {
+    isPaginating(true);
+    if (query?.isNotEmpty ?? false) {
+      await _paginateSearchShop();
+    } else {
+      await _paginateShopList();
+    }
+
+    isPaginating(false);
+  }
+
+  Future<void> _paginateShopList() async {
+    var shopListResponse = await _shopRepo.shopList(SharedPrefs.getUserId()!, pageNumber: pageNumber, pageSize: pageSize);
+    if ((shopListResponse.shopListResult?.status ?? false) && ((shopListResponse.shopListResult!.shopCount ?? 0) > 0)) {
+      pageNumber += 1;
+      shopList.addAll(shopListResponse.shopListResult!.shopList!);
+    }
+  }
+
+  Future<void> _paginateSearchShop() async {
+    var shopListResponse = await _shopRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {"name": query}, pageNumber: pageNumber, pageSize: pageSize);
+    if ((shopListResponse.shopListResult?.status ?? false) && ((shopListResponse.shopListResult!.shopCount ?? 0) > 0)) {
+      pageNumber += 1;
+      shopList.addAll(shopListResponse.shopListResult!.shopList!);
+    }
+  }
+
+  paginateProducts() async {
+    if (isPaginating.value) {
+      return;
+    }
+    isPaginating(true);
+    if (productQuery?.isNotEmpty ?? false) {
+      await _paginateSearchProducts();
+    } else {
+      await _paginateProducts();
+    }
+
+    isPaginating(false);
+  }
+
+  Future<void> _paginateSearchProducts() async {
+    try {
+      var res = await _productListRepo.searchProductList(productQuery ?? "", pageNumber: productPageNumber, pageSize: productPageSize);
+      var tempProductList = res.productListResult?.productList ?? [];
+      tempProductList = tempProductList.where((outer) => productList.firstWhereOrNull((inner) => inner.id == outer.id) == null).toList();
+      if (tempProductList.isEmpty) {
+        throw "";
+      }
+      productList.addAll(tempProductList);
+
+      productList(productList.toSet().toList());
+      productPageNumber += 1;
+      _products.addAll(tempProductList);
+      _products = _products.toSet().toList();
+      for (var product in _products) {
+        if (!cartproductsFocusNode.keys.contains(product.id)) cartproductsFocusNode[product.id!] = FocusNode();
+      }
+    } catch (error, stacktrace) {
+      log("error", error: error, stackTrace: stacktrace);
+    }
+  }
+
+  Future<void> _paginateProducts() async {
+    try {
+      var res = await _productListRepo.productList(pageNumber: productPageNumber, pageSize: productPageSize);
+      var tempProductList = res.productListResult?.productList ?? [];
+      // tempProductList = tempProductList.where((outer) => productList.firstWhereOrNull((inner) => inner.id == outer.id) == null).toList();
+      if (tempProductList.isEmpty) {
+        throw "";
+      }
+      productList.addAll(tempProductList);
+
+      productList(productList.toSet().toList());
+      productPageNumber += 1;
+      _products.addAll(tempProductList);
+      _products = _products.toSet().toList();
+      for (var product in _products) {
+        if (!cartproductsFocusNode.keys.contains(product.id)) cartproductsFocusNode[product.id!] = FocusNode();
+      }
+    } catch (error, stacktrace) {
+      log("error", error: error, stackTrace: stacktrace);
+    }
   }
 }

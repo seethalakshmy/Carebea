@@ -9,14 +9,23 @@ class OrdersController extends GetxController {
   OrderListResponse? allorderListResponse;
   RxBool isOrdersLoaded = false.obs;
   RxBool isFilterClick = false.obs;
-  List<History> allOrders = [];
+  RxList<History> allOrders = RxList<History>();
   FilterVals? filterVals;
   OrderType selectedOrderType = OrderType.previous;
   late TabController tabController1;
+
+  int pageSize = 10;
+  int pageNumber = 0;
+
+  ScrollController scrollController = ScrollController();
   @override
   void onInit() {
     fetchOrdersList(orderType: selectedOrderType);
-
+    scrollController.addListener(() {
+      if (((scrollController.position.maxScrollExtent * .7) <= scrollController.position.pixels) && !isPaginating.value) {
+        paginate();
+      }
+    });
     super.onInit();
   }
 
@@ -34,13 +43,23 @@ class OrdersController extends GetxController {
     isOrdersLoaded(true);
     allOrders.clear();
     filterSelected("");
+    query = null;
+    pageNumber = 0;
     selectedOrderType = orderType;
-    allorderListResponse = await orderListRepo.allOrdersList(SharedPrefs.getUserId()!, getOrdertypeString(orderType));
+    allorderListResponse = await orderListRepo.allOrdersList(
+      SharedPrefs.getUserId()!,
+      getOrdertypeString(orderType),
+      pageNumber: pageNumber,
+      pageSize: pageSize,
+    );
     if (allorderListResponse?.orderListResult?.status ?? false) {
-      allOrders = allorderListResponse?.orderListResult?.history ?? [];
+      allOrders(allorderListResponse?.orderListResult?.history ?? []);
+      if (allOrders.isNotEmpty) {
+        pageNumber = 1;
+      }
       filterVals = allorderListResponse!.orderListResult!.filterVals;
     } else {
-      allOrders = [];
+      allOrders.clear();
     }
 
     isOrdersLoaded(false);
@@ -50,12 +69,21 @@ class OrdersController extends GetxController {
   filterOrders(String filterName, int filterId) async {
     allOrders.clear();
     isFilterClick(true);
+    pageNumber = 0;
     filterSelected("$filterName-$filterId");
     var orderResponse = await orderListRepo.allOrdersList(
-        SharedPrefs.getUserId()!, getOrdertypeString(selectedOrderType),
-        filtername: filterName, filterid: filterId);
+      SharedPrefs.getUserId()!,
+      getOrdertypeString(selectedOrderType),
+      filtername: filterName,
+      filterid: filterId,
+      pageNumber: pageNumber,
+      pageSize: pageSize,
+    );
     if (orderResponse.orderListResult?.status ?? false) {
-      allOrders = orderResponse.orderListResult?.history ?? [];
+      allOrders(orderResponse.orderListResult?.history ?? []);
+      if (allOrders.isNotEmpty) {
+        pageNumber = 1;
+      }
     }
     isFilterClick(false);
   }
@@ -64,16 +92,101 @@ class OrdersController extends GetxController {
     await fetchOrdersList(orderType: selectedOrderType);
   }
 
+  String? query;
   Future<void> searchOrders(String? query) async {
     isFilterClick(true);
-    var temp = await orderListRepo.allOrdersList(SharedPrefs.getUserId()!, getOrdertypeString(selectedOrderType),
-        query: query);
+    pageNumber = 0;
+    this.query = query;
+    if (query?.isEmpty ?? true) {
+      await fetchOrdersList(orderType: selectedOrderType);
+      isFilterClick(false);
+      return;
+    }
+    var temp = await orderListRepo.allOrdersList(
+      SharedPrefs.getUserId()!,
+      getOrdertypeString(selectedOrderType),
+      query: query,
+      pageNumber: pageNumber,
+      pageSize: pageSize,
+    );
     if (temp.orderListResult?.status ?? false) {
-      allOrders = temp.orderListResult?.history ?? [];
+      allOrders(allorderListResponse?.orderListResult?.history ?? []);
+      if (allOrders.isNotEmpty) {
+        pageNumber = 1;
+      }
     } else {
-      allOrders = [];
+      allOrders.clear();
     }
     isFilterClick(false);
+  }
+
+  RxBool isPaginating = false.obs;
+  paginate() async {
+    isPaginating(true);
+    if (query?.isNotEmpty ?? false) {
+      await _paginateSearchOrders();
+    } else if (filterSelected.isNotEmpty) {
+      await _paginateFilterOrders();
+    } else {
+      await _paginateOrderList();
+    }
+
+    isPaginating(false);
+  }
+
+  Future<void> _paginateOrderList() async {
+    allorderListResponse = await orderListRepo.allOrdersList(
+      SharedPrefs.getUserId()!,
+      getOrdertypeString(selectedOrderType),
+      pageNumber: pageNumber,
+      pageSize: pageSize,
+    );
+    if (allorderListResponse?.orderListResult?.status ?? false) {
+      allOrders.addAll(allorderListResponse?.orderListResult?.history ?? []);
+      if ((allorderListResponse?.orderListResult?.history ?? []).isNotEmpty) {
+        pageNumber += 1;
+      }
+    } else {
+      allOrders.clear();
+    }
+  }
+
+  Future<void> _paginateFilterOrders() async {
+    var split = filterSelected.split("-");
+    var allorderListResponse = await orderListRepo.allOrdersList(
+      SharedPrefs.getUserId()!,
+      getOrdertypeString(selectedOrderType),
+      filtername: split.first,
+      filterid: int.parse(split.last),
+      pageNumber: pageNumber,
+      pageSize: pageSize,
+    );
+    if (allorderListResponse.orderListResult?.status ?? false) {
+      allOrders.addAll(allorderListResponse.orderListResult?.history ?? []);
+      if ((allorderListResponse.orderListResult?.history ?? []).isNotEmpty) {
+        pageNumber += 1;
+      }
+    } else {
+      allOrders.clear();
+    }
+  }
+
+  Future<void> _paginateSearchOrders() async {
+    var allorderListResponse = await orderListRepo.allOrdersList(
+      SharedPrefs.getUserId()!,
+      getOrdertypeString(selectedOrderType),
+      query: query,
+      pageNumber: pageNumber,
+      pageSize: pageSize,
+    );
+    if (allorderListResponse.orderListResult?.status ?? false) {
+      allOrders.addAll(allorderListResponse.orderListResult?.history ?? []);
+      if ((allorderListResponse.orderListResult?.history ?? []).isNotEmpty) {
+        pageNumber += 1;
+      }
+    } else {
+      allOrders.clear();
+    }
   }
 }
 

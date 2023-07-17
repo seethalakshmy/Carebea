@@ -29,9 +29,7 @@ class BottomNavBarView extends GetView<DashboardController> {
             Text(
               'Home',
               style: customTheme(context).medium.copyWith(
-                    color: controller.currentScreenIndex.value == 0
-                        ? customTheme(context).primary
-                        : const Color(0xff929292),
+                    color: controller.currentScreenIndex.value == 0 ? customTheme(context).primary : const Color(0xff929292),
                     fontSize: 12,
                   ),
             ),
@@ -49,9 +47,7 @@ class BottomNavBarView extends GetView<DashboardController> {
             Text(
               'Shops',
               style: customTheme(context).medium.copyWith(
-                    color: controller.currentScreenIndex.value == 1
-                        ? customTheme(context).primary
-                        : const Color(0xff929292),
+                    color: controller.currentScreenIndex.value == 1 ? customTheme(context).primary : const Color(0xff929292),
                     fontSize: 12,
                   ),
             ),
@@ -69,9 +65,7 @@ class BottomNavBarView extends GetView<DashboardController> {
             Text(
               'Orders',
               style: customTheme(context).medium.copyWith(
-                    color: controller.currentScreenIndex.value == 2
-                        ? customTheme(context).primary
-                        : const Color(0xff929292),
+                    color: controller.currentScreenIndex.value == 2 ? customTheme(context).primary : const Color(0xff929292),
                     fontSize: 12,
                   ),
             ),
@@ -80,25 +74,32 @@ class BottomNavBarView extends GetView<DashboardController> {
         InkWell(
           onTap: () => controller.bottomNavViewChange(3),
           child: Column(children: [
-            CircleAvatar(
-              radius: 15,
-              backgroundColor:
-                  controller.currentScreenIndex.value == 3 ? customTheme(context).primary : const Color(0xff929292),
-              foregroundImage:
-                  NetworkImage(controller.profileController.profileResponse?.profileResponseResult?.imgUrl ?? ""),
-              child: Icon(
-                Icons.account_circle,
-                size: 30,
-                color:
-                    controller.currentScreenIndex.value == 3 ? customTheme(context).primary : const Color(0xff929292),
+            if (controller.profileController.profileResponse?.profileResponseResult?.imgUrl?.isEmpty ?? true)
+              CircleAvatar(
+                radius: 15,
+                backgroundColor: controller.currentScreenIndex.value == 3 ? customTheme(context).primary : const Color(0xff929292),
+                child: Icon(
+                  Icons.account_circle,
+                  size: 30,
+                  color: controller.currentScreenIndex.value == 3 ? customTheme(context).primary : const Color(0xff929292),
+                ),
+              )
+            else
+              CircleAvatar(
+                radius: 15,
+                backgroundColor: controller.currentScreenIndex.value == 3 ? customTheme(context).primary : const Color(0xff929292),
+                foregroundImage: NetworkImage(controller.profileController.profileResponse?.profileResponseResult?.imgUrl ?? ""),
+                onForegroundImageError: (exception, stackTrace) {},
+                child: Icon(
+                  Icons.account_circle,
+                  size: 30,
+                  color: controller.currentScreenIndex.value == 3 ? customTheme(context).primary : const Color(0xff929292),
+                ),
               ),
-            ),
             Text(
               'Profile',
               style: customTheme(context).medium.copyWith(
-                    color: controller.currentScreenIndex.value == 3
-                        ? customTheme(context).primary
-                        : const Color(0xff929292),
+                    color: controller.currentScreenIndex.value == 3 ? customTheme(context).primary : const Color(0xff929292),
                     fontSize: 12,
                   ),
             ),

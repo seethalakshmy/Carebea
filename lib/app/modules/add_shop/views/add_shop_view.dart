@@ -92,9 +92,7 @@ class AddShopView extends GetView<AddShopController> {
                     text: 'Last name',
                     style: customTheme(context).regular.copyWith(fontSize: 12),
                     children: const <TextSpan>[
-                      TextSpan(
-                          text: '  (location should be the last name)',
-                          style: TextStyle(color: Colors.black54, fontStyle: FontStyle.italic)),
+                      TextSpan(text: '  (location should be the last name)', style: TextStyle(color: Colors.black54, fontStyle: FontStyle.italic)),
                     ],
                   )),
                   const SizedBox(
@@ -195,34 +193,45 @@ class AddShopView extends GetView<AddShopController> {
                     height: 10,
                   ),
 
-                  RichText(
-                      text: TextSpan(
-                    text: 'GST',
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                    children: const <TextSpan>[
-                      TextSpan(text: '\*', style: TextStyle(color: Colors.blue)),
-                    ],
-                  )),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  CustomTextField(
-                    // inputFormatters: [
-                    //   FilteringTextInputFormatter.allow(RegExp(gstRegexp))
-                    // ],
-                    textcontroller: controller.gst,
-                    validaton: (value) {
-                      if (controller.selectedRadio.value == 1 || (value != null && value.trim().isNotEmpty)) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'GST Number can\'t be empty';
-                        }
-                        if (!RegExp(gstRegexp).hasMatch(value)) {
-                          return 'Invalid GST Number';
-                        }
-                        return null;
-                      }
-                    },
-                  ),
+                  Obx(() {
+                    if (controller.selectedRadio.value == 2) {
+                      return const SizedBox.shrink();
+                    }
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        RichText(
+                            text: TextSpan(
+                          text: 'GST',
+                          style: customTheme(context).regular.copyWith(fontSize: 12),
+                          children: const <TextSpan>[
+                            TextSpan(text: '\*', style: TextStyle(color: Colors.blue)),
+                          ],
+                        )),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        CustomTextField(
+                          // inputFormatters: [
+                          //   FilteringTextInputFormatter.allow(RegExp(gstRegexp))
+                          // ],
+                          textcontroller: controller.gst,
+                          validaton: (value) {
+                            if (controller.selectedRadio.value == 1 || (value != null && value.trim().isNotEmpty)) {
+                              if (value == null || value.trim().isEmpty) {
+                                return 'GST Number can\'t be empty';
+                              }
+                              if (!RegExp(gstRegexp).hasMatch(value)) {
+                                return 'Invalid GST Number';
+                              }
+                              return null;
+                            }
+                          },
+                        ),
+                      ],
+                    );
+                  }),
                   const SizedBox(
                     height: 25,
                   ),
@@ -240,9 +249,7 @@ class AddShopView extends GetView<AddShopController> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            MapLocationView(
-                                latitude: controller.currentLocation!.latitude!,
-                                longitude: controller.currentLocation!.longitude!),
+                            MapLocationView(latitude: controller.currentLocation!.latitude!, longitude: controller.currentLocation!.longitude!),
                             Padding(
                               padding: const EdgeInsets.only(top: 20),
                               child: InkWell(
@@ -255,9 +262,7 @@ class AddShopView extends GetView<AddShopController> {
                                       Icons.add,
                                       color: Theme.of(context).extension<CustomTheme>()!.primary,
                                     ),
-                                    Text('Update shop location',
-                                        style: TextStyle(
-                                            fontSize: 12, color: Theme.of(context).extension<CustomTheme>()!.primary))
+                                    Text('Update shop location', style: TextStyle(fontSize: 12, color: Theme.of(context).extension<CustomTheme>()!.primary))
                                   ],
                                 ),
                               ),
@@ -278,9 +283,7 @@ class AddShopView extends GetView<AddShopController> {
                               Icons.add,
                               color: Theme.of(context).extension<CustomTheme>()!.primary,
                             ),
-                            Text('Add shop location',
-                                style:
-                                    TextStyle(fontSize: 12, color: Theme.of(context).extension<CustomTheme>()!.primary))
+                            Text('Add shop location', style: TextStyle(fontSize: 12, color: Theme.of(context).extension<CustomTheme>()!.primary))
                           ],
                         ),
                       ),
@@ -677,9 +680,7 @@ class AddShopView extends GetView<AddShopController> {
                     text: 'Opening balance',
                     style: customTheme(context).regular.copyWith(fontSize: 12),
                     children: const <TextSpan>[
-                      TextSpan(
-                          text: '  (mandatory only for existing shops)',
-                          style: TextStyle(color: Colors.black54, fontStyle: FontStyle.italic)),
+                      TextSpan(text: '  (mandatory only for existing shops)', style: TextStyle(color: Colors.black54, fontStyle: FontStyle.italic)),
                     ],
                   )),
                   const SizedBox(
