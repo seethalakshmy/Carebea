@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:admin_580_tech/domain/admin_creation/model/admin_view_response.dart';
 import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
 import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_earning_list_response.dart';
 import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_service_list_response.dart';
@@ -27,6 +28,7 @@ import '../../presentation/on_boarding/modules/personal_details/models/state_lis
 import '../../presentation/on_boarding/modules/preference/models/get_preference_response.dart';
 import '../../presentation/on_boarding/modules/preference/models/language_list_response.dart';
 import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
+import '../admins/model/admin_get_response.dart';
 import '../caregiver_verification/model/reject_params.dart';
 import '../caregivers/model/caregiver_response.dart';
 import '../on_boarding/models/common_response.dart';
@@ -242,7 +244,7 @@ abstract class ApiClient {
       @Field('limit') int limit);
 
   @POST("/admin/add-role")
-  Future<CommonResponse> addRoleUpdateRole(
+  Future<CommonResponseUse> addRoleUpdateRole(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('role') String role,
@@ -257,7 +259,7 @@ abstract class ApiClient {
       @Header("Authorization") String token, @Field('user_id') String userId);
 
   @POST("/admin/delete-role")
-  Future<CommonResponse> deleteRole(@Header("Authorization") String token,
+  Future<CommonResponseUse> deleteRole(@Header("Authorization") String token,
       @Field('user_id') String userId, @Field('role_id') String roleId);
 
   @POST("/admin/view-role")
@@ -268,15 +270,46 @@ abstract class ApiClient {
   Future<GetRoleResponse> getRoles(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
-      @Field('page') int page,
-      @Field('limit') int limit,
+      @Field('page') int? page,
+      @Field('limit') int? limit,
       @Field('search_term') String? searchTerm);
 
   @POST("/admin/super-admin/create-admin")
-  Future<CommonResponse> addAdmin(
+  Future<CommonResponseUse> addAdmin(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('first_name') String firstName,
+      @Field('last_name') String lastName,
+      @Field('email') String email,
+      @Field('mobile_number') String? mobileNumber,
+      @Field('user_role_id') String? roleId);
+
+  @POST("/admin/edit-admin")
+  Future<CommonResponseUse> updateAdmin(
+      @Field('user_id') String userId,
+      @Field('admin_id') String adminId,
       @Header("Authorization") String token,
       @Field('first_name') String firstName,
       @Field('last_name') String lastName,
+      @Field('email') String email,
       @Field('mobile_number') String? mobileNumber,
       @Field('user_role_id') String? roleId);
+
+  @POST("/admin/get-admins")
+  Future<AdminGetResponse> getAdmins(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit,
+      @Field('status_id') String? statusID,
+      @Field('role_id') String? roleID,
+      @Field('search_term') String? searchTerm);
+
+  @POST("/admin/delete-admin")
+  Future<CommonResponseUse> deleteAdmin(@Header("Authorization") String token,
+      @Field('user_id') String userId, @Field('admin_id') String? adminId);
+
+  @POST("/admin/view-admin")
+  Future<AdminViewResponse> viewAdmin(@Header("Authorization") String token,
+      @Field('user_id') String userId, @Field('admin_id') String adminId);
 }

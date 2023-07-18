@@ -7,7 +7,6 @@ import 'package:admin_580_tech/infrastructure/caregiver_verification/caregivers_
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_web_plugins/url_strategy.dart';
 
 import 'application/bloc/form_validation/form_validation_bloc.dart';
 import 'core/config/environment.dart';

@@ -45,7 +45,7 @@ class RolesBloc extends Bloc<RolesEvent, RolesState> {
   }
 
   _deleteRoles(_RoleDelete event, Emitter<RolesState> emit) async {
-    final Either<ApiErrorHandler, CommonResponse> homeResult =
+    final Either<ApiErrorHandler, CommonResponseUse> homeResult =
         await rolesRepository.deleteRole(
             roleID: event.roleId, userID: event.roleId);
     RolesState homeState = homeResult.fold((l) {

@@ -423,7 +423,7 @@ abstract class _RoleDelete implements RolesEvent {
 mixin _$RolesState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
-  CommonResponse? get deleteResponse => throw _privateConstructorUsedError;
+  CommonResponseUse? get deleteResponse => throw _privateConstructorUsedError;
   GetRoleResponse? get getRolesResponse => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   bool get isClientError => throw _privateConstructorUsedError;
@@ -442,7 +442,7 @@ abstract class $RolesStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       bool isError,
-      CommonResponse? deleteResponse,
+      CommonResponseUse? deleteResponse,
       GetRoleResponse? getRolesResponse,
       String? error,
       bool isClientError});
@@ -480,7 +480,7 @@ class _$RolesStateCopyWithImpl<$Res, $Val extends RolesState>
       deleteResponse: freezed == deleteResponse
           ? _value.deleteResponse
           : deleteResponse // ignore: cast_nullable_to_non_nullable
-              as CommonResponse?,
+              as CommonResponseUse?,
       getRolesResponse: freezed == getRolesResponse
           ? _value.getRolesResponse
           : getRolesResponse // ignore: cast_nullable_to_non_nullable
@@ -508,7 +508,7 @@ abstract class _$$_RolesStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       bool isError,
-      CommonResponse? deleteResponse,
+      CommonResponseUse? deleteResponse,
       GetRoleResponse? getRolesResponse,
       String? error,
       bool isClientError});
@@ -544,7 +544,7 @@ class __$$_RolesStateCopyWithImpl<$Res>
       deleteResponse: freezed == deleteResponse
           ? _value.deleteResponse
           : deleteResponse // ignore: cast_nullable_to_non_nullable
-              as CommonResponse?,
+              as CommonResponseUse?,
       getRolesResponse: freezed == getRolesResponse
           ? _value.getRolesResponse
           : getRolesResponse // ignore: cast_nullable_to_non_nullable
@@ -577,7 +577,7 @@ class _$_RolesState implements _RolesState {
   @override
   final bool isError;
   @override
-  final CommonResponse? deleteResponse;
+  final CommonResponseUse? deleteResponse;
   @override
   final GetRoleResponse? getRolesResponse;
   @override
@@ -623,7 +623,7 @@ abstract class _RolesState implements RolesState {
   const factory _RolesState(
       {required final bool isLoading,
       required final bool isError,
-      required final CommonResponse? deleteResponse,
+      required final CommonResponseUse? deleteResponse,
       required final GetRoleResponse? getRolesResponse,
       required final String? error,
       final bool isClientError}) = _$_RolesState;
@@ -633,7 +633,7 @@ abstract class _RolesState implements RolesState {
   @override
   bool get isError;
   @override
-  CommonResponse? get deleteResponse;
+  CommonResponseUse? get deleteResponse;
   @override
   GetRoleResponse? get getRolesResponse;
   @override

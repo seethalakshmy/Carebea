@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'role_creation_bloc.dart';
+part of 'admin_creation_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -18,44 +18,68 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AdminCreationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? roleId, BuildContext context,
-            String firstName, String lastName, String email, String dob)
-        addAdmin,
-    required TResult Function(String userId) getRoles,
     required TResult Function(
             String userId,
-            String? roleId,
+            String roleId,
             BuildContext context,
             String firstName,
             String lastName,
             String email,
-            String dob)
+            String mobile)
+        addAdmin,
+    required TResult Function(String userId) getRoles,
+    required TResult Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)
         updateAdmin,
-    required TResult Function(String userId) viewAdmin,
+    required TResult Function(String userId, String adminId) viewAdmin,
+    required TResult Function(bool value) dropDownErrorDisplay,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? roleId, BuildContext context, String firstName,
-            String lastName, String email, String dob)?
+    TResult? Function(String userId, String roleId, BuildContext context,
+            String firstName, String lastName, String email, String mobile)?
         addAdmin,
     TResult? Function(String userId)? getRoles,
-    TResult? Function(String userId, String? roleId, BuildContext context,
-            String firstName, String lastName, String email, String dob)?
+    TResult? Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)?
         updateAdmin,
-    TResult? Function(String userId)? viewAdmin,
+    TResult? Function(String userId, String adminId)? viewAdmin,
+    TResult? Function(bool value)? dropDownErrorDisplay,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? roleId, BuildContext context, String firstName,
-            String lastName, String email, String dob)?
+    TResult Function(String userId, String roleId, BuildContext context,
+            String firstName, String lastName, String email, String mobile)?
         addAdmin,
     TResult Function(String userId)? getRoles,
-    TResult Function(String userId, String? roleId, BuildContext context,
-            String firstName, String lastName, String email, String dob)?
+    TResult Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)?
         updateAdmin,
-    TResult Function(String userId)? viewAdmin,
+    TResult Function(String userId, String adminId)? viewAdmin,
+    TResult Function(bool value)? dropDownErrorDisplay,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -65,6 +89,7 @@ mixin _$AdminCreationEvent {
     required TResult Function(_GetRoles value) getRoles,
     required TResult Function(_UpdateAdmin value) updateAdmin,
     required TResult Function(_ViewAdmin value) viewAdmin,
+    required TResult Function(_DropDownErrorDisplay value) dropDownErrorDisplay,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -73,6 +98,7 @@ mixin _$AdminCreationEvent {
     TResult? Function(_GetRoles value)? getRoles,
     TResult? Function(_UpdateAdmin value)? updateAdmin,
     TResult? Function(_ViewAdmin value)? viewAdmin,
+    TResult? Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,6 +107,7 @@ mixin _$AdminCreationEvent {
     TResult Function(_GetRoles value)? getRoles,
     TResult Function(_UpdateAdmin value)? updateAdmin,
     TResult Function(_ViewAdmin value)? viewAdmin,
+    TResult Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -111,12 +138,13 @@ abstract class _$$_AddAdminCopyWith<$Res> {
       __$$_AddAdminCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {String? roleId,
+      {String userId,
+      String roleId,
       BuildContext context,
       String firstName,
       String lastName,
       String email,
-      String dob});
+      String mobile});
 }
 
 /// @nodoc
@@ -130,18 +158,23 @@ class __$$_AddAdminCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? roleId = freezed,
+    Object? userId = null,
+    Object? roleId = null,
     Object? context = null,
     Object? firstName = null,
     Object? lastName = null,
     Object? email = null,
-    Object? dob = null,
+    Object? mobile = null,
   }) {
     return _then(_$_AddAdmin(
-      roleId: freezed == roleId
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      roleId: null == roleId
           ? _value.roleId
           : roleId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       context: null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
@@ -158,9 +191,9 @@ class __$$_AddAdminCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      dob: null == dob
-          ? _value.dob
-          : dob // ignore: cast_nullable_to_non_nullable
+      mobile: null == mobile
+          ? _value.mobile
+          : mobile // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -170,15 +203,18 @@ class __$$_AddAdminCopyWithImpl<$Res>
 
 class _$_AddAdmin implements _AddAdmin {
   const _$_AddAdmin(
-      {required this.roleId,
+      {required this.userId,
+      required this.roleId,
       required this.context,
       required this.firstName,
       required this.lastName,
       required this.email,
-      required this.dob});
+      required this.mobile});
 
   @override
-  final String? roleId;
+  final String userId;
+  @override
+  final String roleId;
   @override
   final BuildContext context;
   @override
@@ -188,11 +224,11 @@ class _$_AddAdmin implements _AddAdmin {
   @override
   final String email;
   @override
-  final String dob;
+  final String mobile;
 
   @override
   String toString() {
-    return 'AdminCreationEvent.addAdmin(roleId: $roleId, context: $context, firstName: $firstName, lastName: $lastName, email: $email, dob: $dob)';
+    return 'AdminCreationEvent.addAdmin(userId: $userId, roleId: $roleId, context: $context, firstName: $firstName, lastName: $lastName, email: $email, mobile: $mobile)';
   }
 
   @override
@@ -200,6 +236,7 @@ class _$_AddAdmin implements _AddAdmin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AddAdmin &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.roleId, roleId) || other.roleId == roleId) &&
             (identical(other.context, context) || other.context == context) &&
             (identical(other.firstName, firstName) ||
@@ -207,12 +244,12 @@ class _$_AddAdmin implements _AddAdmin {
             (identical(other.lastName, lastName) ||
                 other.lastName == lastName) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.dob, dob) || other.dob == dob));
+            (identical(other.mobile, mobile) || other.mobile == mobile));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, roleId, context, firstName, lastName, email, dob);
+      runtimeType, userId, roleId, context, firstName, lastName, email, mobile);
 
   @JsonKey(ignore: true)
   @override
@@ -223,54 +260,81 @@ class _$_AddAdmin implements _AddAdmin {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? roleId, BuildContext context,
-            String firstName, String lastName, String email, String dob)
-        addAdmin,
-    required TResult Function(String userId) getRoles,
     required TResult Function(
             String userId,
-            String? roleId,
+            String roleId,
             BuildContext context,
             String firstName,
             String lastName,
             String email,
-            String dob)
+            String mobile)
+        addAdmin,
+    required TResult Function(String userId) getRoles,
+    required TResult Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)
         updateAdmin,
-    required TResult Function(String userId) viewAdmin,
+    required TResult Function(String userId, String adminId) viewAdmin,
+    required TResult Function(bool value) dropDownErrorDisplay,
   }) {
-    return addAdmin(roleId, context, firstName, lastName, email, dob);
+    return addAdmin(
+        userId, roleId, context, firstName, lastName, email, mobile);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? roleId, BuildContext context, String firstName,
-            String lastName, String email, String dob)?
+    TResult? Function(String userId, String roleId, BuildContext context,
+            String firstName, String lastName, String email, String mobile)?
         addAdmin,
     TResult? Function(String userId)? getRoles,
-    TResult? Function(String userId, String? roleId, BuildContext context,
-            String firstName, String lastName, String email, String dob)?
+    TResult? Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)?
         updateAdmin,
-    TResult? Function(String userId)? viewAdmin,
+    TResult? Function(String userId, String adminId)? viewAdmin,
+    TResult? Function(bool value)? dropDownErrorDisplay,
   }) {
-    return addAdmin?.call(roleId, context, firstName, lastName, email, dob);
+    return addAdmin?.call(
+        userId, roleId, context, firstName, lastName, email, mobile);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? roleId, BuildContext context, String firstName,
-            String lastName, String email, String dob)?
+    TResult Function(String userId, String roleId, BuildContext context,
+            String firstName, String lastName, String email, String mobile)?
         addAdmin,
     TResult Function(String userId)? getRoles,
-    TResult Function(String userId, String? roleId, BuildContext context,
-            String firstName, String lastName, String email, String dob)?
+    TResult Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)?
         updateAdmin,
-    TResult Function(String userId)? viewAdmin,
+    TResult Function(String userId, String adminId)? viewAdmin,
+    TResult Function(bool value)? dropDownErrorDisplay,
     required TResult orElse(),
   }) {
     if (addAdmin != null) {
-      return addAdmin(roleId, context, firstName, lastName, email, dob);
+      return addAdmin(
+          userId, roleId, context, firstName, lastName, email, mobile);
     }
     return orElse();
   }
@@ -282,6 +346,7 @@ class _$_AddAdmin implements _AddAdmin {
     required TResult Function(_GetRoles value) getRoles,
     required TResult Function(_UpdateAdmin value) updateAdmin,
     required TResult Function(_ViewAdmin value) viewAdmin,
+    required TResult Function(_DropDownErrorDisplay value) dropDownErrorDisplay,
   }) {
     return addAdmin(this);
   }
@@ -293,6 +358,7 @@ class _$_AddAdmin implements _AddAdmin {
     TResult? Function(_GetRoles value)? getRoles,
     TResult? Function(_UpdateAdmin value)? updateAdmin,
     TResult? Function(_ViewAdmin value)? viewAdmin,
+    TResult? Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
   }) {
     return addAdmin?.call(this);
   }
@@ -304,6 +370,7 @@ class _$_AddAdmin implements _AddAdmin {
     TResult Function(_GetRoles value)? getRoles,
     TResult Function(_UpdateAdmin value)? updateAdmin,
     TResult Function(_ViewAdmin value)? viewAdmin,
+    TResult Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
     required TResult orElse(),
   }) {
     if (addAdmin != null) {
@@ -315,19 +382,21 @@ class _$_AddAdmin implements _AddAdmin {
 
 abstract class _AddAdmin implements AdminCreationEvent {
   const factory _AddAdmin(
-      {required final String? roleId,
+      {required final String userId,
+      required final String roleId,
       required final BuildContext context,
       required final String firstName,
       required final String lastName,
       required final String email,
-      required final String dob}) = _$_AddAdmin;
+      required final String mobile}) = _$_AddAdmin;
 
-  String? get roleId;
+  String get userId;
+  String get roleId;
   BuildContext get context;
   String get firstName;
   String get lastName;
   String get email;
-  String get dob;
+  String get mobile;
   @JsonKey(ignore: true)
   _$$_AddAdminCopyWith<_$_AddAdmin> get copyWith =>
       throw _privateConstructorUsedError;
@@ -397,20 +466,28 @@ class _$_GetRoles implements _GetRoles {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? roleId, BuildContext context,
-            String firstName, String lastName, String email, String dob)
-        addAdmin,
-    required TResult Function(String userId) getRoles,
     required TResult Function(
             String userId,
-            String? roleId,
+            String roleId,
             BuildContext context,
             String firstName,
             String lastName,
             String email,
-            String dob)
+            String mobile)
+        addAdmin,
+    required TResult Function(String userId) getRoles,
+    required TResult Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)
         updateAdmin,
-    required TResult Function(String userId) viewAdmin,
+    required TResult Function(String userId, String adminId) viewAdmin,
+    required TResult Function(bool value) dropDownErrorDisplay,
   }) {
     return getRoles(userId);
   }
@@ -418,14 +495,22 @@ class _$_GetRoles implements _GetRoles {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? roleId, BuildContext context, String firstName,
-            String lastName, String email, String dob)?
+    TResult? Function(String userId, String roleId, BuildContext context,
+            String firstName, String lastName, String email, String mobile)?
         addAdmin,
     TResult? Function(String userId)? getRoles,
-    TResult? Function(String userId, String? roleId, BuildContext context,
-            String firstName, String lastName, String email, String dob)?
+    TResult? Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)?
         updateAdmin,
-    TResult? Function(String userId)? viewAdmin,
+    TResult? Function(String userId, String adminId)? viewAdmin,
+    TResult? Function(bool value)? dropDownErrorDisplay,
   }) {
     return getRoles?.call(userId);
   }
@@ -433,14 +518,22 @@ class _$_GetRoles implements _GetRoles {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? roleId, BuildContext context, String firstName,
-            String lastName, String email, String dob)?
+    TResult Function(String userId, String roleId, BuildContext context,
+            String firstName, String lastName, String email, String mobile)?
         addAdmin,
     TResult Function(String userId)? getRoles,
-    TResult Function(String userId, String? roleId, BuildContext context,
-            String firstName, String lastName, String email, String dob)?
+    TResult Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)?
         updateAdmin,
-    TResult Function(String userId)? viewAdmin,
+    TResult Function(String userId, String adminId)? viewAdmin,
+    TResult Function(bool value)? dropDownErrorDisplay,
     required TResult orElse(),
   }) {
     if (getRoles != null) {
@@ -456,6 +549,7 @@ class _$_GetRoles implements _GetRoles {
     required TResult Function(_GetRoles value) getRoles,
     required TResult Function(_UpdateAdmin value) updateAdmin,
     required TResult Function(_ViewAdmin value) viewAdmin,
+    required TResult Function(_DropDownErrorDisplay value) dropDownErrorDisplay,
   }) {
     return getRoles(this);
   }
@@ -467,6 +561,7 @@ class _$_GetRoles implements _GetRoles {
     TResult? Function(_GetRoles value)? getRoles,
     TResult? Function(_UpdateAdmin value)? updateAdmin,
     TResult? Function(_ViewAdmin value)? viewAdmin,
+    TResult? Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
   }) {
     return getRoles?.call(this);
   }
@@ -478,6 +573,7 @@ class _$_GetRoles implements _GetRoles {
     TResult Function(_GetRoles value)? getRoles,
     TResult Function(_UpdateAdmin value)? updateAdmin,
     TResult Function(_ViewAdmin value)? viewAdmin,
+    TResult Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
     required TResult orElse(),
   }) {
     if (getRoles != null) {
@@ -504,12 +600,13 @@ abstract class _$$_UpdateAdminCopyWith<$Res> {
   @useResult
   $Res call(
       {String userId,
-      String? roleId,
+      String adminId,
+      String roleId,
       BuildContext context,
       String firstName,
       String lastName,
       String email,
-      String dob});
+      String mobile});
 }
 
 /// @nodoc
@@ -524,22 +621,27 @@ class __$$_UpdateAdminCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = null,
-    Object? roleId = freezed,
+    Object? adminId = null,
+    Object? roleId = null,
     Object? context = null,
     Object? firstName = null,
     Object? lastName = null,
     Object? email = null,
-    Object? dob = null,
+    Object? mobile = null,
   }) {
     return _then(_$_UpdateAdmin(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      roleId: freezed == roleId
+      adminId: null == adminId
+          ? _value.adminId
+          : adminId // ignore: cast_nullable_to_non_nullable
+              as String,
+      roleId: null == roleId
           ? _value.roleId
           : roleId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       context: null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
@@ -556,9 +658,9 @@ class __$$_UpdateAdminCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      dob: null == dob
-          ? _value.dob
-          : dob // ignore: cast_nullable_to_non_nullable
+      mobile: null == mobile
+          ? _value.mobile
+          : mobile // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -569,17 +671,20 @@ class __$$_UpdateAdminCopyWithImpl<$Res>
 class _$_UpdateAdmin implements _UpdateAdmin {
   const _$_UpdateAdmin(
       {required this.userId,
+      required this.adminId,
       required this.roleId,
       required this.context,
       required this.firstName,
       required this.lastName,
       required this.email,
-      required this.dob});
+      required this.mobile});
 
   @override
   final String userId;
   @override
-  final String? roleId;
+  final String adminId;
+  @override
+  final String roleId;
   @override
   final BuildContext context;
   @override
@@ -589,11 +694,11 @@ class _$_UpdateAdmin implements _UpdateAdmin {
   @override
   final String email;
   @override
-  final String dob;
+  final String mobile;
 
   @override
   String toString() {
-    return 'AdminCreationEvent.updateAdmin(userId: $userId, roleId: $roleId, context: $context, firstName: $firstName, lastName: $lastName, email: $email, dob: $dob)';
+    return 'AdminCreationEvent.updateAdmin(userId: $userId, adminId: $adminId, roleId: $roleId, context: $context, firstName: $firstName, lastName: $lastName, email: $email, mobile: $mobile)';
   }
 
   @override
@@ -602,6 +707,7 @@ class _$_UpdateAdmin implements _UpdateAdmin {
         (other.runtimeType == runtimeType &&
             other is _$_UpdateAdmin &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.adminId, adminId) || other.adminId == adminId) &&
             (identical(other.roleId, roleId) || other.roleId == roleId) &&
             (identical(other.context, context) || other.context == context) &&
             (identical(other.firstName, firstName) ||
@@ -609,12 +715,12 @@ class _$_UpdateAdmin implements _UpdateAdmin {
             (identical(other.lastName, lastName) ||
                 other.lastName == lastName) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.dob, dob) || other.dob == dob));
+            (identical(other.mobile, mobile) || other.mobile == mobile));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, userId, roleId, context, firstName, lastName, email, dob);
+  int get hashCode => Object.hash(runtimeType, userId, adminId, roleId, context,
+      firstName, lastName, email, mobile);
 
   @JsonKey(ignore: true)
   @override
@@ -625,57 +731,81 @@ class _$_UpdateAdmin implements _UpdateAdmin {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? roleId, BuildContext context,
-            String firstName, String lastName, String email, String dob)
-        addAdmin,
-    required TResult Function(String userId) getRoles,
     required TResult Function(
             String userId,
-            String? roleId,
+            String roleId,
             BuildContext context,
             String firstName,
             String lastName,
             String email,
-            String dob)
+            String mobile)
+        addAdmin,
+    required TResult Function(String userId) getRoles,
+    required TResult Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)
         updateAdmin,
-    required TResult Function(String userId) viewAdmin,
+    required TResult Function(String userId, String adminId) viewAdmin,
+    required TResult Function(bool value) dropDownErrorDisplay,
   }) {
     return updateAdmin(
-        userId, roleId, context, firstName, lastName, email, dob);
+        userId, adminId, roleId, context, firstName, lastName, email, mobile);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? roleId, BuildContext context, String firstName,
-            String lastName, String email, String dob)?
+    TResult? Function(String userId, String roleId, BuildContext context,
+            String firstName, String lastName, String email, String mobile)?
         addAdmin,
     TResult? Function(String userId)? getRoles,
-    TResult? Function(String userId, String? roleId, BuildContext context,
-            String firstName, String lastName, String email, String dob)?
+    TResult? Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)?
         updateAdmin,
-    TResult? Function(String userId)? viewAdmin,
+    TResult? Function(String userId, String adminId)? viewAdmin,
+    TResult? Function(bool value)? dropDownErrorDisplay,
   }) {
     return updateAdmin?.call(
-        userId, roleId, context, firstName, lastName, email, dob);
+        userId, adminId, roleId, context, firstName, lastName, email, mobile);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? roleId, BuildContext context, String firstName,
-            String lastName, String email, String dob)?
+    TResult Function(String userId, String roleId, BuildContext context,
+            String firstName, String lastName, String email, String mobile)?
         addAdmin,
     TResult Function(String userId)? getRoles,
-    TResult Function(String userId, String? roleId, BuildContext context,
-            String firstName, String lastName, String email, String dob)?
+    TResult Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)?
         updateAdmin,
-    TResult Function(String userId)? viewAdmin,
+    TResult Function(String userId, String adminId)? viewAdmin,
+    TResult Function(bool value)? dropDownErrorDisplay,
     required TResult orElse(),
   }) {
     if (updateAdmin != null) {
       return updateAdmin(
-          userId, roleId, context, firstName, lastName, email, dob);
+          userId, adminId, roleId, context, firstName, lastName, email, mobile);
     }
     return orElse();
   }
@@ -687,6 +817,7 @@ class _$_UpdateAdmin implements _UpdateAdmin {
     required TResult Function(_GetRoles value) getRoles,
     required TResult Function(_UpdateAdmin value) updateAdmin,
     required TResult Function(_ViewAdmin value) viewAdmin,
+    required TResult Function(_DropDownErrorDisplay value) dropDownErrorDisplay,
   }) {
     return updateAdmin(this);
   }
@@ -698,6 +829,7 @@ class _$_UpdateAdmin implements _UpdateAdmin {
     TResult? Function(_GetRoles value)? getRoles,
     TResult? Function(_UpdateAdmin value)? updateAdmin,
     TResult? Function(_ViewAdmin value)? viewAdmin,
+    TResult? Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
   }) {
     return updateAdmin?.call(this);
   }
@@ -709,6 +841,7 @@ class _$_UpdateAdmin implements _UpdateAdmin {
     TResult Function(_GetRoles value)? getRoles,
     TResult Function(_UpdateAdmin value)? updateAdmin,
     TResult Function(_ViewAdmin value)? viewAdmin,
+    TResult Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
     required TResult orElse(),
   }) {
     if (updateAdmin != null) {
@@ -721,20 +854,22 @@ class _$_UpdateAdmin implements _UpdateAdmin {
 abstract class _UpdateAdmin implements AdminCreationEvent {
   const factory _UpdateAdmin(
       {required final String userId,
-      required final String? roleId,
+      required final String adminId,
+      required final String roleId,
       required final BuildContext context,
       required final String firstName,
       required final String lastName,
       required final String email,
-      required final String dob}) = _$_UpdateAdmin;
+      required final String mobile}) = _$_UpdateAdmin;
 
   String get userId;
-  String? get roleId;
+  String get adminId;
+  String get roleId;
   BuildContext get context;
   String get firstName;
   String get lastName;
   String get email;
-  String get dob;
+  String get mobile;
   @JsonKey(ignore: true)
   _$$_UpdateAdminCopyWith<_$_UpdateAdmin> get copyWith =>
       throw _privateConstructorUsedError;
@@ -746,7 +881,7 @@ abstract class _$$_ViewAdminCopyWith<$Res> {
           _$_ViewAdmin value, $Res Function(_$_ViewAdmin) then) =
       __$$_ViewAdminCopyWithImpl<$Res>;
   @useResult
-  $Res call({String userId});
+  $Res call({String userId, String adminId});
 }
 
 /// @nodoc
@@ -761,11 +896,16 @@ class __$$_ViewAdminCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = null,
+    Object? adminId = null,
   }) {
     return _then(_$_ViewAdmin(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      adminId: null == adminId
+          ? _value.adminId
+          : adminId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -774,14 +914,16 @@ class __$$_ViewAdminCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ViewAdmin implements _ViewAdmin {
-  const _$_ViewAdmin({required this.userId});
+  const _$_ViewAdmin({required this.userId, required this.adminId});
 
   @override
   final String userId;
+  @override
+  final String adminId;
 
   @override
   String toString() {
-    return 'AdminCreationEvent.viewAdmin(userId: $userId)';
+    return 'AdminCreationEvent.viewAdmin(userId: $userId, adminId: $adminId)';
   }
 
   @override
@@ -789,11 +931,12 @@ class _$_ViewAdmin implements _ViewAdmin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ViewAdmin &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.adminId, adminId) || other.adminId == adminId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId);
+  int get hashCode => Object.hash(runtimeType, userId, adminId);
 
   @JsonKey(ignore: true)
   @override
@@ -804,54 +947,78 @@ class _$_ViewAdmin implements _ViewAdmin {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? roleId, BuildContext context,
-            String firstName, String lastName, String email, String dob)
-        addAdmin,
-    required TResult Function(String userId) getRoles,
     required TResult Function(
             String userId,
-            String? roleId,
+            String roleId,
             BuildContext context,
             String firstName,
             String lastName,
             String email,
-            String dob)
+            String mobile)
+        addAdmin,
+    required TResult Function(String userId) getRoles,
+    required TResult Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)
         updateAdmin,
-    required TResult Function(String userId) viewAdmin,
+    required TResult Function(String userId, String adminId) viewAdmin,
+    required TResult Function(bool value) dropDownErrorDisplay,
   }) {
-    return viewAdmin(userId);
+    return viewAdmin(userId, adminId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? roleId, BuildContext context, String firstName,
-            String lastName, String email, String dob)?
+    TResult? Function(String userId, String roleId, BuildContext context,
+            String firstName, String lastName, String email, String mobile)?
         addAdmin,
     TResult? Function(String userId)? getRoles,
-    TResult? Function(String userId, String? roleId, BuildContext context,
-            String firstName, String lastName, String email, String dob)?
+    TResult? Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)?
         updateAdmin,
-    TResult? Function(String userId)? viewAdmin,
+    TResult? Function(String userId, String adminId)? viewAdmin,
+    TResult? Function(bool value)? dropDownErrorDisplay,
   }) {
-    return viewAdmin?.call(userId);
+    return viewAdmin?.call(userId, adminId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? roleId, BuildContext context, String firstName,
-            String lastName, String email, String dob)?
+    TResult Function(String userId, String roleId, BuildContext context,
+            String firstName, String lastName, String email, String mobile)?
         addAdmin,
     TResult Function(String userId)? getRoles,
-    TResult Function(String userId, String? roleId, BuildContext context,
-            String firstName, String lastName, String email, String dob)?
+    TResult Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)?
         updateAdmin,
-    TResult Function(String userId)? viewAdmin,
+    TResult Function(String userId, String adminId)? viewAdmin,
+    TResult Function(bool value)? dropDownErrorDisplay,
     required TResult orElse(),
   }) {
     if (viewAdmin != null) {
-      return viewAdmin(userId);
+      return viewAdmin(userId, adminId);
     }
     return orElse();
   }
@@ -863,6 +1030,7 @@ class _$_ViewAdmin implements _ViewAdmin {
     required TResult Function(_GetRoles value) getRoles,
     required TResult Function(_UpdateAdmin value) updateAdmin,
     required TResult Function(_ViewAdmin value) viewAdmin,
+    required TResult Function(_DropDownErrorDisplay value) dropDownErrorDisplay,
   }) {
     return viewAdmin(this);
   }
@@ -874,6 +1042,7 @@ class _$_ViewAdmin implements _ViewAdmin {
     TResult? Function(_GetRoles value)? getRoles,
     TResult? Function(_UpdateAdmin value)? updateAdmin,
     TResult? Function(_ViewAdmin value)? viewAdmin,
+    TResult? Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
   }) {
     return viewAdmin?.call(this);
   }
@@ -885,6 +1054,7 @@ class _$_ViewAdmin implements _ViewAdmin {
     TResult Function(_GetRoles value)? getRoles,
     TResult Function(_UpdateAdmin value)? updateAdmin,
     TResult Function(_ViewAdmin value)? viewAdmin,
+    TResult Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
     required TResult orElse(),
   }) {
     if (viewAdmin != null) {
@@ -895,11 +1065,206 @@ class _$_ViewAdmin implements _ViewAdmin {
 }
 
 abstract class _ViewAdmin implements AdminCreationEvent {
-  const factory _ViewAdmin({required final String userId}) = _$_ViewAdmin;
+  const factory _ViewAdmin(
+      {required final String userId,
+      required final String adminId}) = _$_ViewAdmin;
 
   String get userId;
+  String get adminId;
   @JsonKey(ignore: true)
   _$$_ViewAdminCopyWith<_$_ViewAdmin> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DropDownErrorDisplayCopyWith<$Res> {
+  factory _$$_DropDownErrorDisplayCopyWith(_$_DropDownErrorDisplay value,
+          $Res Function(_$_DropDownErrorDisplay) then) =
+      __$$_DropDownErrorDisplayCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool value});
+}
+
+/// @nodoc
+class __$$_DropDownErrorDisplayCopyWithImpl<$Res>
+    extends _$AdminCreationEventCopyWithImpl<$Res, _$_DropDownErrorDisplay>
+    implements _$$_DropDownErrorDisplayCopyWith<$Res> {
+  __$$_DropDownErrorDisplayCopyWithImpl(_$_DropDownErrorDisplay _value,
+      $Res Function(_$_DropDownErrorDisplay) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+  }) {
+    return _then(_$_DropDownErrorDisplay(
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_DropDownErrorDisplay implements _DropDownErrorDisplay {
+  const _$_DropDownErrorDisplay({required this.value});
+
+  @override
+  final bool value;
+
+  @override
+  String toString() {
+    return 'AdminCreationEvent.dropDownErrorDisplay(value: $value)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DropDownErrorDisplay &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, value);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DropDownErrorDisplayCopyWith<_$_DropDownErrorDisplay> get copyWith =>
+      __$$_DropDownErrorDisplayCopyWithImpl<_$_DropDownErrorDisplay>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)
+        addAdmin,
+    required TResult Function(String userId) getRoles,
+    required TResult Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)
+        updateAdmin,
+    required TResult Function(String userId, String adminId) viewAdmin,
+    required TResult Function(bool value) dropDownErrorDisplay,
+  }) {
+    return dropDownErrorDisplay(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String roleId, BuildContext context,
+            String firstName, String lastName, String email, String mobile)?
+        addAdmin,
+    TResult? Function(String userId)? getRoles,
+    TResult? Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)?
+        updateAdmin,
+    TResult? Function(String userId, String adminId)? viewAdmin,
+    TResult? Function(bool value)? dropDownErrorDisplay,
+  }) {
+    return dropDownErrorDisplay?.call(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String roleId, BuildContext context,
+            String firstName, String lastName, String email, String mobile)?
+        addAdmin,
+    TResult Function(String userId)? getRoles,
+    TResult Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)?
+        updateAdmin,
+    TResult Function(String userId, String adminId)? viewAdmin,
+    TResult Function(bool value)? dropDownErrorDisplay,
+    required TResult orElse(),
+  }) {
+    if (dropDownErrorDisplay != null) {
+      return dropDownErrorDisplay(value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AddAdmin value) addAdmin,
+    required TResult Function(_GetRoles value) getRoles,
+    required TResult Function(_UpdateAdmin value) updateAdmin,
+    required TResult Function(_ViewAdmin value) viewAdmin,
+    required TResult Function(_DropDownErrorDisplay value) dropDownErrorDisplay,
+  }) {
+    return dropDownErrorDisplay(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AddAdmin value)? addAdmin,
+    TResult? Function(_GetRoles value)? getRoles,
+    TResult? Function(_UpdateAdmin value)? updateAdmin,
+    TResult? Function(_ViewAdmin value)? viewAdmin,
+    TResult? Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
+  }) {
+    return dropDownErrorDisplay?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AddAdmin value)? addAdmin,
+    TResult Function(_GetRoles value)? getRoles,
+    TResult Function(_UpdateAdmin value)? updateAdmin,
+    TResult Function(_ViewAdmin value)? viewAdmin,
+    TResult Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
+    required TResult orElse(),
+  }) {
+    if (dropDownErrorDisplay != null) {
+      return dropDownErrorDisplay(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DropDownErrorDisplay implements AdminCreationEvent {
+  const factory _DropDownErrorDisplay({required final bool value}) =
+      _$_DropDownErrorDisplay;
+
+  bool get value;
+  @JsonKey(ignore: true)
+  _$$_DropDownErrorDisplayCopyWith<_$_DropDownErrorDisplay> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -908,7 +1273,12 @@ mixin _$AdminCreationState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
-  CommonResponse? get response => throw _privateConstructorUsedError;
+  CommonResponseUse? get addResponse => throw _privateConstructorUsedError;
+  CommonResponseUse? get updateResponse => throw _privateConstructorUsedError;
+  AdminViewResponse? get viewResponse => throw _privateConstructorUsedError;
+  GetRoleResponse? get rolesResponse => throw _privateConstructorUsedError;
+  bool get isClientError => throw _privateConstructorUsedError;
+  bool get isDropDownError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AdminCreationStateCopyWith<AdminCreationState> get copyWith =>
@@ -922,7 +1292,15 @@ abstract class $AdminCreationStateCopyWith<$Res> {
       _$AdminCreationStateCopyWithImpl<$Res, AdminCreationState>;
   @useResult
   $Res call(
-      {bool isLoading, bool isError, String? error, CommonResponse? response});
+      {bool isLoading,
+      bool isError,
+      String? error,
+      CommonResponseUse? addResponse,
+      CommonResponseUse? updateResponse,
+      AdminViewResponse? viewResponse,
+      GetRoleResponse? rolesResponse,
+      bool isClientError,
+      bool isDropDownError});
 }
 
 /// @nodoc
@@ -941,7 +1319,12 @@ class _$AdminCreationStateCopyWithImpl<$Res, $Val extends AdminCreationState>
     Object? isLoading = null,
     Object? isError = null,
     Object? error = freezed,
-    Object? response = freezed,
+    Object? addResponse = freezed,
+    Object? updateResponse = freezed,
+    Object? viewResponse = freezed,
+    Object? rolesResponse = freezed,
+    Object? isClientError = null,
+    Object? isDropDownError = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -956,10 +1339,30 @@ class _$AdminCreationStateCopyWithImpl<$Res, $Val extends AdminCreationState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
-      response: freezed == response
-          ? _value.response
-          : response // ignore: cast_nullable_to_non_nullable
-              as CommonResponse?,
+      addResponse: freezed == addResponse
+          ? _value.addResponse
+          : addResponse // ignore: cast_nullable_to_non_nullable
+              as CommonResponseUse?,
+      updateResponse: freezed == updateResponse
+          ? _value.updateResponse
+          : updateResponse // ignore: cast_nullable_to_non_nullable
+              as CommonResponseUse?,
+      viewResponse: freezed == viewResponse
+          ? _value.viewResponse
+          : viewResponse // ignore: cast_nullable_to_non_nullable
+              as AdminViewResponse?,
+      rolesResponse: freezed == rolesResponse
+          ? _value.rolesResponse
+          : rolesResponse // ignore: cast_nullable_to_non_nullable
+              as GetRoleResponse?,
+      isClientError: null == isClientError
+          ? _value.isClientError
+          : isClientError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDropDownError: null == isDropDownError
+          ? _value.isDropDownError
+          : isDropDownError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -973,7 +1376,15 @@ abstract class _$$_AdminCreationStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isLoading, bool isError, String? error, CommonResponse? response});
+      {bool isLoading,
+      bool isError,
+      String? error,
+      CommonResponseUse? addResponse,
+      CommonResponseUse? updateResponse,
+      AdminViewResponse? viewResponse,
+      GetRoleResponse? rolesResponse,
+      bool isClientError,
+      bool isDropDownError});
 }
 
 /// @nodoc
@@ -990,7 +1401,12 @@ class __$$_AdminCreationStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? isError = null,
     Object? error = freezed,
-    Object? response = freezed,
+    Object? addResponse = freezed,
+    Object? updateResponse = freezed,
+    Object? viewResponse = freezed,
+    Object? rolesResponse = freezed,
+    Object? isClientError = null,
+    Object? isDropDownError = null,
   }) {
     return _then(_$_AdminCreationState(
       isLoading: null == isLoading
@@ -1005,10 +1421,30 @@ class __$$_AdminCreationStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
-      response: freezed == response
-          ? _value.response
-          : response // ignore: cast_nullable_to_non_nullable
-              as CommonResponse?,
+      addResponse: freezed == addResponse
+          ? _value.addResponse
+          : addResponse // ignore: cast_nullable_to_non_nullable
+              as CommonResponseUse?,
+      updateResponse: freezed == updateResponse
+          ? _value.updateResponse
+          : updateResponse // ignore: cast_nullable_to_non_nullable
+              as CommonResponseUse?,
+      viewResponse: freezed == viewResponse
+          ? _value.viewResponse
+          : viewResponse // ignore: cast_nullable_to_non_nullable
+              as AdminViewResponse?,
+      rolesResponse: freezed == rolesResponse
+          ? _value.rolesResponse
+          : rolesResponse // ignore: cast_nullable_to_non_nullable
+              as GetRoleResponse?,
+      isClientError: null == isClientError
+          ? _value.isClientError
+          : isClientError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDropDownError: null == isDropDownError
+          ? _value.isDropDownError
+          : isDropDownError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1020,7 +1456,12 @@ class _$_AdminCreationState implements _AdminCreationState {
       {required this.isLoading,
       required this.isError,
       required this.error,
-      required this.response});
+      required this.addResponse,
+      required this.updateResponse,
+      required this.viewResponse,
+      required this.rolesResponse,
+      this.isClientError = false,
+      this.isDropDownError = false});
 
   @override
   final bool isLoading;
@@ -1029,11 +1470,23 @@ class _$_AdminCreationState implements _AdminCreationState {
   @override
   final String? error;
   @override
-  final CommonResponse? response;
+  final CommonResponseUse? addResponse;
+  @override
+  final CommonResponseUse? updateResponse;
+  @override
+  final AdminViewResponse? viewResponse;
+  @override
+  final GetRoleResponse? rolesResponse;
+  @override
+  @JsonKey()
+  final bool isClientError;
+  @override
+  @JsonKey()
+  final bool isDropDownError;
 
   @override
   String toString() {
-    return 'AdminCreationState(isLoading: $isLoading, isError: $isError, error: $error, response: $response)';
+    return 'AdminCreationState(isLoading: $isLoading, isError: $isError, error: $error, addResponse: $addResponse, updateResponse: $updateResponse, viewResponse: $viewResponse, rolesResponse: $rolesResponse, isClientError: $isClientError, isDropDownError: $isDropDownError)';
   }
 
   @override
@@ -1045,13 +1498,32 @@ class _$_AdminCreationState implements _AdminCreationState {
                 other.isLoading == isLoading) &&
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.error, error) || other.error == error) &&
-            (identical(other.response, response) ||
-                other.response == response));
+            (identical(other.addResponse, addResponse) ||
+                other.addResponse == addResponse) &&
+            (identical(other.updateResponse, updateResponse) ||
+                other.updateResponse == updateResponse) &&
+            (identical(other.viewResponse, viewResponse) ||
+                other.viewResponse == viewResponse) &&
+            (identical(other.rolesResponse, rolesResponse) ||
+                other.rolesResponse == rolesResponse) &&
+            (identical(other.isClientError, isClientError) ||
+                other.isClientError == isClientError) &&
+            (identical(other.isDropDownError, isDropDownError) ||
+                other.isDropDownError == isDropDownError));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isLoading, isError, error, response);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      isError,
+      error,
+      addResponse,
+      updateResponse,
+      viewResponse,
+      rolesResponse,
+      isClientError,
+      isDropDownError);
 
   @JsonKey(ignore: true)
   @override
@@ -1066,7 +1538,12 @@ abstract class _AdminCreationState implements AdminCreationState {
       {required final bool isLoading,
       required final bool isError,
       required final String? error,
-      required final CommonResponse? response}) = _$_AdminCreationState;
+      required final CommonResponseUse? addResponse,
+      required final CommonResponseUse? updateResponse,
+      required final AdminViewResponse? viewResponse,
+      required final GetRoleResponse? rolesResponse,
+      final bool isClientError,
+      final bool isDropDownError}) = _$_AdminCreationState;
 
   @override
   bool get isLoading;
@@ -1075,7 +1552,17 @@ abstract class _AdminCreationState implements AdminCreationState {
   @override
   String? get error;
   @override
-  CommonResponse? get response;
+  CommonResponseUse? get addResponse;
+  @override
+  CommonResponseUse? get updateResponse;
+  @override
+  AdminViewResponse? get viewResponse;
+  @override
+  GetRoleResponse? get rolesResponse;
+  @override
+  bool get isClientError;
+  @override
+  bool get isDropDownError;
   @override
   @JsonKey(ignore: true)
   _$$_AdminCreationStateCopyWith<_$_AdminCreationState> get copyWith =>

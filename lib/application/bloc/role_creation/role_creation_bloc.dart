@@ -3,6 +3,7 @@ import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.d
 import 'package:admin_580_tech/domain/role_creation/model/module_response.dart';
 import 'package:admin_580_tech/domain/role_creation/model/view_role_response.dart';
 import 'package:admin_580_tech/infrastructure/role_creation/role_creation_repository.dart';
+import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -87,7 +88,7 @@ class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
   }
 
   _addUpdateRole(_AddUpdateRole event, Emitter<RoleCreationState> emit) async {
-    final Either<ApiErrorHandler, CommonResponse> homeResult =
+    final Either<ApiErrorHandler, CommonResponseUse> homeResult =
         await roleCreationRepository.addRoleUpdateRole(
             userId: event.userId,
             role: event.role,
@@ -107,6 +108,7 @@ class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        autoTabRouter?.setActiveIndex(10);
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }

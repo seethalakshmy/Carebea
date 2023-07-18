@@ -1,13 +1,13 @@
-class CommonResponse {
+class CommonResponseUse {
   bool? status;
   String? message;
 
-  CommonResponse({
+  CommonResponseUse({
     this.status,
     this.message,
   });
 
-  CommonResponse.fromJson(Map<String, dynamic> json) {
+  CommonResponseUse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
   }

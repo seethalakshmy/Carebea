@@ -6,21 +6,26 @@ import 'custom_sizedbox.dart';
 import 'custom_svg.dart';
 
 class TableActions extends StatelessWidget {
-  const TableActions(
-      {Key? key,
-      this.isView = false,
-      this.isEdit = false,
-      this.onEditTap,
-      this.onViewTap})
-      : super(key: key);
+  const TableActions({
+    Key? key,
+    this.isView = false,
+    this.isEdit = false,
+    this.isDelete = false,
+    this.onEditTap,
+    this.onViewTap,
+    this.onDeleteTap,
+  }) : super(key: key);
   final bool isView;
   final bool isEdit;
+  final bool isDelete;
   final Function? onViewTap;
   final Function? onEditTap;
+  final Function? onDeleteTap;
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         isView ? _onView(context) : CustomSizedBox.shrink(),
@@ -28,6 +33,10 @@ class TableActions extends StatelessWidget {
           width: isView ? DBL.twentyThree.val : DBL.zero.val,
         ),
         isEdit ? _onEdit(context) : CustomSizedBox.shrink(),
+        CustomSizedBox(
+          width: isView ? DBL.twentyThree.val : DBL.zero.val,
+        ),
+        isDelete ? _onDelete(context) : CustomSizedBox.shrink(),
       ],
     );
   }
@@ -38,6 +47,14 @@ class TableActions extends StatelessWidget {
           onEditTap!();
         },
         child: _buildCustomSvg(context, IMG.edit.val));
+  }
+
+  InkWell _onDelete(BuildContext context) {
+    return InkWell(
+        onTap: () {
+          onDeleteTap!();
+        },
+        child: _buildCustomSvg(context, IMG.delete.val));
   }
 
   CustomSvg _buildCustomSvg(BuildContext context, String path) {

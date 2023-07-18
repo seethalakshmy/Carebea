@@ -10,6 +10,6 @@ abstract class IRolesRepo {
     required int limit,
     String? searchTerm,
   });
-  Future<Either<ApiErrorHandler, CommonResponse>> deleteRole(
+  Future<Either<ApiErrorHandler, CommonResponseUse>> deleteRole(
       {required String userID, required String roleID});
 }

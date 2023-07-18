@@ -14,7 +14,7 @@ class RoleCreationRepository implements IRoleCreationRepo {
   ApiClient apiClient = ApiClient();
 
   @override
-  Future<Either<ApiErrorHandler, CommonResponse>> addRoleUpdateRole({
+  Future<Either<ApiErrorHandler, CommonResponseUse>> addRoleUpdateRole({
     required String userId,
     required String role,
     required List<String> moduleId,

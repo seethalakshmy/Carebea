@@ -1,13 +1,12 @@
-import 'package:admin_580_tech/application/bloc/roles/roles_bloc.dart';
+import 'package:admin_580_tech/application/bloc/admins/admins_bloc.dart';
 import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/properties.dart';
+import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
-import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
-import 'package:admin_580_tech/infrastructure/roles/roles_repository.dart';
+import 'package:admin_580_tech/domain/admins/model/admin_get_response.dart';
+import 'package:admin_580_tech/infrastructure/admins/admins_repository.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
-import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
-import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
@@ -18,12 +17,14 @@ import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
 import 'package:admin_580_tech/presentation/widget/empty_view.dart';
 import 'package:admin_580_tech/presentation/widget/pagination_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
+import 'package:admin_580_tech/presentation/widget/table_row_image_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_row_view.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../widget/custom_alert_delete.dart';
+import '../side_menu/side_menu_page.dart';
+import '../widget/custom_dropdown.dart';
 import '../widget/custom_icon.dart';
 import '../widget/custom_text.dart';
 import '../widget/custom_text_field.dart';
@@ -32,17 +33,17 @@ import '../widget/header_view.dart';
 import '../widget/table_actions_view.dart';
 import '../widget/table_column_view.dart';
 
-class RolesPage extends StatefulWidget {
-  const RolesPage({
+class AdminsPage extends StatefulWidget {
+  const AdminsPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<RolesPage> createState() => _RolesPageState();
+  State<AdminsPage> createState() => _AdminsPageState();
 }
 
-class _RolesPageState extends State<RolesPage> {
-  List<Role> mRoles = [];
+class _AdminsPageState extends State<AdminsPage> {
+  List<ResData> mAdmins = [];
   int _totalItems = 1;
   final int _limit = 10;
   int _page = 1;
@@ -52,14 +53,15 @@ class _RolesPageState extends State<RolesPage> {
   final TextEditingController _searchController = TextEditingController();
   final _searchNode = FocusNode();
   String _adminUserId = "";
-  late RolesBloc _roleBloc;
+  late AdminsBloc _adminsBloc;
   SharedPreffUtil sharedPrefUtil = SharedPreffUtil();
+  String? filterId;
 
   @override
   void initState() {
-    _adminUserId = sharedPrefUtil.getUserId;
     super.initState();
-    _roleBloc = RolesBloc(RolesRepository());
+    _adminUserId = sharedPrefUtil.getUserId;
+    _adminsBloc = AdminsBloc(AdminsRepository());
   }
 
   @override
@@ -75,17 +77,17 @@ class _RolesPageState extends State<RolesPage> {
     return Column(
       children: [
         HeaderView(
-          title: AppString.roleManagement.val,
+          title: AppString.adminManagement.val,
         ),
         _rebuildView(),
       ],
     );
   }
 
-  BlocProvider<RolesBloc> _rebuildView() {
+  BlocProvider<AdminsBloc> _rebuildView() {
     return BlocProvider(
-      create: (context) => _roleBloc
-        ..add(RolesEvent.getRoles(
+      create: (context) => _adminsBloc
+        ..add(AdminEvent.getAdmins(
           userId: _adminUserId,
           page: _page,
           limit: _limit,
@@ -95,19 +97,14 @@ class _RolesPageState extends State<RolesPage> {
   }
 
   _bodyView() {
-    return BlocBuilder<RolesBloc, RolesState>(
+    return BlocBuilder<AdminsBloc, AdminsState>(
       builder: (_, state) {
-        return Column(
-          children: [
-            CustomSizedBox(height: DBL.twenty.val),
-            _cardView(state, context),
-          ],
-        );
+        return _cardView(state, context);
       },
     );
   }
 
-  CustomCard _cardView(RolesState state, BuildContext context) {
+  CustomCard _cardView(AdminsState state, BuildContext context) {
     return CustomCard(
       shape: PR().roundedRectangleBorder(DBL.five.val),
       elevation: DBL.seven.val,
@@ -119,17 +116,23 @@ class _RolesPageState extends State<RolesPage> {
                   ? ErrorView(
                       isClientError: state.isClientError,
                       errorMessage: state.error)
-                  : _rolesView(context, state)),
+                  : _caregiversView(context, state)),
     );
   }
 
-  _rolesView(BuildContext context, RolesState state) {
-    GetRoleResponse? value = state.getRolesResponse;
+  _resetValues() {
+    _page = 1;
+    _searchController.clear();
+    filterId = null;
+  }
+
+  _caregiversView(BuildContext context, AdminsState state) {
+    AdminGetResponse? value = state.getAdminsResponse;
     if (value?.status ?? false) {
-      mRoles.clear();
-      if (value?.data?.role != null && value!.data!.role!.isNotEmpty!) {
-        _totalItems = value.data?.totalCount ?? 1;
-        mRoles.addAll(value.data?.role ?? []);
+      mAdmins.clear();
+      if (value?.data?.resData != null && value!.data!.resData!.isNotEmpty) {
+        _totalItems = value.data?.totalCount?.floor() ?? 1;
+        mAdmins.addAll(value.data?.resData ?? []);
         _updateData();
       }
     }
@@ -137,15 +140,15 @@ class _RolesPageState extends State<RolesPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         LayoutBuilder(builder: (context, constraints) {
-          return _actionsView(constraints, context);
+          return _actionView(constraints, context);
         }),
-        mRoles.isNotEmpty
+        mAdmins.isNotEmpty
             ? Column(
                 children: [
                   CustomSizedBox(height: DBL.fifteen.val),
                   CustomSizedBox(
                     height: (_limit + 1) * 48,
-                    child: _rolesTable(state, context),
+                    child: _adminsTable(state, context),
                   ),
                   CustomSizedBox(height: DBL.twenty.val),
                   if (_totalItems > 10) _paginationView()
@@ -156,7 +159,7 @@ class _RolesPageState extends State<RolesPage> {
     );
   }
 
-  SingleChildScrollView _actionsView(
+  SingleChildScrollView _actionView(
       BoxConstraints constraints, BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -165,21 +168,26 @@ class _RolesPageState extends State<RolesPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _searchField(),
-            CustomSizedBox(
-              width: DBL.ten.val,
+            _statusDropDown(context),
+            Row(
+              children: [
+                _searchField(),
+                CustomSizedBox(
+                  width: DBL.ten.val,
+                ),
+                _caregiverCreate()
+              ],
             ),
-            _roleCreate(),
           ],
         ),
       ),
     );
   }
 
-  CustomButton _roleCreate() {
+  CustomButton _caregiverCreate() {
     return CustomButton(
         onPressed: () {
-          autoTabRouter?.navigate(RoleCreationRoute());
+          autoTabRouter?.setActiveIndex(13);
         },
         text: AppString.create.val,
         color: AppColor.primaryColor.val,
@@ -196,6 +204,74 @@ class _RolesPageState extends State<RolesPage> {
           size: DBL.twenty.val,
           color: AppColor.white.val,
         ));
+  }
+
+  _statusDropDown(BuildContext context) {
+    return Row(
+      children: [
+        CustomText(
+          AppString.filter.val,
+          style: TS()
+              .gRoboto(fontSize: FS.font15.val, color: AppColor.rowColor.val),
+        ),
+        CustomSizedBox(
+          width: DBL.ten.val,
+        ),
+        CustomDropdown<int>(
+          onChange: (int value, int index) {
+            CustomLog.log("val:::${value.toString()}");
+            filterId = value.toString();
+            _getCareGiverEvent();
+          },
+          dropdownButtonStyle: DropdownButtonStyle(
+            mainAxisAlignment: MainAxisAlignment.start,
+            width: DBL.oneForty.val,
+            height: Responsive.isMobile(context)
+                ? DBL.fortyFive.val
+                : DBL.forty.val,
+            elevation: DBL.zero.val,
+            padding: EdgeInsets.only(left: DBL.fifteen.val),
+            backgroundColor: Colors.white,
+            primaryColor: AppColor.white.val,
+          ),
+          dropdownStyle: DropdownStyle(
+            borderRadius: BorderRadius.circular(DBL.zero.val),
+            elevation: DBL.two.val,
+            color: AppColor.white.val,
+            padding: EdgeInsets.all(DBL.five.val),
+          ),
+          items: [AppString.active.val, AppString.inActive.val]
+              .asMap()
+              .entries
+              .map(
+                (item) => DropdownItem<int>(
+                  value: item.key,
+                  child: Padding(
+                    padding: EdgeInsets.all(DBL.eight.val),
+                    child: Text(
+                      item.value,
+                      style: TS().gRoboto(
+                          fontWeight: FW.w500.val,
+                          fontSize: FS.font15.val,
+                          color: AppColor.columColor2.val),
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
+          child: CustomText(
+            AppString.status.val,
+            style: TS().gRoboto(
+                fontWeight: FW.w500.val,
+                fontSize: FS.font15.val,
+                color: AppColor.columColor2.val),
+          ),
+        ),
+        CustomSizedBox(
+          width: DBL.ten.val,
+        )
+      ],
+    );
   }
 
   _searchField() {
@@ -223,66 +299,73 @@ class _RolesPageState extends State<RolesPage> {
     );
   }
 
-  _rolesTable(RolesState state, BuildContext context) {
+  _adminsTable(AdminsState state, BuildContext context) {
     return CSelectionArea(
       child: CDataTable2(
         minWidth: DBL.nineFifty.val,
         dividerThickness: DBL.pointThree.val,
         headingRowHeight: DBL.fortyEight.val,
-        dataRowHeight: DBL.eighty.val,
+        dataRowHeight: DBL.sixty.val,
         columns: [
           DataColumn2(
             size: ColumnSize.S,
-            // fixedWidth: DBL.eighty.val,
-            label: _tableColumnView(AppString.slNo.val),
+            fixedWidth: DBL.eighty.val,
+            label: _tableColumnView(AppString.id.val),
           ),
           DataColumn2(
             size: ColumnSize.L,
             label: _tableColumnView(
-              AppString.role.val,
+              AppString.firstName.val,
             ),
           ),
           DataColumn2(
             size: ColumnSize.L,
             label: _tableColumnView(
-              AppString.assignedModule.val,
+              AppString.lastName.val,
             ),
           ),
           DataColumn2(
-            fixedWidth: DBL.oneTwenty.val,
-            label: const CustomText(""),
+            size: ColumnSize.L,
+            label: _tableColumnView(
+              AppString.emailAddress.val,
+            ),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _tableColumnView(
+              AppString.phoneNumber.val,
+            ),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _tableColumnView(AppString.status.val),
+          ),
+          const DataColumn2(
+            size: ColumnSize.L,
+            label: CustomText(""),
           ),
         ],
-        rows: mRoles.asMap().entries.map((e) {
+        rows: mAdmins.asMap().entries.map((e) {
           _setIndex(e.key);
           var item = e.value;
           return DataRow2(
             cells: [
               DataCell(_tableRowView(_pageIndex.toString())),
-              DataCell(_tableRowView(item.name ?? "")),
-              DataCell(_tableRowView(
-                  item.assignedModule != null && item.assignedModule!.isNotEmpty
-                      ? item.assignedModule?.join("\n") ?? " , "
-                      : "")),
+              DataCell(TableRowImageView(
+                name: item.name?.firstName ?? "",
+                imageUrl: "",
+              )),
+              DataCell(_tableRowView(item.name?.lastName ?? "")),
+              DataCell(_tableRowView(item.email ?? "")),
+              DataCell(_tableRowView(item.phoneNumber ?? "")),
+              DataCell(_statusBox(item.status ?? false)),
               DataCell(TableActions(
                 isView: true,
-                onViewTap: () {
-                  autoTabRouter?.navigate(RoleCreationRoute(
-                    roleId: item.id,
-                    isView: "view",
-                  ));
-                },
-                isEdit: true,
-                onEditTap: () {
-                  autoTabRouter?.navigate(
-                      RoleCreationRoute(roleId: item.id, isEdit: "edit"));
-                },
+                onViewTap: () {},
                 isDelete: true,
-                onDeleteTap: () {
-                  _deletePopup(
-                    context,
-                  );
-                },
+                onDeleteTap: () {},
+                isEdit: true,
+                onEditTap: () {},
               )),
             ],
           );
@@ -300,6 +383,27 @@ class _RolesPageState extends State<RolesPage> {
   TableColumnView _tableColumnView(String name) {
     return TableColumnView(
       text: name,
+    );
+  }
+
+  _statusBox(bool isActive) {
+    return CustomContainer.decoration(
+      width: DBL.seventy.val,
+      height: DBL.thirty.val,
+      padding:
+          EdgeInsets.symmetric(vertical: DBL.five.val, horizontal: DBL.ten.val),
+      decoration: BoxDecoration(
+          color: isActive ? AppColor.green3.val : AppColor.offWhite.val,
+          borderRadius: PR().circularRadius(DBL.eight.val)),
+      child: CustomText(
+        textAlign: TextAlign.center,
+        isActive ? AppString.active.val : AppString.inActive.val,
+        style: TS().gRoboto(
+          fontWeight: FW.w500.val,
+          fontSize: FS.font12.val,
+          color: isActive ? AppColor.green.val : AppColor.lightGrey6.val,
+        ),
+      ),
     );
   }
 
@@ -340,34 +444,22 @@ class _RolesPageState extends State<RolesPage> {
   void _updateData() {
     if (_page == 1) {
       _start = 0;
-      _end = mRoles.length < _limit ? mRoles.length : _limit;
+      _end = mAdmins.length < _limit ? mAdmins.length : _limit;
     } else {
       _start = (_page * _limit) - 10;
-      _end = _start + mRoles.length;
+      _end = _start + mAdmins.length;
     }
   }
 
   _getCareGiverEvent() {
-    _roleBloc.add(RolesEvent.getRoles(
+    _adminsBloc.add(AdminEvent.getAdmins(
         userId: _adminUserId,
         page: _page,
         limit: _limit,
+        status: filterId,
         searchTerm: _searchController.text.trim().isNotEmpty
             ? _searchController.text.trim()
             : null));
-  }
-
-  _deletePopup(
-    BuildContext context,
-  ) {
-    showGeneralDialog(
-      context: context,
-      pageBuilder: (BuildContext buildContext, Animation animation,
-          Animation secondaryAnimation) {
-        return CustomAlertDelete(
-            label: AppString.deleteRole.val, onTapYes: () {});
-      },
-    );
   }
 
   bool _isXs(context) => MediaQuery.of(context).size.width <= 544;

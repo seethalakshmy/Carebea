@@ -1582,7 +1582,7 @@ abstract class _IsCheckedDelete implements RoleCreationEvent {
 mixin _$RoleCreationState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
-  CommonResponse? get response => throw _privateConstructorUsedError;
+  CommonResponseUse? get response => throw _privateConstructorUsedError;
   ModuleResponse? get moduleResponse => throw _privateConstructorUsedError;
   ViewRoleResponse? get viewRoleResponse => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
@@ -1605,7 +1605,7 @@ abstract class $RoleCreationStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       bool isError,
-      CommonResponse? response,
+      CommonResponseUse? response,
       ModuleResponse? moduleResponse,
       ViewRoleResponse? viewRoleResponse,
       String? error,
@@ -1651,7 +1651,7 @@ class _$RoleCreationStateCopyWithImpl<$Res, $Val extends RoleCreationState>
       response: freezed == response
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
-              as CommonResponse?,
+              as CommonResponseUse?,
       moduleResponse: freezed == moduleResponse
           ? _value.moduleResponse
           : moduleResponse // ignore: cast_nullable_to_non_nullable
@@ -1695,7 +1695,7 @@ abstract class _$$_RoleCreationStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       bool isError,
-      CommonResponse? response,
+      CommonResponseUse? response,
       ModuleResponse? moduleResponse,
       ViewRoleResponse? viewRoleResponse,
       String? error,
@@ -1739,7 +1739,7 @@ class __$$_RoleCreationStateCopyWithImpl<$Res>
       response: freezed == response
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
-              as CommonResponse?,
+              as CommonResponseUse?,
       moduleResponse: freezed == moduleResponse
           ? _value.moduleResponse
           : moduleResponse // ignore: cast_nullable_to_non_nullable
@@ -1792,7 +1792,7 @@ class _$_RoleCreationState implements _RoleCreationState {
   @override
   final bool isError;
   @override
-  final CommonResponse? response;
+  final CommonResponseUse? response;
   @override
   final ModuleResponse? moduleResponse;
   @override
@@ -1866,7 +1866,7 @@ abstract class _RoleCreationState implements RoleCreationState {
   const factory _RoleCreationState(
       {required final bool isLoading,
       required final bool isError,
-      required final CommonResponse? response,
+      required final CommonResponseUse? response,
       required final ModuleResponse? moduleResponse,
       required final ViewRoleResponse? viewRoleResponse,
       required final String? error,
@@ -1880,7 +1880,7 @@ abstract class _RoleCreationState implements RoleCreationState {
   @override
   bool get isError;
   @override
-  CommonResponse? get response;
+  CommonResponseUse? get response;
   @override
   ModuleResponse? get moduleResponse;
   @override

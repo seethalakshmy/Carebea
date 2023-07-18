@@ -512,7 +512,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                 child: CustomText(
                   isCertificateApproveOrReject(state)
                       ? AppString.acceptThisCareAmbassador.val
-                      : AppString.cerificateCheckStatus.val,
+                      : AppString.certificateCheckStatus.val,
                   style: TS().gRoboto(
                       color: AppColor.primaryColor.val,
                       fontWeight: FW.w500.val,

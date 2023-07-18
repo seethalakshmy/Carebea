@@ -7,6 +7,8 @@ import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/core/text_utils.dart';
 import 'package:admin_580_tech/core/theme.dart';
+import 'package:admin_580_tech/presentation/admin_creation/admin_creation_page.dart';
+import 'package:admin_580_tech/presentation/admins/admins_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/caregiver_verification_page.dart';
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
@@ -57,6 +59,7 @@ class _MenuBarState extends State<SideMenuPage> {
   Map<String, String> mainData = {
     AppString.dashboard.val: "",
     AppString.roleManagement.val: "",
+    AppString.adminManagement.val: "",
     AppString.careAmbassador.val: "",
     AppString.userManagement.val: "",
     AppString.transactionManagement.val: "",
@@ -420,7 +423,7 @@ class _MenuBarState extends State<SideMenuPage> {
   }
 
   bool isSelected(Map<String, String> items, int index, TabsRouter tabsRouter) {
-    String path = tabsRouter.currentPath.replaceAll("admin/", "");
+    String path = tabsRouter.currentPath.replaceAll("admin/main/", "");
     CustomLog.log('path is $path');
     if (path == "/user-management-detail") {
       path = "user-management";
@@ -429,6 +432,8 @@ class _MenuBarState extends State<SideMenuPage> {
         path == AppString.careAmbassadorProfilePath.val ||
         path == AppString.careAmbassadorCreationPath.val) {
       path = "care-ambassador";
+    } else if (path == "role-manage") {
+      path = "role-management";
     }
     return items.keys.elementAt(index) == upperCase(path) ? true : false;
   }
@@ -445,7 +450,9 @@ class _MenuBarState extends State<SideMenuPage> {
     OnboardingRoute(),
     CaregiverVerificationRoute(),
     RolesRoute(),
-    RoleCreationRoute()
+    RoleCreationRoute(),
+    AdminsRoute(),
+    AdminCreationRoute()
   ];
 
   int getRouteIndex(String route) {
@@ -472,6 +479,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return 10;
     } else if (route == AppString.roleManage.val) {
       return 11;
+    } else if (route == AppString.adminManagement.val) {
+      return 12;
+    } else if (route == AppString.adminManage.val) {
+      return 13;
     } else {
       return 0;
     }
@@ -501,6 +512,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return const RolesPage();
     } else if (index == 11) {
       return const RoleCreationPage();
+    } else if (index == 12) {
+      return const AdminsPage();
+    } else if (index == 13) {
+      return const AdminCreationPage();
     } else {
       return const DashboardPage();
     }

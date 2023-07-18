@@ -5,7 +5,7 @@ class RoleCreationState with _$RoleCreationState {
   const factory RoleCreationState({
     required bool isLoading,
     required bool isError,
-    required CommonResponse? response,
+    required CommonResponseUse? response,
     required ModuleResponse? moduleResponse,
     required ViewRoleResponse? viewRoleResponse,
     required String? error,

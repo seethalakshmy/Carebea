@@ -1,3 +1,5 @@
+import 'package:admin_580_tech/presentation/admin_creation/admin_creation_page.dart';
+import 'package:admin_580_tech/presentation/admins/admins_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/caregiver_verification_page.dart';
 import 'package:admin_580_tech/presentation/forgot_password/forgot_password_page.dart';
@@ -39,10 +41,7 @@ import '../transaction_management/transaction_management_page.dart';
       children: [
         AutoRoute(path: 'dashboard', page: DashboardPage, initial: true),
         AutoRoute(
-          path: 'care-ambassador',
-          page: CareGiversPage,
-          maintainState: true
-        ),
+            path: 'care-ambassador', page: CareGiversPage, maintainState: true),
         AutoRoute(
           path: 'user-management',
           page: UserManagementPage,
@@ -79,7 +78,13 @@ import '../transaction_management/transaction_management_page.dart';
         AutoRoute(
             path: 'role-management', page: RolesPage, maintainState: false),
         AutoRoute(
-            path: "role_manage", page: RoleCreationPage, maintainState: false),
+            path: "role-manage", page: RoleCreationPage, maintainState: false),
+        AutoRoute(
+            path: "admin-manage",
+            page: AdminCreationPage,
+            maintainState: false),
+        AutoRoute(
+            path: "admin-management", page: AdminsPage, maintainState: false),
       ],
     ),
   ],

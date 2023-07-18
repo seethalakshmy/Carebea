@@ -1,38 +1,46 @@
-import 'package:admin_580_tech/application/bloc/caregiver_creation/caregiver_creation_bloc.dart';
 import 'package:admin_580_tech/core/responsive.dart';
-import 'package:admin_580_tech/infrastructure/caregiver_creation/caregiver_creation_repository.dart';
-import 'package:admin_580_tech/presentation/caregiver_creation/widgets/details_text_field_with_label.dart';
+import 'package:admin_580_tech/infrastructure/admin_creation/admin_creation_repository.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
+import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
+import 'package:admin_580_tech/presentation/widget/loader_view.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../application/bloc/form_validation/form_validation_bloc.dart';
+import '../../application/bloc/admin_creation/admin_creation_bloc.dart';
+import '../../core/custom_debugger.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
-import '../../infrastructure/shared_preference/shared_preff_util.dart';
-import '../widget/common_button_loader_widget.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
+import '../widget/custom_dropdown.dart';
 import '../widget/custom_sizedbox.dart';
-import '../widget/custom_text_field.dart';
+import '../widget/details_text_field_with_label.dart';
+import '../widget/error_view.dart';
 import '../widget/header_view.dart';
 
-class CaregiverCreationPage extends StatefulWidget {
-  const CaregiverCreationPage({Key? key}) : super(key: key);
+class AdminCreationPage extends StatefulWidget {
+  const AdminCreationPage(
+      {Key? key,
+      @QueryParam('view') this.isView,
+      @QueryParam('edit') this.isEdit,
+      @QueryParam('role_id') this.roleId})
+      : super(key: key);
+
+  /// To do change :- change these two variables to bool for now getting error like " NoSuchMethodError: 'toLowerCase"  when extracting using auto-route
+  final String? isView;
+  final String? isEdit;
+  final String? roleId;
 
   @override
-  State<CaregiverCreationPage> createState() => _CaregiverCreationPageState();
+  State<AdminCreationPage> createState() => _AdminCreationPageState();
 }
 
-class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
-  late CaregiverCreationBloc _creationBloc;
-  final FormValidationBloc _validationBloc = FormValidationBloc();
-
+class _AdminCreationPageState extends State<AdminCreationPage> {
   final TextEditingController _fNameController = TextEditingController();
   final TextEditingController _lNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -42,14 +50,16 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
   final FocusNode _lNameFocusNode = FocusNode();
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _mobileFocusNode = FocusNode();
+  late AdminCreationBloc _adminCreationBloc;
+  bool isError = true;
 
-  AutovalidateMode _validateMode = AutovalidateMode.disabled;
+  final AutovalidateMode _validateMode = AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    _creationBloc = CaregiverCreationBloc(CaregiverCreationRepository());
+    _adminCreationBloc = AdminCreationBloc(AdminCreationRepository());
   }
 
   @override
@@ -57,68 +67,131 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
     return Column(
       children: [
         HeaderView(
-          title: AppString.createNew.val,
+          title: AppString.adminManagement.val,
         ),
-        CustomSizedBox(height: DBL.twenty.val),
+        CustomSizedBox(height: DBL.ten.val),
         _rebuildView(),
       ],
     );
   }
 
-  MultiBlocProvider _rebuildView() {
-    return MultiBlocProvider(providers: [
-      BlocProvider(create: (context) => FormValidationBloc()),
-      BlocProvider(
-          create: (context) =>
-              CaregiverCreationBloc(CaregiverCreationRepository())),
-    ], child: _bodyView());
+  _rebuildView() {
+    return BlocProvider(
+      create: (_) => _adminCreationBloc,
+      child: _bodyView(context),
+    );
   }
 
-  _bodyView() {
-    return BlocConsumer<CaregiverCreationBloc, CaregiverCreationState>(
-      listener: (context, listenerState) {
-        final router = context.router;
-
-        return listenerState.failureOrSuccessOption.fold(
-          () {},
-          (some) => some.fold(
-            (l) {},
-            (r) async {
-              if (r.status!) {
-                SharedPreffUtil().setUserId = r.data?.id ?? "";
-                router.navigate(const OnboardingRoute());
-              } else {}
-            },
-          ),
-        );
-      },
-      buildWhen: (previous, current) => previous != current,
-      bloc: _creationBloc,
-      builder: (context, creationState) {
-        return CustomCard(
-          shape: PR().roundedRectangleBorder(DBL.eighteen.val),
-          elevation: DBL.seven.val,
-          child: CustomContainer(
-            width: MediaQuery.of(context).size.width * 0.8,
-            padding: const EdgeInsets.all(20),
-            child: _createCaregiverView(),
+  _bodyView(BuildContext context) {
+    return BlocBuilder<AdminCreationBloc, AdminCreationState>(
+      builder: (context, state) {
+        return CustomPadding.symmetric(
+          horizontal: DBL.sixteen.val,
+          child: CustomCard(
+            shape: PR().roundedRectangleBorder(DBL.five.val),
+            elevation: DBL.seven.val,
+            child: CustomContainer(
+                padding: EdgeInsets.symmetric(
+                    horizontal: DBL.forty.val, vertical: DBL.eighteen.val),
+                child: state.isLoading
+                    ? const LoaderView()
+                    : state.isError
+                        ? ErrorView(
+                            isClientError: state.isClientError,
+                            errorMessage: state.error)
+                        : _createAdminView(state)),
           ),
         );
       },
     );
   }
 
-  _createCaregiverView() {
+  _roleDropDown(AdminCreationState state) {
+    return CustomSizedBox(
+      width: DBL.twoEighty.val,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              CustomText(AppString.role.val,
+                  style: TS().gRoboto(
+                      fontWeight: FW.w400.val,
+                      color: AppColor.label8.val,
+                      fontSize: FS.font16.val)),
+              CustomPadding.only(
+                left: DBL.five.val,
+                child: CustomText(
+                  AppString.mandatorySymbol.val,
+                  style: TS().gRoboto(
+                      color: AppColor.red.val, fontSize: FS.font15.val),
+                ),
+              )
+            ],
+          ),
+          CustomSizedBox(height: DBL.ten.val),
+          CustomDropdown<int>(
+            isError: state.isDropDownError,
+            onChange: (int value, int index) {
+              CustomLog.log("val:::${value.toString()}");
+            },
+            dropdownButtonStyle: DropdownButtonStyle(
+              mainAxisAlignment: MainAxisAlignment.start,
+              width: DBL.twoEighty.val,
+              height: DBL.fortyEight.val,
+              elevation: DBL.zero.val,
+              padding: EdgeInsets.only(left: DBL.fifteen.val),
+              backgroundColor: Colors.white,
+              primaryColor: AppColor.white.val,
+            ),
+            dropdownStyle: DropdownStyle(
+              borderRadius: BorderRadius.circular(DBL.zero.val),
+              elevation: DBL.two.val,
+              color: AppColor.white.val,
+              padding: EdgeInsets.all(DBL.five.val),
+            ),
+            items: [AppString.active.val, AppString.inActive.val]
+                .asMap()
+                .entries
+                .map(
+                  (item) => DropdownItem<int>(
+                    value: item.key,
+                    child: Padding(
+                      padding: EdgeInsets.all(DBL.eight.val),
+                      child: Text(
+                        item.value,
+                        style: TS().gRoboto(
+                            fontWeight: FW.w500.val,
+                            fontSize: FS.font15.val,
+                            color: AppColor.columColor2.val),
+                      ),
+                    ),
+                  ),
+                )
+                .toList(),
+            child: CustomText(
+              AppString.selectHint.val,
+              style: TS().gRoboto(
+                  fontWeight: FW.w500.val,
+                  fontSize: FS.font15.val,
+                  color: AppColor.columColor2.val),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _createAdminView(AdminCreationState state) {
     return Column(
-      crossAxisAlignment: Responsive.isWeb(context)
-          ? CrossAxisAlignment.start
-          : CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(
           AppString.basicDetails.val,
           style: TS().gRoboto(
               fontSize:
-                  Responsive.isWeb(context) ? FS.font18.val : FS.font15.val,
+                  Responsive.isWeb(context) ? FS.font18.val : FS.font17.val,
               fontWeight: FW.w500.val,
               color: AppColor.matBlack.val),
         ),
@@ -127,16 +200,14 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
           formKey: _formKey,
           autoValidateMode: _validateMode,
           child: Wrap(
-            alignment:
-                Responsive.isMobile(context) || Responsive.isTablet(context)
-                    ? WrapAlignment.center
-                    : WrapAlignment.start,
+            alignment: WrapAlignment.start,
             spacing: 20,
             runSpacing: 20,
             children: [
               CustomSizedBox(
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
+                  isMandatory: true,
                   labelName: AppString.firstName.val,
                   focusNode: _fNameFocusNode,
                   controller: _fNameController,
@@ -154,6 +225,7 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
               CustomSizedBox(
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
+                  isMandatory: true,
                   labelName: AppString.lastName.val,
                   focusNode: _lNameFocusNode,
                   controller: _lNameController,
@@ -171,6 +243,7 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
               CustomSizedBox(
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
+                  isMandatory: true,
                   labelName: AppString.emailAddress.val,
                   focusNode: _emailFocusNode,
                   controller: _emailController,
@@ -192,6 +265,7 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
               CustomSizedBox(
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
+                  isMandatory: true,
                   labelName: AppString.mobileNumber.val,
                   focusNode: _mobileFocusNode,
                   controller: _mobileController,
@@ -208,42 +282,36 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
                   suffixIcon: const CustomContainer(width: 0),
                 ),
               ),
-              BlocBuilder<FormValidationBloc, FormValidationState>(
-                bloc: _validationBloc,
-                builder: (context, state) {
-                  return Row(
-                    mainAxisAlignment: Responsive.isWeb(context)
-                        ? MainAxisAlignment.end
-                        : MainAxisAlignment.center,
-                    children: [
-                      CustomButton(
-                        height: 45,
-                        minWidth: 120,
-                        onPressed: () {
-                          context.router.navigate(CareGiversRoute());
-                        },
-                        text: AppString.cancel.val,
-                        color: AppColor.white.val,
-                        textColor: AppColor.primaryColor.val,
-                        borderWidth: 1,
-                      ),
-                      const CustomSizedBox(width: 20),
-                      _creationBloc.state.isLoading
-                          ? const CommonButtonLoaderWidget()
-                          : CustomButton(
-                              height: 45,
-                              minWidth: 120,
-                              onPressed: () {
-                                checkInputData();
-                              },
-                              text: AppString.save.val,
-                              color: AppColor.primaryColor.val,
-                              textColor: AppColor.white.val,
-                            ),
-                    ],
-                  );
-                },
-              )
+              _roleDropDown(state),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CustomButton(
+                    height: 45,
+                    minWidth: 120,
+                    onPressed: () {
+                      context.router.navigate(CareGiversRoute());
+                    },
+                    text: AppString.cancel.val,
+                    color: AppColor.white.val,
+                    textColor: AppColor.primaryColor.val,
+                    borderWidth: 1,
+                  ),
+                  CustomSizedBox(width: DBL.twenty.val),
+                  CustomButton(
+                    height: DBL.fortyFive.val,
+                    minWidth: DBL.oneTwenty.val,
+                    onPressed: () {
+                      isError = false;
+
+                      checkInputData(state);
+                    },
+                    text: AppString.save.val,
+                    color: AppColor.primaryColor.val,
+                    textColor: AppColor.white.val,
+                  ),
+                ],
+              ),
             ],
           ),
         )
@@ -251,74 +319,11 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
     );
   }
 
-  Row _labelText(String labelName) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        CustomText(labelName,
-            style: TS().gRoboto(
-                fontWeight: FW.w400.val,
-                color: AppColor.label.val,
-                fontSize: FS.font16.val)),
-        CustomText(
-          "*",
-          style: TS().gRoboto(color: AppColor.error.val),
-        )
-      ],
-    );
-  }
+  checkInputData(AdminCreationState state) {
+    _adminCreationBloc
+        .add(const AdminCreationEvent.dropDownErrorDisplay(value: true));
 
-  CTextField _textFormField(
-    FocusNode focusNode,
-    TextEditingController controller,
-    FormFieldValidator<String> validator,
-    TextInputAction textInputAction,
-    TextInputType textInputType,
-    Widget sufficsIcon,
-  ) {
-    return CTextField(
-      suffixIcon: sufficsIcon,
-      focusNode: focusNode,
-      width: DBL.twoEighty.val,
-      height: DBL.forty.val,
-      onChanged: (String value) {},
-      keyBoardType: textInputType,
-      textInputAction: textInputAction,
-      controller: controller,
-      validator: validator,
-    );
-  }
-
-  _caregiverDetailsItem(
-    String labelName,
-    FocusNode focusNode,
-    TextEditingController controller,
-    FormFieldValidator<String> validator,
-    TextInputAction textInputAction,
-    TextInputType textInputType,
-    Widget sufficsIcon,
-  ) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _labelText(labelName),
-        _textFormField(focusNode, controller, validator, textInputAction,
-            textInputType, sufficsIcon)
-      ],
-    );
-  }
-
-  checkInputData() {
-    if (_validateMode != AutovalidateMode.always) {
-      _validationBloc.add(const FormValidationEvent.submit());
-    }
-    if (_formKey.currentState!.validate()) {
-      _creationBloc.add(CaregiverCreationEvent.createCaregiver(
-          firstName: _fNameController.text.trim(),
-          lastName: _lNameController.text.trim(),
-          email: _emailController.text.trim(),
-          mobileNo: _mobileController.text.trim()));
-    }
+    if (_formKey.currentState!.validate() && !state.isDropDownError) {}
   }
 
   @override

@@ -200,7 +200,11 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
                 ),
                 Positioned(
                     right: DBL.zero.val,
-                    top: isLg2(context) ? DBL.oneThirtyEight.val : DBL.two.val,
+                    top: isXs4(context)
+                        ? DBL.oneSeventy.val
+                        : isLg2(context)
+                            ? DBL.oneFifty.val
+                            : DBL.two.val,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -537,4 +541,5 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
   bool isXs2(context) => MediaQuery.of(context).size.width <= 930;
 
   bool isXs3(context) => MediaQuery.of(context).size.width <= 805;
+  bool isXs4(context) => MediaQuery.of(context).size.width <= 590;
 }

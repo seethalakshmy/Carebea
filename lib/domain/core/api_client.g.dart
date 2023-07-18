@@ -848,7 +848,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<CommonResponse> addRoleUpdateRole(
+  Future<CommonResponseUse> addRoleUpdateRole(
     token,
     userId,
     role,
@@ -874,7 +874,7 @@ class _ApiClient implements ApiClient {
     };
     _data.removeWhere((k, v) => v == null);
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponseUse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -886,7 +886,7 @@ class _ApiClient implements ApiClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CommonResponse.fromJson(_result.data!);
+    final value = CommonResponseUse.fromJson(_result.data!);
     return value;
   }
 
@@ -918,7 +918,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<CommonResponse> deleteRole(
+  Future<CommonResponseUse> deleteRole(
     token,
     userId,
     roleId,
@@ -932,7 +932,7 @@ class _ApiClient implements ApiClient {
       'role_id': roleId,
     };
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponseUse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -944,7 +944,7 @@ class _ApiClient implements ApiClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CommonResponse.fromJson(_result.data!);
+    final value = CommonResponseUse.fromJson(_result.data!);
     return value;
   }
 
@@ -1017,10 +1017,12 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<CommonResponse> addAdmin(
+  Future<CommonResponseUse> addAdmin(
     token,
+    userId,
     firstName,
     lastName,
+    email,
     mobileNumber,
     roleId,
   ) async {
@@ -1030,14 +1032,16 @@ class _ApiClient implements ApiClient {
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
     final _data = {
+      'user_id': userId,
       'first_name': firstName,
       'last_name': lastName,
+      'email': email,
       'mobile_number': mobileNumber,
       'user_role_id': roleId,
     };
     _data.removeWhere((k, v) => v == null);
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponseUse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -1049,7 +1053,155 @@ class _ApiClient implements ApiClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CommonResponse.fromJson(_result.data!);
+    final value = CommonResponseUse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponseUse> updateAdmin(
+    userId,
+    adminId,
+    token,
+    firstName,
+    lastName,
+    email,
+    mobileNumber,
+    roleId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'admin_id': adminId,
+      'first_name': firstName,
+      'last_name': lastName,
+      'email': email,
+      'mobile_number': mobileNumber,
+      'user_role_id': roleId,
+    };
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponseUse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/edit-admin',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponseUse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<AdminGetResponse> getAdmins(
+    token,
+    userId,
+    page,
+    limit,
+    statusID,
+    roleID,
+    searchTerm,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'page': page,
+      'limit': limit,
+      'status_id': statusID,
+      'role_id': roleID,
+      'search_term': searchTerm,
+    };
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<AdminGetResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-admins',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AdminGetResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponseUse> deleteAdmin(
+    token,
+    userId,
+    adminId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'admin_id': adminId,
+    };
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponseUse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/delete-admin',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponseUse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<AdminViewResponse> viewAdmin(
+    token,
+    userId,
+    adminId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'admin_id': adminId,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<AdminViewResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/view-admin',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AdminViewResponse.fromJson(_result.data!);
     return value;
   }
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 enum AppString {
   userId("USER ID"),
   login("Login"),
+  mandatorySymbol("*"),
   select("Select"),
   selectHint("--Select--"),
   ok("Ok"),
@@ -38,7 +39,9 @@ enum AppString {
   careAmbassador("Care Ambassador"),
   userManagement("User Management"),
   roleManagement("Role Management"),
+  adminManagement("Admin Management"),
   roleManage("Role Manage"),
+  adminManage("Admin Manage"),
   userManagementDetail("User Management Detail"),
   careAmbassadorDetail("Care Ambassador Detail"),
   careAmbassadorVerification("Care Ambassador Verification"),
@@ -159,6 +162,7 @@ enum AppString {
   update("Update"),
   yes("Yes"),
   no("No"),
+  deleteRole("Are you sure want to delete this role?"),
   noUsersFound("No Users found!"),
   profileCompletion("Profile Completion"),
   logout("Logout"),
@@ -232,7 +236,6 @@ enum AppString {
   ddmmyyyy("dd/mm/yyyy"),
   mmDDYYY("MM/dd/yyyy"),
   mmDDYYYTimeZone("MM/dd/yyyy  'at' hh:mm a"),
-
   personalDetails("Personal Details"),
   qualificationAndTestResult("Qualifications & Test Result"),
   uploadYourProfilePhoto("Upload Your Profile Photo"),
@@ -266,7 +269,7 @@ enum AppString {
   knownLanguages("Select your known languages"),
   ifOthersPlzSpecify("If others, please specify"),
   backgroundCheckStatus("Background Check Status"),
-  cerificateCheckStatus("Certificate Check Status"),
+  certificateCheckStatus("Certificate Check Status"),
   approve("Approve"),
   approved("Approved"),
   rejected("Rejected"),
@@ -276,15 +279,18 @@ enum AppString {
   trainingStarted("Training Started"),
   interviewStarted("Interview Started"),
   interviewCompleted("Interview Completed"),
+  interviewFailed("Interview Failed"),
+  backgroundRejected("Background Verification Rejected"),
+  certificateRejected("Certificate Verification Rejected"),
   enterTheReason("Enter the reason"),
   acceptThisCareAmbassador("Do you want to accept this care ambassador?"),
   selectRejectedDocument("Select rejected document and mentioned the reason"),
 
   ///paths
-  careAmbassadorVerificationPath("/care-ambassador-verification"),
-  careAmbassadorCreationPath("/care-ambassador-creation"),
-  careAmbassadorProfilePath("/care-ambassador-profile"),
-  careAmbassadorDetailPath("/care-ambassador-detail"),
+  careAmbassadorVerificationPath("care-ambassador-verification"),
+  careAmbassadorCreationPath("care-ambassador-creation"),
+  careAmbassadorProfilePath("care-ambassador-profile"),
+  careAmbassadorDetailPath("care-ambassador-detail"),
 
   ///validations
   emptyEmail("Email address shouldn't be empty"),
@@ -329,7 +335,6 @@ enum AppString {
   emptyRole("Role name shouldn't be empty"),
   emptyModule("You Should Select at least one module"),
   emptyProfilePic("Please select your profile picture"),
-
   agreementChckboxText(
       "I have read and agree to the home health aid agreement"),
   dummyAgreementText(
@@ -410,7 +415,6 @@ enum AppColor {
   darkGrey2(Color(0xff496379)),
   darkGrey3(Color(0xff5B6D84)),
   darkGrey4(Color(0xff52687B)),
-
   lightWhite(Color(0xffEEF4FA)),
   notAvailable(Color(0xff7C7676)),
   timeInChange(Color(0xffAE92FE)),
@@ -472,7 +476,6 @@ enum IMG {
   file("assets/icons/ic_file.svg"),
   roundClose("assets/icons/round_close.svg"),
   roundAdd("assets/icons/plus-circle.svg"),
-
   imageNotFound("assets/icons/image_not_found.png"),
   ssn("assets/icons/ic_ssn.svg"),
   warning("assets/icons/ic_warning.svg"),
@@ -751,12 +754,18 @@ enum InOut {
   const InOut(this.val);
 }
 
+//1=start verification 2=started verification 3=Training verification
+// started 4=interview started 5=interview completed(verified)
+// 7=background verification rejected 8=certificate rejected
 enum Verification {
   startVerification(1),
   startedVerification(2),
   trainingStarted(3),
   interViewStarted(4),
-  interViewCompleted(5);
+  interViewCompleted(5),
+  interViewFailed(6),
+  backgroundVerificationRejected(7),
+  certificateVerificationRejected(8);
 
   final int val;
 

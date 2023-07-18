@@ -13,13 +13,24 @@ import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text_field.dart';
 import 'package:admin_580_tech/presentation/widget/header_view.dart';
 import 'package:admin_580_tech/presentation/widget/loader_view.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/custom_debugger.dart';
+import '../side_menu/side_menu_page.dart';
 
 class RoleCreationPage extends StatefulWidget {
-  const RoleCreationPage({super.key});
+  const RoleCreationPage(
+      {super.key,
+      @QueryParam('view') this.isView,
+      @QueryParam('edit') this.isEdit,
+      @QueryParam('role_id') this.roleId});
+
+  /// To do change :- change these two variables to bool for now getting error like " NoSuchMethodError: 'toLowerCase"  when extracting using auto-route
+  final String? isView;
+  final String? isEdit;
+  final String? roleId;
 
   @override
   State<RoleCreationPage> createState() => _RoleCreationPageState();
@@ -31,12 +42,33 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
   String adminUserID = "";
   String roleId = "64afdb6a7ee13eec8899b88d";
   List<String> selectedModules = [];
+  bool? _isView;
+
+  bool? _isEdit;
 
   @override
   void initState() {
     super.initState();
     adminUserID = SharedPreffUtil().getUserId;
+    print('userID:: $adminUserID');
+    // adminUserID = "64a69c032961698d154944ea";
     roleCreationBloc = RoleCreationBloc(RoleCreationRepository());
+    roleId =
+        autoTabRouter?.currentChild?.queryParams.getString("role_id", "") ?? "";
+    if (autoTabRouter!.currentChild!.queryParams
+        .getString('view', "")
+        .isNotEmpty) {
+      _isView = true;
+    } else {
+      _isView = false;
+    }
+    if (autoTabRouter!.currentChild!.queryParams
+        .getString('edit', "")
+        .isNotEmpty) {
+      _isEdit = true;
+    } else {
+      _isEdit = false;
+    }
   }
 
   @override
@@ -117,9 +149,12 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
             CustomSizedBox(
               height: DBL.eight.val,
             ),
-            CTextField(
-              controller: _roleController,
-              width: DBL.fourHundred.val,
+            IgnorePointer(
+              ignoring: _isView!,
+              child: CTextField(
+                controller: _roleController,
+                width: DBL.fourHundred.val,
+              ),
             )
           ],
         ),
@@ -149,48 +184,52 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
             Container(
               padding: EdgeInsets.only(top: DBL.eighty.val),
               alignment: Alignment.topRight,
-              child: CustomButton(
-                borderRadius: DBL.five.val,
-                padding: EdgeInsets.symmetric(
-                    horizontal: DBL.fortyFive.val, vertical: DBL.eighteen.val),
-                onPressed: () {
-                  addAssignIdList(state);
-                  if (_roleController.text.trim().isEmpty) {
-                    CSnackBar.showError(context, msg: AppString.emptyRole.val);
-                  } else if (selectedModules.isEmpty) {
-                    CSnackBar.showError(context,
-                        msg: AppString.emptyModule.val);
-                  } else {
-                    if (roleId.isEmpty) {
-                      roleCreationBloc.add(RoleCreationEvent.addUpdateRole(
-                          userId: adminUserID,
-                          role: _roleController.text.trim(),
-                          moduleId: selectedModules,
-                          isView: state.isView ? 1 : 0,
-                          isDelete: state.isDelete ? 1 : 0,
-                          isEdit: state.isEdit ? 1 : 0,
-                          context: context));
-                    } else {
-                      roleCreationBloc.add(RoleCreationEvent.addUpdateRole(
-                          roleId: roleId,
-                          userId: adminUserID,
-                          role: _roleController.text.trim(),
-                          moduleId: selectedModules,
-                          isView: state.isView ? 1 : 0,
-                          isDelete: state.isDelete ? 1 : 0,
-                          isEdit: state.isEdit ? 1 : 0,
-                          context: context));
-                    }
-                  }
-                },
-                text:
-                    roleId.isEmpty ? AppString.save.val : AppString.update.val,
-              ),
+              child: _saveButton(state, context),
             )
           ],
         ),
       ),
     );
+  }
+
+  _saveButton(RoleCreationState state, BuildContext context) {
+    return !_isView!
+        ? CustomButton(
+            borderRadius: DBL.five.val,
+            padding: EdgeInsets.symmetric(
+                horizontal: DBL.fortyFive.val, vertical: DBL.eighteen.val),
+            onPressed: () {
+              addAssignIdList(state);
+              if (_roleController.text.trim().isEmpty) {
+                CSnackBar.showError(context, msg: AppString.emptyRole.val);
+              } else if (selectedModules.isEmpty) {
+                CSnackBar.showError(context, msg: AppString.emptyModule.val);
+              } else {
+                if (roleId.isEmpty) {
+                  roleCreationBloc.add(RoleCreationEvent.addUpdateRole(
+                      userId: adminUserID,
+                      role: _roleController.text.trim(),
+                      moduleId: selectedModules,
+                      isView: state.isView ? 1 : 0,
+                      isDelete: state.isDelete ? 1 : 0,
+                      isEdit: state.isEdit ? 1 : 0,
+                      context: context));
+                } else {
+                  roleCreationBloc.add(RoleCreationEvent.addUpdateRole(
+                      roleId: roleId,
+                      userId: adminUserID,
+                      role: _roleController.text.trim(),
+                      moduleId: selectedModules,
+                      isView: state.isView ? 1 : 0,
+                      isDelete: state.isDelete ? 1 : 0,
+                      isEdit: state.isEdit ? 1 : 0,
+                      context: context));
+                }
+              }
+            },
+            text: !_isEdit! ? AppString.save.val : AppString.update.val,
+          )
+        : CustomSizedBox.shrink();
   }
 
   Column _bottomView1(BuildContext context, RoleCreationState state) {
@@ -230,6 +269,7 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomCheckLabel(
+                isIgnoring: _isView!,
                 label: AppString.view.val,
                 value: state.isView,
                 onToggle: (val) {
@@ -239,6 +279,7 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
               width: DBL.eight.val,
             ),
             CustomCheckLabel(
+                isIgnoring: _isView!,
                 label: AppString.edit.val,
                 value: state.isEdit,
                 onToggle: (val) {
@@ -248,6 +289,7 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
               width: DBL.eight.val,
             ),
             CustomCheckLabel(
+                isIgnoring: _isView!,
                 label: AppString.delete.val,
                 value: state.isDelete,
                 onToggle: (val) {
@@ -263,67 +305,70 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
   }
 
   buildChip(RoleCreationState state) {
-    return CustomSizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: ListView(
-        shrinkWrap: true,
-        children: [
-          Wrap(
-            children: List<Widget>.generate(
-                state.moduleResponse?.module?.length ?? 0, (index) {
-              var item = state.moduleResponse?.module![index];
-              return Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: DBL.six.val, horizontal: DBL.five.val),
-                child: Theme(
-                  data: ThemeData(
-                    // Define the disabled color for ChoiceChip
-                    chipTheme: ChipThemeData(
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                          color: Colors.grey.withOpacity(0.3),
+    return IgnorePointer(
+      ignoring: _isView!,
+      child: CustomSizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            Wrap(
+              children: List<Widget>.generate(
+                  state.moduleResponse?.module?.length ?? 0, (index) {
+                var item = state.moduleResponse?.module![index];
+                return Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: DBL.six.val, horizontal: DBL.five.val),
+                  child: Theme(
+                    data: ThemeData(
+                      // Define the disabled color for ChoiceChip
+                      chipTheme: ChipThemeData(
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            color: Colors.grey.withOpacity(0.3),
+                          ),
+                          borderRadius: BorderRadius.circular(DBL.six.val),
                         ),
-                        borderRadius: BorderRadius.circular(DBL.six.val),
                       ),
                     ),
-                  ),
-                  child: ChoiceChip(
-                    selectedColor: AppColor.primaryColor.val,
-                    backgroundColor: Colors.grey.withOpacity(0.3),
-                    labelStyle: TS().gRoboto(
-                        color: item!.isSelected
-                            ? AppColor.white.val
-                            : AppColor.black3.val,
-                        fontSize: FS.font14.val),
-                    label: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        item.isSelected
-                            ? CustomIcon(
-                                icon: Icons.check,
-                                size: DBL.fourteen.val,
-                                color: AppColor.white.val,
-                              )
-                            : CustomSizedBox.shrink(),
-                        CustomSizedBox(
-                          width: DBL.five.val,
-                        ),
-                        CustomText(item.name ?? ""),
-                      ],
+                    child: ChoiceChip(
+                      selectedColor: AppColor.primaryColor.val,
+                      backgroundColor: Colors.grey.withOpacity(0.3),
+                      labelStyle: TS().gRoboto(
+                          color: item!.isSelected
+                              ? AppColor.white.val
+                              : AppColor.black3.val,
+                          fontSize: FS.font14.val),
+                      label: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          item.isSelected
+                              ? CustomIcon(
+                                  icon: Icons.check,
+                                  size: DBL.fourteen.val,
+                                  color: AppColor.white.val,
+                                )
+                              : CustomSizedBox.shrink(),
+                          CustomSizedBox(
+                            width: DBL.five.val,
+                          ),
+                          CustomText(item.name ?? ""),
+                        ],
+                      ),
+                      selected: item.isSelected,
+                      onSelected: (bool selected) {
+                        roleCreationBloc.add(RoleCreationEvent.isSelected(
+                          module: item,
+                        ));
+                      },
                     ),
-                    selected: item.isSelected,
-                    onSelected: (bool selected) {
-                      roleCreationBloc.add(RoleCreationEvent.isSelected(
-                        module: item,
-                      ));
-                    },
                   ),
-                ),
-              );
-            }).toList(),
-          ),
-        ],
+                );
+              }).toList(),
+            ),
+          ],
+        ),
       ),
     );
   }

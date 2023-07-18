@@ -1,14 +1,15 @@
-part of 'role_creation_bloc.dart';
+part of 'admin_creation_bloc.dart';
 
 @freezed
 class AdminCreationEvent with _$AdminCreationEvent {
   const factory AdminCreationEvent.addAdmin({
-    required String? roleId,
+    required String userId,
+    required String roleId,
     required BuildContext context,
     required String firstName,
     required String lastName,
     required String email,
-    required String dob,
+    required String mobile,
   }) = _AddAdmin;
 
   const factory AdminCreationEvent.getRoles({
@@ -17,15 +18,20 @@ class AdminCreationEvent with _$AdminCreationEvent {
 
   const factory AdminCreationEvent.updateAdmin({
     required String userId,
-    required String? roleId,
+    required String adminId,
+    required String roleId,
     required BuildContext context,
     required String firstName,
     required String lastName,
     required String email,
-    required String dob,
+    required String mobile,
   }) = _UpdateAdmin;
 
   const factory AdminCreationEvent.viewAdmin({
     required String userId,
+    required String adminId,
   }) = _ViewAdmin;
+  const factory AdminCreationEvent.dropDownErrorDisplay({
+    required bool value,
+  }) = _DropDownErrorDisplay;
 }

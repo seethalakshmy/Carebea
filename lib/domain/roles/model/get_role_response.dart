@@ -5,6 +5,13 @@ class GetRoleResponse {
 
   GetRoleResponse({this.status, this.message, this.data});
 
+  GetRoleResponse copyWith({bool? status, String? message, Data? data}) =>
+      GetRoleResponse(
+        message: message ?? this.message,
+        status: status ?? this.status,
+        data: data ?? this.data,
+      );
+
   GetRoleResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
@@ -29,6 +36,14 @@ class Data {
   int? actualLimit;
 
   Data({this.role, this.totalCount, this.offset, this.actualLimit});
+
+  Data copyWith(
+          {List<Role>? role, int? totalCount, int? offset, int? actualLimit}) =>
+      Data(
+          role: role ?? this.role,
+          actualLimit: actualLimit ?? this.actualLimit,
+          offset: offset ?? this.offset,
+          totalCount: totalCount ?? this.totalCount);
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['result'] != null) {
@@ -62,22 +77,25 @@ class Role {
   bool? isDelete;
   bool? isEdit;
   bool? isView;
+  bool isSelected = false;
 
-  Role(
-      {this.id,
-      this.name,
-      this.assignedModule,
-      this.status,
-      this.isDelete,
-      this.isEdit,
-      this.isView});
+  Role({
+    this.id,
+    this.name,
+    this.assignedModule,
+    this.status,
+    this.isDelete,
+    this.isEdit,
+    this.isView,
+    this.isSelected = false,
+  });
 
   Role.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    // if (json['assigned_module'] != null) {
-    //   // assignedModule = json['assigned_module'].cast<String>();
-    // }
+    if (json['assigned_module'] != null) {
+      assignedModule = json['assigned_module'].cast<String>();
+    }
     status = json['status'];
     isDelete = json['is_delete'] ?? false;
     isEdit = json['is_edit'] ?? false;
