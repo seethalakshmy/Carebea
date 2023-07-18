@@ -68,8 +68,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
           onboardingBloc: _onboardingBloc,
           pageController: controller),*/
       PreferenceView(
-        onboardingBloc: _onboardingBloc,
         pageController: controller,
+        onboardingBloc: _onboardingBloc,
       ),
       ServicesView(pageController: controller),
       ReferenceView(
