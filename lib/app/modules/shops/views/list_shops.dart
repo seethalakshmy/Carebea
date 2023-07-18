@@ -51,7 +51,7 @@ class ListShops extends StatelessWidget {
                       children: [
                         Expanded(
                           child: CustomTextField(
-                            textcontroller:controller.searchEditingController,
+                            textcontroller: controller.searchEditingController,
                             key: const ValueKey("search"),
                             // focusNode: _focusNode,
                             onChanged: (val) {

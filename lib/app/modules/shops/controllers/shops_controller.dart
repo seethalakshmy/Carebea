@@ -232,7 +232,11 @@ class ShopsController extends GetxController {
   }
 
   Future<void> _paginateSearchShop() async {
-    var shopListResponse = await shopListRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {selectedSearchtype.value.type!: searchEditingController.text}, pageNumber: pageNumber, pageSize: pageSize);
+    if (pageNumber == 0) {
+      pageNumber = 1;
+    }
+    var shopListResponse =
+        await shopListRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {selectedSearchtype.value.type!: searchEditingController.text}, pageNumber: pageNumber, pageSize: pageSize);
     if ((shopListResponse.shopListResult?.status ?? false) && ((shopListResponse.shopListResult!.shopCount ?? 0) > 0)) {
       pageNumber += 1;
       shopList.addAll(shopListResponse.shopListResult!.shopList!);
