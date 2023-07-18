@@ -32,13 +32,26 @@ class OnboardingEvent with _$OnboardingEvent {
     required CovidVaccinationDetails covidDetails,
   }) = _GetQualificationDetails;
 
+  const factory OnboardingEvent.preferenceDetails(
+      {required String userId,
+      required String yearsOfExp,
+      required bool serveWithSmoker,
+      required bool willingToTransportation,
+      required bool willingToServeWithPets,
+      required List<PetsList> petsList,
+      required List<String> knownLanguages}) = _SubmitPreferenceDetails;
+
   const factory OnboardingEvent.commonData() = _CommonDataLists;
 
   const factory OnboardingEvent.cityList() = _CityLists;
 
   const factory OnboardingEvent.stateList() = _StateLists;
-  const factory OnboardingEvent.petsList() = _GetPetList;
-  const factory OnboardingEvent.languageList() = _GetLanguageList;
+  const factory OnboardingEvent.yearsOfExpList() = _YearsOfExp;
+
+  const factory OnboardingEvent.petsList(String petSearchKey) = _GetPetList;
+
+  const factory OnboardingEvent.languageList(String languageSearchKey,
+      List<PreferenceLanguageModel> languageList) = _GetLanguageList;
 
   const factory OnboardingEvent.radioHHA(int isSelected) = _RadioHHASelected;
 
@@ -85,4 +98,8 @@ class OnboardingEvent with _$OnboardingEvent {
   const factory OnboardingEvent.covidDocumentUpload(
           List<PlatformFile> bytesList, bool listUpdated) =
       _CovidDocumentUploadSelected;
+
+  const factory OnboardingEvent.languagePagination() = _LanguagePagination;
+  const factory OnboardingEvent.getServices({required String userId}) =
+      _GetCaregiverService;
 }

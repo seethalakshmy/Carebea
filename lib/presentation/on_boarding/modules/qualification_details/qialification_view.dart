@@ -340,7 +340,6 @@ class _QualificationViewState extends State<QualificationView> {
     final userId = SharedPreffUtil().getUserId;
 
     if (_formKey.currentState!.validate()) {
-      print("hha expiry date : ${hhaDateController.text.trim()}");
       widget.onboardingBloc.add(
         OnboardingEvent.qualificationDetails(
             userId: userId,

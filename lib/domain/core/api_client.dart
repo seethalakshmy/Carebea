@@ -25,7 +25,6 @@ import '../../presentation/on_boarding/modules/personal_details/models/document_
 import '../../presentation/on_boarding/modules/personal_details/models/gender_list_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/personal_details_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
-import '../../presentation/on_boarding/modules/preference/models/get_preference_response.dart';
 import '../../presentation/on_boarding/modules/preference/models/language_list_response.dart';
 import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
 import '../admins/model/admin_get_response.dart';
@@ -35,6 +34,8 @@ import '../on_boarding/models/common_response.dart';
 import '../on_boarding/models/preferences/pet_list_response.dart';
 import '../role_creation/model/module_response.dart';
 import '../role_creation/model/view_role_response.dart';
+import '../on_boarding/models/preferences/preference_request_model.dart';
+import '../on_boarding/models/preferences/years_of_experience_response.dart';
 
 part 'api_client.g.dart';
 
@@ -163,21 +164,24 @@ abstract class ApiClient {
   );
 
   @POST("/admin/admin-cg-preferences")
-  Future<GetPreferenceResponse> getPreferences(
+  Future<CommonResponse> getPreferences(
     @Field('user_id') String userId,
     @Field('years_of_experience') String yearsOfExperience,
     @Field('serve_with_a_smoker') bool serveWithSmoker,
     @Field('willing_to_provide_transportation') bool willingToTransportation,
     @Field('willing_to_serve_with_pets') bool willingToServeWithPets,
-    @Field('pets_list') List<String> petsList,
+    @Field('pets_list') List<PetsList> petsList,
     @Field('known_languages') List<String> knownLanguages,
   );
 
   @POST("/admin/admin-cg-services")
-  Future<GetServiceResponse> getServices(
+  Future<CommonResponse> submitServices(
     @Field('user_id') String userId,
     @Field('services') ServicesModel services,
   );
+
+  @GET("/care-giver/services?")
+  Future<GetServiceResponse> getServices(@Query('user_id') String userId);
 
   @POST("/admin/change-caregiver-status")
   Future<VerifyResponse> careGiverActiveOrInactive(
@@ -221,6 +225,9 @@ abstract class ApiClient {
     @Field('email') String email,
     @Field('password') String password,
   );
+
+  @GET("/common-data/get-years")
+  Future<YearsOfExperienceResponse> getYearsOfExp();
 
   @POST("/admin/admin-cg-get-services")
   Future<CareGiverServiceListResponse> getCareGiverServiceList(
