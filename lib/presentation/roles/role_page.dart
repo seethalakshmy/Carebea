@@ -377,15 +377,4 @@ class _RolesPageState extends State<RolesPage> {
   }
 
   bool _isXs(context) => MediaQuery.of(context).size.width <= 544;
-
-  bool isLarge(BuildContext context) =>
-      MediaQuery.of(context).size.width <= 1236;
-
-  bool isLg(BuildContext context) => MediaQuery.of(context).size.width <= 1370;
-
-  bool isLg1(BuildContext context) => MediaQuery.of(context).size.width <= 976;
-
-  bool isXs(BuildContext context) => MediaQuery.of(context).size.width <= 760;
-
-  bool isXs1(BuildContext context) => MediaQuery.of(context).size.width <= 780;
 }
