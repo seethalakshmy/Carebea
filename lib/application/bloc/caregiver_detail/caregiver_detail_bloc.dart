@@ -10,7 +10,9 @@ import '../../../domain/caregiver_detail/model/caregiver_service_list_response.d
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
 
 part 'caregiver_detail_bloc.freezed.dart';
+
 part 'caregiver_detail_event.dart';
+
 part 'caregiver_detail_state.dart';
 
 class CaregiverDetailBloc
