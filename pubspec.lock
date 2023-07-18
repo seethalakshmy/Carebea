@@ -401,6 +401,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.55.2"
+  flash:
+    dependency: "direct main"
+    description:
+      name: flash
+      sha256: "0ec6c32deb839a8ead1ba17a3bb055996f00ea6631384f4705ac6a08dec8b16c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.5+1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -1245,14 +1253,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
-  top_snackbar_flutter:
-    dependency: "direct main"
-    description:
-      name: top_snackbar_flutter
-      sha256: "7d4aa8f0031ad4a597c02487b4bb9b0dbb6a8d76ce1ab6e13e9565f865c1b70c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0+1"
   tuple:
     dependency: transitive
     description:

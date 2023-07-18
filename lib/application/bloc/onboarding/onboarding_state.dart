@@ -9,6 +9,7 @@ class OnboardingState with _$OnboardingState {
       required List<PlatformFile> blsDocumentList,
       required List<PlatformFile> tbDocumentList,
       required List<PlatformFile> covidDocumentList,
+      required List<GetReferences> referenceList,
       required int isHHASelected,
       required int isBLSSelected,
       required int isTBSelected,
@@ -38,6 +39,7 @@ class OnboardingState with _$OnboardingState {
   factory OnboardingState.initial() {
     return OnboardingState(
         pickedProfilePic: Uint8List(0),
+        referenceList: List.empty(growable: true),
         securityDocumentList: [],
         blsDocumentList: [],
         covidDocumentList: [],

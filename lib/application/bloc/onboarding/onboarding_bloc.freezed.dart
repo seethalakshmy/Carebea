@@ -40,8 +40,11 @@ mixin _$OnboardingEvent {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -88,8 +91,11 @@ mixin _$OnboardingEvent {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -136,8 +142,11 @@ mixin _$OnboardingEvent {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -169,6 +178,10 @@ mixin _$OnboardingEvent {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -199,6 +212,10 @@ mixin _$OnboardingEvent {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -225,6 +242,10 @@ mixin _$OnboardingEvent {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -535,8 +556,11 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -602,8 +626,11 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -669,8 +696,11 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -724,6 +754,10 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -757,6 +791,10 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -786,6 +824,10 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -911,8 +953,11 @@ class _$_CommonDataLists implements _CommonDataLists {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -962,8 +1007,11 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -1013,8 +1061,11 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -1052,6 +1103,10 @@ class _$_CommonDataLists implements _CommonDataLists {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -1085,6 +1140,10 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -1114,6 +1173,10 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -1203,8 +1266,11 @@ class _$_CityLists implements _CityLists {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -1254,8 +1320,11 @@ class _$_CityLists implements _CityLists {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -1305,8 +1374,11 @@ class _$_CityLists implements _CityLists {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -1344,6 +1416,10 @@ class _$_CityLists implements _CityLists {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -1377,6 +1453,10 @@ class _$_CityLists implements _CityLists {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -1406,6 +1486,10 @@ class _$_CityLists implements _CityLists {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -1495,8 +1579,11 @@ class _$_StateLists implements _StateLists {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -1546,8 +1633,11 @@ class _$_StateLists implements _StateLists {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -1597,8 +1687,11 @@ class _$_StateLists implements _StateLists {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -1636,6 +1729,10 @@ class _$_StateLists implements _StateLists {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -1669,6 +1766,10 @@ class _$_StateLists implements _StateLists {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -1698,6 +1799,10 @@ class _$_StateLists implements _StateLists {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -1787,8 +1892,11 @@ class _$_RelationList implements _RelationList {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -1838,8 +1946,11 @@ class _$_RelationList implements _RelationList {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -1889,8 +2000,11 @@ class _$_RelationList implements _RelationList {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -1928,6 +2042,10 @@ class _$_RelationList implements _RelationList {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -1961,6 +2079,10 @@ class _$_RelationList implements _RelationList {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -1990,6 +2112,10 @@ class _$_RelationList implements _RelationList {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -2025,7 +2151,7 @@ abstract class _$$_SubmitReferenceCopyWith<$Res> {
           _$_SubmitReference value, $Res Function(_$_SubmitReference) then) =
       __$$_SubmitReferenceCopyWithImpl<$Res>;
   @useResult
-  $Res call({String userId, List<dynamic> referenceList});
+  $Res call({String userId});
 }
 
 /// @nodoc
@@ -2040,17 +2166,12 @@ class __$$_SubmitReferenceCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = null,
-    Object? referenceList = null,
   }) {
     return _then(_$_SubmitReference(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      referenceList: null == referenceList
-          ? _value._referenceList
-          : referenceList // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
     ));
   }
 }
@@ -2058,22 +2179,14 @@ class __$$_SubmitReferenceCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SubmitReference implements _SubmitReference {
-  const _$_SubmitReference(
-      {required this.userId, required final List<dynamic> referenceList})
-      : _referenceList = referenceList;
+  const _$_SubmitReference({required this.userId});
 
   @override
   final String userId;
-  final List<dynamic> _referenceList;
-  @override
-  List<dynamic> get referenceList {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_referenceList);
-  }
 
   @override
   String toString() {
-    return 'OnboardingEvent.submitReference(userId: $userId, referenceList: $referenceList)';
+    return 'OnboardingEvent.submitReference(userId: $userId)';
   }
 
   @override
@@ -2081,14 +2194,11 @@ class _$_SubmitReference implements _SubmitReference {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SubmitReference &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            const DeepCollectionEquality()
-                .equals(other._referenceList, _referenceList));
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, userId, const DeepCollectionEquality().hash(_referenceList));
+  int get hashCode => Object.hash(runtimeType, userId);
 
   @JsonKey(ignore: true)
   @override
@@ -2121,8 +2231,11 @@ class _$_SubmitReference implements _SubmitReference {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -2144,7 +2257,7 @@ class _$_SubmitReference implements _SubmitReference {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
   }) {
-    return submitReference(userId, referenceList);
+    return submitReference(userId);
   }
 
   @override
@@ -2172,8 +2285,11 @@ class _$_SubmitReference implements _SubmitReference {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -2195,7 +2311,7 @@ class _$_SubmitReference implements _SubmitReference {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
   }) {
-    return submitReference?.call(userId, referenceList);
+    return submitReference?.call(userId);
   }
 
   @override
@@ -2223,8 +2339,11 @@ class _$_SubmitReference implements _SubmitReference {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -2248,7 +2367,7 @@ class _$_SubmitReference implements _SubmitReference {
     required TResult orElse(),
   }) {
     if (submitReference != null) {
-      return submitReference(userId, referenceList);
+      return submitReference(userId);
     }
     return orElse();
   }
@@ -2262,6 +2381,10 @@ class _$_SubmitReference implements _SubmitReference {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -2295,6 +2418,10 @@ class _$_SubmitReference implements _SubmitReference {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -2324,6 +2451,10 @@ class _$_SubmitReference implements _SubmitReference {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -2350,14 +2481,1369 @@ class _$_SubmitReference implements _SubmitReference {
 }
 
 abstract class _SubmitReference implements OnboardingEvent {
-  const factory _SubmitReference(
-      {required final String userId,
-      required final List<dynamic> referenceList}) = _$_SubmitReference;
+  const factory _SubmitReference({required final String userId}) =
+      _$_SubmitReference;
 
   String get userId;
-  List<dynamic> get referenceList;
   @JsonKey(ignore: true)
   _$$_SubmitReferenceCopyWith<_$_SubmitReference> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AddReferenceCopyWith<$Res> {
+  factory _$$_AddReferenceCopyWith(
+          _$_AddReference value, $Res Function(_$_AddReference) then) =
+      __$$_AddReferenceCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_AddReferenceCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_AddReference>
+    implements _$$_AddReferenceCopyWith<$Res> {
+  __$$_AddReferenceCopyWithImpl(
+      _$_AddReference _value, $Res Function(_$_AddReference) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_AddReference implements _AddReference {
+  const _$_AddReference();
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.addReference()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_AddReference);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
+    required TResult Function() commonData,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+  }) {
+    return addReference();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult? Function()? commonData,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+  }) {
+    return addReference?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult Function()? commonData,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (addReference != null) {
+      return addReference();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_CommonDataLists value) commonData,
+    required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+  }) {
+    return addReference(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_CommonDataLists value)? commonData,
+    TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+  }) {
+    return addReference?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_CommonDataLists value)? commonData,
+    TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (addReference != null) {
+      return addReference(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AddReference implements OnboardingEvent {
+  const factory _AddReference() = _$_AddReference;
+}
+
+/// @nodoc
+abstract class _$$DeleteReferenceCopyWith<$Res> {
+  factory _$$DeleteReferenceCopyWith(
+          _$DeleteReference value, $Res Function(_$DeleteReference) then) =
+      __$$DeleteReferenceCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int index});
+}
+
+/// @nodoc
+class __$$DeleteReferenceCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$DeleteReference>
+    implements _$$DeleteReferenceCopyWith<$Res> {
+  __$$DeleteReferenceCopyWithImpl(
+      _$DeleteReference _value, $Res Function(_$DeleteReference) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? index = null,
+  }) {
+    return _then(_$DeleteReference(
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteReference implements DeleteReference {
+  const _$DeleteReference({required this.index});
+
+  @override
+  final int index;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.deleteReference(index: $index)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteReference &&
+            (identical(other.index, index) || other.index == index));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, index);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteReferenceCopyWith<_$DeleteReference> get copyWith =>
+      __$$DeleteReferenceCopyWithImpl<_$DeleteReference>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
+    required TResult Function() commonData,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+  }) {
+    return deleteReference(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult? Function()? commonData,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+  }) {
+    return deleteReference?.call(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult Function()? commonData,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (deleteReference != null) {
+      return deleteReference(index);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_CommonDataLists value) commonData,
+    required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+  }) {
+    return deleteReference(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_CommonDataLists value)? commonData,
+    TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+  }) {
+    return deleteReference?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_CommonDataLists value)? commonData,
+    TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (deleteReference != null) {
+      return deleteReference(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeleteReference implements OnboardingEvent {
+  const factory DeleteReference({required final int index}) = _$DeleteReference;
+
+  int get index;
+  @JsonKey(ignore: true)
+  _$$DeleteReferenceCopyWith<_$DeleteReference> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateReferenceCopyWith<$Res> {
+  factory _$$UpdateReferenceCopyWith(
+          _$UpdateReference value, $Res Function(_$UpdateReference) then) =
+      __$$UpdateReferenceCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int index});
+}
+
+/// @nodoc
+class __$$UpdateReferenceCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$UpdateReference>
+    implements _$$UpdateReferenceCopyWith<$Res> {
+  __$$UpdateReferenceCopyWithImpl(
+      _$UpdateReference _value, $Res Function(_$UpdateReference) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? index = null,
+  }) {
+    return _then(_$UpdateReference(
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateReference implements UpdateReference {
+  const _$UpdateReference({required this.index});
+
+  @override
+  final int index;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.updateReference(index: $index)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateReference &&
+            (identical(other.index, index) || other.index == index));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, index);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateReferenceCopyWith<_$UpdateReference> get copyWith =>
+      __$$UpdateReferenceCopyWithImpl<_$UpdateReference>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
+    required TResult Function() commonData,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+  }) {
+    return updateReference(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult? Function()? commonData,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+  }) {
+    return updateReference?.call(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult Function()? commonData,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (updateReference != null) {
+      return updateReference(index);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_CommonDataLists value) commonData,
+    required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+  }) {
+    return updateReference(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_CommonDataLists value)? commonData,
+    TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+  }) {
+    return updateReference?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_CommonDataLists value)? commonData,
+    TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (updateReference != null) {
+      return updateReference(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateReference implements OnboardingEvent {
+  const factory UpdateReference({required final int index}) = _$UpdateReference;
+
+  int get index;
+  @JsonKey(ignore: true)
+  _$$UpdateReferenceCopyWith<_$UpdateReference> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$EditReferenceCopyWith<$Res> {
+  factory _$$EditReferenceCopyWith(
+          _$EditReference value, $Res Function(_$EditReference) then) =
+      __$$EditReferenceCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int index, GetReferences reference});
+}
+
+/// @nodoc
+class __$$EditReferenceCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$EditReference>
+    implements _$$EditReferenceCopyWith<$Res> {
+  __$$EditReferenceCopyWithImpl(
+      _$EditReference _value, $Res Function(_$EditReference) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? index = null,
+    Object? reference = null,
+  }) {
+    return _then(_$EditReference(
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+      reference: null == reference
+          ? _value.reference
+          : reference // ignore: cast_nullable_to_non_nullable
+              as GetReferences,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$EditReference implements EditReference {
+  const _$EditReference({required this.index, required this.reference});
+
+  @override
+  final int index;
+  @override
+  final GetReferences reference;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.editReference(index: $index, reference: $reference)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$EditReference &&
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.reference, reference) ||
+                other.reference == reference));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, index, reference);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$EditReferenceCopyWith<_$EditReference> get copyWith =>
+      __$$EditReferenceCopyWithImpl<_$EditReference>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
+    required TResult Function() commonData,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+  }) {
+    return editReference(index, reference);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult? Function()? commonData,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+  }) {
+    return editReference?.call(index, reference);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult Function()? commonData,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (editReference != null) {
+      return editReference(index, reference);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_CommonDataLists value) commonData,
+    required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+  }) {
+    return editReference(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_CommonDataLists value)? commonData,
+    TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+  }) {
+    return editReference?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_CommonDataLists value)? commonData,
+    TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    required TResult orElse(),
+  }) {
+    if (editReference != null) {
+      return editReference(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class EditReference implements OnboardingEvent {
+  const factory EditReference(
+      {required final int index,
+      required final GetReferences reference}) = _$EditReference;
+
+  int get index;
+  GetReferences get reference;
+  @JsonKey(ignore: true)
+  _$$EditReferenceCopyWith<_$EditReference> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2448,8 +3934,11 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -2499,8 +3988,11 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -2550,8 +4042,11 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -2589,6 +4084,10 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -2622,6 +4121,10 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -2651,6 +4154,10 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -2772,8 +4279,11 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -2823,8 +4333,11 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -2874,8 +4387,11 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -2913,6 +4429,10 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -2946,6 +4466,10 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -2975,6 +4499,10 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -3096,8 +4624,11 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -3147,8 +4678,11 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -3198,8 +4732,11 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -3237,6 +4774,10 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -3270,6 +4811,10 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -3299,6 +4844,10 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -3421,8 +4970,11 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -3472,8 +5024,11 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -3523,8 +5078,11 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -3562,6 +5120,10 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -3595,6 +5157,10 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -3624,6 +5190,10 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -3748,8 +5318,11 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -3799,8 +5372,11 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -3850,8 +5426,11 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -3889,6 +5468,10 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -3922,6 +5505,10 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -3951,6 +5538,10 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -4074,8 +5665,11 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -4125,8 +5719,11 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -4176,8 +5773,11 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -4215,6 +5815,10 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -4248,6 +5852,10 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -4277,6 +5885,10 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -4402,8 +6014,11 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -4453,8 +6068,11 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -4504,8 +6122,11 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -4543,6 +6164,10 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -4576,6 +6201,10 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -4605,6 +6234,10 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -4727,8 +6360,11 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -4778,8 +6414,11 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -4829,8 +6468,11 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -4868,6 +6510,10 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -4901,6 +6547,10 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -4930,6 +6580,10 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -5052,8 +6706,11 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -5103,8 +6760,11 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -5154,8 +6814,11 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -5193,6 +6856,10 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -5226,6 +6893,10 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -5255,6 +6926,10 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -5378,8 +7053,11 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -5429,8 +7107,11 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -5480,8 +7161,11 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -5519,6 +7203,10 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -5552,6 +7240,10 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -5581,6 +7273,10 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -5725,8 +7421,11 @@ class _$_SecurityDocumentUploadSelected
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -5776,8 +7475,11 @@ class _$_SecurityDocumentUploadSelected
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -5827,8 +7529,11 @@ class _$_SecurityDocumentUploadSelected
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -5866,6 +7571,10 @@ class _$_SecurityDocumentUploadSelected
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -5899,6 +7608,10 @@ class _$_SecurityDocumentUploadSelected
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -5928,6 +7641,10 @@ class _$_SecurityDocumentUploadSelected
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -6072,8 +7789,11 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -6123,8 +7843,11 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -6174,8 +7897,11 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -6213,6 +7939,10 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -6246,6 +7976,10 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -6275,6 +8009,10 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -6419,8 +8157,11 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -6470,8 +8211,11 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -6521,8 +8265,11 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -6560,6 +8307,10 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -6593,6 +8344,10 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -6622,6 +8377,10 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -6765,8 +8524,11 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -6816,8 +8578,11 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -6867,8 +8632,11 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -6906,6 +8674,10 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -6939,6 +8711,10 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -6968,6 +8744,10 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -7112,8 +8892,11 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     required TResult Function() cityList,
     required TResult Function() stateList,
     required TResult Function() relationList,
-    required TResult Function(String userId, List<dynamic> referenceList)
-        submitReference,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function(int isSelected) radioHHA,
     required TResult Function(int isSelected) radioBLS,
     required TResult Function(int isSelected) radioTB,
@@ -7163,8 +8946,11 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult? Function()? cityList,
     TResult? Function()? stateList,
     TResult? Function()? relationList,
-    TResult? Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function(int isSelected)? radioHHA,
     TResult? Function(int isSelected)? radioBLS,
     TResult? Function(int isSelected)? radioTB,
@@ -7214,8 +9000,11 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult Function()? cityList,
     TResult Function()? stateList,
     TResult Function()? relationList,
-    TResult Function(String userId, List<dynamic> referenceList)?
-        submitReference,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function(int isSelected)? radioHHA,
     TResult Function(int isSelected)? radioBLS,
     TResult Function(int isSelected)? radioTB,
@@ -7253,6 +9042,10 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     required TResult Function(_StateLists value) stateList,
     required TResult Function(_RelationList value) relationList,
     required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_RadioHHASelected value) radioHHA,
     required TResult Function(_RadioBLSSelected value) radioBLS,
     required TResult Function(_RadioTBSelected value) radioTB,
@@ -7286,6 +9079,10 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult? Function(_StateLists value)? stateList,
     TResult? Function(_RelationList value)? relationList,
     TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_RadioHHASelected value)? radioHHA,
     TResult? Function(_RadioBLSSelected value)? radioBLS,
     TResult? Function(_RadioTBSelected value)? radioTB,
@@ -7315,6 +9112,10 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult Function(_StateLists value)? stateList,
     TResult Function(_RelationList value)? relationList,
     TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_RadioHHASelected value)? radioHHA,
     TResult Function(_RadioBLSSelected value)? radioBLS,
     TResult Function(_RadioTBSelected value)? radioTB,
@@ -7362,6 +9163,7 @@ mixin _$OnboardingState {
   List<PlatformFile> get tbDocumentList => throw _privateConstructorUsedError;
   List<PlatformFile> get covidDocumentList =>
       throw _privateConstructorUsedError;
+  List<GetReferences> get referenceList => throw _privateConstructorUsedError;
   int get isHHASelected => throw _privateConstructorUsedError;
   int get isBLSSelected => throw _privateConstructorUsedError;
   int get isTBSelected => throw _privateConstructorUsedError;
@@ -7408,6 +9210,7 @@ abstract class $OnboardingStateCopyWith<$Res> {
       List<PlatformFile> blsDocumentList,
       List<PlatformFile> tbDocumentList,
       List<PlatformFile> covidDocumentList,
+      List<GetReferences> referenceList,
       int isHHASelected,
       int isBLSSelected,
       int isTBSelected,
@@ -7450,6 +9253,7 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
     Object? blsDocumentList = null,
     Object? tbDocumentList = null,
     Object? covidDocumentList = null,
+    Object? referenceList = null,
     Object? isHHASelected = null,
     Object? isBLSSelected = null,
     Object? isTBSelected = null,
@@ -7496,6 +9300,10 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
           ? _value.covidDocumentList
           : covidDocumentList // ignore: cast_nullable_to_non_nullable
               as List<PlatformFile>,
+      referenceList: null == referenceList
+          ? _value.referenceList
+          : referenceList // ignore: cast_nullable_to_non_nullable
+              as List<GetReferences>,
       isHHASelected: null == isHHASelected
           ? _value.isHHASelected
           : isHHASelected // ignore: cast_nullable_to_non_nullable
@@ -7595,6 +9403,7 @@ abstract class _$$_OnboardingStateCopyWith<$Res>
       List<PlatformFile> blsDocumentList,
       List<PlatformFile> tbDocumentList,
       List<PlatformFile> covidDocumentList,
+      List<GetReferences> referenceList,
       int isHHASelected,
       int isBLSSelected,
       int isTBSelected,
@@ -7635,6 +9444,7 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
     Object? blsDocumentList = null,
     Object? tbDocumentList = null,
     Object? covidDocumentList = null,
+    Object? referenceList = null,
     Object? isHHASelected = null,
     Object? isBLSSelected = null,
     Object? isTBSelected = null,
@@ -7681,6 +9491,10 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
           ? _value._covidDocumentList
           : covidDocumentList // ignore: cast_nullable_to_non_nullable
               as List<PlatformFile>,
+      referenceList: null == referenceList
+          ? _value._referenceList
+          : referenceList // ignore: cast_nullable_to_non_nullable
+              as List<GetReferences>,
       isHHASelected: null == isHHASelected
           ? _value.isHHASelected
           : isHHASelected // ignore: cast_nullable_to_non_nullable
@@ -7775,6 +9589,7 @@ class _$_OnboardingState implements _OnboardingState {
       required final List<PlatformFile> blsDocumentList,
       required final List<PlatformFile> tbDocumentList,
       required final List<PlatformFile> covidDocumentList,
+      required final List<GetReferences> referenceList,
       required this.isHHASelected,
       required this.isBLSSelected,
       required this.isTBSelected,
@@ -7799,7 +9614,8 @@ class _$_OnboardingState implements _OnboardingState {
         _hhaDocumentList = hhaDocumentList,
         _blsDocumentList = blsDocumentList,
         _tbDocumentList = tbDocumentList,
-        _covidDocumentList = covidDocumentList;
+        _covidDocumentList = covidDocumentList,
+        _referenceList = referenceList;
 
   @override
   final Uint8List pickedProfilePic;
@@ -7836,6 +9652,13 @@ class _$_OnboardingState implements _OnboardingState {
   List<PlatformFile> get covidDocumentList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_covidDocumentList);
+  }
+
+  final List<GetReferences> _referenceList;
+  @override
+  List<GetReferences> get referenceList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_referenceList);
   }
 
   @override
@@ -7882,7 +9705,7 @@ class _$_OnboardingState implements _OnboardingState {
 
   @override
   String toString() {
-    return 'OnboardingState(pickedProfilePic: $pickedProfilePic, securityDocumentList: $securityDocumentList, hhaDocumentList: $hhaDocumentList, blsDocumentList: $blsDocumentList, tbDocumentList: $tbDocumentList, covidDocumentList: $covidDocumentList, isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected, isFormSubmitSuccess: $isFormSubmitSuccess, listUpdated: $listUpdated, isExperianceSelected: $isExperianceSelected, isSmokerSelected: $isSmokerSelected, isTransportationSelected: $isTransportationSelected, isPetsSelected: $isPetsSelected, isLanguagesSelected: $isLanguagesSelected, isLoading: $isLoading, selectedGenderId: $selectedGenderId, personalDetailsOption: $personalDetailsOption, genderOption: $genderOption, documentOption: $documentOption, stateOption: $stateOption, cityOption: $cityOption, relationOption: $relationOption, referenceOption: $referenceOption)';
+    return 'OnboardingState(pickedProfilePic: $pickedProfilePic, securityDocumentList: $securityDocumentList, hhaDocumentList: $hhaDocumentList, blsDocumentList: $blsDocumentList, tbDocumentList: $tbDocumentList, covidDocumentList: $covidDocumentList, referenceList: $referenceList, isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected, isFormSubmitSuccess: $isFormSubmitSuccess, listUpdated: $listUpdated, isExperianceSelected: $isExperianceSelected, isSmokerSelected: $isSmokerSelected, isTransportationSelected: $isTransportationSelected, isPetsSelected: $isPetsSelected, isLanguagesSelected: $isLanguagesSelected, isLoading: $isLoading, selectedGenderId: $selectedGenderId, personalDetailsOption: $personalDetailsOption, genderOption: $genderOption, documentOption: $documentOption, stateOption: $stateOption, cityOption: $cityOption, relationOption: $relationOption, referenceOption: $referenceOption)';
   }
 
   @override
@@ -7902,6 +9725,8 @@ class _$_OnboardingState implements _OnboardingState {
                 .equals(other._tbDocumentList, _tbDocumentList) &&
             const DeepCollectionEquality()
                 .equals(other._covidDocumentList, _covidDocumentList) &&
+            const DeepCollectionEquality()
+                .equals(other._referenceList, _referenceList) &&
             (identical(other.isHHASelected, isHHASelected) ||
                 other.isHHASelected == isHHASelected) &&
             (identical(other.isBLSSelected, isBLSSelected) ||
@@ -7954,6 +9779,7 @@ class _$_OnboardingState implements _OnboardingState {
         const DeepCollectionEquality().hash(_blsDocumentList),
         const DeepCollectionEquality().hash(_tbDocumentList),
         const DeepCollectionEquality().hash(_covidDocumentList),
+        const DeepCollectionEquality().hash(_referenceList),
         isHHASelected,
         isBLSSelected,
         isTBSelected,
@@ -7991,6 +9817,7 @@ abstract class _OnboardingState implements OnboardingState {
       required final List<PlatformFile> blsDocumentList,
       required final List<PlatformFile> tbDocumentList,
       required final List<PlatformFile> covidDocumentList,
+      required final List<GetReferences> referenceList,
       required final int isHHASelected,
       required final int isBLSSelected,
       required final int isTBSelected,
@@ -8031,6 +9858,8 @@ abstract class _OnboardingState implements OnboardingState {
   List<PlatformFile> get tbDocumentList;
   @override
   List<PlatformFile> get covidDocumentList;
+  @override
+  List<GetReferences> get referenceList;
   @override
   int get isHHASelected;
   @override

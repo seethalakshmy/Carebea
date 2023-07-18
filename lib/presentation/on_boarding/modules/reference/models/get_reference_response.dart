@@ -210,4 +210,48 @@ class GetReferences {
     map['zip'] = _zip;
     return map;
   }
+
+  set setAddress(String value) {
+    _address = value;
+  }
+
+  set setZip(String value) {
+    _zip = value;
+  }
+
+  set setStateId(String value) {
+    _state = value;
+  }
+
+  set setRelationShip(String value) {
+    _relationship = value;
+  }
+
+  set setRelationshipId(String value) {
+    _relationship = value;
+  }
+
+  set setCityId(String value) {
+    _city = value;
+  }
+
+  set setStreet(String value) {
+    _street = value;
+  }
+
+  set setPhoneNumber(String value) {
+    _phone = value;
+  }
+
+  set setName(String value) {
+    _name = value;
+  }
+
+  set setStateName(String value) {
+    _stateName = value;
+  }
+
+  set setCityName(String value) {
+    _cityName = value;
+  }
 }

@@ -24,8 +24,15 @@ class OnboardingEvent with _$OnboardingEvent {
   const factory OnboardingEvent.cityList() = _CityLists;
   const factory OnboardingEvent.stateList() = _StateLists;
   const factory OnboardingEvent.relationList() = _RelationList;
-  const factory OnboardingEvent.submitReference(
-      {required String userId, required List referenceList}) = _SubmitReference;
+  const factory OnboardingEvent.submitReference({required String userId}) =
+      _SubmitReference;
+  const factory OnboardingEvent.addReference() = _AddReference;
+  const factory OnboardingEvent.deleteReference({required int index}) =
+      DeleteReference;
+  const factory OnboardingEvent.updateReference({required int index}) =
+      UpdateReference;
+  const factory OnboardingEvent.editReference(
+      {required int index, required GetReferences reference}) = EditReference;
 
   const factory OnboardingEvent.radioHHA(int isSelected) = _RadioHHASelected;
 

@@ -39,7 +39,6 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   String selectedCity = "";
   String selectedCityId = "";
   String selectedRelation = "";
-  List<GetReferences> reference = List<GetReferences>.empty(growable: true);
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController streetController = TextEditingController();
@@ -97,24 +96,82 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     on<_RelationList>(_getRelationList);
     on<_GetPersonalDetails>(_getPersonalData);
     on<_SubmitReference>(_submitReference);
+
+    on<_AddReference>((event, emit) {
+      print("on ref add");
+
+      print("on ref added");
+      List<GetReferences> refList = [];
+      refList.addAll(state.referenceList);
+      refList.add(GetReferences(
+          name: nameController.text,
+          address: addressController.text,
+          street: streetController.text,
+          stateName: selectedState,
+          cityName: selectedCity,
+          city: selectedCityId,
+          state: stateId,
+          phone: phoneController.text,
+          relationship: selectedRelation,
+          zip: zipController.text));
+      print("ref list : ${refList.length}");
+      emit(state.copyWith(referenceList: refList));
+      print(state.referenceList.length);
+    });
+    on<DeleteReference>((event, emit) {
+      List<GetReferences> refList = [];
+      refList.addAll(state.referenceList);
+      refList.removeAt(event.index);
+      emit(state.copyWith(referenceList: refList));
+    });
+    on<UpdateReference>((event, emit) {
+      List<GetReferences> refList = [];
+      var ref = GetReferences(
+          name: nameController.text,
+          address: addressController.text,
+          street: streetController.text,
+          stateName: selectedState,
+          cityName: selectedCity,
+          city: selectedCityId,
+          state: stateId,
+          phone: phoneController.text,
+          relationship: selectedRelation,
+          zip: zipController.text);
+      refList.addAll(state.referenceList);
+      refList[event.index] = ref;
+      emit(state.copyWith(referenceList: refList));
+    });
+
+    on<EditReference>((event, emit) {
+      setData(event.reference);
+    });
   }
 
-  void addToReferenceList() {
-    reference.add(GetReferences(
-        name: nameController.text,
-        address: addressController.text,
-        street: streetController.text,
-        stateName: selectedState,
-        cityName: selectedCity,
-        city: selectedCityId,
-        state: stateId,
-        phone: phoneController.text,
-        relationName: selectedRelation,
-        relationship: relationId,
-        zip: zipController.text));
-    print(reference.first.name);
+  setData(GetReferences item) {
+    nameController.text = item.name ?? '';
+    phoneController.text = item.phone ?? '';
+    streetController.text = item.street ?? '';
+    zipController.text = item.zip ?? '';
+    addressController.text = item.address ?? '';
+    selectedState = item.stateName ?? "";
+    selectedCity = item.cityName ?? "";
+    selectedState = item.state ?? "";
+    selectedCityId = item.city ?? '';
+    selectedRelation = item.relationship ?? "";
+  }
 
-    // reference.refresh();
+  clearData() {
+    nameController.text = "";
+    phoneController.text = "";
+    streetController.text = "";
+    selectedRelation = "";
+    // selectedRelationId = "";
+    zipController.text = "";
+    addressController.text = "";
+    selectedCityId = "";
+    selectedState = '';
+    // selectedStatename = "";
+    selectedCity = "";
   }
 
   _getCommonLists(_CommonDataLists event, Emitter<OnboardingState> emit) async {
@@ -243,7 +300,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     final Either<ApiErrorHandler, CommonResponse> result =
         await onboardingRepository.submitReference(
       userId: event.userId,
-      referenceList: event.referenceList,
+      referenceList: state.referenceList.map((e) => e.toJson()).toList(),
     );
     OnboardingState referenceState = result.fold((l) {
       return state.copyWith(isLoading: false, referenceOption: Some(Left(l)));
