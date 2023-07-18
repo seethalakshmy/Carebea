@@ -37,6 +37,8 @@ class Assets {
   static const String iconsIcUncheck = 'assets/icons/ic_uncheck.svg';
   static const String iconsIcWarning = 'assets/icons/ic_warning.svg';
   static const String iconsImageNotFound = 'assets/icons/image_not_found.png';
+  static const String iconsPlusCircle = 'assets/icons/plus-circle.svg';
+  static const String iconsRoundClose = 'assets/icons/round_close.svg';
   static const String iconsSearchIcon = 'assets/icons/search_icon.svg';
   static const String iconsUploadIcon = 'assets/icons/uploadIcon.svg';
   static const String iconsUserAvatar = 'assets/icons/user_avatar.svg';
@@ -47,8 +49,4 @@ class Assets {
   static const String imagesIcPerson = 'assets/images/ic_person.png';
   static const String imagesNotification = 'assets/images/notification.png';
   static const String imagesProfile = 'assets/images/profile.png';
-  static const String sampleCareGiverDetailResponse =
-      'assets/sample/care_giver_detail_response.json';
-  static const String sampleUserDetailResponse =
-      'assets/sample/user_detail_response.json';
 }
