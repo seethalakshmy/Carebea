@@ -75,9 +75,9 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
     _page = autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
     _tab = autoTabRouter?.currentChild?.queryParams.getInt('tab', 0);
     super.initState();
-    context
-        .read<CareGiverVerificationBloc>()
-        .add(CareGiverVerificationEvent.getVerificationData(userId: userId));
+    context.read<CareGiverVerificationBloc>().add(
+        CareGiverVerificationEvent.getVerificationData(
+            userId: userId, context: context));
   }
 
   @override
@@ -634,32 +634,33 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         });
   }
 
-  ApprovalStatusBox _certificateApprovalStatusBox(
-      CareGiverVerificationState state) {
+  _certificateApprovalStatusBox(CareGiverVerificationState state) {
     int status =
         state.response?.data?.certificateVerification?.approvalStatus ?? 0;
-
-    return ApprovalStatusBox(
-      careGiversVerificationState: state,
-      textEditingController: _reasonController,
-      focusNode: _reasonNode,
-      status: status,
-      onTapApprove: () {
-        context.read<CareGiverVerificationBloc>().add(
-            CareGiverVerificationEvent.careGiverCertificateApprove(
-                userID: userId,
-                status: 1,
-                context: context,
-                profileUrl: "",
-                userName:
-                    "${state.response?.data?.caregiver?.firstName} ${state.response?.data?.caregiver?.lastName}"));
-      },
-      onTapReject: () {
-        _certificateRejectPopUp(
-          context,
-        );
-      },
-    );
+    bool? isPendingDoc = state.response?.data?.pendingDocs ?? false;
+    return !isPendingDoc
+        ? ApprovalStatusBox(
+            careGiversVerificationState: state,
+            textEditingController: _reasonController,
+            focusNode: _reasonNode,
+            status: status,
+            onTapApprove: () {
+              context.read<CareGiverVerificationBloc>().add(
+                  CareGiverVerificationEvent.careGiverCertificateApprove(
+                      userID: userId,
+                      status: 1,
+                      context: context,
+                      profileUrl: "",
+                      userName:
+                          "${state.response?.data?.caregiver?.firstName} ${state.response?.data?.caregiver?.lastName}"));
+            },
+            onTapReject: () {
+              _certificateRejectPopUp(
+                context,
+              );
+            },
+          )
+        : CustomSizedBox.shrink();
   }
 
   _hhaRowCombo(QualificationAndTest? qualificationAndTest) {
@@ -858,26 +859,29 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
 
   _backgroundVerifyApprovalStatusBox(
       CareGiverVerificationState state, int status) {
-    return ApprovalStatusBox(
-      careGiversVerificationState: state,
-      textEditingController: _reasonController,
-      focusNode: _reasonNode,
-      status: status,
-      onTapApprove: () {
-        context.read<CareGiverVerificationBloc>().add(
-            CareGiverVerificationEvent.careGiverBackgroundVerify(
-                userID: userId, status: 1, context: context));
-      },
-      onTapReject: () {
-        _reasonNode.requestFocus();
-        context.read<CareGiverVerificationBloc>().add(
-            CareGiverVerificationEvent.careGiverBackgroundVerify(
-                userID: userId,
-                status: 2,
-                rejectReason: _reasonController.text.trim(),
-                context: context));
-      },
-    );
+    bool? isPendingDoc = state.response?.data?.pendingDocs ?? false;
+    return !isPendingDoc
+        ? ApprovalStatusBox(
+            careGiversVerificationState: state,
+            textEditingController: _reasonController,
+            focusNode: _reasonNode,
+            status: status,
+            onTapApprove: () {
+              context.read<CareGiverVerificationBloc>().add(
+                  CareGiverVerificationEvent.careGiverBackgroundVerify(
+                      userID: userId, status: 1, context: context));
+            },
+            onTapReject: () {
+              _reasonNode.requestFocus();
+              context.read<CareGiverVerificationBloc>().add(
+                  CareGiverVerificationEvent.careGiverBackgroundVerify(
+                      userID: userId,
+                      status: 2,
+                      rejectReason: _reasonController.text.trim(),
+                      context: context));
+            },
+          )
+        : CustomSizedBox.shrink();
   }
 
   RowColonCombo _emailView(PersonalDetails? personalDetails) {

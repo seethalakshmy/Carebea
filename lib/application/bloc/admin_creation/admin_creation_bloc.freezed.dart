@@ -40,6 +40,7 @@ mixin _$AdminCreationEvent {
         updateAdmin,
     required TResult Function(String userId, String adminId) viewAdmin,
     required TResult Function(bool value) dropDownErrorDisplay,
+    required TResult Function(Role value) setDropDownValue,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +61,7 @@ mixin _$AdminCreationEvent {
         updateAdmin,
     TResult? Function(String userId, String adminId)? viewAdmin,
     TResult? Function(bool value)? dropDownErrorDisplay,
+    TResult? Function(Role value)? setDropDownValue,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -80,6 +82,7 @@ mixin _$AdminCreationEvent {
         updateAdmin,
     TResult Function(String userId, String adminId)? viewAdmin,
     TResult Function(bool value)? dropDownErrorDisplay,
+    TResult Function(Role value)? setDropDownValue,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -90,6 +93,7 @@ mixin _$AdminCreationEvent {
     required TResult Function(_UpdateAdmin value) updateAdmin,
     required TResult Function(_ViewAdmin value) viewAdmin,
     required TResult Function(_DropDownErrorDisplay value) dropDownErrorDisplay,
+    required TResult Function(_SetDropDownValue value) setDropDownValue,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -99,6 +103,7 @@ mixin _$AdminCreationEvent {
     TResult? Function(_UpdateAdmin value)? updateAdmin,
     TResult? Function(_ViewAdmin value)? viewAdmin,
     TResult? Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
+    TResult? Function(_SetDropDownValue value)? setDropDownValue,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -108,6 +113,7 @@ mixin _$AdminCreationEvent {
     TResult Function(_UpdateAdmin value)? updateAdmin,
     TResult Function(_ViewAdmin value)? viewAdmin,
     TResult Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
+    TResult Function(_SetDropDownValue value)? setDropDownValue,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -282,6 +288,7 @@ class _$_AddAdmin implements _AddAdmin {
         updateAdmin,
     required TResult Function(String userId, String adminId) viewAdmin,
     required TResult Function(bool value) dropDownErrorDisplay,
+    required TResult Function(Role value) setDropDownValue,
   }) {
     return addAdmin(
         userId, roleId, context, firstName, lastName, email, mobile);
@@ -306,6 +313,7 @@ class _$_AddAdmin implements _AddAdmin {
         updateAdmin,
     TResult? Function(String userId, String adminId)? viewAdmin,
     TResult? Function(bool value)? dropDownErrorDisplay,
+    TResult? Function(Role value)? setDropDownValue,
   }) {
     return addAdmin?.call(
         userId, roleId, context, firstName, lastName, email, mobile);
@@ -330,6 +338,7 @@ class _$_AddAdmin implements _AddAdmin {
         updateAdmin,
     TResult Function(String userId, String adminId)? viewAdmin,
     TResult Function(bool value)? dropDownErrorDisplay,
+    TResult Function(Role value)? setDropDownValue,
     required TResult orElse(),
   }) {
     if (addAdmin != null) {
@@ -347,6 +356,7 @@ class _$_AddAdmin implements _AddAdmin {
     required TResult Function(_UpdateAdmin value) updateAdmin,
     required TResult Function(_ViewAdmin value) viewAdmin,
     required TResult Function(_DropDownErrorDisplay value) dropDownErrorDisplay,
+    required TResult Function(_SetDropDownValue value) setDropDownValue,
   }) {
     return addAdmin(this);
   }
@@ -359,6 +369,7 @@ class _$_AddAdmin implements _AddAdmin {
     TResult? Function(_UpdateAdmin value)? updateAdmin,
     TResult? Function(_ViewAdmin value)? viewAdmin,
     TResult? Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
+    TResult? Function(_SetDropDownValue value)? setDropDownValue,
   }) {
     return addAdmin?.call(this);
   }
@@ -371,6 +382,7 @@ class _$_AddAdmin implements _AddAdmin {
     TResult Function(_UpdateAdmin value)? updateAdmin,
     TResult Function(_ViewAdmin value)? viewAdmin,
     TResult Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
+    TResult Function(_SetDropDownValue value)? setDropDownValue,
     required TResult orElse(),
   }) {
     if (addAdmin != null) {
@@ -488,6 +500,7 @@ class _$_GetRoles implements _GetRoles {
         updateAdmin,
     required TResult Function(String userId, String adminId) viewAdmin,
     required TResult Function(bool value) dropDownErrorDisplay,
+    required TResult Function(Role value) setDropDownValue,
   }) {
     return getRoles(userId);
   }
@@ -511,6 +524,7 @@ class _$_GetRoles implements _GetRoles {
         updateAdmin,
     TResult? Function(String userId, String adminId)? viewAdmin,
     TResult? Function(bool value)? dropDownErrorDisplay,
+    TResult? Function(Role value)? setDropDownValue,
   }) {
     return getRoles?.call(userId);
   }
@@ -534,6 +548,7 @@ class _$_GetRoles implements _GetRoles {
         updateAdmin,
     TResult Function(String userId, String adminId)? viewAdmin,
     TResult Function(bool value)? dropDownErrorDisplay,
+    TResult Function(Role value)? setDropDownValue,
     required TResult orElse(),
   }) {
     if (getRoles != null) {
@@ -550,6 +565,7 @@ class _$_GetRoles implements _GetRoles {
     required TResult Function(_UpdateAdmin value) updateAdmin,
     required TResult Function(_ViewAdmin value) viewAdmin,
     required TResult Function(_DropDownErrorDisplay value) dropDownErrorDisplay,
+    required TResult Function(_SetDropDownValue value) setDropDownValue,
   }) {
     return getRoles(this);
   }
@@ -562,6 +578,7 @@ class _$_GetRoles implements _GetRoles {
     TResult? Function(_UpdateAdmin value)? updateAdmin,
     TResult? Function(_ViewAdmin value)? viewAdmin,
     TResult? Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
+    TResult? Function(_SetDropDownValue value)? setDropDownValue,
   }) {
     return getRoles?.call(this);
   }
@@ -574,6 +591,7 @@ class _$_GetRoles implements _GetRoles {
     TResult Function(_UpdateAdmin value)? updateAdmin,
     TResult Function(_ViewAdmin value)? viewAdmin,
     TResult Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
+    TResult Function(_SetDropDownValue value)? setDropDownValue,
     required TResult orElse(),
   }) {
     if (getRoles != null) {
@@ -753,6 +771,7 @@ class _$_UpdateAdmin implements _UpdateAdmin {
         updateAdmin,
     required TResult Function(String userId, String adminId) viewAdmin,
     required TResult Function(bool value) dropDownErrorDisplay,
+    required TResult Function(Role value) setDropDownValue,
   }) {
     return updateAdmin(
         userId, adminId, roleId, context, firstName, lastName, email, mobile);
@@ -777,6 +796,7 @@ class _$_UpdateAdmin implements _UpdateAdmin {
         updateAdmin,
     TResult? Function(String userId, String adminId)? viewAdmin,
     TResult? Function(bool value)? dropDownErrorDisplay,
+    TResult? Function(Role value)? setDropDownValue,
   }) {
     return updateAdmin?.call(
         userId, adminId, roleId, context, firstName, lastName, email, mobile);
@@ -801,6 +821,7 @@ class _$_UpdateAdmin implements _UpdateAdmin {
         updateAdmin,
     TResult Function(String userId, String adminId)? viewAdmin,
     TResult Function(bool value)? dropDownErrorDisplay,
+    TResult Function(Role value)? setDropDownValue,
     required TResult orElse(),
   }) {
     if (updateAdmin != null) {
@@ -818,6 +839,7 @@ class _$_UpdateAdmin implements _UpdateAdmin {
     required TResult Function(_UpdateAdmin value) updateAdmin,
     required TResult Function(_ViewAdmin value) viewAdmin,
     required TResult Function(_DropDownErrorDisplay value) dropDownErrorDisplay,
+    required TResult Function(_SetDropDownValue value) setDropDownValue,
   }) {
     return updateAdmin(this);
   }
@@ -830,6 +852,7 @@ class _$_UpdateAdmin implements _UpdateAdmin {
     TResult? Function(_UpdateAdmin value)? updateAdmin,
     TResult? Function(_ViewAdmin value)? viewAdmin,
     TResult? Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
+    TResult? Function(_SetDropDownValue value)? setDropDownValue,
   }) {
     return updateAdmin?.call(this);
   }
@@ -842,6 +865,7 @@ class _$_UpdateAdmin implements _UpdateAdmin {
     TResult Function(_UpdateAdmin value)? updateAdmin,
     TResult Function(_ViewAdmin value)? viewAdmin,
     TResult Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
+    TResult Function(_SetDropDownValue value)? setDropDownValue,
     required TResult orElse(),
   }) {
     if (updateAdmin != null) {
@@ -969,6 +993,7 @@ class _$_ViewAdmin implements _ViewAdmin {
         updateAdmin,
     required TResult Function(String userId, String adminId) viewAdmin,
     required TResult Function(bool value) dropDownErrorDisplay,
+    required TResult Function(Role value) setDropDownValue,
   }) {
     return viewAdmin(userId, adminId);
   }
@@ -992,6 +1017,7 @@ class _$_ViewAdmin implements _ViewAdmin {
         updateAdmin,
     TResult? Function(String userId, String adminId)? viewAdmin,
     TResult? Function(bool value)? dropDownErrorDisplay,
+    TResult? Function(Role value)? setDropDownValue,
   }) {
     return viewAdmin?.call(userId, adminId);
   }
@@ -1015,6 +1041,7 @@ class _$_ViewAdmin implements _ViewAdmin {
         updateAdmin,
     TResult Function(String userId, String adminId)? viewAdmin,
     TResult Function(bool value)? dropDownErrorDisplay,
+    TResult Function(Role value)? setDropDownValue,
     required TResult orElse(),
   }) {
     if (viewAdmin != null) {
@@ -1031,6 +1058,7 @@ class _$_ViewAdmin implements _ViewAdmin {
     required TResult Function(_UpdateAdmin value) updateAdmin,
     required TResult Function(_ViewAdmin value) viewAdmin,
     required TResult Function(_DropDownErrorDisplay value) dropDownErrorDisplay,
+    required TResult Function(_SetDropDownValue value) setDropDownValue,
   }) {
     return viewAdmin(this);
   }
@@ -1043,6 +1071,7 @@ class _$_ViewAdmin implements _ViewAdmin {
     TResult? Function(_UpdateAdmin value)? updateAdmin,
     TResult? Function(_ViewAdmin value)? viewAdmin,
     TResult? Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
+    TResult? Function(_SetDropDownValue value)? setDropDownValue,
   }) {
     return viewAdmin?.call(this);
   }
@@ -1055,6 +1084,7 @@ class _$_ViewAdmin implements _ViewAdmin {
     TResult Function(_UpdateAdmin value)? updateAdmin,
     TResult Function(_ViewAdmin value)? viewAdmin,
     TResult Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
+    TResult Function(_SetDropDownValue value)? setDropDownValue,
     required TResult orElse(),
   }) {
     if (viewAdmin != null) {
@@ -1163,6 +1193,7 @@ class _$_DropDownErrorDisplay implements _DropDownErrorDisplay {
         updateAdmin,
     required TResult Function(String userId, String adminId) viewAdmin,
     required TResult Function(bool value) dropDownErrorDisplay,
+    required TResult Function(Role value) setDropDownValue,
   }) {
     return dropDownErrorDisplay(value);
   }
@@ -1186,6 +1217,7 @@ class _$_DropDownErrorDisplay implements _DropDownErrorDisplay {
         updateAdmin,
     TResult? Function(String userId, String adminId)? viewAdmin,
     TResult? Function(bool value)? dropDownErrorDisplay,
+    TResult? Function(Role value)? setDropDownValue,
   }) {
     return dropDownErrorDisplay?.call(value);
   }
@@ -1209,6 +1241,7 @@ class _$_DropDownErrorDisplay implements _DropDownErrorDisplay {
         updateAdmin,
     TResult Function(String userId, String adminId)? viewAdmin,
     TResult Function(bool value)? dropDownErrorDisplay,
+    TResult Function(Role value)? setDropDownValue,
     required TResult orElse(),
   }) {
     if (dropDownErrorDisplay != null) {
@@ -1225,6 +1258,7 @@ class _$_DropDownErrorDisplay implements _DropDownErrorDisplay {
     required TResult Function(_UpdateAdmin value) updateAdmin,
     required TResult Function(_ViewAdmin value) viewAdmin,
     required TResult Function(_DropDownErrorDisplay value) dropDownErrorDisplay,
+    required TResult Function(_SetDropDownValue value) setDropDownValue,
   }) {
     return dropDownErrorDisplay(this);
   }
@@ -1237,6 +1271,7 @@ class _$_DropDownErrorDisplay implements _DropDownErrorDisplay {
     TResult? Function(_UpdateAdmin value)? updateAdmin,
     TResult? Function(_ViewAdmin value)? viewAdmin,
     TResult? Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
+    TResult? Function(_SetDropDownValue value)? setDropDownValue,
   }) {
     return dropDownErrorDisplay?.call(this);
   }
@@ -1249,6 +1284,7 @@ class _$_DropDownErrorDisplay implements _DropDownErrorDisplay {
     TResult Function(_UpdateAdmin value)? updateAdmin,
     TResult Function(_ViewAdmin value)? viewAdmin,
     TResult Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
+    TResult Function(_SetDropDownValue value)? setDropDownValue,
     required TResult orElse(),
   }) {
     if (dropDownErrorDisplay != null) {
@@ -1269,6 +1305,203 @@ abstract class _DropDownErrorDisplay implements AdminCreationEvent {
 }
 
 /// @nodoc
+abstract class _$$_SetDropDownValueCopyWith<$Res> {
+  factory _$$_SetDropDownValueCopyWith(
+          _$_SetDropDownValue value, $Res Function(_$_SetDropDownValue) then) =
+      __$$_SetDropDownValueCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Role value});
+}
+
+/// @nodoc
+class __$$_SetDropDownValueCopyWithImpl<$Res>
+    extends _$AdminCreationEventCopyWithImpl<$Res, _$_SetDropDownValue>
+    implements _$$_SetDropDownValueCopyWith<$Res> {
+  __$$_SetDropDownValueCopyWithImpl(
+      _$_SetDropDownValue _value, $Res Function(_$_SetDropDownValue) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+  }) {
+    return _then(_$_SetDropDownValue(
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as Role,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SetDropDownValue implements _SetDropDownValue {
+  const _$_SetDropDownValue({required this.value});
+
+  @override
+  final Role value;
+
+  @override
+  String toString() {
+    return 'AdminCreationEvent.setDropDownValue(value: $value)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SetDropDownValue &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, value);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SetDropDownValueCopyWith<_$_SetDropDownValue> get copyWith =>
+      __$$_SetDropDownValueCopyWithImpl<_$_SetDropDownValue>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)
+        addAdmin,
+    required TResult Function(String userId) getRoles,
+    required TResult Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)
+        updateAdmin,
+    required TResult Function(String userId, String adminId) viewAdmin,
+    required TResult Function(bool value) dropDownErrorDisplay,
+    required TResult Function(Role value) setDropDownValue,
+  }) {
+    return setDropDownValue(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String roleId, BuildContext context,
+            String firstName, String lastName, String email, String mobile)?
+        addAdmin,
+    TResult? Function(String userId)? getRoles,
+    TResult? Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)?
+        updateAdmin,
+    TResult? Function(String userId, String adminId)? viewAdmin,
+    TResult? Function(bool value)? dropDownErrorDisplay,
+    TResult? Function(Role value)? setDropDownValue,
+  }) {
+    return setDropDownValue?.call(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String roleId, BuildContext context,
+            String firstName, String lastName, String email, String mobile)?
+        addAdmin,
+    TResult Function(String userId)? getRoles,
+    TResult Function(
+            String userId,
+            String adminId,
+            String roleId,
+            BuildContext context,
+            String firstName,
+            String lastName,
+            String email,
+            String mobile)?
+        updateAdmin,
+    TResult Function(String userId, String adminId)? viewAdmin,
+    TResult Function(bool value)? dropDownErrorDisplay,
+    TResult Function(Role value)? setDropDownValue,
+    required TResult orElse(),
+  }) {
+    if (setDropDownValue != null) {
+      return setDropDownValue(value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AddAdmin value) addAdmin,
+    required TResult Function(_GetRoles value) getRoles,
+    required TResult Function(_UpdateAdmin value) updateAdmin,
+    required TResult Function(_ViewAdmin value) viewAdmin,
+    required TResult Function(_DropDownErrorDisplay value) dropDownErrorDisplay,
+    required TResult Function(_SetDropDownValue value) setDropDownValue,
+  }) {
+    return setDropDownValue(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AddAdmin value)? addAdmin,
+    TResult? Function(_GetRoles value)? getRoles,
+    TResult? Function(_UpdateAdmin value)? updateAdmin,
+    TResult? Function(_ViewAdmin value)? viewAdmin,
+    TResult? Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
+    TResult? Function(_SetDropDownValue value)? setDropDownValue,
+  }) {
+    return setDropDownValue?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AddAdmin value)? addAdmin,
+    TResult Function(_GetRoles value)? getRoles,
+    TResult Function(_UpdateAdmin value)? updateAdmin,
+    TResult Function(_ViewAdmin value)? viewAdmin,
+    TResult Function(_DropDownErrorDisplay value)? dropDownErrorDisplay,
+    TResult Function(_SetDropDownValue value)? setDropDownValue,
+    required TResult orElse(),
+  }) {
+    if (setDropDownValue != null) {
+      return setDropDownValue(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetDropDownValue implements AdminCreationEvent {
+  const factory _SetDropDownValue({required final Role value}) =
+      _$_SetDropDownValue;
+
+  Role get value;
+  @JsonKey(ignore: true)
+  _$$_SetDropDownValueCopyWith<_$_SetDropDownValue> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$AdminCreationState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
@@ -1277,8 +1510,10 @@ mixin _$AdminCreationState {
   CommonResponseUse? get updateResponse => throw _privateConstructorUsedError;
   AdminViewResponse? get viewResponse => throw _privateConstructorUsedError;
   GetRoleResponse? get rolesResponse => throw _privateConstructorUsedError;
+  Role? get selectedRole => throw _privateConstructorUsedError;
   bool get isClientError => throw _privateConstructorUsedError;
   bool get isDropDownError => throw _privateConstructorUsedError;
+  bool get isLoadingButton => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AdminCreationStateCopyWith<AdminCreationState> get copyWith =>
@@ -1299,8 +1534,10 @@ abstract class $AdminCreationStateCopyWith<$Res> {
       CommonResponseUse? updateResponse,
       AdminViewResponse? viewResponse,
       GetRoleResponse? rolesResponse,
+      Role? selectedRole,
       bool isClientError,
-      bool isDropDownError});
+      bool isDropDownError,
+      bool isLoadingButton});
 }
 
 /// @nodoc
@@ -1323,8 +1560,10 @@ class _$AdminCreationStateCopyWithImpl<$Res, $Val extends AdminCreationState>
     Object? updateResponse = freezed,
     Object? viewResponse = freezed,
     Object? rolesResponse = freezed,
+    Object? selectedRole = freezed,
     Object? isClientError = null,
     Object? isDropDownError = null,
+    Object? isLoadingButton = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -1355,6 +1594,10 @@ class _$AdminCreationStateCopyWithImpl<$Res, $Val extends AdminCreationState>
           ? _value.rolesResponse
           : rolesResponse // ignore: cast_nullable_to_non_nullable
               as GetRoleResponse?,
+      selectedRole: freezed == selectedRole
+          ? _value.selectedRole
+          : selectedRole // ignore: cast_nullable_to_non_nullable
+              as Role?,
       isClientError: null == isClientError
           ? _value.isClientError
           : isClientError // ignore: cast_nullable_to_non_nullable
@@ -1362,6 +1605,10 @@ class _$AdminCreationStateCopyWithImpl<$Res, $Val extends AdminCreationState>
       isDropDownError: null == isDropDownError
           ? _value.isDropDownError
           : isDropDownError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingButton: null == isLoadingButton
+          ? _value.isLoadingButton
+          : isLoadingButton // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -1383,8 +1630,10 @@ abstract class _$$_AdminCreationStateCopyWith<$Res>
       CommonResponseUse? updateResponse,
       AdminViewResponse? viewResponse,
       GetRoleResponse? rolesResponse,
+      Role? selectedRole,
       bool isClientError,
-      bool isDropDownError});
+      bool isDropDownError,
+      bool isLoadingButton});
 }
 
 /// @nodoc
@@ -1405,8 +1654,10 @@ class __$$_AdminCreationStateCopyWithImpl<$Res>
     Object? updateResponse = freezed,
     Object? viewResponse = freezed,
     Object? rolesResponse = freezed,
+    Object? selectedRole = freezed,
     Object? isClientError = null,
     Object? isDropDownError = null,
+    Object? isLoadingButton = null,
   }) {
     return _then(_$_AdminCreationState(
       isLoading: null == isLoading
@@ -1437,6 +1688,10 @@ class __$$_AdminCreationStateCopyWithImpl<$Res>
           ? _value.rolesResponse
           : rolesResponse // ignore: cast_nullable_to_non_nullable
               as GetRoleResponse?,
+      selectedRole: freezed == selectedRole
+          ? _value.selectedRole
+          : selectedRole // ignore: cast_nullable_to_non_nullable
+              as Role?,
       isClientError: null == isClientError
           ? _value.isClientError
           : isClientError // ignore: cast_nullable_to_non_nullable
@@ -1444,6 +1699,10 @@ class __$$_AdminCreationStateCopyWithImpl<$Res>
       isDropDownError: null == isDropDownError
           ? _value.isDropDownError
           : isDropDownError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingButton: null == isLoadingButton
+          ? _value.isLoadingButton
+          : isLoadingButton // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -1460,8 +1719,10 @@ class _$_AdminCreationState implements _AdminCreationState {
       required this.updateResponse,
       required this.viewResponse,
       required this.rolesResponse,
+      required this.selectedRole,
       this.isClientError = false,
-      this.isDropDownError = false});
+      this.isDropDownError = false,
+      this.isLoadingButton = false});
 
   @override
   final bool isLoading;
@@ -1478,15 +1739,20 @@ class _$_AdminCreationState implements _AdminCreationState {
   @override
   final GetRoleResponse? rolesResponse;
   @override
+  final Role? selectedRole;
+  @override
   @JsonKey()
   final bool isClientError;
   @override
   @JsonKey()
   final bool isDropDownError;
+  @override
+  @JsonKey()
+  final bool isLoadingButton;
 
   @override
   String toString() {
-    return 'AdminCreationState(isLoading: $isLoading, isError: $isError, error: $error, addResponse: $addResponse, updateResponse: $updateResponse, viewResponse: $viewResponse, rolesResponse: $rolesResponse, isClientError: $isClientError, isDropDownError: $isDropDownError)';
+    return 'AdminCreationState(isLoading: $isLoading, isError: $isError, error: $error, addResponse: $addResponse, updateResponse: $updateResponse, viewResponse: $viewResponse, rolesResponse: $rolesResponse, selectedRole: $selectedRole, isClientError: $isClientError, isDropDownError: $isDropDownError, isLoadingButton: $isLoadingButton)';
   }
 
   @override
@@ -1506,10 +1772,14 @@ class _$_AdminCreationState implements _AdminCreationState {
                 other.viewResponse == viewResponse) &&
             (identical(other.rolesResponse, rolesResponse) ||
                 other.rolesResponse == rolesResponse) &&
+            (identical(other.selectedRole, selectedRole) ||
+                other.selectedRole == selectedRole) &&
             (identical(other.isClientError, isClientError) ||
                 other.isClientError == isClientError) &&
             (identical(other.isDropDownError, isDropDownError) ||
-                other.isDropDownError == isDropDownError));
+                other.isDropDownError == isDropDownError) &&
+            (identical(other.isLoadingButton, isLoadingButton) ||
+                other.isLoadingButton == isLoadingButton));
   }
 
   @override
@@ -1522,8 +1792,10 @@ class _$_AdminCreationState implements _AdminCreationState {
       updateResponse,
       viewResponse,
       rolesResponse,
+      selectedRole,
       isClientError,
-      isDropDownError);
+      isDropDownError,
+      isLoadingButton);
 
   @JsonKey(ignore: true)
   @override
@@ -1542,8 +1814,10 @@ abstract class _AdminCreationState implements AdminCreationState {
       required final CommonResponseUse? updateResponse,
       required final AdminViewResponse? viewResponse,
       required final GetRoleResponse? rolesResponse,
+      required final Role? selectedRole,
       final bool isClientError,
-      final bool isDropDownError}) = _$_AdminCreationState;
+      final bool isDropDownError,
+      final bool isLoadingButton}) = _$_AdminCreationState;
 
   @override
   bool get isLoading;
@@ -1560,9 +1834,13 @@ abstract class _AdminCreationState implements AdminCreationState {
   @override
   GetRoleResponse? get rolesResponse;
   @override
+  Role? get selectedRole;
+  @override
   bool get isClientError;
   @override
   bool get isDropDownError;
+  @override
+  bool get isLoadingButton;
   @override
   @JsonKey(ignore: true)
   _$$_AdminCreationStateCopyWith<_$_AdminCreationState> get copyWith =>

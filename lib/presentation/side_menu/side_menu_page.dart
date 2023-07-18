@@ -434,6 +434,8 @@ class _MenuBarState extends State<SideMenuPage> {
       path = "care-ambassador";
     } else if (path == "role-manage") {
       path = "role-management";
+    } else if (path == "admin-manage") {
+      path = "admin-management";
     }
     return items.keys.elementAt(index) == upperCase(path) ? true : false;
   }

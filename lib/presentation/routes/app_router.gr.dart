@@ -222,7 +222,7 @@ class AppRouter extends _i19.RootStackRouter {
           orElse: () => AdminCreationRouteArgs(
                 isView: queryParams.optString('view'),
                 isEdit: queryParams.optString('edit'),
-                roleId: queryParams.optString('role_id'),
+                id: queryParams.optString('id'),
               ));
       return _i19.AdaptivePage<dynamic>(
         routeData: routeData,
@@ -230,7 +230,7 @@ class AppRouter extends _i19.RootStackRouter {
           key: args.key,
           isView: args.isView,
           isEdit: args.isEdit,
-          roleId: args.roleId,
+          id: args.id,
         ),
         maintainState: false,
       );
@@ -718,7 +718,7 @@ class AdminCreationRoute extends _i19.PageRouteInfo<AdminCreationRouteArgs> {
     _i20.Key? key,
     String? isView,
     String? isEdit,
-    String? roleId,
+    String? id,
   }) : super(
           AdminCreationRoute.name,
           path: 'admin-manage',
@@ -726,12 +726,12 @@ class AdminCreationRoute extends _i19.PageRouteInfo<AdminCreationRouteArgs> {
             key: key,
             isView: isView,
             isEdit: isEdit,
-            roleId: roleId,
+            id: id,
           ),
           rawQueryParams: {
             'view': isView,
             'edit': isEdit,
-            'role_id': roleId,
+            'id': id,
           },
         );
 
@@ -743,7 +743,7 @@ class AdminCreationRouteArgs {
     this.key,
     this.isView,
     this.isEdit,
-    this.roleId,
+    this.id,
   });
 
   final _i20.Key? key;
@@ -752,11 +752,11 @@ class AdminCreationRouteArgs {
 
   final String? isEdit;
 
-  final String? roleId;
+  final String? id;
 
   @override
   String toString() {
-    return 'AdminCreationRouteArgs{key: $key, isView: $isView, isEdit: $isEdit, roleId: $roleId}';
+    return 'AdminCreationRouteArgs{key: $key, isView: $isView, isEdit: $isEdit, id: $id}';
   }
 }
 

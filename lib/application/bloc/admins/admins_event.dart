@@ -15,5 +15,7 @@ class AdminEvent with _$AdminEvent {
   }) = _GetRoles;
 
   const factory AdminEvent.adminDelete(
-      {required String roleId, required String userID}) = _AdminDelete;
+      {required String adminID,
+      required String userID,
+      required BuildContext context}) = _AdminDelete;
 }

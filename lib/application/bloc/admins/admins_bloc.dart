@@ -3,9 +3,11 @@ import 'package:admin_580_tech/domain/common_response/common_response.dart';
 import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.dart';
 import 'package:admin_580_tech/infrastructure/admins/admins_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../core/custom_snackbar.dart';
 import '../../../domain/roles/model/get_role_response.dart';
 
 part 'admins_bloc.freezed.dart';
@@ -21,23 +23,23 @@ class AdminsBloc extends Bloc<AdminEvent, AdminsState> {
   }
 
   _getAdmins(_GetAdmins event, Emitter<AdminsState> emit) async {
-    // final Either<ApiErrorHandler, GetRoleResponse> roleResult =
-    //     await adminsRepository.getRoles(
-    //   userID: event.userId,
-    // );
-    // AdminsState roleState = roleResult.fold((l) {
-    //   return state.copyWith(
-    //     error: l.error,
-    //     isError: true,
-    //   );
-    // }, (r) {
-    //   return state.copyWith(
-    //     getRolesResponse: r,
-    //   );
-    // });
-    // emit(
-    //   roleState,
-    // );
+    final Either<ApiErrorHandler, GetRoleResponse> roleResult =
+        await adminsRepository.getRoles(
+      userID: event.userId,
+    );
+    AdminsState roleState = roleResult.fold((l) {
+      return state.copyWith(
+        error: l.error,
+        isError: true,
+      );
+    }, (r) {
+      return state.copyWith(
+        getRolesResponse: r,
+      );
+    });
+    emit(
+      roleState,
+    );
 
     final Either<ApiErrorHandler, AdminGetResponse> adminResult =
         await adminsRepository.getAdmins(
@@ -69,8 +71,9 @@ class AdminsBloc extends Bloc<AdminEvent, AdminsState> {
   _deleteRoles(_AdminDelete event, Emitter<AdminsState> emit) async {
     final Either<ApiErrorHandler, CommonResponseUse> homeResult =
         await adminsRepository.deleteAdmin(
-            adminID: event.roleId, userID: event.roleId);
+            adminID: event.adminID, userID: event.userID);
     AdminsState homeState = homeResult.fold((l) {
+      CSnackBar.showError(event.context, msg: l.error ?? "");
       return state.copyWith(
         error: l.error,
         isLoading: false,
@@ -78,6 +81,12 @@ class AdminsBloc extends Bloc<AdminEvent, AdminsState> {
         isClientError: l.isClientError ?? false,
       );
     }, (r) {
+      if (r.status ?? false) {
+        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        add(AdminEvent.getAdmins(userId: event.userID, page: 1, limit: 10));
+      } else {
+        CSnackBar.showError(event.context, msg: r.message ?? "");
+      }
       return state.copyWith(
         deleteResponse: r,
         isLoading: false,

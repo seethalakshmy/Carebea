@@ -88,6 +88,7 @@ class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
   }
 
   _addUpdateRole(_AddUpdateRole event, Emitter<RoleCreationState> emit) async {
+    emit(state.copyWith(isLoadingButton: true));
     final Either<ApiErrorHandler, CommonResponseUse> homeResult =
         await roleCreationRepository.addRoleUpdateRole(
             userId: event.userId,
@@ -102,6 +103,7 @@ class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
       return state.copyWith(
         error: l.error,
         isLoading: false,
+        isLoadingButton: false,
         isError: true,
         isClientError: l.isClientError ?? false,
       );

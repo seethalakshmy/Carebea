@@ -1,6 +1,7 @@
 import 'package:admin_580_tech/domain/admin_creation/model/admin_view_response.dart';
 import 'package:admin_580_tech/domain/common_response/common_response.dart';
 import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
+import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,10 +20,34 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
 
   AdminCreationBloc(this.adminCreationRepository)
       : super(AdminCreationState.initial()) {
+    on<_GetRoles>(_getRoles);
     on<_AddAdmin>(_addAdmin);
     on<_UpdateAdmin>(_updateAdmin);
     on<_ViewAdmin>(_viewAdmin);
     on<_DropDownErrorDisplay>(_dropDownErrorDisplay);
+    on<_SetDropDownValue>(_setRoleDropDownValue);
+  }
+
+  _getRoles(_GetRoles event, Emitter<AdminCreationState> emit) async {
+    final Either<ApiErrorHandler, GetRoleResponse> roleResult =
+        await adminCreationRepository.getRoles(
+      userID: event.userId,
+    );
+    AdminCreationState roleState = roleResult.fold((l) {
+      return state.copyWith(
+        error: l.error,
+        isLoading: false,
+        isError: true,
+      );
+    }, (r) {
+      return state.copyWith(
+        rolesResponse: r,
+        isLoading: false,
+      );
+    });
+    emit(
+      roleState,
+    );
   }
 
   _dropDownErrorDisplay(
@@ -30,8 +55,13 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
     emit(state.copyWith(isDropDownError: event.value));
   }
 
+  _setRoleDropDownValue(
+      _SetDropDownValue event, Emitter<AdminCreationState> emit) {
+    emit(state.copyWith(selectedRole: event.value));
+    add(const AdminCreationEvent.dropDownErrorDisplay(value: false));
+  }
+
   _viewAdmin(_ViewAdmin event, Emitter<AdminCreationState> emit) async {
-    emit(state.copyWith(isLoading: true));
     final Either<ApiErrorHandler, GetRoleResponse> roleResult =
         await adminCreationRepository.getRoles(
       userID: event.userId,
@@ -61,19 +91,18 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
       );
     }, (r) {
       List<Role> role = state.rolesResponse?.data?.role ?? [];
+      Role? initialRoleValue;
       if (r.data?.roleId != null) {
         for (var i in role) {
           if (r.data?.roleId == i.id) {
-            i.isSelected = true;
+            initialRoleValue = i;
           }
         }
       }
-      GetRoleResponse? roleResponse = state.rolesResponse
-          ?.copyWith(data: state.rolesResponse?.data?.copyWith(role: role));
 
       return state.copyWith(
-        rolesResponse: roleResponse,
         viewResponse: r,
+        selectedRole: initialRoleValue,
         isLoading: false,
       );
     });
@@ -82,25 +111,8 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
     );
   }
 
-  //
   _addAdmin(_AddAdmin event, Emitter<AdminCreationState> emit) async {
-    final Either<ApiErrorHandler, GetRoleResponse> roleResult =
-        await adminCreationRepository.getRoles(
-      userID: event.userId,
-    );
-    AdminCreationState roleState = roleResult.fold((l) {
-      return state.copyWith(
-        error: l.error,
-        isError: true,
-      );
-    }, (r) {
-      return state.copyWith(
-        rolesResponse: r,
-      );
-    });
-    emit(
-      roleState,
-    );
+    emit(state.copyWith(isLoadingButton: true));
     final Either<ApiErrorHandler, CommonResponseUse> homeResult =
         await adminCreationRepository.addAdmin(
       userId: event.userId,
@@ -116,17 +128,20 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
         error: l.error,
         isLoading: false,
         isError: true,
+        isLoadingButton: false,
         isClientError: l.isClientError ?? false,
       );
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        autoTabRouter?.setActiveIndex(12);
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
       return state.copyWith(
         addResponse: r,
         isLoading: false,
+        isLoadingButton: false,
       );
     });
     emit(
@@ -135,6 +150,7 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
   }
 
   _updateAdmin(_UpdateAdmin event, Emitter<AdminCreationState> emit) async {
+    emit(state.copyWith(isLoadingButton: true));
     final Either<ApiErrorHandler, CommonResponseUse> homeResult =
         await adminCreationRepository.updateAdmin(
       userId: event.userId,
@@ -151,18 +167,18 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
         error: l.error,
         isLoading: false,
         isError: true,
+        isLoadingButton: false,
         isClientError: l.isClientError ?? false,
       );
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        autoTabRouter?.setActiveIndex(12);
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
       return state.copyWith(
-        addResponse: r,
-        isLoading: false,
-      );
+          addResponse: r, isLoading: false, isLoadingButton: false);
     });
     emit(
       homeState,

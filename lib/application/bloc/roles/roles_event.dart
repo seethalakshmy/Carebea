@@ -10,5 +10,7 @@ class RolesEvent with _$RolesEvent {
       int? filterId}) = _GetRoles;
 
   const factory RolesEvent.roleDelete(
-      {required String roleId, required String userID}) = _RoleDelete;
+      {required String roleId,
+      required String userId,
+      required BuildContext context}) = _RoleDelete;
 }

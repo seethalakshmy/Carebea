@@ -4,7 +4,6 @@ part of 'caregiver_verification_bloc.dart';
 class CareGiverVerificationState with _$CareGiverVerificationState {
   const factory CareGiverVerificationState({
     required bool isLoading,
-    required bool isWebViewLoading,
     required bool isError,
     required String? error,
     required int? selectedVerificationIndex,
@@ -14,6 +13,7 @@ class CareGiverVerificationState with _$CareGiverVerificationState {
     required VerifyResponse? certificateVerifyApproveResponse,
     required VerifyResponse? certificateVerifyRejectResponse,
     required VerifyResponse? sendTrainingResponse,
+    required CommonResponseUse? notifyPendingDocumentResponse,
     @Default(false) bool isBackGroundVerificationReasonFieldTapped,
     @Default(false) bool isHHaReasonFieldTapped,
     @Default(false) bool isBlsReasonFieldTapped,
@@ -23,17 +23,16 @@ class CareGiverVerificationState with _$CareGiverVerificationState {
 
   factory CareGiverVerificationState.initial() {
     return const CareGiverVerificationState(
-      isLoading: true,
-      isError: false,
-      isWebViewLoading: false,
-      error: null,
-      verificationTypes: [],
-      selectedVerificationIndex: 0,
-      response: null,
-      backgroundVerifyResponse: null,
-      certificateVerifyApproveResponse: null,
-      certificateVerifyRejectResponse: null,
-      sendTrainingResponse: null,
-    );
+        isLoading: true,
+        isError: false,
+        error: null,
+        verificationTypes: [],
+        selectedVerificationIndex: 0,
+        response: null,
+        backgroundVerifyResponse: null,
+        certificateVerifyApproveResponse: null,
+        certificateVerifyRejectResponse: null,
+        sendTrainingResponse: null,
+        notifyPendingDocumentResponse: null);
   }
 }

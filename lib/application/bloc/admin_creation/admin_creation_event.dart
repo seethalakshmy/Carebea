@@ -34,4 +34,7 @@ class AdminCreationEvent with _$AdminCreationEvent {
   const factory AdminCreationEvent.dropDownErrorDisplay({
     required bool value,
   }) = _DropDownErrorDisplay;
+  const factory AdminCreationEvent.setDropDownValue({
+    required Role value,
+  }) = _SetDropDownValue;
 }

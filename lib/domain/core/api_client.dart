@@ -32,10 +32,10 @@ import '../caregiver_verification/model/reject_params.dart';
 import '../caregivers/model/caregiver_response.dart';
 import '../on_boarding/models/common_response.dart';
 import '../on_boarding/models/preferences/pet_list_response.dart';
-import '../role_creation/model/module_response.dart';
-import '../role_creation/model/view_role_response.dart';
 import '../on_boarding/models/preferences/preference_request_model.dart';
 import '../on_boarding/models/preferences/years_of_experience_response.dart';
+import '../role_creation/model/module_response.dart';
+import '../role_creation/model/view_role_response.dart';
 
 part 'api_client.g.dart';
 
@@ -75,7 +75,9 @@ abstract class ApiClient {
 
   @POST("/admin/get-caregiver-verification")
   Future<CaregiverVerificationResponse> getCareGiverVerificationData(
-      @Header("Authorization") String token, @Field('user_id') String userId);
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('admin_id') String adminId);
 
   @POST("/admin/caregiver-background-verify")
   Future<VerifyResponse> careGiverBackgroundVerify(
@@ -281,7 +283,7 @@ abstract class ApiClient {
       @Field('limit') int? limit,
       @Field('search_term') String? searchTerm);
 
-  @POST("/admin/super-admin/create-admin")
+  @POST("/super-admin/create-admin")
   Future<CommonResponseUse> addAdmin(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
@@ -293,14 +295,14 @@ abstract class ApiClient {
 
   @POST("/admin/edit-admin")
   Future<CommonResponseUse> updateAdmin(
+      @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('admin_id') String adminId,
-      @Header("Authorization") String token,
       @Field('first_name') String firstName,
       @Field('last_name') String lastName,
       @Field('email') String email,
       @Field('mobile_number') String? mobileNumber,
-      @Field('user_role_id') String? roleId);
+      @Field('role_id') String? roleId);
 
   @POST("/admin/get-admins")
   Future<AdminGetResponse> getAdmins(
@@ -319,4 +321,10 @@ abstract class ApiClient {
   @POST("/admin/view-admin")
   Future<AdminViewResponse> viewAdmin(@Header("Authorization") String token,
       @Field('user_id') String userId, @Field('admin_id') String adminId);
+
+  @POST("/admin/notify-pending-docs-cg")
+  Future<CommonResponseUse> notifyPendingDocument(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('admin_id') String adminId);
 }

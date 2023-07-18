@@ -1,4 +1,5 @@
 import 'package:admin_580_tech/core/responsive.dart';
+import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
 import 'package:admin_580_tech/infrastructure/admin_creation/admin_creation_repository.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
@@ -11,16 +12,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/admin_creation/admin_creation_bloc.dart';
-import '../../core/custom_debugger.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
+import '../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../side_menu/side_menu_page.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_dropdown.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/details_text_field_with_label.dart';
-import '../widget/error_view.dart';
 import '../widget/header_view.dart';
 
 class AdminCreationPage extends StatefulWidget {
@@ -28,13 +29,13 @@ class AdminCreationPage extends StatefulWidget {
       {Key? key,
       @QueryParam('view') this.isView,
       @QueryParam('edit') this.isEdit,
-      @QueryParam('role_id') this.roleId})
+      @QueryParam('id') this.id})
       : super(key: key);
 
   /// To do change :- change these two variables to bool for now getting error like " NoSuchMethodError: 'toLowerCase"  when extracting using auto-route
   final String? isView;
   final String? isEdit;
-  final String? roleId;
+  final String? id;
 
   @override
   State<AdminCreationPage> createState() => _AdminCreationPageState();
@@ -51,15 +52,37 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _mobileFocusNode = FocusNode();
   late AdminCreationBloc _adminCreationBloc;
-  bool isError = true;
 
   final AutovalidateMode _validateMode = AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
+  String adminUserID = "";
+  String adminId = "";
+
+  bool? _isView;
+
+  bool? _isEdit;
 
   @override
   void initState() {
     super.initState();
     _adminCreationBloc = AdminCreationBloc(AdminCreationRepository());
+    adminUserID = SharedPreffUtil().getUserId;
+    adminId =
+        autoTabRouter?.currentChild?.queryParams.getString("id", "") ?? "";
+    if (autoTabRouter!.currentChild!.queryParams
+        .getString('view', "")
+        .isNotEmpty) {
+      _isView = true;
+    } else {
+      _isView = false;
+    }
+    if (autoTabRouter!.currentChild!.queryParams
+        .getString('edit', "")
+        .isNotEmpty) {
+      _isEdit = true;
+    } else {
+      _isEdit = false;
+    }
   }
 
   @override
@@ -77,36 +100,48 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
 
   _rebuildView() {
     return BlocProvider(
-      create: (_) => _adminCreationBloc,
-      child: _bodyView(context),
+      create: (_) {
+        if (adminId.isNotEmpty) {
+          return _adminCreationBloc
+            ..add(AdminCreationEvent.viewAdmin(
+                userId: adminUserID, adminId: adminId));
+        } else {
+          return _adminCreationBloc
+            ..add(AdminCreationEvent.getRoles(userId: adminUserID));
+        }
+      },
+      child: BlocBuilder<AdminCreationBloc, AdminCreationState>(
+        builder: (context, state) {
+          return !state.isLoading
+              ? _bodyView(context, state)
+              : const LoaderView();
+        },
+      ),
     );
   }
 
-  _bodyView(BuildContext context) {
-    return BlocBuilder<AdminCreationBloc, AdminCreationState>(
-      builder: (context, state) {
-        return CustomPadding.symmetric(
-          horizontal: DBL.sixteen.val,
-          child: CustomCard(
-            shape: PR().roundedRectangleBorder(DBL.five.val),
-            elevation: DBL.seven.val,
-            child: CustomContainer(
-                padding: EdgeInsets.symmetric(
-                    horizontal: DBL.forty.val, vertical: DBL.eighteen.val),
-                child: state.isLoading
-                    ? const LoaderView()
-                    : state.isError
-                        ? ErrorView(
-                            isClientError: state.isClientError,
-                            errorMessage: state.error)
-                        : _createAdminView(state)),
-          ),
-        );
-      },
+  _bodyView(BuildContext context, AdminCreationState state) {
+    if (state.viewResponse != null) {
+      _fNameController.text = state.viewResponse?.data?.firstName ?? "";
+      _lNameController.text = state.viewResponse?.data?.lastName ?? "";
+      _emailController.text = state.viewResponse?.data?.email ?? "";
+      _mobileController.text = state.viewResponse?.data?.phoneNumber ?? "";
+    }
+    return CustomPadding.symmetric(
+      horizontal: DBL.sixteen.val,
+      child: CustomCard(
+        shape: PR().roundedRectangleBorder(DBL.five.val),
+        elevation: DBL.seven.val,
+        child: CustomContainer(
+            padding: EdgeInsets.symmetric(
+                horizontal: DBL.forty.val, vertical: DBL.eighteen.val),
+            child: _createAdminView(state)),
+      ),
     );
   }
 
   _roleDropDown(AdminCreationState state) {
+    List<Role> mRoles = state.rolesResponse?.data?.role ?? [];
     return CustomSizedBox(
       width: DBL.twoEighty.val,
       child: Column(
@@ -131,10 +166,12 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
             ],
           ),
           CustomSizedBox(height: DBL.ten.val),
-          CustomDropdown<int>(
+          CustomDropdown<Role>(
             isError: state.isDropDownError,
-            onChange: (int value, int index) {
-              CustomLog.log("val:::${value.toString()}");
+            errorMsg: AppString.emptyRole.val,
+            onChange: (Role value, int index) {
+              _adminCreationBloc
+                  .add(AdminCreationEvent.setDropDownValue(value: value));
             },
             dropdownButtonStyle: DropdownButtonStyle(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -151,16 +188,16 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
               color: AppColor.white.val,
               padding: EdgeInsets.all(DBL.five.val),
             ),
-            items: [AppString.active.val, AppString.inActive.val]
+            items: mRoles
                 .asMap()
                 .entries
                 .map(
-                  (item) => DropdownItem<int>(
-                    value: item.key,
+                  (item) => DropdownItem<Role>(
+                    value: item.value,
                     child: Padding(
                       padding: EdgeInsets.all(DBL.eight.val),
-                      child: Text(
-                        item.value,
+                      child: CustomText(
+                        item.value.name ?? "",
                         style: TS().gRoboto(
                             fontWeight: FW.w500.val,
                             fontSize: FS.font15.val,
@@ -171,7 +208,9 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                 )
                 .toList(),
             child: CustomText(
-              AppString.selectHint.val,
+              state.selectedRole != null
+                  ? state.selectedRole!.name.toString()
+                  : AppString.selectHint.val,
               style: TS().gRoboto(
                   fontWeight: FW.w500.val,
                   fontSize: FS.font15.val,
@@ -207,6 +246,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
               CustomSizedBox(
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
+                  isIgnore: _isView!,
                   isMandatory: true,
                   labelName: AppString.firstName.val,
                   focusNode: _fNameFocusNode,
@@ -225,6 +265,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
               CustomSizedBox(
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
+                  isIgnore: _isView!,
                   isMandatory: true,
                   labelName: AppString.lastName.val,
                   focusNode: _lNameFocusNode,
@@ -243,6 +284,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
               CustomSizedBox(
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
+                  isIgnore: _isView!,
                   isMandatory: true,
                   labelName: AppString.emailAddress.val,
                   focusNode: _emailFocusNode,
@@ -265,6 +307,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
               CustomSizedBox(
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
+                  isIgnore: _isView!,
                   isMandatory: true,
                   labelName: AppString.mobileNumber.val,
                   focusNode: _mobileFocusNode,
@@ -282,34 +325,42 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                   suffixIcon: const CustomContainer(width: 0),
                 ),
               ),
-              _roleDropDown(state),
+              IgnorePointer(
+                ignoring: _isView!,
+                child: _roleDropDown(state),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  CustomButton(
-                    height: 45,
-                    minWidth: 120,
-                    onPressed: () {
-                      context.router.navigate(CareGiversRoute());
-                    },
-                    text: AppString.cancel.val,
-                    color: AppColor.white.val,
-                    textColor: AppColor.primaryColor.val,
-                    borderWidth: 1,
-                  ),
+                  adminId.isEmpty
+                      ? CustomButton(
+                          height: DBL.fortyFive.val,
+                          minWidth: DBL.oneTwenty.val,
+                          onPressed: () {
+                            context.router.navigate(const AdminsRoute());
+                          },
+                          text: AppString.cancel.val,
+                          color: AppColor.white.val,
+                          textColor: AppColor.primaryColor.val,
+                          borderWidth: 1,
+                        )
+                      : CustomSizedBox.shrink(),
                   CustomSizedBox(width: DBL.twenty.val),
-                  CustomButton(
-                    height: DBL.fortyFive.val,
-                    minWidth: DBL.oneTwenty.val,
-                    onPressed: () {
-                      isError = false;
-
-                      checkInputData(state);
-                    },
-                    text: AppString.save.val,
-                    color: AppColor.primaryColor.val,
-                    textColor: AppColor.white.val,
-                  ),
+                  !_isView!
+                      ? CustomButton(
+                          isLoading: state.isLoadingButton,
+                          height: DBL.fortyFive.val,
+                          minWidth: DBL.oneTwenty.val,
+                          onPressed: () {
+                            checkInputData(state);
+                          },
+                          text: _isEdit!
+                              ? AppString.update.val
+                              : AppString.save.val,
+                          color: AppColor.primaryColor.val,
+                          textColor: AppColor.white.val,
+                        )
+                      : CustomSizedBox.shrink(),
                 ],
               ),
             ],
@@ -320,10 +371,31 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
   }
 
   checkInputData(AdminCreationState state) {
-    _adminCreationBloc
-        .add(const AdminCreationEvent.dropDownErrorDisplay(value: true));
-
-    if (_formKey.currentState!.validate() && !state.isDropDownError) {}
+    _adminCreationBloc.add(AdminCreationEvent.dropDownErrorDisplay(
+        value: state.selectedRole == null));
+    if (_formKey.currentState!.validate() && !state.isDropDownError) {
+      print('id:: ${adminUserID}');
+      if (_isEdit!) {
+        _adminCreationBloc.add(AdminCreationEvent.updateAdmin(
+            adminId: adminId,
+            userId: adminUserID,
+            roleId: state.selectedRole?.id ?? "",
+            context: context,
+            firstName: _fNameController.text.trim(),
+            lastName: _lNameController.text.trim(),
+            email: _emailController.text.trim(),
+            mobile: _mobileController.text.trim()));
+      } else {
+        _adminCreationBloc.add(AdminCreationEvent.addAdmin(
+            userId: adminUserID,
+            roleId: state.selectedRole?.id ?? "",
+            context: context,
+            firstName: _fNameController.text.trim(),
+            lastName: _lNameController.text.trim(),
+            email: _emailController.text.trim(),
+            mobile: _mobileController.text.trim()));
+      }
+    }
   }
 
   @override

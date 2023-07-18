@@ -2,8 +2,10 @@ part of 'caregiver_verification_bloc.dart';
 
 @freezed
 class CareGiverVerificationEvent with _$CareGiverVerificationEvent {
-  const factory CareGiverVerificationEvent.getVerificationData(
-      {required String userId}) = _GetVerificationData;
+  const factory CareGiverVerificationEvent.getVerificationData({
+    required BuildContext context,
+    required String userId,
+  }) = _GetVerificationData;
 
   const factory CareGiverVerificationEvent.isSelectedVerificationTab(
       VerificationTypes type) = _IsSelectedVerificationTab;
@@ -50,7 +52,9 @@ class CareGiverVerificationEvent with _$CareGiverVerificationEvent {
     required BuildContext context,
     int? page,
   }) = _CareGiverTrainingVerify;
-
-  const factory CareGiverVerificationEvent.isWebViewLoading(bool value) =
-      _IsWebViewLoading;
+  const factory CareGiverVerificationEvent.notifyPendingDocument({
+    required String userId,
+    required BuildContext context,
+    int? page,
+  }) = _NotifyPendingDocument;
 }

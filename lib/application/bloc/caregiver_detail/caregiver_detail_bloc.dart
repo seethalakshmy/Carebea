@@ -34,7 +34,7 @@ class CaregiverDetailBloc
       userID: event.userId,
     );
     var homeState = result.fold((l) {
-      return state.copyWith(error: l.error, isLoading: false);
+      return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       return state.copyWith(response: r, isLoading: false);
     });

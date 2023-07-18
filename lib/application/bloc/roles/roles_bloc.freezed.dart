@@ -16,12 +16,15 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$RolesEvent {
+  String get userId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, int page, int limit,
             String? searchTerm, int? filterId)
         getRoles,
-    required TResult Function(String roleId, String userID) roleDelete,
+    required TResult Function(
+            String roleId, String userId, BuildContext context)
+        roleDelete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +32,8 @@ mixin _$RolesEvent {
     TResult? Function(String userId, int page, int limit, String? searchTerm,
             int? filterId)?
         getRoles,
-    TResult? Function(String roleId, String userID)? roleDelete,
+    TResult? Function(String roleId, String userId, BuildContext context)?
+        roleDelete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +41,8 @@ mixin _$RolesEvent {
     TResult Function(String userId, int page, int limit, String? searchTerm,
             int? filterId)?
         getRoles,
-    TResult Function(String roleId, String userID)? roleDelete,
+    TResult Function(String roleId, String userId, BuildContext context)?
+        roleDelete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -60,6 +65,10 @@ mixin _$RolesEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $RolesEventCopyWith<RolesEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -67,6 +76,8 @@ abstract class $RolesEventCopyWith<$Res> {
   factory $RolesEventCopyWith(
           RolesEvent value, $Res Function(RolesEvent) then) =
       _$RolesEventCopyWithImpl<$Res, RolesEvent>;
+  @useResult
+  $Res call({String userId});
 }
 
 /// @nodoc
@@ -78,13 +89,27 @@ class _$RolesEventCopyWithImpl<$Res, $Val extends RolesEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+  }) {
+    return _then(_value.copyWith(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$_GetRolesCopyWith<$Res> {
+abstract class _$$_GetRolesCopyWith<$Res> implements $RolesEventCopyWith<$Res> {
   factory _$$_GetRolesCopyWith(
           _$_GetRoles value, $Res Function(_$_GetRoles) then) =
       __$$_GetRolesCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call(
       {String userId, int page, int limit, String? searchTerm, int? filterId});
@@ -188,7 +213,9 @@ class _$_GetRoles implements _GetRoles {
     required TResult Function(String userId, int page, int limit,
             String? searchTerm, int? filterId)
         getRoles,
-    required TResult Function(String roleId, String userID) roleDelete,
+    required TResult Function(
+            String roleId, String userId, BuildContext context)
+        roleDelete,
   }) {
     return getRoles(userId, page, limit, searchTerm, filterId);
   }
@@ -199,7 +226,8 @@ class _$_GetRoles implements _GetRoles {
     TResult? Function(String userId, int page, int limit, String? searchTerm,
             int? filterId)?
         getRoles,
-    TResult? Function(String roleId, String userID)? roleDelete,
+    TResult? Function(String roleId, String userId, BuildContext context)?
+        roleDelete,
   }) {
     return getRoles?.call(userId, page, limit, searchTerm, filterId);
   }
@@ -210,7 +238,8 @@ class _$_GetRoles implements _GetRoles {
     TResult Function(String userId, int page, int limit, String? searchTerm,
             int? filterId)?
         getRoles,
-    TResult Function(String roleId, String userID)? roleDelete,
+    TResult Function(String roleId, String userId, BuildContext context)?
+        roleDelete,
     required TResult orElse(),
   }) {
     if (getRoles != null) {
@@ -259,23 +288,27 @@ abstract class _GetRoles implements RolesEvent {
       final String? searchTerm,
       final int? filterId}) = _$_GetRoles;
 
+  @override
   String get userId;
   int get page;
   int get limit;
   String? get searchTerm;
   int? get filterId;
+  @override
   @JsonKey(ignore: true)
   _$$_GetRolesCopyWith<_$_GetRoles> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_RoleDeleteCopyWith<$Res> {
+abstract class _$$_RoleDeleteCopyWith<$Res>
+    implements $RolesEventCopyWith<$Res> {
   factory _$$_RoleDeleteCopyWith(
           _$_RoleDelete value, $Res Function(_$_RoleDelete) then) =
       __$$_RoleDeleteCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({String roleId, String userID});
+  $Res call({String roleId, String userId, BuildContext context});
 }
 
 /// @nodoc
@@ -290,17 +323,22 @@ class __$$_RoleDeleteCopyWithImpl<$Res>
   @override
   $Res call({
     Object? roleId = null,
-    Object? userID = null,
+    Object? userId = null,
+    Object? context = null,
   }) {
     return _then(_$_RoleDelete(
       roleId: null == roleId
           ? _value.roleId
           : roleId // ignore: cast_nullable_to_non_nullable
               as String,
-      userID: null == userID
-          ? _value.userID
-          : userID // ignore: cast_nullable_to_non_nullable
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ));
   }
 }
@@ -308,16 +346,19 @@ class __$$_RoleDeleteCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_RoleDelete implements _RoleDelete {
-  const _$_RoleDelete({required this.roleId, required this.userID});
+  const _$_RoleDelete(
+      {required this.roleId, required this.userId, required this.context});
 
   @override
   final String roleId;
   @override
-  final String userID;
+  final String userId;
+  @override
+  final BuildContext context;
 
   @override
   String toString() {
-    return 'RolesEvent.roleDelete(roleId: $roleId, userID: $userID)';
+    return 'RolesEvent.roleDelete(roleId: $roleId, userId: $userId, context: $context)';
   }
 
   @override
@@ -326,11 +367,12 @@ class _$_RoleDelete implements _RoleDelete {
         (other.runtimeType == runtimeType &&
             other is _$_RoleDelete &&
             (identical(other.roleId, roleId) || other.roleId == roleId) &&
-            (identical(other.userID, userID) || other.userID == userID));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.context, context) || other.context == context));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, roleId, userID);
+  int get hashCode => Object.hash(runtimeType, roleId, userId, context);
 
   @JsonKey(ignore: true)
   @override
@@ -344,9 +386,11 @@ class _$_RoleDelete implements _RoleDelete {
     required TResult Function(String userId, int page, int limit,
             String? searchTerm, int? filterId)
         getRoles,
-    required TResult Function(String roleId, String userID) roleDelete,
+    required TResult Function(
+            String roleId, String userId, BuildContext context)
+        roleDelete,
   }) {
-    return roleDelete(roleId, userID);
+    return roleDelete(roleId, userId, context);
   }
 
   @override
@@ -355,9 +399,10 @@ class _$_RoleDelete implements _RoleDelete {
     TResult? Function(String userId, int page, int limit, String? searchTerm,
             int? filterId)?
         getRoles,
-    TResult? Function(String roleId, String userID)? roleDelete,
+    TResult? Function(String roleId, String userId, BuildContext context)?
+        roleDelete,
   }) {
-    return roleDelete?.call(roleId, userID);
+    return roleDelete?.call(roleId, userId, context);
   }
 
   @override
@@ -366,11 +411,12 @@ class _$_RoleDelete implements _RoleDelete {
     TResult Function(String userId, int page, int limit, String? searchTerm,
             int? filterId)?
         getRoles,
-    TResult Function(String roleId, String userID)? roleDelete,
+    TResult Function(String roleId, String userId, BuildContext context)?
+        roleDelete,
     required TResult orElse(),
   }) {
     if (roleDelete != null) {
-      return roleDelete(roleId, userID);
+      return roleDelete(roleId, userId, context);
     }
     return orElse();
   }
@@ -410,10 +456,14 @@ class _$_RoleDelete implements _RoleDelete {
 abstract class _RoleDelete implements RolesEvent {
   const factory _RoleDelete(
       {required final String roleId,
-      required final String userID}) = _$_RoleDelete;
+      required final String userId,
+      required final BuildContext context}) = _$_RoleDelete;
 
   String get roleId;
-  String get userID;
+  @override
+  String get userId;
+  BuildContext get context;
+  @override
   @JsonKey(ignore: true)
   _$$_RoleDeleteCopyWith<_$_RoleDelete> get copyWith =>
       throw _privateConstructorUsedError;

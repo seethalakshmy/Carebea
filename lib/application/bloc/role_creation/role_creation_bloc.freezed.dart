@@ -1590,6 +1590,7 @@ mixin _$RoleCreationState {
   bool get isView => throw _privateConstructorUsedError;
   bool get isEdit => throw _privateConstructorUsedError;
   bool get isDelete => throw _privateConstructorUsedError;
+  bool get isLoadingButton => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RoleCreationStateCopyWith<RoleCreationState> get copyWith =>
@@ -1612,7 +1613,8 @@ abstract class $RoleCreationStateCopyWith<$Res> {
       bool isClientError,
       bool isView,
       bool isEdit,
-      bool isDelete});
+      bool isDelete,
+      bool isLoadingButton});
 }
 
 /// @nodoc
@@ -1638,6 +1640,7 @@ class _$RoleCreationStateCopyWithImpl<$Res, $Val extends RoleCreationState>
     Object? isView = null,
     Object? isEdit = null,
     Object? isDelete = null,
+    Object? isLoadingButton = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -1680,6 +1683,10 @@ class _$RoleCreationStateCopyWithImpl<$Res, $Val extends RoleCreationState>
           ? _value.isDelete
           : isDelete // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoadingButton: null == isLoadingButton
+          ? _value.isLoadingButton
+          : isLoadingButton // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -1702,7 +1709,8 @@ abstract class _$$_RoleCreationStateCopyWith<$Res>
       bool isClientError,
       bool isView,
       bool isEdit,
-      bool isDelete});
+      bool isDelete,
+      bool isLoadingButton});
 }
 
 /// @nodoc
@@ -1726,6 +1734,7 @@ class __$$_RoleCreationStateCopyWithImpl<$Res>
     Object? isView = null,
     Object? isEdit = null,
     Object? isDelete = null,
+    Object? isLoadingButton = null,
   }) {
     return _then(_$_RoleCreationState(
       isLoading: null == isLoading
@@ -1768,6 +1777,10 @@ class __$$_RoleCreationStateCopyWithImpl<$Res>
           ? _value.isDelete
           : isDelete // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoadingButton: null == isLoadingButton
+          ? _value.isLoadingButton
+          : isLoadingButton // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1785,7 +1798,8 @@ class _$_RoleCreationState implements _RoleCreationState {
       this.isClientError = false,
       this.isView = false,
       this.isEdit = false,
-      this.isDelete = false});
+      this.isDelete = false,
+      this.isLoadingButton = false});
 
   @override
   final bool isLoading;
@@ -1811,10 +1825,13 @@ class _$_RoleCreationState implements _RoleCreationState {
   @override
   @JsonKey()
   final bool isDelete;
+  @override
+  @JsonKey()
+  final bool isLoadingButton;
 
   @override
   String toString() {
-    return 'RoleCreationState(isLoading: $isLoading, isError: $isError, response: $response, moduleResponse: $moduleResponse, viewRoleResponse: $viewRoleResponse, error: $error, isClientError: $isClientError, isView: $isView, isEdit: $isEdit, isDelete: $isDelete)';
+    return 'RoleCreationState(isLoading: $isLoading, isError: $isError, response: $response, moduleResponse: $moduleResponse, viewRoleResponse: $viewRoleResponse, error: $error, isClientError: $isClientError, isView: $isView, isEdit: $isEdit, isDelete: $isDelete, isLoadingButton: $isLoadingButton)';
   }
 
   @override
@@ -1837,7 +1854,9 @@ class _$_RoleCreationState implements _RoleCreationState {
             (identical(other.isView, isView) || other.isView == isView) &&
             (identical(other.isEdit, isEdit) || other.isEdit == isEdit) &&
             (identical(other.isDelete, isDelete) ||
-                other.isDelete == isDelete));
+                other.isDelete == isDelete) &&
+            (identical(other.isLoadingButton, isLoadingButton) ||
+                other.isLoadingButton == isLoadingButton));
   }
 
   @override
@@ -1852,7 +1871,8 @@ class _$_RoleCreationState implements _RoleCreationState {
       isClientError,
       isView,
       isEdit,
-      isDelete);
+      isDelete,
+      isLoadingButton);
 
   @JsonKey(ignore: true)
   @override
@@ -1873,7 +1893,8 @@ abstract class _RoleCreationState implements RoleCreationState {
       final bool isClientError,
       final bool isView,
       final bool isEdit,
-      final bool isDelete}) = _$_RoleCreationState;
+      final bool isDelete,
+      final bool isLoadingButton}) = _$_RoleCreationState;
 
   @override
   bool get isLoading;
@@ -1895,6 +1916,8 @@ abstract class _RoleCreationState implements RoleCreationState {
   bool get isEdit;
   @override
   bool get isDelete;
+  @override
+  bool get isLoadingButton;
   @override
   @JsonKey(ignore: true)
   _$$_RoleCreationStateCopyWith<_$_RoleCreationState> get copyWith =>

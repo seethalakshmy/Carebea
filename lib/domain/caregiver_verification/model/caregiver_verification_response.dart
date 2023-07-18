@@ -24,6 +24,7 @@ class Data {
   String? id;
   int? verificationStatus;
   Caregiver? caregiver;
+  bool? pendingDocs;
   BackgroundVerification? backgroundVerification;
   CertificateVerification? certificateVerification;
 
@@ -36,7 +37,8 @@ class Data {
   });
 
   Data.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = json['user_id'];
+    pendingDocs = json['pending_docs'];
     verificationStatus = json['verificationStatus'];
     caregiver = json['name'] != null ? Caregiver.fromJson(json['name']) : null;
     backgroundVerification = json['background_verfication'] != null

@@ -3,8 +3,11 @@ import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.d
 import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
 import 'package:admin_580_tech/infrastructure/roles/roles_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../../core/custom_snackbar.dart';
 
 part 'roles_bloc.freezed.dart';
 part 'roles_event.dart';
@@ -49,6 +52,8 @@ class RolesBloc extends Bloc<RolesEvent, RolesState> {
         await rolesRepository.deleteRole(
             roleID: event.roleId, userID: event.roleId);
     RolesState homeState = homeResult.fold((l) {
+      CSnackBar.showError(event.context, msg: l.error ?? "");
+
       return state.copyWith(
         error: l.error,
         isLoading: false,
@@ -56,6 +61,11 @@ class RolesBloc extends Bloc<RolesEvent, RolesState> {
         isClientError: l.isClientError ?? false,
       );
     }, (r) {
+      if (r.status ?? false) {
+        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+      } else {
+        CSnackBar.showError(event.context, msg: r.message ?? "");
+      }
       return state.copyWith(
         deleteResponse: r,
         isLoading: false,
@@ -64,5 +74,6 @@ class RolesBloc extends Bloc<RolesEvent, RolesState> {
     emit(
       homeState,
     );
+    add(RolesEvent.getRoles(userId: event.userId, page: 1, limit: 10));
   }
 }

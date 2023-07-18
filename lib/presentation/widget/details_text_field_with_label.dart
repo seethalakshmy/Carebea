@@ -10,22 +10,23 @@ import 'custom_text.dart';
 import 'custom_text_field.dart';
 
 class DetailsTextFieldWithLabel extends StatelessWidget {
-  const DetailsTextFieldWithLabel(
-      {Key? key,
-      required this.controller,
-      required this.textInputAction,
-      required this.textInputType,
-      required this.focusNode,
-      required this.validator,
-      required this.labelName,
-      required this.suffixIcon,
-      this.isMandatory = false,
-      this.maxLines,
-      this.width,
-      this.textAlignVertical,
-      this.inputFormatter,
-      this.height})
-      : super(key: key);
+  const DetailsTextFieldWithLabel({
+    Key? key,
+    required this.controller,
+    required this.textInputAction,
+    required this.textInputType,
+    required this.focusNode,
+    required this.validator,
+    required this.labelName,
+    required this.suffixIcon,
+    this.isMandatory = false,
+    this.maxLines,
+    this.width,
+    this.textAlignVertical,
+    this.inputFormatter,
+    this.height,
+    this.isIgnore = false,
+  }) : super(key: key);
   final String labelName;
   final Widget suffixIcon;
   final FocusNode focusNode;
@@ -39,6 +40,7 @@ class DetailsTextFieldWithLabel extends StatelessWidget {
   final int? maxLines;
   final TextAlignVertical? textAlignVertical;
   final List<TextInputFormatter>? inputFormatter;
+  final bool isIgnore;
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +69,7 @@ class DetailsTextFieldWithLabel extends StatelessWidget {
         ),
         CustomSizedBox(height: DBL.ten.val),
         CTextField(
+          isIgnore: isIgnore,
           textAlignVertical: textAlignVertical,
           suffixIcon: suffixIcon,
           focusNode: focusNode,

@@ -151,7 +151,7 @@ class _RolesPageState extends State<RolesPage> {
                   if (_totalItems > 10) _paginationView()
                 ],
               )
-            : EmptyView(title: AppString.emptyCareGivers.val),
+            : EmptyView(title: AppString.emptyRoles.val),
       ],
     );
   }
@@ -262,7 +262,7 @@ class _RolesPageState extends State<RolesPage> {
               DataCell(_tableRowView(item.name ?? "")),
               DataCell(_tableRowView(
                   item.assignedModule != null && item.assignedModule!.isNotEmpty
-                      ? item.assignedModule?.join("\n") ?? " , "
+                      ? item.assignedModule?.join(", ") ?? ""
                       : "")),
               DataCell(TableActions(
                 isView: true,
@@ -281,6 +281,7 @@ class _RolesPageState extends State<RolesPage> {
                 onDeleteTap: () {
                   _deletePopup(
                     context,
+                    item.id ?? "",
                   );
                 },
               )),
@@ -359,13 +360,18 @@ class _RolesPageState extends State<RolesPage> {
 
   _deletePopup(
     BuildContext context,
+    String roleId,
   ) {
     showGeneralDialog(
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {
         return CustomAlertDelete(
-            label: AppString.deleteRole.val, onTapYes: () {});
+            label: AppString.deleteRole.val,
+            onTapYes: () {
+              _roleBloc.add(RolesEvent.roleDelete(
+                  roleId: roleId, userId: _adminUserId, context: context));
+            });
       },
     );
   }

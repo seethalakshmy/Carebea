@@ -40,18 +40,17 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
   final TextEditingController _roleController = TextEditingController();
   late RoleCreationBloc roleCreationBloc;
   String adminUserID = "";
-  String roleId = "64afdb6a7ee13eec8899b88d";
+  String roleId = "";
   List<String> selectedModules = [];
   bool? _isView;
-
   bool? _isEdit;
 
   @override
   void initState() {
     super.initState();
     adminUserID = SharedPreffUtil().getUserId;
-    print('userID:: $adminUserID');
-    // adminUserID = "64a69c032961698d154944ea";
+
+    /// adminUserID = "64a69c032961698d154944ea";
     roleCreationBloc = RoleCreationBloc(RoleCreationRepository());
     roleId =
         autoTabRouter?.currentChild?.queryParams.getString("role_id", "") ?? "";
@@ -149,12 +148,10 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
             CustomSizedBox(
               height: DBL.eight.val,
             ),
-            IgnorePointer(
-              ignoring: _isView!,
-              child: CTextField(
-                controller: _roleController,
-                width: DBL.fourHundred.val,
-              ),
+            CTextField(
+              isIgnore: _isView!,
+              controller: _roleController,
+              width: DBL.fourHundred.val,
             )
           ],
         ),
@@ -193,43 +190,53 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
   }
 
   _saveButton(RoleCreationState state, BuildContext context) {
-    return !_isView!
-        ? CustomButton(
-            borderRadius: DBL.five.val,
-            padding: EdgeInsets.symmetric(
-                horizontal: DBL.fortyFive.val, vertical: DBL.eighteen.val),
-            onPressed: () {
-              addAssignIdList(state);
-              if (_roleController.text.trim().isEmpty) {
-                CSnackBar.showError(context, msg: AppString.emptyRole.val);
-              } else if (selectedModules.isEmpty) {
-                CSnackBar.showError(context, msg: AppString.emptyModule.val);
-              } else {
-                if (roleId.isEmpty) {
-                  roleCreationBloc.add(RoleCreationEvent.addUpdateRole(
-                      userId: adminUserID,
-                      role: _roleController.text.trim(),
-                      moduleId: selectedModules,
-                      isView: state.isView ? 1 : 0,
-                      isDelete: state.isDelete ? 1 : 0,
-                      isEdit: state.isEdit ? 1 : 0,
-                      context: context));
-                } else {
-                  roleCreationBloc.add(RoleCreationEvent.addUpdateRole(
-                      roleId: roleId,
-                      userId: adminUserID,
-                      role: _roleController.text.trim(),
-                      moduleId: selectedModules,
-                      isView: state.isView ? 1 : 0,
-                      isDelete: state.isDelete ? 1 : 0,
-                      isEdit: state.isEdit ? 1 : 0,
-                      context: context));
-                }
-              }
-            },
-            text: !_isEdit! ? AppString.save.val : AppString.update.val,
-          )
-        : CustomSizedBox.shrink();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        roleId.isEmpty
+            ? CustomButton(
+                height: DBL.fortyFive.val,
+                minWidth: DBL.oneTwenty.val,
+                onPressed: () {
+                  autoTabRouter?.setActiveIndex(10);
+                },
+                text: AppString.cancel.val,
+                color: AppColor.white.val,
+                textColor: AppColor.primaryColor.val,
+                borderWidth: 1,
+              )
+            : CustomSizedBox.shrink(),
+        CustomSizedBox(width: DBL.twenty.val),
+        !_isView!
+            ? CustomButton(
+                isLoading: state.isLoadingButton,
+                text: !_isEdit! ? AppString.save.val : AppString.update.val,
+                borderRadius: DBL.five.val,
+                padding: EdgeInsets.symmetric(
+                    horizontal: DBL.fortyFive.val, vertical: DBL.eighteen.val),
+                onPressed: () {
+                  addAssignIdToList(state);
+                  if (_roleController.text.trim().isEmpty) {
+                    CSnackBar.showError(context, msg: AppString.emptyRole.val);
+                  } else if (selectedModules.isEmpty) {
+                    CSnackBar.showError(context,
+                        msg: AppString.emptyModule.val);
+                  } else {
+                    roleCreationBloc.add(RoleCreationEvent.addUpdateRole(
+                        roleId: roleId.isEmpty ? null : roleId,
+                        userId: adminUserID,
+                        role: _roleController.text.trim(),
+                        moduleId: selectedModules,
+                        isView: state.isView ? 1 : 0,
+                        isDelete: state.isDelete ? 1 : 0,
+                        isEdit: state.isEdit ? 1 : 0,
+                        context: context));
+                  }
+                },
+              )
+            : CustomSizedBox.shrink()
+      ],
+    );
   }
 
   Column _bottomView1(BuildContext context, RoleCreationState state) {
@@ -237,7 +244,7 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(
-          AppString.assignedModule.val,
+          AppString.assignModule.val,
           style: TS().gRoboto(
               color: AppColor.label8.val,
               fontSize: FS.font13.val,
@@ -375,7 +382,7 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
 
   bool isXS(BuildContext context) => MediaQuery.of(context).size.width <= 880;
 
-  void addAssignIdList(RoleCreationState state) {
+  void addAssignIdToList(RoleCreationState state) {
     selectedModules.clear();
     state.moduleResponse?.module?.forEach((element) {
       if (element.isSelected) {

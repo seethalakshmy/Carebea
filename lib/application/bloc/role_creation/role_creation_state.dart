@@ -13,6 +13,7 @@ class RoleCreationState with _$RoleCreationState {
     @Default(false) bool isView,
     @Default(false) bool isEdit,
     @Default(false) bool isDelete,
+    @Default(false) bool isLoadingButton,
   }) = _RoleCreationState;
 
   factory RoleCreationState.initial() {

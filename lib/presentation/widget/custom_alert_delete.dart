@@ -46,7 +46,7 @@ class CustomAlertDelete extends StatelessWidget {
                   CustomSizedBox(
                     width: DBL.ten.val,
                   ),
-                  _yesButton(),
+                  _yesButton(context),
                 ],
               )
             ],
@@ -73,10 +73,11 @@ class CustomAlertDelete extends StatelessWidget {
     );
   }
 
-  CustomButton _yesButton() {
+  CustomButton _yesButton(BuildContext context) {
     return CustomButton(
       text: AppString.yes.val,
       onPressed: () {
+        Navigator.pop(context);
         onTapYes();
       },
       borderRadius: DBL.five.val,

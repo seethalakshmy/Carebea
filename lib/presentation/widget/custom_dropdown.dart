@@ -29,7 +29,7 @@ class CustomDropdown<T> extends StatefulWidget {
   /// if true the dropdown icon will as a leading icon, default to false
   final bool leadingIcon;
   final bool isError;
-
+  final String errorMsg;
   const CustomDropdown({
     Key? key,
     this.hideIcon = false,
@@ -41,6 +41,7 @@ class CustomDropdown<T> extends StatefulWidget {
     required this.onChange,
     this.iconPath,
     this.isError = false,
+    this.errorMsg = "",
   }) : super(key: key);
 
   @override
@@ -127,7 +128,7 @@ class CustomDropdownState<T> extends State<CustomDropdown<T>>
                 horizontal: DBL.twelve.val,
                 vertical: DBL.eight.val,
                 child: CustomText(
-                  AppString.emptyRole.val,
+                  widget.errorMsg,
                   style: TS().gPoppins(
                     fontSize: FS.font11.val,
                     color: AppColor.red.val,

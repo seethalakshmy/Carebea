@@ -63,12 +63,16 @@ class _ApiClient implements ApiClient {
   Future<CaregiverVerificationResponse> getCareGiverVerificationData(
     token,
     userId,
+    adminId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = {'user_id': userId};
+    final _data = {
+      'user_id': userId,
+      'admin_id': adminId,
+    };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<CaregiverVerificationResponse>(Options(
       method: 'POST',
@@ -457,7 +461,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<GetPreferenceResponse> getPreferences(
+  Future<CommonResponse> getPreferences(
     userId,
     yearsOfExperience,
     serveWithSmoker,
@@ -478,8 +482,8 @@ class _ApiClient implements ApiClient {
       'pets_list': petsList,
       'known_languages': knownLanguages,
     };
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<GetPreferenceResponse>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -491,12 +495,12 @@ class _ApiClient implements ApiClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = GetPreferenceResponse.fromJson(_result.data!);
+    final value = CommonResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<GetServiceResponse> getServices(
+  Future<CommonResponse> submitServices(
     userId,
     services,
   ) async {
@@ -508,7 +512,7 @@ class _ApiClient implements ApiClient {
       'services': services,
     };
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<GetServiceResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -516,6 +520,29 @@ class _ApiClient implements ApiClient {
             .compose(
               _dio.options,
               '/admin/admin-cg-services',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetServiceResponse> getServices(userId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'user_id': userId};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<GetServiceResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/care-giver/services?',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -745,6 +772,29 @@ class _ApiClient implements ApiClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = LoginResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<YearsOfExperienceResponse> getYearsOfExp() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<YearsOfExperienceResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/common-data/get-years',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = YearsOfExperienceResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -1048,7 +1098,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/admin/super-admin/create-admin',
+              '/super-admin/create-admin',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -1059,9 +1109,9 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<CommonResponseUse> updateAdmin(
+    token,
     userId,
     adminId,
-    token,
     firstName,
     lastName,
     email,
@@ -1080,7 +1130,7 @@ class _ApiClient implements ApiClient {
       'last_name': lastName,
       'email': email,
       'mobile_number': mobileNumber,
-      'user_role_id': roleId,
+      'role_id': roleId,
     };
     _data.removeWhere((k, v) => v == null);
     final _result = await _dio
@@ -1202,6 +1252,37 @@ class _ApiClient implements ApiClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = AdminViewResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponseUse> notifyPendingDocument(
+    token,
+    userId,
+    adminId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'admin_id': adminId,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponseUse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/notify-pending-docs-cg',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponseUse.fromJson(_result.data!);
     return value;
   }
 

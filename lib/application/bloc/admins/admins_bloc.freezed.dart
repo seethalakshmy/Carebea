@@ -22,7 +22,9 @@ mixin _$AdminEvent {
             String? searchTerm, String? status, String? roleId)
         getAdmins,
     required TResult Function(String userId) getRoles,
-    required TResult Function(String roleId, String userID) adminDelete,
+    required TResult Function(
+            String adminID, String userID, BuildContext context)
+        adminDelete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,7 +33,8 @@ mixin _$AdminEvent {
             String? status, String? roleId)?
         getAdmins,
     TResult? Function(String userId)? getRoles,
-    TResult? Function(String roleId, String userID)? adminDelete,
+    TResult? Function(String adminID, String userID, BuildContext context)?
+        adminDelete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,7 +43,8 @@ mixin _$AdminEvent {
             String? status, String? roleId)?
         getAdmins,
     TResult Function(String userId)? getRoles,
-    TResult Function(String roleId, String userID)? adminDelete,
+    TResult Function(String adminID, String userID, BuildContext context)?
+        adminDelete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -208,7 +212,9 @@ class _$_GetAdmins implements _GetAdmins {
             String? searchTerm, String? status, String? roleId)
         getAdmins,
     required TResult Function(String userId) getRoles,
-    required TResult Function(String roleId, String userID) adminDelete,
+    required TResult Function(
+            String adminID, String userID, BuildContext context)
+        adminDelete,
   }) {
     return getAdmins(userId, page, limit, searchTerm, status, roleId);
   }
@@ -220,7 +226,8 @@ class _$_GetAdmins implements _GetAdmins {
             String? status, String? roleId)?
         getAdmins,
     TResult? Function(String userId)? getRoles,
-    TResult? Function(String roleId, String userID)? adminDelete,
+    TResult? Function(String adminID, String userID, BuildContext context)?
+        adminDelete,
   }) {
     return getAdmins?.call(userId, page, limit, searchTerm, status, roleId);
   }
@@ -232,7 +239,8 @@ class _$_GetAdmins implements _GetAdmins {
             String? status, String? roleId)?
         getAdmins,
     TResult Function(String userId)? getRoles,
-    TResult Function(String roleId, String userID)? adminDelete,
+    TResult Function(String adminID, String userID, BuildContext context)?
+        adminDelete,
     required TResult orElse(),
   }) {
     if (getAdmins != null) {
@@ -364,7 +372,9 @@ class _$_GetRoles implements _GetRoles {
             String? searchTerm, String? status, String? roleId)
         getAdmins,
     required TResult Function(String userId) getRoles,
-    required TResult Function(String roleId, String userID) adminDelete,
+    required TResult Function(
+            String adminID, String userID, BuildContext context)
+        adminDelete,
   }) {
     return getRoles(userId);
   }
@@ -376,7 +386,8 @@ class _$_GetRoles implements _GetRoles {
             String? status, String? roleId)?
         getAdmins,
     TResult? Function(String userId)? getRoles,
-    TResult? Function(String roleId, String userID)? adminDelete,
+    TResult? Function(String adminID, String userID, BuildContext context)?
+        adminDelete,
   }) {
     return getRoles?.call(userId);
   }
@@ -388,7 +399,8 @@ class _$_GetRoles implements _GetRoles {
             String? status, String? roleId)?
         getAdmins,
     TResult Function(String userId)? getRoles,
-    TResult Function(String roleId, String userID)? adminDelete,
+    TResult Function(String adminID, String userID, BuildContext context)?
+        adminDelete,
     required TResult orElse(),
   }) {
     if (getRoles != null) {
@@ -447,7 +459,7 @@ abstract class _$$_AdminDeleteCopyWith<$Res> {
           _$_AdminDelete value, $Res Function(_$_AdminDelete) then) =
       __$$_AdminDeleteCopyWithImpl<$Res>;
   @useResult
-  $Res call({String roleId, String userID});
+  $Res call({String adminID, String userID, BuildContext context});
 }
 
 /// @nodoc
@@ -461,18 +473,23 @@ class __$$_AdminDeleteCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? roleId = null,
+    Object? adminID = null,
     Object? userID = null,
+    Object? context = null,
   }) {
     return _then(_$_AdminDelete(
-      roleId: null == roleId
-          ? _value.roleId
-          : roleId // ignore: cast_nullable_to_non_nullable
+      adminID: null == adminID
+          ? _value.adminID
+          : adminID // ignore: cast_nullable_to_non_nullable
               as String,
       userID: null == userID
           ? _value.userID
           : userID // ignore: cast_nullable_to_non_nullable
               as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ));
   }
 }
@@ -480,16 +497,19 @@ class __$$_AdminDeleteCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AdminDelete implements _AdminDelete {
-  const _$_AdminDelete({required this.roleId, required this.userID});
+  const _$_AdminDelete(
+      {required this.adminID, required this.userID, required this.context});
 
   @override
-  final String roleId;
+  final String adminID;
   @override
   final String userID;
+  @override
+  final BuildContext context;
 
   @override
   String toString() {
-    return 'AdminEvent.adminDelete(roleId: $roleId, userID: $userID)';
+    return 'AdminEvent.adminDelete(adminID: $adminID, userID: $userID, context: $context)';
   }
 
   @override
@@ -497,12 +517,13 @@ class _$_AdminDelete implements _AdminDelete {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AdminDelete &&
-            (identical(other.roleId, roleId) || other.roleId == roleId) &&
-            (identical(other.userID, userID) || other.userID == userID));
+            (identical(other.adminID, adminID) || other.adminID == adminID) &&
+            (identical(other.userID, userID) || other.userID == userID) &&
+            (identical(other.context, context) || other.context == context));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, roleId, userID);
+  int get hashCode => Object.hash(runtimeType, adminID, userID, context);
 
   @JsonKey(ignore: true)
   @override
@@ -517,9 +538,11 @@ class _$_AdminDelete implements _AdminDelete {
             String? searchTerm, String? status, String? roleId)
         getAdmins,
     required TResult Function(String userId) getRoles,
-    required TResult Function(String roleId, String userID) adminDelete,
+    required TResult Function(
+            String adminID, String userID, BuildContext context)
+        adminDelete,
   }) {
-    return adminDelete(roleId, userID);
+    return adminDelete(adminID, userID, context);
   }
 
   @override
@@ -529,9 +552,10 @@ class _$_AdminDelete implements _AdminDelete {
             String? status, String? roleId)?
         getAdmins,
     TResult? Function(String userId)? getRoles,
-    TResult? Function(String roleId, String userID)? adminDelete,
+    TResult? Function(String adminID, String userID, BuildContext context)?
+        adminDelete,
   }) {
-    return adminDelete?.call(roleId, userID);
+    return adminDelete?.call(adminID, userID, context);
   }
 
   @override
@@ -541,11 +565,12 @@ class _$_AdminDelete implements _AdminDelete {
             String? status, String? roleId)?
         getAdmins,
     TResult Function(String userId)? getRoles,
-    TResult Function(String roleId, String userID)? adminDelete,
+    TResult Function(String adminID, String userID, BuildContext context)?
+        adminDelete,
     required TResult orElse(),
   }) {
     if (adminDelete != null) {
-      return adminDelete(roleId, userID);
+      return adminDelete(adminID, userID, context);
     }
     return orElse();
   }
@@ -587,11 +612,13 @@ class _$_AdminDelete implements _AdminDelete {
 
 abstract class _AdminDelete implements AdminEvent {
   const factory _AdminDelete(
-      {required final String roleId,
-      required final String userID}) = _$_AdminDelete;
+      {required final String adminID,
+      required final String userID,
+      required final BuildContext context}) = _$_AdminDelete;
 
-  String get roleId;
+  String get adminID;
   String get userID;
+  BuildContext get context;
   @JsonKey(ignore: true)
   _$$_AdminDeleteCopyWith<_$_AdminDelete> get copyWith =>
       throw _privateConstructorUsedError;

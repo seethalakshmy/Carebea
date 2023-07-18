@@ -5,8 +5,10 @@ import 'package:admin_580_tech/core/properties.dart';
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/admins/model/admin_get_response.dart';
+import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
 import 'package:admin_580_tech/infrastructure/admins/admins_repository.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
+import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
@@ -24,6 +26,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../side_menu/side_menu_page.dart';
+import '../widget/custom_alert_delete.dart';
 import '../widget/custom_dropdown.dart';
 import '../widget/custom_icon.dart';
 import '../widget/custom_text.dart';
@@ -56,6 +59,7 @@ class _AdminsPageState extends State<AdminsPage> {
   late AdminsBloc _adminsBloc;
   SharedPreffUtil sharedPrefUtil = SharedPreffUtil();
   String? filterId;
+  String? roleId;
 
   @override
   void initState() {
@@ -78,6 +82,9 @@ class _AdminsPageState extends State<AdminsPage> {
       children: [
         HeaderView(
           title: AppString.adminManagement.val,
+        ),
+        CustomSizedBox(
+          height: DBL.twenty.val,
         ),
         _rebuildView(),
       ],
@@ -116,7 +123,7 @@ class _AdminsPageState extends State<AdminsPage> {
                   ? ErrorView(
                       isClientError: state.isClientError,
                       errorMessage: state.error)
-                  : _caregiversView(context, state)),
+                  : _adminssView(context, state)),
     );
   }
 
@@ -126,7 +133,7 @@ class _AdminsPageState extends State<AdminsPage> {
     filterId = null;
   }
 
-  _caregiversView(BuildContext context, AdminsState state) {
+  _adminssView(BuildContext context, AdminsState state) {
     AdminGetResponse? value = state.getAdminsResponse;
     if (value?.status ?? false) {
       mAdmins.clear();
@@ -140,7 +147,7 @@ class _AdminsPageState extends State<AdminsPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         LayoutBuilder(builder: (context, constraints) {
-          return _actionView(constraints, context);
+          return _actionView(constraints, context, state);
         }),
         mAdmins.isNotEmpty
             ? Column(
@@ -154,13 +161,13 @@ class _AdminsPageState extends State<AdminsPage> {
                   if (_totalItems > 10) _paginationView()
                 ],
               )
-            : EmptyView(title: AppString.emptyCareGivers.val),
+            : EmptyView(title: AppString.emptyadmin.val),
       ],
     );
   }
 
   SingleChildScrollView _actionView(
-      BoxConstraints constraints, BuildContext context) {
+      BoxConstraints constraints, BuildContext context, AdminsState state) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: ConstrainedBox(
@@ -168,14 +175,26 @@ class _AdminsPageState extends State<AdminsPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _statusDropDown(context),
             Row(
+              children: [
+                _statusDropDown(context),
+                CustomSizedBox(
+                  width: DBL.five.val,
+                ),
+                _rolesDropDown(context, state),
+              ],
+            ),
+            CustomSizedBox(
+              width: DBL.ten.val,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _searchField(),
                 CustomSizedBox(
                   width: DBL.ten.val,
                 ),
-                _caregiverCreate()
+                _adminCreate()
               ],
             ),
           ],
@@ -184,14 +203,14 @@ class _AdminsPageState extends State<AdminsPage> {
     );
   }
 
-  CustomButton _caregiverCreate() {
+  CustomButton _adminCreate() {
     return CustomButton(
         onPressed: () {
-          autoTabRouter?.setActiveIndex(13);
+          autoTabRouter?.navigate(AdminCreationRoute());
         },
         text: AppString.create.val,
         color: AppColor.primaryColor.val,
-        height: DBL.fifty.val,
+        height: DBL.fiftyTwo.val,
         borderRadius: DBL.five.val,
         padding: EdgeInsets.symmetric(
             horizontal: DBL.twentyTwo.val, vertical: DBL.ten.val),
@@ -221,7 +240,7 @@ class _AdminsPageState extends State<AdminsPage> {
           onChange: (int value, int index) {
             CustomLog.log("val:::${value.toString()}");
             filterId = value.toString();
-            _getCareGiverEvent();
+            _getAdminEvent();
           },
           dropdownButtonStyle: DropdownButtonStyle(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -274,6 +293,59 @@ class _AdminsPageState extends State<AdminsPage> {
     );
   }
 
+  _rolesDropDown(BuildContext context, AdminsState state) {
+    List<Role> mRoles = state.getRolesResponse?.data?.role ?? [];
+    return CustomDropdown<Role>(
+      onChange: (Role value, int index) {
+        CustomLog.log("val:::${value.toString()}");
+        roleId = value.id.toString();
+        _getAdminEvent();
+      },
+      dropdownButtonStyle: DropdownButtonStyle(
+        mainAxisAlignment: MainAxisAlignment.start,
+        width: DBL.oneForty.val,
+        height:
+            Responsive.isMobile(context) ? DBL.fortyFive.val : DBL.forty.val,
+        elevation: DBL.zero.val,
+        padding: EdgeInsets.only(left: DBL.fifteen.val),
+        backgroundColor: Colors.white,
+        primaryColor: AppColor.white.val,
+      ),
+      dropdownStyle: DropdownStyle(
+        borderRadius: BorderRadius.circular(DBL.zero.val),
+        elevation: DBL.two.val,
+        color: AppColor.white.val,
+        padding: EdgeInsets.all(DBL.five.val),
+      ),
+      items: mRoles
+          .asMap()
+          .entries
+          .map(
+            (item) => DropdownItem<Role>(
+              value: item.value,
+              child: Padding(
+                padding: EdgeInsets.all(DBL.eight.val),
+                child: Text(
+                  item.value.name ?? "",
+                  style: TS().gRoboto(
+                      fontWeight: FW.w500.val,
+                      fontSize: FS.font15.val,
+                      color: AppColor.columColor2.val),
+                ),
+              ),
+            ),
+          )
+          .toList(),
+      child: CustomText(
+        AppString.role.val,
+        style: TS().gRoboto(
+            fontWeight: FW.w500.val,
+            fontSize: FS.font15.val,
+            color: AppColor.columColor2.val),
+      ),
+    );
+  }
+
   _searchField() {
     return CTextField(
       focusNode: _searchNode,
@@ -284,11 +356,11 @@ class _AdminsPageState extends State<AdminsPage> {
       hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
       onSubmitted: (String value) {
         _searchNode.requestFocus();
-        _getCareGiverEvent();
+        _getAdminEvent();
       },
       suffixIcon: InkWell(
         onTap: () {
-          _getCareGiverEvent();
+          _getAdminEvent();
         },
         child: CustomSvg(
           path: IMG.search.val,
@@ -338,6 +410,12 @@ class _AdminsPageState extends State<AdminsPage> {
           ),
           DataColumn2(
             size: ColumnSize.L,
+            label: _tableColumnView(
+              AppString.role.val,
+            ),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
             label: _tableColumnView(AppString.status.val),
           ),
           const DataColumn2(
@@ -358,14 +436,23 @@ class _AdminsPageState extends State<AdminsPage> {
               DataCell(_tableRowView(item.name?.lastName ?? "")),
               DataCell(_tableRowView(item.email ?? "")),
               DataCell(_tableRowView(item.phoneNumber ?? "")),
+              DataCell(_tableRowView(item.role ?? "")),
               DataCell(_statusBox(item.status ?? false)),
               DataCell(TableActions(
                 isView: true,
-                onViewTap: () {},
+                onViewTap: () {
+                  autoTabRouter?.navigate(
+                      AdminCreationRoute(isView: "view", id: item.id));
+                },
                 isDelete: true,
-                onDeleteTap: () {},
+                onDeleteTap: () {
+                  _deletePopup(context, item.id ?? "");
+                },
                 isEdit: true,
-                onEditTap: () {},
+                onEditTap: () {
+                  autoTabRouter?.navigate(
+                      AdminCreationRoute(isEdit: "edit", id: item.id));
+                },
               )),
             ],
           );
@@ -383,6 +470,24 @@ class _AdminsPageState extends State<AdminsPage> {
   TableColumnView _tableColumnView(String name) {
     return TableColumnView(
       text: name,
+    );
+  }
+
+  _deletePopup(
+    BuildContext context,
+    String adminID,
+  ) {
+    showGeneralDialog(
+      context: context,
+      pageBuilder: (BuildContext buildContext, Animation animation,
+          Animation secondaryAnimation) {
+        return CustomAlertDelete(
+            label: AppString.deleteRole.val,
+            onTapYes: () {
+              _adminsBloc.add(AdminEvent.adminDelete(
+                  adminID: adminID, userID: _adminUserId, context: context));
+            });
+      },
     );
   }
 
@@ -426,17 +531,17 @@ class _AdminsPageState extends State<AdminsPage> {
         onNextPressed: () {
           if (_page < totalPages) {
             _page = _page + 1;
-            _getCareGiverEvent();
+            _getAdminEvent();
           }
         },
         onItemPressed: (i) {
           _page = i;
-          _getCareGiverEvent();
+          _getAdminEvent();
         },
         onPreviousPressed: () {
           if (_page > 1) {
             _page = _page - 1;
-            _getCareGiverEvent();
+            _getAdminEvent();
           }
         });
   }
@@ -451,12 +556,13 @@ class _AdminsPageState extends State<AdminsPage> {
     }
   }
 
-  _getCareGiverEvent() {
+  _getAdminEvent() {
     _adminsBloc.add(AdminEvent.getAdmins(
         userId: _adminUserId,
         page: _page,
         limit: _limit,
         status: filterId,
+        roleId: roleId,
         searchTerm: _searchController.text.trim().isNotEmpty
             ? _searchController.text.trim()
             : null));

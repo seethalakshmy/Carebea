@@ -58,11 +58,13 @@ class Data {
     String? lastName,
     String? email,
     String? roleId,
+    String? phone,
   }) {
     _firstName = firstName;
     _lastName = lastName;
     _email = email;
     _roleId = roleId;
+    _phoneNumber = phone;
   }
 
   Data.fromJson(dynamic json) {
@@ -70,27 +72,32 @@ class Data {
     _lastName = json['last_name'];
     _email = json['email'];
     _roleId = json['role_id'];
+    _phoneNumber = json['phone_number'];
   }
   String? _firstName;
   String? _lastName;
   String? _email;
   String? _roleId;
+  String? _phoneNumber;
   Data copyWith({
     String? firstName,
     String? lastName,
     String? email,
     String? roleId,
+    String? phone,
   }) =>
       Data(
-        firstName: firstName ?? _firstName,
-        lastName: lastName ?? _lastName,
-        email: email ?? _email,
-        roleId: roleId ?? _roleId,
-      );
+          firstName: firstName ?? _firstName,
+          lastName: lastName ?? _lastName,
+          email: email ?? _email,
+          roleId: roleId ?? _roleId,
+          phone: phone ?? _phoneNumber);
+
   String? get firstName => _firstName;
   String? get lastName => _lastName;
   String? get email => _email;
   String? get roleId => _roleId;
+  String? get phoneNumber => _phoneNumber;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

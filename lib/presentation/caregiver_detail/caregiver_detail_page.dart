@@ -15,6 +15,7 @@ import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
+import 'package:admin_580_tech/presentation/widget/error_view.dart';
 import 'package:admin_580_tech/presentation/widget/loader_view.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -69,9 +70,11 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
         ..add(CareGiverDetailEvent.getCareGiverDetail(userId: userId)),
       child: BlocBuilder<CaregiverDetailBloc, CareGiverDetailState>(
         builder: (context, state) {
-          return !state.isLoading
-              ? (_bodyView(context, state))
-              : const LoaderView();
+          return state.isLoading
+              ? const LoaderView()
+              : state.isError
+                  ? ErrorView(isClientError: false, errorMessage: state.error)
+                  : _bodyView(context, state);
         },
       ),
     );
@@ -80,7 +83,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
   _bodyView(BuildContext context, CareGiverDetailState state) {
     CustomLog.log(
         'width :${MediaQuery.of(context).size.width} ${state.response}');
-    CareGiverDetailResponse response = state.response!;
+    CareGiverDetailResponse? response = state.response!;
     return CustomSizedBox(
       height: MediaQuery.of(context).size.height,
       child: Scaffold(
@@ -541,5 +544,6 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
   bool isXs2(context) => MediaQuery.of(context).size.width <= 930;
 
   bool isXs3(context) => MediaQuery.of(context).size.width <= 805;
+
   bool isXs4(context) => MediaQuery.of(context).size.width <= 590;
 }

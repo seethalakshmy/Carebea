@@ -35,6 +35,7 @@ class CTextField extends StatelessWidget {
     this.textAlignVertical,
     this.inputFormatter,
     this.borderColor,
+    this.isIgnore = false,
   })  : assert(controller != null),
         super(key: key);
   final TextEditingController? controller;
@@ -64,67 +65,71 @@ class CTextField extends StatelessWidget {
   final Color? borderColor;
   final TextAlignVertical? textAlignVertical;
   final List<TextInputFormatter>? inputFormatter;
+  final bool isIgnore;
 
   @override
   Widget build(BuildContext context) {
-    return CustomSizedBox(
-      width: width,
-      child: TextFormField(
-        textAlignVertical: textAlignVertical ?? TextAlignVertical.center,
-        inputFormatters: inputFormatter ?? [],
-        controller: controller,
-        focusNode: focusNode,
-        textInputAction: textInputAction,
-        obscureText: obscureText!,
-        onChanged: onChanged,
-        onFieldSubmitted: onSubmitted,
-        maxLines: maxLines ?? INT.one.val,
-        minLines: INT.one.val,
-        onTap: onTap,
-        keyboardType: keyBoardType,
-        textCapitalization: textCapitalization,
-        // cursorColor: AppColor.white.val,
-        style: TextStyle(fontSize: 15, color: textColor),
-        decoration: InputDecoration(
-          counter: Offstage(),
-          hintText: hintText,
-          hintStyle: hintStyle,
-          suffixIconConstraints: BoxConstraints(minWidth: DBL.fifty.val),
-          filled: true,
-          fillColor: fillColor ?? AppColor.white.val,
-          suffixIcon: suffixIcon,
-          isDense: true,
-          errorText: errorText,
-          errorStyle: TS().gPoppins(
-            fontSize: FS.font11.val,
-            color: AppColor.red.val,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-                color: borderColor ?? AppColor.borderColor.val, width: 1),
-            borderRadius: BorderRadius.circular(DBL.five.val),
-          ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: AppColor.primaryColor.val,
+    return IgnorePointer(
+      ignoring: isIgnore,
+      child: CustomSizedBox(
+        width: width,
+        child: TextFormField(
+          textAlignVertical: textAlignVertical ?? TextAlignVertical.center,
+          inputFormatters: inputFormatter ?? [],
+          controller: controller,
+          focusNode: focusNode,
+          textInputAction: textInputAction,
+          obscureText: obscureText!,
+          onChanged: onChanged,
+          onFieldSubmitted: onSubmitted,
+          maxLines: maxLines ?? INT.one.val,
+          minLines: INT.one.val,
+          onTap: onTap,
+          keyboardType: keyBoardType,
+          textCapitalization: textCapitalization,
+          // cursorColor: AppColor.white.val,
+          style: TextStyle(fontSize: 15, color: textColor),
+          decoration: InputDecoration(
+            counter: Offstage(),
+            hintText: hintText,
+            hintStyle: hintStyle,
+            suffixIconConstraints: BoxConstraints(minWidth: DBL.fifty.val),
+            filled: true,
+            fillColor: fillColor ?? AppColor.white.val,
+            suffixIcon: suffixIcon,
+            isDense: true,
+            errorText: errorText,
+            errorStyle: TS().gPoppins(
+              fontSize: FS.font11.val,
+              color: AppColor.red.val,
             ),
-            borderRadius: BorderRadius.circular(DBL.five.val),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: borderColor ?? AppColor.borderColor.val, width: 1),
+              borderRadius: BorderRadius.circular(DBL.five.val),
+            ),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColor.primaryColor.val,
+              ),
+              borderRadius: BorderRadius.circular(DBL.five.val),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColor.borderColor.val),
+              borderRadius: BorderRadius.circular(DBL.five.val),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColor.error.val),
+              borderRadius: BorderRadius.circular(DBL.five.val),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColor.primaryColor.val),
+              borderRadius: BorderRadius.circular(DBL.five.val),
+            ),
           ),
-          disabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.primaryColor.val),
-            borderRadius: BorderRadius.circular(DBL.five.val),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.error.val),
-            borderRadius: BorderRadius.circular(DBL.five.val),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColor.primaryColor.val),
-            borderRadius: BorderRadius.circular(DBL.five.val),
-          ),
+          validator: validator,
+          maxLength: maxLength,
         ),
-        validator: validator,
-        maxLength: maxLength,
       ),
     );
   }
