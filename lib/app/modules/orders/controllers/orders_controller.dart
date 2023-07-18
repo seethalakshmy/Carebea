@@ -147,7 +147,7 @@ class OrdersController extends GetxController {
         pageNumber += 1;
       }
     } else {
-      allOrders.clear();
+      // allOrders.clear();
     }
   }
 

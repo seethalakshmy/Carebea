@@ -36,6 +36,7 @@ class ShopsController extends GetxController {
   Rx<PaymentMethod?> selectedPaymentMethod = Rx<PaymentMethod?>(null);
   TextEditingController collectedAmountEditingController = TextEditingController();
   TextEditingController cheqNoController = TextEditingController();
+  TextEditingController searchEditingController = TextEditingController();
 
   Rx<SearchType> selectedSearchtype = Rx(
     SearchType("Name", "name"),
@@ -52,6 +53,8 @@ class ShopsController extends GetxController {
 
   @override
   void onInit() {
+    print("startt");
+
     scrollController.addListener(() {
       if (((scrollController.position.maxScrollExtent * .7) <= scrollController.position.pixels) && !isPaginating.value) {
         paginate();
@@ -63,6 +66,7 @@ class ShopsController extends GetxController {
 
   @override
   void onReady() {
+
     super.onReady();
   }
 
@@ -72,6 +76,8 @@ class ShopsController extends GetxController {
   }
 
   fetchAllShops() async {
+    print("iuor");
+    searchEditingController.text = "";
     shopList.clear();
     filterSelected("");
     pageNumber = 0;
