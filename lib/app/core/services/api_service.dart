@@ -112,7 +112,7 @@ class ApiService extends GetxService {
       );
     }
     developer.log('status code : ${res.statusCode}');
-    developer.log('response body : ${res.body}');
+    // developer.log('response body : ${res.body}');
     developer.log('**** post request end : $path ****');
     if (res.statusCode == 401) {
       var val = await refreshToken();

@@ -25,7 +25,9 @@ class CustomTextField extends TextFormField {
     this.focusNode,
     this.validaton,
     this.autoFocus = false,
+    
   }) : super(
+    
           key: key,
           focusNode: focusNode,
           initialValue: initialvalue,

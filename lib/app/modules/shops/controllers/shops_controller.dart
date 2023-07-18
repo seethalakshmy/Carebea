@@ -31,7 +31,7 @@ class ShopsController extends GetxController {
 
   int pageNumber = 0;
   int pageSize = 10;
-    ScrollController scrollController = ScrollController();
+  ScrollController scrollController = ScrollController();
 
   Rx<PaymentMethod?> selectedPaymentMethod = Rx<PaymentMethod?>(null);
   TextEditingController collectedAmountEditingController = TextEditingController();
@@ -50,7 +50,6 @@ class ShopsController extends GetxController {
 
   final count = 0.obs;
 
-
   @override
   void onInit() {
     print("startt");
@@ -66,7 +65,6 @@ class ShopsController extends GetxController {
 
   @override
   void onReady() {
-
     super.onReady();
   }
 
@@ -126,6 +124,7 @@ class ShopsController extends GetxController {
   RxString filterSelected = "".obs;
   filterShops(String filterName, int filterId) async {
     shopList.clear();
+    searchEditingController.text = "";
     isFilterClick(true);
     filterSelected("$filterName-$filterId");
     pageNumber = 0;
@@ -233,7 +232,7 @@ class ShopsController extends GetxController {
   }
 
   Future<void> _paginateSearchShop() async {
-    var shopListResponse = await shopListRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {selectedSearchtype.value.type!: query}, pageNumber: pageNumber, pageSize: pageSize);
+    var shopListResponse = await shopListRepo.shopSearch(salesPersonId: SharedPrefs.getUserId()!, query: {selectedSearchtype.value.type!: searchEditingController.text}, pageNumber: pageNumber, pageSize: pageSize);
     if ((shopListResponse.shopListResult?.status ?? false) && ((shopListResponse.shopListResult!.shopCount ?? 0) > 0)) {
       pageNumber += 1;
       shopList.addAll(shopListResponse.shopListResult!.shopList!);
@@ -251,7 +250,7 @@ class ShopsController extends GetxController {
 
   paginate() async {
     isPaginating(true);
-    if (query?.isNotEmpty ?? false) {
+    if (searchEditingController.text.isNotEmpty) {
       await _paginateSearchShop();
     } else if (filterSelected.isNotEmpty) {
       await _paginateFilterShops();

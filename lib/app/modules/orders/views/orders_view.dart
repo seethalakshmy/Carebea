@@ -88,6 +88,7 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
                   children: [
                     Expanded(
                         child: CustomTextField(
+                      textcontroller: ordersController.searchTextEditingController,
                       onChanged: (val) => ordersController.searchOrders(val),
                       hint: 'Search for orders',
                       fillcolor: customTheme(context).textFormFieldColor,

@@ -13,6 +13,7 @@ class OrdersController extends GetxController {
   FilterVals? filterVals;
   OrderType selectedOrderType = OrderType.previous;
   late TabController tabController1;
+  final TextEditingController searchTextEditingController = TextEditingController();
 
   int pageSize = 10;
   int pageNumber = 0;
@@ -42,6 +43,7 @@ class OrdersController extends GetxController {
   fetchOrdersList({required OrderType orderType}) async {
     isOrdersLoaded(true);
     allOrders.clear();
+    searchTextEditingController.clear();
     filterSelected("");
     query = null;
     pageNumber = 0;
@@ -68,6 +70,7 @@ class OrdersController extends GetxController {
   RxString filterSelected = "".obs;
   filterOrders(String filterName, int filterId) async {
     allOrders.clear();
+    searchTextEditingController.clear();
     isFilterClick(true);
     pageNumber = 0;
     filterSelected("$filterName-$filterId");
@@ -123,7 +126,7 @@ class OrdersController extends GetxController {
   RxBool isPaginating = false.obs;
   paginate() async {
     isPaginating(true);
-    if (query?.isNotEmpty ?? false) {
+    if (searchTextEditingController.text.isNotEmpty) {
       await _paginateSearchOrders();
     } else if (filterSelected.isNotEmpty) {
       await _paginateFilterOrders();
@@ -146,8 +149,6 @@ class OrdersController extends GetxController {
       if ((allorderListResponse?.orderListResult?.history ?? []).isNotEmpty) {
         pageNumber += 1;
       }
-    } else {
-      // allOrders.clear();
     }
   }
 
@@ -166,8 +167,6 @@ class OrdersController extends GetxController {
       if ((allorderListResponse.orderListResult?.history ?? []).isNotEmpty) {
         pageNumber += 1;
       }
-    } else {
-      allOrders.clear();
     }
   }
 
@@ -175,7 +174,7 @@ class OrdersController extends GetxController {
     var allorderListResponse = await orderListRepo.allOrdersList(
       SharedPrefs.getUserId()!,
       getOrdertypeString(selectedOrderType),
-      query: query,
+      query: searchTextEditingController.text,
       pageNumber: pageNumber,
       pageSize: pageSize,
     );
@@ -184,8 +183,6 @@ class OrdersController extends GetxController {
       if ((allorderListResponse.orderListResult?.history ?? []).isNotEmpty) {
         pageNumber += 1;
       }
-    } else {
-      allOrders.clear();
     }
   }
 }
