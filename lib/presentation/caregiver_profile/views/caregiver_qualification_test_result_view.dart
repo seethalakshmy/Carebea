@@ -1,5 +1,6 @@
 import 'package:admin_580_tech/application/bloc/caregiver-profile/caregiver_profile_bloc.dart';
 import 'package:admin_580_tech/core/enum.dart';
+import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/domain/caregiver_profile/model/caregiver_profile_response.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/row_combo.dart';
@@ -33,7 +34,9 @@ class CaregiverQualificationAndTestResultView extends StatelessWidget {
             CustomSizedBox(height: DBL.eight.val),
             _subTitleVIew(
                 label: AppString.expiryDate.val,
-                value: qualificationAndTest?.hhaExpiry ?? ""),
+                value: qualificationAndTest?.hhaExpiry
+                        ?.parseWithFormat(dateFormat: AppString.mmDDYYY.val) ??
+                    ""),
             CustomSizedBox(
               height: DBL.eighteen.val,
             ),
@@ -47,7 +50,9 @@ class CaregiverQualificationAndTestResultView extends StatelessWidget {
             CustomSizedBox(height: DBL.eight.val),
             _subTitleVIew(
                 label: AppString.expiryDate.val,
-                value: qualificationAndTest?.blsExpiry ?? ""),
+                value: qualificationAndTest?.blsExpiry
+                        ?.parseWithFormat(dateFormat: AppString.mmDDYYY.val) ??
+                    ""),
             CustomSizedBox(
               height: DBL.eighteen.val,
             ),
@@ -57,7 +62,9 @@ class CaregiverQualificationAndTestResultView extends StatelessWidget {
             CustomSizedBox(height: DBL.eight.val),
             _subTitleVIew(
                 label: AppString.takenDate.val,
-                value: qualificationAndTest?.tbTakenDate ?? ""),
+                value: qualificationAndTest?.tbTakenDate
+                        ?.parseWithFormat(dateFormat: AppString.mmDDYYY.val) ??
+                    ""),
             CustomSizedBox(height: DBL.eight.val),
             _subTitleVIew(
                 label: AppString.result.val,
@@ -71,7 +78,9 @@ class CaregiverQualificationAndTestResultView extends StatelessWidget {
             CustomSizedBox(height: DBL.eight.val),
             _subTitleVIew(
                 label: AppString.takenDate.val,
-                value: qualificationAndTest?.vaccinTakenDate ?? ""),
+                value: qualificationAndTest?.vaccinTakenDate
+                        ?.parseWithFormat(dateFormat: AppString.mmDDYYY.val) ??
+                    ""),
             CustomSizedBox(height: DBL.eight.val),
           ],
         ),

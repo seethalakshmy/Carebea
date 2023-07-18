@@ -34,6 +34,7 @@ class CustomButton extends StatelessWidget {
   final Color? borderColor;
   final Color? hoverColor;
   final TextStyle? textStyle;
+  final bool isLoading;
 
   const CustomButton({
     Key? key,
@@ -63,6 +64,7 @@ class CustomButton extends StatelessWidget {
     this.hoverColor,
     this.borderColor,
     this.textStyle,
+    this.isLoading = false,
   })  : assert((fullWidth && minWidth == null) ||
             (!fullWidth && minWidth != null) ||
             (!fullWidth && minWidth == null)),
@@ -123,12 +125,14 @@ class CustomButton extends StatelessWidget {
                   ? SizedBox(width: gap)
                   : CustomSizedBox.shrink(),
               text != null
-                  ? Flexible(
-                      child: Text(
-                        text!,
-                        style: textStyle,
-                      ),
-                    )
+                  ? isLoading
+                      ? buildProgress()
+                      : Flexible(
+                          child: Text(
+                            text!,
+                            style: textStyle,
+                          ),
+                        )
                   : CustomSizedBox.shrink(),
             ],
           ),
@@ -136,6 +140,17 @@ class CustomButton extends StatelessWidget {
       },
     );
   }
+}
+
+buildProgress() {
+  return SizedBox(
+    height: DBL.twenty.val,
+    width: DBL.twenty.val,
+    child: CircularProgressIndicator(
+      color: AppColor.white.val,
+      strokeWidth: 3,
+    ),
+  );
 }
 
 Color? _getButtonColor(

@@ -1,10 +1,16 @@
 import 'dart:async';
 
+import 'package:admin_580_tech/domain/admin_creation/model/admin_view_response.dart';
 import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
+import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_earning_list_response.dart';
+import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_service_list_response.dart';
+import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_service_request_list_response.dart';
 import 'package:admin_580_tech/domain/caregiver_profile/model/caregiver_profile_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_verification_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
+import 'package:admin_580_tech/domain/common_response/common_response.dart';
 import 'package:admin_580_tech/domain/login/login_response.dart';
+import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/services/models/get_service_response.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/services/models/service_list_response.dart';
 import 'package:dio/dio.dart';
@@ -21,12 +27,15 @@ import '../../presentation/on_boarding/modules/personal_details/models/personal_
 import '../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
 import '../../presentation/on_boarding/modules/preference/models/language_list_response.dart';
 import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
+import '../admins/model/admin_get_response.dart';
 import '../caregiver_verification/model/reject_params.dart';
 import '../caregivers/model/caregiver_response.dart';
 import '../on_boarding/models/common_response.dart';
 import '../on_boarding/models/preferences/pet_list_response.dart';
 import '../on_boarding/models/preferences/preference_request_model.dart';
 import '../on_boarding/models/preferences/years_of_experience_response.dart';
+import '../role_creation/model/module_response.dart';
+import '../role_creation/model/view_role_response.dart';
 
 part 'api_client.g.dart';
 
@@ -66,7 +75,9 @@ abstract class ApiClient {
 
   @POST("/admin/get-caregiver-verification")
   Future<CaregiverVerificationResponse> getCareGiverVerificationData(
-      @Header("Authorization") String token, @Field('user_id') String userId);
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('admin_id') String adminId);
 
   @POST("/admin/caregiver-background-verify")
   Future<VerifyResponse> careGiverBackgroundVerify(
@@ -219,4 +230,101 @@ abstract class ApiClient {
 
   @GET("/common-data/get-years")
   Future<YearsOfExperienceResponse> getYearsOfExp();
+
+  @POST("/admin/admin-cg-get-services")
+  Future<CareGiverServiceListResponse> getCareGiverServiceList(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit);
+
+  @POST("/admin/admin-cg-get-earnings")
+  Future<CareGiverEarningsListResponse> getCareGiverEarningList(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit);
+
+  @POST("/admin/admin-cg-get-service-requests")
+  Future<CareGiverServiceRequestListResponse> getCareGiverRequestList(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit);
+
+  @POST("/admin/add-role")
+  Future<CommonResponseUse> addRoleUpdateRole(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('role') String role,
+      @Field('role_id') String? roleId,
+      @Field('assigned_modules') List<String> moduleID,
+      @Field('view') int view,
+      @Field('delete') int delete,
+      @Field('edit') int edit);
+
+  @POST("/admin/get-modules")
+  Future<ModuleResponse> getModules(
+      @Header("Authorization") String token, @Field('user_id') String userId);
+
+  @POST("/admin/delete-role")
+  Future<CommonResponseUse> deleteRole(@Header("Authorization") String token,
+      @Field('user_id') String userId, @Field('role_id') String roleId);
+
+  @POST("/admin/view-role")
+  Future<ViewRoleResponse> viewRole(@Header("Authorization") String token,
+      @Field('user_id') String userId, @Field('role_id') String roleId);
+
+  @POST("/admin/get-roles")
+  Future<GetRoleResponse> getRoles(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int? page,
+      @Field('limit') int? limit,
+      @Field('search_term') String? searchTerm);
+
+  @POST("/super-admin/create-admin")
+  Future<CommonResponseUse> addAdmin(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('first_name') String firstName,
+      @Field('last_name') String lastName,
+      @Field('email') String email,
+      @Field('mobile_number') String? mobileNumber,
+      @Field('user_role_id') String? roleId);
+
+  @POST("/admin/edit-admin")
+  Future<CommonResponseUse> updateAdmin(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('admin_id') String adminId,
+      @Field('first_name') String firstName,
+      @Field('last_name') String lastName,
+      @Field('email') String email,
+      @Field('mobile_number') String? mobileNumber,
+      @Field('role_id') String? roleId);
+
+  @POST("/admin/get-admins")
+  Future<AdminGetResponse> getAdmins(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit,
+      @Field('status_id') String? statusID,
+      @Field('role_id') String? roleID,
+      @Field('search_term') String? searchTerm);
+
+  @POST("/admin/delete-admin")
+  Future<CommonResponseUse> deleteAdmin(@Header("Authorization") String token,
+      @Field('user_id') String userId, @Field('admin_id') String? adminId);
+
+  @POST("/admin/view-admin")
+  Future<AdminViewResponse> viewAdmin(@Header("Authorization") String token,
+      @Field('user_id') String userId, @Field('admin_id') String adminId);
+
+  @POST("/admin/notify-pending-docs-cg")
+  Future<CommonResponseUse> notifyPendingDocument(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('admin_id') String adminId);
 }

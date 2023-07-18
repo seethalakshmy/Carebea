@@ -1,8 +1,11 @@
-
-
 import 'package:admin_580_tech/core/enum.dart';
+import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
+import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:flutter/material.dart';
+
+import '../../core/text_styles.dart';
+import 'custom_sizedbox.dart';
 
 class CustomDropdown<T> extends StatefulWidget {
   /// the child widget for the button, this will be ignored if text is supplied
@@ -25,7 +28,8 @@ class CustomDropdown<T> extends StatefulWidget {
 
   /// if true the dropdown icon will as a leading icon, default to false
   final bool leadingIcon;
-
+  final bool isError;
+  final String errorMsg;
   const CustomDropdown({
     Key? key,
     this.hideIcon = false,
@@ -36,6 +40,8 @@ class CustomDropdown<T> extends StatefulWidget {
     this.leadingIcon = false,
     required this.onChange,
     this.iconPath,
+    this.isError = false,
+    this.errorMsg = "",
   }) : super(key: key);
 
   @override
@@ -72,46 +78,65 @@ class CustomDropdownState<T> extends State<CustomDropdown<T>>
   Widget build(BuildContext context) {
     var style = widget.dropdownButtonStyle;
     // link the overlay to the button
-    return CompositedTransformTarget(
-      link: this._layerLink,
-      child: SizedBox(
-        width: style.width,
-        height: style.height,
-        child: ElevatedButton(
-
-          style: OutlinedButton.styleFrom(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5), side: BorderSide(color: AppColor.borderColor.val,width: 1)),
-            padding: style.padding,
-            backgroundColor: style.backgroundColor,
-            elevation: style.elevation,
-            primary: style.primaryColor,
-          ),
-          onPressed: _toggleDropdown,
-          child: Row(
-            mainAxisAlignment:
-            MainAxisAlignment.spaceBetween,
-            textDirection:
-            widget.leadingIcon ? TextDirection.rtl : TextDirection.ltr,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              if (_currentIndex == -1) ...[
-                widget.child,
-              ] else ...[
-                widget.items[_currentIndex],
-              ],
-              if (!widget.hideIcon)
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  // child: RotationTransition(
-                  //   turns: _rotateAnimation!,
-                  //   child: widget.icon ?? const Icon(Icons.arrow_forward_ios),
-                  // ),
-                  child: CustomSvg(path:widget.iconPath?? IMG.arrowDown.val),
-                ),
-            ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CompositedTransformTarget(
+          link: this._layerLink,
+          child: SizedBox(
+            width: style.width,
+            height: style.height,
+            child: ElevatedButton(
+              style: OutlinedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    side: BorderSide(
+                        color: widget.isError
+                            ? AppColor.red.val
+                            : AppColor.borderColor.val,
+                        width: 1)),
+                padding: style.padding,
+                backgroundColor: style.backgroundColor,
+                elevation: style.elevation,
+                primary: style.primaryColor,
+              ),
+              onPressed: _toggleDropdown,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                textDirection:
+                    widget.leadingIcon ? TextDirection.rtl : TextDirection.ltr,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  if (_currentIndex == -1) ...[
+                    widget.child,
+                  ] else ...[
+                    widget.items[_currentIndex],
+                  ],
+                  if (!widget.hideIcon)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child:
+                          CustomSvg(path: widget.iconPath ?? IMG.arrowDown.val),
+                    ),
+                ],
+              ),
+            ),
           ),
         ),
-      ),
+        widget.isError
+            ? CustomPadding.symmetric(
+                horizontal: DBL.twelve.val,
+                vertical: DBL.eight.val,
+                child: CustomText(
+                  widget.errorMsg,
+                  style: TS().gPoppins(
+                    fontSize: FS.font11.val,
+                    color: AppColor.red.val,
+                  ),
+                ),
+              )
+            : CustomSizedBox.shrink()
+      ],
     );
   }
 
@@ -140,13 +165,13 @@ class CustomDropdownState<T> extends State<CustomDropdown<T>>
                 width: widget.dropdownStyle.width ?? size.width,
                 child: CompositedTransformFollower(
                   offset:
-                  widget.dropdownStyle.offset ?? Offset(0, size.height + 5),
+                      widget.dropdownStyle.offset ?? Offset(0, size.height + 5),
                   link: this._layerLink,
                   showWhenUnlinked: false,
                   child: Material(
                     elevation: widget.dropdownStyle.elevation ?? 0,
                     borderRadius:
-                    widget.dropdownStyle.borderRadius ?? BorderRadius.zero,
+                        widget.dropdownStyle.borderRadius ?? BorderRadius.zero,
                     color: widget.dropdownStyle.color,
                     child: SizeTransition(
                       axisAlignment: 1,
@@ -160,7 +185,7 @@ class CustomDropdownState<T> extends State<CustomDropdown<T>>
                             ),
                         child: ListView(
                           padding:
-                          widget.dropdownStyle.padding ?? EdgeInsets.zero,
+                              widget.dropdownStyle.padding ?? EdgeInsets.zero,
                           shrinkWrap: true,
                           children: widget.items.asMap().entries.map((item) {
                             return InkWell(

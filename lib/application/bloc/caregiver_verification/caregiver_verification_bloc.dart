@@ -11,6 +11,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../core/enum.dart';
 import '../../../core/text_styles.dart';
 import '../../../domain/caregivers/model/verification_types.dart';
+import '../../../domain/common_response/common_response.dart';
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
 import '../../../infrastructure/caregiver_verification/caregivers_verification_repository.dart';
 import '../../../presentation/widget/cached_image.dart';
@@ -35,13 +36,13 @@ class CareGiverVerificationBloc
     on<_CareGiverCertificateApprove>(_careGiverCertificateApprove);
     on<_CareGiverCertificateReject>(_careGiverCertificateReject);
     on<_CareGiverTrainingVerify>(_careGiverSendTrainingRequest);
+    on<_NotifyPendingDocument>(_notifyPendingDocument);
     on<_IsSelectedVerificationTab>(_getVerificationSelectedTab);
     on<_IsTappedReason>(_getTappedReason);
     on<_IsTappedHHaReason>(_getTappedHHaReason);
     on<_IsTappedBlsReason>(_getTappedBlsReason);
     on<_IsTappedTbReason>(_getTappedTbReason);
     on<_IsTappedCovidReason>(_getTappedCovidReason);
-    on<_IsWebViewLoading>(_webViewLoading);
   }
 
   _getCareGiverVerificationData(_GetVerificationData event,
@@ -49,6 +50,7 @@ class CareGiverVerificationBloc
     emit(state.copyWith(
       isLoading: true,
       response: null,
+      notifyPendingDocumentResponse: null,
       certificateVerifyRejectResponse: null,
       certificateVerifyApproveResponse: null,
       verificationTypes: [],
@@ -79,6 +81,16 @@ class CareGiverVerificationBloc
     CareGiverVerificationState caregiverVerificationState = result.fold((l) {
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
+      if (r.status ?? false) {
+        if (r.data?.pendingDocs ?? false) {
+          _notifyPopUp(event.context,
+              userName:
+                  "${r.data?.caregiver?.firstName} ${r.data?.caregiver?.lastName}",
+              imgUrl: r.data?.caregiver?.profile ?? "",
+              msg: AppString.pendingDocumentsReminder.val,
+              userId: r.data?.id ?? "");
+        }
+      }
       return state.copyWith(
         isLoading: false,
         response: r,
@@ -142,6 +154,32 @@ class CareGiverVerificationBloc
     );
   }
 
+  _notifyPendingDocument(_NotifyPendingDocument event,
+      Emitter<CareGiverVerificationState> emit) async {
+    final Either<ApiErrorHandler, CommonResponseUse> result =
+        await careGiverVerificationRepository.notifyPendingDocument(
+      userID: event.userId,
+    );
+    CareGiverVerificationState caregiverVerificationState = result.fold((l) {
+      CSnackBar.showError(event.context, msg: l.error);
+      return state.copyWith(error: l.error, isLoading: false, isError: true);
+    }, (r) {
+      if (r.status ?? false) {
+        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+      } else {
+        CSnackBar.showError(event.context, msg: r.message ?? "");
+      }
+      return state.copyWith(
+        isLoading: false,
+        notifyPendingDocumentResponse: r,
+        isError: false,
+      );
+    });
+    emit(
+      caregiverVerificationState,
+    );
+  }
+
   _careGiverCertificateApprove(_CareGiverCertificateApprove event,
       Emitter<CareGiverVerificationState> emit) async {
     final Either<ApiErrorHandler, VerifyResponse> result =
@@ -153,6 +191,7 @@ class CareGiverVerificationBloc
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
+        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
         _approvalPopUp(
           event.context,
           userId: event.userID,
@@ -256,8 +295,6 @@ class CareGiverVerificationBloc
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
-
-        // autoTabRouter?.navigate(CareGiversRoute(page: event.page));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
@@ -269,6 +306,22 @@ class CareGiverVerificationBloc
     });
     emit(
       caregiverVerificationState,
+    );
+    final Either<ApiErrorHandler, CaregiverVerificationResponse> result2 =
+        await careGiverVerificationRepository.getCareGiverVerificationData(
+      userID: event.userId,
+    );
+    CareGiverVerificationState caregiverVerificationState2 = result2.fold((l) {
+      return state.copyWith(error: l.error, isLoading: false, isError: true);
+    }, (r) {
+      return state.copyWith(
+        isLoading: false,
+        response: r,
+        isError: false,
+      );
+    });
+    emit(
+      caregiverVerificationState2,
     );
   }
 
@@ -316,11 +369,6 @@ class CareGiverVerificationBloc
   _getTappedCovidReason(
       _IsTappedCovidReason event, Emitter<CareGiverVerificationState> emit) {
     emit(state.copyWith(isCovidReasonFieldTapped: event.value));
-  }
-
-  _webViewLoading(
-      _IsWebViewLoading event, Emitter<CareGiverVerificationState> emit) {
-    emit(state.copyWith(isWebViewLoading: event.value));
   }
 
   _approvalPopUp(
@@ -386,11 +434,95 @@ class CareGiverVerificationBloc
     );
   }
 
+  _notifyPopUp(
+    BuildContext context, {
+    required String userName,
+    required String imgUrl,
+    required String msg,
+    required userId,
+  }) {
+    showGeneralDialog(
+      context: context,
+      pageBuilder: (BuildContext buildContext, Animation animation,
+          Animation secondaryAnimation) {
+        return CustomAlertDialogWidget(
+            width: 800,
+            height: 400,
+            heading: AppString.verificationProcess.val,
+            child: Column(
+              children: [
+                CustomSizedBox(
+                  height: DBL.four.val,
+                ),
+                CachedImage(
+                  imgUrl: imgUrl,
+                  height: DBL.oneFifty.val,
+                  width: DBL.oneFifty.val,
+                  isDetailPage: true,
+                  fit: BoxFit.contain,
+                ),
+                CustomSizedBox(
+                  height: DBL.four.val,
+                ),
+                CustomText(
+                  userName,
+                  style: TS().gRoboto(
+                    color: AppColor.black2.val,
+                    fontWeight: FW.w600.val,
+                    fontSize: FS.font16.val,
+                  ),
+                ),
+                CustomSizedBox(
+                  height: DBL.eight.val,
+                ),
+                _buildDivider(context, color: AppColor.lightBlue2.val),
+                CustomSizedBox(
+                  height: DBL.ten.val,
+                ),
+                CustomText(
+                  msg,
+                  style: TS().gRoboto(
+                    color: AppColor.black5.val,
+                    fontWeight: FW.w500.val,
+                    fontSize: FS.font21.val,
+                  ),
+                ),
+                CustomSizedBox(
+                  height: DBL.fifteen.val,
+                ),
+                _notifyButton(userId: userId, context: context),
+              ],
+            ));
+      },
+    );
+  }
+
   CustomContainer _buildDivider(BuildContext context, {Color? color}) {
     return CustomContainer(
       height: 1.2,
       width: MediaQuery.of(context).size.width,
       color: color ?? AppColor.dividerColor.val,
+    );
+  }
+
+  CustomButton _notifyButton(
+      {required String userId, required BuildContext context}) {
+    return CustomButton(
+      text: AppString.notify.val,
+      onPressed: () {
+        Navigator.of(context).pop();
+        add(_NotifyPendingDocument(userId: userId, context: context));
+      },
+      color: AppColor.white.val,
+      borderRadius: DBL.five.val,
+      borderColor: AppColor.primaryColor.val,
+      hoverColor: AppColor.offWhite.val.withOpacity(0.2),
+      textStyle: TS().gRoboto(
+          fontWeight: FW.w500.val,
+          color: AppColor.primaryColor.val,
+          fontSize: FS.font16.val),
+      padding: EdgeInsets.symmetric(
+          horizontal: DBL.thirtyFive.val, vertical: DBL.eighteen.val),
     );
   }
 

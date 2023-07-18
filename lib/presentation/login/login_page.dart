@@ -2,6 +2,7 @@ import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/infrastructure/login/login_repository.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
@@ -34,6 +35,14 @@ class _LoginPageState extends State<LoginPage> {
   final LoginBloc _loginBloc = LoginBloc(LoginRepository());
   AutovalidateMode _validateMode = AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    if (SharedPreffUtil().getLogin) {
+      context.router.replace(const SideMenuRoute());
+    }
+  }
 
   @override
   void dispose() {

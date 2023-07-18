@@ -42,9 +42,11 @@ import '../widget/table_actions_view.dart';
 import '../widget/table_column_view.dart';
 
 class CareGiversPage extends StatefulWidget {
-  const CareGiversPage({Key? key, @QueryParam('page') this.page})
+  const CareGiversPage(
+      {Key? key, @QueryParam('page') this.page, @QueryParam('tab') this.tab})
       : super(key: key);
   final int? page;
+  final int? tab;
 
   @override
   State<CareGiversPage> createState() => _CareGiversPageState();
@@ -64,12 +66,22 @@ class _CareGiversPageState extends State<CareGiversPage> {
   int _tabType = 1;
   int? _filterId;
   late CareGiversBloc _careGiversBloc;
+  SharedPreffUtil sharedPrefUtil = SharedPreffUtil();
 
   @override
   void initState() {
-    _adminUserId = SharedPreffUtil().getUserId;
-    // int  =autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
+    _adminUserId = sharedPrefUtil.getUserId;
+    int? getPage = autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
+    int? getTab = autoTabRouter?.currentChild?.queryParams.getInt('tab', 0);
+
+    print('get page $getPage and $getTab');
     super.initState();
+    if (getPage != null && getPage != 0) {
+      _page = getPage;
+    }
+    if (getTab != null && getTab != 0) {
+      _tabType = getTab;
+    }
     _careGiversBloc = CareGiversBloc(CareGiversRepository());
   }
 
@@ -408,6 +420,8 @@ class _CareGiversPageState extends State<CareGiversPage> {
               if (_tabType == 2) {
                 autoTabRouter?.navigate(CareGiverDetailRoute(
                   id: item.userId,
+                  page: _page,
+                  tab: _tabType,
                 ));
               } else {
                 if (verificationStatus == Verification.trainingStarted.val ||
@@ -416,8 +430,11 @@ class _CareGiversPageState extends State<CareGiversPage> {
                     id: item.userId,
                   ));
                 } else {
-                  autoTabRouter?.navigate(
-                      CaregiverVerificationRoute(id: userId, page: _page));
+                  autoTabRouter?.navigate(CaregiverVerificationRoute(
+                    id: userId,
+                    page: _page,
+                    tab: _tabType,
+                  ));
                 }
               }
             },
@@ -480,6 +497,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
       verificationStatus: item.verificationStatus ?? 0,
       userId: item.userId,
       page: _page,
+      tab: _tabType,
     );
   }
 
