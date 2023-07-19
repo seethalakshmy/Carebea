@@ -29,7 +29,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   final FormValidationBloc _validationBloc = FormValidationBloc();
-  AutovalidateMode _validateMode =AutovalidateMode.disabled;
+  AutovalidateMode _validateMode = AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -64,11 +64,11 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
   SingleChildScrollView webView(BuildContext context, Size size) {
     return SingleChildScrollView(
-        child:Row(
-          children: [
-            _part1View(size, context),
-            _part2View(size),
-          ],
+      child: Row(
+        children: [
+          _part1View(size, context),
+          _part2View(size),
+        ],
       ),
     );
   }
@@ -186,7 +186,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     return CTextField(
       obscureText: true,
       width: DBL.fourFifty.val,
-      height: DBL.fiftyFive.val,
       onChanged: (String value) {},
       textCapitalization: TextCapitalization.none,
       textInputAction: TextInputAction.done,
@@ -206,7 +205,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     return CTextField(
       obscureText: true,
       width: DBL.fourFifty.val,
-      height: DBL.fiftyFive.val,
       onChanged: (String value) {},
       textCapitalization: TextCapitalization.none,
       textInputAction: TextInputAction.done,

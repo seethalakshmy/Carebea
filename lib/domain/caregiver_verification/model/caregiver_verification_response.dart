@@ -22,18 +22,24 @@ class CaregiverVerificationResponse {
 
 class Data {
   String? id;
+  int? verificationStatus;
   Caregiver? caregiver;
+  bool? pendingDocs;
   BackgroundVerification? backgroundVerification;
   CertificateVerification? certificateVerification;
 
-  Data(
-      {this.id,
-      this.caregiver,
-      this.backgroundVerification,
-      this.certificateVerification});
+  Data({
+    this.id,
+    this.caregiver,
+    this.backgroundVerification,
+    this.certificateVerification,
+    this.verificationStatus,
+  });
 
   Data.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = json['user_id'];
+    pendingDocs = json['pending_docs'];
+    verificationStatus = json['verificationStatus'];
     caregiver = json['name'] != null ? Caregiver.fromJson(json['name']) : null;
     backgroundVerification = json['background_verfication'] != null
         ? BackgroundVerification.fromJson(json['background_verfication'])

@@ -16,18 +16,20 @@ class TableLoaderView extends StatelessWidget {
     List<int> shimmerList = List.generate(10, (index) => (index));
     return CustomSizedBox(
         width: MediaQuery.of(context).size.width,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              CustomSizedBox(height: DBL.ten.val),
-              CustomSizedBox(
-                  height: DBL.nineFifty.val,
-                  child: Shimmer.fromColors(
-                    baseColor: AppColor.rowBackgroundColor.val,
-                    highlightColor: AppColor.rowBackgroundColor.val,
-                    child: _buildDataTable(shimmerList),
-                  ))
-            ]));
+        child: SingleChildScrollView(
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                CustomSizedBox(height: DBL.ten.val),
+                CustomSizedBox(
+                    height: DBL.nineFifty.val,
+                    child: Shimmer.fromColors(
+                      baseColor: AppColor.rowBackgroundColor.val,
+                      highlightColor: AppColor.rowBackgroundColor.val,
+                      child: _buildDataTable(shimmerList),
+                    ))
+              ]),
+        ));
   }
 
   CDataTable2 _buildDataTable(List<int> shimmerList) {

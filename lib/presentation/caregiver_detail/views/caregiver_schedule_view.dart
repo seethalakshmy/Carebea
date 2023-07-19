@@ -9,7 +9,6 @@ import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../domain/caregiver_detail/model/caregiver_detail_response.dart';
-import '../../widget/custom_button.dart';
 import '../../widget/custom_icon.dart';
 import '../../widget/custom_listview_builder.dart';
 import '../widgets/date_view.dart';
@@ -168,35 +167,22 @@ class CareGiverScheduleView extends StatelessWidget {
                 children: [
                   buildRow(context,
                       label: AppString.clientName.val,
-                      val: item.userName ?? ""),
+                      val: item.clientName ?? ""),
                   CustomSizedBox(
                     height: DBL.five.val,
                   ),
                   buildRow(context,
                       label: AppString.time.val,
                       val:
-                          "${item.startTime} ${AppString.to.val} ${item.endTime}"),
+                          "${item.startTime ?? ""} ${item.startTime != null ? AppString.to.val : ""} ${item.endTime ?? ""}"),
                   CustomSizedBox(
                     height: DBL.five.val,
                   ),
                   buildRow(context,
                       label: AppString.serviceFee.val,
-                      val: item.serviceFee.toString()),
+                      val: item.serviceFee ?? ""),
                   CustomSizedBox(
                     height: DBL.twenty.val,
-                  ),
-                  Align(
-                    alignment: AlignmentDirectional.bottomEnd,
-                    child: CustomButton(
-                      borderRadius: DBL.five.val,
-                      text: AppString.viewDetails.val,
-                      onPressed: () {},
-                      textStyle: TS().gRoboto(
-                          color: AppColor.white.val,
-                          fontSize:
-                              isXS2(context) ? FS.font11.val : FS.font15.val,
-                          fontWeight: FW.w600.val),
-                    ),
                   ),
                   CustomSizedBox(
                     height: DBL.ten.val,

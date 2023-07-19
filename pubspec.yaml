@@ -45,9 +45,9 @@ dependencies:
   table_calendar:
   webviewx: ^0.2.2
   get_it:
-  top_snackbar_flutter: ^3.0.0+1
-  flutter_staggered_grid_view: ^0.6.2
   shared_preferences: ^2.2.0
+  flash: ^3.0.5+1
+
 
 
 dev_dependencies:
@@ -73,4 +73,4 @@ flutter:
     - assets/
     - assets/images/
     - assets/icons/
-    - assets/sample/
+

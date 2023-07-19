@@ -2,8 +2,6 @@ import 'package:admin_580_tech/core/custom_snackbar.dart';
 import 'package:admin_580_tech/domain/caregiver_profile/model/caregiver_profile_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
 import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.dart';
-import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
-import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,13 +26,16 @@ class CareGiverProfileBloc
 
   _getCareGiverProfile(
       _GetCareGiverProfile event, Emitter<CareGiverProfileState> emit) async {
-    emit(state.copyWith(isLoading: true));
     final Either<ApiErrorHandler, CaregiverProfileResponse> homeResult =
         await careGiverProfileRepository.getCareGiverProfile(
       userID: event.userId,
     );
     CareGiverProfileState stateResult = homeResult.fold((l) {
-      return state.copyWith(error: l.error, isLoading: false, isError: true);
+      return state.copyWith(
+          error: l.error,
+          isLoading: false,
+          isError: true,
+          isClientError: l.isClientError ?? false);
     }, (r) {
       return state.copyWith(
         response: r,
@@ -57,7 +58,7 @@ class CareGiverProfileBloc
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
-        autoTabRouter?.setActiveIndex(1);
+        add(CareGiverProfileEvent.getCareGiverProfile(userId: event.userId));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
@@ -83,7 +84,8 @@ class CareGiverProfileBloc
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
-        autoTabRouter?.navigate(CareGiversRoute());
+        // autoTabRouter?.navigate(CareGiversRoute());
+        add(CareGiverProfileEvent.getCareGiverProfile(userId: event.userId));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }

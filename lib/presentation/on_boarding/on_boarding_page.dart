@@ -15,9 +15,7 @@ import '../widget/custom_sizedbox.dart';
 import '../widget/custom_text.dart';
 import '../widget/header_view.dart';
 import 'modules/build_profile/build_profile_view.dart';
-import 'modules/personal_details/personal_details_view.dart';
 import 'modules/preference/preference_view.dart';
-import 'modules/qualification_details/qialification_view.dart';
 import 'modules/setup_compensation/setup_compensation_view.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -61,17 +59,17 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   Widget _bodyView() {
     List<Widget> pages = [
-      PersonalDetailsView(
+      /*PersonalDetailsView(
         onboardingBloc: _onboardingBloc,
         pageController: controller,
-      ),
-      QualificationView(
+      ),*/
+      /* QualificationView(
           state: _onboardingBloc.state,
           onboardingBloc: _onboardingBloc,
-          pageController: controller),
+          pageController: controller),*/
       PreferenceView(
-        onboardingBloc: _onboardingBloc,
         pageController: controller,
+        onboardingBloc: _onboardingBloc,
       ),
       ServicesView(pageController: controller),
       ReferenceView(

@@ -1,6 +1,7 @@
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../core/enum.dart';
 import '../../../core/text_styles.dart';
@@ -21,6 +22,7 @@ class DetailsTextFieldWithLabel extends StatelessWidget {
       this.maxLines,
       this.width,
       this.textAlignVertical,
+      this.inputFormatter,
       this.height})
       : super(key: key);
   final String labelName;
@@ -35,6 +37,7 @@ class DetailsTextFieldWithLabel extends StatelessWidget {
   final double? height;
   final int? maxLines;
   final TextAlignVertical? textAlignVertical;
+  final List<TextInputFormatter>? inputFormatter;
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +67,7 @@ class DetailsTextFieldWithLabel extends StatelessWidget {
           focusNode: focusNode,
           width: width ?? DBL.twoEighty.val,
           height: height ?? null,
+          inputFormatter: inputFormatter ?? [],
           maxLines: maxLines,
           onChanged: (String value) {},
           keyBoardType: textInputType,

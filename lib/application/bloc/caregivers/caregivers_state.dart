@@ -9,6 +9,7 @@ class CareGiversState with _$CareGiversState {
     required VerifyResponse? activeOrInactiveResponse,
     required List<Types> types,
     required String? error,
+    @Default(false) bool isClientError,
   }) = _CareGiversState;
 
   factory CareGiversState.initial() {
