@@ -11,7 +11,6 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:amplify_storage_s3/amplify_storage_s3.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_web_plugins/url_strategy.dart';
 
 import 'amplifyconfiguration.dart';
 import 'application/bloc/form_validation/form_validation_bloc.dart';
@@ -49,8 +48,9 @@ class _MyAppState extends State<MyApp> {
     );
     Environment().initConfig(environment);
     await HiveUtils.init();
-    await _configureAmplify();
+    await configureAmplify();
     SharedPreffUtil().init();
+    await SharedPreffUtil().init();
   }
 
   @override

@@ -187,7 +187,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     return CTextField(
       obscureText: true,
       width: DBL.fourFifty.val,
-      height: DBL.fiftyFive.val,
       onChanged: (String value) {},
       textCapitalization: TextCapitalization.none,
       textInputAction: TextInputAction.done,
@@ -207,7 +206,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     return CTextField(
       obscureText: true,
       width: DBL.fourFifty.val,
-      height: DBL.fiftyFive.val,
       onChanged: (String value) {},
       textCapitalization: TextCapitalization.none,
       textInputAction: TextInputAction.done,

@@ -241,7 +241,8 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
                                     return InkWell(
                                       // hoverColor: AppColors.textGrey,
                                       onTap: () {
-                                        _currentIndex = item.key;
+                                        setState(
+                                            () => _currentIndex = item.key);
                                         widget.onChange(
                                             item.value.value!, item.key);
                                         _toggleDropdown();

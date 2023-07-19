@@ -15,6 +15,7 @@ class TableVerificationButton extends StatelessWidget {
       required this.verificationStatus,
       this.isHover = true,
       this.page,
+      this.tab,
       this.userId})
       : super(key: key);
   final int verificationStatus;
@@ -22,6 +23,7 @@ class TableVerificationButton extends StatelessWidget {
   final bool isHover;
   final String? userId;
   final int? page;
+  final int? tab;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class TableVerificationButton extends StatelessWidget {
     return SelectionContainer.disabled(
       child: CustomContainer.decoration(
         height: height ?? DBL.thirtyFive.val,
-        width: DBL.oneThirty.val,
+        width: DBL.twoFortyFive.val,
         padding: EdgeInsets.symmetric(horizontal: DBL.five.val),
         decoration: _buildBoxDecoration(isHover),
         child: _buildText(),
@@ -79,9 +81,22 @@ class TableVerificationButton extends StatelessWidget {
             ? AppColor.primaryColor.val
             : verificationStatus == Verification.startedVerification.val
                 ? AppColor.primaryColor.val
-                : verificationStatus == Verification.interViewStarted.val
-                    ? AppColor.darkGreen.val
-                    : AppColor.amber2.val,
+                : verificationStatus == Verification.trainingStarted.val
+                    ? AppColor.amber.val
+                    : verificationStatus == Verification.interViewStarted.val ||
+                            verificationStatus ==
+                                Verification.interViewCompleted.val
+                        ? AppColor.darkGreen.val
+                        : verificationStatus ==
+                                    Verification.interViewFailed.val ||
+                                verificationStatus ==
+                                    Verification
+                                        .backgroundVerificationRejected.val ||
+                                verificationStatus ==
+                                    Verification
+                                        .certificateVerificationRejected.val
+                            ? AppColor.red2.val
+                            : AppColor.primaryColor.val,
         width: 1.2);
   }
 
@@ -103,8 +118,14 @@ class TableVerificationButton extends StatelessWidget {
       return isHover ? AppColor.darkBlue.val : AppColor.primaryColor.val;
     } else if (verificationStatus == Verification.trainingStarted.val) {
       return isHover ? AppColor.amber3.val : AppColor.amber2.val;
-    } else if (verificationStatus == Verification.interViewStarted.val) {
+    } else if (verificationStatus == Verification.interViewStarted.val ||
+        verificationStatus == Verification.interViewCompleted.val) {
       return isHover ? AppColor.darkGreen2.val : AppColor.darkGreen.val;
+    } else if (verificationStatus == Verification.interViewFailed.val ||
+        verificationStatus == Verification.backgroundVerificationRejected.val ||
+        verificationStatus ==
+            Verification.certificateVerificationRejected.val) {
+      return isHover ? AppColor.errorDark.val : AppColor.red2.val;
     } else {
       return AppColor.primaryColor.val;
     }
@@ -115,8 +136,22 @@ class TableVerificationButton extends StatelessWidget {
         ? AppString.startVerification.val
         : verificationStatus == Verification.startedVerification.val
             ? AppString.startedVerification.val
-            : verificationStatus == Verification.interViewStarted.val
-                ? AppString.interviewStarted.val
-                : AppString.trainingStarted.val;
+            : verificationStatus == Verification.trainingStarted.val
+                ? AppString.trainingStarted.val
+                : verificationStatus == Verification.interViewStarted.val
+                    ? AppString.interviewStarted.val
+                    : verificationStatus == Verification.interViewCompleted.val
+                        ? AppString.interviewCompleted.val
+                        : verificationStatus == Verification.interViewFailed.val
+                            ? AppString.interviewFailed.val
+                            : verificationStatus ==
+                                    Verification
+                                        .backgroundVerificationRejected.val
+                                ? AppString.backgroundRejected.val
+                                : verificationStatus ==
+                                        Verification
+                                            .certificateVerificationRejected.val
+                                    ? AppString.certificateRejected.val
+                                    : "";
   }
 }

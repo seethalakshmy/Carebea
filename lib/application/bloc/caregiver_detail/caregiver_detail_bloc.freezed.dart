@@ -19,6 +19,12 @@ mixin _$CareGiverDetailEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) getCareGiverDetail,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverServiceList,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverEarningList,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverServiceRequestList,
     required TResult Function(DateTime selectedDate) getSelectedDate,
     required TResult Function(List<ServiceDates> services)
         getSelectedScheduleServices,
@@ -27,6 +33,12 @@ mixin _$CareGiverDetailEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? getCareGiverDetail,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverServiceList,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverEarningList,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverServiceRequestList,
     TResult? Function(DateTime selectedDate)? getSelectedDate,
     TResult? Function(List<ServiceDates> services)? getSelectedScheduleServices,
   }) =>
@@ -34,6 +46,12 @@ mixin _$CareGiverDetailEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? getCareGiverDetail,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverServiceList,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverEarningList,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverServiceRequestList,
     TResult Function(DateTime selectedDate)? getSelectedDate,
     TResult Function(List<ServiceDates> services)? getSelectedScheduleServices,
     required TResult orElse(),
@@ -42,6 +60,12 @@ mixin _$CareGiverDetailEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetCareGiverDetail value) getCareGiverDetail,
+    required TResult Function(_GetCareGiverServiceList value)
+        getCareGiverServiceList,
+    required TResult Function(_GetCareGiverEarningList value)
+        getCareGiverEarningList,
+    required TResult Function(_GetCareGiverServiceRequestList value)
+        getCareGiverServiceRequestList,
     required TResult Function(_GetSelectedDate value) getSelectedDate,
     required TResult Function(_GetSelectedScheduleServices value)
         getSelectedScheduleServices,
@@ -50,6 +74,10 @@ mixin _$CareGiverDetailEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult? Function(_GetCareGiverServiceList value)? getCareGiverServiceList,
+    TResult? Function(_GetCareGiverEarningList value)? getCareGiverEarningList,
+    TResult? Function(_GetCareGiverServiceRequestList value)?
+        getCareGiverServiceRequestList,
     TResult? Function(_GetSelectedDate value)? getSelectedDate,
     TResult? Function(_GetSelectedScheduleServices value)?
         getSelectedScheduleServices,
@@ -58,6 +86,10 @@ mixin _$CareGiverDetailEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult Function(_GetCareGiverServiceList value)? getCareGiverServiceList,
+    TResult Function(_GetCareGiverEarningList value)? getCareGiverEarningList,
+    TResult Function(_GetCareGiverServiceRequestList value)?
+        getCareGiverServiceRequestList,
     TResult Function(_GetSelectedDate value)? getSelectedDate,
     TResult Function(_GetSelectedScheduleServices value)?
         getSelectedScheduleServices,
@@ -151,6 +183,12 @@ class _$_GetCareGiverDetail implements _GetCareGiverDetail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) getCareGiverDetail,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverServiceList,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverEarningList,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverServiceRequestList,
     required TResult Function(DateTime selectedDate) getSelectedDate,
     required TResult Function(List<ServiceDates> services)
         getSelectedScheduleServices,
@@ -162,6 +200,12 @@ class _$_GetCareGiverDetail implements _GetCareGiverDetail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? getCareGiverDetail,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverServiceList,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverEarningList,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverServiceRequestList,
     TResult? Function(DateTime selectedDate)? getSelectedDate,
     TResult? Function(List<ServiceDates> services)? getSelectedScheduleServices,
   }) {
@@ -172,6 +216,12 @@ class _$_GetCareGiverDetail implements _GetCareGiverDetail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? getCareGiverDetail,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverServiceList,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverEarningList,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverServiceRequestList,
     TResult Function(DateTime selectedDate)? getSelectedDate,
     TResult Function(List<ServiceDates> services)? getSelectedScheduleServices,
     required TResult orElse(),
@@ -186,6 +236,12 @@ class _$_GetCareGiverDetail implements _GetCareGiverDetail {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetCareGiverDetail value) getCareGiverDetail,
+    required TResult Function(_GetCareGiverServiceList value)
+        getCareGiverServiceList,
+    required TResult Function(_GetCareGiverEarningList value)
+        getCareGiverEarningList,
+    required TResult Function(_GetCareGiverServiceRequestList value)
+        getCareGiverServiceRequestList,
     required TResult Function(_GetSelectedDate value) getSelectedDate,
     required TResult Function(_GetSelectedScheduleServices value)
         getSelectedScheduleServices,
@@ -197,6 +253,10 @@ class _$_GetCareGiverDetail implements _GetCareGiverDetail {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult? Function(_GetCareGiverServiceList value)? getCareGiverServiceList,
+    TResult? Function(_GetCareGiverEarningList value)? getCareGiverEarningList,
+    TResult? Function(_GetCareGiverServiceRequestList value)?
+        getCareGiverServiceRequestList,
     TResult? Function(_GetSelectedDate value)? getSelectedDate,
     TResult? Function(_GetSelectedScheduleServices value)?
         getSelectedScheduleServices,
@@ -208,6 +268,10 @@ class _$_GetCareGiverDetail implements _GetCareGiverDetail {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult Function(_GetCareGiverServiceList value)? getCareGiverServiceList,
+    TResult Function(_GetCareGiverEarningList value)? getCareGiverEarningList,
+    TResult Function(_GetCareGiverServiceRequestList value)?
+        getCareGiverServiceRequestList,
     TResult Function(_GetSelectedDate value)? getSelectedDate,
     TResult Function(_GetSelectedScheduleServices value)?
         getSelectedScheduleServices,
@@ -228,6 +292,606 @@ abstract class _GetCareGiverDetail implements CareGiverDetailEvent {
   @JsonKey(ignore: true)
   _$$_GetCareGiverDetailCopyWith<_$_GetCareGiverDetail> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_GetCareGiverServiceListCopyWith<$Res> {
+  factory _$$_GetCareGiverServiceListCopyWith(_$_GetCareGiverServiceList value,
+          $Res Function(_$_GetCareGiverServiceList) then) =
+      __$$_GetCareGiverServiceListCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String userId, int page, int limit});
+}
+
+/// @nodoc
+class __$$_GetCareGiverServiceListCopyWithImpl<$Res>
+    extends _$CareGiverDetailEventCopyWithImpl<$Res, _$_GetCareGiverServiceList>
+    implements _$$_GetCareGiverServiceListCopyWith<$Res> {
+  __$$_GetCareGiverServiceListCopyWithImpl(_$_GetCareGiverServiceList _value,
+      $Res Function(_$_GetCareGiverServiceList) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? page = null,
+    Object? limit = null,
+  }) {
+    return _then(_$_GetCareGiverServiceList(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      limit: null == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetCareGiverServiceList implements _GetCareGiverServiceList {
+  const _$_GetCareGiverServiceList(
+      {required this.userId, required this.page, required this.limit});
+
+  @override
+  final String userId;
+  @override
+  final int page;
+  @override
+  final int limit;
+
+  @override
+  String toString() {
+    return 'CareGiverDetailEvent.getCareGiverServiceList(userId: $userId, page: $page, limit: $limit)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetCareGiverServiceList &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.limit, limit) || other.limit == limit));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userId, page, limit);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetCareGiverServiceListCopyWith<_$_GetCareGiverServiceList>
+      get copyWith =>
+          __$$_GetCareGiverServiceListCopyWithImpl<_$_GetCareGiverServiceList>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId) getCareGiverDetail,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverServiceList,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverEarningList,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverServiceRequestList,
+    required TResult Function(DateTime selectedDate) getSelectedDate,
+    required TResult Function(List<ServiceDates> services)
+        getSelectedScheduleServices,
+  }) {
+    return getCareGiverServiceList(userId, page, limit);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId)? getCareGiverDetail,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverServiceList,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverEarningList,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverServiceRequestList,
+    TResult? Function(DateTime selectedDate)? getSelectedDate,
+    TResult? Function(List<ServiceDates> services)? getSelectedScheduleServices,
+  }) {
+    return getCareGiverServiceList?.call(userId, page, limit);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId)? getCareGiverDetail,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverServiceList,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverEarningList,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverServiceRequestList,
+    TResult Function(DateTime selectedDate)? getSelectedDate,
+    TResult Function(List<ServiceDates> services)? getSelectedScheduleServices,
+    required TResult orElse(),
+  }) {
+    if (getCareGiverServiceList != null) {
+      return getCareGiverServiceList(userId, page, limit);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverDetail value) getCareGiverDetail,
+    required TResult Function(_GetCareGiverServiceList value)
+        getCareGiverServiceList,
+    required TResult Function(_GetCareGiverEarningList value)
+        getCareGiverEarningList,
+    required TResult Function(_GetCareGiverServiceRequestList value)
+        getCareGiverServiceRequestList,
+    required TResult Function(_GetSelectedDate value) getSelectedDate,
+    required TResult Function(_GetSelectedScheduleServices value)
+        getSelectedScheduleServices,
+  }) {
+    return getCareGiverServiceList(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult? Function(_GetCareGiverServiceList value)? getCareGiverServiceList,
+    TResult? Function(_GetCareGiverEarningList value)? getCareGiverEarningList,
+    TResult? Function(_GetCareGiverServiceRequestList value)?
+        getCareGiverServiceRequestList,
+    TResult? Function(_GetSelectedDate value)? getSelectedDate,
+    TResult? Function(_GetSelectedScheduleServices value)?
+        getSelectedScheduleServices,
+  }) {
+    return getCareGiverServiceList?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult Function(_GetCareGiverServiceList value)? getCareGiverServiceList,
+    TResult Function(_GetCareGiverEarningList value)? getCareGiverEarningList,
+    TResult Function(_GetCareGiverServiceRequestList value)?
+        getCareGiverServiceRequestList,
+    TResult Function(_GetSelectedDate value)? getSelectedDate,
+    TResult Function(_GetSelectedScheduleServices value)?
+        getSelectedScheduleServices,
+    required TResult orElse(),
+  }) {
+    if (getCareGiverServiceList != null) {
+      return getCareGiverServiceList(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetCareGiverServiceList implements CareGiverDetailEvent {
+  const factory _GetCareGiverServiceList(
+      {required final String userId,
+      required final int page,
+      required final int limit}) = _$_GetCareGiverServiceList;
+
+  String get userId;
+  int get page;
+  int get limit;
+  @JsonKey(ignore: true)
+  _$$_GetCareGiverServiceListCopyWith<_$_GetCareGiverServiceList>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_GetCareGiverEarningListCopyWith<$Res> {
+  factory _$$_GetCareGiverEarningListCopyWith(_$_GetCareGiverEarningList value,
+          $Res Function(_$_GetCareGiverEarningList) then) =
+      __$$_GetCareGiverEarningListCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String userId, int page, int limit});
+}
+
+/// @nodoc
+class __$$_GetCareGiverEarningListCopyWithImpl<$Res>
+    extends _$CareGiverDetailEventCopyWithImpl<$Res, _$_GetCareGiverEarningList>
+    implements _$$_GetCareGiverEarningListCopyWith<$Res> {
+  __$$_GetCareGiverEarningListCopyWithImpl(_$_GetCareGiverEarningList _value,
+      $Res Function(_$_GetCareGiverEarningList) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? page = null,
+    Object? limit = null,
+  }) {
+    return _then(_$_GetCareGiverEarningList(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      limit: null == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetCareGiverEarningList implements _GetCareGiverEarningList {
+  const _$_GetCareGiverEarningList(
+      {required this.userId, required this.page, required this.limit});
+
+  @override
+  final String userId;
+  @override
+  final int page;
+  @override
+  final int limit;
+
+  @override
+  String toString() {
+    return 'CareGiverDetailEvent.getCareGiverEarningList(userId: $userId, page: $page, limit: $limit)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetCareGiverEarningList &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.limit, limit) || other.limit == limit));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userId, page, limit);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetCareGiverEarningListCopyWith<_$_GetCareGiverEarningList>
+      get copyWith =>
+          __$$_GetCareGiverEarningListCopyWithImpl<_$_GetCareGiverEarningList>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId) getCareGiverDetail,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverServiceList,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverEarningList,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverServiceRequestList,
+    required TResult Function(DateTime selectedDate) getSelectedDate,
+    required TResult Function(List<ServiceDates> services)
+        getSelectedScheduleServices,
+  }) {
+    return getCareGiverEarningList(userId, page, limit);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId)? getCareGiverDetail,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverServiceList,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverEarningList,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverServiceRequestList,
+    TResult? Function(DateTime selectedDate)? getSelectedDate,
+    TResult? Function(List<ServiceDates> services)? getSelectedScheduleServices,
+  }) {
+    return getCareGiverEarningList?.call(userId, page, limit);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId)? getCareGiverDetail,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverServiceList,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverEarningList,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverServiceRequestList,
+    TResult Function(DateTime selectedDate)? getSelectedDate,
+    TResult Function(List<ServiceDates> services)? getSelectedScheduleServices,
+    required TResult orElse(),
+  }) {
+    if (getCareGiverEarningList != null) {
+      return getCareGiverEarningList(userId, page, limit);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverDetail value) getCareGiverDetail,
+    required TResult Function(_GetCareGiverServiceList value)
+        getCareGiverServiceList,
+    required TResult Function(_GetCareGiverEarningList value)
+        getCareGiverEarningList,
+    required TResult Function(_GetCareGiverServiceRequestList value)
+        getCareGiverServiceRequestList,
+    required TResult Function(_GetSelectedDate value) getSelectedDate,
+    required TResult Function(_GetSelectedScheduleServices value)
+        getSelectedScheduleServices,
+  }) {
+    return getCareGiverEarningList(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult? Function(_GetCareGiverServiceList value)? getCareGiverServiceList,
+    TResult? Function(_GetCareGiverEarningList value)? getCareGiverEarningList,
+    TResult? Function(_GetCareGiverServiceRequestList value)?
+        getCareGiverServiceRequestList,
+    TResult? Function(_GetSelectedDate value)? getSelectedDate,
+    TResult? Function(_GetSelectedScheduleServices value)?
+        getSelectedScheduleServices,
+  }) {
+    return getCareGiverEarningList?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult Function(_GetCareGiverServiceList value)? getCareGiverServiceList,
+    TResult Function(_GetCareGiverEarningList value)? getCareGiverEarningList,
+    TResult Function(_GetCareGiverServiceRequestList value)?
+        getCareGiverServiceRequestList,
+    TResult Function(_GetSelectedDate value)? getSelectedDate,
+    TResult Function(_GetSelectedScheduleServices value)?
+        getSelectedScheduleServices,
+    required TResult orElse(),
+  }) {
+    if (getCareGiverEarningList != null) {
+      return getCareGiverEarningList(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetCareGiverEarningList implements CareGiverDetailEvent {
+  const factory _GetCareGiverEarningList(
+      {required final String userId,
+      required final int page,
+      required final int limit}) = _$_GetCareGiverEarningList;
+
+  String get userId;
+  int get page;
+  int get limit;
+  @JsonKey(ignore: true)
+  _$$_GetCareGiverEarningListCopyWith<_$_GetCareGiverEarningList>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_GetCareGiverServiceRequestListCopyWith<$Res> {
+  factory _$$_GetCareGiverServiceRequestListCopyWith(
+          _$_GetCareGiverServiceRequestList value,
+          $Res Function(_$_GetCareGiverServiceRequestList) then) =
+      __$$_GetCareGiverServiceRequestListCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String userId, int page, int limit});
+}
+
+/// @nodoc
+class __$$_GetCareGiverServiceRequestListCopyWithImpl<$Res>
+    extends _$CareGiverDetailEventCopyWithImpl<$Res,
+        _$_GetCareGiverServiceRequestList>
+    implements _$$_GetCareGiverServiceRequestListCopyWith<$Res> {
+  __$$_GetCareGiverServiceRequestListCopyWithImpl(
+      _$_GetCareGiverServiceRequestList _value,
+      $Res Function(_$_GetCareGiverServiceRequestList) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? page = null,
+    Object? limit = null,
+  }) {
+    return _then(_$_GetCareGiverServiceRequestList(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      limit: null == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetCareGiverServiceRequestList
+    implements _GetCareGiverServiceRequestList {
+  const _$_GetCareGiverServiceRequestList(
+      {required this.userId, required this.page, required this.limit});
+
+  @override
+  final String userId;
+  @override
+  final int page;
+  @override
+  final int limit;
+
+  @override
+  String toString() {
+    return 'CareGiverDetailEvent.getCareGiverServiceRequestList(userId: $userId, page: $page, limit: $limit)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetCareGiverServiceRequestList &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.limit, limit) || other.limit == limit));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userId, page, limit);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetCareGiverServiceRequestListCopyWith<_$_GetCareGiverServiceRequestList>
+      get copyWith => __$$_GetCareGiverServiceRequestListCopyWithImpl<
+          _$_GetCareGiverServiceRequestList>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId) getCareGiverDetail,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverServiceList,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverEarningList,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverServiceRequestList,
+    required TResult Function(DateTime selectedDate) getSelectedDate,
+    required TResult Function(List<ServiceDates> services)
+        getSelectedScheduleServices,
+  }) {
+    return getCareGiverServiceRequestList(userId, page, limit);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId)? getCareGiverDetail,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverServiceList,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverEarningList,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverServiceRequestList,
+    TResult? Function(DateTime selectedDate)? getSelectedDate,
+    TResult? Function(List<ServiceDates> services)? getSelectedScheduleServices,
+  }) {
+    return getCareGiverServiceRequestList?.call(userId, page, limit);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId)? getCareGiverDetail,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverServiceList,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverEarningList,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverServiceRequestList,
+    TResult Function(DateTime selectedDate)? getSelectedDate,
+    TResult Function(List<ServiceDates> services)? getSelectedScheduleServices,
+    required TResult orElse(),
+  }) {
+    if (getCareGiverServiceRequestList != null) {
+      return getCareGiverServiceRequestList(userId, page, limit);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverDetail value) getCareGiverDetail,
+    required TResult Function(_GetCareGiverServiceList value)
+        getCareGiverServiceList,
+    required TResult Function(_GetCareGiverEarningList value)
+        getCareGiverEarningList,
+    required TResult Function(_GetCareGiverServiceRequestList value)
+        getCareGiverServiceRequestList,
+    required TResult Function(_GetSelectedDate value) getSelectedDate,
+    required TResult Function(_GetSelectedScheduleServices value)
+        getSelectedScheduleServices,
+  }) {
+    return getCareGiverServiceRequestList(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult? Function(_GetCareGiverServiceList value)? getCareGiverServiceList,
+    TResult? Function(_GetCareGiverEarningList value)? getCareGiverEarningList,
+    TResult? Function(_GetCareGiverServiceRequestList value)?
+        getCareGiverServiceRequestList,
+    TResult? Function(_GetSelectedDate value)? getSelectedDate,
+    TResult? Function(_GetSelectedScheduleServices value)?
+        getSelectedScheduleServices,
+  }) {
+    return getCareGiverServiceRequestList?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult Function(_GetCareGiverServiceList value)? getCareGiverServiceList,
+    TResult Function(_GetCareGiverEarningList value)? getCareGiverEarningList,
+    TResult Function(_GetCareGiverServiceRequestList value)?
+        getCareGiverServiceRequestList,
+    TResult Function(_GetSelectedDate value)? getSelectedDate,
+    TResult Function(_GetSelectedScheduleServices value)?
+        getSelectedScheduleServices,
+    required TResult orElse(),
+  }) {
+    if (getCareGiverServiceRequestList != null) {
+      return getCareGiverServiceRequestList(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetCareGiverServiceRequestList implements CareGiverDetailEvent {
+  const factory _GetCareGiverServiceRequestList(
+      {required final String userId,
+      required final int page,
+      required final int limit}) = _$_GetCareGiverServiceRequestList;
+
+  String get userId;
+  int get page;
+  int get limit;
+  @JsonKey(ignore: true)
+  _$$_GetCareGiverServiceRequestListCopyWith<_$_GetCareGiverServiceRequestList>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -296,6 +960,12 @@ class _$_GetSelectedDate implements _GetSelectedDate {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) getCareGiverDetail,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverServiceList,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverEarningList,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverServiceRequestList,
     required TResult Function(DateTime selectedDate) getSelectedDate,
     required TResult Function(List<ServiceDates> services)
         getSelectedScheduleServices,
@@ -307,6 +977,12 @@ class _$_GetSelectedDate implements _GetSelectedDate {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? getCareGiverDetail,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverServiceList,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverEarningList,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverServiceRequestList,
     TResult? Function(DateTime selectedDate)? getSelectedDate,
     TResult? Function(List<ServiceDates> services)? getSelectedScheduleServices,
   }) {
@@ -317,6 +993,12 @@ class _$_GetSelectedDate implements _GetSelectedDate {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? getCareGiverDetail,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverServiceList,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverEarningList,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverServiceRequestList,
     TResult Function(DateTime selectedDate)? getSelectedDate,
     TResult Function(List<ServiceDates> services)? getSelectedScheduleServices,
     required TResult orElse(),
@@ -331,6 +1013,12 @@ class _$_GetSelectedDate implements _GetSelectedDate {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetCareGiverDetail value) getCareGiverDetail,
+    required TResult Function(_GetCareGiverServiceList value)
+        getCareGiverServiceList,
+    required TResult Function(_GetCareGiverEarningList value)
+        getCareGiverEarningList,
+    required TResult Function(_GetCareGiverServiceRequestList value)
+        getCareGiverServiceRequestList,
     required TResult Function(_GetSelectedDate value) getSelectedDate,
     required TResult Function(_GetSelectedScheduleServices value)
         getSelectedScheduleServices,
@@ -342,6 +1030,10 @@ class _$_GetSelectedDate implements _GetSelectedDate {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult? Function(_GetCareGiverServiceList value)? getCareGiverServiceList,
+    TResult? Function(_GetCareGiverEarningList value)? getCareGiverEarningList,
+    TResult? Function(_GetCareGiverServiceRequestList value)?
+        getCareGiverServiceRequestList,
     TResult? Function(_GetSelectedDate value)? getSelectedDate,
     TResult? Function(_GetSelectedScheduleServices value)?
         getSelectedScheduleServices,
@@ -353,6 +1045,10 @@ class _$_GetSelectedDate implements _GetSelectedDate {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult Function(_GetCareGiverServiceList value)? getCareGiverServiceList,
+    TResult Function(_GetCareGiverEarningList value)? getCareGiverEarningList,
+    TResult Function(_GetCareGiverServiceRequestList value)?
+        getCareGiverServiceRequestList,
     TResult Function(_GetSelectedDate value)? getSelectedDate,
     TResult Function(_GetSelectedScheduleServices value)?
         getSelectedScheduleServices,
@@ -452,6 +1148,12 @@ class _$_GetSelectedScheduleServices implements _GetSelectedScheduleServices {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) getCareGiverDetail,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverServiceList,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverEarningList,
+    required TResult Function(String userId, int page, int limit)
+        getCareGiverServiceRequestList,
     required TResult Function(DateTime selectedDate) getSelectedDate,
     required TResult Function(List<ServiceDates> services)
         getSelectedScheduleServices,
@@ -463,6 +1165,12 @@ class _$_GetSelectedScheduleServices implements _GetSelectedScheduleServices {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? getCareGiverDetail,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverServiceList,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverEarningList,
+    TResult? Function(String userId, int page, int limit)?
+        getCareGiverServiceRequestList,
     TResult? Function(DateTime selectedDate)? getSelectedDate,
     TResult? Function(List<ServiceDates> services)? getSelectedScheduleServices,
   }) {
@@ -473,6 +1181,12 @@ class _$_GetSelectedScheduleServices implements _GetSelectedScheduleServices {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? getCareGiverDetail,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverServiceList,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverEarningList,
+    TResult Function(String userId, int page, int limit)?
+        getCareGiverServiceRequestList,
     TResult Function(DateTime selectedDate)? getSelectedDate,
     TResult Function(List<ServiceDates> services)? getSelectedScheduleServices,
     required TResult orElse(),
@@ -487,6 +1201,12 @@ class _$_GetSelectedScheduleServices implements _GetSelectedScheduleServices {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetCareGiverDetail value) getCareGiverDetail,
+    required TResult Function(_GetCareGiverServiceList value)
+        getCareGiverServiceList,
+    required TResult Function(_GetCareGiverEarningList value)
+        getCareGiverEarningList,
+    required TResult Function(_GetCareGiverServiceRequestList value)
+        getCareGiverServiceRequestList,
     required TResult Function(_GetSelectedDate value) getSelectedDate,
     required TResult Function(_GetSelectedScheduleServices value)
         getSelectedScheduleServices,
@@ -498,6 +1218,10 @@ class _$_GetSelectedScheduleServices implements _GetSelectedScheduleServices {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult? Function(_GetCareGiverServiceList value)? getCareGiverServiceList,
+    TResult? Function(_GetCareGiverEarningList value)? getCareGiverEarningList,
+    TResult? Function(_GetCareGiverServiceRequestList value)?
+        getCareGiverServiceRequestList,
     TResult? Function(_GetSelectedDate value)? getSelectedDate,
     TResult? Function(_GetSelectedScheduleServices value)?
         getSelectedScheduleServices,
@@ -509,6 +1233,10 @@ class _$_GetSelectedScheduleServices implements _GetSelectedScheduleServices {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetCareGiverDetail value)? getCareGiverDetail,
+    TResult Function(_GetCareGiverServiceList value)? getCareGiverServiceList,
+    TResult Function(_GetCareGiverEarningList value)? getCareGiverEarningList,
+    TResult Function(_GetCareGiverServiceRequestList value)?
+        getCareGiverServiceRequestList,
     TResult Function(_GetSelectedDate value)? getSelectedDate,
     TResult Function(_GetSelectedScheduleServices value)?
         getSelectedScheduleServices,
@@ -535,8 +1263,17 @@ abstract class _GetSelectedScheduleServices implements CareGiverDetailEvent {
 /// @nodoc
 mixin _$CareGiverDetailState {
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isLoadingServices => throw _privateConstructorUsedError;
+  dynamic get isLoadingEarnings => throw _privateConstructorUsedError;
+  dynamic get isLoadingServiceRequest => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
   CareGiverDetailResponse? get response => throw _privateConstructorUsedError;
+  CareGiverServiceListResponse? get serviceListResponse =>
+      throw _privateConstructorUsedError;
+  CareGiverEarningsListResponse? get earningsListResponse =>
+      throw _privateConstructorUsedError;
+  CareGiverServiceRequestListResponse? get serviceRequestListResponse =>
+      throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   DateTime get selectedDate => throw _privateConstructorUsedError;
   List<ServiceDates> get selectedScheduleServices =>
@@ -555,8 +1292,14 @@ abstract class $CareGiverDetailStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
+      bool isLoadingServices,
+      dynamic isLoadingEarnings,
+      dynamic isLoadingServiceRequest,
       bool isError,
       CareGiverDetailResponse? response,
+      CareGiverServiceListResponse? serviceListResponse,
+      CareGiverEarningsListResponse? earningsListResponse,
+      CareGiverServiceRequestListResponse? serviceRequestListResponse,
       String? error,
       DateTime selectedDate,
       List<ServiceDates> selectedScheduleServices});
@@ -577,8 +1320,14 @@ class _$CareGiverDetailStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isLoadingServices = null,
+    Object? isLoadingEarnings = null,
+    Object? isLoadingServiceRequest = null,
     Object? isError = null,
     Object? response = freezed,
+    Object? serviceListResponse = freezed,
+    Object? earningsListResponse = freezed,
+    Object? serviceRequestListResponse = freezed,
     Object? error = freezed,
     Object? selectedDate = null,
     Object? selectedScheduleServices = null,
@@ -588,6 +1337,18 @@ class _$CareGiverDetailStateCopyWithImpl<$Res,
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoadingServices: null == isLoadingServices
+          ? _value.isLoadingServices
+          : isLoadingServices // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingEarnings: null == isLoadingEarnings
+          ? _value.isLoadingEarnings
+          : isLoadingEarnings // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      isLoadingServiceRequest: null == isLoadingServiceRequest
+          ? _value.isLoadingServiceRequest
+          : isLoadingServiceRequest // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       isError: null == isError
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
@@ -596,6 +1357,18 @@ class _$CareGiverDetailStateCopyWithImpl<$Res,
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as CareGiverDetailResponse?,
+      serviceListResponse: freezed == serviceListResponse
+          ? _value.serviceListResponse
+          : serviceListResponse // ignore: cast_nullable_to_non_nullable
+              as CareGiverServiceListResponse?,
+      earningsListResponse: freezed == earningsListResponse
+          ? _value.earningsListResponse
+          : earningsListResponse // ignore: cast_nullable_to_non_nullable
+              as CareGiverEarningsListResponse?,
+      serviceRequestListResponse: freezed == serviceRequestListResponse
+          ? _value.serviceRequestListResponse
+          : serviceRequestListResponse // ignore: cast_nullable_to_non_nullable
+              as CareGiverServiceRequestListResponse?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -622,8 +1395,14 @@ abstract class _$$_CareGiversDetailStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
+      bool isLoadingServices,
+      dynamic isLoadingEarnings,
+      dynamic isLoadingServiceRequest,
       bool isError,
       CareGiverDetailResponse? response,
+      CareGiverServiceListResponse? serviceListResponse,
+      CareGiverEarningsListResponse? earningsListResponse,
+      CareGiverServiceRequestListResponse? serviceRequestListResponse,
       String? error,
       DateTime selectedDate,
       List<ServiceDates> selectedScheduleServices});
@@ -641,8 +1420,14 @@ class __$$_CareGiversDetailStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isLoadingServices = null,
+    Object? isLoadingEarnings = null,
+    Object? isLoadingServiceRequest = null,
     Object? isError = null,
     Object? response = freezed,
+    Object? serviceListResponse = freezed,
+    Object? earningsListResponse = freezed,
+    Object? serviceRequestListResponse = freezed,
     Object? error = freezed,
     Object? selectedDate = null,
     Object? selectedScheduleServices = null,
@@ -652,6 +1437,16 @@ class __$$_CareGiversDetailStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoadingServices: null == isLoadingServices
+          ? _value.isLoadingServices
+          : isLoadingServices // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingEarnings: null == isLoadingEarnings
+          ? _value.isLoadingEarnings
+          : isLoadingEarnings,
+      isLoadingServiceRequest: null == isLoadingServiceRequest
+          ? _value.isLoadingServiceRequest
+          : isLoadingServiceRequest,
       isError: null == isError
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
@@ -660,6 +1455,18 @@ class __$$_CareGiversDetailStateCopyWithImpl<$Res>
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as CareGiverDetailResponse?,
+      serviceListResponse: freezed == serviceListResponse
+          ? _value.serviceListResponse
+          : serviceListResponse // ignore: cast_nullable_to_non_nullable
+              as CareGiverServiceListResponse?,
+      earningsListResponse: freezed == earningsListResponse
+          ? _value.earningsListResponse
+          : earningsListResponse // ignore: cast_nullable_to_non_nullable
+              as CareGiverEarningsListResponse?,
+      serviceRequestListResponse: freezed == serviceRequestListResponse
+          ? _value.serviceRequestListResponse
+          : serviceRequestListResponse // ignore: cast_nullable_to_non_nullable
+              as CareGiverServiceRequestListResponse?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -681,8 +1488,14 @@ class __$$_CareGiversDetailStateCopyWithImpl<$Res>
 class _$_CareGiversDetailState implements _CareGiversDetailState {
   const _$_CareGiversDetailState(
       {required this.isLoading,
+      this.isLoadingServices = false,
+      this.isLoadingEarnings = false,
+      this.isLoadingServiceRequest = false,
       required this.isError,
       required this.response,
+      required this.serviceListResponse,
+      required this.earningsListResponse,
+      required this.serviceRequestListResponse,
       required this.error,
       required this.selectedDate,
       required final List<ServiceDates> selectedScheduleServices})
@@ -691,9 +1504,24 @@ class _$_CareGiversDetailState implements _CareGiversDetailState {
   @override
   final bool isLoading;
   @override
+  @JsonKey()
+  final bool isLoadingServices;
+  @override
+  @JsonKey()
+  final dynamic isLoadingEarnings;
+  @override
+  @JsonKey()
+  final dynamic isLoadingServiceRequest;
+  @override
   final bool isError;
   @override
   final CareGiverDetailResponse? response;
+  @override
+  final CareGiverServiceListResponse? serviceListResponse;
+  @override
+  final CareGiverEarningsListResponse? earningsListResponse;
+  @override
+  final CareGiverServiceRequestListResponse? serviceRequestListResponse;
   @override
   final String? error;
   @override
@@ -709,7 +1537,7 @@ class _$_CareGiversDetailState implements _CareGiversDetailState {
 
   @override
   String toString() {
-    return 'CareGiverDetailState(isLoading: $isLoading, isError: $isError, response: $response, error: $error, selectedDate: $selectedDate, selectedScheduleServices: $selectedScheduleServices)';
+    return 'CareGiverDetailState(isLoading: $isLoading, isLoadingServices: $isLoadingServices, isLoadingEarnings: $isLoadingEarnings, isLoadingServiceRequest: $isLoadingServiceRequest, isError: $isError, response: $response, serviceListResponse: $serviceListResponse, earningsListResponse: $earningsListResponse, serviceRequestListResponse: $serviceRequestListResponse, error: $error, selectedDate: $selectedDate, selectedScheduleServices: $selectedScheduleServices)';
   }
 
   @override
@@ -719,9 +1547,23 @@ class _$_CareGiversDetailState implements _CareGiversDetailState {
             other is _$_CareGiversDetailState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isLoadingServices, isLoadingServices) ||
+                other.isLoadingServices == isLoadingServices) &&
+            const DeepCollectionEquality()
+                .equals(other.isLoadingEarnings, isLoadingEarnings) &&
+            const DeepCollectionEquality().equals(
+                other.isLoadingServiceRequest, isLoadingServiceRequest) &&
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.response, response) ||
                 other.response == response) &&
+            (identical(other.serviceListResponse, serviceListResponse) ||
+                other.serviceListResponse == serviceListResponse) &&
+            (identical(other.earningsListResponse, earningsListResponse) ||
+                other.earningsListResponse == earningsListResponse) &&
+            (identical(other.serviceRequestListResponse,
+                    serviceRequestListResponse) ||
+                other.serviceRequestListResponse ==
+                    serviceRequestListResponse) &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.selectedDate, selectedDate) ||
                 other.selectedDate == selectedDate) &&
@@ -733,8 +1575,14 @@ class _$_CareGiversDetailState implements _CareGiversDetailState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
+      isLoadingServices,
+      const DeepCollectionEquality().hash(isLoadingEarnings),
+      const DeepCollectionEquality().hash(isLoadingServiceRequest),
       isError,
       response,
+      serviceListResponse,
+      earningsListResponse,
+      serviceRequestListResponse,
       error,
       selectedDate,
       const DeepCollectionEquality().hash(_selectedScheduleServices));
@@ -750,8 +1598,15 @@ class _$_CareGiversDetailState implements _CareGiversDetailState {
 abstract class _CareGiversDetailState implements CareGiverDetailState {
   const factory _CareGiversDetailState(
           {required final bool isLoading,
+          final bool isLoadingServices,
+          final dynamic isLoadingEarnings,
+          final dynamic isLoadingServiceRequest,
           required final bool isError,
           required final CareGiverDetailResponse? response,
+          required final CareGiverServiceListResponse? serviceListResponse,
+          required final CareGiverEarningsListResponse? earningsListResponse,
+          required final CareGiverServiceRequestListResponse?
+              serviceRequestListResponse,
           required final String? error,
           required final DateTime selectedDate,
           required final List<ServiceDates> selectedScheduleServices}) =
@@ -760,9 +1615,21 @@ abstract class _CareGiversDetailState implements CareGiverDetailState {
   @override
   bool get isLoading;
   @override
+  bool get isLoadingServices;
+  @override
+  dynamic get isLoadingEarnings;
+  @override
+  dynamic get isLoadingServiceRequest;
+  @override
   bool get isError;
   @override
   CareGiverDetailResponse? get response;
+  @override
+  CareGiverServiceListResponse? get serviceListResponse;
+  @override
+  CareGiverEarningsListResponse? get earningsListResponse;
+  @override
+  CareGiverServiceRequestListResponse? get serviceRequestListResponse;
   @override
   String? get error;
   @override

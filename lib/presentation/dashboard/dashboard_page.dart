@@ -1,10 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/custom_snackbar.dart';
-
-@RoutePage()
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
 
@@ -19,10 +15,10 @@ class _DashboardPageState extends State<DashboardPage> {
     return CustomSizedBox(
       height: 350,
       child: InkWell(
-          onTap: () {
-            CSnackBar.showSuccess(context,
-                msg: "test purpose to show something ok");
-          },
+          // onTap: () {
+          //   CSnackBar.showError(context,
+          //       msg: "test purpose to show something ok");
+          // },
           child: Center(child: Text("DASHBOARD"))),
     );
   }

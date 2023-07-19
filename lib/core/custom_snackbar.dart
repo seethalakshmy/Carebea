@@ -34,8 +34,7 @@ class CSnackBar {
       position: FlashPosition.top,
       icon: CustomIcon(
         icon: icon,
-        color: AppColor.black.val,
-        // /black6
+        color: AppColor.black6.val,
         size: DBL.seventy.val,
       ),
       content: Center(

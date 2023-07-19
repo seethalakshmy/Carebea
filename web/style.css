@@ -1,0 +1,22 @@
+html, body {
+  touch-action: manipulation;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  zoom: 100%;
+}
+
+@viewport {
+  zoom: 1.0;
+  width: device-width;
+  user-zoom: fixed;
+  max-zoom: 1.0;
+  min-zoom: 1.0;
+}
+
+
+
+
+
+
+

@@ -2,8 +2,8 @@ import 'package:admin_580_tech/application/bloc/caregiver-profile/caregiver_prof
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_listview_builder.dart';
-import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:admin_580_tech/presentation/widget/dot_text_list_item.dart';
+import 'package:admin_580_tech/presentation/widget/empty_label_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../widget/custom_sizedbox.dart';
@@ -69,14 +69,8 @@ class CareGiverProvidedServices extends StatelessWidget {
                           color: AppColor.label6.val,
                         )),
               )
-            : _emptyView(),
+            : EmptyLabelView(msg: AppString.noServices.val),
       ],
-    );
-  }
-
-  Center _emptyView() {
-    return Center(
-      child: CustomText(AppString.notServices.val),
     );
   }
 
@@ -107,7 +101,7 @@ class CareGiverProvidedServices extends StatelessWidget {
                           color: AppColor.red.val,
                         )),
               )
-            : _emptyView(),
+            : EmptyLabelView(msg: AppString.noServices.val),
       ],
     );
   }

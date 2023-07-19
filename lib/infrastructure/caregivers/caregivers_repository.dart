@@ -29,7 +29,9 @@ class CareGiversRepository implements ICareGiversRepo {
       if (e.message.contains("SocketException")) {
         CustomLog.log("reached here..");
         return Left(ClientFailure(
-            error: AppString.noInternetConnection.val, isClientError: true));
+          error: AppString.noInternetConnection.val,
+          isClientError: true,
+        ));
       } else {
         return Left(ServerFailure(
             error: AppString.somethingWentWrong.val, isClientError: false));

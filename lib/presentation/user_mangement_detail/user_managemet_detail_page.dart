@@ -13,6 +13,7 @@ import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
+import 'package:admin_580_tech/presentation/widget/loader_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -54,9 +55,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
         ..add(UserManagementDetailEvent.getUserDetail(userId: userId)),
       child: BlocBuilder<UserManagementDetailBloc, UserManagementDetailState>(
         builder: (context, state) {
-          return state.isLoading
-              ? CircularProgressIndicator()
-              : _bodyView(context, state);
+          return state.isLoading ? LoaderView() : _bodyView(context, state);
         },
       ),
     );
@@ -65,7 +64,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
   CustomSizedBox _bodyView(
       BuildContext context, UserManagementDetailState state) {
     CustomLog.log('width :${MediaQuery.of(context).size.width}');
-    UserDetailResponse response = state.response!;
+    UserDetailResponse? response = state.response;
     return CustomSizedBox(
       height: MediaQuery.of(context).size.height,
       child: NestedScrollView(
@@ -203,7 +202,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                               CrossAxisAlignment.start,
                                           children: [
                                             CustomText(
-                                              "${response.user?.name?.firstName} ${response.user?.name?.lastName}",
+                                              "${response?.user?.name?.firstName} ${response?.user?.name?.lastName}",
                                               style: TS().gRoboto(
                                                 color: AppColor.rowColor.val,
                                                 fontWeight: FW.w600.val,
@@ -218,8 +217,8 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                             ),
                                             SVGText(
                                               path: IMG.location.val,
-                                              name:
-                                                  response.user?.location ?? "",
+                                              name: response?.user?.location ??
+                                                  "",
                                               widthGap: DBL.fifteen.val,
                                             ),
                                             CustomSizedBox(
@@ -227,7 +226,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                             ),
                                             SVGText(
                                               path: IMG.email.val,
-                                              name: response.user?.email ?? "",
+                                              name: response?.user?.email ?? "",
                                               widthGap: DBL.twelve.val,
                                             ),
                                             CustomSizedBox(
@@ -235,7 +234,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                             ),
                                             SVGText(
                                               path: IMG.phone.val,
-                                              name: response.user?.phone ?? "",
+                                              name: response?.user?.phone ?? "",
                                               widthGap: DBL.nine.val,
                                             ),
                                             CustomSizedBox(
@@ -243,7 +242,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                             ),
                                             SVGText(
                                               path: IMG.ssn.val,
-                                              name: response.user?.ssn ?? "",
+                                              name: response?.user?.ssn ?? "",
                                               widthGap: DBL.twelve.val,
                                             ),
                                             // CustomSizedBox(
@@ -432,28 +431,28 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
   }
 
   ServiceRewardAndCompletion reviewsView(
-      {double? height, required UserDetailResponse response}) {
+      {double? height, required UserDetailResponse? response}) {
     return ServiceRewardAndCompletion(
       height: height,
-      title: response.user?.totalReviewsGiven.toString() ?? "",
+      title: response?.user?.totalReviewsGiven.toString() ?? "",
       subTitle: AppString.reviewGiven.val,
     );
   }
 
   ServiceRewardAndCompletion cancelledCount(
-      {double? height, required UserDetailResponse response}) {
+      {double? height, required UserDetailResponse? response}) {
     return ServiceRewardAndCompletion(
       height: height,
-      title: response.user?.canceledRequest.toString() ?? "",
+      title: response?.user?.canceledRequest.toString() ?? "",
       subTitle: AppString.canceledRequest.val,
     );
   }
 
   ServiceRewardAndCompletion serviceCount(
-      {double? height, required UserDetailResponse response}) {
+      {double? height, required UserDetailResponse? response}) {
     return ServiceRewardAndCompletion(
       height: height,
-      title: response.user?.serviceCompleted.toString() ?? "",
+      title: response?.user?.serviceCompleted.toString() ?? "",
       subTitle: AppString.serviceCompleted.val,
     );
   }

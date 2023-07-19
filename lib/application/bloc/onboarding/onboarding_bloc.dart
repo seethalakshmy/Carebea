@@ -10,6 +10,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
+import '../../../domain/on_boarding/models/preferences/pet_list_response.dart';
+import '../../../domain/on_boarding/models/preferences/pets_model.dart';
+import '../../../domain/on_boarding/models/preferences/preference_language_model.dart';
+import '../../../domain/on_boarding/models/preferences/preference_request_model.dart';
+import '../../../domain/on_boarding/models/preferences/years_of_experience_response.dart';
 import '../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/city_list_response.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/gender_list_response.dart';
@@ -17,9 +22,14 @@ import '../../../presentation/on_boarding/modules/personal_details/models/person
 import '../../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
 import '../../../presentation/on_boarding/modules/reference/models/get_reference_response.dart';
 import '../../../presentation/on_boarding/modules/reference/models/relation_response.dart';
+import '../../../presentation/on_boarding/modules/preference/models/language_list_response.dart';
+import '../../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
+import '../../../presentation/on_boarding/modules/services/models/get_service_response.dart';
 
 part 'onboarding_bloc.freezed.dart';
+
 part 'onboarding_event.dart';
+
 part 'onboarding_state.dart';
 
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
@@ -29,11 +39,17 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   List<StateItem> stateList = [];
   List<RelationList> relationList = [];
   List<DocumentType> documentList = [];
+  List<PetsModel> petsList = [];
+  List<PetsModel> selectedPetsList = [];
+  List<PreferenceLanguageModel> languageList = [];
+  List<PreferenceLanguageModel> selectedLanguageList = [];
+  List<YearData> yearList = [];
   String stateId = "";
   String relationId = "";
   String citySearchKey = "";
   String stateSearchKey = "";
   String relationSearchKey = "";
+  String languageSearchKey = "";
   String profileUrl = "";
   String selectedState = "";
   String selectedCity = "";
@@ -48,6 +64,8 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   final TextEditingController stateSearchController = TextEditingController();
   final TextEditingController relationSearchController =
       TextEditingController();
+  int languagePage = 1;
+  String selectedYearId = "";
 
   OnboardingBloc(this.onboardingRepository) : super(OnboardingState.initial()) {
     on<OnboardingEvent>((event, emit) async {
@@ -88,6 +106,8 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
         emit(state.copyWith(
             covidDocumentList: event.bytesList,
             listUpdated: !event.listUpdated));
+      } else if (event is _LanguagePagination) {
+        emit(state.copyWith(languagePaginationPage: languagePage));
       }
     });
     on<_CommonDataLists>(_getCommonLists);
@@ -95,6 +115,12 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     on<_StateLists>(_getStateList);
     on<_RelationList>(_getRelationList);
     on<_GetPersonalDetails>(_getPersonalData);
+    on<_GetQualificationDetails>(_getQualificationDetails);
+    on<_SubmitPreferenceDetails>(_getPreferenceDetails);
+    on<_GetPetList>(_getPetsList);
+    on<_YearsOfExp>(_getYearsOfExp);
+    on<_GetLanguageList>(_getLanguageList);
+    on<_GetCaregiverService>(_getCaregiverServices);
     on<_SubmitReference>(_submitReference);
 
     on<_AddReference>((event, emit) {
@@ -192,6 +218,43 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
 
   _getRelationList(_RelationList event, Emitter<OnboardingState> emit) async {
     await getRelationResult(emit);
+  }
+
+  _getPetsList(_GetPetList event, Emitter<OnboardingState> emit) async {
+    final Either<ApiErrorHandler, PetListResponse> result =
+        await onboardingRepository.getPetList(searchKey: event.petSearchKey);
+    OnboardingState petState = result.fold((l) {
+      return state.copyWith(isLoading: false, petListOption: Some(Left(l)));
+    }, (r) {
+      petsList.clear();
+      petsList
+          .addAll(r.data!.map((e) => PetsModel(e.name ?? "", e.id)).toList());
+      return state.copyWith(
+          isLoading: false,
+          petsList: r.data!.map((e) => PetsModel(e.name ?? "", e.id)).toList(),
+          petListOption: Some(Right(r)));
+    });
+    emit(petState);
+  }
+
+  _getLanguageList(
+      _GetLanguageList event, Emitter<OnboardingState> emit) async {
+    final Either<ApiErrorHandler, LanguageListResponse> result =
+        await onboardingRepository.getLanguageList(
+            page: languagePage.toString(), searchKey: event.languageSearchKey);
+    OnboardingState languageState = result.fold((l) {
+      return state.copyWith(isLoading: false, petListOption: Some(Left(l)));
+    }, (r) {
+      if (languagePage == 1) {
+        languageList.clear();
+      }
+      languageList.addAll(r.data!
+          .map((e) => PreferenceLanguageModel(e.name ?? "", e.id ?? ""))
+          .toList(growable: true));
+      return state.copyWith(
+          isLoading: false, languageListOption: Some(Right(r)));
+    });
+    emit(languageState);
   }
 
   Future<void> getDocumentTypeResult(Emitter<OnboardingState> emit) async {
@@ -293,20 +356,72 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     emit(peronalState);
   }
 
-  _submitReference(
-      _SubmitReference event, Emitter<OnboardingState> emit) async {
+  _getQualificationDetails(
+      _GetQualificationDetails event, Emitter<OnboardingState> emit) async {
     emit(state.copyWith(isLoading: true));
-
     final Either<ApiErrorHandler, CommonResponse> result =
-        await onboardingRepository.submitReference(
-      userId: event.userId,
-      referenceList: state.referenceList.map((e) => e.toJson()).toList(),
-    );
-    OnboardingState referenceState = result.fold((l) {
-      return state.copyWith(isLoading: false, referenceOption: Some(Left(l)));
+        await onboardingRepository.qualificationSubmit(
+            userId: event.userId,
+            haveHHARegistration: event.haveHhaRegistration,
+            hhaDetails: event.hhaDetails,
+            haveBLSCertificate: event.haveBlsCertificate,
+            blsDetails: event.blsDetails,
+            haveTBTest: event.haveTbTest,
+            tbDetails: event.tbDetails,
+            haveCovidVaccination: event.haveCovidVaccination,
+            covidDetails: event.covidDetails);
+    OnboardingState qualificationState = result.fold((l) {
+      return state.copyWith(
+          isLoading: false, qualificationDetailsOption: Some(Left(l)));
     }, (r) {
-      return state.copyWith(isLoading: false, referenceOption: Some(Right(r)));
+      return state.copyWith(
+          isLoading: false, qualificationDetailsOption: Some(Right(r)));
     });
-    emit(referenceState);
+    emit(qualificationState);
+  }
+
+  _getPreferenceDetails(
+      _SubmitPreferenceDetails event, Emitter<OnboardingState> emit) async {
+    emit(state.copyWith(isLoading: true));
+    final Either<ApiErrorHandler, CommonResponse> result =
+        await onboardingRepository.preferenceSubmit(
+            userId: event.userId,
+            yearsOfExp: event.yearsOfExp,
+            serveWithSmoker: event.serveWithSmoker,
+            willingToTransportation: event.willingToTransportation,
+            willingToServeWithPets: event.willingToServeWithPets,
+            petsList: event.petsList,
+            knownLanguages: event.knownLanguages);
+    OnboardingState preferenceState = result.fold((l) {
+      return state.copyWith(
+          isLoading: false, preferenceDetailsOption: Some(Left(l)));
+    }, (r) {
+      return state.copyWith(
+          isLoading: false, preferenceDetailsOption: Some(Right(r)));
+    });
+    emit(preferenceState);
+  }
+
+  _getYearsOfExp(_YearsOfExp event, Emitter<OnboardingState> emit) async {
+    final Either<ApiErrorHandler, YearsOfExperienceResponse> result =
+        await onboardingRepository.getYearsOfExpResult();
+    result.fold((l) {
+      return state.copyWith(isLoading: false, yearsOption: Some(Left(l)));
+    }, (r) {
+      yearList.clear();
+      yearList.addAll(r.data!);
+      return state.copyWith(isLoading: false, yearsOption: Some(Right(r)));
+    });
+  }
+
+  _getCaregiverServices(
+      _GetCaregiverService event, Emitter<OnboardingState> emit) async {
+    final Either<ApiErrorHandler, GetServiceResponse> result =
+        await onboardingRepository.getServices(userId: event.userId);
+    result.fold((l) {
+      return state.copyWith(isLoading: false, getServiceOption: Some(Left(l)));
+    }, (r) {
+      return state.copyWith(isLoading: false, getServiceOption: Some(Right(r)));
+    });
   }
 }

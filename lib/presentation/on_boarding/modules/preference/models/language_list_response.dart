@@ -1,19 +1,24 @@
 import 'dart:convert';
+
 /// status : true
 /// message : "Success"
 /// data : [{"_id":"643ceb686cba31e037a0daef","name":"Abkhaz","code":"ab"},{"_id":"643ceb686cba31e037a0daf0","name":"Afar","code":"aa"},{"_id":"643ceb686cba31e037a0daf1","name":"Afrikaans","code":"af"},{"_id":"643ceb686cba31e037a0daf2","name":"Akan","code":"ak"},{"_id":"643ceb686cba31e037a0daf3","name":"Albanian","code":"sq"},{"_id":"643ceb686cba31e037a0daf4","name":"Amharic","code":"am"},{"_id":"643ceb686cba31e037a0daf5","name":"Arabic","code":"ar"},{"_id":"643ceb686cba31e037a0daf6","name":"Aragonese","code":"an"},{"_id":"643ceb686cba31e037a0daf7","name":"Armenian","code":"hy"},{"_id":"643ceb686cba31e037a0daf8","name":"Assamese","code":"as"}]
 
-LanguageListResponse languageListResponseFromJson(String str) => LanguageListResponse.fromJson(json.decode(str));
-String languageListResponseToJson(LanguageListResponse data) => json.encode(data.toJson());
+LanguageListResponse languageListResponseFromJson(String str) =>
+    LanguageListResponse.fromJson(json.decode(str));
+String languageListResponseToJson(LanguageListResponse data) =>
+    json.encode(data.toJson());
+
 class LanguageListResponse {
   LanguageListResponse({
-      bool? status, 
-      String? message, 
-      List<Data>? data,}){
+    bool? status,
+    String? message,
+    List<Data>? data,
+  }) {
     _status = status;
     _message = message;
     _data = data;
-}
+  }
 
   LanguageListResponse.fromJson(dynamic json) {
     _status = json['status'];
@@ -28,13 +33,16 @@ class LanguageListResponse {
   bool? _status;
   String? _message;
   List<Data>? _data;
-LanguageListResponse copyWith({  bool? status,
-  String? message,
-  List<Data>? data,
-}) => LanguageListResponse(  status: status ?? _status,
-  message: message ?? _message,
-  data: data ?? _data,
-);
+  LanguageListResponse copyWith({
+    bool? status,
+    String? message,
+    List<Data>? data,
+  }) =>
+      LanguageListResponse(
+        status: status ?? _status,
+        message: message ?? _message,
+        data: data ?? _data,
+      );
   bool? get status => _status;
   String? get message => _message;
   List<Data>? get data => _data;
@@ -48,7 +56,6 @@ LanguageListResponse copyWith({  bool? status,
     }
     return map;
   }
-
 }
 
 /// _id : "643ceb686cba31e037a0daef"
@@ -57,15 +64,17 @@ LanguageListResponse copyWith({  bool? status,
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
+
 class Data {
   Data({
-      String? id, 
-      String? name, 
-      String? code,}){
+    String? id,
+    String? name,
+    String? code,
+  }) {
     _id = id;
     _name = name;
     _code = code;
-}
+  }
 
   Data.fromJson(dynamic json) {
     _id = json['_id'];
@@ -75,13 +84,16 @@ class Data {
   String? _id;
   String? _name;
   String? _code;
-Data copyWith({  String? id,
-  String? name,
-  String? code,
-}) => Data(  id: id ?? _id,
-  name: name ?? _name,
-  code: code ?? _code,
-);
+  Data copyWith({
+    String? id,
+    String? name,
+    String? code,
+  }) =>
+      Data(
+        id: id ?? _id,
+        name: name ?? _name,
+        code: code ?? _code,
+      );
   String? get id => _id;
   String? get name => _name;
   String? get code => _code;
@@ -93,5 +105,4 @@ Data copyWith({  String? id,
     map['code'] = _code;
     return map;
   }
-
 }

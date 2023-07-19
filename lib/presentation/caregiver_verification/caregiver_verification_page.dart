@@ -18,6 +18,7 @@ import '../../application/bloc/caregiver_verification/caregiver_verification_blo
 import '../../core/enum.dart';
 import '../../core/text_styles.dart';
 import '../../domain/caregivers/model/verification_types.dart';
+import '../routes/app_router.gr.dart';
 import '../widget/cached_image.dart';
 import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/custom_container.dart';
@@ -34,11 +35,15 @@ import 'widgets/approval_status_box.dart';
 @RoutePage()
 class CaregiverVerificationPage extends StatefulWidget {
   const CaregiverVerificationPage(
-      {Key? key, @QueryParam('id') this.id = '', @QueryParam('page') this.page})
+      {Key? key,
+      @QueryParam('id') this.id = '',
+      @QueryParam('page') this.page,
+      @QueryParam('tab') this.tab})
       : super(key: key);
 
   final String? id;
   final int? page;
+  final int? tab;
 
   @override
   State<CaregiverVerificationPage> createState() =>
@@ -62,16 +67,18 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
   final AutovalidateMode _validateMode = AutovalidateMode.disabled;
   String userId = "";
   int? _page;
+  int? _tab;
   RejectionParams? rejectionParams;
 
   @override
   void initState() {
     userId = autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
     _page = autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
+    _tab = autoTabRouter?.currentChild?.queryParams.getInt('tab', 0);
     super.initState();
-    context
-        .read<CareGiverVerificationBloc>()
-        .add(CareGiverVerificationEvent.getVerificationData(userId: userId));
+    context.read<CareGiverVerificationBloc>().add(
+        CareGiverVerificationEvent.getVerificationData(
+            userId: userId, context: context));
   }
 
   @override
@@ -91,14 +98,20 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
   @override
   Widget build(BuildContext context) {
     CustomLog.log("width == ${MediaQuery.of(context).size.width}");
-    return BlocBuilder<CareGiverVerificationBloc, CareGiverVerificationState>(
-      builder: (context, state) {
-        return state.isLoading
-            ? const LoaderView()
-            : state.isError
-                ? ErrorView(isClientError: false, errorMessage: state.error)
-                : _bodyView(context, state);
+    return WillPopScope(
+      onWillPop: () async {
+        autoTabRouter?.navigate(CareGiversRoute(page: _page, tab: _tab));
+        return true;
       },
+      child: BlocBuilder<CareGiverVerificationBloc, CareGiverVerificationState>(
+        builder: (context, state) {
+          return state.isLoading
+              ? const LoaderView()
+              : state.isError
+                  ? ErrorView(isClientError: false, errorMessage: state.error)
+                  : _bodyView(context, state);
+        },
+      ),
     );
   }
 
@@ -152,7 +165,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                         CustomSizedBox(
                           height: DBL.five.val,
                         ),
-                        _trainingRequestButton(),
+                        _trainingRequestButton(
+                            state.response?.data?.verificationStatus),
                         CustomSizedBox(
                           height: DBL.eight.val,
                         ),
@@ -177,25 +191,33 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
     );
   }
 
-  CustomButton _trainingRequestButton() {
-    return CustomButton(
-      text: AppString.sendTrainingRequest.val,
-      onPressed: () {
-        context.read<CareGiverVerificationBloc>().add(
-            CareGiverVerificationEvent.careGiverTrainingVerify(
-                userId: userId, context: context, page: _page));
-      },
-      color: AppColor.white.val,
-      borderRadius: DBL.five.val,
-      borderColor: AppColor.primaryColor.val,
-      hoverColor: AppColor.offWhite.val.withOpacity(0.2),
-      textStyle: TS().gRoboto(
-          fontWeight: FW.w500.val,
-          color: AppColor.primaryColor.val,
-          fontSize: FS.font16.val),
-      padding: EdgeInsets.symmetric(
-          horizontal: DBL.thirtyFive.val, vertical: DBL.eighteen.val),
-    );
+  _trainingRequestButton(int? status) {
+    return status != null
+        ? CustomButton(
+            text: status != Verification.trainingStarted.val
+                ? AppString.sendTrainingRequest.val
+                : AppString.goToProfile.val,
+            onPressed: () {
+              if (status != Verification.trainingStarted.val) {
+                context.read<CareGiverVerificationBloc>().add(
+                    CareGiverVerificationEvent.careGiverTrainingVerify(
+                        userId: userId, context: context, page: _page));
+              } else {
+                autoTabRouter?.navigate(CareGiverProfileRoute(id: userId));
+              }
+            },
+            color: AppColor.white.val,
+            borderRadius: DBL.five.val,
+            borderColor: AppColor.primaryColor.val,
+            hoverColor: AppColor.offWhite.val.withOpacity(0.2),
+            textStyle: TS().gRoboto(
+                fontWeight: FW.w500.val,
+                color: AppColor.primaryColor.val,
+                fontSize: FS.font16.val),
+            padding: EdgeInsets.symmetric(
+                horizontal: DBL.thirtyFive.val, vertical: DBL.eighteen.val),
+          )
+        : CustomSizedBox.shrink();
   }
 
   CustomContainer _buildDivider(BuildContext context, {Color? color}) {
@@ -233,7 +255,9 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                 child: RowColonCombo.twoHundred(
                     customWidthLg1: DBL.twoHundred.val,
                     label: AppString.dob.val,
-                    value: personalDetails?.dob ?? "",
+                    value: personalDetails?.dob?.parseWithFormat(
+                            dateFormat: AppString.mmDDYYY.val) ??
+                        "",
                     fontSize: FS.font13PointFive.val),
               ),
               !isLarge(context)
@@ -260,7 +284,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
               !isLarge(context)
                   ? Expanded(
                       flex: 1,
-                      child: _alterNativeMobileNumberView(personalDetails),
+                      child: _emailView(personalDetails),
                     )
                   : CustomSizedBox.shrink(),
             ],
@@ -268,24 +292,11 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
           CustomSizedBox(
             height: DBL.six.val,
           ),
-          Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: RowColonCombo.twoHundred(
-                    customWidthLg1: DBL.twoHundred.val,
-                    label: AppString.addressLine1.val,
-                    value: personalDetails?.addressLine ?? "",
-                    fontSize: FS.font13PointFive.val),
-              ),
-              !isLarge(context)
-                  ? Expanded(
-                      flex: 1,
-                      child: _emailView(personalDetails),
-                    )
-                  : CustomSizedBox.shrink(),
-            ],
-          ),
+          RowColonCombo.twoHundred(
+              customWidthLg1: DBL.twoHundred.val,
+              label: AppString.addressLine1.val,
+              value: personalDetails?.addressLine ?? "",
+              fontSize: FS.font13PointFive.val),
           CustomSizedBox(
             height: DBL.six.val,
           ),
@@ -316,7 +327,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
           RowColonCombo.twoHundred(
               customWidthLg1: DBL.twoHundred.val,
               label: AppString.state.val,
-              value: personalDetails?.zip ?? "",
+              value: personalDetails?.state ?? "",
               fontSize: FS.font13PointFive.val),
           isLarge(context)
               ? CustomSizedBox(
@@ -498,9 +509,11 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
           Row(
             children: [
               CustomSizedBox(
-                width: isLg3(context) ? 360 : 500,
+                width: getLabelWidth(state),
                 child: CustomText(
-                  AppString.acceptThisCareAmbassador.val,
+                  isCertificateApproveOrReject(state)
+                      ? AppString.acceptThisCareAmbassador.val
+                      : AppString.certificateCheckStatus.val,
                   style: TS().gRoboto(
                       color: AppColor.primaryColor.val,
                       fontWeight: FW.w500.val,
@@ -511,9 +524,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                 width: isLg3(context) ? DBL.seven.val : DBL.twelve.val,
               ),
               !isXs2(context)
-                  ? state.response?.data?.certificateVerification
-                              ?.approvalStatus ==
-                          Approve.approveOrReject.val
+                  ? isCertificateApproveOrReject(state)
                       ? !isLg4(context)
                           ? Expanded(
                               child: _certificateApprovalStatusBox(state))
@@ -526,10 +537,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
             height: DBL.fifteen.val,
           ),
           (isXs2(context)) ||
-                  (state.response?.data?.certificateVerification
-                              ?.approvalStatus ==
-                          Approve.approveOrReject.val &&
-                      isLg4(context))
+                  (isCertificateApproveOrReject(state) && isLg4(context))
               ? _certificateApprovalStatusBox(state)
               : CustomSizedBox.shrink(),
           CustomSizedBox(
@@ -538,6 +546,19 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         ],
       ),
     );
+  }
+
+  double getLabelWidth(CareGiverVerificationState state) {
+    if (isCertificateApproveOrReject(state)) {
+      return isLg3(context) ? 360 : 500;
+    } else {
+      return isLg3(context) ? 290 : 390;
+    }
+  }
+
+  bool isCertificateApproveOrReject(CareGiverVerificationState state) {
+    return state.response?.data?.certificateVerification?.approvalStatus ==
+        Approve.approveOrReject.val;
   }
 
   CustomListViewBuilder _covidListView(
@@ -614,32 +635,33 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         });
   }
 
-  ApprovalStatusBox _certificateApprovalStatusBox(
-      CareGiverVerificationState state) {
+  _certificateApprovalStatusBox(CareGiverVerificationState state) {
     int status =
         state.response?.data?.certificateVerification?.approvalStatus ?? 0;
-
-    return ApprovalStatusBox(
-      careGiversVerificationState: state,
-      textEditingController: _reasonController,
-      focusNode: _reasonNode,
-      status: status,
-      onTapApprove: () {
-        context.read<CareGiverVerificationBloc>().add(
-            CareGiverVerificationEvent.careGiverCertificateApprove(
-                userID: userId,
-                status: 1,
-                context: context,
-                profileUrl: "",
-                userName:
-                    "${state.response?.data?.caregiver?.firstName} ${state.response?.data?.caregiver?.lastName}"));
-      },
-      onTapReject: () {
-        _certificateRejectPopUp(
-          context,
-        );
-      },
-    );
+    bool? isPendingDoc = state.response?.data?.pendingDocs ?? false;
+    return !isPendingDoc
+        ? ApprovalStatusBox(
+            careGiversVerificationState: state,
+            textEditingController: _reasonController,
+            focusNode: _reasonNode,
+            status: status,
+            onTapApprove: () {
+              context.read<CareGiverVerificationBloc>().add(
+                  CareGiverVerificationEvent.careGiverCertificateApprove(
+                      userID: userId,
+                      status: 1,
+                      context: context,
+                      profileUrl: "",
+                      userName:
+                          "${state.response?.data?.caregiver?.firstName} ${state.response?.data?.caregiver?.lastName}"));
+            },
+            onTapReject: () {
+              _certificateRejectPopUp(
+                context,
+              );
+            },
+          )
+        : CustomSizedBox.shrink();
   }
 
   _hhaRowCombo(QualificationAndTest? qualificationAndTest) {
@@ -655,7 +677,9 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         CustomSizedBox(height: DBL.eight.val),
         _subTitleVIew(
             label: AppString.expiryDate.val,
-            value: qualificationAndTest?.hhaExpiryDate ?? ""),
+            value: qualificationAndTest?.hhaExpiryDate
+                    ?.parseWithFormat(dateFormat: AppString.mmDDYYY.val) ??
+                ""),
       ],
     );
   }
@@ -673,7 +697,9 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         CustomSizedBox(height: DBL.eight.val),
         _subTitleVIew(
             label: AppString.expiryDate.val,
-            value: qualificationAndTest?.blsExpiryDate ?? ""),
+            value: qualificationAndTest?.blsExpiryDate
+                    ?.parseWithFormat(dateFormat: AppString.mmDDYYY.val) ??
+                ""),
       ],
     );
   }
@@ -687,7 +713,9 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         CustomSizedBox(height: DBL.eight.val),
         _subTitleVIew(
             label: AppString.takenDate.val,
-            value: qualificationAndTest?.tbTakenDate ?? ""),
+            value: qualificationAndTest?.tbTakenDate
+                    ?.parseWithFormat(dateFormat: AppString.mmDDYYY.val) ??
+                ""),
         CustomSizedBox(height: DBL.eight.val),
         _subTitleVIew(
             label: AppString.result.val,
@@ -705,7 +733,9 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         CustomSizedBox(height: DBL.eight.val),
         _subTitleVIew(
             label: AppString.takenDate.val,
-            value: qualificationAndTest?.covidTakenDate ?? ""),
+            value: qualificationAndTest?.covidTakenDate
+                    ?.parseWithFormat(dateFormat: AppString.mmDDYYY.val) ??
+                ""),
       ],
     );
   }
@@ -751,7 +781,9 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         RowColonCombo.twoHundred(
             customWidthLg1: DBL.twoHundred.val,
             label: AppString.expiryDate.val,
-            value: documentDetails?.expiryDate ?? "",
+            value: documentDetails?.expiryDate
+                    ?.parseWithFormat(dateFormat: AppString.mmDDYYY.val) ??
+                "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.eighteen.val,
@@ -828,26 +860,29 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
 
   _backgroundVerifyApprovalStatusBox(
       CareGiverVerificationState state, int status) {
-    return ApprovalStatusBox(
-      careGiversVerificationState: state,
-      textEditingController: _reasonController,
-      focusNode: _reasonNode,
-      status: status,
-      onTapApprove: () {
-        context.read<CareGiverVerificationBloc>().add(
-            CareGiverVerificationEvent.careGiverBackgroundVerify(
-                userID: userId, status: 1, context: context));
-      },
-      onTapReject: () {
-        _reasonNode.requestFocus();
-        context.read<CareGiverVerificationBloc>().add(
-            CareGiverVerificationEvent.careGiverBackgroundVerify(
-                userID: userId,
-                status: 2,
-                rejectReason: _reasonController.text.trim(),
-                context: context));
-      },
-    );
+    bool? isPendingDoc = state.response?.data?.pendingDocs ?? false;
+    return !isPendingDoc
+        ? ApprovalStatusBox(
+            careGiversVerificationState: state,
+            textEditingController: _reasonController,
+            focusNode: _reasonNode,
+            status: status,
+            onTapApprove: () {
+              context.read<CareGiverVerificationBloc>().add(
+                  CareGiverVerificationEvent.careGiverBackgroundVerify(
+                      userID: userId, status: 1, context: context));
+            },
+            onTapReject: () {
+              _reasonNode.requestFocus();
+              context.read<CareGiverVerificationBloc>().add(
+                  CareGiverVerificationEvent.careGiverBackgroundVerify(
+                      userID: userId,
+                      status: 2,
+                      rejectReason: _reasonController.text.trim(),
+                      context: context));
+            },
+          )
+        : CustomSizedBox.shrink();
   }
 
   RowColonCombo _emailView(PersonalDetails? personalDetails) {
@@ -879,10 +914,10 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _mobileNumberView(personalDetails),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-        _alterNativeMobileNumberView(personalDetails),
+        // CustomSizedBox(
+        //   height: DBL.six.val,
+        // ),
+        // _alterNativeMobileNumberView(personalDetails),
         CustomSizedBox(
           height: DBL.six.val,
         ),
@@ -1207,12 +1242,14 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
   }
 
   bool isSendTrainingRequest(CareGiverVerificationState state) {
+    int? verificationStatus = state.response?.data?.verificationStatus;
     PersonalDetails? personalDetails =
         state.response?.data?.backgroundVerification?.personalDetails;
     CertificateVerification? certificateVerification =
         state.response?.data?.certificateVerification;
-    return personalDetails?.approvalStatus == Approve.approved.val &&
-        certificateVerification?.approvalStatus == Approve.approved.val;
+    return (personalDetails?.approvalStatus == Approve.approved.val &&
+            certificateVerification?.approvalStatus == Approve.approved.val) ||
+        (verificationStatus == Verification.trainingStarted.val);
   }
 
   bool isLarge(BuildContext context) =>

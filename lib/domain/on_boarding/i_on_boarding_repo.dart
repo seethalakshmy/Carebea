@@ -10,6 +10,13 @@ import '../../presentation/on_boarding/modules/personal_details/models/gender_li
 import '../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
 import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_response.dart';
 import 'models/common_response.dart';
+import '../../presentation/on_boarding/modules/preference/models/language_list_response.dart';
+import '../../presentation/on_boarding/modules/services/models/get_service_response.dart';
+import '../../presentation/on_boarding/modules/services/models/service_list_response.dart';
+import 'models/common_response.dart';
+import 'models/preferences/pet_list_response.dart';
+import 'models/preferences/preference_request_model.dart';
+import 'models/preferences/years_of_experience_response.dart';
 
 abstract class IOnBoardingRepo {
   Future<Either<ApiErrorHandler, GenderListResponse>> getGenderList();
@@ -33,6 +40,14 @@ abstract class IOnBoardingRepo {
   Future<Either<ApiErrorHandler, DocumentListResponse>> getDocumentList();
   Future<Either<ApiErrorHandler, RelationResponse>> getRelationList();
 
+  Future<Either<ApiErrorHandler, PetListResponse>> getPetList(
+      {required String searchKey});
+
+  Future<Either<ApiErrorHandler, LanguageListResponse>> getLanguageList({
+    required String page,
+    required String searchKey,
+  });
+
   Future<Either<ApiErrorHandler, PersonalDetailsResponse>>
       personalDetailsSubmit(
           {required String userId,
@@ -52,16 +67,36 @@ abstract class IOnBoardingRepo {
           required List<String> documentList,
           required String profilePic});
 
-  Future<Either<ApiErrorHandler, CommentsAndReviewResponseModel>>
-      qualificationSubmit({
+  Future<Either<ApiErrorHandler, CommonResponse>> qualificationSubmit({
     required String userId,
     required bool haveHHARegistration,
-    HhaDetails? hhaDetails,
+    required HhaDetails hhaDetails,
     required bool haveBLSCertificate,
-    BlsOrFirstAidCertificateDetails? blsDetails,
+    required BlsOrFirstAidCertificateDetails blsDetails,
     required bool haveTBTest,
-    TbOrPpdTestDetails? tbDetails,
+    required TbOrPpdTestDetails tbDetails,
     required bool haveCovidVaccination,
-    CovidVaccinationDetails? covidDetails,
+    required CovidVaccinationDetails covidDetails,
   });
+
+  Future<Either<ApiErrorHandler, CommonResponse>> preferenceSubmit({
+    required String userId,
+    required String yearsOfExp,
+    required bool serveWithSmoker,
+    required bool willingToTransportation,
+    required bool willingToServeWithPets,
+    required List<PetsList> petsList,
+    required List<String> knownLanguages,
+  });
+
+  Future<Either<ApiErrorHandler, YearsOfExperienceResponse>>
+      getYearsOfExpResult();
+
+  Future<Either<ApiErrorHandler, CommonResponse>> servicesSubmit({
+    required String userId,
+    required ServicesModel services,
+  });
+
+  Future<Either<ApiErrorHandler, GetServiceResponse>> getServices(
+      {required String userId});
 }

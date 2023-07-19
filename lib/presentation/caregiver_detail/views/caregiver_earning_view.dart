@@ -1,12 +1,13 @@
 import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
-import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
 import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/bloc/caregiver_detail/caregiver_detail_bloc.dart';
 import '../../../core/enum.dart';
+import '../../../domain/caregiver_detail/model/caregiver_earning_list_response.dart';
 import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_card.dart';
 import '../../widget/custom_container.dart';
@@ -17,6 +18,7 @@ import '../../widget/custom_sizedbox.dart';
 import '../../widget/custom_text.dart';
 import '../../widget/empty_view.dart';
 import '../../widget/error_view.dart';
+import '../../widget/pagination_view.dart';
 import '../../widget/table_actions_view.dart';
 import '../../widget/table_column_view.dart';
 import '../../widget/table_loader_view.dart';
@@ -24,23 +26,57 @@ import '../../widget/table_row_view.dart';
 import '../../widget/table_status_box.dart';
 import '../widgets/earning_detail_left_view.dart';
 
-class CareGiverEarningView extends StatelessWidget {
+class CareGiverEarningView extends StatefulWidget {
   const CareGiverEarningView(
-      {required this.state, required this.earnings, Key? key})
+      {required this.bloc, required this.userId, Key? key})
       : super(key: key);
-  final CareGiverDetailState state;
-  final List<Earnings> earnings;
+  final CaregiverDetailBloc bloc;
+  final String userId;
+
+  @override
+  State<CareGiverEarningView> createState() => _CareGiverEarningViewState();
+}
+
+class _CareGiverEarningViewState extends State<CareGiverEarningView> {
+  List<Earnings> earnings = [];
+  int _totalItems = 1;
+  final int _limit = 10;
+  int _page = 1;
+  int _pageIndex = 0;
+  int _start = 0;
+  int _end = 10;
+
+  @override
+  void initState() {
+    super.initState();
+    _getCareGiverEarnings();
+  }
 
   @override
   Widget build(BuildContext context) {
     return CustomCard(
       elevation: DBL.seven.val,
-      child: CustomContainer(
-          child: state.isLoading
-              ? const TableLoaderView()
-              : state.isError
-                  ? ErrorView(isClientError: false, errorMessage: state.error)
-                  : _serviceView(context, earnings)),
+      child: BlocBuilder<CaregiverDetailBloc, CareGiverDetailState>(
+        builder: (context, state) {
+          CareGiverEarningsListResponse? value = state.earningsListResponse;
+          if (value?.status ?? false) {
+            earnings.clear();
+            if (value?.data?.earnings != null &&
+                value!.data!.earnings!.isNotEmpty) {
+              _totalItems = value.data?.totalCount ?? 1;
+              earnings.addAll(value.data?.earnings ?? []);
+              _updateData();
+            }
+          }
+          return CustomContainer(
+              child: state.isLoadingEarnings
+                  ? const TableLoaderView()
+                  : state.isError
+                      ? ErrorView(
+                          isClientError: false, errorMessage: state.error)
+                      : _serviceView(context, earnings));
+        },
+      ),
     );
   }
 
@@ -60,11 +96,16 @@ class CareGiverEarningView extends StatelessWidget {
                     height: (INT.ten.val + 1) * 48,
                     child: _earnTable(context),
                   ),
+                  CustomSizedBox(height: DBL.twenty.val),
+                  if (_totalItems > 10) _paginationView()
                 ],
               ),
             ),
           )
-        : const EmptyView(title: "No Services found!");
+        : const EmptyView(
+            title: "No Earnings found!",
+            isUnderTab: true,
+          );
   }
 
   _earnTable(BuildContext context) {
@@ -121,10 +162,11 @@ class CareGiverEarningView extends StatelessWidget {
         ],
         rows: earnings.asMap().entries.map((e) {
           var item = e.value;
+          _setIndex(e.key);
           return DataRow2(
             cells: [
               DataCell(_tableRowView(
-                getIndex(e.key).toString(),
+                _pageIndex.toString(),
               )),
               DataCell(_tableRowView(
                 item.serviceId.toString(),
@@ -161,8 +203,56 @@ class CareGiverEarningView extends StatelessWidget {
     );
   }
 
-  int getIndex(int index) {
-    return index + 1;
+  void _updateData() {
+    if (_page == 1) {
+      _start = 0;
+      _end = earnings.length < _limit ? earnings.length : _limit;
+    } else {
+      _start = (_page * _limit) - 10;
+      _end = _start + earnings.length;
+    }
+  }
+
+  _paginationView() {
+    final int totalPages = (_totalItems / _limit).ceil();
+    return PaginationView(
+        page: _page,
+        start: _start,
+        end: _end,
+        totalItems: _totalItems,
+        totalPages: totalPages,
+        onNextPressed: () {
+          if (_page < totalPages) {
+            _page = _page + 1;
+            _getCareGiverEarnings();
+          }
+        },
+        onItemPressed: (i) {
+          _page = i;
+          _getCareGiverEarnings();
+        },
+        onPreviousPressed: () {
+          if (_page > 1) {
+            _page = _page - 1;
+            _getCareGiverEarnings();
+          }
+        });
+  }
+
+  _getCareGiverEarnings() {
+    widget.bloc.add(CareGiverDetailEvent.getCareGiverEarningList(
+      userId: widget.userId,
+      page: _page,
+      limit: _limit,
+    ));
+  }
+
+  _setIndex(int index) {
+    if (_page == 1) {
+      _pageIndex = index + 1;
+    } else {
+      _pageIndex = ((_page * _limit) - 10) + index + 1;
+    }
   }
 
   _earningsDetailPopUp(BuildContext context, int status) {
@@ -414,6 +504,7 @@ class CareGiverEarningView extends StatelessWidget {
   }
 
   bool isLg(BuildContext context) => MediaQuery.of(context).size.width <= 976;
+
   bool isXs(BuildContext context) => MediaQuery.of(context).size.width <= 570;
 }
 
