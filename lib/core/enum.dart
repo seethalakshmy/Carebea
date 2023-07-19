@@ -307,7 +307,23 @@ enum AppString {
   emptyHHANo("Please enter HHA number"),
   emptyBLSNo("Please enter BLS certification number"),
   emptyTBNo("Please enter TB result number"),
-
+  serviceRequestManagement("Service Request Management"),
+  pendingServices("Pending Services"),
+  completedServices("Completed Services"),
+  cancelledRequest("Cancelled Request"),
+  upcomingRequest("Upcoming Request"),
+  onGoingRequest("Ongoing Request"),
+  decisionMakerIdAndName("Decision maker ID & Name"),
+  clientIdAndName("Client ID & Name"),
+  startDateAndTime("Start Date & Start Time"),
+  endDateAndTime("End Date & End Time"),
+  noOfMatchingIsShown("No of Matching list shown"),
+  cancelledBy("Cancelled By"),
+  extraFee("Extra Fee"),
+  tip("Tip"),
+  normalServiceRequest("Normal Service Booking"),
+  rebooking("Rebooking"),
+  refund("Refund"),
   agreementChckboxText(
       "I have read and agree to the home health aid agreement"),
   dummyAgreementText(
@@ -444,7 +460,6 @@ enum IMG {
   file("assets/icons/ic_file.svg"),
   roundClose("assets/icons/round_close.svg"),
   roundAdd("assets/icons/plus-circle.svg"),
-
   imageNotFound("assets/icons/image_not_found.png"),
   ssn("assets/icons/ic_ssn.svg"),
   warning("assets/icons/ic_warning.svg"),
