@@ -18,6 +18,7 @@ import '../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../routes/app_router.gr.dart';
 import '../widget/custom_text_field.dart';
 
+@RoutePage()
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -155,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
 
   CustomImage _logoView() {
     return CustomImage(
-     height: DBL.twoThirty.val,
+      height: DBL.twoThirty.val,
       path: IMG.blackLogoPng.val,
     );
   }

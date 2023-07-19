@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:admin_580_tech/application/bloc/user_management_detail/user_management_detail_bloc.dart';
 import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/enum.dart';
@@ -19,6 +20,7 @@ import '../../core/responsive.dart';
 import '../caregiver_detail/widgets/service_completion_and_rewards.dart';
 import '../caregiver_detail/widgets/svg_text.dart';
 
+@RoutePage()
 class UserManagementDetailPage extends StatefulWidget {
   const UserManagementDetailPage({Key? key}) : super(key: key);
 

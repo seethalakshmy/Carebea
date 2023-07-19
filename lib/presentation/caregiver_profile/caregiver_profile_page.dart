@@ -26,6 +26,7 @@ import '../widget/custom_button.dart';
 import '../widget/custom_text.dart';
 import '../widget/table_verification_button.dart';
 
+@RoutePage()
 class CareGiverProfilePage extends StatefulWidget {
   const CareGiverProfilePage({Key? key, @QueryParam('id') this.id = ''})
       : super(key: key);

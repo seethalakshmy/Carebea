@@ -24,9 +24,11 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import '../../core/custom_debugger.dart';
 import '../../core/responsive.dart';
 import '../routes/app_router.gr.dart';
+
 import '../side_menu/side_menu_page.dart';
 import '../widget/svg_text.dart';
 
+@RoutePage()
 class CareGiverDetailPage extends StatefulWidget {
   const CareGiverDetailPage({Key? key, @QueryParam('id') this.id = ''})
       : super(key: key);

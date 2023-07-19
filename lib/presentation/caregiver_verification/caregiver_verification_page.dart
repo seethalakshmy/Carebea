@@ -31,6 +31,7 @@ import '../widget/loader_view.dart';
 import '../widget/row_combo.dart';
 import 'widgets/approval_status_box.dart';
 
+@RoutePage()
 class CaregiverVerificationPage extends StatefulWidget {
   const CaregiverVerificationPage(
       {Key? key, @QueryParam('id') this.id = '', @QueryParam('page') this.page})

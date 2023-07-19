@@ -40,6 +40,7 @@ import '../widget/header_view.dart';
 import '../widget/table_actions_view.dart';
 import '../widget/table_column_view.dart';
 
+@RoutePage()
 class CareGiversPage extends StatefulWidget {
   const CareGiversPage({Key? key, @QueryParam('page') this.page})
       : super(key: key);

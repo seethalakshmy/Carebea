@@ -17,6 +17,7 @@ import '../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../core/custom_debugger.dart';
 import '../widget/custom_text_field.dart';
 
+@RoutePage()
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({Key? key}) : super(key: key);
 
@@ -29,7 +30,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   final FormValidationBloc _validationBloc = FormValidationBloc();
-  AutovalidateMode _validateMode =AutovalidateMode.disabled;
+  AutovalidateMode _validateMode = AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -64,11 +65,11 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
   SingleChildScrollView webView(BuildContext context, Size size) {
     return SingleChildScrollView(
-        child:Row(
-          children: [
-            _part1View(size, context),
-            _part2View(size),
-          ],
+      child: Row(
+        children: [
+          _part1View(size, context),
+          _part2View(size),
+        ],
       ),
     );
   }

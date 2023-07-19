@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:admin_580_tech/application/bloc/onboarding/onboarding_bloc.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/reference/reference_view.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/services/services_view.dart';
@@ -20,6 +21,7 @@ import 'modules/preference/preference_view.dart';
 import 'modules/qualification_details/qialification_view.dart';
 import 'modules/setup_compensation/setup_compensation_view.dart';
 
+@RoutePage()
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({Key? key}) : super(key: key);
 
@@ -61,10 +63,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   Widget _bodyView() {
     List<Widget> pages = [
-      ReferenceView(
-        onboardingBloc: _onboardingBloc,
-        pageController: controller,
-      ),
       PersonalDetailsView(
         onboardingBloc: _onboardingBloc,
         pageController: controller,
