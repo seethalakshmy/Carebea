@@ -7,10 +7,13 @@ import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/core/text_utils.dart';
 import 'package:admin_580_tech/core/theme.dart';
+import 'package:admin_580_tech/presentation/admin_creation/admin_creation_page.dart';
+import 'package:admin_580_tech/presentation/admins/admins_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/caregiver_verification_page.dart';
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
+import 'package:admin_580_tech/presentation/roles/role_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
@@ -23,6 +26,7 @@ import 'package:flutter/material.dart';
 import '../caregiver_creation/caregiver_creation_page.dart';
 import '../caregiver_detail/caregiver_detail_page.dart';
 import '../caregivers/caregivers_page.dart';
+import '../role_creation/role_creation_page.dart';
 import '../transaction_management/transaction_management_page.dart';
 import '../user_management/user_management_page.dart';
 import '../user_mangement_detail/user_managemet_detail_page.dart';
@@ -42,6 +46,11 @@ class _MenuBarState extends State<SideMenuPage> {
   final GlobalKey<ScaffoldState> _scaffoldDrawerKey =
       GlobalKey<ScaffoldState>();
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   final ScrollController _scrollController = ScrollController();
 
   ValueNotifier<bool> isOpen = ValueNotifier(true);
@@ -49,6 +58,8 @@ class _MenuBarState extends State<SideMenuPage> {
 
   Map<String, String> mainData = {
     AppString.dashboard.val: "",
+    AppString.roleManagement.val: "",
+    AppString.adminManagement.val: "",
     AppString.careAmbassador.val: "",
     AppString.userManagement.val: "",
     AppString.transactionManagement.val: "",
@@ -412,7 +423,7 @@ class _MenuBarState extends State<SideMenuPage> {
   }
 
   bool isSelected(Map<String, String> items, int index, TabsRouter tabsRouter) {
-    String path = tabsRouter.currentPath.replaceAll("admin/", "");
+    String path = tabsRouter.currentPath.replaceAll("admin/main/", "");
     CustomLog.log('path is $path');
     if (path == "/user-management-detail") {
       path = "user-management";
@@ -421,6 +432,10 @@ class _MenuBarState extends State<SideMenuPage> {
         path == AppString.careAmbassadorProfilePath.val ||
         path == AppString.careAmbassadorCreationPath.val) {
       path = "care-ambassador";
+    } else if (path == "role-manage") {
+      path = "role-management";
+    } else if (path == "admin-manage") {
+      path = "admin-management";
     }
     return items.keys.elementAt(index) == upperCase(path) ? true : false;
   }
@@ -436,6 +451,10 @@ class _MenuBarState extends State<SideMenuPage> {
     CaregiverCreationRoute(),
     OnboardingRoute(),
     CaregiverVerificationRoute(),
+    RolesRoute(),
+    RoleCreationRoute(),
+    AdminsRoute(),
+    AdminCreationRoute()
   ];
 
   int getRouteIndex(String route) {
@@ -458,6 +477,14 @@ class _MenuBarState extends State<SideMenuPage> {
       return 8;
     } else if (route == AppString.careAmbassadorVerification.val) {
       return 9;
+    } else if (route == AppString.roleManagement.val) {
+      return 10;
+    } else if (route == AppString.roleManage.val) {
+      return 11;
+    } else if (route == AppString.adminManagement.val) {
+      return 12;
+    } else if (route == AppString.adminManage.val) {
+      return 13;
     } else {
       return 0;
     }
@@ -483,6 +510,14 @@ class _MenuBarState extends State<SideMenuPage> {
       return const OnboardingPage();
     } else if (index == 9) {
       return const CaregiverVerificationPage();
+    } else if (index == 10) {
+      return const RolesPage();
+    } else if (index == 11) {
+      return const RoleCreationPage();
+    } else if (index == 12) {
+      return const AdminsPage();
+    } else if (index == 13) {
+      return const AdminCreationPage();
     } else {
       return const DashboardPage();
     }

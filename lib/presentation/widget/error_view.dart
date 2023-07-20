@@ -13,10 +13,12 @@ class ErrorView extends StatelessWidget {
   const ErrorView({
     required this.isClientError,
     required this.errorMessage,
+    this.isUnderTab = false,
     Key? key,
   }) : super(key: key);
   final String? errorMessage;
   final bool? isClientError;
+  final bool isUnderTab;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,13 @@ class ErrorView extends StatelessWidget {
                 CustomSizedBox(
                   height: DBL.sixty.val,
                 ),
-                SvgPicture.asset(IMG.notFound.val),
+                isUnderTab
+                    ? SvgPicture.asset(
+                        IMG.notFound.val,
+                        height: DBL.oneFifty.val,
+                        width: DBL.oneFifty.val,
+                      )
+                    : SvgPicture.asset(IMG.notFound.val),
                 CustomSizedBox(
                   height: DBL.ten.val,
                 ),
@@ -44,7 +52,7 @@ class ErrorView extends StatelessWidget {
                   height: DBL.fifteen.val,
                 ),
                 Visibility(
-                  visible: !isClientError!,
+                  visible: !isClientError! || isUnderTab,
                   child: _buildButton(context),
                 ),
               ],
@@ -73,7 +81,7 @@ class ErrorView extends StatelessWidget {
       errorMessage ?? "",
       style: TS().gPoppins(
         fontWeight: FW.bold.val,
-        fontSize: FS.font21.val,
+        fontSize: isUnderTab ? FS.font17.val : FS.font21.val,
       ),
     );
   }

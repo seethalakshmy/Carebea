@@ -20,6 +20,7 @@ class DocumentDetailsView extends StatelessWidget {
       required this.pageController,
       required this.dateController,
       required this.onChanged,
+      this.selectedDocumentType,
       required this.documentNumberController})
       : super(key: key);
   OnboardingBloc onboardingBloc;
@@ -31,7 +32,7 @@ class DocumentDetailsView extends StatelessWidget {
 
   String selectedDate = "";
 
-  String selectedDocumentType = "";
+  String? selectedDocumentType;
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +67,9 @@ class DocumentDetailsView extends StatelessWidget {
             _documentDetailsWidget(),
             _documentNoWidget(),
             CommonDatePickerWidget(
+              initialDate: DateTime.now(),
+              firstDate: DateTime.now(),
+              lastDate: DateTime(3000),
               dateController: dateController,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -102,9 +106,12 @@ class DocumentDetailsView extends StatelessWidget {
               items: onboardingBloc.documentList,
               onChange: (value) {
                 onChanged(value);
+                selectedDocumentType = value;
+                print(
+                    "selectedDocTypeValue is : $selectedDocumentType, nextClicked : $nextClicked");
               },
               errorText: nextClicked
-                  ? selectedDocumentType == ""
+                  ? selectedDocumentType!.isEmpty
                       ? AppString.emptyDocType.val
                       : ""
                   : "",

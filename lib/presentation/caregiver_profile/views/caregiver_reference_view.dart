@@ -4,6 +4,7 @@ import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
+import 'package:admin_580_tech/presentation/widget/empty_label_view.dart';
 import 'package:admin_580_tech/presentation/widget/row_combo.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ class CareGiverReferenceView extends StatefulWidget {
   const CareGiverReferenceView({Key? key, required this.state})
       : super(key: key);
   final CareGiverProfileState state;
+
   @override
   State<CareGiverReferenceView> createState() => _CareGiverReferenceViewState();
 }
@@ -26,7 +28,7 @@ class _CareGiverReferenceViewState extends State<CareGiverReferenceView> {
   @override
   void initState() {
     super.initState();
-    _mReference = widget.state.response?.data?.reference ?? [];
+    // _mReference = widget.state.response?.data?.reference ?? [];
   }
 
   @override
@@ -37,55 +39,56 @@ class _CareGiverReferenceViewState extends State<CareGiverReferenceView> {
     );
   }
 
-  SingleChildScrollView _bodyView() {
-    return SingleChildScrollView(
-      child: ExpansionPanelList(
-          elevation: DBL.one.val,
-          expandedHeaderPadding: EdgeInsets.only(
-            left: DBL.fifteen.val,
-          ),
-          dividerColor: AppColor.dividerColor2.val,
-          expansionCallback: (int index, bool isExpanded) {
-            setState(() {
-              _mReference![index].isExpanded = !isExpanded;
-            });
-          },
-          children: _mReference!.map((e) {
-            final int index = _mReference!.indexOf(e);
-            return ExpansionPanel(
-                canTapOnHeader: true,
-                backgroundColor: AppColor.white.val,
-                isExpanded: e.isExpanded,
-                headerBuilder: (BuildContext context, bool isExpanded) {
-                  return ListTile(
-                    title: CustomText(
-                      "${AppString.reference.val} ${index + 1}",
-                      style: TS().gRoboto(
-                          fontWeight: FW.w500.val,
-                          fontSize: FS.font15.val,
-                          color: AppColor.matBlack5.val),
-                    ),
-                  );
+  _bodyView() {
+    return _mReference!.isNotEmpty
+        ? SingleChildScrollView(
+            child: ExpansionPanelList(
+                elevation: DBL.one.val,
+                expandedHeaderPadding: EdgeInsets.only(
+                  left: DBL.fifteen.val,
+                ),
+                dividerColor: AppColor.dividerColor2.val,
+                expansionCallback: (int index, bool isExpanded) {
+                  setState(() {
+                    _mReference![index].isExpanded = !isExpanded;
+                  });
                 },
-                body: CustomPadding.only(
-                  left: DBL.thirty.val,
-                  child: !isLg(context)
-                      ? Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(flex: 2, child: _leftView(e)),
-                            Expanded(flex: 3, child: _rightView(e))
-                          ],
-                        )
-                      : Column(
-                          children: [
-                            _leftView(e),
-                            _rightView(e),
-                          ],
-                        ),
-                ));
-          }).toList()),
-    );
+                children: _mReference!.map((e) {
+                  final int index = _mReference!.indexOf(e);
+                  return ExpansionPanel(
+                      canTapOnHeader: true,
+                      backgroundColor: AppColor.white.val,
+                      isExpanded: e.isExpanded,
+                      headerBuilder: (BuildContext context, bool isExpanded) {
+                        return ListTile(
+                          title: CustomText(
+                            "${AppString.reference.val} ${index + 1}",
+                            style: TS().gRoboto(
+                                fontWeight: FW.w500.val,
+                                fontSize: FS.font15.val,
+                                color: AppColor.matBlack5.val),
+                          ),
+                        );
+                      },
+                      body: CustomPadding.only(
+                        left: DBL.thirty.val,
+                        child: !isLg(context)
+                            ? Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(flex: 2, child: _leftView(e)),
+                                  Expanded(flex: 3, child: _rightView(e))
+                                ],
+                              )
+                            : Column(
+                                children: [
+                                  _leftView(e),
+                                  _rightView(e),
+                                ],
+                              ),
+                      ));
+                }).toList()))
+        : EmptyLabelView(msg: AppString.noReferences.val);
   }
 
   Column _leftView(Reference e) {

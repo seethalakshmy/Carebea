@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../../core/enum.dart';
 import '../../core/responsive.dart';
+import 'common_button_loader_widget.dart';
 import 'custom_button.dart';
 import 'custom_container.dart';
 import 'custom_sizedbox.dart';
@@ -12,12 +13,14 @@ class CommonNextOrCancelButtons extends StatelessWidget {
       required this.onRightButtonPressed,
       required this.rightButtonName,
       required this.onLeftButtonPressed,
+      this.isLoading,
       required this.leftButtonName})
       : super(key: key);
   final String leftButtonName;
   final String rightButtonName;
   final Function() onLeftButtonPressed;
   final Function() onRightButtonPressed;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +43,15 @@ class CommonNextOrCancelButtons extends StatelessWidget {
             isOutlineButton: true,
           ),
           const CustomSizedBox(width: 20),
-          CustomButton(
-            height: 45,
-            minWidth: 120,
-            onPressed: onRightButtonPressed,
-            text: rightButtonName,
-            textColor: AppColor.white.val,
-          ),
+          isLoading ?? false
+              ? const CommonButtonLoaderWidget()
+              : CustomButton(
+                  height: 45,
+                  minWidth: 120,
+                  onPressed: onRightButtonPressed,
+                  text: rightButtonName,
+                  textColor: AppColor.white.val,
+                ),
         ],
       ),
     );

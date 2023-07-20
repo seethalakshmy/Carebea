@@ -1,6 +1,7 @@
 import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_verification_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/reject_params.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
+import 'package:admin_580_tech/domain/common_response/common_response.dart';
 import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.dart';
 import 'package:dartz/dartz.dart';
 
@@ -21,6 +22,9 @@ abstract class ICareGiverVerificationRepo {
   Future<Either<ApiErrorHandler, VerifyResponse>> careGiverCertificateReject(
       {required RejectionParams params});
   Future<Either<ApiErrorHandler, VerifyResponse>> careGiverSendTrainingRequest({
+    required String userID,
+  });
+  Future<Either<ApiErrorHandler, CommonResponseUse>> notifyPendingDocument({
     required String userID,
   });
 }

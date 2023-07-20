@@ -6,7 +6,6 @@ import 'dart:convert';
 
 YearsOfExperienceResponse yearsOfExperienceResponseFromJson(String str) =>
     YearsOfExperienceResponse.fromJson(json.decode(str));
-
 String yearsOfExperienceResponseToJson(YearsOfExperienceResponse data) =>
     json.encode(data.toJson());
 
@@ -14,7 +13,7 @@ class YearsOfExperienceResponse {
   YearsOfExperienceResponse({
     bool? status,
     String? message,
-    List<YearOfExperienceData>? data,
+    List<YearData>? data,
   }) {
     _status = status;
     _message = message;
@@ -27,31 +26,26 @@ class YearsOfExperienceResponse {
     if (json['data'] != null) {
       _data = [];
       json['data'].forEach((v) {
-        _data?.add(YearOfExperienceData.fromJson(v));
+        _data?.add(YearData.fromJson(v));
       });
     }
   }
-
   bool? _status;
   String? _message;
-  List<YearOfExperienceData>? _data;
-
+  List<YearData>? _data;
   YearsOfExperienceResponse copyWith({
     bool? status,
     String? message,
-    List<YearOfExperienceData>? data,
+    List<YearData>? data,
   }) =>
       YearsOfExperienceResponse(
         status: status ?? _status,
         message: message ?? _message,
         data: data ?? _data,
       );
-
   bool? get status => _status;
-
   String? get message => _message;
-
-  List<YearOfExperienceData>? get data => _data;
+  List<YearData>? get data => _data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -67,13 +61,11 @@ class YearsOfExperienceResponse {
 /// _id : "643e659563e7736ada368134"
 /// year : "Less than 1 year"
 
-YearOfExperienceData dataFromJson(String str) =>
-    YearOfExperienceData.fromJson(json.decode(str));
+YearData dataFromJson(String str) => YearData.fromJson(json.decode(str));
+String dataToJson(YearData data) => json.encode(data.toJson());
 
-String dataToJson(YearOfExperienceData data) => json.encode(data.toJson());
-
-class YearOfExperienceData {
-  YearOfExperienceData({
+class YearData {
+  YearData({
     String? id,
     String? year,
   }) {
@@ -81,25 +73,21 @@ class YearOfExperienceData {
     _year = year;
   }
 
-  YearOfExperienceData.fromJson(dynamic json) {
+  YearData.fromJson(dynamic json) {
     _id = json['_id'];
     _year = json['year'];
   }
-
   String? _id;
   String? _year;
-
-  YearOfExperienceData copyWith({
+  YearData copyWith({
     String? id,
     String? year,
   }) =>
-      YearOfExperienceData(
+      YearData(
         id: id ?? _id,
         year: year ?? _year,
       );
-
   String? get id => _id;
-
   String? get year => _year;
 
   Map<String, dynamic> toJson() {

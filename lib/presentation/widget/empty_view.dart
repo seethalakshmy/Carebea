@@ -1,7 +1,4 @@
-import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
-import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -48,28 +45,9 @@ class EmptyView extends StatelessWidget {
             CustomSizedBox(
               height: DBL.fifteen.val,
             ),
-            isUnderTab ? CustomSizedBox.shrink() : _buildButton(context),
           ],
         ),
       ),
-    );
-  }
-
-  CustomButton _buildButton(BuildContext context) {
-    return CustomButton(
-      color: AppColor.primaryColor.val,
-      text: AppString.backToDashBoard.val,
-      borderRadius: DBL.ten.val,
-      textStyle: TS().gPoppins(
-        fontWeight: FW.w500.val,
-        fontSize: FS.font16.val,
-      ),
-      padding: EdgeInsets.symmetric(
-          vertical: DBL.twentyFive.val, horizontal: DBL.fifty.val),
-      onPressed: () {
-        context.router.navigate(const DashboardRoute());
-      },
-      icon: Icon(Icons.home, size: DBL.eighteen.val),
     );
   }
 
