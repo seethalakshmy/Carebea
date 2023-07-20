@@ -3,15 +3,17 @@ part of 'caregiver_detail_bloc.dart';
 @freezed
 class CareGiverDetailEvent with _$CareGiverDetailEvent {
   const factory CareGiverDetailEvent.getCareGiverDetail(
-      {required String userId}) = _GetCareGiverDetail;
+      {required String userId, required String adminId}) = _GetCareGiverDetail;
 
   const factory CareGiverDetailEvent.getCareGiverServiceList(
       {required String userId,
+      required String adminId,
       required int page,
       required int limit}) = _GetCareGiverServiceList;
 
   const factory CareGiverDetailEvent.getCareGiverEarningList(
       {required String userId,
+      required String adminId,
       required int page,
       required int limit}) = _GetCareGiverEarningList;
 

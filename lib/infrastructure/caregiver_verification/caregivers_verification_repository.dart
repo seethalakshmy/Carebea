@@ -41,11 +41,14 @@ class CareGiverVerificationRepository implements ICareGiverVerificationRepo {
 
   @override
   Future<Either<ApiErrorHandler, VerifyResponse>> careGiverCertificateApprove(
-      {required String userID, required int status}) async {
+      {required String userID,
+      required String adminId,
+      required int status}) async {
     try {
       final response = await _apiClient.careGiverCertificateApprove(
         "",
         userID,
+        adminId,
         status,
       );
       return Right(response);
@@ -66,10 +69,16 @@ class CareGiverVerificationRepository implements ICareGiverVerificationRepo {
   Future<Either<ApiErrorHandler, VerifyResponse>> careGiverBackgroundVerify(
       {required String userID,
       required int status,
+      required String adminId,
       String? rejectReason}) async {
     try {
       final response = await _apiClient.careGiverBackgroundVerify(
-          "", userID, status, rejectReason);
+        "",
+        userID,
+        status,
+        adminId,
+        rejectReason,
+      );
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverVerificationRepository: ${e.message}");
@@ -105,12 +114,10 @@ class CareGiverVerificationRepository implements ICareGiverVerificationRepo {
 
   @override
   Future<Either<ApiErrorHandler, VerifyResponse>> careGiverSendTrainingRequest(
-      {required String userID}) async {
+      {required String userID, required String adminId}) async {
     try {
-      final response = await _apiClient.careGiverSendTrainingRequest(
-        "",
-        userID,
-      );
+      final response =
+          await _apiClient.careGiverSendTrainingRequest("", userID, adminId);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverVerificationRepository: ${e.message}");

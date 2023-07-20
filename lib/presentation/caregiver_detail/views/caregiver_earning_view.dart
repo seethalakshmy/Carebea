@@ -244,6 +244,7 @@ class _CareGiverEarningViewState extends State<CareGiverEarningView> {
       userId: widget.userId,
       page: _page,
       limit: _limit,
+      adminId: widget.userId,
     ));
   }
 

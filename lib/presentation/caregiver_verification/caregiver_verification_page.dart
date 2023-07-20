@@ -66,6 +66,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
 
   final AutovalidateMode _validateMode = AutovalidateMode.disabled;
   String userId = "";
+  String adminId = "";
   int? _page;
   int? _tab;
   RejectionParams? rejectionParams;
@@ -73,12 +74,14 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
   @override
   void initState() {
     userId = autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
+    adminId =
+        autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
     _page = autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
     _tab = autoTabRouter?.currentChild?.queryParams.getInt('tab', 0);
     super.initState();
     context.read<CareGiverVerificationBloc>().add(
         CareGiverVerificationEvent.getVerificationData(
-            userId: userId, context: context));
+            userId: userId, context: context, adminId: adminId));
   }
 
   @override
@@ -201,7 +204,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
               if (status != Verification.trainingStarted.val) {
                 context.read<CareGiverVerificationBloc>().add(
                     CareGiverVerificationEvent.careGiverTrainingVerify(
-                        userId: userId, context: context, page: _page));
+                        userId: userId, context: context, page: _page, adminId: userId));
               } else {
                 autoTabRouter?.navigate(CareGiverProfileRoute(id: userId));
               }
@@ -870,7 +873,10 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
             onTapApprove: () {
               context.read<CareGiverVerificationBloc>().add(
                   CareGiverVerificationEvent.careGiverBackgroundVerify(
-                      userID: userId, status: 1, context: context));
+                      userID: userId,
+                      status: 1,
+                      context: context,
+                      adminId: adminId));
             },
             onTapReject: () {
               _reasonNode.requestFocus();
@@ -879,7 +885,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                       userID: userId,
                       status: 2,
                       rejectReason: _reasonController.text.trim(),
-                      context: context));
+                      context: context,
+                      adminId: adminId));
             },
           )
         : CustomSizedBox.shrink();

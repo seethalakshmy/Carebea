@@ -39,7 +39,8 @@ class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
             limit: event.limit,
             type: event.type,
             searchTerm: event.searchTerm,
-            filterId: event.filterId);
+            filterId: event.filterId,
+            adminId: event.adminId);
     CareGiversState homeState = homeResult.fold((l) {
       return state.copyWith(
         error: l.error,
@@ -71,6 +72,7 @@ class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
         await careGiverListRepository.careGiverActiveOrInactive(
       userID: event.userId,
       status: event.status,
+      adminId: event.adminId,
     );
     var userState = result.fold((l) {
       CSnackBar.showError(event.context, msg: l.error);

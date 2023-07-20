@@ -41,12 +41,15 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
   String _userId = "";
+  String _adminId = "";
   late CareGiverProfileBloc _careGiverProfileBloc;
 
   @override
   void initState() {
     tabController = TabController(vsync: this, length: 7);
     _userId =
+        autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
+    _adminId =
         autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
     _careGiverProfileBloc = CareGiverProfileBloc(CareGiverProfileRepository());
     super.initState();
@@ -66,7 +69,8 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
   BlocProvider<CareGiverProfileBloc> _rebuildView() {
     return BlocProvider(
       create: (context) => _careGiverProfileBloc
-        ..add(CareGiverProfileEvent.getCareGiverProfile(userId: _userId)),
+        ..add(CareGiverProfileEvent.getCareGiverProfile(
+            userId: _userId, adminId: _adminId)),
       child: BlocBuilder<CareGiverProfileBloc, CareGiverProfileState>(
         builder: (context, state) {
           return state.isLoading
@@ -361,11 +365,17 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
         if (status == Verification.trainingStarted.val) {
           _careGiverProfileBloc.add(
               CareGiverProfileEvent.careGiverTrainingVerify(
-                  userId: _userId, status: false, context: context));
+                  userId: _userId,
+                  status: false,
+                  context: context,
+                  adminId: ''));
         } else {
           _careGiverProfileBloc.add(
               CareGiverProfileEvent.careGiverInterViewVerify(
-                  userId: _userId, status: false, context: context));
+                  userId: _userId,
+                  status: false,
+                  context: context,
+                  adminId: _adminId));
         }
       },
       color: AppColor.white.val,
@@ -388,11 +398,17 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
         if (status == Verification.trainingStarted.val) {
           _careGiverProfileBloc.add(
               CareGiverProfileEvent.careGiverTrainingVerify(
-                  userId: _userId, status: true, context: context));
+                  userId: _userId,
+                  status: true,
+                  context: context,
+                  adminId: _adminId));
         } else {
           _careGiverProfileBloc.add(
               CareGiverProfileEvent.careGiverInterViewVerify(
-                  userId: _userId, status: true, context: context));
+                  userId: _userId,
+                  status: true,
+                  context: context,
+                  adminId: _adminId));
         }
       },
       borderRadius: DBL.five.val,

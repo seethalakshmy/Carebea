@@ -340,4 +340,22 @@ class OnBoardingRepository implements IOnBoardingRepo {
       }
     }
   }
+
+  @override
+  Future<Either<ApiErrorHandler, RelationResponse>> getRelationList() async {
+    try {
+      final response = await apiClient.getRelationList();
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
 }

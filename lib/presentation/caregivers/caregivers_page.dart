@@ -115,6 +115,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
           limit: _limit,
           type: _tabType,
           filterId: _filterId,
+          adminId: _adminUserId,
         )),
       child: _bodyView(),
     );
@@ -488,7 +489,8 @@ class _CareGiversPageState extends State<CareGiversPage> {
             caregiver: item,
             status: item.isActive ?? false,
             userId: item.userId ?? "",
-            context: context));
+            context: context,
+            adminId: item.userId ?? ""));
       },
     );
   }
@@ -555,7 +557,8 @@ class _CareGiversPageState extends State<CareGiversPage> {
         filterId: _filterId,
         searchTerm: _searchController.text.trim().isNotEmpty
             ? _searchController.text.trim()
-            : null));
+            : null,
+        adminId: _adminUserId));
   }
 
   bool _isXs(context) => MediaQuery.of(context).size.width <= 544;

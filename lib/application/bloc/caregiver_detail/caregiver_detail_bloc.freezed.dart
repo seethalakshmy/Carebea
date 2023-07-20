@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'caregiver_detail_bloc.dart';
 
@@ -18,10 +18,12 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CareGiverDetailEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId) getCareGiverDetail,
-    required TResult Function(String userId, int page, int limit)
+    required TResult Function(String userId, String adminId) getCareGiverDetail,
+    required TResult Function(
+            String userId, String adminId, int page, int limit)
         getCareGiverServiceList,
-    required TResult Function(String userId, int page, int limit)
+    required TResult Function(
+            String userId, String adminId, int page, int limit)
         getCareGiverEarningList,
     required TResult Function(String userId, int page, int limit)
         getCareGiverServiceRequestList,
@@ -32,10 +34,10 @@ mixin _$CareGiverDetailEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? getCareGiverDetail,
-    TResult? Function(String userId, int page, int limit)?
+    TResult? Function(String userId, String adminId)? getCareGiverDetail,
+    TResult? Function(String userId, String adminId, int page, int limit)?
         getCareGiverServiceList,
-    TResult? Function(String userId, int page, int limit)?
+    TResult? Function(String userId, String adminId, int page, int limit)?
         getCareGiverEarningList,
     TResult? Function(String userId, int page, int limit)?
         getCareGiverServiceRequestList,
@@ -45,10 +47,10 @@ mixin _$CareGiverDetailEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? getCareGiverDetail,
-    TResult Function(String userId, int page, int limit)?
+    TResult Function(String userId, String adminId)? getCareGiverDetail,
+    TResult Function(String userId, String adminId, int page, int limit)?
         getCareGiverServiceList,
-    TResult Function(String userId, int page, int limit)?
+    TResult Function(String userId, String adminId, int page, int limit)?
         getCareGiverEarningList,
     TResult Function(String userId, int page, int limit)?
         getCareGiverServiceRequestList,
@@ -123,7 +125,7 @@ abstract class _$$_GetCareGiverDetailCopyWith<$Res> {
           $Res Function(_$_GetCareGiverDetail) then) =
       __$$_GetCareGiverDetailCopyWithImpl<$Res>;
   @useResult
-  $Res call({String userId});
+  $Res call({String userId, String adminId});
 }
 
 /// @nodoc
@@ -138,11 +140,16 @@ class __$$_GetCareGiverDetailCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = null,
+    Object? adminId = null,
   }) {
     return _then(_$_GetCareGiverDetail(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      adminId: null == adminId
+          ? _value.adminId
+          : adminId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -151,14 +158,16 @@ class __$$_GetCareGiverDetailCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_GetCareGiverDetail implements _GetCareGiverDetail {
-  const _$_GetCareGiverDetail({required this.userId});
+  const _$_GetCareGiverDetail({required this.userId, required this.adminId});
 
   @override
   final String userId;
+  @override
+  final String adminId;
 
   @override
   String toString() {
-    return 'CareGiverDetailEvent.getCareGiverDetail(userId: $userId)';
+    return 'CareGiverDetailEvent.getCareGiverDetail(userId: $userId, adminId: $adminId)';
   }
 
   @override
@@ -166,11 +175,12 @@ class _$_GetCareGiverDetail implements _GetCareGiverDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_GetCareGiverDetail &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.adminId, adminId) || other.adminId == adminId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId);
+  int get hashCode => Object.hash(runtimeType, userId, adminId);
 
   @JsonKey(ignore: true)
   @override
@@ -182,10 +192,12 @@ class _$_GetCareGiverDetail implements _GetCareGiverDetail {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId) getCareGiverDetail,
-    required TResult Function(String userId, int page, int limit)
+    required TResult Function(String userId, String adminId) getCareGiverDetail,
+    required TResult Function(
+            String userId, String adminId, int page, int limit)
         getCareGiverServiceList,
-    required TResult Function(String userId, int page, int limit)
+    required TResult Function(
+            String userId, String adminId, int page, int limit)
         getCareGiverEarningList,
     required TResult Function(String userId, int page, int limit)
         getCareGiverServiceRequestList,
@@ -193,32 +205,32 @@ class _$_GetCareGiverDetail implements _GetCareGiverDetail {
     required TResult Function(List<ServiceDates> services)
         getSelectedScheduleServices,
   }) {
-    return getCareGiverDetail(userId);
+    return getCareGiverDetail(userId, adminId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? getCareGiverDetail,
-    TResult? Function(String userId, int page, int limit)?
+    TResult? Function(String userId, String adminId)? getCareGiverDetail,
+    TResult? Function(String userId, String adminId, int page, int limit)?
         getCareGiverServiceList,
-    TResult? Function(String userId, int page, int limit)?
+    TResult? Function(String userId, String adminId, int page, int limit)?
         getCareGiverEarningList,
     TResult? Function(String userId, int page, int limit)?
         getCareGiverServiceRequestList,
     TResult? Function(DateTime selectedDate)? getSelectedDate,
     TResult? Function(List<ServiceDates> services)? getSelectedScheduleServices,
   }) {
-    return getCareGiverDetail?.call(userId);
+    return getCareGiverDetail?.call(userId, adminId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? getCareGiverDetail,
-    TResult Function(String userId, int page, int limit)?
+    TResult Function(String userId, String adminId)? getCareGiverDetail,
+    TResult Function(String userId, String adminId, int page, int limit)?
         getCareGiverServiceList,
-    TResult Function(String userId, int page, int limit)?
+    TResult Function(String userId, String adminId, int page, int limit)?
         getCareGiverEarningList,
     TResult Function(String userId, int page, int limit)?
         getCareGiverServiceRequestList,
@@ -227,7 +239,7 @@ class _$_GetCareGiverDetail implements _GetCareGiverDetail {
     required TResult orElse(),
   }) {
     if (getCareGiverDetail != null) {
-      return getCareGiverDetail(userId);
+      return getCareGiverDetail(userId, adminId);
     }
     return orElse();
   }
@@ -285,10 +297,12 @@ class _$_GetCareGiverDetail implements _GetCareGiverDetail {
 }
 
 abstract class _GetCareGiverDetail implements CareGiverDetailEvent {
-  const factory _GetCareGiverDetail({required final String userId}) =
-      _$_GetCareGiverDetail;
+  const factory _GetCareGiverDetail(
+      {required final String userId,
+      required final String adminId}) = _$_GetCareGiverDetail;
 
   String get userId;
+  String get adminId;
   @JsonKey(ignore: true)
   _$$_GetCareGiverDetailCopyWith<_$_GetCareGiverDetail> get copyWith =>
       throw _privateConstructorUsedError;
@@ -300,7 +314,7 @@ abstract class _$$_GetCareGiverServiceListCopyWith<$Res> {
           $Res Function(_$_GetCareGiverServiceList) then) =
       __$$_GetCareGiverServiceListCopyWithImpl<$Res>;
   @useResult
-  $Res call({String userId, int page, int limit});
+  $Res call({String userId, String adminId, int page, int limit});
 }
 
 /// @nodoc
@@ -315,6 +329,7 @@ class __$$_GetCareGiverServiceListCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = null,
+    Object? adminId = null,
     Object? page = null,
     Object? limit = null,
   }) {
@@ -322,6 +337,10 @@ class __$$_GetCareGiverServiceListCopyWithImpl<$Res>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      adminId: null == adminId
+          ? _value.adminId
+          : adminId // ignore: cast_nullable_to_non_nullable
               as String,
       page: null == page
           ? _value.page
@@ -339,10 +358,15 @@ class __$$_GetCareGiverServiceListCopyWithImpl<$Res>
 
 class _$_GetCareGiverServiceList implements _GetCareGiverServiceList {
   const _$_GetCareGiverServiceList(
-      {required this.userId, required this.page, required this.limit});
+      {required this.userId,
+      required this.adminId,
+      required this.page,
+      required this.limit});
 
   @override
   final String userId;
+  @override
+  final String adminId;
   @override
   final int page;
   @override
@@ -350,7 +374,7 @@ class _$_GetCareGiverServiceList implements _GetCareGiverServiceList {
 
   @override
   String toString() {
-    return 'CareGiverDetailEvent.getCareGiverServiceList(userId: $userId, page: $page, limit: $limit)';
+    return 'CareGiverDetailEvent.getCareGiverServiceList(userId: $userId, adminId: $adminId, page: $page, limit: $limit)';
   }
 
   @override
@@ -359,12 +383,13 @@ class _$_GetCareGiverServiceList implements _GetCareGiverServiceList {
         (other.runtimeType == runtimeType &&
             other is _$_GetCareGiverServiceList &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.adminId, adminId) || other.adminId == adminId) &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.limit, limit) || other.limit == limit));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId, page, limit);
+  int get hashCode => Object.hash(runtimeType, userId, adminId, page, limit);
 
   @JsonKey(ignore: true)
   @override
@@ -377,10 +402,12 @@ class _$_GetCareGiverServiceList implements _GetCareGiverServiceList {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId) getCareGiverDetail,
-    required TResult Function(String userId, int page, int limit)
+    required TResult Function(String userId, String adminId) getCareGiverDetail,
+    required TResult Function(
+            String userId, String adminId, int page, int limit)
         getCareGiverServiceList,
-    required TResult Function(String userId, int page, int limit)
+    required TResult Function(
+            String userId, String adminId, int page, int limit)
         getCareGiverEarningList,
     required TResult Function(String userId, int page, int limit)
         getCareGiverServiceRequestList,
@@ -388,32 +415,32 @@ class _$_GetCareGiverServiceList implements _GetCareGiverServiceList {
     required TResult Function(List<ServiceDates> services)
         getSelectedScheduleServices,
   }) {
-    return getCareGiverServiceList(userId, page, limit);
+    return getCareGiverServiceList(userId, adminId, page, limit);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? getCareGiverDetail,
-    TResult? Function(String userId, int page, int limit)?
+    TResult? Function(String userId, String adminId)? getCareGiverDetail,
+    TResult? Function(String userId, String adminId, int page, int limit)?
         getCareGiverServiceList,
-    TResult? Function(String userId, int page, int limit)?
+    TResult? Function(String userId, String adminId, int page, int limit)?
         getCareGiverEarningList,
     TResult? Function(String userId, int page, int limit)?
         getCareGiverServiceRequestList,
     TResult? Function(DateTime selectedDate)? getSelectedDate,
     TResult? Function(List<ServiceDates> services)? getSelectedScheduleServices,
   }) {
-    return getCareGiverServiceList?.call(userId, page, limit);
+    return getCareGiverServiceList?.call(userId, adminId, page, limit);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? getCareGiverDetail,
-    TResult Function(String userId, int page, int limit)?
+    TResult Function(String userId, String adminId)? getCareGiverDetail,
+    TResult Function(String userId, String adminId, int page, int limit)?
         getCareGiverServiceList,
-    TResult Function(String userId, int page, int limit)?
+    TResult Function(String userId, String adminId, int page, int limit)?
         getCareGiverEarningList,
     TResult Function(String userId, int page, int limit)?
         getCareGiverServiceRequestList,
@@ -422,7 +449,7 @@ class _$_GetCareGiverServiceList implements _GetCareGiverServiceList {
     required TResult orElse(),
   }) {
     if (getCareGiverServiceList != null) {
-      return getCareGiverServiceList(userId, page, limit);
+      return getCareGiverServiceList(userId, adminId, page, limit);
     }
     return orElse();
   }
@@ -482,10 +509,12 @@ class _$_GetCareGiverServiceList implements _GetCareGiverServiceList {
 abstract class _GetCareGiverServiceList implements CareGiverDetailEvent {
   const factory _GetCareGiverServiceList(
       {required final String userId,
+      required final String adminId,
       required final int page,
       required final int limit}) = _$_GetCareGiverServiceList;
 
   String get userId;
+  String get adminId;
   int get page;
   int get limit;
   @JsonKey(ignore: true)
@@ -499,7 +528,7 @@ abstract class _$$_GetCareGiverEarningListCopyWith<$Res> {
           $Res Function(_$_GetCareGiverEarningList) then) =
       __$$_GetCareGiverEarningListCopyWithImpl<$Res>;
   @useResult
-  $Res call({String userId, int page, int limit});
+  $Res call({String userId, String adminId, int page, int limit});
 }
 
 /// @nodoc
@@ -514,6 +543,7 @@ class __$$_GetCareGiverEarningListCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = null,
+    Object? adminId = null,
     Object? page = null,
     Object? limit = null,
   }) {
@@ -521,6 +551,10 @@ class __$$_GetCareGiverEarningListCopyWithImpl<$Res>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      adminId: null == adminId
+          ? _value.adminId
+          : adminId // ignore: cast_nullable_to_non_nullable
               as String,
       page: null == page
           ? _value.page
@@ -538,10 +572,15 @@ class __$$_GetCareGiverEarningListCopyWithImpl<$Res>
 
 class _$_GetCareGiverEarningList implements _GetCareGiverEarningList {
   const _$_GetCareGiverEarningList(
-      {required this.userId, required this.page, required this.limit});
+      {required this.userId,
+      required this.adminId,
+      required this.page,
+      required this.limit});
 
   @override
   final String userId;
+  @override
+  final String adminId;
   @override
   final int page;
   @override
@@ -549,7 +588,7 @@ class _$_GetCareGiverEarningList implements _GetCareGiverEarningList {
 
   @override
   String toString() {
-    return 'CareGiverDetailEvent.getCareGiverEarningList(userId: $userId, page: $page, limit: $limit)';
+    return 'CareGiverDetailEvent.getCareGiverEarningList(userId: $userId, adminId: $adminId, page: $page, limit: $limit)';
   }
 
   @override
@@ -558,12 +597,13 @@ class _$_GetCareGiverEarningList implements _GetCareGiverEarningList {
         (other.runtimeType == runtimeType &&
             other is _$_GetCareGiverEarningList &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.adminId, adminId) || other.adminId == adminId) &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.limit, limit) || other.limit == limit));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId, page, limit);
+  int get hashCode => Object.hash(runtimeType, userId, adminId, page, limit);
 
   @JsonKey(ignore: true)
   @override
@@ -576,10 +616,12 @@ class _$_GetCareGiverEarningList implements _GetCareGiverEarningList {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId) getCareGiverDetail,
-    required TResult Function(String userId, int page, int limit)
+    required TResult Function(String userId, String adminId) getCareGiverDetail,
+    required TResult Function(
+            String userId, String adminId, int page, int limit)
         getCareGiverServiceList,
-    required TResult Function(String userId, int page, int limit)
+    required TResult Function(
+            String userId, String adminId, int page, int limit)
         getCareGiverEarningList,
     required TResult Function(String userId, int page, int limit)
         getCareGiverServiceRequestList,
@@ -587,32 +629,32 @@ class _$_GetCareGiverEarningList implements _GetCareGiverEarningList {
     required TResult Function(List<ServiceDates> services)
         getSelectedScheduleServices,
   }) {
-    return getCareGiverEarningList(userId, page, limit);
+    return getCareGiverEarningList(userId, adminId, page, limit);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? getCareGiverDetail,
-    TResult? Function(String userId, int page, int limit)?
+    TResult? Function(String userId, String adminId)? getCareGiverDetail,
+    TResult? Function(String userId, String adminId, int page, int limit)?
         getCareGiverServiceList,
-    TResult? Function(String userId, int page, int limit)?
+    TResult? Function(String userId, String adminId, int page, int limit)?
         getCareGiverEarningList,
     TResult? Function(String userId, int page, int limit)?
         getCareGiverServiceRequestList,
     TResult? Function(DateTime selectedDate)? getSelectedDate,
     TResult? Function(List<ServiceDates> services)? getSelectedScheduleServices,
   }) {
-    return getCareGiverEarningList?.call(userId, page, limit);
+    return getCareGiverEarningList?.call(userId, adminId, page, limit);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? getCareGiverDetail,
-    TResult Function(String userId, int page, int limit)?
+    TResult Function(String userId, String adminId)? getCareGiverDetail,
+    TResult Function(String userId, String adminId, int page, int limit)?
         getCareGiverServiceList,
-    TResult Function(String userId, int page, int limit)?
+    TResult Function(String userId, String adminId, int page, int limit)?
         getCareGiverEarningList,
     TResult Function(String userId, int page, int limit)?
         getCareGiverServiceRequestList,
@@ -621,7 +663,7 @@ class _$_GetCareGiverEarningList implements _GetCareGiverEarningList {
     required TResult orElse(),
   }) {
     if (getCareGiverEarningList != null) {
-      return getCareGiverEarningList(userId, page, limit);
+      return getCareGiverEarningList(userId, adminId, page, limit);
     }
     return orElse();
   }
@@ -681,10 +723,12 @@ class _$_GetCareGiverEarningList implements _GetCareGiverEarningList {
 abstract class _GetCareGiverEarningList implements CareGiverDetailEvent {
   const factory _GetCareGiverEarningList(
       {required final String userId,
+      required final String adminId,
       required final int page,
       required final int limit}) = _$_GetCareGiverEarningList;
 
   String get userId;
+  String get adminId;
   int get page;
   int get limit;
   @JsonKey(ignore: true)
@@ -778,10 +822,12 @@ class _$_GetCareGiverServiceRequestList
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId) getCareGiverDetail,
-    required TResult Function(String userId, int page, int limit)
+    required TResult Function(String userId, String adminId) getCareGiverDetail,
+    required TResult Function(
+            String userId, String adminId, int page, int limit)
         getCareGiverServiceList,
-    required TResult Function(String userId, int page, int limit)
+    required TResult Function(
+            String userId, String adminId, int page, int limit)
         getCareGiverEarningList,
     required TResult Function(String userId, int page, int limit)
         getCareGiverServiceRequestList,
@@ -795,10 +841,10 @@ class _$_GetCareGiverServiceRequestList
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? getCareGiverDetail,
-    TResult? Function(String userId, int page, int limit)?
+    TResult? Function(String userId, String adminId)? getCareGiverDetail,
+    TResult? Function(String userId, String adminId, int page, int limit)?
         getCareGiverServiceList,
-    TResult? Function(String userId, int page, int limit)?
+    TResult? Function(String userId, String adminId, int page, int limit)?
         getCareGiverEarningList,
     TResult? Function(String userId, int page, int limit)?
         getCareGiverServiceRequestList,
@@ -811,10 +857,10 @@ class _$_GetCareGiverServiceRequestList
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? getCareGiverDetail,
-    TResult Function(String userId, int page, int limit)?
+    TResult Function(String userId, String adminId)? getCareGiverDetail,
+    TResult Function(String userId, String adminId, int page, int limit)?
         getCareGiverServiceList,
-    TResult Function(String userId, int page, int limit)?
+    TResult Function(String userId, String adminId, int page, int limit)?
         getCareGiverEarningList,
     TResult Function(String userId, int page, int limit)?
         getCareGiverServiceRequestList,
@@ -959,10 +1005,12 @@ class _$_GetSelectedDate implements _GetSelectedDate {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId) getCareGiverDetail,
-    required TResult Function(String userId, int page, int limit)
+    required TResult Function(String userId, String adminId) getCareGiverDetail,
+    required TResult Function(
+            String userId, String adminId, int page, int limit)
         getCareGiverServiceList,
-    required TResult Function(String userId, int page, int limit)
+    required TResult Function(
+            String userId, String adminId, int page, int limit)
         getCareGiverEarningList,
     required TResult Function(String userId, int page, int limit)
         getCareGiverServiceRequestList,
@@ -976,10 +1024,10 @@ class _$_GetSelectedDate implements _GetSelectedDate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? getCareGiverDetail,
-    TResult? Function(String userId, int page, int limit)?
+    TResult? Function(String userId, String adminId)? getCareGiverDetail,
+    TResult? Function(String userId, String adminId, int page, int limit)?
         getCareGiverServiceList,
-    TResult? Function(String userId, int page, int limit)?
+    TResult? Function(String userId, String adminId, int page, int limit)?
         getCareGiverEarningList,
     TResult? Function(String userId, int page, int limit)?
         getCareGiverServiceRequestList,
@@ -992,10 +1040,10 @@ class _$_GetSelectedDate implements _GetSelectedDate {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? getCareGiverDetail,
-    TResult Function(String userId, int page, int limit)?
+    TResult Function(String userId, String adminId)? getCareGiverDetail,
+    TResult Function(String userId, String adminId, int page, int limit)?
         getCareGiverServiceList,
-    TResult Function(String userId, int page, int limit)?
+    TResult Function(String userId, String adminId, int page, int limit)?
         getCareGiverEarningList,
     TResult Function(String userId, int page, int limit)?
         getCareGiverServiceRequestList,
@@ -1115,7 +1163,6 @@ class _$_GetSelectedScheduleServices implements _GetSelectedScheduleServices {
   final List<ServiceDates> _services;
   @override
   List<ServiceDates> get services {
-    if (_services is EqualUnmodifiableListView) return _services;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_services);
   }
@@ -1147,10 +1194,12 @@ class _$_GetSelectedScheduleServices implements _GetSelectedScheduleServices {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId) getCareGiverDetail,
-    required TResult Function(String userId, int page, int limit)
+    required TResult Function(String userId, String adminId) getCareGiverDetail,
+    required TResult Function(
+            String userId, String adminId, int page, int limit)
         getCareGiverServiceList,
-    required TResult Function(String userId, int page, int limit)
+    required TResult Function(
+            String userId, String adminId, int page, int limit)
         getCareGiverEarningList,
     required TResult Function(String userId, int page, int limit)
         getCareGiverServiceRequestList,
@@ -1164,10 +1213,10 @@ class _$_GetSelectedScheduleServices implements _GetSelectedScheduleServices {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? getCareGiverDetail,
-    TResult? Function(String userId, int page, int limit)?
+    TResult? Function(String userId, String adminId)? getCareGiverDetail,
+    TResult? Function(String userId, String adminId, int page, int limit)?
         getCareGiverServiceList,
-    TResult? Function(String userId, int page, int limit)?
+    TResult? Function(String userId, String adminId, int page, int limit)?
         getCareGiverEarningList,
     TResult? Function(String userId, int page, int limit)?
         getCareGiverServiceRequestList,
@@ -1180,10 +1229,10 @@ class _$_GetSelectedScheduleServices implements _GetSelectedScheduleServices {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? getCareGiverDetail,
-    TResult Function(String userId, int page, int limit)?
+    TResult Function(String userId, String adminId)? getCareGiverDetail,
+    TResult Function(String userId, String adminId, int page, int limit)?
         getCareGiverServiceList,
-    TResult Function(String userId, int page, int limit)?
+    TResult Function(String userId, String adminId, int page, int limit)?
         getCareGiverEarningList,
     TResult Function(String userId, int page, int limit)?
         getCareGiverServiceRequestList,
@@ -1529,8 +1578,6 @@ class _$_CareGiversDetailState implements _CareGiversDetailState {
   final List<ServiceDates> _selectedScheduleServices;
   @override
   List<ServiceDates> get selectedScheduleServices {
-    if (_selectedScheduleServices is EqualUnmodifiableListView)
-      return _selectedScheduleServices;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_selectedScheduleServices);
   }

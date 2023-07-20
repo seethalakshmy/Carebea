@@ -48,8 +48,7 @@ class _MyAppState extends State<MyApp> {
     );
     Environment().initConfig(environment);
     await HiveUtils.init();
-    await configureAmplify();
-    SharedPreffUtil().init();
+    await _configureAmplify();
     await SharedPreffUtil().init();
   }
 

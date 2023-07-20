@@ -5,6 +5,7 @@ class CareGiverVerificationEvent with _$CareGiverVerificationEvent {
   const factory CareGiverVerificationEvent.getVerificationData({
     required BuildContext context,
     required String userId,
+    required String adminId,
   }) = _GetVerificationData;
 
   const factory CareGiverVerificationEvent.isSelectedVerificationTab(
@@ -27,10 +28,12 @@ class CareGiverVerificationEvent with _$CareGiverVerificationEvent {
 
   const factory CareGiverVerificationEvent.getCareGiverVerificationData({
     required String userId,
+    required String adminId,
   }) = _GetCareGiverVerificationData;
 
   const factory CareGiverVerificationEvent.careGiverBackgroundVerify(
       {required String userID,
+      required String adminId,
       required int status,
       required BuildContext context,
       String? rejectReason}) = _CareGiverBackgroundVerify;
@@ -49,6 +52,7 @@ class CareGiverVerificationEvent with _$CareGiverVerificationEvent {
 
   const factory CareGiverVerificationEvent.careGiverTrainingVerify({
     required String userId,
+    required String adminId,
     required BuildContext context,
     int? page,
   }) = _CareGiverTrainingVerify;

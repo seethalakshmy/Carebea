@@ -86,18 +86,21 @@ abstract class ApiClient {
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('status') int status,
+      @Field('admin_id') String adminId,
       @Field('reject_reason') String? reason);
 
   @POST("/admin/caregiver-certificate-verification")
   Future<VerifyResponse> careGiverCertificateApprove(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
+      @Field('admin_id') String adminId,
       @Field('status') int status);
 
   @POST("/admin/caregiver-training-verification")
   Future<VerifyResponse> careGiverTrainingVerify(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
+      @Field('admin_id') String adminId,
       @Field('status') bool status);
 
   @POST("/admin/reject-qualification-document")
@@ -107,22 +110,28 @@ abstract class ApiClient {
 
   @POST("/admin/caregiver-start-training")
   Future<VerifyResponse> careGiverSendTrainingRequest(
-      @Header("Authorization") String token, @Field('user_id') String userId);
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('admin_id') String adminId);
 
   @POST("/admin/get-care-giver-profile")
   Future<CaregiverProfileResponse> getCareGiverProfile(
-      @Header("Authorization") String token, @Field('user_id') String userId);
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('admin_id') String adminId);
 
   @POST("/admin/caregiver-intervie-verification")
   Future<VerifyResponse> careGiverInterViewVerify(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
+      @Field('admin_id') String adminId,
       @Field('status') bool status);
 
   @POST("/admin/get-care-giver-by-id")
   Future<CareGiverDetailResponse> getCareGiverDetail(
     @Header("Authorization") String token,
     @Field('user_id') String userId,
+    @Field('admin_id') String adminId,
   );
 
   @POST("/admin/admin-create-caregiver")
@@ -191,6 +200,7 @@ abstract class ApiClient {
   Future<VerifyResponse> careGiverActiveOrInactive(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
+      @Field('admin_id') String adminId,
       @Field('status') bool status);
 
   @GET("/common-data/get-gender")
@@ -226,16 +236,16 @@ abstract class ApiClient {
 
   @GET("/common-data/get-languages?")
   Future<LanguageListResponse> getLanguageList(
-      @Query("page") String pageNo,
-      @Query("limit") String limit,
-      @Query("search_term") String searchQuery,
-      );
+    @Query("page") String pageNo,
+    @Query("limit") String limit,
+    @Query("search_term") String searchQuery,
+  );
 
   @POST("/super-admin/login")
   Future<LoginResponse> login(
-      @Field('email') String email,
-      @Field('password') String password,
-      );
+    @Field('email') String email,
+    @Field('password') String password,
+  );
 
   @GET("/common-data/get-years")
   Future<YearsOfExperienceResponse> getYearsOfExp();
@@ -336,5 +346,4 @@ abstract class ApiClient {
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('admin_id') String adminId);
-
 }

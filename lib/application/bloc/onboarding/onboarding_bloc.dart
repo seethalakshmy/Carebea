@@ -173,6 +173,23 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     });
   }
 
+  _submitReference(
+      _SubmitReference event, Emitter<OnboardingState> emit) async {
+    emit(state.copyWith(isLoading: true));
+
+    final Either<ApiErrorHandler, CommonResponse> result =
+        await onboardingRepository.submitReference(
+      userId: event.userId,
+      referenceList: state.referenceList.map((e) => e.toJson()).toList(),
+    );
+    OnboardingState referenceState = result.fold((l) {
+      return state.copyWith(isLoading: false, referenceOption: Some(Left(l)));
+    }, (r) {
+      return state.copyWith(isLoading: false, referenceOption: Some(Right(r)));
+    });
+    emit(referenceState);
+  }
+
   setData(GetReferences item) {
     nameController.text = item.name ?? '';
     phoneController.text = item.phone ?? '';
@@ -231,7 +248,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
           .addAll(r.data!.map((e) => PetsModel(e.name ?? "", e.id)).toList());
       return state.copyWith(
           isLoading: false,
-          petsList: r.data!.map((e) => PetsModel(e.name ?? "", e.id)).toList(),
+          // petsList: r.data!.map((e) => PetsModel(e.name ?? "", e.id)).toList(),
           petListOption: Some(Right(r)));
     });
     emit(petState);

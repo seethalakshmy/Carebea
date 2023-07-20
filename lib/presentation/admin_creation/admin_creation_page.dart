@@ -24,6 +24,7 @@ import '../widget/custom_sizedbox.dart';
 import '../widget/details_text_field_with_label.dart';
 import '../widget/header_view.dart';
 
+@RoutePage()
 class AdminCreationPage extends StatefulWidget {
   const AdminCreationPage(
       {Key? key,
@@ -337,7 +338,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                           height: DBL.fortyFive.val,
                           minWidth: DBL.oneTwenty.val,
                           onPressed: () {
-                            context.router.navigate(const AdminsRoute());
+                            // context.router.navigate(const AdminsRoute());
                           },
                           text: AppString.cancel.val,
                           color: AppColor.white.val,

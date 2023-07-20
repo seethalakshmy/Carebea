@@ -663,7 +663,6 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
     }
   }
 
-
   Future<void> uploadToSingleFileAwsS3() async {
     await ApiServiceS3().uploadImage(pickedFile: file!);
   }

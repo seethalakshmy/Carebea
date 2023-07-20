@@ -51,12 +51,15 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
   late TabController tabController;
   late CaregiverDetailBloc _caregiverDetailBloc;
   String userId = "";
+  String adminId = "";
   int? _page;
   int? _tab;
 
   @override
   void initState() {
     userId = autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
+    adminId =
+        autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
     _page = autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
     _tab = autoTabRouter?.currentChild?.queryParams.getInt('tab', 0);
 
@@ -69,7 +72,8 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => _caregiverDetailBloc
-        ..add(CareGiverDetailEvent.getCareGiverDetail(userId: userId)),
+        ..add(CareGiverDetailEvent.getCareGiverDetail(
+            userId: userId, adminId: adminId)),
       child: BlocBuilder<CaregiverDetailBloc, CareGiverDetailState>(
         builder: (context, state) {
           return state.isLoading

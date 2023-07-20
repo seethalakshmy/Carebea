@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../presentation/routes/app_router.gr.dart';
+import '../../../presentation/side_menu/side_menu_page.dart';
 
 part 'login_bloc.freezed.dart';
 part 'login_event.dart';

@@ -13,9 +13,9 @@ class CareGiverProfileRepository implements ICareGiverProfileRepo {
 
   @override
   Future<Either<ApiErrorHandler, CaregiverProfileResponse>> getCareGiverProfile(
-      {required String userID}) async {
+      {required String userID, required String adminId}) async {
     try {
-      var res = await _apiClient.getCareGiverProfile("", userID);
+      var res = await _apiClient.getCareGiverProfile("", userID, adminId);
       return Right(res);
     } on DioError catch (e) {
       CustomLog.log("CareGiverDetailRepository: ${e.message}");
@@ -32,9 +32,12 @@ class CareGiverProfileRepository implements ICareGiverProfileRepo {
 
   @override
   Future<Either<ApiErrorHandler, VerifyResponse>> careGiverTrainingVerify(
-      {required String userID, required bool status}) async {
+      {required String userID,
+      required String adminId,
+      required bool status}) async {
     try {
-      var res = await _apiClient.careGiverTrainingVerify("", userID, status);
+      var res =
+          await _apiClient.careGiverTrainingVerify("", userID, adminId, status);
       return Right(res);
     } on DioError catch (e) {
       CustomLog.log("CareGiverDetailRepository: ${e.message}");
@@ -51,9 +54,12 @@ class CareGiverProfileRepository implements ICareGiverProfileRepo {
 
   @override
   Future<Either<ApiErrorHandler, VerifyResponse>> careGiverInterViewVerify(
-      {required String userID, required bool status}) async {
+      {required String userID,
+      required String adminId,
+      required bool status}) async {
     try {
-      var res = await _apiClient.careGiverInterViewVerify("", userID, status);
+      var res = await _apiClient.careGiverInterViewVerify(
+          "", userID, adminId, status);
       return Right(res);
     } on DioError catch (e) {
       CustomLog.log("CareGiverDetailRepository: ${e.message}");

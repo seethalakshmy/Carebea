@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'caregiver_verification_bloc.dart';
 
@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CareGiverVerificationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(BuildContext context, String userId)
+    required TResult Function(
+            BuildContext context, String userId, String adminId)
         getVerificationData,
     required TResult Function(VerificationTypes type) isSelectedVerificationTab,
     required TResult Function(bool value) isTappedReason,
@@ -26,9 +27,10 @@ mixin _$CareGiverVerificationEvent {
     required TResult Function(bool value) isTappedBlsReason,
     required TResult Function(bool value) isTappedTbReason,
     required TResult Function(bool value) isTappedCovidReason,
-    required TResult Function(String userId) getCareGiverVerificationData,
-    required TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)
+    required TResult Function(String userId, String adminId)
+        getCareGiverVerificationData,
+    required TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
     required TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)
@@ -36,7 +38,8 @@ mixin _$CareGiverVerificationEvent {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context, int? page)
+    required TResult Function(
+            String userId, String adminId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
@@ -44,16 +47,18 @@ mixin _$CareGiverVerificationEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BuildContext context, String userId)? getVerificationData,
+    TResult? Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult? Function(bool value)? isTappedReason,
     TResult? Function(bool value)? isTappedHHaReason,
     TResult? Function(bool value)? isTappedBlsReason,
     TResult? Function(bool value)? isTappedTbReason,
     TResult? Function(bool value)? isTappedCovidReason,
-    TResult? Function(String userId)? getCareGiverVerificationData,
-    TResult? Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult? Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult? Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult? Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -61,7 +66,8 @@ mixin _$CareGiverVerificationEvent {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context, int? page)?
+    TResult? Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -69,16 +75,18 @@ mixin _$CareGiverVerificationEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BuildContext context, String userId)? getVerificationData,
+    TResult Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult Function(bool value)? isTappedReason,
     TResult Function(bool value)? isTappedHHaReason,
     TResult Function(bool value)? isTappedBlsReason,
     TResult Function(bool value)? isTappedTbReason,
     TResult Function(bool value)? isTappedCovidReason,
-    TResult Function(String userId)? getCareGiverVerificationData,
-    TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -86,7 +94,8 @@ mixin _$CareGiverVerificationEvent {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context, int? page)?
+    TResult Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -190,7 +199,7 @@ abstract class _$$_GetVerificationDataCopyWith<$Res> {
           $Res Function(_$_GetVerificationData) then) =
       __$$_GetVerificationDataCopyWithImpl<$Res>;
   @useResult
-  $Res call({BuildContext context, String userId});
+  $Res call({BuildContext context, String userId, String adminId});
 }
 
 /// @nodoc
@@ -207,6 +216,7 @@ class __$$_GetVerificationDataCopyWithImpl<$Res>
   $Res call({
     Object? context = null,
     Object? userId = null,
+    Object? adminId = null,
   }) {
     return _then(_$_GetVerificationData(
       context: null == context
@@ -217,6 +227,10 @@ class __$$_GetVerificationDataCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      adminId: null == adminId
+          ? _value.adminId
+          : adminId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -224,16 +238,19 @@ class __$$_GetVerificationDataCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_GetVerificationData implements _GetVerificationData {
-  const _$_GetVerificationData({required this.context, required this.userId});
+  const _$_GetVerificationData(
+      {required this.context, required this.userId, required this.adminId});
 
   @override
   final BuildContext context;
   @override
   final String userId;
+  @override
+  final String adminId;
 
   @override
   String toString() {
-    return 'CareGiverVerificationEvent.getVerificationData(context: $context, userId: $userId)';
+    return 'CareGiverVerificationEvent.getVerificationData(context: $context, userId: $userId, adminId: $adminId)';
   }
 
   @override
@@ -242,11 +259,12 @@ class _$_GetVerificationData implements _GetVerificationData {
         (other.runtimeType == runtimeType &&
             other is _$_GetVerificationData &&
             (identical(other.context, context) || other.context == context) &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.adminId, adminId) || other.adminId == adminId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, context, userId);
+  int get hashCode => Object.hash(runtimeType, context, userId, adminId);
 
   @JsonKey(ignore: true)
   @override
@@ -258,7 +276,8 @@ class _$_GetVerificationData implements _GetVerificationData {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(BuildContext context, String userId)
+    required TResult Function(
+            BuildContext context, String userId, String adminId)
         getVerificationData,
     required TResult Function(VerificationTypes type) isSelectedVerificationTab,
     required TResult Function(bool value) isTappedReason,
@@ -266,9 +285,10 @@ class _$_GetVerificationData implements _GetVerificationData {
     required TResult Function(bool value) isTappedBlsReason,
     required TResult Function(bool value) isTappedTbReason,
     required TResult Function(bool value) isTappedCovidReason,
-    required TResult Function(String userId) getCareGiverVerificationData,
-    required TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)
+    required TResult Function(String userId, String adminId)
+        getCareGiverVerificationData,
+    required TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
     required TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)
@@ -276,27 +296,30 @@ class _$_GetVerificationData implements _GetVerificationData {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context, int? page)
+    required TResult Function(
+            String userId, String adminId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
   }) {
-    return getVerificationData(context, userId);
+    return getVerificationData(context, userId, adminId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BuildContext context, String userId)? getVerificationData,
+    TResult? Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult? Function(bool value)? isTappedReason,
     TResult? Function(bool value)? isTappedHHaReason,
     TResult? Function(bool value)? isTappedBlsReason,
     TResult? Function(bool value)? isTappedTbReason,
     TResult? Function(bool value)? isTappedCovidReason,
-    TResult? Function(String userId)? getCareGiverVerificationData,
-    TResult? Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult? Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult? Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult? Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -304,27 +327,30 @@ class _$_GetVerificationData implements _GetVerificationData {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context, int? page)?
+    TResult? Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
   }) {
-    return getVerificationData?.call(context, userId);
+    return getVerificationData?.call(context, userId, adminId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BuildContext context, String userId)? getVerificationData,
+    TResult Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult Function(bool value)? isTappedReason,
     TResult Function(bool value)? isTappedHHaReason,
     TResult Function(bool value)? isTappedBlsReason,
     TResult Function(bool value)? isTappedTbReason,
     TResult Function(bool value)? isTappedCovidReason,
-    TResult Function(String userId)? getCareGiverVerificationData,
-    TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -332,14 +358,15 @@ class _$_GetVerificationData implements _GetVerificationData {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context, int? page)?
+    TResult Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
     required TResult orElse(),
   }) {
     if (getVerificationData != null) {
-      return getVerificationData(context, userId);
+      return getVerificationData(context, userId, adminId);
     }
     return orElse();
   }
@@ -429,10 +456,12 @@ class _$_GetVerificationData implements _GetVerificationData {
 abstract class _GetVerificationData implements CareGiverVerificationEvent {
   const factory _GetVerificationData(
       {required final BuildContext context,
-      required final String userId}) = _$_GetVerificationData;
+      required final String userId,
+      required final String adminId}) = _$_GetVerificationData;
 
   BuildContext get context;
   String get userId;
+  String get adminId;
   @JsonKey(ignore: true)
   _$$_GetVerificationDataCopyWith<_$_GetVerificationData> get copyWith =>
       throw _privateConstructorUsedError;
@@ -506,7 +535,8 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(BuildContext context, String userId)
+    required TResult Function(
+            BuildContext context, String userId, String adminId)
         getVerificationData,
     required TResult Function(VerificationTypes type) isSelectedVerificationTab,
     required TResult Function(bool value) isTappedReason,
@@ -514,9 +544,10 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
     required TResult Function(bool value) isTappedBlsReason,
     required TResult Function(bool value) isTappedTbReason,
     required TResult Function(bool value) isTappedCovidReason,
-    required TResult Function(String userId) getCareGiverVerificationData,
-    required TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)
+    required TResult Function(String userId, String adminId)
+        getCareGiverVerificationData,
+    required TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
     required TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)
@@ -524,7 +555,8 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context, int? page)
+    required TResult Function(
+            String userId, String adminId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
@@ -535,16 +567,18 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BuildContext context, String userId)? getVerificationData,
+    TResult? Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult? Function(bool value)? isTappedReason,
     TResult? Function(bool value)? isTappedHHaReason,
     TResult? Function(bool value)? isTappedBlsReason,
     TResult? Function(bool value)? isTappedTbReason,
     TResult? Function(bool value)? isTappedCovidReason,
-    TResult? Function(String userId)? getCareGiverVerificationData,
-    TResult? Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult? Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult? Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult? Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -552,7 +586,8 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context, int? page)?
+    TResult? Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -563,16 +598,18 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BuildContext context, String userId)? getVerificationData,
+    TResult Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult Function(bool value)? isTappedReason,
     TResult Function(bool value)? isTappedHHaReason,
     TResult Function(bool value)? isTappedBlsReason,
     TResult Function(bool value)? isTappedTbReason,
     TResult Function(bool value)? isTappedCovidReason,
-    TResult Function(String userId)? getCareGiverVerificationData,
-    TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -580,7 +617,8 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context, int? page)?
+    TResult Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -749,7 +787,8 @@ class _$_IsTappedReason implements _IsTappedReason {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(BuildContext context, String userId)
+    required TResult Function(
+            BuildContext context, String userId, String adminId)
         getVerificationData,
     required TResult Function(VerificationTypes type) isSelectedVerificationTab,
     required TResult Function(bool value) isTappedReason,
@@ -757,9 +796,10 @@ class _$_IsTappedReason implements _IsTappedReason {
     required TResult Function(bool value) isTappedBlsReason,
     required TResult Function(bool value) isTappedTbReason,
     required TResult Function(bool value) isTappedCovidReason,
-    required TResult Function(String userId) getCareGiverVerificationData,
-    required TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)
+    required TResult Function(String userId, String adminId)
+        getCareGiverVerificationData,
+    required TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
     required TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)
@@ -767,7 +807,8 @@ class _$_IsTappedReason implements _IsTappedReason {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context, int? page)
+    required TResult Function(
+            String userId, String adminId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
@@ -778,16 +819,18 @@ class _$_IsTappedReason implements _IsTappedReason {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BuildContext context, String userId)? getVerificationData,
+    TResult? Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult? Function(bool value)? isTappedReason,
     TResult? Function(bool value)? isTappedHHaReason,
     TResult? Function(bool value)? isTappedBlsReason,
     TResult? Function(bool value)? isTappedTbReason,
     TResult? Function(bool value)? isTappedCovidReason,
-    TResult? Function(String userId)? getCareGiverVerificationData,
-    TResult? Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult? Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult? Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult? Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -795,7 +838,8 @@ class _$_IsTappedReason implements _IsTappedReason {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context, int? page)?
+    TResult? Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -806,16 +850,18 @@ class _$_IsTappedReason implements _IsTappedReason {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BuildContext context, String userId)? getVerificationData,
+    TResult Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult Function(bool value)? isTappedReason,
     TResult Function(bool value)? isTappedHHaReason,
     TResult Function(bool value)? isTappedBlsReason,
     TResult Function(bool value)? isTappedTbReason,
     TResult Function(bool value)? isTappedCovidReason,
-    TResult Function(String userId)? getCareGiverVerificationData,
-    TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -823,7 +869,8 @@ class _$_IsTappedReason implements _IsTappedReason {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context, int? page)?
+    TResult Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -991,7 +1038,8 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(BuildContext context, String userId)
+    required TResult Function(
+            BuildContext context, String userId, String adminId)
         getVerificationData,
     required TResult Function(VerificationTypes type) isSelectedVerificationTab,
     required TResult Function(bool value) isTappedReason,
@@ -999,9 +1047,10 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
     required TResult Function(bool value) isTappedBlsReason,
     required TResult Function(bool value) isTappedTbReason,
     required TResult Function(bool value) isTappedCovidReason,
-    required TResult Function(String userId) getCareGiverVerificationData,
-    required TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)
+    required TResult Function(String userId, String adminId)
+        getCareGiverVerificationData,
+    required TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
     required TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)
@@ -1009,7 +1058,8 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context, int? page)
+    required TResult Function(
+            String userId, String adminId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
@@ -1020,16 +1070,18 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BuildContext context, String userId)? getVerificationData,
+    TResult? Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult? Function(bool value)? isTappedReason,
     TResult? Function(bool value)? isTappedHHaReason,
     TResult? Function(bool value)? isTappedBlsReason,
     TResult? Function(bool value)? isTappedTbReason,
     TResult? Function(bool value)? isTappedCovidReason,
-    TResult? Function(String userId)? getCareGiverVerificationData,
-    TResult? Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult? Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult? Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult? Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -1037,7 +1089,8 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context, int? page)?
+    TResult? Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -1048,16 +1101,18 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BuildContext context, String userId)? getVerificationData,
+    TResult Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult Function(bool value)? isTappedReason,
     TResult Function(bool value)? isTappedHHaReason,
     TResult Function(bool value)? isTappedBlsReason,
     TResult Function(bool value)? isTappedTbReason,
     TResult Function(bool value)? isTappedCovidReason,
-    TResult Function(String userId)? getCareGiverVerificationData,
-    TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -1065,7 +1120,8 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context, int? page)?
+    TResult Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -1233,7 +1289,8 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(BuildContext context, String userId)
+    required TResult Function(
+            BuildContext context, String userId, String adminId)
         getVerificationData,
     required TResult Function(VerificationTypes type) isSelectedVerificationTab,
     required TResult Function(bool value) isTappedReason,
@@ -1241,9 +1298,10 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
     required TResult Function(bool value) isTappedBlsReason,
     required TResult Function(bool value) isTappedTbReason,
     required TResult Function(bool value) isTappedCovidReason,
-    required TResult Function(String userId) getCareGiverVerificationData,
-    required TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)
+    required TResult Function(String userId, String adminId)
+        getCareGiverVerificationData,
+    required TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
     required TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)
@@ -1251,7 +1309,8 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context, int? page)
+    required TResult Function(
+            String userId, String adminId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
@@ -1262,16 +1321,18 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BuildContext context, String userId)? getVerificationData,
+    TResult? Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult? Function(bool value)? isTappedReason,
     TResult? Function(bool value)? isTappedHHaReason,
     TResult? Function(bool value)? isTappedBlsReason,
     TResult? Function(bool value)? isTappedTbReason,
     TResult? Function(bool value)? isTappedCovidReason,
-    TResult? Function(String userId)? getCareGiverVerificationData,
-    TResult? Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult? Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult? Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult? Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -1279,7 +1340,8 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context, int? page)?
+    TResult? Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -1290,16 +1352,18 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BuildContext context, String userId)? getVerificationData,
+    TResult Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult Function(bool value)? isTappedReason,
     TResult Function(bool value)? isTappedHHaReason,
     TResult Function(bool value)? isTappedBlsReason,
     TResult Function(bool value)? isTappedTbReason,
     TResult Function(bool value)? isTappedCovidReason,
-    TResult Function(String userId)? getCareGiverVerificationData,
-    TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -1307,7 +1371,8 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context, int? page)?
+    TResult Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -1474,7 +1539,8 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(BuildContext context, String userId)
+    required TResult Function(
+            BuildContext context, String userId, String adminId)
         getVerificationData,
     required TResult Function(VerificationTypes type) isSelectedVerificationTab,
     required TResult Function(bool value) isTappedReason,
@@ -1482,9 +1548,10 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
     required TResult Function(bool value) isTappedBlsReason,
     required TResult Function(bool value) isTappedTbReason,
     required TResult Function(bool value) isTappedCovidReason,
-    required TResult Function(String userId) getCareGiverVerificationData,
-    required TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)
+    required TResult Function(String userId, String adminId)
+        getCareGiverVerificationData,
+    required TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
     required TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)
@@ -1492,7 +1559,8 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context, int? page)
+    required TResult Function(
+            String userId, String adminId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
@@ -1503,16 +1571,18 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BuildContext context, String userId)? getVerificationData,
+    TResult? Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult? Function(bool value)? isTappedReason,
     TResult? Function(bool value)? isTappedHHaReason,
     TResult? Function(bool value)? isTappedBlsReason,
     TResult? Function(bool value)? isTappedTbReason,
     TResult? Function(bool value)? isTappedCovidReason,
-    TResult? Function(String userId)? getCareGiverVerificationData,
-    TResult? Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult? Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult? Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult? Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -1520,7 +1590,8 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context, int? page)?
+    TResult? Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -1531,16 +1602,18 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BuildContext context, String userId)? getVerificationData,
+    TResult Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult Function(bool value)? isTappedReason,
     TResult Function(bool value)? isTappedHHaReason,
     TResult Function(bool value)? isTappedBlsReason,
     TResult Function(bool value)? isTappedTbReason,
     TResult Function(bool value)? isTappedCovidReason,
-    TResult Function(String userId)? getCareGiverVerificationData,
-    TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -1548,7 +1621,8 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context, int? page)?
+    TResult Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -1717,7 +1791,8 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(BuildContext context, String userId)
+    required TResult Function(
+            BuildContext context, String userId, String adminId)
         getVerificationData,
     required TResult Function(VerificationTypes type) isSelectedVerificationTab,
     required TResult Function(bool value) isTappedReason,
@@ -1725,9 +1800,10 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
     required TResult Function(bool value) isTappedBlsReason,
     required TResult Function(bool value) isTappedTbReason,
     required TResult Function(bool value) isTappedCovidReason,
-    required TResult Function(String userId) getCareGiverVerificationData,
-    required TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)
+    required TResult Function(String userId, String adminId)
+        getCareGiverVerificationData,
+    required TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
     required TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)
@@ -1735,7 +1811,8 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context, int? page)
+    required TResult Function(
+            String userId, String adminId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
@@ -1746,16 +1823,18 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BuildContext context, String userId)? getVerificationData,
+    TResult? Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult? Function(bool value)? isTappedReason,
     TResult? Function(bool value)? isTappedHHaReason,
     TResult? Function(bool value)? isTappedBlsReason,
     TResult? Function(bool value)? isTappedTbReason,
     TResult? Function(bool value)? isTappedCovidReason,
-    TResult? Function(String userId)? getCareGiverVerificationData,
-    TResult? Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult? Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult? Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult? Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -1763,7 +1842,8 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context, int? page)?
+    TResult? Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -1774,16 +1854,18 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BuildContext context, String userId)? getVerificationData,
+    TResult Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult Function(bool value)? isTappedReason,
     TResult Function(bool value)? isTappedHHaReason,
     TResult Function(bool value)? isTappedBlsReason,
     TResult Function(bool value)? isTappedTbReason,
     TResult Function(bool value)? isTappedCovidReason,
-    TResult Function(String userId)? getCareGiverVerificationData,
-    TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -1791,7 +1873,8 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context, int? page)?
+    TResult Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -1901,7 +1984,7 @@ abstract class _$$_GetCareGiverVerificationDataCopyWith<$Res> {
           $Res Function(_$_GetCareGiverVerificationData) then) =
       __$$_GetCareGiverVerificationDataCopyWithImpl<$Res>;
   @useResult
-  $Res call({String userId});
+  $Res call({String userId, String adminId});
 }
 
 /// @nodoc
@@ -1918,11 +2001,16 @@ class __$$_GetCareGiverVerificationDataCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = null,
+    Object? adminId = null,
   }) {
     return _then(_$_GetCareGiverVerificationData(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      adminId: null == adminId
+          ? _value.adminId
+          : adminId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -1931,14 +2019,17 @@ class __$$_GetCareGiverVerificationDataCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
-  const _$_GetCareGiverVerificationData({required this.userId});
+  const _$_GetCareGiverVerificationData(
+      {required this.userId, required this.adminId});
 
   @override
   final String userId;
+  @override
+  final String adminId;
 
   @override
   String toString() {
-    return 'CareGiverVerificationEvent.getCareGiverVerificationData(userId: $userId)';
+    return 'CareGiverVerificationEvent.getCareGiverVerificationData(userId: $userId, adminId: $adminId)';
   }
 
   @override
@@ -1946,11 +2037,12 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_GetCareGiverVerificationData &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.adminId, adminId) || other.adminId == adminId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId);
+  int get hashCode => Object.hash(runtimeType, userId, adminId);
 
   @JsonKey(ignore: true)
   @override
@@ -1962,7 +2054,8 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(BuildContext context, String userId)
+    required TResult Function(
+            BuildContext context, String userId, String adminId)
         getVerificationData,
     required TResult Function(VerificationTypes type) isSelectedVerificationTab,
     required TResult Function(bool value) isTappedReason,
@@ -1970,9 +2063,10 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
     required TResult Function(bool value) isTappedBlsReason,
     required TResult Function(bool value) isTappedTbReason,
     required TResult Function(bool value) isTappedCovidReason,
-    required TResult Function(String userId) getCareGiverVerificationData,
-    required TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)
+    required TResult Function(String userId, String adminId)
+        getCareGiverVerificationData,
+    required TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
     required TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)
@@ -1980,27 +2074,30 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context, int? page)
+    required TResult Function(
+            String userId, String adminId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
   }) {
-    return getCareGiverVerificationData(userId);
+    return getCareGiverVerificationData(userId, adminId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BuildContext context, String userId)? getVerificationData,
+    TResult? Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult? Function(bool value)? isTappedReason,
     TResult? Function(bool value)? isTappedHHaReason,
     TResult? Function(bool value)? isTappedBlsReason,
     TResult? Function(bool value)? isTappedTbReason,
     TResult? Function(bool value)? isTappedCovidReason,
-    TResult? Function(String userId)? getCareGiverVerificationData,
-    TResult? Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult? Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult? Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult? Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -2008,27 +2105,30 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context, int? page)?
+    TResult? Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
   }) {
-    return getCareGiverVerificationData?.call(userId);
+    return getCareGiverVerificationData?.call(userId, adminId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BuildContext context, String userId)? getVerificationData,
+    TResult Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult Function(bool value)? isTappedReason,
     TResult Function(bool value)? isTappedHHaReason,
     TResult Function(bool value)? isTappedBlsReason,
     TResult Function(bool value)? isTappedTbReason,
     TResult Function(bool value)? isTappedCovidReason,
-    TResult Function(String userId)? getCareGiverVerificationData,
-    TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -2036,14 +2136,15 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context, int? page)?
+    TResult Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
     required TResult orElse(),
   }) {
     if (getCareGiverVerificationData != null) {
-      return getCareGiverVerificationData(userId);
+      return getCareGiverVerificationData(userId, adminId);
     }
     return orElse();
   }
@@ -2132,10 +2233,12 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
 
 abstract class _GetCareGiverVerificationData
     implements CareGiverVerificationEvent {
-  const factory _GetCareGiverVerificationData({required final String userId}) =
-      _$_GetCareGiverVerificationData;
+  const factory _GetCareGiverVerificationData(
+      {required final String userId,
+      required final String adminId}) = _$_GetCareGiverVerificationData;
 
   String get userId;
+  String get adminId;
   @JsonKey(ignore: true)
   _$$_GetCareGiverVerificationDataCopyWith<_$_GetCareGiverVerificationData>
       get copyWith => throw _privateConstructorUsedError;
@@ -2149,7 +2252,11 @@ abstract class _$$_CareGiverBackgroundVerifyCopyWith<$Res> {
       __$$_CareGiverBackgroundVerifyCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {String userID, int status, BuildContext context, String? rejectReason});
+      {String userID,
+      String adminId,
+      int status,
+      BuildContext context,
+      String? rejectReason});
 }
 
 /// @nodoc
@@ -2166,6 +2273,7 @@ class __$$_CareGiverBackgroundVerifyCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userID = null,
+    Object? adminId = null,
     Object? status = null,
     Object? context = null,
     Object? rejectReason = freezed,
@@ -2174,6 +2282,10 @@ class __$$_CareGiverBackgroundVerifyCopyWithImpl<$Res>
       userID: null == userID
           ? _value.userID
           : userID // ignore: cast_nullable_to_non_nullable
+              as String,
+      adminId: null == adminId
+          ? _value.adminId
+          : adminId // ignore: cast_nullable_to_non_nullable
               as String,
       status: null == status
           ? _value.status
@@ -2196,12 +2308,15 @@ class __$$_CareGiverBackgroundVerifyCopyWithImpl<$Res>
 class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
   const _$_CareGiverBackgroundVerify(
       {required this.userID,
+      required this.adminId,
       required this.status,
       required this.context,
       this.rejectReason});
 
   @override
   final String userID;
+  @override
+  final String adminId;
   @override
   final int status;
   @override
@@ -2211,7 +2326,7 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
 
   @override
   String toString() {
-    return 'CareGiverVerificationEvent.careGiverBackgroundVerify(userID: $userID, status: $status, context: $context, rejectReason: $rejectReason)';
+    return 'CareGiverVerificationEvent.careGiverBackgroundVerify(userID: $userID, adminId: $adminId, status: $status, context: $context, rejectReason: $rejectReason)';
   }
 
   @override
@@ -2220,6 +2335,7 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
         (other.runtimeType == runtimeType &&
             other is _$_CareGiverBackgroundVerify &&
             (identical(other.userID, userID) || other.userID == userID) &&
+            (identical(other.adminId, adminId) || other.adminId == adminId) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.context, context) || other.context == context) &&
             (identical(other.rejectReason, rejectReason) ||
@@ -2228,7 +2344,7 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, userID, status, context, rejectReason);
+      Object.hash(runtimeType, userID, adminId, status, context, rejectReason);
 
   @JsonKey(ignore: true)
   @override
@@ -2240,7 +2356,8 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(BuildContext context, String userId)
+    required TResult Function(
+            BuildContext context, String userId, String adminId)
         getVerificationData,
     required TResult Function(VerificationTypes type) isSelectedVerificationTab,
     required TResult Function(bool value) isTappedReason,
@@ -2248,9 +2365,10 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
     required TResult Function(bool value) isTappedBlsReason,
     required TResult Function(bool value) isTappedTbReason,
     required TResult Function(bool value) isTappedCovidReason,
-    required TResult Function(String userId) getCareGiverVerificationData,
-    required TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)
+    required TResult Function(String userId, String adminId)
+        getCareGiverVerificationData,
+    required TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
     required TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)
@@ -2258,27 +2376,31 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context, int? page)
+    required TResult Function(
+            String userId, String adminId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
   }) {
-    return careGiverBackgroundVerify(userID, status, context, rejectReason);
+    return careGiverBackgroundVerify(
+        userID, adminId, status, context, rejectReason);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BuildContext context, String userId)? getVerificationData,
+    TResult? Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult? Function(bool value)? isTappedReason,
     TResult? Function(bool value)? isTappedHHaReason,
     TResult? Function(bool value)? isTappedBlsReason,
     TResult? Function(bool value)? isTappedTbReason,
     TResult? Function(bool value)? isTappedCovidReason,
-    TResult? Function(String userId)? getCareGiverVerificationData,
-    TResult? Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult? Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult? Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult? Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -2286,28 +2408,31 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context, int? page)?
+    TResult? Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
   }) {
     return careGiverBackgroundVerify?.call(
-        userID, status, context, rejectReason);
+        userID, adminId, status, context, rejectReason);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BuildContext context, String userId)? getVerificationData,
+    TResult Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult Function(bool value)? isTappedReason,
     TResult Function(bool value)? isTappedHHaReason,
     TResult Function(bool value)? isTappedBlsReason,
     TResult Function(bool value)? isTappedTbReason,
     TResult Function(bool value)? isTappedCovidReason,
-    TResult Function(String userId)? getCareGiverVerificationData,
-    TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -2315,14 +2440,16 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context, int? page)?
+    TResult Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
     required TResult orElse(),
   }) {
     if (careGiverBackgroundVerify != null) {
-      return careGiverBackgroundVerify(userID, status, context, rejectReason);
+      return careGiverBackgroundVerify(
+          userID, adminId, status, context, rejectReason);
     }
     return orElse();
   }
@@ -2413,11 +2540,13 @@ abstract class _CareGiverBackgroundVerify
     implements CareGiverVerificationEvent {
   const factory _CareGiverBackgroundVerify(
       {required final String userID,
+      required final String adminId,
       required final int status,
       required final BuildContext context,
       final String? rejectReason}) = _$_CareGiverBackgroundVerify;
 
   String get userID;
+  String get adminId;
   int get status;
   BuildContext get context;
   String? get rejectReason;
@@ -2539,7 +2668,8 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(BuildContext context, String userId)
+    required TResult Function(
+            BuildContext context, String userId, String adminId)
         getVerificationData,
     required TResult Function(VerificationTypes type) isSelectedVerificationTab,
     required TResult Function(bool value) isTappedReason,
@@ -2547,9 +2677,10 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
     required TResult Function(bool value) isTappedBlsReason,
     required TResult Function(bool value) isTappedTbReason,
     required TResult Function(bool value) isTappedCovidReason,
-    required TResult Function(String userId) getCareGiverVerificationData,
-    required TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)
+    required TResult Function(String userId, String adminId)
+        getCareGiverVerificationData,
+    required TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
     required TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)
@@ -2557,7 +2688,8 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context, int? page)
+    required TResult Function(
+            String userId, String adminId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
@@ -2569,16 +2701,18 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BuildContext context, String userId)? getVerificationData,
+    TResult? Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult? Function(bool value)? isTappedReason,
     TResult? Function(bool value)? isTappedHHaReason,
     TResult? Function(bool value)? isTappedBlsReason,
     TResult? Function(bool value)? isTappedTbReason,
     TResult? Function(bool value)? isTappedCovidReason,
-    TResult? Function(String userId)? getCareGiverVerificationData,
-    TResult? Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult? Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult? Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult? Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -2586,7 +2720,8 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context, int? page)?
+    TResult? Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -2598,16 +2733,18 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BuildContext context, String userId)? getVerificationData,
+    TResult Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult Function(bool value)? isTappedReason,
     TResult Function(bool value)? isTappedHHaReason,
     TResult Function(bool value)? isTappedBlsReason,
     TResult Function(bool value)? isTappedTbReason,
     TResult Function(bool value)? isTappedCovidReason,
-    TResult Function(String userId)? getCareGiverVerificationData,
-    TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -2615,7 +2752,8 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context, int? page)?
+    TResult Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -2814,7 +2952,8 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(BuildContext context, String userId)
+    required TResult Function(
+            BuildContext context, String userId, String adminId)
         getVerificationData,
     required TResult Function(VerificationTypes type) isSelectedVerificationTab,
     required TResult Function(bool value) isTappedReason,
@@ -2822,9 +2961,10 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
     required TResult Function(bool value) isTappedBlsReason,
     required TResult Function(bool value) isTappedTbReason,
     required TResult Function(bool value) isTappedCovidReason,
-    required TResult Function(String userId) getCareGiverVerificationData,
-    required TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)
+    required TResult Function(String userId, String adminId)
+        getCareGiverVerificationData,
+    required TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
     required TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)
@@ -2832,7 +2972,8 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context, int? page)
+    required TResult Function(
+            String userId, String adminId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
@@ -2843,16 +2984,18 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BuildContext context, String userId)? getVerificationData,
+    TResult? Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult? Function(bool value)? isTappedReason,
     TResult? Function(bool value)? isTappedHHaReason,
     TResult? Function(bool value)? isTappedBlsReason,
     TResult? Function(bool value)? isTappedTbReason,
     TResult? Function(bool value)? isTappedCovidReason,
-    TResult? Function(String userId)? getCareGiverVerificationData,
-    TResult? Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult? Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult? Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult? Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -2860,7 +3003,8 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context, int? page)?
+    TResult? Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -2871,16 +3015,18 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BuildContext context, String userId)? getVerificationData,
+    TResult Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult Function(bool value)? isTappedReason,
     TResult Function(bool value)? isTappedHHaReason,
     TResult Function(bool value)? isTappedBlsReason,
     TResult Function(bool value)? isTappedTbReason,
     TResult Function(bool value)? isTappedCovidReason,
-    TResult Function(String userId)? getCareGiverVerificationData,
-    TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -2888,7 +3034,8 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context, int? page)?
+    TResult Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -3003,7 +3150,7 @@ abstract class _$$_CareGiverTrainingVerifyCopyWith<$Res> {
           $Res Function(_$_CareGiverTrainingVerify) then) =
       __$$_CareGiverTrainingVerifyCopyWithImpl<$Res>;
   @useResult
-  $Res call({String userId, BuildContext context, int? page});
+  $Res call({String userId, String adminId, BuildContext context, int? page});
 }
 
 /// @nodoc
@@ -3019,6 +3166,7 @@ class __$$_CareGiverTrainingVerifyCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = null,
+    Object? adminId = null,
     Object? context = null,
     Object? page = freezed,
   }) {
@@ -3026,6 +3174,10 @@ class __$$_CareGiverTrainingVerifyCopyWithImpl<$Res>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      adminId: null == adminId
+          ? _value.adminId
+          : adminId // ignore: cast_nullable_to_non_nullable
               as String,
       context: null == context
           ? _value.context
@@ -3043,10 +3195,15 @@ class __$$_CareGiverTrainingVerifyCopyWithImpl<$Res>
 
 class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
   const _$_CareGiverTrainingVerify(
-      {required this.userId, required this.context, this.page});
+      {required this.userId,
+      required this.adminId,
+      required this.context,
+      this.page});
 
   @override
   final String userId;
+  @override
+  final String adminId;
   @override
   final BuildContext context;
   @override
@@ -3054,7 +3211,7 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
 
   @override
   String toString() {
-    return 'CareGiverVerificationEvent.careGiverTrainingVerify(userId: $userId, context: $context, page: $page)';
+    return 'CareGiverVerificationEvent.careGiverTrainingVerify(userId: $userId, adminId: $adminId, context: $context, page: $page)';
   }
 
   @override
@@ -3063,12 +3220,13 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
         (other.runtimeType == runtimeType &&
             other is _$_CareGiverTrainingVerify &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.adminId, adminId) || other.adminId == adminId) &&
             (identical(other.context, context) || other.context == context) &&
             (identical(other.page, page) || other.page == page));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId, context, page);
+  int get hashCode => Object.hash(runtimeType, userId, adminId, context, page);
 
   @JsonKey(ignore: true)
   @override
@@ -3081,7 +3239,8 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(BuildContext context, String userId)
+    required TResult Function(
+            BuildContext context, String userId, String adminId)
         getVerificationData,
     required TResult Function(VerificationTypes type) isSelectedVerificationTab,
     required TResult Function(bool value) isTappedReason,
@@ -3089,9 +3248,10 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
     required TResult Function(bool value) isTappedBlsReason,
     required TResult Function(bool value) isTappedTbReason,
     required TResult Function(bool value) isTappedCovidReason,
-    required TResult Function(String userId) getCareGiverVerificationData,
-    required TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)
+    required TResult Function(String userId, String adminId)
+        getCareGiverVerificationData,
+    required TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
     required TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)
@@ -3099,27 +3259,30 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context, int? page)
+    required TResult Function(
+            String userId, String adminId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
   }) {
-    return careGiverTrainingVerify(userId, context, page);
+    return careGiverTrainingVerify(userId, adminId, context, page);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BuildContext context, String userId)? getVerificationData,
+    TResult? Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult? Function(bool value)? isTappedReason,
     TResult? Function(bool value)? isTappedHHaReason,
     TResult? Function(bool value)? isTappedBlsReason,
     TResult? Function(bool value)? isTappedTbReason,
     TResult? Function(bool value)? isTappedCovidReason,
-    TResult? Function(String userId)? getCareGiverVerificationData,
-    TResult? Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult? Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult? Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult? Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -3127,27 +3290,30 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context, int? page)?
+    TResult? Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
   }) {
-    return careGiverTrainingVerify?.call(userId, context, page);
+    return careGiverTrainingVerify?.call(userId, adminId, context, page);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BuildContext context, String userId)? getVerificationData,
+    TResult Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult Function(bool value)? isTappedReason,
     TResult Function(bool value)? isTappedHHaReason,
     TResult Function(bool value)? isTappedBlsReason,
     TResult Function(bool value)? isTappedTbReason,
     TResult Function(bool value)? isTappedCovidReason,
-    TResult Function(String userId)? getCareGiverVerificationData,
-    TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -3155,14 +3321,15 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context, int? page)?
+    TResult Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
     required TResult orElse(),
   }) {
     if (careGiverTrainingVerify != null) {
-      return careGiverTrainingVerify(userId, context, page);
+      return careGiverTrainingVerify(userId, adminId, context, page);
     }
     return orElse();
   }
@@ -3252,10 +3419,12 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
 abstract class _CareGiverTrainingVerify implements CareGiverVerificationEvent {
   const factory _CareGiverTrainingVerify(
       {required final String userId,
+      required final String adminId,
       required final BuildContext context,
       final int? page}) = _$_CareGiverTrainingVerify;
 
   String get userId;
+  String get adminId;
   BuildContext get context;
   int? get page;
   @JsonKey(ignore: true)
@@ -3346,7 +3515,8 @@ class _$_NotifyPendingDocument implements _NotifyPendingDocument {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(BuildContext context, String userId)
+    required TResult Function(
+            BuildContext context, String userId, String adminId)
         getVerificationData,
     required TResult Function(VerificationTypes type) isSelectedVerificationTab,
     required TResult Function(bool value) isTappedReason,
@@ -3354,9 +3524,10 @@ class _$_NotifyPendingDocument implements _NotifyPendingDocument {
     required TResult Function(bool value) isTappedBlsReason,
     required TResult Function(bool value) isTappedTbReason,
     required TResult Function(bool value) isTappedCovidReason,
-    required TResult Function(String userId) getCareGiverVerificationData,
-    required TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)
+    required TResult Function(String userId, String adminId)
+        getCareGiverVerificationData,
+    required TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
     required TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)
@@ -3364,7 +3535,8 @@ class _$_NotifyPendingDocument implements _NotifyPendingDocument {
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
         careGiverCertificateReject,
-    required TResult Function(String userId, BuildContext context, int? page)
+    required TResult Function(
+            String userId, String adminId, BuildContext context, int? page)
         careGiverTrainingVerify,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
@@ -3375,16 +3547,18 @@ class _$_NotifyPendingDocument implements _NotifyPendingDocument {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BuildContext context, String userId)? getVerificationData,
+    TResult? Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult? Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult? Function(bool value)? isTappedReason,
     TResult? Function(bool value)? isTappedHHaReason,
     TResult? Function(bool value)? isTappedBlsReason,
     TResult? Function(bool value)? isTappedTbReason,
     TResult? Function(bool value)? isTappedCovidReason,
-    TResult? Function(String userId)? getCareGiverVerificationData,
-    TResult? Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult? Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult? Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult? Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -3392,7 +3566,8 @@ class _$_NotifyPendingDocument implements _NotifyPendingDocument {
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult? Function(String userId, BuildContext context, int? page)?
+    TResult? Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -3403,16 +3578,18 @@ class _$_NotifyPendingDocument implements _NotifyPendingDocument {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BuildContext context, String userId)? getVerificationData,
+    TResult Function(BuildContext context, String userId, String adminId)?
+        getVerificationData,
     TResult Function(VerificationTypes type)? isSelectedVerificationTab,
     TResult Function(bool value)? isTappedReason,
     TResult Function(bool value)? isTappedHHaReason,
     TResult Function(bool value)? isTappedBlsReason,
     TResult Function(bool value)? isTappedTbReason,
     TResult Function(bool value)? isTappedCovidReason,
-    TResult Function(String userId)? getCareGiverVerificationData,
-    TResult Function(String userID, int status, BuildContext context,
-            String? rejectReason)?
+    TResult Function(String userId, String adminId)?
+        getCareGiverVerificationData,
+    TResult Function(String userID, String adminId, int status,
+            BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
     TResult Function(String userID, int status, String profileUrl,
             String userName, BuildContext context)?
@@ -3420,7 +3597,8 @@ class _$_NotifyPendingDocument implements _NotifyPendingDocument {
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
         careGiverCertificateReject,
-    TResult Function(String userId, BuildContext context, int? page)?
+    TResult Function(
+            String userId, String adminId, BuildContext context, int? page)?
         careGiverTrainingVerify,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
@@ -3852,8 +4030,6 @@ class _$_CareGiverVerificationState implements _CareGiverVerificationState {
   final List<VerificationTypes> _verificationTypes;
   @override
   List<VerificationTypes> get verificationTypes {
-    if (_verificationTypes is EqualUnmodifiableListView)
-      return _verificationTypes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_verificationTypes);
   }
