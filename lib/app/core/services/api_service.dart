@@ -11,8 +11,8 @@ import '../../utils/shared_prefs.dart';
 
 class ApiService extends GetxService {
   // var baseUrl = "https://ba7d-62-61-160-244.ngrok-free.app/api/v1/"; //test
-  var baseUrl = "https://3a80-62-61-160-244.ngrok-free.app/api/v1/";//test server
-  // var baseUrl = "http://15.206.14.111/api/v1/"; //live
+  // var baseUrl = "https://3a80-62-61-160-244.ngrok-free.app/api/v1/";//test server
+  var baseUrl = "http://15.206.14.111/api/v1/"; //live
   // var baseUrl = "http://3.6.152.83/api/v1/"; //test
 
   // var xAuthClient = "12345";
