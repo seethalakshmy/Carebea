@@ -67,10 +67,14 @@ class AddShopView extends GetView<AddShopController> {
                     height: 30,
                   ),
 
-                  Text(
-                    'Shop name',
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                  ),
+                  RichText(
+                      text: TextSpan(
+                        text: 'Shop name',
+                        style: customTheme(context).regular.copyWith(fontSize: 12),
+                        children: const <TextSpan>[
+                          TextSpan(text: '\*', style: TextStyle(color: Colors.blue)),
+                        ],
+                      )),
                   const SizedBox(
                     height: 5,
                   ),
@@ -92,6 +96,7 @@ class AddShopView extends GetView<AddShopController> {
                     text: 'Last name',
                     style: customTheme(context).regular.copyWith(fontSize: 12),
                     children: const <TextSpan>[
+                      TextSpan(text: '\*', style: TextStyle(color: Colors.blue)),
                       TextSpan(text: '  (location should be the last name)', style: TextStyle(color: Colors.black54, fontStyle: FontStyle.italic)),
                     ],
                   )),
@@ -110,10 +115,15 @@ class AddShopView extends GetView<AddShopController> {
                   const SizedBox(
                     height: 5,
                   ),
-                  Text(
-                    "Shop category",
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                  ),
+                  RichText(
+                      text: TextSpan(
+                        text: "Shop category",
+                        style: customTheme(context).regular.copyWith(fontSize: 12),
+                        children: const <TextSpan>[
+                          TextSpan(text: '\*', style: TextStyle(color: Colors.blue)),
+                        ],
+                      )),
+
                   Padding(
                     padding: const EdgeInsets.only(top: 8, bottom: 12),
                     child: DropdownSearch<CategoryList>(
@@ -292,10 +302,15 @@ class AddShopView extends GetView<AddShopController> {
                   const SizedBox(
                     height: 15,
                   ),
-                  Text(
-                    'Local area/city',
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                  ),
+                  RichText(
+                      text: TextSpan(
+                        text: 'Local area/city',
+                        style: customTheme(context).regular.copyWith(fontSize: 12),
+                        children: const <TextSpan>[
+                          TextSpan(text: '\*', style: TextStyle(color: Colors.blue)),
+                        ],
+                      )),
+
                   const SizedBox(
                     height: 5,
                   ),
@@ -332,18 +347,18 @@ class AddShopView extends GetView<AddShopController> {
                               textcontroller: controller.zip,
                               maxlength: 6,
                               inputType: TextInputType.number,
-                              validaton: (value) {
-                                if (value == null || value.trim().isEmpty) {
-                                  return 'pincode can\'t be empty';
-                                }
-                                if (value.length < 6) {
-                                  return "Pincode must be 6 digits";
-                                }
-                                if (!RegExp(pinRegexp).hasMatch(value)) {
-                                  return 'Invalid Pincode';
-                                }
-                                return null;
-                              },
+                              // validaton: (value) {
+                                // if (value == null || value.trim().isEmpty) {
+                                //   return 'pincode can\'t be empty';
+                                // }
+                                // if (value.length < 6) {
+                                //   return "Pincode must be 6 digits";
+                                // }
+                                // if (!RegExp(pinRegexp).hasMatch(value)) {
+                                //   return 'Invalid Pincode';
+                                // }
+                                // return null;
+                              // },
                               // onChanged: (value)=>controller.zip.toString()!= value!,
                             ),
                           ],
@@ -370,12 +385,12 @@ class AddShopView extends GetView<AddShopController> {
                                 inputFormatters: [
                                   FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]+|\b\s')),
                                 ],
-                                validaton: (value) {
-                                  if (value == null || value.trim().isEmpty) {
-                                    return 'District can\'t be empty';
-                                  }
-                                  return null;
-                                },
+                                // validaton: (value) {
+                                  // if (value == null || value.trim().isEmpty) {
+                                  //   return 'District can\'t be empty';
+                                  // }
+                                  // return null;
+                                // },
                                 // onChanged: (value)=>controller.district.toString() =value!.trim(),
                               ),
                             ],
@@ -387,61 +402,61 @@ class AddShopView extends GetView<AddShopController> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    'State',
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Obx(() {
-                    if (controller.isStateListLoading.value) {
-                      circularProgressIndicator(context);
-                    }
-                    return DropdownSearch<StateList>(
-                      validator: (value) {
-                        if (value?.stateName == null) {
-                          return "State  can\'t be empty";
-                        }
-                        return null;
-                      },
-                      dropdownBuilder: (context, selectedItem) => Text(
-                        selectedItem?.stateName ?? "",
-                        style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black),
-                      ),
-                      popupProps: const PopupProps.menu(
-                        showSearchBox: true,
-                        // showSelectedItems: true,
-                      ),
-                      dropdownDecoratorProps: DropDownDecoratorProps(
-                          dropdownSearchDecoration: InputDecoration(
-                              // hintText: "Choose",
-                              // hintStyle: customTheme(Get.context!)
-                              //     .regular
-                              //     .copyWith(fontSize: 11, color: const Color(0xff929292)),
-                              isDense: true,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide.none,
-                              ),
-                              filled: true,
-                              fillColor: Theme.of(context).extension<CustomTheme>()!.textFormFieldColor)),
-                      items: controller.stateList,
-                      itemAsString: (StateList? stateList) => stateList!.stateName!,
-                      onChanged: (data) {
-                        controller.selectedStateList = data;
-                      },
-                      selectedItem: controller.selectedStateList,
-                    );
-                  }),
+                  // Text(
+                  //   'State',
+                  //   style: customTheme(context).regular.copyWith(fontSize: 12),
+                  // ),
+                  // const SizedBox(
+                  //   height: 5,
+                  // ),
+                  // Obx(() {
+                  //   if (controller.isStateListLoading.value) {
+                  //     circularProgressIndicator(context);
+                  //   }
+                  //   return DropdownSearch<StateList>(
+                  //     validator: (value) {
+                  //       if (value?.stateName == null) {
+                  //         return "State  can\'t be empty";
+                  //       }
+                  //       return null;
+                  //     },
+                  //     dropdownBuilder: (context, selectedItem) => Text(
+                  //       selectedItem?.stateName ?? "",
+                  //       style: customTheme(Get.context!).regular.copyWith(fontSize: 11, color: Colors.black),
+                  //     ),
+                  //     popupProps: const PopupProps.menu(
+                  //       showSearchBox: true,
+                  //       // showSelectedItems: true,
+                  //     ),
+                  //     dropdownDecoratorProps: DropDownDecoratorProps(
+                  //         dropdownSearchDecoration: InputDecoration(
+                  //             // hintText: "Choose",
+                  //             // hintStyle: customTheme(Get.context!)
+                  //             //     .regular
+                  //             //     .copyWith(fontSize: 11, color: const Color(0xff929292)),
+                  //             isDense: true,
+                  //             border: OutlineInputBorder(
+                  //               borderRadius: BorderRadius.circular(8),
+                  //               borderSide: BorderSide.none,
+                  //             ),
+                  //             enabledBorder: OutlineInputBorder(
+                  //               borderRadius: BorderRadius.circular(8),
+                  //               borderSide: BorderSide.none,
+                  //             ),
+                  //             focusedBorder: OutlineInputBorder(
+                  //               borderRadius: BorderRadius.circular(8),
+                  //               borderSide: BorderSide.none,
+                  //             ),
+                  //             filled: true,
+                  //             fillColor: Theme.of(context).extension<CustomTheme>()!.textFormFieldColor)),
+                  //     items: controller.stateList,
+                  //     itemAsString: (StateList? stateList) => stateList!.stateName!,
+                  //     onChanged: (data) {
+                  //       controller.selectedStateList = data;
+                  //     },
+                  //     selectedItem: controller.selectedStateList,
+                  //   );
+                  // }),
 
                   // CustomTextField(
                   //   validaton: (value) {
@@ -620,10 +635,14 @@ class AddShopView extends GetView<AddShopController> {
                   //     );
                   //   }),
                   // ),
-                  Text(
-                    "Route",
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                  ),
+                  RichText(
+                      text: TextSpan(
+                        text: "Route",
+                        style: customTheme(context).regular.copyWith(fontSize: 12),
+                        children: const <TextSpan>[
+                          TextSpan(text: '\*', style: TextStyle(color: Colors.blue)),
+                        ],
+                      )),
                   Padding(
                     padding: const EdgeInsets.only(top: 8, bottom: 12),
                     child: Obx(() {
@@ -675,21 +694,21 @@ class AddShopView extends GetView<AddShopController> {
                       );
                     }),
                   ),
-                  RichText(
-                      text: TextSpan(
-                    text: 'Opening balance',
-                    style: customTheme(context).regular.copyWith(fontSize: 12),
-                    children: const <TextSpan>[
-                      TextSpan(text: '  (mandatory only for existing shops)', style: TextStyle(color: Colors.black54, fontStyle: FontStyle.italic)),
-                    ],
-                  )),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  CustomTextField(
-                    enabled: !(Get.arguments['isEdit'] ?? false),
-                    textcontroller: controller.openingBalanceController,
-                  ),
+                  // RichText(
+                  //     text: TextSpan(
+                  //   text: 'Opening balance',
+                  //   style: customTheme(context).regular.copyWith(fontSize: 12),
+                  //   children: const <TextSpan>[
+                  //     TextSpan(text: '  (mandatory only for existing shops)', style: TextStyle(color: Colors.black54, fontStyle: FontStyle.italic)),
+                  //   ],
+                  // )),
+                  // const SizedBox(
+                  //   height: 5,
+                  // ),
+                  // CustomTextField(
+                  //   enabled: !(Get.arguments['isEdit'] ?? false),
+                  //   textcontroller: controller.openingBalanceController,
+                  // ),
                   const SizedBox(
                     height: 25,
                   ),
@@ -697,6 +716,11 @@ class AddShopView extends GetView<AddShopController> {
                       ? Obx(() {
                           return CustomButton(
                               onTap: () {
+                                for(int i=0;i<=controller.stateList.length-1;i++){
+                                  if(controller.stateList[i].stateName == "Kerala"){
+                                    controller.selectedStateList = controller.stateList[i];
+                                  }
+                                }
                                 if (controller.addShopFormKey.currentState!.validate()) {
                                   controller.updateShop(
                                     name: controller.name.text,
@@ -722,8 +746,16 @@ class AddShopView extends GetView<AddShopController> {
                               isLoading: controller.isAddShopButtonPressed.value);
                         })
                       : Obx(() {
+                         if (controller.isStateListLoading.value) {
+                            circularProgressIndicator(context);
+                        }
                           return CustomButton(
                               onTap: () {
+                                for(int i=0;i<=controller.stateList.length-1;i++){
+                                  if(controller.stateList[i].stateName == "Kerala"){
+                                    controller.selectedStateList = controller.stateList[i];
+                                  }
+                                }
                                 if (controller.addShopFormKey.currentState!.validate()) {
                                   controller.addShop(
                                     name: controller.name.text,
