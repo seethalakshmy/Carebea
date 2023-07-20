@@ -126,8 +126,9 @@ class AddShopController extends GetxController {
           zoneId,
           routeId,
           currentLocation!.latitude!,
-          currentLocation!.longitude!,
-          openingBalanceController.text.isEmpty ? 0 : double.parse(openingBalanceController.text));
+          currentLocation!.longitude!,0
+          // openingBalanceController.text.isEmpty ? 0 : double.parse(openingBalanceController.text)
+      );
 
       if (addShopResponse.addShopResult?.status ?? false) {
         showDialog<bool>(
