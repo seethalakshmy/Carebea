@@ -11,14 +11,14 @@ import '../../domain/on_boarding/i_on_boarding_repo.dart';
 import '../../domain/on_boarding/models/preferences/pet_list_response.dart';
 import '../../domain/on_boarding/models/preferences/preference_request_model.dart';
 import '../../domain/on_boarding/models/preferences/years_of_experience_response.dart';
+import '../../domain/on_boarding/models/services/get_services_response.dart';
+import '../../domain/on_boarding/models/services/service_request_model.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/city_list_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/document_list_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/gender_list_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/personal_details_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
 import '../../presentation/on_boarding/modules/preference/models/language_list_response.dart';
-import '../../presentation/on_boarding/modules/services/models/get_service_response.dart';
-import '../../presentation/on_boarding/modules/services/models/service_list_response.dart';
 
 class OnBoardingRepository implements IOnBoardingRepo {
   ApiClient apiClient = ApiClient();
@@ -282,7 +282,7 @@ class OnBoardingRepository implements IOnBoardingRepo {
 
   @override
   Future<Either<ApiErrorHandler, CommonResponse>> servicesSubmit(
-      {required String userId, required ServicesModel services}) async {
+      {required String userId, required ServicesRequest services}) async {
     try {
       final response = await apiClient.submitServices(userId, services);
       return Right(response);
@@ -300,10 +300,55 @@ class OnBoardingRepository implements IOnBoardingRepo {
   }
 
   @override
-  Future<Either<ApiErrorHandler, GetServiceResponse>> getServices(
-      {required String userId}) async {
+  Future<Either<ApiErrorHandler, GetServicesResponse>> getServices() async {
     try {
-      final response = await apiClient.getServices(userId);
+      final response = await apiClient.getServices();
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, CommonResponse>> buildProfileSubmit(
+      {required String userId,
+      required String aboutYou,
+      required String hobbies,
+      required String whyLoveBeingCaregiver}) async {
+    try {
+      final response = await apiClient.submitBuildProfile(
+          userId, aboutYou, hobbies, whyLoveBeingCaregiver);
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, CommonResponse>> accountDetailsSubmit(
+      {required String userId,
+      required String accountHolderName,
+      required String routingNumber,
+      required String accountNumber}) async {
+    try {
+      final response = await apiClient.submitAccountDetails(
+          userId, accountHolderName, routingNumber, accountNumber);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");

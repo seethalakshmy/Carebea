@@ -11,6 +11,7 @@ class OnboardingState with _$OnboardingState {
     required List<PlatformFile> covidDocumentList,
     required List<PetsModel> petsList,
     required List<PreferenceLanguageModel> languageList,
+    required List<ServiceModel> serviceList,
     required int isHHASelected,
     required int isBLSSelected,
     required int isTBSelected,
@@ -23,9 +24,11 @@ class OnboardingState with _$OnboardingState {
     required int isPetsSelected,
     required int isLanguagesSelected,
     required bool isLoading,
+    required bool isInitialLoading,
     required bool nextClicked,
     required int selectedGenderId,
     required int languagePaginationPage,
+    required int caregiverServiceListIndex,
     required Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
         personalDetailsOption,
     required Option<Either<ApiErrorHandler, CommonResponse>>
@@ -42,8 +45,14 @@ class OnboardingState with _$OnboardingState {
         yearsOption,
     required Option<Either<ApiErrorHandler, LanguageListResponse>>
         languageListOption,
-    required Option<Either<ApiErrorHandler, GetServiceResponse>>
+    required Option<Either<ApiErrorHandler, GetServicesResponse>>
         getServiceOption,
+    required Option<Either<ApiErrorHandler, CommonResponse>>
+        submitServiceOption,
+    required Option<Either<ApiErrorHandler, CommonResponse>>
+        submitBuildProfileOption,
+    required Option<Either<ApiErrorHandler, CommonResponse>>
+    submitAccountDetailsOption,
   }) = _OnboardingState;
 
   //const factory OnboardingState.formSubmitSuccess() = _FormSubmitSuccess;
@@ -58,6 +67,7 @@ class OnboardingState with _$OnboardingState {
       tbDocumentList: [],
       petsList: [],
       languageList: [],
+      serviceList: [],
       isHHASelected: 0,
       isBLSSelected: 0,
       isTBSelected: 0,
@@ -70,9 +80,11 @@ class OnboardingState with _$OnboardingState {
       isSmokerSelected: 0,
       isTransportationSelected: 0,
       isLoading: false,
+      isInitialLoading: false,
       nextClicked: false,
       selectedGenderId: 0,
       languagePaginationPage: 1,
+      caregiverServiceListIndex: -1,
       personalDetailsOption: const None(),
       qualificationDetailsOption: const None(),
       preferenceDetailsOption: const None(),
@@ -84,6 +96,9 @@ class OnboardingState with _$OnboardingState {
       yearsOption: const None(),
       languageListOption: const None(),
       getServiceOption: const None(),
+      submitServiceOption: const None(),
+      submitBuildProfileOption: const None(),
+      submitAccountDetailsOption: const None(),
     );
   }
 }

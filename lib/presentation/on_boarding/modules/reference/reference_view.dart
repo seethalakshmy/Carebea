@@ -235,6 +235,7 @@ class _ReferenceViewState extends State<ReferenceView> {
         _labelWidget(AppString.relationship.val),
         CustomSizedBox(height: DBL.twelve.val),
         StateDropDown(
+          onboardingBloc: widget.onboardingBloc,
           errorText: nextClicked
               ? selectedRelation.isEmpty
                   ? AppString.emptyRelationship.val
@@ -257,6 +258,7 @@ class _ReferenceViewState extends State<ReferenceView> {
         _labelWidget(AppString.address.val),
         CustomSizedBox(height: DBL.twelve.val),
         StateDropDown(
+          onboardingBloc: widget.onboardingBloc,
           errorText: nextClicked
               ? selectedAddress.isEmpty
                   ? AppString.emptyAddress.val
@@ -279,6 +281,7 @@ class _ReferenceViewState extends State<ReferenceView> {
         _labelWidget(AppString.state.val),
         CustomSizedBox(height: DBL.twelve.val),
         StateDropDown(
+          onboardingBloc: widget.onboardingBloc,
           errorText: nextClicked
               ? selectedState.isEmpty
                   ? AppString.emptyState.val
@@ -301,6 +304,7 @@ class _ReferenceViewState extends State<ReferenceView> {
         _labelWidget(AppString.city.val),
         CustomSizedBox(height: DBL.twelve.val),
         StateDropDown(
+          onboardingBloc: widget.onboardingBloc,
           errorText: nextClicked
               ? selectedCity.isEmpty
                   ? AppString.emptyCity.val

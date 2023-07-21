@@ -46,6 +46,7 @@ class OnboardingEvent with _$OnboardingEvent {
   const factory OnboardingEvent.cityList() = _CityLists;
 
   const factory OnboardingEvent.stateList() = _StateLists;
+
   const factory OnboardingEvent.yearsOfExpList() = _YearsOfExp;
 
   const factory OnboardingEvent.petsList(String petSearchKey) = _GetPetList;
@@ -100,6 +101,27 @@ class OnboardingEvent with _$OnboardingEvent {
       _CovidDocumentUploadSelected;
 
   const factory OnboardingEvent.languagePagination() = _LanguagePagination;
-  const factory OnboardingEvent.getServices({required String userId}) =
-      _GetCaregiverService;
+
+  const factory OnboardingEvent.getServices() = _GetCaregiverService;
+
+  const factory OnboardingEvent.submitServices(
+      {required String userId,
+      required ServicesRequest services}) = _SubmitCaregiverService;
+
+  const factory OnboardingEvent.serviceSelected(int index, bool value) =
+      _CaregiverServiceSelected;
+
+  const factory OnboardingEvent.submitBuildProfile({
+    required String userId,
+    required String aboutYou,
+    required String hobbies,
+    required String whyLoveBeingCaregiver,
+  }) = _SubmitBuildProfile;
+
+  const factory OnboardingEvent.submitAccountDetais({
+    required String userId,
+    required String accountHolderName,
+    required String routingNumber,
+    required String accountNumber,
+  }) = _SubmitAccountDetails;
 }

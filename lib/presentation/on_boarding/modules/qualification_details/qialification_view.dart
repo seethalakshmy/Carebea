@@ -314,6 +314,7 @@ class _QualificationViewState extends State<QualificationView> {
                           rightButtonName: AppString.next.val,
                           leftButtonName: AppString.back.val,
                           onLeftButtonPressed: () {
+                            widget.onboardingBloc.nextButtonClicked = false;
                             widget.pageController.jumpToPage(
                                 widget.pageController.page!.toInt() - 1);
                           },
