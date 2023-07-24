@@ -71,7 +71,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
 
   @override
   void initState() {
-    _adminUserId = sharedPrefUtil.getUserId;
+    _adminUserId = sharedPrefUtil.getAdminId;
     int? getPage = autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
     int? getTab = autoTabRouter?.currentChild?.queryParams.getInt('tab', 0);
 
