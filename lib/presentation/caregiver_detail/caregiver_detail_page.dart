@@ -3,6 +3,7 @@ import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
 import 'package:admin_580_tech/infrastructure/caregiver_detail/caregiver_detail_repository.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/caregiver_detail/views/caregiver_bank_account_info_view.dart';
 import 'package:admin_580_tech/presentation/caregiver_detail/views/caregiver_earning_view.dart';
 import 'package:admin_580_tech/presentation/caregiver_detail/views/caregiver_schedule_view.dart';
@@ -51,15 +52,12 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
   late TabController tabController;
   late CaregiverDetailBloc _caregiverDetailBloc;
   String userId = "";
-  String adminId = "";
   int? _page;
   int? _tab;
 
   @override
   void initState() {
     userId = autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
-    adminId =
-        autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
     _page = autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
     _tab = autoTabRouter?.currentChild?.queryParams.getInt('tab', 0);
 
@@ -73,7 +71,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
     return BlocProvider(
       create: (context) => _caregiverDetailBloc
         ..add(CareGiverDetailEvent.getCareGiverDetail(
-            userId: userId, adminId: adminId)),
+            userId: userId, adminId: SharedPreffUtil().getAdminId)),
       child: BlocBuilder<CaregiverDetailBloc, CareGiverDetailState>(
         builder: (context, state) {
           return state.isLoading

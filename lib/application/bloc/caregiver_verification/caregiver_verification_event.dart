@@ -40,6 +40,7 @@ class CareGiverVerificationEvent with _$CareGiverVerificationEvent {
 
   const factory CareGiverVerificationEvent.careGiverCertificateApprove(
       {required String userID,
+      required String adminId,
       required int status,
       required String profileUrl,
       required String userName,

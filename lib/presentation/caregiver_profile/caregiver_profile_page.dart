@@ -1,6 +1,7 @@
 import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/infrastructure/caregiver_profile/caregiver_profile_repository.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/views/caregiver_agreement_view.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/views/caregiver_personal_details_view.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/views/caregiver_preference_view.dart';
@@ -41,15 +42,12 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
   String _userId = "";
-  String _adminId = "";
   late CareGiverProfileBloc _careGiverProfileBloc;
 
   @override
   void initState() {
     tabController = TabController(vsync: this, length: 7);
     _userId =
-        autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
-    _adminId =
         autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
     _careGiverProfileBloc = CareGiverProfileBloc(CareGiverProfileRepository());
     super.initState();
@@ -70,7 +68,7 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
     return BlocProvider(
       create: (context) => _careGiverProfileBloc
         ..add(CareGiverProfileEvent.getCareGiverProfile(
-            userId: _userId, adminId: _adminId)),
+            userId: _userId, adminId: SharedPreffUtil().getAdminId)),
       child: BlocBuilder<CareGiverProfileBloc, CareGiverProfileState>(
         builder: (context, state) {
           return state.isLoading
@@ -375,7 +373,7 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
                   userId: _userId,
                   status: false,
                   context: context,
-                  adminId: _adminId));
+                  adminId: SharedPreffUtil().getAdminId));
         }
       },
       color: AppColor.white.val,
@@ -401,14 +399,14 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
                   userId: _userId,
                   status: true,
                   context: context,
-                  adminId: _adminId));
+                  adminId: SharedPreffUtil().getAdminId));
         } else {
           _careGiverProfileBloc.add(
               CareGiverProfileEvent.careGiverInterViewVerify(
                   userId: _userId,
                   status: true,
                   context: context,
-                  adminId: _adminId));
+                  adminId: SharedPreffUtil().getAdminId));
         }
       },
       borderRadius: DBL.five.val,

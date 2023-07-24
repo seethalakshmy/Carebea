@@ -32,8 +32,8 @@ mixin _$CareGiverVerificationEvent {
     required TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)
+    required TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
@@ -60,8 +60,8 @@ mixin _$CareGiverVerificationEvent {
     TResult? Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult? Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -88,8 +88,8 @@ mixin _$CareGiverVerificationEvent {
     TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -290,8 +290,8 @@ class _$_GetVerificationData implements _GetVerificationData {
     required TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)
+    required TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
@@ -321,8 +321,8 @@ class _$_GetVerificationData implements _GetVerificationData {
     TResult? Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult? Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -352,8 +352,8 @@ class _$_GetVerificationData implements _GetVerificationData {
     TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -549,8 +549,8 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
     required TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)
+    required TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
@@ -580,8 +580,8 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
     TResult? Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult? Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -611,8 +611,8 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
     TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -801,8 +801,8 @@ class _$_IsTappedReason implements _IsTappedReason {
     required TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)
+    required TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
@@ -832,8 +832,8 @@ class _$_IsTappedReason implements _IsTappedReason {
     TResult? Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult? Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -863,8 +863,8 @@ class _$_IsTappedReason implements _IsTappedReason {
     TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -1052,8 +1052,8 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
     required TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)
+    required TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
@@ -1083,8 +1083,8 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
     TResult? Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult? Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -1114,8 +1114,8 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
     TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -1303,8 +1303,8 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
     required TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)
+    required TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
@@ -1334,8 +1334,8 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
     TResult? Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult? Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -1365,8 +1365,8 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
     TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -1553,8 +1553,8 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
     required TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)
+    required TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
@@ -1584,8 +1584,8 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
     TResult? Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult? Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -1615,8 +1615,8 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
     TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -1805,8 +1805,8 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
     required TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)
+    required TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
@@ -1836,8 +1836,8 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
     TResult? Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult? Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -1867,8 +1867,8 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
     TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -2068,8 +2068,8 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
     required TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)
+    required TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
@@ -2099,8 +2099,8 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
     TResult? Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult? Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -2130,8 +2130,8 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
     TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -2370,8 +2370,8 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
     required TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)
+    required TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
@@ -2402,8 +2402,8 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
     TResult? Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult? Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -2434,8 +2434,8 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
     TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -2564,6 +2564,7 @@ abstract class _$$_CareGiverCertificateApproveCopyWith<$Res> {
   @useResult
   $Res call(
       {String userID,
+      String adminId,
       int status,
       String profileUrl,
       String userName,
@@ -2584,6 +2585,7 @@ class __$$_CareGiverCertificateApproveCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userID = null,
+    Object? adminId = null,
     Object? status = null,
     Object? profileUrl = null,
     Object? userName = null,
@@ -2593,6 +2595,10 @@ class __$$_CareGiverCertificateApproveCopyWithImpl<$Res>
       userID: null == userID
           ? _value.userID
           : userID // ignore: cast_nullable_to_non_nullable
+              as String,
+      adminId: null == adminId
+          ? _value.adminId
+          : adminId // ignore: cast_nullable_to_non_nullable
               as String,
       status: null == status
           ? _value.status
@@ -2619,6 +2625,7 @@ class __$$_CareGiverCertificateApproveCopyWithImpl<$Res>
 class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
   const _$_CareGiverCertificateApprove(
       {required this.userID,
+      required this.adminId,
       required this.status,
       required this.profileUrl,
       required this.userName,
@@ -2626,6 +2633,8 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
 
   @override
   final String userID;
+  @override
+  final String adminId;
   @override
   final int status;
   @override
@@ -2637,7 +2646,7 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
 
   @override
   String toString() {
-    return 'CareGiverVerificationEvent.careGiverCertificateApprove(userID: $userID, status: $status, profileUrl: $profileUrl, userName: $userName, context: $context)';
+    return 'CareGiverVerificationEvent.careGiverCertificateApprove(userID: $userID, adminId: $adminId, status: $status, profileUrl: $profileUrl, userName: $userName, context: $context)';
   }
 
   @override
@@ -2646,6 +2655,7 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
         (other.runtimeType == runtimeType &&
             other is _$_CareGiverCertificateApprove &&
             (identical(other.userID, userID) || other.userID == userID) &&
+            (identical(other.adminId, adminId) || other.adminId == adminId) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.profileUrl, profileUrl) ||
                 other.profileUrl == profileUrl) &&
@@ -2655,8 +2665,8 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, userID, status, profileUrl, userName, context);
+  int get hashCode => Object.hash(
+      runtimeType, userID, adminId, status, profileUrl, userName, context);
 
   @JsonKey(ignore: true)
   @override
@@ -2682,8 +2692,8 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
     required TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)
+    required TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
@@ -2695,7 +2705,7 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
         notifyPendingDocument,
   }) {
     return careGiverCertificateApprove(
-        userID, status, profileUrl, userName, context);
+        userID, adminId, status, profileUrl, userName, context);
   }
 
   @override
@@ -2714,8 +2724,8 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
     TResult? Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult? Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -2727,7 +2737,7 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
         notifyPendingDocument,
   }) {
     return careGiverCertificateApprove?.call(
-        userID, status, profileUrl, userName, context);
+        userID, adminId, status, profileUrl, userName, context);
   }
 
   @override
@@ -2746,8 +2756,8 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
     TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -2761,7 +2771,7 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
   }) {
     if (careGiverCertificateApprove != null) {
       return careGiverCertificateApprove(
-          userID, status, profileUrl, userName, context);
+          userID, adminId, status, profileUrl, userName, context);
     }
     return orElse();
   }
@@ -2852,12 +2862,14 @@ abstract class _CareGiverCertificateApprove
     implements CareGiverVerificationEvent {
   const factory _CareGiverCertificateApprove(
       {required final String userID,
+      required final String adminId,
       required final int status,
       required final String profileUrl,
       required final String userName,
       required final BuildContext context}) = _$_CareGiverCertificateApprove;
 
   String get userID;
+  String get adminId;
   int get status;
   String get profileUrl;
   String get userName;
@@ -2966,8 +2978,8 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
     required TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)
+    required TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
@@ -2997,8 +3009,8 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
     TResult? Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult? Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -3028,8 +3040,8 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
     TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -3253,8 +3265,8 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
     required TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)
+    required TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
@@ -3284,8 +3296,8 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
     TResult? Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult? Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -3315,8 +3327,8 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
     TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -3529,8 +3541,8 @@ class _$_NotifyPendingDocument implements _NotifyPendingDocument {
     required TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)
         careGiverBackgroundVerify,
-    required TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)
+    required TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)
         careGiverCertificateApprove,
     required TResult Function(
             String userID, RejectionParams params, BuildContext context)
@@ -3560,8 +3572,8 @@ class _$_NotifyPendingDocument implements _NotifyPendingDocument {
     TResult? Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult? Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult? Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult? Function(
             String userID, RejectionParams params, BuildContext context)?
@@ -3591,8 +3603,8 @@ class _$_NotifyPendingDocument implements _NotifyPendingDocument {
     TResult Function(String userID, String adminId, int status,
             BuildContext context, String? rejectReason)?
         careGiverBackgroundVerify,
-    TResult Function(String userID, int status, String profileUrl,
-            String userName, BuildContext context)?
+    TResult Function(String userID, String adminId, int status,
+            String profileUrl, String userName, BuildContext context)?
         careGiverCertificateApprove,
     TResult Function(
             String userID, RejectionParams params, BuildContext context)?

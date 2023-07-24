@@ -4,6 +4,7 @@ import 'package:admin_580_tech/core/custom_snackbar.dart';
 import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_verification_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/reject_params.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/widgets/custom_check_text_field.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/widgets/file_preview.dart';
 import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart';
@@ -656,7 +657,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                       context: context,
                       profileUrl: "",
                       userName:
-                          "${state.response?.data?.caregiver?.firstName} ${state.response?.data?.caregiver?.lastName}"));
+                          "${state.response?.data?.caregiver?.firstName} ${state.response?.data?.caregiver?.lastName}", adminId: SharedPreffUtil().getAdminId));
             },
             onTapReject: () {
               _certificateRejectPopUp(

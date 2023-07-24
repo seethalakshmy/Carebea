@@ -23,7 +23,7 @@ class CareGiverVerificationRepository implements ICareGiverVerificationRepo {
       final response = await _apiClient.getCareGiverVerificationData(
         "",
         userID,
-        SharedPreffUtil().getUserId,
+        SharedPreffUtil().getAdminId,
       );
       return Right(response);
     } on DioError catch (e) {
@@ -138,7 +138,7 @@ class CareGiverVerificationRepository implements ICareGiverVerificationRepo {
   }) async {
     try {
       final response = await _apiClient.notifyPendingDocument(
-          "", userID, SharedPreffUtil().getUserId);
+          "", userID, SharedPreffUtil().getAdminId);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverVerificationRepository: ${e.message}");
