@@ -7,13 +7,19 @@ import 'package:dartz/dartz.dart';
 
 abstract class ICareGiverDetailRepo {
   Future<Either<ApiErrorHandler, CareGiverDetailResponse>> getCareGiverDetail(
-      {required String userID});
+      {required String userID, required String adminId});
   Future<Either<ApiErrorHandler, CareGiverServiceListResponse>>
       getCareGiverServiceList(
-          {required String userID, required int page, required int limit});
+          {required String userID,
+          required int page,
+          required int limit,
+          required String adminId});
   Future<Either<ApiErrorHandler, CareGiverEarningsListResponse>>
       getCareGiverEarningsList(
-          {required String userID, required int page, required int limit});
+          {required String userID,
+          required int page,
+          required int limit,
+          required String adminId});
   Future<Either<ApiErrorHandler, CareGiverServiceRequestListResponse>>
       getCareGiverServiceRequestedList(
           {required String userID, required int page, required int limit});

@@ -20,6 +20,7 @@ import '../../application/bloc/login/login_bloc.dart';
 import '../routes/app_router.gr.dart';
 import '../widget/custom_text_field.dart';
 
+@RoutePage()
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 

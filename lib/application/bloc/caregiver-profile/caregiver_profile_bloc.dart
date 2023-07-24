@@ -29,6 +29,7 @@ class CareGiverProfileBloc
     final Either<ApiErrorHandler, CaregiverProfileResponse> homeResult =
         await careGiverProfileRepository.getCareGiverProfile(
       userID: event.userId,
+      adminId: event.adminId,
     );
     CareGiverProfileState stateResult = homeResult.fold((l) {
       return state.copyWith(
@@ -51,14 +52,15 @@ class CareGiverProfileBloc
       Emitter<CareGiverProfileState> emit) async {
     final Either<ApiErrorHandler, VerifyResponse> homeResult =
         await careGiverProfileRepository.careGiverTrainingVerify(
-            userID: event.userId, status: event.status);
+            userID: event.userId, status: event.status, adminId: event.adminId);
     CareGiverProfileState stateResult = homeResult.fold((l) {
       CSnackBar.showError(event.context, msg: l.error);
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
-        add(CareGiverProfileEvent.getCareGiverProfile(userId: event.userId));
+        add(CareGiverProfileEvent.getCareGiverProfile(
+            userId: event.userId, adminId: event.adminId));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
@@ -77,7 +79,7 @@ class CareGiverProfileBloc
       Emitter<CareGiverProfileState> emit) async {
     final Either<ApiErrorHandler, VerifyResponse> homeResult =
         await careGiverProfileRepository.careGiverInterViewVerify(
-            userID: event.userId, status: event.status);
+            userID: event.userId, status: event.status, adminId: event.adminId);
     CareGiverProfileState stateResult = homeResult.fold((l) {
       CSnackBar.showError(event.context, msg: l.error);
       return state.copyWith(error: l.error, isLoading: false, isError: true);
@@ -85,7 +87,8 @@ class CareGiverProfileBloc
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
         // autoTabRouter?.navigate(CareGiversRoute());
-        add(CareGiverProfileEvent.getCareGiverProfile(userId: event.userId));
+        add(CareGiverProfileEvent.getCareGiverProfile(
+            userId: event.userId, adminId: event.adminId));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }

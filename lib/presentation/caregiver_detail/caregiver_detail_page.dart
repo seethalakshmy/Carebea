@@ -3,6 +3,7 @@ import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/caregiver_detail/model/caregiver_detail_response.dart';
 import 'package:admin_580_tech/infrastructure/caregiver_detail/caregiver_detail_repository.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/caregiver_detail/views/caregiver_bank_account_info_view.dart';
 import 'package:admin_580_tech/presentation/caregiver_detail/views/caregiver_earning_view.dart';
 import 'package:admin_580_tech/presentation/caregiver_detail/views/caregiver_schedule_view.dart';
@@ -25,9 +26,11 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import '../../core/custom_debugger.dart';
 import '../../core/responsive.dart';
 import '../routes/app_router.gr.dart';
+
 import '../side_menu/side_menu_page.dart';
 import '../widget/svg_text.dart';
 
+@RoutePage()
 class CareGiverDetailPage extends StatefulWidget {
   const CareGiverDetailPage(
       {Key? key,
@@ -67,7 +70,8 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => _caregiverDetailBloc
-        ..add(CareGiverDetailEvent.getCareGiverDetail(userId: userId)),
+        ..add(CareGiverDetailEvent.getCareGiverDetail(
+            userId: userId, adminId: SharedPreffUtil().getAdminId)),
       child: BlocBuilder<CaregiverDetailBloc, CareGiverDetailState>(
         builder: (context, state) {
           return state.isLoading

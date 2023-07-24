@@ -1,6 +1,7 @@
 import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/infrastructure/caregiver_profile/caregiver_profile_repository.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/views/caregiver_agreement_view.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/views/caregiver_personal_details_view.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/views/caregiver_preference_view.dart';
@@ -26,6 +27,7 @@ import '../widget/custom_text.dart';
 import '../widget/error_view.dart';
 import '../widget/table_verification_button.dart';
 
+@RoutePage()
 class CareGiverProfilePage extends StatefulWidget {
   const CareGiverProfilePage({Key? key, @QueryParam('id') this.id = ''})
       : super(key: key);
@@ -65,7 +67,8 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
   BlocProvider<CareGiverProfileBloc> _rebuildView() {
     return BlocProvider(
       create: (context) => _careGiverProfileBloc
-        ..add(CareGiverProfileEvent.getCareGiverProfile(userId: _userId)),
+        ..add(CareGiverProfileEvent.getCareGiverProfile(
+            userId: _userId, adminId: SharedPreffUtil().getAdminId)),
       child: BlocBuilder<CareGiverProfileBloc, CareGiverProfileState>(
         builder: (context, state) {
           return state.isLoading
@@ -360,11 +363,17 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
         if (status == Verification.trainingStarted.val) {
           _careGiverProfileBloc.add(
               CareGiverProfileEvent.careGiverTrainingVerify(
-                  userId: _userId, status: false, context: context));
+                  userId: _userId,
+                  status: false,
+                  context: context,
+                  adminId: ''));
         } else {
           _careGiverProfileBloc.add(
               CareGiverProfileEvent.careGiverInterViewVerify(
-                  userId: _userId, status: false, context: context));
+                  userId: _userId,
+                  status: false,
+                  context: context,
+                  adminId: SharedPreffUtil().getAdminId));
         }
       },
       color: AppColor.white.val,
@@ -387,11 +396,17 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
         if (status == Verification.trainingStarted.val) {
           _careGiverProfileBloc.add(
               CareGiverProfileEvent.careGiverTrainingVerify(
-                  userId: _userId, status: true, context: context));
+                  userId: _userId,
+                  status: true,
+                  context: context,
+                  adminId: SharedPreffUtil().getAdminId));
         } else {
           _careGiverProfileBloc.add(
               CareGiverProfileEvent.careGiverInterViewVerify(
-                  userId: _userId, status: true, context: context));
+                  userId: _userId,
+                  status: true,
+                  context: context,
+                  adminId: SharedPreffUtil().getAdminId));
         }
       },
       borderRadius: DBL.five.val,

@@ -1,19 +1,24 @@
 import 'dart:convert';
+
 /// status : true
 /// message : "Success"
 /// data : {"references":[{"name":"reference name one","phone":"","relationship":"6440e584a8a1d6a29d7ff746","address":"address 1","street":"street 1","city":"5a0ae710737d5eb24932fc6c","state":"643d82526cba31e037a0dc4b","city_name":"Barkhamsted","state_name":"Connecticut","relation_name":"Nephew","zip":"68095-2394"},{"name":"two","phone":"643-565-6262","relationship":"6440e584a8a1d6a29d7ff73f","address":"shs","street":"ueue","city":"5a0ae710737d5eb2493300b7","state":"643d82526cba31e037a0dc3f","city_name":"Arapahoe","state_name":"Colorado","relation_name":"Sister","zip":"23232-4646"}]}
 
-GetReferenceResponse getReferenceResponseFromJson(String str) => GetReferenceResponse.fromJson(json.decode(str));
-String getReferenceResponseToJson(GetReferenceResponse data) => json.encode(data.toJson());
+GetReferenceResponse getReferenceResponseFromJson(String str) =>
+    GetReferenceResponse.fromJson(json.decode(str));
+String getReferenceResponseToJson(GetReferenceResponse data) =>
+    json.encode(data.toJson());
+
 class GetReferenceResponse {
   GetReferenceResponse({
-      bool? status, 
-      String? message, 
-      Data? data,}){
+    bool? status,
+    String? message,
+    Data? data,
+  }) {
     _status = status;
     _message = message;
     _data = data;
-}
+  }
 
   GetReferenceResponse.fromJson(dynamic json) {
     _status = json['status'];
@@ -23,13 +28,16 @@ class GetReferenceResponse {
   bool? _status;
   String? _message;
   Data? _data;
-GetReferenceResponse copyWith({  bool? status,
-  String? message,
-  Data? data,
-}) => GetReferenceResponse(  status: status ?? _status,
-  message: message ?? _message,
-  data: data ?? _data,
-);
+  GetReferenceResponse copyWith({
+    bool? status,
+    String? message,
+    Data? data,
+  }) =>
+      GetReferenceResponse(
+        status: status ?? _status,
+        message: message ?? _message,
+        data: data ?? _data,
+      );
   bool? get status => _status;
   String? get message => _message;
   Data? get data => _data;
@@ -43,18 +51,19 @@ GetReferenceResponse copyWith({  bool? status,
     }
     return map;
   }
-
 }
 
 /// references : [{"name":"reference name one","phone":"","relationship":"6440e584a8a1d6a29d7ff746","address":"address 1","street":"street 1","city":"5a0ae710737d5eb24932fc6c","state":"643d82526cba31e037a0dc4b","city_name":"Barkhamsted","state_name":"Connecticut","relation_name":"Nephew","zip":"68095-2394"},{"name":"two","phone":"643-565-6262","relationship":"6440e584a8a1d6a29d7ff73f","address":"shs","street":"ueue","city":"5a0ae710737d5eb2493300b7","state":"643d82526cba31e037a0dc3f","city_name":"Arapahoe","state_name":"Colorado","relation_name":"Sister","zip":"23232-4646"}]
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
+
 class Data {
   Data({
-      List<GetReferences>? references,}){
+    List<GetReferences>? references,
+  }) {
     _references = references;
-}
+  }
 
   Data.fromJson(dynamic json) {
     if (json['references'] != null) {
@@ -65,9 +74,12 @@ class Data {
     }
   }
   List<GetReferences>? _references;
-Data copyWith({  List<GetReferences>? references,
-}) => Data(  references: references ?? _references,
-);
+  Data copyWith({
+    List<GetReferences>? references,
+  }) =>
+      Data(
+        references: references ?? _references,
+      );
   List<GetReferences>? get references => _references;
 
   Map<String, dynamic> toJson() {
@@ -77,7 +89,6 @@ Data copyWith({  List<GetReferences>? references,
     }
     return map;
   }
-
 }
 
 /// name : "reference name one"
@@ -92,21 +103,24 @@ Data copyWith({  List<GetReferences>? references,
 /// relation_name : "Nephew"
 /// zip : "68095-2394"
 
-GetReferences referencesFromJson(String str) => GetReferences.fromJson(json.decode(str));
+GetReferences referencesFromJson(String str) =>
+    GetReferences.fromJson(json.decode(str));
 String referencesToJson(GetReferences data) => json.encode(data.toJson());
+
 class GetReferences {
   GetReferences({
-      String? name, 
-      String? phone, 
-      String? relationship, 
-      String? address, 
-      String? street, 
-      String? city, 
-      String? state, 
-      String? cityName, 
-      String? stateName, 
-      String? relationName, 
-      String? zip,}){
+    String? name,
+    String? phone,
+    String? relationship,
+    String? address,
+    String? street,
+    String? city,
+    String? state,
+    String? cityName,
+    String? stateName,
+    String? relationName,
+    String? zip,
+  }) {
     _name = name;
     _phone = phone;
     _relationship = relationship;
@@ -118,19 +132,18 @@ class GetReferences {
     _stateName = stateName;
     _relationName = relationName;
     _zip = zip;
-}
+  }
 
   GetReferences.fromJson(dynamic json) {
     _name = json['name'];
-    _phone = json['phone'];
+    _phone = json['phone_number'];
     _relationship = json['relationship'];
     _address = json['address'];
     _street = json['street'];
-    _city = json['city'];
-    _state = json['state'];
+    _city = json['city_id'];
+    _state = json['state_id'];
     _cityName = json['city_name'];
     _stateName = json['state_name'];
-    _relationName = json['relation_name'];
     _zip = json['zip'];
   }
   String? _name;
@@ -144,29 +157,32 @@ class GetReferences {
   String? _stateName;
   String? _relationName;
   String? _zip;
-GetReferences copyWith({  String? name,
-  String? phone,
-  String? relationship,
-  String? address,
-  String? street,
-  String? city,
-  String? state,
-  String? cityName,
-  String? stateName,
-  String? relationName,
-  String? zip,
-}) => GetReferences(  name: name ?? _name,
-  phone: phone ?? _phone,
-  relationship: relationship ?? _relationship,
-  address: address ?? _address,
-  street: street ?? _street,
-  city: city ?? _city,
-  state: state ?? _state,
-  cityName: cityName ?? _cityName,
-  stateName: stateName ?? _stateName,
-  relationName: relationName ?? _relationName,
-  zip: zip ?? _zip,
-);
+  GetReferences copyWith({
+    String? name,
+    String? phone,
+    String? relationship,
+    String? address,
+    String? street,
+    String? city,
+    String? state,
+    String? cityName,
+    String? stateName,
+    String? relationName,
+    String? zip,
+  }) =>
+      GetReferences(
+        name: name ?? _name,
+        phone: phone ?? _phone,
+        relationship: relationship ?? _relationship,
+        address: address ?? _address,
+        street: street ?? _street,
+        city: city ?? _city,
+        state: state ?? _state,
+        cityName: cityName ?? _cityName,
+        stateName: stateName ?? _stateName,
+        relationName: relationName ?? _relationName,
+        zip: zip ?? _zip,
+      );
   String? get name => _name;
   String? get phone => _phone;
   String? get relationship => _relationship;
@@ -195,4 +211,47 @@ GetReferences copyWith({  String? name,
     return map;
   }
 
+  set setAddress(String value) {
+    _address = value;
+  }
+
+  set setZip(String value) {
+    _zip = value;
+  }
+
+  set setStateId(String value) {
+    _state = value;
+  }
+
+  set setRelationShip(String value) {
+    _relationship = value;
+  }
+
+  set setRelationshipId(String value) {
+    _relationship = value;
+  }
+
+  set setCityId(String value) {
+    _city = value;
+  }
+
+  set setStreet(String value) {
+    _street = value;
+  }
+
+  set setPhoneNumber(String value) {
+    _phone = value;
+  }
+
+  set setName(String value) {
+    _name = value;
+  }
+
+  set setStateName(String value) {
+    _stateName = value;
+  }
+
+  set setCityName(String value) {
+    _cityName = value;
+  }
 }

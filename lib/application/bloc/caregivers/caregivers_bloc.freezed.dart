@@ -18,33 +18,33 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CareGiversEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, int page, int limit, int type,
-            String? searchTerm, int? filterId)
+    required TResult Function(String userId, String adminId, int page,
+            int limit, int type, String? searchTerm, int? filterId)
         getCareGivers,
-    required TResult Function(Caregivers caregiver, String userId, bool status,
-            BuildContext context)
+    required TResult Function(Caregivers caregiver, String userId,
+            String adminId, bool status, BuildContext context)
         isUserActive,
     required TResult Function(Types type) isSelectedTab,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, int page, int limit, int type,
-            String? searchTerm, int? filterId)?
+    TResult? Function(String userId, String adminId, int page, int limit,
+            int type, String? searchTerm, int? filterId)?
         getCareGivers,
-    TResult? Function(Caregivers caregiver, String userId, bool status,
-            BuildContext context)?
+    TResult? Function(Caregivers caregiver, String userId, String adminId,
+            bool status, BuildContext context)?
         isUserActive,
     TResult? Function(Types type)? isSelectedTab,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, int page, int limit, int type,
-            String? searchTerm, int? filterId)?
+    TResult Function(String userId, String adminId, int page, int limit,
+            int type, String? searchTerm, int? filterId)?
         getCareGivers,
-    TResult Function(Caregivers caregiver, String userId, bool status,
-            BuildContext context)?
+    TResult Function(Caregivers caregiver, String userId, String adminId,
+            bool status, BuildContext context)?
         isUserActive,
     TResult Function(Types type)? isSelectedTab,
     required TResult orElse(),
@@ -100,6 +100,7 @@ abstract class _$$_GetCareGiversCopyWith<$Res> {
   @useResult
   $Res call(
       {String userId,
+      String adminId,
       int page,
       int limit,
       int type,
@@ -119,6 +120,7 @@ class __$$_GetCareGiversCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = null,
+    Object? adminId = null,
     Object? page = null,
     Object? limit = null,
     Object? type = null,
@@ -129,6 +131,10 @@ class __$$_GetCareGiversCopyWithImpl<$Res>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      adminId: null == adminId
+          ? _value.adminId
+          : adminId // ignore: cast_nullable_to_non_nullable
               as String,
       page: null == page
           ? _value.page
@@ -159,6 +165,7 @@ class __$$_GetCareGiversCopyWithImpl<$Res>
 class _$_GetCareGivers implements _GetCareGivers {
   const _$_GetCareGivers(
       {required this.userId,
+      required this.adminId,
       required this.page,
       required this.limit,
       required this.type,
@@ -167,6 +174,8 @@ class _$_GetCareGivers implements _GetCareGivers {
 
   @override
   final String userId;
+  @override
+  final String adminId;
   @override
   final int page;
   @override
@@ -180,7 +189,7 @@ class _$_GetCareGivers implements _GetCareGivers {
 
   @override
   String toString() {
-    return 'CareGiversEvent.getCareGivers(userId: $userId, page: $page, limit: $limit, type: $type, searchTerm: $searchTerm, filterId: $filterId)';
+    return 'CareGiversEvent.getCareGivers(userId: $userId, adminId: $adminId, page: $page, limit: $limit, type: $type, searchTerm: $searchTerm, filterId: $filterId)';
   }
 
   @override
@@ -189,6 +198,7 @@ class _$_GetCareGivers implements _GetCareGivers {
         (other.runtimeType == runtimeType &&
             other is _$_GetCareGivers &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.adminId, adminId) || other.adminId == adminId) &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.limit, limit) || other.limit == limit) &&
             (identical(other.type, type) || other.type == type) &&
@@ -199,8 +209,8 @@ class _$_GetCareGivers implements _GetCareGivers {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, userId, page, limit, type, searchTerm, filterId);
+  int get hashCode => Object.hash(
+      runtimeType, userId, adminId, page, limit, type, searchTerm, filterId);
 
   @JsonKey(ignore: true)
   @override
@@ -211,45 +221,48 @@ class _$_GetCareGivers implements _GetCareGivers {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, int page, int limit, int type,
-            String? searchTerm, int? filterId)
+    required TResult Function(String userId, String adminId, int page,
+            int limit, int type, String? searchTerm, int? filterId)
         getCareGivers,
-    required TResult Function(Caregivers caregiver, String userId, bool status,
-            BuildContext context)
+    required TResult Function(Caregivers caregiver, String userId,
+            String adminId, bool status, BuildContext context)
         isUserActive,
     required TResult Function(Types type) isSelectedTab,
   }) {
-    return getCareGivers(userId, page, limit, type, searchTerm, filterId);
+    return getCareGivers(
+        userId, adminId, page, limit, type, searchTerm, filterId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, int page, int limit, int type,
-            String? searchTerm, int? filterId)?
+    TResult? Function(String userId, String adminId, int page, int limit,
+            int type, String? searchTerm, int? filterId)?
         getCareGivers,
-    TResult? Function(Caregivers caregiver, String userId, bool status,
-            BuildContext context)?
+    TResult? Function(Caregivers caregiver, String userId, String adminId,
+            bool status, BuildContext context)?
         isUserActive,
     TResult? Function(Types type)? isSelectedTab,
   }) {
-    return getCareGivers?.call(userId, page, limit, type, searchTerm, filterId);
+    return getCareGivers?.call(
+        userId, adminId, page, limit, type, searchTerm, filterId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, int page, int limit, int type,
-            String? searchTerm, int? filterId)?
+    TResult Function(String userId, String adminId, int page, int limit,
+            int type, String? searchTerm, int? filterId)?
         getCareGivers,
-    TResult Function(Caregivers caregiver, String userId, bool status,
-            BuildContext context)?
+    TResult Function(Caregivers caregiver, String userId, String adminId,
+            bool status, BuildContext context)?
         isUserActive,
     TResult Function(Types type)? isSelectedTab,
     required TResult orElse(),
   }) {
     if (getCareGivers != null) {
-      return getCareGivers(userId, page, limit, type, searchTerm, filterId);
+      return getCareGivers(
+          userId, adminId, page, limit, type, searchTerm, filterId);
     }
     return orElse();
   }
@@ -292,6 +305,7 @@ class _$_GetCareGivers implements _GetCareGivers {
 abstract class _GetCareGivers implements CareGiversEvent {
   const factory _GetCareGivers(
       {required final String userId,
+      required final String adminId,
       required final int page,
       required final int limit,
       required final int type,
@@ -299,6 +313,7 @@ abstract class _GetCareGivers implements CareGiversEvent {
       final int? filterId}) = _$_GetCareGivers;
 
   String get userId;
+  String get adminId;
   int get page;
   int get limit;
   int get type;
@@ -316,7 +331,11 @@ abstract class _$$_IsUserActiveCopyWith<$Res> {
       __$$_IsUserActiveCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {Caregivers caregiver, String userId, bool status, BuildContext context});
+      {Caregivers caregiver,
+      String userId,
+      String adminId,
+      bool status,
+      BuildContext context});
 }
 
 /// @nodoc
@@ -332,6 +351,7 @@ class __$$_IsUserActiveCopyWithImpl<$Res>
   $Res call({
     Object? caregiver = null,
     Object? userId = null,
+    Object? adminId = null,
     Object? status = null,
     Object? context = null,
   }) {
@@ -343,6 +363,10 @@ class __$$_IsUserActiveCopyWithImpl<$Res>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      adminId: null == adminId
+          ? _value.adminId
+          : adminId // ignore: cast_nullable_to_non_nullable
               as String,
       status: null == status
           ? _value.status
@@ -362,6 +386,7 @@ class _$_IsUserActive implements _IsUserActive {
   const _$_IsUserActive(
       {required this.caregiver,
       required this.userId,
+      required this.adminId,
       required this.status,
       required this.context});
 
@@ -370,13 +395,15 @@ class _$_IsUserActive implements _IsUserActive {
   @override
   final String userId;
   @override
+  final String adminId;
+  @override
   final bool status;
   @override
   final BuildContext context;
 
   @override
   String toString() {
-    return 'CareGiversEvent.isUserActive(caregiver: $caregiver, userId: $userId, status: $status, context: $context)';
+    return 'CareGiversEvent.isUserActive(caregiver: $caregiver, userId: $userId, adminId: $adminId, status: $status, context: $context)';
   }
 
   @override
@@ -387,13 +414,14 @@ class _$_IsUserActive implements _IsUserActive {
             (identical(other.caregiver, caregiver) ||
                 other.caregiver == caregiver) &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.adminId, adminId) || other.adminId == adminId) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.context, context) || other.context == context));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, caregiver, userId, status, context);
+      Object.hash(runtimeType, caregiver, userId, adminId, status, context);
 
   @JsonKey(ignore: true)
   @override
@@ -404,45 +432,45 @@ class _$_IsUserActive implements _IsUserActive {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, int page, int limit, int type,
-            String? searchTerm, int? filterId)
+    required TResult Function(String userId, String adminId, int page,
+            int limit, int type, String? searchTerm, int? filterId)
         getCareGivers,
-    required TResult Function(Caregivers caregiver, String userId, bool status,
-            BuildContext context)
+    required TResult Function(Caregivers caregiver, String userId,
+            String adminId, bool status, BuildContext context)
         isUserActive,
     required TResult Function(Types type) isSelectedTab,
   }) {
-    return isUserActive(caregiver, userId, status, context);
+    return isUserActive(caregiver, userId, adminId, status, context);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, int page, int limit, int type,
-            String? searchTerm, int? filterId)?
+    TResult? Function(String userId, String adminId, int page, int limit,
+            int type, String? searchTerm, int? filterId)?
         getCareGivers,
-    TResult? Function(Caregivers caregiver, String userId, bool status,
-            BuildContext context)?
+    TResult? Function(Caregivers caregiver, String userId, String adminId,
+            bool status, BuildContext context)?
         isUserActive,
     TResult? Function(Types type)? isSelectedTab,
   }) {
-    return isUserActive?.call(caregiver, userId, status, context);
+    return isUserActive?.call(caregiver, userId, adminId, status, context);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, int page, int limit, int type,
-            String? searchTerm, int? filterId)?
+    TResult Function(String userId, String adminId, int page, int limit,
+            int type, String? searchTerm, int? filterId)?
         getCareGivers,
-    TResult Function(Caregivers caregiver, String userId, bool status,
-            BuildContext context)?
+    TResult Function(Caregivers caregiver, String userId, String adminId,
+            bool status, BuildContext context)?
         isUserActive,
     TResult Function(Types type)? isSelectedTab,
     required TResult orElse(),
   }) {
     if (isUserActive != null) {
-      return isUserActive(caregiver, userId, status, context);
+      return isUserActive(caregiver, userId, adminId, status, context);
     }
     return orElse();
   }
@@ -486,11 +514,13 @@ abstract class _IsUserActive implements CareGiversEvent {
   const factory _IsUserActive(
       {required final Caregivers caregiver,
       required final String userId,
+      required final String adminId,
       required final bool status,
       required final BuildContext context}) = _$_IsUserActive;
 
   Caregivers get caregiver;
   String get userId;
+  String get adminId;
   bool get status;
   BuildContext get context;
   @JsonKey(ignore: true)
@@ -562,11 +592,11 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, int page, int limit, int type,
-            String? searchTerm, int? filterId)
+    required TResult Function(String userId, String adminId, int page,
+            int limit, int type, String? searchTerm, int? filterId)
         getCareGivers,
-    required TResult Function(Caregivers caregiver, String userId, bool status,
-            BuildContext context)
+    required TResult Function(Caregivers caregiver, String userId,
+            String adminId, bool status, BuildContext context)
         isUserActive,
     required TResult Function(Types type) isSelectedTab,
   }) {
@@ -576,11 +606,11 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, int page, int limit, int type,
-            String? searchTerm, int? filterId)?
+    TResult? Function(String userId, String adminId, int page, int limit,
+            int type, String? searchTerm, int? filterId)?
         getCareGivers,
-    TResult? Function(Caregivers caregiver, String userId, bool status,
-            BuildContext context)?
+    TResult? Function(Caregivers caregiver, String userId, String adminId,
+            bool status, BuildContext context)?
         isUserActive,
     TResult? Function(Types type)? isSelectedTab,
   }) {
@@ -590,11 +620,11 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, int page, int limit, int type,
-            String? searchTerm, int? filterId)?
+    TResult Function(String userId, String adminId, int page, int limit,
+            int type, String? searchTerm, int? filterId)?
         getCareGivers,
-    TResult Function(Caregivers caregiver, String userId, bool status,
-            BuildContext context)?
+    TResult Function(Caregivers caregiver, String userId, String adminId,
+            bool status, BuildContext context)?
         isUserActive,
     TResult Function(Types type)? isSelectedTab,
     required TResult orElse(),

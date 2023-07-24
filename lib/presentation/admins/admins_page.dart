@@ -21,6 +21,7 @@ import 'package:admin_580_tech/presentation/widget/pagination_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_row_image_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_row_view.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,6 +37,7 @@ import '../widget/header_view.dart';
 import '../widget/table_actions_view.dart';
 import '../widget/table_column_view.dart';
 
+@RoutePage()
 class AdminsPage extends StatefulWidget {
   const AdminsPage({
     Key? key,

@@ -13,17 +13,18 @@ abstract class ICareGiverVerificationRepo {
   Future<Either<ApiErrorHandler, VerifyResponse>> careGiverBackgroundVerify({
     required String userID,
     required int status,
+    required String adminId,
     String? rejectReason,
   });
   Future<Either<ApiErrorHandler, VerifyResponse>> careGiverCertificateApprove({
     required String userID,
     required int status,
+    required String adminId,
   });
   Future<Either<ApiErrorHandler, VerifyResponse>> careGiverCertificateReject(
       {required RejectionParams params});
-  Future<Either<ApiErrorHandler, VerifyResponse>> careGiverSendTrainingRequest({
-    required String userID,
-  });
+  Future<Either<ApiErrorHandler, VerifyResponse>> careGiverSendTrainingRequest(
+      {required String userID, required String adminId});
   Future<Either<ApiErrorHandler, CommonResponseUse>> notifyPendingDocument({
     required String userID,
   });
