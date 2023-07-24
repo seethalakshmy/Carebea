@@ -28,6 +28,7 @@ class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
   }
 
   _getCareGivers(_GetCareGivers event, Emitter<CareGiversState> emit) async {
+    print('helllo${event.userId}');
     final List<Types> typeList = [
       Types(id: 1, title: AppString.newRequest.val, isSelected: true),
       Types(id: 2, title: AppString.activeCareAmbassador.val, isSelected: false)

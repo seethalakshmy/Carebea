@@ -59,7 +59,7 @@ class _RolesPageState extends State<RolesPage> {
 
   @override
   void initState() {
-    _adminUserId = sharedPrefUtil.getUserId;
+    _adminUserId = sharedPrefUtil.getAdminId;
     super.initState();
     _roleBloc = RolesBloc(RolesRepository());
   }

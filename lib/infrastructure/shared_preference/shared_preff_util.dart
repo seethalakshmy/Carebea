@@ -57,9 +57,6 @@ class SharedPreffUtil {
   }
 
   get getAdminId {
-    // if (_prefs == null || _prefs!.getString(userId) == null) {
-    //   return "";
-    // }
     return _prefs?.getString(adminId) ?? "";
   }
 
