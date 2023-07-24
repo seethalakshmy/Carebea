@@ -66,7 +66,7 @@ class _AdminsPageState extends State<AdminsPage> {
   @override
   void initState() {
     super.initState();
-    _adminUserId = sharedPrefUtil.getUserId;
+    _adminUserId = SharedPreffUtil().getAdminId;
     _adminsBloc = AdminsBloc(AdminsRepository());
   }
 

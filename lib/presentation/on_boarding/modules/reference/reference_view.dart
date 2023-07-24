@@ -5,6 +5,7 @@ import 'package:admin_580_tech/presentation/on_boarding/widgets/common_padding_w
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/svg_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/bloc/form_validation/form_validation_bloc.dart';
@@ -22,6 +23,8 @@ import '../../../widget/custom_text.dart';
 import '../../../widget/dropdown/city_drop_down.dart';
 import '../../../widget/dropdown/relation_drop_down.dart';
 import '../../../widget/dropdown/state_drop_down.dart';
+import '../personal_details/widgets/mobile_number_formatter.dart';
+import '../personal_details/widgets/zip_code_formatter.dart';
 
 class ReferenceView extends StatefulWidget {
   const ReferenceView(
@@ -444,6 +447,11 @@ class _ReferenceViewState extends State<ReferenceView> {
                       CustomSizedBox(
                         width: DBL.twoEighty.val,
                         child: DetailsTextFieldWithLabel(
+                            inputFormatter: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(10),
+                              MobileNumberFormatter(),
+                            ],
                             isMandatory: false,
                             controller: widget.onboardingBloc.phoneController,
                             textInputAction: TextInputAction.next,
@@ -499,6 +507,11 @@ class _ReferenceViewState extends State<ReferenceView> {
                       CustomSizedBox(
                         width: DBL.twoEighty.val,
                         child: DetailsTextFieldWithLabel(
+                            inputFormatter: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(9),
+                              ZipCodeFormatter(),
+                            ],
                             isMandatory: false,
                             controller: widget.onboardingBloc.zipController,
                             textInputAction: TextInputAction.next,
