@@ -2,12 +2,15 @@ import 'package:admin_580_tech/domain/core/api_client.dart';
 import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.dart';
 import 'package:admin_580_tech/domain/on_boarding/models/common_response.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
+import 'package:admin_580_tech/presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_response.dart';
+import 'package:admin_580_tech/presentation/on_boarding/modules/reference/models/relation_response.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 import '../../core/custom_debugger.dart';
 import '../../core/enum.dart';
 import '../../domain/on_boarding/i_on_boarding_repo.dart';
+import '../../domain/on_boarding/models/common_response.dart';
 import '../../domain/on_boarding/models/preferences/pet_list_response.dart';
 import '../../domain/on_boarding/models/preferences/preference_request_model.dart';
 import '../../domain/on_boarding/models/preferences/years_of_experience_response.dart';
@@ -349,6 +352,44 @@ class OnBoardingRepository implements IOnBoardingRepo {
     try {
       final response = await apiClient.submitAccountDetails(
           userId, accountHolderName, routingNumber, accountNumber);
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, CommonResponse>> submitReference(
+      {required String userId, required List referenceList}) async {
+    try {
+      print('inside respo');
+      final response = await apiClient.submitReference(userId, referenceList);
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, RelationResponse>> getRelationList() async {
+    try {
+      final response = await apiClient.getRelationList();
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");

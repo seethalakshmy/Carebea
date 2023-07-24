@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:admin_580_tech/core/custom_snackbar.dart';
 import 'package:admin_580_tech/infrastructure/on_boarding/on_boarding_repository.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/address_selection_widget.dart';
@@ -18,6 +20,7 @@ import '../../../../application/bloc/onboarding/onboarding_bloc.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
+import '../../../../infrastructure/api_service_s3.dart';
 import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../../widget/common_date_picker_widget.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
@@ -35,7 +38,7 @@ import '../../widgets/image_preview_widget.dart';
 import 'widgets/document_details_view.dart';
 
 class PersonalDetailsView extends StatefulWidget {
-  const PersonalDetailsView(
+  PersonalDetailsView(
       {Key? key, required this.onboardingBloc, required this.pageController})
       : super(key: key);
   final OnboardingBloc onboardingBloc;
@@ -57,6 +60,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   final TextEditingController expiryDateController = TextEditingController();
   final TextEditingController citySearchController = TextEditingController();
   final TextEditingController stateSearchController = TextEditingController();
+  PlatformFile? file;
 
   final FocusNode _dateFocusNode = FocusNode();
   String selectedDate = "";
@@ -515,6 +519,26 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                 },
                 selectedValue: selectedState,
               ),
+        StateDropDown(
+          onSearchChanged: (val) {
+            widget.onboardingBloc.add(const OnboardingEvent.stateList());
+            widget.onboardingBloc.stateSearchKey = val;
+          },
+          searchController: stateSearchController,
+          errorText: widget.onboardingBloc.state.nextClicked
+              ? selectedState.isEmpty
+                  ? AppString.emptyState.val
+                  : ""
+              : "",
+          items: widget.onboardingBloc.stateList,
+          onChange: (value) {
+            selectedState = value.toString();
+            print("state value in onchanged : $value");
+            widget.onboardingBloc.stateId = value;
+            widget.onboardingBloc.add(const OnboardingEvent.cityList());
+          },
+          selectedValue: selectedState,
+        ),
       ],
     );
   }
@@ -633,10 +657,12 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
     return UploadDocumentWidget(
       onTap: () async {
         FilePickerResult? result = await FilePicker.platform.pickFiles(
-          type: FileType.custom,
-          allowedExtensions: ['jpg', 'png', 'pdf', 'doc'],
-        );
+            type: FileType.custom,
+            allowedExtensions: ['jpg', 'png', 'pdf', 'doc'],
+            withData: false,
+            withReadStream: true);
         if (result != null) {
+          file = result!.files.single;
           for (PlatformFile file in result.files) {
             bytesList.add(file);
             listUpdated = !listUpdated;
@@ -685,6 +711,10 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
             if (widget.onboardingBloc.profileUrl.isEmpty) {
               CSnackBar.showError(context, msg: AppString.emptyProfilePic.val);
             }
+            uploadToSingleFileAwsS3();
+            // setState(() {
+            //   nextClicked = true;
+            // });
             checkInputData();
           },
         );
@@ -706,6 +736,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
       formValidationBloc.add(const FormValidationEvent.dropDown("true"));
     }
     final userId = SharedPreffUtil().getUserId;
+    print("UserId : $userId");
 
     if (_formKey.currentState!.validate() &&
         widget.onboardingBloc.profileUrl.isNotEmpty) {
@@ -727,5 +758,9 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           documentList: [],
           profilePic: widget.onboardingBloc.profileUrl));
     }
+  }
+
+  Future<void> uploadToSingleFileAwsS3() async {
+    await ApiServiceS3().uploadImage(pickedFile: file!);
   }
 }

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:admin_580_tech/domain/transaction_management/model/transaction_response.dart';
 import 'package:admin_580_tech/domain/transaction_management/model/transactions.dart';
 import 'package:admin_580_tech/infrastructure/transaction_management/transactions_repository.dart';
@@ -27,6 +28,7 @@ import '../widget/error_view.dart';
 import '../widget/header_view.dart';
 import '../widget/pagination_view.dart';
 
+@RoutePage()
 class TransactionManagementPage extends StatefulWidget {
   const TransactionManagementPage({Key? key}) : super(key: key);
 

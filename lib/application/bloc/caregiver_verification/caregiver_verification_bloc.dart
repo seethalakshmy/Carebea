@@ -3,10 +3,12 @@ import 'package:admin_580_tech/core/custom_snackbar.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_verification_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/reject_params.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/enum.dart';
 import '../../../core/text_styles.dart';
@@ -107,9 +109,11 @@ class CareGiverVerificationBloc
       Emitter<CareGiverVerificationState> emit) async {
     final Either<ApiErrorHandler, VerifyResponse> result =
         await careGiverVerificationRepository.careGiverBackgroundVerify(
-            userID: event.userID,
-            status: event.status,
-            rejectReason: event.rejectReason);
+      userID: event.userID,
+      status: event.status,
+      rejectReason: event.rejectReason,
+      adminId: event.adminId,
+    );
     CareGiverVerificationState caregiverVerificationState = result.fold((l) {
       CSnackBar.showError(event.context, msg: l.error);
       return state.copyWith(error: l.error, isLoading: false, isError: true);
@@ -184,7 +188,7 @@ class CareGiverVerificationBloc
       Emitter<CareGiverVerificationState> emit) async {
     final Either<ApiErrorHandler, VerifyResponse> result =
         await careGiverVerificationRepository.careGiverCertificateApprove(
-            userID: event.userID, status: event.status);
+            userID: event.userID, status: event.status, adminId: event.adminId);
     CareGiverVerificationState caregiverVerificationState = result.fold((l) {
       CSnackBar.showError(event.context, msg: l.error);
 
@@ -287,7 +291,7 @@ class CareGiverVerificationBloc
       Emitter<CareGiverVerificationState> emit) async {
     final Either<ApiErrorHandler, VerifyResponse> result =
         await careGiverVerificationRepository.careGiverSendTrainingRequest(
-            userID: event.userId);
+            userID: event.userId, adminId: event.adminId);
     CareGiverVerificationState caregiverVerificationState = result.fold((l) {
       CSnackBar.showError(event.context, msg: l.error);
 
@@ -427,7 +431,10 @@ class CareGiverVerificationBloc
                 CustomSizedBox(
                   height: DBL.fifteen.val,
                 ),
-                _trainingRequestButton(userId: userId, context: context),
+                _trainingRequestButton(
+                    userId: userId,
+                    context: context,
+                    adminId: SharedPreffUtil().getAdminId),
               ],
             ));
       },
@@ -527,12 +534,15 @@ class CareGiverVerificationBloc
   }
 
   CustomButton _trainingRequestButton(
-      {required String userId, required BuildContext context}) {
+      {required String userId,
+      required BuildContext context,
+      required String adminId}) {
     return CustomButton(
       text: AppString.sendTrainingRequest.val,
       onPressed: () {
         Navigator.of(context).pop();
-        add(_CareGiverTrainingVerify(userId: userId, context: context));
+        add(_CareGiverTrainingVerify(
+            userId: userId, context: context, adminId: adminId));
       },
       color: AppColor.white.val,
       borderRadius: DBL.five.val,

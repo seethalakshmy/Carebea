@@ -15,11 +15,11 @@ class CareGiverDetailRepository implements ICareGiverDetailRepo {
 
   @override
   Future<Either<ApiErrorHandler, CareGiverDetailResponse>> getCareGiverDetail(
-      {required String userID}) async {
+      {required String userID, required String adminId}) async {
     try {
       // var res = await rootBundle
       //     .loadString("assets/sample/care_giver_detail_response.json");
-      var res = await _apiClient.getCareGiverDetail("", userID);
+      var res = await _apiClient.getCareGiverDetail("", userID, adminId);
       // var response = CareGiverDetailResponse.fromJson(jsonDecode(res));
       return Right(res);
     } on DioError catch (e) {
@@ -40,7 +40,8 @@ class CareGiverDetailRepository implements ICareGiverDetailRepo {
       getCareGiverEarningsList(
           {required String userID,
           required int page,
-          required int limit}) async {
+          required int limit,
+          required String adminId}) async {
     try {
       var res =
           await _apiClient.getCareGiverEarningList("", userID, page, limit);
@@ -63,7 +64,8 @@ class CareGiverDetailRepository implements ICareGiverDetailRepo {
       getCareGiverServiceList(
           {required String userID,
           required int page,
-          required int limit}) async {
+          required int limit,
+          required String adminId}) async {
     try {
       var res =
           await _apiClient.getCareGiverServiceList("", userID, page, limit);

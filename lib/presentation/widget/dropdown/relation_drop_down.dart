@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 
 import '../../../core/enum.dart';
 import '../../../core/text_styles.dart';
-import '../../on_boarding/modules/personal_details/models/city_list_response.dart';
+import '../../on_boarding/modules/personal_details/models/state_list_reponse.dart';
+import '../../on_boarding/modules/reference/models/relation_response.dart';
 import '../../on_boarding/widgets/drop_down.dart';
 import '../custom_text.dart';
 
-class CityDropDown extends StatelessWidget {
-  const CityDropDown(
+class RelationDropDown extends StatelessWidget {
+  const RelationDropDown(
       {Key? key,
       this.errorText,
       required this.items,
@@ -19,7 +20,7 @@ class CityDropDown extends StatelessWidget {
       : super(key: key);
   final String? errorText;
   final Function onChange;
-  final List<City> items;
+  final List<RelationList> items;
   final String? selectedValue;
   final TextEditingController? searchController;
   final Function? onSearchChanged;
@@ -29,28 +30,28 @@ class CityDropDown extends StatelessWidget {
     return CustomSizedBox(
       width: DBL.twoEighty.val,
       child: DropdownWidget(
-          showSearchBox: true,
-          searchController: searchController,
-          onSearchChanged: (val) {
-            onSearchChanged!(val);
-          },
-          hint: AppString.city.val,
+          showSearchBox: false,
+          // searchController: searchController,
+          // onSearchChanged: (val) {
+          //   onSearchChanged!(val);
+          // },
+          hint: AppString.relationship.val,
           errorText: errorText,
           items: items
               .map((e) => DropdownItem(
-                    value: e.cityName,
+                    value: e.relationship,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20, vertical: 10),
                       child: CustomText(
-                        e.cityName ?? "",
+                        e.relationship ?? "",
                         style: TS().gRoboto(color: AppColor.black.val),
                       ),
                     ),
                   ))
               .toList(),
           onChange: (value, index) {
-            onChange(items[index].id, items[index].cityName);
+            onChange(items[index].id, items[index].relationship);
           },
           child: CustomText(selectedValue ?? "")),
     );

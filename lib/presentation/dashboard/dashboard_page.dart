@@ -1,6 +1,8 @@
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage()
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
 

@@ -1,4 +1,7 @@
 import 'package:admin_580_tech/application/bloc/onboarding/onboarding_bloc.dart';
+import 'package:admin_580_tech/presentation/on_boarding/modules/reference/reference_view.dart';
+import 'package:admin_580_tech/presentation/on_boarding/modules/services/services_view.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +19,7 @@ import 'modules/personal_details/personal_details_view.dart';
 import 'modules/qualification_details/qialification_view.dart';
 import 'modules/setup_compensation/setup_compensation_view.dart';
 
+@RoutePage()
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({Key? key}) : super(key: key);
 

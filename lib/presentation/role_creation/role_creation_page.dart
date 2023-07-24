@@ -20,6 +20,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/custom_debugger.dart';
 import '../side_menu/side_menu_page.dart';
 
+@RoutePage()
 class RoleCreationPage extends StatefulWidget {
   const RoleCreationPage(
       {super.key,

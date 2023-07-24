@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:admin_580_tech/application/bloc/user_managment/user_management_bloc.dart';
 import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/infrastructure/user_management/users_repository.dart';
@@ -28,6 +29,7 @@ import '../widget/empty_view.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
 
+@RoutePage()
 class UserManagementPage extends StatefulWidget {
   const UserManagementPage({Key? key}) : super(key: key);
 
@@ -126,7 +128,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
                 child: _usersTable(),
               ),
               CustomSizedBox(height: DBL.twenty.val),
-             _paginationView()
+              _paginationView()
             ],
           )
         : EmptyView(title: AppString.noUsersFound.val);
@@ -195,7 +197,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
     );
   }
 
-   _paginationView() {
+  _paginationView() {
     final int totalPages = (_totalItems / _limit).ceil();
     return PaginationView(
         page: _page,

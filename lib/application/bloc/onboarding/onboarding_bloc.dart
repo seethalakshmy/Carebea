@@ -5,6 +5,7 @@ import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -21,6 +22,8 @@ import '../../../presentation/on_boarding/modules/personal_details/models/city_l
 import '../../../presentation/on_boarding/modules/personal_details/models/gender_list_response.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/personal_details_response.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
+import '../../../presentation/on_boarding/modules/reference/models/get_reference_response.dart';
+import '../../../presentation/on_boarding/modules/reference/models/relation_response.dart';
 import '../../../presentation/on_boarding/modules/preference/models/language_list_response.dart';
 import '../../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
 import '../../../presentation/on_boarding/modules/services/models/service_model.dart';
@@ -34,6 +37,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   List<Gender> genderList = [];
   List<City> cityList = [];
   List<StateItem> stateList = [];
+  List<RelationList> relationList = [];
   List<DocumentType> documentList = [];
   List<PetsModel> petsList = [];
   List<PetsModel> selectedPetsList = [];
@@ -45,10 +49,25 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   List<ServiceModel> serviceList = [];
   bool nextButtonClicked = false;
   String stateId = "";
+  String relationId = "";
   String citySearchKey = "";
   String stateSearchKey = "";
+  String relationSearchKey = "";
   String languageSearchKey = "";
   String profileUrl = "";
+  String selectedState = "";
+  String selectedCity = "";
+  String selectedCityId = "";
+  String selectedRelation = "";
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController streetController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final TextEditingController zipController = TextEditingController();
+  final TextEditingController citySearchController = TextEditingController();
+  final TextEditingController stateSearchController = TextEditingController();
+  final TextEditingController relationSearchController =
+      TextEditingController();
   int languagePage = 1;
   int caregiverServiceListIndex = 0;
   String selectedYearId = "";
@@ -106,6 +125,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     on<_CommonDataLists>(_getCommonLists);
     on<_CityLists>(_getCityList);
     on<_StateLists>(_getStateList);
+    on<_RelationList>(_getRelationList);
     on<_GetPersonalDetails>(_getPersonalData);
     on<_GetQualificationDetails>(_getQualificationDetails);
     on<_SubmitPreferenceDetails>(_getPreferenceDetails);
@@ -116,9 +136,105 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     on<_SubmitCaregiverService>(_submitServices);
     on<_SubmitBuildProfile>(_submitBuildProfile);
     on<_SubmitAccountDetails>(_submitAccountDetails);
+    on<_SubmitReference>(_submitReference);
+
+    on<_AddReference>((event, emit) {
+      print("on ref add");
+
+      print("on ref added");
+      List<GetReferences> refList = [];
+      refList.addAll(state.referenceList);
+      refList.add(GetReferences(
+          name: nameController.text,
+          address: addressController.text,
+          street: streetController.text,
+          stateName: selectedState,
+          cityName: selectedCity,
+          city: selectedCityId,
+          state: stateId,
+          phone: phoneController.text,
+          relationship: selectedRelation,
+          zip: zipController.text));
+      print("ref list : ${refList.length}");
+      emit(state.copyWith(referenceList: refList));
+      print(state.referenceList.length);
+    });
+    on<DeleteReference>((event, emit) {
+      List<GetReferences> refList = [];
+      refList.addAll(state.referenceList);
+      refList.removeAt(event.index);
+      emit(state.copyWith(referenceList: refList));
+    });
+    on<UpdateReference>((event, emit) {
+      List<GetReferences> refList = [];
+      var ref = GetReferences(
+          name: nameController.text,
+          address: addressController.text,
+          street: streetController.text,
+          stateName: selectedState,
+          cityName: selectedCity,
+          city: selectedCityId,
+          state: stateId,
+          phone: phoneController.text,
+          relationship: selectedRelation,
+          zip: zipController.text);
+      refList.addAll(state.referenceList);
+      refList[event.index] = ref;
+      emit(state.copyWith(referenceList: refList));
+    });
+
+    on<EditReference>((event, emit) {
+      setData(event.reference);
+    });
+  }
+
+  _submitReference(
+      _SubmitReference event, Emitter<OnboardingState> emit) async {
+    emit(state.copyWith(isLoading: true));
+
+    final Either<ApiErrorHandler, CommonResponse> result =
+        await onboardingRepository.submitReference(
+      userId: event.userId,
+      referenceList: state.referenceList.map((e) => e.toJson()).toList(),
+    );
+    OnboardingState referenceState = result.fold((l) {
+      return state.copyWith(isLoading: false, referenceOption: Some(Left(l)));
+    }, (r) {
+      return state.copyWith(isLoading: false, referenceOption: Some(Right(r)));
+    });
+    emit(referenceState);
+  }
+
+  setData(GetReferences item) {
+    nameController.text = item.name ?? '';
+    phoneController.text = item.phone ?? '';
+    streetController.text = item.street ?? '';
+    zipController.text = item.zip ?? '';
+    addressController.text = item.address ?? '';
+    selectedState = item.stateName ?? "";
+    selectedCity = item.cityName ?? "";
+    selectedState = item.state ?? "";
+    selectedCityId = item.city ?? '';
+    selectedRelation = item.relationship ?? "";
+  }
+
+  clearData() {
+    nameController.text = "";
+    phoneController.text = "";
+    streetController.text = "";
+    selectedRelation = "";
+    // selectedRelationId = "";
+    zipController.text = "";
+    addressController.text = "";
+    selectedCityId = "";
+    selectedState = '';
+    // selectedStatename = "";
+    selectedCity = "";
   }
 
   _getCommonLists(_CommonDataLists event, Emitter<OnboardingState> emit) async {
+    emit(state.copyWith(isLoading: true));
+
     await getGenderResult(emit);
     await getStateResult(emit);
     await getDocumentTypeResult(emit);
@@ -132,6 +248,10 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     await getStateResult(emit);
   }
 
+  _getRelationList(_RelationList event, Emitter<OnboardingState> emit) async {
+    await getRelationResult(emit);
+  }
+
   _getPetsList(_GetPetList event, Emitter<OnboardingState> emit) async {
     final Either<ApiErrorHandler, PetListResponse> result =
         await onboardingRepository.getPetList(searchKey: event.petSearchKey);
@@ -143,7 +263,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
           .addAll(r.data!.map((e) => PetsModel(e.name ?? "", e.id)).toList());
       return state.copyWith(
           isLoading: false,
-          petsList: r.data!.map((e) => PetsModel(e.name ?? "", e.id)).toList(),
+          // petsList: r.data!.map((e) => PetsModel(e.name ?? "", e.id)).toList(),
           petListOption: Some(Right(r)));
     });
     emit(petState);
@@ -214,6 +334,19 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
           isInitialLoading: false, stateOption: Some(Right(r)));
     });
     emit(stateState);
+  }
+
+  Future<void> getRelationResult(Emitter<OnboardingState> emit) async {
+    final Either<ApiErrorHandler, RelationResponse> relationResult =
+        await onboardingRepository.getRelationList();
+    OnboardingState relationState = relationResult.fold((l) {
+      return state.copyWith(isLoading: false, relationOption: Some(Left(l)));
+    }, (r) {
+      relationList.clear();
+      relationList.addAll(r.data!);
+      return state.copyWith(isLoading: false, relationOption: Some(Right(r)));
+    });
+    emit(relationState);
   }
 
   Future<void> getCityResult(Emitter<OnboardingState> emit) async {
