@@ -299,6 +299,7 @@ class _ReferenceViewState extends State<ReferenceView> {
             widget.onboardingBloc.add(const OnboardingEvent.cityList());
           },
           selectedValue: widget.onboardingBloc.selectedState,
+          onboardingBloc: widget.onboardingBloc,
         ),
       ],
     );

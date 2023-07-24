@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:admin_580_tech/core/custom_snackbar.dart';
 import 'package:admin_580_tech/infrastructure/on_boarding/on_boarding_repository.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/address_selection_widget.dart';
@@ -538,6 +536,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
             widget.onboardingBloc.add(const OnboardingEvent.cityList());
           },
           selectedValue: selectedState,
+          onboardingBloc: widget.onboardingBloc,
         ),
       ],
     );
