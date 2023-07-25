@@ -67,7 +67,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
   void initState() {
     super.initState();
     _adminCreationBloc = AdminCreationBloc(AdminCreationRepository());
-    adminUserID = SharedPreffUtil().getUserId;
+    adminUserID = SharedPreffUtil().getAdminId;
     adminId =
         autoTabRouter?.currentChild?.queryParams.getString("id", "") ?? "";
     if (autoTabRouter!.currentChild!.queryParams

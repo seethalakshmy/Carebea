@@ -346,4 +346,10 @@ abstract class ApiClient {
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('admin_id') String adminId);
+
+  @POST("/super-admin/change-admin-status")
+  Future<VerifyResponse> changeAdminStatus(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('status') String status);
 }
