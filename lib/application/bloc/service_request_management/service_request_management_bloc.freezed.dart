@@ -20,18 +20,21 @@ mixin _$ServiceRequestManagementEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(Types type) isSelectedTab,
+    required TResult Function(Types type) getServiceList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(Types type)? isSelectedTab,
+    TResult? Function(Types type)? getServiceList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(Types type)? isSelectedTab,
+    TResult Function(Types type)? getServiceList,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$ServiceRequestManagementEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_GetServiceList value) getServiceList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_GetServiceList value)? getServiceList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_GetServiceList value)? getServiceList,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -116,6 +122,7 @@ class _$_Started implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(Types type) isSelectedTab,
+    required TResult Function(Types type) getServiceList,
   }) {
     return started();
   }
@@ -125,6 +132,7 @@ class _$_Started implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(Types type)? isSelectedTab,
+    TResult? Function(Types type)? getServiceList,
   }) {
     return started?.call();
   }
@@ -134,6 +142,7 @@ class _$_Started implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(Types type)? isSelectedTab,
+    TResult Function(Types type)? getServiceList,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -147,6 +156,7 @@ class _$_Started implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_GetServiceList value) getServiceList,
   }) {
     return started(this);
   }
@@ -156,6 +166,7 @@ class _$_Started implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_GetServiceList value)? getServiceList,
   }) {
     return started?.call(this);
   }
@@ -165,6 +176,7 @@ class _$_Started implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_GetServiceList value)? getServiceList,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -244,6 +256,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(Types type) isSelectedTab,
+    required TResult Function(Types type) getServiceList,
   }) {
     return isSelectedTab(type);
   }
@@ -253,6 +266,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function(Types type)? isSelectedTab,
+    TResult? Function(Types type)? getServiceList,
   }) {
     return isSelectedTab?.call(type);
   }
@@ -262,6 +276,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(Types type)? isSelectedTab,
+    TResult Function(Types type)? getServiceList,
     required TResult orElse(),
   }) {
     if (isSelectedTab != null) {
@@ -275,6 +290,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_GetServiceList value) getServiceList,
   }) {
     return isSelectedTab(this);
   }
@@ -284,6 +300,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_GetServiceList value)? getServiceList,
   }) {
     return isSelectedTab?.call(this);
   }
@@ -293,6 +310,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_GetServiceList value)? getServiceList,
     required TResult orElse(),
   }) {
     if (isSelectedTab != null) {
@@ -312,8 +330,150 @@ abstract class _IsSelectedTab implements ServiceRequestManagementEvent {
 }
 
 /// @nodoc
+abstract class _$$_GetServiceListCopyWith<$Res> {
+  factory _$$_GetServiceListCopyWith(
+          _$_GetServiceList value, $Res Function(_$_GetServiceList) then) =
+      __$$_GetServiceListCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Types type});
+}
+
+/// @nodoc
+class __$$_GetServiceListCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res, _$_GetServiceList>
+    implements _$$_GetServiceListCopyWith<$Res> {
+  __$$_GetServiceListCopyWithImpl(
+      _$_GetServiceList _value, $Res Function(_$_GetServiceList) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+  }) {
+    return _then(_$_GetServiceList(
+      null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as Types,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetServiceList implements _GetServiceList {
+  const _$_GetServiceList(this.type);
+
+  @override
+  final Types type;
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.getServiceList(type: $type)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetServiceList &&
+            (identical(other.type, type) || other.type == type));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, type);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetServiceListCopyWith<_$_GetServiceList> get copyWith =>
+      __$$_GetServiceListCopyWithImpl<_$_GetServiceList>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(Types type) isSelectedTab,
+    required TResult Function(Types type) getServiceList,
+  }) {
+    return getServiceList(type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(Types type)? isSelectedTab,
+    TResult? Function(Types type)? getServiceList,
+  }) {
+    return getServiceList?.call(type);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(Types type)? isSelectedTab,
+    TResult Function(Types type)? getServiceList,
+    required TResult orElse(),
+  }) {
+    if (getServiceList != null) {
+      return getServiceList(type);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_GetServiceList value) getServiceList,
+  }) {
+    return getServiceList(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_GetServiceList value)? getServiceList,
+  }) {
+    return getServiceList?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_GetServiceList value)? getServiceList,
+    required TResult orElse(),
+  }) {
+    if (getServiceList != null) {
+      return getServiceList(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetServiceList implements ServiceRequestManagementEvent {
+  const factory _GetServiceList(final Types type) = _$_GetServiceList;
+
+  Types get type;
+  @JsonKey(ignore: true)
+  _$$_GetServiceListCopyWith<_$_GetServiceList> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ServiceRequestManagementState {
   List<Types> get types => throw _privateConstructorUsedError;
+  bool? get isLoading => throw _privateConstructorUsedError;
+  String? get error => throw _privateConstructorUsedError;
+  List<Services> get services => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ServiceRequestManagementStateCopyWith<ServiceRequestManagementState>
@@ -328,7 +488,11 @@ abstract class $ServiceRequestManagementStateCopyWith<$Res> {
       _$ServiceRequestManagementStateCopyWithImpl<$Res,
           ServiceRequestManagementState>;
   @useResult
-  $Res call({List<Types> types});
+  $Res call(
+      {List<Types> types,
+      bool? isLoading,
+      String? error,
+      List<Services> services});
 }
 
 /// @nodoc
@@ -346,12 +510,27 @@ class _$ServiceRequestManagementStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? types = null,
+    Object? isLoading = freezed,
+    Object? error = freezed,
+    Object? services = null,
   }) {
     return _then(_value.copyWith(
       types: null == types
           ? _value.types
           : types // ignore: cast_nullable_to_non_nullable
               as List<Types>,
+      isLoading: freezed == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+      services: null == services
+          ? _value.services
+          : services // ignore: cast_nullable_to_non_nullable
+              as List<Services>,
     ) as $Val);
   }
 }
@@ -365,7 +544,11 @@ abstract class _$$_ServiceRequestManagementStateCopyWith<$Res>
       __$$_ServiceRequestManagementStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Types> types});
+  $Res call(
+      {List<Types> types,
+      bool? isLoading,
+      String? error,
+      List<Services> services});
 }
 
 /// @nodoc
@@ -382,12 +565,27 @@ class __$$_ServiceRequestManagementStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? types = null,
+    Object? isLoading = freezed,
+    Object? error = freezed,
+    Object? services = null,
   }) {
     return _then(_$_ServiceRequestManagementState(
       types: null == types
           ? _value._types
           : types // ignore: cast_nullable_to_non_nullable
               as List<Types>,
+      isLoading: freezed == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String?,
+      services: null == services
+          ? _value._services
+          : services // ignore: cast_nullable_to_non_nullable
+              as List<Services>,
     ));
   }
 }
@@ -396,8 +594,13 @@ class __$$_ServiceRequestManagementStateCopyWithImpl<$Res>
 
 class _$_ServiceRequestManagementState
     implements _ServiceRequestManagementState {
-  const _$_ServiceRequestManagementState({required final List<Types> types})
-      : _types = types;
+  const _$_ServiceRequestManagementState(
+      {required final List<Types> types,
+      this.isLoading,
+      required this.error,
+      required final List<Services> services})
+      : _types = types,
+        _services = services;
 
   final List<Types> _types;
   @override
@@ -407,8 +610,19 @@ class _$_ServiceRequestManagementState
   }
 
   @override
+  final bool? isLoading;
+  @override
+  final String? error;
+  final List<Services> _services;
+  @override
+  List<Services> get services {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_services);
+  }
+
+  @override
   String toString() {
-    return 'ServiceRequestManagementState(types: $types)';
+    return 'ServiceRequestManagementState(types: $types, isLoading: $isLoading, error: $error, services: $services)';
   }
 
   @override
@@ -416,12 +630,20 @@ class _$_ServiceRequestManagementState
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ServiceRequestManagementState &&
-            const DeepCollectionEquality().equals(other._types, _types));
+            const DeepCollectionEquality().equals(other._types, _types) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.error, error) || other.error == error) &&
+            const DeepCollectionEquality().equals(other._services, _services));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_types));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_types),
+      isLoading,
+      error,
+      const DeepCollectionEquality().hash(_services));
 
   @JsonKey(ignore: true)
   @override
@@ -434,10 +656,20 @@ class _$_ServiceRequestManagementState
 abstract class _ServiceRequestManagementState
     implements ServiceRequestManagementState {
   const factory _ServiceRequestManagementState(
-      {required final List<Types> types}) = _$_ServiceRequestManagementState;
+          {required final List<Types> types,
+          final bool? isLoading,
+          required final String? error,
+          required final List<Services> services}) =
+      _$_ServiceRequestManagementState;
 
   @override
   List<Types> get types;
+  @override
+  bool? get isLoading;
+  @override
+  String? get error;
+  @override
+  List<Services> get services;
   @override
   @JsonKey(ignore: true)
   _$$_ServiceRequestManagementStateCopyWith<_$_ServiceRequestManagementState>

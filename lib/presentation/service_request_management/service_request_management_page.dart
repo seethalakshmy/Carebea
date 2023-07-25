@@ -10,6 +10,8 @@ import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
 import '../../domain/caregivers/model/types.dart';
+import '../../domain/service_request_management/model/service_request_response.dart';
+import '../../infrastructure/service_request_management/service_request_management_repository.dart';
 import '../caregivers/widgets/tab_item.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
@@ -20,7 +22,9 @@ import '../widget/custom_selection_area.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_svg.dart';
 import '../widget/custom_text.dart';
-import 'models/service_request_model.dart';
+import '../widget/error_view.dart';
+import '../widget/table_loader_view.dart';
+import 'widgets/service_details_dialog.dart';
 
 class ServiceRequestManagementPage extends StatefulWidget {
   const ServiceRequestManagementPage({Key? key}) : super(key: key);
@@ -33,23 +37,7 @@ class ServiceRequestManagementPage extends StatefulWidget {
 class _ServiceRequestManagementPageState
     extends State<ServiceRequestManagementPage> {
   late ServiceRequestManagementBloc _serviceRequestManagementBloc;
-  List<ServiceRequestModel> serviceList = [
-    ServiceRequestModel(
-        "009876",
-        "#ID120",
-        "Aleena George",
-        "#ID123",
-        "John George",
-        "Tier 2",
-        "04/26/2023  at 10:00am",
-        "04/26/2023  at 10:00pm",
-        "2",
-        "\$200",
-        "\$34",
-        "\$15",
-        "\$0",
-        "client"),
-  ];
+  List<Services> serviceList = [];
 
   final int _limit = 10;
   int _tabType = 1;
@@ -57,13 +45,16 @@ class _ServiceRequestManagementPageState
   @override
   void initState() {
     super.initState();
-    _serviceRequestManagementBloc = ServiceRequestManagementBloc();
+    _serviceRequestManagementBloc =
+        ServiceRequestManagementBloc(ServiceRequestManagementRepository());
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ServiceRequestManagementBloc>(
-      create: (context) => _serviceRequestManagementBloc,
+      create: (context) => _serviceRequestManagementBloc
+        ..add(ServiceRequestManagementEvent.getServiceList(Types(
+            id: 1, title: AppString.pendingServices.val, isSelected: true))),
       child: Column(
         children: [
           HeaderView(
@@ -76,7 +67,9 @@ class _ServiceRequestManagementPageState
               return Column(
                 children: [
                   _tabView(state),
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   Align(
                     alignment: Alignment.centerRight,
                     child: Padding(
@@ -84,7 +77,9 @@ class _ServiceRequestManagementPageState
                       child: _statusDropDown(context),
                     ),
                   ),
-                  const SizedBox(height: 30,),
+                  const SizedBox(
+                    height: 30,
+                  ),
                   _cardView(state, context)
                 ],
               );
@@ -110,6 +105,9 @@ class _ServiceRequestManagementPageState
                   context
                       .read<ServiceRequestManagementBloc>()
                       .add(ServiceRequestManagementEvent.isSelectedTab(item));
+                  context
+                      .read<ServiceRequestManagementBloc>()
+                      .add(ServiceRequestManagementEvent.getServiceList(item));
                 },
               );
             }));
@@ -120,17 +118,21 @@ class _ServiceRequestManagementPageState
     return CustomCard(
       shape: PR().roundedRectangleBorder(DBL.five.val),
       elevation: DBL.seven.val,
-      child: CustomContainer(
-        padding: EdgeInsets.all(DBL.twenty.val),
-        child: CustomSizedBox(
-          height: (_limit + 1) * 48,
-          child: _requestsTable(),
-        ),
-      ),
+      child: state.isLoading!
+          ? const TableLoaderView()
+          : state.error != ""
+              ? ErrorView(isClientError: false, errorMessage: state.error)
+              : CustomContainer(
+                  padding: EdgeInsets.all(DBL.twenty.val),
+                  child: CustomSizedBox(
+                    height: (_limit + 1) * 48,
+                    child: _requestsTable(state),
+                  ),
+                ),
     );
   }
 
-  _requestsTable() {
+  _requestsTable(ServiceRequestManagementState state) {
     return CSelectionArea(
       child: CDataTable2(
         minWidth: 2000,
@@ -234,7 +236,7 @@ class _ServiceRequestManagementPageState
             label: const CustomText(""),
           ),
         ],
-        rows: serviceList.asMap().entries.map((e) {
+        rows: state.services.asMap().entries.map((e) {
           var item = e.value;
           return DataRow2(
             cells: [
@@ -245,23 +247,24 @@ class _ServiceRequestManagementPageState
                 text: item.serviceId.toString(),
               )),
               DataCell(_rowsView(
-                text: "${item.decisionMakerId} - ${item.decisionMakerName}",
+                text:
+                    "${item.decisionMaker?.id} - ${item.decisionMaker?.firstName}",
               )),
               DataCell(_rowsView(
-                text: "${item.clientName} - ${item.clientId}",
+                text: "${item.client?.firstName} - ${item.client?.id}",
               )),
               DataCell(_rowsView(
                 text: item.service,
               )),
               DataCell(_rowsView(
-                text: item.startDateAndTime,
+                text: item.startDateTime,
               )),
               DataCell(_rowsView(
-                text: item.endDateAndTime,
+                text: item.endDateTime,
               )),
               if (_tabType == 1)
                 DataCell(_rowsView(
-                  text: item.noOfMatchingShown,
+                  text: item.noOfMatching,
                 )),
               if (_tabType != 1)
                 DataCell(_rowsView(
@@ -281,11 +284,21 @@ class _ServiceRequestManagementPageState
                 )),
               if (_tabType == 3)
                 DataCell(_rowsView(
-                  text: item.cancelledBy,
+                  text: item.cancelledBy ?? "", //no tag from api
                 )),
               DataCell(
                 InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      //autoTabRouter?.navigate(ServiceDetailsRoute(id: item.id));
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return ServiceDetailsDialog(
+                              service: item,
+                              title: getTitle(_tabType),
+                            );
+                          });
+                    },
                     child: CustomSvg(
                       path: IMG.edit.val,
                     )),
@@ -373,5 +386,19 @@ class _ServiceRequestManagementPageState
             color: AppColor.columColor2.val),
       ),
     );
+  }
+}
+
+String getTitle(int tabType) {
+  if (tabType == 1) {
+    return AppString.pending.val;
+  } else if (tabType == 2) {
+    return AppString.completed.val;
+  } else if (tabType == 3) {
+    return AppString.canceled.val;
+  } else if (tabType == 4) {
+    return AppString.upcoming.val;
+  } else {
+    return AppString.onGoing.val;
   }
 }

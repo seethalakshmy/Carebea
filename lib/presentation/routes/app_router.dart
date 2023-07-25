@@ -17,6 +17,7 @@ import '../caregivers/caregivers_page.dart';
 import '../dashboard/dashboard_page.dart';
 import '../login/login_page.dart';
 import '../role_creation/role_creation_page.dart';
+import '../service_details/service_details_page.dart';
 import '../side_menu/side_menu_page.dart';
 import '../transaction_management/transaction_management_page.dart';
 
@@ -90,6 +91,8 @@ import '../transaction_management/transaction_management_page.dart';
             maintainState: false),
         AutoRoute(
             path: "admin-management", page: AdminsPage, maintainState: false),
+        AutoRoute(
+            path: "service-details", page: ServiceDetailsPage, maintainState: false),
       ],
     ),
   ],

@@ -15,6 +15,7 @@ import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
 import 'package:admin_580_tech/presentation/roles/role_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
+import 'package:admin_580_tech/presentation/service_details/service_details_page.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
@@ -456,8 +457,9 @@ class _MenuBarState extends State<SideMenuPage> {
     RolesRoute(),
     RoleCreationRoute(),
     AdminsRoute(),
-    AdminCreationRoute()
-    ServiceRequestManagementRoute()
+    AdminCreationRoute(),
+    ServiceRequestManagementRoute(),
+    ServiceDetailsRoute(),
   ];
 
   int getRouteIndex(String route) {
@@ -480,8 +482,6 @@ class _MenuBarState extends State<SideMenuPage> {
       return 8;
     } else if (route == AppString.careAmbassadorVerification.val) {
       return 9;
-    }else if (route == AppString.serviceRequestManagement.val) {
-      return 10;
     } else if (route == AppString.roleManagement.val) {
       return 10;
     } else if (route == AppString.roleManage.val) {
@@ -490,6 +490,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return 12;
     } else if (route == AppString.adminManage.val) {
       return 13;
+    } else if (route == AppString.serviceRequestManagement.val) {
+      return 14;
+    } else if (route == AppString.serviceDetails.val) {
+      return 15;
     } else {
       return 0;
     }
@@ -516,8 +520,6 @@ class _MenuBarState extends State<SideMenuPage> {
     } else if (index == 9) {
       return const CaregiverVerificationPage();
     } else if (index == 10) {
-      return const ServiceRequestManagementPage();
-    } else if (index == 10) {
       return const RolesPage();
     } else if (index == 11) {
       return const RoleCreationPage();
@@ -525,6 +527,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return const AdminsPage();
     } else if (index == 13) {
       return const AdminCreationPage();
+    } else if (index == 14) {
+      return const ServiceRequestManagementPage();
+    } else if (index == 15) {
+      return const ServiceDetailsPage();
     } else {
       return const DashboardPage();
     }

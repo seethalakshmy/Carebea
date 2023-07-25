@@ -36,6 +36,7 @@ import '../on_boarding/models/preferences/preference_request_model.dart';
 import '../on_boarding/models/preferences/years_of_experience_response.dart';
 import '../role_creation/model/module_response.dart';
 import '../role_creation/model/view_role_response.dart';
+import '../service_request_management/model/service_request_response.dart';
 
 part 'api_client.g.dart';
 
@@ -327,4 +328,39 @@ abstract class ApiClient {
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('admin_id') String adminId);
+
+  @POST("/admin/pending-service-list")
+  Future<ServiceRequestResponse> getPendingRequests(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit);
+
+  @POST("/admin/completed-service-list")
+  Future<ServiceRequestResponse> getCompletedRequests(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit);
+
+  @POST("/admin/cancelled-service-list")
+  Future<ServiceRequestResponse> getCancelled(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit);
+
+  @POST("/admin/upcoming-service-list")
+  Future<ServiceRequestResponse> getUpcomingRequests(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit);
+
+  @POST("/admin/ongoing-service-list")
+  Future<ServiceRequestResponse> getOngoingRequests(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit);
 }

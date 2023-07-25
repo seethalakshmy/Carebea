@@ -14,6 +14,8 @@ class CachedImage extends StatelessWidget {
     this.isCircle = false,
     this.isDocImage = false,
     this.isDetailPage = false,
+    this.placeHolderWidth,
+    this.placeHolderHeight,
   }) : super(key: key);
 
   final String? imgUrl;
@@ -23,6 +25,8 @@ class CachedImage extends StatelessWidget {
   final bool isCircle;
   final bool isDocImage;
   final bool isDetailPage;
+  final double? placeHolderWidth;
+  final double? placeHolderHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -69,8 +73,9 @@ class CachedImage extends StatelessWidget {
               )
             : Image.asset(
                 IMG.person.val,
-                height: DBL.forty.val,
-                width: DBL.forty.val,
+                height: placeHolderHeight ?? DBL.forty.val,
+                width: placeHolderWidth ?? DBL.forty.val,
+                fit: BoxFit.fill,
               );
   }
 
