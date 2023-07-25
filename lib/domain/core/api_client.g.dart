@@ -1397,6 +1397,7 @@ class _ApiClient implements ApiClient {
     userId,
     page,
     limit,
+    filterId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1406,6 +1407,7 @@ class _ApiClient implements ApiClient {
       'user_id': userId,
       'page': page,
       'limit': limit,
+      'filter_id': filterId,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(
@@ -1430,6 +1432,7 @@ class _ApiClient implements ApiClient {
     userId,
     page,
     limit,
+    filterId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1439,6 +1442,7 @@ class _ApiClient implements ApiClient {
       'user_id': userId,
       'page': page,
       'limit': limit,
+      'filter_id': filterId,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(
@@ -1463,6 +1467,7 @@ class _ApiClient implements ApiClient {
     userId,
     page,
     limit,
+    filterId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1472,6 +1477,7 @@ class _ApiClient implements ApiClient {
       'user_id': userId,
       'page': page,
       'limit': limit,
+      'filter_id': filterId,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(
@@ -1496,6 +1502,7 @@ class _ApiClient implements ApiClient {
     userId,
     page,
     limit,
+    filterId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1505,6 +1512,7 @@ class _ApiClient implements ApiClient {
       'user_id': userId,
       'page': page,
       'limit': limit,
+      'filter_id': filterId,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(
@@ -1529,6 +1537,7 @@ class _ApiClient implements ApiClient {
     userId,
     page,
     limit,
+    filterId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1538,6 +1547,7 @@ class _ApiClient implements ApiClient {
       'user_id': userId,
       'page': page,
       'limit': limit,
+      'filter_id': filterId,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(

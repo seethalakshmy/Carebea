@@ -14,9 +14,13 @@ class ServiceRequestManagementRepository
 
   @override
   Future<Either<ApiErrorHandler, ServiceRequestResponse>> getCancelledRequests(
-      {required int page, required int limit, required String userId}) async {
+      {required int page,
+      required int limit,
+      required String userId,
+      required int filterId}) async {
     try {
-      final response = await _apiClient.getCancelled("", userId, page, limit);
+      final response =
+          await _apiClient.getCancelled("", userId, page, limit, filterId);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
@@ -33,10 +37,13 @@ class ServiceRequestManagementRepository
 
   @override
   Future<Either<ApiErrorHandler, ServiceRequestResponse>> getCompletedRequests(
-      {required int page, required int limit, required String userId}) async {
+      {required int page,
+      required int limit,
+      required String userId,
+      required int filterId}) async {
     try {
-      final response =
-          await _apiClient.getCompletedRequests("", userId, page, limit);
+      final response = await _apiClient.getCompletedRequests(
+          "", userId, page, limit, filterId);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
@@ -53,10 +60,13 @@ class ServiceRequestManagementRepository
 
   @override
   Future<Either<ApiErrorHandler, ServiceRequestResponse>> getOngoingRequests(
-      {required int page, required int limit, required String userId}) async {
+      {required int page,
+      required int limit,
+      required String userId,
+      required int filterId}) async {
     try {
-      final response =
-          await _apiClient.getOngoingRequests("", userId, page, limit);
+      final response = await _apiClient.getOngoingRequests(
+          "", userId, page, limit, filterId);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
@@ -73,10 +83,13 @@ class ServiceRequestManagementRepository
 
   @override
   Future<Either<ApiErrorHandler, ServiceRequestResponse>> getPendingRequests(
-      {required int page, required int limit, required String userId}) async {
+      {required int page,
+      required int limit,
+      required String userId,
+      required int filterId}) async {
     try {
-      final response =
-          await _apiClient.getPendingRequests("", userId, page, limit);
+      final response = await _apiClient.getPendingRequests(
+          "", userId, page, limit, filterId);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
@@ -93,10 +106,13 @@ class ServiceRequestManagementRepository
 
   @override
   Future<Either<ApiErrorHandler, ServiceRequestResponse>> getUpcomingRequests(
-      {required int page, required int limit, required String userId}) async {
+      {required int page,
+      required int limit,
+      required String userId,
+      required int filterId}) async {
     try {
-      final response =
-          await _apiClient.getUpcomingRequests("", userId, page, limit);
+      final response = await _apiClient.getUpcomingRequests(
+          "", userId, page, limit, filterId);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");

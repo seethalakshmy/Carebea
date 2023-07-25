@@ -43,6 +43,7 @@ class _ServiceRequestManagementPageState
 
   final int _limit = 10;
   int _tabType = 1;
+  Types selectedType = Types(id: 1, title: AppString.pendingServices.val, isSelected: true);
 
   @override
   void initState() {
@@ -104,6 +105,7 @@ class _ServiceRequestManagementPageState
                 item: item,
                 onTap: () {
                   _tabType = item.id!;
+                  selectedType = item;
                   context
                       .read<ServiceRequestManagementBloc>()
                       .add(ServiceRequestManagementEvent.isSelectedTab(item));
@@ -344,7 +346,10 @@ class _ServiceRequestManagementPageState
 
   CustomDropdown<int> _statusDropDown(BuildContext context) {
     return CustomDropdown<int>(
-      onChange: (int value, int index) => CustomLog.log(value.toString()),
+      onChange: (int value, int index) {
+        _serviceRequestManagementBloc.filterId = value;
+        _serviceRequestManagementBloc.add(ServiceRequestManagementEvent.getServiceList(selectedType));
+      },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
         width: 220,

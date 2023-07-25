@@ -16,6 +16,7 @@ part 'service_request_management_state.dart';
 class ServiceRequestManagementBloc
     extends Bloc<ServiceRequestManagementEvent, ServiceRequestManagementState> {
   ServiceRequestManagementRepository serviceRequestManagementRepository;
+  int filterId =0;
 
   ServiceRequestManagementBloc(this.serviceRequestManagementRepository)
       : super(ServiceRequestManagementState.initial()) {
@@ -62,7 +63,7 @@ class ServiceRequestManagementBloc
   Future<ServiceRequestManagementState> _getPendingRequests() async {
     final Either<ApiErrorHandler, ServiceRequestResponse> result =
         await serviceRequestManagementRepository.getPendingRequests(
-            page: 1, userId: SharedPreffUtil().getAdminId, limit: 10);
+            page: 1, userId: SharedPreffUtil().getAdminId, limit: 10,filterId: filterId);
     ServiceRequestManagementState serviceRequestManagementState =
         result.fold((l) {
       return state.copyWith(isLoading: false, services: [], error: l.error);
@@ -75,7 +76,7 @@ class ServiceRequestManagementBloc
   Future<ServiceRequestManagementState> _getCompletedRequests() async {
     final Either<ApiErrorHandler, ServiceRequestResponse> result =
         await serviceRequestManagementRepository.getCompletedRequests(
-            page: 1, userId: SharedPreffUtil().getAdminId, limit: 10);
+            page: 1, userId: SharedPreffUtil().getAdminId, limit: 10,filterId: filterId);
     ServiceRequestManagementState serviceRequestManagementState =
         result.fold((l) {
       return state.copyWith(isLoading: false, services: [], error: l.error);
@@ -88,7 +89,7 @@ class ServiceRequestManagementBloc
   Future<ServiceRequestManagementState> _getCancelledRequests() async {
     final Either<ApiErrorHandler, ServiceRequestResponse> result =
         await serviceRequestManagementRepository.getCancelledRequests(
-            page: 1, userId: SharedPreffUtil().getAdminId, limit: 10);
+            page: 1, userId: SharedPreffUtil().getAdminId, limit: 10,filterId: filterId);
     ServiceRequestManagementState serviceRequestManagementState =
         result.fold((l) {
       return state.copyWith(isLoading: false, services: [], error: l.error);
@@ -101,7 +102,7 @@ class ServiceRequestManagementBloc
   Future<ServiceRequestManagementState> _getUpcomingRequests() async {
     final Either<ApiErrorHandler, ServiceRequestResponse> result =
         await serviceRequestManagementRepository.getUpcomingRequests(
-            page: 1, userId: SharedPreffUtil().getAdminId, limit: 10);
+            page: 1, userId: SharedPreffUtil().getAdminId, limit: 10,filterId: filterId);
     ServiceRequestManagementState serviceRequestManagementState =
         result.fold((l) {
       return state.copyWith(isLoading: false, services: [], error: l.error);
@@ -114,7 +115,7 @@ class ServiceRequestManagementBloc
   Future<ServiceRequestManagementState> _getOngoingRequests() async {
     final Either<ApiErrorHandler, ServiceRequestResponse> result =
         await serviceRequestManagementRepository.getOngoingRequests(
-            page: 1, userId: SharedPreffUtil().getAdminId, limit: 10);
+            page: 1, userId: SharedPreffUtil().getAdminId, limit: 10,filterId: filterId);
     ServiceRequestManagementState serviceRequestManagementState =
         result.fold((l) {
       return state.copyWith(isLoading: false, services: [], error: l.error);
