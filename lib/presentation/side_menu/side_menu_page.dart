@@ -463,7 +463,6 @@ class _MenuBarState extends State<SideMenuPage> {
     AdminsRoute(),
     AdminCreationRoute(),
     ServiceRequestManagementRoute(),
-    ServiceDetailsRoute(),
   ];
 
   int getRouteIndex(String route) {
@@ -533,8 +532,6 @@ class _MenuBarState extends State<SideMenuPage> {
       return const AdminCreationPage();
     } else if (index == 14) {
       return const ServiceRequestManagementPage();
-    } else if (index == 15) {
-      return const ServiceDetailsPage();
     } else {
       return const DashboardPage();
     }

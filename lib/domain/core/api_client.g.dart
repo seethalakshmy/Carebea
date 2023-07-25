@@ -95,6 +95,7 @@ class _ApiClient implements ApiClient {
     token,
     userId,
     status,
+    adminId,
     reason,
   ) async {
     const _extra = <String, dynamic>{};
@@ -105,6 +106,7 @@ class _ApiClient implements ApiClient {
     final _data = {
       'user_id': userId,
       'status': status,
+      'admin_id': adminId,
       'reject_reason': reason,
     };
     _data.removeWhere((k, v) => v == null);
@@ -129,6 +131,7 @@ class _ApiClient implements ApiClient {
   Future<VerifyResponse> careGiverCertificateApprove(
     token,
     userId,
+    adminId,
     status,
   ) async {
     const _extra = <String, dynamic>{};
@@ -137,6 +140,7 @@ class _ApiClient implements ApiClient {
     _headers.removeWhere((k, v) => v == null);
     final _data = {
       'user_id': userId,
+      'admin_id': adminId,
       'status': status,
     };
     final _result = await _dio
@@ -160,6 +164,7 @@ class _ApiClient implements ApiClient {
   Future<VerifyResponse> careGiverTrainingVerify(
     token,
     userId,
+    adminId,
     status,
   ) async {
     const _extra = <String, dynamic>{};
@@ -168,6 +173,7 @@ class _ApiClient implements ApiClient {
     _headers.removeWhere((k, v) => v == null);
     final _data = {
       'user_id': userId,
+      'admin_id': adminId,
       'status': status,
     };
     final _result = await _dio
@@ -219,12 +225,16 @@ class _ApiClient implements ApiClient {
   Future<VerifyResponse> careGiverSendTrainingRequest(
     token,
     userId,
+    adminId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = {'user_id': userId};
+    final _data = {
+      'user_id': userId,
+      'admin_id': adminId,
+    };
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<VerifyResponse>(Options(
       method: 'POST',
@@ -246,12 +256,16 @@ class _ApiClient implements ApiClient {
   Future<CaregiverProfileResponse> getCareGiverProfile(
     token,
     userId,
+    adminId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = {'user_id': userId};
+    final _data = {
+      'user_id': userId,
+      'admin_id': adminId,
+    };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<CaregiverProfileResponse>(Options(
       method: 'POST',
@@ -273,6 +287,7 @@ class _ApiClient implements ApiClient {
   Future<VerifyResponse> careGiverInterViewVerify(
     token,
     userId,
+    adminId,
     status,
   ) async {
     const _extra = <String, dynamic>{};
@@ -281,6 +296,7 @@ class _ApiClient implements ApiClient {
     _headers.removeWhere((k, v) => v == null);
     final _data = {
       'user_id': userId,
+      'admin_id': adminId,
       'status': status,
     };
     final _result = await _dio
@@ -304,12 +320,16 @@ class _ApiClient implements ApiClient {
   Future<CareGiverDetailResponse> getCareGiverDetail(
     token,
     userId,
+    adminId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = {'user_id': userId};
+    final _data = {
+      'user_id': userId,
+      'admin_id': adminId,
+    };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<CareGiverDetailResponse>(Options(
       method: 'POST',
@@ -555,6 +575,7 @@ class _ApiClient implements ApiClient {
   Future<VerifyResponse> careGiverActiveOrInactive(
     token,
     userId,
+    adminId,
     status,
   ) async {
     const _extra = <String, dynamic>{};
@@ -563,6 +584,7 @@ class _ApiClient implements ApiClient {
     _headers.removeWhere((k, v) => v == null);
     final _data = {
       'user_id': userId,
+      'admin_id': adminId,
       'status': status,
     };
     final _result = await _dio
@@ -689,6 +711,58 @@ class _ApiClient implements ApiClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = DocumentListResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<RelationResponse> getRelationList() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<RelationResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/common-data/get-relationships',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = RelationResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponse> submitReference(
+    userId,
+    referenceList,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'references': referenceList,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/admin-cg-references',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -1283,6 +1357,37 @@ class _ApiClient implements ApiClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = CommonResponseUse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<VerifyResponse> changeAdminStatus(
+    token,
+    userId,
+    status,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'status': status,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<VerifyResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/super-admin/change-admin-status',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VerifyResponse.fromJson(_result.data!);
     return value;
   }
 

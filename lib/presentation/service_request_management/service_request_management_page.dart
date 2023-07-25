@@ -1,4 +1,5 @@
 import 'package:admin_580_tech/presentation/widget/header_view.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +27,7 @@ import '../widget/error_view.dart';
 import '../widget/table_loader_view.dart';
 import 'widgets/service_details_dialog.dart';
 
+@RoutePage()
 class ServiceRequestManagementPage extends StatefulWidget {
   const ServiceRequestManagementPage({Key? key}) : super(key: key);
 
