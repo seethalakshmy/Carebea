@@ -2,6 +2,7 @@ import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/domain/admins/i_admins_repo.dart';
 import 'package:admin_580_tech/domain/admins/model/admin_get_response.dart';
+import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
 import 'package:admin_580_tech/domain/common_response/common_response.dart';
 import 'package:admin_580_tech/domain/core/api_client.dart';
 import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.dart';
@@ -68,6 +69,27 @@ class AdminsRepository implements IAdminsRepo {
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+          error: AppString.noInternetConnection.val,
+          isClientError: true,
+        ));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, VerifyResponse>> changeAdminStatus(
+      {required String userID, required String status}) async {
+    try {
+      final response = await _apiClient.changeAdminStatus("", userID, status);
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("AdminsRepository: ${e.message}");
       if (e.message.contains("SocketException")) {
         CustomLog.log("reached here..");
         return Left(ClientFailure(
