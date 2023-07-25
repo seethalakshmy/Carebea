@@ -24,6 +24,7 @@ import '../widget/custom_sizedbox.dart';
 import '../widget/custom_text_field.dart';
 import '../widget/header_view.dart';
 
+@RoutePage()
 class CaregiverCreationPage extends StatefulWidget {
   const CaregiverCreationPage({Key? key}) : super(key: key);
 

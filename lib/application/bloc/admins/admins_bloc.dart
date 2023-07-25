@@ -1,4 +1,5 @@
 import 'package:admin_580_tech/domain/admins/model/admin_get_response.dart';
+import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
 import 'package:admin_580_tech/domain/common_response/common_response.dart';
 import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.dart';
 import 'package:admin_580_tech/infrastructure/admins/admins_repository.dart';
@@ -20,6 +21,7 @@ class AdminsBloc extends Bloc<AdminEvent, AdminsState> {
   AdminsBloc(this.adminsRepository) : super(AdminsState.initial()) {
     on<_GetAdmins>(_getAdmins);
     on<_AdminDelete>(_deleteRoles);
+    on<_ChangeAdminStatus>(_changeAdminStatus);
   }
 
   _getAdmins(_GetAdmins event, Emitter<AdminsState> emit) async {
@@ -89,6 +91,36 @@ class AdminsBloc extends Bloc<AdminEvent, AdminsState> {
       }
       return state.copyWith(
         deleteResponse: r,
+        isLoading: false,
+      );
+    });
+    emit(
+      homeState,
+    );
+  }
+
+  _changeAdminStatus(
+      _ChangeAdminStatus event, Emitter<AdminsState> emit) async {
+    final Either<ApiErrorHandler, VerifyResponse> homeResult =
+        await adminsRepository.changeAdminStatus(
+            userID: event.userId, status: event.status);
+    AdminsState homeState = homeResult.fold((l) {
+      CSnackBar.showError(event.context, msg: l.error ?? "");
+      return state.copyWith(
+        error: l.error,
+        isLoading: false,
+        isError: true,
+        isClientError: l.isClientError ?? false,
+      );
+    }, (r) {
+      if (r.status ?? false) {
+        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        add(AdminEvent.getAdmins(userId: event.userId, page: 1, limit: 10));
+      } else {
+        CSnackBar.showError(event.context, msg: r.message ?? "");
+      }
+      return state.copyWith(
+        // deleteResponse: r,
         isLoading: false,
       );
     });

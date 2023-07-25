@@ -36,6 +36,7 @@ import '../widget/dropdown/dropdown.dart';
 
 TabsRouter? autoTabRouter;
 
+@RoutePage()
 class SideMenuPage extends StatefulWidget {
   const SideMenuPage({Key? key}) : super(key: key);
 
@@ -76,7 +77,10 @@ class _MenuBarState extends State<SideMenuPage> {
   Widget build(BuildContext context) {
     return AutoTabsRouter(
       routes: _routes,
-      builder: (context, child, animation) {
+      builder: (
+        context,
+        child,
+      ) {
         final tabsRouter = AutoTabsRouter.of(context);
         autoTabRouter = tabsRouter;
         return Scaffold(

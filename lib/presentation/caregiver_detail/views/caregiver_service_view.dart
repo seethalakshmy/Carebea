@@ -120,6 +120,7 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
       userId: widget.userId,
       page: _page,
       limit: _limit,
+      adminId: widget.userId,
     ));
   }
 

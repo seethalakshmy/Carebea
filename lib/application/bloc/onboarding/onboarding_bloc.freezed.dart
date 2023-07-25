@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'onboarding_bloc.dart';
 
@@ -59,6 +59,12 @@ mixin _$OnboardingEvent {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -131,6 +137,12 @@ mixin _$OnboardingEvent {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -203,6 +215,12 @@ mixin _$OnboardingEvent {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -242,6 +260,12 @@ mixin _$OnboardingEvent {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -277,6 +301,12 @@ mixin _$OnboardingEvent {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -308,6 +338,12 @@ mixin _$OnboardingEvent {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -527,6 +563,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
   final List<String> _documentList;
   @override
   List<String> get documentList {
+    if (_documentList is EqualUnmodifiableListView) return _documentList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_documentList);
   }
@@ -642,6 +679,12 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -733,6 +776,12 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -824,6 +873,12 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -885,6 +940,12 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -923,6 +984,12 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -957,6 +1024,12 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -1234,6 +1307,12 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -1318,6 +1397,12 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -1402,6 +1487,12 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -1456,6 +1547,12 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -1494,6 +1591,12 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -1528,6 +1631,12 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -1680,6 +1789,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
   final List<PetsList> _petsList;
   @override
   List<PetsList> get petsList {
+    if (_petsList is EqualUnmodifiableListView) return _petsList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_petsList);
   }
@@ -1687,6 +1797,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
   final List<String> _knownLanguages;
   @override
   List<String> get knownLanguages {
+    if (_knownLanguages is EqualUnmodifiableListView) return _knownLanguages;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_knownLanguages);
   }
@@ -1779,6 +1890,12 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -1861,6 +1978,12 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -1943,6 +2066,12 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -1995,6 +2124,12 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -2033,6 +2168,12 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -2067,6 +2208,12 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -2198,6 +2345,12 @@ class _$_CommonDataLists implements _CommonDataLists {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -2273,6 +2426,12 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -2348,6 +2507,12 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -2393,6 +2558,12 @@ class _$_CommonDataLists implements _CommonDataLists {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -2431,6 +2602,12 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -2465,6 +2642,12 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -2578,6 +2761,12 @@ class _$_CityLists implements _CityLists {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -2653,6 +2842,12 @@ class _$_CityLists implements _CityLists {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -2728,6 +2923,12 @@ class _$_CityLists implements _CityLists {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -2773,6 +2974,12 @@ class _$_CityLists implements _CityLists {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -2811,6 +3018,12 @@ class _$_CityLists implements _CityLists {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -2845,6 +3058,12 @@ class _$_CityLists implements _CityLists {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -2958,6 +3177,12 @@ class _$_StateLists implements _StateLists {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -3033,6 +3258,12 @@ class _$_StateLists implements _StateLists {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -3108,6 +3339,12 @@ class _$_StateLists implements _StateLists {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -3153,6 +3390,12 @@ class _$_StateLists implements _StateLists {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -3191,6 +3434,12 @@ class _$_StateLists implements _StateLists {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -3225,6 +3474,12 @@ class _$_StateLists implements _StateLists {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -3257,6 +3512,2639 @@ class _$_StateLists implements _StateLists {
 
 abstract class _StateLists implements OnboardingEvent {
   const factory _StateLists() = _$_StateLists;
+}
+
+/// @nodoc
+abstract class _$$_RelationListCopyWith<$Res> {
+  factory _$$_RelationListCopyWith(
+          _$_RelationList value, $Res Function(_$_RelationList) then) =
+      __$$_RelationListCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_RelationListCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_RelationList>
+    implements _$$_RelationListCopyWith<$Res> {
+  __$$_RelationListCopyWithImpl(
+      _$_RelationList _value, $Res Function(_$_RelationList) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_RelationList implements _RelationList {
+  const _$_RelationList();
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.relationList()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_RelationList);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
+    required TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)
+        preferenceDetails,
+    required TResult Function() commonData,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
+    required TResult Function() yearsOfExpList,
+    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)
+        languageList,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+    required TResult Function() languagePagination,
+    required TResult Function(String userId) getServices,
+  }) {
+    return relationList();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult? Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult? Function()? commonData,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
+    TResult? Function()? yearsOfExpList,
+    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult? Function()? languagePagination,
+    TResult? Function(String userId)? getServices,
+  }) {
+    return relationList?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult Function()? commonData,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
+    TResult Function()? yearsOfExpList,
+    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult Function()? languagePagination,
+    TResult Function(String userId)? getServices,
+    required TResult orElse(),
+  }) {
+    if (relationList != null) {
+      return relationList();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
+    required TResult Function(_SubmitPreferenceDetails value) preferenceDetails,
+    required TResult Function(_CommonDataLists value) commonData,
+    required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
+    required TResult Function(_YearsOfExp value) yearsOfExpList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+    required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_GetCaregiverService value) getServices,
+  }) {
+    return relationList(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult? Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult? Function(_CommonDataLists value)? commonData,
+    TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
+    TResult? Function(_YearsOfExp value)? yearsOfExpList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_GetCaregiverService value)? getServices,
+  }) {
+    return relationList?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult Function(_CommonDataLists value)? commonData,
+    TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
+    TResult Function(_YearsOfExp value)? yearsOfExpList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_GetCaregiverService value)? getServices,
+    required TResult orElse(),
+  }) {
+    if (relationList != null) {
+      return relationList(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RelationList implements OnboardingEvent {
+  const factory _RelationList() = _$_RelationList;
+}
+
+/// @nodoc
+abstract class _$$_SubmitReferenceCopyWith<$Res> {
+  factory _$$_SubmitReferenceCopyWith(
+          _$_SubmitReference value, $Res Function(_$_SubmitReference) then) =
+      __$$_SubmitReferenceCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String userId});
+}
+
+/// @nodoc
+class __$$_SubmitReferenceCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_SubmitReference>
+    implements _$$_SubmitReferenceCopyWith<$Res> {
+  __$$_SubmitReferenceCopyWithImpl(
+      _$_SubmitReference _value, $Res Function(_$_SubmitReference) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+  }) {
+    return _then(_$_SubmitReference(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SubmitReference implements _SubmitReference {
+  const _$_SubmitReference({required this.userId});
+
+  @override
+  final String userId;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.submitReference(userId: $userId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SubmitReference &&
+            (identical(other.userId, userId) || other.userId == userId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SubmitReferenceCopyWith<_$_SubmitReference> get copyWith =>
+      __$$_SubmitReferenceCopyWithImpl<_$_SubmitReference>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
+    required TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)
+        preferenceDetails,
+    required TResult Function() commonData,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
+    required TResult Function() yearsOfExpList,
+    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)
+        languageList,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+    required TResult Function() languagePagination,
+    required TResult Function(String userId) getServices,
+  }) {
+    return submitReference(userId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult? Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult? Function()? commonData,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
+    TResult? Function()? yearsOfExpList,
+    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult? Function()? languagePagination,
+    TResult? Function(String userId)? getServices,
+  }) {
+    return submitReference?.call(userId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult Function()? commonData,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
+    TResult Function()? yearsOfExpList,
+    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult Function()? languagePagination,
+    TResult Function(String userId)? getServices,
+    required TResult orElse(),
+  }) {
+    if (submitReference != null) {
+      return submitReference(userId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
+    required TResult Function(_SubmitPreferenceDetails value) preferenceDetails,
+    required TResult Function(_CommonDataLists value) commonData,
+    required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
+    required TResult Function(_YearsOfExp value) yearsOfExpList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+    required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_GetCaregiverService value) getServices,
+  }) {
+    return submitReference(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult? Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult? Function(_CommonDataLists value)? commonData,
+    TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
+    TResult? Function(_YearsOfExp value)? yearsOfExpList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_GetCaregiverService value)? getServices,
+  }) {
+    return submitReference?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult Function(_CommonDataLists value)? commonData,
+    TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
+    TResult Function(_YearsOfExp value)? yearsOfExpList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_GetCaregiverService value)? getServices,
+    required TResult orElse(),
+  }) {
+    if (submitReference != null) {
+      return submitReference(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SubmitReference implements OnboardingEvent {
+  const factory _SubmitReference({required final String userId}) =
+      _$_SubmitReference;
+
+  String get userId;
+  @JsonKey(ignore: true)
+  _$$_SubmitReferenceCopyWith<_$_SubmitReference> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AddReferenceCopyWith<$Res> {
+  factory _$$_AddReferenceCopyWith(
+          _$_AddReference value, $Res Function(_$_AddReference) then) =
+      __$$_AddReferenceCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_AddReferenceCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_AddReference>
+    implements _$$_AddReferenceCopyWith<$Res> {
+  __$$_AddReferenceCopyWithImpl(
+      _$_AddReference _value, $Res Function(_$_AddReference) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_AddReference implements _AddReference {
+  const _$_AddReference();
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.addReference()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_AddReference);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
+    required TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)
+        preferenceDetails,
+    required TResult Function() commonData,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
+    required TResult Function() yearsOfExpList,
+    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)
+        languageList,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+    required TResult Function() languagePagination,
+    required TResult Function(String userId) getServices,
+  }) {
+    return addReference();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult? Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult? Function()? commonData,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
+    TResult? Function()? yearsOfExpList,
+    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult? Function()? languagePagination,
+    TResult? Function(String userId)? getServices,
+  }) {
+    return addReference?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult Function()? commonData,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
+    TResult Function()? yearsOfExpList,
+    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult Function()? languagePagination,
+    TResult Function(String userId)? getServices,
+    required TResult orElse(),
+  }) {
+    if (addReference != null) {
+      return addReference();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
+    required TResult Function(_SubmitPreferenceDetails value) preferenceDetails,
+    required TResult Function(_CommonDataLists value) commonData,
+    required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
+    required TResult Function(_YearsOfExp value) yearsOfExpList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+    required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_GetCaregiverService value) getServices,
+  }) {
+    return addReference(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult? Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult? Function(_CommonDataLists value)? commonData,
+    TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
+    TResult? Function(_YearsOfExp value)? yearsOfExpList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_GetCaregiverService value)? getServices,
+  }) {
+    return addReference?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult Function(_CommonDataLists value)? commonData,
+    TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
+    TResult Function(_YearsOfExp value)? yearsOfExpList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_GetCaregiverService value)? getServices,
+    required TResult orElse(),
+  }) {
+    if (addReference != null) {
+      return addReference(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AddReference implements OnboardingEvent {
+  const factory _AddReference() = _$_AddReference;
+}
+
+/// @nodoc
+abstract class _$$DeleteReferenceCopyWith<$Res> {
+  factory _$$DeleteReferenceCopyWith(
+          _$DeleteReference value, $Res Function(_$DeleteReference) then) =
+      __$$DeleteReferenceCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int index});
+}
+
+/// @nodoc
+class __$$DeleteReferenceCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$DeleteReference>
+    implements _$$DeleteReferenceCopyWith<$Res> {
+  __$$DeleteReferenceCopyWithImpl(
+      _$DeleteReference _value, $Res Function(_$DeleteReference) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? index = null,
+  }) {
+    return _then(_$DeleteReference(
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteReference implements DeleteReference {
+  const _$DeleteReference({required this.index});
+
+  @override
+  final int index;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.deleteReference(index: $index)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteReference &&
+            (identical(other.index, index) || other.index == index));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, index);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteReferenceCopyWith<_$DeleteReference> get copyWith =>
+      __$$DeleteReferenceCopyWithImpl<_$DeleteReference>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
+    required TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)
+        preferenceDetails,
+    required TResult Function() commonData,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
+    required TResult Function() yearsOfExpList,
+    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)
+        languageList,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+    required TResult Function() languagePagination,
+    required TResult Function(String userId) getServices,
+  }) {
+    return deleteReference(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult? Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult? Function()? commonData,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
+    TResult? Function()? yearsOfExpList,
+    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult? Function()? languagePagination,
+    TResult? Function(String userId)? getServices,
+  }) {
+    return deleteReference?.call(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult Function()? commonData,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
+    TResult Function()? yearsOfExpList,
+    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult Function()? languagePagination,
+    TResult Function(String userId)? getServices,
+    required TResult orElse(),
+  }) {
+    if (deleteReference != null) {
+      return deleteReference(index);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
+    required TResult Function(_SubmitPreferenceDetails value) preferenceDetails,
+    required TResult Function(_CommonDataLists value) commonData,
+    required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
+    required TResult Function(_YearsOfExp value) yearsOfExpList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+    required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_GetCaregiverService value) getServices,
+  }) {
+    return deleteReference(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult? Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult? Function(_CommonDataLists value)? commonData,
+    TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
+    TResult? Function(_YearsOfExp value)? yearsOfExpList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_GetCaregiverService value)? getServices,
+  }) {
+    return deleteReference?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult Function(_CommonDataLists value)? commonData,
+    TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
+    TResult Function(_YearsOfExp value)? yearsOfExpList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_GetCaregiverService value)? getServices,
+    required TResult orElse(),
+  }) {
+    if (deleteReference != null) {
+      return deleteReference(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeleteReference implements OnboardingEvent {
+  const factory DeleteReference({required final int index}) = _$DeleteReference;
+
+  int get index;
+  @JsonKey(ignore: true)
+  _$$DeleteReferenceCopyWith<_$DeleteReference> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateReferenceCopyWith<$Res> {
+  factory _$$UpdateReferenceCopyWith(
+          _$UpdateReference value, $Res Function(_$UpdateReference) then) =
+      __$$UpdateReferenceCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int index});
+}
+
+/// @nodoc
+class __$$UpdateReferenceCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$UpdateReference>
+    implements _$$UpdateReferenceCopyWith<$Res> {
+  __$$UpdateReferenceCopyWithImpl(
+      _$UpdateReference _value, $Res Function(_$UpdateReference) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? index = null,
+  }) {
+    return _then(_$UpdateReference(
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateReference implements UpdateReference {
+  const _$UpdateReference({required this.index});
+
+  @override
+  final int index;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.updateReference(index: $index)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateReference &&
+            (identical(other.index, index) || other.index == index));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, index);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateReferenceCopyWith<_$UpdateReference> get copyWith =>
+      __$$UpdateReferenceCopyWithImpl<_$UpdateReference>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
+    required TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)
+        preferenceDetails,
+    required TResult Function() commonData,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
+    required TResult Function() yearsOfExpList,
+    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)
+        languageList,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+    required TResult Function() languagePagination,
+    required TResult Function(String userId) getServices,
+  }) {
+    return updateReference(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult? Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult? Function()? commonData,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
+    TResult? Function()? yearsOfExpList,
+    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult? Function()? languagePagination,
+    TResult? Function(String userId)? getServices,
+  }) {
+    return updateReference?.call(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult Function()? commonData,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
+    TResult Function()? yearsOfExpList,
+    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult Function()? languagePagination,
+    TResult Function(String userId)? getServices,
+    required TResult orElse(),
+  }) {
+    if (updateReference != null) {
+      return updateReference(index);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
+    required TResult Function(_SubmitPreferenceDetails value) preferenceDetails,
+    required TResult Function(_CommonDataLists value) commonData,
+    required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
+    required TResult Function(_YearsOfExp value) yearsOfExpList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+    required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_GetCaregiverService value) getServices,
+  }) {
+    return updateReference(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult? Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult? Function(_CommonDataLists value)? commonData,
+    TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
+    TResult? Function(_YearsOfExp value)? yearsOfExpList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_GetCaregiverService value)? getServices,
+  }) {
+    return updateReference?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult Function(_CommonDataLists value)? commonData,
+    TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
+    TResult Function(_YearsOfExp value)? yearsOfExpList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_GetCaregiverService value)? getServices,
+    required TResult orElse(),
+  }) {
+    if (updateReference != null) {
+      return updateReference(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateReference implements OnboardingEvent {
+  const factory UpdateReference({required final int index}) = _$UpdateReference;
+
+  int get index;
+  @JsonKey(ignore: true)
+  _$$UpdateReferenceCopyWith<_$UpdateReference> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$EditReferenceCopyWith<$Res> {
+  factory _$$EditReferenceCopyWith(
+          _$EditReference value, $Res Function(_$EditReference) then) =
+      __$$EditReferenceCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int index, GetReferences reference});
+}
+
+/// @nodoc
+class __$$EditReferenceCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$EditReference>
+    implements _$$EditReferenceCopyWith<$Res> {
+  __$$EditReferenceCopyWithImpl(
+      _$EditReference _value, $Res Function(_$EditReference) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? index = null,
+    Object? reference = null,
+  }) {
+    return _then(_$EditReference(
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+      reference: null == reference
+          ? _value.reference
+          : reference // ignore: cast_nullable_to_non_nullable
+              as GetReferences,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$EditReference implements EditReference {
+  const _$EditReference({required this.index, required this.reference});
+
+  @override
+  final int index;
+  @override
+  final GetReferences reference;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.editReference(index: $index, reference: $reference)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$EditReference &&
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.reference, reference) ||
+                other.reference == reference));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, index, reference);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$EditReferenceCopyWith<_$EditReference> get copyWith =>
+      __$$EditReferenceCopyWithImpl<_$EditReference>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
+    required TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)
+        preferenceDetails,
+    required TResult Function() commonData,
+    required TResult Function() cityList,
+    required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
+    required TResult Function() yearsOfExpList,
+    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)
+        languageList,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+    required TResult Function() languagePagination,
+    required TResult Function(String userId) getServices,
+  }) {
+    return editReference(index, reference);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult? Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult? Function()? commonData,
+    TResult? Function()? cityList,
+    TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
+    TResult? Function()? yearsOfExpList,
+    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult? Function()? languagePagination,
+    TResult? Function(String userId)? getServices,
+  }) {
+    return editReference?.call(index, reference);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult Function()? commonData,
+    TResult Function()? cityList,
+    TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
+    TResult Function()? yearsOfExpList,
+    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult Function()? languagePagination,
+    TResult Function(String userId)? getServices,
+    required TResult orElse(),
+  }) {
+    if (editReference != null) {
+      return editReference(index, reference);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
+    required TResult Function(_SubmitPreferenceDetails value) preferenceDetails,
+    required TResult Function(_CommonDataLists value) commonData,
+    required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
+    required TResult Function(_YearsOfExp value) yearsOfExpList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+    required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_GetCaregiverService value) getServices,
+  }) {
+    return editReference(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult? Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult? Function(_CommonDataLists value)? commonData,
+    TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
+    TResult? Function(_YearsOfExp value)? yearsOfExpList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_GetCaregiverService value)? getServices,
+  }) {
+    return editReference?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult Function(_CommonDataLists value)? commonData,
+    TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
+    TResult Function(_YearsOfExp value)? yearsOfExpList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_GetCaregiverService value)? getServices,
+    required TResult orElse(),
+  }) {
+    if (editReference != null) {
+      return editReference(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class EditReference implements OnboardingEvent {
+  const factory EditReference(
+      {required final int index,
+      required final GetReferences reference}) = _$EditReference;
+
+  int get index;
+  GetReferences get reference;
+  @JsonKey(ignore: true)
+  _$$EditReferenceCopyWith<_$EditReference> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -3338,6 +6226,12 @@ class _$_YearsOfExp implements _YearsOfExp {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -3413,6 +6307,12 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -3488,6 +6388,12 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -3533,6 +6439,12 @@ class _$_YearsOfExp implements _YearsOfExp {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -3571,6 +6483,12 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -3605,6 +6523,12 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -3745,6 +6669,12 @@ class _$_GetPetList implements _GetPetList {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -3820,6 +6750,12 @@ class _$_GetPetList implements _GetPetList {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -3895,6 +6831,12 @@ class _$_GetPetList implements _GetPetList {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -3940,6 +6882,12 @@ class _$_GetPetList implements _GetPetList {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -3978,6 +6926,12 @@ class _$_GetPetList implements _GetPetList {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -4012,6 +6966,12 @@ class _$_GetPetList implements _GetPetList {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -4100,6 +7060,7 @@ class _$_GetLanguageList implements _GetLanguageList {
   final List<PreferenceLanguageModel> _languageList;
   @override
   List<PreferenceLanguageModel> get languageList {
+    if (_languageList is EqualUnmodifiableListView) return _languageList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_languageList);
   }
@@ -4174,6 +7135,12 @@ class _$_GetLanguageList implements _GetLanguageList {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -4249,6 +7216,12 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -4324,6 +7297,12 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -4369,6 +7348,12 @@ class _$_GetLanguageList implements _GetLanguageList {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -4407,6 +7392,12 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -4441,6 +7432,12 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -4588,6 +7585,12 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -4663,6 +7666,12 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -4738,6 +7747,12 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -4783,6 +7798,12 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -4821,6 +7842,12 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -4855,6 +7882,12 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -5000,6 +8033,12 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -5075,6 +8114,12 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -5150,6 +8195,12 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -5195,6 +8246,12 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -5233,6 +8290,12 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -5267,6 +8330,12 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -5412,6 +8481,12 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -5487,6 +8562,12 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -5562,6 +8643,12 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -5607,6 +8694,12 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -5645,6 +8738,12 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -5679,6 +8778,12 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -5825,6 +8930,12 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -5900,6 +9011,12 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -5975,6 +9092,12 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -6020,6 +9143,12 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -6058,6 +9187,12 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -6092,6 +9227,12 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -6240,6 +9381,12 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -6315,6 +9462,12 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -6390,6 +9543,12 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -6435,6 +9594,12 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -6473,6 +9638,12 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -6507,6 +9678,12 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -6654,6 +9831,12 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -6729,6 +9912,12 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -6804,6 +9993,12 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -6849,6 +10044,12 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -6887,6 +10088,12 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -6921,6 +10128,12 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -7070,6 +10283,12 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -7145,6 +10364,12 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -7220,6 +10445,12 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -7265,6 +10496,12 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -7303,6 +10540,12 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -7337,6 +10580,12 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -7483,6 +10732,12 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -7558,6 +10813,12 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -7633,6 +10894,12 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -7678,6 +10945,12 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -7716,6 +10989,12 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -7750,6 +11029,12 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -7896,6 +11181,12 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -7971,6 +11262,12 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -8046,6 +11343,12 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -8091,6 +11394,12 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -8129,6 +11438,12 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -8163,6 +11478,12 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -8310,6 +11631,12 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -8385,6 +11712,12 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -8460,6 +11793,12 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -8505,6 +11844,12 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -8543,6 +11888,12 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -8577,6 +11928,12 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -8667,6 +12024,7 @@ class _$_SecurityDocumentUploadSelected
   final List<PlatformFile> _bytesList;
   @override
   List<PlatformFile> get bytesList {
+    if (_bytesList is EqualUnmodifiableListView) return _bytesList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bytesList);
   }
@@ -8745,6 +12103,12 @@ class _$_SecurityDocumentUploadSelected
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -8820,6 +12184,12 @@ class _$_SecurityDocumentUploadSelected
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -8895,6 +12265,12 @@ class _$_SecurityDocumentUploadSelected
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -8940,6 +12316,12 @@ class _$_SecurityDocumentUploadSelected
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -8978,6 +12360,12 @@ class _$_SecurityDocumentUploadSelected
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -9012,6 +12400,12 @@ class _$_SecurityDocumentUploadSelected
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -9102,6 +12496,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
   final List<PlatformFile> _bytesList;
   @override
   List<PlatformFile> get bytesList {
+    if (_bytesList is EqualUnmodifiableListView) return _bytesList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bytesList);
   }
@@ -9180,6 +12575,12 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -9255,6 +12656,12 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -9330,6 +12737,12 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -9375,6 +12788,12 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -9413,6 +12832,12 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -9447,6 +12872,12 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -9537,6 +12968,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
   final List<PlatformFile> _bytesList;
   @override
   List<PlatformFile> get bytesList {
+    if (_bytesList is EqualUnmodifiableListView) return _bytesList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bytesList);
   }
@@ -9615,6 +13047,12 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -9690,6 +13128,12 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -9765,6 +13209,12 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -9810,6 +13260,12 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -9848,6 +13304,12 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -9882,6 +13344,12 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -9971,6 +13439,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
   final List<PlatformFile> _bytesList;
   @override
   List<PlatformFile> get bytesList {
+    if (_bytesList is EqualUnmodifiableListView) return _bytesList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bytesList);
   }
@@ -10049,6 +13518,12 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -10124,6 +13599,12 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -10199,6 +13680,12 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -10244,6 +13731,12 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -10282,6 +13775,12 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -10316,6 +13815,12 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -10406,6 +13911,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
   final List<PlatformFile> _bytesList;
   @override
   List<PlatformFile> get bytesList {
+    if (_bytesList is EqualUnmodifiableListView) return _bytesList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bytesList);
   }
@@ -10484,6 +13990,12 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -10559,6 +14071,12 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -10634,6 +14152,12 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -10679,6 +14203,12 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -10717,6 +14247,12 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -10751,6 +14287,12 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -10872,6 +14414,12 @@ class _$_LanguagePagination implements _LanguagePagination {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -10947,6 +14495,12 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -11022,6 +14576,12 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -11067,6 +14627,12 @@ class _$_LanguagePagination implements _LanguagePagination {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -11105,6 +14671,12 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -11139,6 +14711,12 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -11279,6 +14857,12 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     required TResult Function() commonData,
     required TResult Function() cityList,
     required TResult Function() stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
     required TResult Function() yearsOfExpList,
     required TResult Function(String petSearchKey) petsList,
     required TResult Function(String languageSearchKey,
@@ -11354,6 +14938,12 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult? Function()? commonData,
     TResult? Function()? cityList,
     TResult? Function()? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
     TResult? Function()? yearsOfExpList,
     TResult? Function(String petSearchKey)? petsList,
     TResult? Function(String languageSearchKey,
@@ -11429,6 +15019,12 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult Function()? commonData,
     TResult Function()? cityList,
     TResult Function()? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
     TResult Function()? yearsOfExpList,
     TResult Function(String petSearchKey)? petsList,
     TResult Function(String languageSearchKey,
@@ -11474,6 +15070,12 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     required TResult Function(_CommonDataLists value) commonData,
     required TResult Function(_CityLists value) cityList,
     required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
     required TResult Function(_YearsOfExp value) yearsOfExpList,
     required TResult Function(_GetPetList value) petsList,
     required TResult Function(_GetLanguageList value) languageList,
@@ -11512,6 +15114,12 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult? Function(_CommonDataLists value)? commonData,
     TResult? Function(_CityLists value)? cityList,
     TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
     TResult? Function(_YearsOfExp value)? yearsOfExpList,
     TResult? Function(_GetPetList value)? petsList,
     TResult? Function(_GetLanguageList value)? languageList,
@@ -11546,6 +15154,12 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult Function(_CommonDataLists value)? commonData,
     TResult Function(_CityLists value)? cityList,
     TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
     TResult Function(_YearsOfExp value)? yearsOfExpList,
     TResult Function(_GetPetList value)? petsList,
     TResult Function(_GetLanguageList value)? languageList,
@@ -11596,14 +15210,13 @@ mixin _$OnboardingState {
   List<PlatformFile> get tbDocumentList => throw _privateConstructorUsedError;
   List<PlatformFile> get covidDocumentList =>
       throw _privateConstructorUsedError;
-  List<PetsModel> get petsList => throw _privateConstructorUsedError;
-  List<PreferenceLanguageModel> get languageList =>
-      throw _privateConstructorUsedError;
+  List<GetReferences> get referenceList => throw _privateConstructorUsedError;
   int get isHHASelected => throw _privateConstructorUsedError;
   int get isBLSSelected => throw _privateConstructorUsedError;
   int get isTBSelected => throw _privateConstructorUsedError;
   int get isCovidSelected => throw _privateConstructorUsedError;
   bool get isFormSubmitSuccess => throw _privateConstructorUsedError;
+  bool get nextClicked => throw _privateConstructorUsedError;
   bool get listUpdated => throw _privateConstructorUsedError;
   int get isExperianceSelected => throw _privateConstructorUsedError;
   int get isSmokerSelected => throw _privateConstructorUsedError;
@@ -11611,15 +15224,10 @@ mixin _$OnboardingState {
   int get isPetsSelected => throw _privateConstructorUsedError;
   int get isLanguagesSelected => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
-  bool get nextClicked => throw _privateConstructorUsedError;
   int get selectedGenderId => throw _privateConstructorUsedError;
   int get languagePaginationPage => throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
       get personalDetailsOption => throw _privateConstructorUsedError;
-  Option<Either<ApiErrorHandler, CommonResponse>>
-      get qualificationDetailsOption => throw _privateConstructorUsedError;
-  Option<Either<ApiErrorHandler, CommonResponse>> get preferenceDetailsOption =>
-      throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, GenderListResponse>> get genderOption =>
       throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, DocumentListResponse>> get documentOption =>
@@ -11635,6 +15243,14 @@ mixin _$OnboardingState {
   Option<Either<ApiErrorHandler, LanguageListResponse>>
       get languageListOption => throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, GetServiceResponse>> get getServiceOption =>
+      throw _privateConstructorUsedError;
+  Option<Either<ApiErrorHandler, RelationResponse>> get relationOption =>
+      throw _privateConstructorUsedError;
+  Option<Either<ApiErrorHandler, CommonResponse>>
+      get qualificationDetailsOption => throw _privateConstructorUsedError;
+  Option<Either<ApiErrorHandler, CommonResponse>> get preferenceDetailsOption =>
+      throw _privateConstructorUsedError;
+  Option<Either<ApiErrorHandler, CommonResponse>> get referenceOption =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -11655,13 +15271,13 @@ abstract class $OnboardingStateCopyWith<$Res> {
       List<PlatformFile> blsDocumentList,
       List<PlatformFile> tbDocumentList,
       List<PlatformFile> covidDocumentList,
-      List<PetsModel> petsList,
-      List<PreferenceLanguageModel> languageList,
+      List<GetReferences> referenceList,
       int isHHASelected,
       int isBLSSelected,
       int isTBSelected,
       int isCovidSelected,
       bool isFormSubmitSuccess,
+      bool nextClicked,
       bool listUpdated,
       int isExperianceSelected,
       int isSmokerSelected,
@@ -11669,14 +15285,10 @@ abstract class $OnboardingStateCopyWith<$Res> {
       int isPetsSelected,
       int isLanguagesSelected,
       bool isLoading,
-      bool nextClicked,
       int selectedGenderId,
       int languagePaginationPage,
       Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
           personalDetailsOption,
-      Option<Either<ApiErrorHandler, CommonResponse>>
-          qualificationDetailsOption,
-      Option<Either<ApiErrorHandler, CommonResponse>> preferenceDetailsOption,
       Option<Either<ApiErrorHandler, GenderListResponse>> genderOption,
       Option<Either<ApiErrorHandler, DocumentListResponse>> documentOption,
       Option<Either<ApiErrorHandler, StateListReponse>> stateOption,
@@ -11684,7 +15296,12 @@ abstract class $OnboardingStateCopyWith<$Res> {
       Option<Either<ApiErrorHandler, PetListResponse>> petListOption,
       Option<Either<ApiErrorHandler, YearsOfExperienceResponse>> yearsOption,
       Option<Either<ApiErrorHandler, LanguageListResponse>> languageListOption,
-      Option<Either<ApiErrorHandler, GetServiceResponse>> getServiceOption});
+      Option<Either<ApiErrorHandler, GetServiceResponse>> getServiceOption,
+      Option<Either<ApiErrorHandler, RelationResponse>> relationOption,
+      Option<Either<ApiErrorHandler, CommonResponse>>
+          qualificationDetailsOption,
+      Option<Either<ApiErrorHandler, CommonResponse>> preferenceDetailsOption,
+      Option<Either<ApiErrorHandler, CommonResponse>> referenceOption});
 }
 
 /// @nodoc
@@ -11706,13 +15323,13 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
     Object? blsDocumentList = null,
     Object? tbDocumentList = null,
     Object? covidDocumentList = null,
-    Object? petsList = null,
-    Object? languageList = null,
+    Object? referenceList = null,
     Object? isHHASelected = null,
     Object? isBLSSelected = null,
     Object? isTBSelected = null,
     Object? isCovidSelected = null,
     Object? isFormSubmitSuccess = null,
+    Object? nextClicked = null,
     Object? listUpdated = null,
     Object? isExperianceSelected = null,
     Object? isSmokerSelected = null,
@@ -11720,12 +15337,9 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
     Object? isPetsSelected = null,
     Object? isLanguagesSelected = null,
     Object? isLoading = null,
-    Object? nextClicked = null,
     Object? selectedGenderId = null,
     Object? languagePaginationPage = null,
     Object? personalDetailsOption = null,
-    Object? qualificationDetailsOption = null,
-    Object? preferenceDetailsOption = null,
     Object? genderOption = null,
     Object? documentOption = null,
     Object? stateOption = null,
@@ -11734,6 +15348,10 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
     Object? yearsOption = null,
     Object? languageListOption = null,
     Object? getServiceOption = null,
+    Object? relationOption = null,
+    Object? qualificationDetailsOption = null,
+    Object? preferenceDetailsOption = null,
+    Object? referenceOption = null,
   }) {
     return _then(_value.copyWith(
       pickedProfilePic: null == pickedProfilePic
@@ -11760,14 +15378,10 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
           ? _value.covidDocumentList
           : covidDocumentList // ignore: cast_nullable_to_non_nullable
               as List<PlatformFile>,
-      petsList: null == petsList
-          ? _value.petsList
-          : petsList // ignore: cast_nullable_to_non_nullable
-              as List<PetsModel>,
-      languageList: null == languageList
-          ? _value.languageList
-          : languageList // ignore: cast_nullable_to_non_nullable
-              as List<PreferenceLanguageModel>,
+      referenceList: null == referenceList
+          ? _value.referenceList
+          : referenceList // ignore: cast_nullable_to_non_nullable
+              as List<GetReferences>,
       isHHASelected: null == isHHASelected
           ? _value.isHHASelected
           : isHHASelected // ignore: cast_nullable_to_non_nullable
@@ -11787,6 +15401,10 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
       isFormSubmitSuccess: null == isFormSubmitSuccess
           ? _value.isFormSubmitSuccess
           : isFormSubmitSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      nextClicked: null == nextClicked
+          ? _value.nextClicked
+          : nextClicked // ignore: cast_nullable_to_non_nullable
               as bool,
       listUpdated: null == listUpdated
           ? _value.listUpdated
@@ -11816,10 +15434,6 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      nextClicked: null == nextClicked
-          ? _value.nextClicked
-          : nextClicked // ignore: cast_nullable_to_non_nullable
-              as bool,
       selectedGenderId: null == selectedGenderId
           ? _value.selectedGenderId
           : selectedGenderId // ignore: cast_nullable_to_non_nullable
@@ -11832,14 +15446,6 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
           ? _value.personalDetailsOption
           : personalDetailsOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiErrorHandler, PersonalDetailsResponse>>,
-      qualificationDetailsOption: null == qualificationDetailsOption
-          ? _value.qualificationDetailsOption
-          : qualificationDetailsOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<ApiErrorHandler, CommonResponse>>,
-      preferenceDetailsOption: null == preferenceDetailsOption
-          ? _value.preferenceDetailsOption
-          : preferenceDetailsOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<ApiErrorHandler, CommonResponse>>,
       genderOption: null == genderOption
           ? _value.genderOption
           : genderOption // ignore: cast_nullable_to_non_nullable
@@ -11872,6 +15478,22 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
           ? _value.getServiceOption
           : getServiceOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiErrorHandler, GetServiceResponse>>,
+      relationOption: null == relationOption
+          ? _value.relationOption
+          : relationOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, RelationResponse>>,
+      qualificationDetailsOption: null == qualificationDetailsOption
+          ? _value.qualificationDetailsOption
+          : qualificationDetailsOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, CommonResponse>>,
+      preferenceDetailsOption: null == preferenceDetailsOption
+          ? _value.preferenceDetailsOption
+          : preferenceDetailsOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, CommonResponse>>,
+      referenceOption: null == referenceOption
+          ? _value.referenceOption
+          : referenceOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, CommonResponse>>,
     ) as $Val);
   }
 }
@@ -11891,13 +15513,13 @@ abstract class _$$_OnboardingStateCopyWith<$Res>
       List<PlatformFile> blsDocumentList,
       List<PlatformFile> tbDocumentList,
       List<PlatformFile> covidDocumentList,
-      List<PetsModel> petsList,
-      List<PreferenceLanguageModel> languageList,
+      List<GetReferences> referenceList,
       int isHHASelected,
       int isBLSSelected,
       int isTBSelected,
       int isCovidSelected,
       bool isFormSubmitSuccess,
+      bool nextClicked,
       bool listUpdated,
       int isExperianceSelected,
       int isSmokerSelected,
@@ -11905,14 +15527,10 @@ abstract class _$$_OnboardingStateCopyWith<$Res>
       int isPetsSelected,
       int isLanguagesSelected,
       bool isLoading,
-      bool nextClicked,
       int selectedGenderId,
       int languagePaginationPage,
       Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
           personalDetailsOption,
-      Option<Either<ApiErrorHandler, CommonResponse>>
-          qualificationDetailsOption,
-      Option<Either<ApiErrorHandler, CommonResponse>> preferenceDetailsOption,
       Option<Either<ApiErrorHandler, GenderListResponse>> genderOption,
       Option<Either<ApiErrorHandler, DocumentListResponse>> documentOption,
       Option<Either<ApiErrorHandler, StateListReponse>> stateOption,
@@ -11920,7 +15538,12 @@ abstract class _$$_OnboardingStateCopyWith<$Res>
       Option<Either<ApiErrorHandler, PetListResponse>> petListOption,
       Option<Either<ApiErrorHandler, YearsOfExperienceResponse>> yearsOption,
       Option<Either<ApiErrorHandler, LanguageListResponse>> languageListOption,
-      Option<Either<ApiErrorHandler, GetServiceResponse>> getServiceOption});
+      Option<Either<ApiErrorHandler, GetServiceResponse>> getServiceOption,
+      Option<Either<ApiErrorHandler, RelationResponse>> relationOption,
+      Option<Either<ApiErrorHandler, CommonResponse>>
+          qualificationDetailsOption,
+      Option<Either<ApiErrorHandler, CommonResponse>> preferenceDetailsOption,
+      Option<Either<ApiErrorHandler, CommonResponse>> referenceOption});
 }
 
 /// @nodoc
@@ -11940,13 +15563,13 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
     Object? blsDocumentList = null,
     Object? tbDocumentList = null,
     Object? covidDocumentList = null,
-    Object? petsList = null,
-    Object? languageList = null,
+    Object? referenceList = null,
     Object? isHHASelected = null,
     Object? isBLSSelected = null,
     Object? isTBSelected = null,
     Object? isCovidSelected = null,
     Object? isFormSubmitSuccess = null,
+    Object? nextClicked = null,
     Object? listUpdated = null,
     Object? isExperianceSelected = null,
     Object? isSmokerSelected = null,
@@ -11954,12 +15577,9 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
     Object? isPetsSelected = null,
     Object? isLanguagesSelected = null,
     Object? isLoading = null,
-    Object? nextClicked = null,
     Object? selectedGenderId = null,
     Object? languagePaginationPage = null,
     Object? personalDetailsOption = null,
-    Object? qualificationDetailsOption = null,
-    Object? preferenceDetailsOption = null,
     Object? genderOption = null,
     Object? documentOption = null,
     Object? stateOption = null,
@@ -11968,6 +15588,10 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
     Object? yearsOption = null,
     Object? languageListOption = null,
     Object? getServiceOption = null,
+    Object? relationOption = null,
+    Object? qualificationDetailsOption = null,
+    Object? preferenceDetailsOption = null,
+    Object? referenceOption = null,
   }) {
     return _then(_$_OnboardingState(
       pickedProfilePic: null == pickedProfilePic
@@ -11994,14 +15618,10 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
           ? _value._covidDocumentList
           : covidDocumentList // ignore: cast_nullable_to_non_nullable
               as List<PlatformFile>,
-      petsList: null == petsList
-          ? _value._petsList
-          : petsList // ignore: cast_nullable_to_non_nullable
-              as List<PetsModel>,
-      languageList: null == languageList
-          ? _value._languageList
-          : languageList // ignore: cast_nullable_to_non_nullable
-              as List<PreferenceLanguageModel>,
+      referenceList: null == referenceList
+          ? _value._referenceList
+          : referenceList // ignore: cast_nullable_to_non_nullable
+              as List<GetReferences>,
       isHHASelected: null == isHHASelected
           ? _value.isHHASelected
           : isHHASelected // ignore: cast_nullable_to_non_nullable
@@ -12021,6 +15641,10 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
       isFormSubmitSuccess: null == isFormSubmitSuccess
           ? _value.isFormSubmitSuccess
           : isFormSubmitSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
+      nextClicked: null == nextClicked
+          ? _value.nextClicked
+          : nextClicked // ignore: cast_nullable_to_non_nullable
               as bool,
       listUpdated: null == listUpdated
           ? _value.listUpdated
@@ -12050,10 +15674,6 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
-      nextClicked: null == nextClicked
-          ? _value.nextClicked
-          : nextClicked // ignore: cast_nullable_to_non_nullable
-              as bool,
       selectedGenderId: null == selectedGenderId
           ? _value.selectedGenderId
           : selectedGenderId // ignore: cast_nullable_to_non_nullable
@@ -12066,14 +15686,6 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
           ? _value.personalDetailsOption
           : personalDetailsOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiErrorHandler, PersonalDetailsResponse>>,
-      qualificationDetailsOption: null == qualificationDetailsOption
-          ? _value.qualificationDetailsOption
-          : qualificationDetailsOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<ApiErrorHandler, CommonResponse>>,
-      preferenceDetailsOption: null == preferenceDetailsOption
-          ? _value.preferenceDetailsOption
-          : preferenceDetailsOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<ApiErrorHandler, CommonResponse>>,
       genderOption: null == genderOption
           ? _value.genderOption
           : genderOption // ignore: cast_nullable_to_non_nullable
@@ -12106,6 +15718,22 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
           ? _value.getServiceOption
           : getServiceOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiErrorHandler, GetServiceResponse>>,
+      relationOption: null == relationOption
+          ? _value.relationOption
+          : relationOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, RelationResponse>>,
+      qualificationDetailsOption: null == qualificationDetailsOption
+          ? _value.qualificationDetailsOption
+          : qualificationDetailsOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, CommonResponse>>,
+      preferenceDetailsOption: null == preferenceDetailsOption
+          ? _value.preferenceDetailsOption
+          : preferenceDetailsOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, CommonResponse>>,
+      referenceOption: null == referenceOption
+          ? _value.referenceOption
+          : referenceOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, CommonResponse>>,
     ));
   }
 }
@@ -12120,13 +15748,13 @@ class _$_OnboardingState implements _OnboardingState {
       required final List<PlatformFile> blsDocumentList,
       required final List<PlatformFile> tbDocumentList,
       required final List<PlatformFile> covidDocumentList,
-      required final List<PetsModel> petsList,
-      required final List<PreferenceLanguageModel> languageList,
+      required final List<GetReferences> referenceList,
       required this.isHHASelected,
       required this.isBLSSelected,
       required this.isTBSelected,
       required this.isCovidSelected,
       required this.isFormSubmitSuccess,
+      required this.nextClicked,
       required this.listUpdated,
       required this.isExperianceSelected,
       required this.isSmokerSelected,
@@ -12134,12 +15762,9 @@ class _$_OnboardingState implements _OnboardingState {
       required this.isPetsSelected,
       required this.isLanguagesSelected,
       required this.isLoading,
-      required this.nextClicked,
       required this.selectedGenderId,
       required this.languagePaginationPage,
       required this.personalDetailsOption,
-      required this.qualificationDetailsOption,
-      required this.preferenceDetailsOption,
       required this.genderOption,
       required this.documentOption,
       required this.stateOption,
@@ -12147,20 +15772,25 @@ class _$_OnboardingState implements _OnboardingState {
       required this.petListOption,
       required this.yearsOption,
       required this.languageListOption,
-      required this.getServiceOption})
+      required this.getServiceOption,
+      required this.relationOption,
+      required this.qualificationDetailsOption,
+      required this.preferenceDetailsOption,
+      required this.referenceOption})
       : _securityDocumentList = securityDocumentList,
         _hhaDocumentList = hhaDocumentList,
         _blsDocumentList = blsDocumentList,
         _tbDocumentList = tbDocumentList,
         _covidDocumentList = covidDocumentList,
-        _petsList = petsList,
-        _languageList = languageList;
+        _referenceList = referenceList;
 
   @override
   final Uint8List pickedProfilePic;
   final List<PlatformFile> _securityDocumentList;
   @override
   List<PlatformFile> get securityDocumentList {
+    if (_securityDocumentList is EqualUnmodifiableListView)
+      return _securityDocumentList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_securityDocumentList);
   }
@@ -12168,6 +15798,7 @@ class _$_OnboardingState implements _OnboardingState {
   final List<PlatformFile> _hhaDocumentList;
   @override
   List<PlatformFile> get hhaDocumentList {
+    if (_hhaDocumentList is EqualUnmodifiableListView) return _hhaDocumentList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_hhaDocumentList);
   }
@@ -12175,6 +15806,7 @@ class _$_OnboardingState implements _OnboardingState {
   final List<PlatformFile> _blsDocumentList;
   @override
   List<PlatformFile> get blsDocumentList {
+    if (_blsDocumentList is EqualUnmodifiableListView) return _blsDocumentList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_blsDocumentList);
   }
@@ -12182,6 +15814,7 @@ class _$_OnboardingState implements _OnboardingState {
   final List<PlatformFile> _tbDocumentList;
   @override
   List<PlatformFile> get tbDocumentList {
+    if (_tbDocumentList is EqualUnmodifiableListView) return _tbDocumentList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_tbDocumentList);
   }
@@ -12189,22 +15822,18 @@ class _$_OnboardingState implements _OnboardingState {
   final List<PlatformFile> _covidDocumentList;
   @override
   List<PlatformFile> get covidDocumentList {
+    if (_covidDocumentList is EqualUnmodifiableListView)
+      return _covidDocumentList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_covidDocumentList);
   }
 
-  final List<PetsModel> _petsList;
+  final List<GetReferences> _referenceList;
   @override
-  List<PetsModel> get petsList {
+  List<GetReferences> get referenceList {
+    if (_referenceList is EqualUnmodifiableListView) return _referenceList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_petsList);
-  }
-
-  final List<PreferenceLanguageModel> _languageList;
-  @override
-  List<PreferenceLanguageModel> get languageList {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_languageList);
+    return EqualUnmodifiableListView(_referenceList);
   }
 
   @override
@@ -12217,6 +15846,8 @@ class _$_OnboardingState implements _OnboardingState {
   final int isCovidSelected;
   @override
   final bool isFormSubmitSuccess;
+  @override
+  final bool nextClicked;
   @override
   final bool listUpdated;
   @override
@@ -12232,19 +15863,12 @@ class _$_OnboardingState implements _OnboardingState {
   @override
   final bool isLoading;
   @override
-  final bool nextClicked;
-  @override
   final int selectedGenderId;
   @override
   final int languagePaginationPage;
   @override
   final Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
       personalDetailsOption;
-  @override
-  final Option<Either<ApiErrorHandler, CommonResponse>>
-      qualificationDetailsOption;
-  @override
-  final Option<Either<ApiErrorHandler, CommonResponse>> preferenceDetailsOption;
   @override
   final Option<Either<ApiErrorHandler, GenderListResponse>> genderOption;
   @override
@@ -12262,10 +15886,19 @@ class _$_OnboardingState implements _OnboardingState {
       languageListOption;
   @override
   final Option<Either<ApiErrorHandler, GetServiceResponse>> getServiceOption;
+  @override
+  final Option<Either<ApiErrorHandler, RelationResponse>> relationOption;
+  @override
+  final Option<Either<ApiErrorHandler, CommonResponse>>
+      qualificationDetailsOption;
+  @override
+  final Option<Either<ApiErrorHandler, CommonResponse>> preferenceDetailsOption;
+  @override
+  final Option<Either<ApiErrorHandler, CommonResponse>> referenceOption;
 
   @override
   String toString() {
-    return 'OnboardingState(pickedProfilePic: $pickedProfilePic, securityDocumentList: $securityDocumentList, hhaDocumentList: $hhaDocumentList, blsDocumentList: $blsDocumentList, tbDocumentList: $tbDocumentList, covidDocumentList: $covidDocumentList, petsList: $petsList, languageList: $languageList, isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected, isFormSubmitSuccess: $isFormSubmitSuccess, listUpdated: $listUpdated, isExperianceSelected: $isExperianceSelected, isSmokerSelected: $isSmokerSelected, isTransportationSelected: $isTransportationSelected, isPetsSelected: $isPetsSelected, isLanguagesSelected: $isLanguagesSelected, isLoading: $isLoading, nextClicked: $nextClicked, selectedGenderId: $selectedGenderId, languagePaginationPage: $languagePaginationPage, personalDetailsOption: $personalDetailsOption, qualificationDetailsOption: $qualificationDetailsOption, preferenceDetailsOption: $preferenceDetailsOption, genderOption: $genderOption, documentOption: $documentOption, stateOption: $stateOption, cityOption: $cityOption, petListOption: $petListOption, yearsOption: $yearsOption, languageListOption: $languageListOption, getServiceOption: $getServiceOption)';
+    return 'OnboardingState(pickedProfilePic: $pickedProfilePic, securityDocumentList: $securityDocumentList, hhaDocumentList: $hhaDocumentList, blsDocumentList: $blsDocumentList, tbDocumentList: $tbDocumentList, covidDocumentList: $covidDocumentList, referenceList: $referenceList, isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected, isFormSubmitSuccess: $isFormSubmitSuccess, nextClicked: $nextClicked, listUpdated: $listUpdated, isExperianceSelected: $isExperianceSelected, isSmokerSelected: $isSmokerSelected, isTransportationSelected: $isTransportationSelected, isPetsSelected: $isPetsSelected, isLanguagesSelected: $isLanguagesSelected, isLoading: $isLoading, selectedGenderId: $selectedGenderId, languagePaginationPage: $languagePaginationPage, personalDetailsOption: $personalDetailsOption, genderOption: $genderOption, documentOption: $documentOption, stateOption: $stateOption, cityOption: $cityOption, petListOption: $petListOption, yearsOption: $yearsOption, languageListOption: $languageListOption, getServiceOption: $getServiceOption, relationOption: $relationOption, qualificationDetailsOption: $qualificationDetailsOption, preferenceDetailsOption: $preferenceDetailsOption, referenceOption: $referenceOption)';
   }
 
   @override
@@ -12285,9 +15918,8 @@ class _$_OnboardingState implements _OnboardingState {
                 .equals(other._tbDocumentList, _tbDocumentList) &&
             const DeepCollectionEquality()
                 .equals(other._covidDocumentList, _covidDocumentList) &&
-            const DeepCollectionEquality().equals(other._petsList, _petsList) &&
             const DeepCollectionEquality()
-                .equals(other._languageList, _languageList) &&
+                .equals(other._referenceList, _referenceList) &&
             (identical(other.isHHASelected, isHHASelected) ||
                 other.isHHASelected == isHHASelected) &&
             (identical(other.isBLSSelected, isBLSSelected) ||
@@ -12298,14 +15930,15 @@ class _$_OnboardingState implements _OnboardingState {
                 other.isCovidSelected == isCovidSelected) &&
             (identical(other.isFormSubmitSuccess, isFormSubmitSuccess) ||
                 other.isFormSubmitSuccess == isFormSubmitSuccess) &&
+            (identical(other.nextClicked, nextClicked) ||
+                other.nextClicked == nextClicked) &&
             (identical(other.listUpdated, listUpdated) ||
                 other.listUpdated == listUpdated) &&
             (identical(other.isExperianceSelected, isExperianceSelected) ||
                 other.isExperianceSelected == isExperianceSelected) &&
             (identical(other.isSmokerSelected, isSmokerSelected) ||
                 other.isSmokerSelected == isSmokerSelected) &&
-            (identical(
-                    other.isTransportationSelected, isTransportationSelected) ||
+            (identical(other.isTransportationSelected, isTransportationSelected) ||
                 other.isTransportationSelected == isTransportationSelected) &&
             (identical(other.isPetsSelected, isPetsSelected) ||
                 other.isPetsSelected == isPetsSelected) &&
@@ -12313,19 +15946,12 @@ class _$_OnboardingState implements _OnboardingState {
                 other.isLanguagesSelected == isLanguagesSelected) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.nextClicked, nextClicked) ||
-                other.nextClicked == nextClicked) &&
             (identical(other.selectedGenderId, selectedGenderId) ||
                 other.selectedGenderId == selectedGenderId) &&
             (identical(other.languagePaginationPage, languagePaginationPage) ||
                 other.languagePaginationPage == languagePaginationPage) &&
             (identical(other.personalDetailsOption, personalDetailsOption) ||
                 other.personalDetailsOption == personalDetailsOption) &&
-            (identical(other.qualificationDetailsOption, qualificationDetailsOption) ||
-                other.qualificationDetailsOption ==
-                    qualificationDetailsOption) &&
-            (identical(other.preferenceDetailsOption, preferenceDetailsOption) ||
-                other.preferenceDetailsOption == preferenceDetailsOption) &&
             (identical(other.genderOption, genderOption) ||
                 other.genderOption == genderOption) &&
             (identical(other.documentOption, documentOption) ||
@@ -12341,7 +15967,17 @@ class _$_OnboardingState implements _OnboardingState {
             (identical(other.languageListOption, languageListOption) ||
                 other.languageListOption == languageListOption) &&
             (identical(other.getServiceOption, getServiceOption) ||
-                other.getServiceOption == getServiceOption));
+                other.getServiceOption == getServiceOption) &&
+            (identical(other.relationOption, relationOption) ||
+                other.relationOption == relationOption) &&
+            (identical(other.qualificationDetailsOption,
+                    qualificationDetailsOption) ||
+                other.qualificationDetailsOption ==
+                    qualificationDetailsOption) &&
+            (identical(other.preferenceDetailsOption, preferenceDetailsOption) ||
+                other.preferenceDetailsOption == preferenceDetailsOption) &&
+            (identical(other.referenceOption, referenceOption) ||
+                other.referenceOption == referenceOption));
   }
 
   @override
@@ -12353,13 +15989,13 @@ class _$_OnboardingState implements _OnboardingState {
         const DeepCollectionEquality().hash(_blsDocumentList),
         const DeepCollectionEquality().hash(_tbDocumentList),
         const DeepCollectionEquality().hash(_covidDocumentList),
-        const DeepCollectionEquality().hash(_petsList),
-        const DeepCollectionEquality().hash(_languageList),
+        const DeepCollectionEquality().hash(_referenceList),
         isHHASelected,
         isBLSSelected,
         isTBSelected,
         isCovidSelected,
         isFormSubmitSuccess,
+        nextClicked,
         listUpdated,
         isExperianceSelected,
         isSmokerSelected,
@@ -12367,12 +16003,9 @@ class _$_OnboardingState implements _OnboardingState {
         isPetsSelected,
         isLanguagesSelected,
         isLoading,
-        nextClicked,
         selectedGenderId,
         languagePaginationPage,
         personalDetailsOption,
-        qualificationDetailsOption,
-        preferenceDetailsOption,
         genderOption,
         documentOption,
         stateOption,
@@ -12380,7 +16013,11 @@ class _$_OnboardingState implements _OnboardingState {
         petListOption,
         yearsOption,
         languageListOption,
-        getServiceOption
+        getServiceOption,
+        relationOption,
+        qualificationDetailsOption,
+        preferenceDetailsOption,
+        referenceOption
       ]);
 
   @JsonKey(ignore: true)
@@ -12398,13 +16035,13 @@ abstract class _OnboardingState implements OnboardingState {
       required final List<PlatformFile> blsDocumentList,
       required final List<PlatformFile> tbDocumentList,
       required final List<PlatformFile> covidDocumentList,
-      required final List<PetsModel> petsList,
-      required final List<PreferenceLanguageModel> languageList,
+      required final List<GetReferences> referenceList,
       required final int isHHASelected,
       required final int isBLSSelected,
       required final int isTBSelected,
       required final int isCovidSelected,
       required final bool isFormSubmitSuccess,
+      required final bool nextClicked,
       required final bool listUpdated,
       required final int isExperianceSelected,
       required final int isSmokerSelected,
@@ -12412,15 +16049,10 @@ abstract class _OnboardingState implements OnboardingState {
       required final int isPetsSelected,
       required final int isLanguagesSelected,
       required final bool isLoading,
-      required final bool nextClicked,
       required final int selectedGenderId,
       required final int languagePaginationPage,
       required final Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
           personalDetailsOption,
-      required final Option<Either<ApiErrorHandler, CommonResponse>>
-          qualificationDetailsOption,
-      required final Option<Either<ApiErrorHandler, CommonResponse>>
-          preferenceDetailsOption,
       required final Option<Either<ApiErrorHandler, GenderListResponse>>
           genderOption,
       required final Option<Either<ApiErrorHandler, DocumentListResponse>>
@@ -12436,7 +16068,15 @@ abstract class _OnboardingState implements OnboardingState {
       required final Option<Either<ApiErrorHandler, LanguageListResponse>>
           languageListOption,
       required final Option<Either<ApiErrorHandler, GetServiceResponse>>
-          getServiceOption}) = _$_OnboardingState;
+          getServiceOption,
+      required final Option<Either<ApiErrorHandler, RelationResponse>>
+          relationOption,
+      required final Option<Either<ApiErrorHandler, CommonResponse>>
+          qualificationDetailsOption,
+      required final Option<Either<ApiErrorHandler, CommonResponse>>
+          preferenceDetailsOption,
+      required final Option<Either<ApiErrorHandler, CommonResponse>>
+          referenceOption}) = _$_OnboardingState;
 
   @override
   Uint8List get pickedProfilePic;
@@ -12451,9 +16091,7 @@ abstract class _OnboardingState implements OnboardingState {
   @override
   List<PlatformFile> get covidDocumentList;
   @override
-  List<PetsModel> get petsList;
-  @override
-  List<PreferenceLanguageModel> get languageList;
+  List<GetReferences> get referenceList;
   @override
   int get isHHASelected;
   @override
@@ -12464,6 +16102,8 @@ abstract class _OnboardingState implements OnboardingState {
   int get isCovidSelected;
   @override
   bool get isFormSubmitSuccess;
+  @override
+  bool get nextClicked;
   @override
   bool get listUpdated;
   @override
@@ -12479,19 +16119,12 @@ abstract class _OnboardingState implements OnboardingState {
   @override
   bool get isLoading;
   @override
-  bool get nextClicked;
-  @override
   int get selectedGenderId;
   @override
   int get languagePaginationPage;
   @override
   Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
       get personalDetailsOption;
-  @override
-  Option<Either<ApiErrorHandler, CommonResponse>>
-      get qualificationDetailsOption;
-  @override
-  Option<Either<ApiErrorHandler, CommonResponse>> get preferenceDetailsOption;
   @override
   Option<Either<ApiErrorHandler, GenderListResponse>> get genderOption;
   @override
@@ -12508,6 +16141,15 @@ abstract class _OnboardingState implements OnboardingState {
   Option<Either<ApiErrorHandler, LanguageListResponse>> get languageListOption;
   @override
   Option<Either<ApiErrorHandler, GetServiceResponse>> get getServiceOption;
+  @override
+  Option<Either<ApiErrorHandler, RelationResponse>> get relationOption;
+  @override
+  Option<Either<ApiErrorHandler, CommonResponse>>
+      get qualificationDetailsOption;
+  @override
+  Option<Either<ApiErrorHandler, CommonResponse>> get preferenceDetailsOption;
+  @override
+  Option<Either<ApiErrorHandler, CommonResponse>> get referenceOption;
   @override
   @JsonKey(ignore: true)
   _$$_OnboardingStateCopyWith<_$_OnboardingState> get copyWith =>

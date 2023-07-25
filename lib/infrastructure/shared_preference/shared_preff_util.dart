@@ -5,6 +5,7 @@ class SharedPreffUtil {
   final tokenType = 'token_type';
   final refreshToken = 'refresh_token';
   final userId = 'user_id';
+  final adminId = 'admin_id';
   final loggedUser = 'logged_user';
   final notShowIntroScreen = 'not_show_intro_screen';
   final profileUserName = 'profile_user_name';
@@ -49,6 +50,14 @@ class SharedPreffUtil {
     //   return "";
     // }
     return _prefs?.getString(userId) ?? "";
+  }
+
+  set setAdminId(String value) {
+    _prefs?.setString(adminId, value);
+  }
+
+  get getAdminId {
+    return _prefs?.getString(adminId) ?? "";
   }
 
   set setTokenType(String value) {

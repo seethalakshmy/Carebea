@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'admins_bloc.dart';
 
@@ -25,6 +25,9 @@ mixin _$AdminEvent {
     required TResult Function(
             String adminID, String userID, BuildContext context)
         adminDelete,
+    required TResult Function(
+            String userId, String status, BuildContext context)
+        changeAdminStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +38,8 @@ mixin _$AdminEvent {
     TResult? Function(String userId)? getRoles,
     TResult? Function(String adminID, String userID, BuildContext context)?
         adminDelete,
+    TResult? Function(String userId, String status, BuildContext context)?
+        changeAdminStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -45,6 +50,8 @@ mixin _$AdminEvent {
     TResult Function(String userId)? getRoles,
     TResult Function(String adminID, String userID, BuildContext context)?
         adminDelete,
+    TResult Function(String userId, String status, BuildContext context)?
+        changeAdminStatus,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -53,6 +60,7 @@ mixin _$AdminEvent {
     required TResult Function(_GetAdmins value) getAdmins,
     required TResult Function(_GetRoles value) getRoles,
     required TResult Function(_AdminDelete value) adminDelete,
+    required TResult Function(_ChangeAdminStatus value) changeAdminStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +68,7 @@ mixin _$AdminEvent {
     TResult? Function(_GetAdmins value)? getAdmins,
     TResult? Function(_GetRoles value)? getRoles,
     TResult? Function(_AdminDelete value)? adminDelete,
+    TResult? Function(_ChangeAdminStatus value)? changeAdminStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,6 +76,7 @@ mixin _$AdminEvent {
     TResult Function(_GetAdmins value)? getAdmins,
     TResult Function(_GetRoles value)? getRoles,
     TResult Function(_AdminDelete value)? adminDelete,
+    TResult Function(_ChangeAdminStatus value)? changeAdminStatus,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -215,6 +225,9 @@ class _$_GetAdmins implements _GetAdmins {
     required TResult Function(
             String adminID, String userID, BuildContext context)
         adminDelete,
+    required TResult Function(
+            String userId, String status, BuildContext context)
+        changeAdminStatus,
   }) {
     return getAdmins(userId, page, limit, searchTerm, status, roleId);
   }
@@ -228,6 +241,8 @@ class _$_GetAdmins implements _GetAdmins {
     TResult? Function(String userId)? getRoles,
     TResult? Function(String adminID, String userID, BuildContext context)?
         adminDelete,
+    TResult? Function(String userId, String status, BuildContext context)?
+        changeAdminStatus,
   }) {
     return getAdmins?.call(userId, page, limit, searchTerm, status, roleId);
   }
@@ -241,6 +256,8 @@ class _$_GetAdmins implements _GetAdmins {
     TResult Function(String userId)? getRoles,
     TResult Function(String adminID, String userID, BuildContext context)?
         adminDelete,
+    TResult Function(String userId, String status, BuildContext context)?
+        changeAdminStatus,
     required TResult orElse(),
   }) {
     if (getAdmins != null) {
@@ -255,6 +272,7 @@ class _$_GetAdmins implements _GetAdmins {
     required TResult Function(_GetAdmins value) getAdmins,
     required TResult Function(_GetRoles value) getRoles,
     required TResult Function(_AdminDelete value) adminDelete,
+    required TResult Function(_ChangeAdminStatus value) changeAdminStatus,
   }) {
     return getAdmins(this);
   }
@@ -265,6 +283,7 @@ class _$_GetAdmins implements _GetAdmins {
     TResult? Function(_GetAdmins value)? getAdmins,
     TResult? Function(_GetRoles value)? getRoles,
     TResult? Function(_AdminDelete value)? adminDelete,
+    TResult? Function(_ChangeAdminStatus value)? changeAdminStatus,
   }) {
     return getAdmins?.call(this);
   }
@@ -275,6 +294,7 @@ class _$_GetAdmins implements _GetAdmins {
     TResult Function(_GetAdmins value)? getAdmins,
     TResult Function(_GetRoles value)? getRoles,
     TResult Function(_AdminDelete value)? adminDelete,
+    TResult Function(_ChangeAdminStatus value)? changeAdminStatus,
     required TResult orElse(),
   }) {
     if (getAdmins != null) {
@@ -375,6 +395,9 @@ class _$_GetRoles implements _GetRoles {
     required TResult Function(
             String adminID, String userID, BuildContext context)
         adminDelete,
+    required TResult Function(
+            String userId, String status, BuildContext context)
+        changeAdminStatus,
   }) {
     return getRoles(userId);
   }
@@ -388,6 +411,8 @@ class _$_GetRoles implements _GetRoles {
     TResult? Function(String userId)? getRoles,
     TResult? Function(String adminID, String userID, BuildContext context)?
         adminDelete,
+    TResult? Function(String userId, String status, BuildContext context)?
+        changeAdminStatus,
   }) {
     return getRoles?.call(userId);
   }
@@ -401,6 +426,8 @@ class _$_GetRoles implements _GetRoles {
     TResult Function(String userId)? getRoles,
     TResult Function(String adminID, String userID, BuildContext context)?
         adminDelete,
+    TResult Function(String userId, String status, BuildContext context)?
+        changeAdminStatus,
     required TResult orElse(),
   }) {
     if (getRoles != null) {
@@ -415,6 +442,7 @@ class _$_GetRoles implements _GetRoles {
     required TResult Function(_GetAdmins value) getAdmins,
     required TResult Function(_GetRoles value) getRoles,
     required TResult Function(_AdminDelete value) adminDelete,
+    required TResult Function(_ChangeAdminStatus value) changeAdminStatus,
   }) {
     return getRoles(this);
   }
@@ -425,6 +453,7 @@ class _$_GetRoles implements _GetRoles {
     TResult? Function(_GetAdmins value)? getAdmins,
     TResult? Function(_GetRoles value)? getRoles,
     TResult? Function(_AdminDelete value)? adminDelete,
+    TResult? Function(_ChangeAdminStatus value)? changeAdminStatus,
   }) {
     return getRoles?.call(this);
   }
@@ -435,6 +464,7 @@ class _$_GetRoles implements _GetRoles {
     TResult Function(_GetAdmins value)? getAdmins,
     TResult Function(_GetRoles value)? getRoles,
     TResult Function(_AdminDelete value)? adminDelete,
+    TResult Function(_ChangeAdminStatus value)? changeAdminStatus,
     required TResult orElse(),
   }) {
     if (getRoles != null) {
@@ -541,6 +571,9 @@ class _$_AdminDelete implements _AdminDelete {
     required TResult Function(
             String adminID, String userID, BuildContext context)
         adminDelete,
+    required TResult Function(
+            String userId, String status, BuildContext context)
+        changeAdminStatus,
   }) {
     return adminDelete(adminID, userID, context);
   }
@@ -554,6 +587,8 @@ class _$_AdminDelete implements _AdminDelete {
     TResult? Function(String userId)? getRoles,
     TResult? Function(String adminID, String userID, BuildContext context)?
         adminDelete,
+    TResult? Function(String userId, String status, BuildContext context)?
+        changeAdminStatus,
   }) {
     return adminDelete?.call(adminID, userID, context);
   }
@@ -567,6 +602,8 @@ class _$_AdminDelete implements _AdminDelete {
     TResult Function(String userId)? getRoles,
     TResult Function(String adminID, String userID, BuildContext context)?
         adminDelete,
+    TResult Function(String userId, String status, BuildContext context)?
+        changeAdminStatus,
     required TResult orElse(),
   }) {
     if (adminDelete != null) {
@@ -581,6 +618,7 @@ class _$_AdminDelete implements _AdminDelete {
     required TResult Function(_GetAdmins value) getAdmins,
     required TResult Function(_GetRoles value) getRoles,
     required TResult Function(_AdminDelete value) adminDelete,
+    required TResult Function(_ChangeAdminStatus value) changeAdminStatus,
   }) {
     return adminDelete(this);
   }
@@ -591,6 +629,7 @@ class _$_AdminDelete implements _AdminDelete {
     TResult? Function(_GetAdmins value)? getAdmins,
     TResult? Function(_GetRoles value)? getRoles,
     TResult? Function(_AdminDelete value)? adminDelete,
+    TResult? Function(_ChangeAdminStatus value)? changeAdminStatus,
   }) {
     return adminDelete?.call(this);
   }
@@ -601,6 +640,7 @@ class _$_AdminDelete implements _AdminDelete {
     TResult Function(_GetAdmins value)? getAdmins,
     TResult Function(_GetRoles value)? getRoles,
     TResult Function(_AdminDelete value)? adminDelete,
+    TResult Function(_ChangeAdminStatus value)? changeAdminStatus,
     required TResult orElse(),
   }) {
     if (adminDelete != null) {
@@ -625,12 +665,196 @@ abstract class _AdminDelete implements AdminEvent {
 }
 
 /// @nodoc
+abstract class _$$_ChangeAdminStatusCopyWith<$Res> {
+  factory _$$_ChangeAdminStatusCopyWith(_$_ChangeAdminStatus value,
+          $Res Function(_$_ChangeAdminStatus) then) =
+      __$$_ChangeAdminStatusCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String userId, String status, BuildContext context});
+}
+
+/// @nodoc
+class __$$_ChangeAdminStatusCopyWithImpl<$Res>
+    extends _$AdminEventCopyWithImpl<$Res, _$_ChangeAdminStatus>
+    implements _$$_ChangeAdminStatusCopyWith<$Res> {
+  __$$_ChangeAdminStatusCopyWithImpl(
+      _$_ChangeAdminStatus _value, $Res Function(_$_ChangeAdminStatus) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? status = null,
+    Object? context = null,
+  }) {
+    return _then(_$_ChangeAdminStatus(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ChangeAdminStatus implements _ChangeAdminStatus {
+  const _$_ChangeAdminStatus(
+      {required this.userId, required this.status, required this.context});
+
+  @override
+  final String userId;
+  @override
+  final String status;
+  @override
+  final BuildContext context;
+
+  @override
+  String toString() {
+    return 'AdminEvent.changeAdminStatus(userId: $userId, status: $status, context: $context)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ChangeAdminStatus &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userId, status, context);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ChangeAdminStatusCopyWith<_$_ChangeAdminStatus> get copyWith =>
+      __$$_ChangeAdminStatusCopyWithImpl<_$_ChangeAdminStatus>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, int page, int limit,
+            String? searchTerm, String? status, String? roleId)
+        getAdmins,
+    required TResult Function(String userId) getRoles,
+    required TResult Function(
+            String adminID, String userID, BuildContext context)
+        adminDelete,
+    required TResult Function(
+            String userId, String status, BuildContext context)
+        changeAdminStatus,
+  }) {
+    return changeAdminStatus(userId, status, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, int page, int limit, String? searchTerm,
+            String? status, String? roleId)?
+        getAdmins,
+    TResult? Function(String userId)? getRoles,
+    TResult? Function(String adminID, String userID, BuildContext context)?
+        adminDelete,
+    TResult? Function(String userId, String status, BuildContext context)?
+        changeAdminStatus,
+  }) {
+    return changeAdminStatus?.call(userId, status, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, int page, int limit, String? searchTerm,
+            String? status, String? roleId)?
+        getAdmins,
+    TResult Function(String userId)? getRoles,
+    TResult Function(String adminID, String userID, BuildContext context)?
+        adminDelete,
+    TResult Function(String userId, String status, BuildContext context)?
+        changeAdminStatus,
+    required TResult orElse(),
+  }) {
+    if (changeAdminStatus != null) {
+      return changeAdminStatus(userId, status, context);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetAdmins value) getAdmins,
+    required TResult Function(_GetRoles value) getRoles,
+    required TResult Function(_AdminDelete value) adminDelete,
+    required TResult Function(_ChangeAdminStatus value) changeAdminStatus,
+  }) {
+    return changeAdminStatus(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetAdmins value)? getAdmins,
+    TResult? Function(_GetRoles value)? getRoles,
+    TResult? Function(_AdminDelete value)? adminDelete,
+    TResult? Function(_ChangeAdminStatus value)? changeAdminStatus,
+  }) {
+    return changeAdminStatus?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetAdmins value)? getAdmins,
+    TResult Function(_GetRoles value)? getRoles,
+    TResult Function(_AdminDelete value)? adminDelete,
+    TResult Function(_ChangeAdminStatus value)? changeAdminStatus,
+    required TResult orElse(),
+  }) {
+    if (changeAdminStatus != null) {
+      return changeAdminStatus(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ChangeAdminStatus implements AdminEvent {
+  const factory _ChangeAdminStatus(
+      {required final String userId,
+      required final String status,
+      required final BuildContext context}) = _$_ChangeAdminStatus;
+
+  String get userId;
+  String get status;
+  BuildContext get context;
+  @JsonKey(ignore: true)
+  _$$_ChangeAdminStatusCopyWith<_$_ChangeAdminStatus> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$AdminsState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
   CommonResponseUse? get deleteResponse => throw _privateConstructorUsedError;
   AdminGetResponse? get getAdminsResponse => throw _privateConstructorUsedError;
   GetRoleResponse? get getRolesResponse => throw _privateConstructorUsedError;
+  VerifyResponse? get changeStatusResponse =>
+      throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   bool get isClientError => throw _privateConstructorUsedError;
 
@@ -651,6 +875,7 @@ abstract class $AdminsStateCopyWith<$Res> {
       CommonResponseUse? deleteResponse,
       AdminGetResponse? getAdminsResponse,
       GetRoleResponse? getRolesResponse,
+      VerifyResponse? changeStatusResponse,
       String? error,
       bool isClientError});
 }
@@ -673,6 +898,7 @@ class _$AdminsStateCopyWithImpl<$Res, $Val extends AdminsState>
     Object? deleteResponse = freezed,
     Object? getAdminsResponse = freezed,
     Object? getRolesResponse = freezed,
+    Object? changeStatusResponse = freezed,
     Object? error = freezed,
     Object? isClientError = null,
   }) {
@@ -697,6 +923,10 @@ class _$AdminsStateCopyWithImpl<$Res, $Val extends AdminsState>
           ? _value.getRolesResponse
           : getRolesResponse // ignore: cast_nullable_to_non_nullable
               as GetRoleResponse?,
+      changeStatusResponse: freezed == changeStatusResponse
+          ? _value.changeStatusResponse
+          : changeStatusResponse // ignore: cast_nullable_to_non_nullable
+              as VerifyResponse?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -723,6 +953,7 @@ abstract class _$$_AdminsStateCopyWith<$Res>
       CommonResponseUse? deleteResponse,
       AdminGetResponse? getAdminsResponse,
       GetRoleResponse? getRolesResponse,
+      VerifyResponse? changeStatusResponse,
       String? error,
       bool isClientError});
 }
@@ -743,6 +974,7 @@ class __$$_AdminsStateCopyWithImpl<$Res>
     Object? deleteResponse = freezed,
     Object? getAdminsResponse = freezed,
     Object? getRolesResponse = freezed,
+    Object? changeStatusResponse = freezed,
     Object? error = freezed,
     Object? isClientError = null,
   }) {
@@ -767,6 +999,10 @@ class __$$_AdminsStateCopyWithImpl<$Res>
           ? _value.getRolesResponse
           : getRolesResponse // ignore: cast_nullable_to_non_nullable
               as GetRoleResponse?,
+      changeStatusResponse: freezed == changeStatusResponse
+          ? _value.changeStatusResponse
+          : changeStatusResponse // ignore: cast_nullable_to_non_nullable
+              as VerifyResponse?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -788,6 +1024,7 @@ class _$_AdminsState implements _AdminsState {
       required this.deleteResponse,
       required this.getAdminsResponse,
       required this.getRolesResponse,
+      required this.changeStatusResponse,
       required this.error,
       this.isClientError = false});
 
@@ -802,6 +1039,8 @@ class _$_AdminsState implements _AdminsState {
   @override
   final GetRoleResponse? getRolesResponse;
   @override
+  final VerifyResponse? changeStatusResponse;
+  @override
   final String? error;
   @override
   @JsonKey()
@@ -809,7 +1048,7 @@ class _$_AdminsState implements _AdminsState {
 
   @override
   String toString() {
-    return 'AdminsState(isLoading: $isLoading, isError: $isError, deleteResponse: $deleteResponse, getAdminsResponse: $getAdminsResponse, getRolesResponse: $getRolesResponse, error: $error, isClientError: $isClientError)';
+    return 'AdminsState(isLoading: $isLoading, isError: $isError, deleteResponse: $deleteResponse, getAdminsResponse: $getAdminsResponse, getRolesResponse: $getRolesResponse, changeStatusResponse: $changeStatusResponse, error: $error, isClientError: $isClientError)';
   }
 
   @override
@@ -826,6 +1065,8 @@ class _$_AdminsState implements _AdminsState {
                 other.getAdminsResponse == getAdminsResponse) &&
             (identical(other.getRolesResponse, getRolesResponse) ||
                 other.getRolesResponse == getRolesResponse) &&
+            (identical(other.changeStatusResponse, changeStatusResponse) ||
+                other.changeStatusResponse == changeStatusResponse) &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.isClientError, isClientError) ||
                 other.isClientError == isClientError));
@@ -839,6 +1080,7 @@ class _$_AdminsState implements _AdminsState {
       deleteResponse,
       getAdminsResponse,
       getRolesResponse,
+      changeStatusResponse,
       error,
       isClientError);
 
@@ -856,6 +1098,7 @@ abstract class _AdminsState implements AdminsState {
       required final CommonResponseUse? deleteResponse,
       required final AdminGetResponse? getAdminsResponse,
       required final GetRoleResponse? getRolesResponse,
+      required final VerifyResponse? changeStatusResponse,
       required final String? error,
       final bool isClientError}) = _$_AdminsState;
 
@@ -869,6 +1112,8 @@ abstract class _AdminsState implements AdminsState {
   AdminGetResponse? get getAdminsResponse;
   @override
   GetRoleResponse? get getRolesResponse;
+  @override
+  VerifyResponse? get changeStatusResponse;
   @override
   String? get error;
   @override

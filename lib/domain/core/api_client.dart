@@ -27,6 +27,8 @@ import '../../presentation/on_boarding/modules/personal_details/models/personal_
 import '../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
 import '../../presentation/on_boarding/modules/preference/models/language_list_response.dart';
 import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
+import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_response.dart';
+import '../../presentation/on_boarding/modules/reference/models/relation_response.dart';
 import '../admins/model/admin_get_response.dart';
 import '../caregiver_verification/model/reject_params.dart';
 import '../caregivers/model/caregiver_response.dart';
@@ -85,18 +87,21 @@ abstract class ApiClient {
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('status') int status,
+      @Field('admin_id') String adminId,
       @Field('reject_reason') String? reason);
 
   @POST("/admin/caregiver-certificate-verification")
   Future<VerifyResponse> careGiverCertificateApprove(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
+      @Field('admin_id') String adminId,
       @Field('status') int status);
 
   @POST("/admin/caregiver-training-verification")
   Future<VerifyResponse> careGiverTrainingVerify(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
+      @Field('admin_id') String adminId,
       @Field('status') bool status);
 
   @POST("/admin/reject-qualification-document")
@@ -106,22 +111,28 @@ abstract class ApiClient {
 
   @POST("/admin/caregiver-start-training")
   Future<VerifyResponse> careGiverSendTrainingRequest(
-      @Header("Authorization") String token, @Field('user_id') String userId);
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('admin_id') String adminId);
 
   @POST("/admin/get-care-giver-profile")
   Future<CaregiverProfileResponse> getCareGiverProfile(
-      @Header("Authorization") String token, @Field('user_id') String userId);
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('admin_id') String adminId);
 
   @POST("/admin/caregiver-intervie-verification")
   Future<VerifyResponse> careGiverInterViewVerify(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
+      @Field('admin_id') String adminId,
       @Field('status') bool status);
 
   @POST("/admin/get-care-giver-by-id")
   Future<CareGiverDetailResponse> getCareGiverDetail(
     @Header("Authorization") String token,
     @Field('user_id') String userId,
+    @Field('admin_id') String adminId,
   );
 
   @POST("/admin/admin-create-caregiver")
@@ -190,6 +201,7 @@ abstract class ApiClient {
   Future<VerifyResponse> careGiverActiveOrInactive(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
+      @Field('admin_id') String adminId,
       @Field('status') bool status);
 
   @GET("/common-data/get-gender")
@@ -212,6 +224,13 @@ abstract class ApiClient {
 
   @GET("/common-data/get-documents")
   Future<DocumentListResponse> getDocumentsList();
+
+  @GET("/common-data/get-relationships")
+  Future<RelationResponse> getRelationList();
+
+  @POST("/admin/admin-cg-references")
+  Future<CommonResponse> submitReference(
+      @Field('user_id') String userId, @Field('references') List referenceList);
 
   @GET("/common-data/get-pets?")
   Future<PetListResponse> getPetList(@Query("search_term") String searchQuery);
@@ -328,6 +347,12 @@ abstract class ApiClient {
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('admin_id') String adminId);
+
+  @POST("/super-admin/change-admin-status")
+  Future<VerifyResponse> changeAdminStatus(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('status') String status);
 
   @POST("/admin/pending-service-list")
   Future<ServiceRequestResponse> getPendingRequests(

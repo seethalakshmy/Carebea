@@ -28,6 +28,7 @@ class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
   }
 
   _getCareGivers(_GetCareGivers event, Emitter<CareGiversState> emit) async {
+    print('helllo${event.userId}');
     final List<Types> typeList = [
       Types(id: 1, title: AppString.newRequest.val, isSelected: true),
       Types(id: 2, title: AppString.activeCareAmbassador.val, isSelected: false)
@@ -39,7 +40,8 @@ class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
             limit: event.limit,
             type: event.type,
             searchTerm: event.searchTerm,
-            filterId: event.filterId);
+            filterId: event.filterId,
+            adminId: event.adminId);
     CareGiversState homeState = homeResult.fold((l) {
       return state.copyWith(
         error: l.error,
@@ -71,6 +73,7 @@ class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
         await careGiverListRepository.careGiverActiveOrInactive(
       userID: event.userId,
       status: event.status,
+      adminId: event.adminId,
     );
     var userState = result.fold((l) {
       CSnackBar.showError(event.context, msg: l.error);

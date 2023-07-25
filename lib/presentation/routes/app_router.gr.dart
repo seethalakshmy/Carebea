@@ -1,92 +1,76 @@
-// **************************************************************************
-// AutoRouteGenerator
-// **************************************************************************
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// AutoRouteGenerator
+// AutoRouterGenerator
 // **************************************************************************
-//
+
 // ignore_for_file: type=lint
+// coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:admin_580_tech/presentation/admin_creation/admin_creation_page.dart'
-    as _i18;
-import 'package:admin_580_tech/presentation/admins/admins_page.dart' as _i19;
-import 'package:admin_580_tech/presentation/caregiver_creation/caregiver_creation_page.dart'
-    as _i12;
-import 'package:admin_580_tech/presentation/caregiver_detail/caregiver_detail_page.dart'
-    as _i8;
-import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart'
-    as _i11;
-import 'package:admin_580_tech/presentation/caregiver_verification/caregiver_verification_page.dart'
-    as _i14;
-import 'package:admin_580_tech/presentation/caregivers/caregivers_page.dart'
-    as _i6;
-import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart'
-    as _i5;
-import 'package:admin_580_tech/presentation/forgot_password/forgot_password_page.dart'
     as _i2;
-import 'package:admin_580_tech/presentation/login/login_page.dart' as _i1;
-import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart'
-    as _i13;
-import 'package:admin_580_tech/presentation/reset_password/reset_password_page.dart'
-    as _i3;
-import 'package:admin_580_tech/presentation/role_creation/role_creation_page.dart'
-    as _i17;
-import 'package:admin_580_tech/presentation/roles/role_page.dart' as _i16;
-import 'package:admin_580_tech/presentation/service_details/service_details_page.dart'
-    as _i20;
-import 'package:admin_580_tech/presentation/service_request_management/service_request_management_page.dart'
-    as _i15;
-import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart'
+import 'package:admin_580_tech/presentation/admins/admins_page.dart' as _i1;
+import 'package:admin_580_tech/presentation/caregiver_creation/caregiver_creation_page.dart'
     as _i4;
-import 'package:admin_580_tech/presentation/transaction_management/transaction_management_page.dart'
-    as _i10;
-import 'package:admin_580_tech/presentation/user_management/user_management_page.dart'
+import 'package:admin_580_tech/presentation/caregiver_detail/caregiver_detail_page.dart'
+    as _i5;
+import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart'
+    as _i6;
+import 'package:admin_580_tech/presentation/caregiver_verification/caregiver_verification_page.dart'
     as _i7;
-import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet_detail_page.dart'
+import 'package:admin_580_tech/presentation/caregivers/caregivers_page.dart'
+    as _i3;
+import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart'
+    as _i8;
+import 'package:admin_580_tech/presentation/forgot_password/forgot_password_page.dart'
     as _i9;
-import 'package:auto_route/auto_route.dart' as _i21;
-import 'package:flutter/material.dart' as _i22;
+import 'package:admin_580_tech/presentation/login/login_page.dart' as _i10;
+import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart'
+    as _i11;
+import 'package:admin_580_tech/presentation/reset_password/reset_password_page.dart'
+    as _i12;
+import 'package:admin_580_tech/presentation/role_creation/role_creation_page.dart'
+    as _i14;
+import 'package:admin_580_tech/presentation/roles/role_page.dart' as _i13;
+import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart'
+    as _i15;
+import 'package:admin_580_tech/presentation/transaction_management/transaction_management_page.dart'
+    as _i16;
+import 'package:admin_580_tech/presentation/user_management/user_management_page.dart'
+    as _i17;
+import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet_detail_page.dart'
+    as _i18;
+import 'package:auto_route/auto_route.dart' as _i19;
+import 'package:flutter/material.dart' as _i20;
 
-class AppRouter extends _i21.RootStackRouter {
-  AppRouter([_i22.GlobalKey<_i22.NavigatorState>? navigatorKey])
-      : super(navigatorKey);
+abstract class $AppRouter extends _i19.RootStackRouter {
+  $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i21.PageFactory> pagesMap = {
-    LoginRoute.name: (routeData) {
-      return _i21.AdaptivePage<dynamic>(
+  final Map<String, _i19.PageFactory> pagesMap = {
+    AdminsRoute.name: (routeData) {
+      return _i19.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.LoginPage(),
+        child: const _i1.AdminsPage(),
       );
     },
-    ForgotPasswordRoute.name: (routeData) {
-      return _i21.AdaptivePage<dynamic>(
+    AdminCreationRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<AdminCreationRouteArgs>(
+          orElse: () => AdminCreationRouteArgs(
+                isView: queryParams.optString('view'),
+                isEdit: queryParams.optString('edit'),
+                id: queryParams.optString('id'),
+              ));
+      return _i19.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.ForgotPasswordPage(),
-        maintainState: false,
-      );
-    },
-    ResetPasswordRoute.name: (routeData) {
-      return _i21.AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: const _i3.ResetPasswordPage(),
-        maintainState: false,
-      );
-    },
-    SideMenuRoute.name: (routeData) {
-      return _i21.AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: const _i4.SideMenuPage(),
-      );
-    },
-    DashboardRoute.name: (routeData) {
-      return _i21.AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: const _i5.DashboardPage(),
+        child: _i2.AdminCreationPage(
+          key: args.key,
+          isView: args.isView,
+          isEdit: args.isEdit,
+          id: args.id,
+        ),
       );
     },
     CareGiversRoute.name: (routeData) {
@@ -96,19 +80,19 @@ class AppRouter extends _i21.RootStackRouter {
                 page: queryParams.optInt('page'),
                 tab: queryParams.optInt('tab'),
               ));
-      return _i21.AdaptivePage<dynamic>(
+      return _i19.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i6.CareGiversPage(
+        child: _i3.CareGiversPage(
           key: args.key,
           page: args.page,
           tab: args.tab,
         ),
       );
     },
-    UserManagementRoute.name: (routeData) {
-      return _i21.AdaptivePage<dynamic>(
+    CaregiverCreationRoute.name: (routeData) {
+      return _i19.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i7.UserManagementPage(),
+        child: const _i4.CaregiverCreationPage(),
       );
     },
     CareGiverDetailRoute.name: (routeData) {
@@ -122,26 +106,14 @@ class AppRouter extends _i21.RootStackRouter {
                 page: queryParams.optInt('page'),
                 tab: queryParams.optInt('tab'),
               ));
-      return _i21.AdaptivePage<dynamic>(
+      return _i19.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i8.CareGiverDetailPage(
+        child: _i5.CareGiverDetailPage(
           key: args.key,
           id: args.id,
           page: args.page,
           tab: args.tab,
         ),
-      );
-    },
-    UserManagementDetailRoute.name: (routeData) {
-      return _i21.AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: const _i9.UserManagementDetailPage(),
-      );
-    },
-    TransactionManagementRoute.name: (routeData) {
-      return _i21.AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: const _i10.TransactionManagementPage(),
       );
     },
     CareGiverProfileRoute.name: (routeData) {
@@ -152,24 +124,12 @@ class AppRouter extends _i21.RootStackRouter {
                 'id',
                 '',
               )));
-      return _i21.AdaptivePage<dynamic>(
+      return _i19.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i11.CareGiverProfilePage(
+        child: _i6.CareGiverProfilePage(
           key: args.key,
           id: args.id,
         ),
-      );
-    },
-    CaregiverCreationRoute.name: (routeData) {
-      return _i21.AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: const _i12.CaregiverCreationPage(),
-      );
-    },
-    OnboardingRoute.name: (routeData) {
-      return _i21.AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: const _i13.OnboardingPage(),
       );
     },
     CaregiverVerificationRoute.name: (routeData) {
@@ -183,29 +143,50 @@ class AppRouter extends _i21.RootStackRouter {
                 page: queryParams.optInt('page'),
                 tab: queryParams.optInt('tab'),
               ));
-      return _i21.AdaptivePage<dynamic>(
+      return _i19.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i14.CaregiverVerificationPage(
+        child: _i7.CaregiverVerificationPage(
           key: args.key,
           id: args.id,
           page: args.page,
           tab: args.tab,
         ),
-        maintainState: false,
       );
     },
-    ServiceRequestManagementRoute.name: (routeData) {
-      return _i21.AdaptivePage<dynamic>(
+    DashboardRoute.name: (routeData) {
+      return _i19.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i15.ServiceRequestManagementPage(),
-        maintainState: false,
+        child: const _i8.DashboardPage(),
+      );
+    },
+    ForgotPasswordRoute.name: (routeData) {
+      return _i19.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i9.ForgotPasswordPage(),
+      );
+    },
+    LoginRoute.name: (routeData) {
+      return _i19.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i10.LoginPage(),
+      );
+    },
+    OnboardingRoute.name: (routeData) {
+      return _i19.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i11.OnboardingPage(),
+      );
+    },
+    ResetPasswordRoute.name: (routeData) {
+      return _i19.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i12.ResetPasswordPage(),
       );
     },
     RolesRoute.name: (routeData) {
-      return _i21.AdaptivePage<dynamic>(
+      return _i19.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i16.RolesPage(),
-        maintainState: false,
+        child: const _i13.RolesPage(),
       );
     },
     RoleCreationRoute.name: (routeData) {
@@ -216,562 +197,68 @@ class AppRouter extends _i21.RootStackRouter {
                 isEdit: queryParams.optString('edit'),
                 roleId: queryParams.optString('role_id'),
               ));
-      return _i21.AdaptivePage<dynamic>(
+      return _i19.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i17.RoleCreationPage(
+        child: _i14.RoleCreationPage(
           key: args.key,
           isView: args.isView,
           isEdit: args.isEdit,
           roleId: args.roleId,
         ),
-        maintainState: false,
       );
     },
-    AdminCreationRoute.name: (routeData) {
-      final queryParams = routeData.queryParams;
-      final args = routeData.argsAs<AdminCreationRouteArgs>(
-          orElse: () => AdminCreationRouteArgs(
-                isView: queryParams.optString('view'),
-                isEdit: queryParams.optString('edit'),
-                id: queryParams.optString('id'),
-              ));
-      return _i21.AdaptivePage<dynamic>(
+    SideMenuRoute.name: (routeData) {
+      return _i19.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i18.AdminCreationPage(
-          key: args.key,
-          isView: args.isView,
-          isEdit: args.isEdit,
-          id: args.id,
-        ),
-        maintainState: false,
+        child: const _i15.SideMenuPage(),
       );
     },
-    AdminsRoute.name: (routeData) {
-      return _i21.AdaptivePage<dynamic>(
+    TransactionManagementRoute.name: (routeData) {
+      return _i19.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i19.AdminsPage(),
-        maintainState: false,
+        child: const _i16.TransactionManagementPage(),
       );
     },
-    ServiceDetailsRoute.name: (routeData) {
-      final queryParams = routeData.queryParams;
-      final args = routeData.argsAs<ServiceDetailsRouteArgs>(
-          orElse: () => ServiceDetailsRouteArgs(
-                  id: queryParams.optString(
-                'id',
-                '',
-              )));
-      return _i21.AdaptivePage<dynamic>(
+    UserManagementRoute.name: (routeData) {
+      return _i19.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i20.ServiceDetailsPage(
-          key: args.key,
-          id: args.id,
-        ),
-        maintainState: false,
+        child: const _i17.UserManagementPage(),
+      );
+    },
+    UserManagementDetailRoute.name: (routeData) {
+      return _i19.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i18.UserManagementDetailPage(),
       );
     },
   };
-
-  @override
-  List<_i21.RouteConfig> get routes => [
-        _i21.RouteConfig(
-          '/#redirect',
-          path: '/',
-          redirectTo: 'admin/login',
-          fullMatch: true,
-        ),
-        _i21.RouteConfig(
-          LoginRoute.name,
-          path: 'admin/login',
-        ),
-        _i21.RouteConfig(
-          ForgotPasswordRoute.name,
-          path: 'admin/forgot-password',
-        ),
-        _i21.RouteConfig(
-          ResetPasswordRoute.name,
-          path: 'admin/reset-password',
-        ),
-        _i21.RouteConfig(
-          SideMenuRoute.name,
-          path: 'admin/main',
-          children: [
-            _i21.RouteConfig(
-              '#redirect',
-              path: '',
-              parent: SideMenuRoute.name,
-              redirectTo: 'dashboard',
-              fullMatch: true,
-            ),
-            _i21.RouteConfig(
-              DashboardRoute.name,
-              path: 'dashboard',
-              parent: SideMenuRoute.name,
-            ),
-            _i21.RouteConfig(
-              CareGiversRoute.name,
-              path: 'care-ambassador',
-              parent: SideMenuRoute.name,
-            ),
-            _i21.RouteConfig(
-              UserManagementRoute.name,
-              path: 'user-management',
-              parent: SideMenuRoute.name,
-            ),
-            _i21.RouteConfig(
-              CareGiverDetailRoute.name,
-              path: 'care-ambassador-detail',
-              parent: SideMenuRoute.name,
-            ),
-            _i21.RouteConfig(
-              UserManagementDetailRoute.name,
-              path: 'user-management-detail',
-              parent: SideMenuRoute.name,
-            ),
-            _i21.RouteConfig(
-              TransactionManagementRoute.name,
-              path: 'transaction-management',
-              parent: SideMenuRoute.name,
-            ),
-            _i21.RouteConfig(
-              CareGiverProfileRoute.name,
-              path: 'care-ambassador-profile',
-              parent: SideMenuRoute.name,
-            ),
-            _i21.RouteConfig(
-              CaregiverCreationRoute.name,
-              path: 'care-ambassador-creation',
-              parent: SideMenuRoute.name,
-            ),
-            _i21.RouteConfig(
-              OnboardingRoute.name,
-              path: 'caregiver-on_boarding',
-              parent: SideMenuRoute.name,
-            ),
-            _i21.RouteConfig(
-              CaregiverVerificationRoute.name,
-              path: 'care-ambassador-verification',
-              parent: SideMenuRoute.name,
-            ),
-            _i21.RouteConfig(
-              ServiceRequestManagementRoute.name,
-              path: 'service-request-management',
-              parent: SideMenuRoute.name,
-            ),
-            _i21.RouteConfig(
-              RolesRoute.name,
-              path: 'role-management',
-              parent: SideMenuRoute.name,
-            ),
-            _i21.RouteConfig(
-              RoleCreationRoute.name,
-              path: 'role-manage',
-              parent: SideMenuRoute.name,
-            ),
-            _i21.RouteConfig(
-              AdminCreationRoute.name,
-              path: 'admin-manage',
-              parent: SideMenuRoute.name,
-            ),
-            _i21.RouteConfig(
-              AdminsRoute.name,
-              path: 'admin-management',
-              parent: SideMenuRoute.name,
-            ),
-            _i21.RouteConfig(
-              ServiceDetailsRoute.name,
-              path: 'service-details',
-              parent: SideMenuRoute.name,
-            ),
-          ],
-        ),
-      ];
 }
 
 /// generated route for
-/// [_i1.LoginPage]
-class LoginRoute extends _i21.PageRouteInfo<void> {
-  const LoginRoute()
+/// [_i1.AdminsPage]
+class AdminsRoute extends _i19.PageRouteInfo<void> {
+  const AdminsRoute({List<_i19.PageRouteInfo>? children})
       : super(
-          LoginRoute.name,
-          path: 'admin/login',
-        );
-
-  static const String name = 'LoginRoute';
-}
-
-/// generated route for
-/// [_i2.ForgotPasswordPage]
-class ForgotPasswordRoute extends _i21.PageRouteInfo<void> {
-  const ForgotPasswordRoute()
-      : super(
-          ForgotPasswordRoute.name,
-          path: 'admin/forgot-password',
-        );
-
-  static const String name = 'ForgotPasswordRoute';
-}
-
-/// generated route for
-/// [_i3.ResetPasswordPage]
-class ResetPasswordRoute extends _i21.PageRouteInfo<void> {
-  const ResetPasswordRoute()
-      : super(
-          ResetPasswordRoute.name,
-          path: 'admin/reset-password',
-        );
-
-  static const String name = 'ResetPasswordRoute';
-}
-
-/// generated route for
-/// [_i4.SideMenuPage]
-class SideMenuRoute extends _i21.PageRouteInfo<void> {
-  const SideMenuRoute({List<_i21.PageRouteInfo>? children})
-      : super(
-          SideMenuRoute.name,
-          path: 'admin/main',
+          AdminsRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'SideMenuRoute';
+  static const String name = 'AdminsRoute';
+
+  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i5.DashboardPage]
-class DashboardRoute extends _i21.PageRouteInfo<void> {
-  const DashboardRoute()
-      : super(
-          DashboardRoute.name,
-          path: 'dashboard',
-        );
-
-  static const String name = 'DashboardRoute';
-}
-
-/// generated route for
-/// [_i6.CareGiversPage]
-class CareGiversRoute extends _i21.PageRouteInfo<CareGiversRouteArgs> {
-  CareGiversRoute({
-    _i22.Key? key,
-    int? page,
-    int? tab,
-  }) : super(
-          CareGiversRoute.name,
-          path: 'care-ambassador',
-          args: CareGiversRouteArgs(
-            key: key,
-            page: page,
-            tab: tab,
-          ),
-          rawQueryParams: {
-            'page': page,
-            'tab': tab,
-          },
-        );
-
-  static const String name = 'CareGiversRoute';
-}
-
-class CareGiversRouteArgs {
-  const CareGiversRouteArgs({
-    this.key,
-    this.page,
-    this.tab,
-  });
-
-  final _i22.Key? key;
-
-  final int? page;
-
-  final int? tab;
-
-  @override
-  String toString() {
-    return 'CareGiversRouteArgs{key: $key, page: $page, tab: $tab}';
-  }
-}
-
-/// generated route for
-/// [_i7.UserManagementPage]
-class UserManagementRoute extends _i21.PageRouteInfo<void> {
-  const UserManagementRoute()
-      : super(
-          UserManagementRoute.name,
-          path: 'user-management',
-        );
-
-  static const String name = 'UserManagementRoute';
-}
-
-/// generated route for
-/// [_i8.CareGiverDetailPage]
-class CareGiverDetailRoute
-    extends _i21.PageRouteInfo<CareGiverDetailRouteArgs> {
-  CareGiverDetailRoute({
-    _i22.Key? key,
-    String? id = '',
-    int? page,
-    int? tab,
-  }) : super(
-          CareGiverDetailRoute.name,
-          path: 'care-ambassador-detail',
-          args: CareGiverDetailRouteArgs(
-            key: key,
-            id: id,
-            page: page,
-            tab: tab,
-          ),
-          rawQueryParams: {
-            'id': id,
-            'page': page,
-            'tab': tab,
-          },
-        );
-
-  static const String name = 'CareGiverDetailRoute';
-}
-
-class CareGiverDetailRouteArgs {
-  const CareGiverDetailRouteArgs({
-    this.key,
-    this.id = '',
-    this.page,
-    this.tab,
-  });
-
-  final _i22.Key? key;
-
-  final String? id;
-
-  final int? page;
-
-  final int? tab;
-
-  @override
-  String toString() {
-    return 'CareGiverDetailRouteArgs{key: $key, id: $id, page: $page, tab: $tab}';
-  }
-}
-
-/// generated route for
-/// [_i9.UserManagementDetailPage]
-class UserManagementDetailRoute extends _i21.PageRouteInfo<void> {
-  const UserManagementDetailRoute()
-      : super(
-          UserManagementDetailRoute.name,
-          path: 'user-management-detail',
-        );
-
-  static const String name = 'UserManagementDetailRoute';
-}
-
-/// generated route for
-/// [_i10.TransactionManagementPage]
-class TransactionManagementRoute extends _i21.PageRouteInfo<void> {
-  const TransactionManagementRoute()
-      : super(
-          TransactionManagementRoute.name,
-          path: 'transaction-management',
-        );
-
-  static const String name = 'TransactionManagementRoute';
-}
-
-/// generated route for
-/// [_i11.CareGiverProfilePage]
-class CareGiverProfileRoute
-    extends _i21.PageRouteInfo<CareGiverProfileRouteArgs> {
-  CareGiverProfileRoute({
-    _i22.Key? key,
-    String? id = '',
-  }) : super(
-          CareGiverProfileRoute.name,
-          path: 'care-ambassador-profile',
-          args: CareGiverProfileRouteArgs(
-            key: key,
-            id: id,
-          ),
-          rawQueryParams: {'id': id},
-        );
-
-  static const String name = 'CareGiverProfileRoute';
-}
-
-class CareGiverProfileRouteArgs {
-  const CareGiverProfileRouteArgs({
-    this.key,
-    this.id = '',
-  });
-
-  final _i22.Key? key;
-
-  final String? id;
-
-  @override
-  String toString() {
-    return 'CareGiverProfileRouteArgs{key: $key, id: $id}';
-  }
-}
-
-/// generated route for
-/// [_i12.CaregiverCreationPage]
-class CaregiverCreationRoute extends _i21.PageRouteInfo<void> {
-  const CaregiverCreationRoute()
-      : super(
-          CaregiverCreationRoute.name,
-          path: 'care-ambassador-creation',
-        );
-
-  static const String name = 'CaregiverCreationRoute';
-}
-
-/// generated route for
-/// [_i13.OnboardingPage]
-class OnboardingRoute extends _i21.PageRouteInfo<void> {
-  const OnboardingRoute()
-      : super(
-          OnboardingRoute.name,
-          path: 'caregiver-on_boarding',
-        );
-
-  static const String name = 'OnboardingRoute';
-}
-
-/// generated route for
-/// [_i14.CaregiverVerificationPage]
-class CaregiverVerificationRoute
-    extends _i21.PageRouteInfo<CaregiverVerificationRouteArgs> {
-  CaregiverVerificationRoute({
-    _i22.Key? key,
-    String? id = '',
-    int? page,
-    int? tab,
-  }) : super(
-          CaregiverVerificationRoute.name,
-          path: 'care-ambassador-verification',
-          args: CaregiverVerificationRouteArgs(
-            key: key,
-            id: id,
-            page: page,
-            tab: tab,
-          ),
-          rawQueryParams: {
-            'id': id,
-            'page': page,
-            'tab': tab,
-          },
-        );
-
-  static const String name = 'CaregiverVerificationRoute';
-}
-
-class CaregiverVerificationRouteArgs {
-  const CaregiverVerificationRouteArgs({
-    this.key,
-    this.id = '',
-    this.page,
-    this.tab,
-  });
-
-  final _i22.Key? key;
-
-  final String? id;
-
-  final int? page;
-
-  final int? tab;
-
-  @override
-  String toString() {
-    return 'CaregiverVerificationRouteArgs{key: $key, id: $id, page: $page, tab: $tab}';
-  }
-}
-
-/// generated route for
-/// [_i15.ServiceRequestManagementPage]
-class ServiceRequestManagementRoute extends _i21.PageRouteInfo<void> {
-  const ServiceRequestManagementRoute()
-      : super(
-          ServiceRequestManagementRoute.name,
-          path: 'service-request-management',
-        );
-
-  static const String name = 'ServiceRequestManagementRoute';
-}
-
-/// generated route for
-/// [_i16.RolesPage]
-class RolesRoute extends _i21.PageRouteInfo<void> {
-  const RolesRoute()
-      : super(
-          RolesRoute.name,
-          path: 'role-management',
-        );
-
-  static const String name = 'RolesRoute';
-}
-
-/// generated route for
-/// [_i17.RoleCreationPage]
-class RoleCreationRoute extends _i21.PageRouteInfo<RoleCreationRouteArgs> {
-  RoleCreationRoute({
-    _i22.Key? key,
-    String? isView,
-    String? isEdit,
-    String? roleId,
-  }) : super(
-          RoleCreationRoute.name,
-          path: 'role-manage',
-          args: RoleCreationRouteArgs(
-            key: key,
-            isView: isView,
-            isEdit: isEdit,
-            roleId: roleId,
-          ),
-          rawQueryParams: {
-            'view': isView,
-            'edit': isEdit,
-            'role_id': roleId,
-          },
-        );
-
-  static const String name = 'RoleCreationRoute';
-}
-
-class RoleCreationRouteArgs {
-  const RoleCreationRouteArgs({
-    this.key,
-    this.isView,
-    this.isEdit,
-    this.roleId,
-  });
-
-  final _i22.Key? key;
-
-  final String? isView;
-
-  final String? isEdit;
-
-  final String? roleId;
-
-  @override
-  String toString() {
-    return 'RoleCreationRouteArgs{key: $key, isView: $isView, isEdit: $isEdit, roleId: $roleId}';
-  }
-}
-
-/// generated route for
-/// [_i18.AdminCreationPage]
-class AdminCreationRoute extends _i21.PageRouteInfo<AdminCreationRouteArgs> {
+/// [_i2.AdminCreationPage]
+class AdminCreationRoute extends _i19.PageRouteInfo<AdminCreationRouteArgs> {
   AdminCreationRoute({
-    _i22.Key? key,
+    _i20.Key? key,
     String? isView,
     String? isEdit,
     String? id,
+    List<_i19.PageRouteInfo>? children,
   }) : super(
           AdminCreationRoute.name,
-          path: 'admin-manage',
           args: AdminCreationRouteArgs(
             key: key,
             isView: isView,
@@ -783,9 +270,13 @@ class AdminCreationRoute extends _i21.PageRouteInfo<AdminCreationRouteArgs> {
             'edit': isEdit,
             'id': id,
           },
+          initialChildren: children,
         );
 
   static const String name = 'AdminCreationRoute';
+
+  static const _i19.PageInfo<AdminCreationRouteArgs> page =
+      _i19.PageInfo<AdminCreationRouteArgs>(name);
 }
 
 class AdminCreationRouteArgs {
@@ -796,7 +287,7 @@ class AdminCreationRouteArgs {
     this.id,
   });
 
-  final _i22.Key? key;
+  final _i20.Key? key;
 
   final String? isView;
 
@@ -811,48 +302,403 @@ class AdminCreationRouteArgs {
 }
 
 /// generated route for
-/// [_i19.AdminsPage]
-class AdminsRoute extends _i21.PageRouteInfo<void> {
-  const AdminsRoute()
-      : super(
-          AdminsRoute.name,
-          path: 'admin-management',
+/// [_i3.CareGiversPage]
+class CareGiversRoute extends _i19.PageRouteInfo<CareGiversRouteArgs> {
+  CareGiversRoute({
+    _i20.Key? key,
+    int? page,
+    int? tab,
+    List<_i19.PageRouteInfo>? children,
+  }) : super(
+          CareGiversRoute.name,
+          args: CareGiversRouteArgs(
+            key: key,
+            page: page,
+            tab: tab,
+          ),
+          rawQueryParams: {
+            'page': page,
+            'tab': tab,
+          },
+          initialChildren: children,
         );
 
-  static const String name = 'AdminsRoute';
+  static const String name = 'CareGiversRoute';
+
+  static const _i19.PageInfo<CareGiversRouteArgs> page =
+      _i19.PageInfo<CareGiversRouteArgs>(name);
+}
+
+class CareGiversRouteArgs {
+  const CareGiversRouteArgs({
+    this.key,
+    this.page,
+    this.tab,
+  });
+
+  final _i20.Key? key;
+
+  final int? page;
+
+  final int? tab;
+
+  @override
+  String toString() {
+    return 'CareGiversRouteArgs{key: $key, page: $page, tab: $tab}';
+  }
 }
 
 /// generated route for
-/// [_i20.ServiceDetailsPage]
-class ServiceDetailsRoute extends _i21.PageRouteInfo<ServiceDetailsRouteArgs> {
-  ServiceDetailsRoute({
-    _i22.Key? key,
+/// [_i4.CaregiverCreationPage]
+class CaregiverCreationRoute extends _i19.PageRouteInfo<void> {
+  const CaregiverCreationRoute({List<_i19.PageRouteInfo>? children})
+      : super(
+          CaregiverCreationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CaregiverCreationRoute';
+
+  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i5.CareGiverDetailPage]
+class CareGiverDetailRoute
+    extends _i19.PageRouteInfo<CareGiverDetailRouteArgs> {
+  CareGiverDetailRoute({
+    _i20.Key? key,
     String? id = '',
+    int? page,
+    int? tab,
+    List<_i19.PageRouteInfo>? children,
   }) : super(
-          ServiceDetailsRoute.name,
-          path: 'service-details',
-          args: ServiceDetailsRouteArgs(
+          CareGiverDetailRoute.name,
+          args: CareGiverDetailRouteArgs(
+            key: key,
+            id: id,
+            page: page,
+            tab: tab,
+          ),
+          rawQueryParams: {
+            'id': id,
+            'page': page,
+            'tab': tab,
+          },
+          initialChildren: children,
+        );
+
+  static const String name = 'CareGiverDetailRoute';
+
+  static const _i19.PageInfo<CareGiverDetailRouteArgs> page =
+      _i19.PageInfo<CareGiverDetailRouteArgs>(name);
+}
+
+class CareGiverDetailRouteArgs {
+  const CareGiverDetailRouteArgs({
+    this.key,
+    this.id = '',
+    this.page,
+    this.tab,
+  });
+
+  final _i20.Key? key;
+
+  final String? id;
+
+  final int? page;
+
+  final int? tab;
+
+  @override
+  String toString() {
+    return 'CareGiverDetailRouteArgs{key: $key, id: $id, page: $page, tab: $tab}';
+  }
+}
+
+/// generated route for
+/// [_i6.CareGiverProfilePage]
+class CareGiverProfileRoute
+    extends _i19.PageRouteInfo<CareGiverProfileRouteArgs> {
+  CareGiverProfileRoute({
+    _i20.Key? key,
+    String? id = '',
+    List<_i19.PageRouteInfo>? children,
+  }) : super(
+          CareGiverProfileRoute.name,
+          args: CareGiverProfileRouteArgs(
             key: key,
             id: id,
           ),
           rawQueryParams: {'id': id},
+          initialChildren: children,
         );
 
-  static const String name = 'ServiceDetailsRoute';
+  static const String name = 'CareGiverProfileRoute';
+
+  static const _i19.PageInfo<CareGiverProfileRouteArgs> page =
+      _i19.PageInfo<CareGiverProfileRouteArgs>(name);
 }
 
-class ServiceDetailsRouteArgs {
-  const ServiceDetailsRouteArgs({
+class CareGiverProfileRouteArgs {
+  const CareGiverProfileRouteArgs({
     this.key,
     this.id = '',
   });
 
-  final _i22.Key? key;
+  final _i20.Key? key;
 
   final String? id;
 
   @override
   String toString() {
-    return 'ServiceDetailsRouteArgs{key: $key, id: $id}';
+    return 'CareGiverProfileRouteArgs{key: $key, id: $id}';
   }
+}
+
+/// generated route for
+/// [_i7.CaregiverVerificationPage]
+class CaregiverVerificationRoute
+    extends _i19.PageRouteInfo<CaregiverVerificationRouteArgs> {
+  CaregiverVerificationRoute({
+    _i20.Key? key,
+    String? id = '',
+    int? page,
+    int? tab,
+    List<_i19.PageRouteInfo>? children,
+  }) : super(
+          CaregiverVerificationRoute.name,
+          args: CaregiverVerificationRouteArgs(
+            key: key,
+            id: id,
+            page: page,
+            tab: tab,
+          ),
+          rawQueryParams: {
+            'id': id,
+            'page': page,
+            'tab': tab,
+          },
+          initialChildren: children,
+        );
+
+  static const String name = 'CaregiverVerificationRoute';
+
+  static const _i19.PageInfo<CaregiverVerificationRouteArgs> page =
+      _i19.PageInfo<CaregiverVerificationRouteArgs>(name);
+}
+
+class CaregiverVerificationRouteArgs {
+  const CaregiverVerificationRouteArgs({
+    this.key,
+    this.id = '',
+    this.page,
+    this.tab,
+  });
+
+  final _i20.Key? key;
+
+  final String? id;
+
+  final int? page;
+
+  final int? tab;
+
+  @override
+  String toString() {
+    return 'CaregiverVerificationRouteArgs{key: $key, id: $id, page: $page, tab: $tab}';
+  }
+}
+
+/// generated route for
+/// [_i8.DashboardPage]
+class DashboardRoute extends _i19.PageRouteInfo<void> {
+  const DashboardRoute({List<_i19.PageRouteInfo>? children})
+      : super(
+          DashboardRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DashboardRoute';
+
+  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i9.ForgotPasswordPage]
+class ForgotPasswordRoute extends _i19.PageRouteInfo<void> {
+  const ForgotPasswordRoute({List<_i19.PageRouteInfo>? children})
+      : super(
+          ForgotPasswordRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ForgotPasswordRoute';
+
+  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i10.LoginPage]
+class LoginRoute extends _i19.PageRouteInfo<void> {
+  const LoginRoute({List<_i19.PageRouteInfo>? children})
+      : super(
+          LoginRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LoginRoute';
+
+  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i11.OnboardingPage]
+class OnboardingRoute extends _i19.PageRouteInfo<void> {
+  const OnboardingRoute({List<_i19.PageRouteInfo>? children})
+      : super(
+          OnboardingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'OnboardingRoute';
+
+  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i12.ResetPasswordPage]
+class ResetPasswordRoute extends _i19.PageRouteInfo<void> {
+  const ResetPasswordRoute({List<_i19.PageRouteInfo>? children})
+      : super(
+          ResetPasswordRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ResetPasswordRoute';
+
+  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i13.RolesPage]
+class RolesRoute extends _i19.PageRouteInfo<void> {
+  const RolesRoute({List<_i19.PageRouteInfo>? children})
+      : super(
+          RolesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RolesRoute';
+
+  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i14.RoleCreationPage]
+class RoleCreationRoute extends _i19.PageRouteInfo<RoleCreationRouteArgs> {
+  RoleCreationRoute({
+    _i20.Key? key,
+    String? isView,
+    String? isEdit,
+    String? roleId,
+    List<_i19.PageRouteInfo>? children,
+  }) : super(
+          RoleCreationRoute.name,
+          args: RoleCreationRouteArgs(
+            key: key,
+            isView: isView,
+            isEdit: isEdit,
+            roleId: roleId,
+          ),
+          rawQueryParams: {
+            'view': isView,
+            'edit': isEdit,
+            'role_id': roleId,
+          },
+          initialChildren: children,
+        );
+
+  static const String name = 'RoleCreationRoute';
+
+  static const _i19.PageInfo<RoleCreationRouteArgs> page =
+      _i19.PageInfo<RoleCreationRouteArgs>(name);
+}
+
+class RoleCreationRouteArgs {
+  const RoleCreationRouteArgs({
+    this.key,
+    this.isView,
+    this.isEdit,
+    this.roleId,
+  });
+
+  final _i20.Key? key;
+
+  final String? isView;
+
+  final String? isEdit;
+
+  final String? roleId;
+
+  @override
+  String toString() {
+    return 'RoleCreationRouteArgs{key: $key, isView: $isView, isEdit: $isEdit, roleId: $roleId}';
+  }
+}
+
+/// generated route for
+/// [_i15.SideMenuPage]
+class SideMenuRoute extends _i19.PageRouteInfo<void> {
+  const SideMenuRoute({List<_i19.PageRouteInfo>? children})
+      : super(
+          SideMenuRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SideMenuRoute';
+
+  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i16.TransactionManagementPage]
+class TransactionManagementRoute extends _i19.PageRouteInfo<void> {
+  const TransactionManagementRoute({List<_i19.PageRouteInfo>? children})
+      : super(
+          TransactionManagementRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TransactionManagementRoute';
+
+  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i17.UserManagementPage]
+class UserManagementRoute extends _i19.PageRouteInfo<void> {
+  const UserManagementRoute({List<_i19.PageRouteInfo>? children})
+      : super(
+          UserManagementRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'UserManagementRoute';
+
+  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i18.UserManagementDetailPage]
+class UserManagementDetailRoute extends _i19.PageRouteInfo<void> {
+  const UserManagementDetailRoute({List<_i19.PageRouteInfo>? children})
+      : super(
+          UserManagementDetailRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'UserManagementDetailRoute';
+
+  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
 }

@@ -8,6 +8,7 @@ class AdminsState with _$AdminsState {
     required CommonResponseUse? deleteResponse,
     required AdminGetResponse? getAdminsResponse,
     required GetRoleResponse? getRolesResponse,
+    required VerifyResponse? changeStatusResponse,
     required String? error,
     @Default(false) bool isClientError,
   }) = _AdminsState;
@@ -20,6 +21,7 @@ class AdminsState with _$AdminsState {
       error: null,
       getRolesResponse: null,
       getAdminsResponse: null,
+      changeStatusResponse: null,
     );
   }
 }

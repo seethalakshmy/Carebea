@@ -18,4 +18,9 @@ class AdminEvent with _$AdminEvent {
       {required String adminID,
       required String userID,
       required BuildContext context}) = _AdminDelete;
+
+  const factory AdminEvent.changeAdminStatus(
+      {required String userId,
+      required String status,
+      required BuildContext context}) = _ChangeAdminStatus;
 }

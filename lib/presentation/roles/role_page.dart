@@ -19,6 +19,7 @@ import 'package:admin_580_tech/presentation/widget/empty_view.dart';
 import 'package:admin_580_tech/presentation/widget/pagination_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_row_view.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,6 +33,7 @@ import '../widget/header_view.dart';
 import '../widget/table_actions_view.dart';
 import '../widget/table_column_view.dart';
 
+@RoutePage()
 class RolesPage extends StatefulWidget {
   const RolesPage({
     Key? key,
@@ -57,7 +59,7 @@ class _RolesPageState extends State<RolesPage> {
 
   @override
   void initState() {
-    _adminUserId = sharedPrefUtil.getUserId;
+    _adminUserId = sharedPrefUtil.getAdminId;
     super.initState();
     _roleBloc = RolesBloc(RolesRepository());
   }

@@ -5,12 +5,10 @@ import 'package:dartz/dartz.dart';
 import '../caregiver_verification/model/verify_response.dart';
 
 abstract class ICareGiverProfileRepo {
-  Future<Either<ApiErrorHandler, CaregiverProfileResponse>>
-      getCareGiverProfile({
-    required String userID,
-  });
+  Future<Either<ApiErrorHandler, CaregiverProfileResponse>> getCareGiverProfile(
+      {required String userID, required String adminId});
   Future<Either<ApiErrorHandler, VerifyResponse>> careGiverTrainingVerify(
-      {required String userID, required bool status});
+      {required String userID, required bool status, required String adminId});
   Future<Either<ApiErrorHandler, VerifyResponse>> careGiverInterViewVerify(
-      {required String userID, required bool status});
+      {required String userID, required bool status, required String adminId});
 }

@@ -20,6 +20,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/custom_debugger.dart';
 import '../side_menu/side_menu_page.dart';
 
+@RoutePage()
 class RoleCreationPage extends StatefulWidget {
   const RoleCreationPage(
       {super.key,
@@ -48,7 +49,7 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
   @override
   void initState() {
     super.initState();
-    adminUserID = SharedPreffUtil().getUserId;
+    adminUserID = SharedPreffUtil().getAdminId;
 
     /// adminUserID = "64a69c032961698d154944ea";
     roleCreationBloc = RoleCreationBloc(RoleCreationRepository());

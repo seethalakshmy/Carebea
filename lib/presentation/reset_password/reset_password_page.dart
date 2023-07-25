@@ -17,6 +17,7 @@ import '../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../core/custom_debugger.dart';
 import '../widget/custom_text_field.dart';
 
+@RoutePage()
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({Key? key}) : super(key: key);
 
