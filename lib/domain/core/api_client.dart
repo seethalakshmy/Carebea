@@ -25,7 +25,6 @@ import '../../presentation/on_boarding/modules/personal_details/models/personal_
 import '../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
 import '../../presentation/on_boarding/modules/preference/models/language_list_response.dart';
 import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
-import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_response.dart';
 import '../../presentation/on_boarding/modules/reference/models/relation_response.dart';
 import '../admins/model/admin_get_response.dart';
 import '../caregiver_verification/model/reject_params.dart';
@@ -175,6 +174,7 @@ abstract class ApiClient {
     @Field('tb_or_ppd_test_details') TbOrPpdTestDetails tbDetails,
     @Field('covid_vaccination') bool haveCovidVaccination,
     @Field('covid_vaccination_details') CovidVaccinationDetails covidDetails,
+    @Field('is_reupload') bool isReUpload,
   );
 
   @POST("/admin/admin-cg-preferences")
@@ -204,6 +204,7 @@ abstract class ApiClient {
     @Field('hobbies') String hobbies,
     @Field('why_love_being_caregiver') String whyLoveBeingCaregiver,
   );
+
   @POST("/admin/admin-cg-acc-details")
   Future<CommonResponse> submitAccountDetails(
     @Field('user_id') String userId,

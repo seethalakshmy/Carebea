@@ -63,6 +63,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   final FocusNode _dateFocusNode = FocusNode();
   String selectedDate = "";
   String selectedGender = "";
+  String selectedGenderName = "";
   String selectedState = "";
   String selectedCity = "";
   String selectedDocument = "";
@@ -77,6 +78,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   @override
   void initState() {
     widget.onboardingBloc.add(const OnboardingEvent.commonData());
+    widget.onboardingBloc.add(const OnboardingEvent.stateList(
+        stateSearchQuery: "", wantLoading: true));
     super.initState();
   }
 
@@ -171,18 +174,6 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                                 isWeb),
                           ],
                         ),
-
-                  /*NextAndPreviousButton(
-                  isLoading: controller.isLoading.value,
-                  nextButtonText: Get.parameters['is_from_profile'] != null
-                      ? LocaleKeys.save.tr
-                      : LocaleKeys.next.tr,
-                  isHasPreviousButton:
-                      Get.parameters['is_from_profile'] != null ? true : false,
-                  onNext: () {
-
-                    }
-                  }),*/
                   _nextPrevButtonWidget(),
                 ],
               ),
@@ -279,7 +270,6 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           itemCount: state.securityDocumentList.length,
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            print("selected doc list : ${state.securityDocumentList}");
             return Container(
               margin: EdgeInsets.all(DBL.ten.val),
               child: state.securityDocumentList[index].name.endsWith(".png") ||
@@ -374,6 +364,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                     height: DBL.fifty.val, width: DBL.twoEighty.val),
               )
             : GenderDropDown(
+                onboardingBloc: widget.onboardingBloc,
+                selectedValue: widget.onboardingBloc.selectedGenderName,
                 onChange: (value) {
                   selectedGender = value.toString();
                   state.copyWith(selectedGenderId: value);
@@ -500,8 +492,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
             : StateDropDown(
                 onboardingBloc: widget.onboardingBloc,
                 onSearchChanged: (val) {
-                  widget.onboardingBloc.add(const OnboardingEvent.stateList());
-                  widget.onboardingBloc.stateSearchKey = val;
+                  widget.onboardingBloc.add(OnboardingEvent.stateList(
+                      stateSearchQuery: val, wantLoading: false));
                 },
                 searchController: stateSearchController,
                 errorText: widget.onboardingBloc.state.nextClicked
@@ -512,9 +504,11 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                 items: widget.onboardingBloc.stateList,
                 onChange: (value) {
                   selectedState = value.toString();
-                  widget.onboardingBloc.add(const OnboardingEvent.cityList());
+                  widget.onboardingBloc.add(const OnboardingEvent.cityList(
+                      searchQuery: "", wantLoading: true));
+                  widget.onboardingBloc.selectedCityName = "";
                 },
-                selectedValue: selectedState,
+                selectedValue: widget.onboardingBloc.selectedStateName,
               ),
       ],
     );
@@ -529,14 +523,15 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                 height: DBL.twenty.val, width: DBL.hundred.val)
             : _labelWidget(AppString.city.val),
         CustomSizedBox(height: DBL.twelve.val),
-        state.isInitialLoading
+        state.isCityApiCalling || state.isInitialLoading
             ? CustomShimmerWidget.rectangular(
                 height: DBL.fifty.val, width: DBL.twoEighty.val)
             : CityDropDown(
+                onboardingBloc: widget.onboardingBloc,
                 searchController: citySearchController,
                 onSearchChanged: (val) {
-                  //widget.onboardingBloc.add(const OnboardingEvent.cityList());
-                  widget.onboardingBloc.citySearchKey = val;
+                  widget.onboardingBloc.add(OnboardingEvent.cityList(
+                      searchQuery: val, wantLoading: false));
                 },
                 errorText: widget.onboardingBloc.state.nextClicked
                     ? selectedCity.isEmpty
@@ -547,7 +542,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                 onChange: (value) {
                   selectedCity = value;
                 },
-                selectedValue: selectedCity,
+                selectedValue: widget.onboardingBloc.selectedCityName,
               ),
       ],
     );
@@ -680,12 +675,9 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
               widget.onboardingBloc.emit(
                   widget.onboardingBloc.state.copyWith(nextClicked: false));
             }
-            if (widget.onboardingBloc.profileUrl.isEmpty) {
+            if (widget.onboardingBloc.state.pickedProfilePic!.name.isEmpty) {
               CSnackBar.showError(context, msg: AppString.emptyProfilePic.val);
             }
-            // setState(() {
-            //   nextClicked = true;
-            // });
             if (widget.onboardingBloc.state.pickedProfilePic!.size > 0) {
               await uploadProfilePicToAwsS3(
                   AppString.profilePicture.val, SharedPreffUtil().getUserId);
@@ -748,8 +740,6 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         folderName: folderName,
         userId: userId,
         context: context);
-    print(
-        " s3 upload result of profile pic : ${widget.onboardingBloc.profileUrl}");
   }
 
   Future<void> uploadDocumentsToAwsS3(
@@ -761,7 +751,5 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
             folderName: folderName,
             userId: userId,
             context: context));
-    print(
-        " s3 upload result of document : ${widget.onboardingBloc.uploadedDocumentList}");
   }
 }

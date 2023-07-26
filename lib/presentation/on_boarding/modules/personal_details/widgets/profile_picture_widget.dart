@@ -26,11 +26,11 @@ class ProfilePictureWidget extends StatelessWidget {
               child: Container(
                 height: size,
                 width: size,
-                padding: state.pickedProfilePic!.bytes!.isEmpty
+                padding: state.pickedProfilePic!.name.isEmpty
                     ? const EdgeInsets.all(40)
                     : const EdgeInsets.all(0),
                 color: AppColor.skyBlueShade.val,
-                child: state.pickedProfilePic!.bytes!.isEmpty
+                child: state.pickedProfilePic!.name.isEmpty
                     ? CommonImageView(
                         svgPath: IMG.userAvatar.val,
                       )
@@ -55,7 +55,7 @@ class ProfilePictureWidget extends StatelessWidget {
               );
               if (result != null) {
                 file = result.files.single;
-              }
+              } else {}
 
               onboardingBloc.add(OnboardingEvent.profilePicSelection(file));
             },

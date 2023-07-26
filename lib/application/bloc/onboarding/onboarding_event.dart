@@ -43,19 +43,29 @@ class OnboardingEvent with _$OnboardingEvent {
 
   const factory OnboardingEvent.commonData() = _CommonDataLists;
 
-  const factory OnboardingEvent.cityList() = _CityLists;
+  const factory OnboardingEvent.cityList(
+      {required String searchQuery, required bool wantLoading}) = _CityLists;
 
-  const factory OnboardingEvent.stateList() = _StateLists;
+  const factory OnboardingEvent.stateList(
+      {required String stateSearchQuery,
+      required bool wantLoading}) = _StateLists;
+
   const factory OnboardingEvent.relationList() = _RelationList;
+
   const factory OnboardingEvent.submitReference({required String userId}) =
       _SubmitReference;
+
   const factory OnboardingEvent.addReference() = _AddReference;
+
   const factory OnboardingEvent.deleteReference({required int index}) =
       DeleteReference;
+
   const factory OnboardingEvent.updateReference({required int index}) =
       UpdateReference;
+
   const factory OnboardingEvent.editReference(
       {required int index, required GetReferences reference}) = EditReference;
+
   const factory OnboardingEvent.yearsOfExpList() = _YearsOfExp;
 
   const factory OnboardingEvent.petsList(String petSearchKey) = _GetPetList;
@@ -110,6 +120,10 @@ class OnboardingEvent with _$OnboardingEvent {
       _CovidDocumentUploadSelected;
 
   const factory OnboardingEvent.languagePagination() = _LanguagePagination;
+
+  const factory OnboardingEvent.statePagination() = _StatePagination;
+
+  const factory OnboardingEvent.cityPagination() = _CityPagination;
 
   const factory OnboardingEvent.getServices() = _GetCaregiverService;
 
