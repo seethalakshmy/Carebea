@@ -21,7 +21,6 @@ import '../widget/common_button_loader_widget.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_sizedbox.dart';
-import '../widget/custom_text_field.dart';
 import '../widget/header_view.dart';
 
 @RoutePage()
@@ -106,38 +105,21 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
           child: CustomContainer(
             width: MediaQuery.of(context).size.width * 0.8,
             padding: const EdgeInsets.all(20),
-            child: _createCaregiverView(),
+            child: RawKeyboardListener(
+              focusNode: FocusNode(),
+              onKey: (RawKeyEvent event) {
+                if (event.runtimeType == RawKeyEvent &&
+                    event.logicalKey == LogicalKeyboardKey.enter) {
+                  FocusScope.of(context).nextFocus();
+                }
+              },
+              child: _createCaregiverView(),
+            ),
           ),
         );
       },
     );
   }
-
-  /*loaderView() {
-    return CustomSizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              CustomText3(
-                Strings.recent.trim(),
-                style: TS().style(
-                  fontSize: FS.font18.val,
-                  fontWeight: FW.bold.val,
-                ),
-              ),
-              CustomSizedBox(height: DBL.ten.val),
-              CustomSizedBox(
-                  height: 950,
-                  child: Shimmer.fromColors(
-                    // baseColor: Colors.grey[400]!,
-                    // highlightColor: Colors.grey[300]!,
-                    baseColor: AppColor.rowBackgroundColor.val,
-                    highlightColor: AppColor.rowBackgroundColor.val,
-                    child: Container(),
-                  ))
-            ]));
-  }*/
 
   _createCaregiverView() {
     return Column(
@@ -283,63 +265,6 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
             ],
           ),
         )
-      ],
-    );
-  }
-
-  Row _labelText(String labelName) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        CustomText(labelName,
-            style: TS().gRoboto(
-                fontWeight: FW.w400.val,
-                color: AppColor.label.val,
-                fontSize: FS.font16.val)),
-        CustomText(
-          "*",
-          style: TS().gRoboto(color: AppColor.error.val),
-        )
-      ],
-    );
-  }
-
-  CTextField _textFormField(
-    FocusNode focusNode,
-    TextEditingController controller,
-    FormFieldValidator<String> validator,
-    TextInputAction textInputAction,
-    TextInputType textInputType,
-    Widget sufficsIcon,
-  ) {
-    return CTextField(
-      suffixIcon: sufficsIcon,
-      focusNode: focusNode,
-      width: DBL.twoEighty.val,
-      height: DBL.forty.val,
-      onChanged: (String value) {},
-      keyBoardType: textInputType,
-      textInputAction: textInputAction,
-      controller: controller,
-      validator: validator,
-    );
-  }
-
-  _caregiverDetailsItem(
-    String labelName,
-    FocusNode focusNode,
-    TextEditingController controller,
-    FormFieldValidator<String> validator,
-    TextInputAction textInputAction,
-    TextInputType textInputType,
-    Widget sufficsIcon,
-  ) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _labelText(labelName),
-        _textFormField(focusNode, controller, validator, textInputAction,
-            textInputType, sufficsIcon)
       ],
     );
   }

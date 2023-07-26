@@ -448,6 +448,7 @@ class _ApiClient implements ApiClient {
     tbDetails,
     haveCovidVaccination,
     covidDetails,
+    isReUpload,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -462,6 +463,7 @@ class _ApiClient implements ApiClient {
       'tb_or_ppd_test_details': tbDetails,
       'covid_vaccination': haveCovidVaccination,
       'covid_vaccination_details': covidDetails,
+      'is_reupload': isReUpload,
     };
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(

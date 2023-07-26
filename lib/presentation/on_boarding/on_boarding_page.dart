@@ -15,7 +15,9 @@ import '../widget/custom_card.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_text.dart';
 import '../widget/header_view.dart';
+import 'modules/build_profile/build_profile_view.dart';
 import 'modules/personal_details/personal_details_view.dart';
+import 'modules/preference/preference_view.dart';
 import 'modules/qualification_details/qialification_view.dart';
 import 'modules/setup_compensation/setup_compensation_view.dart';
 
@@ -69,20 +71,20 @@ class _OnboardingPageState extends State<OnboardingPage> {
           state: _onboardingBloc.state,
           onboardingBloc: _onboardingBloc,
           pageController: controller),
-      /* PreferenceView(
+      PreferenceView(
         pageController: controller,
         onboardingBloc: _onboardingBloc,
-      ),*/
-      /*ServicesView(
+      ),
+      ServicesView(
         pageController: controller,
         onboardingBloc: _onboardingBloc,
-      ),*/
-      /*ReferenceView(
+      ),
+      ReferenceView(
         onboardingBloc: _onboardingBloc,
         pageController: controller,
-      ),*/
-      /*BuildProfileView(
-          pageController: controller, onboardingBloc: _onboardingBloc),*/
+      ),
+      BuildProfileView(
+          pageController: controller, onboardingBloc: _onboardingBloc),
       //HomeHealthAidAgreementView(pageController: controller),
       SetupCompensationView(
           pageController: controller, onboardingBloc: _onboardingBloc),

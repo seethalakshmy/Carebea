@@ -51,14 +51,16 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   bool nextButtonClicked = false;
   String stateId = "";
   String relationId = "";
-  String citySearchKey = "";
   String stateSearchKey = "";
   String relationSearchKey = "";
   String languageSearchKey = "";
   String profileUrl = "";
   String selectedState = "";
+  String selectedStateName = "";
   String selectedCity = "";
+  String selectedCityName = "";
   String selectedCityId = "";
+  String selectedGenderName = "";
   String selectedRelation = "";
   Uint8List showProfilePic = Uint8List(0);
   PlatformFile? profileFile;
@@ -72,6 +74,8 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   final TextEditingController relationSearchController =
       TextEditingController();
   int languagePage = 1;
+  int cityPage = 1;
+  int statePage = 1;
   int caregiverServiceListIndex = 0;
   String selectedYearId = "";
 
@@ -116,6 +120,10 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
             listUpdated: !event.listUpdated));
       } else if (event is _LanguagePagination) {
         emit(state.copyWith(languagePaginationPage: languagePage));
+      } else if (event is _StatePagination) {
+        emit(state.copyWith(statePaginationPage: statePage));
+      } else if (event is _CityPagination) {
+        emit(state.copyWith(cityPaginationPage: cityPage));
       } else if (event is _CaregiverServiceSelected) {
         List<ServiceModel> serviceList = state.serviceList;
         serviceList[event.index].selected = event.value;
@@ -239,16 +247,15 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     emit(state.copyWith(isInitialLoading: true));
 
     await getGenderResult(emit);
-    await getStateResult(emit);
     await getDocumentTypeResult(emit);
   }
 
   _getCityList(_CityLists event, Emitter<OnboardingState> emit) async {
-    await getCityResult(emit);
+    await getCityResult(event, emit);
   }
 
   _getStateList(_StateLists event, Emitter<OnboardingState> emit) async {
-    await getStateResult(emit);
+    await getStateResult(event, emit);
   }
 
   _getRelationList(_RelationList event, Emitter<OnboardingState> emit) async {
@@ -324,16 +331,19 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     emit(genderState);
   }
 
-  Future<void> getStateResult(Emitter<OnboardingState> emit) async {
-    emit(state.copyWith(isInitialLoading: true));
+  Future<void> getStateResult(
+      _StateLists? event, Emitter<OnboardingState> emit) async {
+    emit(state.copyWith(isInitialLoading: event!.wantLoading));
     final Either<ApiErrorHandler, StateListReponse> stateResult =
         await onboardingRepository.getStateList(
-            page: "1", searchKey: stateSearchKey);
+            page: statePage.toString(), searchKey: event.stateSearchQuery);
     OnboardingState stateState = stateResult.fold((l) {
       return state.copyWith(
           isInitialLoading: false, stateOption: Some(Left(l)));
     }, (r) {
-      stateList.clear();
+      if (statePage == 1) {
+        stateList.clear();
+      }
       stateList.addAll(r.data!);
       return state.copyWith(
           isInitialLoading: false, stateOption: Some(Right(r)));
@@ -354,18 +364,23 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     emit(relationState);
   }
 
-  Future<void> getCityResult(Emitter<OnboardingState> emit) async {
-    emit(state.copyWith(isInitialLoading: true));
+  Future<void> getCityResult(
+      _CityLists event, Emitter<OnboardingState> emit) async {
+    emit(state.copyWith(isCityApiCalling: event.wantLoading));
     final Either<ApiErrorHandler, CityListResponse> cityResult =
         await onboardingRepository.getCityList(
-            stateId: stateId, page: "1", searchKey: citySearchKey);
+            stateId: stateId,
+            page: cityPage.toString(),
+            searchKey: event.searchQuery);
     OnboardingState cityState = cityResult.fold((l) {
-      return state.copyWith(isInitialLoading: false, cityOption: Some(Left(l)));
+      return state.copyWith(isCityApiCalling: false, cityOption: Some(Left(l)));
     }, (r) {
-      cityList.clear();
+      if (cityPage == 1) {
+        cityList.clear();
+      }
       cityList.addAll(r.data!);
       return state.copyWith(
-          isInitialLoading: false, cityOption: Some(Right(r)));
+          isCityApiCalling: false, cityOption: Some(Right(r)));
     });
     emit(cityState);
   }
@@ -414,7 +429,8 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
             haveTBTest: event.haveTbTest,
             tbDetails: event.tbDetails,
             haveCovidVaccination: event.haveCovidVaccination,
-            covidDetails: event.covidDetails);
+            covidDetails: event.covidDetails,
+            isReUpload: false);
     OnboardingState qualificationState = result.fold((l) {
       return state.copyWith(
           isLoading: false, qualificationDetailsOption: Some(Left(l)));
