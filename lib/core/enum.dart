@@ -343,6 +343,25 @@ enum AppString {
   emptyModule("You Should Select at least one module"),
   emptyProfilePic("Please select your profile picture"),
   errorUploadingFile("Error uploading file, Please try again"),
+  serviceRequestManagement("Service Request Management"),
+  pendingServices("Pending Services"),
+  completedServices("Completed Services"),
+  cancelledRequest("Cancelled Request"),
+  upcomingRequest("Upcoming Request"),
+  onGoingRequest("Ongoing Request"),
+  decisionMakerIdAndName("Decision maker ID & Name"),
+  clientIdAndName("Client ID & Name"),
+  startDateAndTime("Start Date & Start Time"),
+  endDateAndTime("End Date & End Time"),
+  noOfMatchingIsShown("No of Matching list shown"),
+  cancelledBy("Cancelled By"),
+  extraFee("Extra Fee"),
+  tip("Tip"),
+  normalServiceRequest("Normal Service Booking"),
+  rebooking("Rebooking"),
+  refund("Refund"),
+  cancelThisServiceRequest("Cancel This Service Request"),
+  rescheduleThisServiceRequest("Reschedule This Service Request"),
   agreementChckboxText(
       "I have read and agree to the home health aid agreement"),
   dummyAgreementText(
@@ -445,6 +464,9 @@ enum AppColor {
   infoDark(Color(0xff03a9f4)),
   skyBlueShade(Color(0xff29AECC)),
   dark(Color(0xff141414)),
+  lightRed(Color(0xfffceff1)),
+  mediumRed(Color(0xfff06f81)),
+  starFillColor(Color(0xffEB9C02)),
   transparent(Colors.transparent);
 
   final Color val;

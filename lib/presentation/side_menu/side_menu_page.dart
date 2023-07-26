@@ -14,6 +14,8 @@ import 'package:admin_580_tech/presentation/caregiver_verification/caregiver_ver
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
 import 'package:admin_580_tech/presentation/roles/role_page.dart';
+import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
+import 'package:admin_580_tech/presentation/service_details/service_details_page.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
@@ -27,6 +29,7 @@ import '../caregiver_detail/caregiver_detail_page.dart';
 import '../caregivers/caregivers_page.dart';
 import '../role_creation/role_creation_page.dart';
 import '../routes/app_router.gr.dart';
+import '../service_request_management/service_request_management_page.dart';
 import '../transaction_management/transaction_management_page.dart';
 import '../user_management/user_management_page.dart';
 import '../user_mangement_detail/user_managemet_detail_page.dart';
@@ -64,6 +67,7 @@ class _MenuBarState extends State<SideMenuPage> {
     AppString.careAmbassador.val: "",
     AppString.userManagement.val: "",
     AppString.transactionManagement.val: "",
+    AppString.serviceRequestManagement.val: "",
   };
 
   final List<String> _items = [
@@ -458,7 +462,8 @@ class _MenuBarState extends State<SideMenuPage> {
     RolesRoute(),
     RoleCreationRoute(),
     AdminsRoute(),
-    AdminCreationRoute()
+    AdminCreationRoute(),
+    ServiceRequestManagementRoute(),
   ];
 
   int getRouteIndex(String route) {
@@ -489,6 +494,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return 12;
     } else if (route == AppString.adminManage.val) {
       return 13;
+    } else if (route == AppString.serviceRequestManagement.val) {
+      return 14;
+    } else if (route == AppString.serviceDetails.val) {
+      return 15;
     } else {
       return 0;
     }
@@ -522,6 +531,8 @@ class _MenuBarState extends State<SideMenuPage> {
       return const AdminsPage();
     } else if (index == 13) {
       return const AdminCreationPage();
+    } else if (index == 14) {
+      return const ServiceRequestManagementPage();
     } else {
       return const DashboardPage();
     }

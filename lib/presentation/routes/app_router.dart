@@ -66,6 +66,10 @@ class AppRouter extends $AppRouter {
           path: "admin-management",
           page: AdminsRoute.page,
           maintainState: false),
+      AutoRoute(
+          path: "service-request",
+          page: ServiceRequestManagementRoute.page,
+          maintainState: false),
     ]),
   ];
 }
