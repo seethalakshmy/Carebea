@@ -12,10 +12,9 @@ class StatusWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return /*isOngoing
-        ?*/
-        _onGoingWidget();
-    /*: Container(
+    return isOngoing
+        ? _onGoingWidget()
+        : Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(4), color: getColor()),
             padding: const EdgeInsets.all(6),
@@ -23,7 +22,7 @@ class StatusWidget extends StatelessWidget {
                 child: CustomText(
                     status == AppString.onGoing.val ? "Start" : status,
                     style: const TextStyle(color: Colors.white, fontSize: 12))),
-          );*/
+          );
   }
 
   Color getColor() {
@@ -46,7 +45,8 @@ class StatusWidget extends StatelessWidget {
     return Row(
       children: [
         Container(
-          decoration:  BoxDecoration(shape: BoxShape.circle,color: AppColor.green2.val),
+          decoration:
+              BoxDecoration(shape: BoxShape.circle, color: AppColor.green2.val),
           height: 10,
           width: 10,
         ),
