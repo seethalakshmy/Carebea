@@ -267,7 +267,6 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
 
   _removeSelectedFiles(int index, OnboardingState state) {
     bytesList.removeAt(index);
-
     widget.onboardingBloc.add(
         OnboardingEvent.securityDocumentUpload(bytesList, state.listUpdated));
   }
@@ -280,6 +279,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           itemCount: state.securityDocumentList.length,
           shrinkWrap: true,
           itemBuilder: (context, index) {
+            print("selected doc list : ${state.securityDocumentList}");
             return Container(
               margin: EdgeInsets.all(DBL.ten.val),
               child: state.securityDocumentList[index].name.endsWith(".png") ||
@@ -383,7 +383,6 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                         selectedGender.isEmpty
                     ? AppString.emptyGender.val
                     : "",
-                selectedValue: selectedGender,
               ),
       ],
     );
@@ -517,27 +516,6 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                 },
                 selectedValue: selectedState,
               ),
-        StateDropDown(
-          onSearchChanged: (val) {
-            widget.onboardingBloc.add(const OnboardingEvent.stateList());
-            widget.onboardingBloc.stateSearchKey = val;
-          },
-          searchController: stateSearchController,
-          errorText: widget.onboardingBloc.state.nextClicked
-              ? selectedState.isEmpty
-                  ? AppString.emptyState.val
-                  : ""
-              : "",
-          items: widget.onboardingBloc.stateList,
-          onChange: (value) {
-            selectedState = value.toString();
-            print("state value in onchanged : $value");
-            widget.onboardingBloc.stateId = value;
-            widget.onboardingBloc.add(const OnboardingEvent.cityList());
-          },
-          selectedValue: selectedState,
-          onboardingBloc: widget.onboardingBloc,
-        ),
       ],
     );
   }
@@ -557,7 +535,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
             : CityDropDown(
                 searchController: citySearchController,
                 onSearchChanged: (val) {
-                  widget.onboardingBloc.add(const OnboardingEvent.cityList());
+                  //widget.onboardingBloc.add(const OnboardingEvent.cityList());
                   widget.onboardingBloc.citySearchKey = val;
                 },
                 errorText: widget.onboardingBloc.state.nextClicked
@@ -567,7 +545,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                     : "",
                 items: widget.onboardingBloc.cityList,
                 onChange: (value) {
-                  selectedCity = value.toString();
+                  selectedCity = value;
                 },
                 selectedValue: selectedCity,
               ),
@@ -656,24 +634,19 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
     return UploadDocumentWidget(
       onTap: () async {
         FilePickerResult? result = await FilePicker.platform.pickFiles(
-            type: FileType.custom,
-            allowedExtensions: ['jpg', 'png', 'pdf', 'doc'],
-            withData: false,
-            withReadStream: true);
+          type: FileType.custom,
+          allowedExtensions: ['jpg', 'png', 'pdf', 'doc'],
+          withData: true,
+        );
         if (result != null) {
-          file = result!.files.single;
+          file = result.files.single;
           for (PlatformFile file in result.files) {
             bytesList.add(file);
             listUpdated = !listUpdated;
-            // Break the loop after adding 2 items
             if (bytesList.length == 2) {
               break;
             }
           }
-          for (int i = 0; i < bytesList.length; i++) {
-            //docPathList.add(bytesList[i].path!);
-          }
-          print("docPathList : $docPathList");
           widget.onboardingBloc.add(
             OnboardingEvent.securityDocumentUpload(bytesList, listUpdated),
           );
@@ -695,7 +668,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           onLeftButtonPressed: () {
             context.router.navigate(const CaregiverCreationRoute());
           },
-          onRightButtonPressed: () {
+          onRightButtonPressed: () async {
             widget.onboardingBloc.nextButtonClicked = true;
             if (selectedGender.isEmpty &&
                 selectedState.isEmpty &&
@@ -710,10 +683,19 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
             if (widget.onboardingBloc.profileUrl.isEmpty) {
               CSnackBar.showError(context, msg: AppString.emptyProfilePic.val);
             }
-            uploadToSingleFileAwsS3();
             // setState(() {
             //   nextClicked = true;
             // });
+            if (widget.onboardingBloc.state.pickedProfilePic!.size > 0) {
+              await uploadProfilePicToAwsS3(
+                  AppString.profilePicture.val, SharedPreffUtil().getUserId);
+            }
+            if (bytesList.isNotEmpty) {
+              for (int i = 0; i < bytesList.length; i++) {
+                await uploadDocumentsToAwsS3(AppString.documents.val,
+                    SharedPreffUtil().getUserId, bytesList[i]);
+              }
+            }
             checkInputData();
           },
         );
@@ -735,7 +717,6 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
       formValidationBloc.add(const FormValidationEvent.dropDown("true"));
     }
     final userId = SharedPreffUtil().getUserId;
-    print("UserId : $userId");
 
     if (_formKey.currentState!.validate() &&
         widget.onboardingBloc.profileUrl.isNotEmpty) {
@@ -754,12 +735,33 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           documentId: selectedDocument,
           documentNo: documentNumberController.text.trim(),
           expiryDate: expiryDateController.text.trim(),
-          documentList: [],
+          documentList: widget.onboardingBloc.uploadedDocumentList,
           profilePic: widget.onboardingBloc.profileUrl));
     }
   }
 
-  Future<void> uploadToSingleFileAwsS3() async {
-    await ApiServiceS3().uploadImage(pickedFile: file!);
+  Future<void> uploadProfilePicToAwsS3(String folderName, String userId) async {
+    widget.onboardingBloc.profileUrl = await ApiServiceS3().uploadImage(
+        pickedFile: widget.onboardingBloc.state.pickedProfilePic!.bytes!,
+        format:
+            widget.onboardingBloc.state.pickedProfilePic!.name.split('.').last,
+        folderName: folderName,
+        userId: userId,
+        context: context);
+    print(
+        " s3 upload result of profile pic : ${widget.onboardingBloc.profileUrl}");
+  }
+
+  Future<void> uploadDocumentsToAwsS3(
+      String folderName, String userId, PlatformFile pickedItem) async {
+    widget.onboardingBloc.uploadedDocumentList.add(await ApiServiceS3()
+        .uploadImage(
+            pickedFile: pickedItem.bytes!,
+            format: pickedItem.name.split('.').last,
+            folderName: folderName,
+            userId: userId,
+            context: context));
+    print(
+        " s3 upload result of document : ${widget.onboardingBloc.uploadedDocumentList}");
   }
 }

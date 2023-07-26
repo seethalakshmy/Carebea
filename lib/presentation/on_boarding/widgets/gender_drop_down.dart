@@ -8,7 +8,7 @@ import '../modules/personal_details/models/gender_list_response.dart';
 import 'drop_down.dart';
 
 class GenderDropDown extends StatelessWidget {
-  const GenderDropDown(
+  GenderDropDown(
       {Key? key,
       required this.onChange,
       required this.errorText,
@@ -20,6 +20,7 @@ class GenderDropDown extends StatelessWidget {
   final String errorText;
   final List<Gender> items;
   final String? selectedValue;
+  int index = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +43,10 @@ class GenderDropDown extends StatelessWidget {
                     ),
                   ))
               .toList(),
+          selectedValue: items[index].name,
           onChange: (value, index) {
             onChange(items[index].id);
+            this.index = index;
           },
           child: CustomText(selectedValue ?? "")),
     );

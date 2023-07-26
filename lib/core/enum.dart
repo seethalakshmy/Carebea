@@ -290,6 +290,8 @@ enum AppString {
   enterTheReason("Enter the reason"),
   acceptThisCareAmbassador("Do you want to accept this care ambassador?"),
   selectRejectedDocument("Select rejected document and mentioned the reason"),
+  profilePicture("ProfilePictures"),
+  documents("Documents"),
 
   ///paths
   careAmbassadorVerificationPath("care-ambassador-verification"),
@@ -340,6 +342,7 @@ enum AppString {
   emptyRole("Role name shouldn't be empty"),
   emptyModule("You Should Select at least one module"),
   emptyProfilePic("Please select your profile picture"),
+  errorUploadingFile("Error uploading file, Please try again"),
   agreementChckboxText(
       "I have read and agree to the home health aid agreement"),
   dummyAgreementText(

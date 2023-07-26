@@ -3,7 +3,7 @@ part of 'onboarding_bloc.dart';
 @freezed
 class OnboardingState with _$OnboardingState {
   const factory OnboardingState({
-    required Uint8List pickedProfilePic,
+    required PlatformFile? pickedProfilePic,
     required List<PlatformFile> securityDocumentList,
     required List<PlatformFile> hhaDocumentList,
     required List<PlatformFile> blsDocumentList,
@@ -60,7 +60,8 @@ class OnboardingState with _$OnboardingState {
 
   factory OnboardingState.initial() {
     return OnboardingState(
-      pickedProfilePic: Uint8List(0),
+      pickedProfilePic:
+          PlatformFile(size: 0, name: "", path: "", bytes: Uint8List(0)),
       securityDocumentList: [],
       blsDocumentList: [],
       covidDocumentList: [],

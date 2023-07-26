@@ -22,10 +22,10 @@ import '../../../presentation/on_boarding/modules/personal_details/models/city_l
 import '../../../presentation/on_boarding/modules/personal_details/models/gender_list_response.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/personal_details_response.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
-import '../../../presentation/on_boarding/modules/reference/models/get_reference_response.dart';
-import '../../../presentation/on_boarding/modules/reference/models/relation_response.dart';
 import '../../../presentation/on_boarding/modules/preference/models/language_list_response.dart';
 import '../../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
+import '../../../presentation/on_boarding/modules/reference/models/get_reference_response.dart';
+import '../../../presentation/on_boarding/modules/reference/models/relation_response.dart';
 import '../../../presentation/on_boarding/modules/services/models/service_model.dart';
 
 part 'onboarding_bloc.freezed.dart';
@@ -47,6 +47,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   List<String> selectedTier1ServiceList = [];
   List<String> selectedTier2ServiceList = [];
   List<ServiceModel> serviceList = [];
+  List<String> uploadedDocumentList = [];
   bool nextButtonClicked = false;
   String stateId = "";
   String relationId = "";
@@ -59,6 +60,8 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   String selectedCity = "";
   String selectedCityId = "";
   String selectedRelation = "";
+  Uint8List showProfilePic = Uint8List(0);
+  PlatformFile? profileFile;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController streetController = TextEditingController();
@@ -233,7 +236,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   }
 
   _getCommonLists(_CommonDataLists event, Emitter<OnboardingState> emit) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(isInitialLoading: true));
 
     await getGenderResult(emit);
     await getStateResult(emit);
@@ -290,15 +293,17 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   }
 
   Future<void> getDocumentTypeResult(Emitter<OnboardingState> emit) async {
-    emit(state.copyWith(isInitialLoading:true));
+    emit(state.copyWith(isInitialLoading: true));
     final Either<ApiErrorHandler, DocumentListResponse> documentResult =
         await onboardingRepository.getDocumentList();
     OnboardingState documentState = documentResult.fold((l) {
-      return state.copyWith(isInitialLoading: false, documentOption: Some(Left(l)));
+      return state.copyWith(
+          isInitialLoading: false, documentOption: Some(Left(l)));
     }, (r) {
       documentList.clear();
       documentList.addAll(r.data!);
-      return state.copyWith(isInitialLoading: false, documentOption: Some(Right(r)));
+      return state.copyWith(
+          isInitialLoading: false, documentOption: Some(Right(r)));
     });
     emit(documentState);
   }
@@ -368,7 +373,6 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   _getPersonalData(
       _GetPersonalDetails event, Emitter<OnboardingState> emit) async {
     emit(state.copyWith(isLoading: true));
-
     final Either<ApiErrorHandler, PersonalDetailsResponse> result =
         await onboardingRepository.personalDetailsSubmit(
             userId: event.userId,

@@ -50,7 +50,7 @@ class CityDropDown extends StatelessWidget {
                   ))
               .toList(),
           onChange: (value, index) {
-            onChange(items[index].id, items[index].cityName);
+            onChange(items[index].id);
           },
           child: CustomText(selectedValue ?? "")),
     );

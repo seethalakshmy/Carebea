@@ -86,7 +86,7 @@ class OnboardingEvent with _$OnboardingEvent {
   const factory OnboardingEvent.radioLanguage(int isSelected) =
       _RadioLanguageSelected;
 
-  const factory OnboardingEvent.profilePicSelection(Uint8List bytes) =
+  const factory OnboardingEvent.profilePicSelection(PlatformFile bytes) =
       _ProfilePicSelected;
 
   const factory OnboardingEvent.securityDocumentUpload(

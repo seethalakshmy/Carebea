@@ -79,7 +79,7 @@ mixin _$OnboardingEvent {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -166,7 +166,7 @@ mixin _$OnboardingEvent {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -252,7 +252,7 @@ mixin _$OnboardingEvent {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -735,7 +735,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -841,7 +841,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -946,7 +946,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -1400,7 +1400,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -1499,7 +1499,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -1597,7 +1597,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -2018,7 +2018,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -2115,7 +2115,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -2211,7 +2211,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -2510,7 +2510,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -2600,7 +2600,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -2689,7 +2689,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -2963,7 +2963,7 @@ class _$_CityLists implements _CityLists {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -3053,7 +3053,7 @@ class _$_CityLists implements _CityLists {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -3142,7 +3142,7 @@ class _$_CityLists implements _CityLists {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -3416,7 +3416,7 @@ class _$_StateLists implements _StateLists {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -3506,7 +3506,7 @@ class _$_StateLists implements _StateLists {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -3595,7 +3595,7 @@ class _$_StateLists implements _StateLists {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -3869,7 +3869,7 @@ class _$_RelationList implements _RelationList {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -3959,7 +3959,7 @@ class _$_RelationList implements _RelationList {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -4048,7 +4048,7 @@ class _$_RelationList implements _RelationList {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -4348,7 +4348,7 @@ class _$_SubmitReference implements _SubmitReference {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -4438,7 +4438,7 @@ class _$_SubmitReference implements _SubmitReference {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -4527,7 +4527,7 @@ class _$_SubmitReference implements _SubmitReference {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -4807,7 +4807,7 @@ class _$_AddReference implements _AddReference {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -4897,7 +4897,7 @@ class _$_AddReference implements _AddReference {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -4986,7 +4986,7 @@ class _$_AddReference implements _AddReference {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -5286,7 +5286,7 @@ class _$DeleteReference implements DeleteReference {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -5376,7 +5376,7 @@ class _$DeleteReference implements DeleteReference {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -5465,7 +5465,7 @@ class _$DeleteReference implements DeleteReference {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -5770,7 +5770,7 @@ class _$UpdateReference implements UpdateReference {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -5860,7 +5860,7 @@ class _$UpdateReference implements UpdateReference {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -5949,7 +5949,7 @@ class _$UpdateReference implements UpdateReference {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -6263,7 +6263,7 @@ class _$EditReference implements EditReference {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -6353,7 +6353,7 @@ class _$EditReference implements EditReference {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -6442,7 +6442,7 @@ class _$EditReference implements EditReference {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -6724,7 +6724,7 @@ class _$_YearsOfExp implements _YearsOfExp {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -6814,7 +6814,7 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -6903,7 +6903,7 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -7204,7 +7204,7 @@ class _$_GetPetList implements _GetPetList {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -7294,7 +7294,7 @@ class _$_GetPetList implements _GetPetList {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -7383,7 +7383,7 @@ class _$_GetPetList implements _GetPetList {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -7706,7 +7706,7 @@ class _$_GetLanguageList implements _GetLanguageList {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -7796,7 +7796,7 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -7885,7 +7885,7 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -8193,7 +8193,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -8283,7 +8283,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -8372,7 +8372,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -8678,7 +8678,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -8768,7 +8768,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -8857,7 +8857,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -9163,7 +9163,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -9253,7 +9253,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -9342,7 +9342,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -9649,7 +9649,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -9739,7 +9739,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -9828,7 +9828,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -10137,7 +10137,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -10227,7 +10227,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -10316,7 +10316,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -10624,7 +10624,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -10714,7 +10714,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -10803,7 +10803,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -11113,7 +11113,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -11203,7 +11203,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -11292,7 +11292,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -11599,7 +11599,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -11689,7 +11689,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -11778,7 +11778,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -12085,7 +12085,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -12175,7 +12175,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -12264,7 +12264,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -12451,7 +12451,7 @@ abstract class _$$_ProfilePicSelectedCopyWith<$Res> {
           $Res Function(_$_ProfilePicSelected) then) =
       __$$_ProfilePicSelectedCopyWithImpl<$Res>;
   @useResult
-  $Res call({Uint8List bytes});
+  $Res call({PlatformFile bytes});
 }
 
 /// @nodoc
@@ -12471,7 +12471,7 @@ class __$$_ProfilePicSelectedCopyWithImpl<$Res>
       null == bytes
           ? _value.bytes
           : bytes // ignore: cast_nullable_to_non_nullable
-              as Uint8List,
+              as PlatformFile,
     ));
   }
 }
@@ -12482,7 +12482,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
   const _$_ProfilePicSelected(this.bytes);
 
   @override
-  final Uint8List bytes;
+  final PlatformFile bytes;
 
   @override
   String toString() {
@@ -12494,12 +12494,11 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ProfilePicSelected &&
-            const DeepCollectionEquality().equals(other.bytes, bytes));
+            (identical(other.bytes, bytes) || other.bytes == bytes));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(bytes));
+  int get hashCode => Object.hash(runtimeType, bytes);
 
   @JsonKey(ignore: true)
   @override
@@ -12572,7 +12571,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -12662,7 +12661,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -12751,7 +12750,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -12923,10 +12922,10 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
 }
 
 abstract class _ProfilePicSelected implements OnboardingEvent {
-  const factory _ProfilePicSelected(final Uint8List bytes) =
+  const factory _ProfilePicSelected(final PlatformFile bytes) =
       _$_ProfilePicSelected;
 
-  Uint8List get bytes;
+  PlatformFile get bytes;
   @JsonKey(ignore: true)
   _$$_ProfilePicSelectedCopyWith<_$_ProfilePicSelected> get copyWith =>
       throw _privateConstructorUsedError;
@@ -13080,7 +13079,7 @@ class _$_SecurityDocumentUploadSelected
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -13170,7 +13169,7 @@ class _$_SecurityDocumentUploadSelected
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -13259,7 +13258,7 @@ class _$_SecurityDocumentUploadSelected
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -13588,7 +13587,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -13678,7 +13677,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -13767,7 +13766,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -14096,7 +14095,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -14186,7 +14185,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -14275,7 +14274,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -14603,7 +14602,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -14693,7 +14692,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -14782,7 +14781,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -15111,7 +15110,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -15201,7 +15200,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -15290,7 +15289,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -15572,7 +15571,7 @@ class _$_LanguagePagination implements _LanguagePagination {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -15662,7 +15661,7 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -15751,7 +15750,7 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -16025,7 +16024,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -16115,7 +16114,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -16204,7 +16203,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -16515,7 +16514,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -16605,7 +16604,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -16694,7 +16693,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -17012,7 +17011,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -17102,7 +17101,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -17191,7 +17190,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -17534,7 +17533,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -17624,7 +17623,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -17714,7 +17713,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -18064,7 +18063,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     required TResult Function(int isSelected) radioTransportation,
     required TResult Function(int isSelected) radioPet,
     required TResult Function(int isSelected) radioLanguage,
-    required TResult Function(Uint8List bytes) profilePicSelection,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         securityDocumentUpload,
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
@@ -18155,7 +18154,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     TResult? Function(int isSelected)? radioTransportation,
     TResult? Function(int isSelected)? radioPet,
     TResult? Function(int isSelected)? radioLanguage,
-    TResult? Function(Uint8List bytes)? profilePicSelection,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -18245,7 +18244,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     TResult Function(int isSelected)? radioTransportation,
     TResult Function(int isSelected)? radioPet,
     TResult Function(int isSelected)? radioLanguage,
-    TResult Function(Uint8List bytes)? profilePicSelection,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         securityDocumentUpload,
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
@@ -18435,7 +18434,7 @@ abstract class _SubmitAccountDetails implements OnboardingEvent {
 
 /// @nodoc
 mixin _$OnboardingState {
-  Uint8List get pickedProfilePic => throw _privateConstructorUsedError;
+  PlatformFile? get pickedProfilePic => throw _privateConstructorUsedError;
   List<PlatformFile> get securityDocumentList =>
       throw _privateConstructorUsedError;
   List<PlatformFile> get hhaDocumentList => throw _privateConstructorUsedError;
@@ -18510,7 +18509,7 @@ abstract class $OnboardingStateCopyWith<$Res> {
       _$OnboardingStateCopyWithImpl<$Res, OnboardingState>;
   @useResult
   $Res call(
-      {Uint8List pickedProfilePic,
+      {PlatformFile? pickedProfilePic,
       List<PlatformFile> securityDocumentList,
       List<PlatformFile> hhaDocumentList,
       List<PlatformFile> blsDocumentList,
@@ -18571,7 +18570,7 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pickedProfilePic = null,
+    Object? pickedProfilePic = freezed,
     Object? securityDocumentList = null,
     Object? hhaDocumentList = null,
     Object? blsDocumentList = null,
@@ -18616,10 +18615,10 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
     Object? submitAccountDetailsOption = null,
   }) {
     return _then(_value.copyWith(
-      pickedProfilePic: null == pickedProfilePic
+      pickedProfilePic: freezed == pickedProfilePic
           ? _value.pickedProfilePic
           : pickedProfilePic // ignore: cast_nullable_to_non_nullable
-              as Uint8List,
+              as PlatformFile?,
       securityDocumentList: null == securityDocumentList
           ? _value.securityDocumentList
           : securityDocumentList // ignore: cast_nullable_to_non_nullable
@@ -18801,7 +18800,7 @@ abstract class _$$_OnboardingStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Uint8List pickedProfilePic,
+      {PlatformFile? pickedProfilePic,
       List<PlatformFile> securityDocumentList,
       List<PlatformFile> hhaDocumentList,
       List<PlatformFile> blsDocumentList,
@@ -18860,7 +18859,7 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pickedProfilePic = null,
+    Object? pickedProfilePic = freezed,
     Object? securityDocumentList = null,
     Object? hhaDocumentList = null,
     Object? blsDocumentList = null,
@@ -18905,10 +18904,10 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
     Object? submitAccountDetailsOption = null,
   }) {
     return _then(_$_OnboardingState(
-      pickedProfilePic: null == pickedProfilePic
+      pickedProfilePic: freezed == pickedProfilePic
           ? _value.pickedProfilePic
           : pickedProfilePic // ignore: cast_nullable_to_non_nullable
-              as Uint8List,
+              as PlatformFile?,
       securityDocumentList: null == securityDocumentList
           ? _value._securityDocumentList
           : securityDocumentList // ignore: cast_nullable_to_non_nullable
@@ -19139,7 +19138,7 @@ class _$_OnboardingState implements _OnboardingState {
         _serviceList = serviceList;
 
   @override
-  final Uint8List pickedProfilePic;
+  final PlatformFile? pickedProfilePic;
   final List<PlatformFile> _securityDocumentList;
   @override
   List<PlatformFile> get securityDocumentList {
@@ -19285,8 +19284,8 @@ class _$_OnboardingState implements _OnboardingState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_OnboardingState &&
-            const DeepCollectionEquality()
-                .equals(other.pickedProfilePic, pickedProfilePic) &&
+            (identical(other.pickedProfilePic, pickedProfilePic) ||
+                other.pickedProfilePic == pickedProfilePic) &&
             const DeepCollectionEquality()
                 .equals(other._securityDocumentList, _securityDocumentList) &&
             const DeepCollectionEquality()
@@ -19371,7 +19370,7 @@ class _$_OnboardingState implements _OnboardingState {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        const DeepCollectionEquality().hash(pickedProfilePic),
+        pickedProfilePic,
         const DeepCollectionEquality().hash(_securityDocumentList),
         const DeepCollectionEquality().hash(_hhaDocumentList),
         const DeepCollectionEquality().hash(_blsDocumentList),
@@ -19425,7 +19424,7 @@ class _$_OnboardingState implements _OnboardingState {
 
 abstract class _OnboardingState implements OnboardingState {
   const factory _OnboardingState(
-      {required final Uint8List pickedProfilePic,
+      {required final PlatformFile? pickedProfilePic,
       required final List<PlatformFile> securityDocumentList,
       required final List<PlatformFile> hhaDocumentList,
       required final List<PlatformFile> blsDocumentList,
@@ -19486,7 +19485,7 @@ abstract class _OnboardingState implements OnboardingState {
           submitAccountDetailsOption}) = _$_OnboardingState;
 
   @override
-  Uint8List get pickedProfilePic;
+  PlatformFile? get pickedProfilePic;
   @override
   List<PlatformFile> get securityDocumentList;
   @override
