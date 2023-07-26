@@ -49,7 +49,7 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
   @override
   void initState() {
     super.initState();
-    adminUserID = SharedPreffUtil().getUserId;
+    adminUserID = SharedPreffUtil().getAdminId;
 
     /// adminUserID = "64a69c032961698d154944ea";
     roleCreationBloc = RoleCreationBloc(RoleCreationRepository());

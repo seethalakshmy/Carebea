@@ -26,6 +26,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../domain/caregivers/model/care_givers.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/custom_alert_delete.dart';
 import '../widget/custom_dropdown.dart';
@@ -36,6 +37,7 @@ import '../widget/error_view.dart';
 import '../widget/header_view.dart';
 import '../widget/table_actions_view.dart';
 import '../widget/table_column_view.dart';
+import '../widget/table_switch_box.dart';
 
 @RoutePage()
 class AdminsPage extends StatefulWidget {
@@ -66,7 +68,7 @@ class _AdminsPageState extends State<AdminsPage> {
   @override
   void initState() {
     super.initState();
-    _adminUserId = SharedPreffUtil().getAdminId;
+    _adminUserId = sharedPrefUtil.getAdminId;
     _adminsBloc = AdminsBloc(AdminsRepository());
   }
 
@@ -439,7 +441,8 @@ class _AdminsPageState extends State<AdminsPage> {
               DataCell(_tableRowView(item.email ?? "")),
               DataCell(_tableRowView(item.phoneNumber ?? "")),
               DataCell(_tableRowView(item.role ?? "")),
-              DataCell(_statusBox(item.status ?? false)),
+              DataCell(_tableSwitchBox(item)),
+              // DataCell(_statusBox(item.status ?? false)),
               DataCell(TableActions(
                 isView: true,
                 onViewTap: () {
@@ -460,6 +463,20 @@ class _AdminsPageState extends State<AdminsPage> {
           );
         }).toList(),
       ),
+    );
+  }
+
+  TableSwitchBox _tableSwitchBox(ResData item) {
+    return TableSwitchBox(
+      value: item.status!,
+      onToggle: () {
+        print(item.status);
+        _adminsBloc.add(AdminEvent.changeAdminStatus(
+          status: item.status.toString() == 'true' ? "0" : "1",
+          userId: item.uniqueId ?? "",
+          context: context,
+        ));
+      },
     );
   }
 
