@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-#  auto_route: 5.0.2
+  #auto_route: ^5.0.2
   auto_route: ^7.7.0
   flutter_bloc: ^8.1.1
   json_annotation: ^4.8.1
@@ -55,19 +55,21 @@ dependencies:
 
 
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
   build_runner:
- # json_serializable: 6.6.2
   retrofit_generator: ^4.2.0
   freezed: ^2.1.0+1
+  #auto_route_generator: ^5.0.2
   auto_route_generator: ^7.2.0
   json_serializable: ^6.7.1
 
 
 dependency_overrides:
+  build_runner_core: ^7.2.10
   #auto_route: 6.0.0
 
 

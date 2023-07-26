@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/application/bloc/onboarding/onboarding_bloc.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,7 @@ class StateDropDown extends StatelessWidget {
       required this.items,
       required this.onChange,
       required this.selectedValue,
+      required this.onboardingBloc,
       this.onSearchChanged,
       this.searchController})
       : super(key: key);
@@ -23,6 +25,7 @@ class StateDropDown extends StatelessWidget {
   final String? selectedValue;
   final TextEditingController? searchController;
   final Function? onSearchChanged;
+  final OnboardingBloc onboardingBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +53,8 @@ class StateDropDown extends StatelessWidget {
                   ))
               .toList(),
           onChange: (value, index) {
-            onChange(items[index].id, items[index].name);
+            onChange(items[index].name);
+            onboardingBloc.stateId = items[index].id!;
           },
           child: CustomText(selectedValue ?? "")),
     );

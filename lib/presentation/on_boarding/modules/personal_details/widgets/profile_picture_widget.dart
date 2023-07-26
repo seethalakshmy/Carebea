@@ -1,20 +1,18 @@
-import 'dart:typed_data';
-
 import 'package:admin_580_tech/application/bloc/onboarding/onboarding_bloc.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../../../../core/enum.dart';
-import '../../../../../core/utility.dart';
 import '../../../../widget/commonImageview.dart';
 
 class ProfilePictureWidget extends StatelessWidget {
-  const ProfilePictureWidget(
+  ProfilePictureWidget(
       {Key? key, required this.size, required this.onboardingBloc})
       : super(key: key);
   final double size;
   final OnboardingBloc onboardingBloc;
+  PlatformFile file = PlatformFile(name: "", size: 0);
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +26,16 @@ class ProfilePictureWidget extends StatelessWidget {
               child: Container(
                 height: size,
                 width: size,
-                padding: state.pickedProfilePic.isEmpty
+                padding: state.pickedProfilePic!.bytes!.isEmpty
                     ? const EdgeInsets.all(40)
                     : const EdgeInsets.all(0),
                 color: AppColor.skyBlueShade.val,
-                child: state.pickedProfilePic.isEmpty
+                child: state.pickedProfilePic!.bytes!.isEmpty
                     ? CommonImageView(
                         svgPath: IMG.userAvatar.val,
                       )
                     : CommonImageView(
-                        bytes: state.pickedProfilePic,
+                        bytes: state.pickedProfilePic!.bytes,
                         fit: BoxFit.cover,
                         isCircleImage: false,
                       ),
@@ -50,10 +48,16 @@ class ProfilePictureWidget extends StatelessWidget {
           right: 10,
           child: InkWell(
             onTap: () async {
-              XFile? pickedFileData = (await Utility.getFromGallery())!;
-              Uint8List bytes = await pickedFileData.readAsBytes();
-              onboardingBloc.add(OnboardingEvent.profilePicSelection(bytes));
-              onboardingBloc.profileUrl = pickedFileData.path;
+              FilePickerResult? result = await FilePicker.platform.pickFiles(
+                type: FileType.custom,
+                allowedExtensions: ['jpg', 'png', 'jpeg'],
+                withData: true,
+              );
+              if (result != null) {
+                file = result.files.single;
+              }
+
+              onboardingBloc.add(OnboardingEvent.profilePicSelection(file));
             },
             child: Container(
               width: 31,

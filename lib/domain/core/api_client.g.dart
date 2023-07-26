@@ -549,25 +549,91 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<GetServiceResponse> getServices(userId) async {
+  Future<GetServicesResponse> getServices() async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'user_id': userId};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<GetServiceResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetServicesResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/care-giver/services?',
+              '/common-data/get-services',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = GetServiceResponse.fromJson(_result.data!);
+    final value = GetServicesResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponse> submitBuildProfile(
+    userId,
+    aboutYou,
+    hobbies,
+    whyLoveBeingCaregiver,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'about_you': aboutYou,
+      'hobbies': hobbies,
+      'why_love_being_caregiver': whyLoveBeingCaregiver,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/admin-cg-profile',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponse> submitAccountDetails(
+    userId,
+    accountHolderName,
+    routingNumber,
+    accountNumber,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'account_holder_name': accountHolderName,
+      'routing_number': routingNumber,
+      'account_number': accountNumber,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/admin-cg-acc-details',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponse.fromJson(_result.data!);
     return value;
   }
 

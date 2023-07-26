@@ -20,6 +20,7 @@ class DetailsTextFieldWithLabel extends StatelessWidget {
       required this.suffixIcon,
       this.isMandatory,
       this.maxLines,
+      this.maxLength,
       this.width,
       this.textAlignVertical,
       this.inputFormatter,
@@ -36,6 +37,7 @@ class DetailsTextFieldWithLabel extends StatelessWidget {
   final double? width;
   final double? height;
   final int? maxLines;
+  final int? maxLength;
   final TextAlignVertical? textAlignVertical;
   final List<TextInputFormatter>? inputFormatter;
 
@@ -62,6 +64,7 @@ class DetailsTextFieldWithLabel extends StatelessWidget {
         ),
         CustomSizedBox(height: DBL.ten.val),
         CTextField(
+          maxLength: maxLength,
           textAlignVertical: textAlignVertical,
           suffixIcon: suffixIcon,
           focusNode: focusNode,

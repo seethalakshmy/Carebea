@@ -15,21 +15,21 @@ import '../../../domain/on_boarding/models/preferences/pets_model.dart';
 import '../../../domain/on_boarding/models/preferences/preference_language_model.dart';
 import '../../../domain/on_boarding/models/preferences/preference_request_model.dart';
 import '../../../domain/on_boarding/models/preferences/years_of_experience_response.dart';
+import '../../../domain/on_boarding/models/services/get_services_response.dart';
+import '../../../domain/on_boarding/models/services/service_request_model.dart';
 import '../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/city_list_response.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/gender_list_response.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/personal_details_response.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
-import '../../../presentation/on_boarding/modules/reference/models/get_reference_response.dart';
-import '../../../presentation/on_boarding/modules/reference/models/relation_response.dart';
 import '../../../presentation/on_boarding/modules/preference/models/language_list_response.dart';
 import '../../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
-import '../../../presentation/on_boarding/modules/services/models/get_service_response.dart';
+import '../../../presentation/on_boarding/modules/reference/models/get_reference_response.dart';
+import '../../../presentation/on_boarding/modules/reference/models/relation_response.dart';
+import '../../../presentation/on_boarding/modules/services/models/service_model.dart';
 
 part 'onboarding_bloc.freezed.dart';
-
 part 'onboarding_event.dart';
-
 part 'onboarding_state.dart';
 
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
@@ -44,6 +44,11 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   List<PreferenceLanguageModel> languageList = [];
   List<PreferenceLanguageModel> selectedLanguageList = [];
   List<YearData> yearList = [];
+  List<String> selectedTier1ServiceList = [];
+  List<String> selectedTier2ServiceList = [];
+  List<ServiceModel> serviceList = [];
+  List<String> uploadedDocumentList = [];
+  bool nextButtonClicked = false;
   String stateId = "";
   String relationId = "";
   String citySearchKey = "";
@@ -55,6 +60,8 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   String selectedCity = "";
   String selectedCityId = "";
   String selectedRelation = "";
+  Uint8List showProfilePic = Uint8List(0);
+  PlatformFile? profileFile;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController streetController = TextEditingController();
@@ -65,6 +72,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   final TextEditingController relationSearchController =
       TextEditingController();
   int languagePage = 1;
+  int caregiverServiceListIndex = 0;
   String selectedYearId = "";
 
   OnboardingBloc(this.onboardingRepository) : super(OnboardingState.initial()) {
@@ -108,6 +116,13 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
             listUpdated: !event.listUpdated));
       } else if (event is _LanguagePagination) {
         emit(state.copyWith(languagePaginationPage: languagePage));
+      } else if (event is _CaregiverServiceSelected) {
+        List<ServiceModel> serviceList = state.serviceList;
+        serviceList[event.index].selected = event.value;
+        emit(state.copyWith(
+            caregiverServiceListIndex: event.index,
+            serviceList: serviceList,
+            listUpdated: !state.listUpdated));
       }
     });
     on<_CommonDataLists>(_getCommonLists);
@@ -121,6 +136,9 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     on<_YearsOfExp>(_getYearsOfExp);
     on<_GetLanguageList>(_getLanguageList);
     on<_GetCaregiverService>(_getCaregiverServices);
+    on<_SubmitCaregiverService>(_submitServices);
+    on<_SubmitBuildProfile>(_submitBuildProfile);
+    on<_SubmitAccountDetails>(_submitAccountDetails);
     on<_SubmitReference>(_submitReference);
 
     on<_AddReference>((event, emit) {
@@ -218,7 +236,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   }
 
   _getCommonLists(_CommonDataLists event, Emitter<OnboardingState> emit) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(isInitialLoading: true));
 
     await getGenderResult(emit);
     await getStateResult(emit);
@@ -275,41 +293,50 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   }
 
   Future<void> getDocumentTypeResult(Emitter<OnboardingState> emit) async {
+    emit(state.copyWith(isInitialLoading: true));
     final Either<ApiErrorHandler, DocumentListResponse> documentResult =
         await onboardingRepository.getDocumentList();
     OnboardingState documentState = documentResult.fold((l) {
-      return state.copyWith(isLoading: false, documentOption: Some(Left(l)));
+      return state.copyWith(
+          isInitialLoading: false, documentOption: Some(Left(l)));
     }, (r) {
       documentList.clear();
       documentList.addAll(r.data!);
-      return state.copyWith(isLoading: false, documentOption: Some(Right(r)));
+      return state.copyWith(
+          isInitialLoading: false, documentOption: Some(Right(r)));
     });
     emit(documentState);
   }
 
   Future<void> getGenderResult(Emitter<OnboardingState> emit) async {
+    emit(state.copyWith(isInitialLoading: true));
     final Either<ApiErrorHandler, GenderListResponse> genderResult =
         await onboardingRepository.getGenderList();
     OnboardingState genderState = genderResult.fold((l) {
-      return state.copyWith(isLoading: false, genderOption: Some(Left(l)));
+      return state.copyWith(
+          isInitialLoading: false, genderOption: Some(Left(l)));
     }, (r) {
       genderList.clear();
       genderList.addAll(r.gender!);
-      return state.copyWith(isLoading: false, genderOption: Some(Right(r)));
+      return state.copyWith(
+          isInitialLoading: false, genderOption: Some(Right(r)));
     });
     emit(genderState);
   }
 
   Future<void> getStateResult(Emitter<OnboardingState> emit) async {
+    emit(state.copyWith(isInitialLoading: true));
     final Either<ApiErrorHandler, StateListReponse> stateResult =
         await onboardingRepository.getStateList(
             page: "1", searchKey: stateSearchKey);
     OnboardingState stateState = stateResult.fold((l) {
-      return state.copyWith(isLoading: false, stateOption: Some(Left(l)));
+      return state.copyWith(
+          isInitialLoading: false, stateOption: Some(Left(l)));
     }, (r) {
       stateList.clear();
       stateList.addAll(r.data!);
-      return state.copyWith(isLoading: false, stateOption: Some(Right(r)));
+      return state.copyWith(
+          isInitialLoading: false, stateOption: Some(Right(r)));
     });
     emit(stateState);
   }
@@ -328,15 +355,17 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   }
 
   Future<void> getCityResult(Emitter<OnboardingState> emit) async {
+    emit(state.copyWith(isInitialLoading: true));
     final Either<ApiErrorHandler, CityListResponse> cityResult =
         await onboardingRepository.getCityList(
             stateId: stateId, page: "1", searchKey: citySearchKey);
     OnboardingState cityState = cityResult.fold((l) {
-      return state.copyWith(isLoading: false, cityOption: Some(Left(l)));
+      return state.copyWith(isInitialLoading: false, cityOption: Some(Left(l)));
     }, (r) {
       cityList.clear();
       cityList.addAll(r.data!);
-      return state.copyWith(isLoading: false, cityOption: Some(Right(r)));
+      return state.copyWith(
+          isInitialLoading: false, cityOption: Some(Right(r)));
     });
     emit(cityState);
   }
@@ -344,7 +373,6 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   _getPersonalData(
       _GetPersonalDetails event, Emitter<OnboardingState> emit) async {
     emit(state.copyWith(isLoading: true));
-
     final Either<ApiErrorHandler, PersonalDetailsResponse> result =
         await onboardingRepository.personalDetailsSubmit(
             userId: event.userId,
@@ -422,23 +450,89 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   _getYearsOfExp(_YearsOfExp event, Emitter<OnboardingState> emit) async {
     final Either<ApiErrorHandler, YearsOfExperienceResponse> result =
         await onboardingRepository.getYearsOfExpResult();
-    result.fold((l) {
+    OnboardingState yearOfExpState = result.fold((l) {
       return state.copyWith(isLoading: false, yearsOption: Some(Left(l)));
     }, (r) {
       yearList.clear();
       yearList.addAll(r.data!);
       return state.copyWith(isLoading: false, yearsOption: Some(Right(r)));
     });
+    emit(yearOfExpState);
   }
 
   _getCaregiverServices(
       _GetCaregiverService event, Emitter<OnboardingState> emit) async {
-    final Either<ApiErrorHandler, GetServiceResponse> result =
-        await onboardingRepository.getServices(userId: event.userId);
-    result.fold((l) {
-      return state.copyWith(isLoading: false, getServiceOption: Some(Left(l)));
+    emit(state.copyWith(isInitialLoading: true));
+    final Either<ApiErrorHandler, GetServicesResponse> result =
+        await onboardingRepository.getServices();
+    OnboardingState getServiceState = result.fold((l) {
+      return state.copyWith(
+          isInitialLoading: false, getServiceOption: Some(Left(l)));
     }, (r) {
-      return state.copyWith(isLoading: false, getServiceOption: Some(Right(r)));
+      serviceList.clear();
+      serviceList.addAll(r.data!
+          .map((e) => ServiceModel(
+              name: e.serviceName!, type: e.type, id: e.id!, selected: false))
+          .toList());
+      return state.copyWith(
+          isInitialLoading: false,
+          serviceList: serviceList,
+          getServiceOption: Some(Right(r)));
     });
+    emit(getServiceState);
+  }
+
+  _submitServices(
+      _SubmitCaregiverService event, Emitter<OnboardingState> emit) async {
+    emit(state.copyWith(isLoading: true));
+    final Either<ApiErrorHandler, CommonResponse> result =
+        await onboardingRepository.servicesSubmit(
+            userId: event.userId, services: event.services);
+    OnboardingState submitServiceState = result.fold((l) {
+      return state.copyWith(
+          isLoading: false, submitServiceOption: Some(Left(l)));
+    }, (r) {
+      return state.copyWith(
+          isLoading: false, submitServiceOption: Some(Right(r)));
+    });
+    emit(submitServiceState);
+  }
+
+  _submitBuildProfile(
+      _SubmitBuildProfile event, Emitter<OnboardingState> emit) async {
+    emit(state.copyWith(isLoading: true));
+    final Either<ApiErrorHandler, CommonResponse> result =
+        await onboardingRepository.buildProfileSubmit(
+            userId: event.userId,
+            aboutYou: event.aboutYou,
+            hobbies: event.hobbies,
+            whyLoveBeingCaregiver: event.whyLoveBeingCaregiver);
+    OnboardingState profileState = result.fold((l) {
+      return state.copyWith(
+          isLoading: false, submitBuildProfileOption: Some(Left(l)));
+    }, (r) {
+      return state.copyWith(
+          isLoading: false, submitBuildProfileOption: Some(Right(r)));
+    });
+    emit(profileState);
+  }
+
+  _submitAccountDetails(
+      _SubmitAccountDetails event, Emitter<OnboardingState> emit) async {
+    emit(state.copyWith(isLoading: true));
+    final Either<ApiErrorHandler, CommonResponse> result =
+        await onboardingRepository.accountDetailsSubmit(
+            userId: event.userId,
+            accountHolderName: event.accountHolderName,
+            routingNumber: event.routingNumber,
+            accountNumber: event.accountNumber);
+    OnboardingState accountState = result.fold((l) {
+      return state.copyWith(
+          isLoading: false, submitAccountDetailsOption: Some(Left(l)));
+    }, (r) {
+      return state.copyWith(
+          isLoading: false, submitAccountDetailsOption: Some(Right(r)));
+    });
+    emit(accountState);
   }
 }

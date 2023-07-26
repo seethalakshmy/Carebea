@@ -1,64 +1,100 @@
+import 'package:admin_580_tech/core/custom_snackbar.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/on_boarding/widgets/common_padding_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../application/bloc/onboarding/onboarding_bloc.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
+import '../../../../domain/on_boarding/models/services/service_request_model.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
+import '../../../widget/custom_shimmer.dart';
 import '../../../widget/custom_sizedbox.dart';
 import '../../../widget/custom_text.dart';
-import 'models/service_model.dart';
 
 class ServicesView extends StatefulWidget {
-  const ServicesView({Key? key, required this.pageController})
+  const ServicesView(
+      {Key? key, required this.pageController, required this.onboardingBloc})
       : super(key: key);
   final PageController pageController;
+  final OnboardingBloc onboardingBloc;
 
   @override
   State<ServicesView> createState() => _ServicesViewState();
 }
 
 class _ServicesViewState extends State<ServicesView> {
-  List<ServiceModel> services = [
-    ServiceModel(name: 'Assist w/ wake Up'),
-    ServiceModel(name: 'Assist w/ Showering'),
-    ServiceModel(name: 'Assist w/ wake Up'),
-    ServiceModel(name: 'Assist w/ wake Up'),
-    ServiceModel(name: 'Assist w/ Showering'),
-    ServiceModel(name: 'Assist w/ Showering'),
-    ServiceModel(name: 'Assist w/ wake Up'),
-    ServiceModel(name: 'Assist w/ wake Up'),
-    ServiceModel(name: 'Assist w/ wake Up'),
-    ServiceModel(name: 'Assist w/ wake Up'),
-    // Add more services as needed
-  ];
+  @override
+  void initState() {
+    widget.onboardingBloc.add(const OnboardingEvent.getServices());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return CommonPaddingWidget(
-      child: CustomContainer(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _topArea(context),
-            CustomSizedBox(height: DBL.twenty.val),
-            _listView(),
-            CommonNextOrCancelButtons(
-              leftButtonName: AppString.back.val,
-              rightButtonName: AppString.next.val,
-              onLeftButtonPressed: () {
-                widget.pageController
-                    .jumpToPage(widget.pageController.page!.toInt() - 1);
-              },
-              onRightButtonPressed: () {
-                widget.pageController
-                    .jumpToPage(widget.pageController.page!.toInt() + 1);
-              },
-            )
-          ],
-        ),
-      ),
+    return BlocConsumer<OnboardingBloc, OnboardingState>(
+      listener: (context, listenerState) {
+        return listenerState.submitServiceOption.fold(() {}, (some) {
+          some.fold((l) {
+            CSnackBar.showError(context, msg: l.error);
+          }, (r) {
+            print(
+                "inside listener nextClicked : ${widget.onboardingBloc.nextButtonClicked}");
+            if (widget.onboardingBloc.nextButtonClicked) {
+              widget.pageController
+                  .jumpToPage(widget.pageController.page!.toInt() + 1);
+            }
+          });
+        });
+      },
+      builder: (context, state) {
+        return CommonPaddingWidget(
+          child: CustomContainer(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _topArea(context),
+                  CustomSizedBox(height: DBL.twenty.val),
+                  _listView(state),
+                  CommonNextOrCancelButtons(
+                    isLoading: state.isLoading,
+                    leftButtonName: AppString.back.val,
+                    rightButtonName: AppString.next.val,
+                    onLeftButtonPressed: () {
+                      widget.pageController
+                          .jumpToPage(widget.pageController.page!.toInt() - 1);
+                    },
+                    onRightButtonPressed: () {
+                      if (widget.onboardingBloc.selectedTier1ServiceList
+                              .isEmpty &&
+                          widget.onboardingBloc.selectedTier2ServiceList
+                              .isEmpty) {
+                        CSnackBar.showError(context,
+                            msg: "Please select at least one service");
+                      } else {
+                        widget.onboardingBloc
+                            .add(OnboardingEvent.submitServices(
+                                userId: SharedPreffUtil().getUserId,
+                                services: ServicesRequest(
+                                  tier1: widget
+                                      .onboardingBloc.selectedTier1ServiceList,
+                                  tier2: widget
+                                      .onboardingBloc.selectedTier2ServiceList,
+                                )));
+                      }
+                      widget.onboardingBloc.nextButtonClicked = true;
+                    },
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -119,7 +155,7 @@ class _ServicesViewState extends State<ServicesView> {
     );
   }
 
-  _listView() {
+  _listView(OnboardingState state) {
     return ListView.separated(
       separatorBuilder: (context, index) {
         return CustomContainer(
@@ -128,27 +164,54 @@ class _ServicesViewState extends State<ServicesView> {
         );
       },
       shrinkWrap: true,
-      itemCount: services.length,
+      itemCount: state.isInitialLoading ? 10 : state.serviceList.length,
       itemBuilder: (context, index) {
         return ListTile(
-          title: Row(
-            children: [
-              Expanded(
-                  child:
-                      Text(services[index].name)), // Service name on the left
-              Checkbox(
-                activeColor: AppColor.primaryColor.val,
-                fillColor: MaterialStateProperty.all(AppColor.primaryColor.val),
-                checkColor: AppColor.white.val,
-                value: services[index].selected,
-                onChanged: (value) {
-                  setState(() {
-                    services[index].selected = value ?? false;
-                  });
-                },
-              ), // Checkbox on the right
-            ],
-          ),
+          title: state.isInitialLoading
+              ? const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                        child: CustomShimmerWidget.rectangular(height: 40)),
+                    CustomSizedBox(width: 10),
+                    CustomShimmerWidget.rectangular(height: 20, width: 20)
+                  ],
+                )
+              : Row(
+                  children: [
+                    Expanded(child: Text(state.serviceList[index].name)),
+                    Checkbox(
+                      activeColor: AppColor.primaryColor.val,
+                      fillColor:
+                          MaterialStateProperty.all(AppColor.primaryColor.val),
+                      checkColor: AppColor.white.val,
+                      value: state.serviceList[index].selected,
+                      onChanged: (value) {
+                        //state.serviceList[index].selected = value!;
+
+                        widget.onboardingBloc.add(
+                            OnboardingEvent.serviceSelected(index, value!));
+                        if (!state.serviceList[index].selected) {
+                          if (state.serviceList[index].type == 1) {
+                            widget.onboardingBloc.selectedTier1ServiceList
+                                .add(state.serviceList[index].id);
+                          } else {
+                            widget.onboardingBloc.selectedTier2ServiceList
+                                .add(state.serviceList[index].id);
+                          }
+                        } else {
+                          if (state.serviceList[index].type == 1) {
+                            widget.onboardingBloc.selectedTier1ServiceList
+                                .remove(state.serviceList[index].id);
+                          } else {
+                            widget.onboardingBloc.selectedTier2ServiceList
+                                .remove(state.serviceList[index].id);
+                          }
+                        }
+                      },
+                    ),
+                  ],
+                ),
         );
       },
     );
