@@ -11,6 +11,7 @@ import '../../../../core/custom_snackbar.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
+import '../../../../infrastructure/api_service_s3.dart';
 import '../../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
@@ -133,7 +134,13 @@ class _QualificationViewState extends State<QualificationView> {
                         FilePickerResult? result =
                             await FilePicker.platform.pickFiles(
                           type: FileType.custom,
-                          allowedExtensions: ['jpg', 'png', 'pdf', 'doc'],
+                          allowedExtensions: [
+                            'jpg',
+                            'png',
+                            'jpeg',
+                            'pdf',
+                            'doc'
+                          ],
                         );
                         if (result != null) {
                           for (PlatformFile file in result.files) {
@@ -404,5 +411,16 @@ class _QualificationViewState extends State<QualificationView> {
         CustomSizedBox(height: DBL.ten.val),
       ],
     );
+  }
+
+  Future<void> uploadDocumentsToAwsS3(
+      String folderName, String userId, PlatformFile pickedItem) async {
+    widget.onboardingBloc.uploadedDocumentList.add(await ApiServiceS3()
+        .uploadImage(
+            pickedFile: pickedItem.bytes!,
+            format: pickedItem.name.split('.').last,
+            folderName: folderName,
+            userId: userId,
+            context: context));
   }
 }

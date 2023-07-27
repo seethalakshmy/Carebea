@@ -57,8 +57,9 @@ mixin _$OnboardingEvent {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -91,6 +92,8 @@ mixin _$OnboardingEvent {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -144,8 +147,8 @@ mixin _$OnboardingEvent {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -178,6 +181,8 @@ mixin _$OnboardingEvent {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -230,8 +235,8 @@ mixin _$OnboardingEvent {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -264,6 +269,8 @@ mixin _$OnboardingEvent {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -315,6 +322,8 @@ mixin _$OnboardingEvent {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -356,6 +365,8 @@ mixin _$OnboardingEvent {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -397,6 +408,8 @@ mixin _$OnboardingEvent {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -714,8 +727,9 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -748,6 +762,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -820,8 +836,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -854,6 +870,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -925,8 +943,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -959,6 +977,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -1032,6 +1052,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -1076,6 +1098,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -1120,6 +1144,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -1379,8 +1405,9 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -1413,6 +1440,8 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -1478,8 +1507,8 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -1512,6 +1541,8 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -1576,8 +1607,8 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -1610,6 +1641,8 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -1676,6 +1709,8 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -1720,6 +1755,8 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -1764,6 +1801,8 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -1999,8 +2038,9 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -2033,6 +2073,8 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -2096,8 +2138,8 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -2130,6 +2172,8 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -2192,8 +2236,8 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -2226,6 +2270,8 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -2290,6 +2336,8 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -2334,6 +2382,8 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -2378,6 +2428,8 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -2491,8 +2543,9 @@ class _$_CommonDataLists implements _CommonDataLists {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -2525,6 +2578,8 @@ class _$_CommonDataLists implements _CommonDataLists {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -2581,8 +2636,8 @@ class _$_CommonDataLists implements _CommonDataLists {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -2615,6 +2670,8 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -2670,8 +2727,8 @@ class _$_CommonDataLists implements _CommonDataLists {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -2704,6 +2761,8 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -2761,6 +2820,8 @@ class _$_CommonDataLists implements _CommonDataLists {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -2805,6 +2866,8 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -2849,6 +2912,8 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -2872,6 +2937,8 @@ abstract class _$$_CityListsCopyWith<$Res> {
   factory _$$_CityListsCopyWith(
           _$_CityLists value, $Res Function(_$_CityLists) then) =
       __$$_CityListsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String searchQuery, bool wantLoading});
 }
 
 /// @nodoc
@@ -2881,26 +2948,60 @@ class __$$_CityListsCopyWithImpl<$Res>
   __$$_CityListsCopyWithImpl(
       _$_CityLists _value, $Res Function(_$_CityLists) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? searchQuery = null,
+    Object? wantLoading = null,
+  }) {
+    return _then(_$_CityLists(
+      searchQuery: null == searchQuery
+          ? _value.searchQuery
+          : searchQuery // ignore: cast_nullable_to_non_nullable
+              as String,
+      wantLoading: null == wantLoading
+          ? _value.wantLoading
+          : wantLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_CityLists implements _CityLists {
-  const _$_CityLists();
+  const _$_CityLists({required this.searchQuery, required this.wantLoading});
+
+  @override
+  final String searchQuery;
+  @override
+  final bool wantLoading;
 
   @override
   String toString() {
-    return 'OnboardingEvent.cityList()';
+    return 'OnboardingEvent.cityList(searchQuery: $searchQuery, wantLoading: $wantLoading)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_CityLists);
+        (other.runtimeType == runtimeType &&
+            other is _$_CityLists &&
+            (identical(other.searchQuery, searchQuery) ||
+                other.searchQuery == searchQuery) &&
+            (identical(other.wantLoading, wantLoading) ||
+                other.wantLoading == wantLoading));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, searchQuery, wantLoading);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CityListsCopyWith<_$_CityLists> get copyWith =>
+      __$$_CityListsCopyWithImpl<_$_CityLists>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2944,8 +3045,9 @@ class _$_CityLists implements _CityLists {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -2978,6 +3080,8 @@ class _$_CityLists implements _CityLists {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -2989,7 +3093,7 @@ class _$_CityLists implements _CityLists {
             String routingNumber, String accountNumber)
         submitAccountDetais,
   }) {
-    return cityList();
+    return cityList(searchQuery, wantLoading);
   }
 
   @override
@@ -3034,8 +3138,8 @@ class _$_CityLists implements _CityLists {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -3068,6 +3172,8 @@ class _$_CityLists implements _CityLists {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -3078,7 +3184,7 @@ class _$_CityLists implements _CityLists {
             String routingNumber, String accountNumber)?
         submitAccountDetais,
   }) {
-    return cityList?.call();
+    return cityList?.call(searchQuery, wantLoading);
   }
 
   @override
@@ -3123,8 +3229,8 @@ class _$_CityLists implements _CityLists {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -3157,6 +3263,8 @@ class _$_CityLists implements _CityLists {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -3169,7 +3277,7 @@ class _$_CityLists implements _CityLists {
     required TResult orElse(),
   }) {
     if (cityList != null) {
-      return cityList();
+      return cityList(searchQuery, wantLoading);
     }
     return orElse();
   }
@@ -3214,6 +3322,8 @@ class _$_CityLists implements _CityLists {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -3258,6 +3368,8 @@ class _$_CityLists implements _CityLists {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -3302,6 +3414,8 @@ class _$_CityLists implements _CityLists {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -3317,7 +3431,15 @@ class _$_CityLists implements _CityLists {
 }
 
 abstract class _CityLists implements OnboardingEvent {
-  const factory _CityLists() = _$_CityLists;
+  const factory _CityLists(
+      {required final String searchQuery,
+      required final bool wantLoading}) = _$_CityLists;
+
+  String get searchQuery;
+  bool get wantLoading;
+  @JsonKey(ignore: true)
+  _$$_CityListsCopyWith<_$_CityLists> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -3325,6 +3447,8 @@ abstract class _$$_StateListsCopyWith<$Res> {
   factory _$$_StateListsCopyWith(
           _$_StateLists value, $Res Function(_$_StateLists) then) =
       __$$_StateListsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String stateSearchQuery, bool wantLoading});
 }
 
 /// @nodoc
@@ -3334,26 +3458,61 @@ class __$$_StateListsCopyWithImpl<$Res>
   __$$_StateListsCopyWithImpl(
       _$_StateLists _value, $Res Function(_$_StateLists) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? stateSearchQuery = null,
+    Object? wantLoading = null,
+  }) {
+    return _then(_$_StateLists(
+      stateSearchQuery: null == stateSearchQuery
+          ? _value.stateSearchQuery
+          : stateSearchQuery // ignore: cast_nullable_to_non_nullable
+              as String,
+      wantLoading: null == wantLoading
+          ? _value.wantLoading
+          : wantLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_StateLists implements _StateLists {
-  const _$_StateLists();
+  const _$_StateLists(
+      {required this.stateSearchQuery, required this.wantLoading});
+
+  @override
+  final String stateSearchQuery;
+  @override
+  final bool wantLoading;
 
   @override
   String toString() {
-    return 'OnboardingEvent.stateList()';
+    return 'OnboardingEvent.stateList(stateSearchQuery: $stateSearchQuery, wantLoading: $wantLoading)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_StateLists);
+        (other.runtimeType == runtimeType &&
+            other is _$_StateLists &&
+            (identical(other.stateSearchQuery, stateSearchQuery) ||
+                other.stateSearchQuery == stateSearchQuery) &&
+            (identical(other.wantLoading, wantLoading) ||
+                other.wantLoading == wantLoading));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, stateSearchQuery, wantLoading);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_StateListsCopyWith<_$_StateLists> get copyWith =>
+      __$$_StateListsCopyWithImpl<_$_StateLists>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3397,8 +3556,9 @@ class _$_StateLists implements _StateLists {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -3431,6 +3591,8 @@ class _$_StateLists implements _StateLists {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -3442,7 +3604,7 @@ class _$_StateLists implements _StateLists {
             String routingNumber, String accountNumber)
         submitAccountDetais,
   }) {
-    return stateList();
+    return stateList(stateSearchQuery, wantLoading);
   }
 
   @override
@@ -3487,8 +3649,8 @@ class _$_StateLists implements _StateLists {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -3521,6 +3683,8 @@ class _$_StateLists implements _StateLists {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -3531,7 +3695,7 @@ class _$_StateLists implements _StateLists {
             String routingNumber, String accountNumber)?
         submitAccountDetais,
   }) {
-    return stateList?.call();
+    return stateList?.call(stateSearchQuery, wantLoading);
   }
 
   @override
@@ -3576,8 +3740,8 @@ class _$_StateLists implements _StateLists {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -3610,6 +3774,8 @@ class _$_StateLists implements _StateLists {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -3622,7 +3788,7 @@ class _$_StateLists implements _StateLists {
     required TResult orElse(),
   }) {
     if (stateList != null) {
-      return stateList();
+      return stateList(stateSearchQuery, wantLoading);
     }
     return orElse();
   }
@@ -3667,6 +3833,8 @@ class _$_StateLists implements _StateLists {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -3711,6 +3879,8 @@ class _$_StateLists implements _StateLists {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -3755,6 +3925,8 @@ class _$_StateLists implements _StateLists {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -3770,7 +3942,15 @@ class _$_StateLists implements _StateLists {
 }
 
 abstract class _StateLists implements OnboardingEvent {
-  const factory _StateLists() = _$_StateLists;
+  const factory _StateLists(
+      {required final String stateSearchQuery,
+      required final bool wantLoading}) = _$_StateLists;
+
+  String get stateSearchQuery;
+  bool get wantLoading;
+  @JsonKey(ignore: true)
+  _$$_StateListsCopyWith<_$_StateLists> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -3850,8 +4030,9 @@ class _$_RelationList implements _RelationList {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -3884,6 +4065,8 @@ class _$_RelationList implements _RelationList {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -3940,8 +4123,8 @@ class _$_RelationList implements _RelationList {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -3974,6 +4157,8 @@ class _$_RelationList implements _RelationList {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -4029,8 +4214,8 @@ class _$_RelationList implements _RelationList {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -4063,6 +4248,8 @@ class _$_RelationList implements _RelationList {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -4120,6 +4307,8 @@ class _$_RelationList implements _RelationList {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -4164,6 +4353,8 @@ class _$_RelationList implements _RelationList {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -4208,6 +4399,8 @@ class _$_RelationList implements _RelationList {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -4329,8 +4522,9 @@ class _$_SubmitReference implements _SubmitReference {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -4363,6 +4557,8 @@ class _$_SubmitReference implements _SubmitReference {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -4419,8 +4615,8 @@ class _$_SubmitReference implements _SubmitReference {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -4453,6 +4649,8 @@ class _$_SubmitReference implements _SubmitReference {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -4508,8 +4706,8 @@ class _$_SubmitReference implements _SubmitReference {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -4542,6 +4740,8 @@ class _$_SubmitReference implements _SubmitReference {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -4599,6 +4799,8 @@ class _$_SubmitReference implements _SubmitReference {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -4643,6 +4845,8 @@ class _$_SubmitReference implements _SubmitReference {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -4687,6 +4891,8 @@ class _$_SubmitReference implements _SubmitReference {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -4788,8 +4994,9 @@ class _$_AddReference implements _AddReference {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -4822,6 +5029,8 @@ class _$_AddReference implements _AddReference {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -4878,8 +5087,8 @@ class _$_AddReference implements _AddReference {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -4912,6 +5121,8 @@ class _$_AddReference implements _AddReference {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -4967,8 +5178,8 @@ class _$_AddReference implements _AddReference {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -5001,6 +5212,8 @@ class _$_AddReference implements _AddReference {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -5058,6 +5271,8 @@ class _$_AddReference implements _AddReference {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -5102,6 +5317,8 @@ class _$_AddReference implements _AddReference {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -5146,6 +5363,8 @@ class _$_AddReference implements _AddReference {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -5267,8 +5486,9 @@ class _$DeleteReference implements DeleteReference {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -5301,6 +5521,8 @@ class _$DeleteReference implements DeleteReference {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -5357,8 +5579,8 @@ class _$DeleteReference implements DeleteReference {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -5391,6 +5613,8 @@ class _$DeleteReference implements DeleteReference {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -5446,8 +5670,8 @@ class _$DeleteReference implements DeleteReference {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -5480,6 +5704,8 @@ class _$DeleteReference implements DeleteReference {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -5537,6 +5763,8 @@ class _$DeleteReference implements DeleteReference {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -5581,6 +5809,8 @@ class _$DeleteReference implements DeleteReference {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -5625,6 +5855,8 @@ class _$DeleteReference implements DeleteReference {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -5751,8 +5983,9 @@ class _$UpdateReference implements UpdateReference {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -5785,6 +6018,8 @@ class _$UpdateReference implements UpdateReference {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -5841,8 +6076,8 @@ class _$UpdateReference implements UpdateReference {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -5875,6 +6110,8 @@ class _$UpdateReference implements UpdateReference {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -5930,8 +6167,8 @@ class _$UpdateReference implements UpdateReference {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -5964,6 +6201,8 @@ class _$UpdateReference implements UpdateReference {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -6021,6 +6260,8 @@ class _$UpdateReference implements UpdateReference {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -6065,6 +6306,8 @@ class _$UpdateReference implements UpdateReference {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -6109,6 +6352,8 @@ class _$UpdateReference implements UpdateReference {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -6244,8 +6489,9 @@ class _$EditReference implements EditReference {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -6278,6 +6524,8 @@ class _$EditReference implements EditReference {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -6334,8 +6582,8 @@ class _$EditReference implements EditReference {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -6368,6 +6616,8 @@ class _$EditReference implements EditReference {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -6423,8 +6673,8 @@ class _$EditReference implements EditReference {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -6457,6 +6707,8 @@ class _$EditReference implements EditReference {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -6514,6 +6766,8 @@ class _$EditReference implements EditReference {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -6558,6 +6812,8 @@ class _$EditReference implements EditReference {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -6602,6 +6858,8 @@ class _$EditReference implements EditReference {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -6705,8 +6963,9 @@ class _$_YearsOfExp implements _YearsOfExp {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -6739,6 +6998,8 @@ class _$_YearsOfExp implements _YearsOfExp {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -6795,8 +7056,8 @@ class _$_YearsOfExp implements _YearsOfExp {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -6829,6 +7090,8 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -6884,8 +7147,8 @@ class _$_YearsOfExp implements _YearsOfExp {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -6918,6 +7181,8 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -6975,6 +7240,8 @@ class _$_YearsOfExp implements _YearsOfExp {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -7019,6 +7286,8 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -7063,6 +7332,8 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -7185,8 +7456,9 @@ class _$_GetPetList implements _GetPetList {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -7219,6 +7491,8 @@ class _$_GetPetList implements _GetPetList {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -7275,8 +7549,8 @@ class _$_GetPetList implements _GetPetList {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -7309,6 +7583,8 @@ class _$_GetPetList implements _GetPetList {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -7364,8 +7640,8 @@ class _$_GetPetList implements _GetPetList {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -7398,6 +7674,8 @@ class _$_GetPetList implements _GetPetList {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -7455,6 +7733,8 @@ class _$_GetPetList implements _GetPetList {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -7499,6 +7779,8 @@ class _$_GetPetList implements _GetPetList {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -7543,6 +7825,8 @@ class _$_GetPetList implements _GetPetList {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -7688,8 +7972,9 @@ class _$_GetLanguageList implements _GetLanguageList {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -7722,6 +8007,8 @@ class _$_GetLanguageList implements _GetLanguageList {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -7778,8 +8065,8 @@ class _$_GetLanguageList implements _GetLanguageList {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -7812,6 +8099,8 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -7867,8 +8156,8 @@ class _$_GetLanguageList implements _GetLanguageList {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -7901,6 +8190,8 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -7958,6 +8249,8 @@ class _$_GetLanguageList implements _GetLanguageList {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -8002,6 +8295,8 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -8046,6 +8341,8 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -8175,8 +8472,9 @@ class _$_RadioHHASelected implements _RadioHHASelected {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -8209,6 +8507,8 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -8265,8 +8565,8 @@ class _$_RadioHHASelected implements _RadioHHASelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -8299,6 +8599,8 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -8354,8 +8656,8 @@ class _$_RadioHHASelected implements _RadioHHASelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -8388,6 +8690,8 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -8445,6 +8749,8 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -8489,6 +8795,8 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -8533,6 +8841,8 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -8660,8 +8970,9 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -8694,6 +9005,8 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -8750,8 +9063,8 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -8784,6 +9097,8 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -8839,8 +9154,8 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -8873,6 +9188,8 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -8930,6 +9247,8 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -8974,6 +9293,8 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -9018,6 +9339,8 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -9145,8 +9468,9 @@ class _$_RadioTBSelected implements _RadioTBSelected {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -9179,6 +9503,8 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -9235,8 +9561,8 @@ class _$_RadioTBSelected implements _RadioTBSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -9269,6 +9595,8 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -9324,8 +9652,8 @@ class _$_RadioTBSelected implements _RadioTBSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -9358,6 +9686,8 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -9415,6 +9745,8 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -9459,6 +9791,8 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -9503,6 +9837,8 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -9631,8 +9967,9 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -9665,6 +10002,8 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -9721,8 +10060,8 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -9755,6 +10094,8 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -9810,8 +10151,8 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -9844,6 +10185,8 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -9901,6 +10244,8 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -9945,6 +10290,8 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -9989,6 +10336,8 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -10119,8 +10468,9 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -10153,6 +10503,8 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -10209,8 +10561,8 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -10243,6 +10595,8 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -10298,8 +10652,8 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -10332,6 +10686,8 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -10389,6 +10745,8 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -10433,6 +10791,8 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -10477,6 +10837,8 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -10606,8 +10968,9 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -10640,6 +11003,8 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -10696,8 +11061,8 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -10730,6 +11095,8 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -10785,8 +11152,8 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -10819,6 +11186,8 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -10876,6 +11245,8 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -10920,6 +11291,8 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -10964,6 +11337,8 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -11095,8 +11470,9 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -11129,6 +11505,8 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -11185,8 +11563,8 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -11219,6 +11597,8 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -11274,8 +11654,8 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -11308,6 +11688,8 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -11365,6 +11747,8 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -11409,6 +11793,8 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -11453,6 +11839,8 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -11581,8 +11969,9 @@ class _$_RadioPetSelected implements _RadioPetSelected {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -11615,6 +12004,8 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -11671,8 +12062,8 @@ class _$_RadioPetSelected implements _RadioPetSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -11705,6 +12096,8 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -11760,8 +12153,8 @@ class _$_RadioPetSelected implements _RadioPetSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -11794,6 +12187,8 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -11851,6 +12246,8 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -11895,6 +12292,8 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -11939,6 +12338,8 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -12067,8 +12468,9 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -12101,6 +12503,8 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -12157,8 +12561,8 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -12191,6 +12595,8 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -12246,8 +12652,8 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -12280,6 +12686,8 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -12337,6 +12745,8 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -12381,6 +12791,8 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -12425,6 +12837,8 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -12553,8 +12967,9 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -12587,6 +13002,8 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -12643,8 +13060,8 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -12677,6 +13094,8 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -12732,8 +13151,8 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -12766,6 +13185,8 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -12823,6 +13244,8 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -12867,6 +13290,8 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -12911,6 +13336,8 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -13062,8 +13489,9 @@ class _$_SecurityDocumentUploadSelected
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -13096,6 +13524,8 @@ class _$_SecurityDocumentUploadSelected
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -13152,8 +13582,8 @@ class _$_SecurityDocumentUploadSelected
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -13186,6 +13616,8 @@ class _$_SecurityDocumentUploadSelected
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -13241,8 +13673,8 @@ class _$_SecurityDocumentUploadSelected
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -13275,6 +13707,8 @@ class _$_SecurityDocumentUploadSelected
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -13332,6 +13766,8 @@ class _$_SecurityDocumentUploadSelected
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -13376,6 +13812,8 @@ class _$_SecurityDocumentUploadSelected
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -13420,6 +13858,8 @@ class _$_SecurityDocumentUploadSelected
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -13571,8 +14011,9 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -13605,6 +14046,8 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -13661,8 +14104,8 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -13695,6 +14138,8 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -13750,8 +14195,8 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -13784,6 +14229,8 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -13841,6 +14288,8 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -13885,6 +14334,8 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -13929,6 +14380,8 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -14080,8 +14533,9 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -14114,6 +14568,8 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -14170,8 +14626,8 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -14204,6 +14660,8 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -14259,8 +14717,8 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -14293,6 +14751,8 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -14350,6 +14810,8 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -14394,6 +14856,8 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -14438,6 +14902,8 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -14588,8 +15054,9 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -14622,6 +15089,8 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -14678,8 +15147,8 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -14712,6 +15181,8 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -14767,8 +15238,8 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -14801,6 +15272,8 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -14858,6 +15331,8 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -14902,6 +15377,8 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -14946,6 +15423,8 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -15097,8 +15576,9 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -15131,6 +15611,8 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -15187,8 +15669,8 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -15221,6 +15703,8 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -15276,8 +15760,8 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -15310,6 +15794,8 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -15367,6 +15853,8 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -15411,6 +15899,8 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -15455,6 +15945,8 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -15558,8 +16050,9 @@ class _$_LanguagePagination implements _LanguagePagination {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -15592,6 +16085,8 @@ class _$_LanguagePagination implements _LanguagePagination {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -15648,8 +16143,8 @@ class _$_LanguagePagination implements _LanguagePagination {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -15682,6 +16177,8 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -15737,8 +16234,8 @@ class _$_LanguagePagination implements _LanguagePagination {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -15771,6 +16268,8 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -15828,6 +16327,8 @@ class _$_LanguagePagination implements _LanguagePagination {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -15872,6 +16373,8 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -15916,6 +16419,8 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -15932,6 +16437,938 @@ class _$_LanguagePagination implements _LanguagePagination {
 
 abstract class _LanguagePagination implements OnboardingEvent {
   const factory _LanguagePagination() = _$_LanguagePagination;
+}
+
+/// @nodoc
+abstract class _$$_StatePaginationCopyWith<$Res> {
+  factory _$$_StatePaginationCopyWith(
+          _$_StatePagination value, $Res Function(_$_StatePagination) then) =
+      __$$_StatePaginationCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_StatePaginationCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_StatePagination>
+    implements _$$_StatePaginationCopyWith<$Res> {
+  __$$_StatePaginationCopyWithImpl(
+      _$_StatePagination _value, $Res Function(_$_StatePagination) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_StatePagination implements _StatePagination {
+  const _$_StatePagination();
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.statePagination()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_StatePagination);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
+    required TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)
+        preferenceDetails,
+    required TResult Function() commonData,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
+    required TResult Function() yearsOfExpList,
+    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)
+        languageList,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+    required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
+    required TResult Function() getServices,
+    required TResult Function(String userId, ServicesRequest services)
+        submitServices,
+    required TResult Function(int index, bool value) serviceSelected,
+    required TResult Function(String userId, String aboutYou, String hobbies,
+            String whyLoveBeingCaregiver)
+        submitBuildProfile,
+    required TResult Function(String userId, String accountHolderName,
+            String routingNumber, String accountNumber)
+        submitAccountDetais,
+  }) {
+    return statePagination();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult? Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult? Function()? commonData,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
+    TResult? Function()? yearsOfExpList,
+    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
+    TResult? Function()? getServices,
+    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(int index, bool value)? serviceSelected,
+    TResult? Function(String userId, String aboutYou, String hobbies,
+            String whyLoveBeingCaregiver)?
+        submitBuildProfile,
+    TResult? Function(String userId, String accountHolderName,
+            String routingNumber, String accountNumber)?
+        submitAccountDetais,
+  }) {
+    return statePagination?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult Function()? commonData,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
+    TResult Function()? yearsOfExpList,
+    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
+    TResult Function()? getServices,
+    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(int index, bool value)? serviceSelected,
+    TResult Function(String userId, String aboutYou, String hobbies,
+            String whyLoveBeingCaregiver)?
+        submitBuildProfile,
+    TResult Function(String userId, String accountHolderName,
+            String routingNumber, String accountNumber)?
+        submitAccountDetais,
+    required TResult orElse(),
+  }) {
+    if (statePagination != null) {
+      return statePagination();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
+    required TResult Function(_SubmitPreferenceDetails value) preferenceDetails,
+    required TResult Function(_CommonDataLists value) commonData,
+    required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
+    required TResult Function(_YearsOfExp value) yearsOfExpList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+    required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
+    required TResult Function(_GetCaregiverService value) getServices,
+    required TResult Function(_SubmitCaregiverService value) submitServices,
+    required TResult Function(_CaregiverServiceSelected value) serviceSelected,
+    required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
+    required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+  }) {
+    return statePagination(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult? Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult? Function(_CommonDataLists value)? commonData,
+    TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
+    TResult? Function(_YearsOfExp value)? yearsOfExpList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
+    TResult? Function(_GetCaregiverService value)? getServices,
+    TResult? Function(_SubmitCaregiverService value)? submitServices,
+    TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
+    TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
+    TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+  }) {
+    return statePagination?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult Function(_CommonDataLists value)? commonData,
+    TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
+    TResult Function(_YearsOfExp value)? yearsOfExpList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
+    TResult Function(_GetCaregiverService value)? getServices,
+    TResult Function(_SubmitCaregiverService value)? submitServices,
+    TResult Function(_CaregiverServiceSelected value)? serviceSelected,
+    TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
+    TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    required TResult orElse(),
+  }) {
+    if (statePagination != null) {
+      return statePagination(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _StatePagination implements OnboardingEvent {
+  const factory _StatePagination() = _$_StatePagination;
+}
+
+/// @nodoc
+abstract class _$$_CityPaginationCopyWith<$Res> {
+  factory _$$_CityPaginationCopyWith(
+          _$_CityPagination value, $Res Function(_$_CityPagination) then) =
+      __$$_CityPaginationCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_CityPaginationCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_CityPagination>
+    implements _$$_CityPaginationCopyWith<$Res> {
+  __$$_CityPaginationCopyWithImpl(
+      _$_CityPagination _value, $Res Function(_$_CityPagination) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_CityPagination implements _CityPagination {
+  const _$_CityPagination();
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.cityPagination()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_CityPagination);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
+    required TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)
+        preferenceDetails,
+    required TResult Function() commonData,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
+    required TResult Function() yearsOfExpList,
+    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)
+        languageList,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+    required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
+    required TResult Function() getServices,
+    required TResult Function(String userId, ServicesRequest services)
+        submitServices,
+    required TResult Function(int index, bool value) serviceSelected,
+    required TResult Function(String userId, String aboutYou, String hobbies,
+            String whyLoveBeingCaregiver)
+        submitBuildProfile,
+    required TResult Function(String userId, String accountHolderName,
+            String routingNumber, String accountNumber)
+        submitAccountDetais,
+  }) {
+    return cityPagination();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult? Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult? Function()? commonData,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
+    TResult? Function()? yearsOfExpList,
+    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
+    TResult? Function()? getServices,
+    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(int index, bool value)? serviceSelected,
+    TResult? Function(String userId, String aboutYou, String hobbies,
+            String whyLoveBeingCaregiver)?
+        submitBuildProfile,
+    TResult? Function(String userId, String accountHolderName,
+            String routingNumber, String accountNumber)?
+        submitAccountDetais,
+  }) {
+    return cityPagination?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<PetsList> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult Function()? commonData,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
+    TResult Function()? yearsOfExpList,
+    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
+    TResult Function()? getServices,
+    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(int index, bool value)? serviceSelected,
+    TResult Function(String userId, String aboutYou, String hobbies,
+            String whyLoveBeingCaregiver)?
+        submitBuildProfile,
+    TResult Function(String userId, String accountHolderName,
+            String routingNumber, String accountNumber)?
+        submitAccountDetais,
+    required TResult orElse(),
+  }) {
+    if (cityPagination != null) {
+      return cityPagination();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
+    required TResult Function(_SubmitPreferenceDetails value) preferenceDetails,
+    required TResult Function(_CommonDataLists value) commonData,
+    required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
+    required TResult Function(_YearsOfExp value) yearsOfExpList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+    required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
+    required TResult Function(_GetCaregiverService value) getServices,
+    required TResult Function(_SubmitCaregiverService value) submitServices,
+    required TResult Function(_CaregiverServiceSelected value) serviceSelected,
+    required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
+    required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+  }) {
+    return cityPagination(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult? Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult? Function(_CommonDataLists value)? commonData,
+    TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
+    TResult? Function(_YearsOfExp value)? yearsOfExpList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
+    TResult? Function(_GetCaregiverService value)? getServices,
+    TResult? Function(_SubmitCaregiverService value)? submitServices,
+    TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
+    TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
+    TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+  }) {
+    return cityPagination?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult Function(_CommonDataLists value)? commonData,
+    TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
+    TResult Function(_YearsOfExp value)? yearsOfExpList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
+    TResult Function(_GetCaregiverService value)? getServices,
+    TResult Function(_SubmitCaregiverService value)? submitServices,
+    TResult Function(_CaregiverServiceSelected value)? serviceSelected,
+    TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
+    TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    required TResult orElse(),
+  }) {
+    if (cityPagination != null) {
+      return cityPagination(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CityPagination implements OnboardingEvent {
+  const factory _CityPagination() = _$_CityPagination;
 }
 
 /// @nodoc
@@ -16011,8 +17448,9 @@ class _$_GetCaregiverService implements _GetCaregiverService {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -16045,6 +17483,8 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -16101,8 +17541,8 @@ class _$_GetCaregiverService implements _GetCaregiverService {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -16135,6 +17575,8 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -16190,8 +17632,8 @@ class _$_GetCaregiverService implements _GetCaregiverService {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -16224,6 +17666,8 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -16281,6 +17725,8 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -16325,6 +17771,8 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -16369,6 +17817,8 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -16501,8 +17951,9 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -16535,6 +17986,8 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -16591,8 +18044,8 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -16625,6 +18078,8 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -16680,8 +18135,8 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -16714,6 +18169,8 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -16771,6 +18228,8 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -16815,6 +18274,8 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -16859,6 +18320,8 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -16998,8 +18461,9 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -17032,6 +18496,8 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -17088,8 +18554,8 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -17122,6 +18588,8 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -17177,8 +18645,8 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -17211,6 +18679,8 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -17268,6 +18738,8 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -17312,6 +18784,8 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -17356,6 +18830,8 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -17520,8 +18996,9 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -17554,6 +19031,8 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -17610,8 +19089,8 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -17644,6 +19123,8 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -17700,8 +19181,8 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -17734,6 +19215,8 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -17792,6 +19275,8 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -17836,6 +19321,8 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -17880,6 +19367,8 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -18050,8 +19539,9 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
-    required TResult Function() cityList,
-    required TResult Function() stateList,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
     required TResult Function() relationList,
     required TResult Function(String userId) submitReference,
     required TResult Function() addReference,
@@ -18084,6 +19574,8 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
         covidDocumentUpload,
     required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
     required TResult Function() getServices,
     required TResult Function(String userId, ServicesRequest services)
         submitServices,
@@ -18141,8 +19633,8 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
-    TResult? Function()? cityList,
-    TResult? Function()? stateList,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult? Function()? relationList,
     TResult? Function(String userId)? submitReference,
     TResult? Function()? addReference,
@@ -18175,6 +19667,8 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
     TResult? Function()? getServices,
     TResult? Function(String userId, ServicesRequest services)? submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
@@ -18231,8 +19725,8 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
-    TResult Function()? cityList,
-    TResult Function()? stateList,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
     TResult Function()? relationList,
     TResult Function(String userId)? submitReference,
     TResult Function()? addReference,
@@ -18265,6 +19759,8 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
         covidDocumentUpload,
     TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
     TResult Function()? getServices,
     TResult Function(String userId, ServicesRequest services)? submitServices,
     TResult Function(int index, bool value)? serviceSelected,
@@ -18323,6 +19819,8 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     required TResult Function(_CovidDocumentUploadSelected value)
         covidDocumentUpload,
     required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
     required TResult Function(_GetCaregiverService value) getServices,
     required TResult Function(_SubmitCaregiverService value) submitServices,
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
@@ -18367,6 +19865,8 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
     TResult? Function(_GetCaregiverService value)? getServices,
     TResult? Function(_SubmitCaregiverService value)? submitServices,
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -18411,6 +19911,8 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
     TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
     TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
     TResult Function(_GetCaregiverService value)? getServices,
     TResult Function(_SubmitCaregiverService value)? submitServices,
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
@@ -18470,8 +19972,11 @@ mixin _$OnboardingState {
   int get isLanguagesSelected => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isInitialLoading => throw _privateConstructorUsedError;
+  bool get isCityApiCalling => throw _privateConstructorUsedError;
   int get selectedGenderId => throw _privateConstructorUsedError;
   int get languagePaginationPage => throw _privateConstructorUsedError;
+  int get statePaginationPage => throw _privateConstructorUsedError;
+  int get cityPaginationPage => throw _privateConstructorUsedError;
   int get caregiverServiceListIndex => throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
       get personalDetailsOption => throw _privateConstructorUsedError;
@@ -18542,8 +20047,11 @@ abstract class $OnboardingStateCopyWith<$Res> {
       int isLanguagesSelected,
       bool isLoading,
       bool isInitialLoading,
+      bool isCityApiCalling,
       int selectedGenderId,
       int languagePaginationPage,
+      int statePaginationPage,
+      int cityPaginationPage,
       int caregiverServiceListIndex,
       Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
           personalDetailsOption,
@@ -18603,8 +20111,11 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
     Object? isLanguagesSelected = null,
     Object? isLoading = null,
     Object? isInitialLoading = null,
+    Object? isCityApiCalling = null,
     Object? selectedGenderId = null,
     Object? languagePaginationPage = null,
+    Object? statePaginationPage = null,
+    Object? cityPaginationPage = null,
     Object? caregiverServiceListIndex = null,
     Object? personalDetailsOption = null,
     Object? genderOption = null,
@@ -18720,6 +20231,10 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
           ? _value.isInitialLoading
           : isInitialLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isCityApiCalling: null == isCityApiCalling
+          ? _value.isCityApiCalling
+          : isCityApiCalling // ignore: cast_nullable_to_non_nullable
+              as bool,
       selectedGenderId: null == selectedGenderId
           ? _value.selectedGenderId
           : selectedGenderId // ignore: cast_nullable_to_non_nullable
@@ -18727,6 +20242,14 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
       languagePaginationPage: null == languagePaginationPage
           ? _value.languagePaginationPage
           : languagePaginationPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      statePaginationPage: null == statePaginationPage
+          ? _value.statePaginationPage
+          : statePaginationPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      cityPaginationPage: null == cityPaginationPage
+          ? _value.cityPaginationPage
+          : cityPaginationPage // ignore: cast_nullable_to_non_nullable
               as int,
       caregiverServiceListIndex: null == caregiverServiceListIndex
           ? _value.caregiverServiceListIndex
@@ -18833,8 +20356,11 @@ abstract class _$$_OnboardingStateCopyWith<$Res>
       int isLanguagesSelected,
       bool isLoading,
       bool isInitialLoading,
+      bool isCityApiCalling,
       int selectedGenderId,
       int languagePaginationPage,
+      int statePaginationPage,
+      int cityPaginationPage,
       int caregiverServiceListIndex,
       Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
           personalDetailsOption,
@@ -18892,8 +20418,11 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
     Object? isLanguagesSelected = null,
     Object? isLoading = null,
     Object? isInitialLoading = null,
+    Object? isCityApiCalling = null,
     Object? selectedGenderId = null,
     Object? languagePaginationPage = null,
+    Object? statePaginationPage = null,
+    Object? cityPaginationPage = null,
     Object? caregiverServiceListIndex = null,
     Object? personalDetailsOption = null,
     Object? genderOption = null,
@@ -19009,6 +20538,10 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
           ? _value.isInitialLoading
           : isInitialLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      isCityApiCalling: null == isCityApiCalling
+          ? _value.isCityApiCalling
+          : isCityApiCalling // ignore: cast_nullable_to_non_nullable
+              as bool,
       selectedGenderId: null == selectedGenderId
           ? _value.selectedGenderId
           : selectedGenderId // ignore: cast_nullable_to_non_nullable
@@ -19016,6 +20549,14 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
       languagePaginationPage: null == languagePaginationPage
           ? _value.languagePaginationPage
           : languagePaginationPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      statePaginationPage: null == statePaginationPage
+          ? _value.statePaginationPage
+          : statePaginationPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      cityPaginationPage: null == cityPaginationPage
+          ? _value.cityPaginationPage
+          : cityPaginationPage // ignore: cast_nullable_to_non_nullable
               as int,
       caregiverServiceListIndex: null == caregiverServiceListIndex
           ? _value.caregiverServiceListIndex
@@ -19117,8 +20658,11 @@ class _$_OnboardingState implements _OnboardingState {
       required this.isLanguagesSelected,
       required this.isLoading,
       required this.isInitialLoading,
+      required this.isCityApiCalling,
       required this.selectedGenderId,
       required this.languagePaginationPage,
+      required this.statePaginationPage,
+      required this.cityPaginationPage,
       required this.caregiverServiceListIndex,
       required this.personalDetailsOption,
       required this.genderOption,
@@ -19251,9 +20795,15 @@ class _$_OnboardingState implements _OnboardingState {
   @override
   final bool isInitialLoading;
   @override
+  final bool isCityApiCalling;
+  @override
   final int selectedGenderId;
   @override
   final int languagePaginationPage;
+  @override
+  final int statePaginationPage;
+  @override
+  final int cityPaginationPage;
   @override
   final int caregiverServiceListIndex;
   @override
@@ -19296,7 +20846,7 @@ class _$_OnboardingState implements _OnboardingState {
 
   @override
   String toString() {
-    return 'OnboardingState(pickedProfilePic: $pickedProfilePic, securityDocumentList: $securityDocumentList, hhaDocumentList: $hhaDocumentList, blsDocumentList: $blsDocumentList, tbDocumentList: $tbDocumentList, covidDocumentList: $covidDocumentList, referenceList: $referenceList, petsList: $petsList, languageList: $languageList, serviceList: $serviceList, isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected, isFormSubmitSuccess: $isFormSubmitSuccess, nextClicked: $nextClicked, listUpdated: $listUpdated, isExperianceSelected: $isExperianceSelected, isSmokerSelected: $isSmokerSelected, isTransportationSelected: $isTransportationSelected, isPetsSelected: $isPetsSelected, isLanguagesSelected: $isLanguagesSelected, isLoading: $isLoading, isInitialLoading: $isInitialLoading, selectedGenderId: $selectedGenderId, languagePaginationPage: $languagePaginationPage, caregiverServiceListIndex: $caregiverServiceListIndex, personalDetailsOption: $personalDetailsOption, genderOption: $genderOption, documentOption: $documentOption, stateOption: $stateOption, cityOption: $cityOption, petListOption: $petListOption, yearsOption: $yearsOption, languageListOption: $languageListOption, getServiceOption: $getServiceOption, relationOption: $relationOption, qualificationDetailsOption: $qualificationDetailsOption, preferenceDetailsOption: $preferenceDetailsOption, referenceOption: $referenceOption, submitServiceOption: $submitServiceOption, submitBuildProfileOption: $submitBuildProfileOption, submitAccountDetailsOption: $submitAccountDetailsOption)';
+    return 'OnboardingState(pickedProfilePic: $pickedProfilePic, securityDocumentList: $securityDocumentList, hhaDocumentList: $hhaDocumentList, blsDocumentList: $blsDocumentList, tbDocumentList: $tbDocumentList, covidDocumentList: $covidDocumentList, referenceList: $referenceList, petsList: $petsList, languageList: $languageList, serviceList: $serviceList, isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected, isFormSubmitSuccess: $isFormSubmitSuccess, nextClicked: $nextClicked, listUpdated: $listUpdated, isExperianceSelected: $isExperianceSelected, isSmokerSelected: $isSmokerSelected, isTransportationSelected: $isTransportationSelected, isPetsSelected: $isPetsSelected, isLanguagesSelected: $isLanguagesSelected, isLoading: $isLoading, isInitialLoading: $isInitialLoading, isCityApiCalling: $isCityApiCalling, selectedGenderId: $selectedGenderId, languagePaginationPage: $languagePaginationPage, statePaginationPage: $statePaginationPage, cityPaginationPage: $cityPaginationPage, caregiverServiceListIndex: $caregiverServiceListIndex, personalDetailsOption: $personalDetailsOption, genderOption: $genderOption, documentOption: $documentOption, stateOption: $stateOption, cityOption: $cityOption, petListOption: $petListOption, yearsOption: $yearsOption, languageListOption: $languageListOption, getServiceOption: $getServiceOption, relationOption: $relationOption, qualificationDetailsOption: $qualificationDetailsOption, preferenceDetailsOption: $preferenceDetailsOption, referenceOption: $referenceOption, submitServiceOption: $submitServiceOption, submitBuildProfileOption: $submitBuildProfileOption, submitAccountDetailsOption: $submitAccountDetailsOption)';
   }
 
   @override
@@ -19351,10 +20901,16 @@ class _$_OnboardingState implements _OnboardingState {
                 other.isLoading == isLoading) &&
             (identical(other.isInitialLoading, isInitialLoading) ||
                 other.isInitialLoading == isInitialLoading) &&
+            (identical(other.isCityApiCalling, isCityApiCalling) ||
+                other.isCityApiCalling == isCityApiCalling) &&
             (identical(other.selectedGenderId, selectedGenderId) ||
                 other.selectedGenderId == selectedGenderId) &&
             (identical(other.languagePaginationPage, languagePaginationPage) ||
                 other.languagePaginationPage == languagePaginationPage) &&
+            (identical(other.statePaginationPage, statePaginationPage) ||
+                other.statePaginationPage == statePaginationPage) &&
+            (identical(other.cityPaginationPage, cityPaginationPage) ||
+                other.cityPaginationPage == cityPaginationPage) &&
             (identical(other.caregiverServiceListIndex, caregiverServiceListIndex) ||
                 other.caregiverServiceListIndex == caregiverServiceListIndex) &&
             (identical(other.personalDetailsOption, personalDetailsOption) ||
@@ -19375,11 +20931,8 @@ class _$_OnboardingState implements _OnboardingState {
                 other.languageListOption == languageListOption) &&
             (identical(other.getServiceOption, getServiceOption) ||
                 other.getServiceOption == getServiceOption) &&
-            (identical(other.relationOption, relationOption) ||
-                other.relationOption == relationOption) &&
-            (identical(other.qualificationDetailsOption, qualificationDetailsOption) ||
-                other.qualificationDetailsOption ==
-                    qualificationDetailsOption) &&
+            (identical(other.relationOption, relationOption) || other.relationOption == relationOption) &&
+            (identical(other.qualificationDetailsOption, qualificationDetailsOption) || other.qualificationDetailsOption == qualificationDetailsOption) &&
             (identical(other.preferenceDetailsOption, preferenceDetailsOption) || other.preferenceDetailsOption == preferenceDetailsOption) &&
             (identical(other.referenceOption, referenceOption) || other.referenceOption == referenceOption) &&
             (identical(other.submitServiceOption, submitServiceOption) || other.submitServiceOption == submitServiceOption) &&
@@ -19414,8 +20967,11 @@ class _$_OnboardingState implements _OnboardingState {
         isLanguagesSelected,
         isLoading,
         isInitialLoading,
+        isCityApiCalling,
         selectedGenderId,
         languagePaginationPage,
+        statePaginationPage,
+        cityPaginationPage,
         caregiverServiceListIndex,
         personalDetailsOption,
         genderOption,
@@ -19468,8 +21024,11 @@ abstract class _OnboardingState implements OnboardingState {
       required final int isLanguagesSelected,
       required final bool isLoading,
       required final bool isInitialLoading,
+      required final bool isCityApiCalling,
       required final int selectedGenderId,
       required final int languagePaginationPage,
+      required final int statePaginationPage,
+      required final int cityPaginationPage,
       required final int caregiverServiceListIndex,
       required final Option<Either<ApiErrorHandler, PersonalDetailsResponse>>
           personalDetailsOption,
@@ -19553,9 +21112,15 @@ abstract class _OnboardingState implements OnboardingState {
   @override
   bool get isInitialLoading;
   @override
+  bool get isCityApiCalling;
+  @override
   int get selectedGenderId;
   @override
   int get languagePaginationPage;
+  @override
+  int get statePaginationPage;
+  @override
+  int get cityPaginationPage;
   @override
   int get caregiverServiceListIndex;
   @override

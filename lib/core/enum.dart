@@ -59,6 +59,7 @@ enum AppString {
   transactionDetails("Transaction Details"),
   qualifiedForCareAmbassador("Qualified for care ambassador's training ."),
   caregiverCreation("Care Ambassador Creation"),
+  selectYourStateFirst("Please select your state first"),
   onBoarding("On-boarding"),
   id("ID"),
   slNo("SL No"),
