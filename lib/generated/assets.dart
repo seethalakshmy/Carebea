@@ -13,7 +13,9 @@ class Assets {
   static const String iconsExclamation = 'assets/icons/exclamation.svg';
   static const String iconsIcActive = 'assets/icons/ic_active.svg';
   static const String iconsIcArrowDown = 'assets/icons/ic_arrow_down.svg';
+  static const String iconsIcCalendar = 'assets/icons/ic_calendar.svg';
   static const String iconsIcCheck = 'assets/icons/ic_check.svg';
+  static const String iconsIcClock = 'assets/icons/ic_clock.svg';
   static const String iconsIcCompleted = 'assets/icons/ic_completed.svg';
   static const String iconsIcDelete = 'assets/icons/ic_delete.svg';
   static const String iconsIcEdit = 'assets/icons/ic_edit.svg';
@@ -37,6 +39,8 @@ class Assets {
   static const String iconsIcUncheck = 'assets/icons/ic_uncheck.svg';
   static const String iconsIcWarning = 'assets/icons/ic_warning.svg';
   static const String iconsImageNotFound = 'assets/icons/image_not_found.png';
+  static const String iconsNotAvailableCaregivers =
+      'assets/icons/ic_not_available_caregivers.svg';
   static const String iconsPlusCircle = 'assets/icons/plus-circle.svg';
   static const String iconsRoundClose = 'assets/icons/round_close.svg';
   static const String iconsSearchIcon = 'assets/icons/search_icon.svg';

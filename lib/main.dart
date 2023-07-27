@@ -4,8 +4,8 @@ import 'package:admin_580_tech/application/bloc/caregiver_verification/caregiver
 import 'package:admin_580_tech/core/hive/hive_utils.dart';
 import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/infrastructure/caregiver_verification/caregivers_verification_repository.dart';
+import 'package:admin_580_tech/infrastructure/service_request_management/service_request_management_repository.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.dart';
-import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:amplify_storage_s3/amplify_storage_s3.dart';
@@ -14,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'amplifyconfiguration.dart';
 import 'application/bloc/form_validation/form_validation_bloc.dart';
+import 'application/bloc/service_request_management/service_request_management_bloc.dart';
 import 'core/config/environment.dart';
 import 'infrastructure/shared_preference/shared_preff_util.dart';
 
@@ -60,6 +61,9 @@ class _MyAppState extends State<MyApp> {
             create: (_) =>
                 CareGiverVerificationBloc(CareGiverVerificationRepository())),
         BlocProvider(create: (_) => FormValidationBloc()),
+        BlocProvider<ServiceRequestManagementBloc>(
+            create: (context) => ServiceRequestManagementBloc(
+                ServiceRequestManagementRepository())),
       ],
       child: MaterialApp.router(
         routerDelegate: _appRouter.delegate(),
