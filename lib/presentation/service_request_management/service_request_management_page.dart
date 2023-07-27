@@ -5,14 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/service_request_management/service_request_management_bloc.dart';
-import '../../core/custom_debugger.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
 import '../../domain/caregivers/model/types.dart';
 import '../../domain/service_request_management/model/service_request_response.dart';
-import '../../infrastructure/service_request_management/service_request_management_repository.dart';
 import '../caregivers/widgets/tab_item.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
@@ -38,58 +36,54 @@ class ServiceRequestManagementPage extends StatefulWidget {
 
 class _ServiceRequestManagementPageState
     extends State<ServiceRequestManagementPage> {
-  late ServiceRequestManagementBloc _serviceRequestManagementBloc;
   List<Services> serviceList = [];
 
   final int _limit = 10;
   int _tabType = 1;
-  Types selectedType = Types(id: 1, title: AppString.pendingServices.val, isSelected: true);
+  Types selectedType =
+      Types(id: 1, title: AppString.pendingServices.val, isSelected: true);
 
   @override
   void initState() {
     super.initState();
-    _serviceRequestManagementBloc =
-        ServiceRequestManagementBloc(ServiceRequestManagementRepository());
+    context.read<ServiceRequestManagementBloc>().add(
+        ServiceRequestManagementEvent.getServiceList(Types(
+            id: 1, title: AppString.pendingServices.val, isSelected: true)));
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ServiceRequestManagementBloc>(
-      create: (context) => _serviceRequestManagementBloc
-        ..add(ServiceRequestManagementEvent.getServiceList(Types(
-            id: 1, title: AppString.pendingServices.val, isSelected: true))),
-      child: Column(
-        children: [
-          HeaderView(
-            title: AppString.serviceRequestManagement.val,
-          ),
-          CustomSizedBox(height: DBL.fifty.val),
-          BlocBuilder<ServiceRequestManagementBloc,
-              ServiceRequestManagementState>(
-            builder: (context, state) {
-              return Column(
-                children: [
-                  _tabView(state),
-                  const SizedBox(
-                    height: 20,
+    return Column(
+      children: [
+        HeaderView(
+          title: AppString.serviceRequestManagement.val,
+        ),
+        CustomSizedBox(height: DBL.fifty.val),
+        BlocBuilder<ServiceRequestManagementBloc,
+            ServiceRequestManagementState>(
+          builder: (context, state) {
+            return Column(
+              children: [
+                _tabView(state),
+                const SizedBox(
+                  height: 20,
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: _statusDropDown(context),
                   ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 20),
-                      child: _statusDropDown(context),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  _cardView(state, context)
-                ],
-              );
-            },
-          )
-        ],
-      ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                _cardView(state, context)
+              ],
+            );
+          },
+        )
+      ],
     );
   }
 
@@ -347,8 +341,11 @@ class _ServiceRequestManagementPageState
   CustomDropdown<int> _statusDropDown(BuildContext context) {
     return CustomDropdown<int>(
       onChange: (int value, int index) {
-        _serviceRequestManagementBloc.filterId = value;
-        _serviceRequestManagementBloc.add(ServiceRequestManagementEvent.getServiceList(selectedType));
+        ///todo change later to bloc event
+        // _serviceRequestManagementBloc.filterId = value;
+        context
+            .read<ServiceRequestManagementBloc>()
+            .add(ServiceRequestManagementEvent.getServiceList(selectedType));
       },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,

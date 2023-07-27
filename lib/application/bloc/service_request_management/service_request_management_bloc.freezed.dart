@@ -21,6 +21,9 @@ mixin _$ServiceRequestManagementEvent {
     required TResult Function() started,
     required TResult Function(Types type) isSelectedTab,
     required TResult Function(Types type) getServiceList,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +31,9 @@ mixin _$ServiceRequestManagementEvent {
     TResult? Function()? started,
     TResult? Function(Types type)? isSelectedTab,
     TResult? Function(Types type)? getServiceList,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +41,9 @@ mixin _$ServiceRequestManagementEvent {
     TResult Function()? started,
     TResult Function(Types type)? isSelectedTab,
     TResult Function(Types type)? getServiceList,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +52,9 @@ mixin _$ServiceRequestManagementEvent {
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_GetServiceList value) getServiceList,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +62,9 @@ mixin _$ServiceRequestManagementEvent {
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_GetServiceList value)? getServiceList,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +72,9 @@ mixin _$ServiceRequestManagementEvent {
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_GetServiceList value)? getServiceList,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -123,6 +141,9 @@ class _$_Started implements _Started {
     required TResult Function() started,
     required TResult Function(Types type) isSelectedTab,
     required TResult Function(Types type) getServiceList,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
   }) {
     return started();
   }
@@ -133,6 +154,9 @@ class _$_Started implements _Started {
     TResult? Function()? started,
     TResult? Function(Types type)? isSelectedTab,
     TResult? Function(Types type)? getServiceList,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
   }) {
     return started?.call();
   }
@@ -143,6 +167,9 @@ class _$_Started implements _Started {
     TResult Function()? started,
     TResult Function(Types type)? isSelectedTab,
     TResult Function(Types type)? getServiceList,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -157,6 +184,9 @@ class _$_Started implements _Started {
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_GetServiceList value) getServiceList,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
   }) {
     return started(this);
   }
@@ -167,6 +197,9 @@ class _$_Started implements _Started {
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_GetServiceList value)? getServiceList,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
   }) {
     return started?.call(this);
   }
@@ -177,6 +210,9 @@ class _$_Started implements _Started {
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_GetServiceList value)? getServiceList,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -257,6 +293,9 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     required TResult Function() started,
     required TResult Function(Types type) isSelectedTab,
     required TResult Function(Types type) getServiceList,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
   }) {
     return isSelectedTab(type);
   }
@@ -267,6 +306,9 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     TResult? Function()? started,
     TResult? Function(Types type)? isSelectedTab,
     TResult? Function(Types type)? getServiceList,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
   }) {
     return isSelectedTab?.call(type);
   }
@@ -277,6 +319,9 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     TResult Function()? started,
     TResult Function(Types type)? isSelectedTab,
     TResult Function(Types type)? getServiceList,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
     required TResult orElse(),
   }) {
     if (isSelectedTab != null) {
@@ -291,6 +336,9 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_GetServiceList value) getServiceList,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
   }) {
     return isSelectedTab(this);
   }
@@ -301,6 +349,9 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_GetServiceList value)? getServiceList,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
   }) {
     return isSelectedTab?.call(this);
   }
@@ -311,6 +362,9 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_GetServiceList value)? getServiceList,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
     required TResult orElse(),
   }) {
     if (isSelectedTab != null) {
@@ -396,6 +450,9 @@ class _$_GetServiceList implements _GetServiceList {
     required TResult Function() started,
     required TResult Function(Types type) isSelectedTab,
     required TResult Function(Types type) getServiceList,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
   }) {
     return getServiceList(type);
   }
@@ -406,6 +463,9 @@ class _$_GetServiceList implements _GetServiceList {
     TResult? Function()? started,
     TResult? Function(Types type)? isSelectedTab,
     TResult? Function(Types type)? getServiceList,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
   }) {
     return getServiceList?.call(type);
   }
@@ -416,6 +476,9 @@ class _$_GetServiceList implements _GetServiceList {
     TResult Function()? started,
     TResult Function(Types type)? isSelectedTab,
     TResult Function(Types type)? getServiceList,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
     required TResult orElse(),
   }) {
     if (getServiceList != null) {
@@ -430,6 +493,9 @@ class _$_GetServiceList implements _GetServiceList {
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_GetServiceList value) getServiceList,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
   }) {
     return getServiceList(this);
   }
@@ -440,6 +506,9 @@ class _$_GetServiceList implements _GetServiceList {
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_GetServiceList value)? getServiceList,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
   }) {
     return getServiceList?.call(this);
   }
@@ -450,6 +519,9 @@ class _$_GetServiceList implements _GetServiceList {
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_GetServiceList value)? getServiceList,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
     required TResult orElse(),
   }) {
     if (getServiceList != null) {
@@ -469,10 +541,484 @@ abstract class _GetServiceList implements ServiceRequestManagementEvent {
 }
 
 /// @nodoc
+abstract class _$$_SetDateCopyWith<$Res> {
+  factory _$$_SetDateCopyWith(
+          _$_SetDate value, $Res Function(_$_SetDate) then) =
+      __$$_SetDateCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DateTime selectedDate});
+}
+
+/// @nodoc
+class __$$_SetDateCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res, _$_SetDate>
+    implements _$$_SetDateCopyWith<$Res> {
+  __$$_SetDateCopyWithImpl(_$_SetDate _value, $Res Function(_$_SetDate) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? selectedDate = null,
+  }) {
+    return _then(_$_SetDate(
+      null == selectedDate
+          ? _value.selectedDate
+          : selectedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SetDate implements _SetDate {
+  const _$_SetDate(this.selectedDate);
+
+  @override
+  final DateTime selectedDate;
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.setDate(selectedDate: $selectedDate)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SetDate &&
+            (identical(other.selectedDate, selectedDate) ||
+                other.selectedDate == selectedDate));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, selectedDate);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SetDateCopyWith<_$_SetDate> get copyWith =>
+      __$$_SetDateCopyWithImpl<_$_SetDate>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(Types type) isSelectedTab,
+    required TResult Function(Types type) getServiceList,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+  }) {
+    return setDate(selectedDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(Types type)? isSelectedTab,
+    TResult? Function(Types type)? getServiceList,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+  }) {
+    return setDate?.call(selectedDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(Types type)? isSelectedTab,
+    TResult Function(Types type)? getServiceList,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    required TResult orElse(),
+  }) {
+    if (setDate != null) {
+      return setDate(selectedDate);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_GetServiceList value) getServiceList,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+  }) {
+    return setDate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_GetServiceList value)? getServiceList,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+  }) {
+    return setDate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_GetServiceList value)? getServiceList,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    required TResult orElse(),
+  }) {
+    if (setDate != null) {
+      return setDate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetDate implements ServiceRequestManagementEvent {
+  const factory _SetDate(final DateTime selectedDate) = _$_SetDate;
+
+  DateTime get selectedDate;
+  @JsonKey(ignore: true)
+  _$$_SetDateCopyWith<_$_SetDate> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SetFromTimeCopyWith<$Res> {
+  factory _$$_SetFromTimeCopyWith(
+          _$_SetFromTime value, $Res Function(_$_SetFromTime) then) =
+      __$$_SetFromTimeCopyWithImpl<$Res>;
+  @useResult
+  $Res call({TimeOfDay time});
+}
+
+/// @nodoc
+class __$$_SetFromTimeCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res, _$_SetFromTime>
+    implements _$$_SetFromTimeCopyWith<$Res> {
+  __$$_SetFromTimeCopyWithImpl(
+      _$_SetFromTime _value, $Res Function(_$_SetFromTime) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? time = null,
+  }) {
+    return _then(_$_SetFromTime(
+      null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as TimeOfDay,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SetFromTime implements _SetFromTime {
+  const _$_SetFromTime(this.time);
+
+  @override
+  final TimeOfDay time;
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.setFromTime(time: $time)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SetFromTime &&
+            (identical(other.time, time) || other.time == time));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, time);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SetFromTimeCopyWith<_$_SetFromTime> get copyWith =>
+      __$$_SetFromTimeCopyWithImpl<_$_SetFromTime>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(Types type) isSelectedTab,
+    required TResult Function(Types type) getServiceList,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+  }) {
+    return setFromTime(time);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(Types type)? isSelectedTab,
+    TResult? Function(Types type)? getServiceList,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+  }) {
+    return setFromTime?.call(time);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(Types type)? isSelectedTab,
+    TResult Function(Types type)? getServiceList,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    required TResult orElse(),
+  }) {
+    if (setFromTime != null) {
+      return setFromTime(time);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_GetServiceList value) getServiceList,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+  }) {
+    return setFromTime(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_GetServiceList value)? getServiceList,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+  }) {
+    return setFromTime?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_GetServiceList value)? getServiceList,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    required TResult orElse(),
+  }) {
+    if (setFromTime != null) {
+      return setFromTime(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetFromTime implements ServiceRequestManagementEvent {
+  const factory _SetFromTime(final TimeOfDay time) = _$_SetFromTime;
+
+  TimeOfDay get time;
+  @JsonKey(ignore: true)
+  _$$_SetFromTimeCopyWith<_$_SetFromTime> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SetToTimeCopyWith<$Res> {
+  factory _$$_SetToTimeCopyWith(
+          _$_SetToTime value, $Res Function(_$_SetToTime) then) =
+      __$$_SetToTimeCopyWithImpl<$Res>;
+  @useResult
+  $Res call({TimeOfDay time});
+}
+
+/// @nodoc
+class __$$_SetToTimeCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res, _$_SetToTime>
+    implements _$$_SetToTimeCopyWith<$Res> {
+  __$$_SetToTimeCopyWithImpl(
+      _$_SetToTime _value, $Res Function(_$_SetToTime) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? time = null,
+  }) {
+    return _then(_$_SetToTime(
+      null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as TimeOfDay,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SetToTime implements _SetToTime {
+  const _$_SetToTime(this.time);
+
+  @override
+  final TimeOfDay time;
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.setToTime(time: $time)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SetToTime &&
+            (identical(other.time, time) || other.time == time));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, time);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SetToTimeCopyWith<_$_SetToTime> get copyWith =>
+      __$$_SetToTimeCopyWithImpl<_$_SetToTime>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(Types type) isSelectedTab,
+    required TResult Function(Types type) getServiceList,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+  }) {
+    return setToTime(time);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(Types type)? isSelectedTab,
+    TResult? Function(Types type)? getServiceList,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+  }) {
+    return setToTime?.call(time);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(Types type)? isSelectedTab,
+    TResult Function(Types type)? getServiceList,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    required TResult orElse(),
+  }) {
+    if (setToTime != null) {
+      return setToTime(time);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_GetServiceList value) getServiceList,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+  }) {
+    return setToTime(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_GetServiceList value)? getServiceList,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+  }) {
+    return setToTime?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_GetServiceList value)? getServiceList,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    required TResult orElse(),
+  }) {
+    if (setToTime != null) {
+      return setToTime(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetToTime implements ServiceRequestManagementEvent {
+  const factory _SetToTime(final TimeOfDay time) = _$_SetToTime;
+
+  TimeOfDay get time;
+  @JsonKey(ignore: true)
+  _$$_SetToTimeCopyWith<_$_SetToTime> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ServiceRequestManagementState {
   List<Types> get types => throw _privateConstructorUsedError;
   bool? get isLoading => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+  DateTime get selectedDate => throw _privateConstructorUsedError;
+  TimeOfDay? get fromTime => throw _privateConstructorUsedError;
+  TimeOfDay? get toTime => throw _privateConstructorUsedError;
   List<Services> get services => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -492,6 +1038,9 @@ abstract class $ServiceRequestManagementStateCopyWith<$Res> {
       {List<Types> types,
       bool? isLoading,
       String? error,
+      DateTime selectedDate,
+      TimeOfDay? fromTime,
+      TimeOfDay? toTime,
       List<Services> services});
 }
 
@@ -512,6 +1061,9 @@ class _$ServiceRequestManagementStateCopyWithImpl<$Res,
     Object? types = null,
     Object? isLoading = freezed,
     Object? error = freezed,
+    Object? selectedDate = null,
+    Object? fromTime = freezed,
+    Object? toTime = freezed,
     Object? services = null,
   }) {
     return _then(_value.copyWith(
@@ -527,6 +1079,18 @@ class _$ServiceRequestManagementStateCopyWithImpl<$Res,
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      selectedDate: null == selectedDate
+          ? _value.selectedDate
+          : selectedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      fromTime: freezed == fromTime
+          ? _value.fromTime
+          : fromTime // ignore: cast_nullable_to_non_nullable
+              as TimeOfDay?,
+      toTime: freezed == toTime
+          ? _value.toTime
+          : toTime // ignore: cast_nullable_to_non_nullable
+              as TimeOfDay?,
       services: null == services
           ? _value.services
           : services // ignore: cast_nullable_to_non_nullable
@@ -548,6 +1112,9 @@ abstract class _$$_ServiceRequestManagementStateCopyWith<$Res>
       {List<Types> types,
       bool? isLoading,
       String? error,
+      DateTime selectedDate,
+      TimeOfDay? fromTime,
+      TimeOfDay? toTime,
       List<Services> services});
 }
 
@@ -567,6 +1134,9 @@ class __$$_ServiceRequestManagementStateCopyWithImpl<$Res>
     Object? types = null,
     Object? isLoading = freezed,
     Object? error = freezed,
+    Object? selectedDate = null,
+    Object? fromTime = freezed,
+    Object? toTime = freezed,
     Object? services = null,
   }) {
     return _then(_$_ServiceRequestManagementState(
@@ -582,6 +1152,18 @@ class __$$_ServiceRequestManagementStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      selectedDate: null == selectedDate
+          ? _value.selectedDate
+          : selectedDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      fromTime: freezed == fromTime
+          ? _value.fromTime
+          : fromTime // ignore: cast_nullable_to_non_nullable
+              as TimeOfDay?,
+      toTime: freezed == toTime
+          ? _value.toTime
+          : toTime // ignore: cast_nullable_to_non_nullable
+              as TimeOfDay?,
       services: null == services
           ? _value._services
           : services // ignore: cast_nullable_to_non_nullable
@@ -598,6 +1180,9 @@ class _$_ServiceRequestManagementState
       {required final List<Types> types,
       this.isLoading,
       required this.error,
+      required this.selectedDate,
+      this.fromTime,
+      this.toTime,
       required final List<Services> services})
       : _types = types,
         _services = services;
@@ -614,6 +1199,12 @@ class _$_ServiceRequestManagementState
   final bool? isLoading;
   @override
   final String? error;
+  @override
+  final DateTime selectedDate;
+  @override
+  final TimeOfDay? fromTime;
+  @override
+  final TimeOfDay? toTime;
   final List<Services> _services;
   @override
   List<Services> get services {
@@ -624,7 +1215,7 @@ class _$_ServiceRequestManagementState
 
   @override
   String toString() {
-    return 'ServiceRequestManagementState(types: $types, isLoading: $isLoading, error: $error, services: $services)';
+    return 'ServiceRequestManagementState(types: $types, isLoading: $isLoading, error: $error, selectedDate: $selectedDate, fromTime: $fromTime, toTime: $toTime, services: $services)';
   }
 
   @override
@@ -636,6 +1227,11 @@ class _$_ServiceRequestManagementState
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error) &&
+            (identical(other.selectedDate, selectedDate) ||
+                other.selectedDate == selectedDate) &&
+            (identical(other.fromTime, fromTime) ||
+                other.fromTime == fromTime) &&
+            (identical(other.toTime, toTime) || other.toTime == toTime) &&
             const DeepCollectionEquality().equals(other._services, _services));
   }
 
@@ -645,6 +1241,9 @@ class _$_ServiceRequestManagementState
       const DeepCollectionEquality().hash(_types),
       isLoading,
       error,
+      selectedDate,
+      fromTime,
+      toTime,
       const DeepCollectionEquality().hash(_services));
 
   @JsonKey(ignore: true)
@@ -661,6 +1260,9 @@ abstract class _ServiceRequestManagementState
           {required final List<Types> types,
           final bool? isLoading,
           required final String? error,
+          required final DateTime selectedDate,
+          final TimeOfDay? fromTime,
+          final TimeOfDay? toTime,
           required final List<Services> services}) =
       _$_ServiceRequestManagementState;
 
@@ -670,6 +1272,12 @@ abstract class _ServiceRequestManagementState
   bool? get isLoading;
   @override
   String? get error;
+  @override
+  DateTime get selectedDate;
+  @override
+  TimeOfDay? get fromTime;
+  @override
+  TimeOfDay? get toTime;
   @override
   List<Services> get services;
   @override

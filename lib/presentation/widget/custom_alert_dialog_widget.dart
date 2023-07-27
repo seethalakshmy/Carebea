@@ -11,12 +11,14 @@ class CustomAlertDialogWidget extends StatelessWidget {
       required this.heading,
       required this.child,
       this.height,
+      this.backgroundColor,
       this.width});
 
   final String heading;
   final Widget child;
   final double? height;
   final double? width;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class CustomAlertDialogWidget extends StatelessWidget {
             width: width ?? 1072,
             height: height ?? 550,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: backgroundColor ?? Colors.white,
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(DBL.five.val),
               boxShadow: [

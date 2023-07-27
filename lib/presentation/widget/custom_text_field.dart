@@ -20,7 +20,6 @@ class CTextField extends StatelessWidget {
     this.textCapitalization = TextCapitalization.none,
     this.errorText,
     this.changeColor,
-    this.readOnly = false,
     this.onIconTap,
     this.suffixIcon,
     this.validator,
@@ -36,6 +35,7 @@ class CTextField extends StatelessWidget {
     this.inputFormatter,
     this.borderColor,
     this.isIgnore = false,
+    this.isReadOnly = false,
   })  : assert(controller != null),
         super(key: key);
   final TextEditingController? controller;
@@ -50,7 +50,6 @@ class CTextField extends StatelessWidget {
   final TextCapitalization textCapitalization;
   final String? errorText;
   final bool? changeColor;
-  final bool? readOnly;
   final void Function()? onIconTap;
   final Widget? suffixIcon;
   final String? Function(String?)? validator;
@@ -66,9 +65,11 @@ class CTextField extends StatelessWidget {
   final TextAlignVertical? textAlignVertical;
   final List<TextInputFormatter>? inputFormatter;
   final bool isIgnore;
-
+  final bool isReadOnly;
   @override
   Widget build(BuildContext context) {
+    /// used ignore pointer instead of read only cause in read they have their own border color
+    /// and disable text color so with other widget it might little boring, will change later
     return IgnorePointer(
       ignoring: isIgnore,
       child: CustomSizedBox(
@@ -85,12 +86,13 @@ class CTextField extends StatelessWidget {
           maxLines: maxLines ?? INT.one.val,
           minLines: INT.one.val,
           onTap: onTap,
+          readOnly: isReadOnly,
           keyboardType: keyBoardType,
           textCapitalization: textCapitalization,
           // cursorColor: AppColor.white.val,
           style: TextStyle(fontSize: 15, color: textColor),
           decoration: InputDecoration(
-            counter: Offstage(),
+            counter: const Offstage(),
             hintText: hintText,
             hintStyle: hintStyle,
             suffixIconConstraints: BoxConstraints(minWidth: DBL.fifty.val),
@@ -123,7 +125,10 @@ class CTextField extends StatelessWidget {
               borderRadius: BorderRadius.circular(DBL.five.val),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColor.primaryColor.val),
+              borderSide: BorderSide(
+                  color: isReadOnly
+                      ? AppColor.borderColor.val
+                      : AppColor.primaryColor.val),
               borderRadius: BorderRadius.circular(DBL.five.val),
             ),
           ),
