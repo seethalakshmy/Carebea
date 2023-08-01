@@ -287,7 +287,8 @@ class _ReferenceViewState extends State<ReferenceView> {
         CustomSizedBox(height: DBL.twelve.val),
         StateDropDown(
           onSearchChanged: (val) {
-            widget.onboardingBloc.add(const OnboardingEvent.stateList());
+            widget.onboardingBloc.add(OnboardingEvent.stateList(
+                stateSearchQuery: val!, wantLoading: false));
             widget.onboardingBloc.stateSearchKey = val;
           },
           searchController: widget.onboardingBloc.stateSearchController,
@@ -299,9 +300,11 @@ class _ReferenceViewState extends State<ReferenceView> {
             widget.onboardingBloc.selectedState = name.toString();
             print("state value in onchanged : $name");
             widget.onboardingBloc.stateId = id;
-            widget.onboardingBloc.add(const OnboardingEvent.cityList());
+            widget.onboardingBloc.add(const OnboardingEvent.cityList(
+                searchQuery: "", wantLoading: false));
           },
           selectedValue: widget.onboardingBloc.selectedState,
+          onboardingBloc: widget.onboardingBloc,
         ),
       ],
     );
@@ -314,10 +317,11 @@ class _ReferenceViewState extends State<ReferenceView> {
         _labelWidget(AppString.city.val),
         CustomSizedBox(height: DBL.twelve.val),
         CityDropDown(
+          onboardingBloc: widget.onboardingBloc,
           searchController: widget.onboardingBloc.citySearchController,
           onSearchChanged: (val) {
-            widget.onboardingBloc.add(const OnboardingEvent.cityList());
-            widget.onboardingBloc.citySearchKey = val;
+            widget.onboardingBloc.add(OnboardingEvent.cityList(
+                searchQuery: val!, wantLoading: false));
           },
           errorText: widget.onboardingBloc.selectedCity.isEmpty
               ? AppString.emptyCity.val

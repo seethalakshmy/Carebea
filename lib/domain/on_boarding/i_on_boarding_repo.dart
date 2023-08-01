@@ -8,15 +8,13 @@ import 'package:dartz/dartz.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/city_list_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/gender_list_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
-import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_response.dart';
-import 'models/common_response.dart';
 import '../../presentation/on_boarding/modules/preference/models/language_list_response.dart';
-import '../../presentation/on_boarding/modules/services/models/get_service_response.dart';
-import '../../presentation/on_boarding/modules/services/models/service_list_response.dart';
 import 'models/common_response.dart';
 import 'models/preferences/pet_list_response.dart';
 import 'models/preferences/preference_request_model.dart';
 import 'models/preferences/years_of_experience_response.dart';
+import 'models/services/get_services_response.dart';
+import 'models/services/service_request_model.dart';
 
 abstract class IOnBoardingRepo {
   Future<Either<ApiErrorHandler, GenderListResponse>> getGenderList();
@@ -38,6 +36,7 @@ abstract class IOnBoardingRepo {
   });
 
   Future<Either<ApiErrorHandler, DocumentListResponse>> getDocumentList();
+
   Future<Either<ApiErrorHandler, RelationResponse>> getRelationList();
 
   Future<Either<ApiErrorHandler, PetListResponse>> getPetList(
@@ -77,6 +76,7 @@ abstract class IOnBoardingRepo {
     required TbOrPpdTestDetails tbDetails,
     required bool haveCovidVaccination,
     required CovidVaccinationDetails covidDetails,
+    required bool isReUpload,
   });
 
   Future<Either<ApiErrorHandler, CommonResponse>> preferenceSubmit({
@@ -94,9 +94,22 @@ abstract class IOnBoardingRepo {
 
   Future<Either<ApiErrorHandler, CommonResponse>> servicesSubmit({
     required String userId,
-    required ServicesModel services,
+    required ServicesRequest services,
   });
 
-  Future<Either<ApiErrorHandler, GetServiceResponse>> getServices(
-      {required String userId});
+  Future<Either<ApiErrorHandler, GetServicesResponse>> getServices();
+
+  Future<Either<ApiErrorHandler, CommonResponse>> buildProfileSubmit({
+    required String userId,
+    required String aboutYou,
+    required String hobbies,
+    required String whyLoveBeingCaregiver,
+  });
+
+  Future<Either<ApiErrorHandler, CommonResponse>> accountDetailsSubmit({
+    required String userId,
+    required String accountHolderName,
+    required String routingNumber,
+    required String accountNumber,
+  });
 }

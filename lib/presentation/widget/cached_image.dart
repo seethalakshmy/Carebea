@@ -14,6 +14,9 @@ class CachedImage extends StatelessWidget {
     this.isCircle = false,
     this.isDocImage = false,
     this.isDetailPage = false,
+    this.placeHolderWidth,
+    this.placeHolderHeight,
+    this.circleRadius,
   }) : super(key: key);
 
   final String? imgUrl;
@@ -23,6 +26,9 @@ class CachedImage extends StatelessWidget {
   final bool isCircle;
   final bool isDocImage;
   final bool isDetailPage;
+  final double? placeHolderWidth;
+  final double? placeHolderHeight;
+  final double? circleRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +36,7 @@ class CachedImage extends StatelessWidget {
         ? CachedNetworkImage(
             imageUrl: imgUrl ?? "",
             imageBuilder: (context, imageProvider) => CircleAvatar(
-              radius: 20,
+              radius: circleRadius ?? 20,
               backgroundImage: imageProvider,
             ),
             placeholder: (context, url) => _circlePersonView(),
@@ -69,14 +75,15 @@ class CachedImage extends StatelessWidget {
               )
             : Image.asset(
                 IMG.person.val,
-                height: DBL.forty.val,
-                width: DBL.forty.val,
+                height: placeHolderHeight ?? DBL.forty.val,
+                width: placeHolderWidth ?? DBL.forty.val,
+                fit: BoxFit.fill,
               );
   }
 
   _circlePersonView() {
     return CircleAvatar(
-      radius: 20,
+      radius: circleRadius ?? 20,
       backgroundImage: AssetImage(IMG.person.val),
     );
   }

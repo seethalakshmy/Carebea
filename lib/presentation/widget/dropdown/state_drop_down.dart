@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/application/bloc/onboarding/onboarding_bloc.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:flutter/material.dart';
 
@@ -8,12 +9,13 @@ import '../../on_boarding/widgets/drop_down.dart';
 import '../custom_text.dart';
 
 class StateDropDown extends StatelessWidget {
-  const StateDropDown(
+  StateDropDown(
       {Key? key,
       this.errorText,
       required this.items,
       required this.onChange,
       required this.selectedValue,
+      required this.onboardingBloc,
       this.onSearchChanged,
       this.searchController})
       : super(key: key);
@@ -23,12 +25,27 @@ class StateDropDown extends StatelessWidget {
   final String? selectedValue;
   final TextEditingController? searchController;
   final Function? onSearchChanged;
+  final OnboardingBloc onboardingBloc;
+  final ScrollController scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
+    scrollController.addListener(() {
+      if (scrollController.position.atEdge) {
+        if (scrollController.position.pixels == 0) {
+          print("scrolled to the top");
+          // Scrolled to the top
+        } else {
+          onboardingBloc.statePage++;
+          onboardingBloc.add(const OnboardingEvent.stateList(
+              stateSearchQuery: "", wantLoading: false));
+        }
+      }
+    });
     return CustomSizedBox(
       width: DBL.twoEighty.val,
       child: DropdownWidget(
+          scrollController: scrollController,
           showSearchBox: true,
           searchController: searchController,
           onSearchChanged: (val) {
@@ -50,7 +67,9 @@ class StateDropDown extends StatelessWidget {
                   ))
               .toList(),
           onChange: (value, index) {
-            onChange(items[index].id, items[index].name);
+            onChange(items[index].name);
+            onboardingBloc.stateId = items[index].id!;
+            onboardingBloc.selectedStateName = items[index].name ?? "";
           },
           child: CustomText(selectedValue ?? "")),
     );

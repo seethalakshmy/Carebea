@@ -11,8 +11,6 @@ import 'package:admin_580_tech/domain/caregiver_verification/model/verify_respon
 import 'package:admin_580_tech/domain/common_response/common_response.dart';
 import 'package:admin_580_tech/domain/login/login_response.dart';
 import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
-import 'package:admin_580_tech/presentation/on_boarding/modules/services/models/get_service_response.dart';
-import 'package:admin_580_tech/presentation/on_boarding/modules/services/models/service_list_response.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -27,7 +25,6 @@ import '../../presentation/on_boarding/modules/personal_details/models/personal_
 import '../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
 import '../../presentation/on_boarding/modules/preference/models/language_list_response.dart';
 import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
-import '../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_response.dart';
 import '../../presentation/on_boarding/modules/reference/models/relation_response.dart';
 import '../admins/model/admin_get_response.dart';
 import '../caregiver_verification/model/reject_params.dart';
@@ -36,8 +33,11 @@ import '../on_boarding/models/common_response.dart';
 import '../on_boarding/models/preferences/pet_list_response.dart';
 import '../on_boarding/models/preferences/preference_request_model.dart';
 import '../on_boarding/models/preferences/years_of_experience_response.dart';
+import '../on_boarding/models/services/get_services_response.dart';
+import '../on_boarding/models/services/service_request_model.dart';
 import '../role_creation/model/module_response.dart';
 import '../role_creation/model/view_role_response.dart';
+import '../service_request_management/model/service_request_response.dart';
 
 part 'api_client.g.dart';
 
@@ -174,6 +174,7 @@ abstract class ApiClient {
     @Field('tb_or_ppd_test_details') TbOrPpdTestDetails tbDetails,
     @Field('covid_vaccination') bool haveCovidVaccination,
     @Field('covid_vaccination_details') CovidVaccinationDetails covidDetails,
+    @Field('is_reupload') bool isReUpload,
   );
 
   @POST("/admin/admin-cg-preferences")
@@ -190,11 +191,27 @@ abstract class ApiClient {
   @POST("/admin/admin-cg-services")
   Future<CommonResponse> submitServices(
     @Field('user_id') String userId,
-    @Field('services') ServicesModel services,
+    @Field('services') ServicesRequest services,
   );
 
-  @GET("/care-giver/services?")
-  Future<GetServiceResponse> getServices(@Query('user_id') String userId);
+  @GET("/common-data/get-services")
+  Future<GetServicesResponse> getServices();
+
+  @POST("/admin/admin-cg-profile")
+  Future<CommonResponse> submitBuildProfile(
+    @Field('user_id') String userId,
+    @Field('about_you') String aboutYou,
+    @Field('hobbies') String hobbies,
+    @Field('why_love_being_caregiver') String whyLoveBeingCaregiver,
+  );
+
+  @POST("/admin/admin-cg-acc-details")
+  Future<CommonResponse> submitAccountDetails(
+    @Field('user_id') String userId,
+    @Field('account_holder_name') String accountHolderName,
+    @Field('routing_number') String routingNumber,
+    @Field('account_number') String accountNumber,
+  );
 
   @POST("/admin/change-caregiver-status")
   Future<VerifyResponse> careGiverActiveOrInactive(
@@ -352,4 +369,44 @@ abstract class ApiClient {
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('status') String status);
+
+  @POST("/admin/pending-service-list")
+  Future<ServiceRequestResponse> getPendingRequests(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit,
+      @Field('filter_id') int filterId);
+
+  @POST("/admin/completed-service-list")
+  Future<ServiceRequestResponse> getCompletedRequests(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit,
+      @Field('filter_id') int filterId);
+
+  @POST("/admin/cancelled-service-list")
+  Future<ServiceRequestResponse> getCancelled(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit,
+      @Field('filter_id') int filterId);
+
+  @POST("/admin/upcoming-service-list")
+  Future<ServiceRequestResponse> getUpcomingRequests(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit,
+      @Field('filter_id') int filterId);
+
+  @POST("/admin/ongoing-service-list")
+  Future<ServiceRequestResponse> getOngoingRequests(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') int page,
+      @Field('limit') int limit,
+      @Field('filter_id') int filterId);
 }

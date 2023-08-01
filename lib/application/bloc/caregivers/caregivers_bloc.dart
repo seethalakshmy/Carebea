@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/custom_snackbar.dart';
-import '../../../domain/caregivers/model/Data.dart';
 import '../../../domain/caregivers/model/care_givers.dart';
 import '../../../domain/caregivers/model/types.dart';
 import '../../../infrastructure/caregivers/caregivers_repository.dart';
@@ -81,25 +80,24 @@ class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
-        final state = this.state;
-        Caregivers item = event.caregiver;
-        CareGiverResponse response = state.response ?? CareGiverResponse();
-        Data data = response.data ?? Data();
-        final index = data.caregivers!.indexOf(item);
-        List<Caregivers> careGiverList = data.caregivers!..remove(item);
-
-        if (item.isActive ?? false) {
-          careGiverList.insert(index, item.copyWith(isActive: false));
-        } else {
-          careGiverList.insert(index, item.copyWith(isActive: true));
-        }
-        final updatedResponse = response.copyWith(
-          data: data.copyWith(caregivers: careGiverList),
-        );
+        // final state = this.state;
+        // Caregivers item = event.caregiver;
+        // CareGiverResponse response = state.response ?? CareGiverResponse();
+        // Data data = response.data ?? Data();
+        // final index = data.caregivers!.indexOf(item);
+        // List<Caregivers> careGiverList = data.caregivers!..remove(item);
+        //
+        // if (item.isActive ?? false) {
+        //   careGiverList.insert(index, item.copyWith(isActive: false));
+        // } else {
+        //   careGiverList.insert(index, item.copyWith(isActive: true));
+        // }
+        // final updatedResponse = response.copyWith(
+        //   data: data.copyWith(caregivers: careGiverList),
+        // );
 
         return state.copyWith(
           isLoading: false,
-          response: updatedResponse,
           activeOrInactiveResponse: r,
           isError: false,
         );

@@ -448,6 +448,7 @@ class _ApiClient implements ApiClient {
     tbDetails,
     haveCovidVaccination,
     covidDetails,
+    isReUpload,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -462,6 +463,7 @@ class _ApiClient implements ApiClient {
       'tb_or_ppd_test_details': tbDetails,
       'covid_vaccination': haveCovidVaccination,
       'covid_vaccination_details': covidDetails,
+      'is_reupload': isReUpload,
     };
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
@@ -549,25 +551,91 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<GetServiceResponse> getServices(userId) async {
+  Future<GetServicesResponse> getServices() async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'user_id': userId};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<GetServiceResponse>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetServicesResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/care-giver/services?',
+              '/common-data/get-services',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = GetServiceResponse.fromJson(_result.data!);
+    final value = GetServicesResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponse> submitBuildProfile(
+    userId,
+    aboutYou,
+    hobbies,
+    whyLoveBeingCaregiver,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'about_you': aboutYou,
+      'hobbies': hobbies,
+      'why_love_being_caregiver': whyLoveBeingCaregiver,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/admin-cg-profile',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponse> submitAccountDetails(
+    userId,
+    accountHolderName,
+    routingNumber,
+    accountNumber,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'account_holder_name': accountHolderName,
+      'routing_number': routingNumber,
+      'account_number': accountNumber,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/admin-cg-acc-details',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -1388,6 +1456,181 @@ class _ApiClient implements ApiClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = VerifyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ServiceRequestResponse> getPendingRequests(
+    token,
+    userId,
+    page,
+    limit,
+    filterId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'page': page,
+      'limit': limit,
+      'filter_id': filterId,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ServiceRequestResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/pending-service-list',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ServiceRequestResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ServiceRequestResponse> getCompletedRequests(
+    token,
+    userId,
+    page,
+    limit,
+    filterId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'page': page,
+      'limit': limit,
+      'filter_id': filterId,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ServiceRequestResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/completed-service-list',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ServiceRequestResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ServiceRequestResponse> getCancelled(
+    token,
+    userId,
+    page,
+    limit,
+    filterId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'page': page,
+      'limit': limit,
+      'filter_id': filterId,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ServiceRequestResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/cancelled-service-list',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ServiceRequestResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ServiceRequestResponse> getUpcomingRequests(
+    token,
+    userId,
+    page,
+    limit,
+    filterId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'page': page,
+      'limit': limit,
+      'filter_id': filterId,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ServiceRequestResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/upcoming-service-list',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ServiceRequestResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ServiceRequestResponse> getOngoingRequests(
+    token,
+    userId,
+    page,
+    limit,
+    filterId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'page': page,
+      'limit': limit,
+      'filter_id': filterId,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ServiceRequestResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/ongoing-service-list',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ServiceRequestResponse.fromJson(_result.data!);
     return value;
   }
 

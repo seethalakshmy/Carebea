@@ -1,9 +1,14 @@
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
+import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../../../application/bloc/onboarding/onboarding_bloc.dart';
+import '../../../../core/custom_snackbar.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
@@ -57,7 +62,16 @@ class _SetupCompensationViewState extends State<SetupCompensationView> {
         BlocProvider(
             create: (context) => OnboardingBloc(OnBoardingRepository())),
       ],
-      child: BlocBuilder<OnboardingBloc, OnboardingState>(
+      child: BlocConsumer<OnboardingBloc, OnboardingState>(
+        listener: (context, listenerState) {
+          return listenerState.submitAccountDetailsOption.fold(() {}, (some) {
+            some.fold((l) {
+              CSnackBar.showError(context, msg: l.error);
+            }, (r) {
+              context.router.navigate(const CaregiverCreationRoute());
+            });
+          });
+        },
         bloc: widget.onboardingBloc,
         builder: (context, onboardingState) {
           return CommonPaddingWidget(
@@ -79,6 +93,7 @@ class _SetupCompensationViewState extends State<SetupCompensationView> {
                     bloc: formValidationBloc,
                     builder: (context, state) {
                       return CommonNextOrCancelButtons(
+                        isLoading: onboardingState.isLoading,
                         leftButtonName: AppString.back.val,
                         rightButtonName: AppString.next.val,
                         onLeftButtonPressed: () {
@@ -164,12 +179,16 @@ class _SetupCompensationViewState extends State<SetupCompensationView> {
                 CustomContainer(
                   width: DBL.threeFifty.val,
                   child: DetailsTextFieldWithLabel(
+                    maxLength: 9,
+                    inputFormatter: [
+                      FilteringTextInputFormatter.allow(RegExp("[0-9]"))
+                    ],
                     width: DBL.threeFifty.val,
                     labelName: AppString.routingNo.val,
                     controller: routingController,
                     focusNode: routingFocusNode,
                     textInputAction: TextInputAction.next,
-                    textInputType: TextInputType.text,
+                    textInputType: TextInputType.number,
                     isMandatory: false,
                     suffixIcon: CustomContainer(width: DBL.zero.val),
                     validator: (value) {
@@ -183,6 +202,10 @@ class _SetupCompensationViewState extends State<SetupCompensationView> {
                 CustomContainer(
                   width: DBL.threeFifty.val,
                   child: DetailsTextFieldWithLabel(
+                    maxLength: 12,
+                    inputFormatter: [
+                      FilteringTextInputFormatter.allow(RegExp("[0-9]"))
+                    ],
                     width: DBL.threeFifty.val,
                     labelName: AppString.accountNumber.val,
                     controller: acNoController,
@@ -212,10 +235,15 @@ class _SetupCompensationViewState extends State<SetupCompensationView> {
       formValidationBloc.add(const FormValidationEvent.submit());
     }
     if (_formKey.currentState!.validate()) {
-      setState(() {
+      /*setState(() {
         widget.pageController
             .jumpToPage(widget.pageController.page!.toInt() + 1);
-      });
+      });*/
+      widget.onboardingBloc.add(OnboardingEvent.submitAccountDetais(
+          userId: SharedPreffUtil().getUserId,
+          accountHolderName: nameController.text.trim(),
+          routingNumber: routingController.text.trim(),
+          accountNumber: acNoController.text.trim()));
     }
   }
 }

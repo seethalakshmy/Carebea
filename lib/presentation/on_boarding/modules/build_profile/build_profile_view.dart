@@ -5,10 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../../../application/bloc/onboarding/onboarding_bloc.dart';
+import '../../../../core/custom_snackbar.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
 import '../../../../infrastructure/on_boarding/on_boarding_repository.dart';
+import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../../caregiver_creation/widgets/details_text_field_with_label.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
 import '../../../widget/custom_form.dart';
@@ -58,7 +60,17 @@ class _BuildProfileViewState extends State<BuildProfileView> {
         BlocProvider(
             create: (context) => OnboardingBloc(OnBoardingRepository())),
       ],
-      child: BlocBuilder<OnboardingBloc, OnboardingState>(
+      child: BlocConsumer<OnboardingBloc, OnboardingState>(
+        listener: (context, listenerState) {
+          return listenerState.submitBuildProfileOption.fold(() {}, (some) {
+            some.fold((l) {
+              CSnackBar.showError(context, msg: l.error);
+            }, (r) {
+              widget.pageController
+                  .jumpToPage(widget.pageController.page!.toInt() + 1);
+            });
+          });
+        },
         bloc: widget.onboardingBloc,
         builder: (context, onBoardingState) {
           return CommonPaddingWidget(
@@ -80,14 +92,29 @@ class _BuildProfileViewState extends State<BuildProfileView> {
                   bloc: formValidationBloc,
                   builder: (context, state) {
                     return CommonNextOrCancelButtons(
+                      isLoading: onBoardingState.isLoading,
                       leftButtonName: AppString.back.val,
                       rightButtonName: AppString.next.val,
                       onLeftButtonPressed: () {
                         widget.pageController.jumpToPage(
                             widget.pageController.page!.toInt() - 1);
+                        widget.onboardingBloc.nextButtonClicked = false;
                       },
                       onRightButtonPressed: () {
-                        checkInputData();
+                        //checkInputData();
+                        widget.onboardingBloc.add(
+                            OnboardingEvent.submitBuildProfile(
+                                userId: SharedPreffUtil().getUserId,
+                                aboutYou: aboutYouController.text.trim().isEmpty
+                                    ? "NA"
+                                    : aboutYouController.text.trim(),
+                                hobbies: hobbiesController.text.trim().isEmpty
+                                    ? "NA"
+                                    : hobbiesController.text.trim(),
+                                whyLoveBeingCaregiver:
+                                    loveController.text.trim().isEmpty
+                                        ? "NA"
+                                        : loveController.text.trim()));
                       },
                     );
                   },
@@ -224,10 +251,10 @@ class _BuildProfileViewState extends State<BuildProfileView> {
       formValidationBloc.add(const FormValidationEvent.submit());
     }
     if (_formKey.currentState!.validate()) {
-      setState(() {
+      /*setState(() {
         widget.pageController
             .jumpToPage(widget.pageController.page!.toInt() + 1);
-      });
+      });*/
     }
   }
 }

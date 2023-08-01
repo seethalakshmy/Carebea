@@ -2,7 +2,6 @@ import 'package:admin_580_tech/domain/core/api_client.dart';
 import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.dart';
 import 'package:admin_580_tech/domain/on_boarding/models/common_response.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
-import 'package:admin_580_tech/presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_response.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/reference/models/relation_response.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -10,18 +9,17 @@ import 'package:dio/dio.dart';
 import '../../core/custom_debugger.dart';
 import '../../core/enum.dart';
 import '../../domain/on_boarding/i_on_boarding_repo.dart';
-import '../../domain/on_boarding/models/common_response.dart';
 import '../../domain/on_boarding/models/preferences/pet_list_response.dart';
 import '../../domain/on_boarding/models/preferences/preference_request_model.dart';
 import '../../domain/on_boarding/models/preferences/years_of_experience_response.dart';
+import '../../domain/on_boarding/models/services/get_services_response.dart';
+import '../../domain/on_boarding/models/services/service_request_model.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/city_list_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/document_list_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/gender_list_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/personal_details_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
 import '../../presentation/on_boarding/modules/preference/models/language_list_response.dart';
-import '../../presentation/on_boarding/modules/services/models/get_service_response.dart';
-import '../../presentation/on_boarding/modules/services/models/service_list_response.dart';
 
 class OnBoardingRepository implements IOnBoardingRepo {
   ApiClient apiClient = ApiClient();
@@ -206,7 +204,8 @@ class OnBoardingRepository implements IOnBoardingRepo {
       required bool haveTBTest,
       required TbOrPpdTestDetails tbDetails,
       required bool haveCovidVaccination,
-      required CovidVaccinationDetails covidDetails}) async {
+      required CovidVaccinationDetails covidDetails,
+      required bool isReUpload}) async {
     try {
       final response = await apiClient.getQualifications(
           userId,
@@ -217,7 +216,8 @@ class OnBoardingRepository implements IOnBoardingRepo {
           haveTBTest,
           tbDetails,
           haveCovidVaccination,
-          covidDetails);
+          covidDetails,
+          isReUpload);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
@@ -285,7 +285,7 @@ class OnBoardingRepository implements IOnBoardingRepo {
 
   @override
   Future<Either<ApiErrorHandler, CommonResponse>> servicesSubmit(
-      {required String userId, required ServicesModel services}) async {
+      {required String userId, required ServicesRequest services}) async {
     try {
       final response = await apiClient.submitServices(userId, services);
       return Right(response);
@@ -303,10 +303,55 @@ class OnBoardingRepository implements IOnBoardingRepo {
   }
 
   @override
-  Future<Either<ApiErrorHandler, GetServiceResponse>> getServices(
-      {required String userId}) async {
+  Future<Either<ApiErrorHandler, GetServicesResponse>> getServices() async {
     try {
-      final response = await apiClient.getServices(userId);
+      final response = await apiClient.getServices();
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, CommonResponse>> buildProfileSubmit(
+      {required String userId,
+      required String aboutYou,
+      required String hobbies,
+      required String whyLoveBeingCaregiver}) async {
+    try {
+      final response = await apiClient.submitBuildProfile(
+          userId, aboutYou, hobbies, whyLoveBeingCaregiver);
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, CommonResponse>> accountDetailsSubmit(
+      {required String userId,
+      required String accountHolderName,
+      required String routingNumber,
+      required String accountNumber}) async {
+    try {
+      final response = await apiClient.submitAccountDetails(
+          userId, accountHolderName, routingNumber, accountNumber);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");

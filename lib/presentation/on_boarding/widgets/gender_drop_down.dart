@@ -2,24 +2,27 @@ import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 
+import '../../../application/bloc/onboarding/onboarding_bloc.dart';
 import '../../../core/text_styles.dart';
 import '../../widget/custom_sizedbox.dart';
 import '../modules/personal_details/models/gender_list_response.dart';
 import 'drop_down.dart';
 
 class GenderDropDown extends StatelessWidget {
-  const GenderDropDown(
+  GenderDropDown(
       {Key? key,
       required this.onChange,
       required this.errorText,
       required this.items,
-      this.selectedValue})
+      this.selectedValue,
+      required this.onboardingBloc})
       : super(key: key);
 
   final Function onChange;
   final String errorText;
   final List<Gender> items;
   final String? selectedValue;
+  final OnboardingBloc onboardingBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +47,7 @@ class GenderDropDown extends StatelessWidget {
               .toList(),
           onChange: (value, index) {
             onChange(items[index].id);
+            onboardingBloc.selectedGenderName = items[index].name ?? "";
           },
           child: CustomText(selectedValue ?? "")),
     );

@@ -43,7 +43,7 @@ class CustomButton extends StatelessWidget {
     this.icon,
     this.isOutlineButton = false,
     this.borderWidth = 1.0,
-    this.borderRadius = 05.0,
+    this.borderRadius = 5.0,
     required this.onPressed,
     this.onLongPress,
     this.onHighlightChanged,

@@ -37,6 +37,7 @@ class DropdownWidget<T> extends StatefulWidget {
   final Function? onSearchChanged;
   final TextEditingController? searchController;
   final bool showSearchBox;
+  final ScrollController? scrollController;
 
   DropdownWidget({
     Key? key,
@@ -55,6 +56,7 @@ class DropdownWidget<T> extends StatefulWidget {
     this.onSearchChanged,
     this.searchController,
     required this.showSearchBox,
+    this.scrollController,
   }) : super(key: key);
 
   @override
@@ -172,20 +174,15 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
   }
 
   OverlayEntry _createOverlayEntry() {
-    // find the size and position of the current widget
     RenderBox? renderBox = context.findRenderObject() as RenderBox?;
     var size = renderBox!.size;
-
     var offset = renderBox.localToGlobal(Offset.zero);
     var topOffset = offset.dy + size.height + 5;
     return OverlayEntry(
-      // full screen GestureDetector to register when a
-      // user has clicked away from the dropdown
       builder: (context) => GestureDetector(
         onTap: () => _toggleDropdown(close: true),
         behavior: HitTestBehavior.translucent,
-        // full screen container to register taps anywhere and close drop down
-        child: Container(
+        child: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Stack(
@@ -210,13 +207,18 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
                         constraints: widget.dropdownStyle.constraints ??
                             BoxConstraints(
                               maxHeight: MediaQuery.of(context).size.height -
-                                  topOffset -
-                                  15,
+                                          topOffset -
+                                          15 >
+                                      30
+                                  ? MediaQuery.of(context).size.height -
+                                      topOffset -
+                                      15
+                                  : 400,
                             ),
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           //color: Colors.white,
-                          constraints: BoxConstraints(maxHeight: 200),
+                          constraints: BoxConstraints(maxHeight: 400),
                           child: Column(
                             children: [
                               widget.showSearchBox
@@ -233,6 +235,7 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
                                   : Container(),
                               Flexible(
                                 child: ListView(
+                                  controller: widget.scrollController,
                                   padding: widget.dropdownStyle.padding ??
                                       EdgeInsets.zero,
                                   shrinkWrap: true,

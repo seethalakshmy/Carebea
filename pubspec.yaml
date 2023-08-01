@@ -52,6 +52,7 @@ dependencies:
   amplify_auth_cognito: ^1.2.1
   amplify_flutter: ^1.2.1
   amplify_storage_s3: ^1.2.1
+  flutter_spinkit: ^5.2.0
 
 
 

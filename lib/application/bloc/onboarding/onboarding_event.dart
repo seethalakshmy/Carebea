@@ -43,19 +43,29 @@ class OnboardingEvent with _$OnboardingEvent {
 
   const factory OnboardingEvent.commonData() = _CommonDataLists;
 
-  const factory OnboardingEvent.cityList() = _CityLists;
+  const factory OnboardingEvent.cityList(
+      {required String searchQuery, required bool wantLoading}) = _CityLists;
 
-  const factory OnboardingEvent.stateList() = _StateLists;
+  const factory OnboardingEvent.stateList(
+      {required String stateSearchQuery,
+      required bool wantLoading}) = _StateLists;
+
   const factory OnboardingEvent.relationList() = _RelationList;
+
   const factory OnboardingEvent.submitReference({required String userId}) =
       _SubmitReference;
+
   const factory OnboardingEvent.addReference() = _AddReference;
+
   const factory OnboardingEvent.deleteReference({required int index}) =
       DeleteReference;
+
   const factory OnboardingEvent.updateReference({required int index}) =
       UpdateReference;
+
   const factory OnboardingEvent.editReference(
       {required int index, required GetReferences reference}) = EditReference;
+
   const factory OnboardingEvent.yearsOfExpList() = _YearsOfExp;
 
   const factory OnboardingEvent.petsList(String petSearchKey) = _GetPetList;
@@ -86,7 +96,7 @@ class OnboardingEvent with _$OnboardingEvent {
   const factory OnboardingEvent.radioLanguage(int isSelected) =
       _RadioLanguageSelected;
 
-  const factory OnboardingEvent.profilePicSelection(Uint8List bytes) =
+  const factory OnboardingEvent.profilePicSelection(PlatformFile bytes) =
       _ProfilePicSelected;
 
   const factory OnboardingEvent.securityDocumentUpload(
@@ -110,6 +120,31 @@ class OnboardingEvent with _$OnboardingEvent {
       _CovidDocumentUploadSelected;
 
   const factory OnboardingEvent.languagePagination() = _LanguagePagination;
-  const factory OnboardingEvent.getServices({required String userId}) =
-      _GetCaregiverService;
+
+  const factory OnboardingEvent.statePagination() = _StatePagination;
+
+  const factory OnboardingEvent.cityPagination() = _CityPagination;
+
+  const factory OnboardingEvent.getServices() = _GetCaregiverService;
+
+  const factory OnboardingEvent.submitServices(
+      {required String userId,
+      required ServicesRequest services}) = _SubmitCaregiverService;
+
+  const factory OnboardingEvent.serviceSelected(int index, bool value) =
+      _CaregiverServiceSelected;
+
+  const factory OnboardingEvent.submitBuildProfile({
+    required String userId,
+    required String aboutYou,
+    required String hobbies,
+    required String whyLoveBeingCaregiver,
+  }) = _SubmitBuildProfile;
+
+  const factory OnboardingEvent.submitAccountDetais({
+    required String userId,
+    required String accountHolderName,
+    required String routingNumber,
+    required String accountNumber,
+  }) = _SubmitAccountDetails;
 }
