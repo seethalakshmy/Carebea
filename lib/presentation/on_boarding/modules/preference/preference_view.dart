@@ -37,7 +37,9 @@ class PreferenceView extends StatelessWidget {
             CSnackBar.showError(context, msg: l.error);
           }, (r) {
             print("Response in listener : ${r.status}");
-            pageController.jumpToPage(pageController.page!.toInt() + 1);
+            if (onboardingBloc.nextButtonClicked) {
+              pageController.jumpToPage(pageController.page!.toInt() + 1);
+            }
           });
         });
       },
@@ -73,27 +75,38 @@ class PreferenceView extends StatelessWidget {
                 leftButtonName: AppString.back.val,
                 rightButtonName: AppString.next.val,
                 onLeftButtonPressed: () {
+                  onboardingBloc.nextButtonClicked = false;
                   pageController.jumpToPage(pageController.page!.toInt() - 1);
                 },
                 onRightButtonPressed: () {
-                  onboardingBloc.add(OnboardingEvent.preferenceDetails(
-                      userId: SharedPreffUtil().getUserId,
-                      yearsOfExp: onboardingBloc.selectedYearId,
-                      serveWithSmoker:
-                          state.isSmokerSelected == 0 ? true : false,
-                      willingToTransportation:
-                          state.isTransportationSelected == 0 ? true : false,
-                      willingToServeWithPets:
-                          state.isPetsSelected == 0 ? true : false,
-                      petsList: state.isPetsSelected == 0
-                          ? onboardingBloc.selectedPetsList
-                              .map((e) =>
-                                  PetsList(id: e.id, inOutStatus: e.petsId))
-                              .toList()
-                          : [],
-                      knownLanguages: onboardingBloc.selectedLanguageList
-                          .map((e) => e.id)
-                          .toList()));
+                  if (state.isPetsSelected == 0 &&
+                      onboardingBloc.selectedPetsList.isEmpty) {
+                    CSnackBar.showError(context,
+                        msg: AppString.pleaseSelectPets.val);
+                  } else if (onboardingBloc.selectedLanguageList.isEmpty) {
+                    CSnackBar.showError(context,
+                        msg: AppString.pleaseSelectLanguages.val);
+                  } else {
+                    onboardingBloc.nextButtonClicked = true;
+                    onboardingBloc.add(OnboardingEvent.preferenceDetails(
+                        userId: SharedPreffUtil().getUserId,
+                        yearsOfExp: onboardingBloc.selectedYearId,
+                        serveWithSmoker:
+                            state.isSmokerSelected == 0 ? true : false,
+                        willingToTransportation:
+                            state.isTransportationSelected == 0 ? true : false,
+                        willingToServeWithPets:
+                            state.isPetsSelected == 0 ? true : false,
+                        petsList: state.isPetsSelected == 0
+                            ? onboardingBloc.selectedPetsList
+                                .map((e) =>
+                                    PetsList(id: e.id, inOutStatus: e.petsId))
+                                .toList()
+                            : [],
+                        knownLanguages: onboardingBloc.selectedLanguageList
+                            .map((e) => e.id)
+                            .toList()));
+                  }
                 },
               )
             ],

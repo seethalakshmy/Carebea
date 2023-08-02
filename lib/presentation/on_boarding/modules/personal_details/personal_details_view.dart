@@ -33,6 +33,7 @@ import '../../widgets/common_padding_widget.dart';
 import '../../widgets/file_preview_widget.dart';
 import '../../widgets/gender_drop_down.dart';
 import '../../widgets/image_preview_widget.dart';
+import '../../widgets/on_boarding_title_divider_widget.dart';
 import 'widgets/document_details_view.dart';
 
 class PersonalDetailsView extends StatefulWidget {
@@ -116,25 +117,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomSizedBox(height: DBL.ten.val),
-                  CustomText(
-                    AppString.personalDetails.val,
-                    softWrap: true,
-                    style: TS().gRoboto(
-                        fontSize: Responsive.isWeb(context)
-                            ? DBL.nineteen.val
-                            : DBL.sixteen.val,
-                        fontWeight: FW.w500.val,
-                        color: AppColor.primaryColor.val),
-                    textAlign: TextAlign.start,
-                  ),
-                  CustomSizedBox(height: DBL.fifteen.val),
-                  CustomContainer(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    height: DBL.one.val,
-                    color: AppColor.lightGrey.val,
-                  ),
-                  CustomSizedBox(height: DBL.twenty.val),
+                  OnBoardingTitleDividerWidget(
+                      title: AppString.personalDetails.val),
                   Responsive.isWeb(context)
                       ? Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -492,6 +476,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
             : StateDropDown(
                 onboardingBloc: widget.onboardingBloc,
                 onSearchChanged: (val) {
+                  widget.onboardingBloc.statePage = 1;
                   widget.onboardingBloc.add(OnboardingEvent.stateList(
                       stateSearchQuery: val, wantLoading: false));
                 },
@@ -530,6 +515,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                 onboardingBloc: widget.onboardingBloc,
                 searchController: citySearchController,
                 onSearchChanged: (val) {
+                  widget.onboardingBloc.cityPage = 1;
                   widget.onboardingBloc.add(OnboardingEvent.cityList(
                       searchQuery: val, wantLoading: false));
                 },
