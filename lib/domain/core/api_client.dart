@@ -330,7 +330,8 @@ abstract class ApiClient {
       @Field('last_name') String lastName,
       @Field('email') String email,
       @Field('mobile_number') String? mobileNumber,
-      @Field('user_role_id') String? roleId);
+      @Field('user_role_id') String? roleId,
+      @Field('profile_picture') String? profileUrl);
 
   @POST("/admin/edit-admin")
   Future<CommonResponseUse> updateAdmin(
@@ -341,7 +342,8 @@ abstract class ApiClient {
       @Field('last_name') String lastName,
       @Field('email') String email,
       @Field('mobile_number') String? mobileNumber,
-      @Field('role_id') String? roleId);
+      @Field('role_id') String? roleId,
+      @Field('profile_picture') String? profileUrl);
 
   @POST("/admin/get-admins")
   Future<AdminGetResponse> getAdmins(

@@ -1217,6 +1217,7 @@ class _ApiClient implements ApiClient {
     email,
     mobileNumber,
     roleId,
+    profileUrl,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1230,6 +1231,7 @@ class _ApiClient implements ApiClient {
       'email': email,
       'mobile_number': mobileNumber,
       'user_role_id': roleId,
+      'profile_picture': profileUrl,
     };
     _data.removeWhere((k, v) => v == null);
     final _result = await _dio
@@ -1259,6 +1261,7 @@ class _ApiClient implements ApiClient {
     email,
     mobileNumber,
     roleId,
+    profileUrl,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1273,6 +1276,7 @@ class _ApiClient implements ApiClient {
       'email': email,
       'mobile_number': mobileNumber,
       'role_id': roleId,
+      'profile_picture': profileUrl,
     };
     _data.removeWhere((k, v) => v == null);
     final _result = await _dio

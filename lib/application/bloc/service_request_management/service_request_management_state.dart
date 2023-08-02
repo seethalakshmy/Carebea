@@ -6,6 +6,9 @@ class ServiceRequestManagementState with _$ServiceRequestManagementState {
       {required List<Types> types,
       bool? isLoading,
       required String? error,
+      required DateTime selectedDate,
+      TimeOfDay? fromTime,
+      TimeOfDay? toTime,
       required List<Services> services}) = _ServiceRequestManagementState;
 
   factory ServiceRequestManagementState.initial() {
@@ -19,6 +22,7 @@ class ServiceRequestManagementState with _$ServiceRequestManagementState {
           Types(id: 4, title: AppString.upcomingRequest.val, isSelected: false),
           Types(id: 5, title: AppString.onGoingRequest.val, isSelected: false),
         ],
+        selectedDate: DateTime.now(),
         services: [],
         error: "");
   }

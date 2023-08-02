@@ -3,6 +3,7 @@ part of 'admin_creation_bloc.dart';
 @freezed
 class AdminCreationState with _$AdminCreationState {
   const factory AdminCreationState({
+    required PlatformFile? pickedProfilePic,
     required bool isLoading,
     required bool isError,
     required String? error,
@@ -17,7 +18,7 @@ class AdminCreationState with _$AdminCreationState {
   }) = _AdminCreationState;
 
   factory AdminCreationState.initial() {
-    return const AdminCreationState(
+    return AdminCreationState(
       isLoading: true,
       isError: false,
       viewResponse: null,
@@ -26,6 +27,8 @@ class AdminCreationState with _$AdminCreationState {
       rolesResponse: null,
       selectedRole: null,
       error: null,
+      pickedProfilePic:
+          PlatformFile(size: 0, name: "", path: "", bytes: Uint8List(0)),
     );
   }
 }

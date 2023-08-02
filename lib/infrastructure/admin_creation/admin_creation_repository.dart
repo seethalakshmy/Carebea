@@ -38,17 +38,11 @@ class AdminCreationRepository implements IAdminCreationRepo {
       required String firstName,
       required String lastName,
       required String email,
-      required String phoneNumber}) async {
+      required String phoneNumber,
+      String? profileUrl}) async {
     try {
-      final response = await _apiClient.addAdmin(
-        "",
-        userId,
-        firstName,
-        lastName,
-        email,
-        phoneNumber,
-        role,
-      );
+      final response = await _apiClient.addAdmin("", userId, firstName,
+          lastName, email, phoneNumber, role, profileUrl);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
@@ -91,18 +85,11 @@ class AdminCreationRepository implements IAdminCreationRepo {
       required String firstName,
       required String lastName,
       required String email,
-      required String phoneNumber}) async {
+      required String phoneNumber,
+      String? profileUrl}) async {
     try {
-      final response = await _apiClient.updateAdmin(
-        "",
-        userId,
-        adminId,
-        firstName,
-        lastName,
-        email,
-        phoneNumber,
-        role,
-      );
+      final response = await _apiClient.updateAdmin("", userId, adminId,
+          firstName, lastName, email, phoneNumber, role, profileUrl);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");

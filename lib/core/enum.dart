@@ -7,6 +7,9 @@ enum AppString {
   mandatorySymbol("*"),
   select("Select"),
   selectHint("--Select--"),
+  selectDate("Select Date"),
+  startTime("Start Time"),
+  endTime("End Time"),
   ok("Ok"),
   profile("Profile"),
   profileDetails("Profile Details"),
@@ -154,6 +157,7 @@ enum AppString {
   role("Role"),
   assignModule("Assign Module"),
   assignedModule("Assigned Module"),
+  assign("Assign"),
   previous("Previous"),
   next("Next"),
   create("Create"),
@@ -237,6 +241,7 @@ enum AppString {
   haveAnAppointment("Have an appointment"),
   viewDetails("View Details"),
   view("View"),
+  viewProfile("View Profile"),
   edit("Edit"),
   delete("Delete"),
   provideTransportationOrRunErrands(
@@ -298,6 +303,7 @@ enum AppString {
   selectRejectedDocument("Select rejected document and mentioned the reason"),
   profilePicture("ProfilePictures"),
   documents("Documents"),
+  matchingList("Matching List"),
 
   ///paths
   careAmbassadorVerificationPath("care-ambassador-verification"),
@@ -328,6 +334,8 @@ enum AppString {
   validMobile("Mobile number should be 10 digits"),
   uploadDocument("Upload the document"),
   emptyDOB("Date of birth shouldn't be empty"),
+  emptyStartTime("Start time shouldn't be empty"),
+  emptyEndTime("End time shouldn't be empty"),
   emptyExpiry("Expiry date shouldn't be empty"),
   emptyDate("Date shouldn't be empty"),
   emptyGender("Please select your gender"),
@@ -365,10 +373,21 @@ enum AppString {
   cancelledBy("Cancelled By"),
   extraFee("Extra Fee"),
   tip("Tip"),
+  proceed("Proceed"),
+  enterYourNewDateAndTime("Enter Your New Date & Time"),
   normalServiceRequest("Normal Service Booking"),
   rebooking("Rebooking"),
   refund("Refund"),
   refundStarted("Refund Started"),
+  congrats("Congrats!"),
+  caregiverAvailable(
+      "Your selected caregiver is available for the service . You can accept & Enjoy the service"),
+  caregiverNotAvailable(
+      "Sorry!\nSelected care ambassador is not available on\n that particular day .\nDo you want to proceed this service with\n other care ambassador?"),
+
+  youShouldSelectStartTime("You should start from time"),
+  rescheduleWaiting(
+      "Please hold on for a moment as we are\nchecking if the caregiver is available for the\ndate you have chosen"),
   cancelThisServiceRequest("Cancel This Service Request"),
   rescheduleThisServiceRequest("Reschedule This Service Request"),
   agreementChckboxText(
@@ -385,6 +404,7 @@ enum AppString {
 enum AppColor {
   backgroundColor(Color(0xffE9F0F9)),
   primaryColor(Color(0xff344280)),
+  blue2(Color(0xff193DF2)),
   darkBlue(Color(0xff070329)),
   lightBlue1(Color(0xffDAD8EE)),
   lightBlue2(Color(0xffF6F9FF)),
@@ -522,6 +542,9 @@ enum IMG {
   drawerPng("assets/images/drawer.png"),
   unCheckBox("assets/icons/ic_uncheck.svg"),
   checkBox("assets/icons/ic_check.svg"),
+  clock("assets/icons/ic_clock.svg"),
+  calenderOutLine("assets/icons/ic_calendar.svg"),
+  notAvailableCaregivers("assets/icons/ic_not_available_caregivers.svg"),
   colorLogoPng("assets/images/color_logo.png"),
   blackLogoPng("assets/images/black_logo.png"),
   careGiver("assets/images/caregiver.png"),
