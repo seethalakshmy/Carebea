@@ -178,26 +178,28 @@ class _RolesPageState extends State<RolesPage> {
     );
   }
 
-  CustomButton _roleCreate() {
-    return CustomButton(
-        onPressed: () {
-          autoTabRouter?.navigate(RoleCreationRoute());
-        },
-        text: AppString.create.val,
-        color: AppColor.primaryColor.val,
-        height: DBL.fifty.val,
-        borderRadius: DBL.five.val,
-        padding: EdgeInsets.symmetric(
-            horizontal: DBL.twentyTwo.val, vertical: DBL.ten.val),
-        textStyle: TS().gRoboto(
-            color: AppColor.white.val,
-            fontWeight: FW.w600.val,
-            fontSize: FS.font16.val),
-        icon: CustomIcon(
-          icon: Icons.add,
-          size: DBL.twenty.val,
-          color: AppColor.white.val,
-        ));
+  _roleCreate() {
+    return sharedPrefUtil.getEditRole
+        ? CustomButton(
+            onPressed: () {
+              autoTabRouter?.navigate(RoleCreationRoute());
+            },
+            text: AppString.create.val,
+            color: AppColor.primaryColor.val,
+            height: DBL.fifty.val,
+            borderRadius: DBL.five.val,
+            padding: EdgeInsets.symmetric(
+                horizontal: DBL.twentyTwo.val, vertical: DBL.ten.val),
+            textStyle: TS().gRoboto(
+                color: AppColor.white.val,
+                fontWeight: FW.w600.val,
+                fontSize: FS.font16.val),
+            icon: CustomIcon(
+              icon: Icons.add,
+              size: DBL.twenty.val,
+              color: AppColor.white.val,
+            ))
+        : CustomSizedBox.shrink();
   }
 
   _searchField() {
@@ -267,25 +269,31 @@ class _RolesPageState extends State<RolesPage> {
                       ? item.assignedModule?.join(", ") ?? ""
                       : "")),
               DataCell(TableActions(
-                isView: true,
-                onViewTap: () {
-                  autoTabRouter?.navigate(RoleCreationRoute(
-                    roleId: item.id,
-                    isView: "view",
-                  ));
-                },
-                isEdit: true,
-                onEditTap: () {
-                  autoTabRouter?.navigate(
-                      RoleCreationRoute(roleId: item.id, isEdit: "edit"));
-                },
-                isDelete: true,
-                onDeleteTap: () {
-                  _deletePopup(
-                    context,
-                    item.id ?? "",
-                  );
-                },
+                isView: sharedPrefUtil.getViewRole ? true : false,
+                onViewTap: sharedPrefUtil.getViewRole
+                    ? () {
+                        autoTabRouter?.navigate(RoleCreationRoute(
+                          roleId: item.id,
+                          isView: "view",
+                        ));
+                      }
+                    : null,
+                isEdit: sharedPrefUtil.getEditRole ? true : false,
+                onEditTap: sharedPrefUtil.getEditRole
+                    ? () {
+                        autoTabRouter?.navigate(
+                            RoleCreationRoute(roleId: item.id, isEdit: "edit"));
+                      }
+                    : null,
+                isDelete: sharedPrefUtil.getDeleteRole ? true : false,
+                onDeleteTap: sharedPrefUtil.getDeleteRole
+                    ? () {
+                        _deletePopup(
+                          context,
+                          item.id ?? "",
+                        );
+                      }
+                    : null,
               )),
             ],
           );

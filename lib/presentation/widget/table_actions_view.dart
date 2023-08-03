@@ -29,12 +29,10 @@ class TableActions extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         isView ? _onView(context) : CustomSizedBox.shrink(),
-        CustomSizedBox(
-          width: isView ? DBL.twentyThree.val : DBL.zero.val,
-        ),
+        CustomSizedBox(width: DBL.twentyThree.val),
         isEdit ? _onEdit(context) : CustomSizedBox.shrink(),
         CustomSizedBox(
-          width: isView ? DBL.twentyThree.val : DBL.zero.val,
+          width: DBL.twentyThree.val,
         ),
         isDelete ? _onDelete(context) : CustomSizedBox.shrink(),
       ],

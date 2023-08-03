@@ -7,6 +7,7 @@ import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/core/text_utils.dart';
 import 'package:admin_580_tech/core/theme.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/admin_creation/admin_creation_page.dart';
 import 'package:admin_580_tech/presentation/admins/admins_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart';
@@ -15,7 +16,6 @@ import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
 import 'package:admin_580_tech/presentation/roles/role_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
-import 'package:admin_580_tech/presentation/service_details/service_details_page.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
@@ -28,7 +28,6 @@ import '../caregiver_creation/caregiver_creation_page.dart';
 import '../caregiver_detail/caregiver_detail_page.dart';
 import '../caregivers/caregivers_page.dart';
 import '../role_creation/role_creation_page.dart';
-import '../routes/app_router.gr.dart';
 import '../service_request_management/service_request_management_page.dart';
 import '../transaction_management/transaction_management_page.dart';
 import '../user_management/user_management_page.dart';
@@ -49,26 +48,42 @@ class _MenuBarState extends State<SideMenuPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<ScaffoldState> _scaffoldDrawerKey =
       GlobalKey<ScaffoldState>();
+  Map<String, String> mainData = {};
+  SharedPreffUtil sharedPreffUtil = SharedPreffUtil();
 
   @override
   void initState() {
     super.initState();
+    mainData = {
+      AppString.dashboard.val: "",
+      AppString.roleManagement.val: "",
+      AppString.adminManagement.val: "",
+      AppString.careAmbassador.val: "",
+      AppString.userManagement.val: "",
+      AppString.transactionManagement.val: "",
+      AppString.serviceRequestManagement.val: "",
+    };
+    // if (!sharedPreffUtil.getViewRole) {
+    //   mainData.remove(AppString.roleManagement.val);
+    // }
+    // if (!sharedPreffUtil.getViewAdmin) {
+    //   mainData.remove(AppString.adminManagement.val);
+    // }
+    // if (!sharedPreffUtil.getViewCareGiver) {
+    //   mainData.remove(AppString.careAmbassador.val);
+    // }
+    // if (!sharedPreffUtil.getViewTransaction) {
+    //   mainData.remove(AppString.transactionManagement.val);
+    // }
+    // if (!sharedPreffUtil.getViewServiceRequest) {
+    //   mainData.remove(AppString.serviceRequestManagement.val);
+    // }
   }
 
   final ScrollController _scrollController = ScrollController();
 
   ValueNotifier<bool> isOpen = ValueNotifier(true);
   ValueNotifier<bool> isSubListOpen = ValueNotifier(false);
-
-  Map<String, String> mainData = {
-    AppString.dashboard.val: "",
-    AppString.roleManagement.val: "",
-    AppString.adminManagement.val: "",
-    AppString.careAmbassador.val: "",
-    AppString.userManagement.val: "",
-    AppString.transactionManagement.val: "",
-    AppString.serviceRequestManagement.val: "",
-  };
 
   final List<String> _items = [
     AppString.profile.val,

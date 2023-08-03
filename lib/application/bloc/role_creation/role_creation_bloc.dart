@@ -75,9 +75,6 @@ class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
 
       return state.copyWith(
         viewRoleResponse: r,
-        isView: r.data?.isView ?? false,
-        isDelete: r.data?.isDelete ?? false,
-        isEdit: r.data?.isEdit ?? false,
         moduleResponse: moduleResponse,
         isLoading: false,
       );
@@ -93,11 +90,8 @@ class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
         await roleCreationRepository.addRoleUpdateRole(
             userId: event.userId,
             role: event.role,
-            isDelete: event.isDelete,
-            isEdit: event.isEdit,
-            roleId: event.roleId,
-            isView: event.isView,
-            moduleId: event.moduleId);
+            moduleId: event.moduleId,
+            roleId: event.roleId);
     RoleCreationState homeState = homeResult.fold((l) {
       CSnackBar.showError(event.context, msg: l.error ?? "");
       return state.copyWith(
@@ -168,14 +162,51 @@ class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
   }
 
   _isCheckedView(_IsCheckedView event, Emitter<RoleCreationState> emit) {
-    emit(state.copyWith(isView: event.value));
+    final state = this.state;
+    Module moduleItem = event.module;
+    ModuleResponse? moduleResponse = state.moduleResponse;
+    final index = moduleResponse!.module!.indexOf(moduleItem);
+    List<Module> moduleList = moduleResponse.module!..remove(moduleItem);
+    if (moduleItem.isView) {
+      moduleList.insert(index, moduleItem.copyWith(isView: false));
+    } else {
+      moduleList.insert(
+          index, moduleItem.copyWith(isView: true, isSelected: true));
+    }
+    final updatedResponse = moduleResponse.copyWith(module: moduleList);
+
+    emit(state.copyWith(moduleResponse: updatedResponse));
   }
 
   _isCheckedDelete(_IsCheckedDelete event, Emitter<RoleCreationState> emit) {
-    emit(state.copyWith(isDelete: event.value));
+    Module moduleItem = event.module;
+    ModuleResponse? moduleResponse = state.moduleResponse;
+    final index = moduleResponse!.module!.indexOf(moduleItem);
+    List<Module> moduleList = moduleResponse.module!..remove(moduleItem);
+    if (moduleItem.isDelete) {
+      moduleList.insert(index, moduleItem.copyWith(isDelete: false));
+    } else {
+      moduleList.insert(
+          index, moduleItem.copyWith(isDelete: true, isSelected: true));
+    }
+    final updatedResponse = moduleResponse.copyWith(module: moduleList);
+
+    emit(state.copyWith(moduleResponse: updatedResponse));
   }
 
   _isCheckedEdit(_IsCheckedEdit event, Emitter<RoleCreationState> emit) {
-    emit(state.copyWith(isEdit: event.value));
+    Module moduleItem = event.module;
+    ModuleResponse? moduleResponse = state.moduleResponse;
+    final index = moduleResponse!.module!.indexOf(moduleItem);
+    List<Module> moduleList = moduleResponse.module!..remove(moduleItem);
+    if (moduleItem.isEdit) {
+      moduleList.insert(index, moduleItem.copyWith(isEdit: false));
+    } else {
+      moduleList.insert(
+          index, moduleItem.copyWith(isEdit: true, isSelected: true));
+    }
+    final updatedResponse = moduleResponse.copyWith(module: moduleList);
+
+    emit(state.copyWith(moduleResponse: updatedResponse));
   }
 }

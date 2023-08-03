@@ -290,14 +290,12 @@ abstract class ApiClient {
 
   @POST("/admin/add-role")
   Future<CommonResponseUse> addRoleUpdateRole(
-      @Header("Authorization") String token,
-      @Field('user_id') String userId,
-      @Field('role') String role,
-      @Field('role_id') String? roleId,
-      @Field('assigned_modules') List<String> moduleID,
-      @Field('view') int view,
-      @Field('delete') int delete,
-      @Field('edit') int edit);
+    @Header("Authorization") String token,
+    @Field('user_id') String userId,
+    @Field('role') String role,
+    @Field('role_id') String? roleId,
+    @Field('assigned_modules') List<Module> moduleID,
+  );
 
   @POST("/admin/get-modules")
   Future<ModuleResponse> getModules(
