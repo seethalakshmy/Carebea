@@ -8,7 +8,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/enum.dart';
 import '../../../core/text_styles.dart';
@@ -119,9 +118,9 @@ class CareGiverVerificationBloc
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context, msg: r.data?.message ?? "");
       } else {
-        CSnackBar.showError(event.context, msg: r.message ?? "");
+        CSnackBar.showError(event.context, msg: r.data?.message ?? "");
       }
       return state.copyWith(
         isLoading: false,
@@ -195,7 +194,8 @@ class CareGiverVerificationBloc
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context,
+            msg: r.data?.message ?? "");
         _approvalPopUp(
           event.context,
           userId: event.userID,
@@ -204,7 +204,8 @@ class CareGiverVerificationBloc
           userName: event.userName,
         );
       } else {
-        CSnackBar.showError(event.context, msg: r.message ?? "");
+        CSnackBar.showError(event.context,
+            msg: r.data?.message ?? "");
       }
       return state.copyWith(
         isLoading: false,

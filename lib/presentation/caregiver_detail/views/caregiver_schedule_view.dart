@@ -174,7 +174,7 @@ class CareGiverScheduleView extends StatelessWidget {
                   buildRow(context,
                       label: AppString.time.val,
                       val:
-                          "${item.startTime ?? ""} ${item.startTime != null ? AppString.to.val : ""} ${item.endTime ?? ""}"),
+                          "${caregiverDetailBloc.convertTo12HourFormat(item.startTime ?? "")} ${item.startTime != null ? AppString.to.val : ""} ${caregiverDetailBloc.convertTo12HourFormat(item.endTime ?? "")}"),
                   CustomSizedBox(
                     height: DBL.five.val,
                   ),
