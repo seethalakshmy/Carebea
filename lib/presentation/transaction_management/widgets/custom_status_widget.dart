@@ -8,10 +8,16 @@ import '../../widget/custom_container.dart';
 import '../../widget/custom_text.dart';
 
 class CustomStatusWidget extends StatelessWidget {
-  bool isCompleted;
-  bool? isFromDetails;
+  final bool isCompleted;
+  final bool? isFromDetails;
+  final String statusName;
 
-  CustomStatusWidget({Key? key, required this.isCompleted,this.isFromDetails}) : super(key: key);
+  const CustomStatusWidget(
+      {Key? key,
+      required this.isCompleted,
+      this.isFromDetails,
+      required this.statusName})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +27,7 @@ class CustomStatusWidget extends StatelessWidget {
       children: [
         CustomContainer.decoration(
           alignment: Alignment.center,
-          width: isFromDetails!=null && isFromDetails!?80:110,
+          width: isFromDetails != null && isFromDetails! ? 80 : 110,
           height: DBL.thirty.val,
           padding: EdgeInsets.symmetric(
               vertical: DBL.five.val, horizontal: DBL.five.val),
@@ -30,10 +36,11 @@ class CustomStatusWidget extends StatelessWidget {
               borderRadius: PR().circularRadius(DBL.eight.val)),
           child: CustomText(
             textAlign: TextAlign.center,
-            isCompleted ? AppString.completed.val : AppString.cancel.val,
+            statusName,
             style: TS().gRoboto(
               fontWeight: FW.w600.val,
-              fontSize: Responsive.isWeb(context)?FS.font12.val:FS.font10.val,
+              fontSize:
+                  Responsive.isWeb(context) ? FS.font12.val : FS.font10.val,
               color: AppColor.white.val,
             ),
           ),
@@ -42,7 +49,9 @@ class CustomStatusWidget extends StatelessWidget {
             ? CustomText(
                 "Refund under process",
                 style: TextStyle(
-                    fontSize: Responsive.isWeb(context)?FS.font07.val:FS.font065.val,
+                    fontSize: Responsive.isWeb(context)
+                        ? FS.font07.val
+                        : FS.font065.val,
                     fontWeight: FontWeight.w400,
                     color: AppColor.label.val),
               )

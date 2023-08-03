@@ -38,6 +38,9 @@ import '../on_boarding/models/services/service_request_model.dart';
 import '../role_creation/model/module_response.dart';
 import '../role_creation/model/view_role_response.dart';
 import '../service_request_management/model/service_request_response.dart';
+import '../transaction_management/model/get_filters_response.dart';
+import '../transaction_management/model/transaction_details_response.dart';
+import '../transaction_management/model/transaction_list_response.dart';
 
 part 'api_client.g.dart';
 
@@ -325,7 +328,8 @@ abstract class ApiClient {
       @Field('last_name') String lastName,
       @Field('email') String email,
       @Field('mobile_number') String? mobileNumber,
-      @Field('user_role_id') String? roleId);
+      @Field('user_role_id') String? roleId,
+      @Field('profile_picture') String? profileUrl);
 
   @POST("/admin/edit-admin")
   Future<CommonResponseUse> updateAdmin(
@@ -336,7 +340,8 @@ abstract class ApiClient {
       @Field('last_name') String lastName,
       @Field('email') String email,
       @Field('mobile_number') String? mobileNumber,
-      @Field('role_id') String? roleId);
+      @Field('role_id') String? roleId,
+      @Field('profile_picture') String? profileUrl);
 
   @POST("/admin/get-admins")
   Future<AdminGetResponse> getAdmins(
@@ -407,4 +412,21 @@ abstract class ApiClient {
       @Field('page') int page,
       @Field('limit') int limit,
       @Field('filter_id') int filterId);
+
+  @GET("/common-data/get-filters")
+  Future<GetFiltersResponse> getFilters();
+
+  @POST("/admin/get-transactions")
+  Future<TransactionListResponse> getTransactions(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('page') String page,
+      @Field('limit') int limit,
+      @Field('search_term') String searchTerm,
+      @Field('filter_id') int filterId);
+
+  @POST("/admin/transaction-details")
+  Future<TransactionDetailsResponse> getTransactionDetails(
+      @Header("Authorization") String token,
+      @Field('transaction_id') String transactionId);
 }

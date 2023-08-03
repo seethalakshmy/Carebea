@@ -2,148 +2,65 @@ import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/presentation/transaction_management/widgets/custom_status_widget.dart';
-import 'package:admin_580_tech/presentation/widget/custom_icon.dart';
+import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../application/bloc/transaction_management/transaction_management_bloc.dart';
+import '../../../domain/transaction_management/model/transaction_details_response.dart';
+import '../../widget/custom_shimmer.dart';
 
 class TransactionDetailsAlert extends StatelessWidget {
-  TransactionDetailsAlert({super.key});
+  const TransactionDetailsAlert({super.key, required this.transactionBloc});
 
-  late BuildContext context;
-
-  List<Step> stepperData = [
-    Step(
-        state: StepState.complete,
-        title: SizedBox(
-          width: 200,
-          child: ListTile(
-            contentPadding: EdgeInsets.zero,
-            title: CustomText(
-              'Refund Started',
-              style: TS().gRoboto(
-                  color: AppColor.black.val,
-                  fontSize: FS.font16.val,
-                  fontWeight: FW.w500.val),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomText(
-                  'Mon,09March 2023 |  3:20PM',
-                  style: TS().gRoboto(
-                      color: AppColor.black.val,
-                      fontSize: FS.font12.val,
-                      fontWeight: FW.w400.val),
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 150,
-                    height: 30,
-                    padding: const EdgeInsets.all(5),
-                    child: Row(
-                      children: [
-                        CustomText(
-                          "Hide Details",
-                          style: TS().gRoboto(
-                              color: AppColor.error.val,
-                              fontSize: FS.font13.val,
-                              fontWeight: FW.w400.val),
-                        ),
-                        Icon(
-                          Icons.keyboard_arrow_up,
-                          size: 20,
-                          color: AppColor.error.val,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        content: Container(
-          width: 350,
-          height: 150,
-          color: AppColor.lightGrey7.val,
-          child:  Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("THis is working"),
-              CustomSizedBox(height: 30),
-              Text("THis is working"),
-              CustomSizedBox(height: 30),
-              Text("THis is working"),
-            ],
-          ),
-        )),
-    Step(
-        title: SizedBox(
-          width: 200,
-          child: ListTile(
-            contentPadding: EdgeInsets.zero,
-            title: CustomText(
-              'Refunded',
-              style: TS().gRoboto(
-                  color: AppColor.black.val,
-                  fontSize: FS.font16.val,
-                  fontWeight: FW.w500.val),
-            ),
-            subtitle: CustomText(
-              'Mon,09March 2023 |  3:20PM',
-              style: TS().gRoboto(
-                  color: AppColor.black.val,
-                  fontSize: FS.font12.val,
-                  fontWeight: FW.w400.val),
-            ),
-          ),
-        ),
-        content: Container(
-          width: 350,
-          height: 150,
-          color: Colors.red,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text("THis is working"),
-              CustomSizedBox(height: 30),
-              Text("THis is working"),
-              CustomSizedBox(height: 30),
-              Text("THis is working"),
-            ],
-          ),
-        )),
-  ];
+  final TransactionManagementBloc transactionBloc;
 
   @override
   Widget build(BuildContext context) {
-    this.context = context;
-    return Container(height: 400,
-      child: Wrap(
-        children: [
-          Responsive.isWeb(context)
-              ? Row(
-                  children: [_detailsWidget(), _refundDetailsWidget()],
-                )
-              : Container(
-                  height: 480,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [_detailsWidget(), _refundDetailsWidget()],
-                    ),
+    return BlocProvider<TransactionManagementBloc>(
+      create: (context) => transactionBloc,
+      child: BlocBuilder<TransactionManagementBloc, TransactionManagementState>(
+        bloc: transactionBloc,
+        builder: (context, state) {
+          return SizedBox(
+            height: 480,
+            child: transactionBloc.state.isDetailsLoading
+                ? const CustomShimmerWidget.rectangular(height: double.infinity)
+                : Wrap(
+                    children: [
+                      Responsive.isWeb(context)
+                          ? Row(
+                              children: [
+                                _detailsWidget(context),
+                                _refundWidget(transactionBloc.state)
+                              ],
+                            )
+                          : SizedBox(
+                              height: 480,
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    _detailsWidget(context),
+                                    _refundWidget(transactionBloc.state)
+                                  ],
+                                ),
+                              ),
+                            ),
+                    ],
                   ),
-                ),
-        ],
+          );
+        },
       ),
     );
   }
 
-  Row _detailRow(String detailName, String detail) {
+  Row _detailRow(String detailName, String detail, TransactionDetailsData? item,
+      BuildContext context) {
     return Row(
       children: [
-        Container(
+        SizedBox(
           width: 160,
           child: CustomText(
             detailName,
@@ -155,7 +72,7 @@ class TransactionDetailsAlert extends StatelessWidget {
             ),
           ),
         ),
-        detail.toLowerCase() == "completed" || detail.toLowerCase() == "cancel"
+        item?.status!.id == 1 || item?.status!.id == 2
             ? Row(
                 children: [
                   CustomText(
@@ -169,14 +86,14 @@ class TransactionDetailsAlert extends StatelessWidget {
                     ),
                   ),
                   CustomStatusWidget(
-                    isCompleted:
-                        detail.toLowerCase() == "completed" ? true : false,
+                    statusName: item!.status!.name!,
+                    isCompleted: item.status!.id == 1 || item.status!.id == 2,
                     isFromDetails: true,
                   )
                 ],
               )
             : CustomText(
-                ":  " + detail,
+                ":  $detail",
                 softWrap: true,
                 style: TS().gRoboto(
                   fontSize:
@@ -188,46 +105,7 @@ class TransactionDetailsAlert extends StatelessWidget {
     );
   }
 
-  Widget _headerWidget() {
-    return Container(
-      width: double.infinity,
-      height: 68,
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(5),
-          topLeft: Radius.circular(5),
-        ),
-        color: AppColor.primaryColor.val,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          CustomText(
-            AppString.transactionDetails.val,
-            style: TS().gRoboto(
-              color: AppColor.white.val,
-              fontWeight: FW.w500.val,
-              fontSize:
-                  Responsive.isWeb(context) ? FS.font22.val : FS.font18.val,
-            ),
-          ),
-          InkWell(
-            child: CustomIcon(
-              icon: Icons.close,
-              size: 16.5,
-              color: AppColor.white.val,
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _detailsWidget() {
+  Widget _detailsWidget(BuildContext context) {
     return Container(
       width: Responsive.isWeb(context)
           ? MediaQuery.of(context).size.width * .35
@@ -236,29 +114,67 @@ class TransactionDetailsAlert extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          _detailRow("Transaction ID", "6846141845"),
+          _detailRow(
+              "Transaction ID",
+              transactionBloc.transactionDetailsData.transactionId ?? "",
+              null,
+              context),
           const CustomSizedBox(height: 7),
-          _detailRow("Service ID", "#4400"),
+          _detailRow(
+              "Service ID",
+              transactionBloc.transactionDetailsData.serviceId ?? "",
+              null,
+              context),
           const CustomSizedBox(height: 7),
-          _detailRow("Transaction Type", "ACH"),
+          _detailRow(
+              "Transaction Type",
+              transactionBloc.transactionDetailsData.transactionType ?? "",
+              null,
+              context),
           const CustomSizedBox(height: 7),
-          _detailRow("Paid For", "Serivce Fee"),
+          _detailRow(
+              "Paid For",
+              transactionBloc.transactionDetailsData.paidFor ?? "",
+              null,
+              context),
           const CustomSizedBox(height: 7),
-          _detailRow("Paid To", "ama-gi"),
+          _detailRow(
+              "Paid To",
+              transactionBloc.transactionDetailsData.paidTo ?? "",
+              null,
+              context),
           const CustomSizedBox(height: 7),
-          _detailRow("Received From", "Client Name"),
+          _detailRow(
+              "Received From",
+              transactionBloc.transactionDetailsData.recievedFrom ?? "",
+              null,
+              context),
           const CustomSizedBox(height: 7),
-          _detailRow("Amount", "\$230"),
+          _detailRow(
+              "Amount",
+              transactionBloc.transactionDetailsData.amount ?? "",
+              null,
+              context),
           const CustomSizedBox(height: 7),
-          _detailRow("Date & Time", "March 4 2023 - 02:30PM"),
+          _detailRow(
+              "Date & Time",
+              transactionBloc.formatDateToMonthName(
+                  transactionBloc.transactionDetailsData.dateTime ??
+                      "0000-00-00T00:00:00.000Z"),
+              null,
+              context),
           const CustomSizedBox(height: 7),
-          _detailRow("Status", "Completed"),
+          _detailRow(
+              "Status",
+              transactionBloc.transactionDetailsData.status!.name ?? "",
+              transactionBloc.transactionDetailsData,
+              context),
         ],
       ),
     );
   }
 
-  Widget _refundDetailsWidget() {
+/*  Widget _refundDetailsWidget() {
     return Container(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
@@ -280,8 +196,73 @@ class TransactionDetailsAlert extends StatelessWidget {
             currentStep: 0,
             type: StepperType.vertical,
             controlsBuilder: (ctx, details) {
-              return Padding(padding: EdgeInsets.zero);
+              return const Padding(padding: EdgeInsets.zero);
             },
+          ),
+        ],
+      ),
+    );
+  }*/
+
+  Widget _refundWidget(TransactionManagementState state) {
+    return CustomContainer(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomText(
+            AppString.refundStarted.val,
+            style: TS().gRoboto(
+                color: AppColor.black.val,
+                fontSize: FS.font16.val,
+                fontWeight: FW.w500.val),
+          ),
+          Row(
+            children: [
+              Icon(
+                Icons.check_circle,
+                size: 20,
+                color: AppColor.green.val,
+              ),
+              CustomSizedBox(width: DBL.fifteen.val),
+              CustomText(
+                'Mon,09March 2023 |  3:20PM',
+                style: TS().gRoboto(
+                    color: AppColor.black.val,
+                    fontSize: FS.font12.val,
+                    fontWeight: FW.w400.val),
+              ),
+            ],
+          ),
+          InkWell(
+            onTap: () {
+              transactionBloc.add(TransactionManagementEvent.hideOrShowDetails(
+                  clicked: transactionBloc.isClicked));
+              print("isClicked : ${transactionBloc.isClicked}");
+            },
+            child: Container(
+              width: 150,
+              height: 30,
+              padding: const EdgeInsets.all(5),
+              child: Row(
+                children: [
+                  CustomText(
+                    state.isClicked ? "Hide Details" : "Show Details",
+                    style: TS().gRoboto(
+                        color: AppColor.error.val,
+                        fontSize: FS.font13.val,
+                        fontWeight: FW.w400.val),
+                  ),
+                  Icon(
+                    state.isClicked
+                        ? Icons.keyboard_arrow_up
+                        : Icons.keyboard_arrow_down,
+                    size: 20,
+                    color: AppColor.error.val,
+                  )
+                ],
+              ),
+            ),
           ),
         ],
       ),

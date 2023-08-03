@@ -1,6 +1,7 @@
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
 import 'package:admin_580_tech/infrastructure/admin_creation/admin_creation_repository.dart';
+import 'package:admin_580_tech/presentation/admin_creation/widgets/admin_profile_pic.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
@@ -9,17 +10,22 @@ import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:admin_580_tech/presentation/widget/loader_view.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/admin_creation/admin_creation_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
+import '../../infrastructure/api_service_s3.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../on_boarding/modules/personal_details/widgets/mobile_number_formatter.dart';
+import '../on_boarding/modules/personal_details/widgets/profile_picture_widget.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_dropdown.dart';
+import '../widget/custom_shimmer.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/details_text_field_with_label.dart';
 import '../widget/header_view.dart';
@@ -223,10 +229,46 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
     );
   }
 
+  _profilePicWidget(AdminCreationState state) {
+    return Column(
+      children: [
+        _adminCreationBloc.state.isLoading
+            ? const CustomShimmerWidget.circular(height: 150, width: 150)
+            : AdminProfilePictureWidget(
+                adminCreationBloc: _adminCreationBloc,
+                size: Responsive.isWeb(context) ? 180 : 140,
+              ),
+        CustomSizedBox(height: DBL.six.val),
+        state.isLoading
+            ? CustomShimmerWidget.rectangular(
+                height: DBL.twenty.val, width: DBL.twoHundred.val)
+            : Center(
+                child: CustomText(
+                  AppString.uploadYourProfilePhoto.val,
+                  style: TS().gRoboto(
+                      fontSize: FS.font14.val,
+                      fontWeight: FW.w400.val,
+                      color: AppColor.darkGrey.val),
+                ),
+              ),
+      ],
+    );
+  }
+
+  Future<void> uploadProfilePicToAwsS3(String folderName, String userId) async {
+    _adminCreationBloc.profileUrl = await ApiServiceS3().uploadImage(
+        pickedFile: _adminCreationBloc.state.pickedProfilePic!.bytes!,
+        format: _adminCreationBloc.state.pickedProfilePic!.name.split('.').last,
+        folderName: folderName,
+        userId: userId,
+        context: context);
+  }
+
   _createAdminView(AdminCreationState state) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _profilePicWidget(state),
         CustomText(
           AppString.basicDetails.val,
           style: TS().gRoboto(
@@ -309,6 +351,11 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
                   isIgnore: _isView!,
+                  inputFormatter: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(10),
+                    MobileNumberFormatter(),
+                  ],
                   isMandatory: true,
                   labelName: AppString.mobileNumber.val,
                   focusNode: _mobileFocusNode,
@@ -316,7 +363,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return AppString.emptyMobile.val;
-                    } else if (value.toString().length != 10) {
+                    } else if (value.toString().length != 12) {
                       return AppString.validMobile.val;
                     }
                     return null;
@@ -352,7 +399,14 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                           isLoading: state.isLoadingButton,
                           height: DBL.fortyFive.val,
                           minWidth: DBL.oneTwenty.val,
-                          onPressed: () {
+                          onPressed: () async {
+                            if (_adminCreationBloc
+                                    .state.pickedProfilePic!.size >
+                                0) {
+                              await uploadProfilePicToAwsS3(
+                                  AppString.profilePicture.val,
+                                  SharedPreffUtil().getUserId);
+                            }
                             checkInputData(state);
                           },
                           text: _isEdit!
@@ -385,7 +439,8 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
             firstName: _fNameController.text.trim(),
             lastName: _lNameController.text.trim(),
             email: _emailController.text.trim(),
-            mobile: _mobileController.text.trim()));
+            mobile: _mobileController.text.trim(),
+            profilePic: _adminCreationBloc.profileUrl));
       } else {
         _adminCreationBloc.add(AdminCreationEvent.addAdmin(
             userId: adminUserID,
@@ -394,7 +449,8 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
             firstName: _fNameController.text.trim(),
             lastName: _lNameController.text.trim(),
             email: _emailController.text.trim(),
-            mobile: _mobileController.text.trim()));
+            mobile: _mobileController.text.trim(),
+            profilePic: _adminCreationBloc.profileUrl));
       }
     }
   }

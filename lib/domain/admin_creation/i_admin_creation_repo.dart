@@ -6,24 +6,24 @@ import '../roles/model/get_role_response.dart';
 import 'model/admin_view_response.dart';
 
 abstract class IAdminCreationRepo {
-  Future<Either<ApiErrorHandler, CommonResponseUse>> addAdmin({
-    required String userId,
-    required String role,
-    required String firstName,
-    required String lastName,
-    required String email,
-    required String phoneNumber,
-  });
+  Future<Either<ApiErrorHandler, CommonResponseUse>> addAdmin(
+      {required String userId,
+      required String role,
+      required String firstName,
+      required String lastName,
+      required String email,
+      required String phoneNumber,
+      String? profileUrl});
 
-  Future<Either<ApiErrorHandler, CommonResponseUse>> updateAdmin({
-    required String userId,
-    required String adminId,
-    required String role,
-    required String firstName,
-    required String lastName,
-    required String email,
-    required String phoneNumber,
-  });
+  Future<Either<ApiErrorHandler, CommonResponseUse>> updateAdmin(
+      {required String userId,
+      required String adminId,
+      required String role,
+      required String firstName,
+      required String lastName,
+      required String email,
+      required String phoneNumber,
+      String? profileUrl});
 
   Future<Either<ApiErrorHandler, GetRoleResponse>> getRoles({
     required String userID,

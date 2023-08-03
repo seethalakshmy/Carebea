@@ -1,8 +1,11 @@
+import 'dart:typed_data';
+
 import 'package:admin_580_tech/domain/admin_creation/model/admin_view_response.dart';
 import 'package:admin_580_tech/domain/common_response/common_response.dart';
 import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
 import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart';
 import 'package:dartz/dartz.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,9 +20,15 @@ part 'admin_creation_state.dart';
 
 class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
   AdminCreationRepository adminCreationRepository;
+  String profileUrl = "";
 
   AdminCreationBloc(this.adminCreationRepository)
       : super(AdminCreationState.initial()) {
+    on<AdminCreationEvent>((event, emit) async {
+      if (event is _ProfilePicSelected) {
+        emit(state.copyWith(pickedProfilePic: event.bytes));
+      }
+    });
     on<_GetRoles>(_getRoles);
     on<_AddAdmin>(_addAdmin);
     on<_UpdateAdmin>(_updateAdmin);
@@ -115,13 +124,13 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
     emit(state.copyWith(isLoadingButton: true));
     final Either<ApiErrorHandler, CommonResponseUse> homeResult =
         await adminCreationRepository.addAdmin(
-      userId: event.userId,
-      role: event.roleId,
-      firstName: event.firstName,
-      lastName: event.lastName,
-      email: event.email,
-      phoneNumber: event.mobile,
-    );
+            userId: event.userId,
+            role: event.roleId,
+            firstName: event.firstName,
+            lastName: event.lastName,
+            email: event.email,
+            phoneNumber: event.mobile,
+            profileUrl: event.profilePic);
     AdminCreationState homeState = homeResult.fold((l) {
       CSnackBar.showError(event.context, msg: l.error ?? "");
       return state.copyWith(
@@ -153,14 +162,14 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
     emit(state.copyWith(isLoadingButton: true));
     final Either<ApiErrorHandler, CommonResponseUse> homeResult =
         await adminCreationRepository.updateAdmin(
-      userId: event.userId,
-      adminId: event.adminId,
-      role: event.roleId,
-      firstName: event.firstName,
-      lastName: event.lastName,
-      email: event.email,
-      phoneNumber: event.mobile,
-    );
+            userId: event.userId,
+            adminId: event.adminId,
+            role: event.roleId,
+            firstName: event.firstName,
+            lastName: event.lastName,
+            email: event.email,
+            phoneNumber: event.mobile,
+            profileUrl: event.profilePic);
     AdminCreationState homeState = homeResult.fold((l) {
       CSnackBar.showError(event.context, msg: l.error ?? "");
       return state.copyWith(
