@@ -5,14 +5,13 @@ import 'package:admin_580_tech/infrastructure/caregiver_detail/caregiver_detail_
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 
 import '../../../domain/caregiver_detail/model/caregiver_service_list_response.dart';
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
 
 part 'caregiver_detail_bloc.freezed.dart';
-
 part 'caregiver_detail_event.dart';
-
 part 'caregiver_detail_state.dart';
 
 class CaregiverDetailBloc
@@ -108,5 +107,13 @@ class CaregiverDetailBloc
   void _getScheduleServices(
       _GetSelectedScheduleServices event, Emitter<CareGiverDetailState> emit) {
     emit(state.copyWith(selectedScheduleServices: event.services));
+  }
+
+  String convertTo12HourFormat(String time24Hour) {
+    DateFormat inputFormat = DateFormat('HH:mm');
+    DateTime dateTime = inputFormat.parse(time24Hour);
+    DateFormat outputFormat = DateFormat('h:mm a');
+    String time12Hour = outputFormat.format(dateTime);
+    return time12Hour;
   }
 }

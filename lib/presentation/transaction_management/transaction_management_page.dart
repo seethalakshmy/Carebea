@@ -28,6 +28,7 @@ import '../widget/empty_view.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
 import '../widget/pagination_view.dart';
+import '../widget/table_actions_view.dart';
 
 @RoutePage()
 class TransactionManagementPage extends StatefulWidget {
@@ -396,25 +397,11 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                   text: _transactionBloc.formatDate(
                       item.dateTime ?? "0000-00-00T00:00:00.000Z"))),
               DataCell(_statusBox(item)),
-              DataCell(Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  InkWell(
-                      onTap: () {
-                        print(
-                            "initialLoading val in click : ${_transactionBloc.state.isInitialLoading}");
-                        _transactionDetails(item);
-                      },
-                      child: CustomSvg(
-                        path: IMG.eye.val,
-                        height: Responsive.isWeb(context)
-                            ? DBL.fifteen.val
-                            : DBL.twelve.val,
-                        width: Responsive.isWeb(context)
-                            ? DBL.twenty.val
-                            : DBL.eighteen.val,
-                      )),
-                ],
+              DataCell(TableActions(
+                isView: true, //SharedPreffUtil().getViewTransaction,
+                onViewTap: () {
+                  _transactionDetails(item);
+                },
               ))
             ],
           );
