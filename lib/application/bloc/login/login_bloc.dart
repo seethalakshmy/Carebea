@@ -52,8 +52,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
         sharedPrefUtil.setViewCareGiver =
             r.data?.permissions?.careAmbassador?.view ?? false;
-        // sharedPrefUtil.setEditCareGiver =
-        //     r.data?.permissions?.careAmbassador?.edit ?? false;
+        sharedPrefUtil.setEditCareGiver =
+            r.data?.permissions?.careAmbassador?.edit ?? false;
 
         sharedPrefUtil.setViewServiceRequest =
             r.data?.permissions?.services?.view ?? false;
@@ -64,7 +64,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             r.data?.permissions?.transactions?.view ?? false;
 
         event.context.router.replace(const SideMenuRoute());
-        // autoTabRouter?.setActiveIndex(1);
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
