@@ -6,13 +6,11 @@ import '../core/api_error_handler/api_error_handler.dart';
 import 'model/module_response.dart';
 
 abstract class IRoleCreationRepo {
-  Future<Either<ApiErrorHandler, CommonResponseUse>> addRoleUpdateRole(
-      {required String userId,
-      required String role,
-      required List<String> moduleId,
-      required int isView,
-      required int isEdit,
-      required int isDelete});
+  Future<Either<ApiErrorHandler, CommonResponseUse>> addRoleUpdateRole({
+    required String userId,
+    required String role,
+    required List<Module> moduleId,
+  });
   Future<Either<ApiErrorHandler, ModuleResponse>> getModule({
     required String userId,
   });

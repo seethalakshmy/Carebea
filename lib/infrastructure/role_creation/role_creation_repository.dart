@@ -17,11 +17,8 @@ class RoleCreationRepository implements IRoleCreationRepo {
   Future<Either<ApiErrorHandler, CommonResponseUse>> addRoleUpdateRole({
     required String userId,
     required String role,
-    required List<String> moduleId,
+    required List<Module> moduleId,
     String? roleId,
-    required int isView,
-    required int isEdit,
-    required int isDelete,
   }) async {
     try {
       final response = await apiClient.addRoleUpdateRole(
@@ -30,9 +27,6 @@ class RoleCreationRepository implements IRoleCreationRepo {
         role,
         roleId,
         moduleId,
-        isView,
-        isDelete,
-        isEdit,
       );
       return Right(response);
     } on DioError catch (e) {

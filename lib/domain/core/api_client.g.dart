@@ -1046,9 +1046,6 @@ class _ApiClient implements ApiClient {
     role,
     roleId,
     moduleID,
-    view,
-    delete,
-    edit,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1060,9 +1057,6 @@ class _ApiClient implements ApiClient {
       'role': role,
       'role_id': roleId,
       'assigned_modules': moduleID,
-      'view': view,
-      'delete': delete,
-      'edit': edit,
     };
     _data.removeWhere((k, v) => v == null);
     final _result = await _dio

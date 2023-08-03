@@ -1,9 +1,11 @@
 import 'dart:ui';
 
 import 'package:admin_580_tech/application/bloc/caregiver_verification/caregiver_verification_bloc.dart';
+import 'package:admin_580_tech/application/bloc/login/login_bloc.dart';
 import 'package:admin_580_tech/core/hive/hive_utils.dart';
 import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/infrastructure/caregiver_verification/caregivers_verification_repository.dart';
+import 'package:admin_580_tech/infrastructure/login/login_repository.dart';
 import 'package:admin_580_tech/infrastructure/service_request_management/service_request_management_repository.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
@@ -61,6 +63,7 @@ class _MyAppState extends State<MyApp> {
             create: (_) =>
                 CareGiverVerificationBloc(CareGiverVerificationRepository())),
         BlocProvider(create: (_) => FormValidationBloc()),
+        BlocProvider(create: (_) => LoginBloc(LoginRepository())),
         BlocProvider<ServiceRequestManagementBloc>(
             create: (context) => ServiceRequestManagementBloc(
                 ServiceRequestManagementRepository())),

@@ -1,7 +1,6 @@
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
-import 'package:admin_580_tech/infrastructure/login/login_repository.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
@@ -33,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   final FocusNode _userFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
-  final LoginBloc _loginBloc = LoginBloc(LoginRepository());
+  // final LoginBloc _loginBloc = LoginBloc(LoginRepository());
   AutovalidateMode _validateMode = AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
 
@@ -60,20 +59,17 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(body: _rebuildView(size));
   }
 
-  BlocProvider<LoginBloc> _rebuildView(Size size) {
-    return BlocProvider(
-      create: (context) => _loginBloc,
-      child: BlocBuilder<FormValidationBloc, FormValidationState>(
-        buildWhen: (previous, current) => previous != current,
-        builder: (context, state) {
-          state.whenOrNull(
-            formSubmitSuccess: () {
-              _validateMode = AutovalidateMode.always;
-            },
-          );
-          return _bodyView(context, size);
-        },
-      ),
+  _rebuildView(Size size) {
+    return BlocBuilder<FormValidationBloc, FormValidationState>(
+      buildWhen: (previous, current) => previous != current,
+      builder: (context, state) {
+        state.whenOrNull(
+          formSubmitSuccess: () {
+            _validateMode = AutovalidateMode.always;
+          },
+        );
+        return _bodyView(context, size);
+      },
     );
   }
 
@@ -274,7 +270,7 @@ class _LoginPageState extends State<LoginPage> {
           .add(const FormValidationEvent.submit());
     }
     if (_formKey.currentState!.validate()) {
-      _loginBloc.add(LoginEvent.login(
+      context.read<LoginBloc>().add(LoginEvent.login(
           context: context,
           email: _usernameController.text.trim(),
           password: _passwordController.text.trim()));
