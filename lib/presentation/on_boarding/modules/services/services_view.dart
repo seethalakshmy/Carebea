@@ -65,16 +65,18 @@ class _ServicesViewState extends State<ServicesView> {
                     leftButtonName: AppString.back.val,
                     rightButtonName: AppString.next.val,
                     onLeftButtonPressed: () {
+                      widget.onboardingBloc.nextButtonClicked = false;
                       widget.pageController
                           .jumpToPage(widget.pageController.page!.toInt() - 1);
                     },
                     onRightButtonPressed: () {
+                      widget.onboardingBloc.nextButtonClicked = true;
                       if (widget.onboardingBloc.selectedTier1ServiceList
                               .isEmpty &&
                           widget.onboardingBloc.selectedTier2ServiceList
                               .isEmpty) {
                         CSnackBar.showError(context,
-                            msg: "Please select at least one service");
+                            msg: AppString.pleaseSelectOneService.val);
                       } else {
                         widget.onboardingBloc
                             .add(OnboardingEvent.submitServices(

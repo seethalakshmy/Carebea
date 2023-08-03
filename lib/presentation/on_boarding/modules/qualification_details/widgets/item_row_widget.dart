@@ -180,7 +180,8 @@ class ItemRowWidget extends StatelessWidget {
             return Container(
               margin: EdgeInsets.all(DBL.ten.val),
               child: documentList[index].name.endsWith(".png") ||
-                      documentList[index].name.endsWith(".jpg")
+                      documentList[index].name.endsWith(".jpg") ||
+                      documentList[index].name.endsWith(".jpeg")
                   ? ImagePreviewWidget(
                       bytes: documentList[index].bytes!,
                       onRemoveTap: () {
