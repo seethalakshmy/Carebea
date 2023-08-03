@@ -26,6 +26,7 @@ class CustomCheckLabel extends StatelessWidget {
       child: Row(
         children: [
           Checkbox(
+              activeColor: AppColor.primaryColor.val,
               focusColor: AppColor.transparent.val,
               hoverColor: AppColor.transparent.val,
               value: value,

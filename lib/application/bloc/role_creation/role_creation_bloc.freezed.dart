@@ -18,62 +18,41 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$RoleCreationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)
+    required TResult Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)
         addUpdateRole,
     required TResult Function(String userId) getModules,
     required TResult Function(String userId, String roleId) viewRole,
     required TResult Function(Module module) isSelected,
-    required TResult Function(bool value) isCheckedView,
-    required TResult Function(bool value) isCheckedEdit,
-    required TResult Function(bool value) isCheckedDelete,
+    required TResult Function(Module module) isCheckedView,
+    required TResult Function(Module module) isCheckedEdit,
+    required TResult Function(Module module) isCheckedDelete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)?
+    TResult? Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)?
         addUpdateRole,
     TResult? Function(String userId)? getModules,
     TResult? Function(String userId, String roleId)? viewRole,
     TResult? Function(Module module)? isSelected,
-    TResult? Function(bool value)? isCheckedView,
-    TResult? Function(bool value)? isCheckedEdit,
-    TResult? Function(bool value)? isCheckedDelete,
+    TResult? Function(Module module)? isCheckedView,
+    TResult? Function(Module module)? isCheckedEdit,
+    TResult? Function(Module module)? isCheckedDelete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)?
+    TResult Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)?
         addUpdateRole,
     TResult Function(String userId)? getModules,
     TResult Function(String userId, String roleId)? viewRole,
     TResult Function(Module module)? isSelected,
-    TResult Function(bool value)? isCheckedView,
-    TResult Function(bool value)? isCheckedEdit,
-    TResult Function(bool value)? isCheckedDelete,
+    TResult Function(Module module)? isCheckedView,
+    TResult Function(Module module)? isCheckedEdit,
+    TResult Function(Module module)? isCheckedDelete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -141,10 +120,7 @@ abstract class _$$_AddUpdateRoleCopyWith<$Res> {
       {String userId,
       String role,
       String? roleId,
-      List<String> moduleId,
-      int isView,
-      int isDelete,
-      int isEdit,
+      List<Module> moduleId,
       BuildContext context});
 }
 
@@ -163,9 +139,6 @@ class __$$_AddUpdateRoleCopyWithImpl<$Res>
     Object? role = null,
     Object? roleId = freezed,
     Object? moduleId = null,
-    Object? isView = null,
-    Object? isDelete = null,
-    Object? isEdit = null,
     Object? context = null,
   }) {
     return _then(_$_AddUpdateRole(
@@ -184,19 +157,7 @@ class __$$_AddUpdateRoleCopyWithImpl<$Res>
       moduleId: null == moduleId
           ? _value._moduleId
           : moduleId // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      isView: null == isView
-          ? _value.isView
-          : isView // ignore: cast_nullable_to_non_nullable
-              as int,
-      isDelete: null == isDelete
-          ? _value.isDelete
-          : isDelete // ignore: cast_nullable_to_non_nullable
-              as int,
-      isEdit: null == isEdit
-          ? _value.isEdit
-          : isEdit // ignore: cast_nullable_to_non_nullable
-              as int,
+              as List<Module>,
       context: null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
@@ -212,10 +173,7 @@ class _$_AddUpdateRole implements _AddUpdateRole {
       {required this.userId,
       required this.role,
       this.roleId,
-      required final List<String> moduleId,
-      required this.isView,
-      required this.isDelete,
-      required this.isEdit,
+      required final List<Module> moduleId,
       required this.context})
       : _moduleId = moduleId;
 
@@ -225,26 +183,20 @@ class _$_AddUpdateRole implements _AddUpdateRole {
   final String role;
   @override
   final String? roleId;
-  final List<String> _moduleId;
+  final List<Module> _moduleId;
   @override
-  List<String> get moduleId {
+  List<Module> get moduleId {
     if (_moduleId is EqualUnmodifiableListView) return _moduleId;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_moduleId);
   }
 
   @override
-  final int isView;
-  @override
-  final int isDelete;
-  @override
-  final int isEdit;
-  @override
   final BuildContext context;
 
   @override
   String toString() {
-    return 'RoleCreationEvent.addUpdateRole(userId: $userId, role: $role, roleId: $roleId, moduleId: $moduleId, isView: $isView, isDelete: $isDelete, isEdit: $isEdit, context: $context)';
+    return 'RoleCreationEvent.addUpdateRole(userId: $userId, role: $role, roleId: $roleId, moduleId: $moduleId, context: $context)';
   }
 
   @override
@@ -256,24 +208,12 @@ class _$_AddUpdateRole implements _AddUpdateRole {
             (identical(other.role, role) || other.role == role) &&
             (identical(other.roleId, roleId) || other.roleId == roleId) &&
             const DeepCollectionEquality().equals(other._moduleId, _moduleId) &&
-            (identical(other.isView, isView) || other.isView == isView) &&
-            (identical(other.isDelete, isDelete) ||
-                other.isDelete == isDelete) &&
-            (identical(other.isEdit, isEdit) || other.isEdit == isEdit) &&
             (identical(other.context, context) || other.context == context));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      userId,
-      role,
-      roleId,
-      const DeepCollectionEquality().hash(_moduleId),
-      isView,
-      isDelete,
-      isEdit,
-      context);
+  int get hashCode => Object.hash(runtimeType, userId, role, roleId,
+      const DeepCollectionEquality().hash(_moduleId), context);
 
   @JsonKey(ignore: true)
   @override
@@ -284,75 +224,51 @@ class _$_AddUpdateRole implements _AddUpdateRole {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)
+    required TResult Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)
         addUpdateRole,
     required TResult Function(String userId) getModules,
     required TResult Function(String userId, String roleId) viewRole,
     required TResult Function(Module module) isSelected,
-    required TResult Function(bool value) isCheckedView,
-    required TResult Function(bool value) isCheckedEdit,
-    required TResult Function(bool value) isCheckedDelete,
+    required TResult Function(Module module) isCheckedView,
+    required TResult Function(Module module) isCheckedEdit,
+    required TResult Function(Module module) isCheckedDelete,
   }) {
-    return addUpdateRole(
-        userId, role, roleId, moduleId, isView, isDelete, isEdit, context);
+    return addUpdateRole(userId, role, roleId, moduleId, context);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)?
+    TResult? Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)?
         addUpdateRole,
     TResult? Function(String userId)? getModules,
     TResult? Function(String userId, String roleId)? viewRole,
     TResult? Function(Module module)? isSelected,
-    TResult? Function(bool value)? isCheckedView,
-    TResult? Function(bool value)? isCheckedEdit,
-    TResult? Function(bool value)? isCheckedDelete,
+    TResult? Function(Module module)? isCheckedView,
+    TResult? Function(Module module)? isCheckedEdit,
+    TResult? Function(Module module)? isCheckedDelete,
   }) {
-    return addUpdateRole?.call(
-        userId, role, roleId, moduleId, isView, isDelete, isEdit, context);
+    return addUpdateRole?.call(userId, role, roleId, moduleId, context);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)?
+    TResult Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)?
         addUpdateRole,
     TResult Function(String userId)? getModules,
     TResult Function(String userId, String roleId)? viewRole,
     TResult Function(Module module)? isSelected,
-    TResult Function(bool value)? isCheckedView,
-    TResult Function(bool value)? isCheckedEdit,
-    TResult Function(bool value)? isCheckedDelete,
+    TResult Function(Module module)? isCheckedView,
+    TResult Function(Module module)? isCheckedEdit,
+    TResult Function(Module module)? isCheckedDelete,
     required TResult orElse(),
   }) {
     if (addUpdateRole != null) {
-      return addUpdateRole(
-          userId, role, roleId, moduleId, isView, isDelete, isEdit, context);
+      return addUpdateRole(userId, role, roleId, moduleId, context);
     }
     return orElse();
   }
@@ -409,19 +325,13 @@ abstract class _AddUpdateRole implements RoleCreationEvent {
       {required final String userId,
       required final String role,
       final String? roleId,
-      required final List<String> moduleId,
-      required final int isView,
-      required final int isDelete,
-      required final int isEdit,
+      required final List<Module> moduleId,
       required final BuildContext context}) = _$_AddUpdateRole;
 
   String get userId;
   String get role;
   String? get roleId;
-  List<String> get moduleId;
-  int get isView;
-  int get isDelete;
-  int get isEdit;
+  List<Module> get moduleId;
   BuildContext get context;
   @JsonKey(ignore: true)
   _$$_AddUpdateRoleCopyWith<_$_AddUpdateRole> get copyWith =>
@@ -492,22 +402,15 @@ class _$_GetModules implements _GetModules {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)
+    required TResult Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)
         addUpdateRole,
     required TResult Function(String userId) getModules,
     required TResult Function(String userId, String roleId) viewRole,
     required TResult Function(Module module) isSelected,
-    required TResult Function(bool value) isCheckedView,
-    required TResult Function(bool value) isCheckedEdit,
-    required TResult Function(bool value) isCheckedDelete,
+    required TResult Function(Module module) isCheckedView,
+    required TResult Function(Module module) isCheckedEdit,
+    required TResult Function(Module module) isCheckedDelete,
   }) {
     return getModules(userId);
   }
@@ -515,22 +418,15 @@ class _$_GetModules implements _GetModules {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)?
+    TResult? Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)?
         addUpdateRole,
     TResult? Function(String userId)? getModules,
     TResult? Function(String userId, String roleId)? viewRole,
     TResult? Function(Module module)? isSelected,
-    TResult? Function(bool value)? isCheckedView,
-    TResult? Function(bool value)? isCheckedEdit,
-    TResult? Function(bool value)? isCheckedDelete,
+    TResult? Function(Module module)? isCheckedView,
+    TResult? Function(Module module)? isCheckedEdit,
+    TResult? Function(Module module)? isCheckedDelete,
   }) {
     return getModules?.call(userId);
   }
@@ -538,22 +434,15 @@ class _$_GetModules implements _GetModules {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)?
+    TResult Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)?
         addUpdateRole,
     TResult Function(String userId)? getModules,
     TResult Function(String userId, String roleId)? viewRole,
     TResult Function(Module module)? isSelected,
-    TResult Function(bool value)? isCheckedView,
-    TResult Function(bool value)? isCheckedEdit,
-    TResult Function(bool value)? isCheckedDelete,
+    TResult Function(Module module)? isCheckedView,
+    TResult Function(Module module)? isCheckedEdit,
+    TResult Function(Module module)? isCheckedDelete,
     required TResult orElse(),
   }) {
     if (getModules != null) {
@@ -690,22 +579,15 @@ class _$_ViewRole implements _ViewRole {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)
+    required TResult Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)
         addUpdateRole,
     required TResult Function(String userId) getModules,
     required TResult Function(String userId, String roleId) viewRole,
     required TResult Function(Module module) isSelected,
-    required TResult Function(bool value) isCheckedView,
-    required TResult Function(bool value) isCheckedEdit,
-    required TResult Function(bool value) isCheckedDelete,
+    required TResult Function(Module module) isCheckedView,
+    required TResult Function(Module module) isCheckedEdit,
+    required TResult Function(Module module) isCheckedDelete,
   }) {
     return viewRole(userId, roleId);
   }
@@ -713,22 +595,15 @@ class _$_ViewRole implements _ViewRole {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)?
+    TResult? Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)?
         addUpdateRole,
     TResult? Function(String userId)? getModules,
     TResult? Function(String userId, String roleId)? viewRole,
     TResult? Function(Module module)? isSelected,
-    TResult? Function(bool value)? isCheckedView,
-    TResult? Function(bool value)? isCheckedEdit,
-    TResult? Function(bool value)? isCheckedDelete,
+    TResult? Function(Module module)? isCheckedView,
+    TResult? Function(Module module)? isCheckedEdit,
+    TResult? Function(Module module)? isCheckedDelete,
   }) {
     return viewRole?.call(userId, roleId);
   }
@@ -736,22 +611,15 @@ class _$_ViewRole implements _ViewRole {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)?
+    TResult Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)?
         addUpdateRole,
     TResult Function(String userId)? getModules,
     TResult Function(String userId, String roleId)? viewRole,
     TResult Function(Module module)? isSelected,
-    TResult Function(bool value)? isCheckedView,
-    TResult Function(bool value)? isCheckedEdit,
-    TResult Function(bool value)? isCheckedDelete,
+    TResult Function(Module module)? isCheckedView,
+    TResult Function(Module module)? isCheckedEdit,
+    TResult Function(Module module)? isCheckedDelete,
     required TResult orElse(),
   }) {
     if (viewRole != null) {
@@ -883,22 +751,15 @@ class _$_IsSelected implements _IsSelected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)
+    required TResult Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)
         addUpdateRole,
     required TResult Function(String userId) getModules,
     required TResult Function(String userId, String roleId) viewRole,
     required TResult Function(Module module) isSelected,
-    required TResult Function(bool value) isCheckedView,
-    required TResult Function(bool value) isCheckedEdit,
-    required TResult Function(bool value) isCheckedDelete,
+    required TResult Function(Module module) isCheckedView,
+    required TResult Function(Module module) isCheckedEdit,
+    required TResult Function(Module module) isCheckedDelete,
   }) {
     return isSelected(module);
   }
@@ -906,22 +767,15 @@ class _$_IsSelected implements _IsSelected {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)?
+    TResult? Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)?
         addUpdateRole,
     TResult? Function(String userId)? getModules,
     TResult? Function(String userId, String roleId)? viewRole,
     TResult? Function(Module module)? isSelected,
-    TResult? Function(bool value)? isCheckedView,
-    TResult? Function(bool value)? isCheckedEdit,
-    TResult? Function(bool value)? isCheckedDelete,
+    TResult? Function(Module module)? isCheckedView,
+    TResult? Function(Module module)? isCheckedEdit,
+    TResult? Function(Module module)? isCheckedDelete,
   }) {
     return isSelected?.call(module);
   }
@@ -929,22 +783,15 @@ class _$_IsSelected implements _IsSelected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)?
+    TResult Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)?
         addUpdateRole,
     TResult Function(String userId)? getModules,
     TResult Function(String userId, String roleId)? viewRole,
     TResult Function(Module module)? isSelected,
-    TResult Function(bool value)? isCheckedView,
-    TResult Function(bool value)? isCheckedEdit,
-    TResult Function(bool value)? isCheckedDelete,
+    TResult Function(Module module)? isCheckedView,
+    TResult Function(Module module)? isCheckedEdit,
+    TResult Function(Module module)? isCheckedDelete,
     required TResult orElse(),
   }) {
     if (isSelected != null) {
@@ -1015,7 +862,7 @@ abstract class _$$_IsCheckedViewCopyWith<$Res> {
           _$_IsCheckedView value, $Res Function(_$_IsCheckedView) then) =
       __$$_IsCheckedViewCopyWithImpl<$Res>;
   @useResult
-  $Res call({bool value});
+  $Res call({Module module});
 }
 
 /// @nodoc
@@ -1029,13 +876,13 @@ class __$$_IsCheckedViewCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? value = null,
+    Object? module = null,
   }) {
     return _then(_$_IsCheckedView(
-      null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as bool,
+      null == module
+          ? _value.module
+          : module // ignore: cast_nullable_to_non_nullable
+              as Module,
     ));
   }
 }
@@ -1043,14 +890,14 @@ class __$$_IsCheckedViewCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_IsCheckedView implements _IsCheckedView {
-  const _$_IsCheckedView(this.value);
+  const _$_IsCheckedView(this.module);
 
   @override
-  final bool value;
+  final Module module;
 
   @override
   String toString() {
-    return 'RoleCreationEvent.isCheckedView(value: $value)';
+    return 'RoleCreationEvent.isCheckedView(module: $module)';
   }
 
   @override
@@ -1058,11 +905,11 @@ class _$_IsCheckedView implements _IsCheckedView {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_IsCheckedView &&
-            (identical(other.value, value) || other.value == value));
+            (identical(other.module, module) || other.module == module));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, value);
+  int get hashCode => Object.hash(runtimeType, module);
 
   @JsonKey(ignore: true)
   @override
@@ -1073,72 +920,51 @@ class _$_IsCheckedView implements _IsCheckedView {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)
+    required TResult Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)
         addUpdateRole,
     required TResult Function(String userId) getModules,
     required TResult Function(String userId, String roleId) viewRole,
     required TResult Function(Module module) isSelected,
-    required TResult Function(bool value) isCheckedView,
-    required TResult Function(bool value) isCheckedEdit,
-    required TResult Function(bool value) isCheckedDelete,
+    required TResult Function(Module module) isCheckedView,
+    required TResult Function(Module module) isCheckedEdit,
+    required TResult Function(Module module) isCheckedDelete,
   }) {
-    return isCheckedView(value);
+    return isCheckedView(module);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)?
+    TResult? Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)?
         addUpdateRole,
     TResult? Function(String userId)? getModules,
     TResult? Function(String userId, String roleId)? viewRole,
     TResult? Function(Module module)? isSelected,
-    TResult? Function(bool value)? isCheckedView,
-    TResult? Function(bool value)? isCheckedEdit,
-    TResult? Function(bool value)? isCheckedDelete,
+    TResult? Function(Module module)? isCheckedView,
+    TResult? Function(Module module)? isCheckedEdit,
+    TResult? Function(Module module)? isCheckedDelete,
   }) {
-    return isCheckedView?.call(value);
+    return isCheckedView?.call(module);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)?
+    TResult Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)?
         addUpdateRole,
     TResult Function(String userId)? getModules,
     TResult Function(String userId, String roleId)? viewRole,
     TResult Function(Module module)? isSelected,
-    TResult Function(bool value)? isCheckedView,
-    TResult Function(bool value)? isCheckedEdit,
-    TResult Function(bool value)? isCheckedDelete,
+    TResult Function(Module module)? isCheckedView,
+    TResult Function(Module module)? isCheckedEdit,
+    TResult Function(Module module)? isCheckedDelete,
     required TResult orElse(),
   }) {
     if (isCheckedView != null) {
-      return isCheckedView(value);
+      return isCheckedView(module);
     }
     return orElse();
   }
@@ -1191,9 +1017,9 @@ class _$_IsCheckedView implements _IsCheckedView {
 }
 
 abstract class _IsCheckedView implements RoleCreationEvent {
-  const factory _IsCheckedView(final bool value) = _$_IsCheckedView;
+  const factory _IsCheckedView(final Module module) = _$_IsCheckedView;
 
-  bool get value;
+  Module get module;
   @JsonKey(ignore: true)
   _$$_IsCheckedViewCopyWith<_$_IsCheckedView> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1205,7 +1031,7 @@ abstract class _$$_IsCheckedEditCopyWith<$Res> {
           _$_IsCheckedEdit value, $Res Function(_$_IsCheckedEdit) then) =
       __$$_IsCheckedEditCopyWithImpl<$Res>;
   @useResult
-  $Res call({bool value});
+  $Res call({Module module});
 }
 
 /// @nodoc
@@ -1219,13 +1045,13 @@ class __$$_IsCheckedEditCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? value = null,
+    Object? module = null,
   }) {
     return _then(_$_IsCheckedEdit(
-      null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as bool,
+      null == module
+          ? _value.module
+          : module // ignore: cast_nullable_to_non_nullable
+              as Module,
     ));
   }
 }
@@ -1233,14 +1059,14 @@ class __$$_IsCheckedEditCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_IsCheckedEdit implements _IsCheckedEdit {
-  const _$_IsCheckedEdit(this.value);
+  const _$_IsCheckedEdit(this.module);
 
   @override
-  final bool value;
+  final Module module;
 
   @override
   String toString() {
-    return 'RoleCreationEvent.isCheckedEdit(value: $value)';
+    return 'RoleCreationEvent.isCheckedEdit(module: $module)';
   }
 
   @override
@@ -1248,11 +1074,11 @@ class _$_IsCheckedEdit implements _IsCheckedEdit {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_IsCheckedEdit &&
-            (identical(other.value, value) || other.value == value));
+            (identical(other.module, module) || other.module == module));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, value);
+  int get hashCode => Object.hash(runtimeType, module);
 
   @JsonKey(ignore: true)
   @override
@@ -1263,72 +1089,51 @@ class _$_IsCheckedEdit implements _IsCheckedEdit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)
+    required TResult Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)
         addUpdateRole,
     required TResult Function(String userId) getModules,
     required TResult Function(String userId, String roleId) viewRole,
     required TResult Function(Module module) isSelected,
-    required TResult Function(bool value) isCheckedView,
-    required TResult Function(bool value) isCheckedEdit,
-    required TResult Function(bool value) isCheckedDelete,
+    required TResult Function(Module module) isCheckedView,
+    required TResult Function(Module module) isCheckedEdit,
+    required TResult Function(Module module) isCheckedDelete,
   }) {
-    return isCheckedEdit(value);
+    return isCheckedEdit(module);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)?
+    TResult? Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)?
         addUpdateRole,
     TResult? Function(String userId)? getModules,
     TResult? Function(String userId, String roleId)? viewRole,
     TResult? Function(Module module)? isSelected,
-    TResult? Function(bool value)? isCheckedView,
-    TResult? Function(bool value)? isCheckedEdit,
-    TResult? Function(bool value)? isCheckedDelete,
+    TResult? Function(Module module)? isCheckedView,
+    TResult? Function(Module module)? isCheckedEdit,
+    TResult? Function(Module module)? isCheckedDelete,
   }) {
-    return isCheckedEdit?.call(value);
+    return isCheckedEdit?.call(module);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)?
+    TResult Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)?
         addUpdateRole,
     TResult Function(String userId)? getModules,
     TResult Function(String userId, String roleId)? viewRole,
     TResult Function(Module module)? isSelected,
-    TResult Function(bool value)? isCheckedView,
-    TResult Function(bool value)? isCheckedEdit,
-    TResult Function(bool value)? isCheckedDelete,
+    TResult Function(Module module)? isCheckedView,
+    TResult Function(Module module)? isCheckedEdit,
+    TResult Function(Module module)? isCheckedDelete,
     required TResult orElse(),
   }) {
     if (isCheckedEdit != null) {
-      return isCheckedEdit(value);
+      return isCheckedEdit(module);
     }
     return orElse();
   }
@@ -1381,9 +1186,9 @@ class _$_IsCheckedEdit implements _IsCheckedEdit {
 }
 
 abstract class _IsCheckedEdit implements RoleCreationEvent {
-  const factory _IsCheckedEdit(final bool value) = _$_IsCheckedEdit;
+  const factory _IsCheckedEdit(final Module module) = _$_IsCheckedEdit;
 
-  bool get value;
+  Module get module;
   @JsonKey(ignore: true)
   _$$_IsCheckedEditCopyWith<_$_IsCheckedEdit> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1395,7 +1200,7 @@ abstract class _$$_IsCheckedDeleteCopyWith<$Res> {
           _$_IsCheckedDelete value, $Res Function(_$_IsCheckedDelete) then) =
       __$$_IsCheckedDeleteCopyWithImpl<$Res>;
   @useResult
-  $Res call({bool value});
+  $Res call({Module module});
 }
 
 /// @nodoc
@@ -1409,13 +1214,13 @@ class __$$_IsCheckedDeleteCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? value = null,
+    Object? module = null,
   }) {
     return _then(_$_IsCheckedDelete(
-      null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as bool,
+      null == module
+          ? _value.module
+          : module // ignore: cast_nullable_to_non_nullable
+              as Module,
     ));
   }
 }
@@ -1423,14 +1228,14 @@ class __$$_IsCheckedDeleteCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_IsCheckedDelete implements _IsCheckedDelete {
-  const _$_IsCheckedDelete(this.value);
+  const _$_IsCheckedDelete(this.module);
 
   @override
-  final bool value;
+  final Module module;
 
   @override
   String toString() {
-    return 'RoleCreationEvent.isCheckedDelete(value: $value)';
+    return 'RoleCreationEvent.isCheckedDelete(module: $module)';
   }
 
   @override
@@ -1438,11 +1243,11 @@ class _$_IsCheckedDelete implements _IsCheckedDelete {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_IsCheckedDelete &&
-            (identical(other.value, value) || other.value == value));
+            (identical(other.module, module) || other.module == module));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, value);
+  int get hashCode => Object.hash(runtimeType, module);
 
   @JsonKey(ignore: true)
   @override
@@ -1453,72 +1258,51 @@ class _$_IsCheckedDelete implements _IsCheckedDelete {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)
+    required TResult Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)
         addUpdateRole,
     required TResult Function(String userId) getModules,
     required TResult Function(String userId, String roleId) viewRole,
     required TResult Function(Module module) isSelected,
-    required TResult Function(bool value) isCheckedView,
-    required TResult Function(bool value) isCheckedEdit,
-    required TResult Function(bool value) isCheckedDelete,
+    required TResult Function(Module module) isCheckedView,
+    required TResult Function(Module module) isCheckedEdit,
+    required TResult Function(Module module) isCheckedDelete,
   }) {
-    return isCheckedDelete(value);
+    return isCheckedDelete(module);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)?
+    TResult? Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)?
         addUpdateRole,
     TResult? Function(String userId)? getModules,
     TResult? Function(String userId, String roleId)? viewRole,
     TResult? Function(Module module)? isSelected,
-    TResult? Function(bool value)? isCheckedView,
-    TResult? Function(bool value)? isCheckedEdit,
-    TResult? Function(bool value)? isCheckedDelete,
+    TResult? Function(Module module)? isCheckedView,
+    TResult? Function(Module module)? isCheckedEdit,
+    TResult? Function(Module module)? isCheckedDelete,
   }) {
-    return isCheckedDelete?.call(value);
+    return isCheckedDelete?.call(module);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String userId,
-            String role,
-            String? roleId,
-            List<String> moduleId,
-            int isView,
-            int isDelete,
-            int isEdit,
-            BuildContext context)?
+    TResult Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)?
         addUpdateRole,
     TResult Function(String userId)? getModules,
     TResult Function(String userId, String roleId)? viewRole,
     TResult Function(Module module)? isSelected,
-    TResult Function(bool value)? isCheckedView,
-    TResult Function(bool value)? isCheckedEdit,
-    TResult Function(bool value)? isCheckedDelete,
+    TResult Function(Module module)? isCheckedView,
+    TResult Function(Module module)? isCheckedEdit,
+    TResult Function(Module module)? isCheckedDelete,
     required TResult orElse(),
   }) {
     if (isCheckedDelete != null) {
-      return isCheckedDelete(value);
+      return isCheckedDelete(module);
     }
     return orElse();
   }
@@ -1571,9 +1355,9 @@ class _$_IsCheckedDelete implements _IsCheckedDelete {
 }
 
 abstract class _IsCheckedDelete implements RoleCreationEvent {
-  const factory _IsCheckedDelete(final bool value) = _$_IsCheckedDelete;
+  const factory _IsCheckedDelete(final Module module) = _$_IsCheckedDelete;
 
-  bool get value;
+  Module get module;
   @JsonKey(ignore: true)
   _$$_IsCheckedDeleteCopyWith<_$_IsCheckedDelete> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1588,9 +1372,6 @@ mixin _$RoleCreationState {
   ViewRoleResponse? get viewRoleResponse => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   bool get isClientError => throw _privateConstructorUsedError;
-  bool get isView => throw _privateConstructorUsedError;
-  bool get isEdit => throw _privateConstructorUsedError;
-  bool get isDelete => throw _privateConstructorUsedError;
   bool get isLoadingButton => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1612,9 +1393,6 @@ abstract class $RoleCreationStateCopyWith<$Res> {
       ViewRoleResponse? viewRoleResponse,
       String? error,
       bool isClientError,
-      bool isView,
-      bool isEdit,
-      bool isDelete,
       bool isLoadingButton});
 }
 
@@ -1638,9 +1416,6 @@ class _$RoleCreationStateCopyWithImpl<$Res, $Val extends RoleCreationState>
     Object? viewRoleResponse = freezed,
     Object? error = freezed,
     Object? isClientError = null,
-    Object? isView = null,
-    Object? isEdit = null,
-    Object? isDelete = null,
     Object? isLoadingButton = null,
   }) {
     return _then(_value.copyWith(
@@ -1672,18 +1447,6 @@ class _$RoleCreationStateCopyWithImpl<$Res, $Val extends RoleCreationState>
           ? _value.isClientError
           : isClientError // ignore: cast_nullable_to_non_nullable
               as bool,
-      isView: null == isView
-          ? _value.isView
-          : isView // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isEdit: null == isEdit
-          ? _value.isEdit
-          : isEdit // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isDelete: null == isDelete
-          ? _value.isDelete
-          : isDelete // ignore: cast_nullable_to_non_nullable
-              as bool,
       isLoadingButton: null == isLoadingButton
           ? _value.isLoadingButton
           : isLoadingButton // ignore: cast_nullable_to_non_nullable
@@ -1708,9 +1471,6 @@ abstract class _$$_RoleCreationStateCopyWith<$Res>
       ViewRoleResponse? viewRoleResponse,
       String? error,
       bool isClientError,
-      bool isView,
-      bool isEdit,
-      bool isDelete,
       bool isLoadingButton});
 }
 
@@ -1732,9 +1492,6 @@ class __$$_RoleCreationStateCopyWithImpl<$Res>
     Object? viewRoleResponse = freezed,
     Object? error = freezed,
     Object? isClientError = null,
-    Object? isView = null,
-    Object? isEdit = null,
-    Object? isDelete = null,
     Object? isLoadingButton = null,
   }) {
     return _then(_$_RoleCreationState(
@@ -1766,18 +1523,6 @@ class __$$_RoleCreationStateCopyWithImpl<$Res>
           ? _value.isClientError
           : isClientError // ignore: cast_nullable_to_non_nullable
               as bool,
-      isView: null == isView
-          ? _value.isView
-          : isView // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isEdit: null == isEdit
-          ? _value.isEdit
-          : isEdit // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isDelete: null == isDelete
-          ? _value.isDelete
-          : isDelete // ignore: cast_nullable_to_non_nullable
-              as bool,
       isLoadingButton: null == isLoadingButton
           ? _value.isLoadingButton
           : isLoadingButton // ignore: cast_nullable_to_non_nullable
@@ -1797,9 +1542,6 @@ class _$_RoleCreationState implements _RoleCreationState {
       required this.viewRoleResponse,
       required this.error,
       this.isClientError = false,
-      this.isView = false,
-      this.isEdit = false,
-      this.isDelete = false,
       this.isLoadingButton = false});
 
   @override
@@ -1819,20 +1561,11 @@ class _$_RoleCreationState implements _RoleCreationState {
   final bool isClientError;
   @override
   @JsonKey()
-  final bool isView;
-  @override
-  @JsonKey()
-  final bool isEdit;
-  @override
-  @JsonKey()
-  final bool isDelete;
-  @override
-  @JsonKey()
   final bool isLoadingButton;
 
   @override
   String toString() {
-    return 'RoleCreationState(isLoading: $isLoading, isError: $isError, response: $response, moduleResponse: $moduleResponse, viewRoleResponse: $viewRoleResponse, error: $error, isClientError: $isClientError, isView: $isView, isEdit: $isEdit, isDelete: $isDelete, isLoadingButton: $isLoadingButton)';
+    return 'RoleCreationState(isLoading: $isLoading, isError: $isError, response: $response, moduleResponse: $moduleResponse, viewRoleResponse: $viewRoleResponse, error: $error, isClientError: $isClientError, isLoadingButton: $isLoadingButton)';
   }
 
   @override
@@ -1852,28 +1585,13 @@ class _$_RoleCreationState implements _RoleCreationState {
             (identical(other.error, error) || other.error == error) &&
             (identical(other.isClientError, isClientError) ||
                 other.isClientError == isClientError) &&
-            (identical(other.isView, isView) || other.isView == isView) &&
-            (identical(other.isEdit, isEdit) || other.isEdit == isEdit) &&
-            (identical(other.isDelete, isDelete) ||
-                other.isDelete == isDelete) &&
             (identical(other.isLoadingButton, isLoadingButton) ||
                 other.isLoadingButton == isLoadingButton));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      isLoading,
-      isError,
-      response,
-      moduleResponse,
-      viewRoleResponse,
-      error,
-      isClientError,
-      isView,
-      isEdit,
-      isDelete,
-      isLoadingButton);
+  int get hashCode => Object.hash(runtimeType, isLoading, isError, response,
+      moduleResponse, viewRoleResponse, error, isClientError, isLoadingButton);
 
   @JsonKey(ignore: true)
   @override
@@ -1892,9 +1610,6 @@ abstract class _RoleCreationState implements RoleCreationState {
       required final ViewRoleResponse? viewRoleResponse,
       required final String? error,
       final bool isClientError,
-      final bool isView,
-      final bool isEdit,
-      final bool isDelete,
       final bool isLoadingButton}) = _$_RoleCreationState;
 
   @override
@@ -1911,12 +1626,6 @@ abstract class _RoleCreationState implements RoleCreationState {
   String? get error;
   @override
   bool get isClientError;
-  @override
-  bool get isView;
-  @override
-  bool get isEdit;
-  @override
-  bool get isDelete;
   @override
   bool get isLoadingButton;
   @override

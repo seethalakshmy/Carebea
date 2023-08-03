@@ -10,9 +10,6 @@ class RoleCreationState with _$RoleCreationState {
     required ViewRoleResponse? viewRoleResponse,
     required String? error,
     @Default(false) bool isClientError,
-    @Default(false) bool isView,
-    @Default(false) bool isEdit,
-    @Default(false) bool isDelete,
     @Default(false) bool isLoadingButton,
   }) = _RoleCreationState;
 
