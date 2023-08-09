@@ -517,7 +517,8 @@ class _AdminsPageState extends State<AdminsPage> {
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {
-        return CustomAlertDelete(
+        return CustomActionAlert(
+            heading: AppString.delete.val,
             label: AppString.deleteRole.val,
             onTapYes: () {
               _adminsBloc.add(AdminEvent.adminDelete(

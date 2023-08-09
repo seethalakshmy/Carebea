@@ -1498,7 +1498,6 @@ class _ApiClient implements ApiClient {
     userId,
     page,
     limit,
-    filterId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1508,7 +1507,6 @@ class _ApiClient implements ApiClient {
       'user_id': userId,
       'page': page,
       'limit': limit,
-      'filter_id': filterId,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(
@@ -1533,7 +1531,6 @@ class _ApiClient implements ApiClient {
     userId,
     page,
     limit,
-    filterId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1543,7 +1540,6 @@ class _ApiClient implements ApiClient {
       'user_id': userId,
       'page': page,
       'limit': limit,
-      'filter_id': filterId,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(
@@ -1568,7 +1564,6 @@ class _ApiClient implements ApiClient {
     userId,
     page,
     limit,
-    filterId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1578,7 +1573,6 @@ class _ApiClient implements ApiClient {
       'user_id': userId,
       'page': page,
       'limit': limit,
-      'filter_id': filterId,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(
@@ -1603,7 +1597,6 @@ class _ApiClient implements ApiClient {
     userId,
     page,
     limit,
-    filterId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1613,7 +1606,6 @@ class _ApiClient implements ApiClient {
       'user_id': userId,
       'page': page,
       'limit': limit,
-      'filter_id': filterId,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(
@@ -1716,6 +1708,126 @@ class _ApiClient implements ApiClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = TransactionDetailsResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<RescheduleResponse> serviceReschedule(
+    token,
+    rescheduleParams,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(rescheduleParams.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<RescheduleResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/reschedule-service',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = RescheduleResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponseUse> assignCareGiver(
+    token,
+    rescheduleParams,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(rescheduleParams.toJson());
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponseUse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/assign-caregiver',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponseUse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponseUse> startService(
+    token,
+    userId,
+    serviceId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'service_id': serviceId,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponseUse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/start-service',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponseUse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponseUse> cancelServiceRequest(
+    token,
+    userId,
+    serviceId,
+    description,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'service_id': serviceId,
+      'description': description,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponseUse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/cancel-service',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponseUse.fromJson(_result.data!);
     return value;
   }
 

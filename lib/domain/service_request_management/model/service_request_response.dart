@@ -1,15 +1,20 @@
 import 'dart:convert';
-ServiceRequestResponse serviceRequestResponseFromJson(String str) => ServiceRequestResponse.fromJson(json.decode(str));
-String serviceRequestResponseToJson(ServiceRequestResponse data) => json.encode(data.toJson());
+
+ServiceRequestResponse serviceRequestResponseFromJson(String str) =>
+    ServiceRequestResponse.fromJson(json.decode(str));
+String serviceRequestResponseToJson(ServiceRequestResponse data) =>
+    json.encode(data.toJson());
+
 class ServiceRequestResponse {
   ServiceRequestResponse({
-      bool? status, 
-      String? message, 
-      Data? data,}){
+    bool? status,
+    String? message,
+    Data? data,
+  }) {
     _status = status;
     _message = message;
     _data = data;
-}
+  }
 
   ServiceRequestResponse.fromJson(dynamic json) {
     _status = json['status'];
@@ -19,13 +24,16 @@ class ServiceRequestResponse {
   bool? _status;
   String? _message;
   Data? _data;
-ServiceRequestResponse copyWith({  bool? status,
-  String? message,
-  Data? data,
-}) => ServiceRequestResponse(  status: status ?? _status,
-  message: message ?? _message,
-  data: data ?? _data,
-);
+  ServiceRequestResponse copyWith({
+    bool? status,
+    String? message,
+    Data? data,
+  }) =>
+      ServiceRequestResponse(
+        status: status ?? _status,
+        message: message ?? _message,
+        data: data ?? _data,
+      );
   bool? get status => _status;
   String? get message => _message;
   Data? get data => _data;
@@ -39,22 +47,23 @@ ServiceRequestResponse copyWith({  bool? status,
     }
     return map;
   }
-
 }
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
+
 class Data {
   Data({
-      List<Services>? services, 
-      num? totalCount, 
-      num? offset, 
-      num? actualLimit,}){
+    List<Services>? services,
+    num? totalCount,
+    num? offset,
+    num? actualLimit,
+  }) {
     _services = services;
     _totalCount = totalCount;
     _offset = offset;
     _actualLimit = actualLimit;
-}
+  }
 
   Data.fromJson(dynamic json) {
     if (json['services'] != null) {
@@ -71,15 +80,18 @@ class Data {
   num? _totalCount;
   num? _offset;
   num? _actualLimit;
-Data copyWith({  List<Services>? services,
-  num? totalCount,
-  num? offset,
-  num? actualLimit,
-}) => Data(  services: services ?? _services,
-  totalCount: totalCount ?? _totalCount,
-  offset: offset ?? _offset,
-  actualLimit: actualLimit ?? _actualLimit,
-);
+  Data copyWith({
+    List<Services>? services,
+    num? totalCount,
+    num? offset,
+    num? actualLimit,
+  }) =>
+      Data(
+        services: services ?? _services,
+        totalCount: totalCount ?? _totalCount,
+        offset: offset ?? _offset,
+        actualLimit: actualLimit ?? _actualLimit,
+      );
   List<Services>? get services => _services;
   num? get totalCount => _totalCount;
   num? get offset => _offset;
@@ -95,42 +107,42 @@ Data copyWith({  List<Services>? services,
     map['actualLimit'] = _actualLimit;
     return map;
   }
-
 }
 
 Services servicesFromJson(String str) => Services.fromJson(json.decode(str));
 String servicesToJson(Services data) => json.encode(data.toJson());
+
 class Services {
   Services({
-      String? id, 
-      String? serviceId, 
-      String? service, 
-      String? startDateTime, 
-      String? endDateTime, 
-      String? rating, 
-      String? cancelledBy, 
-      String? refundStatus, 
-      bool? isRated, 
-      String? cancelReason, 
-      String? feedback, 
-      List<String>? suspectedThingsDuringShift, 
-      String? suspectedOtherIssues, 
-      List<String>? caregiverReportedIssues, 
-      String? caregiverReportedOtherIssues, 
-      List<String>? serviceNeeded, 
-      String? noOfMatching, 
-      String? upcomingDays, 
-      List<Location>? location, 
-      List<String>? serviceCompleted, 
-      List<String>? serviceNotCompleted, 
-      String? extraFee, 
-      String? tip, 
-      String? refund, 
-      String? serviceFee, 
-      DecisionMaker? decisionMaker, 
-      Client? client,
+    String? id,
+    String? serviceId,
+    String? service,
+    String? startDateTime,
+    String? endDateTime,
+    String? rating,
+    String? cancelledBy,
+    String? refundStatus,
+    bool? isRated,
+    String? cancelReason,
+    String? feedback,
+    List<String>? suspectedThingsDuringShift,
+    String? suspectedOtherIssues,
+    List<String>? caregiverReportedIssues,
+    String? caregiverReportedOtherIssues,
+    List<String>? serviceNeeded,
+    String? noOfMatching,
+    String? upcomingDays,
+    List<Location>? location,
+    List<String>? serviceCompleted,
+    List<String>? serviceNotCompleted,
+    String? extraFee,
+    String? tip,
+    String? refund,
+    String? serviceFee,
+    DecisionMaker? decisionMaker,
+    Client? client,
     bool? isOngoing,
-  }){
+  }) {
     _id = id;
     _serviceId = serviceId;
     _service = service;
@@ -159,7 +171,7 @@ class Services {
     _decisionMaker = decisionMaker;
     _client = client;
     _isOngoing = isOngoing;
-}
+  }
 
   Services.fromJson(dynamic json) {
     _id = json['id'];
@@ -173,11 +185,17 @@ class Services {
     _isRated = json['is_rated'];
     _cancelReason = json['cancel_reason'];
     _feedback = json['feedback'];
-    _suspectedThingsDuringShift = json['suspected_things_during_shift'] != null ? json['suspected_things_during_shift'].cast<String>() : [];
+    _suspectedThingsDuringShift = json['suspected_things_during_shift'] != null
+        ? json['suspected_things_during_shift'].cast<String>()
+        : [];
     _suspectedOtherIssues = json['suspected_other_issues'];
-    _caregiverReportedIssues = json['caregiver_reported_issues'] != null ? json['caregiver_reported_issues'].cast<String>() : [];
+    _caregiverReportedIssues = json['caregiver_reported_issues'] != null
+        ? json['caregiver_reported_issues'].cast<String>()
+        : [];
     _caregiverReportedOtherIssues = json['caregiver_reported_other_issues'];
-    _serviceNeeded = json['service_needed'] != null ? json['service_needed'].cast<String>() : [];
+    _serviceNeeded = json['service_needed'] != null
+        ? json['service_needed'].cast<String>()
+        : [];
     _noOfMatching = json['no_of_matching'];
     _upcomingDays = json['upcoming_days'];
     if (json['location'] != null) {
@@ -186,15 +204,27 @@ class Services {
         _location?.add(Location.fromJson(v));
       });
     }
-    _serviceCompleted = json['service_completed'] != null ? json['service_completed'].cast<String>() : [];
-    _serviceNotCompleted = json['service_not_completed'] != null ? json['service_not_completed'].cast<String>() : [];
+    _serviceCompleted = json['service_completed'] != null
+        ? json['service_completed'].cast<String>()
+        : [];
+    _serviceNotCompleted = json['service_not_completed'] != null
+        ? json['service_not_completed'].cast<String>()
+        : [];
     _extraFee = json['extra_fee'];
     _tip = json['tip'];
     _refund = json['refund'];
     _serviceFee = json['service_fee'];
-    _decisionMaker = json['decision_maker'] != null ? DecisionMaker.fromJson(json['decision_maker']) : null;
+    _decisionMaker = json['decision_maker'] != null
+        ? DecisionMaker.fromJson(json['decision_maker'])
+        : null;
     _client = json['client'] != null ? Client.fromJson(json['client']) : null;
     _isOngoing = json['is_ongoing'];
+    _profileId = json['profile_id'];
+    _genderPreference = json['gender_preference'];
+    _selectedServices = json['selected_services'] != null
+        ? SelectedServices.fromJson(json['selected_services'])
+        : null;
+    _addressId = json['address_id'];
   }
   String? _id;
   String? _serviceId;
@@ -224,63 +254,74 @@ class Services {
   DecisionMaker? _decisionMaker;
   Client? _client;
   bool? _isOngoing;
-Services copyWith({  String? id,
-  String? serviceId,
-  String? service,
-  String? startDateTime,
-  String? endDateTime,
-  String? rating,
-  String? cancelledBy,
-  String? refundStatus,
-  bool? isRated,
-  String? cancelReason,
-  String? feedback,
-  List<String>? suspectedThingsDuringShift,
-  String? suspectedOtherIssues,
-  List<String>? caregiverReportedIssues,
-  String? caregiverReportedOtherIssues,
-  List<String>? serviceNeeded,
-  String? noOfMatching,
-  String? upcomingDays,
-  List<Location>? location,
-  List<String>? serviceCompleted,
-  List<String>? serviceNotCompleted,
-  String? extraFee,
-  String? tip,
-  String? refund,
-  String? serviceFee,
-  DecisionMaker? decisionMaker,
-  Client? client,
-  bool? isOngoing,
-}) => Services(  id: id ?? _id,
-  serviceId: serviceId ?? _serviceId,
-  service: service ?? _service,
-  startDateTime: startDateTime ?? _startDateTime,
-  endDateTime: endDateTime ?? _endDateTime,
-  rating: rating ?? _rating,
-  cancelledBy: cancelledBy ?? _cancelledBy,
-  refundStatus: refundStatus ?? _refundStatus,
-  isRated: isRated ?? _isRated,
-  cancelReason: cancelReason ?? _cancelReason,
-  feedback: feedback ?? _feedback,
-  suspectedThingsDuringShift: suspectedThingsDuringShift ?? _suspectedThingsDuringShift,
-  suspectedOtherIssues: suspectedOtherIssues ?? _suspectedOtherIssues,
-  caregiverReportedIssues: caregiverReportedIssues ?? _caregiverReportedIssues,
-  caregiverReportedOtherIssues: caregiverReportedOtherIssues ?? _caregiverReportedOtherIssues,
-  serviceNeeded: serviceNeeded ?? _serviceNeeded,
-  noOfMatching: noOfMatching ?? _noOfMatching,
-  upcomingDays: upcomingDays ?? _upcomingDays,
-  location: location ?? _location,
-  serviceCompleted: serviceCompleted ?? _serviceCompleted,
-  serviceNotCompleted: serviceNotCompleted ?? _serviceNotCompleted,
-  extraFee: extraFee ?? _extraFee,
-  tip: tip ?? _tip,
-  refund: refund ?? _refund,
-  serviceFee: serviceFee ?? _serviceFee,
-  decisionMaker: decisionMaker ?? _decisionMaker,
-  client: client ?? _client,
-  isOngoing: isOngoing ?? _isOngoing,
-);
+  String? _profileId;
+  String? _addressId;
+  int? _genderPreference;
+  SelectedServices? _selectedServices;
+
+  Services copyWith({
+    String? id,
+    String? serviceId,
+    String? service,
+    String? startDateTime,
+    String? endDateTime,
+    String? rating,
+    String? cancelledBy,
+    String? refundStatus,
+    bool? isRated,
+    String? cancelReason,
+    String? feedback,
+    List<String>? suspectedThingsDuringShift,
+    String? suspectedOtherIssues,
+    List<String>? caregiverReportedIssues,
+    String? caregiverReportedOtherIssues,
+    List<String>? serviceNeeded,
+    String? noOfMatching,
+    String? upcomingDays,
+    List<Location>? location,
+    List<String>? serviceCompleted,
+    List<String>? serviceNotCompleted,
+    String? extraFee,
+    String? tip,
+    String? refund,
+    String? serviceFee,
+    DecisionMaker? decisionMaker,
+    Client? client,
+    bool? isOngoing,
+  }) =>
+      Services(
+        id: id ?? _id,
+        serviceId: serviceId ?? _serviceId,
+        service: service ?? _service,
+        startDateTime: startDateTime ?? _startDateTime,
+        endDateTime: endDateTime ?? _endDateTime,
+        rating: rating ?? _rating,
+        cancelledBy: cancelledBy ?? _cancelledBy,
+        refundStatus: refundStatus ?? _refundStatus,
+        isRated: isRated ?? _isRated,
+        cancelReason: cancelReason ?? _cancelReason,
+        feedback: feedback ?? _feedback,
+        suspectedThingsDuringShift:
+            suspectedThingsDuringShift ?? _suspectedThingsDuringShift,
+        suspectedOtherIssues: suspectedOtherIssues ?? _suspectedOtherIssues,
+        caregiverReportedIssues:
+            caregiverReportedIssues ?? _caregiverReportedIssues,
+        caregiverReportedOtherIssues:
+            caregiverReportedOtherIssues ?? _caregiverReportedOtherIssues,
+        serviceNeeded: serviceNeeded ?? _serviceNeeded,
+        noOfMatching: noOfMatching ?? _noOfMatching,
+        upcomingDays: upcomingDays ?? _upcomingDays,
+        location: location ?? _location,
+        serviceCompleted: serviceCompleted ?? _serviceCompleted,
+        serviceNotCompleted: serviceNotCompleted ?? _serviceNotCompleted,
+        extraFee: extraFee ?? _extraFee,
+        tip: tip ?? _tip,
+        refund: refund ?? _refund,
+        serviceFee: serviceFee ?? _serviceFee,
+        decisionMaker: decisionMaker ?? _decisionMaker,
+        client: client ?? _client,
+        isOngoing: isOngoing ?? _isOngoing,
+      );
   String? get id => _id;
   String? get serviceId => _serviceId;
   String? get service => _service;
@@ -309,6 +350,10 @@ Services copyWith({  String? id,
   DecisionMaker? get decisionMaker => _decisionMaker;
   Client? get client => _client;
   bool? get isOngoing => _isOngoing;
+  int? get genderPreferences => _genderPreference;
+  String? get addressId => _addressId;
+  String? get profileID => _profileId;
+  SelectedServices? get selectedServices => _selectedServices;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -348,22 +393,23 @@ Services copyWith({  String? id,
     map['is_ongoing'] = _isOngoing;
     return map;
   }
-
 }
 
 Client clientFromJson(String str) => Client.fromJson(json.decode(str));
 String clientToJson(Client data) => json.encode(data.toJson());
+
 class Client {
   Client({
-      String? id, 
-      String? firstName, 
-      String? lastName, 
-      String? profile,}){
+    String? id,
+    String? firstName,
+    String? lastName,
+    String? profile,
+  }) {
     _id = id;
     _firstName = firstName;
     _lastName = lastName;
     _profile = profile;
-}
+  }
 
   Client.fromJson(dynamic json) {
     _id = json['id'];
@@ -375,15 +421,18 @@ class Client {
   String? _firstName;
   String? _lastName;
   String? _profile;
-Client copyWith({  String? id,
-  String? firstName,
-  String? lastName,
-  String? profile,
-}) => Client(  id: id ?? _id,
-  firstName: firstName ?? _firstName,
-  lastName: lastName ?? _lastName,
-  profile: profile ?? _profile,
-);
+  Client copyWith({
+    String? id,
+    String? firstName,
+    String? lastName,
+    String? profile,
+  }) =>
+      Client(
+        id: id ?? _id,
+        firstName: firstName ?? _firstName,
+        lastName: lastName ?? _lastName,
+        profile: profile ?? _profile,
+      );
   String? get id => _id;
   String? get firstName => _firstName;
   String? get lastName => _lastName;
@@ -397,22 +446,24 @@ Client copyWith({  String? id,
     map['profile'] = _profile;
     return map;
   }
-
 }
 
-DecisionMaker decisionMakerFromJson(String str) => DecisionMaker.fromJson(json.decode(str));
+DecisionMaker decisionMakerFromJson(String str) =>
+    DecisionMaker.fromJson(json.decode(str));
 String decisionMakerToJson(DecisionMaker data) => json.encode(data.toJson());
+
 class DecisionMaker {
   DecisionMaker({
-      String? id, 
-      String? firstName, 
-      String? lastName, 
-      String? profile,}){
+    String? id,
+    String? firstName,
+    String? lastName,
+    String? profile,
+  }) {
     _id = id;
     _firstName = firstName;
     _lastName = lastName;
     _profile = profile;
-}
+  }
 
   DecisionMaker.fromJson(dynamic json) {
     _id = json['id'];
@@ -424,15 +475,18 @@ class DecisionMaker {
   String? _firstName;
   String? _lastName;
   String? _profile;
-DecisionMaker copyWith({  String? id,
-  String? firstName,
-  String? lastName,
-  String? profile,
-}) => DecisionMaker(  id: id ?? _id,
-  firstName: firstName ?? _firstName,
-  lastName: lastName ?? _lastName,
-  profile: profile ?? _profile,
-);
+  DecisionMaker copyWith({
+    String? id,
+    String? firstName,
+    String? lastName,
+    String? profile,
+  }) =>
+      DecisionMaker(
+        id: id ?? _id,
+        firstName: firstName ?? _firstName,
+        lastName: lastName ?? _lastName,
+        profile: profile ?? _profile,
+      );
   String? get id => _id;
   String? get firstName => _firstName;
   String? get lastName => _lastName;
@@ -446,23 +500,24 @@ DecisionMaker copyWith({  String? id,
     map['profile'] = _profile;
     return map;
   }
-
 }
 
 Location locationFromJson(String str) => Location.fromJson(json.decode(str));
 String locationToJson(Location data) => json.encode(data.toJson());
+
 class Location {
   Location({
-      String? streetName, 
-      String? lattitude, 
-      String? longitude, 
-      String? city, 
-      String? state, 
-      String? cityName, 
-      String? stateName, 
-      String? address, 
-      String? zipCode, 
-      String? id,}){
+    String? streetName,
+    String? lattitude,
+    String? longitude,
+    String? city,
+    String? state,
+    String? cityName,
+    String? stateName,
+    String? address,
+    String? zipCode,
+    String? id,
+  }) {
     _streetName = streetName;
     _lattitude = lattitude;
     _longitude = longitude;
@@ -473,7 +528,7 @@ class Location {
     _address = address;
     _zipCode = zipCode;
     _id = id;
-}
+  }
 
   Location.fromJson(dynamic json) {
     _streetName = json['streetName'];
@@ -497,27 +552,30 @@ class Location {
   String? _address;
   String? _zipCode;
   String? _id;
-Location copyWith({  String? streetName,
-  String? lattitude,
-  String? longitude,
-  String? city,
-  String? state,
-  String? cityName,
-  String? stateName,
-  String? address,
-  String? zipCode,
-  String? id,
-}) => Location(  streetName: streetName ?? _streetName,
-  lattitude: lattitude ?? _lattitude,
-  longitude: longitude ?? _longitude,
-  city: city ?? _city,
-  state: state ?? _state,
-  cityName: cityName ?? _cityName,
-  stateName: stateName ?? _stateName,
-  address: address ?? _address,
-  zipCode: zipCode ?? _zipCode,
-  id: id ?? _id,
-);
+  Location copyWith({
+    String? streetName,
+    String? lattitude,
+    String? longitude,
+    String? city,
+    String? state,
+    String? cityName,
+    String? stateName,
+    String? address,
+    String? zipCode,
+    String? id,
+  }) =>
+      Location(
+        streetName: streetName ?? _streetName,
+        lattitude: lattitude ?? _lattitude,
+        longitude: longitude ?? _longitude,
+        city: city ?? _city,
+        state: state ?? _state,
+        cityName: cityName ?? _cityName,
+        stateName: stateName ?? _stateName,
+        address: address ?? _address,
+        zipCode: zipCode ?? _zipCode,
+        id: id ?? _id,
+      );
   String? get streetName => _streetName;
   String? get lattitude => _lattitude;
   String? get longitude => _longitude;
@@ -543,5 +601,23 @@ Location copyWith({  String? streetName,
     map['_id'] = _id;
     return map;
   }
+}
 
+class SelectedServices {
+  List<String>? tier1;
+  List<String>? tier2;
+
+  SelectedServices({this.tier1, this.tier2});
+
+  SelectedServices.fromJson(Map<String, dynamic> json) {
+    tier1 = json['tier1'].cast<String>();
+    tier2 = json['tier2'].cast<String>();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['tier1'] = tier1;
+    data['tier2'] = tier2;
+    return data;
+  }
 }

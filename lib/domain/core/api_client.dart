@@ -11,6 +11,7 @@ import 'package:admin_580_tech/domain/caregiver_verification/model/verify_respon
 import 'package:admin_580_tech/domain/common_response/common_response.dart';
 import 'package:admin_580_tech/domain/login/login_response.dart';
 import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
+import 'package:admin_580_tech/domain/service_request_management/model/reschedule_params.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -37,6 +38,8 @@ import '../on_boarding/models/services/get_services_response.dart';
 import '../on_boarding/models/services/service_request_model.dart';
 import '../role_creation/model/module_response.dart';
 import '../role_creation/model/view_role_response.dart';
+import '../service_request_management/model/assign_caregiver_params.dart';
+import '../service_request_management/model/reschedule_response.dart';
 import '../service_request_management/model/service_request_response.dart';
 import '../transaction_management/model/get_filters_response.dart';
 import '../transaction_management/model/transaction_details_response.dart';
@@ -386,32 +389,28 @@ abstract class ApiClient {
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('page') int page,
-      @Field('limit') int limit,
-      @Field('filter_id') int filterId);
+      @Field('limit') int limit);
 
   @POST("/admin/cancelled-service-list")
   Future<ServiceRequestResponse> getCancelled(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('page') int page,
-      @Field('limit') int limit,
-      @Field('filter_id') int filterId);
+      @Field('limit') int limit);
 
   @POST("/admin/upcoming-service-list")
   Future<ServiceRequestResponse> getUpcomingRequests(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('page') int page,
-      @Field('limit') int limit,
-      @Field('filter_id') int filterId);
+      @Field('limit') int limit);
 
   @POST("/admin/ongoing-service-list")
   Future<ServiceRequestResponse> getOngoingRequests(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('page') int page,
-      @Field('limit') int limit,
-      @Field('filter_id') int filterId);
+      @Field('limit') int limit);
 
   @GET("/common-data/get-filters")
   Future<GetFiltersResponse> getFilters();
@@ -429,4 +428,25 @@ abstract class ApiClient {
   Future<TransactionDetailsResponse> getTransactionDetails(
       @Header("Authorization") String token,
       @Field('transaction_id') String transactionId);
+
+  @POST("/admin/reschedule-service")
+  Future<RescheduleResponse> serviceReschedule(
+      @Header("Authorization") String token,
+      @Body() RescheduleParams rescheduleParams);
+
+  @POST("/admin/assign-caregiver")
+  Future<CommonResponseUse> assignCareGiver(
+      @Header("Authorization") String token,
+      @Body() AssignCareGiverParams rescheduleParams);
+
+  @POST("/admin/start-service")
+  Future<CommonResponseUse> startService(@Header("Authorization") String token,
+      @Field('user_id') String userId, @Field('service_id') String serviceId);
+
+  @POST("/admin/cancel-service")
+  Future<CommonResponseUse> cancelServiceRequest(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('service_id') String serviceId,
+      @Field('description') String description);
 }

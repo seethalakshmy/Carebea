@@ -6,16 +6,31 @@ import 'custom_alert_dialog_widget.dart';
 import 'custom_button.dart';
 import 'custom_sizedbox.dart';
 import 'custom_text.dart';
+import 'custom_text_field.dart';
 
-class CustomAlertDelete extends StatelessWidget {
-  const CustomAlertDelete(
-      {super.key, required this.label, required this.onTapYes});
+class CustomActionAlert extends StatelessWidget {
+  const CustomActionAlert({
+    super.key,
+    required this.label,
+    required this.onTapYes,
+    required this.heading,
+    this.isTextField = false,
+    this.isLoading = false,
+    this.controller,
+    this.validator,
+  });
+  final String heading;
   final String label;
   final Function onTapYes;
+  final bool isTextField;
+  final bool isLoading;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
+
   @override
   Widget build(BuildContext context) {
     return CustomAlertDialogWidget(
-      heading: AppString.delete.val,
+      heading: heading,
       height: 280,
       width: 500,
       child: Padding(
@@ -37,7 +52,11 @@ class CustomAlertDelete extends StatelessWidget {
                     fontWeight: FW.w400.val),
               ),
               CustomSizedBox(
-                height: DBL.hundred.val,
+                height: isTextField ? DBL.twenty.val : DBL.zero.val,
+              ),
+              isTextField ? reasonField() : CustomSizedBox.shrink(),
+              CustomSizedBox(
+                height: isTextField ? DBL.thirty.val : DBL.hundred.val,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -76,8 +95,8 @@ class CustomAlertDelete extends StatelessWidget {
   CustomButton _yesButton(BuildContext context) {
     return CustomButton(
       text: AppString.yes.val,
+      isLoading: isLoading,
       onPressed: () {
-        Navigator.pop(context);
         onTapYes();
       },
       borderRadius: DBL.five.val,
@@ -87,6 +106,22 @@ class CustomAlertDelete extends StatelessWidget {
           fontSize: FS.font16.val),
       padding: EdgeInsets.symmetric(
           horizontal: DBL.thirtyFive.val, vertical: DBL.eighteen.val),
+    );
+  }
+
+  reasonField() {
+    return CTextField(
+      width: 350,
+      controller: controller,
+      borderColor: AppColor.lightBlue3.val,
+      hintText: AppString.enterTheReason.val,
+      maxLines: INT.two.val,
+      hintStyle: TS().gRoboto(
+          fontSize: FS.font15.val,
+          fontWeight: FW.w400.val,
+          color: AppColor.black.val),
+      fillColor: AppColor.lightBlue3.val,
+      validator: validator,
     );
   }
 }

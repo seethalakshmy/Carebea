@@ -40,13 +40,13 @@ class CareGiverProfilePage extends StatefulWidget {
 
 class _CareGiverProfilePageState extends State<CareGiverProfilePage>
     with SingleTickerProviderStateMixin {
-  late TabController tabController;
+  late TabController _tabController;
   String _userId = "";
   late CareGiverProfileBloc _careGiverProfileBloc;
 
   @override
   void initState() {
-    tabController = TabController(vsync: this, length: 7);
+    _tabController = TabController(vsync: this, length: 7);
     _userId =
         autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
     _careGiverProfileBloc = CareGiverProfileBloc(CareGiverProfileRepository());
@@ -55,7 +55,7 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
 
   @override
   void dispose() {
-    tabController.dispose();
+    _tabController.dispose();
     super.dispose();
   }
 
@@ -124,11 +124,11 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
               Tab(icon: _buildCustomText(AppString.profile.val)),
               Tab(icon: _buildCustomText(AppString.agreement.val)),
             ],
-            controller: tabController,
+            controller: _tabController,
           ),
           body: TabBarView(
             physics: const NeverScrollableScrollPhysics(),
-            controller: tabController,
+            controller: _tabController,
             children: [
               CaregiverPersonalDetailsView(
                 state: state,
