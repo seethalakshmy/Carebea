@@ -9,6 +9,7 @@ enum AppString {
   selectHint("--Select--"),
   selectDate("Select Date"),
   startTime("Start Time"),
+  start("Start"),
   endTime("End Time"),
   ok("Ok"),
   profile("Profile"),
@@ -97,6 +98,7 @@ enum AppString {
   notify("Notify"),
   serviceDetails("Service Details"),
   services("Services"),
+  serviceTypeHint("Select Your Service Type"),
   selectAllServices("Select all the services you are able to do"),
   addMoreReference("Add more reference"),
   serviceCompleted("Services Completed"),
@@ -109,6 +111,7 @@ enum AppString {
   location("Location"),
   colon(": "),
   startDateStartTime("Start Date & Start Time"),
+  startService("Start Service"),
   startDateTime("Start Date & Time"),
   suspectedThings("The suspected things during the shift"),
   reportedIssuesByCareAmbassador(
@@ -176,6 +179,9 @@ enum AppString {
   yes("Yes"),
   no("No"),
   deleteRole("Are you sure want to delete this role?"),
+  areYouSureCancelServiceRequest(
+      "Are you sure want to cancel this service request?"),
+  areYouSureStartServiceRequest("Are you sure want to start this service?"),
   noUsersFound("No Users found!"),
   profileCompletion("Profile Completion"),
   logout("Logout"),
@@ -251,6 +257,7 @@ enum AppString {
   dateOfBirth("Date of Birth"),
   ddmmyyyy("dd/mm/yyyy"),
   mmDDYYY("MM/dd/yyyy"),
+  ddMMYYY("dd/MM/yyyy"),
   mmDDYYYTimeZone("MM/dd/yyyy  'at' hh:mm a"),
   personalDetails("Personal Details"),
   qualificationAndTestResult("Qualifications & Test Result"),
@@ -388,8 +395,8 @@ enum AppString {
   youShouldSelectStartTime("You should start from time"),
   rescheduleWaiting(
       "Please hold on for a moment as we are\nchecking if the caregiver is available for the\ndate you have chosen"),
-  cancelThisServiceRequest("Cancel This Service Request"),
-  rescheduleThisServiceRequest("Reschedule This Service Request"),
+  cancelThisServiceRequest("Cancel this Service Request"),
+  rescheduleThisServiceRequest("Reschedule this Service Request"),
   agreementChckboxText(
       "I have read and agree to the home health aid agreement"),
   dummyAgreementText(

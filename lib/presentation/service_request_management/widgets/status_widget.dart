@@ -1,28 +1,42 @@
 import 'package:admin_580_tech/core/enum.dart';
+import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../widget/custom_text.dart';
 
 class StatusWidget extends StatelessWidget {
-  const StatusWidget({Key? key, required this.status, required this.isOngoing})
+  const StatusWidget(
+      {Key? key,
+      required this.status,
+      required this.isOngoing,
+      this.onStartPressed})
       : super(key: key);
 
   final String status;
   final bool isOngoing;
+  final Function? onStartPressed;
 
   @override
   Widget build(BuildContext context) {
     return isOngoing
         ? _onGoingWidget()
-        : Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4), color: getColor()),
-            padding: const EdgeInsets.all(6),
-            child: Center(
-                child: CustomText(
-                    status == AppString.onGoing.val ? "Start" : status,
-                    style: const TextStyle(color: Colors.white, fontSize: 12))),
-          );
+        : status == AppString.onGoing.val
+            ? CustomButton(
+                onPressed: () {
+                  onStartPressed!();
+                },
+                text: AppString.start.val,
+                hoverColor: AppColor.darkBlue.val,
+              )
+            : Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4), color: getColor()),
+                padding: const EdgeInsets.all(6),
+                child: Center(
+                    child: CustomText(status,
+                        style: const TextStyle(
+                            color: Colors.white, fontSize: 12))),
+              );
   }
 
   Color getColor() {
