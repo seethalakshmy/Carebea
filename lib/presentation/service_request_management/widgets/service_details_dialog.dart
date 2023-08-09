@@ -375,7 +375,7 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
                                                                   ? _notAvailableCaregiversView()
                                                                   : state
                                                                           .isRescheduleOtherMatchingListView
-                                                                      ? _matchingListView(
+                                                                      ? _otherMatchingListView(
                                                                           context,
                                                                           state,
                                                                           state
@@ -1024,8 +1024,8 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
     );
   }
 
-  _matchingListView(BuildContext context, ServiceRequestManagementState state,
-      String? oldServiceID) {
+  _otherMatchingListView(BuildContext context,
+      ServiceRequestManagementState state, String? oldServiceID) {
     List<Caregivers> mCaregivers =
         state.rescheduleResponse?.data?.caregivers ?? [];
     return CustomContainer(
