@@ -440,7 +440,7 @@ class _AdminsPageState extends State<AdminsPage> {
               DataCell(_tableRowView(_pageIndex.toString())),
               DataCell(TableRowImageView(
                 name: item.name?.firstName ?? "",
-                imageUrl: "",
+                imageUrl: item.profile ?? '',
               )),
               DataCell(_tableRowView(item.name?.lastName ?? "")),
               DataCell(_tableRowView(item.email ?? "")),

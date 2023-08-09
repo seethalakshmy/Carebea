@@ -134,6 +134,7 @@ class ResData {
     String? uniqueId,
     Name? name,
     String? email,
+    String? profile,
     String? phoneNumber,
     String? role,
     bool? status,
@@ -142,6 +143,7 @@ class ResData {
     _uniqueId = uniqueId;
     _name = name;
     _email = email;
+    _profile = profile;
     _phoneNumber = phoneNumber;
     _role = role;
     _status = status;
@@ -152,6 +154,7 @@ class ResData {
     _uniqueId = json['uniqueId'];
     _name = json['name'] != null ? Name.fromJson(json['name']) : null;
     _email = json['email'];
+    _profile = json['profile_picture'];
     _phoneNumber = json['phoneNumber'];
     _role = json['role'];
     _status = json['status'];
@@ -160,6 +163,7 @@ class ResData {
   String? _uniqueId;
   Name? _name;
   String? _email;
+  String? _profile;
   String? _phoneNumber;
   String? _role;
   bool? _status;
@@ -168,6 +172,7 @@ class ResData {
     String? uniqueId,
     Name? name,
     String? email,
+    String? profile,
     String? phoneNumber,
     String? role,
     bool? status,
@@ -177,6 +182,7 @@ class ResData {
         uniqueId: uniqueId ?? _uniqueId,
         name: name ?? _name,
         email: email ?? _email,
+        profile: profile ?? _profile,
         phoneNumber: phoneNumber ?? _phoneNumber,
         role: role ?? _role,
         status: status ?? _status,
@@ -185,6 +191,7 @@ class ResData {
   String? get uniqueId => _uniqueId;
   Name? get name => _name;
   String? get email => _email;
+  String? get profile => _profile;
   String? get phoneNumber => _phoneNumber;
   String? get role => _role;
   bool? get status => _status;
@@ -197,6 +204,7 @@ class ResData {
       map['name'] = _name?.toJson();
     }
     map['email'] = _email;
+    map['profile_picture'] = _profile;
     map['phoneNumber'] = _phoneNumber;
     map['role'] = _role;
     map['status'] = _status;

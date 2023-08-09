@@ -414,6 +414,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
         rows: mCareGiverList.asMap().entries.map((e) {
           _setIndex(e.key);
           var item = e.value;
+          CustomLog.log("${item.profile}");
           int? verificationStatus = item.verificationStatus;
           String? userId = item.userId;
           return DataRow2(
