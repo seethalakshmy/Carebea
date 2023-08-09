@@ -57,12 +57,14 @@ class Data {
     String? firstName,
     String? lastName,
     String? email,
+    String? profile,
     String? roleId,
     String? phone,
   }) {
     _firstName = firstName;
     _lastName = lastName;
     _email = email;
+    _profile = profile;
     _roleId = roleId;
     _phoneNumber = phone;
   }
@@ -71,18 +73,21 @@ class Data {
     _firstName = json['first_name'];
     _lastName = json['last_name'];
     _email = json['email'];
+    _profile = json['profile_picture'];
     _roleId = json['role_id'];
     _phoneNumber = json['phone_number'];
   }
   String? _firstName;
   String? _lastName;
   String? _email;
+  String? _profile;
   String? _roleId;
   String? _phoneNumber;
   Data copyWith({
     String? firstName,
     String? lastName,
     String? email,
+    String? profile,
     String? roleId,
     String? phone,
   }) =>
@@ -90,12 +95,14 @@ class Data {
           firstName: firstName ?? _firstName,
           lastName: lastName ?? _lastName,
           email: email ?? _email,
+          profile: profile ?? _profile,
           roleId: roleId ?? _roleId,
           phone: phone ?? _phoneNumber);
 
   String? get firstName => _firstName;
   String? get lastName => _lastName;
   String? get email => _email;
+  String? get profile => _profile;
   String? get roleId => _roleId;
   String? get phoneNumber => _phoneNumber;
 
@@ -104,6 +111,7 @@ class Data {
     map['first_name'] = _firstName;
     map['last_name'] = _lastName;
     map['email'] = _email;
+    map['profile_picture'] = _profile;
     map['role_id'] = _roleId;
     return map;
   }

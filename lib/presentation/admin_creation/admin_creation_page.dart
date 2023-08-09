@@ -133,6 +133,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
       _lNameController.text = state.viewResponse?.data?.lastName ?? "";
       _emailController.text = state.viewResponse?.data?.email ?? "";
       _mobileController.text = state.viewResponse?.data?.phoneNumber ?? "";
+      _adminCreationBloc.profileUrl = state.viewResponse?.data?.profile ?? '';
     }
     return CustomPadding.symmetric(
       horizontal: DBL.sixteen.val,
@@ -405,7 +406,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                                 0) {
                               await uploadProfilePicToAwsS3(
                                   AppString.profilePicture.val,
-                                  SharedPreffUtil().getUserId);
+                                  SharedPreffUtil().getAdminId);
                             }
                             checkInputData(state);
                           },

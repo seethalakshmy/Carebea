@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/enum.dart';
+import '../../widget/cached_image.dart';
 import '../../widget/commonImageview.dart';
 
 class AdminProfilePictureWidget extends StatelessWidget {
@@ -31,15 +32,21 @@ class AdminProfilePictureWidget extends StatelessWidget {
                     ? const EdgeInsets.all(40)
                     : const EdgeInsets.all(0),
                 color: AppColor.skyBlueShade.val,
-                child: state.pickedProfilePic!.name.isEmpty
-                    ? CommonImageView(
-                        svgPath: IMG.userAvatar.val,
+                child: state.viewResponse?.data?.profile != null
+                    ? CachedImage(
+                        imgUrl: state.viewResponse?.data?.profile,
+                        isCircle: true,
+                        circleRadius: 50,
                       )
-                    : CommonImageView(
-                        bytes: state.pickedProfilePic!.bytes,
-                        fit: BoxFit.cover,
-                        isCircleImage: false,
-                      ),
+                    : state.pickedProfilePic!.name.isEmpty
+                        ? CommonImageView(
+                            svgPath: IMG.userAvatar.val,
+                          )
+                        : CommonImageView(
+                            bytes: state.pickedProfilePic!.bytes,
+                            fit: BoxFit.cover,
+                            isCircleImage: false,
+                          ),
               ),
             );
           },
