@@ -39,16 +39,16 @@ class CareGiverPreferenceView extends StatelessWidget {
               width: DBL.threeEighty.val,
             ),
             CustomSizedBox(
+              height: DBL.fourteen.val,
+            ),
+            petsList(context, MediaQuery.of(context).size, preference),
+            CustomSizedBox(
               height: DBL.twenty.val,
             ),
             RowColonCombo.threeEighty(
                 label: AppString.serveHomeWithSmoker.val,
                 value: preference?.serveHomeWithSmoker ?? "",
                 fontSize: FS.font13PointFive.val),
-            CustomSizedBox(
-              height: DBL.fourteen.val,
-            ),
-            petsList(context, MediaQuery.of(context).size, preference),
             CustomSizedBox(
               height: DBL.fourteen.val,
             ),

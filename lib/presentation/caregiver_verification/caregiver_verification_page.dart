@@ -205,7 +205,10 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
               if (status != Verification.trainingStarted.val) {
                 context.read<CareGiverVerificationBloc>().add(
                     CareGiverVerificationEvent.careGiverTrainingVerify(
-                        userId: userId, context: context, page: _page, adminId: userId));
+                        userId: userId,
+                        context: context,
+                        page: _page,
+                        adminId: userId));
               } else {
                 autoTabRouter?.navigate(CareGiverProfileRoute(id: userId));
               }
@@ -657,7 +660,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                       context: context,
                       profileUrl: "",
                       userName:
-                          "${state.response?.data?.caregiver?.firstName} ${state.response?.data?.caregiver?.lastName}", adminId: SharedPreffUtil().getAdminId));
+                          "${state.response?.data?.caregiver?.firstName} ${state.response?.data?.caregiver?.lastName}",
+                      adminId: SharedPreffUtil().getAdminId));
             },
             onTapReject: () {
               _certificateRejectPopUp(
@@ -1043,11 +1047,13 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
           CustomLog.log("url is ${url}");
           return CustomAlertDialogWidget(
               width: 800,
-              height: 800,
+              height: 550,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               heading: AppString.verificationProcess.val,
               child: CachedImage(
                 imgUrl: url,
-                width: 800,
+                width: 780,
                 height: 800,
                 isDocImage: true,
                 fit: BoxFit.contain,

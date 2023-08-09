@@ -1046,9 +1046,6 @@ class _ApiClient implements ApiClient {
     role,
     roleId,
     moduleID,
-    view,
-    delete,
-    edit,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1060,9 +1057,6 @@ class _ApiClient implements ApiClient {
       'role': role,
       'role_id': roleId,
       'assigned_modules': moduleID,
-      'view': view,
-      'delete': delete,
-      'edit': edit,
     };
     _data.removeWhere((k, v) => v == null);
     final _result = await _dio
@@ -1635,6 +1629,93 @@ class _ApiClient implements ApiClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ServiceRequestResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetFiltersResponse> getFilters() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<GetFiltersResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/common-data/get-filters',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetFiltersResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<TransactionListResponse> getTransactions(
+    token,
+    userId,
+    page,
+    limit,
+    searchTerm,
+    filterId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'page': page,
+      'limit': limit,
+      'search_term': searchTerm,
+      'filter_id': filterId,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<TransactionListResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-transactions',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = TransactionListResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<TransactionDetailsResponse> getTransactionDetails(
+    token,
+    transactionId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {'transaction_id': transactionId};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<TransactionDetailsResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/transaction-details',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = TransactionDetailsResponse.fromJson(_result.data!);
     return value;
   }
 

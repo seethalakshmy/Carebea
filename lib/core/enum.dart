@@ -25,6 +25,8 @@ enum AppString {
   reviewPending("Review Pending"),
   forgotPassword("Forgot Password ?"),
   resetPassword("Reset Password"),
+  optVerification("OTP Verification"),
+
   resetPasswordDescription(
       "Enter your registered mail id to receive password\nreset link"),
   sendRestInstructions("Send  reset instructions"),
@@ -60,6 +62,9 @@ enum AppString {
   qualifiedForCareAmbassador("Qualified for care ambassador's training ."),
   caregiverCreation("Care Ambassador Creation"),
   selectYourStateFirst("Please select your state first"),
+  pleaseSelectOneService("Please select at least one service"),
+  emailOtp("OTP For Email Verification"),
+  mobileOtp("OTP For Mobile Number Verification"),
   onBoarding("On-boarding"),
   id("ID"),
   slNo("SL No"),
@@ -353,6 +358,8 @@ enum AppString {
   emptyProfilePic("Please select your profile picture"),
   errorUploadingFile("Error uploading file, Please try again"),
   serviceRequestManagement("Service Request Management"),
+  pleaseSelectPets("Please select the pets"),
+  pleaseSelectLanguages("Please select the languages"),
   pendingServices("Pending Services"),
   completedServices("Completed Services"),
   cancelledRequest("Cancelled Request"),
@@ -371,6 +378,7 @@ enum AppString {
   normalServiceRequest("Normal Service Booking"),
   rebooking("Rebooking"),
   refund("Refund"),
+  refundStarted("Refund Started"),
   congrats("Congrats!"),
   caregiverAvailable(
       "Your selected caregiver is available for the service . You can accept & Enjoy the service"),
@@ -683,6 +691,7 @@ enum DBL {
   oneEighty(180.0),
   oneNinety(190.0),
   twoHundred(200.0),
+  twoTen(210.0),
   twoThirty(230.0),
   twoForty(240),
   twoFortyFive(245),

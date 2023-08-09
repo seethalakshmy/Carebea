@@ -48,6 +48,10 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   List<String> selectedTier2ServiceList = [];
   List<ServiceModel> serviceList = [];
   List<String> uploadedDocumentList = [];
+  List<String> uploadedHhaDocList = [];
+  List<String> uploadedBlsDocList = [];
+  List<String> uploadedTbDocList = [];
+  List<String> uploadedCovidDocList = [];
   bool nextButtonClicked = false;
   String stateId = "";
   String relationId = "";

@@ -26,7 +26,6 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/caregivers/model/care_givers.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/custom_alert_delete.dart';
 import '../widget/custom_dropdown.dart';
@@ -207,26 +206,28 @@ class _AdminsPageState extends State<AdminsPage> {
     );
   }
 
-  CustomButton _adminCreate() {
-    return CustomButton(
-        onPressed: () {
-          autoTabRouter?.navigate(AdminCreationRoute());
-        },
-        text: AppString.create.val,
-        color: AppColor.primaryColor.val,
-        height: DBL.fiftyTwo.val,
-        borderRadius: DBL.five.val,
-        padding: EdgeInsets.symmetric(
-            horizontal: DBL.twentyTwo.val, vertical: DBL.ten.val),
-        textStyle: TS().gRoboto(
-            color: AppColor.white.val,
-            fontWeight: FW.w600.val,
-            fontSize: FS.font16.val),
-        icon: CustomIcon(
-          icon: Icons.add,
-          size: DBL.twenty.val,
-          color: AppColor.white.val,
-        ));
+  _adminCreate() {
+    return sharedPrefUtil.getEditAdmin
+        ? CustomButton(
+            onPressed: () {
+              autoTabRouter?.navigate(AdminCreationRoute());
+            },
+            text: AppString.create.val,
+            color: AppColor.primaryColor.val,
+            height: DBL.fiftyTwo.val,
+            borderRadius: DBL.five.val,
+            padding: EdgeInsets.symmetric(
+                horizontal: DBL.twentyTwo.val, vertical: DBL.ten.val),
+            textStyle: TS().gRoboto(
+                color: AppColor.white.val,
+                fontWeight: FW.w600.val,
+                fontSize: FS.font16.val),
+            icon: CustomIcon(
+              icon: Icons.add,
+              size: DBL.twenty.val,
+              color: AppColor.white.val,
+            ))
+        : CustomSizedBox.shrink();
   }
 
   _statusDropDown(BuildContext context) {
@@ -418,14 +419,18 @@ class _AdminsPageState extends State<AdminsPage> {
               AppString.role.val,
             ),
           ),
-          DataColumn2(
-            size: ColumnSize.L,
-            label: _tableColumnView(AppString.status.val),
-          ),
-          const DataColumn2(
-            size: ColumnSize.L,
-            label: CustomText(""),
-          ),
+          sharedPrefUtil.getEditAdmin
+              ? DataColumn2(
+                  size: ColumnSize.L,
+                  label: _tableColumnView(AppString.status.val),
+                )
+              : emptyColumn(),
+          sharedPrefUtil.getEditAdmin || sharedPrefUtil.getViewAdmin
+              ? const DataColumn2(
+                  size: ColumnSize.L,
+                  label: CustomText(""),
+                )
+              : emptyColumn(),
         ],
         rows: mAdmins.asMap().entries.map((e) {
           _setIndex(e.key);
@@ -444,20 +449,26 @@ class _AdminsPageState extends State<AdminsPage> {
               DataCell(_tableSwitchBox(item)),
               // DataCell(_statusBox(item.status ?? false)),
               DataCell(TableActions(
-                isView: true,
-                onViewTap: () {
-                  autoTabRouter?.navigate(
-                      AdminCreationRoute(isView: "view", id: item.id));
-                },
-                isDelete: true,
-                onDeleteTap: () {
-                  _deletePopup(context, item.id ?? "");
-                },
-                isEdit: true,
-                onEditTap: () {
-                  autoTabRouter?.navigate(
-                      AdminCreationRoute(isEdit: "edit", id: item.id));
-                },
+                isView: sharedPrefUtil.getViewAdmin,
+                onViewTap: sharedPrefUtil.getViewAdmin
+                    ? () {
+                        autoTabRouter?.navigate(
+                            AdminCreationRoute(isView: "view", id: item.id));
+                      }
+                    : null,
+                isDelete: sharedPrefUtil.getDeleteAdmin,
+                onDeleteTap: sharedPrefUtil.getDeleteAdmin
+                    ? () {
+                        _deletePopup(context, item.id ?? "");
+                      }
+                    : null,
+                isEdit: sharedPrefUtil.getEditAdmin,
+                onEditTap: sharedPrefUtil.getEditAdmin
+                    ? () {
+                        autoTabRouter?.navigate(
+                            AdminCreationRoute(isEdit: "edit", id: item.id));
+                      }
+                    : null,
               )),
             ],
           );
@@ -470,13 +481,19 @@ class _AdminsPageState extends State<AdminsPage> {
     return TableSwitchBox(
       value: item.status!,
       onToggle: () {
-        print(item.status);
         _adminsBloc.add(AdminEvent.changeAdminStatus(
           status: item.status.toString() == 'true' ? "0" : "1",
           userId: item.uniqueId ?? "",
           context: context,
         ));
       },
+    );
+  }
+
+  DataColumn2 emptyColumn() {
+    return const DataColumn2(
+      fixedWidth: 0,
+      label: CustomText(""),
     );
   }
 

@@ -6,10 +6,7 @@ class RoleCreationEvent with _$RoleCreationEvent {
     required String userId,
     required String role,
     String? roleId,
-    required List<String> moduleId,
-    required int isView,
-    required int isDelete,
-    required int isEdit,
+    required List<Module> moduleId,
     required BuildContext context,
   }) = _AddUpdateRole;
   const factory RoleCreationEvent.getModules({
@@ -23,8 +20,8 @@ class RoleCreationEvent with _$RoleCreationEvent {
   const factory RoleCreationEvent.isSelected({
     required Module module,
   }) = _IsSelected;
-  const factory RoleCreationEvent.isCheckedView(bool value) = _IsCheckedView;
-  const factory RoleCreationEvent.isCheckedEdit(bool value) = _IsCheckedEdit;
-  const factory RoleCreationEvent.isCheckedDelete(bool value) =
+  const factory RoleCreationEvent.isCheckedView(Module module) = _IsCheckedView;
+  const factory RoleCreationEvent.isCheckedEdit(Module module) = _IsCheckedEdit;
+  const factory RoleCreationEvent.isCheckedDelete(Module module) =
       _IsCheckedDelete;
 }

@@ -75,7 +75,6 @@ class _CareGiversPageState extends State<CareGiversPage> {
     int? getPage = autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
     int? getTab = autoTabRouter?.currentChild?.queryParams.getInt('tab', 0);
 
-    print('get page $getPage and $getTab');
     super.initState();
     if (getPage != null && getPage != 0) {
       _page = getPage;
@@ -194,7 +193,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         LayoutBuilder(builder: (context, constraints) {
-          return _tableActionView(constraints, context);
+          return _actionView(constraints, context);
         }),
         mCareGiverList.isNotEmpty
             ? Column(
@@ -213,7 +212,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
     );
   }
 
-  SingleChildScrollView _tableActionView(
+  SingleChildScrollView _actionView(
       BoxConstraints constraints, BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -240,26 +239,28 @@ class _CareGiversPageState extends State<CareGiversPage> {
     );
   }
 
-  CustomButton _caregiverCreate() {
-    return CustomButton(
-        onPressed: () {
-          autoTabRouter?.setActiveIndex(7);
-        },
-        text: AppString.create.val,
-        color: AppColor.primaryColor.val,
-        height: DBL.fifty.val,
-        borderRadius: DBL.five.val,
-        padding: EdgeInsets.symmetric(
-            horizontal: DBL.twentyTwo.val, vertical: DBL.ten.val),
-        textStyle: TS().gRoboto(
-            color: AppColor.white.val,
-            fontWeight: FW.w600.val,
-            fontSize: FS.font16.val),
-        icon: CustomIcon(
-          icon: Icons.add,
-          size: DBL.twenty.val,
-          color: AppColor.white.val,
-        ));
+  _caregiverCreate() {
+    return sharedPrefUtil.getEditCareGiver
+        ? CustomButton(
+            onPressed: () {
+              autoTabRouter?.setActiveIndex(7);
+            },
+            text: AppString.create.val,
+            color: AppColor.primaryColor.val,
+            height: DBL.fifty.val,
+            borderRadius: DBL.five.val,
+            padding: EdgeInsets.symmetric(
+                horizontal: DBL.twentyTwo.val, vertical: DBL.ten.val),
+            textStyle: TS().gRoboto(
+                color: AppColor.white.val,
+                fontWeight: FW.w600.val,
+                fontSize: FS.font16.val),
+            icon: CustomIcon(
+              icon: Icons.add,
+              size: DBL.twenty.val,
+              color: AppColor.white.val,
+            ))
+        : CustomSizedBox.shrink();
   }
 
   _statusDropDown(BuildContext context) {
@@ -392,24 +393,23 @@ class _CareGiversPageState extends State<CareGiversPage> {
               AppString.phoneNumber.val,
             ),
           ),
-          _tabType == 1
-              ? DataColumn2(
-                  size: ColumnSize.L,
-                  label: _tableColumnView(AppString.status.val),
-                )
-              : DataColumn2(
-                  fixedWidth: DBL.oneFifty.val,
-                  label: _tableColumnView(AppString.status.val),
-                ),
-          _tabType == 1
-              ? const DataColumn2(
-                  fixedWidth: 0,
-                  label: CustomText(""),
-                )
-              : const DataColumn2(
-                  size: ColumnSize.L,
-                  label: CustomText(""),
-                ),
+          sharedPrefUtil.getEditCareGiver
+              ? _tabType == 1
+                  ? DataColumn2(
+                      size: ColumnSize.L,
+                      label: _tableColumnView(AppString.status.val))
+                  : DataColumn2(
+                      fixedWidth: DBL.oneFifty.val,
+                      label: _tableColumnView(AppString.status.val))
+              : emptyColumn(),
+          sharedPrefUtil.getEditCareGiver
+              ? _tabType == 1
+                  ? emptyColumn()
+                  : const DataColumn2(
+                      size: ColumnSize.L,
+                      label: CustomText(""),
+                    )
+              : emptyColumn(),
         ],
         rows: mCareGiverList.asMap().entries.map((e) {
           _setIndex(e.key);
@@ -419,25 +419,26 @@ class _CareGiversPageState extends State<CareGiversPage> {
           String? userId = item.userId;
           return DataRow2(
             onTap: () {
-              print('tab type == $_tabType');
-              if (_tabType == 2) {
+              if (_tabType == 2 && sharedPrefUtil.getViewCareGiver) {
                 autoTabRouter?.navigate(CareGiverDetailRoute(
                   id: item.userId,
                   page: _page,
                   tab: _tabType,
                 ));
               } else {
-                if (verificationStatus == Verification.trainingStarted.val ||
-                    verificationStatus == Verification.interViewStarted.val) {
-                  autoTabRouter?.navigate(CareGiverProfileRoute(
-                    id: item.userId,
-                  ));
-                } else {
-                  autoTabRouter?.navigate(CaregiverVerificationRoute(
-                    id: userId,
-                    page: _page,
-                    tab: _tabType,
-                  ));
+                if (sharedPrefUtil.getEditCareGiver) {
+                  if (verificationStatus == Verification.trainingStarted.val ||
+                      verificationStatus == Verification.interViewStarted.val) {
+                    autoTabRouter?.navigate(CareGiverProfileRoute(
+                      id: item.userId,
+                    ));
+                  } else {
+                    autoTabRouter?.navigate(CaregiverVerificationRoute(
+                      id: userId,
+                      page: _page,
+                      tab: _tabType,
+                    ));
+                  }
                 }
               }
             },
@@ -451,22 +452,34 @@ class _CareGiversPageState extends State<CareGiversPage> {
               DataCell(_tableRowView(item.email ?? "")),
               DataCell(_tableRowView(item.mobile ?? "")),
               _tabType == 1
-                  ? DataCell(_tableVerificationButton(item))
-                  : DataCell(_tableSwitchBox(item)),
+                  ? DataCell(sharedPrefUtil.getEditCareGiver
+                      ? _tableVerificationButton(item)
+                      : _tableRowView(""))
+                  : DataCell(sharedPrefUtil.getEditCareGiver
+                      ? _tableSwitchBox(item)
+                      : _tableRowView("")),
               _tabType == 1
                   ? DataCell(_tableRowView(""))
-                  : DataCell(TableActions(
-                      isView: true,
-                      onViewTap: () {
-                        autoTabRouter?.navigate(CareGiverDetailRoute(
-                          id: item.userId,
-                        ));
-                      },
-                    )),
+                  : DataCell(sharedPrefUtil.getEditCareGiver
+                      ? TableActions(
+                          isView: true,
+                          onViewTap: () {
+                            autoTabRouter?.navigate(CareGiverDetailRoute(
+                              id: item.userId,
+                            ));
+                          })
+                      : _tableRowView("")),
             ],
           );
         }).toList(),
       ),
+    );
+  }
+
+  DataColumn2 emptyColumn() {
+    return const DataColumn2(
+      fixedWidth: 0,
+      label: CustomText(""),
     );
   }
 

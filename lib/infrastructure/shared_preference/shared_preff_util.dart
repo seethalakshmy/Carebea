@@ -14,7 +14,25 @@ class SharedPreffUtil {
   final setPasswordToken = 'set_password_token';
   final currentPassword = 'current_password';
   final _page = '_page';
-  final _tab = '_tab';
+
+  final viewRole = 'view_role';
+  final editRole = "edit_role";
+  final deleteRole = "delete_role";
+
+  final viewAdmin = "view_admin";
+  final editAdmin = "edit_admin";
+  final deleteAdmin = "delete_admin";
+
+  final viewCareGiver = "view_caregiver";
+  final editCareGiver = "edit_caregiver";
+
+  final viewUser = "view_user";
+  final editUser = "edit_user";
+
+  final viewTransaction = "view_transaction";
+
+  final viewServiceRequest = "view_service";
+  final editServiceRequest = "edit_service";
 
   static final SharedPreffUtil _instance = SharedPreffUtil._ctor();
 
@@ -46,9 +64,6 @@ class SharedPreffUtil {
   }
 
   get getUserId {
-    // if (_prefs == null || _prefs!.getString(userId) == null) {
-    //   return "";
-    // }
     return _prefs?.getString(userId) ?? "";
   }
 
@@ -161,6 +176,94 @@ class SharedPreffUtil {
     return _prefs!.getString(refreshToken) ?? "";
   }
 
+  set setViewRole(bool value) {
+    _prefs?.setBool(viewRole, value);
+  }
+
+  get getViewRole {
+    return _prefs?.getBool(viewRole) ?? false;
+  }
+
+  set setEditRole(bool value) {
+    _prefs?.setBool(editRole, value);
+  }
+
+  get getEditRole {
+    return _prefs?.getBool(editRole) ?? false;
+  }
+
+  set setDeleteRole(bool value) {
+    _prefs?.setBool(deleteRole, value);
+  }
+
+  get getDeleteRole {
+    return _prefs?.getBool(deleteRole) ?? false;
+  }
+
+  set setViewAdmin(bool value) {
+    _prefs?.setBool(viewAdmin, value);
+  }
+
+  get getViewAdmin {
+    return _prefs?.getBool(viewAdmin) ?? false;
+  }
+
+  set setEditAdmin(bool value) {
+    _prefs?.setBool(editAdmin, value);
+  }
+
+  get getEditAdmin {
+    return _prefs?.getBool(editAdmin) ?? false;
+  }
+
+  set setDeleteAdmin(bool value) {
+    _prefs?.setBool(deleteAdmin, value);
+  }
+
+  get getDeleteAdmin {
+    return _prefs?.getBool(deleteAdmin) ?? false;
+  }
+
+  set setViewCareGiver(bool value) {
+    _prefs?.setBool(viewCareGiver, value);
+  }
+
+  get getViewCareGiver {
+    return _prefs?.getBool(viewCareGiver) ?? false;
+  }
+
+  set setEditCareGiver(bool value) {
+    _prefs?.setBool(editCareGiver, value);
+  }
+
+  get getEditCareGiver {
+    return _prefs?.getBool(editCareGiver) ?? false;
+  }
+
+  set setViewServiceRequest(bool value) {
+    _prefs?.setBool(viewServiceRequest, value);
+  }
+
+  get getViewServiceRequest {
+    return _prefs?.getBool(viewServiceRequest) ?? false;
+  }
+
+  set setEditServiceRequest(bool value) {
+    _prefs?.setBool(editServiceRequest, value);
+  }
+
+  get getEditServiceRequest {
+    return _prefs?.getBool(editServiceRequest) ?? false;
+  }
+
+  set setViewTransaction(bool value) {
+    _prefs?.setBool(viewTransaction, value);
+  }
+
+  get getViewTransaction {
+    return _prefs?.getBool(viewTransaction) ?? false;
+  }
+
   void logoutClear() {
     _prefs!.setString(userId, "");
     _prefs!.setString(profileUserName, "");
@@ -172,5 +275,16 @@ class SharedPreffUtil {
     _prefs!.setString(setPasswordToken, "");
     _prefs!.setString(currentPassword, "");
     _prefs!.setBool(loggedUser, false);
+    _prefs!.setBool(viewRole, false);
+    _prefs!.setBool(editRole, false);
+    _prefs!.setBool(deleteRole, false);
+    _prefs!.setBool(viewAdmin, false);
+    _prefs!.setBool(editAdmin, false);
+    _prefs!.setBool(deleteAdmin, false);
+    _prefs!.setBool(viewCareGiver, false);
+    _prefs!.setBool(editCareGiver, false);
+    _prefs!.setBool(viewServiceRequest, false);
+    _prefs!.setBool(editServiceRequest, false);
+    _prefs!.setBool(viewTransaction, false);
   }
 }

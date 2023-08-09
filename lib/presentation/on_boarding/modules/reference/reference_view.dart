@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/bloc/form_validation/form_validation_bloc.dart';
+import '../../../../core/custom_snackbar.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
@@ -18,6 +19,7 @@ import '../../../widget/common_next_or_cancel_buttons.dart';
 import '../../../widget/custom_button.dart';
 import '../../../widget/custom_form.dart';
 import '../../../widget/custom_listview_builder.dart';
+import '../../../widget/custom_shimmer.dart';
 import '../../../widget/custom_sizedbox.dart';
 import '../../../widget/custom_text.dart';
 import '../../../widget/dropdown/city_drop_down.dart';
@@ -49,16 +51,22 @@ class _ReferenceViewState extends State<ReferenceView> {
   final FormValidationBloc formValidationBloc = FormValidationBloc();
   AutovalidateMode _validateMode = AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
+  final stateSearchController = TextEditingController();
+  final citySearchController = TextEditingController();
 
   @override
   void initState() {
-    widget.onboardingBloc.add(OnboardingEvent.relationList());
+    widget.onboardingBloc.add(const OnboardingEvent.relationList());
+    widget.onboardingBloc.add(const OnboardingEvent.stateList(
+        stateSearchQuery: "", wantLoading: true));
     super.initState();
   }
 
   @override
   void dispose() {
     widget.onboardingBloc.nameController.dispose();
+    citySearchController.dispose();
+    stateSearchController.dispose();
     // phoneController.dispose();
     // streetController.dispose();
     // zipController.dispose();
@@ -80,7 +88,19 @@ class _ReferenceViewState extends State<ReferenceView> {
           BlocProvider(
               create: (context) => OnboardingBloc(OnBoardingRepository())),
         ],
-        child: BlocBuilder<OnboardingBloc, OnboardingState>(
+        child: BlocConsumer<OnboardingBloc, OnboardingState>(
+          listener: (context, listenerState) {
+            return listenerState.referenceOption.fold(() {}, (some) {
+              some.fold((l) {
+                CSnackBar.showError(context, msg: l.error);
+              }, (r) {
+                if (widget.onboardingBloc.nextButtonClicked) {
+                  widget.pageController
+                      .jumpToPage(widget.pageController.page!.toInt() + 1);
+                }
+              });
+            });
+          },
           bloc: widget.onboardingBloc,
           builder: (context, state) {
             return CommonPaddingWidget(
@@ -187,23 +207,17 @@ class _ReferenceViewState extends State<ReferenceView> {
                                                   ''),
                                         ],
                                       )),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Divider(
-                                    thickness: 2,
-                                  )
+                                  const CustomSizedBox(height: 10),
+                                  const Divider(thickness: 2)
                                 ],
                               ),
                             );
                           },
                         )
-                      : SizedBox(),
+                      : const CustomSizedBox(),
                 ),
                 CustomSizedBox(height: DBL.twenty.val),
-                _moreReferenceWidget(() {
-                  /*onTap Function*/
-                }),
+                _moreReferenceWidget(),
                 BlocBuilder<FormValidationBloc, FormValidationState>(
                   bloc: formValidationBloc,
                   builder: (context, state) {
@@ -212,10 +226,12 @@ class _ReferenceViewState extends State<ReferenceView> {
                       leftButtonName: AppString.back.val,
                       rightButtonName: AppString.next.val,
                       onLeftButtonPressed: () {
+                        widget.onboardingBloc.nextButtonClicked = false;
                         widget.pageController.jumpToPage(
                             widget.pageController.page!.toInt() - 1);
                       },
                       onRightButtonPressed: () {
+                        widget.onboardingBloc.nextButtonClicked = true;
                         checkInputData();
                       },
                     );
@@ -286,54 +302,62 @@ class _ReferenceViewState extends State<ReferenceView> {
         _labelWidget(AppString.state.val),
         CustomSizedBox(height: DBL.twelve.val),
         StateDropDown(
-          onSearchChanged: (val) {
-            widget.onboardingBloc.add(OnboardingEvent.stateList(
-                stateSearchQuery: val!, wantLoading: false));
-            widget.onboardingBloc.stateSearchKey = val;
-          },
-          searchController: widget.onboardingBloc.stateSearchController,
-          errorText: widget.onboardingBloc.selectedState.isEmpty
-              ? AppString.emptyState.val
-              : '',
-          items: widget.onboardingBloc.stateList,
-          onChange: (id, name) {
-            widget.onboardingBloc.selectedState = name.toString();
-            print("state value in onchanged : $name");
-            widget.onboardingBloc.stateId = id;
-            widget.onboardingBloc.add(const OnboardingEvent.cityList(
-                searchQuery: "", wantLoading: false));
-          },
-          selectedValue: widget.onboardingBloc.selectedState,
           onboardingBloc: widget.onboardingBloc,
+          onSearchChanged: (val) {
+            widget.onboardingBloc.statePage = 1;
+            widget.onboardingBloc.add(OnboardingEvent.stateList(
+                stateSearchQuery: val, wantLoading: false));
+          },
+          searchController: stateSearchController,
+          errorText: widget.onboardingBloc.state.nextClicked
+              ? widget.onboardingBloc.selectedState.isEmpty
+                  ? AppString.emptyState.val
+                  : ""
+              : "",
+          items: widget.onboardingBloc.stateList,
+          onChange: (value) {
+            widget.onboardingBloc.selectedState = value.toString();
+            widget.onboardingBloc.add(const OnboardingEvent.cityList(
+                searchQuery: "", wantLoading: true));
+            widget.onboardingBloc.selectedCityName = "";
+          },
+          selectedValue: widget.onboardingBloc.selectedStateName,
         ),
       ],
     );
   }
 
-  _cityWidget() {
+  _cityWidget(OnboardingState state) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _labelWidget(AppString.city.val),
+        state.isInitialLoading
+            ? CustomShimmerWidget.rectangular(
+                height: DBL.twenty.val, width: DBL.hundred.val)
+            : _labelWidget(AppString.city.val),
         CustomSizedBox(height: DBL.twelve.val),
-        CityDropDown(
-          onboardingBloc: widget.onboardingBloc,
-          searchController: widget.onboardingBloc.citySearchController,
-          onSearchChanged: (val) {
-            widget.onboardingBloc.add(OnboardingEvent.cityList(
-                searchQuery: val!, wantLoading: false));
-          },
-          errorText: widget.onboardingBloc.selectedCity.isEmpty
-              ? AppString.emptyCity.val
-              : "",
-          items: widget.onboardingBloc.cityList,
-          onChange: (id, name) {
-            widget.onboardingBloc.selectedCity = name.toString();
-            widget.onboardingBloc.selectedCityId = id;
-            print("city value in onchanged : $name");
-          },
-          selectedValue: widget.onboardingBloc.selectedCity,
-        ),
+        state.isCityApiCalling || state.isInitialLoading
+            ? CustomShimmerWidget.rectangular(
+                height: DBL.fifty.val, width: DBL.twoEighty.val)
+            : CityDropDown(
+                onboardingBloc: widget.onboardingBloc,
+                searchController: citySearchController,
+                onSearchChanged: (val) {
+                  widget.onboardingBloc.cityPage = 1;
+                  widget.onboardingBloc.add(OnboardingEvent.cityList(
+                      searchQuery: val, wantLoading: false));
+                },
+                errorText: widget.onboardingBloc.state.nextClicked
+                    ? widget.onboardingBloc.selectedCity.isEmpty
+                        ? AppString.emptyCity.val
+                        : ""
+                    : "",
+                items: widget.onboardingBloc.cityList,
+                onChange: (value) {
+                  widget.onboardingBloc.selectedCity = value;
+                },
+                selectedValue: widget.onboardingBloc.selectedCityName,
+              ),
       ],
     );
   }
@@ -346,7 +370,7 @@ class _ReferenceViewState extends State<ReferenceView> {
             fontSize: FS.font16.val));
   }
 
-  _moreReferenceWidget(Function() onTap) {
+  _moreReferenceWidget() {
     return InkWell(
       onTap: () {
         widget.onboardingBloc.clearData();
@@ -408,14 +432,22 @@ class _ReferenceViewState extends State<ReferenceView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: SizedBox(
-                        height: 64,
-                        width: 64,
-                        child: SVGText(path: IMG.iconClose.val, name: '')),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20.0, top: 20.0),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: CustomContainer(
+                          height: 20,
+                          width: 20,
+                          child: SVGText(
+                            path: IMG.iconClose.val,
+                            name: '',
+                            height: 20,
+                            width: 20,
+                          )),
+                    ),
                   ),
                 ],
               ),
@@ -506,7 +538,7 @@ class _ReferenceViewState extends State<ReferenceView> {
                             labelName: AppString.address.val,
                             suffixIcon: const CustomContainer(width: 0)),
                       ),
-                      _cityWidget(),
+                      _cityWidget(widget.onboardingBloc.state),
                       _stateWidget(),
                       CustomSizedBox(
                         width: DBL.twoEighty.val,
@@ -530,24 +562,31 @@ class _ReferenceViewState extends State<ReferenceView> {
                             labelName: AppString.zip.val,
                             suffixIcon: const CustomContainer(width: 0)),
                       ),
-                      CustomButton(
-                        text: 'Save',
-                        icon: SizedBox(),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            if (index != null) {
-                              widget.onboardingBloc.add(
-                                  OnboardingEvent.updateReference(
-                                      index: index));
-                            } else {
-                              widget.onboardingBloc
-                                  .add(OnboardingEvent.addReference());
-                            }
-                            Navigator.pop(context);
-                          }
-                        },
-                      )
                     ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 50.0, bottom: 20.0),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: CustomButton(
+                    height: 45,
+                    minWidth: 120,
+                    text: AppString.save.val,
+                    icon: const CustomSizedBox(),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        if (index != null) {
+                          widget.onboardingBloc.add(
+                              OnboardingEvent.updateReference(index: index));
+                        } else {
+                          widget.onboardingBloc
+                              .add(const OnboardingEvent.addReference());
+                        }
+                        Navigator.pop(context);
+                      }
+                    },
                   ),
                 ),
               ),

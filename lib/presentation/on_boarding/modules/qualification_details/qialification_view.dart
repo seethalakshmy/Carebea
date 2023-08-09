@@ -9,16 +9,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/custom_snackbar.dart';
 import '../../../../core/enum.dart';
-import '../../../../core/responsive.dart';
-import '../../../../core/text_styles.dart';
 import '../../../../infrastructure/api_service_s3.dart';
 import '../../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
 import '../../../widget/custom_container.dart';
 import '../../../widget/custom_sizedbox.dart';
-import '../../../widget/custom_text.dart';
 import '../../widgets/common_padding_widget.dart';
+import '../../widgets/on_boarding_title_divider_widget.dart';
 
 class QualificationView extends StatefulWidget {
   const QualificationView(
@@ -93,8 +91,10 @@ class _QualificationViewState extends State<QualificationView> {
             some.fold((l) {
               CSnackBar.showError(context, msg: l.error);
             }, (r) {
-              widget.pageController
-                  .jumpToPage(widget.pageController.page!.toInt() + 1);
+              if (widget.onboardingBloc.nextButtonClicked) {
+                widget.pageController
+                    .jumpToPage(widget.pageController.page!.toInt() + 1);
+              }
             });
           });
         },
@@ -109,7 +109,8 @@ class _QualificationViewState extends State<QualificationView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _topArea(context),
+                    OnBoardingTitleDividerWidget(
+                        title: AppString.qualificationAndTestResult.val),
                     ItemRowWidget(
                       whichDocument: 1,
                       documentList: hhaBytesList,
@@ -190,7 +191,13 @@ class _QualificationViewState extends State<QualificationView> {
                         FilePickerResult? result =
                             await FilePicker.platform.pickFiles(
                           type: FileType.custom,
-                          allowedExtensions: ['jpg', 'png', 'pdf', 'doc'],
+                          allowedExtensions: [
+                            'jpg',
+                            'png',
+                            'jpeg',
+                            'pdf',
+                            'doc'
+                          ],
                         );
                         if (result != null) {
                           for (PlatformFile file in result.files) {
@@ -240,7 +247,13 @@ class _QualificationViewState extends State<QualificationView> {
                         FilePickerResult? result =
                             await FilePicker.platform.pickFiles(
                           type: FileType.custom,
-                          allowedExtensions: ['jpg', 'png', 'pdf', 'doc'],
+                          allowedExtensions: [
+                            'jpg',
+                            'png',
+                            'jpeg',
+                            'pdf',
+                            'doc'
+                          ],
                         );
                         if (result != null) {
                           for (PlatformFile file in result.files) {
@@ -288,7 +301,13 @@ class _QualificationViewState extends State<QualificationView> {
                         FilePickerResult? result =
                             await FilePicker.platform.pickFiles(
                           type: FileType.custom,
-                          allowedExtensions: ['jpg', 'png', 'pdf', 'doc'],
+                          allowedExtensions: [
+                            'jpg',
+                            'png',
+                            'jpeg',
+                            'pdf',
+                            'doc'
+                          ],
                         );
                         if (result != null) {
                           for (PlatformFile file in result.files) {
@@ -325,7 +344,48 @@ class _QualificationViewState extends State<QualificationView> {
                             widget.pageController.jumpToPage(
                                 widget.pageController.page!.toInt() - 1);
                           },
-                          onRightButtonPressed: () {
+                          onRightButtonPressed: () async {
+                            widget.onboardingBloc.nextButtonClicked = true;
+                            if (hhaBytesList.isNotEmpty) {
+                              for (int i = 0; i < hhaBytesList.length; i++) {
+                                widget.onboardingBloc.uploadedHhaDocList.add(
+                                    await uploadDocumentsToAwsS3(
+                                        AppString.documents.val,
+                                        SharedPreffUtil().getUserId,
+                                        hhaBytesList[i]));
+                              }
+                              hhaBytesList.clear();
+                            }
+                            if (blsBytesList.isNotEmpty) {
+                              for (int i = 0; i < blsBytesList.length; i++) {
+                                widget.onboardingBloc.uploadedBlsDocList.add(
+                                    await uploadDocumentsToAwsS3(
+                                        AppString.documents.val,
+                                        SharedPreffUtil().getUserId,
+                                        blsBytesList[i]));
+                              }
+                              blsBytesList.clear();
+                            }
+                            if (tbBytesList.isNotEmpty) {
+                              for (int i = 0; i < tbBytesList.length; i++) {
+                                widget.onboardingBloc.uploadedTbDocList.add(
+                                    await uploadDocumentsToAwsS3(
+                                        AppString.documents.val,
+                                        SharedPreffUtil().getUserId,
+                                        tbBytesList[i]));
+                              }
+                              tbBytesList.clear();
+                            }
+                            if (covidBytesList.isNotEmpty) {
+                              for (int i = 0; i < covidBytesList.length; i++) {
+                                widget.onboardingBloc.uploadedCovidDocList.add(
+                                    await uploadDocumentsToAwsS3(
+                                        AppString.documents.val,
+                                        SharedPreffUtil().getUserId,
+                                        covidBytesList[i]));
+                              }
+                              covidBytesList.clear();
+                            }
                             checkInputData();
                           },
                         );
@@ -355,7 +415,7 @@ class _QualificationViewState extends State<QualificationView> {
                 widget.onboardingBloc.state.isHHASelected == 0 ? true : false,
             hhaDetails: widget.onboardingBloc.state.isHHASelected == 0
                 ? HhaDetails(
-                    document: [],
+                    document: widget.onboardingBloc.uploadedHhaDocList,
                     expiryDate: hhaDateController.text.trim(),
                     hhaNumber: hhaController.text.trim())
                 : HhaDetails(hhaNumber: "", expiryDate: "", document: []),
@@ -363,7 +423,7 @@ class _QualificationViewState extends State<QualificationView> {
                 widget.onboardingBloc.state.isBLSSelected == 0 ? true : false,
             blsDetails: widget.onboardingBloc.state.isBLSSelected == 0
                 ? BlsOrFirstAidCertificateDetails(
-                    document: [],
+                    document: widget.onboardingBloc.uploadedBlsDocList,
                     certificationNumber: blsController.text.trim(),
                     expiryDate: blsDateController.text.trim())
                 : BlsOrFirstAidCertificateDetails(
@@ -372,7 +432,7 @@ class _QualificationViewState extends State<QualificationView> {
                 widget.onboardingBloc.state.isTBSelected == 0 ? true : false,
             tbDetails: widget.onboardingBloc.state.isTBSelected == 0
                 ? TbOrPpdTestDetails(
-                    document: [],
+                    document: widget.onboardingBloc.uploadedTbDocList,
                     result: tbPpdController.text.trim(),
                     date: tbPpdDateController.text.trim())
                 : TbOrPpdTestDetails(document: [], result: "", date: ""),
@@ -380,47 +440,20 @@ class _QualificationViewState extends State<QualificationView> {
                 widget.onboardingBloc.state.isCovidSelected == 0 ? true : false,
             covidDetails: widget.onboardingBloc.state.isCovidSelected == 0
                 ? CovidVaccinationDetails(
-                    document: [], date: covidDateController.text.trim())
+                    document: widget.onboardingBloc.uploadedCovidDocList,
+                    date: covidDateController.text.trim())
                 : CovidVaccinationDetails(document: [], date: "")),
       );
     }
   }
 
-  _topArea(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CustomSizedBox(height: DBL.ten.val),
-        CustomText(
-          AppString.qualificationAndTestResult.val,
-          softWrap: true,
-          style: TS().gRoboto(
-              fontSize: Responsive.isWeb(context)
-                  ? DBL.nineteen.val
-                  : DBL.sixteen.val,
-              fontWeight: FW.w500.val,
-              color: AppColor.primaryColor.val),
-          textAlign: TextAlign.start,
-        ),
-        CustomSizedBox(height: DBL.fifteen.val),
-        CustomContainer(
-          width: MediaQuery.of(context).size.width * 0.8,
-          height: DBL.one.val,
-          color: AppColor.lightGrey.val,
-        ),
-        CustomSizedBox(height: DBL.ten.val),
-      ],
-    );
-  }
-
-  Future<void> uploadDocumentsToAwsS3(
+  Future<String> uploadDocumentsToAwsS3(
       String folderName, String userId, PlatformFile pickedItem) async {
-    widget.onboardingBloc.uploadedDocumentList.add(await ApiServiceS3()
-        .uploadImage(
-            pickedFile: pickedItem.bytes!,
-            format: pickedItem.name.split('.').last,
-            folderName: folderName,
-            userId: userId,
-            context: context));
+    return await ApiServiceS3().uploadImage(
+        pickedFile: pickedItem.bytes!,
+        format: pickedItem.name.split('.').last,
+        folderName: folderName,
+        userId: userId,
+        context: context);
   }
 }

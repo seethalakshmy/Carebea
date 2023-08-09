@@ -45,7 +45,7 @@ class _SampleDropdownState extends State<SampleDropdown> {
           // Scrolled to the top
         } else {
           widget.onboardingBloc.languagePage++;
-          widget.onboardingBloc.add(OnboardingEvent.languageList("", []));
+          widget.onboardingBloc.add(const OnboardingEvent.languageList("", []));
         }
       }
     });

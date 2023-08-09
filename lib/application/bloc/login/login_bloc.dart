@@ -10,7 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../presentation/routes/app_router.gr.dart';
-import '../../../presentation/side_menu/side_menu_page.dart';
 
 part 'login_bloc.freezed.dart';
 part 'login_event.dart';
@@ -41,8 +40,30 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         sharedPrefUtil.setLogin = true;
         sharedPrefUtil.setAdminId = r.data?.userId ?? "";
         sharedPrefUtil.setAccessToken = r.data?.accessToken ?? "";
+        sharedPrefUtil.setViewRole = r.data?.permissions?.role?.view ?? false;
+        sharedPrefUtil.setEditRole = r.data?.permissions?.role?.view ?? false;
+        sharedPrefUtil.setDeleteRole =
+            r.data?.permissions?.role?.delete ?? false;
+
+        sharedPrefUtil.setViewAdmin = r.data?.permissions?.admin?.view ?? false;
+        sharedPrefUtil.setEditAdmin = r.data?.permissions?.admin?.edit ?? false;
+        sharedPrefUtil.setDeleteAdmin =
+            r.data?.permissions?.admin?.delete ?? false;
+
+        sharedPrefUtil.setViewCareGiver =
+            r.data?.permissions?.careAmbassador?.view ?? false;
+        sharedPrefUtil.setEditCareGiver =
+            r.data?.permissions?.careAmbassador?.edit ?? false;
+
+        sharedPrefUtil.setViewServiceRequest =
+            r.data?.permissions?.services?.view ?? false;
+        sharedPrefUtil.setEditServiceRequest =
+            r.data?.permissions?.services?.edit ?? false;
+
+        sharedPrefUtil.setViewTransaction =
+            r.data?.permissions?.transactions?.view ?? false;
+
         event.context.router.replace(const SideMenuRoute());
-        // autoTabRouter?.setActiveIndex(1);
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
