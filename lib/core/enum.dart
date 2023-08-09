@@ -93,6 +93,7 @@ enum AppString {
   clientName("Client Name"),
   nameAndAge("Name & Age"),
   totalServiceCompleted("Total Service Completed"),
+  totalServicePerMonth("Total Services Per Month"),
   service("Service"),
   sendTrainingRequest("Send Training Request"),
   notify("Notify"),
