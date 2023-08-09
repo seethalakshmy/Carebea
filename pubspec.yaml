@@ -53,6 +53,7 @@ dependencies:
   amplify_flutter: ^1.2.1
   amplify_storage_s3: ^1.2.1
   flutter_spinkit: ^5.2.0
+  pdf_render: ^1.4.0
 
 
 
