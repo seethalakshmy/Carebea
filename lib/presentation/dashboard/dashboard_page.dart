@@ -1,6 +1,8 @@
-import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+
+import '../../core/enum.dart';
+import '../widget/header_view.dart';
 
 @RoutePage()
 class DashboardPage extends StatefulWidget {
@@ -11,17 +13,13 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  List<String> nameList = [""];
   @override
   Widget build(BuildContext context) {
-    print("width: ${MediaQuery.of(context).size.width}");
-    return CustomSizedBox(
-      height: 350,
-      child: InkWell(
-          // onTap: () {
-          //   CSnackBar.showError(context,
-          //       msg: "test purpose to show something ok");
-          // },
-          child: Center(child: Text("DASHBOARD"))),
+    return Column(
+      children: [
+        HeaderView(title: AppString.dashboard.val),
+      ],
     );
   }
 }
