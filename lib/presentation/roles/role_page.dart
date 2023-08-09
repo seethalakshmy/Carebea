@@ -179,7 +179,7 @@ class _RolesPageState extends State<RolesPage> {
   }
 
   _roleCreate() {
-    return sharedPrefUtil.getEditRole
+    return !sharedPrefUtil.getEditRole
         ? CustomButton(
             onPressed: () {
               autoTabRouter?.navigate(RoleCreationRoute());
@@ -269,8 +269,8 @@ class _RolesPageState extends State<RolesPage> {
                       ? item.assignedModule?.join(", ") ?? ""
                       : "")),
               DataCell(TableActions(
-                isView: sharedPrefUtil.getViewRole ? true : false,
-                onViewTap: sharedPrefUtil.getViewRole
+                isView: !sharedPrefUtil.getViewRole ? true : false,
+                onViewTap: !sharedPrefUtil.getViewRole
                     ? () {
                         autoTabRouter?.navigate(RoleCreationRoute(
                           roleId: item.id,
@@ -278,8 +278,8 @@ class _RolesPageState extends State<RolesPage> {
                         ));
                       }
                     : null,
-                isEdit: sharedPrefUtil.getEditRole ? true : false,
-                onEditTap: sharedPrefUtil.getEditRole
+                isEdit: !sharedPrefUtil.getEditRole ? true : false,
+                onEditTap: !sharedPrefUtil.getEditRole
                     ? () {
                         autoTabRouter?.navigate(
                             RoleCreationRoute(roleId: item.id, isEdit: "edit"));
@@ -376,7 +376,8 @@ class _RolesPageState extends State<RolesPage> {
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {
-        return CustomAlertDelete(
+        return CustomActionAlert(
+            heading: AppString.delete.val,
             label: AppString.deleteRole.val,
             onTapYes: () {
               _roleBloc.add(RolesEvent.roleDelete(

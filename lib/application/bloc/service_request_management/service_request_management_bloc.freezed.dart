@@ -19,31 +19,75 @@ mixin _$ServiceRequestManagementEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Types type) isSelectedTab,
-    required TResult Function(Types type) getServiceList,
+    required TResult Function(Types type, int? filterId) isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
     required TResult Function(DateTime selectedDate) setDate,
     required TResult Function(TimeOfDay time) setFromTime,
     required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Types type)? isSelectedTab,
-    TResult? Function(Types type)? getServiceList,
+    TResult? Function(Types type, int? filterId)? isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
     TResult? Function(DateTime selectedDate)? setDate,
     TResult? Function(TimeOfDay time)? setFromTime,
     TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Types type)? isSelectedTab,
-    TResult Function(Types type)? getServiceList,
+    TResult Function(Types type, int? filterId)? isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
     TResult Function(DateTime selectedDate)? setDate,
     TResult Function(TimeOfDay time)? setFromTime,
     TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,30 +95,65 @@ mixin _$ServiceRequestManagementEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
-    required TResult Function(_GetServiceList value) getServiceList,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
     required TResult Function(_SetDate value) setDate,
     required TResult Function(_SetFromTime value) setFromTime,
     required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
-    TResult? Function(_GetServiceList value)? getServiceList,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
     TResult? Function(_SetDate value)? setDate,
     TResult? Function(_SetFromTime value)? setFromTime,
     TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
-    TResult Function(_GetServiceList value)? getServiceList,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
     TResult Function(_SetDate value)? setDate,
     TResult Function(_SetFromTime value)? setFromTime,
     TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -139,11 +218,27 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Types type) isSelectedTab,
-    required TResult Function(Types type) getServiceList,
+    required TResult Function(Types type, int? filterId) isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
     required TResult Function(DateTime selectedDate) setDate,
     required TResult Function(TimeOfDay time) setFromTime,
     required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
   }) {
     return started();
   }
@@ -152,11 +247,25 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Types type)? isSelectedTab,
-    TResult? Function(Types type)? getServiceList,
+    TResult? Function(Types type, int? filterId)? isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
     TResult? Function(DateTime selectedDate)? setDate,
     TResult? Function(TimeOfDay time)? setFromTime,
     TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
   }) {
     return started?.call();
   }
@@ -165,11 +274,25 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Types type)? isSelectedTab,
-    TResult Function(Types type)? getServiceList,
+    TResult Function(Types type, int? filterId)? isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
     TResult Function(DateTime selectedDate)? setDate,
     TResult Function(TimeOfDay time)? setFromTime,
     TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -183,10 +306,23 @@ class _$_Started implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
-    required TResult Function(_GetServiceList value) getServiceList,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
     required TResult Function(_SetDate value) setDate,
     required TResult Function(_SetFromTime value) setFromTime,
     required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
   }) {
     return started(this);
   }
@@ -196,10 +332,21 @@ class _$_Started implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
-    TResult? Function(_GetServiceList value)? getServiceList,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
     TResult? Function(_SetDate value)? setDate,
     TResult? Function(_SetFromTime value)? setFromTime,
     TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
   }) {
     return started?.call(this);
   }
@@ -209,10 +356,21 @@ class _$_Started implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
-    TResult Function(_GetServiceList value)? getServiceList,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
     TResult Function(_SetDate value)? setDate,
     TResult Function(_SetFromTime value)? setFromTime,
     TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -232,7 +390,7 @@ abstract class _$$_IsSelectedTabCopyWith<$Res> {
           _$_IsSelectedTab value, $Res Function(_$_IsSelectedTab) then) =
       __$$_IsSelectedTabCopyWithImpl<$Res>;
   @useResult
-  $Res call({Types type});
+  $Res call({Types type, int? filterId});
 }
 
 /// @nodoc
@@ -247,12 +405,17 @@ class __$$_IsSelectedTabCopyWithImpl<$Res>
   @override
   $Res call({
     Object? type = null,
+    Object? filterId = freezed,
   }) {
     return _then(_$_IsSelectedTab(
       null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as Types,
+      filterId: freezed == filterId
+          ? _value.filterId
+          : filterId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -260,14 +423,16 @@ class __$$_IsSelectedTabCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_IsSelectedTab implements _IsSelectedTab {
-  const _$_IsSelectedTab(this.type);
+  const _$_IsSelectedTab(this.type, {this.filterId});
 
   @override
   final Types type;
+  @override
+  final int? filterId;
 
   @override
   String toString() {
-    return 'ServiceRequestManagementEvent.isSelectedTab(type: $type)';
+    return 'ServiceRequestManagementEvent.isSelectedTab(type: $type, filterId: $filterId)';
   }
 
   @override
@@ -275,11 +440,13 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_IsSelectedTab &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.filterId, filterId) ||
+                other.filterId == filterId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, type);
+  int get hashCode => Object.hash(runtimeType, type, filterId);
 
   @JsonKey(ignore: true)
   @override
@@ -291,41 +458,85 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Types type) isSelectedTab,
-    required TResult Function(Types type) getServiceList,
+    required TResult Function(Types type, int? filterId) isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
     required TResult Function(DateTime selectedDate) setDate,
     required TResult Function(TimeOfDay time) setFromTime,
     required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
   }) {
-    return isSelectedTab(type);
+    return isSelectedTab(type, filterId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Types type)? isSelectedTab,
-    TResult? Function(Types type)? getServiceList,
+    TResult? Function(Types type, int? filterId)? isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
     TResult? Function(DateTime selectedDate)? setDate,
     TResult? Function(TimeOfDay time)? setFromTime,
     TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
   }) {
-    return isSelectedTab?.call(type);
+    return isSelectedTab?.call(type, filterId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Types type)? isSelectedTab,
-    TResult Function(Types type)? getServiceList,
+    TResult Function(Types type, int? filterId)? isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
     TResult Function(DateTime selectedDate)? setDate,
     TResult Function(TimeOfDay time)? setFromTime,
     TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
     required TResult orElse(),
   }) {
     if (isSelectedTab != null) {
-      return isSelectedTab(type);
+      return isSelectedTab(type, filterId);
     }
     return orElse();
   }
@@ -335,10 +546,23 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
-    required TResult Function(_GetServiceList value) getServiceList,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
     required TResult Function(_SetDate value) setDate,
     required TResult Function(_SetFromTime value) setFromTime,
     required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
   }) {
     return isSelectedTab(this);
   }
@@ -348,10 +572,21 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
-    TResult? Function(_GetServiceList value)? getServiceList,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
     TResult? Function(_SetDate value)? setDate,
     TResult? Function(_SetFromTime value)? setFromTime,
     TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
   }) {
     return isSelectedTab?.call(this);
   }
@@ -361,10 +596,21 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
-    TResult Function(_GetServiceList value)? getServiceList,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
     TResult Function(_SetDate value)? setDate,
     TResult Function(_SetFromTime value)? setFromTime,
     TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
     required TResult orElse(),
   }) {
     if (isSelectedTab != null) {
@@ -375,114 +621,169 @@ class _$_IsSelectedTab implements _IsSelectedTab {
 }
 
 abstract class _IsSelectedTab implements ServiceRequestManagementEvent {
-  const factory _IsSelectedTab(final Types type) = _$_IsSelectedTab;
+  const factory _IsSelectedTab(final Types type, {final int? filterId}) =
+      _$_IsSelectedTab;
 
   Types get type;
+  int? get filterId;
   @JsonKey(ignore: true)
   _$$_IsSelectedTabCopyWith<_$_IsSelectedTab> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_GetServiceListCopyWith<$Res> {
-  factory _$$_GetServiceListCopyWith(
-          _$_GetServiceList value, $Res Function(_$_GetServiceList) then) =
-      __$$_GetServiceListCopyWithImpl<$Res>;
+abstract class _$$_RescheduleCopyWith<$Res> {
+  factory _$$_RescheduleCopyWith(
+          _$_Reschedule value, $Res Function(_$_Reschedule) then) =
+      __$$_RescheduleCopyWithImpl<$Res>;
   @useResult
-  $Res call({Types type});
+  $Res call({RescheduleParams rescheduleParams, BuildContext context});
 }
 
 /// @nodoc
-class __$$_GetServiceListCopyWithImpl<$Res>
-    extends _$ServiceRequestManagementEventCopyWithImpl<$Res, _$_GetServiceList>
-    implements _$$_GetServiceListCopyWith<$Res> {
-  __$$_GetServiceListCopyWithImpl(
-      _$_GetServiceList _value, $Res Function(_$_GetServiceList) _then)
+class __$$_RescheduleCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res, _$_Reschedule>
+    implements _$$_RescheduleCopyWith<$Res> {
+  __$$_RescheduleCopyWithImpl(
+      _$_Reschedule _value, $Res Function(_$_Reschedule) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = null,
+    Object? rescheduleParams = null,
+    Object? context = null,
   }) {
-    return _then(_$_GetServiceList(
-      null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as Types,
+    return _then(_$_Reschedule(
+      rescheduleParams: null == rescheduleParams
+          ? _value.rescheduleParams
+          : rescheduleParams // ignore: cast_nullable_to_non_nullable
+              as RescheduleParams,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_GetServiceList implements _GetServiceList {
-  const _$_GetServiceList(this.type);
+class _$_Reschedule implements _Reschedule {
+  const _$_Reschedule({required this.rescheduleParams, required this.context});
 
   @override
-  final Types type;
+  final RescheduleParams rescheduleParams;
+  @override
+  final BuildContext context;
 
   @override
   String toString() {
-    return 'ServiceRequestManagementEvent.getServiceList(type: $type)';
+    return 'ServiceRequestManagementEvent.reschedule(rescheduleParams: $rescheduleParams, context: $context)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetServiceList &&
-            (identical(other.type, type) || other.type == type));
+            other is _$_Reschedule &&
+            (identical(other.rescheduleParams, rescheduleParams) ||
+                other.rescheduleParams == rescheduleParams) &&
+            (identical(other.context, context) || other.context == context));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, type);
+  int get hashCode => Object.hash(runtimeType, rescheduleParams, context);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GetServiceListCopyWith<_$_GetServiceList> get copyWith =>
-      __$$_GetServiceListCopyWithImpl<_$_GetServiceList>(this, _$identity);
+  _$$_RescheduleCopyWith<_$_Reschedule> get copyWith =>
+      __$$_RescheduleCopyWithImpl<_$_Reschedule>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Types type) isSelectedTab,
-    required TResult Function(Types type) getServiceList,
+    required TResult Function(Types type, int? filterId) isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
     required TResult Function(DateTime selectedDate) setDate,
     required TResult Function(TimeOfDay time) setFromTime,
     required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
   }) {
-    return getServiceList(type);
+    return reschedule(rescheduleParams, context);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Types type)? isSelectedTab,
-    TResult? Function(Types type)? getServiceList,
+    TResult? Function(Types type, int? filterId)? isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
     TResult? Function(DateTime selectedDate)? setDate,
     TResult? Function(TimeOfDay time)? setFromTime,
     TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
   }) {
-    return getServiceList?.call(type);
+    return reschedule?.call(rescheduleParams, context);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Types type)? isSelectedTab,
-    TResult Function(Types type)? getServiceList,
+    TResult Function(Types type, int? filterId)? isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
     TResult Function(DateTime selectedDate)? setDate,
     TResult Function(TimeOfDay time)? setFromTime,
     TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
     required TResult orElse(),
   }) {
-    if (getServiceList != null) {
-      return getServiceList(type);
+    if (reschedule != null) {
+      return reschedule(rescheduleParams, context);
     }
     return orElse();
   }
@@ -492,12 +793,25 @@ class _$_GetServiceList implements _GetServiceList {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
-    required TResult Function(_GetServiceList value) getServiceList,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
     required TResult Function(_SetDate value) setDate,
     required TResult Function(_SetFromTime value) setFromTime,
     required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
   }) {
-    return getServiceList(this);
+    return reschedule(this);
   }
 
   @override
@@ -505,12 +819,23 @@ class _$_GetServiceList implements _GetServiceList {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
-    TResult? Function(_GetServiceList value)? getServiceList,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
     TResult? Function(_SetDate value)? setDate,
     TResult? Function(_SetFromTime value)? setFromTime,
     TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
   }) {
-    return getServiceList?.call(this);
+    return reschedule?.call(this);
   }
 
   @override
@@ -518,25 +843,826 @@ class _$_GetServiceList implements _GetServiceList {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
-    TResult Function(_GetServiceList value)? getServiceList,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
     TResult Function(_SetDate value)? setDate,
     TResult Function(_SetFromTime value)? setFromTime,
     TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
     required TResult orElse(),
   }) {
-    if (getServiceList != null) {
-      return getServiceList(this);
+    if (reschedule != null) {
+      return reschedule(this);
     }
     return orElse();
   }
 }
 
-abstract class _GetServiceList implements ServiceRequestManagementEvent {
-  const factory _GetServiceList(final Types type) = _$_GetServiceList;
+abstract class _Reschedule implements ServiceRequestManagementEvent {
+  const factory _Reschedule(
+      {required final RescheduleParams rescheduleParams,
+      required final BuildContext context}) = _$_Reschedule;
 
-  Types get type;
+  RescheduleParams get rescheduleParams;
+  BuildContext get context;
   @JsonKey(ignore: true)
-  _$$_GetServiceListCopyWith<_$_GetServiceList> get copyWith =>
+  _$$_RescheduleCopyWith<_$_Reschedule> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AssignCaregiverCopyWith<$Res> {
+  factory _$$_AssignCaregiverCopyWith(
+          _$_AssignCaregiver value, $Res Function(_$_AssignCaregiver) then) =
+      __$$_AssignCaregiverCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {AssignCareGiverParams assignCareGiverParams, BuildContext context});
+}
+
+/// @nodoc
+class __$$_AssignCaregiverCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res,
+        _$_AssignCaregiver> implements _$$_AssignCaregiverCopyWith<$Res> {
+  __$$_AssignCaregiverCopyWithImpl(
+      _$_AssignCaregiver _value, $Res Function(_$_AssignCaregiver) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? assignCareGiverParams = null,
+    Object? context = null,
+  }) {
+    return _then(_$_AssignCaregiver(
+      assignCareGiverParams: null == assignCareGiverParams
+          ? _value.assignCareGiverParams
+          : assignCareGiverParams // ignore: cast_nullable_to_non_nullable
+              as AssignCareGiverParams,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_AssignCaregiver implements _AssignCaregiver {
+  const _$_AssignCaregiver(
+      {required this.assignCareGiverParams, required this.context});
+
+  @override
+  final AssignCareGiverParams assignCareGiverParams;
+  @override
+  final BuildContext context;
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.assignCaregiver(assignCareGiverParams: $assignCareGiverParams, context: $context)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AssignCaregiver &&
+            (identical(other.assignCareGiverParams, assignCareGiverParams) ||
+                other.assignCareGiverParams == assignCareGiverParams) &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, assignCareGiverParams, context);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AssignCaregiverCopyWith<_$_AssignCaregiver> get copyWith =>
+      __$$_AssignCaregiverCopyWithImpl<_$_AssignCaregiver>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(Types type, int? filterId) isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
+  }) {
+    return assignCaregiver(assignCareGiverParams, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(Types type, int? filterId)? isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
+  }) {
+    return assignCaregiver?.call(assignCareGiverParams, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(Types type, int? filterId)? isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
+    required TResult orElse(),
+  }) {
+    if (assignCaregiver != null) {
+      return assignCaregiver(assignCareGiverParams, context);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
+  }) {
+    return assignCaregiver(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+  }) {
+    return assignCaregiver?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    required TResult orElse(),
+  }) {
+    if (assignCaregiver != null) {
+      return assignCaregiver(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AssignCaregiver implements ServiceRequestManagementEvent {
+  const factory _AssignCaregiver(
+      {required final AssignCareGiverParams assignCareGiverParams,
+      required final BuildContext context}) = _$_AssignCaregiver;
+
+  AssignCareGiverParams get assignCareGiverParams;
+  BuildContext get context;
+  @JsonKey(ignore: true)
+  _$$_AssignCaregiverCopyWith<_$_AssignCaregiver> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_StartServiceCopyWith<$Res> {
+  factory _$$_StartServiceCopyWith(
+          _$_StartService value, $Res Function(_$_StartService) then) =
+      __$$_StartServiceCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String userId, String serviceId, BuildContext context});
+}
+
+/// @nodoc
+class __$$_StartServiceCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res, _$_StartService>
+    implements _$$_StartServiceCopyWith<$Res> {
+  __$$_StartServiceCopyWithImpl(
+      _$_StartService _value, $Res Function(_$_StartService) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? serviceId = null,
+    Object? context = null,
+  }) {
+    return _then(_$_StartService(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      serviceId: null == serviceId
+          ? _value.serviceId
+          : serviceId // ignore: cast_nullable_to_non_nullable
+              as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_StartService implements _StartService {
+  const _$_StartService(
+      {required this.userId, required this.serviceId, required this.context});
+
+  @override
+  final String userId;
+  @override
+  final String serviceId;
+  @override
+  final BuildContext context;
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.startService(userId: $userId, serviceId: $serviceId, context: $context)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_StartService &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.serviceId, serviceId) ||
+                other.serviceId == serviceId) &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userId, serviceId, context);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_StartServiceCopyWith<_$_StartService> get copyWith =>
+      __$$_StartServiceCopyWithImpl<_$_StartService>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(Types type, int? filterId) isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
+  }) {
+    return startService(userId, serviceId, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(Types type, int? filterId)? isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
+  }) {
+    return startService?.call(userId, serviceId, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(Types type, int? filterId)? isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
+    required TResult orElse(),
+  }) {
+    if (startService != null) {
+      return startService(userId, serviceId, context);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
+  }) {
+    return startService(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+  }) {
+    return startService?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    required TResult orElse(),
+  }) {
+    if (startService != null) {
+      return startService(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _StartService implements ServiceRequestManagementEvent {
+  const factory _StartService(
+      {required final String userId,
+      required final String serviceId,
+      required final BuildContext context}) = _$_StartService;
+
+  String get userId;
+  String get serviceId;
+  BuildContext get context;
+  @JsonKey(ignore: true)
+  _$$_StartServiceCopyWith<_$_StartService> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_CancelServiceCopyWith<$Res> {
+  factory _$$_CancelServiceCopyWith(
+          _$_CancelService value, $Res Function(_$_CancelService) then) =
+      __$$_CancelServiceCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String userId,
+      String serviceId,
+      String description,
+      BuildContext context});
+}
+
+/// @nodoc
+class __$$_CancelServiceCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res, _$_CancelService>
+    implements _$$_CancelServiceCopyWith<$Res> {
+  __$$_CancelServiceCopyWithImpl(
+      _$_CancelService _value, $Res Function(_$_CancelService) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? serviceId = null,
+    Object? description = null,
+    Object? context = null,
+  }) {
+    return _then(_$_CancelService(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      serviceId: null == serviceId
+          ? _value.serviceId
+          : serviceId // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_CancelService implements _CancelService {
+  const _$_CancelService(
+      {required this.userId,
+      required this.serviceId,
+      required this.description,
+      required this.context});
+
+  @override
+  final String userId;
+  @override
+  final String serviceId;
+  @override
+  final String description;
+  @override
+  final BuildContext context;
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.cancelService(userId: $userId, serviceId: $serviceId, description: $description, context: $context)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CancelService &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.serviceId, serviceId) ||
+                other.serviceId == serviceId) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, userId, serviceId, description, context);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CancelServiceCopyWith<_$_CancelService> get copyWith =>
+      __$$_CancelServiceCopyWithImpl<_$_CancelService>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(Types type, int? filterId) isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
+  }) {
+    return cancelService(userId, serviceId, description, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(Types type, int? filterId)? isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
+  }) {
+    return cancelService?.call(userId, serviceId, description, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(Types type, int? filterId)? isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
+    required TResult orElse(),
+  }) {
+    if (cancelService != null) {
+      return cancelService(userId, serviceId, description, context);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
+  }) {
+    return cancelService(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+  }) {
+    return cancelService?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    required TResult orElse(),
+  }) {
+    if (cancelService != null) {
+      return cancelService(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CancelService implements ServiceRequestManagementEvent {
+  const factory _CancelService(
+      {required final String userId,
+      required final String serviceId,
+      required final String description,
+      required final BuildContext context}) = _$_CancelService;
+
+  String get userId;
+  String get serviceId;
+  String get description;
+  BuildContext get context;
+  @JsonKey(ignore: true)
+  _$$_CancelServiceCopyWith<_$_CancelService> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -605,11 +1731,27 @@ class _$_SetDate implements _SetDate {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Types type) isSelectedTab,
-    required TResult Function(Types type) getServiceList,
+    required TResult Function(Types type, int? filterId) isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
     required TResult Function(DateTime selectedDate) setDate,
     required TResult Function(TimeOfDay time) setFromTime,
     required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
   }) {
     return setDate(selectedDate);
   }
@@ -618,11 +1760,25 @@ class _$_SetDate implements _SetDate {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Types type)? isSelectedTab,
-    TResult? Function(Types type)? getServiceList,
+    TResult? Function(Types type, int? filterId)? isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
     TResult? Function(DateTime selectedDate)? setDate,
     TResult? Function(TimeOfDay time)? setFromTime,
     TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
   }) {
     return setDate?.call(selectedDate);
   }
@@ -631,11 +1787,25 @@ class _$_SetDate implements _SetDate {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Types type)? isSelectedTab,
-    TResult Function(Types type)? getServiceList,
+    TResult Function(Types type, int? filterId)? isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
     TResult Function(DateTime selectedDate)? setDate,
     TResult Function(TimeOfDay time)? setFromTime,
     TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
     required TResult orElse(),
   }) {
     if (setDate != null) {
@@ -649,10 +1819,23 @@ class _$_SetDate implements _SetDate {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
-    required TResult Function(_GetServiceList value) getServiceList,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
     required TResult Function(_SetDate value) setDate,
     required TResult Function(_SetFromTime value) setFromTime,
     required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
   }) {
     return setDate(this);
   }
@@ -662,10 +1845,21 @@ class _$_SetDate implements _SetDate {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
-    TResult? Function(_GetServiceList value)? getServiceList,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
     TResult? Function(_SetDate value)? setDate,
     TResult? Function(_SetFromTime value)? setFromTime,
     TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
   }) {
     return setDate?.call(this);
   }
@@ -675,10 +1869,21 @@ class _$_SetDate implements _SetDate {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
-    TResult Function(_GetServiceList value)? getServiceList,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
     TResult Function(_SetDate value)? setDate,
     TResult Function(_SetFromTime value)? setFromTime,
     TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
     required TResult orElse(),
   }) {
     if (setDate != null) {
@@ -762,11 +1967,27 @@ class _$_SetFromTime implements _SetFromTime {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Types type) isSelectedTab,
-    required TResult Function(Types type) getServiceList,
+    required TResult Function(Types type, int? filterId) isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
     required TResult Function(DateTime selectedDate) setDate,
     required TResult Function(TimeOfDay time) setFromTime,
     required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
   }) {
     return setFromTime(time);
   }
@@ -775,11 +1996,25 @@ class _$_SetFromTime implements _SetFromTime {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Types type)? isSelectedTab,
-    TResult? Function(Types type)? getServiceList,
+    TResult? Function(Types type, int? filterId)? isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
     TResult? Function(DateTime selectedDate)? setDate,
     TResult? Function(TimeOfDay time)? setFromTime,
     TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
   }) {
     return setFromTime?.call(time);
   }
@@ -788,11 +2023,25 @@ class _$_SetFromTime implements _SetFromTime {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Types type)? isSelectedTab,
-    TResult Function(Types type)? getServiceList,
+    TResult Function(Types type, int? filterId)? isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
     TResult Function(DateTime selectedDate)? setDate,
     TResult Function(TimeOfDay time)? setFromTime,
     TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
     required TResult orElse(),
   }) {
     if (setFromTime != null) {
@@ -806,10 +2055,23 @@ class _$_SetFromTime implements _SetFromTime {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
-    required TResult Function(_GetServiceList value) getServiceList,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
     required TResult Function(_SetDate value) setDate,
     required TResult Function(_SetFromTime value) setFromTime,
     required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
   }) {
     return setFromTime(this);
   }
@@ -819,10 +2081,21 @@ class _$_SetFromTime implements _SetFromTime {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
-    TResult? Function(_GetServiceList value)? getServiceList,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
     TResult? Function(_SetDate value)? setDate,
     TResult? Function(_SetFromTime value)? setFromTime,
     TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
   }) {
     return setFromTime?.call(this);
   }
@@ -832,10 +2105,21 @@ class _$_SetFromTime implements _SetFromTime {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
-    TResult Function(_GetServiceList value)? getServiceList,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
     TResult Function(_SetDate value)? setDate,
     TResult Function(_SetFromTime value)? setFromTime,
     TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
     required TResult orElse(),
   }) {
     if (setFromTime != null) {
@@ -919,11 +2203,27 @@ class _$_SetToTime implements _SetToTime {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Types type) isSelectedTab,
-    required TResult Function(Types type) getServiceList,
+    required TResult Function(Types type, int? filterId) isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
     required TResult Function(DateTime selectedDate) setDate,
     required TResult Function(TimeOfDay time) setFromTime,
     required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
   }) {
     return setToTime(time);
   }
@@ -932,11 +2232,25 @@ class _$_SetToTime implements _SetToTime {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Types type)? isSelectedTab,
-    TResult? Function(Types type)? getServiceList,
+    TResult? Function(Types type, int? filterId)? isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
     TResult? Function(DateTime selectedDate)? setDate,
     TResult? Function(TimeOfDay time)? setFromTime,
     TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
   }) {
     return setToTime?.call(time);
   }
@@ -945,11 +2259,25 @@ class _$_SetToTime implements _SetToTime {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Types type)? isSelectedTab,
-    TResult Function(Types type)? getServiceList,
+    TResult Function(Types type, int? filterId)? isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
     TResult Function(DateTime selectedDate)? setDate,
     TResult Function(TimeOfDay time)? setFromTime,
     TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
     required TResult orElse(),
   }) {
     if (setToTime != null) {
@@ -963,10 +2291,23 @@ class _$_SetToTime implements _SetToTime {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
-    required TResult Function(_GetServiceList value) getServiceList,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
     required TResult Function(_SetDate value) setDate,
     required TResult Function(_SetFromTime value) setFromTime,
     required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
   }) {
     return setToTime(this);
   }
@@ -976,10 +2317,21 @@ class _$_SetToTime implements _SetToTime {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
-    TResult? Function(_GetServiceList value)? getServiceList,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
     TResult? Function(_SetDate value)? setDate,
     TResult? Function(_SetFromTime value)? setFromTime,
     TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
   }) {
     return setToTime?.call(this);
   }
@@ -989,10 +2341,21 @@ class _$_SetToTime implements _SetToTime {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
-    TResult Function(_GetServiceList value)? getServiceList,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
     TResult Function(_SetDate value)? setDate,
     TResult Function(_SetFromTime value)? setFromTime,
     TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
     required TResult orElse(),
   }) {
     if (setToTime != null) {
@@ -1012,6 +2375,1055 @@ abstract class _SetToTime implements ServiceRequestManagementEvent {
 }
 
 /// @nodoc
+abstract class _$$_IsRescheduleInitialViewCopyWith<$Res> {
+  factory _$$_IsRescheduleInitialViewCopyWith(_$_IsRescheduleInitialView value,
+          $Res Function(_$_IsRescheduleInitialView) then) =
+      __$$_IsRescheduleInitialViewCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_IsRescheduleInitialViewCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res,
+        _$_IsRescheduleInitialView>
+    implements _$$_IsRescheduleInitialViewCopyWith<$Res> {
+  __$$_IsRescheduleInitialViewCopyWithImpl(_$_IsRescheduleInitialView _value,
+      $Res Function(_$_IsRescheduleInitialView) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
+  const _$_IsRescheduleInitialView();
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.isRescheduleInitialView()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_IsRescheduleInitialView);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(Types type, int? filterId) isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleInitialView();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(Types type, int? filterId)? isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleInitialView?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(Types type, int? filterId)? isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
+    required TResult orElse(),
+  }) {
+    if (isRescheduleInitialView != null) {
+      return isRescheduleInitialView();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleInitialView(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleInitialView?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    required TResult orElse(),
+  }) {
+    if (isRescheduleInitialView != null) {
+      return isRescheduleInitialView(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _IsRescheduleInitialView
+    implements ServiceRequestManagementEvent {
+  const factory _IsRescheduleInitialView() = _$_IsRescheduleInitialView;
+}
+
+/// @nodoc
+abstract class _$$_IsRescheduleLoaderViewCopyWith<$Res> {
+  factory _$$_IsRescheduleLoaderViewCopyWith(_$_IsRescheduleLoaderView value,
+          $Res Function(_$_IsRescheduleLoaderView) then) =
+      __$$_IsRescheduleLoaderViewCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_IsRescheduleLoaderViewCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res,
+        _$_IsRescheduleLoaderView>
+    implements _$$_IsRescheduleLoaderViewCopyWith<$Res> {
+  __$$_IsRescheduleLoaderViewCopyWithImpl(_$_IsRescheduleLoaderView _value,
+      $Res Function(_$_IsRescheduleLoaderView) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
+  const _$_IsRescheduleLoaderView();
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.isRescheduleLoaderView()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_IsRescheduleLoaderView);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(Types type, int? filterId) isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleLoaderView();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(Types type, int? filterId)? isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleLoaderView?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(Types type, int? filterId)? isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
+    required TResult orElse(),
+  }) {
+    if (isRescheduleLoaderView != null) {
+      return isRescheduleLoaderView();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleLoaderView(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleLoaderView?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    required TResult orElse(),
+  }) {
+    if (isRescheduleLoaderView != null) {
+      return isRescheduleLoaderView(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _IsRescheduleLoaderView
+    implements ServiceRequestManagementEvent {
+  const factory _IsRescheduleLoaderView() = _$_IsRescheduleLoaderView;
+}
+
+/// @nodoc
+abstract class _$$_IsRescheduleAvailableViewCopyWith<$Res> {
+  factory _$$_IsRescheduleAvailableViewCopyWith(
+          _$_IsRescheduleAvailableView value,
+          $Res Function(_$_IsRescheduleAvailableView) then) =
+      __$$_IsRescheduleAvailableViewCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_IsRescheduleAvailableViewCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res,
+        _$_IsRescheduleAvailableView>
+    implements _$$_IsRescheduleAvailableViewCopyWith<$Res> {
+  __$$_IsRescheduleAvailableViewCopyWithImpl(
+      _$_IsRescheduleAvailableView _value,
+      $Res Function(_$_IsRescheduleAvailableView) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
+  const _$_IsRescheduleAvailableView();
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.isRescheduleAvailableView()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_IsRescheduleAvailableView);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(Types type, int? filterId) isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleAvailableView();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(Types type, int? filterId)? isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleAvailableView?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(Types type, int? filterId)? isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
+    required TResult orElse(),
+  }) {
+    if (isRescheduleAvailableView != null) {
+      return isRescheduleAvailableView();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleAvailableView(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleAvailableView?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    required TResult orElse(),
+  }) {
+    if (isRescheduleAvailableView != null) {
+      return isRescheduleAvailableView(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _IsRescheduleAvailableView
+    implements ServiceRequestManagementEvent {
+  const factory _IsRescheduleAvailableView() = _$_IsRescheduleAvailableView;
+}
+
+/// @nodoc
+abstract class _$$_IsRescheduleNotAvailableViewCopyWith<$Res> {
+  factory _$$_IsRescheduleNotAvailableViewCopyWith(
+          _$_IsRescheduleNotAvailableView value,
+          $Res Function(_$_IsRescheduleNotAvailableView) then) =
+      __$$_IsRescheduleNotAvailableViewCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_IsRescheduleNotAvailableViewCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res,
+        _$_IsRescheduleNotAvailableView>
+    implements _$$_IsRescheduleNotAvailableViewCopyWith<$Res> {
+  __$$_IsRescheduleNotAvailableViewCopyWithImpl(
+      _$_IsRescheduleNotAvailableView _value,
+      $Res Function(_$_IsRescheduleNotAvailableView) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
+  const _$_IsRescheduleNotAvailableView();
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.isRescheduleNotAvailableView()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_IsRescheduleNotAvailableView);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(Types type, int? filterId) isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleNotAvailableView();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(Types type, int? filterId)? isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleNotAvailableView?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(Types type, int? filterId)? isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
+    required TResult orElse(),
+  }) {
+    if (isRescheduleNotAvailableView != null) {
+      return isRescheduleNotAvailableView();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleNotAvailableView(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleNotAvailableView?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    required TResult orElse(),
+  }) {
+    if (isRescheduleNotAvailableView != null) {
+      return isRescheduleNotAvailableView(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _IsRescheduleNotAvailableView
+    implements ServiceRequestManagementEvent {
+  const factory _IsRescheduleNotAvailableView() =
+      _$_IsRescheduleNotAvailableView;
+}
+
+/// @nodoc
+abstract class _$$_IsRescheduleOtherMatchingViewViewCopyWith<$Res> {
+  factory _$$_IsRescheduleOtherMatchingViewViewCopyWith(
+          _$_IsRescheduleOtherMatchingViewView value,
+          $Res Function(_$_IsRescheduleOtherMatchingViewView) then) =
+      __$$_IsRescheduleOtherMatchingViewViewCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_IsRescheduleOtherMatchingViewViewCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res,
+        _$_IsRescheduleOtherMatchingViewView>
+    implements _$$_IsRescheduleOtherMatchingViewViewCopyWith<$Res> {
+  __$$_IsRescheduleOtherMatchingViewViewCopyWithImpl(
+      _$_IsRescheduleOtherMatchingViewView _value,
+      $Res Function(_$_IsRescheduleOtherMatchingViewView) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_IsRescheduleOtherMatchingViewView
+    implements _IsRescheduleOtherMatchingViewView {
+  const _$_IsRescheduleOtherMatchingViewView();
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.isRescheduleOtherMatchingView()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_IsRescheduleOtherMatchingViewView);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(Types type, int? filterId) isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleOtherMatchingView();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(Types type, int? filterId)? isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleOtherMatchingView?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(Types type, int? filterId)? isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
+    required TResult orElse(),
+  }) {
+    if (isRescheduleOtherMatchingView != null) {
+      return isRescheduleOtherMatchingView();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleOtherMatchingView(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+  }) {
+    return isRescheduleOtherMatchingView?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    required TResult orElse(),
+  }) {
+    if (isRescheduleOtherMatchingView != null) {
+      return isRescheduleOtherMatchingView(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _IsRescheduleOtherMatchingViewView
+    implements ServiceRequestManagementEvent {
+  const factory _IsRescheduleOtherMatchingViewView() =
+      _$_IsRescheduleOtherMatchingViewView;
+}
+
+/// @nodoc
 mixin _$ServiceRequestManagementState {
   List<Types> get types => throw _privateConstructorUsedError;
   bool? get isLoading => throw _privateConstructorUsedError;
@@ -1019,6 +3431,27 @@ mixin _$ServiceRequestManagementState {
   DateTime get selectedDate => throw _privateConstructorUsedError;
   TimeOfDay? get fromTime => throw _privateConstructorUsedError;
   TimeOfDay? get toTime => throw _privateConstructorUsedError;
+  RescheduleResponse? get rescheduleResponse =>
+      throw _privateConstructorUsedError;
+  CommonResponseUse? get caregiverAssignResponse =>
+      throw _privateConstructorUsedError;
+  CommonResponseUse? get startServiceResponse =>
+      throw _privateConstructorUsedError;
+  CommonResponseUse? get cancelServiceResponse =>
+      throw _privateConstructorUsedError;
+  bool get isError => throw _privateConstructorUsedError;
+  bool get isCancelLoading => throw _privateConstructorUsedError;
+  bool get isStartServiceLoading => throw _privateConstructorUsedError;
+  bool get isReScheduleError => throw _privateConstructorUsedError;
+  bool get isClientError => throw _privateConstructorUsedError;
+  bool get isRescheduleInitialView => throw _privateConstructorUsedError;
+  bool get isRescheduleLoaderView => throw _privateConstructorUsedError;
+  bool get isRescheduleAvailableCaregiverView =>
+      throw _privateConstructorUsedError;
+  bool get isRescheduleNotAvailableCaregiverView =>
+      throw _privateConstructorUsedError;
+  bool get isRescheduleOtherMatchingListView =>
+      throw _privateConstructorUsedError;
   List<Services> get services => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1041,6 +3474,20 @@ abstract class $ServiceRequestManagementStateCopyWith<$Res> {
       DateTime selectedDate,
       TimeOfDay? fromTime,
       TimeOfDay? toTime,
+      RescheduleResponse? rescheduleResponse,
+      CommonResponseUse? caregiverAssignResponse,
+      CommonResponseUse? startServiceResponse,
+      CommonResponseUse? cancelServiceResponse,
+      bool isError,
+      bool isCancelLoading,
+      bool isStartServiceLoading,
+      bool isReScheduleError,
+      bool isClientError,
+      bool isRescheduleInitialView,
+      bool isRescheduleLoaderView,
+      bool isRescheduleAvailableCaregiverView,
+      bool isRescheduleNotAvailableCaregiverView,
+      bool isRescheduleOtherMatchingListView,
       List<Services> services});
 }
 
@@ -1064,6 +3511,20 @@ class _$ServiceRequestManagementStateCopyWithImpl<$Res,
     Object? selectedDate = null,
     Object? fromTime = freezed,
     Object? toTime = freezed,
+    Object? rescheduleResponse = freezed,
+    Object? caregiverAssignResponse = freezed,
+    Object? startServiceResponse = freezed,
+    Object? cancelServiceResponse = freezed,
+    Object? isError = null,
+    Object? isCancelLoading = null,
+    Object? isStartServiceLoading = null,
+    Object? isReScheduleError = null,
+    Object? isClientError = null,
+    Object? isRescheduleInitialView = null,
+    Object? isRescheduleLoaderView = null,
+    Object? isRescheduleAvailableCaregiverView = null,
+    Object? isRescheduleNotAvailableCaregiverView = null,
+    Object? isRescheduleOtherMatchingListView = null,
     Object? services = null,
   }) {
     return _then(_value.copyWith(
@@ -1091,6 +3552,65 @@ class _$ServiceRequestManagementStateCopyWithImpl<$Res,
           ? _value.toTime
           : toTime // ignore: cast_nullable_to_non_nullable
               as TimeOfDay?,
+      rescheduleResponse: freezed == rescheduleResponse
+          ? _value.rescheduleResponse
+          : rescheduleResponse // ignore: cast_nullable_to_non_nullable
+              as RescheduleResponse?,
+      caregiverAssignResponse: freezed == caregiverAssignResponse
+          ? _value.caregiverAssignResponse
+          : caregiverAssignResponse // ignore: cast_nullable_to_non_nullable
+              as CommonResponseUse?,
+      startServiceResponse: freezed == startServiceResponse
+          ? _value.startServiceResponse
+          : startServiceResponse // ignore: cast_nullable_to_non_nullable
+              as CommonResponseUse?,
+      cancelServiceResponse: freezed == cancelServiceResponse
+          ? _value.cancelServiceResponse
+          : cancelServiceResponse // ignore: cast_nullable_to_non_nullable
+              as CommonResponseUse?,
+      isError: null == isError
+          ? _value.isError
+          : isError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isCancelLoading: null == isCancelLoading
+          ? _value.isCancelLoading
+          : isCancelLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isStartServiceLoading: null == isStartServiceLoading
+          ? _value.isStartServiceLoading
+          : isStartServiceLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isReScheduleError: null == isReScheduleError
+          ? _value.isReScheduleError
+          : isReScheduleError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isClientError: null == isClientError
+          ? _value.isClientError
+          : isClientError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRescheduleInitialView: null == isRescheduleInitialView
+          ? _value.isRescheduleInitialView
+          : isRescheduleInitialView // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRescheduleLoaderView: null == isRescheduleLoaderView
+          ? _value.isRescheduleLoaderView
+          : isRescheduleLoaderView // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRescheduleAvailableCaregiverView: null ==
+              isRescheduleAvailableCaregiverView
+          ? _value.isRescheduleAvailableCaregiverView
+          : isRescheduleAvailableCaregiverView // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRescheduleNotAvailableCaregiverView: null ==
+              isRescheduleNotAvailableCaregiverView
+          ? _value.isRescheduleNotAvailableCaregiverView
+          : isRescheduleNotAvailableCaregiverView // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRescheduleOtherMatchingListView: null ==
+              isRescheduleOtherMatchingListView
+          ? _value.isRescheduleOtherMatchingListView
+          : isRescheduleOtherMatchingListView // ignore: cast_nullable_to_non_nullable
+              as bool,
       services: null == services
           ? _value.services
           : services // ignore: cast_nullable_to_non_nullable
@@ -1115,6 +3635,20 @@ abstract class _$$_ServiceRequestManagementStateCopyWith<$Res>
       DateTime selectedDate,
       TimeOfDay? fromTime,
       TimeOfDay? toTime,
+      RescheduleResponse? rescheduleResponse,
+      CommonResponseUse? caregiverAssignResponse,
+      CommonResponseUse? startServiceResponse,
+      CommonResponseUse? cancelServiceResponse,
+      bool isError,
+      bool isCancelLoading,
+      bool isStartServiceLoading,
+      bool isReScheduleError,
+      bool isClientError,
+      bool isRescheduleInitialView,
+      bool isRescheduleLoaderView,
+      bool isRescheduleAvailableCaregiverView,
+      bool isRescheduleNotAvailableCaregiverView,
+      bool isRescheduleOtherMatchingListView,
       List<Services> services});
 }
 
@@ -1137,6 +3671,20 @@ class __$$_ServiceRequestManagementStateCopyWithImpl<$Res>
     Object? selectedDate = null,
     Object? fromTime = freezed,
     Object? toTime = freezed,
+    Object? rescheduleResponse = freezed,
+    Object? caregiverAssignResponse = freezed,
+    Object? startServiceResponse = freezed,
+    Object? cancelServiceResponse = freezed,
+    Object? isError = null,
+    Object? isCancelLoading = null,
+    Object? isStartServiceLoading = null,
+    Object? isReScheduleError = null,
+    Object? isClientError = null,
+    Object? isRescheduleInitialView = null,
+    Object? isRescheduleLoaderView = null,
+    Object? isRescheduleAvailableCaregiverView = null,
+    Object? isRescheduleNotAvailableCaregiverView = null,
+    Object? isRescheduleOtherMatchingListView = null,
     Object? services = null,
   }) {
     return _then(_$_ServiceRequestManagementState(
@@ -1164,6 +3712,65 @@ class __$$_ServiceRequestManagementStateCopyWithImpl<$Res>
           ? _value.toTime
           : toTime // ignore: cast_nullable_to_non_nullable
               as TimeOfDay?,
+      rescheduleResponse: freezed == rescheduleResponse
+          ? _value.rescheduleResponse
+          : rescheduleResponse // ignore: cast_nullable_to_non_nullable
+              as RescheduleResponse?,
+      caregiverAssignResponse: freezed == caregiverAssignResponse
+          ? _value.caregiverAssignResponse
+          : caregiverAssignResponse // ignore: cast_nullable_to_non_nullable
+              as CommonResponseUse?,
+      startServiceResponse: freezed == startServiceResponse
+          ? _value.startServiceResponse
+          : startServiceResponse // ignore: cast_nullable_to_non_nullable
+              as CommonResponseUse?,
+      cancelServiceResponse: freezed == cancelServiceResponse
+          ? _value.cancelServiceResponse
+          : cancelServiceResponse // ignore: cast_nullable_to_non_nullable
+              as CommonResponseUse?,
+      isError: null == isError
+          ? _value.isError
+          : isError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isCancelLoading: null == isCancelLoading
+          ? _value.isCancelLoading
+          : isCancelLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isStartServiceLoading: null == isStartServiceLoading
+          ? _value.isStartServiceLoading
+          : isStartServiceLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isReScheduleError: null == isReScheduleError
+          ? _value.isReScheduleError
+          : isReScheduleError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isClientError: null == isClientError
+          ? _value.isClientError
+          : isClientError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRescheduleInitialView: null == isRescheduleInitialView
+          ? _value.isRescheduleInitialView
+          : isRescheduleInitialView // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRescheduleLoaderView: null == isRescheduleLoaderView
+          ? _value.isRescheduleLoaderView
+          : isRescheduleLoaderView // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRescheduleAvailableCaregiverView: null ==
+              isRescheduleAvailableCaregiverView
+          ? _value.isRescheduleAvailableCaregiverView
+          : isRescheduleAvailableCaregiverView // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRescheduleNotAvailableCaregiverView: null ==
+              isRescheduleNotAvailableCaregiverView
+          ? _value.isRescheduleNotAvailableCaregiverView
+          : isRescheduleNotAvailableCaregiverView // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRescheduleOtherMatchingListView: null ==
+              isRescheduleOtherMatchingListView
+          ? _value.isRescheduleOtherMatchingListView
+          : isRescheduleOtherMatchingListView // ignore: cast_nullable_to_non_nullable
+              as bool,
       services: null == services
           ? _value._services
           : services // ignore: cast_nullable_to_non_nullable
@@ -1183,6 +3790,20 @@ class _$_ServiceRequestManagementState
       required this.selectedDate,
       this.fromTime,
       this.toTime,
+      this.rescheduleResponse,
+      this.caregiverAssignResponse,
+      this.startServiceResponse,
+      this.cancelServiceResponse,
+      this.isError = false,
+      this.isCancelLoading = false,
+      this.isStartServiceLoading = false,
+      this.isReScheduleError = false,
+      this.isClientError = false,
+      this.isRescheduleInitialView = false,
+      this.isRescheduleLoaderView = false,
+      this.isRescheduleAvailableCaregiverView = false,
+      this.isRescheduleNotAvailableCaregiverView = false,
+      this.isRescheduleOtherMatchingListView = false,
       required final List<Services> services})
       : _types = types,
         _services = services;
@@ -1205,6 +3826,44 @@ class _$_ServiceRequestManagementState
   final TimeOfDay? fromTime;
   @override
   final TimeOfDay? toTime;
+  @override
+  final RescheduleResponse? rescheduleResponse;
+  @override
+  final CommonResponseUse? caregiverAssignResponse;
+  @override
+  final CommonResponseUse? startServiceResponse;
+  @override
+  final CommonResponseUse? cancelServiceResponse;
+  @override
+  @JsonKey()
+  final bool isError;
+  @override
+  @JsonKey()
+  final bool isCancelLoading;
+  @override
+  @JsonKey()
+  final bool isStartServiceLoading;
+  @override
+  @JsonKey()
+  final bool isReScheduleError;
+  @override
+  @JsonKey()
+  final bool isClientError;
+  @override
+  @JsonKey()
+  final bool isRescheduleInitialView;
+  @override
+  @JsonKey()
+  final bool isRescheduleLoaderView;
+  @override
+  @JsonKey()
+  final bool isRescheduleAvailableCaregiverView;
+  @override
+  @JsonKey()
+  final bool isRescheduleNotAvailableCaregiverView;
+  @override
+  @JsonKey()
+  final bool isRescheduleOtherMatchingListView;
   final List<Services> _services;
   @override
   List<Services> get services {
@@ -1215,7 +3874,7 @@ class _$_ServiceRequestManagementState
 
   @override
   String toString() {
-    return 'ServiceRequestManagementState(types: $types, isLoading: $isLoading, error: $error, selectedDate: $selectedDate, fromTime: $fromTime, toTime: $toTime, services: $services)';
+    return 'ServiceRequestManagementState(types: $types, isLoading: $isLoading, error: $error, selectedDate: $selectedDate, fromTime: $fromTime, toTime: $toTime, rescheduleResponse: $rescheduleResponse, caregiverAssignResponse: $caregiverAssignResponse, startServiceResponse: $startServiceResponse, cancelServiceResponse: $cancelServiceResponse, isError: $isError, isCancelLoading: $isCancelLoading, isStartServiceLoading: $isStartServiceLoading, isReScheduleError: $isReScheduleError, isClientError: $isClientError, isRescheduleInitialView: $isRescheduleInitialView, isRescheduleLoaderView: $isRescheduleLoaderView, isRescheduleAvailableCaregiverView: $isRescheduleAvailableCaregiverView, isRescheduleNotAvailableCaregiverView: $isRescheduleNotAvailableCaregiverView, isRescheduleOtherMatchingListView: $isRescheduleOtherMatchingListView, services: $services)';
   }
 
   @override
@@ -1232,19 +3891,69 @@ class _$_ServiceRequestManagementState
             (identical(other.fromTime, fromTime) ||
                 other.fromTime == fromTime) &&
             (identical(other.toTime, toTime) || other.toTime == toTime) &&
+            (identical(other.rescheduleResponse, rescheduleResponse) ||
+                other.rescheduleResponse == rescheduleResponse) &&
+            (identical(
+                    other.caregiverAssignResponse, caregiverAssignResponse) ||
+                other.caregiverAssignResponse == caregiverAssignResponse) &&
+            (identical(other.startServiceResponse, startServiceResponse) ||
+                other.startServiceResponse == startServiceResponse) &&
+            (identical(other.cancelServiceResponse, cancelServiceResponse) ||
+                other.cancelServiceResponse == cancelServiceResponse) &&
+            (identical(other.isError, isError) || other.isError == isError) &&
+            (identical(other.isCancelLoading, isCancelLoading) ||
+                other.isCancelLoading == isCancelLoading) &&
+            (identical(other.isStartServiceLoading, isStartServiceLoading) ||
+                other.isStartServiceLoading == isStartServiceLoading) &&
+            (identical(other.isReScheduleError, isReScheduleError) ||
+                other.isReScheduleError == isReScheduleError) &&
+            (identical(other.isClientError, isClientError) ||
+                other.isClientError == isClientError) &&
+            (identical(
+                    other.isRescheduleInitialView, isRescheduleInitialView) ||
+                other.isRescheduleInitialView == isRescheduleInitialView) &&
+            (identical(other.isRescheduleLoaderView, isRescheduleLoaderView) ||
+                other.isRescheduleLoaderView == isRescheduleLoaderView) &&
+            (identical(other.isRescheduleAvailableCaregiverView,
+                    isRescheduleAvailableCaregiverView) ||
+                other.isRescheduleAvailableCaregiverView ==
+                    isRescheduleAvailableCaregiverView) &&
+            (identical(other.isRescheduleNotAvailableCaregiverView,
+                    isRescheduleNotAvailableCaregiverView) ||
+                other.isRescheduleNotAvailableCaregiverView ==
+                    isRescheduleNotAvailableCaregiverView) &&
+            (identical(other.isRescheduleOtherMatchingListView,
+                    isRescheduleOtherMatchingListView) ||
+                other.isRescheduleOtherMatchingListView ==
+                    isRescheduleOtherMatchingListView) &&
             const DeepCollectionEquality().equals(other._services, _services));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_types),
-      isLoading,
-      error,
-      selectedDate,
-      fromTime,
-      toTime,
-      const DeepCollectionEquality().hash(_services));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(_types),
+        isLoading,
+        error,
+        selectedDate,
+        fromTime,
+        toTime,
+        rescheduleResponse,
+        caregiverAssignResponse,
+        startServiceResponse,
+        cancelServiceResponse,
+        isError,
+        isCancelLoading,
+        isStartServiceLoading,
+        isReScheduleError,
+        isClientError,
+        isRescheduleInitialView,
+        isRescheduleLoaderView,
+        isRescheduleAvailableCaregiverView,
+        isRescheduleNotAvailableCaregiverView,
+        isRescheduleOtherMatchingListView,
+        const DeepCollectionEquality().hash(_services)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -1263,6 +3972,20 @@ abstract class _ServiceRequestManagementState
           required final DateTime selectedDate,
           final TimeOfDay? fromTime,
           final TimeOfDay? toTime,
+          final RescheduleResponse? rescheduleResponse,
+          final CommonResponseUse? caregiverAssignResponse,
+          final CommonResponseUse? startServiceResponse,
+          final CommonResponseUse? cancelServiceResponse,
+          final bool isError,
+          final bool isCancelLoading,
+          final bool isStartServiceLoading,
+          final bool isReScheduleError,
+          final bool isClientError,
+          final bool isRescheduleInitialView,
+          final bool isRescheduleLoaderView,
+          final bool isRescheduleAvailableCaregiverView,
+          final bool isRescheduleNotAvailableCaregiverView,
+          final bool isRescheduleOtherMatchingListView,
           required final List<Services> services}) =
       _$_ServiceRequestManagementState;
 
@@ -1278,6 +4001,34 @@ abstract class _ServiceRequestManagementState
   TimeOfDay? get fromTime;
   @override
   TimeOfDay? get toTime;
+  @override
+  RescheduleResponse? get rescheduleResponse;
+  @override
+  CommonResponseUse? get caregiverAssignResponse;
+  @override
+  CommonResponseUse? get startServiceResponse;
+  @override
+  CommonResponseUse? get cancelServiceResponse;
+  @override
+  bool get isError;
+  @override
+  bool get isCancelLoading;
+  @override
+  bool get isStartServiceLoading;
+  @override
+  bool get isReScheduleError;
+  @override
+  bool get isClientError;
+  @override
+  bool get isRescheduleInitialView;
+  @override
+  bool get isRescheduleLoaderView;
+  @override
+  bool get isRescheduleAvailableCaregiverView;
+  @override
+  bool get isRescheduleNotAvailableCaregiverView;
+  @override
+  bool get isRescheduleOtherMatchingListView;
   @override
   List<Services> get services;
   @override

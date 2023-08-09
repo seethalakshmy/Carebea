@@ -9,19 +9,27 @@ class ServiceRequestManagementState with _$ServiceRequestManagementState {
       required DateTime selectedDate,
       TimeOfDay? fromTime,
       TimeOfDay? toTime,
+      RescheduleResponse? rescheduleResponse,
+      CommonResponseUse? caregiverAssignResponse,
+      CommonResponseUse? startServiceResponse,
+      CommonResponseUse? cancelServiceResponse,
+      @Default(false) bool isError,
+      @Default(false) bool isCancelLoading,
+      @Default(false) bool isStartServiceLoading,
+      @Default(false) bool isReScheduleError,
+      @Default(false) bool isClientError,
+      @Default(false) bool isRescheduleInitialView,
+      @Default(false) bool isRescheduleLoaderView,
+      @Default(false) bool isRescheduleAvailableCaregiverView,
+      @Default(false) bool isRescheduleNotAvailableCaregiverView,
+      @Default(false) bool isRescheduleOtherMatchingListView,
       required List<Services> services}) = _ServiceRequestManagementState;
 
   factory ServiceRequestManagementState.initial() {
     return ServiceRequestManagementState(
         isLoading: true,
-        types: [
-          Types(id: 1, title: AppString.pendingServices.val, isSelected: true),
-          Types(
-              id: 2, title: AppString.completedServices.val, isSelected: false),
-          Types(id: 3, title: AppString.canceledRequest.val, isSelected: false),
-          Types(id: 4, title: AppString.upcomingRequest.val, isSelected: false),
-          Types(id: 5, title: AppString.onGoingRequest.val, isSelected: false),
-        ],
+        rescheduleResponse: null,
+        types: [],
         selectedDate: DateTime.now(),
         services: [],
         error: "");

@@ -40,15 +40,15 @@ class _ServiceRequestManagementPageState
 
   final int _limit = 10;
   int _tabType = 1;
-  Types selectedType =
-      Types(id: 1, title: AppString.pendingServices.val, isSelected: true);
 
   @override
   void initState() {
     super.initState();
-    context.read<ServiceRequestManagementBloc>().add(
-        ServiceRequestManagementEvent.getServiceList(Types(
-            id: 1, title: AppString.pendingServices.val, isSelected: true)));
+    Types initialType =
+        Types(id: 1, title: AppString.pendingServices.val, isSelected: true);
+    context
+        .read<ServiceRequestManagementBloc>()
+        .add(ServiceRequestManagementEvent.isSelectedTab(initialType));
   }
 
   @override
@@ -99,13 +99,9 @@ class _ServiceRequestManagementPageState
                 item: item,
                 onTap: () {
                   _tabType = item.id!;
-                  selectedType = item;
                   context
                       .read<ServiceRequestManagementBloc>()
                       .add(ServiceRequestManagementEvent.isSelectedTab(item));
-                  context
-                      .read<ServiceRequestManagementBloc>()
-                      .add(ServiceRequestManagementEvent.getServiceList(item));
                 },
               );
             }));
@@ -288,6 +284,7 @@ class _ServiceRequestManagementPageState
                 InkWell(
                     onTap: () {
                       //autoTabRouter?.navigate(ServiceDetailsRoute(id: item.id));
+
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -338,58 +335,59 @@ class _ServiceRequestManagementPageState
     );
   }
 
-  CustomDropdown<int> _statusDropDown(BuildContext context) {
-    return CustomDropdown<int>(
-      onChange: (int value, int index) {
-        ///todo change later to bloc event
-        // _serviceRequestManagementBloc.filterId = value;
-        context
-            .read<ServiceRequestManagementBloc>()
-            .add(ServiceRequestManagementEvent.getServiceList(selectedType));
-      },
-      dropdownButtonStyle: DropdownButtonStyle(
-        mainAxisAlignment: MainAxisAlignment.start,
-        width: 220,
-        height:
-            Responsive.isMobile(context) ? DBL.fortyFive.val : DBL.forty.val,
-        elevation: DBL.zero.val,
-        padding: EdgeInsets.only(left: DBL.fifteen.val),
-        backgroundColor: Colors.white,
-        primaryColor: AppColor.white.val,
-      ),
-      dropdownStyle: DropdownStyle(
-        borderRadius: BorderRadius.circular(DBL.zero.val),
-        elevation: 2,
-        color: AppColor.white.val,
-        padding: EdgeInsets.all(DBL.five.val),
-      ),
-      items: [AppString.normalServiceRequest.val, AppString.rebooking.val]
-          .asMap()
-          .entries
-          .map(
-            (item) => DropdownItem<int>(
-              value: item.key + 1,
-              child: Padding(
-                padding: EdgeInsets.all(DBL.eight.val),
-                child: Text(
-                  item.value,
-                  style: TS().gRoboto(
-                      fontWeight: FW.w500.val,
-                      fontSize: FS.font15.val,
-                      color: AppColor.columColor2.val),
-                ),
-              ),
+  _statusDropDown(BuildContext context) {
+    return _tabType == 1
+        ? CustomDropdown<int>(
+            onChange: (int value, int index) {
+              // context.read<ServiceRequestManagementBloc>().add(
+              //     ServiceRequestManagementEvent.getServiceList(selectedType,
+              //         filterId: value));
+            },
+            dropdownButtonStyle: DropdownButtonStyle(
+              mainAxisAlignment: MainAxisAlignment.start,
+              width: 220,
+              height: Responsive.isMobile(context)
+                  ? DBL.fortyFive.val
+                  : DBL.forty.val,
+              elevation: DBL.zero.val,
+              padding: EdgeInsets.only(left: DBL.fifteen.val),
+              backgroundColor: Colors.white,
+              primaryColor: AppColor.white.val,
+            ),
+            dropdownStyle: DropdownStyle(
+              borderRadius: BorderRadius.circular(DBL.zero.val),
+              elevation: 2,
+              color: AppColor.white.val,
+              padding: EdgeInsets.all(DBL.five.val),
+            ),
+            items: [AppString.normalServiceRequest.val, AppString.rebooking.val]
+                .asMap()
+                .entries
+                .map(
+                  (item) => DropdownItem<int>(
+                    value: item.key + 1,
+                    child: Padding(
+                      padding: EdgeInsets.all(DBL.eight.val),
+                      child: Text(
+                        item.value,
+                        style: TS().gRoboto(
+                            fontWeight: FW.w500.val,
+                            fontSize: FS.font15.val,
+                            color: AppColor.columColor2.val),
+                      ),
+                    ),
+                  ),
+                )
+                .toList(),
+            child: CustomText(
+              AppString.serviceTypeHint.val,
+              style: TS().gRoboto(
+                  fontWeight: FW.w500.val,
+                  fontSize: FS.font15.val,
+                  color: AppColor.columColor2.val),
             ),
           )
-          .toList(),
-      child: CustomText(
-        "",
-        style: TS().gRoboto(
-            fontWeight: FW.w500.val,
-            fontSize: FS.font15.val,
-            color: AppColor.columColor2.val),
-      ),
-    );
+        : CustomSizedBox.shrink();
   }
 }
 
