@@ -13,6 +13,7 @@ import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pdf_render/pdf_render_widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../application/bloc/caregiver_verification/caregiver_verification_bloc.dart';
@@ -62,6 +63,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
   final FocusNode _tbReasonNode = FocusNode();
   final TextEditingController _covid19ReasonController =
       TextEditingController();
+  final pdfController = PdfViewerController();
   final FocusNode _covid19ReasonNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
 
@@ -97,6 +99,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
     _tbReasonNode.dispose();
     _blsReasonNode.dispose();
     _hhaReasonNode.dispose();
+    pdfController.dispose();
   }
 
   @override
@@ -1051,13 +1054,27 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               heading: AppString.verificationProcess.val,
-              child: CachedImage(
-                imgUrl: url,
-                width: 780,
-                height: 800,
-                isDocImage: true,
-                fit: BoxFit.contain,
-              ));
+              child: url.contains('.pdf')
+                  ? CustomSizedBox(
+                      width: 780,
+                      height: 540,
+                      child: PdfViewer.openFile(
+                        url,
+                        viewerController: pdfController,
+                        onError: (err) => print(err),
+                        params: const PdfViewerParams(
+                            minScale: 0.2,
+                            scrollDirection: Axis.vertical,
+                            padding: 10),
+                      ),
+                    )
+                  : CachedImage(
+                      imgUrl: url,
+                      width: 780,
+                      height: 800,
+                      isDocImage: true,
+                      fit: BoxFit.contain,
+                    ));
         },
       );
     }
