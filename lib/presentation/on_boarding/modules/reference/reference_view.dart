@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/bloc/form_validation/form_validation_bloc.dart';
+import '../../../../core/custom_snackbar.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
@@ -87,7 +88,19 @@ class _ReferenceViewState extends State<ReferenceView> {
           BlocProvider(
               create: (context) => OnboardingBloc(OnBoardingRepository())),
         ],
-        child: BlocBuilder<OnboardingBloc, OnboardingState>(
+        child: BlocConsumer<OnboardingBloc, OnboardingState>(
+          listener: (context, listenerState) {
+            return listenerState.referenceOption.fold(() {}, (some) {
+              some.fold((l) {
+                CSnackBar.showError(context, msg: l.error);
+              }, (r) {
+                if (widget.onboardingBloc.nextButtonClicked) {
+                  widget.pageController
+                      .jumpToPage(widget.pageController.page!.toInt() + 1);
+                }
+              });
+            });
+          },
           bloc: widget.onboardingBloc,
           builder: (context, state) {
             return CommonPaddingWidget(

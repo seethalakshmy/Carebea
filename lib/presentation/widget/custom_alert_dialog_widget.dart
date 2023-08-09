@@ -12,13 +12,17 @@ class CustomAlertDialogWidget extends StatelessWidget {
       required this.child,
       this.height,
       this.backgroundColor,
-      this.width});
+      this.width,
+      this.mainAxisAlignment,
+      this.crossAxisAlignment});
 
   final String heading;
   final Widget child;
   final double? height;
   final double? width;
   final Color? backgroundColor;
+  final MainAxisAlignment? mainAxisAlignment;
+  final CrossAxisAlignment? crossAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +34,9 @@ class CustomAlertDialogWidget extends StatelessWidget {
       backgroundColor: Colors.transparent,
       child: Wrap(
         children: [
+          _headerWidget(context, heading),
           Container(
-            width: width ?? 1072,
+            width: width ?? double.infinity,
             height: height ?? 550,
             decoration: BoxDecoration(
               color: backgroundColor ?? Colors.white,
@@ -47,9 +52,10 @@ class CustomAlertDialogWidget extends StatelessWidget {
             ),
             child: SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [_headerWidget(context, heading), child],
+                mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
+                crossAxisAlignment:
+                    crossAxisAlignment ?? CrossAxisAlignment.start,
+                children: [child],
               ),
             ),
           ),
@@ -63,7 +69,7 @@ class CustomAlertDialogWidget extends StatelessWidget {
     String heading,
   ) {
     return Container(
-      width: double.infinity,
+      width: width ?? double.infinity,
       height: DBL.sixtyEight.val,
       padding: EdgeInsets.all(DBL.twenty.val),
       decoration: BoxDecoration(
