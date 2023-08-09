@@ -26,8 +26,9 @@ class ApiServiceS3 {
           print('Fraction completed: ${progress.fractionCompleted}');
         },
       ).result;
-      uploadResult = result.uploadedItem.key;
-      print('Successfully uploaded file: ${result.uploadedItem.key}');
+      uploadResult = result.uploadedItem.key.split('/').last;
+      print(
+          'Successfully uploaded file: ${result.uploadedItem.key.split('/').last}');
     } on StorageException catch (e) {
       print('Error uploading file: $e');
       CSnackBar.showError(context, msg: AppString.errorUploadingFile.val);

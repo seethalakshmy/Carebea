@@ -185,6 +185,7 @@ class CareGiverVerificationBloc
 
   _careGiverCertificateApprove(_CareGiverCertificateApprove event,
       Emitter<CareGiverVerificationState> emit) async {
+    emit(state.copyWith(isLoading: true));
     final Either<ApiErrorHandler, VerifyResponse> result =
         await careGiverVerificationRepository.careGiverCertificateApprove(
             userID: event.userID, status: event.status, adminId: event.adminId);
@@ -194,8 +195,7 @@ class CareGiverVerificationBloc
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context,
-            msg: r.data?.message ?? "");
+        CSnackBar.showSuccess(event.context, msg: r.data?.message ?? "");
         _approvalPopUp(
           event.context,
           userId: event.userID,
@@ -204,8 +204,7 @@ class CareGiverVerificationBloc
           userName: event.userName,
         );
       } else {
-        CSnackBar.showError(event.context,
-            msg: r.data?.message ?? "");
+        CSnackBar.showError(event.context, msg: r.data?.message ?? "");
       }
       return state.copyWith(
         isLoading: false,
