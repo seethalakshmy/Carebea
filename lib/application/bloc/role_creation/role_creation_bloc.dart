@@ -62,10 +62,21 @@ class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
       List<Module> module = state.moduleResponse?.module ?? [];
       if (r.data?.assignedModule != null &&
           state.moduleResponse?.module != null) {
-        r.data?.assignedModule?.forEach((savedModule) {
+        r.data?.assignedModule?.forEach((viewModule) {
           for (var module in module) {
-            if (savedModule == module.sId) {
-              module.isSelected = true;
+            if (viewModule.moduleId == module.id) {
+              if (viewModule.delete ?? false) {
+                module.isDelete = true;
+                module.isSelected = true;
+              }
+              if (viewModule.read ?? false) {
+                module.isView = true;
+                module.isSelected = true;
+              }
+              if (viewModule.write ?? false) {
+                module.isEdit = true;
+                module.isSelected = true;
+              }
             }
           }
         });

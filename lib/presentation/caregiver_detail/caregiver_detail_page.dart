@@ -26,22 +26,17 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import '../../core/custom_debugger.dart';
 import '../../core/responsive.dart';
 import '../routes/app_router.gr.dart';
-
 import '../side_menu/side_menu_page.dart';
 import '../widget/svg_text.dart';
 
 @RoutePage()
 class CareGiverDetailPage extends StatefulWidget {
-  const CareGiverDetailPage(
-      {Key? key,
-      @QueryParam('id') this.id = '',
-      @QueryParam('page') this.page,
-      @QueryParam('tab') this.tab})
-      : super(key: key);
+  const CareGiverDetailPage({
+    Key? key,
+    @QueryParam('id') this.id = '',
+  }) : super(key: key);
 
   final String? id;
-  final int? tab;
-  final int? page;
 
   @override
   State<CareGiverDetailPage> createState() => _CareGiverDetailPageState();
@@ -52,15 +47,10 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
   late TabController tabController;
   late CaregiverDetailBloc _caregiverDetailBloc;
   String userId = "";
-  int? _page;
-  int? _tab;
 
   @override
   void initState() {
     userId = autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
-    _page = autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
-    _tab = autoTabRouter?.currentChild?.queryParams.getInt('tab', 0);
-
     tabController = TabController(vsync: this, length: 5);
     _caregiverDetailBloc = CaregiverDetailBloc(CareGiverDetailRepository());
     super.initState();

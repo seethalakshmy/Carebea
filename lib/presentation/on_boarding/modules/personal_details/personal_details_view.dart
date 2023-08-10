@@ -665,13 +665,13 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
               CSnackBar.showError(context, msg: AppString.emptyProfilePic.val);
             }
             if (widget.onboardingBloc.state.pickedProfilePic!.size > 0) {
-              await uploadProfilePicToAwsS3(
-                  AppString.profilePicture.val, SharedPreffUtil().getUserId);
+              await uploadProfilePicToAwsS3(AppString.profilePicture.val,
+                  SharedPreffUtil().getCareGiverUserId);
             }
             if (bytesList.isNotEmpty) {
               for (int i = 0; i < bytesList.length; i++) {
                 await uploadDocumentsToAwsS3(AppString.documents.val,
-                    SharedPreffUtil().getUserId, bytesList[i]);
+                    SharedPreffUtil().getCareGiverUserId, bytesList[i]);
               }
             }
             checkInputData();
@@ -694,7 +694,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
       formValidationBloc.add(const FormValidationEvent.submit());
       formValidationBloc.add(const FormValidationEvent.dropDown("true"));
     }
-    final userId = SharedPreffUtil().getUserId;
+    final userId = SharedPreffUtil().getCareGiverUserId;
 
     if (_formKey.currentState!.validate() &&
         widget.onboardingBloc.profileUrl.isNotEmpty) {

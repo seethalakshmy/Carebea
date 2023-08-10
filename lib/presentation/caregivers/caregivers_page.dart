@@ -43,10 +43,8 @@ import '../widget/table_column_view.dart';
 
 @RoutePage()
 class CareGiversPage extends StatefulWidget {
-  const CareGiversPage(
-      {Key? key, @QueryParam('page') this.page, @QueryParam('tab') this.tab})
+  const CareGiversPage({Key? key, @QueryParam('tab') this.tab})
       : super(key: key);
-  final int? page;
   final int? tab;
 
   @override
@@ -72,16 +70,14 @@ class _CareGiversPageState extends State<CareGiversPage> {
   @override
   void initState() {
     _adminUserId = sharedPrefUtil.getAdminId;
-    int? getPage = autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
     int? getTab = autoTabRouter?.currentChild?.queryParams.getInt('tab', 0);
-
     super.initState();
-    if (getPage != null && getPage != 0) {
-      _page = getPage;
+    CustomLog.log(":::page ${sharedPrefUtil.getTab}");
+    if (sharedPrefUtil.getPage != 0 && sharedPrefUtil.getTab != 0) {
+      _page = sharedPrefUtil.getPage;
+      _tabType = sharedPrefUtil.getTab;
     }
-    if (getTab != null && getTab != 0) {
-      _tabType = getTab;
-    }
+
     _careGiversBloc = CareGiversBloc(CareGiversRepository());
   }
 
@@ -422,8 +418,6 @@ class _CareGiversPageState extends State<CareGiversPage> {
               if (_tabType == 2 && sharedPrefUtil.getViewCareGiver) {
                 autoTabRouter?.navigate(CareGiverDetailRoute(
                   id: item.userId,
-                  page: _page,
-                  tab: _tabType,
                 ));
               } else {
                 if (sharedPrefUtil.getEditCareGiver) {
@@ -435,8 +429,6 @@ class _CareGiversPageState extends State<CareGiversPage> {
                   } else {
                     autoTabRouter?.navigate(CaregiverVerificationRoute(
                       id: userId,
-                      page: _page,
-                      tab: _tabType,
                     ));
                   }
                 }
@@ -560,6 +552,11 @@ class _CareGiversPageState extends State<CareGiversPage> {
       _start = (_page * _limit) - 10;
       _end = _start + mCareGiverList.length;
     }
+
+    SharedPreffUtil().setPage = _page;
+    SharedPreffUtil().setTab = _tabType;
+    CustomLog.log(':::page set $_page ${SharedPreffUtil().getPage}');
+    CustomLog.log(':::tab set $_tabType ${SharedPreffUtil().getTab}');
   }
 
   _getCareGiverEvent() {

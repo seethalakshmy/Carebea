@@ -269,8 +269,8 @@ class _RolesPageState extends State<RolesPage> {
                       ? item.assignedModule?.join(", ") ?? ""
                       : "")),
               DataCell(TableActions(
-                isView: !sharedPrefUtil.getViewRole ? true : false,
-                onViewTap: !sharedPrefUtil.getViewRole
+                isView: sharedPrefUtil.getViewRole,
+                onViewTap: sharedPrefUtil.getViewRole
                     ? () {
                         autoTabRouter?.navigate(RoleCreationRoute(
                           roleId: item.id,
@@ -278,8 +278,8 @@ class _RolesPageState extends State<RolesPage> {
                         ));
                       }
                     : null,
-                isEdit: !sharedPrefUtil.getEditRole ? true : false,
-                onEditTap: !sharedPrefUtil.getEditRole
+                isEdit: sharedPrefUtil.getEditRole,
+                onEditTap: sharedPrefUtil.getEditRole
                     ? () {
                         autoTabRouter?.navigate(
                             RoleCreationRoute(roleId: item.id, isEdit: "edit"));

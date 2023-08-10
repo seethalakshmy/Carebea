@@ -351,7 +351,7 @@ class _QualificationViewState extends State<QualificationView> {
                                 widget.onboardingBloc.uploadedHhaDocList.add(
                                     await uploadDocumentsToAwsS3(
                                         AppString.documents.val,
-                                        SharedPreffUtil().getUserId,
+                                        SharedPreffUtil().getCareGiverUserId,
                                         hhaBytesList[i]));
                               }
                               hhaBytesList.clear();
@@ -361,7 +361,7 @@ class _QualificationViewState extends State<QualificationView> {
                                 widget.onboardingBloc.uploadedBlsDocList.add(
                                     await uploadDocumentsToAwsS3(
                                         AppString.documents.val,
-                                        SharedPreffUtil().getUserId,
+                                        SharedPreffUtil().getCareGiverUserId,
                                         blsBytesList[i]));
                               }
                               blsBytesList.clear();
@@ -371,7 +371,7 @@ class _QualificationViewState extends State<QualificationView> {
                                 widget.onboardingBloc.uploadedTbDocList.add(
                                     await uploadDocumentsToAwsS3(
                                         AppString.documents.val,
-                                        SharedPreffUtil().getUserId,
+                                        SharedPreffUtil().getCareGiverUserId,
                                         tbBytesList[i]));
                               }
                               tbBytesList.clear();
@@ -381,7 +381,7 @@ class _QualificationViewState extends State<QualificationView> {
                                 widget.onboardingBloc.uploadedCovidDocList.add(
                                     await uploadDocumentsToAwsS3(
                                         AppString.documents.val,
-                                        SharedPreffUtil().getUserId,
+                                        SharedPreffUtil().getCareGiverUserId,
                                         covidBytesList[i]));
                               }
                               covidBytesList.clear();
@@ -405,7 +405,7 @@ class _QualificationViewState extends State<QualificationView> {
     if (_validateMode != AutovalidateMode.always) {
       _validationBloc.add(const FormValidationEvent.submit());
     }
-    final userId = SharedPreffUtil().getUserId;
+    final userId = SharedPreffUtil().getCareGiverUserId;
 
     if (_formKey.currentState!.validate()) {
       widget.onboardingBloc.add(
