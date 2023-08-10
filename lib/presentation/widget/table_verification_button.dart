@@ -141,7 +141,7 @@ class TableVerificationButton extends StatelessWidget {
                 : verificationStatus == Verification.interViewStarted.val
                     ? AppString.interviewStarted.val
                     : verificationStatus == Verification.interViewCompleted.val
-                        ? AppString.interviewCompleted.val
+                        ? AppString.verified.val
                         : verificationStatus == Verification.interViewFailed.val
                             ? AppString.interviewFailed.val
                             : verificationStatus ==
