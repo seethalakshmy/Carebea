@@ -424,7 +424,8 @@ class _MenuBarState extends State<SideMenuPage> {
                 HiveUtils.set(AppString.selectedMenuIndex.val,
                     getRouteIndex(items.keys.elementAt(index)));
                 _scaffoldDrawerKey.currentState?.closeDrawer();
-                print('tapped here....');
+                SharedPreffUtil().setPage = 0;
+                SharedPreffUtil().setTab = 0;
               },
             );
           },
@@ -465,7 +466,7 @@ class _MenuBarState extends State<SideMenuPage> {
 
   final List<PageRouteInfo<dynamic>> _routes = [
     DashboardRoute(),
-    CareGiversRoute(),
+    CareGiversRoute(tab: null),
     CareGiverDetailRoute(),
     UserManagementRoute(),
     UserManagementDetailRoute(),

@@ -89,7 +89,7 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
             (l) {},
             (r) async {
               if (r.status!) {
-                SharedPreffUtil().setUserId = r.data?.id ?? "";
+                SharedPreffUtil().setCareGiverUserId = r.data?.id ?? "";
                 router.navigate(const OnboardingRoute());
               } else {}
             },
@@ -238,7 +238,7 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
                         height: 45,
                         minWidth: 120,
                         onPressed: () {
-                          context.router.navigate(CareGiversRoute());
+                          context.router.navigate(CareGiversRoute(tab: 2));
                         },
                         text: AppString.cancel.val,
                         color: AppColor.white.val,
