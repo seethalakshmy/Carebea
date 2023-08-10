@@ -14,6 +14,7 @@ class SharedPreffUtil {
   final setPasswordToken = 'set_password_token';
   final currentPassword = 'current_password';
   final _page = '_page';
+  final _tab = '_tab';
 
   final viewRole = 'view_role';
   final editRole = "edit_role";
@@ -33,6 +34,9 @@ class SharedPreffUtil {
 
   final viewServiceRequest = "view_service";
   final editServiceRequest = "edit_service";
+
+  final page = "page";
+  final tab = "tab";
 
   static final SharedPreffUtil _instance = SharedPreffUtil._ctor();
 
@@ -59,11 +63,11 @@ class SharedPreffUtil {
     return _prefs!.getString(accessToken) ?? "";
   }
 
-  set setUserId(String value) {
+  set setCareGiverUserId(String value) {
     _prefs?.setString(userId, value);
   }
 
-  get getUserId {
+  get getCareGiverUserId {
     return _prefs?.getString(userId) ?? "";
   }
 
@@ -114,11 +118,11 @@ class SharedPreffUtil {
   }
 
   get getTab {
-    return _prefs?.getInt(_page) ?? 0;
+    return _prefs?.getInt(_tab) ?? 0;
   }
 
   set setTab(int value) {
-    _prefs?.setInt(_page, value);
+    _prefs?.setInt(_tab, value);
   }
 
   set setUserEmail(String value) {

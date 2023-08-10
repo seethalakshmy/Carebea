@@ -36,8 +36,9 @@ class TableVerificationButton extends StatelessWidget {
                   id: userId!,
                 ));
               } else {
-                autoTabRouter?.navigate(
-                    CaregiverVerificationRoute(id: userId!, page: page));
+                autoTabRouter?.navigate(CaregiverVerificationRoute(
+                  id: userId!,
+                ));
               }
             },
             child: FxHover(builder: (isHover) {

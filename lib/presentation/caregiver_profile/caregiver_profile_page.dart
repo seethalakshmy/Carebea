@@ -68,7 +68,8 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
     return BlocProvider(
       create: (context) => _careGiverProfileBloc
         ..add(CareGiverProfileEvent.getCareGiverProfile(
-            userId: _userId, adminId: SharedPreffUtil().getAdminId)),
+            userId: "64d336c35da4b7606f1ef77a",
+            adminId: SharedPreffUtil().getAdminId)),
       child: BlocBuilder<CareGiverProfileBloc, CareGiverProfileState>(
         builder: (context, state) {
           return state.isLoading

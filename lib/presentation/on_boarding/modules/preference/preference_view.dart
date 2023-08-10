@@ -89,7 +89,7 @@ class PreferenceView extends StatelessWidget {
                   } else {
                     onboardingBloc.nextButtonClicked = true;
                     onboardingBloc.add(OnboardingEvent.preferenceDetails(
-                        userId: SharedPreffUtil().getUserId,
+                        userId: SharedPreffUtil().getCareGiverUserId,
                         yearsOfExp: onboardingBloc.selectedYearId,
                         serveWithSmoker:
                             state.isSmokerSelected == 0 ? true : false,

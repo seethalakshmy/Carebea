@@ -38,7 +38,7 @@ class ModuleResponse {
 }
 
 class Module {
-  String? sId;
+  String? id;
   String? name;
   bool isSelected = false;
   bool isView = false;
@@ -49,7 +49,7 @@ class Module {
   bool isDeleteShow = false;
 
   Module(
-      {this.sId,
+      {this.id,
       this.name,
       this.isSelected = false,
       this.isView = false,
@@ -71,7 +71,7 @@ class Module {
     bool? isDeleteShow,
   }) =>
       Module(
-        sId: sId ?? this.sId,
+        id: sId ?? this.id,
         name: name ?? this.name,
         isSelected: isSelected ?? this.isSelected,
         isView: isView ?? this.isView,
@@ -83,7 +83,7 @@ class Module {
       );
 
   Module.fromJson(Map<String, dynamic> json) {
-    sId = json['_id'];
+    id = json['_id'];
     name = json['name'];
     isViewShow = json['read'];
     isEditShow = json['write'];
@@ -92,7 +92,7 @@ class Module {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['module_id'] = sId;
+    data['module_id'] = id;
     data['module_name'] = name;
     data['read'] = isView;
     data['delete'] = isDelete;

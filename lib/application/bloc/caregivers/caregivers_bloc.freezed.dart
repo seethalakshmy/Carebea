@@ -25,6 +25,7 @@ mixin _$CareGiversEvent {
             String adminId, bool status, BuildContext context)
         isUserActive,
     required TResult Function(Types type) isSelectedTab,
+    required TResult Function() resetValue,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,6 +37,7 @@ mixin _$CareGiversEvent {
             bool status, BuildContext context)?
         isUserActive,
     TResult? Function(Types type)? isSelectedTab,
+    TResult? Function()? resetValue,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,6 +49,7 @@ mixin _$CareGiversEvent {
             bool status, BuildContext context)?
         isUserActive,
     TResult Function(Types type)? isSelectedTab,
+    TResult Function()? resetValue,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +58,7 @@ mixin _$CareGiversEvent {
     required TResult Function(_GetCareGivers value) getCareGivers,
     required TResult Function(_IsUserActive value) isUserActive,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_ResetValue value) resetValue,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +66,7 @@ mixin _$CareGiversEvent {
     TResult? Function(_GetCareGivers value)? getCareGivers,
     TResult? Function(_IsUserActive value)? isUserActive,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_ResetValue value)? resetValue,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +74,7 @@ mixin _$CareGiversEvent {
     TResult Function(_GetCareGivers value)? getCareGivers,
     TResult Function(_IsUserActive value)? isUserActive,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_ResetValue value)? resetValue,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -228,6 +234,7 @@ class _$_GetCareGivers implements _GetCareGivers {
             String adminId, bool status, BuildContext context)
         isUserActive,
     required TResult Function(Types type) isSelectedTab,
+    required TResult Function() resetValue,
   }) {
     return getCareGivers(
         userId, adminId, page, limit, type, searchTerm, filterId);
@@ -243,6 +250,7 @@ class _$_GetCareGivers implements _GetCareGivers {
             bool status, BuildContext context)?
         isUserActive,
     TResult? Function(Types type)? isSelectedTab,
+    TResult? Function()? resetValue,
   }) {
     return getCareGivers?.call(
         userId, adminId, page, limit, type, searchTerm, filterId);
@@ -258,6 +266,7 @@ class _$_GetCareGivers implements _GetCareGivers {
             bool status, BuildContext context)?
         isUserActive,
     TResult Function(Types type)? isSelectedTab,
+    TResult Function()? resetValue,
     required TResult orElse(),
   }) {
     if (getCareGivers != null) {
@@ -273,6 +282,7 @@ class _$_GetCareGivers implements _GetCareGivers {
     required TResult Function(_GetCareGivers value) getCareGivers,
     required TResult Function(_IsUserActive value) isUserActive,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_ResetValue value) resetValue,
   }) {
     return getCareGivers(this);
   }
@@ -283,6 +293,7 @@ class _$_GetCareGivers implements _GetCareGivers {
     TResult? Function(_GetCareGivers value)? getCareGivers,
     TResult? Function(_IsUserActive value)? isUserActive,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_ResetValue value)? resetValue,
   }) {
     return getCareGivers?.call(this);
   }
@@ -293,6 +304,7 @@ class _$_GetCareGivers implements _GetCareGivers {
     TResult Function(_GetCareGivers value)? getCareGivers,
     TResult Function(_IsUserActive value)? isUserActive,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_ResetValue value)? resetValue,
     required TResult orElse(),
   }) {
     if (getCareGivers != null) {
@@ -439,6 +451,7 @@ class _$_IsUserActive implements _IsUserActive {
             String adminId, bool status, BuildContext context)
         isUserActive,
     required TResult Function(Types type) isSelectedTab,
+    required TResult Function() resetValue,
   }) {
     return isUserActive(caregiver, userId, adminId, status, context);
   }
@@ -453,6 +466,7 @@ class _$_IsUserActive implements _IsUserActive {
             bool status, BuildContext context)?
         isUserActive,
     TResult? Function(Types type)? isSelectedTab,
+    TResult? Function()? resetValue,
   }) {
     return isUserActive?.call(caregiver, userId, adminId, status, context);
   }
@@ -467,6 +481,7 @@ class _$_IsUserActive implements _IsUserActive {
             bool status, BuildContext context)?
         isUserActive,
     TResult Function(Types type)? isSelectedTab,
+    TResult Function()? resetValue,
     required TResult orElse(),
   }) {
     if (isUserActive != null) {
@@ -481,6 +496,7 @@ class _$_IsUserActive implements _IsUserActive {
     required TResult Function(_GetCareGivers value) getCareGivers,
     required TResult Function(_IsUserActive value) isUserActive,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_ResetValue value) resetValue,
   }) {
     return isUserActive(this);
   }
@@ -491,6 +507,7 @@ class _$_IsUserActive implements _IsUserActive {
     TResult? Function(_GetCareGivers value)? getCareGivers,
     TResult? Function(_IsUserActive value)? isUserActive,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_ResetValue value)? resetValue,
   }) {
     return isUserActive?.call(this);
   }
@@ -501,6 +518,7 @@ class _$_IsUserActive implements _IsUserActive {
     TResult Function(_GetCareGivers value)? getCareGivers,
     TResult Function(_IsUserActive value)? isUserActive,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_ResetValue value)? resetValue,
     required TResult orElse(),
   }) {
     if (isUserActive != null) {
@@ -599,6 +617,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
             String adminId, bool status, BuildContext context)
         isUserActive,
     required TResult Function(Types type) isSelectedTab,
+    required TResult Function() resetValue,
   }) {
     return isSelectedTab(type);
   }
@@ -613,6 +632,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
             bool status, BuildContext context)?
         isUserActive,
     TResult? Function(Types type)? isSelectedTab,
+    TResult? Function()? resetValue,
   }) {
     return isSelectedTab?.call(type);
   }
@@ -627,6 +647,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
             bool status, BuildContext context)?
         isUserActive,
     TResult Function(Types type)? isSelectedTab,
+    TResult Function()? resetValue,
     required TResult orElse(),
   }) {
     if (isSelectedTab != null) {
@@ -641,6 +662,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     required TResult Function(_GetCareGivers value) getCareGivers,
     required TResult Function(_IsUserActive value) isUserActive,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_ResetValue value) resetValue,
   }) {
     return isSelectedTab(this);
   }
@@ -651,6 +673,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     TResult? Function(_GetCareGivers value)? getCareGivers,
     TResult? Function(_IsUserActive value)? isUserActive,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_ResetValue value)? resetValue,
   }) {
     return isSelectedTab?.call(this);
   }
@@ -661,6 +684,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     TResult Function(_GetCareGivers value)? getCareGivers,
     TResult Function(_IsUserActive value)? isUserActive,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_ResetValue value)? resetValue,
     required TResult orElse(),
   }) {
     if (isSelectedTab != null) {
@@ -677,6 +701,132 @@ abstract class _IsSelectedTab implements CareGiversEvent {
   @JsonKey(ignore: true)
   _$$_IsSelectedTabCopyWith<_$_IsSelectedTab> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ResetValueCopyWith<$Res> {
+  factory _$$_ResetValueCopyWith(
+          _$_ResetValue value, $Res Function(_$_ResetValue) then) =
+      __$$_ResetValueCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ResetValueCopyWithImpl<$Res>
+    extends _$CareGiversEventCopyWithImpl<$Res, _$_ResetValue>
+    implements _$$_ResetValueCopyWith<$Res> {
+  __$$_ResetValueCopyWithImpl(
+      _$_ResetValue _value, $Res Function(_$_ResetValue) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ResetValue implements _ResetValue {
+  const _$_ResetValue();
+
+  @override
+  String toString() {
+    return 'CareGiversEvent.resetValue()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ResetValue);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId, int page,
+            int limit, int type, String? searchTerm, int? filterId)
+        getCareGivers,
+    required TResult Function(Caregivers caregiver, String userId,
+            String adminId, bool status, BuildContext context)
+        isUserActive,
+    required TResult Function(Types type) isSelectedTab,
+    required TResult Function() resetValue,
+  }) {
+    return resetValue();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId, int page, int limit,
+            int type, String? searchTerm, int? filterId)?
+        getCareGivers,
+    TResult? Function(Caregivers caregiver, String userId, String adminId,
+            bool status, BuildContext context)?
+        isUserActive,
+    TResult? Function(Types type)? isSelectedTab,
+    TResult? Function()? resetValue,
+  }) {
+    return resetValue?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId, int page, int limit,
+            int type, String? searchTerm, int? filterId)?
+        getCareGivers,
+    TResult Function(Caregivers caregiver, String userId, String adminId,
+            bool status, BuildContext context)?
+        isUserActive,
+    TResult Function(Types type)? isSelectedTab,
+    TResult Function()? resetValue,
+    required TResult orElse(),
+  }) {
+    if (resetValue != null) {
+      return resetValue();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGivers value) getCareGivers,
+    required TResult Function(_IsUserActive value) isUserActive,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_ResetValue value) resetValue,
+  }) {
+    return resetValue(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGivers value)? getCareGivers,
+    TResult? Function(_IsUserActive value)? isUserActive,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_ResetValue value)? resetValue,
+  }) {
+    return resetValue?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGivers value)? getCareGivers,
+    TResult Function(_IsUserActive value)? isUserActive,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_ResetValue value)? resetValue,
+    required TResult orElse(),
+  }) {
+    if (resetValue != null) {
+      return resetValue(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ResetValue implements CareGiversEvent {
+  const factory _ResetValue() = _$_ResetValue;
 }
 
 /// @nodoc

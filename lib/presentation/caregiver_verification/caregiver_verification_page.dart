@@ -36,16 +36,12 @@ import 'widgets/approval_status_box.dart';
 
 @RoutePage()
 class CaregiverVerificationPage extends StatefulWidget {
-  const CaregiverVerificationPage(
-      {Key? key,
-      @QueryParam('id') this.id = '',
-      @QueryParam('page') this.page,
-      @QueryParam('tab') this.tab})
-      : super(key: key);
+  const CaregiverVerificationPage({
+    Key? key,
+    @QueryParam('id') this.id = '',
+  }) : super(key: key);
 
   final String? id;
-  final int? page;
-  final int? tab;
 
   @override
   State<CaregiverVerificationPage> createState() =>
@@ -107,7 +103,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
     CustomLog.log("width == ${MediaQuery.of(context).size.width}");
     return WillPopScope(
       onWillPop: () async {
-        autoTabRouter?.navigate(CareGiversRoute(page: _page, tab: _tab));
+        autoTabRouter?.navigate(CareGiversRoute(tab: 1));
         return true;
       },
       child: BlocBuilder<CareGiverVerificationBloc, CareGiverVerificationState>(
