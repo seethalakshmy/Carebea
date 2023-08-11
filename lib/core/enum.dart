@@ -23,6 +23,7 @@ enum AppString {
   createdDate("Created Date"),
   repliedOn('Replied On'),
   title('Title'),
+  description('Description'),
   email("Email"),
   basicServices("Basic Services"),
   specialServices("Special Services"),
