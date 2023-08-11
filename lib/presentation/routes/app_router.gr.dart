@@ -87,10 +87,11 @@ abstract class $AppRouter extends _i22.RootStackRouter {
                 tab: queryParams.optInt('tab'),
               ));
       return _i22.AutoRoutePage<dynamic>(
+          orElse: () => CareGiversRouteArgs(tab: queryParams.optInt('tab')));
+      return _i20.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i3.CareGiversPage(
           key: args.key,
-          page: args.page,
           tab: args.tab,
         ),
       );
@@ -113,12 +114,15 @@ abstract class $AppRouter extends _i22.RootStackRouter {
                 tab: queryParams.optInt('tab'),
               ));
       return _i22.AutoRoutePage<dynamic>(
+                  id: queryParams.optString(
+                'id',
+                '',
+              )));
+      return _i20.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i5.CareGiverDetailPage(
           key: args.key,
           id: args.id,
-          page: args.page,
-          tab: args.tab,
         ),
       );
     },
@@ -150,12 +154,15 @@ abstract class $AppRouter extends _i22.RootStackRouter {
                 tab: queryParams.optInt('tab'),
               ));
       return _i22.AutoRoutePage<dynamic>(
+                  id: queryParams.optString(
+                'id',
+                '',
+              )));
+      return _i20.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i7.CaregiverVerificationPage(
           key: args.key,
           id: args.id,
-          page: args.page,
-          tab: args.tab,
         ),
       );
     },
@@ -331,19 +338,16 @@ class CareGiversRoute extends _i22.PageRouteInfo<CareGiversRouteArgs> {
   CareGiversRoute({
     _i23.Key? key,
     int? page,
+    _i21.Key? key,
     int? tab,
     List<_i22.PageRouteInfo>? children,
   }) : super(
           CareGiversRoute.name,
           args: CareGiversRouteArgs(
             key: key,
-            page: page,
             tab: tab,
           ),
-          rawQueryParams: {
-            'page': page,
-            'tab': tab,
-          },
+          rawQueryParams: {'tab': tab},
           initialChildren: children,
         );
 
@@ -356,19 +360,16 @@ class CareGiversRoute extends _i22.PageRouteInfo<CareGiversRouteArgs> {
 class CareGiversRouteArgs {
   const CareGiversRouteArgs({
     this.key,
-    this.page,
     this.tab,
   });
 
   final _i23.Key? key;
 
-  final int? page;
-
   final int? tab;
 
   @override
   String toString() {
-    return 'CareGiversRouteArgs{key: $key, page: $page, tab: $tab}';
+    return 'CareGiversRouteArgs{key: $key, tab: $tab}';
   }
 }
 
@@ -396,19 +397,14 @@ class CareGiverDetailRoute
     int? page,
     int? tab,
     List<_i22.PageRouteInfo>? children,
+    List<_i20.PageRouteInfo>? children,
   }) : super(
           CareGiverDetailRoute.name,
           args: CareGiverDetailRouteArgs(
             key: key,
             id: id,
-            page: page,
-            tab: tab,
           ),
-          rawQueryParams: {
-            'id': id,
-            'page': page,
-            'tab': tab,
-          },
+          rawQueryParams: {'id': id},
           initialChildren: children,
         );
 
@@ -422,21 +418,15 @@ class CareGiverDetailRouteArgs {
   const CareGiverDetailRouteArgs({
     this.key,
     this.id = '',
-    this.page,
-    this.tab,
   });
 
   final _i23.Key? key;
 
   final String? id;
 
-  final int? page;
-
-  final int? tab;
-
   @override
   String toString() {
-    return 'CareGiverDetailRouteArgs{key: $key, id: $id, page: $page, tab: $tab}';
+    return 'CareGiverDetailRouteArgs{key: $key, id: $id}';
   }
 }
 
@@ -490,19 +480,15 @@ class CaregiverVerificationRoute
     int? page,
     int? tab,
     List<_i22.PageRouteInfo>? children,
+
+    List<_i20.PageRouteInfo>? children,
   }) : super(
           CaregiverVerificationRoute.name,
           args: CaregiverVerificationRouteArgs(
             key: key,
             id: id,
-            page: page,
-            tab: tab,
           ),
-          rawQueryParams: {
-            'id': id,
-            'page': page,
-            'tab': tab,
-          },
+          rawQueryParams: {'id': id},
           initialChildren: children,
         );
 
@@ -516,21 +502,15 @@ class CaregiverVerificationRouteArgs {
   const CaregiverVerificationRouteArgs({
     this.key,
     this.id = '',
-    this.page,
-    this.tab,
   });
 
   final _i23.Key? key;
 
   final String? id;
 
-  final int? page;
-
-  final int? tab;
-
   @override
   String toString() {
-    return 'CaregiverVerificationRouteArgs{key: $key, id: $id, page: $page, tab: $tab}';
+    return 'CaregiverVerificationRouteArgs{key: $key, id: $id}';
   }
 }
 

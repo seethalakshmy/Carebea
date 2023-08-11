@@ -80,7 +80,7 @@ class _ServicesViewState extends State<ServicesView> {
                       } else {
                         widget.onboardingBloc
                             .add(OnboardingEvent.submitServices(
-                                userId: SharedPreffUtil().getUserId,
+                                userId: SharedPreffUtil().getCareGiverUserId,
                                 services: ServicesRequest(
                                   tier1: widget
                                       .onboardingBloc.selectedTier1ServiceList,

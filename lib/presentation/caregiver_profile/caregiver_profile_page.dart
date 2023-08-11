@@ -85,6 +85,7 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
                     errorMessage: state.error)
                 : _bodyView(state);
       },
+
     );
   }
 

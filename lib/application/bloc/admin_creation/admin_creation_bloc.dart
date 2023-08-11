@@ -132,7 +132,7 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
             phoneNumber: event.mobile,
             profileUrl: event.profilePic);
     AdminCreationState homeState = homeResult.fold((l) {
-      CSnackBar.showError(event.context, msg: l.error ?? "");
+      CSnackBar.showError(event.context, msg: l.error);
       return state.copyWith(
         error: l.error,
         isLoading: false,

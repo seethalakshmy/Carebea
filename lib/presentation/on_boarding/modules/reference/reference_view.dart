@@ -606,8 +606,8 @@ class _ReferenceViewState extends State<ReferenceView> {
     }
     // if (_formKey.currentState!.validate()) {
     print('hello');
-    widget.onboardingBloc.add(
-        OnboardingEvent.submitReference(userId: SharedPreffUtil().getUserId));
+    widget.onboardingBloc.add(OnboardingEvent.submitReference(
+        userId: SharedPreffUtil().getCareGiverUserId));
     // setState(() {
     //   widget.pageController
     //       .jumpToPage(widget.pageController.page!.toInt() + 1);

@@ -2,6 +2,7 @@ import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
 import 'package:admin_580_tech/domain/caregivers/model/caregiver_response.dart';
 import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,14 +26,23 @@ class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
     on<_GetCareGivers>(_getCareGivers);
     on<_IsUserActive>(_getUserActive);
     on<_IsSelectedTab>(_getSelectedTab);
+    on<_ResetValue>(_resetValue);
   }
 
   _getCareGivers(_GetCareGivers event, Emitter<CareGiversState> emit) async {
-    print('helllo${event.userId}');
     final List<Types> typeList = [
       Types(id: 1, title: AppString.newRequest.val, isSelected: true),
       Types(id: 2, title: AppString.activeCareAmbassador.val, isSelected: false)
     ];
+    if (SharedPreffUtil().getTab != 0) {
+      if (SharedPreffUtil().getTab == 1) {
+        typeList[0].isSelected = true;
+        typeList[1].isSelected = false;
+      } else if (SharedPreffUtil().getTab == 2) {
+        typeList[0].isSelected = false;
+        typeList[1].isSelected = true;
+      }
+    }
     final Either<ApiErrorHandler, CareGiverResponse> homeResult =
         await careGiverListRepository.getCareGivers(
             userID: event.userId,
@@ -128,5 +138,15 @@ class CareGiversBloc extends Bloc<CareGiversEvent, CareGiversState> {
       types.insert(index, item.copyWith(isSelected: true));
       emit(state.copyWith(types: types, isLoading: true));
     }
+  }
+
+  _resetValue(_ResetValue event, Emitter<CareGiversState> emit) {
+    final state = this.state;
+    final typeList = state.types;
+    for (var element in typeList) {
+      element.isSelected = false;
+    }
+    typeList[0].isSelected = true;
+    emit(state.copyWith(types: typeList));
   }
 }

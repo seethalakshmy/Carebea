@@ -104,7 +104,7 @@ class _BuildProfileViewState extends State<BuildProfileView> {
                         //checkInputData();
                         widget.onboardingBloc.add(
                             OnboardingEvent.submitBuildProfile(
-                                userId: SharedPreffUtil().getUserId,
+                                userId: SharedPreffUtil().getCareGiverUserId,
                                 aboutYou: aboutYouController.text.trim().isEmpty
                                     ? "NA"
                                     : aboutYouController.text.trim(),
