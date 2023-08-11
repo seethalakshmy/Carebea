@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ServiceRequestManagementEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
     required TResult Function() started,
     required TResult Function(Types type, int? filterId) isSelectedTab,
     required TResult Function(
@@ -44,6 +46,7 @@ mixin _$ServiceRequestManagementEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
     TResult? Function()? started,
     TResult? Function(Types type, int? filterId)? isSelectedTab,
     TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -68,6 +71,7 @@ mixin _$ServiceRequestManagementEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
     TResult Function()? started,
     TResult Function(Types type, int? filterId)? isSelectedTab,
     TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -93,6 +97,7 @@ mixin _$ServiceRequestManagementEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_Reschedule value) reschedule,
@@ -116,6 +121,7 @@ mixin _$ServiceRequestManagementEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_Reschedule value)? reschedule,
@@ -137,6 +143,7 @@ mixin _$ServiceRequestManagementEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_Reschedule value)? reschedule,
@@ -181,6 +188,262 @@ class _$ServiceRequestManagementEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
+abstract class _$$_GetCareGiverProfileCopyWith<$Res> {
+  factory _$$_GetCareGiverProfileCopyWith(_$_GetCareGiverProfile value,
+          $Res Function(_$_GetCareGiverProfile) then) =
+      __$$_GetCareGiverProfileCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String userId, String adminId});
+}
+
+/// @nodoc
+class __$$_GetCareGiverProfileCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res,
+        _$_GetCareGiverProfile>
+    implements _$$_GetCareGiverProfileCopyWith<$Res> {
+  __$$_GetCareGiverProfileCopyWithImpl(_$_GetCareGiverProfile _value,
+      $Res Function(_$_GetCareGiverProfile) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? adminId = null,
+  }) {
+    return _then(_$_GetCareGiverProfile(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      adminId: null == adminId
+          ? _value.adminId
+          : adminId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetCareGiverProfile implements _GetCareGiverProfile {
+  const _$_GetCareGiverProfile({required this.userId, required this.adminId});
+
+  @override
+  final String userId;
+  @override
+  final String adminId;
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.getCareGiverProfile(userId: $userId, adminId: $adminId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetCareGiverProfile &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.adminId, adminId) || other.adminId == adminId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userId, adminId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetCareGiverProfileCopyWith<_$_GetCareGiverProfile> get copyWith =>
+      __$$_GetCareGiverProfileCopyWithImpl<_$_GetCareGiverProfile>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
+    required TResult Function() started,
+    required TResult Function(Types type, int? filterId) isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
+  }) {
+    return getCareGiverProfile(userId, adminId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
+    TResult? Function()? started,
+    TResult? Function(Types type, int? filterId)? isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
+  }) {
+    return getCareGiverProfile?.call(userId, adminId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
+    TResult Function()? started,
+    TResult Function(Types type, int? filterId)? isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
+    required TResult orElse(),
+  }) {
+    if (getCareGiverProfile != null) {
+      return getCareGiverProfile(userId, adminId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
+  }) {
+    return getCareGiverProfile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+  }) {
+    return getCareGiverProfile?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    required TResult orElse(),
+  }) {
+    if (getCareGiverProfile != null) {
+      return getCareGiverProfile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetCareGiverProfile implements ServiceRequestManagementEvent {
+  const factory _GetCareGiverProfile(
+      {required final String userId,
+      required final String adminId}) = _$_GetCareGiverProfile;
+
+  String get userId;
+  String get adminId;
+  @JsonKey(ignore: true)
+  _$$_GetCareGiverProfileCopyWith<_$_GetCareGiverProfile> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 abstract class _$$_StartedCopyWith<$Res> {
   factory _$$_StartedCopyWith(
           _$_Started value, $Res Function(_$_Started) then) =
@@ -217,6 +480,8 @@ class _$_Started implements _Started {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
     required TResult Function() started,
     required TResult Function(Types type, int? filterId) isSelectedTab,
     required TResult Function(
@@ -246,6 +511,7 @@ class _$_Started implements _Started {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
     TResult? Function()? started,
     TResult? Function(Types type, int? filterId)? isSelectedTab,
     TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -273,6 +539,7 @@ class _$_Started implements _Started {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
     TResult Function()? started,
     TResult Function(Types type, int? filterId)? isSelectedTab,
     TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -304,6 +571,7 @@ class _$_Started implements _Started {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_Reschedule value) reschedule,
@@ -330,6 +598,7 @@ class _$_Started implements _Started {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_Reschedule value)? reschedule,
@@ -354,6 +623,7 @@ class _$_Started implements _Started {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_Reschedule value)? reschedule,
@@ -457,6 +727,8 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
     required TResult Function() started,
     required TResult Function(Types type, int? filterId) isSelectedTab,
     required TResult Function(
@@ -486,6 +758,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
     TResult? Function()? started,
     TResult? Function(Types type, int? filterId)? isSelectedTab,
     TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -513,6 +786,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
     TResult Function()? started,
     TResult Function(Types type, int? filterId)? isSelectedTab,
     TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -544,6 +818,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_Reschedule value) reschedule,
@@ -570,6 +845,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_Reschedule value)? reschedule,
@@ -594,6 +870,7 @@ class _$_IsSelectedTab implements _IsSelectedTab {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_Reschedule value)? reschedule,
@@ -704,6 +981,8 @@ class _$_Reschedule implements _Reschedule {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
     required TResult Function() started,
     required TResult Function(Types type, int? filterId) isSelectedTab,
     required TResult Function(
@@ -733,6 +1012,7 @@ class _$_Reschedule implements _Reschedule {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
     TResult? Function()? started,
     TResult? Function(Types type, int? filterId)? isSelectedTab,
     TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -760,6 +1040,7 @@ class _$_Reschedule implements _Reschedule {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
     TResult Function()? started,
     TResult Function(Types type, int? filterId)? isSelectedTab,
     TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -791,6 +1072,7 @@ class _$_Reschedule implements _Reschedule {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_Reschedule value) reschedule,
@@ -817,6 +1099,7 @@ class _$_Reschedule implements _Reschedule {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_Reschedule value)? reschedule,
@@ -841,6 +1124,7 @@ class _$_Reschedule implements _Reschedule {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_Reschedule value)? reschedule,
@@ -954,6 +1238,8 @@ class _$_AssignCaregiver implements _AssignCaregiver {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
     required TResult Function() started,
     required TResult Function(Types type, int? filterId) isSelectedTab,
     required TResult Function(
@@ -983,6 +1269,7 @@ class _$_AssignCaregiver implements _AssignCaregiver {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
     TResult? Function()? started,
     TResult? Function(Types type, int? filterId)? isSelectedTab,
     TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -1010,6 +1297,7 @@ class _$_AssignCaregiver implements _AssignCaregiver {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
     TResult Function()? started,
     TResult Function(Types type, int? filterId)? isSelectedTab,
     TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -1041,6 +1329,7 @@ class _$_AssignCaregiver implements _AssignCaregiver {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_Reschedule value) reschedule,
@@ -1067,6 +1356,7 @@ class _$_AssignCaregiver implements _AssignCaregiver {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_Reschedule value)? reschedule,
@@ -1091,6 +1381,7 @@ class _$_AssignCaregiver implements _AssignCaregiver {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_Reschedule value)? reschedule,
@@ -1211,6 +1502,8 @@ class _$_StartService implements _StartService {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
     required TResult Function() started,
     required TResult Function(Types type, int? filterId) isSelectedTab,
     required TResult Function(
@@ -1240,6 +1533,7 @@ class _$_StartService implements _StartService {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
     TResult? Function()? started,
     TResult? Function(Types type, int? filterId)? isSelectedTab,
     TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -1267,6 +1561,7 @@ class _$_StartService implements _StartService {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
     TResult Function()? started,
     TResult Function(Types type, int? filterId)? isSelectedTab,
     TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -1298,6 +1593,7 @@ class _$_StartService implements _StartService {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_Reschedule value) reschedule,
@@ -1324,6 +1620,7 @@ class _$_StartService implements _StartService {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_Reschedule value)? reschedule,
@@ -1348,6 +1645,7 @@ class _$_StartService implements _StartService {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_Reschedule value)? reschedule,
@@ -1487,6 +1785,8 @@ class _$_CancelService implements _CancelService {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
     required TResult Function() started,
     required TResult Function(Types type, int? filterId) isSelectedTab,
     required TResult Function(
@@ -1516,6 +1816,7 @@ class _$_CancelService implements _CancelService {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
     TResult? Function()? started,
     TResult? Function(Types type, int? filterId)? isSelectedTab,
     TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -1543,6 +1844,7 @@ class _$_CancelService implements _CancelService {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
     TResult Function()? started,
     TResult Function(Types type, int? filterId)? isSelectedTab,
     TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -1574,6 +1876,7 @@ class _$_CancelService implements _CancelService {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_Reschedule value) reschedule,
@@ -1600,6 +1903,7 @@ class _$_CancelService implements _CancelService {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_Reschedule value)? reschedule,
@@ -1624,6 +1928,7 @@ class _$_CancelService implements _CancelService {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_Reschedule value)? reschedule,
@@ -1730,6 +2035,8 @@ class _$_SetDate implements _SetDate {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
     required TResult Function() started,
     required TResult Function(Types type, int? filterId) isSelectedTab,
     required TResult Function(
@@ -1759,6 +2066,7 @@ class _$_SetDate implements _SetDate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
     TResult? Function()? started,
     TResult? Function(Types type, int? filterId)? isSelectedTab,
     TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -1786,6 +2094,7 @@ class _$_SetDate implements _SetDate {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
     TResult Function()? started,
     TResult Function(Types type, int? filterId)? isSelectedTab,
     TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -1817,6 +2126,7 @@ class _$_SetDate implements _SetDate {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_Reschedule value) reschedule,
@@ -1843,6 +2153,7 @@ class _$_SetDate implements _SetDate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_Reschedule value)? reschedule,
@@ -1867,6 +2178,7 @@ class _$_SetDate implements _SetDate {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_Reschedule value)? reschedule,
@@ -1966,6 +2278,8 @@ class _$_SetFromTime implements _SetFromTime {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
     required TResult Function() started,
     required TResult Function(Types type, int? filterId) isSelectedTab,
     required TResult Function(
@@ -1995,6 +2309,7 @@ class _$_SetFromTime implements _SetFromTime {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
     TResult? Function()? started,
     TResult? Function(Types type, int? filterId)? isSelectedTab,
     TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -2022,6 +2337,7 @@ class _$_SetFromTime implements _SetFromTime {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
     TResult Function()? started,
     TResult Function(Types type, int? filterId)? isSelectedTab,
     TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -2053,6 +2369,7 @@ class _$_SetFromTime implements _SetFromTime {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_Reschedule value) reschedule,
@@ -2079,6 +2396,7 @@ class _$_SetFromTime implements _SetFromTime {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_Reschedule value)? reschedule,
@@ -2103,6 +2421,7 @@ class _$_SetFromTime implements _SetFromTime {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_Reschedule value)? reschedule,
@@ -2202,6 +2521,8 @@ class _$_SetToTime implements _SetToTime {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
     required TResult Function() started,
     required TResult Function(Types type, int? filterId) isSelectedTab,
     required TResult Function(
@@ -2231,6 +2552,7 @@ class _$_SetToTime implements _SetToTime {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
     TResult? Function()? started,
     TResult? Function(Types type, int? filterId)? isSelectedTab,
     TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -2258,6 +2580,7 @@ class _$_SetToTime implements _SetToTime {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
     TResult Function()? started,
     TResult Function(Types type, int? filterId)? isSelectedTab,
     TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -2289,6 +2612,7 @@ class _$_SetToTime implements _SetToTime {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_Reschedule value) reschedule,
@@ -2315,6 +2639,7 @@ class _$_SetToTime implements _SetToTime {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_Reschedule value)? reschedule,
@@ -2339,6 +2664,7 @@ class _$_SetToTime implements _SetToTime {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_Reschedule value)? reschedule,
@@ -2414,6 +2740,8 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
     required TResult Function() started,
     required TResult Function(Types type, int? filterId) isSelectedTab,
     required TResult Function(
@@ -2443,6 +2771,7 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
     TResult? Function()? started,
     TResult? Function(Types type, int? filterId)? isSelectedTab,
     TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -2470,6 +2799,7 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
     TResult Function()? started,
     TResult Function(Types type, int? filterId)? isSelectedTab,
     TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -2501,6 +2831,7 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_Reschedule value) reschedule,
@@ -2527,6 +2858,7 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_Reschedule value)? reschedule,
@@ -2551,6 +2883,7 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_Reschedule value)? reschedule,
@@ -2622,6 +2955,8 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
     required TResult Function() started,
     required TResult Function(Types type, int? filterId) isSelectedTab,
     required TResult Function(
@@ -2651,6 +2986,7 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
     TResult? Function()? started,
     TResult? Function(Types type, int? filterId)? isSelectedTab,
     TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -2678,6 +3014,7 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
     TResult Function()? started,
     TResult Function(Types type, int? filterId)? isSelectedTab,
     TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -2709,6 +3046,7 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_Reschedule value) reschedule,
@@ -2735,6 +3073,7 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_Reschedule value)? reschedule,
@@ -2759,6 +3098,7 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_Reschedule value)? reschedule,
@@ -2832,6 +3172,8 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
     required TResult Function() started,
     required TResult Function(Types type, int? filterId) isSelectedTab,
     required TResult Function(
@@ -2861,6 +3203,7 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
     TResult? Function()? started,
     TResult? Function(Types type, int? filterId)? isSelectedTab,
     TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -2888,6 +3231,7 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
     TResult Function()? started,
     TResult Function(Types type, int? filterId)? isSelectedTab,
     TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -2919,6 +3263,7 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_Reschedule value) reschedule,
@@ -2945,6 +3290,7 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_Reschedule value)? reschedule,
@@ -2969,6 +3315,7 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_Reschedule value)? reschedule,
@@ -3042,6 +3389,8 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
     required TResult Function() started,
     required TResult Function(Types type, int? filterId) isSelectedTab,
     required TResult Function(
@@ -3071,6 +3420,7 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
     TResult? Function()? started,
     TResult? Function(Types type, int? filterId)? isSelectedTab,
     TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -3098,6 +3448,7 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
     TResult Function()? started,
     TResult Function(Types type, int? filterId)? isSelectedTab,
     TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -3129,6 +3480,7 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_Reschedule value) reschedule,
@@ -3155,6 +3507,7 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_Reschedule value)? reschedule,
@@ -3179,6 +3532,7 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_Reschedule value)? reschedule,
@@ -3254,6 +3608,8 @@ class _$_IsRescheduleOtherMatchingViewView
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
     required TResult Function() started,
     required TResult Function(Types type, int? filterId) isSelectedTab,
     required TResult Function(
@@ -3283,6 +3639,7 @@ class _$_IsRescheduleOtherMatchingViewView
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
     TResult? Function()? started,
     TResult? Function(Types type, int? filterId)? isSelectedTab,
     TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -3310,6 +3667,7 @@ class _$_IsRescheduleOtherMatchingViewView
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
     TResult Function()? started,
     TResult Function(Types type, int? filterId)? isSelectedTab,
     TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
@@ -3341,6 +3699,7 @@ class _$_IsRescheduleOtherMatchingViewView
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
     required TResult Function(_Started value) started,
     required TResult Function(_IsSelectedTab value) isSelectedTab,
     required TResult Function(_Reschedule value) reschedule,
@@ -3367,6 +3726,7 @@ class _$_IsRescheduleOtherMatchingViewView
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult? Function(_Started value)? started,
     TResult? Function(_IsSelectedTab value)? isSelectedTab,
     TResult? Function(_Reschedule value)? reschedule,
@@ -3391,6 +3751,7 @@ class _$_IsRescheduleOtherMatchingViewView
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
     TResult Function(_Started value)? started,
     TResult Function(_IsSelectedTab value)? isSelectedTab,
     TResult Function(_Reschedule value)? reschedule,
@@ -3439,6 +3800,8 @@ mixin _$ServiceRequestManagementState {
       throw _privateConstructorUsedError;
   CommonResponseUse? get cancelServiceResponse =>
       throw _privateConstructorUsedError;
+  CaregiverProfileResponse? get caregiverProfileResponse =>
+      throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
   bool get isCancelLoading => throw _privateConstructorUsedError;
   bool get isStartServiceLoading => throw _privateConstructorUsedError;
@@ -3452,7 +3815,7 @@ mixin _$ServiceRequestManagementState {
       throw _privateConstructorUsedError;
   bool get isRescheduleOtherMatchingListView =>
       throw _privateConstructorUsedError;
-  List<Services> get services => throw _privateConstructorUsedError;
+  List<ServiceList> get services => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ServiceRequestManagementStateCopyWith<ServiceRequestManagementState>
@@ -3478,6 +3841,7 @@ abstract class $ServiceRequestManagementStateCopyWith<$Res> {
       CommonResponseUse? caregiverAssignResponse,
       CommonResponseUse? startServiceResponse,
       CommonResponseUse? cancelServiceResponse,
+      CaregiverProfileResponse? caregiverProfileResponse,
       bool isError,
       bool isCancelLoading,
       bool isStartServiceLoading,
@@ -3488,7 +3852,7 @@ abstract class $ServiceRequestManagementStateCopyWith<$Res> {
       bool isRescheduleAvailableCaregiverView,
       bool isRescheduleNotAvailableCaregiverView,
       bool isRescheduleOtherMatchingListView,
-      List<Services> services});
+      List<ServiceList> services});
 }
 
 /// @nodoc
@@ -3515,6 +3879,7 @@ class _$ServiceRequestManagementStateCopyWithImpl<$Res,
     Object? caregiverAssignResponse = freezed,
     Object? startServiceResponse = freezed,
     Object? cancelServiceResponse = freezed,
+    Object? caregiverProfileResponse = freezed,
     Object? isError = null,
     Object? isCancelLoading = null,
     Object? isStartServiceLoading = null,
@@ -3568,6 +3933,10 @@ class _$ServiceRequestManagementStateCopyWithImpl<$Res,
           ? _value.cancelServiceResponse
           : cancelServiceResponse // ignore: cast_nullable_to_non_nullable
               as CommonResponseUse?,
+      caregiverProfileResponse: freezed == caregiverProfileResponse
+          ? _value.caregiverProfileResponse
+          : caregiverProfileResponse // ignore: cast_nullable_to_non_nullable
+              as CaregiverProfileResponse?,
       isError: null == isError
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
@@ -3614,7 +3983,7 @@ class _$ServiceRequestManagementStateCopyWithImpl<$Res,
       services: null == services
           ? _value.services
           : services // ignore: cast_nullable_to_non_nullable
-              as List<Services>,
+              as List<ServiceList>,
     ) as $Val);
   }
 }
@@ -3639,6 +4008,7 @@ abstract class _$$_ServiceRequestManagementStateCopyWith<$Res>
       CommonResponseUse? caregiverAssignResponse,
       CommonResponseUse? startServiceResponse,
       CommonResponseUse? cancelServiceResponse,
+      CaregiverProfileResponse? caregiverProfileResponse,
       bool isError,
       bool isCancelLoading,
       bool isStartServiceLoading,
@@ -3649,7 +4019,7 @@ abstract class _$$_ServiceRequestManagementStateCopyWith<$Res>
       bool isRescheduleAvailableCaregiverView,
       bool isRescheduleNotAvailableCaregiverView,
       bool isRescheduleOtherMatchingListView,
-      List<Services> services});
+      List<ServiceList> services});
 }
 
 /// @nodoc
@@ -3675,6 +4045,7 @@ class __$$_ServiceRequestManagementStateCopyWithImpl<$Res>
     Object? caregiverAssignResponse = freezed,
     Object? startServiceResponse = freezed,
     Object? cancelServiceResponse = freezed,
+    Object? caregiverProfileResponse = freezed,
     Object? isError = null,
     Object? isCancelLoading = null,
     Object? isStartServiceLoading = null,
@@ -3728,6 +4099,10 @@ class __$$_ServiceRequestManagementStateCopyWithImpl<$Res>
           ? _value.cancelServiceResponse
           : cancelServiceResponse // ignore: cast_nullable_to_non_nullable
               as CommonResponseUse?,
+      caregiverProfileResponse: freezed == caregiverProfileResponse
+          ? _value.caregiverProfileResponse
+          : caregiverProfileResponse // ignore: cast_nullable_to_non_nullable
+              as CaregiverProfileResponse?,
       isError: null == isError
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
@@ -3774,7 +4149,7 @@ class __$$_ServiceRequestManagementStateCopyWithImpl<$Res>
       services: null == services
           ? _value._services
           : services // ignore: cast_nullable_to_non_nullable
-              as List<Services>,
+              as List<ServiceList>,
     ));
   }
 }
@@ -3794,6 +4169,7 @@ class _$_ServiceRequestManagementState
       this.caregiverAssignResponse,
       this.startServiceResponse,
       this.cancelServiceResponse,
+      this.caregiverProfileResponse,
       this.isError = false,
       this.isCancelLoading = false,
       this.isStartServiceLoading = false,
@@ -3804,7 +4180,7 @@ class _$_ServiceRequestManagementState
       this.isRescheduleAvailableCaregiverView = false,
       this.isRescheduleNotAvailableCaregiverView = false,
       this.isRescheduleOtherMatchingListView = false,
-      required final List<Services> services})
+      required final List<ServiceList> services})
       : _types = types,
         _services = services;
 
@@ -3835,6 +4211,8 @@ class _$_ServiceRequestManagementState
   @override
   final CommonResponseUse? cancelServiceResponse;
   @override
+  final CaregiverProfileResponse? caregiverProfileResponse;
+  @override
   @JsonKey()
   final bool isError;
   @override
@@ -3864,9 +4242,9 @@ class _$_ServiceRequestManagementState
   @override
   @JsonKey()
   final bool isRescheduleOtherMatchingListView;
-  final List<Services> _services;
+  final List<ServiceList> _services;
   @override
-  List<Services> get services {
+  List<ServiceList> get services {
     if (_services is EqualUnmodifiableListView) return _services;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_services);
@@ -3874,7 +4252,7 @@ class _$_ServiceRequestManagementState
 
   @override
   String toString() {
-    return 'ServiceRequestManagementState(types: $types, isLoading: $isLoading, error: $error, selectedDate: $selectedDate, fromTime: $fromTime, toTime: $toTime, rescheduleResponse: $rescheduleResponse, caregiverAssignResponse: $caregiverAssignResponse, startServiceResponse: $startServiceResponse, cancelServiceResponse: $cancelServiceResponse, isError: $isError, isCancelLoading: $isCancelLoading, isStartServiceLoading: $isStartServiceLoading, isReScheduleError: $isReScheduleError, isClientError: $isClientError, isRescheduleInitialView: $isRescheduleInitialView, isRescheduleLoaderView: $isRescheduleLoaderView, isRescheduleAvailableCaregiverView: $isRescheduleAvailableCaregiverView, isRescheduleNotAvailableCaregiverView: $isRescheduleNotAvailableCaregiverView, isRescheduleOtherMatchingListView: $isRescheduleOtherMatchingListView, services: $services)';
+    return 'ServiceRequestManagementState(types: $types, isLoading: $isLoading, error: $error, selectedDate: $selectedDate, fromTime: $fromTime, toTime: $toTime, rescheduleResponse: $rescheduleResponse, caregiverAssignResponse: $caregiverAssignResponse, startServiceResponse: $startServiceResponse, cancelServiceResponse: $cancelServiceResponse, caregiverProfileResponse: $caregiverProfileResponse, isError: $isError, isCancelLoading: $isCancelLoading, isStartServiceLoading: $isStartServiceLoading, isReScheduleError: $isReScheduleError, isClientError: $isClientError, isRescheduleInitialView: $isRescheduleInitialView, isRescheduleLoaderView: $isRescheduleLoaderView, isRescheduleAvailableCaregiverView: $isRescheduleAvailableCaregiverView, isRescheduleNotAvailableCaregiverView: $isRescheduleNotAvailableCaregiverView, isRescheduleOtherMatchingListView: $isRescheduleOtherMatchingListView, services: $services)';
   }
 
   @override
@@ -3893,13 +4271,14 @@ class _$_ServiceRequestManagementState
             (identical(other.toTime, toTime) || other.toTime == toTime) &&
             (identical(other.rescheduleResponse, rescheduleResponse) ||
                 other.rescheduleResponse == rescheduleResponse) &&
-            (identical(
-                    other.caregiverAssignResponse, caregiverAssignResponse) ||
+            (identical(other.caregiverAssignResponse, caregiverAssignResponse) ||
                 other.caregiverAssignResponse == caregiverAssignResponse) &&
             (identical(other.startServiceResponse, startServiceResponse) ||
                 other.startServiceResponse == startServiceResponse) &&
             (identical(other.cancelServiceResponse, cancelServiceResponse) ||
                 other.cancelServiceResponse == cancelServiceResponse) &&
+            (identical(other.caregiverProfileResponse, caregiverProfileResponse) ||
+                other.caregiverProfileResponse == caregiverProfileResponse) &&
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.isCancelLoading, isCancelLoading) ||
                 other.isCancelLoading == isCancelLoading) &&
@@ -3909,8 +4288,7 @@ class _$_ServiceRequestManagementState
                 other.isReScheduleError == isReScheduleError) &&
             (identical(other.isClientError, isClientError) ||
                 other.isClientError == isClientError) &&
-            (identical(
-                    other.isRescheduleInitialView, isRescheduleInitialView) ||
+            (identical(other.isRescheduleInitialView, isRescheduleInitialView) ||
                 other.isRescheduleInitialView == isRescheduleInitialView) &&
             (identical(other.isRescheduleLoaderView, isRescheduleLoaderView) ||
                 other.isRescheduleLoaderView == isRescheduleLoaderView) &&
@@ -3924,8 +4302,7 @@ class _$_ServiceRequestManagementState
                     isRescheduleNotAvailableCaregiverView) &&
             (identical(other.isRescheduleOtherMatchingListView,
                     isRescheduleOtherMatchingListView) ||
-                other.isRescheduleOtherMatchingListView ==
-                    isRescheduleOtherMatchingListView) &&
+                other.isRescheduleOtherMatchingListView == isRescheduleOtherMatchingListView) &&
             const DeepCollectionEquality().equals(other._services, _services));
   }
 
@@ -3942,6 +4319,7 @@ class _$_ServiceRequestManagementState
         caregiverAssignResponse,
         startServiceResponse,
         cancelServiceResponse,
+        caregiverProfileResponse,
         isError,
         isCancelLoading,
         isStartServiceLoading,
@@ -3976,6 +4354,7 @@ abstract class _ServiceRequestManagementState
           final CommonResponseUse? caregiverAssignResponse,
           final CommonResponseUse? startServiceResponse,
           final CommonResponseUse? cancelServiceResponse,
+          final CaregiverProfileResponse? caregiverProfileResponse,
           final bool isError,
           final bool isCancelLoading,
           final bool isStartServiceLoading,
@@ -3986,7 +4365,7 @@ abstract class _ServiceRequestManagementState
           final bool isRescheduleAvailableCaregiverView,
           final bool isRescheduleNotAvailableCaregiverView,
           final bool isRescheduleOtherMatchingListView,
-          required final List<Services> services}) =
+          required final List<ServiceList> services}) =
       _$_ServiceRequestManagementState;
 
   @override
@@ -4010,6 +4389,8 @@ abstract class _ServiceRequestManagementState
   @override
   CommonResponseUse? get cancelServiceResponse;
   @override
+  CaregiverProfileResponse? get caregiverProfileResponse;
+  @override
   bool get isError;
   @override
   bool get isCancelLoading;
@@ -4030,7 +4411,7 @@ abstract class _ServiceRequestManagementState
   @override
   bool get isRescheduleOtherMatchingListView;
   @override
-  List<Services> get services;
+  List<ServiceList> get services;
   @override
   @JsonKey(ignore: true)
   _$$_ServiceRequestManagementStateCopyWith<_$_ServiceRequestManagementState>

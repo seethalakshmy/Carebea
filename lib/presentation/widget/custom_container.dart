@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomContainer extends StatelessWidget {
-  const CustomContainer({super.key,
+  const CustomContainer({
+    super.key,
     this.height,
     this.width,
     this.child,
@@ -15,10 +16,16 @@ class CustomContainer extends StatelessWidget {
   final Color? color;
   final Widget? child;
   final Alignment? alignment;
-  final EdgeInsetsGeometry ?padding;
+  final EdgeInsetsGeometry? padding;
 
   const CustomContainer.decoration(
-      {super.key, this.height, this.width, this.child, this.decoration, this.alignment, this.padding})
+      {super.key,
+      this.height,
+      this.width,
+      this.child,
+      this.decoration,
+      this.alignment,
+      this.padding})
       : color = null;
 
   @override

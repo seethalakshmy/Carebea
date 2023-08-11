@@ -8,6 +8,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/custom_snackbar.dart';
 import '../../../core/enum.dart';
+import '../../../domain/caregiver_profile/model/caregiver_profile_response.dart';
 import '../../../domain/caregivers/model/types.dart';
 import '../../../domain/common_response/common_response.dart';
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
@@ -38,6 +39,31 @@ class ServiceRequestManagementBloc
     on<_AssignCaregiver>(_assignCaregiver);
     on<_StartService>(_startService);
     on<_CancelService>(_cancelService);
+    on<_GetCareGiverProfile>(_getCareGiverProfile);
+  }
+
+  _getCareGiverProfile(_GetCareGiverProfile event,
+      Emitter<ServiceRequestManagementState> emit) async {
+    final Either<ApiErrorHandler, CaregiverProfileResponse> homeResult =
+        await serviceRequestManagementRepository.getCareGiverProfile(
+      userID: event.userId,
+      adminId: event.adminId,
+    );
+    ServiceRequestManagementState stateResult = homeResult.fold((l) {
+      return state.copyWith(
+          error: l.error,
+          isLoading: false,
+          isError: true,
+          isClientError: l.isClientError ?? false);
+    }, (r) {
+      return state.copyWith(
+        caregiverProfileResponse: r,
+        isLoading: false,
+      );
+    });
+    emit(
+      stateResult,
+    );
   }
 
   _getSelectedTab(
@@ -280,7 +306,7 @@ class ServiceRequestManagementBloc
         result.fold((l) {
       return state.copyWith(isLoading: false, services: [], error: l.error);
     }, (r) {
-      return state.copyWith(isLoading: false, services: r.data?.services ?? []);
+      return state.copyWith(isLoading: false, services: r.data?.service ?? []);
     });
     return serviceRequestManagementState;
   }
@@ -296,7 +322,7 @@ class ServiceRequestManagementBloc
         result.fold((l) {
       return state.copyWith(isLoading: false, services: [], error: l.error);
     }, (r) {
-      return state.copyWith(isLoading: false, services: r.data?.services ?? []);
+      return state.copyWith(isLoading: false, services: r.data?.service ?? []);
     });
     return serviceRequestManagementState;
   }
@@ -313,7 +339,7 @@ class ServiceRequestManagementBloc
         result.fold((l) {
       return state.copyWith(isLoading: false, services: [], error: l.error);
     }, (r) {
-      return state.copyWith(isLoading: false, services: r.data?.services ?? []);
+      return state.copyWith(isLoading: false, services: r.data?.service ?? []);
     });
     return serviceRequestManagementState;
   }
@@ -330,7 +356,7 @@ class ServiceRequestManagementBloc
         result.fold((l) {
       return state.copyWith(isLoading: false, services: [], error: l.error);
     }, (r) {
-      return state.copyWith(isLoading: false, services: r.data?.services ?? []);
+      return state.copyWith(isLoading: false, services: r.data?.service ?? []);
     });
     return serviceRequestManagementState;
   }
@@ -347,7 +373,7 @@ class ServiceRequestManagementBloc
         result.fold((l) {
       return state.copyWith(isLoading: false, services: [], error: l.error);
     }, (r) {
-      return state.copyWith(isLoading: false, services: r.data?.services ?? []);
+      return state.copyWith(isLoading: false, services: r.data?.service ?? []);
     });
     return serviceRequestManagementState;
   }
