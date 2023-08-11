@@ -177,7 +177,9 @@ class SubProfileView extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomSizedBox(height: DBL.ten.val,),
+            CustomSizedBox(
+              height: DBL.ten.val,
+            ),
             Expanded(
               flex: 1,
               child: CustomText(

@@ -13,6 +13,7 @@ class ServiceRequestManagementState with _$ServiceRequestManagementState {
       CommonResponseUse? caregiverAssignResponse,
       CommonResponseUse? startServiceResponse,
       CommonResponseUse? cancelServiceResponse,
+      CaregiverProfileResponse? caregiverProfileResponse,
       @Default(false) bool isError,
       @Default(false) bool isCancelLoading,
       @Default(false) bool isStartServiceLoading,
@@ -23,7 +24,7 @@ class ServiceRequestManagementState with _$ServiceRequestManagementState {
       @Default(false) bool isRescheduleAvailableCaregiverView,
       @Default(false) bool isRescheduleNotAvailableCaregiverView,
       @Default(false) bool isRescheduleOtherMatchingListView,
-      required List<Services> services}) = _ServiceRequestManagementState;
+      required List<ServiceList> services}) = _ServiceRequestManagementState;
 
   factory ServiceRequestManagementState.initial() {
     return ServiceRequestManagementState(

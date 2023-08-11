@@ -29,8 +29,10 @@ import '../widget/table_verification_button.dart';
 
 @RoutePage()
 class CareGiverProfilePage extends StatefulWidget {
-  const CareGiverProfilePage({Key? key, @QueryParam('id') this.id = ''})
-      : super(key: key);
+  const CareGiverProfilePage({
+    Key? key,
+    @QueryParam('id') this.id = '',
+  }) : super(key: key);
 
   final String? id;
 
@@ -42,15 +44,23 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   String _userId = "";
-  late CareGiverProfileBloc _careGiverProfileBloc;
+  // late CareGiverProfileBloc _careGiverProfileBloc;
 
   @override
   void initState() {
+    print('idinpage ${widget.id}');
     _tabController = TabController(vsync: this, length: 7);
+    // _userId = '64d3523839a46593449be44e';
     _userId =
-        autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
-    _careGiverProfileBloc = CareGiverProfileBloc(CareGiverProfileRepository());
+        autoTabRouter?.currentChild?.queryParams.getString('id', widget.id) ??
+            '';
+    // _careGiverProfileBloc = CareGiverProfileBloc(CareGiverProfileRepository());
     super.initState();
+    context.read<CareGiverProfileBloc>().add(
+        CareGiverProfileEvent.getCareGiverProfile(
+            userId: _userId,
+            adminId: SharedPreffUtil().getAdminId,
+            context: context));
   }
 
   @override
@@ -64,22 +74,17 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
     return _rebuildView();
   }
 
-  BlocProvider<CareGiverProfileBloc> _rebuildView() {
-    return BlocProvider(
-      create: (context) => _careGiverProfileBloc
-        ..add(CareGiverProfileEvent.getCareGiverProfile(
-            userId: _userId, adminId: SharedPreffUtil().getAdminId)),
-      child: BlocBuilder<CareGiverProfileBloc, CareGiverProfileState>(
-        builder: (context, state) {
-          return state.isLoading
-              ? (const LoaderView())
-              : state.isError
-                  ? ErrorView(
-                      isClientError: state.isClientError,
-                      errorMessage: state.error)
-                  : _bodyView(state);
-        },
-      ),
+  _rebuildView() {
+    return BlocBuilder<CareGiverProfileBloc, CareGiverProfileState>(
+      builder: (context, state) {
+        return state.isLoading
+            ? (const LoaderView())
+            : state.isError
+                ? ErrorView(
+                    isClientError: state.isClientError,
+                    errorMessage: state.error)
+                : _bodyView(state);
+      },
     );
   }
 
@@ -361,19 +366,32 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
       text: AppString.no.val,
       onPressed: () {
         if (status == Verification.trainingStarted.val) {
-          _careGiverProfileBloc.add(
+          context.read<CareGiverProfileBloc>().add(
               CareGiverProfileEvent.careGiverTrainingVerify(
                   userId: _userId,
+                  adminId: '',
                   status: false,
-                  context: context,
-                  adminId: ''));
+                  context: context));
+          // _careGiverProfileBloc.add(
+          //     CareGiverProfileEvent.careGiverTrainingVerify(
+          //         userId: _userId,
+          //         status: false,
+          //         context: context,
+          //         adminId: ''));
         } else {
-          _careGiverProfileBloc.add(
+          context.read<CareGiverProfileBloc>().add(
               CareGiverProfileEvent.careGiverInterViewVerify(
                   userId: _userId,
+                  adminId: SharedPreffUtil().getAdminId,
                   status: false,
-                  context: context,
-                  adminId: SharedPreffUtil().getAdminId));
+                  context: context));
+
+          // _careGiverProfileBloc.add(
+          //     CareGiverProfileEvent.careGiverInterViewVerify(
+          //         userId: _userId,
+          //         status: false,
+          //         context: context,
+          //         adminId: SharedPreffUtil().getAdminId));
         }
       },
       color: AppColor.white.val,
@@ -394,19 +412,33 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
       text: AppString.yes.val,
       onPressed: () {
         if (status == Verification.trainingStarted.val) {
-          _careGiverProfileBloc.add(
+          context.read<CareGiverProfileBloc>().add(
               CareGiverProfileEvent.careGiverTrainingVerify(
                   userId: _userId,
+                  adminId: SharedPreffUtil().getAdminId,
                   status: true,
-                  context: context,
-                  adminId: SharedPreffUtil().getAdminId));
+                  context: context));
+
+          // _careGiverProfileBloc.add(
+          //     CareGiverProfileEvent.careGiverTrainingVerify(
+          //         userId: _userId,
+          //         status: true,
+          //         context: context,
+          //         adminId: SharedPreffUtil().getAdminId));
         } else {
-          _careGiverProfileBloc.add(
+          context.read<CareGiverProfileBloc>().add(
               CareGiverProfileEvent.careGiverInterViewVerify(
                   userId: _userId,
+                  adminId: SharedPreffUtil().getAdminId,
                   status: true,
-                  context: context,
-                  adminId: SharedPreffUtil().getAdminId));
+                  context: context));
+
+          // _careGiverProfileBloc.add(
+          //     CareGiverProfileEvent.careGiverInterViewVerify(
+          //         userId: _userId,
+          //         status: true,
+          //         context: context,
+          //         adminId: SharedPreffUtil().getAdminId));
         }
       },
       borderRadius: DBL.five.val,

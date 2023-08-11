@@ -1,5 +1,3 @@
-
-
 import 'package:admin_580_tech/domain/user_management/model/user_data.dart';
 
 class UserResponse {

@@ -11,7 +11,7 @@ import '../../core/enum.dart';
 import '../../domain/core/api_client.dart';
 import '../../domain/user_management/model/users.dart';
 
-class UsersRepository implements IUsersRepo {
+class UsersRepository implements IUserRepo {
   final ApiClient _apiClient = ApiClient();
   List<Users> mUsers = [
     Users(

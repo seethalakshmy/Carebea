@@ -7,7 +7,7 @@ import '../../../domain/service_request_management/model/service_request_respons
 
 class RatingWidget extends StatelessWidget {
   const RatingWidget({Key? key, required this.service}) : super(key: key);
-  final Services service;
+  final ServiceList service;
 
   @override
   Widget build(BuildContext context) {

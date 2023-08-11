@@ -22,13 +22,16 @@ class UserAccountDetails extends StatelessWidget {
       child: Row(
         children: [
           CustomSizedBox(
-            width: isXS2(context)?DBL.oneEighty.val: DBL.twoHundred.val,
+            width: isXS2(context) ? DBL.oneEighty.val : DBL.twoHundred.val,
             child: CustomText(
               label,
               style: TS().gRoboto(
                   fontSize: getFontSize(
                     context,
-                    fontSize: getFontSize(context, fontSize:  FS.font16.val,),
+                    fontSize: getFontSize(
+                      context,
+                      fontSize: FS.font16.val,
+                    ),
                   ),
                   color: AppColor.darkGrey.val,
                   fontWeight: FW.w400.val),
@@ -39,7 +42,11 @@ class UserAccountDetails extends StatelessWidget {
           ),
           CustomContainer.decoration(
             height: DBL.fortyFive.val,
-            width: isXS2(context)?DBL.twoNinety.val: isXS(context)?DBL.threeFortyThree.val:DBL.fourHundred.val,
+            width: isXS2(context)
+                ? DBL.twoNinety.val
+                : isXS(context)
+                    ? DBL.threeFortyThree.val
+                    : DBL.fourHundred.val,
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               color: AppColor.lightWhite.val,

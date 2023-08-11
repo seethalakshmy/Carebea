@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/presentation/help_and_support/help_and_support_page.dart';
 import 'package:auto_route/auto_route.dart';
 
 import 'app_router.gr.dart';
@@ -69,6 +70,14 @@ class AppRouter extends $AppRouter {
       AutoRoute(
           path: "service-request",
           page: ServiceRequestManagementRoute.page,
+          maintainState: false),
+      AutoRoute(
+          path: "help-support",
+          page: HelpAndSupportRoute.page,
+          maintainState: false),
+      AutoRoute(
+          path: "support-tickets-details",
+          page: SupportTicketsDetailRoute.page,
           maintainState: false),
     ]),
   ];
