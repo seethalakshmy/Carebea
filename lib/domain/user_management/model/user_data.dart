@@ -1,4 +1,3 @@
-
 import 'package:admin_580_tech/domain/caregivers/model/pagination.dart';
 
 import 'users.dart';
@@ -10,8 +9,7 @@ class UserData {
   UserData({this.users, this.pagination});
 
   UserData copyWith({List<Users>? users, Pagination? pagination}) => UserData(
-      users: users ?? this.users,
-      pagination: pagination ?? this.pagination);
+      users: users ?? this.users, pagination: pagination ?? this.pagination);
 
   UserData.fromJson(Map<String, dynamic> json) {
     if (json['finalResult'] != null) {

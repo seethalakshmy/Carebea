@@ -6,6 +6,7 @@ import 'package:admin_580_tech/domain/service_request_management/model/reschedul
 import 'package:admin_580_tech/domain/service_request_management/model/reschedule_response.dart';
 import 'package:admin_580_tech/generated/assets.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
+import 'package:admin_580_tech/presentation/login/login_page.dart';
 import 'package:admin_580_tech/presentation/service_request_management/widgets/cancellation_widget.dart';
 import 'package:admin_580_tech/presentation/service_request_management/widgets/profile_widget.dart';
 import 'package:admin_580_tech/presentation/service_request_management/widgets/rating_widget.dart';
@@ -25,18 +26,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/bloc/service_request_management/service_request_management_bloc.dart';
 import '../../../core/responsive.dart';
+import '../../../domain/caregiver_profile/model/caregiver_profile_response.dart';
 import '../../../domain/service_request_management/model/assign_caregiver_params.dart';
 import '../../../domain/service_request_management/model/service_request_response.dart';
+import '../../caregiver_profile/caregiver_profile_page.dart';
 import '../../widget/custom_alert_delete.dart';
+import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_icon.dart';
 import '../../widget/custom_text_field.dart';
+import '../../widget/header_view.dart';
 
 class ServiceDetailsDialog extends StatefulWidget {
   const ServiceDetailsDialog(
       {Key? key, required this.service, required this.title})
       : super(key: key);
 
-  final Services service;
+  final ServiceList service;
   final String title;
 
   @override
@@ -369,7 +374,8 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
                                                                   state
                                                                       .rescheduleResponse
                                                                       ?.data
-                                                                      ?.oldServiceId)
+                                                                      ?.oldServiceId,
+                                                                  state)
                                                               : state
                                                                       .isRescheduleNotAvailableCaregiverView
                                                                   ? _notAvailableCaregiversView()
@@ -491,7 +497,8 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
     );
   }
 
-  availableCaregiverView(Caregivers? caregivers, String? oldServiceID) {
+  availableCaregiverView(Caregivers? caregivers, String? oldServiceID,
+      ServiceRequestManagementState state) {
     return SingleChildScrollView(
       child: Padding(
           padding: EdgeInsets.symmetric(
@@ -573,7 +580,11 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
                                     borderRadius: DBL.three.val,
                                     hoverColor:
                                         AppColor.red2.val.withOpacity(0.4),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      print('printonclick');
+                                      _profilePopUp(
+                                          caregivers.caregiverId ?? '');
+                                    },
                                   )
                                 ],
                               )
@@ -681,6 +692,30 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
             ],
           )),
     );
+  }
+
+  _profilePopUp(String userId) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return CustomAlertDialogWidget(
+              height: MediaQuery.of(context).size.height,
+              heading: "View Profile",
+              child: SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: CareGiverProfilePage(
+                    id: userId,
+                  )));
+        });
+    // showGeneralDialog(
+    //   context: context,
+    //   pageBuilder: (BuildContext buildContext, Animation animation,
+    //       Animation secondaryAnimation) {
+    //     return SizedBox(
+    //         height: MediaQuery.of(context).size.height * .1,
+    //         child: CareGiverProfilePage(id: userId));
+    //   },
+    // );
   }
 
   loaderView() {
@@ -1107,7 +1142,10 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
                                         borderRadius: DBL.three.val,
                                         hoverColor:
                                             AppColor.red2.val.withOpacity(0.4),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          _profilePopUp(
+                                              caregiver.caregiverId ?? '');
+                                        },
                                       )
                                     ],
                                   )
@@ -1257,7 +1295,7 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
 
   _cancelServiceRequestPopup(
     BuildContext context,
-    Services services,
+    ServiceList services,
   ) {
     showDialog(
       context: context,
@@ -1296,4 +1334,106 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
       },
     );
   }
+
+  // _caregiverProfilePopup(BuildContext context,
+  //     {int? index, required ServiceRequestManagementState state}) {
+  //   Profile? profile = state.caregiverProfileResponse?.data?.profile;
+  //
+  //   return CustomContainer(
+  //     padding: EdgeInsets.symmetric(
+  //         horizontal: DBL.twentyFive.val, vertical: DBL.twentyFive.val),
+  //     color: AppColor.white.val,
+  //     child: SingleChildScrollView(
+  //       child: Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           aboutView(profile?.about ?? ""),
+  //           CustomSizedBox(
+  //             height: DBL.fifteen.val,
+  //           ),
+  //           _hobbiesView(profile?.hobbies ?? ""),
+  //           CustomSizedBox(
+  //             height: DBL.fifteen.val,
+  //           ),
+  //           _whyCareGiver(profile?.description ?? ""),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+  //
+  // aboutView(String about) {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       HeaderView(
+  //         title: AppString.about.val,
+  //         color: AppColor.matBlack3.val,
+  //         fontSize: FS.font18.val,
+  //         topPadding: DBL.zero.val,
+  //         sidePadding: DBL.zero.val,
+  //       ),
+  //       CustomSizedBox(
+  //         height: DBL.eight.val,
+  //       ),
+  //       CustomText(
+  //         about,
+  //         style: TS().gRoboto(
+  //           fontSize: FS.font13PointFive.val,
+  //           fontWeight: FW.w400.val,
+  //           color: AppColor.darkGrey3.val,
+  //           height: DBL.onePointNine.val,
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
+  //
+  // _hobbiesView(String hobbies) {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       HeaderView(
+  //         title: AppString.hobbies.val,
+  //         color: AppColor.matBlack3.val,
+  //         fontSize: FS.font18.val,
+  //         topPadding: DBL.zero.val,
+  //         sidePadding: DBL.zero.val,
+  //       ),
+  //       CustomSizedBox(
+  //         height: DBL.eight.val,
+  //       ),
+  //       CustomText(hobbies,
+  //           style: TS().gRoboto(
+  //               color: AppColor.matBlack3.val, fontWeight: FW.w400.val)),
+  //     ],
+  //   );
+  // }
+  //
+  // _whyCareGiver(String des) {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       HeaderView(
+  //         title: AppString.whyYouLoveBeingCareAmbassador.val,
+  //         color: AppColor.matBlack3.val,
+  //         fontSize: FS.font18.val,
+  //         topPadding: DBL.zero.val,
+  //         sidePadding: DBL.zero.val,
+  //       ),
+  //       CustomSizedBox(
+  //         height: DBL.eight.val,
+  //       ),
+  //       CustomText(
+  //         des,
+  //         style: TS().gRoboto(
+  //           fontSize: FS.font13PointFive.val,
+  //           fontWeight: FW.w400.val,
+  //           color: AppColor.darkGrey3.val,
+  //           height: DBL.onePointNine.val,
+  //         ),
+  //       )
+  //     ],
+  //   );
+  // }
 }
