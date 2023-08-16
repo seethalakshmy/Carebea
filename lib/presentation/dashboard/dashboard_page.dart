@@ -270,7 +270,8 @@ class _DashboardPageState extends State<DashboardPage> {
                         FlSpot(2, 100),
                         FlSpot(3, 220),
                         FlSpot(4, 300),
-                        FlSpot(6, 350),
+                        FlSpot(6.5, 350),
+                        FlSpot(6.8, 150),
                         FlSpot(7, 200),
                         FlSpot(8, 400),
                         FlSpot(9, 250),
@@ -278,10 +279,12 @@ class _DashboardPageState extends State<DashboardPage> {
                         // Add more spots for other months
                       ],
                       isCurved: false,
-                      barWidth: 8,
+                      barWidth: 10,
                       isStrokeCapRound: true,
                       isStrokeJoinRound: false,
                       gradient: LinearGradient(colors: [
+                        AppColor.primaryColor.val.withOpacity(0.2),
+                        AppColor.primaryColor.val.withOpacity(0.4),
                         AppColor.primaryColor.val.withOpacity(0.6),
                         AppColor.primaryColor.val
                       ]),
