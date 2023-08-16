@@ -14,6 +14,7 @@ import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
 import '../../domain/transaction_management/model/transaction_list_response.dart';
+import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
@@ -46,6 +47,8 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
 
   final TextEditingController _searchController = TextEditingController();
 
+  SharedPreffUtil sharedPrefUtil = SharedPreffUtil();
+
   @override
   void initState() {
     super.initState();
@@ -56,6 +59,9 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
         limit: _transactionBloc.limit,
         searchTerm: "",
         filterId: 0));
+    if (sharedPrefUtil.getPage != 0) {
+      _transactionBloc.paginationPage = sharedPrefUtil.getPage;
+    }
   }
 
   @override
@@ -475,6 +481,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
             _transactionBloc.start + _transactionBloc.mUserList.length;
       }
     }
+    SharedPreffUtil().setPage = _transactionBloc.paginationPage;
   }
 
   _statusBox(Transactions item) {

@@ -62,6 +62,9 @@ class _RolesPageState extends State<RolesPage> {
     _adminUserId = sharedPrefUtil.getAdminId;
     super.initState();
     _roleBloc = RolesBloc(RolesRepository());
+    if (sharedPrefUtil.getPage != 0) {
+      _page = sharedPrefUtil.getPage;
+    }
   }
 
   @override
@@ -356,6 +359,8 @@ class _RolesPageState extends State<RolesPage> {
       _start = (_page * _limit) - 10;
       _end = _start + mRoles.length;
     }
+    SharedPreffUtil().setPage = _page;
+    CustomLog.log(':::page set $_page ${SharedPreffUtil().getPage}');
   }
 
   _getCareGiverEvent() {
