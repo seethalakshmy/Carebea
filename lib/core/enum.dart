@@ -511,6 +511,8 @@ enum AppColor {
   lightRed(Color(0xfffceff1)),
   mediumRed(Color(0xfff06f81)),
   starFillColor(Color(0xffEB9C02)),
+  pieChartColor(Color(0xff586EFF)),
+  dashboardSymbolBackground(Color(0xffECF3FB)),
   transparent(Colors.transparent);
 
   final Color val;
@@ -564,7 +566,16 @@ enum IMG {
   blackLogoPng("assets/images/black_logo.png"),
   careGiver("assets/images/caregiver.png"),
   person("assets/images/ic_person.png"),
-  profile("assets/images/profile.png");
+  profile("assets/images/profile.png"),
+  clientComplaints("assets/images/client_complaints.png"),
+  careCancelledShifts("assets/images/care_cancelled.png"),
+  careComplaints("assets/images/care_complaint.png"),
+  clientCancelledShifts("assets/images/client_cancelled.png"),
+  scheduledShifts("assets/images/missed_schedule.png"),
+  clients("assets/images/clients.png"),
+  dollar("assets/images/dollar-sign.png"),
+  careAmbassadors("assets/images/care_ambassadors.png"),
+  dashBoardClock("assets/images/hours.png");
 
   final String val;
 
