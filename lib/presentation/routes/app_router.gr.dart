@@ -82,13 +82,8 @@ abstract class $AppRouter extends _i22.RootStackRouter {
     CareGiversRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<CareGiversRouteArgs>(
-          orElse: () => CareGiversRouteArgs(
-                page: queryParams.optInt('page'),
-                tab: queryParams.optInt('tab'),
-              ));
-      return _i22.AutoRoutePage<dynamic>(
           orElse: () => CareGiversRouteArgs(tab: queryParams.optInt('tab')));
-      return _i20.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i3.CareGiversPage(
           key: args.key,
@@ -106,19 +101,11 @@ abstract class $AppRouter extends _i22.RootStackRouter {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<CareGiverDetailRouteArgs>(
           orElse: () => CareGiverDetailRouteArgs(
-                id: queryParams.optString(
-                  'id',
-                  '',
-                ),
-                page: queryParams.optInt('page'),
-                tab: queryParams.optInt('tab'),
-              ));
-      return _i22.AutoRoutePage<dynamic>(
                   id: queryParams.optString(
                 'id',
                 '',
               )));
-      return _i20.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i5.CareGiverDetailPage(
           key: args.key,
@@ -146,19 +133,11 @@ abstract class $AppRouter extends _i22.RootStackRouter {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<CaregiverVerificationRouteArgs>(
           orElse: () => CaregiverVerificationRouteArgs(
-                id: queryParams.optString(
-                  'id',
-                  '',
-                ),
-                page: queryParams.optInt('page'),
-                tab: queryParams.optInt('tab'),
-              ));
-      return _i22.AutoRoutePage<dynamic>(
                   id: queryParams.optString(
                 'id',
                 '',
               )));
-      return _i20.AutoRoutePage<dynamic>(
+      return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i7.CaregiverVerificationPage(
           key: args.key,
@@ -337,8 +316,6 @@ class AdminCreationRouteArgs {
 class CareGiversRoute extends _i22.PageRouteInfo<CareGiversRouteArgs> {
   CareGiversRoute({
     _i23.Key? key,
-    int? page,
-    _i21.Key? key,
     int? tab,
     List<_i22.PageRouteInfo>? children,
   }) : super(
@@ -394,10 +371,7 @@ class CareGiverDetailRoute
   CareGiverDetailRoute({
     _i23.Key? key,
     String? id = '',
-    int? page,
-    int? tab,
     List<_i22.PageRouteInfo>? children,
-    List<_i20.PageRouteInfo>? children,
   }) : super(
           CareGiverDetailRoute.name,
           args: CareGiverDetailRouteArgs(
@@ -477,11 +451,7 @@ class CaregiverVerificationRoute
   CaregiverVerificationRoute({
     _i23.Key? key,
     String? id = '',
-    int? page,
-    int? tab,
     List<_i22.PageRouteInfo>? children,
-
-    List<_i20.PageRouteInfo>? children,
   }) : super(
           CaregiverVerificationRoute.name,
           args: CaregiverVerificationRouteArgs(
