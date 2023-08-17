@@ -27,7 +27,7 @@ class PaginationView extends StatelessWidget {
   final int end;
 
   @override
-  Widget build(BuildContext cqontext) {
+  Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       return SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -55,50 +55,72 @@ class PaginationView extends StatelessWidget {
   }
 
   Row _buildPagination() {
+    List<Widget> paginationButtons = [];
+
+    void addPageNumber(int pageNumber) {
+      paginationButtons.add(
+        CustomButton(
+          text: pageNumber.toString(),
+          borderRadius: 0.0,
+          minWidth: 16.0,
+          color: page == pageNumber
+              ? AppColor.primaryColor.val
+              : AppColor.white.val,
+          textColor: page == pageNumber
+              ? AppColor.white.val
+              : AppColor.primaryColor.val,
+          borderWidth: 0.0,
+          onPressed: () {
+            onItemPressed(pageNumber);
+          },
+        ),
+      );
+    }
+
+    paginationButtons.add(
+      CustomButton(
+        onPressed: () {
+          onPreviousPressed();
+        },
+        text: AppString.previous.val,
+        borderRadius: 0.0,
+        borderWidth: 0.0,
+        color: AppColor.white.val,
+        textColor: AppColor.primaryColor.val,
+      ),
+    );
+
+    for (int i = 1; i <= totalPages; i++) {
+      if (i <= 3 || i >= totalPages || (i >= page - 1 && i <= page + 1)) {
+        addPageNumber(i);
+      } else if (paginationButtons.last is Icon) {
+        continue;
+      } else {
+        paginationButtons.add(
+          Icon(
+            Icons.more_horiz,
+            color: AppColor.primaryColor.val,
+          ),
+        );
+      }
+    }
+
+    paginationButtons.add(
+      CustomButton(
+        onPressed: () {
+          onNextPressed();
+        },
+        text: AppString.next.val,
+        borderRadius: 0.0,
+        borderWidth: 0.0,
+        color: AppColor.white.val,
+        textColor: AppColor.primaryColor.val,
+      ),
+    );
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        CustomButton(
-          onPressed: () {
-            onPreviousPressed();
-          },
-          text: AppString.previous.val,
-          borderRadius: 0.0,
-          borderWidth: 0.0,
-          color: AppColor.white.val,
-          textColor: AppColor.primaryColor.val,
-        ),
-        for (int i = 1; i <= totalPages; i++)
-          if (i == 1 ||
-              i == totalPages ||
-              totalPages <= 5 ||
-              i <= 3 ||
-              i == page ||
-              (i == page - 1 && page - 3 > 1) ||
-              (i == page + 1 && page + 3 < totalPages))
-            CustomButton(
-              text: i.toString(),
-              borderRadius: 0.0,
-              minWidth: 16.0,
-              color: page == i ? AppColor.primaryColor.val : AppColor.white.val,
-              textColor:
-                  page == i ? AppColor.white.val : AppColor.primaryColor.val,
-              borderWidth: 0.0,
-              onPressed: () {
-                onItemPressed(i);
-              },
-            ),
-        CustomButton(
-          onPressed: () {
-            onNextPressed();
-          },
-          text: AppString.next.val,
-          borderRadius: 0.0,
-          borderWidth: 0.0,
-          color: AppColor.white.val,
-          textColor: AppColor.primaryColor.val,
-        ),
-      ],
+      children: paginationButtons,
     );
   }
 }

@@ -195,6 +195,141 @@ class _DashboardPageState extends State<DashboardPage> {
                   Responsive.isWeb(context) ? FS.font14.val : FS.font12.val,
               fontWeight: FW.w500.val,
               color: AppColor.label.val,
+            CustomSizedBox(height: DBL.ten.val),
+            Container(
+              alignment: Alignment.bottomLeft,
+              margin: EdgeInsets.only(right: DBL.twenty.val),
+              height: MediaQuery.of(context).size.height * 0.6,
+              child: LineChart(
+                LineChartData(
+                  lineTouchData:
+                      LineTouchData(touchTooltipData: LineTouchTooltipData(
+                    getTooltipItems: (touchedSpots) {
+                      return touchedSpots.map((LineBarSpot touchedSpot) {
+                        final textStyle = TextStyle(
+                          color: AppColor.white.val,
+                          fontWeight: FW.bold.val,
+                        );
+                        return LineTooltipItem(
+                            touchedSpot.y.toString(), textStyle);
+                      }).toList();
+                    },
+                  )),
+                  minX: 1,
+                  maxX: 12,
+                  minY: 0,
+                  maxY: 600,
+                  backgroundColor: Colors.white,
+                  borderData: FlBorderData(
+                    show: true,
+                    border: Border(
+                      left: BorderSide(
+                          width: DBL.two.val, color: AppColor.offWhite.val),
+                      bottom: BorderSide(
+                          width: DBL.two.val, color: AppColor.offWhite.val),
+                    ),
+                  ),
+                  gridData: FlGridData(
+                      show: true,
+                      verticalInterval: 1,
+                      horizontalInterval: 100,
+                      getDrawingVerticalLine: (val) {
+                        return FlLine(
+                            color: AppColor.offWhite.val,
+                            strokeWidth: DBL.one.val);
+                      },
+                      getDrawingHorizontalLine: (val) {
+                        return FlLine(
+                            color: AppColor.offWhite.val,
+                            strokeWidth: DBL.one.val);
+                      }),
+                  titlesData: FlTitlesData(
+                    bottomTitles: AxisTitles(
+                      axisNameSize: 30,
+                      axisNameWidget: CustomText(
+                        "Month",
+                        style: TS().gRoboto(
+                            fontSize: FS.font16.val,
+                            fontWeight: FW.w500.val,
+                            color: AppColor.label8.val),
+                      ),
+                      sideTitles: SideTitles(
+                        reservedSize: 40,
+                        showTitles: true,
+                        interval: 1,
+                        getTitlesWidget: (num, title) {
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 10.0),
+                            child: CustomText(
+                              yearList[num.toInt() - 1],
+                              style: TS().gRoboto(
+                                  fontSize: FS.font13.val,
+                                  color: AppColor.label.val,
+                                  fontWeight: FW.w500.val),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    rightTitles:
+                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    topTitles:
+                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    leftTitles: AxisTitles(
+                      axisNameSize: 40,
+                      axisNameWidget: CustomText(
+                        "Total Services",
+                        style: TS().gRoboto(
+                            fontSize: FS.font16.val,
+                            fontWeight: FW.w500.val,
+                            color: AppColor.label8.val),
+                      ),
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        interval: 100,
+                        reservedSize: 30,
+                        getTitlesWidget: (num, title) {
+                          return Text(
+                            num.toString(),
+                            style: TS().gRoboto(
+                                fontSize: FS.font13.val,
+                                color: AppColor.label.val,
+                                fontWeight: FW.w500.val),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  lineBarsData: [
+                    LineChartBarData(
+                      spots: [
+                        FlSpot(1, 10),
+                        FlSpot(2, 100),
+                        FlSpot(3, 220),
+                        FlSpot(4, 300),
+                        FlSpot(6.5, 350),
+                        FlSpot(6.8, 150),
+                        FlSpot(7, 200),
+                        FlSpot(8, 400),
+                        FlSpot(9, 250),
+
+                        // Add more spots for other months
+                      ],
+                      isCurved: false,
+                      barWidth: 10,
+                      isStrokeCapRound: true,
+                      isStrokeJoinRound: false,
+                      gradient: LinearGradient(colors: [
+                        AppColor.primaryColor.val.withOpacity(0.2),
+                        AppColor.primaryColor.val.withOpacity(0.4),
+                        AppColor.primaryColor.val.withOpacity(0.6),
+                        AppColor.primaryColor.val
+                      ]),
+                      dotData: FlDotData(show: false),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ],
