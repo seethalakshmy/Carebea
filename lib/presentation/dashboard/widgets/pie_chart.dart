@@ -24,7 +24,7 @@ class PieChartPageState extends State {
       color: AppColor.white.val,
       height: MediaQuery.of(context).size.height * .4,
       width: Responsive.isWeb(context)
-          ? MediaQuery.of(context).size.width * .3
+          ? MediaQuery.of(context).size.width * .32
           : MediaQuery.of(context).size.width,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 5),

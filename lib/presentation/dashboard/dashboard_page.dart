@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/enum.dart';
 import '../../core/text_styles.dart';
+import '../side_menu/side_menu_page.dart';
 import '../widget/custom_image.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_text.dart';
@@ -65,57 +66,84 @@ class _DashboardPageState extends State<DashboardPage> {
       children: [
         HeaderView(title: AppString.dashboard.val),
         CustomSizedBox(height: DBL.twenty.val),
-        _detailsCardView(),
-        CustomSizedBox(height: DBL.twenty.val),
-        HeaderView(title: AppString.totalServiceCompleted.val),
-        CustomSizedBox(height: DBL.twenty.val),
-        LineChartWidget(),
-        CustomSizedBox(height: DBL.twenty.val),
         Wrap(
           children: [
-            AlertList(),
-            Responsive.isWeb(context)
-                ? CustomSizedBox(width: DBL.twenty.val)
-                : CustomSizedBox(height: DBL.threeHundred.val),
-            PieChartPage(),
-            Responsive.isWeb(context)
-                ? CustomSizedBox(width: DBL.twenty.val)
-                : CustomSizedBox(height: DBL.threeHundred.val),
-            Column(
-              children: [
-                _newCareAmbassadorOnboarded(
-                    "New Care Ambassadors Onboarded", "20"),
-                CustomSizedBox(height: DBL.twenty.val),
-                _newCareAmbassadorOnboarded("Service Completed", "365")
-              ],
-            )
+            _detailsCardView(),
+            CustomSizedBox(width: DBL.twenty.val),
+            CustomSizedBox(height: DBL.twenty.val),
+            AlertList()
           ],
-        )
+        ),
+        CustomSizedBox(height: DBL.ten.val),
+        // CustomSizedBox(height: DBL.ten.val),
+        Wrap(
+          children: [
+            BarChartWidget(),
+            Responsive.isWeb(context)
+                ? CustomSizedBox(width: DBL.ten.val)
+                : CustomSizedBox(height: DBL.twenty.val),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Responsive.isWeb(context)
+                    ? CustomSizedBox()
+                    : CustomSizedBox(height: DBL.twenty.val),
+                PieChartPage(),
+                Responsive.isWeb(context)
+                    ? CustomSizedBox(height: DBL.twenty.val)
+                    : CustomSizedBox(height: DBL.twenty.val),
+                Wrap(
+                  alignment: WrapAlignment.start,
+                  children: [
+                    _newCareAmbassadorOnboarded(
+                        "New Care Ambassadors\n Onboarded", "20"),
+                    CustomSizedBox(width: DBL.twenty.val),
+                    CustomSizedBox(height: DBL.twenty.val),
+                    _newCareAmbassadorOnboarded("Service Completed", "365")
+                  ],
+                )
+              ],
+            ),
+          ],
+        ),
+        CustomSizedBox(height: DBL.twenty.val),
       ],
     );
   }
 
   _detailsCardView() {
     return CustomSizedBox(
-      height: DBL.oneTwenty.val,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
+      height: 250,
+      width: 500,
+      child: GridView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          childAspectRatio: 2,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          crossAxisCount: 2,
+        ),
         itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: DBL.fifteen.val),
+          return InkWell(
+            onTap: () {
+              if (index == 2) {
+                autoTabRouter!.setActiveIndex(3);
+              }
+              if (index == 3) {
+                autoTabRouter!.setActiveIndex(1);
+              }
+            },
             child: Card(
               elevation: DBL.ten.val,
               child: CustomSizedBox(
-                width: Responsive.isWeb(context)
-                    ? DBL.twoEighty.val
-                    : DBL.oneEighty.val,
+                width: Responsive.isWeb(context) ? DBL.ten.val : DBL.six.val,
                 height: DBL.oneTwenty.val,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: 50.0,
-                      height: 50.0,
+                      width: 75.0,
+                      height: 75.0,
                       decoration: BoxDecoration(
                         color: AppColor.dashboardSymbolBackground.val,
                         shape: BoxShape.circle,
@@ -171,9 +199,9 @@ class _DashboardPageState extends State<DashboardPage> {
   _newCareAmbassadorOnboarded(String title, String count) {
     return Container(
       color: Colors.white,
-      height: MediaQuery.of(context).size.height * .188,
+      height: MediaQuery.of(context).size.height * .175,
       width: Responsive.isWeb(context)
-          ? MediaQuery.of(context).size.width * .18
+          ? MediaQuery.of(context).size.width * .154
           : MediaQuery.of(context).size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -195,143 +223,9 @@ class _DashboardPageState extends State<DashboardPage> {
               fontWeight: FW.w500.val,
               color: AppColor.label.val,
             ),
+            textAlign: TextAlign.center,
           ),
           CustomSizedBox(height: DBL.ten.val),
-          Container(
-            alignment: Alignment.bottomLeft,
-            margin: EdgeInsets.only(right: DBL.twenty.val),
-            height: MediaQuery.of(context).size.height * 0.6,
-            child: LineChart(
-              LineChartData(
-                lineTouchData:
-                    LineTouchData(touchTooltipData: LineTouchTooltipData(
-                  getTooltipItems: (touchedSpots) {
-                    return touchedSpots.map((LineBarSpot touchedSpot) {
-                      final textStyle = TextStyle(
-                        color: AppColor.white.val,
-                        fontWeight: FW.bold.val,
-                      );
-                      return LineTooltipItem(
-                          touchedSpot.y.toString(), textStyle);
-                    }).toList();
-                  },
-                )),
-                minX: 1,
-                maxX: 12,
-                minY: 0,
-                maxY: 600,
-                backgroundColor: Colors.white,
-                borderData: FlBorderData(
-                  show: true,
-                  border: Border(
-                    left: BorderSide(
-                        width: DBL.two.val, color: AppColor.offWhite.val),
-                    bottom: BorderSide(
-                        width: DBL.two.val, color: AppColor.offWhite.val),
-                  ),
-                ),
-                gridData: FlGridData(
-                    show: true,
-                    verticalInterval: 1,
-                    horizontalInterval: 100,
-                    getDrawingVerticalLine: (val) {
-                      return FlLine(
-                          color: AppColor.offWhite.val,
-                          strokeWidth: DBL.one.val);
-                    },
-                    getDrawingHorizontalLine: (val) {
-                      return FlLine(
-                          color: AppColor.offWhite.val,
-                          strokeWidth: DBL.one.val);
-                    }),
-                titlesData: FlTitlesData(
-                  bottomTitles: AxisTitles(
-                    axisNameSize: 30,
-                    axisNameWidget: CustomText(
-                      "Month",
-                      style: TS().gRoboto(
-                          fontSize: FS.font16.val,
-                          fontWeight: FW.w500.val,
-                          color: AppColor.label8.val),
-                    ),
-                    sideTitles: SideTitles(
-                      reservedSize: 40,
-                      showTitles: true,
-                      interval: 1,
-                      getTitlesWidget: (num, title) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 10.0),
-                          child: CustomText(
-                            yearList[num.toInt() - 1],
-                            style: TS().gRoboto(
-                                fontSize: FS.font13.val,
-                                color: AppColor.label.val,
-                                fontWeight: FW.w500.val),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  rightTitles:
-                      AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                  topTitles:
-                      AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                  leftTitles: AxisTitles(
-                    axisNameSize: 40,
-                    axisNameWidget: CustomText(
-                      "Total Services",
-                      style: TS().gRoboto(
-                          fontSize: FS.font16.val,
-                          fontWeight: FW.w500.val,
-                          color: AppColor.label8.val),
-                    ),
-                    sideTitles: SideTitles(
-                      showTitles: true,
-                      interval: 100,
-                      reservedSize: 30,
-                      getTitlesWidget: (num, title) {
-                        return Text(
-                          num.toString(),
-                          style: TS().gRoboto(
-                              fontSize: FS.font13.val,
-                              color: AppColor.label.val,
-                              fontWeight: FW.w500.val),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-                lineBarsData: [
-                  LineChartBarData(
-                    spots: [
-                      FlSpot(1, 10),
-                      FlSpot(2, 100),
-                      FlSpot(3, 220),
-                      FlSpot(4, 300),
-                      FlSpot(6.5, 350),
-                      FlSpot(6.8, 150),
-                      FlSpot(7, 200),
-                      FlSpot(8, 400),
-                      FlSpot(9, 250),
-
-                      // Add more spots for other months
-                    ],
-                    isCurved: false,
-                    barWidth: 10,
-                    isStrokeCapRound: true,
-                    isStrokeJoinRound: false,
-                    gradient: LinearGradient(colors: [
-                      AppColor.primaryColor.val.withOpacity(0.2),
-                      AppColor.primaryColor.val.withOpacity(0.4),
-                      AppColor.primaryColor.val.withOpacity(0.6),
-                      AppColor.primaryColor.val
-                    ]),
-                    dotData: FlDotData(show: false),
-                  ),
-                ],
-              ),
-            ),
-          ),
         ],
       ),
     );
