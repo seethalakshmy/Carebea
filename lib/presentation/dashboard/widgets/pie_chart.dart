@@ -111,7 +111,7 @@ class PieChartPageState extends State {
               children: [
                 Icon(
                   Icons.arrow_upward,
-                  size: 10,
+                  size: 12,
                   color: AppColor.green.val,
                 ),
                 CustomText(
@@ -136,10 +136,11 @@ class PieChartPageState extends State {
               height: 18,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * .05,
-                ),
+                // SizedBox(
+                //   width: MediaQuery.of(context).size.width * .05,
+                // ),
                 Indicator(
                   color: AppColor.pieChartColor.val,
                   text: 'New clients 56',

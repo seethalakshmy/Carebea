@@ -1,4 +1,7 @@
+import 'package:admin_580_tech/application/bloc/dashboard/dashboard_bloc.dart';
+import 'package:admin_580_tech/infrastructure/dashboard/dashboard_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../core/enum.dart';
@@ -71,28 +74,35 @@ class _DashBoardDatePickerWidgetState extends State<DashBoardDatePickerWidget> {
         child: CustomSizedBox(
           width: 150,
           height: 48,
-          child: CTextField(
-            hintText: Utility.detailDate(DateTime.now()),
-            hintStyle: TS().gRoboto(
-                fontWeight: FW.w400.val,
-                color: AppColor.label.val,
-                fontSize: FS.font16.val),
-            controller: widget.dateController,
-            onTap: () {},
-            onChanged: (val) {},
-            textInputAction: TextInputAction.next,
-            keyBoardType: TextInputType.text,
-            prefixIcon: CustomContainer(
-              alignment: Alignment.center,
-              width: 30,
-              height: 30,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SVGText(
-                  path: IMG.calender.val,
-                  name: "",
-                ),
-              ),
+          child: BlocProvider(
+            create: (context) => DashboardBloc(DashboardRepository()),
+            child: BlocBuilder<DashboardBloc, DashboardState>(
+              builder: (context, state) {
+                return CTextField(
+                  hintText: Utility.detailDate(DateTime.now()),
+                  hintStyle: TS().gRoboto(
+                      fontWeight: FW.w400.val,
+                      color: AppColor.label.val,
+                      fontSize: FS.font16.val),
+                  controller: widget.dateController,
+                  onTap: () {},
+                  onChanged: (val) {},
+                  textInputAction: TextInputAction.next,
+                  keyBoardType: TextInputType.text,
+                  prefixIcon: CustomContainer(
+                    alignment: Alignment.center,
+                    width: 30,
+                    height: 30,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SVGText(
+                        path: IMG.calender.val,
+                        name: "",
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ),

@@ -67,10 +67,10 @@ class _DashboardPageState extends State<DashboardPage> {
         HeaderView(title: AppString.dashboard.val),
         CustomSizedBox(height: DBL.twenty.val),
         Wrap(
+          runSpacing: 10,
           children: [
             _detailsCardView(),
             CustomSizedBox(width: DBL.twenty.val),
-            CustomSizedBox(height: DBL.twenty.val),
             AlertList()
           ],
         ),
@@ -199,7 +199,7 @@ class _DashboardPageState extends State<DashboardPage> {
   _newCareAmbassadorOnboarded(String title, String count) {
     return Container(
       color: Colors.white,
-      height: MediaQuery.of(context).size.height * .175,
+      height: MediaQuery.of(context).size.height * .19,
       width: Responsive.isWeb(context)
           ? MediaQuery.of(context).size.width * .154
           : MediaQuery.of(context).size.width,
