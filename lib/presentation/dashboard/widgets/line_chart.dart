@@ -118,6 +118,10 @@ class BarChartWidgetState extends State<BarChartWidget> {
                 Utility.detailDate(DateTime(pastYear.year, 1, 1));
             endDateController.text =
                 Utility.detailDate(DateTime(pastYear.year, 12, 31));
+          } else if (dashboardBloc.state.filterId == 3) {
+            endDateController.text = Utility.detailDate(DateTime.now());
+            var startDate = DateTime.now().subtract(Duration(days: 7));
+            startDateController.text = Utility.detailDate(startDate);
           }
 
           return Column(
@@ -153,11 +157,15 @@ class BarChartWidgetState extends State<BarChartWidget> {
                           : CustomSizedBox(
                               height: 50,
                             ),
-                      DashBoardDatePickerWidget(
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime(3000),
-                        dateController: startDateController,
+                      BlocBuilder<DashboardBloc, DashboardState>(
+                        builder: (context, state) {
+                          return DashBoardDatePickerWidget(
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime.now(),
+                            lastDate: DateTime(3000),
+                            dateController: startDateController,
+                          );
+                        },
                       ),
                       CustomSizedBox(
                         width: 10,

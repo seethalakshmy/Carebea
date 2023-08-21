@@ -24,9 +24,10 @@ class _AlertListState extends State<AlertList> {
     "Care Ambassador\n Complaints",
     "Missed Scheduled\n Shifts",
     "Client Cancelled\n Shifts",
-    "Care Ambassador\n Cancelled Shifts"
+    "Care Ambassador\n Cancelled Shifts",
+    ""
   ];
-  List countList = ['10', '15', "2", "7", "1"];
+  List countList = ['10', '15', "2", "7", "1", ""];
   List icons = [
     IMG.clientComplaints.val,
     IMG.careComplaints.val,
