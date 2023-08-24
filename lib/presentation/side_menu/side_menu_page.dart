@@ -466,7 +466,7 @@ class _MenuBarState extends State<SideMenuPage> {
 
   final List<PageRouteInfo<dynamic>> _routes = [
     DashboardRoute(),
-    CareGiversRoute(tab: null),
+    CareGiversRoute(),
     CareGiverDetailRoute(),
     UserManagementRoute(),
     UserManagementDetailRoute(),
