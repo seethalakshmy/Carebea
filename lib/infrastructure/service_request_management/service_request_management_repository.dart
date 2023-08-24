@@ -9,6 +9,7 @@ import 'package:dio/dio.dart';
 
 import '../../core/custom_debugger.dart';
 import '../../core/enum.dart';
+import '../../domain/caregiver_profile/model/caregiver_profile_response.dart';
 import '../../domain/core/api_client.dart';
 import '../../domain/service_request_management/model/reschedule_response.dart';
 
@@ -32,6 +33,25 @@ class ServiceRequestManagementRepository
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, CaregiverProfileResponse>> getCareGiverProfile(
+      {required String userID, required String adminId}) async {
+    try {
+      var res = await _apiClient.getCareGiverProfile("", userID, adminId);
+      return Right(res);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverDetailRepository: ${e.message}");
       if (e.message.contains("SocketException")) {
         CustomLog.log("reached here..");
         return Left(ClientFailure(

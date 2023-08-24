@@ -60,7 +60,9 @@ class CareGiverProfileBloc
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
         add(CareGiverProfileEvent.getCareGiverProfile(
-            userId: event.userId, adminId: event.adminId));
+            userId: event.userId,
+            adminId: event.adminId,
+            context: event.context));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
@@ -88,7 +90,9 @@ class CareGiverProfileBloc
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
         // autoTabRouter?.navigate(CareGiversRoute());
         add(CareGiverProfileEvent.getCareGiverProfile(
-            userId: event.userId, adminId: event.adminId));
+            userId: event.userId,
+            adminId: event.adminId,
+            context: event.context));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }

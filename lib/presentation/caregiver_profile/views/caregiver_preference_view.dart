@@ -25,14 +25,14 @@ class CareGiverPreferenceView extends StatelessWidget {
         child: Column(
           children: [
             RowColonCombo.threeEighty(
-                label: AppString.howManyExperience.val,
+                label: AppString.yearOfExperience.val,
                 value: preference?.experience ?? "",
                 fontSize: FS.font13PointFive.val),
             CustomSizedBox(
               height: DBL.twenty.val,
             ),
             RowColonCombo.threeEighty(
-                label: AppString.serveClientsWithPets.val,
+                label: AppString.willingToWorkWithPets.val,
                 value: preference?.serveWithPets ?? "",
                 fontSize: FS.font13PointFive.val),
             CustomSizedBox(
@@ -46,14 +46,14 @@ class CareGiverPreferenceView extends StatelessWidget {
               height: DBL.twenty.val,
             ),
             RowColonCombo.threeEighty(
-                label: AppString.serveHomeWithSmoker.val,
+                label: AppString.willingToServeWithSmoker.val,
                 value: preference?.serveHomeWithSmoker ?? "",
                 fontSize: FS.font13PointFive.val),
             CustomSizedBox(
               height: DBL.fourteen.val,
             ),
             RowColonCombo.threeEighty(
-                label: AppString.languagesKnown.val,
+                label: AppString.knownLanguage.val,
                 value: preference?.languages != null
                     ? preference!.languages!.join(",")
                     : "",
@@ -62,7 +62,7 @@ class CareGiverPreferenceView extends StatelessWidget {
               height: DBL.fourteen.val,
             ),
             RowColonCombo.threeEighty(
-                label: AppString.provideTransportationOrRunErrands.val,
+                label: AppString.willingToProvideTransportation.val,
                 value: preference?.provideTranspotationOrRunErrands ?? "",
                 fontSize: FS.font13PointFive.val),
             CustomSizedBox(

@@ -3,6 +3,7 @@ import 'package:admin_580_tech/domain/service_request_management/model/assign_ca
 import 'package:admin_580_tech/domain/service_request_management/model/reschedule_params.dart';
 import 'package:dartz/dartz.dart';
 
+import '../caregiver_profile/model/caregiver_profile_response.dart';
 import '../core/api_error_handler/api_error_handler.dart';
 import 'model/reschedule_response.dart';
 import 'model/service_request_response.dart';
@@ -13,6 +14,9 @@ abstract class IServiceRequestManagementRepo {
       required int limit,
       required String userId,
       required int filterId});
+
+  Future<Either<ApiErrorHandler, CaregiverProfileResponse>> getCareGiverProfile(
+      {required String userID, required String adminId});
 
   Future<Either<ApiErrorHandler, ServiceRequestResponse>> getCompletedRequests({
     required int page,

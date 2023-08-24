@@ -19,6 +19,11 @@ enum AppString {
   userProfile("User Profile"),
   backToDashBoard("Back to Dashboard"),
   emailAddress("Email Address"),
+  category("Category"),
+  createdDate("Created Date"),
+  repliedOn('Replied On'),
+  title('Title'),
+  description('Description'),
   email("Email"),
   basicServices("Basic Services"),
   specialServices("Special Services"),
@@ -239,12 +244,16 @@ enum AppString {
   takenDate("Taken Date"),
   result("Result"),
   howManyExperience("How many years of experience do you have?"),
+  yearOfExperience("Year of experience"),
   serveClientsWithPets("Are you willing to serve clients with pets?"),
+  willingToWorkWithPets("Willing to work with clients who have pets"),
   languagesKnown("Languages known"),
+  knownLanguage("Known languages"),
   chooseLanguages("Choose languages"),
   searchLanguages("Search languages"),
   done("Done"),
   serveHomeWithSmoker("Are you able to serve a home with a smoker?"),
+  willingToServeWithSmoker("Willing to serve with smoker"),
   haveAnAppointment("Have an appointment"),
   viewDetails("View Details"),
   view("View"),
@@ -253,6 +262,7 @@ enum AppString {
   delete("Delete"),
   provideTransportationOrRunErrands(
       "Are you willing to provide transportation or run errands in your vehicle"),
+  willingToProvideTransportation("Willing to provide transportation"),
   createNew("Create New"),
   basicDetails("Basic Details"),
   dateOfBirth("Date of Birth"),
@@ -303,6 +313,7 @@ enum AppString {
   trainingStarted("Training Started"),
   interviewStarted("Interview Started"),
   interviewCompleted("Interview Completed"),
+  verified("Verified"),
   interviewFailed("Interview Failed"),
   backgroundRejected("Background Verification Rejected"),
   certificateRejected("Certificate Verification Rejected"),
@@ -366,6 +377,8 @@ enum AppString {
   emptyProfilePic("Please select your profile picture"),
   errorUploadingFile("Error uploading file, Please try again"),
   serviceRequestManagement("Service Request Management"),
+  supportTickets("Complaints"),
+  supportTicketsDetails("Complaints Details"),
   pleaseSelectPets("Please select the pets"),
   pleaseSelectLanguages("Please select the languages"),
   pendingServices("Pending Services"),
@@ -504,6 +517,8 @@ enum AppColor {
   lightRed(Color(0xfffceff1)),
   mediumRed(Color(0xfff06f81)),
   starFillColor(Color(0xffEB9C02)),
+  pieChartColor(Color(0xff586EFF)),
+  dashboardSymbolBackground(Color(0xffECF3FB)),
   transparent(Colors.transparent);
 
   final Color val;
@@ -557,7 +572,16 @@ enum IMG {
   blackLogoPng("assets/images/black_logo.png"),
   careGiver("assets/images/caregiver.png"),
   person("assets/images/ic_person.png"),
-  profile("assets/images/profile.png");
+  profile("assets/images/profile.png"),
+  clientComplaints("assets/images/client_complaints.png"),
+  careCancelledShifts("assets/images/care_cancelled.png"),
+  careComplaints("assets/images/care_complaint.png"),
+  clientCancelledShifts("assets/images/client_cancelled.png"),
+  scheduledShifts("assets/images/missed_schedule.png"),
+  clients("assets/images/clients.png"),
+  dollar("assets/images/dollar-sign.png"),
+  careAmbassadors("assets/images/care_ambassadors.png"),
+  dashBoardClock("assets/images/hours.png");
 
   final String val;
 

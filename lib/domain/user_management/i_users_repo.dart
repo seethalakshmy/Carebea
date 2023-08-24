@@ -4,8 +4,7 @@ import 'package:dartz/dartz.dart';
 
 import 'model/user_response.dart';
 
-
-abstract class IUsersRepo {
-  Future<Either<ApiErrorHandler,UserResponse>> getUsers(
+abstract class IUserRepo {
+  Future<Either<ApiErrorHandler, UserResponse>> getUsers(
       {required int page, required int limit});
 }

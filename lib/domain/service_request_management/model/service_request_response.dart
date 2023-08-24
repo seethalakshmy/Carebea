@@ -54,12 +54,12 @@ String dataToJson(Data data) => json.encode(data.toJson());
 
 class Data {
   Data({
-    List<Services>? services,
+    List<ServiceList>? service,
     num? totalCount,
     num? offset,
     num? actualLimit,
   }) {
-    _services = services;
+    _service = service;
     _totalCount = totalCount;
     _offset = offset;
     _actualLimit = actualLimit;
@@ -67,40 +67,40 @@ class Data {
 
   Data.fromJson(dynamic json) {
     if (json['services'] != null) {
-      _services = [];
+      _service = [];
       json['services'].forEach((v) {
-        _services?.add(Services.fromJson(v));
+        _service?.add(ServiceList.fromJson(v));
       });
     }
     _totalCount = json['totalCount'];
     _offset = json['offset'];
     _actualLimit = json['actualLimit'];
   }
-  List<Services>? _services;
+  List<ServiceList>? _service;
   num? _totalCount;
   num? _offset;
   num? _actualLimit;
   Data copyWith({
-    List<Services>? services,
+    List<ServiceList>? service,
     num? totalCount,
     num? offset,
     num? actualLimit,
   }) =>
       Data(
-        services: services ?? _services,
+        service: service ?? _service,
         totalCount: totalCount ?? _totalCount,
         offset: offset ?? _offset,
         actualLimit: actualLimit ?? _actualLimit,
       );
-  List<Services>? get services => _services;
+  List<ServiceList>? get service => _service;
   num? get totalCount => _totalCount;
   num? get offset => _offset;
   num? get actualLimit => _actualLimit;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    if (_services != null) {
-      map['services'] = _services?.map((v) => v.toJson()).toList();
+    if (_service != null) {
+      map['services'] = _service?.map((v) => v.toJson()).toList();
     }
     map['totalCount'] = _totalCount;
     map['offset'] = _offset;
@@ -109,11 +109,12 @@ class Data {
   }
 }
 
-Services servicesFromJson(String str) => Services.fromJson(json.decode(str));
-String servicesToJson(Services data) => json.encode(data.toJson());
+ServiceList servicesFromJson(String str) =>
+    ServiceList.fromJson(json.decode(str));
+String servicesToJson(ServiceList data) => json.encode(data.toJson());
 
-class Services {
-  Services({
+class ServiceList {
+  ServiceList({
     String? id,
     String? serviceId,
     String? service,
@@ -173,7 +174,7 @@ class Services {
     _isOngoing = isOngoing;
   }
 
-  Services.fromJson(dynamic json) {
+  ServiceList.fromJson(dynamic json) {
     _id = json['id'];
     _serviceId = json['serviceId'];
     _service = json['service'];
@@ -259,7 +260,7 @@ class Services {
   int? _genderPreference;
   SelectedServices? _selectedServices;
 
-  Services copyWith({
+  ServiceList copyWith({
     String? id,
     String? serviceId,
     String? service,
@@ -289,7 +290,7 @@ class Services {
     Client? client,
     bool? isOngoing,
   }) =>
-      Services(
+      ServiceList(
         id: id ?? _id,
         serviceId: serviceId ?? _serviceId,
         service: service ?? _service,

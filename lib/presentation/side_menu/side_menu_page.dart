@@ -13,6 +13,7 @@ import 'package:admin_580_tech/presentation/admins/admins_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/caregiver_verification_page.dart';
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
+import 'package:admin_580_tech/presentation/help_and_support/help_and_support_page.dart';
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
 import 'package:admin_580_tech/presentation/roles/role_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
@@ -29,6 +30,7 @@ import '../caregiver_detail/caregiver_detail_page.dart';
 import '../caregivers/caregivers_page.dart';
 import '../role_creation/role_creation_page.dart';
 import '../service_request_management/service_request_management_page.dart';
+import '../support_tickets_detail/support_tickets_detail_page.dart';
 import '../transaction_management/transaction_management_page.dart';
 import '../user_management/user_management_page.dart';
 import '../user_mangement_detail/user_managemet_detail_page.dart';
@@ -62,6 +64,7 @@ class _MenuBarState extends State<SideMenuPage> {
       AppString.userManagement.val: "",
       AppString.transactionManagement.val: "",
       AppString.serviceRequestManagement.val: "",
+      AppString.supportTickets.val: ""
     };
     // if (!sharedPreffUtil.getViewRole) {
     //   mainData.remove(AppString.roleManagement.val);
@@ -480,6 +483,8 @@ class _MenuBarState extends State<SideMenuPage> {
     AdminsRoute(),
     AdminCreationRoute(),
     ServiceRequestManagementRoute(),
+    HelpAndSupportRoute(),
+    SupportTicketsDetailRoute()
   ];
 
   int getRouteIndex(String route) {
@@ -512,8 +517,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return 13;
     } else if (route == AppString.serviceRequestManagement.val) {
       return 14;
-    } else if (route == AppString.serviceDetails.val) {
+    } else if (route == AppString.supportTickets.val) {
       return 15;
+    } else if (route == AppString.supportTicketsDetails.val) {
+      return 16;
     } else {
       return 0;
     }
@@ -549,6 +556,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return const AdminCreationPage();
     } else if (index == 14) {
       return const ServiceRequestManagementPage();
+    } else if (index == 15) {
+      return const HelpAndSupportPage();
+    } else if (index == 16) {
+      return const SupportTicketsDetailPage();
     } else {
       return const DashboardPage();
     }

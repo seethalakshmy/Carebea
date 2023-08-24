@@ -22,6 +22,7 @@ class CTextField extends StatelessWidget {
     this.changeColor,
     this.onIconTap,
     this.suffixIcon,
+    this.prefixIcon,
     this.validator,
     this.maxLength,
     this.textColor,
@@ -52,6 +53,7 @@ class CTextField extends StatelessWidget {
   final bool? changeColor;
   final void Function()? onIconTap;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
   final String? Function(String?)? validator;
   final int? maxLength;
   final Color? textColor;
@@ -99,6 +101,7 @@ class CTextField extends StatelessWidget {
             filled: true,
             fillColor: fillColor ?? AppColor.white.val,
             suffixIcon: suffixIcon,
+            prefixIcon: prefixIcon,
             isDense: true,
             errorText: errorText,
             errorStyle: TS().gPoppins(

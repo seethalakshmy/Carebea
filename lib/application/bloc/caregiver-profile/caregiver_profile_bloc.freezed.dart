@@ -18,9 +18,11 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CareGiverProfileEvent {
   String get userId => throw _privateConstructorUsedError;
   String get adminId => throw _privateConstructorUsedError;
+  BuildContext get context => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, String adminId)
+    required TResult Function(
+            String userId, String adminId, BuildContext context)
         getCareGiverProfile,
     required TResult Function(
             String userId, String adminId, bool status, BuildContext context)
@@ -32,7 +34,8 @@ mixin _$CareGiverProfileEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, String adminId)? getCareGiverProfile,
+    TResult? Function(String userId, String adminId, BuildContext context)?
+        getCareGiverProfile,
     TResult? Function(
             String userId, String adminId, bool status, BuildContext context)?
         careGiverTrainingVerify,
@@ -43,7 +46,8 @@ mixin _$CareGiverProfileEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, String adminId)? getCareGiverProfile,
+    TResult Function(String userId, String adminId, BuildContext context)?
+        getCareGiverProfile,
     TResult Function(
             String userId, String adminId, bool status, BuildContext context)?
         careGiverTrainingVerify,
@@ -90,7 +94,7 @@ abstract class $CareGiverProfileEventCopyWith<$Res> {
           $Res Function(CareGiverProfileEvent) then) =
       _$CareGiverProfileEventCopyWithImpl<$Res, CareGiverProfileEvent>;
   @useResult
-  $Res call({String userId, String adminId});
+  $Res call({String userId, String adminId, BuildContext context});
 }
 
 /// @nodoc
@@ -109,6 +113,7 @@ class _$CareGiverProfileEventCopyWithImpl<$Res,
   $Res call({
     Object? userId = null,
     Object? adminId = null,
+    Object? context = null,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -119,6 +124,10 @@ class _$CareGiverProfileEventCopyWithImpl<$Res,
           ? _value.adminId
           : adminId // ignore: cast_nullable_to_non_nullable
               as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ) as $Val);
   }
 }
@@ -131,7 +140,7 @@ abstract class _$$_GetCareGiverProfileCopyWith<$Res>
       __$$_GetCareGiverProfileCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String userId, String adminId});
+  $Res call({String userId, String adminId, BuildContext context});
 }
 
 /// @nodoc
@@ -147,6 +156,7 @@ class __$$_GetCareGiverProfileCopyWithImpl<$Res>
   $Res call({
     Object? userId = null,
     Object? adminId = null,
+    Object? context = null,
   }) {
     return _then(_$_GetCareGiverProfile(
       userId: null == userId
@@ -157,6 +167,10 @@ class __$$_GetCareGiverProfileCopyWithImpl<$Res>
           ? _value.adminId
           : adminId // ignore: cast_nullable_to_non_nullable
               as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ));
   }
 }
@@ -164,16 +178,19 @@ class __$$_GetCareGiverProfileCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_GetCareGiverProfile implements _GetCareGiverProfile {
-  const _$_GetCareGiverProfile({required this.userId, required this.adminId});
+  const _$_GetCareGiverProfile(
+      {required this.userId, required this.adminId, required this.context});
 
   @override
   final String userId;
   @override
   final String adminId;
+  @override
+  final BuildContext context;
 
   @override
   String toString() {
-    return 'CareGiverProfileEvent.getCareGiverProfile(userId: $userId, adminId: $adminId)';
+    return 'CareGiverProfileEvent.getCareGiverProfile(userId: $userId, adminId: $adminId, context: $context)';
   }
 
   @override
@@ -182,11 +199,12 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
         (other.runtimeType == runtimeType &&
             other is _$_GetCareGiverProfile &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.adminId, adminId) || other.adminId == adminId));
+            (identical(other.adminId, adminId) || other.adminId == adminId) &&
+            (identical(other.context, context) || other.context == context));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId, adminId);
+  int get hashCode => Object.hash(runtimeType, userId, adminId, context);
 
   @JsonKey(ignore: true)
   @override
@@ -198,7 +216,8 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, String adminId)
+    required TResult Function(
+            String userId, String adminId, BuildContext context)
         getCareGiverProfile,
     required TResult Function(
             String userId, String adminId, bool status, BuildContext context)
@@ -207,13 +226,14 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
             String userId, String adminId, bool status, BuildContext context)
         careGiverInterViewVerify,
   }) {
-    return getCareGiverProfile(userId, adminId);
+    return getCareGiverProfile(userId, adminId, context);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, String adminId)? getCareGiverProfile,
+    TResult? Function(String userId, String adminId, BuildContext context)?
+        getCareGiverProfile,
     TResult? Function(
             String userId, String adminId, bool status, BuildContext context)?
         careGiverTrainingVerify,
@@ -221,13 +241,14 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
             String userId, String adminId, bool status, BuildContext context)?
         careGiverInterViewVerify,
   }) {
-    return getCareGiverProfile?.call(userId, adminId);
+    return getCareGiverProfile?.call(userId, adminId, context);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, String adminId)? getCareGiverProfile,
+    TResult Function(String userId, String adminId, BuildContext context)?
+        getCareGiverProfile,
     TResult Function(
             String userId, String adminId, bool status, BuildContext context)?
         careGiverTrainingVerify,
@@ -237,7 +258,7 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
     required TResult orElse(),
   }) {
     if (getCareGiverProfile != null) {
-      return getCareGiverProfile(userId, adminId);
+      return getCareGiverProfile(userId, adminId, context);
     }
     return orElse();
   }
@@ -283,12 +304,15 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
 abstract class _GetCareGiverProfile implements CareGiverProfileEvent {
   const factory _GetCareGiverProfile(
       {required final String userId,
-      required final String adminId}) = _$_GetCareGiverProfile;
+      required final String adminId,
+      required final BuildContext context}) = _$_GetCareGiverProfile;
 
   @override
   String get userId;
   @override
   String get adminId;
+  @override
+  BuildContext get context;
   @override
   @JsonKey(ignore: true)
   _$$_GetCareGiverProfileCopyWith<_$_GetCareGiverProfile> get copyWith =>
@@ -393,7 +417,8 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, String adminId)
+    required TResult Function(
+            String userId, String adminId, BuildContext context)
         getCareGiverProfile,
     required TResult Function(
             String userId, String adminId, bool status, BuildContext context)
@@ -408,7 +433,8 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, String adminId)? getCareGiverProfile,
+    TResult? Function(String userId, String adminId, BuildContext context)?
+        getCareGiverProfile,
     TResult? Function(
             String userId, String adminId, bool status, BuildContext context)?
         careGiverTrainingVerify,
@@ -422,7 +448,8 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, String adminId)? getCareGiverProfile,
+    TResult Function(String userId, String adminId, BuildContext context)?
+        getCareGiverProfile,
     TResult Function(
             String userId, String adminId, bool status, BuildContext context)?
         careGiverTrainingVerify,
@@ -487,6 +514,7 @@ abstract class _CareGiverTrainingVerify implements CareGiverProfileEvent {
   @override
   String get adminId;
   bool get status;
+  @override
   BuildContext get context;
   @override
   @JsonKey(ignore: true)
@@ -592,7 +620,8 @@ class _$_CareGiverInterViewVerify implements _CareGiverInterViewVerify {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, String adminId)
+    required TResult Function(
+            String userId, String adminId, BuildContext context)
         getCareGiverProfile,
     required TResult Function(
             String userId, String adminId, bool status, BuildContext context)
@@ -607,7 +636,8 @@ class _$_CareGiverInterViewVerify implements _CareGiverInterViewVerify {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, String adminId)? getCareGiverProfile,
+    TResult? Function(String userId, String adminId, BuildContext context)?
+        getCareGiverProfile,
     TResult? Function(
             String userId, String adminId, bool status, BuildContext context)?
         careGiverTrainingVerify,
@@ -621,7 +651,8 @@ class _$_CareGiverInterViewVerify implements _CareGiverInterViewVerify {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, String adminId)? getCareGiverProfile,
+    TResult Function(String userId, String adminId, BuildContext context)?
+        getCareGiverProfile,
     TResult Function(
             String userId, String adminId, bool status, BuildContext context)?
         careGiverTrainingVerify,
@@ -686,6 +717,7 @@ abstract class _CareGiverInterViewVerify implements CareGiverProfileEvent {
   @override
   String get adminId;
   bool get status;
+  @override
   BuildContext get context;
   @override
   @JsonKey(ignore: true)

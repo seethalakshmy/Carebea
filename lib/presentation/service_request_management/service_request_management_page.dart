@@ -36,7 +36,7 @@ class ServiceRequestManagementPage extends StatefulWidget {
 
 class _ServiceRequestManagementPageState
     extends State<ServiceRequestManagementPage> {
-  List<Services> serviceList = [];
+  List<ServiceList> serviceList = [];
 
   final int _limit = 10;
   int _tabType = 1;
