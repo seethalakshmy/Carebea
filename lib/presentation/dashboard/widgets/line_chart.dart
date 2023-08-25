@@ -1,5 +1,7 @@
 import 'package:admin_580_tech/application/bloc/dashboard/dashboard_bloc.dart';
+import 'package:admin_580_tech/domain/dashboard/model/dashboard_response.dart';
 import 'package:admin_580_tech/infrastructure/dashboard/dashboard_repository.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -16,9 +18,18 @@ import '../../widget/custom_dropdown.dart';
 import '../../widget/dashboard_date_picker.dart';
 
 class BarChartWidget extends StatefulWidget {
-  BarChartWidget({super.key});
+  BarChartWidget(
+      {super.key,
+      this.monthlyServiceCount,
+      this.dailyCount,
+      required this.bloc});
+
+  MonthlyServiceCounts? monthlyServiceCount;
+  List? dailyCount;
+  final DashboardBloc bloc;
 
   final Color normal = AppColor.pieChartColor.val;
+  int dropDownValue = 0;
 
   @override
   State<StatefulWidget> createState() => BarChartWidgetState();
@@ -27,48 +38,46 @@ class BarChartWidget extends StatefulWidget {
 class BarChartWidgetState extends State<BarChartWidget> {
   final TextEditingController startDateController = TextEditingController();
   final TextEditingController endDateController = TextEditingController();
-  DashboardBloc dashboardBloc = DashboardBloc(DashboardRepository());
 
   Widget bottomTitles(double value, TitleMeta meta) {
-    print("value $dashboardBloc.state.filterId");
     const style = TextStyle(fontSize: 10);
     String text;
     switch (value.toInt()) {
       case 0:
-        text = dashboardBloc.state.filterId == 3 ? 'Sun' : 'Jan';
+        text = widget.dropDownValue == 3 ? 'Sun' : 'Jan';
         break;
       case 1:
-        text = dashboardBloc.state.filterId == 3 ? 'Mon' : 'Feb';
+        text = widget.dropDownValue == 3 ? 'Mon' : 'Feb';
         break;
       case 2:
-        text = dashboardBloc.state.filterId == 3 ? 'Tue' : 'Mar';
+        text = widget.dropDownValue == 3 ? 'Tue' : 'Mar';
         break;
       case 3:
-        text = dashboardBloc.state.filterId == 3 ? 'Wen' : 'Apr';
+        text = widget.dropDownValue == 3 ? 'Wen' : 'Apr';
         break;
       case 4:
-        text = dashboardBloc.state.filterId == 3 ? 'Thu' : 'May';
+        text = widget.dropDownValue == 3 ? 'Thu' : 'May';
         break;
       case 5:
-        text = dashboardBloc.state.filterId == 3 ? 'Fri' : 'Jun';
+        text = widget.dropDownValue == 3 ? 'Fri' : 'Jun';
         break;
       case 6:
-        text = dashboardBloc.state.filterId == 3 ? 'Sat' : 'Jul';
+        text = widget.dropDownValue == 3 ? 'Sat' : 'Jul';
         break;
       case 7:
-        text = dashboardBloc.state.filterId == 3 ? '' : 'Aug';
+        text = widget.dropDownValue == 3 ? '' : 'Aug';
         break;
       case 8:
-        text = dashboardBloc.state.filterId == 3 ? '' : 'Sep';
+        text = widget.dropDownValue == 3 ? '' : 'Sep';
         break;
       case 9:
-        text = dashboardBloc.state.filterId == 3 ? '' : 'Oct';
+        text = widget.dropDownValue == 3 ? '' : 'Oct';
         break;
       case 10:
-        text = dashboardBloc.state.filterId == 3 ? '' : 'Nov';
+        text = widget.dropDownValue == 3 ? '' : 'Nov';
         break;
       case 11:
-        text = dashboardBloc.state.filterId == 3 ? '' : 'Dec';
+        text = widget.dropDownValue == 3 ? '' : 'Dec';
         break;
       default:
         text = '';
@@ -98,168 +107,149 @@ class BarChartWidgetState extends State<BarChartWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => DashboardBloc(DashboardRepository()),
-      child: BlocBuilder<DashboardBloc, DashboardState>(
-        builder: (context, state) {
-          print('sate ${state.filterId}');
-          print('selected ${dashboardBloc.state.filterId}');
-          print('inside build $dashboardBloc.state.filterId');
-          var now = DateTime.now();
-          if (dashboardBloc.state.filterId == 2) {
-            DateTime(now.year, 1, 1);
-            startDateController.text =
-                Utility.detailDate(DateTime(now.year, 1, 1));
-            endDateController.text =
-                Utility.detailDate(DateTime(now.year, 12, 31));
-          } else if (dashboardBloc.state.filterId == 1) {
-            var pastYear = DateTime(now.year, 1, 1).subtract(Duration(days: 1));
-            startDateController.text =
-                Utility.detailDate(DateTime(pastYear.year, 1, 1));
-            endDateController.text =
-                Utility.detailDate(DateTime(pastYear.year, 12, 31));
-          } else if (dashboardBloc.state.filterId == 3) {
-            endDateController.text = Utility.detailDate(DateTime.now());
-            var startDate = DateTime.now().subtract(Duration(days: 7));
-            startDateController.text = Utility.detailDate(startDate);
-          }
-
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                color: AppColor.white.val,
-                width: Responsive.isWeb(context)
-                    ? MediaQuery.of(context).size.width * .5
-                    : MediaQuery.of(context).size.width,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Wrap(
-                    children: [
-                      CustomText(
-                        AppString.totalServiceCompleted.val,
-                        style: TS().gRoboto(
-                          fontSize: Responsive.isWeb(context)
-                              ? FS.font16.val
-                              : FS.font14.val,
-                          fontWeight: FW.w800.val,
-                          color: AppColor.primaryColor.val,
-                        ),
-                      ),
-                      CustomSizedBox(
-                        width: 50,
-                      ),
-                      _FilterDropDown(context, dashboardBloc),
-                      Responsive.isWeb(context)
-                          ? CustomSizedBox(
-                              width: 10,
-                            )
-                          : CustomSizedBox(
-                              height: 50,
-                            ),
-                      BlocBuilder<DashboardBloc, DashboardState>(
-                        builder: (context, state) {
-                          return DashBoardDatePickerWidget(
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime.now(),
-                            lastDate: DateTime(3000),
-                            dateController: startDateController,
-                          );
-                        },
-                      ),
-                      CustomSizedBox(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          color: AppColor.white.val,
+          width: Responsive.isWeb(context)
+              ? MediaQuery.of(context).size.width * .5
+              : MediaQuery.of(context).size.width,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Wrap(
+              children: [
+                CustomText(
+                  AppString.totalServiceCompleted.val,
+                  style: TS().gRoboto(
+                    fontSize: Responsive.isWeb(context)
+                        ? FS.font16.val
+                        : FS.font14.val,
+                    fontWeight: FW.w800.val,
+                    color: AppColor.primaryColor.val,
+                  ),
+                ),
+                CustomSizedBox(
+                  width: 50,
+                ),
+                BlocBuilder<DashboardBloc, DashboardState>(
+                  builder: (context, state) {
+                    return _FilterDropDown(context, widget.bloc);
+                  },
+                ),
+                Responsive.isWeb(context)
+                    ? CustomSizedBox(
                         width: 10,
-                      ),
-                      DashBoardDatePickerWidget(
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime(3000),
-                        dateController: endDateController,
                       )
-                    ],
-                  ),
+                    : CustomSizedBox(
+                        height: 50,
+                      ),
+                BlocBuilder<DashboardBloc, DashboardState>(
+                  builder: (context, state) {
+                    return DashBoardDatePickerWidget(
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime(3000),
+                      dateController: startDateController,
+                    );
+                  },
                 ),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.53,
-                width: Responsive.isWeb(context)
-                    ? MediaQuery.of(context).size.width * .5
-                    : MediaQuery.of(context).size.width,
-                color: AppColor.white.val,
-                child: AspectRatio(
-                  aspectRatio: 10,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        final barsSpace = 4.0 * constraints.maxWidth / 100;
-                        final barsWidth = 8.0 * constraints.maxWidth / 200;
-                        return BarChart(
-                          BarChartData(
-                            alignment: BarChartAlignment.center,
-                            barTouchData: BarTouchData(
-                              enabled: false,
-                            ),
-                            titlesData: FlTitlesData(
-                              show: true,
-                              bottomTitles: AxisTitles(
-                                sideTitles: SideTitles(
-                                  showTitles: true,
-                                  reservedSize: 28,
-                                  getTitlesWidget: bottomTitles,
-                                ),
-                              ),
-                              leftTitles: AxisTitles(
-                                sideTitles: SideTitles(
-                                  showTitles: true,
-                                  reservedSize: 40,
-                                  getTitlesWidget: leftTitles,
-                                ),
-                              ),
-                              topTitles: AxisTitles(
-                                sideTitles: SideTitles(showTitles: false),
-                              ),
-                              rightTitles: AxisTitles(
-                                sideTitles: SideTitles(showTitles: false),
-                              ),
-                            ),
-                            gridData: FlGridData(
-                              show: true,
-                              checkToShowHorizontalLine: (value) =>
-                                  value % 10 == 0,
-                              getDrawingHorizontalLine: (value) => FlLine(
-                                color: AppColor.borderColor.val,
-                                strokeWidth: 1,
-                              ),
-                              drawVerticalLine: false,
-                            ),
-                            borderData: FlBorderData(
-                              show: false,
-                            ),
-                            groupsSpace: barsSpace,
-                            barGroups: getData(barsWidth, barsSpace),
+                CustomSizedBox(
+                  width: 10,
+                ),
+                DashBoardDatePickerWidget(
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime.now(),
+                  lastDate: DateTime(3000),
+                  dateController: endDateController,
+                )
+              ],
+            ),
+          ),
+        ),
+        Container(
+          height: MediaQuery.of(context).size.height * 0.53,
+          width: Responsive.isWeb(context)
+              ? MediaQuery.of(context).size.width * .5
+              : MediaQuery.of(context).size.width,
+          color: AppColor.white.val,
+          child: AspectRatio(
+            aspectRatio: 10,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final barsSpace = 4.0 * constraints.maxWidth / 100;
+                  final barsWidth = 8.0 * constraints.maxWidth / 200;
+                  return BlocBuilder<DashboardBloc, DashboardState>(
+                    builder: (context, state) {
+                      return BarChart(
+                        BarChartData(
+                          alignment: BarChartAlignment.center,
+                          barTouchData: BarTouchData(
+                            enabled: false,
                           ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
+                          titlesData: FlTitlesData(
+                            show: true,
+                            bottomTitles: AxisTitles(
+                              sideTitles: SideTitles(
+                                showTitles: true,
+                                reservedSize: 28,
+                                getTitlesWidget: bottomTitles,
+                              ),
+                            ),
+                            leftTitles: AxisTitles(
+                              sideTitles: SideTitles(
+                                showTitles: true,
+                                reservedSize: 40,
+                                getTitlesWidget: leftTitles,
+                              ),
+                            ),
+                            topTitles: AxisTitles(
+                              sideTitles: SideTitles(showTitles: false),
+                            ),
+                            rightTitles: AxisTitles(
+                              sideTitles: SideTitles(showTitles: false),
+                            ),
+                          ),
+                          gridData: FlGridData(
+                            show: true,
+                            checkToShowHorizontalLine: (value) =>
+                                value % 10 == 0,
+                            getDrawingHorizontalLine: (value) => FlLine(
+                              color: AppColor.borderColor.val,
+                              strokeWidth: 1,
+                            ),
+                            drawVerticalLine: false,
+                          ),
+                          borderData: FlBorderData(
+                            show: false,
+                          ),
+                          groupsSpace: barsSpace,
+                          barGroups: getData(barsWidth, barsSpace, state),
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
-            ],
-          );
-        },
-      ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
-  List<BarChartGroupData> getData(double barsWidth, double barsSpace) {
+  List<BarChartGroupData> getData(
+      double barsWidth, double barsSpace, DashboardState state) {
+    print('checking for data ${widget.monthlyServiceCount?.dec?.toDouble()}');
     return [
       BarChartGroupData(
         x: 0,
         barsSpace: barsSpace,
         barRods: [
           BarChartRodData(
-            toY: dashboardBloc.state.filterId == 3 ? 10 : 170,
+            toY: widget.monthlyServiceCount!.jan!.toDouble(),
             color: widget.normal,
             borderRadius: BorderRadius.zero,
             width: barsWidth,
@@ -271,7 +261,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
         barsSpace: barsSpace,
         barRods: [
           BarChartRodData(
-            toY: dashboardBloc.state.filterId == 3 ? 20 : 310,
+            toY: widget.monthlyServiceCount!.feb!.toDouble(),
             color: widget.normal,
             borderRadius: BorderRadius.zero,
             width: barsWidth,
@@ -283,7 +273,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
         barsSpace: barsSpace,
         barRods: [
           BarChartRodData(
-            toY: dashboardBloc.state.filterId == 3 ? 40 : 340,
+            toY: widget.monthlyServiceCount!.mar!.toDouble(),
             color: widget.normal,
             borderRadius: BorderRadius.zero,
             width: barsWidth,
@@ -295,7 +285,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
         barsSpace: barsSpace,
         barRods: [
           BarChartRodData(
-            toY: dashboardBloc.state.filterId == 3 ? 12 : 100,
+            toY: widget.monthlyServiceCount!.apr!.toDouble(),
             color: widget.normal,
             borderRadius: BorderRadius.zero,
             width: barsWidth,
@@ -307,7 +297,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
         barsSpace: barsSpace,
         barRods: [
           BarChartRodData(
-            toY: dashboardBloc.state.filterId == 3 ? 23 : 110,
+            toY: widget.monthlyServiceCount!.may!.toDouble(),
             color: widget.normal,
             borderRadius: BorderRadius.zero,
             width: barsWidth,
@@ -319,7 +309,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
         barsSpace: barsSpace,
         barRods: [
           BarChartRodData(
-            toY: dashboardBloc.state.filterId == 3 ? 40 : 100,
+            toY: widget.monthlyServiceCount!.jun!.toDouble(),
             color: widget.normal,
             borderRadius: BorderRadius.zero,
             width: barsWidth,
@@ -331,7 +321,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
         barsSpace: barsSpace,
         barRods: [
           BarChartRodData(
-            toY: dashboardBloc.state.filterId == 3 ? 12 : 190,
+            toY: widget.monthlyServiceCount!.jul!.toDouble(),
             color: widget.normal,
             borderRadius: BorderRadius.zero,
             width: barsWidth,
@@ -343,7 +333,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
         barsSpace: barsSpace,
         barRods: [
           BarChartRodData(
-            toY: dashboardBloc.state.filterId == 3 ? 0 : 160,
+            toY: widget.monthlyServiceCount!.aug!.toDouble(),
             color: widget.normal,
             borderRadius: BorderRadius.zero,
             width: barsWidth,
@@ -355,7 +345,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
         barsSpace: barsSpace,
         barRods: [
           BarChartRodData(
-            toY: dashboardBloc.state.filterId == 3 ? 0 : 130,
+            toY: widget.monthlyServiceCount!.sept!.toDouble(),
             color: widget.normal,
             borderRadius: BorderRadius.zero,
             width: barsWidth,
@@ -367,7 +357,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
         barsSpace: barsSpace,
         barRods: [
           BarChartRodData(
-            toY: dashboardBloc.state.filterId == 3 ? 0 : 150,
+            toY: widget.monthlyServiceCount!.oct!.toDouble(),
             color: widget.normal,
             borderRadius: BorderRadius.zero,
             width: barsWidth,
@@ -379,7 +369,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
         barsSpace: barsSpace,
         barRods: [
           BarChartRodData(
-            toY: dashboardBloc.state.filterId == 3 ? 0 : 140,
+            toY: widget.monthlyServiceCount!.nov!.toDouble(),
             color: widget.normal,
             borderRadius: BorderRadius.zero,
             width: barsWidth,
@@ -391,7 +381,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
         barsSpace: barsSpace,
         barRods: [
           BarChartRodData(
-            toY: dashboardBloc.state.filterId == 3 ? 0 : 120,
+            toY: widget.monthlyServiceCount!.dec!.toDouble(),
             color: widget.normal,
             borderRadius: BorderRadius.zero,
             width: barsWidth,
@@ -406,7 +396,41 @@ class BarChartWidgetState extends State<BarChartWidget> {
     return CustomDropdown<int>(
       onChange: (int value, int index) {
         bloc.add(DashboardEvent.changeAxis(filterId: value));
-        print("checking${dashboardBloc.state.filterId}");
+
+        print('controller value ${startDateController.text}');
+        print('drop down value ${value}');
+        print('drop down value from sate ${bloc.state.filterId}');
+        var now = DateTime.now();
+        if (value == 2) {
+          DateTime(now.year, 1, 1);
+          startDateController.text =
+              Utility.detailDate(DateTime(now.year, 1, 1));
+          endDateController.text =
+              Utility.detailDate(DateTime(now.year, 12, 31));
+        } else if (value == 1) {
+          var pastYear = DateTime(now.year, 1, 1).subtract(Duration(days: 1));
+          startDateController.text =
+              Utility.detailDate(DateTime(pastYear.year, 1, 1));
+          endDateController.text =
+              Utility.detailDate(DateTime(pastYear.year, 12, 31));
+        } else if (value == 3) {
+          endDateController.text = Utility.detailDate(DateTime.now());
+          var startDate = DateTime.now().subtract(Duration(days: 7));
+          startDateController.text = Utility.detailDate(startDate);
+        }
+
+        print("inside dropdown ${bloc.state.filterId}");
+        print("controllervalue ${startDateController.text}");
+
+        bloc.add(DashboardEvent.getDashboard(
+            userId: SharedPreffUtil().getAdminId,
+            year: value == 1
+                ? (DateTime.now().year - 1).toString()
+                : DateTime.now().year.toString(),
+            fromData: startDateController.text,
+            toDate: endDateController.text,
+            isCallAlertApiCall: false));
+        print("checking${widget.monthlyServiceCount?.aug}");
         CustomLog.log(value.toString());
       },
       dropdownButtonStyle: DropdownButtonStyle(

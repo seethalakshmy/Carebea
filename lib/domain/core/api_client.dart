@@ -9,6 +9,8 @@ import 'package:admin_580_tech/domain/caregiver_profile/model/caregiver_profile_
 import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_verification_response.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
 import 'package:admin_580_tech/domain/common_response/common_response.dart';
+import 'package:admin_580_tech/domain/dashboard/model/alert_response.dart';
+import 'package:admin_580_tech/domain/dashboard/model/dashboard_response.dart';
 import 'package:admin_580_tech/domain/login/login_response.dart';
 import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
 import 'package:admin_580_tech/domain/service_request_management/model/reschedule_params.dart';
@@ -244,6 +246,11 @@ abstract class ApiClient {
     @Query("search_term") String searchQuery,
   );
 
+  @GET("/admin/dashboard-alerts?")
+  Future<AlertResponse> getAlerts(
+    @Query("user_id") String userId,
+  );
+
   @GET("/common-data/get-documents")
   Future<DocumentListResponse> getDocumentsList();
 
@@ -449,4 +456,12 @@ abstract class ApiClient {
       @Field('user_id') String userId,
       @Field('service_id') String serviceId,
       @Field('description') String description);
+
+  @POST("/admin/dashboard")
+  Future<DashboardResponse> getDashboardData(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('year') String year,
+      @Field('from_date') String fromDate,
+      @Field('to_date') String toDate);
 }

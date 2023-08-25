@@ -760,6 +760,29 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<AlertResponse> getAlerts(userId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'user_id': userId};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<AlertResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/dashboard-alerts?',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AlertResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<DocumentListResponse> getDocumentsList() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1828,6 +1851,41 @@ class _ApiClient implements ApiClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = CommonResponseUse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DashboardResponse> getDashboardData(
+    token,
+    userId,
+    year,
+    fromDate,
+    toDate,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'year': year,
+      'from_date': fromDate,
+      'to_date': toDate,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<DashboardResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/dashboard',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = DashboardResponse.fromJson(_result.data!);
     return value;
   }
 
