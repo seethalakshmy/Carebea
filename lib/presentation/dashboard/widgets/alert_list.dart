@@ -1,24 +1,23 @@
-import 'package:admin_580_tech/presentation/widget/commonImageview.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:admin_580_tech/application/bloc/dashboard/dashboard_bloc.dart';
+import 'package:admin_580_tech/infrastructure/dashboard/dashboard_repository.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/enum.dart';
 import '../../../core/responsive.dart';
 import '../../../core/text_styles.dart';
 import '../../side_menu/side_menu_page.dart';
-import '../../widget/custom_image.dart';
-import '../../widget/custom_svg.dart';
 import '../../widget/custom_text.dart';
-import '../../widget/header_view.dart';
 
 class AlertList extends StatefulWidget {
-  const AlertList({Key? key}) : super(key: key);
+  const AlertList({Key? key, this.countList}) : super(key: key);
+  final List? countList;
 
   @override
   State<AlertList> createState() => _AlertListState();
 }
 
 class _AlertListState extends State<AlertList> {
+  DashboardBloc bloc = DashboardBloc(DashboardRepository());
   List alertList = [
     'Client\n Compliant',
     "Care Ambassador\n Complaints",
@@ -27,7 +26,8 @@ class _AlertListState extends State<AlertList> {
     "Care Ambassador\n Cancelled Shifts",
     ""
   ];
-  List countList = ['10', '15', "2", "7", "1", ""];
+
+  // List countList = ['15', "2", "7", "1", ""];
   List icons = [
     IMG.clientComplaints.val,
     IMG.careComplaints.val,
@@ -94,7 +94,7 @@ class _AlertListState extends State<AlertList> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CustomText(
-                            countList[index],
+                            widget.countList?[index].toString() ?? '',
                             style: TS().gRoboto(
                               fontSize: Responsive.isWeb(context)
                                   ? FS.font16.val

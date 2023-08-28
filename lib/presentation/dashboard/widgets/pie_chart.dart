@@ -9,17 +9,23 @@ import '../../widget/custom_text.dart';
 import '../indicator_widget.dart';
 
 class PieChartPage extends StatefulWidget {
-  const PieChartPage({super.key});
+  PieChartPage(
+      {super.key, this.totalClient, this.newClients, this.repeatedClients});
+
+  final int? totalClient;
+  final int? newClients;
+  final int? repeatedClients;
 
   @override
   State<StatefulWidget> createState() => PieChartPageState();
 }
 
-class PieChartPageState extends State {
+class PieChartPageState extends State<PieChartPage> {
   int touchedIndex = -1;
 
   @override
   Widget build(BuildContext context) {
+    var tot;
     return Container(
       color: AppColor.white.val,
       height: MediaQuery.of(context).size.height * .4,
@@ -66,7 +72,7 @@ class PieChartPageState extends State {
                             ),
                           ),
                           CustomText(
-                            "156",
+                            widget.totalClient.toString(),
                             style: TS().gRoboto(
                               fontSize: FS.font20.val,
                               fontWeight: FW.w500.val,
@@ -143,7 +149,7 @@ class PieChartPageState extends State {
                 // ),
                 Indicator(
                   color: AppColor.pieChartColor.val,
-                  text: 'New clients 56',
+                  text: 'New clients ${widget.newClients}',
                   isSquare: false,
                   size:
                       Responsive.isWeb(context) ? FS.font12.val : FS.font10.val,
@@ -153,7 +159,7 @@ class PieChartPageState extends State {
                 ),
                 Indicator(
                   color: AppColor.lightGrey.val,
-                  text: 'Repeat clients 70',
+                  text: 'Repeat clients ${widget.repeatedClients}',
                   size:
                       Responsive.isWeb(context) ? FS.font12.val : FS.font10.val,
                   isSquare: false,

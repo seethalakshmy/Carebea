@@ -24,6 +24,7 @@ import '../widget/cached_image.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_data_table_2.dart';
+import '../widget/custom_image.dart';
 import '../widget/custom_selection_area.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_svg.dart';
@@ -70,8 +71,10 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         HeaderView(title: AppString.supportTickets.val),
+        _detailsCardView(),
         CustomSizedBox(height: DBL.twenty.val),
         _reBuildView(),
       ],
@@ -102,6 +105,80 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
                     : _usersView(context, state.response);
           },
         ),
+      ),
+    );
+  }
+
+  List name = [
+    'Care Ambassador issue',
+    "Service Related",
+    'Payment',
+    'Customer Care\nAnd Operations'
+  ];
+  List count = ['10', '20', '22', '1'];
+
+  _detailsCardView() {
+    return CustomSizedBox(
+      height: 100,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        // physics: NeverScrollableScrollPhysics(),
+        // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        //   childAspectRatio: 2,
+        //   mainAxisSpacing: 10,
+        //   crossAxisSpacing: 10,
+        //   crossAxisCount: 2,
+        // ),
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Card(
+              elevation: DBL.ten.val,
+              child: CustomSizedBox(
+                width: Responsive.isWeb(context) ? 310 : 310,
+                height: Responsive.isWeb(context)
+                    ? DBL.ten.val
+                    : DBL.twoHundred.val,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomText(
+                          name[index],
+                          style: TS().gRoboto(
+                            fontSize: Responsive.isWeb(context)
+                                ? FS.font14.val
+                                : FS.font12.val,
+                            fontWeight: FW.w400.val,
+                            color: AppColor.label.val,
+                          ),
+                        ),
+                        CustomText(
+                          count[index],
+                          style: TS().gRoboto(
+                            fontSize: Responsive.isWeb(context)
+                                ? FS.font28.val
+                                : FS.font24.val,
+                            fontWeight: FW.w600.val,
+                            color: AppColor.primaryColor.val,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+        shrinkWrap: true,
+        itemCount: name.length,
       ),
     );
   }

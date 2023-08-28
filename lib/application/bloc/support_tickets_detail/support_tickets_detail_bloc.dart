@@ -5,9 +5,9 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 
-import '../../domain/core/api_error_handler/api_error_handler.dart';
-import '../../domain/support_tickets/model/support_tickets_response.dart';
-import '../../infrastructure/support_tickets_detail/support_tickets_detail_repository.dart';
+import '../../../domain/core/api_error_handler/api_error_handler.dart';
+import '../../../domain/support_tickets/model/support_tickets_response.dart';
+import '../../../infrastructure/support_tickets_detail/support_tickets_detail_repository.dart';
 
 part 'support_tickets_detail_event.dart';
 part 'support_tickets_detail_state.dart';

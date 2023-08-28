@@ -79,6 +79,11 @@ class AppRouter extends $AppRouter {
           path: "support-tickets-details",
           page: SupportTicketsDetailRoute.page,
           maintainState: false),
+      AutoRoute(path: "faq", page: FaqRoute.page, maintainState: false),
+      AutoRoute(
+          path: "faq-creation",
+          page: FaqCreationRoute.page,
+          maintainState: false),
     ]),
   ];
 }
