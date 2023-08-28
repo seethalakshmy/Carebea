@@ -37,6 +37,7 @@ class SharedPreffUtil {
 
   final page = "page";
   final tab = "tab";
+  final year = "year";
 
   static final SharedPreffUtil _instance = SharedPreffUtil._ctor();
 
@@ -78,6 +79,8 @@ class SharedPreffUtil {
   get getAdminId {
     return _prefs?.getString(adminId) ?? "";
   }
+
+  set setYear(String value) {}
 
   set setTokenType(String value) {
     _prefs!.setString(tokenType, value);

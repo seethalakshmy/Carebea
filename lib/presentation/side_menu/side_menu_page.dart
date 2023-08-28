@@ -13,6 +13,7 @@ import 'package:admin_580_tech/presentation/admins/admins_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/caregiver_verification_page.dart';
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
+import 'package:admin_580_tech/presentation/faq_creation/faq_creation_screen.dart';
 import 'package:admin_580_tech/presentation/help_and_support/help_and_support_page.dart';
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
 import 'package:admin_580_tech/presentation/roles/role_page.dart';
@@ -29,6 +30,7 @@ import 'package:flutter/material.dart';
 import '../caregiver_creation/caregiver_creation_page.dart';
 import '../caregiver_detail/caregiver_detail_page.dart';
 import '../caregivers/caregivers_page.dart';
+import '../faq/faq_screen.dart';
 import '../role_creation/role_creation_page.dart';
 import '../service_request_management/service_request_management_page.dart';
 import '../support_tickets_detail/support_tickets_detail_page.dart';
@@ -66,6 +68,7 @@ class _MenuBarState extends State<SideMenuPage> {
       AppString.transactionManagement.val: "",
       AppString.serviceRequestManagement.val: "",
       AppString.supportTickets.val: "",
+      AppString.faq.val: ""
     };
 
     CustomLog.log("Side menu:::Called initial Api Call");
@@ -509,7 +512,9 @@ class _MenuBarState extends State<SideMenuPage> {
     AdminCreationRoute(),
     ServiceRequestManagementRoute(),
     HelpAndSupportRoute(),
-    SupportTicketsDetailRoute()
+    SupportTicketsDetailRoute(),
+    FaqRoute(),
+    FaqCreationRoute()
   ];
 
   int getRouteIndex(String route) {
@@ -546,6 +551,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return 15;
     } else if (route == AppString.supportTicketsDetails.val) {
       return 16;
+    } else if (route == AppString.faq.val) {
+      return 17;
+    } else if (route == AppString.faqCreation.val) {
+      return 18;
     } else {
       return 0;
     }
@@ -585,6 +594,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return const HelpAndSupportPage();
     } else if (index == 16) {
       return const SupportTicketsDetailPage();
+    } else if (index == 17) {
+      return const FaqPage();
+    } else if (index == 18) {
+      return const FaqCreationPage();
     } else {
       return const DashboardPage();
     }

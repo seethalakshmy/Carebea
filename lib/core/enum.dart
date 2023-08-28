@@ -77,6 +77,7 @@ enum AppString {
   firstName("First Name"),
   filter("Filter"),
   lastName("Last Name"),
+  answer("Answer"),
   serviceRequestID("Service Request ID"),
   requestedStartDateTime("Requested Start Date & Time"),
   requestedEndDateTime("Requested End Date & Time"),
@@ -346,7 +347,9 @@ enum AppString {
   emptyRoutingNo("Routing number shouldn't be empty"),
   emptyAcNo("Account number shouldn't be empty"),
   emptyFName("First name shouldn't be empty"),
+  questionError("Question shouldn't be empty"),
   emptyLName("Last name shouldn't be empty"),
+  answerError("Answer shouldn't be empty"),
   emptyPhone("Phone number shouldn't be empty"),
   emptyAbout("Please write something about you"),
   emptyHobbies("Please write something about your hobbies"),
@@ -380,6 +383,7 @@ enum AppString {
   errorUploadingFile("Error uploading file, Please try again"),
   serviceRequestManagement("Service Request Management"),
   supportTickets("Complaints"),
+  faq("Faq"),
   supportTicketsDetails("Complaints Details"),
   pleaseSelectPets("Please select the pets"),
   pleaseSelectLanguages("Please select the languages"),
@@ -396,6 +400,7 @@ enum AppString {
   cancelledBy("Cancelled By"),
   extraFee("Extra Fee"),
   tip("Tip"),
+  question("Questions"),
   proceed("Proceed"),
   enterYourNewDateAndTime("Enter Your New Date & Time"),
   normalServiceRequest("Normal Service Booking"),
@@ -416,7 +421,8 @@ enum AppString {
   agreementChckboxText(
       "I have read and agree to the home health aid agreement"),
   dummyAgreementText(
-      "Gives the care ambassador the right to make healthcare decisions on someone else’s behalf. This is common if the patient is not able to speak for themselves and a care ambassador is assigned the duty of making decisions for the benefit of the patient. This form also includes a living will that allows the patient to make end-of-life decisions if they should be in a state of incapacitation for a longer period of time.");
+      "Gives the care ambassador the right to make healthcare decisions on someone else’s behalf. This is common if the patient is not able to speak for themselves and a care ambassador is assigned the duty of making decisions for the benefit of the patient. This form also includes a living will that allows the patient to make end-of-life decisions if they should be in a state of incapacitation for a longer period of time."),
+  faqCreation("Faq Creation");
 
   final String val;
 

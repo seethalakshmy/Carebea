@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import '../../core/enum.dart';
 import '../../core/text_styles.dart';
 import '../../core/utility.dart';
+import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../caregiver_detail/widgets/svg_text.dart';
 import 'custom_container.dart';
 import 'custom_sizedbox.dart';
@@ -14,19 +15,26 @@ import 'custom_text.dart';
 import 'custom_text_field.dart';
 
 class DashBoardDatePickerWidget extends StatefulWidget {
-  const DashBoardDatePickerWidget(
-      {Key? key,
-      required this.dateController,
-      required this.lastDate,
-      required this.initialDate,
-      required this.firstDate,
-      this.labelSize})
-      : super(key: key);
-  final TextEditingController dateController;
+  const DashBoardDatePickerWidget({
+    Key? key,
+    required this.lastDate,
+    required this.initialDate,
+    required this.firstDate,
+    required this.dateController,
+    required this.dropDownValue,
+    this.labelSize,
+    required this.bloc,
+    required this.onChanged,
+  }) : super(key: key);
   final double? labelSize;
   final DateTime initialDate;
   final DateTime firstDate;
   final DateTime lastDate;
+  final int dropDownValue;
+  final DashboardBloc bloc;
+
+  final TextEditingController dateController;
+  final Function() onChanged;
 
   @override
   State<DashBoardDatePickerWidget> createState() =>
@@ -69,40 +77,34 @@ class _DashBoardDatePickerWidgetState extends State<DashBoardDatePickerWidget> {
         setState(() {
           widget.dateController.text = convertedDate;
         });
+        widget.onChanged();
       },
       child: IgnorePointer(
         child: CustomSizedBox(
           width: 150,
           height: 48,
-          child: BlocProvider(
-            create: (context) => DashboardBloc(DashboardRepository()),
-            child: BlocBuilder<DashboardBloc, DashboardState>(
-              builder: (context, state) {
-                return CTextField(
-                  hintText: Utility.detailDate(DateTime.now()),
-                  hintStyle: TS().gRoboto(
-                      fontWeight: FW.w400.val,
-                      color: AppColor.label.val,
-                      fontSize: FS.font16.val),
-                  controller: widget.dateController,
-                  onTap: () {},
-                  onChanged: (val) {},
-                  textInputAction: TextInputAction.next,
-                  keyBoardType: TextInputType.text,
-                  prefixIcon: CustomContainer(
-                    alignment: Alignment.center,
-                    width: 30,
-                    height: 30,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SVGText(
-                        path: IMG.calender.val,
-                        name: "",
-                      ),
-                    ),
-                  ),
-                );
-              },
+          child: CTextField(
+            hintText: Utility.detailDate(DateTime.now()),
+            hintStyle: TS().gRoboto(
+                fontWeight: FW.w400.val,
+                color: AppColor.label.val,
+                fontSize: FS.font16.val),
+            controller: widget.dateController,
+            onTap: () {},
+            onChanged: (val) {},
+            textInputAction: TextInputAction.next,
+            keyBoardType: TextInputType.text,
+            prefixIcon: CustomContainer(
+              alignment: Alignment.center,
+              width: 30,
+              height: 30,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SVGText(
+                  path: IMG.calender.val,
+                  name: "",
+                ),
+              ),
             ),
           ),
         ),
