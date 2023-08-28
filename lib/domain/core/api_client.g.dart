@@ -307,7 +307,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/admin/caregiver-intervie-verification',
+              '/admin/caregiver-interview-verification',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -908,7 +908,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/super-admin/login',
+              '/admin/login',
               queryParameters: queryParameters,
               data: _data,
             )

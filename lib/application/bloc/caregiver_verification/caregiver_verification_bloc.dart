@@ -36,7 +36,7 @@ class CareGiverVerificationBloc
     on<_CareGiverBackgroundVerify>(_careGiverBackgroundVerify);
     on<_CareGiverCertificateApprove>(_careGiverCertificateApprove);
     on<_CareGiverCertificateReject>(_careGiverCertificateReject);
-    on<_CareGiverTrainingVerify>(_careGiverSendTrainingRequest);
+    on<_CareGiverSendTrainingRequest>(_careGiverSendTrainingRequest);
     on<_NotifyPendingDocument>(_notifyPendingDocument);
     on<_IsSelectedVerificationTab>(_getVerificationSelectedTab);
     on<_IsTappedReason>(_getTappedReason);
@@ -287,7 +287,7 @@ class CareGiverVerificationBloc
     );
   }
 
-  _careGiverSendTrainingRequest(_CareGiverTrainingVerify event,
+  _careGiverSendTrainingRequest(_CareGiverSendTrainingRequest event,
       Emitter<CareGiverVerificationState> emit) async {
     final Either<ApiErrorHandler, VerifyResponse> result =
         await careGiverVerificationRepository.careGiverSendTrainingRequest(
@@ -541,7 +541,7 @@ class CareGiverVerificationBloc
       text: AppString.sendTrainingRequest.val,
       onPressed: () {
         Navigator.of(context).pop();
-        add(_CareGiverTrainingVerify(
+        add(_CareGiverSendTrainingRequest(
             userId: userId, context: context, adminId: adminId));
       },
       color: AppColor.white.val,

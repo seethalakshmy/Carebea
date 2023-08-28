@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/enum.dart';
-import 'custom_svg.dart';
 
 class CachedImage extends StatelessWidget {
   const CachedImage({
@@ -69,9 +68,18 @@ class CachedImage extends StatelessWidget {
             color: AppColor.lightGrey.val,
           )
         : isDetailPage
-            ? CustomSvg(
-                width: DBL.oneFifty.val,
-                path: IMG.profilePlaceHolder.val,
+
+            /// changing due to the height won't reflect in SVG
+            // ? CustomSvg(
+            //     height: 1000,
+            //     width: DBL.oneFifty.val,
+            //     path: IMG.profilePlaceHolder.val,
+            //   )
+            ? Image.asset(
+                IMG.icProfile.val,
+                height: placeHolderHeight,
+                width: placeHolderWidth,
+                fit: BoxFit.cover,
               )
             : Image.asset(
                 IMG.person.val,

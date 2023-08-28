@@ -51,12 +51,12 @@ class CareGiverVerificationEvent with _$CareGiverVerificationEvent {
       required RejectionParams params,
       required BuildContext context}) = _CareGiverCertificateReject;
 
-  const factory CareGiverVerificationEvent.careGiverTrainingVerify({
+  const factory CareGiverVerificationEvent.careGiverSendTrainingRequest({
     required String userId,
     required String adminId,
     required BuildContext context,
     int? page,
-  }) = _CareGiverTrainingVerify;
+  }) = _CareGiverSendTrainingRequest;
   const factory CareGiverVerificationEvent.notifyPendingDocument({
     required String userId,
     required BuildContext context,

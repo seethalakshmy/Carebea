@@ -26,27 +26,27 @@ import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart'
 import 'package:admin_580_tech/presentation/forgot_password/forgot_password_page.dart'
     as _i9;
 import 'package:admin_580_tech/presentation/help_and_support/help_and_support_page.dart'
-    as _i20;
-import 'package:admin_580_tech/presentation/login/login_page.dart' as _i10;
+    as _i10;
+import 'package:admin_580_tech/presentation/login/login_page.dart' as _i11;
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart'
-    as _i11;
-import 'package:admin_580_tech/presentation/reset_password/reset_password_page.dart'
     as _i12;
+import 'package:admin_580_tech/presentation/reset_password/reset_password_page.dart'
+    as _i13;
 import 'package:admin_580_tech/presentation/role_creation/role_creation_page.dart'
-    as _i14;
-import 'package:admin_580_tech/presentation/roles/role_page.dart' as _i13;
-import 'package:admin_580_tech/presentation/service_request_management/service_request_management_page.dart'
     as _i15;
-import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart'
+import 'package:admin_580_tech/presentation/roles/role_page.dart' as _i14;
+import 'package:admin_580_tech/presentation/service_request_management/service_request_management_page.dart'
     as _i16;
-import 'package:admin_580_tech/presentation/support_tickets_detail/support_tickets_detail_page.dart'
-    as _i21;
-import 'package:admin_580_tech/presentation/transaction_management/transaction_management_page.dart'
+import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart'
     as _i17;
-import 'package:admin_580_tech/presentation/user_management/user_management_page.dart'
+import 'package:admin_580_tech/presentation/support_tickets_detail/support_tickets_detail_page.dart'
     as _i18;
-import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet_detail_page.dart'
+import 'package:admin_580_tech/presentation/transaction_management/transaction_management_page.dart'
     as _i19;
+import 'package:admin_580_tech/presentation/user_management/user_management_page.dart'
+    as _i20;
+import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet_detail_page.dart'
+    as _i21;
 import 'package:auto_route/auto_route.dart' as _i22;
 import 'package:flutter/material.dart' as _i23;
 
@@ -157,28 +157,34 @@ abstract class $AppRouter extends _i22.RootStackRouter {
         child: const _i9.ForgotPasswordPage(),
       );
     },
+    HelpAndSupportRoute.name: (routeData) {
+      return _i22.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i10.HelpAndSupportPage(),
+      );
+    },
     LoginRoute.name: (routeData) {
       return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i10.LoginPage(),
+        child: const _i11.LoginPage(),
       );
     },
     OnboardingRoute.name: (routeData) {
       return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i11.OnboardingPage(),
+        child: const _i12.OnboardingPage(),
       );
     },
     ResetPasswordRoute.name: (routeData) {
       return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i12.ResetPasswordPage(),
+        child: const _i13.ResetPasswordPage(),
       );
     },
     RolesRoute.name: (routeData) {
       return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i13.RolesPage(),
+        child: const _i14.RolesPage(),
       );
     },
     RoleCreationRoute.name: (routeData) {
@@ -191,7 +197,7 @@ abstract class $AppRouter extends _i22.RootStackRouter {
               ));
       return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i14.RoleCreationPage(
+        child: _i15.RoleCreationPage(
           key: args.key,
           isView: args.isView,
           isEdit: args.isEdit,
@@ -202,43 +208,37 @@ abstract class $AppRouter extends _i22.RootStackRouter {
     ServiceRequestManagementRoute.name: (routeData) {
       return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i15.ServiceRequestManagementPage(),
+        child: const _i16.ServiceRequestManagementPage(),
       );
     },
     SideMenuRoute.name: (routeData) {
       return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i16.SideMenuPage(),
-      );
-    },
-    TransactionManagementRoute.name: (routeData) {
-      return _i22.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i17.TransactionManagementPage(),
-      );
-    },
-    UserManagementRoute.name: (routeData) {
-      return _i22.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i18.UserManagementPage(),
-      );
-    },
-    UserManagementDetailRoute.name: (routeData) {
-      return _i22.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i19.UserManagementDetailPage(),
-      );
-    },
-    HelpAndSupportRoute.name: (routeData) {
-      return _i22.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i20.HelpAndSupportPage(),
+        child: const _i17.SideMenuPage(),
       );
     },
     SupportTicketsDetailRoute.name: (routeData) {
       return _i22.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i21.SupportTicketsDetailPage(),
+        child: const _i18.SupportTicketsDetailPage(),
+      );
+    },
+    TransactionManagementRoute.name: (routeData) {
+      return _i22.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i19.TransactionManagementPage(),
+      );
+    },
+    UserManagementRoute.name: (routeData) {
+      return _i22.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i20.UserManagementPage(),
+      );
+    },
+    UserManagementDetailRoute.name: (routeData) {
+      return _i22.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i21.UserManagementDetailPage(),
       );
     },
   };
@@ -513,7 +513,21 @@ class ForgotPasswordRoute extends _i22.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i10.LoginPage]
+/// [_i10.HelpAndSupportPage]
+class HelpAndSupportRoute extends _i22.PageRouteInfo<void> {
+  const HelpAndSupportRoute({List<_i22.PageRouteInfo>? children})
+      : super(
+          HelpAndSupportRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HelpAndSupportRoute';
+
+  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i11.LoginPage]
 class LoginRoute extends _i22.PageRouteInfo<void> {
   const LoginRoute({List<_i22.PageRouteInfo>? children})
       : super(
@@ -527,7 +541,7 @@ class LoginRoute extends _i22.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i11.OnboardingPage]
+/// [_i12.OnboardingPage]
 class OnboardingRoute extends _i22.PageRouteInfo<void> {
   const OnboardingRoute({List<_i22.PageRouteInfo>? children})
       : super(
@@ -541,7 +555,7 @@ class OnboardingRoute extends _i22.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i12.ResetPasswordPage]
+/// [_i13.ResetPasswordPage]
 class ResetPasswordRoute extends _i22.PageRouteInfo<void> {
   const ResetPasswordRoute({List<_i22.PageRouteInfo>? children})
       : super(
@@ -555,7 +569,7 @@ class ResetPasswordRoute extends _i22.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i13.RolesPage]
+/// [_i14.RolesPage]
 class RolesRoute extends _i22.PageRouteInfo<void> {
   const RolesRoute({List<_i22.PageRouteInfo>? children})
       : super(
@@ -569,7 +583,7 @@ class RolesRoute extends _i22.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i14.RoleCreationPage]
+/// [_i15.RoleCreationPage]
 class RoleCreationRoute extends _i22.PageRouteInfo<RoleCreationRouteArgs> {
   RoleCreationRoute({
     _i23.Key? key,
@@ -622,7 +636,7 @@ class RoleCreationRouteArgs {
 }
 
 /// generated route for
-/// [_i15.ServiceRequestManagementPage]
+/// [_i16.ServiceRequestManagementPage]
 class ServiceRequestManagementRoute extends _i22.PageRouteInfo<void> {
   const ServiceRequestManagementRoute({List<_i22.PageRouteInfo>? children})
       : super(
@@ -636,7 +650,7 @@ class ServiceRequestManagementRoute extends _i22.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i16.SideMenuPage]
+/// [_i17.SideMenuPage]
 class SideMenuRoute extends _i22.PageRouteInfo<void> {
   const SideMenuRoute({List<_i22.PageRouteInfo>? children})
       : super(
@@ -650,7 +664,21 @@ class SideMenuRoute extends _i22.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i17.TransactionManagementPage]
+/// [_i18.SupportTicketsDetailPage]
+class SupportTicketsDetailRoute extends _i22.PageRouteInfo<void> {
+  const SupportTicketsDetailRoute({List<_i22.PageRouteInfo>? children})
+      : super(
+          SupportTicketsDetailRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SupportTicketsDetailRoute';
+
+  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i19.TransactionManagementPage]
 class TransactionManagementRoute extends _i22.PageRouteInfo<void> {
   const TransactionManagementRoute({List<_i22.PageRouteInfo>? children})
       : super(
@@ -664,7 +692,7 @@ class TransactionManagementRoute extends _i22.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i18.UserManagementPage]
+/// [_i20.UserManagementPage]
 class UserManagementRoute extends _i22.PageRouteInfo<void> {
   const UserManagementRoute({List<_i22.PageRouteInfo>? children})
       : super(
@@ -678,7 +706,7 @@ class UserManagementRoute extends _i22.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i19.UserManagementDetailPage]
+/// [_i21.UserManagementDetailPage]
 class UserManagementDetailRoute extends _i22.PageRouteInfo<void> {
   const UserManagementDetailRoute({List<_i22.PageRouteInfo>? children})
       : super(
@@ -687,34 +715,6 @@ class UserManagementDetailRoute extends _i22.PageRouteInfo<void> {
         );
 
   static const String name = 'UserManagementDetailRoute';
-
-  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i20.HelpAndSupportPage]
-class HelpAndSupportRoute extends _i22.PageRouteInfo<void> {
-  const HelpAndSupportRoute({List<_i22.PageRouteInfo>? children})
-      : super(
-          HelpAndSupportRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'HelpAndSupportRoute';
-
-  static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i21.SupportTicketsDetailPage]
-class SupportTicketsDetailRoute extends _i22.PageRouteInfo<void> {
-  const SupportTicketsDetailRoute({List<_i22.PageRouteInfo>? children})
-      : super(
-          SupportTicketsDetailRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'SupportTicketsDetailRoute';
 
   static const _i22.PageInfo<void> page = _i22.PageInfo<void>(name);
 }

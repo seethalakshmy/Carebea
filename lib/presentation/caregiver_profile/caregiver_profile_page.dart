@@ -1,6 +1,6 @@
 import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/enum.dart';
-import 'package:admin_580_tech/infrastructure/caregiver_profile/caregiver_profile_repository.dart';
+import 'package:admin_580_tech/core/hover.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/views/caregiver_agreement_view.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/views/caregiver_personal_details_view.dart';
@@ -22,7 +22,6 @@ import '../../core/text_styles.dart';
 import '../caregiver_detail/widgets/service_completion_and_rewards.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';
-import '../widget/custom_button.dart';
 import '../widget/custom_text.dart';
 import '../widget/error_view.dart';
 import '../widget/table_verification_button.dart';
@@ -44,22 +43,26 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   String _userId = "";
+
   // late CareGiverProfileBloc _careGiverProfileBloc;
 
   @override
   void initState() {
-    print('idinpage ${widget.id}');
+    print('admin ${SharedPreffUtil().getAdminId}');
     _tabController = TabController(vsync: this, length: 7);
-    // _userId = '64d3523839a46593449be44e';
+
     _userId =
         autoTabRouter?.currentChild?.queryParams.getString('id', widget.id) ??
             '';
     // _careGiverProfileBloc = CareGiverProfileBloc(CareGiverProfileRepository());
     super.initState();
-    context.read<CareGiverProfileBloc>().add(
-        CareGiverProfileEvent.getCareGiverProfile(
+    context
+        .read<CareGiverProfileBloc>()
+        .add(CareGiverProfileEvent.getCareGiverProfile(
             userId: _userId,
+            // userId: "64d336c35da4b7606f1ef77a",
             adminId: SharedPreffUtil().getAdminId,
+            // adminId: "64a69c032961698d154944ea",
             context: context));
   }
 
@@ -85,7 +88,6 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
                     errorMessage: state.error)
                 : _bodyView(state);
       },
-
     );
   }
 
@@ -101,9 +103,9 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
             SliverAppBar(
                 leading: const SizedBox(),
                 backgroundColor: Colors.white,
-                expandedHeight: isInterViewOrTraining(status)
-                    ? DBL.threeFifteen.val
-                    : DBL.twoFiftyFive.val,
+                expandedHeight: state.isShowStatusDropDown
+                    ? DBL.twoSixty.val
+                    : DBL.twoThirty.val,
                 floating: false,
                 toolbarHeight: DBL.fifty.val,
                 flexibleSpace: _buildFlexibleSpaceBar(context, state, status))
@@ -173,124 +175,157 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
           left: DBL.twenty.val,
           top: DBL.twenty.val,
           right: DBL.twenty.val,
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Row(
+          child: Stack(children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CachedImage(
-                  imgUrl: state.response?.data?.name?.profile ?? "",
-                  height: DBL.oneFifty.val,
-                  width: DBL.oneFifty.val,
-                  isDetailPage: true,
-                  fit: BoxFit.cover,
-                ),
-                CustomSizedBox(
-                  width: DBL.twentyFive.val,
-                ),
-                isInterViewOrTraining(status) || isInterViewCompleted(status)
-                    ? TableVerificationButton(
-                        verificationStatus: status,
-                        isHover: false,
-                      )
-                    : CustomSizedBox.shrink()
-              ],
-            ),
-            CustomSizedBox(
-              height: DBL.five.val,
-            ),
-            CustomText(
-              "${state.response?.data?.name?.firstName} ${state.response?.data?.name?.lastName}",
-              style: TS().gRoboto(
-                color: AppColor.rowColor.val,
-                fontWeight: FW.w600.val,
-                fontSize: getFontSize(
-                  context,
-                  fontSize: FS.font19.val,
-                ),
-              ),
-            ),
-            CustomSizedBox(
-              height: DBL.seven.val,
-            ),
-
-            CustomSizedBox(
-                width: DBL.twoHundred.val,
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomText(
-                        AppString.profileCompletion.val,
-                        style: TS().gRoboto(
-                            fontWeight: FW.w500.val,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CachedImage(
+                          imgUrl: state.response?.data?.name?.profile ?? "",
+                          height: DBL.oneFifty.val,
+                          width: DBL.oneFifty.val,
+                          isDetailPage: true,
+                          fit: BoxFit.cover,
+                        ),
+                        CustomSizedBox(
+                          height: DBL.five.val,
+                        ),
+                        CustomText(
+                          "${state.response?.data?.name?.firstName} ${state.response?.data?.name?.lastName}",
+                          style: TS().gRoboto(
+                            color: AppColor.rowColor.val,
+                            fontWeight: FW.w600.val,
                             fontSize: getFontSize(
                               context,
-                              fontSize: FS.font14.val,
+                              fontSize: FS.font19.val,
                             ),
-                            color: AppColor.lightGrey4.val),
-                      ),
-                      CustomSizedBox(
-                        width: DBL.five.val,
-                      ),
-                      // CustomText(
-                      //   state.response?.data?.profileCompletion ?? "",
-                      //   style: TS().gRoboto(
-                      //       fontWeight: FW.w500.val,
-                      //       fontSize: getFontSize(
-                      //         context,
-                      //         fontSize: FS.font14.val,
-                      //       ),
-                      //       color: AppColor.primaryColor.val),
-                      // ),
-                    ])),
-            // CustomSizedBox(
-            //   height: DBL.thirteen.val,
-            // ),
-            // CustomSizedBox(
-            //   height: isXs2(context) ? DBL.eight.val : DBL.zero.val,
-            // ),
-
-            // state.response?.data?.profileCompletion != null
-            //     ? LinearPercentIndicator(
-            //         padding: EdgeInsets.all(DBL.zero.val),
-            //         barRadius: Radius.circular(DBL.ten.val),
-            //         width: DBL.twoHundred.val,
-            //         lineHeight: DBL.six.val,
-            //         percent: double.parse(
-            //                 state.response?.data?.profileCompletion ?? "0.0") /
-            //             100,
-            //         progressColor: AppColor.green2.val,
-            //       )
-            //     : CustomSizedBox.shrink(),
-            CustomSizedBox(
-              height: DBL.ten.val,
-            ),
-            isInterViewOrTraining(status)
-                ? SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        CustomText(
-                          status == Verification.trainingStarted.val
-                              ? AppString.isCompletedTraining.val
-                              : AppString.isCompletedInterView.val,
-                          style: TS().gRoboto(
-                              color: AppColor.primaryColor.val,
-                              fontWeight: FW.w500.val,
-                              fontSize: isLg3(context)
-                                  ? FS.font18.val
-                                  : FS.font22.val),
+                          ),
                         ),
-                        CustomSizedBox(
-                          width: DBL.twenty.val,
-                        ),
-                        _noButton(status),
-                        CustomSizedBox(
-                          width: DBL.ten.val,
-                        ),
-                        _yesButton(status),
                       ],
                     ),
-                  )
+                    CustomSizedBox(
+                      width: DBL.twentyFive.val,
+                    ),
+                    Column(
+                      children: [
+                        TableVerificationButton(
+                            verificationStatus: status,
+                            isStatusChangeWidget: true,
+                            onStatusChange: () {
+                              context.read<CareGiverProfileBloc>().add(
+                                  CareGiverProfileEvent.onTappedStatusDropDown(
+                                      state.isShowStatusDropDown
+                                          ? false
+                                          : true));
+                            }),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            state.isShowStatusDropDown
+                ? Positioned(
+                    top: 43,
+                    left: 174,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5), // Light black
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: const Offset(
+                                0, 3), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: CustomSizedBox(
+                        height: 160,
+                        width: 200,
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: state.statusList.length,
+                            itemBuilder: (context, index) {
+                              var item = state.statusList[index];
+
+                              ///id 1-training started , 2- training completed, 3-interview started ,4 -interview failed
+                              /// 5- interview completed
+                              return InkWell(
+                                onTap: () {
+                                  if (item.id == 1) {
+                                    context.read<CareGiverProfileBloc>().add(
+                                        CareGiverProfileEvent
+                                            .careGiverSendTrainingRequest(
+                                                userId: _userId,
+                                                adminId: SharedPreffUtil()
+                                                    .getAdminId,
+                                                context: context));
+                                  } else if (item.id == 2) {
+                                    context.read<CareGiverProfileBloc>().add(
+                                        CareGiverProfileEvent
+                                            .careGiverTrainingVerify(
+                                                userId: _userId,
+                                                adminId: SharedPreffUtil()
+                                                    .getAdminId,
+                                                status: true,
+                                                context: context));
+                                  } else if (item.id == 3) {
+                                    context.read<CareGiverProfileBloc>().add(
+                                        CareGiverProfileEvent
+                                            .careGiverInterViewVerify(
+                                                userId: _userId,
+                                                adminId: SharedPreffUtil()
+                                                    .getAdminId,
+                                                status: Interview.started.val,
+                                                context: context));
+                                  } else if (item.id == 4) {
+                                    context.read<CareGiverProfileBloc>().add(
+                                        CareGiverProfileEvent
+                                            .careGiverInterViewVerify(
+                                                userId: _userId,
+                                                adminId: SharedPreffUtil()
+                                                    .getAdminId,
+                                                status: Interview.failed.val,
+                                                context: context));
+                                  } else if (item.id == 5) {
+                                    context.read<CareGiverProfileBloc>().add(
+                                        CareGiverProfileEvent
+                                            .careGiverInterViewVerify(
+                                                userId: _userId,
+                                                adminId: SharedPreffUtil()
+                                                    .getAdminId,
+                                                status: Interview.completed.val,
+                                                context: context));
+                                  }
+                                },
+                                child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 8),
+                                    child: FxHover(
+                                      builder: (isHover) {
+                                        return CustomText(
+                                          item.title ?? "",
+                                          style: TS().gRoboto(
+                                              fontWeight: FontWeight.w500,
+                                              color: isHover
+                                                  ? AppColor.darkBlue.val
+                                                  : AppColor.matBlack2.val,
+                                              fontSize: 14),
+                                        );
+                                      },
+                                    )),
+                              );
+                            }),
+                      ),
+                    ))
                 : CustomSizedBox.shrink()
 
             ///todo after getting new design have to modify this
@@ -322,6 +357,42 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
             //     : CustomSizedBox.shrink()
           ]),
         ));
+  }
+
+  Container buildStatusList(CareGiverProfileState state) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5), // Light black
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: const Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      child: CustomSizedBox(
+        height: 500,
+        width: 200,
+        child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: state.statusList.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: CustomText(
+                  state.statusList[index].title ?? "",
+                  style: TS().gRoboto(
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.matBlack2.val,
+                      fontSize: 14),
+                ),
+              );
+            }),
+      ),
+    );
   }
 
   CustomText _buildCustomText(String name) => CustomText(
@@ -359,96 +430,6 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
       height: height,
       title: "36",
       subTitle: AppString.serviceCompleted.val,
-    );
-  }
-
-  CustomButton _noButton(int status) {
-    return CustomButton(
-      text: AppString.no.val,
-      onPressed: () {
-        if (status == Verification.trainingStarted.val) {
-          context.read<CareGiverProfileBloc>().add(
-              CareGiverProfileEvent.careGiverTrainingVerify(
-                  userId: _userId,
-                  adminId: '',
-                  status: false,
-                  context: context));
-          // _careGiverProfileBloc.add(
-          //     CareGiverProfileEvent.careGiverTrainingVerify(
-          //         userId: _userId,
-          //         status: false,
-          //         context: context,
-          //         adminId: ''));
-        } else {
-          context.read<CareGiverProfileBloc>().add(
-              CareGiverProfileEvent.careGiverInterViewVerify(
-                  userId: _userId,
-                  adminId: SharedPreffUtil().getAdminId,
-                  status: false,
-                  context: context));
-
-          // _careGiverProfileBloc.add(
-          //     CareGiverProfileEvent.careGiverInterViewVerify(
-          //         userId: _userId,
-          //         status: false,
-          //         context: context,
-          //         adminId: SharedPreffUtil().getAdminId));
-        }
-      },
-      color: AppColor.white.val,
-      borderRadius: DBL.five.val,
-      borderColor: AppColor.primaryColor.val,
-      hoverColor: AppColor.offWhite.val.withOpacity(0.2),
-      textStyle: TS().gRoboto(
-          fontWeight: FW.w500.val,
-          color: AppColor.primaryColor.val,
-          fontSize: FS.font16.val),
-      padding: EdgeInsets.symmetric(
-          horizontal: DBL.thirtyFive.val, vertical: DBL.eighteen.val),
-    );
-  }
-
-  CustomButton _yesButton(int status) {
-    return CustomButton(
-      text: AppString.yes.val,
-      onPressed: () {
-        if (status == Verification.trainingStarted.val) {
-          context.read<CareGiverProfileBloc>().add(
-              CareGiverProfileEvent.careGiverTrainingVerify(
-                  userId: _userId,
-                  adminId: SharedPreffUtil().getAdminId,
-                  status: true,
-                  context: context));
-
-          // _careGiverProfileBloc.add(
-          //     CareGiverProfileEvent.careGiverTrainingVerify(
-          //         userId: _userId,
-          //         status: true,
-          //         context: context,
-          //         adminId: SharedPreffUtil().getAdminId));
-        } else {
-          context.read<CareGiverProfileBloc>().add(
-              CareGiverProfileEvent.careGiverInterViewVerify(
-                  userId: _userId,
-                  adminId: SharedPreffUtil().getAdminId,
-                  status: true,
-                  context: context));
-
-          // _careGiverProfileBloc.add(
-          //     CareGiverProfileEvent.careGiverInterViewVerify(
-          //         userId: _userId,
-          //         status: true,
-          //         context: context,
-          //         adminId: SharedPreffUtil().getAdminId));
-        }
-      },
-      borderRadius: DBL.five.val,
-      textStyle: TS().gRoboto(
-          fontWeight: FW.w500.val,
-          color: AppColor.white.val,
-          fontSize: FS.font16.val),
-      padding: EdgeInsets.symmetric(
-          horizontal: DBL.thirtyFive.val, vertical: DBL.eighteen.val),
     );
   }
 

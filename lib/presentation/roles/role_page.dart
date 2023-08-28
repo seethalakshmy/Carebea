@@ -24,7 +24,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../widget/custom_alert_delete.dart';
+import '../widget/common_alert_widget.dart';
 import '../widget/custom_icon.dart';
 import '../widget/custom_text.dart';
 import '../widget/custom_text_field.dart';
@@ -182,7 +182,7 @@ class _RolesPageState extends State<RolesPage> {
   }
 
   _roleCreate() {
-    return !sharedPrefUtil.getEditRole
+    return sharedPrefUtil.getEditRole
         ? CustomButton(
             onPressed: () {
               autoTabRouter?.navigate(RoleCreationRoute());
@@ -381,7 +381,7 @@ class _RolesPageState extends State<RolesPage> {
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {
-        return CustomActionAlert(
+        return CommonAlertWidget(
             heading: AppString.delete.val,
             label: AppString.deleteRole.val,
             onTapYes: () {

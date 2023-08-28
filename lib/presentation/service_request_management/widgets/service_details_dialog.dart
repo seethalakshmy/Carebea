@@ -6,7 +6,6 @@ import 'package:admin_580_tech/domain/service_request_management/model/reschedul
 import 'package:admin_580_tech/domain/service_request_management/model/reschedule_response.dart';
 import 'package:admin_580_tech/generated/assets.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
-import 'package:admin_580_tech/presentation/login/login_page.dart';
 import 'package:admin_580_tech/presentation/service_request_management/widgets/cancellation_widget.dart';
 import 'package:admin_580_tech/presentation/service_request_management/widgets/profile_widget.dart';
 import 'package:admin_580_tech/presentation/service_request_management/widgets/rating_widget.dart';
@@ -26,15 +25,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/bloc/service_request_management/service_request_management_bloc.dart';
 import '../../../core/responsive.dart';
-import '../../../domain/caregiver_profile/model/caregiver_profile_response.dart';
 import '../../../domain/service_request_management/model/assign_caregiver_params.dart';
 import '../../../domain/service_request_management/model/service_request_response.dart';
 import '../../caregiver_profile/caregiver_profile_page.dart';
-import '../../widget/custom_alert_delete.dart';
+import '../../widget/common_alert_widget.dart';
 import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_icon.dart';
 import '../../widget/custom_text_field.dart';
-import '../../widget/header_view.dart';
 
 class ServiceDetailsDialog extends StatefulWidget {
   const ServiceDetailsDialog(
@@ -137,7 +134,7 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
                                                   ServiceRequestManagementBloc,
                                                   ServiceRequestManagementState>(
                                                 builder: (context, state) {
-                                                  return CustomActionAlert(
+                                                  return CommonAlertWidget(
                                                     controller: controller,
                                                     isLoading: state
                                                         .isStartServiceLoading,
@@ -1305,7 +1302,7 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
           child: BlocBuilder<ServiceRequestManagementBloc,
               ServiceRequestManagementState>(
             builder: (context, state) {
-              return CustomActionAlert(
+              return CommonAlertWidget(
                 controller: controller,
                 isLoading: state.isCancelLoading,
                 isTextField: true,
