@@ -931,7 +931,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/super-admin/login',
+              '/admin/login',
               queryParameters: queryParameters,
               data: _data,
             )

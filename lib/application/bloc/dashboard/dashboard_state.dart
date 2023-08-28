@@ -8,8 +8,8 @@ class DashboardState with _$DashboardState {
       required bool isError,
       required AlertResponse? alertResponse,
       required DashboardResponse? dashboardResponse,
+
       required String? error,
-      MonthlyServiceCounts? monthlyServiceCounts,
       @Default(false) bool isClientError}) = _DashboardState;
 
   factory DashboardState.initial() {
@@ -20,6 +20,6 @@ class DashboardState with _$DashboardState {
         alertResponse: null,
         error: '',
         dashboardResponse: null,
-        monthlyServiceCounts: null);
+    );
   }
 }

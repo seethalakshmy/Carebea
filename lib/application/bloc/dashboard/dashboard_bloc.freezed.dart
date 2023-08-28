@@ -423,8 +423,6 @@ mixin _$DashboardState {
   DashboardResponse? get dashboardResponse =>
       throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
-  MonthlyServiceCounts? get monthlyServiceCounts =>
-      throw _privateConstructorUsedError;
   bool get isClientError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -445,7 +443,6 @@ abstract class $DashboardStateCopyWith<$Res> {
       AlertResponse? alertResponse,
       DashboardResponse? dashboardResponse,
       String? error,
-      MonthlyServiceCounts? monthlyServiceCounts,
       bool isClientError});
 }
 
@@ -468,7 +465,6 @@ class _$DashboardStateCopyWithImpl<$Res, $Val extends DashboardState>
     Object? alertResponse = freezed,
     Object? dashboardResponse = freezed,
     Object? error = freezed,
-    Object? monthlyServiceCounts = freezed,
     Object? isClientError = null,
   }) {
     return _then(_value.copyWith(
@@ -496,10 +492,6 @@ class _$DashboardStateCopyWithImpl<$Res, $Val extends DashboardState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
-      monthlyServiceCounts: freezed == monthlyServiceCounts
-          ? _value.monthlyServiceCounts
-          : monthlyServiceCounts // ignore: cast_nullable_to_non_nullable
-              as MonthlyServiceCounts?,
       isClientError: null == isClientError
           ? _value.isClientError
           : isClientError // ignore: cast_nullable_to_non_nullable
@@ -523,7 +515,6 @@ abstract class _$$_DashboardStateCopyWith<$Res>
       AlertResponse? alertResponse,
       DashboardResponse? dashboardResponse,
       String? error,
-      MonthlyServiceCounts? monthlyServiceCounts,
       bool isClientError});
 }
 
@@ -544,7 +535,6 @@ class __$$_DashboardStateCopyWithImpl<$Res>
     Object? alertResponse = freezed,
     Object? dashboardResponse = freezed,
     Object? error = freezed,
-    Object? monthlyServiceCounts = freezed,
     Object? isClientError = null,
   }) {
     return _then(_$_DashboardState(
@@ -572,10 +562,6 @@ class __$$_DashboardStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
-      monthlyServiceCounts: freezed == monthlyServiceCounts
-          ? _value.monthlyServiceCounts
-          : monthlyServiceCounts // ignore: cast_nullable_to_non_nullable
-              as MonthlyServiceCounts?,
       isClientError: null == isClientError
           ? _value.isClientError
           : isClientError // ignore: cast_nullable_to_non_nullable
@@ -594,7 +580,6 @@ class _$_DashboardState implements _DashboardState {
       required this.alertResponse,
       required this.dashboardResponse,
       required this.error,
-      this.monthlyServiceCounts,
       this.isClientError = false});
 
   @override
@@ -610,14 +595,12 @@ class _$_DashboardState implements _DashboardState {
   @override
   final String? error;
   @override
-  final MonthlyServiceCounts? monthlyServiceCounts;
-  @override
   @JsonKey()
   final bool isClientError;
 
   @override
   String toString() {
-    return 'DashboardState(filterId: $filterId, isLoading: $isLoading, isError: $isError, alertResponse: $alertResponse, dashboardResponse: $dashboardResponse, error: $error, monthlyServiceCounts: $monthlyServiceCounts, isClientError: $isClientError)';
+    return 'DashboardState(filterId: $filterId, isLoading: $isLoading, isError: $isError, alertResponse: $alertResponse, dashboardResponse: $dashboardResponse, error: $error, isClientError: $isClientError)';
   }
 
   @override
@@ -635,23 +618,13 @@ class _$_DashboardState implements _DashboardState {
             (identical(other.dashboardResponse, dashboardResponse) ||
                 other.dashboardResponse == dashboardResponse) &&
             (identical(other.error, error) || other.error == error) &&
-            (identical(other.monthlyServiceCounts, monthlyServiceCounts) ||
-                other.monthlyServiceCounts == monthlyServiceCounts) &&
             (identical(other.isClientError, isClientError) ||
                 other.isClientError == isClientError));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      filterId,
-      isLoading,
-      isError,
-      alertResponse,
-      dashboardResponse,
-      error,
-      monthlyServiceCounts,
-      isClientError);
+  int get hashCode => Object.hash(runtimeType, filterId, isLoading, isError,
+      alertResponse, dashboardResponse, error, isClientError);
 
   @JsonKey(ignore: true)
   @override
@@ -668,7 +641,6 @@ abstract class _DashboardState implements DashboardState {
       required final AlertResponse? alertResponse,
       required final DashboardResponse? dashboardResponse,
       required final String? error,
-      final MonthlyServiceCounts? monthlyServiceCounts,
       final bool isClientError}) = _$_DashboardState;
 
   @override
@@ -683,8 +655,6 @@ abstract class _DashboardState implements DashboardState {
   DashboardResponse? get dashboardResponse;
   @override
   String? get error;
-  @override
-  MonthlyServiceCounts? get monthlyServiceCounts;
   @override
   bool get isClientError;
   @override

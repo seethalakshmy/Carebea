@@ -6,12 +6,13 @@ import 'package:admin_580_tech/presentation/dashboard/widgets/line_chart.dart';
 import 'package:admin_580_tech/presentation/dashboard/widgets/pie_chart.dart';
 import 'package:admin_580_tech/presentation/widget/loader_view.dart';
 import 'package:auto_route/annotations.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../core/enum.dart';
 import '../../core/text_styles.dart';
+import '../../core/utility.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/custom_image.dart';
@@ -34,40 +35,27 @@ class _DashboardPageState extends State<DashboardPage> {
     "Clients",
     "Care Ambassadors",
   ];
-  List<String> numberList = [
-    "29",
-    "\$50,000",
-    "365",
-    "786",
-  ];
+
   List icons = [
     IMG.dashBoardClock.val,
     IMG.dollar.val,
     IMG.clients.val,
     IMG.careAmbassadors.val
   ];
-  List<String> yearList = [
-    "JAN",
-    "FEB",
-    "MAR",
-    "APR",
-    "MAY",
-    "JUN",
-    "JUL",
-    "AUG",
-    "SEPT",
-    "OCT",
-    "NOV",
-    "DEC",
-  ];
-  List<int> yearsList = List.generate(24, (index) => 2000 + index);
 
-  int selectedYear = 2000;
+  // List<int> yearsList = List.generate(24, (index) => 2000 + index);
+  var now = DateTime.now();
+  TextEditingController startDateController = TextEditingController();
+  TextEditingController endDateController = TextEditingController();
+
   String _adminUserId = "";
   late DashboardBloc _dashboardBloc;
   SharedPreffUtil sharedPrefUtil = SharedPreffUtil();
+
   @override
   void initState() {
+    startDateController.text = Utility.detailDate(DateTime(now.year, 1, 1));
+    endDateController.text = Utility.detailDate(DateTime(now.year, 12, 31));
     _adminUserId = sharedPrefUtil.getAdminId;
     super.initState();
     _dashboardBloc = DashboardBloc(DashboardRepository());
@@ -146,12 +134,37 @@ class _DashboardPageState extends State<DashboardPage> {
                           builder: (context, state) {
                             print(
                                 'check:: ${state.dashboardResponse?.data?.monthlyServiceCounts?.aug}');
+                            Map<String, double> mapValues = {};
+                            print("fsdasr ${startDateController.text}");
+                            if ((startDateController.text.isNotEmpty) &&
+                                (endDateController.text.isNotEmpty)) {
+                              var startDate = DateFormat('MMM dd yyyy')
+                                  .parse(startDateController.text);
+                              var endDate = DateFormat('MMM dd yyyy')
+                                  .parse(endDateController.text);
+                              if (endDate.difference(startDate).inDays <= 12) {
+                                for (var i in state
+                                        .dashboardResponse?.data?.dailyCounts ??
+                                    []) {
+                                  mapValues.addAll({
+                                    i.date: double.parse(i.count.toString())
+                                  });
+                                }
+                              } else {
+                                mapValues = state.dashboardResponse?.data
+                                        ?.monthlyServiceCounts
+                                        ?.toJson()
+                                        .map((key, value) => MapEntry(key,
+                                            double.parse(value.toString()))) ??
+                                    {};
+                              }
+                            }
+
                             return BarChartWidget(
                                 bloc: _dashboardBloc,
-                                monthlyServiceCount: state.dashboardResponse
-                                    ?.data?.monthlyServiceCounts,
-                                dailyCount:
-                                    state.dashboardResponse?.data?.dailyCounts);
+                                mapValues: mapValues,
+                                startDate: startDateController,
+                                endDate: endDateController);
                           },
                         ),
                         Responsive.isWeb(context)
@@ -163,7 +176,13 @@ class _DashboardPageState extends State<DashboardPage> {
                             Responsive.isWeb(context)
                                 ? CustomSizedBox()
                                 : CustomSizedBox(height: DBL.twenty.val),
-                            PieChartPage(),
+                            PieChartPage(
+                                totalClient:
+                                    state.dashboardResponse?.data?.clientCount,
+                                newClients: state
+                                    .dashboardResponse?.data?.totalNewClient,
+                                repeatedClients: state.dashboardResponse?.data
+                                    ?.totalRepeatedClient),
                             Responsive.isWeb(context)
                                 ? CustomSizedBox(height: DBL.twenty.val)
                                 : CustomSizedBox(height: DBL.twenty.val),
@@ -171,11 +190,19 @@ class _DashboardPageState extends State<DashboardPage> {
                               alignment: WrapAlignment.start,
                               children: [
                                 _newCareAmbassadorOnboarded(
-                                    "New Care Ambassadors\n Onboarded", "20"),
+                                    "New Care Ambassadors\n Onboarded",
+                                    state.dashboardResponse?.data
+                                            ?.totalNewCareGiver
+                                            .toString() ??
+                                        ''),
                                 CustomSizedBox(width: DBL.twenty.val),
                                 CustomSizedBox(height: DBL.twenty.val),
                                 _newCareAmbassadorOnboarded(
-                                    "Service Completed", "365")
+                                    "Service Completed",
+                                    state.dashboardResponse?.data
+                                            ?.totalServiceCompleted
+                                            .toString() ??
+                                        '')
                               ],
                             )
                           ],

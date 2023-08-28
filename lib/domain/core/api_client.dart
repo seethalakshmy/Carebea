@@ -271,7 +271,7 @@ abstract class ApiClient {
     @Query("search_term") String searchQuery,
   );
 
-  @POST("/super-admin/login")
+  @POST("/admin/login")
   Future<LoginResponse> login(
     @Field('email') String email,
     @Field('password') String password,

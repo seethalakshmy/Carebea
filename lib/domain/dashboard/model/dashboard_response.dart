@@ -56,6 +56,10 @@ class Data {
   Data({
     int? clientCount,
     int? careGiverCount,
+    int? totalNewCareGiver,
+    int? totalNewClient,
+    int? totalRepeatedCareGiver,
+    int? totalRepeatedClient,
     double? totalHours,
     int? totalServiceCompleted,
     int? totalSales,
@@ -65,6 +69,10 @@ class Data {
   }) {
     _clientCount = clientCount;
     _careGiverCount = careGiverCount;
+    _totalNewCareGiver = totalNewCareGiver;
+    _totalNewClient = totalNewClient;
+    _totalRepeatedCareGiver = totalRepeatedCareGiver;
+    _totalRepeatedClient = totalRepeatedClient;
     _totalHours = totalHours;
     _totalServiceCompleted = totalServiceCompleted;
     _totalSales = totalSales;
@@ -76,6 +84,10 @@ class Data {
   Data.fromJson(dynamic json) {
     _clientCount = json['clientCount'];
     _careGiverCount = json['careGiverCount'];
+    _totalNewCareGiver = json['totalNewCareGiver'];
+    _totalNewClient = json['totalNewClient'];
+    _totalRepeatedCareGiver = json['totalRepeatedCareGiver'];
+    _totalRepeatedClient = json['totalRepeatedClient'];
     _totalHours = json['totalHours'];
     _totalServiceCompleted = json['totalServiceCompleted'];
     _totalSales = json['totalSales'];
@@ -92,6 +104,10 @@ class Data {
   }
   int? _clientCount;
   int? _careGiverCount;
+  int? _totalNewCareGiver;
+  int? _totalNewClient;
+  int? _totalRepeatedCareGiver;
+  int? _totalRepeatedClient;
   double? _totalHours;
   int? _totalServiceCompleted;
   int? _totalSales;
@@ -101,6 +117,10 @@ class Data {
   Data copyWith({
     int? clientCount,
     int? careGiverCount,
+    int? totalNewCareGiver,
+    int? totalNewClient,
+    int? totalRepeatedCareGiver,
+    int? totalRepeatedClient,
     double? totalHours,
     int? totalServiceCompleted,
     int? totalSales,
@@ -111,6 +131,11 @@ class Data {
       Data(
         clientCount: clientCount ?? _clientCount,
         careGiverCount: careGiverCount ?? _careGiverCount,
+        totalNewCareGiver: totalNewCareGiver ?? _totalNewCareGiver,
+        totalNewClient: totalNewClient ?? _totalNewClient,
+        totalRepeatedCareGiver:
+            totalRepeatedCareGiver ?? _totalRepeatedCareGiver,
+        totalRepeatedClient: totalRepeatedClient ?? _totalRepeatedClient,
         totalHours: totalHours ?? _totalHours,
         totalServiceCompleted: totalServiceCompleted ?? _totalServiceCompleted,
         totalSales: totalSales ?? _totalSales,
@@ -120,6 +145,10 @@ class Data {
       );
   int? get clientCount => _clientCount;
   int? get careGiverCount => _careGiverCount;
+  int? get totalNewCareGiver => _totalNewCareGiver;
+  int? get totalNewClient => _totalNewClient;
+  int? get totalRepeatedCareGiver => _totalRepeatedCareGiver;
+  int? get totalRepeatedClient => _totalRepeatedClient;
   double? get totalHours => _totalHours;
   int? get totalServiceCompleted => _totalServiceCompleted;
   int? get totalSales => _totalSales;
@@ -131,6 +160,10 @@ class Data {
     final map = <String, dynamic>{};
     map['clientCount'] = _clientCount;
     map['careGiverCount'] = _careGiverCount;
+    map['totalNewCareGiver'] = _totalNewCareGiver;
+    map['totalNewClient'] = _totalNewClient;
+    map['totalRepeatedCareGiver'] = _totalRepeatedCareGiver;
+    map['totalRepeatedClient'] = _totalRepeatedClient;
     map['totalHours'] = _totalHours;
     map['totalServiceCompleted'] = _totalServiceCompleted;
     map['totalSales'] = _totalSales;
