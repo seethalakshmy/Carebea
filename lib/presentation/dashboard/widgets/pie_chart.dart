@@ -10,11 +10,16 @@ import '../indicator_widget.dart';
 
 class PieChartPage extends StatefulWidget {
   PieChartPage(
-      {super.key, this.totalClient, this.newClients, this.repeatedClients});
+      {super.key,
+      this.totalClient,
+      this.newClients,
+      this.repeatedClients,
+      this.percentage});
 
   final int? totalClient;
   final int? newClients;
   final int? repeatedClients;
+  final double? percentage;
 
   @override
   State<StatefulWidget> createState() => PieChartPageState();
@@ -116,20 +121,24 @@ class PieChartPageState extends State<PieChartPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.arrow_upward,
+                  widget.percentage! > 0.0
+                      ? Icons.arrow_upward
+                      : Icons.arrow_downward,
                   size: 12,
                   color: AppColor.green.val,
                 ),
                 CustomText(
-                  "33%",
+                  widget.percentage?.abs().toStringAsFixed(2) ?? '',
                   style: TS().gRoboto(
                     fontSize: FS.font12.val,
                     fontWeight: FW.w400.val,
-                    color: AppColor.green.val,
+                    color: widget.percentage! > 0.0
+                        ? AppColor.green.val
+                        : AppColor.red.val,
                   ),
                 ),
                 CustomText(
-                  "compared to the last 7-14days",
+                  " compared to the last 7-14days",
                   style: TS().gRoboto(
                     fontSize: FS.font12.val,
                     fontWeight: FW.w400.val,
