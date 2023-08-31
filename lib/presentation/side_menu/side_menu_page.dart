@@ -12,9 +12,11 @@ import 'package:admin_580_tech/presentation/admin_creation/admin_creation_page.d
 import 'package:admin_580_tech/presentation/admins/admins_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/caregiver_verification_page.dart';
+import 'package:admin_580_tech/presentation/client_analytics/client_analytics_page.dart';
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
 import 'package:admin_580_tech/presentation/faq_creation/faq_creation_screen.dart';
 import 'package:admin_580_tech/presentation/help_and_support/help_and_support_page.dart';
+import 'package:admin_580_tech/presentation/login/login_page.dart';
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
 import 'package:admin_580_tech/presentation/roles/role_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
@@ -66,8 +68,10 @@ class _MenuBarState extends State<SideMenuPage> {
       AppString.userManagement.val: "",
       AppString.transactionManagement.val: "",
       AppString.serviceRequestManagement.val: "",
+      AppString.clientAnalytics.val: "",
       AppString.supportTickets.val: "",
-      AppString.faq.val: ""
+      AppString.faq.val: "",
+      AppString.logout.val: ""
     };
     // if (!sharedPreffUtil.getViewRole) {
     //   mainData.remove(AppString.roleManagement.val);
@@ -396,47 +400,62 @@ class _MenuBarState extends State<SideMenuPage> {
     required Map<String, String> items,
     required bool isOpened,
   }) {
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        return FxHover(
-          builder: (isHover) {
-            Color color =
-                isHover ? AppColor.primaryColor.val : AppColor.menuDisable.val;
-            return ListTile(
-              leading: isHover || isSelected(items, index, tabsRouter)
-                  ? Padding(
-                      padding: EdgeInsets.symmetric(horizontal: DBL.five.val),
-                      child: CustomContainer(
-                        width: DBL.four.val,
-                        color: AppColor.primaryColor.val,
-                        height: DBL.twentyFive.val,
-                      ),
-                    )
-                  : CustomSizedBox(
-                      width: DBL.ten.val,
-                    ),
-              title:
-                  isOpened ? buildText(items, index, tabsRouter, color) : null,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-              mouseCursor: SystemMouseCursors.click,
-              horizontalTitleGap: DBL.zero.val,
-              onTap: () {
-                isOpen.value = true;
-                tabsRouter
-                    .setActiveIndex(getRouteIndex(items.keys.elementAt(index)));
-                HiveUtils.set(AppString.selectedMenuIndex.val,
-                    getRouteIndex(items.keys.elementAt(index)));
-                _scaffoldDrawerKey.currentState?.closeDrawer();
-                SharedPreffUtil().setPage = 0;
-                SharedPreffUtil().setTab = 0;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return FxHover(
+              builder: (isHover) {
+                Color color = isHover
+                    ? AppColor.primaryColor.val
+                    : AppColor.menuDisable.val;
+                return ListTile(
+                  leading: isHover || isSelected(items, index, tabsRouter)
+                      ? Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: DBL.five.val),
+                          child: CustomContainer(
+                            width: DBL.four.val,
+                            color: AppColor.primaryColor.val,
+                            height: DBL.twentyFive.val,
+                          ),
+                        )
+                      : CustomSizedBox(
+                          width: DBL.ten.val,
+                        ),
+                  title: isOpened
+                      ? buildText(items, index, tabsRouter, color)
+                      : null,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+                  mouseCursor: SystemMouseCursors.click,
+                  horizontalTitleGap: DBL.zero.val,
+                  onTap: () {
+                    isOpen.value = true;
+                    tabsRouter.setActiveIndex(
+                        getRouteIndex(items.keys.elementAt(index)));
+                    HiveUtils.set(AppString.selectedMenuIndex.val,
+                        getRouteIndex(items.keys.elementAt(index)));
+                    _scaffoldDrawerKey.currentState?.closeDrawer();
+                    SharedPreffUtil().setPage = 0;
+                    SharedPreffUtil().setTab = 0;
+                  },
+                );
               },
             );
           },
-        );
-      },
+        ),
+        // InkWell(
+        //     onTap: () async{
+        //      await SharedPreffUtil().logoutClear();
+        //       print("After logout ${SharedPreffUtil().getAdminId}");
+        //       autoTabRouter?.navigate(LoginRoute());
+        //     },
+        //     child: Text(AppString.logout.val))
+      ],
     );
   }
 
@@ -489,7 +508,8 @@ class _MenuBarState extends State<SideMenuPage> {
     HelpAndSupportRoute(),
     SupportTicketsDetailRoute(),
     FaqRoute(),
-    FaqCreationRoute()
+    FaqCreationRoute(),
+    ClientAnalyticsRoute()
   ];
 
   int getRouteIndex(String route) {
@@ -530,6 +550,8 @@ class _MenuBarState extends State<SideMenuPage> {
       return 17;
     } else if (route == AppString.faqCreation.val) {
       return 18;
+    } else if (route == AppString.clientAnalytics.val) {
+      return 19;
     } else {
       return 0;
     }
@@ -573,6 +595,8 @@ class _MenuBarState extends State<SideMenuPage> {
       return const FaqPage();
     } else if (index == 18) {
       return const FaqCreationPage();
+    } else if (index == 19) {
+      return const ClientAnalyticsPage();
     } else {
       return const DashboardPage();
     }

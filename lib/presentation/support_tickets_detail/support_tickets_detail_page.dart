@@ -1,11 +1,8 @@
-import 'package:admin_580_tech/domain/support_tickets/model/support_tickets_response.dart';
 import 'package:auto_route/annotations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/support_tickets_detail/support_tickets_detail_bloc.dart';
-import '../../core/custom_debugger.dart';
 import '../../core/enum.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
@@ -13,10 +10,7 @@ import '../caregiver_detail/widgets/svg_text.dart';
 import '../widget/cached_image.dart';
 import '../widget/custom_padding.dart';
 import '../widget/custom_sizedbox.dart';
-import '../widget/custom_svg.dart';
 import '../widget/custom_text.dart';
-import '../widget/error_view.dart';
-import '../widget/loader_view.dart';
 import '../widget/row_combo.dart';
 
 @RoutePage()

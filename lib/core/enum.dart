@@ -32,6 +32,7 @@ enum AppString {
   forgotPassword("Forgot Password ?"),
   resetPassword("Reset Password"),
   optVerification("OTP Verification"),
+  clientAnalytics("Client Analytics"),
 
   resetPasswordDescription(
       "Enter your registered mail id to receive password\nreset link"),
@@ -420,7 +421,14 @@ enum AppString {
       "I have read and agree to the home health aid agreement"),
   dummyAgreementText(
       "Gives the care ambassador the right to make healthcare decisions on someone else’s behalf. This is common if the patient is not able to speak for themselves and a care ambassador is assigned the duty of making decisions for the benefit of the patient. This form also includes a living will that allows the patient to make end-of-life decisions if they should be in a state of incapacitation for a longer period of time."),
-  faqCreation("Faq Creation");
+  faqCreation("Faq Creation"),
+  churnRate("Churn Rate"),
+  inactiveRate("Inactive Rate"),
+  newUsers("New Users"),
+  newClients("New Clients"),
+  qualityOfServices("Quality Of Services(Rating)"),
+  averageCoastPerClient("Average Coast Per Client"),
+  averageCostPerCareAmbassador("Average Coast Per CareAmbassadors");
 
   final String val;
 

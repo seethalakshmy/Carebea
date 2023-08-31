@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/presentation/client_analytics/client_analytics_page.dart';
 import 'package:admin_580_tech/presentation/help_and_support/help_and_support_page.dart';
 import 'package:auto_route/auto_route.dart';
 
@@ -83,6 +84,10 @@ class AppRouter extends $AppRouter {
       AutoRoute(
           path: "faq-creation",
           page: FaqCreationRoute.page,
+          maintainState: false),
+      AutoRoute(
+          path: "client-analytics",
+          page: ClientAnalyticsRoute.page,
           maintainState: false),
     ]),
   ];
