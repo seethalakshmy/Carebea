@@ -25,31 +25,31 @@ import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart'
     as _i8;
 import 'package:admin_580_tech/presentation/faq/faq_screen.dart' as _i9;
 import 'package:admin_580_tech/presentation/faq_creation/faq_creation_screen.dart'
-    as _i23;
-import 'package:admin_580_tech/presentation/forgot_password/forgot_password_page.dart'
     as _i10;
-import 'package:admin_580_tech/presentation/help_and_support/help_and_support_page.dart'
+import 'package:admin_580_tech/presentation/forgot_password/forgot_password_page.dart'
     as _i11;
-import 'package:admin_580_tech/presentation/login/login_page.dart' as _i12;
+import 'package:admin_580_tech/presentation/help_and_support/help_and_support_page.dart'
+    as _i12;
+import 'package:admin_580_tech/presentation/login/login_page.dart' as _i13;
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart'
-    as _i13;
-import 'package:admin_580_tech/presentation/reset_password/reset_password_page.dart'
     as _i14;
+import 'package:admin_580_tech/presentation/reset_password/reset_password_page.dart'
+    as _i15;
 import 'package:admin_580_tech/presentation/role_creation/role_creation_page.dart'
-    as _i16;
-import 'package:admin_580_tech/presentation/roles/role_page.dart' as _i15;
-import 'package:admin_580_tech/presentation/service_request_management/service_request_management_page.dart'
     as _i17;
-import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart'
+import 'package:admin_580_tech/presentation/roles/role_page.dart' as _i16;
+import 'package:admin_580_tech/presentation/service_request_management/service_request_management_page.dart'
     as _i18;
-import 'package:admin_580_tech/presentation/support_tickets_detail/support_tickets_detail_page.dart'
+import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart'
     as _i19;
-import 'package:admin_580_tech/presentation/transaction_management/transaction_management_page.dart'
+import 'package:admin_580_tech/presentation/support_tickets_detail/support_tickets_detail_page.dart'
     as _i20;
-import 'package:admin_580_tech/presentation/user_management/user_management_page.dart'
+import 'package:admin_580_tech/presentation/transaction_management/transaction_management_page.dart'
     as _i21;
-import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet_detail_page.dart'
+import 'package:admin_580_tech/presentation/user_management/user_management_page.dart'
     as _i22;
+import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet_detail_page.dart'
+    as _i23;
 import 'package:auto_route/auto_route.dart' as _i24;
 import 'package:flutter/material.dart' as _i25;
 
@@ -160,40 +160,58 @@ abstract class $AppRouter extends _i24.RootStackRouter {
         child: const _i9.FaqPage(),
       );
     },
+    FaqCreationRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<FaqCreationRouteArgs>(
+          orElse: () => FaqCreationRouteArgs(
+                isView: queryParams.optString('view'),
+                isEdit: queryParams.optString('edit'),
+                id: queryParams.optString('id'),
+              ));
+      return _i24.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i10.FaqCreationPage(
+          key: args.key,
+          isView: args.isView,
+          isEdit: args.isEdit,
+          id: args.id,
+        ),
+      );
+    },
     ForgotPasswordRoute.name: (routeData) {
       return _i24.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i10.ForgotPasswordPage(),
+        child: const _i11.ForgotPasswordPage(),
       );
     },
     HelpAndSupportRoute.name: (routeData) {
       return _i24.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i11.HelpAndSupportPage(),
+        child: const _i12.HelpAndSupportPage(),
       );
     },
     LoginRoute.name: (routeData) {
       return _i24.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i12.LoginPage(),
+        child: const _i13.LoginPage(),
       );
     },
     OnboardingRoute.name: (routeData) {
       return _i24.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i13.OnboardingPage(),
+        child: const _i14.OnboardingPage(),
       );
     },
     ResetPasswordRoute.name: (routeData) {
       return _i24.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i14.ResetPasswordPage(),
+        child: const _i15.ResetPasswordPage(),
       );
     },
     RolesRoute.name: (routeData) {
       return _i24.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i15.RolesPage(),
+        child: const _i16.RolesPage(),
       );
     },
     RoleCreationRoute.name: (routeData) {
@@ -206,7 +224,7 @@ abstract class $AppRouter extends _i24.RootStackRouter {
               ));
       return _i24.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i16.RoleCreationPage(
+        child: _i17.RoleCreationPage(
           key: args.key,
           isView: args.isView,
           isEdit: args.isEdit,
@@ -217,55 +235,37 @@ abstract class $AppRouter extends _i24.RootStackRouter {
     ServiceRequestManagementRoute.name: (routeData) {
       return _i24.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i17.ServiceRequestManagementPage(),
+        child: const _i18.ServiceRequestManagementPage(),
       );
     },
     SideMenuRoute.name: (routeData) {
       return _i24.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i18.SideMenuPage(),
+        child: const _i19.SideMenuPage(),
       );
     },
     SupportTicketsDetailRoute.name: (routeData) {
       return _i24.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i19.SupportTicketsDetailPage(),
+        child: const _i20.SupportTicketsDetailPage(),
       );
     },
     TransactionManagementRoute.name: (routeData) {
       return _i24.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i20.TransactionManagementPage(),
+        child: const _i21.TransactionManagementPage(),
       );
     },
     UserManagementRoute.name: (routeData) {
       return _i24.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i21.UserManagementPage(),
+        child: const _i22.UserManagementPage(),
       );
     },
     UserManagementDetailRoute.name: (routeData) {
       return _i24.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i22.UserManagementDetailPage(),
-      );
-    },
-    FaqCreationRoute.name: (routeData) {
-      final queryParams = routeData.queryParams;
-      final args = routeData.argsAs<FaqCreationRouteArgs>(
-          orElse: () => FaqCreationRouteArgs(
-                isView: queryParams.optString('view'),
-                isEdit: queryParams.optString('edit'),
-                id: queryParams.optString('id'),
-              ));
-      return _i24.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i23.FaqCreationPage(
-          key: args.key,
-          isView: args.isView,
-          isEdit: args.isEdit,
-          id: args.id,
-        ),
+        child: const _i23.UserManagementDetailPage(),
       );
     },
   };
@@ -540,7 +540,60 @@ class FaqRoute extends _i24.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i10.ForgotPasswordPage]
+/// [_i10.FaqCreationPage]
+class FaqCreationRoute extends _i24.PageRouteInfo<FaqCreationRouteArgs> {
+  FaqCreationRoute({
+    _i25.Key? key,
+    String? isView,
+    String? isEdit,
+    String? id,
+    List<_i24.PageRouteInfo>? children,
+  }) : super(
+          FaqCreationRoute.name,
+          args: FaqCreationRouteArgs(
+            key: key,
+            isView: isView,
+            isEdit: isEdit,
+            id: id,
+          ),
+          rawQueryParams: {
+            'view': isView,
+            'edit': isEdit,
+            'id': id,
+          },
+          initialChildren: children,
+        );
+
+  static const String name = 'FaqCreationRoute';
+
+  static const _i24.PageInfo<FaqCreationRouteArgs> page =
+      _i24.PageInfo<FaqCreationRouteArgs>(name);
+}
+
+class FaqCreationRouteArgs {
+  const FaqCreationRouteArgs({
+    this.key,
+    this.isView,
+    this.isEdit,
+    this.id,
+  });
+
+  final _i25.Key? key;
+
+  final String? isView;
+
+  final String? isEdit;
+
+  final String? id;
+
+  @override
+  String toString() {
+    return 'FaqCreationRouteArgs{key: $key, isView: $isView, isEdit: $isEdit, id: $id}';
+  }
+}
+
+/// generated route for
+/// [_i11.ForgotPasswordPage]
 class ForgotPasswordRoute extends _i24.PageRouteInfo<void> {
   const ForgotPasswordRoute({List<_i24.PageRouteInfo>? children})
       : super(
@@ -554,7 +607,7 @@ class ForgotPasswordRoute extends _i24.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i11.HelpAndSupportPage]
+/// [_i12.HelpAndSupportPage]
 class HelpAndSupportRoute extends _i24.PageRouteInfo<void> {
   const HelpAndSupportRoute({List<_i24.PageRouteInfo>? children})
       : super(
@@ -568,7 +621,7 @@ class HelpAndSupportRoute extends _i24.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i12.LoginPage]
+/// [_i13.LoginPage]
 class LoginRoute extends _i24.PageRouteInfo<void> {
   const LoginRoute({List<_i24.PageRouteInfo>? children})
       : super(
@@ -582,7 +635,7 @@ class LoginRoute extends _i24.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i13.OnboardingPage]
+/// [_i14.OnboardingPage]
 class OnboardingRoute extends _i24.PageRouteInfo<void> {
   const OnboardingRoute({List<_i24.PageRouteInfo>? children})
       : super(
@@ -596,7 +649,7 @@ class OnboardingRoute extends _i24.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i14.ResetPasswordPage]
+/// [_i15.ResetPasswordPage]
 class ResetPasswordRoute extends _i24.PageRouteInfo<void> {
   const ResetPasswordRoute({List<_i24.PageRouteInfo>? children})
       : super(
@@ -610,7 +663,7 @@ class ResetPasswordRoute extends _i24.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i15.RolesPage]
+/// [_i16.RolesPage]
 class RolesRoute extends _i24.PageRouteInfo<void> {
   const RolesRoute({List<_i24.PageRouteInfo>? children})
       : super(
@@ -624,7 +677,7 @@ class RolesRoute extends _i24.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i16.RoleCreationPage]
+/// [_i17.RoleCreationPage]
 class RoleCreationRoute extends _i24.PageRouteInfo<RoleCreationRouteArgs> {
   RoleCreationRoute({
     _i25.Key? key,
@@ -677,7 +730,7 @@ class RoleCreationRouteArgs {
 }
 
 /// generated route for
-/// [_i17.ServiceRequestManagementPage]
+/// [_i18.ServiceRequestManagementPage]
 class ServiceRequestManagementRoute extends _i24.PageRouteInfo<void> {
   const ServiceRequestManagementRoute({List<_i24.PageRouteInfo>? children})
       : super(
@@ -691,7 +744,7 @@ class ServiceRequestManagementRoute extends _i24.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i18.SideMenuPage]
+/// [_i19.SideMenuPage]
 class SideMenuRoute extends _i24.PageRouteInfo<void> {
   const SideMenuRoute({List<_i24.PageRouteInfo>? children})
       : super(
@@ -705,7 +758,7 @@ class SideMenuRoute extends _i24.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i19.SupportTicketsDetailPage]
+/// [_i20.SupportTicketsDetailPage]
 class SupportTicketsDetailRoute extends _i24.PageRouteInfo<void> {
   const SupportTicketsDetailRoute({List<_i24.PageRouteInfo>? children})
       : super(
@@ -719,7 +772,7 @@ class SupportTicketsDetailRoute extends _i24.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i20.TransactionManagementPage]
+/// [_i21.TransactionManagementPage]
 class TransactionManagementRoute extends _i24.PageRouteInfo<void> {
   const TransactionManagementRoute({List<_i24.PageRouteInfo>? children})
       : super(
@@ -733,7 +786,7 @@ class TransactionManagementRoute extends _i24.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i21.UserManagementPage]
+/// [_i22.UserManagementPage]
 class UserManagementRoute extends _i24.PageRouteInfo<void> {
   const UserManagementRoute({List<_i24.PageRouteInfo>? children})
       : super(
@@ -747,7 +800,7 @@ class UserManagementRoute extends _i24.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i22.UserManagementDetailPage]
+/// [_i23.UserManagementDetailPage]
 class UserManagementDetailRoute extends _i24.PageRouteInfo<void> {
   const UserManagementDetailRoute({List<_i24.PageRouteInfo>? children})
       : super(
@@ -758,57 +811,4 @@ class UserManagementDetailRoute extends _i24.PageRouteInfo<void> {
   static const String name = 'UserManagementDetailRoute';
 
   static const _i24.PageInfo<void> page = _i24.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i23.FaqCreationPage]
-class FaqCreationRoute extends _i24.PageRouteInfo<FaqCreationRouteArgs> {
-  FaqCreationRoute({
-    _i25.Key? key,
-    String? isView,
-    String? isEdit,
-    String? id,
-    List<_i24.PageRouteInfo>? children,
-  }) : super(
-          FaqCreationRoute.name,
-          args: FaqCreationRouteArgs(
-            key: key,
-            isView: isView,
-            isEdit: isEdit,
-            id: id,
-          ),
-          rawQueryParams: {
-            'view': isView,
-            'edit': isEdit,
-            'id': id,
-          },
-          initialChildren: children,
-        );
-
-  static const String name = 'FaqCreationRoute';
-
-  static const _i24.PageInfo<FaqCreationRouteArgs> page =
-      _i24.PageInfo<FaqCreationRouteArgs>(name);
-}
-
-class FaqCreationRouteArgs {
-  const FaqCreationRouteArgs({
-    this.key,
-    this.isView,
-    this.isEdit,
-    this.id,
-  });
-
-  final _i25.Key? key;
-
-  final String? isView;
-
-  final String? isEdit;
-
-  final String? id;
-
-  @override
-  String toString() {
-    return 'FaqCreationRouteArgs{key: $key, isView: $isView, isEdit: $isEdit, id: $id}';
-  }
 }

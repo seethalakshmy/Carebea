@@ -226,9 +226,17 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  bool isHide = true;
   CTextField _passwordTextFormView() {
     return CTextField(
-      obscureText: true,
+      suffixIcon: InkWell(
+          onTap: () {
+            setState(() {
+              isHide = !isHide;
+            });
+          },
+          child: Icon(Icons.remove_red_eye)),
+      obscureText: isHide ? true : false,
       width: DBL.fourFifty.val,
       onChanged: (String value) {},
       textInputAction: TextInputAction.done,
