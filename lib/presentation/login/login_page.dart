@@ -1,7 +1,6 @@
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
-import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
@@ -39,9 +38,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    if (SharedPreffUtil().getLogin) {
-      context.router.replace(const SideMenuRoute());
-    }
+    // if (SharedPreffUtil().getLogin) {
+    //   context.router.replace(const SideMenuRoute());
+    // }
   }
 
   @override
