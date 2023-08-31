@@ -30,6 +30,8 @@ class CareGiverProfileBloc
 
   _getCareGiverProfile(
       _GetCareGiverProfile event, Emitter<CareGiverProfileState> emit) async {
+    emit(state.copyWith(isLoading: true));
+
     final List<StatusList> list = [
       StatusList(id: 1, title: AppString.trainingStarted.val),
       StatusList(id: 2, title: AppString.trainingCompleted.val),
@@ -79,6 +81,7 @@ class CareGiverProfileBloc
       return state.copyWith(
         statusList: list,
         response: r,
+        status: r.data?.verificationStatus,
         isLoading: false,
       );
     });
@@ -89,21 +92,21 @@ class CareGiverProfileBloc
 
   _careGiverSendTrainingRequest(_CareGiverSendTrainingRequest event,
       Emitter<CareGiverProfileState> emit) async {
+    emit(state.copyWith(status: Verification.trainingStarted.val));
     final Either<ApiErrorHandler, VerifyResponse> result =
         await careGiverProfileRepository.careGiverSendTrainingRequest(
             userID: event.userId, adminId: event.adminId);
     CareGiverProfileState caregiverVerificationState = result.fold((l) {
       CSnackBar.showError(event.context, msg: l.error);
-
+      emit(state.copyWith(
+          status: state.response?.data?.verificationStatus ?? 0));
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
-        add(CareGiverProfileEvent.getCareGiverProfile(
-            userId: event.userId,
-            adminId: event.adminId,
-            context: event.context));
+        // CSnackBar.showSuccess(event.context, msg: r.message ?? "");
       } else {
+        emit(state.copyWith(
+            status: state.response?.data?.verificationStatus ?? 0));
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
       return state.copyWith(
@@ -119,20 +122,22 @@ class CareGiverProfileBloc
 
   _careGiverTrainingVerify(_CareGiverTrainingVerify event,
       Emitter<CareGiverProfileState> emit) async {
+    emit(state.copyWith(status: Verification.trainingCompleted.val));
+
     final Either<ApiErrorHandler, VerifyResponse> homeResult =
         await careGiverProfileRepository.careGiverTrainingVerify(
             userID: event.userId, status: event.status, adminId: event.adminId);
     CareGiverProfileState stateResult = homeResult.fold((l) {
-      CSnackBar.showError(event.context, msg: l.error);
+      // CSnackBar.showError(event.context, msg: l.error);
+      emit(state.copyWith(
+          status: state.response?.data?.verificationStatus ?? 0));
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
-        add(CareGiverProfileEvent.getCareGiverProfile(
-            userId: event.userId,
-            adminId: event.adminId,
-            context: event.context));
+        // CSnackBar.showSuccess(event.context, msg: r.message ?? "");
       } else {
+        emit(state.copyWith(
+            status: state.response?.data?.verificationStatus ?? 0));
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
 
@@ -148,21 +153,28 @@ class CareGiverProfileBloc
 
   _careGiverInterViewVerify(_CareGiverInterViewVerify event,
       Emitter<CareGiverProfileState> emit) async {
+    if (event.status == Interview.started.val) {
+      emit(state.copyWith(status: Verification.interViewStarted.val));
+    } else if (event.status == Interview.failed.val) {
+      emit(state.copyWith(status: Verification.interViewFailed.val));
+    } else if (event.status == Interview.completed.val) {
+      emit(state.copyWith(status: Verification.interViewCompleted.val));
+    }
     final Either<ApiErrorHandler, VerifyResponse> homeResult =
         await careGiverProfileRepository.careGiverInterViewVerify(
             userID: event.userId, status: event.status, adminId: event.adminId);
     CareGiverProfileState stateResult = homeResult.fold((l) {
       CSnackBar.showError(event.context, msg: l.error);
+      emit(state.copyWith(
+          status: state.response?.data?.verificationStatus ?? 0));
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        // CSnackBar.showSuccess(event.context, msg: r.message ?? "");
         // autoTabRouter?.navigate(CareGiversRoute());
-        add(CareGiverProfileEvent.getCareGiverProfile(
-            userId: event.userId,
-            adminId: event.adminId,
-            context: event.context));
       } else {
+        emit(state.copyWith(
+            status: state.response?.data?.verificationStatus ?? 0));
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
 

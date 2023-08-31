@@ -10,7 +10,9 @@ class CareGiverProfileState with _$CareGiverProfileState {
     required VerifyResponse? interViewVerifyResponse,
     required String? error,
     required VerifyResponse? sendTrainingResponse,
+    int? status,
     @Default(false) bool isClientError,
+    @Default(false) bool isAlreadyCalledInitialCall,
     @Default(false) bool isShowStatusDropDown,
     @Default([]) List<StatusList> statusList,
   }) = _CareGiverProfileState;

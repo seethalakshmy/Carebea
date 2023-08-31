@@ -72,21 +72,21 @@ class _MenuBarState extends State<SideMenuPage> {
     };
 
     CustomLog.log("Side menu:::Called initial Api Call");
-    if (!sharedPreffUtil.getViewRole) {
-      mainData.remove(AppString.roleManagement.val);
-    }
-    if (!sharedPreffUtil.getViewAdmin) {
-      mainData.remove(AppString.adminManagement.val);
-    }
-    if (!sharedPreffUtil.getViewCareGiver) {
-      mainData.remove(AppString.careAmbassador.val);
-    }
-    if (!sharedPreffUtil.getViewTransaction) {
-      mainData.remove(AppString.transactionManagement.val);
-    }
-    if (!sharedPreffUtil.getViewServiceRequest) {
-      mainData.remove(AppString.serviceRequestManagement.val);
-    }
+    // if (!sharedPreffUtil.getViewRole) {
+    //   mainData.remove(AppString.roleManagement.val);
+    // }
+    // if (!sharedPreffUtil.getViewAdmin) {
+    //   mainData.remove(AppString.adminManagement.val);
+    // }
+    // if (!sharedPreffUtil.getViewCareGiver) {
+    //   mainData.remove(AppString.careAmbassador.val);
+    // }
+    // if (!sharedPreffUtil.getViewTransaction) {
+    //   mainData.remove(AppString.transactionManagement.val);
+    // }
+    // if (!sharedPreffUtil.getViewServiceRequest) {
+    //   mainData.remove(AppString.serviceRequestManagement.val);
+    // }
   }
 
   final ScrollController _scrollController = ScrollController();

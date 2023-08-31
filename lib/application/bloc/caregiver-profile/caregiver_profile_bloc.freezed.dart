@@ -1176,7 +1176,9 @@ mixin _$CareGiverProfileState {
   String? get error => throw _privateConstructorUsedError;
   VerifyResponse? get sendTrainingResponse =>
       throw _privateConstructorUsedError;
+  int? get status => throw _privateConstructorUsedError;
   bool get isClientError => throw _privateConstructorUsedError;
+  bool get isAlreadyCalledInitialCall => throw _privateConstructorUsedError;
   bool get isShowStatusDropDown => throw _privateConstructorUsedError;
   List<StatusList> get statusList => throw _privateConstructorUsedError;
 
@@ -1199,7 +1201,9 @@ abstract class $CareGiverProfileStateCopyWith<$Res> {
       VerifyResponse? interViewVerifyResponse,
       String? error,
       VerifyResponse? sendTrainingResponse,
+      int? status,
       bool isClientError,
+      bool isAlreadyCalledInitialCall,
       bool isShowStatusDropDown,
       List<StatusList> statusList});
 }
@@ -1225,7 +1229,9 @@ class _$CareGiverProfileStateCopyWithImpl<$Res,
     Object? interViewVerifyResponse = freezed,
     Object? error = freezed,
     Object? sendTrainingResponse = freezed,
+    Object? status = freezed,
     Object? isClientError = null,
+    Object? isAlreadyCalledInitialCall = null,
     Object? isShowStatusDropDown = null,
     Object? statusList = null,
   }) {
@@ -1258,9 +1264,17 @@ class _$CareGiverProfileStateCopyWithImpl<$Res,
           ? _value.sendTrainingResponse
           : sendTrainingResponse // ignore: cast_nullable_to_non_nullable
               as VerifyResponse?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
       isClientError: null == isClientError
           ? _value.isClientError
           : isClientError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAlreadyCalledInitialCall: null == isAlreadyCalledInitialCall
+          ? _value.isAlreadyCalledInitialCall
+          : isAlreadyCalledInitialCall // ignore: cast_nullable_to_non_nullable
               as bool,
       isShowStatusDropDown: null == isShowStatusDropDown
           ? _value.isShowStatusDropDown
@@ -1290,7 +1304,9 @@ abstract class _$$_CareGiverProfileStateCopyWith<$Res>
       VerifyResponse? interViewVerifyResponse,
       String? error,
       VerifyResponse? sendTrainingResponse,
+      int? status,
       bool isClientError,
+      bool isAlreadyCalledInitialCall,
       bool isShowStatusDropDown,
       List<StatusList> statusList});
 }
@@ -1313,7 +1329,9 @@ class __$$_CareGiverProfileStateCopyWithImpl<$Res>
     Object? interViewVerifyResponse = freezed,
     Object? error = freezed,
     Object? sendTrainingResponse = freezed,
+    Object? status = freezed,
     Object? isClientError = null,
+    Object? isAlreadyCalledInitialCall = null,
     Object? isShowStatusDropDown = null,
     Object? statusList = null,
   }) {
@@ -1346,9 +1364,17 @@ class __$$_CareGiverProfileStateCopyWithImpl<$Res>
           ? _value.sendTrainingResponse
           : sendTrainingResponse // ignore: cast_nullable_to_non_nullable
               as VerifyResponse?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as int?,
       isClientError: null == isClientError
           ? _value.isClientError
           : isClientError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAlreadyCalledInitialCall: null == isAlreadyCalledInitialCall
+          ? _value.isAlreadyCalledInitialCall
+          : isAlreadyCalledInitialCall // ignore: cast_nullable_to_non_nullable
               as bool,
       isShowStatusDropDown: null == isShowStatusDropDown
           ? _value.isShowStatusDropDown
@@ -1373,7 +1399,9 @@ class _$_CareGiverProfileState implements _CareGiverProfileState {
       required this.interViewVerifyResponse,
       required this.error,
       required this.sendTrainingResponse,
+      this.status,
       this.isClientError = false,
+      this.isAlreadyCalledInitialCall = false,
       this.isShowStatusDropDown = false,
       final List<StatusList> statusList = const []})
       : _statusList = statusList;
@@ -1393,8 +1421,13 @@ class _$_CareGiverProfileState implements _CareGiverProfileState {
   @override
   final VerifyResponse? sendTrainingResponse;
   @override
+  final int? status;
+  @override
   @JsonKey()
   final bool isClientError;
+  @override
+  @JsonKey()
+  final bool isAlreadyCalledInitialCall;
   @override
   @JsonKey()
   final bool isShowStatusDropDown;
@@ -1409,7 +1442,7 @@ class _$_CareGiverProfileState implements _CareGiverProfileState {
 
   @override
   String toString() {
-    return 'CareGiverProfileState(isLoading: $isLoading, isError: $isError, response: $response, trainingVerifyResponse: $trainingVerifyResponse, interViewVerifyResponse: $interViewVerifyResponse, error: $error, sendTrainingResponse: $sendTrainingResponse, isClientError: $isClientError, isShowStatusDropDown: $isShowStatusDropDown, statusList: $statusList)';
+    return 'CareGiverProfileState(isLoading: $isLoading, isError: $isError, response: $response, trainingVerifyResponse: $trainingVerifyResponse, interViewVerifyResponse: $interViewVerifyResponse, error: $error, sendTrainingResponse: $sendTrainingResponse, status: $status, isClientError: $isClientError, isAlreadyCalledInitialCall: $isAlreadyCalledInitialCall, isShowStatusDropDown: $isShowStatusDropDown, statusList: $statusList)';
   }
 
   @override
@@ -1430,8 +1463,13 @@ class _$_CareGiverProfileState implements _CareGiverProfileState {
             (identical(other.error, error) || other.error == error) &&
             (identical(other.sendTrainingResponse, sendTrainingResponse) ||
                 other.sendTrainingResponse == sendTrainingResponse) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.isClientError, isClientError) ||
                 other.isClientError == isClientError) &&
+            (identical(other.isAlreadyCalledInitialCall,
+                    isAlreadyCalledInitialCall) ||
+                other.isAlreadyCalledInitialCall ==
+                    isAlreadyCalledInitialCall) &&
             (identical(other.isShowStatusDropDown, isShowStatusDropDown) ||
                 other.isShowStatusDropDown == isShowStatusDropDown) &&
             const DeepCollectionEquality()
@@ -1448,7 +1486,9 @@ class _$_CareGiverProfileState implements _CareGiverProfileState {
       interViewVerifyResponse,
       error,
       sendTrainingResponse,
+      status,
       isClientError,
+      isAlreadyCalledInitialCall,
       isShowStatusDropDown,
       const DeepCollectionEquality().hash(_statusList));
 
@@ -1469,7 +1509,9 @@ abstract class _CareGiverProfileState implements CareGiverProfileState {
       required final VerifyResponse? interViewVerifyResponse,
       required final String? error,
       required final VerifyResponse? sendTrainingResponse,
+      final int? status,
       final bool isClientError,
+      final bool isAlreadyCalledInitialCall,
       final bool isShowStatusDropDown,
       final List<StatusList> statusList}) = _$_CareGiverProfileState;
 
@@ -1488,7 +1530,11 @@ abstract class _CareGiverProfileState implements CareGiverProfileState {
   @override
   VerifyResponse? get sendTrainingResponse;
   @override
+  int? get status;
+  @override
   bool get isClientError;
+  @override
+  bool get isAlreadyCalledInitialCall;
   @override
   bool get isShowStatusDropDown;
   @override

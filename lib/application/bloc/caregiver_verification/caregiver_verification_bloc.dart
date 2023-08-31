@@ -4,6 +4,8 @@ import 'package:admin_580_tech/domain/caregiver_verification/model/caregiver_ver
 import 'package:admin_580_tech/domain/caregiver_verification/model/reject_params.dart';
 import 'package:admin_580_tech/domain/caregiver_verification/model/verify_response.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
+import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
+import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -122,9 +124,21 @@ class CareGiverVerificationBloc
       } else {
         CSnackBar.showError(event.context, msg: r.data?.message ?? "");
       }
+
+      VerificationTypes item = state.verificationTypes[1];
+      final list = state.verificationTypes;
+      for (var element in list) {
+        element.isSelected = false;
+      }
+
+      List<VerificationTypes> verificationTypes = List.from(list)..removeAt(1);
+      verificationTypes.insert(1, item.copyWith(isSelected: true));
+
       return state.copyWith(
         isLoading: false,
         backgroundVerifyResponse: r,
+        selectedVerificationIndex: 1,
+        verificationTypes: verificationTypes,
         isError: false,
       );
     });
@@ -299,6 +313,7 @@ class CareGiverVerificationBloc
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        autoTabRouter?.navigate(CareGiverProfileRoute());
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }

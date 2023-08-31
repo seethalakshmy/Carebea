@@ -48,7 +48,6 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
 
   @override
   void initState() {
-    print('admin ${SharedPreffUtil().getAdminId}');
     _tabController = TabController(vsync: this, length: 7);
 
     _userId =
@@ -91,76 +90,87 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
     );
   }
 
-  CustomSizedBox _bodyView(CareGiverProfileState state) {
+  _bodyView(CareGiverProfileState state) {
     CustomLog.log('width :${MediaQuery.of(context).size.width}');
     int status = state.response?.data?.verificationStatus ?? 0;
-    return CustomSizedBox(
-      height: MediaQuery.of(context).size.height,
-      child: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [
-            //prev 230
-            SliverAppBar(
-                leading: const SizedBox(),
-                backgroundColor: Colors.white,
-                expandedHeight: state.isShowStatusDropDown
-                    ? DBL.twoSixty.val
-                    : DBL.twoThirty.val,
-                floating: false,
-                toolbarHeight: DBL.fifty.val,
-                flexibleSpace: _buildFlexibleSpaceBar(context, state, status))
-          ];
-        },
-        body: Scaffold(
-          backgroundColor: AppColor.dividerColor2.val,
-          appBar: TabBar(
-            isScrollable: true,
-            dividerColor: AppColor.transparent.val,
-            indicatorColor: AppColor.primaryColor.val,
-            indicatorSize: TabBarIndicatorSize.tab,
-            indicatorWeight: 2,
-            labelColor: AppColor.primaryColor.val,
-            unselectedLabelColor: AppColor.lightGrey11.val,
-            tabs: [
-              Tab(icon: _buildCustomText(AppString.personalDetails1.val)),
-              Tab(
-                  icon:
-                      _buildCustomText(AppString.qualificationTestResult.val)),
-              Tab(icon: _buildCustomText(AppString.preference.val)),
-              Tab(icon: _buildCustomText(AppString.services.val)),
-              Tab(icon: _buildCustomText(AppString.reference.val)),
-              Tab(icon: _buildCustomText(AppString.profile.val)),
-              Tab(icon: _buildCustomText(AppString.agreement.val)),
-            ],
-            controller: _tabController,
-          ),
-          body: TabBarView(
-            physics: const NeverScrollableScrollPhysics(),
-            controller: _tabController,
-            children: [
-              CaregiverPersonalDetailsView(
-                state: state,
-              ),
-              CaregiverQualificationAndTestResultView(
-                state: state,
-              ),
-              CareGiverPreferenceView(
-                state: state,
-              ),
-              CareGiverProvidedServices(
-                state: state,
-              ),
-              CareGiverReferenceView(
-                state: state,
-              ),
-              CaregiverProfileView(
-                state: state,
-              ),
-              CareGiverAgreementView(
-                state: state,
-              )
-              /*buildOffersListView(),*/
-            ],
+
+    return InkWell(
+      onTap: () {
+        print('on tapped:: }');
+        if (state.isShowStatusDropDown) {
+          context
+              .read<CareGiverProfileBloc>()
+              .add(const CareGiverProfileEvent.onTappedStatusDropDown(false));
+        }
+      },
+      child: CustomSizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return [
+              //prev 230
+              SliverAppBar(
+                  leading: const SizedBox(),
+                  backgroundColor: Colors.white,
+                  expandedHeight: state.isShowStatusDropDown
+                      ? DBL.twoSixty.val
+                      : DBL.twoThirty.val,
+                  floating: false,
+                  toolbarHeight: DBL.fifty.val,
+                  flexibleSpace: _buildFlexibleSpaceBar(context, state, status))
+            ];
+          },
+          body: Scaffold(
+            backgroundColor: AppColor.dividerColor2.val,
+            appBar: TabBar(
+              isScrollable: true,
+              dividerColor: AppColor.transparent.val,
+              indicatorColor: AppColor.primaryColor.val,
+              indicatorSize: TabBarIndicatorSize.tab,
+              indicatorWeight: 2,
+              labelColor: AppColor.primaryColor.val,
+              unselectedLabelColor: AppColor.lightGrey11.val,
+              tabs: [
+                Tab(icon: _buildCustomText(AppString.personalDetails1.val)),
+                Tab(
+                    icon: _buildCustomText(
+                        AppString.qualificationTestResult.val)),
+                Tab(icon: _buildCustomText(AppString.preference.val)),
+                Tab(icon: _buildCustomText(AppString.services.val)),
+                Tab(icon: _buildCustomText(AppString.reference.val)),
+                Tab(icon: _buildCustomText(AppString.profile.val)),
+                Tab(icon: _buildCustomText(AppString.agreement.val)),
+              ],
+              controller: _tabController,
+            ),
+            body: TabBarView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: _tabController,
+              children: [
+                CaregiverPersonalDetailsView(
+                  state: state,
+                ),
+                CaregiverQualificationAndTestResultView(
+                  state: state,
+                ),
+                CareGiverPreferenceView(
+                  state: state,
+                ),
+                CareGiverProvidedServices(
+                  state: state,
+                ),
+                CareGiverReferenceView(
+                  state: state,
+                ),
+                CaregiverProfileView(
+                  state: state,
+                ),
+                CareGiverAgreementView(
+                  state: state,
+                )
+                /*buildOffersListView(),*/
+              ],
+            ),
           ),
         ),
       ),
@@ -212,23 +222,21 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
                     CustomSizedBox(
                       width: DBL.twentyFive.val,
                     ),
-                    Column(
-                      children: [
-                        TableVerificationButton(
-                            verificationStatus: status,
-                            isStatusChangeWidget: true,
-                            onStatusChange: () {
-                              context.read<CareGiverProfileBloc>().add(
-                                  CareGiverProfileEvent.onTappedStatusDropDown(
-                                      state.isShowStatusDropDown
-                                          ? false
-                                          : true));
-                            }),
-                      ],
-                    ),
                   ],
                 ),
               ],
+            ),
+            Positioned(
+              top: 5,
+              left: 174,
+              child: TableVerificationButton(
+                  verificationStatus: state.status ?? 0,
+                  isStatusChangeWidget: true,
+                  onStatusChange: () {
+                    context.read<CareGiverProfileBloc>().add(
+                        CareGiverProfileEvent.onTappedStatusDropDown(
+                            state.isShowStatusDropDown ? false : true));
+                  }),
             ),
             state.isShowStatusDropDown
                 ? Positioned(

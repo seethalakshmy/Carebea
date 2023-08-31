@@ -1,4 +1,4 @@
-import 'package:admin_580_tech/presentation/help_and_support/help_and_support_page.dart';
+import 'package:admin_580_tech/presentation/routes/gurad.dart';
 import 'package:auto_route/auto_route.dart';
 
 import 'app_router.gr.dart';
@@ -9,7 +9,11 @@ import 'app_router.gr.dart';
 class AppRouter extends $AppRouter {
   @override
   final List<AutoRoute> routes = [
-    AutoRoute(page: LoginRoute.page, initial: true, path: '/'),
+    AutoRoute(
+        page: LoginRoute.page,
+        path: '/',
+        initial: true,
+        guards: [DashBoardGuardGuard()]),
     AutoRoute(
         page: ForgotPasswordRoute.page,
         maintainState: false,
@@ -19,7 +23,11 @@ class AppRouter extends $AppRouter {
         maintainState: false,
         path: '/admin/reset-password'),
     AutoRoute(page: SideMenuRoute.page, path: "/admin/main", children: [
-      AutoRoute(path: 'dashboard', page: DashboardRoute.page, initial: true),
+      AutoRoute(
+        path: 'dashboard',
+        page: DashboardRoute.page,
+        initial: true,
+      ),
       AutoRoute(
           path: 'care-ambassador',
           page: CareGiversRoute.page,
