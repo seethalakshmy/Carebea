@@ -18,6 +18,7 @@ import 'package:admin_580_tech/presentation/help_and_support/help_and_support_pa
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
 import 'package:admin_580_tech/presentation/roles/role_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
+import 'package:admin_580_tech/presentation/widget/common_alert_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
@@ -69,6 +70,8 @@ class _MenuBarState extends State<SideMenuPage> {
       AppString.supportTickets.val: "",
       AppString.faq.val: ""
     };
+
+    CustomLog.log("Side menu:::Called initial Api Call");
     // if (!sharedPreffUtil.getViewRole) {
     //   mainData.remove(AppString.roleManagement.val);
     // }
@@ -424,14 +427,30 @@ class _MenuBarState extends State<SideMenuPage> {
               mouseCursor: SystemMouseCursors.click,
               horizontalTitleGap: DBL.zero.val,
               onTap: () {
-                isOpen.value = true;
-                tabsRouter
-                    .setActiveIndex(getRouteIndex(items.keys.elementAt(index)));
-                HiveUtils.set(AppString.selectedMenuIndex.val,
-                    getRouteIndex(items.keys.elementAt(index)));
-                _scaffoldDrawerKey.currentState?.closeDrawer();
-                SharedPreffUtil().setPage = 0;
-                SharedPreffUtil().setTab = 0;
+                if (items.keys.elementAt(index) == AppString.logout.val) {
+                  showDialog<void>(
+                    context: context,
+                    builder: (BuildContext dialogContext) {
+                      return CommonAlertWidget(
+                        heading: AppString.logout.val,
+                        label: AppString.logoutMsg.val,
+                        onTapYes: () {
+                          SharedPreffUtil().logoutClear();
+                          context.router.replace(const LoginRoute());
+                        },
+                      );
+                    },
+                  );
+                } else {
+                  isOpen.value = true;
+                  tabsRouter.setActiveIndex(
+                      getRouteIndex(items.keys.elementAt(index)));
+                  HiveUtils.set(AppString.selectedMenuIndex.val,
+                      getRouteIndex(items.keys.elementAt(index)));
+                  _scaffoldDrawerKey.currentState?.closeDrawer();
+                  SharedPreffUtil().setPage = 0;
+                  SharedPreffUtil().setTab = 0;
+                }
               },
             );
           },
@@ -453,26 +472,32 @@ class _MenuBarState extends State<SideMenuPage> {
   }
 
   bool isSelected(Map<String, String> items, int index, TabsRouter tabsRouter) {
-    String path = tabsRouter.currentPath.replaceAll("admin/main/", "");
-    CustomLog.log('path is $path');
-    if (path == "/user-management-detail") {
-      path = "user-management";
-    } else if (path == AppString.careAmbassadorVerificationPath.val ||
-        path == AppString.careAmbassadorDetailPath.val ||
-        path == AppString.careAmbassadorProfilePath.val ||
-        path == AppString.careAmbassadorCreationPath.val) {
-      path = "care-ambassador";
-    } else if (path == "role-manage") {
-      path = "role-management";
-    } else if (path == "admin-manage") {
-      path = "admin-management";
+    print('item:: ${items.keys.elementAt(index)}');
+
+    if (items.keys.elementAt(index) != AppString.logout.val) {
+      String path = tabsRouter.currentPath.replaceAll("admin/main/", "");
+      CustomLog.log('path is $path');
+      if (path == "/user-management-detail") {
+        path = "user-management";
+      } else if (path == AppString.careAmbassadorVerificationPath.val ||
+          path == AppString.careAmbassadorDetailPath.val ||
+          path == AppString.careAmbassadorProfilePath.val ||
+          path == AppString.careAmbassadorCreationPath.val) {
+        path = "care-ambassador";
+      } else if (path == "role-manage") {
+        path = "role-management";
+      } else if (path == "admin-manage") {
+        path = "admin-management";
+      }
+      return items.keys.elementAt(index) == upperCase(path) ? true : false;
+    } else {
+      return false;
     }
-    return items.keys.elementAt(index) == upperCase(path) ? true : false;
   }
 
   final List<PageRouteInfo<dynamic>> _routes = [
     DashboardRoute(),
-    CareGiversRoute(tab: null),
+    CareGiversRoute(),
     CareGiverDetailRoute(),
     UserManagementRoute(),
     UserManagementDetailRoute(),

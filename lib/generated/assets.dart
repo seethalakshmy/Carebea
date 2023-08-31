@@ -63,6 +63,7 @@ class Assets {
   static const String imagesDrawer = 'assets/images/drawer.png';
   static const String imagesHours = 'assets/images/hours.png';
   static const String imagesIcPerson = 'assets/images/ic_person.png';
+  static const String imagesImg = 'assets/images/ic_profile.png';
   static const String imagesMissedSchedule =
       'assets/images/missed_schedule.png';
   static const String imagesNotification = 'assets/images/notification.png';

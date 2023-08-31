@@ -128,12 +128,12 @@ abstract class ApiClient {
       @Field('user_id') String userId,
       @Field('admin_id') String adminId);
 
-  @POST("/admin/caregiver-intervie-verification")
+  @POST("/admin/caregiver-interview-verification")
   Future<VerifyResponse> careGiverInterViewVerify(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('admin_id') String adminId,
-      @Field('status') bool status);
+      @Field('status') int status);
 
   @POST("/admin/get-care-giver-by-id")
   Future<CareGiverDetailResponse> getCareGiverDetail(

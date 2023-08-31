@@ -27,6 +27,7 @@ class CustomAlertDialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      alignment: AlignmentDirectional.center,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(DBL.ten.val),
       ),
@@ -34,12 +35,11 @@ class CustomAlertDialogWidget extends StatelessWidget {
       backgroundColor: Colors.transparent,
       child: Wrap(
         children: [
-          _headerWidget(context, heading),
           Container(
-            width: width ?? double.infinity,
+            width: width ?? 1072,
             height: height ?? 550,
             decoration: BoxDecoration(
-              color: backgroundColor ?? Colors.white,
+              color: Colors.white,
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(DBL.five.val),
               boxShadow: [
@@ -52,15 +52,43 @@ class CustomAlertDialogWidget extends StatelessWidget {
             ),
             child: SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
-                crossAxisAlignment:
-                    crossAxisAlignment ?? CrossAxisAlignment.start,
-                children: [child],
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [_headerWidget(context, heading), child],
               ),
             ),
           ),
         ],
       ),
+      // child: Wrap(
+      //   children: [
+      //     _headerWidget(context, heading),
+      //     Container(
+      //       width: width ?? double.infinity,
+      //       height: height ?? 550,
+      //       decoration: BoxDecoration(
+      //         color: backgroundColor ?? Colors.white,
+      //         shape: BoxShape.rectangle,
+      //         borderRadius: BorderRadius.circular(DBL.five.val),
+      //         boxShadow: [
+      //           BoxShadow(
+      //             color: Colors.black26,
+      //             blurRadius: DBL.ten.val,
+      //             offset: Offset(DBL.zero.val, DBL.ten.val),
+      //           ),
+      //         ],
+      //       ),
+      //       child: SingleChildScrollView(
+      //         child: Column(
+      //           mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
+      //           crossAxisAlignment:
+      //               crossAxisAlignment ?? CrossAxisAlignment.start,
+      //           children: [child],
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // ),
     );
   }
 

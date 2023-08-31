@@ -27,7 +27,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../side_menu/side_menu_page.dart';
-import '../widget/custom_alert_delete.dart';
+import '../widget/common_alert_widget.dart';
 import '../widget/custom_dropdown.dart';
 import '../widget/custom_icon.dart';
 import '../widget/custom_text.dart';
@@ -517,7 +517,7 @@ class _AdminsPageState extends State<AdminsPage> {
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {
-        return CustomActionAlert(
+        return CommonAlertWidget(
             heading: AppString.delete.val,
             label: AppString.deleteRole.val,
             onTapYes: () {
