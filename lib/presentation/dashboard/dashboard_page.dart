@@ -85,47 +85,105 @@ class _DashboardPageState extends State<DashboardPage> {
                   children: [
                     HeaderView(title: AppString.dashboard.val),
                     CustomSizedBox(height: DBL.twenty.val),
-                    Wrap(
-                      runSpacing: 10,
-                      children: [
-                        BlocBuilder<DashboardBloc, DashboardState>(
-                          builder: (context, state) {
-                            return _detailsCardView(list: [
-                              state.dashboardResponse?.data?.totalHours
-                                  ?.toStringAsFixed(2),
-                              state.dashboardResponse?.data?.totalSales,
-                              state.dashboardResponse?.data?.clientCount,
-                              state.dashboardResponse?.data?.careGiverCount
-                            ]);
-                          },
-                        ),
-                        CustomSizedBox(width: DBL.twenty.val),
-                        BlocBuilder<DashboardBloc, DashboardState>(
-                          builder: (context, state) {
-                            return AlertList(
-                                countList: state.alertResponse?.data != null
-                                    ? [
-                                        state.alertResponse?.data
-                                            ?.clientQueryCount,
-                                        state.alertResponse?.data?.cgQueryCount,
-                                        state.alertResponse?.data
-                                            ?.missedTotalService,
-                                        state.alertResponse?.data
-                                            ?.totalClientCancelledService,
-                                        state.alertResponse?.data
-                                            ?.totalCgCancelledService,
-                                        ""
-                                      ]
-                                    : null
-                                // count: state.alertResponse?.data != null
-                                //     ? state.alertResponse!.data!.cgQueryCount
-                                //         .toString()
-                                //     : "null",
-                                );
-                          },
-                        )
-                      ],
-                    ),
+                    Responsive.isWeb(context)
+                        ? Row(
+                            // runSpacing: 10,
+                            children: [
+                              BlocBuilder<DashboardBloc, DashboardState>(
+                                builder: (context, state) {
+                                  return Expanded(
+                                    child: _detailsCardView(list: [
+                                      state.dashboardResponse?.data?.totalHours
+                                          ?.toStringAsFixed(2),
+                                      state.dashboardResponse?.data?.totalSales,
+                                      state
+                                          .dashboardResponse?.data?.clientCount,
+                                      state.dashboardResponse?.data
+                                          ?.careGiverCount
+                                    ]),
+                                  );
+                                },
+                              ),
+                              Responsive.isWeb(context)
+                                  ? CustomSizedBox(width: DBL.ten.val)
+                                  : CustomSizedBox(height: DBL.twenty.val),
+                              BlocBuilder<DashboardBloc, DashboardState>(
+                                builder: (context, state) {
+                                  return Expanded(
+                                    flex: 1,
+                                    child: AlertList(
+                                        countList:
+                                            state.alertResponse?.data != null
+                                                ? [
+                                                    state.alertResponse?.data
+                                                        ?.clientQueryCount,
+                                                    state.alertResponse?.data
+                                                        ?.cgQueryCount,
+                                                    state.alertResponse?.data
+                                                        ?.missedTotalService,
+                                                    state.alertResponse?.data
+                                                        ?.totalClientCancelledService,
+                                                    state.alertResponse?.data
+                                                        ?.totalCgCancelledService,
+                                                    ""
+                                                  ]
+                                                : null
+                                        // count: state.alertResponse?.data != null
+                                        //     ? state.alertResponse!.data!.cgQueryCount
+                                        //         .toString()
+                                        //     : "null",
+                                        ),
+                                  );
+                                },
+                              )
+                            ],
+                          )
+                        : Column(
+                            // runSpacing: 10,
+                            children: [
+                              BlocBuilder<DashboardBloc, DashboardState>(
+                                builder: (context, state) {
+                                  return _detailsCardView(list: [
+                                    state.dashboardResponse?.data?.totalHours
+                                        ?.toStringAsFixed(2),
+                                    state.dashboardResponse?.data?.totalSales,
+                                    state.dashboardResponse?.data?.clientCount,
+                                    state
+                                        .dashboardResponse?.data?.careGiverCount
+                                  ]);
+                                },
+                              ),
+                              Responsive.isWeb(context)
+                                  ? CustomSizedBox(width: DBL.ten.val)
+                                  : CustomSizedBox(height: DBL.twenty.val),
+                              BlocBuilder<DashboardBloc, DashboardState>(
+                                builder: (context, state) {
+                                  return AlertList(
+                                      countList:
+                                          state.alertResponse?.data != null
+                                              ? [
+                                                  state.alertResponse?.data
+                                                      ?.clientQueryCount,
+                                                  state.alertResponse?.data
+                                                      ?.cgQueryCount,
+                                                  state.alertResponse?.data
+                                                      ?.missedTotalService,
+                                                  state.alertResponse?.data
+                                                      ?.totalClientCancelledService,
+                                                  state.alertResponse?.data
+                                                      ?.totalCgCancelledService,
+                                                  ""
+                                                ]
+                                              : null
+                                      // count: state.alertResponse?.data != null
+                                      //     ? state.alertResponse!.data!.cgQueryCount
+                                      //         .toString()
+                                      //     : "null",
+                                      );
+                                },
+                              )
+                            ],
+                          ),
                     CustomSizedBox(height: DBL.ten.val),
                     // CustomSizedBox(height: DBL.ten.val),
                     Wrap(
@@ -182,7 +240,9 @@ class _DashboardPageState extends State<DashboardPage> {
                                 newClients: state
                                     .dashboardResponse?.data?.totalNewClient,
                                 repeatedClients: state.dashboardResponse?.data
-                                    ?.totalRepeatedClient),
+                                    ?.totalRepeatedClient,
+                                percentage: state.dashboardResponse?.data
+                                    ?.percentageChangeInNewClient),
                             Responsive.isWeb(context)
                                 ? CustomSizedBox(height: DBL.twenty.val)
                                 : CustomSizedBox(height: DBL.twenty.val),
@@ -224,7 +284,7 @@ class _DashboardPageState extends State<DashboardPage> {
       child: GridView.builder(
         physics: NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 2,
+          childAspectRatio: 2.5,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
           crossAxisCount: 2,

@@ -61,6 +61,7 @@ class Data {
     int? totalRepeatedCareGiver,
     int? totalRepeatedClient,
     double? totalHours,
+    double? percentageChangeInNewClient,
     int? totalServiceCompleted,
     int? totalSales,
     String? monthlyIncome,
@@ -74,6 +75,7 @@ class Data {
     _totalRepeatedCareGiver = totalRepeatedCareGiver;
     _totalRepeatedClient = totalRepeatedClient;
     _totalHours = totalHours;
+    _percentageChangeInNewClient = percentageChangeInNewClient;
     _totalServiceCompleted = totalServiceCompleted;
     _totalSales = totalSales;
     _monthlyIncome = monthlyIncome;
@@ -89,6 +91,7 @@ class Data {
     _totalRepeatedCareGiver = json['totalRepeatedCareGiver'];
     _totalRepeatedClient = json['totalRepeatedClient'];
     _totalHours = json['totalHours'];
+    _percentageChangeInNewClient = json['percentageChangeInNewClient'];
     _totalServiceCompleted = json['totalServiceCompleted'];
     _totalSales = json['totalSales'];
     _monthlyIncome = json['monthlyIncome'];
@@ -109,6 +112,7 @@ class Data {
   int? _totalRepeatedCareGiver;
   int? _totalRepeatedClient;
   double? _totalHours;
+  double? _percentageChangeInNewClient;
   int? _totalServiceCompleted;
   int? _totalSales;
   String? _monthlyIncome;
@@ -122,6 +126,7 @@ class Data {
     int? totalRepeatedCareGiver,
     int? totalRepeatedClient,
     double? totalHours,
+    double? percentageChangeInNewClient,
     int? totalServiceCompleted,
     int? totalSales,
     String? monthlyIncome,
@@ -137,6 +142,8 @@ class Data {
             totalRepeatedCareGiver ?? _totalRepeatedCareGiver,
         totalRepeatedClient: totalRepeatedClient ?? _totalRepeatedClient,
         totalHours: totalHours ?? _totalHours,
+        percentageChangeInNewClient:
+            percentageChangeInNewClient ?? _percentageChangeInNewClient,
         totalServiceCompleted: totalServiceCompleted ?? _totalServiceCompleted,
         totalSales: totalSales ?? _totalSales,
         monthlyIncome: monthlyIncome ?? _monthlyIncome,
@@ -150,6 +157,7 @@ class Data {
   int? get totalRepeatedCareGiver => _totalRepeatedCareGiver;
   int? get totalRepeatedClient => _totalRepeatedClient;
   double? get totalHours => _totalHours;
+  double? get percentageChangeInNewClient => _percentageChangeInNewClient;
   int? get totalServiceCompleted => _totalServiceCompleted;
   int? get totalSales => _totalSales;
   String? get monthlyIncome => _monthlyIncome;
@@ -165,6 +173,7 @@ class Data {
     map['totalRepeatedCareGiver'] = _totalRepeatedCareGiver;
     map['totalRepeatedClient'] = _totalRepeatedClient;
     map['totalHours'] = _totalHours;
+    map['percentageChangeInNewClient'] = _percentageChangeInNewClient;
     map['totalServiceCompleted'] = _totalServiceCompleted;
     map['totalSales'] = _totalSales;
     map['monthlyIncome'] = _monthlyIncome;
