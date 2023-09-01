@@ -193,6 +193,7 @@ enum AppString {
   noUsersFound("No Users found!"),
   profileCompletion("Profile Completion"),
   logout("Logout"),
+  careAmbassadorAnalytics("Care Ambassador Analytics "),
   noProfiles("No Profiles Found!"),
   creditCardDetails("Credit card details"),
   paymentMethod("Payment Method"),
@@ -428,6 +429,14 @@ enum AppString {
   newClients("New Clients"),
   qualityOfServices("Quality Of Services(Rating)"),
   averageCoastPerClient("Average Coast Per Client"),
+  averageNumberOfHoursPerService("Average Number Of Hours Per Service"),
+  careAmbassadorUtilizationRate("Care Ambassador\nUtilization Rate"),
+  averageEarnings("Average Earnings"),
+  averageEarningsPerCareAmbassador("Average Earnings Per Care Ambassador"),
+  regionAnalytics("Region Analytics"),
+  numberOfCommunitiesServiced("Number Of Communities Serviced"),
+  numberOfCitiesServiced("Number Of Cities Serviced"),
+  numberOfStatesServiced("Number Of States Serviced"),
   averageCostPerCareAmbassador("Average Coast Per CareAmbassadors");
 
   final String val;

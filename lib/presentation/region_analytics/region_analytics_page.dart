@@ -1,4 +1,3 @@
-import 'package:admin_580_tech/presentation/widget/multiple_barchart.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -9,15 +8,15 @@ import '../widget/header_view.dart';
 import '../widget/single_barchart.dart';
 
 @RoutePage()
-class ClientAnalyticsPage extends StatelessWidget {
-  const ClientAnalyticsPage({Key? key}) : super(key: key);
+class RegionAnalyticsPage extends StatelessWidget {
+  const RegionAnalyticsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        HeaderView(title: AppString.clientAnalytics.val),
+        HeaderView(title: AppString.regionAnalytics.val),
         CustomSizedBox(height: DBL.twenty.val),
         Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -25,32 +24,31 @@ class ClientAnalyticsPage extends StatelessWidget {
                 ? Row(
                     children: [
                       Expanded(
-                          child: MultipleBarchart(
-                              indicatorText1: AppString.churnRate.val,
-                              indicatorText2: AppString.inactiveRate.val)),
+                          child: SingleBarChart(
+                        indicatorTitle:
+                            AppString.numberOfCommunitiesServiced.val,
+                      )),
                       SizedBox(
                         width: 20,
                       ),
                       Expanded(
-                          child: MultipleBarchart(
-                        indicatorText1: AppString.newUsers.val,
-                        indicatorText2: AppString.newClients.val,
-                      ))
+                          child: SingleBarChart(
+                        indicatorTitle: AppString.numberOfCitiesServiced.val,
+                      )),
                     ],
                   )
                 : Column(
                     children: [
-                      MultipleBarchart(
-                        indicatorText1: AppString.churnRate.val,
-                        indicatorText2: AppString.inactiveRate.val,
+                      SingleBarChart(
+                        indicatorTitle:
+                            AppString.numberOfCommunitiesServiced.val,
                       ),
                       SizedBox(
                         height: 20,
                       ),
-                      MultipleBarchart(
-                        indicatorText1: AppString.newUsers.val,
-                        indicatorText2: AppString.newClients.val,
-                      )
+                      SingleBarChart(
+                        indicatorTitle: AppString.numberOfCitiesServiced.val,
+                      ),
                     ],
                   )),
         SizedBox(
@@ -63,32 +61,23 @@ class ClientAnalyticsPage extends StatelessWidget {
                     children: [
                       Expanded(
                           child: SingleBarChart(
-                        indicatorTitle: AppString.qualityOfServices.val,
+                        indicatorTitle: AppString.numberOfStatesServiced.val,
                       )),
                       SizedBox(
                         width: 20,
                       ),
-                      Expanded(
-                          child: MultipleBarchart(
-                        indicatorText1: AppString.averageCoastPerClient.val,
-                        indicatorText2:
-                            AppString.averageCostPerCareAmbassador.val,
-                      ))
+                      Expanded(child: SizedBox())
                     ],
                   )
                 : Column(
                     children: [
                       SingleBarChart(
-                        indicatorTitle: AppString.qualityOfServices.val,
+                        indicatorTitle: AppString.numberOfStatesServiced.val,
                       ),
                       SizedBox(
-                        height: 20,
+                        width: 20,
                       ),
-                      MultipleBarchart(
-                        indicatorText1: AppString.averageCoastPerClient.val,
-                        indicatorText2:
-                            AppString.averageCostPerCareAmbassador.val,
-                      )
+                      SizedBox()
                     ],
                   ))
       ],

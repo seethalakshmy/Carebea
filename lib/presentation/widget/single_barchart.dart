@@ -1,11 +1,10 @@
-import 'package:admin_580_tech/presentation/client_analytics/widgets/multiple_barchart.dart';
-import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
+import 'package:admin_580_tech/presentation/widget/multiple_barchart.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/enum.dart';
 import '../../../core/responsive.dart';
-import '../../dashboard/indicator_widget.dart';
+import '../dashboard/indicator_widget.dart';
 
 class SingleBarChart extends StatefulWidget {
   SingleBarChart({
@@ -55,6 +54,8 @@ class SingleBarChartState extends State<SingleBarChart> {
 
   @override
   Widget build(BuildContext context) {
+    // double barWidth = Responsive.isWeb(context) ? 20 : 10;
+    // double barSpace = Responsive.isWeb(context) ? 10 : 5;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 25),
       height: MediaQuery.of(context).size.height * 0.53,
@@ -82,51 +83,55 @@ class SingleBarChartState extends State<SingleBarChart> {
                   ],
                 ),
                 Expanded(
-                  child: BarChart(
-                    BarChartData(
-                      alignment: BarChartAlignment.center,
-                      barTouchData: BarTouchData(
-                        enabled: false,
-                      ),
-                      titlesData: FlTitlesData(
-                        show: true,
-                        bottomTitles: AxisTitles(
-                          sideTitles: SideTitles(
-                            showTitles: true,
-                            reservedSize: 28,
-                            getTitlesWidget: bottomTitles,
+                  child: LayoutBuilder(builder: (context, constraints) {
+                    final barsSpace = 4.0 * constraints.maxWidth / 100;
+                    final barsWidth = 8.0 * constraints.maxWidth / 200;
+                    return BarChart(
+                      BarChartData(
+                        alignment: BarChartAlignment.center,
+                        barTouchData: BarTouchData(
+                          enabled: false,
+                        ),
+                        titlesData: FlTitlesData(
+                          show: true,
+                          bottomTitles: AxisTitles(
+                            sideTitles: SideTitles(
+                              showTitles: true,
+                              reservedSize: 28,
+                              getTitlesWidget: bottomTitles,
+                            ),
+                          ),
+                          leftTitles: AxisTitles(
+                            sideTitles: SideTitles(
+                              showTitles: true,
+                              reservedSize: 40,
+                              getTitlesWidget: leftTitles,
+                            ),
+                          ),
+                          topTitles: AxisTitles(
+                            sideTitles: SideTitles(showTitles: false),
+                          ),
+                          rightTitles: AxisTitles(
+                            sideTitles: SideTitles(showTitles: false),
                           ),
                         ),
-                        leftTitles: AxisTitles(
-                          sideTitles: SideTitles(
-                            showTitles: true,
-                            reservedSize: 40,
-                            getTitlesWidget: leftTitles,
+                        gridData: FlGridData(
+                          show: true,
+                          checkToShowHorizontalLine: (value) => value % 10 == 0,
+                          getDrawingHorizontalLine: (value) => FlLine(
+                            color: AppColor.borderColor.val,
+                            strokeWidth: 1,
                           ),
+                          drawVerticalLine: false,
                         ),
-                        topTitles: AxisTitles(
-                          sideTitles: SideTitles(showTitles: false),
+                        borderData: FlBorderData(
+                          show: false,
                         ),
-                        rightTitles: AxisTitles(
-                          sideTitles: SideTitles(showTitles: false),
-                        ),
+                        groupsSpace: barsSpace,
+                        barGroups: getData(barsWidth, barsSpace),
                       ),
-                      gridData: FlGridData(
-                        show: true,
-                        checkToShowHorizontalLine: (value) => value % 10 == 0,
-                        getDrawingHorizontalLine: (value) => FlLine(
-                          color: AppColor.borderColor.val,
-                          strokeWidth: 1,
-                        ),
-                        drawVerticalLine: false,
-                      ),
-                      borderData: FlBorderData(
-                        show: false,
-                      ),
-                      groupsSpace: 20,
-                      barGroups: getData(20, 10),
-                    ),
-                  ),
+                    );
+                  }),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),

@@ -1,5 +1,6 @@
 import 'package:admin_580_tech/presentation/client_analytics/client_analytics_page.dart';
 import 'package:admin_580_tech/presentation/help_and_support/help_and_support_page.dart';
+import 'package:admin_580_tech/presentation/region_analytics/region_analytics_page.dart';
 import 'package:auto_route/auto_route.dart';
 
 import 'app_router.gr.dart';
@@ -88,6 +89,14 @@ class AppRouter extends $AppRouter {
       AutoRoute(
           path: "client-analytics",
           page: ClientAnalyticsRoute.page,
+          maintainState: false),
+      AutoRoute(
+          path: "care-Ambassador-analytics",
+          page: CareAmbassadorAnalysisRoute.page,
+          maintainState: false),
+      AutoRoute(
+          path: "region-analytics",
+          page: RegionAnalyticsRoute.page,
           maintainState: false),
     ]),
   ];

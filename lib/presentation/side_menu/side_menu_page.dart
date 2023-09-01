@@ -10,14 +10,15 @@ import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/admin_creation/admin_creation_page.dart';
 import 'package:admin_580_tech/presentation/admins/admins_page.dart';
+import 'package:admin_580_tech/presentation/care_ambassador_analytics/care_ambassador_analysis.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/caregiver_verification_page.dart';
 import 'package:admin_580_tech/presentation/client_analytics/client_analytics_page.dart';
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
 import 'package:admin_580_tech/presentation/faq_creation/faq_creation_screen.dart';
 import 'package:admin_580_tech/presentation/help_and_support/help_and_support_page.dart';
-import 'package:admin_580_tech/presentation/login/login_page.dart';
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
+import 'package:admin_580_tech/presentation/region_analytics/region_analytics_page.dart';
 import 'package:admin_580_tech/presentation/roles/role_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
@@ -69,9 +70,11 @@ class _MenuBarState extends State<SideMenuPage> {
       AppString.transactionManagement.val: "",
       AppString.serviceRequestManagement.val: "",
       AppString.clientAnalytics.val: "",
+      AppString.careAmbassadorAnalytics.val: "",
+      AppString.regionAnalytics.val: "",
       AppString.supportTickets.val: "",
       AppString.faq.val: "",
-      AppString.logout.val: ""
+      AppString.logout.val: "",
     };
     // if (!sharedPreffUtil.getViewRole) {
     //   mainData.remove(AppString.roleManagement.val);
@@ -509,7 +512,9 @@ class _MenuBarState extends State<SideMenuPage> {
     SupportTicketsDetailRoute(),
     FaqRoute(),
     FaqCreationRoute(),
-    ClientAnalyticsRoute()
+    ClientAnalyticsRoute(),
+    CareAmbassadorAnalysisRoute(),
+    RegionAnalyticsRoute()
   ];
 
   int getRouteIndex(String route) {
@@ -552,6 +557,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return 18;
     } else if (route == AppString.clientAnalytics.val) {
       return 19;
+    } else if (route == AppString.careAmbassadorAnalytics.val) {
+      return 20;
+    } else if (route == AppString.regionAnalytics.val) {
+      return 21;
     } else {
       return 0;
     }
@@ -597,6 +606,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return const FaqCreationPage();
     } else if (index == 19) {
       return const ClientAnalyticsPage();
+    } else if (index == 20) {
+      return const CareAmbassadorAnalysisPage();
+    } else if (index == 21) {
+      return const RegionAnalyticsPage();
     } else {
       return const DashboardPage();
     }

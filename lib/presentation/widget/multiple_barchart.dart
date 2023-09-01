@@ -2,13 +2,13 @@ import 'package:admin_580_tech/core/enum.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import '../../../application/bloc/dashboard/dashboard_bloc.dart';
-import '../../../core/custom_debugger.dart';
-import '../../../core/responsive.dart';
-import '../../../core/text_styles.dart';
-import '../../dashboard/indicator_widget.dart';
-import '../../widget/custom_dropdown.dart';
-import '../../widget/custom_text.dart';
+import '../../application/bloc/dashboard/dashboard_bloc.dart';
+import '../../core/custom_debugger.dart';
+import '../../core/responsive.dart';
+import '../../core/text_styles.dart';
+import '../dashboard/indicator_widget.dart';
+import 'custom_dropdown.dart';
+import 'custom_text.dart';
 
 class MultipleBarchart extends StatefulWidget {
   MultipleBarchart(
@@ -153,7 +153,7 @@ class MultipleBarchartState extends State<MultipleBarchart> {
                     isSquare: false,
                     size: Responsive.isWeb(context)
                         ? FS.font12.val
-                        : FS.font10.val,
+                        : FS.font05.val,
                   ),
                   SizedBox(
                     width: 10,
@@ -163,7 +163,7 @@ class MultipleBarchartState extends State<MultipleBarchart> {
                     text: widget.indicatorText2,
                     size: Responsive.isWeb(context)
                         ? FS.font12.val
-                        : FS.font10.val,
+                        : FS.font05.val,
                     isSquare: false,
                   ),
                 ],
