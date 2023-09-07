@@ -11,6 +11,7 @@ import 'package:admin_580_tech/domain/caregiver_verification/model/verify_respon
 import 'package:admin_580_tech/domain/common_response/common_response.dart';
 import 'package:admin_580_tech/domain/dashboard/model/alert_response.dart';
 import 'package:admin_580_tech/domain/dashboard/model/dashboard_response.dart';
+import 'package:admin_580_tech/domain/email_otp_verification/models/generate_otp_response.dart';
 import 'package:admin_580_tech/domain/login/login_response.dart';
 import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
 import 'package:admin_580_tech/domain/service_request_management/model/reschedule_params.dart';
@@ -32,6 +33,7 @@ import '../../presentation/on_boarding/modules/reference/models/relation_respons
 import '../admins/model/admin_get_response.dart';
 import '../caregiver_verification/model/reject_params.dart';
 import '../caregivers/model/caregiver_response.dart';
+import '../email_otp_verification/models/verify_otp_response.dart';
 import '../on_boarding/models/common_response.dart';
 import '../on_boarding/models/preferences/pet_list_response.dart';
 import '../on_boarding/models/preferences/preference_request_model.dart';
@@ -43,6 +45,7 @@ import '../role_creation/model/view_role_response.dart';
 import '../service_request_management/model/assign_caregiver_params.dart';
 import '../service_request_management/model/reschedule_response.dart';
 import '../service_request_management/model/service_request_response.dart';
+import '../signup/signup_response.dart';
 import '../transaction_management/model/get_filters_response.dart';
 import '../transaction_management/model/transaction_details_response.dart';
 import '../transaction_management/model/transaction_list_response.dart';
@@ -170,8 +173,45 @@ abstract class ApiClient {
     @Field('profile_picture') String profilePicture,
   );
 
+  @POST("/care-giver/personal-details")
+  Future<PersonalDetailsResponse> getPersonalDetailsWebsite(
+    @Header("Authorization") String token,
+    @Field('user_id') String userId,
+    @Field('dob') String dob,
+    @Field('gender_id') int genderId,
+    @Field('street') String street,
+    @Field('city_id') String cityId,
+    @Field('state_id') String stateId,
+    @Field('latitude') double latitude,
+    @Field('longitude') double longitude,
+    @Field('zip') String zip,
+    @Field('address') String address,
+    @Field('social_security_number') String socialSecurityNumber,
+    @Field('document_id') String documentId,
+    @Field('document_number') String documentNumber,
+    @Field('expiry_date') String expiryDate,
+    @Field('document') List<String> document,
+    @Field('profile_picture') String profilePicture,
+  );
+
   @POST("/admin/admin-cg-qualification")
   Future<CommonResponse> getQualifications(
+    @Field('user_id') String userId,
+    @Field('have_hha_registration') bool haveHHARegistration,
+    @Field('hha_details') HhaDetails hhaDetails,
+    @Field('bls_or_first_aid_certificate') bool haveBLSCertificate,
+    @Field('bls_or_first_aid_certificate_details')
+    BlsOrFirstAidCertificateDetails blsDetails,
+    @Field('tb_or_ppd_test') bool haveTBTest,
+    @Field('tb_or_ppd_test_details') TbOrPpdTestDetails tbDetails,
+    @Field('covid_vaccination') bool haveCovidVaccination,
+    @Field('covid_vaccination_details') CovidVaccinationDetails covidDetails,
+    @Field('is_reupload') bool isReUpload,
+  );
+
+  @POST("/care-giver/qualification")
+  Future<CommonResponse> getQualificationsWebsite(
+    @Header("Authorization") String token,
     @Field('user_id') String userId,
     @Field('have_hha_registration') bool haveHHARegistration,
     @Field('hha_details') HhaDetails hhaDetails,
@@ -196,8 +236,27 @@ abstract class ApiClient {
     @Field('known_languages') List<String> knownLanguages,
   );
 
+  @POST("/care-giver/preferences")
+  Future<CommonResponse> getPreferencesWebsite(
+    @Header("Authorization") String token,
+    @Field('user_id') String userId,
+    @Field('years_of_experience') String yearsOfExperience,
+    @Field('serve_with_a_smoker') bool serveWithSmoker,
+    @Field('willing_to_provide_transportation') bool willingToTransportation,
+    @Field('willing_to_serve_with_pets') bool willingToServeWithPets,
+    @Field('pets_list') List<PetsList> petsList,
+    @Field('known_languages') List<String> knownLanguages,
+  );
+
   @POST("/admin/admin-cg-services")
   Future<CommonResponse> submitServices(
+    @Field('user_id') String userId,
+    @Field('services') ServicesRequest services,
+  );
+
+  @POST("/care-giver/services")
+  Future<CommonResponse> submitServicesWebsite(
+    @Header("Authorization") String token,
     @Field('user_id') String userId,
     @Field('services') ServicesRequest services,
   );
@@ -213,8 +272,26 @@ abstract class ApiClient {
     @Field('why_love_being_caregiver') String whyLoveBeingCaregiver,
   );
 
+  @POST("/care-giver/profile")
+  Future<CommonResponse> submitBuildProfileWebsite(
+    @Header("Authorization") String token,
+    @Field('user_id') String userId,
+    @Field('about_you') String aboutYou,
+    @Field('hobbies') String hobbies,
+    @Field('why_love_being_caregiver') String whyLoveBeingCaregiver,
+  );
+
   @POST("/admin/admin-cg-acc-details")
   Future<CommonResponse> submitAccountDetails(
+    @Field('user_id') String userId,
+    @Field('account_holder_name') String accountHolderName,
+    @Field('routing_number') String routingNumber,
+    @Field('account_number') String accountNumber,
+  );
+
+  @POST("/care-giver/acc-details")
+  Future<CommonResponse> submitAccountDetailsWebsite(
+    @Header("Authorization") String token,
     @Field('user_id') String userId,
     @Field('account_holder_name') String accountHolderName,
     @Field('routing_number') String routingNumber,
@@ -261,6 +338,12 @@ abstract class ApiClient {
   Future<CommonResponse> submitReference(
       @Field('user_id') String userId, @Field('references') List referenceList);
 
+  @POST("/care-giver/references")
+  Future<CommonResponse> submitReferenceWebsite(
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('references') List referenceList);
+
   @GET("/common-data/get-pets?")
   Future<PetListResponse> getPetList(@Query("search_term") String searchQuery);
 
@@ -275,6 +358,33 @@ abstract class ApiClient {
   Future<LoginResponse> login(
     @Field('email') String email,
     @Field('password') String password,
+  );
+
+  @POST("/generate-otp")
+  Future<GenerateOtpResponse> generateOtp(
+    @Field('user_id') String userId,
+    @Field('phone_number') String phoneNumber,
+  );
+
+  @POST("/verify-otp")
+  Future<VerifyOtpResponse> verifyOtp(
+    @Field('user_id') String userId,
+    @Field('type') int type,
+    @Field('otp') String otp,
+  );
+
+  @POST("/sign-up")
+  Future<SignUpResponse> signup(
+    @Field('email') String email,
+    @Field('password') String password,
+    @Field('first_name') String firstName,
+    @Field('last_name') String lastName,
+    @Field('mobile_number') String mobileNumber,
+    @Field('device_token') String deviceToken,
+    @Field('profile_pic') String profilePic,
+    @Field('device_type') String deviceType,
+    @Field('user_type') int userType,
+    @Field('is_social_login') bool isSocialLogin,
   );
 
   @GET("/common-data/get-years")

@@ -2,13 +2,17 @@ import 'dart:ui';
 
 import 'package:admin_580_tech/application/bloc/caregiver-profile/caregiver_profile_bloc.dart';
 import 'package:admin_580_tech/application/bloc/caregiver_verification/caregiver_verification_bloc.dart';
+import 'package:admin_580_tech/application/bloc/email-otp-verification/email_otp_verification_bloc.dart';
 import 'package:admin_580_tech/application/bloc/login/login_bloc.dart';
+import 'package:admin_580_tech/application/bloc/signup/signup_bloc.dart';
 import 'package:admin_580_tech/core/hive/hive_utils.dart';
 import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/infrastructure/caregiver_profile/caregiver_profile_repository.dart';
 import 'package:admin_580_tech/infrastructure/caregiver_verification/caregivers_verification_repository.dart';
+import 'package:admin_580_tech/infrastructure/email_otp_verification/email_otp_verification_repository.dart';
 import 'package:admin_580_tech/infrastructure/login/login_repository.dart';
 import 'package:admin_580_tech/infrastructure/service_request_management/service_request_management_repository.dart';
+import 'package:admin_580_tech/infrastructure/signup/signup_repository.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
@@ -67,12 +71,17 @@ class _MyAppState extends State<MyApp> {
                 CareGiverVerificationBloc(CareGiverVerificationRepository())),
         BlocProvider(create: (_) => FormValidationBloc()),
         BlocProvider(create: (_) => LoginBloc(LoginRepository())),
+        BlocProvider(create: (_) => SignupBloc(SignupRepository())),
+
         BlocProvider<ServiceRequestManagementBloc>(
             create: (context) => ServiceRequestManagementBloc(
                 ServiceRequestManagementRepository())),
         BlocProvider<CareGiverProfileBloc>(
             create: (context) =>
-                CareGiverProfileBloc(CareGiverProfileRepository()))
+                CareGiverProfileBloc(CareGiverProfileRepository())),
+        BlocProvider(
+            create: (_) =>
+                EmailOtpVerificationBloc(EmailOtpVerificationRepository())),
       ],
       child: MaterialApp.router(
         routerDelegate: _appRouter.delegate(),

@@ -438,6 +438,65 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<PersonalDetailsResponse> getPersonalDetailsWebsite(
+    token,
+    userId,
+    dob,
+    genderId,
+    street,
+    cityId,
+    stateId,
+    latitude,
+    longitude,
+    zip,
+    address,
+    socialSecurityNumber,
+    documentId,
+    documentNumber,
+    expiryDate,
+    document,
+    profilePicture,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'dob': dob,
+      'gender_id': genderId,
+      'street': street,
+      'city_id': cityId,
+      'state_id': stateId,
+      'latitude': latitude,
+      'longitude': longitude,
+      'zip': zip,
+      'address': address,
+      'social_security_number': socialSecurityNumber,
+      'document_id': documentId,
+      'document_number': documentNumber,
+      'expiry_date': expiryDate,
+      'document': document,
+      'profile_picture': profilePicture,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PersonalDetailsResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/care-giver/personal-details',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PersonalDetailsResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<CommonResponse> getQualifications(
     userId,
     haveHHARegistration,
@@ -474,6 +533,53 @@ class _ApiClient implements ApiClient {
             .compose(
               _dio.options,
               '/admin/admin-cg-qualification',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponse> getQualificationsWebsite(
+    token,
+    userId,
+    haveHHARegistration,
+    hhaDetails,
+    haveBLSCertificate,
+    blsDetails,
+    haveTBTest,
+    tbDetails,
+    haveCovidVaccination,
+    covidDetails,
+    isReUpload,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'have_hha_registration': haveHHARegistration,
+      'hha_details': hhaDetails,
+      'bls_or_first_aid_certificate': haveBLSCertificate,
+      'bls_or_first_aid_certificate_details': blsDetails,
+      'tb_or_ppd_test': haveTBTest,
+      'tb_or_ppd_test_details': tbDetails,
+      'covid_vaccination': haveCovidVaccination,
+      'covid_vaccination_details': covidDetails,
+      'is_reupload': isReUpload,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/care-giver/qualification',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -522,6 +628,47 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<CommonResponse> getPreferencesWebsite(
+    token,
+    userId,
+    yearsOfExperience,
+    serveWithSmoker,
+    willingToTransportation,
+    willingToServeWithPets,
+    petsList,
+    knownLanguages,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'years_of_experience': yearsOfExperience,
+      'serve_with_a_smoker': serveWithSmoker,
+      'willing_to_provide_transportation': willingToTransportation,
+      'willing_to_serve_with_pets': willingToServeWithPets,
+      'pets_list': petsList,
+      'known_languages': knownLanguages,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/care-giver/preferences',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<CommonResponse> submitServices(
     userId,
     services,
@@ -542,6 +689,37 @@ class _ApiClient implements ApiClient {
             .compose(
               _dio.options,
               '/admin/admin-cg-services',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponse> submitServicesWebsite(
+    token,
+    userId,
+    services,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'services': services,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/care-giver/services',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -607,6 +785,41 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<CommonResponse> submitBuildProfileWebsite(
+    token,
+    userId,
+    aboutYou,
+    hobbies,
+    whyLoveBeingCaregiver,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'about_you': aboutYou,
+      'hobbies': hobbies,
+      'why_love_being_caregiver': whyLoveBeingCaregiver,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/care-giver/profile',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<CommonResponse> submitAccountDetails(
     userId,
     accountHolderName,
@@ -631,6 +844,41 @@ class _ApiClient implements ApiClient {
             .compose(
               _dio.options,
               '/admin/admin-cg-acc-details',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponse> submitAccountDetailsWebsite(
+    token,
+    userId,
+    accountHolderName,
+    routingNumber,
+    accountNumber,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'account_holder_name': accountHolderName,
+      'routing_number': routingNumber,
+      'account_number': accountNumber,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/care-giver/acc-details',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -858,6 +1106,37 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<CommonResponse> submitReferenceWebsite(
+    token,
+    userId,
+    referenceList,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'references': referenceList,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/care-giver/references',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<PetListResponse> getPetList(searchQuery) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'search_term': searchQuery};
@@ -937,6 +1216,111 @@ class _ApiClient implements ApiClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = LoginResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GenerateOtpResponse> generateOtp(
+    userId,
+    phoneNumber,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'phone_number': phoneNumber,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GenerateOtpResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/generate-otp',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GenerateOtpResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<VerifyOtpResponse> verifyOtp(
+    userId,
+    type,
+    otp,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'type': type,
+      'otp': otp,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<VerifyOtpResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/verify-otp',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = VerifyOtpResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SignUpResponse> signup(
+    email,
+    password,
+    firstName,
+    lastName,
+    mobileNumber,
+    deviceToken,
+    profilePic,
+    deviceType,
+    userType,
+    isSocialLogin,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'email': email,
+      'password': password,
+      'first_name': firstName,
+      'last_name': lastName,
+      'mobile_number': mobileNumber,
+      'device_token': deviceToken,
+      'profile_pic': profilePic,
+      'device_type': deviceType,
+      'user_type': userType,
+      'is_social_login': isSocialLogin,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SignUpResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/sign-up',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SignUpResponse.fromJson(_result.data!);
     return value;
   }
 

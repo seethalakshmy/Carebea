@@ -1,4 +1,5 @@
 import 'package:admin_580_tech/presentation/routes/gurad.dart';
+import 'package:admin_580_tech/presentation/mobile_otp_verification/mobile_otp_verification_page.dart';
 import 'package:auto_route/auto_route.dart';
 
 import 'app_router.gr.dart';
@@ -14,6 +15,28 @@ class AppRouter extends $AppRouter {
         path: '/',
         initial: true,
         guards: [DashBoardGuardGuard()]),
+    // AutoRoute(page: LoginRoute.page, initial: true, path: '/'),
+    AutoRoute(
+      path: "/care-ambassador-registration",
+      page: CareAmbassadorRegistrationRoute.page,
+      maintainState: true,
+    ),
+    AutoRoute(
+      path: "/signup",
+      page: SignUpRoute.page,
+      maintainState: true,
+      initial: true,
+    ),
+    AutoRoute(
+      path: "/email-otp-verification",
+      page: EmailOtpVerificationRoute.page,
+      maintainState: true,
+    ),
+    AutoRoute(
+      path: "/mobile-otp-verification",
+      page: MobileOtpVerificationRoute.page,
+      maintainState: true,
+    ),
     AutoRoute(
         page: ForgotPasswordRoute.page,
         maintainState: false,
@@ -28,6 +51,7 @@ class AppRouter extends $AppRouter {
         page: DashboardRoute.page,
         initial: true,
       ),
+      AutoRoute(path: 'dashboard', page: DashboardRoute.page, initial: false),
       AutoRoute(
           path: 'care-ambassador',
           page: CareGiversRoute.page,
@@ -92,6 +116,19 @@ class AppRouter extends $AppRouter {
           path: "faq-creation",
           page: FaqCreationRoute.page,
           maintainState: false),
+      AutoRoute(
+          path: "client-analytics",
+          page: ClientAnalyticsRoute.page,
+          maintainState: false),
+      AutoRoute(
+          path: "care-Ambassador-analytics",
+          page: CareAmbassadorAnalysisRoute.page,
+          maintainState: false),
+      AutoRoute(
+          path: "region-analytics",
+          page: RegionAnalyticsRoute.page,
+          maintainState: false,
+          initial: false),
     ]),
   ];
 }

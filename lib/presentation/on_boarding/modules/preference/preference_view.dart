@@ -46,70 +46,79 @@ class PreferenceView extends StatelessWidget {
       builder: (context, state) {
         return CommonPaddingWidget(
             child: CustomContainer(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _topArea(context),
-              _experienceWidget(state, context),
-              CustomSizedBox(height: DBL.twenty.val),
-              _smokerWidget(state),
-              CustomSizedBox(height: DBL.twenty.val),
-              _transportationWidget(state),
-              CustomSizedBox(height: DBL.twenty.val),
-              _petsWidget(state),
-              state.isPetsSelected == 0
-                  ? SampleDropdown(
-                      onboardingBloc: onboardingBloc,
-                      onSearchChanged: (val) {
-                        onboardingBloc.add(OnboardingEvent.petsList(val));
-                      },
-                      searchController: petSearchController,
-                      petList: onboardingBloc.petsList,
-                      isFromLangauge: false,
-                    )
-                  : Container(),
-              CustomSizedBox(height: DBL.twenty.val),
-              _knownLanguagesWidget(),
-              CommonNextOrCancelButtons(
-                isLoading: state.isLoading,
-                leftButtonName: AppString.back.val,
-                rightButtonName: AppString.next.val,
-                onLeftButtonPressed: () {
-                  onboardingBloc.nextButtonClicked = false;
-                  pageController.jumpToPage(pageController.page!.toInt() - 1);
-                },
-                onRightButtonPressed: () {
-                  if (state.isPetsSelected == 0 &&
-                      onboardingBloc.selectedPetsList.isEmpty) {
-                    CSnackBar.showError(context,
-                        msg: AppString.pleaseSelectPets.val);
-                  } else if (onboardingBloc.selectedLanguageList.isEmpty) {
-                    CSnackBar.showError(context,
-                        msg: AppString.pleaseSelectLanguages.val);
-                  } else {
-                    onboardingBloc.nextButtonClicked = true;
-                    onboardingBloc.add(OnboardingEvent.preferenceDetails(
-                        userId: SharedPreffUtil().getCareGiverUserId,
-                        yearsOfExp: onboardingBloc.selectedYearId,
-                        serveWithSmoker:
-                            state.isSmokerSelected == 0 ? true : false,
-                        willingToTransportation:
-                            state.isTransportationSelected == 0 ? true : false,
-                        willingToServeWithPets:
-                            state.isPetsSelected == 0 ? true : false,
-                        petsList: state.isPetsSelected == 0
-                            ? onboardingBloc.selectedPetsList
-                                .map((e) =>
-                                    PetsList(id: e.id, inOutStatus: e.petsId))
-                                .toList()
-                            : [],
-                        knownLanguages: onboardingBloc.selectedLanguageList
-                            .map((e) => e.id)
-                            .toList()));
-                  }
-                },
-              )
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _topArea(context),
+                _experienceWidget(state, context),
+                CustomSizedBox(height: DBL.twenty.val),
+                _smokerWidget(state),
+                CustomSizedBox(height: DBL.twenty.val),
+                _transportationWidget(state),
+                CustomSizedBox(height: DBL.twenty.val),
+                _petsWidget(state),
+                state.isPetsSelected == 0
+                    ? SampleDropdown(
+                        onboardingBloc: onboardingBloc,
+                        onSearchChanged: (val) {
+                          onboardingBloc.add(OnboardingEvent.petsList(val));
+                        },
+                        searchController: petSearchController,
+                        petList: onboardingBloc.petsList,
+                        isFromLangauge: false,
+                      )
+                    : Container(),
+                CustomSizedBox(height: DBL.twenty.val),
+                _knownLanguagesWidget(),
+                CommonNextOrCancelButtons(
+                  isLoading: state.isLoading,
+                  leftButtonName: AppString.back.val,
+                  rightButtonName: AppString.next.val,
+                  onLeftButtonPressed: () {
+                    onboardingBloc.nextButtonClicked = false;
+                    pageController.jumpToPage(pageController.page!.toInt() - 1);
+                  },
+                  onRightButtonPressed: () {
+                    print('selected list ${(onboardingBloc.selectedPetsList)}');
+                    print(
+                        'to list ${onboardingBloc.selectedPetsList.map((e) => PetsList(id: e.id, inOutStatus: e.petsId)).toList()}');
+                    if (state.isPetsSelected == 0 &&
+                        onboardingBloc.selectedPetsList.isEmpty) {
+                      CSnackBar.showError(context,
+                          msg: AppString.pleaseSelectPets.val);
+                    } else if (onboardingBloc.selectedLanguageList.isEmpty) {
+                      CSnackBar.showError(context,
+                          msg: AppString.pleaseSelectLanguages.val);
+                    } else {
+                      onboardingBloc.nextButtonClicked = true;
+                      onboardingBloc.add(OnboardingEvent.preferenceDetails(
+                          userId: SharedPreffUtil().getIsFromWebsite == true
+                              ? SharedPreffUtil().getAccessToken
+                              : SharedPreffUtil().getCareGiverUserId,
+                          yearsOfExp: onboardingBloc.selectedYearId,
+                          serveWithSmoker:
+                              state.isSmokerSelected == 0 ? true : false,
+                          willingToTransportation:
+                              state.isTransportationSelected == 0
+                                  ? true
+                                  : false,
+                          willingToServeWithPets:
+                              state.isPetsSelected == 0 ? true : false,
+                          petsList: state.isPetsSelected == 0
+                              ? onboardingBloc.selectedPetsList
+                                  .map((e) => PetsList.fromJson(PetsList(
+                                      id: e.id, inOutStatus: e.petsId)))
+                                  .toList()
+                              : [],
+                          knownLanguages: onboardingBloc.selectedLanguageList
+                              .map((e) => e.id)
+                              .toList()));
+                    }
+                  },
+                )
+              ],
+            ),
           ),
         ));
       },
