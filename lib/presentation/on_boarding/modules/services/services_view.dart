@@ -78,9 +78,12 @@ class _ServicesViewState extends State<ServicesView> {
                         CSnackBar.showError(context,
                             msg: AppString.pleaseSelectOneService.val);
                       } else {
-                        widget.onboardingBloc
-                            .add(OnboardingEvent.submitServices(
-                                userId: SharedPreffUtil().getCareGiverUserId,
+                        widget.onboardingBloc.add(
+                            OnboardingEvent.submitServices(
+                                userId:
+                                    SharedPreffUtil().getIsFromWebsite == true
+                                        ? SharedPreffUtil().getAccessToken
+                                        : SharedPreffUtil().getCareGiverUserId,
                                 services: ServicesRequest(
                                   tier1: widget
                                       .onboardingBloc.selectedTier1ServiceList,

@@ -60,6 +60,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   final TextEditingController citySearchController = TextEditingController();
   final TextEditingController stateSearchController = TextEditingController();
   PlatformFile? file;
+  SharedPreffUtil sharedPreffUtil = SharedPreffUtil();
 
   final FocusNode _dateFocusNode = FocusNode();
   String selectedDate = "";
@@ -78,6 +79,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
 
   @override
   void initState() {
+    print('inside page ${SharedPreffUtil().getIsFromWebsite}');
     widget.onboardingBloc.add(const OnboardingEvent.commonData());
     widget.onboardingBloc.add(const OnboardingEvent.stateList(
         stateSearchQuery: "", wantLoading: true));
@@ -699,7 +701,9 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
     if (_formKey.currentState!.validate() &&
         widget.onboardingBloc.profileUrl.isNotEmpty) {
       widget.onboardingBloc.add(OnboardingEvent.personalDetails(
-          userId: userId,
+          userId: sharedPreffUtil.getIsFromWebsite == true
+              ? sharedPreffUtil.getAdminId
+              : userId,
           dob: dobController.text.trim(),
           genderId: int.parse(selectedGender),
           street: streetController.text.trim(),

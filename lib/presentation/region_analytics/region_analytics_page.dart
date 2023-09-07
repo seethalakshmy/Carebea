@@ -28,7 +28,7 @@ class RegionAnalyticsPage extends StatelessWidget {
                         indicatorTitle:
                             AppString.numberOfCommunitiesServiced.val,
                       )),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       Expanded(

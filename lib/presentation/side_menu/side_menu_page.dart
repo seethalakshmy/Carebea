@@ -17,6 +17,7 @@ import 'package:admin_580_tech/presentation/client_analytics/client_analytics_pa
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
 import 'package:admin_580_tech/presentation/faq_creation/faq_creation_screen.dart';
 import 'package:admin_580_tech/presentation/help_and_support/help_and_support_page.dart';
+import 'package:admin_580_tech/presentation/login/login_page.dart';
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
 import 'package:admin_580_tech/presentation/region_analytics/region_analytics_page.dart';
 import 'package:admin_580_tech/presentation/roles/role_page.dart';
@@ -55,7 +56,7 @@ class _MenuBarState extends State<SideMenuPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<ScaffoldState> _scaffoldDrawerKey =
       GlobalKey<ScaffoldState>();
-  Map<String, String> mainData = {};
+  Map<String, dynamic> mainData = {};
   SharedPreffUtil sharedPreffUtil = SharedPreffUtil();
 
   @override
@@ -69,6 +70,11 @@ class _MenuBarState extends State<SideMenuPage> {
       AppString.userManagement.val: "",
       AppString.transactionManagement.val: "",
       AppString.serviceRequestManagement.val: "",
+      // AppString.analytics.val: [
+      //   AppString.clientAnalytics.val,
+      //   AppString.careAmbassadorAnalytics.val,
+      //   AppString.regionAnalytics.val
+      // ],
       AppString.clientAnalytics.val: "",
       AppString.careAmbassadorAnalytics.val: "",
       AppString.regionAnalytics.val: "",
@@ -400,7 +406,7 @@ class _MenuBarState extends State<SideMenuPage> {
   /// menu list
   Widget _menuList({
     required TabsRouter tabsRouter,
-    required Map<String, String> items,
+    required Map<String, dynamic> items,
     required bool isOpened,
   }) {
     return Column(
@@ -438,8 +444,10 @@ class _MenuBarState extends State<SideMenuPage> {
                   horizontalTitleGap: DBL.zero.val,
                   onTap: () {
                     isOpen.value = true;
-                    tabsRouter.setActiveIndex(
-                        getRouteIndex(items.keys.elementAt(index)));
+                    items.keys.elementAt(index) == AppString.logout.val
+                        ? SharedPreffUtil().logoutClear()
+                        : tabsRouter.setActiveIndex(
+                            getRouteIndex(items.keys.elementAt(index)));
                     HiveUtils.set(AppString.selectedMenuIndex.val,
                         getRouteIndex(items.keys.elementAt(index)));
                     _scaffoldDrawerKey.currentState?.closeDrawer();
@@ -462,7 +470,7 @@ class _MenuBarState extends State<SideMenuPage> {
     );
   }
 
-  CustomText buildText(Map<String, String> items, int index,
+  CustomText buildText(Map<String, dynamic> items, int index,
       TabsRouter tabsRouter, Color color) {
     return CustomText(
       items.keys.elementAt(index).capitalize(),
@@ -474,7 +482,8 @@ class _MenuBarState extends State<SideMenuPage> {
     );
   }
 
-  bool isSelected(Map<String, String> items, int index, TabsRouter tabsRouter) {
+  bool isSelected(
+      Map<String, dynamic> items, int index, TabsRouter tabsRouter) {
     String path = tabsRouter.currentPath.replaceAll("admin/main/", "");
     CustomLog.log('path is $path');
     if (path == "/user-management-detail") {
@@ -514,7 +523,8 @@ class _MenuBarState extends State<SideMenuPage> {
     FaqCreationRoute(),
     ClientAnalyticsRoute(),
     CareAmbassadorAnalysisRoute(),
-    RegionAnalyticsRoute()
+    RegionAnalyticsRoute(),
+    // LoginRoute()
   ];
 
   int getRouteIndex(String route) {
@@ -555,12 +565,18 @@ class _MenuBarState extends State<SideMenuPage> {
       return 17;
     } else if (route == AppString.faqCreation.val) {
       return 18;
-    } else if (route == AppString.clientAnalytics.val) {
+    }
+    // else if (route == AppString.analytics.val) {
+    //   return 19;
+    // }
+    else if (route == AppString.clientAnalytics.val) {
       return 19;
     } else if (route == AppString.careAmbassadorAnalytics.val) {
       return 20;
     } else if (route == AppString.regionAnalytics.val) {
       return 21;
+    } else if (route == AppString.logout.val) {
+      return 22;
     } else {
       return 0;
     }
@@ -610,7 +626,11 @@ class _MenuBarState extends State<SideMenuPage> {
       return const CareAmbassadorAnalysisPage();
     } else if (index == 21) {
       return const RegionAnalyticsPage();
-    } else {
+    }
+    // else if (index == 22) {
+    //   return const LoginPage();
+    // }
+    else {
       return const DashboardPage();
     }
   }

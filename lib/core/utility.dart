@@ -52,4 +52,11 @@ class Utility {
     String selectedDate = picked.toString();
     return selectedDate;
   }
+
+  static bool validatePassword(String value) {
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,32}$';
+    RegExp regExp = RegExp(pattern);
+    return regExp.hasMatch(value);
+  }
 }

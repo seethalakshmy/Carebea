@@ -6,6 +6,7 @@ class SharedPreffUtil {
   final refreshToken = 'refresh_token';
   final userId = 'user_id';
   final adminId = 'admin_id';
+  final mobileNumber = 'mobile_number';
   final loggedUser = 'logged_user';
   final notShowIntroScreen = 'not_show_intro_screen';
   final profileUserName = 'profile_user_name';
@@ -15,6 +16,7 @@ class SharedPreffUtil {
   final currentPassword = 'current_password';
   final _page = '_page';
   final _tab = '_tab';
+  final isFromWebsite = "is_from_website";
 
   final viewRole = 'view_role';
   final editRole = "edit_role";
@@ -80,6 +82,16 @@ class SharedPreffUtil {
     return _prefs?.getString(adminId) ?? "";
   }
 
+
+
+  set setMobileNumber(String value) {
+    _prefs?.setString(mobileNumber, value);
+  }
+
+  get getMobileNumber {
+    return _prefs?.getString(mobileNumber) ?? "";
+  }
+
   set setYear(String value) {}
 
   set setTokenType(String value) {
@@ -110,6 +122,14 @@ class SharedPreffUtil {
 
   get getLogin {
     return _prefs?.getBool(loggedUser) ?? false;
+  }
+
+  set setIsFromWebsite(bool value) {
+     _prefs?.setBool(isFromWebsite,value);
+  }
+
+  get getIsFromWebsite{
+    return _prefs?.getBool(isFromWebsite) ?? false;
   }
 
   get getPage {

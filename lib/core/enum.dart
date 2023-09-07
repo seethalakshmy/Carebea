@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 /// App Strings
 enum AppString {
   userId("USER ID"),
+  signUp("SignUp"),
+  verify("Verify"),
   login("Login"),
   mandatorySymbol("*"),
   select("Select"),
@@ -12,6 +14,8 @@ enum AppString {
   start("Start"),
   endTime("End Time"),
   ok("Ok"),
+  passwordCriteria(
+      'Password must be 8 to 32 characters including upper/lower case letters/numbers\nand at least one special characters'),
   profile("Profile"),
   profileDetails("Profile Details"),
   goToProfile("Go to Profile "),
@@ -33,6 +37,7 @@ enum AppString {
   resetPassword("Reset Password"),
   optVerification("OTP Verification"),
   clientAnalytics("Client Analytics"),
+  analytics("Analytics"),
 
   resetPasswordDescription(
       "Enter your registered mail id to receive password\nreset link"),
@@ -335,9 +340,11 @@ enum AppString {
 
   ///validations
   emptyEmail("Email address shouldn't be empty"),
+  emptyOtp("OTP shouldn't be empty"),
   emptyReason("Reason shouldn't be empty"),
   validEmail("Enter valid email address"),
   emptyPassword("Password shouldn't be empty"),
+  invalidPassword("Password should meet the criteria"),
   emptyRejectedDocument(
       "Please Select rejected document and mention the reason"),
   passwordLengthError("Password should be at least 8 characters"),
@@ -356,6 +363,7 @@ enum AppString {
   emptyLoveCaregiver("Please write the reason"),
   emptyMobile("Mobile number shouldn't be empty"),
   validMobile("Mobile number should be 10 digits"),
+  validOtp("OTP should be 4 digits"),
   uploadDocument("Upload the document"),
   emptyDOB("Date of birth shouldn't be empty"),
   emptyStartTime("Start time shouldn't be empty"),
@@ -437,6 +445,7 @@ enum AppString {
   numberOfCommunitiesServiced("Number Of Communities Serviced"),
   numberOfCitiesServiced("Number Of Cities Serviced"),
   numberOfStatesServiced("Number Of States Serviced"),
+  passwordMismatch("The passwords entered do not match."),
   averageCostPerCareAmbassador("Average Coast Per CareAmbassadors");
 
   final String val;
