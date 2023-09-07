@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/presentation/routes/gurad.dart';
 import 'package:admin_580_tech/presentation/mobile_otp_verification/mobile_otp_verification_page.dart';
 import 'package:auto_route/auto_route.dart';
 
@@ -9,6 +10,11 @@ import 'app_router.gr.dart';
 class AppRouter extends $AppRouter {
   @override
   final List<AutoRoute> routes = [
+    AutoRoute(
+        page: LoginRoute.page,
+        path: '/',
+        initial: true,
+        guards: [DashBoardGuardGuard()]),
     // AutoRoute(page: LoginRoute.page, initial: true, path: '/'),
     AutoRoute(
       path: "/care-ambassador-registration",
@@ -40,6 +46,11 @@ class AppRouter extends $AppRouter {
         maintainState: false,
         path: '/admin/reset-password'),
     AutoRoute(page: SideMenuRoute.page, path: "/admin/main", children: [
+      AutoRoute(
+        path: 'dashboard',
+        page: DashboardRoute.page,
+        initial: true,
+      ),
       AutoRoute(path: 'dashboard', page: DashboardRoute.page, initial: false),
       AutoRoute(
           path: 'care-ambassador',

@@ -16,6 +16,14 @@ class CareGiverProfileEvent with _$CareGiverProfileEvent {
   const factory CareGiverProfileEvent.careGiverInterViewVerify(
       {required String userId,
       required String adminId,
-      required bool status,
+      required int status,
       required BuildContext context}) = _CareGiverInterViewVerify;
+  const factory CareGiverProfileEvent.onTappedStatusDropDown(bool val) =
+      _OnTappedStatusDropDown;
+  const factory CareGiverProfileEvent.careGiverSendTrainingRequest({
+    required String userId,
+    required String adminId,
+    required BuildContext context,
+    int? page,
+  }) = _CareGiverSendTrainingRequest;
 }

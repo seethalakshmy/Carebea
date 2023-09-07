@@ -40,7 +40,7 @@ mixin _$CareGiverVerificationEvent {
         careGiverCertificateReject,
     required TResult Function(
             String userId, String adminId, BuildContext context, int? page)
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
   }) =>
@@ -68,7 +68,7 @@ mixin _$CareGiverVerificationEvent {
         careGiverCertificateReject,
     TResult? Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
   }) =>
@@ -96,7 +96,7 @@ mixin _$CareGiverVerificationEvent {
         careGiverCertificateReject,
     TResult Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
     required TResult orElse(),
@@ -120,8 +120,8 @@ mixin _$CareGiverVerificationEvent {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
-    required TResult Function(_CareGiverTrainingVerify value)
-        careGiverTrainingVerify,
+    required TResult Function(_CareGiverSendTrainingRequest value)
+        careGiverSendTrainingRequest,
     required TResult Function(_NotifyPendingDocument value)
         notifyPendingDocument,
   }) =>
@@ -144,7 +144,8 @@ mixin _$CareGiverVerificationEvent {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult? Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult? Function(_NotifyPendingDocument value)? notifyPendingDocument,
   }) =>
       throw _privateConstructorUsedError;
@@ -166,7 +167,8 @@ mixin _$CareGiverVerificationEvent {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult Function(_NotifyPendingDocument value)? notifyPendingDocument,
     required TResult orElse(),
   }) =>
@@ -298,7 +300,7 @@ class _$_GetVerificationData implements _GetVerificationData {
         careGiverCertificateReject,
     required TResult Function(
             String userId, String adminId, BuildContext context, int? page)
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
   }) {
@@ -329,7 +331,7 @@ class _$_GetVerificationData implements _GetVerificationData {
         careGiverCertificateReject,
     TResult? Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
   }) {
@@ -360,7 +362,7 @@ class _$_GetVerificationData implements _GetVerificationData {
         careGiverCertificateReject,
     TResult Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
     required TResult orElse(),
@@ -390,8 +392,8 @@ class _$_GetVerificationData implements _GetVerificationData {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
-    required TResult Function(_CareGiverTrainingVerify value)
-        careGiverTrainingVerify,
+    required TResult Function(_CareGiverSendTrainingRequest value)
+        careGiverSendTrainingRequest,
     required TResult Function(_NotifyPendingDocument value)
         notifyPendingDocument,
   }) {
@@ -417,7 +419,8 @@ class _$_GetVerificationData implements _GetVerificationData {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult? Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult? Function(_NotifyPendingDocument value)? notifyPendingDocument,
   }) {
     return getVerificationData?.call(this);
@@ -442,7 +445,8 @@ class _$_GetVerificationData implements _GetVerificationData {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult Function(_NotifyPendingDocument value)? notifyPendingDocument,
     required TResult orElse(),
   }) {
@@ -557,7 +561,7 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
         careGiverCertificateReject,
     required TResult Function(
             String userId, String adminId, BuildContext context, int? page)
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
   }) {
@@ -588,7 +592,7 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
         careGiverCertificateReject,
     TResult? Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
   }) {
@@ -619,7 +623,7 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
         careGiverCertificateReject,
     TResult Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
     required TResult orElse(),
@@ -649,8 +653,8 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
-    required TResult Function(_CareGiverTrainingVerify value)
-        careGiverTrainingVerify,
+    required TResult Function(_CareGiverSendTrainingRequest value)
+        careGiverSendTrainingRequest,
     required TResult Function(_NotifyPendingDocument value)
         notifyPendingDocument,
   }) {
@@ -676,7 +680,8 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult? Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult? Function(_NotifyPendingDocument value)? notifyPendingDocument,
   }) {
     return isSelectedVerificationTab?.call(this);
@@ -701,7 +706,8 @@ class _$_IsSelectedVerificationTab implements _IsSelectedVerificationTab {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult Function(_NotifyPendingDocument value)? notifyPendingDocument,
     required TResult orElse(),
   }) {
@@ -809,7 +815,7 @@ class _$_IsTappedReason implements _IsTappedReason {
         careGiverCertificateReject,
     required TResult Function(
             String userId, String adminId, BuildContext context, int? page)
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
   }) {
@@ -840,7 +846,7 @@ class _$_IsTappedReason implements _IsTappedReason {
         careGiverCertificateReject,
     TResult? Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
   }) {
@@ -871,7 +877,7 @@ class _$_IsTappedReason implements _IsTappedReason {
         careGiverCertificateReject,
     TResult Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
     required TResult orElse(),
@@ -901,8 +907,8 @@ class _$_IsTappedReason implements _IsTappedReason {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
-    required TResult Function(_CareGiverTrainingVerify value)
-        careGiverTrainingVerify,
+    required TResult Function(_CareGiverSendTrainingRequest value)
+        careGiverSendTrainingRequest,
     required TResult Function(_NotifyPendingDocument value)
         notifyPendingDocument,
   }) {
@@ -928,7 +934,8 @@ class _$_IsTappedReason implements _IsTappedReason {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult? Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult? Function(_NotifyPendingDocument value)? notifyPendingDocument,
   }) {
     return isTappedReason?.call(this);
@@ -953,7 +960,8 @@ class _$_IsTappedReason implements _IsTappedReason {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult Function(_NotifyPendingDocument value)? notifyPendingDocument,
     required TResult orElse(),
   }) {
@@ -1060,7 +1068,7 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
         careGiverCertificateReject,
     required TResult Function(
             String userId, String adminId, BuildContext context, int? page)
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
   }) {
@@ -1091,7 +1099,7 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
         careGiverCertificateReject,
     TResult? Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
   }) {
@@ -1122,7 +1130,7 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
         careGiverCertificateReject,
     TResult Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
     required TResult orElse(),
@@ -1152,8 +1160,8 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
-    required TResult Function(_CareGiverTrainingVerify value)
-        careGiverTrainingVerify,
+    required TResult Function(_CareGiverSendTrainingRequest value)
+        careGiverSendTrainingRequest,
     required TResult Function(_NotifyPendingDocument value)
         notifyPendingDocument,
   }) {
@@ -1179,7 +1187,8 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult? Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult? Function(_NotifyPendingDocument value)? notifyPendingDocument,
   }) {
     return isTappedHHaReason?.call(this);
@@ -1204,7 +1213,8 @@ class _$_IsTappedHHaReason implements _IsTappedHHaReason {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult Function(_NotifyPendingDocument value)? notifyPendingDocument,
     required TResult orElse(),
   }) {
@@ -1311,7 +1321,7 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
         careGiverCertificateReject,
     required TResult Function(
             String userId, String adminId, BuildContext context, int? page)
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
   }) {
@@ -1342,7 +1352,7 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
         careGiverCertificateReject,
     TResult? Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
   }) {
@@ -1373,7 +1383,7 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
         careGiverCertificateReject,
     TResult Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
     required TResult orElse(),
@@ -1403,8 +1413,8 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
-    required TResult Function(_CareGiverTrainingVerify value)
-        careGiverTrainingVerify,
+    required TResult Function(_CareGiverSendTrainingRequest value)
+        careGiverSendTrainingRequest,
     required TResult Function(_NotifyPendingDocument value)
         notifyPendingDocument,
   }) {
@@ -1430,7 +1440,8 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult? Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult? Function(_NotifyPendingDocument value)? notifyPendingDocument,
   }) {
     return isTappedBlsReason?.call(this);
@@ -1455,7 +1466,8 @@ class _$_IsTappedBlsReason implements _IsTappedBlsReason {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult Function(_NotifyPendingDocument value)? notifyPendingDocument,
     required TResult orElse(),
   }) {
@@ -1561,7 +1573,7 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
         careGiverCertificateReject,
     required TResult Function(
             String userId, String adminId, BuildContext context, int? page)
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
   }) {
@@ -1592,7 +1604,7 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
         careGiverCertificateReject,
     TResult? Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
   }) {
@@ -1623,7 +1635,7 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
         careGiverCertificateReject,
     TResult Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
     required TResult orElse(),
@@ -1653,8 +1665,8 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
-    required TResult Function(_CareGiverTrainingVerify value)
-        careGiverTrainingVerify,
+    required TResult Function(_CareGiverSendTrainingRequest value)
+        careGiverSendTrainingRequest,
     required TResult Function(_NotifyPendingDocument value)
         notifyPendingDocument,
   }) {
@@ -1680,7 +1692,8 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult? Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult? Function(_NotifyPendingDocument value)? notifyPendingDocument,
   }) {
     return isTappedTbReason?.call(this);
@@ -1705,7 +1718,8 @@ class _$_IsTappedTbReason implements _IsTappedTbReason {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult Function(_NotifyPendingDocument value)? notifyPendingDocument,
     required TResult orElse(),
   }) {
@@ -1813,7 +1827,7 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
         careGiverCertificateReject,
     required TResult Function(
             String userId, String adminId, BuildContext context, int? page)
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
   }) {
@@ -1844,7 +1858,7 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
         careGiverCertificateReject,
     TResult? Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
   }) {
@@ -1875,7 +1889,7 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
         careGiverCertificateReject,
     TResult Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
     required TResult orElse(),
@@ -1905,8 +1919,8 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
-    required TResult Function(_CareGiverTrainingVerify value)
-        careGiverTrainingVerify,
+    required TResult Function(_CareGiverSendTrainingRequest value)
+        careGiverSendTrainingRequest,
     required TResult Function(_NotifyPendingDocument value)
         notifyPendingDocument,
   }) {
@@ -1932,7 +1946,8 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult? Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult? Function(_NotifyPendingDocument value)? notifyPendingDocument,
   }) {
     return isTappedCovidReason?.call(this);
@@ -1957,7 +1972,8 @@ class _$_IsTappedCovidReason implements _IsTappedCovidReason {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult Function(_NotifyPendingDocument value)? notifyPendingDocument,
     required TResult orElse(),
   }) {
@@ -2076,7 +2092,7 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
         careGiverCertificateReject,
     required TResult Function(
             String userId, String adminId, BuildContext context, int? page)
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
   }) {
@@ -2107,7 +2123,7 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
         careGiverCertificateReject,
     TResult? Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
   }) {
@@ -2138,7 +2154,7 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
         careGiverCertificateReject,
     TResult Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
     required TResult orElse(),
@@ -2168,8 +2184,8 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
-    required TResult Function(_CareGiverTrainingVerify value)
-        careGiverTrainingVerify,
+    required TResult Function(_CareGiverSendTrainingRequest value)
+        careGiverSendTrainingRequest,
     required TResult Function(_NotifyPendingDocument value)
         notifyPendingDocument,
   }) {
@@ -2195,7 +2211,8 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult? Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult? Function(_NotifyPendingDocument value)? notifyPendingDocument,
   }) {
     return getCareGiverVerificationData?.call(this);
@@ -2220,7 +2237,8 @@ class _$_GetCareGiverVerificationData implements _GetCareGiverVerificationData {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult Function(_NotifyPendingDocument value)? notifyPendingDocument,
     required TResult orElse(),
   }) {
@@ -2378,7 +2396,7 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
         careGiverCertificateReject,
     required TResult Function(
             String userId, String adminId, BuildContext context, int? page)
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
   }) {
@@ -2410,7 +2428,7 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
         careGiverCertificateReject,
     TResult? Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
   }) {
@@ -2442,7 +2460,7 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
         careGiverCertificateReject,
     TResult Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
     required TResult orElse(),
@@ -2473,8 +2491,8 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
-    required TResult Function(_CareGiverTrainingVerify value)
-        careGiverTrainingVerify,
+    required TResult Function(_CareGiverSendTrainingRequest value)
+        careGiverSendTrainingRequest,
     required TResult Function(_NotifyPendingDocument value)
         notifyPendingDocument,
   }) {
@@ -2500,7 +2518,8 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult? Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult? Function(_NotifyPendingDocument value)? notifyPendingDocument,
   }) {
     return careGiverBackgroundVerify?.call(this);
@@ -2525,7 +2544,8 @@ class _$_CareGiverBackgroundVerify implements _CareGiverBackgroundVerify {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult Function(_NotifyPendingDocument value)? notifyPendingDocument,
     required TResult orElse(),
   }) {
@@ -2700,7 +2720,7 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
         careGiverCertificateReject,
     required TResult Function(
             String userId, String adminId, BuildContext context, int? page)
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
   }) {
@@ -2732,7 +2752,7 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
         careGiverCertificateReject,
     TResult? Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
   }) {
@@ -2764,7 +2784,7 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
         careGiverCertificateReject,
     TResult Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
     required TResult orElse(),
@@ -2795,8 +2815,8 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
-    required TResult Function(_CareGiverTrainingVerify value)
-        careGiverTrainingVerify,
+    required TResult Function(_CareGiverSendTrainingRequest value)
+        careGiverSendTrainingRequest,
     required TResult Function(_NotifyPendingDocument value)
         notifyPendingDocument,
   }) {
@@ -2822,7 +2842,8 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult? Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult? Function(_NotifyPendingDocument value)? notifyPendingDocument,
   }) {
     return careGiverCertificateApprove?.call(this);
@@ -2847,7 +2868,8 @@ class _$_CareGiverCertificateApprove implements _CareGiverCertificateApprove {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult Function(_NotifyPendingDocument value)? notifyPendingDocument,
     required TResult orElse(),
   }) {
@@ -2986,7 +3008,7 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
         careGiverCertificateReject,
     required TResult Function(
             String userId, String adminId, BuildContext context, int? page)
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
   }) {
@@ -3017,7 +3039,7 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
         careGiverCertificateReject,
     TResult? Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
   }) {
@@ -3048,7 +3070,7 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
         careGiverCertificateReject,
     TResult Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
     required TResult orElse(),
@@ -3078,8 +3100,8 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
-    required TResult Function(_CareGiverTrainingVerify value)
-        careGiverTrainingVerify,
+    required TResult Function(_CareGiverSendTrainingRequest value)
+        careGiverSendTrainingRequest,
     required TResult Function(_NotifyPendingDocument value)
         notifyPendingDocument,
   }) {
@@ -3105,7 +3127,8 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult? Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult? Function(_NotifyPendingDocument value)? notifyPendingDocument,
   }) {
     return careGiverCertificateReject?.call(this);
@@ -3130,7 +3153,8 @@ class _$_CareGiverCertificateReject implements _CareGiverCertificateReject {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult Function(_NotifyPendingDocument value)? notifyPendingDocument,
     required TResult orElse(),
   }) {
@@ -3157,21 +3181,23 @@ abstract class _CareGiverCertificateReject
 }
 
 /// @nodoc
-abstract class _$$_CareGiverTrainingVerifyCopyWith<$Res> {
-  factory _$$_CareGiverTrainingVerifyCopyWith(_$_CareGiverTrainingVerify value,
-          $Res Function(_$_CareGiverTrainingVerify) then) =
-      __$$_CareGiverTrainingVerifyCopyWithImpl<$Res>;
+abstract class _$$_CareGiverSendTrainingRequestCopyWith<$Res> {
+  factory _$$_CareGiverSendTrainingRequestCopyWith(
+          _$_CareGiverSendTrainingRequest value,
+          $Res Function(_$_CareGiverSendTrainingRequest) then) =
+      __$$_CareGiverSendTrainingRequestCopyWithImpl<$Res>;
   @useResult
   $Res call({String userId, String adminId, BuildContext context, int? page});
 }
 
 /// @nodoc
-class __$$_CareGiverTrainingVerifyCopyWithImpl<$Res>
+class __$$_CareGiverSendTrainingRequestCopyWithImpl<$Res>
     extends _$CareGiverVerificationEventCopyWithImpl<$Res,
-        _$_CareGiverTrainingVerify>
-    implements _$$_CareGiverTrainingVerifyCopyWith<$Res> {
-  __$$_CareGiverTrainingVerifyCopyWithImpl(_$_CareGiverTrainingVerify _value,
-      $Res Function(_$_CareGiverTrainingVerify) _then)
+        _$_CareGiverSendTrainingRequest>
+    implements _$$_CareGiverSendTrainingRequestCopyWith<$Res> {
+  __$$_CareGiverSendTrainingRequestCopyWithImpl(
+      _$_CareGiverSendTrainingRequest _value,
+      $Res Function(_$_CareGiverSendTrainingRequest) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3182,7 +3208,7 @@ class __$$_CareGiverTrainingVerifyCopyWithImpl<$Res>
     Object? context = null,
     Object? page = freezed,
   }) {
-    return _then(_$_CareGiverTrainingVerify(
+    return _then(_$_CareGiverSendTrainingRequest(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -3205,8 +3231,8 @@ class __$$_CareGiverTrainingVerifyCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
-  const _$_CareGiverTrainingVerify(
+class _$_CareGiverSendTrainingRequest implements _CareGiverSendTrainingRequest {
+  const _$_CareGiverSendTrainingRequest(
       {required this.userId,
       required this.adminId,
       required this.context,
@@ -3223,14 +3249,14 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
 
   @override
   String toString() {
-    return 'CareGiverVerificationEvent.careGiverTrainingVerify(userId: $userId, adminId: $adminId, context: $context, page: $page)';
+    return 'CareGiverVerificationEvent.careGiverSendTrainingRequest(userId: $userId, adminId: $adminId, context: $context, page: $page)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CareGiverTrainingVerify &&
+            other is _$_CareGiverSendTrainingRequest &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.adminId, adminId) || other.adminId == adminId) &&
             (identical(other.context, context) || other.context == context) &&
@@ -3243,10 +3269,9 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CareGiverTrainingVerifyCopyWith<_$_CareGiverTrainingVerify>
-      get copyWith =>
-          __$$_CareGiverTrainingVerifyCopyWithImpl<_$_CareGiverTrainingVerify>(
-              this, _$identity);
+  _$$_CareGiverSendTrainingRequestCopyWith<_$_CareGiverSendTrainingRequest>
+      get copyWith => __$$_CareGiverSendTrainingRequestCopyWithImpl<
+          _$_CareGiverSendTrainingRequest>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3273,11 +3298,11 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
         careGiverCertificateReject,
     required TResult Function(
             String userId, String adminId, BuildContext context, int? page)
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
   }) {
-    return careGiverTrainingVerify(userId, adminId, context, page);
+    return careGiverSendTrainingRequest(userId, adminId, context, page);
   }
 
   @override
@@ -3304,11 +3329,11 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
         careGiverCertificateReject,
     TResult? Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
   }) {
-    return careGiverTrainingVerify?.call(userId, adminId, context, page);
+    return careGiverSendTrainingRequest?.call(userId, adminId, context, page);
   }
 
   @override
@@ -3335,13 +3360,13 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
         careGiverCertificateReject,
     TResult Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
     required TResult orElse(),
   }) {
-    if (careGiverTrainingVerify != null) {
-      return careGiverTrainingVerify(userId, adminId, context, page);
+    if (careGiverSendTrainingRequest != null) {
+      return careGiverSendTrainingRequest(userId, adminId, context, page);
     }
     return orElse();
   }
@@ -3365,12 +3390,12 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
-    required TResult Function(_CareGiverTrainingVerify value)
-        careGiverTrainingVerify,
+    required TResult Function(_CareGiverSendTrainingRequest value)
+        careGiverSendTrainingRequest,
     required TResult Function(_NotifyPendingDocument value)
         notifyPendingDocument,
   }) {
-    return careGiverTrainingVerify(this);
+    return careGiverSendTrainingRequest(this);
   }
 
   @override
@@ -3392,10 +3417,11 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult? Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult? Function(_NotifyPendingDocument value)? notifyPendingDocument,
   }) {
-    return careGiverTrainingVerify?.call(this);
+    return careGiverSendTrainingRequest?.call(this);
   }
 
   @override
@@ -3417,30 +3443,32 @@ class _$_CareGiverTrainingVerify implements _CareGiverTrainingVerify {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult Function(_NotifyPendingDocument value)? notifyPendingDocument,
     required TResult orElse(),
   }) {
-    if (careGiverTrainingVerify != null) {
-      return careGiverTrainingVerify(this);
+    if (careGiverSendTrainingRequest != null) {
+      return careGiverSendTrainingRequest(this);
     }
     return orElse();
   }
 }
 
-abstract class _CareGiverTrainingVerify implements CareGiverVerificationEvent {
-  const factory _CareGiverTrainingVerify(
+abstract class _CareGiverSendTrainingRequest
+    implements CareGiverVerificationEvent {
+  const factory _CareGiverSendTrainingRequest(
       {required final String userId,
       required final String adminId,
       required final BuildContext context,
-      final int? page}) = _$_CareGiverTrainingVerify;
+      final int? page}) = _$_CareGiverSendTrainingRequest;
 
   String get userId;
   String get adminId;
   BuildContext get context;
   int? get page;
   @JsonKey(ignore: true)
-  _$$_CareGiverTrainingVerifyCopyWith<_$_CareGiverTrainingVerify>
+  _$$_CareGiverSendTrainingRequestCopyWith<_$_CareGiverSendTrainingRequest>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -3549,7 +3577,7 @@ class _$_NotifyPendingDocument implements _NotifyPendingDocument {
         careGiverCertificateReject,
     required TResult Function(
             String userId, String adminId, BuildContext context, int? page)
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     required TResult Function(String userId, BuildContext context, int? page)
         notifyPendingDocument,
   }) {
@@ -3580,7 +3608,7 @@ class _$_NotifyPendingDocument implements _NotifyPendingDocument {
         careGiverCertificateReject,
     TResult? Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult? Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
   }) {
@@ -3611,7 +3639,7 @@ class _$_NotifyPendingDocument implements _NotifyPendingDocument {
         careGiverCertificateReject,
     TResult Function(
             String userId, String adminId, BuildContext context, int? page)?
-        careGiverTrainingVerify,
+        careGiverSendTrainingRequest,
     TResult Function(String userId, BuildContext context, int? page)?
         notifyPendingDocument,
     required TResult orElse(),
@@ -3641,8 +3669,8 @@ class _$_NotifyPendingDocument implements _NotifyPendingDocument {
         careGiverCertificateApprove,
     required TResult Function(_CareGiverCertificateReject value)
         careGiverCertificateReject,
-    required TResult Function(_CareGiverTrainingVerify value)
-        careGiverTrainingVerify,
+    required TResult Function(_CareGiverSendTrainingRequest value)
+        careGiverSendTrainingRequest,
     required TResult Function(_NotifyPendingDocument value)
         notifyPendingDocument,
   }) {
@@ -3668,7 +3696,8 @@ class _$_NotifyPendingDocument implements _NotifyPendingDocument {
         careGiverCertificateApprove,
     TResult? Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult? Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult? Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult? Function(_NotifyPendingDocument value)? notifyPendingDocument,
   }) {
     return notifyPendingDocument?.call(this);
@@ -3693,7 +3722,8 @@ class _$_NotifyPendingDocument implements _NotifyPendingDocument {
         careGiverCertificateApprove,
     TResult Function(_CareGiverCertificateReject value)?
         careGiverCertificateReject,
-    TResult Function(_CareGiverTrainingVerify value)? careGiverTrainingVerify,
+    TResult Function(_CareGiverSendTrainingRequest value)?
+        careGiverSendTrainingRequest,
     TResult Function(_NotifyPendingDocument value)? notifyPendingDocument,
     required TResult orElse(),
   }) {

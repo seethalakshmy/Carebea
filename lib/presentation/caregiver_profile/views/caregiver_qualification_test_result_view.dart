@@ -94,6 +94,7 @@ class CaregiverQualificationAndTestResultView extends StatelessWidget {
       child: RowColonCombo.threeSeventy(
         label: label,
         value: value,
+        fontSize: FS.font13PointFive.val,
       ),
     );
   }
@@ -103,6 +104,7 @@ class CaregiverQualificationAndTestResultView extends StatelessWidget {
       label: label,
       value: value,
       color: AppColor.label7.val,
+      fontSize: FS.font13PointFive.val,
       fontWeight: FW.w500.val,
     );
   }

@@ -22,6 +22,7 @@ import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
 import 'package:admin_580_tech/presentation/region_analytics/region_analytics_page.dart';
 import 'package:admin_580_tech/presentation/roles/role_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
+import 'package:admin_580_tech/presentation/widget/common_alert_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
@@ -82,6 +83,8 @@ class _MenuBarState extends State<SideMenuPage> {
       AppString.faq.val: "",
       AppString.logout.val: "",
     };
+
+    CustomLog.log("Side menu:::Called initial Api Call");
     // if (!sharedPreffUtil.getViewRole) {
     //   mainData.remove(AppString.roleManagement.val);
     // }
@@ -409,6 +412,58 @@ class _MenuBarState extends State<SideMenuPage> {
     required Map<String, dynamic> items,
     required bool isOpened,
   }) {
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        return FxHover(
+          builder: (isHover) {
+            Color color =
+                isHover ? AppColor.primaryColor.val : AppColor.menuDisable.val;
+            return ListTile(
+              leading: isHover || isSelected(items, index, tabsRouter)
+                  ? Padding(
+                      padding: EdgeInsets.symmetric(horizontal: DBL.five.val),
+                      child: CustomContainer(
+                        width: DBL.four.val,
+                        color: AppColor.primaryColor.val,
+                        height: DBL.twentyFive.val,
+                      ),
+                    )
+                  : CustomSizedBox(
+                      width: DBL.ten.val,
+                    ),
+              title:
+                  isOpened ? buildText(items, index, tabsRouter, color) : null,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+              mouseCursor: SystemMouseCursors.click,
+              horizontalTitleGap: DBL.zero.val,
+              onTap: () {
+                if (items.keys.elementAt(index) == AppString.logout.val) {
+                  showDialog<void>(
+                    context: context,
+                    builder: (BuildContext dialogContext) {
+                      return CommonAlertWidget(
+                        heading: AppString.logout.val,
+                        label: AppString.logoutMsg.val,
+                        onTapYes: () {
+                          SharedPreffUtil().logoutClear();
+                          context.router.replace(const LoginRoute());
+                        },
+                      );
+                    },
+                  );
+                } else {
+                  isOpen.value = true;
+                  tabsRouter.setActiveIndex(
+                      getRouteIndex(items.keys.elementAt(index)));
+                  HiveUtils.set(AppString.selectedMenuIndex.val,
+                      getRouteIndex(items.keys.elementAt(index)));
+                  _scaffoldDrawerKey.currentState?.closeDrawer();
+                  SharedPreffUtil().setPage = 0;
+                  SharedPreffUtil().setTab = 0;
+                }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -482,6 +537,28 @@ class _MenuBarState extends State<SideMenuPage> {
     );
   }
 
+  bool isSelected(Map<String, String> items, int index, TabsRouter tabsRouter) {
+    print('item:: ${items.keys.elementAt(index)}');
+
+    if (items.keys.elementAt(index) != AppString.logout.val) {
+      String path = tabsRouter.currentPath.replaceAll("admin/main/", "");
+      CustomLog.log('path is $path');
+      if (path == "/user-management-detail") {
+        path = "user-management";
+      } else if (path == AppString.careAmbassadorVerificationPath.val ||
+          path == AppString.careAmbassadorDetailPath.val ||
+          path == AppString.careAmbassadorProfilePath.val ||
+          path == AppString.careAmbassadorCreationPath.val) {
+        path = "care-ambassador";
+      } else if (path == "role-manage") {
+        path = "role-management";
+      } else if (path == "admin-manage") {
+        path = "admin-management";
+      }
+      return items.keys.elementAt(index) == upperCase(path) ? true : false;
+    } else {
+      return false;
+
   bool isSelected(
       Map<String, dynamic> items, int index, TabsRouter tabsRouter) {
     String path = tabsRouter.currentPath.replaceAll("admin/main/", "");
@@ -498,12 +575,11 @@ class _MenuBarState extends State<SideMenuPage> {
     } else if (path == "admin-manage") {
       path = "admin-management";
     }
-    return items.keys.elementAt(index) == upperCase(path) ? true : false;
   }
 
   final List<PageRouteInfo<dynamic>> _routes = [
     DashboardRoute(),
-    CareGiversRoute(tab: null),
+    CareGiversRoute(),
     CareGiverDetailRoute(),
     UserManagementRoute(),
     UserManagementDetailRoute(),
