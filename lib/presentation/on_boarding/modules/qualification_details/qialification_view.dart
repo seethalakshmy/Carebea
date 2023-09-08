@@ -53,6 +53,7 @@ class _QualificationViewState extends State<QualificationView> {
   final AutovalidateMode _validateMode = AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
   final FormValidationBloc _validationBloc = FormValidationBloc();
+  SharedPreffUtil sharedPreffUtil = SharedPreffUtil();
 
   List<PlatformFile> hhaBytesList = [];
   List<PlatformFile> blsBytesList = [];
@@ -410,7 +411,9 @@ class _QualificationViewState extends State<QualificationView> {
     if (_formKey.currentState!.validate()) {
       widget.onboardingBloc.add(
         OnboardingEvent.qualificationDetails(
-            userId: userId,
+            userId: sharedPreffUtil.getIsFromWebsite == true
+                ? sharedPreffUtil.getAdminId
+                : userId,
             haveHhaRegistration:
                 widget.onboardingBloc.state.isHHASelected == 0 ? true : false,
             hhaDetails: widget.onboardingBloc.state.isHHASelected == 0

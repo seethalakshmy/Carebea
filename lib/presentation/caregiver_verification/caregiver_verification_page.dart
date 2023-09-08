@@ -203,7 +203,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
             onPressed: () {
               if (status != Verification.trainingStarted.val) {
                 context.read<CareGiverVerificationBloc>().add(
-                    CareGiverVerificationEvent.careGiverTrainingVerify(
+                    CareGiverVerificationEvent.careGiverSendTrainingRequest(
                         userId: userId,
                         context: context,
                         page: _page,

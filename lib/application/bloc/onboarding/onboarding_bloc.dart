@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:admin_580_tech/domain/on_boarding/models/common_response.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/models/document_list_response.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
@@ -67,6 +68,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   String selectedGenderName = "";
   String selectedRelation = "";
   Uint8List showProfilePic = Uint8List(0);
+  SharedPreffUtil sharedPreffUtil = SharedPreffUtil();
   PlatformFile? profileFile;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
@@ -152,6 +154,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     on<_SubmitBuildProfile>(_submitBuildProfile);
     on<_SubmitAccountDetails>(_submitAccountDetails);
     on<_SubmitReference>(_submitReference);
+    print("inside bloc ${SharedPreffUtil().getIsFromWebsite}");
 
     on<_AddReference>((event, emit) {
       print("on ref add");
@@ -207,11 +210,17 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
       _SubmitReference event, Emitter<OnboardingState> emit) async {
     emit(state.copyWith(isLoading: true));
 
-    final Either<ApiErrorHandler, CommonResponse> result =
-        await onboardingRepository.submitReference(
-      userId: event.userId,
-      referenceList: state.referenceList.map((e) => e.toJson()).toList(),
-    );
+    final Either<ApiErrorHandler, CommonResponse> result = sharedPreffUtil
+                .getIsFromWebsite ==
+            false
+        ? await onboardingRepository.submitReference(
+            userId: event.userId,
+            referenceList: state.referenceList.map((e) => e.toJson()).toList(),
+          )
+        : await onboardingRepository.submitReferenceWebsite(
+            userId: event.userId,
+            referenceList: state.referenceList.map((e) => e.toJson()).toList(),
+          );
     OnboardingState referenceState = result.fold((l) {
       return state.copyWith(isLoading: false, referenceOption: Some(Left(l)));
     }, (r) {
@@ -391,50 +400,81 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
 
   _getPersonalData(
       _GetPersonalDetails event, Emitter<OnboardingState> emit) async {
+    print('asd ${sharedPreffUtil.getAccessToken}');
     emit(state.copyWith(isLoading: true));
     final Either<ApiErrorHandler, PersonalDetailsResponse> result =
-        await onboardingRepository.personalDetailsSubmit(
-            userId: event.userId,
-            dob: event.dob,
-            genderId: event.genderId,
-            street: event.street,
-            cityId: event.cityId,
-            stateId: event.stateId,
-            latitude: event.latitude,
-            longitude: event.longitude,
-            zip: event.zip,
-            address: event.address,
-            socialSecurityNo: event.socialSecurityNo,
-            documentId: event.documentId,
-            documentNo: event.documentNo,
-            expiryDate: event.expiryDate,
-            documentList: event.documentList,
-            profilePic: event.profilePic);
-    OnboardingState peronalState = result.fold((l) {
+        sharedPreffUtil.getIsFromWebsite == false
+            ? await onboardingRepository.personalDetailsSubmit(
+                userId: event.userId,
+                dob: event.dob,
+                genderId: event.genderId,
+                street: event.street,
+                cityId: event.cityId,
+                stateId: event.stateId,
+                latitude: event.latitude,
+                longitude: event.longitude,
+                zip: event.zip,
+                address: event.address,
+                socialSecurityNo: event.socialSecurityNo,
+                documentId: event.documentId,
+                documentNo: event.documentNo,
+                expiryDate: event.expiryDate,
+                documentList: event.documentList,
+                profilePic: event.profilePic)
+            : await onboardingRepository.personalDetailsSubmitWebsite(
+                userId: event.userId,
+                dob: event.dob,
+                genderId: event.genderId,
+                street: event.street,
+                cityId: event.cityId,
+                stateId: event.stateId,
+                latitude: event.latitude,
+                longitude: event.longitude,
+                zip: event.zip,
+                address: event.address,
+                socialSecurityNo: event.socialSecurityNo,
+                documentId: event.documentId,
+                documentNo: event.documentNo,
+                expiryDate: event.expiryDate,
+                documentList: event.documentList,
+                profilePic: event.profilePic);
+    OnboardingState personalState = result.fold((l) {
       return state.copyWith(
           isLoading: false, personalDetailsOption: Some(Left(l)));
     }, (r) {
       return state.copyWith(
           isLoading: false, personalDetailsOption: Some(Right(r)));
     });
-    emit(peronalState);
+    emit(personalState);
   }
 
   _getQualificationDetails(
       _GetQualificationDetails event, Emitter<OnboardingState> emit) async {
     emit(state.copyWith(isLoading: true));
     final Either<ApiErrorHandler, CommonResponse> result =
-        await onboardingRepository.qualificationSubmit(
-            userId: event.userId,
-            haveHHARegistration: event.haveHhaRegistration,
-            hhaDetails: event.hhaDetails,
-            haveBLSCertificate: event.haveBlsCertificate,
-            blsDetails: event.blsDetails,
-            haveTBTest: event.haveTbTest,
-            tbDetails: event.tbDetails,
-            haveCovidVaccination: event.haveCovidVaccination,
-            covidDetails: event.covidDetails,
-            isReUpload: false);
+        sharedPreffUtil.getIsFromWebsite == false
+            ? await onboardingRepository.qualificationSubmit(
+                userId: event.userId,
+                haveHHARegistration: event.haveHhaRegistration,
+                hhaDetails: event.hhaDetails,
+                haveBLSCertificate: event.haveBlsCertificate,
+                blsDetails: event.blsDetails,
+                haveTBTest: event.haveTbTest,
+                tbDetails: event.tbDetails,
+                haveCovidVaccination: event.haveCovidVaccination,
+                covidDetails: event.covidDetails,
+                isReUpload: false)
+            : await onboardingRepository.qualificationSubmitWebsite(
+                userId: event.userId,
+                haveHHARegistration: event.haveHhaRegistration,
+                hhaDetails: event.hhaDetails,
+                haveBLSCertificate: event.haveBlsCertificate,
+                blsDetails: event.blsDetails,
+                haveTBTest: event.haveTbTest,
+                tbDetails: event.tbDetails,
+                haveCovidVaccination: event.haveCovidVaccination,
+                covidDetails: event.covidDetails,
+                isReUpload: false);
     OnboardingState qualificationState = result.fold((l) {
       return state.copyWith(
           isLoading: false, qualificationDetailsOption: Some(Left(l)));
@@ -449,14 +489,23 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
       _SubmitPreferenceDetails event, Emitter<OnboardingState> emit) async {
     emit(state.copyWith(isLoading: true));
     final Either<ApiErrorHandler, CommonResponse> result =
-        await onboardingRepository.preferenceSubmit(
-            userId: event.userId,
-            yearsOfExp: event.yearsOfExp,
-            serveWithSmoker: event.serveWithSmoker,
-            willingToTransportation: event.willingToTransportation,
-            willingToServeWithPets: event.willingToServeWithPets,
-            petsList: event.petsList,
-            knownLanguages: event.knownLanguages);
+        sharedPreffUtil.getIsFromWebsite == false
+            ? await onboardingRepository.preferenceSubmit(
+                userId: event.userId,
+                yearsOfExp: event.yearsOfExp,
+                serveWithSmoker: event.serveWithSmoker,
+                willingToTransportation: event.willingToTransportation,
+                willingToServeWithPets: event.willingToServeWithPets,
+                petsList: event.petsList,
+                knownLanguages: event.knownLanguages)
+            : await onboardingRepository.preferenceSubmitWebsite(
+                userId: event.userId,
+                yearsOfExp: event.yearsOfExp,
+                serveWithSmoker: event.serveWithSmoker,
+                willingToTransportation: event.willingToTransportation,
+                willingToServeWithPets: event.willingToServeWithPets,
+                petsList: event.petsList,
+                knownLanguages: event.knownLanguages);
     OnboardingState preferenceState = result.fold((l) {
       return state.copyWith(
           isLoading: false, preferenceDetailsOption: Some(Left(l)));
@@ -506,8 +555,11 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
       _SubmitCaregiverService event, Emitter<OnboardingState> emit) async {
     emit(state.copyWith(isLoading: true));
     final Either<ApiErrorHandler, CommonResponse> result =
-        await onboardingRepository.servicesSubmit(
-            userId: event.userId, services: event.services);
+        sharedPreffUtil.getIsFromWebsite == false
+            ? await onboardingRepository.servicesSubmit(
+                userId: event.userId, services: event.services)
+            : await onboardingRepository.servicesSubmitWebsite(
+                userId: event.userId, services: event.services);
     OnboardingState submitServiceState = result.fold((l) {
       return state.copyWith(
           isLoading: false, submitServiceOption: Some(Left(l)));
@@ -522,11 +574,17 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
       _SubmitBuildProfile event, Emitter<OnboardingState> emit) async {
     emit(state.copyWith(isLoading: true));
     final Either<ApiErrorHandler, CommonResponse> result =
-        await onboardingRepository.buildProfileSubmit(
-            userId: event.userId,
-            aboutYou: event.aboutYou,
-            hobbies: event.hobbies,
-            whyLoveBeingCaregiver: event.whyLoveBeingCaregiver);
+        sharedPreffUtil.getIsFromWebsite == false
+            ? await onboardingRepository.buildProfileSubmit(
+                userId: event.userId,
+                aboutYou: event.aboutYou,
+                hobbies: event.hobbies,
+                whyLoveBeingCaregiver: event.whyLoveBeingCaregiver)
+            : await onboardingRepository.buildProfileSubmitWebsite(
+                userId: event.userId,
+                aboutYou: event.aboutYou,
+                hobbies: event.hobbies,
+                whyLoveBeingCaregiver: event.whyLoveBeingCaregiver);
     OnboardingState profileState = result.fold((l) {
       return state.copyWith(
           isLoading: false, submitBuildProfileOption: Some(Left(l)));
@@ -541,11 +599,17 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
       _SubmitAccountDetails event, Emitter<OnboardingState> emit) async {
     emit(state.copyWith(isLoading: true));
     final Either<ApiErrorHandler, CommonResponse> result =
-        await onboardingRepository.accountDetailsSubmit(
-            userId: event.userId,
-            accountHolderName: event.accountHolderName,
-            routingNumber: event.routingNumber,
-            accountNumber: event.accountNumber);
+        sharedPreffUtil.getIsFromWebsite == false
+            ? await onboardingRepository.accountDetailsSubmit(
+                userId: event.userId,
+                accountHolderName: event.accountHolderName,
+                routingNumber: event.routingNumber,
+                accountNumber: event.accountNumber)
+            : await onboardingRepository.accountDetailsSubmitWebsite(
+                userId: event.userId,
+                accountHolderName: event.accountHolderName,
+                routingNumber: event.routingNumber,
+                accountNumber: event.accountNumber);
     OnboardingState accountState = result.fold((l) {
       return state.copyWith(
           isLoading: false, submitAccountDetailsOption: Some(Left(l)));

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 /// App Strings
 enum AppString {
   userId("USER ID"),
+  signUp("SignUp"),
+  verify("Verify"),
   login("Login"),
   mandatorySymbol("*"),
   select("Select"),
@@ -12,6 +14,8 @@ enum AppString {
   start("Start"),
   endTime("End Time"),
   ok("Ok"),
+  passwordCriteria(
+      'Password must be 8 to 32 characters including upper/lower case letters/numbers\nand at least one special characters'),
   profile("Profile"),
   profileDetails("Profile Details"),
   goToProfile("Go to Profile "),
@@ -23,6 +27,7 @@ enum AppString {
   createdDate("Created Date"),
   repliedOn('Replied On'),
   title('Title'),
+  description('Description'),
   email("Email"),
   basicServices("Basic Services"),
   specialServices("Special Services"),
@@ -31,6 +36,8 @@ enum AppString {
   forgotPassword("Forgot Password ?"),
   resetPassword("Reset Password"),
   optVerification("OTP Verification"),
+  clientAnalytics("Client Analytics"),
+  analytics("Analytics"),
 
   resetPasswordDescription(
       "Enter your registered mail id to receive password\nreset link"),
@@ -76,6 +83,7 @@ enum AppString {
   firstName("First Name"),
   filter("Filter"),
   lastName("Last Name"),
+  answer("Answer"),
   serviceRequestID("Service Request ID"),
   requestedStartDateTime("Requested Start Date & Time"),
   requestedEndDateTime("Requested End Date & Time"),
@@ -190,6 +198,8 @@ enum AppString {
   noUsersFound("No Users found!"),
   profileCompletion("Profile Completion"),
   logout("Logout"),
+  logoutMsg("Are you sure want to logout?"),
+  careAmbassadorAnalytics("Care Ambassador Analytics "),
   noProfiles("No Profiles Found!"),
   creditCardDetails("Credit card details"),
   paymentMethod("Payment Method"),
@@ -310,12 +320,13 @@ enum AppString {
   startVerification("Start Verification"),
   startedVerification("Started Verification"),
   trainingStarted("Training Started"),
+  trainingCompleted("Training Completed"),
   interviewStarted("Interview Started"),
   interviewCompleted("Interview Completed"),
   verified("Verified"),
   interviewFailed("Interview Failed"),
-  backgroundRejected("Background Verification Rejected"),
-  certificateRejected("Certificate Verification Rejected"),
+  backgroundRejected("Background Rejected"),
+  certificateRejected("Certificate Rejected"),
   enterTheReason("Enter the reason"),
   acceptThisCareAmbassador("Do you want to accept this care ambassador?"),
   selectRejectedDocument("Select rejected document and mentioned the reason"),
@@ -331,9 +342,11 @@ enum AppString {
 
   ///validations
   emptyEmail("Email address shouldn't be empty"),
+  emptyOtp("OTP shouldn't be empty"),
   emptyReason("Reason shouldn't be empty"),
   validEmail("Enter valid email address"),
   emptyPassword("Password shouldn't be empty"),
+  invalidPassword("Password should meet the criteria"),
   emptyRejectedDocument(
       "Please Select rejected document and mention the reason"),
   passwordLengthError("Password should be at least 8 characters"),
@@ -343,13 +356,16 @@ enum AppString {
   emptyRoutingNo("Routing number shouldn't be empty"),
   emptyAcNo("Account number shouldn't be empty"),
   emptyFName("First name shouldn't be empty"),
+  questionError("Question shouldn't be empty"),
   emptyLName("Last name shouldn't be empty"),
+  answerError("Answer shouldn't be empty"),
   emptyPhone("Phone number shouldn't be empty"),
   emptyAbout("Please write something about you"),
   emptyHobbies("Please write something about your hobbies"),
   emptyLoveCaregiver("Please write the reason"),
   emptyMobile("Mobile number shouldn't be empty"),
   validMobile("Mobile number should be 10 digits"),
+  validOtp("OTP should be 4 digits"),
   uploadDocument("Upload the document"),
   emptyDOB("Date of birth shouldn't be empty"),
   emptyStartTime("Start time shouldn't be empty"),
@@ -376,8 +392,9 @@ enum AppString {
   emptyProfilePic("Please select your profile picture"),
   errorUploadingFile("Error uploading file, Please try again"),
   serviceRequestManagement("Service Request Management"),
-  supportTickets("Support Tickets"),
-  supportTicketsDetails("Support Tickets Details"),
+  supportTickets("Complaints"),
+  faq("Faq"),
+  supportTicketsDetails("Complaints Details"),
   pleaseSelectPets("Please select the pets"),
   pleaseSelectLanguages("Please select the languages"),
   pendingServices("Pending Services"),
@@ -393,6 +410,7 @@ enum AppString {
   cancelledBy("Cancelled By"),
   extraFee("Extra Fee"),
   tip("Tip"),
+  question("Questions"),
   proceed("Proceed"),
   enterYourNewDateAndTime("Enter Your New Date & Time"),
   normalServiceRequest("Normal Service Booking"),
@@ -413,7 +431,24 @@ enum AppString {
   agreementChckboxText(
       "I have read and agree to the home health aid agreement"),
   dummyAgreementText(
-      "Gives the care ambassador the right to make healthcare decisions on someone else’s behalf. This is common if the patient is not able to speak for themselves and a care ambassador is assigned the duty of making decisions for the benefit of the patient. This form also includes a living will that allows the patient to make end-of-life decisions if they should be in a state of incapacitation for a longer period of time.");
+      "Gives the care ambassador the right to make healthcare decisions on someone else’s behalf. This is common if the patient is not able to speak for themselves and a care ambassador is assigned the duty of making decisions for the benefit of the patient. This form also includes a living will that allows the patient to make end-of-life decisions if they should be in a state of incapacitation for a longer period of time."),
+  faqCreation("Faq Creation"),
+  churnRate("Churn Rate"),
+  inactiveRate("Inactive Rate"),
+  newUsers("New Users"),
+  newClients("New Clients"),
+  qualityOfServices("Quality Of Services(Rating)"),
+  averageCoastPerClient("Average Coast Per Client"),
+  averageNumberOfHoursPerService("Average Number Of Hours Per Service"),
+  careAmbassadorUtilizationRate("Care Ambassador\nUtilization Rate"),
+  averageEarnings("Average Earnings"),
+  averageEarningsPerCareAmbassador("Average Earnings Per Care Ambassador"),
+  regionAnalytics("Region Analytics"),
+  numberOfCommunitiesServiced("Number Of Communities Serviced"),
+  numberOfCitiesServiced("Number Of Cities Serviced"),
+  numberOfStatesServiced("Number Of States Serviced"),
+  passwordMismatch("The passwords entered do not match."),
+  averageCostPerCareAmbassador("Average Coast Per CareAmbassadors");
 
   final String val;
 
@@ -464,6 +499,7 @@ enum AppColor {
   calendarColor(Color(0xffF9FBFF)),
   darkGreen(Color(0xff479C88)),
   darkGreen2(Color(0xff075948)),
+  darkGreen3(Color(0xff054237)),
   green(Color(0xff42C25F)),
   green2(Color(0xff50CD89)),
   green3(Color(0xffC9F7D3)),
@@ -472,6 +508,7 @@ enum AppColor {
   amber2(Color(0xffE7B75A)),
   amber3(Color(0xffEB9C02)),
   amber4(Color(0xffFDF1CA)),
+  amber5(Color(0xffD6A850)),
   indoor(Color(0xffFCEFCF)),
   outdoor(Color(0xffF6DADA)),
   both(Color(0xffC6DEF4)),
@@ -502,6 +539,7 @@ enum AppColor {
   red3(Color(0xffFDEDEE)),
   red4(Color(0xffFDEDEE)),
   red5(Color(0xffFF2727)),
+  red6(Color.fromRGBO(145, 0, 0, 0.8)),
   blue(Color(0xff556DD3)),
   success(Color(0xff53a653)),
   warning(Color(0xffffcc00)),
@@ -516,6 +554,8 @@ enum AppColor {
   lightRed(Color(0xfffceff1)),
   mediumRed(Color(0xfff06f81)),
   starFillColor(Color(0xffEB9C02)),
+  pieChartColor(Color(0xff586EFF)),
+  dashboardSymbolBackground(Color(0xffECF3FB)),
   transparent(Colors.transparent);
 
   final Color val;
@@ -569,7 +609,17 @@ enum IMG {
   blackLogoPng("assets/images/black_logo.png"),
   careGiver("assets/images/caregiver.png"),
   person("assets/images/ic_person.png"),
-  profile("assets/images/profile.png");
+  icProfile("assets/images/ic_profile.png"),
+  profile("assets/images/profile.png"),
+  clientComplaints("assets/images/client_complaints.png"),
+  careCancelledShifts("assets/images/care_cancelled.png"),
+  careComplaints("assets/images/care_complaint.png"),
+  clientCancelledShifts("assets/images/client_cancelled.png"),
+  scheduledShifts("assets/images/missed_schedule.png"),
+  clients("assets/images/clients.png"),
+  dollar("assets/images/dollar-sign.png"),
+  careAmbassadors("assets/images/care_ambassadors.png"),
+  dashBoardClock("assets/images/hours.png");
 
   final String val;
 
@@ -844,6 +894,7 @@ enum Verification {
   startVerification(1),
   startedVerification(2),
   trainingStarted(3),
+  trainingCompleted(9),
   interViewStarted(4),
   interViewCompleted(5),
   interViewFailed(6),
@@ -863,6 +914,16 @@ enum Approve {
   final int val;
 
   const Approve(this.val);
+}
+
+enum Interview {
+  started(1),
+  failed(2),
+  completed(3);
+
+  final int val;
+
+  const Interview(this.val);
 }
 
 enum ToastPosition { top, bottom, topLeft, topRight, bottomLeft, bottomRight }

@@ -8,8 +8,8 @@ import 'custom_sizedbox.dart';
 import 'custom_text.dart';
 import 'custom_text_field.dart';
 
-class CustomActionAlert extends StatelessWidget {
-  const CustomActionAlert({
+class CommonAlertWidget extends StatelessWidget {
+  const CommonAlertWidget({
     super.key,
     required this.label,
     required this.onTapYes,

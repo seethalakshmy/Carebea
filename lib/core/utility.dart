@@ -23,6 +23,11 @@ class Utility {
     }
   }
 
+  static String detailDate(DateTime date) {
+    final String formattedDate = DateFormat('MMM dd yyyy').format(date);
+    return formattedDate;
+  }
+
   static Future<String> selectDate(BuildContext context, DateTime initialDate,
       DateTime firstDate, DateTime lastDate) async {
     final DateFormat formatter = DateFormat('dd/MM/yyyy');
@@ -34,5 +39,24 @@ class Utility {
 
     String selectedDate = formatter.format(picked!);
     return selectedDate;
+  }
+
+  static Future<String> selectDateDashboard(BuildContext context,
+      DateTime initialDate, DateTime firstDate, DateTime lastDate) async {
+    DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: initialDate,
+        firstDate: firstDate,
+        lastDate: lastDate);
+
+    String selectedDate = picked.toString();
+    return selectedDate;
+  }
+
+  static bool validatePassword(String value) {
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,32}$';
+    RegExp regExp = RegExp(pattern);
+    return regExp.hasMatch(value);
   }
 }

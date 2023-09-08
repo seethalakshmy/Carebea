@@ -10,13 +10,19 @@ import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/admin_creation/admin_creation_page.dart';
 import 'package:admin_580_tech/presentation/admins/admins_page.dart';
+import 'package:admin_580_tech/presentation/care_ambassador_analytics/care_ambassador_analysis.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/caregiver_verification_page.dart';
+import 'package:admin_580_tech/presentation/client_analytics/client_analytics_page.dart';
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
+import 'package:admin_580_tech/presentation/faq_creation/faq_creation_screen.dart';
 import 'package:admin_580_tech/presentation/help_and_support/help_and_support_page.dart';
+import 'package:admin_580_tech/presentation/login/login_page.dart';
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
+import 'package:admin_580_tech/presentation/region_analytics/region_analytics_page.dart';
 import 'package:admin_580_tech/presentation/roles/role_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
+import 'package:admin_580_tech/presentation/widget/common_alert_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
@@ -28,6 +34,7 @@ import 'package:flutter/material.dart';
 import '../caregiver_creation/caregiver_creation_page.dart';
 import '../caregiver_detail/caregiver_detail_page.dart';
 import '../caregivers/caregivers_page.dart';
+import '../faq/faq_screen.dart';
 import '../role_creation/role_creation_page.dart';
 import '../service_request_management/service_request_management_page.dart';
 import '../support_tickets_detail/support_tickets_detail_page.dart';
@@ -50,7 +57,7 @@ class _MenuBarState extends State<SideMenuPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<ScaffoldState> _scaffoldDrawerKey =
       GlobalKey<ScaffoldState>();
-  Map<String, String> mainData = {};
+  Map<String, dynamic> mainData = {};
   SharedPreffUtil sharedPreffUtil = SharedPreffUtil();
 
   @override
@@ -64,8 +71,20 @@ class _MenuBarState extends State<SideMenuPage> {
       AppString.userManagement.val: "",
       AppString.transactionManagement.val: "",
       AppString.serviceRequestManagement.val: "",
-      AppString.supportTickets.val: ""
+      // AppString.analytics.val: [
+      //   AppString.clientAnalytics.val,
+      //   AppString.careAmbassadorAnalytics.val,
+      //   AppString.regionAnalytics.val
+      // ],
+      AppString.clientAnalytics.val: "",
+      AppString.careAmbassadorAnalytics.val: "",
+      AppString.regionAnalytics.val: "",
+      AppString.supportTickets.val: "",
+      AppString.faq.val: "",
+      AppString.logout.val: "",
     };
+
+    CustomLog.log("Side menu:::Called initial Api Call");
     // if (!sharedPreffUtil.getViewRole) {
     //   mainData.remove(AppString.roleManagement.val);
     // }
@@ -390,7 +409,7 @@ class _MenuBarState extends State<SideMenuPage> {
   /// menu list
   Widget _menuList({
     required TabsRouter tabsRouter,
-    required Map<String, String> items,
+    required Map<String, dynamic> items,
     required bool isOpened,
   }) {
     return ListView.builder(
@@ -421,23 +440,92 @@ class _MenuBarState extends State<SideMenuPage> {
               mouseCursor: SystemMouseCursors.click,
               horizontalTitleGap: DBL.zero.val,
               onTap: () {
-                isOpen.value = true;
-                tabsRouter
-                    .setActiveIndex(getRouteIndex(items.keys.elementAt(index)));
-                HiveUtils.set(AppString.selectedMenuIndex.val,
-                    getRouteIndex(items.keys.elementAt(index)));
-                _scaffoldDrawerKey.currentState?.closeDrawer();
-                SharedPreffUtil().setPage = 0;
-                SharedPreffUtil().setTab = 0;
+                if (items.keys.elementAt(index) == AppString.logout.val) {
+                  showDialog<void>(
+                    context: context,
+                    builder: (BuildContext dialogContext) {
+                      return CommonAlertWidget(
+                        heading: AppString.logout.val,
+                        label: AppString.logoutMsg.val,
+                        onTapYes: () {
+                          SharedPreffUtil().logoutClear();
+                          context.router.replace(const LoginRoute());
+                        },
+                      );
+                    },
+                  );
+                } else {
+                  isOpen.value = true;
+                  tabsRouter.setActiveIndex(
+                      getRouteIndex(items.keys.elementAt(index)));
+                  HiveUtils.set(AppString.selectedMenuIndex.val,
+                      getRouteIndex(items.keys.elementAt(index)));
+                  _scaffoldDrawerKey.currentState?.closeDrawer();
+                  SharedPreffUtil().setPage = 0;
+                  SharedPreffUtil().setTab = 0;
+                }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return FxHover(
+              builder: (isHover) {
+                Color color = isHover
+                    ? AppColor.primaryColor.val
+                    : AppColor.menuDisable.val;
+                return ListTile(
+                  leading: isHover || isSelected(items, index, tabsRouter)
+                      ? Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: DBL.five.val),
+                          child: CustomContainer(
+                            width: DBL.four.val,
+                            color: AppColor.primaryColor.val,
+                            height: DBL.twentyFive.val,
+                          ),
+                        )
+                      : CustomSizedBox(
+                          width: DBL.ten.val,
+                        ),
+                  title: isOpened
+                      ? buildText(items, index, tabsRouter, color)
+                      : null,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+                  mouseCursor: SystemMouseCursors.click,
+                  horizontalTitleGap: DBL.zero.val,
+                  onTap: () {
+                    isOpen.value = true;
+                    items.keys.elementAt(index) == AppString.logout.val
+                        ? SharedPreffUtil().logoutClear()
+                        : tabsRouter.setActiveIndex(
+                            getRouteIndex(items.keys.elementAt(index)));
+                    HiveUtils.set(AppString.selectedMenuIndex.val,
+                        getRouteIndex(items.keys.elementAt(index)));
+                    _scaffoldDrawerKey.currentState?.closeDrawer();
+                    SharedPreffUtil().setPage = 0;
+                    SharedPreffUtil().setTab = 0;
+                  },
+                );
               },
             );
           },
-        );
-      },
+        ),
+        // InkWell(
+        //     onTap: () async{
+        //      await SharedPreffUtil().logoutClear();
+        //       print("After logout ${SharedPreffUtil().getAdminId}");
+        //       autoTabRouter?.navigate(LoginRoute());
+        //     },
+        //     child: Text(AppString.logout.val))
+      ],
     );
   }
 
-  CustomText buildText(Map<String, String> items, int index,
+  CustomText buildText(Map<String, dynamic> items, int index,
       TabsRouter tabsRouter, Color color) {
     return CustomText(
       items.keys.elementAt(index).capitalize(),
@@ -450,6 +538,29 @@ class _MenuBarState extends State<SideMenuPage> {
   }
 
   bool isSelected(Map<String, String> items, int index, TabsRouter tabsRouter) {
+    print('item:: ${items.keys.elementAt(index)}');
+
+    if (items.keys.elementAt(index) != AppString.logout.val) {
+      String path = tabsRouter.currentPath.replaceAll("admin/main/", "");
+      CustomLog.log('path is $path');
+      if (path == "/user-management-detail") {
+        path = "user-management";
+      } else if (path == AppString.careAmbassadorVerificationPath.val ||
+          path == AppString.careAmbassadorDetailPath.val ||
+          path == AppString.careAmbassadorProfilePath.val ||
+          path == AppString.careAmbassadorCreationPath.val) {
+        path = "care-ambassador";
+      } else if (path == "role-manage") {
+        path = "role-management";
+      } else if (path == "admin-manage") {
+        path = "admin-management";
+      }
+      return items.keys.elementAt(index) == upperCase(path) ? true : false;
+    } else {
+      return false;
+
+  bool isSelected(
+      Map<String, dynamic> items, int index, TabsRouter tabsRouter) {
     String path = tabsRouter.currentPath.replaceAll("admin/main/", "");
     CustomLog.log('path is $path');
     if (path == "/user-management-detail") {
@@ -464,12 +575,11 @@ class _MenuBarState extends State<SideMenuPage> {
     } else if (path == "admin-manage") {
       path = "admin-management";
     }
-    return items.keys.elementAt(index) == upperCase(path) ? true : false;
   }
 
   final List<PageRouteInfo<dynamic>> _routes = [
     DashboardRoute(),
-    CareGiversRoute(tab: null),
+    CareGiversRoute(),
     CareGiverDetailRoute(),
     UserManagementRoute(),
     UserManagementDetailRoute(),
@@ -484,7 +594,13 @@ class _MenuBarState extends State<SideMenuPage> {
     AdminCreationRoute(),
     ServiceRequestManagementRoute(),
     HelpAndSupportRoute(),
-    SupportTicketsDetailRoute()
+    SupportTicketsDetailRoute(),
+    FaqRoute(),
+    FaqCreationRoute(),
+    ClientAnalyticsRoute(),
+    CareAmbassadorAnalysisRoute(),
+    RegionAnalyticsRoute(),
+    // LoginRoute()
   ];
 
   int getRouteIndex(String route) {
@@ -521,6 +637,22 @@ class _MenuBarState extends State<SideMenuPage> {
       return 15;
     } else if (route == AppString.supportTicketsDetails.val) {
       return 16;
+    } else if (route == AppString.faq.val) {
+      return 17;
+    } else if (route == AppString.faqCreation.val) {
+      return 18;
+    }
+    // else if (route == AppString.analytics.val) {
+    //   return 19;
+    // }
+    else if (route == AppString.clientAnalytics.val) {
+      return 19;
+    } else if (route == AppString.careAmbassadorAnalytics.val) {
+      return 20;
+    } else if (route == AppString.regionAnalytics.val) {
+      return 21;
+    } else if (route == AppString.logout.val) {
+      return 22;
     } else {
       return 0;
     }
@@ -560,7 +692,21 @@ class _MenuBarState extends State<SideMenuPage> {
       return const HelpAndSupportPage();
     } else if (index == 16) {
       return const SupportTicketsDetailPage();
-    } else {
+    } else if (index == 17) {
+      return const FaqPage();
+    } else if (index == 18) {
+      return const FaqCreationPage();
+    } else if (index == 19) {
+      return const ClientAnalyticsPage();
+    } else if (index == 20) {
+      return const CareAmbassadorAnalysisPage();
+    } else if (index == 21) {
+      return const RegionAnalyticsPage();
+    }
+    // else if (index == 22) {
+    //   return const LoginPage();
+    // }
+    else {
       return const DashboardPage();
     }
   }

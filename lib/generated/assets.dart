@@ -24,6 +24,8 @@ class Assets {
   static const String iconsIcFile = 'assets/icons/ic_file.svg';
   static const String iconsIcInactive = 'assets/icons/ic_inactive.svg';
   static const String iconsIcLocation = 'assets/icons/ic_location.svg';
+  static const String iconsIcNotAvailableCaregivers =
+      'assets/icons/ic_not_available_caregivers.svg';
   static const String iconsIcNotFound = 'assets/icons/ic_not_found.svg';
   static const String iconsIcNotfication = 'assets/icons/ic_notfication.svg';
   static const String iconsIcNotificationDot =
@@ -39,18 +41,31 @@ class Assets {
   static const String iconsIcUncheck = 'assets/icons/ic_uncheck.svg';
   static const String iconsIcWarning = 'assets/icons/ic_warning.svg';
   static const String iconsImageNotFound = 'assets/icons/image_not_found.png';
-  static const String iconsNotAvailableCaregivers =
-      'assets/icons/ic_not_available_caregivers.svg';
   static const String iconsPlusCircle = 'assets/icons/plus-circle.svg';
   static const String iconsRoundClose = 'assets/icons/round_close.svg';
   static const String iconsSearchIcon = 'assets/icons/search_icon.svg';
   static const String iconsUploadIcon = 'assets/icons/uploadIcon.svg';
   static const String iconsUserAvatar = 'assets/icons/user_avatar.svg';
   static const String imagesBlackLogo = 'assets/images/black_logo.png';
+  static const String imagesCareAmbassadors =
+      'assets/images/care_ambassadors.png';
+  static const String imagesCareCancelled = 'assets/images/care_cancelled.png';
+  static const String imagesCareComplaint = 'assets/images/care_complaint.png';
   static const String imagesCaregiver = 'assets/images/caregiver.png';
+  static const String imagesClientCancelled =
+      'assets/images/client_cancelled.png';
+  static const String imagesClientComplaints =
+      'assets/images/client_complaints.png';
+  static const String imagesClients = 'assets/images/clients.png';
+  static const String imagesClock = 'assets/images/clock.png';
   static const String imagesColorLogo = 'assets/images/color_logo.png';
+  static const String imagesDollarSign = 'assets/images/dollar-sign.png';
   static const String imagesDrawer = 'assets/images/drawer.png';
+  static const String imagesHours = 'assets/images/hours.png';
   static const String imagesIcPerson = 'assets/images/ic_person.png';
+  static const String imagesImg = 'assets/images/ic_profile.png';
+  static const String imagesMissedSchedule =
+      'assets/images/missed_schedule.png';
   static const String imagesNotification = 'assets/images/notification.png';
   static const String imagesProfile = 'assets/images/profile.png';
 }
