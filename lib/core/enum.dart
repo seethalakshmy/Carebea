@@ -198,6 +198,7 @@ enum AppString {
   noUsersFound("No Users found!"),
   profileCompletion("Profile Completion"),
   logout("Logout"),
+  logoutMsg("Are you sure want to logout?"),
   careAmbassadorAnalytics("Care Ambassador Analytics "),
   noProfiles("No Profiles Found!"),
   creditCardDetails("Credit card details"),
@@ -319,12 +320,13 @@ enum AppString {
   startVerification("Start Verification"),
   startedVerification("Started Verification"),
   trainingStarted("Training Started"),
+  trainingCompleted("Training Completed"),
   interviewStarted("Interview Started"),
   interviewCompleted("Interview Completed"),
   verified("Verified"),
   interviewFailed("Interview Failed"),
-  backgroundRejected("Background Verification Rejected"),
-  certificateRejected("Certificate Verification Rejected"),
+  backgroundRejected("Background Rejected"),
+  certificateRejected("Certificate Rejected"),
   enterTheReason("Enter the reason"),
   acceptThisCareAmbassador("Do you want to accept this care ambassador?"),
   selectRejectedDocument("Select rejected document and mentioned the reason"),
@@ -497,6 +499,7 @@ enum AppColor {
   calendarColor(Color(0xffF9FBFF)),
   darkGreen(Color(0xff479C88)),
   darkGreen2(Color(0xff075948)),
+  darkGreen3(Color(0xff054237)),
   green(Color(0xff42C25F)),
   green2(Color(0xff50CD89)),
   green3(Color(0xffC9F7D3)),
@@ -505,6 +508,7 @@ enum AppColor {
   amber2(Color(0xffE7B75A)),
   amber3(Color(0xffEB9C02)),
   amber4(Color(0xffFDF1CA)),
+  amber5(Color(0xffD6A850)),
   indoor(Color(0xffFCEFCF)),
   outdoor(Color(0xffF6DADA)),
   both(Color(0xffC6DEF4)),
@@ -535,6 +539,7 @@ enum AppColor {
   red3(Color(0xffFDEDEE)),
   red4(Color(0xffFDEDEE)),
   red5(Color(0xffFF2727)),
+  red6(Color.fromRGBO(145, 0, 0, 0.8)),
   blue(Color(0xff556DD3)),
   success(Color(0xff53a653)),
   warning(Color(0xffffcc00)),
@@ -604,6 +609,7 @@ enum IMG {
   blackLogoPng("assets/images/black_logo.png"),
   careGiver("assets/images/caregiver.png"),
   person("assets/images/ic_person.png"),
+  icProfile("assets/images/ic_profile.png"),
   profile("assets/images/profile.png"),
   clientComplaints("assets/images/client_complaints.png"),
   careCancelledShifts("assets/images/care_cancelled.png"),
@@ -888,6 +894,7 @@ enum Verification {
   startVerification(1),
   startedVerification(2),
   trainingStarted(3),
+  trainingCompleted(9),
   interViewStarted(4),
   interViewCompleted(5),
   interViewFailed(6),
@@ -907,6 +914,16 @@ enum Approve {
   final int val;
 
   const Approve(this.val);
+}
+
+enum Interview {
+  started(1),
+  failed(2),
+  completed(3);
+
+  final int val;
+
+  const Interview(this.val);
 }
 
 enum ToastPosition { top, bottom, topLeft, topRight, bottomLeft, bottomRight }

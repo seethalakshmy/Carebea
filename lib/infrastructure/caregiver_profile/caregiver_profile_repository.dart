@@ -56,13 +56,33 @@ class CareGiverProfileRepository implements ICareGiverProfileRepo {
   Future<Either<ApiErrorHandler, VerifyResponse>> careGiverInterViewVerify(
       {required String userID,
       required String adminId,
-      required bool status}) async {
+      required int status}) async {
     try {
       var res = await _apiClient.careGiverInterViewVerify(
           "", userID, adminId, status);
       return Right(res);
     } on DioError catch (e) {
       CustomLog.log("CareGiverDetailRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, VerifyResponse>> careGiverSendTrainingRequest(
+      {required String userID, required String adminId}) async {
+    try {
+      final response =
+          await _apiClient.careGiverSendTrainingRequest("", userID, adminId);
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverVerificationRepository: ${e.message}");
       if (e.message.contains("SocketException")) {
         CustomLog.log("reached here..");
         return Left(ClientFailure(

@@ -9,7 +9,12 @@ class CareGiverProfileState with _$CareGiverProfileState {
     required VerifyResponse? trainingVerifyResponse,
     required VerifyResponse? interViewVerifyResponse,
     required String? error,
+    required VerifyResponse? sendTrainingResponse,
+    int? status,
     @Default(false) bool isClientError,
+    @Default(false) bool isAlreadyCalledInitialCall,
+    @Default(false) bool isShowStatusDropDown,
+    @Default([]) List<StatusList> statusList,
   }) = _CareGiverProfileState;
 
   factory CareGiverProfileState.initial() {
@@ -18,6 +23,7 @@ class CareGiverProfileState with _$CareGiverProfileState {
         isError: false,
         response: null,
         error: null,
+        sendTrainingResponse: null,
         trainingVerifyResponse: null,
         interViewVerifyResponse: null);
   }

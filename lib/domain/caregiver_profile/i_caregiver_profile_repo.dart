@@ -10,5 +10,7 @@ abstract class ICareGiverProfileRepo {
   Future<Either<ApiErrorHandler, VerifyResponse>> careGiverTrainingVerify(
       {required String userID, required bool status, required String adminId});
   Future<Either<ApiErrorHandler, VerifyResponse>> careGiverInterViewVerify(
-      {required String userID, required bool status, required String adminId});
+      {required String userID, required int status, required String adminId});
+  Future<Either<ApiErrorHandler, VerifyResponse>> careGiverSendTrainingRequest(
+      {required String userID, required String adminId});
 }
