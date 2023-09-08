@@ -9,18 +9,18 @@ import 'app_router.gr.dart';
 class AppRouter extends $AppRouter {
   @override
   final List<AutoRoute> routes = [
-    // AutoRoute(page: LoginRoute.page, initial: true, path: '/'),
+    AutoRoute(page: LoginRoute.page, initial: true, path: '/'),
     AutoRoute(
       path: "/care-ambassador-registration",
       page: CareAmbassadorRegistrationRoute.page,
       maintainState: true,
     ),
-    AutoRoute(
-      path: "/signup",
-      page: SignUpRoute.page,
-      maintainState: true,
-      initial: true,
-    ),
+    // AutoRoute(
+    //   path: "/signup",
+    //   page: SignUpRoute.page,
+    //   maintainState: true,
+    //   initial: true,
+    // ),
     AutoRoute(
       path: "/email-otp-verification",
       page: EmailOtpVerificationRoute.page,

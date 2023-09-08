@@ -107,8 +107,8 @@ class PreferenceView extends StatelessWidget {
                               state.isPetsSelected == 0 ? true : false,
                           petsList: state.isPetsSelected == 0
                               ? onboardingBloc.selectedPetsList
-                                  .map((e) => PetsList.fromJson(PetsList(
-                                      id: e.id, inOutStatus: e.petsId)))
+                                  .map((e) =>
+                                      PetsList(id: e.id, inOutStatus: e.petsId))
                                   .toList()
                               : [],
                           knownLanguages: onboardingBloc.selectedLanguageList
