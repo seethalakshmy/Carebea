@@ -17,19 +17,20 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$UserManagementDetailEvent {
   String get userId => throw _privateConstructorUsedError;
+  String get adminId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId) getUserDetail,
+    required TResult Function(String userId, String adminId) getUserDetail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? getUserDetail,
+    TResult? Function(String userId, String adminId)? getUserDetail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? getUserDetail,
+    TResult Function(String userId, String adminId)? getUserDetail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +62,7 @@ abstract class $UserManagementDetailEventCopyWith<$Res> {
           $Res Function(UserManagementDetailEvent) then) =
       _$UserManagementDetailEventCopyWithImpl<$Res, UserManagementDetailEvent>;
   @useResult
-  $Res call({String userId});
+  $Res call({String userId, String adminId});
 }
 
 /// @nodoc
@@ -79,11 +80,16 @@ class _$UserManagementDetailEventCopyWithImpl<$Res,
   @override
   $Res call({
     Object? userId = null,
+    Object? adminId = null,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      adminId: null == adminId
+          ? _value.adminId
+          : adminId // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -97,7 +103,7 @@ abstract class _$$_GetUserDetailCopyWith<$Res>
       __$$_GetUserDetailCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String userId});
+  $Res call({String userId, String adminId});
 }
 
 /// @nodoc
@@ -112,11 +118,16 @@ class __$$_GetUserDetailCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = null,
+    Object? adminId = null,
   }) {
     return _then(_$_GetUserDetail(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      adminId: null == adminId
+          ? _value.adminId
+          : adminId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -125,14 +136,16 @@ class __$$_GetUserDetailCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_GetUserDetail implements _GetUserDetail {
-  const _$_GetUserDetail({required this.userId});
+  const _$_GetUserDetail({required this.userId, required this.adminId});
 
   @override
   final String userId;
+  @override
+  final String adminId;
 
   @override
   String toString() {
-    return 'UserManagementDetailEvent.getUserDetail(userId: $userId)';
+    return 'UserManagementDetailEvent.getUserDetail(userId: $userId, adminId: $adminId)';
   }
 
   @override
@@ -140,11 +153,12 @@ class _$_GetUserDetail implements _GetUserDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_GetUserDetail &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.adminId, adminId) || other.adminId == adminId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId);
+  int get hashCode => Object.hash(runtimeType, userId, adminId);
 
   @JsonKey(ignore: true)
   @override
@@ -155,27 +169,27 @@ class _$_GetUserDetail implements _GetUserDetail {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId) getUserDetail,
+    required TResult Function(String userId, String adminId) getUserDetail,
   }) {
-    return getUserDetail(userId);
+    return getUserDetail(userId, adminId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId)? getUserDetail,
+    TResult? Function(String userId, String adminId)? getUserDetail,
   }) {
-    return getUserDetail?.call(userId);
+    return getUserDetail?.call(userId, adminId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId)? getUserDetail,
+    TResult Function(String userId, String adminId)? getUserDetail,
     required TResult orElse(),
   }) {
     if (getUserDetail != null) {
-      return getUserDetail(userId);
+      return getUserDetail(userId, adminId);
     }
     return orElse();
   }
@@ -210,11 +224,14 @@ class _$_GetUserDetail implements _GetUserDetail {
 }
 
 abstract class _GetUserDetail implements UserManagementDetailEvent {
-  const factory _GetUserDetail({required final String userId}) =
-      _$_GetUserDetail;
+  const factory _GetUserDetail(
+      {required final String userId,
+      required final String adminId}) = _$_GetUserDetail;
 
   @override
   String get userId;
+  @override
+  String get adminId;
   @override
   @JsonKey(ignore: true)
   _$$_GetUserDetailCopyWith<_$_GetUserDetail> get copyWith =>

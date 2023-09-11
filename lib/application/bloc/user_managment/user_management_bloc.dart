@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:admin_580_tech/domain/user_management/model/user_list_response.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -26,8 +27,13 @@ class UserManagementBloc
 
   _getUser(_GetUsers event, Emitter<UserManagementState> emit) async {
     emit(state.copyWith(isLoading: false));
-    final Either<ApiErrorHandler, UserResponse> result =
-        await usersRepository.getUsers(page: event.page, limit: event.limit);
+    final Either<ApiErrorHandler, UserListResponse> result =
+        await usersRepository.getUsers(
+            userId: event.userId,
+            page: event.page,
+            limit: event.limit,
+            searchTerm: event.searchTerm,
+            filterId: event.filterId);
     var userState = result.fold((l) {
       return state.copyWith(error: l.error, isLoading: false);
     }, (r) {

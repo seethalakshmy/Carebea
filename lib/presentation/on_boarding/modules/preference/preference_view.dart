@@ -94,7 +94,7 @@ class PreferenceView extends StatelessWidget {
                       onboardingBloc.nextButtonClicked = true;
                       onboardingBloc.add(OnboardingEvent.preferenceDetails(
                           userId: SharedPreffUtil().getIsFromWebsite == true
-                              ? SharedPreffUtil().getAccessToken
+                              ? SharedPreffUtil().getAdminId
                               : SharedPreffUtil().getCareGiverUserId,
                           yearsOfExp: onboardingBloc.selectedYearId,
                           serveWithSmoker:
@@ -108,7 +108,8 @@ class PreferenceView extends StatelessWidget {
                           petsList: state.isPetsSelected == 0
                               ? onboardingBloc.selectedPetsList
                                   .map((e) =>
-                                      PetsList(id: e.id, inOutStatus: e.petsId))
+                                      PetsList(id: e.id, inOutStatus: e.petsId)
+                                          .toJson())
                                   .toList()
                               : [],
                           knownLanguages: onboardingBloc.selectedLanguageList

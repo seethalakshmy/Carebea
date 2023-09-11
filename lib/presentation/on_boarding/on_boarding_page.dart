@@ -13,6 +13,7 @@ import '../widget/custom_card.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_text.dart';
 import '../widget/header_view.dart';
+import 'modules/agreement/agreement.dart';
 import 'modules/build_profile/build_profile_view.dart';
 import 'modules/personal_details/personal_details_view.dart';
 import 'modules/preference/preference_view.dart';
@@ -63,6 +64,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   Widget _bodyView() {
     List<Widget> pages = [
+      Agreement(
+        onboardingBloc: _onboardingBloc,
+        pageController: controller,
+      ),
       //const OtpVerificationView(),
       PersonalDetailsView(
         onboardingBloc: _onboardingBloc,

@@ -17,21 +17,29 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$UserManagementEvent {
   String get userId => throw _privateConstructorUsedError;
-  int get page => throw _privateConstructorUsedError;
-  int get limit => throw _privateConstructorUsedError;
+  String get page => throw _privateConstructorUsedError;
+  String get limit => throw _privateConstructorUsedError;
+  String get searchTerm => throw _privateConstructorUsedError;
+  int get filterId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, int page, int limit) getUsers,
+    required TResult Function(String userId, String page, String limit,
+            String searchTerm, int filterId)
+        getUsers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, int page, int limit)? getUsers,
+    TResult? Function(String userId, String page, String limit,
+            String searchTerm, int filterId)?
+        getUsers,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, int page, int limit)? getUsers,
+    TResult Function(String userId, String page, String limit,
+            String searchTerm, int filterId)?
+        getUsers,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,7 +71,12 @@ abstract class $UserManagementEventCopyWith<$Res> {
           UserManagementEvent value, $Res Function(UserManagementEvent) then) =
       _$UserManagementEventCopyWithImpl<$Res, UserManagementEvent>;
   @useResult
-  $Res call({String userId, int page, int limit});
+  $Res call(
+      {String userId,
+      String page,
+      String limit,
+      String searchTerm,
+      int filterId});
 }
 
 /// @nodoc
@@ -82,6 +95,8 @@ class _$UserManagementEventCopyWithImpl<$Res, $Val extends UserManagementEvent>
     Object? userId = null,
     Object? page = null,
     Object? limit = null,
+    Object? searchTerm = null,
+    Object? filterId = null,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -91,10 +106,18 @@ class _$UserManagementEventCopyWithImpl<$Res, $Val extends UserManagementEvent>
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       limit: null == limit
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
+              as String,
+      searchTerm: null == searchTerm
+          ? _value.searchTerm
+          : searchTerm // ignore: cast_nullable_to_non_nullable
+              as String,
+      filterId: null == filterId
+          ? _value.filterId
+          : filterId // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -108,7 +131,12 @@ abstract class _$$_GetUsersCopyWith<$Res>
       __$$_GetUsersCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String userId, int page, int limit});
+  $Res call(
+      {String userId,
+      String page,
+      String limit,
+      String searchTerm,
+      int filterId});
 }
 
 /// @nodoc
@@ -125,6 +153,8 @@ class __$$_GetUsersCopyWithImpl<$Res>
     Object? userId = null,
     Object? page = null,
     Object? limit = null,
+    Object? searchTerm = null,
+    Object? filterId = null,
   }) {
     return _then(_$_GetUsers(
       userId: null == userId
@@ -134,10 +164,18 @@ class __$$_GetUsersCopyWithImpl<$Res>
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       limit: null == limit
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
+              as String,
+      searchTerm: null == searchTerm
+          ? _value.searchTerm
+          : searchTerm // ignore: cast_nullable_to_non_nullable
+              as String,
+      filterId: null == filterId
+          ? _value.filterId
+          : filterId // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -147,18 +185,26 @@ class __$$_GetUsersCopyWithImpl<$Res>
 
 class _$_GetUsers implements _GetUsers {
   const _$_GetUsers(
-      {required this.userId, required this.page, required this.limit});
+      {required this.userId,
+      required this.page,
+      required this.limit,
+      required this.searchTerm,
+      required this.filterId});
 
   @override
   final String userId;
   @override
-  final int page;
+  final String page;
   @override
-  final int limit;
+  final String limit;
+  @override
+  final String searchTerm;
+  @override
+  final int filterId;
 
   @override
   String toString() {
-    return 'UserManagementEvent.getUsers(userId: $userId, page: $page, limit: $limit)';
+    return 'UserManagementEvent.getUsers(userId: $userId, page: $page, limit: $limit, searchTerm: $searchTerm, filterId: $filterId)';
   }
 
   @override
@@ -168,11 +214,16 @@ class _$_GetUsers implements _GetUsers {
             other is _$_GetUsers &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.page, page) || other.page == page) &&
-            (identical(other.limit, limit) || other.limit == limit));
+            (identical(other.limit, limit) || other.limit == limit) &&
+            (identical(other.searchTerm, searchTerm) ||
+                other.searchTerm == searchTerm) &&
+            (identical(other.filterId, filterId) ||
+                other.filterId == filterId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId, page, limit);
+  int get hashCode =>
+      Object.hash(runtimeType, userId, page, limit, searchTerm, filterId);
 
   @JsonKey(ignore: true)
   @override
@@ -183,27 +234,33 @@ class _$_GetUsers implements _GetUsers {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, int page, int limit) getUsers,
+    required TResult Function(String userId, String page, String limit,
+            String searchTerm, int filterId)
+        getUsers,
   }) {
-    return getUsers(userId, page, limit);
+    return getUsers(userId, page, limit, searchTerm, filterId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, int page, int limit)? getUsers,
+    TResult? Function(String userId, String page, String limit,
+            String searchTerm, int filterId)?
+        getUsers,
   }) {
-    return getUsers?.call(userId, page, limit);
+    return getUsers?.call(userId, page, limit, searchTerm, filterId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, int page, int limit)? getUsers,
+    TResult Function(String userId, String page, String limit,
+            String searchTerm, int filterId)?
+        getUsers,
     required TResult orElse(),
   }) {
     if (getUsers != null) {
-      return getUsers(userId, page, limit);
+      return getUsers(userId, page, limit, searchTerm, filterId);
     }
     return orElse();
   }
@@ -240,15 +297,21 @@ class _$_GetUsers implements _GetUsers {
 abstract class _GetUsers implements UserManagementEvent {
   const factory _GetUsers(
       {required final String userId,
-      required final int page,
-      required final int limit}) = _$_GetUsers;
+      required final String page,
+      required final String limit,
+      required final String searchTerm,
+      required final int filterId}) = _$_GetUsers;
 
   @override
   String get userId;
   @override
-  int get page;
+  String get page;
   @override
-  int get limit;
+  String get limit;
+  @override
+  String get searchTerm;
+  @override
+  int get filterId;
   @override
   @JsonKey(ignore: true)
   _$$_GetUsersCopyWith<_$_GetUsers> get copyWith =>
@@ -259,7 +322,7 @@ abstract class _GetUsers implements UserManagementEvent {
 mixin _$UserManagementState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
-  UserResponse? get response => throw _privateConstructorUsedError;
+  UserListResponse? get response => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -274,7 +337,10 @@ abstract class $UserManagementStateCopyWith<$Res> {
       _$UserManagementStateCopyWithImpl<$Res, UserManagementState>;
   @useResult
   $Res call(
-      {bool isLoading, bool isError, UserResponse? response, String? error});
+      {bool isLoading,
+      bool isError,
+      UserListResponse? response,
+      String? error});
 }
 
 /// @nodoc
@@ -307,7 +373,7 @@ class _$UserManagementStateCopyWithImpl<$Res, $Val extends UserManagementState>
       response: freezed == response
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
-              as UserResponse?,
+              as UserListResponse?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -325,7 +391,10 @@ abstract class _$$_UsersStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isLoading, bool isError, UserResponse? response, String? error});
+      {bool isLoading,
+      bool isError,
+      UserListResponse? response,
+      String? error});
 }
 
 /// @nodoc
@@ -356,7 +425,7 @@ class __$$_UsersStateCopyWithImpl<$Res>
       response: freezed == response
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
-              as UserResponse?,
+              as UserListResponse?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -379,7 +448,7 @@ class _$_UsersState implements _UsersState {
   @override
   final bool isError;
   @override
-  final UserResponse? response;
+  final UserListResponse? response;
   @override
   final String? error;
 
@@ -416,7 +485,7 @@ abstract class _UsersState implements UserManagementState {
   const factory _UsersState(
       {required final bool isLoading,
       required final bool isError,
-      required final UserResponse? response,
+      required final UserListResponse? response,
       required final String? error}) = _$_UsersState;
 
   @override
@@ -424,7 +493,7 @@ abstract class _UsersState implements UserManagementState {
   @override
   bool get isError;
   @override
-  UserResponse? get response;
+  UserListResponse? get response;
   @override
   String? get error;
   @override

@@ -276,9 +276,16 @@ abstract class $AppRouter extends _i31.RootStackRouter {
       );
     },
     UserManagementDetailRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<UserManagementDetailRouteArgs>(
+          orElse: () =>
+              UserManagementDetailRouteArgs(id: queryParams.optString('id')));
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i23.UserManagementDetailPage(),
+        child: _i23.UserManagementDetailPage(
+          key: args.key,
+          id: args.id,
+        ),
       );
     },
     ClientAnalyticsRoute.name: (routeData) {
@@ -856,16 +863,42 @@ class UserManagementRoute extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i23.UserManagementDetailPage]
-class UserManagementDetailRoute extends _i31.PageRouteInfo<void> {
-  const UserManagementDetailRoute({List<_i31.PageRouteInfo>? children})
-      : super(
+class UserManagementDetailRoute
+    extends _i31.PageRouteInfo<UserManagementDetailRouteArgs> {
+  UserManagementDetailRoute({
+    _i32.Key? key,
+    String? id,
+    List<_i31.PageRouteInfo>? children,
+  }) : super(
           UserManagementDetailRoute.name,
+          args: UserManagementDetailRouteArgs(
+            key: key,
+            id: id,
+          ),
+          rawQueryParams: {'id': id},
           initialChildren: children,
         );
 
   static const String name = 'UserManagementDetailRoute';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i31.PageInfo<UserManagementDetailRouteArgs> page =
+      _i31.PageInfo<UserManagementDetailRouteArgs>(name);
+}
+
+class UserManagementDetailRouteArgs {
+  const UserManagementDetailRouteArgs({
+    this.key,
+    this.id,
+  });
+
+  final _i32.Key? key;
+
+  final String? id;
+
+  @override
+  String toString() {
+    return 'UserManagementDetailRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for

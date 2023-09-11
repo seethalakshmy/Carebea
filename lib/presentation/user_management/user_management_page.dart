@@ -1,10 +1,12 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:admin_580_tech/application/bloc/user_managment/user_management_bloc.dart';
 import 'package:admin_580_tech/core/custom_debugger.dart';
+import 'package:admin_580_tech/domain/user_management/model/user_list_response.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/infrastructure/user_management/users_repository.dart';
 import 'package:admin_580_tech/presentation/widget/custom_dropdown.dart';
 import 'package:admin_580_tech/presentation/widget/pagination_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,8 +15,7 @@ import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
-import '../../domain/user_management/model/user_response.dart';
-import '../../domain/user_management/model/users.dart';
+import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';
 import '../widget/custom_card.dart';
@@ -40,7 +41,7 @@ class UserManagementPage extends StatefulWidget {
 class _UserManagementPageState extends State<UserManagementPage> {
   late UserManagementBloc _userBloc;
 
-  List<Users> mUserList = [];
+  List<dynamic> mUserList = [];
   List<int> shimmerList = List.generate(10, (index) => (index));
   int _totalItems = 1;
   int _page = 1;
@@ -49,11 +50,12 @@ class _UserManagementPageState extends State<UserManagementPage> {
   int _start = 0;
   int _end = 10;
   final TextEditingController _searchController = TextEditingController();
-  String userId = "6461c0f33ba4fd69bd494df0";
+  String? userId;
 
   @override
   void initState() {
     super.initState();
+    userId = SharedPreffUtil().getAdminId;
     _userBloc = UserManagementBloc(UsersRepository());
   }
 
@@ -78,7 +80,11 @@ class _UserManagementPageState extends State<UserManagementPage> {
     return BlocProvider(
       create: (context) => _userBloc
         ..add(UserManagementEvent.getUsers(
-            userId: userId, page: _page, limit: _limit)),
+            userId: userId ?? '',
+            page: _page.toString(),
+            limit: _limit.toString(),
+            searchTerm: _searchController.text.trim(),
+            filterId: 1)),
       child: _bodyView(),
     );
   }
@@ -102,13 +108,14 @@ class _UserManagementPageState extends State<UserManagementPage> {
     );
   }
 
-  _usersView(BuildContext context, UserResponse? value) {
+  _usersView(BuildContext context, UserListResponse? value) {
     if (value?.status ?? false) {
-      if (value?.data?.users != null && value!.data!.users!.isNotEmpty) {
+      if (value?.data?.finalResult != null &&
+          value!.data!.finalResult!.isNotEmpty) {
         ///todo change later
         _totalItems = value.data?.pagination?.totals ?? 5000;
         mUserList.clear();
-        mUserList.addAll(value.data?.users ?? []);
+        mUserList.addAll(value.data?.finalResult ?? []);
       }
     }
     return mUserList.isNotEmpty
@@ -141,6 +148,14 @@ class _UserManagementPageState extends State<UserManagementPage> {
       controller: _searchController,
       hintText: AppString.search.val,
       hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
+      onSubmitted: (String value) {
+        _userBloc.add(UserManagementEvent.getUsers(
+            userId: userId ?? '',
+            page: _page.toString(),
+            limit: _limit.toString(),
+            searchTerm: _searchController.text.trim(),
+            filterId: 1));
+      },
       suffixIcon: CustomSvg(
         path: IMG.search.val,
         height: DBL.sixteen.val,
@@ -151,7 +166,14 @@ class _UserManagementPageState extends State<UserManagementPage> {
 
   CustomDropdown<int> _statusDropDown(BuildContext context) {
     return CustomDropdown<int>(
-      onChange: (int value, int index) => CustomLog.log(value.toString()),
+      onChange: (int value, int index) {
+        _userBloc.add(UserManagementEvent.getUsers(
+            userId: userId ?? '',
+            page: _page.toString(),
+            limit: _limit.toString(),
+            searchTerm: _searchController.text.trim(),
+            filterId: value));
+      },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
         width: DBL.oneForty.val,
@@ -209,21 +231,33 @@ class _UserManagementPageState extends State<UserManagementPage> {
           if (_page < totalPages) {
             _page = _page + 1;
             _userBloc.add(UserManagementEvent.getUsers(
-                userId: userId, page: _page, limit: _limit));
+                userId: userId ?? '',
+                page: _page.toString(),
+                limit: _limit.toString(),
+                searchTerm: _searchController.text.trim(),
+                filterId: 1));
             updateData();
           }
         },
         onItemPressed: (i) {
           _page = i;
           _userBloc.add(UserManagementEvent.getUsers(
-              userId: userId, page: _page, limit: _limit));
+              userId: userId ?? '',
+              page: _page.toString(),
+              limit: _limit.toString(),
+              searchTerm: _searchController.text.trim(),
+              filterId: 1));
           updateData();
         },
         onPreviousPressed: () {
           if (_page > 1) {
             _page = _page - 1;
             _userBloc.add(UserManagementEvent.getUsers(
-                userId: userId, page: _page, limit: _limit));
+                userId: userId ?? '',
+                page: _page.toString(),
+                limit: _limit.toString(),
+                searchTerm: _searchController.text.trim(),
+                filterId: 1));
             updateData();
           }
         });
@@ -243,12 +277,12 @@ class _UserManagementPageState extends State<UserManagementPage> {
             label: _columnsView(
                 text: AppString.slNo.val, fontWeight: FontWeight.bold),
           ),
-          DataColumn2(
-            size: ColumnSize.S,
-            fixedWidth: DBL.eighty.val,
-            label: _columnsView(
-                text: AppString.id.val, fontWeight: FontWeight.bold),
-          ),
+          // DataColumn2(
+          //   size: ColumnSize.S,
+          //   fixedWidth: DBL.eighty.val,
+          //   label: _columnsView(
+          //       text: AppString.id.val, fontWeight: FontWeight.bold),
+          // ),
           DataColumn2(
             fixedWidth: Responsive.isWeb(context)
                 ? MediaQuery.of(context).size.width * .17
@@ -292,22 +326,25 @@ class _UserManagementPageState extends State<UserManagementPage> {
               DataCell(_rowsView(
                 text: pageIndex.toString(),
               )),
-              DataCell(_rowsView(
-                text: item.userId.toString(),
-              )),
+              // DataCell(_rowsView(
+              //   text: item.userId.toString(),
+              // )),
               DataCell(_tableRowImage(
                   "${item.name?.firstName} ${item.name?.lastName}",
                   item.profile ?? "")),
               DataCell(_rowsView(text: item.email ?? "")),
               DataCell(_rowsView(text: item.mobile)),
               DataCell(_rowsView(text: item.role)),
-              DataCell(_statusBox(item.isActive ?? false)),
+              DataCell(_rowsView(text: item.role)),
+              // DataCell(_statusBox(item.isActive ?? false)),
               DataCell(Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   InkWell(
                       onTap: () {
-                        autoTabRouter!.setActiveIndex(4);
+                        autoTabRouter
+                            ?.navigate(UserManagementDetailRoute(id: item.id));
+                        // autoTabRouter!.setActiveIndex(4,);
                       },
                       child: CustomSvg(
                         path: IMG.eye.val,
@@ -321,31 +358,31 @@ class _UserManagementPageState extends State<UserManagementPage> {
                   CustomSizedBox(
                     width: DBL.twentyThree.val,
                   ),
-                  InkWell(
-                      onTap: () {},
-                      child: CustomSvg(
-                        path: IMG.refresh.val,
-                        height: Responsive.isWeb(context)
-                            ? DBL.fifteen.val
-                            : DBL.twelve.val,
-                        width: Responsive.isWeb(context)
-                            ? DBL.twenty.val
-                            : DBL.eighteen.val,
-                      )),
+                  // InkWell(
+                  //     onTap: () {},
+                  //     child: CustomSvg(
+                  //       path: IMG.refresh.val,
+                  //       height: Responsive.isWeb(context)
+                  //           ? DBL.fifteen.val
+                  //           : DBL.twelve.val,
+                  //       width: Responsive.isWeb(context)
+                  //           ? DBL.twenty.val
+                  //           : DBL.eighteen.val,
+                  //     )),
                   CustomSizedBox(
                     width: DBL.twentyThree.val,
                   ),
-                  InkWell(
-                      onTap: () {},
-                      child: CustomSvg(
-                        path: IMG.edit.val,
-                        height: Responsive.isWeb(context)
-                            ? DBL.fifteen.val
-                            : DBL.twelve.val,
-                        width: Responsive.isWeb(context)
-                            ? DBL.fifteen.val
-                            : DBL.twelve.val,
-                      )),
+                  // InkWell(
+                  //     onTap: () {},
+                  //     child: CustomSvg(
+                  //       path: IMG.edit.val,
+                  //       height: Responsive.isWeb(context)
+                  //           ? DBL.fifteen.val
+                  //           : DBL.twelve.val,
+                  //       width: Responsive.isWeb(context)
+                  //           ? DBL.fifteen.val
+                  //           : DBL.twelve.val,
+                  //     )),
                 ],
               )),
             ],

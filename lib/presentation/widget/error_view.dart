@@ -15,10 +15,12 @@ class ErrorView extends StatelessWidget {
     required this.errorMessage,
     this.isUnderTab = false,
     Key? key,
+    this.isFromDashboard,
   }) : super(key: key);
   final String? errorMessage;
   final bool? isClientError;
   final bool isUnderTab;
+  final bool? isFromDashboard;
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +90,9 @@ class ErrorView extends StatelessWidget {
 
   CustomButton _buildButton(BuildContext context) {
     return CustomButton(
-      text: AppString.backToDashBoard.val,
+      text: isFromDashboard == true
+          ? AppString.tryAgain.val
+          : AppString.backToDashBoard.val,
       borderRadius: DBL.ten.val,
       textStyle: TS().gPoppins(
         fontWeight: FW.w500.val,
@@ -97,9 +101,12 @@ class ErrorView extends StatelessWidget {
       padding: EdgeInsets.symmetric(
           vertical: DBL.twentyFive.val, horizontal: DBL.fifty.val),
       onPressed: () {
-        context.router.navigate(const DashboardRoute());
+        isFromDashboard == true
+            ? context.router.push(const DashboardRoute())
+            : context.router.navigate(const DashboardRoute());
       },
-      icon: Icon(Icons.home, size: DBL.eighteen.val),
+      icon: Icon(isFromDashboard == true ? Icons.refresh : Icons.home,
+          size: DBL.eighteen.val),
     );
   }
 }

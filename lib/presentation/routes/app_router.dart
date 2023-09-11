@@ -16,11 +16,11 @@ class AppRouter extends $AppRouter {
         initial: true,
         guards: [DashBoardGuardGuard()]),
     // AutoRoute(page: LoginRoute.page, initial: true, path: '/'),
-    AutoRoute(
-      path: "/care-ambassador-registration",
-      page: CareAmbassadorRegistrationRoute.page,
-      maintainState: true,
-    ),
+    // AutoRoute(
+    //   path: "/care-ambassador-registration",
+    //   page: CareAmbassadorRegistrationRoute.page,
+    //   maintainState: true,
+    // ),
     // AutoRoute(
     //   path: "/signup",
     //   page: SignUpRoute.page,

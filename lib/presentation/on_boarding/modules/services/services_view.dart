@@ -82,14 +82,14 @@ class _ServicesViewState extends State<ServicesView> {
                             OnboardingEvent.submitServices(
                                 userId:
                                     SharedPreffUtil().getIsFromWebsite == true
-                                        ? SharedPreffUtil().getAccessToken
+                                        ? SharedPreffUtil().getAdminId
                                         : SharedPreffUtil().getCareGiverUserId,
                                 services: ServicesRequest(
                                   tier1: widget
                                       .onboardingBloc.selectedTier1ServiceList,
                                   tier2: widget
                                       .onboardingBloc.selectedTier2ServiceList,
-                                )));
+                                ).toJson()));
                       }
                       widget.onboardingBloc.nextButtonClicked = true;
                     },

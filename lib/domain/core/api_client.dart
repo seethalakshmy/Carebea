@@ -15,6 +15,7 @@ import 'package:admin_580_tech/domain/email_otp_verification/models/generate_otp
 import 'package:admin_580_tech/domain/login/login_response.dart';
 import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
 import 'package:admin_580_tech/domain/service_request_management/model/reschedule_params.dart';
+import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -49,6 +50,7 @@ import '../signup/signup_response.dart';
 import '../transaction_management/model/get_filters_response.dart';
 import '../transaction_management/model/transaction_details_response.dart';
 import '../transaction_management/model/transaction_list_response.dart';
+import '../user_management/model/user_list_response.dart';
 
 part 'api_client.g.dart';
 
@@ -232,7 +234,7 @@ abstract class ApiClient {
     @Field('serve_with_a_smoker') bool serveWithSmoker,
     @Field('willing_to_provide_transportation') bool willingToTransportation,
     @Field('willing_to_serve_with_pets') bool willingToServeWithPets,
-    @Field('pets_list') List<PetsList> petsList,
+    @Field('pets_list') List<Map<String, dynamic>> petsList,
     @Field('known_languages') List<String> knownLanguages,
   );
 
@@ -244,21 +246,21 @@ abstract class ApiClient {
     @Field('serve_with_a_smoker') bool serveWithSmoker,
     @Field('willing_to_provide_transportation') bool willingToTransportation,
     @Field('willing_to_serve_with_pets') bool willingToServeWithPets,
-    @Field('pets_list') List<PetsList> petsList,
+    @Field('pets_list') List<Map<String, dynamic>> petsList,
     @Field('known_languages') List<String> knownLanguages,
   );
 
   @POST("/admin/admin-cg-services")
   Future<CommonResponse> submitServices(
     @Field('user_id') String userId,
-    @Field('services') ServicesRequest services,
+    @Field('services') Map<String, dynamic> services,
   );
 
   @POST("/care-giver/services")
   Future<CommonResponse> submitServicesWebsite(
     @Header("Authorization") String token,
     @Field('user_id') String userId,
-    @Field('services') ServicesRequest services,
+    @Field('services') Map<String, dynamic> services,
   );
 
   @GET("/common-data/get-services")
@@ -574,4 +576,18 @@ abstract class ApiClient {
       @Field('year') String year,
       @Field('from_date') String fromDate,
       @Field('to_date') String toDate);
+
+  @POST("/admin/get-clients")
+  Future<UserListResponse> getUser(
+      @Field('user_id') String userId,
+      @Field('page') String page,
+      @Field('limit') String limit,
+      @Field('search_term') String searchTerm,
+      @Field('status') int status);
+
+  @POST("/admin/get-clients-by-id")
+  Future<UserDetailResponse> getUserDetails(
+    @Field('user_id') String userId,
+    @Field('admin_id') String adminId,
+  );
 }

@@ -38,7 +38,7 @@ class OnboardingEvent with _$OnboardingEvent {
       required bool serveWithSmoker,
       required bool willingToTransportation,
       required bool willingToServeWithPets,
-      required List<PetsList> petsList,
+      required List<Map<String, dynamic>> petsList,
       required List<String> knownLanguages}) = _SubmitPreferenceDetails;
 
   const factory OnboardingEvent.commonData() = _CommonDataLists;
@@ -129,7 +129,7 @@ class OnboardingEvent with _$OnboardingEvent {
 
   const factory OnboardingEvent.submitServices(
       {required String userId,
-      required ServicesRequest services}) = _SubmitCaregiverService;
+      required Map<String, dynamic> services}) = _SubmitCaregiverService;
 
   const factory OnboardingEvent.serviceSelected(int index, bool value) =
       _CaregiverServiceSelected;

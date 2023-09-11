@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:admin_580_tech/application/bloc/user_management_detail/user_management_detail_bloc.dart';
 import 'package:admin_580_tech/core/custom_debugger.dart';
@@ -20,10 +21,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/responsive.dart';
 import '../caregiver_detail/widgets/service_completion_and_rewards.dart';
 import '../caregiver_detail/widgets/svg_text.dart';
+import '../side_menu/side_menu_page.dart';
 
 @RoutePage()
 class UserManagementDetailPage extends StatefulWidget {
-  const UserManagementDetailPage({Key? key}) : super(key: key);
+  const UserManagementDetailPage({Key? key, @QueryParam('id') this.id})
+      : super(key: key);
+  final String? id;
 
   @override
   State<UserManagementDetailPage> createState() =>
@@ -34,10 +38,13 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
   late UserManagementDetailBloc _userDetailBloc;
-  String userId = "6461c0f33ba4fd69bd494df0";
+  String? adminId;
+  String? userId;
 
   @override
   void initState() {
+    adminId = SharedPreffUtil().getAdminId;
+    userId = autoTabRouter?.currentChild?.queryParams.getString("id", "") ?? "";
     tabController = TabController(vsync: this, length: 4);
     _userDetailBloc =
         UserManagementDetailBloc(UserManagementDetailRepository());
@@ -52,7 +59,8 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
   BlocProvider<UserManagementDetailBloc> _rebuildView() {
     return BlocProvider(
       create: (context) => _userDetailBloc
-        ..add(UserManagementDetailEvent.getUserDetail(userId: userId)),
+        ..add(UserManagementDetailEvent.getUserDetail(
+            userId: userId ?? '', adminId: adminId ?? '')),
       child: BlocBuilder<UserManagementDetailBloc, UserManagementDetailState>(
         builder: (context, state) {
           return state.isLoading ? LoaderView() : _bodyView(context, state);
@@ -65,6 +73,9 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
       BuildContext context, UserManagementDetailState state) {
     CustomLog.log('width :${MediaQuery.of(context).size.width}');
     UserDetailResponse? response = state.response;
+    print('testing${state.response?.data?.name?.firstName}');
+    print('testing${userId}');
+
     return CustomSizedBox(
       height: MediaQuery.of(context).size.height,
       child: NestedScrollView(
@@ -202,7 +213,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                               CrossAxisAlignment.start,
                                           children: [
                                             CustomText(
-                                              "${response?.user?.name?.firstName} ${response?.user?.name?.lastName}",
+                                              "${state.response?.data?.name?.firstName} ${response?.data?.name?.lastName}",
                                               style: TS().gRoboto(
                                                 color: AppColor.rowColor.val,
                                                 fontWeight: FW.w600.val,
@@ -215,18 +226,18 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                             CustomSizedBox(
                                               height: DBL.seventeen.val,
                                             ),
-                                            SVGText(
-                                              path: IMG.location.val,
-                                              name: response?.user?.location ??
-                                                  "",
-                                              widthGap: DBL.fifteen.val,
-                                            ),
+                                            // SVGText(
+                                            //   path: IMG.location.val,
+                                            //   name: response?.data?.location ??
+                                            //       "",
+                                            //   widthGap: DBL.fifteen.val,
+                                            // ),
                                             CustomSizedBox(
                                               height: DBL.fourteen.val,
                                             ),
                                             SVGText(
                                               path: IMG.email.val,
-                                              name: response?.user?.email ?? "",
+                                              name: response?.data?.email ?? "",
                                               widthGap: DBL.twelve.val,
                                             ),
                                             CustomSizedBox(
@@ -234,7 +245,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                             ),
                                             SVGText(
                                               path: IMG.phone.val,
-                                              name: response?.user?.phone ?? "",
+                                              name: response?.data?.phone ?? "",
                                               widthGap: DBL.nine.val,
                                             ),
                                             CustomSizedBox(
@@ -242,7 +253,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                             ),
                                             SVGText(
                                               path: IMG.ssn.val,
-                                              name: response?.user?.ssn ?? "",
+                                              name: response?.data?.ssn ?? "",
                                               widthGap: DBL.twelve.val,
                                             ),
                                             // CustomSizedBox(
@@ -390,16 +401,16 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
           appBar: TabBar(
             isScrollable: true,
             dividerColor: AppColor.transparent.val,
-            indicatorColor: AppColor.primaryColor.val,
+            indicatorColor: AppColor.white.val,
             indicatorSize: TabBarIndicatorSize.tab,
             indicatorWeight: 2.5,
-            labelColor: AppColor.primaryColor.val,
+            labelColor: AppColor.white.val,
             unselectedLabelColor: AppColor.lightGrey5.val,
             tabs: [
               Tab(icon: Text(AppString.clientProfiles.val)),
               Tab(icon: Text(AppString.paymentMethod.val)),
               Tab(icon: Text(AppString.services.val)),
-              Tab(icon: Text("Services")),
+              Tab(icon: Text(AppString.services.val)),
             ],
             controller: tabController,
           ),
@@ -434,7 +445,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
       {double? height, required UserDetailResponse? response}) {
     return ServiceRewardAndCompletion(
       height: height,
-      title: response?.user?.totalReviewsGiven.toString() ?? "",
+      title: response?.data?.totalReviewsGiven.toString() ?? "",
       subTitle: AppString.reviewGiven.val,
     );
   }
@@ -443,7 +454,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
       {double? height, required UserDetailResponse? response}) {
     return ServiceRewardAndCompletion(
       height: height,
-      title: response?.user?.canceledRequest.toString() ?? "",
+      title: response?.data?.cancelledRequest.toString() ?? "",
       subTitle: AppString.canceledRequest.val,
     );
   }
@@ -452,7 +463,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
       {double? height, required UserDetailResponse? response}) {
     return ServiceRewardAndCompletion(
       height: height,
-      title: response?.user?.serviceCompleted.toString() ?? "",
+      title: response?.data?.serviceCompleted.toString() ?? "",
       subTitle: AppString.serviceCompleted.val,
     );
   }

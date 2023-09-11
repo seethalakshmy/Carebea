@@ -4,9 +4,9 @@ part of 'user_management_bloc.dart';
 class UserManagementState with _$UserManagementState {
   const factory UserManagementState(
       {required bool isLoading,
-        required bool isError,
-        required UserResponse? response,
-        required String? error}) = _UsersState;
+      required bool isError,
+      required UserListResponse? response,
+      required String? error}) = _UsersState;
 
   factory UserManagementState.initial() {
     return const UserManagementState(
