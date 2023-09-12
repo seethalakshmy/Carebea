@@ -583,11 +583,18 @@ abstract class ApiClient {
       @Field('page') String page,
       @Field('limit') String limit,
       @Field('search_term') String searchTerm,
-      @Field('status') int status);
+      @Field('status') bool? status);
 
   @POST("/admin/get-clients-by-id")
   Future<UserDetailResponse> getUserDetails(
     @Field('user_id') String userId,
     @Field('admin_id') String adminId,
+  );
+
+  @POST("/admin/change-client-status")
+  Future<CommonResponse> changeClientStatus(
+    @Field('user_id') String userId,
+    @Field('admin_id') String adminId,
+    @Field('status') bool status,
   );
 }

@@ -324,13 +324,19 @@ class _MenuBarState extends State<SideMenuPage> {
         ),
         DropdownMenuItem(
           value: AppString.logout.val,
-          child: Text(
-            AppString.logout.val,
-            style: TextStyle(
-              fontSize: FS.font15.val,
-              fontWeight: FontWeight.bold,
+          child: InkWell(
+            onTap: () {
+              SharedPreffUtil().logoutClear();
+              context.router.replace(LoginRoute());
+            },
+            child: Text(
+              AppString.logout.val,
+              style: TextStyle(
+                fontSize: FS.font15.val,
+                fontWeight: FontWeight.bold,
+              ),
+              overflow: TextOverflow.ellipsis,
             ),
-            overflow: TextOverflow.ellipsis,
           ),
         ),
       ],

@@ -28,6 +28,7 @@ import '../widget/custom_text_field.dart';
 import '../widget/empty_view.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
+import '../widget/loader_view.dart';
 import '../widget/pagination_view.dart';
 import '../widget/table_actions_view.dart';
 
@@ -66,16 +67,23 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        HeaderView(title: AppString.transaction.val),
-        CustomSizedBox(height: DBL.twenty.val),
-        BlocProvider(
-          create: (context) => _transactionBloc,
-          child: _bodyView(),
-        ),
-      ],
-    );
+    return FutureBuilder(
+        future: SharedPreffUtil().init(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return LoaderView();
+          }
+          return Column(
+            children: [
+              HeaderView(title: AppString.transaction.val),
+              CustomSizedBox(height: DBL.twenty.val),
+              BlocProvider(
+                create: (context) => _transactionBloc,
+                child: _bodyView(),
+              ),
+            ],
+          );
+        });
   }
 
   CustomCard _bodyView() {

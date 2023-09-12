@@ -51,8 +51,9 @@ class SharedPreffUtil {
 
   SharedPreferences? _prefs;
 
-  init() async {
-    _prefs = await SharedPreferences.getInstance();
+  Future<bool> init() async {
+    _prefs ??= await SharedPreferences.getInstance();
+    return _prefs == null;
   }
 
   set setAccessToken(String value) {
@@ -317,5 +318,6 @@ class SharedPreffUtil {
     _prefs!.setBool(viewServiceRequest, false);
     _prefs!.setBool(editServiceRequest, false);
     _prefs!.setBool(viewTransaction, false);
+    print('Logout successful');
   }
 }

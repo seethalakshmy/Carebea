@@ -57,249 +57,294 @@ class _DashboardPageState extends State<DashboardPage> {
   void initState() {
     startDateController.text = Utility.detailDate(DateTime(now.year, 1, 1));
     endDateController.text = Utility.detailDate(DateTime(now.year, 12, 31));
-    _adminUserId = sharedPrefUtil.getAdminId;
+
     super.initState();
     _dashboardBloc = DashboardBloc(DashboardRepository());
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => _dashboardBloc
-        ..add(DashboardEvent.getDashboard(
-            isCallAlertApiCall: true,
-            userId: _adminUserId,
-            year: _dashboardBloc.state.filterId == 1
-                ? (DateTime.now().year - 1).toString()
-                : DateTime.now().year.toString(),
-            fromData: '',
-            toDate: '')),
-      child: BlocBuilder<DashboardBloc, DashboardState>(
-        builder: (context, state) {
-          print('hello testing ${state.alertResponse?.data?.cgQueryCount}');
-          print(
-              'hello testing22 ${state.dashboardResponse?.data?.dailyCounts}');
-          return state.isLoading
-              ? const LoaderView()
-              : state.isError
-                  ? ErrorView(
-                      isFromDashboard: true,
-                      isClientError: state.isClientError,
-                      errorMessage: state.error)
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        HeaderView(title: AppString.dashboard.val),
-                        CustomSizedBox(height: DBL.twenty.val),
-                        Responsive.isWeb(context)
-                            ? Row(
-                                // runSpacing: 10,
+    return FutureBuilder(
+        future: SharedPreffUtil().init(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return LoaderView();
+          }
+          _adminUserId = sharedPrefUtil.getAdminId;
+          return BlocProvider(
+            create: (context) => _dashboardBloc
+              ..add(DashboardEvent.getDashboard(
+                  isCallAlertApiCall: true,
+                  userId: _adminUserId,
+                  year: _dashboardBloc.state.filterId == 1
+                      ? (DateTime.now().year - 1).toString()
+                      : DateTime.now().year.toString(),
+                  fromData: '',
+                  toDate: '')),
+            child: BlocBuilder<DashboardBloc, DashboardState>(
+              builder: (context, state) {
+                print(
+                    'hello testing ${state.alertResponse?.data?.cgQueryCount}');
+                print(
+                    'hello testing22 ${state.dashboardResponse?.data?.dailyCounts}');
+                return state.isLoading
+                    ? const LoaderView()
+                    : (state.isError)
+                        ? ErrorView(
+                            isFromDashboard: true,
+                            isClientError: state.isClientError,
+                            errorMessage: state.error)
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              HeaderView(title: AppString.dashboard.val),
+                              CustomSizedBox(height: DBL.twenty.val),
+                              Responsive.isWeb(context)
+                                  ? Row(
+                                      // runSpacing: 10,
+                                      children: [
+                                        BlocBuilder<DashboardBloc,
+                                            DashboardState>(
+                                          builder: (context, state) {
+                                            return Expanded(
+                                              child: _detailsCardView(list: [
+                                                state.dashboardResponse?.data
+                                                    ?.totalHours
+                                                    ?.toStringAsFixed(2),
+                                                state.dashboardResponse?.data
+                                                    ?.totalSales,
+                                                state.dashboardResponse?.data
+                                                    ?.clientCount,
+                                                state.dashboardResponse?.data
+                                                    ?.careGiverCount
+                                              ]),
+                                            );
+                                          },
+                                        ),
+                                        Responsive.isWeb(context)
+                                            ? CustomSizedBox(width: DBL.ten.val)
+                                            : CustomSizedBox(
+                                                height: DBL.twenty.val),
+                                        BlocBuilder<DashboardBloc,
+                                            DashboardState>(
+                                          builder: (context, state) {
+                                            return Expanded(
+                                              flex: 1,
+                                              child: AlertList(
+                                                  countList: state.alertResponse
+                                                              ?.data !=
+                                                          null
+                                                      ? [
+                                                          state
+                                                              .alertResponse
+                                                              ?.data
+                                                              ?.clientQueryCount,
+                                                          state
+                                                              .alertResponse
+                                                              ?.data
+                                                              ?.cgQueryCount,
+                                                          state
+                                                              .alertResponse
+                                                              ?.data
+                                                              ?.missedTotalService,
+                                                          state
+                                                              .alertResponse
+                                                              ?.data
+                                                              ?.totalClientCancelledService,
+                                                          state
+                                                              .alertResponse
+                                                              ?.data
+                                                              ?.totalCgCancelledService,
+                                                          ""
+                                                        ]
+                                                      : null
+                                                  // count: state.alertResponse?.data != null
+                                                  //     ? state.alertResponse!.data!.cgQueryCount
+                                                  //         .toString()
+                                                  //     : "null",
+                                                  ),
+                                            );
+                                          },
+                                        )
+                                      ],
+                                    )
+                                  : Column(
+                                      // runSpacing: 10,
+                                      children: [
+                                        BlocBuilder<DashboardBloc,
+                                            DashboardState>(
+                                          builder: (context, state) {
+                                            return _detailsCardView(list: [
+                                              state.dashboardResponse?.data
+                                                  ?.totalHours
+                                                  ?.toStringAsFixed(2),
+                                              state.dashboardResponse?.data
+                                                  ?.totalSales,
+                                              state.dashboardResponse?.data
+                                                  ?.clientCount,
+                                              state.dashboardResponse?.data
+                                                  ?.careGiverCount
+                                            ]);
+                                          },
+                                        ),
+                                        Responsive.isWeb(context)
+                                            ? CustomSizedBox(width: DBL.ten.val)
+                                            : CustomSizedBox(
+                                                height: DBL.twenty.val),
+                                        BlocBuilder<DashboardBloc,
+                                            DashboardState>(
+                                          builder: (context, state) {
+                                            return AlertList(
+                                                countList:
+                                                    state.alertResponse?.data !=
+                                                            null
+                                                        ? [
+                                                            state
+                                                                .alertResponse
+                                                                ?.data
+                                                                ?.clientQueryCount,
+                                                            state
+                                                                .alertResponse
+                                                                ?.data
+                                                                ?.cgQueryCount,
+                                                            state
+                                                                .alertResponse
+                                                                ?.data
+                                                                ?.missedTotalService,
+                                                            state
+                                                                .alertResponse
+                                                                ?.data
+                                                                ?.totalClientCancelledService,
+                                                            state
+                                                                .alertResponse
+                                                                ?.data
+                                                                ?.totalCgCancelledService,
+                                                            ""
+                                                          ]
+                                                        : null
+                                                // count: state.alertResponse?.data != null
+                                                //     ? state.alertResponse!.data!.cgQueryCount
+                                                //         .toString()
+                                                //     : "null",
+                                                );
+                                          },
+                                        )
+                                      ],
+                                    ),
+                              CustomSizedBox(height: DBL.ten.val),
+                              // CustomSizedBox(height: DBL.ten.val),
+                              Wrap(
                                 children: [
                                   BlocBuilder<DashboardBloc, DashboardState>(
                                     builder: (context, state) {
-                                      return Expanded(
-                                        child: _detailsCardView(list: [
-                                          state.dashboardResponse?.data
-                                              ?.totalHours
-                                              ?.toStringAsFixed(2),
-                                          state.dashboardResponse?.data
-                                              ?.totalSales,
-                                          state.dashboardResponse?.data
-                                              ?.clientCount,
-                                          state.dashboardResponse?.data
-                                              ?.careGiverCount
-                                        ]),
-                                      );
+                                      print(
+                                          'check:: ${state.dashboardResponse?.data?.monthlyServiceCounts?.aug}');
+                                      Map<String, double> mapValues = {};
+                                      print(
+                                          "fsdasr ${startDateController.text}");
+                                      if ((startDateController
+                                              .text.isNotEmpty) &&
+                                          (endDateController.text.isNotEmpty)) {
+                                        var startDate =
+                                            DateFormat('MMM dd yyyy').parse(
+                                                startDateController.text);
+                                        var endDate = DateFormat('MMM dd yyyy')
+                                            .parse(endDateController.text);
+                                        if (endDate
+                                                .difference(startDate)
+                                                .inDays <=
+                                            12) {
+                                          for (var i in state.dashboardResponse
+                                                  ?.data?.dailyCounts ??
+                                              []) {
+                                            mapValues.addAll({
+                                              i.date: double.parse(
+                                                  i.count.toString())
+                                            });
+                                          }
+                                        } else {
+                                          mapValues = state.dashboardResponse
+                                                  ?.data?.monthlyServiceCounts
+                                                  ?.toJson()
+                                                  .map((key, value) => MapEntry(
+                                                      key,
+                                                      double.parse(
+                                                          value.toString()))) ??
+                                              {};
+                                        }
+                                      }
+
+                                      return BarChartWidget(
+                                          bloc: _dashboardBloc,
+                                          mapValues: mapValues,
+                                          startDate: startDateController,
+                                          endDate: endDateController);
                                     },
                                   ),
                                   Responsive.isWeb(context)
                                       ? CustomSizedBox(width: DBL.ten.val)
                                       : CustomSizedBox(height: DBL.twenty.val),
-                                  BlocBuilder<DashboardBloc, DashboardState>(
-                                    builder: (context, state) {
-                                      return Expanded(
-                                        flex: 1,
-                                        child: AlertList(
-                                            countList:
-                                                state.alertResponse?.data !=
-                                                        null
-                                                    ? [
-                                                        state
-                                                            .alertResponse
-                                                            ?.data
-                                                            ?.clientQueryCount,
-                                                        state
-                                                            .alertResponse
-                                                            ?.data
-                                                            ?.cgQueryCount,
-                                                        state
-                                                            .alertResponse
-                                                            ?.data
-                                                            ?.missedTotalService,
-                                                        state
-                                                            .alertResponse
-                                                            ?.data
-                                                            ?.totalClientCancelledService,
-                                                        state
-                                                            .alertResponse
-                                                            ?.data
-                                                            ?.totalCgCancelledService,
-                                                        ""
-                                                      ]
-                                                    : null
-                                            // count: state.alertResponse?.data != null
-                                            //     ? state.alertResponse!.data!.cgQueryCount
-                                            //         .toString()
-                                            //     : "null",
-                                            ),
-                                      );
-                                    },
-                                  )
-                                ],
-                              )
-                            : Column(
-                                // runSpacing: 10,
-                                children: [
-                                  BlocBuilder<DashboardBloc, DashboardState>(
-                                    builder: (context, state) {
-                                      return _detailsCardView(list: [
-                                        state
-                                            .dashboardResponse?.data?.totalHours
-                                            ?.toStringAsFixed(2),
-                                        state.dashboardResponse?.data
-                                            ?.totalSales,
-                                        state.dashboardResponse?.data
-                                            ?.clientCount,
-                                        state.dashboardResponse?.data
-                                            ?.careGiverCount
-                                      ]);
-                                    },
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Responsive.isWeb(context)
+                                          ? CustomSizedBox()
+                                          : CustomSizedBox(
+                                              height: DBL.twenty.val),
+                                      PieChartPage(
+                                          totalClient: state.dashboardResponse
+                                                  ?.data?.clientCount ??
+                                              0,
+                                          newClients: state.dashboardResponse
+                                                  ?.data?.totalNewClient ??
+                                              0,
+                                          repeatedClients: state
+                                                  .dashboardResponse
+                                                  ?.data
+                                                  ?.totalRepeatedClient ??
+                                              0,
+                                          percentage: state
+                                                  .dashboardResponse
+                                                  ?.data
+                                                  ?.percentageChangeInNewClient ??
+                                              0.0),
+                                      Responsive.isWeb(context)
+                                          ? CustomSizedBox(
+                                              height: DBL.twenty.val)
+                                          : CustomSizedBox(
+                                              height: DBL.twenty.val),
+                                      Wrap(
+                                        alignment: WrapAlignment.start,
+                                        children: [
+                                          _newCareAmbassadorOnboarded(
+                                              "New Care Ambassadors\n Onboarded",
+                                              state.dashboardResponse?.data
+                                                      ?.totalNewCareGiver
+                                                      .toString() ??
+                                                  ''),
+                                          CustomSizedBox(width: DBL.twenty.val),
+                                          CustomSizedBox(
+                                              height: DBL.twenty.val),
+                                          _newCareAmbassadorOnboarded(
+                                              "Service Completed",
+                                              state.dashboardResponse?.data
+                                                      ?.totalServiceCompleted
+                                                      .toString() ??
+                                                  '')
+                                        ],
+                                      )
+                                    ],
                                   ),
-                                  Responsive.isWeb(context)
-                                      ? CustomSizedBox(width: DBL.ten.val)
-                                      : CustomSizedBox(height: DBL.twenty.val),
-                                  BlocBuilder<DashboardBloc, DashboardState>(
-                                    builder: (context, state) {
-                                      return AlertList(
-                                          countList:
-                                              state.alertResponse?.data != null
-                                                  ? [
-                                                      state.alertResponse?.data
-                                                          ?.clientQueryCount,
-                                                      state.alertResponse?.data
-                                                          ?.cgQueryCount,
-                                                      state.alertResponse?.data
-                                                          ?.missedTotalService,
-                                                      state.alertResponse?.data
-                                                          ?.totalClientCancelledService,
-                                                      state.alertResponse?.data
-                                                          ?.totalCgCancelledService,
-                                                      ""
-                                                    ]
-                                                  : null
-                                          // count: state.alertResponse?.data != null
-                                          //     ? state.alertResponse!.data!.cgQueryCount
-                                          //         .toString()
-                                          //     : "null",
-                                          );
-                                    },
-                                  )
                                 ],
                               ),
-                        CustomSizedBox(height: DBL.ten.val),
-                        // CustomSizedBox(height: DBL.ten.val),
-                        Wrap(
-                          children: [
-                            BlocBuilder<DashboardBloc, DashboardState>(
-                              builder: (context, state) {
-                                print(
-                                    'check:: ${state.dashboardResponse?.data?.monthlyServiceCounts?.aug}');
-                                Map<String, double> mapValues = {};
-                                print("fsdasr ${startDateController.text}");
-                                if ((startDateController.text.isNotEmpty) &&
-                                    (endDateController.text.isNotEmpty)) {
-                                  var startDate = DateFormat('MMM dd yyyy')
-                                      .parse(startDateController.text);
-                                  var endDate = DateFormat('MMM dd yyyy')
-                                      .parse(endDateController.text);
-                                  if (endDate.difference(startDate).inDays <=
-                                      12) {
-                                    for (var i in state.dashboardResponse?.data
-                                            ?.dailyCounts ??
-                                        []) {
-                                      mapValues.addAll({
-                                        i.date: double.parse(i.count.toString())
-                                      });
-                                    }
-                                  } else {
-                                    mapValues = state.dashboardResponse?.data
-                                            ?.monthlyServiceCounts
-                                            ?.toJson()
-                                            .map((key, value) => MapEntry(
-                                                key,
-                                                double.parse(
-                                                    value.toString()))) ??
-                                        {};
-                                  }
-                                }
-
-                                return BarChartWidget(
-                                    bloc: _dashboardBloc,
-                                    mapValues: mapValues,
-                                    startDate: startDateController,
-                                    endDate: endDateController);
-                              },
-                            ),
-                            Responsive.isWeb(context)
-                                ? CustomSizedBox(width: DBL.ten.val)
-                                : CustomSizedBox(height: DBL.twenty.val),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Responsive.isWeb(context)
-                                    ? CustomSizedBox()
-                                    : CustomSizedBox(height: DBL.twenty.val),
-                                PieChartPage(
-                                    totalClient: state
-                                        .dashboardResponse?.data?.clientCount,
-                                    newClients: state.dashboardResponse?.data
-                                        ?.totalNewClient,
-                                    repeatedClients: state.dashboardResponse
-                                        ?.data?.totalRepeatedClient,
-                                    percentage: state.dashboardResponse?.data
-                                        ?.percentageChangeInNewClient),
-                                Responsive.isWeb(context)
-                                    ? CustomSizedBox(height: DBL.twenty.val)
-                                    : CustomSizedBox(height: DBL.twenty.val),
-                                Wrap(
-                                  alignment: WrapAlignment.start,
-                                  children: [
-                                    _newCareAmbassadorOnboarded(
-                                        "New Care Ambassadors\n Onboarded",
-                                        state.dashboardResponse?.data
-                                                ?.totalNewCareGiver
-                                                .toString() ??
-                                            ''),
-                                    CustomSizedBox(width: DBL.twenty.val),
-                                    CustomSizedBox(height: DBL.twenty.val),
-                                    _newCareAmbassadorOnboarded(
-                                        "Service Completed",
-                                        state.dashboardResponse?.data
-                                                ?.totalServiceCompleted
-                                                .toString() ??
-                                            '')
-                                  ],
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                        CustomSizedBox(height: DBL.twenty.val),
-                      ],
-                    );
-        },
-      ),
-    );
+                              CustomSizedBox(height: DBL.twenty.val),
+                            ],
+                          );
+              },
+            ),
+          );
+        });
   }
 
   _detailsCardView({required List list}) {

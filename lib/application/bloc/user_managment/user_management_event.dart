@@ -7,5 +7,11 @@ class UserManagementEvent with _$UserManagementEvent {
       required String page,
       required String limit,
       required String searchTerm,
-      required int filterId}) = _GetUsers;
+      bool? filterId}) = _GetUsers;
+
+  const factory UserManagementEvent.changeClientStatus(
+      {required String userId,
+      required String adminId,
+      required bool status,
+      required BuildContext context}) = _ChangeClientStatus;
 }

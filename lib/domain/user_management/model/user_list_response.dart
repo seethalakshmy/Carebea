@@ -148,16 +148,16 @@ FinalResult finalResultFromJson(String str) =>
 String finalResultToJson(FinalResult data) => json.encode(data.toJson());
 
 class FinalResult {
-  FinalResult({
-    String? id,
-    String? userId,
-    Name? name,
-    String? profile,
-    String? profileThumbnail,
-    String? email,
-    String? mobile,
-    String? role,
-  }) {
+  FinalResult(
+      {String? id,
+      String? userId,
+      Name? name,
+      String? profile,
+      String? profileThumbnail,
+      String? email,
+      String? mobile,
+      String? role,
+      bool? status}) {
     _id = id;
     _userId = userId;
     _name = name;
@@ -166,6 +166,7 @@ class FinalResult {
     _email = email;
     _mobile = mobile;
     _role = role;
+    _status = status;
   }
 
   FinalResult.fromJson(dynamic json) {
@@ -177,6 +178,7 @@ class FinalResult {
     _email = json['email'];
     _mobile = json['mobile'];
     _role = json['role'];
+    _status = json['status'];
   }
   String? _id;
   String? _userId;
@@ -186,26 +188,27 @@ class FinalResult {
   String? _email;
   String? _mobile;
   String? _role;
-  FinalResult copyWith({
-    String? id,
-    String? userId,
-    Name? name,
-    String? profile,
-    String? profileThumbnail,
-    String? email,
-    String? mobile,
-    String? role,
-  }) =>
+  bool? _status;
+  FinalResult copyWith(
+          {String? id,
+          String? userId,
+          Name? name,
+          String? profile,
+          String? profileThumbnail,
+          String? email,
+          String? mobile,
+          String? role,
+          bool? status}) =>
       FinalResult(
-        id: id ?? _id,
-        userId: userId ?? _userId,
-        name: name ?? _name,
-        profile: profile ?? _profile,
-        profileThumbnail: profileThumbnail ?? _profileThumbnail,
-        email: email ?? _email,
-        mobile: mobile ?? _mobile,
-        role: role ?? _role,
-      );
+          id: id ?? _id,
+          userId: userId ?? _userId,
+          name: name ?? _name,
+          profile: profile ?? _profile,
+          profileThumbnail: profileThumbnail ?? _profileThumbnail,
+          email: email ?? _email,
+          mobile: mobile ?? _mobile,
+          role: role ?? _role,
+          status: status ?? _status);
   String? get id => _id;
   String? get userId => _userId;
   Name? get name => _name;
@@ -214,6 +217,7 @@ class FinalResult {
   String? get email => _email;
   String? get mobile => _mobile;
   String? get role => _role;
+  bool? get status => _status;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -227,6 +231,7 @@ class FinalResult {
     map['email'] = _email;
     map['mobile'] = _mobile;
     map['role'] = _role;
+    map['status'] = _status;
     return map;
   }
 }

@@ -1,5 +1,6 @@
+import 'dart:developer';
+
 import 'package:admin_580_tech/application/bloc/user_managment/user_management_bloc.dart';
-import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/domain/user_management/model/user_list_response.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/infrastructure/user_management/users_repository.dart';
@@ -15,6 +16,7 @@ import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
+import '../../domain/admins/model/admin_get_response.dart';
 import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';
@@ -29,6 +31,8 @@ import '../widget/custom_text_field.dart';
 import '../widget/empty_view.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
+import '../widget/loader_view.dart';
+import '../widget/table_switch_box.dart';
 
 @RoutePage()
 class UserManagementPage extends StatefulWidget {
@@ -44,18 +48,16 @@ class _UserManagementPageState extends State<UserManagementPage> {
   List<dynamic> mUserList = [];
   List<int> shimmerList = List.generate(10, (index) => (index));
   int _totalItems = 1;
-  int _page = 1;
-  final int _limit = 10;
+
   int pageIndex = 0;
   int _start = 0;
   int _end = 10;
   final TextEditingController _searchController = TextEditingController();
-  String? userId;
+  String? adminId;
 
   @override
   void initState() {
     super.initState();
-    userId = SharedPreffUtil().getAdminId;
     _userBloc = UserManagementBloc(UsersRepository());
   }
 
@@ -67,24 +69,33 @@ class _UserManagementPageState extends State<UserManagementPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        HeaderView(title: AppString.clientsCustomer.val),
-        CustomSizedBox(height: DBL.twenty.val),
-        _reBuildView(),
-      ],
-    );
+    return FutureBuilder(
+        future: SharedPreffUtil().init(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return LoaderView();
+          }
+          adminId = SharedPreffUtil().getAdminId;
+
+          return Column(
+            children: [
+              HeaderView(title: AppString.clientsCustomer.val),
+              CustomSizedBox(height: DBL.twenty.val),
+              _reBuildView(),
+            ],
+          );
+        });
   }
 
   BlocProvider<UserManagementBloc> _reBuildView() {
     return BlocProvider(
       create: (context) => _userBloc
         ..add(UserManagementEvent.getUsers(
-            userId: userId ?? '',
-            page: _page.toString(),
-            limit: _limit.toString(),
+            userId: adminId ?? '',
+            page: _userBloc.page.toString(),
+            limit: _userBloc.limit.toString(),
             searchTerm: _searchController.text.trim(),
-            filterId: 1)),
+            filterId: null)),
       child: _bodyView(),
     );
   }
@@ -101,14 +112,15 @@ class _UserManagementPageState extends State<UserManagementPage> {
                 ? const TableLoaderView()
                 : state.isError
                     ? ErrorView(isClientError: false, errorMessage: state.error)
-                    : _usersView(context, state.response);
+                    : _usersView(context, state.response, state);
           },
         ),
       ),
     );
   }
 
-  _usersView(BuildContext context, UserListResponse? value) {
+  _usersView(BuildContext context, UserListResponse? value,
+      UserManagementState state) {
     if (value?.status ?? false) {
       if (value?.data?.finalResult != null &&
           value!.data!.finalResult!.isNotEmpty) {
@@ -131,8 +143,8 @@ class _UserManagementPageState extends State<UserManagementPage> {
               ),
               CustomSizedBox(height: DBL.fifteen.val),
               CustomSizedBox(
-                height: (_limit + 1) * 48,
-                child: _usersTable(),
+                height: (_userBloc.limit + 1) * 48,
+                child: _usersTable(state, context),
               ),
               CustomSizedBox(height: DBL.twenty.val),
               _paginationView()
@@ -150,11 +162,11 @@ class _UserManagementPageState extends State<UserManagementPage> {
       hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
       onSubmitted: (String value) {
         _userBloc.add(UserManagementEvent.getUsers(
-            userId: userId ?? '',
-            page: _page.toString(),
-            limit: _limit.toString(),
+            userId: adminId ?? '',
+            page: _userBloc.page.toString(),
+            limit: _userBloc.limit.toString(),
             searchTerm: _searchController.text.trim(),
-            filterId: 1));
+            filterId: null));
       },
       suffixIcon: CustomSvg(
         path: IMG.search.val,
@@ -168,11 +180,11 @@ class _UserManagementPageState extends State<UserManagementPage> {
     return CustomDropdown<int>(
       onChange: (int value, int index) {
         _userBloc.add(UserManagementEvent.getUsers(
-            userId: userId ?? '',
-            page: _page.toString(),
-            limit: _limit.toString(),
+            userId: adminId ?? '',
+            page: _userBloc.page.toString(),
+            limit: _userBloc.limit.toString(),
             searchTerm: _searchController.text.trim(),
-            filterId: value));
+            filterId: value == 1 ? true : false));
       },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -220,50 +232,50 @@ class _UserManagementPageState extends State<UserManagementPage> {
   }
 
   _paginationView() {
-    final int totalPages = (_totalItems / _limit).ceil();
+    final int totalPages = (_totalItems / _userBloc.limit).ceil();
     return PaginationView(
-        page: _page,
+        page: _userBloc.page,
         totalPages: totalPages,
         end: _end,
         totalItems: _totalItems,
         start: _start,
         onNextPressed: () {
-          if (_page < totalPages) {
-            _page = _page + 1;
+          if (_userBloc.page < totalPages) {
+            _userBloc.page = _userBloc.page + 1;
             _userBloc.add(UserManagementEvent.getUsers(
-                userId: userId ?? '',
-                page: _page.toString(),
-                limit: _limit.toString(),
+                userId: adminId ?? '',
+                page: _userBloc.page.toString(),
+                limit: _userBloc.limit.toString(),
                 searchTerm: _searchController.text.trim(),
-                filterId: 1));
+                filterId: null));
             updateData();
           }
         },
         onItemPressed: (i) {
-          _page = i;
+          _userBloc.page = i;
           _userBloc.add(UserManagementEvent.getUsers(
-              userId: userId ?? '',
-              page: _page.toString(),
-              limit: _limit.toString(),
+              userId: adminId ?? '',
+              page: _userBloc.page.toString(),
+              limit: _userBloc.limit.toString(),
               searchTerm: _searchController.text.trim(),
-              filterId: 1));
+              filterId: null));
           updateData();
         },
         onPreviousPressed: () {
-          if (_page > 1) {
-            _page = _page - 1;
+          if (_userBloc.page > 1) {
+            _userBloc.page = _userBloc.page - 1;
             _userBloc.add(UserManagementEvent.getUsers(
-                userId: userId ?? '',
-                page: _page.toString(),
-                limit: _limit.toString(),
+                userId: adminId ?? '',
+                page: _userBloc.page.toString(),
+                limit: _userBloc.limit.toString(),
                 searchTerm: _searchController.text.trim(),
-                filterId: 1));
+                filterId: null));
             updateData();
           }
         });
   }
 
-  _usersTable() {
+  _usersTable(UserManagementState state, BuildContext context) {
     return CSelectionArea(
       child: CDataTable2(
         minWidth: DBL.nineFifty.val,
@@ -335,7 +347,8 @@ class _UserManagementPageState extends State<UserManagementPage> {
               DataCell(_rowsView(text: item.email ?? "")),
               DataCell(_rowsView(text: item.mobile)),
               DataCell(_rowsView(text: item.role)),
-              DataCell(_rowsView(text: item.role)),
+              DataCell(_tableSwitchBox(item)),
+
               // DataCell(_statusBox(item.isActive ?? false)),
               DataCell(Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -469,21 +482,40 @@ class _UserManagementPageState extends State<UserManagementPage> {
   }
 
   setIndex(int index) {
-    if (_page == 1) {
+    if (_userBloc.page == 1) {
       pageIndex = index + 1;
     } else {
-      pageIndex = ((_page * _limit) - 10) + index + 1;
+      pageIndex = ((_userBloc.page * _userBloc.limit) - 10) + index + 1;
     }
   }
 
   void updateData() {
-    if (_page == 1) {
+    if (_userBloc.page == 1) {
       _start = 0;
-      _end = mUserList.length < _limit ? mUserList.length : _limit;
+      _end = mUserList.length < _userBloc.limit
+          ? mUserList.length
+          : _userBloc.limit;
     } else {
-      _start = (_page * _limit) - 10;
+      _start = (_userBloc.page * _userBloc.limit) - 10;
       _end = _start + mUserList.length;
     }
+  }
+
+  _tableSwitchBox(FinalResult item) {
+    log("rebuilded ${item.status} ${item.name?.firstName}");
+
+    return TableSwitchBox(
+      value: item.status!,
+      onToggle: () {
+        bool status = item.status == true ? false : true;
+        _userBloc.add(UserManagementEvent.changeClientStatus(
+          userId: item.id ?? '',
+          adminId: adminId ?? '',
+          status: status,
+          context: context,
+        ));
+      },
+    );
   }
 
   bool isXs(context) => MediaQuery.of(context).size.width <= 560;
