@@ -24,4 +24,6 @@ class RoleCreationEvent with _$RoleCreationEvent {
   const factory RoleCreationEvent.isCheckedEdit(Module module) = _IsCheckedEdit;
   const factory RoleCreationEvent.isCheckedDelete(Module module) =
       _IsCheckedDelete;
+  const factory RoleCreationEvent.isCheckedCreate(Module module) =
+      _IsCheckedCreate;
 }

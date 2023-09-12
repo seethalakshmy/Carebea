@@ -1,5 +1,4 @@
 import 'package:admin_580_tech/presentation/routes/gurad.dart';
-import 'package:admin_580_tech/presentation/mobile_otp_verification/mobile_otp_verification_page.dart';
 import 'package:auto_route/auto_route.dart';
 
 import 'app_router.gr.dart';
@@ -21,12 +20,12 @@ class AppRouter extends $AppRouter {
       page: CareAmbassadorRegistrationRoute.page,
       maintainState: true,
     ),
-    AutoRoute(
+    /*AutoRoute(
       path: "/signup",
       page: SignUpRoute.page,
       maintainState: true,
       initial: true,
-    ),
+    ),*/
     AutoRoute(
       path: "/email-otp-verification",
       page: EmailOtpVerificationRoute.page,

@@ -18,6 +18,7 @@ import 'package:admin_580_tech/presentation/widget/header_view.dart';
 import 'package:admin_580_tech/presentation/widget/loader_view.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/custom_debugger.dart';
@@ -153,10 +154,13 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
               height: DBL.eight.val,
             ),
             CTextField(
-              isIgnore: _isView!,
-              controller: _roleController,
-              width: DBL.fourHundred.val,
-            )
+                maxLength: 50,
+                isIgnore: _isView!,
+                controller: _roleController,
+                width: DBL.fourHundred.val,
+                inputFormatter: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9 ]')),
+                ])
           ],
         ),
       ),
@@ -270,8 +274,8 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
         child: ListView(
           shrinkWrap: true,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.start,
               children: List<Widget>.generate(
                   state.moduleResponse?.module?.length ?? 0, (index) {
                 var item = state.moduleResponse?.module![index];
@@ -297,7 +301,6 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
                       children: [
                         Container(
                           alignment: AlignmentDirectional.topStart,
-                          width: 450,
                           child: ChoiceChip(
                             selectedColor: AppColor.primaryColor.val,
                             backgroundColor: Colors.grey.withOpacity(0.3),
@@ -331,52 +334,68 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
                             },
                           ),
                         ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            item.isViewShow
-                                ? CustomCheckLabel(
-                                    isIgnoring: _isView!,
-                                    label: AppString.view.val,
-                                    value: item.isView,
-                                    onToggle: (val) {
-                                      roleCreationBloc.add(
-                                          RoleCreationEvent.isCheckedView(
-                                              item));
-                                    })
-                                : CustomSizedBox.shrink(),
-                            CustomSizedBox(
-                              width: DBL.eight.val,
-                            ),
-                            item.isEditShow
-                                ? CustomCheckLabel(
-                                    isIgnoring: _isView!,
-                                    label: AppString.edit.val,
-                                    value: item.isEdit,
-                                    onToggle: (val) {
-                                      roleCreationBloc.add(
-                                          RoleCreationEvent.isCheckedEdit(
-                                              item));
-                                    })
-                                : CustomSizedBox.shrink(),
-                            CustomSizedBox(
-                              width: DBL.eight.val,
-                            ),
-                            item.isDeleteShow
-                                ? CustomCheckLabel(
-                                    isIgnoring: _isView!,
-                                    label: AppString.delete.val,
-                                    value: item.isDelete,
-                                    onToggle: (val) {
-                                      roleCreationBloc.add(
-                                          RoleCreationEvent.isCheckedDelete(
-                                              item));
-                                    })
-                                : CustomSizedBox.shrink(),
-                            CustomSizedBox(
-                              width: DBL.eight.val,
-                            ),
-                          ],
+                        const Spacer(),
+                        SizedBox(
+                          width: 250,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              item.isViewShow
+                                  ? CustomCheckLabel(
+                                      isIgnoring: _isView!,
+                                      label: AppString.view.val,
+                                      value: item.isView,
+                                      onToggle: (val) {
+                                        roleCreationBloc.add(
+                                            RoleCreationEvent.isCheckedView(
+                                                item));
+                                      })
+                                  : CustomSizedBox.shrink(),
+                              CustomSizedBox(
+                                width: DBL.eight.val,
+                              ),
+                              item.isEditShow
+                                  ? CustomCheckLabel(
+                                      isIgnoring: _isView!,
+                                      label: AppString.edit.val,
+                                      value: item.isEdit,
+                                      onToggle: (val) {
+                                        roleCreationBloc.add(
+                                            RoleCreationEvent.isCheckedEdit(
+                                                item));
+                                      })
+                                  : CustomSizedBox.shrink(),
+                              CustomSizedBox(
+                                width: DBL.eight.val,
+                              ),
+                              item.isDeleteShow
+                                  ? CustomCheckLabel(
+                                      isIgnoring: _isView!,
+                                      label: AppString.delete.val,
+                                      value: item.isDelete,
+                                      onToggle: (val) {
+                                        roleCreationBloc.add(
+                                            RoleCreationEvent.isCheckedDelete(
+                                                item));
+                                      })
+                                  : CustomSizedBox.shrink(),
+                              item.isCreateShow && index == 0
+                                  ? CustomCheckLabel(
+                                      isIgnoring: _isView!,
+                                      label: AppString.create.val,
+                                      value: item.isCreate,
+                                      onToggle: (val) {
+                                        roleCreationBloc.add(
+                                            RoleCreationEvent.isCheckedCreate(
+                                                item));
+                                      })
+                                  : CustomSizedBox.shrink(),
+                              CustomSizedBox(
+                                width: DBL.eight.val,
+                              ),
+                            ],
+                          ),
                         )
                       ],
                     ),
@@ -396,7 +415,11 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
     selectedModules.clear();
     final moduleList = state.moduleResponse?.module ?? [];
     for (var element in moduleList) {
-      if (element.isSelected) {
+      if (element.isSelected &&
+          (element.isView ||
+              element.isEdit ||
+              element.isDelete ||
+              element.isCreate)) {
         CustomLog.log("element:: ${json.encode(element)}");
         selectedModules.add(element);
       }

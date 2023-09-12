@@ -142,6 +142,8 @@ class _AdminsPageState extends State<AdminsPage> {
       mAdmins.clear();
       if (value?.data?.resData != null && value!.data!.resData!.isNotEmpty) {
         _totalItems = value.data?.totalCount?.floor() ?? 1;
+
+        print("total items = $_totalItems");
         mAdmins.addAll(value.data?.resData ?? []);
         _updateData();
       }
@@ -161,7 +163,7 @@ class _AdminsPageState extends State<AdminsPage> {
                     child: _adminsTable(state, context),
                   ),
                   CustomSizedBox(height: DBL.twenty.val),
-                  if (_totalItems > 10) _paginationView()
+                  if (_totalItems >= 10) _paginationView()
                 ],
               )
             : EmptyView(title: AppString.emptyadmin.val),
@@ -523,6 +525,7 @@ class _AdminsPageState extends State<AdminsPage> {
             onTapYes: () {
               _adminsBloc.add(AdminEvent.adminDelete(
                   adminID: adminID, userID: _adminUserId, context: context));
+              Navigator.pop(context);
             });
       },
     );
@@ -550,7 +553,7 @@ class _AdminsPageState extends State<AdminsPage> {
   }
 
   _setIndex(int index) {
-    if (_page == 1) {
+    if (_page == 1 || (_totalItems / _limit).ceil() == 1) {
       _pageIndex = index + 1;
     } else {
       _pageIndex = ((_page * _limit) - 10) + index + 1;
@@ -559,10 +562,11 @@ class _AdminsPageState extends State<AdminsPage> {
 
   _paginationView() {
     final int totalPages = (_totalItems / _limit).ceil();
+    print("total pages : $totalPages");
     return PaginationView(
         page: _page,
-        start: _start,
-        end: _end,
+        start: totalPages == 1 ? 0 : _start,
+        end: totalPages == 1 ? 10 : _end,
         totalItems: _totalItems,
         totalPages: totalPages,
         onNextPressed: () {
