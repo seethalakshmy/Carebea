@@ -47,6 +47,8 @@ class Module {
   bool isEditShow = false;
   bool isDelete = false;
   bool isDeleteShow = false;
+  bool isCreate = false;
+  bool isCreateShow = false;
 
   Module(
       {this.id,
@@ -55,9 +57,11 @@ class Module {
       this.isView = false,
       this.isEdit = false,
       this.isDelete = false,
+      this.isCreate = false,
       this.isViewShow = false,
       this.isEditShow = false,
-      this.isDeleteShow = false});
+      this.isDeleteShow = false,
+      this.isCreateShow = false});
 
   Module copyWith({
     String? sId,
@@ -66,9 +70,11 @@ class Module {
     bool? isView,
     bool? isEdit,
     bool? isDelete,
+    bool? isCreate,
     bool? isViewShow,
     bool? isEditShow,
     bool? isDeleteShow,
+    bool? isCreateShow,
   }) =>
       Module(
         id: sId ?? this.id,
@@ -77,9 +83,11 @@ class Module {
         isView: isView ?? this.isView,
         isEdit: isEdit ?? this.isEdit,
         isDelete: isDelete ?? this.isDelete,
+        isCreate: isCreate ?? this.isCreate,
         isViewShow: isViewShow ?? this.isViewShow,
         isEditShow: isEditShow ?? this.isEditShow,
         isDeleteShow: isDeleteShow ?? this.isDeleteShow,
+        isCreateShow: isCreateShow ?? this.isCreateShow,
       );
 
   Module.fromJson(Map<String, dynamic> json) {
@@ -88,6 +96,7 @@ class Module {
     isViewShow = json['read'];
     isEditShow = json['write'];
     isDeleteShow = json['delete'];
+    isCreateShow = json['write'];
   }
 
   Map<String, dynamic> toJson() {
@@ -97,6 +106,7 @@ class Module {
     data['read'] = isView;
     data['delete'] = isDelete;
     data['write'] = isEdit;
+    data['write'] = isCreate;
     return data;
   }
 }

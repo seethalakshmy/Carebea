@@ -45,7 +45,7 @@ class RolesPage extends StatefulWidget {
 
 class _RolesPageState extends State<RolesPage> {
   List<Role> mRoles = [];
-  int _totalItems = 1;
+  int _totalItems = 0;
   final int _limit = 10;
   int _page = 1;
   int _pageIndex = 0;
@@ -385,8 +385,10 @@ class _RolesPageState extends State<RolesPage> {
             heading: AppString.delete.val,
             label: AppString.deleteRole.val,
             onTapYes: () {
+              print("role id : $roleId\nuser id : $_adminUserId");
               _roleBloc.add(RolesEvent.roleDelete(
                   roleId: roleId, userId: _adminUserId, context: context));
+              Navigator.pop(context);
             });
       },
     );
