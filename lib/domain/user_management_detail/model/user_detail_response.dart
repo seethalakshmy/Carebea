@@ -1,423 +1,764 @@
+import 'dart:convert';
+
+UserDetailResponse userDetailResponseFromJson(String str) =>
+    UserDetailResponse.fromJson(json.decode(str));
+String userDetailResponseToJson(UserDetailResponse data) =>
+    json.encode(data.toJson());
+
 class UserDetailResponse {
-  bool? status;
-  String? message;
-  User? user;
-
-  UserDetailResponse({this.status, this.message, this.user});
-
-  UserDetailResponse.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    message = json['message'];
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
+  UserDetailResponse({
+    String? status,
+    Data? data,
+  }) {
+    _status = status;
+    _data = data;
   }
 
+  UserDetailResponse.fromJson(dynamic json) {
+    _status = json['status'];
+    _data = json['data'] != null ? Data.fromJson(json['data']) : null;
+  }
+  String? _status;
+  Data? _data;
+  UserDetailResponse copyWith({
+    String? status,
+    Data? data,
+  }) =>
+      UserDetailResponse(
+        status: status ?? _status,
+        data: data ?? _data,
+      );
+  String? get status => _status;
+  Data? get data => _data;
+
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    data['message'] = message;
-    if (user != null) {
-      data['user'] = user!.toJson();
+    final map = <String, dynamic>{};
+    map['status'] = _status;
+    if (_data != null) {
+      map['data'] = _data?.toJson();
     }
-    return data;
+    return map;
   }
 }
 
-class User {
-  String? id;
-  String? location;
-  Name? name;
-  String? phone;
-  String? email;
-  String? ssn;
-  int? serviceCompleted;
-  int? canceledRequest;
-  int? totalReviewsGiven;
-  List<SubProfiles>? subProfiles;
-  PaymentMethod? paymentMethod;
-  List<Services>? services;
-  List<Transactions>? transactions;
-  List<ServiceRequest>? serviceRequest;
+Data dataFromJson(String str) => Data.fromJson(json.decode(str));
+String dataToJson(Data data) => json.encode(data.toJson());
 
-  User({
-    this.id,
-    this.name,
-    this.phone,
-    this.email,
-    this.ssn,
-    this.serviceCompleted,
-    this.canceledRequest,
-    this.totalReviewsGiven,
-    this.subProfiles,
-    this.paymentMethod,
-    this.services,
-    this.transactions,
-    this.serviceRequest,
-    this.location,
-  });
+class Data {
+  Data({
+    String? id,
+    Name? name,
+    String? phone,
+    String? email,
+    dynamic ssn,
+    int? serviceCompleted,
+    int? cancelledRequest,
+    int? totalReviewsGiven,
+    List<SubProfiles>? subProfiles,
+    PaymentMethod? paymentMethod,
+    List<Services>? services,
+    List<Transactions>? transactions,
+    List<RequestdServices>? requestdServices,
+  }) {
+    _id = id;
+    _name = name;
+    _phone = phone;
+    _email = email;
+    _ssn = ssn;
+    _serviceCompleted = serviceCompleted;
+    _cancelledRequest = cancelledRequest;
+    _totalReviewsGiven = totalReviewsGiven;
+    _subProfiles = subProfiles;
+    _paymentMethod = paymentMethod;
+    _services = services;
+    _transactions = transactions;
+    _requestdServices = requestdServices;
+  }
 
-  User.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    location = json['location'];
-    name = json['name'] != null ? Name.fromJson(json['name']) : null;
-    phone = json['phone'];
-    email = json['email'];
-    ssn = json['ssn'];
-    serviceCompleted = json['service_completed'];
-    canceledRequest = json['canceled_request'];
-    totalReviewsGiven = json['total_reviews_given'];
-    if (json['sub_profiles'] != null) {
-      subProfiles = <SubProfiles>[];
-      json['sub_profiles'].forEach((v) {
-        subProfiles!.add(SubProfiles.fromJson(v));
+  Data.fromJson(dynamic json) {
+    _id = json['id'];
+    _name = json['name'] != null ? Name.fromJson(json['name']) : null;
+    _phone = json['phone'];
+    _email = json['email'];
+    _ssn = json['ssn'];
+    _serviceCompleted = json['service_completed'];
+    _cancelledRequest = json['cancelled_request'];
+    _totalReviewsGiven = json['total_reviews_given'];
+    if (json['subProfiles'] != null) {
+      _subProfiles = [];
+      json['subProfiles'].forEach((v) {
+        _subProfiles?.add(SubProfiles.fromJson(v));
       });
     }
-    paymentMethod = json['payment_method'] != null
-        ? PaymentMethod.fromJson(json['payment_method'])
+    _paymentMethod = json['paymentMethod'] != null
+        ? PaymentMethod.fromJson(json['paymentMethod'])
         : null;
     if (json['services'] != null) {
-      services = <Services>[];
+      _services = [];
       json['services'].forEach((v) {
-        services!.add(Services.fromJson(v));
+        _services?.add(Services.fromJson(v));
       });
     }
     if (json['transactions'] != null) {
-      transactions = <Transactions>[];
+      _transactions = [];
       json['transactions'].forEach((v) {
-        transactions!.add(Transactions.fromJson(v));
+        _transactions?.add(Transactions.fromJson(v));
       });
     }
-    if (json['service_request'] != null) {
-      serviceRequest = <ServiceRequest>[];
-      json['service_request'].forEach((v) {
-        serviceRequest!.add(ServiceRequest.fromJson(v));
+    if (json['requestd_services'] != null) {
+      _requestdServices = [];
+      json['requestd_services'].forEach((v) {
+        _requestdServices?.add(RequestdServices.fromJson(v));
       });
     }
   }
+  String? _id;
+  Name? _name;
+  String? _phone;
+  String? _email;
+  dynamic _ssn;
+  int? _serviceCompleted;
+  int? _cancelledRequest;
+  int? _totalReviewsGiven;
+  List<SubProfiles>? _subProfiles;
+  PaymentMethod? _paymentMethod;
+  List<Services>? _services;
+  List<Transactions>? _transactions;
+  List<RequestdServices>? _requestdServices;
+  Data copyWith({
+    String? id,
+    Name? name,
+    String? phone,
+    String? email,
+    dynamic ssn,
+    int? serviceCompleted,
+    int? cancelledRequest,
+    int? totalReviewsGiven,
+    List<SubProfiles>? subProfiles,
+    PaymentMethod? paymentMethod,
+    List<Services>? services,
+    List<Transactions>? transactions,
+    List<RequestdServices>? requestdServices,
+  }) =>
+      Data(
+        id: id ?? _id,
+        name: name ?? _name,
+        phone: phone ?? _phone,
+        email: email ?? _email,
+        ssn: ssn ?? _ssn,
+        serviceCompleted: serviceCompleted ?? _serviceCompleted,
+        cancelledRequest: cancelledRequest ?? _cancelledRequest,
+        totalReviewsGiven: totalReviewsGiven ?? _totalReviewsGiven,
+        subProfiles: subProfiles ?? _subProfiles,
+        paymentMethod: paymentMethod ?? _paymentMethod,
+        services: services ?? _services,
+        transactions: transactions ?? _transactions,
+        requestdServices: requestdServices ?? _requestdServices,
+      );
+  String? get id => _id;
+  Name? get name => _name;
+  String? get phone => _phone;
+  String? get email => _email;
+  dynamic get ssn => _ssn;
+  int? get serviceCompleted => _serviceCompleted;
+  int? get cancelledRequest => _cancelledRequest;
+  int? get totalReviewsGiven => _totalReviewsGiven;
+  List<SubProfiles>? get subProfiles => _subProfiles;
+  PaymentMethod? get paymentMethod => _paymentMethod;
+  List<Services>? get services => _services;
+  List<Transactions>? get transactions => _transactions;
+  List<RequestdServices>? get requestdServices => _requestdServices;
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    if (name != null) {
-      data['name'] = name!.toJson();
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    if (_name != null) {
+      map['name'] = _name?.toJson();
     }
-    data['phones'] = phone;
-    data['email'] = email;
-    data['ssn'] = ssn;
-    data['service_completed'] = serviceCompleted;
-    data['canceled_request'] = canceledRequest;
-    data['total_reviews_given'] = totalReviewsGiven;
-    if (subProfiles != null) {
-      data['sub_profiles'] = subProfiles!.map((v) => v.toJson()).toList();
+    map['phone'] = _phone;
+    map['email'] = _email;
+    map['ssn'] = _ssn;
+    map['service_completed'] = _serviceCompleted;
+    map['cancelled_request'] = _cancelledRequest;
+    map['total_reviews_given'] = _totalReviewsGiven;
+    if (_subProfiles != null) {
+      map['subProfiles'] = _subProfiles?.map((v) => v.toJson()).toList();
     }
-    if (paymentMethod != null) {
-      data['payment_method'] = paymentMethod!.toJson();
+    if (_paymentMethod != null) {
+      map['paymentMethod'] = _paymentMethod?.toJson();
     }
-    if (services != null) {
-      data['services'] = services!.map((v) => v.toJson()).toList();
+    if (_services != null) {
+      map['services'] = _services?.map((v) => v.toJson()).toList();
     }
-    if (transactions != null) {
-      data['transactions'] = transactions!.map((v) => v.toJson()).toList();
+    if (_transactions != null) {
+      map['transactions'] = _transactions?.map((v) => v.toJson()).toList();
     }
-    if (serviceRequest != null) {
-      data['service_request'] = serviceRequest!.map((v) => v.toJson()).toList();
+    if (_requestdServices != null) {
+      map['requestd_services'] =
+          _requestdServices?.map((v) => v.toJson()).toList();
     }
-    return data;
+    return map;
   }
 }
 
-class Name {
-  String? firstName;
-  String? lastName;
-  String? profile;
+RequestdServices requestdServicesFromJson(String str) =>
+    RequestdServices.fromJson(json.decode(str));
+String requestdServicesToJson(RequestdServices data) =>
+    json.encode(data.toJson());
 
-  Name({this.firstName, this.lastName, this.profile});
-
-  Name.fromJson(Map<String, dynamic> json) {
-    firstName = json['first_name'];
-    lastName = json['last_name'];
-    profile = json['profile'];
+class RequestdServices {
+  RequestdServices({
+    String? client,
+    String? requestId,
+    String? startDateTime,
+    String? endDateTime,
+    List<String>? requesteServices,
+  }) {
+    _client = client;
+    _requestId = requestId;
+    _startDateTime = startDateTime;
+    _endDateTime = endDateTime;
+    _requesteServices = requesteServices;
   }
 
+  RequestdServices.fromJson(dynamic json) {
+    _client = json['client'];
+    _requestId = json['requestId'];
+    _startDateTime = json['start_date_time'];
+    _endDateTime = json['end_date_time'];
+    _requesteServices = json['requeste_Services'] != null
+        ? json['requeste_Services'].cast<String>()
+        : [];
+  }
+  String? _client;
+  String? _requestId;
+  String? _startDateTime;
+  String? _endDateTime;
+  List<String>? _requesteServices;
+  RequestdServices copyWith({
+    String? client,
+    String? requestId,
+    String? startDateTime,
+    String? endDateTime,
+    List<String>? requesteServices,
+  }) =>
+      RequestdServices(
+        client: client ?? _client,
+        requestId: requestId ?? _requestId,
+        startDateTime: startDateTime ?? _startDateTime,
+        endDateTime: endDateTime ?? _endDateTime,
+        requesteServices: requesteServices ?? _requesteServices,
+      );
+  String? get client => _client;
+  String? get requestId => _requestId;
+  String? get startDateTime => _startDateTime;
+  String? get endDateTime => _endDateTime;
+  List<String>? get requesteServices => _requesteServices;
+
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['first_name'] = firstName;
-    data['last_name'] = lastName;
-    data['profile'] = profile;
-    return data;
+    final map = <String, dynamic>{};
+    map['client'] = _client;
+    map['requestId'] = _requestId;
+    map['start_date_time'] = _startDateTime;
+    map['end_date_time'] = _endDateTime;
+    map['requeste_Services'] = _requesteServices;
+    return map;
   }
 }
 
-class SubProfiles {
-  String? id;
-  String? userId;
-  int? totalSeriviceCompleted;
-  int? age;
-  Name? name;
-
-  SubProfiles(
-      {this.id, this.userId, this.totalSeriviceCompleted, this.age, this.name});
-
-  SubProfiles.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    userId = json['user_id'];
-    totalSeriviceCompleted = json['total_serivice_completed'];
-    age = json['age'];
-    name = json['name'] != null ? Name.fromJson(json['name']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['user_id'] = userId;
-    data['total_serivice_completed'] = totalSeriviceCompleted;
-    data['age'] = age;
-    if (name != null) {
-      data['name'] = name!.toJson();
-    }
-    return data;
-  }
-}
-
-class PaymentMethod {
-  CreditCardDetails? creditCardDetails;
-  AchDetails? achDetails;
-
-  PaymentMethod({this.creditCardDetails, this.achDetails});
-
-  PaymentMethod.fromJson(Map<String, dynamic> json) {
-    creditCardDetails = json['credit_card_details'] != null
-        ? CreditCardDetails.fromJson(json['credit_card_details'])
-        : null;
-    achDetails = json['ach_details'] != null
-        ? AchDetails.fromJson(json['ach_details'])
-        : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (creditCardDetails != null) {
-      data['credit_card_details'] = creditCardDetails!.toJson();
-    }
-    if (achDetails != null) {
-      data['ach_details'] = achDetails!.toJson();
-    }
-    return data;
-  }
-}
-
-class CreditCardDetails {
-  String? accountHolderName;
-  String? accountNumber;
-  String? expirationDate;
-  int? securityNumber;
-
-  CreditCardDetails(
-      {this.accountHolderName,
-      this.accountNumber,
-      this.expirationDate,
-      this.securityNumber});
-
-  CreditCardDetails.fromJson(Map<String, dynamic> json) {
-    accountHolderName = json['account_holder_name'];
-    accountNumber = json['account_number'];
-    expirationDate = json['expiration_date'];
-    securityNumber = json['security_number'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['account_holder_name'] = accountHolderName;
-    data['account_number'] = accountNumber;
-    data['expiration_date'] = expirationDate;
-    data['security_number'] = securityNumber;
-    return data;
-  }
-}
-
-class AchDetails {
-  String? accountHolderName;
-  String? routingNumber;
-  String? accountNumber;
-  List<String>? accountType;
-
-  AchDetails(
-      {this.accountHolderName,
-      this.routingNumber,
-      this.accountNumber,
-      this.accountType});
-
-  AchDetails.fromJson(Map<String, dynamic> json) {
-    accountHolderName = json['account_holder_name'];
-    routingNumber = json['routing_number'];
-    accountNumber = json['account_number'];
-    accountType = json['account_type'].cast<String>();
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['account_holder_name'] = accountHolderName;
-    data['routing_number'] = routingNumber;
-    data['account_number'] = accountNumber;
-    data['account_type'] = accountType;
-    return data;
-  }
-}
-
-class Services {
-  String? id;
-  String? userId;
-  String? startDateTime;
-  String? endDateTime;
-  String? totalServiceFee;
-  int? status;
-  Name? client;
-  Name? caregiver;
-
-  Services(
-      {this.id,
-      this.userId,
-      this.startDateTime,
-      this.endDateTime,
-      this.totalServiceFee,
-      this.status,
-      this.client,
-      this.caregiver});
-
-  Services.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    userId = json['user_id'];
-    startDateTime = json['start_date_time'];
-    endDateTime = json['end_date_time'];
-    totalServiceFee = json['total_service_fee'];
-    status = json['status'];
-    client = json['client'] != null ? Name.fromJson(json['client']) : null;
-    caregiver =
-        json['caregiver'] != null ? Name.fromJson(json['caregiver']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['user_id'] = userId;
-    data['start_date_time'] = startDateTime;
-    data['end_date_time'] = endDateTime;
-    data['total_service_fee'] = totalServiceFee;
-    data['status'] = status;
-    if (client != null) {
-      data['client'] = client!.toJson();
-    }
-    if (caregiver != null) {
-      data['caregiver'] = caregiver!.toJson();
-    }
-    return data;
-  }
-}
+Transactions transactionsFromJson(String str) =>
+    Transactions.fromJson(json.decode(str));
+String transactionsToJson(Transactions data) => json.encode(data.toJson());
 
 class Transactions {
-  String? client;
-  String? serviceId;
-  String? transactionType;
-  String? dateTime;
-  String? amount;
-  String? paidFor;
-  String? transactionId;
-  int? status;
-
-  Transactions(
-      {this.client,
-      this.serviceId,
-      this.transactionType,
-      this.dateTime,
-      this.amount,
-      this.paidFor,
-      this.transactionId,
-      this.status});
-
-  Transactions.fromJson(Map<String, dynamic> json) {
-    client = json['client'];
-    serviceId = json['service_id'];
-    transactionType = json['transaction_type'];
-    dateTime = json['date_time'];
-    amount = json['amount'];
-    paidFor = json['paid_for'];
-    transactionId = json['transaction_id'];
-    status = json['status'];
+  Transactions({
+    String? client,
+    String? serviceId,
+    String? transactionType,
+    String? dateTime,
+    String? amount,
+    String? paidFor,
+    String? transactionId,
+    String? status,
+  }) {
+    _client = client;
+    _serviceId = serviceId;
+    _transactionType = transactionType;
+    _dateTime = dateTime;
+    _amount = amount;
+    _paidFor = paidFor;
+    _transactionId = transactionId;
+    _status = status;
   }
 
+  Transactions.fromJson(dynamic json) {
+    _client = json['client'];
+    _serviceId = json['service_id'];
+    _transactionType = json['transaction_type'];
+    _dateTime = json['date_time'];
+    _amount = json['amount'];
+    _paidFor = json['paid_for'];
+    _transactionId = json['transaction_id'];
+    _status = json['status'];
+  }
+  String? _client;
+  String? _serviceId;
+  String? _transactionType;
+  String? _dateTime;
+  String? _amount;
+  String? _paidFor;
+  String? _transactionId;
+  String? _status;
+  Transactions copyWith({
+    String? client,
+    String? serviceId,
+    String? transactionType,
+    String? dateTime,
+    String? amount,
+    String? paidFor,
+    String? transactionId,
+    String? status,
+  }) =>
+      Transactions(
+        client: client ?? _client,
+        serviceId: serviceId ?? _serviceId,
+        transactionType: transactionType ?? _transactionType,
+        dateTime: dateTime ?? _dateTime,
+        amount: amount ?? _amount,
+        paidFor: paidFor ?? _paidFor,
+        transactionId: transactionId ?? _transactionId,
+        status: status ?? _status,
+      );
+  String? get client => _client;
+  String? get serviceId => _serviceId;
+  String? get transactionType => _transactionType;
+  String? get dateTime => _dateTime;
+  String? get amount => _amount;
+  String? get paidFor => _paidFor;
+  String? get transactionId => _transactionId;
+  String? get status => _status;
+
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['client'] = client;
-    data['service_id'] = serviceId;
-    data['transaction_type'] = transactionType;
-    data['date_time'] = dateTime;
-    data['amount'] = amount;
-    data['paid_for'] = paidFor;
-    data['transaction_id'] = transactionId;
-    data['status'] = status;
-    return data;
+    final map = <String, dynamic>{};
+    map['client'] = _client;
+    map['service_id'] = _serviceId;
+    map['transaction_type'] = _transactionType;
+    map['date_time'] = _dateTime;
+    map['amount'] = _amount;
+    map['paid_for'] = _paidFor;
+    map['transaction_id'] = _transactionId;
+    map['status'] = _status;
+    return map;
   }
 }
 
-class ServiceRequest {
-  ServiceRequestName? clientName;
-  String? requestId;
-  String? startDateTime;
-  String? endDateTime;
-  int? matchingListCount;
-  String? serviceNeed;
-  String? status;
+Services servicesFromJson(String str) => Services.fromJson(json.decode(str));
+String servicesToJson(Services data) => json.encode(data.toJson());
 
-  ServiceRequest(
-      {this.clientName,
-      this.requestId,
-      this.startDateTime,
-      this.endDateTime,
-      this.matchingListCount,
-      this.serviceNeed});
-
-  ServiceRequest.fromJson(Map<String, dynamic> json) {
-    requestId = json['request_id'];
-    startDateTime = json['start_date_time'];
-    endDateTime = json['end_date_time'];
-    matchingListCount = json['matching_list_count'];
-    serviceNeed = json['service_need'];
-    status = json['status'];
-    clientName =
-        json['name'] != null ? ServiceRequestName.fromJson(json['name']) : null;
+class Services {
+  Services({
+    String? id,
+    String? userId,
+    String? startDateTime,
+    String? endDateTime,
+    double? totalServiceFee,
+    String? status,
+    Client? client,
+    Caregiver? caregiver,
+  }) {
+    _id = id;
+    _userId = userId;
+    _startDateTime = startDateTime;
+    _endDateTime = endDateTime;
+    _totalServiceFee = totalServiceFee;
+    _status = status;
+    _client = client;
+    _caregiver = caregiver;
   }
 
+  Services.fromJson(dynamic json) {
+    _id = json['id'];
+    _userId = json['userId'];
+    _startDateTime = json['start_date_time'];
+    _endDateTime = json['end_date_time'];
+    _totalServiceFee = json['total_service_fee'];
+    _status = json['status'];
+    _client = json['client'] != null ? Client.fromJson(json['client']) : null;
+    _caregiver = json['caregiver'] != null
+        ? Caregiver.fromJson(json['caregiver'])
+        : null;
+  }
+  String? _id;
+  String? _userId;
+  String? _startDateTime;
+  String? _endDateTime;
+  double? _totalServiceFee;
+  String? _status;
+  Client? _client;
+  Caregiver? _caregiver;
+  Services copyWith({
+    String? id,
+    String? userId,
+    String? startDateTime,
+    String? endDateTime,
+    double? totalServiceFee,
+    String? status,
+    Client? client,
+    Caregiver? caregiver,
+  }) =>
+      Services(
+        id: id ?? _id,
+        userId: userId ?? _userId,
+        startDateTime: startDateTime ?? _startDateTime,
+        endDateTime: endDateTime ?? _endDateTime,
+        totalServiceFee: totalServiceFee ?? _totalServiceFee,
+        status: status ?? _status,
+        client: client ?? _client,
+        caregiver: caregiver ?? _caregiver,
+      );
+  String? get id => _id;
+  String? get userId => _userId;
+  String? get startDateTime => _startDateTime;
+  String? get endDateTime => _endDateTime;
+  double? get totalServiceFee => _totalServiceFee;
+  String? get status => _status;
+  Client? get client => _client;
+  Caregiver? get caregiver => _caregiver;
+
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['request_id'] = requestId;
-    data['start_date_time'] = startDateTime;
-    data['end_date_time'] = endDateTime;
-    data['matching_list_count'] = matchingListCount;
-    data['service_need'] = serviceNeed;
-    if (clientName != null) {
-      data['name'] = clientName!.toJson();
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['userId'] = _userId;
+    map['start_date_time'] = _startDateTime;
+    map['end_date_time'] = _endDateTime;
+    map['total_service_fee'] = _totalServiceFee;
+    map['status'] = _status;
+    if (_client != null) {
+      map['client'] = _client?.toJson();
     }
-    return data;
+    if (_caregiver != null) {
+      map['caregiver'] = _caregiver?.toJson();
+    }
+    return map;
   }
 }
 
-class ServiceRequestName {
-  String? firstName;
-  String? lastName;
+Caregiver caregiverFromJson(String str) => Caregiver.fromJson(json.decode(str));
+String caregiverToJson(Caregiver data) => json.encode(data.toJson());
 
-  ServiceRequestName({
-    this.firstName,
-    this.lastName,
-  });
-
-  ServiceRequestName.fromJson(Map<String, dynamic> json) {
-    firstName = json['first_name'];
-    lastName = json['last_name'];
+class Caregiver {
+  Caregiver({
+    String? firstName,
+    String? lastName,
+    String? profilePic,
+    String? profileThumbnail,
+  }) {
+    _firstName = firstName;
+    _lastName = lastName;
+    _profilePic = profilePic;
+    _profileThumbnail = profileThumbnail;
   }
 
+  Caregiver.fromJson(dynamic json) {
+    _firstName = json['firstName'];
+    _lastName = json['lastName'];
+    _profilePic = json['profile_pic'];
+    _profileThumbnail = json['profile_thumbnail'];
+  }
+  String? _firstName;
+  String? _lastName;
+  String? _profilePic;
+  String? _profileThumbnail;
+  Caregiver copyWith({
+    String? firstName,
+    String? lastName,
+    String? profilePic,
+    String? profileThumbnail,
+  }) =>
+      Caregiver(
+        firstName: firstName ?? _firstName,
+        lastName: lastName ?? _lastName,
+        profilePic: profilePic ?? _profilePic,
+        profileThumbnail: profileThumbnail ?? _profileThumbnail,
+      );
+  String? get firstName => _firstName;
+  String? get lastName => _lastName;
+  String? get profilePic => _profilePic;
+  String? get profileThumbnail => _profileThumbnail;
+
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['first_name'] = firstName;
-    data['last_name'] = lastName;
-    return data;
+    final map = <String, dynamic>{};
+    map['firstName'] = _firstName;
+    map['lastName'] = _lastName;
+    map['profile_pic'] = _profilePic;
+    map['profile_thumbnail'] = _profileThumbnail;
+    return map;
+  }
+}
+
+Client clientFromJson(String str) => Client.fromJson(json.decode(str));
+String clientToJson(Client data) => json.encode(data.toJson());
+
+class Client {
+  Client({
+    String? firstName,
+    String? lastName,
+    String? profilePic,
+    String? profileThumbnail,
+  }) {
+    _firstName = firstName;
+    _lastName = lastName;
+    _profilePic = profilePic;
+    _profileThumbnail = profileThumbnail;
+  }
+
+  Client.fromJson(dynamic json) {
+    _firstName = json['firstName'];
+    _lastName = json['lastName'];
+    _profilePic = json['profile_pic'];
+    _profileThumbnail = json['profile_thumbnail'];
+  }
+  String? _firstName;
+  String? _lastName;
+  String? _profilePic;
+  String? _profileThumbnail;
+  Client copyWith({
+    String? firstName,
+    String? lastName,
+    String? profilePic,
+    String? profileThumbnail,
+  }) =>
+      Client(
+        firstName: firstName ?? _firstName,
+        lastName: lastName ?? _lastName,
+        profilePic: profilePic ?? _profilePic,
+        profileThumbnail: profileThumbnail ?? _profileThumbnail,
+      );
+  String? get firstName => _firstName;
+  String? get lastName => _lastName;
+  String? get profilePic => _profilePic;
+  String? get profileThumbnail => _profileThumbnail;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['firstName'] = _firstName;
+    map['lastName'] = _lastName;
+    map['profile_pic'] = _profilePic;
+    map['profile_thumbnail'] = _profileThumbnail;
+    return map;
+  }
+}
+
+PaymentMethod paymentMethodFromJson(String str) =>
+    PaymentMethod.fromJson(json.decode(str));
+String paymentMethodToJson(PaymentMethod data) => json.encode(data.toJson());
+
+class PaymentMethod {
+  PaymentMethod({
+    CreditCard? creditCard,
+  }) {
+    _creditCard = creditCard;
+  }
+
+  PaymentMethod.fromJson(dynamic json) {
+    _creditCard = json['creditCard'] != null
+        ? CreditCard.fromJson(json['creditCard'])
+        : null;
+  }
+  CreditCard? _creditCard;
+  PaymentMethod copyWith({
+    CreditCard? creditCard,
+  }) =>
+      PaymentMethod(
+        creditCard: creditCard ?? _creditCard,
+      );
+  CreditCard? get creditCard => _creditCard;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    if (_creditCard != null) {
+      map['creditCard'] = _creditCard?.toJson();
+    }
+    return map;
+  }
+}
+
+CreditCard creditCardFromJson(String str) =>
+    CreditCard.fromJson(json.decode(str));
+String creditCardToJson(CreditCard data) => json.encode(data.toJson());
+
+class CreditCard {
+  CreditCard({
+    String? cardNumber,
+    String? expirationDate,
+    String? cvv,
+  }) {
+    _cardNumber = cardNumber;
+    _expirationDate = expirationDate;
+    _cvv = cvv;
+  }
+
+  CreditCard.fromJson(dynamic json) {
+    _cardNumber = json['cardNumber'];
+    _expirationDate = json['expirationDate'];
+    _cvv = json['cvv'];
+  }
+  String? _cardNumber;
+  String? _expirationDate;
+  String? _cvv;
+  CreditCard copyWith({
+    String? cardNumber,
+    String? expirationDate,
+    String? cvv,
+  }) =>
+      CreditCard(
+        cardNumber: cardNumber ?? _cardNumber,
+        expirationDate: expirationDate ?? _expirationDate,
+        cvv: cvv ?? _cvv,
+      );
+  String? get cardNumber => _cardNumber;
+  String? get expirationDate => _expirationDate;
+  String? get cvv => _cvv;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['cardNumber'] = _cardNumber;
+    map['expirationDate'] = _expirationDate;
+    map['cvv'] = _cvv;
+    return map;
+  }
+}
+
+SubProfiles subProfilesFromJson(String str) =>
+    SubProfiles.fromJson(json.decode(str));
+String subProfilesToJson(SubProfiles data) => json.encode(data.toJson());
+
+class SubProfiles {
+  SubProfiles({
+    String? id,
+    Name? name,
+    String? profilePic,
+    String? profileThumbnail,
+    String? age,
+    bool? isProfileCompleted,
+    int? profileCompletePercentage,
+    int? profileCompletion,
+    int? completedServices,
+  }) {
+    _id = id;
+    _name = name;
+    _profilePic = profilePic;
+    _profileThumbnail = profileThumbnail;
+    _age = age;
+    _isProfileCompleted = isProfileCompleted;
+    _profileCompletePercentage = profileCompletePercentage;
+    _profileCompletion = profileCompletion;
+    _completedServices = completedServices;
+  }
+
+  SubProfiles.fromJson(dynamic json) {
+    _id = json['id'];
+    _name = json['name'] != null ? Name.fromJson(json['name']) : null;
+    _profilePic = json['profile_pic'];
+    _profileThumbnail = json['profile_thumbnail'];
+    _age = json['age'];
+    _isProfileCompleted = json['is_profile_completed'];
+    _profileCompletePercentage = json['profile_complete_percentage'];
+    _profileCompletion = json['profile_completion'];
+    _completedServices = json['completedServices'];
+  }
+  String? _id;
+  Name? _name;
+  String? _profilePic;
+  String? _profileThumbnail;
+  String? _age;
+  bool? _isProfileCompleted;
+  int? _profileCompletePercentage;
+  int? _profileCompletion;
+  int? _completedServices;
+  SubProfiles copyWith({
+    String? id,
+    Name? name,
+    String? profilePic,
+    String? profileThumbnail,
+    String? age,
+    bool? isProfileCompleted,
+    int? profileCompletePercentage,
+    int? profileCompletion,
+    int? completedServices,
+  }) =>
+      SubProfiles(
+        id: id ?? _id,
+        name: name ?? _name,
+        profilePic: profilePic ?? _profilePic,
+        profileThumbnail: profileThumbnail ?? _profileThumbnail,
+        age: age ?? _age,
+        isProfileCompleted: isProfileCompleted ?? _isProfileCompleted,
+        profileCompletePercentage:
+            profileCompletePercentage ?? _profileCompletePercentage,
+        profileCompletion: profileCompletion ?? _profileCompletion,
+        completedServices: completedServices ?? _completedServices,
+      );
+  String? get id => _id;
+  Name? get name => _name;
+  String? get profilePic => _profilePic;
+  String? get profileThumbnail => _profileThumbnail;
+  String? get age => _age;
+  bool? get isProfileCompleted => _isProfileCompleted;
+  int? get profileCompletePercentage => _profileCompletePercentage;
+  int? get profileCompletion => _profileCompletion;
+  int? get completedServices => _completedServices;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    if (_name != null) {
+      map['name'] = _name?.toJson();
+    }
+    map['profile_pic'] = _profilePic;
+    map['profile_thumbnail'] = _profileThumbnail;
+    map['age'] = _age;
+    map['is_profile_completed'] = _isProfileCompleted;
+    map['profile_complete_percentage'] = _profileCompletePercentage;
+    map['profile_completion'] = _profileCompletion;
+    map['completedServices'] = _completedServices;
+    return map;
+  }
+}
+
+Name nameFromJson(String str) => Name.fromJson(json.decode(str));
+String nameToJson(Name data) => json.encode(data.toJson());
+
+class Name {
+  Name({
+    String? firstName,
+    String? lastName,
+  }) {
+    _firstName = firstName;
+    _lastName = lastName;
+  }
+
+  Name.fromJson(dynamic json) {
+    _firstName = json['firstName'];
+    _lastName = json['lastName'];
+  }
+  String? _firstName;
+  String? _lastName;
+  Name copyWith({
+    String? firstName,
+    String? lastName,
+  }) =>
+      Name(
+        firstName: firstName ?? _firstName,
+        lastName: lastName ?? _lastName,
+      );
+  String? get firstName => _firstName;
+  String? get lastName => _lastName;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['firstName'] = _firstName;
+    map['lastName'] = _lastName;
+    return map;
   }
 }

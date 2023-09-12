@@ -53,7 +53,7 @@ mixin _$OnboardingEvent {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -95,7 +95,7 @@ mixin _$OnboardingEvent {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -143,7 +143,7 @@ mixin _$OnboardingEvent {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -184,7 +184,8 @@ mixin _$OnboardingEvent {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -231,7 +232,7 @@ mixin _$OnboardingEvent {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -272,7 +273,8 @@ mixin _$OnboardingEvent {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -723,7 +725,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -765,7 +767,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -832,7 +834,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -873,7 +875,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -939,7 +942,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -980,7 +983,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -1401,7 +1405,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -1443,7 +1447,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -1503,7 +1507,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -1544,7 +1548,8 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -1603,7 +1608,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -1644,7 +1649,8 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -1856,7 +1862,7 @@ abstract class _$$_SubmitPreferenceDetailsCopyWith<$Res> {
       bool serveWithSmoker,
       bool willingToTransportation,
       bool willingToServeWithPets,
-      List<PetsList> petsList,
+      List<Map<String, dynamic>> petsList,
       List<String> knownLanguages});
 }
 
@@ -1903,7 +1909,7 @@ class __$$_SubmitPreferenceDetailsCopyWithImpl<$Res>
       petsList: null == petsList
           ? _value._petsList
           : petsList // ignore: cast_nullable_to_non_nullable
-              as List<PetsList>,
+              as List<Map<String, dynamic>>,
       knownLanguages: null == knownLanguages
           ? _value._knownLanguages
           : knownLanguages // ignore: cast_nullable_to_non_nullable
@@ -1921,7 +1927,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
       required this.serveWithSmoker,
       required this.willingToTransportation,
       required this.willingToServeWithPets,
-      required final List<PetsList> petsList,
+      required final List<Map<String, dynamic>> petsList,
       required final List<String> knownLanguages})
       : _petsList = petsList,
         _knownLanguages = knownLanguages;
@@ -1936,9 +1942,9 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
   final bool willingToTransportation;
   @override
   final bool willingToServeWithPets;
-  final List<PetsList> _petsList;
+  final List<Map<String, dynamic>> _petsList;
   @override
-  List<PetsList> get petsList {
+  List<Map<String, dynamic>> get petsList {
     if (_petsList is EqualUnmodifiableListView) return _petsList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_petsList);
@@ -2034,7 +2040,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -2076,7 +2082,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -2134,7 +2140,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -2175,7 +2181,8 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -2232,7 +2239,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -2273,7 +2280,8 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -2451,7 +2459,7 @@ abstract class _SubmitPreferenceDetails implements OnboardingEvent {
       required final bool serveWithSmoker,
       required final bool willingToTransportation,
       required final bool willingToServeWithPets,
-      required final List<PetsList> petsList,
+      required final List<Map<String, dynamic>> petsList,
       required final List<String> knownLanguages}) = _$_SubmitPreferenceDetails;
 
   String get userId;
@@ -2459,7 +2467,7 @@ abstract class _SubmitPreferenceDetails implements OnboardingEvent {
   bool get serveWithSmoker;
   bool get willingToTransportation;
   bool get willingToServeWithPets;
-  List<PetsList> get petsList;
+  List<Map<String, dynamic>> get petsList;
   List<String> get knownLanguages;
   @JsonKey(ignore: true)
   _$$_SubmitPreferenceDetailsCopyWith<_$_SubmitPreferenceDetails>
@@ -2539,7 +2547,7 @@ class _$_CommonDataLists implements _CommonDataLists {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -2581,7 +2589,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -2632,7 +2640,7 @@ class _$_CommonDataLists implements _CommonDataLists {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -2673,7 +2681,8 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -2723,7 +2732,7 @@ class _$_CommonDataLists implements _CommonDataLists {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -2764,7 +2773,8 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -3041,7 +3051,7 @@ class _$_CityLists implements _CityLists {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -3083,7 +3093,7 @@ class _$_CityLists implements _CityLists {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -3134,7 +3144,7 @@ class _$_CityLists implements _CityLists {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -3175,7 +3185,8 @@ class _$_CityLists implements _CityLists {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -3225,7 +3236,7 @@ class _$_CityLists implements _CityLists {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -3266,7 +3277,8 @@ class _$_CityLists implements _CityLists {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -3552,7 +3564,7 @@ class _$_StateLists implements _StateLists {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -3594,7 +3606,7 @@ class _$_StateLists implements _StateLists {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -3645,7 +3657,7 @@ class _$_StateLists implements _StateLists {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -3686,7 +3698,8 @@ class _$_StateLists implements _StateLists {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -3736,7 +3749,7 @@ class _$_StateLists implements _StateLists {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -3777,7 +3790,8 @@ class _$_StateLists implements _StateLists {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -4026,7 +4040,7 @@ class _$_RelationList implements _RelationList {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -4068,7 +4082,7 @@ class _$_RelationList implements _RelationList {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -4119,7 +4133,7 @@ class _$_RelationList implements _RelationList {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -4160,7 +4174,8 @@ class _$_RelationList implements _RelationList {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -4210,7 +4225,7 @@ class _$_RelationList implements _RelationList {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -4251,7 +4266,8 @@ class _$_RelationList implements _RelationList {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -4518,7 +4534,7 @@ class _$_SubmitReference implements _SubmitReference {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -4560,7 +4576,7 @@ class _$_SubmitReference implements _SubmitReference {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -4611,7 +4627,7 @@ class _$_SubmitReference implements _SubmitReference {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -4652,7 +4668,8 @@ class _$_SubmitReference implements _SubmitReference {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -4702,7 +4719,7 @@ class _$_SubmitReference implements _SubmitReference {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -4743,7 +4760,8 @@ class _$_SubmitReference implements _SubmitReference {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -4990,7 +5008,7 @@ class _$_AddReference implements _AddReference {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -5032,7 +5050,7 @@ class _$_AddReference implements _AddReference {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -5083,7 +5101,7 @@ class _$_AddReference implements _AddReference {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -5124,7 +5142,8 @@ class _$_AddReference implements _AddReference {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -5174,7 +5193,7 @@ class _$_AddReference implements _AddReference {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -5215,7 +5234,8 @@ class _$_AddReference implements _AddReference {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -5482,7 +5502,7 @@ class _$DeleteReference implements DeleteReference {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -5524,7 +5544,7 @@ class _$DeleteReference implements DeleteReference {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -5575,7 +5595,7 @@ class _$DeleteReference implements DeleteReference {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -5616,7 +5636,8 @@ class _$DeleteReference implements DeleteReference {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -5666,7 +5687,7 @@ class _$DeleteReference implements DeleteReference {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -5707,7 +5728,8 @@ class _$DeleteReference implements DeleteReference {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -5979,7 +6001,7 @@ class _$UpdateReference implements UpdateReference {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -6021,7 +6043,7 @@ class _$UpdateReference implements UpdateReference {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -6072,7 +6094,7 @@ class _$UpdateReference implements UpdateReference {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -6113,7 +6135,8 @@ class _$UpdateReference implements UpdateReference {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -6163,7 +6186,7 @@ class _$UpdateReference implements UpdateReference {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -6204,7 +6227,8 @@ class _$UpdateReference implements UpdateReference {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -6485,7 +6509,7 @@ class _$EditReference implements EditReference {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -6527,7 +6551,7 @@ class _$EditReference implements EditReference {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -6578,7 +6602,7 @@ class _$EditReference implements EditReference {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -6619,7 +6643,8 @@ class _$EditReference implements EditReference {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -6669,7 +6694,7 @@ class _$EditReference implements EditReference {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -6710,7 +6735,8 @@ class _$EditReference implements EditReference {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -6959,7 +6985,7 @@ class _$_YearsOfExp implements _YearsOfExp {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -7001,7 +7027,7 @@ class _$_YearsOfExp implements _YearsOfExp {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -7052,7 +7078,7 @@ class _$_YearsOfExp implements _YearsOfExp {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -7093,7 +7119,8 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -7143,7 +7170,7 @@ class _$_YearsOfExp implements _YearsOfExp {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -7184,7 +7211,8 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -7452,7 +7480,7 @@ class _$_GetPetList implements _GetPetList {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -7494,7 +7522,7 @@ class _$_GetPetList implements _GetPetList {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -7545,7 +7573,7 @@ class _$_GetPetList implements _GetPetList {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -7586,7 +7614,8 @@ class _$_GetPetList implements _GetPetList {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -7636,7 +7665,7 @@ class _$_GetPetList implements _GetPetList {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -7677,7 +7706,8 @@ class _$_GetPetList implements _GetPetList {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -7968,7 +7998,7 @@ class _$_GetLanguageList implements _GetLanguageList {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -8010,7 +8040,7 @@ class _$_GetLanguageList implements _GetLanguageList {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -8061,7 +8091,7 @@ class _$_GetLanguageList implements _GetLanguageList {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -8102,7 +8132,8 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -8152,7 +8183,7 @@ class _$_GetLanguageList implements _GetLanguageList {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -8193,7 +8224,8 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -8468,7 +8500,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -8510,7 +8542,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -8561,7 +8593,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -8602,7 +8634,8 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -8652,7 +8685,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -8693,7 +8726,8 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -8966,7 +9000,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -9008,7 +9042,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -9059,7 +9093,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -9100,7 +9134,8 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -9150,7 +9185,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -9191,7 +9226,8 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -9464,7 +9500,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -9506,7 +9542,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -9557,7 +9593,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -9598,7 +9634,8 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -9648,7 +9685,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -9689,7 +9726,8 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -9963,7 +10001,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -10005,7 +10043,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -10056,7 +10094,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -10097,7 +10135,8 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -10147,7 +10186,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -10188,7 +10227,8 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -10464,7 +10504,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -10506,7 +10546,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -10557,7 +10597,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -10598,7 +10638,8 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -10648,7 +10689,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -10689,7 +10730,8 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -10964,7 +11006,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -11006,7 +11048,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -11057,7 +11099,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -11098,7 +11140,8 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -11148,7 +11191,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -11189,7 +11232,8 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -11466,7 +11510,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -11508,7 +11552,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -11559,7 +11603,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -11600,7 +11644,8 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -11650,7 +11695,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -11691,7 +11736,8 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -11965,7 +12011,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -12007,7 +12053,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -12058,7 +12104,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -12099,7 +12145,8 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -12149,7 +12196,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -12190,7 +12237,8 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -12464,7 +12512,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -12506,7 +12554,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -12557,7 +12605,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -12598,7 +12646,8 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -12648,7 +12697,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -12689,7 +12738,8 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -12963,7 +13013,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -13005,7 +13055,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -13056,7 +13106,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -13097,7 +13147,8 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -13147,7 +13198,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -13188,7 +13239,8 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -13485,7 +13537,7 @@ class _$_SecurityDocumentUploadSelected
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -13527,7 +13579,7 @@ class _$_SecurityDocumentUploadSelected
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -13578,7 +13630,7 @@ class _$_SecurityDocumentUploadSelected
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -13619,7 +13671,8 @@ class _$_SecurityDocumentUploadSelected
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -13669,7 +13722,7 @@ class _$_SecurityDocumentUploadSelected
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -13710,7 +13763,8 @@ class _$_SecurityDocumentUploadSelected
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -14007,7 +14061,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -14049,7 +14103,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -14100,7 +14154,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -14141,7 +14195,8 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -14191,7 +14246,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -14232,7 +14287,8 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -14529,7 +14585,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -14571,7 +14627,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -14622,7 +14678,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -14663,7 +14719,8 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -14713,7 +14770,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -14754,7 +14811,8 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -15050,7 +15108,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -15092,7 +15150,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -15143,7 +15201,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -15184,7 +15242,8 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -15234,7 +15293,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -15275,7 +15334,8 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -15572,7 +15632,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -15614,7 +15674,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -15665,7 +15725,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -15706,7 +15766,8 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -15756,7 +15817,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -15797,7 +15858,8 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -16046,7 +16108,7 @@ class _$_LanguagePagination implements _LanguagePagination {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -16088,7 +16150,7 @@ class _$_LanguagePagination implements _LanguagePagination {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -16139,7 +16201,7 @@ class _$_LanguagePagination implements _LanguagePagination {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -16180,7 +16242,8 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -16230,7 +16293,7 @@ class _$_LanguagePagination implements _LanguagePagination {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -16271,7 +16334,8 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -16512,7 +16576,7 @@ class _$_StatePagination implements _StatePagination {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -16554,7 +16618,7 @@ class _$_StatePagination implements _StatePagination {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -16605,7 +16669,7 @@ class _$_StatePagination implements _StatePagination {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -16646,7 +16710,8 @@ class _$_StatePagination implements _StatePagination {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -16696,7 +16761,7 @@ class _$_StatePagination implements _StatePagination {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -16737,7 +16802,8 @@ class _$_StatePagination implements _StatePagination {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -16978,7 +17044,7 @@ class _$_CityPagination implements _CityPagination {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -17020,7 +17086,7 @@ class _$_CityPagination implements _CityPagination {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -17071,7 +17137,7 @@ class _$_CityPagination implements _CityPagination {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -17112,7 +17178,8 @@ class _$_CityPagination implements _CityPagination {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -17162,7 +17229,7 @@ class _$_CityPagination implements _CityPagination {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -17203,7 +17270,8 @@ class _$_CityPagination implements _CityPagination {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -17444,7 +17512,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -17486,7 +17554,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -17537,7 +17605,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -17578,7 +17646,8 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -17628,7 +17697,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -17669,7 +17738,8 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -17843,7 +17913,7 @@ abstract class _$$_SubmitCaregiverServiceCopyWith<$Res> {
           $Res Function(_$_SubmitCaregiverService) then) =
       __$$_SubmitCaregiverServiceCopyWithImpl<$Res>;
   @useResult
-  $Res call({String userId, ServicesRequest services});
+  $Res call({String userId, Map<String, dynamic> services});
 }
 
 /// @nodoc
@@ -17866,9 +17936,9 @@ class __$$_SubmitCaregiverServiceCopyWithImpl<$Res>
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
       services: null == services
-          ? _value.services
+          ? _value._services
           : services // ignore: cast_nullable_to_non_nullable
-              as ServicesRequest,
+              as Map<String, dynamic>,
     ));
   }
 }
@@ -17877,12 +17947,18 @@ class __$$_SubmitCaregiverServiceCopyWithImpl<$Res>
 
 class _$_SubmitCaregiverService implements _SubmitCaregiverService {
   const _$_SubmitCaregiverService(
-      {required this.userId, required this.services});
+      {required this.userId, required final Map<String, dynamic> services})
+      : _services = services;
 
   @override
   final String userId;
+  final Map<String, dynamic> _services;
   @override
-  final ServicesRequest services;
+  Map<String, dynamic> get services {
+    if (_services is EqualUnmodifiableMapView) return _services;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_services);
+  }
 
   @override
   String toString() {
@@ -17895,12 +17971,12 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
         (other.runtimeType == runtimeType &&
             other is _$_SubmitCaregiverService &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.services, services) ||
-                other.services == services));
+            const DeepCollectionEquality().equals(other._services, _services));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId, services);
+  int get hashCode => Object.hash(
+      runtimeType, userId, const DeepCollectionEquality().hash(_services));
 
   @JsonKey(ignore: true)
   @override
@@ -17947,7 +18023,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -17989,7 +18065,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -18040,7 +18116,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -18081,7 +18157,8 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -18131,7 +18208,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -18172,7 +18249,8 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -18338,11 +18416,12 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
 
 abstract class _SubmitCaregiverService implements OnboardingEvent {
   const factory _SubmitCaregiverService(
-      {required final String userId,
-      required final ServicesRequest services}) = _$_SubmitCaregiverService;
+          {required final String userId,
+          required final Map<String, dynamic> services}) =
+      _$_SubmitCaregiverService;
 
   String get userId;
-  ServicesRequest get services;
+  Map<String, dynamic> get services;
   @JsonKey(ignore: true)
   _$$_SubmitCaregiverServiceCopyWith<_$_SubmitCaregiverService> get copyWith =>
       throw _privateConstructorUsedError;
@@ -18457,7 +18536,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -18499,7 +18578,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -18550,7 +18629,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -18591,7 +18670,8 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -18641,7 +18721,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -18682,7 +18762,8 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -18992,7 +19073,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -19034,7 +19115,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -19085,7 +19166,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -19126,7 +19207,8 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -19177,7 +19259,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -19218,7 +19300,8 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -19535,7 +19618,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)
         preferenceDetails,
     required TResult Function() commonData,
@@ -19577,7 +19660,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     required TResult Function() statePagination,
     required TResult Function() cityPagination,
     required TResult Function() getServices,
-    required TResult Function(String userId, ServicesRequest services)
+    required TResult Function(String userId, Map<String, dynamic> services)
         submitServices,
     required TResult Function(int index, bool value) serviceSelected,
     required TResult Function(String userId, String aboutYou, String hobbies,
@@ -19629,7 +19712,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult? Function()? commonData,
@@ -19670,7 +19753,8 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     TResult? Function()? statePagination,
     TResult? Function()? cityPagination,
     TResult? Function()? getServices,
-    TResult? Function(String userId, ServicesRequest services)? submitServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult? Function(int index, bool value)? serviceSelected,
     TResult? Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?
@@ -19721,7 +19805,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
             bool serveWithSmoker,
             bool willingToTransportation,
             bool willingToServeWithPets,
-            List<PetsList> petsList,
+            List<Map<String, dynamic>> petsList,
             List<String> knownLanguages)?
         preferenceDetails,
     TResult Function()? commonData,
@@ -19762,7 +19846,8 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     TResult Function()? statePagination,
     TResult Function()? cityPagination,
     TResult Function()? getServices,
-    TResult Function(String userId, ServicesRequest services)? submitServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
     TResult Function(int index, bool value)? serviceSelected,
     TResult Function(String userId, String aboutYou, String hobbies,
             String whyLoveBeingCaregiver)?

@@ -18,6 +18,9 @@ part 'admins_state.dart';
 class AdminsBloc extends Bloc<AdminEvent, AdminsState> {
   AdminsRepository adminsRepository;
 
+  int limit = 10;
+  int page = 1;
+
   AdminsBloc(this.adminsRepository) : super(AdminsState.initial()) {
     on<_GetAdmins>(_getAdmins);
     on<_AdminDelete>(_deleteRoles);
@@ -85,7 +88,8 @@ class AdminsBloc extends Bloc<AdminEvent, AdminsState> {
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
-        add(AdminEvent.getAdmins(userId: event.userID, page: 1, limit: 10));
+        add(AdminEvent.getAdmins(
+            userId: event.userID, page: page, limit: limit));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
@@ -115,7 +119,8 @@ class AdminsBloc extends Bloc<AdminEvent, AdminsState> {
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
-        add(AdminEvent.getAdmins(userId: event.userId, page: 1, limit: 10));
+        add(AdminEvent.getAdmins(
+            userId: event.userId, page: page, limit: limit));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }

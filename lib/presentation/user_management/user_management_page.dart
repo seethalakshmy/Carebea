@@ -1,10 +1,13 @@
-import 'package:auto_route/auto_route.dart';
+import 'dart:developer';
+
 import 'package:admin_580_tech/application/bloc/user_managment/user_management_bloc.dart';
-import 'package:admin_580_tech/core/custom_debugger.dart';
+import 'package:admin_580_tech/domain/user_management/model/user_list_response.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/infrastructure/user_management/users_repository.dart';
 import 'package:admin_580_tech/presentation/widget/custom_dropdown.dart';
 import 'package:admin_580_tech/presentation/widget/pagination_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,8 +16,8 @@ import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
-import '../../domain/user_management/model/user_response.dart';
-import '../../domain/user_management/model/users.dart';
+import '../../domain/admins/model/admin_get_response.dart';
+import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';
 import '../widget/custom_card.dart';
@@ -28,6 +31,8 @@ import '../widget/custom_text_field.dart';
 import '../widget/empty_view.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
+import '../widget/loader_view.dart';
+import '../widget/table_switch_box.dart';
 
 @RoutePage()
 class UserManagementPage extends StatefulWidget {
@@ -40,16 +45,15 @@ class UserManagementPage extends StatefulWidget {
 class _UserManagementPageState extends State<UserManagementPage> {
   late UserManagementBloc _userBloc;
 
-  List<Users> mUserList = [];
+  List<dynamic> mUserList = [];
   List<int> shimmerList = List.generate(10, (index) => (index));
   int _totalItems = 1;
-  int _page = 1;
-  final int _limit = 10;
+
   int pageIndex = 0;
   int _start = 0;
   int _end = 10;
   final TextEditingController _searchController = TextEditingController();
-  String userId = "6461c0f33ba4fd69bd494df0";
+  String? adminId;
 
   @override
   void initState() {
@@ -65,20 +69,33 @@ class _UserManagementPageState extends State<UserManagementPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        HeaderView(title: AppString.clientsCustomer.val),
-        CustomSizedBox(height: DBL.twenty.val),
-        _reBuildView(),
-      ],
-    );
+    return FutureBuilder(
+        future: SharedPreffUtil().init(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return LoaderView();
+          }
+          adminId = SharedPreffUtil().getAdminId;
+
+          return Column(
+            children: [
+              HeaderView(title: AppString.clientsCustomer.val),
+              CustomSizedBox(height: DBL.twenty.val),
+              _reBuildView(),
+            ],
+          );
+        });
   }
 
   BlocProvider<UserManagementBloc> _reBuildView() {
     return BlocProvider(
       create: (context) => _userBloc
         ..add(UserManagementEvent.getUsers(
-            userId: userId, page: _page, limit: _limit)),
+            userId: adminId ?? '',
+            page: _userBloc.page.toString(),
+            limit: _userBloc.limit.toString(),
+            searchTerm: _searchController.text.trim(),
+            filterId: null)),
       child: _bodyView(),
     );
   }
@@ -95,20 +112,22 @@ class _UserManagementPageState extends State<UserManagementPage> {
                 ? const TableLoaderView()
                 : state.isError
                     ? ErrorView(isClientError: false, errorMessage: state.error)
-                    : _usersView(context, state.response);
+                    : _usersView(context, state.response, state);
           },
         ),
       ),
     );
   }
 
-  _usersView(BuildContext context, UserResponse? value) {
+  _usersView(BuildContext context, UserListResponse? value,
+      UserManagementState state) {
     if (value?.status ?? false) {
-      if (value?.data?.users != null && value!.data!.users!.isNotEmpty) {
+      if (value?.data?.finalResult != null &&
+          value!.data!.finalResult!.isNotEmpty) {
         ///todo change later
         _totalItems = value.data?.pagination?.totals ?? 5000;
         mUserList.clear();
-        mUserList.addAll(value.data?.users ?? []);
+        mUserList.addAll(value.data?.finalResult ?? []);
       }
     }
     return mUserList.isNotEmpty
@@ -124,8 +143,8 @@ class _UserManagementPageState extends State<UserManagementPage> {
               ),
               CustomSizedBox(height: DBL.fifteen.val),
               CustomSizedBox(
-                height: (_limit + 1) * 48,
-                child: _usersTable(),
+                height: (_userBloc.limit + 1) * 48,
+                child: _usersTable(state, context),
               ),
               CustomSizedBox(height: DBL.twenty.val),
               _paginationView()
@@ -141,6 +160,14 @@ class _UserManagementPageState extends State<UserManagementPage> {
       controller: _searchController,
       hintText: AppString.search.val,
       hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
+      onSubmitted: (String value) {
+        _userBloc.add(UserManagementEvent.getUsers(
+            userId: adminId ?? '',
+            page: _userBloc.page.toString(),
+            limit: _userBloc.limit.toString(),
+            searchTerm: _searchController.text.trim(),
+            filterId: null));
+      },
       suffixIcon: CustomSvg(
         path: IMG.search.val,
         height: DBL.sixteen.val,
@@ -151,7 +178,14 @@ class _UserManagementPageState extends State<UserManagementPage> {
 
   CustomDropdown<int> _statusDropDown(BuildContext context) {
     return CustomDropdown<int>(
-      onChange: (int value, int index) => CustomLog.log(value.toString()),
+      onChange: (int value, int index) {
+        _userBloc.add(UserManagementEvent.getUsers(
+            userId: adminId ?? '',
+            page: _userBloc.page.toString(),
+            limit: _userBloc.limit.toString(),
+            searchTerm: _searchController.text.trim(),
+            filterId: value == 1 ? true : false));
+      },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
         width: DBL.oneForty.val,
@@ -198,38 +232,50 @@ class _UserManagementPageState extends State<UserManagementPage> {
   }
 
   _paginationView() {
-    final int totalPages = (_totalItems / _limit).ceil();
+    final int totalPages = (_totalItems / _userBloc.limit).ceil();
     return PaginationView(
-        page: _page,
+        page: _userBloc.page,
         totalPages: totalPages,
         end: _end,
         totalItems: _totalItems,
         start: _start,
         onNextPressed: () {
-          if (_page < totalPages) {
-            _page = _page + 1;
+          if (_userBloc.page < totalPages) {
+            _userBloc.page = _userBloc.page + 1;
             _userBloc.add(UserManagementEvent.getUsers(
-                userId: userId, page: _page, limit: _limit));
+                userId: adminId ?? '',
+                page: _userBloc.page.toString(),
+                limit: _userBloc.limit.toString(),
+                searchTerm: _searchController.text.trim(),
+                filterId: null));
             updateData();
           }
         },
         onItemPressed: (i) {
-          _page = i;
+          _userBloc.page = i;
           _userBloc.add(UserManagementEvent.getUsers(
-              userId: userId, page: _page, limit: _limit));
+              userId: adminId ?? '',
+              page: _userBloc.page.toString(),
+              limit: _userBloc.limit.toString(),
+              searchTerm: _searchController.text.trim(),
+              filterId: null));
           updateData();
         },
         onPreviousPressed: () {
-          if (_page > 1) {
-            _page = _page - 1;
+          if (_userBloc.page > 1) {
+            _userBloc.page = _userBloc.page - 1;
             _userBloc.add(UserManagementEvent.getUsers(
-                userId: userId, page: _page, limit: _limit));
+                userId: adminId ?? '',
+                page: _userBloc.page.toString(),
+                limit: _userBloc.limit.toString(),
+                searchTerm: _searchController.text.trim(),
+                filterId: null));
             updateData();
           }
         });
   }
 
-  _usersTable() {
+  _usersTable(UserManagementState state, BuildContext context) {
     return CSelectionArea(
       child: CDataTable2(
         minWidth: DBL.nineFifty.val,
@@ -243,12 +289,12 @@ class _UserManagementPageState extends State<UserManagementPage> {
             label: _columnsView(
                 text: AppString.slNo.val, fontWeight: FontWeight.bold),
           ),
-          DataColumn2(
-            size: ColumnSize.S,
-            fixedWidth: DBL.eighty.val,
-            label: _columnsView(
-                text: AppString.id.val, fontWeight: FontWeight.bold),
-          ),
+          // DataColumn2(
+          //   size: ColumnSize.S,
+          //   fixedWidth: DBL.eighty.val,
+          //   label: _columnsView(
+          //       text: AppString.id.val, fontWeight: FontWeight.bold),
+          // ),
           DataColumn2(
             fixedWidth: Responsive.isWeb(context)
                 ? MediaQuery.of(context).size.width * .17
@@ -292,22 +338,26 @@ class _UserManagementPageState extends State<UserManagementPage> {
               DataCell(_rowsView(
                 text: pageIndex.toString(),
               )),
-              DataCell(_rowsView(
-                text: item.userId.toString(),
-              )),
+              // DataCell(_rowsView(
+              //   text: item.userId.toString(),
+              // )),
               DataCell(_tableRowImage(
                   "${item.name?.firstName} ${item.name?.lastName}",
                   item.profile ?? "")),
               DataCell(_rowsView(text: item.email ?? "")),
               DataCell(_rowsView(text: item.mobile)),
               DataCell(_rowsView(text: item.role)),
-              DataCell(_statusBox(item.isActive ?? false)),
+              DataCell(_tableSwitchBox(item)),
+
+              // DataCell(_statusBox(item.isActive ?? false)),
               DataCell(Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   InkWell(
                       onTap: () {
-                        autoTabRouter!.setActiveIndex(4);
+                        autoTabRouter
+                            ?.navigate(UserManagementDetailRoute(id: item.id));
+                        // autoTabRouter!.setActiveIndex(4,);
                       },
                       child: CustomSvg(
                         path: IMG.eye.val,
@@ -321,31 +371,31 @@ class _UserManagementPageState extends State<UserManagementPage> {
                   CustomSizedBox(
                     width: DBL.twentyThree.val,
                   ),
-                  InkWell(
-                      onTap: () {},
-                      child: CustomSvg(
-                        path: IMG.refresh.val,
-                        height: Responsive.isWeb(context)
-                            ? DBL.fifteen.val
-                            : DBL.twelve.val,
-                        width: Responsive.isWeb(context)
-                            ? DBL.twenty.val
-                            : DBL.eighteen.val,
-                      )),
+                  // InkWell(
+                  //     onTap: () {},
+                  //     child: CustomSvg(
+                  //       path: IMG.refresh.val,
+                  //       height: Responsive.isWeb(context)
+                  //           ? DBL.fifteen.val
+                  //           : DBL.twelve.val,
+                  //       width: Responsive.isWeb(context)
+                  //           ? DBL.twenty.val
+                  //           : DBL.eighteen.val,
+                  //     )),
                   CustomSizedBox(
                     width: DBL.twentyThree.val,
                   ),
-                  InkWell(
-                      onTap: () {},
-                      child: CustomSvg(
-                        path: IMG.edit.val,
-                        height: Responsive.isWeb(context)
-                            ? DBL.fifteen.val
-                            : DBL.twelve.val,
-                        width: Responsive.isWeb(context)
-                            ? DBL.fifteen.val
-                            : DBL.twelve.val,
-                      )),
+                  // InkWell(
+                  //     onTap: () {},
+                  //     child: CustomSvg(
+                  //       path: IMG.edit.val,
+                  //       height: Responsive.isWeb(context)
+                  //           ? DBL.fifteen.val
+                  //           : DBL.twelve.val,
+                  //       width: Responsive.isWeb(context)
+                  //           ? DBL.fifteen.val
+                  //           : DBL.twelve.val,
+                  //     )),
                 ],
               )),
             ],
@@ -432,21 +482,40 @@ class _UserManagementPageState extends State<UserManagementPage> {
   }
 
   setIndex(int index) {
-    if (_page == 1) {
+    if (_userBloc.page == 1) {
       pageIndex = index + 1;
     } else {
-      pageIndex = ((_page * _limit) - 10) + index + 1;
+      pageIndex = ((_userBloc.page * _userBloc.limit) - 10) + index + 1;
     }
   }
 
   void updateData() {
-    if (_page == 1) {
+    if (_userBloc.page == 1) {
       _start = 0;
-      _end = mUserList.length < _limit ? mUserList.length : _limit;
+      _end = mUserList.length < _userBloc.limit
+          ? mUserList.length
+          : _userBloc.limit;
     } else {
-      _start = (_page * _limit) - 10;
+      _start = (_userBloc.page * _userBloc.limit) - 10;
       _end = _start + mUserList.length;
     }
+  }
+
+  _tableSwitchBox(FinalResult item) {
+    log("rebuilded ${item.status} ${item.name?.firstName}");
+
+    return TableSwitchBox(
+      value: item.status!,
+      onToggle: () {
+        bool status = item.status == true ? false : true;
+        _userBloc.add(UserManagementEvent.changeClientStatus(
+          userId: item.id ?? '',
+          adminId: adminId ?? '',
+          status: status,
+          context: context,
+        ));
+      },
+    );
   }
 
   bool isXs(context) => MediaQuery.of(context).size.width <= 560;

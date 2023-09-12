@@ -30,6 +30,7 @@ import '../widget/custom_text.dart';
 import '../widget/custom_text_field.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
+import '../widget/loader_view.dart';
 import '../widget/table_actions_view.dart';
 import '../widget/table_column_view.dart';
 
@@ -59,7 +60,6 @@ class _RolesPageState extends State<RolesPage> {
 
   @override
   void initState() {
-    _adminUserId = sharedPrefUtil.getAdminId;
     super.initState();
     _roleBloc = RolesBloc(RolesRepository());
     if (sharedPrefUtil.getPage != 0) {
@@ -77,14 +77,22 @@ class _RolesPageState extends State<RolesPage> {
   @override
   Widget build(BuildContext context) {
     CustomLog.log('width == ${MediaQuery.of(context).size.width}');
-    return Column(
-      children: [
-        HeaderView(
-          title: AppString.roleManagement.val,
-        ),
-        _rebuildView(),
-      ],
-    );
+    return FutureBuilder(
+        future: SharedPreffUtil().init(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return LoaderView();
+          }
+          _adminUserId = sharedPrefUtil.getAdminId;
+          return Column(
+            children: [
+              HeaderView(
+                title: AppString.roleManagement.val,
+              ),
+              _rebuildView(),
+            ],
+          );
+        });
   }
 
   BlocProvider<RolesBloc> _rebuildView() {

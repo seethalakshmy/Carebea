@@ -38,6 +38,7 @@ import '../widget/custom_text.dart';
 import '../widget/custom_text_field.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
+import '../widget/loader_view.dart';
 import '../widget/table_actions_view.dart';
 import '../widget/table_column_view.dart';
 
@@ -69,7 +70,6 @@ class _CareGiversPageState extends State<CareGiversPage> {
 
   @override
   void initState() {
-    _adminUserId = sharedPrefUtil.getAdminId;
     super.initState();
     CustomLog.log(":::page ${sharedPrefUtil.getTab}");
     if (sharedPrefUtil.getPage != 0 && sharedPrefUtil.getTab != 0) {
@@ -90,14 +90,23 @@ class _CareGiversPageState extends State<CareGiversPage> {
   @override
   Widget build(BuildContext context) {
     CustomLog.log('width == ${MediaQuery.of(context).size.width}');
-    return Column(
-      children: [
-        HeaderView(
-          title: AppString.careAmbassador.val,
-        ),
-        _rebuildView(),
-      ],
-    );
+    return FutureBuilder(
+        future: SharedPreffUtil().init(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return LoaderView();
+          }
+          _adminUserId = sharedPrefUtil.getAdminId;
+
+          return Column(
+            children: [
+              HeaderView(
+                title: AppString.careAmbassador.val,
+              ),
+              _rebuildView(),
+            ],
+          );
+        });
   }
 
   BlocProvider<CareGiversBloc> _rebuildView() {
