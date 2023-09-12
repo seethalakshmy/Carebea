@@ -27,6 +27,7 @@ class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
     on<_IsCheckedEdit>(_isCheckedEdit);
     on<_IsCheckedView>(_isCheckedView);
     on<_IsCheckedDelete>(_isCheckedDelete);
+    on<_IsCheckedCreate>(_isCheckedCreate);
   }
 
   _viewRole(_ViewRole event, Emitter<RoleCreationState> emit) async {
@@ -76,6 +77,7 @@ class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
               if (viewModule.write ?? false) {
                 module.isEdit = true;
                 module.isSelected = true;
+                module.isCreate = true;
               }
             }
           }
@@ -199,6 +201,22 @@ class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
     } else {
       moduleList.insert(
           index, moduleItem.copyWith(isDelete: true, isSelected: true));
+    }
+    final updatedResponse = moduleResponse.copyWith(module: moduleList);
+
+    emit(state.copyWith(moduleResponse: updatedResponse));
+  }
+
+  _isCheckedCreate(_IsCheckedCreate event, Emitter<RoleCreationState> emit) {
+    Module moduleItem = event.module;
+    ModuleResponse? moduleResponse = state.moduleResponse;
+    final index = moduleResponse!.module!.indexOf(moduleItem);
+    List<Module> moduleList = moduleResponse.module!..remove(moduleItem);
+    if (moduleItem.isCreate) {
+      moduleList.insert(index, moduleItem.copyWith(isCreate: false));
+    } else {
+      moduleList.insert(
+          index, moduleItem.copyWith(isCreate: true, isSelected: true));
     }
     final updatedResponse = moduleResponse.copyWith(module: moduleList);
 
