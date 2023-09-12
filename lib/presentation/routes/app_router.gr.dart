@@ -12,9 +12,9 @@ import 'package:admin_580_tech/presentation/admin_creation/admin_creation_page.d
     as _i2;
 import 'package:admin_580_tech/presentation/admins/admins_page.dart' as _i1;
 import 'package:admin_580_tech/presentation/care_ambassador_analytics/care_ambassador_analysis.dart'
-    as _i25;
+    as _i22;
 import 'package:admin_580_tech/presentation/care_ambassador_registeration/care_ambassador_registration.dart'
-    as _i27;
+    as _i23;
 import 'package:admin_580_tech/presentation/caregiver_creation/caregiver_creation_page.dart'
     as _i4;
 import 'package:admin_580_tech/presentation/caregiver_detail/caregiver_detail_page.dart'
@@ -29,40 +29,40 @@ import 'package:admin_580_tech/presentation/client_analytics/client_analytics_pa
     as _i24;
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart'
     as _i8;
-import 'package:admin_580_tech/presentation/faq/faq_screen.dart' as _i9;
+import 'package:admin_580_tech/presentation/faq/faq_screen.dart' as _i25;
 import 'package:admin_580_tech/presentation/faq_creation/faq_creation_screen.dart'
-    as _i10;
-import 'package:admin_580_tech/presentation/forgot_password/forgot_password_page.dart'
-    as _i11;
-import 'package:admin_580_tech/presentation/help_and_support/help_and_support_page.dart'
-    as _i12;
-import 'package:admin_580_tech/presentation/login/login_page.dart' as _i13;
-import 'package:admin_580_tech/presentation/mobile_otp_verification/mobile_otp_verification_page.dart'
-    as _i30;
-import 'package:admin_580_tech/presentation/on_boarding/modules/email_otp_varification/otp_varification_view.dart'
-    as _i29;
-import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart'
-    as _i14;
-import 'package:admin_580_tech/presentation/region_analytics/region_analytics_page.dart'
     as _i26;
+import 'package:admin_580_tech/presentation/forgot_password/forgot_password_page.dart'
+    as _i9;
+import 'package:admin_580_tech/presentation/help_and_support/help_and_support_page.dart'
+    as _i10;
+import 'package:admin_580_tech/presentation/login/login_page.dart' as _i11;
+import 'package:admin_580_tech/presentation/mobile_otp_verification/mobile_otp_verification_page.dart'
+    as _i27;
+import 'package:admin_580_tech/presentation/on_boarding/modules/email_otp_varification/otp_varification_view.dart'
+    as _i28;
+import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart'
+    as _i12;
+import 'package:admin_580_tech/presentation/region_analytics/region_analytics_page.dart'
+    as _i29;
 import 'package:admin_580_tech/presentation/reset_password/reset_password_page.dart'
-    as _i15;
+    as _i13;
 import 'package:admin_580_tech/presentation/role_creation/role_creation_page.dart'
-    as _i17;
-import 'package:admin_580_tech/presentation/roles/role_page.dart' as _i16;
+    as _i15;
+import 'package:admin_580_tech/presentation/roles/role_page.dart' as _i14;
 import 'package:admin_580_tech/presentation/service_request_management/service_request_management_page.dart'
-    as _i18;
+    as _i16;
 import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart'
-    as _i19;
-import 'package:admin_580_tech/presentation/signup/sign_up.dart' as _i28;
+    as _i17;
+import 'package:admin_580_tech/presentation/signup/sign_up.dart' as _i30;
 import 'package:admin_580_tech/presentation/support_tickets_detail/support_tickets_detail_page.dart'
-    as _i20;
+    as _i18;
 import 'package:admin_580_tech/presentation/transaction_management/transaction_management_page.dart'
-    as _i21;
+    as _i19;
 import 'package:admin_580_tech/presentation/user_management/user_management_page.dart'
-    as _i22;
+    as _i20;
 import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet_detail_page.dart'
-    as _i23;
+    as _i21;
 import 'package:auto_route/auto_route.dart' as _i31;
 import 'package:flutter/material.dart' as _i32;
 
@@ -167,64 +167,40 @@ abstract class $AppRouter extends _i31.RootStackRouter {
         child: const _i8.DashboardPage(),
       );
     },
-    FaqRoute.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i9.FaqPage(),
-      );
-    },
-    FaqCreationRoute.name: (routeData) {
-      final queryParams = routeData.queryParams;
-      final args = routeData.argsAs<FaqCreationRouteArgs>(
-          orElse: () => FaqCreationRouteArgs(
-                isView: queryParams.optString('view'),
-                isEdit: queryParams.optString('edit'),
-                id: queryParams.optString('id'),
-              ));
-      return _i31.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i10.FaqCreationPage(
-          key: args.key,
-          isView: args.isView,
-          isEdit: args.isEdit,
-          id: args.id,
-        ),
-      );
-    },
     ForgotPasswordRoute.name: (routeData) {
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i11.ForgotPasswordPage(),
+        child: const _i9.ForgotPasswordPage(),
       );
     },
     HelpAndSupportRoute.name: (routeData) {
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i12.HelpAndSupportPage(),
+        child: const _i10.HelpAndSupportPage(),
       );
     },
     LoginRoute.name: (routeData) {
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i13.LoginPage(),
+        child: const _i11.LoginPage(),
       );
     },
     OnboardingRoute.name: (routeData) {
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i14.OnboardingPage(),
+        child: const _i12.OnboardingPage(),
       );
     },
     ResetPasswordRoute.name: (routeData) {
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i15.ResetPasswordPage(),
+        child: const _i13.ResetPasswordPage(),
       );
     },
     RolesRoute.name: (routeData) {
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i16.RolesPage(),
+        child: const _i14.RolesPage(),
       );
     },
     RoleCreationRoute.name: (routeData) {
@@ -237,7 +213,7 @@ abstract class $AppRouter extends _i31.RootStackRouter {
               ));
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i17.RoleCreationPage(
+        child: _i15.RoleCreationPage(
           key: args.key,
           isView: args.isView,
           isEdit: args.isEdit,
@@ -248,37 +224,49 @@ abstract class $AppRouter extends _i31.RootStackRouter {
     ServiceRequestManagementRoute.name: (routeData) {
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i18.ServiceRequestManagementPage(),
+        child: const _i16.ServiceRequestManagementPage(),
       );
     },
     SideMenuRoute.name: (routeData) {
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i19.SideMenuPage(),
+        child: const _i17.SideMenuPage(),
       );
     },
     SupportTicketsDetailRoute.name: (routeData) {
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i20.SupportTicketsDetailPage(),
+        child: const _i18.SupportTicketsDetailPage(),
       );
     },
     TransactionManagementRoute.name: (routeData) {
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i21.TransactionManagementPage(),
+        child: const _i19.TransactionManagementPage(),
       );
     },
     UserManagementRoute.name: (routeData) {
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i22.UserManagementPage(),
+        child: const _i20.UserManagementPage(),
       );
     },
     UserManagementDetailRoute.name: (routeData) {
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i23.UserManagementDetailPage(),
+        child: const _i21.UserManagementDetailPage(),
+      );
+    },
+    CareAmbassadorAnalysisRoute.name: (routeData) {
+      return _i31.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i22.CareAmbassadorAnalysisPage(),
+      );
+    },
+    CareAmbassadorRegistrationRoute.name: (routeData) {
+      return _i31.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i23.CareAmbassadorRegistrationPage(),
       );
     },
     ClientAnalyticsRoute.name: (routeData) {
@@ -287,40 +275,52 @@ abstract class $AppRouter extends _i31.RootStackRouter {
         child: const _i24.ClientAnalyticsPage(),
       );
     },
-    CareAmbassadorAnalysisRoute.name: (routeData) {
+    FaqRoute.name: (routeData) {
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i25.CareAmbassadorAnalysisPage(),
+        child: const _i25.FaqPage(),
       );
     },
-    RegionAnalyticsRoute.name: (routeData) {
+    FaqCreationRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<FaqCreationRouteArgs>(
+          orElse: () => FaqCreationRouteArgs(
+                isView: queryParams.optString('view'),
+                isEdit: queryParams.optString('edit'),
+                id: queryParams.optString('id'),
+              ));
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i26.RegionAnalyticsPage(),
-      );
-    },
-    CareAmbassadorRegistrationRoute.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i27.CareAmbassadorRegistrationPage(),
-      );
-    },
-    SignUpRoute.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i28.SignUpPage(),
-      );
-    },
-    EmailOtpVerificationRoute.name: (routeData) {
-      return _i31.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i29.EmailOtpVerificationPage(),
+        child: _i26.FaqCreationPage(
+          key: args.key,
+          isView: args.isView,
+          isEdit: args.isEdit,
+          id: args.id,
+        ),
       );
     },
     MobileOtpVerificationRoute.name: (routeData) {
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i30.MobileOtpVerificationPage(),
+        child: const _i27.MobileOtpVerificationPage(),
+      );
+    },
+    EmailOtpVerificationRoute.name: (routeData) {
+      return _i31.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i28.EmailOtpVerificationPage(),
+      );
+    },
+    RegionAnalyticsRoute.name: (routeData) {
+      return _i31.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i29.RegionAnalyticsPage(),
+      );
+    },
+    SignUpRoute.name: (routeData) {
+      return _i31.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i30.SignUpPage(),
       );
     },
   };
@@ -581,74 +581,7 @@ class DashboardRoute extends _i31.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i9.FaqPage]
-class FaqRoute extends _i31.PageRouteInfo<void> {
-  const FaqRoute({List<_i31.PageRouteInfo>? children})
-      : super(
-          FaqRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'FaqRoute';
-
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i10.FaqCreationPage]
-class FaqCreationRoute extends _i31.PageRouteInfo<FaqCreationRouteArgs> {
-  FaqCreationRoute({
-    _i32.Key? key,
-    String? isView,
-    String? isEdit,
-    String? id,
-    List<_i31.PageRouteInfo>? children,
-  }) : super(
-          FaqCreationRoute.name,
-          args: FaqCreationRouteArgs(
-            key: key,
-            isView: isView,
-            isEdit: isEdit,
-            id: id,
-          ),
-          rawQueryParams: {
-            'view': isView,
-            'edit': isEdit,
-            'id': id,
-          },
-          initialChildren: children,
-        );
-
-  static const String name = 'FaqCreationRoute';
-
-  static const _i31.PageInfo<FaqCreationRouteArgs> page =
-      _i31.PageInfo<FaqCreationRouteArgs>(name);
-}
-
-class FaqCreationRouteArgs {
-  const FaqCreationRouteArgs({
-    this.key,
-    this.isView,
-    this.isEdit,
-    this.id,
-  });
-
-  final _i32.Key? key;
-
-  final String? isView;
-
-  final String? isEdit;
-
-  final String? id;
-
-  @override
-  String toString() {
-    return 'FaqCreationRouteArgs{key: $key, isView: $isView, isEdit: $isEdit, id: $id}';
-  }
-}
-
-/// generated route for
-/// [_i11.ForgotPasswordPage]
+/// [_i9.ForgotPasswordPage]
 class ForgotPasswordRoute extends _i31.PageRouteInfo<void> {
   const ForgotPasswordRoute({List<_i31.PageRouteInfo>? children})
       : super(
@@ -662,7 +595,7 @@ class ForgotPasswordRoute extends _i31.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i12.HelpAndSupportPage]
+/// [_i10.HelpAndSupportPage]
 class HelpAndSupportRoute extends _i31.PageRouteInfo<void> {
   const HelpAndSupportRoute({List<_i31.PageRouteInfo>? children})
       : super(
@@ -676,7 +609,7 @@ class HelpAndSupportRoute extends _i31.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i13.LoginPage]
+/// [_i11.LoginPage]
 class LoginRoute extends _i31.PageRouteInfo<void> {
   const LoginRoute({List<_i31.PageRouteInfo>? children})
       : super(
@@ -690,7 +623,7 @@ class LoginRoute extends _i31.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i14.OnboardingPage]
+/// [_i12.OnboardingPage]
 class OnboardingRoute extends _i31.PageRouteInfo<void> {
   const OnboardingRoute({List<_i31.PageRouteInfo>? children})
       : super(
@@ -704,7 +637,7 @@ class OnboardingRoute extends _i31.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i15.ResetPasswordPage]
+/// [_i13.ResetPasswordPage]
 class ResetPasswordRoute extends _i31.PageRouteInfo<void> {
   const ResetPasswordRoute({List<_i31.PageRouteInfo>? children})
       : super(
@@ -718,7 +651,7 @@ class ResetPasswordRoute extends _i31.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i16.RolesPage]
+/// [_i14.RolesPage]
 class RolesRoute extends _i31.PageRouteInfo<void> {
   const RolesRoute({List<_i31.PageRouteInfo>? children})
       : super(
@@ -732,7 +665,7 @@ class RolesRoute extends _i31.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i17.RoleCreationPage]
+/// [_i15.RoleCreationPage]
 class RoleCreationRoute extends _i31.PageRouteInfo<RoleCreationRouteArgs> {
   RoleCreationRoute({
     _i32.Key? key,
@@ -785,7 +718,7 @@ class RoleCreationRouteArgs {
 }
 
 /// generated route for
-/// [_i18.ServiceRequestManagementPage]
+/// [_i16.ServiceRequestManagementPage]
 class ServiceRequestManagementRoute extends _i31.PageRouteInfo<void> {
   const ServiceRequestManagementRoute({List<_i31.PageRouteInfo>? children})
       : super(
@@ -799,7 +732,7 @@ class ServiceRequestManagementRoute extends _i31.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i19.SideMenuPage]
+/// [_i17.SideMenuPage]
 class SideMenuRoute extends _i31.PageRouteInfo<void> {
   const SideMenuRoute({List<_i31.PageRouteInfo>? children})
       : super(
@@ -813,7 +746,7 @@ class SideMenuRoute extends _i31.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i20.SupportTicketsDetailPage]
+/// [_i18.SupportTicketsDetailPage]
 class SupportTicketsDetailRoute extends _i31.PageRouteInfo<void> {
   const SupportTicketsDetailRoute({List<_i31.PageRouteInfo>? children})
       : super(
@@ -827,7 +760,7 @@ class SupportTicketsDetailRoute extends _i31.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i21.TransactionManagementPage]
+/// [_i19.TransactionManagementPage]
 class TransactionManagementRoute extends _i31.PageRouteInfo<void> {
   const TransactionManagementRoute({List<_i31.PageRouteInfo>? children})
       : super(
@@ -841,7 +774,7 @@ class TransactionManagementRoute extends _i31.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i22.UserManagementPage]
+/// [_i20.UserManagementPage]
 class UserManagementRoute extends _i31.PageRouteInfo<void> {
   const UserManagementRoute({List<_i31.PageRouteInfo>? children})
       : super(
@@ -855,7 +788,7 @@ class UserManagementRoute extends _i31.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i23.UserManagementDetailPage]
+/// [_i21.UserManagementDetailPage]
 class UserManagementDetailRoute extends _i31.PageRouteInfo<void> {
   const UserManagementDetailRoute({List<_i31.PageRouteInfo>? children})
       : super(
@@ -864,6 +797,34 @@ class UserManagementDetailRoute extends _i31.PageRouteInfo<void> {
         );
 
   static const String name = 'UserManagementDetailRoute';
+
+  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i22.CareAmbassadorAnalysisPage]
+class CareAmbassadorAnalysisRoute extends _i31.PageRouteInfo<void> {
+  const CareAmbassadorAnalysisRoute({List<_i31.PageRouteInfo>? children})
+      : super(
+          CareAmbassadorAnalysisRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CareAmbassadorAnalysisRoute';
+
+  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i23.CareAmbassadorRegistrationPage]
+class CareAmbassadorRegistrationRoute extends _i31.PageRouteInfo<void> {
+  const CareAmbassadorRegistrationRoute({List<_i31.PageRouteInfo>? children})
+      : super(
+          CareAmbassadorRegistrationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CareAmbassadorRegistrationRoute';
 
   static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
 }
@@ -883,63 +844,88 @@ class ClientAnalyticsRoute extends _i31.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i25.CareAmbassadorAnalysisPage]
-class CareAmbassadorAnalysisRoute extends _i31.PageRouteInfo<void> {
-  const CareAmbassadorAnalysisRoute({List<_i31.PageRouteInfo>? children})
+/// [_i25.FaqPage]
+class FaqRoute extends _i31.PageRouteInfo<void> {
+  const FaqRoute({List<_i31.PageRouteInfo>? children})
       : super(
-          CareAmbassadorAnalysisRoute.name,
+          FaqRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'CareAmbassadorAnalysisRoute';
+  static const String name = 'FaqRoute';
 
   static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i26.RegionAnalyticsPage]
-class RegionAnalyticsRoute extends _i31.PageRouteInfo<void> {
-  const RegionAnalyticsRoute({List<_i31.PageRouteInfo>? children})
-      : super(
-          RegionAnalyticsRoute.name,
+/// [_i26.FaqCreationPage]
+class FaqCreationRoute extends _i31.PageRouteInfo<FaqCreationRouteArgs> {
+  FaqCreationRoute({
+    _i32.Key? key,
+    String? isView,
+    String? isEdit,
+    String? id,
+    List<_i31.PageRouteInfo>? children,
+  }) : super(
+          FaqCreationRoute.name,
+          args: FaqCreationRouteArgs(
+            key: key,
+            isView: isView,
+            isEdit: isEdit,
+            id: id,
+          ),
+          rawQueryParams: {
+            'view': isView,
+            'edit': isEdit,
+            'id': id,
+          },
           initialChildren: children,
         );
 
-  static const String name = 'RegionAnalyticsRoute';
+  static const String name = 'FaqCreationRoute';
+
+  static const _i31.PageInfo<FaqCreationRouteArgs> page =
+      _i31.PageInfo<FaqCreationRouteArgs>(name);
+}
+
+class FaqCreationRouteArgs {
+  const FaqCreationRouteArgs({
+    this.key,
+    this.isView,
+    this.isEdit,
+    this.id,
+  });
+
+  final _i32.Key? key;
+
+  final String? isView;
+
+  final String? isEdit;
+
+  final String? id;
+
+  @override
+  String toString() {
+    return 'FaqCreationRouteArgs{key: $key, isView: $isView, isEdit: $isEdit, id: $id}';
+  }
+}
+
+/// generated route for
+/// [_i27.MobileOtpVerificationPage]
+class MobileOtpVerificationRoute extends _i31.PageRouteInfo<void> {
+  const MobileOtpVerificationRoute({List<_i31.PageRouteInfo>? children})
+      : super(
+          MobileOtpVerificationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MobileOtpVerificationRoute';
 
   static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i27.CareAmbassadorRegistrationPage]
-class CareAmbassadorRegistrationRoute extends _i31.PageRouteInfo<void> {
-  const CareAmbassadorRegistrationRoute({List<_i31.PageRouteInfo>? children})
-      : super(
-          CareAmbassadorRegistrationRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'CareAmbassadorRegistrationRoute';
-
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i28.SignUpPage]
-class SignUpRoute extends _i31.PageRouteInfo<void> {
-  const SignUpRoute({List<_i31.PageRouteInfo>? children})
-      : super(
-          SignUpRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'SignUpRoute';
-
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i29.EmailOtpVerificationPage]
+/// [_i28.EmailOtpVerificationPage]
 class EmailOtpVerificationRoute extends _i31.PageRouteInfo<void> {
   const EmailOtpVerificationRoute({List<_i31.PageRouteInfo>? children})
       : super(
@@ -953,15 +939,29 @@ class EmailOtpVerificationRoute extends _i31.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i30.MobileOtpVerificationPage]
-class MobileOtpVerificationRoute extends _i31.PageRouteInfo<void> {
-  const MobileOtpVerificationRoute({List<_i31.PageRouteInfo>? children})
+/// [_i29.RegionAnalyticsPage]
+class RegionAnalyticsRoute extends _i31.PageRouteInfo<void> {
+  const RegionAnalyticsRoute({List<_i31.PageRouteInfo>? children})
       : super(
-          MobileOtpVerificationRoute.name,
+          RegionAnalyticsRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'MobileOtpVerificationRoute';
+  static const String name = 'RegionAnalyticsRoute';
+
+  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i30.SignUpPage]
+class SignUpRoute extends _i31.PageRouteInfo<void> {
+  const SignUpRoute({List<_i31.PageRouteInfo>? children})
+      : super(
+          SignUpRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SignUpRoute';
 
   static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
 }
