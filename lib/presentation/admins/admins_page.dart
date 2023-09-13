@@ -56,7 +56,6 @@ class _AdminsPageState extends State<AdminsPage> {
   int _pageIndex = 0;
   int _start = 0;
   int _end = 10;
-  final TextEditingController _searchController = TextEditingController();
   final _searchNode = FocusNode();
 
   late AdminsBloc _adminsBloc;
@@ -74,7 +73,7 @@ class _AdminsPageState extends State<AdminsPage> {
 
   @override
   void dispose() {
-    _searchController.dispose();
+    _adminsBloc.searchController.dispose();
     _searchNode.dispose();
     super.dispose();
   }
@@ -110,6 +109,7 @@ class _AdminsPageState extends State<AdminsPage> {
           userId: _adminUserId,
           page: _adminsBloc.page,
           limit: _adminsBloc.limit,
+          searchTerm: _adminsBloc.searchController.text.trim(),
         )),
       child: _bodyView(),
     );
@@ -142,7 +142,7 @@ class _AdminsPageState extends State<AdminsPage> {
 
   _resetValues() {
     _adminsBloc.page = 1;
-    _searchController.clear();
+    _adminsBloc.searchController.clear();
     filterId = null;
   }
 
@@ -406,7 +406,7 @@ class _AdminsPageState extends State<AdminsPage> {
       focusNode: _searchNode,
       width: _isXs(context) ? DBL.threeFifteen.val : DBL.threeHundred.val,
       height: DBL.forty.val,
-      controller: _searchController,
+      controller: _adminsBloc.searchController,
       hintText: AppString.search.val,
       hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
       onSubmitted: (String value) {
@@ -607,9 +607,9 @@ class _AdminsPageState extends State<AdminsPage> {
         limit: _adminsBloc.limit,
         status: filterId,
         roleId: roleId,
-        searchTerm: _searchController.text.trim().isNotEmpty
-            ? _searchController.text.trim()
-            : null));
+        searchTerm: _adminsBloc.searchController.text.trim().isNotEmpty
+            ? _adminsBloc.searchController.text.trim()
+            : ''));
   }
 
   _setIndex(int index) {

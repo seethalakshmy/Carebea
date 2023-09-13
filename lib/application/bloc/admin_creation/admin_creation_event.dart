@@ -12,9 +12,8 @@ class AdminCreationEvent with _$AdminCreationEvent {
       required String mobile,
       String? profilePic}) = _AddAdmin;
 
-  const factory AdminCreationEvent.getRoles({
-    required String userId,
-  }) = _GetRoles;
+  const factory AdminCreationEvent.getRoles(
+      {required String userId, required String searchTerm}) = _GetRoles;
 
   const factory AdminCreationEvent.updateAdmin(
       {required String userId,
@@ -27,10 +26,10 @@ class AdminCreationEvent with _$AdminCreationEvent {
       required String mobile,
       String? profilePic}) = _UpdateAdmin;
 
-  const factory AdminCreationEvent.viewAdmin({
-    required String userId,
-    required String adminId,
-  }) = _ViewAdmin;
+  const factory AdminCreationEvent.viewAdmin(
+      {required String userId,
+      required String adminId,
+      required String searchTerm}) = _ViewAdmin;
   const factory AdminCreationEvent.dropDownErrorDisplay({
     required bool value,
   }) = _DropDownErrorDisplay;

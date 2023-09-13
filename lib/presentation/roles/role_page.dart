@@ -102,6 +102,7 @@ class _RolesPageState extends State<RolesPage> {
           userId: _adminUserId,
           page: _page,
           limit: _limit,
+          searchTerm: _searchController.text,
         )),
       child: _bodyView(),
     );
@@ -378,7 +379,7 @@ class _RolesPageState extends State<RolesPage> {
         limit: _limit,
         searchTerm: _searchController.text.trim().isNotEmpty
             ? _searchController.text.trim()
-            : null));
+            : ''));
   }
 
   _deletePopup(

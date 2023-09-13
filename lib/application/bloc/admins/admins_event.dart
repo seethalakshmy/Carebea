@@ -6,13 +6,12 @@ class AdminEvent with _$AdminEvent {
     required String userId,
     required int page,
     required int limit,
-    String? searchTerm,
+    required String searchTerm,
     String? status,
     String? roleId,
   }) = _GetAdmins;
-  const factory AdminEvent.getRoles({
-    required String userId,
-  }) = _GetRoles;
+  const factory AdminEvent.getRoles(
+      {required String userId, required String searchTerm}) = _GetRoles;
 
   const factory AdminEvent.adminDelete(
       {required String adminID,

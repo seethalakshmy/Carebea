@@ -19,9 +19,9 @@ mixin _$AdminEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, int page, int limit,
-            String? searchTerm, String? status, String? roleId)
+            String searchTerm, String? status, String? roleId)
         getAdmins,
-    required TResult Function(String userId) getRoles,
+    required TResult Function(String userId, String searchTerm) getRoles,
     required TResult Function(
             String adminID, String userID, BuildContext context)
         adminDelete,
@@ -32,10 +32,10 @@ mixin _$AdminEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, int page, int limit, String? searchTerm,
+    TResult? Function(String userId, int page, int limit, String searchTerm,
             String? status, String? roleId)?
         getAdmins,
-    TResult? Function(String userId)? getRoles,
+    TResult? Function(String userId, String searchTerm)? getRoles,
     TResult? Function(String adminID, String userID, BuildContext context)?
         adminDelete,
     TResult? Function(String userId, String status, BuildContext context)?
@@ -44,10 +44,10 @@ mixin _$AdminEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, int page, int limit, String? searchTerm,
+    TResult Function(String userId, int page, int limit, String searchTerm,
             String? status, String? roleId)?
         getAdmins,
-    TResult Function(String userId)? getRoles,
+    TResult Function(String userId, String searchTerm)? getRoles,
     TResult Function(String adminID, String userID, BuildContext context)?
         adminDelete,
     TResult Function(String userId, String status, BuildContext context)?
@@ -110,7 +110,7 @@ abstract class _$$_GetAdminsCopyWith<$Res> {
       {String userId,
       int page,
       int limit,
-      String? searchTerm,
+      String searchTerm,
       String? status,
       String? roleId});
 }
@@ -129,7 +129,7 @@ class __$$_GetAdminsCopyWithImpl<$Res>
     Object? userId = null,
     Object? page = null,
     Object? limit = null,
-    Object? searchTerm = freezed,
+    Object? searchTerm = null,
     Object? status = freezed,
     Object? roleId = freezed,
   }) {
@@ -146,10 +146,10 @@ class __$$_GetAdminsCopyWithImpl<$Res>
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
               as int,
-      searchTerm: freezed == searchTerm
+      searchTerm: null == searchTerm
           ? _value.searchTerm
           : searchTerm // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -169,7 +169,7 @@ class _$_GetAdmins implements _GetAdmins {
       {required this.userId,
       required this.page,
       required this.limit,
-      this.searchTerm,
+      required this.searchTerm,
       this.status,
       this.roleId});
 
@@ -180,7 +180,7 @@ class _$_GetAdmins implements _GetAdmins {
   @override
   final int limit;
   @override
-  final String? searchTerm;
+  final String searchTerm;
   @override
   final String? status;
   @override
@@ -219,9 +219,9 @@ class _$_GetAdmins implements _GetAdmins {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, int page, int limit,
-            String? searchTerm, String? status, String? roleId)
+            String searchTerm, String? status, String? roleId)
         getAdmins,
-    required TResult Function(String userId) getRoles,
+    required TResult Function(String userId, String searchTerm) getRoles,
     required TResult Function(
             String adminID, String userID, BuildContext context)
         adminDelete,
@@ -235,10 +235,10 @@ class _$_GetAdmins implements _GetAdmins {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, int page, int limit, String? searchTerm,
+    TResult? Function(String userId, int page, int limit, String searchTerm,
             String? status, String? roleId)?
         getAdmins,
-    TResult? Function(String userId)? getRoles,
+    TResult? Function(String userId, String searchTerm)? getRoles,
     TResult? Function(String adminID, String userID, BuildContext context)?
         adminDelete,
     TResult? Function(String userId, String status, BuildContext context)?
@@ -250,10 +250,10 @@ class _$_GetAdmins implements _GetAdmins {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, int page, int limit, String? searchTerm,
+    TResult Function(String userId, int page, int limit, String searchTerm,
             String? status, String? roleId)?
         getAdmins,
-    TResult Function(String userId)? getRoles,
+    TResult Function(String userId, String searchTerm)? getRoles,
     TResult Function(String adminID, String userID, BuildContext context)?
         adminDelete,
     TResult Function(String userId, String status, BuildContext context)?
@@ -309,14 +309,14 @@ abstract class _GetAdmins implements AdminEvent {
       {required final String userId,
       required final int page,
       required final int limit,
-      final String? searchTerm,
+      required final String searchTerm,
       final String? status,
       final String? roleId}) = _$_GetAdmins;
 
   String get userId;
   int get page;
   int get limit;
-  String? get searchTerm;
+  String get searchTerm;
   String? get status;
   String? get roleId;
   @JsonKey(ignore: true)
@@ -330,7 +330,7 @@ abstract class _$$_GetRolesCopyWith<$Res> {
           _$_GetRoles value, $Res Function(_$_GetRoles) then) =
       __$$_GetRolesCopyWithImpl<$Res>;
   @useResult
-  $Res call({String userId});
+  $Res call({String userId, String searchTerm});
 }
 
 /// @nodoc
@@ -345,11 +345,16 @@ class __$$_GetRolesCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = null,
+    Object? searchTerm = null,
   }) {
     return _then(_$_GetRoles(
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      searchTerm: null == searchTerm
+          ? _value.searchTerm
+          : searchTerm // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -358,14 +363,16 @@ class __$$_GetRolesCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_GetRoles implements _GetRoles {
-  const _$_GetRoles({required this.userId});
+  const _$_GetRoles({required this.userId, required this.searchTerm});
 
   @override
   final String userId;
+  @override
+  final String searchTerm;
 
   @override
   String toString() {
-    return 'AdminEvent.getRoles(userId: $userId)';
+    return 'AdminEvent.getRoles(userId: $userId, searchTerm: $searchTerm)';
   }
 
   @override
@@ -373,11 +380,13 @@ class _$_GetRoles implements _GetRoles {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_GetRoles &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.searchTerm, searchTerm) ||
+                other.searchTerm == searchTerm));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId);
+  int get hashCode => Object.hash(runtimeType, userId, searchTerm);
 
   @JsonKey(ignore: true)
   @override
@@ -389,9 +398,9 @@ class _$_GetRoles implements _GetRoles {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, int page, int limit,
-            String? searchTerm, String? status, String? roleId)
+            String searchTerm, String? status, String? roleId)
         getAdmins,
-    required TResult Function(String userId) getRoles,
+    required TResult Function(String userId, String searchTerm) getRoles,
     required TResult Function(
             String adminID, String userID, BuildContext context)
         adminDelete,
@@ -399,31 +408,31 @@ class _$_GetRoles implements _GetRoles {
             String userId, String status, BuildContext context)
         changeAdminStatus,
   }) {
-    return getRoles(userId);
+    return getRoles(userId, searchTerm);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, int page, int limit, String? searchTerm,
+    TResult? Function(String userId, int page, int limit, String searchTerm,
             String? status, String? roleId)?
         getAdmins,
-    TResult? Function(String userId)? getRoles,
+    TResult? Function(String userId, String searchTerm)? getRoles,
     TResult? Function(String adminID, String userID, BuildContext context)?
         adminDelete,
     TResult? Function(String userId, String status, BuildContext context)?
         changeAdminStatus,
   }) {
-    return getRoles?.call(userId);
+    return getRoles?.call(userId, searchTerm);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, int page, int limit, String? searchTerm,
+    TResult Function(String userId, int page, int limit, String searchTerm,
             String? status, String? roleId)?
         getAdmins,
-    TResult Function(String userId)? getRoles,
+    TResult Function(String userId, String searchTerm)? getRoles,
     TResult Function(String adminID, String userID, BuildContext context)?
         adminDelete,
     TResult Function(String userId, String status, BuildContext context)?
@@ -431,7 +440,7 @@ class _$_GetRoles implements _GetRoles {
     required TResult orElse(),
   }) {
     if (getRoles != null) {
-      return getRoles(userId);
+      return getRoles(userId, searchTerm);
     }
     return orElse();
   }
@@ -475,9 +484,12 @@ class _$_GetRoles implements _GetRoles {
 }
 
 abstract class _GetRoles implements AdminEvent {
-  const factory _GetRoles({required final String userId}) = _$_GetRoles;
+  const factory _GetRoles(
+      {required final String userId,
+      required final String searchTerm}) = _$_GetRoles;
 
   String get userId;
+  String get searchTerm;
   @JsonKey(ignore: true)
   _$$_GetRolesCopyWith<_$_GetRoles> get copyWith =>
       throw _privateConstructorUsedError;
@@ -565,9 +577,9 @@ class _$_AdminDelete implements _AdminDelete {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, int page, int limit,
-            String? searchTerm, String? status, String? roleId)
+            String searchTerm, String? status, String? roleId)
         getAdmins,
-    required TResult Function(String userId) getRoles,
+    required TResult Function(String userId, String searchTerm) getRoles,
     required TResult Function(
             String adminID, String userID, BuildContext context)
         adminDelete,
@@ -581,10 +593,10 @@ class _$_AdminDelete implements _AdminDelete {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, int page, int limit, String? searchTerm,
+    TResult? Function(String userId, int page, int limit, String searchTerm,
             String? status, String? roleId)?
         getAdmins,
-    TResult? Function(String userId)? getRoles,
+    TResult? Function(String userId, String searchTerm)? getRoles,
     TResult? Function(String adminID, String userID, BuildContext context)?
         adminDelete,
     TResult? Function(String userId, String status, BuildContext context)?
@@ -596,10 +608,10 @@ class _$_AdminDelete implements _AdminDelete {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, int page, int limit, String? searchTerm,
+    TResult Function(String userId, int page, int limit, String searchTerm,
             String? status, String? roleId)?
         getAdmins,
-    TResult Function(String userId)? getRoles,
+    TResult Function(String userId, String searchTerm)? getRoles,
     TResult Function(String adminID, String userID, BuildContext context)?
         adminDelete,
     TResult Function(String userId, String status, BuildContext context)?
@@ -747,9 +759,9 @@ class _$_ChangeAdminStatus implements _ChangeAdminStatus {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, int page, int limit,
-            String? searchTerm, String? status, String? roleId)
+            String searchTerm, String? status, String? roleId)
         getAdmins,
-    required TResult Function(String userId) getRoles,
+    required TResult Function(String userId, String searchTerm) getRoles,
     required TResult Function(
             String adminID, String userID, BuildContext context)
         adminDelete,
@@ -763,10 +775,10 @@ class _$_ChangeAdminStatus implements _ChangeAdminStatus {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, int page, int limit, String? searchTerm,
+    TResult? Function(String userId, int page, int limit, String searchTerm,
             String? status, String? roleId)?
         getAdmins,
-    TResult? Function(String userId)? getRoles,
+    TResult? Function(String userId, String searchTerm)? getRoles,
     TResult? Function(String adminID, String userID, BuildContext context)?
         adminDelete,
     TResult? Function(String userId, String status, BuildContext context)?
@@ -778,10 +790,10 @@ class _$_ChangeAdminStatus implements _ChangeAdminStatus {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, int page, int limit, String? searchTerm,
+    TResult Function(String userId, int page, int limit, String searchTerm,
             String? status, String? roleId)?
         getAdmins,
-    TResult Function(String userId)? getRoles,
+    TResult Function(String userId, String searchTerm)? getRoles,
     TResult Function(String adminID, String userID, BuildContext context)?
         adminDelete,
     TResult Function(String userId, String status, BuildContext context)?

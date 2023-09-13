@@ -19,13 +19,13 @@ import '../../widget/custom_text.dart';
 import '../../widget/empty_view.dart';
 import '../../widget/error_view.dart';
 
-class SubProfileView extends StatelessWidget {
-  const SubProfileView({Key? key, required this.state}) : super(key: key);
+class ServiceView extends StatelessWidget {
+  const ServiceView({Key? key, required this.state}) : super(key: key);
   final UserManagementDetailState state;
 
   @override
   Widget build(BuildContext context) {
-    final mSubProfiles = state.response?.data?.subProfiles ?? [];
+    final services = state.response?.data?.services ?? [];
     return CustomCard(
       elevation: DBL.seven.val,
       child: CustomContainer(
@@ -33,7 +33,7 @@ class SubProfileView extends StatelessWidget {
               ? const TableLoaderView()
               : state.isError
                   ? ErrorView(isClientError: false, errorMessage: state.error)
-                  : mSubProfiles.isNotEmpty
+                  : services.isNotEmpty
                       ? CustomPadding.only(
                           left: DBL.twenty.val,
                           right: DBL.nineteen.val,
@@ -46,18 +46,18 @@ class SubProfileView extends StatelessWidget {
                                 ),
                                 CustomSizedBox(
                                   height: (10 + 1) * 48,
-                                  child: _profilesTable(mSubProfiles, context),
+                                  child: _serviceTable(services, context),
                                 ),
                                 CustomSizedBox(height: DBL.twenty.val),
                               ],
                             ),
                           ),
                         )
-                      : EmptyView(title: AppString.noProfiles.val)),
+                      : EmptyView(title: AppString.noServices.val)),
     );
   }
 
-  _profilesTable(List<SubProfiles> profiles, BuildContext context) {
+  _serviceTable(List<Services> services, BuildContext context) {
     return CSelectionArea(
       child: CDataTable2(
         minWidth: 950,
@@ -80,20 +80,70 @@ class SubProfileView extends StatelessWidget {
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
-                text: AppString.nameAndAge.val, fontWeight: FontWeight.bold),
+                text: AppString.client.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
-                text: AppString.totalServiceCompleted.val,
+                text: AppString.careAmbassador.val,
                 fontWeight: FontWeight.bold),
           ),
-          const DataColumn2(
+          DataColumn2(
             size: ColumnSize.L,
-            label: CustomText(""),
+            label: _columnsView(context,
+                text: AppString.service.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.startDateAndTime.val,
+                fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.endDateAndTime.val,
+                fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.serviceFee.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.extraFee.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.tip.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.refund.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.reviewFromClient.val,
+                fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.feedbackFromClient.val,
+                fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.status.val, fontWeight: FontWeight.bold),
           ),
         ],
-        rows: profiles.asMap().entries.map((e) {
+        rows: services.asMap().entries.map((e) {
           getIndex(e.key);
           var item = e.value;
           return DataRow2(
@@ -106,26 +156,42 @@ class SubProfileView extends StatelessWidget {
               //   context,
               //   text: item.id.toString(),
               // )),
-              DataCell(_tableRowImage(context,
-                  name: "${item.name?.firstName} ${item.name?.lastName}",
-                  imgUrl: item.profilePic ?? "",
-                  age: int.tryParse(item.age ?? '') ?? 1)),
-              DataCell(_rowsView(context,
-                  text: item.completedServices?.first.toString())),
-              DataCell(InkWell(
-                  onTap: () {},
-                  child: CustomContainer(
-                    alignment: Alignment.centerRight,
-                    child: CustomSvg(
-                      path: IMG.eye.val,
-                      height: Responsive.isWeb(context)
-                          ? DBL.fifteen.val
-                          : DBL.twelve.val,
-                      width: Responsive.isWeb(context)
-                          ? DBL.twenty.val
-                          : DBL.eighteen.val,
-                    ),
-                  ))),
+              DataCell(_tableRowImage(
+                context,
+                name: "${item.client?.firstName} ${item.client?.lastName}",
+                imgUrl: item.client?.profilePic ?? "",
+              )),
+              DataCell(_tableRowImage(
+                context,
+                name:
+                    "${item.caregiver?.firstName?.name?.firstName} ${item.caregiver?.lastName}",
+                imgUrl: item.caregiver?.profilePic ?? "",
+              )),
+              DataCell(_rowsView(context, text: '1')),
+              DataCell(_rowsView(context, text: item.startDateTime)),
+              DataCell(_rowsView(context, text: item.endDateTime)),
+              DataCell(
+                  _rowsView(context, text: item.totalServiceFee.toString())),
+              DataCell(_rowsView(context, text: "10")),
+              DataCell(_rowsView(context, text: "1")),
+              DataCell(_rowsView(context, text: "1")),
+              DataCell(_rowsView(context, text: "1")),
+              DataCell(_rowsView(context, text: "22")),
+              DataCell(_rowsView(context, text: item.status.toString())),
+              // DataCell(InkWell(
+              //     onTap: () {},
+              //     child: CustomContainer(
+              //       alignment: Alignment.centerRight,
+              //       child: CustomSvg(
+              //         path: IMG.eye.val,
+              //         height: Responsive.isWeb(context)
+              //             ? DBL.fifteen.val
+              //             : DBL.twelve.val,
+              //         width: Responsive.isWeb(context)
+              //             ? DBL.twenty.val
+              //             : DBL.eighteen.val,
+              //       ),
+              //     ))),
             ],
           );
         }).toList(),
@@ -165,7 +231,7 @@ class SubProfileView extends StatelessWidget {
   }
 
   Widget _tableRowImage(BuildContext context,
-      {required String name, required String imgUrl, required int age}) {
+      {required String name, required String imgUrl}) {
     return Row(
       children: [
         ClipRRect(
@@ -194,18 +260,6 @@ class SubProfileView extends StatelessWidget {
             ),
             CustomSizedBox(
               height: DBL.three.val,
-            ),
-            Expanded(
-              flex: 2,
-              child: CustomText(
-                "(${age.toString()})",
-                style: TS().gRoboto(
-                    fontSize: Responsive.isWeb(context)
-                        ? DBL.thirteen.val
-                        : DBL.eleven.val,
-                    fontWeight: FW.w400.val,
-                    color: AppColor.lightGrey7.val),
-              ),
             ),
           ],
         ),

@@ -1,4 +1,6 @@
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
+import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_view.dart';
+import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/transactions_view.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:admin_580_tech/application/bloc/user_management_detail/user_management_detail_bloc.dart';
 import 'package:admin_580_tech/core/custom_debugger.dart';
@@ -410,7 +412,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
               Tab(icon: Text(AppString.clientProfiles.val)),
               Tab(icon: Text(AppString.paymentMethod.val)),
               Tab(icon: Text(AppString.services.val)),
-              Tab(icon: Text(AppString.services.val)),
+              Tab(icon: Text(AppString.transaction.val)),
             ],
             controller: tabController,
           ),
@@ -425,12 +427,8 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                   PaymentMethodView(
                     state: state,
                   ),
-                  Container(
-                    color: Colors.white,
-                  ),
-                  Container(
-                    color: Colors.white,
-                  )
+                  ServiceView(state: state),
+                  TransactionView(state: state)
                   /*buildOffersListView(),*/
                 ],
               ),

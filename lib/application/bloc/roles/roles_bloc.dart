@@ -74,6 +74,7 @@ class RolesBloc extends Bloc<RolesEvent, RolesState> {
     emit(
       homeState,
     );
-    add(RolesEvent.getRoles(userId: event.userId, page: 1, limit: 10));
+    add(RolesEvent.getRoles(
+        userId: event.userId, page: 1, limit: 10, searchTerm: ''));
   }
 }

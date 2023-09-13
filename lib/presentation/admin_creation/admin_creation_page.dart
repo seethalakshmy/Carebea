@@ -2,7 +2,6 @@ import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
 import 'package:admin_580_tech/infrastructure/admin_creation/admin_creation_repository.dart';
 import 'package:admin_580_tech/presentation/admin_creation/widgets/admin_profile_pic.dart';
-import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
@@ -20,7 +19,6 @@ import '../../core/text_styles.dart';
 import '../../infrastructure/api_service_s3.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../on_boarding/modules/personal_details/widgets/mobile_number_formatter.dart';
-import '../on_boarding/modules/personal_details/widgets/profile_picture_widget.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
@@ -111,10 +109,11 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
         if (adminId.isNotEmpty) {
           return _adminCreationBloc
             ..add(AdminCreationEvent.viewAdmin(
-                userId: adminUserID, adminId: adminId));
+                userId: adminUserID, adminId: adminId, searchTerm: ''));
         } else {
           return _adminCreationBloc
-            ..add(AdminCreationEvent.getRoles(userId: adminUserID));
+            ..add(AdminCreationEvent.getRoles(
+                userId: adminUserID, searchTerm: ''));
         }
       },
       child: BlocBuilder<AdminCreationBloc, AdminCreationState>(

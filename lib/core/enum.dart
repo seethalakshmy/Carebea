@@ -15,6 +15,8 @@ enum AppString {
   endTime("End Time"),
   tryAgain("Try Again"),
   ok("Ok"),
+  reviewFromClient("Review From Client"),
+  feedbackFromClient("Feedback From Client"),
   passwordCriteria(
       'Password must be 8 to 32 characters including upper/lower case letters/numbers\nand at least one special characters'),
   profile("Profile"),
@@ -389,7 +391,8 @@ enum AppString {
   emptyBLSNo("Please enter BLS certification number"),
   emptyTBNo("Please enter TB result number"),
   emptyRole("Role name shouldn't be empty"),
-  emptyModule("You Should Select at least one module with at least one privilege"),
+  emptyModule(
+      "You Should Select at least one module with at least one privilege"),
   emptyProfilePic("Please select your profile picture"),
   errorUploadingFile("Error uploading file, Please try again"),
   serviceRequestManagement("Service Request Management"),

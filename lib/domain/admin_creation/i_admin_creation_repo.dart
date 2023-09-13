@@ -25,10 +25,11 @@ abstract class IAdminCreationRepo {
       required String phoneNumber,
       String? profileUrl});
 
-  Future<Either<ApiErrorHandler, GetRoleResponse>> getRoles({
-    required String userID,
-  });
+  Future<Either<ApiErrorHandler, GetRoleResponse>> getRoles(
+      {required String userID, required String searchTerm});
 
   Future<Either<ApiErrorHandler, AdminViewResponse>> viewRole(
-      {required String userId, required String adminId});
+      {required String userId,
+      required String adminId,
+      required String searchTerm});
 }
