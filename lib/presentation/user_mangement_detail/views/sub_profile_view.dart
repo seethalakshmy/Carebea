@@ -25,7 +25,7 @@ class SubProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mSubProfiles = state.response?.user?.subProfiles ?? [];
+    final mSubProfiles = state.response?.data?.subProfiles ?? [];
     return CustomCard(
       elevation: DBL.seven.val,
       child: CustomContainer(
@@ -108,10 +108,10 @@ class SubProfileView extends StatelessWidget {
               )),
               DataCell(_tableRowImage(context,
                   name: "${item.name?.firstName} ${item.name?.lastName}",
-                  imgUrl: item.name?.profile ?? "",
-                  age: item.age ?? 0)),
-              DataCell(_rowsView(context,
-                  text: item.totalSeriviceCompleted.toString())),
+                  imgUrl: item.profilePic ?? "",
+                  age: int.parse(item?.age ?? ''))),
+              DataCell(
+                  _rowsView(context, text: item.completedServices.toString())),
               DataCell(InkWell(
                   onTap: () {},
                   child: CustomContainer(

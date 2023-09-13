@@ -11,11 +11,11 @@ class PaymentMethodView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var value = state.response?.user?.paymentMethod;
+    var value = state.response?.data?.paymentMethod;
     return SingleChildScrollView(
       child: Column(
         children: [
-          value?.creditCardDetails != null
+          value?.creditCard != null
               ? HeaderView(title: AppString.creditCardDetails.val)
               : CustomSizedBox.shrink(),
           CustomSizedBox(
@@ -23,25 +23,25 @@ class PaymentMethodView extends StatelessWidget {
           ),
           UserAccountDetails(
               label: AppString.accountHolderName.val,
-              value: value?.creditCardDetails?.accountHolderName ?? ""),
+              value: value?.creditCard?.cardNumber ?? ""),
           CustomSizedBox(
             height: DBL.thirty.val,
           ),
           UserAccountDetails(
               label: AppString.accountNumber.val,
-              value: value?.creditCardDetails?.accountNumber ?? ""),
+              value: value?.creditCard?.cardNumber ?? ""),
           CustomSizedBox(
             height: DBL.thirty.val,
           ),
-          UserAccountDetails(
-              label: AppString.expirationDate.val,
-              value: value?.creditCardDetails?.expirationDate ?? ""),
+          // UserAccountDetails(
+          //     label: AppString.expirationDate.val,
+          //     value: value?.creditCardDetails?.expirationDate ?? ""),
           CustomSizedBox(
             height: DBL.thirty.val,
           ),
-          UserAccountDetails(
-              label: AppString.securityNo.val,
-              value: value?.creditCardDetails?.securityNumber.toString() ?? ""),
+          // UserAccountDetails(
+          //     label: AppString.securityNo.val,
+          //     value: value?.creditCardDetails?.securityNumber.toString() ?? ""),
         ],
       ),
     );

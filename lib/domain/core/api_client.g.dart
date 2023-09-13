@@ -2273,6 +2273,103 @@ class _ApiClient implements ApiClient {
     return value;
   }
 
+  @override
+  Future<UserListResponse> getUser(
+    userId,
+    page,
+    limit,
+    searchTerm,
+    status,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'page': page,
+      'limit': limit,
+      'search_term': searchTerm,
+      'status': status,
+    };
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<UserListResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-clients',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UserListResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<UserDetailResponse> getUserDetails(
+    userId,
+    adminId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'admin_id': adminId,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<UserDetailResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-clients-by-id',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UserDetailResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponse> changeClientStatus(
+    userId,
+    adminId,
+    status,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'admin_id': adminId,
+      'status': status,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/change-client-status',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

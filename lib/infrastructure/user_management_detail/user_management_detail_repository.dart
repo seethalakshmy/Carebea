@@ -16,15 +16,13 @@ class UserManagementDetailRepository implements IUserDetailRepo {
 
   @override
   Future<Either<ApiErrorHandler, UserDetailResponse>> getUserDetail(
-      {required String userID}) async {
+      {required String userId, required String adminId}) async {
     try {
-      var res = await rootBundle
-          .loadString("assets/sample/user_detail_response.json");
-      var response = UserDetailResponse.fromJson(jsonDecode(res));
-
+      final response = await _apiClient.getUserDetails(userId, adminId);
       return Right(response);
     } on DioError catch (e) {
-      CustomLog.log("CareGiverListRepository: ${e.message}");
+      CustomLog.log(": ${e.message}");
+
       if (e.message.contains("SocketException")) {
         CustomLog.log("reached here..");
         return Left(ClientFailure(

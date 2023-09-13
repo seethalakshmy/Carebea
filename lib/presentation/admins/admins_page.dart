@@ -34,6 +34,7 @@ import '../widget/custom_text.dart';
 import '../widget/custom_text_field.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
+import '../widget/loader_view.dart';
 import '../widget/table_actions_view.dart';
 import '../widget/table_column_view.dart';
 import '../widget/table_switch_box.dart';
@@ -51,23 +52,23 @@ class AdminsPage extends StatefulWidget {
 class _AdminsPageState extends State<AdminsPage> {
   List<ResData> mAdmins = [];
   int _totalItems = 1;
-  final int _limit = 10;
-  int _page = 1;
+
   int _pageIndex = 0;
   int _start = 0;
   int _end = 10;
   final TextEditingController _searchController = TextEditingController();
   final _searchNode = FocusNode();
-  String _adminUserId = "";
+
   late AdminsBloc _adminsBloc;
   SharedPreffUtil sharedPrefUtil = SharedPreffUtil();
   String? filterId;
   String? roleId;
+  String _adminUserId = '';
 
   @override
   void initState() {
     super.initState();
-    _adminUserId = sharedPrefUtil.getAdminId;
+
     _adminsBloc = AdminsBloc(AdminsRepository());
   }
 
@@ -81,17 +82,25 @@ class _AdminsPageState extends State<AdminsPage> {
   @override
   Widget build(BuildContext context) {
     CustomLog.log('width == ${MediaQuery.of(context).size.width}');
-    return Column(
-      children: [
-        HeaderView(
-          title: AppString.adminManagement.val,
-        ),
-        CustomSizedBox(
-          height: DBL.twenty.val,
-        ),
-        _rebuildView(),
-      ],
-    );
+    return FutureBuilder(
+        future: SharedPreffUtil().init(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return LoaderView();
+          }
+          _adminUserId = sharedPrefUtil.getAdminId;
+          return Column(
+            children: [
+              HeaderView(
+                title: AppString.adminManagement.val,
+              ),
+              CustomSizedBox(
+                height: DBL.twenty.val,
+              ),
+              _rebuildView(),
+            ],
+          );
+        });
   }
 
   BlocProvider<AdminsBloc> _rebuildView() {
@@ -99,8 +108,8 @@ class _AdminsPageState extends State<AdminsPage> {
       create: (context) => _adminsBloc
         ..add(AdminEvent.getAdmins(
           userId: _adminUserId,
-          page: _page,
-          limit: _limit,
+          page: _adminsBloc.page,
+          limit: _adminsBloc.limit,
         )),
       child: _bodyView(),
     );
@@ -109,6 +118,7 @@ class _AdminsPageState extends State<AdminsPage> {
   _bodyView() {
     return BlocBuilder<AdminsBloc, AdminsState>(
       builder: (_, state) {
+        print('update called');
         return _cardView(state, context);
       },
     );
@@ -131,9 +141,21 @@ class _AdminsPageState extends State<AdminsPage> {
   }
 
   _resetValues() {
-    _page = 1;
+    _adminsBloc.page = 1;
     _searchController.clear();
     filterId = null;
+  }
+
+  void _updateData() {
+    if (_adminsBloc.page == 1) {
+      _start = 0;
+      _end = mAdmins.length < _adminsBloc.limit
+          ? mAdmins.length
+          : _adminsBloc.limit;
+    } else {
+      _start = (_adminsBloc.page * _adminsBloc.limit) - 10;
+      _end = _start + mAdmins.length;
+    }
   }
 
   _adminssView(BuildContext context, AdminsState state) {
@@ -148,6 +170,32 @@ class _AdminsPageState extends State<AdminsPage> {
         _updateData();
       }
     }
+    _paginationView() {
+      final int totalPages = (_totalItems / _adminsBloc.limit).ceil();
+      return PaginationView(
+          page: _adminsBloc.page,
+          start: _start,
+          end: _end,
+          totalItems: _totalItems,
+          totalPages: totalPages,
+          onNextPressed: () {
+            if (_adminsBloc.page < totalPages) {
+              _adminsBloc.page = _adminsBloc.page + 1;
+              _getAdminEvent();
+            }
+          },
+          onItemPressed: (i) {
+            _adminsBloc.page = i;
+            _getAdminEvent();
+          },
+          onPreviousPressed: () {
+            if (_adminsBloc.page > 1) {
+              _adminsBloc.page = _adminsBloc.page - 1;
+              _getAdminEvent();
+            }
+          });
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -159,7 +207,7 @@ class _AdminsPageState extends State<AdminsPage> {
                 children: [
                   CustomSizedBox(height: DBL.fifteen.val),
                   CustomSizedBox(
-                    height: (_limit + 1) * 48,
+                    height: (_adminsBloc.limit + 1) * 48,
                     child: _adminsTable(state, context),
                   ),
                   CustomSizedBox(height: DBL.twenty.val),
@@ -552,61 +600,27 @@ class _AdminsPageState extends State<AdminsPage> {
     );
   }
 
-  _setIndex(int index) {
-    if (_page == 1 || (_totalItems / _limit).ceil() == 1) {
-      _pageIndex = index + 1;
-    } else {
-      _pageIndex = ((_page * _limit) - 10) + index + 1;
-    }
-  }
-
-  _paginationView() {
-    final int totalPages = (_totalItems / _limit).ceil();
-    print("total pages : $totalPages");
-    return PaginationView(
-        page: _page,
-        start: totalPages == 1 ? 0 : _start,
-        end: totalPages == 1 ? 10 : _end,
-        totalItems: _totalItems,
-        totalPages: totalPages,
-        onNextPressed: () {
-          if (_page < totalPages) {
-            _page = _page + 1;
-            _getAdminEvent();
-          }
-        },
-        onItemPressed: (i) {
-          _page = i;
-          _getAdminEvent();
-        },
-        onPreviousPressed: () {
-          if (_page > 1) {
-            _page = _page - 1;
-            _getAdminEvent();
-          }
-        });
-  }
-
-  void _updateData() {
-    if (_page == 1) {
-      _start = 0;
-      _end = mAdmins.length < _limit ? mAdmins.length : _limit;
-    } else {
-      _start = (_page * _limit) - 10;
-      _end = _start + mAdmins.length;
-    }
-  }
-
   _getAdminEvent() {
     _adminsBloc.add(AdminEvent.getAdmins(
         userId: _adminUserId,
-        page: _page,
-        limit: _limit,
+        page: _adminsBloc.page,
+        limit: _adminsBloc.limit,
         status: filterId,
         roleId: roleId,
         searchTerm: _searchController.text.trim().isNotEmpty
             ? _searchController.text.trim()
             : null));
+  }
+
+  _setIndex(int index) {
+    if (_adminsBloc.page == 1 ||
+        (_totalItems / _adminsBloc.limit).ceil() == 1) {
+      if (_adminsBloc.page == 1) {
+        _pageIndex = index + 1;
+      } else {
+        _pageIndex = ((_adminsBloc.page * _adminsBloc.limit) - 10) + index + 1;
+      }
+    }
   }
 
   bool _isXs(context) => MediaQuery.of(context).size.width <= 544;

@@ -26,6 +26,17 @@ class AppRouter extends $AppRouter {
       maintainState: true,
       initial: true,
     ),*/
+    // AutoRoute(
+    //   path: "/care-ambassador-registration",
+    //   page: CareAmbassadorRegistrationRoute.page,
+    //   maintainState: true,
+    // ),
+    // AutoRoute(
+    //   path: "/signup",
+    //   page: SignUpRoute.page,
+    //   maintainState: true,
+    //   initial: true,
+    // ),
     AutoRoute(
       path: "/email-otp-verification",
       page: EmailOtpVerificationRoute.page,

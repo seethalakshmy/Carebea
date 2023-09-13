@@ -25,7 +25,8 @@ class UserManagementDetailBloc
       _GetUserDetail event, Emitter<UserManagementDetailState> emit) async {
     final Either<ApiErrorHandler, UserDetailResponse> result =
         await userDetailRepository.getUserDetail(
-      userID: event.userId,
+      adminId: event.adminId,
+      userId: event.userId,
     );
     var homeState = result.fold((l) {
       return state.copyWith(error: l.error, isLoading: false);

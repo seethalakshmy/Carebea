@@ -85,7 +85,7 @@ abstract class IOnBoardingRepo {
     required bool serveWithSmoker,
     required bool willingToTransportation,
     required bool willingToServeWithPets,
-    required List<PetsList> petsList,
+    required List<Map<String, dynamic>> petsList,
     required List<String> knownLanguages,
   });
 
@@ -94,7 +94,7 @@ abstract class IOnBoardingRepo {
 
   Future<Either<ApiErrorHandler, CommonResponse>> servicesSubmit({
     required String userId,
-    required ServicesRequest services,
+    required Map<String, dynamic> services,
   });
 
   Future<Either<ApiErrorHandler, GetServicesResponse>> getServices();

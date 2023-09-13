@@ -51,8 +51,9 @@ class SharedPreffUtil {
 
   SharedPreferences? _prefs;
 
-  init() async {
-    _prefs = await SharedPreferences.getInstance();
+  Future<bool> init() async {
+    _prefs ??= await SharedPreferences.getInstance();
+    return _prefs == null;
   }
 
   set setAccessToken(String value) {
@@ -71,6 +72,9 @@ class SharedPreffUtil {
   }
 
   get getCareGiverUserId {
+    // if (_prefs == null) {
+    //   await init();
+    // }
     return _prefs?.getString(userId) ?? "";
   }
 
@@ -79,10 +83,11 @@ class SharedPreffUtil {
   }
 
   get getAdminId {
+    // if (_prefs == null) {
+    //   await init();
+    // }
     return _prefs?.getString(adminId) ?? "";
   }
-
-
 
   set setMobileNumber(String value) {
     _prefs?.setString(mobileNumber, value);
@@ -125,10 +130,10 @@ class SharedPreffUtil {
   }
 
   set setIsFromWebsite(bool value) {
-     _prefs?.setBool(isFromWebsite,value);
+    _prefs?.setBool(isFromWebsite, value);
   }
 
-  get getIsFromWebsite{
+  get getIsFromWebsite {
     return _prefs?.getBool(isFromWebsite) ?? false;
   }
 
@@ -313,5 +318,6 @@ class SharedPreffUtil {
     _prefs!.setBool(viewServiceRequest, false);
     _prefs!.setBool(editServiceRequest, false);
     _prefs!.setBool(viewTransaction, false);
+    print('Logout successful');
   }
 }

@@ -334,7 +334,7 @@ class OnBoardingRepository implements IOnBoardingRepo {
       required bool serveWithSmoker,
       required bool willingToTransportation,
       required bool willingToServeWithPets,
-      required List<PetsList> petsList,
+      required List<Map<String, dynamic>> petsList,
       required List<String> knownLanguages}) async {
     try {
       final response = await apiClient.getPreferences(
@@ -366,7 +366,7 @@ class OnBoardingRepository implements IOnBoardingRepo {
       required bool serveWithSmoker,
       required bool willingToTransportation,
       required bool willingToServeWithPets,
-      required List<PetsList> petsList,
+      required List<Map<String, dynamic>> petsList,
       required List<String> knownLanguages}) async {
     try {
       final response = await apiClient.getPreferencesWebsite(
@@ -413,7 +413,7 @@ class OnBoardingRepository implements IOnBoardingRepo {
 
   @override
   Future<Either<ApiErrorHandler, CommonResponse>> servicesSubmit(
-      {required String userId, required ServicesRequest services}) async {
+      {required String userId, required Map<String, dynamic> services}) async {
     try {
       final response = await apiClient.submitServices(userId, services);
       return Right(response);
@@ -432,7 +432,7 @@ class OnBoardingRepository implements IOnBoardingRepo {
 
   @override
   Future<Either<ApiErrorHandler, CommonResponse>> servicesSubmitWebsite(
-      {required String userId, required ServicesRequest services}) async {
+      {required String userId, required Map<String, dynamic> services}) async {
     try {
       final response = await apiClient.submitServicesWebsite(
           "Bearer " + sharedPreffUtil.getAccessToken, userId, services);
@@ -499,7 +499,7 @@ class OnBoardingRepository implements IOnBoardingRepo {
       required String whyLoveBeingCaregiver}) async {
     try {
       final response = await apiClient.submitBuildProfileWebsite(
-          'Baerer ' + sharedPreffUtil.getAccessToken,
+          'Bearer ' + sharedPreffUtil.getAccessToken,
           userId,
           aboutYou,
           hobbies,
@@ -594,7 +594,7 @@ class OnBoardingRepository implements IOnBoardingRepo {
     try {
       print('inside respo');
       final response = await apiClient.submitReferenceWebsite(
-          'Bearer' + sharedPreffUtil.getAccessToken, userId, referenceList);
+          'Bearer ' + sharedPreffUtil.getAccessToken, userId, referenceList);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
