@@ -6,8 +6,10 @@ import '../../core/text_styles.dart';
 import 'custom_text.dart';
 
 class TableRowView extends StatelessWidget {
-  const TableRowView({Key? key, required this.text}) : super(key: key);
+  const TableRowView({Key? key, required this.text, this.maxLines})
+      : super(key: key);
   final String text;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,7 @@ class TableRowView extends StatelessWidget {
   CustomText _buildText(BuildContext context) {
     return CustomText(
       text,
+      maxLines: maxLines,
       softWrap: true,
       style: _buildStyle(context),
       textAlign: TextAlign.start,

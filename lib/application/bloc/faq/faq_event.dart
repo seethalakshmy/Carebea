@@ -7,4 +7,5 @@ class FaqEvent with _$FaqEvent {
     required int page,
     required int limit,
   }) = _GetFaq;
+  const factory FaqEvent.getFaqList() = _GetFaqList;
 }
