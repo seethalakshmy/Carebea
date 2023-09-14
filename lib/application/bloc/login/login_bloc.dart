@@ -20,6 +20,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   LoginBloc(this.loginRepository) : super(LoginState.initial()) {
     on<_Login>(_login);
+    on<_RememberMe>(_rememberMe);
   }
 
   _login(_Login event, Emitter<LoginState> emit) async {
@@ -37,6 +38,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }, (r) {
       if (r.status ?? false) {
         SharedPreffUtil sharedPrefUtil = SharedPreffUtil();
+        sharedPrefUtil.setLoginEmail = event.email;
+        sharedPrefUtil.setLoginPassword = event.password;
         sharedPrefUtil.setLogin = true;
         sharedPrefUtil.setAdminId = r.data?.userId ?? "";
         sharedPrefUtil.setAccessToken = r.data?.accessToken ?? "";
@@ -77,5 +80,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(
       stateResult,
     );
+  }
+
+  _rememberMe(_RememberMe event, Emitter<LoginState> emit) {
+    print("remember me checked : ${event.isChecked}");
+    emit(state.copyWith(isCheckedRemember: event.isChecked));
   }
 }

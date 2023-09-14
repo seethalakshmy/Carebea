@@ -16,48 +16,47 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LoginEvent {
-  BuildContext get context => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
             BuildContext context, String email, String password)
         login,
+    required TResult Function(bool isChecked) rememberMe,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(BuildContext context, String email, String password)?
         login,
+    TResult? Function(bool isChecked)? rememberMe,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(BuildContext context, String email, String password)?
         login,
+    TResult Function(bool isChecked)? rememberMe,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Login value) login,
+    required TResult Function(_RememberMe value) rememberMe,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Login value)? login,
+    TResult? Function(_RememberMe value)? rememberMe,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_RememberMe value)? rememberMe,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $LoginEventCopyWith<LoginEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -66,8 +65,6 @@ abstract class $LoginEventCopyWith<$Res> {
   factory $LoginEventCopyWith(
           LoginEvent value, $Res Function(LoginEvent) then) =
       _$LoginEventCopyWithImpl<$Res, LoginEvent>;
-  @useResult
-  $Res call({BuildContext context, String email, String password});
 }
 
 /// @nodoc
@@ -79,36 +76,12 @@ class _$LoginEventCopyWithImpl<$Res, $Val extends LoginEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? context = null,
-    Object? email = null,
-    Object? password = null,
-  }) {
-    return _then(_value.copyWith(
-      context: null == context
-          ? _value.context
-          : context // ignore: cast_nullable_to_non_nullable
-              as BuildContext,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_LoginCopyWith<$Res> implements $LoginEventCopyWith<$Res> {
+abstract class _$$_LoginCopyWith<$Res> {
   factory _$$_LoginCopyWith(_$_Login value, $Res Function(_$_Login) then) =
       __$$_LoginCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({BuildContext context, String email, String password});
 }
@@ -188,6 +161,7 @@ class _$_Login implements _Login {
     required TResult Function(
             BuildContext context, String email, String password)
         login,
+    required TResult Function(bool isChecked) rememberMe,
   }) {
     return login(context, email, password);
   }
@@ -197,6 +171,7 @@ class _$_Login implements _Login {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(BuildContext context, String email, String password)?
         login,
+    TResult? Function(bool isChecked)? rememberMe,
   }) {
     return login?.call(context, email, password);
   }
@@ -206,6 +181,7 @@ class _$_Login implements _Login {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(BuildContext context, String email, String password)?
         login,
+    TResult Function(bool isChecked)? rememberMe,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -218,6 +194,7 @@ class _$_Login implements _Login {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Login value) login,
+    required TResult Function(_RememberMe value) rememberMe,
   }) {
     return login(this);
   }
@@ -226,6 +203,7 @@ class _$_Login implements _Login {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Login value)? login,
+    TResult? Function(_RememberMe value)? rememberMe,
   }) {
     return login?.call(this);
   }
@@ -234,6 +212,7 @@ class _$_Login implements _Login {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Login value)? login,
+    TResult Function(_RememberMe value)? rememberMe,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -249,15 +228,149 @@ abstract class _Login implements LoginEvent {
       required final String email,
       required final String password}) = _$_Login;
 
-  @override
   BuildContext get context;
-  @override
   String get email;
-  @override
   String get password;
-  @override
   @JsonKey(ignore: true)
   _$$_LoginCopyWith<_$_Login> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_RememberMeCopyWith<$Res> {
+  factory _$$_RememberMeCopyWith(
+          _$_RememberMe value, $Res Function(_$_RememberMe) then) =
+      __$$_RememberMeCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isChecked});
+}
+
+/// @nodoc
+class __$$_RememberMeCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$_RememberMe>
+    implements _$$_RememberMeCopyWith<$Res> {
+  __$$_RememberMeCopyWithImpl(
+      _$_RememberMe _value, $Res Function(_$_RememberMe) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isChecked = null,
+  }) {
+    return _then(_$_RememberMe(
+      isChecked: null == isChecked
+          ? _value.isChecked
+          : isChecked // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_RememberMe implements _RememberMe {
+  const _$_RememberMe({required this.isChecked});
+
+  @override
+  final bool isChecked;
+
+  @override
+  String toString() {
+    return 'LoginEvent.rememberMe(isChecked: $isChecked)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_RememberMe &&
+            (identical(other.isChecked, isChecked) ||
+                other.isChecked == isChecked));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isChecked);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RememberMeCopyWith<_$_RememberMe> get copyWith =>
+      __$$_RememberMeCopyWithImpl<_$_RememberMe>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            BuildContext context, String email, String password)
+        login,
+    required TResult Function(bool isChecked) rememberMe,
+  }) {
+    return rememberMe(isChecked);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(BuildContext context, String email, String password)?
+        login,
+    TResult? Function(bool isChecked)? rememberMe,
+  }) {
+    return rememberMe?.call(isChecked);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BuildContext context, String email, String password)?
+        login,
+    TResult Function(bool isChecked)? rememberMe,
+    required TResult orElse(),
+  }) {
+    if (rememberMe != null) {
+      return rememberMe(isChecked);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Login value) login,
+    required TResult Function(_RememberMe value) rememberMe,
+  }) {
+    return rememberMe(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Login value)? login,
+    TResult? Function(_RememberMe value)? rememberMe,
+  }) {
+    return rememberMe?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Login value)? login,
+    TResult Function(_RememberMe value)? rememberMe,
+    required TResult orElse(),
+  }) {
+    if (rememberMe != null) {
+      return rememberMe(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RememberMe implements LoginEvent {
+  const factory _RememberMe({required final bool isChecked}) = _$_RememberMe;
+
+  bool get isChecked;
+  @JsonKey(ignore: true)
+  _$$_RememberMeCopyWith<_$_RememberMe> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -267,6 +380,7 @@ mixin _$LoginState {
   bool get isError => throw _privateConstructorUsedError;
   LoginResponse? get response => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+  bool get isCheckedRemember => throw _privateConstructorUsedError;
   bool get isClientError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -285,6 +399,7 @@ abstract class $LoginStateCopyWith<$Res> {
       bool isError,
       LoginResponse? response,
       String? error,
+      bool isCheckedRemember,
       bool isClientError});
 }
 
@@ -305,6 +420,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
     Object? isError = null,
     Object? response = freezed,
     Object? error = freezed,
+    Object? isCheckedRemember = null,
     Object? isClientError = null,
   }) {
     return _then(_value.copyWith(
@@ -324,6 +440,10 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      isCheckedRemember: null == isCheckedRemember
+          ? _value.isCheckedRemember
+          : isCheckedRemember // ignore: cast_nullable_to_non_nullable
+              as bool,
       isClientError: null == isClientError
           ? _value.isClientError
           : isClientError // ignore: cast_nullable_to_non_nullable
@@ -345,6 +465,7 @@ abstract class _$$_LoginStateCopyWith<$Res>
       bool isError,
       LoginResponse? response,
       String? error,
+      bool isCheckedRemember,
       bool isClientError});
 }
 
@@ -363,6 +484,7 @@ class __$$_LoginStateCopyWithImpl<$Res>
     Object? isError = null,
     Object? response = freezed,
     Object? error = freezed,
+    Object? isCheckedRemember = null,
     Object? isClientError = null,
   }) {
     return _then(_$_LoginState(
@@ -382,6 +504,10 @@ class __$$_LoginStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      isCheckedRemember: null == isCheckedRemember
+          ? _value.isCheckedRemember
+          : isCheckedRemember // ignore: cast_nullable_to_non_nullable
+              as bool,
       isClientError: null == isClientError
           ? _value.isClientError
           : isClientError // ignore: cast_nullable_to_non_nullable
@@ -398,6 +524,7 @@ class _$_LoginState implements _LoginState {
       required this.isError,
       required this.response,
       required this.error,
+      required this.isCheckedRemember,
       this.isClientError = false});
 
   @override
@@ -409,12 +536,14 @@ class _$_LoginState implements _LoginState {
   @override
   final String? error;
   @override
+  final bool isCheckedRemember;
+  @override
   @JsonKey()
   final bool isClientError;
 
   @override
   String toString() {
-    return 'LoginState(isLoading: $isLoading, isError: $isError, response: $response, error: $error, isClientError: $isClientError)';
+    return 'LoginState(isLoading: $isLoading, isError: $isError, response: $response, error: $error, isCheckedRemember: $isCheckedRemember, isClientError: $isClientError)';
   }
 
   @override
@@ -428,13 +557,15 @@ class _$_LoginState implements _LoginState {
             (identical(other.response, response) ||
                 other.response == response) &&
             (identical(other.error, error) || other.error == error) &&
+            (identical(other.isCheckedRemember, isCheckedRemember) ||
+                other.isCheckedRemember == isCheckedRemember) &&
             (identical(other.isClientError, isClientError) ||
                 other.isClientError == isClientError));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isLoading, isError, response, error, isClientError);
+  int get hashCode => Object.hash(runtimeType, isLoading, isError, response,
+      error, isCheckedRemember, isClientError);
 
   @JsonKey(ignore: true)
   @override
@@ -449,6 +580,7 @@ abstract class _LoginState implements LoginState {
       required final bool isError,
       required final LoginResponse? response,
       required final String? error,
+      required final bool isCheckedRemember,
       final bool isClientError}) = _$_LoginState;
 
   @override
@@ -459,6 +591,8 @@ abstract class _LoginState implements LoginState {
   LoginResponse? get response;
   @override
   String? get error;
+  @override
+  bool get isCheckedRemember;
   @override
   bool get isClientError;
   @override

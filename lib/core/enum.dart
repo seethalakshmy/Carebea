@@ -38,6 +38,7 @@ enum AppString {
   password("Password"),
   reviewPending("Review Pending"),
   forgotPassword("Forgot Password ?"),
+  rememberMe("Remember Me"),
   resetPassword("Reset Password"),
   optVerification("OTP Verification"),
   clientAnalytics("Client Analytics"),

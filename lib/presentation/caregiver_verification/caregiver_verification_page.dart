@@ -130,6 +130,22 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                 height: DBL.four.val,
               ),
               CachedImage(
+                onTap: () {
+                  showGeneralDialog(
+                    context: context,
+                    pageBuilder: (BuildContext buildContext,
+                        Animation animation, Animation secondaryAnimation) {
+                      return CustomAlertDialogWidget(
+                          showHeading: false,
+                          width: 700,
+                          heading: "",
+                          child: CachedImage(
+                            fit: BoxFit.contain,
+                            imgUrl: caregiver?.profile ?? "",
+                          ));
+                    },
+                  );
+                },
                 imgUrl: caregiver?.profile ?? "",
                 height: DBL.oneFifty.val,
                 width: DBL.oneFifty.val,
@@ -1065,6 +1081,23 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                       ),
                     )
                   : CachedImage(
+                      onTap: () {
+                        showGeneralDialog(
+                          context: context,
+                          pageBuilder: (BuildContext buildContext,
+                              Animation animation,
+                              Animation secondaryAnimation) {
+                            return CustomAlertDialogWidget(
+                                showHeading: false,
+                                width: 700,
+                                heading: "",
+                                child: CachedImage(
+                                  fit: BoxFit.contain,
+                                  imgUrl: url,
+                                ));
+                          },
+                        );
+                      },
                       imgUrl: url,
                       width: 780,
                       height: 800,

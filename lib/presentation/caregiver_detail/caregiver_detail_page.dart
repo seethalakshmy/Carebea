@@ -27,6 +27,7 @@ import '../../core/custom_debugger.dart';
 import '../../core/responsive.dart';
 import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';
+import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/svg_text.dart';
 
 @RoutePage()
@@ -478,6 +479,22 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
 
   _profileImageView(BuildContext context, String url) {
     return CachedImage(
+      onTap: () {
+        showGeneralDialog(
+          context: context,
+          pageBuilder: (BuildContext buildContext, Animation animation,
+              Animation secondaryAnimation) {
+            return CustomAlertDialogWidget(
+                showHeading: false,
+                width: 700,
+                heading: "",
+                child: CachedImage(
+                  fit: BoxFit.contain,
+                  imgUrl: url,
+                ));
+          },
+        );
+      },
       imgUrl: url,
       height: DBL.oneSeventyFive.val,
       width: DBL.twoHundred.val,
