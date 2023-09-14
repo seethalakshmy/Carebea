@@ -33,6 +33,9 @@ class SharedPreffUtil {
   final editUser = "edit_user";
 
   final viewTransaction = "view_transaction";
+  final rememberMe = "remember_me";
+  final loginEmail = "login_email";
+  final loginPassword = "login_password";
 
   final viewServiceRequest = "view_service";
   final editServiceRequest = "edit_service";
@@ -294,6 +297,36 @@ class SharedPreffUtil {
 
   get getViewTransaction {
     return _prefs?.getBool(viewTransaction) ?? false;
+  }
+
+  set setRememberMe(bool value) {
+    _prefs?.setBool(rememberMe, value);
+  }
+
+  get getRememberMe {
+    return _prefs?.getBool(rememberMe) ?? false;
+  }
+
+  set setLoginEmail(String value) {
+    _prefs!.setString(loginEmail, value);
+  }
+
+  get getLoginEmail {
+    if (_prefs == null || _prefs!.getString(loginEmail) == null) {
+      return "";
+    }
+    return _prefs!.getString(loginEmail) ?? "";
+  }
+
+  set setLoginPassword(String value) {
+    _prefs!.setString(loginPassword, value);
+  }
+
+  get getLoginPassword {
+    if (_prefs == null || _prefs!.getString(loginPassword) == null) {
+      return "";
+    }
+    return _prefs!.getString(loginPassword) ?? "";
   }
 
   void logoutClear() {

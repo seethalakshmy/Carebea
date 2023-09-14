@@ -22,6 +22,7 @@ import '../../core/text_styles.dart';
 import '../caregiver_detail/widgets/service_completion_and_rewards.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';
+import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/custom_text.dart';
 import '../widget/error_view.dart';
 import '../widget/table_verification_button.dart';
@@ -197,6 +198,25 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CachedImage(
+                          onTap: () {
+                            showGeneralDialog(
+                              context: context,
+                              pageBuilder: (BuildContext buildContext,
+                                  Animation animation,
+                                  Animation secondaryAnimation) {
+                                return CustomAlertDialogWidget(
+                                    showHeading: false,
+                                    width: 700,
+                                    heading: "",
+                                    child: CachedImage(
+                                      fit: BoxFit.fitHeight,
+                                      imgUrl:
+                                          state.response?.data?.name?.profile ??
+                                              "",
+                                    ));
+                              },
+                            );
+                          },
                           imgUrl: state.response?.data?.name?.profile ?? "",
                           height: DBL.oneFifty.val,
                           width: DBL.oneFifty.val,

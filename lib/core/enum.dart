@@ -36,6 +36,7 @@ enum AppString {
   password("Password"),
   reviewPending("Review Pending"),
   forgotPassword("Forgot Password ?"),
+  rememberMe("Remember Me"),
   resetPassword("Reset Password"),
   optVerification("OTP Verification"),
   clientAnalytics("Client Analytics"),
@@ -389,7 +390,8 @@ enum AppString {
   emptyBLSNo("Please enter BLS certification number"),
   emptyTBNo("Please enter TB result number"),
   emptyRole("Role name shouldn't be empty"),
-  emptyModule("You Should Select at least one module with at least one privilege"),
+  emptyModule(
+      "You Should Select at least one module with at least one privilege"),
   emptyProfilePic("Please select your profile picture"),
   errorUploadingFile("Error uploading file, Please try again"),
   serviceRequestManagement("Service Request Management"),

@@ -7,15 +7,17 @@ class LoginState with _$LoginState {
     required bool isError,
     required LoginResponse? response,
     required String? error,
+    required bool isCheckedRemember,
     @Default(false) bool isClientError,
   }) = _LoginState;
 
   factory LoginState.initial() {
-    return const LoginState(
+    return LoginState(
       isLoading: false,
       isError: false,
       response: null,
       error: null,
+      isCheckedRemember: SharedPreffUtil().getRememberMe,
     );
   }
 }

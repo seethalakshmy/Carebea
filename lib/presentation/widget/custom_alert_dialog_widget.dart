@@ -14,6 +14,7 @@ class CustomAlertDialogWidget extends StatelessWidget {
       this.backgroundColor,
       this.width,
       this.mainAxisAlignment,
+      this.showHeading = true,
       this.crossAxisAlignment});
 
   final String heading;
@@ -23,6 +24,7 @@ class CustomAlertDialogWidget extends StatelessWidget {
   final Color? backgroundColor;
   final MainAxisAlignment? mainAxisAlignment;
   final CrossAxisAlignment? crossAxisAlignment;
+  final bool? showHeading;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +56,28 @@ class CustomAlertDialogWidget extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [_headerWidget(context, heading), child],
+                children: [
+                  showHeading!
+                      ? _headerWidget(context, heading)
+                      : Padding(
+                          padding:
+                              const EdgeInsets.only(top: 20.0, right: 20.0),
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: InkWell(
+                              child: CustomIcon(
+                                icon: Icons.close,
+                                size: DBL.twenty.val,
+                                color: AppColor.black.val,
+                              ),
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                        ),
+                  Center(child: child)
+                ],
               ),
             ),
           ),

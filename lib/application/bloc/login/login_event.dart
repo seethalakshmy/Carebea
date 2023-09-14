@@ -6,4 +6,5 @@ class LoginEvent with _$LoginEvent {
       {required BuildContext context,
       required String email,
       required String password}) = _Login;
+  const factory LoginEvent.rememberMe({required bool isChecked}) = _RememberMe;
 }
