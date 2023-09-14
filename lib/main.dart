@@ -14,6 +14,7 @@ import 'package:admin_580_tech/infrastructure/login/login_repository.dart';
 import 'package:admin_580_tech/infrastructure/service_request_management/service_request_management_repository.dart';
 import 'package:admin_580_tech/infrastructure/signup/signup_repository.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.dart';
+import 'package:admin_580_tech/presentation/widget/loader_view.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:amplify_storage_s3/amplify_storage_s3.dart';
@@ -89,6 +90,16 @@ class _MyAppState extends State<MyApp> {
         routeInformationProvider: _appRouter.routeInfoProvider(),
         debugShowCheckedModeBanner: false,
         theme: ThemeClass.themeData(context),
+        builder: (_, child) {
+          return FutureBuilder(
+              future: SharedPreffUtil().init(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return LoaderView();
+                }
+                return child ?? SizedBox();
+              });
+        },
         scrollBehavior: const MaterialScrollBehavior().copyWith(
           dragDevices: {
             PointerDeviceKind.mouse,

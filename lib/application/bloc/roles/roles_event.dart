@@ -6,7 +6,7 @@ class RolesEvent with _$RolesEvent {
       {required String userId,
       required int page,
       required int limit,
-      String? searchTerm,
+      required String searchTerm,
       int? filterId}) = _GetRoles;
 
   const factory RolesEvent.roleDelete(

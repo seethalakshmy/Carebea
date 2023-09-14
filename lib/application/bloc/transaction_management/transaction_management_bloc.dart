@@ -44,7 +44,7 @@ class TransactionManagementBloc
     emit(state.copyWith(isLoading: true));
     final Either<ApiErrorHandler, TransactionListResponse> result =
         await transactionsRepository.getTransactions(
-            userId: SharedPreffUtil().getAdminId,
+            userId: event.userId,
             page: event.page,
             limit: event.limit,
             searchTerm: event.searchTerm,

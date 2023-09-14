@@ -20,7 +20,7 @@ mixin _$RolesEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, int page, int limit,
-            String? searchTerm, int? filterId)
+            String searchTerm, int? filterId)
         getRoles,
     required TResult Function(
             String roleId, String userId, BuildContext context)
@@ -29,7 +29,7 @@ mixin _$RolesEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, int page, int limit, String? searchTerm,
+    TResult? Function(String userId, int page, int limit, String searchTerm,
             int? filterId)?
         getRoles,
     TResult? Function(String roleId, String userId, BuildContext context)?
@@ -38,7 +38,7 @@ mixin _$RolesEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, int page, int limit, String? searchTerm,
+    TResult Function(String userId, int page, int limit, String searchTerm,
             int? filterId)?
         getRoles,
     TResult Function(String roleId, String userId, BuildContext context)?
@@ -112,7 +112,7 @@ abstract class _$$_GetRolesCopyWith<$Res> implements $RolesEventCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String userId, int page, int limit, String? searchTerm, int? filterId});
+      {String userId, int page, int limit, String searchTerm, int? filterId});
 }
 
 /// @nodoc
@@ -129,7 +129,7 @@ class __$$_GetRolesCopyWithImpl<$Res>
     Object? userId = null,
     Object? page = null,
     Object? limit = null,
-    Object? searchTerm = freezed,
+    Object? searchTerm = null,
     Object? filterId = freezed,
   }) {
     return _then(_$_GetRoles(
@@ -145,10 +145,10 @@ class __$$_GetRolesCopyWithImpl<$Res>
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
               as int,
-      searchTerm: freezed == searchTerm
+      searchTerm: null == searchTerm
           ? _value.searchTerm
           : searchTerm // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       filterId: freezed == filterId
           ? _value.filterId
           : filterId // ignore: cast_nullable_to_non_nullable
@@ -164,7 +164,7 @@ class _$_GetRoles implements _GetRoles {
       {required this.userId,
       required this.page,
       required this.limit,
-      this.searchTerm,
+      required this.searchTerm,
       this.filterId});
 
   @override
@@ -174,7 +174,7 @@ class _$_GetRoles implements _GetRoles {
   @override
   final int limit;
   @override
-  final String? searchTerm;
+  final String searchTerm;
   @override
   final int? filterId;
 
@@ -211,7 +211,7 @@ class _$_GetRoles implements _GetRoles {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, int page, int limit,
-            String? searchTerm, int? filterId)
+            String searchTerm, int? filterId)
         getRoles,
     required TResult Function(
             String roleId, String userId, BuildContext context)
@@ -223,7 +223,7 @@ class _$_GetRoles implements _GetRoles {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, int page, int limit, String? searchTerm,
+    TResult? Function(String userId, int page, int limit, String searchTerm,
             int? filterId)?
         getRoles,
     TResult? Function(String roleId, String userId, BuildContext context)?
@@ -235,7 +235,7 @@ class _$_GetRoles implements _GetRoles {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, int page, int limit, String? searchTerm,
+    TResult Function(String userId, int page, int limit, String searchTerm,
             int? filterId)?
         getRoles,
     TResult Function(String roleId, String userId, BuildContext context)?
@@ -285,14 +285,14 @@ abstract class _GetRoles implements RolesEvent {
       {required final String userId,
       required final int page,
       required final int limit,
-      final String? searchTerm,
+      required final String searchTerm,
       final int? filterId}) = _$_GetRoles;
 
   @override
   String get userId;
   int get page;
   int get limit;
-  String? get searchTerm;
+  String get searchTerm;
   int? get filterId;
   @override
   @JsonKey(ignore: true)
@@ -384,7 +384,7 @@ class _$_RoleDelete implements _RoleDelete {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, int page, int limit,
-            String? searchTerm, int? filterId)
+            String searchTerm, int? filterId)
         getRoles,
     required TResult Function(
             String roleId, String userId, BuildContext context)
@@ -396,7 +396,7 @@ class _$_RoleDelete implements _RoleDelete {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, int page, int limit, String? searchTerm,
+    TResult? Function(String userId, int page, int limit, String searchTerm,
             int? filterId)?
         getRoles,
     TResult? Function(String roleId, String userId, BuildContext context)?
@@ -408,7 +408,7 @@ class _$_RoleDelete implements _RoleDelete {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, int page, int limit, String? searchTerm,
+    TResult Function(String userId, int page, int limit, String searchTerm,
             int? filterId)?
         getRoles,
     TResult Function(String roleId, String userId, BuildContext context)?

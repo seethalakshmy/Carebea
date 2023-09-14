@@ -5,6 +5,7 @@ abstract class TransactionManagementEvent with _$TransactionManagementEvent {
   const factory TransactionManagementEvent.getFilters() = _GetFilters;
 
   const factory TransactionManagementEvent.getTransactions({
+    required String userId,
     required String page,
     required int limit,
     required String searchTerm,

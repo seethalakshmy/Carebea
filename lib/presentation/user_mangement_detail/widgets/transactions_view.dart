@@ -19,13 +19,13 @@ import '../../widget/custom_text.dart';
 import '../../widget/empty_view.dart';
 import '../../widget/error_view.dart';
 
-class SubProfileView extends StatelessWidget {
-  const SubProfileView({Key? key, required this.state}) : super(key: key);
+class TransactionView extends StatelessWidget {
+  const TransactionView({Key? key, required this.state}) : super(key: key);
   final UserManagementDetailState state;
 
   @override
   Widget build(BuildContext context) {
-    final mSubProfiles = state.response?.data?.subProfiles ?? [];
+    final transactions = state.response?.data?.transactions ?? [];
     return CustomCard(
       elevation: DBL.seven.val,
       child: CustomContainer(
@@ -33,7 +33,7 @@ class SubProfileView extends StatelessWidget {
               ? const TableLoaderView()
               : state.isError
                   ? ErrorView(isClientError: false, errorMessage: state.error)
-                  : mSubProfiles.isNotEmpty
+                  : transactions.isNotEmpty
                       ? CustomPadding.only(
                           left: DBL.twenty.val,
                           right: DBL.nineteen.val,
@@ -46,7 +46,8 @@ class SubProfileView extends StatelessWidget {
                                 ),
                                 CustomSizedBox(
                                   height: (10 + 1) * 48,
-                                  child: _profilesTable(mSubProfiles, context),
+                                  child:
+                                      _transactionTable(transactions, context),
                                 ),
                                 CustomSizedBox(height: DBL.twenty.val),
                               ],
@@ -57,7 +58,7 @@ class SubProfileView extends StatelessWidget {
     );
   }
 
-  _profilesTable(List<SubProfiles> profiles, BuildContext context) {
+  _transactionTable(List<Transactions> transaction, BuildContext context) {
     return CSelectionArea(
       child: CDataTable2(
         minWidth: 950,
@@ -80,20 +81,46 @@ class SubProfileView extends StatelessWidget {
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
-                text: AppString.nameAndAge.val, fontWeight: FontWeight.bold),
+                text: AppString.client.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
-                text: AppString.totalServiceCompleted.val,
+                text: AppString.serviceId.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.transactionType.val,
                 fontWeight: FontWeight.bold),
           ),
-          const DataColumn2(
+          DataColumn2(
             size: ColumnSize.L,
-            label: CustomText(""),
+            label: _columnsView(context,
+                text: AppString.dateTime.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.amount.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.paidFor.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.transactionId.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.status.val, fontWeight: FontWeight.bold),
           ),
         ],
-        rows: profiles.asMap().entries.map((e) {
+        rows: transaction.asMap().entries.map((e) {
           getIndex(e.key);
           var item = e.value;
           return DataRow2(
@@ -106,25 +133,28 @@ class SubProfileView extends StatelessWidget {
               //   context,
               //   text: item.id.toString(),
               // )),
-              DataCell(_tableRowImage(context,
-                  name: "${item.name?.firstName} ${item.name?.lastName}",
-                  imgUrl: item.profilePic ?? "",
-                  age: item.age ?? '')),
-              DataCell(_rowsView(context, text: item.totalServices.toString())),
-              DataCell(InkWell(
-                  onTap: () {},
-                  child: CustomContainer(
-                    alignment: Alignment.centerRight,
-                    child: CustomSvg(
-                      path: IMG.eye.val,
-                      height: Responsive.isWeb(context)
-                          ? DBL.fifteen.val
-                          : DBL.twelve.val,
-                      width: Responsive.isWeb(context)
-                          ? DBL.twenty.val
-                          : DBL.eighteen.val,
-                    ),
-                  ))),
+              DataCell(_rowsView(context, text: item.client)),
+              DataCell(_rowsView(context, text: item.serviceId)),
+              DataCell(_rowsView(context, text: item.transactionType)),
+              DataCell(_rowsView(context, text: item.dateTime)),
+              DataCell(_rowsView(context, text: item.amount)),
+              DataCell(_rowsView(context, text: item.paidFor)),
+              DataCell(_rowsView(context, text: item.transactionId)),
+              DataCell(_rowsView(context, text: item.status.toString())),
+              // DataCell(InkWell(
+              //     onTap: () {},
+              //     child: CustomContainer(
+              //       alignment: Alignment.centerRight,
+              //       child: CustomSvg(
+              //         path: IMG.eye.val,
+              //         height: Responsive.isWeb(context)
+              //             ? DBL.fifteen.val
+              //             : DBL.twelve.val,
+              //         width: Responsive.isWeb(context)
+              //             ? DBL.twenty.val
+              //             : DBL.eighteen.val,
+              //       ),
+              //     ))),
             ],
           );
         }).toList(),
@@ -164,7 +194,7 @@ class SubProfileView extends StatelessWidget {
   }
 
   Widget _tableRowImage(BuildContext context,
-      {required String name, required String imgUrl, required String age}) {
+      {required String name, required String imgUrl, required int age}) {
     return Row(
       children: [
         ClipRRect(
@@ -196,17 +226,15 @@ class SubProfileView extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: age != ''
-                  ? CustomText(
-                      "(${age.toString()})",
-                      style: TS().gRoboto(
-                          fontSize: Responsive.isWeb(context)
-                              ? DBL.thirteen.val
-                              : DBL.eleven.val,
-                          fontWeight: FW.w400.val,
-                          color: AppColor.lightGrey7.val),
-                    )
-                  : SizedBox.shrink(),
+              child: CustomText(
+                "(${age.toString()})",
+                style: TS().gRoboto(
+                    fontSize: Responsive.isWeb(context)
+                        ? DBL.thirteen.val
+                        : DBL.eleven.val,
+                    fontWeight: FW.w400.val,
+                    color: AppColor.lightGrey7.val),
+              ),
             ),
           ],
         ),

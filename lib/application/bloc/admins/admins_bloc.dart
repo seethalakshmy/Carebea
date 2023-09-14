@@ -20,6 +20,7 @@ class AdminsBloc extends Bloc<AdminEvent, AdminsState> {
 
   int limit = 10;
   int page = 1;
+  final TextEditingController searchController = TextEditingController();
 
   AdminsBloc(this.adminsRepository) : super(AdminsState.initial()) {
     on<_GetAdmins>(_getAdmins);
@@ -31,6 +32,7 @@ class AdminsBloc extends Bloc<AdminEvent, AdminsState> {
     final Either<ApiErrorHandler, GetRoleResponse> roleResult =
         await adminsRepository.getRoles(
       userID: event.userId,
+      searchTerm: event.searchTerm,
     );
     AdminsState roleState = roleResult.fold((l) {
       return state.copyWith(
@@ -89,7 +91,10 @@ class AdminsBloc extends Bloc<AdminEvent, AdminsState> {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
         add(AdminEvent.getAdmins(
-            userId: event.userID, page: page, limit: limit));
+            userId: event.userID,
+            page: page,
+            limit: limit,
+            searchTerm: searchController.text.trim()));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
@@ -120,7 +125,10 @@ class AdminsBloc extends Bloc<AdminEvent, AdminsState> {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
         add(AdminEvent.getAdmins(
-            userId: event.userId, page: page, limit: limit));
+            userId: event.userId,
+            page: page,
+            limit: limit,
+            searchTerm: searchController.text.trim()));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }

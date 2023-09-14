@@ -15,7 +15,9 @@ class AdminCreationRepository implements IAdminCreationRepo {
 
   @override
   Future<Either<ApiErrorHandler, AdminViewResponse>> viewRole(
-      {required String userId, required String adminId}) async {
+      {required String userId,
+      required String adminId,
+      required String searchTerm}) async {
     try {
       final response = await _apiClient.viewAdmin("", userId, adminId);
       return Right(response);
@@ -58,9 +60,9 @@ class AdminCreationRepository implements IAdminCreationRepo {
 
   @override
   Future<Either<ApiErrorHandler, GetRoleResponse>> getRoles(
-      {required String userID}) async {
+      {required String userID, required String searchTerm}) async {
     try {
-      final response = await _apiClient.getRoles("", userID, null, null, null);
+      final response = await _apiClient.getRoles("", userID, null, null, '');
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");

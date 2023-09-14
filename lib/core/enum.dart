@@ -15,6 +15,8 @@ enum AppString {
   endTime("End Time"),
   tryAgain("Try Again"),
   ok("Ok"),
+  reviewFromClient("Review From Client"),
+  feedbackFromClient("Feedback From Client"),
   passwordCriteria(
       'Password must be 8 to 32 characters including upper/lower case letters/numbers\nand at least one special characters'),
   profile("Profile"),
