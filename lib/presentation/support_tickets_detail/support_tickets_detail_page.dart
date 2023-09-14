@@ -8,6 +8,7 @@ import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
 import '../caregiver_detail/widgets/svg_text.dart';
 import '../widget/cached_image.dart';
+import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/custom_padding.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_text.dart';
@@ -201,6 +202,22 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
 
   _profileImageView(BuildContext context, String url) {
     return CachedImage(
+      onTap: () {
+        showGeneralDialog(
+          context: context,
+          pageBuilder: (BuildContext buildContext, Animation animation,
+              Animation secondaryAnimation) {
+            return CustomAlertDialogWidget(
+                showHeading: false,
+                width: 700,
+                heading: "",
+                child: CachedImage(
+                  fit: BoxFit.contain,
+                  imgUrl: url,
+                ));
+          },
+        );
+      },
       imgUrl: url,
       height: DBL.oneSeventyFive.val,
       width: DBL.twoHundred.val,

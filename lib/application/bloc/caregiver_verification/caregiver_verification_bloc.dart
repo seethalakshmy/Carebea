@@ -411,6 +411,22 @@ class CareGiverVerificationBloc
                   height: DBL.four.val,
                 ),
                 CachedImage(
+                  onTap: () {
+                    showGeneralDialog(
+                      context: context,
+                      pageBuilder: (BuildContext buildContext, Animation animation,
+                          Animation secondaryAnimation) {
+                        return CustomAlertDialogWidget(
+                            showHeading: false,
+                            width: 700,
+                            heading: "",
+                            child: CachedImage(
+                              fit: BoxFit.contain,
+                              imgUrl: imgUrl,
+                            ));
+                      },
+                    );
+                  },
                   imgUrl: imgUrl,
                   height: DBL.oneFifty.val,
                   width: DBL.oneFifty.val,
@@ -477,6 +493,22 @@ class CareGiverVerificationBloc
                   height: DBL.four.val,
                 ),
                 CachedImage(
+                  onTap: () {
+                    showGeneralDialog(
+                      context: context,
+                      pageBuilder: (BuildContext buildContext, Animation animation,
+                          Animation secondaryAnimation) {
+                        return CustomAlertDialogWidget(
+                            showHeading: false,
+                            width: 700,
+                            heading: "",
+                            child: CachedImage(
+                              fit: BoxFit.contain,
+                              imgUrl: imgUrl,
+                            ));
+                      },
+                    );
+                  },
                   imgUrl: imgUrl,
                   height: DBL.oneFifty.val,
                   width: DBL.oneFifty.val,

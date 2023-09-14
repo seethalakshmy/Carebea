@@ -16,6 +16,7 @@ class CachedImage extends StatelessWidget {
     this.placeHolderWidth,
     this.placeHolderHeight,
     this.circleRadius,
+    this.onTap,
   }) : super(key: key);
 
   final String? imgUrl;
@@ -28,28 +29,32 @@ class CachedImage extends StatelessWidget {
   final double? placeHolderWidth;
   final double? placeHolderHeight;
   final double? circleRadius;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return isCircle
-        ? CachedNetworkImage(
-            imageUrl: imgUrl ?? "",
-            imageBuilder: (context, imageProvider) => CircleAvatar(
-              radius: circleRadius ?? 20,
-              backgroundImage: imageProvider,
+    return InkWell(
+      onTap: onTap,
+      child: isCircle
+          ? CachedNetworkImage(
+              imageUrl: imgUrl ?? "",
+              imageBuilder: (context, imageProvider) => CircleAvatar(
+                radius: circleRadius ?? 20,
+                backgroundImage: imageProvider,
+              ),
+              placeholder: (context, url) => _circlePersonView(),
+              errorWidget: (context, url, error) => _circlePersonView(),
+            )
+          : CachedNetworkImage(
+              imageUrl: imgUrl ?? "",
+              fit: fit ?? BoxFit.cover,
+              width: width,
+              height: height,
+              placeholder: (context, url) =>
+                  isDocImage || isDetailPage ? buildProgress() : _personView(),
+              errorWidget: (context, url, error) => _personView(),
             ),
-            placeholder: (context, url) => _circlePersonView(),
-            errorWidget: (context, url, error) => _circlePersonView(),
-          )
-        : CachedNetworkImage(
-            imageUrl: imgUrl ?? "",
-            fit: fit ?? BoxFit.cover,
-            width: width,
-            height: height,
-            placeholder: (context, url) =>
-                isDocImage || isDetailPage ? buildProgress() : _personView(),
-            errorWidget: (context, url, error) => _personView(),
-          );
+    );
   }
 
   Center buildProgress() {

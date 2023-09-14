@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/enum.dart';
 import '../../widget/cached_image.dart';
 import '../../widget/commonImageview.dart';
+import '../../widget/custom_alert_dialog_widget.dart';
 
 class AdminProfilePictureWidget extends StatelessWidget {
   AdminProfilePictureWidget(
@@ -34,6 +35,22 @@ class AdminProfilePictureWidget extends StatelessWidget {
                 color: AppColor.skyBlueShade.val,
                 child: state.viewResponse?.data?.profile != null
                     ? CachedImage(
+                  onTap: () {
+                    showGeneralDialog(
+                      context: context,
+                      pageBuilder: (BuildContext buildContext, Animation animation,
+                          Animation secondaryAnimation) {
+                        return CustomAlertDialogWidget(
+                            showHeading: false,
+                            width: 700,
+                            heading: "",
+                            child: CachedImage(
+                              fit: BoxFit.contain,
+                              imgUrl: state.viewResponse?.data?.profile,
+                            ));
+                      },
+                    );
+                  },
                         imgUrl: state.viewResponse?.data?.profile,
                         isCircle: true,
                         circleRadius: 50,
