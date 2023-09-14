@@ -1,5 +1,7 @@
 import 'package:admin_580_tech/application/bloc/user_management_detail/user_management_detail_bloc.dart';
+import 'package:admin_580_tech/core/utility.dart';
 import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
+import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_status.dart';
 import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,7 @@ import '../../widget/custom_card.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_data_table_2.dart';
 import '../../widget/custom_padding.dart';
+import '../../widget/custom_rating_bar.dart';
 import '../../widget/custom_selection_area.dart';
 import '../../widget/custom_sizedbox.dart';
 import '../../widget/custom_svg.dart';
@@ -45,9 +48,8 @@ class ServiceView extends StatelessWidget {
                                   height: DBL.four.val,
                                 ),
                                 CustomSizedBox(
-                                  height: (10 + 1) * 48,
-                                  child: _serviceTable(services, context),
-                                ),
+                                    height: (10 + 1) * 48,
+                                    child: _serviceTable(services, context)),
                                 CustomSizedBox(height: DBL.twenty.val),
                               ],
                             ),
@@ -88,11 +90,11 @@ class ServiceView extends StatelessWidget {
                 text: AppString.careAmbassador.val,
                 fontWeight: FontWeight.bold),
           ),
-          DataColumn2(
-            size: ColumnSize.L,
-            label: _columnsView(context,
-                text: AppString.service.val, fontWeight: FontWeight.bold),
-          ),
+          // DataColumn2(
+          //   size: ColumnSize.L,
+          //   label: _columnsView(context,
+          //       text: AppString.service.val, fontWeight: FontWeight.bold),
+          // ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
@@ -110,33 +112,33 @@ class ServiceView extends StatelessWidget {
             label: _columnsView(context,
                 text: AppString.serviceFee.val, fontWeight: FontWeight.bold),
           ),
-          DataColumn2(
-            size: ColumnSize.L,
-            label: _columnsView(context,
-                text: AppString.extraFee.val, fontWeight: FontWeight.bold),
-          ),
+          // DataColumn2(
+          //   size: ColumnSize.L,
+          //   label: _columnsView(context,
+          //       text: AppString.extraFee.val, fontWeight: FontWeight.bold),
+          // ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
                 text: AppString.tip.val, fontWeight: FontWeight.bold),
           ),
-          DataColumn2(
-            size: ColumnSize.L,
-            label: _columnsView(context,
-                text: AppString.refund.val, fontWeight: FontWeight.bold),
-          ),
+          // DataColumn2(
+          //   size: ColumnSize.L,
+          //   label: _columnsView(context,
+          //       text: AppString.refund.val, fontWeight: FontWeight.bold),
+          // ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
                 text: AppString.reviewFromClient.val,
                 fontWeight: FontWeight.bold),
           ),
-          DataColumn2(
-            size: ColumnSize.L,
-            label: _columnsView(context,
-                text: AppString.feedbackFromClient.val,
-                fontWeight: FontWeight.bold),
-          ),
+          // DataColumn2(
+          //   size: ColumnSize.L,
+          //   label: _columnsView(context,
+          //       text: AppString.feedbackFromClient.val,
+          //       fontWeight: FontWeight.bold),
+          // ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
@@ -164,20 +166,23 @@ class ServiceView extends StatelessWidget {
               DataCell(_tableRowImage(
                 context,
                 name:
-                    "${item.caregiver?.firstName?.name?.firstName} ${item.caregiver?.lastName}",
+                    "${item.caregiver?.firstName?.name?.firstName} ${item.caregiver?.firstName?.name?.lastName}",
                 imgUrl: item.caregiver?.profilePic ?? "",
               )),
-              DataCell(_rowsView(context, text: '1')),
-              DataCell(_rowsView(context, text: item.startDateTime)),
-              DataCell(_rowsView(context, text: item.endDateTime)),
-              DataCell(
-                  _rowsView(context, text: item.totalServiceFee.toString())),
-              DataCell(_rowsView(context, text: "10")),
-              DataCell(_rowsView(context, text: "1")),
-              DataCell(_rowsView(context, text: "1")),
-              DataCell(_rowsView(context, text: "1")),
-              DataCell(_rowsView(context, text: "22")),
-              DataCell(_rowsView(context, text: item.status.toString())),
+              DataCell(_rowsView(context,
+                  text: Utility.serviceDate(
+                      DateTime.parse(item.startDateTime ?? '')))),
+              DataCell(_rowsView(context,
+                  text: Utility.serviceDate(
+                      DateTime.parse(item.endDateTime ?? '')))),
+              DataCell(_rowsView(context,
+                  text: '\$ ${item.totalServiceFee.toString()}')),
+              DataCell(_rowsView(context, text: '\$ ${item.tip}')),
+              DataCell(CustomRatingBar(
+                rating: item.rating ?? 0,
+              )),
+              // DataCell(_rowsView(context, text: item.status.toString())),
+              DataCell(ServiceStatus(status: item.status ?? 0)),
               // DataCell(InkWell(
               //     onTap: () {},
               //     child: CustomContainer(
@@ -240,28 +245,32 @@ class ServiceView extends StatelessWidget {
               height: DBL.thirty.val, width: DBL.thirty.val, imgUrl: imgUrl),
         ),
         CustomSizedBox(width: DBL.twelve.val),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomSizedBox(
-              height: DBL.ten.val,
-            ),
-            Expanded(
-              flex: 1,
-              child: CustomText(
-                name,
-                style: TS().gRoboto(
-                    fontSize: Responsive.isWeb(context)
-                        ? DBL.fourteen.val
-                        : DBL.twelve.val,
-                    fontWeight: FW.w400.val,
-                    color: AppColor.rowColor.val),
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomSizedBox(
+                height: DBL.ten.val,
               ),
-            ),
-            CustomSizedBox(
-              height: DBL.three.val,
-            ),
-          ],
+              Expanded(
+                flex: 1,
+                child: CustomText(
+                  name,
+                  overflow: TextOverflow.visible,
+                  softWrap: true,
+                  style: TS().gRoboto(
+                      fontSize: Responsive.isWeb(context)
+                          ? DBL.twelve.val
+                          : DBL.ten.val,
+                      fontWeight: FW.w400.val,
+                      color: AppColor.rowColor.val),
+                ),
+              ),
+              CustomSizedBox(
+                height: DBL.three.val,
+              ),
+            ],
+          ),
         ),
       ],
     );

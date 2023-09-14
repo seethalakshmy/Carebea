@@ -109,9 +109,8 @@ class SubProfileView extends StatelessWidget {
               DataCell(_tableRowImage(context,
                   name: "${item.name?.firstName} ${item.name?.lastName}",
                   imgUrl: item.profilePic ?? "",
-                  age: int.tryParse(item.age ?? '') ?? 1)),
-              DataCell(_rowsView(context,
-                  text: item.completedServices?.first.toString())),
+                  age: item.age ?? '')),
+              DataCell(_rowsView(context, text: item.totalServices.toString())),
               DataCell(InkWell(
                   onTap: () {},
                   child: CustomContainer(
@@ -165,7 +164,7 @@ class SubProfileView extends StatelessWidget {
   }
 
   Widget _tableRowImage(BuildContext context,
-      {required String name, required String imgUrl, required int age}) {
+      {required String name, required String imgUrl, required String age}) {
     return Row(
       children: [
         ClipRRect(
@@ -197,15 +196,17 @@ class SubProfileView extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: CustomText(
-                "(${age.toString()})",
-                style: TS().gRoboto(
-                    fontSize: Responsive.isWeb(context)
-                        ? DBL.thirteen.val
-                        : DBL.eleven.val,
-                    fontWeight: FW.w400.val,
-                    color: AppColor.lightGrey7.val),
-              ),
+              child: age != ''
+                  ? CustomText(
+                      "(${age.toString()})",
+                      style: TS().gRoboto(
+                          fontSize: Responsive.isWeb(context)
+                              ? DBL.thirteen.val
+                              : DBL.eleven.val,
+                          fontWeight: FW.w400.val,
+                          color: AppColor.lightGrey7.val),
+                    )
+                  : SizedBox.shrink(),
             ),
           ],
         ),

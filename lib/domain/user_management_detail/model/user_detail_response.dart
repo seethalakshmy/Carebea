@@ -290,6 +290,8 @@ class Services {
     String? endDateTime,
     num? totalServiceFee,
     num? status,
+    num? tip,
+    num? rating,
     Client? client,
     Caregiver? caregiver,
   }) {
@@ -298,6 +300,8 @@ class Services {
     _startDateTime = startDateTime;
     _endDateTime = endDateTime;
     _totalServiceFee = totalServiceFee;
+    _tip = tip;
+    _rating = rating;
     _status = status;
     _client = client;
     _caregiver = caregiver;
@@ -310,6 +314,8 @@ class Services {
     _endDateTime = json['end_date_time'];
     _totalServiceFee = json['total_service_fee'];
     _status = json['status'];
+    _tip = json['tipByClient'];
+    _rating = json['service_rating'];
     _client = json['client'] != null ? Client.fromJson(json['client']) : null;
     _caregiver = json['caregiver'] != null
         ? Caregiver.fromJson(json['caregiver'])
@@ -321,6 +327,8 @@ class Services {
   String? _endDateTime;
   num? _totalServiceFee;
   num? _status;
+  num? _tip;
+  num? _rating;
   Client? _client;
   Caregiver? _caregiver;
   Services copyWith({
@@ -330,6 +338,8 @@ class Services {
     String? endDateTime,
     num? totalServiceFee,
     num? status,
+    num? tip,
+    num? rating,
     Client? client,
     Caregiver? caregiver,
   }) =>
@@ -340,6 +350,8 @@ class Services {
         endDateTime: endDateTime ?? _endDateTime,
         totalServiceFee: totalServiceFee ?? _totalServiceFee,
         status: status ?? _status,
+        tip: tip ?? _tip,
+        rating: rating ?? _rating,
         client: client ?? _client,
         caregiver: caregiver ?? _caregiver,
       );
@@ -349,6 +361,8 @@ class Services {
   String? get endDateTime => _endDateTime;
   num? get totalServiceFee => _totalServiceFee;
   num? get status => _status;
+  num? get tip => _tip;
+  num? get rating => _rating;
   Client? get client => _client;
   Caregiver? get caregiver => _caregiver;
 
@@ -360,6 +374,8 @@ class Services {
     map['end_date_time'] = _endDateTime;
     map['total_service_fee'] = _totalServiceFee;
     map['status'] = _status;
+    map['tipByClient'] = _tip;
+    map['service_rating'] = _rating;
     if (_client != null) {
       map['client'] = _client?.toJson();
     }
@@ -1633,6 +1649,7 @@ class SubProfiles {
     String? locationTag,
     String? profilePic,
     String? age,
+    num? totalServices,
     String? profileThumbnail,
     bool? isProfileCompleted,
     num? profileCompletePercentage,
@@ -1645,6 +1662,7 @@ class SubProfiles {
     _locationTag = locationTag;
     _profilePic = profilePic;
     _age = age;
+    _totalServices = totalServices;
     _profileThumbnail = profileThumbnail;
     _isProfileCompleted = isProfileCompleted;
     _profileCompletePercentage = profileCompletePercentage;
@@ -1663,6 +1681,7 @@ class SubProfiles {
     _profileThumbnail = json['profile_thumbnail'];
     _isProfileCompleted = json['is_profile_completed'];
     _profileCompletePercentage = json['profile_complete_percentage'];
+    _totalServices = json['totalService'];
     _profileCompletion = json['profile_completion'] != null
         ? ProfileCompletion.fromJson(json['profile_completion'])
         : null;
@@ -1682,6 +1701,7 @@ class SubProfiles {
   String? _profileThumbnail;
   bool? _isProfileCompleted;
   num? _profileCompletePercentage;
+  num? _totalServices;
   ProfileCompletion? _profileCompletion;
   List<CompletedServices>? _completedServices;
   SubProfiles copyWith({
@@ -1694,6 +1714,7 @@ class SubProfiles {
     String? profileThumbnail,
     bool? isProfileCompleted,
     num? profileCompletePercentage,
+    num? totalServices,
     ProfileCompletion? profileCompletion,
     List<CompletedServices>? completedServices,
   }) =>
@@ -1704,6 +1725,7 @@ class SubProfiles {
         locationTag: locationTag ?? _locationTag,
         profilePic: profilePic ?? _profilePic,
         age: age ?? _age,
+        totalServices: totalServices ?? _totalServices,
         profileThumbnail: profileThumbnail ?? _profileThumbnail,
         isProfileCompleted: isProfileCompleted ?? _isProfileCompleted,
         profileCompletePercentage:
@@ -1720,6 +1742,7 @@ class SubProfiles {
   String? get profileThumbnail => _profileThumbnail;
   bool? get isProfileCompleted => _isProfileCompleted;
   num? get profileCompletePercentage => _profileCompletePercentage;
+  num? get totalServices => _totalServices;
   ProfileCompletion? get profileCompletion => _profileCompletion;
   List<CompletedServices>? get completedServices => _completedServices;
 
@@ -1738,6 +1761,7 @@ class SubProfiles {
     map['profile_thumbnail'] = _profileThumbnail;
     map['is_profile_completed'] = _isProfileCompleted;
     map['profile_complete_percentage'] = _profileCompletePercentage;
+    map['totalServices'] = _totalServices;
     if (_profileCompletion != null) {
       map['profile_completion'] = _profileCompletion?.toJson();
     }
