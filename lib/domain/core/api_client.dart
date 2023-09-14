@@ -35,12 +35,12 @@ import '../admins/model/admin_get_response.dart';
 import '../caregiver_verification/model/reject_params.dart';
 import '../caregivers/model/caregiver_response.dart';
 import '../email_otp_verification/models/verify_otp_response.dart';
+import '../faq/models/faq_list_response_model.dart';
+import '../faq_creation/models/faq_details_response_model.dart';
 import '../on_boarding/models/common_response.dart';
 import '../on_boarding/models/preferences/pet_list_response.dart';
-import '../on_boarding/models/preferences/preference_request_model.dart';
 import '../on_boarding/models/preferences/years_of_experience_response.dart';
 import '../on_boarding/models/services/get_services_response.dart';
-import '../on_boarding/models/services/service_request_model.dart';
 import '../role_creation/model/module_response.dart';
 import '../role_creation/model/view_role_response.dart';
 import '../service_request_management/model/assign_caregiver_params.dart';
@@ -596,5 +596,28 @@ abstract class ApiClient {
     @Field('user_id') String userId,
     @Field('admin_id') String adminId,
     @Field('status') bool status,
+  );
+
+  @GET('/common-data/get-faqs')
+  Future<FaqListResponseModel> getFaqList();
+
+  @POST('/common-data/get-faq')
+  Future<FaqDetailsResponseModel> getFaqDetails(
+    @Field('_id') String itemId,
+  );
+
+  @POST('/common-data/update-faq')
+  Future<CommonResponse> updateFaqDetails(
+    @Field('_id') String itemId,
+    @Field('question') String question,
+    @Field('answer') String answer,
+    @Field('status') String status,
+  );
+
+  @POST('/common-data/create-faq')
+  Future<CommonResponse> createFaqDetails(
+    @Field('question') String question,
+    @Field('answer') String answer,
+    @Field('status') String status,
   );
 }

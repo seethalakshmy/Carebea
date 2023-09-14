@@ -16,62 +16,61 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$FaqCreationEvent {
-  BuildContext get context => throw _privateConstructorUsedError;
-  String get question => throw _privateConstructorUsedError;
-  String get answer => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String id) getFaq,
     required TResult Function(BuildContext context, String question,
-            String answer, String? profilePic)
+            String answer, String status, String? profilePic)
         addFaq,
-    required TResult Function(
-            String userId, BuildContext context, String question, String answer)
+    required TResult Function(String id, String question, String answer,
+            String status, BuildContext context)
         updateFaq,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id)? getFaq,
     TResult? Function(BuildContext context, String question, String answer,
-            String? profilePic)?
+            String status, String? profilePic)?
         addFaq,
-    TResult? Function(String userId, BuildContext context, String question,
-            String answer)?
+    TResult? Function(String id, String question, String answer, String status,
+            BuildContext context)?
         updateFaq,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id)? getFaq,
     TResult Function(BuildContext context, String question, String answer,
-            String? profilePic)?
+            String status, String? profilePic)?
         addFaq,
-    TResult Function(String userId, BuildContext context, String question,
-            String answer)?
+    TResult Function(String id, String question, String answer, String status,
+            BuildContext context)?
         updateFaq,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetFaq value) getFaq,
     required TResult Function(_AddFaq value) addFaq,
     required TResult Function(_UpdateFaq value) updateFaq,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetFaq value)? getFaq,
     TResult? Function(_AddFaq value)? addFaq,
     TResult? Function(_UpdateFaq value)? updateFaq,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetFaq value)? getFaq,
     TResult Function(_AddFaq value)? addFaq,
     TResult Function(_UpdateFaq value)? updateFaq,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $FaqCreationEventCopyWith<FaqCreationEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -80,8 +79,6 @@ abstract class $FaqCreationEventCopyWith<$Res> {
   factory $FaqCreationEventCopyWith(
           FaqCreationEvent value, $Res Function(FaqCreationEvent) then) =
       _$FaqCreationEventCopyWithImpl<$Res, FaqCreationEvent>;
-  @useResult
-  $Res call({BuildContext context, String question, String answer});
 }
 
 /// @nodoc
@@ -93,42 +90,167 @@ class _$FaqCreationEventCopyWithImpl<$Res, $Val extends FaqCreationEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$_GetFaqCopyWith<$Res> {
+  factory _$$_GetFaqCopyWith(_$_GetFaq value, $Res Function(_$_GetFaq) then) =
+      __$$_GetFaqCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String id});
+}
+
+/// @nodoc
+class __$$_GetFaqCopyWithImpl<$Res>
+    extends _$FaqCreationEventCopyWithImpl<$Res, _$_GetFaq>
+    implements _$$_GetFaqCopyWith<$Res> {
+  __$$_GetFaqCopyWithImpl(_$_GetFaq _value, $Res Function(_$_GetFaq) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? context = null,
-    Object? question = null,
-    Object? answer = null,
+    Object? id = null,
   }) {
-    return _then(_value.copyWith(
-      context: null == context
-          ? _value.context
-          : context // ignore: cast_nullable_to_non_nullable
-              as BuildContext,
-      question: null == question
-          ? _value.question
-          : question // ignore: cast_nullable_to_non_nullable
+    return _then(_$_GetFaq(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      answer: null == answer
-          ? _value.answer
-          : answer // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+    ));
   }
 }
 
 /// @nodoc
-abstract class _$$_AddFaqCopyWith<$Res>
-    implements $FaqCreationEventCopyWith<$Res> {
+
+class _$_GetFaq implements _GetFaq {
+  const _$_GetFaq({required this.id});
+
+  @override
+  final String id;
+
+  @override
+  String toString() {
+    return 'FaqCreationEvent.getFaq(id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetFaq &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetFaqCopyWith<_$_GetFaq> get copyWith =>
+      __$$_GetFaqCopyWithImpl<_$_GetFaq>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String id) getFaq,
+    required TResult Function(BuildContext context, String question,
+            String answer, String status, String? profilePic)
+        addFaq,
+    required TResult Function(String id, String question, String answer,
+            String status, BuildContext context)
+        updateFaq,
+  }) {
+    return getFaq(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id)? getFaq,
+    TResult? Function(BuildContext context, String question, String answer,
+            String status, String? profilePic)?
+        addFaq,
+    TResult? Function(String id, String question, String answer, String status,
+            BuildContext context)?
+        updateFaq,
+  }) {
+    return getFaq?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id)? getFaq,
+    TResult Function(BuildContext context, String question, String answer,
+            String status, String? profilePic)?
+        addFaq,
+    TResult Function(String id, String question, String answer, String status,
+            BuildContext context)?
+        updateFaq,
+    required TResult orElse(),
+  }) {
+    if (getFaq != null) {
+      return getFaq(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetFaq value) getFaq,
+    required TResult Function(_AddFaq value) addFaq,
+    required TResult Function(_UpdateFaq value) updateFaq,
+  }) {
+    return getFaq(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetFaq value)? getFaq,
+    TResult? Function(_AddFaq value)? addFaq,
+    TResult? Function(_UpdateFaq value)? updateFaq,
+  }) {
+    return getFaq?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetFaq value)? getFaq,
+    TResult Function(_AddFaq value)? addFaq,
+    TResult Function(_UpdateFaq value)? updateFaq,
+    required TResult orElse(),
+  }) {
+    if (getFaq != null) {
+      return getFaq(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetFaq implements FaqCreationEvent {
+  const factory _GetFaq({required final String id}) = _$_GetFaq;
+
+  String get id;
+  @JsonKey(ignore: true)
+  _$$_GetFaqCopyWith<_$_GetFaq> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AddFaqCopyWith<$Res> {
   factory _$$_AddFaqCopyWith(_$_AddFaq value, $Res Function(_$_AddFaq) then) =
       __$$_AddFaqCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call(
       {BuildContext context,
       String question,
       String answer,
+      String status,
       String? profilePic});
 }
 
@@ -145,6 +267,7 @@ class __$$_AddFaqCopyWithImpl<$Res>
     Object? context = null,
     Object? question = null,
     Object? answer = null,
+    Object? status = null,
     Object? profilePic = freezed,
   }) {
     return _then(_$_AddFaq(
@@ -159,6 +282,10 @@ class __$$_AddFaqCopyWithImpl<$Res>
       answer: null == answer
           ? _value.answer
           : answer // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
               as String,
       profilePic: freezed == profilePic
           ? _value.profilePic
@@ -175,6 +302,7 @@ class _$_AddFaq implements _AddFaq {
       {required this.context,
       required this.question,
       required this.answer,
+      required this.status,
       this.profilePic});
 
   @override
@@ -184,11 +312,13 @@ class _$_AddFaq implements _AddFaq {
   @override
   final String answer;
   @override
+  final String status;
+  @override
   final String? profilePic;
 
   @override
   String toString() {
-    return 'FaqCreationEvent.addFaq(context: $context, question: $question, answer: $answer, profilePic: $profilePic)';
+    return 'FaqCreationEvent.addFaq(context: $context, question: $question, answer: $answer, status: $status, profilePic: $profilePic)';
   }
 
   @override
@@ -200,13 +330,14 @@ class _$_AddFaq implements _AddFaq {
             (identical(other.question, question) ||
                 other.question == question) &&
             (identical(other.answer, answer) || other.answer == answer) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.profilePic, profilePic) ||
                 other.profilePic == profilePic));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, context, question, answer, profilePic);
+      Object.hash(runtimeType, context, question, answer, status, profilePic);
 
   @JsonKey(ignore: true)
   @override
@@ -217,42 +348,45 @@ class _$_AddFaq implements _AddFaq {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String id) getFaq,
     required TResult Function(BuildContext context, String question,
-            String answer, String? profilePic)
+            String answer, String status, String? profilePic)
         addFaq,
-    required TResult Function(
-            String userId, BuildContext context, String question, String answer)
+    required TResult Function(String id, String question, String answer,
+            String status, BuildContext context)
         updateFaq,
   }) {
-    return addFaq(context, question, answer, profilePic);
+    return addFaq(context, question, answer, status, profilePic);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id)? getFaq,
     TResult? Function(BuildContext context, String question, String answer,
-            String? profilePic)?
+            String status, String? profilePic)?
         addFaq,
-    TResult? Function(String userId, BuildContext context, String question,
-            String answer)?
+    TResult? Function(String id, String question, String answer, String status,
+            BuildContext context)?
         updateFaq,
   }) {
-    return addFaq?.call(context, question, answer, profilePic);
+    return addFaq?.call(context, question, answer, status, profilePic);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id)? getFaq,
     TResult Function(BuildContext context, String question, String answer,
-            String? profilePic)?
+            String status, String? profilePic)?
         addFaq,
-    TResult Function(String userId, BuildContext context, String question,
-            String answer)?
+    TResult Function(String id, String question, String answer, String status,
+            BuildContext context)?
         updateFaq,
     required TResult orElse(),
   }) {
     if (addFaq != null) {
-      return addFaq(context, question, answer, profilePic);
+      return addFaq(context, question, answer, status, profilePic);
     }
     return orElse();
   }
@@ -260,6 +394,7 @@ class _$_AddFaq implements _AddFaq {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetFaq value) getFaq,
     required TResult Function(_AddFaq value) addFaq,
     required TResult Function(_UpdateFaq value) updateFaq,
   }) {
@@ -269,6 +404,7 @@ class _$_AddFaq implements _AddFaq {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetFaq value)? getFaq,
     TResult? Function(_AddFaq value)? addFaq,
     TResult? Function(_UpdateFaq value)? updateFaq,
   }) {
@@ -278,6 +414,7 @@ class _$_AddFaq implements _AddFaq {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetFaq value)? getFaq,
     TResult Function(_AddFaq value)? addFaq,
     TResult Function(_UpdateFaq value)? updateFaq,
     required TResult orElse(),
@@ -294,31 +431,31 @@ abstract class _AddFaq implements FaqCreationEvent {
       {required final BuildContext context,
       required final String question,
       required final String answer,
+      required final String status,
       final String? profilePic}) = _$_AddFaq;
 
-  @override
   BuildContext get context;
-  @override
   String get question;
-  @override
   String get answer;
+  String get status;
   String? get profilePic;
-  @override
   @JsonKey(ignore: true)
   _$$_AddFaqCopyWith<_$_AddFaq> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateFaqCopyWith<$Res>
-    implements $FaqCreationEventCopyWith<$Res> {
+abstract class _$$_UpdateFaqCopyWith<$Res> {
   factory _$$_UpdateFaqCopyWith(
           _$_UpdateFaq value, $Res Function(_$_UpdateFaq) then) =
       __$$_UpdateFaqCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call(
-      {String userId, BuildContext context, String question, String answer});
+      {String id,
+      String question,
+      String answer,
+      String status,
+      BuildContext context});
 }
 
 /// @nodoc
@@ -332,20 +469,17 @@ class __$$_UpdateFaqCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userId = null,
-    Object? context = null,
+    Object? id = null,
     Object? question = null,
     Object? answer = null,
+    Object? status = null,
+    Object? context = null,
   }) {
     return _then(_$_UpdateFaq(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      context: null == context
-          ? _value.context
-          : context // ignore: cast_nullable_to_non_nullable
-              as BuildContext,
       question: null == question
           ? _value.question
           : question // ignore: cast_nullable_to_non_nullable
@@ -354,6 +488,14 @@ class __$$_UpdateFaqCopyWithImpl<$Res>
           ? _value.answer
           : answer // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ));
   }
 }
@@ -362,23 +504,26 @@ class __$$_UpdateFaqCopyWithImpl<$Res>
 
 class _$_UpdateFaq implements _UpdateFaq {
   const _$_UpdateFaq(
-      {required this.userId,
-      required this.context,
+      {required this.id,
       required this.question,
-      required this.answer});
+      required this.answer,
+      required this.status,
+      required this.context});
 
   @override
-  final String userId;
-  @override
-  final BuildContext context;
+  final String id;
   @override
   final String question;
   @override
   final String answer;
+  @override
+  final String status;
+  @override
+  final BuildContext context;
 
   @override
   String toString() {
-    return 'FaqCreationEvent.updateFaq(userId: $userId, context: $context, question: $question, answer: $answer)';
+    return 'FaqCreationEvent.updateFaq(id: $id, question: $question, answer: $answer, status: $status, context: $context)';
   }
 
   @override
@@ -386,16 +531,17 @@ class _$_UpdateFaq implements _UpdateFaq {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UpdateFaq &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.context, context) || other.context == context) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.question, question) ||
                 other.question == question) &&
-            (identical(other.answer, answer) || other.answer == answer));
+            (identical(other.answer, answer) || other.answer == answer) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.context, context) || other.context == context));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, userId, context, question, answer);
+      Object.hash(runtimeType, id, question, answer, status, context);
 
   @JsonKey(ignore: true)
   @override
@@ -406,42 +552,45 @@ class _$_UpdateFaq implements _UpdateFaq {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String id) getFaq,
     required TResult Function(BuildContext context, String question,
-            String answer, String? profilePic)
+            String answer, String status, String? profilePic)
         addFaq,
-    required TResult Function(
-            String userId, BuildContext context, String question, String answer)
+    required TResult Function(String id, String question, String answer,
+            String status, BuildContext context)
         updateFaq,
   }) {
-    return updateFaq(userId, context, question, answer);
+    return updateFaq(id, question, answer, status, context);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id)? getFaq,
     TResult? Function(BuildContext context, String question, String answer,
-            String? profilePic)?
+            String status, String? profilePic)?
         addFaq,
-    TResult? Function(String userId, BuildContext context, String question,
-            String answer)?
+    TResult? Function(String id, String question, String answer, String status,
+            BuildContext context)?
         updateFaq,
   }) {
-    return updateFaq?.call(userId, context, question, answer);
+    return updateFaq?.call(id, question, answer, status, context);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id)? getFaq,
     TResult Function(BuildContext context, String question, String answer,
-            String? profilePic)?
+            String status, String? profilePic)?
         addFaq,
-    TResult Function(String userId, BuildContext context, String question,
-            String answer)?
+    TResult Function(String id, String question, String answer, String status,
+            BuildContext context)?
         updateFaq,
     required TResult orElse(),
   }) {
     if (updateFaq != null) {
-      return updateFaq(userId, context, question, answer);
+      return updateFaq(id, question, answer, status, context);
     }
     return orElse();
   }
@@ -449,6 +598,7 @@ class _$_UpdateFaq implements _UpdateFaq {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_GetFaq value) getFaq,
     required TResult Function(_AddFaq value) addFaq,
     required TResult Function(_UpdateFaq value) updateFaq,
   }) {
@@ -458,6 +608,7 @@ class _$_UpdateFaq implements _UpdateFaq {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetFaq value)? getFaq,
     TResult? Function(_AddFaq value)? addFaq,
     TResult? Function(_UpdateFaq value)? updateFaq,
   }) {
@@ -467,6 +618,7 @@ class _$_UpdateFaq implements _UpdateFaq {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetFaq value)? getFaq,
     TResult Function(_AddFaq value)? addFaq,
     TResult Function(_UpdateFaq value)? updateFaq,
     required TResult orElse(),
@@ -480,19 +632,17 @@ class _$_UpdateFaq implements _UpdateFaq {
 
 abstract class _UpdateFaq implements FaqCreationEvent {
   const factory _UpdateFaq(
-      {required final String userId,
-      required final BuildContext context,
+      {required final String id,
       required final String question,
-      required final String answer}) = _$_UpdateFaq;
+      required final String answer,
+      required final String status,
+      required final BuildContext context}) = _$_UpdateFaq;
 
-  String get userId;
-  @override
-  BuildContext get context;
-  @override
+  String get id;
   String get question;
-  @override
   String get answer;
-  @override
+  String get status;
+  BuildContext get context;
   @JsonKey(ignore: true)
   _$$_UpdateFaqCopyWith<_$_UpdateFaq> get copyWith =>
       throw _privateConstructorUsedError;
@@ -507,6 +657,8 @@ mixin _$FaqCreationState {
 // required CommonResponseUse? updateResponse,
 // required AdminViewResponse? viewResponse,
 // required GetRoleResponse? rolesResponse,
+  Option<Either<ApiErrorHandler, FaqDetailsResponseModel>>
+      get faqDetailOption => throw _privateConstructorUsedError;
   bool get isClientError => throw _privateConstructorUsedError;
   bool get isDropDownError => throw _privateConstructorUsedError;
   bool get isLoadingButton => throw _privateConstructorUsedError;
@@ -526,6 +678,7 @@ abstract class $FaqCreationStateCopyWith<$Res> {
       {bool isLoading,
       bool isError,
       String? error,
+      Option<Either<ApiErrorHandler, FaqDetailsResponseModel>> faqDetailOption,
       bool isClientError,
       bool isDropDownError,
       bool isLoadingButton});
@@ -547,6 +700,7 @@ class _$FaqCreationStateCopyWithImpl<$Res, $Val extends FaqCreationState>
     Object? isLoading = null,
     Object? isError = null,
     Object? error = freezed,
+    Object? faqDetailOption = null,
     Object? isClientError = null,
     Object? isDropDownError = null,
     Object? isLoadingButton = null,
@@ -564,6 +718,10 @@ class _$FaqCreationStateCopyWithImpl<$Res, $Val extends FaqCreationState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      faqDetailOption: null == faqDetailOption
+          ? _value.faqDetailOption
+          : faqDetailOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, FaqDetailsResponseModel>>,
       isClientError: null == isClientError
           ? _value.isClientError
           : isClientError // ignore: cast_nullable_to_non_nullable
@@ -592,6 +750,7 @@ abstract class _$$_FaqCreationStateCopyWith<$Res>
       {bool isLoading,
       bool isError,
       String? error,
+      Option<Either<ApiErrorHandler, FaqDetailsResponseModel>> faqDetailOption,
       bool isClientError,
       bool isDropDownError,
       bool isLoadingButton});
@@ -611,6 +770,7 @@ class __$$_FaqCreationStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? isError = null,
     Object? error = freezed,
+    Object? faqDetailOption = null,
     Object? isClientError = null,
     Object? isDropDownError = null,
     Object? isLoadingButton = null,
@@ -628,6 +788,10 @@ class __$$_FaqCreationStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      faqDetailOption: null == faqDetailOption
+          ? _value.faqDetailOption
+          : faqDetailOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, FaqDetailsResponseModel>>,
       isClientError: null == isClientError
           ? _value.isClientError
           : isClientError // ignore: cast_nullable_to_non_nullable
@@ -651,6 +815,7 @@ class _$_FaqCreationState implements _FaqCreationState {
       {required this.isLoading,
       required this.isError,
       required this.error,
+      required this.faqDetailOption,
       this.isClientError = false,
       this.isDropDownError = false,
       this.isLoadingButton = false});
@@ -666,6 +831,9 @@ class _$_FaqCreationState implements _FaqCreationState {
 // required AdminViewResponse? viewResponse,
 // required GetRoleResponse? rolesResponse,
   @override
+  final Option<Either<ApiErrorHandler, FaqDetailsResponseModel>>
+      faqDetailOption;
+  @override
   @JsonKey()
   final bool isClientError;
   @override
@@ -677,7 +845,7 @@ class _$_FaqCreationState implements _FaqCreationState {
 
   @override
   String toString() {
-    return 'FaqCreationState(isLoading: $isLoading, isError: $isError, error: $error, isClientError: $isClientError, isDropDownError: $isDropDownError, isLoadingButton: $isLoadingButton)';
+    return 'FaqCreationState(isLoading: $isLoading, isError: $isError, error: $error, faqDetailOption: $faqDetailOption, isClientError: $isClientError, isDropDownError: $isDropDownError, isLoadingButton: $isLoadingButton)';
   }
 
   @override
@@ -689,6 +857,8 @@ class _$_FaqCreationState implements _FaqCreationState {
                 other.isLoading == isLoading) &&
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.error, error) || other.error == error) &&
+            (identical(other.faqDetailOption, faqDetailOption) ||
+                other.faqDetailOption == faqDetailOption) &&
             (identical(other.isClientError, isClientError) ||
                 other.isClientError == isClientError) &&
             (identical(other.isDropDownError, isDropDownError) ||
@@ -699,7 +869,7 @@ class _$_FaqCreationState implements _FaqCreationState {
 
   @override
   int get hashCode => Object.hash(runtimeType, isLoading, isError, error,
-      isClientError, isDropDownError, isLoadingButton);
+      faqDetailOption, isClientError, isDropDownError, isLoadingButton);
 
   @JsonKey(ignore: true)
   @override
@@ -713,6 +883,8 @@ abstract class _FaqCreationState implements FaqCreationState {
       {required final bool isLoading,
       required final bool isError,
       required final String? error,
+      required final Option<Either<ApiErrorHandler, FaqDetailsResponseModel>>
+          faqDetailOption,
       final bool isClientError,
       final bool isDropDownError,
       final bool isLoadingButton}) = _$_FaqCreationState;
@@ -727,6 +899,8 @@ abstract class _FaqCreationState implements FaqCreationState {
 // required CommonResponseUse? updateResponse,
 // required AdminViewResponse? viewResponse,
 // required GetRoleResponse? rolesResponse,
+  Option<Either<ApiErrorHandler, FaqDetailsResponseModel>> get faqDetailOption;
+  @override
   bool get isClientError;
   @override
   bool get isDropDownError;

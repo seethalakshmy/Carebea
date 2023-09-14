@@ -10,6 +10,8 @@ class FaqCreationState with _$FaqCreationState {
     // required CommonResponseUse? updateResponse,
     // required AdminViewResponse? viewResponse,
     // required GetRoleResponse? rolesResponse,
+    required Option<Either<ApiErrorHandler, FaqDetailsResponseModel>>
+        faqDetailOption,
     @Default(false) bool isClientError,
     @Default(false) bool isDropDownError,
     @Default(false) bool isLoadingButton,
@@ -17,13 +19,14 @@ class FaqCreationState with _$FaqCreationState {
 
   factory FaqCreationState.initial() {
     return const FaqCreationState(
-      isLoading: true,
+      isLoading: false,
       isError: false,
       // viewResponse: null,
       // addResponse: null,
       // updateResponse: null,
       // rolesResponse: null,
       // selectedRole: null,
+      faqDetailOption: None(),
       error: null,
     );
   }

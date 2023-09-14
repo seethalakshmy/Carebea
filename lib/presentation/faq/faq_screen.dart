@@ -20,11 +20,15 @@ import '../widget/custom_icon.dart';
 import '../widget/custom_selection_area.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_svg.dart';
+import '../widget/custom_text.dart';
 import '../widget/custom_text_field.dart';
+import '../widget/error_view.dart';
 import '../widget/header_view.dart';
+import '../widget/loader_view.dart';
 import '../widget/pagination_view.dart';
 import '../widget/table_actions_view.dart';
 import '../widget/table_column_view.dart';
+import '../widget/table_loader_view.dart';
 import '../widget/table_row_view.dart';
 
 @RoutePage()
@@ -46,22 +50,31 @@ class _FaqPageState extends State<FaqPage> {
   final TextEditingController _searchController = TextEditingController();
   final _searchNode = FocusNode();
   String _adminUserId = "";
-  FaqBloc _faqBloc = FaqBloc(FaqRepository());
+  final FaqBloc _faqBloc = FaqBloc(FaqRepository());
   SharedPreffUtil sharedPrefUtil = SharedPreffUtil();
   String? filterId;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        HeaderView(
-          title: AppString.faq.val,
-        ),
-        CustomSizedBox(
-          height: DBL.twenty.val,
-        ),
-        _rebuildView(),
-      ],
+    _faqBloc.add(const FaqEvent.getFaqList());
+    return FutureBuilder(
+      future: SharedPreffUtil().init(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const LoaderView();
+        }
+        return Column(
+          children: [
+            HeaderView(
+              title: AppString.faq.val,
+            ),
+            CustomSizedBox(
+              height: DBL.twenty.val,
+            ),
+            _rebuildView(),
+          ],
+        );
+      },
     );
   }
 
@@ -91,14 +104,13 @@ class _FaqPageState extends State<FaqPage> {
       elevation: DBL.seven.val,
       child: CustomContainer(
           padding: EdgeInsets.all(DBL.twenty.val),
-          child
-              // child: state.isLoading
-              //     ? const TableLoaderView()
-              //     : state.isError
-              //         ? ErrorView(
-              //             isClientError: state.isClientError,
-              //             errorMessage: state.error)
-              : _faqView(context, state)),
+          child: state.isLoading
+              ? const TableLoaderView()
+              : state.isError
+                  ? ErrorView(
+                      isClientError: state.isClientError,
+                      errorMessage: state.error)
+                  : _faqView(context, state)),
     );
   }
 
@@ -156,22 +168,18 @@ class _FaqPageState extends State<FaqPage> {
               ),
             ),
             DataColumn2(
-              size: ColumnSize.L,
+              size: ColumnSize.M,
               label: _tableColumnView(
                 "",
               ),
             ),
           ],
-          rows:
-              // faqs.asMap().entries.map((e) {
-              // _setIndex(e.key);
-              // var item = e.value;
-              [
-            DataRow2(
+          rows: _faqBloc.faqList.asMap().entries.map((e) {
+            var item = e.value;
+            return DataRow2(
               cells: [
-                DataCell(_tableRowView(_pageIndex.toString())),
-                DataCell(
-                    _tableRowView("lorem lipsum lorem lipsum lorem lipsum")),
+                DataCell(_tableRowView("", _pageIndex.toString())),
+                DataCell(_tableRowView(item.question ?? "", item.answer ?? "")),
 
                 // DataCell(_statusBox(item.status ?? false)),
                 DataCell(TableActions(
@@ -179,13 +187,13 @@ class _FaqPageState extends State<FaqPage> {
                   onEditTap: sharedPrefUtil.getEditAdmin
                       ? () {
                           autoTabRouter?.navigate(
-                              FaqCreationRoute(isEdit: "edit", id: ''));
+                              FaqCreationRoute(isEdit: "edit", id: item.id));
                         }
                       : null,
                 )),
               ],
-            )
-          ]
+            );
+          }).toList()
           // }).toList(),
           ),
     );
@@ -197,9 +205,22 @@ class _FaqPageState extends State<FaqPage> {
     );
   }
 
-  TableRowView _tableRowView(String name) {
-    return TableRowView(
-      text: name,
+  Column _tableRowView(String question, String name) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        CustomText(question,
+            maxLines: 2,
+            style: TS().gRoboto(
+                fontSize: FS.font13.val,
+                fontWeight: FW.w500.val,
+                color: AppColor.black5.val)),
+        TableRowView(
+          text: name,
+          maxLines: 1,
+        ),
+      ],
     );
   }
 
