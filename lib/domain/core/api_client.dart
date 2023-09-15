@@ -34,6 +34,8 @@ import '../../presentation/on_boarding/modules/reference/models/relation_respons
 import '../admins/model/admin_get_response.dart';
 import '../caregiver_verification/model/reject_params.dart';
 import '../caregivers/model/caregiver_response.dart';
+import '../complaint_details/models/complaint_details_response_model.dart';
+import '../complaints/model/complaints_list_response_model.dart';
 import '../email_otp_verification/models/verify_otp_response.dart';
 import '../faq/models/faq_list_response_model.dart';
 import '../faq_creation/models/faq_details_response_model.dart';
@@ -619,5 +621,19 @@ abstract class ApiClient {
     @Field('question') String question,
     @Field('answer') String answer,
     @Field('status') String status,
+  );
+
+  @POST('/admin/get-complaints')
+  Future<ComplaintsListResponseModel> getComplaints(
+    @Field('user_id') String userId,
+    @Field('page') String page,
+    @Field('limit') String limit,
+    @Field('search_term') String searchTerm,
+    @Field('status') int status,
+  );
+
+  @POST('/admin/get-complaints-by-id')
+  Future<ComplaintDetailsResponseModel> getComplaintDetails(
+    @Field('complaint_id') String complaintId,
   );
 }
