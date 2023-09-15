@@ -1,8 +1,6 @@
 import 'package:admin_580_tech/application/bloc/email-otp-verification/email_otp_verification_bloc.dart';
-import 'package:admin_580_tech/infrastructure/email_otp_verification/email_otp_verification_repository.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.dart';
-import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';

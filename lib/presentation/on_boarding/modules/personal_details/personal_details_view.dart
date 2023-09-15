@@ -5,9 +5,7 @@ import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/social_security_number_formatter.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/zip_code_formatter.dart';
 import 'package:admin_580_tech/presentation/on_boarding/widgets/upload_document_widget.dart';
-import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -649,7 +647,9 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           leftButtonName: AppString.back.val,
           rightButtonName: AppString.next.val,
           onLeftButtonPressed: () {
-            context.router.navigate(const CaregiverCreationRoute());
+            // context.router.navigate(const CaregiverCreationRoute());
+            widget.pageController
+                .jumpToPage(widget.pageController.page!.toInt() - 1);
           },
           onRightButtonPressed: () async {
             widget.onboardingBloc.nextButtonClicked = true;

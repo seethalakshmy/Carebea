@@ -9,23 +9,23 @@ import 'app_router.gr.dart';
 class AppRouter extends $AppRouter {
   @override
   final List<AutoRoute> routes = [
-    AutoRoute(
-        page: LoginRoute.page,
-        path: '/',
-        initial: true,
-        guards: [DashBoardGuardGuard()]),
+    // AutoRoute(
+    //     page: LoginRoute.page,
+    //     path: '/',
+    //     initial: true,
+    //     guards: [DashBoardGuardGuard()]),
     // AutoRoute(page: LoginRoute.page, initial: true, path: '/'),
     AutoRoute(
       path: "/care-ambassador-registration",
       page: CareAmbassadorRegistrationRoute.page,
       maintainState: true,
     ),
-    /*AutoRoute(
+    AutoRoute(
       path: "/signup",
       page: SignUpRoute.page,
       maintainState: true,
       initial: true,
-    ),*/
+    ),
     // AutoRoute(
     //   path: "/care-ambassador-registration",
     //   page: CareAmbassadorRegistrationRoute.page,

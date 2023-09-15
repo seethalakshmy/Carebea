@@ -9,6 +9,7 @@ import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
 import '../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../on_boarding/modules/build_profile/build_profile_view.dart';
+import '../on_boarding/modules/health_aid_agreement/home_health_agreement_view.dart';
 import '../on_boarding/modules/personal_details/personal_details_view.dart';
 import '../on_boarding/modules/preference/preference_view.dart';
 import '../on_boarding/modules/qualification_details/qialification_view.dart';
@@ -88,8 +89,10 @@ class _CareAmbassadorRegistrationPageState
       ),
       BuildProfileView(
           pageController: controller, onboardingBloc: _onboardingBloc),
-      //HomeHealthAidAgreementView(pageController: controller),
       SetupCompensationView(
+          pageController: controller, onboardingBloc: _onboardingBloc),
+      //HomeHealthAidAgreementView(pageController: controller),
+      HomeHealthAidAgreementView(
           pageController: controller, onboardingBloc: _onboardingBloc),
     ];
     setState(() {

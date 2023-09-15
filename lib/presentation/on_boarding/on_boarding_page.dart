@@ -1,9 +1,9 @@
-import 'package:admin_580_tech/application/bloc/onboarding/onboarding_bloc.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../application/bloc/onboarding/onboarding_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
@@ -91,7 +91,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       ),
       BuildProfileView(
           pageController: controller, onboardingBloc: _onboardingBloc),
-      //HomeHealthAidAgreementView(pageController: controller),
+      // HomeHealthAidAgreementView(pageController: controller),
       SetupCompensationView(
           pageController: controller, onboardingBloc: _onboardingBloc),
     ];

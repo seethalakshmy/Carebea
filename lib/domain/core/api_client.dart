@@ -37,10 +37,8 @@ import '../caregivers/model/caregiver_response.dart';
 import '../email_otp_verification/models/verify_otp_response.dart';
 import '../on_boarding/models/common_response.dart';
 import '../on_boarding/models/preferences/pet_list_response.dart';
-import '../on_boarding/models/preferences/preference_request_model.dart';
 import '../on_boarding/models/preferences/years_of_experience_response.dart';
 import '../on_boarding/models/services/get_services_response.dart';
-import '../on_boarding/models/services/service_request_model.dart';
 import '../role_creation/model/module_response.dart';
 import '../role_creation/model/view_role_response.dart';
 import '../service_request_management/model/assign_caregiver_params.dart';
@@ -194,6 +192,19 @@ abstract class ApiClient {
     @Field('expiry_date') String expiryDate,
     @Field('document') List<String> document,
     @Field('profile_picture') String profilePicture,
+  );
+
+  @POST("/care-giver/agreement")
+  Future<CommonResponse> createCareGiverAgreement(
+    @Header("Authorization") String token,
+    @Field('user_id') String userId,
+    @Field('signature') String signature,
+  );
+
+  @GET("/care-giver/agreement")
+  Future<CommonResponse> getCareGiverAgreement(
+    @Header("Authorization") String token,
+    @Field('user_id') String userId,
   );
 
   @POST("/admin/admin-cg-qualification")
