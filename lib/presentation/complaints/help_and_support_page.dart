@@ -1,31 +1,27 @@
-import 'package:admin_580_tech/application/bloc/support_tickets/support_tickets_bloc.dart';
-import 'package:admin_580_tech/domain/support_tickets/model/support_ticket.dart';
-import 'package:admin_580_tech/domain/support_tickets/model/support_tickets_response.dart';
-import 'package:admin_580_tech/infrastructure/support_tickets/support_ticket_repository.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:admin_580_tech/application/bloc/user_managment/user_management_bloc.dart';
 import 'package:admin_580_tech/core/custom_debugger.dart';
-import 'package:admin_580_tech/infrastructure/user_management/users_repository.dart';
+import 'package:admin_580_tech/infrastructure/complaints/complaints_repository.dart';
+import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_dropdown.dart';
 import 'package:admin_580_tech/presentation/widget/pagination_view.dart';
 import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../application/bloc/complaints/complaints_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
-import '../../domain/user_management/model/user_response.dart';
-import '../../domain/user_management/model/users.dart';
+import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_data_table_2.dart';
-import '../widget/custom_image.dart';
 import '../widget/custom_selection_area.dart';
+import '../widget/custom_shimmer.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_svg.dart';
 import '../widget/custom_text.dart';
@@ -43,9 +39,8 @@ class HelpAndSupportPage extends StatefulWidget {
 }
 
 class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
-  late SupportTicketsBloc _supportTicketsBloc;
+  late ComplaintsBloc _supportTicketsBloc;
 
-  List<SupportTickets> supportTicketsList = [];
   List<int> shimmerList = List.generate(10, (index) => (index));
   int _totalItems = 1;
   int _page = 1;
@@ -54,12 +49,12 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
   int _start = 0;
   int _end = 10;
   final TextEditingController _searchController = TextEditingController();
-  String userId = "6461c0f33ba4fd69bd494df0";
+  String userId = SharedPreffUtil().getAdminId;
 
   @override
   void initState() {
     super.initState();
-    _supportTicketsBloc = SupportTicketsBloc(SupportTicketsRepository());
+    _supportTicketsBloc = ComplaintsBloc(ComplaintsRepository());
   }
 
   @override
@@ -74,38 +69,47 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         HeaderView(title: AppString.supportTickets.val),
-        _detailsCardView(),
-        CustomSizedBox(height: DBL.twenty.val),
         _reBuildView(),
       ],
     );
   }
 
-  BlocProvider<SupportTicketsBloc> _reBuildView() {
+  BlocProvider<ComplaintsBloc> _reBuildView() {
     return BlocProvider(
       create: (context) => _supportTicketsBloc
-        ..add(SupportTicketsEvent.getSupportTickets(
-            userId: userId, page: _page, limit: _limit)),
+        ..add(ComplaintsEvent.getComplaints(
+            userId: userId,
+            page: _page.toString(),
+            limit: _limit.toString(),
+            searchTerm: _searchController.text.trim(),
+            status: 0)),
       child: _bodyView(),
     );
   }
 
-  CustomCard _bodyView() {
-    return CustomCard(
-      shape: PR().roundedRectangleBorder(DBL.eighteen.val),
-      elevation: DBL.seven.val,
-      child: CustomContainer(
-        padding: EdgeInsets.all(DBL.twenty.val),
-        child: BlocBuilder<SupportTicketsBloc, SupportTicketsState>(
-          builder: (context, state) {
-            return state.isLoading
-                ? const TableLoaderView()
-                : state.isError
-                    ? ErrorView(isClientError: false, errorMessage: state.error)
-                    : _usersView(context, state.response);
-          },
+  Column _bodyView() {
+    return Column(
+      children: [
+        _detailsCardView(),
+        CustomSizedBox(height: DBL.twenty.val),
+        CustomCard(
+          shape: PR().roundedRectangleBorder(DBL.eighteen.val),
+          elevation: DBL.seven.val,
+          child: CustomContainer(
+            padding: EdgeInsets.all(DBL.twenty.val),
+            child: BlocBuilder<ComplaintsBloc, ComplaintsState>(
+              builder: (context, state) {
+                return state.isLoading
+                    ? const TableLoaderView()
+                    : state.isError
+                        ? ErrorView(
+                            isClientError: false, errorMessage: state.error)
+                        : _usersView(context);
+              },
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 
@@ -115,85 +119,84 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
     'Payment',
     'Customer Care\nAnd Operations'
   ];
-  List count = ['10', '20', '22', '1'];
 
   _detailsCardView() {
-    return CustomSizedBox(
-      height: 100,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        // physics: NeverScrollableScrollPhysics(),
-        // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        //   childAspectRatio: 2,
-        //   mainAxisSpacing: 10,
-        //   crossAxisSpacing: 10,
-        //   crossAxisCount: 2,
-        // ),
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Card(
-              elevation: DBL.ten.val,
-              child: CustomSizedBox(
-                width: Responsive.isWeb(context) ? 310 : 310,
-                height: Responsive.isWeb(context)
-                    ? DBL.ten.val
-                    : DBL.twoHundred.val,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomText(
-                          name[index],
-                          style: TS().gRoboto(
-                            fontSize: Responsive.isWeb(context)
-                                ? FS.font14.val
-                                : FS.font12.val,
-                            fontWeight: FW.w400.val,
-                            color: AppColor.label.val,
+    return BlocBuilder<ComplaintsBloc, ComplaintsState>(
+      builder: (context, state) {
+        return state.isLoading
+            ? CustomShimmerWidget.rectangular(
+                height: 100,
+                width: 900,
+                baseColor: AppColor.white.val,
+                highlightColor: AppColor.lightGrey.val.withOpacity(0.5),
+              )
+            : CustomSizedBox(
+                height: 100,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  // physics: NeverScrollableScrollPhysics(),
+                  // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  //   childAspectRatio: 2,
+                  //   mainAxisSpacing: 10,
+                  //   crossAxisSpacing: 10,
+                  //   crossAxisCount: 2,
+                  // ),
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Card(
+                        elevation: DBL.ten.val,
+                        child: CustomSizedBox(
+                          width: Responsive.isWeb(context) ? 310 : 310,
+                          height: Responsive.isWeb(context)
+                              ? DBL.ten.val
+                              : DBL.twoHundred.val,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const SizedBox(width: 10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CustomText(
+                                    name[index],
+                                    style: TS().gRoboto(
+                                      fontSize: Responsive.isWeb(context)
+                                          ? FS.font14.val
+                                          : FS.font12.val,
+                                      fontWeight: FW.w400.val,
+                                      color: AppColor.label.val,
+                                    ),
+                                  ),
+                                  CustomText(
+                                    _supportTicketsBloc.count[index],
+                                    style: TS().gRoboto(
+                                      fontSize: Responsive.isWeb(context)
+                                          ? FS.font28.val
+                                          : FS.font24.val,
+                                      fontWeight: FW.w600.val,
+                                      color: AppColor.primaryColor.val,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                        CustomText(
-                          count[index],
-                          style: TS().gRoboto(
-                            fontSize: Responsive.isWeb(context)
-                                ? FS.font28.val
-                                : FS.font24.val,
-                            fontWeight: FW.w600.val,
-                            color: AppColor.primaryColor.val,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                      ),
+                    );
+                  },
+                  shrinkWrap: true,
+                  itemCount: name.length,
                 ),
-              ),
-            ),
-          );
-        },
-        shrinkWrap: true,
-        itemCount: name.length,
-      ),
+              );
+      },
     );
   }
 
-  _usersView(BuildContext context, SupportTicketsResponse? value) {
-    if (value?.status ?? false) {
-      if (value?.data?.supportTickets != null &&
-          value!.data!.supportTickets!.isNotEmpty) {
-        ///todo change later
-        _totalItems = value.data?.pagination?.totals ?? 5000;
-        supportTicketsList.clear();
-        supportTicketsList.addAll(value.data?.supportTickets ?? []);
-      }
-    }
-    return supportTicketsList.isNotEmpty
+  _usersView(BuildContext context) {
+    return _supportTicketsBloc.complaintList.isNotEmpty
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -223,12 +226,31 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
       controller: _searchController,
       hintText: AppString.search.val,
       hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
-      suffixIcon: CustomSvg(
-        path: IMG.search.val,
-        height: DBL.sixteen.val,
-        width: DBL.sixteen.val,
+      onSubmitted: (String val) {
+        _getCompliantsEvent();
+      },
+      suffixIcon: InkWell(
+        onTap: () {
+          _getCompliantsEvent();
+        },
+        child: CustomSvg(
+          path: IMG.search.val,
+          height: DBL.sixteen.val,
+          width: DBL.sixteen.val,
+        ),
       ),
     );
+  }
+
+  void _getCompliantsEvent() {
+    _supportTicketsBloc.add(ComplaintsEvent.getComplaints(
+        userId: userId,
+        page: _page.toString(),
+        limit: _limit.toString(),
+        searchTerm: _searchController.text.trim(),
+        status: 0));
+    print(
+        "list length after the api call : ${_supportTicketsBloc.complaintList.length}");
   }
 
   CustomDropdown<int> _statusDropDown(BuildContext context) {
@@ -280,6 +302,7 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
   }
 
   _paginationView() {
+    _totalItems = _supportTicketsBloc.paginationList[0].totals!.toInt();
     final int totalPages = (_totalItems / _limit).ceil();
     return PaginationView(
         page: _page,
@@ -290,22 +313,19 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
         onNextPressed: () {
           if (_page < totalPages) {
             _page = _page + 1;
-            _supportTicketsBloc.add(SupportTicketsEvent.getSupportTickets(
-                userId: userId, page: _page, limit: _limit));
+            _getCompliantsEvent();
             updateData();
           }
         },
         onItemPressed: (i) {
           _page = i;
-          _supportTicketsBloc.add(SupportTicketsEvent.getSupportTickets(
-              userId: userId, page: _page, limit: _limit));
+          _getCompliantsEvent();
           updateData();
         },
         onPreviousPressed: () {
           if (_page > 1) {
             _page = _page - 1;
-            _supportTicketsBloc.add(SupportTicketsEvent.getSupportTickets(
-                userId: userId, page: _page, limit: _limit));
+            _getCompliantsEvent();
             updateData();
           }
         });
@@ -314,69 +334,80 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
   _usersTable() {
     return CSelectionArea(
       child: CDataTable2(
-        minWidth: DBL.nineFifty.val,
+        minWidth: 1200,
         dividerThickness: .3,
-        headingRowHeight: DBL.fortyEight.val,
+        headingRowHeight: DBL.fiftyFive.val,
         dataRowHeight: DBL.sixty.val,
         columns: [
           DataColumn2(
-            size: ColumnSize.S,
-            fixedWidth: DBL.eighty.val,
+            //size: ColumnSize.S,
+            fixedWidth: DBL.fifty.val,
             label: _columnsView(
                 text: AppString.slNo.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.S,
-            fixedWidth: DBL.eighty.val,
+            //size: ColumnSize.L,
+            // fixedWidth: DBL.hundred.val,
             label: _columnsView(
                 text: AppString.id.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            fixedWidth: Responsive.isWeb(context)
-                ? MediaQuery.of(context).size.width * .17
-                : DBL.twoHundred.val,
+            //size: ColumnSize.L,
+            /* fixedWidth: Responsive.isWeb(context)
+                ? MediaQuery.of(context).size.width / 8
+                : DBL.hundred.val,*/
             label: _columnsView(
-                text: AppString.name.val, fontWeight: FontWeight.bold),
+                text: AppString.clientName.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.L,
+            //size: ColumnSize.L,
+            /* fixedWidth: Responsive.isWeb(context)
+                ? MediaQuery.of(context).size.width / 8
+                : DBL.hundred.val,*/
+            label: _columnsView(
+                text: AppString.caName.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            //size: ColumnSize.L,
+            // fixedWidth: DBL.hundred.val,
             label: _columnsView(
                 text: AppString.category.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.L,
+            //size: ColumnSize.L,
+            //fixedWidth: DBL.hundred.val,
             label: _columnsView(
                 text: AppString.createdDate.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.L,
+            //size: ColumnSize.L,
+            // fixedWidth: DBL.hundred.val,
             label: _columnsView(
                 text: AppString.repliedOn.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.L,
+            //size: ColumnSize.L,
+            // fixedWidth: DBL.hundred.val,
             label: _columnsView(
                 text: AppString.title.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.L,
+            //size: ColumnSize.L,
+            //fixedWidth: DBL.hundred.val,
             label: _columnsView(
                 text: AppString.role.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.L,
+            //size: ColumnSize.L,
+            // fixedWidth: DBL.hundred.val,
             label: _columnsView(
                 text: AppString.status.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            // size: ColumnSize.L,
-            fixedWidth: Responsive.isWeb(context)
-                ? MediaQuery.of(context).size.width * .1
-                : DBL.oneSeventy.val,
             label: const CustomText(""),
           ),
         ],
-        rows: supportTicketsList.asMap().entries.map((e) {
+        rows: _supportTicketsBloc.complaintList.asMap().entries.map((e) {
           setIndex(e.key);
           var item = e.value;
           return DataRow2(
@@ -385,11 +416,15 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
                 text: pageIndex.toString(),
               )),
               DataCell(_rowsView(
-                text: item.userId.toString(),
+                text: item.complaintId.toString(),
               )),
-              DataCell(_tableRowImage(
-                  "${item.name?.firstName} ${item.name?.lastName}",
-                  item.profile ?? "")),
+              DataCell(_rowsView(
+                  text:
+                      "${item.clientName?.firstName} ${item.clientName?.lastName}")),
+              //_tableRowImage("${item.clientName?.firstName} ${item.clientName?.lastName}","")
+              DataCell(_rowsView(
+                  text:
+                      "${item.caregiverName?.firstName} ${item.caregiverName?.lastName}")),
               DataCell(_rowsView(text: item.category ?? "")),
               DataCell(_rowsView(text: item.createdDate)),
               DataCell(_rowsView(text: item.repliedOn)),
@@ -402,7 +437,8 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
                 children: [
                   InkWell(
                       onTap: () {
-                        autoTabRouter!.setActiveIndex(16);
+                        autoTabRouter!.navigate(SupportTicketsDetailRoute(
+                            complaintId: item.id ?? ""));
                       },
                       child: CustomSvg(
                         path: IMG.eye.val,
@@ -476,7 +512,7 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
               Responsive.isWeb(context) ? DBL.fourteen.val : DBL.twelve.val,
           fontWeight: fontWeight,
           color: AppColor.columColor.val),
-      textAlign: TextAlign.center,
+      textAlign: TextAlign.start,
     );
   }
 
@@ -537,12 +573,12 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
   void updateData() {
     if (_page == 1) {
       _start = 0;
-      _end = supportTicketsList.length < _limit
-          ? supportTicketsList.length
+      _end = _supportTicketsBloc.complaintList.length < _limit
+          ? _supportTicketsBloc.complaintList.length
           : _limit;
     } else {
       _start = (_page * _limit) - 10;
-      _end = _start + supportTicketsList.length;
+      _end = _start + _supportTicketsBloc.complaintList.length;
     }
   }
 

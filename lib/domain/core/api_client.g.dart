@@ -2480,6 +2480,64 @@ class _ApiClient implements ApiClient {
     return value;
   }
 
+  @override
+  Future<ComplaintsListResponseModel> getComplaints(
+    userId,
+    page,
+    limit,
+    searchTerm,
+    status,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'page': page,
+      'limit': limit,
+      'search_term': searchTerm,
+      'status': status,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ComplaintsListResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-complaints',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ComplaintsListResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ComplaintDetailsResponseModel> getComplaintDetails(complaintId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'complaint_id': complaintId};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ComplaintDetailsResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-complaints-by-id',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ComplaintDetailsResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||
