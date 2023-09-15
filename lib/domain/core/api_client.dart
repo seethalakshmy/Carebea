@@ -47,6 +47,7 @@ import '../service_request_management/model/assign_caregiver_params.dart';
 import '../service_request_management/model/reschedule_response.dart';
 import '../service_request_management/model/service_request_response.dart';
 import '../signup/signup_response.dart';
+import '../subProfile_details/model/sub_profile_detail_response.dart';
 import '../transaction_management/model/get_filters_response.dart';
 import '../transaction_management/model/transaction_details_response.dart';
 import '../transaction_management/model/transaction_list_response.dart';
@@ -619,5 +620,11 @@ abstract class ApiClient {
     @Field('question') String question,
     @Field('answer') String answer,
     @Field('status') String status,
+  );
+
+  @POST('/admin/get-subprofile-detail')
+  Future<SubProfileDetailResponse> getSubProfileDetails(
+    @Field('user_id') String userId,
+    @Field('admin_id') String adminId,
   );
 }

@@ -2480,6 +2480,35 @@ class _ApiClient implements ApiClient {
     return value;
   }
 
+  @override
+  Future<SubProfileDetailResponse> getSubProfileDetails(
+    userId,
+    adminId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'admin_id': adminId,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SubProfileDetailResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-subprofile-detail',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SubProfileDetailResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

@@ -64,10 +64,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   Widget _bodyView() {
     List<Widget> pages = [
-      Agreement(
-        onboardingBloc: _onboardingBloc,
-        pageController: controller,
-      ),
+      // Agreement(
+      //   onboardingBloc: _onboardingBloc,
+      //   pageController: controller,
+      // ),
       //const OtpVerificationView(),
       PersonalDetailsView(
         onboardingBloc: _onboardingBloc,

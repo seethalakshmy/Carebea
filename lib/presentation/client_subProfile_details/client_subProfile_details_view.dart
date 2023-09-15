@@ -1,55 +1,57 @@
-import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
-import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_view.dart';
-import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/transactions_view.dart';
-import 'package:auto_route/auto_route.dart';
+import 'package:admin_580_tech/application/bloc/sub_profile_details/sub_profile_details_bloc.dart';
 import 'package:admin_580_tech/application/bloc/user_management_detail/user_management_detail_bloc.dart';
 import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/enum.dart';
-import 'package:admin_580_tech/core/properties.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
+import 'package:admin_580_tech/domain/subProfile_details/model/sub_profile_detail_response.dart';
 import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
+import 'package:admin_580_tech/infrastructure/subprofile_details/subprofile_detail_repository.dart';
 import 'package:admin_580_tech/infrastructure/user_management_detail/user_management_detail_repository.dart';
-import 'package:admin_580_tech/presentation/user_mangement_detail/views/payment_method_view.dart';
-import 'package:admin_580_tech/presentation/user_mangement_detail/views/sub_profile_view.dart';
-import 'package:admin_580_tech/presentation/widget/custom_card.dart';
+import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/sub_profile_personal_details_one.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:admin_580_tech/presentation/widget/loader_view.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../caregiver_detail/widgets/service_completion_and_rewards.dart';
 import '../caregiver_detail/widgets/svg_text.dart';
+import '../on_boarding/modules/personal_details/personal_details_view.dart';
 import '../side_menu/side_menu_page.dart';
+import '../widget/custom_card.dart';
 
 @RoutePage()
-class UserManagementDetailPage extends StatefulWidget {
-  const UserManagementDetailPage({Key? key, @QueryParam('id') this.id})
+class ClientSubProfileDetailsPage extends StatefulWidget {
+  const ClientSubProfileDetailsPage({Key? key, @QueryParam('id') this.id})
       : super(key: key);
   final String? id;
 
   @override
-  State<UserManagementDetailPage> createState() =>
-      _UserManagementDetailPageState();
+  State<ClientSubProfileDetailsPage> createState() =>
+      _ClientSubProfileDetailsPageState();
 }
 
-class _UserManagementDetailPageState extends State<UserManagementDetailPage>
+class _ClientSubProfileDetailsPageState
+    extends State<ClientSubProfileDetailsPage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
-  late UserManagementDetailBloc _userDetailBloc;
+  late SubProfileDetailBloc _subProfileDetailBloc;
   String? adminId;
   String? userId;
 
   @override
   void initState() {
+    print('inside sub profile screen');
     adminId = SharedPreffUtil().getAdminId;
     userId = autoTabRouter?.currentChild?.queryParams.getString("id", "") ?? "";
     tabController = TabController(vsync: this, length: 4);
-    _userDetailBloc =
-        UserManagementDetailBloc(UserManagementDetailRepository());
+    _subProfileDetailBloc = SubProfileDetailBloc(SubProfileDetailRepository());
     super.initState();
   }
 
@@ -58,12 +60,12 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
     return _rebuildView();
   }
 
-  BlocProvider<UserManagementDetailBloc> _rebuildView() {
+  BlocProvider<SubProfileDetailBloc> _rebuildView() {
     return BlocProvider(
-      create: (context) => _userDetailBloc
-        ..add(UserManagementDetailEvent.getUserDetail(
+      create: (context) => _subProfileDetailBloc
+        ..add(SubProfileDetailEvent.getSubProfileDetail(
             userId: userId ?? '', adminId: adminId ?? '')),
-      child: BlocBuilder<UserManagementDetailBloc, UserManagementDetailState>(
+      child: BlocBuilder<SubProfileDetailBloc, SubProfileDetailState>(
         builder: (context, state) {
           return state.isLoading ? LoaderView() : _bodyView(context, state);
         },
@@ -71,10 +73,9 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
     );
   }
 
-  CustomSizedBox _bodyView(
-      BuildContext context, UserManagementDetailState state) {
+  CustomSizedBox _bodyView(BuildContext context, SubProfileDetailState state) {
     CustomLog.log('width :${MediaQuery.of(context).size.width}');
-    UserDetailResponse? response = state.response;
+    SubProfileDetailResponse? response = state.response;
     print('testing${state.response?.data?.name?.firstName}');
     print('testing${userId}');
 
@@ -121,9 +122,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                               CrossAxisAlignment.start,
                                           children: [
                                             CustomSvg(
-                                              path: state.response?.data
-                                                      ?.profilePic ??
-                                                  IMG.profilePlaceHolder.val,
+                                              path: IMG.profilePlaceHolder.val,
                                               width: isXs(context) ? 150 : 200,
                                               height: isXs(context) ? 125 : 175,
                                             ),
@@ -236,30 +235,11 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                             //       "",
                                             //   widthGap: DBL.fifteen.val,
                                             // ),
+
                                             CustomSizedBox(
                                               height: DBL.fourteen.val,
                                             ),
-                                            SVGText(
-                                              path: IMG.email.val,
-                                              name: response?.data?.email ?? "",
-                                              widthGap: DBL.twelve.val,
-                                            ),
-                                            CustomSizedBox(
-                                              height: DBL.fourteen.val,
-                                            ),
-                                            SVGText(
-                                              path: IMG.phone.val,
-                                              name: response?.data?.phone ?? "",
-                                              widthGap: DBL.nine.val,
-                                            ),
-                                            CustomSizedBox(
-                                              height: DBL.fourteen.val,
-                                            ),
-                                            SVGText(
-                                              path: IMG.ssn.val,
-                                              name: response?.data?.ssn ?? "",
-                                              widthGap: DBL.twelve.val,
-                                            ),
+
                                             // CustomSizedBox(
                                             //   height: isXs2(context)
                                             //       ? DBL.ten.val
@@ -411,10 +391,12 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
             labelColor: AppColor.white.val,
             unselectedLabelColor: AppColor.lightGrey5.val,
             tabs: [
-              Tab(icon: Text(AppString.clientProfiles.val)),
-              Tab(icon: Text(AppString.paymentMethod.val)),
-              Tab(icon: Text(AppString.services.val)),
-              Tab(icon: Text(AppString.transaction.val)),
+              Tab(icon: Text(AppString.personalDetailsOne.val)),
+              Tab(icon: Text(AppString.personalDetailsTwo.val)),
+              Tab(icon: Text(AppString.contactDetails.val)),
+              Tab(icon: Text(AppString.healthProfile.val)),
+              Tab(icon: Text(AppString.service.val)),
+              Tab(icon: Text(AppString.serviceAgreement.val)),
             ],
             controller: tabController,
           ),
@@ -425,13 +407,9 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
               child: TabBarView(
                 controller: tabController,
                 children: [
-                  SubProfileView(state: state),
-                  PaymentMethodView(
+                  SubProfilePersonalDetailsOneView(
                     state: state,
-                  ),
-                  ServiceView(state: state),
-                  TransactionView(state: state)
-                  /*buildOffersListView(),*/
+                  )
                 ],
               ),
             ),
@@ -442,25 +420,25 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
   }
 
   ServiceRewardAndCompletion reviewsView(
-      {double? height, required UserDetailResponse? response}) {
+      {double? height, required SubProfileDetailResponse? response}) {
     return ServiceRewardAndCompletion(
       height: height,
-      title: response?.data?.totalReviewsGiven.toString() ?? "",
+      title: response?.data?.averageReview.toString() ?? "",
       subTitle: AppString.reviewGiven.val,
     );
   }
 
   ServiceRewardAndCompletion cancelledCount(
-      {double? height, required UserDetailResponse? response}) {
+      {double? height, required SubProfileDetailResponse? response}) {
     return ServiceRewardAndCompletion(
       height: height,
-      title: response?.data?.cancelledRequest.toString() ?? "",
+      title: response?.data?.cancelledRequests.toString() ?? "",
       subTitle: AppString.canceledRequest.val,
     );
   }
 
   ServiceRewardAndCompletion serviceCount(
-      {double? height, required UserDetailResponse? response}) {
+      {double? height, required SubProfileDetailResponse? response}) {
     return ServiceRewardAndCompletion(
       height: height,
       title: response?.data?.serviceCompleted.toString() ?? "",
