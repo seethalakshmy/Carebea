@@ -8,7 +8,11 @@ import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_r
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/infrastructure/subprofile_details/subprofile_detail_repository.dart';
 import 'package:admin_580_tech/infrastructure/user_management_detail/user_management_detail_repository.dart';
+import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/contact_details.dart';
+import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/health_profile.dart';
+import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/service_details.dart';
 import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/sub_profile_personal_details_one.dart';
+import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/sub_profile_personal_details_two.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
@@ -50,7 +54,7 @@ class _ClientSubProfileDetailsPageState
     print('inside sub profile screen');
     adminId = SharedPreffUtil().getAdminId;
     userId = autoTabRouter?.currentChild?.queryParams.getString("id", "") ?? "";
-    tabController = TabController(vsync: this, length: 4);
+    tabController = TabController(vsync: this, length: 6);
     _subProfileDetailBloc = SubProfileDetailBloc(SubProfileDetailRepository());
     super.initState();
   }
@@ -409,7 +413,11 @@ class _ClientSubProfileDetailsPageState
                 children: [
                   SubProfilePersonalDetailsOneView(
                     state: state,
-                  )
+                  ),
+                  SubProfilePersonalDetailsTwoView(state: state),
+                  SubProfileContactDetails(state: state),
+                  SubProfileHealthProfile(state: state),
+                  ServiceDetails(state: state)
                 ],
               ),
             ),
