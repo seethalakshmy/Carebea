@@ -58,6 +58,7 @@ class Data {
     Name? name,
     String? phone,
     String? email,
+    String? profilePic,
     dynamic ssn,
     num? serviceCompleted,
     num? cancelledRequest,
@@ -71,6 +72,7 @@ class Data {
     _name = name;
     _phone = phone;
     _email = email;
+    _profilePic = profilePic;
     _ssn = ssn;
     _serviceCompleted = serviceCompleted;
     _cancelledRequest = cancelledRequest;
@@ -86,6 +88,7 @@ class Data {
     _name = json['name'] != null ? Name.fromJson(json['name']) : null;
     _phone = json['phone'];
     _email = json['email'];
+    _profilePic = json['parent_profile_pic'];
     _ssn = json['ssn'];
     _serviceCompleted = json['service_completed'];
     _cancelledRequest = json['cancelled_request'];
@@ -116,6 +119,7 @@ class Data {
   Name? _name;
   String? _phone;
   String? _email;
+  String? _profilePic;
   dynamic _ssn;
   num? _serviceCompleted;
   num? _cancelledRequest;
@@ -129,6 +133,7 @@ class Data {
     Name? name,
     String? phone,
     String? email,
+    String? profilePic,
     dynamic ssn,
     num? serviceCompleted,
     num? cancelledRequest,
@@ -143,6 +148,7 @@ class Data {
         name: name ?? _name,
         phone: phone ?? _phone,
         email: email ?? _email,
+        profilePic: profilePic ?? _profilePic,
         ssn: ssn ?? _ssn,
         serviceCompleted: serviceCompleted ?? _serviceCompleted,
         cancelledRequest: cancelledRequest ?? _cancelledRequest,
@@ -156,6 +162,7 @@ class Data {
   Name? get name => _name;
   String? get phone => _phone;
   String? get email => _email;
+  String? get profilePic => _profilePic;
   dynamic get ssn => _ssn;
   num? get serviceCompleted => _serviceCompleted;
   num? get cancelledRequest => _cancelledRequest;
@@ -173,6 +180,7 @@ class Data {
     }
     map['phone'] = _phone;
     map['email'] = _email;
+    map['parent_profile_pic'] = _profilePic;
     map['ssn'] = _ssn;
     map['service_completed'] = _serviceCompleted;
     map['cancelled_request'] = _cancelledRequest;
