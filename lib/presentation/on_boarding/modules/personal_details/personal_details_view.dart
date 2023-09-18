@@ -33,7 +33,7 @@ import 'widgets/social_security_number_formatter.dart';
 import 'widgets/zip_code_formatter.dart';
 
 class PersonalDetailsView extends StatefulWidget {
-  PersonalDetailsView(
+  const PersonalDetailsView(
       {Key? key, required this.onboardingBloc, required this.pageController})
       : super(key: key);
   final OnboardingBloc onboardingBloc;
@@ -383,6 +383,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                       fontWeight: FW.w400.val,
                       color: AppColor.label.val,
                       fontSize: FS.font16.val),
+                  maxLength: 50,
                   validator: (val) {
                     if (val == null || val.isEmpty) {
                       return AppString.emptyAddress.val;
@@ -532,9 +533,21 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                 child: CTextField(
                   isReadOnly: true,
                   validator: (value) {
+                    bool cityPresent = false;
                     if (value == null || value.isEmpty) {
                       return AppString.emptyCity.val;
                     }
+                    for (var element in widget.onboardingBloc.cityList) {
+                      if (element.cityName?.trim().toLowerCase() ==
+                          citySearchController.text.toLowerCase()) {
+                        cityPresent = true;
+                        selectedCity = citySearchController.text;
+                      }
+                    }
+                    if (cityPresent == false) {
+                      return AppString.cityNotFound.val;
+                    }
+
                     return null;
                   },
                   controller: citySearchController,
@@ -587,7 +600,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return AppString.emptyZip.val;
-                    } else if (value.length < 10) {
+                    } else if (value.length != 9 && value.length != 5) {
                       return AppString.invalidZip.val;
                     }
                     return null;

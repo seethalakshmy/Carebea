@@ -46,7 +46,9 @@ class AddressSelectionWidget extends StatelessWidget {
                 initialLocation: const LatLng(36.778259, -119.417931),
                 language: 'en',
                 country: 'US');
-            String? zipCode;
+            String zipCodeSuffix = "";
+            String zipCodePrefix = "";
+            String zipCode = '';
             String? locality;
             String? streetNumber;
             String? stateName;
@@ -56,7 +58,10 @@ class AddressSelectionWidget extends StatelessWidget {
 
             for (var i in result.components) {
               if (i.types.first == "postal_code") {
-                zipCode = i.longName;
+                zipCodePrefix = i.longName ?? "";
+              }
+              if (i.types.first == "postal_code_suffix") {
+                zipCodeSuffix = i.longName ?? "";
               }
               if (i.types.first == "locality") {
                 locality = i.longName;
@@ -77,6 +82,11 @@ class AddressSelectionWidget extends StatelessWidget {
             }
             for (var e in result.components) {
               log("element is $e");
+            }
+            if (zipCodePrefix != "" && zipCodeSuffix != "") {
+              zipCode = "$zipCodePrefix-$zipCodeSuffix";
+            } else {
+              zipCode = zipCodePrefix;
             }
             final selectedAddress = SelectedAddress(
                 country: country,

@@ -13,6 +13,7 @@ import 'application/bloc/caregiver_verification/caregiver_verification_bloc.dart
 import 'application/bloc/email-otp-verification/email_otp_verification_bloc.dart';
 import 'application/bloc/form_validation/form_validation_bloc.dart';
 import 'application/bloc/login/login_bloc.dart';
+import 'application/bloc/resend_otp_bloc/resend_otp_bloc.dart';
 import 'application/bloc/service_request_management/service_request_management_bloc.dart';
 import 'application/bloc/signup/signup_bloc.dart';
 import 'core/config/environment.dart';
@@ -23,6 +24,7 @@ import 'infrastructure/caregiver_submit_agreement_repo/caregiver_submit_agreemen
 import 'infrastructure/caregiver_verification/caregivers_verification_repository.dart';
 import 'infrastructure/email_otp_verification/email_otp_verification_repository.dart';
 import 'infrastructure/login/login_repository.dart';
+import 'infrastructure/resend_otp/resend_otp_repo_impl.dart';
 import 'infrastructure/service_request_management/service_request_management_repository.dart';
 import 'infrastructure/shared_preference/shared_preff_util.dart';
 import 'infrastructure/signup/signup_repository.dart';
@@ -87,6 +89,8 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(
             create: (_) =>
                 EmailOtpVerificationBloc(EmailOtpVerificationRepository())),
+        BlocProvider<ResendOtpBloc>(
+            create: (_) => ResendOtpBloc(ResendOTPRepoImpl())),
       ],
       child: MaterialApp.router(
         routerDelegate: _appRouter.delegate(),

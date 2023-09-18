@@ -386,6 +386,12 @@ abstract class ApiClient {
     @Field('otp') String otp,
   );
 
+  @POST("/resend-otp")
+  Future<CommonResponse> resendOTP(
+    @Field('user_id') String userId,
+    @Field('type') int type,
+  );
+
   @POST("/sign-up")
   Future<SignUpResponse> signup(
     @Field('email') String email,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
@@ -107,8 +109,8 @@ class DocumentDetailsView extends StatelessWidget {
               onChange: (value) {
                 onChanged(value);
                 selectedDocumentType = value;
-                print(
-                    "selectedDocTypeValue is : $selectedDocumentType, nextClicked : $nextClicked");
+
+                log("selectedDocTypeValue is : $selectedDocumentType, nextClicked : $nextClicked");
               },
               errorText: nextClicked
                   ? selectedDocumentType!.isEmpty
@@ -143,6 +145,7 @@ class DocumentDetailsView extends StatelessWidget {
             obscureText: false,
             keyBoardType: TextInputType.number,
             textInputAction: TextInputAction.done,
+            maxLength: 50,
             onChanged: (value) {},
             onTap: () {},
           ),
