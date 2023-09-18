@@ -1,22 +1,29 @@
+import 'package:admin_580_tech/infrastructure/complaint_details/complaint_details_repository.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../application/bloc/support_tickets_detail/support_tickets_detail_bloc.dart';
+import '../../application/bloc/complaint_details/complaint_detail_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
 import '../caregiver_detail/widgets/svg_text.dart';
+import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';
 import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/custom_padding.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_text.dart';
+import '../widget/error_view.dart';
+import '../widget/loader_view.dart';
 import '../widget/row_combo.dart';
 
 @RoutePage()
 class SupportTicketsDetailPage extends StatefulWidget {
-  const SupportTicketsDetailPage({Key? key}) : super(key: key);
+  const SupportTicketsDetailPage(
+      {Key? key, @QueryParam('complaint_id') this.complaintId})
+      : super(key: key);
+  final String? complaintId;
 
   @override
   State<SupportTicketsDetailPage> createState() =>
@@ -24,15 +31,20 @@ class SupportTicketsDetailPage extends StatefulWidget {
 }
 
 class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
-  String userId = "6461c0f33ba4fd69bd494df0";
-  late SupportTicketsDetailBloc _supportTicketsDetailBloc;
+  late ComplaintDetailBloc _complaintDetailBloc;
+  String compId = '';
 
   @override
   void initState() {
     // userId = autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
     // tabController = TabController(vsync: this, length: 5);
     // _caregiverDetailBloc = CaregiverDetailBloc(CareGiverDetailRepository());
-    // _supportTicketsDetailBloc = SupportTicketsDetailBloc(SupportTicketsDetailBloc());
+    _complaintDetailBloc = ComplaintDetailBloc(ComplaintDetailsRepository());
+    compId = autoTabRouter?.currentChild?.queryParams
+            .getString("complaint_id", "") ??
+        "";
+    _complaintDetailBloc
+        .add(ComplaintDetailEvent.getComplaintDetails(complaintId: compId));
     super.initState();
   }
 
@@ -41,29 +53,26 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
     return _reBuildView();
   }
 
-  BlocProvider<SupportTicketsDetailBloc> _reBuildView() {
+  BlocProvider<ComplaintDetailBloc> _reBuildView() {
+    print("_rebuild view called");
     return BlocProvider(
-      create: (context) => _supportTicketsDetailBloc
-        ..add(SupportTicketsDetailEvent.getSupportTickets(
-            userId: userId, page: 1, limit: 1)),
-      child: _bodyView(),
+      create: (context) => _complaintDetailBloc
+        ..add(ComplaintDetailEvent.getComplaintDetails(complaintId: compId)),
+      child: _rebuildView(),
     );
   }
 
-  // _rebuildView() {
-  //   return BlocBuilder<SupportTicketsDetailBloc, SupportTicketsDetailState>(
-  //     builder: (context, state) {
-  //       return state.isLoading
-  //           ? (const LoaderView())
-  //           : state.isError
-  //           ? ErrorView(
-  //           isClientError: state.isClientError,
-  //           errorMessage: state.error)
-  //           : _bodyView(state);
-  //     },
-  //
-  //   );
-  // }
+  _rebuildView() {
+    return BlocBuilder<ComplaintDetailBloc, ComplaintDetailState>(
+      builder: (context, state) {
+        return state.isLoading
+            ? (const LoaderView())
+            : state.isError
+                ? ErrorView(isClientError: false, errorMessage: state.error)
+                : _bodyView();
+      },
+    );
+  }
 
   _bodyView() {
     // CustomLog.log(
@@ -121,20 +130,18 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Flexible(
+                    flex: 1,
                     child: _topLeftView(
                       context,
                       // response
                     ),
-                    flex: 1,
                   ),
                   const CustomSizedBox(
                     width: 25,
                   ),
                   Flexible(
-                    child: _topRightView(context
-                        // response
-                        ),
                     flex: 2,
+                    child: _topRightView(context),
                   ),
                 ],
               ),
@@ -145,10 +152,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
         ));
   }
 
-  CustomSizedBox _topRightView(
-    BuildContext context,
-    // SupportTicketsResponse response
-  ) {
+  CustomSizedBox _topRightView(BuildContext context) {
     // Location? location = response.data?.location;
     return CustomSizedBox(
       width: isXs3(context)
@@ -168,7 +172,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomText(
-            "Jhon Miller",
+            _complaintDetailBloc.complaintDetailsList[0].userName ?? "",
             // "${response.data?.name?.firstName} ${response.data?.name?.lastName}",
             style: TS().gRoboto(
               color: AppColor.rowColor.val,
@@ -184,7 +188,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
           ),
           SVGText(
             path: IMG.email.val,
-            name: "abc@gmail.com",
+            name: _complaintDetailBloc.complaintDetailsList[0].email ?? "",
             widthGap: DBL.twelve.val,
           ),
           CustomSizedBox(
@@ -192,7 +196,8 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
           ),
           SVGText(
             path: IMG.phone.val,
-            name: "1212121234",
+            name:
+                _complaintDetailBloc.complaintDetailsList[0].phoneNumber ?? "",
             widthGap: DBL.nine.val,
           ),
         ],
@@ -225,16 +230,16 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
     );
   }
 
-  CustomSizedBox _topLeftView(
-    BuildContext context,
-    // SupportTicketsResponse response
-  ) {
+  CustomSizedBox _topLeftView(BuildContext context) {
+    print(
+        "image url : ${_complaintDetailBloc.complaintDetailsList[0].userPicture}");
     return CustomSizedBox(
       width: isXs(context) ? DBL.oneFifty.val : DBL.twoHundred.val,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _profileImageView(context, ""),
+          _profileImageView(context,
+              _complaintDetailBloc.complaintDetailsList[0].userPicture ?? ""),
           CustomSizedBox(
             height: isLg2(context) ? DBL.fourteen.val : DBL.twenty.val,
           ),
@@ -255,28 +260,29 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
         ),
         RowColonCombo.twoHundred(
             label: AppString.category.val,
-            value: "Service",
+            value: _complaintDetailBloc.complaintDetailsList[0].category ?? "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.six.val,
         ),
         RowColonCombo.twoHundred(
             label: AppString.createdDate.val,
-            value: "11/04/2023",
+            value:
+                _complaintDetailBloc.complaintDetailsList[0].createdDate ?? "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.six.val,
         ),
         RowColonCombo.twoHundred(
             label: AppString.title.val,
-            value: "issue",
+            value: _complaintDetailBloc.complaintDetailsList[0].title ?? "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.six.val,
         ),
         RowColonCombo.twoHundred(
             label: AppString.description.val,
-            value: "Lorem lipsum lorem lipsum lorem",
+            value: "description is not given",
             fontSize: FS.font13PointFive.val),
       ],
     );

@@ -176,6 +176,7 @@ class _FaqPageState extends State<FaqPage> {
           ],
           rows: _faqBloc.faqList.asMap().entries.map((e) {
             var item = e.value;
+            _pageIndex = e.key + 1;
             return DataRow2(
               cells: [
                 DataCell(_tableRowView("", _pageIndex.toString())),
