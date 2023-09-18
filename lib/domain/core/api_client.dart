@@ -628,6 +628,7 @@ abstract class ApiClient {
   Future<SubProfileDetailResponse> getSubProfileDetails(
     @Field('user_id') String userId,
     @Field('admin_id') String adminId,
+  );
   @POST('/admin/get-complaints')
   Future<ComplaintsListResponseModel> getComplaints(
     @Field('user_id') String userId,
