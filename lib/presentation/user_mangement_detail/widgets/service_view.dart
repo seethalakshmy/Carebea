@@ -1,6 +1,7 @@
 import 'package:admin_580_tech/application/bloc/user_management_detail/user_management_detail_bloc.dart';
 import 'package:admin_580_tech/core/utility.dart';
 import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
+import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_details_popUp.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_status.dart';
 import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -10,6 +11,7 @@ import '../../../core/enum.dart';
 import '../../../core/responsive.dart';
 import '../../../core/text_styles.dart';
 import '../../widget/cached_image.dart';
+import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_card.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_data_table_2.dart';
@@ -144,6 +146,10 @@ class ServiceView extends StatelessWidget {
             label: _columnsView(context,
                 text: AppString.status.val, fontWeight: FontWeight.bold),
           ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context, text: '', fontWeight: FontWeight.bold),
+          ),
         ],
         rows: services.asMap().entries.map((e) {
           getIndex(e.key);
@@ -181,22 +187,31 @@ class ServiceView extends StatelessWidget {
               DataCell(CustomRatingBar(
                 rating: item.rating ?? 0,
               )),
-              // DataCell(_rowsView(context, text: item.status.toString())),
               DataCell(ServiceStatus(status: item.status ?? 0)),
-              // DataCell(InkWell(
-              //     onTap: () {},
-              //     child: CustomContainer(
-              //       alignment: Alignment.centerRight,
-              //       child: CustomSvg(
-              //         path: IMG.eye.val,
-              //         height: Responsive.isWeb(context)
-              //             ? DBL.fifteen.val
-              //             : DBL.twelve.val,
-              //         width: Responsive.isWeb(context)
-              //             ? DBL.twenty.val
-              //             : DBL.eighteen.val,
-              //       ),
-              //     ))),
+              DataCell(InkWell(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CustomAlertDialogWidget(
+                          heading: AppString.transactionManagement.val,
+                          child: const ServiceDetailsPopUp(),
+                        );
+                      },
+                    );
+                  },
+                  child: CustomContainer(
+                    alignment: Alignment.centerRight,
+                    child: CustomSvg(
+                      path: IMG.eye.val,
+                      height: Responsive.isWeb(context)
+                          ? DBL.fifteen.val
+                          : DBL.twelve.val,
+                      width: Responsive.isWeb(context)
+                          ? DBL.twenty.val
+                          : DBL.eighteen.val,
+                    ),
+                  ))),
             ],
           );
         }).toList(),

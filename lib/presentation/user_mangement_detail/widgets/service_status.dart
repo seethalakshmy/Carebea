@@ -44,7 +44,9 @@ class ServiceStatus extends StatelessWidget {
                     ? AppColor.darkGreen.val
                     : status == 6
                         ? AppColor.red.val
-                        : AppColor.starFillColor.val,
+                        : status == 2
+                            ? AppColor.starFillColor.val
+                            : null,
                 borderRadius: PR().circularRadius(DBL.eight.val)),
             child: CustomText(
               textAlign: TextAlign.center,
@@ -52,7 +54,9 @@ class ServiceStatus extends StatelessWidget {
                   ? 'Completed'
                   : status == 6
                       ? 'Cancelled'
-                      : 'Upcoming',
+                      : status == 2
+                          ? 'Upcoming'
+                          : '',
               style: TS().gRoboto(
                 fontWeight: FW.w600.val,
                 fontSize:

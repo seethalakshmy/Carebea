@@ -113,7 +113,8 @@ class SubProfileView extends StatelessWidget {
                   name: "${item.name?.firstName} ${item.name?.lastName}",
                   imgUrl: item.profilePic ?? "",
                   age: item.age ?? '')),
-              DataCell(_rowsView(context, text: item.totalServices.toString())),
+              DataCell(_rowsView(context,
+                  text: item.completedServices?.length.toString())),
               DataCell(InkWell(
                   onTap: () {
                     autoTabRouter
