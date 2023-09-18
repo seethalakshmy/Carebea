@@ -35,189 +35,119 @@ class ServiceDetailsPopUp extends StatelessWidget {
         Responsive.isWeb(context)
             ? Row(
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomSizedBox(
-                        width: isXs(context) ? 150 : 200,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CustomSvg(
-                              path: IMG.profilePlaceHolder.val,
-                              width: isXs(context) ? 150 : 200,
-                              height: isXs(context) ? 125 : 175,
-                            ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomSizedBox(
+                          width: isXs(context) ? 150 : 200,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomSvg(
+                                path: IMG.profilePlaceHolder.val,
+                                width: isXs(context) ? 150 : 200,
+                                height: isXs(context) ? 125 : 175,
+                              ),
 
-                            ///Todo change later
-                            // CustomSizedBox(
-                            //   height: DBL.forty.val,
-                            // ),
-                            // Row(
-                            //     mainAxisAlignment:
-                            //         MainAxisAlignment
-                            //             .spaceBetween,
-                            //     children: [
-                            //       CustomText3(
-                            //         AppString.profileCompletion.val,
-                            //         style: TS().gRoboto(
-                            //             fontWeight: FW.w500.val,
-                            //             fontSize: getFontSize(
-                            //               context,
-                            //               fontSize:
-                            //                   FS.font14.val,
-                            //             ),
-                            //             color: AppColor
-                            //                 .lightGrey4.val),
-                            //       ),
-                            //       CustomSizedBox(
-                            //         width: DBL.five.val,
-                            //       ),
-                            //       CustomText3(
-                            //         response.user
-                            //                 ?.profileCompletion ??
-                            //             "",
-                            //         style: TS().gRoboto(
-                            //             fontWeight: FW.w500.val,
-                            //             fontSize: getFontSize(
-                            //               context,
-                            //               fontSize:
-                            //                   FS.font14.val,
-                            //             ),
-                            //             color: AppColor
-                            //                 .primaryColor.val),
-                            //       )
-                            //     ]),
-                            // CustomSizedBox(
-                            //   height: DBL.thirteen.val,
-                            // ),
-                            // LinearPercentIndicator(
-                            //   padding: const EdgeInsets.all(0),
-                            //   barRadius:
-                            //       const Radius.circular(10),
-                            //   width:
-                            //       isXs(context) ? 150.0 : 200.0,
-                            //   lineHeight: 6.0,
-                            //   percent: 0.5,
-                            //   progressColor:
-                            //       AppColor.green2.val,
-                            // ),
-                          ],
+                              ///Todo change later
+                              // CustomSizedBox(
+                              //   height: DBL.forty.val,
+                              // ),
+                              // Row(
+                              //     mainAxisAlignment:
+                              //         MainAxisAlignment
+                              //             .spaceBetween,
+                              //     children: [
+                              //       CustomText3(
+                              //         AppString.profileCompletion.val,
+                              //         style: TS().gRoboto(
+                              //             fontWeight: FW.w500.val,
+                              //             fontSize: getFontSize(
+                              //               context,
+                              //               fontSize:
+                              //                   FS.font14.val,
+                              //             ),
+                              //             color: AppColor
+                              //                 .lightGrey4.val),
+                              //       ),
+                              //       CustomSizedBox(
+                              //         width: DBL.five.val,
+                              //       ),
+                              //       CustomText3(
+                              //         response.user
+                              //                 ?.profileCompletion ??
+                              //             "",
+                              //         style: TS().gRoboto(
+                              //             fontWeight: FW.w500.val,
+                              //             fontSize: getFontSize(
+                              //               context,
+                              //               fontSize:
+                              //                   FS.font14.val,
+                              //             ),
+                              //             color: AppColor
+                              //                 .primaryColor.val),
+                              //       )
+                              //     ]),
+                              // CustomSizedBox(
+                              //   height: DBL.thirteen.val,
+                              // ),
+                              // LinearPercentIndicator(
+                              //   padding: const EdgeInsets.all(0),
+                              //   barRadius:
+                              //       const Radius.circular(10),
+                              //   width:
+                              //       isXs(context) ? 150.0 : 200.0,
+                              //   lineHeight: 6.0,
+                              //   percent: 0.5,
+                              //   progressColor:
+                              //       AppColor.green2.val,
+                              // ),
+                            ],
+                          ),
                         ),
-                      ),
-                      const CustomSizedBox(
-                        width: 25,
-                      ),
-                      CustomSizedBox(
-                        width: isXs3(context)
-                            ? MediaQuery.of(context).size.width - 230
-                            : isXs2(context)
-                                ? MediaQuery.of(context).size.width - 470
-                                : isXs(context)
-                                    ? MediaQuery.of(context).size.width - 635
-                                    : isLg2(context)
-                                        ? MediaQuery.of(context).size.width -
-                                            695
-                                        : MediaQuery.of(context).size.width -
-                                            1055,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CustomText(
-                              "test",
-                              style: TS().gRoboto(
-                                color: AppColor.rowColor.val,
-                                fontWeight: FW.w600.val,
-                                fontSize: getFontSize(
-                                  context,
-                                  fontSize: FS.font19.val,
+                        const CustomSizedBox(
+                          width: 25,
+                        ),
+                        CustomSizedBox(
+                          width: isXs3(context)
+                              ? MediaQuery.of(context).size.width - 230
+                              : isXs2(context)
+                                  ? MediaQuery.of(context).size.width - 470
+                                  : isXs(context)
+                                      ? MediaQuery.of(context).size.width - 635
+                                      : isLg2(context)
+                                          ? MediaQuery.of(context).size.width -
+                                              695
+                                          : MediaQuery.of(context).size.width -
+                                              1055,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 40,
+                              ),
+                              CustomText(
+                                "test",
+                                style: TS().gRoboto(
+                                  color: AppColor.rowColor.val,
+                                  fontWeight: FW.w600.val,
+                                  fontSize: getFontSize(
+                                    context,
+                                    fontSize: FS.font19.val,
+                                  ),
                                 ),
                               ),
-                            ),
-                            CustomSizedBox(
-                              height: DBL.seventeen.val,
-                            ),
-                            // SVGText(
-                            //   path: IMG.location.val,
-                            //   name: response?.data?.location ??
-                            //       "",
-                            //   widthGap: DBL.fifteen.val,
-                            // ),
-                            CustomSizedBox(
-                              height: DBL.fourteen.val,
-                            ),
-                            SVGText(
-                              path: IMG.email.val,
-                              name: "",
-                              widthGap: DBL.twelve.val,
-                            ),
-                            CustomSizedBox(
-                              height: DBL.fourteen.val,
-                            ),
-                            SVGText(
-                              path: IMG.phone.val,
-                              name: "",
-                              widthGap: DBL.nine.val,
-                            ),
-                            CustomSizedBox(
-                              height: DBL.fourteen.val,
-                            ),
-                            SVGText(
-                              path: IMG.ssn.val,
-                              name: "",
-                              widthGap: DBL.twelve.val,
-                            ),
-                            // CustomSizedBox(
-                            //   height: isXs2(context)
-                            //       ? DBL.ten.val
-                            //       : DBL.fourteen.val,
-                            // ),
-                            // Row(children: [
-                            //   CustomSvg(path: IMG.warning.val),
-                            //   CustomSizedBox(
-                            //     width: DBL.five.val,
-                            //   ),
-                            //   Expanded(
-                            //     child: CustomText3(
-                            //       AppString.pendingDocuments.val,
-                            //       style: TS().gRoboto(
-                            //           fontWeight: FW.w500.val,
-                            //           fontSize: getFontSize(
-                            //               context,
-                            //               fontSize:
-                            //                   FS.font14.val),
-                            //           color: AppColor.red.val),
-                            //     ),
-                            //   )
-                            // ]),
-                            // CustomSizedBox(
-                            //   height: isXs2(context)
-                            //       ? DBL.five.val
-                            //       : DBL.thirteen.val,
-                            // ),
-                            // Row(children: [
-                            //   CustomSizedBox(
-                            //     width: DBL.twentyEight.val,
-                            //   ),
-                            //   Expanded(
-                            //     child: CustomText3(
-                            //       "COVID - 19 Vaccination  |  BLS CPR/First Aid Certification",
-                            //       style: TS().gRoboto(
-                            //           fontSize: getFontSize(
-                            //             context,
-                            //             fontSize: FS.font14.val,
-                            //           ),
-                            //           fontWeight: FW.w400.val,
-                            //           color: AppColor
-                            //               .matBlack2.val),
-                            //     ),
-                            //   ),
-                            // ]
-                            // ),
-                          ],
+                              CustomSizedBox(
+                                height: DBL.seventeen.val,
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
 
                   // _refundWidget(transactionBloc.state)
