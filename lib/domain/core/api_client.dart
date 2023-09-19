@@ -82,8 +82,7 @@ abstract class ApiClient {
   }
 
   @POST("/admin/get-care-givers")
-  Future<CareGiverResponse> getCareGivers(
-      @Header("Authorization") String token,
+  Future<CareGiverResponse> getCareGivers(@Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('page') int page,
       @Field('limit') int limit,
@@ -145,163 +144,144 @@ abstract class ApiClient {
 
   @POST("/admin/get-care-giver-by-id")
   Future<CareGiverDetailResponse> getCareGiverDetail(
-    @Header("Authorization") String token,
-    @Field('user_id') String userId,
-    @Field('admin_id') String adminId,
-  );
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('admin_id') String adminId,);
 
   @POST("/admin/admin-create-caregiver")
   Future<CaregiverCreationResponse> createCaregiver(
-    @Field('first_name') String firstName,
-    @Field('last_name') String lastName,
-    @Field('mobile_number') String mobileNo,
-    @Field('email') String email,
-  );
+      @Field('first_name') String firstName,
+      @Field('last_name') String lastName,
+      @Field('mobile_number') String mobileNo,
+      @Field('email') String email,);
 
   @POST("/admin/admin-cg-personal-details")
   Future<PersonalDetailsResponse> getPersonalDetails(
-    @Field('user_id') String userId,
-    @Field('dob') String dob,
-    @Field('gender_id') int genderId,
-    @Field('street') String street,
-    @Field('city_id') String cityId,
-    @Field('state_id') String stateId,
-    @Field('latitude') double latitude,
-    @Field('longitude') double longitude,
-    @Field('zip') String zip,
-    @Field('address') String address,
-    @Field('social_security_number') String socialSecurityNumber,
-    @Field('document_id') String documentId,
-    @Field('document_number') String documentNumber,
-    @Field('expiry_date') String expiryDate,
-    @Field('document') List<String> document,
-    @Field('profile_picture') String profilePicture,
-  );
+      @Field('user_id') String userId,
+      @Field('dob') String dob,
+      @Field('gender_id') int genderId,
+      @Field('street') String street,
+      @Field('city_id') String cityId,
+      @Field('state_id') String stateId,
+      @Field('latitude') double latitude,
+      @Field('longitude') double longitude,
+      @Field('zip') String zip,
+      @Field('address') String address,
+      @Field('social_security_number') String socialSecurityNumber,
+      @Field('document_id') String documentId,
+      @Field('document_number') String documentNumber,
+      @Field('expiry_date') String expiryDate,
+      @Field('document') List<String> document,
+      @Field('profile_picture') String profilePicture,);
 
   @POST("/care-giver/personal-details")
   Future<PersonalDetailsResponse> getPersonalDetailsWebsite(
-    @Header("Authorization") String token,
-    @Field('user_id') String userId,
-    @Field('dob') String dob,
-    @Field('gender_id') int genderId,
-    @Field('street') String street,
-    @Field('city_id') String cityId,
-    @Field('state_id') String stateId,
-    @Field('latitude') double latitude,
-    @Field('longitude') double longitude,
-    @Field('zip') String zip,
-    @Field('address') String address,
-    @Field('social_security_number') String socialSecurityNumber,
-    @Field('document_id') String documentId,
-    @Field('document_number') String documentNumber,
-    @Field('expiry_date') String expiryDate,
-    @Field('document') List<String> document,
-    @Field('profile_picture') String profilePicture,
-  );
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('dob') String dob,
+      @Field('gender_id') int genderId,
+      @Field('street') String street,
+      @Field('city_id') String cityId,
+      @Field('state_id') String stateId,
+      @Field('latitude') double latitude,
+      @Field('longitude') double longitude,
+      @Field('zip') String zip,
+      @Field('address') String address,
+      @Field('social_security_number') String socialSecurityNumber,
+      @Field('document_id') String documentId,
+      @Field('document_number') String documentNumber,
+      @Field('expiry_date') String expiryDate,
+      @Field('document') List<String> document,
+      @Field('profile_picture') String profilePicture,);
 
   @POST("/admin/admin-cg-qualification")
-  Future<CommonResponse> getQualifications(
-    @Field('user_id') String userId,
-    @Field('have_hha_registration') bool haveHHARegistration,
-    @Field('hha_details') HhaDetails hhaDetails,
-    @Field('bls_or_first_aid_certificate') bool haveBLSCertificate,
-    @Field('bls_or_first_aid_certificate_details')
-    BlsOrFirstAidCertificateDetails blsDetails,
-    @Field('tb_or_ppd_test') bool haveTBTest,
-    @Field('tb_or_ppd_test_details') TbOrPpdTestDetails tbDetails,
-    @Field('covid_vaccination') bool haveCovidVaccination,
-    @Field('covid_vaccination_details') CovidVaccinationDetails covidDetails,
-    @Field('is_reupload') bool isReUpload,
-  );
+  Future<CommonResponse> getQualifications(@Field('user_id') String userId,
+      @Field('have_hha_registration') bool haveHHARegistration,
+      @Field('hha_details') HhaDetails hhaDetails,
+      @Field('bls_or_first_aid_certificate') bool haveBLSCertificate,
+      @Field(
+          'bls_or_first_aid_certificate_details') BlsOrFirstAidCertificateDetails blsDetails,
+      @Field('tb_or_ppd_test') bool haveTBTest,
+      @Field('tb_or_ppd_test_details') TbOrPpdTestDetails tbDetails,
+      @Field('covid_vaccination') bool haveCovidVaccination,
+      @Field('covid_vaccination_details') CovidVaccinationDetails covidDetails,
+      @Field('is_reupload') bool isReUpload,);
 
   @POST("/care-giver/qualification")
   Future<CommonResponse> getQualificationsWebsite(
-    @Header("Authorization") String token,
-    @Field('user_id') String userId,
-    @Field('have_hha_registration') bool haveHHARegistration,
-    @Field('hha_details') HhaDetails hhaDetails,
-    @Field('bls_or_first_aid_certificate') bool haveBLSCertificate,
-    @Field('bls_or_first_aid_certificate_details')
-    BlsOrFirstAidCertificateDetails blsDetails,
-    @Field('tb_or_ppd_test') bool haveTBTest,
-    @Field('tb_or_ppd_test_details') TbOrPpdTestDetails tbDetails,
-    @Field('covid_vaccination') bool haveCovidVaccination,
-    @Field('covid_vaccination_details') CovidVaccinationDetails covidDetails,
-    @Field('is_reupload') bool isReUpload,
-  );
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('have_hha_registration') bool haveHHARegistration,
+      @Field('hha_details') HhaDetails hhaDetails,
+      @Field('bls_or_first_aid_certificate') bool haveBLSCertificate,
+      @Field(
+          'bls_or_first_aid_certificate_details') BlsOrFirstAidCertificateDetails blsDetails,
+      @Field('tb_or_ppd_test') bool haveTBTest,
+      @Field('tb_or_ppd_test_details') TbOrPpdTestDetails tbDetails,
+      @Field('covid_vaccination') bool haveCovidVaccination,
+      @Field('covid_vaccination_details') CovidVaccinationDetails covidDetails,
+      @Field('is_reupload') bool isReUpload,);
 
   @POST("/admin/admin-cg-preferences")
-  Future<CommonResponse> getPreferences(
-    @Field('user_id') String userId,
-    @Field('years_of_experience') String yearsOfExperience,
-    @Field('serve_with_a_smoker') bool serveWithSmoker,
-    @Field('willing_to_provide_transportation') bool willingToTransportation,
-    @Field('willing_to_serve_with_pets') bool willingToServeWithPets,
-    @Field('pets_list') List<Map<String, dynamic>> petsList,
-    @Field('known_languages') List<String> knownLanguages,
-  );
+  Future<CommonResponse> getPreferences(@Field('user_id') String userId,
+      @Field('years_of_experience') String yearsOfExperience,
+      @Field('serve_with_a_smoker') bool serveWithSmoker,
+      @Field('willing_to_provide_transportation') bool willingToTransportation,
+      @Field('willing_to_serve_with_pets') bool willingToServeWithPets,
+      @Field('pets_list') List<Map<String, dynamic>> petsList,
+      @Field('known_languages') List<String> knownLanguages,);
 
   @POST("/care-giver/preferences")
   Future<CommonResponse> getPreferencesWebsite(
-    @Header("Authorization") String token,
-    @Field('user_id') String userId,
-    @Field('years_of_experience') String yearsOfExperience,
-    @Field('serve_with_a_smoker') bool serveWithSmoker,
-    @Field('willing_to_provide_transportation') bool willingToTransportation,
-    @Field('willing_to_serve_with_pets') bool willingToServeWithPets,
-    @Field('pets_list') List<Map<String, dynamic>> petsList,
-    @Field('known_languages') List<String> knownLanguages,
-  );
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('years_of_experience') String yearsOfExperience,
+      @Field('serve_with_a_smoker') bool serveWithSmoker,
+      @Field('willing_to_provide_transportation') bool willingToTransportation,
+      @Field('willing_to_serve_with_pets') bool willingToServeWithPets,
+      @Field('pets_list') List<Map<String, dynamic>> petsList,
+      @Field('known_languages') List<String> knownLanguages,);
 
   @POST("/admin/admin-cg-services")
-  Future<CommonResponse> submitServices(
-    @Field('user_id') String userId,
-    @Field('services') Map<String, dynamic> services,
-  );
+  Future<CommonResponse> submitServices(@Field('user_id') String userId,
+      @Field('services') Map<String, dynamic> services,);
 
   @POST("/care-giver/services")
   Future<CommonResponse> submitServicesWebsite(
-    @Header("Authorization") String token,
-    @Field('user_id') String userId,
-    @Field('services') Map<String, dynamic> services,
-  );
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('services') Map<String, dynamic> services,);
 
   @GET("/common-data/get-services")
   Future<GetServicesResponse> getServices();
 
   @POST("/admin/admin-cg-profile")
-  Future<CommonResponse> submitBuildProfile(
-    @Field('user_id') String userId,
-    @Field('about_you') String aboutYou,
-    @Field('hobbies') String hobbies,
-    @Field('why_love_being_caregiver') String whyLoveBeingCaregiver,
-  );
+  Future<CommonResponse> submitBuildProfile(@Field('user_id') String userId,
+      @Field('about_you') String aboutYou,
+      @Field('hobbies') String hobbies,
+      @Field('why_love_being_caregiver') String whyLoveBeingCaregiver,);
 
   @POST("/care-giver/profile")
   Future<CommonResponse> submitBuildProfileWebsite(
-    @Header("Authorization") String token,
-    @Field('user_id') String userId,
-    @Field('about_you') String aboutYou,
-    @Field('hobbies') String hobbies,
-    @Field('why_love_being_caregiver') String whyLoveBeingCaregiver,
-  );
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('about_you') String aboutYou,
+      @Field('hobbies') String hobbies,
+      @Field('why_love_being_caregiver') String whyLoveBeingCaregiver,);
 
   @POST("/admin/admin-cg-acc-details")
-  Future<CommonResponse> submitAccountDetails(
-    @Field('user_id') String userId,
-    @Field('account_holder_name') String accountHolderName,
-    @Field('routing_number') String routingNumber,
-    @Field('account_number') String accountNumber,
-  );
+  Future<CommonResponse> submitAccountDetails(@Field('user_id') String userId,
+      @Field('account_holder_name') String accountHolderName,
+      @Field('routing_number') String routingNumber,
+      @Field('account_number') String accountNumber,);
 
   @POST("/care-giver/acc-details")
   Future<CommonResponse> submitAccountDetailsWebsite(
-    @Header("Authorization") String token,
-    @Field('user_id') String userId,
-    @Field('account_holder_name') String accountHolderName,
-    @Field('routing_number') String routingNumber,
-    @Field('account_number') String accountNumber,
-  );
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('account_holder_name') String accountHolderName,
+      @Field('routing_number') String routingNumber,
+      @Field('account_number') String accountNumber,);
 
   @POST("/admin/change-caregiver-status")
   Future<VerifyResponse> careGiverActiveOrInactive(
@@ -314,24 +294,18 @@ abstract class ApiClient {
   Future<GenderListResponse> getGenderList();
 
   @GET("/common-data/get-cities?")
-  Future<CityListResponse> getCityList(
-    @Query("state_id") String stateId,
-    @Query("page") String pageNo,
-    @Query("limit") String limit,
-    @Query("search_term") String searchQuery,
-  );
+  Future<CityListResponse> getCityList(@Query("state_id") String stateId,
+      @Query("page") String pageNo,
+      @Query("limit") String limit,
+      @Query("search_term") String searchQuery,);
 
   @GET("/common-data/get-states?")
-  Future<StateListReponse> getStateList(
-    @Query("page") String pageNo,
-    @Query("limit") String limit,
-    @Query("search_term") String searchQuery,
-  );
+  Future<StateListReponse> getStateList(@Query("page") String pageNo,
+      @Query("limit") String limit,
+      @Query("search_term") String searchQuery,);
 
   @GET("/admin/dashboard-alerts?")
-  Future<AlertResponse> getAlerts(
-    @Query("user_id") String userId,
-  );
+  Future<AlertResponse> getAlerts(@Query("user_id") String userId,);
 
   @GET("/common-data/get-documents")
   Future<DocumentListResponse> getDocumentsList();
@@ -340,8 +314,8 @@ abstract class ApiClient {
   Future<RelationResponse> getRelationList();
 
   @POST("/admin/admin-cg-references")
-  Future<CommonResponse> submitReference(
-      @Field('user_id') String userId, @Field('references') List referenceList);
+  Future<CommonResponse> submitReference(@Field('user_id') String userId,
+      @Field('references') List referenceList);
 
   @POST("/care-giver/references")
   Future<CommonResponse> submitReferenceWebsite(
@@ -353,44 +327,34 @@ abstract class ApiClient {
   Future<PetListResponse> getPetList(@Query("search_term") String searchQuery);
 
   @GET("/common-data/get-languages?")
-  Future<LanguageListResponse> getLanguageList(
-    @Query("page") String pageNo,
-    @Query("limit") String limit,
-    @Query("search_term") String searchQuery,
-  );
+  Future<LanguageListResponse> getLanguageList(@Query("page") String pageNo,
+      @Query("limit") String limit,
+      @Query("search_term") String searchQuery,);
 
   @POST("/admin/login")
-  Future<LoginResponse> login(
-    @Field('email') String email,
-    @Field('password') String password,
-  );
+  Future<LoginResponse> login(@Field('email') String email,
+      @Field('password') String password,);
 
   @POST("/generate-otp")
-  Future<GenerateOtpResponse> generateOtp(
-    @Field('user_id') String userId,
-    @Field('phone_number') String phoneNumber,
-  );
+  Future<GenerateOtpResponse> generateOtp(@Field('user_id') String userId,
+      @Field('phone_number') String phoneNumber,);
 
   @POST("/verify-otp")
-  Future<VerifyOtpResponse> verifyOtp(
-    @Field('user_id') String userId,
-    @Field('type') int type,
-    @Field('otp') String otp,
-  );
+  Future<VerifyOtpResponse> verifyOtp(@Field('user_id') String userId,
+      @Field('type') int type,
+      @Field('otp') String otp,);
 
   @POST("/sign-up")
-  Future<SignUpResponse> signup(
-    @Field('email') String email,
-    @Field('password') String password,
-    @Field('first_name') String firstName,
-    @Field('last_name') String lastName,
-    @Field('mobile_number') String mobileNumber,
-    @Field('device_token') String deviceToken,
-    @Field('profile_pic') String profilePic,
-    @Field('device_type') String deviceType,
-    @Field('user_type') int userType,
-    @Field('is_social_login') bool isSocialLogin,
-  );
+  Future<SignUpResponse> signup(@Field('email') String email,
+      @Field('password') String password,
+      @Field('first_name') String firstName,
+      @Field('last_name') String lastName,
+      @Field('mobile_number') String mobileNumber,
+      @Field('device_token') String deviceToken,
+      @Field('profile_pic') String profilePic,
+      @Field('device_type') String deviceType,
+      @Field('user_type') int userType,
+      @Field('is_social_login') bool isSocialLogin,);
 
   @GET("/common-data/get-years")
   Future<YearsOfExperienceResponse> getYearsOfExp();
@@ -418,16 +382,15 @@ abstract class ApiClient {
 
   @POST("/admin/add-role")
   Future<CommonResponseUse> addRoleUpdateRole(
-    @Header("Authorization") String token,
-    @Field('user_id') String userId,
-    @Field('role') String role,
-    @Field('role_id') String? roleId,
-    @Field('assigned_modules') List<Module> moduleID,
-  );
+      @Header("Authorization") String token,
+      @Field('user_id') String userId,
+      @Field('role') String role,
+      @Field('role_id') String? roleId,
+      @Field('assigned_modules') List<Module> moduleID,);
 
   @POST("/admin/get-modules")
-  Future<ModuleResponse> getModules(
-      @Header("Authorization") String token, @Field('user_id') String userId);
+  Future<ModuleResponse> getModules(@Header("Authorization") String token,
+      @Field('user_id') String userId);
 
   @POST("/admin/delete-role")
   Future<CommonResponseUse> deleteRole(@Header("Authorization") String token,
@@ -438,16 +401,14 @@ abstract class ApiClient {
       @Field('user_id') String userId, @Field('role_id') String roleId);
 
   @POST("/admin/get-roles")
-  Future<GetRoleResponse> getRoles(
-      @Header("Authorization") String token,
+  Future<GetRoleResponse> getRoles(@Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('page') int? page,
       @Field('limit') int? limit,
       @Field('search_term') String? searchTerm);
 
   @POST("/super-admin/create-admin")
-  Future<CommonResponseUse> addAdmin(
-      @Header("Authorization") String token,
+  Future<CommonResponseUse> addAdmin(@Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('first_name') String firstName,
       @Field('last_name') String lastName,
@@ -457,8 +418,7 @@ abstract class ApiClient {
       @Field('profile_picture') String? profileUrl);
 
   @POST("/admin/edit-admin")
-  Future<CommonResponseUse> updateAdmin(
-      @Header("Authorization") String token,
+  Future<CommonResponseUse> updateAdmin(@Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('admin_id') String adminId,
       @Field('first_name') String firstName,
@@ -469,8 +429,7 @@ abstract class ApiClient {
       @Field('profile_picture') String? profileUrl);
 
   @POST("/admin/get-admins")
-  Future<AdminGetResponse> getAdmins(
-      @Header("Authorization") String token,
+  Future<AdminGetResponse> getAdmins(@Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('page') int page,
       @Field('limit') int limit,
@@ -581,72 +540,58 @@ abstract class ApiClient {
       @Field('to_date') String toDate);
 
   @POST("/admin/get-clients")
-  Future<UserListResponse> getUser(
-      @Field('user_id') String userId,
+  Future<UserListResponse> getUser(@Field('user_id') String userId,
       @Field('page') String page,
       @Field('limit') String limit,
       @Field('search_term') String searchTerm,
       @Field('status') bool? status);
 
   @POST("/admin/get-clients-by-id")
-  Future<UserDetailResponse> getUserDetails(
-    @Field('user_id') String userId,
-    @Field('admin_id') String adminId,
-  );
+  Future<UserDetailResponse> getUserDetails(@Field('user_id') String userId,
+      @Field('admin_id') String adminId,);
 
   @POST("/admin/change-client-status")
-  Future<CommonResponse> changeClientStatus(
-    @Field('user_id') String userId,
-    @Field('admin_id') String adminId,
-    @Field('status') bool status,
-  );
+  Future<CommonResponse> changeClientStatus(@Field('user_id') String userId,
+      @Field('admin_id') String adminId,
+      @Field('status') bool status,);
 
   @GET('/common-data/get-faqs')
   Future<FaqListResponseModel> getFaqList();
 
   @POST('/common-data/get-faq')
-  Future<FaqDetailsResponseModel> getFaqDetails(
-    @Field('_id') String itemId,
-  );
+  Future<FaqDetailsResponseModel> getFaqDetails(@Field('_id') String itemId,);
 
   @POST('/common-data/update-faq')
-  Future<CommonResponse> updateFaqDetails(
-    @Field('_id') String itemId,
-    @Field('question') String question,
-    @Field('answer') String answer,
-    @Field('status') String status,
-  );
+  Future<CommonResponse> updateFaqDetails(@Field('_id') String itemId,
+      @Field('question') String question,
+      @Field('answer') String answer,
+      @Field('status') String status,);
 
   @POST('/common-data/create-faq')
-  Future<CommonResponse> createFaqDetails(
-    @Field('question') String question,
-    @Field('answer') String answer,
-    @Field('status') String status,
-  );
+  Future<CommonResponse> createFaqDetails(@Field('question') String question,
+      @Field('answer') String answer,
+      @Field('status') String status,);
 
   @POST('/admin/get-subprofile-detail')
   Future<SubProfileDetailResponse> getSubProfileDetails(
-    @Field('user_id') String userId,
-    @Field('admin_id') String adminId,
+      @Field('user_id') String userId,
+  @Field('admin_id') String adminId,);
+
   @POST('/admin/get-complaints')
   Future<ComplaintsListResponseModel> getComplaints(
-    @Field('user_id') String userId,
-    @Field('page') String page,
-    @Field('limit') String limit,
-    @Field('search_term') String searchTerm,
-    @Field('status') int status,
-  );
+      @Field('user_id') String userId,
+      @Field('page') String page,
+      @Field('limit') String limit,
+      @Field('search_term') String searchTerm,
+      @Field('status') int status,);
 
   @POST('/admin/get-complaints-by-id')
   Future<ComplaintDetailsResponseModel> getComplaintDetails(
-    @Field('complaint_id') String complaintId,
-  );
+      @Field('complaint_id') String complaintId,);
 
   @POST('/admin/update-complaint')
-  Future<CommonResponse> updateComplaint(
-    @Field('admin_id') String adminId,
-    @Field('complaint_id') String complaintId,
-    @Field('status') int status,
-    @Field('comment') String comment,
-  );
+  Future<CommonResponse> updateComplaint(@Field('admin_id') String adminId,
+      @Field('complaint_id') String complaintId,
+      @Field('status') int status,
+      @Field('comment') String comment,);
 }
