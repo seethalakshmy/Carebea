@@ -1,13 +1,9 @@
 import 'package:admin_580_tech/application/bloc/sub_profile_details/sub_profile_details_bloc.dart';
-import 'package:admin_580_tech/application/bloc/user_management_detail/user_management_detail_bloc.dart';
 import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
-import 'package:admin_580_tech/domain/subProfile_details/model/sub_profile_detail_response.dart';
-import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/infrastructure/subprofile_details/subprofile_detail_repository.dart';
-import 'package:admin_580_tech/infrastructure/user_management_detail/user_management_detail_repository.dart';
 import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/contact_details.dart';
 import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/health_profile.dart';
 import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/service_details.dart';
@@ -24,9 +20,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
+import '../../domain/subProfile_details/model/sub_profile_details_model.dart';
 import '../caregiver_detail/widgets/service_completion_and_rewards.dart';
-import '../caregiver_detail/widgets/svg_text.dart';
-import '../on_boarding/modules/personal_details/personal_details_view.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/custom_card.dart';
 
@@ -417,7 +412,8 @@ class _ClientSubProfileDetailsPageState
                   SubProfilePersonalDetailsTwoView(state: state),
                   SubProfileContactDetails(state: state),
                   SubProfileHealthProfile(state: state),
-                  ServiceDetails(state: state)
+                  ServiceDetails(state: state),
+                  Container()
                 ],
               ),
             ),
@@ -431,7 +427,7 @@ class _ClientSubProfileDetailsPageState
       {double? height, required SubProfileDetailResponse? response}) {
     return ServiceRewardAndCompletion(
       height: height,
-      title: response?.data?.averageReview.toString() ?? "",
+      title: response?.data?.reviewCount.toString() ?? "",
       subTitle: AppString.reviewGiven.val,
     );
   }

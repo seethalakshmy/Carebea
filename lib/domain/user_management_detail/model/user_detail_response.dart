@@ -1662,7 +1662,7 @@ class SubProfiles {
     bool? isProfileCompleted,
     num? profileCompletePercentage,
     ProfileCompletion? profileCompletion,
-    List<CompletedServices>? completedServices,
+    num? completedServices,
   }) {
     _id = id;
     _name = name;
@@ -1690,15 +1690,10 @@ class SubProfiles {
     _isProfileCompleted = json['is_profile_completed'];
     _profileCompletePercentage = json['profile_complete_percentage'];
     _totalServices = json['totalService'];
+    _completedServices = json['completedServices'];
     _profileCompletion = json['profile_completion'] != null
         ? ProfileCompletion.fromJson(json['profile_completion'])
         : null;
-    if (json['completedServices'] != null) {
-      _completedServices = [];
-      json['completedServices'].forEach((v) {
-        _completedServices?.add(CompletedServices.fromJson(v));
-      });
-    }
   }
   String? _id;
   Name? _name;
@@ -1711,7 +1706,7 @@ class SubProfiles {
   num? _profileCompletePercentage;
   num? _totalServices;
   ProfileCompletion? _profileCompletion;
-  List<CompletedServices>? _completedServices;
+  num? _completedServices;
   SubProfiles copyWith({
     String? id,
     Name? name,
@@ -1724,7 +1719,7 @@ class SubProfiles {
     num? profileCompletePercentage,
     num? totalServices,
     ProfileCompletion? profileCompletion,
-    List<CompletedServices>? completedServices,
+    num? completedServices,
   }) =>
       SubProfiles(
         id: id ?? _id,
@@ -1752,7 +1747,7 @@ class SubProfiles {
   num? get profileCompletePercentage => _profileCompletePercentage;
   num? get totalServices => _totalServices;
   ProfileCompletion? get profileCompletion => _profileCompletion;
-  List<CompletedServices>? get completedServices => _completedServices;
+  num? get completedServices => _completedServices;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -1770,336 +1765,11 @@ class SubProfiles {
     map['is_profile_completed'] = _isProfileCompleted;
     map['profile_complete_percentage'] = _profileCompletePercentage;
     map['totalServices'] = _totalServices;
+    map["completedServices"] = _completedServices;
     if (_profileCompletion != null) {
       map['profile_completion'] = _profileCompletion?.toJson();
     }
-    if (_completedServices != null) {
-      map['completedServices'] =
-          _completedServices?.map((v) => v.toJson()).toList();
-    }
-    return map;
-  }
-}
 
-CompletedServices completedServicesFromJson(String str) =>
-    CompletedServices.fromJson(json.decode(str));
-String completedServicesToJson(CompletedServices data) =>
-    json.encode(data.toJson());
-
-class CompletedServices {
-  CompletedServices({
-    Services? services,
-    CompletedServices? completedServices,
-    ProblemFaced? problemFaced,
-    String? id,
-    String? userId,
-    String? profileId,
-    String? caregiverId,
-    String? serviceBookingId,
-    dynamic cancelReason,
-    String? serviceId,
-    String? date,
-    num? status,
-    bool? deleteStatus,
-    String? startTime,
-    String? endTime,
-    String? addressId,
-    num? genderPreference,
-    num? distance,
-    num? fee,
-    num? travelingCharge,
-    double? caregiverCompensation,
-    num? amagiRevenue,
-    bool? isRated,
-    bool? isRatedByCg,
-    num? serviceRating,
-    bool? isRescheduleService,
-    bool? isRebooking,
-    dynamic serviceRatingByCg,
-    dynamic refundStatus,
-    dynamic refundFee,
-    num? refundPaymentStatus,
-    String? createdAt,
-    String? updatedAt,
-    num? v,
-    String? actualStartTime,
-    String? actualEndTime,
-  }) {
-    _services = services;
-    _completedServices = completedServices;
-    _problemFaced = problemFaced;
-    _id = id;
-    _userId = userId;
-    _profileId = profileId;
-    _caregiverId = caregiverId;
-    _serviceBookingId = serviceBookingId;
-    _cancelReason = cancelReason;
-    _serviceId = serviceId;
-    _date = date;
-    _status = status;
-    _deleteStatus = deleteStatus;
-    _startTime = startTime;
-    _endTime = endTime;
-    _addressId = addressId;
-    _genderPreference = genderPreference;
-    _distance = distance;
-    _fee = fee;
-    _travelingCharge = travelingCharge;
-    _caregiverCompensation = caregiverCompensation?.toDouble();
-    _amagiRevenue = amagiRevenue;
-    _isRated = isRated;
-    _isRatedByCg = isRatedByCg;
-    _serviceRating = serviceRating;
-    _isRescheduleService = isRescheduleService;
-    _isRebooking = isRebooking;
-    _serviceRatingByCg = serviceRatingByCg;
-    _refundStatus = refundStatus;
-    _refundFee = refundFee;
-    _refundPaymentStatus = refundPaymentStatus;
-    _createdAt = createdAt;
-    _updatedAt = updatedAt;
-    _v = v;
-    _actualStartTime = actualStartTime;
-    _actualEndTime = actualEndTime;
-  }
-
-  CompletedServices.fromJson(dynamic json) {
-    _services =
-        json['services'] != null ? Services.fromJson(json['services']) : null;
-    _completedServices = json['completedServices'] != null
-        ? CompletedServices.fromJson(json['completedServices'])
-        : null;
-    _problemFaced = json['problemFaced'] != null
-        ? ProblemFaced.fromJson(json['problemFaced'])
-        : null;
-    _id = json['_id'];
-    _userId = json['userId'];
-    _profileId = json['profileId'];
-    _caregiverId = json['caregiverId'];
-    _serviceBookingId = json['serviceBookingId'];
-    _cancelReason = json['cancel_reason'];
-    _serviceId = json['serviceId'];
-    _date = json['date'];
-    _status = json['status'];
-    _deleteStatus = json['deleteStatus'];
-    _startTime = json['startTime'];
-    _endTime = json['endTime'];
-    _addressId = json['addressId'];
-    _genderPreference = json['genderPreference'];
-    _distance = json['distance'];
-    _fee = json['fee'];
-    _travelingCharge = json['travelingCharge'];
-    _caregiverCompensation = json['caregiverCompensation'];
-    _amagiRevenue = json['amagiRevenue'];
-    _isRated = json['is_rated'];
-    _isRatedByCg = json['is_rated_by_cg'];
-    _serviceRating = json['service_rating'];
-    _isRescheduleService = json['isRescheduleService'];
-    _isRebooking = json['isRebooking'];
-    _serviceRatingByCg = json['service_rating_by_cg'];
-    _refundStatus = json['refund_status'];
-    _refundFee = json['refundFee'];
-    _refundPaymentStatus = json['refundPaymentStatus'];
-    _createdAt = json['createdAt'];
-    _updatedAt = json['updatedAt'];
-    _v = json['__v'];
-    _actualStartTime = json['actualStartTime'];
-    _actualEndTime = json['actualEndTime'];
-  }
-  Services? _services;
-  CompletedServices? _completedServices;
-  ProblemFaced? _problemFaced;
-  String? _id;
-  String? _userId;
-  String? _profileId;
-  String? _caregiverId;
-  String? _serviceBookingId;
-  dynamic _cancelReason;
-  String? _serviceId;
-  String? _date;
-  num? _status;
-  bool? _deleteStatus;
-  String? _startTime;
-  String? _endTime;
-  String? _addressId;
-  num? _genderPreference;
-  num? _distance;
-  num? _fee;
-  num? _travelingCharge;
-  double? _caregiverCompensation;
-  num? _amagiRevenue;
-  bool? _isRated;
-  bool? _isRatedByCg;
-  num? _serviceRating;
-  bool? _isRescheduleService;
-  bool? _isRebooking;
-  dynamic _serviceRatingByCg;
-  dynamic _refundStatus;
-  dynamic _refundFee;
-  num? _refundPaymentStatus;
-  String? _createdAt;
-  String? _updatedAt;
-  num? _v;
-  String? _actualStartTime;
-  String? _actualEndTime;
-  CompletedServices copyWith({
-    Services? services,
-    CompletedServices? completedServices,
-    ProblemFaced? problemFaced,
-    String? id,
-    String? userId,
-    String? profileId,
-    String? caregiverId,
-    String? serviceBookingId,
-    dynamic cancelReason,
-    String? serviceId,
-    String? date,
-    num? status,
-    bool? deleteStatus,
-    String? startTime,
-    String? endTime,
-    String? addressId,
-    num? genderPreference,
-    num? distance,
-    num? fee,
-    num? travelingCharge,
-    num? caregiverCompensation,
-    num? amagiRevenue,
-    bool? isRated,
-    bool? isRatedByCg,
-    num? serviceRating,
-    bool? isRescheduleService,
-    bool? isRebooking,
-    dynamic serviceRatingByCg,
-    dynamic refundStatus,
-    dynamic refundFee,
-    num? refundPaymentStatus,
-    String? createdAt,
-    String? updatedAt,
-    num? v,
-    String? actualStartTime,
-    String? actualEndTime,
-  }) =>
-      CompletedServices(
-        services: services ?? _services,
-        completedServices: completedServices ?? _completedServices,
-        problemFaced: problemFaced ?? _problemFaced,
-        id: id ?? _id,
-        userId: userId ?? _userId,
-        profileId: profileId ?? _profileId,
-        caregiverId: caregiverId ?? _caregiverId,
-        serviceBookingId: serviceBookingId ?? _serviceBookingId,
-        cancelReason: cancelReason ?? _cancelReason,
-        serviceId: serviceId ?? _serviceId,
-        date: date ?? _date,
-        status: status ?? _status,
-        deleteStatus: deleteStatus ?? _deleteStatus,
-        startTime: startTime ?? _startTime,
-        endTime: endTime ?? _endTime,
-        addressId: addressId ?? _addressId,
-        genderPreference: genderPreference ?? _genderPreference,
-        distance: distance ?? _distance,
-        fee: fee ?? _fee,
-        travelingCharge: travelingCharge ?? _travelingCharge,
-        caregiverCompensation:
-            caregiverCompensation?.toDouble() ?? _caregiverCompensation,
-        amagiRevenue: amagiRevenue ?? _amagiRevenue,
-        isRated: isRated ?? _isRated,
-        isRatedByCg: isRatedByCg ?? _isRatedByCg,
-        serviceRating: serviceRating ?? _serviceRating,
-        isRescheduleService: isRescheduleService ?? _isRescheduleService,
-        isRebooking: isRebooking ?? _isRebooking,
-        serviceRatingByCg: serviceRatingByCg ?? _serviceRatingByCg,
-        refundStatus: refundStatus ?? _refundStatus,
-        refundFee: refundFee ?? _refundFee,
-        refundPaymentStatus: refundPaymentStatus ?? _refundPaymentStatus,
-        createdAt: createdAt ?? _createdAt,
-        updatedAt: updatedAt ?? _updatedAt,
-        v: v ?? _v,
-        actualStartTime: actualStartTime ?? _actualStartTime,
-        actualEndTime: actualEndTime ?? _actualEndTime,
-      );
-  Services? get services => _services;
-  CompletedServices? get completedServices => _completedServices;
-  ProblemFaced? get problemFaced => _problemFaced;
-  String? get id => _id;
-  String? get userId => _userId;
-  String? get profileId => _profileId;
-  String? get caregiverId => _caregiverId;
-  String? get serviceBookingId => _serviceBookingId;
-  dynamic get cancelReason => _cancelReason;
-  String? get serviceId => _serviceId;
-  String? get date => _date;
-  num? get status => _status;
-  bool? get deleteStatus => _deleteStatus;
-  String? get startTime => _startTime;
-  String? get endTime => _endTime;
-  String? get addressId => _addressId;
-  num? get genderPreference => _genderPreference;
-  num? get distance => _distance;
-  num? get fee => _fee;
-  num? get travelingCharge => _travelingCharge;
-  double? get caregiverCompensation => _caregiverCompensation;
-  num? get amagiRevenue => _amagiRevenue;
-  bool? get isRated => _isRated;
-  bool? get isRatedByCg => _isRatedByCg;
-  num? get serviceRating => _serviceRating;
-  bool? get isRescheduleService => _isRescheduleService;
-  bool? get isRebooking => _isRebooking;
-  dynamic get serviceRatingByCg => _serviceRatingByCg;
-  dynamic get refundStatus => _refundStatus;
-  dynamic get refundFee => _refundFee;
-  num? get refundPaymentStatus => _refundPaymentStatus;
-  String? get createdAt => _createdAt;
-  String? get updatedAt => _updatedAt;
-  num? get v => _v;
-  String? get actualStartTime => _actualStartTime;
-  String? get actualEndTime => _actualEndTime;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    if (_services != null) {
-      map['services'] = _services?.toJson();
-    }
-    if (_completedServices != null) {
-      map['completedServices'] = _completedServices?.toJson();
-    }
-    if (_problemFaced != null) {
-      map['problemFaced'] = _problemFaced?.toJson();
-    }
-    map['_id'] = _id;
-    map['userId'] = _userId;
-    map['profileId'] = _profileId;
-    map['caregiverId'] = _caregiverId;
-    map['serviceBookingId'] = _serviceBookingId;
-    map['cancel_reason'] = _cancelReason;
-    map['serviceId'] = _serviceId;
-    map['date'] = _date;
-    map['status'] = _status;
-    map['deleteStatus'] = _deleteStatus;
-    map['startTime'] = _startTime;
-    map['endTime'] = _endTime;
-    map['addressId'] = _addressId;
-    map['genderPreference'] = _genderPreference;
-    map['distance'] = _distance;
-    map['fee'] = _fee;
-    map['travelingCharge'] = _travelingCharge;
-    map['caregiverCompensation'] = _caregiverCompensation;
-    map['amagiRevenue'] = _amagiRevenue;
-    map['is_rated'] = _isRated;
-    map['is_rated_by_cg'] = _isRatedByCg;
-    map['service_rating'] = _serviceRating;
-    map['isRescheduleService'] = _isRescheduleService;
-    map['isRebooking'] = _isRebooking;
-    map['service_rating_by_cg'] = _serviceRatingByCg;
-    map['refund_status'] = _refundStatus;
-    map['refundFee'] = _refundFee;
-    map['refundPaymentStatus'] = _refundPaymentStatus;
-    map['createdAt'] = _createdAt;
-    map['updatedAt'] = _updatedAt;
-    map['__v'] = _v;
-    map['actualStartTime'] = _actualStartTime;
-    map['actualEndTime'] = _actualEndTime;
     return map;
   }
 }

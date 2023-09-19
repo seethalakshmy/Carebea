@@ -104,7 +104,7 @@ class ServiceDetailServiceListView extends StatelessWidget {
       children: [
         AlertTextLabel(
           customWidth: DBL.threeEighty.val,
-          AppString.serviceInCompleted.val,
+          AppString.serviceInComplete.val,
           isCustomWidth: true,
         ),
         inCompletedServices.isNotEmpty

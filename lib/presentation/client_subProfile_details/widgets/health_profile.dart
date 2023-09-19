@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../application/bloc/sub_profile_details/sub_profile_details_bloc.dart';
-import '../../../domain/subProfile_details/model/sub_profile_detail_response.dart';
 import '../../widget/alert_text_label.dart';
 import '../../widget/custom_sizedbox.dart';
 import '../../widget/row_combo.dart';
@@ -36,15 +35,20 @@ class SubProfileHealthProfile extends StatelessWidget {
                     height: 50,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 10, // Replace with your desired item count
+                      itemCount: state.response?.data?.healthProfile
+                          ?.length, // Replace with your desired item count
                       itemBuilder: (context, index) {
                         return Row(
                           children: [
                             CustomText(
-                              'Item $index ',
+                              state.response?.data!.healthProfile?[index] ?? '',
                               style: TextStyle(fontSize: 16),
                             ),
-                            index < 9
+                            index <
+                                    ((state.response?.data?.healthProfile
+                                                ?.length ??
+                                            1) -
+                                        1)
                                 ? Text(
                                     ' | ',
                                     style: TextStyle(color: Colors.grey),
@@ -72,15 +76,18 @@ class SubProfileHealthProfile extends StatelessWidget {
                     height: 50,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 10, // Replace with your desired item count
+                      itemCount: state.response?.data?.diet
+                          ?.length, // Replace with your desired item count
                       itemBuilder: (context, index) {
                         return Row(
                           children: [
                             CustomText(
-                              'Item $index ',
+                              state.response?.data?.diet?[index] ?? '',
                               style: TextStyle(fontSize: 16),
                             ),
-                            index < 9
+                            index <
+                                    (state.response?.data?.diet?.length ?? 1) -
+                                        1
                                 ? Text(
                                     ' | ',
                                     style: TextStyle(color: Colors.grey),

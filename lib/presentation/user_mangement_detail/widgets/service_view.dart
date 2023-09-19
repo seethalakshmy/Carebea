@@ -194,8 +194,8 @@ class ServiceView extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return CustomAlertDialogWidget(
-                          heading: AppString.transactionManagement.val,
-                          child: const ServiceDetailsPopUp(),
+                          heading: AppString.services.val,
+                          child: ServiceDetailsPopUp(services: item),
                         );
                       },
                     );
