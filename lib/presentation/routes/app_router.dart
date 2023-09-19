@@ -26,17 +26,6 @@ class AppRouter extends $AppRouter {
       maintainState: true,
       initial: true,
     ),*/
-    // AutoRoute(
-    //   path: "/care-ambassador-registration",
-    //   page: CareAmbassadorRegistrationRoute.page,
-    //   maintainState: true,
-    // ),
-    // AutoRoute(
-    //   path: "/signup",
-    //   page: SignUpRoute.page,
-    //   maintainState: true,
-    //   initial: true,
-    // ),
     AutoRoute(
       path: "/email-otp-verification",
       page: EmailOtpVerificationRoute.page,
@@ -61,7 +50,6 @@ class AppRouter extends $AppRouter {
         page: DashboardRoute.page,
         initial: true,
       ),
-      AutoRoute(path: 'dashboard', page: DashboardRoute.page, initial: false),
       AutoRoute(
           path: 'care-ambassador',
           page: CareGiversRoute.page,
@@ -77,11 +65,12 @@ class AppRouter extends $AppRouter {
       AutoRoute(
         path: 'user-management-detail',
         page: UserManagementDetailRoute.page,
+        maintainState: true,
       ),
       AutoRoute(
-        path: 'user-management-detail',
-        page: UserManagementDetailRoute.page,
-      ),
+          path: 'sub-profile-details',
+          page: ClientSubProfileDetailsRoute.page,
+          maintainState: true),
       // AutoRoute(path: 'caregiver-detail', page: TestPage,),
       AutoRoute(
           path: 'transaction-management',

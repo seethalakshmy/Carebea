@@ -2481,6 +2481,9 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<SubProfileDetailResponse> getSubProfileDetails(
+    userId,
+    adminId,
   Future<ComplaintsListResponseModel> getComplaints(
     userId,
     page,
@@ -2493,6 +2496,10 @@ class _ApiClient implements ApiClient {
     final _headers = <String, dynamic>{};
     final _data = {
       'user_id': userId,
+      'admin_id': adminId,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SubProfileDetailResponse>(Options(
       'page': page,
       'limit': limit,
       'search_term': searchTerm,
@@ -2506,11 +2513,13 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
+              '/admin/get-subprofile-detail',
               '/admin/get-complaints',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SubProfileDetailResponse.fromJson(_result.data!);
     final value = ComplaintsListResponseModel.fromJson(_result.data!);
     return value;
   }
