@@ -20,6 +20,8 @@ import '../../../widget/custom_shimmer.dart';
 import '../../../widget/custom_sizedbox.dart';
 import '../../../widget/custom_text.dart';
 import '../../../widget/custom_text_field.dart';
+import '../../../widget/dropdown/city_drop_down.dart';
+import '../../../widget/dropdown/state_drop_down.dart';
 import '../../widgets/common_padding_widget.dart';
 import '../../widgets/file_preview_widget.dart';
 import '../../widgets/gender_drop_down.dart';
@@ -474,44 +476,45 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         state.isInitialLoading
             ? CustomShimmerWidget.rectangular(
                 height: DBL.fifty.val, width: DBL.twoEighty.val)
-            : CustomSizedBox(
-                width: DBL.twoEighty.val,
-                child: CTextField(
-                  isReadOnly: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return AppString.emptyState.val;
-                    }
-                    return null;
-                  },
-                  controller: stateSearchController,
-                  onChanged: (value) {},
-                  onTap: () {},
-                ),
-              )
-        // StateDropDown(
-        //       onboardingBloc: widget.onboardingBloc,
-        //       onSearchChanged: (val) {
-        //         widget.onboardingBloc.statePage = 1;
-        //         widget.onboardingBloc.add(OnboardingEvent.stateList(
-        //             stateSearchQuery: val, wantLoading: false));
-        //       },
-        //       searchController: stateSearchController,
-        //       errorText: widget.onboardingBloc.state.nextClicked
-        //           ? selectedState.isEmpty
-        //               ? AppString.emptyState.val
-        //               : ""
-        //           : "",
-        //       items: widget.onboardingBloc.stateList,
-        //       onChange: (value) {
-        //         selectedState = value.toString();
-        //         widget.onboardingBloc.add(const OnboardingEvent.cityList(
-        //             searchQuery: "", wantLoading: true));
-        //         widget.onboardingBloc.selectedCityName = "";
-        //       },
-        //       selectedValue: widget.onboardingBloc.selectedStateName,
-        //     )
-        ,
+            :
+            // CustomSizedBox(
+            //         width: DBL.twoEighty.val,
+            //         child: CTextField(
+            //           isReadOnly: true,
+            //           validator: (value) {
+            //             if (value == null || value.isEmpty) {
+            //               return AppString.emptyState.val;
+            //             }
+            //             return null;
+            //           },
+            //           controller: stateSearchController,
+            //           onChanged: (value) {},
+            //           onTap: () {},
+            //         ),
+            //       )
+            StateDropDown(
+                onboardingBloc: widget.onboardingBloc,
+                onSearchChanged: (val) {
+                  widget.onboardingBloc.statePage = 1;
+                  widget.onboardingBloc.add(OnboardingEvent.stateList(
+                      stateSearchQuery: val.toString().toLowerCase(),
+                      wantLoading: false));
+                },
+                searchController: stateSearchController,
+                errorText: widget.onboardingBloc.state.nextClicked
+                    ? selectedState.isEmpty
+                        ? AppString.emptyState.val
+                        : ""
+                    : "",
+                items: widget.onboardingBloc.stateList,
+                onChange: (value) {
+                  selectedState = value.toString();
+                  widget.onboardingBloc.add(const OnboardingEvent.cityList(
+                      searchQuery: "", wantLoading: true));
+                  widget.onboardingBloc.selectedCityName = "";
+                },
+                selectedValue: widget.onboardingBloc.selectedStateName,
+              ),
       ],
     );
   }
@@ -528,55 +531,55 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         state.isCityApiCalling || state.isInitialLoading
             ? CustomShimmerWidget.rectangular(
                 height: DBL.fifty.val, width: DBL.twoEighty.val)
-            : CustomSizedBox(
-                width: DBL.twoEighty.val,
-                child: CTextField(
-                  isReadOnly: true,
-                  validator: (value) {
-                    bool cityPresent = false;
-                    if (value == null || value.isEmpty) {
-                      return AppString.emptyCity.val;
-                    }
-                    for (var element in widget.onboardingBloc.cityList) {
-                      if (element.cityName?.trim().toLowerCase() ==
-                          citySearchController.text.toLowerCase()) {
-                        cityPresent = true;
-                        selectedCity = citySearchController.text;
-                      }
-                    }
-                    if (cityPresent == false) {
-                      return AppString.cityNotFound.val;
-                    }
+            :
 
-                    return null;
-                  },
-                  controller: citySearchController,
-                  onChanged: (value) {},
-                  onTap: () {},
-                ),
-              )
+            // CustomSizedBox(
+            //         width: DBL.twoEighty.val,
+            //         child: CTextField(
+            //           isReadOnly: true,
+            //           validator: (value) {
+            //             bool cityPresent = false;
+            //             if (value == null || value.isEmpty) {
+            //               return AppString.emptyCity.val;
+            //             }
+            //             for (var element in widget.onboardingBloc.cityList) {
+            //               if (element.cityName?.trim().toLowerCase() ==
+            //                   citySearchController.text.toLowerCase()) {
+            //                 cityPresent = true;
+            //                 selectedCity = citySearchController.text;
+            //               }
+            //             }
+            //             if (cityPresent == false) {
+            //               return AppString.cityNotFound.val;
+            //             }
+            //
+            //             return null;
+            //           },
+            //           controller: citySearchController,
+            //           onChanged: (value) {},
+            //           onTap: () {},
+            //         ),
+            //       )
 
-        // CityDropDown(
-        //         onboardingBloc: widget.onboardingBloc,
-        //         searchController: citySearchController,
-        //         onSearchChanged: (val) {
-        //           widget.onboardingBloc.cityPage = 1;
-        //           widget.onboardingBloc.add(OnboardingEvent.cityList(
-        //               searchQuery: val, wantLoading: false));
-        //         },
-        //         errorText: widget.onboardingBloc.state.nextClicked
-        //             ? selectedCity.isEmpty
-        //                 ? AppString.emptyCity.val
-        //                 : ""
-        //             : "",
-        //         items: widget.onboardingBloc.cityList,
-        //         onChange: (value) {
-        //           selectedCity = value;
-        //         },
-        //         selectedValue: widget.onboardingBloc.selectedCityName,
-        //       )
-
-        ,
+            CityDropDown(
+                onboardingBloc: widget.onboardingBloc,
+                searchController: citySearchController,
+                onSearchChanged: (val) {
+                  widget.onboardingBloc.cityPage = 1;
+                  widget.onboardingBloc.add(OnboardingEvent.cityList(
+                      searchQuery: val, wantLoading: false));
+                },
+                errorText: widget.onboardingBloc.state.nextClicked
+                    ? selectedCity.isEmpty
+                        ? AppString.emptyCity.val
+                        : ""
+                    : "",
+                items: widget.onboardingBloc.cityList,
+                onChange: (value) {
+                  selectedCity = value;
+                },
+                selectedValue: widget.onboardingBloc.selectedCityName,
+              ),
       ],
     );
   }
