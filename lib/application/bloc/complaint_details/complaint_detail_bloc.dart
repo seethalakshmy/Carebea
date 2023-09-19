@@ -1,3 +1,5 @@
+import 'package:admin_580_tech/domain/on_boarding/models/common_response.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -15,10 +17,13 @@ class ComplaintDetailBloc
   ComplaintDetailsRepository complaintDetailsRepository;
   List<ComplaintDetailsData> complaintDetailsList = [];
   ComplaintDetailsData complaintDetailsData = ComplaintDetailsData();
+  int selectedStatusFromDropdown = 0;
+  String compId = '';
 
   ComplaintDetailBloc(this.complaintDetailsRepository)
       : super(ComplaintDetailState.initial()) {
     on<_GetComplaintDetails>(_getComplaintDetails);
+    on<_UpdateComplaint>(_updateComplaint);
   }
 
   _getComplaintDetails(
@@ -39,6 +44,28 @@ class ComplaintDetailBloc
       print("api calling worked");
       return state.copyWith(
           complaintDetailsOption: Some(Right(r)), isLoading: false);
+    });
+    emit(userState);
+  }
+
+  _updateComplaint(
+      _UpdateComplaint event, Emitter<ComplaintDetailState> emit) async {
+    emit(state.copyWith(isLoading: true));
+    final Either<ApiErrorHandler, CommonResponse> result =
+        await complaintDetailsRepository.updateComplaint(
+            adminId: SharedPreffUtil().getAdminId,
+            complaintId: event.complaintId,
+            status: event.status,
+            comment: event.comment);
+    var userState = result.fold((l) {
+      return state.copyWith(
+          error: l.error,
+          updateComplaintOption: Some(Left(l)),
+          isLoading: false);
+    }, (r) {
+      add(ComplaintDetailEvent.getComplaintDetails(complaintId: compId));
+      return state.copyWith(
+          updateComplaintOption: Some(Right(r)), isLoading: false);
     });
     emit(userState);
   }

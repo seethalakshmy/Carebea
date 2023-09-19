@@ -636,4 +636,12 @@ abstract class ApiClient {
   Future<ComplaintDetailsResponseModel> getComplaintDetails(
     @Field('complaint_id') String complaintId,
   );
+
+  @POST('/admin/update-complaint')
+  Future<CommonResponse> updateComplaint(
+    @Field('admin_id') String adminId,
+    @Field('complaint_id') String complaintId,
+    @Field('status') int status,
+    @Field('comment') String comment,
+  );
 }

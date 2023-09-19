@@ -10,6 +10,7 @@ class AlertTextLabel extends StatelessWidget {
     Key? key,
     this.isCustomWidth = false,
     this.isRequiredSpace = false,
+    this.needUnderLine = false,
     this.customWidth,
     this.customWidthLg1,
     this.color,
@@ -19,6 +20,7 @@ class AlertTextLabel extends StatelessWidget {
   final String name;
   final bool isCustomWidth;
   final bool isRequiredSpace;
+  final bool? needUnderLine;
   final Color? color;
   final double? customWidth;
   final double? customWidthLg1;
@@ -40,6 +42,7 @@ class AlertTextLabel extends StatelessWidget {
     return CustomText(name,
         width: isCustomWidth ? getWidth(context, size) : null,
         style: TS().gRoboto(
+            needUnderLine: needUnderLine,
             color: color ?? AppColor.matBlack3.val,
             fontWeight: fontWeight ?? FW.w400.val,
             fontSize: fontSize));
