@@ -3,6 +3,7 @@ import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/core/utility.dart';
+import 'package:admin_580_tech/domain/user_management_detail/model/client_service_response.dart';
 import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_status.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
@@ -21,7 +22,7 @@ class ServiceDetailsPopUp extends StatelessWidget {
     required this.services,
   });
 
-  final Services services;
+  final ClientService services;
 
   @override
   Widget build(BuildContext context) {
@@ -182,7 +183,7 @@ class ServiceDetailsPopUp extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * .11,
               ),
-              ServiceStatus(status: services.status ?? 0),
+              ClientStatusWidget(serviceStatus: services.status ?? 0),
             ],
           ),
           Row(
@@ -276,9 +277,9 @@ class ServiceDetailsPopUp extends StatelessWidget {
               AlertTextLabel(AppString.rating.val),
               SizedBox(width: MediaQuery.of(context).size.width * .11),
               Expanded(
-                  child: CustomRatingBar(
-                rating: services.rating ?? 0,
-              )),
+                  child: CustomRatingBar(rating: 0
+                      // services.rating ?? 0,
+                      )),
             ],
           ),
           Row(

@@ -62,6 +62,7 @@ class Data {
     double? averageReview,
     int? reviewCount,
     Name? name,
+    String? profilePic,
     PersonalDetails1? personalDetails1,
     DocumentDetails2? documentDetails2,
     PersonalDetails2? personalDetails2,
@@ -80,6 +81,7 @@ class Data {
     _averageReview = averageReview;
     _reviewCount = reviewCount;
     _name = name;
+    _profilePic = profilePic;
     _personalDetails1 = personalDetails1;
     _documentDetails2 = documentDetails2;
     _personalDetails2 = personalDetails2;
@@ -101,6 +103,7 @@ class Data {
     _cancelledRequests = json['cancelled_requests'];
     _averageReview = json['average_review'];
     _reviewCount = json['review_count'];
+    _profilePic = json['profile_pic'];
     _name = json['name'] != null ? Name.fromJson(json['name']) : null;
     _personalDetails1 = json['personal_details'] != null
         ? PersonalDetails1.fromJson(json['personal_details'])
@@ -130,6 +133,7 @@ class Data {
   int? _cancelledRequests;
   double? _averageReview;
   int? _reviewCount;
+  String? _profilePic;
   Name? _name;
   PersonalDetails1? _personalDetails1;
   DocumentDetails2? _documentDetails2;
@@ -146,6 +150,7 @@ class Data {
     dynamic agreement,
     int? serviceCompleted,
     int? cancelledRequests,
+    String? profilePic,
     double? averageReview,
     int? reviewCount,
     Name? name,
@@ -168,6 +173,7 @@ class Data {
         averageReview: averageReview ?? _averageReview,
         reviewCount: reviewCount ?? _reviewCount,
         name: name ?? _name,
+        profilePic: profilePic ?? _profilePic,
         personalDetails1: personalDetails1 ?? _personalDetails1,
         documentDetails2: documentDetails2 ?? _documentDetails2,
         personalDetails2: personalDetails2 ?? _personalDetails2,
@@ -186,6 +192,7 @@ class Data {
   double? get averageReview => _averageReview;
   int? get reviewCount => _reviewCount;
   Name? get name => _name;
+  String? get profilePic => _profilePic;
   PersonalDetails1? get personalDetails => _personalDetails1;
   DocumentDetails2? get documentDetails2 => _documentDetails2;
   PersonalDetails2? get personalDetails2 => _personalDetails2;
@@ -207,6 +214,7 @@ class Data {
     map['cancelled_requests'] = _cancelledRequests;
     map['average_review'] = _averageReview;
     map['review_count'] = _reviewCount;
+    map['profile_pic'] = _profilePic;
     if (_name != null) {
       map['name'] = _name?.toJson();
     }

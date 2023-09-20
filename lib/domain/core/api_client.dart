@@ -54,6 +54,7 @@ import '../transaction_management/model/get_filters_response.dart';
 import '../transaction_management/model/transaction_details_response.dart';
 import '../transaction_management/model/transaction_list_response.dart';
 import '../user_management/model/user_list_response.dart';
+import '../user_management_detail/model/client_service_response.dart';
 
 part 'api_client.g.dart';
 
@@ -549,6 +550,7 @@ abstract class ApiClient {
   @POST("/admin/transaction-details")
   Future<TransactionDetailsResponse> getTransactionDetails(
       @Header("Authorization") String token,
+      @Field('service_id') String serviceId,
       @Field('transaction_id') String transactionId);
 
   @POST("/admin/reschedule-service")
@@ -636,6 +638,12 @@ abstract class ApiClient {
     @Field('limit') String limit,
     @Field('search_term') String searchTerm,
     @Field('status') int status,
+  );
+
+  @POST('/admin/client-service-view')
+  Future<ClientServiceResponse> getClientService(
+    @Field('user_id') String userId,
+    @Field('admin_id') String adminId,
   );
 
   @POST('/admin/get-complaints-by-id')

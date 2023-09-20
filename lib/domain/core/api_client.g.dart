@@ -2094,13 +2094,17 @@ class _ApiClient implements ApiClient {
   @override
   Future<TransactionDetailsResponse> getTransactionDetails(
     token,
+    serviceId,
     transactionId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = {'transaction_id': transactionId};
+    final _data = {
+      'service_id': serviceId,
+      'transaction_id': transactionId,
+    };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<TransactionDetailsResponse>(Options(
       method: 'POST',
@@ -2541,6 +2545,35 @@ class _ApiClient implements ApiClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ComplaintsListResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ClientServiceResponse> getClientService(
+    userId,
+    adminId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'admin_id': adminId,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ClientServiceResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/client-service-view',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ClientServiceResponse.fromJson(_result.data!);
     return value;
   }
 

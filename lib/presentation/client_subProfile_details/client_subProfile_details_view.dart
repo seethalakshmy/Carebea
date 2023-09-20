@@ -121,7 +121,9 @@ class _ClientSubProfileDetailsPageState
                                               CrossAxisAlignment.start,
                                           children: [
                                             CustomSvg(
-                                              path: IMG.profilePlaceHolder.val,
+                                              path: state.response?.data
+                                                      ?.profilePic ??
+                                                  IMG.profilePlaceHolder.val,
                                               width: isXs(context) ? 150 : 200,
                                               height: isXs(context) ? 125 : 175,
                                             ),

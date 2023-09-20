@@ -23,7 +23,8 @@ mixin _$TransactionManagementEvent {
             String searchTerm, int filterId)
         getTransactions,
     required TResult Function(bool clicked) hideOrShowDetails,
-    required TResult Function(String transactionId) getTransactionDetails,
+    required TResult Function(String transactionId, String serviceId)
+        getTransactionDetails,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,7 +34,8 @@ mixin _$TransactionManagementEvent {
             int filterId)?
         getTransactions,
     TResult? Function(bool clicked)? hideOrShowDetails,
-    TResult? Function(String transactionId)? getTransactionDetails,
+    TResult? Function(String transactionId, String serviceId)?
+        getTransactionDetails,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,7 +45,8 @@ mixin _$TransactionManagementEvent {
             int filterId)?
         getTransactions,
     TResult Function(bool clicked)? hideOrShowDetails,
-    TResult Function(String transactionId)? getTransactionDetails,
+    TResult Function(String transactionId, String serviceId)?
+        getTransactionDetails,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -138,7 +141,8 @@ class _$_GetFilters implements _GetFilters {
             String searchTerm, int filterId)
         getTransactions,
     required TResult Function(bool clicked) hideOrShowDetails,
-    required TResult Function(String transactionId) getTransactionDetails,
+    required TResult Function(String transactionId, String serviceId)
+        getTransactionDetails,
   }) {
     return getFilters();
   }
@@ -151,7 +155,8 @@ class _$_GetFilters implements _GetFilters {
             int filterId)?
         getTransactions,
     TResult? Function(bool clicked)? hideOrShowDetails,
-    TResult? Function(String transactionId)? getTransactionDetails,
+    TResult? Function(String transactionId, String serviceId)?
+        getTransactionDetails,
   }) {
     return getFilters?.call();
   }
@@ -164,7 +169,8 @@ class _$_GetFilters implements _GetFilters {
             int filterId)?
         getTransactions,
     TResult Function(bool clicked)? hideOrShowDetails,
-    TResult Function(String transactionId)? getTransactionDetails,
+    TResult Function(String transactionId, String serviceId)?
+        getTransactionDetails,
     required TResult orElse(),
   }) {
     if (getFilters != null) {
@@ -326,7 +332,8 @@ class _$_GetTransactions implements _GetTransactions {
             String searchTerm, int filterId)
         getTransactions,
     required TResult Function(bool clicked) hideOrShowDetails,
-    required TResult Function(String transactionId) getTransactionDetails,
+    required TResult Function(String transactionId, String serviceId)
+        getTransactionDetails,
   }) {
     return getTransactions(userId, page, limit, searchTerm, filterId);
   }
@@ -339,7 +346,8 @@ class _$_GetTransactions implements _GetTransactions {
             int filterId)?
         getTransactions,
     TResult? Function(bool clicked)? hideOrShowDetails,
-    TResult? Function(String transactionId)? getTransactionDetails,
+    TResult? Function(String transactionId, String serviceId)?
+        getTransactionDetails,
   }) {
     return getTransactions?.call(userId, page, limit, searchTerm, filterId);
   }
@@ -352,7 +360,8 @@ class _$_GetTransactions implements _GetTransactions {
             int filterId)?
         getTransactions,
     TResult Function(bool clicked)? hideOrShowDetails,
-    TResult Function(String transactionId)? getTransactionDetails,
+    TResult Function(String transactionId, String serviceId)?
+        getTransactionDetails,
     required TResult orElse(),
   }) {
     if (getTransactions != null) {
@@ -488,7 +497,8 @@ class _$_HideOrShowDetails implements _HideOrShowDetails {
             String searchTerm, int filterId)
         getTransactions,
     required TResult Function(bool clicked) hideOrShowDetails,
-    required TResult Function(String transactionId) getTransactionDetails,
+    required TResult Function(String transactionId, String serviceId)
+        getTransactionDetails,
   }) {
     return hideOrShowDetails(clicked);
   }
@@ -501,7 +511,8 @@ class _$_HideOrShowDetails implements _HideOrShowDetails {
             int filterId)?
         getTransactions,
     TResult? Function(bool clicked)? hideOrShowDetails,
-    TResult? Function(String transactionId)? getTransactionDetails,
+    TResult? Function(String transactionId, String serviceId)?
+        getTransactionDetails,
   }) {
     return hideOrShowDetails?.call(clicked);
   }
@@ -514,7 +525,8 @@ class _$_HideOrShowDetails implements _HideOrShowDetails {
             int filterId)?
         getTransactions,
     TResult Function(bool clicked)? hideOrShowDetails,
-    TResult Function(String transactionId)? getTransactionDetails,
+    TResult Function(String transactionId, String serviceId)?
+        getTransactionDetails,
     required TResult orElse(),
   }) {
     if (hideOrShowDetails != null) {
@@ -578,7 +590,7 @@ abstract class _$$_GetTransactionDetailsCopyWith<$Res> {
           $Res Function(_$_GetTransactionDetails) then) =
       __$$_GetTransactionDetailsCopyWithImpl<$Res>;
   @useResult
-  $Res call({String transactionId});
+  $Res call({String transactionId, String serviceId});
 }
 
 /// @nodoc
@@ -594,11 +606,16 @@ class __$$_GetTransactionDetailsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? transactionId = null,
+    Object? serviceId = null,
   }) {
     return _then(_$_GetTransactionDetails(
       transactionId: null == transactionId
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      serviceId: null == serviceId
+          ? _value.serviceId
+          : serviceId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -607,14 +624,17 @@ class __$$_GetTransactionDetailsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_GetTransactionDetails implements _GetTransactionDetails {
-  const _$_GetTransactionDetails({required this.transactionId});
+  const _$_GetTransactionDetails(
+      {required this.transactionId, required this.serviceId});
 
   @override
   final String transactionId;
+  @override
+  final String serviceId;
 
   @override
   String toString() {
-    return 'TransactionManagementEvent.getTransactionDetails(transactionId: $transactionId)';
+    return 'TransactionManagementEvent.getTransactionDetails(transactionId: $transactionId, serviceId: $serviceId)';
   }
 
   @override
@@ -623,11 +643,13 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
         (other.runtimeType == runtimeType &&
             other is _$_GetTransactionDetails &&
             (identical(other.transactionId, transactionId) ||
-                other.transactionId == transactionId));
+                other.transactionId == transactionId) &&
+            (identical(other.serviceId, serviceId) ||
+                other.serviceId == serviceId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, transactionId);
+  int get hashCode => Object.hash(runtimeType, transactionId, serviceId);
 
   @JsonKey(ignore: true)
   @override
@@ -644,9 +666,10 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
             String searchTerm, int filterId)
         getTransactions,
     required TResult Function(bool clicked) hideOrShowDetails,
-    required TResult Function(String transactionId) getTransactionDetails,
+    required TResult Function(String transactionId, String serviceId)
+        getTransactionDetails,
   }) {
-    return getTransactionDetails(transactionId);
+    return getTransactionDetails(transactionId, serviceId);
   }
 
   @override
@@ -657,9 +680,10 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
             int filterId)?
         getTransactions,
     TResult? Function(bool clicked)? hideOrShowDetails,
-    TResult? Function(String transactionId)? getTransactionDetails,
+    TResult? Function(String transactionId, String serviceId)?
+        getTransactionDetails,
   }) {
-    return getTransactionDetails?.call(transactionId);
+    return getTransactionDetails?.call(transactionId, serviceId);
   }
 
   @override
@@ -670,11 +694,12 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
             int filterId)?
         getTransactions,
     TResult Function(bool clicked)? hideOrShowDetails,
-    TResult Function(String transactionId)? getTransactionDetails,
+    TResult Function(String transactionId, String serviceId)?
+        getTransactionDetails,
     required TResult orElse(),
   }) {
     if (getTransactionDetails != null) {
-      return getTransactionDetails(transactionId);
+      return getTransactionDetails(transactionId, serviceId);
     }
     return orElse();
   }
@@ -719,10 +744,12 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
 }
 
 abstract class _GetTransactionDetails implements TransactionManagementEvent {
-  const factory _GetTransactionDetails({required final String transactionId}) =
-      _$_GetTransactionDetails;
+  const factory _GetTransactionDetails(
+      {required final String transactionId,
+      required final String serviceId}) = _$_GetTransactionDetails;
 
   String get transactionId;
+  String get serviceId;
   @JsonKey(ignore: true)
   _$$_GetTransactionDetailsCopyWith<_$_GetTransactionDetails> get copyWith =>
       throw _privateConstructorUsedError;

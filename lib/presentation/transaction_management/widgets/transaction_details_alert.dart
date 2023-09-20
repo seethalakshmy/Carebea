@@ -72,7 +72,7 @@ class TransactionDetailsAlert extends StatelessWidget {
             ),
           ),
         ),
-        item?.status!.id == 1 || item?.status!.id == 2
+        item?.status?.id == 1 || item?.status?.id == 2
             ? Row(
                 children: [
                   CustomText(
@@ -86,8 +86,8 @@ class TransactionDetailsAlert extends StatelessWidget {
                     ),
                   ),
                   CustomStatusWidget(
-                    statusName: item!.status!.name!,
-                    isCompleted: item.status!.id == 1 || item.status!.id == 2,
+                    statusName: item?.status?.name ?? "",
+                    isCompleted: item?.status?.id == 1 || item?.status?.id == 2,
                     isFromDetails: true,
                   )
                 ],
