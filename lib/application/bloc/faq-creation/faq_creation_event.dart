@@ -8,6 +8,7 @@ class FaqCreationEvent with _$FaqCreationEvent {
       required String question,
       required String answer,
       required String status,
+      required bool forClient,
       String? profilePic}) = _AddFaq;
 
   const factory FaqCreationEvent.updateFaq({
@@ -15,6 +16,9 @@ class FaqCreationEvent with _$FaqCreationEvent {
     required String question,
     required String answer,
     required String status,
+    required bool forClient,
     required BuildContext context,
   }) = _UpdateFaq;
+  const factory FaqCreationEvent.radioForClient({required int isSelected}) =
+      _RadioForClient;
 }

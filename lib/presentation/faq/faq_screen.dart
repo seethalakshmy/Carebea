@@ -168,6 +168,12 @@ class _FaqPageState extends State<FaqPage> {
               ),
             ),
             DataColumn2(
+              size: ColumnSize.L,
+              label: _tableColumnView(
+                AppString.visibility.val,
+              ),
+            ),
+            DataColumn2(
               size: ColumnSize.M,
               label: _tableColumnView(
                 "",
@@ -181,6 +187,11 @@ class _FaqPageState extends State<FaqPage> {
               cells: [
                 DataCell(_tableRowView("", _pageIndex.toString())),
                 DataCell(_tableRowView(item.question ?? "", item.answer ?? "")),
+                DataCell(_tableRowView(
+                    "",
+                    item.forClient ?? false
+                        ? AppString.forClient.val
+                        : AppString.forCa.val)),
 
                 // DataCell(_statusBox(item.status ?? false)),
                 DataCell(TableActions(

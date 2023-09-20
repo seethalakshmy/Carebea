@@ -32,11 +32,11 @@ class FaqCreationRepository implements IFaqCreationRepo {
   }
 
   @override
-  Future<Either<ApiErrorHandler, CommonResponse>> updateFaqDetails(
-      String id, String question, String answer, String status) async {
+  Future<Either<ApiErrorHandler, CommonResponse>> updateFaqDetails(String id,
+      String question, String answer, String status, bool forClient) async {
     try {
-      final response =
-          await apiClient.updateFaqDetails(id, question, answer, status);
+      final response = await apiClient.updateFaqDetails(
+          id, question, answer, status, forClient);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
@@ -53,10 +53,10 @@ class FaqCreationRepository implements IFaqCreationRepo {
 
   @override
   Future<Either<ApiErrorHandler, CommonResponse>> createFaqDetails(
-      String question, String answer, String status) async {
+      String question, String answer, String status, bool forClient) async {
     try {
       final response =
-          await apiClient.createFaqDetails(question, answer, status);
+          await apiClient.createFaqDetails(question, answer, status, forClient);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
