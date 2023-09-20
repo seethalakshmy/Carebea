@@ -1858,7 +1858,7 @@ class SubProfiles {
     bool? isProfileCompleted,
     num? profileCompletePercentage,
     ProfileCompletion? profileCompletion,
-    List<CompletedServices>? completedServices,
+    int? completedServices,
   }) {
     _id = id;
     _name = name;
@@ -1889,12 +1889,13 @@ class SubProfiles {
     _profileCompletion = json['profile_completion'] != null
         ? ProfileCompletion.fromJson(json['profile_completion'])
         : null;
-    if (json['completedServices'] != null) {
+    /*if (json['completedServices'] != null) {
       _completedServices = [];
       json['completedServices'].forEach((v) {
         _completedServices?.add(CompletedServices.fromJson(v));
       });
-    }
+    }*/
+    _completedServices = json['completedServices'];
   }
 
   String? _id;
@@ -1908,7 +1909,7 @@ class SubProfiles {
   num? _profileCompletePercentage;
   num? _totalServices;
   ProfileCompletion? _profileCompletion;
-  List<CompletedServices>? _completedServices;
+  int? _completedServices;
 
   SubProfiles copyWith({
     String? id,
@@ -1922,7 +1923,7 @@ class SubProfiles {
     num? profileCompletePercentage,
     num? totalServices,
     ProfileCompletion? profileCompletion,
-    List<CompletedServices>? completedServices,
+    int? completedServices,
   }) =>
       SubProfiles(
         id: id ?? _id,
@@ -1962,7 +1963,7 @@ class SubProfiles {
 
   ProfileCompletion? get profileCompletion => _profileCompletion;
 
-  List<CompletedServices>? get completedServices => _completedServices;
+  int? get completedServices => _completedServices;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -1983,15 +1984,16 @@ class SubProfiles {
     if (_profileCompletion != null) {
       map['profile_completion'] = _profileCompletion?.toJson();
     }
-    if (_completedServices != null) {
+    /*if (_completedServices != null) {
       map['completedServices'] =
           _completedServices?.map((v) => v.toJson()).toList();
-    }
+    }*/
+    map['completedServices'] = _completedServices;
     return map;
   }
 }
 
-CompletedServices completedServicesFromJson(String str) =>
+/*CompletedServices completedServicesFromJson(String str) =>
     CompletedServices.fromJson(json.decode(str));
 
 String completedServicesToJson(CompletedServices data) =>
@@ -2351,7 +2353,7 @@ class CompletedServices {
     map['actualEndTime'] = _actualEndTime;
     return map;
   }
-}
+}*/
 
 ProblemFaced problemFacedFromJson(String str) =>
     ProblemFaced.fromJson(json.decode(str));

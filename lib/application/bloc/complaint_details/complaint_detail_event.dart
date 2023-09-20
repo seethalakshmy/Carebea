@@ -10,4 +10,7 @@ class ComplaintDetailEvent with _$ComplaintDetailEvent {
     required int status,
     required String comment,
   }) = _UpdateComplaint;
+
+  const factory ComplaintDetailEvent.getService({required String serviceId,required BuildContext context}) =
+      _GetService;
 }

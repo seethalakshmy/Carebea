@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 
@@ -10,12 +11,14 @@ class ProfileWidget extends StatelessWidget {
       {Key? key,
       required this.imageUrl,
       required this.name,
+      this.width,
       required this.subText})
       : super(key: key);
 
   final String imageUrl;
   final String name;
   final String subText;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +33,12 @@ class ProfileWidget extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomText(name,
-                    style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold)),
+                CustomSizedBox(
+                  child: CustomText(name,
+                      width: width,
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold)),
+                ),
                 const SizedBox(
                   height: 4,
                 ),

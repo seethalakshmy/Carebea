@@ -2,6 +2,7 @@ import 'package:admin_580_tech/infrastructure/complaint_details/complaint_detail
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pdf_render/pdf_render_widgets.dart';
 
 import '../../application/bloc/complaint_details/complaint_detail_bloc.dart';
 import '../../core/enum.dart';
@@ -37,6 +38,7 @@ class SupportTicketsDetailPage extends StatefulWidget {
 class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
   late ComplaintDetailBloc _complaintDetailBloc;
   late TextEditingController _commentController;
+  final pdfController = PdfViewerController();
 
   @override
   void initState() {
@@ -58,6 +60,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
   @override
   void dispose() {
     _commentController.dispose();
+  //  pdfController.dispose();
     super.dispose();
   }
 
@@ -251,7 +254,8 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
         RowColonCombo.twoHundred(
             customWidthLg1: 180,
             label: AppString.complaintId.val,
-            value: _complaintDetailBloc.complaintDetailsList[0].uniqueComplaintId ?? "",
+            value: _complaintDetailBloc.complaintDetailsList[0]
+                .uniqueComplaintId ?? "",
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(height: DBL.six.val),
         RowColonCombo.twoHundred(
@@ -309,7 +313,11 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
                 _complaintDetailBloc.complaintDetailsList[0].serviceBookingId ==
                     null
                 ? null
-                : () {}
+                : () {
+              _complaintDetailBloc.add(ComplaintDetailEvent.getService(
+                  serviceId: _complaintDetailBloc.complaintDetailsList[0]
+                      .serviceId ?? "", context: context));
+            }
                 : _complaintDetailBloc.complaintDetailsList[0]
                 .isPaymentRelated ?? false
                 ? _complaintDetailBloc.complaintDetailsList[0]
@@ -317,7 +325,9 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
                 _complaintDetailBloc.complaintDetailsList[0]
                     .uniqueTransactionId == null
                 ? null
-                : () {} : null,
+                : () {
+
+            } : null,
             needUnderLine: _complaintDetailBloc.complaintDetailsList[0]
                 .isServiceRelated ?? false
                 ? _complaintDetailBloc.complaintDetailsList[0]
@@ -435,49 +445,131 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
                 ? AppColor.black.val : AppColor.blue.val,
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(height: DBL.thirty.val),
-        Column(
+        _statusUpdateWidget(),
+        CustomSizedBox(height: DBL.twenty.val),
+        CustomText(
+          "Attachments",
+          style: TS().gRoboto(
+              fontSize: FS.font16.val,
+              fontWeight: FW.w500.val,
+              color: AppColor.black.val),
+        ),
+        CustomSizedBox(height: DBL.ten.val),
+        _documentShowingWidget(),
+        CustomSizedBox(height: DBL.twenty.val),
+        Divider(color: AppColor.lightGrey.val),
+        Expanded(child: _statusDetailsView())
+      ],
+    );
+  }
+
+  _statusUpdateWidget() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _statusDropDown(context),
+        CustomSizedBox(height: DBL.ten.val),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _statusDropDown(context),
-            CustomSizedBox(height: DBL.ten.val),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CTextField(
-                  controller: _commentController,
-                  width: DBL.twoEighty.val,
-                  height: DBL.fortyFive.val,
-                  maxLines: 10,
-                  hintText: AppString.comments.val,
-                ),
-                CustomSizedBox(width: DBL.thirty.val),
-                Padding(
-                  padding: const EdgeInsets.only(top: 3.0),
-                  child: CustomButton(
-                    onPressed: () {
-                      print("selected status is : ${_complaintDetailBloc
-                          .selectedStatusFromDropdown}");
-                      _complaintDetailBloc.add(
-                          ComplaintDetailEvent.updateComplaint(
-                              complaintId: _complaintDetailBloc.compId,
-                              status: _complaintDetailBloc
-                                  .selectedStatusFromDropdown,
-                              comment: _commentController.text.trim()));
-                      _commentController.clear();
-                    },
-                    text: AppString.submit.val,
-                    height: DBL.fifty.val,
-                  ),
-                )
-              ],
+            CTextField(
+              controller: _commentController,
+              width: DBL.twoEighty.val,
+              height: DBL.fortyFive.val,
+              maxLines: 10,
+              hintText: AppString.comments.val,
             ),
+            CustomSizedBox(width: DBL.thirty.val),
+            Padding(
+              padding: const EdgeInsets.only(top: 3.0),
+              child: CustomButton(
+                onPressed: () {
+                  print("selected status is : ${_complaintDetailBloc
+                      .selectedStatusFromDropdown}");
+                  _complaintDetailBloc.add(
+                      ComplaintDetailEvent.updateComplaint(
+                          complaintId: _complaintDetailBloc.compId,
+                          status: _complaintDetailBloc
+                              .selectedStatusFromDropdown,
+                          comment: _commentController.text.trim()));
+                  _commentController.clear();
+                },
+                text: AppString.submit.val,
+                height: DBL.fifty.val,
+              ),
+            )
           ],
         ),
-        CustomSizedBox(height: DBL.thirty.val),
-        Divider(color: AppColor.lightGrey.val),
-        _statusDetailsView()
       ],
+    );
+  }
+
+  _documentShowingWidget() {
+    return CustomSizedBox(height: 40,
+      child: ListView.builder(shrinkWrap: true,scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Padding(padding: EdgeInsets.only(right: 20),child: _complaintDetailBloc
+              .complaintDetailsList[0].attachments![index].contains(".pdf")
+              ? InkWell(onTap: (){
+            showGeneralDialog(
+              context: context,
+              pageBuilder: (BuildContext buildContext, Animation animation,
+                  Animation secondaryAnimation) {
+                return CustomAlertDialogWidget(
+                    showHeading: false,
+                    width: 700,
+                    height: 600,
+                    heading: "",
+                    child: SizedBox(width: double.infinity,height: MediaQuery.of(context).size.height*0.9,
+                      child: PdfViewer.openFile(
+                        _complaintDetailBloc
+                            .complaintDetailsList[0].attachments![index],
+                        viewerController: pdfController,
+                        onError: (err) => print(err),
+                        params: const PdfViewerParams(
+                            minScale: 0.2,
+                            scrollDirection: Axis.vertical,
+                            padding: 10,
+                            scaleEnabled: false,
+                            maxScale: 100),
+                      ),
+                    ));
+              },
+            );
+          },
+            child: Container(padding: const EdgeInsets.all(3),alignment: Alignment.center,width: DBL.fifty.val,
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: AppColor.primaryColor.val,width: 1.5)),
+                child:Icon(Icons.text_snippet_outlined,size: 25,color: AppColor.primaryColor.val,)),
+          ) : ClipRRect(borderRadius: BorderRadius.circular(10),
+            child: CachedImage(
+              onTap: () {
+                showGeneralDialog(
+                  context: context,
+                  pageBuilder: (BuildContext buildContext, Animation animation,
+                      Animation secondaryAnimation) {
+                    return CustomAlertDialogWidget(
+                        showHeading: false,
+                        width: 700,
+                        heading: "",
+                        child: CachedImage(
+                          fit: BoxFit.contain,
+                          imgUrl: _complaintDetailBloc
+                              .complaintDetailsList[0].attachments![index],
+                        ));
+                  },
+                );
+              },
+              imgUrl: _complaintDetailBloc
+                  .complaintDetailsList[0].attachments![index],
+              height: DBL.fifty.val,
+              width: DBL.fifty.val,
+              isDetailPage: true,
+            ),
+          ),);
+        }, itemCount: _complaintDetailBloc
+            .complaintDetailsList[0].attachments!.length,),
     );
   }
 
@@ -579,118 +671,116 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
   }
 
   _statusDetailsView() {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CustomText(
-            "Complaint Status",
-            style: TS().gRoboto(
-                fontSize: FS.font16.val,
-                fontWeight: FW.w500.val,
-                color: AppColor.black.val),
-          ),
-          CustomSizedBox(height: DBL.ten.val),
-          Expanded(
-            child: ListView.builder(
-                itemCount: _complaintDetailBloc.complaintDetailsList[0]
-                    .statusHistory!.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomText(
+          "Complaint Status",
+          style: TS().gRoboto(
+              fontSize: FS.font16.val,
+              fontWeight: FW.w500.val,
+              color: AppColor.black.val),
+        ),
+        CustomSizedBox(height: DBL.ten.val),
+        Expanded(
+          child: ListView.builder(
+              itemCount: _complaintDetailBloc.complaintDetailsList[0]
+                  .statusHistory!.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        children: [
+                          const CircleAvatar(
+                            backgroundColor: Colors.green,
+                            radius: 6,
+                          ),
+                          index + 1 < _complaintDetailBloc
+                              .complaintDetailsList[0].statusHistory!.length
+                              ? Container(
+                            width: 5,
+                            color: AppColor.lightGrey.val,
+                            height: 100,
+                          )
+                              : Container()
+                        ],
+                      ),
+                      CustomSizedBox(width: DBL.ten.val),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const CircleAvatar(
-                              backgroundColor: Colors.green,
-                              radius: 6,
-                            ),
-                            index + 1 < _complaintDetailBloc
-                                .complaintDetailsList[0].statusHistory!.length
-                                ? Container(
-                              width: 5,
-                              color: AppColor.lightGrey.val,
-                              height: 100,
-                            )
-                                : Container()
-                          ],
-                        ),
-                        CustomSizedBox(width: DBL.ten.val),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomText(
-                                    _complaintDetailBloc.complaintDetailsList[0]
-                                        .statusHistory![index].date ?? "",
-                                    style: TS().gRoboto(
-                                        fontSize: FS.font12.val,
-                                        fontWeight: FW.w400.val,
-                                        color: AppColor.black4.val),
-                                  ),
-                                  CustomSizedBox(width: DBL.twenty.val),
-                                  // Divider(color: AppColor.lightGrey.val, thickness: 1.0),
-                                  CustomSizedBox(height: DBL.ten.val),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: generateColorForStatus(
-                                            _complaintDetailBloc
-                                                .complaintDetailsList[0]
-                                                .statusHistory![index].status
-                                                .toString())),
-                                    padding: const EdgeInsets.all(7),
-                                    child: CustomText(
-                                      generateStatusText(_complaintDetailBloc
-                                          .complaintDetailsList[0]
-                                          .statusHistory![index].status
-                                          .toString()),
-                                      style: TS().gRoboto(
-                                          fontSize: FS.font12.val,
-                                          fontWeight: FW.w500.val,
-                                          color: AppColor.white.val),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              CustomSizedBox(width: DBL.ten.val),
-                              Container(
-                                width: 1,
-                                height: 50,
-                                color: AppColor.lightGrey.val,
-                              ),
-                              CustomSizedBox(width: DBL.ten.val),
-                              SizedBox(
-                                width: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width * 0.4,
-                                child: CustomText(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomText(
                                   _complaintDetailBloc.complaintDetailsList[0]
-                                      .statusHistory![index].comment ?? "",
+                                      .statusHistory![index].date ?? "",
                                   style: TS().gRoboto(
                                       fontSize: FS.font12.val,
                                       fontWeight: FW.w400.val,
-                                      color: AppColor.lightGrey3.val),
+                                      color: AppColor.black4.val),
                                 ),
+                                CustomSizedBox(width: DBL.twenty.val),
+                                // Divider(color: AppColor.lightGrey.val, thickness: 1.0),
+                                CustomSizedBox(height: DBL.ten.val),
+                                Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: generateColorForStatus(
+                                          _complaintDetailBloc
+                                              .complaintDetailsList[0]
+                                              .statusHistory![index].status
+                                              .toString())),
+                                  padding: const EdgeInsets.all(7),
+                                  child: CustomText(
+                                    generateStatusText(_complaintDetailBloc
+                                        .complaintDetailsList[0]
+                                        .statusHistory![index].status
+                                        .toString()),
+                                    style: TS().gRoboto(
+                                        fontSize: FS.font12.val,
+                                        fontWeight: FW.w500.val,
+                                        color: AppColor.white.val),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            CustomSizedBox(width: DBL.ten.val),
+                            Container(
+                              width: 1,
+                              height: 50,
+                              color: AppColor.lightGrey.val,
+                            ),
+                            CustomSizedBox(width: DBL.ten.val),
+                            SizedBox(
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width * 0.4,
+                              child: CustomText(
+                                _complaintDetailBloc.complaintDetailsList[0]
+                                    .statusHistory![index].comment ?? "",
+                                style: TS().gRoboto(
+                                    fontSize: FS.font12.val,
+                                    fontWeight: FW.w400.val,
+                                    color: AppColor.lightGrey3.val),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  );
-                }),
-          ),
-        ],
-      ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+        ),
+      ],
     );
   }
 
