@@ -2,7 +2,6 @@ import 'package:admin_580_tech/application/bloc/user_management_detail/user_mana
 import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 
@@ -113,8 +112,8 @@ class SubProfileView extends StatelessWidget {
                   name: "${item.name?.firstName} ${item.name?.lastName}",
                   imgUrl: item.profilePic ?? "",
                   age: item.age ?? '')),
-              DataCell(_rowsView(context,
-                  text: item.completedServices?.length.toString())),
+              DataCell(
+                  _rowsView(context, text: item.completedServices?.toString())),
               DataCell(InkWell(
                   onTap: () {
                     autoTabRouter

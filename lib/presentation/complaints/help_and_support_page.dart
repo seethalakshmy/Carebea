@@ -1,4 +1,3 @@
-import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/infrastructure/complaints/complaints_repository.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_dropdown.dart';
@@ -59,8 +58,8 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
 
   @override
   void dispose() {
-    super.dispose();
     _searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -249,13 +248,17 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
         limit: _limit.toString(),
         searchTerm: _searchController.text.trim(),
         status: 0));
-    print(
-        "list length after the api call : ${_supportTicketsBloc.complaintList.length}");
   }
 
   CustomDropdown<int> _statusDropDown(BuildContext context) {
     return CustomDropdown<int>(
-      onChange: (int value, int index) => CustomLog.log(value.toString()),
+      onChange: (int value, int index) => _supportTicketsBloc.add(
+          ComplaintsEvent.getComplaints(
+              userId: userId,
+              page: _page.toString(),
+              limit: _limit.toString(),
+              searchTerm: "",
+              status: value)),
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
         width: DBL.oneForty.val,
@@ -272,7 +275,12 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
         color: AppColor.white.val,
         padding: EdgeInsets.all(DBL.five.val),
       ),
-      items: [AppString.completed.val, AppString.pending.val]
+      items: [
+        AppString.neww.val,
+        AppString.onGoing.val,
+        AppString.completed.val,
+        AppString.canceled.val
+      ]
           .asMap()
           .entries
           .map(

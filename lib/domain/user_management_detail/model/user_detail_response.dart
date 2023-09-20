@@ -2,6 +2,7 @@ import 'dart:convert';
 
 UserDetailResponse userDetailResponseFromJson(String str) =>
     UserDetailResponse.fromJson(json.decode(str));
+
 String userDetailResponseToJson(UserDetailResponse data) =>
     json.encode(data.toJson());
 
@@ -21,9 +22,11 @@ class UserDetailResponse {
     _message = json['message'];
     _data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
+
   bool? _status;
   String? _message;
   Data? _data;
+
   UserDetailResponse copyWith({
     bool? status,
     String? message,
@@ -34,8 +37,11 @@ class UserDetailResponse {
         message: message ?? _message,
         data: data ?? _data,
       );
+
   bool? get status => _status;
+
   String? get message => _message;
+
   Data? get data => _data;
 
   Map<String, dynamic> toJson() {
@@ -50,6 +56,7 @@ class UserDetailResponse {
 }
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
+
 String dataToJson(Data data) => json.encode(data.toJson());
 
 class Data {
@@ -115,6 +122,7 @@ class Data {
       });
     }
   }
+
   String? _id;
   Name? _name;
   String? _phone;
@@ -128,6 +136,7 @@ class Data {
   PaymentMethod? _paymentMethod;
   List<Services>? _services;
   List<Transactions>? _transactions;
+
   Data copyWith({
     String? id,
     Name? name,
@@ -158,18 +167,29 @@ class Data {
         services: services ?? _services,
         transactions: transactions ?? _transactions,
       );
+
   String? get id => _id;
+
   Name? get name => _name;
+
   String? get phone => _phone;
+
   String? get email => _email;
   String? get profilePic => _profilePic;
   dynamic get ssn => _ssn;
+
   num? get serviceCompleted => _serviceCompleted;
+
   num? get cancelledRequest => _cancelledRequest;
+
   num? get totalReviewsGiven => _totalReviewsGiven;
+
   List<SubProfiles>? get subProfiles => _subProfiles;
+
   PaymentMethod? get paymentMethod => _paymentMethod;
+
   List<Services>? get services => _services;
+
   List<Transactions>? get transactions => _transactions;
 
   Map<String, dynamic> toJson() {
@@ -203,6 +223,7 @@ class Data {
 
 Transactions transactionsFromJson(String str) =>
     Transactions.fromJson(json.decode(str));
+
 String transactionsToJson(Transactions data) => json.encode(data.toJson());
 
 class Transactions {
@@ -236,6 +257,7 @@ class Transactions {
     _transactionId = json['transaction_id'];
     _status = json['status'];
   }
+
   String? _client;
   String? _serviceId;
   String? _transactionType;
@@ -244,6 +266,7 @@ class Transactions {
   String? _paidFor;
   String? _transactionId;
   num? _status;
+
   Transactions copyWith({
     String? client,
     String? serviceId,
@@ -264,13 +287,21 @@ class Transactions {
         transactionId: transactionId ?? _transactionId,
         status: status ?? _status,
       );
+
   String? get client => _client;
+
   String? get serviceId => _serviceId;
+
   String? get transactionType => _transactionType;
+
   String? get dateTime => _dateTime;
+
   String? get amount => _amount;
+
   String? get paidFor => _paidFor;
+
   String? get transactionId => _transactionId;
+
   num? get status => _status;
 
   Map<String, dynamic> toJson() {
@@ -288,6 +319,7 @@ class Transactions {
 }
 
 Services servicesFromJson(String str) => Services.fromJson(json.decode(str));
+
 String servicesToJson(Services data) => json.encode(data.toJson());
 
 class Services {
@@ -329,6 +361,7 @@ class Services {
         ? Caregiver.fromJson(json['caregiver'])
         : null;
   }
+
   String? _id;
   String? _userId;
   String? _startDateTime;
@@ -339,6 +372,7 @@ class Services {
   num? _rating;
   Client? _client;
   Caregiver? _caregiver;
+
   Services copyWith({
     String? id,
     String? userId,
@@ -363,15 +397,25 @@ class Services {
         client: client ?? _client,
         caregiver: caregiver ?? _caregiver,
       );
+
   String? get id => _id;
+
   String? get userId => _userId;
+
   String? get startDateTime => _startDateTime;
+
   String? get endDateTime => _endDateTime;
+
   num? get totalServiceFee => _totalServiceFee;
+
   num? get status => _status;
+
   num? get tip => _tip;
+
   num? get rating => _rating;
+
   Client? get client => _client;
+
   Caregiver? get caregiver => _caregiver;
 
   Map<String, dynamic> toJson() {
@@ -395,6 +439,7 @@ class Services {
 }
 
 Caregiver caregiverFromJson(String str) => Caregiver.fromJson(json.decode(str));
+
 String caregiverToJson(Caregiver data) => json.encode(data.toJson());
 
 class Caregiver {
@@ -419,10 +464,12 @@ class Caregiver {
     _profilePic = json['profile_pic'];
     _profileThumbnail = json['profile_thumbnail'];
   }
+
   FirstName? _firstName;
   LastName? _lastName;
   String? _profilePic;
   String? _profileThumbnail;
+
   Caregiver copyWith({
     FirstName? firstName,
     LastName? lastName,
@@ -435,9 +482,13 @@ class Caregiver {
         profilePic: profilePic ?? _profilePic,
         profileThumbnail: profileThumbnail ?? _profileThumbnail,
       );
+
   FirstName? get firstName => _firstName;
+
   LastName? get lastName => _lastName;
+
   String? get profilePic => _profilePic;
+
   String? get profileThumbnail => _profileThumbnail;
 
   Map<String, dynamic> toJson() {
@@ -455,6 +506,7 @@ class Caregiver {
 }
 
 LastName lastNameFromJson(String str) => LastName.fromJson(json.decode(str));
+
 String lastNameToJson(LastName data) => json.encode(data.toJson());
 
 class LastName {
@@ -591,6 +643,7 @@ class LastName {
     _verified = json['verified'];
     _dateOfBirth = json['dateOfBirth'];
   }
+
   ParentId? _parentId;
   Name? _name;
   Location? _location;
@@ -629,6 +682,7 @@ class LastName {
   num? _verificationStatus;
   bool? _verified;
   String? _dateOfBirth;
+
   LastName copyWith({
     ParentId? parentId,
     Name? name,
@@ -713,43 +767,81 @@ class LastName {
         verified: verified ?? _verified,
         dateOfBirth: dateOfBirth ?? _dateOfBirth,
       );
+
   ParentId? get parentId => _parentId;
+
   Name? get name => _name;
+
   Location? get location => _location;
+
   BackgroundVerification? get backgroundVerification => _backgroundVerification;
+
   String? get id => _id;
+
   num? get v => _v;
+
   List<Address>? get address => _address;
+
   num? get certificateVerificationStatus => _certificateVerificationStatus;
+
   String? get createdAt => _createdAt;
+
   bool? get deleteStatus => _deleteStatus;
+
   String? get deviceToken => _deviceToken;
+
   String? get deviceType => _deviceType;
+
   List<Document>? get document => _document;
+
   String? get email => _email;
+
   num? get gender => _gender;
+
   num? get numerviewVerificationStatus => _numerviewVerificationStatus;
+
   bool? get isEmailVerified => _isEmailVerified;
+
   bool? get isPasswordSet => _isPasswordSet;
+
   bool? get isPhoneNumberVerified => _isPhoneNumberVerified;
+
   bool? get isProfileSet => _isProfileSet;
+
   bool? get isAppleLogin => _isAppleLogin;
+
   bool? get isGoogleLogin => _isGoogleLogin;
+
   bool? get isRejected => _isRejected;
+
   bool? get isSocial => _isSocial;
+
   bool? get onBoardingStatus => _onBoardingStatus;
+
   num? get onBoardingStep => _onBoardingStep;
+
   bool? get otpVerification => _otpVerification;
+
   String? get password => _password;
+
   String? get phoneNumber => _phoneNumber;
+
   String? get profilePicture => _profilePicture;
+
   String? get roleId => _roleId;
+
   bool? get status => _status;
+
   List<dynamic>? get subscriptionDetails => _subscriptionDetails;
+
   num? get trainingVerificationStatus => _trainingVerificationStatus;
+
   String? get updatedAt => _updatedAt;
+
   num? get verificationStatus => _verificationStatus;
+
   bool? get verified => _verified;
+
   String? get dateOfBirth => _dateOfBirth;
 
   Map<String, dynamic> toJson() {
@@ -812,6 +904,7 @@ class LastName {
 }
 
 Document documentFromJson(String str) => Document.fromJson(json.decode(str));
+
 String documentToJson(Document data) => json.encode(data.toJson());
 
 class Document {
@@ -842,6 +935,7 @@ class Document {
     _status = json['status'];
     _id = json['_id'];
   }
+
   String? _type;
   bool? _valid;
   String? _number;
@@ -849,6 +943,7 @@ class Document {
   List<String>? _file;
   bool? _status;
   String? _id;
+
   Document copyWith({
     String? type,
     bool? valid,
@@ -867,12 +962,19 @@ class Document {
         status: status ?? _status,
         id: id ?? _id,
       );
+
   String? get type => _type;
+
   bool? get valid => _valid;
+
   String? get number => _number;
+
   String? get expiry => _expiry;
+
   List<String>? get file => _file;
+
   bool? get status => _status;
+
   String? get id => _id;
 
   Map<String, dynamic> toJson() {
@@ -889,6 +991,7 @@ class Document {
 }
 
 Address addressFromJson(String str) => Address.fromJson(json.decode(str));
+
 String addressToJson(Address data) => json.encode(data.toJson());
 
 class Address {
@@ -935,6 +1038,7 @@ class Address {
     _isDefault = json['is_default'];
     _id = json['_id'];
   }
+
   Location? _location;
   String? _streetName;
   String? _lattitude;
@@ -947,6 +1051,7 @@ class Address {
   bool? _isDelete;
   bool? _isDefault;
   String? _id;
+
   Address copyWith({
     Location? location,
     String? streetName,
@@ -975,17 +1080,29 @@ class Address {
         isDefault: isDefault ?? _isDefault,
         id: id ?? _id,
       );
+
   Location? get location => _location;
+
   String? get streetName => _streetName;
+
   String? get lattitude => _lattitude;
+
   String? get longitude => _longitude;
+
   String? get city => _city;
+
   String? get state => _state;
+
   String? get address => _address;
+
   dynamic get locationTag => _locationTag;
+
   String? get zipCode => _zipCode;
+
   bool? get isDelete => _isDelete;
+
   bool? get isDefault => _isDefault;
+
   String? get id => _id;
 
   Map<String, dynamic> toJson() {
@@ -1009,6 +1126,7 @@ class Address {
 }
 
 Location locationFromJson(String str) => Location.fromJson(json.decode(str));
+
 String locationToJson(Location data) => json.encode(data.toJson());
 
 class Location {
@@ -1025,8 +1143,10 @@ class Location {
     _coordinates =
         json['coordinates'] != null ? json['coordinates'].cast<double>() : [];
   }
+
   String? _type;
   List<double>? _coordinates;
+
   Location copyWith({
     String? type,
     List<double>? coordinates,
@@ -1035,7 +1155,9 @@ class Location {
         type: type ?? _type,
         coordinates: coordinates ?? _coordinates,
       );
+
   String? get type => _type;
+
   List<double>? get coordinates => _coordinates;
 
   Map<String, dynamic> toJson() {
@@ -1048,6 +1170,7 @@ class Location {
 
 BackgroundVerification backgroundVerificationFromJson(String str) =>
     BackgroundVerification.fromJson(json.decode(str));
+
 String backgroundVerificationToJson(BackgroundVerification data) =>
     json.encode(data.toJson());
 
@@ -1064,8 +1187,10 @@ class BackgroundVerification {
     _rejectReason = json['reject_reason'];
     _status = json['status'];
   }
+
   String? _rejectReason;
   num? _status;
+
   BackgroundVerification copyWith({
     String? rejectReason,
     num? status,
@@ -1074,7 +1199,9 @@ class BackgroundVerification {
         rejectReason: rejectReason ?? _rejectReason,
         status: status ?? _status,
       );
+
   String? get rejectReason => _rejectReason;
+
   num? get status => _status;
 
   Map<String, dynamic> toJson() {
@@ -1086,6 +1213,7 @@ class BackgroundVerification {
 }
 
 Name nameFromJson(String str) => Name.fromJson(json.decode(str));
+
 String nameToJson(Name data) => json.encode(data.toJson());
 
 class Name {
@@ -1101,8 +1229,10 @@ class Name {
     _firstName = json['firstName'];
     _lastName = json['lastName'];
   }
+
   String? _firstName;
   String? _lastName;
+
   Name copyWith({
     String? firstName,
     String? lastName,
@@ -1111,7 +1241,9 @@ class Name {
         firstName: firstName ?? _firstName,
         lastName: lastName ?? _lastName,
       );
+
   String? get firstName => _firstName;
+
   String? get lastName => _lastName;
 
   Map<String, dynamic> toJson() {
@@ -1123,6 +1255,7 @@ class Name {
 }
 
 ParentId parentIdFromJson(String str) => ParentId.fromJson(json.decode(str));
+
 String parentIdToJson(ParentId data) => json.encode(data.toJson());
 
 class ParentId {
@@ -1135,13 +1268,16 @@ class ParentId {
   ParentId.fromJson(dynamic json) {
     _profileFor = json['profileFor'];
   }
+
   num? _profileFor;
+
   ParentId copyWith({
     num? profileFor,
   }) =>
       ParentId(
         profileFor: profileFor ?? _profileFor,
       );
+
   num? get profileFor => _profileFor;
 
   Map<String, dynamic> toJson() {
@@ -1152,6 +1288,7 @@ class ParentId {
 }
 
 FirstName firstNameFromJson(String str) => FirstName.fromJson(json.decode(str));
+
 String firstNameToJson(FirstName data) => json.encode(data.toJson());
 
 class FirstName {
@@ -1286,6 +1423,7 @@ class FirstName {
     _verified = json['verified'];
     _dateOfBirth = json['dateOfBirth'];
   }
+
   ParentId? _parentId;
   Name? _name;
   Location? _location;
@@ -1323,6 +1461,7 @@ class FirstName {
   num? _verificationStatus;
   bool? _verified;
   String? _dateOfBirth;
+
   FirstName copyWith({
     ParentId? parentId,
     Name? name,
@@ -1405,42 +1544,79 @@ class FirstName {
         verified: verified ?? _verified,
         dateOfBirth: dateOfBirth ?? _dateOfBirth,
       );
+
   ParentId? get parentId => _parentId;
+
   Name? get name => _name;
+
   Location? get location => _location;
+
   BackgroundVerification? get backgroundVerification => _backgroundVerification;
+
   String? get id => _id;
+
   num? get v => _v;
+
   List<Address>? get address => _address;
+
   num? get certificateVerificationStatus => _certificateVerificationStatus;
+
   String? get createdAt => _createdAt;
+
   bool? get deleteStatus => _deleteStatus;
+
   String? get deviceToken => _deviceToken;
+
   String? get deviceType => _deviceType;
+
   List<Document>? get document => _document;
+
   String? get email => _email;
+
   num? get gender => _gender;
+
   num? get numerviewVerificationStatus => _numerviewVerificationStatus;
+
   bool? get isEmailVerified => _isEmailVerified;
+
   bool? get isPasswordSet => _isPasswordSet;
+
   bool? get isPhoneNumberVerified => _isPhoneNumberVerified;
+
   bool? get isProfileSet => _isProfileSet;
+
   bool? get isAppleLogin => _isAppleLogin;
+
   bool? get isGoogleLogin => _isGoogleLogin;
+
   bool? get isRejected => _isRejected;
+
   bool? get isSocial => _isSocial;
+
   bool? get onBoardingStatus => _onBoardingStatus;
+
   num? get onBoardingStep => _onBoardingStep;
+
   bool? get otpVerification => _otpVerification;
+
   String? get password => _password;
+
   String? get phoneNumber => _phoneNumber;
+
   String? get profilePicture => _profilePicture;
+
   String? get roleId => _roleId;
+
   bool? get status => _status;
+
   num? get trainingVerificationStatus => _trainingVerificationStatus;
+
   String? get updatedAt => _updatedAt;
+
   num? get verificationStatus => _verificationStatus;
+
   bool? get verified => _verified;
+
   String? get dateOfBirth => _dateOfBirth;
 
   Map<String, dynamic> toJson() {
@@ -1499,6 +1675,7 @@ class FirstName {
 }
 
 Client clientFromJson(String str) => Client.fromJson(json.decode(str));
+
 String clientToJson(Client data) => json.encode(data.toJson());
 
 class Client {
@@ -1520,10 +1697,12 @@ class Client {
     _profilePic = json['profile_pic'];
     _profileThumbnail = json['profile_thumbnail'];
   }
+
   String? _firstName;
   String? _lastName;
   String? _profilePic;
   String? _profileThumbnail;
+
   Client copyWith({
     String? firstName,
     String? lastName,
@@ -1536,9 +1715,13 @@ class Client {
         profilePic: profilePic ?? _profilePic,
         profileThumbnail: profileThumbnail ?? _profileThumbnail,
       );
+
   String? get firstName => _firstName;
+
   String? get lastName => _lastName;
+
   String? get profilePic => _profilePic;
+
   String? get profileThumbnail => _profileThumbnail;
 
   Map<String, dynamic> toJson() {
@@ -1553,6 +1736,7 @@ class Client {
 
 PaymentMethod paymentMethodFromJson(String str) =>
     PaymentMethod.fromJson(json.decode(str));
+
 String paymentMethodToJson(PaymentMethod data) => json.encode(data.toJson());
 
 class PaymentMethod {
@@ -1589,6 +1773,7 @@ class PaymentMethod {
     _status = json['status'];
     _deleteStatus = json['deleteStatus'];
   }
+
   String? _name;
   String? _cardNumber;
   dynamic _expiry;
@@ -1598,6 +1783,7 @@ class PaymentMethod {
   num? _type;
   bool? _status;
   bool? _deleteStatus;
+
   PaymentMethod copyWith({
     String? name,
     String? cardNumber,
@@ -1620,14 +1806,23 @@ class PaymentMethod {
         status: status ?? _status,
         deleteStatus: deleteStatus ?? _deleteStatus,
       );
+
   String? get name => _name;
+
   String? get cardNumber => _cardNumber;
+
   dynamic get expiry => _expiry;
+
   dynamic get securityNumber => _securityNumber;
+
   String? get paymentMethodId => _paymentMethodId;
+
   String? get stripeId => _stripeId;
+
   num? get type => _type;
+
   bool? get status => _status;
+
   bool? get deleteStatus => _deleteStatus;
 
   Map<String, dynamic> toJson() {
@@ -1647,6 +1842,7 @@ class PaymentMethod {
 
 SubProfiles subProfilesFromJson(String str) =>
     SubProfiles.fromJson(json.decode(str));
+
 String subProfilesToJson(SubProfiles data) => json.encode(data.toJson());
 
 class SubProfiles {
@@ -1662,7 +1858,7 @@ class SubProfiles {
     bool? isProfileCompleted,
     num? profileCompletePercentage,
     ProfileCompletion? profileCompletion,
-    List<CompletedServices>? completedServices,
+    int? completedServices,
   }) {
     _id = id;
     _name = name;
@@ -1693,13 +1889,15 @@ class SubProfiles {
     _profileCompletion = json['profile_completion'] != null
         ? ProfileCompletion.fromJson(json['profile_completion'])
         : null;
-    if (json['completedServices'] != null) {
+    /*if (json['completedServices'] != null) {
       _completedServices = [];
       json['completedServices'].forEach((v) {
         _completedServices?.add(CompletedServices.fromJson(v));
       });
-    }
+    }*/
+    _completedServices = json['completedServices'];
   }
+
   String? _id;
   Name? _name;
   Location? _location;
@@ -1711,7 +1909,8 @@ class SubProfiles {
   num? _profileCompletePercentage;
   num? _totalServices;
   ProfileCompletion? _profileCompletion;
-  List<CompletedServices>? _completedServices;
+  int? _completedServices;
+
   SubProfiles copyWith({
     String? id,
     Name? name,
@@ -1724,7 +1923,7 @@ class SubProfiles {
     num? profileCompletePercentage,
     num? totalServices,
     ProfileCompletion? profileCompletion,
-    List<CompletedServices>? completedServices,
+    int? completedServices,
   }) =>
       SubProfiles(
         id: id ?? _id,
@@ -1741,18 +1940,30 @@ class SubProfiles {
         profileCompletion: profileCompletion ?? _profileCompletion,
         completedServices: completedServices ?? _completedServices,
       );
+
   String? get id => _id;
+
   Name? get name => _name;
+
   Location? get location => _location;
+
   String? get locationTag => _locationTag;
+
   String? get profilePic => _profilePic;
+
   String? get age => _age;
+
   String? get profileThumbnail => _profileThumbnail;
+
   bool? get isProfileCompleted => _isProfileCompleted;
+
   num? get profileCompletePercentage => _profileCompletePercentage;
+
   num? get totalServices => _totalServices;
+
   ProfileCompletion? get profileCompletion => _profileCompletion;
-  List<CompletedServices>? get completedServices => _completedServices;
+
+  int? get completedServices => _completedServices;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -1773,16 +1984,18 @@ class SubProfiles {
     if (_profileCompletion != null) {
       map['profile_completion'] = _profileCompletion?.toJson();
     }
-    if (_completedServices != null) {
+    /*if (_completedServices != null) {
       map['completedServices'] =
           _completedServices?.map((v) => v.toJson()).toList();
-    }
+    }*/
+    map['completedServices'] = _completedServices;
     return map;
   }
 }
 
-CompletedServices completedServicesFromJson(String str) =>
+/*CompletedServices completedServicesFromJson(String str) =>
     CompletedServices.fromJson(json.decode(str));
+
 String completedServicesToJson(CompletedServices data) =>
     json.encode(data.toJson());
 
@@ -1906,6 +2119,7 @@ class CompletedServices {
     _actualStartTime = json['actualStartTime'];
     _actualEndTime = json['actualEndTime'];
   }
+
   Services? _services;
   CompletedServices? _completedServices;
   ProblemFaced? _problemFaced;
@@ -1942,6 +2156,7 @@ class CompletedServices {
   num? _v;
   String? _actualStartTime;
   String? _actualEndTime;
+
   CompletedServices copyWith({
     Services? services,
     CompletedServices? completedServices,
@@ -2019,41 +2234,77 @@ class CompletedServices {
         actualStartTime: actualStartTime ?? _actualStartTime,
         actualEndTime: actualEndTime ?? _actualEndTime,
       );
+
   Services? get services => _services;
+
   CompletedServices? get completedServices => _completedServices;
+
   ProblemFaced? get problemFaced => _problemFaced;
+
   String? get id => _id;
+
   String? get userId => _userId;
+
   String? get profileId => _profileId;
+
   String? get caregiverId => _caregiverId;
+
   String? get serviceBookingId => _serviceBookingId;
+
   dynamic get cancelReason => _cancelReason;
+
   String? get serviceId => _serviceId;
+
   String? get date => _date;
+
   num? get status => _status;
+
   bool? get deleteStatus => _deleteStatus;
+
   String? get startTime => _startTime;
+
   String? get endTime => _endTime;
+
   String? get addressId => _addressId;
+
   num? get genderPreference => _genderPreference;
+
   num? get distance => _distance;
+
   num? get fee => _fee;
+
   num? get travelingCharge => _travelingCharge;
+
   double? get caregiverCompensation => _caregiverCompensation;
+
   num? get amagiRevenue => _amagiRevenue;
+
   bool? get isRated => _isRated;
+
   bool? get isRatedByCg => _isRatedByCg;
+
   num? get serviceRating => _serviceRating;
+
   bool? get isRescheduleService => _isRescheduleService;
+
   bool? get isRebooking => _isRebooking;
+
   dynamic get serviceRatingByCg => _serviceRatingByCg;
+
   dynamic get refundStatus => _refundStatus;
+
   dynamic get refundFee => _refundFee;
+
   num? get refundPaymentStatus => _refundPaymentStatus;
+
   String? get createdAt => _createdAt;
+
   String? get updatedAt => _updatedAt;
+
   num? get v => _v;
+
   String? get actualStartTime => _actualStartTime;
+
   String? get actualEndTime => _actualEndTime;
 
   Map<String, dynamic> toJson() {
@@ -2102,10 +2353,11 @@ class CompletedServices {
     map['actualEndTime'] = _actualEndTime;
     return map;
   }
-}
+}*/
 
 ProblemFaced problemFacedFromJson(String str) =>
     ProblemFaced.fromJson(json.decode(str));
+
 String problemFacedToJson(ProblemFaced data) => json.encode(data.toJson());
 
 class ProblemFaced {
@@ -2121,8 +2373,10 @@ class ProblemFaced {
     _issueDescription = json['issueDescription'];
     _problemDescription = json['problemDescription'];
   }
+
   String? _issueDescription;
   String? _problemDescription;
+
   ProblemFaced copyWith({
     String? issueDescription,
     String? problemDescription,
@@ -2131,7 +2385,9 @@ class ProblemFaced {
         issueDescription: issueDescription ?? _issueDescription,
         problemDescription: problemDescription ?? _problemDescription,
       );
+
   String? get issueDescription => _issueDescription;
+
   String? get problemDescription => _problemDescription;
 
   Map<String, dynamic> toJson() {
@@ -2143,6 +2399,7 @@ class ProblemFaced {
 }
 
 Tier1 tier1FromJson(String str) => Tier1.fromJson(json.decode(str));
+
 String tier1ToJson(Tier1 data) => json.encode(data.toJson());
 
 class Tier1 {
@@ -2160,8 +2417,10 @@ class Tier1 {
     _isExtra = json['is_extra'];
     _id = json['_id'];
   }
+
   String? _id;
   bool? _isExtra;
+
   Tier1 copyWith({
     String? id,
     bool? isExtra,
@@ -2170,7 +2429,9 @@ class Tier1 {
         id: id ?? _id,
         isExtra: isExtra ?? _isExtra,
       );
+
   String? get id => _id;
+
   bool? get isExtra => _isExtra;
 
   Map<String, dynamic> toJson() {
@@ -2184,6 +2445,7 @@ class Tier1 {
 
 ProfileCompletion profileCompletionFromJson(String str) =>
     ProfileCompletion.fromJson(json.decode(str));
+
 String profileCompletionToJson(ProfileCompletion data) =>
     json.encode(data.toJson());
 
@@ -2212,12 +2474,14 @@ class ProfileCompletion {
     _services = json['services'];
     _termsAndConditions = json['termsAndConditions'];
   }
+
   bool? _personalDetails;
   bool? _preferences;
   bool? _contacts;
   bool? _healthCondition;
   bool? _services;
   bool? _termsAndConditions;
+
   ProfileCompletion copyWith({
     bool? personalDetails,
     bool? preferences,
@@ -2234,11 +2498,17 @@ class ProfileCompletion {
         services: services ?? _services,
         termsAndConditions: termsAndConditions ?? _termsAndConditions,
       );
+
   bool? get personalDetails => _personalDetails;
+
   bool? get preferences => _preferences;
+
   bool? get contacts => _contacts;
+
   bool? get healthCondition => _healthCondition;
+
   bool? get services => _services;
+
   bool? get termsAndConditions => _termsAndConditions;
 
   Map<String, dynamic> toJson() {

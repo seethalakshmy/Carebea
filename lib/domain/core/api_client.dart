@@ -35,6 +35,7 @@ import '../admins/model/admin_get_response.dart';
 import '../caregiver_verification/model/reject_params.dart';
 import '../caregivers/model/caregiver_response.dart';
 import '../complaint_details/models/complaint_details_response_model.dart';
+import '../complaint_details/models/get_service_response_model.dart';
 import '../complaints/model/complaints_list_response_model.dart';
 import '../email_otp_verification/models/verify_otp_response.dart';
 import '../faq/models/faq_list_response_model.dart';
@@ -628,6 +629,8 @@ abstract class ApiClient {
   Future<SubProfileDetailResponse> getSubProfileDetails(
     @Field('user_id') String userId,
     @Field('admin_id') String adminId,
+  );
+
   @POST('/admin/get-complaints')
   Future<ComplaintsListResponseModel> getComplaints(
     @Field('user_id') String userId,
@@ -640,5 +643,19 @@ abstract class ApiClient {
   @POST('/admin/get-complaints-by-id')
   Future<ComplaintDetailsResponseModel> getComplaintDetails(
     @Field('complaint_id') String complaintId,
+  );
+
+  @POST('/admin/update-complaint')
+  Future<CommonResponse> updateComplaint(
+    @Field('admin_id') String adminId,
+    @Field('complaint_id') String complaintId,
+    @Field('status') int status,
+    @Field('comment') String comment,
+  );
+
+  @POST('/admin/view-service')
+  Future<GetServiceResponseModel> viewService(
+    @Field('user_id') String adminId,
+    @Field('service_id') String complaintId,
   );
 }
