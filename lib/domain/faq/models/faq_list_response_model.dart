@@ -72,11 +72,13 @@ class FaqListData {
     String? question,
     String? answer,
     bool? status,
+    bool? forClient,
   }) {
     _id = id;
     _question = question;
     _answer = answer;
     _status = status;
+    _forClient = forClient;
   }
 
   FaqListData.fromJson(dynamic json) {
@@ -84,27 +86,32 @@ class FaqListData {
     _question = json['question'];
     _answer = json['answer'];
     _status = json['status'];
+    _forClient = json['for_client'];
   }
   String? _id;
   String? _question;
   String? _answer;
   bool? _status;
+  bool? _forClient;
   FaqListData copyWith({
     String? id,
     String? question,
     String? answer,
     bool? status,
+    bool? forClient,
   }) =>
       FaqListData(
         id: id ?? _id,
         question: question ?? _question,
         answer: answer ?? _answer,
         status: status ?? _status,
+        forClient: forClient ?? _forClient,
       );
   String? get id => _id;
   String? get question => _question;
   String? get answer => _answer;
   bool? get status => _status;
+  bool? get forClient => _forClient;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -112,6 +119,7 @@ class FaqListData {
     map['question'] = _question;
     map['answer'] = _answer;
     map['status'] = _status;
+    map['for_client'] = _forClient;
     return map;
   }
 }

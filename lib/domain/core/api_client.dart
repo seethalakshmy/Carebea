@@ -616,6 +616,7 @@ abstract class ApiClient {
     @Field('question') String question,
     @Field('answer') String answer,
     @Field('status') String status,
+    @Field('forClient') bool forClient,
   );
 
   @POST('/common-data/create-faq')
@@ -623,6 +624,7 @@ abstract class ApiClient {
     @Field('question') String question,
     @Field('answer') String answer,
     @Field('status') String status,
+    @Field('forClient') bool forClient,
   );
 
   @POST('/admin/get-subprofile-detail')

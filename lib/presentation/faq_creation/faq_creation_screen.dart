@@ -9,12 +9,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../application/bloc/faq-creation/faq_creation_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
+import '../../core/text_styles.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../on_boarding/modules/qualification_details/widgets/yes_no_radio_button_widget.dart';
 import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_sizedbox.dart';
+import '../widget/custom_text.dart';
 import '../widget/details_text_field_with_label.dart';
 import '../widget/header_view.dart';
 import '../widget/loader_view.dart';
@@ -180,6 +183,7 @@ class _faqCreationPageState extends State<FaqCreationPage> {
                   suffixIcon: const CustomContainer(width: 0),
                 ),
               ),
+              _forClientCheckBoxWidget(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -223,6 +227,32 @@ class _faqCreationPageState extends State<FaqCreationPage> {
     );
   }
 
+  _forClientCheckBoxWidget() {
+    return Row(
+      children: [
+        CustomText(AppString.faqFor.val,
+            style: TS().gRoboto(
+                fontWeight: FW.w400.val,
+                color: AppColor.label8.val,
+                fontSize: FS.font14.val)),
+        const CustomSizedBox(width: 20),
+        BlocBuilder<FaqCreationBloc, FaqCreationState>(
+          builder: (context, state) {
+            return YesNoRadioButtonWidget(
+              yesLabel: AppString.forClient.val,
+              noLabel: AppString.forCa.val,
+              onChanged: (val) {
+                BlocProvider.of<FaqCreationBloc>(context)
+                    .add(FaqCreationEvent.radioForClient(isSelected: val ?? 0));
+              },
+              groupValue: state.isForClient,
+            );
+          },
+        )
+      ],
+    );
+  }
+
   checkInputData(FaqCreationState state) {
     if (_formKey.currentState!.validate()) {
       print('id:: ${adminUserID}');
@@ -232,13 +262,16 @@ class _faqCreationPageState extends State<FaqCreationPage> {
             question: _faqCreationBloc.questionController.text.trim(),
             answer: _faqCreationBloc.answerController.text.trim(),
             status: "true",
+            forClient: state.isForClient == 0 ? true : false,
             context: context));
       } else {
         _faqCreationBloc.add(FaqCreationEvent.addFaq(
-            context: context,
-            question: _faqCreationBloc.questionController.text.trim(),
-            answer: _faqCreationBloc.answerController.text.trim(),
-            status: "true"));
+          context: context,
+          question: _faqCreationBloc.questionController.text.trim(),
+          answer: _faqCreationBloc.answerController.text.trim(),
+          status: "true",
+          forClient: state.isForClient == 0 ? true : false,
+        ));
       }
     }
   }

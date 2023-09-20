@@ -26,6 +26,7 @@ class FaqCreationBloc extends Bloc<FaqCreationEvent, FaqCreationState> {
     on<_GetFaq>(_getFaq);
     on<_AddFaq>(_addFaq);
     on<_UpdateFaq>(_updateFaq);
+    on<_RadioForClient>(_radioForClient);
   }
 
   _getFaq(_GetFaq event, Emitter<FaqCreationState> emit) async {
@@ -47,7 +48,7 @@ class FaqCreationBloc extends Bloc<FaqCreationEvent, FaqCreationState> {
     emit(state.copyWith(isLoadingButton: true));
     final Either<ApiErrorHandler, CommonResponse> faqDetailsResult =
         await faqCreationRepository.createFaqDetails(
-            event.question, event.answer, event.status);
+            event.question, event.answer, event.status, event.forClient);
     FaqCreationState faqState = faqDetailsResult.fold((l) {
       return state.copyWith(isLoadingButton: false);
     }, (r) {
@@ -60,8 +61,8 @@ class FaqCreationBloc extends Bloc<FaqCreationEvent, FaqCreationState> {
   _updateFaq(_UpdateFaq event, Emitter<FaqCreationState> emit) async {
     emit(state.copyWith(isLoadingButton: true));
     final Either<ApiErrorHandler, CommonResponse> faqDetailsResult =
-        await faqCreationRepository.updateFaqDetails(
-            event.id, event.question, event.answer, event.status);
+        await faqCreationRepository.updateFaqDetails(event.id, event.question,
+            event.answer, event.status, event.forClient);
     FaqCreationState faqState = faqDetailsResult.fold((l) {
       return state.copyWith(isLoadingButton: false);
     }, (r) {
@@ -69,5 +70,9 @@ class FaqCreationBloc extends Bloc<FaqCreationEvent, FaqCreationState> {
       return state.copyWith(isLoadingButton: false);
     });
     emit(faqState);
+  }
+
+  _radioForClient(_RadioForClient event, Emitter<FaqCreationState> emit) {
+    emit(state.copyWith(isForClient: event.isSelected));
   }
 }
