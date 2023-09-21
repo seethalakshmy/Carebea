@@ -34,7 +34,7 @@ import '../widget/svg_text.dart';
 class CareGiverDetailPage extends StatefulWidget {
   const CareGiverDetailPage({
     Key? key,
-    @QueryParam('id') this.id = '',
+    @QueryParam('id') this.id,
   }) : super(key: key);
 
   final String? id;
@@ -59,6 +59,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
 
   @override
   Widget build(BuildContext context) {
+    print("userId received in CA detail page : $userId");
     return BlocProvider(
       create: (context) => _caregiverDetailBloc
         ..add(CareGiverDetailEvent.getCareGiverDetail(

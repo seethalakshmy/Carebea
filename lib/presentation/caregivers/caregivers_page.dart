@@ -423,6 +423,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
           String? userId = item.userId;
           return DataRow2(
             onTap: () {
+              print("userId passing from CA list page : ${item.userId}");
               if (_tabType == 2 && sharedPrefUtil.getViewCareGiver) {
                 autoTabRouter?.navigate(CareGiverDetailRoute(
                   id: item.userId,

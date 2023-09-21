@@ -118,11 +118,8 @@ abstract class $AppRouter extends _i32.RootStackRouter {
     CareGiverDetailRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<CareGiverDetailRouteArgs>(
-          orElse: () => CareGiverDetailRouteArgs(
-                  id: queryParams.optString(
-                'id',
-                '',
-              )));
+          orElse: () =>
+              CareGiverDetailRouteArgs(id: queryParams.optString('id')));
       return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i5.CareGiverDetailPage(
@@ -134,11 +131,8 @@ abstract class $AppRouter extends _i32.RootStackRouter {
     CareGiverProfileRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<CareGiverProfileRouteArgs>(
-          orElse: () => CareGiverProfileRouteArgs(
-                  id: queryParams.optString(
-                'id',
-                '',
-              )));
+          orElse: () =>
+              CareGiverProfileRouteArgs(id: queryParams.optString('id')));
       return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i6.CareGiverProfilePage(
@@ -150,11 +144,8 @@ abstract class $AppRouter extends _i32.RootStackRouter {
     CaregiverVerificationRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<CaregiverVerificationRouteArgs>(
-          orElse: () => CaregiverVerificationRouteArgs(
-                  id: queryParams.optString(
-                'id',
-                '',
-              )));
+          orElse: () =>
+              CaregiverVerificationRouteArgs(id: queryParams.optString('id')));
       return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i7.CaregiverVerificationPage(
@@ -481,7 +472,7 @@ class CareGiverDetailRoute
     extends _i32.PageRouteInfo<CareGiverDetailRouteArgs> {
   CareGiverDetailRoute({
     _i33.Key? key,
-    String? id = '',
+    String? id,
     List<_i32.PageRouteInfo>? children,
   }) : super(
           CareGiverDetailRoute.name,
@@ -502,7 +493,7 @@ class CareGiverDetailRoute
 class CareGiverDetailRouteArgs {
   const CareGiverDetailRouteArgs({
     this.key,
-    this.id = '',
+    this.id,
   });
 
   final _i33.Key? key;
@@ -521,7 +512,7 @@ class CareGiverProfileRoute
     extends _i32.PageRouteInfo<CareGiverProfileRouteArgs> {
   CareGiverProfileRoute({
     _i33.Key? key,
-    String? id = '',
+    String? id,
     List<_i32.PageRouteInfo>? children,
   }) : super(
           CareGiverProfileRoute.name,
@@ -542,7 +533,7 @@ class CareGiverProfileRoute
 class CareGiverProfileRouteArgs {
   const CareGiverProfileRouteArgs({
     this.key,
-    this.id = '',
+    this.id,
   });
 
   final _i33.Key? key;
@@ -561,7 +552,7 @@ class CaregiverVerificationRoute
     extends _i32.PageRouteInfo<CaregiverVerificationRouteArgs> {
   CaregiverVerificationRoute({
     _i33.Key? key,
-    String? id = '',
+    String? id,
     List<_i32.PageRouteInfo>? children,
   }) : super(
           CaregiverVerificationRoute.name,
@@ -582,7 +573,7 @@ class CaregiverVerificationRoute
 class CaregiverVerificationRouteArgs {
   const CaregiverVerificationRouteArgs({
     this.key,
-    this.id = '',
+    this.id,
   });
 
   final _i33.Key? key;
