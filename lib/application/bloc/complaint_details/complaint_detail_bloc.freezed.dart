@@ -16,10 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ComplaintDetailEvent {
-  String get complaintId => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String complaintId) getComplaintDetails,
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String complaintId) getComplaintDetails,
@@ -27,34 +23,34 @@ mixin _$ComplaintDetailEvent {
         updateComplaint,
     required TResult Function(String serviceId, BuildContext context)
         getService,
-    required TResult Function(String transactionId) getTransactionDetails,
+    required TResult Function(String transactionId, String serviceId)
+        getTransactionDetails,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String complaintId)? getComplaintDetails,
-
     TResult? Function(String complaintId, int status, String comment)?
         updateComplaint,
     TResult? Function(String serviceId, BuildContext context)? getService,
-    TResult? Function(String transactionId)? getTransactionDetails,
+    TResult? Function(String transactionId, String serviceId)?
+        getTransactionDetails,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String complaintId)? getComplaintDetails,
-
     TResult Function(String complaintId, int status, String comment)?
         updateComplaint,
     TResult Function(String serviceId, BuildContext context)? getService,
-    TResult Function(String transactionId)? getTransactionDetails,
+    TResult Function(String transactionId, String serviceId)?
+        getTransactionDetails,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetComplaintDetails value) getComplaintDetails,
-
     required TResult Function(_UpdateComplaint value) updateComplaint,
     required TResult Function(_GetService value) getService,
     required TResult Function(_GetTransactionDetails value)
@@ -64,7 +60,6 @@ mixin _$ComplaintDetailEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetComplaintDetails value)? getComplaintDetails,
-
     TResult? Function(_UpdateComplaint value)? updateComplaint,
     TResult? Function(_GetService value)? getService,
     TResult? Function(_GetTransactionDetails value)? getTransactionDetails,
@@ -73,13 +68,6 @@ mixin _$ComplaintDetailEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetComplaintDetails value)? getComplaintDetails,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $ComplaintDetailEventCopyWith<ComplaintDetailEvent> get copyWith =>
-      throw _privateConstructorUsedError;
     TResult Function(_UpdateComplaint value)? updateComplaint,
     TResult Function(_GetService value)? getService,
     TResult Function(_GetTransactionDetails value)? getTransactionDetails,
@@ -93,9 +81,6 @@ abstract class $ComplaintDetailEventCopyWith<$Res> {
   factory $ComplaintDetailEventCopyWith(ComplaintDetailEvent value,
           $Res Function(ComplaintDetailEvent) then) =
       _$ComplaintDetailEventCopyWithImpl<$Res, ComplaintDetailEvent>;
-  @useResult
-  $Res call({String complaintId});
-
 }
 
 /// @nodoc
@@ -108,28 +93,6 @@ class _$ComplaintDetailEventCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? complaintId = null,
-  }) {
-    return _then(_value.copyWith(
-      complaintId: null == complaintId
-          ? _value.complaintId
-          : complaintId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$_GetComplaintDetailsCopyWith<$Res>
-    implements $ComplaintDetailEventCopyWith<$Res> {
-  factory _$$_GetComplaintDetailsCopyWith(_$_GetComplaintDetails value,
-          $Res Function(_$_GetComplaintDetails) then) =
-      __$$_GetComplaintDetailsCopyWithImpl<$Res>;
-  @override
 }
 
 /// @nodoc
@@ -199,12 +162,12 @@ class _$_GetComplaintDetails implements _GetComplaintDetails {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String complaintId) getComplaintDetails,
-
     required TResult Function(String complaintId, int status, String comment)
         updateComplaint,
     required TResult Function(String serviceId, BuildContext context)
         getService,
-    required TResult Function(String transactionId) getTransactionDetails,
+    required TResult Function(String transactionId, String serviceId)
+        getTransactionDetails,
   }) {
     return getComplaintDetails(complaintId);
   }
@@ -213,11 +176,11 @@ class _$_GetComplaintDetails implements _GetComplaintDetails {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String complaintId)? getComplaintDetails,
-
     TResult? Function(String complaintId, int status, String comment)?
         updateComplaint,
     TResult? Function(String serviceId, BuildContext context)? getService,
-    TResult? Function(String transactionId)? getTransactionDetails,
+    TResult? Function(String transactionId, String serviceId)?
+        getTransactionDetails,
   }) {
     return getComplaintDetails?.call(complaintId);
   }
@@ -226,11 +189,11 @@ class _$_GetComplaintDetails implements _GetComplaintDetails {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String complaintId)? getComplaintDetails,
-
     TResult Function(String complaintId, int status, String comment)?
         updateComplaint,
     TResult Function(String serviceId, BuildContext context)? getService,
-    TResult Function(String transactionId)? getTransactionDetails,
+    TResult Function(String transactionId, String serviceId)?
+        getTransactionDetails,
     required TResult orElse(),
   }) {
     if (getComplaintDetails != null) {
@@ -243,7 +206,6 @@ class _$_GetComplaintDetails implements _GetComplaintDetails {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetComplaintDetails value) getComplaintDetails,
-
     required TResult Function(_UpdateComplaint value) updateComplaint,
     required TResult Function(_GetService value) getService,
     required TResult Function(_GetTransactionDetails value)
@@ -256,7 +218,6 @@ class _$_GetComplaintDetails implements _GetComplaintDetails {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetComplaintDetails value)? getComplaintDetails,
-
     TResult? Function(_UpdateComplaint value)? updateComplaint,
     TResult? Function(_GetService value)? getService,
     TResult? Function(_GetTransactionDetails value)? getTransactionDetails,
@@ -268,7 +229,6 @@ class _$_GetComplaintDetails implements _GetComplaintDetails {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetComplaintDetails value)? getComplaintDetails,
-
     TResult Function(_UpdateComplaint value)? updateComplaint,
     TResult Function(_GetService value)? getService,
     TResult Function(_GetTransactionDetails value)? getTransactionDetails,
@@ -285,8 +245,6 @@ abstract class _GetComplaintDetails implements ComplaintDetailEvent {
   const factory _GetComplaintDetails({required final String complaintId}) =
       _$_GetComplaintDetails;
 
-
-  _$$_GetComplaintDetailsCopyWith<_$_GetComplaintDetails> get copyWith =>
   String get complaintId;
   @JsonKey(ignore: true)
   _$$_GetComplaintDetailsCopyWith<_$_GetComplaintDetails> get copyWith =>
@@ -380,7 +338,8 @@ class _$_UpdateComplaint implements _UpdateComplaint {
         updateComplaint,
     required TResult Function(String serviceId, BuildContext context)
         getService,
-    required TResult Function(String transactionId) getTransactionDetails,
+    required TResult Function(String transactionId, String serviceId)
+        getTransactionDetails,
   }) {
     return updateComplaint(complaintId, status, comment);
   }
@@ -392,7 +351,8 @@ class _$_UpdateComplaint implements _UpdateComplaint {
     TResult? Function(String complaintId, int status, String comment)?
         updateComplaint,
     TResult? Function(String serviceId, BuildContext context)? getService,
-    TResult? Function(String transactionId)? getTransactionDetails,
+    TResult? Function(String transactionId, String serviceId)?
+        getTransactionDetails,
   }) {
     return updateComplaint?.call(complaintId, status, comment);
   }
@@ -404,7 +364,8 @@ class _$_UpdateComplaint implements _UpdateComplaint {
     TResult Function(String complaintId, int status, String comment)?
         updateComplaint,
     TResult Function(String serviceId, BuildContext context)? getService,
-    TResult Function(String transactionId)? getTransactionDetails,
+    TResult Function(String transactionId, String serviceId)?
+        getTransactionDetails,
     required TResult orElse(),
   }) {
     if (updateComplaint != null) {
@@ -544,7 +505,8 @@ class _$_GetService implements _GetService {
         updateComplaint,
     required TResult Function(String serviceId, BuildContext context)
         getService,
-    required TResult Function(String transactionId) getTransactionDetails,
+    required TResult Function(String transactionId, String serviceId)
+        getTransactionDetails,
   }) {
     return getService(serviceId, context);
   }
@@ -556,7 +518,8 @@ class _$_GetService implements _GetService {
     TResult? Function(String complaintId, int status, String comment)?
         updateComplaint,
     TResult? Function(String serviceId, BuildContext context)? getService,
-    TResult? Function(String transactionId)? getTransactionDetails,
+    TResult? Function(String transactionId, String serviceId)?
+        getTransactionDetails,
   }) {
     return getService?.call(serviceId, context);
   }
@@ -568,7 +531,8 @@ class _$_GetService implements _GetService {
     TResult Function(String complaintId, int status, String comment)?
         updateComplaint,
     TResult Function(String serviceId, BuildContext context)? getService,
-    TResult Function(String transactionId)? getTransactionDetails,
+    TResult Function(String transactionId, String serviceId)?
+        getTransactionDetails,
     required TResult orElse(),
   }) {
     if (getService != null) {
@@ -634,7 +598,7 @@ abstract class _$$_GetTransactionDetailsCopyWith<$Res> {
           $Res Function(_$_GetTransactionDetails) then) =
       __$$_GetTransactionDetailsCopyWithImpl<$Res>;
   @useResult
-  $Res call({String transactionId});
+  $Res call({String transactionId, String serviceId});
 }
 
 /// @nodoc
@@ -649,11 +613,16 @@ class __$$_GetTransactionDetailsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? transactionId = null,
+    Object? serviceId = null,
   }) {
     return _then(_$_GetTransactionDetails(
       transactionId: null == transactionId
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      serviceId: null == serviceId
+          ? _value.serviceId
+          : serviceId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -662,14 +631,17 @@ class __$$_GetTransactionDetailsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_GetTransactionDetails implements _GetTransactionDetails {
-  const _$_GetTransactionDetails({required this.transactionId});
+  const _$_GetTransactionDetails(
+      {required this.transactionId, required this.serviceId});
 
   @override
   final String transactionId;
+  @override
+  final String serviceId;
 
   @override
   String toString() {
-    return 'ComplaintDetailEvent.getTransactionDetails(transactionId: $transactionId)';
+    return 'ComplaintDetailEvent.getTransactionDetails(transactionId: $transactionId, serviceId: $serviceId)';
   }
 
   @override
@@ -678,11 +650,13 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
         (other.runtimeType == runtimeType &&
             other is _$_GetTransactionDetails &&
             (identical(other.transactionId, transactionId) ||
-                other.transactionId == transactionId));
+                other.transactionId == transactionId) &&
+            (identical(other.serviceId, serviceId) ||
+                other.serviceId == serviceId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, transactionId);
+  int get hashCode => Object.hash(runtimeType, transactionId, serviceId);
 
   @JsonKey(ignore: true)
   @override
@@ -699,9 +673,10 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
         updateComplaint,
     required TResult Function(String serviceId, BuildContext context)
         getService,
-    required TResult Function(String transactionId) getTransactionDetails,
+    required TResult Function(String transactionId, String serviceId)
+        getTransactionDetails,
   }) {
-    return getTransactionDetails(transactionId);
+    return getTransactionDetails(transactionId, serviceId);
   }
 
   @override
@@ -711,9 +686,10 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
     TResult? Function(String complaintId, int status, String comment)?
         updateComplaint,
     TResult? Function(String serviceId, BuildContext context)? getService,
-    TResult? Function(String transactionId)? getTransactionDetails,
+    TResult? Function(String transactionId, String serviceId)?
+        getTransactionDetails,
   }) {
-    return getTransactionDetails?.call(transactionId);
+    return getTransactionDetails?.call(transactionId, serviceId);
   }
 
   @override
@@ -723,11 +699,12 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
     TResult Function(String complaintId, int status, String comment)?
         updateComplaint,
     TResult Function(String serviceId, BuildContext context)? getService,
-    TResult Function(String transactionId)? getTransactionDetails,
+    TResult Function(String transactionId, String serviceId)?
+        getTransactionDetails,
     required TResult orElse(),
   }) {
     if (getTransactionDetails != null) {
-      return getTransactionDetails(transactionId);
+      return getTransactionDetails(transactionId, serviceId);
     }
     return orElse();
   }
@@ -772,10 +749,12 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
 }
 
 abstract class _GetTransactionDetails implements ComplaintDetailEvent {
-  const factory _GetTransactionDetails({required final String transactionId}) =
-      _$_GetTransactionDetails;
+  const factory _GetTransactionDetails(
+      {required final String transactionId,
+      required final String serviceId}) = _$_GetTransactionDetails;
 
   String get transactionId;
+  String get serviceId;
   @JsonKey(ignore: true)
   _$$_GetTransactionDetailsCopyWith<_$_GetTransactionDetails> get copyWith =>
       throw _privateConstructorUsedError;
@@ -787,7 +766,6 @@ mixin _$ComplaintDetailState {
   bool get isError => throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, ComplaintDetailsResponseModel>>
       get complaintDetailsOption => throw _privateConstructorUsedError;
-
   Option<Either<ApiErrorHandler, CommonResponse>> get updateComplaintOption =>
       throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, GetServiceResponseModel>>
@@ -812,7 +790,6 @@ abstract class $ComplaintDetailStateCopyWith<$Res> {
       bool isError,
       Option<Either<ApiErrorHandler, ComplaintDetailsResponseModel>>
           complaintDetailsOption,
-
       Option<Either<ApiErrorHandler, CommonResponse>> updateComplaintOption,
       Option<Either<ApiErrorHandler, GetServiceResponseModel>> getServiceOption,
       Option<Either<ApiErrorHandler, TransactionDetailsResponse>>
@@ -837,7 +814,6 @@ class _$ComplaintDetailStateCopyWithImpl<$Res,
     Object? isLoading = null,
     Object? isError = null,
     Object? complaintDetailsOption = null,
-
     Object? updateComplaintOption = null,
     Object? getServiceOption = null,
     Object? trDetailsOption = null,
@@ -856,7 +832,6 @@ class _$ComplaintDetailStateCopyWithImpl<$Res,
           ? _value.complaintDetailsOption
           : complaintDetailsOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiErrorHandler, ComplaintDetailsResponseModel>>,
-
       updateComplaintOption: null == updateComplaintOption
           ? _value.updateComplaintOption
           : updateComplaintOption // ignore: cast_nullable_to_non_nullable
@@ -890,7 +865,6 @@ abstract class _$$_ComplaintStateCopyWith<$Res>
       bool isError,
       Option<Either<ApiErrorHandler, ComplaintDetailsResponseModel>>
           complaintDetailsOption,
-
       Option<Either<ApiErrorHandler, CommonResponse>> updateComplaintOption,
       Option<Either<ApiErrorHandler, GetServiceResponseModel>> getServiceOption,
       Option<Either<ApiErrorHandler, TransactionDetailsResponse>>
@@ -912,7 +886,6 @@ class __$$_ComplaintStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? isError = null,
     Object? complaintDetailsOption = null,
-
     Object? updateComplaintOption = null,
     Object? getServiceOption = null,
     Object? trDetailsOption = null,
@@ -931,7 +904,6 @@ class __$$_ComplaintStateCopyWithImpl<$Res>
           ? _value.complaintDetailsOption
           : complaintDetailsOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiErrorHandler, ComplaintDetailsResponseModel>>,
-
       updateComplaintOption: null == updateComplaintOption
           ? _value.updateComplaintOption
           : updateComplaintOption // ignore: cast_nullable_to_non_nullable
@@ -959,7 +931,6 @@ class _$_ComplaintState implements _ComplaintState {
       {required this.isLoading,
       required this.isError,
       required this.complaintDetailsOption,
-
       required this.updateComplaintOption,
       required this.getServiceOption,
       required this.trDetailsOption,
@@ -973,7 +944,6 @@ class _$_ComplaintState implements _ComplaintState {
   final Option<Either<ApiErrorHandler, ComplaintDetailsResponseModel>>
       complaintDetailsOption;
   @override
-
   final Option<Either<ApiErrorHandler, CommonResponse>> updateComplaintOption;
   @override
   final Option<Either<ApiErrorHandler, GetServiceResponseModel>>
@@ -986,8 +956,7 @@ class _$_ComplaintState implements _ComplaintState {
 
   @override
   String toString() {
-    return 'ComplaintDetailState(isLoading: $isLoading, isError: $isError, complaintDetailsOption: $complaintDetailsOption, error: $error)';
-
+    return 'ComplaintDetailState(isLoading: $isLoading, isError: $isError, complaintDetailsOption: $complaintDetailsOption, updateComplaintOption: $updateComplaintOption, getServiceOption: $getServiceOption, trDetailsOption: $trDetailsOption, error: $error)';
   }
 
   @override
@@ -1000,20 +969,17 @@ class _$_ComplaintState implements _ComplaintState {
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.complaintDetailsOption, complaintDetailsOption) ||
                 other.complaintDetailsOption == complaintDetailsOption) &&
-
             (identical(other.updateComplaintOption, updateComplaintOption) ||
                 other.updateComplaintOption == updateComplaintOption) &&
             (identical(other.getServiceOption, getServiceOption) ||
                 other.getServiceOption == getServiceOption) &&
             (identical(other.trDetailsOption, trDetailsOption) ||
                 other.trDetailsOption == trDetailsOption) &&
-
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, isLoading, isError, complaintDetailsOption, error);
       runtimeType,
       isLoading,
       isError,
@@ -1037,7 +1003,6 @@ abstract class _ComplaintState implements ComplaintDetailState {
       required final Option<
               Either<ApiErrorHandler, ComplaintDetailsResponseModel>>
           complaintDetailsOption,
-
       required final Option<Either<ApiErrorHandler, CommonResponse>>
           updateComplaintOption,
       required final Option<Either<ApiErrorHandler, GetServiceResponseModel>>
@@ -1054,7 +1019,6 @@ abstract class _ComplaintState implements ComplaintDetailState {
   Option<Either<ApiErrorHandler, ComplaintDetailsResponseModel>>
       get complaintDetailsOption;
   @override
-
   Option<Either<ApiErrorHandler, CommonResponse>> get updateComplaintOption;
   @override
   Option<Either<ApiErrorHandler, GetServiceResponseModel>> get getServiceOption;

@@ -731,7 +731,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(
-          "Complaint Status",
+          AppString.complaintStatus.val,
           style: TS().gRoboto(
               fontSize: FS.font16.val,
               fontWeight: FW.w500.val,
