@@ -20,33 +20,36 @@ mixin _$FaqCreationEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String id) getFaq,
     required TResult Function(BuildContext context, String question,
-            String answer, String status, String? profilePic)
+            String answer, String status, bool forClient, String? profilePic)
         addFaq,
     required TResult Function(String id, String question, String answer,
-            String status, BuildContext context)
+            String status, bool forClient, BuildContext context)
         updateFaq,
+    required TResult Function(int isSelected) radioForClient,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? getFaq,
     TResult? Function(BuildContext context, String question, String answer,
-            String status, String? profilePic)?
+            String status, bool forClient, String? profilePic)?
         addFaq,
     TResult? Function(String id, String question, String answer, String status,
-            BuildContext context)?
+            bool forClient, BuildContext context)?
         updateFaq,
+    TResult? Function(int isSelected)? radioForClient,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? getFaq,
     TResult Function(BuildContext context, String question, String answer,
-            String status, String? profilePic)?
+            String status, bool forClient, String? profilePic)?
         addFaq,
     TResult Function(String id, String question, String answer, String status,
-            BuildContext context)?
+            bool forClient, BuildContext context)?
         updateFaq,
+    TResult Function(int isSelected)? radioForClient,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +58,7 @@ mixin _$FaqCreationEvent {
     required TResult Function(_GetFaq value) getFaq,
     required TResult Function(_AddFaq value) addFaq,
     required TResult Function(_UpdateFaq value) updateFaq,
+    required TResult Function(_RadioForClient value) radioForClient,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +66,7 @@ mixin _$FaqCreationEvent {
     TResult? Function(_GetFaq value)? getFaq,
     TResult? Function(_AddFaq value)? addFaq,
     TResult? Function(_UpdateFaq value)? updateFaq,
+    TResult? Function(_RadioForClient value)? radioForClient,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +74,7 @@ mixin _$FaqCreationEvent {
     TResult Function(_GetFaq value)? getFaq,
     TResult Function(_AddFaq value)? addFaq,
     TResult Function(_UpdateFaq value)? updateFaq,
+    TResult Function(_RadioForClient value)? radioForClient,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -156,11 +162,12 @@ class _$_GetFaq implements _GetFaq {
   TResult when<TResult extends Object?>({
     required TResult Function(String id) getFaq,
     required TResult Function(BuildContext context, String question,
-            String answer, String status, String? profilePic)
+            String answer, String status, bool forClient, String? profilePic)
         addFaq,
     required TResult Function(String id, String question, String answer,
-            String status, BuildContext context)
+            String status, bool forClient, BuildContext context)
         updateFaq,
+    required TResult Function(int isSelected) radioForClient,
   }) {
     return getFaq(id);
   }
@@ -170,11 +177,12 @@ class _$_GetFaq implements _GetFaq {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? getFaq,
     TResult? Function(BuildContext context, String question, String answer,
-            String status, String? profilePic)?
+            String status, bool forClient, String? profilePic)?
         addFaq,
     TResult? Function(String id, String question, String answer, String status,
-            BuildContext context)?
+            bool forClient, BuildContext context)?
         updateFaq,
+    TResult? Function(int isSelected)? radioForClient,
   }) {
     return getFaq?.call(id);
   }
@@ -184,11 +192,12 @@ class _$_GetFaq implements _GetFaq {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? getFaq,
     TResult Function(BuildContext context, String question, String answer,
-            String status, String? profilePic)?
+            String status, bool forClient, String? profilePic)?
         addFaq,
     TResult Function(String id, String question, String answer, String status,
-            BuildContext context)?
+            bool forClient, BuildContext context)?
         updateFaq,
+    TResult Function(int isSelected)? radioForClient,
     required TResult orElse(),
   }) {
     if (getFaq != null) {
@@ -203,6 +212,7 @@ class _$_GetFaq implements _GetFaq {
     required TResult Function(_GetFaq value) getFaq,
     required TResult Function(_AddFaq value) addFaq,
     required TResult Function(_UpdateFaq value) updateFaq,
+    required TResult Function(_RadioForClient value) radioForClient,
   }) {
     return getFaq(this);
   }
@@ -213,6 +223,7 @@ class _$_GetFaq implements _GetFaq {
     TResult? Function(_GetFaq value)? getFaq,
     TResult? Function(_AddFaq value)? addFaq,
     TResult? Function(_UpdateFaq value)? updateFaq,
+    TResult? Function(_RadioForClient value)? radioForClient,
   }) {
     return getFaq?.call(this);
   }
@@ -223,6 +234,7 @@ class _$_GetFaq implements _GetFaq {
     TResult Function(_GetFaq value)? getFaq,
     TResult Function(_AddFaq value)? addFaq,
     TResult Function(_UpdateFaq value)? updateFaq,
+    TResult Function(_RadioForClient value)? radioForClient,
     required TResult orElse(),
   }) {
     if (getFaq != null) {
@@ -251,6 +263,7 @@ abstract class _$$_AddFaqCopyWith<$Res> {
       String question,
       String answer,
       String status,
+      bool forClient,
       String? profilePic});
 }
 
@@ -268,6 +281,7 @@ class __$$_AddFaqCopyWithImpl<$Res>
     Object? question = null,
     Object? answer = null,
     Object? status = null,
+    Object? forClient = null,
     Object? profilePic = freezed,
   }) {
     return _then(_$_AddFaq(
@@ -287,6 +301,10 @@ class __$$_AddFaqCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
+      forClient: null == forClient
+          ? _value.forClient
+          : forClient // ignore: cast_nullable_to_non_nullable
+              as bool,
       profilePic: freezed == profilePic
           ? _value.profilePic
           : profilePic // ignore: cast_nullable_to_non_nullable
@@ -303,6 +321,7 @@ class _$_AddFaq implements _AddFaq {
       required this.question,
       required this.answer,
       required this.status,
+      required this.forClient,
       this.profilePic});
 
   @override
@@ -314,11 +333,13 @@ class _$_AddFaq implements _AddFaq {
   @override
   final String status;
   @override
+  final bool forClient;
+  @override
   final String? profilePic;
 
   @override
   String toString() {
-    return 'FaqCreationEvent.addFaq(context: $context, question: $question, answer: $answer, status: $status, profilePic: $profilePic)';
+    return 'FaqCreationEvent.addFaq(context: $context, question: $question, answer: $answer, status: $status, forClient: $forClient, profilePic: $profilePic)';
   }
 
   @override
@@ -331,13 +352,15 @@ class _$_AddFaq implements _AddFaq {
                 other.question == question) &&
             (identical(other.answer, answer) || other.answer == answer) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.forClient, forClient) ||
+                other.forClient == forClient) &&
             (identical(other.profilePic, profilePic) ||
                 other.profilePic == profilePic));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, context, question, answer, status, profilePic);
+  int get hashCode => Object.hash(
+      runtimeType, context, question, answer, status, forClient, profilePic);
 
   @JsonKey(ignore: true)
   @override
@@ -350,13 +373,14 @@ class _$_AddFaq implements _AddFaq {
   TResult when<TResult extends Object?>({
     required TResult Function(String id) getFaq,
     required TResult Function(BuildContext context, String question,
-            String answer, String status, String? profilePic)
+            String answer, String status, bool forClient, String? profilePic)
         addFaq,
     required TResult Function(String id, String question, String answer,
-            String status, BuildContext context)
+            String status, bool forClient, BuildContext context)
         updateFaq,
+    required TResult Function(int isSelected) radioForClient,
   }) {
-    return addFaq(context, question, answer, status, profilePic);
+    return addFaq(context, question, answer, status, forClient, profilePic);
   }
 
   @override
@@ -364,13 +388,15 @@ class _$_AddFaq implements _AddFaq {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? getFaq,
     TResult? Function(BuildContext context, String question, String answer,
-            String status, String? profilePic)?
+            String status, bool forClient, String? profilePic)?
         addFaq,
     TResult? Function(String id, String question, String answer, String status,
-            BuildContext context)?
+            bool forClient, BuildContext context)?
         updateFaq,
+    TResult? Function(int isSelected)? radioForClient,
   }) {
-    return addFaq?.call(context, question, answer, status, profilePic);
+    return addFaq?.call(
+        context, question, answer, status, forClient, profilePic);
   }
 
   @override
@@ -378,15 +404,16 @@ class _$_AddFaq implements _AddFaq {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? getFaq,
     TResult Function(BuildContext context, String question, String answer,
-            String status, String? profilePic)?
+            String status, bool forClient, String? profilePic)?
         addFaq,
     TResult Function(String id, String question, String answer, String status,
-            BuildContext context)?
+            bool forClient, BuildContext context)?
         updateFaq,
+    TResult Function(int isSelected)? radioForClient,
     required TResult orElse(),
   }) {
     if (addFaq != null) {
-      return addFaq(context, question, answer, status, profilePic);
+      return addFaq(context, question, answer, status, forClient, profilePic);
     }
     return orElse();
   }
@@ -397,6 +424,7 @@ class _$_AddFaq implements _AddFaq {
     required TResult Function(_GetFaq value) getFaq,
     required TResult Function(_AddFaq value) addFaq,
     required TResult Function(_UpdateFaq value) updateFaq,
+    required TResult Function(_RadioForClient value) radioForClient,
   }) {
     return addFaq(this);
   }
@@ -407,6 +435,7 @@ class _$_AddFaq implements _AddFaq {
     TResult? Function(_GetFaq value)? getFaq,
     TResult? Function(_AddFaq value)? addFaq,
     TResult? Function(_UpdateFaq value)? updateFaq,
+    TResult? Function(_RadioForClient value)? radioForClient,
   }) {
     return addFaq?.call(this);
   }
@@ -417,6 +446,7 @@ class _$_AddFaq implements _AddFaq {
     TResult Function(_GetFaq value)? getFaq,
     TResult Function(_AddFaq value)? addFaq,
     TResult Function(_UpdateFaq value)? updateFaq,
+    TResult Function(_RadioForClient value)? radioForClient,
     required TResult orElse(),
   }) {
     if (addFaq != null) {
@@ -432,12 +462,14 @@ abstract class _AddFaq implements FaqCreationEvent {
       required final String question,
       required final String answer,
       required final String status,
+      required final bool forClient,
       final String? profilePic}) = _$_AddFaq;
 
   BuildContext get context;
   String get question;
   String get answer;
   String get status;
+  bool get forClient;
   String? get profilePic;
   @JsonKey(ignore: true)
   _$$_AddFaqCopyWith<_$_AddFaq> get copyWith =>
@@ -455,6 +487,7 @@ abstract class _$$_UpdateFaqCopyWith<$Res> {
       String question,
       String answer,
       String status,
+      bool forClient,
       BuildContext context});
 }
 
@@ -473,6 +506,7 @@ class __$$_UpdateFaqCopyWithImpl<$Res>
     Object? question = null,
     Object? answer = null,
     Object? status = null,
+    Object? forClient = null,
     Object? context = null,
   }) {
     return _then(_$_UpdateFaq(
@@ -492,6 +526,10 @@ class __$$_UpdateFaqCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String,
+      forClient: null == forClient
+          ? _value.forClient
+          : forClient // ignore: cast_nullable_to_non_nullable
+              as bool,
       context: null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
@@ -508,6 +546,7 @@ class _$_UpdateFaq implements _UpdateFaq {
       required this.question,
       required this.answer,
       required this.status,
+      required this.forClient,
       required this.context});
 
   @override
@@ -519,11 +558,13 @@ class _$_UpdateFaq implements _UpdateFaq {
   @override
   final String status;
   @override
+  final bool forClient;
+  @override
   final BuildContext context;
 
   @override
   String toString() {
-    return 'FaqCreationEvent.updateFaq(id: $id, question: $question, answer: $answer, status: $status, context: $context)';
+    return 'FaqCreationEvent.updateFaq(id: $id, question: $question, answer: $answer, status: $status, forClient: $forClient, context: $context)';
   }
 
   @override
@@ -536,12 +577,14 @@ class _$_UpdateFaq implements _UpdateFaq {
                 other.question == question) &&
             (identical(other.answer, answer) || other.answer == answer) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.forClient, forClient) ||
+                other.forClient == forClient) &&
             (identical(other.context, context) || other.context == context));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, question, answer, status, context);
+  int get hashCode => Object.hash(
+      runtimeType, id, question, answer, status, forClient, context);
 
   @JsonKey(ignore: true)
   @override
@@ -554,13 +597,14 @@ class _$_UpdateFaq implements _UpdateFaq {
   TResult when<TResult extends Object?>({
     required TResult Function(String id) getFaq,
     required TResult Function(BuildContext context, String question,
-            String answer, String status, String? profilePic)
+            String answer, String status, bool forClient, String? profilePic)
         addFaq,
     required TResult Function(String id, String question, String answer,
-            String status, BuildContext context)
+            String status, bool forClient, BuildContext context)
         updateFaq,
+    required TResult Function(int isSelected) radioForClient,
   }) {
-    return updateFaq(id, question, answer, status, context);
+    return updateFaq(id, question, answer, status, forClient, context);
   }
 
   @override
@@ -568,13 +612,14 @@ class _$_UpdateFaq implements _UpdateFaq {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? getFaq,
     TResult? Function(BuildContext context, String question, String answer,
-            String status, String? profilePic)?
+            String status, bool forClient, String? profilePic)?
         addFaq,
     TResult? Function(String id, String question, String answer, String status,
-            BuildContext context)?
+            bool forClient, BuildContext context)?
         updateFaq,
+    TResult? Function(int isSelected)? radioForClient,
   }) {
-    return updateFaq?.call(id, question, answer, status, context);
+    return updateFaq?.call(id, question, answer, status, forClient, context);
   }
 
   @override
@@ -582,15 +627,16 @@ class _$_UpdateFaq implements _UpdateFaq {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? getFaq,
     TResult Function(BuildContext context, String question, String answer,
-            String status, String? profilePic)?
+            String status, bool forClient, String? profilePic)?
         addFaq,
     TResult Function(String id, String question, String answer, String status,
-            BuildContext context)?
+            bool forClient, BuildContext context)?
         updateFaq,
+    TResult Function(int isSelected)? radioForClient,
     required TResult orElse(),
   }) {
     if (updateFaq != null) {
-      return updateFaq(id, question, answer, status, context);
+      return updateFaq(id, question, answer, status, forClient, context);
     }
     return orElse();
   }
@@ -601,6 +647,7 @@ class _$_UpdateFaq implements _UpdateFaq {
     required TResult Function(_GetFaq value) getFaq,
     required TResult Function(_AddFaq value) addFaq,
     required TResult Function(_UpdateFaq value) updateFaq,
+    required TResult Function(_RadioForClient value) radioForClient,
   }) {
     return updateFaq(this);
   }
@@ -611,6 +658,7 @@ class _$_UpdateFaq implements _UpdateFaq {
     TResult? Function(_GetFaq value)? getFaq,
     TResult? Function(_AddFaq value)? addFaq,
     TResult? Function(_UpdateFaq value)? updateFaq,
+    TResult? Function(_RadioForClient value)? radioForClient,
   }) {
     return updateFaq?.call(this);
   }
@@ -621,6 +669,7 @@ class _$_UpdateFaq implements _UpdateFaq {
     TResult Function(_GetFaq value)? getFaq,
     TResult Function(_AddFaq value)? addFaq,
     TResult Function(_UpdateFaq value)? updateFaq,
+    TResult Function(_RadioForClient value)? radioForClient,
     required TResult orElse(),
   }) {
     if (updateFaq != null) {
@@ -636,12 +685,14 @@ abstract class _UpdateFaq implements FaqCreationEvent {
       required final String question,
       required final String answer,
       required final String status,
+      required final bool forClient,
       required final BuildContext context}) = _$_UpdateFaq;
 
   String get id;
   String get question;
   String get answer;
   String get status;
+  bool get forClient;
   BuildContext get context;
   @JsonKey(ignore: true)
   _$$_UpdateFaqCopyWith<_$_UpdateFaq> get copyWith =>
@@ -649,10 +700,170 @@ abstract class _UpdateFaq implements FaqCreationEvent {
 }
 
 /// @nodoc
+abstract class _$$_RadioForClientCopyWith<$Res> {
+  factory _$$_RadioForClientCopyWith(
+          _$_RadioForClient value, $Res Function(_$_RadioForClient) then) =
+      __$$_RadioForClientCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int isSelected});
+}
+
+/// @nodoc
+class __$$_RadioForClientCopyWithImpl<$Res>
+    extends _$FaqCreationEventCopyWithImpl<$Res, _$_RadioForClient>
+    implements _$$_RadioForClientCopyWith<$Res> {
+  __$$_RadioForClientCopyWithImpl(
+      _$_RadioForClient _value, $Res Function(_$_RadioForClient) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isSelected = null,
+  }) {
+    return _then(_$_RadioForClient(
+      isSelected: null == isSelected
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_RadioForClient implements _RadioForClient {
+  const _$_RadioForClient({required this.isSelected});
+
+  @override
+  final int isSelected;
+
+  @override
+  String toString() {
+    return 'FaqCreationEvent.radioForClient(isSelected: $isSelected)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_RadioForClient &&
+            (identical(other.isSelected, isSelected) ||
+                other.isSelected == isSelected));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isSelected);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RadioForClientCopyWith<_$_RadioForClient> get copyWith =>
+      __$$_RadioForClientCopyWithImpl<_$_RadioForClient>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String id) getFaq,
+    required TResult Function(BuildContext context, String question,
+            String answer, String status, bool forClient, String? profilePic)
+        addFaq,
+    required TResult Function(String id, String question, String answer,
+            String status, bool forClient, BuildContext context)
+        updateFaq,
+    required TResult Function(int isSelected) radioForClient,
+  }) {
+    return radioForClient(isSelected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id)? getFaq,
+    TResult? Function(BuildContext context, String question, String answer,
+            String status, bool forClient, String? profilePic)?
+        addFaq,
+    TResult? Function(String id, String question, String answer, String status,
+            bool forClient, BuildContext context)?
+        updateFaq,
+    TResult? Function(int isSelected)? radioForClient,
+  }) {
+    return radioForClient?.call(isSelected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id)? getFaq,
+    TResult Function(BuildContext context, String question, String answer,
+            String status, bool forClient, String? profilePic)?
+        addFaq,
+    TResult Function(String id, String question, String answer, String status,
+            bool forClient, BuildContext context)?
+        updateFaq,
+    TResult Function(int isSelected)? radioForClient,
+    required TResult orElse(),
+  }) {
+    if (radioForClient != null) {
+      return radioForClient(isSelected);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetFaq value) getFaq,
+    required TResult Function(_AddFaq value) addFaq,
+    required TResult Function(_UpdateFaq value) updateFaq,
+    required TResult Function(_RadioForClient value) radioForClient,
+  }) {
+    return radioForClient(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetFaq value)? getFaq,
+    TResult? Function(_AddFaq value)? addFaq,
+    TResult? Function(_UpdateFaq value)? updateFaq,
+    TResult? Function(_RadioForClient value)? radioForClient,
+  }) {
+    return radioForClient?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetFaq value)? getFaq,
+    TResult Function(_AddFaq value)? addFaq,
+    TResult Function(_UpdateFaq value)? updateFaq,
+    TResult Function(_RadioForClient value)? radioForClient,
+    required TResult orElse(),
+  }) {
+    if (radioForClient != null) {
+      return radioForClient(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RadioForClient implements FaqCreationEvent {
+  const factory _RadioForClient({required final int isSelected}) =
+      _$_RadioForClient;
+
+  int get isSelected;
+  @JsonKey(ignore: true)
+  _$$_RadioForClientCopyWith<_$_RadioForClient> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$FaqCreationState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
-  String? get error =>
+  String? get error => throw _privateConstructorUsedError;
+  int get isForClient =>
       throw _privateConstructorUsedError; // required CommonResponseUse? addResponse,
 // required CommonResponseUse? updateResponse,
 // required AdminViewResponse? viewResponse,
@@ -678,6 +889,7 @@ abstract class $FaqCreationStateCopyWith<$Res> {
       {bool isLoading,
       bool isError,
       String? error,
+      int isForClient,
       Option<Either<ApiErrorHandler, FaqDetailsResponseModel>> faqDetailOption,
       bool isClientError,
       bool isDropDownError,
@@ -700,6 +912,7 @@ class _$FaqCreationStateCopyWithImpl<$Res, $Val extends FaqCreationState>
     Object? isLoading = null,
     Object? isError = null,
     Object? error = freezed,
+    Object? isForClient = null,
     Object? faqDetailOption = null,
     Object? isClientError = null,
     Object? isDropDownError = null,
@@ -718,6 +931,10 @@ class _$FaqCreationStateCopyWithImpl<$Res, $Val extends FaqCreationState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      isForClient: null == isForClient
+          ? _value.isForClient
+          : isForClient // ignore: cast_nullable_to_non_nullable
+              as int,
       faqDetailOption: null == faqDetailOption
           ? _value.faqDetailOption
           : faqDetailOption // ignore: cast_nullable_to_non_nullable
@@ -750,6 +967,7 @@ abstract class _$$_FaqCreationStateCopyWith<$Res>
       {bool isLoading,
       bool isError,
       String? error,
+      int isForClient,
       Option<Either<ApiErrorHandler, FaqDetailsResponseModel>> faqDetailOption,
       bool isClientError,
       bool isDropDownError,
@@ -770,6 +988,7 @@ class __$$_FaqCreationStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? isError = null,
     Object? error = freezed,
+    Object? isForClient = null,
     Object? faqDetailOption = null,
     Object? isClientError = null,
     Object? isDropDownError = null,
@@ -788,6 +1007,10 @@ class __$$_FaqCreationStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      isForClient: null == isForClient
+          ? _value.isForClient
+          : isForClient // ignore: cast_nullable_to_non_nullable
+              as int,
       faqDetailOption: null == faqDetailOption
           ? _value.faqDetailOption
           : faqDetailOption // ignore: cast_nullable_to_non_nullable
@@ -815,6 +1038,7 @@ class _$_FaqCreationState implements _FaqCreationState {
       {required this.isLoading,
       required this.isError,
       required this.error,
+      required this.isForClient,
       required this.faqDetailOption,
       this.isClientError = false,
       this.isDropDownError = false,
@@ -826,6 +1050,8 @@ class _$_FaqCreationState implements _FaqCreationState {
   final bool isError;
   @override
   final String? error;
+  @override
+  final int isForClient;
 // required CommonResponseUse? addResponse,
 // required CommonResponseUse? updateResponse,
 // required AdminViewResponse? viewResponse,
@@ -845,7 +1071,7 @@ class _$_FaqCreationState implements _FaqCreationState {
 
   @override
   String toString() {
-    return 'FaqCreationState(isLoading: $isLoading, isError: $isError, error: $error, faqDetailOption: $faqDetailOption, isClientError: $isClientError, isDropDownError: $isDropDownError, isLoadingButton: $isLoadingButton)';
+    return 'FaqCreationState(isLoading: $isLoading, isError: $isError, error: $error, isForClient: $isForClient, faqDetailOption: $faqDetailOption, isClientError: $isClientError, isDropDownError: $isDropDownError, isLoadingButton: $isLoadingButton)';
   }
 
   @override
@@ -857,6 +1083,8 @@ class _$_FaqCreationState implements _FaqCreationState {
                 other.isLoading == isLoading) &&
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.error, error) || other.error == error) &&
+            (identical(other.isForClient, isForClient) ||
+                other.isForClient == isForClient) &&
             (identical(other.faqDetailOption, faqDetailOption) ||
                 other.faqDetailOption == faqDetailOption) &&
             (identical(other.isClientError, isClientError) ||
@@ -868,8 +1096,16 @@ class _$_FaqCreationState implements _FaqCreationState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isError, error,
-      faqDetailOption, isClientError, isDropDownError, isLoadingButton);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      isError,
+      error,
+      isForClient,
+      faqDetailOption,
+      isClientError,
+      isDropDownError,
+      isLoadingButton);
 
   @JsonKey(ignore: true)
   @override
@@ -883,6 +1119,7 @@ abstract class _FaqCreationState implements FaqCreationState {
       {required final bool isLoading,
       required final bool isError,
       required final String? error,
+      required final int isForClient,
       required final Option<Either<ApiErrorHandler, FaqDetailsResponseModel>>
           faqDetailOption,
       final bool isClientError,
@@ -895,6 +1132,8 @@ abstract class _FaqCreationState implements FaqCreationState {
   bool get isError;
   @override
   String? get error;
+  @override
+  int get isForClient;
   @override // required CommonResponseUse? addResponse,
 // required CommonResponseUse? updateResponse,
 // required AdminViewResponse? viewResponse,

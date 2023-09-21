@@ -36,11 +36,15 @@ class TS {
           {double? fontSize,
           FontWeight? fontWeight,
           Color? color,
+          bool? needUnderLine = false,
           double? height}) =>
       GoogleFonts.roboto(
           color: color,
           fontSize: fontSize ?? DBL.twelve.val,
           fontWeight: fontWeight,
+          decoration:
+              needUnderLine! ? TextDecoration.underline : TextDecoration.none,
+          decorationColor: AppColor.blue.val,
           height: height);
   gInter({double? fontSize, FontWeight? fontWeight, Color? color}) =>
       GoogleFonts.inter(

@@ -45,7 +45,7 @@ class RolesPage extends StatefulWidget {
 }
 
 class _RolesPageState extends State<RolesPage> {
-  List<Role> mRoles = [];
+  List<Result> mRoles = [];
   int _totalItems = 0;
   final int _limit = 10;
   int _page = 1;
@@ -141,9 +141,9 @@ class _RolesPageState extends State<RolesPage> {
     GetRoleResponse? value = state.getRolesResponse;
     if (value?.status ?? false) {
       mRoles.clear();
-      if (value?.data?.role != null && value!.data!.role!.isNotEmpty!) {
+      if (value?.data?.result != null && value!.data!.result!.isNotEmpty) {
         _totalItems = value.data?.totalCount ?? 1;
-        mRoles.addAll(value.data?.role ?? []);
+        mRoles.addAll(value.data?.result ?? []);
         _updateData();
       }
     }
@@ -272,14 +272,17 @@ class _RolesPageState extends State<RolesPage> {
         rows: mRoles.asMap().entries.map((e) {
           _setIndex(e.key);
           var item = e.value;
+          List<String> assignedModule = [];
+          if (item.permissions != null || item.permissions!.isNotEmpty) {
+            for (int i = 0; i < item.permissions!.length; i++) {
+              assignedModule.add(item.permissions![i].moduleName ?? "");
+            }
+          }
           return DataRow2(
             cells: [
               DataCell(_tableRowView(_pageIndex.toString())),
-              DataCell(_tableRowView(item.name ?? "")),
-              DataCell(_tableRowView(
-                  item.assignedModule != null && item.assignedModule!.isNotEmpty
-                      ? item.assignedModule?.join(", ") ?? ""
-                      : "")),
+              DataCell(_tableRowView(item.role ?? "")),
+              DataCell(_tableRowView(assignedModule.join(", "))),
               DataCell(TableActions(
                 isView: sharedPrefUtil.getViewRole,
                 onViewTap: sharedPrefUtil.getViewRole

@@ -349,9 +349,9 @@ class _AdminsPageState extends State<AdminsPage> {
   }
 
   _rolesDropDown(BuildContext context, AdminsState state) {
-    List<Role> mRoles = state.getRolesResponse?.data?.role ?? [];
-    return CustomDropdown<Role>(
-      onChange: (Role value, int index) {
+    List<Result> mRoles = state.getRolesResponse?.data?.result ?? [];
+    return CustomDropdown<Result>(
+      onChange: (Result value, int index) {
         CustomLog.log("val:::${value.toString()}");
         roleId = value.id.toString();
         _getAdminEvent();
@@ -376,12 +376,12 @@ class _AdminsPageState extends State<AdminsPage> {
           .asMap()
           .entries
           .map(
-            (item) => DropdownItem<Role>(
+            (item) => DropdownItem<Result>(
               value: item.value,
               child: Padding(
                 padding: EdgeInsets.all(DBL.eight.val),
                 child: Text(
-                  item.value.name ?? "",
+                  item.value.role ?? "",
                   style: TS().gRoboto(
                       fontWeight: FW.w500.val,
                       fontSize: FS.font15.val,

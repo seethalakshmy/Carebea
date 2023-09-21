@@ -11,7 +11,7 @@ class AdminCreationState with _$AdminCreationState {
     required CommonResponseUse? updateResponse,
     required AdminViewResponse? viewResponse,
     required GetRoleResponse? rolesResponse,
-    required Role? selectedRole,
+    required Result? selectedRole,
     @Default(false) bool isClientError,
     @Default(false) bool isDropDownError,
     @Default(false) bool isLoadingButton,

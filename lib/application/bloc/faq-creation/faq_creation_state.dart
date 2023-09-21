@@ -6,6 +6,7 @@ class FaqCreationState with _$FaqCreationState {
     required bool isLoading,
     required bool isError,
     required String? error,
+    required int isForClient,
     // required CommonResponseUse? addResponse,
     // required CommonResponseUse? updateResponse,
     // required AdminViewResponse? viewResponse,
@@ -21,6 +22,7 @@ class FaqCreationState with _$FaqCreationState {
     return const FaqCreationState(
       isLoading: false,
       isError: false,
+      isForClient: 0,
       // viewResponse: null,
       // addResponse: null,
       // updateResponse: null,

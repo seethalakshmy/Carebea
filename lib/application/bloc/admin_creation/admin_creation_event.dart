@@ -34,7 +34,7 @@ class AdminCreationEvent with _$AdminCreationEvent {
     required bool value,
   }) = _DropDownErrorDisplay;
   const factory AdminCreationEvent.setDropDownValue({
-    required Role value,
+    required Result value,
   }) = _SetDropDownValue;
   const factory AdminCreationEvent.profilePicSelection(PlatformFile bytes) =
       _ProfilePicSelected;

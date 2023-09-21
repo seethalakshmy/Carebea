@@ -9,8 +9,8 @@ abstract class IFaqCreationRepo {
       String id);
 
   Future<Either<ApiErrorHandler, CommonResponse>> updateFaqDetails(
-      String id, String question, String answer, String status);
+      String id, String question, String answer, String status, bool forClient);
 
   Future<Either<ApiErrorHandler, CommonResponse>> createFaqDetails(
-      String question, String answer, String status);
+      String question, String answer, String status, bool forClient);
 }

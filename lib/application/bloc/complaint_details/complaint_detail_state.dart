@@ -7,6 +7,12 @@ class ComplaintDetailState with _$ComplaintDetailState {
       required bool isError,
       required Option<Either<ApiErrorHandler, ComplaintDetailsResponseModel>>
           complaintDetailsOption,
+      required Option<Either<ApiErrorHandler, CommonResponse>>
+          updateComplaintOption,
+      required Option<Either<ApiErrorHandler, GetServiceResponseModel>>
+          getServiceOption,
+      required Option<Either<ApiErrorHandler, TransactionDetailsResponse>>
+          trDetailsOption,
       required String? error}) = _ComplaintState;
 
   factory ComplaintDetailState.initial() {
@@ -14,6 +20,9 @@ class ComplaintDetailState with _$ComplaintDetailState {
         isLoading: true,
         isError: false,
         complaintDetailsOption: None(),
+        updateComplaintOption: None(),
+        getServiceOption: None(),
+        trDetailsOption: None(),
         error: null);
   }
 }

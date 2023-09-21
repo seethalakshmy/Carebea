@@ -14,8 +14,11 @@ class RowColonCombo extends StatelessWidget {
     this.petList,
     this.fontSize,
     this.color,
+    this.valueColor,
+    this.onValueTap,
     this.width,
     this.customWidthLg1,
+    this.needUnderLine = false,
     this.fontWeight,
   });
 
@@ -24,11 +27,15 @@ class RowColonCombo extends StatelessWidget {
   final List<Pet>? petList;
   final String label;
   final Color? color;
+  final Color? valueColor;
   final double? fontSize;
   final double? width;
   final double? customWidthLg1;
+  final Function()? onValueTap;
+  final bool? needUnderLine;
 
   final FontWeight? fontWeight;
+
   RowColonCombo.twoHundred({
     super.key,
     this.list,
@@ -36,9 +43,12 @@ class RowColonCombo extends StatelessWidget {
     required this.label,
     required this.value,
     this.color,
+    this.valueColor,
+    this.onValueTap,
     this.fontSize,
     this.fontWeight,
     this.customWidthLg1,
+    this.needUnderLine = false,
   }) : width = DBL.twoHundred.val;
 
   RowColonCombo.threeEighty({
@@ -48,9 +58,12 @@ class RowColonCombo extends StatelessWidget {
     required this.value,
     required this.label,
     this.color,
+    this.valueColor,
+    this.onValueTap,
     this.fontSize,
     this.fontWeight,
     this.customWidthLg1,
+    this.needUnderLine = false,
   }) : width = DBL.threeEighty.val;
 
   RowColonCombo.threeSeventy({
@@ -60,9 +73,12 @@ class RowColonCombo extends StatelessWidget {
     required this.value,
     required this.label,
     this.color,
+    this.valueColor,
+    this.onValueTap,
     this.fontSize,
     this.fontWeight,
     this.customWidthLg1,
+    this.needUnderLine = false,
   }) : width = DBL.threeSeventeen.val;
 
   @override
@@ -86,11 +102,17 @@ class RowColonCombo extends StatelessWidget {
           fontWeight: fontWeight,
           fontSize: fontSize,
         ),
-        AlertTextLabel(
-          value,
-          color: color,
-          fontWeight: fontWeight,
-          fontSize: fontSize,
+        Expanded(
+          child: InkWell(
+            onTap: onValueTap,
+            child: AlertTextLabel(
+              value,
+              color: color ?? valueColor,
+              needUnderLine: needUnderLine,
+              fontWeight: fontWeight,
+              fontSize: fontSize,
+            ),
+          ),
         ),
         Wrap(
           children: list
