@@ -255,10 +255,12 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                             CustomSizedBox(
                                               height: DBL.fourteen.val,
                                             ),
-                                            SVGText(
-                                              path: IMG.ssn.val,
-                                              name: response?.data?.ssn ?? "",
-                                              widthGap: DBL.twelve.val,
+                                            Flexible(
+                                              child: SVGText(
+                                                path: IMG.ssn.val,
+                                                name: response?.data?.ssn ?? "",
+                                                widthGap: DBL.twelve.val,
+                                              ),
                                             ),
                                             // CustomSizedBox(
                                             //   height: isXs2(context)

@@ -19,10 +19,12 @@ class RowColonCombo extends StatelessWidget {
     this.width,
     this.customWidthLg1,
     this.needUnderLine = false,
+    this.hasColon = true,
     this.fontWeight,
   });
 
   final String value;
+  final bool hasColon;
   final List<dynamic>? list;
   final List<Pet>? petList;
   final String label;
@@ -49,37 +51,40 @@ class RowColonCombo extends StatelessWidget {
     this.fontWeight,
     this.customWidthLg1,
     this.needUnderLine = false,
+    this.hasColon = true,
   }) : width = DBL.twoHundred.val;
 
-  RowColonCombo.threeEighty({
-    super.key,
-    this.list,
-    this.petList,
-    required this.value,
-    required this.label,
-    this.color,
-    this.valueColor,
-    this.onValueTap,
-    this.fontSize,
-    this.fontWeight,
-    this.customWidthLg1,
-    this.needUnderLine = false,
-  }) : width = DBL.threeEighty.val;
+  RowColonCombo.threeEighty(
+      {super.key,
+      this.list,
+      this.petList,
+      required this.value,
+      required this.label,
+      this.color,
+      this.valueColor,
+      this.onValueTap,
+      this.fontSize,
+      this.fontWeight,
+      this.customWidthLg1,
+      this.needUnderLine = false,
+      this.hasColon = true})
+      : width = DBL.threeEighty.val;
 
-  RowColonCombo.threeSeventy({
-    super.key,
-    this.list,
-    this.petList,
-    required this.value,
-    required this.label,
-    this.color,
-    this.valueColor,
-    this.onValueTap,
-    this.fontSize,
-    this.fontWeight,
-    this.customWidthLg1,
-    this.needUnderLine = false,
-  }) : width = DBL.threeSeventeen.val;
+  RowColonCombo.threeSeventy(
+      {super.key,
+      this.list,
+      this.petList,
+      required this.value,
+      required this.label,
+      this.color,
+      this.valueColor,
+      this.onValueTap,
+      this.fontSize,
+      this.fontWeight,
+      this.customWidthLg1,
+      this.needUnderLine = false,
+      this.hasColon = true})
+      : width = DBL.threeSeventeen.val;
 
   @override
   Widget build(BuildContext context) {
@@ -95,13 +100,15 @@ class RowColonCombo extends StatelessWidget {
           fontWeight: fontWeight,
           fontSize: fontSize,
         ),
-        AlertTextLabel(
-          AppString.colon.val,
-          isRequiredSpace: true,
-          color: color,
-          fontWeight: fontWeight,
-          fontSize: fontSize,
-        ),
+        hasColon
+            ? AlertTextLabel(
+                AppString.colon.val,
+                isRequiredSpace: true,
+                color: color,
+                fontWeight: fontWeight,
+                fontSize: fontSize,
+              )
+            : const SizedBox.shrink(),
         Expanded(
           child: InkWell(
             onTap: onValueTap,
@@ -114,18 +121,20 @@ class RowColonCombo extends StatelessWidget {
             ),
           ),
         ),
-        Wrap(
-          children: list
-                  ?.map(
-                    (e) => AlertTextLabel(
-                      e,
-                      color: color,
-                      fontWeight: fontWeight,
-                      fontSize: fontSize,
-                    ),
-                  )
-                  .toList() ??
-              [],
+        Flexible(
+          child: Wrap(
+            children: list
+                    ?.map(
+                      (e) => AlertTextLabel(
+                        e,
+                        color: color,
+                        fontWeight: fontWeight,
+                        fontSize: fontSize,
+                      ),
+                    )
+                    .toList() ??
+                [],
+          ),
         )
       ],
     );
