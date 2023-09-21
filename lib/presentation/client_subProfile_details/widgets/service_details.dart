@@ -24,15 +24,21 @@ class ServiceDetails extends StatelessWidget {
                 height: 50,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 10, // Replace with your desired item count
+                  itemCount: state.response?.data?.services?.tier1
+                      ?.length, // Replace with your desired item count
                   itemBuilder: (context, index) {
                     return Row(
                       children: [
                         CustomText(
-                          'Item $index ',
+                          state.response?.data?.services?.tier1?[index].name ??
+                              '',
                           style: TextStyle(fontSize: 16),
                         ),
-                        index < 9
+                        index <
+                                (state.response?.data?.services?.tier1
+                                            ?.length ??
+                                        1) -
+                                    1
                             ? const Text(
                                 ' | ',
                                 style: TextStyle(color: Colors.grey),
@@ -57,15 +63,21 @@ class ServiceDetails extends StatelessWidget {
                 height: 50,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 10, // Replace with your desired item count
+                  itemCount: state.response?.data?.services?.tier2
+                      ?.length, // Replace with your desired item count
                   itemBuilder: (context, index) {
                     return Row(
                       children: [
                         CustomText(
-                          'Item $index ',
+                          state.response?.data?.services?.tier2?[index].name ??
+                              '',
                           style: TextStyle(fontSize: 16),
                         ),
-                        index < 9
+                        index <
+                                (state.response?.data?.services?.tier2
+                                            ?.length ??
+                                        1) -
+                                    1
                             ? Text(
                                 ' | ',
                                 style: TextStyle(color: Colors.grey),

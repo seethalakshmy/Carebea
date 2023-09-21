@@ -1,13 +1,12 @@
 import 'package:admin_580_tech/application/bloc/sub_profile_details/sub_profile_details_bloc.dart';
-import 'package:admin_580_tech/core/string_extension.dart';
-import 'package:admin_580_tech/domain/caregiver_profile/model/caregiver_profile_response.dart';
+import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/pet_list.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/enum.dart';
-import '../../../domain/subProfile_details/model/sub_profile_detail_response.dart';
+import '../../../domain/subProfile_details/model/sub_profile_details_model.dart';
+import '../../widget/alert_text_label.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_sizedbox.dart';
-import '../../widget/header_view.dart';
 import '../../widget/row_combo.dart';
 
 class SubProfilePersonalDetailsTwoView extends StatelessWidget {
@@ -17,64 +16,77 @@ class SubProfilePersonalDetailsTwoView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SubProfilePersonalDetails? personalDetails =
-        state.response?.data?.personalDetails;
+    PersonalDetails2? personalDetails = state.response?.data?.personalDetails2;
+    List<String>? languages = state.response?.data?.languages1;
+    String? pets = state.response?.data?.pets?.havePets.toString();
+    List<Pet>? petList = state.response?.data?.pets?.pet;
     return CustomContainer(
       padding: EdgeInsets.symmetric(
           horizontal: DBL.twentyFive.val, vertical: DBL.twentyFive.val),
       color: AppColor.white.val,
       child: SingleChildScrollView(
-        child: _rightView(personalDetails),
+        child: _rightView(personalDetails, languages, pets, petList ?? []),
       ),
     );
   }
 
-  RowColonCombo _dnrView(SubProfilePersonalDetails? personalDetails) {
+  RowColonCombo _dnrView(PersonalDetails2? personalDetails) {
     return RowColonCombo.threeSeventy(
         label: AppString.doYouHaveDNR.val,
-        value: "no value",
+        value: personalDetails?.haveDnr ?? '',
         // personalDetails?.alternativeMobileNumber ?? "",
         fontSize: FS.font13PointFive.val);
   }
 
-  RowColonCombo _advanceDirectiveView(
-      SubProfilePersonalDetails? personalDetails) {
+  RowColonCombo _advanceDirectiveView(PersonalDetails2? personalDetails) {
     return RowColonCombo.threeSeventy(
         label: AppString.doYouHaveAnAdvanceDirective.val,
-        value: 'no value',
+        value: personalDetails?.haveAnAdvanceDirective ?? '',
         fontSize: FS.font13PointFive.val);
   }
 
-  RowColonCombo _smokerView(SubProfilePersonalDetails? personalDetails) {
+  RowColonCombo _smokerView(PersonalDetails2? personalDetails) {
     return RowColonCombo.threeSeventy(
         label: AppString.isThereASmokerInHouse.val,
-        value: 'no value',
+        value: personalDetails?.isSmokerInHousehold ?? '',
         fontSize: FS.font13PointFive.val);
   }
 
-  RowColonCombo _languageView(SubProfilePersonalDetails? personalDetails) {
+  RowColonCombo _languageView(List<String>? languages) {
     return RowColonCombo.threeSeventy(
         label: AppString.languagesKnown.val,
-        value: 'no value',
+        value: '',
+        list: languages!,
         fontSize: FS.font13PointFive.val);
   }
 
-  RowColonCombo _petsView(SubProfilePersonalDetails? personalDetails) {
+  RowColonCombo _petsView(String? pets, List<Pet> petList) {
     return RowColonCombo.threeSeventy(
         label: AppString.doYouHavePets.val,
-        value: 'no value',
+        value: pets == 'true' ? 'Yes' : 'No',
+        petList: petList,
         fontSize: FS.font13PointFive.val);
   }
 
-  Column _rightView(SubProfilePersonalDetails? personalDetails) {
+  PetListView _petListView(List<Pet> petList) {
+    return PetListView(
+      label: '',
+      value: '',
+      petList: petList,
+    );
+  }
+
+  Column _rightView(PersonalDetails2? personalDetails, List<String>? languages,
+      String? pets, List<Pet> petList) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _petsView(personalDetails),
+        _petsView(pets, petList),
+        _petListView(petList),
         CustomSizedBox(
           height: DBL.six.val,
         ),
-        _languageView(personalDetails),
+        _languageView(languages),
         CustomSizedBox(
           height: DBL.six.val,
         ),

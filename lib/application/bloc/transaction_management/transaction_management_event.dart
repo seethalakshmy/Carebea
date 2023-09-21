@@ -15,7 +15,7 @@ abstract class TransactionManagementEvent with _$TransactionManagementEvent {
   const factory TransactionManagementEvent.hideOrShowDetails(
       {required bool clicked}) = _HideOrShowDetails;
 
-  const factory TransactionManagementEvent.getTransactionDetails({
-    required String transactionId,
-  }) = _GetTransactionDetails;
+  const factory TransactionManagementEvent.getTransactionDetails(
+      {required String transactionId,
+      required String serviceId}) = _GetTransactionDetails;
 }

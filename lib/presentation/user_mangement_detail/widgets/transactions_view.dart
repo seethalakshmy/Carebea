@@ -1,5 +1,8 @@
+import 'package:admin_580_tech/application/bloc/transaction_management/transaction_management_bloc.dart';
 import 'package:admin_580_tech/application/bloc/user_management_detail/user_management_detail_bloc.dart';
 import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
+import 'package:admin_580_tech/infrastructure/transaction_management/transactions_repository.dart';
+import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_status.dart';
 import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +10,12 @@ import 'package:flutter/material.dart';
 import '../../../core/enum.dart';
 import '../../../core/responsive.dart';
 import '../../../core/text_styles.dart';
+import '../../../core/utility.dart';
+import '../../service_request_management/widgets/status_widget.dart';
+import '../../transaction_management/widgets/custom_status_widget.dart';
+import '../../transaction_management/widgets/transaction_details_alert.dart';
 import '../../widget/cached_image.dart';
+import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_card.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_data_table_2.dart';
@@ -20,11 +28,15 @@ import '../../widget/empty_view.dart';
 import '../../widget/error_view.dart';
 
 class TransactionView extends StatelessWidget {
-  const TransactionView({Key? key, required this.state}) : super(key: key);
+  TransactionView({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
   final UserManagementDetailState state;
-
+  late TransactionManagementBloc transactionBloc;
   @override
   Widget build(BuildContext context) {
+    transactionBloc = TransactionManagementBloc(TransactionsRepository());
     final transactions = state.response?.data?.transactions ?? [];
     return CustomCard(
       elevation: DBL.seven.val,
@@ -119,6 +131,10 @@ class TransactionView extends StatelessWidget {
             label: _columnsView(context,
                 text: AppString.status.val, fontWeight: FontWeight.bold),
           ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context, text: '', fontWeight: FontWeight.bold),
+          ),
         ],
         rows: transaction.asMap().entries.map((e) {
           getIndex(e.key);
@@ -136,29 +152,68 @@ class TransactionView extends StatelessWidget {
               DataCell(_rowsView(context, text: item.client)),
               DataCell(_rowsView(context, text: item.serviceId)),
               DataCell(_rowsView(context, text: item.transactionType)),
-              DataCell(_rowsView(context, text: item.dateTime)),
+              DataCell(_rowsView(
+                context,
+                text: Utility.serviceDate(
+                    DateTime.tryParse(item.dateTime ?? "")?.toLocal() ??
+                        DateTime.now().toLocal()),
+              )),
               DataCell(_rowsView(context, text: item.amount)),
               DataCell(_rowsView(context, text: item.paidFor)),
               DataCell(_rowsView(context, text: item.transactionId)),
-              DataCell(_rowsView(context, text: item.status.toString())),
-              // DataCell(InkWell(
-              //     onTap: () {},
-              //     child: CustomContainer(
-              //       alignment: Alignment.centerRight,
-              //       child: CustomSvg(
-              //         path: IMG.eye.val,
-              //         height: Responsive.isWeb(context)
-              //             ? DBL.fifteen.val
-              //             : DBL.twelve.val,
-              //         width: Responsive.isWeb(context)
-              //             ? DBL.twenty.val
-              //             : DBL.eighteen.val,
-              //       ),
-              //     ))),
+              DataCell(_statusBox(item.status)),
+              DataCell(InkWell(
+                  onTap: () {
+                    _transactionDetails(
+                        serviceId: item.serviceId ?? '',
+                        transactionId: item.transactionId ?? '',
+                        context: context);
+                  },
+                  child: CustomContainer(
+                    alignment: Alignment.centerRight,
+                    child: CustomSvg(
+                      path: IMG.eye.val,
+                      height: Responsive.isWeb(context)
+                          ? DBL.fifteen.val
+                          : DBL.twelve.val,
+                      width: Responsive.isWeb(context)
+                          ? DBL.twenty.val
+                          : DBL.eighteen.val,
+                    ),
+                  ))),
             ],
           );
         }).toList(),
       ),
+    );
+  }
+
+  _statusBox(num? item) {
+    return CustomStatusWidget(
+      statusName: item == 1
+          ? 'Initialized'
+          : item == 2
+              ? 'Success'
+              : 'Failed',
+      isCompleted: item == 2 ? true : false,
+    );
+  }
+
+  _transactionDetails(
+      {required String serviceId,
+      required String transactionId,
+      required BuildContext context}) {
+    print('asas $serviceId');
+    transactionBloc.add(TransactionManagementEvent.getTransactionDetails(
+        transactionId: transactionId, serviceId: serviceId));
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CustomAlertDialogWidget(
+          heading: AppString.transactionManagement.val,
+          child: TransactionDetailsAlert(transactionBloc: transactionBloc),
+        );
+      },
     );
   }
 

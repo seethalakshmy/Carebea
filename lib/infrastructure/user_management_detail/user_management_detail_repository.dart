@@ -7,6 +7,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 import '../../core/enum.dart';
+import '../../domain/user_management_detail/model/client_service_response.dart';
 
 class UserManagementDetailRepository implements IClientDetailRepo {
   final ApiClient _apiClient = ApiClient();
@@ -16,6 +17,26 @@ class UserManagementDetailRepository implements IClientDetailRepo {
       {required String userId, required String adminId}) async {
     try {
       final response = await _apiClient.getUserDetails(userId, adminId);
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log(": ${e.message}");
+
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, ClientServiceResponse>> getClientService(
+      {required String userId, required String adminId}) async {
+    try {
+      final response = await _apiClient.getClientService(userId, adminId);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log(": ${e.message}");
