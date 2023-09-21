@@ -101,8 +101,8 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
         isClientError: l.isClientError ?? false,
       );
     }, (r) {
-      List<Role> role = state.rolesResponse?.data?.role ?? [];
-      Role? initialRoleValue;
+      List<Result> role = state.rolesResponse?.data?.result ?? [];
+      Result? initialRoleValue;
       if (r.data?.roleId != null) {
         for (var i in role) {
           if (r.data?.roleId == i.id) {

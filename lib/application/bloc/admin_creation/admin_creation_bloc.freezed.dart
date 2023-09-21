@@ -43,7 +43,7 @@ mixin _$AdminCreationEvent {
     required TResult Function(String userId, String adminId, String searchTerm)
         viewAdmin,
     required TResult Function(bool value) dropDownErrorDisplay,
-    required TResult Function(Role value) setDropDownValue,
+    required TResult Function(Result value) setDropDownValue,
     required TResult Function(PlatformFile bytes) profilePicSelection,
   }) =>
       throw _privateConstructorUsedError;
@@ -74,7 +74,7 @@ mixin _$AdminCreationEvent {
     TResult? Function(String userId, String adminId, String searchTerm)?
         viewAdmin,
     TResult? Function(bool value)? dropDownErrorDisplay,
-    TResult? Function(Role value)? setDropDownValue,
+    TResult? Function(Result value)? setDropDownValue,
     TResult? Function(PlatformFile bytes)? profilePicSelection,
   }) =>
       throw _privateConstructorUsedError;
@@ -105,7 +105,7 @@ mixin _$AdminCreationEvent {
     TResult Function(String userId, String adminId, String searchTerm)?
         viewAdmin,
     TResult Function(bool value)? dropDownErrorDisplay,
-    TResult Function(Role value)? setDropDownValue,
+    TResult Function(Result value)? setDropDownValue,
     TResult Function(PlatformFile bytes)? profilePicSelection,
     required TResult orElse(),
   }) =>
@@ -329,7 +329,7 @@ class _$_AddAdmin implements _AddAdmin {
     required TResult Function(String userId, String adminId, String searchTerm)
         viewAdmin,
     required TResult Function(bool value) dropDownErrorDisplay,
-    required TResult Function(Role value) setDropDownValue,
+    required TResult Function(Result value) setDropDownValue,
     required TResult Function(PlatformFile bytes) profilePicSelection,
   }) {
     return addAdmin(userId, roleId, context, firstName, lastName, email, mobile,
@@ -364,7 +364,7 @@ class _$_AddAdmin implements _AddAdmin {
     TResult? Function(String userId, String adminId, String searchTerm)?
         viewAdmin,
     TResult? Function(bool value)? dropDownErrorDisplay,
-    TResult? Function(Role value)? setDropDownValue,
+    TResult? Function(Result value)? setDropDownValue,
     TResult? Function(PlatformFile bytes)? profilePicSelection,
   }) {
     return addAdmin?.call(userId, roleId, context, firstName, lastName, email,
@@ -399,7 +399,7 @@ class _$_AddAdmin implements _AddAdmin {
     TResult Function(String userId, String adminId, String searchTerm)?
         viewAdmin,
     TResult Function(bool value)? dropDownErrorDisplay,
-    TResult Function(Role value)? setDropDownValue,
+    TResult Function(Result value)? setDropDownValue,
     TResult Function(PlatformFile bytes)? profilePicSelection,
     required TResult orElse(),
   }) {
@@ -579,7 +579,7 @@ class _$_GetRoles implements _GetRoles {
     required TResult Function(String userId, String adminId, String searchTerm)
         viewAdmin,
     required TResult Function(bool value) dropDownErrorDisplay,
-    required TResult Function(Role value) setDropDownValue,
+    required TResult Function(Result value) setDropDownValue,
     required TResult Function(PlatformFile bytes) profilePicSelection,
   }) {
     return getRoles(userId, searchTerm);
@@ -613,7 +613,7 @@ class _$_GetRoles implements _GetRoles {
     TResult? Function(String userId, String adminId, String searchTerm)?
         viewAdmin,
     TResult? Function(bool value)? dropDownErrorDisplay,
-    TResult? Function(Role value)? setDropDownValue,
+    TResult? Function(Result value)? setDropDownValue,
     TResult? Function(PlatformFile bytes)? profilePicSelection,
   }) {
     return getRoles?.call(userId, searchTerm);
@@ -647,7 +647,7 @@ class _$_GetRoles implements _GetRoles {
     TResult Function(String userId, String adminId, String searchTerm)?
         viewAdmin,
     TResult Function(bool value)? dropDownErrorDisplay,
-    TResult Function(Role value)? setDropDownValue,
+    TResult Function(Result value)? setDropDownValue,
     TResult Function(PlatformFile bytes)? profilePicSelection,
     required TResult orElse(),
   }) {
@@ -891,7 +891,7 @@ class _$_UpdateAdmin implements _UpdateAdmin {
     required TResult Function(String userId, String adminId, String searchTerm)
         viewAdmin,
     required TResult Function(bool value) dropDownErrorDisplay,
-    required TResult Function(Role value) setDropDownValue,
+    required TResult Function(Result value) setDropDownValue,
     required TResult Function(PlatformFile bytes) profilePicSelection,
   }) {
     return updateAdmin(userId, adminId, roleId, context, firstName, lastName,
@@ -926,7 +926,7 @@ class _$_UpdateAdmin implements _UpdateAdmin {
     TResult? Function(String userId, String adminId, String searchTerm)?
         viewAdmin,
     TResult? Function(bool value)? dropDownErrorDisplay,
-    TResult? Function(Role value)? setDropDownValue,
+    TResult? Function(Result value)? setDropDownValue,
     TResult? Function(PlatformFile bytes)? profilePicSelection,
   }) {
     return updateAdmin?.call(userId, adminId, roleId, context, firstName,
@@ -961,7 +961,7 @@ class _$_UpdateAdmin implements _UpdateAdmin {
     TResult Function(String userId, String adminId, String searchTerm)?
         viewAdmin,
     TResult Function(bool value)? dropDownErrorDisplay,
-    TResult Function(Role value)? setDropDownValue,
+    TResult Function(Result value)? setDropDownValue,
     TResult Function(PlatformFile bytes)? profilePicSelection,
     required TResult orElse(),
   }) {
@@ -1152,7 +1152,7 @@ class _$_ViewAdmin implements _ViewAdmin {
     required TResult Function(String userId, String adminId, String searchTerm)
         viewAdmin,
     required TResult Function(bool value) dropDownErrorDisplay,
-    required TResult Function(Role value) setDropDownValue,
+    required TResult Function(Result value) setDropDownValue,
     required TResult Function(PlatformFile bytes) profilePicSelection,
   }) {
     return viewAdmin(userId, adminId, searchTerm);
@@ -1186,7 +1186,7 @@ class _$_ViewAdmin implements _ViewAdmin {
     TResult? Function(String userId, String adminId, String searchTerm)?
         viewAdmin,
     TResult? Function(bool value)? dropDownErrorDisplay,
-    TResult? Function(Role value)? setDropDownValue,
+    TResult? Function(Result value)? setDropDownValue,
     TResult? Function(PlatformFile bytes)? profilePicSelection,
   }) {
     return viewAdmin?.call(userId, adminId, searchTerm);
@@ -1220,7 +1220,7 @@ class _$_ViewAdmin implements _ViewAdmin {
     TResult Function(String userId, String adminId, String searchTerm)?
         viewAdmin,
     TResult Function(bool value)? dropDownErrorDisplay,
-    TResult Function(Role value)? setDropDownValue,
+    TResult Function(Result value)? setDropDownValue,
     TResult Function(PlatformFile bytes)? profilePicSelection,
     required TResult orElse(),
   }) {
@@ -1381,7 +1381,7 @@ class _$_DropDownErrorDisplay implements _DropDownErrorDisplay {
     required TResult Function(String userId, String adminId, String searchTerm)
         viewAdmin,
     required TResult Function(bool value) dropDownErrorDisplay,
-    required TResult Function(Role value) setDropDownValue,
+    required TResult Function(Result value) setDropDownValue,
     required TResult Function(PlatformFile bytes) profilePicSelection,
   }) {
     return dropDownErrorDisplay(value);
@@ -1415,7 +1415,7 @@ class _$_DropDownErrorDisplay implements _DropDownErrorDisplay {
     TResult? Function(String userId, String adminId, String searchTerm)?
         viewAdmin,
     TResult? Function(bool value)? dropDownErrorDisplay,
-    TResult? Function(Role value)? setDropDownValue,
+    TResult? Function(Result value)? setDropDownValue,
     TResult? Function(PlatformFile bytes)? profilePicSelection,
   }) {
     return dropDownErrorDisplay?.call(value);
@@ -1449,7 +1449,7 @@ class _$_DropDownErrorDisplay implements _DropDownErrorDisplay {
     TResult Function(String userId, String adminId, String searchTerm)?
         viewAdmin,
     TResult Function(bool value)? dropDownErrorDisplay,
-    TResult Function(Role value)? setDropDownValue,
+    TResult Function(Result value)? setDropDownValue,
     TResult Function(PlatformFile bytes)? profilePicSelection,
     required TResult orElse(),
   }) {
@@ -1522,7 +1522,7 @@ abstract class _$$_SetDropDownValueCopyWith<$Res> {
           _$_SetDropDownValue value, $Res Function(_$_SetDropDownValue) then) =
       __$$_SetDropDownValueCopyWithImpl<$Res>;
   @useResult
-  $Res call({Role value});
+  $Res call({Result value});
 }
 
 /// @nodoc
@@ -1542,7 +1542,7 @@ class __$$_SetDropDownValueCopyWithImpl<$Res>
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
-              as Role,
+              as Result,
     ));
   }
 }
@@ -1553,7 +1553,7 @@ class _$_SetDropDownValue implements _SetDropDownValue {
   const _$_SetDropDownValue({required this.value});
 
   @override
-  final Role value;
+  final Result value;
 
   @override
   String toString() {
@@ -1605,7 +1605,7 @@ class _$_SetDropDownValue implements _SetDropDownValue {
     required TResult Function(String userId, String adminId, String searchTerm)
         viewAdmin,
     required TResult Function(bool value) dropDownErrorDisplay,
-    required TResult Function(Role value) setDropDownValue,
+    required TResult Function(Result value) setDropDownValue,
     required TResult Function(PlatformFile bytes) profilePicSelection,
   }) {
     return setDropDownValue(value);
@@ -1639,7 +1639,7 @@ class _$_SetDropDownValue implements _SetDropDownValue {
     TResult? Function(String userId, String adminId, String searchTerm)?
         viewAdmin,
     TResult? Function(bool value)? dropDownErrorDisplay,
-    TResult? Function(Role value)? setDropDownValue,
+    TResult? Function(Result value)? setDropDownValue,
     TResult? Function(PlatformFile bytes)? profilePicSelection,
   }) {
     return setDropDownValue?.call(value);
@@ -1673,7 +1673,7 @@ class _$_SetDropDownValue implements _SetDropDownValue {
     TResult Function(String userId, String adminId, String searchTerm)?
         viewAdmin,
     TResult Function(bool value)? dropDownErrorDisplay,
-    TResult Function(Role value)? setDropDownValue,
+    TResult Function(Result value)? setDropDownValue,
     TResult Function(PlatformFile bytes)? profilePicSelection,
     required TResult orElse(),
   }) {
@@ -1731,10 +1731,10 @@ class _$_SetDropDownValue implements _SetDropDownValue {
 }
 
 abstract class _SetDropDownValue implements AdminCreationEvent {
-  const factory _SetDropDownValue({required final Role value}) =
+  const factory _SetDropDownValue({required final Result value}) =
       _$_SetDropDownValue;
 
-  Role get value;
+  Result get value;
   @JsonKey(ignore: true)
   _$$_SetDropDownValueCopyWith<_$_SetDropDownValue> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1830,7 +1830,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     required TResult Function(String userId, String adminId, String searchTerm)
         viewAdmin,
     required TResult Function(bool value) dropDownErrorDisplay,
-    required TResult Function(Role value) setDropDownValue,
+    required TResult Function(Result value) setDropDownValue,
     required TResult Function(PlatformFile bytes) profilePicSelection,
   }) {
     return profilePicSelection(bytes);
@@ -1864,7 +1864,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult? Function(String userId, String adminId, String searchTerm)?
         viewAdmin,
     TResult? Function(bool value)? dropDownErrorDisplay,
-    TResult? Function(Role value)? setDropDownValue,
+    TResult? Function(Result value)? setDropDownValue,
     TResult? Function(PlatformFile bytes)? profilePicSelection,
   }) {
     return profilePicSelection?.call(bytes);
@@ -1898,7 +1898,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult Function(String userId, String adminId, String searchTerm)?
         viewAdmin,
     TResult Function(bool value)? dropDownErrorDisplay,
-    TResult Function(Role value)? setDropDownValue,
+    TResult Function(Result value)? setDropDownValue,
     TResult Function(PlatformFile bytes)? profilePicSelection,
     required TResult orElse(),
   }) {
@@ -1975,7 +1975,7 @@ mixin _$AdminCreationState {
   CommonResponseUse? get updateResponse => throw _privateConstructorUsedError;
   AdminViewResponse? get viewResponse => throw _privateConstructorUsedError;
   GetRoleResponse? get rolesResponse => throw _privateConstructorUsedError;
-  Role? get selectedRole => throw _privateConstructorUsedError;
+  Result? get selectedRole => throw _privateConstructorUsedError;
   bool get isClientError => throw _privateConstructorUsedError;
   bool get isDropDownError => throw _privateConstructorUsedError;
   bool get isLoadingButton => throw _privateConstructorUsedError;
@@ -2000,7 +2000,7 @@ abstract class $AdminCreationStateCopyWith<$Res> {
       CommonResponseUse? updateResponse,
       AdminViewResponse? viewResponse,
       GetRoleResponse? rolesResponse,
-      Role? selectedRole,
+      Result? selectedRole,
       bool isClientError,
       bool isDropDownError,
       bool isLoadingButton});
@@ -2068,7 +2068,7 @@ class _$AdminCreationStateCopyWithImpl<$Res, $Val extends AdminCreationState>
       selectedRole: freezed == selectedRole
           ? _value.selectedRole
           : selectedRole // ignore: cast_nullable_to_non_nullable
-              as Role?,
+              as Result?,
       isClientError: null == isClientError
           ? _value.isClientError
           : isClientError // ignore: cast_nullable_to_non_nullable
@@ -2102,7 +2102,7 @@ abstract class _$$_AdminCreationStateCopyWith<$Res>
       CommonResponseUse? updateResponse,
       AdminViewResponse? viewResponse,
       GetRoleResponse? rolesResponse,
-      Role? selectedRole,
+      Result? selectedRole,
       bool isClientError,
       bool isDropDownError,
       bool isLoadingButton});
@@ -2168,7 +2168,7 @@ class __$$_AdminCreationStateCopyWithImpl<$Res>
       selectedRole: freezed == selectedRole
           ? _value.selectedRole
           : selectedRole // ignore: cast_nullable_to_non_nullable
-              as Role?,
+              as Result?,
       isClientError: null == isClientError
           ? _value.isClientError
           : isClientError // ignore: cast_nullable_to_non_nullable
@@ -2219,7 +2219,7 @@ class _$_AdminCreationState implements _AdminCreationState {
   @override
   final GetRoleResponse? rolesResponse;
   @override
-  final Role? selectedRole;
+  final Result? selectedRole;
   @override
   @JsonKey()
   final bool isClientError;
@@ -2298,7 +2298,7 @@ abstract class _AdminCreationState implements AdminCreationState {
       required final CommonResponseUse? updateResponse,
       required final AdminViewResponse? viewResponse,
       required final GetRoleResponse? rolesResponse,
-      required final Role? selectedRole,
+      required final Result? selectedRole,
       final bool isClientError,
       final bool isDropDownError,
       final bool isLoadingButton}) = _$_AdminCreationState;
@@ -2320,7 +2320,7 @@ abstract class _AdminCreationState implements AdminCreationState {
   @override
   GetRoleResponse? get rolesResponse;
   @override
-  Role? get selectedRole;
+  Result? get selectedRole;
   @override
   bool get isClientError;
   @override
