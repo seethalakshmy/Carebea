@@ -616,7 +616,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
 
   _transactionDetails(Transactions item) {
     _complaintDetailBloc.add(ComplaintDetailEvent.getTransactionDetails(
-        transactionId: item.transactionId ?? ""));
+        transactionId: item.transactionId ?? "", serviceId: item.serviceId ?? ''));
     showDialog(
       context: context,
       builder: (BuildContext context) {

@@ -13,7 +13,7 @@ class ComplaintDetailEvent with _$ComplaintDetailEvent {
 
   const factory ComplaintDetailEvent.getService(
       {required String serviceId, required BuildContext context}) = _GetService;
-  const factory ComplaintDetailEvent.getTransactionDetails({
-    required String transactionId,
-  }) = _GetTransactionDetails;
+  const factory ComplaintDetailEvent.getTransactionDetails(
+      {required String transactionId,
+      required String serviceId}) = _GetTransactionDetails;
 }

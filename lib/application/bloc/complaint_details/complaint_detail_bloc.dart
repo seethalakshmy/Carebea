@@ -107,7 +107,9 @@ class ComplaintDetailBloc
     emit(state.copyWith(isLoading: true));
     final Either<ApiErrorHandler, TransactionDetailsResponse> result =
         await complaintDetailsRepository.getTransactionDetails(
-            token: '', transactionId: event.transactionId);
+            token: '',
+            transactionId: event.transactionId,
+            serviceId: event.serviceId);
     ComplaintDetailState filterState = result.fold((l) {
       return state.copyWith(isLoading: false, trDetailsOption: Some(Left(l)));
     }, (r) {
