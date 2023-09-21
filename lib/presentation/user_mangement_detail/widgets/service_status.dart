@@ -7,14 +7,16 @@ import '../../../core/text_styles.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_text.dart';
 
-class ServiceStatus extends StatelessWidget {
-  ServiceStatus({Key? key, required this.status}) : super(key: key);
+class ClientStatusWidget extends StatelessWidget {
+  ClientStatusWidget({Key? key, this.serviceStatus, this.paymentStatus})
+      : super(key: key);
 
-  num status;
+  num? serviceStatus;
+  num? paymentStatus;
 
   @override
   Widget build(BuildContext context) {
-    return status == 3
+    return serviceStatus == 3
         ? Row(
             children: [
               Container(
@@ -40,30 +42,46 @@ class ServiceStatus extends StatelessWidget {
             padding: EdgeInsets.symmetric(
                 vertical: DBL.five.val, horizontal: DBL.five.val),
             decoration: BoxDecoration(
-                color: status == 5
+                color: (serviceStatus == 5 || paymentStatus == 2)
                     ? AppColor.darkGreen.val
-                    : status == 6
+                    : (serviceStatus == 6 || paymentStatus == 3)
                         ? AppColor.red.val
-                        : status == 2
+                        : (serviceStatus == 2 || paymentStatus == 1)
                             ? AppColor.starFillColor.val
                             : null,
                 borderRadius: PR().circularRadius(DBL.eight.val)),
-            child: CustomText(
-              textAlign: TextAlign.center,
-              status == 5
-                  ? 'Completed'
-                  : status == 6
-                      ? 'Cancelled'
-                      : status == 2
-                          ? 'Upcoming'
-                          : '',
-              style: TS().gRoboto(
-                fontWeight: FW.w600.val,
-                fontSize:
-                    Responsive.isWeb(context) ? FS.font12.val : FS.font10.val,
-                color: AppColor.white.val,
-              ),
-            ),
-          );
+            child: paymentStatus == null
+                ? CustomText(
+                    textAlign: TextAlign.center,
+                    serviceStatus == 5
+                        ? 'Completed'
+                        : serviceStatus == 6
+                            ? 'Cancelled'
+                            : serviceStatus == 2
+                                ? 'Upcoming'
+                                : '',
+                    style: TS().gRoboto(
+                      fontWeight: FW.w600.val,
+                      fontSize: Responsive.isWeb(context)
+                          ? FS.font12.val
+                          : FS.font10.val,
+                      color: AppColor.white.val,
+                    ),
+                  )
+                : CustomText(
+                    textAlign: TextAlign.center,
+                    paymentStatus == 2
+                        ? 'Success'
+                        : serviceStatus == 3
+                            ? 'Failed'
+                            : 'Initialized',
+                    style: TS().gRoboto(
+                      fontWeight: FW.w600.val,
+                      fontSize: Responsive.isWeb(context)
+                          ? FS.font12.val
+                          : FS.font10.val,
+                      color: AppColor.white.val,
+                    ),
+                  ));
   }
 }

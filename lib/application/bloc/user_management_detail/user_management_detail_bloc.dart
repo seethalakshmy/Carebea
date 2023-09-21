@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/domain/user_management_detail/model/client_service_response.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -19,6 +20,7 @@ class UserManagementDetailBloc
   UserManagementDetailBloc(this.userDetailRepository)
       : super(UserManagementDetailState.initial()) {
     on<_GetUserDetail>(_getUserDetail);
+    on<_GetClientService>(_getClientService);
   }
 
   _getUserDetail(
@@ -28,10 +30,28 @@ class UserManagementDetailBloc
       adminId: event.adminId,
       userId: event.userId,
     );
+
     var homeState = result.fold((l) {
       return state.copyWith(error: l.error, isLoading: false);
     }, (r) {
+      if (r.status ?? false) {
+        add(UserManagementDetailEvent.getClientService(
+            userId: event.adminId, adminId: event.adminId));
+      }
       return state.copyWith(response: r, isLoading: false);
+    });
+    emit(homeState);
+  }
+
+  _getClientService(
+      _GetClientService event, Emitter<UserManagementDetailState> emit) async {
+    final Either<ApiErrorHandler, ClientServiceResponse> result =
+        await userDetailRepository.getClientService(
+            userId: event.userId, adminId: event.adminId);
+    var homeState = result.fold((l) {
+      return state.copyWith(error: l.error, isLoading: false);
+    }, (r) {
+      return state.copyWith(clientServiceResponse: r, isLoading: false);
     });
     emit(homeState);
   }

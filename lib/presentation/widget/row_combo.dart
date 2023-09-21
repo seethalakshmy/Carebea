@@ -1,13 +1,17 @@
+import 'package:admin_580_tech/domain/subProfile_details/model/sub_profile_details_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/enum.dart';
 import 'alert_text_label.dart';
+import 'custom_text.dart';
 
 class RowColonCombo extends StatelessWidget {
   const RowColonCombo({
     super.key,
     required this.label,
     required this.value,
+    this.list,
+    this.petList,
     this.fontSize,
     this.color,
     this.valueColor,
@@ -19,6 +23,8 @@ class RowColonCombo extends StatelessWidget {
   });
 
   final String value;
+  final List<dynamic>? list;
+  final List<Pet>? petList;
   final String label;
   final Color? color;
   final Color? valueColor;
@@ -32,6 +38,8 @@ class RowColonCombo extends StatelessWidget {
 
   RowColonCombo.twoHundred({
     super.key,
+    this.list,
+    this.petList,
     required this.label,
     required this.value,
     this.color,
@@ -45,6 +53,8 @@ class RowColonCombo extends StatelessWidget {
 
   RowColonCombo.threeEighty({
     super.key,
+    this.list,
+    this.petList,
     required this.value,
     required this.label,
     this.color,
@@ -58,6 +68,8 @@ class RowColonCombo extends StatelessWidget {
 
   RowColonCombo.threeSeventy({
     super.key,
+    this.list,
+    this.petList,
     required this.value,
     required this.label,
     this.color,
@@ -102,6 +114,19 @@ class RowColonCombo extends StatelessWidget {
             ),
           ),
         ),
+        Wrap(
+          children: list
+                  ?.map(
+                    (e) => AlertTextLabel(
+                      e,
+                      color: color,
+                      fontWeight: fontWeight,
+                      fontSize: fontSize,
+                    ),
+                  )
+                  .toList() ??
+              [],
+        )
       ],
     );
   }

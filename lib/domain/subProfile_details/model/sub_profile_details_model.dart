@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-SubProfileDetailResponse subProfileDetailResponseFromJson(String str) =>
+SubProfileDetailResponse subProfileDetailsModelFromJson(String str) =>
     SubProfileDetailResponse.fromJson(json.decode(str));
-String subProfileDetailResponseToJson(SubProfileDetailResponse data) =>
+String subProfileDetailsModelToJson(SubProfileDetailResponse data) =>
     json.encode(data.toJson());
 
 class SubProfileDetailResponse {
@@ -59,18 +59,19 @@ class Data {
     dynamic agreement,
     int? serviceCompleted,
     int? cancelledRequests,
-    int? averageReview,
+    double? averageReview,
     int? reviewCount,
     Name? name,
-    SubProfilePersonalDetails? personalDetails,
-    SubProfileDocumentDetails? documentDetails,
+    String? profilePic,
+    PersonalDetails1? personalDetails1,
+    DocumentDetails2? documentDetails2,
     PersonalDetails2? personalDetails2,
-    List<String>? languages,
+    List<String>? languages1,
     Pets? pets,
     Contacts? contacts,
     List<String>? healthProfile,
     List<String>? diet,
-    List<dynamic>? services,
+    Services? services,
   }) {
     _id = id;
     _profileCompletion = profileCompletion;
@@ -80,10 +81,11 @@ class Data {
     _averageReview = averageReview;
     _reviewCount = reviewCount;
     _name = name;
-    _personalDetails = personalDetails;
-    _documentDetails = documentDetails;
+    _profilePic = profilePic;
+    _personalDetails1 = personalDetails1;
+    _documentDetails2 = documentDetails2;
     _personalDetails2 = personalDetails2;
-    _languages = languages;
+    _languages1 = languages1;
     _pets = pets;
     _contacts = contacts;
     _healthProfile = healthProfile;
@@ -101,67 +103,66 @@ class Data {
     _cancelledRequests = json['cancelled_requests'];
     _averageReview = json['average_review'];
     _reviewCount = json['review_count'];
+    _profilePic = json['profile_pic'];
     _name = json['name'] != null ? Name.fromJson(json['name']) : null;
-    _personalDetails = json['personal_details'] != null
-        ? SubProfilePersonalDetails.fromJson(json['personal_details'])
+    _personalDetails1 = json['personal_details'] != null
+        ? PersonalDetails1.fromJson(json['personal_details'])
         : null;
-    _documentDetails = json['document_details'] != null
-        ? SubProfileDocumentDetails.fromJson(json['document_details'])
+    _documentDetails2 = json['document_details'] != null
+        ? DocumentDetails2.fromJson(json['document_details'])
         : null;
     _personalDetails2 = json['personal_details2'] != null
         ? PersonalDetails2.fromJson(json['personal_details2'])
         : null;
-    _languages =
+    _languages1 =
         json['languages'] != null ? json['languages'].cast<String>() : [];
-    // _pets = json['pets'] != null ? Pets.fromJson(json['pets']) : null;
+    _pets = json['pets'] != null ? Pets.fromJson(json['pets']) : null;
     _contacts =
         json['contacts'] != null ? Contacts.fromJson(json['contacts']) : null;
     _healthProfile = json['health_profile'] != null
         ? json['health_profile'].cast<String>()
         : [];
     _diet = json['diet'] != null ? json['diet'].cast<String>() : [];
-    // if (json['services'] != null) {
-    //   _services = [];
-    //   json['services'].forEach((v) {
-    //     _services?.add(Dynamic.fromJson(v));
-    //   });
-    // }
+    _services =
+        json['services'] != null ? Services.fromJson(json['services']) : null;
   }
   String? _id;
   ProfileCompletion? _profileCompletion;
   dynamic _agreement;
   int? _serviceCompleted;
   int? _cancelledRequests;
-  int? _averageReview;
+  double? _averageReview;
   int? _reviewCount;
+  String? _profilePic;
   Name? _name;
-  SubProfilePersonalDetails? _personalDetails;
-  SubProfileDocumentDetails? _documentDetails;
+  PersonalDetails1? _personalDetails1;
+  DocumentDetails2? _documentDetails2;
   PersonalDetails2? _personalDetails2;
-  List<String>? _languages;
+  List<String>? _languages1;
   Pets? _pets;
   Contacts? _contacts;
   List<String>? _healthProfile;
   List<String>? _diet;
-  List<dynamic>? _services;
+  Services? _services;
   Data copyWith({
     String? id,
     ProfileCompletion? profileCompletion,
     dynamic agreement,
     int? serviceCompleted,
     int? cancelledRequests,
-    int? averageReview,
+    String? profilePic,
+    double? averageReview,
     int? reviewCount,
     Name? name,
-    SubProfilePersonalDetails? personalDetails,
-    SubProfileDocumentDetails? documentDetails,
+    PersonalDetails1? personalDetails1,
+    DocumentDetails2? documentDetails2,
     PersonalDetails2? personalDetails2,
-    List<String>? languages,
+    List<String>? languages1,
     Pets? pets,
     Contacts? contacts,
     List<String>? healthProfile,
     List<String>? diet,
-    List<dynamic>? services,
+    Services? services,
   }) =>
       Data(
         id: id ?? _id,
@@ -172,10 +173,11 @@ class Data {
         averageReview: averageReview ?? _averageReview,
         reviewCount: reviewCount ?? _reviewCount,
         name: name ?? _name,
-        personalDetails: personalDetails ?? _personalDetails,
-        documentDetails: documentDetails ?? _documentDetails,
+        profilePic: profilePic ?? _profilePic,
+        personalDetails1: personalDetails1 ?? _personalDetails1,
+        documentDetails2: documentDetails2 ?? _documentDetails2,
         personalDetails2: personalDetails2 ?? _personalDetails2,
-        languages: languages ?? _languages,
+        languages1: languages1 ?? _languages1,
         pets: pets ?? _pets,
         contacts: contacts ?? _contacts,
         healthProfile: healthProfile ?? _healthProfile,
@@ -187,18 +189,19 @@ class Data {
   dynamic get agreement => _agreement;
   int? get serviceCompleted => _serviceCompleted;
   int? get cancelledRequests => _cancelledRequests;
-  int? get averageReview => _averageReview;
+  double? get averageReview => _averageReview;
   int? get reviewCount => _reviewCount;
   Name? get name => _name;
-  SubProfilePersonalDetails? get personalDetails => _personalDetails;
-  SubProfileDocumentDetails? get documentDetails => _documentDetails;
+  String? get profilePic => _profilePic;
+  PersonalDetails1? get personalDetails => _personalDetails1;
+  DocumentDetails2? get documentDetails2 => _documentDetails2;
   PersonalDetails2? get personalDetails2 => _personalDetails2;
-  List<String>? get languages => _languages;
+  List<String>? get languages1 => _languages1;
   Pets? get pets => _pets;
   Contacts? get contacts => _contacts;
   List<String>? get healthProfile => _healthProfile;
   List<String>? get diet => _diet;
-  List<dynamic>? get services => _services;
+  Services? get services => _services;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -211,19 +214,20 @@ class Data {
     map['cancelled_requests'] = _cancelledRequests;
     map['average_review'] = _averageReview;
     map['review_count'] = _reviewCount;
+    map['profile_pic'] = _profilePic;
     if (_name != null) {
       map['name'] = _name?.toJson();
     }
-    if (_personalDetails != null) {
-      map['personal_details'] = _personalDetails?.toJson();
+    if (_personalDetails1 != null) {
+      map['personal_details'] = _personalDetails1?.toJson();
     }
-    if (_documentDetails != null) {
-      map['document_details'] = _documentDetails?.toJson();
+    if (_documentDetails2 != null) {
+      map['document_details'] = _documentDetails2?.toJson();
     }
     if (_personalDetails2 != null) {
       map['personal_details2'] = _personalDetails2?.toJson();
     }
-    map['languages'] = _languages;
+    map['languages'] = _languages1;
     if (_pets != null) {
       map['pets'] = _pets?.toJson();
     }
@@ -233,8 +237,133 @@ class Data {
     map['health_profile'] = _healthProfile;
     map['diet'] = _diet;
     if (_services != null) {
-      map['services'] = _services?.map((v) => v.toJson()).toList();
+      map['services'] = _services?.toJson();
     }
+    return map;
+  }
+}
+
+Services servicesFromJson(String str) => Services.fromJson(json.decode(str));
+String servicesToJson(Services data) => json.encode(data.toJson());
+
+class Services {
+  Services({
+    List<Tier1>? tier1,
+    List<Tier2>? tier2,
+  }) {
+    _tier1 = tier1;
+    _tier2 = tier2;
+  }
+
+  Services.fromJson(dynamic json) {
+    if (json['tier1'] != null) {
+      _tier1 = [];
+      json['tier1'].forEach((v) {
+        _tier1?.add(Tier1.fromJson(v));
+      });
+    }
+    if (json['tier2'] != null) {
+      _tier2 = [];
+      json['tier2'].forEach((v) {
+        _tier2?.add(Tier2.fromJson(v));
+      });
+    }
+  }
+  List<Tier1>? _tier1;
+  List<Tier2>? _tier2;
+  Services copyWith({
+    List<Tier1>? tier1,
+    List<Tier2>? tier2,
+  }) =>
+      Services(
+        tier1: tier1 ?? _tier1,
+        tier2: tier2 ?? _tier2,
+      );
+  List<Tier1>? get tier1 => _tier1;
+  List<Tier2>? get tier2 => _tier2;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    if (_tier1 != null) {
+      map['tier1'] = _tier1?.map((v) => v.toJson()).toList();
+    }
+    if (_tier2 != null) {
+      map['tier2'] = _tier2?.map((v) => v.toJson()).toList();
+    }
+    return map;
+  }
+}
+
+Tier2 tier2FromJson(String str) => Tier2.fromJson(json.decode(str));
+String tier2ToJson(Tier2 data) => json.encode(data.toJson());
+
+class Tier2 {
+  Tier2({
+    String? id,
+    String? name,
+  }) {
+    _id = id;
+    _name = name;
+  }
+
+  Tier2.fromJson(dynamic json) {
+    _id = json['id'];
+    _name = json['name'];
+  }
+  String? _id;
+  String? _name;
+  Tier2 copyWith({
+    String? id,
+    String? name,
+  }) =>
+      Tier2(
+        id: id ?? _id,
+        name: name ?? _name,
+      );
+  String? get id => _id;
+  String? get name => _name;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['name'] = _name;
+    return map;
+  }
+}
+
+Tier1 tier1FromJson(String str) => Tier1.fromJson(json.decode(str));
+String tier1ToJson(Tier1 data) => json.encode(data.toJson());
+
+class Tier1 {
+  Tier1({
+    String? id,
+    String? name,
+  }) {
+    _id = id;
+    _name = name;
+  }
+
+  Tier1.fromJson(dynamic json) {
+    _id = json['id'];
+    _name = json['name'];
+  }
+  String? _id;
+  String? _name;
+  Tier1 copyWith({
+    String? id,
+    String? name,
+  }) =>
+      Tier1(
+        id: id ?? _id,
+        name: name ?? _name,
+      );
+  String? get id => _id;
+  String? get name => _name;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['name'] = _name;
     return map;
   }
 }
@@ -713,9 +842,9 @@ String secondaryContactToJson(SecondaryContact data) =>
 
 class SecondaryContact {
   SecondaryContact({
-    String? name,
-    String? relationship,
-    String? phoneNumber,
+    dynamic name,
+    dynamic relationship,
+    dynamic phoneNumber,
     dynamic relationshipDescription,
   }) {
     _name = name;
@@ -730,14 +859,14 @@ class SecondaryContact {
     _phoneNumber = json['phone_number'];
     _relationshipDescription = json['relationship_description'];
   }
-  String? _name;
-  String? _relationship;
-  String? _phoneNumber;
+  dynamic _name;
+  dynamic _relationship;
+  dynamic _phoneNumber;
   dynamic _relationshipDescription;
   SecondaryContact copyWith({
-    String? name,
-    String? relationship,
-    String? phoneNumber,
+    dynamic name,
+    dynamic relationship,
+    dynamic phoneNumber,
     dynamic relationshipDescription,
   }) =>
       SecondaryContact(
@@ -747,9 +876,9 @@ class SecondaryContact {
         relationshipDescription:
             relationshipDescription ?? _relationshipDescription,
       );
-  String? get name => _name;
-  String? get relationship => _relationship;
-  String? get phoneNumber => _phoneNumber;
+  dynamic get name => _name;
+  dynamic get relationship => _relationship;
+  dynamic get phoneNumber => _phoneNumber;
   dynamic get relationshipDescription => _relationshipDescription;
 
   Map<String, dynamic> toJson() {
@@ -817,39 +946,39 @@ class PrimaryContact {
   }
 }
 
-// Pets petsFromJson(String str) => Pets.fromJson(json.decode(str));
+Pets petsFromJson(String str) => Pets.fromJson(json.decode(str));
 String petsToJson(Pets data) => json.encode(data.toJson());
 
 class Pets {
   Pets({
     bool? havePets,
-    List<dynamic>? pet,
+    List<Pet>? pet,
   }) {
     _havePets = havePets;
     _pet = pet;
   }
 
-  // Pets.fromJson(dynamic json) {
-  //   _havePets = json['have_pets'];
-  //   if (json['pet'] != null) {
-  //     _pet = [];
-  //     json['pet'].forEach((v) {
-  //       _pet?.add(Dynamic.fromJson(v));
-  //     });
-  //   }
-  // }
+  Pets.fromJson(dynamic json) {
+    _havePets = json['have_pets'];
+    if (json['pet'] != null) {
+      _pet = [];
+      json['pet'].forEach((v) {
+        _pet?.add(Pet.fromJson(v));
+      });
+    }
+  }
   bool? _havePets;
-  List<dynamic>? _pet;
+  List<Pet>? _pet;
   Pets copyWith({
     bool? havePets,
-    List<dynamic>? pet,
+    List<Pet>? pet,
   }) =>
       Pets(
         havePets: havePets ?? _havePets,
         pet: pet ?? _pet,
       );
   bool? get havePets => _havePets;
-  List<dynamic>? get pet => _pet;
+  List<Pet>? get pet => _pet;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -857,6 +986,43 @@ class Pets {
     if (_pet != null) {
       map['pet'] = _pet?.map((v) => v.toJson()).toList();
     }
+    return map;
+  }
+}
+
+Pet petFromJson(String str) => Pet.fromJson(json.decode(str));
+String petToJson(Pet data) => json.encode(data.toJson());
+
+class Pet {
+  Pet({
+    int? area,
+    String? name,
+  }) {
+    _area = area;
+    _name = name;
+  }
+
+  Pet.fromJson(dynamic json) {
+    _area = json['area'];
+    _name = json['name'];
+  }
+  int? _area;
+  String? _name;
+  Pet copyWith({
+    int? area,
+    String? name,
+  }) =>
+      Pet(
+        area: area ?? _area,
+        name: name ?? _name,
+      );
+  int? get area => _area;
+  String? get name => _name;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['area'] = _area;
+    map['name'] = _name;
     return map;
   }
 }
@@ -909,13 +1075,13 @@ class PersonalDetails2 {
   }
 }
 
-SubProfileDocumentDetails subProfileDocumentDetailsFromJson(String str) =>
-    SubProfileDocumentDetails.fromJson(json.decode(str));
-String subProfileDocumentDetailsToJson(SubProfileDocumentDetails data) =>
+DocumentDetails2 documentDetails2FromJson(String str) =>
+    DocumentDetails2.fromJson(json.decode(str));
+String documentDetails2ToJson(DocumentDetails2 data) =>
     json.encode(data.toJson());
 
-class SubProfileDocumentDetails {
-  SubProfileDocumentDetails({
+class DocumentDetails2 {
+  DocumentDetails2({
     String? documentUploaded,
     String? doumentNumber,
     String? expiryDate,
@@ -925,7 +1091,7 @@ class SubProfileDocumentDetails {
     _expiryDate = expiryDate;
   }
 
-  SubProfileDocumentDetails.fromJson(dynamic json) {
+  DocumentDetails2.fromJson(dynamic json) {
     _documentUploaded = json['document_uploaded'];
     _doumentNumber = json['doument_number'];
     _expiryDate = json['expiry_date'];
@@ -933,12 +1099,12 @@ class SubProfileDocumentDetails {
   String? _documentUploaded;
   String? _doumentNumber;
   String? _expiryDate;
-  SubProfileDocumentDetails copyWith({
+  DocumentDetails2 copyWith({
     String? documentUploaded,
     String? doumentNumber,
     String? expiryDate,
   }) =>
-      SubProfileDocumentDetails(
+      DocumentDetails2(
         documentUploaded: documentUploaded ?? _documentUploaded,
         doumentNumber: doumentNumber ?? _doumentNumber,
         expiryDate: expiryDate ?? _expiryDate,
@@ -956,15 +1122,19 @@ class SubProfileDocumentDetails {
   }
 }
 
-SubProfilePersonalDetails subProfilePersonalDetailsFromJson(String str) =>
-    SubProfilePersonalDetails.fromJson(json.decode(str));
-String subProfilePersonalDetailsToJson(SubProfilePersonalDetails data) =>
+PersonalDetails1 personalDetails1FromJson(String str) =>
+    PersonalDetails1.fromJson(json.decode(str));
+String personalDetails1ToJson(PersonalDetails1 data) =>
     json.encode(data.toJson());
 
-class SubProfilePersonalDetails {
-  SubProfilePersonalDetails({
+class PersonalDetails1 {
+  PersonalDetails1({
+    String? dob,
+    String? addressline1,
+    String? street,
     String? city,
     String? state,
+    String? zip,
     String? height,
     String? weight,
     int? gender,
@@ -972,8 +1142,12 @@ class SubProfilePersonalDetails {
     String? alternativeNumber,
     String? email,
   }) {
+    _dob = dob;
+    _addressline1 = addressline1;
+    _street = street;
     _city = city;
     _state = state;
+    _zip = zip;
     _height = height;
     _weight = weight;
     _gender = gender;
@@ -982,9 +1156,13 @@ class SubProfilePersonalDetails {
     _email = email;
   }
 
-  SubProfilePersonalDetails.fromJson(dynamic json) {
+  PersonalDetails1.fromJson(dynamic json) {
+    _dob = json['dob'];
+    _addressline1 = json['addressline1'];
+    _street = json['street'];
     _city = json['city'];
     _state = json['state'];
+    _zip = json['zip'];
     _height = json['height'];
     _weight = json['weight'];
     _gender = json['gender'];
@@ -992,17 +1170,25 @@ class SubProfilePersonalDetails {
     _alternativeNumber = json['alternative_number'];
     _email = json['email'];
   }
+  String? _dob;
+  String? _addressline1;
+  String? _street;
   String? _city;
   String? _state;
+  String? _zip;
   String? _height;
   String? _weight;
   int? _gender;
   String? _mobile;
   String? _alternativeNumber;
   String? _email;
-  SubProfilePersonalDetails copyWith({
+  PersonalDetails1 copyWith({
+    String? dob,
+    String? addressline1,
+    String? street,
     String? city,
     String? state,
+    String? zip,
     String? height,
     String? weight,
     int? gender,
@@ -1010,9 +1196,13 @@ class SubProfilePersonalDetails {
     String? alternativeNumber,
     String? email,
   }) =>
-      SubProfilePersonalDetails(
+      PersonalDetails1(
+        dob: dob ?? _dob,
+        addressline1: addressline1 ?? _addressline1,
+        street: street ?? _street,
         city: city ?? _city,
         state: state ?? _state,
+        zip: zip ?? _zip,
         height: height ?? _height,
         weight: weight ?? _weight,
         gender: gender ?? _gender,
@@ -1020,8 +1210,12 @@ class SubProfilePersonalDetails {
         alternativeNumber: alternativeNumber ?? _alternativeNumber,
         email: email ?? _email,
       );
+  String? get dob => _dob;
+  String? get addressline1 => _addressline1;
+  String? get street => _street;
   String? get city => _city;
   String? get state => _state;
+  String? get zip => _zip;
   String? get height => _height;
   String? get weight => _weight;
   int? get gender => _gender;
@@ -1031,8 +1225,12 @@ class SubProfilePersonalDetails {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['dob'] = _dob;
+    map['addressline1'] = _addressline1;
+    map['street'] = _street;
     map['city'] = _city;
     map['state'] = _state;
+    map['zip'] = _zip;
     map['height'] = _height;
     map['weight'] = _weight;
     map['gender'] = _gender;

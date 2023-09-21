@@ -1,10 +1,9 @@
 import 'package:admin_580_tech/application/bloc/sub_profile_details/sub_profile_details_bloc.dart';
 import 'package:admin_580_tech/core/string_extension.dart';
-import 'package:admin_580_tech/domain/caregiver_profile/model/caregiver_profile_response.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/enum.dart';
-import '../../../domain/subProfile_details/model/sub_profile_detail_response.dart';
+import '../../../domain/subProfile_details/model/sub_profile_details_model.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_sizedbox.dart';
 import '../../widget/header_view.dart';
@@ -28,10 +27,8 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
   }
 
   Column _topView(BuildContext context) {
-    SubProfilePersonalDetails? personalDetails =
-        state.response?.data?.personalDetails;
-    SubProfileDocumentDetails? documentDetails =
-        state.response?.data?.documentDetails;
+    PersonalDetails1? personalDetails = state.response?.data?.personalDetails;
+    DocumentDetails2? documentDetails = state.response?.data?.documentDetails2;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,10 +38,9 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
             Expanded(
               child: RowColonCombo.twoHundred(
                   label: AppString.dob.val,
-                  value: "1",
-                  // personalDetails.?.parseWithFormat(
-                  //         dateFormat: AppString.mmDDYYY.val) ??
-                  //     "",
+                  value: personalDetails?.dob?.parseWithFormat(
+                          dateFormat: AppString.mmDDYYY.val) ??
+                      "",
                   fontSize: FS.font13PointFive.val),
             ),
             !isLg(context)
@@ -62,7 +58,7 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
             Expanded(
               child: RowColonCombo.twoHundred(
                   label: AppString.addressLine1.val,
-                  value: "1",
+                  value: personalDetails?.addressline1 ?? '',
                   // personalDetails?.addressLine ?? "",
                   fontSize: FS.font13PointFive.val),
             ),
@@ -81,7 +77,7 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
             Expanded(
               child: RowColonCombo.twoHundred(
                   label: AppString.street.val,
-                  value: "no value",
+                  value: personalDetails?.street ?? '',
                   fontSize: FS.font13PointFive.val),
             ),
             !isLg(context)
@@ -137,7 +133,7 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
             Expanded(
               child: RowColonCombo.twoHundred(
                   label: AppString.zip.val,
-                  value: "no value",
+                  value: personalDetails?.zip ?? '',
                   fontSize: FS.font13PointFive.val),
             ),
             !isLg(context)
@@ -200,7 +196,7 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
     );
   }
 
-  RowColonCombo _emailView(SubProfilePersonalDetails? personalDetails) {
+  RowColonCombo _emailView(PersonalDetails1? personalDetails) {
     return RowColonCombo.twoHundred(
         label: AppString.email.val,
         value: personalDetails?.email ?? "",
@@ -208,43 +204,42 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
   }
 
   RowColonCombo _alterNativeMobileNumberView(
-      SubProfilePersonalDetails? personalDetails) {
+      PersonalDetails1? personalDetails) {
     return RowColonCombo.twoHundred(
         label: AppString.alternativeMobileNumber.val,
-        value: "no value",
-        // personalDetails?.alternativeMobileNumber ?? "",
+        value: personalDetails?.alternativeNumber ?? '',
         fontSize: FS.font13PointFive.val);
   }
 
-  RowColonCombo _mobileNumberView(SubProfilePersonalDetails? personalDetails) {
+  RowColonCombo _mobileNumberView(PersonalDetails1? personalDetails) {
     return RowColonCombo.twoHundred(
         label: AppString.mobileNumber.val,
         value: personalDetails?.mobile ?? "",
         fontSize: FS.font13PointFive.val);
   }
 
-  RowColonCombo _heightView(SubProfilePersonalDetails? personalDetails) {
+  RowColonCombo _heightView(PersonalDetails1? personalDetails) {
     return RowColonCombo.twoHundred(
         label: AppString.height.val,
         value: personalDetails?.height ?? "",
         fontSize: FS.font13PointFive.val);
   }
 
-  RowColonCombo _weightView(SubProfilePersonalDetails? personalDetails) {
+  RowColonCombo _weightView(PersonalDetails1? personalDetails) {
     return RowColonCombo.twoHundred(
         label: AppString.weight.val,
         value: personalDetails?.weight ?? "",
         fontSize: FS.font13PointFive.val);
   }
 
-  RowColonCombo _genderView(SubProfilePersonalDetails? personalDetails) {
+  RowColonCombo _genderView(PersonalDetails1? personalDetails) {
     return RowColonCombo.twoHundred(
         label: AppString.gender.val,
         value: personalDetails?.gender.toString() ?? "",
         fontSize: FS.font13PointFive.val);
   }
 
-  Column _rightView(SubProfilePersonalDetails? personalDetails) {
+  Column _rightView(PersonalDetails1? personalDetails) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

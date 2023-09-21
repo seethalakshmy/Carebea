@@ -61,10 +61,12 @@ class TransactionsRepository implements ITransactionsRepo {
   @override
   Future<Either<ApiErrorHandler, TransactionDetailsResponse>>
       getTransactionDetails(
-          {required String token, required String transactionId}) async {
+          {required String token,
+          required String transactionId,
+          required String serviceId}) async {
     try {
-      final response =
-          await _apiClient.getTransactionDetails(token, transactionId);
+      final response = await _apiClient.getTransactionDetails(
+          token, serviceId, transactionId);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");

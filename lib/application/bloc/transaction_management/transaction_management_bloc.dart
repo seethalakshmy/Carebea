@@ -106,7 +106,9 @@ class TransactionManagementBloc
     emit(state.copyWith(isDetailsLoading: true));
     final Either<ApiErrorHandler, TransactionDetailsResponse> result =
         await transactionsRepository.getTransactionDetails(
-            token: '', transactionId: event.transactionId);
+            token: '',
+            transactionId: event.transactionId,
+            serviceId: event.serviceId);
     TransactionManagementState filterState = result.fold((l) {
       return state.copyWith(
           isDetailsLoading: false, trDetailsOption: Some(Left(l)));

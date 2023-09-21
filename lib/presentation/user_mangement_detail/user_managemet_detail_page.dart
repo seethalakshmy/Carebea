@@ -429,7 +429,10 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                   PaymentMethodView(
                     state: state,
                   ),
-                  ServiceView(state: state),
+                  ServiceView(
+                    state: state,
+                    userId: state.response?.data?.id ?? '',
+                  ),
                   TransactionView(state: state)
                   /*buildOffersListView(),*/
                 ],

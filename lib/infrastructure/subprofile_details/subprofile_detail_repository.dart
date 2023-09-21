@@ -8,7 +8,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 import '../../core/enum.dart';
-import '../../domain/subProfile_details/model/sub_profile_detail_response.dart';
+import '../../domain/subProfile_details/model/sub_profile_details_model.dart';
 
 class SubProfileDetailRepository implements ISubProfileDetailRepo {
   final ApiClient _apiClient = ApiClient();
