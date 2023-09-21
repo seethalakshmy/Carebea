@@ -11,6 +11,8 @@ class ComplaintDetailState with _$ComplaintDetailState {
           updateComplaintOption,
       required Option<Either<ApiErrorHandler, GetServiceResponseModel>>
           getServiceOption,
+      required Option<Either<ApiErrorHandler, TransactionDetailsResponse>>
+          trDetailsOption,
       required String? error}) = _ComplaintState;
 
   factory ComplaintDetailState.initial() {
@@ -20,6 +22,7 @@ class ComplaintDetailState with _$ComplaintDetailState {
         complaintDetailsOption: None(),
         updateComplaintOption: None(),
         getServiceOption: None(),
+        trDetailsOption: None(),
         error: null);
   }
 }

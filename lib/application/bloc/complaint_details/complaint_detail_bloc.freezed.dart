@@ -23,6 +23,7 @@ mixin _$ComplaintDetailEvent {
         updateComplaint,
     required TResult Function(String serviceId, BuildContext context)
         getService,
+    required TResult Function(String transactionId) getTransactionDetails,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,6 +32,7 @@ mixin _$ComplaintDetailEvent {
     TResult? Function(String complaintId, int status, String comment)?
         updateComplaint,
     TResult? Function(String serviceId, BuildContext context)? getService,
+    TResult? Function(String transactionId)? getTransactionDetails,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,6 +41,7 @@ mixin _$ComplaintDetailEvent {
     TResult Function(String complaintId, int status, String comment)?
         updateComplaint,
     TResult Function(String serviceId, BuildContext context)? getService,
+    TResult Function(String transactionId)? getTransactionDetails,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,8 @@ mixin _$ComplaintDetailEvent {
     required TResult Function(_GetComplaintDetails value) getComplaintDetails,
     required TResult Function(_UpdateComplaint value) updateComplaint,
     required TResult Function(_GetService value) getService,
+    required TResult Function(_GetTransactionDetails value)
+        getTransactionDetails,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,6 +59,7 @@ mixin _$ComplaintDetailEvent {
     TResult? Function(_GetComplaintDetails value)? getComplaintDetails,
     TResult? Function(_UpdateComplaint value)? updateComplaint,
     TResult? Function(_GetService value)? getService,
+    TResult? Function(_GetTransactionDetails value)? getTransactionDetails,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +67,7 @@ mixin _$ComplaintDetailEvent {
     TResult Function(_GetComplaintDetails value)? getComplaintDetails,
     TResult Function(_UpdateComplaint value)? updateComplaint,
     TResult Function(_GetService value)? getService,
+    TResult Function(_GetTransactionDetails value)? getTransactionDetails,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -156,6 +163,7 @@ class _$_GetComplaintDetails implements _GetComplaintDetails {
         updateComplaint,
     required TResult Function(String serviceId, BuildContext context)
         getService,
+    required TResult Function(String transactionId) getTransactionDetails,
   }) {
     return getComplaintDetails(complaintId);
   }
@@ -167,6 +175,7 @@ class _$_GetComplaintDetails implements _GetComplaintDetails {
     TResult? Function(String complaintId, int status, String comment)?
         updateComplaint,
     TResult? Function(String serviceId, BuildContext context)? getService,
+    TResult? Function(String transactionId)? getTransactionDetails,
   }) {
     return getComplaintDetails?.call(complaintId);
   }
@@ -178,6 +187,7 @@ class _$_GetComplaintDetails implements _GetComplaintDetails {
     TResult Function(String complaintId, int status, String comment)?
         updateComplaint,
     TResult Function(String serviceId, BuildContext context)? getService,
+    TResult Function(String transactionId)? getTransactionDetails,
     required TResult orElse(),
   }) {
     if (getComplaintDetails != null) {
@@ -192,6 +202,8 @@ class _$_GetComplaintDetails implements _GetComplaintDetails {
     required TResult Function(_GetComplaintDetails value) getComplaintDetails,
     required TResult Function(_UpdateComplaint value) updateComplaint,
     required TResult Function(_GetService value) getService,
+    required TResult Function(_GetTransactionDetails value)
+        getTransactionDetails,
   }) {
     return getComplaintDetails(this);
   }
@@ -202,6 +214,7 @@ class _$_GetComplaintDetails implements _GetComplaintDetails {
     TResult? Function(_GetComplaintDetails value)? getComplaintDetails,
     TResult? Function(_UpdateComplaint value)? updateComplaint,
     TResult? Function(_GetService value)? getService,
+    TResult? Function(_GetTransactionDetails value)? getTransactionDetails,
   }) {
     return getComplaintDetails?.call(this);
   }
@@ -212,6 +225,7 @@ class _$_GetComplaintDetails implements _GetComplaintDetails {
     TResult Function(_GetComplaintDetails value)? getComplaintDetails,
     TResult Function(_UpdateComplaint value)? updateComplaint,
     TResult Function(_GetService value)? getService,
+    TResult Function(_GetTransactionDetails value)? getTransactionDetails,
     required TResult orElse(),
   }) {
     if (getComplaintDetails != null) {
@@ -318,6 +332,7 @@ class _$_UpdateComplaint implements _UpdateComplaint {
         updateComplaint,
     required TResult Function(String serviceId, BuildContext context)
         getService,
+    required TResult Function(String transactionId) getTransactionDetails,
   }) {
     return updateComplaint(complaintId, status, comment);
   }
@@ -329,6 +344,7 @@ class _$_UpdateComplaint implements _UpdateComplaint {
     TResult? Function(String complaintId, int status, String comment)?
         updateComplaint,
     TResult? Function(String serviceId, BuildContext context)? getService,
+    TResult? Function(String transactionId)? getTransactionDetails,
   }) {
     return updateComplaint?.call(complaintId, status, comment);
   }
@@ -340,6 +356,7 @@ class _$_UpdateComplaint implements _UpdateComplaint {
     TResult Function(String complaintId, int status, String comment)?
         updateComplaint,
     TResult Function(String serviceId, BuildContext context)? getService,
+    TResult Function(String transactionId)? getTransactionDetails,
     required TResult orElse(),
   }) {
     if (updateComplaint != null) {
@@ -354,6 +371,8 @@ class _$_UpdateComplaint implements _UpdateComplaint {
     required TResult Function(_GetComplaintDetails value) getComplaintDetails,
     required TResult Function(_UpdateComplaint value) updateComplaint,
     required TResult Function(_GetService value) getService,
+    required TResult Function(_GetTransactionDetails value)
+        getTransactionDetails,
   }) {
     return updateComplaint(this);
   }
@@ -364,6 +383,7 @@ class _$_UpdateComplaint implements _UpdateComplaint {
     TResult? Function(_GetComplaintDetails value)? getComplaintDetails,
     TResult? Function(_UpdateComplaint value)? updateComplaint,
     TResult? Function(_GetService value)? getService,
+    TResult? Function(_GetTransactionDetails value)? getTransactionDetails,
   }) {
     return updateComplaint?.call(this);
   }
@@ -374,6 +394,7 @@ class _$_UpdateComplaint implements _UpdateComplaint {
     TResult Function(_GetComplaintDetails value)? getComplaintDetails,
     TResult Function(_UpdateComplaint value)? updateComplaint,
     TResult Function(_GetService value)? getService,
+    TResult Function(_GetTransactionDetails value)? getTransactionDetails,
     required TResult orElse(),
   }) {
     if (updateComplaint != null) {
@@ -475,6 +496,7 @@ class _$_GetService implements _GetService {
         updateComplaint,
     required TResult Function(String serviceId, BuildContext context)
         getService,
+    required TResult Function(String transactionId) getTransactionDetails,
   }) {
     return getService(serviceId, context);
   }
@@ -486,6 +508,7 @@ class _$_GetService implements _GetService {
     TResult? Function(String complaintId, int status, String comment)?
         updateComplaint,
     TResult? Function(String serviceId, BuildContext context)? getService,
+    TResult? Function(String transactionId)? getTransactionDetails,
   }) {
     return getService?.call(serviceId, context);
   }
@@ -497,6 +520,7 @@ class _$_GetService implements _GetService {
     TResult Function(String complaintId, int status, String comment)?
         updateComplaint,
     TResult Function(String serviceId, BuildContext context)? getService,
+    TResult Function(String transactionId)? getTransactionDetails,
     required TResult orElse(),
   }) {
     if (getService != null) {
@@ -511,6 +535,8 @@ class _$_GetService implements _GetService {
     required TResult Function(_GetComplaintDetails value) getComplaintDetails,
     required TResult Function(_UpdateComplaint value) updateComplaint,
     required TResult Function(_GetService value) getService,
+    required TResult Function(_GetTransactionDetails value)
+        getTransactionDetails,
   }) {
     return getService(this);
   }
@@ -521,6 +547,7 @@ class _$_GetService implements _GetService {
     TResult? Function(_GetComplaintDetails value)? getComplaintDetails,
     TResult? Function(_UpdateComplaint value)? updateComplaint,
     TResult? Function(_GetService value)? getService,
+    TResult? Function(_GetTransactionDetails value)? getTransactionDetails,
   }) {
     return getService?.call(this);
   }
@@ -531,6 +558,7 @@ class _$_GetService implements _GetService {
     TResult Function(_GetComplaintDetails value)? getComplaintDetails,
     TResult Function(_UpdateComplaint value)? updateComplaint,
     TResult Function(_GetService value)? getService,
+    TResult Function(_GetTransactionDetails value)? getTransactionDetails,
     required TResult orElse(),
   }) {
     if (getService != null) {
@@ -553,6 +581,159 @@ abstract class _GetService implements ComplaintDetailEvent {
 }
 
 /// @nodoc
+abstract class _$$_GetTransactionDetailsCopyWith<$Res> {
+  factory _$$_GetTransactionDetailsCopyWith(_$_GetTransactionDetails value,
+          $Res Function(_$_GetTransactionDetails) then) =
+      __$$_GetTransactionDetailsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String transactionId});
+}
+
+/// @nodoc
+class __$$_GetTransactionDetailsCopyWithImpl<$Res>
+    extends _$ComplaintDetailEventCopyWithImpl<$Res, _$_GetTransactionDetails>
+    implements _$$_GetTransactionDetailsCopyWith<$Res> {
+  __$$_GetTransactionDetailsCopyWithImpl(_$_GetTransactionDetails _value,
+      $Res Function(_$_GetTransactionDetails) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? transactionId = null,
+  }) {
+    return _then(_$_GetTransactionDetails(
+      transactionId: null == transactionId
+          ? _value.transactionId
+          : transactionId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetTransactionDetails implements _GetTransactionDetails {
+  const _$_GetTransactionDetails({required this.transactionId});
+
+  @override
+  final String transactionId;
+
+  @override
+  String toString() {
+    return 'ComplaintDetailEvent.getTransactionDetails(transactionId: $transactionId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetTransactionDetails &&
+            (identical(other.transactionId, transactionId) ||
+                other.transactionId == transactionId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, transactionId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetTransactionDetailsCopyWith<_$_GetTransactionDetails> get copyWith =>
+      __$$_GetTransactionDetailsCopyWithImpl<_$_GetTransactionDetails>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String complaintId) getComplaintDetails,
+    required TResult Function(String complaintId, int status, String comment)
+        updateComplaint,
+    required TResult Function(String serviceId, BuildContext context)
+        getService,
+    required TResult Function(String transactionId) getTransactionDetails,
+  }) {
+    return getTransactionDetails(transactionId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String complaintId)? getComplaintDetails,
+    TResult? Function(String complaintId, int status, String comment)?
+        updateComplaint,
+    TResult? Function(String serviceId, BuildContext context)? getService,
+    TResult? Function(String transactionId)? getTransactionDetails,
+  }) {
+    return getTransactionDetails?.call(transactionId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String complaintId)? getComplaintDetails,
+    TResult Function(String complaintId, int status, String comment)?
+        updateComplaint,
+    TResult Function(String serviceId, BuildContext context)? getService,
+    TResult Function(String transactionId)? getTransactionDetails,
+    required TResult orElse(),
+  }) {
+    if (getTransactionDetails != null) {
+      return getTransactionDetails(transactionId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetComplaintDetails value) getComplaintDetails,
+    required TResult Function(_UpdateComplaint value) updateComplaint,
+    required TResult Function(_GetService value) getService,
+    required TResult Function(_GetTransactionDetails value)
+        getTransactionDetails,
+  }) {
+    return getTransactionDetails(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetComplaintDetails value)? getComplaintDetails,
+    TResult? Function(_UpdateComplaint value)? updateComplaint,
+    TResult? Function(_GetService value)? getService,
+    TResult? Function(_GetTransactionDetails value)? getTransactionDetails,
+  }) {
+    return getTransactionDetails?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetComplaintDetails value)? getComplaintDetails,
+    TResult Function(_UpdateComplaint value)? updateComplaint,
+    TResult Function(_GetService value)? getService,
+    TResult Function(_GetTransactionDetails value)? getTransactionDetails,
+    required TResult orElse(),
+  }) {
+    if (getTransactionDetails != null) {
+      return getTransactionDetails(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetTransactionDetails implements ComplaintDetailEvent {
+  const factory _GetTransactionDetails({required final String transactionId}) =
+      _$_GetTransactionDetails;
+
+  String get transactionId;
+  @JsonKey(ignore: true)
+  _$$_GetTransactionDetailsCopyWith<_$_GetTransactionDetails> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ComplaintDetailState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
@@ -562,6 +743,8 @@ mixin _$ComplaintDetailState {
       throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, GetServiceResponseModel>>
       get getServiceOption => throw _privateConstructorUsedError;
+  Option<Either<ApiErrorHandler, TransactionDetailsResponse>>
+      get trDetailsOption => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -582,6 +765,8 @@ abstract class $ComplaintDetailStateCopyWith<$Res> {
           complaintDetailsOption,
       Option<Either<ApiErrorHandler, CommonResponse>> updateComplaintOption,
       Option<Either<ApiErrorHandler, GetServiceResponseModel>> getServiceOption,
+      Option<Either<ApiErrorHandler, TransactionDetailsResponse>>
+          trDetailsOption,
       String? error});
 }
 
@@ -604,6 +789,7 @@ class _$ComplaintDetailStateCopyWithImpl<$Res,
     Object? complaintDetailsOption = null,
     Object? updateComplaintOption = null,
     Object? getServiceOption = null,
+    Object? trDetailsOption = null,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
@@ -627,6 +813,10 @@ class _$ComplaintDetailStateCopyWithImpl<$Res,
           ? _value.getServiceOption
           : getServiceOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiErrorHandler, GetServiceResponseModel>>,
+      trDetailsOption: null == trDetailsOption
+          ? _value.trDetailsOption
+          : trDetailsOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, TransactionDetailsResponse>>,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -650,6 +840,8 @@ abstract class _$$_ComplaintStateCopyWith<$Res>
           complaintDetailsOption,
       Option<Either<ApiErrorHandler, CommonResponse>> updateComplaintOption,
       Option<Either<ApiErrorHandler, GetServiceResponseModel>> getServiceOption,
+      Option<Either<ApiErrorHandler, TransactionDetailsResponse>>
+          trDetailsOption,
       String? error});
 }
 
@@ -669,6 +861,7 @@ class __$$_ComplaintStateCopyWithImpl<$Res>
     Object? complaintDetailsOption = null,
     Object? updateComplaintOption = null,
     Object? getServiceOption = null,
+    Object? trDetailsOption = null,
     Object? error = freezed,
   }) {
     return _then(_$_ComplaintState(
@@ -692,6 +885,10 @@ class __$$_ComplaintStateCopyWithImpl<$Res>
           ? _value.getServiceOption
           : getServiceOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiErrorHandler, GetServiceResponseModel>>,
+      trDetailsOption: null == trDetailsOption
+          ? _value.trDetailsOption
+          : trDetailsOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, TransactionDetailsResponse>>,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -709,6 +906,7 @@ class _$_ComplaintState implements _ComplaintState {
       required this.complaintDetailsOption,
       required this.updateComplaintOption,
       required this.getServiceOption,
+      required this.trDetailsOption,
       required this.error});
 
   @override
@@ -724,11 +922,14 @@ class _$_ComplaintState implements _ComplaintState {
   final Option<Either<ApiErrorHandler, GetServiceResponseModel>>
       getServiceOption;
   @override
+  final Option<Either<ApiErrorHandler, TransactionDetailsResponse>>
+      trDetailsOption;
+  @override
   final String? error;
 
   @override
   String toString() {
-    return 'ComplaintDetailState(isLoading: $isLoading, isError: $isError, complaintDetailsOption: $complaintDetailsOption, updateComplaintOption: $updateComplaintOption, getServiceOption: $getServiceOption, error: $error)';
+    return 'ComplaintDetailState(isLoading: $isLoading, isError: $isError, complaintDetailsOption: $complaintDetailsOption, updateComplaintOption: $updateComplaintOption, getServiceOption: $getServiceOption, trDetailsOption: $trDetailsOption, error: $error)';
   }
 
   @override
@@ -745,12 +946,21 @@ class _$_ComplaintState implements _ComplaintState {
                 other.updateComplaintOption == updateComplaintOption) &&
             (identical(other.getServiceOption, getServiceOption) ||
                 other.getServiceOption == getServiceOption) &&
+            (identical(other.trDetailsOption, trDetailsOption) ||
+                other.trDetailsOption == trDetailsOption) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isError,
-      complaintDetailsOption, updateComplaintOption, getServiceOption, error);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      isError,
+      complaintDetailsOption,
+      updateComplaintOption,
+      getServiceOption,
+      trDetailsOption,
+      error);
 
   @JsonKey(ignore: true)
   @override
@@ -770,6 +980,8 @@ abstract class _ComplaintState implements ComplaintDetailState {
           updateComplaintOption,
       required final Option<Either<ApiErrorHandler, GetServiceResponseModel>>
           getServiceOption,
+      required final Option<Either<ApiErrorHandler, TransactionDetailsResponse>>
+          trDetailsOption,
       required final String? error}) = _$_ComplaintState;
 
   @override
@@ -783,6 +995,9 @@ abstract class _ComplaintState implements ComplaintDetailState {
   Option<Either<ApiErrorHandler, CommonResponse>> get updateComplaintOption;
   @override
   Option<Either<ApiErrorHandler, GetServiceResponseModel>> get getServiceOption;
+  @override
+  Option<Either<ApiErrorHandler, TransactionDetailsResponse>>
+      get trDetailsOption;
   @override
   String? get error;
   @override

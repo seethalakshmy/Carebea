@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 
 import '../core/api_error_handler/api_error_handler.dart';
 import '../on_boarding/models/common_response.dart';
+import '../transaction_management/model/transaction_details_response.dart';
 import 'models/complaint_details_response_model.dart';
 import 'models/get_service_response_model.dart';
 
@@ -20,4 +21,8 @@ abstract class IComplaintDetailsRepo {
     required String userId,
     required String serviceId,
   });
+
+  Future<Either<ApiErrorHandler, TransactionDetailsResponse>>
+      getTransactionDetails(
+          {required String token, required String transactionId});
 }

@@ -4,11 +4,13 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 
 import '../../../core/enum.dart';
 import '../../../domain/complaint_details/models/complaint_details_response_model.dart';
 import '../../../domain/complaint_details/models/get_service_response_model.dart';
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
+import '../../../domain/transaction_management/model/transaction_details_response.dart';
 import '../../../infrastructure/complaint_details/complaint_details_repository.dart';
 import '../../../presentation/complaint_details/widgets/service_details_dialog_widget.dart';
 
@@ -23,12 +25,15 @@ class ComplaintDetailBloc
   ComplaintDetailsData complaintDetailsData = ComplaintDetailsData();
   int selectedStatusFromDropdown = 0;
   String compId = '';
+  List<TransactionDetailsData> detailsList = [];
+  TransactionDetailsData transactionDetailsData = TransactionDetailsData();
 
   ComplaintDetailBloc(this.complaintDetailsRepository)
       : super(ComplaintDetailState.initial()) {
     on<_GetComplaintDetails>(_getComplaintDetails);
     on<_UpdateComplaint>(_updateComplaint);
     on<_GetService>(_getService);
+    on<_GetTransactionDetails>(_getTransactionDetails);
   }
 
   _getComplaintDetails(
@@ -97,6 +102,23 @@ class ComplaintDetailBloc
     emit(userState);
   }
 
+  _getTransactionDetails(
+      _GetTransactionDetails event, Emitter<ComplaintDetailState> emit) async {
+    emit(state.copyWith(isLoading: true));
+    final Either<ApiErrorHandler, TransactionDetailsResponse> result =
+        await complaintDetailsRepository.getTransactionDetails(
+            token: '', transactionId: event.transactionId);
+    ComplaintDetailState filterState = result.fold((l) {
+      return state.copyWith(isLoading: false, trDetailsOption: Some(Left(l)));
+    }, (r) {
+      detailsList.clear();
+      detailsList.add(r.data!);
+      transactionDetailsData = r.data!;
+      return state.copyWith(isLoading: false, trDetailsOption: Some(Right(r)));
+    });
+    emit(filterState);
+  }
+
   String getTitle(int tabType) {
     if (tabType == 1) {
       return AppString.pending.val;
@@ -109,5 +131,23 @@ class ComplaintDetailBloc
     } else {
       return AppString.onGoing.val;
     }
+  }
+
+  String formatDate(String givenDate) {
+    DateTime dateTime = DateTime.parse(givenDate);
+
+    String dateString = DateFormat('MM/dd/yyyy').format(dateTime);
+    String timeString = DateFormat('HH:mm a').format(dateTime);
+
+    return '$dateString, $timeString';
+  }
+
+  String formatDateToMonthName(String givenDate) {
+    DateTime dateTime = DateTime.parse(givenDate);
+
+    String dateString = DateFormat('MMM d yyyy').format(dateTime);
+    String timeString = DateFormat('HH:mm a').format(dateTime);
+
+    return '$dateString, $timeString';
   }
 }

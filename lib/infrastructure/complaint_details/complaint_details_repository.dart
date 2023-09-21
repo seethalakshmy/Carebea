@@ -9,6 +9,7 @@ import '../../core/custom_debugger.dart';
 import '../../core/enum.dart';
 import '../../domain/complaint_details/i_complaint_details_repo.dart';
 import '../../domain/core/api_client.dart';
+import '../../domain/transaction_management/model/transaction_details_response.dart';
 
 class ComplaintDetailsRepository implements IComplaintDetailsRepo {
   final ApiClient apiClient = ApiClient();
@@ -63,6 +64,28 @@ class ComplaintDetailsRepository implements IComplaintDetailsRepo {
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, TransactionDetailsResponse>>
+      getTransactionDetails(
+          {required String token, required String transactionId}) async {
+    try {
+      final response =
+          await apiClient.getTransactionDetails(token, transactionId);
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverListRepository: ${e.message}");
+
       if (e.message.contains("SocketException")) {
         CustomLog.log("reached here..");
         return Left(ClientFailure(

@@ -121,6 +121,7 @@ enum AppString {
   filter("Filter"),
   lastName("Last Name"),
   answer("Answer"),
+  attachments("Attachments"),
   serviceRequestID("Service Request ID"),
   requestedStartDateTime("Requested Start Date & Time"),
   requestedEndDateTime("Requested End Date & Time"),
