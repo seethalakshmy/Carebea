@@ -364,6 +364,7 @@ enum AppString {
   ifOthersPlzSpecify("If others, please specify"),
   backgroundCheckStatus("Background Check Status"),
   certificateCheckStatus("Certificate Check Status"),
+  complaintStatus("Complaint Status"),
   approve("Approve"),
   approved("Approved"),
   rejected("Rejected"),

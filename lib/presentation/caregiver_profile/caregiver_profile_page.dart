@@ -29,10 +29,8 @@ import '../widget/table_verification_button.dart';
 
 @RoutePage()
 class CareGiverProfilePage extends StatefulWidget {
-  const CareGiverProfilePage({
-    Key? key,
-    @QueryParam('id') this.id = '',
-  }) : super(key: key);
+  const CareGiverProfilePage({Key? key, @QueryParam('id') this.id})
+      : super(key: key);
 
   final String? id;
 
@@ -52,9 +50,9 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
     _tabController = TabController(vsync: this, length: 7);
 
     _userId =
-        autoTabRouter?.currentChild?.queryParams.getString('id', widget.id) ??
-            '';
+        autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? '';
     // _careGiverProfileBloc = CareGiverProfileBloc(CareGiverProfileRepository());
+    print("user id in profile : $_userId");
     super.initState();
     context
         .read<CareGiverProfileBloc>()
@@ -250,6 +248,7 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
               top: 5,
               left: 174,
               child: TableVerificationButton(
+                  userId: _userId,
                   verificationStatus: state.status ?? 0,
                   isStatusChangeWidget: true,
                   onStatusChange: () {

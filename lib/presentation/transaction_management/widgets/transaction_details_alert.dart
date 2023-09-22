@@ -29,25 +29,11 @@ class TransactionDetailsAlert extends StatelessWidget {
             child: transactionBloc.state.isDetailsLoading
                 ? const CustomShimmerWidget.rectangular(height: double.infinity)
                 : Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.start,
+                    alignment: WrapAlignment.start,
                     children: [
-                      Responsive.isWeb(context)
-                          ? Row(
-                              children: [
-                                _detailsWidget(context),
-                                _refundWidget(transactionBloc.state)
-                              ],
-                            )
-                          : SizedBox(
-                              height: 480,
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    _detailsWidget(context),
-                                    _refundWidget(transactionBloc.state)
-                                  ],
-                                ),
-                              ),
-                            ),
+                      _detailsWidget(context),
+                      _refundDetailsWidget(context)
                     ],
                   ),
           );
@@ -73,24 +59,27 @@ class TransactionDetailsAlert extends StatelessWidget {
           ),
         ),
         item?.status?.id == 1 || item?.status?.id == 2
-            ? Row(
-                children: [
-                  CustomText(
-                    ":  ",
-                    softWrap: true,
-                    style: TS().gRoboto(
-                      fontSize: Responsive.isWeb(context)
-                          ? FS.font14.val
-                          : FS.font13.val,
-                      fontWeight: FW.w400.val,
+            ? Expanded(
+                child: Row(
+                  children: [
+                    CustomText(
+                      ":  ",
+                      softWrap: true,
+                      style: TS().gRoboto(
+                        fontSize: Responsive.isWeb(context)
+                            ? FS.font14.val
+                            : FS.font13.val,
+                        fontWeight: FW.w400.val,
+                      ),
                     ),
-                  ),
-                  CustomStatusWidget(
-                    statusName: item?.status?.name ?? "",
-                    isCompleted: item?.status?.id == 1 || item?.status?.id == 2,
-                    isFromDetails: true,
-                  )
-                ],
+                    CustomStatusWidget(
+                      statusName: item?.status?.name ?? "",
+                      isCompleted:
+                          item?.status?.id == 1 || item?.status?.id == 2,
+                      isFromDetails: true,
+                    )
+                  ],
+                ),
               )
             : CustomText(
                 ":  $detail",
@@ -107,9 +96,7 @@ class TransactionDetailsAlert extends StatelessWidget {
 
   Widget _detailsWidget(BuildContext context) {
     return Container(
-      width: Responsive.isWeb(context)
-          ? MediaQuery.of(context).size.width * .35
-          : double.infinity,
+      width: 400,
       color: AppColor.white.val,
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -166,7 +153,7 @@ class TransactionDetailsAlert extends StatelessWidget {
           const CustomSizedBox(height: 7),
           _detailRow(
               "Status",
-              transactionBloc.transactionDetailsData.status!.name ?? "",
+              transactionBloc.transactionDetailsData.status?.name ?? "",
               transactionBloc.transactionDetailsData,
               context),
         ],
@@ -264,6 +251,111 @@ class TransactionDetailsAlert extends StatelessWidget {
               ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _refundDetailsWidget(BuildContext context) {
+    return CustomContainer(
+      width: 300,
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomText(
+            AppString.refundStatus.val,
+            style: TS().gRoboto(
+                fontSize: FS.font16.val,
+                fontWeight: FW.w500.val,
+                color: AppColor.black.val),
+          ),
+          CustomSizedBox(height: DBL.ten.val),
+          ListView.builder(
+              itemCount: BlocProvider.of<TransactionManagementBloc>(context)
+                  .detailsList[0]
+                  .refund!
+                  .paymentStatus!
+                  .length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      children: [
+                        const CircleAvatar(
+                          backgroundColor: Colors.green,
+                          radius: 6,
+                        ),
+                        index + 1 <
+                                BlocProvider.of<TransactionManagementBloc>(
+                                        context)
+                                    .detailsList[0]
+                                    .refund!
+                                    .paymentStatus!
+                                    .length
+                            ? Container(
+                                width: 5,
+                                color: AppColor.lightGrey.val,
+                                height: 60,
+                              )
+                            : Container()
+                      ],
+                    ),
+                    CustomSizedBox(width: DBL.ten.val),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                          BlocProvider.of<TransactionManagementBloc>(context)
+                                  .detailsList[0]
+                                  .refund!
+                                  .paymentStatus![index]
+                                  .date ??
+                              "",
+                          style: TS().gRoboto(
+                              fontSize: FS.font12.val,
+                              fontWeight: FW.w400.val,
+                              color: AppColor.black4.val),
+                        ),
+                        CustomSizedBox(height: DBL.ten.val),
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 10.0, bottom: 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomText(
+                                BlocProvider.of<TransactionManagementBloc>(
+                                            context)
+                                        .detailsList[0]
+                                        .refund!
+                                        .paymentStatus![index]
+                                        .title ??
+                                    "",
+                                style: TS().gRoboto(
+                                    fontSize: FS.font12.val,
+                                    fontWeight: FW.w400.val,
+                                    color: AppColor.lightGrey2.val),
+                              ),
+                              CustomSizedBox(height: DBL.five.val),
+                              CustomText(
+                                "Txn Id : ${BlocProvider.of<TransactionManagementBloc>(context).detailsList[0].refund!.paymentStatus![index].paymentLogTxnId ?? ""}",
+                                style: TS().gRoboto(
+                                    fontSize: FS.font12.val,
+                                    fontWeight: FW.w400.val,
+                                    color: AppColor.lightGrey2.val),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                );
+              }),
         ],
       ),
     );

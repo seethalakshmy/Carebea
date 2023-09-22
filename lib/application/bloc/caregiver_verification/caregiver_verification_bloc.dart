@@ -313,7 +313,7 @@ class CareGiverVerificationBloc
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
-        autoTabRouter?.navigate(CareGiverProfileRoute());
+        autoTabRouter?.navigate(CareGiverProfileRoute(id: event.userId));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
@@ -414,8 +414,8 @@ class CareGiverVerificationBloc
                   onTap: () {
                     showGeneralDialog(
                       context: context,
-                      pageBuilder: (BuildContext buildContext, Animation animation,
-                          Animation secondaryAnimation) {
+                      pageBuilder: (BuildContext buildContext,
+                          Animation animation, Animation secondaryAnimation) {
                         return CustomAlertDialogWidget(
                             showHeading: false,
                             width: 700,
@@ -496,8 +496,8 @@ class CareGiverVerificationBloc
                   onTap: () {
                     showGeneralDialog(
                       context: context,
-                      pageBuilder: (BuildContext buildContext, Animation animation,
-                          Animation secondaryAnimation) {
+                      pageBuilder: (BuildContext buildContext,
+                          Animation animation, Animation secondaryAnimation) {
                         return CustomAlertDialogWidget(
                             showHeading: false,
                             width: 700,
