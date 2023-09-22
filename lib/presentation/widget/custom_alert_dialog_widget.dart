@@ -37,6 +37,24 @@ class CustomAlertDialogWidget extends StatelessWidget {
       backgroundColor: Colors.transparent,
       child: Wrap(
         children: [
+          showHeading!
+              ? _headerWidget(context, heading)
+              : Padding(
+                  padding: const EdgeInsets.only(top: 20.0, right: 20.0),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: InkWell(
+                      child: CustomIcon(
+                        icon: Icons.close,
+                        size: DBL.twenty.val,
+                        color: AppColor.black.val,
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                ),
           Container(
             width: width ?? 1072,
             height: height ?? 550,
@@ -56,28 +74,7 @@ class CustomAlertDialogWidget extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  showHeading!
-                      ? _headerWidget(context, heading)
-                      : Padding(
-                          padding:
-                              const EdgeInsets.only(top: 20.0, right: 20.0),
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: InkWell(
-                              child: CustomIcon(
-                                icon: Icons.close,
-                                size: DBL.twenty.val,
-                                color: AppColor.black.val,
-                              ),
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
-                        ),
-                  Center(child: child)
-                ],
+                children: [Center(child: child)],
               ),
             ),
           ),

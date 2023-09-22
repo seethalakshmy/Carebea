@@ -563,7 +563,8 @@ class _AdminsPageState extends State<AdminsPage> {
     BuildContext context,
     String adminID,
   ) {
-    showGeneralDialog(
+    showGeneralDialog(barrierLabel: "",
+      barrierDismissible: true,
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {

@@ -7,7 +7,6 @@ import '../../../domain/core/api_error_handler/api_error_handler.dart';
 import '../../../domain/transaction_management/model/get_filters_response.dart';
 import '../../../domain/transaction_management/model/transaction_details_response.dart';
 import '../../../domain/transaction_management/model/transaction_list_response.dart';
-import '../../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../../infrastructure/transaction_management/transactions_repository.dart';
 
 part 'transaction_management_bloc.freezed.dart';
@@ -110,8 +109,11 @@ class TransactionManagementBloc
             transactionId: event.transactionId,
             serviceId: event.serviceId);
     TransactionManagementState filterState = result.fold((l) {
+      print("this is workng");
       return state.copyWith(
-          isDetailsLoading: false, trDetailsOption: Some(Left(l)));
+          isDetailsLoading: false,
+          trDetailsOption: Some(Left(l)),
+          error: l.error);
     }, (r) {
       detailsList.clear();
       detailsList.add(r.data!);

@@ -704,7 +704,7 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
                     id: userId,
                   )));
         });
-    // showGeneralDialog(
+    // showGeneralDialog(barrierDismissible: true,barrierLabel: "",
     //   context: context,
     //   pageBuilder: (BuildContext buildContext, Animation animation,
     //       Animation secondaryAnimation) {
