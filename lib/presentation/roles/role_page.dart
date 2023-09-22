@@ -390,6 +390,8 @@ class _RolesPageState extends State<RolesPage> {
     String roleId,
   ) {
     showGeneralDialog(
+      barrierLabel: "",
+      barrierDismissible: true,
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {

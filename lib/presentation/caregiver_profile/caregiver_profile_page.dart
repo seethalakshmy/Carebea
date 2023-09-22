@@ -198,6 +198,8 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
                         CachedImage(
                           onTap: () {
                             showGeneralDialog(
+                              barrierLabel: "",
+                              barrierDismissible: true,
                               context: context,
                               pageBuilder: (BuildContext buildContext,
                                   Animation animation,

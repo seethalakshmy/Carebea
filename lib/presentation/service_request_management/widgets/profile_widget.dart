@@ -60,6 +60,8 @@ class ProfileWidget extends StatelessWidget {
       child: CachedImage(
           onTap: () {
             showGeneralDialog(
+              barrierLabel: "",
+              barrierDismissible: true,
               context: context,
               pageBuilder: (BuildContext buildContext, Animation animation,
                   Animation secondaryAnimation) {

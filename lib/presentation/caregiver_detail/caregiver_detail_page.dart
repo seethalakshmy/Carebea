@@ -482,6 +482,8 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
     return CachedImage(
       onTap: () {
         showGeneralDialog(
+          barrierLabel: "",
+          barrierDismissible: true,
           context: context,
           pageBuilder: (BuildContext buildContext, Animation animation,
               Animation secondaryAnimation) {
