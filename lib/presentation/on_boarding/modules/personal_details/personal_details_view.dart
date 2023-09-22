@@ -373,7 +373,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         state.isInitialLoading
             ? CustomShimmerWidget.rectangular(
                 height: DBL.twenty.val, width: DBL.hundred.val)
-            : _labelWidget(AppString.address.val),
+            : _labelWidget(AppString.addressLine1.val),
         CustomSizedBox(height: DBL.twelve.val),
         state.isInitialLoading
             ? CustomShimmerWidget.rectangular(
@@ -388,7 +388,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                       color: AppColor.label.val,
                       fontSize: FS.font16.val),
                   validator: (val) {
-                    if (val == null || val.isEmpty) {
+                    if (val?.trim() == null || val!.trim().isEmpty) {
                       return AppString.emptyAddress.val;
                     }
                     return null;
@@ -441,15 +441,15 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           state.isInitialLoading
               ? CustomShimmerWidget.rectangular(
                   height: DBL.twenty.val, width: DBL.hundred.val)
-              : _labelWidget(AppString.street.val),
+              : _labelWidget(AppString.addressLine2.val),
           CustomSizedBox(height: DBL.twelve.val),
           state.isInitialLoading
               ? CustomShimmerWidget.rectangular(
                   height: DBL.fifty.val, width: DBL.twoEighty.val)
               : CTextField(
                   controller: streetController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
+                  validator: (val) {
+                    if (val?.trim() == null || val!.trim().isEmpty) {
                       return AppString.emptyStreet.val;
                     }
                     return null;
@@ -692,6 +692,9 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   }
 
   checkInputData() {
+    addressLineController.text = addressLineController.text.trim();
+    documentNumberController.text = documentNumberController.text.trim();
+    streetController.text = streetController.text.trim();
     if (_validateMode != AutovalidateMode.always) {
       formValidationBloc.add(const FormValidationEvent.submit());
       formValidationBloc.add(const FormValidationEvent.dropDown("true"));

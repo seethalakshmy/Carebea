@@ -111,7 +111,7 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
                 child: InkWell(
                   onTap: _toggleDropdown,
                   child: Container(
-                    padding: EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(6),
@@ -141,10 +141,10 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
                             _isOpen
                                 ? ""
                                 : widget.items[_currentIndex].value.toString(),
-                            style: TextStyle(color: Colors.black),
+                            style: const TextStyle(color: Colors.black),
                           )
                         ],
-                        if (!widget.hideIcon) Spacer(),
+                        if (!widget.hideIcon) const Spacer(),
                         RotationTransition(
                           turns: _rotateAnimation!,
                           child: widget.icon ??

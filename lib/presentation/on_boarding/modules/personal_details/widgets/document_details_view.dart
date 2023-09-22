@@ -135,7 +135,7 @@ class DocumentDetailsView extends StatelessWidget {
             hintStyle: TS()
                 .gRoboto(color: AppColor.label.val, fontSize: FS.font18.val),
             validator: (val) {
-              if (val == null || val.isEmpty) {
+              if (val?.trim() == null || val!.trim().isEmpty) {
                 return AppString.emptyDocNo.val;
               }
               return null;
