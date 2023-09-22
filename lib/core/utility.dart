@@ -35,7 +35,7 @@ class Utility {
 
   static Future<String> selectDate(BuildContext context, DateTime initialDate,
       DateTime firstDate, DateTime lastDate) async {
-    final DateFormat formatter = DateFormat('dd/MM/yyyy');
+    final DateFormat formatter = DateFormat('MM/dd/yyyy');
     DateTime? picked = await showDatePicker(
         context: context,
         initialDate: initialDate,

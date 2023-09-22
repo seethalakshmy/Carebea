@@ -6,5 +6,6 @@ class CaregiverCreationEvent with _$CaregiverCreationEvent {
       {required String firstName,
       required String lastName,
       required String email,
-      required String mobileNo}) = _CreateCaregiver;
+      required String mobileNo,
+      required BuildContext context}) = _CreateCaregiver;
 }
