@@ -59,6 +59,7 @@ class Data {
     dynamic agreement,
     int? serviceCompleted,
     int? cancelledRequests,
+    int? profileCompletionPercentage,
     double? averageReview,
     int? reviewCount,
     Name? name,
@@ -81,6 +82,7 @@ class Data {
     _averageReview = averageReview;
     _reviewCount = reviewCount;
     _name = name;
+    _profileCompletionPercentage = profileCompletionPercentage;
     _profilePic = profilePic;
     _personalDetails1 = personalDetails1;
     _documentDetails2 = documentDetails2;
@@ -104,6 +106,7 @@ class Data {
     _averageReview = json['average_review'];
     _reviewCount = json['review_count'];
     _profilePic = json['profile_pic'];
+    _profileCompletionPercentage = json['profile_completion_percentage'];
     _name = json['name'] != null ? Name.fromJson(json['name']) : null;
     _personalDetails1 = json['personal_details'] != null
         ? PersonalDetails1.fromJson(json['personal_details'])
@@ -131,6 +134,7 @@ class Data {
   dynamic _agreement;
   int? _serviceCompleted;
   int? _cancelledRequests;
+  int? _profileCompletionPercentage;
   double? _averageReview;
   int? _reviewCount;
   String? _profilePic;
@@ -154,6 +158,7 @@ class Data {
     double? averageReview,
     int? reviewCount,
     Name? name,
+    int? profileCompletionPercentage,
     PersonalDetails1? personalDetails1,
     DocumentDetails2? documentDetails2,
     PersonalDetails2? personalDetails2,
@@ -173,6 +178,8 @@ class Data {
         averageReview: averageReview ?? _averageReview,
         reviewCount: reviewCount ?? _reviewCount,
         name: name ?? _name,
+        profileCompletionPercentage:
+            profileCompletionPercentage ?? _profileCompletionPercentage,
         profilePic: profilePic ?? _profilePic,
         personalDetails1: personalDetails1 ?? _personalDetails1,
         documentDetails2: documentDetails2 ?? _documentDetails2,
@@ -192,6 +199,7 @@ class Data {
   double? get averageReview => _averageReview;
   int? get reviewCount => _reviewCount;
   Name? get name => _name;
+  int? get profileCompletionPercentage => _profileCompletionPercentage;
   String? get profilePic => _profilePic;
   PersonalDetails1? get personalDetails => _personalDetails1;
   DocumentDetails2? get documentDetails2 => _documentDetails2;
@@ -215,6 +223,7 @@ class Data {
     map['average_review'] = _averageReview;
     map['review_count'] = _reviewCount;
     map['profile_pic'] = _profilePic;
+    map['profile_completion_percentage'] = _profileCompletionPercentage;
     if (_name != null) {
       map['name'] = _name?.toJson();
     }

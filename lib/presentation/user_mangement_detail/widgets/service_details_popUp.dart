@@ -211,9 +211,8 @@ class ServiceDetailsPopUp extends StatelessWidget {
               ),
               Flexible(
                   child: _tableRowImage(context,
-                      name: (services.caregiver?.firstName?.name?.firstName ??
-                              '') +
-                          (services.caregiver?.lastName?.name?.lastName ?? ''),
+                      name: (services.caregiver?.firstName ?? '') +
+                          (services.caregiver?.lastName ?? ''),
                       imgUrl: services.caregiver?.profilePic ?? ''))
             ],
           ),
@@ -376,7 +375,8 @@ class ServiceDetailsPopUp extends StatelessWidget {
         _dataView(
             label: AppString.serviceCompleted.val,
             value: '',
-            list: services.caregiver?.completedServices?.tier1),
+            serviceListOne: services.caregiver?.completedServices?.tier1,
+        serviceListTwo: services.caregiver?.completedServices?.tier2),
         _dataView(
             hasColon: false,
             label: '',
@@ -388,12 +388,7 @@ class ServiceDetailsPopUp extends StatelessWidget {
         _dataView(
             label: AppString.serviceInComplete.val,
             value: '',
-            list: services.caregiver?.notcompletedServices?.tier1),
-        _dataView(
-            label: '',
-            value: '',
-            hasColon: false,
-            list: services.caregiver?.notcompletedServices?.tier2),
+            : services.caregiver?.notcompletedServices?.tier1),
       ],
     );
   }
@@ -440,12 +435,14 @@ class ServiceDetailsPopUp extends StatelessWidget {
   RowColonCombo _dataView(
       {required String label,
       required String value,
-      List<String>? list,
+      List<TierOne>? serviceListOne,
+      List<TierTwo>? serviceListTwo,
       bool? hasColon}) {
     return RowColonCombo.threeSeventy(
         label: label,
         value: value,
-        list: list,
+        tierOneServiceList: serviceListOne,
+        tierTwoServiceList: serviceListTwo,
         hasColon: hasColon ?? true,
         fontSize: FS.font13PointFive.val);
   }

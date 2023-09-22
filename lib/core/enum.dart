@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 enum AppString {
   userId("USER ID"),
   subProfileDetails('SubProfile Details'),
+  noTransactions("No Transactions"),
   primaryEmergencyContact("Primary Emergency Contact"),
   secondaryEmergencyContact("Secondary Emergency Contact"),
   physicianContact("Primary Care Physician Contact"),

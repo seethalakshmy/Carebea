@@ -177,7 +177,7 @@ class ServiceView extends StatelessWidget {
               )),
               DataCell(_tableRowImage(context,
                   name:
-                      "${item.caregiver?.firstName?.name?.firstName} ${item.caregiver?.firstName?.name?.lastName}",
+                      "${item.caregiver?.firstName} ${item.caregiver?.lastName}",
                   imgUrl: item.caregiver?.profilePic ?? "")),
               DataCell(_rowsView(context,
                   text: Utility.serviceDate(

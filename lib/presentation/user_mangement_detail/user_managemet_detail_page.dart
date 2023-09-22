@@ -1,6 +1,7 @@
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_view.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/transactions_view.dart';
+import 'package:admin_580_tech/presentation/widget/custom_image.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:admin_580_tech/application/bloc/user_management_detail/user_management_detail_bloc.dart';
 import 'package:admin_580_tech/core/custom_debugger.dart';
@@ -24,6 +25,7 @@ import '../../core/responsive.dart';
 import '../caregiver_detail/widgets/service_completion_and_rewards.dart';
 import '../caregiver_detail/widgets/svg_text.dart';
 import '../side_menu/side_menu_page.dart';
+import '../widget/cached_image.dart';
 
 @RoutePage()
 class UserManagementDetailPage extends StatefulWidget {
@@ -77,6 +79,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
     UserDetailResponse? response = state.response;
     print('testing${state.response?.data?.name?.firstName}');
     print('testing${userId}');
+    print(state.response?.data?.profilePic);
 
     return CustomSizedBox(
       height: MediaQuery.of(context).size.height,
@@ -120,12 +123,11 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            CustomSvg(
-                                              path: state.response?.data
-                                                      ?.profilePic ??
-                                                  IMG.profilePlaceHolder.val,
+                                            CachedImage(
                                               width: isXs(context) ? 150 : 200,
                                               height: isXs(context) ? 125 : 175,
+                                              imgUrl: state
+                                                  .response?.data?.profilePic,
                                             ),
 
                                             ///Todo change later

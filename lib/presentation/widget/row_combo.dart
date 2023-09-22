@@ -2,6 +2,7 @@ import 'package:admin_580_tech/domain/subProfile_details/model/sub_profile_detai
 import 'package:flutter/material.dart';
 
 import '../../core/enum.dart';
+import '../../domain/user_management_detail/model/client_service_response.dart';
 import 'alert_text_label.dart';
 import 'custom_text.dart';
 
@@ -12,6 +13,8 @@ class RowColonCombo extends StatelessWidget {
     required this.value,
     this.list,
     this.petList,
+    this.tierOneServiceList,
+    this.tierTwoServiceList,
     this.fontSize,
     this.color,
     this.valueColor,
@@ -26,6 +29,8 @@ class RowColonCombo extends StatelessWidget {
   final String value;
   final bool hasColon;
   final List<dynamic>? list;
+  final List<TierOne>? tierOneServiceList;
+  final List<TierTwo>? tierTwoServiceList;
   final List<Pet>? petList;
   final String label;
   final Color? color;
@@ -52,6 +57,8 @@ class RowColonCombo extends StatelessWidget {
     this.customWidthLg1,
     this.needUnderLine = false,
     this.hasColon = true,
+    this.tierOneServiceList,
+    this.tierTwoServiceList,
   }) : width = DBL.twoHundred.val;
 
   RowColonCombo.threeEighty(
@@ -67,7 +74,9 @@ class RowColonCombo extends StatelessWidget {
       this.fontWeight,
       this.customWidthLg1,
       this.needUnderLine = false,
-      this.hasColon = true})
+      this.hasColon = true,
+      this.tierOneServiceList,
+      this.tierTwoServiceList})
       : width = DBL.threeEighty.val;
 
   RowColonCombo.threeSeventy(
@@ -83,7 +92,9 @@ class RowColonCombo extends StatelessWidget {
       this.fontWeight,
       this.customWidthLg1,
       this.needUnderLine = false,
-      this.hasColon = true})
+      this.hasColon = true,
+      this.tierOneServiceList,
+      this.tierTwoServiceList})
       : width = DBL.threeSeventeen.val;
 
   @override
@@ -127,6 +138,36 @@ class RowColonCombo extends StatelessWidget {
                     ?.map(
                       (e) => AlertTextLabel(
                         e,
+                        color: color,
+                        fontWeight: fontWeight,
+                        fontSize: fontSize,
+                      ),
+                    )
+                    .toList() ??
+                [],
+          ),
+        ),
+        Flexible(
+          child: Wrap(
+            children: tierOneServiceList
+                    ?.map(
+                      (e) => AlertTextLabel(
+                        e.serviceName ?? '',
+                        color: color,
+                        fontWeight: fontWeight,
+                        fontSize: fontSize,
+                      ),
+                    )
+                    .toList() ??
+                [],
+          ),
+        ),
+        Flexible(
+          child: Wrap(
+            children: tierTwoServiceList
+                    ?.map(
+                      (e) => AlertTextLabel(
+                        e.serviceName ?? '',
                         color: color,
                         fontWeight: fontWeight,
                         fontSize: fontSize,
