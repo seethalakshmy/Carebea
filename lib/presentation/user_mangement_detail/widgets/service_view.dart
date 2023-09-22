@@ -112,12 +112,6 @@ class ServiceView extends StatelessWidget {
             label: _columnsView(context,
                 text: AppString.slNo.val, fontWeight: FontWeight.bold),
           ),
-          // DataColumn2(
-          //   size: ColumnSize.S,
-          //   fixedWidth: 80,
-          //   label: _columnsView(context,
-          //       text: AppString.id.val, fontWeight: FontWeight.bold),
-          // ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
@@ -129,11 +123,6 @@ class ServiceView extends StatelessWidget {
                 text: AppString.careAmbassador.val,
                 fontWeight: FontWeight.bold),
           ),
-          // DataColumn2(
-          //   size: ColumnSize.L,
-          //   label: _columnsView(context,
-          //       text: AppString.service.val, fontWeight: FontWeight.bold),
-          // ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
@@ -151,33 +140,17 @@ class ServiceView extends StatelessWidget {
             label: _columnsView(context,
                 text: AppString.serviceFee.val, fontWeight: FontWeight.bold),
           ),
-          // DataColumn2(
-          //   size: ColumnSize.L,
-          //   label: _columnsView(context,
-          //       text: AppString.extraFee.val, fontWeight: FontWeight.bold),
-          // ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
                 text: AppString.tip.val, fontWeight: FontWeight.bold),
           ),
-          // DataColumn2(
-          //   size: ColumnSize.L,
-          //   label: _columnsView(context,
-          //       text: AppString.refund.val, fontWeight: FontWeight.bold),
-          // ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
                 text: AppString.reviewFromClient.val,
                 fontWeight: FontWeight.bold),
           ),
-          // DataColumn2(
-          //   size: ColumnSize.L,
-          //   label: _columnsView(context,
-          //       text: AppString.feedbackFromClient.val,
-          //       fontWeight: FontWeight.bold),
-          // ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
@@ -197,23 +170,15 @@ class ServiceView extends StatelessWidget {
                 context,
                 text: getIndex(e.key).toString(),
               )),
-              // DataCell(_rowsView(
-              //   context,
-              //   text: item.id.toString(),
-              // )),
               DataCell(_tableRowImage(
                 context,
                 name: "${item.client?.firstName} ${item.client?.lastName}",
                 imgUrl: item.client?.profilePic ?? "",
               )),
-              DataCell(_tableRowImage(
-                context,
-                name: "",
-                // "${item.caregiver?.firstName?.name?.firstName} ${item.caregiver?.firstName?.name?.lastName}",
-                imgUrl: ""
-                    "item.caregiver?.profilePic ?? "
-                    "",
-              )),
+              DataCell(_tableRowImage(context,
+                  name:
+                      "${item.caregiver?.firstName?.name?.firstName} ${item.caregiver?.firstName?.name?.lastName}",
+                  imgUrl: item.caregiver?.profilePic ?? "")),
               DataCell(_rowsView(context,
                   text: Utility.serviceDate(
                       DateTime.parse(item.startDateTime ?? '')))),

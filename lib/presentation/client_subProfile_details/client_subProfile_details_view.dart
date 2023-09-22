@@ -17,6 +17,7 @@ import 'package:admin_580_tech/presentation/widget/loader_view.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
@@ -124,62 +125,13 @@ class _ClientSubProfileDetailsPageState
                                               path: state.response?.data
                                                       ?.profilePic ??
                                                   IMG.profilePlaceHolder.val,
-                                              width: isXs(context) ? 150 : 200,
+                                              width: isXs(context) ? 150 : 150,
                                               height: isXs(context) ? 125 : 175,
                                             ),
 
                                             ///Todo change later
                                             // CustomSizedBox(
                                             //   height: DBL.forty.val,
-                                            // ),
-                                            // Row(
-                                            //     mainAxisAlignment:
-                                            //         MainAxisAlignment
-                                            //             .spaceBetween,
-                                            //     children: [
-                                            //       CustomText3(
-                                            //         AppString.profileCompletion.val,
-                                            //         style: TS().gRoboto(
-                                            //             fontWeight: FW.w500.val,
-                                            //             fontSize: getFontSize(
-                                            //               context,
-                                            //               fontSize:
-                                            //                   FS.font14.val,
-                                            //             ),
-                                            //             color: AppColor
-                                            //                 .lightGrey4.val),
-                                            //       ),
-                                            //       CustomSizedBox(
-                                            //         width: DBL.five.val,
-                                            //       ),
-                                            //       CustomText3(
-                                            //         response.user
-                                            //                 ?.profileCompletion ??
-                                            //             "",
-                                            //         style: TS().gRoboto(
-                                            //             fontWeight: FW.w500.val,
-                                            //             fontSize: getFontSize(
-                                            //               context,
-                                            //               fontSize:
-                                            //                   FS.font14.val,
-                                            //             ),
-                                            //             color: AppColor
-                                            //                 .primaryColor.val),
-                                            //       )
-                                            //     ]),
-                                            // CustomSizedBox(
-                                            //   height: DBL.thirteen.val,
-                                            // ),
-                                            // LinearPercentIndicator(
-                                            //   padding: const EdgeInsets.all(0),
-                                            //   barRadius:
-                                            //       const Radius.circular(10),
-                                            //   width:
-                                            //       isXs(context) ? 150.0 : 200.0,
-                                            //   lineHeight: 6.0,
-                                            //   percent: 0.5,
-                                            //   progressColor:
-                                            //       AppColor.green2.val,
                                             // ),
                                           ],
                                         ),
@@ -229,6 +181,47 @@ class _ClientSubProfileDetailsPageState
                                             ),
                                             CustomSizedBox(
                                               height: DBL.seventeen.val,
+                                            ),
+                                            Row(children: [
+                                              CustomText(
+                                                AppString.profileCompletion.val,
+                                                style: TS().gRoboto(
+                                                    fontWeight: FW.w500.val,
+                                                    fontSize: getFontSize(
+                                                      context,
+                                                      fontSize: FS.font14.val,
+                                                    ),
+                                                    color: AppColor
+                                                        .lightGrey4.val),
+                                              ),
+                                              CustomSizedBox(
+                                                width: DBL.five.val,
+                                              ),
+                                              CustomText(
+                                                '10',
+                                                style: TS().gRoboto(
+                                                    fontWeight: FW.w500.val,
+                                                    fontSize: getFontSize(
+                                                      context,
+                                                      fontSize: FS.font14.val,
+                                                    ),
+                                                    color: AppColor
+                                                        .primaryColor.val),
+                                              )
+                                            ]),
+                                            // CustomSizedBox(
+                                            //   height: DBL.thirteen.val,
+                                            // ),
+                                            LinearPercentIndicator(
+                                              padding: const EdgeInsets.all(0),
+                                              barRadius:
+                                                  const Radius.circular(10),
+                                              width:
+                                                  isXs(context) ? 150.0 : 200.0,
+                                              lineHeight: 6.0,
+                                              percent: 0.5,
+                                              progressColor:
+                                                  AppColor.green2.val,
                                             ),
                                             // SVGText(
                                             //   path: IMG.location.val,

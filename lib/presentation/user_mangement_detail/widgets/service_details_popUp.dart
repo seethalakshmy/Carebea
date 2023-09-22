@@ -263,12 +263,26 @@ class ServiceDetailsPopUp extends StatelessWidget {
                     //     "",
                     fontSize: FS.font13PointFive.val),
               ),
+            ],
+          ),
+          Row(
+            children: [
+              const Expanded(child: SizedBox()),
               !isLg(context)
                   ? Expanded(
-                      child: _dataView(
-                          label: AppString.serviceCompleted.val,
-                          value: 'No value'),
-                    )
+                      child: Column(
+                      children: [
+                        RowColonCombo.threeSeventy(
+                            label: AppString.serviceCompleted.val,
+                            value: '',
+                            list: services.caregiver?.completedServices?.tier1),
+                        RowColonCombo.threeSeventy(
+                            hasColon: false,
+                            label: '',
+                            value: '',
+                            list: services.caregiver?.completedServices?.tier2),
+                      ],
+                    ))
                   : CustomSizedBox.shrink(),
             ],
           ),
@@ -292,10 +306,21 @@ class ServiceDetailsPopUp extends StatelessWidget {
               ),
               !isLg(context)
                   ? Expanded(
-                      child: _dataView(
-                          label: AppString.serviceInComplete.val,
-                          value: 'No value'),
-                    )
+                      child: Column(
+                      children: [
+                        RowColonCombo.threeSeventy(
+                            label: AppString.serviceInComplete.val,
+                            value: '',
+                            list: services
+                                .caregiver?.notcompletedServices?.tier1),
+                        RowColonCombo.threeSeventy(
+                            hasColon: false,
+                            label: '',
+                            value: '',
+                            list: services
+                                .caregiver?.notcompletedServices?.tier2),
+                      ],
+                    ))
                   : CustomSizedBox.shrink(),
             ],
           ),
@@ -348,11 +373,27 @@ class ServiceDetailsPopUp extends StatelessWidget {
         CustomSizedBox(
           height: DBL.six.val,
         ),
-        _dataView(label: AppString.serviceCompleted.val, value: ''),
+        _dataView(
+            label: AppString.serviceCompleted.val,
+            value: '',
+            list: services.caregiver?.completedServices?.tier1),
+        _dataView(
+            hasColon: false,
+            label: '',
+            value: '',
+            list: services.caregiver?.completedServices?.tier2),
         CustomSizedBox(
           height: DBL.six.val,
         ),
-        _dataView(label: AppString.serviceInComplete.val, value: ''),
+        _dataView(
+            label: AppString.serviceInComplete.val,
+            value: '',
+            list: services.caregiver?.notcompletedServices?.tier1),
+        _dataView(
+            label: '',
+            value: '',
+            hasColon: false,
+            list: services.caregiver?.notcompletedServices?.tier2),
       ],
     );
   }
@@ -396,9 +437,17 @@ class ServiceDetailsPopUp extends StatelessWidget {
     );
   }
 
-  RowColonCombo _dataView({required String label, required String value}) {
+  RowColonCombo _dataView(
+      {required String label,
+      required String value,
+      List<String>? list,
+      bool? hasColon}) {
     return RowColonCombo.threeSeventy(
-        label: label, value: value, fontSize: FS.font13PointFive.val);
+        label: label,
+        value: value,
+        list: list,
+        hasColon: hasColon ?? true,
+        fontSize: FS.font13PointFive.val);
   }
 
   double getFontSize(BuildContext context, {required double fontSize}) {
