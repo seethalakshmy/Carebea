@@ -179,42 +179,44 @@ class SubProfileView extends StatelessWidget {
               height: DBL.thirty.val, width: DBL.thirty.val, imgUrl: imgUrl),
         ),
         CustomSizedBox(width: DBL.twelve.val),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomSizedBox(
-              height: DBL.ten.val,
-            ),
-            Expanded(
-              flex: 1,
-              child: CustomText(
-                name,
-                style: TS().gRoboto(
-                    fontSize: Responsive.isWeb(context)
-                        ? DBL.fourteen.val
-                        : DBL.twelve.val,
-                    fontWeight: FW.w400.val,
-                    color: AppColor.rowColor.val),
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomSizedBox(
+                height: DBL.ten.val,
               ),
-            ),
-            CustomSizedBox(
-              height: DBL.three.val,
-            ),
-            Expanded(
-              flex: 2,
-              child: age != ''
-                  ? CustomText(
-                      "(${age.toString()})",
-                      style: TS().gRoboto(
-                          fontSize: Responsive.isWeb(context)
-                              ? DBL.thirteen.val
-                              : DBL.eleven.val,
-                          fontWeight: FW.w400.val,
-                          color: AppColor.lightGrey7.val),
-                    )
-                  : SizedBox.shrink(),
-            ),
-          ],
+              Expanded(
+                flex: 1,
+                child: CustomText(
+                  name,
+                  style: TS().gRoboto(
+                      fontSize: Responsive.isWeb(context)
+                          ? DBL.fourteen.val
+                          : DBL.twelve.val,
+                      fontWeight: FW.w400.val,
+                      color: AppColor.rowColor.val),
+                ),
+              ),
+              CustomSizedBox(
+                height: DBL.three.val,
+              ),
+              Expanded(
+                flex: 2,
+                child: age != ''
+                    ? CustomText(
+                        "(${age.toString()})",
+                        style: TS().gRoboto(
+                            fontSize: Responsive.isWeb(context)
+                                ? DBL.thirteen.val
+                                : DBL.eleven.val,
+                            fontWeight: FW.w400.val,
+                            color: AppColor.lightGrey7.val),
+                      )
+                    : SizedBox.shrink(),
+              ),
+            ],
+          ),
         ),
       ],
     );
