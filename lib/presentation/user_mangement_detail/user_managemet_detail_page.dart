@@ -1,23 +1,21 @@
-import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
-import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_view.dart';
-import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/transactions_view.dart';
-import 'package:admin_580_tech/presentation/widget/custom_image.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:admin_580_tech/application/bloc/user_management_detail/user_management_detail_bloc.dart';
 import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/properties.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/infrastructure/user_management_detail/user_management_detail_repository.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/views/payment_method_view.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/views/sub_profile_view.dart';
+import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_view.dart';
+import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/transactions_view.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
-import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:admin_580_tech/presentation/widget/loader_view.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -129,60 +127,6 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                               imgUrl: state
                                                   .response?.data?.profilePic,
                                             ),
-
-                                            ///Todo change later
-                                            // CustomSizedBox(
-                                            //   height: DBL.forty.val,
-                                            // ),
-                                            // Row(
-                                            //     mainAxisAlignment:
-                                            //         MainAxisAlignment
-                                            //             .spaceBetween,
-                                            //     children: [
-                                            //       CustomText3(
-                                            //         AppString.profileCompletion.val,
-                                            //         style: TS().gRoboto(
-                                            //             fontWeight: FW.w500.val,
-                                            //             fontSize: getFontSize(
-                                            //               context,
-                                            //               fontSize:
-                                            //                   FS.font14.val,
-                                            //             ),
-                                            //             color: AppColor
-                                            //                 .lightGrey4.val),
-                                            //       ),
-                                            //       CustomSizedBox(
-                                            //         width: DBL.five.val,
-                                            //       ),
-                                            //       CustomText3(
-                                            //         response.user
-                                            //                 ?.profileCompletion ??
-                                            //             "",
-                                            //         style: TS().gRoboto(
-                                            //             fontWeight: FW.w500.val,
-                                            //             fontSize: getFontSize(
-                                            //               context,
-                                            //               fontSize:
-                                            //                   FS.font14.val,
-                                            //             ),
-                                            //             color: AppColor
-                                            //                 .primaryColor.val),
-                                            //       )
-                                            //     ]),
-                                            // CustomSizedBox(
-                                            //   height: DBL.thirteen.val,
-                                            // ),
-                                            // LinearPercentIndicator(
-                                            //   padding: const EdgeInsets.all(0),
-                                            //   barRadius:
-                                            //       const Radius.circular(10),
-                                            //   width:
-                                            //       isXs(context) ? 150.0 : 200.0,
-                                            //   lineHeight: 6.0,
-                                            //   percent: 0.5,
-                                            //   progressColor:
-                                            //       AppColor.green2.val,
-                                            // ),
                                           ],
                                         ),
                                       ),

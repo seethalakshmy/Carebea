@@ -3,7 +3,7 @@ import 'package:admin_580_tech/presentation/widget/commonImageview.dart';
 import 'package:flutter/material.dart';
 
 import '../../../application/bloc/sub_profile_details/sub_profile_details_bloc.dart';
-import '../../../domain/subProfile_details/model/sub_profile_details_model.dart';
+import '../../../domain/subProfile_details/model/sub_profile_detail_response.dart';
 import '../../widget/alert_text_label.dart';
 import '../../widget/custom_sizedbox.dart';
 import '../../widget/row_combo.dart';

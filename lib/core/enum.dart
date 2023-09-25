@@ -33,6 +33,7 @@ enum AppString {
   otherAllergies("Other allergies"),
   diagnosis("Diagnosis"),
   medicationDetails("Medication Details"),
+  allergicDrugs("Allergic Drugs"),
   diet("Diet"),
   healthCondition("Health Condition"),
   medication("Medication"),

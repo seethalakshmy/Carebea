@@ -3,7 +3,7 @@ import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/enum.dart';
-import '../../../domain/subProfile_details/model/sub_profile_details_model.dart';
+import '../../../domain/subProfile_details/model/sub_profile_detail_response.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_sizedbox.dart';
 import '../../widget/header_view.dart';
@@ -28,7 +28,7 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
 
   Column _topView(BuildContext context) {
     PersonalDetails1? personalDetails = state.response?.data?.personalDetails;
-    DocumentDetails2? documentDetails = state.response?.data?.documentDetails2;
+    DocumentDetails2? documentDetails = state.response?.data?.documentDetails;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

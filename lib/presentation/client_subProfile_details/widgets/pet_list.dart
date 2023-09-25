@@ -1,7 +1,7 @@
-import 'package:admin_580_tech/domain/subProfile_details/model/sub_profile_details_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/enum.dart';
+import '../../../domain/subProfile_details/model/sub_profile_detail_response.dart';
 import '../../widget/alert_text_label.dart';
 
 class PetListView extends StatelessWidget {

@@ -2,13 +2,11 @@ import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/domain/core/api_client.dart';
 import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.dart';
 import 'package:admin_580_tech/domain/subProfile_details/i_sub_profile_detail_repo.dart';
-import 'package:admin_580_tech/domain/user_management_detail/i_user_management_detail_repo.dart';
-import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 import '../../core/enum.dart';
-import '../../domain/subProfile_details/model/sub_profile_details_model.dart';
+import '../../domain/subProfile_details/model/sub_profile_detail_response.dart';
 
 class SubProfileDetailRepository implements ISubProfileDetailRepo {
   final ApiClient _apiClient = ApiClient();

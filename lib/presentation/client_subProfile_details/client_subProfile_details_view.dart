@@ -21,7 +21,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
-import '../../domain/subProfile_details/model/sub_profile_details_model.dart';
+import '../../domain/subProfile_details/model/sub_profile_detail_response.dart';
 import '../caregiver_detail/widgets/service_completion_and_rewards.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';

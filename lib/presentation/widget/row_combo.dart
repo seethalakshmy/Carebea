@@ -1,7 +1,7 @@
-import 'package:admin_580_tech/domain/subProfile_details/model/sub_profile_details_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/enum.dart';
+import '../../domain/subProfile_details/model/sub_profile_detail_response.dart';
 import '../../domain/user_management_detail/model/client_service_response.dart';
 import 'alert_text_label.dart';
 import 'custom_text.dart';
@@ -147,36 +147,41 @@ class RowColonCombo extends StatelessWidget {
                 [],
           ),
         ),
-        Flexible(
-          child: Wrap(
-            children: tierOneServiceList
-                    ?.map(
-                      (e) => AlertTextLabel(
-                        e.serviceName ?? '',
-                        color: color,
-                        fontWeight: fontWeight,
-                        fontSize: fontSize,
-                      ),
-                    )
-                    .toList() ??
-                [],
-          ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Flexible(
+              child: Wrap(
+                children: tierOneServiceList
+                        ?.map(
+                          (e) => AlertTextLabel(
+                            e.serviceName ?? '',
+                            color: color,
+                            fontWeight: fontWeight,
+                            fontSize: fontSize,
+                          ),
+                        )
+                        .toList() ??
+                    [],
+              ),
+            ),
+            Flexible(
+              child: Wrap(
+                children: tierTwoServiceList
+                        ?.map(
+                          (e) => AlertTextLabel(
+                            e.serviceName ?? '',
+                            color: color,
+                            fontWeight: fontWeight,
+                            fontSize: fontSize,
+                          ),
+                        )
+                        .toList() ??
+                    [],
+              ),
+            )
+          ],
         ),
-        Flexible(
-          child: Wrap(
-            children: tierTwoServiceList
-                    ?.map(
-                      (e) => AlertTextLabel(
-                        e.serviceName ?? '',
-                        color: color,
-                        fontWeight: fontWeight,
-                        fontSize: fontSize,
-                      ),
-                    )
-                    .toList() ??
-                [],
-          ),
-        )
       ],
     );
   }

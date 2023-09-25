@@ -1,10 +1,8 @@
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/responsive.dart';
-import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/core/utility.dart';
 import 'package:admin_580_tech/domain/user_management_detail/model/client_service_response.dart';
-import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_status.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
@@ -22,7 +20,7 @@ class ServiceDetailsPopUp extends StatelessWidget {
     required this.services,
   });
 
-  final ClientService services;
+  final ClientServices services;
 
   @override
   Widget build(BuildContext context) {
@@ -274,12 +272,10 @@ class ServiceDetailsPopUp extends StatelessWidget {
                         RowColonCombo.threeSeventy(
                             label: AppString.serviceCompleted.val,
                             value: '',
-                            list: services.caregiver?.completedServices?.tier1),
-                        RowColonCombo.threeSeventy(
-                            hasColon: false,
-                            label: '',
-                            value: '',
-                            list: services.caregiver?.completedServices?.tier2),
+                            tierOneServiceList:
+                                services.caregiver?.completedServices?.tier1,
+                            tierTwoServiceList:
+                                services.caregiver?.completedServices?.tier2),
                       ],
                     ))
                   : CustomSizedBox.shrink(),
@@ -308,16 +304,13 @@ class ServiceDetailsPopUp extends StatelessWidget {
                       child: Column(
                       children: [
                         RowColonCombo.threeSeventy(
-                            label: AppString.serviceInComplete.val,
-                            value: '',
-                            list: services
-                                .caregiver?.notcompletedServices?.tier1),
-                        RowColonCombo.threeSeventy(
-                            hasColon: false,
-                            label: '',
-                            value: '',
-                            list: services
-                                .caregiver?.notcompletedServices?.tier2),
+                          label: AppString.serviceInComplete.val,
+                          value: '',
+                          tierOneServiceList:
+                              services.caregiver?.notcompletedServices?.tier1,
+                          tierTwoServiceList:
+                              services.caregiver?.notcompletedServices?.tier2,
+                        ),
                       ],
                     ))
                   : CustomSizedBox.shrink(),
@@ -376,19 +369,20 @@ class ServiceDetailsPopUp extends StatelessWidget {
             label: AppString.serviceCompleted.val,
             value: '',
             serviceListOne: services.caregiver?.completedServices?.tier1,
-        serviceListTwo: services.caregiver?.completedServices?.tier2),
-        _dataView(
-            hasColon: false,
-            label: '',
-            value: '',
-            list: services.caregiver?.completedServices?.tier2),
+            serviceListTwo: services.caregiver?.completedServices?.tier2),
+        // _dataView(
+        //     hasColon: false,
+        //     label: '',
+        //     value: '',
+        //     serv: services.caregiver?.completedServices?.tier2),
         CustomSizedBox(
           height: DBL.six.val,
         ),
         _dataView(
             label: AppString.serviceInComplete.val,
             value: '',
-            : services.caregiver?.notcompletedServices?.tier1),
+            serviceListOne: services.caregiver?.notcompletedServices?.tier1,
+            serviceListTwo: services.caregiver?.notcompletedServices?.tier2),
       ],
     );
   }
@@ -438,7 +432,7 @@ class ServiceDetailsPopUp extends StatelessWidget {
       List<TierOne>? serviceListOne,
       List<TierTwo>? serviceListTwo,
       bool? hasColon}) {
-    return RowColonCombo.threeSeventy(
+    return RowColonCombo.twoHundred(
         label: label,
         value: value,
         tierOneServiceList: serviceListOne,

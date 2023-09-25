@@ -54,54 +54,58 @@ String dataToJson(Data data) => json.encode(data.toJson());
 
 class Data {
   Data({
-    List<ClientService>? clientService,
+    List<ClientServices>? services,
   }) {
-    _clientService = clientService;
+    _services = services;
   }
 
   Data.fromJson(dynamic json) {
-    if (json['ClientService'] != null) {
-      _clientService = [];
-      json['ClientService'].forEach((v) {
-        _clientService?.add(ClientService.fromJson(v));
+    if (json['services'] != null) {
+      _services = [];
+      json['services'].forEach((v) {
+        _services?.add(ClientServices.fromJson(v));
       });
     }
   }
-  List<ClientService>? _clientService;
+
+  List<ClientServices>? _services;
+
   Data copyWith({
-    List<ClientService>? clientService,
+    List<ClientServices>? services,
   }) =>
       Data(
-        clientService: clientService ?? _clientService,
+        services: services ?? _services,
       );
-  List<ClientService>? get clientService => _clientService;
+
+  List<ClientServices>? get services => _services;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    if (_clientService != null) {
-      map['ClientService'] = _clientService?.map((v) => v.toJson()).toList();
+    if (_services != null) {
+      map['services'] = _services?.map((v) => v.toJson()).toList();
     }
     return map;
   }
 }
 
-ClientService clientServiceFromJson(String str) =>
-    ClientService.fromJson(json.decode(str));
-String clientServiceToJson(ClientService data) => json.encode(data.toJson());
+ClientServices clientServicesFromJson(String str) =>
+    ClientServices.fromJson(json.decode(str));
 
-class ClientService {
-  ClientService({
+String clientServicesToJson(ClientServices data) => json.encode(data.toJson());
+
+class ClientServices {
+  ClientServices({
     String? id,
     String? uniqueId,
     String? userId,
     String? profileId,
     String? startDateTime,
     String? endDateTime,
-    int? totalServiceFee,
-    int? status,
+    num? totalServiceFee,
+    num? status,
     String? cancelReason,
-    int? serviceRating,
-    int? tip,
+    num? serviceRating,
+    num? tip,
     Client? client,
     Caregiver? caregiver,
   }) {
@@ -120,7 +124,7 @@ class ClientService {
     _caregiver = caregiver;
   }
 
-  ClientService.fromJson(dynamic json) {
+  ClientServices.fromJson(dynamic json) {
     _id = json['id'];
     _uniqueId = json['unique_id'];
     _userId = json['userId'];
@@ -137,35 +141,37 @@ class ClientService {
         ? Caregiver.fromJson(json['caregiver'])
         : null;
   }
+
   String? _id;
   String? _uniqueId;
   String? _userId;
   String? _profileId;
   String? _startDateTime;
   String? _endDateTime;
-  int? _totalServiceFee;
-  int? _status;
+  num? _totalServiceFee;
+  num? _status;
   String? _cancelReason;
-  int? _serviceRating;
-  int? _tip;
+  num? _serviceRating;
+  num? _tip;
   Client? _client;
   Caregiver? _caregiver;
-  ClientService copyWith({
+
+  ClientServices copyWith({
     String? id,
     String? uniqueId,
     String? userId,
     String? profileId,
     String? startDateTime,
     String? endDateTime,
-    int? totalServiceFee,
-    int? status,
+    num? totalServiceFee,
+    num? status,
     String? cancelReason,
-    int? serviceRating,
-    int? tip,
+    num? serviceRating,
+    num? tip,
     Client? client,
     Caregiver? caregiver,
   }) =>
-      ClientService(
+      ClientServices(
         id: id ?? _id,
         uniqueId: uniqueId ?? _uniqueId,
         userId: userId ?? _userId,
@@ -180,18 +186,31 @@ class ClientService {
         client: client ?? _client,
         caregiver: caregiver ?? _caregiver,
       );
+
   String? get id => _id;
+
   String? get uniqueId => _uniqueId;
+
   String? get userId => _userId;
+
   String? get profileId => _profileId;
+
   String? get startDateTime => _startDateTime;
+
   String? get endDateTime => _endDateTime;
-  int? get totalServiceFee => _totalServiceFee;
-  int? get status => _status;
+
+  num? get totalServiceFee => _totalServiceFee;
+
+  num? get status => _status;
+
   String? get cancelReason => _cancelReason;
-  int? get serviceRating => _serviceRating;
-  int? get tip => _tip;
+
+  num? get serviceRating => _serviceRating;
+
+  num? get tip => _tip;
+
   Client? get client => _client;
+
   Caregiver? get caregiver => _caregiver;
 
   Map<String, dynamic> toJson() {
@@ -229,7 +248,7 @@ class Caregiver {
     String? profileThumbnail,
     CompletedServices? completedServices,
     NotcompletedServices? notcompletedServices,
-    List<UserComplaints>? userComplaints,
+    // List<UserComplaints>? userComplaints,
   }) {
     _firstName = firstName;
     _lastName = lastName;
@@ -238,7 +257,7 @@ class Caregiver {
     _profileThumbnail = profileThumbnail;
     _completedServices = completedServices;
     _notcompletedServices = notcompletedServices;
-    _userComplaints = userComplaints;
+    // _userComplaints = userComplaints;
   }
 
   Caregiver.fromJson(dynamic json) {
@@ -253,12 +272,12 @@ class Caregiver {
     _notcompletedServices = json['notcompletedServices'] != null
         ? NotcompletedServices.fromJson(json['notcompletedServices'])
         : null;
-    if (json['user_complaints'] != null) {
-      _userComplaints = [];
-      json['user_complaints'].forEach((v) {
-        _userComplaints?.add(UserComplaints.fromJson(v));
-      });
-    }
+    // if (json['user_complaints'] != null) {
+    //   _userComplaints = [];
+    //   json['user_complaints'].forEach((v) {
+    //     _userComplaints?.add(UserComplaints.fromJson(v));
+    //   });
+    // }
   }
   String? _firstName;
   String? _lastName;
@@ -267,7 +286,7 @@ class Caregiver {
   String? _profileThumbnail;
   CompletedServices? _completedServices;
   NotcompletedServices? _notcompletedServices;
-  List<UserComplaints>? _userComplaints;
+  // List<UserComplaints>? _userComplaints;
   Caregiver copyWith({
     String? firstName,
     String? lastName,
@@ -276,7 +295,7 @@ class Caregiver {
     String? profileThumbnail,
     CompletedServices? completedServices,
     NotcompletedServices? notcompletedServices,
-    List<UserComplaints>? userComplaints,
+    // List<UserComplaints>? userComplaints,
   }) =>
       Caregiver(
         firstName: firstName ?? _firstName,
@@ -286,7 +305,7 @@ class Caregiver {
         profileThumbnail: profileThumbnail ?? _profileThumbnail,
         completedServices: completedServices ?? _completedServices,
         notcompletedServices: notcompletedServices ?? _notcompletedServices,
-        userComplaints: userComplaints ?? _userComplaints,
+        // userComplaints: userComplaints ?? _userComplaints,
       );
   String? get firstName => _firstName;
   String? get lastName => _lastName;
@@ -295,7 +314,7 @@ class Caregiver {
   String? get profileThumbnail => _profileThumbnail;
   CompletedServices? get completedServices => _completedServices;
   NotcompletedServices? get notcompletedServices => _notcompletedServices;
-  List<UserComplaints>? get userComplaints => _userComplaints;
+  // List<UserComplaints>? get userComplaints => _userComplaints;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -310,74 +329,74 @@ class Caregiver {
     if (_notcompletedServices != null) {
       map['notcompletedServices'] = _notcompletedServices?.toJson();
     }
-    if (_userComplaints != null) {
-      map['user_complaints'] = _userComplaints?.map((v) => v.toJson()).toList();
-    }
+    // if (_userComplaints != null) {
+    //   map['user_complaints'] = _userComplaints?.map((v) => v.toJson()).toList();
+    // }
     return map;
   }
 }
 
-UserComplaints userComplaintsFromJson(String str) =>
-    UserComplaints.fromJson(json.decode(str));
-String userComplaintsToJson(UserComplaints data) => json.encode(data.toJson());
-
-class UserComplaints {
-  UserComplaints({
-    String? description,
-    List<String>? attachments,
-    String? currentStatus,
-    List<StatusHistory>? statusHistory,
-  }) {
-    _description = description;
-    _attachments = attachments;
-    _currentStatus = currentStatus;
-    _statusHistory = statusHistory;
-  }
-
-  UserComplaints.fromJson(dynamic json) {
-    _description = json['description'];
-    _attachments =
-        json['attachments'] != null ? json['attachments'].cast<String>() : [];
-    _currentStatus = json['current_status'];
-    if (json['status_history'] != null) {
-      _statusHistory = [];
-      json['status_history'].forEach((v) {
-        _statusHistory?.add(StatusHistory.fromJson(v));
-      });
-    }
-  }
-  String? _description;
-  List<String>? _attachments;
-  String? _currentStatus;
-  List<StatusHistory>? _statusHistory;
-  UserComplaints copyWith({
-    String? description,
-    List<String>? attachments,
-    String? currentStatus,
-    List<StatusHistory>? statusHistory,
-  }) =>
-      UserComplaints(
-        description: description ?? _description,
-        attachments: attachments ?? _attachments,
-        currentStatus: currentStatus ?? _currentStatus,
-        statusHistory: statusHistory ?? _statusHistory,
-      );
-  String? get description => _description;
-  List<String>? get attachments => _attachments;
-  String? get currentStatus => _currentStatus;
-  List<StatusHistory>? get statusHistory => _statusHistory;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['description'] = _description;
-    map['attachments'] = _attachments;
-    map['current_status'] = _currentStatus;
-    if (_statusHistory != null) {
-      map['status_history'] = _statusHistory?.map((v) => v.toJson()).toList();
-    }
-    return map;
-  }
-}
+// UserComplaints userComplaintsFromJson(String str) =>
+//     UserComplaints.fromJson(json.decode(str));
+// String userComplaintsToJson(UserComplaints data) => json.encode(data.toJson());
+//
+// class UserComplaints {
+//   UserComplaints({
+//     String? description,
+//     List<String>? attachments,
+//     String? currentStatus,
+//     List<StatusHistory>? statusHistory,
+//   }) {
+//     _description = description;
+//     _attachments = attachments;
+//     _currentStatus = currentStatus;
+//     _statusHistory = statusHistory;
+//   }
+//
+//   UserComplaints.fromJson(dynamic json) {
+//     _description = json['description'];
+//     _attachments =
+//         json['attachments'] != null ? json['attachments'].cast<String>() : [];
+//     _currentStatus = json['current_status'];
+//     if (json['status_history'] != null) {
+//       _statusHistory = [];
+//       json['status_history'].forEach((v) {
+//         _statusHistory?.add(StatusHistory.fromJson(v));
+//       });
+//     }
+//   }
+//   String? _description;
+//   List<String>? _attachments;
+//   String? _currentStatus;
+//   List<StatusHistory>? _statusHistory;
+//   UserComplaints copyWith({
+//     String? description,
+//     List<String>? attachments,
+//     String? currentStatus,
+//     List<StatusHistory>? statusHistory,
+//   }) =>
+//       UserComplaints(
+//         description: description ?? _description,
+//         attachments: attachments ?? _attachments,
+//         currentStatus: currentStatus ?? _currentStatus,
+//         statusHistory: statusHistory ?? _statusHistory,
+//       );
+//   String? get description => _description;
+//   List<String>? get attachments => _attachments;
+//   String? get currentStatus => _currentStatus;
+//   List<StatusHistory>? get statusHistory => _statusHistory;
+//
+//   Map<String, dynamic> toJson() {
+//     final map = <String, dynamic>{};
+//     map['description'] = _description;
+//     map['attachments'] = _attachments;
+//     map['current_status'] = _currentStatus;
+//     if (_statusHistory != null) {
+//       map['status_history'] = _statusHistory?.map((v) => v.toJson()).toList();
+//     }
+//     return map;
+//   }
+// }
 
 StatusHistory statusHistoryFromJson(String str) =>
     StatusHistory.fromJson(json.decode(str));
@@ -386,7 +405,7 @@ String statusHistoryToJson(StatusHistory data) => json.encode(data.toJson());
 class StatusHistory {
   StatusHistory({
     String? date,
-    String? status,
+    num? status,
     dynamic comment,
     String? id,
   }) {
@@ -403,12 +422,12 @@ class StatusHistory {
     _id = json['_id'];
   }
   String? _date;
-  String? _status;
+  num? _status;
   dynamic _comment;
   String? _id;
   StatusHistory copyWith({
     String? date,
-    String? status,
+    num? status,
     dynamic comment,
     String? id,
   }) =>
@@ -419,7 +438,7 @@ class StatusHistory {
         id: id ?? _id,
       );
   String? get date => _date;
-  String? get status => _status;
+  num? get status => _status;
   dynamic get comment => _comment;
   String? get id => _id;
 
@@ -536,6 +555,7 @@ class TierOne {
   }
 
   TierOne.fromJson(dynamic json) {
+    print('inside tier 1 $json');
     _serviceName = json['serviceName'];
     _isExtra = json['is_extra'];
   }

@@ -1,7 +1,6 @@
 import 'package:admin_580_tech/application/bloc/user_management_detail/user_management_detail_bloc.dart';
 import 'package:admin_580_tech/core/utility.dart';
 import 'package:admin_580_tech/domain/user_management_detail/model/client_service_response.dart';
-import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/infrastructure/user_management_detail/user_management_detail_repository.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_details_popUp.dart';
@@ -14,7 +13,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/enum.dart';
 import '../../../core/responsive.dart';
 import '../../../core/text_styles.dart';
-import '../../../domain/caregiver_detail/model/caregiver_service_list_response.dart';
 import '../../widget/cached_image.dart';
 import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_card.dart';
@@ -36,20 +34,6 @@ class ServiceView extends StatelessWidget {
   late UserManagementDetailBloc userDetailBloc;
   String userId;
 
-  // BlocProvider<UserManagementDetailBloc> _rebuildView() {
-  //   UserManagementDetailBloc userDetailBloc;
-  //   return BlocProvider(
-  //     create: (context) => userDetailBloc
-  //       ..add(UserManagementDetailEvent.getUserDetail(
-  //           userId: userId ?? '', adminId: adminId ?? '')),
-  //     child: BlocBuilder<UserManagementDetailBloc, UserManagementDetailState>(
-  //       builder: (context, state) {
-  //         return state.isLoading ? LoaderView() : _bodyView(context, state);
-  //       },
-  //     ),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     userDetailBloc = UserManagementDetailBloc(UserManagementDetailRepository());
@@ -60,8 +44,9 @@ class ServiceView extends StatelessWidget {
             userId: userId, adminId: SharedPreffUtil().getAdminId)),
       child: BlocBuilder<UserManagementDetailBloc, UserManagementDetailState>(
         builder: (context, state) {
-          final services =
-              state.clientServiceResponse?.data?.clientService ?? [];
+          final services = state.clientServiceResponse?.data?.services ?? [];
+          print('service $services');
+
           return CustomCard(
             elevation: DBL.seven.val,
             child: CustomContainer(
@@ -98,7 +83,7 @@ class ServiceView extends StatelessWidget {
     );
   }
 
-  _serviceTable(List<ClientService> services, BuildContext context) {
+  _serviceTable(List<ClientServices> services, BuildContext context) {
     return CSelectionArea(
       child: CDataTable2(
         minWidth: 950,

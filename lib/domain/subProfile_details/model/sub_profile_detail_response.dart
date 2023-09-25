@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-SubProfileDetailResponse subProfileDetailsModelFromJson(String str) =>
+subProfileDetailResponseFromJson(String str) =>
     SubProfileDetailResponse.fromJson(json.decode(str));
-String subProfileDetailsModelToJson(SubProfileDetailResponse data) =>
+String subProfileDetailResponseToJson(SubProfileDetailResponse data) =>
     json.encode(data.toJson());
 
 class SubProfileDetailResponse {
@@ -55,26 +55,31 @@ String dataToJson(Data data) => json.encode(data.toJson());
 class Data {
   Data({
     String? id,
+    int? profileCompletionPercentage,
     ProfileCompletion? profileCompletion,
     dynamic agreement,
     int? serviceCompleted,
     int? cancelledRequests,
-    int? profileCompletionPercentage,
     double? averageReview,
     int? reviewCount,
     Name? name,
+    Location? location,
+    String? profilePicReferrence,
     String? profilePic,
-    PersonalDetails1? personalDetails1,
-    DocumentDetails2? documentDetails2,
+    String? locationTag,
+    PersonalDetails1? personalDetails,
+    DocumentDetails2? documentDetails,
     PersonalDetails2? personalDetails2,
-    List<String>? languages1,
+    List<String>? languages,
     Pets? pets,
     Contacts? contacts,
+    HealthMedicalConditions? healthMedicalConditions,
     List<String>? healthProfile,
     List<String>? diet,
     Services? services,
   }) {
     _id = id;
+    _profileCompletionPercentage = profileCompletionPercentage;
     _profileCompletion = profileCompletion;
     _agreement = agreement;
     _serviceCompleted = serviceCompleted;
@@ -82,14 +87,17 @@ class Data {
     _averageReview = averageReview;
     _reviewCount = reviewCount;
     _name = name;
-    _profileCompletionPercentage = profileCompletionPercentage;
+    _location = location;
+    _profilePicReferrence = profilePicReferrence;
     _profilePic = profilePic;
-    _personalDetails1 = personalDetails1;
-    _documentDetails2 = documentDetails2;
+    _locationTag = locationTag;
+    _personalDetails = personalDetails;
+    _documentDetails = documentDetails;
     _personalDetails2 = personalDetails2;
-    _languages1 = languages1;
+    _languages = languages;
     _pets = pets;
     _contacts = contacts;
+    _healthMedicalConditions = healthMedicalConditions;
     _healthProfile = healthProfile;
     _diet = diet;
     _services = services;
@@ -97,6 +105,7 @@ class Data {
 
   Data.fromJson(dynamic json) {
     _id = json['id'];
+    _profileCompletionPercentage = json['profile_completion_percentage'];
     _profileCompletion = json['profile_completion'] != null
         ? ProfileCompletion.fromJson(json['profile_completion'])
         : null;
@@ -105,23 +114,29 @@ class Data {
     _cancelledRequests = json['cancelled_requests'];
     _averageReview = json['average_review'];
     _reviewCount = json['review_count'];
-    _profilePic = json['profile_pic'];
-    _profileCompletionPercentage = json['profile_completion_percentage'];
     _name = json['name'] != null ? Name.fromJson(json['name']) : null;
-    _personalDetails1 = json['personal_details'] != null
+    _location =
+        json['location'] != null ? Location.fromJson(json['location']) : null;
+    _profilePicReferrence = json['profile_pic_referrence'];
+    _profilePic = json['profile_pic'];
+    _locationTag = json['location_tag'];
+    _personalDetails = json['personal_details'] != null
         ? PersonalDetails1.fromJson(json['personal_details'])
         : null;
-    _documentDetails2 = json['document_details'] != null
+    _documentDetails = json['document_details'] != null
         ? DocumentDetails2.fromJson(json['document_details'])
         : null;
     _personalDetails2 = json['personal_details2'] != null
         ? PersonalDetails2.fromJson(json['personal_details2'])
         : null;
-    _languages1 =
+    _languages =
         json['languages'] != null ? json['languages'].cast<String>() : [];
     _pets = json['pets'] != null ? Pets.fromJson(json['pets']) : null;
     _contacts =
         json['contacts'] != null ? Contacts.fromJson(json['contacts']) : null;
+    _healthMedicalConditions = json['health_medical_conditions'] != null
+        ? HealthMedicalConditions.fromJson(json['health_medical_conditions'])
+        : null;
     _healthProfile = json['health_profile'] != null
         ? json['health_profile'].cast<String>()
         : [];
@@ -130,47 +145,57 @@ class Data {
         json['services'] != null ? Services.fromJson(json['services']) : null;
   }
   String? _id;
+  int? _profileCompletionPercentage;
   ProfileCompletion? _profileCompletion;
   dynamic _agreement;
   int? _serviceCompleted;
   int? _cancelledRequests;
-  int? _profileCompletionPercentage;
   double? _averageReview;
   int? _reviewCount;
-  String? _profilePic;
   Name? _name;
-  PersonalDetails1? _personalDetails1;
-  DocumentDetails2? _documentDetails2;
+  Location? _location;
+  String? _profilePicReferrence;
+  String? _profilePic;
+  String? _locationTag;
+  PersonalDetails1? _personalDetails;
+  DocumentDetails2? _documentDetails;
   PersonalDetails2? _personalDetails2;
-  List<String>? _languages1;
+  List<String>? _languages;
   Pets? _pets;
   Contacts? _contacts;
+  HealthMedicalConditions? _healthMedicalConditions;
   List<String>? _healthProfile;
   List<String>? _diet;
   Services? _services;
   Data copyWith({
     String? id,
+    int? profileCompletionPercentage,
     ProfileCompletion? profileCompletion,
     dynamic agreement,
     int? serviceCompleted,
     int? cancelledRequests,
-    String? profilePic,
     double? averageReview,
     int? reviewCount,
     Name? name,
-    int? profileCompletionPercentage,
-    PersonalDetails1? personalDetails1,
-    DocumentDetails2? documentDetails2,
+    Location? location,
+    String? profilePicReferrence,
+    String? profilePic,
+    String? locationTag,
+    PersonalDetails1? personalDetails,
+    DocumentDetails2? documentDetails,
     PersonalDetails2? personalDetails2,
-    List<String>? languages1,
+    List<String>? languages,
     Pets? pets,
     Contacts? contacts,
+    HealthMedicalConditions? healthMedicalConditions,
     List<String>? healthProfile,
     List<String>? diet,
     Services? services,
   }) =>
       Data(
         id: id ?? _id,
+        profileCompletionPercentage:
+            profileCompletionPercentage ?? _profileCompletionPercentage,
         profileCompletion: profileCompletion ?? _profileCompletion,
         agreement: agreement ?? _agreement,
         serviceCompleted: serviceCompleted ?? _serviceCompleted,
@@ -178,20 +203,24 @@ class Data {
         averageReview: averageReview ?? _averageReview,
         reviewCount: reviewCount ?? _reviewCount,
         name: name ?? _name,
-        profileCompletionPercentage:
-            profileCompletionPercentage ?? _profileCompletionPercentage,
+        location: location ?? _location,
+        profilePicReferrence: profilePicReferrence ?? _profilePicReferrence,
         profilePic: profilePic ?? _profilePic,
-        personalDetails1: personalDetails1 ?? _personalDetails1,
-        documentDetails2: documentDetails2 ?? _documentDetails2,
+        locationTag: locationTag ?? _locationTag,
+        personalDetails: personalDetails ?? _personalDetails,
+        documentDetails: documentDetails ?? _documentDetails,
         personalDetails2: personalDetails2 ?? _personalDetails2,
-        languages1: languages1 ?? _languages1,
+        languages: languages ?? _languages,
         pets: pets ?? _pets,
         contacts: contacts ?? _contacts,
+        healthMedicalConditions:
+            healthMedicalConditions ?? _healthMedicalConditions,
         healthProfile: healthProfile ?? _healthProfile,
         diet: diet ?? _diet,
         services: services ?? _services,
       );
   String? get id => _id;
+  int? get profileCompletionPercentage => _profileCompletionPercentage;
   ProfileCompletion? get profileCompletion => _profileCompletion;
   dynamic get agreement => _agreement;
   int? get serviceCompleted => _serviceCompleted;
@@ -199,14 +228,18 @@ class Data {
   double? get averageReview => _averageReview;
   int? get reviewCount => _reviewCount;
   Name? get name => _name;
-  int? get profileCompletionPercentage => _profileCompletionPercentage;
+  Location? get location => _location;
+  String? get profilePicReferrence => _profilePicReferrence;
   String? get profilePic => _profilePic;
-  PersonalDetails1? get personalDetails => _personalDetails1;
-  DocumentDetails2? get documentDetails2 => _documentDetails2;
+  String? get locationTag => _locationTag;
+  PersonalDetails1? get personalDetails => _personalDetails;
+  DocumentDetails2? get documentDetails => _documentDetails;
   PersonalDetails2? get personalDetails2 => _personalDetails2;
-  List<String>? get languages1 => _languages1;
+  List<String>? get languages => _languages;
   Pets? get pets => _pets;
   Contacts? get contacts => _contacts;
+  HealthMedicalConditions? get healthMedicalConditions =>
+      _healthMedicalConditions;
   List<String>? get healthProfile => _healthProfile;
   List<String>? get diet => _diet;
   Services? get services => _services;
@@ -214,6 +247,7 @@ class Data {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = _id;
+    map['profile_completion_percentage'] = _profileCompletionPercentage;
     if (_profileCompletion != null) {
       map['profile_completion'] = _profileCompletion?.toJson();
     }
@@ -222,26 +256,33 @@ class Data {
     map['cancelled_requests'] = _cancelledRequests;
     map['average_review'] = _averageReview;
     map['review_count'] = _reviewCount;
-    map['profile_pic'] = _profilePic;
-    map['profile_completion_percentage'] = _profileCompletionPercentage;
     if (_name != null) {
       map['name'] = _name?.toJson();
     }
-    if (_personalDetails1 != null) {
-      map['personal_details'] = _personalDetails1?.toJson();
+    if (_location != null) {
+      map['location'] = _location?.toJson();
     }
-    if (_documentDetails2 != null) {
-      map['document_details'] = _documentDetails2?.toJson();
+    map['profile_pic_referrence'] = _profilePicReferrence;
+    map['profile_pic'] = _profilePic;
+    map['location_tag'] = _locationTag;
+    if (_personalDetails != null) {
+      map['personal_details'] = _personalDetails?.toJson();
+    }
+    if (_documentDetails != null) {
+      map['document_details'] = _documentDetails?.toJson();
     }
     if (_personalDetails2 != null) {
       map['personal_details2'] = _personalDetails2?.toJson();
     }
-    map['languages'] = _languages1;
+    map['languages'] = _languages;
     if (_pets != null) {
       map['pets'] = _pets?.toJson();
     }
     if (_contacts != null) {
       map['contacts'] = _contacts?.toJson();
+    }
+    if (_healthMedicalConditions != null) {
+      map['health_medical_conditions'] = _healthMedicalConditions?.toJson();
     }
     map['health_profile'] = _healthProfile;
     map['diet'] = _diet;
@@ -373,6 +414,298 @@ class Tier1 {
     final map = <String, dynamic>{};
     map['id'] = _id;
     map['name'] = _name;
+    return map;
+  }
+}
+
+HealthMedicalConditions healthMedicalConditionsFromJson(String str) =>
+    HealthMedicalConditions.fromJson(json.decode(str));
+String healthMedicalConditionsToJson(HealthMedicalConditions data) =>
+    json.encode(data.toJson());
+
+class HealthMedicalConditions {
+  HealthMedicalConditions({
+    List<String>? diagnosis,
+    dynamic diagnoseDescription,
+    List<String>? diet,
+    String? dietDescription,
+    HealthCondition? healthCondition,
+    List<Medication>? medication,
+    List<String>? drugs,
+    String? userId,
+  }) {
+    _diagnosis = diagnosis;
+    _diagnoseDescription = diagnoseDescription;
+    _diet = diet;
+    _dietDescription = dietDescription;
+    _healthCondition = healthCondition;
+    _medication = medication;
+    _drugs = drugs;
+    _userId = userId;
+  }
+
+  HealthMedicalConditions.fromJson(dynamic json) {
+    _diagnosis =
+        json['diagnosis'] != null ? json['diagnosis'].cast<String>() : [];
+    _diagnoseDescription = json['diagnose_description'];
+    _diet = json['diet'] != null ? json['diet'].cast<String>() : [];
+    _drugs = json['drugs'] != null ? json['drugs'].cast<String>() : [];
+    _dietDescription = json['diet_description'];
+    _healthCondition = json['health_condition'] != null
+        ? HealthCondition.fromJson(json['health_condition'])
+        : null;
+    if (json['medication'] != null) {
+      _medication = [];
+      json['medication'].forEach((v) {
+        _medication?.add(Medication.fromJson(v));
+      });
+    }
+
+    _userId = json['user_id'];
+  }
+  List<String>? _diagnosis;
+  dynamic _diagnoseDescription;
+  List<String>? _diet;
+  String? _dietDescription;
+  HealthCondition? _healthCondition;
+  List<Medication>? _medication;
+  List<String>? _drugs;
+  String? _userId;
+  HealthMedicalConditions copyWith({
+    List<String>? diagnosis,
+    dynamic diagnoseDescription,
+    List<String>? diet,
+    String? dietDescription,
+    HealthCondition? healthCondition,
+    List<Medication>? medication,
+    List<String>? drugs,
+    String? userId,
+  }) =>
+      HealthMedicalConditions(
+        diagnosis: diagnosis ?? _diagnosis,
+        diagnoseDescription: diagnoseDescription ?? _diagnoseDescription,
+        diet: diet ?? _diet,
+        dietDescription: dietDescription ?? _dietDescription,
+        healthCondition: healthCondition ?? _healthCondition,
+        medication: medication ?? _medication,
+        drugs: drugs ?? _drugs,
+        userId: userId ?? _userId,
+      );
+  List<String>? get diagnosis => _diagnosis;
+  dynamic get diagnoseDescription => _diagnoseDescription;
+  List<String>? get diet => _diet;
+  String? get dietDescription => _dietDescription;
+  HealthCondition? get healthCondition => _healthCondition;
+  List<Medication>? get medication => _medication;
+  List<String>? get drugs => _drugs;
+  String? get userId => _userId;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['diagnosis'] = _diagnosis;
+    map['diagnose_description'] = _diagnoseDescription;
+    map['diet'] = _diet;
+    map['drugs'] = _drugs;
+    map['diet_description'] = _dietDescription;
+    if (_healthCondition != null) {
+      map['health_condition'] = _healthCondition?.toJson();
+    }
+    if (_medication != null) {
+      map['medication'] = _medication?.map((v) => v.toJson()).toList();
+    }
+
+    map['user_id'] = _userId;
+    return map;
+  }
+}
+
+Medication medicationFromJson(String str) =>
+    Medication.fromJson(json.decode(str));
+String medicationToJson(Medication data) => json.encode(data.toJson());
+
+class Medication {
+  Medication({
+    String? drugName,
+    String? freequency,
+    String? dosage,
+    String? prescribingDoctor,
+    String? expirationDate,
+    bool? status,
+  }) {
+    _drugName = drugName;
+    _freequency = freequency;
+    _dosage = dosage;
+    _prescribingDoctor = prescribingDoctor;
+    _expirationDate = expirationDate;
+    _status = status;
+  }
+
+  Medication.fromJson(dynamic json) {
+    _drugName = json['drug_name'];
+    _freequency = json['freequency'];
+    _dosage = json['dosage'];
+    _prescribingDoctor = json['prescribing_doctor'];
+    _expirationDate = json['expiration_date'];
+    _status = json['status'];
+  }
+  String? _drugName;
+  String? _freequency;
+  String? _dosage;
+  String? _prescribingDoctor;
+  String? _expirationDate;
+  bool? _status;
+  Medication copyWith({
+    String? drugName,
+    String? freequency,
+    String? dosage,
+    String? prescribingDoctor,
+    String? expirationDate,
+    bool? status,
+  }) =>
+      Medication(
+        drugName: drugName ?? _drugName,
+        freequency: freequency ?? _freequency,
+        dosage: dosage ?? _dosage,
+        prescribingDoctor: prescribingDoctor ?? _prescribingDoctor,
+        expirationDate: expirationDate ?? _expirationDate,
+        status: status ?? _status,
+      );
+  String? get drugName => _drugName;
+  String? get freequency => _freequency;
+  String? get dosage => _dosage;
+  String? get prescribingDoctor => _prescribingDoctor;
+  String? get expirationDate => _expirationDate;
+  bool? get status => _status;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['drug_name'] = _drugName;
+    map['freequency'] = _freequency;
+    map['dosage'] = _dosage;
+    map['prescribing_doctor'] = _prescribingDoctor;
+    map['expiration_date'] = _expirationDate;
+    map['status'] = _status;
+    return map;
+  }
+}
+
+HealthCondition healthConditionFromJson(String str) =>
+    HealthCondition.fromJson(json.decode(str));
+String healthConditionToJson(HealthCondition data) =>
+    json.encode(data.toJson());
+
+class HealthCondition {
+  HealthCondition({
+    bool? haveFoodAllergies,
+    String? foodAllergiDesc,
+    bool? haveHearingDifficulty,
+    bool? haveHearingAid,
+    bool? haveDifficultyInvision,
+    bool? haveGlasses,
+    String? mentalHealthCondiditon,
+    String? mentalHealthName,
+    String? mobility,
+    String? mobilityName,
+    bool? haveAnyAllergyProblem,
+    String? allergiProblemDesc,
+  }) {
+    _haveFoodAllergies = haveFoodAllergies;
+    _foodAllergiDesc = foodAllergiDesc;
+    _haveHearingDifficulty = haveHearingDifficulty;
+    _haveHearingAid = haveHearingAid;
+    _haveDifficultyInvision = haveDifficultyInvision;
+    _haveGlasses = haveGlasses;
+    _mentalHealthCondiditon = mentalHealthCondiditon;
+    _mentalHealthName = mentalHealthName;
+    _mobility = mobility;
+    _mobilityName = mobilityName;
+    _haveAnyAllergyProblem = haveAnyAllergyProblem;
+    _allergiProblemDesc = allergiProblemDesc;
+  }
+
+  HealthCondition.fromJson(dynamic json) {
+    _haveFoodAllergies = json['have_food_allergies'];
+    _foodAllergiDesc = json['food_allergi_desc'];
+    _haveHearingDifficulty = json['have_hearing_difficulty'];
+    _haveHearingAid = json['have_hearing_aid'];
+    _haveDifficultyInvision = json['have_difficulty_invision'];
+    _haveGlasses = json['have_glasses'];
+    _mentalHealthCondiditon = json['mental_health_condiditon'];
+    _mentalHealthName = json['mental_health_name'];
+    _mobility = json['mobility'];
+    _mobilityName = json['mobility_name'];
+    _haveAnyAllergyProblem = json['have_any_allergy_problem'];
+    _allergiProblemDesc = json['allergi_problem_desc'];
+  }
+  bool? _haveFoodAllergies;
+  String? _foodAllergiDesc;
+  bool? _haveHearingDifficulty;
+  bool? _haveHearingAid;
+  bool? _haveDifficultyInvision;
+  bool? _haveGlasses;
+  String? _mentalHealthCondiditon;
+  String? _mentalHealthName;
+  String? _mobility;
+  String? _mobilityName;
+  bool? _haveAnyAllergyProblem;
+  String? _allergiProblemDesc;
+  HealthCondition copyWith({
+    bool? haveFoodAllergies,
+    String? foodAllergiDesc,
+    bool? haveHearingDifficulty,
+    bool? haveHearingAid,
+    bool? haveDifficultyInvision,
+    bool? haveGlasses,
+    String? mentalHealthCondiditon,
+    String? mentalHealthName,
+    String? mobility,
+    String? mobilityName,
+    bool? haveAnyAllergyProblem,
+    String? allergiProblemDesc,
+  }) =>
+      HealthCondition(
+        haveFoodAllergies: haveFoodAllergies ?? _haveFoodAllergies,
+        foodAllergiDesc: foodAllergiDesc ?? _foodAllergiDesc,
+        haveHearingDifficulty: haveHearingDifficulty ?? _haveHearingDifficulty,
+        haveHearingAid: haveHearingAid ?? _haveHearingAid,
+        haveDifficultyInvision:
+            haveDifficultyInvision ?? _haveDifficultyInvision,
+        haveGlasses: haveGlasses ?? _haveGlasses,
+        mentalHealthCondiditon:
+            mentalHealthCondiditon ?? _mentalHealthCondiditon,
+        mentalHealthName: mentalHealthName ?? _mentalHealthName,
+        mobility: mobility ?? _mobility,
+        mobilityName: mobilityName ?? _mobilityName,
+        haveAnyAllergyProblem: haveAnyAllergyProblem ?? _haveAnyAllergyProblem,
+        allergiProblemDesc: allergiProblemDesc ?? _allergiProblemDesc,
+      );
+  bool? get haveFoodAllergies => _haveFoodAllergies;
+  String? get foodAllergiDesc => _foodAllergiDesc;
+  bool? get haveHearingDifficulty => _haveHearingDifficulty;
+  bool? get haveHearingAid => _haveHearingAid;
+  bool? get haveDifficultyInvision => _haveDifficultyInvision;
+  bool? get haveGlasses => _haveGlasses;
+  String? get mentalHealthCondiditon => _mentalHealthCondiditon;
+  String? get mentalHealthName => _mentalHealthName;
+  String? get mobility => _mobility;
+  String? get mobilityName => _mobilityName;
+  bool? get haveAnyAllergyProblem => _haveAnyAllergyProblem;
+  String? get allergiProblemDesc => _allergiProblemDesc;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['have_food_allergies'] = _haveFoodAllergies;
+    map['food_allergi_desc'] = _foodAllergiDesc;
+    map['have_hearing_difficulty'] = _haveHearingDifficulty;
+    map['have_hearing_aid'] = _haveHearingAid;
+    map['have_difficulty_invision'] = _haveDifficultyInvision;
+    map['have_glasses'] = _haveGlasses;
+    map['mental_health_condiditon'] = _mentalHealthCondiditon;
+    map['mental_health_name'] = _mentalHealthName;
+    map['mobility'] = _mobility;
+    map['mobility_name'] = _mobilityName;
+    map['have_any_allergy_problem'] = _haveAnyAllergyProblem;
+    map['allergi_problem_desc'] = _allergiProblemDesc;
     return map;
   }
 }
@@ -1092,39 +1425,47 @@ String documentDetails2ToJson(DocumentDetails2 data) =>
 class DocumentDetails2 {
   DocumentDetails2({
     String? documentUploaded,
+    String? url,
     String? doumentNumber,
     String? expiryDate,
   }) {
     _documentUploaded = documentUploaded;
+    _url = url;
     _doumentNumber = doumentNumber;
     _expiryDate = expiryDate;
   }
 
   DocumentDetails2.fromJson(dynamic json) {
     _documentUploaded = json['document_uploaded'];
+    _url = json['url'];
     _doumentNumber = json['doument_number'];
     _expiryDate = json['expiry_date'];
   }
   String? _documentUploaded;
+  String? _url;
   String? _doumentNumber;
   String? _expiryDate;
   DocumentDetails2 copyWith({
     String? documentUploaded,
+    String? url,
     String? doumentNumber,
     String? expiryDate,
   }) =>
       DocumentDetails2(
         documentUploaded: documentUploaded ?? _documentUploaded,
+        url: url ?? _url,
         doumentNumber: doumentNumber ?? _doumentNumber,
         expiryDate: expiryDate ?? _expiryDate,
       );
   String? get documentUploaded => _documentUploaded;
+  String? get url => _url;
   String? get doumentNumber => _doumentNumber;
   String? get expiryDate => _expiryDate;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['document_uploaded'] = _documentUploaded;
+    map['url'] = _url;
     map['doument_number'] = _doumentNumber;
     map['expiry_date'] = _expiryDate;
     return map;
@@ -1246,6 +1587,44 @@ class PersonalDetails1 {
     map['mobile'] = _mobile;
     map['alternative_number'] = _alternativeNumber;
     map['email'] = _email;
+    return map;
+  }
+}
+
+Location locationFromJson(String str) => Location.fromJson(json.decode(str));
+String locationToJson(Location data) => json.encode(data.toJson());
+
+class Location {
+  Location({
+    List<double>? coordinates,
+    String? type,
+  }) {
+    _coordinates = coordinates;
+    _type = type;
+  }
+
+  Location.fromJson(dynamic json) {
+    _coordinates =
+        json['coordinates'] != null ? json['coordinates'].cast<double>() : [];
+    _type = json['type'];
+  }
+  List<double>? _coordinates;
+  String? _type;
+  Location copyWith({
+    List<double>? coordinates,
+    String? type,
+  }) =>
+      Location(
+        coordinates: coordinates ?? _coordinates,
+        type: type ?? _type,
+      );
+  List<double>? get coordinates => _coordinates;
+  String? get type => _type;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['coordinates'] = _coordinates;
+    map['type'] = _type;
     return map;
   }
 }
