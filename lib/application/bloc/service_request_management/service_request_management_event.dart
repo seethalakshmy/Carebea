@@ -8,7 +8,9 @@ class ServiceRequestManagementEvent with _$ServiceRequestManagementEvent {
   }) = _GetCareGiverProfile;
   const factory ServiceRequestManagementEvent.started() = _Started;
   const factory ServiceRequestManagementEvent.isSelectedTab(Types type,
-      {int? filterId}) = _IsSelectedTab;
+      {int? filterId,
+      String? searchQuery,
+      String? dateFilterId}) = _IsSelectedTab;
   const factory ServiceRequestManagementEvent.reschedule(
       {required RescheduleParams rescheduleParams,
       required BuildContext context}) = _Reschedule;
@@ -41,4 +43,5 @@ class ServiceRequestManagementEvent with _$ServiceRequestManagementEvent {
       _IsRescheduleNotAvailableView;
   const factory ServiceRequestManagementEvent.isRescheduleOtherMatchingView() =
       _IsRescheduleOtherMatchingViewView;
+  const factory ServiceRequestManagementEvent.getFilters() = _GetFilters;
 }

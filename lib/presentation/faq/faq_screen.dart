@@ -170,7 +170,7 @@ class _FaqPageState extends State<FaqPage> {
             DataColumn2(
               size: ColumnSize.L,
               label: _tableColumnView(
-                AppString.visibility.val,
+                AppString.category.val,
               ),
             ),
             DataColumn2(
