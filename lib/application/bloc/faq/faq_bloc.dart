@@ -52,11 +52,20 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
     final Either<ApiErrorHandler, FaqListResponseModel> faqListResult =
         await faqRepository.getFaqList();
     FaqState faqState = faqListResult.fold((l) {
-      return state.copyWith(isLoading: false, faqListOption: Some(Left(l)));
+      return state.copyWith(
+          isLoading: false,
+          faqListOption: Some(Left(l)),
+          error: l.error,
+          isError: true);
     }, (r) {
-      faqList.clear();
-      faqList.addAll(r.data!);
-      return state.copyWith(isLoading: false, faqListOption: Some(Right(r)));
+      if (r.status!) {
+        faqList.clear();
+        faqList.addAll(r.data!);
+        return state.copyWith(isLoading: false, faqListOption: Some(Right(r)));
+      } else {
+        return state.copyWith(
+            isLoading: false, isError: true, error: r.message);
+      }
     });
     emit(faqState);
   }

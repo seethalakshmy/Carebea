@@ -14,6 +14,7 @@ class ServiceRequestManagementState with _$ServiceRequestManagementState {
       CommonResponseUse? startServiceResponse,
       CommonResponseUse? cancelServiceResponse,
       CaregiverProfileResponse? caregiverProfileResponse,
+      required Option<Either<ApiErrorHandler, GetFiltersResponse>> filterOption,
       @Default(false) bool isError,
       @Default(false) bool isCancelLoading,
       @Default(false) bool isStartServiceLoading,
@@ -33,6 +34,7 @@ class ServiceRequestManagementState with _$ServiceRequestManagementState {
         types: [],
         selectedDate: DateTime.now(),
         services: [],
+        filterOption: const None(),
         error: "");
   }
 }
