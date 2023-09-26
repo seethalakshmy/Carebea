@@ -10,7 +10,9 @@ class ServiceRequestManagementEvent with _$ServiceRequestManagementEvent {
   const factory ServiceRequestManagementEvent.isSelectedTab(Types type,
       {int? filterId,
       String? searchQuery,
-      String? dateFilterId}) = _IsSelectedTab;
+      String? dateFilterId,
+      String? fromDate,
+      String? toDate}) = _IsSelectedTab;
   const factory ServiceRequestManagementEvent.reschedule(
       {required RescheduleParams rescheduleParams,
       required BuildContext context}) = _Reschedule;

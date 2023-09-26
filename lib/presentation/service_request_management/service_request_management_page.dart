@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/presentation/widget/header_view.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -47,6 +48,10 @@ class _ServiceRequestManagementPageState
   final ServiceRequestManagementBloc _serviceRequestBloc =
       ServiceRequestManagementBloc(ServiceRequestManagementRepository());
   final TextEditingController _searchController = TextEditingController();
+  TextEditingController fromDateController = TextEditingController();
+  TextEditingController toDateController = TextEditingController();
+  Types items =
+      Types(id: 1, title: AppString.pendingServices.val, isSelected: true);
 
   @override
   void initState() {
@@ -77,77 +82,30 @@ class _ServiceRequestManagementPageState
             ServiceRequestManagementState>(
           builder: (context, state) {
             return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 _tabView(state),
                 const SizedBox(height: 20),
-                Responsive.isWeb(context)
-                    ? Row(
-                        children: [
-                          _dateFilterDropDown(context),
-                          const CustomSizedBox(width: 20),
-                          _statusDropDown(context),
-                          Flexible(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 20.0),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: CTextField(
-                                  onSubmitted: (val) {
-                                    _serviceRequestBloc.searchQuery = val;
-                                    //  _serviceRequestBloc.add(ServiceRequestManagementEvent.isSelectedTab(type));
-                                  },
-                                  width: Responsive.isWeb(context)
-                                      ? DBL.threeFifteen.val
-                                      : DBL.twoForty.val,
-                                  height: DBL.forty.val,
-                                  controller: _searchController,
-                                  hintText: AppString.search.val,
-                                  hintStyle: TS().gRoboto(
-                                      fontSize: FS.font15.val,
-                                      fontWeight: FW.w500.val),
-                                  suffixIcon: CustomSvg(
-                                    path: IMG.search.val,
-                                    height: 16,
-                                    width: 16,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                    : Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.start,
-                        alignment: WrapAlignment.start,
-                        runAlignment: WrapAlignment.start,
-                        spacing: 20,
-                        runSpacing: 10,
-                        children: [
-                          _dateFilterDropDown(context),
-                          _statusDropDown(context),
-                          CTextField(
-                            onSubmitted: (val) {
-                              _serviceRequestBloc.searchQuery = val;
-                              //  _serviceRequestBloc.add(ServiceRequestManagementEvent.isSelectedTab(type));
-                            },
-                            width: Responsive.isWeb(context)
-                                ? DBL.threeFifteen.val
-                                : DBL.twoForty.val,
-                            height: DBL.forty.val,
-                            controller: _searchController,
-                            hintText: AppString.search.val,
-                            hintStyle: TS().gRoboto(
-                                fontSize: FS.font15.val,
-                                fontWeight: FW.w500.val),
-                            suffixIcon: CustomSvg(
-                              path: IMG.search.val,
-                              height: 16,
-                              width: 16,
-                            ),
-                          ),
-                        ],
-                      ),
+                Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.start,
+                  alignment: WrapAlignment.start,
+                  runAlignment: WrapAlignment.start,
+                  spacing: 20,
+                  runSpacing: 10,
+                  children: [
+                    _dateFilterDropDown(context),
+                    _statusDropDown(context),
+                    _buildDatePicker(
+                        state, fromDateController, AppString.from.val, () {
+                      _selectFromDate(context, state);
+                    }),
+                    _buildDatePicker(state, toDateController, AppString.to.val,
+                        () {
+                      _selectToDate(context, state);
+                    }),
+                    _searchWidget(context),
+                  ],
+                ),
                 const SizedBox(height: 30),
                 _cardView(state, context)
               ],
@@ -155,6 +113,105 @@ class _ServiceRequestManagementPageState
           },
         )
       ],
+    );
+  }
+
+  CTextField _buildDatePicker(ServiceRequestManagementState state,
+      TextEditingController controller, String hintText, Function() onTap) {
+    return CTextField(
+      width: DBL.twoTen.val,
+      height: DBL.fortySeven.val,
+      hintText: hintText,
+      isReadOnly: true,
+      controller: controller,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return AppString.emptyDate.val;
+        }
+        return null;
+      },
+      onTap: onTap,
+      onChanged: (val) {},
+      textInputAction: TextInputAction.next,
+      keyBoardType: TextInputType.text,
+      suffixIcon: CustomSvg(
+        width: DBL.twentyFive.val,
+        height: DBL.twentyFive.val,
+        path: IMG.calenderOutLine.val,
+      ),
+    );
+  }
+
+  Future<void> _selectFromDate(
+      BuildContext context, ServiceRequestManagementState state) async {
+    final DateTime now = DateTime.now();
+    showDatePicker(
+      context: context,
+      initialDate: state.selectedDate,
+      firstDate: now.subtract(const Duration(days: 365)),
+      lastDate: now.add(const Duration(days: 365)),
+    ).then((value) {
+      if (value != null && value != state.selectedDate) {
+        context
+            .read<ServiceRequestManagementBloc>()
+            .add(ServiceRequestManagementEvent.setDate(value));
+        _serviceRequestBloc.add(ServiceRequestManagementEvent.isSelectedTab(
+            items,
+            fromDate: value.toString()));
+        fromDateController.text =
+            value.toString().parseWithFormat(dateFormat: AppString.mmDDYYY.val);
+        _serviceRequestBloc.selectedFromDate =
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+        FocusScope.of(context).unfocus();
+      }
+    });
+  }
+
+  Future<void> _selectToDate(
+      BuildContext context, ServiceRequestManagementState state) async {
+    final DateTime now = DateTime.now();
+    showDatePicker(
+      context: context,
+      initialDate: state.selectedDate,
+      firstDate: now.subtract(const Duration(days: 365)),
+      lastDate: now.add(const Duration(days: 365)),
+    ).then((value) {
+      if (value != null && value != state.selectedDate) {
+        context
+            .read<ServiceRequestManagementBloc>()
+            .add(ServiceRequestManagementEvent.setDate(value));
+        _serviceRequestBloc.add(ServiceRequestManagementEvent.isSelectedTab(
+            items,
+            toDate: value.toString()));
+        toDateController.text =
+            value.toString().parseWithFormat(dateFormat: AppString.mmDDYYY.val);
+        _serviceRequestBloc.selectedToDate =
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+        FocusScope.of(context).unfocus();
+      }
+    });
+  }
+
+  CTextField _searchWidget(BuildContext context) {
+    return CTextField(
+      onSubmitted: (val) {
+        print("item inside search submit : ${items.title}");
+        _serviceRequestBloc.searchQuery = val;
+        _serviceRequestBloc.add(ServiceRequestManagementEvent.isSelectedTab(
+          items,
+          searchQuery: val,
+        ));
+      },
+      width: DBL.twoTen.val,
+      height: DBL.fortySeven.val,
+      controller: _searchController,
+      hintText: AppString.search.val,
+      hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
+      suffixIcon: CustomSvg(
+        path: IMG.search.val,
+        height: 16,
+        width: 16,
+      ),
     );
   }
 
@@ -169,8 +226,7 @@ class _ServiceRequestManagementPageState
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
         width: DBL.twoTen.val,
-        height:
-            Responsive.isMobile(context) ? DBL.fortyFive.val : DBL.forty.val,
+        height: DBL.fortySeven.val,
         elevation: DBL.zero.val,
         padding: EdgeInsets.only(left: DBL.fifteen.val),
         backgroundColor: Colors.white,
@@ -223,6 +279,7 @@ class _ServiceRequestManagementPageState
                 item: item,
                 onTap: () {
                   _tabType = item.id!;
+                  items = item;
                   context
                       .read<ServiceRequestManagementBloc>()
                       .add(ServiceRequestManagementEvent.isSelectedTab(item));
@@ -393,10 +450,12 @@ class _ServiceRequestManagementPageState
                       text: item.service,
                     )),
                     DataCell(_rowsView(
-                      text: item.startDateTime,
+                      text: _serviceRequestBloc
+                          .generateFormattedDate(item.startDateTime ?? ""),
                     )),
                     DataCell(_rowsView(
-                      text: item.endDateTime,
+                      text: _serviceRequestBloc
+                          .generateFormattedDate(item.endDateTime ?? ""),
                     )),
                     if (_tabType == 1)
                       DataCell(_rowsView(
@@ -489,10 +548,8 @@ class _ServiceRequestManagementPageState
             },
             dropdownButtonStyle: DropdownButtonStyle(
               mainAxisAlignment: MainAxisAlignment.start,
-              width: 220,
-              height: Responsive.isMobile(context)
-                  ? DBL.fortyFive.val
-                  : DBL.forty.val,
+              width: DBL.twoTen.val,
+              height: DBL.fortySeven.val,
               elevation: DBL.zero.val,
               padding: EdgeInsets.only(left: DBL.fifteen.val),
               backgroundColor: Colors.white,

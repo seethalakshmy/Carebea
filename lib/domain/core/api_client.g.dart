@@ -1871,6 +1871,10 @@ class _ApiClient implements ApiClient {
     page,
     limit,
     filterId,
+    searchTerm,
+    serviceId,
+    fromDate,
+    toDate,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1881,6 +1885,10 @@ class _ApiClient implements ApiClient {
       'page': page,
       'limit': limit,
       'filter_id': filterId,
+      'search_term': searchTerm,
+      'service_id': serviceId,
+      'from_date': fromDate,
+      'to_date': toDate,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(
@@ -1905,6 +1913,10 @@ class _ApiClient implements ApiClient {
     userId,
     page,
     limit,
+    searchTerm,
+    serviceId,
+    fromDate,
+    toDate,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1914,6 +1926,10 @@ class _ApiClient implements ApiClient {
       'user_id': userId,
       'page': page,
       'limit': limit,
+      'search_term': searchTerm,
+      'service_id': serviceId,
+      'from_date': fromDate,
+      'to_date': toDate,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(
@@ -1938,6 +1954,10 @@ class _ApiClient implements ApiClient {
     userId,
     page,
     limit,
+    searchTerm,
+    serviceId,
+    fromDate,
+    toDate,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1947,6 +1967,10 @@ class _ApiClient implements ApiClient {
       'user_id': userId,
       'page': page,
       'limit': limit,
+      'search_term': searchTerm,
+      'service_id': serviceId,
+      'from_date': fromDate,
+      'to_date': toDate,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(
@@ -1971,6 +1995,10 @@ class _ApiClient implements ApiClient {
     userId,
     page,
     limit,
+    searchTerm,
+    serviceId,
+    fromDate,
+    toDate,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1980,6 +2008,10 @@ class _ApiClient implements ApiClient {
       'user_id': userId,
       'page': page,
       'limit': limit,
+      'search_term': searchTerm,
+      'service_id': serviceId,
+      'from_date': fromDate,
+      'to_date': toDate,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(
@@ -2004,6 +2036,10 @@ class _ApiClient implements ApiClient {
     userId,
     page,
     limit,
+    searchTerm,
+    serviceId,
+    fromDate,
+    toDate,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -2013,6 +2049,10 @@ class _ApiClient implements ApiClient {
       'user_id': userId,
       'page': page,
       'limit': limit,
+      'search_term': searchTerm,
+      'service_id': serviceId,
+      'from_date': fromDate,
+      'to_date': toDate,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(
