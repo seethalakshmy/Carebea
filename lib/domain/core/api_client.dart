@@ -506,35 +506,55 @@ abstract class ApiClient {
       @Field('user_id') String userId,
       @Field('page') int page,
       @Field('limit') int limit,
-      @Field('filter_id') int filterId);
+      @Field('filter_id') int filterId,
+      @Field('search_term') String searchTerm,
+      @Field('service_id') String serviceId,
+      @Field('from_date') String fromDate,
+      @Field('to_date') String toDate);
 
   @POST("/admin/completed-service-list")
   Future<ServiceRequestResponse> getCompletedRequests(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('page') int page,
-      @Field('limit') int limit);
+      @Field('limit') int limit,
+      @Field('search_term') String searchTerm,
+      @Field('service_id') String serviceId,
+      @Field('from_date') String fromDate,
+      @Field('to_date') String toDate);
 
   @POST("/admin/cancelled-service-list")
   Future<ServiceRequestResponse> getCancelled(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('page') int page,
-      @Field('limit') int limit);
+      @Field('limit') int limit,
+      @Field('search_term') String searchTerm,
+      @Field('service_id') String serviceId,
+      @Field('from_date') String fromDate,
+      @Field('to_date') String toDate);
 
   @POST("/admin/upcoming-service-list")
   Future<ServiceRequestResponse> getUpcomingRequests(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('page') int page,
-      @Field('limit') int limit);
+      @Field('limit') int limit,
+      @Field('search_term') String searchTerm,
+      @Field('service_id') String serviceId,
+      @Field('from_date') String fromDate,
+      @Field('to_date') String toDate);
 
   @POST("/admin/ongoing-service-list")
   Future<ServiceRequestResponse> getOngoingRequests(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('page') int page,
-      @Field('limit') int limit);
+      @Field('limit') int limit,
+      @Field('search_term') String searchTerm,
+      @Field('service_id') String serviceId,
+      @Field('from_date') String fromDate,
+      @Field('to_date') String toDate);
 
   @GET("/common-data/get-filters")
   Future<GetFiltersResponse> getFilters();
