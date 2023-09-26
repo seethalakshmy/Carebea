@@ -16,6 +16,9 @@ enum AppString {
   theReportedIssueByTheCg("The reported issue by the  care ambassador"),
   serviceCompleted("Service Completed"),
   serviceIncomplete("Service Incomplete"),
+  extraService("Extra Services"),
+  cancelReason("Cancel Reason"),
+  subscription("Subscription"),
 
   dosage("Dosage"),
   frequency("Frequency"),

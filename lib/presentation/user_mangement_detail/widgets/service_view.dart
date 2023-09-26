@@ -174,8 +174,7 @@ class ServiceView extends StatelessWidget {
                   text: '\$ ${item.totalServiceFee.toString()}')),
               DataCell(_rowsView(context, text: '\$ ${item.tip}')),
               DataCell(CustomRatingBar(
-                rating: 0,
-                // : item.rating ?? 0,
+                rating: item.serviceRating ?? 0,
               )),
               DataCell(ClientStatusWidget(serviceStatus: item.status ?? 0)),
               DataCell(InkWell(

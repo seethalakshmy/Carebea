@@ -37,13 +37,12 @@ class ServiceDetailsPopUp extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomSizedBox(
-                            width: isXs(context) ? 150 : 200,
+                            width: isXs(context) ? 150 : 250,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                CustomSvg(
-                                  path: services.client?.profilePic ??
-                                      IMG.profilePlaceHolder.val,
+                                CachedImage(
+                                  imgUrl: services.client?.profilePic,
                                   width: isXs(context) ? 150 : 200,
                                   height: isXs(context) ? 125 : 175,
                                 ),
@@ -111,9 +110,8 @@ class ServiceDetailsPopUp extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                CustomSvg(
-                                  path: services.client?.profilePic ??
-                                      IMG.profilePlaceHolder.val,
+                                CachedImage(
+                                  imgUrl: services.client?.profilePic,
                                   width: isXs(context) ? 150 : 200,
                                   height: isXs(context) ? 125 : 175,
                                 ),
@@ -201,6 +199,19 @@ class ServiceDetailsPopUp extends StatelessWidget {
                   : CustomSizedBox.shrink(),
             ],
           ),
+          services.status == 6
+              ? Row(
+                  children: [
+                    Expanded(
+                      child: AlertTextLabel(AppString.cancelReason.val),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * .11,
+                    ),
+                    AlertTextLabel(services.cancelReason ?? '')
+                  ],
+                )
+              : SizedBox.shrink(),
           Row(
             children: [
               AlertTextLabel(AppString.careAmbassador.val),
@@ -254,7 +265,7 @@ class ServiceDetailsPopUp extends StatelessWidget {
               Expanded(
                 child: RowColonCombo.twoHundred(
                     label: AppString.location.val,
-                    value: "no value",
+                    value: '',
                     // personalDetails.?.parseWithFormat(
                     //         dateFormat: AppString.mmDDYYY.val) ??
                     //     "",
@@ -269,7 +280,7 @@ class ServiceDetailsPopUp extends StatelessWidget {
                   ? Expanded(
                       child: Column(
                       children: [
-                        RowColonCombo.threeSeventy(
+                        RowColonCombo.twoHundred(
                             label: AppString.serviceCompleted.val,
                             value: '',
                             tierOneServiceList:
@@ -303,13 +314,37 @@ class ServiceDetailsPopUp extends StatelessWidget {
                   ? Expanded(
                       child: Column(
                       children: [
-                        RowColonCombo.threeSeventy(
+                        RowColonCombo.twoHundred(
                           label: AppString.serviceInComplete.val,
                           value: '',
                           tierOneServiceList:
                               services.caregiver?.notcompletedServices?.tier1,
                           tierTwoServiceList:
                               services.caregiver?.notcompletedServices?.tier2,
+                        ),
+                      ],
+                    ))
+                  : CustomSizedBox.shrink(),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(child: SizedBox()),
+              !isLg(context)
+                  ? Expanded(
+                      child: Column(
+                      children: [
+                        RowColonCombo.twoHundred(
+                          label: AppString.extraService.val,
+                          value: '',
+                          tierOneServiceList: services
+                              .caregiver?.completedServices?.tier1
+                              ?.where((element) => element.isExtra ?? false)
+                              .toList(),
+                          tierTwoServiceList: services
+                              .caregiver?.completedServices?.tier2
+                              ?.where((element) => element.isExtra ?? false)
+                              .toList(),
                         ),
                       ],
                     ))
@@ -383,6 +418,19 @@ class ServiceDetailsPopUp extends StatelessWidget {
             value: '',
             serviceListOne: services.caregiver?.notcompletedServices?.tier1,
             serviceListTwo: services.caregiver?.notcompletedServices?.tier2),
+        CustomSizedBox(
+          height: DBL.six.val,
+        ),
+        _dataView(
+          label: AppString.extraService.val,
+          value: '',
+          serviceListOne: services.caregiver?.completedServices?.tier1
+              ?.where((element) => element.isExtra ?? false)
+              .toList(),
+          serviceListTwo: services.caregiver?.completedServices?.tier2
+              ?.where((element) => element.isExtra ?? false)
+              .toList(),
+        ),
       ],
     );
   }
