@@ -14,6 +14,7 @@ class PaymentMethodView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var value = state.response?.data?.paymentMethod;
+    print("checking $value");
     print('inside payment ${value?.name}');
     return SingleChildScrollView(
         child: value?.type == 1

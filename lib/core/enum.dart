@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 enum AppString {
   userId("USER ID"),
   subProfileDetails('SubProfile Details'),
+  noTransactions("No Transactions"),
   primaryEmergencyContact("Primary Emergency Contact"),
   secondaryEmergencyContact("Secondary Emergency Contact"),
   physicianContact("Primary Care Physician Contact"),
@@ -15,6 +16,9 @@ enum AppString {
   theReportedIssueByTheCg("The reported issue by the  care ambassador"),
   serviceCompleted("Service Completed"),
   serviceIncomplete("Service Incomplete"),
+  extraService("Extra Services"),
+  cancelReason("Cancel Reason"),
+  subscription("Subscription"),
 
   dosage("Dosage"),
   frequency("Frequency"),
@@ -32,6 +36,7 @@ enum AppString {
   otherAllergies("Other allergies"),
   diagnosis("Diagnosis"),
   medicationDetails("Medication Details"),
+  allergicDrugs("Allergic Drugs"),
   diet("Diet"),
   healthCondition("Health Condition"),
   medication("Medication"),

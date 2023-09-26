@@ -125,7 +125,9 @@ class SubProfileHealthProfile extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Medication(),
+                child: MedicationWidget(
+                    medication: state
+                        .response?.data?.healthMedicalConditions?.medication),
               )
             ],
           ),
@@ -137,63 +139,95 @@ class SubProfileHealthProfile extends StatelessWidget {
   RowColonCombo _foodAllergy() {
     return RowColonCombo.twoHundred(
         label: AppString.doYouHaveAnyFoodAllergies.val,
-        value: "no value",
+        value: state.response?.data?.healthMedicalConditions?.healthCondition
+                    ?.haveFoodAllergies ==
+                true
+            ? 'Yes'
+            : 'No',
         fontSize: FS.font13PointFive.val);
   }
 
   RowColonCombo _difficultyInHearing() {
     return RowColonCombo.twoHundred(
         label: AppString.doYouHaveDifficultyInHearing.val,
-        value: "no value",
+        value: state.response?.data?.healthMedicalConditions?.healthCondition
+                    ?.haveHearingDifficulty ==
+                true
+            ? 'Yes'
+            : 'No',
         fontSize: FS.font13PointFive.val);
   }
 
   RowColonCombo _hearingAid() {
     return RowColonCombo.twoHundred(
         label: AppString.areYouUsingAnyHearingAid.val,
-        value: "no value",
+        value: state.response?.data?.healthMedicalConditions?.healthCondition
+                    ?.haveHearingAid ==
+                true
+            ? 'Yes'
+            : 'No',
         fontSize: FS.font13PointFive.val);
   }
 
   RowColonCombo _difficultyInVision() {
     return RowColonCombo.twoHundred(
         label: AppString.doYouHaveDifficultyInVision.val,
-        value: "no value",
+        value: state.response?.data?.healthMedicalConditions?.healthCondition
+                    ?.haveDifficultyInvision ==
+                true
+            ? 'Yes'
+            : 'No',
         fontSize: FS.font13PointFive.val);
   }
 
   RowColonCombo _glass() {
     return RowColonCombo.twoHundred(
         label: AppString.areYouUsingAnyGlass.val,
-        value: "no value",
+        value: state.response?.data?.healthMedicalConditions?.healthCondition
+                    ?.haveGlasses ==
+                true
+            ? 'Yes'
+            : "No",
         fontSize: FS.font13PointFive.val);
   }
 
   RowColonCombo _mentalCondition() {
     return RowColonCombo.twoHundred(
         label: AppString.mentalHealthCondition.val,
-        value: "no value",
+        value: state.response?.data?.healthMedicalConditions?.healthCondition
+                    ?.mentalHealthCondiditon ==
+                true
+            ? 'Yes'
+            : "No",
         fontSize: FS.font13PointFive.val);
   }
 
   RowColonCombo _mobility() {
     return RowColonCombo.twoHundred(
         label: AppString.mobility.val,
-        value: "no value",
+        value: state.response?.data?.healthMedicalConditions?.healthCondition
+                    ?.mobility ==
+                true
+            ? 'Yes'
+            : 'No',
         fontSize: FS.font13PointFive.val);
   }
 
   RowColonCombo _allergyProblem() {
     return RowColonCombo.twoHundred(
         label: AppString.doYouHaveAnyAllergyProblem.val,
-        value: "no value",
+        value: state.response?.data?.healthMedicalConditions?.healthCondition
+                    ?.haveAnyAllergyProblem ==
+                true
+            ? 'Yes'
+            : 'No',
         fontSize: FS.font13PointFive.val);
   }
 
   RowColonCombo _otherAllergies() {
     return RowColonCombo.twoHundred(
         label: AppString.otherAllergies.val,
-        value: "no value",
+        value: '',
         fontSize: FS.font13PointFive.val);
   }
 

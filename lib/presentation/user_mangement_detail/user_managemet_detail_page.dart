@@ -1,22 +1,21 @@
-import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
-import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_view.dart';
-import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/transactions_view.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:admin_580_tech/application/bloc/user_management_detail/user_management_detail_bloc.dart';
 import 'package:admin_580_tech/core/custom_debugger.dart';
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/properties.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/infrastructure/user_management_detail/user_management_detail_repository.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/views/payment_method_view.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/views/sub_profile_view.dart';
+import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_view.dart';
+import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/transactions_view.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
-import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:admin_580_tech/presentation/widget/loader_view.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,6 +23,7 @@ import '../../core/responsive.dart';
 import '../caregiver_detail/widgets/service_completion_and_rewards.dart';
 import '../caregiver_detail/widgets/svg_text.dart';
 import '../side_menu/side_menu_page.dart';
+import '../widget/cached_image.dart';
 
 @RoutePage()
 class UserManagementDetailPage extends StatefulWidget {
@@ -77,6 +77,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
     UserDetailResponse? response = state.response;
     print('testing${state.response?.data?.name?.firstName}');
     print('testing${userId}');
+    print(state.response?.data?.profilePic);
 
     return CustomSizedBox(
       height: MediaQuery.of(context).size.height,
@@ -120,67 +121,12 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            CustomSvg(
-                                              path: state.response?.data
-                                                      ?.profilePic ??
-                                                  IMG.profilePlaceHolder.val,
+                                            CachedImage(
                                               width: isXs(context) ? 150 : 200,
                                               height: isXs(context) ? 125 : 175,
+                                              imgUrl: state
+                                                  .response?.data?.profilePic,
                                             ),
-
-                                            ///Todo change later
-                                            // CustomSizedBox(
-                                            //   height: DBL.forty.val,
-                                            // ),
-                                            // Row(
-                                            //     mainAxisAlignment:
-                                            //         MainAxisAlignment
-                                            //             .spaceBetween,
-                                            //     children: [
-                                            //       CustomText3(
-                                            //         AppString.profileCompletion.val,
-                                            //         style: TS().gRoboto(
-                                            //             fontWeight: FW.w500.val,
-                                            //             fontSize: getFontSize(
-                                            //               context,
-                                            //               fontSize:
-                                            //                   FS.font14.val,
-                                            //             ),
-                                            //             color: AppColor
-                                            //                 .lightGrey4.val),
-                                            //       ),
-                                            //       CustomSizedBox(
-                                            //         width: DBL.five.val,
-                                            //       ),
-                                            //       CustomText3(
-                                            //         response.user
-                                            //                 ?.profileCompletion ??
-                                            //             "",
-                                            //         style: TS().gRoboto(
-                                            //             fontWeight: FW.w500.val,
-                                            //             fontSize: getFontSize(
-                                            //               context,
-                                            //               fontSize:
-                                            //                   FS.font14.val,
-                                            //             ),
-                                            //             color: AppColor
-                                            //                 .primaryColor.val),
-                                            //       )
-                                            //     ]),
-                                            // CustomSizedBox(
-                                            //   height: DBL.thirteen.val,
-                                            // ),
-                                            // LinearPercentIndicator(
-                                            //   padding: const EdgeInsets.all(0),
-                                            //   barRadius:
-                                            //       const Radius.circular(10),
-                                            //   width:
-                                            //       isXs(context) ? 150.0 : 200.0,
-                                            //   lineHeight: 6.0,
-                                            //   percent: 0.5,
-                                            //   progressColor:
-                                            //       AppColor.green2.val,
-                                            // ),
                                           ],
                                         ),
                                       ),
