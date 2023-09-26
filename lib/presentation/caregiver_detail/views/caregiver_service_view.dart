@@ -258,6 +258,8 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
 
   _serviceDetailPopUp(BuildContext context, int status) {
     showGeneralDialog(
+      barrierDismissible: true,
+      barrierLabel: "",
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {

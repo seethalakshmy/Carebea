@@ -268,6 +268,8 @@ class _CareGiverServiceRequestViewState
     BuildContext context,
   ) {
     showGeneralDialog(
+      barrierDismissible: true,
+      barrierLabel: "",
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {

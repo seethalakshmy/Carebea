@@ -142,6 +142,7 @@ class ServiceList {
     String? serviceFee,
     DecisionMaker? decisionMaker,
     Client? client,
+    CareGiver? careGiver,
     bool? isOngoing,
   }) {
     _id = id;
@@ -171,6 +172,7 @@ class ServiceList {
     _serviceFee = serviceFee;
     _decisionMaker = decisionMaker;
     _client = client;
+    _careGiver = careGiver;
     _isOngoing = isOngoing;
   }
 
@@ -219,6 +221,9 @@ class ServiceList {
         ? DecisionMaker.fromJson(json['decision_maker'])
         : null;
     _client = json['client'] != null ? Client.fromJson(json['client']) : null;
+    _careGiver = json['caregiver'] != null
+        ? CareGiver.fromJson(json['caregiver'])
+        : null;
     _isOngoing = json['is_ongoing'];
     _profileId = json['profile_id'];
     _genderPreference = json['gender_preference'];
@@ -254,6 +259,7 @@ class ServiceList {
   String? _serviceFee;
   DecisionMaker? _decisionMaker;
   Client? _client;
+  CareGiver? _careGiver;
   bool? _isOngoing;
   String? _profileId;
   String? _addressId;
@@ -288,6 +294,7 @@ class ServiceList {
     String? serviceFee,
     DecisionMaker? decisionMaker,
     Client? client,
+    CareGiver? careGiver,
     bool? isOngoing,
   }) =>
       ServiceList(
@@ -321,6 +328,7 @@ class ServiceList {
         serviceFee: serviceFee ?? _serviceFee,
         decisionMaker: decisionMaker ?? _decisionMaker,
         client: client ?? _client,
+        careGiver: careGiver ?? _careGiver,
         isOngoing: isOngoing ?? _isOngoing,
       );
   String? get id => _id;
@@ -350,6 +358,7 @@ class ServiceList {
   String? get serviceFee => _serviceFee;
   DecisionMaker? get decisionMaker => _decisionMaker;
   Client? get client => _client;
+  CareGiver? get careGiver => _careGiver;
   bool? get isOngoing => _isOngoing;
   int? get genderPreferences => _genderPreference;
   String? get addressId => _addressId;
@@ -391,7 +400,63 @@ class ServiceList {
     if (_client != null) {
       map['client'] = _client?.toJson();
     }
+    if (_careGiver != null) {
+      map['caregiver'] = _careGiver?.toJson();
+    }
     map['is_ongoing'] = _isOngoing;
+    return map;
+  }
+}
+
+CareGiver careGiverFromJson(String str) => CareGiver.fromJson(json.decode(str));
+String careGiverToJson(CareGiver data) => json.encode(data.toJson());
+
+class CareGiver {
+  CareGiver({
+    String? id,
+    String? firstName,
+    String? lastName,
+    String? profile,
+  }) {
+    _id = id;
+    _firstName = firstName;
+    _lastName = lastName;
+    _profile = profile;
+  }
+
+  CareGiver.fromJson(dynamic json) {
+    _id = json['id'];
+    _firstName = json['first_name'];
+    _lastName = json['last_name'];
+    _profile = json['profile'];
+  }
+  String? _id;
+  String? _firstName;
+  String? _lastName;
+  String? _profile;
+  CareGiver copyWith({
+    String? id,
+    String? firstName,
+    String? lastName,
+    String? profile,
+  }) =>
+      CareGiver(
+        id: id ?? _id,
+        firstName: firstName ?? _firstName,
+        lastName: lastName ?? _lastName,
+        profile: profile ?? _profile,
+      );
+  String? get id => _id;
+  String? get firstName => _firstName;
+  String? get lastName => _lastName;
+  String? get profile => _profile;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['first_name'] = _firstName;
+    map['last_name'] = _lastName;
+    map['profile'] = _profile;
     return map;
   }
 }

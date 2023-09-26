@@ -14,6 +14,7 @@ import '../../../domain/common_response/common_response.dart';
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
 import '../../../domain/service_request_management/model/reschedule_response.dart';
 import '../../../domain/service_request_management/model/service_request_response.dart';
+import '../../../domain/transaction_management/model/get_filters_response.dart';
 import '../../../infrastructure/service_request_management/service_request_management_repository.dart';
 
 part 'service_request_management_bloc.freezed.dart';
@@ -23,6 +24,9 @@ part 'service_request_management_state.dart';
 class ServiceRequestManagementBloc
     extends Bloc<ServiceRequestManagementEvent, ServiceRequestManagementState> {
   ServiceRequestManagementRepository serviceRequestManagementRepository;
+  int filterId = 0;
+  String searchQuery = "";
+  List<FilterData> filterList = [];
 
   ServiceRequestManagementBloc(this.serviceRequestManagementRepository)
       : super(ServiceRequestManagementState.initial()) {
@@ -40,6 +44,7 @@ class ServiceRequestManagementBloc
     on<_StartService>(_startService);
     on<_CancelService>(_cancelService);
     on<_GetCareGiverProfile>(_getCareGiverProfile);
+    on<_GetFilters>(_getFilters);
   }
 
   _getCareGiverProfile(_GetCareGiverProfile event,
@@ -190,10 +195,12 @@ class ServiceRequestManagementBloc
         await serviceRequestManagementRepository.rescheduleService(
             rescheduleParams: event.rescheduleParams);
     ServiceRequestManagementState rescheduleState = result.fold((l) {
+      Navigator.pop(event.context);
       CSnackBar.showError(event.context, msg: l.error ?? "");
       return state.copyWith(
           isRescheduleLoaderView: false, isReScheduleError: true);
     }, (r) {
+      Navigator.pop(event.context);
       if (r.status ?? false) {
         if (r.data?.caregiverFound ?? false) {
           add(const ServiceRequestManagementEvent.isRescheduleAvailableView());
@@ -278,9 +285,11 @@ class ServiceRequestManagementBloc
       return state.copyWith(isCancelLoading: false);
     }, (r) {
       if (r.status ?? false) {
-        Navigator.pop(event.context);
-        Navigator.pop(event.context);
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        Navigator.pop(event.context);
+        Navigator.pop(event.context);
+        add(ServiceRequestManagementEvent.isSelectedTab(Types(
+            id: 4, title: AppString.upcomingRequest.val, isSelected: true)));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
@@ -376,5 +385,20 @@ class ServiceRequestManagementBloc
       return state.copyWith(isLoading: false, services: r.data?.service ?? []);
     });
     return serviceRequestManagementState;
+  }
+
+  _getFilters(
+      _GetFilters event, Emitter<ServiceRequestManagementState> emit) async {
+    emit(state.copyWith(isLoading: true));
+    final Either<ApiErrorHandler, GetFiltersResponse> result =
+        await serviceRequestManagementRepository.getFilters();
+    ServiceRequestManagementState filterState = result.fold((l) {
+      return state.copyWith(isLoading: false, filterOption: Some(Left(l)));
+    }, (r) {
+      filterList.clear();
+      filterList.addAll(r.data!);
+      return state.copyWith(isLoading: false, filterOption: Some(Right(r)));
+    });
+    emit(filterState);
   }
 }

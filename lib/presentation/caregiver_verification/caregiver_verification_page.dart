@@ -132,6 +132,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
               CachedImage(
                 onTap: () {
                   showGeneralDialog(
+                    barrierLabel: "",
+                    barrierDismissible: true,
                     context: context,
                     pageBuilder: (BuildContext buildContext,
                         Animation animation, Animation secondaryAnimation) {
@@ -1057,6 +1059,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
       _launchUrl(url);
     } else {
       showGeneralDialog(
+        barrierLabel: "",
+        barrierDismissible: true,
         context: context,
         pageBuilder: (BuildContext buildContext, Animation animation,
             Animation secondaryAnimation) {
@@ -1083,7 +1087,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                     )
                   : CachedImage(
                       onTap: () {
-                        showGeneralDialog(
+                        /*showGeneralDialog(barrierLabel: "",
+                          barrierDismissible: true,
                           context: context,
                           pageBuilder: (BuildContext buildContext,
                               Animation animation,
@@ -1097,7 +1102,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                                   imgUrl: url,
                                 ));
                           },
-                        );
+                        );*/
                       },
                       imgUrl: url,
                       width: 780,
@@ -1112,6 +1117,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
 
   _certificateRejectPopUp(BuildContext context) {
     showGeneralDialog(
+      barrierLabel: "",
+      barrierDismissible: true,
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {

@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 
 import '../caregiver_profile/model/caregiver_profile_response.dart';
 import '../core/api_error_handler/api_error_handler.dart';
+import '../transaction_management/model/get_filters_response.dart';
 import 'model/reschedule_response.dart';
 import 'model/service_request_response.dart';
 
@@ -53,4 +54,6 @@ abstract class IServiceRequestManagementRepo {
     required String userId,
     required String serviceId,
   });
+
+  Future<Either<ApiErrorHandler, GetFiltersResponse>> getFilters();
 }

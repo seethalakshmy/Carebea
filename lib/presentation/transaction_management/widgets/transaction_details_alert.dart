@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../application/bloc/transaction_management/transaction_management_bloc.dart';
 import '../../../domain/transaction_management/model/transaction_details_response.dart';
 import '../../widget/custom_shimmer.dart';
+import '../../widget/error_view.dart';
 
 class TransactionDetailsAlert extends StatelessWidget {
   const TransactionDetailsAlert({super.key, required this.transactionBloc});
@@ -24,18 +25,26 @@ class TransactionDetailsAlert extends StatelessWidget {
       child: BlocBuilder<TransactionManagementBloc, TransactionManagementState>(
         bloc: transactionBloc,
         builder: (context, state) {
+          print("2222222222222 ${transactionBloc.state.error}");
           return SizedBox(
             height: 480,
             child: transactionBloc.state.isDetailsLoading
                 ? const CustomShimmerWidget.rectangular(height: double.infinity)
-                : Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.start,
-                    alignment: WrapAlignment.start,
-                    children: [
-                      _detailsWidget(context),
-                      _refundDetailsWidget(context)
-                    ],
-                  ),
+                : transactionBloc.state.error != null
+                    ? ErrorView(
+                        isClientError: true,
+                        errorMessage: transactionBloc.state.error,
+                        isUnderTab: false,
+                        isFromDashboard: false,
+                      )
+                    : Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.start,
+                        alignment: WrapAlignment.start,
+                        children: [
+                          _detailsWidget(context),
+                          _refundDetailsWidget(context)
+                        ],
+                      ),
           );
         },
       ),
@@ -168,98 +177,94 @@ class TransactionDetailsAlert extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomText(
-            AppString.refundStatus.val,
-            style: TS().gRoboto(
-                fontSize: FS.font16.val,
-                fontWeight: FW.w500.val,
-                color: AppColor.black.val),
-          ),
+          transactionBloc.detailsList.isNotEmpty
+              ? CustomText(
+                  AppString.refundStatus.val,
+                  style: TS().gRoboto(
+                      fontSize: FS.font16.val,
+                      fontWeight: FW.w500.val,
+                      color: AppColor.black.val),
+                )
+              : CustomSizedBox.shrink(),
           CustomSizedBox(height: DBL.ten.val),
           ListView.builder(
-              itemCount: BlocProvider.of<TransactionManagementBloc>(context)
-                  .detailsList[0]
-                  .refund!
-                  .paymentStatus!
-                  .length,
+              itemCount: transactionBloc.detailsList.isNotEmpty
+                  ? transactionBloc.detailsList[0].refund!.paymentStatus!.length
+                  : 0,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      children: [
-                        const CircleAvatar(
-                          backgroundColor: Colors.green,
-                          radius: 6,
-                        ),
-                        index + 1 <
-                                BlocProvider.of<TransactionManagementBloc>(
-                                        context)
-                                    .detailsList[0]
-                                    .refund!
-                                    .paymentStatus!
-                                    .length
-                            ? Container(
-                                width: 5,
-                                color: AppColor.lightGrey.val,
-                                height: 60,
-                              )
-                            : Container()
-                      ],
-                    ),
-                    CustomSizedBox(width: DBL.ten.val),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomText(
-                          BlocProvider.of<TransactionManagementBloc>(context)
-                                  .detailsList[0]
-                                  .refund!
-                                  .paymentStatus![index]
-                                  .date ??
-                              "",
-                          style: TS().gRoboto(
-                              fontSize: FS.font12.val,
-                              fontWeight: FW.w400.val,
-                              color: AppColor.black4.val),
-                        ),
-                        CustomSizedBox(height: DBL.ten.val),
-                        Padding(
-                          padding:
-                              const EdgeInsets.only(left: 10.0, bottom: 10.0),
-                          child: Column(
+                print("********** ${transactionBloc.detailsList.isNotEmpty}");
+                return transactionBloc.detailsList.isNotEmpty
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            children: [
+                              const CircleAvatar(
+                                backgroundColor: Colors.green,
+                                radius: 6,
+                              ),
+                              index + 1 <
+                                      transactionBloc.detailsList[0].refund!
+                                          .paymentStatus!.length
+                                  ? Container(
+                                      width: 5,
+                                      color: AppColor.lightGrey.val,
+                                      height: 60,
+                                    )
+                                  : Container()
+                            ],
+                          ),
+                          CustomSizedBox(width: DBL.ten.val),
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CustomText(
-                                BlocProvider.of<TransactionManagementBloc>(
-                                            context)
-                                        .detailsList[0]
-                                        .refund!
-                                        .paymentStatus![index]
-                                        .title ??
+                                transactionBloc.detailsList[0].refund!
+                                        .paymentStatus![index].date ??
                                     "",
                                 style: TS().gRoboto(
                                     fontSize: FS.font12.val,
                                     fontWeight: FW.w400.val,
-                                    color: AppColor.lightGrey2.val),
+                                    color: AppColor.black4.val),
                               ),
-                              CustomSizedBox(height: DBL.five.val),
-                              CustomText(
-                                "Txn Id : ${BlocProvider.of<TransactionManagementBloc>(context).detailsList[0].refund!.paymentStatus![index].paymentLogTxnId ?? ""}",
-                                style: TS().gRoboto(
-                                    fontSize: FS.font12.val,
-                                    fontWeight: FW.w400.val,
-                                    color: AppColor.lightGrey2.val),
+                              CustomSizedBox(height: DBL.ten.val),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10.0, bottom: 10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CustomText(
+                                      transactionBloc.detailsList[0].refund!
+                                              .paymentStatus![index].title ??
+                                          "",
+                                      style: TS().gRoboto(
+                                          fontSize: FS.font12.val,
+                                          fontWeight: FW.w400.val,
+                                          color: AppColor.lightGrey2.val),
+                                    ),
+                                    CustomSizedBox(height: DBL.five.val),
+                                    CustomText(
+                                      "Txn Id : ${transactionBloc.detailsList[0].refund!.paymentStatus![index].paymentLogTxnId ?? ""}",
+                                      style: TS().gRoboto(
+                                          fontSize: FS.font12.val,
+                                          fontWeight: FW.w400.val,
+                                          color: AppColor.lightGrey2.val),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                );
+                          )
+                        ],
+                      )
+                    : Container(
+                        width: 100,
+                        height: 50,
+                        color: Colors.red,
+                      );
               }),
         ],
       ),

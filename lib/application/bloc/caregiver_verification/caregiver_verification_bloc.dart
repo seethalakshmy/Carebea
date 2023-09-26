@@ -312,6 +312,7 @@ class CareGiverVerificationBloc
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
+        print(" ################## ${r.message}");
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
         autoTabRouter?.navigate(CareGiverProfileRoute(id: event.userId));
       } else {
@@ -398,6 +399,8 @@ class CareGiverVerificationBloc
     required userId,
   }) {
     showGeneralDialog(
+      barrierLabel: "",
+      barrierDismissible: true,
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {
@@ -412,7 +415,8 @@ class CareGiverVerificationBloc
                 ),
                 CachedImage(
                   onTap: () {
-                    showGeneralDialog(
+                    /*showGeneralDialog(barrierLabel: "",
+                      barrierDismissible: true,
                       context: context,
                       pageBuilder: (BuildContext buildContext,
                           Animation animation, Animation secondaryAnimation) {
@@ -425,7 +429,7 @@ class CareGiverVerificationBloc
                               imgUrl: imgUrl,
                             ));
                       },
-                    );
+                    );*/
                   },
                   imgUrl: imgUrl,
                   height: DBL.oneFifty.val,
@@ -480,6 +484,8 @@ class CareGiverVerificationBloc
     required userId,
   }) {
     showGeneralDialog(
+      barrierLabel: "",
+      barrierDismissible: true,
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {
@@ -494,7 +500,8 @@ class CareGiverVerificationBloc
                 ),
                 CachedImage(
                   onTap: () {
-                    showGeneralDialog(
+                    /*showGeneralDialog(barrierLabel: "",
+                      barrierDismissible: true,
                       context: context,
                       pageBuilder: (BuildContext buildContext,
                           Animation animation, Animation secondaryAnimation) {
@@ -507,7 +514,7 @@ class CareGiverVerificationBloc
                               imgUrl: imgUrl,
                             ));
                       },
-                    );
+                    );*/
                   },
                   imgUrl: imgUrl,
                   height: DBL.oneFifty.val,

@@ -211,7 +211,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
   _profileImageView(BuildContext context, String url) {
     return CachedImage(
       onTap: () {
-        showGeneralDialog(
+        showGeneralDialog(barrierDismissible: true,barrierLabel: "",
           context: context,
           pageBuilder: (BuildContext buildContext, Animation animation,
               Animation secondaryAnimation) {
@@ -340,7 +340,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
             padding: EdgeInsets.only(right: 20), child: _complaintDetailBloc
               .complaintDetailsList[0].attachments![index].contains(".pdf")
               ? InkWell(onTap: () {
-            showGeneralDialog(
+            showGeneralDialog(barrierDismissible: true,barrierLabel: "",
               context: context,
               pageBuilder: (BuildContext buildContext, Animation animation,
                   Animation secondaryAnimation) {
@@ -381,7 +381,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
           ) : ClipRRect(borderRadius: BorderRadius.circular(10),
             child: CachedImage(
               onTap: () {
-                showGeneralDialog(
+                showGeneralDialog(barrierDismissible: true,barrierLabel: "",
                   context: context,
                   pageBuilder: (BuildContext buildContext, Animation animation,
                       Animation secondaryAnimation) {

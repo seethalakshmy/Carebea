@@ -136,7 +136,7 @@ class CareGiverProfileBloc
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
-        // CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
       } else {
         emit(state.copyWith(
             status: state.response?.data?.verificationStatus ?? 0));
@@ -173,7 +173,9 @@ class CareGiverProfileBloc
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
-        autoTabRouter?.navigate(CareGiverDetailRoute(id: event.userId));
+        if (event.status == Interview.completed.val) {
+          autoTabRouter?.navigate(CareGiverDetailRoute(id: event.userId));
+        }
       } else {
         emit(state.copyWith(
             status: state.response?.data?.verificationStatus ?? 0));

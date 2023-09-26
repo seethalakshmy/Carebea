@@ -150,11 +150,15 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
               CustomSizedBox(
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
+                  maxLength: 30,
+                  inputFormatter: [
+                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Z., ]"))
+                  ],
                   labelName: AppString.firstName.val,
                   focusNode: _fNameFocusNode,
                   controller: _fNameController,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value?.trim() == null || value!.trim().isEmpty) {
                       return AppString.emptyFName.val;
                     }
                     return null;
@@ -167,11 +171,15 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
               CustomSizedBox(
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
+                  maxLength: 30,
+                  inputFormatter: [
+                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Z., ]"))
+                  ],
                   labelName: AppString.lastName.val,
                   focusNode: _lNameFocusNode,
                   controller: _lNameController,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value?.trim() == null || value!.trim().isEmpty) {
                       return AppString.emptyLName.val;
                     }
                     return null;
@@ -184,11 +192,14 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
               CustomSizedBox(
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
+                  inputFormatter: [
+                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Z0-9@.]"))
+                  ],
                   labelName: AppString.emailAddress.val,
                   focusNode: _emailFocusNode,
                   controller: _emailController,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value?.trim() == null || value!.trim().isEmpty) {
                       return AppString.emptyEmail.val;
                     } else if (!RegExp(
                             r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
@@ -270,11 +281,16 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
   }
 
   checkInputData() {
+    _fNameController.text = _fNameController.text.trim();
+    _lNameController.text = _lNameController.text.trim();
+    _emailController.text = _emailController.text.trim();
+    _mobileController.text = _mobileController.text.trim();
     if (_validateMode != AutovalidateMode.always) {
       _validationBloc.add(const FormValidationEvent.submit());
     }
     if (_formKey.currentState!.validate()) {
       _creationBloc.add(CaregiverCreationEvent.createCaregiver(
+          context: context,
           firstName: _fNameController.text.trim(),
           lastName: _lNameController.text.trim(),
           email: _emailController.text.trim(),
