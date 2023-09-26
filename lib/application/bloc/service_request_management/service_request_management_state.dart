@@ -7,6 +7,9 @@ class ServiceRequestManagementState with _$ServiceRequestManagementState {
       bool? isLoading,
       required String? error,
       required DateTime selectedDate,
+          required String fromDate,
+          required String toDate,
+          required String searchQuery,
       TimeOfDay? fromTime,
       TimeOfDay? toTime,
       RescheduleResponse? rescheduleResponse,
@@ -35,6 +38,9 @@ class ServiceRequestManagementState with _$ServiceRequestManagementState {
         selectedDate: DateTime.now(),
         services: [],
         filterOption: const None(),
-        error: "");
+        error: "",
+        fromDate: "",
+        toDate: "",
+        searchQuery: "");
   }
 }

@@ -14,42 +14,62 @@ abstract class IServiceRequestManagementRepo {
       {required int page,
       required int limit,
       required String userId,
-      required int filterId});
+      required int filterId,
+      required String searchTerm,
+      required String serviceId,
+      required String fromDate,
+      required String toDate});
 
   Future<Either<ApiErrorHandler, CaregiverProfileResponse>> getCareGiverProfile(
       {required String userID, required String adminId});
 
-  Future<Either<ApiErrorHandler, ServiceRequestResponse>> getCompletedRequests({
-    required int page,
-    required int limit,
-    required String userId,
-  });
+  Future<Either<ApiErrorHandler, ServiceRequestResponse>> getCompletedRequests(
+      {required int page,
+      required int limit,
+      required String userId,
+      required String searchTerm,
+      required String serviceId,
+      required String fromDate,
+      required String toDate});
 
-  Future<Either<ApiErrorHandler, ServiceRequestResponse>> getCancelledRequests({
-    required int page,
-    required int limit,
-    required String userId,
-  });
+  Future<Either<ApiErrorHandler, ServiceRequestResponse>> getCancelledRequests(
+      {required int page,
+      required int limit,
+      required String userId,
+      required String searchTerm,
+      required String serviceId,
+      required String fromDate,
+      required String toDate});
 
-  Future<Either<ApiErrorHandler, ServiceRequestResponse>> getUpcomingRequests({
-    required int page,
-    required int limit,
-    required String userId,
-  });
+  Future<Either<ApiErrorHandler, ServiceRequestResponse>> getUpcomingRequests(
+      {required int page,
+      required int limit,
+      required String userId,
+      required String searchTerm,
+      required String serviceId,
+      required String fromDate,
+      required String toDate});
 
-  Future<Either<ApiErrorHandler, ServiceRequestResponse>> getOngoingRequests({
-    required int page,
-    required int limit,
-    required String userId,
-  });
+  Future<Either<ApiErrorHandler, ServiceRequestResponse>> getOngoingRequests(
+      {required int page,
+      required int limit,
+      required String userId,
+      required String searchTerm,
+      required String serviceId,
+      required String fromDate,
+      required String toDate});
+
   Future<Either<ApiErrorHandler, RescheduleResponse>> rescheduleService(
       {required RescheduleParams rescheduleParams});
+
   Future<Either<ApiErrorHandler, CommonResponseUse>> assignCaregiver(
       {required AssignCareGiverParams assignCareGiverParams});
+
   Future<Either<ApiErrorHandler, CommonResponseUse>> cancelServiceRequest(
       {required String userId,
       required String serviceId,
       required String description});
+
   Future<Either<ApiErrorHandler, CommonResponseUse>> startService({
     required String userId,
     required String serviceId,

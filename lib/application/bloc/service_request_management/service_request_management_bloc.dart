@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 
 import '../../../core/custom_snackbar.dart';
 import '../../../core/enum.dart';
@@ -27,6 +28,8 @@ class ServiceRequestManagementBloc
   int filterId = 0;
   String searchQuery = "";
   List<FilterData> filterList = [];
+  String selectedFromDate = "";
+  String selectedToDate = "";
 
   ServiceRequestManagementBloc(this.serviceRequestManagementRepository)
       : super(ServiceRequestManagementState.initial()) {
@@ -78,6 +81,9 @@ class ServiceRequestManagementBloc
         isLoading: true,
         services: [],
         error: "",
+        fromDate: selectedFromDate,
+        toDate: selectedToDate,
+        searchQuery: searchQuery,
         rescheduleResponse: null,
         toTime: null,
         fromTime: null,
@@ -110,15 +116,20 @@ class ServiceRequestManagementBloc
     }
 
     if (event.type.id == 1) {
-      state = await _getPendingRequests(event.filterId);
+      state = await _getPendingRequests(event.filterId,
+          event.searchQuery?.trim(), event.fromDate, event.toDate);
     } else if (event.type.id == 2) {
-      state = await _getCompletedRequests();
+      state = await _getCompletedRequests(
+          event.searchQuery?.trim(), event.fromDate, event.toDate);
     } else if (event.type.id == 3) {
-      state = await _getCancelledRequests();
+      state = await _getCancelledRequests(
+          event.searchQuery?.trim(), event.fromDate, event.toDate);
     } else if (event.type.id == 4) {
-      state = await _getUpcomingRequests();
+      state = await _getUpcomingRequests(
+          event.searchQuery?.trim(), event.fromDate, event.toDate);
     } else {
-      state = await _getOngoingRequests();
+      state = await _getOngoingRequests(
+          event.searchQuery?.trim(), event.fromDate, event.toDate);
     }
     emit(state);
   }
@@ -196,7 +207,7 @@ class ServiceRequestManagementBloc
             rescheduleParams: event.rescheduleParams);
     ServiceRequestManagementState rescheduleState = result.fold((l) {
       Navigator.pop(event.context);
-      CSnackBar.showError(event.context, msg: l.error ?? "");
+      CSnackBar.showError(event.context, msg: l.error);
       return state.copyWith(
           isRescheduleLoaderView: false, isReScheduleError: true);
     }, (r) {
@@ -226,7 +237,7 @@ class ServiceRequestManagementBloc
         await serviceRequestManagementRepository.assignCaregiver(
             assignCareGiverParams: event.assignCareGiverParams);
     ServiceRequestManagementState assignState = result.fold((l) {
-      CSnackBar.showError(event.context, msg: l.error ?? "");
+      CSnackBar.showError(event.context, msg: l.error);
       return state.copyWith(
           isRescheduleLoaderView: false, isReScheduleError: true);
     }, (r) {
@@ -254,7 +265,7 @@ class ServiceRequestManagementBloc
       userId: event.userId,
     );
     ServiceRequestManagementState currentState = result.fold((l) {
-      CSnackBar.showError(event.context, msg: l.error ?? "");
+      CSnackBar.showError(event.context, msg: l.error);
       return state.copyWith(isStartServiceLoading: false);
     }, (r) {
       if (r.status ?? false) {
@@ -281,7 +292,7 @@ class ServiceRequestManagementBloc
             userId: event.userId,
             description: event.description);
     ServiceRequestManagementState currentState = result.fold((l) {
-      CSnackBar.showError(event.context, msg: l.error ?? "");
+      CSnackBar.showError(event.context, msg: l.error);
       return state.copyWith(isCancelLoading: false);
     }, (r) {
       if (r.status ?? false) {
@@ -303,14 +314,18 @@ class ServiceRequestManagementBloc
     );
   }
 
-  Future<ServiceRequestManagementState> _getPendingRequests(
-      int? filterId) async {
+  Future<ServiceRequestManagementState> _getPendingRequests(int? filterId,
+      String? searchQuery, String? fromDate, String? toDate) async {
     final Either<ApiErrorHandler, ServiceRequestResponse> result =
         await serviceRequestManagementRepository.getPendingRequests(
             page: 1,
             userId: SharedPreffUtil().getAdminId,
             limit: 10,
-            filterId: filterId ?? 0);
+            filterId: filterId ?? 0,
+            searchTerm: searchQuery ?? "",
+            serviceId: "",
+            fromDate: fromDate ?? "",
+            toDate: toDate ?? "");
     ServiceRequestManagementState serviceRequestManagementState =
         result.fold((l) {
       return state.copyWith(isLoading: false, services: [], error: l.error);
@@ -320,13 +335,17 @@ class ServiceRequestManagementBloc
     return serviceRequestManagementState;
   }
 
-  Future<ServiceRequestManagementState> _getCompletedRequests() async {
+  Future<ServiceRequestManagementState> _getCompletedRequests(
+      String? searchQuery, String? fromDate, String? toDate) async {
     final Either<ApiErrorHandler, ServiceRequestResponse> result =
         await serviceRequestManagementRepository.getCompletedRequests(
-      page: 1,
-      userId: SharedPreffUtil().getAdminId,
-      limit: 10,
-    );
+            page: 1,
+            userId: SharedPreffUtil().getAdminId,
+            limit: 10,
+            searchTerm: searchQuery ?? "",
+            serviceId: "",
+            fromDate: fromDate ?? "",
+            toDate: toDate ?? "");
     ServiceRequestManagementState serviceRequestManagementState =
         result.fold((l) {
       return state.copyWith(isLoading: false, services: [], error: l.error);
@@ -336,14 +355,19 @@ class ServiceRequestManagementBloc
     return serviceRequestManagementState;
   }
 
-  Future<ServiceRequestManagementState> _getCancelledRequests() async {
+  Future<ServiceRequestManagementState> _getCancelledRequests(
+      String? searchQuery, String? fromDate, String? toDate) async {
     final Either<ApiErrorHandler, ServiceRequestResponse> result =
         await serviceRequestManagementRepository.getCancelledRequests(
-      page: 1,
-      userId: SharedPreffUtil().getAdminId,
-      limit: 10,
-      // filterId: filterId
-    );
+            page: 1,
+            userId: SharedPreffUtil().getAdminId,
+            limit: 10,
+            searchTerm: searchQuery ?? "",
+            serviceId: "",
+            fromDate: fromDate ?? "",
+            toDate: toDate ?? ""
+            // filterId: filterId
+            );
     ServiceRequestManagementState serviceRequestManagementState =
         result.fold((l) {
       return state.copyWith(isLoading: false, services: [], error: l.error);
@@ -353,14 +377,19 @@ class ServiceRequestManagementBloc
     return serviceRequestManagementState;
   }
 
-  Future<ServiceRequestManagementState> _getUpcomingRequests() async {
+  Future<ServiceRequestManagementState> _getUpcomingRequests(
+      String? searchQuery, String? fromDate, String? toDate) async {
     final Either<ApiErrorHandler, ServiceRequestResponse> result =
         await serviceRequestManagementRepository.getUpcomingRequests(
-      page: 1,
-      userId: SharedPreffUtil().getAdminId,
-      limit: 10,
-      // filterId: filterId
-    );
+            page: 1,
+            userId: SharedPreffUtil().getAdminId,
+            limit: 10,
+            searchTerm: searchQuery ?? "",
+            serviceId: "",
+            fromDate: fromDate ?? "",
+            toDate: toDate ?? ""
+            // filterId: filterId
+            );
     ServiceRequestManagementState serviceRequestManagementState =
         result.fold((l) {
       return state.copyWith(isLoading: false, services: [], error: l.error);
@@ -370,14 +399,19 @@ class ServiceRequestManagementBloc
     return serviceRequestManagementState;
   }
 
-  Future<ServiceRequestManagementState> _getOngoingRequests() async {
+  Future<ServiceRequestManagementState> _getOngoingRequests(
+      String? searchQuery, String? fromDate, String? toDate) async {
     final Either<ApiErrorHandler, ServiceRequestResponse> result =
         await serviceRequestManagementRepository.getOngoingRequests(
-      page: 1,
-      userId: SharedPreffUtil().getAdminId,
-      limit: 10,
-      // filterId: filterId
-    );
+            page: 1,
+            userId: SharedPreffUtil().getAdminId,
+            limit: 10,
+            searchTerm: searchQuery ?? "",
+            serviceId: "",
+            fromDate: fromDate ?? "",
+            toDate: toDate ?? ""
+            // filterId: filterId
+            );
     ServiceRequestManagementState serviceRequestManagementState =
         result.fold((l) {
       return state.copyWith(isLoading: false, services: [], error: l.error);
@@ -400,5 +434,12 @@ class ServiceRequestManagementBloc
       return state.copyWith(isLoading: false, filterOption: Some(Right(r)));
     });
     emit(filterState);
+  }
+
+  String generateFormattedDate(String date) {
+    DateTime inputDate = DateTime.parse(date);
+    DateFormat dateFormat = DateFormat('MM-dd-yyyy , HH:mm');
+    String formattedDate = dateFormat.format(inputDate);
+    return formattedDate;
   }
 }

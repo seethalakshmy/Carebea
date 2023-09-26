@@ -23,6 +23,10 @@ class ServiceRequestManagementRepository
     required int page,
     required int limit,
     required String userId,
+    required String searchTerm,
+    required String serviceId,
+    required String fromDate,
+    required String toDate,
   }) async {
     try {
       final response = await _apiClient.getCancelled(
@@ -30,6 +34,10 @@ class ServiceRequestManagementRepository
         userId,
         page,
         limit,
+        searchTerm,
+        "",
+        fromDate,
+        toDate,
       );
       return Right(response);
     } on DioError catch (e) {
@@ -69,6 +77,10 @@ class ServiceRequestManagementRepository
     required int page,
     required int limit,
     required String userId,
+    required String searchTerm,
+    required String serviceId,
+    required String fromDate,
+    required String toDate,
   }) async {
     try {
       final response = await _apiClient.getCompletedRequests(
@@ -76,6 +88,10 @@ class ServiceRequestManagementRepository
         userId,
         page,
         limit,
+        searchTerm,
+        "",
+        fromDate,
+        toDate,
       );
       return Right(response);
     } on DioError catch (e) {
@@ -96,6 +112,10 @@ class ServiceRequestManagementRepository
     required int page,
     required int limit,
     required String userId,
+    required String searchTerm,
+    required String serviceId,
+    required String fromDate,
+    required String toDate,
   }) async {
     try {
       final response = await _apiClient.getOngoingRequests(
@@ -103,6 +123,10 @@ class ServiceRequestManagementRepository
         userId,
         page,
         limit,
+        searchTerm,
+        "",
+        fromDate,
+        toDate,
       );
       return Right(response);
     } on DioError catch (e) {
@@ -124,10 +148,23 @@ class ServiceRequestManagementRepository
     required int limit,
     required String userId,
     required int filterId,
+    required String searchTerm,
+    required String serviceId,
+    required String fromDate,
+    required String toDate,
   }) async {
     try {
       final response = await _apiClient.getPendingRequests(
-          "", userId, page, limit, filterId);
+        "",
+        userId,
+        page,
+        limit,
+        filterId,
+        searchTerm,
+        "",
+        fromDate,
+        toDate,
+      );
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
@@ -147,6 +184,10 @@ class ServiceRequestManagementRepository
     required int page,
     required int limit,
     required String userId,
+    required String searchTerm,
+    required String serviceId,
+    required String fromDate,
+    required String toDate,
   }) async {
     try {
       final response = await _apiClient.getUpcomingRequests(
@@ -154,6 +195,10 @@ class ServiceRequestManagementRepository
         userId,
         page,
         limit,
+        searchTerm,
+        "",
+        fromDate,
+        toDate,
       );
       return Right(response);
     } on DioError catch (e) {
