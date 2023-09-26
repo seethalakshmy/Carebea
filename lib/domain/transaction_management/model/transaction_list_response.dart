@@ -180,8 +180,8 @@ class Transactions {
   }
 
   Transactions.fromJson(dynamic json) {
-    _serviceId = json['serviceId'];
-    _transactionId = json['transactionId'];
+    _serviceId = json['service_id'];
+    _transactionId = json['transaction_id'];
     _transactionType = json['transaction_type'];
     _dateTime = json['date_time'];
     _paidTo = json['paid_to'];
@@ -264,8 +264,8 @@ class Transactions {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['serviceId'] = _serviceId;
-    map['transactionId'] = _transactionId;
+    map['service_id'] = _serviceId;
+    map['transaction_id'] = _transactionId;
     map['transaction_type'] = _transactionType;
     map['date_time'] = _dateTime;
     map['paid_to'] = _paidTo;

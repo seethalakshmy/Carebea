@@ -34,8 +34,7 @@ class AlertTextLabel extends StatelessWidget {
         ? _buildCustomText(context, size)
         : isRequiredSpace
             ? _buildCustomText(context, size)
-            : Flexible(
-                fit: FlexFit.loose, child: _buildCustomText(context, size));
+            : _buildCustomText(context, size);
   }
 
   CustomText _buildCustomText(BuildContext context, Size size) {

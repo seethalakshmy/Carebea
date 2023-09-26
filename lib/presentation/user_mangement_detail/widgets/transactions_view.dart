@@ -66,7 +66,7 @@ class TransactionView extends StatelessWidget {
                             ),
                           ),
                         )
-                      : EmptyView(title: AppString.noProfiles.val)),
+                      : EmptyView(title: AppString.noTransactions.val)),
     );
   }
 

@@ -21,9 +21,10 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
-import '../../domain/subProfile_details/model/sub_profile_details_model.dart';
+import '../../domain/subProfile_details/model/sub_profile_detail_response.dart';
 import '../caregiver_detail/widgets/service_completion_and_rewards.dart';
 import '../side_menu/side_menu_page.dart';
+import '../widget/cached_image.dart';
 import '../widget/custom_card.dart';
 
 @RoutePage()
@@ -121,18 +122,12 @@ class _ClientSubProfileDetailsPageState
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            CustomSvg(
-                                              path: state.response?.data
-                                                      ?.profilePic ??
-                                                  IMG.profilePlaceHolder.val,
-                                              width: isXs(context) ? 150 : 150,
+                                            CachedImage(
+                                              width: isXs(context) ? 150 : 200,
                                               height: isXs(context) ? 125 : 175,
+                                              imgUrl: state
+                                                  .response?.data?.profilePic,
                                             ),
-
-                                            ///Todo change later
-                                            // CustomSizedBox(
-                                            //   height: DBL.forty.val,
-                                            // ),
                                           ],
                                         ),
                                       ),
@@ -198,7 +193,10 @@ class _ClientSubProfileDetailsPageState
                                                 width: DBL.five.val,
                                               ),
                                               CustomText(
-                                                '10',
+                                                state.response?.data
+                                                        ?.profileCompletionPercentage
+                                                        .toString() ??
+                                                    '',
                                                 style: TS().gRoboto(
                                                     fontWeight: FW.w500.val,
                                                     fontSize: getFontSize(
@@ -219,7 +217,10 @@ class _ClientSubProfileDetailsPageState
                                               width:
                                                   isXs(context) ? 150.0 : 200.0,
                                               lineHeight: 6.0,
-                                              percent: 0.5,
+                                              percent: (response?.data
+                                                          ?.profileCompletionPercentage ??
+                                                      0) /
+                                                  100,
                                               progressColor:
                                                   AppColor.green2.val,
                                             ),

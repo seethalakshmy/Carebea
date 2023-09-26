@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
-import '../../../domain/subProfile_details/model/sub_profile_details_model.dart';
+import '../../../domain/subProfile_details/model/sub_profile_detail_response.dart';
 import '../../../infrastructure/subprofile_details/subprofile_detail_repository.dart';
 
 part 'sub_profile_details_bloc.freezed.dart';

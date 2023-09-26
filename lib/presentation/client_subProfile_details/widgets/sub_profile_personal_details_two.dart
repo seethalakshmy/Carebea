@@ -3,7 +3,7 @@ import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/pe
 import 'package:flutter/material.dart';
 
 import '../../../core/enum.dart';
-import '../../../domain/subProfile_details/model/sub_profile_details_model.dart';
+import '../../../domain/subProfile_details/model/sub_profile_detail_response.dart';
 import '../../widget/alert_text_label.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_sizedbox.dart';
@@ -17,7 +17,7 @@ class SubProfilePersonalDetailsTwoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PersonalDetails2? personalDetails = state.response?.data?.personalDetails2;
-    List<String>? languages = state.response?.data?.languages1;
+    List<String>? languages = state.response?.data?.languages;
     String? pets = state.response?.data?.pets?.havePets.toString();
     List<Pet>? petList = state.response?.data?.pets?.pet;
     return CustomContainer(

@@ -530,7 +530,8 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
 
   _transactionDetails(Transactions item) {
     _transactionBloc.add(TransactionManagementEvent.getTransactionDetails(
-        transactionId: item.id ?? "", serviceId: item.serviceId ?? ''));
+        transactionId: item.transactionId ?? "",
+        serviceId: item.serviceId ?? ''));
     showDialog(
       context: context,
       builder: (BuildContext context) {
