@@ -18,6 +18,7 @@ import 'package:admin_580_tech/presentation/faq_creation/faq_creation_screen.dar
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
 import 'package:admin_580_tech/presentation/roles/role_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
+import 'package:admin_580_tech/presentation/subscription/subscription_view.dart';
 import 'package:admin_580_tech/presentation/widget/common_alert_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
@@ -68,6 +69,7 @@ class _MenuBarState extends State<SideMenuPage> {
       AppString.userManagement.val: "",
       AppString.transactionManagement.val: "",
       AppString.serviceRequestManagement.val: "",
+      AppString.subscription.val: "",
       AppString.supportTickets.val: "",
       AppString.faq.val: ""
     };
@@ -522,7 +524,8 @@ class _MenuBarState extends State<SideMenuPage> {
     SupportTicketsDetailRoute(),
     FaqRoute(),
     FaqCreationRoute(),
-    ClientSubProfileDetailsRoute()
+    ClientSubProfileDetailsRoute(),
+    SubscriptionRoute()
   ];
 
   int getRouteIndex(String route) {
@@ -565,6 +568,8 @@ class _MenuBarState extends State<SideMenuPage> {
       return 18;
     } else if (route == AppString.subProfileDetails.val) {
       return 19;
+    } else if (route == AppString.subscription.val) {
+      return 20;
     } else {
       return 0;
     }
@@ -610,6 +615,8 @@ class _MenuBarState extends State<SideMenuPage> {
       return const FaqCreationPage();
     } else if (index == 19) {
       return const ClientSubProfileDetailsPage();
+    } else if (index == 20) {
+      return const SubscriptionPage();
     } else {
       return const DashboardPage();
     }

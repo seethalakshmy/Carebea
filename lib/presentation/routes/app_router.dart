@@ -1,4 +1,5 @@
 import 'package:admin_580_tech/presentation/routes/gurad.dart';
+import 'package:admin_580_tech/presentation/subscription/subscription_view.dart';
 import 'package:auto_route/auto_route.dart';
 
 import 'app_router.gr.dart';
@@ -126,6 +127,11 @@ class AppRouter extends $AppRouter {
       AutoRoute(
           path: "region-analytics",
           page: RegionAnalyticsRoute.page,
+          maintainState: false,
+          initial: false),
+      AutoRoute(
+          path: "subscription",
+          page: SubscriptionRoute.page,
           maintainState: false,
           initial: false),
     ]),
