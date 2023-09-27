@@ -400,7 +400,7 @@ class _ServiceRequestManagementPageState
                     label: _columnsView(
                         text: AppString.tip.val, fontWeight: FontWeight.bold),
                   ),
-                if (_tabType == 2)
+                if (_tabType == 3)
                   DataColumn2(
                     size: ColumnSize.L,
                     fixedWidth: 100,
@@ -473,7 +473,7 @@ class _ServiceRequestManagementPageState
                       DataCell(_rowsView(
                         text: item.tip,
                       )),
-                    if (_tabType == 2)
+                    if (_tabType == 3)
                       DataCell(_rowsView(
                         text: item.refund,
                       )),
