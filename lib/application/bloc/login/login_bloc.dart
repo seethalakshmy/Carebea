@@ -17,6 +17,7 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginRepository loginRepository;
+  String? version;
 
   LoginBloc(this.loginRepository) : super(LoginState.initial()) {
     on<_Login>(_login);

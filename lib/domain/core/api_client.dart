@@ -15,6 +15,7 @@ import 'package:admin_580_tech/domain/email_otp_verification/models/generate_otp
 import 'package:admin_580_tech/domain/login/login_response.dart';
 import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
 import 'package:admin_580_tech/domain/service_request_management/model/reschedule_params.dart';
+import 'package:admin_580_tech/domain/subscription/model/subscription_model.dart';
 import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -688,4 +689,12 @@ abstract class ApiClient {
     @Field('user_id') String adminId,
     @Field('service_id') String complaintId,
   );
+
+  @POST('/admin/get-subscribed-clients')
+  Future<SubscriptionModel> getSubscribedClients(
+      @Field('user_id') String userId,
+      @Field('page') String page,
+      @Field('limit') String limit,
+      @Field('search_term') String searchTerm,
+      @Field('subscription_type') dynamic subscriptionType);
 }

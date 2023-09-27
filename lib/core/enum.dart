@@ -19,6 +19,9 @@ enum AppString {
   extraService("Extra Services"),
   cancelReason("Cancel Reason"),
   subscription("Subscription"),
+  monthly("Monthly"),
+  annually("Annually"),
+  semiAnnually("Semi Annually"),
 
   dosage("Dosage"),
   frequency("Frequency"),

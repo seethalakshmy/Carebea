@@ -1540,6 +1540,7 @@ class SubProfiles {
     num? totalServices,
     String? profileThumbnail,
     bool? isProfileCompleted,
+    bool? isSubscribed,
     num? profileCompletePercentage,
     ProfileCompletion? profileCompletion,
     num? completedServices,
@@ -1553,6 +1554,7 @@ class SubProfiles {
     _totalServices = totalServices;
     _profileThumbnail = profileThumbnail;
     _isProfileCompleted = isProfileCompleted;
+    _isSubscribed = isSubscribed;
     _profileCompletePercentage = profileCompletePercentage;
     _profileCompletion = profileCompletion;
     _completedServices = completedServices;
@@ -1569,6 +1571,7 @@ class SubProfiles {
     _profileThumbnail = json['profile_thumbnail'];
     _isProfileCompleted = json['is_profile_completed'];
     _profileCompletePercentage = json['profile_complete_percentage'];
+    _isSubscribed = json['is_subscription_active'];
     _totalServices = json['totalService'];
     _completedServices = json['completedServices'];
     _profileCompletion = json['profile_completion'] != null
@@ -1583,6 +1586,7 @@ class SubProfiles {
   String? _age;
   String? _profileThumbnail;
   bool? _isProfileCompleted;
+  bool? _isSubscribed;
   num? _profileCompletePercentage;
   num? _totalServices;
   ProfileCompletion? _profileCompletion;
@@ -1596,6 +1600,7 @@ class SubProfiles {
     String? age,
     String? profileThumbnail,
     bool? isProfileCompleted,
+    bool? isSubscribed,
     num? profileCompletePercentage,
     num? totalServices,
     ProfileCompletion? profileCompletion,
@@ -1611,6 +1616,7 @@ class SubProfiles {
         totalServices: totalServices ?? _totalServices,
         profileThumbnail: profileThumbnail ?? _profileThumbnail,
         isProfileCompleted: isProfileCompleted ?? _isProfileCompleted,
+        isSubscribed: isSubscribed ?? _isSubscribed,
         profileCompletePercentage:
             profileCompletePercentage ?? _profileCompletePercentage,
         profileCompletion: profileCompletion ?? _profileCompletion,
@@ -1624,6 +1630,7 @@ class SubProfiles {
   String? get age => _age;
   String? get profileThumbnail => _profileThumbnail;
   bool? get isProfileCompleted => _isProfileCompleted;
+  bool? get isSubscribed => _isSubscribed;
   num? get profileCompletePercentage => _profileCompletePercentage;
   num? get totalServices => _totalServices;
   ProfileCompletion? get profileCompletion => _profileCompletion;
@@ -1644,6 +1651,7 @@ class SubProfiles {
     map['profile_thumbnail'] = _profileThumbnail;
     map['is_profile_completed'] = _isProfileCompleted;
     map['profile_complete_percentage'] = _profileCompletePercentage;
+    map['is_subscription_active'] = _isSubscribed;
     map['totalServices'] = _totalServices;
     map["completedServices"] = _completedServices;
     if (_profileCompletion != null) {

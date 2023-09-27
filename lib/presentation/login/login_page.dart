@@ -13,6 +13,7 @@ import 'package:admin_580_tech/presentation/widget/custom_text_button.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../application/bloc/login/login_bloc.dart';
@@ -32,6 +33,8 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   final FocusNode _userFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
+  late PackageInfo packageInfo;
+  String? version = '';
 
   // final LoginBloc _loginBloc = LoginBloc(LoginRepository());
   AutovalidateMode _validateMode = AutovalidateMode.disabled;
@@ -40,6 +43,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
+    getVersionNumber();
+    print('version $version');
     // if (SharedPreffUtil().getLogin) {
     //   context.router.replace(const SideMenuRoute());
     // }
@@ -184,12 +189,21 @@ class _LoginPageState extends State<LoginPage> {
                   height: DBL.fortyEight.val,
                 ),
                 _loginButton(),
+                CustomSizedBox(
+                  height: DBL.fortyEight.val,
+                ),
+                CustomText('Version $version')
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  Future getVersionNumber() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    version = packageInfo.version;
   }
 
   CustomImage _logoView() {
