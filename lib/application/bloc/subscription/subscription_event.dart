@@ -7,5 +7,5 @@ class SubscriptionEvent with _$SubscriptionEvent {
       required String page,
       required String limit,
       required String searchTerm,
-      String? subscriptionType}) = _GetSubscription;
+      dynamic subscriptionType}) = _GetSubscription;
 }

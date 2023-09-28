@@ -54,7 +54,7 @@ String dataToJson(Data data) => json.encode(data.toJson());
 
 class Data {
   Data({
-    List<FinalResult>? finalResult,
+    List<SubscriptionResult>? finalResult,
     Pagination? pagination,
   }) {
     _finalResult = finalResult;
@@ -65,24 +65,24 @@ class Data {
     if (json['finalResult'] != null) {
       _finalResult = [];
       json['finalResult'].forEach((v) {
-        _finalResult?.add(FinalResult.fromJson(v));
+        _finalResult?.add(SubscriptionResult.fromJson(v));
       });
     }
     _pagination = json['pagination'] != null
         ? Pagination.fromJson(json['pagination'])
         : null;
   }
-  List<FinalResult>? _finalResult;
+  List<SubscriptionResult>? _finalResult;
   Pagination? _pagination;
   Data copyWith({
-    List<FinalResult>? finalResult,
+    List<SubscriptionResult>? finalResult,
     Pagination? pagination,
   }) =>
       Data(
         finalResult: finalResult ?? _finalResult,
         pagination: pagination ?? _pagination,
       );
-  List<FinalResult>? get finalResult => _finalResult;
+  List<SubscriptionResult>? get finalResult => _finalResult;
   Pagination? get pagination => _pagination;
 
   Map<String, dynamic> toJson() {
@@ -103,9 +103,9 @@ String paginationToJson(Pagination data) => json.encode(data.toJson());
 
 class Pagination {
   Pagination({
-    int? limit,
-    int? offset,
-    int? totals,
+    num? limit,
+    num? offset,
+    num? totals,
   }) {
     _limit = limit;
     _offset = offset;
@@ -117,22 +117,22 @@ class Pagination {
     _offset = json['offset'];
     _totals = json['totals'];
   }
-  int? _limit;
-  int? _offset;
-  int? _totals;
+  num? _limit;
+  num? _offset;
+  num? _totals;
   Pagination copyWith({
-    int? limit,
-    int? offset,
-    int? totals,
+    num? limit,
+    num? offset,
+    num? totals,
   }) =>
       Pagination(
         limit: limit ?? _limit,
         offset: offset ?? _offset,
         totals: totals ?? _totals,
       );
-  int? get limit => _limit;
-  int? get offset => _offset;
-  int? get totals => _totals;
+  num? get limit => _limit;
+  num? get offset => _offset;
+  num? get totals => _totals;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -143,12 +143,13 @@ class Pagination {
   }
 }
 
-FinalResult finalResultFromJson(String str) =>
-    FinalResult.fromJson(json.decode(str));
-String finalResultToJson(FinalResult data) => json.encode(data.toJson());
+SubscriptionResult subscriptionResultFromJson(String str) =>
+    SubscriptionResult.fromJson(json.decode(str));
+String subscriptionResultToJson(SubscriptionResult data) =>
+    json.encode(data.toJson());
 
-class FinalResult {
-  FinalResult({
+class SubscriptionResult {
+  SubscriptionResult({
     String? id,
     String? userId,
     Name? name,
@@ -174,7 +175,7 @@ class FinalResult {
     _subscriptionDetails = subscriptionDetails;
   }
 
-  FinalResult.fromJson(dynamic json) {
+  SubscriptionResult.fromJson(dynamic json) {
     _id = json['id'];
     _userId = json['user_id'];
     _name = json['name'] != null ? Name.fromJson(json['name']) : null;
@@ -200,7 +201,7 @@ class FinalResult {
   bool? _status;
   bool? _isSubscriptionActive;
   SubscriptionDetails? _subscriptionDetails;
-  FinalResult copyWith({
+  SubscriptionResult copyWith({
     String? id,
     String? userId,
     Name? name,
@@ -213,7 +214,7 @@ class FinalResult {
     bool? isSubscriptionActive,
     SubscriptionDetails? subscriptionDetails,
   }) =>
-      FinalResult(
+      SubscriptionResult(
         id: id ?? _id,
         userId: userId ?? _userId,
         name: name ?? _name,

@@ -1,5 +1,6 @@
 import 'package:admin_580_tech/application/bloc/subscription/subscription_bloc.dart';
 import 'package:admin_580_tech/infrastructure/subscription/subscription_repository.dart';
+import 'package:admin_580_tech/presentation/subscription/subscription_details_view.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,8 +11,10 @@ import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
+import '../../core/utility.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../side_menu/side_menu_page.dart';
+import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_data_table_2.dart';
@@ -333,13 +336,24 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                 text: pageIndex.toString(),
               )),
               DataCell(_rowsView(
-                text: '',
+                text: '${item.name?.firstName} ${item.name?.lastName}',
               )),
-              DataCell(_rowsView(text: item.subscriptionDetails?.startedAt)),
-              //_tableRowImage("${item.clientName?.firstName} ${item.clientName?.lastName}","")
-              DataCell(_rowsView(text: item.subscriptionDetails?.expiry)),
+              DataCell(_rowsView(
+                  text: Utility.serviceDate(
+                DateTime.parse(item.subscriptionDetails?.startedAt ?? ""),
+              ))),
+              DataCell(_rowsView(
+                text: Utility.serviceDate(
+                  DateTime.parse(item.subscriptionDetails?.expiry ?? ""),
+                ),
+              )),
               DataCell(_rowsView(text: item.email ?? "")),
-              DataCell(_rowsView(text: item.subscriptionDetails?.type)),
+              DataCell(_rowsView(
+                  text: item.subscriptionDetails?.type == '1'
+                      ? 'Monthly'
+                      : item.subscriptionDetails?.type == '2'
+                          ? 'Semi Annual'
+                          : "Annually")),
 
               // DataCell(_statusBox(item.status)),
               DataCell(Row(
@@ -347,6 +361,18 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                 children: [
                   InkWell(
                       onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return CustomAlertDialogWidget(
+                              heading: AppString.subscriptionDetails.val,
+                              child: SizedBox(
+                                  height: MediaQuery.of(context).size.height,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: SubscriptionDetailScreen(item: item)),
+                            );
+                          },
+                        );
                         // autoTabRouter!.navigate(SupportTicketsDetailRoute(
                         //     complaintId: item.id ?? ""));
                       },

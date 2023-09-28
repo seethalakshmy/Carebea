@@ -56,7 +56,7 @@ class CustomAlertDialogWidget extends StatelessWidget {
                   ),
                 ),
           Container(
-            width: width ?? 1072,
+            width: width ?? double.infinity,
             height: height ?? 550,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -117,7 +117,7 @@ class CustomAlertDialogWidget extends StatelessWidget {
     String heading,
   ) {
     return Container(
-      width: width ?? double.infinity,
+      width: width,
       height: DBL.sixtyEight.val,
       padding: EdgeInsets.all(DBL.twenty.val),
       decoration: BoxDecoration(

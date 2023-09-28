@@ -20,25 +20,25 @@ mixin _$SubscriptionEvent {
   String get page => throw _privateConstructorUsedError;
   String get limit => throw _privateConstructorUsedError;
   String get searchTerm => throw _privateConstructorUsedError;
-  String? get subscriptionType => throw _privateConstructorUsedError;
+  dynamic get subscriptionType => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, String page, String limit,
-            String searchTerm, String? subscriptionType)
+            String searchTerm, dynamic subscriptionType)
         getSubscription,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId, String page, String limit,
-            String searchTerm, String? subscriptionType)?
+            String searchTerm, dynamic subscriptionType)?
         getSubscription,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, String page, String limit,
-            String searchTerm, String? subscriptionType)?
+            String searchTerm, dynamic subscriptionType)?
         getSubscription,
     required TResult orElse(),
   }) =>
@@ -76,7 +76,7 @@ abstract class $SubscriptionEventCopyWith<$Res> {
       String page,
       String limit,
       String searchTerm,
-      String? subscriptionType});
+      dynamic subscriptionType});
 }
 
 /// @nodoc
@@ -118,7 +118,7 @@ class _$SubscriptionEventCopyWithImpl<$Res, $Val extends SubscriptionEvent>
       subscriptionType: freezed == subscriptionType
           ? _value.subscriptionType
           : subscriptionType // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
     ) as $Val);
   }
 }
@@ -136,7 +136,7 @@ abstract class _$$_GetSubscriptionCopyWith<$Res>
       String page,
       String limit,
       String searchTerm,
-      String? subscriptionType});
+      dynamic subscriptionType});
 }
 
 /// @nodoc
@@ -176,7 +176,7 @@ class __$$_GetSubscriptionCopyWithImpl<$Res>
       subscriptionType: freezed == subscriptionType
           ? _value.subscriptionType
           : subscriptionType // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
     ));
   }
 }
@@ -200,7 +200,7 @@ class _$_GetSubscription implements _GetSubscription {
   @override
   final String searchTerm;
   @override
-  final String? subscriptionType;
+  final dynamic subscriptionType;
 
   @override
   String toString() {
@@ -217,13 +217,13 @@ class _$_GetSubscription implements _GetSubscription {
             (identical(other.limit, limit) || other.limit == limit) &&
             (identical(other.searchTerm, searchTerm) ||
                 other.searchTerm == searchTerm) &&
-            (identical(other.subscriptionType, subscriptionType) ||
-                other.subscriptionType == subscriptionType));
+            const DeepCollectionEquality()
+                .equals(other.subscriptionType, subscriptionType));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, userId, page, limit, searchTerm, subscriptionType);
+  int get hashCode => Object.hash(runtimeType, userId, page, limit, searchTerm,
+      const DeepCollectionEquality().hash(subscriptionType));
 
   @JsonKey(ignore: true)
   @override
@@ -235,7 +235,7 @@ class _$_GetSubscription implements _GetSubscription {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, String page, String limit,
-            String searchTerm, String? subscriptionType)
+            String searchTerm, dynamic subscriptionType)
         getSubscription,
   }) {
     return getSubscription(userId, page, limit, searchTerm, subscriptionType);
@@ -245,7 +245,7 @@ class _$_GetSubscription implements _GetSubscription {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId, String page, String limit,
-            String searchTerm, String? subscriptionType)?
+            String searchTerm, dynamic subscriptionType)?
         getSubscription,
   }) {
     return getSubscription?.call(
@@ -256,7 +256,7 @@ class _$_GetSubscription implements _GetSubscription {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, String page, String limit,
-            String searchTerm, String? subscriptionType)?
+            String searchTerm, dynamic subscriptionType)?
         getSubscription,
     required TResult orElse(),
   }) {
@@ -301,7 +301,7 @@ abstract class _GetSubscription implements SubscriptionEvent {
       required final String page,
       required final String limit,
       required final String searchTerm,
-      final String? subscriptionType}) = _$_GetSubscription;
+      final dynamic subscriptionType}) = _$_GetSubscription;
 
   @override
   String get userId;
@@ -312,7 +312,7 @@ abstract class _GetSubscription implements SubscriptionEvent {
   @override
   String get searchTerm;
   @override
-  String? get subscriptionType;
+  dynamic get subscriptionType;
   @override
   @JsonKey(ignore: true)
   _$$_GetSubscriptionCopyWith<_$_GetSubscription> get copyWith =>

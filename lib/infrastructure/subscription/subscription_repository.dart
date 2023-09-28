@@ -17,7 +17,7 @@ class SubscriptionRepository implements ISubscriptionRepo {
       required String page,
       required String limit,
       required String searchTerm,
-      String? subscriptionType}) async {
+      dynamic subscriptionType}) async {
     try {
       final response = await _apiClient.getSubscribedClients(
           userId, page, limit, searchTerm, subscriptionType);

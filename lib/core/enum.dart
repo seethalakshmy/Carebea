@@ -22,6 +22,9 @@ enum AppString {
   monthly("Monthly"),
   annually("Annually"),
   semiAnnually("Semi Annually"),
+  subscriptionId("Subscription Id"),
+  subscriptionDetails("Subscription Details"),
+  paymentType("Payment Type"),
 
   dosage("Dosage"),
   frequency("Frequency"),

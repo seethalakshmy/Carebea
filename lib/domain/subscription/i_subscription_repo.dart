@@ -9,5 +9,5 @@ abstract class ISubscriptionRepo {
       required String page,
       required String limit,
       required String searchTerm,
-      String? subscriptionType});
+      dynamic subscriptionType});
 }
