@@ -19,7 +19,6 @@ enum AppString {
   extraService("Extra Services"),
   cancelReason("Cancel Reason"),
   subscription("Subscription"),
-
   dosage("Dosage"),
   frequency("Frequency"),
   expirationDate("Expiration date"),
@@ -86,7 +85,6 @@ enum AppString {
   optVerification("OTP Verification"),
   clientAnalytics("Client Analytics"),
   analytics("Analytics"),
-
   resetPasswordDescription(
       "Enter your registered mail id to receive password\nreset link"),
   sendRestInstructions("Send  reset instructions"),
@@ -131,6 +129,7 @@ enum AppString {
   slNo("SL No"),
   firstName("First Name"),
   filter("Filter"),
+  dateFilter("Date Filter"),
   lastName("Last Name"),
   answer("Answer"),
   attachments("Attachments"),
@@ -164,7 +163,8 @@ enum AppString {
   serviceDetails("Service Details"),
   services("Services"),
   noServiceRequestsFound("No Service Requests Found"),
-  serviceTypeHint("Select Your Service Type"),
+  serviceTypeHint("Select Service Type"),
+  serviceStatusHint("Select Service Status"),
   selectAllServices("Select all the services you are able to do"),
   addMoreReference("Add more reference"),
   serviceInComplete("Services Incomplete"),
@@ -214,10 +214,12 @@ enum AppString {
   profileName("Profile Name"),
   comments("Comments"),
   neww("New"),
+  all("All"),
   completed("Completed"),
   canceled("Canceled"),
   onGoing("Ongoing"),
   upcoming("Upcoming"),
+  clearFilters("Clear Filters"),
   active("Active"),
   inActive("Inactive"),
   inDoor("Indoor"),
@@ -468,7 +470,9 @@ enum AppString {
   decisionMakerName("Decision maker Name"),
   clientIdAndName("Client ID & Name"),
   startDateAndTime("Start Date & Start Time"),
+  startDate("Start Date"),
   endDateAndTime("End Date & End Time"),
+  endDate("End Date"),
   noOfMatchingIsShown("No of Matching list shown"),
   cancelledBy("Cancelled By"),
   extraFee("Extra Fee"),
@@ -489,7 +493,6 @@ enum AppString {
       "Your selected caregiver is available for the service . You can accept & Enjoy the service"),
   caregiverNotAvailable(
       "Sorry!\nSelected care ambassador is not available on\n that particular day .\nDo you want to proceed this service with\n other care ambassador?"),
-
   youShouldSelectStartTime("You should start from time"),
   rescheduleWaiting(
       "Please hold on for a moment as we are\nchecking if the caregiver is available for the\ndate you have chosen"),
