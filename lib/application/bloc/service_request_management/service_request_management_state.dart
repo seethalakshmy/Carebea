@@ -5,11 +5,12 @@ class ServiceRequestManagementState with _$ServiceRequestManagementState {
   const factory ServiceRequestManagementState(
       {required List<Types> types,
       bool? isLoading,
+      bool? isListLoading,
       required String? error,
       required DateTime selectedDate,
-          required String fromDate,
-          required String toDate,
-          required String searchQuery,
+      required String fromDate,
+      required String toDate,
+      required String searchQuery,
       TimeOfDay? fromTime,
       TimeOfDay? toTime,
       RescheduleResponse? rescheduleResponse,
@@ -18,6 +19,10 @@ class ServiceRequestManagementState with _$ServiceRequestManagementState {
       CommonResponseUse? cancelServiceResponse,
       CaregiverProfileResponse? caregiverProfileResponse,
       required Option<Either<ApiErrorHandler, GetFiltersResponse>> filterOption,
+      required Option<Either<ApiErrorHandler, ServiceRequestListResponseModel>>
+          serviceOption,
+      required Option<Either<ApiErrorHandler, ServiceStatusResponseModel>>
+          serviceStatusOption,
       @Default(false) bool isError,
       @Default(false) bool isCancelLoading,
       @Default(false) bool isStartServiceLoading,
@@ -33,11 +38,14 @@ class ServiceRequestManagementState with _$ServiceRequestManagementState {
   factory ServiceRequestManagementState.initial() {
     return ServiceRequestManagementState(
         isLoading: true,
+        isListLoading: false,
         rescheduleResponse: null,
         types: [],
         selectedDate: DateTime.now(),
         services: [],
         filterOption: const None(),
+        serviceOption: const None(),
+        serviceStatusOption: const None(),
         error: "",
         fromDate: "",
         toDate: "",

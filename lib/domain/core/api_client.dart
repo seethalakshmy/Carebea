@@ -48,7 +48,9 @@ import '../role_creation/model/module_response.dart';
 import '../role_creation/model/view_role_response.dart';
 import '../service_request_management/model/assign_caregiver_params.dart';
 import '../service_request_management/model/reschedule_response.dart';
+import '../service_request_management/model/service_request_list_response_model.dart';
 import '../service_request_management/model/service_request_response.dart';
+import '../service_request_management/model/service_status_response_model.dart';
 import '../signup/signup_response.dart';
 import '../subProfile_details/model/sub_profile_detail_response.dart';
 import '../transaction_management/model/get_filters_response.dart';
@@ -555,6 +557,22 @@ abstract class ApiClient {
       @Field('service_id') String serviceId,
       @Field('from_date') String fromDate,
       @Field('to_date') String toDate);
+
+  @POST("/admin/service-request-list")
+  Future<ServiceRequestListResponseModel> getServiceRequests(
+    @Header("Authorization") String token,
+    @Field('user_id') String userId,
+    @Field('service_id') String? serviceId,
+    @Field('page') String page,
+    @Field('limit') int limit,
+    @Field('search_term') String? searchTerm,
+    @Field('status_filter') int? statusFilterId,
+    @Field('from_date') String? fromDate,
+    @Field('to_date') String? toDate,
+    @Field('filter_id') int? dateFilterId,
+  );
+  @GET("/common-data/get-service-status")
+  Future<ServiceStatusResponseModel> getServiceStatus();
 
   @GET("/common-data/get-filters")
   Future<GetFiltersResponse> getFilters();
