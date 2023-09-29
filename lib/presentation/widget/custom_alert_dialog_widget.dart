@@ -117,7 +117,7 @@ class CustomAlertDialogWidget extends StatelessWidget {
     String heading,
   ) {
     return Container(
-      width: width ?? double.infinity,
+      width: width,
       height: DBL.sixtyEight.val,
       padding: EdgeInsets.all(DBL.twenty.val),
       decoration: BoxDecoration(
