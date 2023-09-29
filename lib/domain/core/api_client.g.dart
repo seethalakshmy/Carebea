@@ -2072,6 +2072,76 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<ServiceRequestListResponseModel> getServiceRequests(
+    token,
+    userId,
+    serviceId,
+    page,
+    limit,
+    searchTerm,
+    statusFilterId,
+    fromDate,
+    toDate,
+    dateFilterId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'service_id': serviceId,
+      'page': page,
+      'limit': limit,
+      'search_term': searchTerm,
+      'status_filter': statusFilterId,
+      'from_date': fromDate,
+      'to_date': toDate,
+      'filter_id': dateFilterId,
+    };
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ServiceRequestListResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/service-request-list',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ServiceRequestListResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ServiceStatusResponseModel> getServiceStatus() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ServiceStatusResponseModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/common-data/get-service-status',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ServiceStatusResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<GetFiltersResponse> getFilters() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

@@ -7,7 +7,9 @@ import '../caregiver_profile/model/caregiver_profile_response.dart';
 import '../core/api_error_handler/api_error_handler.dart';
 import '../transaction_management/model/get_filters_response.dart';
 import 'model/reschedule_response.dart';
+import 'model/service_request_list_response_model.dart';
 import 'model/service_request_response.dart';
+import 'model/service_status_response_model.dart';
 
 abstract class IServiceRequestManagementRepo {
   Future<Either<ApiErrorHandler, ServiceRequestResponse>> getPendingRequests(
@@ -58,6 +60,22 @@ abstract class IServiceRequestManagementRepo {
       required String serviceId,
       required String fromDate,
       required String toDate});
+
+  Future<Either<ApiErrorHandler, ServiceRequestListResponseModel>>
+      getServiceRequests({
+    required String page,
+    required int limit,
+    required String userId,
+    required String? serviceId,
+    String? searchTerm,
+    int? statusFilterId,
+    String? fromDate,
+    String? toDate,
+    int? dateFilterId,
+  });
+
+  Future<Either<ApiErrorHandler, ServiceStatusResponseModel>>
+      getServiceStatus();
 
   Future<Either<ApiErrorHandler, RescheduleResponse>> rescheduleService(
       {required RescheduleParams rescheduleParams});
