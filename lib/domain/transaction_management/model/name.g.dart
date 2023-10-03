@@ -7,8 +7,8 @@ part of 'name.dart';
 // **************************************************************************
 
 _$_Name _$$_NameFromJson(Map<String, dynamic> json) => _$_Name(
-      firstName: json['firstName'] as String?,
-      lastName: json['lastName'] as String?,
+      firstName: json['first_name'] as String?,
+      lastName: json['last_name'] as String?,
     );
 
 Map<String, dynamic> _$$_NameToJson(_$_Name instance) {
@@ -20,7 +20,7 @@ Map<String, dynamic> _$$_NameToJson(_$_Name instance) {
     }
   }
 
-  writeNotNull('firstName', instance.firstName);
-  writeNotNull('lastName', instance.lastName);
+  writeNotNull('first_name', instance.firstName);
+  writeNotNull('last_name', instance.lastName);
   return val;
 }

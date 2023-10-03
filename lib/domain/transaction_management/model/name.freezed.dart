@@ -101,7 +101,8 @@ class __$$_NameCopyWithImpl<$Res> extends _$NameCopyWithImpl<$Res, _$_Name>
 
 /// @nodoc
 
-@JsonSerializable(explicitToJson: true, includeIfNull: false)
+@JsonSerializable(
+    explicitToJson: true, includeIfNull: false, fieldRename: FieldRename.snake)
 class _$_Name with DiagnosticableTreeMixin implements _Name {
   const _$_Name({this.firstName, this.lastName});
 

@@ -6,14 +6,14 @@ part 'name.g.dart';
 
 @freezed
 class Name with _$Name {
-  @JsonSerializable(explicitToJson: true, includeIfNull: false)
+  @JsonSerializable(
+      explicitToJson: true,
+      includeIfNull: false,
+      fieldRename: FieldRename.snake)
   const factory Name({
-  String? firstName,
-  String? lastName,
+    String? firstName,
+    String? lastName,
   }) = _Name;
 
-
-
-  factory Name.fromJson(Map<String, dynamic> json) =>
-      _$NameFromJson(json);
+  factory Name.fromJson(Map<String, dynamic> json) => _$NameFromJson(json);
 }
