@@ -34,7 +34,7 @@ class UserManagementBloc
   }
 
   _getUser(_GetUsers event, Emitter<UserManagementState> emit) async {
-    emit(state.copyWith(isLoading: false));
+    emit(state.copyWith(isLoading: true));
     final Either<ApiErrorHandler, UserListResponse> result =
         await usersRepository.getUsers(
             userId: event.userId,

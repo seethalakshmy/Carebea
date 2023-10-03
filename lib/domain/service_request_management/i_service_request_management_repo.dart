@@ -5,52 +5,93 @@ import 'package:dartz/dartz.dart';
 
 import '../caregiver_profile/model/caregiver_profile_response.dart';
 import '../core/api_error_handler/api_error_handler.dart';
+import '../transaction_management/model/get_filters_response.dart';
 import 'model/reschedule_response.dart';
+import 'model/service_request_list_response_model.dart';
 import 'model/service_request_response.dart';
+import 'model/service_status_response_model.dart';
 
 abstract class IServiceRequestManagementRepo {
   Future<Either<ApiErrorHandler, ServiceRequestResponse>> getPendingRequests(
       {required int page,
       required int limit,
       required String userId,
-      required int filterId});
+      required int filterId,
+      required String searchTerm,
+      required String serviceId,
+      required String fromDate,
+      required String toDate});
 
   Future<Either<ApiErrorHandler, CaregiverProfileResponse>> getCareGiverProfile(
       {required String userID, required String adminId});
 
-  Future<Either<ApiErrorHandler, ServiceRequestResponse>> getCompletedRequests({
-    required int page,
+  Future<Either<ApiErrorHandler, ServiceRequestResponse>> getCompletedRequests(
+      {required int page,
+      required int limit,
+      required String userId,
+      required String searchTerm,
+      required String serviceId,
+      required String fromDate,
+      required String toDate});
+
+  Future<Either<ApiErrorHandler, ServiceRequestResponse>> getCancelledRequests(
+      {required int page,
+      required int limit,
+      required String userId,
+      required String searchTerm,
+      required String serviceId,
+      required String fromDate,
+      required String toDate});
+
+  Future<Either<ApiErrorHandler, ServiceRequestResponse>> getUpcomingRequests(
+      {required int page,
+      required int limit,
+      required String userId,
+      required String searchTerm,
+      required String serviceId,
+      required String fromDate,
+      required String toDate});
+
+  Future<Either<ApiErrorHandler, ServiceRequestResponse>> getOngoingRequests(
+      {required int page,
+      required int limit,
+      required String userId,
+      required String searchTerm,
+      required String serviceId,
+      required String fromDate,
+      required String toDate});
+
+  Future<Either<ApiErrorHandler, ServiceRequestListResponseModel>>
+      getServiceRequests({
+    required String page,
     required int limit,
     required String userId,
+    required String? serviceId,
+    String? searchTerm,
+    int? statusFilterId,
+    String? fromDate,
+    String? toDate,
+    int? dateFilterId,
   });
 
-  Future<Either<ApiErrorHandler, ServiceRequestResponse>> getCancelledRequests({
-    required int page,
-    required int limit,
-    required String userId,
-  });
+  Future<Either<ApiErrorHandler, ServiceStatusResponseModel>>
+      getServiceStatus();
 
-  Future<Either<ApiErrorHandler, ServiceRequestResponse>> getUpcomingRequests({
-    required int page,
-    required int limit,
-    required String userId,
-  });
-
-  Future<Either<ApiErrorHandler, ServiceRequestResponse>> getOngoingRequests({
-    required int page,
-    required int limit,
-    required String userId,
-  });
   Future<Either<ApiErrorHandler, RescheduleResponse>> rescheduleService(
       {required RescheduleParams rescheduleParams});
+
   Future<Either<ApiErrorHandler, CommonResponseUse>> assignCaregiver(
       {required AssignCareGiverParams assignCareGiverParams});
+
   Future<Either<ApiErrorHandler, CommonResponseUse>> cancelServiceRequest(
       {required String userId,
       required String serviceId,
       required String description});
+
   Future<Either<ApiErrorHandler, CommonResponseUse>> startService({
     required String userId,
     required String serviceId,
   });
+
+  Future<Either<ApiErrorHandler, GetFiltersResponse>> getFilters();
 }

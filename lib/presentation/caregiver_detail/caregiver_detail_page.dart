@@ -27,13 +27,14 @@ import '../../core/custom_debugger.dart';
 import '../../core/responsive.dart';
 import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';
+import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/svg_text.dart';
 
 @RoutePage()
 class CareGiverDetailPage extends StatefulWidget {
   const CareGiverDetailPage({
     Key? key,
-    @QueryParam('id') this.id = '',
+    @QueryParam('id') this.id,
   }) : super(key: key);
 
   final String? id;
@@ -58,6 +59,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
 
   @override
   Widget build(BuildContext context) {
+    print("userId received in CA detail page : $userId");
     return BlocProvider(
       create: (context) => _caregiverDetailBloc
         ..add(CareGiverDetailEvent.getCareGiverDetail(
@@ -478,6 +480,24 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
 
   _profileImageView(BuildContext context, String url) {
     return CachedImage(
+      onTap: () {
+        showGeneralDialog(
+          barrierLabel: "",
+          barrierDismissible: true,
+          context: context,
+          pageBuilder: (BuildContext buildContext, Animation animation,
+              Animation secondaryAnimation) {
+            return CustomAlertDialogWidget(
+                showHeading: false,
+                width: 700,
+                heading: "",
+                child: CachedImage(
+                  fit: BoxFit.contain,
+                  imgUrl: url,
+                ));
+          },
+        );
+      },
       imgUrl: url,
       height: DBL.oneSeventyFive.val,
       width: DBL.twoHundred.val,

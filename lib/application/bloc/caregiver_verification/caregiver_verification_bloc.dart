@@ -312,8 +312,9 @@ class CareGiverVerificationBloc
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
+        print(" ################## ${r.message}");
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
-        autoTabRouter?.navigate(CareGiverProfileRoute());
+        autoTabRouter?.navigate(CareGiverProfileRoute(id: event.userId));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
@@ -398,6 +399,8 @@ class CareGiverVerificationBloc
     required userId,
   }) {
     showGeneralDialog(
+      barrierLabel: "",
+      barrierDismissible: true,
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {
@@ -411,6 +414,23 @@ class CareGiverVerificationBloc
                   height: DBL.four.val,
                 ),
                 CachedImage(
+                  onTap: () {
+                    /*showGeneralDialog(barrierLabel: "",
+                      barrierDismissible: true,
+                      context: context,
+                      pageBuilder: (BuildContext buildContext,
+                          Animation animation, Animation secondaryAnimation) {
+                        return CustomAlertDialogWidget(
+                            showHeading: false,
+                            width: 700,
+                            heading: "",
+                            child: CachedImage(
+                              fit: BoxFit.contain,
+                              imgUrl: imgUrl,
+                            ));
+                      },
+                    );*/
+                  },
                   imgUrl: imgUrl,
                   height: DBL.oneFifty.val,
                   width: DBL.oneFifty.val,
@@ -464,6 +484,8 @@ class CareGiverVerificationBloc
     required userId,
   }) {
     showGeneralDialog(
+      barrierLabel: "",
+      barrierDismissible: true,
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {
@@ -477,6 +499,23 @@ class CareGiverVerificationBloc
                   height: DBL.four.val,
                 ),
                 CachedImage(
+                  onTap: () {
+                    /*showGeneralDialog(barrierLabel: "",
+                      barrierDismissible: true,
+                      context: context,
+                      pageBuilder: (BuildContext buildContext,
+                          Animation animation, Animation secondaryAnimation) {
+                        return CustomAlertDialogWidget(
+                            showHeading: false,
+                            width: 700,
+                            heading: "",
+                            child: CachedImage(
+                              fit: BoxFit.contain,
+                              imgUrl: imgUrl,
+                            ));
+                      },
+                    );*/
+                  },
                   imgUrl: imgUrl,
                   height: DBL.oneFifty.val,
                   width: DBL.oneFifty.val,

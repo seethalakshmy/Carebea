@@ -28,6 +28,8 @@ import '../../../core/responsive.dart';
 import '../../../domain/service_request_management/model/assign_caregiver_params.dart';
 import '../../../domain/service_request_management/model/service_request_response.dart';
 import '../../caregiver_profile/caregiver_profile_page.dart';
+import '../../routes/app_router.gr.dart';
+import '../../side_menu/side_menu_page.dart';
 import '../../widget/common_alert_widget.dart';
 import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_icon.dart';
@@ -92,27 +94,31 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
+                  const SizedBox(height: 30),
                   Padding(
                     padding: const EdgeInsets.only(left: 20, right: 20),
                     child: Column(
                       children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
+                        Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.start,
                           children: [
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ProfileWidget(
-                                      imageUrl:
-                                          widget.service.client?.profile ?? "",
-                                      name: widget.service.client?.firstName ??
-                                          "",
-                                      subText: 'Client'),
+                                    imageUrl:
+                                        widget.service.client?.profile ?? "",
+                                    name:
+                                        "${widget.service.client?.firstName} ${widget.service.client?.lastName}",
+                                    subText: 'Client',
+                                    onNameTap: () {
+                                      Navigator.pop(context);
+                                      autoTabRouter?.navigate(
+                                          UserManagementDetailRoute(
+                                              id: widget.service.client?.id));
+                                    },
+                                  ),
                                   Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -224,13 +230,20 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
                                   widget.title == AppString.pending.val
                                       ? const SizedBox()
                                       : ProfileWidget(
-                                          imageUrl: widget.service.decisionMaker
-                                                  ?.profile ??
+                                          imageUrl: widget
+                                                  .service.careGiver?.profile ??
                                               "",
-                                          name: widget.service.decisionMaker
-                                                  ?.firstName ??
-                                              "",
-                                          subText: 'Care Ambassador'),
+                                          name:
+                                              "${widget.service.careGiver?.firstName} ${widget.service.careGiver?.lastName}",
+                                          subText: 'Care Ambassador',
+                                          onNameTap: () {
+                                            Navigator.pop(context);
+                                            autoTabRouter?.navigate(
+                                                CareGiverDetailRoute(
+                                                    id: widget.service.careGiver
+                                                        ?.id));
+                                          },
+                                        ),
                                   _serviceListWidget(
                                       title: 'Service Needed',
                                       servicesList:
@@ -704,7 +717,7 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
                     id: userId,
                   )));
         });
-    // showGeneralDialog(
+    // showGeneralDialog(barrierDismissible: true,barrierLabel: "",
     //   context: context,
     //   pageBuilder: (BuildContext buildContext, Animation animation,
     //       Animation secondaryAnimation) {
@@ -943,10 +956,16 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
 
   Future<void> _selectDate(
       BuildContext context, ServiceRequestManagementState state) async {
-    final DateTime currentDate = DateTime.now();
+    final DateTime now = DateTime.now();
+    DateTime currentDate = DateTime.now();
+    if (now.hour >= 12) {
+      currentDate = DateTime(now.year, now.month, now.day + 1);
+    } else {
+      currentDate = DateTime.now();
+    }
     showDatePicker(
       context: context,
-      initialDate: state.selectedDate,
+      initialDate: currentDate,
       firstDate: currentDate,
       lastDate: currentDate.add(const Duration(days: 365)),
     ).then((value) {
@@ -1332,105 +1351,105 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
     );
   }
 
-  // _caregiverProfilePopup(BuildContext context,
-  //     {int? index, required ServiceRequestManagementState state}) {
-  //   Profile? profile = state.caregiverProfileResponse?.data?.profile;
-  //
-  //   return CustomContainer(
-  //     padding: EdgeInsets.symmetric(
-  //         horizontal: DBL.twentyFive.val, vertical: DBL.twentyFive.val),
-  //     color: AppColor.white.val,
-  //     child: SingleChildScrollView(
-  //       child: Column(
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           aboutView(profile?.about ?? ""),
-  //           CustomSizedBox(
-  //             height: DBL.fifteen.val,
-  //           ),
-  //           _hobbiesView(profile?.hobbies ?? ""),
-  //           CustomSizedBox(
-  //             height: DBL.fifteen.val,
-  //           ),
-  //           _whyCareGiver(profile?.description ?? ""),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-  //
-  // aboutView(String about) {
-  //   return Column(
-  //     crossAxisAlignment: CrossAxisAlignment.start,
-  //     children: [
-  //       HeaderView(
-  //         title: AppString.about.val,
-  //         color: AppColor.matBlack3.val,
-  //         fontSize: FS.font18.val,
-  //         topPadding: DBL.zero.val,
-  //         sidePadding: DBL.zero.val,
-  //       ),
-  //       CustomSizedBox(
-  //         height: DBL.eight.val,
-  //       ),
-  //       CustomText(
-  //         about,
-  //         style: TS().gRoboto(
-  //           fontSize: FS.font13PointFive.val,
-  //           fontWeight: FW.w400.val,
-  //           color: AppColor.darkGrey3.val,
-  //           height: DBL.onePointNine.val,
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
-  //
-  // _hobbiesView(String hobbies) {
-  //   return Column(
-  //     crossAxisAlignment: CrossAxisAlignment.start,
-  //     children: [
-  //       HeaderView(
-  //         title: AppString.hobbies.val,
-  //         color: AppColor.matBlack3.val,
-  //         fontSize: FS.font18.val,
-  //         topPadding: DBL.zero.val,
-  //         sidePadding: DBL.zero.val,
-  //       ),
-  //       CustomSizedBox(
-  //         height: DBL.eight.val,
-  //       ),
-  //       CustomText(hobbies,
-  //           style: TS().gRoboto(
-  //               color: AppColor.matBlack3.val, fontWeight: FW.w400.val)),
-  //     ],
-  //   );
-  // }
-  //
-  // _whyCareGiver(String des) {
-  //   return Column(
-  //     crossAxisAlignment: CrossAxisAlignment.start,
-  //     children: [
-  //       HeaderView(
-  //         title: AppString.whyYouLoveBeingCareAmbassador.val,
-  //         color: AppColor.matBlack3.val,
-  //         fontSize: FS.font18.val,
-  //         topPadding: DBL.zero.val,
-  //         sidePadding: DBL.zero.val,
-  //       ),
-  //       CustomSizedBox(
-  //         height: DBL.eight.val,
-  //       ),
-  //       CustomText(
-  //         des,
-  //         style: TS().gRoboto(
-  //           fontSize: FS.font13PointFive.val,
-  //           fontWeight: FW.w400.val,
-  //           color: AppColor.darkGrey3.val,
-  //           height: DBL.onePointNine.val,
-  //         ),
-  //       )
-  //     ],
-  //   );
-  // }
+// _caregiverProfilePopup(BuildContext context,
+//     {int? index, required ServiceRequestManagementState state}) {
+//   Profile? profile = state.caregiverProfileResponse?.data?.profile;
+//
+//   return CustomContainer(
+//     padding: EdgeInsets.symmetric(
+//         horizontal: DBL.twentyFive.val, vertical: DBL.twentyFive.val),
+//     color: AppColor.white.val,
+//     child: SingleChildScrollView(
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           aboutView(profile?.about ?? ""),
+//           CustomSizedBox(
+//             height: DBL.fifteen.val,
+//           ),
+//           _hobbiesView(profile?.hobbies ?? ""),
+//           CustomSizedBox(
+//             height: DBL.fifteen.val,
+//           ),
+//           _whyCareGiver(profile?.description ?? ""),
+//         ],
+//       ),
+//     ),
+//   );
+// }
+//
+// aboutView(String about) {
+//   return Column(
+//     crossAxisAlignment: CrossAxisAlignment.start,
+//     children: [
+//       HeaderView(
+//         title: AppString.about.val,
+//         color: AppColor.matBlack3.val,
+//         fontSize: FS.font18.val,
+//         topPadding: DBL.zero.val,
+//         sidePadding: DBL.zero.val,
+//       ),
+//       CustomSizedBox(
+//         height: DBL.eight.val,
+//       ),
+//       CustomText(
+//         about,
+//         style: TS().gRoboto(
+//           fontSize: FS.font13PointFive.val,
+//           fontWeight: FW.w400.val,
+//           color: AppColor.darkGrey3.val,
+//           height: DBL.onePointNine.val,
+//         ),
+//       ),
+//     ],
+//   );
+// }
+//
+// _hobbiesView(String hobbies) {
+//   return Column(
+//     crossAxisAlignment: CrossAxisAlignment.start,
+//     children: [
+//       HeaderView(
+//         title: AppString.hobbies.val,
+//         color: AppColor.matBlack3.val,
+//         fontSize: FS.font18.val,
+//         topPadding: DBL.zero.val,
+//         sidePadding: DBL.zero.val,
+//       ),
+//       CustomSizedBox(
+//         height: DBL.eight.val,
+//       ),
+//       CustomText(hobbies,
+//           style: TS().gRoboto(
+//               color: AppColor.matBlack3.val, fontWeight: FW.w400.val)),
+//     ],
+//   );
+// }
+//
+// _whyCareGiver(String des) {
+//   return Column(
+//     crossAxisAlignment: CrossAxisAlignment.start,
+//     children: [
+//       HeaderView(
+//         title: AppString.whyYouLoveBeingCareAmbassador.val,
+//         color: AppColor.matBlack3.val,
+//         fontSize: FS.font18.val,
+//         topPadding: DBL.zero.val,
+//         sidePadding: DBL.zero.val,
+//       ),
+//       CustomSizedBox(
+//         height: DBL.eight.val,
+//       ),
+//       CustomText(
+//         des,
+//         style: TS().gRoboto(
+//           fontSize: FS.font13PointFive.val,
+//           fontWeight: FW.w400.val,
+//           color: AppColor.darkGrey3.val,
+//           height: DBL.onePointNine.val,
+//         ),
+//       )
+//     ],
+//   );
+// }
 }

@@ -27,6 +27,7 @@ class CDataTable2 extends StatelessWidget {
         dividerThickness: dividerThickness,
         headingRowHeight: headingRowHeight,
         dataRowHeight: dataRowHeight,
+        // isHorizontalScrollBarVisible: true,
         showBottomBorder: true,
         border: TableBorder(
           horizontalInside: BorderSide(

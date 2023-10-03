@@ -2,8 +2,10 @@ import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.d
 import 'package:admin_580_tech/presentation/caregiver_creation/models/caregiver_creation_response.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../core/custom_snackbar.dart';
 import '../../../infrastructure/caregiver_creation/caregiver_creation_repository.dart';
 
 part 'caregiver_creation_bloc.freezed.dart';
@@ -32,6 +34,9 @@ class CaregiverCreationBloc
       return state.copyWith(
           isLoading: false, failureOrSuccessOption: Some(Left(l)));
     }, (r) {
+      if (!r.status!) {
+        CSnackBar.showError(event.context, msg: r.message ?? "");
+      }
       return state.copyWith(
           failureOrSuccessOption: Some(Right(r)), isLoading: false);
     });

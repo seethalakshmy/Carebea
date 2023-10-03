@@ -38,7 +38,7 @@ import 'widgets/approval_status_box.dart';
 class CaregiverVerificationPage extends StatefulWidget {
   const CaregiverVerificationPage({
     Key? key,
-    @QueryParam('id') this.id = '',
+    @QueryParam('id') this.id,
   }) : super(key: key);
 
   final String? id;
@@ -73,14 +73,14 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
   @override
   void initState() {
     userId = autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
-    adminId =
-        autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
+    adminId = SharedPreffUtil().getAdminId;
     _page = autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
     _tab = autoTabRouter?.currentChild?.queryParams.getInt('tab', 0);
     super.initState();
     context.read<CareGiverVerificationBloc>().add(
         CareGiverVerificationEvent.getVerificationData(
             userId: userId, context: context, adminId: adminId));
+    print("verification screen\nUser ID : $userId\nAdmin ID : $adminId");
   }
 
   @override
@@ -130,6 +130,24 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                 height: DBL.four.val,
               ),
               CachedImage(
+                onTap: () {
+                  showGeneralDialog(
+                    barrierLabel: "",
+                    barrierDismissible: true,
+                    context: context,
+                    pageBuilder: (BuildContext buildContext,
+                        Animation animation, Animation secondaryAnimation) {
+                      return CustomAlertDialogWidget(
+                          showHeading: false,
+                          width: 700,
+                          heading: "",
+                          child: CachedImage(
+                            fit: BoxFit.contain,
+                            imgUrl: caregiver?.profile ?? "",
+                          ));
+                    },
+                  );
+                },
                 imgUrl: caregiver?.profile ?? "",
                 height: DBL.oneFifty.val,
                 width: DBL.oneFifty.val,
@@ -202,12 +220,13 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                 : AppString.goToProfile.val,
             onPressed: () {
               if (status != Verification.trainingStarted.val) {
+                print("user id : $userId\nadminId : $adminId");
                 context.read<CareGiverVerificationBloc>().add(
                     CareGiverVerificationEvent.careGiverSendTrainingRequest(
                         userId: userId,
                         context: context,
                         page: _page,
-                        adminId: userId));
+                        adminId: adminId));
               } else {
                 autoTabRouter?.navigate(CareGiverProfileRoute(id: userId));
               }
@@ -1040,6 +1059,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
       _launchUrl(url);
     } else {
       showGeneralDialog(
+        barrierLabel: "",
+        barrierDismissible: true,
         context: context,
         pageBuilder: (BuildContext buildContext, Animation animation,
             Animation secondaryAnimation) {
@@ -1065,6 +1086,24 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                       ),
                     )
                   : CachedImage(
+                      onTap: () {
+                        /*showGeneralDialog(barrierLabel: "",
+                          barrierDismissible: true,
+                          context: context,
+                          pageBuilder: (BuildContext buildContext,
+                              Animation animation,
+                              Animation secondaryAnimation) {
+                            return CustomAlertDialogWidget(
+                                showHeading: false,
+                                width: 700,
+                                heading: "",
+                                child: CachedImage(
+                                  fit: BoxFit.contain,
+                                  imgUrl: url,
+                                ));
+                          },
+                        );*/
+                      },
                       imgUrl: url,
                       width: 780,
                       height: 800,
@@ -1078,6 +1117,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
 
   _certificateRejectPopUp(BuildContext context) {
     showGeneralDialog(
+      barrierLabel: "",
+      barrierDismissible: true,
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {

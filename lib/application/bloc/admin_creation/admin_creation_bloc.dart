@@ -40,8 +40,7 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
   _getRoles(_GetRoles event, Emitter<AdminCreationState> emit) async {
     final Either<ApiErrorHandler, GetRoleResponse> roleResult =
         await adminCreationRepository.getRoles(
-      userID: event.userId,
-    );
+            userID: event.userId, searchTerm: event.searchTerm);
     AdminCreationState roleState = roleResult.fold((l) {
       return state.copyWith(
         error: l.error,
@@ -74,6 +73,7 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
     final Either<ApiErrorHandler, GetRoleResponse> roleResult =
         await adminCreationRepository.getRoles(
       userID: event.userId,
+      searchTerm: event.searchTerm,
     );
     AdminCreationState roleState = roleResult.fold((l) {
       return state.copyWith(
@@ -90,7 +90,9 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
     );
     final Either<ApiErrorHandler, AdminViewResponse> homeResult =
         await adminCreationRepository.viewRole(
-            userId: event.userId, adminId: event.adminId);
+            userId: event.userId,
+            adminId: event.adminId,
+            searchTerm: event.searchTerm);
     AdminCreationState homeState = homeResult.fold((l) {
       return state.copyWith(
         error: l.error,
@@ -99,8 +101,8 @@ class AdminCreationBloc extends Bloc<AdminCreationEvent, AdminCreationState> {
         isClientError: l.isClientError ?? false,
       );
     }, (r) {
-      List<Role> role = state.rolesResponse?.data?.role ?? [];
-      Role? initialRoleValue;
+      List<Result> role = state.rolesResponse?.data?.result ?? [];
+      Result? initialRoleValue;
       if (r.data?.roleId != null) {
         for (var i in role) {
           if (r.data?.roleId == i.id) {

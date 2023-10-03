@@ -5,15 +5,18 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 
 import '../../../core/custom_snackbar.dart';
-import '../../../core/enum.dart';
 import '../../../domain/caregiver_profile/model/caregiver_profile_response.dart';
 import '../../../domain/caregivers/model/types.dart';
 import '../../../domain/common_response/common_response.dart';
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
 import '../../../domain/service_request_management/model/reschedule_response.dart';
+import '../../../domain/service_request_management/model/service_request_list_response_model.dart';
 import '../../../domain/service_request_management/model/service_request_response.dart';
+import '../../../domain/service_request_management/model/service_status_response_model.dart';
+import '../../../domain/transaction_management/model/get_filters_response.dart';
 import '../../../infrastructure/service_request_management/service_request_management_repository.dart';
 
 part 'service_request_management_bloc.freezed.dart';
@@ -23,10 +26,20 @@ part 'service_request_management_state.dart';
 class ServiceRequestManagementBloc
     extends Bloc<ServiceRequestManagementEvent, ServiceRequestManagementState> {
   ServiceRequestManagementRepository serviceRequestManagementRepository;
+  int filterId = 0;
+  int? statusFilterId = 0;
+  String searchQuery = "";
+  List<FilterData> filterList = [];
+  List<StatusData> serviceStatusList = [];
+  List<ServiceRequests> serviceRequestsList = [];
+  String selectedFromDate = "";
+  String selectedToDate = "";
+  DateTime selectedFromDateTime = DateTime(2020);
+  DateTime? selectedToDateTime;
+  bool isClearFilterClicked = false;
 
   ServiceRequestManagementBloc(this.serviceRequestManagementRepository)
       : super(ServiceRequestManagementState.initial()) {
-    on<_IsSelectedTab>(_getSelectedTab);
     on<_SetDate>(_setDate);
     on<_SetFromTime>(_setFromTime);
     on<_SetToTime>(_setToTime);
@@ -39,83 +52,9 @@ class ServiceRequestManagementBloc
     on<_AssignCaregiver>(_assignCaregiver);
     on<_StartService>(_startService);
     on<_CancelService>(_cancelService);
-    on<_GetCareGiverProfile>(_getCareGiverProfile);
-  }
-
-  _getCareGiverProfile(_GetCareGiverProfile event,
-      Emitter<ServiceRequestManagementState> emit) async {
-    final Either<ApiErrorHandler, CaregiverProfileResponse> homeResult =
-        await serviceRequestManagementRepository.getCareGiverProfile(
-      userID: event.userId,
-      adminId: event.adminId,
-    );
-    ServiceRequestManagementState stateResult = homeResult.fold((l) {
-      return state.copyWith(
-          error: l.error,
-          isLoading: false,
-          isError: true,
-          isClientError: l.isClientError ?? false);
-    }, (r) {
-      return state.copyWith(
-        caregiverProfileResponse: r,
-        isLoading: false,
-      );
-    });
-    emit(
-      stateResult,
-    );
-  }
-
-  _getSelectedTab(
-      _IsSelectedTab event, Emitter<ServiceRequestManagementState> emit) async {
-    var state = this.state;
-    emit(state.copyWith(
-        isLoading: true,
-        services: [],
-        error: "",
-        rescheduleResponse: null,
-        toTime: null,
-        fromTime: null,
-        selectedDate: DateTime.now(),
-        isRescheduleAvailableCaregiverView: false,
-        isError: false,
-        isClientError: false,
-        isRescheduleInitialView: false,
-        isRescheduleLoaderView: false,
-        isRescheduleNotAvailableCaregiverView: false,
-        isRescheduleOtherMatchingListView: false,
-        types: [
-          Types(id: 1, title: AppString.pendingServices.val, isSelected: true),
-          Types(
-              id: 2, title: AppString.completedServices.val, isSelected: false),
-          Types(id: 3, title: AppString.canceledRequest.val, isSelected: false),
-          Types(id: 4, title: AppString.upcomingRequest.val, isSelected: false),
-          Types(id: 5, title: AppString.onGoingRequest.val, isSelected: false),
-        ]));
-    final typeList = state.types;
-    Types item = event.type;
-    final index = typeList.indexOf(item);
-    if (!item.isSelected) {
-      for (var element in typeList) {
-        element.isSelected = false;
-      }
-      List<Types> types = List.from(typeList)..removeAt(index);
-      types.insert(index, item.copyWith(isSelected: true));
-      emit(state.copyWith(types: types, isLoading: true, error: ""));
-    }
-
-    if (event.type.id == 1) {
-      state = await _getPendingRequests(event.filterId);
-    } else if (event.type.id == 2) {
-      state = await _getCompletedRequests();
-    } else if (event.type.id == 3) {
-      state = await _getCancelledRequests();
-    } else if (event.type.id == 4) {
-      state = await _getUpcomingRequests();
-    } else {
-      state = await _getOngoingRequests();
-    }
-    emit(state);
+    on<_GetFilters>(_getFilters);
+    on<_GetServiceStatus>(_getServiceStatus);
+    on<_GetServiceRequests>(_getServiceRequests);
   }
 
   _setDate(_SetDate event, Emitter<ServiceRequestManagementState> emit) async {
@@ -190,10 +129,12 @@ class ServiceRequestManagementBloc
         await serviceRequestManagementRepository.rescheduleService(
             rescheduleParams: event.rescheduleParams);
     ServiceRequestManagementState rescheduleState = result.fold((l) {
-      CSnackBar.showError(event.context, msg: l.error ?? "");
+      Navigator.pop(event.context);
+      CSnackBar.showError(event.context, msg: l.error);
       return state.copyWith(
           isRescheduleLoaderView: false, isReScheduleError: true);
     }, (r) {
+      Navigator.pop(event.context);
       if (r.status ?? false) {
         if (r.data?.caregiverFound ?? false) {
           add(const ServiceRequestManagementEvent.isRescheduleAvailableView());
@@ -219,7 +160,7 @@ class ServiceRequestManagementBloc
         await serviceRequestManagementRepository.assignCaregiver(
             assignCareGiverParams: event.assignCareGiverParams);
     ServiceRequestManagementState assignState = result.fold((l) {
-      CSnackBar.showError(event.context, msg: l.error ?? "");
+      CSnackBar.showError(event.context, msg: l.error);
       return state.copyWith(
           isRescheduleLoaderView: false, isReScheduleError: true);
     }, (r) {
@@ -247,7 +188,7 @@ class ServiceRequestManagementBloc
       userId: event.userId,
     );
     ServiceRequestManagementState currentState = result.fold((l) {
-      CSnackBar.showError(event.context, msg: l.error ?? "");
+      CSnackBar.showError(event.context, msg: l.error);
       return state.copyWith(isStartServiceLoading: false);
     }, (r) {
       if (r.status ?? false) {
@@ -274,13 +215,13 @@ class ServiceRequestManagementBloc
             userId: event.userId,
             description: event.description);
     ServiceRequestManagementState currentState = result.fold((l) {
-      CSnackBar.showError(event.context, msg: l.error ?? "");
+      CSnackBar.showError(event.context, msg: l.error);
       return state.copyWith(isCancelLoading: false);
     }, (r) {
       if (r.status ?? false) {
-        Navigator.pop(event.context);
-        Navigator.pop(event.context);
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        Navigator.pop(event.context);
+        Navigator.pop(event.context);
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
@@ -294,87 +235,76 @@ class ServiceRequestManagementBloc
     );
   }
 
-  Future<ServiceRequestManagementState> _getPendingRequests(
-      int? filterId) async {
-    final Either<ApiErrorHandler, ServiceRequestResponse> result =
-        await serviceRequestManagementRepository.getPendingRequests(
-            page: 1,
-            userId: SharedPreffUtil().getAdminId,
-            limit: 10,
-            filterId: filterId ?? 0);
-    ServiceRequestManagementState serviceRequestManagementState =
-        result.fold((l) {
-      return state.copyWith(isLoading: false, services: [], error: l.error);
+  _getFilters(
+      _GetFilters event, Emitter<ServiceRequestManagementState> emit) async {
+    emit(state.copyWith(isLoading: true));
+    final Either<ApiErrorHandler, GetFiltersResponse> result =
+        await serviceRequestManagementRepository.getFilters();
+    ServiceRequestManagementState filterState = result.fold((l) {
+      return state.copyWith(isLoading: false, filterOption: Some(Left(l)));
     }, (r) {
-      return state.copyWith(isLoading: false, services: r.data?.service ?? []);
+      filterList.clear();
+      filterList.addAll(r.data!);
+      return state.copyWith(isLoading: false, filterOption: Some(Right(r)));
     });
-    return serviceRequestManagementState;
+    emit(filterState);
   }
 
-  Future<ServiceRequestManagementState> _getCompletedRequests() async {
-    final Either<ApiErrorHandler, ServiceRequestResponse> result =
-        await serviceRequestManagementRepository.getCompletedRequests(
-      page: 1,
-      userId: SharedPreffUtil().getAdminId,
-      limit: 10,
-    );
-    ServiceRequestManagementState serviceRequestManagementState =
-        result.fold((l) {
-      return state.copyWith(isLoading: false, services: [], error: l.error);
-    }, (r) {
-      return state.copyWith(isLoading: false, services: r.data?.service ?? []);
-    });
-    return serviceRequestManagementState;
+  String generateFormattedDate(String date) {
+    DateTime inputDate = DateTime.parse(date);
+    DateFormat dateFormat = DateFormat('MM-dd-yyyy , hh:mm a');
+    String formattedDate = dateFormat.format(inputDate);
+    return formattedDate;
   }
 
-  Future<ServiceRequestManagementState> _getCancelledRequests() async {
-    final Either<ApiErrorHandler, ServiceRequestResponse> result =
-        await serviceRequestManagementRepository.getCancelledRequests(
-      page: 1,
-      userId: SharedPreffUtil().getAdminId,
-      limit: 10,
-      // filterId: filterId
-    );
-    ServiceRequestManagementState serviceRequestManagementState =
-        result.fold((l) {
-      return state.copyWith(isLoading: false, services: [], error: l.error);
+  _getServiceStatus(_GetServiceStatus event,
+      Emitter<ServiceRequestManagementState> emit) async {
+    emit(state.copyWith(isLoading: true));
+    final Either<ApiErrorHandler, ServiceStatusResponseModel> result =
+        await serviceRequestManagementRepository.getServiceStatus();
+    ServiceRequestManagementState statusState = result.fold((l) {
+      return state.copyWith(
+          isLoading: false, serviceStatusOption: Some(Left(l)));
     }, (r) {
-      return state.copyWith(isLoading: false, services: r.data?.service ?? []);
+      serviceStatusList.clear();
+      serviceStatusList.add(StatusData(id: 0, name: "All"));
+      serviceStatusList.addAll(r.data!);
+      return state.copyWith(
+          isLoading: false, serviceStatusOption: Some(Right(r)));
     });
-    return serviceRequestManagementState;
+    emit(statusState);
   }
 
-  Future<ServiceRequestManagementState> _getUpcomingRequests() async {
-    final Either<ApiErrorHandler, ServiceRequestResponse> result =
-        await serviceRequestManagementRepository.getUpcomingRequests(
-      page: 1,
+  _getServiceRequests(_GetServiceRequests event,
+      Emitter<ServiceRequestManagementState> emit) async {
+    emit(state.copyWith(isListLoading: true));
+    final Either<ApiErrorHandler, ServiceRequestListResponseModel> result =
+        await serviceRequestManagementRepository.getServiceRequests(
+      page: event.page.toString(),
+      limit: event.limit,
       userId: SharedPreffUtil().getAdminId,
-      limit: 10,
-      // filterId: filterId
+      serviceId: null,
+      searchTerm: event.searchTerm ?? "",
+      fromDate: event.fromDate,
+      toDate: event.toDate,
+      dateFilterId: event.dateFilterId,
+      statusFilterId: event.statusFilterId,
     );
-    ServiceRequestManagementState serviceRequestManagementState =
-        result.fold((l) {
-      return state.copyWith(isLoading: false, services: [], error: l.error);
+    ServiceRequestManagementState serviceState = result.fold((l) {
+      serviceRequestsList.clear();
+      return state.copyWith(
+          isListLoading: false, error: l.error, serviceOption: Some(Left(l)));
     }, (r) {
-      return state.copyWith(isLoading: false, services: r.data?.service ?? []);
+      if (r.status == true) {
+        serviceRequestsList.clear();
+        serviceRequestsList.addAll(r.data!.services!);
+        return state.copyWith(
+            isListLoading: false, error: "", serviceOption: Some(Right(r)));
+      } else {
+        CSnackBar.showError(event.context, msg: r.message ?? "");
+        return state.copyWith(isListLoading: false, error: "");
+      }
     });
-    return serviceRequestManagementState;
-  }
-
-  Future<ServiceRequestManagementState> _getOngoingRequests() async {
-    final Either<ApiErrorHandler, ServiceRequestResponse> result =
-        await serviceRequestManagementRepository.getOngoingRequests(
-      page: 1,
-      userId: SharedPreffUtil().getAdminId,
-      limit: 10,
-      // filterId: filterId
-    );
-    ServiceRequestManagementState serviceRequestManagementState =
-        result.fold((l) {
-      return state.copyWith(isLoading: false, services: [], error: l.error);
-    }, (r) {
-      return state.copyWith(isLoading: false, services: r.data?.service ?? []);
-    });
-    return serviceRequestManagementState;
+    emit(serviceState);
   }
 }

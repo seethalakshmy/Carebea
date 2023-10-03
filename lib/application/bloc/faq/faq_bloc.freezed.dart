@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'faq_bloc.dart';
 
@@ -16,44 +16,43 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$FaqEvent {
-  String get userId => throw _privateConstructorUsedError;
-  int get page => throw _privateConstructorUsedError;
-  int get limit => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, int page, int limit) getFaq,
+    required TResult Function() getFaqList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId, int page, int limit)? getFaq,
+    TResult? Function()? getFaqList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, int page, int limit)? getFaq,
+    TResult Function()? getFaqList,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetFaq value) getFaq,
+    required TResult Function(_GetFaqList value) getFaqList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetFaq value)? getFaq,
+    TResult? Function(_GetFaqList value)? getFaqList,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetFaq value)? getFaq,
+    TResult Function(_GetFaqList value)? getFaqList,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $FaqEventCopyWith<FaqEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -61,8 +60,6 @@ mixin _$FaqEvent {
 abstract class $FaqEventCopyWith<$Res> {
   factory $FaqEventCopyWith(FaqEvent value, $Res Function(FaqEvent) then) =
       _$FaqEventCopyWithImpl<$Res, FaqEvent>;
-  @useResult
-  $Res call({String userId, int page, int limit});
 }
 
 /// @nodoc
@@ -74,36 +71,12 @@ class _$FaqEventCopyWithImpl<$Res, $Val extends FaqEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? userId = null,
-    Object? page = null,
-    Object? limit = null,
-  }) {
-    return _then(_value.copyWith(
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
-      limit: null == limit
-          ? _value.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_GetFaqCopyWith<$Res> implements $FaqEventCopyWith<$Res> {
+abstract class _$$_GetFaqCopyWith<$Res> {
   factory _$$_GetFaqCopyWith(_$_GetFaq value, $Res Function(_$_GetFaq) then) =
       __$$_GetFaqCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({String userId, int page, int limit});
 }
@@ -180,6 +153,7 @@ class _$_GetFaq implements _GetFaq {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, int page, int limit) getFaq,
+    required TResult Function() getFaqList,
   }) {
     return getFaq(userId, page, limit);
   }
@@ -188,6 +162,7 @@ class _$_GetFaq implements _GetFaq {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId, int page, int limit)? getFaq,
+    TResult? Function()? getFaqList,
   }) {
     return getFaq?.call(userId, page, limit);
   }
@@ -196,6 +171,7 @@ class _$_GetFaq implements _GetFaq {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, int page, int limit)? getFaq,
+    TResult Function()? getFaqList,
     required TResult orElse(),
   }) {
     if (getFaq != null) {
@@ -208,6 +184,7 @@ class _$_GetFaq implements _GetFaq {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetFaq value) getFaq,
+    required TResult Function(_GetFaqList value) getFaqList,
   }) {
     return getFaq(this);
   }
@@ -216,6 +193,7 @@ class _$_GetFaq implements _GetFaq {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetFaq value)? getFaq,
+    TResult? Function(_GetFaqList value)? getFaqList,
   }) {
     return getFaq?.call(this);
   }
@@ -224,6 +202,7 @@ class _$_GetFaq implements _GetFaq {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetFaq value)? getFaq,
+    TResult Function(_GetFaqList value)? getFaqList,
     required TResult orElse(),
   }) {
     if (getFaq != null) {
@@ -239,16 +218,114 @@ abstract class _GetFaq implements FaqEvent {
       required final int page,
       required final int limit}) = _$_GetFaq;
 
-  @override
   String get userId;
-  @override
   int get page;
-  @override
   int get limit;
-  @override
   @JsonKey(ignore: true)
   _$$_GetFaqCopyWith<_$_GetFaq> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_GetFaqListCopyWith<$Res> {
+  factory _$$_GetFaqListCopyWith(
+          _$_GetFaqList value, $Res Function(_$_GetFaqList) then) =
+      __$$_GetFaqListCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_GetFaqListCopyWithImpl<$Res>
+    extends _$FaqEventCopyWithImpl<$Res, _$_GetFaqList>
+    implements _$$_GetFaqListCopyWith<$Res> {
+  __$$_GetFaqListCopyWithImpl(
+      _$_GetFaqList _value, $Res Function(_$_GetFaqList) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_GetFaqList implements _GetFaqList {
+  const _$_GetFaqList();
+
+  @override
+  String toString() {
+    return 'FaqEvent.getFaqList()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_GetFaqList);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, int page, int limit) getFaq,
+    required TResult Function() getFaqList,
+  }) {
+    return getFaqList();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, int page, int limit)? getFaq,
+    TResult? Function()? getFaqList,
+  }) {
+    return getFaqList?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, int page, int limit)? getFaq,
+    TResult Function()? getFaqList,
+    required TResult orElse(),
+  }) {
+    if (getFaqList != null) {
+      return getFaqList();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetFaq value) getFaq,
+    required TResult Function(_GetFaqList value) getFaqList,
+  }) {
+    return getFaqList(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetFaq value)? getFaq,
+    TResult? Function(_GetFaqList value)? getFaqList,
+  }) {
+    return getFaqList?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetFaq value)? getFaq,
+    TResult Function(_GetFaqList value)? getFaqList,
+    required TResult orElse(),
+  }) {
+    if (getFaqList != null) {
+      return getFaqList(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetFaqList implements FaqEvent {
+  const factory _GetFaqList() = _$_GetFaqList;
 }
 
 /// @nodoc
@@ -256,6 +333,8 @@ mixin _$FaqState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+  Option<Either<ApiErrorHandler, FaqListResponseModel>> get faqListOption =>
+      throw _privateConstructorUsedError;
   bool get isClientError => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -268,7 +347,12 @@ abstract class $FaqStateCopyWith<$Res> {
   factory $FaqStateCopyWith(FaqState value, $Res Function(FaqState) then) =
       _$FaqStateCopyWithImpl<$Res, FaqState>;
   @useResult
-  $Res call({bool isLoading, bool isError, String? error, bool isClientError});
+  $Res call(
+      {bool isLoading,
+      bool isError,
+      String? error,
+      Option<Either<ApiErrorHandler, FaqListResponseModel>> faqListOption,
+      bool isClientError});
 }
 
 /// @nodoc
@@ -287,6 +371,7 @@ class _$FaqStateCopyWithImpl<$Res, $Val extends FaqState>
     Object? isLoading = null,
     Object? isError = null,
     Object? error = freezed,
+    Object? faqListOption = null,
     Object? isClientError = null,
   }) {
     return _then(_value.copyWith(
@@ -302,6 +387,10 @@ class _$FaqStateCopyWithImpl<$Res, $Val extends FaqState>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      faqListOption: null == faqListOption
+          ? _value.faqListOption
+          : faqListOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, FaqListResponseModel>>,
       isClientError: null == isClientError
           ? _value.isClientError
           : isClientError // ignore: cast_nullable_to_non_nullable
@@ -317,7 +406,12 @@ abstract class _$$_FaqStateCopyWith<$Res> implements $FaqStateCopyWith<$Res> {
       __$$_FaqStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, bool isError, String? error, bool isClientError});
+  $Res call(
+      {bool isLoading,
+      bool isError,
+      String? error,
+      Option<Either<ApiErrorHandler, FaqListResponseModel>> faqListOption,
+      bool isClientError});
 }
 
 /// @nodoc
@@ -334,6 +428,7 @@ class __$$_FaqStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? isError = null,
     Object? error = freezed,
+    Object? faqListOption = null,
     Object? isClientError = null,
   }) {
     return _then(_$_FaqState(
@@ -349,6 +444,10 @@ class __$$_FaqStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      faqListOption: null == faqListOption
+          ? _value.faqListOption
+          : faqListOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, FaqListResponseModel>>,
       isClientError: null == isClientError
           ? _value.isClientError
           : isClientError // ignore: cast_nullable_to_non_nullable
@@ -364,6 +463,7 @@ class _$_FaqState implements _FaqState {
       {required this.isLoading,
       required this.isError,
       required this.error,
+      required this.faqListOption,
       this.isClientError = false});
 
   @override
@@ -373,12 +473,14 @@ class _$_FaqState implements _FaqState {
   @override
   final String? error;
   @override
+  final Option<Either<ApiErrorHandler, FaqListResponseModel>> faqListOption;
+  @override
   @JsonKey()
   final bool isClientError;
 
   @override
   String toString() {
-    return 'FaqState(isLoading: $isLoading, isError: $isError, error: $error, isClientError: $isClientError)';
+    return 'FaqState(isLoading: $isLoading, isError: $isError, error: $error, faqListOption: $faqListOption, isClientError: $isClientError)';
   }
 
   @override
@@ -390,13 +492,15 @@ class _$_FaqState implements _FaqState {
                 other.isLoading == isLoading) &&
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.error, error) || other.error == error) &&
+            (identical(other.faqListOption, faqListOption) ||
+                other.faqListOption == faqListOption) &&
             (identical(other.isClientError, isClientError) ||
                 other.isClientError == isClientError));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isLoading, isError, error, isClientError);
+  int get hashCode => Object.hash(
+      runtimeType, isLoading, isError, error, faqListOption, isClientError);
 
   @JsonKey(ignore: true)
   @override
@@ -410,6 +514,8 @@ abstract class _FaqState implements FaqState {
       {required final bool isLoading,
       required final bool isError,
       required final String? error,
+      required final Option<Either<ApiErrorHandler, FaqListResponseModel>>
+          faqListOption,
       final bool isClientError}) = _$_FaqState;
 
   @override
@@ -418,6 +524,8 @@ abstract class _FaqState implements FaqState {
   bool get isError;
   @override
   String? get error;
+  @override
+  Option<Either<ApiErrorHandler, FaqListResponseModel>> get faqListOption;
   @override
   bool get isClientError;
   @override

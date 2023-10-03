@@ -1,5 +1,6 @@
 import 'package:admin_580_tech/application/bloc/user_management_detail/user_management_detail_bloc.dart';
 import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
+import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import '../../../core/enum.dart';
 import '../../../core/responsive.dart';
 import '../../../core/text_styles.dart';
+import '../../side_menu/side_menu_page.dart';
 import '../../widget/cached_image.dart';
 import '../../widget/custom_card.dart';
 import '../../widget/custom_container.dart';
@@ -71,12 +73,12 @@ class SubProfileView extends StatelessWidget {
             label: _columnsView(context,
                 text: AppString.slNo.val, fontWeight: FontWeight.bold),
           ),
-          DataColumn2(
-            size: ColumnSize.S,
-            fixedWidth: 80,
-            label: _columnsView(context,
-                text: AppString.id.val, fontWeight: FontWeight.bold),
-          ),
+          // DataColumn2(
+          //   size: ColumnSize.S,
+          //   fixedWidth: 80,
+          //   label: _columnsView(context,
+          //       text: AppString.id.val, fontWeight: FontWeight.bold),
+          // ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
@@ -87,6 +89,11 @@ class SubProfileView extends StatelessWidget {
             label: _columnsView(context,
                 text: AppString.totalServiceCompleted.val,
                 fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.subscription.val, fontWeight: FontWeight.bold),
           ),
           const DataColumn2(
             size: ColumnSize.L,
@@ -102,18 +109,23 @@ class SubProfileView extends StatelessWidget {
                 context,
                 text: getIndex(e.key).toString(),
               )),
-              DataCell(_rowsView(
-                context,
-                text: item.id.toString(),
-              )),
+              // DataCell(_rowsView(
+              //   context,
+              //   text: item.id.toString(),
+              // )),
               DataCell(_tableRowImage(context,
                   name: "${item.name?.firstName} ${item.name?.lastName}",
                   imgUrl: item.profilePic ?? "",
-                  age: int.parse(item?.age ?? ''))),
+                  age: item.age ?? '')),
               DataCell(
-                  _rowsView(context, text: item.completedServices.toString())),
+                  _rowsView(context, text: item.completedServices?.toString())),
+              DataCell(_rowsView(context,
+                  icon: item.isSubscribed == true ? Icons.check : Icons.close)),
               DataCell(InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    autoTabRouter
+                        ?.navigate(ClientSubProfileDetailsRoute(id: item.id));
+                  },
                   child: CustomContainer(
                     alignment: Alignment.centerRight,
                     child: CustomSvg(
@@ -136,18 +148,25 @@ class SubProfileView extends StatelessWidget {
   Widget _rowsView(
     BuildContext context, {
     String? text,
+    IconData? icon,
   }) {
-    return CustomText(
-      '$text',
-      softWrap: true,
-      style: TS().gRoboto(
-          fontSize: Responsive.isWeb(context)
-              ? DBL.thirteenPointFive.val
-              : DBL.twelve.val,
-          fontWeight: FW.w400.val,
-          color: AppColor.rowColor.val),
-      textAlign: TextAlign.start,
-    );
+    return icon == null
+        ? CustomText(
+            '$text',
+            softWrap: true,
+            style: TS().gRoboto(
+                fontSize: Responsive.isWeb(context)
+                    ? DBL.thirteenPointFive.val
+                    : DBL.twelve.val,
+                fontWeight: FW.w400.val,
+                color: AppColor.rowColor.val),
+            textAlign: TextAlign.start,
+          )
+        : Icon(
+            icon,
+            size: 12,
+            color: AppColor.darkGrey.val,
+          );
   }
 
   Widget _columnsView(BuildContext context,
@@ -165,7 +184,7 @@ class SubProfileView extends StatelessWidget {
   }
 
   Widget _tableRowImage(BuildContext context,
-      {required String name, required String imgUrl, required int age}) {
+      {required String name, required String imgUrl, required String age}) {
     return Row(
       children: [
         ClipRRect(
@@ -174,40 +193,44 @@ class SubProfileView extends StatelessWidget {
               height: DBL.thirty.val, width: DBL.thirty.val, imgUrl: imgUrl),
         ),
         CustomSizedBox(width: DBL.twelve.val),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomSizedBox(
-              height: DBL.ten.val,
-            ),
-            Expanded(
-              flex: 1,
-              child: CustomText(
-                name,
-                style: TS().gRoboto(
-                    fontSize: Responsive.isWeb(context)
-                        ? DBL.fourteen.val
-                        : DBL.twelve.val,
-                    fontWeight: FW.w400.val,
-                    color: AppColor.rowColor.val),
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomSizedBox(
+                height: DBL.ten.val,
               ),
-            ),
-            CustomSizedBox(
-              height: DBL.three.val,
-            ),
-            Expanded(
-              flex: 2,
-              child: CustomText(
-                "(${age.toString()})",
-                style: TS().gRoboto(
-                    fontSize: Responsive.isWeb(context)
-                        ? DBL.thirteen.val
-                        : DBL.eleven.val,
-                    fontWeight: FW.w400.val,
-                    color: AppColor.lightGrey7.val),
+              Expanded(
+                flex: 1,
+                child: CustomText(
+                  name,
+                  style: TS().gRoboto(
+                      fontSize: Responsive.isWeb(context)
+                          ? DBL.fourteen.val
+                          : DBL.twelve.val,
+                      fontWeight: FW.w400.val,
+                      color: AppColor.rowColor.val),
+                ),
               ),
-            ),
-          ],
+              CustomSizedBox(
+                height: DBL.three.val,
+              ),
+              Expanded(
+                flex: 2,
+                child: age != ''
+                    ? CustomText(
+                        "(${age.toString()})",
+                        style: TS().gRoboto(
+                            fontSize: Responsive.isWeb(context)
+                                ? DBL.thirteen.val
+                                : DBL.eleven.val,
+                            fontWeight: FW.w400.val,
+                            color: AppColor.lightGrey7.val),
+                      )
+                    : SizedBox.shrink(),
+              ),
+            ],
+          ),
         ),
       ],
     );

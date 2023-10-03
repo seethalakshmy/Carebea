@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../application/bloc/transaction_management/transaction_management_bloc.dart';
 import '../../../domain/transaction_management/model/transaction_details_response.dart';
 import '../../widget/custom_shimmer.dart';
+import '../../widget/error_view.dart';
 
 class TransactionDetailsAlert extends StatelessWidget {
   const TransactionDetailsAlert({super.key, required this.transactionBloc});
@@ -24,32 +25,26 @@ class TransactionDetailsAlert extends StatelessWidget {
       child: BlocBuilder<TransactionManagementBloc, TransactionManagementState>(
         bloc: transactionBloc,
         builder: (context, state) {
+          print("2222222222222 ${transactionBloc.state.error}");
           return SizedBox(
             height: 480,
             child: transactionBloc.state.isDetailsLoading
                 ? const CustomShimmerWidget.rectangular(height: double.infinity)
-                : Wrap(
-                    children: [
-                      Responsive.isWeb(context)
-                          ? Row(
-                              children: [
-                                _detailsWidget(context),
-                                _refundWidget(transactionBloc.state)
-                              ],
-                            )
-                          : SizedBox(
-                              height: 480,
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    _detailsWidget(context),
-                                    _refundWidget(transactionBloc.state)
-                                  ],
-                                ),
-                              ),
-                            ),
-                    ],
-                  ),
+                : transactionBloc.state.error != null
+                    ? ErrorView(
+                        isClientError: true,
+                        errorMessage: transactionBloc.state.error,
+                        isUnderTab: false,
+                        isFromDashboard: false,
+                      )
+                    : Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.start,
+                        alignment: WrapAlignment.start,
+                        children: [
+                          _detailsWidget(context),
+                          _refundDetailsWidget(context)
+                        ],
+                      ),
           );
         },
       ),
@@ -72,25 +67,28 @@ class TransactionDetailsAlert extends StatelessWidget {
             ),
           ),
         ),
-        item?.status!.id == 1 || item?.status!.id == 2
-            ? Row(
-                children: [
-                  CustomText(
-                    ":  ",
-                    softWrap: true,
-                    style: TS().gRoboto(
-                      fontSize: Responsive.isWeb(context)
-                          ? FS.font14.val
-                          : FS.font13.val,
-                      fontWeight: FW.w400.val,
+        item?.status?.id == 1 || item?.status?.id == 2
+            ? Expanded(
+                child: Row(
+                  children: [
+                    CustomText(
+                      ":  ",
+                      softWrap: true,
+                      style: TS().gRoboto(
+                        fontSize: Responsive.isWeb(context)
+                            ? FS.font14.val
+                            : FS.font13.val,
+                        fontWeight: FW.w400.val,
+                      ),
                     ),
-                  ),
-                  CustomStatusWidget(
-                    statusName: item!.status!.name!,
-                    isCompleted: item.status!.id == 1 || item.status!.id == 2,
-                    isFromDetails: true,
-                  )
-                ],
+                    CustomStatusWidget(
+                      statusName: item?.status?.name ?? "",
+                      isCompleted:
+                          item?.status?.id == 1 || item?.status?.id == 2,
+                      isFromDetails: true,
+                    )
+                  ],
+                ),
               )
             : CustomText(
                 ":  $detail",
@@ -107,9 +105,7 @@ class TransactionDetailsAlert extends StatelessWidget {
 
   Widget _detailsWidget(BuildContext context) {
     return Container(
-      width: Responsive.isWeb(context)
-          ? MediaQuery.of(context).size.width * .35
-          : double.infinity,
+      width: 400,
       color: AppColor.white.val,
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -166,7 +162,7 @@ class TransactionDetailsAlert extends StatelessWidget {
           const CustomSizedBox(height: 7),
           _detailRow(
               "Status",
-              transactionBloc.transactionDetailsData.status!.name ?? "",
+              transactionBloc.transactionDetailsData.status?.name ?? "",
               transactionBloc.transactionDetailsData,
               context),
         ],
@@ -174,96 +170,102 @@ class TransactionDetailsAlert extends StatelessWidget {
     );
   }
 
-/*  Widget _refundDetailsWidget() {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(10),
-          bottomRight: Radius.circular(10),
-        ),
-        color: AppColor.white.val,
-      ),
-      padding: const EdgeInsets.all(20),
-      width: Responsive.isWeb(context)
-          ? MediaQuery.of(context).size.width * .34
-          : double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stepper(
-            steps: stepperData,
-            currentStep: 0,
-            type: StepperType.vertical,
-            controlsBuilder: (ctx, details) {
-              return const Padding(padding: EdgeInsets.zero);
-            },
-          ),
-        ],
-      ),
-    );
-  }*/
-
-  Widget _refundWidget(TransactionManagementState state) {
+  Widget _refundDetailsWidget(BuildContext context) {
     return CustomContainer(
-      padding: const EdgeInsets.all(20),
+      width: 300,
+      padding: const EdgeInsets.all(20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomText(
-            AppString.refundStarted.val,
-            style: TS().gRoboto(
-                color: AppColor.black.val,
-                fontSize: FS.font16.val,
-                fontWeight: FW.w500.val),
-          ),
-          Row(
-            children: [
-              Icon(
-                Icons.check_circle,
-                size: 20,
-                color: AppColor.green.val,
-              ),
-              CustomSizedBox(width: DBL.fifteen.val),
-              CustomText(
-                'Mon,09March 2023 |  3:20PM',
-                style: TS().gRoboto(
-                    color: AppColor.black.val,
-                    fontSize: FS.font12.val,
-                    fontWeight: FW.w400.val),
-              ),
-            ],
-          ),
-          InkWell(
-            onTap: () {
-              transactionBloc.add(TransactionManagementEvent.hideOrShowDetails(
-                  clicked: transactionBloc.isClicked));
-              print("isClicked : ${transactionBloc.isClicked}");
-            },
-            child: Container(
-              width: 150,
-              height: 30,
-              padding: const EdgeInsets.all(5),
-              child: Row(
-                children: [
-                  CustomText(
-                    state.isClicked ? "Hide Details" : "Show Details",
-                    style: TS().gRoboto(
-                        color: AppColor.error.val,
-                        fontSize: FS.font13.val,
-                        fontWeight: FW.w400.val),
-                  ),
-                  Icon(
-                    state.isClicked
-                        ? Icons.keyboard_arrow_up
-                        : Icons.keyboard_arrow_down,
-                    size: 20,
-                    color: AppColor.error.val,
-                  )
-                ],
-              ),
-            ),
-          ),
+          transactionBloc.detailsList.isNotEmpty
+              ? CustomText(
+                  AppString.refundStatus.val,
+                  style: TS().gRoboto(
+                      fontSize: FS.font16.val,
+                      fontWeight: FW.w500.val,
+                      color: AppColor.black.val),
+                )
+              : CustomSizedBox.shrink(),
+          CustomSizedBox(height: DBL.ten.val),
+          ListView.builder(
+              itemCount: transactionBloc.detailsList.isNotEmpty
+                  ? transactionBloc.detailsList[0].refund!.paymentStatus!.length
+                  : 0,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                print("********** ${transactionBloc.detailsList.isNotEmpty}");
+                return transactionBloc.detailsList.isNotEmpty
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            children: [
+                              const CircleAvatar(
+                                backgroundColor: Colors.green,
+                                radius: 6,
+                              ),
+                              index + 1 <
+                                      transactionBloc.detailsList[0].refund!
+                                          .paymentStatus!.length
+                                  ? Container(
+                                      width: 5,
+                                      color: AppColor.lightGrey.val,
+                                      height: 60,
+                                    )
+                                  : Container()
+                            ],
+                          ),
+                          CustomSizedBox(width: DBL.ten.val),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomText(
+                                transactionBloc.detailsList[0].refund!
+                                        .paymentStatus![index].date ??
+                                    "",
+                                style: TS().gRoboto(
+                                    fontSize: FS.font12.val,
+                                    fontWeight: FW.w400.val,
+                                    color: AppColor.black4.val),
+                              ),
+                              CustomSizedBox(height: DBL.ten.val),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10.0, bottom: 10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CustomText(
+                                      transactionBloc.detailsList[0].refund!
+                                              .paymentStatus![index].title ??
+                                          "",
+                                      style: TS().gRoboto(
+                                          fontSize: FS.font12.val,
+                                          fontWeight: FW.w400.val,
+                                          color: AppColor.lightGrey2.val),
+                                    ),
+                                    CustomSizedBox(height: DBL.five.val),
+                                    CustomText(
+                                      "Txn Id : ${transactionBloc.detailsList[0].refund!.paymentStatus![index].paymentLogTxnId ?? ""}",
+                                      style: TS().gRoboto(
+                                          fontSize: FS.font12.val,
+                                          fontWeight: FW.w400.val,
+                                          color: AppColor.lightGrey2.val),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      )
+                    : Container(
+                        width: 100,
+                        height: 50,
+                        color: Colors.red,
+                      );
+              }),
         ],
       ),
     );

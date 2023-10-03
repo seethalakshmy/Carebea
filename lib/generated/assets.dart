@@ -9,8 +9,12 @@ class Assets {
   static const String iconsCameraIcon = 'assets/icons/camera_icon.svg';
   static const String iconsClose = 'assets/icons/close.svg';
   static const String iconsColorLogo = 'assets/icons/color_logo.svg';
+  static const String iconsDiagnosis = 'assets/icons/diagnosis.svg';
+  static const String iconsDiet = 'assets/icons/diet.svg';
   static const String iconsDrawer = 'assets/icons/drawer.svg';
   static const String iconsExclamation = 'assets/icons/exclamation.svg';
+  static const String iconsFirstAidKit = 'assets/icons/FirstAidKit.svg';
+  static const String iconsHealth = 'assets/icons/health.svg';
   static const String iconsIcActive = 'assets/icons/ic_active.svg';
   static const String iconsIcArrowDown = 'assets/icons/ic_arrow_down.svg';
   static const String iconsIcCalendar = 'assets/icons/ic_calendar.svg';
@@ -41,10 +45,16 @@ class Assets {
   static const String iconsIcUncheck = 'assets/icons/ic_uncheck.svg';
   static const String iconsIcWarning = 'assets/icons/ic_warning.svg';
   static const String iconsImageNotFound = 'assets/icons/image_not_found.png';
+  static const String iconsMedicine = 'assets/icons/medicine.svg';
+  static const String iconsPhone = 'assets/icons/Phone.svg';
+  static const String iconsPill = 'assets/icons/Pill.svg';
   static const String iconsPlusCircle = 'assets/icons/plus-circle.svg';
+  static const String iconsPrimaryContact = 'assets/icons/primaryContact.svg';
   static const String iconsRoundClose = 'assets/icons/round_close.svg';
   static const String iconsSearchIcon = 'assets/icons/search_icon.svg';
+  static const String iconsStethoscope = 'assets/icons/Stethoscope.svg';
   static const String iconsUploadIcon = 'assets/icons/uploadIcon.svg';
+  static const String iconsUser = 'assets/icons/User.svg';
   static const String iconsUserAvatar = 'assets/icons/user_avatar.svg';
   static const String imagesBlackLogo = 'assets/images/black_logo.png';
   static const String imagesCareAmbassadors =
@@ -63,7 +73,7 @@ class Assets {
   static const String imagesDrawer = 'assets/images/drawer.png';
   static const String imagesHours = 'assets/images/hours.png';
   static const String imagesIcPerson = 'assets/images/ic_person.png';
-  static const String imagesImg = 'assets/images/ic_profile.png';
+  static const String imagesIcProfile = 'assets/images/ic_profile.png';
   static const String imagesMissedSchedule =
       'assets/images/missed_schedule.png';
   static const String imagesNotification = 'assets/images/notification.png';

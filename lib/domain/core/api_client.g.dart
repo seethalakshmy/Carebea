@@ -1958,6 +1958,10 @@ class _ApiClient implements ApiClient {
     page,
     limit,
     filterId,
+    searchTerm,
+    serviceId,
+    fromDate,
+    toDate,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1968,6 +1972,10 @@ class _ApiClient implements ApiClient {
       'page': page,
       'limit': limit,
       'filter_id': filterId,
+      'search_term': searchTerm,
+      'service_id': serviceId,
+      'from_date': fromDate,
+      'to_date': toDate,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(
@@ -1992,6 +2000,10 @@ class _ApiClient implements ApiClient {
     userId,
     page,
     limit,
+    searchTerm,
+    serviceId,
+    fromDate,
+    toDate,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -2001,6 +2013,10 @@ class _ApiClient implements ApiClient {
       'user_id': userId,
       'page': page,
       'limit': limit,
+      'search_term': searchTerm,
+      'service_id': serviceId,
+      'from_date': fromDate,
+      'to_date': toDate,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(
@@ -2025,6 +2041,10 @@ class _ApiClient implements ApiClient {
     userId,
     page,
     limit,
+    searchTerm,
+    serviceId,
+    fromDate,
+    toDate,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -2034,6 +2054,10 @@ class _ApiClient implements ApiClient {
       'user_id': userId,
       'page': page,
       'limit': limit,
+      'search_term': searchTerm,
+      'service_id': serviceId,
+      'from_date': fromDate,
+      'to_date': toDate,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(
@@ -2058,6 +2082,10 @@ class _ApiClient implements ApiClient {
     userId,
     page,
     limit,
+    searchTerm,
+    serviceId,
+    fromDate,
+    toDate,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -2067,6 +2095,10 @@ class _ApiClient implements ApiClient {
       'user_id': userId,
       'page': page,
       'limit': limit,
+      'search_term': searchTerm,
+      'service_id': serviceId,
+      'from_date': fromDate,
+      'to_date': toDate,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(
@@ -2091,6 +2123,10 @@ class _ApiClient implements ApiClient {
     userId,
     page,
     limit,
+    searchTerm,
+    serviceId,
+    fromDate,
+    toDate,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -2100,6 +2136,10 @@ class _ApiClient implements ApiClient {
       'user_id': userId,
       'page': page,
       'limit': limit,
+      'search_term': searchTerm,
+      'service_id': serviceId,
+      'from_date': fromDate,
+      'to_date': toDate,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ServiceRequestResponse>(Options(
@@ -2115,6 +2155,76 @@ class _ApiClient implements ApiClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = ServiceRequestResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ServiceRequestListResponseModel> getServiceRequests(
+    token,
+    userId,
+    serviceId,
+    page,
+    limit,
+    searchTerm,
+    statusFilterId,
+    fromDate,
+    toDate,
+    dateFilterId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'service_id': serviceId,
+      'page': page,
+      'limit': limit,
+      'search_term': searchTerm,
+      'status_filter': statusFilterId,
+      'from_date': fromDate,
+      'to_date': toDate,
+      'filter_id': dateFilterId,
+    };
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ServiceRequestListResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/service-request-list',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ServiceRequestListResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ServiceStatusResponseModel> getServiceStatus() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ServiceStatusResponseModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/common-data/get-service-status',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ServiceStatusResponseModel.fromJson(_result.data!);
     return value;
   }
 
@@ -2181,13 +2291,17 @@ class _ApiClient implements ApiClient {
   @override
   Future<TransactionDetailsResponse> getTransactionDetails(
     token,
+    serviceId,
     transactionId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = {'transaction_id': transactionId};
+    final _data = {
+      'service_id': serviceId,
+      'transaction_id': transactionId,
+    };
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<TransactionDetailsResponse>(Options(
       method: 'POST',
@@ -2454,6 +2568,333 @@ class _ApiClient implements ApiClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = CommonResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<FaqListResponseModel> getFaqList() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<FaqListResponseModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/common-data/get-faqs',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = FaqListResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<FaqDetailsResponseModel> getFaqDetails(itemId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'_id': itemId};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<FaqDetailsResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/common-data/get-faq',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = FaqDetailsResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponse> updateFaqDetails(
+    itemId,
+    question,
+    answer,
+    status,
+    forClient,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      '_id': itemId,
+      'question': question,
+      'answer': answer,
+      'status': status,
+      'forClient': forClient,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/common-data/update-faq',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponse> createFaqDetails(
+    question,
+    answer,
+    status,
+    forClient,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'question': question,
+      'answer': answer,
+      'status': status,
+      'forClient': forClient,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/common-data/create-faq',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SubProfileDetailResponse> getSubProfileDetails(
+    userId,
+    adminId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'admin_id': adminId,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SubProfileDetailResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-subprofile-detail',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SubProfileDetailResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ComplaintsListResponseModel> getComplaints(
+    userId,
+    page,
+    limit,
+    searchTerm,
+    status,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'page': page,
+      'limit': limit,
+      'search_term': searchTerm,
+      'status': status,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ComplaintsListResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-complaints',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ComplaintsListResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ClientServiceResponse> getClientService(
+    userId,
+    adminId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'admin_id': adminId,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ClientServiceResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/client-service-view',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ClientServiceResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ComplaintDetailsResponseModel> getComplaintDetails(complaintId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'complaint_id': complaintId};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ComplaintDetailsResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-complaints-by-id',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ComplaintDetailsResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponse> updateComplaint(
+    adminId,
+    complaintId,
+    status,
+    comment,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'admin_id': adminId,
+      'complaint_id': complaintId,
+      'status': status,
+      'comment': comment,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/update-complaint',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetServiceResponseModel> viewService(
+    adminId,
+    complaintId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': adminId,
+      'service_id': complaintId,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetServiceResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/view-service',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetServiceResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SubscriptionModel> getSubscribedClients(
+    userId,
+    page,
+    limit,
+    searchTerm,
+    subscriptionType,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'page': page,
+      'limit': limit,
+      'search_term': searchTerm,
+      'subscription_type': subscriptionType,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SubscriptionModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-subscribed-clients',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SubscriptionModel.fromJson(_result.data!);
     return value;
   }
 

@@ -4,12 +4,17 @@ part of 'user_management_detail_bloc.dart';
 class UserManagementDetailState with _$UserManagementDetailState {
   const factory UserManagementDetailState(
       {required bool isLoading,
-        required bool isError,
-        required UserDetailResponse? response,
-        required String? error}) = _UserManagementDetailState;
+      required bool isError,
+      required UserDetailResponse? response,
+      required ClientServiceResponse? clientServiceResponse,
+      required String? error}) = _UserManagementDetailState;
 
   factory UserManagementDetailState.initial() {
     return const UserManagementDetailState(
-        isLoading: true, isError: false, response: null, error: null);
+        isLoading: true,
+        isError: false,
+        response: null,
+        error: null,
+        clientServiceResponse: null);
   }
 }

@@ -70,7 +70,7 @@ class _CommonDatePickerWidgetState extends State<CommonDatePickerWidget> {
         child: CustomSizedBox(
           width: DBL.twoEighty.val,
           child: CTextField(
-            hintText: AppString.ddmmyyyy.val,
+            hintText: AppString.mmddyyyy.val,
             hintStyle: TS().gRoboto(
                 fontWeight: FW.w400.val,
                 color: AppColor.label.val,

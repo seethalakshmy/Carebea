@@ -4,6 +4,7 @@ import 'package:admin_580_tech/domain/service_request_management/i_service_reque
 import 'package:admin_580_tech/domain/service_request_management/model/assign_caregiver_params.dart';
 import 'package:admin_580_tech/domain/service_request_management/model/reschedule_params.dart';
 import 'package:admin_580_tech/domain/service_request_management/model/service_request_response.dart';
+import 'package:admin_580_tech/domain/service_request_management/model/service_status_response_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
@@ -12,6 +13,8 @@ import '../../core/enum.dart';
 import '../../domain/caregiver_profile/model/caregiver_profile_response.dart';
 import '../../domain/core/api_client.dart';
 import '../../domain/service_request_management/model/reschedule_response.dart';
+import '../../domain/service_request_management/model/service_request_list_response_model.dart';
+import '../../domain/transaction_management/model/get_filters_response.dart';
 
 class ServiceRequestManagementRepository
     implements IServiceRequestManagementRepo {
@@ -22,6 +25,10 @@ class ServiceRequestManagementRepository
     required int page,
     required int limit,
     required String userId,
+    required String searchTerm,
+    required String serviceId,
+    required String fromDate,
+    required String toDate,
   }) async {
     try {
       final response = await _apiClient.getCancelled(
@@ -29,6 +36,10 @@ class ServiceRequestManagementRepository
         userId,
         page,
         limit,
+        searchTerm,
+        "",
+        fromDate,
+        toDate,
       );
       return Right(response);
     } on DioError catch (e) {
@@ -68,6 +79,10 @@ class ServiceRequestManagementRepository
     required int page,
     required int limit,
     required String userId,
+    required String searchTerm,
+    required String serviceId,
+    required String fromDate,
+    required String toDate,
   }) async {
     try {
       final response = await _apiClient.getCompletedRequests(
@@ -75,6 +90,10 @@ class ServiceRequestManagementRepository
         userId,
         page,
         limit,
+        searchTerm,
+        "",
+        fromDate,
+        toDate,
       );
       return Right(response);
     } on DioError catch (e) {
@@ -95,6 +114,10 @@ class ServiceRequestManagementRepository
     required int page,
     required int limit,
     required String userId,
+    required String searchTerm,
+    required String serviceId,
+    required String fromDate,
+    required String toDate,
   }) async {
     try {
       final response = await _apiClient.getOngoingRequests(
@@ -102,6 +125,10 @@ class ServiceRequestManagementRepository
         userId,
         page,
         limit,
+        searchTerm,
+        "",
+        fromDate,
+        toDate,
       );
       return Right(response);
     } on DioError catch (e) {
@@ -123,10 +150,23 @@ class ServiceRequestManagementRepository
     required int limit,
     required String userId,
     required int filterId,
+    required String searchTerm,
+    required String serviceId,
+    required String fromDate,
+    required String toDate,
   }) async {
     try {
       final response = await _apiClient.getPendingRequests(
-          "", userId, page, limit, filterId);
+        "",
+        userId,
+        page,
+        limit,
+        filterId,
+        searchTerm,
+        "",
+        fromDate,
+        toDate,
+      );
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
@@ -146,6 +186,10 @@ class ServiceRequestManagementRepository
     required int page,
     required int limit,
     required String userId,
+    required String searchTerm,
+    required String serviceId,
+    required String fromDate,
+    required String toDate,
   }) async {
     try {
       final response = await _apiClient.getUpcomingRequests(
@@ -153,6 +197,10 @@ class ServiceRequestManagementRepository
         userId,
         page,
         limit,
+        searchTerm,
+        "",
+        fromDate,
+        toDate,
       );
       return Right(response);
     } on DioError catch (e) {
@@ -245,6 +293,83 @@ class ServiceRequestManagementRepository
         userId,
         serviceId,
       );
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, GetFiltersResponse>> getFilters() async {
+    try {
+      final response = await _apiClient.getFilters();
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverListRepository: ${e.message}");
+
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, ServiceRequestListResponseModel>>
+      getServiceRequests(
+          {required String page,
+          required int limit,
+          required String userId,
+          required String? serviceId,
+          String? searchTerm,
+          int? statusFilterId,
+          String? fromDate,
+          String? toDate,
+          int? dateFilterId}) async {
+    try {
+      final response = await _apiClient.getServiceRequests(
+        "",
+        userId,
+        serviceId,
+        page,
+        limit,
+        searchTerm,
+        statusFilterId,
+        fromDate,
+        toDate,
+        dateFilterId,
+      );
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, ServiceStatusResponseModel>>
+      getServiceStatus() async {
+    try {
+      final response = await _apiClient.getServiceStatus();
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");

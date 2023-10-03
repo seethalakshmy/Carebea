@@ -25,7 +25,7 @@ class TableLoaderView extends StatelessWidget {
                     height: DBL.nineFifty.val,
                     child: Shimmer.fromColors(
                       baseColor: AppColor.rowBackgroundColor.val,
-                      highlightColor: AppColor.rowBackgroundColor.val,
+                      highlightColor: AppColor.lightGrey.val,
                       child: _buildDataTable(shimmerList),
                     ))
               ]),

@@ -1,6 +1,7 @@
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
@@ -12,6 +13,7 @@ import 'package:admin_580_tech/presentation/widget/custom_text_button.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../application/bloc/login/login_bloc.dart';
@@ -31,6 +33,9 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   final FocusNode _userFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
+  late PackageInfo packageInfo;
+  String? version = '';
+
   // final LoginBloc _loginBloc = LoginBloc(LoginRepository());
   AutovalidateMode _validateMode = AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
@@ -38,9 +43,15 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
+    getVersionNumber();
+    print('version $version');
     // if (SharedPreffUtil().getLogin) {
     //   context.router.replace(const SideMenuRoute());
     // }
+    if (SharedPreffUtil().getRememberMe) {
+      _usernameController.text = SharedPreffUtil().getLoginEmail;
+      _passwordController.text = SharedPreffUtil().getLoginPassword;
+    }
   }
 
   @override
@@ -143,6 +154,33 @@ class _LoginPageState extends State<LoginPage> {
                   height: DBL.eleven.val,
                 ),
                 _passwordTextFormView(),
+                BlocBuilder<LoginBloc, LoginState>(
+                  builder: (context, loginState) {
+                    return Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      spacing: 0,
+                      runSpacing: 0,
+                      children: [
+                        Checkbox(
+                          value: loginState.isCheckedRemember,
+                          onChanged: (val) {
+                            SharedPreffUtil().setRememberMe = val ?? false;
+                            BlocProvider.of<LoginBloc>(context).add(
+                                LoginEvent.rememberMe(isChecked: val ?? false));
+                          },
+                          activeColor: AppColor.primaryColor.val,
+                          checkColor: AppColor.white.val,
+                          fillColor: MaterialStateProperty.all(
+                              AppColor.primaryColor.val),
+                        ),
+                        Text(AppString.rememberMe.val,
+                            style: TS().gPoppins(
+                                fontWeight: FW.w400.val,
+                                color: AppColor.primaryColor.val)),
+                      ],
+                    );
+                  },
+                ),
                 CustomSizedBox(
                   height: DBL.thirty.val,
                 ),
@@ -151,12 +189,21 @@ class _LoginPageState extends State<LoginPage> {
                   height: DBL.fortyEight.val,
                 ),
                 _loginButton(),
+                CustomSizedBox(
+                  height: DBL.fortyEight.val,
+                ),
+                CustomText('Version $version')
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  Future getVersionNumber() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    version = packageInfo.version;
   }
 
   CustomImage _logoView() {
@@ -226,6 +273,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   bool isHide = true;
+
   CTextField _passwordTextFormView() {
     return CTextField(
       suffixIcon: InkWell(
@@ -263,6 +311,8 @@ class _LoginPageState extends State<LoginPage> {
           isLoading: state.isLoading,
           color: AppColor.primaryColor.val,
           onPressed: () {
+            print(
+                "checked val in login button click: ${state.isCheckedRemember}");
             checkInputData();
           },
         );

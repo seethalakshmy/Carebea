@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'user_management_detail_bloc.dart';
 
@@ -21,32 +21,38 @@ mixin _$UserManagementDetailEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, String adminId) getUserDetail,
+    required TResult Function(String userId, String adminId) getClientService,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId, String adminId)? getUserDetail,
+    TResult? Function(String userId, String adminId)? getClientService,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, String adminId)? getUserDetail,
+    TResult Function(String userId, String adminId)? getClientService,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetUserDetail value) getUserDetail,
+    required TResult Function(_GetClientService value) getClientService,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetUserDetail value)? getUserDetail,
+    TResult? Function(_GetClientService value)? getClientService,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetUserDetail value)? getUserDetail,
+    TResult Function(_GetClientService value)? getClientService,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -170,6 +176,7 @@ class _$_GetUserDetail implements _GetUserDetail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, String adminId) getUserDetail,
+    required TResult Function(String userId, String adminId) getClientService,
   }) {
     return getUserDetail(userId, adminId);
   }
@@ -178,6 +185,7 @@ class _$_GetUserDetail implements _GetUserDetail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId, String adminId)? getUserDetail,
+    TResult? Function(String userId, String adminId)? getClientService,
   }) {
     return getUserDetail?.call(userId, adminId);
   }
@@ -186,6 +194,7 @@ class _$_GetUserDetail implements _GetUserDetail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, String adminId)? getUserDetail,
+    TResult Function(String userId, String adminId)? getClientService,
     required TResult orElse(),
   }) {
     if (getUserDetail != null) {
@@ -198,6 +207,7 @@ class _$_GetUserDetail implements _GetUserDetail {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetUserDetail value) getUserDetail,
+    required TResult Function(_GetClientService value) getClientService,
   }) {
     return getUserDetail(this);
   }
@@ -206,6 +216,7 @@ class _$_GetUserDetail implements _GetUserDetail {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetUserDetail value)? getUserDetail,
+    TResult? Function(_GetClientService value)? getClientService,
   }) {
     return getUserDetail?.call(this);
   }
@@ -214,6 +225,7 @@ class _$_GetUserDetail implements _GetUserDetail {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetUserDetail value)? getUserDetail,
+    TResult Function(_GetClientService value)? getClientService,
     required TResult orElse(),
   }) {
     if (getUserDetail != null) {
@@ -239,10 +251,161 @@ abstract class _GetUserDetail implements UserManagementDetailEvent {
 }
 
 /// @nodoc
+abstract class _$$_GetClientServiceCopyWith<$Res>
+    implements $UserManagementDetailEventCopyWith<$Res> {
+  factory _$$_GetClientServiceCopyWith(
+          _$_GetClientService value, $Res Function(_$_GetClientService) then) =
+      __$$_GetClientServiceCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String userId, String adminId});
+}
+
+/// @nodoc
+class __$$_GetClientServiceCopyWithImpl<$Res>
+    extends _$UserManagementDetailEventCopyWithImpl<$Res, _$_GetClientService>
+    implements _$$_GetClientServiceCopyWith<$Res> {
+  __$$_GetClientServiceCopyWithImpl(
+      _$_GetClientService _value, $Res Function(_$_GetClientService) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? adminId = null,
+  }) {
+    return _then(_$_GetClientService(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      adminId: null == adminId
+          ? _value.adminId
+          : adminId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetClientService implements _GetClientService {
+  const _$_GetClientService({required this.userId, required this.adminId});
+
+  @override
+  final String userId;
+  @override
+  final String adminId;
+
+  @override
+  String toString() {
+    return 'UserManagementDetailEvent.getClientService(userId: $userId, adminId: $adminId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetClientService &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.adminId, adminId) || other.adminId == adminId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userId, adminId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetClientServiceCopyWith<_$_GetClientService> get copyWith =>
+      __$$_GetClientServiceCopyWithImpl<_$_GetClientService>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId) getUserDetail,
+    required TResult Function(String userId, String adminId) getClientService,
+  }) {
+    return getClientService(userId, adminId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getUserDetail,
+    TResult? Function(String userId, String adminId)? getClientService,
+  }) {
+    return getClientService?.call(userId, adminId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getUserDetail,
+    TResult Function(String userId, String adminId)? getClientService,
+    required TResult orElse(),
+  }) {
+    if (getClientService != null) {
+      return getClientService(userId, adminId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetUserDetail value) getUserDetail,
+    required TResult Function(_GetClientService value) getClientService,
+  }) {
+    return getClientService(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetUserDetail value)? getUserDetail,
+    TResult? Function(_GetClientService value)? getClientService,
+  }) {
+    return getClientService?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetUserDetail value)? getUserDetail,
+    TResult Function(_GetClientService value)? getClientService,
+    required TResult orElse(),
+  }) {
+    if (getClientService != null) {
+      return getClientService(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetClientService implements UserManagementDetailEvent {
+  const factory _GetClientService(
+      {required final String userId,
+      required final String adminId}) = _$_GetClientService;
+
+  @override
+  String get userId;
+  @override
+  String get adminId;
+  @override
+  @JsonKey(ignore: true)
+  _$$_GetClientServiceCopyWith<_$_GetClientService> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$UserManagementDetailState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
   UserDetailResponse? get response => throw _privateConstructorUsedError;
+  ClientServiceResponse? get clientServiceResponse =>
+      throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -260,6 +423,7 @@ abstract class $UserManagementDetailStateCopyWith<$Res> {
       {bool isLoading,
       bool isError,
       UserDetailResponse? response,
+      ClientServiceResponse? clientServiceResponse,
       String? error});
 }
 
@@ -280,6 +444,7 @@ class _$UserManagementDetailStateCopyWithImpl<$Res,
     Object? isLoading = null,
     Object? isError = null,
     Object? response = freezed,
+    Object? clientServiceResponse = freezed,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
@@ -295,6 +460,10 @@ class _$UserManagementDetailStateCopyWithImpl<$Res,
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as UserDetailResponse?,
+      clientServiceResponse: freezed == clientServiceResponse
+          ? _value.clientServiceResponse
+          : clientServiceResponse // ignore: cast_nullable_to_non_nullable
+              as ClientServiceResponse?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -316,6 +485,7 @@ abstract class _$$_UserManagementDetailStateCopyWith<$Res>
       {bool isLoading,
       bool isError,
       UserDetailResponse? response,
+      ClientServiceResponse? clientServiceResponse,
       String? error});
 }
 
@@ -335,6 +505,7 @@ class __$$_UserManagementDetailStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? isError = null,
     Object? response = freezed,
+    Object? clientServiceResponse = freezed,
     Object? error = freezed,
   }) {
     return _then(_$_UserManagementDetailState(
@@ -350,6 +521,10 @@ class __$$_UserManagementDetailStateCopyWithImpl<$Res>
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as UserDetailResponse?,
+      clientServiceResponse: freezed == clientServiceResponse
+          ? _value.clientServiceResponse
+          : clientServiceResponse // ignore: cast_nullable_to_non_nullable
+              as ClientServiceResponse?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -365,6 +540,7 @@ class _$_UserManagementDetailState implements _UserManagementDetailState {
       {required this.isLoading,
       required this.isError,
       required this.response,
+      required this.clientServiceResponse,
       required this.error});
 
   @override
@@ -374,11 +550,13 @@ class _$_UserManagementDetailState implements _UserManagementDetailState {
   @override
   final UserDetailResponse? response;
   @override
+  final ClientServiceResponse? clientServiceResponse;
+  @override
   final String? error;
 
   @override
   String toString() {
-    return 'UserManagementDetailState(isLoading: $isLoading, isError: $isError, response: $response, error: $error)';
+    return 'UserManagementDetailState(isLoading: $isLoading, isError: $isError, response: $response, clientServiceResponse: $clientServiceResponse, error: $error)';
   }
 
   @override
@@ -391,12 +569,14 @@ class _$_UserManagementDetailState implements _UserManagementDetailState {
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.response, response) ||
                 other.response == response) &&
+            (identical(other.clientServiceResponse, clientServiceResponse) ||
+                other.clientServiceResponse == clientServiceResponse) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isLoading, isError, response, error);
+  int get hashCode => Object.hash(
+      runtimeType, isLoading, isError, response, clientServiceResponse, error);
 
   @JsonKey(ignore: true)
   @override
@@ -411,6 +591,7 @@ abstract class _UserManagementDetailState implements UserManagementDetailState {
       {required final bool isLoading,
       required final bool isError,
       required final UserDetailResponse? response,
+      required final ClientServiceResponse? clientServiceResponse,
       required final String? error}) = _$_UserManagementDetailState;
 
   @override
@@ -419,6 +600,8 @@ abstract class _UserManagementDetailState implements UserManagementDetailState {
   bool get isError;
   @override
   UserDetailResponse? get response;
+  @override
+  ClientServiceResponse? get clientServiceResponse;
   @override
   String? get error;
   @override

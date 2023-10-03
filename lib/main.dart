@@ -1,34 +1,34 @@
 import 'dart:ui';
 
+import 'package:admin_580_tech/application/bloc/caregiver-profile/caregiver_profile_bloc.dart';
+import 'package:admin_580_tech/application/bloc/caregiver_verification/caregiver_verification_bloc.dart';
+import 'package:admin_580_tech/application/bloc/email-otp-verification/email_otp_verification_bloc.dart';
+import 'package:admin_580_tech/application/bloc/login/login_bloc.dart';
+import 'package:admin_580_tech/application/bloc/signup/signup_bloc.dart';
+import 'package:admin_580_tech/application/bloc/subscription/subscription_bloc.dart';
+import 'package:admin_580_tech/core/hive/hive_utils.dart';
+import 'package:admin_580_tech/core/theme.dart';
+import 'package:admin_580_tech/infrastructure/caregiver_profile/caregiver_profile_repository.dart';
+import 'package:admin_580_tech/infrastructure/caregiver_verification/caregivers_verification_repository.dart';
+import 'package:admin_580_tech/infrastructure/email_otp_verification/email_otp_verification_repository.dart';
+import 'package:admin_580_tech/infrastructure/login/login_repository.dart';
+import 'package:admin_580_tech/infrastructure/service_request_management/service_request_management_repository.dart';
+import 'package:admin_580_tech/infrastructure/signup/signup_repository.dart';
+import 'package:admin_580_tech/infrastructure/subscription/subscription_repository.dart';
+import 'package:admin_580_tech/presentation/routes/app_router.dart';
+import 'package:admin_580_tech/presentation/widget/loader_view.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:amplify_storage_s3/amplify_storage_s3.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'amplifyconfiguration.dart';
-import 'application/bloc/caregiver-profile/caregiver_profile_bloc.dart';
-import 'application/bloc/caregiver_submit_agreement/caregiver_submit_agreement_bloc.dart';
-import 'application/bloc/caregiver_verification/caregiver_verification_bloc.dart';
-import 'application/bloc/email-otp-verification/email_otp_verification_bloc.dart';
 import 'application/bloc/form_validation/form_validation_bloc.dart';
-import 'application/bloc/login/login_bloc.dart';
-import 'application/bloc/resend_otp_bloc/resend_otp_bloc.dart';
 import 'application/bloc/service_request_management/service_request_management_bloc.dart';
-import 'application/bloc/signup/signup_bloc.dart';
 import 'core/config/environment.dart';
-import 'core/hive/hive_utils.dart';
-import 'core/theme.dart';
-import 'infrastructure/caregiver_profile/caregiver_profile_repository.dart';
-import 'infrastructure/caregiver_submit_agreement_repo/caregiver_submit_agreement_repo_impl.dart';
-import 'infrastructure/caregiver_verification/caregivers_verification_repository.dart';
-import 'infrastructure/email_otp_verification/email_otp_verification_repository.dart';
-import 'infrastructure/login/login_repository.dart';
-import 'infrastructure/resend_otp/resend_otp_repo_impl.dart';
-import 'infrastructure/service_request_management/service_request_management_repository.dart';
 import 'infrastructure/shared_preference/shared_preff_util.dart';
-import 'infrastructure/signup/signup_repository.dart';
-import 'presentation/routes/app_router.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,6 +47,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final _appRouter = AppRouter();
+  String? version;
 
   @override
   void initState() {
@@ -59,6 +60,7 @@ class _MyAppState extends State<MyApp> {
       'ENVIRONMENT',
       defaultValue: Environment.dEV,
     );
+    print('main $version');
     Environment().initConfig(environment);
     await HiveUtils.init();
     await _configureAmplify();
@@ -69,17 +71,12 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        // BlocProvider(create: (_) => CareGiversBloc(CareGiversRepository())),
         BlocProvider(
             create: (_) =>
                 CareGiverVerificationBloc(CareGiverVerificationRepository())),
-        BlocProvider<CaregiverSubmitAgreementBloc>(
-            create: (_) => CaregiverSubmitAgreementBloc(
-                CareGiverSubmitAgreementRepoImpl())),
         BlocProvider(create: (_) => FormValidationBloc()),
         BlocProvider(create: (_) => LoginBloc(LoginRepository())),
         BlocProvider(create: (_) => SignupBloc(SignupRepository())),
-
         BlocProvider<ServiceRequestManagementBloc>(
             create: (context) => ServiceRequestManagementBloc(
                 ServiceRequestManagementRepository())),
@@ -89,8 +86,6 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(
             create: (_) =>
                 EmailOtpVerificationBloc(EmailOtpVerificationRepository())),
-        BlocProvider<ResendOtpBloc>(
-            create: (_) => ResendOtpBloc(ResendOTPRepoImpl())),
       ],
       child: MaterialApp.router(
         routerDelegate: _appRouter.delegate(),
@@ -98,6 +93,16 @@ class _MyAppState extends State<MyApp> {
         routeInformationProvider: _appRouter.routeInfoProvider(),
         debugShowCheckedModeBanner: false,
         theme: ThemeClass.themeData(context),
+        builder: (_, child) {
+          return FutureBuilder(
+              future: SharedPreffUtil().init(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return LoaderView();
+                }
+                return child ?? SizedBox();
+              });
+        },
         scrollBehavior: const MaterialScrollBehavior().copyWith(
           dragDevices: {
             PointerDeviceKind.mouse,

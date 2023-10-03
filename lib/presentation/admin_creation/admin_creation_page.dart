@@ -2,7 +2,6 @@ import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
 import 'package:admin_580_tech/infrastructure/admin_creation/admin_creation_repository.dart';
 import 'package:admin_580_tech/presentation/admin_creation/widgets/admin_profile_pic.dart';
-import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
@@ -20,7 +19,6 @@ import '../../core/text_styles.dart';
 import '../../infrastructure/api_service_s3.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../on_boarding/modules/personal_details/widgets/mobile_number_formatter.dart';
-import '../on_boarding/modules/personal_details/widgets/profile_picture_widget.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
@@ -111,10 +109,11 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
         if (adminId.isNotEmpty) {
           return _adminCreationBloc
             ..add(AdminCreationEvent.viewAdmin(
-                userId: adminUserID, adminId: adminId));
+                userId: adminUserID, adminId: adminId, searchTerm: ''));
         } else {
           return _adminCreationBloc
-            ..add(AdminCreationEvent.getRoles(userId: adminUserID));
+            ..add(AdminCreationEvent.getRoles(
+                userId: adminUserID, searchTerm: ''));
         }
       },
       child: BlocBuilder<AdminCreationBloc, AdminCreationState>(
@@ -149,7 +148,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
   }
 
   _roleDropDown(AdminCreationState state) {
-    List<Role> mRoles = state.rolesResponse?.data?.role ?? [];
+    List<Result> mRoles = state.rolesResponse?.data?.result ?? [];
     return CustomSizedBox(
       width: DBL.twoEighty.val,
       child: Column(
@@ -174,10 +173,10 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
             ],
           ),
           CustomSizedBox(height: DBL.ten.val),
-          CustomDropdown<Role>(
+          CustomDropdown<Result>(
             isError: state.isDropDownError,
             errorMsg: AppString.emptyRole.val,
-            onChange: (Role value, int index) {
+            onChange: (Result value, int index) {
               _adminCreationBloc
                   .add(AdminCreationEvent.setDropDownValue(value: value));
             },
@@ -200,12 +199,12 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                 .asMap()
                 .entries
                 .map(
-                  (item) => DropdownItem<Role>(
+                  (item) => DropdownItem<Result>(
                     value: item.value,
                     child: Padding(
                       padding: EdgeInsets.all(DBL.eight.val),
                       child: CustomText(
-                        item.value.name ?? "",
+                        item.value.role ?? "",
                         style: TS().gRoboto(
                             fontWeight: FW.w500.val,
                             fontSize: FS.font15.val,
@@ -217,7 +216,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                 .toList(),
             child: CustomText(
               state.selectedRole != null
-                  ? state.selectedRole!.name.toString()
+                  ? state.selectedRole!.role.toString()
                   : AppString.selectHint.val,
               style: TS().gRoboto(
                   fontWeight: FW.w500.val,

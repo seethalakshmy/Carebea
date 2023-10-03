@@ -1,3 +1,13 @@
+import 'package:admin_580_tech/core/custom_snackbar.dart';
+import 'package:admin_580_tech/infrastructure/on_boarding/on_boarding_repository.dart';
+import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/address_selection_widget.dart';
+import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/profile_picture_widget.dart';
+import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/social_security_number_formatter.dart';
+import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/zip_code_formatter.dart';
+import 'package:admin_580_tech/presentation/on_boarding/widgets/upload_document_widget.dart';
+import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
+import 'package:admin_580_tech/presentation/widget/custom_form.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,17 +15,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../../../application/bloc/onboarding/onboarding_bloc.dart';
-import '../../../../core/custom_snackbar.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
 import '../../../../infrastructure/api_service_s3.dart';
-import '../../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../../widget/common_date_picker_widget.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
 import '../../../widget/custom_container.dart';
-import '../../../widget/custom_form.dart';
 import '../../../widget/custom_shimmer.dart';
 import '../../../widget/custom_sizedbox.dart';
 import '../../../widget/custom_text.dart';
@@ -27,15 +34,10 @@ import '../../widgets/file_preview_widget.dart';
 import '../../widgets/gender_drop_down.dart';
 import '../../widgets/image_preview_widget.dart';
 import '../../widgets/on_boarding_title_divider_widget.dart';
-import '../../widgets/upload_document_widget.dart';
-import 'widgets/address_selection_widget.dart';
 import 'widgets/document_details_view.dart';
-import 'widgets/profile_picture_widget.dart';
-import 'widgets/social_security_number_formatter.dart';
-import 'widgets/zip_code_formatter.dart';
 
 class PersonalDetailsView extends StatefulWidget {
-  const PersonalDetailsView(
+  PersonalDetailsView(
       {Key? key, required this.onboardingBloc, required this.pageController})
       : super(key: key);
   final OnboardingBloc onboardingBloc;
@@ -71,7 +73,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   List<String> docPathList = [];
   bool listUpdated = false;
 
-  AutovalidateMode validateMode = AutovalidateMode.disabled;
+  AutovalidateMode _validateMode = AutovalidateMode.disabled;
   FormValidationBloc formValidationBloc = FormValidationBloc();
   final _formKey = GlobalKey<FormState>();
 
@@ -195,7 +197,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
       child: SingleChildScrollView(
         child: CForm(
           formKey: _formKey,
-          autoValidateMode: validateMode,
+          autoValidateMode: _validateMode,
           child: Wrap(
             alignment: Responsive.isWeb(context)
                 ? WrapAlignment.start
@@ -371,7 +373,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         state.isInitialLoading
             ? CustomShimmerWidget.rectangular(
                 height: DBL.twenty.val, width: DBL.hundred.val)
-            : _labelWidget(AppString.address.val),
+            : _labelWidget(AppString.addressLine1.val),
         CustomSizedBox(height: DBL.twelve.val),
         state.isInitialLoading
             ? CustomShimmerWidget.rectangular(
@@ -387,7 +389,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                       fontSize: FS.font16.val),
                   maxLength: 50,
                   validator: (val) {
-                    if (val == null || val.isEmpty) {
+                    if (val?.trim() == null || val!.trim().isEmpty) {
                       return AppString.emptyAddress.val;
                     }
                     return null;
@@ -442,15 +444,15 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           state.isInitialLoading
               ? CustomShimmerWidget.rectangular(
                   height: DBL.twenty.val, width: DBL.hundred.val)
-              : _labelWidget(AppString.street.val),
+              : _labelWidget(AppString.addressLine2.val),
           CustomSizedBox(height: DBL.twelve.val),
           state.isInitialLoading
               ? CustomShimmerWidget.rectangular(
                   height: DBL.fifty.val, width: DBL.twoEighty.val)
               : CTextField(
                   controller: streetController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
+                  validator: (val) {
+                    if (val?.trim() == null || val!.trim().isEmpty) {
                       return AppString.emptyStreet.val;
                     }
                     return null;
@@ -476,23 +478,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         state.isInitialLoading
             ? CustomShimmerWidget.rectangular(
                 height: DBL.fifty.val, width: DBL.twoEighty.val)
-            :
-            // CustomSizedBox(
-            //         width: DBL.twoEighty.val,
-            //         child: CTextField(
-            //           isReadOnly: true,
-            //           validator: (value) {
-            //             if (value == null || value.isEmpty) {
-            //               return AppString.emptyState.val;
-            //             }
-            //             return null;
-            //           },
-            //           controller: stateSearchController,
-            //           onChanged: (value) {},
-            //           onTap: () {},
-            //         ),
-            //       )
-            StateDropDown(
+            : StateDropDown(
                 onboardingBloc: widget.onboardingBloc,
                 onSearchChanged: (val) {
                   widget.onboardingBloc.statePage = 1;
@@ -531,37 +517,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         state.isCityApiCalling || state.isInitialLoading
             ? CustomShimmerWidget.rectangular(
                 height: DBL.fifty.val, width: DBL.twoEighty.val)
-            :
-
-            // CustomSizedBox(
-            //         width: DBL.twoEighty.val,
-            //         child: CTextField(
-            //           isReadOnly: true,
-            //           validator: (value) {
-            //             bool cityPresent = false;
-            //             if (value == null || value.isEmpty) {
-            //               return AppString.emptyCity.val;
-            //             }
-            //             for (var element in widget.onboardingBloc.cityList) {
-            //               if (element.cityName?.trim().toLowerCase() ==
-            //                   citySearchController.text.toLowerCase()) {
-            //                 cityPresent = true;
-            //                 selectedCity = citySearchController.text;
-            //               }
-            //             }
-            //             if (cityPresent == false) {
-            //               return AppString.cityNotFound.val;
-            //             }
-            //
-            //             return null;
-            //           },
-            //           controller: citySearchController,
-            //           onChanged: (value) {},
-            //           onTap: () {},
-            //         ),
-            //       )
-
-            CityDropDown(
+            : CityDropDown(
                 onboardingBloc: widget.onboardingBloc,
                 searchController: citySearchController,
                 onSearchChanged: (val) {
@@ -742,7 +698,10 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   }
 
   checkInputData() {
-    if (validateMode != AutovalidateMode.always) {
+    addressLineController.text = addressLineController.text.trim();
+    documentNumberController.text = documentNumberController.text.trim();
+    streetController.text = streetController.text.trim();
+    if (_validateMode != AutovalidateMode.always) {
       formValidationBloc.add(const FormValidationEvent.submit());
       formValidationBloc.add(const FormValidationEvent.dropDown("true"));
     }

@@ -9,23 +9,23 @@ import 'app_router.gr.dart';
 class AppRouter extends $AppRouter {
   @override
   final List<AutoRoute> routes = [
-    // AutoRoute(
-    //     page: LoginRoute.page,
-    //     path: '/',
-    //     initial: true,
-    //     guards: [DashBoardGuardGuard()]),
+    AutoRoute(
+        page: LoginRoute.page,
+        path: '/',
+        initial: true,
+        guards: [DashBoardGuardGuard()]),
     // AutoRoute(page: LoginRoute.page, initial: true, path: '/'),
     AutoRoute(
       path: "/care-ambassador-registration",
       page: CareAmbassadorRegistrationRoute.page,
       maintainState: true,
     ),
-    AutoRoute(
+    /*AutoRoute(
       path: "/signup",
       page: SignUpRoute.page,
       maintainState: true,
       initial: true,
-    ),
+    ),*/
     // AutoRoute(
     //   path: "/care-ambassador-registration",
     //   page: CareAmbassadorRegistrationRoute.page,
@@ -77,11 +77,12 @@ class AppRouter extends $AppRouter {
       AutoRoute(
         path: 'user-management-detail',
         page: UserManagementDetailRoute.page,
+        maintainState: true,
       ),
       AutoRoute(
-        path: 'user-management-detail',
-        page: UserManagementDetailRoute.page,
-      ),
+          path: 'sub-profile-details',
+          page: ClientSubProfileDetailsRoute.page,
+          maintainState: true),
       // AutoRoute(path: 'caregiver-detail', page: TestPage,),
       AutoRoute(
           path: 'transaction-management',
@@ -137,6 +138,11 @@ class AppRouter extends $AppRouter {
       AutoRoute(
           path: "region-analytics",
           page: RegionAnalyticsRoute.page,
+          maintainState: false,
+          initial: false),
+      AutoRoute(
+          path: "subscription",
+          page: SubscriptionRoute.page,
           maintainState: false,
           initial: false),
     ]),

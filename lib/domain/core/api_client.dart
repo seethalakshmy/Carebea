@@ -15,6 +15,7 @@ import 'package:admin_580_tech/domain/email_otp_verification/models/generate_otp
 import 'package:admin_580_tech/domain/login/login_response.dart';
 import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
 import 'package:admin_580_tech/domain/service_request_management/model/reschedule_params.dart';
+import 'package:admin_580_tech/domain/subscription/model/subscription_model.dart';
 import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -34,7 +35,12 @@ import '../../presentation/on_boarding/modules/reference/models/relation_respons
 import '../admins/model/admin_get_response.dart';
 import '../caregiver_verification/model/reject_params.dart';
 import '../caregivers/model/caregiver_response.dart';
+import '../complaint_details/models/complaint_details_response_model.dart';
+import '../complaint_details/models/get_service_response_model.dart';
+import '../complaints/model/complaints_list_response_model.dart';
 import '../email_otp_verification/models/verify_otp_response.dart';
+import '../faq/models/faq_list_response_model.dart';
+import '../faq_creation/models/faq_details_response_model.dart';
 import '../on_boarding/models/common_response.dart';
 import '../on_boarding/models/preferences/pet_list_response.dart';
 import '../on_boarding/models/preferences/years_of_experience_response.dart';
@@ -43,12 +49,16 @@ import '../role_creation/model/module_response.dart';
 import '../role_creation/model/view_role_response.dart';
 import '../service_request_management/model/assign_caregiver_params.dart';
 import '../service_request_management/model/reschedule_response.dart';
+import '../service_request_management/model/service_request_list_response_model.dart';
 import '../service_request_management/model/service_request_response.dart';
+import '../service_request_management/model/service_status_response_model.dart';
 import '../signup/signup_response.dart';
+import '../subProfile_details/model/sub_profile_detail_response.dart';
 import '../transaction_management/model/get_filters_response.dart';
 import '../transaction_management/model/transaction_details_response.dart';
 import '../transaction_management/model/transaction_list_response.dart';
 import '../user_management/model/user_list_response.dart';
+import '../user_management_detail/model/client_service_response.dart';
 
 part 'api_client.g.dart';
 
@@ -518,35 +528,71 @@ abstract class ApiClient {
       @Field('user_id') String userId,
       @Field('page') int page,
       @Field('limit') int limit,
-      @Field('filter_id') int filterId);
+      @Field('filter_id') int filterId,
+      @Field('search_term') String searchTerm,
+      @Field('service_id') String serviceId,
+      @Field('from_date') String fromDate,
+      @Field('to_date') String toDate);
 
   @POST("/admin/completed-service-list")
   Future<ServiceRequestResponse> getCompletedRequests(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('page') int page,
-      @Field('limit') int limit);
+      @Field('limit') int limit,
+      @Field('search_term') String searchTerm,
+      @Field('service_id') String serviceId,
+      @Field('from_date') String fromDate,
+      @Field('to_date') String toDate);
 
   @POST("/admin/cancelled-service-list")
   Future<ServiceRequestResponse> getCancelled(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('page') int page,
-      @Field('limit') int limit);
+      @Field('limit') int limit,
+      @Field('search_term') String searchTerm,
+      @Field('service_id') String serviceId,
+      @Field('from_date') String fromDate,
+      @Field('to_date') String toDate);
 
   @POST("/admin/upcoming-service-list")
   Future<ServiceRequestResponse> getUpcomingRequests(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('page') int page,
-      @Field('limit') int limit);
+      @Field('limit') int limit,
+      @Field('search_term') String searchTerm,
+      @Field('service_id') String serviceId,
+      @Field('from_date') String fromDate,
+      @Field('to_date') String toDate);
 
   @POST("/admin/ongoing-service-list")
   Future<ServiceRequestResponse> getOngoingRequests(
       @Header("Authorization") String token,
       @Field('user_id') String userId,
       @Field('page') int page,
-      @Field('limit') int limit);
+      @Field('limit') int limit,
+      @Field('search_term') String searchTerm,
+      @Field('service_id') String serviceId,
+      @Field('from_date') String fromDate,
+      @Field('to_date') String toDate);
+
+  @POST("/admin/service-request-list")
+  Future<ServiceRequestListResponseModel> getServiceRequests(
+    @Header("Authorization") String token,
+    @Field('user_id') String userId,
+    @Field('service_id') String? serviceId,
+    @Field('page') String page,
+    @Field('limit') int limit,
+    @Field('search_term') String? searchTerm,
+    @Field('status_filter') int? statusFilterId,
+    @Field('from_date') String? fromDate,
+    @Field('to_date') String? toDate,
+    @Field('filter_id') int? dateFilterId,
+  );
+  @GET("/common-data/get-service-status")
+  Future<ServiceStatusResponseModel> getServiceStatus();
 
   @GET("/common-data/get-filters")
   Future<GetFiltersResponse> getFilters();
@@ -563,6 +609,7 @@ abstract class ApiClient {
   @POST("/admin/transaction-details")
   Future<TransactionDetailsResponse> getTransactionDetails(
       @Header("Authorization") String token,
+      @Field('service_id') String serviceId,
       @Field('transaction_id') String transactionId);
 
   @POST("/admin/reschedule-service")
@@ -614,4 +661,77 @@ abstract class ApiClient {
     @Field('admin_id') String adminId,
     @Field('status') bool status,
   );
+
+  @GET('/common-data/get-faqs')
+  Future<FaqListResponseModel> getFaqList();
+
+  @POST('/common-data/get-faq')
+  Future<FaqDetailsResponseModel> getFaqDetails(
+    @Field('_id') String itemId,
+  );
+
+  @POST('/common-data/update-faq')
+  Future<CommonResponse> updateFaqDetails(
+    @Field('_id') String itemId,
+    @Field('question') String question,
+    @Field('answer') String answer,
+    @Field('status') String status,
+    @Field('forClient') bool forClient,
+  );
+
+  @POST('/common-data/create-faq')
+  Future<CommonResponse> createFaqDetails(
+    @Field('question') String question,
+    @Field('answer') String answer,
+    @Field('status') String status,
+    @Field('forClient') bool forClient,
+  );
+
+  @POST('/admin/get-subprofile-detail')
+  Future<SubProfileDetailResponse> getSubProfileDetails(
+    @Field('user_id') String userId,
+    @Field('admin_id') String adminId,
+  );
+
+  @POST('/admin/get-complaints')
+  Future<ComplaintsListResponseModel> getComplaints(
+    @Field('user_id') String userId,
+    @Field('page') String page,
+    @Field('limit') String limit,
+    @Field('search_term') String searchTerm,
+    @Field('status') int status,
+  );
+
+  @POST('/admin/client-service-view')
+  Future<ClientServiceResponse> getClientService(
+    @Field('user_id') String userId,
+    @Field('admin_id') String adminId,
+  );
+
+  @POST('/admin/get-complaints-by-id')
+  Future<ComplaintDetailsResponseModel> getComplaintDetails(
+    @Field('complaint_id') String complaintId,
+  );
+
+  @POST('/admin/update-complaint')
+  Future<CommonResponse> updateComplaint(
+    @Field('admin_id') String adminId,
+    @Field('complaint_id') String complaintId,
+    @Field('status') int status,
+    @Field('comment') String comment,
+  );
+
+  @POST('/admin/view-service')
+  Future<GetServiceResponseModel> viewService(
+    @Field('user_id') String adminId,
+    @Field('service_id') String complaintId,
+  );
+
+  @POST('/admin/get-subscribed-clients')
+  Future<SubscriptionModel> getSubscribedClients(
+      @Field('user_id') String userId,
+      @Field('page') String page,
+      @Field('limit') String limit,
+      @Field('search_term') String searchTerm,
+      @Field('subscription_type') dynamic subscriptionType);
 }

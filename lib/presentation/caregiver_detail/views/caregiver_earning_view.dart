@@ -258,6 +258,8 @@ class _CareGiverEarningViewState extends State<CareGiverEarningView> {
 
   _earningsDetailPopUp(BuildContext context, int status) {
     showGeneralDialog(
+      barrierLabel: "",
+      barrierDismissible: true,
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {

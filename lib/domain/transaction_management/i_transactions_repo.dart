@@ -19,5 +19,7 @@ abstract class ITransactionsRepo {
 
   Future<Either<ApiErrorHandler, TransactionDetailsResponse>>
       getTransactionDetails(
-          {required String token, required String transactionId});
+          {required String token,
+          required String transactionId,
+          required String serviceId});
 }

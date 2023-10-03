@@ -12,12 +12,13 @@ import 'package:admin_580_tech/presentation/admin_creation/admin_creation_page.d
 import 'package:admin_580_tech/presentation/admins/admins_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/caregiver_verification_page.dart';
+import 'package:admin_580_tech/presentation/client_subProfile_details/client_subProfile_details_view.dart';
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
 import 'package:admin_580_tech/presentation/faq_creation/faq_creation_screen.dart';
-import 'package:admin_580_tech/presentation/help_and_support/help_and_support_page.dart';
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
 import 'package:admin_580_tech/presentation/roles/role_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
+import 'package:admin_580_tech/presentation/subscription/subscription_view.dart';
 import 'package:admin_580_tech/presentation/widget/common_alert_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
@@ -30,10 +31,11 @@ import 'package:flutter/material.dart';
 import '../caregiver_creation/caregiver_creation_page.dart';
 import '../caregiver_detail/caregiver_detail_page.dart';
 import '../caregivers/caregivers_page.dart';
+import '../complaint_details/support_tickets_detail_page.dart';
+import '../complaints/help_and_support_page.dart';
 import '../faq/faq_screen.dart';
 import '../role_creation/role_creation_page.dart';
 import '../service_request_management/service_request_management_page.dart';
-import '../support_tickets_detail/support_tickets_detail_page.dart';
 import '../transaction_management/transaction_management_page.dart';
 import '../user_management/user_management_page.dart';
 import '../user_mangement_detail/user_managemet_detail_page.dart';
@@ -67,6 +69,7 @@ class _MenuBarState extends State<SideMenuPage> {
       AppString.userManagement.val: "",
       AppString.transactionManagement.val: "",
       AppString.serviceRequestManagement.val: "",
+      AppString.subscription.val: "",
       AppString.supportTickets.val: "",
       AppString.faq.val: ""
     };
@@ -520,7 +523,9 @@ class _MenuBarState extends State<SideMenuPage> {
     HelpAndSupportRoute(),
     SupportTicketsDetailRoute(),
     FaqRoute(),
-    FaqCreationRoute()
+    FaqCreationRoute(),
+    ClientSubProfileDetailsRoute(),
+    SubscriptionRoute()
   ];
 
   int getRouteIndex(String route) {
@@ -561,6 +566,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return 17;
     } else if (route == AppString.faqCreation.val) {
       return 18;
+    } else if (route == AppString.subProfileDetails.val) {
+      return 19;
+    } else if (route == AppString.subscription.val) {
+      return 20;
     } else {
       return 0;
     }
@@ -604,6 +613,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return const FaqPage();
     } else if (index == 18) {
       return const FaqCreationPage();
+    } else if (index == 19) {
+      return const ClientSubProfileDetailsPage();
+    } else if (index == 20) {
+      return const SubscriptionPage();
     } else {
       return const DashboardPage();
     }

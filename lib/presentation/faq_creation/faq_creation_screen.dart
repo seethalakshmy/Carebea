@@ -1,35 +1,26 @@
-import 'package:admin_580_tech/core/responsive.dart';
-import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
-import 'package:admin_580_tech/infrastructure/admin_creation/admin_creation_repository.dart';
 import 'package:admin_580_tech/infrastructure/faq_creation/faq_creation_repository.dart';
-import 'package:admin_580_tech/presentation/admin_creation/widgets/admin_profile_pic.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
-import 'package:admin_580_tech/presentation/widget/custom_text.dart';
-import 'package:admin_580_tech/presentation/widget/loader_view.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../application/bloc/admin_creation/admin_creation_bloc.dart';
 import '../../application/bloc/faq-creation/faq_creation_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
-import '../../infrastructure/api_service_s3.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
-import '../on_boarding/modules/personal_details/widgets/mobile_number_formatter.dart';
-import '../on_boarding/modules/personal_details/widgets/profile_picture_widget.dart';
+import '../on_boarding/modules/qualification_details/widgets/yes_no_radio_button_widget.dart';
+import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
-import '../widget/custom_dropdown.dart';
-import '../widget/custom_shimmer.dart';
 import '../widget/custom_sizedbox.dart';
+import '../widget/custom_text.dart';
 import '../widget/details_text_field_with_label.dart';
 import '../widget/header_view.dart';
+import '../widget/loader_view.dart';
 
 @RoutePage()
 class FaqCreationPage extends StatefulWidget {
@@ -50,9 +41,6 @@ class FaqCreationPage extends StatefulWidget {
 }
 
 class _faqCreationPageState extends State<FaqCreationPage> {
-  final TextEditingController question = TextEditingController();
-  final TextEditingController answer = TextEditingController();
-
   final FocusNode questionFocusNode = FocusNode();
   final FocusNode answerFocusNode = FocusNode();
 
@@ -74,6 +62,7 @@ class _faqCreationPageState extends State<FaqCreationPage> {
     adminUserID = SharedPreffUtil().getAdminId;
     adminId =
         autoTabRouter?.currentChild?.queryParams.getString("id", "") ?? "";
+    _faqCreationBloc.add(FaqCreationEvent.getFaq(id: adminId));
     if (autoTabRouter!.currentChild!.queryParams
         .getString('view', "")
         .isNotEmpty) {
@@ -92,15 +81,22 @@ class _faqCreationPageState extends State<FaqCreationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        HeaderView(
-          title: AppString.faqCreation.val,
-        ),
-        CustomSizedBox(height: DBL.ten.val),
-        _rebuildView(),
-      ],
-    );
+    return FutureBuilder(
+        future: SharedPreffUtil().init(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const LoaderView();
+          }
+          return Column(
+            children: [
+              HeaderView(
+                title: AppString.faqCreation.val,
+              ),
+              CustomSizedBox(height: DBL.ten.val),
+              _rebuildView(),
+            ],
+          );
+        });
   }
 
   _rebuildView() {
@@ -108,10 +104,10 @@ class _faqCreationPageState extends State<FaqCreationPage> {
       create: (context) => FaqCreationBloc(FaqCreationRepository()),
       child: BlocBuilder<FaqCreationBloc, FaqCreationState>(
         builder: (context, state) {
-          return _bodyView(context, state);
-          // return !state.isLoading
-          //     ? _bodyView(context, state)
-          //     : const LoaderView();
+          // return _bodyView(context, state);
+          return !state.isLoading
+              ? _bodyView(context, state)
+              : const LoaderView();
         },
       ),
     );
@@ -152,9 +148,10 @@ class _faqCreationPageState extends State<FaqCreationPage> {
                 child: DetailsTextFieldWithLabel(
                   isIgnore: _isView!,
                   isMandatory: true,
+                  maxLines: 20,
                   labelName: AppString.question.val,
                   focusNode: questionFocusNode,
-                  controller: question,
+                  controller: _faqCreationBloc.questionController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return AppString.questionError.val;
@@ -174,7 +171,7 @@ class _faqCreationPageState extends State<FaqCreationPage> {
                   isMandatory: true,
                   labelName: AppString.answer.val,
                   focusNode: answerFocusNode,
-                  controller: answer,
+                  controller: _faqCreationBloc.answerController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return AppString.answerError.val;
@@ -186,36 +183,39 @@ class _faqCreationPageState extends State<FaqCreationPage> {
                   suffixIcon: const CustomContainer(width: 0),
                 ),
               ),
+              _forClientCheckBoxWidget(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  adminId.isEmpty
-                      ? CustomButton(
-                          height: DBL.fortyFive.val,
-                          minWidth: DBL.oneTwenty.val,
-                          onPressed: () {
-                            // context.router.navigate(const AdminsRoute());
-                          },
-                          text: AppString.cancel.val,
-                          color: AppColor.white.val,
-                          textColor: AppColor.primaryColor.val,
-                          borderWidth: 1,
-                        )
-                      : CustomSizedBox.shrink(),
+                  CustomButton(
+                    height: DBL.fortyFive.val,
+                    minWidth: DBL.oneTwenty.val,
+                    onPressed: () {
+                      context.router.navigate(const FaqRoute());
+                    },
+                    text: AppString.cancel.val,
+                    color: AppColor.white.val,
+                    textColor: AppColor.primaryColor.val,
+                    borderWidth: 1,
+                  ),
                   CustomSizedBox(width: DBL.twenty.val),
                   !_isView!
-                      ? CustomButton(
-                          isLoading: state.isLoadingButton,
-                          height: DBL.fortyFive.val,
-                          minWidth: DBL.oneTwenty.val,
-                          onPressed: () async {
-                            checkInputData(state);
+                      ? BlocBuilder<FaqCreationBloc, FaqCreationState>(
+                          builder: (context, state) {
+                            return CustomButton(
+                              isLoading: state.isLoadingButton,
+                              height: DBL.fortyFive.val,
+                              minWidth: DBL.oneTwenty.val,
+                              onPressed: () async {
+                                checkInputData(state);
+                              },
+                              text: _isEdit!
+                                  ? AppString.update.val
+                                  : AppString.save.val,
+                              color: AppColor.primaryColor.val,
+                              textColor: AppColor.white.val,
+                            );
                           },
-                          text: _isEdit!
-                              ? AppString.update.val
-                              : AppString.save.val,
-                          color: AppColor.primaryColor.val,
-                          textColor: AppColor.white.val,
                         )
                       : CustomSizedBox.shrink(),
                 ],
@@ -227,21 +227,50 @@ class _faqCreationPageState extends State<FaqCreationPage> {
     );
   }
 
+  _forClientCheckBoxWidget() {
+    return Row(
+      children: [
+        CustomText(AppString.faqFor.val,
+            style: TS().gRoboto(
+                fontWeight: FW.w400.val,
+                color: AppColor.label8.val,
+                fontSize: FS.font14.val)),
+        const CustomSizedBox(width: 20),
+        BlocBuilder<FaqCreationBloc, FaqCreationState>(
+          builder: (context, state) {
+            return YesNoRadioButtonWidget(
+              yesLabel: AppString.forClient.val,
+              noLabel: AppString.forCa.val,
+              onChanged: (val) {
+                BlocProvider.of<FaqCreationBloc>(context)
+                    .add(FaqCreationEvent.radioForClient(isSelected: val ?? 0));
+              },
+              groupValue: state.isForClient,
+            );
+          },
+        )
+      ],
+    );
+  }
+
   checkInputData(FaqCreationState state) {
     if (_formKey.currentState!.validate()) {
       print('id:: ${adminUserID}');
       if (_isEdit!) {
         _faqCreationBloc.add(FaqCreationEvent.updateFaq(
-          userId: adminUserID,
-          context: context,
-          question: question.text.trim(),
-          answer: answer.text.trim(),
-        ));
+            id: adminId,
+            question: _faqCreationBloc.questionController.text.trim(),
+            answer: _faqCreationBloc.answerController.text.trim(),
+            status: "true",
+            forClient: state.isForClient == 0 ? true : false,
+            context: context));
       } else {
         _faqCreationBloc.add(FaqCreationEvent.addFaq(
           context: context,
-          question: question.text.trim(),
-          answer: answer.text.trim(),
+          question: _faqCreationBloc.questionController.text.trim(),
+          answer: _faqCreationBloc.answerController.text.trim(),
+          status: "true",
+          forClient: state.isForClient == 0 ? true : false,
         ));
       }
     }
@@ -249,8 +278,8 @@ class _faqCreationPageState extends State<FaqCreationPage> {
 
   @override
   void dispose() {
-    question.dispose();
-    answer.dispose();
+    _faqCreationBloc.questionController.dispose();
+    _faqCreationBloc.answerController.dispose();
 
     super.dispose();
   }

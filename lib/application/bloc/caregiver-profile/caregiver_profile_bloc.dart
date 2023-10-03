@@ -10,6 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../infrastructure/caregiver_profile/caregiver_profile_repository.dart';
+import '../../../presentation/routes/app_router.gr.dart';
+import '../../../presentation/side_menu/side_menu_page.dart';
 
 part 'caregiver_profile_bloc.freezed.dart';
 part 'caregiver_profile_event.dart';
@@ -134,7 +136,7 @@ class CareGiverProfileBloc
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
-        // CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
       } else {
         emit(state.copyWith(
             status: state.response?.data?.verificationStatus ?? 0));
@@ -170,8 +172,10 @@ class CareGiverProfileBloc
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
-        // CSnackBar.showSuccess(event.context, msg: r.message ?? "");
-        // autoTabRouter?.navigate(CareGiversRoute());
+        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        if (event.status == Interview.completed.val) {
+          autoTabRouter?.navigate(CareGiverDetailRoute(id: event.userId));
+        }
       } else {
         emit(state.copyWith(
             status: state.response?.data?.verificationStatus ?? 0));

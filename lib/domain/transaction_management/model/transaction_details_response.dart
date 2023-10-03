@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:admin_580_tech/domain/transaction_management/model/transaction_refund_details_response.dart';
+
 /// status : true
 /// message : "Success"
 /// data : {"serviceId":"AMG-SERQ-1060-2023","transaction_type":"Card","date_time":"2023-07-25T08:59:52.172Z","paid_to":"To AMAGI","amount":"$540","card_number":"4242","name":{"firstName":"Account","lastName":"One"},"user":"64ba2bcbc68af4aeb2471ad3","refund":{},"recieved_from":"AccountOne","transactionId":"pi_3NXh5uGKxeLF3YcY11bLzpDx","paid_for":"Client to amagi for service","status":{"id":2,"name":"Successful"}}
@@ -83,7 +85,7 @@ class TransactionDetailsData {
     String? cardNumber,
     Name? name,
     String? user,
-    dynamic refund,
+    Refund? refund,
     String? recievedFrom,
     String? transactionId,
     String? paidFor,
@@ -113,7 +115,7 @@ class TransactionDetailsData {
     _cardNumber = json['card_number'];
     _name = json['name'] != null ? Name.fromJson(json['name']) : null;
     _user = json['user'];
-    _refund = json['refund'];
+    _refund = json['refund'] != null ? Refund.fromJson(json['refund']) : null;
     _recievedFrom = json['recieved_from'];
     _transactionId = json['transactionId'];
     _paidFor = json['paid_for'];
@@ -127,7 +129,7 @@ class TransactionDetailsData {
   String? _cardNumber;
   Name? _name;
   String? _user;
-  dynamic _refund;
+  Refund? _refund;
   String? _recievedFrom;
   String? _transactionId;
   String? _paidFor;
@@ -141,7 +143,7 @@ class TransactionDetailsData {
     String? cardNumber,
     Name? name,
     String? user,
-    dynamic refund,
+    Refund? refund,
     String? recievedFrom,
     String? transactionId,
     String? paidFor,
@@ -170,7 +172,7 @@ class TransactionDetailsData {
   String? get cardNumber => _cardNumber;
   Name? get name => _name;
   String? get user => _user;
-  dynamic get refund => _refund;
+  Refund? get refund => _refund;
   String? get recievedFrom => _recievedFrom;
   String? get transactionId => _transactionId;
   String? get paidFor => _paidFor;
@@ -188,7 +190,9 @@ class TransactionDetailsData {
       map['name'] = _name?.toJson();
     }
     map['user'] = _user;
-    map['refund'] = _refund;
+    if (_refund != null) {
+      map['refund'] = _refund?.toJson();
+    }
     map['recieved_from'] = _recievedFrom;
     map['transactionId'] = _transactionId;
     map['paid_for'] = _paidFor;

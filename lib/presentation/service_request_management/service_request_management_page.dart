@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/presentation/widget/header_view.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -5,25 +6,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/service_request_management/service_request_management_bloc.dart';
+import '../../core/custom_debugger.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
 import '../../domain/caregivers/model/types.dart';
 import '../../domain/service_request_management/model/service_request_response.dart';
-import '../caregivers/widgets/tab_item.dart';
+import '../../infrastructure/service_request_management/service_request_management_repository.dart';
+import '../widget/custom_button.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_data_table_2.dart';
 import '../widget/custom_dropdown.dart';
-import '../widget/custom_listview_builder.dart';
 import '../widget/custom_selection_area.dart';
+import '../widget/custom_shimmer.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_svg.dart';
 import '../widget/custom_text.dart';
+import '../widget/custom_text_field.dart';
+import '../widget/empty_view.dart';
 import '../widget/error_view.dart';
 import '../widget/table_loader_view.dart';
-import 'widgets/service_details_dialog.dart';
 
 @RoutePage()
 class ServiceRequestManagementPage extends StatefulWidget {
@@ -40,15 +44,28 @@ class _ServiceRequestManagementPageState
 
   final int _limit = 10;
   int _tabType = 1;
+  final ServiceRequestManagementBloc _serviceRequestBloc =
+      ServiceRequestManagementBloc(ServiceRequestManagementRepository());
+  final TextEditingController _searchController = TextEditingController();
+  TextEditingController fromDateController = TextEditingController();
+  TextEditingController toDateController = TextEditingController();
+  Types items =
+      Types(id: 1, title: AppString.pendingServices.val, isSelected: true);
 
   @override
   void initState() {
     super.initState();
-    Types initialType =
-        Types(id: 1, title: AppString.pendingServices.val, isSelected: true);
-    context
-        .read<ServiceRequestManagementBloc>()
-        .add(ServiceRequestManagementEvent.isSelectedTab(initialType));
+    _serviceRequestBloc.add(const ServiceRequestManagementEvent.getFilters());
+    _serviceRequestBloc
+        .add(const ServiceRequestManagementEvent.getServiceStatus());
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    fromDateController.dispose();
+    toDateController.dispose();
+    super.dispose();
   }
 
   @override
@@ -59,250 +76,456 @@ class _ServiceRequestManagementPageState
           title: AppString.serviceRequestManagement.val,
         ),
         CustomSizedBox(height: DBL.fifty.val),
-        BlocBuilder<ServiceRequestManagementBloc,
-            ServiceRequestManagementState>(
-          builder: (context, state) {
-            return Column(
-              children: [
-                _tabView(state),
-                const SizedBox(
-                  height: 20,
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 20),
-                    child: _statusDropDown(context),
+        BlocProvider(
+          create: (context) => _serviceRequestBloc
+            ..add(ServiceRequestManagementEvent.getServiceRequests(
+                context: context, page: 1, limit: _limit)),
+          child: BlocBuilder<ServiceRequestManagementBloc,
+              ServiceRequestManagementState>(
+            builder: (context, state) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  /*_tabView(state),
+                const SizedBox(height: 20),*/
+                  Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.start,
+                    alignment: WrapAlignment.start,
+                    runAlignment: WrapAlignment.center,
+                    spacing: 20,
+                    runSpacing: 10,
+                    children: [
+                      /*state.isLoading ?? false
+                        ? _shimmerForFilterWidgets()
+                        : _dateFilterDropDown(context),*/
+                      // _bookingStatusDropDown(context),
+                      state.isLoading ?? false
+                          ? _shimmerForFilterWidgets()
+                          : _serviceStatusDropDown(context),
+                      state.isLoading ?? false
+                          ? _shimmerForFilterWidgets()
+                          : _buildDatePicker(state, fromDateController,
+                              AppString.startDate.val, () {
+                              _selectFromDate(context, state);
+                            }),
+                      state.isLoading ?? false
+                          ? _shimmerForFilterWidgets()
+                          : _buildDatePicker(
+                              state, toDateController, AppString.endDate.val,
+                              () {
+                              _selectToDate(context, state);
+                            }),
+                      state.isLoading ?? false
+                          ? _shimmerForFilterWidgets()
+                          : _searchWidget(context),
+                      state.isLoading ?? false
+                          ? _shimmerForFilterWidgets(width: DBL.oneTwenty.val)
+                          : _clearAllFiltersButtonWidget()
+                    ],
                   ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                _cardView(state, context)
-              ],
-            );
-          },
+                  const SizedBox(height: 30),
+                  _cardView(state, context)
+                ],
+              );
+            },
+          ),
         )
       ],
     );
   }
 
-  CustomContainer _tabView(ServiceRequestManagementState state) {
-    return CustomContainer(
-        height: DBL.fifty.val,
-        child: CustomListViewBuilder(
-            itemCount: state.types.length,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              Types item = state.types[index];
-              return TabItem(
-                item: item,
-                onTap: () {
-                  _tabType = item.id!;
-                  context
-                      .read<ServiceRequestManagementBloc>()
-                      .add(ServiceRequestManagementEvent.isSelectedTab(item));
-                },
-              );
-            }));
+  CustomShimmerWidget _shimmerForFilterWidgets({double? width}) {
+    return CustomShimmerWidget.rectangular(
+      height: DBL.fortySeven.val,
+      width: width ?? DBL.twoTen.val,
+      baseColor: AppColor.rowBackgroundColor.val,
+      highlightColor: AppColor.lightGrey.val,
+    );
+  }
+
+  CTextField _buildDatePicker(ServiceRequestManagementState state,
+      TextEditingController controller, String hintText, Function() onTap) {
+    return CTextField(
+      width: DBL.twoTen.val,
+      height: DBL.fortySeven.val,
+      hintStyle: TS().gRoboto(
+          fontWeight: FW.w400.val,
+          fontSize: FS.font14.val,
+          color: AppColor.columColor2.val),
+      textColor: AppColor.columColor2.val,
+      hintText: hintText,
+      isReadOnly: true,
+      controller: controller,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return AppString.emptyDate.val;
+        }
+        return null;
+      },
+      onTap: onTap,
+      onChanged: (val) {},
+      textInputAction: TextInputAction.next,
+      keyBoardType: TextInputType.text,
+      suffixIcon: CustomSvg(
+        width: DBL.twentyFive.val,
+        height: DBL.twentyFive.val,
+        path: IMG.calenderOutLine.val,
+      ),
+    );
+  }
+
+  _clearAllFiltersButtonWidget() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 20.0),
+      child: CustomSizedBox(
+        height: 46,
+        child: CustomButton(
+          onPressed: () {
+            _searchController.clear();
+            fromDateController.clear();
+            toDateController.clear();
+            _serviceRequestBloc.statusFilterId = 0;
+            _serviceRequestBloc
+                .add(const ServiceRequestManagementEvent.getServiceStatus());
+            _serviceRequestBloc.add(
+                ServiceRequestManagementEvent.getServiceRequests(
+                    context: context, page: 1, limit: _limit));
+          },
+          text: AppString.clearFilters.val,
+        ),
+      ),
+    );
+  }
+
+  Future<void> _selectFromDate(
+      BuildContext context, ServiceRequestManagementState state) async {
+    final DateTime now = DateTime.now();
+    showDatePicker(
+      context: context,
+      initialDate: _serviceRequestBloc.selectedToDateTime ?? state.selectedDate,
+      firstDate: now.subtract(const Duration(days: 365)),
+      lastDate: _serviceRequestBloc.selectedToDateTime ??
+          now.add(const Duration(days: 365)),
+    ).then((value) {
+      if (value != null) {
+        _serviceRequestBloc.selectedFromDate =
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+        print("selecteddd from date : ${_serviceRequestBloc.selectedFromDate}");
+        _serviceRequestBloc.selectedFromDateTime = value;
+        if (_serviceRequestBloc.selectedFromDate.isNotEmpty &&
+            _serviceRequestBloc.selectedToDate.isNotEmpty) {
+          _serviceRequestBloc.add(
+              ServiceRequestManagementEvent.getServiceRequests(
+                  context: context,
+                  page: 1,
+                  limit: _limit,
+                  fromDate: _serviceRequestBloc.selectedFromDate,
+                  toDate: _serviceRequestBloc.selectedToDate));
+        }
+        fromDateController.text =
+            value.toString().parseWithFormat(dateFormat: AppString.mmDDYYY.val);
+        FocusScope.of(context).unfocus();
+      }
+    });
+  }
+
+  Future<void> _selectToDate(
+      BuildContext context, ServiceRequestManagementState state) async {
+    final DateTime now = DateTime.now();
+    showDatePicker(
+      context: context,
+      initialDate: state.selectedDate,
+      firstDate: _serviceRequestBloc.selectedFromDateTime,
+      lastDate: now.add(const Duration(days: 365)),
+    ).then((value) {
+      if (value != null) {
+        _serviceRequestBloc.selectedToDateTime = value;
+        _serviceRequestBloc.selectedToDate =
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+        print("selecteddd to date : ${_serviceRequestBloc.selectedToDate}");
+        if (_serviceRequestBloc.selectedFromDate.isNotEmpty &&
+            _serviceRequestBloc.selectedToDate.isNotEmpty) {
+          _serviceRequestBloc.add(
+              ServiceRequestManagementEvent.getServiceRequests(
+                  context: context,
+                  page: 1,
+                  limit: _limit,
+                  fromDate: _serviceRequestBloc.selectedFromDate,
+                  toDate: _serviceRequestBloc.selectedToDate));
+        }
+        toDateController.text =
+            value.toString().parseWithFormat(dateFormat: AppString.mmDDYYY.val);
+        FocusScope.of(context).unfocus();
+      }
+    });
+  }
+
+  CTextField _searchWidget(BuildContext context) {
+    return CTextField(
+      onSubmitted: (val) {
+        print("item inside search submit : ${items.title}");
+        _serviceRequestBloc.searchQuery = val;
+        _serviceRequestBloc.add(
+            ServiceRequestManagementEvent.getServiceRequests(
+                context: context,
+                page: 1,
+                limit: _limit,
+                searchTerm: _serviceRequestBloc.searchQuery));
+      },
+      width: DBL.twoTen.val,
+      height: DBL.fortySeven.val,
+      controller: _searchController,
+      hintText: AppString.search.val,
+      hintStyle: TS().gRoboto(
+          fontSize: FS.font14.val,
+          fontWeight: FW.w400.val,
+          color: AppColor.columColor2.val),
+      textColor: AppColor.columColor2.val,
+      suffixIcon: CustomSvg(
+        path: IMG.search.val,
+        height: 16,
+        width: 16,
+      ),
+    );
+  }
+
+  CustomDropdown<int> _dateFilterDropDown(BuildContext context) {
+    return CustomDropdown<int>(
+      onChange: (int value, int index) {
+        CustomLog.log(value.toString());
+        _serviceRequestBloc.filterId = value;
+      },
+      dropdownButtonStyle: DropdownButtonStyle(
+        mainAxisAlignment: MainAxisAlignment.start,
+        width: DBL.twoTen.val,
+        height: DBL.fortySeven.val,
+        elevation: DBL.zero.val,
+        padding: EdgeInsets.only(left: DBL.fifteen.val),
+        backgroundColor: Colors.white,
+        primaryColor: AppColor.white.val,
+      ),
+      dropdownStyle: DropdownStyle(
+        borderRadius: BorderRadius.circular(DBL.zero.val),
+        elevation: 2,
+        color: AppColor.white.val,
+        padding: EdgeInsets.all(DBL.five.val),
+      ),
+      items: _serviceRequestBloc.filterList
+          .asMap()
+          .entries
+          .map(
+            (item) => DropdownItem<int>(
+              value: int.parse(item.value.filterId!),
+              child: Padding(
+                padding: EdgeInsets.all(DBL.eight.val),
+                child: Text(
+                  item.value.title ?? "",
+                  style: TS().gRoboto(
+                      fontWeight: FW.w400.val,
+                      fontSize: FS.font14.val,
+                      color: AppColor.columColor2.val),
+                ),
+              ),
+            ),
+          )
+          .toList(),
+      child: CustomText(
+        AppString.dateFilter.val,
+        style: TS().gRoboto(
+            fontWeight: FW.w400.val,
+            fontSize: FS.font14.val,
+            color: AppColor.columColor2.val),
+      ),
+    );
   }
 
   CustomCard _cardView(
       ServiceRequestManagementState state, BuildContext context) {
     return CustomCard(
-      shape: PR().roundedRectangleBorder(DBL.five.val),
-      elevation: DBL.seven.val,
-      child: state.isLoading!
-          ? const TableLoaderView()
-          : state.error != ""
-              ? ErrorView(isClientError: false, errorMessage: state.error)
-              : CustomContainer(
-                  padding: EdgeInsets.all(DBL.twenty.val),
-                  child: CustomSizedBox(
-                    height: (_limit + 1) * 48,
-                    child: _requestsTable(state),
-                  ),
-                ),
-    );
+        shape: PR().roundedRectangleBorder(DBL.five.val),
+        elevation: DBL.seven.val,
+        child: state.isListLoading ?? false
+            ? const TableLoaderView()
+            : state.error != ""
+                ? ErrorView(isClientError: false, errorMessage: state.error)
+                : CustomContainer(
+                    padding: EdgeInsets.all(DBL.twenty.val),
+                    child: CustomSizedBox(
+                      height: (_limit + 1) * 48,
+                      child: _requestsTable(state),
+                    ),
+                  ));
   }
 
   _requestsTable(ServiceRequestManagementState state) {
-    return CSelectionArea(
-      child: CDataTable2(
-        minWidth: 2000,
-        dividerThickness: .3,
-        headingRowHeight: DBL.fortyEight.val,
-        dataRowHeight: DBL.sixty.val,
-        columns: [
-          DataColumn2(
-            size: ColumnSize.S,
-            fixedWidth: 50,
-            label: _columnsView(
-                text: AppString.slNo.val, fontWeight: FontWeight.bold),
-          ),
-          DataColumn2(
-            size: ColumnSize.S,
-            fixedWidth: DBL.ninetyFive.val,
-            label: _columnsView(
-                text: AppString.serviceId.val, fontWeight: FontWeight.bold),
-          ),
-          DataColumn2(
-            fixedWidth: DBL.twoHundred.val,
-            label: _columnsView(
-                text: AppString.decisionMakerIdAndName.val,
-                fontWeight: FontWeight.bold),
-          ),
-          DataColumn2(
-            size: ColumnSize.L,
-            fixedWidth: DBL.twoHundred.val,
-            label: _columnsView(
-                text: AppString.clientIdAndName.val,
-                fontWeight: FontWeight.bold),
-          ),
-          DataColumn2(
-            size: ColumnSize.L,
-            fixedWidth: DBL.eighty.val,
-            label: _columnsView(
-                text: AppString.service.val, fontWeight: FontWeight.bold),
-          ),
-          DataColumn2(
-            size: ColumnSize.L,
-            fixedWidth: DBL.twoHundred.val,
-            label: _columnsView(
-                text: AppString.startDateAndTime.val,
-                fontWeight: FontWeight.bold),
-          ),
-          DataColumn2(
-            size: ColumnSize.L,
-            fixedWidth: DBL.twoHundred.val,
-            label: _columnsView(
-                text: AppString.endDateAndTime.val,
-                fontWeight: FontWeight.bold),
-          ),
-          if (_tabType == 1)
-            DataColumn2(
-              size: ColumnSize.L,
-              fixedWidth: 150,
-              label: _columnsView(
-                  text: AppString.noOfMatchingIsShown.val,
-                  fontWeight: FontWeight.bold),
-            ),
-          if (_tabType != 1)
-            DataColumn2(
-              size: ColumnSize.L,
-              fixedWidth: 100,
-              label: _columnsView(
-                  text: AppString.serviceFee.val, fontWeight: FontWeight.bold),
-            ),
-          if (_tabType == 2)
-            DataColumn2(
-              size: ColumnSize.L,
-              fixedWidth: 100,
-              label: _columnsView(
-                  text: AppString.extraFee.val, fontWeight: FontWeight.bold),
-            ),
-          if (_tabType == 2)
-            DataColumn2(
-              size: ColumnSize.L,
-              fixedWidth: 100,
-              label: _columnsView(
-                  text: AppString.tip.val, fontWeight: FontWeight.bold),
-            ),
-          if (_tabType == 2)
-            DataColumn2(
-              size: ColumnSize.L,
-              fixedWidth: 100,
-              label: _columnsView(
-                  text: AppString.refund.val, fontWeight: FontWeight.bold),
-            ),
-          if (_tabType == 3)
-            DataColumn2(
-              size: ColumnSize.L,
-              fixedWidth: 150,
-              label: _columnsView(
-                  text: AppString.cancelledBy.val, fontWeight: FontWeight.bold),
-            ),
-          DataColumn2(
-            // size: ColumnSize.L,
-            fixedWidth: Responsive.isWeb(context)
-                ? MediaQuery.of(context).size.width * .1
-                : DBL.oneSeventy.val,
-            label: const CustomText(""),
-          ),
-        ],
-        rows: state.services.asMap().entries.map((e) {
-          var item = e.value;
-          return DataRow2(
-            cells: [
-              DataCell(_rowsView(
-                text: (e.key + 1).toString(),
-              )),
-              DataCell(_rowsView(
-                text: item.serviceId.toString(),
-              )),
-              DataCell(_rowsView(
-                text:
-                    "${item.decisionMaker?.id} - ${item.decisionMaker?.firstName}",
-              )),
-              DataCell(_rowsView(
-                text: "${item.client?.firstName} - ${item.client?.id}",
-              )),
-              DataCell(_rowsView(
-                text: item.service,
-              )),
-              DataCell(_rowsView(
-                text: item.startDateTime,
-              )),
-              DataCell(_rowsView(
-                text: item.endDateTime,
-              )),
-              if (_tabType == 1)
-                DataCell(_rowsView(
-                  text: item.noOfMatching,
-                )),
-              if (_tabType != 1)
-                DataCell(_rowsView(
-                  text: item.serviceFee,
-                )),
-              if (_tabType == 2)
-                DataCell(_rowsView(
-                  text: item.extraFee,
-                )),
-              if (_tabType == 2)
-                DataCell(_rowsView(
-                  text: item.tip,
-                )),
-              if (_tabType == 2)
-                DataCell(_rowsView(
-                  text: item.refund,
-                )),
-              if (_tabType == 3)
-                DataCell(_rowsView(
-                  text: item.cancelledBy ?? "", //no tag from api
-                )),
-              DataCell(
-                InkWell(
-                    onTap: () {
-                      //autoTabRouter?.navigate(ServiceDetailsRoute(id: item.id));
-
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return ServiceDetailsDialog(
-                              service: item,
-                              title: getTitle(_tabType),
-                            );
-                          });
-                    },
-                    child: CustomSvg(
-                      path: IMG.edit.val,
+    return _serviceRequestBloc.serviceRequestsList.isEmpty
+        ? EmptyView(title: AppString.noServiceRequestsFound.val)
+        : CSelectionArea(
+            child: CDataTable2(
+              minWidth: 2000,
+              dividerThickness: .3,
+              headingRowHeight: DBL.fortyEight.val,
+              dataRowHeight: DBL.sixty.val,
+              columns: [
+                DataColumn2(
+                  size: ColumnSize.S,
+                  fixedWidth: 50,
+                  label: _columnsView(
+                      text: AppString.slNo.val, fontWeight: FontWeight.bold),
+                ),
+                DataColumn2(
+                  size: ColumnSize.S,
+                  fixedWidth: DBL.oneFifty.val,
+                  label: _columnsView(
+                      text: AppString.serviceId.val,
+                      fontWeight: FontWeight.bold),
+                ),
+                DataColumn2(
+                  fixedWidth: DBL.twoHundred.val,
+                  label: _columnsView(
+                      text: AppString.decisionMakerName.val,
+                      fontWeight: FontWeight.bold),
+                ),
+                DataColumn2(
+                  size: ColumnSize.L,
+                  fixedWidth: DBL.twoHundred.val,
+                  label: _columnsView(
+                      text: AppString.clientName.val,
+                      fontWeight: FontWeight.bold),
+                ),
+                DataColumn2(
+                  size: ColumnSize.L,
+                  fixedWidth: DBL.twoHundred.val,
+                  label: _columnsView(
+                      text: AppString.caName.val, fontWeight: FontWeight.bold),
+                ),
+                DataColumn2(
+                  size: ColumnSize.L,
+                  fixedWidth: DBL.twoHundred.val,
+                  label: _columnsView(
+                      text: AppString.startDateAndTime.val,
+                      fontWeight: FontWeight.bold),
+                ),
+                DataColumn2(
+                  size: ColumnSize.L,
+                  fixedWidth: DBL.twoHundred.val,
+                  label: _columnsView(
+                      text: AppString.endDateAndTime.val,
+                      fontWeight: FontWeight.bold),
+                ),
+                DataColumn2(
+                  size: ColumnSize.L,
+                  fixedWidth: 150,
+                  label: _columnsView(
+                      text: AppString.serviceFee.val,
+                      fontWeight: FontWeight.bold),
+                ),
+                if (_serviceRequestBloc.statusFilterId == 0 ||
+                    _serviceRequestBloc.statusFilterId == 6)
+                  DataColumn2(
+                    size: ColumnSize.L,
+                    fixedWidth: 100,
+                    label: _columnsView(
+                        text: AppString.refund.val,
+                        fontWeight: FontWeight.bold),
+                  ),
+                if (_serviceRequestBloc.statusFilterId == 0 ||
+                    _serviceRequestBloc.statusFilterId == 6)
+                  DataColumn2(
+                    size: ColumnSize.L,
+                    fixedWidth: 100,
+                    label: _columnsView(
+                        text: AppString.canceledBy.val,
+                        fontWeight: FontWeight.bold),
+                  ),
+                DataColumn2(
+                  size: ColumnSize.L,
+                  fixedWidth: 150,
+                  label: _columnsView(
+                      text: AppString.status.val, fontWeight: FontWeight.bold),
+                ),
+                DataColumn2(
+                  // size: ColumnSize.L,
+                  fixedWidth: Responsive.isWeb(context)
+                      ? MediaQuery.of(context).size.width * .1
+                      : DBL.oneSeventy.val,
+                  label: const CustomText(""),
+                ),
+              ],
+              rows: _serviceRequestBloc.serviceRequestsList
+                  .asMap()
+                  .entries
+                  .map((e) {
+                var item = e.value;
+                return DataRow2(
+                  cells: [
+                    DataCell(_rowsView(
+                      text: (e.key + 1).toString(),
                     )),
-              ),
-            ],
+                    DataCell(_rowsView(
+                      text: item.serviceId.toString(),
+                    )),
+                    DataCell(_rowsView(
+                      text: item.decisionMakerName ?? "",
+                    )),
+                    DataCell(_rowsView(
+                      text: item.clientName ?? "",
+                    )),
+                    DataCell(_rowsView(
+                      text: item.caregiverName ?? "",
+                    )),
+                    DataCell(_rowsView(
+                      text: _serviceRequestBloc
+                          .generateFormattedDate(item.startDate ?? ""),
+                    )),
+                    DataCell(_rowsView(
+                      text: _serviceRequestBloc
+                          .generateFormattedDate(item.endDate ?? ""),
+                    )),
+                    DataCell(_rowsView(
+                      text: item.serviceFee.toString(),
+                    )),
+                    if (_serviceRequestBloc.statusFilterId == 0 ||
+                        _serviceRequestBloc.statusFilterId == 6)
+                      DataCell(_rowsView(
+                        text: item.refundStatus != null
+                            ? item.refundStatus.toString()
+                            : "-",
+                      )),
+                    if (_serviceRequestBloc.statusFilterId == 0 ||
+                        _serviceRequestBloc.statusFilterId == 6)
+                      DataCell(_rowsView(
+                        text: item.cancelledBy == "" || item.cancelledBy == null
+                            ? "-"
+                            : item.cancelledBy ?? "",
+                      )),
+                    DataCell(
+                        _rowsView(text: item.serviceStatus, isStatus: true)),
+                    DataCell(
+                      InkWell(
+                          onTap: () {
+                            //autoTabRouter?.navigate(ServiceDetailsRoute(id: item.id));
+
+                            /*showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return ServiceDetailsDialog(
+                                    service: item,
+                                    title: getTitle(_tabType),
+                                  );
+                                });*/
+                          },
+                          child: CustomSvg(
+                            path: IMG.eye.val,
+                            width: DBL.twelve.val,
+                            height: DBL.twelve.val,
+                          )),
+                    ),
+                  ],
+                );
+              }).toList(),
+            ),
           );
-        }).toList(),
-      ),
-    );
   }
 
   Widget _columnsView(
@@ -319,36 +542,53 @@ class _ServiceRequestManagementPageState
     );
   }
 
-  Widget _rowsView({
-    String? text,
-  }) {
-    return CustomText(
-      '$text',
-      softWrap: true,
-      style: TS().gRoboto(
-          fontSize: Responsive.isWeb(context)
-              ? DBL.thirteenPointFive.val
-              : DBL.twelve.val,
-          fontWeight: FW.w400.val,
-          color: AppColor.rowColor.val),
-      textAlign: TextAlign.start,
+  Widget _rowsView({String? text, bool? isStatus}) {
+    return Container(
+      padding: const EdgeInsets.all(5),
+      decoration: isStatus ?? false
+          ? BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: _generateColor(text ?? ""))
+          : const BoxDecoration(),
+      child: CustomText(
+        '$text',
+        softWrap: true,
+        style: TS().gRoboto(
+            fontSize: Responsive.isWeb(context)
+                ? DBL.thirteenPointFive.val
+                : DBL.twelve.val,
+            fontWeight: FW.w400.val,
+            color:
+                isStatus ?? false ? AppColor.white.val : AppColor.rowColor.val),
+        textAlign: TextAlign.start,
+      ),
     );
   }
 
-  _statusDropDown(BuildContext context) {
+  Color _generateColor(String text) {
+    if (text.toLowerCase().trim() == "upcoming") {
+      return AppColor.darkGrey4.val;
+    } else if (text.toLowerCase().trim() == "ongoing") {
+      return AppColor.blue.val;
+    } else if (text.toLowerCase().trim() == "completed") {
+      return AppColor.green.val;
+    } else {
+      return AppColor.red.val;
+    }
+  }
+
+  _bookingStatusDropDown(BuildContext context) {
     return _tabType == 1
         ? CustomDropdown<int>(
             onChange: (int value, int index) {
-              // context.read<ServiceRequestManagementBloc>().add(
+              // _serviceBloc.add(
               //     ServiceRequestManagementEvent.getServiceList(selectedType,
               //         filterId: value));
             },
             dropdownButtonStyle: DropdownButtonStyle(
               mainAxisAlignment: MainAxisAlignment.start,
-              width: 220,
-              height: Responsive.isMobile(context)
-                  ? DBL.fortyFive.val
-                  : DBL.forty.val,
+              width: DBL.twoTen.val,
+              height: DBL.fortySeven.val,
               elevation: DBL.zero.val,
               padding: EdgeInsets.only(left: DBL.fifteen.val),
               backgroundColor: Colors.white,
@@ -371,8 +611,8 @@ class _ServiceRequestManagementPageState
                       child: Text(
                         item.value,
                         style: TS().gRoboto(
-                            fontWeight: FW.w500.val,
-                            fontSize: FS.font15.val,
+                            fontWeight: FW.w400.val,
+                            fontSize: FS.font14.val,
                             color: AppColor.columColor2.val),
                       ),
                     ),
@@ -382,12 +622,69 @@ class _ServiceRequestManagementPageState
             child: CustomText(
               AppString.serviceTypeHint.val,
               style: TS().gRoboto(
-                  fontWeight: FW.w500.val,
-                  fontSize: FS.font15.val,
+                  fontWeight: FW.w400.val,
+                  fontSize: FS.font14.val,
                   color: AppColor.columColor2.val),
             ),
           )
         : CustomSizedBox.shrink();
+  }
+
+  _serviceStatusDropDown(BuildContext context) {
+    return CustomDropdown<int>(
+      onChange: (int value, int index) {
+        _serviceRequestBloc.statusFilterId = value;
+        _serviceRequestBloc.add(
+            ServiceRequestManagementEvent.getServiceRequests(
+                context: context,
+                page: 1,
+                limit: _limit,
+                statusFilterId: _serviceRequestBloc.statusFilterId == 0
+                    ? null
+                    : _serviceRequestBloc.statusFilterId));
+      },
+      dropdownButtonStyle: DropdownButtonStyle(
+        mainAxisAlignment: MainAxisAlignment.start,
+        width: DBL.twoTen.val,
+        height: DBL.fortySeven.val,
+        elevation: DBL.zero.val,
+        padding: EdgeInsets.only(left: DBL.fifteen.val),
+        backgroundColor: Colors.white,
+        primaryColor: AppColor.white.val,
+      ),
+      dropdownStyle: DropdownStyle(
+        borderRadius: BorderRadius.circular(DBL.zero.val),
+        elevation: 2,
+        color: AppColor.white.val,
+        padding: EdgeInsets.all(DBL.five.val),
+      ),
+      items: _serviceRequestBloc.serviceStatusList
+          .asMap()
+          .entries
+          .map(
+            (item) => DropdownItem<int>(
+              value: item.value.id!.toInt(),
+              child: Padding(
+                padding: EdgeInsets.all(DBL.eight.val),
+                child: Text(
+                  item.value.name ?? "",
+                  style: TS().gRoboto(
+                      fontWeight: FW.w400.val,
+                      fontSize: FS.font14.val,
+                      color: AppColor.columColor2.val),
+                ),
+              ),
+            ),
+          )
+          .toList(),
+      child: CustomText(
+        AppString.serviceStatusHint.val,
+        style: TS().gRoboto(
+            fontWeight: FW.w400.val,
+            fontSize: FS.font14.val,
+            color: AppColor.columColor2.val),
+      ),
+    );
   }
 }
 

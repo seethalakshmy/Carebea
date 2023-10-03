@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'transaction_management_bloc.dart';
 
@@ -19,29 +19,34 @@ mixin _$TransactionManagementEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getFilters,
-    required TResult Function(
-            String page, int limit, String searchTerm, int filterId)
+    required TResult Function(String userId, String page, int limit,
+            String searchTerm, int filterId)
         getTransactions,
     required TResult Function(bool clicked) hideOrShowDetails,
-    required TResult Function(String transactionId) getTransactionDetails,
+    required TResult Function(String transactionId, String serviceId)
+        getTransactionDetails,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getFilters,
-    TResult? Function(String page, int limit, String searchTerm, int filterId)?
+    TResult? Function(String userId, String page, int limit, String searchTerm,
+            int filterId)?
         getTransactions,
     TResult? Function(bool clicked)? hideOrShowDetails,
-    TResult? Function(String transactionId)? getTransactionDetails,
+    TResult? Function(String transactionId, String serviceId)?
+        getTransactionDetails,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getFilters,
-    TResult Function(String page, int limit, String searchTerm, int filterId)?
+    TResult Function(String userId, String page, int limit, String searchTerm,
+            int filterId)?
         getTransactions,
     TResult Function(bool clicked)? hideOrShowDetails,
-    TResult Function(String transactionId)? getTransactionDetails,
+    TResult Function(String transactionId, String serviceId)?
+        getTransactionDetails,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -132,11 +137,12 @@ class _$_GetFilters implements _GetFilters {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getFilters,
-    required TResult Function(
-            String page, int limit, String searchTerm, int filterId)
+    required TResult Function(String userId, String page, int limit,
+            String searchTerm, int filterId)
         getTransactions,
     required TResult Function(bool clicked) hideOrShowDetails,
-    required TResult Function(String transactionId) getTransactionDetails,
+    required TResult Function(String transactionId, String serviceId)
+        getTransactionDetails,
   }) {
     return getFilters();
   }
@@ -145,10 +151,12 @@ class _$_GetFilters implements _GetFilters {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getFilters,
-    TResult? Function(String page, int limit, String searchTerm, int filterId)?
+    TResult? Function(String userId, String page, int limit, String searchTerm,
+            int filterId)?
         getTransactions,
     TResult? Function(bool clicked)? hideOrShowDetails,
-    TResult? Function(String transactionId)? getTransactionDetails,
+    TResult? Function(String transactionId, String serviceId)?
+        getTransactionDetails,
   }) {
     return getFilters?.call();
   }
@@ -157,10 +165,12 @@ class _$_GetFilters implements _GetFilters {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getFilters,
-    TResult Function(String page, int limit, String searchTerm, int filterId)?
+    TResult Function(String userId, String page, int limit, String searchTerm,
+            int filterId)?
         getTransactions,
     TResult Function(bool clicked)? hideOrShowDetails,
-    TResult Function(String transactionId)? getTransactionDetails,
+    TResult Function(String transactionId, String serviceId)?
+        getTransactionDetails,
     required TResult orElse(),
   }) {
     if (getFilters != null) {
@@ -218,7 +228,8 @@ abstract class _$$_GetTransactionsCopyWith<$Res> {
           _$_GetTransactions value, $Res Function(_$_GetTransactions) then) =
       __$$_GetTransactionsCopyWithImpl<$Res>;
   @useResult
-  $Res call({String page, int limit, String searchTerm, int filterId});
+  $Res call(
+      {String userId, String page, int limit, String searchTerm, int filterId});
 }
 
 /// @nodoc
@@ -232,12 +243,17 @@ class __$$_GetTransactionsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? userId = null,
     Object? page = null,
     Object? limit = null,
     Object? searchTerm = null,
     Object? filterId = null,
   }) {
     return _then(_$_GetTransactions(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -262,11 +278,14 @@ class __$$_GetTransactionsCopyWithImpl<$Res>
 
 class _$_GetTransactions implements _GetTransactions {
   const _$_GetTransactions(
-      {required this.page,
+      {required this.userId,
+      required this.page,
       required this.limit,
       required this.searchTerm,
       required this.filterId});
 
+  @override
+  final String userId;
   @override
   final String page;
   @override
@@ -278,7 +297,7 @@ class _$_GetTransactions implements _GetTransactions {
 
   @override
   String toString() {
-    return 'TransactionManagementEvent.getTransactions(page: $page, limit: $limit, searchTerm: $searchTerm, filterId: $filterId)';
+    return 'TransactionManagementEvent.getTransactions(userId: $userId, page: $page, limit: $limit, searchTerm: $searchTerm, filterId: $filterId)';
   }
 
   @override
@@ -286,6 +305,7 @@ class _$_GetTransactions implements _GetTransactions {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_GetTransactions &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.limit, limit) || other.limit == limit) &&
             (identical(other.searchTerm, searchTerm) ||
@@ -296,7 +316,7 @@ class _$_GetTransactions implements _GetTransactions {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, page, limit, searchTerm, filterId);
+      Object.hash(runtimeType, userId, page, limit, searchTerm, filterId);
 
   @JsonKey(ignore: true)
   @override
@@ -308,39 +328,44 @@ class _$_GetTransactions implements _GetTransactions {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getFilters,
-    required TResult Function(
-            String page, int limit, String searchTerm, int filterId)
+    required TResult Function(String userId, String page, int limit,
+            String searchTerm, int filterId)
         getTransactions,
     required TResult Function(bool clicked) hideOrShowDetails,
-    required TResult Function(String transactionId) getTransactionDetails,
+    required TResult Function(String transactionId, String serviceId)
+        getTransactionDetails,
   }) {
-    return getTransactions(page, limit, searchTerm, filterId);
+    return getTransactions(userId, page, limit, searchTerm, filterId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getFilters,
-    TResult? Function(String page, int limit, String searchTerm, int filterId)?
+    TResult? Function(String userId, String page, int limit, String searchTerm,
+            int filterId)?
         getTransactions,
     TResult? Function(bool clicked)? hideOrShowDetails,
-    TResult? Function(String transactionId)? getTransactionDetails,
+    TResult? Function(String transactionId, String serviceId)?
+        getTransactionDetails,
   }) {
-    return getTransactions?.call(page, limit, searchTerm, filterId);
+    return getTransactions?.call(userId, page, limit, searchTerm, filterId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getFilters,
-    TResult Function(String page, int limit, String searchTerm, int filterId)?
+    TResult Function(String userId, String page, int limit, String searchTerm,
+            int filterId)?
         getTransactions,
     TResult Function(bool clicked)? hideOrShowDetails,
-    TResult Function(String transactionId)? getTransactionDetails,
+    TResult Function(String transactionId, String serviceId)?
+        getTransactionDetails,
     required TResult orElse(),
   }) {
     if (getTransactions != null) {
-      return getTransactions(page, limit, searchTerm, filterId);
+      return getTransactions(userId, page, limit, searchTerm, filterId);
     }
     return orElse();
   }
@@ -386,11 +411,13 @@ class _$_GetTransactions implements _GetTransactions {
 
 abstract class _GetTransactions implements TransactionManagementEvent {
   const factory _GetTransactions(
-      {required final String page,
+      {required final String userId,
+      required final String page,
       required final int limit,
       required final String searchTerm,
       required final int filterId}) = _$_GetTransactions;
 
+  String get userId;
   String get page;
   int get limit;
   String get searchTerm;
@@ -466,11 +493,12 @@ class _$_HideOrShowDetails implements _HideOrShowDetails {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getFilters,
-    required TResult Function(
-            String page, int limit, String searchTerm, int filterId)
+    required TResult Function(String userId, String page, int limit,
+            String searchTerm, int filterId)
         getTransactions,
     required TResult Function(bool clicked) hideOrShowDetails,
-    required TResult Function(String transactionId) getTransactionDetails,
+    required TResult Function(String transactionId, String serviceId)
+        getTransactionDetails,
   }) {
     return hideOrShowDetails(clicked);
   }
@@ -479,10 +507,12 @@ class _$_HideOrShowDetails implements _HideOrShowDetails {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getFilters,
-    TResult? Function(String page, int limit, String searchTerm, int filterId)?
+    TResult? Function(String userId, String page, int limit, String searchTerm,
+            int filterId)?
         getTransactions,
     TResult? Function(bool clicked)? hideOrShowDetails,
-    TResult? Function(String transactionId)? getTransactionDetails,
+    TResult? Function(String transactionId, String serviceId)?
+        getTransactionDetails,
   }) {
     return hideOrShowDetails?.call(clicked);
   }
@@ -491,10 +521,12 @@ class _$_HideOrShowDetails implements _HideOrShowDetails {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getFilters,
-    TResult Function(String page, int limit, String searchTerm, int filterId)?
+    TResult Function(String userId, String page, int limit, String searchTerm,
+            int filterId)?
         getTransactions,
     TResult Function(bool clicked)? hideOrShowDetails,
-    TResult Function(String transactionId)? getTransactionDetails,
+    TResult Function(String transactionId, String serviceId)?
+        getTransactionDetails,
     required TResult orElse(),
   }) {
     if (hideOrShowDetails != null) {
@@ -558,7 +590,7 @@ abstract class _$$_GetTransactionDetailsCopyWith<$Res> {
           $Res Function(_$_GetTransactionDetails) then) =
       __$$_GetTransactionDetailsCopyWithImpl<$Res>;
   @useResult
-  $Res call({String transactionId});
+  $Res call({String transactionId, String serviceId});
 }
 
 /// @nodoc
@@ -574,11 +606,16 @@ class __$$_GetTransactionDetailsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? transactionId = null,
+    Object? serviceId = null,
   }) {
     return _then(_$_GetTransactionDetails(
       transactionId: null == transactionId
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      serviceId: null == serviceId
+          ? _value.serviceId
+          : serviceId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -587,14 +624,17 @@ class __$$_GetTransactionDetailsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_GetTransactionDetails implements _GetTransactionDetails {
-  const _$_GetTransactionDetails({required this.transactionId});
+  const _$_GetTransactionDetails(
+      {required this.transactionId, required this.serviceId});
 
   @override
   final String transactionId;
+  @override
+  final String serviceId;
 
   @override
   String toString() {
-    return 'TransactionManagementEvent.getTransactionDetails(transactionId: $transactionId)';
+    return 'TransactionManagementEvent.getTransactionDetails(transactionId: $transactionId, serviceId: $serviceId)';
   }
 
   @override
@@ -603,11 +643,13 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
         (other.runtimeType == runtimeType &&
             other is _$_GetTransactionDetails &&
             (identical(other.transactionId, transactionId) ||
-                other.transactionId == transactionId));
+                other.transactionId == transactionId) &&
+            (identical(other.serviceId, serviceId) ||
+                other.serviceId == serviceId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, transactionId);
+  int get hashCode => Object.hash(runtimeType, transactionId, serviceId);
 
   @JsonKey(ignore: true)
   @override
@@ -620,39 +662,44 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getFilters,
-    required TResult Function(
-            String page, int limit, String searchTerm, int filterId)
+    required TResult Function(String userId, String page, int limit,
+            String searchTerm, int filterId)
         getTransactions,
     required TResult Function(bool clicked) hideOrShowDetails,
-    required TResult Function(String transactionId) getTransactionDetails,
+    required TResult Function(String transactionId, String serviceId)
+        getTransactionDetails,
   }) {
-    return getTransactionDetails(transactionId);
+    return getTransactionDetails(transactionId, serviceId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getFilters,
-    TResult? Function(String page, int limit, String searchTerm, int filterId)?
+    TResult? Function(String userId, String page, int limit, String searchTerm,
+            int filterId)?
         getTransactions,
     TResult? Function(bool clicked)? hideOrShowDetails,
-    TResult? Function(String transactionId)? getTransactionDetails,
+    TResult? Function(String transactionId, String serviceId)?
+        getTransactionDetails,
   }) {
-    return getTransactionDetails?.call(transactionId);
+    return getTransactionDetails?.call(transactionId, serviceId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getFilters,
-    TResult Function(String page, int limit, String searchTerm, int filterId)?
+    TResult Function(String userId, String page, int limit, String searchTerm,
+            int filterId)?
         getTransactions,
     TResult Function(bool clicked)? hideOrShowDetails,
-    TResult Function(String transactionId)? getTransactionDetails,
+    TResult Function(String transactionId, String serviceId)?
+        getTransactionDetails,
     required TResult orElse(),
   }) {
     if (getTransactionDetails != null) {
-      return getTransactionDetails(transactionId);
+      return getTransactionDetails(transactionId, serviceId);
     }
     return orElse();
   }
@@ -697,10 +744,12 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
 }
 
 abstract class _GetTransactionDetails implements TransactionManagementEvent {
-  const factory _GetTransactionDetails({required final String transactionId}) =
-      _$_GetTransactionDetails;
+  const factory _GetTransactionDetails(
+      {required final String transactionId,
+      required final String serviceId}) = _$_GetTransactionDetails;
 
   String get transactionId;
+  String get serviceId;
   @JsonKey(ignore: true)
   _$$_GetTransactionDetailsCopyWith<_$_GetTransactionDetails> get copyWith =>
       throw _privateConstructorUsedError;
@@ -743,6 +792,8 @@ abstract class $TransactionManagementStateCopyWith<$Res> {
       Option<Either<ApiErrorHandler, GetFiltersResponse>> filterOption,
       Option<Either<ApiErrorHandler, TransactionDetailsResponse>>
           trDetailsOption});
+
+  $TransactionListResponseCopyWith<$Res>? get response;
 }
 
 /// @nodoc
@@ -808,6 +859,18 @@ class _$TransactionManagementStateCopyWithImpl<$Res,
               as Option<Either<ApiErrorHandler, TransactionDetailsResponse>>,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TransactionListResponseCopyWith<$Res>? get response {
+    if (_value.response == null) {
+      return null;
+    }
+
+    return $TransactionListResponseCopyWith<$Res>(_value.response!, (value) {
+      return _then(_value.copyWith(response: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -829,6 +892,9 @@ abstract class _$$_TransactionsStateCopyWith<$Res>
       Option<Either<ApiErrorHandler, GetFiltersResponse>> filterOption,
       Option<Either<ApiErrorHandler, TransactionDetailsResponse>>
           trDetailsOption});
+
+  @override
+  $TransactionListResponseCopyWith<$Res>? get response;
 }
 
 /// @nodoc

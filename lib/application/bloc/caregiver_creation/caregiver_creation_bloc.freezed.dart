@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'caregiver_creation_bloc.dart';
 
@@ -20,24 +20,25 @@ mixin _$CaregiverCreationEvent {
   String get lastName => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get mobileNo => throw _privateConstructorUsedError;
+  BuildContext get context => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String firstName, String lastName, String email, String mobileNo)
+    required TResult Function(String firstName, String lastName, String email,
+            String mobileNo, BuildContext context)
         createCaregiver,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String firstName, String lastName, String email, String mobileNo)?
+    TResult? Function(String firstName, String lastName, String email,
+            String mobileNo, BuildContext context)?
         createCaregiver,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String firstName, String lastName, String email, String mobileNo)?
+    TResult Function(String firstName, String lastName, String email,
+            String mobileNo, BuildContext context)?
         createCaregiver,
     required TResult orElse(),
   }) =>
@@ -70,7 +71,12 @@ abstract class $CaregiverCreationEventCopyWith<$Res> {
           $Res Function(CaregiverCreationEvent) then) =
       _$CaregiverCreationEventCopyWithImpl<$Res, CaregiverCreationEvent>;
   @useResult
-  $Res call({String firstName, String lastName, String email, String mobileNo});
+  $Res call(
+      {String firstName,
+      String lastName,
+      String email,
+      String mobileNo,
+      BuildContext context});
 }
 
 /// @nodoc
@@ -91,6 +97,7 @@ class _$CaregiverCreationEventCopyWithImpl<$Res,
     Object? lastName = null,
     Object? email = null,
     Object? mobileNo = null,
+    Object? context = null,
   }) {
     return _then(_value.copyWith(
       firstName: null == firstName
@@ -109,6 +116,10 @@ class _$CaregiverCreationEventCopyWithImpl<$Res,
           ? _value.mobileNo
           : mobileNo // ignore: cast_nullable_to_non_nullable
               as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ) as $Val);
   }
 }
@@ -121,7 +132,12 @@ abstract class _$$_CreateCaregiverCopyWith<$Res>
       __$$_CreateCaregiverCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String firstName, String lastName, String email, String mobileNo});
+  $Res call(
+      {String firstName,
+      String lastName,
+      String email,
+      String mobileNo,
+      BuildContext context});
 }
 
 /// @nodoc
@@ -139,6 +155,7 @@ class __$$_CreateCaregiverCopyWithImpl<$Res>
     Object? lastName = null,
     Object? email = null,
     Object? mobileNo = null,
+    Object? context = null,
   }) {
     return _then(_$_CreateCaregiver(
       firstName: null == firstName
@@ -157,6 +174,10 @@ class __$$_CreateCaregiverCopyWithImpl<$Res>
           ? _value.mobileNo
           : mobileNo // ignore: cast_nullable_to_non_nullable
               as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ));
   }
 }
@@ -168,7 +189,8 @@ class _$_CreateCaregiver implements _CreateCaregiver {
       {required this.firstName,
       required this.lastName,
       required this.email,
-      required this.mobileNo});
+      required this.mobileNo,
+      required this.context});
 
   @override
   final String firstName;
@@ -178,10 +200,12 @@ class _$_CreateCaregiver implements _CreateCaregiver {
   final String email;
   @override
   final String mobileNo;
+  @override
+  final BuildContext context;
 
   @override
   String toString() {
-    return 'CaregiverCreationEvent.createCaregiver(firstName: $firstName, lastName: $lastName, email: $email, mobileNo: $mobileNo)';
+    return 'CaregiverCreationEvent.createCaregiver(firstName: $firstName, lastName: $lastName, email: $email, mobileNo: $mobileNo, context: $context)';
   }
 
   @override
@@ -195,12 +219,13 @@ class _$_CreateCaregiver implements _CreateCaregiver {
                 other.lastName == lastName) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.mobileNo, mobileNo) ||
-                other.mobileNo == mobileNo));
+                other.mobileNo == mobileNo) &&
+            (identical(other.context, context) || other.context == context));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, firstName, lastName, email, mobileNo);
+      Object.hash(runtimeType, firstName, lastName, email, mobileNo, context);
 
   @JsonKey(ignore: true)
   @override
@@ -211,33 +236,33 @@ class _$_CreateCaregiver implements _CreateCaregiver {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String firstName, String lastName, String email, String mobileNo)
+    required TResult Function(String firstName, String lastName, String email,
+            String mobileNo, BuildContext context)
         createCaregiver,
   }) {
-    return createCaregiver(firstName, lastName, email, mobileNo);
+    return createCaregiver(firstName, lastName, email, mobileNo, context);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String firstName, String lastName, String email, String mobileNo)?
+    TResult? Function(String firstName, String lastName, String email,
+            String mobileNo, BuildContext context)?
         createCaregiver,
   }) {
-    return createCaregiver?.call(firstName, lastName, email, mobileNo);
+    return createCaregiver?.call(firstName, lastName, email, mobileNo, context);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String firstName, String lastName, String email, String mobileNo)?
+    TResult Function(String firstName, String lastName, String email,
+            String mobileNo, BuildContext context)?
         createCaregiver,
     required TResult orElse(),
   }) {
     if (createCaregiver != null) {
-      return createCaregiver(firstName, lastName, email, mobileNo);
+      return createCaregiver(firstName, lastName, email, mobileNo, context);
     }
     return orElse();
   }
@@ -276,7 +301,8 @@ abstract class _CreateCaregiver implements CaregiverCreationEvent {
       {required final String firstName,
       required final String lastName,
       required final String email,
-      required final String mobileNo}) = _$_CreateCaregiver;
+      required final String mobileNo,
+      required final BuildContext context}) = _$_CreateCaregiver;
 
   @override
   String get firstName;
@@ -286,6 +312,8 @@ abstract class _CreateCaregiver implements CaregiverCreationEvent {
   String get email;
   @override
   String get mobileNo;
+  @override
+  BuildContext get context;
   @override
   @JsonKey(ignore: true)
   _$$_CreateCaregiverCopyWith<_$_CreateCaregiver> get copyWith =>
