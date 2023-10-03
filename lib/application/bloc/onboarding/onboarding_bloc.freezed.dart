@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'onboarding_bloc.dart';
 
@@ -615,7 +615,6 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
   final List<String> _documentList;
   @override
   List<String> get documentList {
-    if (_documentList is EqualUnmodifiableListView) return _documentList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_documentList);
   }
@@ -1945,7 +1944,6 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
   final List<Map<String, dynamic>> _petsList;
   @override
   List<Map<String, dynamic>> get petsList {
-    if (_petsList is EqualUnmodifiableListView) return _petsList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_petsList);
   }
@@ -1953,7 +1951,6 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
   final List<String> _knownLanguages;
   @override
   List<String> get knownLanguages {
-    if (_knownLanguages is EqualUnmodifiableListView) return _knownLanguages;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_knownLanguages);
   }
@@ -7929,7 +7926,6 @@ class _$_GetLanguageList implements _GetLanguageList {
   final List<PreferenceLanguageModel> _languageList;
   @override
   List<PreferenceLanguageModel> get languageList {
-    if (_languageList is EqualUnmodifiableListView) return _languageList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_languageList);
   }
@@ -13464,7 +13460,6 @@ class _$_SecurityDocumentUploadSelected
   final List<PlatformFile> _bytesList;
   @override
   List<PlatformFile> get bytesList {
-    if (_bytesList is EqualUnmodifiableListView) return _bytesList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bytesList);
   }
@@ -13988,7 +13983,6 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
   final List<PlatformFile> _bytesList;
   @override
   List<PlatformFile> get bytesList {
-    if (_bytesList is EqualUnmodifiableListView) return _bytesList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bytesList);
   }
@@ -14512,7 +14506,6 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
   final List<PlatformFile> _bytesList;
   @override
   List<PlatformFile> get bytesList {
-    if (_bytesList is EqualUnmodifiableListView) return _bytesList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bytesList);
   }
@@ -15035,7 +15028,6 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
   final List<PlatformFile> _bytesList;
   @override
   List<PlatformFile> get bytesList {
-    if (_bytesList is EqualUnmodifiableListView) return _bytesList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bytesList);
   }
@@ -15559,7 +15551,6 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
   final List<PlatformFile> _bytesList;
   @override
   List<PlatformFile> get bytesList {
-    if (_bytesList is EqualUnmodifiableListView) return _bytesList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bytesList);
   }
@@ -17955,7 +17946,6 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
   final Map<String, dynamic> _services;
   @override
   Map<String, dynamic> get services {
-    if (_services is EqualUnmodifiableMapView) return _services;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_services);
   }
@@ -20780,8 +20770,6 @@ class _$_OnboardingState implements _OnboardingState {
   final List<PlatformFile> _securityDocumentList;
   @override
   List<PlatformFile> get securityDocumentList {
-    if (_securityDocumentList is EqualUnmodifiableListView)
-      return _securityDocumentList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_securityDocumentList);
   }
@@ -20789,7 +20777,6 @@ class _$_OnboardingState implements _OnboardingState {
   final List<PlatformFile> _hhaDocumentList;
   @override
   List<PlatformFile> get hhaDocumentList {
-    if (_hhaDocumentList is EqualUnmodifiableListView) return _hhaDocumentList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_hhaDocumentList);
   }
@@ -20797,7 +20784,6 @@ class _$_OnboardingState implements _OnboardingState {
   final List<PlatformFile> _blsDocumentList;
   @override
   List<PlatformFile> get blsDocumentList {
-    if (_blsDocumentList is EqualUnmodifiableListView) return _blsDocumentList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_blsDocumentList);
   }
@@ -20805,7 +20791,6 @@ class _$_OnboardingState implements _OnboardingState {
   final List<PlatformFile> _tbDocumentList;
   @override
   List<PlatformFile> get tbDocumentList {
-    if (_tbDocumentList is EqualUnmodifiableListView) return _tbDocumentList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_tbDocumentList);
   }
@@ -20813,8 +20798,6 @@ class _$_OnboardingState implements _OnboardingState {
   final List<PlatformFile> _covidDocumentList;
   @override
   List<PlatformFile> get covidDocumentList {
-    if (_covidDocumentList is EqualUnmodifiableListView)
-      return _covidDocumentList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_covidDocumentList);
   }
@@ -20822,7 +20805,6 @@ class _$_OnboardingState implements _OnboardingState {
   final List<GetReferences> _referenceList;
   @override
   List<GetReferences> get referenceList {
-    if (_referenceList is EqualUnmodifiableListView) return _referenceList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_referenceList);
   }
@@ -20830,7 +20812,6 @@ class _$_OnboardingState implements _OnboardingState {
   final List<PetsModel> _petsList;
   @override
   List<PetsModel> get petsList {
-    if (_petsList is EqualUnmodifiableListView) return _petsList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_petsList);
   }
@@ -20838,7 +20819,6 @@ class _$_OnboardingState implements _OnboardingState {
   final List<PreferenceLanguageModel> _languageList;
   @override
   List<PreferenceLanguageModel> get languageList {
-    if (_languageList is EqualUnmodifiableListView) return _languageList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_languageList);
   }
@@ -20846,7 +20826,6 @@ class _$_OnboardingState implements _OnboardingState {
   final List<ServiceModel> _serviceList;
   @override
   List<ServiceModel> get serviceList {
-    if (_serviceList is EqualUnmodifiableListView) return _serviceList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_serviceList);
   }

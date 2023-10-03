@@ -14,6 +14,7 @@ import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
 import '../../domain/transaction_management/model/transaction_list_response.dart';
+import '../../domain/transaction_management/model/transactions.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/custom_card.dart';
@@ -425,9 +426,9 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                 text: _transactionBloc.pageIndex.toString(),
               )),
               DataCell(_rowsView(
-                text: item.transactionId.toString(),
+                text: item.transactionIdPublic.toString(),
               )),
-              DataCell(_rowsView(text: item.serviceId.toString())),
+              DataCell(_rowsView(text: item.serviceIdPublic.toString())),
               DataCell(_rowsView(text: item.transactionType)),
               DataCell(_rowsView(text: item.paidFor)),
               DataCell(_rowsView(text: item.paidTo)),
