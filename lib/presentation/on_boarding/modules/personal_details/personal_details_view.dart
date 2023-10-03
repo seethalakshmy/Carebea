@@ -1,13 +1,3 @@
-import 'package:admin_580_tech/core/custom_snackbar.dart';
-import 'package:admin_580_tech/infrastructure/on_boarding/on_boarding_repository.dart';
-import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/address_selection_widget.dart';
-import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/profile_picture_widget.dart';
-import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/social_security_number_formatter.dart';
-import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/zip_code_formatter.dart';
-import 'package:admin_580_tech/presentation/on_boarding/widgets/upload_document_widget.dart';
-import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
-import 'package:admin_580_tech/presentation/widget/custom_form.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,14 +5,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../../../application/bloc/onboarding/onboarding_bloc.dart';
+import '../../../../core/custom_snackbar.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
 import '../../../../infrastructure/api_service_s3.dart';
+import '../../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../../widget/common_date_picker_widget.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
 import '../../../widget/custom_container.dart';
+import '../../../widget/custom_form.dart';
 import '../../../widget/custom_shimmer.dart';
 import '../../../widget/custom_sizedbox.dart';
 import '../../../widget/custom_text.dart';
@@ -34,10 +27,15 @@ import '../../widgets/file_preview_widget.dart';
 import '../../widgets/gender_drop_down.dart';
 import '../../widgets/image_preview_widget.dart';
 import '../../widgets/on_boarding_title_divider_widget.dart';
+import '../../widgets/upload_document_widget.dart';
+import 'widgets/address_selection_widget.dart';
 import 'widgets/document_details_view.dart';
+import 'widgets/profile_picture_widget.dart';
+import 'widgets/social_security_number_formatter.dart';
+import 'widgets/zip_code_formatter.dart';
 
 class PersonalDetailsView extends StatefulWidget {
-  PersonalDetailsView(
+  const PersonalDetailsView(
       {Key? key, required this.onboardingBloc, required this.pageController})
       : super(key: key);
   final OnboardingBloc onboardingBloc;
@@ -73,7 +71,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   List<String> docPathList = [];
   bool listUpdated = false;
 
-  AutovalidateMode _validateMode = AutovalidateMode.disabled;
+  final AutovalidateMode _validateMode = AutovalidateMode.disabled;
   FormValidationBloc formValidationBloc = FormValidationBloc();
   final _formKey = GlobalKey<FormState>();
 
