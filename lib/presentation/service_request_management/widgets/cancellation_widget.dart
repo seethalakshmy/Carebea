@@ -13,7 +13,7 @@ class CancellationWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Container(
         height: 60,
-        width: 400,
+        width: 550,
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6),
@@ -23,16 +23,18 @@ class CancellationWidget extends StatelessWidget {
             CommonImageView(
               svgPath: Assets.iconsIcWarning,
             ),
-            const SizedBox(
-              width: 10,
-            ),
-            Container(
-              width: 300,
+            const SizedBox(width: 10),
+            SizedBox(
+              width: 450,
               child: RichText(
                   text: TextSpan(
                       text: 'Reason for cancellation : ',
                       style: TextStyle(color: AppColor.mediumRed.val),
-                      children: [TextSpan(text: reason,style: TextStyle(color: Colors.black))])),
+                      children: [
+                    TextSpan(
+                        text: reason,
+                        style: const TextStyle(color: Colors.black))
+                  ])),
             )
           ],
         ),
