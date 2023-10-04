@@ -13,6 +13,7 @@ import '../../../domain/caregivers/model/types.dart';
 import '../../../domain/common_response/common_response.dart';
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
 import '../../../domain/service_request_management/model/reschedule_response.dart';
+import '../../../domain/service_request_management/model/service_details_response_model.dart';
 import '../../../domain/service_request_management/model/service_request_list_response_model.dart';
 import '../../../domain/service_request_management/model/service_request_response.dart';
 import '../../../domain/service_request_management/model/service_status_response_model.dart';
@@ -32,11 +33,13 @@ class ServiceRequestManagementBloc
   List<FilterData> filterList = [];
   List<StatusData> serviceStatusList = [];
   List<ServiceRequests> serviceRequestsList = [];
+  List<ServiceDetailsData> serviceDetailsList = [];
   String selectedFromDate = "";
   String selectedToDate = "";
   DateTime selectedFromDateTime = DateTime(2020);
   DateTime? selectedToDateTime;
   bool isClearFilterClicked = false;
+  int totalItems = 1;
 
   ServiceRequestManagementBloc(this.serviceRequestManagementRepository)
       : super(ServiceRequestManagementState.initial()) {
@@ -55,6 +58,12 @@ class ServiceRequestManagementBloc
     on<_GetFilters>(_getFilters);
     on<_GetServiceStatus>(_getServiceStatus);
     on<_GetServiceRequests>(_getServiceRequests);
+    on<_GetServiceDetails>(_getServiceDetails);
+    on<_ShowOrHideTransactionDetails>(_showOrHideTransactionDetails);
+    on<_ShowOrHideNeededServices>(_showOrHideNeededServices);
+    on<_ShowOrHideCompletedServices>(_showOrHideCompletedServices);
+    on<_ShowOrHideIncompleteServices>(_showOrHideIncompleteServices);
+    on<_ShowOrHideExtraServices>(_showOrHideExtraServices);
   }
 
   _setDate(_SetDate event, Emitter<ServiceRequestManagementState> emit) async {
@@ -298,6 +307,7 @@ class ServiceRequestManagementBloc
       if (r.status == true) {
         serviceRequestsList.clear();
         serviceRequestsList.addAll(r.data!.services!);
+        totalItems = r.data!.totalCount!.toInt();
         return state.copyWith(
             isListLoading: false, error: "", serviceOption: Some(Right(r)));
       } else {
@@ -306,5 +316,52 @@ class ServiceRequestManagementBloc
       }
     });
     emit(serviceState);
+  }
+
+  _getServiceDetails(_GetServiceDetails event,
+      Emitter<ServiceRequestManagementState> emit) async {
+    emit(state.copyWith(isDetailsLoading: true));
+    final Either<ApiErrorHandler, ServiceDetailsResponseModel> result =
+        await serviceRequestManagementRepository.getServiceDetails(
+            userId: SharedPreffUtil().getAdminId, serviceId: event.serviceId);
+    ServiceRequestManagementState serviceState = result.fold((l) {
+      return state.copyWith(
+          isDetailsLoading: false, serviceDetailsOption: Some(Left(l)));
+    }, (r) {
+      if (r.status == true) {
+        serviceDetailsList.clear();
+        serviceDetailsList.add(r.data!);
+        return state.copyWith(
+            isDetailsLoading: false, serviceDetailsOption: Some(Right(r)));
+      } else {
+        return state.copyWith(isDetailsLoading: false);
+      }
+    });
+    emit(serviceState);
+  }
+
+  _showOrHideTransactionDetails(_ShowOrHideTransactionDetails event,
+      Emitter<ServiceRequestManagementState> emit) {
+    emit(state.copyWith(isShowingTransactionDetails: event.isShowing));
+  }
+
+  _showOrHideNeededServices(_ShowOrHideNeededServices event,
+      Emitter<ServiceRequestManagementState> emit) {
+    emit(state.copyWith(isShowingNeededServices: event.isShowing));
+  }
+
+  _showOrHideCompletedServices(_ShowOrHideCompletedServices event,
+      Emitter<ServiceRequestManagementState> emit) {
+    emit(state.copyWith(isShowingCompletedServices: event.isShowing));
+  }
+
+  _showOrHideIncompleteServices(_ShowOrHideIncompleteServices event,
+      Emitter<ServiceRequestManagementState> emit) {
+    emit(state.copyWith(isShowingIncompleteServices: event.isShowing));
+  }
+
+  _showOrHideExtraServices(_ShowOrHideExtraServices event,
+      Emitter<ServiceRequestManagementState> emit) {
+    emit(state.copyWith(isShowingExtraServices: event.isShowing));
   }
 }
