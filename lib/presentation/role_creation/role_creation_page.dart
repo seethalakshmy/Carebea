@@ -159,7 +159,7 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
                 controller: _roleController,
                 width: DBL.fourHundred.val,
                 inputFormatter: [
-                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9 ]')),
+                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
                 ])
           ],
         ),
