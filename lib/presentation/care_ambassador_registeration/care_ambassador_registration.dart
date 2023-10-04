@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:admin_580_tech/application/bloc/onboarding/onboarding_bloc.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,6 @@ import '../on_boarding/modules/preference/preference_view.dart';
 import '../on_boarding/modules/qualification_details/qialification_view.dart';
 import '../on_boarding/modules/reference/reference_view.dart';
 import '../on_boarding/modules/services/services_view.dart';
-import '../on_boarding/modules/setup_compensation/setup_compensation_view.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_text.dart';
@@ -89,11 +90,11 @@ class _CareAmbassadorRegistrationPageState
       ),
       BuildProfileView(
           pageController: controller, onboardingBloc: _onboardingBloc),
-      SetupCompensationView(
-          pageController: controller, onboardingBloc: _onboardingBloc),
-      //HomeHealthAidAgreementView(pageController: controller),
       HomeHealthAidAgreementView(
           pageController: controller, onboardingBloc: _onboardingBloc),
+      // SetupCompensationView(
+      //     pageController: controller, onboardingBloc: _onboardingBloc),
+      //HomeHealthAidAgreementView(pageController: controller),
     ];
     setState(() {
       totalPages = pages.length;
@@ -130,6 +131,7 @@ class _CareAmbassadorRegistrationPageState
                   physics: const NeverScrollableScrollPhysics(),
                   children: pages,
                   onPageChanged: (index) {
+                    log("page is $index");
                     setState(() {
                       currentPage = index;
                     });
