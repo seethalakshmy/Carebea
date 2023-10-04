@@ -50,6 +50,7 @@ class _MobileOtpVerificationPageState extends State<MobileOtpVerificationPage> {
             },
             success: (data) {
               CSnackBar.showSuccess(context, msg: "Resend OTP Success");
+              CSnackBar.showSuccess(context, msg: "OTP is ${data.data}");
             });
       },
       child: Scaffold(

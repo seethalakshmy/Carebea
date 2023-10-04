@@ -52,6 +52,7 @@ class _EmailOtpVerificationPageState extends State<EmailOtpVerificationPage> {
               },
               success: (data) {
                 CSnackBar.showSuccess(context, msg: "Resend OTP Success");
+                CSnackBar.showSuccess(context, msg: "OTP is ${data.data}");
               });
         },
         child: Center(

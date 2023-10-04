@@ -4,14 +4,14 @@ import 'package:dio/dio.dart';
 import '../../core/enum.dart';
 import '../../domain/core/api_client.dart';
 import '../../domain/core/api_error_handler/api_error_handler.dart';
-import '../../domain/on_boarding/models/common_response.dart';
+import '../../domain/on_boarding/models/resend_otp_response.dart';
 import '../../domain/resend_otp/resend_otp_repo.dart';
 
 class ResendOTPRepoImpl extends ResendOTPRepo {
   ApiClient apiClient = ApiClient();
 
   @override
-  Future<Either<ApiErrorHandler, CommonResponse>> resendOTP(
+  Future<Either<ApiErrorHandler, ResendOTPResponse>> resendOTP(
       {required String userId, required int type}) async {
     try {
       final response = await apiClient.resendOTP(userId, type);
