@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:admin_580_tech/presentation/widget/multiple_barchart.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import '../dashboard/indicator_widget.dart';
 class SingleBarChart extends StatefulWidget {
   SingleBarChart({
     required this.indicatorTitle,
+    this.totalCountText,
     super.key,
     // required this.mapValues,
     // required this.bloc,
@@ -17,6 +19,7 @@ class SingleBarChart extends StatefulWidget {
 
   // final Map<String, double> mapValues;
   // final DashboardBloc bloc;
+  final String? totalCountText;
 
   final Color normal = AppColor.pieChartColor.val;
 
@@ -59,9 +62,7 @@ class SingleBarChartState extends State<SingleBarChart> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 25),
       height: MediaQuery.of(context).size.height * 0.53,
-      width: Responsive.isWeb(context)
-          ? MediaQuery.of(context).size.width * .5
-          : MediaQuery.of(context).size.width,
+      width: MediaQuery.of(context).size.width,
       color: AppColor.white.val,
       child: AspectRatio(
         aspectRatio: 1,
@@ -69,13 +70,15 @@ class SingleBarChartState extends State<SingleBarChart> {
             padding: const EdgeInsets.only(top: 16),
             child: Column(
               children: [
-                Wrap(
-                  alignment: WrapAlignment.end,
-                  spacing: 10,
-                  runSpacing: 10,
+                Row(
+                  // alignment: WrapAlignment.end,
+                  // spacing: 10,
+                  // runSpacing: 10,
                   children: [
-                    MonthlyDropDown(context: context),
-                    RegionDropDown(context: context),
+                    CustomText(widget.totalCountText ?? ''),
+                    Spacer(),
+                    // MonthlyDropDown(context: context),
+                    // RegionDropDown(context: context),
                     ExportAsDropDown(context: context)
                     // _monthlyDropDown(),
                     // _regionDropDown(),

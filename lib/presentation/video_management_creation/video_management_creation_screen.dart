@@ -1,0 +1,330 @@
+import 'package:admin_580_tech/infrastructure/faq_creation/faq_creation_repository.dart';
+import 'package:admin_580_tech/presentation/widget/custom_button.dart';
+import 'package:admin_580_tech/presentation/widget/custom_form.dart';
+import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../application/bloc/faq-creation/faq_creation_bloc.dart';
+import '../../core/enum.dart';
+import '../../core/properties.dart';
+import '../../core/text_styles.dart';
+import '../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../on_boarding/modules/qualification_details/widgets/yes_no_radio_button_widget.dart';
+import '../on_boarding/widgets/upload_document_widget.dart';
+import '../routes/app_router.gr.dart';
+import '../side_menu/side_menu_page.dart';
+import '../widget/custom_card.dart';
+import '../widget/custom_container.dart';
+import '../widget/custom_sizedbox.dart';
+import '../widget/custom_text.dart';
+import '../widget/details_text_field_with_label.dart';
+import '../widget/header_view.dart';
+import '../widget/loader_view.dart';
+
+@RoutePage()
+class VideoUploadPage extends StatefulWidget {
+  const VideoUploadPage(
+      {Key? key,
+      @QueryParam('view') this.isView,
+      @QueryParam('edit') this.isEdit,
+      @QueryParam('id') this.id})
+      : super(key: key);
+
+  /// To do change :- change these two variables to bool for now getting error like " NoSuchMethodError: 'toLowerCase"  when extracting using auto-route
+  final String? isView;
+  final String? isEdit;
+  final String? id;
+
+  @override
+  State<VideoUploadPage> createState() => _faqCreationPageState();
+}
+
+class _faqCreationPageState extends State<VideoUploadPage> {
+  final FocusNode questionFocusNode = FocusNode();
+  final FocusNode answerFocusNode = FocusNode();
+
+  late FaqCreationBloc _faqCreationBloc;
+
+  final AutovalidateMode _validateMode = AutovalidateMode.disabled;
+  final _formKey = GlobalKey<FormState>();
+  String adminUserID = "";
+  String adminId = "";
+
+  bool? _isView;
+
+  bool? _isEdit;
+  PlatformFile? file;
+  List<PlatformFile> bytesList = [];
+  List<String> docPathList = [];
+  bool listUpdated = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _faqCreationBloc = FaqCreationBloc(FaqCreationRepository());
+    adminUserID = SharedPreffUtil().getAdminId;
+    adminId =
+        autoTabRouter?.currentChild?.queryParams.getString("id", "") ?? "";
+    _faqCreationBloc.add(FaqCreationEvent.getFaq(id: adminId));
+    if (autoTabRouter!.currentChild!.queryParams
+        .getString('view', "")
+        .isNotEmpty) {
+      _isView = true;
+    } else {
+      _isView = false;
+    }
+    if (autoTabRouter!.currentChild!.queryParams
+        .getString('edit', "")
+        .isNotEmpty) {
+      _isEdit = true;
+    } else {
+      _isEdit = false;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: SharedPreffUtil().init(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const LoaderView();
+          }
+          return Column(
+            children: [
+              HeaderView(
+                title: AppString.videoUpload.val,
+              ),
+              CustomSizedBox(height: DBL.ten.val),
+              _rebuildView(),
+            ],
+          );
+        });
+  }
+
+  _rebuildView() {
+    return BlocProvider(
+      create: (context) => FaqCreationBloc(FaqCreationRepository()),
+      child: BlocBuilder<FaqCreationBloc, FaqCreationState>(
+        builder: (context, state) {
+          // return _bodyView(context, state);
+          return !state.isLoading
+              ? _bodyView(context, state)
+              : const LoaderView();
+        },
+      ),
+    );
+  }
+
+  _bodyView(BuildContext context, FaqCreationState state) {
+    // if (state.viewResponse != null) {
+    //   _questionController.text = state.viewResponse?.data?.firstName ?? "";
+    //   _answerController.text = state.viewResponse?.data?.lastName ?? "";
+    // }
+    return CustomPadding.symmetric(
+      horizontal: DBL.sixteen.val,
+      child: CustomCard(
+        shape: PR().roundedRectangleBorder(DBL.five.val),
+        elevation: DBL.seven.val,
+        child: CustomContainer(
+            padding: EdgeInsets.symmetric(
+                horizontal: DBL.forty.val, vertical: DBL.eighteen.val),
+            child: _createFaqView(state)),
+      ),
+    );
+  }
+
+  _createFaqView(FaqCreationState state) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _uploadDocumentWidget(),
+        CForm(
+          formKey: _formKey,
+          autoValidateMode: _validateMode,
+          child: Wrap(
+            alignment: WrapAlignment.start,
+            spacing: 20,
+            runSpacing: 20,
+            children: [
+              CustomSizedBox(
+                width: DBL.twoEighty.val,
+                child: DetailsTextFieldWithLabel(
+                  isIgnore: _isView!,
+                  isMandatory: true,
+                  maxLines: 20,
+                  labelName: AppString.title.val,
+                  focusNode: questionFocusNode,
+                  controller: _faqCreationBloc.questionController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return AppString.questionError.val;
+                    }
+                    return null;
+                  },
+                  textInputAction: TextInputAction.next,
+                  textInputType: TextInputType.text,
+                  suffixIcon: const CustomContainer(width: 0),
+                ),
+              ),
+              _uploadDocumentWidget(),
+              // CustomSizedBox(
+              //   width: DBL.twoEighty.val,
+              //   child: DetailsTextFieldWithLabel(
+              //     maxLines: 10,
+              //     isIgnore: _isView!,
+              //     isMandatory: true,
+              //     labelName: AppString.answer.val,
+              //     focusNode: answerFocusNode,
+              //     controller: _faqCreationBloc.answerController,
+              //     validator: (value) {
+              //       if (value == null || value.isEmpty) {
+              //         return AppString.answerError.val;
+              //       }
+              //       return null;
+              //     },
+              //     textInputAction: TextInputAction.next,
+              //     textInputType: TextInputType.text,
+              //     suffixIcon: const CustomContainer(width: 0),
+              //   ),
+              // ),
+              _forClientCheckBoxWidget(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CustomButton(
+                    height: DBL.fortyFive.val,
+                    minWidth: DBL.oneTwenty.val,
+                    onPressed: () {
+                      context.router.navigate(const FaqRoute());
+                    },
+                    text: AppString.cancel.val,
+                    color: AppColor.white.val,
+                    textColor: AppColor.primaryColor.val,
+                    borderWidth: 1,
+                  ),
+                  CustomSizedBox(width: DBL.twenty.val),
+                  !_isView!
+                      ? BlocBuilder<FaqCreationBloc, FaqCreationState>(
+                          builder: (context, state) {
+                            return CustomButton(
+                              isLoading: state.isLoadingButton,
+                              height: DBL.fortyFive.val,
+                              minWidth: DBL.oneTwenty.val,
+                              onPressed: () async {
+                                checkInputData(state);
+                              },
+                              text: _isEdit!
+                                  ? AppString.update.val
+                                  : AppString.save.val,
+                              color: AppColor.primaryColor.val,
+                              textColor: AppColor.white.val,
+                            );
+                          },
+                        )
+                      : CustomSizedBox.shrink(),
+                ],
+              ),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
+  _uploadDocumentWidget() {
+    return UploadDocumentWidget(
+      onTap: () async {
+        FilePickerResult? result = await FilePicker.platform.pickFiles(
+          type: FileType.custom,
+          allowedExtensions: [
+            'avi',
+            'flv',
+            'mkv',
+            'mov',
+            'mp4',
+            'mpeg',
+            'webm',
+            'wmv'
+          ],
+          withData: true,
+        );
+        if (result != null) {
+          file = result.files.single;
+          for (PlatformFile file in result.files) {
+            bytesList.add(file);
+            listUpdated = !listUpdated;
+            if (bytesList.length == 2) {
+              break;
+            }
+          }
+          // widget.onboardingBloc.add(
+          //   OnboardingEvent.securityDocumentUpload(bytesList, listUpdated),
+          // );
+        } else {
+          // User canceled the picker
+        }
+      },
+    );
+  }
+
+  _forClientCheckBoxWidget() {
+    return Row(
+      children: [
+        CustomText(AppString.videoFor.val,
+            style: TS().gRoboto(
+                fontWeight: FW.w400.val,
+                color: AppColor.label8.val,
+                fontSize: FS.font14.val)),
+        const CustomSizedBox(width: 20),
+        BlocBuilder<FaqCreationBloc, FaqCreationState>(
+          builder: (context, state) {
+            return YesNoRadioButtonWidget(
+              yesLabel: AppString.forClient.val,
+              noLabel: AppString.forCa.val,
+              onChanged: (val) {
+                BlocProvider.of<FaqCreationBloc>(context)
+                    .add(FaqCreationEvent.radioForClient(isSelected: val ?? 0));
+              },
+              groupValue: state.isForClient,
+            );
+          },
+        )
+      ],
+    );
+  }
+
+  checkInputData(FaqCreationState state) {
+    if (_formKey.currentState!.validate()) {
+      print('id:: ${adminUserID}');
+      if (_isEdit!) {
+        _faqCreationBloc.add(FaqCreationEvent.updateFaq(
+            id: adminId,
+            question: _faqCreationBloc.questionController.text.trim(),
+            answer: _faqCreationBloc.answerController.text.trim(),
+            status: "true",
+            forClient: state.isForClient == 0 ? true : false,
+            context: context));
+      } else {
+        _faqCreationBloc.add(FaqCreationEvent.addFaq(
+          context: context,
+          question: _faqCreationBloc.questionController.text.trim(),
+          answer: _faqCreationBloc.answerController.text.trim(),
+          status: "true",
+          forClient: state.isForClient == 0 ? true : false,
+        ));
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _faqCreationBloc.questionController.dispose();
+    _faqCreationBloc.answerController.dispose();
+
+    super.dispose();
+  }
+}

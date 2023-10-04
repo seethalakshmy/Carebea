@@ -59,6 +59,7 @@ import '../transaction_management/model/transaction_details_response.dart';
 import '../transaction_management/model/transaction_list_response.dart';
 import '../user_management/model/user_list_response.dart';
 import '../user_management_detail/model/client_service_response.dart';
+import '../video_management/models/video_management_response.dart';
 
 part 'api_client.g.dart';
 
@@ -715,4 +716,19 @@ abstract class ApiClient {
       @Field('limit') String limit,
       @Field('search_term') String searchTerm,
       @Field('subscription_type') dynamic subscriptionType);
+
+  @GET("/admin/get-general-settings?")
+  Future<VideoManagementResponse> getGeneralSettings(
+    @Query("user_id") String userId,
+  );
+
+  // @POST('/admin/add-general-settings')
+  // Future<SubscriptionModel> addVideo(
+  //     @Field('admin_id') String adminId,
+  //     @Field('settings_id') String settingsId,
+  //     @Field('title') String title,
+  //     @Field('description') String description,
+  //     @Field('attachment') String attachment
+  //     @Field('user_type') int userType
+  //     );
 }
