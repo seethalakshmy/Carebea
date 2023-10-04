@@ -3,6 +3,8 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../domain/complaints/model/complaints_list_response_model.dart';
+import '../../../domain/complaints/model/final_result.dart';
+import '../../../domain/complaints/model/pagination.dart';
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
 import '../../../infrastructure/complaints/complaints_repository.dart';
 

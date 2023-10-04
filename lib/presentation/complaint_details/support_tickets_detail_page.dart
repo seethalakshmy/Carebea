@@ -9,7 +9,7 @@ import '../../application/bloc/complaint_details/complaint_detail_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
-import '../../domain/transaction_management/model/transaction_list_response.dart';
+import '../../domain/transaction_management/model/transactions.dart';
 import '../caregiver_detail/widgets/svg_text.dart';
 import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';

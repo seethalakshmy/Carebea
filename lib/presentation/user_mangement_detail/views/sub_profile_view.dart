@@ -90,6 +90,11 @@ class SubProfileView extends StatelessWidget {
                 text: AppString.totalServiceCompleted.val,
                 fontWeight: FontWeight.bold),
           ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.subscription.val, fontWeight: FontWeight.bold),
+          ),
           const DataColumn2(
             size: ColumnSize.L,
             label: CustomText(""),
@@ -114,6 +119,8 @@ class SubProfileView extends StatelessWidget {
                   age: item.age ?? '')),
               DataCell(
                   _rowsView(context, text: item.completedServices?.toString())),
+              DataCell(_rowsView(context,
+                  icon: item.isSubscribed == true ? Icons.check : Icons.close)),
               DataCell(InkWell(
                   onTap: () {
                     autoTabRouter
@@ -141,18 +148,25 @@ class SubProfileView extends StatelessWidget {
   Widget _rowsView(
     BuildContext context, {
     String? text,
+    IconData? icon,
   }) {
-    return CustomText(
-      '$text',
-      softWrap: true,
-      style: TS().gRoboto(
-          fontSize: Responsive.isWeb(context)
-              ? DBL.thirteenPointFive.val
-              : DBL.twelve.val,
-          fontWeight: FW.w400.val,
-          color: AppColor.rowColor.val),
-      textAlign: TextAlign.start,
-    );
+    return icon == null
+        ? CustomText(
+            '$text',
+            softWrap: true,
+            style: TS().gRoboto(
+                fontSize: Responsive.isWeb(context)
+                    ? DBL.thirteenPointFive.val
+                    : DBL.twelve.val,
+                fontWeight: FW.w400.val,
+                color: AppColor.rowColor.val),
+            textAlign: TextAlign.start,
+          )
+        : Icon(
+            icon,
+            size: 12,
+            color: AppColor.darkGrey.val,
+          );
   }
 
   Widget _columnsView(BuildContext context,

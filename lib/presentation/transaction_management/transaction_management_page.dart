@@ -14,8 +14,10 @@ import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
 import '../../domain/transaction_management/model/transaction_list_response.dart';
+import '../../domain/transaction_management/model/transactions.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../widget/custom_alert_dialog_widget.dart';
+import '../widget/custom_button.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_data_table_2.dart';
@@ -64,7 +66,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
         future: SharedPreffUtil().init(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return LoaderView();
+            return const LoaderView();
           }
           adminId = SharedPreffUtil().getAdminId;
           if (sharedPrefUtil.getPage != 0) {
@@ -233,6 +235,27 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
             ]));
   }
 
+  _clearAllFiltersButtonWidget() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 20.0),
+      child: CustomSizedBox(
+        height: DBL.forty.val,
+        child: CustomButton(
+          onPressed: () {
+            _searchController.clear();
+            _transactionBloc.add(TransactionManagementEvent.getTransactions(
+                page: _transactionBloc.paginationPage.toString(),
+                limit: _transactionBloc.limit,
+                searchTerm: "",
+                filterId: 0,
+                userId: adminId ?? ''));
+          },
+          text: AppString.clearFilters.val,
+        ),
+      ),
+    );
+  }
+
   _transactionsView(BuildContext context, TransactionListResponse? value) {
     if (value?.status ?? false) {
       if (value?.data?.transactions != null &&
@@ -247,9 +270,6 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _transactionBloc.state.isInitialLoading
-                      ? _filterLoader()
-                      : _statusDropDown(context),
                   /*CustomText(
                     AppString.allTransactions.val,
                     softWrap: true,
@@ -261,6 +281,16 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                         color: AppColor.black.val),
                     textAlign: TextAlign.start,
                   ),*/
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      _transactionBloc.state.isInitialLoading
+                          ? _filterLoader()
+                          : _statusDropDown(context),
+                      CustomSizedBox(width: DBL.fifteen.val),
+                      _clearAllFiltersButtonWidget(),
+                    ],
+                  ),
                   CTextField(
                     onChanged: (val) {
                       print("searched value : $val");
@@ -271,7 +301,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                               limit: _transactionBloc.limit,
                               filterId: _transactionBloc.filterId,
                               searchTerm: val,
-                              userId: ''));
+                              userId: adminId ?? ''));
                     },
                     width: Responsive.isWeb(context)
                         ? DBL.threeFifteen.val
@@ -425,9 +455,9 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                 text: _transactionBloc.pageIndex.toString(),
               )),
               DataCell(_rowsView(
-                text: item.transactionId.toString(),
+                text: item.transactionIdPublic.toString(),
               )),
-              DataCell(_rowsView(text: item.serviceId.toString())),
+              DataCell(_rowsView(text: item.serviceIdPublic.toString())),
               DataCell(_rowsView(text: item.transactionType)),
               DataCell(_rowsView(text: item.paidFor)),
               DataCell(_rowsView(text: item.paidTo)),

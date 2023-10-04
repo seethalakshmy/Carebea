@@ -2809,6 +2809,41 @@ class _ApiClient implements ApiClient {
     return value;
   }
 
+  @override
+  Future<SubscriptionModel> getSubscribedClients(
+    userId,
+    page,
+    limit,
+    searchTerm,
+    subscriptionType,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'page': page,
+      'limit': limit,
+      'search_term': searchTerm,
+      'subscription_type': subscriptionType,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SubscriptionModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-subscribed-clients',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SubscriptionModel.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

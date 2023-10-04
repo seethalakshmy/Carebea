@@ -20,6 +20,13 @@ enum AppString {
   extraServiceCharge("Extra Service Charge"),
   cancelReason("Cancel Reason"),
   subscription("Subscription"),
+  monthly("Monthly"),
+  annually("Annually"),
+  semiAnnually("Semi Annually"),
+  subscriptionId("Subscription Id"),
+  subscriptionDetails("Subscription Details"),
+  paymentType("Payment Type"),
+
   dosage("Dosage"),
   frequency("Frequency"),
   expirationDate("Expiration date"),
