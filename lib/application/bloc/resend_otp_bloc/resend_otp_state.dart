@@ -8,6 +8,6 @@ class ResendOtpState with _$ResendOtpState {
 
   const factory ResendOtpState.failed({required String error}) = _Failed;
 
-  const factory ResendOtpState.success({required CommonResponse data}) =
+  const factory ResendOtpState.success({required ResendOTPResponse data}) =
       _Success;
 }

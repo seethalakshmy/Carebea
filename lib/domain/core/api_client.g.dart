@@ -1338,7 +1338,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<CommonResponse> resendOTP(
+  Future<ResendOTPResponse> resendOTP(
     userId,
     type,
   ) async {
@@ -1350,7 +1350,7 @@ class _ApiClient implements ApiClient {
       'type': type,
     };
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<ResendOTPResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -1362,7 +1362,7 @@ class _ApiClient implements ApiClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CommonResponse.fromJson(_result.data!);
+    final value = ResendOTPResponse.fromJson(_result.data!);
     return value;
   }
 

@@ -110,9 +110,12 @@
 //   }
 // }
 
+import 'dart:html' as web;
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../application/bloc/caregiver_submit_agreement/caregiver_submit_agreement_bloc.dart';
 import '../../../../application/bloc/onboarding/onboarding_bloc.dart';
@@ -163,12 +166,20 @@ class _HomeHealthAidAgreementViewState
             failed: (error) {
               CSnackBar.showError(context, msg: error);
             },
-            success: (data) {
+            success: (data) async {
               widget.onboardingBloc.add(
                 OnboardingEvent.securityDocumentUpload(bytesList, listUpdated),
               );
-              widget.pageController
-                  .jumpToPage(widget.pageController.page!.toInt() + 1);
+              // context.router.navigate(const CaregiverCreationRoute());
+              // widget.pageController
+              //     .jumpToPage(widget.pageController.page!.toInt() + 1);
+              final uri = Uri.parse("http://43.204.9.191");
+              if (await canLaunchUrl(uri)) {
+                final a = await launchUrl(uri);
+                if (a) {
+                  web.window.close();
+                }
+              }
             });
       },
       child: CommonPaddingWidget(

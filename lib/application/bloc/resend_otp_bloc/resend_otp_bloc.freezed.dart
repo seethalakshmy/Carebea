@@ -242,7 +242,7 @@ mixin _$ResendOtpState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String error) failed,
-    required TResult Function(CommonResponse data) success,
+    required TResult Function(ResendOTPResponse data) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -250,7 +250,7 @@ mixin _$ResendOtpState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String error)? failed,
-    TResult? Function(CommonResponse data)? success,
+    TResult? Function(ResendOTPResponse data)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -258,7 +258,7 @@ mixin _$ResendOtpState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String error)? failed,
-    TResult Function(CommonResponse data)? success,
+    TResult Function(ResendOTPResponse data)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -347,7 +347,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String error) failed,
-    required TResult Function(CommonResponse data) success,
+    required TResult Function(ResendOTPResponse data) success,
   }) {
     return initial();
   }
@@ -358,7 +358,7 @@ class _$_Initial implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String error)? failed,
-    TResult? Function(CommonResponse data)? success,
+    TResult? Function(ResendOTPResponse data)? success,
   }) {
     return initial?.call();
   }
@@ -369,7 +369,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String error)? failed,
-    TResult Function(CommonResponse data)? success,
+    TResult Function(ResendOTPResponse data)? success,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -460,7 +460,7 @@ class _$_Loading implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String error) failed,
-    required TResult Function(CommonResponse data) success,
+    required TResult Function(ResendOTPResponse data) success,
   }) {
     return loading();
   }
@@ -471,7 +471,7 @@ class _$_Loading implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String error)? failed,
-    TResult? Function(CommonResponse data)? success,
+    TResult? Function(ResendOTPResponse data)? success,
   }) {
     return loading?.call();
   }
@@ -482,7 +482,7 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String error)? failed,
-    TResult Function(CommonResponse data)? success,
+    TResult Function(ResendOTPResponse data)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -598,7 +598,7 @@ class _$_Failed implements _Failed {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String error) failed,
-    required TResult Function(CommonResponse data) success,
+    required TResult Function(ResendOTPResponse data) success,
   }) {
     return failed(error);
   }
@@ -609,7 +609,7 @@ class _$_Failed implements _Failed {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String error)? failed,
-    TResult? Function(CommonResponse data)? success,
+    TResult? Function(ResendOTPResponse data)? success,
   }) {
     return failed?.call(error);
   }
@@ -620,7 +620,7 @@ class _$_Failed implements _Failed {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String error)? failed,
-    TResult Function(CommonResponse data)? success,
+    TResult Function(ResendOTPResponse data)? success,
     required TResult orElse(),
   }) {
     if (failed != null) {
@@ -682,7 +682,9 @@ abstract class _$$_SuccessCopyWith<$Res> {
           _$_Success value, $Res Function(_$_Success) then) =
       __$$_SuccessCopyWithImpl<$Res>;
   @useResult
-  $Res call({CommonResponse data});
+  $Res call({ResendOTPResponse data});
+
+  $ResendOTPResponseCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -701,8 +703,16 @@ class __$$_SuccessCopyWithImpl<$Res>
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as CommonResponse,
+              as ResendOTPResponse,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ResendOTPResponseCopyWith<$Res> get data {
+    return $ResendOTPResponseCopyWith<$Res>(_value.data, (value) {
+      return _then(_value.copyWith(data: value));
+    });
   }
 }
 
@@ -712,7 +722,7 @@ class _$_Success implements _Success {
   const _$_Success({required this.data});
 
   @override
-  final CommonResponse data;
+  final ResendOTPResponse data;
 
   @override
   String toString() {
@@ -742,7 +752,7 @@ class _$_Success implements _Success {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String error) failed,
-    required TResult Function(CommonResponse data) success,
+    required TResult Function(ResendOTPResponse data) success,
   }) {
     return success(data);
   }
@@ -753,7 +763,7 @@ class _$_Success implements _Success {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String error)? failed,
-    TResult? Function(CommonResponse data)? success,
+    TResult? Function(ResendOTPResponse data)? success,
   }) {
     return success?.call(data);
   }
@@ -764,7 +774,7 @@ class _$_Success implements _Success {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String error)? failed,
-    TResult Function(CommonResponse data)? success,
+    TResult Function(ResendOTPResponse data)? success,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -812,9 +822,9 @@ class _$_Success implements _Success {
 }
 
 abstract class _Success implements ResendOtpState {
-  const factory _Success({required final CommonResponse data}) = _$_Success;
+  const factory _Success({required final ResendOTPResponse data}) = _$_Success;
 
-  CommonResponse get data;
+  ResendOTPResponse get data;
   @JsonKey(ignore: true)
   _$$_SuccessCopyWith<_$_Success> get copyWith =>
       throw _privateConstructorUsedError;
