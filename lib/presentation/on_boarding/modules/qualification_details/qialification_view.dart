@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/custom_snackbar.dart';
 import '../../../../core/enum.dart';
+import '../../../../core/time_utils.dart';
 import '../../../../infrastructure/api_service_s3.dart';
 import '../../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
@@ -419,7 +420,8 @@ class _QualificationViewState extends State<QualificationView> {
             hhaDetails: widget.onboardingBloc.state.isHHASelected == 0
                 ? HhaDetails(
                     document: widget.onboardingBloc.uploadedHhaDocList,
-                    expiryDate: widget.onboardingBloc.formatDate(hhaDateController.text.trim()),
+                    expiryDate: TimeUtils.dateInMMDDYYYYToDDMMYYY(
+                        hhaDateController.text.trim()),
                     hhaNumber: hhaController.text.trim())
                 : HhaDetails(hhaNumber: "", expiryDate: "", document: []),
             haveBlsCertificate:
@@ -428,7 +430,8 @@ class _QualificationViewState extends State<QualificationView> {
                 ? BlsOrFirstAidCertificateDetails(
                     document: widget.onboardingBloc.uploadedBlsDocList,
                     certificationNumber: blsController.text.trim(),
-                    expiryDate: widget.onboardingBloc.formatDate(blsDateController.text.trim()))
+                    expiryDate: TimeUtils.dateInMMDDYYYYToDDMMYYY(
+                        blsDateController.text.trim()))
                 : BlsOrFirstAidCertificateDetails(
                     document: [], certificationNumber: "", expiryDate: ""),
             haveTbTest:
@@ -437,15 +440,11 @@ class _QualificationViewState extends State<QualificationView> {
                 ? TbOrPpdTestDetails(
                     document: widget.onboardingBloc.uploadedTbDocList,
                     result: tbPpdController.text.trim(),
-                    date: widget.onboardingBloc.formatDate(tbPpdDateController.text.trim()))
+                    date:
+                        TimeUtils.dateInMMDDYYYYToDDMMYYY(tbPpdDateController.text.trim()))
                 : TbOrPpdTestDetails(document: [], result: "", date: ""),
-            haveCovidVaccination:
-                widget.onboardingBloc.state.isCovidSelected == 0 ? true : false,
-            covidDetails: widget.onboardingBloc.state.isCovidSelected == 0
-                ? CovidVaccinationDetails(
-                    document: widget.onboardingBloc.uploadedCovidDocList,
-                    date: widget.onboardingBloc.formatDate(covidDateController.text.trim()))
-                : CovidVaccinationDetails(document: [], date: "")),
+            haveCovidVaccination: widget.onboardingBloc.state.isCovidSelected == 0 ? true : false,
+            covidDetails: widget.onboardingBloc.state.isCovidSelected == 0 ? CovidVaccinationDetails(document: widget.onboardingBloc.uploadedCovidDocList, date: TimeUtils.dateInMMDDYYYYToDDMMYYY(covidDateController.text.trim())) : CovidVaccinationDetails(document: [], date: "")),
       );
     }
   }

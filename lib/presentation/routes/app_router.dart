@@ -1,5 +1,4 @@
 import 'package:admin_580_tech/presentation/routes/gurad.dart';
-import 'package:admin_580_tech/presentation/subscription/subscription_view.dart';
 import 'package:auto_route/auto_route.dart';
 
 import 'app_router.gr.dart';
@@ -27,6 +26,17 @@ class AppRouter extends $AppRouter {
       maintainState: true,
       initial: true,
     ),*/
+    // AutoRoute(
+    //   path: "/care-ambassador-registration",
+    //   page: CareAmbassadorRegistrationRoute.page,
+    //   maintainState: true,
+    // ),
+    AutoRoute(
+      path: "/signup",
+      page: SignUpRoute.page,
+      maintainState: true,
+      // initial: true,
+    ),
     AutoRoute(
       path: "/email-otp-verification",
       page: EmailOtpVerificationRoute.page,
@@ -51,6 +61,7 @@ class AppRouter extends $AppRouter {
         page: DashboardRoute.page,
         initial: true,
       ),
+      AutoRoute(path: 'dashboard', page: DashboardRoute.page, initial: false),
       AutoRoute(
           path: 'care-ambassador',
           page: CareGiversRoute.page,

@@ -44,6 +44,7 @@ import '../faq_creation/models/faq_details_response_model.dart';
 import '../on_boarding/models/common_response.dart';
 import '../on_boarding/models/preferences/pet_list_response.dart';
 import '../on_boarding/models/preferences/years_of_experience_response.dart';
+import '../on_boarding/models/resend_otp_response.dart';
 import '../on_boarding/models/services/get_services_response.dart';
 import '../role_creation/model/module_response.dart';
 import '../role_creation/model/view_role_response.dart';
@@ -206,35 +207,67 @@ abstract class ApiClient {
     @Field('profile_picture') String profilePicture,
   );
 
+  @POST("/care-giver/agreement")
+  Future<CommonResponse> createCareGiverAgreement(
+    @Header("Authorization") String token,
+    @Field('user_id') String userId,
+    @Field('signature') String signature,
+  );
+
+  @GET("/care-giver/agreement")
+  Future<CommonResponse> getCareGiverAgreement(
+    @Header("Authorization") String token,
+    @Field('user_id') String userId,
+  );
+
   @POST("/admin/admin-cg-qualification")
   Future<CommonResponse> getQualifications(
-    @Field('user_id') String userId,
-    @Field('have_hha_registration') bool haveHHARegistration,
-    @Field('hha_details') HhaDetails hhaDetails,
-    @Field('bls_or_first_aid_certificate') bool haveBLSCertificate,
+    @Field('user_id')
+        String userId,
+    @Field('have_hha_registration')
+        bool haveHHARegistration,
+    @Field('hha_details')
+        HhaDetails hhaDetails,
+    @Field('bls_or_first_aid_certificate')
+        bool haveBLSCertificate,
     @Field('bls_or_first_aid_certificate_details')
-    BlsOrFirstAidCertificateDetails blsDetails,
-    @Field('tb_or_ppd_test') bool haveTBTest,
-    @Field('tb_or_ppd_test_details') TbOrPpdTestDetails tbDetails,
-    @Field('covid_vaccination') bool haveCovidVaccination,
-    @Field('covid_vaccination_details') CovidVaccinationDetails covidDetails,
-    @Field('is_reupload') bool isReUpload,
+        BlsOrFirstAidCertificateDetails blsDetails,
+    @Field('tb_or_ppd_test')
+        bool haveTBTest,
+    @Field('tb_or_ppd_test_details')
+        TbOrPpdTestDetails tbDetails,
+    @Field('covid_vaccination')
+        bool haveCovidVaccination,
+    @Field('covid_vaccination_details')
+        CovidVaccinationDetails covidDetails,
+    @Field('is_reupload')
+        bool isReUpload,
   );
 
   @POST("/care-giver/qualification")
   Future<CommonResponse> getQualificationsWebsite(
-    @Header("Authorization") String token,
-    @Field('user_id') String userId,
-    @Field('have_hha_registration') bool haveHHARegistration,
-    @Field('hha_details') HhaDetails hhaDetails,
-    @Field('bls_or_first_aid_certificate') bool haveBLSCertificate,
+    @Header("Authorization")
+        String token,
+    @Field('user_id')
+        String userId,
+    @Field('have_hha_registration')
+        bool haveHHARegistration,
+    @Field('hha_details')
+        HhaDetails hhaDetails,
+    @Field('bls_or_first_aid_certificate')
+        bool haveBLSCertificate,
     @Field('bls_or_first_aid_certificate_details')
-    BlsOrFirstAidCertificateDetails blsDetails,
-    @Field('tb_or_ppd_test') bool haveTBTest,
-    @Field('tb_or_ppd_test_details') TbOrPpdTestDetails tbDetails,
-    @Field('covid_vaccination') bool haveCovidVaccination,
-    @Field('covid_vaccination_details') CovidVaccinationDetails covidDetails,
-    @Field('is_reupload') bool isReUpload,
+        BlsOrFirstAidCertificateDetails blsDetails,
+    @Field('tb_or_ppd_test')
+        bool haveTBTest,
+    @Field('tb_or_ppd_test_details')
+        TbOrPpdTestDetails tbDetails,
+    @Field('covid_vaccination')
+        bool haveCovidVaccination,
+    @Field('covid_vaccination_details')
+        CovidVaccinationDetails covidDetails,
+    @Field('is_reupload')
+        bool isReUpload,
   );
 
   @POST("/admin/admin-cg-preferences")
@@ -383,6 +416,12 @@ abstract class ApiClient {
     @Field('user_id') String userId,
     @Field('type') int type,
     @Field('otp') String otp,
+  );
+
+  @POST("/resend-otp")
+  Future<ResendOTPResponse> resendOTP(
+    @Field('user_id') String userId,
+    @Field('type') int type,
   );
 
   @POST("/sign-up")

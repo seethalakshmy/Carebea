@@ -1,9 +1,6 @@
-import 'package:admin_580_tech/presentation/on_boarding/widgets/common_padding_widget.dart';
-import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +9,8 @@ import '../../../../core/enum.dart';
 import '../../../../core/text_styles.dart';
 import '../../application/bloc/email-otp-verification/email_otp_verification_bloc.dart';
 import '../../application/bloc/form_validation/form_validation_bloc.dart';
+import '../../application/bloc/resend_otp_bloc/resend_otp_bloc.dart';
+import '../../core/custom_snackbar.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../on_boarding/widgets/on_boarding_title_divider_widget.dart';
 import '../widget/custom_material_button.dart';
@@ -41,22 +40,60 @@ class _MobileOtpVerificationPageState extends State<MobileOtpVerificationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: CForm(
-          formKey: _formKey,
-          autoValidateMode: _validateMode,
-          child: Column(
-            children: [
-              OnBoardingTitleDividerWidget(
-                  title: AppString.optVerification.val),
-              _OtpLabel(),
-              _otpTextFormView(),
-              SizedBox(
-                height: 10,
-              ),
-              _verifyButton()
-            ],
+    return BlocListener<ResendOtpBloc, ResendOtpState>(
+      listener: (context, state) {
+        state.when(
+            initial: () {},
+            loading: () {},
+            failed: (error) {
+              CSnackBar.showError(context, msg: error);
+            },
+            success: (data) {
+              CSnackBar.showSuccess(context, msg: "Resend OTP Success");
+              CSnackBar.showSuccess(context, msg: "OTP is ${data.data}");
+            });
+      },
+      child: Scaffold(
+        body: Center(
+          child: CForm(
+            formKey: _formKey,
+            autoValidateMode: _validateMode,
+            child: Column(
+              children: [
+                OnBoardingTitleDividerWidget(
+                    title: AppString.optVerification.val),
+                _OtpLabel(),
+                _otpTextFormView(),
+                SizedBox(
+                  height: DBL.sixty.val,
+                  width: DBL.fourFifty.val,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                          onPressed: () {
+                            context.read<ResendOtpBloc>().add(ResendOtpEvent.resend(
+                                userId: sharedPreffUtil.getAdminId,
+                                type:
+                                    2)); // Type 0=>registration, 1=>forgotPassword, 2=> verify phone number
+                          },
+                          child: Text(
+                            AppString.resentOTP.val,
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(
+                                    decoration: TextDecoration.underline),
+                          ))
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                _verifyButton()
+              ],
+            ),
           ),
         ),
       ),

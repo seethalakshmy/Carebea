@@ -1,13 +1,3 @@
-import 'package:admin_580_tech/core/custom_snackbar.dart';
-import 'package:admin_580_tech/infrastructure/on_boarding/on_boarding_repository.dart';
-import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/address_selection_widget.dart';
-import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/profile_picture_widget.dart';
-import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/social_security_number_formatter.dart';
-import 'package:admin_580_tech/presentation/on_boarding/modules/personal_details/widgets/zip_code_formatter.dart';
-import 'package:admin_580_tech/presentation/on_boarding/widgets/upload_document_widget.dart';
-import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
-import 'package:admin_580_tech/presentation/widget/custom_form.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,14 +5,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../../../application/bloc/onboarding/onboarding_bloc.dart';
+import '../../../../core/custom_snackbar.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
+import '../../../../core/time_utils.dart';
 import '../../../../infrastructure/api_service_s3.dart';
+import '../../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../../widget/common_date_picker_widget.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
 import '../../../widget/custom_container.dart';
+import '../../../widget/custom_form.dart';
 import '../../../widget/custom_shimmer.dart';
 import '../../../widget/custom_sizedbox.dart';
 import '../../../widget/custom_text.dart';
@@ -34,10 +28,15 @@ import '../../widgets/file_preview_widget.dart';
 import '../../widgets/gender_drop_down.dart';
 import '../../widgets/image_preview_widget.dart';
 import '../../widgets/on_boarding_title_divider_widget.dart';
+import '../../widgets/upload_document_widget.dart';
+import 'widgets/address_selection_widget.dart';
 import 'widgets/document_details_view.dart';
+import 'widgets/profile_picture_widget.dart';
+import 'widgets/social_security_number_formatter.dart';
+import 'widgets/zip_code_formatter.dart';
 
 class PersonalDetailsView extends StatefulWidget {
-  PersonalDetailsView(
+  const PersonalDetailsView(
       {Key? key, required this.onboardingBloc, required this.pageController})
       : super(key: key);
   final OnboardingBloc onboardingBloc;
@@ -73,7 +72,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   List<String> docPathList = [];
   bool listUpdated = false;
 
-  AutovalidateMode _validateMode = AutovalidateMode.disabled;
+  final AutovalidateMode _validateMode = AutovalidateMode.disabled;
   FormValidationBloc formValidationBloc = FormValidationBloc();
   final _formKey = GlobalKey<FormState>();
 
@@ -387,6 +386,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                       fontWeight: FW.w400.val,
                       color: AppColor.label.val,
                       fontSize: FS.font16.val),
+                  maxLength: 50,
                   validator: (val) {
                     if (val?.trim() == null || val!.trim().isEmpty) {
                       return AppString.emptyAddress.val;
@@ -419,10 +419,12 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                 width: DBL.twoEighty.val,
                 height: DBL.fifty.val,
                 child: AddressSelectionWidget(
-                  onAddressSelect: (address, lat, lng) {
-                    /*controller.latitude = lat;
-                    controller.longitude = lng;
-                    controller.location(address);*/
+                  onAddressSelect: (selectedAddress) {
+                    streetController.text = selectedAddress.streetNumber ?? "";
+                    zipController.text = selectedAddress.zipCode ?? "";
+                    citySearchController.text = selectedAddress.locality ?? "";
+                    stateSearchController.text =
+                        selectedAddress.stateName ?? "";
                   },
                   address: "",
                 ),
@@ -480,7 +482,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                 onSearchChanged: (val) {
                   widget.onboardingBloc.statePage = 1;
                   widget.onboardingBloc.add(OnboardingEvent.stateList(
-                      stateSearchQuery: val, wantLoading: false));
+                      stateSearchQuery: val.toString().toLowerCase(),
+                      wantLoading: false));
                 },
                 searchController: stateSearchController,
                 errorText: widget.onboardingBloc.state.nextClicked
@@ -555,7 +558,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return AppString.emptyZip.val;
-                    } else if (value.length < 10) {
+                    } else if (value.length != 9 && value.length != 5) {
                       return AppString.invalidZip.val;
                     }
                     return null;
@@ -622,6 +625,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           withData: true,
         );
         if (result != null) {
+          bytesList.clear();
           file = result.files.single;
           for (PlatformFile file in result.files) {
             bytesList.add(file);
@@ -649,7 +653,9 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           leftButtonName: AppString.back.val,
           rightButtonName: AppString.next.val,
           onLeftButtonPressed: () {
-            context.router.navigate(const CaregiverCreationRoute());
+            // context.router.navigate(const CaregiverCreationRoute());
+            widget.pageController
+                .jumpToPage(widget.pageController.page!.toInt() - 1);
           },
           onRightButtonPressed: () async {
             widget.onboardingBloc.nextButtonClicked = true;
@@ -670,7 +676,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
               await uploadProfilePicToAwsS3(AppString.profilePicture.val,
                   SharedPreffUtil().getCareGiverUserId);
             }
-            if (bytesList.isNotEmpty) {
+            if (bytesList.length <= 1) {
               for (int i = 0; i < bytesList.length; i++) {
                 await uploadDocumentsToAwsS3(AppString.documents.val,
                     SharedPreffUtil().getCareGiverUserId, bytesList[i]);
@@ -702,11 +708,17 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
     final userId = SharedPreffUtil().getCareGiverUserId;
     if (_formKey.currentState!.validate() &&
         widget.onboardingBloc.profileUrl.isNotEmpty) {
+      final expiryDate = expiryDateController.text;
+      final dob = dobController.text;
+
+      final expiryDateInDDMMYY = TimeUtils.dateInMMDDYYYYToDDMMYYY(expiryDate);
+      final dobInDDMMYY = TimeUtils.dateInMMDDYYYYToDDMMYYY(dob);
+
       widget.onboardingBloc.add(OnboardingEvent.personalDetails(
           userId: sharedPreffUtil.getIsFromWebsite == true
               ? sharedPreffUtil.getAdminId
               : userId,
-          dob: widget.onboardingBloc.formatDate(dobController.text.trim()),
+          dob: dobInDDMMYY,
           genderId: int.parse(selectedGender),
           street: streetController.text.trim(),
           cityId: selectedCity,
@@ -718,9 +730,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           socialSecurityNo: socialSecurityNumberController.text.trim(),
           documentId: selectedDocument,
           documentNo: documentNumberController.text.trim(),
-          expiryDate: widget.onboardingBloc
-              .formatDate(expiryDateController.text.trim()),
-          documentList: widget.onboardingBloc.uploadedDocumentList,
+          expiryDate: expiryDateInDDMMYY,
+          documentList: [widget.onboardingBloc.uploadedDocumentList.first],
           profilePic: widget.onboardingBloc.profileUrl));
     }
   }

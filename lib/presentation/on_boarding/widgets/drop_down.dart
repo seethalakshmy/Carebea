@@ -234,6 +234,7 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
                                       ))
                                   : Container(),
                               Flexible(
+                                flex: 3,
                                 child: ListView(
                                   controller: widget.scrollController,
                                   padding: widget.dropdownStyle.padding ??
