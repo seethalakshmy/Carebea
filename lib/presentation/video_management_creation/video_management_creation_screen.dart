@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:admin_580_tech/infrastructure/faq_creation/faq_creation_repository.dart';
+import 'package:admin_580_tech/infrastructure/upload_video/upload_video_repository.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
@@ -8,9 +11,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/faq-creation/faq_creation_bloc.dart';
+import '../../application/bloc/upload_video/upload_video_bloc.dart';
+import '../../core/custom_snackbar.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
+import '../../domain/admin_creation/model/admin_view_response.dart';
+import '../../infrastructure/api_service_s3.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../on_boarding/modules/qualification_details/widgets/yes_no_radio_button_widget.dart';
 import '../on_boarding/widgets/upload_document_widget.dart';
@@ -28,32 +35,36 @@ import '../widget/loader_view.dart';
 class VideoUploadPage extends StatefulWidget {
   const VideoUploadPage(
       {Key? key,
-      @QueryParam('view') this.isView,
       @QueryParam('edit') this.isEdit,
+      @QueryParam('title') this.title,
+      @QueryParam('type') this.type,
+      @QueryParam('attachment') this.attachment,
       @QueryParam('id') this.id})
       : super(key: key);
 
   /// To do change :- change these two variables to bool for now getting error like " NoSuchMethodError: 'toLowerCase"  when extracting using auto-route
-  final String? isView;
   final String? isEdit;
   final String? id;
+  final String? title;
+  final num? type;
+  final String? attachment;
 
   @override
-  State<VideoUploadPage> createState() => _faqCreationPageState();
+  State<VideoUploadPage> createState() => _VideoUploadPageState();
 }
 
-class _faqCreationPageState extends State<VideoUploadPage> {
-  final FocusNode questionFocusNode = FocusNode();
-  final FocusNode answerFocusNode = FocusNode();
+class _VideoUploadPageState extends State<VideoUploadPage> {
+  final FocusNode titleFocusNode = FocusNode();
 
-  late FaqCreationBloc _faqCreationBloc;
+  late UploadVideoBloc _videoBloc;
 
   final AutovalidateMode _validateMode = AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
   String adminUserID = "";
-  String adminId = "";
-
-  bool? _isView;
+  String settingsId = "";
+  String title = "";
+  num type = 0;
+  String attachment = "";
 
   bool? _isEdit;
   PlatformFile? file;
@@ -64,18 +75,21 @@ class _faqCreationPageState extends State<VideoUploadPage> {
   @override
   void initState() {
     super.initState();
-    _faqCreationBloc = FaqCreationBloc(FaqCreationRepository());
+    _videoBloc = UploadVideoBloc(UploadVideoRepository());
     adminUserID = SharedPreffUtil().getAdminId;
-    adminId =
+    settingsId =
         autoTabRouter?.currentChild?.queryParams.getString("id", "") ?? "";
-    _faqCreationBloc.add(FaqCreationEvent.getFaq(id: adminId));
-    if (autoTabRouter!.currentChild!.queryParams
-        .getString('view', "")
-        .isNotEmpty) {
-      _isView = true;
-    } else {
-      _isView = false;
-    }
+    print('testing 12 ${settingsId}');
+    print('testing 123 ${_isEdit}');
+    print('testing 123 $title');
+    _videoBloc.title.text =
+        autoTabRouter?.currentChild?.queryParams.getString("title") ?? '';
+    type = autoTabRouter?.currentChild?.queryParams.getNum("type") ?? 0;
+    attachment =
+        autoTabRouter?.currentChild?.queryParams.getString("attachment") ?? '';
+
+    // _faqCreationBloc.add(FaqCreationEvent.getFaq(id: adminId));
+
     if (autoTabRouter!.currentChild!.queryParams
         .getString('edit', "")
         .isNotEmpty) {
@@ -87,39 +101,38 @@ class _faqCreationPageState extends State<VideoUploadPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: SharedPreffUtil().init(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const LoaderView();
-          }
-          return Column(
-            children: [
-              HeaderView(
-                title: AppString.videoUpload.val,
-              ),
-              CustomSizedBox(height: DBL.ten.val),
-              _rebuildView(),
-            ],
-          );
-        });
-  }
-
-  _rebuildView() {
     return BlocProvider(
-      create: (context) => FaqCreationBloc(FaqCreationRepository()),
-      child: BlocBuilder<FaqCreationBloc, FaqCreationState>(
-        builder: (context, state) {
-          // return _bodyView(context, state);
-          return !state.isLoading
-              ? _bodyView(context, state)
-              : const LoaderView();
-        },
-      ),
+      create: (context) => _videoBloc,
+      child: FutureBuilder(
+          future: SharedPreffUtil().init(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return const LoaderView();
+            }
+            return Column(
+              children: [
+                HeaderView(
+                  title: AppString.videoUpload.val,
+                ),
+                CustomSizedBox(height: DBL.ten.val),
+                _rebuildView(),
+              ],
+            );
+          }),
     );
   }
 
-  _bodyView(BuildContext context, FaqCreationState state) {
+  _rebuildView() {
+    return BlocBuilder<UploadVideoBloc, VideoUploadState>(
+      bloc: _videoBloc,
+      builder: (context, state) {
+        // return _bodyView(context, state);
+        return state.isLoading ? _bodyView(context, state) : const LoaderView();
+      },
+    );
+  }
+
+  _bodyView(BuildContext context, VideoUploadState state) {
     // if (state.viewResponse != null) {
     //   _questionController.text = state.viewResponse?.data?.firstName ?? "";
     //   _answerController.text = state.viewResponse?.data?.lastName ?? "";
@@ -132,111 +145,142 @@ class _faqCreationPageState extends State<VideoUploadPage> {
         child: CustomContainer(
             padding: EdgeInsets.symmetric(
                 horizontal: DBL.forty.val, vertical: DBL.eighteen.val),
-            child: _createFaqView(state)),
+            child: _uploadVideoView(state)),
       ),
     );
   }
 
-  _createFaqView(FaqCreationState state) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _uploadDocumentWidget(),
-        CForm(
-          formKey: _formKey,
-          autoValidateMode: _validateMode,
-          child: Wrap(
-            alignment: WrapAlignment.start,
-            spacing: 20,
-            runSpacing: 20,
-            children: [
-              CustomSizedBox(
-                width: DBL.twoEighty.val,
-                child: DetailsTextFieldWithLabel(
-                  isIgnore: _isView!,
-                  isMandatory: true,
-                  maxLines: 20,
-                  labelName: AppString.title.val,
-                  focusNode: questionFocusNode,
-                  controller: _faqCreationBloc.questionController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return AppString.questionError.val;
-                    }
-                    return null;
-                  },
-                  textInputAction: TextInputAction.next,
-                  textInputType: TextInputType.text,
-                  suffixIcon: const CustomContainer(width: 0),
-                ),
-              ),
-              _uploadDocumentWidget(),
-              // CustomSizedBox(
-              //   width: DBL.twoEighty.val,
-              //   child: DetailsTextFieldWithLabel(
-              //     maxLines: 10,
-              //     isIgnore: _isView!,
-              //     isMandatory: true,
-              //     labelName: AppString.answer.val,
-              //     focusNode: answerFocusNode,
-              //     controller: _faqCreationBloc.answerController,
-              //     validator: (value) {
-              //       if (value == null || value.isEmpty) {
-              //         return AppString.answerError.val;
-              //       }
-              //       return null;
-              //     },
-              //     textInputAction: TextInputAction.next,
-              //     textInputType: TextInputType.text,
-              //     suffixIcon: const CustomContainer(width: 0),
-              //   ),
-              // ),
-              _forClientCheckBoxWidget(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+  _uploadVideoView(VideoUploadState state) {
+    return BlocBuilder<UploadVideoBloc, VideoUploadState>(
+      bloc: _videoBloc,
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            StatefulBuilder(builder: (context, rebuild) {
+              log("rebuilded ${bytesList.length}");
+              return bytesList.isNotEmpty || attachment != ''
+                  ? Wrap(
+                      children: [
+                        CustomText('Uploaded'),
+                        IconButton(
+                            onPressed: () {
+                              bytesList.clear();
+                              log('bytlist ${bytesList.length}');
+                            },
+                            icon: Icon(
+                              Icons.close,
+                              size: 10,
+                            ))
+                      ],
+                    )
+                  : _uploadDocumentWidget(rebuild);
+            }),
+            // : Wrap(
+            //     children: [
+            //       CustomText(AppString.done.val),
+            //       IconButton(
+            //           onPressed: () {
+            //             _videoBloc.uploadedVideo = '';
+            //           },
+            //           icon: Icon(Icons.close))
+            //     ],
+            //   ),
+            CForm(
+              formKey: _formKey,
+              autoValidateMode: _validateMode,
+              child: Wrap(
+                alignment: WrapAlignment.start,
+                spacing: 20,
+                runSpacing: 20,
                 children: [
-                  CustomButton(
-                    height: DBL.fortyFive.val,
-                    minWidth: DBL.oneTwenty.val,
-                    onPressed: () {
-                      context.router.navigate(const FaqRoute());
-                    },
-                    text: AppString.cancel.val,
-                    color: AppColor.white.val,
-                    textColor: AppColor.primaryColor.val,
-                    borderWidth: 1,
+                  CustomSizedBox(
+                    width: DBL.twoEighty.val,
+                    child: DetailsTextFieldWithLabel(
+                      isMandatory: true,
+                      maxLines: 20,
+                      labelName: AppString.title.val,
+                      focusNode: titleFocusNode,
+                      controller: _videoBloc.title,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return AppString.titleError.val;
+                        }
+                        return null;
+                      },
+                      textInputAction: TextInputAction.next,
+                      textInputType: TextInputType.text,
+                      suffixIcon: const CustomContainer(width: 0),
+                    ),
                   ),
-                  CustomSizedBox(width: DBL.twenty.val),
-                  !_isView!
-                      ? BlocBuilder<FaqCreationBloc, FaqCreationState>(
-                          builder: (context, state) {
-                            return CustomButton(
-                              isLoading: state.isLoadingButton,
-                              height: DBL.fortyFive.val,
-                              minWidth: DBL.oneTwenty.val,
-                              onPressed: () async {
-                                checkInputData(state);
-                              },
-                              text: _isEdit!
-                                  ? AppString.update.val
-                                  : AppString.save.val,
-                              color: AppColor.primaryColor.val,
-                              textColor: AppColor.white.val,
-                            );
-                          },
-                        )
-                      : CustomSizedBox.shrink(),
+                  // CustomSizedBox(
+                  //   width: DBL.twoEighty.val,
+                  //   child: DetailsTextFieldWithLabel(
+                  //     maxLines: 10,
+                  //     isIgnore: _isView!,
+                  //     isMandatory: true,
+                  //     labelName: AppString.answer.val,
+                  //     focusNode: answerFocusNode,
+                  //     controller: _faqCreationBloc.answerController,
+                  //     validator: (value) {
+                  //       if (value == null || value.isEmpty) {
+                  //         return AppString.answerError.val;
+                  //       }
+                  //       return null;
+                  //     },
+                  //     textInputAction: TextInputAction.next,
+                  //     textInputType: TextInputType.text,
+                  //     suffixIcon: const CustomContainer(width: 0),
+                  //   ),
+                  // ),
+                  _forClientCheckBoxWidget(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      CustomButton(
+                        height: DBL.fortyFive.val,
+                        minWidth: DBL.oneTwenty.val,
+                        onPressed: () {
+                          context.router.navigate(const VideoManagementRoute());
+                        },
+                        text: AppString.cancel.val,
+                        color: AppColor.white.val,
+                        textColor: AppColor.primaryColor.val,
+                        borderWidth: 1,
+                      ),
+                      CustomSizedBox(width: DBL.twenty.val),
+                      BlocBuilder<UploadVideoBloc, VideoUploadState>(
+                        builder: (context, state) {
+                          return CustomButton(
+                            isLoading: state.isLoadingButton,
+                            height: DBL.fortyFive.val,
+                            minWidth: DBL.oneTwenty.val,
+                            onPressed: () async {
+                              // checkInputData(state);
+                              uploadVideo(state);
+                            },
+                            text: _isEdit!
+                                ? AppString.update.val
+                                : AppString.save.val,
+                            color: AppColor.primaryColor.val,
+                            textColor: AppColor.white.val,
+                          );
+                        },
+                      )
+                    ],
+                  ),
                 ],
               ),
-            ],
-          ),
-        )
-      ],
+            )
+          ],
+        );
+      },
     );
   }
 
-  _uploadDocumentWidget() {
+  _uploadDocumentWidget(void Function(void Function()) rebuild) {
     return UploadDocumentWidget(
+      isVideoUpload: true,
       onTap: () async {
         FilePickerResult? result = await FilePicker.platform.pickFiles(
           type: FileType.custom,
@@ -261,6 +305,7 @@ class _faqCreationPageState extends State<VideoUploadPage> {
               break;
             }
           }
+          rebuild(() {});
           // widget.onboardingBloc.add(
           //   OnboardingEvent.securityDocumentUpload(bytesList, listUpdated),
           // );
@@ -280,14 +325,14 @@ class _faqCreationPageState extends State<VideoUploadPage> {
                 color: AppColor.label8.val,
                 fontSize: FS.font14.val)),
         const CustomSizedBox(width: 20),
-        BlocBuilder<FaqCreationBloc, FaqCreationState>(
+        BlocBuilder<UploadVideoBloc, VideoUploadState>(
           builder: (context, state) {
             return YesNoRadioButtonWidget(
               yesLabel: AppString.forClient.val,
               noLabel: AppString.forCa.val,
               onChanged: (val) {
-                BlocProvider.of<FaqCreationBloc>(context)
-                    .add(FaqCreationEvent.radioForClient(isSelected: val ?? 0));
+                BlocProvider.of<UploadVideoBloc>(context)
+                    .add(VideoUploadEvent.radioForClient(isSelected: val ?? 0));
               },
               groupValue: state.isForClient,
             );
@@ -297,33 +342,57 @@ class _faqCreationPageState extends State<VideoUploadPage> {
     );
   }
 
-  checkInputData(FaqCreationState state) {
+  uploadVideo(VideoUploadState state) async {
+    if (bytesList.isNotEmpty) {
+      await uploadVideoToAwsS3(AppString.documents.val,
+          SharedPreffUtil().getCareGiverUserId, bytesList.first, state);
+      checkInputData(state);
+    }
+  }
+
+  checkInputData(VideoUploadState state) {
     if (_formKey.currentState!.validate()) {
-      print('id:: ${adminUserID}');
       if (_isEdit!) {
-        _faqCreationBloc.add(FaqCreationEvent.updateFaq(
-            id: adminId,
-            question: _faqCreationBloc.questionController.text.trim(),
-            answer: _faqCreationBloc.answerController.text.trim(),
-            status: "true",
-            forClient: state.isForClient == 0 ? true : false,
-            context: context));
+        if (_videoBloc.uploadedVideo == '') {
+          CSnackBar.showError(context, msg: 'Please attach video');
+        } else {
+          print('inside api call $settingsId');
+          _videoBloc.add(VideoUploadEvent.addSettings(
+              adminId: adminUserID,
+              title: _videoBloc.title.text,
+              settingsId: settingsId,
+              attachment: _videoBloc.uploadedVideo,
+              userType: state.isForClient == 0 ? 2 : 1,
+              context: context));
+        }
       } else {
-        _faqCreationBloc.add(FaqCreationEvent.addFaq(
-          context: context,
-          question: _faqCreationBloc.questionController.text.trim(),
-          answer: _faqCreationBloc.answerController.text.trim(),
-          status: "true",
-          forClient: state.isForClient == 0 ? true : false,
-        ));
+        if (_videoBloc.uploadedVideo == '') {
+          CSnackBar.showError(context, msg: 'Please attach video');
+        } else {
+          _videoBloc.add(VideoUploadEvent.addSettings(
+              adminId: adminUserID,
+              title: _videoBloc.title.text,
+              attachment: _videoBloc.uploadedVideo,
+              userType: state.isForClient == 0 ? 2 : 1,
+              context: context));
+        }
       }
     }
   }
 
+  Future<void> uploadVideoToAwsS3(String folderName, String userId,
+      PlatformFile pickedItem, VideoUploadState state) async {
+    _videoBloc.uploadedVideo = await ApiServiceS3().uploadImage(
+        pickedFile: pickedItem.bytes!,
+        format: pickedItem.name.split('.').last,
+        folderName: folderName,
+        userId: userId,
+        context: context);
+  }
+
   @override
   void dispose() {
-    _faqCreationBloc.questionController.dispose();
-    _faqCreationBloc.answerController.dispose();
+    _videoBloc.title.dispose();
 
     super.dispose();
   }

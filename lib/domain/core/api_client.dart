@@ -722,13 +722,12 @@ abstract class ApiClient {
     @Query("user_id") String userId,
   );
 
-  // @POST('/admin/add-general-settings')
-  // Future<SubscriptionModel> addVideo(
-  //     @Field('admin_id') String adminId,
-  //     @Field('settings_id') String settingsId,
-  //     @Field('title') String title,
-  //     @Field('description') String description,
-  //     @Field('attachment') String attachment
-  //     @Field('user_type') int userType
-  //     );
+  @POST('/admin/add-general-settings')
+  Future<CommonResponse> addVideo(
+      @Field('admin_id') String adminId,
+      @Field('settings_id') String? settingsId,
+      @Field('title') String title,
+      @Field('description') String description,
+      @Field('attachment') String attachment,
+      @Field('user_type') int userType);
 }

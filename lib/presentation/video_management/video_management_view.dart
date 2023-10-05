@@ -188,8 +188,12 @@ class _VideoManagementPageState extends State<VideoManagementPage> {
                   isEdit: sharedPrefUtil.getEditAdmin,
                   onEditTap: sharedPrefUtil.getEditAdmin
                       ? () {
-                          // autoTabRouter?.navigate(
-                          //     FaqCreationRoute(isEdit: "edit", id: item.id));
+                          autoTabRouter?.navigate(VideoUploadRoute(
+                              isEdit: "edit",
+                              id: item.id,
+                              title: item.title,
+                              type: item.userType,
+                              attachment: item.attachment));
                         }
                       : null,
                 )),
