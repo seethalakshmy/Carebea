@@ -21,7 +21,9 @@ import '../../../domain/transaction_management/model/get_filters_response.dart';
 import '../../../infrastructure/service_request_management/service_request_management_repository.dart';
 
 part 'service_request_management_bloc.freezed.dart';
+
 part 'service_request_management_event.dart';
+
 part 'service_request_management_state.dart';
 
 class ServiceRequestManagementBloc
@@ -264,6 +266,24 @@ class ServiceRequestManagementBloc
     DateFormat dateFormat = DateFormat('MM-dd-yyyy , hh:mm a');
     String formattedDate = dateFormat.format(inputDate);
     return formattedDate;
+  }
+
+  String generateDaysLeft(String date) {
+    DateTime inputDate = DateTime.parse(date);
+    String days="";
+    if (inputDate.month > DateTime.now().month) {
+     if(inputDate.day>DateTime.now().day){
+       days = "${inputDate.month - DateTime.now().month} month(s) and ${inputDate.day - DateTime.now().day} day(s) left";
+     }else{
+       days = "${inputDate.month - DateTime.now().month} month(s) left";
+     }
+    }else{
+      if(inputDate.day>DateTime.now().day){
+        days = "${inputDate.day - DateTime.now().day} day(s) left";
+      }
+    }
+    print("upcoming days left : $days");
+    return days;
   }
 
   _getServiceStatus(_GetServiceStatus event,

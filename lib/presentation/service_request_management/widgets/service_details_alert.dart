@@ -111,11 +111,15 @@ class ServiceDetailsAlert extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _profileWidget(service, context),
+        _subClientNameWidget(context, service),
+        CustomSizedBox(height: DBL.ten.val),
         _statusShowingWidget(context, service),
         CustomSizedBox(height: DBL.ten.val),
         _clientDetailsWidget(context, service),
         CustomSizedBox(height: DBL.ten.val),
-        _ratingViewWidget(service),
+        title == AppString.completed.val
+            ? _ratingViewWidget(service)
+            : const CustomSizedBox(),
         CustomSizedBox(height: DBL.ten.val),
         _transactionDetailsWidget(service, context)
       ],
@@ -126,38 +130,59 @@ class ServiceDetailsAlert extends StatelessWidget {
       ServiceDetailsData service, BuildContext context) {
     return ProfileWidget(
       width: DBL.threeFifty.val,
-      imageUrl: service.clientProPic ?? "",
+      imageUrl: service.parentProPic ?? "",
       name:
-          "${service.clientName!.firstName ?? ""} ${service.clientName!.lastName ?? ""}",
+          "${service.parentName!.firstName ?? ""} ${service.parentName!.lastName ?? ""}",
       subText: AppString.client.val,
       onNameTap: () {
         Navigator.pop(context);
         autoTabRouter
-            ?.navigate(UserManagementDetailRoute(id: service.profileId ?? ""));
+            ?.navigate(UserManagementDetailRoute(id: service.parentId ?? ""));
       },
     );
   }
 
   Column _ratingViewWidget(ServiceDetailsData service) {
+    String reviewByClient = "";
+    num ratingByClient = 0;
+    String reviewByCa = "";
+    num ratingByCa = 0;
+    if (service.caregiverInfo != null) {
+      if (service.caregiverInfo!.review!.isNotEmpty) {
+        for (int i = 0; i < service.caregiverInfo!.review!.length; i++) {
+          if ((service.caregiverInfo!.review![i].serviceId ?? "") ==
+              (service.serviceId ?? "")) {
+            reviewByClient = service.caregiverInfo!.review![i].review ?? "";
+            ratingByClient = service.caregiverInfo!.review![i].rating ?? 0;
+          }
+        }
+      }
+      if (service.caregiverInfo!.reviewByCg!.isNotEmpty) {
+        for (int i = 0; i < service.caregiverInfo!.reviewByCg!.length; i++) {
+          if ((service.caregiverInfo!.reviewByCg![i].serviceId ?? "") ==
+              (service.serviceId ?? "")) {
+            reviewByCa = service.caregiverInfo!.reviewByCg![i].review ?? "";
+            ratingByCa = service.caregiverInfo!.reviewByCg![i].rating ?? 0;
+          }
+        }
+      }
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         title == AppString.completed.val && (service.isRated ?? false)
             ? RatingWidget(
                 rater: AppString.client.val,
-                feedback:
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
-                rating: double.tryParse(service.caregiverRating.toString()) ??
-                    DBL.zero.val)
+                feedback: reviewByClient,
+                rating:
+                    double.tryParse(ratingByClient.toString()) ?? DBL.zero.val)
             : _rateNowButton(onPressed: () {}, title: AppString.rateTheCa.val),
         CustomSizedBox(height: DBL.ten.val),
         title == AppString.completed.val && (service.isRatedByCg ?? false)
             ? RatingWidget(
                 rater: AppString.careAmbassador.val,
-                feedback:
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
-                rating: double.tryParse(service.caregiverRating.toString()) ??
-                    DBL.zero.val)
+                feedback: reviewByCa,
+                rating: double.tryParse(ratingByCa.toString()) ?? DBL.zero.val)
             : _rateNowButton(
                 onPressed: () {}, title: AppString.rateTheClient.val)
       ],
@@ -180,6 +205,30 @@ class ServiceDetailsAlert extends StatelessWidget {
         color: AppColor.white.val,
         textColor: AppColor.primaryColor.val,
         padding: EdgeInsets.all(DBL.twenty.val),
+      ),
+    );
+  }
+
+  _subClientNameWidget(BuildContext context, ServiceDetailsData service) {
+    return InkWell(
+      onTap: () {
+        Navigator.pop(context);
+        autoTabRouter?.navigate(
+            ClientSubProfileDetailsRoute(id: service.profileId ?? ""));
+      },
+      child: Container(
+        width: DBL.fiveFifty.val,
+        padding: EdgeInsets.only(
+            left: DBL.ten.val, right: DBL.ten.val, bottom: DBL.ten.val),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(DBL.eight.val),
+            border:
+                Border.all(color: AppColor.lightGrey.val, width: DBL.one.val)),
+        child: _textAndSubText(
+            text: AppString.clientName.val,
+            subText:
+                "${service.clientName!.firstName ?? ""} ${service.clientName!.lastName ?? ""}",
+            context: context),
       ),
     );
   }
@@ -234,7 +283,7 @@ class ServiceDetailsAlert extends StatelessWidget {
                   : const CustomSizedBox(),
               title == AppString.upcoming.val
                   ? CustomText(
-                      '3 days left',
+                      serviceBloc.generateDaysLeft(service.serviceDate ?? ""),
                       style: TS().gRoboto(
                           color: AppColor.red2.val, fontWeight: FW.w500.val),
                     )
@@ -267,11 +316,13 @@ class ServiceDetailsAlert extends StatelessWidget {
           _textAndSubText(
               context: context,
               text: AppString.startDateAndTime.val,
-              subText: service.startTime ?? ""),
+              subText: serviceBloc
+                  .generateFormattedDate(service.startDateTime ?? "")),
           _textAndSubText(
               context: context,
               text: AppString.endDateAndTime.val,
-              subText: service.endTime ?? ""),
+              subText:
+                  serviceBloc.generateFormattedDate(service.endDateTime ?? "")),
           _textAndSubText(
               context: context,
               text: AppString.location.val,
@@ -285,6 +336,17 @@ class ServiceDetailsAlert extends StatelessWidget {
 
   Container _issuesShowingWidget(
       BuildContext context, ServiceDetailsData service) {
+    String suspectedThingDuringShift = "";
+    String reportIssueByCg = "";
+    if (service.suspectedThingDuringShift!.isNotEmpty) {
+      suspectedThingDuringShift =
+          "* ${service.suspectedThingDuringShift!.join("\n* ")}";
+      print("suspected list : $suspectedThingDuringShift");
+    }
+    if (service.reportIssueByCg!.isNotEmpty) {
+      reportIssueByCg = "* ${service.reportIssueByCg!.join("\n* ")}";
+      print("cg report list : $reportIssueByCg");
+    }
     return Container(
       width: DBL.fiveFifty.val,
       margin: EdgeInsets.only(bottom: DBL.ten.val),
@@ -299,23 +361,19 @@ class ServiceDetailsAlert extends StatelessWidget {
           _textAndSubText(
               context: context,
               text: AppString.suspectedThings.val,
-              subText:
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry"),
+              subText: suspectedThingDuringShift),
           _textAndSubText(
               context: context,
               text: AppString.otherIssues.val,
-              subText:
-                  "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters"),
+              subText: service.suspectedThingDuringShiftDesc ?? ""),
           _textAndSubText(
               context: context,
               text: AppString.reportedIssuesByCareAmbassador.val,
-              subText:
-                  "1. It is a long established fact that\n2. a reader will be distracted.\n3. by the readable content of a page when looking at its layout."),
+              subText: reportIssueByCg),
           _textAndSubText(
               context: context,
               text: AppString.otherIssues.val,
-              subText:
-                  "reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters"),
+              subText: service.reportIssueByCgDesc ?? ""),
         ],
       ),
     );
@@ -376,7 +434,7 @@ class ServiceDetailsAlert extends StatelessWidget {
                       ?.navigate(CareGiverDetailRoute(id: service.profileId));
                 },
               ),
-        if (title != AppString.completed.val && (service.services != null))
+        if (title == AppString.completed.val && (service.services != null))
           _issuesShowingWidget(context, service),
         if (title != AppString.completed.val && (service.services != null))
           _serviceShowingWidget(

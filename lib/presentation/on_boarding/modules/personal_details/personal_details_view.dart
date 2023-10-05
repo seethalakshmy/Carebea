@@ -207,7 +207,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
               _dateWidget(state),
               _genderWidget(state),
               _addressLineWidget(state),
-              _locationWidget(state),
+              //_locationWidget(state),
               _streetWidget(state),
               _stateWidget(state),
               _cityWidget(state),
@@ -706,7 +706,6 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
       formValidationBloc.add(const FormValidationEvent.dropDown("true"));
     }
     final userId = SharedPreffUtil().getCareGiverUserId;
-
     if (_formKey.currentState!.validate() &&
         widget.onboardingBloc.profileUrl.isNotEmpty) {
       final expiryDate = expiryDateController.text;

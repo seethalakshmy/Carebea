@@ -177,6 +177,7 @@ abstract class ApiClient {
     @Field('longitude') double longitude,
     @Field('zip') String zip,
     @Field('address') String address,
+    @Field('location_tag') String locationTag,
     @Field('social_security_number') String socialSecurityNumber,
     @Field('document_id') String documentId,
     @Field('document_number') String documentNumber,

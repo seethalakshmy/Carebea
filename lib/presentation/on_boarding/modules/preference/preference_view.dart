@@ -1,6 +1,7 @@
 import 'package:admin_580_tech/presentation/on_boarding/modules/preference/widgets/sample_dropdown.dart';
 import 'package:admin_580_tech/presentation/on_boarding/widgets/common_padding_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,6 +12,7 @@ import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
 import '../../../../domain/on_boarding/models/preferences/preference_request_model.dart';
 import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../../../routes/app_router.gr.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
 import '../../../widget/custom_sizedbox.dart';
 import '../../../widget/custom_text.dart';
@@ -36,10 +38,7 @@ class PreferenceView extends StatelessWidget {
           some.fold((l) {
             CSnackBar.showError(context, msg: l.error);
           }, (r) {
-            print("Response in listener : ${r.status}");
-            if (onboardingBloc.nextButtonClicked) {
-              pageController.jumpToPage(pageController.page!.toInt() + 1);
-            }
+            context.router.navigate(const CaregiverCreationRoute());
           });
         });
       },

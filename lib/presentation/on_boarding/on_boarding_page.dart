@@ -20,9 +20,6 @@ import 'modules/health_aid_agreement/home_health_agreement_view.dart';
 import 'modules/personal_details/personal_details_view.dart';
 import 'modules/preference/preference_view.dart';
 import 'modules/qualification_details/qialification_view.dart';
-import 'modules/reference/reference_view.dart';
-import 'modules/services/services_view.dart';
-import 'modules/setup_compensation/setup_compensation_view.dart';
 
 @RoutePage()
 class OnboardingPage extends StatefulWidget {
@@ -83,7 +80,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
         pageController: controller,
         onboardingBloc: _onboardingBloc,
       ),
-      ServicesView(
+      /*ServicesView(
         pageController: controller,
         onboardingBloc: _onboardingBloc,
       ),
@@ -93,12 +90,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
       ),
       BuildProfileView(
           pageController: controller, onboardingBloc: _onboardingBloc),
+      //HomeHealthAidAgreementView(pageController: controller),
       SetupCompensationView(
-          pageController: controller, onboardingBloc: _onboardingBloc),
-      HomeHealthAidAgreementView(
-        pageController: controller,
-        onboardingBloc: _onboardingBloc,
-      ),
+          pageController: controller, onboardingBloc: _onboardingBloc),*/
     ];
     setState(() {
       totalPages = pages.length;
@@ -135,7 +129,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   physics: const NeverScrollableScrollPhysics(),
                   children: pages,
                   onPageChanged: (index) {
-                    log("page is $index");
                     setState(() {
                       currentPage = index;
                     });
