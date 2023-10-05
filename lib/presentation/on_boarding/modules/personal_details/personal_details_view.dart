@@ -9,6 +9,7 @@ import '../../../../core/custom_snackbar.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
+import '../../../../core/time_utils.dart';
 import '../../../../infrastructure/api_service_s3.dart';
 import '../../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
@@ -708,11 +709,17 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
 
     if (_formKey.currentState!.validate() &&
         widget.onboardingBloc.profileUrl.isNotEmpty) {
+      final expiryDate = expiryDateController.text;
+      final dob = dobController.text;
+
+      final expiryDateInDDMMYY = TimeUtils.dateInMMDDYYYYToDDMMYYY(expiryDate);
+      final dobInDDMMYY = TimeUtils.dateInMMDDYYYYToDDMMYYY(dob);
+
       widget.onboardingBloc.add(OnboardingEvent.personalDetails(
           userId: sharedPreffUtil.getIsFromWebsite == true
               ? sharedPreffUtil.getAdminId
               : userId,
-          dob: dobController.text.trim(),
+          dob: dobInDDMMYY,
           genderId: int.parse(selectedGender),
           street: streetController.text.trim(),
           cityId: selectedCity,
@@ -724,7 +731,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           socialSecurityNo: socialSecurityNumberController.text.trim(),
           documentId: selectedDocument,
           documentNo: documentNumberController.text.trim(),
-          expiryDate: expiryDateController.text.trim(),
+          expiryDate: expiryDateInDDMMYY,
           documentList: [widget.onboardingBloc.uploadedDocumentList.first],
           profilePic: widget.onboardingBloc.profileUrl));
     }

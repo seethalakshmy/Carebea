@@ -22,10 +22,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'amplifyconfiguration.dart';
+import 'application/bloc/caregiver_submit_agreement/caregiver_submit_agreement_bloc.dart';
 import 'application/bloc/form_validation/form_validation_bloc.dart';
 import 'application/bloc/resend_otp_bloc/resend_otp_bloc.dart';
 import 'application/bloc/service_request_management/service_request_management_bloc.dart';
 import 'core/config/environment.dart';
+import 'infrastructure/caregiver_submit_agreement_repo/caregiver_submit_agreement_repo_impl.dart';
 import 'infrastructure/resend_otp/resend_otp_repo_impl.dart';
 import 'infrastructure/shared_preference/shared_preff_util.dart';
 
@@ -82,10 +84,14 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<CareGiverProfileBloc>(
             create: (context) =>
                 CareGiverProfileBloc(CareGiverProfileRepository())),
-        BlocProvider(
+        BlocProvider<CaregiverSubmitAgreementBloc>(
+            create: (context) => CaregiverSubmitAgreementBloc(
+                CareGiverSubmitAgreementRepoImpl())),
+        BlocProvider<EmailOtpVerificationBloc>(
             create: (_) =>
                 EmailOtpVerificationBloc(EmailOtpVerificationRepository())),
-        BlocProvider(create: (_) => ResendOtpBloc(ResendOTPRepoImpl())),
+        BlocProvider<ResendOtpBloc>(
+            create: (_) => ResendOtpBloc(ResendOTPRepoImpl())),
       ],
       child: MaterialApp.router(
         routerDelegate: _appRouter.delegate(),
