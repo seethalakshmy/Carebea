@@ -110,7 +110,7 @@
 //   }
 // }
 
-import 'dart:html' as web;
+import 'dart:html' as html;
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -175,10 +175,11 @@ class _HomeHealthAidAgreementViewState
               //     .jumpToPage(widget.pageController.page!.toInt() + 1);
               final uri = Uri.parse("http://43.204.9.191");
               if (await canLaunchUrl(uri)) {
-                final a = await launchUrl(uri);
-                if (a) {
-                  web.window.close();
-                }
+                // final a = await launchUrl(uri);
+                html.window.open('http://43.204.9.191', "_self");
+                // if (a) {
+                //   web.window.close();
+                // }
               }
             });
       },
