@@ -419,7 +419,7 @@ class _QualificationViewState extends State<QualificationView> {
             hhaDetails: widget.onboardingBloc.state.isHHASelected == 0
                 ? HhaDetails(
                     document: widget.onboardingBloc.uploadedHhaDocList,
-                    expiryDate: hhaDateController.text.trim(),
+                    expiryDate: widget.onboardingBloc.formatDate(hhaDateController.text.trim()),
                     hhaNumber: hhaController.text.trim())
                 : HhaDetails(hhaNumber: "", expiryDate: "", document: []),
             haveBlsCertificate:
@@ -428,7 +428,7 @@ class _QualificationViewState extends State<QualificationView> {
                 ? BlsOrFirstAidCertificateDetails(
                     document: widget.onboardingBloc.uploadedBlsDocList,
                     certificationNumber: blsController.text.trim(),
-                    expiryDate: blsDateController.text.trim())
+                    expiryDate: widget.onboardingBloc.formatDate(blsDateController.text.trim()))
                 : BlsOrFirstAidCertificateDetails(
                     document: [], certificationNumber: "", expiryDate: ""),
             haveTbTest:
@@ -437,14 +437,14 @@ class _QualificationViewState extends State<QualificationView> {
                 ? TbOrPpdTestDetails(
                     document: widget.onboardingBloc.uploadedTbDocList,
                     result: tbPpdController.text.trim(),
-                    date: tbPpdDateController.text.trim())
+                    date: widget.onboardingBloc.formatDate(tbPpdDateController.text.trim()))
                 : TbOrPpdTestDetails(document: [], result: "", date: ""),
             haveCovidVaccination:
                 widget.onboardingBloc.state.isCovidSelected == 0 ? true : false,
             covidDetails: widget.onboardingBloc.state.isCovidSelected == 0
                 ? CovidVaccinationDetails(
                     document: widget.onboardingBloc.uploadedCovidDocList,
-                    date: covidDateController.text.trim())
+                    date: widget.onboardingBloc.formatDate(covidDateController.text.trim()))
                 : CovidVaccinationDetails(document: [], date: "")),
       );
     }

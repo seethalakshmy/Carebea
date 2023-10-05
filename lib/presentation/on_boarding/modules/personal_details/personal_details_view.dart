@@ -208,7 +208,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
               _dateWidget(state),
               _genderWidget(state),
               _addressLineWidget(state),
-              _locationWidget(state),
+              //_locationWidget(state),
               _streetWidget(state),
               _stateWidget(state),
               _cityWidget(state),
@@ -700,14 +700,13 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
       formValidationBloc.add(const FormValidationEvent.dropDown("true"));
     }
     final userId = SharedPreffUtil().getCareGiverUserId;
-
     if (_formKey.currentState!.validate() &&
         widget.onboardingBloc.profileUrl.isNotEmpty) {
       widget.onboardingBloc.add(OnboardingEvent.personalDetails(
           userId: sharedPreffUtil.getIsFromWebsite == true
               ? sharedPreffUtil.getAdminId
               : userId,
-          dob: dobController.text.trim(),
+          dob: widget.onboardingBloc.formatDate(dobController.text.trim()),
           genderId: int.parse(selectedGender),
           street: streetController.text.trim(),
           cityId: selectedCity,
@@ -719,7 +718,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           socialSecurityNo: socialSecurityNumberController.text.trim(),
           documentId: selectedDocument,
           documentNo: documentNumberController.text.trim(),
-          expiryDate: expiryDateController.text.trim(),
+          expiryDate: widget.onboardingBloc
+              .formatDate(expiryDateController.text.trim()),
           documentList: widget.onboardingBloc.uploadedDocumentList,
           profilePic: widget.onboardingBloc.profileUrl));
     }

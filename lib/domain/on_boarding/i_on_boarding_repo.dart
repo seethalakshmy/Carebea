@@ -59,6 +59,7 @@ abstract class IOnBoardingRepo {
           required double longitude,
           required String zip,
           required String address,
+          required String locationTag,
           required String socialSecurityNo,
           required String documentId,
           required String documentNo,

@@ -9,6 +9,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
 import '../../../domain/on_boarding/models/preferences/pet_list_response.dart';
@@ -415,6 +416,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
                 longitude: event.longitude,
                 zip: event.zip,
                 address: event.address,
+                locationTag: "",
                 socialSecurityNo: event.socialSecurityNo,
                 documentId: event.documentId,
                 documentNo: event.documentNo,
@@ -618,5 +620,11 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
           isLoading: false, submitAccountDetailsOption: Some(Right(r)));
     });
     emit(accountState);
+  }
+  String formatDate(String date) {
+    DateTime originalDate = DateFormat('MM/dd/yyyy').parse(date);
+    String formattedDate = DateFormat('dd/MM/yyyy').format(originalDate);
+    print("date before format : $date\nafter format : $formattedDate");
+    return formattedDate;
   }
 }

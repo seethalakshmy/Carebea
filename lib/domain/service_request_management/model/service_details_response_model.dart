@@ -117,6 +117,7 @@ String dataToJson(ServiceDetailsData data) => json.encode(data.toJson());
 class ServiceDetailsData {
   ServiceDetailsData({
     String? profileId,
+    String? parentId,
     bool? isSubscribed,
     String? subscriptionType,
     String? subscriptionColor,
@@ -124,12 +125,16 @@ class ServiceDetailsData {
     String? bookingId,
     String? startTime,
     String? endTime,
+    ParentName? parentName,
     ClientName? clientName,
+    String? parentMobile,
     String? clientMobile,
     String? clientAlternativeMobile,
     String? decisionMakerMobile,
     String? decisionMakerAlternativeMobile,
+    String? parentProPic,
     String? clientProPic,
+    String? parentProfileThumbnail,
     String? clientProfileThumbnail,
     CaregiverName? caregiverName,
     String? caregiverProPic,
@@ -138,6 +143,8 @@ class ServiceDetailsData {
     String? caregiverMobile,
     String? aboutClient,
     String? serviceDate,
+    String? startDateTime,
+    String? endDateTime,
     String? serviceTime,
     Address? address,
     num? genderPreference,
@@ -153,9 +160,13 @@ class ServiceDetailsData {
     String? mobility,
     HaveAllergyProblem? haveAllergyProblem,
     List<Medication>? medication,
+    List<RefundDetails>? refundDetails,
+    List<String>? suspectedThingDuringShift,
+    List<String>? reportIssueByCg,
     DoYouHaveAnyAllergyProblem? doYouHaveAnyAllergyProblem,
     Services? services,
     CompletedServices? completedServices,
+    NotCompletedServices? notCompletedServices,
     num? totalAmount,
     num? serviceFee,
     String? serviceFeeTransactionId,
@@ -167,11 +178,14 @@ class ServiceDetailsData {
     bool? isRatedByCg,
     String? reasonForCancellation,
     String? travelingCharge,
+    String? suspectedThingDuringShiftDesc,
+    String? reportIssueByCgDesc,
     bool? isRebook,
     num? status,
     CaregiverInfo? caregiverInfo,
   }) {
     _profileId = profileId;
+    _parentId = parentId;
     _isSubscribed = isSubscribed;
     _subscriptionType = subscriptionType;
     _subscriptionColor = subscriptionColor;
@@ -179,12 +193,16 @@ class ServiceDetailsData {
     _bookingId = bookingId;
     _startTime = startTime;
     _endTime = endTime;
+    _parentName = parentName;
     _clientName = clientName;
+    _parentMobile = parentMobile;
     _clientMobile = clientMobile;
     _clientAlternativeMobile = clientAlternativeMobile;
     _decisionMakerMobile = decisionMakerMobile;
     _decisionMakerAlternativeMobile = decisionMakerAlternativeMobile;
+    _parentProPic = parentProPic;
     _clientProPic = clientProPic;
+    _parentProfileThumbnail = parentProfileThumbnail;
     _clientProfileThumbnail = clientProfileThumbnail;
     _caregiverName = caregiverName;
     _caregiverProPic = caregiverProPic;
@@ -193,6 +211,8 @@ class ServiceDetailsData {
     _caregiverMobile = caregiverMobile;
     _aboutClient = aboutClient;
     _serviceDate = serviceDate;
+    _startDateTime = startDateTime;
+    _endDateTime = endDateTime;
     _serviceTime = serviceTime;
     _address = address;
     _genderPreference = genderPreference;
@@ -208,9 +228,13 @@ class ServiceDetailsData {
     _mobility = mobility;
     _haveAllergyProblem = haveAllergyProblem;
     _medication = medication;
+    _refundDetails = refundDetails;
+    _suspectedThingDuringShift = suspectedThingDuringShift;
+    _reportIssueByCg = reportIssueByCg;
     _doYouHaveAnyAllergyProblem = doYouHaveAnyAllergyProblem;
     _services = services;
     _completedServices = completedServices;
+    _notCompletedServices = notCompletedServices;
     _totalAmount = totalAmount;
     _serviceFee = serviceFee;
     _serviceFeeTransactionId = serviceFeeTransactionId;
@@ -222,6 +246,8 @@ class ServiceDetailsData {
     _isRatedByCg = isRatedByCg;
     _reasonForCancellation = reasonForCancellation;
     _travelingCharge = travelingCharge;
+    _suspectedThingDuringShiftDesc = suspectedThingDuringShiftDesc;
+    _reportIssueByCgDesc = reportIssueByCgDesc;
     _isRebook = isRebook;
     _status = status;
     _caregiverInfo = caregiverInfo;
@@ -229,6 +255,7 @@ class ServiceDetailsData {
 
   ServiceDetailsData.fromJson(dynamic json) {
     _profileId = json['profile_id'];
+    _parentId = json['parent_id'];
     _isSubscribed = json['is_subscribed'];
     _subscriptionType = json['subscription_type'];
     _subscriptionColor = json['subscription_color'];
@@ -236,14 +263,20 @@ class ServiceDetailsData {
     _bookingId = json['booking_id'];
     _startTime = json['start_time'];
     _endTime = json['end_time'];
+    _parentName = json['parent_name'] != null
+        ? ParentName.fromJson(json['parent_name'])
+        : null;
     _clientName = json['client_name'] != null
         ? ClientName.fromJson(json['client_name'])
         : null;
+    _parentMobile = json['parent_mobile'];
     _clientMobile = json['client_mobile'];
     _clientAlternativeMobile = json['client_alternative_mobile'];
     _decisionMakerMobile = json['decision_maker_mobile'];
     _decisionMakerAlternativeMobile = json['decision_maker_alternative_mobile'];
+    _parentProPic = json['parent_pro_pic'];
     _clientProPic = json['client_pro_pic'];
+    _parentProfileThumbnail = json['parent_profile_thumbnail'];
     _clientProfileThumbnail = json['client_profile_thumbnail'];
     _caregiverName = json['caregiver_name'] != null
         ? CaregiverName.fromJson(json['caregiver_name'])
@@ -254,6 +287,8 @@ class ServiceDetailsData {
     _caregiverMobile = json['caregiver_mobile'];
     _aboutClient = json['about_client'];
     _serviceDate = json['service_date'];
+    _startDateTime = json['start_dateTime'];
+    _endDateTime = json['end_dateTime'];
     _serviceTime = json['service_time'];
     _address =
         json['address'] != null ? Address.fromJson(json['address']) : null;
@@ -278,6 +313,18 @@ class ServiceDetailsData {
         _medication?.add(Medication.fromJson(v));
       });
     }
+    if (json['refund_details'] != null) {
+      _refundDetails = [];
+      json['refund_details'].forEach((v) {
+        _refundDetails?.add(RefundDetails.fromJson(v));
+      });
+    }
+    _suspectedThingDuringShift = json['suspected_thing_during_shift'] != null
+        ? json['suspected_thing_during_shift'].cast<String>()
+        : [];
+    _reportIssueByCg = json['report_issue_by_cg'] != null
+        ? json['report_issue_by_cg'].cast<String>()
+        : [];
     _doYouHaveAnyAllergyProblem =
         json['do_you_have_any_allergy_problem'] != null
             ? DoYouHaveAnyAllergyProblem.fromJson(
@@ -287,6 +334,9 @@ class ServiceDetailsData {
         json['services'] != null ? Services.fromJson(json['services']) : null;
     _completedServices = json['completed_services'] != null
         ? CompletedServices.fromJson(json['completed_services'])
+        : null;
+    _notCompletedServices = json['not_completed_services'] != null
+        ? NotCompletedServices.fromJson(json['not_completed_services'])
         : null;
     _totalAmount = json['total_amount'];
     _serviceFee = json['service_fee'];
@@ -299,6 +349,8 @@ class ServiceDetailsData {
     _isRatedByCg = json['is_rated_by_cg'];
     _reasonForCancellation = json['reason_for_cancellation'];
     _travelingCharge = json['traveling_charge'];
+    _suspectedThingDuringShiftDesc = json['suspected_thing_during_shift_desc'];
+    _reportIssueByCgDesc = json['report_issue_by_cg_desc'];
     _isRebook = json['is_rebook'];
     _status = json['status'];
     _caregiverInfo = json['caregiver_info'] != null
@@ -306,6 +358,7 @@ class ServiceDetailsData {
         : null;
   }
   String? _profileId;
+  String? _parentId;
   bool? _isSubscribed;
   String? _subscriptionType;
   String? _subscriptionColor;
@@ -314,11 +367,15 @@ class ServiceDetailsData {
   String? _startTime;
   String? _endTime;
   ClientName? _clientName;
+  ParentName? _parentName;
+  String? _parentMobile;
   String? _clientMobile;
   String? _clientAlternativeMobile;
   String? _decisionMakerMobile;
   String? _decisionMakerAlternativeMobile;
+  String? _parentProPic;
   String? _clientProPic;
+  String? _parentProfileThumbnail;
   String? _clientProfileThumbnail;
   CaregiverName? _caregiverName;
   String? _caregiverProPic;
@@ -327,6 +384,8 @@ class ServiceDetailsData {
   String? _caregiverMobile;
   String? _aboutClient;
   String? _serviceDate;
+  String? _startDateTime;
+  String? _endDateTime;
   String? _serviceTime;
   Address? _address;
   num? _genderPreference;
@@ -342,9 +401,13 @@ class ServiceDetailsData {
   String? _mobility;
   HaveAllergyProblem? _haveAllergyProblem;
   List<Medication>? _medication;
+  List<RefundDetails>? _refundDetails;
+  List<String>? _suspectedThingDuringShift;
+  List<String>? _reportIssueByCg;
   DoYouHaveAnyAllergyProblem? _doYouHaveAnyAllergyProblem;
   Services? _services;
   CompletedServices? _completedServices;
+  NotCompletedServices? _notCompletedServices;
   num? _totalAmount;
   num? _serviceFee;
   String? _serviceFeeTransactionId;
@@ -356,11 +419,14 @@ class ServiceDetailsData {
   bool? _isRatedByCg;
   String? _reasonForCancellation;
   String? _travelingCharge;
+  String? _suspectedThingDuringShiftDesc;
+  String? _reportIssueByCgDesc;
   bool? _isRebook;
   num? _status;
   CaregiverInfo? _caregiverInfo;
   ServiceDetailsData copyWith({
     String? profileId,
+    String? parentId,
     bool? isSubscribed,
     String? subscriptionType,
     String? subscriptionColor,
@@ -369,11 +435,15 @@ class ServiceDetailsData {
     String? startTime,
     String? endTime,
     ClientName? clientName,
+    ParentName? parentName,
+    String? parentMobile,
     String? clientMobile,
     String? clientAlternativeMobile,
     String? decisionMakerMobile,
     String? decisionMakerAlternativeMobile,
+    String? parentProPic,
     String? clientProPic,
+    String? parentProfileThumbnail,
     String? clientProfileThumbnail,
     CaregiverName? caregiverName,
     String? caregiverProPic,
@@ -382,6 +452,8 @@ class ServiceDetailsData {
     String? caregiverMobile,
     String? aboutClient,
     String? serviceDate,
+    String? startDateTime,
+    String? endDateTime,
     String? serviceTime,
     Address? address,
     num? genderPreference,
@@ -397,9 +469,13 @@ class ServiceDetailsData {
     String? mobility,
     HaveAllergyProblem? haveAllergyProblem,
     List<Medication>? medication,
+    List<RefundDetails>? refundDetails,
+    List<String>? suspectedThingDuringShift,
+    List<String>? reportIssueByCg,
     DoYouHaveAnyAllergyProblem? doYouHaveAnyAllergyProblem,
     Services? services,
     CompletedServices? completedServices,
+    NotCompletedServices? notCompletedServices,
     num? totalAmount,
     num? serviceFee,
     String? serviceFeeTransactionId,
@@ -411,12 +487,15 @@ class ServiceDetailsData {
     bool? isRatedByCg,
     String? reasonForCancellation,
     String? travelingCharge,
+    String? suspectedThingDuringShiftDesc,
+    String? reportIssueByCgDesc,
     bool? isRebook,
     num? status,
     CaregiverInfo? caregiverInfo,
   }) =>
       ServiceDetailsData(
         profileId: profileId ?? _profileId,
+        parentId: parentId ?? _parentId,
         isSubscribed: isSubscribed ?? _isSubscribed,
         subscriptionType: subscriptionType ?? _subscriptionType,
         subscriptionColor: subscriptionColor ?? _subscriptionColor,
@@ -424,14 +503,19 @@ class ServiceDetailsData {
         bookingId: bookingId ?? _bookingId,
         startTime: startTime ?? _startTime,
         endTime: endTime ?? _endTime,
+        parentName: parentName ?? _parentName,
         clientName: clientName ?? _clientName,
+        parentMobile: parentMobile ?? _parentMobile,
         clientMobile: clientMobile ?? _clientMobile,
         clientAlternativeMobile:
             clientAlternativeMobile ?? _clientAlternativeMobile,
         decisionMakerMobile: decisionMakerMobile ?? _decisionMakerMobile,
         decisionMakerAlternativeMobile:
             decisionMakerAlternativeMobile ?? _decisionMakerAlternativeMobile,
+        parentProPic: parentProPic ?? _parentProPic,
         clientProPic: clientProPic ?? _clientProPic,
+        parentProfileThumbnail:
+            parentProfileThumbnail ?? _parentProfileThumbnail,
         clientProfileThumbnail:
             clientProfileThumbnail ?? _clientProfileThumbnail,
         caregiverName: caregiverName ?? _caregiverName,
@@ -442,6 +526,8 @@ class ServiceDetailsData {
         caregiverMobile: caregiverMobile ?? _caregiverMobile,
         aboutClient: aboutClient ?? _aboutClient,
         serviceDate: serviceDate ?? _serviceDate,
+        startDateTime: startDateTime ?? _startDateTime,
+        endDateTime: endDateTime ?? _endDateTime,
         serviceTime: serviceTime ?? _serviceTime,
         address: address ?? _address,
         genderPreference: genderPreference ?? _genderPreference,
@@ -457,10 +543,15 @@ class ServiceDetailsData {
         mobility: mobility ?? _mobility,
         haveAllergyProblem: haveAllergyProblem ?? _haveAllergyProblem,
         medication: medication ?? _medication,
+        refundDetails: refundDetails ?? _refundDetails,
+        suspectedThingDuringShift:
+            suspectedThingDuringShift ?? _suspectedThingDuringShift,
+        reportIssueByCg: reportIssueByCg ?? _reportIssueByCg,
         doYouHaveAnyAllergyProblem:
             doYouHaveAnyAllergyProblem ?? _doYouHaveAnyAllergyProblem,
         services: services ?? _services,
         completedServices: completedServices ?? _completedServices,
+        notCompletedServices: notCompletedServices ?? _notCompletedServices,
         totalAmount: totalAmount ?? _totalAmount,
         serviceFee: serviceFee ?? _serviceFee,
         serviceFeeTransactionId:
@@ -474,11 +565,15 @@ class ServiceDetailsData {
         isRatedByCg: isRatedByCg ?? _isRatedByCg,
         reasonForCancellation: reasonForCancellation ?? _reasonForCancellation,
         travelingCharge: travelingCharge ?? _travelingCharge,
+        suspectedThingDuringShiftDesc:
+            suspectedThingDuringShiftDesc ?? _suspectedThingDuringShiftDesc,
+        reportIssueByCgDesc: reportIssueByCgDesc ?? _reportIssueByCgDesc,
         isRebook: isRebook ?? _isRebook,
         status: status ?? _status,
         caregiverInfo: caregiverInfo ?? _caregiverInfo,
       );
   String? get profileId => _profileId;
+  String? get parentId => _parentId;
   bool? get isSubscribed => _isSubscribed;
   String? get subscriptionType => _subscriptionType;
   String? get subscriptionColor => _subscriptionColor;
@@ -486,12 +581,16 @@ class ServiceDetailsData {
   String? get bookingId => _bookingId;
   String? get startTime => _startTime;
   String? get endTime => _endTime;
+  ParentName? get parentName => _parentName;
   ClientName? get clientName => _clientName;
+  String? get parentMobile => _parentMobile;
   String? get clientMobile => _clientMobile;
   String? get clientAlternativeMobile => _clientAlternativeMobile;
   String? get decisionMakerMobile => _decisionMakerMobile;
   String? get decisionMakerAlternativeMobile => _decisionMakerAlternativeMobile;
+  String? get parentProPic => _parentProPic;
   String? get clientProPic => _clientProPic;
+  String? get parentProfileThumbnail => _parentProfileThumbnail;
   String? get clientProfileThumbnail => _clientProfileThumbnail;
   CaregiverName? get caregiverName => _caregiverName;
   String? get caregiverProPic => _caregiverProPic;
@@ -500,6 +599,8 @@ class ServiceDetailsData {
   String? get caregiverMobile => _caregiverMobile;
   String? get aboutClient => _aboutClient;
   String? get serviceDate => _serviceDate;
+  String? get startDateTime => _startDateTime;
+  String? get endDateTime => _endDateTime;
   String? get serviceTime => _serviceTime;
   Address? get address => _address;
   num? get genderPreference => _genderPreference;
@@ -515,10 +616,14 @@ class ServiceDetailsData {
   String? get mobility => _mobility;
   HaveAllergyProblem? get haveAllergyProblem => _haveAllergyProblem;
   List<Medication>? get medication => _medication;
+  List<RefundDetails>? get refundDetails => _refundDetails;
+  List<String>? get suspectedThingDuringShift => _suspectedThingDuringShift;
+  List<String>? get reportIssueByCg => _reportIssueByCg;
   DoYouHaveAnyAllergyProblem? get doYouHaveAnyAllergyProblem =>
       _doYouHaveAnyAllergyProblem;
   Services? get services => _services;
   CompletedServices? get completedServices => _completedServices;
+  NotCompletedServices? get notCompletedServices => _notCompletedServices;
   num? get totalAmount => _totalAmount;
   num? get serviceFee => _serviceFee;
   String? get serviceFeeTransactionId => _serviceFeeTransactionId;
@@ -530,6 +635,8 @@ class ServiceDetailsData {
   bool? get isRatedByCg => _isRatedByCg;
   String? get reasonForCancellation => _reasonForCancellation;
   String? get travelingCharge => _travelingCharge;
+  String? get suspectedThingDuringShiftDesc => _suspectedThingDuringShiftDesc;
+  String? get reportIssueByCgDesc => _reportIssueByCgDesc;
   bool? get isRebook => _isRebook;
   num? get status => _status;
   CaregiverInfo? get caregiverInfo => _caregiverInfo;
@@ -537,6 +644,7 @@ class ServiceDetailsData {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['profile_id'] = _profileId;
+    map['parent_id'] = _parentId;
     map['is_subscribed'] = _isSubscribed;
     map['subscription_type'] = _subscriptionType;
     map['subscription_color'] = _subscriptionColor;
@@ -544,14 +652,20 @@ class ServiceDetailsData {
     map['booking_id'] = _bookingId;
     map['start_time'] = _startTime;
     map['end_time'] = _endTime;
+    if (_parentName != null) {
+      map['parent_name'] = _parentName?.toJson();
+    }
     if (_clientName != null) {
       map['client_name'] = _clientName?.toJson();
     }
+    map['parent_mobile'] = _parentMobile;
     map['client_mobile'] = _clientMobile;
     map['client_alternative_mobile'] = _clientAlternativeMobile;
     map['decision_maker_mobile'] = _decisionMakerMobile;
     map['decision_maker_alternative_mobile'] = _decisionMakerAlternativeMobile;
+    map['parent_pro_pic'] = _parentProPic;
     map['client_pro_pic'] = _clientProPic;
+    map['parent_profile_thumbnail'] = _parentProfileThumbnail;
     map['client_profile_thumbnail'] = _clientProfileThumbnail;
     if (_caregiverName != null) {
       map['caregiver_name'] = _caregiverName?.toJson();
@@ -562,6 +676,8 @@ class ServiceDetailsData {
     map['caregiver_mobile'] = _caregiverMobile;
     map['about_client'] = _aboutClient;
     map['service_date'] = _serviceDate;
+    map['start_dateTime'] = _startDateTime;
+    map['end_dateTime'] = _endDateTime;
     map['service_time'] = _serviceTime;
     if (_address != null) {
       map['address'] = _address?.toJson();
@@ -591,6 +707,11 @@ class ServiceDetailsData {
     if (_medication != null) {
       map['medication'] = _medication?.map((v) => v.toJson()).toList();
     }
+    if (_refundDetails != null) {
+      map['refund_details'] = _refundDetails?.map((v) => v.toJson()).toList();
+    }
+    map['suspected_thing_during_shift'] = _suspectedThingDuringShift;
+    map['report_issue_by_cg'] = _reportIssueByCg;
     if (_doYouHaveAnyAllergyProblem != null) {
       map['do_you_have_any_allergy_problem'] =
           _doYouHaveAnyAllergyProblem?.toJson();
@@ -600,6 +721,9 @@ class ServiceDetailsData {
     }
     if (_completedServices != null) {
       map['completed_services'] = _completedServices?.toJson();
+    }
+    if (_notCompletedServices != null) {
+      map['not_completed_services'] = _notCompletedServices?.toJson();
     }
     map['total_amount'] = _totalAmount;
     map['service_fee'] = _serviceFee;
@@ -612,6 +736,8 @@ class ServiceDetailsData {
     map['is_rated_by_cg'] = _isRatedByCg;
     map['reason_for_cancellation'] = _reasonForCancellation;
     map['traveling_charge'] = _travelingCharge;
+    map['suspected_thing_during_shift_desc'] = _suspectedThingDuringShiftDesc;
+    map['report_issue_by_cg_desc'] = _reportIssueByCgDesc;
     map['is_rebook'] = _isRebook;
     map['status'] = _status;
     if (_caregiverInfo != null) {
@@ -670,6 +796,7 @@ class CaregiverInfo {
     String? profilePic,
     String? profileThumbnail,
     List<Review>? review,
+    List<ReviewByCg>? reviewByCg,
   }) {
     _serviceId = serviceId;
     _caregiverId = caregiverId;
@@ -692,6 +819,7 @@ class CaregiverInfo {
     _profilePic = profilePic;
     _profileThumbnail = profileThumbnail;
     _review = review;
+    _reviewByCg = reviewByCg;
   }
 
   CaregiverInfo.fromJson(dynamic json) {
@@ -731,6 +859,12 @@ class CaregiverInfo {
         _review?.add(Review.fromJson(v));
       });
     }
+    if (json['review_by_cg'] != null) {
+      _reviewByCg = [];
+      json['review_by_cg'].forEach((v) {
+        _reviewByCg?.add(ReviewByCg.fromJson(v));
+      });
+    }
   }
   String? _serviceId;
   String? _caregiverId;
@@ -753,6 +887,7 @@ class CaregiverInfo {
   String? _profilePic;
   String? _profileThumbnail;
   List<Review>? _review;
+  List<ReviewByCg>? _reviewByCg;
   CaregiverInfo copyWith({
     String? serviceId,
     String? caregiverId,
@@ -775,6 +910,7 @@ class CaregiverInfo {
     String? profilePic,
     String? profileThumbnail,
     List<Review>? review,
+    List<ReviewByCg>? reviewByCg,
   }) =>
       CaregiverInfo(
         serviceId: serviceId ?? _serviceId,
@@ -799,6 +935,7 @@ class CaregiverInfo {
         profilePic: profilePic ?? _profilePic,
         profileThumbnail: profileThumbnail ?? _profileThumbnail,
         review: review ?? _review,
+        reviewByCg: reviewByCg ?? _reviewByCg,
       );
   String? get serviceId => _serviceId;
   String? get caregiverId => _caregiverId;
@@ -821,6 +958,7 @@ class CaregiverInfo {
   String? get profilePic => _profilePic;
   String? get profileThumbnail => _profileThumbnail;
   List<Review>? get review => _review;
+  List<ReviewByCg>? get reviewByCg => _reviewByCg;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -853,6 +991,9 @@ class CaregiverInfo {
     if (_review != null) {
       map['review'] = _review?.map((v) => v.toJson()).toList();
     }
+    if (_reviewByCg != null) {
+      map['review_by_cg'] = _reviewByCg?.map((v) => v.toJson()).toList();
+    }
     return map;
   }
 }
@@ -871,6 +1012,7 @@ String reviewToJson(Review data) => json.encode(data.toJson());
 class Review {
   Review({
     String? clientid,
+    String? serviceId,
     String? name,
     String? time,
     num? rating,
@@ -879,6 +1021,7 @@ class Review {
     String? review,
   }) {
     _clientid = clientid;
+    _serviceId = serviceId;
     _name = name;
     _time = time;
     _rating = rating;
@@ -889,6 +1032,7 @@ class Review {
 
   Review.fromJson(dynamic json) {
     _clientid = json['clientid'];
+    _serviceId = json['service_id'];
     _name = json['name'];
     _time = json['time'];
     _rating = json['rating'];
@@ -897,6 +1041,7 @@ class Review {
     _review = json['review'];
   }
   String? _clientid;
+  String? _serviceId;
   String? _name;
   String? _time;
   num? _rating;
@@ -905,6 +1050,7 @@ class Review {
   String? _review;
   Review copyWith({
     String? clientid,
+    String? serviceId,
     String? name,
     String? time,
     num? rating,
@@ -914,6 +1060,7 @@ class Review {
   }) =>
       Review(
         clientid: clientid ?? _clientid,
+        serviceId: serviceId ?? _serviceId,
         name: name ?? _name,
         time: time ?? _time,
         rating: rating ?? _rating,
@@ -922,6 +1069,7 @@ class Review {
         review: review ?? _review,
       );
   String? get clientid => _clientid;
+  String? get serviceId => _serviceId;
   String? get name => _name;
   String? get time => _time;
   num? get rating => _rating;
@@ -932,11 +1080,74 @@ class Review {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['clientid'] = _clientid;
+    map['service_id'] = _serviceId;
     map['name'] = _name;
     map['time'] = _time;
     map['rating'] = _rating;
     map['profile_pic'] = _profilePic;
     map['profile_thumbnail'] = _profileThumbnail;
+    map['review'] = _review;
+    return map;
+  }
+}
+
+ReviewByCg reviewByCgFromJson(String str) =>
+    ReviewByCg.fromJson(json.decode(str));
+String reviewByCgToJson(ReviewByCg data) => json.encode(data.toJson());
+
+class ReviewByCg {
+  ReviewByCg({
+    String? ratedCgId,
+    String? serviceId,
+    String? name,
+    num? rating,
+    String? review,
+  }) {
+    _ratedCgId = ratedCgId;
+    _serviceId = serviceId;
+    _name = name;
+    _rating = rating;
+    _review = review;
+  }
+
+  ReviewByCg.fromJson(dynamic json) {
+    _ratedCgId = json['rated_cg_id'];
+    _serviceId = json['service_id'];
+    _name = json['name'];
+    _rating = json['rating'];
+    _review = json['review'];
+  }
+  String? _ratedCgId;
+  String? _serviceId;
+  String? _name;
+  num? _rating;
+  String? _review;
+  ReviewByCg copyWith({
+    String? ratedCgId,
+    String? serviceId,
+    String? name,
+    num? rating,
+    String? review,
+  }) =>
+      ReviewByCg(
+        ratedCgId: ratedCgId ?? _ratedCgId,
+        serviceId: serviceId ?? _serviceId,
+        name: name ?? _name,
+        rating: rating ?? _rating,
+        review: review ?? _review,
+      );
+  String? get ratedCgId => _ratedCgId;
+  String? get serviceId => _serviceId;
+  String? get name => _name;
+  num? get rating => _rating;
+  String? get review => _review;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['rated_cg_id'] = _ratedCgId;
+    map['service_id'] = _serviceId;
+    map['name'] = _name;
+    map['rating'] = _rating;
     map['review'] = _review;
     return map;
   }
@@ -1309,6 +1520,164 @@ class Name {
     final map = <String, dynamic>{};
     map['firstName'] = _firstName;
     map['lastName'] = _lastName;
+    return map;
+  }
+}
+
+/// tier1 : [{"id":"643cfbc421a11f9948e46bf4","service":"Wake-Up Assistance","is_extra":false},{"id":"643cfbc421a11f9948e46bf5","service":"Bedtime Assistance","is_extra":false},{"id":"643cfbc421a11f9948e46bf6","service":"Help w/ Dressing","is_extra":false}]
+/// tier2 : [{"id":"643cfbc421a11f9948e46bf4","service":"Wake-Up Assistance","is_extra":false},{"id":"643cfbc421a11f9948e46bf5","service":"Bedtime Assistance","is_extra":false},{"id":"643cfbc421a11f9948e46bf6","service":"Help w/ Dressing","is_extra":false}]
+
+NotCompletedServices notCompletedServicesFromJson(String str) =>
+    NotCompletedServices.fromJson(json.decode(str));
+String notCompletedServicesToJson(NotCompletedServices data) =>
+    json.encode(data.toJson());
+
+class NotCompletedServices {
+  NotCompletedServices({
+    List<NotCompletedTier1>? notCompletedTier1,
+    List<NotCompletedTier2>? notCompletedTier2,
+  }) {
+    _notCompletedTier1 = notCompletedTier1;
+    _notCompletedTier2 = notCompletedTier2;
+  }
+
+  NotCompletedServices.fromJson(dynamic json) {
+    if (json['tier1'] != null) {
+      _notCompletedTier1 = [];
+      json['tier1'].forEach((v) {
+        _notCompletedTier1?.add(NotCompletedTier1.fromJson(v));
+      });
+    }
+    if (json['tier2'] != null) {
+      _notCompletedTier2 = [];
+      json['tier2'].forEach((v) {
+        _notCompletedTier2?.add(NotCompletedTier2.fromJson(v));
+      });
+    }
+  }
+  List<NotCompletedTier1>? _notCompletedTier1;
+  List<NotCompletedTier2>? _notCompletedTier2;
+  NotCompletedServices copyWith({
+    List<NotCompletedTier1>? notCompletedTier1,
+    List<NotCompletedTier2>? notCompletedTier2,
+  }) =>
+      NotCompletedServices(
+        notCompletedTier1: notCompletedTier1 ?? _notCompletedTier1,
+        notCompletedTier2: notCompletedTier2 ?? _notCompletedTier2,
+      );
+  List<NotCompletedTier1>? get notCompletedTier1 => _notCompletedTier1;
+  List<NotCompletedTier2>? get notCompletedTier2 => _notCompletedTier2;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    if (_notCompletedTier1 != null) {
+      map['tier1'] = _notCompletedTier1?.map((v) => v.toJson()).toList();
+    }
+    if (_notCompletedTier2 != null) {
+      map['tier2'] = _notCompletedTier2?.map((v) => v.toJson()).toList();
+    }
+    return map;
+  }
+}
+
+/// id : "643cfbc421a11f9948e46bf4"
+/// service : "Wake-Up Assistance"
+/// is_extra : false
+
+NotCompletedTier1 notCompletedTier1FromJson(String str) =>
+    NotCompletedTier1.fromJson(json.decode(str));
+String notCompletedTier1ToJson(NotCompletedTier1 data) =>
+    json.encode(data.toJson());
+
+class NotCompletedTier1 {
+  NotCompletedTier1({
+    String? id,
+    String? service,
+    bool? isExtra,
+  }) {
+    _id = id;
+    _service = service;
+    _isExtra = isExtra;
+  }
+
+  NotCompletedTier1.fromJson(dynamic json) {
+    _id = json['id'];
+    _service = json['service'];
+    _isExtra = json['is_extra'];
+  }
+  String? _id;
+  String? _service;
+  bool? _isExtra;
+  NotCompletedTier1 copyWith({
+    String? id,
+    String? service,
+    bool? isExtra,
+  }) =>
+      NotCompletedTier1(
+        id: id ?? _id,
+        service: service ?? _service,
+        isExtra: isExtra ?? _isExtra,
+      );
+  String? get id => _id;
+  String? get service => _service;
+  bool? get isExtra => _isExtra;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['service'] = _service;
+    map['is_extra'] = _isExtra;
+    return map;
+  }
+}
+
+/// id : "643cfbc421a11f9948e46bf4"
+/// service : "Wake-Up Assistance"
+/// is_extra : false
+
+NotCompletedTier2 notCompletedTier2FromJson(String str) =>
+    NotCompletedTier2.fromJson(json.decode(str));
+String notCompletedTier2ToJson(NotCompletedTier2 data) =>
+    json.encode(data.toJson());
+
+class NotCompletedTier2 {
+  NotCompletedTier2({
+    String? id,
+    String? service,
+    bool? isExtra,
+  }) {
+    _id = id;
+    _service = service;
+    _isExtra = isExtra;
+  }
+
+  NotCompletedTier2.fromJson(dynamic json) {
+    _id = json['id'];
+    _service = json['service'];
+    _isExtra = json['is_extra'];
+  }
+  String? _id;
+  String? _service;
+  bool? _isExtra;
+  NotCompletedTier2 copyWith({
+    String? id,
+    String? service,
+    bool? isExtra,
+  }) =>
+      NotCompletedTier2(
+        id: id ?? _id,
+        service: service ?? _service,
+        isExtra: isExtra ?? _isExtra,
+      );
+  String? get id => _id;
+  String? get service => _service;
+  bool? get isExtra => _isExtra;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['service'] = _service;
+    map['is_extra'] = _isExtra;
     return map;
   }
 }
@@ -2115,6 +2484,143 @@ class ClientName {
     final map = <String, dynamic>{};
     map['firstName'] = _firstName;
     map['lastName'] = _lastName;
+    return map;
+  }
+}
+
+ParentName parentNameFromJson(String str) =>
+    ParentName.fromJson(json.decode(str));
+String parentNameToJson(ParentName data) => json.encode(data.toJson());
+
+class ParentName {
+  ParentName({
+    String? firstName,
+    String? lastName,
+  }) {
+    _firstName = firstName;
+    _lastName = lastName;
+  }
+
+  ParentName.fromJson(dynamic json) {
+    _firstName = json['firstName'];
+    _lastName = json['lastName'];
+  }
+  String? _firstName;
+  String? _lastName;
+  ParentName copyWith({
+    String? firstName,
+    String? lastName,
+  }) =>
+      ParentName(
+        firstName: firstName ?? _firstName,
+        lastName: lastName ?? _lastName,
+      );
+  String? get firstName => _firstName;
+  String? get lastName => _lastName;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['firstName'] = _firstName;
+    map['lastName'] = _lastName;
+    return map;
+  }
+}
+
+RefundDetails refundDetailsFromJson(String str) =>
+    RefundDetails.fromJson(json.decode(str));
+String refundDetailsToJson(RefundDetails data) => json.encode(data.toJson());
+
+class RefundDetails {
+  RefundDetails({
+    String? uniqueId,
+    List<StatusHistory>? statusHistory,
+  }) {
+    _uniqueId = uniqueId;
+    _statusHistory = statusHistory;
+  }
+
+  RefundDetails.fromJson(dynamic json) {
+    _uniqueId = json['uniqueId'];
+    if (json['statusHistory'] != null) {
+      _statusHistory = [];
+      json['statusHistory'].forEach((v) {
+        _statusHistory?.add(StatusHistory.fromJson(v));
+      });
+    }
+  }
+  String? _uniqueId;
+  List<StatusHistory>? _statusHistory;
+  RefundDetails copyWith({
+    String? uniqueId,
+    List<StatusHistory>? statusHistory,
+  }) =>
+      RefundDetails(
+        uniqueId: uniqueId ?? _uniqueId,
+        statusHistory: statusHistory ?? _statusHistory,
+      );
+  String? get uniqueId => _uniqueId;
+  List<StatusHistory>? get statusHistory => _statusHistory;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['uniqueId'] = _uniqueId;
+    if (_statusHistory != null) {
+      map['statusHistory'] = _statusHistory?.map((v) => v.toJson()).toList();
+    }
+    return map;
+  }
+}
+
+StatusHistory statusHistoryFromJson(String str) =>
+    StatusHistory.fromJson(json.decode(str));
+String statusHistoryToJson(StatusHistory data) => json.encode(data.toJson());
+
+class StatusHistory {
+  StatusHistory({
+    int? status,
+    String? title,
+    String? date,
+    String? id,
+  }) {
+    _status = status;
+    _title = title;
+    _date = date;
+    _id = id;
+  }
+
+  StatusHistory.fromJson(dynamic json) {
+    _status = json['status'];
+    _title = json['title'];
+    _date = json['date'];
+    _id = json['_id'];
+  }
+  int? _status;
+  String? _title;
+  String? _date;
+  String? _id;
+  StatusHistory copyWith({
+    int? status,
+    String? title,
+    String? date,
+    String? id,
+  }) =>
+      StatusHistory(
+        status: status ?? _status,
+        title: title ?? _title,
+        date: date ?? _date,
+        id: id ?? _id,
+      );
+  int? get status => _status;
+  String? get title => _title;
+  String? get date => _date;
+  String? get id => _id;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['status'] = _status;
+    map['title'] = _title;
+    map['date'] = _date;
+    map['_id'] = _id;
     return map;
   }
 }

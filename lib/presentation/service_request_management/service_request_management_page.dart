@@ -187,6 +187,7 @@ class _ServiceRequestManagementPageState
         height: 46,
         child: CustomButton(
           onPressed: () {
+            _page = 1;
             _searchController.clear();
             fromDateController.clear();
             toDateController.clear();
@@ -220,6 +221,7 @@ class _ServiceRequestManagementPageState
         _serviceRequestBloc.selectedFromDateTime = value;
         if (_serviceRequestBloc.selectedFromDate.isNotEmpty &&
             _serviceRequestBloc.selectedToDate.isNotEmpty) {
+          _page = 1;
           _serviceRequestBloc.add(
               ServiceRequestManagementEvent.getServiceRequests(
                   context: context,
@@ -251,6 +253,7 @@ class _ServiceRequestManagementPageState
         print("selecteddd to date : ${_serviceRequestBloc.selectedToDate}");
         if (_serviceRequestBloc.selectedFromDate.isNotEmpty &&
             _serviceRequestBloc.selectedToDate.isNotEmpty) {
+          _page = 1;
           _serviceRequestBloc.add(
               ServiceRequestManagementEvent.getServiceRequests(
                   context: context,
@@ -271,6 +274,7 @@ class _ServiceRequestManagementPageState
       onSubmitted: (val) {
         print("item inside search submit : ${items.title}");
         _serviceRequestBloc.searchQuery = val;
+        _page = 1;
         _serviceRequestBloc.add(
             ServiceRequestManagementEvent.getServiceRequests(
                 context: context,
@@ -655,6 +659,7 @@ class _ServiceRequestManagementPageState
     return CustomDropdown<int>(
       onChange: (int value, int index) {
         _serviceRequestBloc.statusFilterId = value;
+        _page = 1;
         _serviceRequestBloc.add(
             ServiceRequestManagementEvent.getServiceRequests(
                 context: context,
@@ -721,7 +726,13 @@ class _ServiceRequestManagementPageState
             _page = _page + 1;
             _serviceRequestBloc.add(
                 ServiceRequestManagementEvent.getServiceRequests(
-                    context: context, page: _page, limit: _limit));
+                    context: context,
+                    page: _page,
+                    limit: _limit,
+                    searchTerm: _serviceRequestBloc.searchQuery,
+                    statusFilterId: _serviceRequestBloc.statusFilterId,
+                    fromDate: _serviceRequestBloc.selectedFromDate,
+                    toDate: _serviceRequestBloc.selectedToDate));
             updateData();
           }
         },
@@ -729,7 +740,13 @@ class _ServiceRequestManagementPageState
           _page = i;
           _serviceRequestBloc.add(
               ServiceRequestManagementEvent.getServiceRequests(
-                  context: context, page: _page, limit: _limit));
+                  context: context,
+                  page: _page,
+                  limit: _limit,
+                  searchTerm: _serviceRequestBloc.searchQuery,
+                  statusFilterId: _serviceRequestBloc.statusFilterId,
+                  fromDate: _serviceRequestBloc.selectedFromDate,
+                  toDate: _serviceRequestBloc.selectedToDate));
           updateData();
         },
         onPreviousPressed: () {
@@ -737,7 +754,13 @@ class _ServiceRequestManagementPageState
             _page = _page - 1;
             _serviceRequestBloc.add(
                 ServiceRequestManagementEvent.getServiceRequests(
-                    context: context, page: _page, limit: _limit));
+                    context: context,
+                    page: _page,
+                    limit: _limit,
+                    searchTerm: _serviceRequestBloc.searchQuery,
+                    statusFilterId: _serviceRequestBloc.statusFilterId,
+                    fromDate: _serviceRequestBloc.selectedFromDate,
+                    toDate: _serviceRequestBloc.selectedToDate));
             updateData();
           }
         });
