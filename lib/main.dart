@@ -5,7 +5,6 @@ import 'package:admin_580_tech/application/bloc/caregiver_verification/caregiver
 import 'package:admin_580_tech/application/bloc/email-otp-verification/email_otp_verification_bloc.dart';
 import 'package:admin_580_tech/application/bloc/login/login_bloc.dart';
 import 'package:admin_580_tech/application/bloc/signup/signup_bloc.dart';
-import 'package:admin_580_tech/application/bloc/subscription/subscription_bloc.dart';
 import 'package:admin_580_tech/core/hive/hive_utils.dart';
 import 'package:admin_580_tech/core/theme.dart';
 import 'package:admin_580_tech/infrastructure/caregiver_profile/caregiver_profile_repository.dart';
@@ -14,7 +13,6 @@ import 'package:admin_580_tech/infrastructure/email_otp_verification/email_otp_v
 import 'package:admin_580_tech/infrastructure/login/login_repository.dart';
 import 'package:admin_580_tech/infrastructure/service_request_management/service_request_management_repository.dart';
 import 'package:admin_580_tech/infrastructure/signup/signup_repository.dart';
-import 'package:admin_580_tech/infrastructure/subscription/subscription_repository.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.dart';
 import 'package:admin_580_tech/presentation/widget/loader_view.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
@@ -22,12 +20,13 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:amplify_storage_s3/amplify_storage_s3.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 import 'amplifyconfiguration.dart';
 import 'application/bloc/form_validation/form_validation_bloc.dart';
+import 'application/bloc/resend_otp_bloc/resend_otp_bloc.dart';
 import 'application/bloc/service_request_management/service_request_management_bloc.dart';
 import 'core/config/environment.dart';
+import 'infrastructure/resend_otp/resend_otp_repo_impl.dart';
 import 'infrastructure/shared_preference/shared_preff_util.dart';
 
 Future<void> main() async {
@@ -86,6 +85,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(
             create: (_) =>
                 EmailOtpVerificationBloc(EmailOtpVerificationRepository())),
+        BlocProvider(create: (_) => ResendOtpBloc(ResendOTPRepoImpl())),
       ],
       child: MaterialApp.router(
         routerDelegate: _appRouter.delegate(),

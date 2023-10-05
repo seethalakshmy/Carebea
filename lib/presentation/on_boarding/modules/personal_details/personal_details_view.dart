@@ -624,6 +624,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           withData: true,
         );
         if (result != null) {
+          bytesList.clear();
           file = result.files.single;
           for (PlatformFile file in result.files) {
             bytesList.add(file);
@@ -674,7 +675,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
               await uploadProfilePicToAwsS3(AppString.profilePicture.val,
                   SharedPreffUtil().getCareGiverUserId);
             }
-            if (bytesList.isNotEmpty) {
+            if (bytesList.length <= 1) {
               for (int i = 0; i < bytesList.length; i++) {
                 await uploadDocumentsToAwsS3(AppString.documents.val,
                     SharedPreffUtil().getCareGiverUserId, bytesList[i]);
@@ -724,7 +725,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           documentId: selectedDocument,
           documentNo: documentNumberController.text.trim(),
           expiryDate: expiryDateController.text.trim(),
-          documentList: widget.onboardingBloc.uploadedDocumentList,
+          documentList: [widget.onboardingBloc.uploadedDocumentList.first],
           profilePic: widget.onboardingBloc.profileUrl));
     }
   }

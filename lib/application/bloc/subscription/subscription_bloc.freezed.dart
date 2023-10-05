@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'subscription_bloc.dart';
 
@@ -96,7 +96,7 @@ class _$SubscriptionEventCopyWithImpl<$Res, $Val extends SubscriptionEvent>
     Object? page = null,
     Object? limit = null,
     Object? searchTerm = null,
-    Object? subscriptionType = null,
+    Object? subscriptionType = freezed,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -115,7 +115,7 @@ class _$SubscriptionEventCopyWithImpl<$Res, $Val extends SubscriptionEvent>
           ? _value.searchTerm
           : searchTerm // ignore: cast_nullable_to_non_nullable
               as String,
-      subscriptionType: null == subscriptionType
+      subscriptionType: freezed == subscriptionType
           ? _value.subscriptionType
           : subscriptionType // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -154,7 +154,7 @@ class __$$_GetSubscriptionCopyWithImpl<$Res>
     Object? page = null,
     Object? limit = null,
     Object? searchTerm = null,
-    Object? subscriptionType = null,
+    Object? subscriptionType = freezed,
   }) {
     return _then(_$_GetSubscription(
       userId: null == userId
@@ -173,7 +173,7 @@ class __$$_GetSubscriptionCopyWithImpl<$Res>
           ? _value.searchTerm
           : searchTerm // ignore: cast_nullable_to_non_nullable
               as String,
-      subscriptionType: null == subscriptionType
+      subscriptionType: freezed == subscriptionType
           ? _value.subscriptionType
           : subscriptionType // ignore: cast_nullable_to_non_nullable
               as dynamic,

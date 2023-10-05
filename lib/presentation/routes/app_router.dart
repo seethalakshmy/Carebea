@@ -31,12 +31,12 @@ class AppRouter extends $AppRouter {
     //   page: CareAmbassadorRegistrationRoute.page,
     //   maintainState: true,
     // ),
-    // AutoRoute(
-    //   path: "/signup",
-    //   page: SignUpRoute.page,
-    //   maintainState: true,
-    //   initial: true,
-    // ),
+    AutoRoute(
+      path: "/signup",
+      page: SignUpRoute.page,
+      maintainState: true,
+      // initial: true,
+    ),
     AutoRoute(
       path: "/email-otp-verification",
       page: EmailOtpVerificationRoute.page,
