@@ -2206,6 +2206,39 @@ class _ApiClient implements ApiClient {
   }
 
   @override
+  Future<ServiceDetailsResponseModel> getServiceDetails(
+    token,
+    userId,
+    serviceId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'Authorization': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = {
+      'user_id': userId,
+      'service_id': serviceId,
+    };
+    _data.removeWhere((k, v) => v == null);
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ServiceDetailsResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/service-info',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ServiceDetailsResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<ServiceStatusResponseModel> getServiceStatus() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

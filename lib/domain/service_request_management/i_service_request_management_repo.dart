@@ -7,6 +7,7 @@ import '../caregiver_profile/model/caregiver_profile_response.dart';
 import '../core/api_error_handler/api_error_handler.dart';
 import '../transaction_management/model/get_filters_response.dart';
 import 'model/reschedule_response.dart';
+import 'model/service_details_response_model.dart';
 import 'model/service_request_list_response_model.dart';
 import 'model/service_request_response.dart';
 import 'model/service_status_response_model.dart';
@@ -72,6 +73,12 @@ abstract class IServiceRequestManagementRepo {
     String? fromDate,
     String? toDate,
     int? dateFilterId,
+  });
+
+  Future<Either<ApiErrorHandler, ServiceDetailsResponseModel>>
+      getServiceDetails({
+    required String userId,
+    required String serviceId,
   });
 
   Future<Either<ApiErrorHandler, ServiceStatusResponseModel>>

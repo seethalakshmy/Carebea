@@ -50,6 +50,7 @@ import '../role_creation/model/module_response.dart';
 import '../role_creation/model/view_role_response.dart';
 import '../service_request_management/model/assign_caregiver_params.dart';
 import '../service_request_management/model/reschedule_response.dart';
+import '../service_request_management/model/service_details_response_model.dart';
 import '../service_request_management/model/service_request_list_response_model.dart';
 import '../service_request_management/model/service_request_response.dart';
 import '../service_request_management/model/service_status_response_model.dart';
@@ -611,6 +612,14 @@ abstract class ApiClient {
     @Field('to_date') String? toDate,
     @Field('filter_id') int? dateFilterId,
   );
+
+  @POST("/admin/service-info")
+  Future<ServiceDetailsResponseModel> getServiceDetails(
+    @Header("Authorization") String token,
+    @Field('user_id') String userId,
+    @Field('service_id') String? serviceId,
+  );
+
   @GET("/common-data/get-service-status")
   Future<ServiceStatusResponseModel> getServiceStatus();
 

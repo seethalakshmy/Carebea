@@ -8,7 +8,6 @@ import 'package:admin_580_tech/generated/assets.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/service_request_management/widgets/cancellation_widget.dart';
 import 'package:admin_580_tech/presentation/service_request_management/widgets/profile_widget.dart';
-import 'package:admin_580_tech/presentation/service_request_management/widgets/rating_widget.dart';
 import 'package:admin_580_tech/presentation/service_request_management/widgets/status_widget.dart';
 import 'package:admin_580_tech/presentation/widget/cached_image.dart';
 import 'package:admin_580_tech/presentation/widget/commonImageview.dart';
@@ -26,43 +25,52 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../application/bloc/service_request_management/service_request_management_bloc.dart';
 import '../../../core/responsive.dart';
 import '../../../domain/service_request_management/model/assign_caregiver_params.dart';
-import '../../../domain/service_request_management/model/service_request_response.dart';
+import '../../../domain/service_request_management/model/service_details_response_model.dart';
 import '../../caregiver_profile/caregiver_profile_page.dart';
 import '../../routes/app_router.gr.dart';
 import '../../side_menu/side_menu_page.dart';
 import '../../widget/common_alert_widget.dart';
 import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_icon.dart';
+import '../../widget/custom_shimmer.dart';
 import '../../widget/custom_text_field.dart';
 
-class ServiceDetailsDialog extends StatefulWidget {
-  const ServiceDetailsDialog(
-      {Key? key, required this.service, required this.title})
+class ServiceDetailsDialog extends StatelessWidget {
+  ServiceDetailsDialog(
+      {Key? key,
+      required this.service,
+      required this.title,
+      required this.isLoading,
+      required this.serviceRequestManagementBloc})
       : super(key: key);
 
-  final ServiceList service;
+  final ServiceDetailsData service;
   final String title;
+  final bool isLoading;
+  final ServiceRequestManagementBloc serviceRequestManagementBloc;
 
-  @override
-  State<ServiceDetailsDialog> createState() => _ServiceDetailsDialogState();
-}
-
-class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
   final TextEditingController dateController = TextEditingController();
-  TextEditingController fromTimeController = TextEditingController();
-  TextEditingController toTimeController = TextEditingController();
+
+  final TextEditingController fromTimeController = TextEditingController();
+
+  final TextEditingController toTimeController = TextEditingController();
+
   String? startTime;
+
   String? endTime;
+
   final _formKey = GlobalKey<FormState>();
+
   String selectedDate = "";
+
   final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Center(
+    return BlocProvider(
+      create: (context) => serviceRequestManagementBloc,
+      child: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 60),
           child: Container(
@@ -81,7 +89,7 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CustomText("${widget.title} Service Request",
+                          CustomText("$title Service Request",
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 18)),
                           CloseButton(
@@ -94,332 +102,135 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: Column(
-                      children: [
-                        Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.start,
-                          children: [
-                            Expanded(
+                  isLoading ? const SizedBox() : const SizedBox(height: 30),
+                  BlocBuilder<ServiceRequestManagementBloc,
+                      ServiceRequestManagementState>(
+                    builder: (context, state) {
+                      return isLoading
+                          ? const CustomShimmerWidget.rectangular(height: 600)
+                          : Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  ProfileWidget(
-                                    imageUrl:
-                                        widget.service.client?.profile ?? "",
-                                    name:
-                                        "${widget.service.client?.firstName} ${widget.service.client?.lastName}",
-                                    subText: 'Client',
-                                    onNameTap: () {
-                                      Navigator.pop(context);
-                                      autoTabRouter?.navigate(
-                                          UserManagementDetailRoute(
-                                              id: widget.service.client?.id));
-                                    },
-                                  ),
-                                  Row(
+                                  Wrap(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                        WrapCrossAlignment.start,
                                     children: [
-                                      const CustomText('Status'),
-                                      const SizedBox(
-                                        width: 140,
-                                      ),
-                                      StatusWidget(
-                                        status: widget.title,
-                                        isOngoing:
-                                            widget.service.isOngoing ?? false,
-                                        onStartPressed: () {
-                                          showDialog(
-                                            context: context,
-                                            builder:
-                                                (BuildContext buildContext) {
-                                              return BlocBuilder<
-                                                  ServiceRequestManagementBloc,
-                                                  ServiceRequestManagementState>(
-                                                builder: (context, state) {
-                                                  return CommonAlertWidget(
-                                                    controller: controller,
-                                                    isLoading: state
-                                                        .isStartServiceLoading,
-                                                    heading: AppString
-                                                        .startService.val,
-                                                    label: AppString
-                                                        .areYouSureStartServiceRequest
-                                                        .val,
-                                                    onTapYes: () {
-                                                      context
-                                                          .read<
-                                                              ServiceRequestManagementBloc>()
-                                                          .add(ServiceRequestManagementEvent
-                                                              .startService(
-                                                                  userId: SharedPreffUtil()
-                                                                      .getAdminId,
-                                                                  serviceId: widget
-                                                                          .service
-                                                                          .id ??
-                                                                      "",
-                                                                  context:
-                                                                      context));
-                                                    },
-                                                  );
-                                                },
-                                              );
-                                            },
-                                          );
-                                        },
-                                      ),
+                                      _clientViewWidget(context),
+                                      _caViewWidget(context)
                                     ],
                                   ),
-                                  _textAndSubText(
-                                      text: AppString.serviceId.val,
-                                      subText: widget.service.serviceId ?? ""),
-                                  if (widget.title == AppString.canceled.val)
-                                    CancellationWidget(
-                                        reason:
-                                            widget.service.cancelReason ?? ""),
-                                  _textAndSubText(
-                                      text: AppString.startDateAndTime.val,
-                                      subText:
-                                          widget.service.startDateTime ?? ""),
-                                  _textAndSubText(
-                                      text: AppString.endDateAndTime.val,
-                                      subText:
-                                          widget.service.endDateTime ?? ""),
-                                  _textAndSubText(
-                                      text: AppString.location.val,
-                                      subText: widget.service.location !=
-                                                  null &&
-                                              widget
-                                                  .service.location!.isNotEmpty
-                                          ? "${widget.service.location?.first.address} \n ${widget.service.location?.first.streetName}\n ${widget.service.location?.first.stateName} \n ${widget.service.location?.first.cityName}"
-                                          : ""),
-                                  if (widget.title == AppString.completed.val &&
-                                      (widget.service.isRated ?? false))
-                                    RatingWidget(service: widget.service),
-                                  if ((widget.service.feedback ?? "")
-                                      .isNotEmpty)
-                                    _textAndSubText(
-                                        text: AppString.feedBack.val,
-                                        subText: widget.service.feedback ?? ""),
-                                  _textAndSubText(
-                                      text: AppString.serviceFee.val,
-                                      subText: widget.service.serviceFee ?? ""),
-                                  _textAndSubText(
-                                      text: AppString.transactionId.val,
-                                      subText: ""),
-                                  if (widget.title == AppString.canceled.val)
-                                    if (widget.title == AppString.canceled.val)
-                                      _textAndSubText(
-                                          text: AppString.cancelledBy.val,
-                                          subText:
-                                              widget.service.cancelledBy ?? ""),
-                                  if (widget.title == AppString.canceled.val)
-                                    _textAndSubText(
-                                        text: AppString.refundStatus.val,
-                                        subText:
-                                            widget.service.refundStatus ?? ""),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  widget.title == AppString.pending.val
-                                      ? const SizedBox()
-                                      : ProfileWidget(
-                                          imageUrl: widget
-                                                  .service.careGiver?.profile ??
-                                              "",
-                                          name:
-                                              "${widget.service.careGiver?.firstName} ${widget.service.careGiver?.lastName}",
-                                          subText: 'Care Ambassador',
-                                          onNameTap: () {
-                                            Navigator.pop(context);
-                                            autoTabRouter?.navigate(
-                                                CareGiverDetailRoute(
-                                                    id: widget.service.careGiver
-                                                        ?.id));
+                                  if (title == AppString.pending.val ||
+                                      title == AppString.upcoming.val)
+                                    BlocBuilder<ServiceRequestManagementBloc,
+                                        ServiceRequestManagementState>(
+                                      builder: (context, state) {
+                                        return CustomButton(
+                                            onPressed: () {
+                                              _cancelServiceRequestPopup(
+                                                context,
+                                                service,
+                                              );
+                                            },
+                                            height: 45,
+                                            minWidth: 200,
+                                            color: Colors.white,
+                                            textColor:
+                                                AppColor.primaryColor.val,
+                                            borderColor:
+                                                AppColor.primaryColor.val,
+                                            text: AppString
+                                                .cancelThisServiceRequest.val);
+                                      },
+                                    ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  if (title == AppString.upcoming.val)
+                                    BlocBuilder<ServiceRequestManagementBloc,
+                                        ServiceRequestManagementState>(
+                                      builder: (context, state) {
+                                        return CustomButton(
+                                          onPressed: () {
+                                            context
+                                                .read<
+                                                    ServiceRequestManagementBloc>()
+                                                .add(const ServiceRequestManagementEvent
+                                                    .isRescheduleInitialView());
+                                            showDialog(
+                                                context: context,
+                                                builder: (
+                                                  BuildContext buildContext,
+                                                ) {
+                                                  return BlocBuilder<
+                                                      ServiceRequestManagementBloc,
+                                                      ServiceRequestManagementState>(
+                                                    builder: (context, state) {
+                                                      return Dialog(
+                                                        child: CustomContainer
+                                                            .decoration(
+                                                                height: state
+                                                                        .isRescheduleOtherMatchingListView
+                                                                    ? 1000
+                                                                    : 510,
+                                                                width: state
+                                                                        .isRescheduleOtherMatchingListView
+                                                                    ? 1500
+                                                                    : 600,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color:
+                                                                      AppColor
+                                                                          .white
+                                                                          .val,
+                                                                  shape: BoxShape
+                                                                      .rectangle,
+                                                                ),
+                                                                child: state
+                                                                        .isRescheduleInitialView
+                                                                    ? rescheduleInitialView(
+                                                                        context,
+                                                                        state)
+                                                                    : state
+                                                                            .isRescheduleLoaderView
+                                                                        ? loaderView()
+                                                                        : state
+                                                                                .isRescheduleAvailableCaregiverView
+                                                                            ? availableCaregiverView(
+                                                                                state.rescheduleResponse?.data?.caregivers?.first,
+                                                                                state.rescheduleResponse?.data?.oldServiceId,
+                                                                                context,
+                                                                                state)
+                                                                            : state.isRescheduleNotAvailableCaregiverView
+                                                                                ? _notAvailableCaregiversView(context)
+                                                                                : state.isRescheduleOtherMatchingListView
+                                                                                    ? _otherMatchingListView(context, state, state.rescheduleResponse?.data?.oldServiceId)
+                                                                                    : Container()),
+                                                      );
+                                                    },
+                                                  );
+                                                });
                                           },
-                                        ),
-                                  _serviceListWidget(
-                                      title: 'Service Needed',
-                                      servicesList:
-                                          widget.service.serviceNeeded ?? []),
-                                  if (widget.title == AppString.completed.val &&
-                                      (widget.service.caregiverReportedIssues ??
-                                              [])
-                                          .isNotEmpty)
-                                    _textAndSubText(
-                                        text:
-                                            "The suspected things during shift",
-                                        subText: widget.service
-                                                .suspectedThingsDuringShift
-                                                ?.join(' ') ??
-                                            ''),
-                                  if (widget.title == AppString.completed.val &&
-                                      (widget.service.suspectedOtherIssues ??
-                                              "")
-                                          .isNotEmpty)
-                                    _textAndSubText(
-                                        text: "Other Issues",
-                                        subText: widget
-                                                .service.suspectedOtherIssues ??
-                                            ''),
-                                  if (widget.title == AppString.completed.val &&
-                                      (widget.service.caregiverReportedIssues ??
-                                              [])
-                                          .isNotEmpty)
-                                    _textAndSubText(
-                                        text:
-                                            "Reported issues by the care giver",
-                                        subText: widget
-                                                .service.caregiverReportedIssues
-                                                ?.join(' ') ??
-                                            ''),
-                                  if (widget.title == AppString.completed.val &&
-                                      (widget.service
-                                                  .caregiverReportedOtherIssues ??
-                                              "")
-                                          .isNotEmpty)
-                                    _textAndSubText(
-                                        text: "Other Issues",
-                                        subText: widget.service
-                                                .caregiverReportedOtherIssues ??
-                                            ''),
-                                  if (widget.title == AppString.completed.val &&
-                                      (widget.service.serviceCompleted ?? [])
-                                          .isNotEmpty)
-                                    _serviceListWidget(
-                                        title: 'Service Completed',
-                                        servicesList:
-                                            widget.service.serviceCompleted ??
-                                                []),
-                                  if (widget.title == AppString.completed.val &&
-                                      (widget.service.serviceNotCompleted ?? [])
-                                          .isNotEmpty)
-                                    _serviceListWidget(
-                                        title: 'Service Incomplete',
-                                        servicesList: widget
-                                                .service.serviceNotCompleted ??
-                                            [])
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                        if (widget.title == AppString.pending.val ||
-                            widget.title == AppString.upcoming.val)
-                          BlocBuilder<ServiceRequestManagementBloc,
-                              ServiceRequestManagementState>(
-                            builder: (context, state) {
-                              return CustomButton(
-                                  onPressed: () {
-                                    _cancelServiceRequestPopup(
-                                      context,
-                                      widget.service,
-                                    );
-                                  },
-                                  height: 45,
-                                  minWidth: 200,
-                                  color: Colors.white,
-                                  textColor: AppColor.primaryColor.val,
-                                  borderColor: AppColor.primaryColor.val,
-                                  text: AppString.cancelThisServiceRequest.val);
-                            },
-                          ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        if (widget.title == AppString.upcoming.val)
-                          BlocBuilder<ServiceRequestManagementBloc,
-                              ServiceRequestManagementState>(
-                            builder: (context, state) {
-                              return CustomButton(
-                                onPressed: () {
-                                  context
-                                      .read<ServiceRequestManagementBloc>()
-                                      .add(const ServiceRequestManagementEvent
-                                          .isRescheduleInitialView());
-                                  showDialog(
-                                      context: context,
-                                      builder: (
-                                        BuildContext buildContext,
-                                      ) {
-                                        return BlocBuilder<
-                                            ServiceRequestManagementBloc,
-                                            ServiceRequestManagementState>(
-                                          builder: (context, state) {
-                                            return Dialog(
-                                              child: CustomContainer.decoration(
-                                                  height: state
-                                                          .isRescheduleOtherMatchingListView
-                                                      ? 1000
-                                                      : 510,
-                                                  width: state
-                                                          .isRescheduleOtherMatchingListView
-                                                      ? 1500
-                                                      : 600,
-                                                  decoration: BoxDecoration(
-                                                    color: AppColor.white.val,
-                                                    shape: BoxShape.rectangle,
-                                                  ),
-                                                  child: state
-                                                          .isRescheduleInitialView
-                                                      ? rescheduleInitialView(
-                                                          context, state)
-                                                      : state
-                                                              .isRescheduleLoaderView
-                                                          ? loaderView()
-                                                          : state
-                                                                  .isRescheduleAvailableCaregiverView
-                                                              ? availableCaregiverView(
-                                                                  state
-                                                                      .rescheduleResponse
-                                                                      ?.data
-                                                                      ?.caregivers
-                                                                      ?.first,
-                                                                  state
-                                                                      .rescheduleResponse
-                                                                      ?.data
-                                                                      ?.oldServiceId,
-                                                                  state)
-                                                              : state
-                                                                      .isRescheduleNotAvailableCaregiverView
-                                                                  ? _notAvailableCaregiversView()
-                                                                  : state
-                                                                          .isRescheduleOtherMatchingListView
-                                                                      ? _otherMatchingListView(
-                                                                          context,
-                                                                          state,
-                                                                          state
-                                                                              .rescheduleResponse
-                                                                              ?.data
-                                                                              ?.oldServiceId)
-                                                                      : Container()),
-                                            );
-                                          },
+                                          height: 45,
+                                          minWidth: 200,
+                                          color: Colors.white,
+                                          textColor: AppColor.primaryColor.val,
+                                          borderColor:
+                                              AppColor.primaryColor.val,
+                                          text: AppString
+                                              .rescheduleThisServiceRequest.val,
                                         );
-                                      });
-                                },
-                                height: 45,
-                                minWidth: 200,
-                                color: Colors.white,
-                                textColor: AppColor.primaryColor.val,
-                                borderColor: AppColor.primaryColor.val,
-                                text:
-                                    AppString.rescheduleThisServiceRequest.val,
-                              );
-                            },
-                          ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                      ],
-                    ),
-                  ),
+                                      },
+                                    ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                ],
+                              ),
+                            );
+                    },
+                  )
                 ],
               ),
             ),
@@ -429,7 +240,155 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
     );
   }
 
-  Column _notAvailableCaregiversView() {
+  Expanded _caViewWidget(BuildContext context) {
+    return Expanded(child: Container());
+    /*return Expanded(
+      child: Column(
+        children: [
+          widget.title == AppString.pending.val
+              ? const SizedBox()
+              : ProfileWidget(
+                  imageUrl: widget.service.clientProPic ?? "",
+                  name:
+                      "${widget.service.caregiverInfo!.name!.firstName ?? ""} ${widget.service.caregiverInfo!.name!.firstName ?? ""}",
+                  subText: 'Care Ambassador',
+                  onNameTap: () {
+                    Navigator.pop(context);
+                    autoTabRouter?.navigate(
+                        CareGiverDetailRoute(id: widget.service.profileId));
+                  },
+                ),
+          _serviceListWidget(title: 'Service Needed', servicesList: []),
+          if (widget.title == AppString.completed.val &&
+              (widget.service.caregiverReportedIssues ?? []).isNotEmpty)
+            _textAndSubText(
+                text: "The suspected things during shift",
+                subText:
+                    widget.service.suspectedThingsDuringShift?.join(' ') ?? ''),
+          if (widget.title == AppString.completed.val &&
+              (widget.service.suspectedOtherIssues ?? "").isNotEmpty)
+            _textAndSubText(
+                text: "Other Issues",
+                subText: widget.service.suspectedOtherIssues ?? ''),
+          if (widget.title == AppString.completed.val &&
+              (widget.service.caregiverReportedIssues ?? []).isNotEmpty)
+            _textAndSubText(
+                text: "Reported issues by the care giver",
+                subText:
+                    widget.service.caregiverReportedIssues?.join(' ') ?? ''),
+          if (widget.title == AppString.completed.val &&
+              (widget.service.caregiverReportedOtherIssues ?? "").isNotEmpty)
+            _textAndSubText(
+                text: "Other Issues",
+                subText: widget.service.caregiverReportedOtherIssues ?? ''),
+          if (widget.title == AppString.completed.val &&
+              (widget.service.serviceCompleted ?? []).isNotEmpty)
+            _serviceListWidget(
+                title: 'Service Completed',
+                servicesList: widget.service.serviceCompleted ?? []),
+          if (widget.title == AppString.completed.val &&
+              (widget.service.serviceNotCompleted ?? []).isNotEmpty)
+            _serviceListWidget(
+                title: 'Service Incomplete',
+                servicesList: widget.service.serviceNotCompleted ?? [])
+        ],
+      ),
+    );*/
+  }
+
+  Expanded _clientViewWidget(BuildContext context) {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ProfileWidget(
+            imageUrl: service.clientProPic ?? "",
+            name:
+                "${service.clientName!.firstName ?? ""} ${service.clientName!.lastName ?? ""}",
+            subText: 'Client',
+            onNameTap: () {
+              Navigator.pop(context);
+              autoTabRouter?.navigate(
+                  UserManagementDetailRoute(id: service.profileId ?? ""));
+            },
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const CustomText('Status'),
+              const SizedBox(
+                width: 140,
+              ),
+              StatusWidget(
+                status: title,
+                isOngoing: false,
+                onStartPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext buildContext) {
+                      return BlocBuilder<ServiceRequestManagementBloc,
+                          ServiceRequestManagementState>(
+                        builder: (context, state) {
+                          return CommonAlertWidget(
+                            controller: controller,
+                            isLoading: state.isStartServiceLoading,
+                            heading: AppString.startService.val,
+                            label: AppString.areYouSureStartServiceRequest.val,
+                            onTapYes: () {
+                              context.read<ServiceRequestManagementBloc>().add(
+                                  ServiceRequestManagementEvent.startService(
+                                      userId: SharedPreffUtil().getAdminId,
+                                      serviceId: service.serviceId ?? "",
+                                      context: context));
+                            },
+                          );
+                        },
+                      );
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
+          _textAndSubText(
+              text: AppString.serviceId.val, subText: service.bookingId ?? ""),
+          if (title == AppString.canceled.val)
+            CancellationWidget(reason: service.reasonForCancellation ?? ""),
+          _textAndSubText(
+              text: AppString.startDateAndTime.val,
+              subText: service.startTime ?? ""),
+          _textAndSubText(
+              text: AppString.endDateAndTime.val,
+              subText: service.endTime ?? ""),
+          _textAndSubText(
+              text: AppString.location.val,
+              subText: service.address != null
+                  ? service.address!.locationTag ?? ""
+                  : ""),
+          /*if (title == AppString.completed.val && (service.isRated ?? false))
+            RatingWidget(
+                rating:
+                    double.tryParse(service.caregiverRating.toString()) ?? 0),*/
+          _textAndSubText(
+              text: AppString.serviceFee.val,
+              subText: service.serviceFee.toString()),
+          _textAndSubText(
+              text: AppString.transportationFee.val,
+              subText: service.travelingCharge ?? ""),
+          _textAndSubText(
+              text: AppString.tip.val, subText: service.tip.toString()),
+          _textAndSubText(
+              text: AppString.extraServiceCharge.val,
+              subText: service.extraServiceFee ?? ""),
+          _textAndSubText(
+              text: AppString.transactionId.val,
+              subText: service.serviceFeeTransactionId ?? ""),
+        ],
+      ),
+    );
+  }
+
+  Column _notAvailableCaregiversView(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -458,18 +417,18 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _cancelButton(),
+            _cancelButton(context),
             CustomSizedBox(
               width: DBL.ten.val,
             ),
-            _proceedButton(),
+            _proceedButton(context),
           ],
         )
       ],
     );
   }
 
-  CustomButton _cancelButton() {
+  CustomButton _cancelButton(BuildContext context) {
     return CustomButton(
       text: AppString.cancel.val,
       onPressed: () {
@@ -488,7 +447,7 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
     );
   }
 
-  CustomButton _proceedButton() {
+  CustomButton _proceedButton(BuildContext context) {
     return CustomButton(
       text: AppString.proceed.val,
       onPressed: () {
@@ -508,7 +467,7 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
   }
 
   availableCaregiverView(Caregivers? caregivers, String? oldServiceID,
-      ServiceRequestManagementState state) {
+      BuildContext context, ServiceRequestManagementState state) {
     return SingleChildScrollView(
       child: Padding(
           padding: EdgeInsets.symmetric(
@@ -593,7 +552,8 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
                                     onPressed: () {
                                       print('printonclick');
                                       _profilePopUp(
-                                          caregivers.caregiverId ?? '');
+                                          caregivers.caregiverId ?? '',
+                                          context);
                                     },
                                   )
                                 ],
@@ -654,8 +614,8 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
                                     userId: SharedPreffUtil().getAdminId,
                                     caregiverID: caregivers.caregiverId,
                                     distance: caregivers.distance,
-                                    profileId: widget.service.profileID,
-                                    serviceId: widget.service.id,
+                                    profileId: service.caregiverId,
+                                    serviceId: service.serviceId,
                                     isRebook: false,
                                     isReschedule: true,
                                     oldServiceId: oldServiceID);
@@ -704,7 +664,7 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
     );
   }
 
-  _profilePopUp(String userId) {
+  _profilePopUp(String userId, BuildContext context) {
     showDialog(
         context: context,
         builder: (context) {
@@ -795,7 +755,7 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
             CustomSizedBox(
               height: DBL.ninetyTwo.val,
             ),
-            saveButton(state)
+            saveButton(state, context)
           ],
         ),
       ),
@@ -812,7 +772,8 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
     );
   }
 
-  CustomButton saveButton(ServiceRequestManagementState state) {
+  CustomButton saveButton(
+      ServiceRequestManagementState state, BuildContext context) {
     return CustomButton(
       onPressed: () {
         print('userID:: ${SharedPreffUtil().getCareGiverUserId}');
@@ -822,11 +783,11 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
               date: selectedDate,
               startTime: startTime,
               endTime: endTime,
-              addressId: widget.service.addressId,
-              genderPreference: widget.service.genderPreferences,
-              profileId: widget.service.profileID,
-              serviceId: widget.service.id,
-              selectedServices: widget.service.selectedServices);
+              addressId: service.address?.id ?? "",
+              genderPreference: service.genderPreference!.toInt(),
+              profileId: service.profileId,
+              serviceId: service.serviceId,
+              selectedServices: null);
           context.read<ServiceRequestManagementBloc>().add(
               ServiceRequestManagementEvent.reschedule(
                   rescheduleParams: rescheduleParams, context: context));
@@ -1160,7 +1121,8 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
                                             AppColor.red2.val.withOpacity(0.4),
                                         onPressed: () {
                                           _profilePopUp(
-                                              caregiver.caregiverId ?? '');
+                                              caregiver.caregiverId ?? '',
+                                              context);
                                         },
                                       )
                                     ],
@@ -1234,9 +1196,8 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
                                               caregiverID:
                                                   caregiver.caregiverId,
                                               distance: caregiver.distance,
-                                              profileId:
-                                                  widget.service.profileID,
-                                              serviceId: widget.service.id,
+                                              profileId: service.profileId,
+                                              serviceId: service.serviceId,
                                               isRebook: false,
                                               isReschedule: true,
                                               oldServiceId: oldServiceID);
@@ -1311,7 +1272,7 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
 
   _cancelServiceRequestPopup(
     BuildContext context,
-    ServiceList services,
+    ServiceDetailsData services,
   ) {
     showDialog(
       context: context,
@@ -1332,7 +1293,7 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
                     context.read<ServiceRequestManagementBloc>().add(
                         ServiceRequestManagementEvent.cancelService(
                             userId: SharedPreffUtil().getAdminId,
-                            serviceId: services.id ?? "",
+                            serviceId: services.serviceId ?? "",
                             description: controller.text.trim(),
                             context: context));
                   }
@@ -1350,106 +1311,4 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialog> {
       },
     );
   }
-
-// _caregiverProfilePopup(BuildContext context,
-//     {int? index, required ServiceRequestManagementState state}) {
-//   Profile? profile = state.caregiverProfileResponse?.data?.profile;
-//
-//   return CustomContainer(
-//     padding: EdgeInsets.symmetric(
-//         horizontal: DBL.twentyFive.val, vertical: DBL.twentyFive.val),
-//     color: AppColor.white.val,
-//     child: SingleChildScrollView(
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           aboutView(profile?.about ?? ""),
-//           CustomSizedBox(
-//             height: DBL.fifteen.val,
-//           ),
-//           _hobbiesView(profile?.hobbies ?? ""),
-//           CustomSizedBox(
-//             height: DBL.fifteen.val,
-//           ),
-//           _whyCareGiver(profile?.description ?? ""),
-//         ],
-//       ),
-//     ),
-//   );
-// }
-//
-// aboutView(String about) {
-//   return Column(
-//     crossAxisAlignment: CrossAxisAlignment.start,
-//     children: [
-//       HeaderView(
-//         title: AppString.about.val,
-//         color: AppColor.matBlack3.val,
-//         fontSize: FS.font18.val,
-//         topPadding: DBL.zero.val,
-//         sidePadding: DBL.zero.val,
-//       ),
-//       CustomSizedBox(
-//         height: DBL.eight.val,
-//       ),
-//       CustomText(
-//         about,
-//         style: TS().gRoboto(
-//           fontSize: FS.font13PointFive.val,
-//           fontWeight: FW.w400.val,
-//           color: AppColor.darkGrey3.val,
-//           height: DBL.onePointNine.val,
-//         ),
-//       ),
-//     ],
-//   );
-// }
-//
-// _hobbiesView(String hobbies) {
-//   return Column(
-//     crossAxisAlignment: CrossAxisAlignment.start,
-//     children: [
-//       HeaderView(
-//         title: AppString.hobbies.val,
-//         color: AppColor.matBlack3.val,
-//         fontSize: FS.font18.val,
-//         topPadding: DBL.zero.val,
-//         sidePadding: DBL.zero.val,
-//       ),
-//       CustomSizedBox(
-//         height: DBL.eight.val,
-//       ),
-//       CustomText(hobbies,
-//           style: TS().gRoboto(
-//               color: AppColor.matBlack3.val, fontWeight: FW.w400.val)),
-//     ],
-//   );
-// }
-//
-// _whyCareGiver(String des) {
-//   return Column(
-//     crossAxisAlignment: CrossAxisAlignment.start,
-//     children: [
-//       HeaderView(
-//         title: AppString.whyYouLoveBeingCareAmbassador.val,
-//         color: AppColor.matBlack3.val,
-//         fontSize: FS.font18.val,
-//         topPadding: DBL.zero.val,
-//         sidePadding: DBL.zero.val,
-//       ),
-//       CustomSizedBox(
-//         height: DBL.eight.val,
-//       ),
-//       CustomText(
-//         des,
-//         style: TS().gRoboto(
-//           fontSize: FS.font13PointFive.val,
-//           fontWeight: FW.w400.val,
-//           color: AppColor.darkGrey3.val,
-//           height: DBL.onePointNine.val,
-//         ),
-//       )
-//     ],
-//   );
-// }
 }

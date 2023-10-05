@@ -3,6 +3,7 @@ import 'package:admin_580_tech/domain/core/api_error_handler/api_error_handler.d
 import 'package:admin_580_tech/domain/service_request_management/i_service_request_management_repo.dart';
 import 'package:admin_580_tech/domain/service_request_management/model/assign_caregiver_params.dart';
 import 'package:admin_580_tech/domain/service_request_management/model/reschedule_params.dart';
+import 'package:admin_580_tech/domain/service_request_management/model/service_details_response_model.dart';
 import 'package:admin_580_tech/domain/service_request_management/model/service_request_response.dart';
 import 'package:admin_580_tech/domain/service_request_management/model/service_status_response_model.dart';
 import 'package:dartz/dartz.dart';
@@ -370,6 +371,27 @@ class ServiceRequestManagementRepository
       getServiceStatus() async {
     try {
       final response = await _apiClient.getServiceStatus();
+      return Right(response);
+    } on DioError catch (e) {
+      CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, ServiceDetailsResponseModel>>
+      getServiceDetails(
+          {required String userId, required String serviceId}) async {
+    try {
+      final response =
+          await _apiClient.getServiceDetails("", userId, serviceId);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");
