@@ -730,4 +730,10 @@ abstract class ApiClient {
       @Field('description') String description,
       @Field('attachment') String attachment,
       @Field('user_type') int userType);
+
+  @POST('/admin/delete-general-settings')
+  Future<CommonResponse> deleteGeneralSettings(
+    @Field('admin_id') String adminId,
+    @Field('settings_id') String? settingsId,
+  );
 }

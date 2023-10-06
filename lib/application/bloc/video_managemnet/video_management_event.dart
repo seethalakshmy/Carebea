@@ -4,4 +4,8 @@ part of 'video_management_bloc.dart';
 class VideoManagementEvent with _$VideoManagementEvent {
   const factory VideoManagementEvent.getSettings({required String userId}) =
       _GetSettings;
+
+  const factory VideoManagementEvent.deleteGeneralSettings(
+      {required String userId,
+      required String settingsId}) = _DeleteGeneralSettings;
 }

@@ -1,10 +1,13 @@
 import 'dart:async';
 
+import 'package:admin_580_tech/core/custom_snackbar.dart';
+import 'package:admin_580_tech/domain/on_boarding/models/common_response.dart';
 import 'package:admin_580_tech/domain/video_management/models/video_management_response.dart';
 import 'package:admin_580_tech/infrastructure/video_management/video_management_repository.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 
@@ -24,6 +27,7 @@ class VideoManagementBloc
   VideoManagementBloc(this.videoManagementRepository)
       : super(VideoManagementState.initial()) {
     on<_GetSettings>(_getSettings);
+    on<_DeleteGeneralSettings>(_deleteSettings);
   }
 
   _getSettings(_GetSettings event, Emitter<VideoManagementState> emit) async {
@@ -38,6 +42,23 @@ class VideoManagementBloc
         videoList.clear();
         videoList.addAll(r.data!);
         return state.copyWith(response: r, isLoading: false);
+      }
+    });
+    emit(userState!);
+  }
+
+  _deleteSettings(
+      _DeleteGeneralSettings event, Emitter<VideoManagementState> emit) async {
+    emit(state.copyWith(isLoading: true));
+    final Either<ApiErrorHandler, CommonResponse> result =
+        await videoManagementRepository.deleteGeneralSettings(
+            userId: event.userId, settingsId: event.settingsId);
+    var userState = result.fold((l) {
+      return state.copyWith(error: l.error, isLoading: false);
+    }, (r) {
+      if (r.status!) {
+        add(VideoManagementEvent.getSettings(userId: event.userId));
+        return state.copyWith(deleteResponse: r, isLoading: false);
       }
     });
     emit(userState!);

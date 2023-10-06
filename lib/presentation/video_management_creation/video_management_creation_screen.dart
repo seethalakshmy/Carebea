@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:admin_580_tech/infrastructure/faq_creation/faq_creation_repository.dart';
 import 'package:admin_580_tech/infrastructure/upload_video/upload_video_repository.dart';
@@ -6,9 +7,12 @@ import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:chewie/chewie.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:video_player/video_player.dart';
 
 import '../../application/bloc/faq-creation/faq_creation_bloc.dart';
 import '../../application/bloc/upload_video/upload_video_bloc.dart';
@@ -17,12 +21,14 @@ import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
 import '../../domain/admin_creation/model/admin_view_response.dart';
+import '../../generated/assets.dart';
 import '../../infrastructure/api_service_s3.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../on_boarding/modules/qualification_details/widgets/yes_no_radio_button_widget.dart';
 import '../on_boarding/widgets/upload_document_widget.dart';
 import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';
+import '../widget/cached_image.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_sizedbox.dart';
@@ -30,6 +36,7 @@ import '../widget/custom_text.dart';
 import '../widget/details_text_field_with_label.dart';
 import '../widget/header_view.dart';
 import '../widget/loader_view.dart';
+import 'dart:html' as html;
 
 @RoutePage()
 class VideoUploadPage extends StatefulWidget {
@@ -62,12 +69,13 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
   final _formKey = GlobalKey<FormState>();
   String adminUserID = "";
   String settingsId = "";
-  String title = "";
+  String? title = "";
   num type = 0;
   String attachment = "";
 
   bool? _isEdit;
   PlatformFile? file;
+  XFile? pickedFile;
   List<PlatformFile> bytesList = [];
   List<String> docPathList = [];
   bool listUpdated = false;
@@ -83,10 +91,11 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
     print('testing 123 ${_isEdit}');
     print('testing 123 $title');
     _videoBloc.title.text =
-        autoTabRouter?.currentChild?.queryParams.getString("title") ?? '';
-    type = autoTabRouter?.currentChild?.queryParams.getNum("type") ?? 0;
+        autoTabRouter?.currentChild?.queryParams.getString("title", '') ?? '';
+    type = autoTabRouter?.currentChild?.queryParams.getNum("type", 0) ?? 0;
     attachment =
-        autoTabRouter?.currentChild?.queryParams.getString("attachment") ?? '';
+        autoTabRouter?.currentChild?.queryParams.getString("attachment", '') ??
+            '';
 
     // _faqCreationBloc.add(FaqCreationEvent.getFaq(id: adminId));
 
@@ -151,6 +160,7 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
   }
 
   _uploadVideoView(VideoUploadState state) {
+    // html.File convertedFile = html.File(file!.bytes!.toList(), file!.name);
     return BlocBuilder<UploadVideoBloc, VideoUploadState>(
       bloc: _videoBloc,
       builder: (context, state) {
@@ -160,8 +170,38 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
             StatefulBuilder(builder: (context, rebuild) {
               log("rebuilded ${bytesList.length}");
               return bytesList.isNotEmpty || attachment != ''
-                  ? Wrap(
+                  ?
+                  // Chewie(
+                  //         controller: ChewieController(
+                  //           overlay: Container(
+                  //             color: Colors.transparent,
+                  //           ),
+                  //           videoPlayerController:
+                  //               VideoPlayerController.file(convertedFile as File),
+                  //           autoPlay: false,
+                  //           looping: false,
+                  //           allowFullScreen: true,
+                  //           showOptions: false,
+                  //           aspectRatio: 16 /
+                  //               9, // Adjust this as per your video's aspect ratio
+                  //           // Placeholder image for the thumbnail
+                  //           placeholder: AspectRatio(
+                  //             aspectRatio: 16 / 9,
+                  //             // child: Container(
+                  //             //   alignment: Alignment.center,
+                  //             //   // color: Colors.black,
+                  //             //   child: Image.asset(
+                  //             //     fit: BoxFit.fill,
+                  //             //   ),
+                  //             // ),
+                  //           ),
+                  //         ),
+                  //       )
+                  Wrap(
                       children: [
+                        CachedImage(
+                          imgUrl: attachment,
+                        ),
                         CustomText('Uploaded'),
                         IconButton(
                             onPressed: () {

@@ -169,6 +169,12 @@ class _VideoManagementPageState extends State<VideoManagementPage> {
                 "",
               ),
             ),
+            DataColumn2(
+              size: ColumnSize.M,
+              label: _tableColumnView(
+                "",
+              ),
+            ),
           ],
           rows: _videoManagementBloc.videoList.asMap().entries.map((e) {
             var item = e.value;
@@ -197,6 +203,17 @@ class _VideoManagementPageState extends State<VideoManagementPage> {
                         }
                       : null,
                 )),
+                DataCell(TableActions(
+                  onDeleteTap: () {
+                    _videoManagementBloc.add(
+                        VideoManagementEvent.deleteGeneralSettings(
+                            userId: SharedPreffUtil().getAdminId,
+                            settingsId: item.id ?? ''));
+                    // _videoManagementBloc.add(
+                    //     VideoManagementEvent.
+                  },
+                  isDelete: true,
+                ))
               ],
             );
           }).toList()

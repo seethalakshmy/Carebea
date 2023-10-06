@@ -6,6 +6,7 @@ class VideoManagementState with _$VideoManagementState {
       {required bool isLoading,
       required bool isError,
       required VideoManagementResponse? response,
+      required CommonResponse? deleteResponse,
       required String? error}) = _VideoManagementState;
 
   factory VideoManagementState.initial() {
@@ -14,6 +15,7 @@ class VideoManagementState with _$VideoManagementState {
       isError: false,
       response: null,
       error: null,
+      deleteResponse: null,
     );
   }
 }

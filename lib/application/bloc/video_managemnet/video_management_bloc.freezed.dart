@@ -20,32 +20,40 @@ mixin _$VideoManagementEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) getSettings,
+    required TResult Function(String userId, String settingsId)
+        deleteGeneralSettings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? getSettings,
+    TResult? Function(String userId, String settingsId)? deleteGeneralSettings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? getSettings,
+    TResult Function(String userId, String settingsId)? deleteGeneralSettings,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetSettings value) getSettings,
+    required TResult Function(_DeleteGeneralSettings value)
+        deleteGeneralSettings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetSettings value)? getSettings,
+    TResult? Function(_DeleteGeneralSettings value)? deleteGeneralSettings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetSettings value)? getSettings,
+    TResult Function(_DeleteGeneralSettings value)? deleteGeneralSettings,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -156,6 +164,8 @@ class _$_GetSettings implements _GetSettings {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) getSettings,
+    required TResult Function(String userId, String settingsId)
+        deleteGeneralSettings,
   }) {
     return getSettings(userId);
   }
@@ -164,6 +174,7 @@ class _$_GetSettings implements _GetSettings {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? getSettings,
+    TResult? Function(String userId, String settingsId)? deleteGeneralSettings,
   }) {
     return getSettings?.call(userId);
   }
@@ -172,6 +183,7 @@ class _$_GetSettings implements _GetSettings {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? getSettings,
+    TResult Function(String userId, String settingsId)? deleteGeneralSettings,
     required TResult orElse(),
   }) {
     if (getSettings != null) {
@@ -184,6 +196,8 @@ class _$_GetSettings implements _GetSettings {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetSettings value) getSettings,
+    required TResult Function(_DeleteGeneralSettings value)
+        deleteGeneralSettings,
   }) {
     return getSettings(this);
   }
@@ -192,6 +206,7 @@ class _$_GetSettings implements _GetSettings {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetSettings value)? getSettings,
+    TResult? Function(_DeleteGeneralSettings value)? deleteGeneralSettings,
   }) {
     return getSettings?.call(this);
   }
@@ -200,6 +215,7 @@ class _$_GetSettings implements _GetSettings {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetSettings value)? getSettings,
+    TResult Function(_DeleteGeneralSettings value)? deleteGeneralSettings,
     required TResult orElse(),
   }) {
     if (getSettings != null) {
@@ -221,10 +237,164 @@ abstract class _GetSettings implements VideoManagementEvent {
 }
 
 /// @nodoc
+abstract class _$$_DeleteGeneralSettingsCopyWith<$Res>
+    implements $VideoManagementEventCopyWith<$Res> {
+  factory _$$_DeleteGeneralSettingsCopyWith(_$_DeleteGeneralSettings value,
+          $Res Function(_$_DeleteGeneralSettings) then) =
+      __$$_DeleteGeneralSettingsCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String userId, String settingsId});
+}
+
+/// @nodoc
+class __$$_DeleteGeneralSettingsCopyWithImpl<$Res>
+    extends _$VideoManagementEventCopyWithImpl<$Res, _$_DeleteGeneralSettings>
+    implements _$$_DeleteGeneralSettingsCopyWith<$Res> {
+  __$$_DeleteGeneralSettingsCopyWithImpl(_$_DeleteGeneralSettings _value,
+      $Res Function(_$_DeleteGeneralSettings) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+    Object? settingsId = null,
+  }) {
+    return _then(_$_DeleteGeneralSettings(
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      settingsId: null == settingsId
+          ? _value.settingsId
+          : settingsId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_DeleteGeneralSettings implements _DeleteGeneralSettings {
+  const _$_DeleteGeneralSettings(
+      {required this.userId, required this.settingsId});
+
+  @override
+  final String userId;
+  @override
+  final String settingsId;
+
+  @override
+  String toString() {
+    return 'VideoManagementEvent.deleteGeneralSettings(userId: $userId, settingsId: $settingsId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeleteGeneralSettings &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.settingsId, settingsId) ||
+                other.settingsId == settingsId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userId, settingsId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DeleteGeneralSettingsCopyWith<_$_DeleteGeneralSettings> get copyWith =>
+      __$$_DeleteGeneralSettingsCopyWithImpl<_$_DeleteGeneralSettings>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId) getSettings,
+    required TResult Function(String userId, String settingsId)
+        deleteGeneralSettings,
+  }) {
+    return deleteGeneralSettings(userId, settingsId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId)? getSettings,
+    TResult? Function(String userId, String settingsId)? deleteGeneralSettings,
+  }) {
+    return deleteGeneralSettings?.call(userId, settingsId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId)? getSettings,
+    TResult Function(String userId, String settingsId)? deleteGeneralSettings,
+    required TResult orElse(),
+  }) {
+    if (deleteGeneralSettings != null) {
+      return deleteGeneralSettings(userId, settingsId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetSettings value) getSettings,
+    required TResult Function(_DeleteGeneralSettings value)
+        deleteGeneralSettings,
+  }) {
+    return deleteGeneralSettings(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetSettings value)? getSettings,
+    TResult? Function(_DeleteGeneralSettings value)? deleteGeneralSettings,
+  }) {
+    return deleteGeneralSettings?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetSettings value)? getSettings,
+    TResult Function(_DeleteGeneralSettings value)? deleteGeneralSettings,
+    required TResult orElse(),
+  }) {
+    if (deleteGeneralSettings != null) {
+      return deleteGeneralSettings(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteGeneralSettings implements VideoManagementEvent {
+  const factory _DeleteGeneralSettings(
+      {required final String userId,
+      required final String settingsId}) = _$_DeleteGeneralSettings;
+
+  @override
+  String get userId;
+  String get settingsId;
+  @override
+  @JsonKey(ignore: true)
+  _$$_DeleteGeneralSettingsCopyWith<_$_DeleteGeneralSettings> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$VideoManagementState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
   VideoManagementResponse? get response => throw _privateConstructorUsedError;
+  CommonResponse? get deleteResponse => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -242,6 +412,7 @@ abstract class $VideoManagementStateCopyWith<$Res> {
       {bool isLoading,
       bool isError,
       VideoManagementResponse? response,
+      CommonResponse? deleteResponse,
       String? error});
 }
 
@@ -262,6 +433,7 @@ class _$VideoManagementStateCopyWithImpl<$Res,
     Object? isLoading = null,
     Object? isError = null,
     Object? response = freezed,
+    Object? deleteResponse = freezed,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
@@ -277,6 +449,10 @@ class _$VideoManagementStateCopyWithImpl<$Res,
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as VideoManagementResponse?,
+      deleteResponse: freezed == deleteResponse
+          ? _value.deleteResponse
+          : deleteResponse // ignore: cast_nullable_to_non_nullable
+              as CommonResponse?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -297,6 +473,7 @@ abstract class _$$_VideoManagementStateCopyWith<$Res>
       {bool isLoading,
       bool isError,
       VideoManagementResponse? response,
+      CommonResponse? deleteResponse,
       String? error});
 }
 
@@ -314,6 +491,7 @@ class __$$_VideoManagementStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? isError = null,
     Object? response = freezed,
+    Object? deleteResponse = freezed,
     Object? error = freezed,
   }) {
     return _then(_$_VideoManagementState(
@@ -329,6 +507,10 @@ class __$$_VideoManagementStateCopyWithImpl<$Res>
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as VideoManagementResponse?,
+      deleteResponse: freezed == deleteResponse
+          ? _value.deleteResponse
+          : deleteResponse // ignore: cast_nullable_to_non_nullable
+              as CommonResponse?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -344,6 +526,7 @@ class _$_VideoManagementState implements _VideoManagementState {
       {required this.isLoading,
       required this.isError,
       required this.response,
+      required this.deleteResponse,
       required this.error});
 
   @override
@@ -353,11 +536,13 @@ class _$_VideoManagementState implements _VideoManagementState {
   @override
   final VideoManagementResponse? response;
   @override
+  final CommonResponse? deleteResponse;
+  @override
   final String? error;
 
   @override
   String toString() {
-    return 'VideoManagementState(isLoading: $isLoading, isError: $isError, response: $response, error: $error)';
+    return 'VideoManagementState(isLoading: $isLoading, isError: $isError, response: $response, deleteResponse: $deleteResponse, error: $error)';
   }
 
   @override
@@ -370,12 +555,14 @@ class _$_VideoManagementState implements _VideoManagementState {
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.response, response) ||
                 other.response == response) &&
+            (identical(other.deleteResponse, deleteResponse) ||
+                other.deleteResponse == deleteResponse) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isLoading, isError, response, error);
+  int get hashCode => Object.hash(
+      runtimeType, isLoading, isError, response, deleteResponse, error);
 
   @JsonKey(ignore: true)
   @override
@@ -390,6 +577,7 @@ abstract class _VideoManagementState implements VideoManagementState {
       {required final bool isLoading,
       required final bool isError,
       required final VideoManagementResponse? response,
+      required final CommonResponse? deleteResponse,
       required final String? error}) = _$_VideoManagementState;
 
   @override
@@ -398,6 +586,8 @@ abstract class _VideoManagementState implements VideoManagementState {
   bool get isError;
   @override
   VideoManagementResponse? get response;
+  @override
+  CommonResponse? get deleteResponse;
   @override
   String? get error;
   @override
