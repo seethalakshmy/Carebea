@@ -56,6 +56,13 @@ mixin _$ServiceRequestManagementEvent {
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -95,6 +102,13 @@ mixin _$ServiceRequestManagementEvent {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -134,6 +148,12 @@ mixin _$ServiceRequestManagementEvent {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -162,6 +182,17 @@ mixin _$ServiceRequestManagementEvent {
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -187,6 +218,16 @@ mixin _$ServiceRequestManagementEvent {
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -212,6 +253,15 @@ mixin _$ServiceRequestManagementEvent {
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -350,6 +400,13 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) {
     return getCareGiverProfile(userId, adminId);
   }
@@ -392,6 +449,13 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) {
     return getCareGiverProfile?.call(userId, adminId);
   }
@@ -434,6 +498,12 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (getCareGiverProfile != null) {
@@ -468,6 +538,17 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) {
     return getCareGiverProfile(this);
   }
@@ -496,6 +577,16 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) {
     return getCareGiverProfile?.call(this);
   }
@@ -524,6 +615,15 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (getCareGiverProfile != null) {
@@ -620,6 +720,13 @@ class _$_Started implements _Started {
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) {
     return started();
   }
@@ -662,6 +769,13 @@ class _$_Started implements _Started {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) {
     return started?.call();
   }
@@ -704,6 +818,12 @@ class _$_Started implements _Started {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -738,6 +858,17 @@ class _$_Started implements _Started {
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) {
     return started(this);
   }
@@ -766,6 +897,16 @@ class _$_Started implements _Started {
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) {
     return started?.call(this);
   }
@@ -794,6 +935,15 @@ class _$_Started implements _Started {
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -965,6 +1115,13 @@ class _$_IsSelectedTab implements _IsSelectedTab {
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) {
     return isSelectedTab(
         type, filterId, searchQuery, dateFilterId, fromDate, toDate);
@@ -1008,6 +1165,13 @@ class _$_IsSelectedTab implements _IsSelectedTab {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) {
     return isSelectedTab?.call(
         type, filterId, searchQuery, dateFilterId, fromDate, toDate);
@@ -1051,6 +1215,12 @@ class _$_IsSelectedTab implements _IsSelectedTab {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (isSelectedTab != null) {
@@ -1086,6 +1256,17 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) {
     return isSelectedTab(this);
   }
@@ -1114,6 +1295,16 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) {
     return isSelectedTab?.call(this);
   }
@@ -1142,6 +1333,15 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (isSelectedTab != null) {
@@ -1281,6 +1481,13 @@ class _$_Reschedule implements _Reschedule {
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) {
     return reschedule(rescheduleParams, context);
   }
@@ -1323,6 +1530,13 @@ class _$_Reschedule implements _Reschedule {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) {
     return reschedule?.call(rescheduleParams, context);
   }
@@ -1365,6 +1579,12 @@ class _$_Reschedule implements _Reschedule {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (reschedule != null) {
@@ -1399,6 +1619,17 @@ class _$_Reschedule implements _Reschedule {
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) {
     return reschedule(this);
   }
@@ -1427,6 +1658,16 @@ class _$_Reschedule implements _Reschedule {
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) {
     return reschedule?.call(this);
   }
@@ -1455,6 +1696,15 @@ class _$_Reschedule implements _Reschedule {
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (reschedule != null) {
@@ -1589,6 +1839,13 @@ class _$_AssignCaregiver implements _AssignCaregiver {
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) {
     return assignCaregiver(assignCareGiverParams, context);
   }
@@ -1631,6 +1888,13 @@ class _$_AssignCaregiver implements _AssignCaregiver {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) {
     return assignCaregiver?.call(assignCareGiverParams, context);
   }
@@ -1673,6 +1937,12 @@ class _$_AssignCaregiver implements _AssignCaregiver {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (assignCaregiver != null) {
@@ -1707,6 +1977,17 @@ class _$_AssignCaregiver implements _AssignCaregiver {
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) {
     return assignCaregiver(this);
   }
@@ -1735,6 +2016,16 @@ class _$_AssignCaregiver implements _AssignCaregiver {
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) {
     return assignCaregiver?.call(this);
   }
@@ -1763,6 +2054,15 @@ class _$_AssignCaregiver implements _AssignCaregiver {
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (assignCaregiver != null) {
@@ -1904,6 +2204,13 @@ class _$_StartService implements _StartService {
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) {
     return startService(userId, serviceId, context);
   }
@@ -1946,6 +2253,13 @@ class _$_StartService implements _StartService {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) {
     return startService?.call(userId, serviceId, context);
   }
@@ -1988,6 +2302,12 @@ class _$_StartService implements _StartService {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (startService != null) {
@@ -2022,6 +2342,17 @@ class _$_StartService implements _StartService {
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) {
     return startService(this);
   }
@@ -2050,6 +2381,16 @@ class _$_StartService implements _StartService {
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) {
     return startService?.call(this);
   }
@@ -2078,6 +2419,15 @@ class _$_StartService implements _StartService {
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (startService != null) {
@@ -2238,6 +2588,13 @@ class _$_CancelService implements _CancelService {
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) {
     return cancelService(userId, serviceId, description, context);
   }
@@ -2280,6 +2637,13 @@ class _$_CancelService implements _CancelService {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) {
     return cancelService?.call(userId, serviceId, description, context);
   }
@@ -2322,6 +2686,12 @@ class _$_CancelService implements _CancelService {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (cancelService != null) {
@@ -2356,6 +2726,17 @@ class _$_CancelService implements _CancelService {
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) {
     return cancelService(this);
   }
@@ -2384,6 +2765,16 @@ class _$_CancelService implements _CancelService {
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) {
     return cancelService?.call(this);
   }
@@ -2412,6 +2803,15 @@ class _$_CancelService implements _CancelService {
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (cancelService != null) {
@@ -2539,6 +2939,13 @@ class _$_SetDate implements _SetDate {
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) {
     return setDate(selectedDate);
   }
@@ -2581,6 +2988,13 @@ class _$_SetDate implements _SetDate {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) {
     return setDate?.call(selectedDate);
   }
@@ -2623,6 +3037,12 @@ class _$_SetDate implements _SetDate {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (setDate != null) {
@@ -2657,6 +3077,17 @@ class _$_SetDate implements _SetDate {
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) {
     return setDate(this);
   }
@@ -2685,6 +3116,16 @@ class _$_SetDate implements _SetDate {
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) {
     return setDate?.call(this);
   }
@@ -2713,6 +3154,15 @@ class _$_SetDate implements _SetDate {
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (setDate != null) {
@@ -2833,6 +3283,13 @@ class _$_SetFromTime implements _SetFromTime {
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) {
     return setFromTime(time);
   }
@@ -2875,6 +3332,13 @@ class _$_SetFromTime implements _SetFromTime {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) {
     return setFromTime?.call(time);
   }
@@ -2917,6 +3381,12 @@ class _$_SetFromTime implements _SetFromTime {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (setFromTime != null) {
@@ -2951,6 +3421,17 @@ class _$_SetFromTime implements _SetFromTime {
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) {
     return setFromTime(this);
   }
@@ -2979,6 +3460,16 @@ class _$_SetFromTime implements _SetFromTime {
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) {
     return setFromTime?.call(this);
   }
@@ -3007,6 +3498,15 @@ class _$_SetFromTime implements _SetFromTime {
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (setFromTime != null) {
@@ -3127,6 +3627,13 @@ class _$_SetToTime implements _SetToTime {
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) {
     return setToTime(time);
   }
@@ -3169,6 +3676,13 @@ class _$_SetToTime implements _SetToTime {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) {
     return setToTime?.call(time);
   }
@@ -3211,6 +3725,12 @@ class _$_SetToTime implements _SetToTime {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (setToTime != null) {
@@ -3245,6 +3765,17 @@ class _$_SetToTime implements _SetToTime {
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) {
     return setToTime(this);
   }
@@ -3273,6 +3804,16 @@ class _$_SetToTime implements _SetToTime {
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) {
     return setToTime?.call(this);
   }
@@ -3301,6 +3842,15 @@ class _$_SetToTime implements _SetToTime {
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (setToTime != null) {
@@ -3397,6 +3947,13 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) {
     return isRescheduleInitialView();
   }
@@ -3439,6 +3996,13 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) {
     return isRescheduleInitialView?.call();
   }
@@ -3481,6 +4045,12 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (isRescheduleInitialView != null) {
@@ -3515,6 +4085,17 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) {
     return isRescheduleInitialView(this);
   }
@@ -3543,6 +4124,16 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) {
     return isRescheduleInitialView?.call(this);
   }
@@ -3571,6 +4162,15 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (isRescheduleInitialView != null) {
@@ -3663,6 +4263,13 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) {
     return isRescheduleLoaderView();
   }
@@ -3705,6 +4312,13 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) {
     return isRescheduleLoaderView?.call();
   }
@@ -3747,6 +4361,12 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (isRescheduleLoaderView != null) {
@@ -3781,6 +4401,17 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) {
     return isRescheduleLoaderView(this);
   }
@@ -3809,6 +4440,16 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) {
     return isRescheduleLoaderView?.call(this);
   }
@@ -3837,6 +4478,15 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (isRescheduleLoaderView != null) {
@@ -3931,6 +4581,13 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) {
     return isRescheduleAvailableView();
   }
@@ -3973,6 +4630,13 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) {
     return isRescheduleAvailableView?.call();
   }
@@ -4015,6 +4679,12 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (isRescheduleAvailableView != null) {
@@ -4049,6 +4719,17 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) {
     return isRescheduleAvailableView(this);
   }
@@ -4077,6 +4758,16 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) {
     return isRescheduleAvailableView?.call(this);
   }
@@ -4105,6 +4796,15 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (isRescheduleAvailableView != null) {
@@ -4199,6 +4899,13 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) {
     return isRescheduleNotAvailableView();
   }
@@ -4241,6 +4948,13 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) {
     return isRescheduleNotAvailableView?.call();
   }
@@ -4283,6 +4997,12 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (isRescheduleNotAvailableView != null) {
@@ -4317,6 +5037,17 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) {
     return isRescheduleNotAvailableView(this);
   }
@@ -4345,6 +5076,16 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) {
     return isRescheduleNotAvailableView?.call(this);
   }
@@ -4373,6 +5114,15 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (isRescheduleNotAvailableView != null) {
@@ -4469,6 +5219,13 @@ class _$_IsRescheduleOtherMatchingViewView
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) {
     return isRescheduleOtherMatchingView();
   }
@@ -4511,6 +5268,13 @@ class _$_IsRescheduleOtherMatchingViewView
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) {
     return isRescheduleOtherMatchingView?.call();
   }
@@ -4553,6 +5317,12 @@ class _$_IsRescheduleOtherMatchingViewView
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (isRescheduleOtherMatchingView != null) {
@@ -4587,6 +5357,17 @@ class _$_IsRescheduleOtherMatchingViewView
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) {
     return isRescheduleOtherMatchingView(this);
   }
@@ -4615,6 +5396,16 @@ class _$_IsRescheduleOtherMatchingViewView
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) {
     return isRescheduleOtherMatchingView?.call(this);
   }
@@ -4643,6 +5434,15 @@ class _$_IsRescheduleOtherMatchingViewView
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (isRescheduleOtherMatchingView != null) {
@@ -4734,6 +5534,13 @@ class _$_GetFilters implements _GetFilters {
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) {
     return getFilters();
   }
@@ -4776,6 +5583,13 @@ class _$_GetFilters implements _GetFilters {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) {
     return getFilters?.call();
   }
@@ -4818,6 +5632,12 @@ class _$_GetFilters implements _GetFilters {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (getFilters != null) {
@@ -4852,6 +5672,17 @@ class _$_GetFilters implements _GetFilters {
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) {
     return getFilters(this);
   }
@@ -4880,6 +5711,16 @@ class _$_GetFilters implements _GetFilters {
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) {
     return getFilters?.call(this);
   }
@@ -4908,6 +5749,15 @@ class _$_GetFilters implements _GetFilters {
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (getFilters != null) {
@@ -4997,6 +5847,13 @@ class _$_GetServiceStatus implements _GetServiceStatus {
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) {
     return getServiceStatus();
   }
@@ -5039,6 +5896,13 @@ class _$_GetServiceStatus implements _GetServiceStatus {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) {
     return getServiceStatus?.call();
   }
@@ -5081,6 +5945,12 @@ class _$_GetServiceStatus implements _GetServiceStatus {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (getServiceStatus != null) {
@@ -5115,6 +5985,17 @@ class _$_GetServiceStatus implements _GetServiceStatus {
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) {
     return getServiceStatus(this);
   }
@@ -5143,6 +6024,16 @@ class _$_GetServiceStatus implements _GetServiceStatus {
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) {
     return getServiceStatus?.call(this);
   }
@@ -5171,6 +6062,15 @@ class _$_GetServiceStatus implements _GetServiceStatus {
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (getServiceStatus != null) {
@@ -5364,6 +6264,13 @@ class _$_GetServiceRequests implements _GetServiceRequests {
             String? fromDate,
             String? toDate)
         getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
   }) {
     return getServiceRequests(context, page, limit, statusFilterId,
         dateFilterId, searchTerm, fromDate, toDate);
@@ -5407,6 +6314,13 @@ class _$_GetServiceRequests implements _GetServiceRequests {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
   }) {
     return getServiceRequests?.call(context, page, limit, statusFilterId,
         dateFilterId, searchTerm, fromDate, toDate);
@@ -5450,6 +6364,12 @@ class _$_GetServiceRequests implements _GetServiceRequests {
             String? fromDate,
             String? toDate)?
         getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (getServiceRequests != null) {
@@ -5485,6 +6405,17 @@ class _$_GetServiceRequests implements _GetServiceRequests {
     required TResult Function(_GetFilters value) getFilters,
     required TResult Function(_GetServiceStatus value) getServiceStatus,
     required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
   }) {
     return getServiceRequests(this);
   }
@@ -5513,6 +6444,16 @@ class _$_GetServiceRequests implements _GetServiceRequests {
     TResult? Function(_GetFilters value)? getFilters,
     TResult? Function(_GetServiceStatus value)? getServiceStatus,
     TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
   }) {
     return getServiceRequests?.call(this);
   }
@@ -5541,6 +6482,15 @@ class _$_GetServiceRequests implements _GetServiceRequests {
     TResult Function(_GetFilters value)? getFilters,
     TResult Function(_GetServiceStatus value)? getServiceStatus,
     TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
     required TResult orElse(),
   }) {
     if (getServiceRequests != null) {
@@ -5575,10 +6525,2126 @@ abstract class _GetServiceRequests implements ServiceRequestManagementEvent {
 }
 
 /// @nodoc
+abstract class _$$_GetServiceDetailsCopyWith<$Res> {
+  factory _$$_GetServiceDetailsCopyWith(_$_GetServiceDetails value,
+          $Res Function(_$_GetServiceDetails) then) =
+      __$$_GetServiceDetailsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({BuildContext context, String serviceId});
+}
+
+/// @nodoc
+class __$$_GetServiceDetailsCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res,
+        _$_GetServiceDetails> implements _$$_GetServiceDetailsCopyWith<$Res> {
+  __$$_GetServiceDetailsCopyWithImpl(
+      _$_GetServiceDetails _value, $Res Function(_$_GetServiceDetails) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? context = null,
+    Object? serviceId = null,
+  }) {
+    return _then(_$_GetServiceDetails(
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+      serviceId: null == serviceId
+          ? _value.serviceId
+          : serviceId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetServiceDetails implements _GetServiceDetails {
+  const _$_GetServiceDetails({required this.context, required this.serviceId});
+
+  @override
+  final BuildContext context;
+  @override
+  final String serviceId;
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.getServiceDetails(context: $context, serviceId: $serviceId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetServiceDetails &&
+            (identical(other.context, context) || other.context == context) &&
+            (identical(other.serviceId, serviceId) ||
+                other.serviceId == serviceId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, context, serviceId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetServiceDetailsCopyWith<_$_GetServiceDetails> get copyWith =>
+      __$$_GetServiceDetailsCopyWithImpl<_$_GetServiceDetails>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
+    required TResult Function() started,
+    required TResult Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)
+        isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
+    required TResult Function() getFilters,
+    required TResult Function() getServiceStatus,
+    required TResult Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)
+        getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
+  }) {
+    return getServiceDetails(context, serviceId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
+    TResult? Function()? started,
+    TResult? Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)?
+        isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
+    TResult? Function()? getFilters,
+    TResult? Function()? getServiceStatus,
+    TResult? Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)?
+        getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
+  }) {
+    return getServiceDetails?.call(context, serviceId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
+    TResult Function()? started,
+    TResult Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)?
+        isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
+    TResult Function()? getFilters,
+    TResult Function()? getServiceStatus,
+    TResult Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)?
+        getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
+    required TResult orElse(),
+  }) {
+    if (getServiceDetails != null) {
+      return getServiceDetails(context, serviceId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
+    required TResult Function(_GetFilters value) getFilters,
+    required TResult Function(_GetServiceStatus value) getServiceStatus,
+    required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
+  }) {
+    return getServiceDetails(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    TResult? Function(_GetFilters value)? getFilters,
+    TResult? Function(_GetServiceStatus value)? getServiceStatus,
+    TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+  }) {
+    return getServiceDetails?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    TResult Function(_GetFilters value)? getFilters,
+    TResult Function(_GetServiceStatus value)? getServiceStatus,
+    TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    required TResult orElse(),
+  }) {
+    if (getServiceDetails != null) {
+      return getServiceDetails(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetServiceDetails implements ServiceRequestManagementEvent {
+  const factory _GetServiceDetails(
+      {required final BuildContext context,
+      required final String serviceId}) = _$_GetServiceDetails;
+
+  BuildContext get context;
+  String get serviceId;
+  @JsonKey(ignore: true)
+  _$$_GetServiceDetailsCopyWith<_$_GetServiceDetails> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ShowOrHideTransactionDetailsCopyWith<$Res> {
+  factory _$$_ShowOrHideTransactionDetailsCopyWith(
+          _$_ShowOrHideTransactionDetails value,
+          $Res Function(_$_ShowOrHideTransactionDetails) then) =
+      __$$_ShowOrHideTransactionDetailsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isShowing});
+}
+
+/// @nodoc
+class __$$_ShowOrHideTransactionDetailsCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res,
+        _$_ShowOrHideTransactionDetails>
+    implements _$$_ShowOrHideTransactionDetailsCopyWith<$Res> {
+  __$$_ShowOrHideTransactionDetailsCopyWithImpl(
+      _$_ShowOrHideTransactionDetails _value,
+      $Res Function(_$_ShowOrHideTransactionDetails) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isShowing = null,
+  }) {
+    return _then(_$_ShowOrHideTransactionDetails(
+      isShowing: null == isShowing
+          ? _value.isShowing
+          : isShowing // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ShowOrHideTransactionDetails implements _ShowOrHideTransactionDetails {
+  const _$_ShowOrHideTransactionDetails({required this.isShowing});
+
+  @override
+  final bool isShowing;
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.showOrHideTransactionDetails(isShowing: $isShowing)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ShowOrHideTransactionDetails &&
+            (identical(other.isShowing, isShowing) ||
+                other.isShowing == isShowing));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isShowing);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ShowOrHideTransactionDetailsCopyWith<_$_ShowOrHideTransactionDetails>
+      get copyWith => __$$_ShowOrHideTransactionDetailsCopyWithImpl<
+          _$_ShowOrHideTransactionDetails>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
+    required TResult Function() started,
+    required TResult Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)
+        isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
+    required TResult Function() getFilters,
+    required TResult Function() getServiceStatus,
+    required TResult Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)
+        getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
+  }) {
+    return showOrHideTransactionDetails(isShowing);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
+    TResult? Function()? started,
+    TResult? Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)?
+        isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
+    TResult? Function()? getFilters,
+    TResult? Function()? getServiceStatus,
+    TResult? Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)?
+        getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
+  }) {
+    return showOrHideTransactionDetails?.call(isShowing);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
+    TResult Function()? started,
+    TResult Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)?
+        isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
+    TResult Function()? getFilters,
+    TResult Function()? getServiceStatus,
+    TResult Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)?
+        getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
+    required TResult orElse(),
+  }) {
+    if (showOrHideTransactionDetails != null) {
+      return showOrHideTransactionDetails(isShowing);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
+    required TResult Function(_GetFilters value) getFilters,
+    required TResult Function(_GetServiceStatus value) getServiceStatus,
+    required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
+  }) {
+    return showOrHideTransactionDetails(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    TResult? Function(_GetFilters value)? getFilters,
+    TResult? Function(_GetServiceStatus value)? getServiceStatus,
+    TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+  }) {
+    return showOrHideTransactionDetails?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    TResult Function(_GetFilters value)? getFilters,
+    TResult Function(_GetServiceStatus value)? getServiceStatus,
+    TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    required TResult orElse(),
+  }) {
+    if (showOrHideTransactionDetails != null) {
+      return showOrHideTransactionDetails(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShowOrHideTransactionDetails
+    implements ServiceRequestManagementEvent {
+  const factory _ShowOrHideTransactionDetails({required final bool isShowing}) =
+      _$_ShowOrHideTransactionDetails;
+
+  bool get isShowing;
+  @JsonKey(ignore: true)
+  _$$_ShowOrHideTransactionDetailsCopyWith<_$_ShowOrHideTransactionDetails>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ShowOrHideNeededServicesCopyWith<$Res> {
+  factory _$$_ShowOrHideNeededServicesCopyWith(
+          _$_ShowOrHideNeededServices value,
+          $Res Function(_$_ShowOrHideNeededServices) then) =
+      __$$_ShowOrHideNeededServicesCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isShowing});
+}
+
+/// @nodoc
+class __$$_ShowOrHideNeededServicesCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res,
+        _$_ShowOrHideNeededServices>
+    implements _$$_ShowOrHideNeededServicesCopyWith<$Res> {
+  __$$_ShowOrHideNeededServicesCopyWithImpl(_$_ShowOrHideNeededServices _value,
+      $Res Function(_$_ShowOrHideNeededServices) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isShowing = null,
+  }) {
+    return _then(_$_ShowOrHideNeededServices(
+      isShowing: null == isShowing
+          ? _value.isShowing
+          : isShowing // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ShowOrHideNeededServices implements _ShowOrHideNeededServices {
+  const _$_ShowOrHideNeededServices({required this.isShowing});
+
+  @override
+  final bool isShowing;
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.showOrHideNeededServices(isShowing: $isShowing)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ShowOrHideNeededServices &&
+            (identical(other.isShowing, isShowing) ||
+                other.isShowing == isShowing));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isShowing);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ShowOrHideNeededServicesCopyWith<_$_ShowOrHideNeededServices>
+      get copyWith => __$$_ShowOrHideNeededServicesCopyWithImpl<
+          _$_ShowOrHideNeededServices>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
+    required TResult Function() started,
+    required TResult Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)
+        isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
+    required TResult Function() getFilters,
+    required TResult Function() getServiceStatus,
+    required TResult Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)
+        getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
+  }) {
+    return showOrHideNeededServices(isShowing);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
+    TResult? Function()? started,
+    TResult? Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)?
+        isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
+    TResult? Function()? getFilters,
+    TResult? Function()? getServiceStatus,
+    TResult? Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)?
+        getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
+  }) {
+    return showOrHideNeededServices?.call(isShowing);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
+    TResult Function()? started,
+    TResult Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)?
+        isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
+    TResult Function()? getFilters,
+    TResult Function()? getServiceStatus,
+    TResult Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)?
+        getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
+    required TResult orElse(),
+  }) {
+    if (showOrHideNeededServices != null) {
+      return showOrHideNeededServices(isShowing);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
+    required TResult Function(_GetFilters value) getFilters,
+    required TResult Function(_GetServiceStatus value) getServiceStatus,
+    required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
+  }) {
+    return showOrHideNeededServices(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    TResult? Function(_GetFilters value)? getFilters,
+    TResult? Function(_GetServiceStatus value)? getServiceStatus,
+    TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+  }) {
+    return showOrHideNeededServices?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    TResult Function(_GetFilters value)? getFilters,
+    TResult Function(_GetServiceStatus value)? getServiceStatus,
+    TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    required TResult orElse(),
+  }) {
+    if (showOrHideNeededServices != null) {
+      return showOrHideNeededServices(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShowOrHideNeededServices
+    implements ServiceRequestManagementEvent {
+  const factory _ShowOrHideNeededServices({required final bool isShowing}) =
+      _$_ShowOrHideNeededServices;
+
+  bool get isShowing;
+  @JsonKey(ignore: true)
+  _$$_ShowOrHideNeededServicesCopyWith<_$_ShowOrHideNeededServices>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ShowOrHideCompletedServicesCopyWith<$Res> {
+  factory _$$_ShowOrHideCompletedServicesCopyWith(
+          _$_ShowOrHideCompletedServices value,
+          $Res Function(_$_ShowOrHideCompletedServices) then) =
+      __$$_ShowOrHideCompletedServicesCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isShowing});
+}
+
+/// @nodoc
+class __$$_ShowOrHideCompletedServicesCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res,
+        _$_ShowOrHideCompletedServices>
+    implements _$$_ShowOrHideCompletedServicesCopyWith<$Res> {
+  __$$_ShowOrHideCompletedServicesCopyWithImpl(
+      _$_ShowOrHideCompletedServices _value,
+      $Res Function(_$_ShowOrHideCompletedServices) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isShowing = null,
+  }) {
+    return _then(_$_ShowOrHideCompletedServices(
+      isShowing: null == isShowing
+          ? _value.isShowing
+          : isShowing // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ShowOrHideCompletedServices implements _ShowOrHideCompletedServices {
+  const _$_ShowOrHideCompletedServices({required this.isShowing});
+
+  @override
+  final bool isShowing;
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.showOrHideCompletedServices(isShowing: $isShowing)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ShowOrHideCompletedServices &&
+            (identical(other.isShowing, isShowing) ||
+                other.isShowing == isShowing));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isShowing);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ShowOrHideCompletedServicesCopyWith<_$_ShowOrHideCompletedServices>
+      get copyWith => __$$_ShowOrHideCompletedServicesCopyWithImpl<
+          _$_ShowOrHideCompletedServices>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
+    required TResult Function() started,
+    required TResult Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)
+        isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
+    required TResult Function() getFilters,
+    required TResult Function() getServiceStatus,
+    required TResult Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)
+        getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
+  }) {
+    return showOrHideCompletedServices(isShowing);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
+    TResult? Function()? started,
+    TResult? Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)?
+        isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
+    TResult? Function()? getFilters,
+    TResult? Function()? getServiceStatus,
+    TResult? Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)?
+        getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
+  }) {
+    return showOrHideCompletedServices?.call(isShowing);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
+    TResult Function()? started,
+    TResult Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)?
+        isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
+    TResult Function()? getFilters,
+    TResult Function()? getServiceStatus,
+    TResult Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)?
+        getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
+    required TResult orElse(),
+  }) {
+    if (showOrHideCompletedServices != null) {
+      return showOrHideCompletedServices(isShowing);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
+    required TResult Function(_GetFilters value) getFilters,
+    required TResult Function(_GetServiceStatus value) getServiceStatus,
+    required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
+  }) {
+    return showOrHideCompletedServices(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    TResult? Function(_GetFilters value)? getFilters,
+    TResult? Function(_GetServiceStatus value)? getServiceStatus,
+    TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+  }) {
+    return showOrHideCompletedServices?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    TResult Function(_GetFilters value)? getFilters,
+    TResult Function(_GetServiceStatus value)? getServiceStatus,
+    TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    required TResult orElse(),
+  }) {
+    if (showOrHideCompletedServices != null) {
+      return showOrHideCompletedServices(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShowOrHideCompletedServices
+    implements ServiceRequestManagementEvent {
+  const factory _ShowOrHideCompletedServices({required final bool isShowing}) =
+      _$_ShowOrHideCompletedServices;
+
+  bool get isShowing;
+  @JsonKey(ignore: true)
+  _$$_ShowOrHideCompletedServicesCopyWith<_$_ShowOrHideCompletedServices>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ShowOrHideIncompleteServicesCopyWith<$Res> {
+  factory _$$_ShowOrHideIncompleteServicesCopyWith(
+          _$_ShowOrHideIncompleteServices value,
+          $Res Function(_$_ShowOrHideIncompleteServices) then) =
+      __$$_ShowOrHideIncompleteServicesCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isShowing});
+}
+
+/// @nodoc
+class __$$_ShowOrHideIncompleteServicesCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res,
+        _$_ShowOrHideIncompleteServices>
+    implements _$$_ShowOrHideIncompleteServicesCopyWith<$Res> {
+  __$$_ShowOrHideIncompleteServicesCopyWithImpl(
+      _$_ShowOrHideIncompleteServices _value,
+      $Res Function(_$_ShowOrHideIncompleteServices) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isShowing = null,
+  }) {
+    return _then(_$_ShowOrHideIncompleteServices(
+      isShowing: null == isShowing
+          ? _value.isShowing
+          : isShowing // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ShowOrHideIncompleteServices implements _ShowOrHideIncompleteServices {
+  const _$_ShowOrHideIncompleteServices({required this.isShowing});
+
+  @override
+  final bool isShowing;
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.showOrHideIncompleteServices(isShowing: $isShowing)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ShowOrHideIncompleteServices &&
+            (identical(other.isShowing, isShowing) ||
+                other.isShowing == isShowing));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isShowing);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ShowOrHideIncompleteServicesCopyWith<_$_ShowOrHideIncompleteServices>
+      get copyWith => __$$_ShowOrHideIncompleteServicesCopyWithImpl<
+          _$_ShowOrHideIncompleteServices>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
+    required TResult Function() started,
+    required TResult Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)
+        isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
+    required TResult Function() getFilters,
+    required TResult Function() getServiceStatus,
+    required TResult Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)
+        getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
+  }) {
+    return showOrHideIncompleteServices(isShowing);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
+    TResult? Function()? started,
+    TResult? Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)?
+        isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
+    TResult? Function()? getFilters,
+    TResult? Function()? getServiceStatus,
+    TResult? Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)?
+        getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
+  }) {
+    return showOrHideIncompleteServices?.call(isShowing);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
+    TResult Function()? started,
+    TResult Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)?
+        isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
+    TResult Function()? getFilters,
+    TResult Function()? getServiceStatus,
+    TResult Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)?
+        getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
+    required TResult orElse(),
+  }) {
+    if (showOrHideIncompleteServices != null) {
+      return showOrHideIncompleteServices(isShowing);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
+    required TResult Function(_GetFilters value) getFilters,
+    required TResult Function(_GetServiceStatus value) getServiceStatus,
+    required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
+  }) {
+    return showOrHideIncompleteServices(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    TResult? Function(_GetFilters value)? getFilters,
+    TResult? Function(_GetServiceStatus value)? getServiceStatus,
+    TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+  }) {
+    return showOrHideIncompleteServices?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    TResult Function(_GetFilters value)? getFilters,
+    TResult Function(_GetServiceStatus value)? getServiceStatus,
+    TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    required TResult orElse(),
+  }) {
+    if (showOrHideIncompleteServices != null) {
+      return showOrHideIncompleteServices(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShowOrHideIncompleteServices
+    implements ServiceRequestManagementEvent {
+  const factory _ShowOrHideIncompleteServices({required final bool isShowing}) =
+      _$_ShowOrHideIncompleteServices;
+
+  bool get isShowing;
+  @JsonKey(ignore: true)
+  _$$_ShowOrHideIncompleteServicesCopyWith<_$_ShowOrHideIncompleteServices>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ShowOrHideExtraServicesCopyWith<$Res> {
+  factory _$$_ShowOrHideExtraServicesCopyWith(_$_ShowOrHideExtraServices value,
+          $Res Function(_$_ShowOrHideExtraServices) then) =
+      __$$_ShowOrHideExtraServicesCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isShowing});
+}
+
+/// @nodoc
+class __$$_ShowOrHideExtraServicesCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res,
+        _$_ShowOrHideExtraServices>
+    implements _$$_ShowOrHideExtraServicesCopyWith<$Res> {
+  __$$_ShowOrHideExtraServicesCopyWithImpl(_$_ShowOrHideExtraServices _value,
+      $Res Function(_$_ShowOrHideExtraServices) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isShowing = null,
+  }) {
+    return _then(_$_ShowOrHideExtraServices(
+      isShowing: null == isShowing
+          ? _value.isShowing
+          : isShowing // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ShowOrHideExtraServices implements _ShowOrHideExtraServices {
+  const _$_ShowOrHideExtraServices({required this.isShowing});
+
+  @override
+  final bool isShowing;
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.showOrHideExtraServices(isShowing: $isShowing)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ShowOrHideExtraServices &&
+            (identical(other.isShowing, isShowing) ||
+                other.isShowing == isShowing));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isShowing);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ShowOrHideExtraServicesCopyWith<_$_ShowOrHideExtraServices>
+      get copyWith =>
+          __$$_ShowOrHideExtraServicesCopyWithImpl<_$_ShowOrHideExtraServices>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
+    required TResult Function() started,
+    required TResult Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)
+        isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
+    required TResult Function() getFilters,
+    required TResult Function() getServiceStatus,
+    required TResult Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)
+        getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
+  }) {
+    return showOrHideExtraServices(isShowing);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
+    TResult? Function()? started,
+    TResult? Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)?
+        isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
+    TResult? Function()? getFilters,
+    TResult? Function()? getServiceStatus,
+    TResult? Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)?
+        getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
+  }) {
+    return showOrHideExtraServices?.call(isShowing);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
+    TResult Function()? started,
+    TResult Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)?
+        isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
+    TResult Function()? getFilters,
+    TResult Function()? getServiceStatus,
+    TResult Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)?
+        getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
+    required TResult orElse(),
+  }) {
+    if (showOrHideExtraServices != null) {
+      return showOrHideExtraServices(isShowing);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
+    required TResult Function(_GetFilters value) getFilters,
+    required TResult Function(_GetServiceStatus value) getServiceStatus,
+    required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
+  }) {
+    return showOrHideExtraServices(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    TResult? Function(_GetFilters value)? getFilters,
+    TResult? Function(_GetServiceStatus value)? getServiceStatus,
+    TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+  }) {
+    return showOrHideExtraServices?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    TResult Function(_GetFilters value)? getFilters,
+    TResult Function(_GetServiceStatus value)? getServiceStatus,
+    TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    required TResult orElse(),
+  }) {
+    if (showOrHideExtraServices != null) {
+      return showOrHideExtraServices(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShowOrHideExtraServices
+    implements ServiceRequestManagementEvent {
+  const factory _ShowOrHideExtraServices({required final bool isShowing}) =
+      _$_ShowOrHideExtraServices;
+
+  bool get isShowing;
+  @JsonKey(ignore: true)
+  _$$_ShowOrHideExtraServicesCopyWith<_$_ShowOrHideExtraServices>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ServiceRequestManagementState {
   List<Types> get types => throw _privateConstructorUsedError;
   bool? get isLoading => throw _privateConstructorUsedError;
   bool? get isListLoading => throw _privateConstructorUsedError;
+  bool? get isDetailsLoading => throw _privateConstructorUsedError;
+  bool get isShowingTransactionDetails => throw _privateConstructorUsedError;
+  bool get isShowingNeededServices => throw _privateConstructorUsedError;
+  bool get isShowingCompletedServices => throw _privateConstructorUsedError;
+  bool get isShowingIncompleteServices => throw _privateConstructorUsedError;
+  bool get isShowingExtraServices => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   DateTime get selectedDate => throw _privateConstructorUsedError;
   String get fromDate => throw _privateConstructorUsedError;
@@ -5598,6 +8664,8 @@ mixin _$ServiceRequestManagementState {
       throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, GetFiltersResponse>> get filterOption =>
       throw _privateConstructorUsedError;
+  Option<Either<ApiErrorHandler, ServiceDetailsResponseModel>>
+      get serviceDetailsOption => throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, ServiceRequestListResponseModel>>
       get serviceOption => throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, ServiceStatusResponseModel>>
@@ -5634,6 +8702,12 @@ abstract class $ServiceRequestManagementStateCopyWith<$Res> {
       {List<Types> types,
       bool? isLoading,
       bool? isListLoading,
+      bool? isDetailsLoading,
+      bool isShowingTransactionDetails,
+      bool isShowingNeededServices,
+      bool isShowingCompletedServices,
+      bool isShowingIncompleteServices,
+      bool isShowingExtraServices,
       String? error,
       DateTime selectedDate,
       String fromDate,
@@ -5647,6 +8721,8 @@ abstract class $ServiceRequestManagementStateCopyWith<$Res> {
       CommonResponseUse? cancelServiceResponse,
       CaregiverProfileResponse? caregiverProfileResponse,
       Option<Either<ApiErrorHandler, GetFiltersResponse>> filterOption,
+      Option<Either<ApiErrorHandler, ServiceDetailsResponseModel>>
+          serviceDetailsOption,
       Option<Either<ApiErrorHandler, ServiceRequestListResponseModel>>
           serviceOption,
       Option<Either<ApiErrorHandler, ServiceStatusResponseModel>>
@@ -5681,6 +8757,12 @@ class _$ServiceRequestManagementStateCopyWithImpl<$Res,
     Object? types = null,
     Object? isLoading = freezed,
     Object? isListLoading = freezed,
+    Object? isDetailsLoading = freezed,
+    Object? isShowingTransactionDetails = null,
+    Object? isShowingNeededServices = null,
+    Object? isShowingCompletedServices = null,
+    Object? isShowingIncompleteServices = null,
+    Object? isShowingExtraServices = null,
     Object? error = freezed,
     Object? selectedDate = null,
     Object? fromDate = null,
@@ -5694,6 +8776,7 @@ class _$ServiceRequestManagementStateCopyWithImpl<$Res,
     Object? cancelServiceResponse = freezed,
     Object? caregiverProfileResponse = freezed,
     Object? filterOption = null,
+    Object? serviceDetailsOption = null,
     Object? serviceOption = null,
     Object? serviceStatusOption = null,
     Object? isError = null,
@@ -5721,6 +8804,30 @@ class _$ServiceRequestManagementStateCopyWithImpl<$Res,
           ? _value.isListLoading
           : isListLoading // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isDetailsLoading: freezed == isDetailsLoading
+          ? _value.isDetailsLoading
+          : isDetailsLoading // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isShowingTransactionDetails: null == isShowingTransactionDetails
+          ? _value.isShowingTransactionDetails
+          : isShowingTransactionDetails // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowingNeededServices: null == isShowingNeededServices
+          ? _value.isShowingNeededServices
+          : isShowingNeededServices // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowingCompletedServices: null == isShowingCompletedServices
+          ? _value.isShowingCompletedServices
+          : isShowingCompletedServices // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowingIncompleteServices: null == isShowingIncompleteServices
+          ? _value.isShowingIncompleteServices
+          : isShowingIncompleteServices // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowingExtraServices: null == isShowingExtraServices
+          ? _value.isShowingExtraServices
+          : isShowingExtraServices // ignore: cast_nullable_to_non_nullable
+              as bool,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -5773,6 +8880,10 @@ class _$ServiceRequestManagementStateCopyWithImpl<$Res,
           ? _value.filterOption
           : filterOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiErrorHandler, GetFiltersResponse>>,
+      serviceDetailsOption: null == serviceDetailsOption
+          ? _value.serviceDetailsOption
+          : serviceDetailsOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, ServiceDetailsResponseModel>>,
       serviceOption: null == serviceOption
           ? _value.serviceOption
           : serviceOption // ignore: cast_nullable_to_non_nullable
@@ -5846,6 +8957,12 @@ abstract class _$$_ServiceRequestManagementStateCopyWith<$Res>
       {List<Types> types,
       bool? isLoading,
       bool? isListLoading,
+      bool? isDetailsLoading,
+      bool isShowingTransactionDetails,
+      bool isShowingNeededServices,
+      bool isShowingCompletedServices,
+      bool isShowingIncompleteServices,
+      bool isShowingExtraServices,
       String? error,
       DateTime selectedDate,
       String fromDate,
@@ -5859,6 +8976,8 @@ abstract class _$$_ServiceRequestManagementStateCopyWith<$Res>
       CommonResponseUse? cancelServiceResponse,
       CaregiverProfileResponse? caregiverProfileResponse,
       Option<Either<ApiErrorHandler, GetFiltersResponse>> filterOption,
+      Option<Either<ApiErrorHandler, ServiceDetailsResponseModel>>
+          serviceDetailsOption,
       Option<Either<ApiErrorHandler, ServiceRequestListResponseModel>>
           serviceOption,
       Option<Either<ApiErrorHandler, ServiceStatusResponseModel>>
@@ -5892,6 +9011,12 @@ class __$$_ServiceRequestManagementStateCopyWithImpl<$Res>
     Object? types = null,
     Object? isLoading = freezed,
     Object? isListLoading = freezed,
+    Object? isDetailsLoading = freezed,
+    Object? isShowingTransactionDetails = null,
+    Object? isShowingNeededServices = null,
+    Object? isShowingCompletedServices = null,
+    Object? isShowingIncompleteServices = null,
+    Object? isShowingExtraServices = null,
     Object? error = freezed,
     Object? selectedDate = null,
     Object? fromDate = null,
@@ -5905,6 +9030,7 @@ class __$$_ServiceRequestManagementStateCopyWithImpl<$Res>
     Object? cancelServiceResponse = freezed,
     Object? caregiverProfileResponse = freezed,
     Object? filterOption = null,
+    Object? serviceDetailsOption = null,
     Object? serviceOption = null,
     Object? serviceStatusOption = null,
     Object? isError = null,
@@ -5932,6 +9058,30 @@ class __$$_ServiceRequestManagementStateCopyWithImpl<$Res>
           ? _value.isListLoading
           : isListLoading // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isDetailsLoading: freezed == isDetailsLoading
+          ? _value.isDetailsLoading
+          : isDetailsLoading // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isShowingTransactionDetails: null == isShowingTransactionDetails
+          ? _value.isShowingTransactionDetails
+          : isShowingTransactionDetails // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowingNeededServices: null == isShowingNeededServices
+          ? _value.isShowingNeededServices
+          : isShowingNeededServices // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowingCompletedServices: null == isShowingCompletedServices
+          ? _value.isShowingCompletedServices
+          : isShowingCompletedServices // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowingIncompleteServices: null == isShowingIncompleteServices
+          ? _value.isShowingIncompleteServices
+          : isShowingIncompleteServices // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowingExtraServices: null == isShowingExtraServices
+          ? _value.isShowingExtraServices
+          : isShowingExtraServices // ignore: cast_nullable_to_non_nullable
+              as bool,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -5984,6 +9134,10 @@ class __$$_ServiceRequestManagementStateCopyWithImpl<$Res>
           ? _value.filterOption
           : filterOption // ignore: cast_nullable_to_non_nullable
               as Option<Either<ApiErrorHandler, GetFiltersResponse>>,
+      serviceDetailsOption: null == serviceDetailsOption
+          ? _value.serviceDetailsOption
+          : serviceDetailsOption // ignore: cast_nullable_to_non_nullable
+              as Option<Either<ApiErrorHandler, ServiceDetailsResponseModel>>,
       serviceOption: null == serviceOption
           ? _value.serviceOption
           : serviceOption // ignore: cast_nullable_to_non_nullable
@@ -6052,6 +9206,12 @@ class _$_ServiceRequestManagementState
       {required final List<Types> types,
       this.isLoading,
       this.isListLoading,
+      this.isDetailsLoading,
+      required this.isShowingTransactionDetails,
+      required this.isShowingNeededServices,
+      required this.isShowingCompletedServices,
+      required this.isShowingIncompleteServices,
+      required this.isShowingExtraServices,
       required this.error,
       required this.selectedDate,
       required this.fromDate,
@@ -6065,6 +9225,7 @@ class _$_ServiceRequestManagementState
       this.cancelServiceResponse,
       this.caregiverProfileResponse,
       required this.filterOption,
+      required this.serviceDetailsOption,
       required this.serviceOption,
       required this.serviceStatusOption,
       this.isError = false,
@@ -6094,6 +9255,18 @@ class _$_ServiceRequestManagementState
   @override
   final bool? isListLoading;
   @override
+  final bool? isDetailsLoading;
+  @override
+  final bool isShowingTransactionDetails;
+  @override
+  final bool isShowingNeededServices;
+  @override
+  final bool isShowingCompletedServices;
+  @override
+  final bool isShowingIncompleteServices;
+  @override
+  final bool isShowingExtraServices;
+  @override
   final String? error;
   @override
   final DateTime selectedDate;
@@ -6119,6 +9292,9 @@ class _$_ServiceRequestManagementState
   final CaregiverProfileResponse? caregiverProfileResponse;
   @override
   final Option<Either<ApiErrorHandler, GetFiltersResponse>> filterOption;
+  @override
+  final Option<Either<ApiErrorHandler, ServiceDetailsResponseModel>>
+      serviceDetailsOption;
   @override
   final Option<Either<ApiErrorHandler, ServiceRequestListResponseModel>>
       serviceOption;
@@ -6165,7 +9341,7 @@ class _$_ServiceRequestManagementState
 
   @override
   String toString() {
-    return 'ServiceRequestManagementState(types: $types, isLoading: $isLoading, isListLoading: $isListLoading, error: $error, selectedDate: $selectedDate, fromDate: $fromDate, toDate: $toDate, searchQuery: $searchQuery, fromTime: $fromTime, toTime: $toTime, rescheduleResponse: $rescheduleResponse, caregiverAssignResponse: $caregiverAssignResponse, startServiceResponse: $startServiceResponse, cancelServiceResponse: $cancelServiceResponse, caregiverProfileResponse: $caregiverProfileResponse, filterOption: $filterOption, serviceOption: $serviceOption, serviceStatusOption: $serviceStatusOption, isError: $isError, isCancelLoading: $isCancelLoading, isStartServiceLoading: $isStartServiceLoading, isReScheduleError: $isReScheduleError, isClientError: $isClientError, isRescheduleInitialView: $isRescheduleInitialView, isRescheduleLoaderView: $isRescheduleLoaderView, isRescheduleAvailableCaregiverView: $isRescheduleAvailableCaregiverView, isRescheduleNotAvailableCaregiverView: $isRescheduleNotAvailableCaregiverView, isRescheduleOtherMatchingListView: $isRescheduleOtherMatchingListView, services: $services)';
+    return 'ServiceRequestManagementState(types: $types, isLoading: $isLoading, isListLoading: $isListLoading, isDetailsLoading: $isDetailsLoading, isShowingTransactionDetails: $isShowingTransactionDetails, isShowingNeededServices: $isShowingNeededServices, isShowingCompletedServices: $isShowingCompletedServices, isShowingIncompleteServices: $isShowingIncompleteServices, isShowingExtraServices: $isShowingExtraServices, error: $error, selectedDate: $selectedDate, fromDate: $fromDate, toDate: $toDate, searchQuery: $searchQuery, fromTime: $fromTime, toTime: $toTime, rescheduleResponse: $rescheduleResponse, caregiverAssignResponse: $caregiverAssignResponse, startServiceResponse: $startServiceResponse, cancelServiceResponse: $cancelServiceResponse, caregiverProfileResponse: $caregiverProfileResponse, filterOption: $filterOption, serviceDetailsOption: $serviceDetailsOption, serviceOption: $serviceOption, serviceStatusOption: $serviceStatusOption, isError: $isError, isCancelLoading: $isCancelLoading, isStartServiceLoading: $isStartServiceLoading, isReScheduleError: $isReScheduleError, isClientError: $isClientError, isRescheduleInitialView: $isRescheduleInitialView, isRescheduleLoaderView: $isRescheduleLoaderView, isRescheduleAvailableCaregiverView: $isRescheduleAvailableCaregiverView, isRescheduleNotAvailableCaregiverView: $isRescheduleNotAvailableCaregiverView, isRescheduleOtherMatchingListView: $isRescheduleOtherMatchingListView, services: $services)';
   }
 
   @override
@@ -6178,6 +9354,21 @@ class _$_ServiceRequestManagementState
                 other.isLoading == isLoading) &&
             (identical(other.isListLoading, isListLoading) ||
                 other.isListLoading == isListLoading) &&
+            (identical(other.isDetailsLoading, isDetailsLoading) ||
+                other.isDetailsLoading == isDetailsLoading) &&
+            (identical(other.isShowingTransactionDetails, isShowingTransactionDetails) ||
+                other.isShowingTransactionDetails ==
+                    isShowingTransactionDetails) &&
+            (identical(other.isShowingNeededServices, isShowingNeededServices) ||
+                other.isShowingNeededServices == isShowingNeededServices) &&
+            (identical(other.isShowingCompletedServices, isShowingCompletedServices) ||
+                other.isShowingCompletedServices ==
+                    isShowingCompletedServices) &&
+            (identical(other.isShowingIncompleteServices, isShowingIncompleteServices) ||
+                other.isShowingIncompleteServices ==
+                    isShowingIncompleteServices) &&
+            (identical(other.isShowingExtraServices, isShowingExtraServices) ||
+                other.isShowingExtraServices == isShowingExtraServices) &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.selectedDate, selectedDate) ||
                 other.selectedDate == selectedDate) &&
@@ -6201,33 +9392,22 @@ class _$_ServiceRequestManagementState
                 other.caregiverProfileResponse == caregiverProfileResponse) &&
             (identical(other.filterOption, filterOption) ||
                 other.filterOption == filterOption) &&
+            (identical(other.serviceDetailsOption, serviceDetailsOption) ||
+                other.serviceDetailsOption == serviceDetailsOption) &&
             (identical(other.serviceOption, serviceOption) ||
                 other.serviceOption == serviceOption) &&
             (identical(other.serviceStatusOption, serviceStatusOption) ||
                 other.serviceStatusOption == serviceStatusOption) &&
             (identical(other.isError, isError) || other.isError == isError) &&
-            (identical(other.isCancelLoading, isCancelLoading) ||
-                other.isCancelLoading == isCancelLoading) &&
-            (identical(other.isStartServiceLoading, isStartServiceLoading) ||
-                other.isStartServiceLoading == isStartServiceLoading) &&
-            (identical(other.isReScheduleError, isReScheduleError) ||
-                other.isReScheduleError == isReScheduleError) &&
-            (identical(other.isClientError, isClientError) ||
-                other.isClientError == isClientError) &&
-            (identical(other.isRescheduleInitialView, isRescheduleInitialView) ||
-                other.isRescheduleInitialView == isRescheduleInitialView) &&
-            (identical(other.isRescheduleLoaderView, isRescheduleLoaderView) ||
-                other.isRescheduleLoaderView == isRescheduleLoaderView) &&
-            (identical(other.isRescheduleAvailableCaregiverView, isRescheduleAvailableCaregiverView) ||
-                other.isRescheduleAvailableCaregiverView ==
-                    isRescheduleAvailableCaregiverView) &&
-            (identical(other.isRescheduleNotAvailableCaregiverView,
-                    isRescheduleNotAvailableCaregiverView) ||
-                other.isRescheduleNotAvailableCaregiverView ==
-                    isRescheduleNotAvailableCaregiverView) &&
-            (identical(other.isRescheduleOtherMatchingListView, isRescheduleOtherMatchingListView) ||
-                other.isRescheduleOtherMatchingListView ==
-                    isRescheduleOtherMatchingListView) &&
+            (identical(other.isCancelLoading, isCancelLoading) || other.isCancelLoading == isCancelLoading) &&
+            (identical(other.isStartServiceLoading, isStartServiceLoading) || other.isStartServiceLoading == isStartServiceLoading) &&
+            (identical(other.isReScheduleError, isReScheduleError) || other.isReScheduleError == isReScheduleError) &&
+            (identical(other.isClientError, isClientError) || other.isClientError == isClientError) &&
+            (identical(other.isRescheduleInitialView, isRescheduleInitialView) || other.isRescheduleInitialView == isRescheduleInitialView) &&
+            (identical(other.isRescheduleLoaderView, isRescheduleLoaderView) || other.isRescheduleLoaderView == isRescheduleLoaderView) &&
+            (identical(other.isRescheduleAvailableCaregiverView, isRescheduleAvailableCaregiverView) || other.isRescheduleAvailableCaregiverView == isRescheduleAvailableCaregiverView) &&
+            (identical(other.isRescheduleNotAvailableCaregiverView, isRescheduleNotAvailableCaregiverView) || other.isRescheduleNotAvailableCaregiverView == isRescheduleNotAvailableCaregiverView) &&
+            (identical(other.isRescheduleOtherMatchingListView, isRescheduleOtherMatchingListView) || other.isRescheduleOtherMatchingListView == isRescheduleOtherMatchingListView) &&
             const DeepCollectionEquality().equals(other._services, _services));
   }
 
@@ -6237,6 +9417,12 @@ class _$_ServiceRequestManagementState
         const DeepCollectionEquality().hash(_types),
         isLoading,
         isListLoading,
+        isDetailsLoading,
+        isShowingTransactionDetails,
+        isShowingNeededServices,
+        isShowingCompletedServices,
+        isShowingIncompleteServices,
+        isShowingExtraServices,
         error,
         selectedDate,
         fromDate,
@@ -6250,6 +9436,7 @@ class _$_ServiceRequestManagementState
         cancelServiceResponse,
         caregiverProfileResponse,
         filterOption,
+        serviceDetailsOption,
         serviceOption,
         serviceStatusOption,
         isError,
@@ -6279,6 +9466,12 @@ abstract class _ServiceRequestManagementState
       {required final List<Types> types,
       final bool? isLoading,
       final bool? isListLoading,
+      final bool? isDetailsLoading,
+      required final bool isShowingTransactionDetails,
+      required final bool isShowingNeededServices,
+      required final bool isShowingCompletedServices,
+      required final bool isShowingIncompleteServices,
+      required final bool isShowingExtraServices,
       required final String? error,
       required final DateTime selectedDate,
       required final String fromDate,
@@ -6293,6 +9486,9 @@ abstract class _ServiceRequestManagementState
       final CaregiverProfileResponse? caregiverProfileResponse,
       required final Option<Either<ApiErrorHandler, GetFiltersResponse>>
           filterOption,
+      required final Option<
+              Either<ApiErrorHandler, ServiceDetailsResponseModel>>
+          serviceDetailsOption,
       required final Option<
               Either<ApiErrorHandler, ServiceRequestListResponseModel>>
           serviceOption,
@@ -6317,6 +9513,18 @@ abstract class _ServiceRequestManagementState
   bool? get isLoading;
   @override
   bool? get isListLoading;
+  @override
+  bool? get isDetailsLoading;
+  @override
+  bool get isShowingTransactionDetails;
+  @override
+  bool get isShowingNeededServices;
+  @override
+  bool get isShowingCompletedServices;
+  @override
+  bool get isShowingIncompleteServices;
+  @override
+  bool get isShowingExtraServices;
   @override
   String? get error;
   @override
@@ -6343,6 +9551,9 @@ abstract class _ServiceRequestManagementState
   CaregiverProfileResponse? get caregiverProfileResponse;
   @override
   Option<Either<ApiErrorHandler, GetFiltersResponse>> get filterOption;
+  @override
+  Option<Either<ApiErrorHandler, ServiceDetailsResponseModel>>
+      get serviceDetailsOption;
   @override
   Option<Either<ApiErrorHandler, ServiceRequestListResponseModel>>
       get serviceOption;

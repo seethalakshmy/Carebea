@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:admin_580_tech/domain/email_otp_verification/models/generate_otp_response.dart';
-import 'package:admin_580_tech/domain/on_boarding/models/common_response.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:auto_route/auto_route.dart';
@@ -9,16 +6,15 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:meta/meta.dart';
 
 import '../../../core/custom_snackbar.dart';
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
 import '../../../domain/email_otp_verification/models/verify_otp_response.dart';
 import '../../../infrastructure/email_otp_verification/email_otp_verification_repository.dart';
 
+part 'email_otp_verification_bloc.freezed.dart';
 part 'email_otp_verification_event.dart';
 part 'email_otp_verification_state.dart';
-part 'email_otp_verification_bloc.freezed.dart';
 
 class EmailOtpVerificationBloc
     extends Bloc<EmailOtpVerificationEvent, EmailOtpVerificationState> {
@@ -33,7 +29,6 @@ class EmailOtpVerificationBloc
   }
 
   _verifyOtp(_VerifyOtp event, Emitter<EmailOtpVerificationState> emit) async {
-    print('inside bloc');
     emit(state.copyWith(isLoading: true));
     final Either<ApiErrorHandler, VerifyOtpResponse> homeResult =
         await emailOtpVerificationRepository.verifyOtp(
@@ -49,6 +44,8 @@ class EmailOtpVerificationBloc
       if (r.status ?? false) {
         print('token ${r.data?.accessToken ?? ''}');
         sharedPreffUtil.setAccessToken = r.data?.accessToken ?? '';
+        sharedPreffUtil.setCareGiverUserId = r.data?.userId ?? '';
+
         add(EmailOtpVerificationEvent.generateOtp(
             context: event.context,
             userId: SharedPreffUtil().getAdminId,
@@ -75,7 +72,6 @@ class EmailOtpVerificationBloc
 
   _verifyMobileOtp(
       _VerifyMobileOtp event, Emitter<EmailOtpVerificationState> emit) async {
-    print('inside bloc');
     emit(state.copyWith(isLoading: true));
     final Either<ApiErrorHandler, VerifyOtpResponse> homeResult =
         await emailOtpVerificationRepository.verifyOtp(

@@ -792,6 +792,8 @@ abstract class $TransactionManagementStateCopyWith<$Res> {
       Option<Either<ApiErrorHandler, GetFiltersResponse>> filterOption,
       Option<Either<ApiErrorHandler, TransactionDetailsResponse>>
           trDetailsOption});
+
+  $TransactionListResponseCopyWith<$Res>? get response;
 }
 
 /// @nodoc
@@ -857,6 +859,18 @@ class _$TransactionManagementStateCopyWithImpl<$Res,
               as Option<Either<ApiErrorHandler, TransactionDetailsResponse>>,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TransactionListResponseCopyWith<$Res>? get response {
+    if (_value.response == null) {
+      return null;
+    }
+
+    return $TransactionListResponseCopyWith<$Res>(_value.response!, (value) {
+      return _then(_value.copyWith(response: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -878,6 +892,9 @@ abstract class _$$_TransactionsStateCopyWith<$Res>
       Option<Either<ApiErrorHandler, GetFiltersResponse>> filterOption,
       Option<Either<ApiErrorHandler, TransactionDetailsResponse>>
           trDetailsOption});
+
+  @override
+  $TransactionListResponseCopyWith<$Res>? get response;
 }
 
 /// @nodoc

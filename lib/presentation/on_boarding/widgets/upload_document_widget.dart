@@ -13,6 +13,7 @@ class UploadDocumentWidget extends StatelessWidget {
   Function() onTap;
   double? width;
   bool? isVideoUpload = false;
+  final bool isSignature;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +45,8 @@ class UploadDocumentWidget extends StatelessWidget {
                 CustomText(
                   isVideoUpload == true
                       ? AppString.uploadVideo.val
+                  isSignature
+                      ? AppString.uploadSignature.val
                       : AppString.uploadDocument.val,
                   style: TS().gRoboto(
                       fontWeight: FW.w500.val,
@@ -53,7 +56,7 @@ class UploadDocumentWidget extends StatelessWidget {
               ],
             ),
             CustomContainer(
-              width: 165,
+              width: isSignature ? 140 : 165,
               height: DBL.one.val,
               color: AppColor.primaryColor.val,
             ),

@@ -61,6 +61,7 @@ dependencies:
   chewie: ^1.7.1
   video_player: ^2.7.2
 
+
 dev_dependencies:
   auto_route_generator: ^7.2.0
   build_runner:

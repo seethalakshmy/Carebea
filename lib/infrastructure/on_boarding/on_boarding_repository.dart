@@ -11,10 +11,8 @@ import '../../core/custom_debugger.dart';
 import '../../core/enum.dart';
 import '../../domain/on_boarding/i_on_boarding_repo.dart';
 import '../../domain/on_boarding/models/preferences/pet_list_response.dart';
-import '../../domain/on_boarding/models/preferences/preference_request_model.dart';
 import '../../domain/on_boarding/models/preferences/years_of_experience_response.dart';
 import '../../domain/on_boarding/models/services/get_services_response.dart';
-import '../../domain/on_boarding/models/services/service_request_model.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/city_list_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/document_list_response.dart';
 import '../../presentation/on_boarding/modules/personal_details/models/gender_list_response.dart';
@@ -158,6 +156,7 @@ class OnBoardingRepository implements IOnBoardingRepo {
           required double longitude,
           required String zip,
           required String address,
+          required String locationTag,
           required String socialSecurityNo,
           required String documentId,
           required String documentNo,
@@ -176,6 +175,7 @@ class OnBoardingRepository implements IOnBoardingRepo {
           longitude,
           zip,
           address,
+          locationTag,
           socialSecurityNo,
           documentId,
           documentNo,

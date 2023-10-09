@@ -1,9 +1,11 @@
-import 'package:admin_580_tech/application/bloc/onboarding/onboarding_bloc.dart';
+import 'dart:developer';
+
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../application/bloc/onboarding/onboarding_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
@@ -13,14 +15,11 @@ import '../widget/custom_card.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_text.dart';
 import '../widget/header_view.dart';
-import 'modules/agreement/agreement.dart';
 import 'modules/build_profile/build_profile_view.dart';
+import 'modules/health_aid_agreement/home_health_agreement_view.dart';
 import 'modules/personal_details/personal_details_view.dart';
 import 'modules/preference/preference_view.dart';
 import 'modules/qualification_details/qialification_view.dart';
-import 'modules/reference/reference_view.dart';
-import 'modules/services/services_view.dart';
-import 'modules/setup_compensation/setup_compensation_view.dart';
 
 @RoutePage()
 class OnboardingPage extends StatefulWidget {
@@ -81,7 +80,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
         pageController: controller,
         onboardingBloc: _onboardingBloc,
       ),
-      ServicesView(
+      /*ServicesView(
         pageController: controller,
         onboardingBloc: _onboardingBloc,
       ),
@@ -93,7 +92,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           pageController: controller, onboardingBloc: _onboardingBloc),
       //HomeHealthAidAgreementView(pageController: controller),
       SetupCompensationView(
-          pageController: controller, onboardingBloc: _onboardingBloc),
+          pageController: controller, onboardingBloc: _onboardingBloc),*/
     ];
     setState(() {
       totalPages = pages.length;

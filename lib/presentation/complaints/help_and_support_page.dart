@@ -195,27 +195,32 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
   }
 
   _usersView(BuildContext context) {
-    return _supportTicketsBloc.complaintList.isNotEmpty
-        ? Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _statusDropDown(context),
-                  _searchField(),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _statusDropDown(context),
+            _searchField(),
+          ],
+        ),
+        _supportTicketsBloc.complaintList.isNotEmpty
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  CustomSizedBox(height: DBL.fifteen.val),
+                  CustomSizedBox(
+                    height: (_limit + 1) * 48,
+                    child: _usersTable(),
+                  ),
+                  CustomSizedBox(height: DBL.twenty.val),
+                  _paginationView()
                 ],
-              ),
-              CustomSizedBox(height: DBL.fifteen.val),
-              CustomSizedBox(
-                height: (_limit + 1) * 48,
-                child: _usersTable(),
-              ),
-              CustomSizedBox(height: DBL.twenty.val),
-              _paginationView()
-            ],
-          )
-        : EmptyView(title: AppString.noUsersFound.val);
+              )
+            : EmptyView(title: AppString.noUsersFound.val),
+      ],
+    );
   }
 
   CTextField _searchField() {
@@ -411,8 +416,8 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
             label: _columnsView(
                 text: AppString.status.val, fontWeight: FontWeight.bold),
           ),
-          DataColumn2(
-            label: const CustomText(""),
+          const DataColumn2(
+            label: CustomText(""),
           ),
         ],
         rows: _supportTicketsBloc.complaintList.asMap().entries.map((e) {
@@ -426,6 +431,13 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
               DataCell(_rowsView(
                 text: item.complaintId.toString(),
               )),
+              // DataCell(_rowsView(
+              //     text:
+              //         "${item.clientName?.firstName ?? ""} ${item.clientName?.lastName ?? ""}")),
+              // //_tableRowImage("${item.clientName?.firstName} ${item.clientName?.lastName}","")
+              // DataCell(_rowsView(
+              //     text:
+              //         "${item.caregiverName?.firstName ?? ""} ${item.caregiverName?.lastName ?? ""}")),
               DataCell(_rowsView(
                   text:
                       "${item.clientName?.firstName} ${item.clientName?.lastName}")),
@@ -498,7 +510,7 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
     String? text,
   }) {
     return CustomText(
-      '$text',
+      text ?? "",
       softWrap: true,
       style: TS().gRoboto(
           fontSize: Responsive.isWeb(context)

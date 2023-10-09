@@ -1,7 +1,5 @@
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
-import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,7 +66,9 @@ class _SetupCompensationViewState extends State<SetupCompensationView> {
             some.fold((l) {
               CSnackBar.showError(context, msg: l.error);
             }, (r) {
-              context.router.navigate(const CaregiverCreationRoute());
+              widget.pageController
+                  .jumpToPage(widget.pageController.page!.toInt() + 1);
+              // context.router.navigate(const CaregiverCreationRoute());
             });
           });
         },

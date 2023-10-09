@@ -1,4 +1,5 @@
 import 'package:admin_580_tech/core/string_extension.dart';
+import 'package:admin_580_tech/presentation/service_request_management/widgets/service_details_alert.dart';
 import 'package:admin_580_tech/presentation/widget/header_view.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -14,6 +15,7 @@ import '../../core/text_styles.dart';
 import '../../domain/caregivers/model/types.dart';
 import '../../domain/service_request_management/model/service_request_response.dart';
 import '../../infrastructure/service_request_management/service_request_management_repository.dart';
+import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/custom_button.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
@@ -27,6 +29,7 @@ import '../widget/custom_text.dart';
 import '../widget/custom_text_field.dart';
 import '../widget/empty_view.dart';
 import '../widget/error_view.dart';
+import '../widget/pagination_view.dart';
 import '../widget/table_loader_view.dart';
 
 @RoutePage()
@@ -43,7 +46,10 @@ class _ServiceRequestManagementPageState
   List<ServiceList> serviceList = [];
 
   final int _limit = 10;
-  int _tabType = 1;
+  int pageIndex = 0;
+  int _start = 0;
+  int _end = 10;
+  int _page = 1;
   final ServiceRequestManagementBloc _serviceRequestBloc =
       ServiceRequestManagementBloc(ServiceRequestManagementRepository());
   final TextEditingController _searchController = TextEditingController();
@@ -79,7 +85,7 @@ class _ServiceRequestManagementPageState
         BlocProvider(
           create: (context) => _serviceRequestBloc
             ..add(ServiceRequestManagementEvent.getServiceRequests(
-                context: context, page: 1, limit: _limit)),
+                context: context, page: _page, limit: _limit)),
           child: BlocBuilder<ServiceRequestManagementBloc,
               ServiceRequestManagementState>(
             builder: (context, state) {
@@ -124,7 +130,7 @@ class _ServiceRequestManagementPageState
                     ],
                   ),
                   const SizedBox(height: 30),
-                  _cardView(state, context)
+                  _cardView(state, context),
                 ],
               );
             },
@@ -181,6 +187,7 @@ class _ServiceRequestManagementPageState
         height: 46,
         child: CustomButton(
           onPressed: () {
+            _page = 1;
             _searchController.clear();
             fromDateController.clear();
             toDateController.clear();
@@ -189,7 +196,7 @@ class _ServiceRequestManagementPageState
                 .add(const ServiceRequestManagementEvent.getServiceStatus());
             _serviceRequestBloc.add(
                 ServiceRequestManagementEvent.getServiceRequests(
-                    context: context, page: 1, limit: _limit));
+                    context: context, page: _page, limit: _limit));
           },
           text: AppString.clearFilters.val,
         ),
@@ -214,10 +221,11 @@ class _ServiceRequestManagementPageState
         _serviceRequestBloc.selectedFromDateTime = value;
         if (_serviceRequestBloc.selectedFromDate.isNotEmpty &&
             _serviceRequestBloc.selectedToDate.isNotEmpty) {
+          _page = 1;
           _serviceRequestBloc.add(
               ServiceRequestManagementEvent.getServiceRequests(
                   context: context,
-                  page: 1,
+                  page: _page,
                   limit: _limit,
                   fromDate: _serviceRequestBloc.selectedFromDate,
                   toDate: _serviceRequestBloc.selectedToDate));
@@ -245,10 +253,11 @@ class _ServiceRequestManagementPageState
         print("selecteddd to date : ${_serviceRequestBloc.selectedToDate}");
         if (_serviceRequestBloc.selectedFromDate.isNotEmpty &&
             _serviceRequestBloc.selectedToDate.isNotEmpty) {
+          _page = 1;
           _serviceRequestBloc.add(
               ServiceRequestManagementEvent.getServiceRequests(
                   context: context,
-                  page: 1,
+                  page: _page,
                   limit: _limit,
                   fromDate: _serviceRequestBloc.selectedFromDate,
                   toDate: _serviceRequestBloc.selectedToDate));
@@ -265,10 +274,11 @@ class _ServiceRequestManagementPageState
       onSubmitted: (val) {
         print("item inside search submit : ${items.title}");
         _serviceRequestBloc.searchQuery = val;
+        _page = 1;
         _serviceRequestBloc.add(
             ServiceRequestManagementEvent.getServiceRequests(
                 context: context,
-                page: 1,
+                page: _page,
                 limit: _limit,
                 searchTerm: _serviceRequestBloc.searchQuery));
       },
@@ -344,17 +354,30 @@ class _ServiceRequestManagementPageState
     return CustomCard(
         shape: PR().roundedRectangleBorder(DBL.five.val),
         elevation: DBL.seven.val,
-        child: state.isListLoading ?? false
-            ? const TableLoaderView()
-            : state.error != ""
-                ? ErrorView(isClientError: false, errorMessage: state.error)
-                : CustomContainer(
-                    padding: EdgeInsets.all(DBL.twenty.val),
-                    child: CustomSizedBox(
-                      height: (_limit + 1) * 48,
-                      child: _requestsTable(state),
-                    ),
-                  ));
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            state.isListLoading ?? false
+                ? const TableLoaderView()
+                : state.error != ""
+                    ? ErrorView(isClientError: false, errorMessage: state.error)
+                    : CustomContainer(
+                        padding: EdgeInsets.all(DBL.twenty.val),
+                        child: CustomSizedBox(
+                          height: (_limit + 1) * 48,
+                          child: _requestsTable(state),
+                        ),
+                      ),
+            Padding(
+              padding: EdgeInsets.only(
+                  left: DBL.twenty.val,
+                  right: DBL.twenty.val,
+                  top: DBL.ten.val,
+                  bottom: DBL.twenty.val),
+              child: _paginationView(),
+            )
+          ],
+        ));
   }
 
   _requestsTable(ServiceRequestManagementState state) {
@@ -501,26 +524,30 @@ class _ServiceRequestManagementPageState
                       )),
                     DataCell(
                         _rowsView(text: item.serviceStatus, isStatus: true)),
-                    DataCell(
-                      InkWell(
-                          onTap: () {
-                            //autoTabRouter?.navigate(ServiceDetailsRoute(id: item.id));
-
-                            /*showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return ServiceDetailsDialog(
-                                    service: item,
-                                    title: getTitle(_tabType),
-                                  );
-                                });*/
-                          },
-                          child: CustomSvg(
-                            path: IMG.eye.val,
-                            width: DBL.twelve.val,
-                            height: DBL.twelve.val,
-                          )),
-                    ),
+                    DataCell(InkWell(
+                        onTap: () {
+                          //autoTabRouter?.navigate(ServiceDetailsRoute(id: item.id));
+                          _serviceRequestBloc.add(
+                              ServiceRequestManagementEvent.getServiceDetails(
+                                  context: context, serviceId: item.id ?? ""));
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return CustomAlertDialogWidget(
+                                  heading:
+                                      "${item.serviceStatus} Service Request",
+                                  child: ServiceDetailsAlert(
+                                    title: item.serviceStatus ?? "",
+                                    serviceBloc: _serviceRequestBloc,
+                                  ),
+                                );
+                              });
+                        },
+                        child: CustomSvg(
+                          path: IMG.eye.val,
+                          width: DBL.twelve.val,
+                          height: DBL.twelve.val,
+                        ))),
                   ],
                 );
               }).toList(),
@@ -544,7 +571,7 @@ class _ServiceRequestManagementPageState
 
   Widget _rowsView({String? text, bool? isStatus}) {
     return Container(
-      padding: const EdgeInsets.all(5),
+      padding: const EdgeInsets.all(7),
       decoration: isStatus ?? false
           ? BoxDecoration(
               borderRadius: BorderRadius.circular(8),
@@ -567,7 +594,7 @@ class _ServiceRequestManagementPageState
 
   Color _generateColor(String text) {
     if (text.toLowerCase().trim() == "upcoming") {
-      return AppColor.darkGrey4.val;
+      return AppColor.amber.val;
     } else if (text.toLowerCase().trim() == "ongoing") {
       return AppColor.blue.val;
     } else if (text.toLowerCase().trim() == "completed") {
@@ -578,66 +605,65 @@ class _ServiceRequestManagementPageState
   }
 
   _bookingStatusDropDown(BuildContext context) {
-    return _tabType == 1
-        ? CustomDropdown<int>(
-            onChange: (int value, int index) {
-              // _serviceBloc.add(
-              //     ServiceRequestManagementEvent.getServiceList(selectedType,
-              //         filterId: value));
-            },
-            dropdownButtonStyle: DropdownButtonStyle(
-              mainAxisAlignment: MainAxisAlignment.start,
-              width: DBL.twoTen.val,
-              height: DBL.fortySeven.val,
-              elevation: DBL.zero.val,
-              padding: EdgeInsets.only(left: DBL.fifteen.val),
-              backgroundColor: Colors.white,
-              primaryColor: AppColor.white.val,
-            ),
-            dropdownStyle: DropdownStyle(
-              borderRadius: BorderRadius.circular(DBL.zero.val),
-              elevation: 2,
-              color: AppColor.white.val,
-              padding: EdgeInsets.all(DBL.five.val),
-            ),
-            items: [AppString.normalServiceRequest.val, AppString.rebooking.val]
-                .asMap()
-                .entries
-                .map(
-                  (item) => DropdownItem<int>(
-                    value: item.key + 1,
-                    child: Padding(
-                      padding: EdgeInsets.all(DBL.eight.val),
-                      child: Text(
-                        item.value,
-                        style: TS().gRoboto(
-                            fontWeight: FW.w400.val,
-                            fontSize: FS.font14.val,
-                            color: AppColor.columColor2.val),
-                      ),
-                    ),
-                  ),
-                )
-                .toList(),
-            child: CustomText(
-              AppString.serviceTypeHint.val,
-              style: TS().gRoboto(
-                  fontWeight: FW.w400.val,
-                  fontSize: FS.font14.val,
-                  color: AppColor.columColor2.val),
+    return CustomDropdown<int>(
+      onChange: (int value, int index) {
+        // _serviceBloc.add(
+        //     ServiceRequestManagementEvent.getServiceList(selectedType,
+        //         filterId: value));
+      },
+      dropdownButtonStyle: DropdownButtonStyle(
+        mainAxisAlignment: MainAxisAlignment.start,
+        width: DBL.twoTen.val,
+        height: DBL.fortySeven.val,
+        elevation: DBL.zero.val,
+        padding: EdgeInsets.only(left: DBL.fifteen.val),
+        backgroundColor: Colors.white,
+        primaryColor: AppColor.white.val,
+      ),
+      dropdownStyle: DropdownStyle(
+        borderRadius: BorderRadius.circular(DBL.zero.val),
+        elevation: 2,
+        color: AppColor.white.val,
+        padding: EdgeInsets.all(DBL.five.val),
+      ),
+      items: [AppString.normalServiceRequest.val, AppString.rebooking.val]
+          .asMap()
+          .entries
+          .map(
+            (item) => DropdownItem<int>(
+              value: item.key + 1,
+              child: Padding(
+                padding: EdgeInsets.all(DBL.eight.val),
+                child: Text(
+                  item.value,
+                  style: TS().gRoboto(
+                      fontWeight: FW.w400.val,
+                      fontSize: FS.font14.val,
+                      color: AppColor.columColor2.val),
+                ),
+              ),
             ),
           )
-        : CustomSizedBox.shrink();
+          .toList(),
+      child: CustomText(
+        AppString.serviceTypeHint.val,
+        style: TS().gRoboto(
+            fontWeight: FW.w400.val,
+            fontSize: FS.font14.val,
+            color: AppColor.columColor2.val),
+      ),
+    );
   }
 
   _serviceStatusDropDown(BuildContext context) {
     return CustomDropdown<int>(
       onChange: (int value, int index) {
         _serviceRequestBloc.statusFilterId = value;
+        _page = 1;
         _serviceRequestBloc.add(
             ServiceRequestManagementEvent.getServiceRequests(
                 context: context,
-                page: 1,
+                page: _page,
                 limit: _limit,
                 statusFilterId: _serviceRequestBloc.statusFilterId == 0
                     ? null
@@ -685,6 +711,71 @@ class _ServiceRequestManagementPageState
             color: AppColor.columColor2.val),
       ),
     );
+  }
+
+  _paginationView() {
+    final int totalPages = (_serviceRequestBloc.totalItems / _limit).ceil();
+    return PaginationView(
+        page: _page,
+        totalPages: totalPages,
+        end: _end,
+        totalItems: _serviceRequestBloc.totalItems,
+        start: _start,
+        onNextPressed: () {
+          if (_page < totalPages) {
+            _page = _page + 1;
+            _serviceRequestBloc.add(
+                ServiceRequestManagementEvent.getServiceRequests(
+                    context: context,
+                    page: _page,
+                    limit: _limit,
+                    searchTerm: _serviceRequestBloc.searchQuery,
+                    statusFilterId: _serviceRequestBloc.statusFilterId,
+                    fromDate: _serviceRequestBloc.selectedFromDate,
+                    toDate: _serviceRequestBloc.selectedToDate));
+            updateData();
+          }
+        },
+        onItemPressed: (i) {
+          _page = i;
+          _serviceRequestBloc.add(
+              ServiceRequestManagementEvent.getServiceRequests(
+                  context: context,
+                  page: _page,
+                  limit: _limit,
+                  searchTerm: _serviceRequestBloc.searchQuery,
+                  statusFilterId: _serviceRequestBloc.statusFilterId,
+                  fromDate: _serviceRequestBloc.selectedFromDate,
+                  toDate: _serviceRequestBloc.selectedToDate));
+          updateData();
+        },
+        onPreviousPressed: () {
+          if (_page > 1) {
+            _page = _page - 1;
+            _serviceRequestBloc.add(
+                ServiceRequestManagementEvent.getServiceRequests(
+                    context: context,
+                    page: _page,
+                    limit: _limit,
+                    searchTerm: _serviceRequestBloc.searchQuery,
+                    statusFilterId: _serviceRequestBloc.statusFilterId,
+                    fromDate: _serviceRequestBloc.selectedFromDate,
+                    toDate: _serviceRequestBloc.selectedToDate));
+            updateData();
+          }
+        });
+  }
+
+  void updateData() {
+    if (_page == 1) {
+      _start = 0;
+      _end = _serviceRequestBloc.serviceRequestsList.length < _limit
+          ? _serviceRequestBloc.serviceRequestsList.length
+          : _limit;
+    } else {
+      _start = (_page * _limit) - 10;
+      _end = _start + _serviceRequestBloc.serviceRequestsList.length;
+    }
   }
 }
 

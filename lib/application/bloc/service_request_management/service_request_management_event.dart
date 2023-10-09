@@ -74,4 +74,20 @@ class ServiceRequestManagementEvent with _$ServiceRequestManagementEvent {
     String? fromDate,
     String? toDate,
   }) = _GetServiceRequests;
+
+  const factory ServiceRequestManagementEvent.getServiceDetails({
+    required BuildContext context,
+    required String serviceId,
+  }) = _GetServiceDetails;
+  const factory ServiceRequestManagementEvent.showOrHideTransactionDetails(
+      {required bool isShowing}) = _ShowOrHideTransactionDetails;
+
+  const factory ServiceRequestManagementEvent.showOrHideNeededServices(
+      {required bool isShowing}) = _ShowOrHideNeededServices;
+  const factory ServiceRequestManagementEvent.showOrHideCompletedServices(
+      {required bool isShowing}) = _ShowOrHideCompletedServices;
+  const factory ServiceRequestManagementEvent.showOrHideIncompleteServices(
+      {required bool isShowing}) = _ShowOrHideIncompleteServices;
+  const factory ServiceRequestManagementEvent.showOrHideExtraServices(
+      {required bool isShowing}) = _ShowOrHideExtraServices;
 }

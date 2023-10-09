@@ -98,7 +98,7 @@ class _BuildProfileViewState extends State<BuildProfileView> {
                       onLeftButtonPressed: () {
                         widget.pageController.jumpToPage(
                             widget.pageController.page!.toInt() - 1);
-                        widget.onboardingBloc.nextButtonClicked = false;
+                        // widget.onboardingBloc.nextButtonClicked = false;
                       },
                       onRightButtonPressed: () {
                         //checkInputData();
