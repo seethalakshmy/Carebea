@@ -8,10 +8,11 @@ import '../../widget/custom_text.dart';
 
 class UploadDocumentWidget extends StatelessWidget {
   UploadDocumentWidget(
-      {Key? key, required this.onTap, this.width, this.isSignature = false})
+      {Key? key, required this.onTap, this.width, this.isVideoUpload})
       : super(key: key);
   Function() onTap;
   double? width;
+  bool? isVideoUpload = false;
   final bool isSignature;
 
   @override
@@ -42,6 +43,8 @@ class UploadDocumentWidget extends StatelessWidget {
                   ),
                 ),
                 CustomText(
+                  isVideoUpload == true
+                      ? AppString.uploadVideo.val
                   isSignature
                       ? AppString.uploadSignature.val
                       : AppString.uploadDocument.val,

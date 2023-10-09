@@ -12,6 +12,7 @@ import 'package:admin_580_tech/presentation/admin_creation/admin_creation_page.d
 import 'package:admin_580_tech/presentation/admins/admins_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/caregiver_verification_page.dart';
+import 'package:admin_580_tech/presentation/client_analytics/client_analytics_page.dart';
 import 'package:admin_580_tech/presentation/client_subProfile_details/client_subProfile_details_view.dart';
 import 'package:admin_580_tech/presentation/dashboard/dashboard_page.dart';
 import 'package:admin_580_tech/presentation/faq_creation/faq_creation_screen.dart';
@@ -19,6 +20,8 @@ import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart';
 import 'package:admin_580_tech/presentation/roles/role_page.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:admin_580_tech/presentation/subscription/subscription_view.dart';
+import 'package:admin_580_tech/presentation/video_management/video_management_view.dart';
+import 'package:admin_580_tech/presentation/video_management_creation/video_management_creation_screen.dart';
 import 'package:admin_580_tech/presentation/widget/common_alert_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
@@ -69,7 +72,9 @@ class _MenuBarState extends State<SideMenuPage> {
       AppString.userManagement.val: "",
       AppString.transactionManagement.val: "",
       AppString.serviceRequestManagement.val: "",
+      AppString.clientAnalytics.val: "",
       AppString.subscription.val: "",
+      AppString.videoManagement.val: "",
       AppString.supportTickets.val: "",
       AppString.faq.val: ""
     };
@@ -525,7 +530,10 @@ class _MenuBarState extends State<SideMenuPage> {
     FaqRoute(),
     FaqCreationRoute(),
     ClientSubProfileDetailsRoute(),
-    SubscriptionRoute()
+    SubscriptionRoute(),
+    VideoManagementRoute(),
+    VideoUploadRoute(),
+    ClientAnalyticsRoute()
   ];
 
   int getRouteIndex(String route) {
@@ -570,6 +578,12 @@ class _MenuBarState extends State<SideMenuPage> {
       return 19;
     } else if (route == AppString.subscription.val) {
       return 20;
+    } else if (route == AppString.videoManagement.val) {
+      return 21;
+    } else if (route == AppString.videoUpload.val) {
+      return 22;
+    } else if (route == AppString.clientAnalytics.val) {
+      return 23;
     } else {
       return 0;
     }
@@ -617,6 +631,12 @@ class _MenuBarState extends State<SideMenuPage> {
       return const ClientSubProfileDetailsPage();
     } else if (index == 20) {
       return const SubscriptionPage();
+    } else if (index == 21) {
+      return const VideoManagementPage();
+    } else if (index == 22) {
+      return const VideoUploadPage();
+    } else if (index == 23) {
+      return ClientAnalyticsPage();
     } else {
       return const DashboardPage();
     }
