@@ -161,7 +161,10 @@ class ItemRowWidget extends StatelessWidget {
             ? const CustomContainer()
             : CustomContainer(
                 width: DBL.twoHundred.val,
-                child: UploadDocumentWidget(onTap: onUpoladTap)),
+                child: UploadDocumentWidget(
+                  onTap: onUpoladTap,
+                  isSignature: false,
+                )),
         documentList.isNotEmpty
             ? _previewShowingWidget(state)
             : const CustomContainer(),

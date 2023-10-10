@@ -641,6 +641,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           // User canceled the picker
         }
       },
+      isSignature: false,
     );
   }
 
