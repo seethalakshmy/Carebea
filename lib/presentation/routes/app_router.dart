@@ -3,6 +3,7 @@ import 'package:admin_580_tech/presentation/subscription/subscription_view.dart'
 import 'package:admin_580_tech/presentation/video_management/video_management_view.dart';
 import 'package:auto_route/auto_route.dart';
 
+import '../terms_and_conditions/terms_and_conditions_view.dart';
 import 'app_router.gr.dart';
 
 @AutoRouterConfig(
@@ -158,6 +159,16 @@ class AppRouter extends $AppRouter {
           page: VideoUploadRoute.page,
           maintainState: false,
           initial: false),
+      AutoRoute(
+          path: "terms-and-conditions",
+          page: TermsAndConditionsRoute.page,
+          maintainState: false,
+          initial: false),
+      AutoRoute(
+          path: "privacy-policy",
+          page: PrivacyPolicyRoute.page,
+          maintainState: false,
+          initial: false)
     ]),
   ];
 }

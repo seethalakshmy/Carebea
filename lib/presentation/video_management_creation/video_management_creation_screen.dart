@@ -353,6 +353,7 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
           // User canceled the picker
         }
       },
+      isSignature: false,
     );
   }
 

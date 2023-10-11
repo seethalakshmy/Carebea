@@ -42,7 +42,10 @@ dependencies:
   google_maps_flutter: ^2.5.0
   google_maps_flutter_web: ^0.5.2
   google_map_location_picker_flutter:
-    git: https://github.com/AdarshSeroo/google_map_location_picker_flutter.git
+    git:
+     url: https://github.com/AdarshSeroo/google_map_location_picker_flutter.git
+     ref: 0.0.2
+
   hive_flutter: ^1.1.0
   html: ^0.15.4
   image_picker: ^0.8.9
@@ -57,9 +60,10 @@ dependencies:
   shimmer: ^2.0.0
   table_calendar:
   url_launcher: ^6.1.5
-  webviewx: ^0.2.2
+#  webviewx: ^0.2.2
   chewie: ^1.7.1
   video_player: ^2.7.2
+  quill_html_editor: ^2.2.6
 
 
 dev_dependencies:

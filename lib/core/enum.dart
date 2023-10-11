@@ -19,6 +19,8 @@ enum AppString {
   churnRate("Churn Rate"),
   drugName("Drug Name"),
   videoFor("Video For"),
+  privacyPolicy("Privacy Policy"),
+  termsAndConditions("Terms And Conditions"),
   theSuspectThingsDuringTheShift("The suspect things during the shift"),
   otherIssues("Other issues "),
   theReportedIssueByTheCg("The reported issue by the  care ambassador"),

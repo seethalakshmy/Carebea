@@ -37,8 +37,10 @@ import '../caregivers/caregivers_page.dart';
 import '../complaint_details/support_tickets_detail_page.dart';
 import '../complaints/help_and_support_page.dart';
 import '../faq/faq_screen.dart';
+import '../privacy_policy/privacy_policy.dart';
 import '../role_creation/role_creation_page.dart';
 import '../service_request_management/service_request_management_page.dart';
+import '../terms_and_conditions/terms_and_conditions_view.dart';
 import '../transaction_management/transaction_management_page.dart';
 import '../user_management/user_management_page.dart';
 import '../user_mangement_detail/user_managemet_detail_page.dart';
@@ -76,7 +78,9 @@ class _MenuBarState extends State<SideMenuPage> {
       AppString.subscription.val: "",
       AppString.videoManagement.val: "",
       AppString.supportTickets.val: "",
-      AppString.faq.val: ""
+      AppString.faq.val: "",
+      AppString.termsAndConditions.val: "",
+      AppString.privacyPolicy.val: ""
     };
 
     CustomLog.log("Side menu:::Called initial Api Call");
@@ -533,7 +537,9 @@ class _MenuBarState extends State<SideMenuPage> {
     SubscriptionRoute(),
     VideoManagementRoute(),
     VideoUploadRoute(),
-    ClientAnalyticsRoute()
+    ClientAnalyticsRoute(),
+    TermsAndConditionsRoute(),
+    PrivacyPolicyRoute()
   ];
 
   int getRouteIndex(String route) {
@@ -584,6 +590,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return 22;
     } else if (route == AppString.clientAnalytics.val) {
       return 23;
+    } else if (route == AppString.termsAndConditions.val) {
+      return 24;
+    } else if (route == AppString.privacyPolicy.val) {
+      return 25;
     } else {
       return 0;
     }
@@ -637,6 +647,10 @@ class _MenuBarState extends State<SideMenuPage> {
       return const VideoUploadPage();
     } else if (index == 23) {
       return ClientAnalyticsPage();
+    } else if (index == 24) {
+      return const TermsAndConditionsPage();
+    } else if (index == 25) {
+      return const PrivacyPolicyPage();
     } else {
       return const DashboardPage();
     }
