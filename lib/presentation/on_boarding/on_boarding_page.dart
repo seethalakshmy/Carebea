@@ -20,6 +20,7 @@ import 'modules/health_aid_agreement/home_health_agreement_view.dart';
 import 'modules/personal_details/personal_details_view.dart';
 import 'modules/preference/preference_view.dart';
 import 'modules/qualification_details/qialification_view.dart';
+import 'modules/services/services_view.dart';
 
 @RoutePage()
 class OnboardingPage extends StatefulWidget {
@@ -80,11 +81,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
         pageController: controller,
         onboardingBloc: _onboardingBloc,
       ),
-      /*ServicesView(
+      ServicesView(
         pageController: controller,
         onboardingBloc: _onboardingBloc,
       ),
-      ReferenceView(
+      /*ReferenceView(
         onboardingBloc: _onboardingBloc,
         pageController: controller,
       ),

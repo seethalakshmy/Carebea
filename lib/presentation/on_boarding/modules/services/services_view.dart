@@ -11,6 +11,7 @@ import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
 import '../../../../domain/on_boarding/models/services/service_request_model.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
+import '../../../widget/custom_button.dart';
 import '../../../widget/custom_shimmer.dart';
 import '../../../widget/custom_sizedbox.dart';
 import '../../../widget/custom_text.dart';
@@ -126,16 +127,24 @@ class _ServicesViewState extends State<ServicesView> {
           color: AppColor.lightGrey.val,
         ),
         CustomSizedBox(height: DBL.ten.val),
-        CustomText(
-          AppString.selectAllServices.val,
-          softWrap: true,
-          style: TS().gRoboto(
-              fontSize: Responsive.isWeb(context)
-                  ? DBL.sixteen.val
-                  : DBL.fourteen.val,
-              fontWeight: FW.w400.val,
-              color: AppColor.black.val),
-          textAlign: TextAlign.start,
+        Wrap(
+          children: [
+            CustomText(
+              AppString.selectAllServices.val,
+              softWrap: true,
+              style: TS().gRoboto(
+                  fontSize: Responsive.isWeb(context)
+                      ? DBL.sixteen.val
+                      : DBL.fourteen.val,
+                  fontWeight: FW.w400.val,
+                  color: AppColor.black.val),
+              textAlign: TextAlign.start,
+            ),
+            CustomButton(
+              onPressed: () {},
+              text: AppString.select.val,
+            )
+          ],
         ),
         CustomSizedBox(height: DBL.ten.val),
         CustomContainer(

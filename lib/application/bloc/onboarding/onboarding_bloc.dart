@@ -621,6 +621,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     });
     emit(accountState);
   }
+
   String formatDate(String date) {
     DateTime originalDate = DateFormat('MM/dd/yyyy').parse(date);
     String formattedDate = DateFormat('dd/MM/yyyy').format(originalDate);
