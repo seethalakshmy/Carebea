@@ -2,6 +2,7 @@ import 'package:admin_580_tech/presentation/caregiver_detail/widgets/svg_text.da
 import 'package:admin_580_tech/presentation/on_boarding/modules/qualification_details/widgets/yes_no_radio_button_widget.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../../application/bloc/onboarding/onboarding_bloc.dart';
 import '../../../../../core/enum.dart';
@@ -33,7 +34,8 @@ class ItemRowWidget extends StatelessWidget {
       required this.selectedValue,
       required this.validator,
       required this.documentList,
-      required this.whichDocument})
+      required this.whichDocument,
+      this.inputFormatter})
       : super(key: key);
   final String question;
   final int radioGroup;
@@ -51,6 +53,7 @@ class ItemRowWidget extends StatelessWidget {
   final FormFieldValidator<String> validator;
   final List<PlatformFile> documentList;
   final int whichDocument;
+  final List<TextInputFormatter>? inputFormatter;
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +105,7 @@ class ItemRowWidget extends StatelessWidget {
                     width: DBL.twoEighty.val,
                     controller: textController,
                     validator: validator,
+                    inputFormatter: inputFormatter ?? [],
                   )
                 ],
               ),
@@ -111,8 +115,15 @@ class ItemRowWidget extends StatelessWidget {
             : CustomSizedBox(width: DBL.ten.val),
         CommonDatePickerWidget(
           initialDate: DateTime.now(),
-          firstDate: DateTime.now(),
-          lastDate: DateTime(3000),
+          firstDate: question == AppString.TBPPDTest.val
+              ? DateTime(2000)
+              : question == AppString.covid19Vaccination.val
+                  ? DateTime(2020)
+                  : DateTime.now(),
+          lastDate: question == AppString.TBPPDTest.val ||
+                  question == AppString.covid19Vaccination.val
+              ? DateTime.now()
+              : DateTime(3000),
           label: datePickerLabel,
           dateController: dateController,
           labelSize: FS.font14.val,
@@ -173,6 +184,7 @@ class ItemRowWidget extends StatelessWidget {
   }
 
   _previewShowingWidget(OnboardingState state) {
+    print("doc list is : ${documentList[0].name}");
     return CustomContainer(
       height: DBL.hundred.val,
       child: ListView.builder(
@@ -206,6 +218,7 @@ class ItemRowWidget extends StatelessWidget {
     documentList.removeAt(index);
 
     if (whichDocument == 1) {
+      //onboardingBloc.hhaBytesList.addAll(documentList);
       onboardingBloc.add(
           OnboardingEvent.hhaDocumentUpload(documentList, state.listUpdated));
     } else if (whichDocument == 2) {
@@ -223,7 +236,7 @@ class ItemRowWidget extends StatelessWidget {
   _noCaseWidget() {
     return question == AppString.doYouHaveHHAReg.val ||
             question == AppString.doYouHaveBLSCertification.val
-        ? const CustomContainer()
+        ? _clickToRegisterWidget()
         : question == AppString.tBAndPPDTest.val
             ? CustomContainer(
                 width: DBL.threeFortyThree.val,

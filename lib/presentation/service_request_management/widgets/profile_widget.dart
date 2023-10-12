@@ -64,12 +64,11 @@ class ProfileWidget extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       child: CachedImage(
           onTap: () {
-            showGeneralDialog(
+            showDialog(
               barrierLabel: "",
               barrierDismissible: true,
               context: context,
-              pageBuilder: (BuildContext buildContext, Animation animation,
-                  Animation secondaryAnimation) {
+              builder: (BuildContext buildContext) {
                 return CustomAlertDialogWidget(
                     showHeading: false,
                     width: 700,

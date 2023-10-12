@@ -10,17 +10,18 @@ import 'custom_sizedbox.dart';
 import 'custom_text.dart';
 
 class TableVerificationButton extends StatelessWidget {
-  const TableVerificationButton(
-      {Key? key,
-      this.height,
-      required this.verificationStatus,
-      this.isHover = true,
-      this.page,
-      this.tab,
-      this.userId,
-      this.onStatusChange,
-      this.isStatusChangeWidget = false})
-      : super(key: key);
+  const TableVerificationButton({
+    Key? key,
+    this.height,
+    required this.verificationStatus,
+    this.isHover = true,
+    this.page,
+    this.tab,
+    this.userId,
+    this.onStatusChange,
+    this.isStatusChangeWidget = false,
+    this.isLoading = false,
+  }) : super(key: key);
   final int verificationStatus;
   final double? height;
   final bool isHover;
@@ -28,6 +29,7 @@ class TableVerificationButton extends StatelessWidget {
   final int? page;
   final int? tab;
   final bool isStatusChangeWidget;
+  final bool isLoading;
   final Function? onStatusChange;
 
   @override
@@ -83,10 +85,18 @@ class TableVerificationButton extends StatelessWidget {
                     height: height ?? DBL.forty.val,
                     width: 40,
                     decoration: _buildDropDownDecoration(isHover),
-                    child: Icon(
-                      Icons.keyboard_arrow_down_outlined,
-                      color: AppColor.white.val,
-                    ))
+                    child: isLoading
+                        ? Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: CircularProgressIndicator(
+                              color: AppColor.white.val,
+                              strokeWidth: 2,
+                            ),
+                          )
+                        : Icon(
+                            Icons.keyboard_arrow_down_outlined,
+                            color: AppColor.white.val,
+                          ))
                 : CustomSizedBox.shrink()
           ],
         ),

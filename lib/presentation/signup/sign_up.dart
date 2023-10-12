@@ -178,7 +178,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 CustomSizedBox(
                   height: DBL.thirty.val,
                 ),
-                PasswordCriteriaWidget(),
+                const PasswordCriteriaWidget(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: _signUpButton(),
@@ -261,8 +261,11 @@ class _SignUpPageState extends State<SignUpPage> {
       onChanged: (String value) {},
       textInputAction: TextInputAction.next,
       controller: _usernameController,
+      inputFormatter: [
+        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z.@0-9]"))
+      ],
       validator: (value) {
-        if (value == null || value.isEmpty) {
+        if (value == null || value.trim().isEmpty) {
           return AppString.emptyEmail.val;
         } else if (!RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
             .hasMatch(value.trim())) {
@@ -279,9 +282,10 @@ class _SignUpPageState extends State<SignUpPage> {
       width: DBL.fourFifty.val,
       onChanged: (String value) {},
       textInputAction: TextInputAction.next,
+      inputFormatter: [FilteringTextInputFormatter.allow(RegExp("[a-zA-Z. ]"))],
       controller: _firstNameController,
       validator: (value) {
-        if (value == null || value.isEmpty) {
+        if (value == null || value.trim().isEmpty) {
           return AppString.emptyName.val;
         }
         return null;
@@ -295,9 +299,10 @@ class _SignUpPageState extends State<SignUpPage> {
       width: DBL.fourFifty.val,
       onChanged: (String value) {},
       textInputAction: TextInputAction.next,
+      inputFormatter: [FilteringTextInputFormatter.allow(RegExp("[a-zA-Z. ]"))],
       controller: _lastNameController,
       validator: (value) {
-        if (value == null || value.isEmpty) {
+        if (value == null || value.trim().isEmpty) {
           return AppString.emptyLName.val;
         }
         return null;
@@ -318,7 +323,7 @@ class _SignUpPageState extends State<SignUpPage> {
         MobileNumberFormatter(),
       ],
       validator: (value) {
-        if (value == null || value.isEmpty) {
+        if (value == null || value.trim().isEmpty) {
           return AppString.emptyMobile.val;
         } else if (value.toString().length != 12) {
           return AppString.validMobile.val;
@@ -349,7 +354,7 @@ class _SignUpPageState extends State<SignUpPage> {
       },
       controller: _passwordController,
       validator: (value) {
-        if (value == null || value.isEmpty) {
+        if (value == null || value.trim().isEmpty) {
           return AppString.emptyPassword.val;
         } else if (!Utility.validatePassword(value)) {
           return AppString.invalidPassword.val;
@@ -377,7 +382,7 @@ class _SignUpPageState extends State<SignUpPage> {
       },
       controller: _confirmPasswordController,
       validator: (value) {
-        if (value == null || value.isEmpty) {
+        if (value == null || value.trim().isEmpty) {
           return AppString.emptyConfirmPassword.val;
         } else if (_passwordController.text !=
             _confirmPasswordController.text) {
@@ -399,6 +404,13 @@ class _SignUpPageState extends State<SignUpPage> {
         color: AppColor.primaryColor.val,
         onPressed: () {
           checkInputData();
+          _firstNameController.text = _firstNameController.text.trim();
+          _lastNameController.text = _lastNameController.text.trim();
+          _mobileController.text = _mobileController.text.trim();
+          _usernameController.text = _usernameController.text.trim();
+          _passwordController.text = _passwordController.text.trim();
+          _confirmPasswordController.text =
+              _confirmPasswordController.text.trim();
         },
       );
     });

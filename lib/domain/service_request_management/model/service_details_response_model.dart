@@ -161,6 +161,7 @@ class ServiceDetailsData {
     HaveAllergyProblem? haveAllergyProblem,
     List<Medication>? medication,
     List<RefundDetails>? refundDetails,
+    List<ServiceHistory>? serviceHistory,
     List<String>? suspectedThingDuringShift,
     List<String>? reportIssueByCg,
     DoYouHaveAnyAllergyProblem? doYouHaveAnyAllergyProblem,
@@ -180,6 +181,9 @@ class ServiceDetailsData {
     String? travelingCharge,
     String? suspectedThingDuringShiftDesc,
     String? reportIssueByCgDesc,
+    String? canceledBy,
+    int? replacementStatus,
+    String? replacedServiceId,
     bool? isRebook,
     num? status,
     CaregiverInfo? caregiverInfo,
@@ -248,9 +252,13 @@ class ServiceDetailsData {
     _travelingCharge = travelingCharge;
     _suspectedThingDuringShiftDesc = suspectedThingDuringShiftDesc;
     _reportIssueByCgDesc = reportIssueByCgDesc;
+    _canceledBy = canceledBy;
+    _replacementStatus = replacementStatus;
+    _replacedServiceId = replacedServiceId;
     _isRebook = isRebook;
     _status = status;
     _caregiverInfo = caregiverInfo;
+    _serviceHistory = serviceHistory;
   }
 
   ServiceDetailsData.fromJson(dynamic json) {
@@ -319,6 +327,12 @@ class ServiceDetailsData {
         _refundDetails?.add(RefundDetails.fromJson(v));
       });
     }
+    if (json['status_history'] != null) {
+      _serviceHistory = [];
+      json['status_history'].forEach((v) {
+        _serviceHistory?.add(ServiceHistory.fromJson(v));
+      });
+    }
     _suspectedThingDuringShift = json['suspected_thing_during_shift'] != null
         ? json['suspected_thing_during_shift'].cast<String>()
         : [];
@@ -351,6 +365,9 @@ class ServiceDetailsData {
     _travelingCharge = json['traveling_charge'];
     _suspectedThingDuringShiftDesc = json['suspected_thing_during_shift_desc'];
     _reportIssueByCgDesc = json['report_issue_by_cg_desc'];
+    _canceledBy = json['cancelled_by'];
+    _replacementStatus = json['ca_replacement_status'];
+    _replacedServiceId = json['new_service_id'];
     _isRebook = json['is_rebook'];
     _status = json['status'];
     _caregiverInfo = json['caregiver_info'] != null
@@ -402,6 +419,7 @@ class ServiceDetailsData {
   HaveAllergyProblem? _haveAllergyProblem;
   List<Medication>? _medication;
   List<RefundDetails>? _refundDetails;
+  List<ServiceHistory>? _serviceHistory;
   List<String>? _suspectedThingDuringShift;
   List<String>? _reportIssueByCg;
   DoYouHaveAnyAllergyProblem? _doYouHaveAnyAllergyProblem;
@@ -412,18 +430,8 @@ class ServiceDetailsData {
   num? _serviceFee;
   String? _serviceFeeTransactionId;
   String? _extraServiceFee;
-  String? _extraServiceFeeTransactionId;
-  num? _tip;
-  String? _tipTransactionId;
-  bool? _isRated;
-  bool? _isRatedByCg;
-  String? _reasonForCancellation;
-  String? _travelingCharge;
-  String? _suspectedThingDuringShiftDesc;
-  String? _reportIssueByCgDesc;
-  bool? _isRebook;
-  num? _status;
-  CaregiverInfo? _caregiverInfo;
+  int? _replacementStatus;
+  String? _replacedServiceId;
   ServiceDetailsData copyWith({
     String? profileId,
     String? parentId,
@@ -470,6 +478,7 @@ class ServiceDetailsData {
     HaveAllergyProblem? haveAllergyProblem,
     List<Medication>? medication,
     List<RefundDetails>? refundDetails,
+    List<ServiceHistory>? serviceHistory,
     List<String>? suspectedThingDuringShift,
     List<String>? reportIssueByCg,
     DoYouHaveAnyAllergyProblem? doYouHaveAnyAllergyProblem,
@@ -489,6 +498,9 @@ class ServiceDetailsData {
     String? travelingCharge,
     String? suspectedThingDuringShiftDesc,
     String? reportIssueByCgDesc,
+    String? canceledBy,
+    int? replacementStatus,
+    String? replacedServiceId,
     bool? isRebook,
     num? status,
     CaregiverInfo? caregiverInfo,
@@ -544,6 +556,7 @@ class ServiceDetailsData {
         haveAllergyProblem: haveAllergyProblem ?? _haveAllergyProblem,
         medication: medication ?? _medication,
         refundDetails: refundDetails ?? _refundDetails,
+        serviceHistory: serviceHistory ?? _serviceHistory,
         suspectedThingDuringShift:
             suspectedThingDuringShift ?? _suspectedThingDuringShift,
         reportIssueByCg: reportIssueByCg ?? _reportIssueByCg,
@@ -568,10 +581,26 @@ class ServiceDetailsData {
         suspectedThingDuringShiftDesc:
             suspectedThingDuringShiftDesc ?? _suspectedThingDuringShiftDesc,
         reportIssueByCgDesc: reportIssueByCgDesc ?? _reportIssueByCgDesc,
+        canceledBy: canceledBy ?? _canceledBy,
+        replacementStatus: replacementStatus ?? _replacementStatus,
+        replacedServiceId: replacedServiceId ?? _replacedServiceId,
         isRebook: isRebook ?? _isRebook,
         status: status ?? _status,
         caregiverInfo: caregiverInfo ?? _caregiverInfo,
       );
+  String? _extraServiceFeeTransactionId;
+  num? _tip;
+  String? _tipTransactionId;
+  bool? _isRated;
+  bool? _isRatedByCg;
+  String? _reasonForCancellation;
+  String? _travelingCharge;
+  String? _suspectedThingDuringShiftDesc;
+  String? _reportIssueByCgDesc;
+  String? _canceledBy;
+  bool? _isRebook;
+  num? _status;
+  CaregiverInfo? _caregiverInfo;
   String? get profileId => _profileId;
   String? get parentId => _parentId;
   bool? get isSubscribed => _isSubscribed;
@@ -617,6 +646,7 @@ class ServiceDetailsData {
   HaveAllergyProblem? get haveAllergyProblem => _haveAllergyProblem;
   List<Medication>? get medication => _medication;
   List<RefundDetails>? get refundDetails => _refundDetails;
+  List<ServiceHistory>? get serviceHistory => _serviceHistory;
   List<String>? get suspectedThingDuringShift => _suspectedThingDuringShift;
   List<String>? get reportIssueByCg => _reportIssueByCg;
   DoYouHaveAnyAllergyProblem? get doYouHaveAnyAllergyProblem =>
@@ -637,6 +667,9 @@ class ServiceDetailsData {
   String? get travelingCharge => _travelingCharge;
   String? get suspectedThingDuringShiftDesc => _suspectedThingDuringShiftDesc;
   String? get reportIssueByCgDesc => _reportIssueByCgDesc;
+  String? get canceledBy => _canceledBy;
+  int? get replacementStatus => _replacementStatus;
+  String? get replacedServiceId => _replacedServiceId;
   bool? get isRebook => _isRebook;
   num? get status => _status;
   CaregiverInfo? get caregiverInfo => _caregiverInfo;
@@ -710,6 +743,9 @@ class ServiceDetailsData {
     if (_refundDetails != null) {
       map['refund_details'] = _refundDetails?.map((v) => v.toJson()).toList();
     }
+    if (_serviceHistory != null) {
+      map['status_history'] = _serviceHistory?.map((v) => v.toJson()).toList();
+    }
     map['suspected_thing_during_shift'] = _suspectedThingDuringShift;
     map['report_issue_by_cg'] = _reportIssueByCg;
     if (_doYouHaveAnyAllergyProblem != null) {
@@ -738,6 +774,9 @@ class ServiceDetailsData {
     map['traveling_charge'] = _travelingCharge;
     map['suspected_thing_during_shift_desc'] = _suspectedThingDuringShiftDesc;
     map['report_issue_by_cg_desc'] = _reportIssueByCgDesc;
+    map['cancelled_by'] = _canceledBy;
+    map['ca_replacement_status'] = _replacementStatus;
+    map['new_service_id'] = _replacedServiceId;
     map['is_rebook'] = _isRebook;
     map['status'] = _status;
     if (_caregiverInfo != null) {
@@ -994,6 +1033,52 @@ class CaregiverInfo {
     if (_reviewByCg != null) {
       map['review_by_cg'] = _reviewByCg?.map((v) => v.toJson()).toList();
     }
+    return map;
+  }
+}
+
+ServiceHistory serviceHistoryFromJson(String str) =>
+    ServiceHistory.fromJson(json.decode(str));
+String serviceHistoryToJson(ServiceHistory data) => json.encode(data.toJson());
+
+class ServiceHistory {
+  ServiceHistory({
+    String? title,
+    String? time,
+    String? id,
+  }) {
+    _title = title;
+    _time = time;
+    _id = id;
+  }
+
+  ServiceHistory.fromJson(dynamic json) {
+    _title = json['statusTitle'];
+    _time = json['time'];
+    _id = json['_id'];
+  }
+  String? _title;
+  String? _time;
+  String? _id;
+  ServiceHistory copyWith({
+    String? title,
+    String? time,
+    String? id,
+  }) =>
+      ServiceHistory(
+        title: title ?? _title,
+        time: time ?? _time,
+        id: id ?? _id,
+      );
+  String? get title => _title;
+  String? get time => _time;
+  String? get id => _id;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['statusTitle'] = _title;
+    map['time'] = _time;
+    map['_id'] = _id;
     return map;
   }
 }
