@@ -1,4 +1,5 @@
 import 'package:admin_580_tech/core/string_extension.dart';
+import 'package:admin_580_tech/domain/service_request_management/model/service_request_list_response_model.dart';
 import 'package:admin_580_tech/presentation/service_request_management/widgets/service_details_alert.dart';
 import 'package:admin_580_tech/presentation/widget/header_view.dart';
 import 'package:auto_route/auto_route.dart';
@@ -481,6 +482,9 @@ class _ServiceRequestManagementPageState
                   .map((e) {
                 var item = e.value;
                 return DataRow2(
+                  onTap: () {
+                    _getServiceDetails(item);
+                  },
                   cells: [
                     DataCell(_rowsView(
                       text: (e.key + 1).toString(),
@@ -527,21 +531,7 @@ class _ServiceRequestManagementPageState
                     DataCell(InkWell(
                         onTap: () {
                           //autoTabRouter?.navigate(ServiceDetailsRoute(id: item.id));
-                          _serviceRequestBloc.add(
-                              ServiceRequestManagementEvent.getServiceDetails(
-                                  context: context, serviceId: item.id ?? ""));
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return CustomAlertDialogWidget(
-                                  heading:
-                                      "${item.serviceStatus} Service Request",
-                                  child: ServiceDetailsAlert(
-                                    title: item.serviceStatus ?? "",
-                                    serviceBloc: _serviceRequestBloc,
-                                  ),
-                                );
-                              });
+                          _getServiceDetails(item);
                         },
                         child: CustomSvg(
                           path: IMG.eye.val,
@@ -553,6 +543,22 @@ class _ServiceRequestManagementPageState
               }).toList(),
             ),
           );
+  }
+
+  void _getServiceDetails(ServiceRequests item) {
+    _serviceRequestBloc.add(ServiceRequestManagementEvent.getServiceDetails(
+        context: context, serviceId: item.id ?? ""));
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CustomAlertDialogWidget(
+            heading: "${item.serviceStatus} Service Request",
+            child: ServiceDetailsAlert(
+              title: item.serviceStatus ?? "",
+              serviceBloc: _serviceRequestBloc,
+            ),
+          );
+        });
   }
 
   Widget _columnsView(

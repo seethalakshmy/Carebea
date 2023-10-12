@@ -14,6 +14,7 @@ class CareGiverProfileState with _$CareGiverProfileState {
     @Default(false) bool isClientError,
     @Default(false) bool isAlreadyCalledInitialCall,
     @Default(false) bool isShowStatusDropDown,
+    @Default(false) bool isLoadingStatusChangeApi,
     @Default([]) List<StatusList> statusList,
   }) = _CareGiverProfileState;
 

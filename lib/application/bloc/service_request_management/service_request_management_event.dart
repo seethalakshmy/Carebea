@@ -90,4 +90,10 @@ class ServiceRequestManagementEvent with _$ServiceRequestManagementEvent {
       {required bool isShowing}) = _ShowOrHideIncompleteServices;
   const factory ServiceRequestManagementEvent.showOrHideExtraServices(
       {required bool isShowing}) = _ShowOrHideExtraServices;
+  const factory ServiceRequestManagementEvent.showOrHideRefundDetails(
+      {required bool isShowing}) = _ShowOrHideRefundDetails;
+  const factory ServiceRequestManagementEvent.whoRequestedCancelRadioButton(
+      {required int whoRequested}) = _WhoRequestedCancelRadioButton;
+  const factory ServiceRequestManagementEvent.showOrHideTimeline(
+      {required bool isShowing}) = _ShowOrHideTimeline;
 }

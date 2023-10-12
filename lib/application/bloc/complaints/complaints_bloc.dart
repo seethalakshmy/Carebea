@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 
 import '../../../domain/complaints/model/complaints_list_response_model.dart';
 import '../../../domain/complaints/model/final_result.dart';
@@ -49,5 +50,12 @@ class ComplaintsBloc extends Bloc<ComplaintsEvent, ComplaintsState> {
           complaintListOption: Some(Right(r)), isLoading: false);
     });
     emit(userState);
+  }
+
+  String generateFormattedDate(String date) {
+    DateTime inputDate = DateTime.parse(date);
+    DateFormat dateFormat = DateFormat('MM-dd-yyyy , hh:mm a');
+    String formattedDate = dateFormat.format(inputDate);
+    return formattedDate;
   }
 }

@@ -152,4 +152,45 @@ class ComplaintDetailBloc
 
     return '$dateString, $timeString';
   }
+
+  String generateFormattedDate(String date) {
+    DateTime inputDate = DateTime(0);
+    if (date.contains('GMT+0000')) {
+      return convertDateFormat(date);
+    } else {
+      inputDate = DateTime.parse(date);
+      DateFormat dateFormat = DateFormat('MM-dd-yyyy , hh:mm a');
+      String formattedDate = dateFormat.format(inputDate);
+      return formattedDate;
+    }
+  }
+
+  String convertDateFormat(String inputDate) {
+    List<String> parts = inputDate.split(' ');
+    Map<String, String> monthMapping = {
+      'Jan': '01',
+      'Feb': '02',
+      'Mar': '03',
+      'Apr': '04',
+      'May': '05',
+      'Jun': '06',
+      'Jul': '07',
+      'Aug': '08',
+      'Sep': '09',
+      'Oct': '10',
+      'Nov': '11',
+      'Dec': '12',
+    };
+
+    String day = parts[2];
+    String? month = monthMapping[parts[1]] ?? "";
+    String year = parts[3];
+    List<String> time = parts[4].split(":");
+    String hour = time[0];
+    String minute = time[1];
+    String amPm = int.parse(hour) < 12 ? "AM" : "PM";
+
+    String formattedDate = '$month-$day-$year, $hour:$minute $amPm';
+    return formattedDate;
+  }
 }

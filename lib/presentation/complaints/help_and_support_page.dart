@@ -390,7 +390,7 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
             //size: ColumnSize.L,
             //fixedWidth: DBL.hundred.val,
             label: _columnsView(
-                text: AppString.createdDate.val, fontWeight: FontWeight.bold),
+                text: AppString.createdDateTime.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             //size: ColumnSize.L,
@@ -424,6 +424,10 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
           setIndex(e.key);
           var item = e.value;
           return DataRow2(
+            onTap: () {
+              autoTabRouter!.navigate(
+                  SupportTicketsDetailRoute(complaintId: item.id ?? ""));
+            },
             cells: [
               DataCell(_rowsView(
                 text: pageIndex.toString(),
@@ -446,8 +450,12 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
                   text:
                       "${item.caregiverName?.firstName} ${item.caregiverName?.lastName}")),
               DataCell(_rowsView(text: item.category ?? "")),
-              DataCell(_rowsView(text: item.createdDate)),
-              DataCell(_rowsView(text: item.repliedOn)),
+              DataCell(_rowsView(
+                  text: _supportTicketsBloc
+                      .generateFormattedDate(item.createdDate ?? ""))),
+              DataCell(_rowsView(
+                  text: _supportTicketsBloc
+                      .generateFormattedDate(item.repliedOn ?? ""))),
               DataCell(_rowsView(text: item.title)),
               DataCell(_rowsView(text: item.role)),
               DataCell(_rowsView(text: item.status)),

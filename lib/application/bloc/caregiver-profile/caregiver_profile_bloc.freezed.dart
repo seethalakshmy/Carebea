@@ -1180,6 +1180,7 @@ mixin _$CareGiverProfileState {
   bool get isClientError => throw _privateConstructorUsedError;
   bool get isAlreadyCalledInitialCall => throw _privateConstructorUsedError;
   bool get isShowStatusDropDown => throw _privateConstructorUsedError;
+  bool get isLoadingStatusChangeApi => throw _privateConstructorUsedError;
   List<StatusList> get statusList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1205,6 +1206,7 @@ abstract class $CareGiverProfileStateCopyWith<$Res> {
       bool isClientError,
       bool isAlreadyCalledInitialCall,
       bool isShowStatusDropDown,
+      bool isLoadingStatusChangeApi,
       List<StatusList> statusList});
 }
 
@@ -1233,6 +1235,7 @@ class _$CareGiverProfileStateCopyWithImpl<$Res,
     Object? isClientError = null,
     Object? isAlreadyCalledInitialCall = null,
     Object? isShowStatusDropDown = null,
+    Object? isLoadingStatusChangeApi = null,
     Object? statusList = null,
   }) {
     return _then(_value.copyWith(
@@ -1280,6 +1283,10 @@ class _$CareGiverProfileStateCopyWithImpl<$Res,
           ? _value.isShowStatusDropDown
           : isShowStatusDropDown // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoadingStatusChangeApi: null == isLoadingStatusChangeApi
+          ? _value.isLoadingStatusChangeApi
+          : isLoadingStatusChangeApi // ignore: cast_nullable_to_non_nullable
+              as bool,
       statusList: null == statusList
           ? _value.statusList
           : statusList // ignore: cast_nullable_to_non_nullable
@@ -1308,6 +1315,7 @@ abstract class _$$_CareGiverProfileStateCopyWith<$Res>
       bool isClientError,
       bool isAlreadyCalledInitialCall,
       bool isShowStatusDropDown,
+      bool isLoadingStatusChangeApi,
       List<StatusList> statusList});
 }
 
@@ -1333,6 +1341,7 @@ class __$$_CareGiverProfileStateCopyWithImpl<$Res>
     Object? isClientError = null,
     Object? isAlreadyCalledInitialCall = null,
     Object? isShowStatusDropDown = null,
+    Object? isLoadingStatusChangeApi = null,
     Object? statusList = null,
   }) {
     return _then(_$_CareGiverProfileState(
@@ -1380,6 +1389,10 @@ class __$$_CareGiverProfileStateCopyWithImpl<$Res>
           ? _value.isShowStatusDropDown
           : isShowStatusDropDown // ignore: cast_nullable_to_non_nullable
               as bool,
+      isLoadingStatusChangeApi: null == isLoadingStatusChangeApi
+          ? _value.isLoadingStatusChangeApi
+          : isLoadingStatusChangeApi // ignore: cast_nullable_to_non_nullable
+              as bool,
       statusList: null == statusList
           ? _value._statusList
           : statusList // ignore: cast_nullable_to_non_nullable
@@ -1403,6 +1416,7 @@ class _$_CareGiverProfileState implements _CareGiverProfileState {
       this.isClientError = false,
       this.isAlreadyCalledInitialCall = false,
       this.isShowStatusDropDown = false,
+      this.isLoadingStatusChangeApi = false,
       final List<StatusList> statusList = const []})
       : _statusList = statusList;
 
@@ -1431,6 +1445,9 @@ class _$_CareGiverProfileState implements _CareGiverProfileState {
   @override
   @JsonKey()
   final bool isShowStatusDropDown;
+  @override
+  @JsonKey()
+  final bool isLoadingStatusChangeApi;
   final List<StatusList> _statusList;
   @override
   @JsonKey()
@@ -1442,7 +1459,7 @@ class _$_CareGiverProfileState implements _CareGiverProfileState {
 
   @override
   String toString() {
-    return 'CareGiverProfileState(isLoading: $isLoading, isError: $isError, response: $response, trainingVerifyResponse: $trainingVerifyResponse, interViewVerifyResponse: $interViewVerifyResponse, error: $error, sendTrainingResponse: $sendTrainingResponse, status: $status, isClientError: $isClientError, isAlreadyCalledInitialCall: $isAlreadyCalledInitialCall, isShowStatusDropDown: $isShowStatusDropDown, statusList: $statusList)';
+    return 'CareGiverProfileState(isLoading: $isLoading, isError: $isError, response: $response, trainingVerifyResponse: $trainingVerifyResponse, interViewVerifyResponse: $interViewVerifyResponse, error: $error, sendTrainingResponse: $sendTrainingResponse, status: $status, isClientError: $isClientError, isAlreadyCalledInitialCall: $isAlreadyCalledInitialCall, isShowStatusDropDown: $isShowStatusDropDown, isLoadingStatusChangeApi: $isLoadingStatusChangeApi, statusList: $statusList)';
   }
 
   @override
@@ -1472,6 +1489,9 @@ class _$_CareGiverProfileState implements _CareGiverProfileState {
                     isAlreadyCalledInitialCall) &&
             (identical(other.isShowStatusDropDown, isShowStatusDropDown) ||
                 other.isShowStatusDropDown == isShowStatusDropDown) &&
+            (identical(
+                    other.isLoadingStatusChangeApi, isLoadingStatusChangeApi) ||
+                other.isLoadingStatusChangeApi == isLoadingStatusChangeApi) &&
             const DeepCollectionEquality()
                 .equals(other._statusList, _statusList));
   }
@@ -1490,6 +1510,7 @@ class _$_CareGiverProfileState implements _CareGiverProfileState {
       isClientError,
       isAlreadyCalledInitialCall,
       isShowStatusDropDown,
+      isLoadingStatusChangeApi,
       const DeepCollectionEquality().hash(_statusList));
 
   @JsonKey(ignore: true)
@@ -1513,6 +1534,7 @@ abstract class _CareGiverProfileState implements CareGiverProfileState {
       final bool isClientError,
       final bool isAlreadyCalledInitialCall,
       final bool isShowStatusDropDown,
+      final bool isLoadingStatusChangeApi,
       final List<StatusList> statusList}) = _$_CareGiverProfileState;
 
   @override
@@ -1537,6 +1559,8 @@ abstract class _CareGiverProfileState implements CareGiverProfileState {
   bool get isAlreadyCalledInitialCall;
   @override
   bool get isShowStatusDropDown;
+  @override
+  bool get isLoadingStatusChangeApi;
   @override
   List<StatusList> get statusList;
   @override

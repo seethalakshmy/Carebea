@@ -18,8 +18,10 @@ import '../../routes/app_router.gr.dart';
 import '../../side_menu/side_menu_page.dart';
 import '../../widget/commonImageview.dart';
 import '../../widget/common_alert_widget.dart';
+import '../../widget/custom_container.dart';
 import '../../widget/custom_shimmer.dart';
 import '../../widget/empty_view.dart';
+import 'cancel_request_alert_widget.dart';
 import 'cancellation_widget.dart';
 
 class ServiceDetailsAlert extends StatelessWidget {
@@ -33,8 +35,8 @@ class ServiceDetailsAlert extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ServiceRequestManagementBloc>(
-      create: (context) => serviceBloc,
+    return BlocProvider.value(
+      value: serviceBloc,
       child: BlocBuilder<ServiceRequestManagementBloc,
           ServiceRequestManagementState>(
         bloc: serviceBloc,
@@ -72,7 +74,7 @@ class ServiceDetailsAlert extends StatelessWidget {
                                 width: DBL.sixHundred.val,
                                 child: _caViewWidget(context),
                               ),
-                              if (title == AppString.pending.val ||
+                              /*if (title == AppString.pending.val ||
                                   title == AppString.upcoming.val)
                                 BlocBuilder<ServiceRequestManagementBloc,
                                     ServiceRequestManagementState>(
@@ -94,7 +96,7 @@ class ServiceDetailsAlert extends StatelessWidget {
                                         text: AppString
                                             .cancelThisServiceRequest.val);
                                   },
-                                ),
+                                ),*/
                             ],
                           ),
                         ),
@@ -453,28 +455,6 @@ class ServiceDetailsAlert extends StatelessWidget {
               isShowing: serviceBloc.state.isShowingNeededServices,
               title: AppString.serviceNeeded.val,
               servicesList: neededServices),
-
-        /*if (title == AppString.completed.val &&
-            (service.caregiverReportedIssues ?? []).isNotEmpty)
-          _textAndSubText(context:context,
-              text: "The suspected things during shift",
-              subText:
-                  service.suspectedThingsDuringShift?.join(' ') ?? ''),*/
-        /*if (title == AppString.completed.val &&
-            (service.suspectedOtherIssues ?? "").isNotEmpty)
-          _textAndSubText(context:context,
-              text: "Other Issues",
-              subText: service.suspectedOtherIssues ?? ''),*/
-        /*if (title == AppString.completed.val &&
-            (service.caregiverReportedIssues ?? []).isNotEmpty)
-          _textAndSubText(context:context,
-              text: "Reported issues by the care giver",
-              subText: service.caregiverReportedIssues?.join(' ') ?? ''),*/
-        /*if (title == AppString.completed.val &&
-            (service.caregiverReportedOtherIssues ?? "").isNotEmpty)
-          _textAndSubText(context:context,
-              text: "Other Issues",
-              subText: service.caregiverReportedOtherIssues ?? ''),*/
         if (title == AppString.completed.val &&
             (service.completedServices != null))
           _serviceShowingWidget(
@@ -531,7 +511,47 @@ class ServiceDetailsAlert extends StatelessWidget {
               isShowing: serviceBloc.state.isShowingExtraServices,
               title: AppString.extraService.val,
               servicesList: extraServices),
+        _replacementDetailsWidget(context, service),
+        CustomSizedBox(height: DBL.ten.val),
+        _serviceTimelineWidget(
+            isShowing: serviceBloc.state.isShowingTimeline, service: service)
       ],
+    );
+  }
+
+  Container _replacementDetailsWidget(
+      BuildContext context, ServiceDetailsData service) {
+    return Container(
+      width: DBL.fiveFifty.val,
+      padding: EdgeInsets.only(
+          left: DBL.ten.val, right: DBL.ten.val, bottom: DBL.ten.val),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(DBL.eight.val),
+          border:
+              Border.all(color: AppColor.lightGrey.val, width: DBL.one.val)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _textAndSubText(
+              text: AppString.caReplacementStatus.val,
+              subText: service.replacementStatus == "1"
+                  ? "Replacement Found"
+                  : "Replacement Not Found",
+              context: context),
+          service.replacementStatus == "2"
+              ? InkWell(
+                  onTap: () {
+                    /*autoTabRouter
+                ?.navigate(CareGiverDetailRoute(id: ""));*/
+                  },
+                  child: _textAndSubText(
+                      text: AppString.replacedCaName.val,
+                      subText: service.replacedServiceId ?? '',
+                      context: context),
+                )
+              : const CustomSizedBox(),
+        ],
+      ),
     );
   }
 
@@ -641,16 +661,20 @@ class ServiceDetailsAlert extends StatelessWidget {
               height: DBL.eight.val,
               text: AppString.transportationFee.val,
               subText: service.travelingCharge ?? ""),
-          _textAndSubText(
-              context: context,
-              height: DBL.eight.val,
-              text: AppString.tip.val,
-              subText: service.tip.toString()),
-          _textAndSubText(
-              context: context,
-              height: DBL.eight.val,
-              text: AppString.extraServiceCharge.val,
-              subText: service.extraServiceFee ?? ""),
+          title == AppString.completed.val
+              ? _textAndSubText(
+                  context: context,
+                  height: DBL.eight.val,
+                  text: AppString.tip.val,
+                  subText: service.tip.toString())
+              : const CustomSizedBox(),
+          title == AppString.completed.val
+              ? _textAndSubText(
+                  context: context,
+                  height: DBL.eight.val,
+                  text: AppString.extraServiceCharge.val,
+                  subText: service.extraServiceFee ?? "")
+              : const CustomSizedBox(),
           _textAndSubText(
               context: context,
               height: DBL.eight.val,
@@ -672,27 +696,143 @@ class ServiceDetailsAlert extends StatelessWidget {
         border: Border.all(color: AppColor.lightGrey.val, width: DBL.one.val),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _textAndSubText(
               context: context,
               height: DBL.eight.val,
               text: AppString.canceledBy.val,
-              subText: "lorem ipsum telum"),
+              subText: service.canceledBy ?? ""),
           _textAndSubText(
               context: context,
               height: DBL.eight.val,
               text: AppString.refundEligibility.val,
-              subText: "Yes"),
-          _textAndSubText(
-              context: context,
-              height: DBL.eight.val,
-              text: AppString.refundStatus.val,
-              subText: "Completed"),
+              subText: service.refundDetails!.isNotEmpty ? "Yes" : "No"),
+          CustomSizedBox(height: DBL.ten.val),
+          _refundStatusWidget(context, service),
           _textAndSubText(
               context: context,
               height: DBL.eight.val,
               text: AppString.transactionId.val,
               subText: service.serviceFeeTransactionId ?? ""),
+        ],
+      ),
+    );
+  }
+
+  _refundStatusWidget(BuildContext context, ServiceDetailsData service) {
+    return Container(
+      padding: EdgeInsets.all(DBL.two.val),
+      width: DBL.threeFifty.val,
+      decoration: BoxDecoration(
+          color: AppColor.lightGrey.val.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(DBL.eight.val)),
+      child: Column(
+        children: [
+          InkWell(
+            onTap: () {
+              serviceBloc.add(
+                  ServiceRequestManagementEvent.showOrHideRefundDetails(
+                      isShowing: !serviceBloc.state.isShowingRefundDetails));
+            },
+            child: Container(
+              padding: EdgeInsets.all(DBL.ten.val),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(DBL.eight.val),
+                  color: AppColor.white.val),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomText(AppString.refundStatus.val),
+                  serviceBloc.state.isShowingRefundDetails
+                      ? const Icon(Icons.keyboard_arrow_down_rounded)
+                      : const Icon(Icons.keyboard_arrow_right_rounded)
+                ],
+              ),
+            ),
+          ),
+          serviceBloc.state.isShowingRefundDetails
+              ? CustomSizedBox(height: DBL.ten.val)
+              : const CustomSizedBox(),
+          serviceBloc.state.isShowingRefundDetails
+              ? Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          CustomSizedBox(width: DBL.twenty.val),
+                          Column(
+                            children: [
+                              index == 0
+                                  ? CustomSizedBox(height: DBL.five.val)
+                                  : Container(
+                                      height: DBL.five.val,
+                                      width: DBL.one.val,
+                                      color: AppColor.darkGrey.val,
+                                    ),
+                              CircleAvatar(
+                                radius: DBL.five.val,
+                                backgroundColor: AppColor.darkGrey.val,
+                              ),
+                              service.refundDetails!.first.statusHistory!
+                                          .length ==
+                                      index + 1
+                                  ? const CustomSizedBox()
+                                  : Container(
+                                      width: DBL.one.val,
+                                      height: DBL.fifty.val,
+                                      color: AppColor.darkGrey.val,
+                                    )
+                            ],
+                          ),
+                          CustomSizedBox(width: DBL.ten.val),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomText(
+                                service.refundDetails!.first
+                                        .statusHistory![index].title ??
+                                    "",
+                                style: TS().gRoboto(
+                                    fontSize: FS.font14.val,
+                                    fontWeight: FW.w500.val,
+                                    color: service.refundDetails!.first
+                                                .statusHistory![index].status ==
+                                            1
+                                        ? AppColor.amber.val
+                                        : service
+                                                    .refundDetails!
+                                                    .first
+                                                    .statusHistory![index]
+                                                    .status ==
+                                                2
+                                            ? AppColor.green.val
+                                            : AppColor.red.val),
+                              ),
+                              CustomText(
+                                  serviceBloc.generateFormattedDate(
+                                    service.refundDetails!.first
+                                            .statusHistory![index].date ??
+                                        "",
+                                  ),
+                                  style: TS().gRoboto(
+                                      fontSize: FS.font13.val,
+                                      fontWeight: FW.w400.val,
+                                      color: AppColor.lightGrey5.val)),
+                            ],
+                          ),
+                        ],
+                      );
+                    },
+                    itemCount:
+                        service.refundDetails!.first.statusHistory!.length,
+                  ),
+                )
+              : const CustomSizedBox()
         ],
       ),
     );
@@ -781,12 +921,12 @@ class ServiceDetailsAlert extends StatelessWidget {
           child: BlocBuilder<ServiceRequestManagementBloc,
               ServiceRequestManagementState>(
             builder: (context, state) {
-              return CommonAlertWidget(
+              return CancelRequestAlertWidget(
                 controller: controller,
                 isLoading: state.isCancelLoading,
-                isTextField: true,
                 heading: AppString.cancelThisServiceRequest.val,
                 label: AppString.areYouSureCancelServiceRequest.val,
+                serviceBloc: serviceBloc,
                 onTapYes: () {
                   if (_formKey.currentState!.validate()) {
                     context.read<ServiceRequestManagementBloc>().add(
@@ -808,6 +948,118 @@ class ServiceDetailsAlert extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  _serviceTimelineWidget(
+      {required bool isShowing, required ServiceDetailsData service}) {
+    return Column(
+      children: [
+        InkWell(
+          onTap: () {
+            serviceBloc.add(ServiceRequestManagementEvent.showOrHideTimeline(
+                isShowing: !serviceBloc.state.isShowingTimeline));
+          },
+          child: Container(
+            width: DBL.fiveFifty.val,
+            height: DBL.fifty.val,
+            padding: EdgeInsets.only(left: DBL.ten.val, right: DBL.ten.val),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(DBL.eight.val),
+                    topRight: Radius.circular(DBL.eight.val),
+                    bottomLeft: isShowing
+                        ? Radius.circular(DBL.zero.val)
+                        : Radius.circular(DBL.eight.val),
+                    bottomRight: isShowing
+                        ? Radius.circular(DBL.zero.val)
+                        : Radius.circular(DBL.eight.val)),
+                border: Border.all(
+                    color: AppColor.lightGrey.val, width: DBL.one.val)),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomText(AppString.serviceTimeline.val),
+                isShowing
+                    ? const Icon(Icons.keyboard_arrow_down_rounded)
+                    : const Icon(Icons.keyboard_arrow_right_rounded)
+              ],
+            ),
+          ),
+        ),
+        isShowing
+            ? Container(
+                width: DBL.fiveFifty.val,
+                padding: EdgeInsets.all(DBL.ten.val),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(DBL.eight.val),
+                        bottomRight: Radius.circular(DBL.eight.val),
+                        topLeft: isShowing
+                            ? Radius.circular(DBL.zero.val)
+                            : Radius.circular(DBL.eight.val),
+                        topRight: isShowing
+                            ? Radius.circular(DBL.zero.val)
+                            : Radius.circular(DBL.eight.val)),
+                    border: Border.all(
+                        color: AppColor.lightGrey.val, width: DBL.one.val)),
+                child: ListView.builder(
+                    itemCount: service.serviceHistory!.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: DBL.twenty.val),
+                              child: Column(
+                                children: [
+                                  CircleAvatar(
+                                      backgroundColor: AppColor.green2.val,
+                                      maxRadius: DBL.seven.val),
+                                  CustomContainer(
+                                      width: DBL.one.val,
+                                      height: DBL.eighty.val,
+                                      color: AppColor.lightGrey.val)
+                                ],
+                              ),
+                            ),
+                            CustomSizedBox(height: DBL.twenty.val),
+                            Padding(
+                              padding: EdgeInsets.only(left: DBL.twenty.val),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CustomText(
+                                      service.serviceHistory![index].title ??
+                                          "",
+                                      style: TS().gRoboto(
+                                          color: AppColor.darkGrey.val,
+                                          fontSize: FS.font15.val,
+                                          fontWeight: FW.w500.val)),
+                                  CustomText(
+                                      serviceBloc.generateFormattedDate(
+                                          service.serviceHistory![index].time ??
+                                              ""),
+                                      style: TS().gRoboto(
+                                          color: AppColor.lightGrey5.val,
+                                          fontSize: FS.font13.val,
+                                          fontWeight: FW.w400.val)),
+                                  /*CustomText("completed date : 10/09/2023",
+                                      style: TS().gRoboto(
+                                          color: AppColor.lightGrey5.val,
+                                          fontSize: FS.font13.val,
+                                          fontWeight: FW.w400.val)),*/
+                                ],
+                              ),
+                            )
+                          ]);
+                    }),
+              )
+            : const CustomSizedBox()
+      ],
     );
   }
 }

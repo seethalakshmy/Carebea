@@ -4,7 +4,6 @@ import '../../core/enum.dart';
 import '../../domain/subProfile_details/model/sub_profile_detail_response.dart';
 import '../../domain/user_management_detail/model/client_service_response.dart';
 import 'alert_text_label.dart';
-import 'custom_text.dart';
 
 class RowColonCombo extends StatelessWidget {
   const RowColonCombo({
@@ -24,6 +23,7 @@ class RowColonCombo extends StatelessWidget {
     this.needUnderLine = false,
     this.hasColon = true,
     this.fontWeight,
+    this.valueFlex,
   });
 
   final String value;
@@ -40,6 +40,7 @@ class RowColonCombo extends StatelessWidget {
   final double? customWidthLg1;
   final Function()? onValueTap;
   final bool? needUnderLine;
+  final int? valueFlex;
 
   final FontWeight? fontWeight;
 
@@ -59,6 +60,7 @@ class RowColonCombo extends StatelessWidget {
     this.hasColon = true,
     this.tierOneServiceList,
     this.tierTwoServiceList,
+    this.valueFlex,
   }) : width = DBL.twoHundred.val;
 
   RowColonCombo.threeEighty(
@@ -76,6 +78,7 @@ class RowColonCombo extends StatelessWidget {
       this.needUnderLine = false,
       this.hasColon = true,
       this.tierOneServiceList,
+        this.valueFlex,
       this.tierTwoServiceList})
       : width = DBL.threeEighty.val;
 
@@ -94,6 +97,7 @@ class RowColonCombo extends StatelessWidget {
       this.needUnderLine = false,
       this.hasColon = true,
       this.tierOneServiceList,
+        this.valueFlex,
       this.tierTwoServiceList})
       : width = DBL.threeSeventeen.val;
 
@@ -121,7 +125,7 @@ class RowColonCombo extends StatelessWidget {
               )
             : const SizedBox.shrink(),
         Flexible(
-          flex: 2,
+          flex: valueFlex??2,
           child: InkWell(
             onTap: onValueTap,
             child: AlertTextLabel(

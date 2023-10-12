@@ -5,6 +5,8 @@ import 'package:admin_580_tech/presentation/widget/custom_icon.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 
+import 'custom_sizedbox.dart';
+
 class CustomAlertDialogWidget extends StatelessWidget {
   const CustomAlertDialogWidget(
       {super.key,
@@ -39,22 +41,7 @@ class CustomAlertDialogWidget extends StatelessWidget {
         children: [
           showHeading!
               ? _headerWidget(context, heading)
-              : Padding(
-                  padding: const EdgeInsets.only(top: 20.0, right: 20.0),
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: InkWell(
-                      child: CustomIcon(
-                        icon: Icons.close,
-                        size: DBL.twenty.val,
-                        color: AppColor.black.val,
-                      ),
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
-                ),
+              : const CustomSizedBox(),
           Container(
             width: width ?? double.infinity,
             height: height ?? 550,
@@ -74,7 +61,28 @@ class CustomAlertDialogWidget extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [Center(child: child)],
+                children: [
+                  showHeading!
+                      ? const CustomSizedBox()
+                      : Padding(
+                          padding: const EdgeInsets.only(
+                              top: 20.0, right: 20.0, bottom: 20.0),
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: InkWell(
+                              child: CustomIcon(
+                                icon: Icons.close,
+                                size: DBL.twenty.val,
+                                color: AppColor.black.val,
+                              ),
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                        ),
+                  Center(child: child)
+                ],
               ),
             ),
           ),

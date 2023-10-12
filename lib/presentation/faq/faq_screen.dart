@@ -184,6 +184,10 @@ class _FaqPageState extends State<FaqPage> {
             var item = e.value;
             _pageIndex = e.key + 1;
             return DataRow2(
+              onTap: () {
+                autoTabRouter
+                    ?.navigate(FaqCreationRoute(isEdit: "edit", id: item.id));
+              },
               cells: [
                 DataCell(_tableRowView("", _pageIndex.toString())),
                 DataCell(_tableRowView(item.question ?? "", item.answer ?? "")),

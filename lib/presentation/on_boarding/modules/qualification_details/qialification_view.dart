@@ -1,10 +1,12 @@
 import 'package:admin_580_tech/application/bloc/form_validation/form_validation_bloc.dart';
 import 'package:admin_580_tech/application/bloc/onboarding/onboarding_bloc.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
+import 'package:admin_580_tech/presentation/on_boarding/modules/qualification_details/widgets/hha_formatter.dart';
 import 'package:admin_580_tech/presentation/on_boarding/modules/qualification_details/widgets/item_row_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/custom_snackbar.dart';
@@ -56,10 +58,6 @@ class _QualificationViewState extends State<QualificationView> {
   final FormValidationBloc _validationBloc = FormValidationBloc();
   SharedPreffUtil sharedPreffUtil = SharedPreffUtil();
 
-  List<PlatformFile> hhaBytesList = [];
-  List<PlatformFile> blsBytesList = [];
-  List<PlatformFile> tbBytesList = [];
-  List<PlatformFile> covidBytesList = [];
   bool hhaListUpdated = false;
   bool blsListUpdated = false;
   bool tbListUpdated = false;
@@ -114,8 +112,13 @@ class _QualificationViewState extends State<QualificationView> {
                     OnBoardingTitleDividerWidget(
                         title: AppString.qualificationAndTestResult.val),
                     ItemRowWidget(
+                      inputFormatter: [
+                        FilteringTextInputFormatter.allow(RegExp("[0-9]")),
+                        HHAFormatter(),
+                        LengthLimitingTextInputFormatter(6),
+                      ],
                       whichDocument: 1,
-                      documentList: hhaBytesList,
+                      documentList: widget.onboardingBloc.hhaBytesList,
                       onboardingBloc: widget.onboardingBloc,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -123,7 +126,10 @@ class _QualificationViewState extends State<QualificationView> {
                         }
                         return null;
                       },
-                      onRegisterTap: () {},
+                      onRegisterTap: () {
+                        widget.onboardingBloc.launchURL(
+                            url: AppString.hhaUrl.val, context: context);
+                      },
                       selectedValue: onboardingState.isHHASelected,
                       state: onboardingState,
                       question: AppString.doYouHaveHHAReg.val,
@@ -146,18 +152,23 @@ class _QualificationViewState extends State<QualificationView> {
                           ],
                         );
                         if (result != null) {
+                          if (widget.onboardingBloc.hhaBytesList.isEmpty) {
+                            hhaListUpdated = !hhaListUpdated;
+                          }
                           for (PlatformFile file in result.files) {
-                            hhaBytesList.add(file);
+                            widget.onboardingBloc.hhaBytesList.add(file);
                             hhaListUpdated = !hhaListUpdated;
                             // Break the loop after adding 2 items
-                            if (hhaBytesList.length == 2) {
+                            if (widget.onboardingBloc.hhaBytesList.length ==
+                                2) {
                               break;
                             }
                           }
 
                           widget.onboardingBloc.add(
                             OnboardingEvent.hhaDocumentUpload(
-                                hhaBytesList, hhaListUpdated),
+                                widget.onboardingBloc.hhaBytesList,
+                                hhaListUpdated),
                           );
                         } else {
                           // User canceled the picker
@@ -170,8 +181,12 @@ class _QualificationViewState extends State<QualificationView> {
                     ),
                     CustomSizedBox(height: DBL.twenty.val),
                     ItemRowWidget(
+                      inputFormatter: [
+                        FilteringTextInputFormatter.allow(RegExp("[0-9]")),
+                        LengthLimitingTextInputFormatter(30),
+                      ],
                       whichDocument: 2,
-                      documentList: blsBytesList,
+                      documentList: widget.onboardingBloc.blsBytesList,
                       onboardingBloc: widget.onboardingBloc,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -179,7 +194,10 @@ class _QualificationViewState extends State<QualificationView> {
                         }
                         return null;
                       },
-                      onRegisterTap: () {},
+                      onRegisterTap: () {
+                        widget.onboardingBloc.launchURL(
+                            url: AppString.blsUrl.val, context: context);
+                      },
                       selectedValue: onboardingState.isBLSSelected,
                       state: onboardingState,
                       question: AppString.doYouHaveBLSCertification.val,
@@ -202,22 +220,23 @@ class _QualificationViewState extends State<QualificationView> {
                           ],
                         );
                         if (result != null) {
-                          for (PlatformFile file in result.files) {
-                            blsBytesList.add(file);
+                          if (widget.onboardingBloc.blsBytesList.isEmpty) {
                             blsListUpdated = !blsListUpdated;
-                            // Break the loop after adding 2 items
-                            if (blsBytesList.length == 2) {
+                          }
+                          for (PlatformFile file in result.files) {
+                            widget.onboardingBloc.blsBytesList.add(file);
+                            blsListUpdated = !blsListUpdated;
+                            if (widget.onboardingBloc.blsBytesList.length ==
+                                2) {
                               break;
                             }
                           }
-
                           widget.onboardingBloc.add(
                             OnboardingEvent.blsDocumentUpload(
-                                blsBytesList, blsListUpdated),
+                                widget.onboardingBloc.blsBytesList,
+                                blsListUpdated),
                           );
-                        } else {
-                          // User canceled the picker
-                        }
+                        } else {}
                       },
                       onChanged: (val) {
                         widget.onboardingBloc
@@ -227,7 +246,7 @@ class _QualificationViewState extends State<QualificationView> {
                     CustomSizedBox(height: DBL.twenty.val),
                     ItemRowWidget(
                       whichDocument: 3,
-                      documentList: tbBytesList,
+                      documentList: widget.onboardingBloc.tbBytesList,
                       onboardingBloc: widget.onboardingBloc,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -258,19 +277,23 @@ class _QualificationViewState extends State<QualificationView> {
                           ],
                         );
                         if (result != null) {
+                          if (widget.onboardingBloc.tbBytesList.isEmpty) {
+                            tbListUpdated = !tbListUpdated;
+                          }
                           for (PlatformFile file in result.files) {
-                            tbBytesList.add(file);
+                            widget.onboardingBloc.tbBytesList.add(file);
                             tbListUpdated = !tbListUpdated;
 
                             // Break the loop after adding 2 items
-                            if (tbBytesList.length == 2) {
+                            if (widget.onboardingBloc.tbBytesList.length == 2) {
                               break;
                             }
                           }
 
                           widget.onboardingBloc.add(
                             OnboardingEvent.tbDocumentUpload(
-                                tbBytesList, tbListUpdated),
+                                widget.onboardingBloc.tbBytesList,
+                                tbListUpdated),
                           );
                         } else {
                           // User canceled the picker
@@ -284,7 +307,7 @@ class _QualificationViewState extends State<QualificationView> {
                     CustomSizedBox(height: DBL.twenty.val),
                     ItemRowWidget(
                       whichDocument: 4,
-                      documentList: covidBytesList,
+                      documentList: widget.onboardingBloc.covidBytesList,
                       onboardingBloc: widget.onboardingBloc,
                       validator: (val) {
                         return null;
@@ -312,18 +335,22 @@ class _QualificationViewState extends State<QualificationView> {
                           ],
                         );
                         if (result != null) {
-                          for (PlatformFile file in result.files) {
-                            covidBytesList.add(file);
+                          if (widget.onboardingBloc.covidBytesList.isEmpty) {
                             covidListUpdated = !covidListUpdated;
-                            // Break the loop after adding 2 items
-                            if (covidBytesList.length == 2) {
+                          }
+                          for (PlatformFile file in result.files) {
+                            widget.onboardingBloc.covidBytesList.add(file);
+                            covidListUpdated = !covidListUpdated;
+                            if (widget.onboardingBloc.covidBytesList.length ==
+                                2) {
                               break;
                             }
                           }
 
                           widget.onboardingBloc.add(
                             OnboardingEvent.covidDocumentUpload(
-                                covidBytesList, covidListUpdated),
+                                widget.onboardingBloc.covidBytesList,
+                                covidListUpdated),
                           );
                         } else {
                           // User canceled the picker
@@ -348,45 +375,57 @@ class _QualificationViewState extends State<QualificationView> {
                           },
                           onRightButtonPressed: () async {
                             widget.onboardingBloc.nextButtonClicked = true;
-                            if (hhaBytesList.isNotEmpty) {
-                              for (int i = 0; i < hhaBytesList.length; i++) {
+                            if (widget.onboardingBloc.hhaBytesList.isNotEmpty) {
+                              for (int i = 0;
+                                  i < widget.onboardingBloc.hhaBytesList.length;
+                                  i++) {
                                 widget.onboardingBloc.uploadedHhaDocList.add(
                                     await uploadDocumentsToAwsS3(
                                         AppString.documents.val,
                                         SharedPreffUtil().getCareGiverUserId,
-                                        hhaBytesList[i]));
+                                        widget.onboardingBloc.hhaBytesList[i]));
                               }
-                              hhaBytesList.clear();
+                              widget.onboardingBloc.hhaBytesList.clear();
                             }
-                            if (blsBytesList.isNotEmpty) {
-                              for (int i = 0; i < blsBytesList.length; i++) {
+                            if (widget.onboardingBloc.blsBytesList.isNotEmpty) {
+                              for (int i = 0;
+                                  i < widget.onboardingBloc.blsBytesList.length;
+                                  i++) {
                                 widget.onboardingBloc.uploadedBlsDocList.add(
                                     await uploadDocumentsToAwsS3(
                                         AppString.documents.val,
                                         SharedPreffUtil().getCareGiverUserId,
-                                        blsBytesList[i]));
+                                        widget.onboardingBloc.blsBytesList[i]));
                               }
-                              blsBytesList.clear();
+                              widget.onboardingBloc.blsBytesList.clear();
                             }
-                            if (tbBytesList.isNotEmpty) {
-                              for (int i = 0; i < tbBytesList.length; i++) {
+                            if (widget.onboardingBloc.tbBytesList.isNotEmpty) {
+                              for (int i = 0;
+                                  i < widget.onboardingBloc.tbBytesList.length;
+                                  i++) {
                                 widget.onboardingBloc.uploadedTbDocList.add(
                                     await uploadDocumentsToAwsS3(
                                         AppString.documents.val,
                                         SharedPreffUtil().getCareGiverUserId,
-                                        tbBytesList[i]));
+                                        widget.onboardingBloc.tbBytesList[i]));
                               }
-                              tbBytesList.clear();
+                              widget.onboardingBloc.tbBytesList.clear();
                             }
-                            if (covidBytesList.isNotEmpty) {
-                              for (int i = 0; i < covidBytesList.length; i++) {
+                            if (widget
+                                .onboardingBloc.covidBytesList.isNotEmpty) {
+                              for (int i = 0;
+                                  i <
+                                      widget
+                                          .onboardingBloc.covidBytesList.length;
+                                  i++) {
                                 widget.onboardingBloc.uploadedCovidDocList.add(
                                     await uploadDocumentsToAwsS3(
                                         AppString.documents.val,
                                         SharedPreffUtil().getCareGiverUserId,
-                                        covidBytesList[i]));
+                                        widget
+                                            .onboardingBloc.covidBytesList[i]));
                               }
-                              covidBytesList.clear();
+                              widget.onboardingBloc.covidBytesList.clear();
                             }
                             checkInputData();
                           },

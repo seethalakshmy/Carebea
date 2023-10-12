@@ -63,6 +63,9 @@ mixin _$ServiceRequestManagementEvent {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -109,6 +112,9 @@ mixin _$ServiceRequestManagementEvent {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -154,6 +160,9 @@ mixin _$ServiceRequestManagementEvent {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -193,6 +202,11 @@ mixin _$ServiceRequestManagementEvent {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -228,6 +242,10 @@ mixin _$ServiceRequestManagementEvent {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -262,6 +280,10 @@ mixin _$ServiceRequestManagementEvent {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -407,6 +429,9 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return getCareGiverProfile(userId, adminId);
   }
@@ -456,6 +481,9 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return getCareGiverProfile?.call(userId, adminId);
   }
@@ -504,6 +532,9 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (getCareGiverProfile != null) {
@@ -549,6 +580,11 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return getCareGiverProfile(this);
   }
@@ -587,6 +623,10 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return getCareGiverProfile?.call(this);
   }
@@ -624,6 +664,10 @@ class _$_GetCareGiverProfile implements _GetCareGiverProfile {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (getCareGiverProfile != null) {
@@ -727,6 +771,9 @@ class _$_Started implements _Started {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return started();
   }
@@ -776,6 +823,9 @@ class _$_Started implements _Started {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return started?.call();
   }
@@ -824,6 +874,9 @@ class _$_Started implements _Started {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -869,6 +922,11 @@ class _$_Started implements _Started {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return started(this);
   }
@@ -907,6 +965,10 @@ class _$_Started implements _Started {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return started?.call(this);
   }
@@ -944,6 +1006,10 @@ class _$_Started implements _Started {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -1122,6 +1188,9 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return isSelectedTab(
         type, filterId, searchQuery, dateFilterId, fromDate, toDate);
@@ -1172,6 +1241,9 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return isSelectedTab?.call(
         type, filterId, searchQuery, dateFilterId, fromDate, toDate);
@@ -1221,6 +1293,9 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (isSelectedTab != null) {
@@ -1267,6 +1342,11 @@ class _$_IsSelectedTab implements _IsSelectedTab {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return isSelectedTab(this);
   }
@@ -1305,6 +1385,10 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return isSelectedTab?.call(this);
   }
@@ -1342,6 +1426,10 @@ class _$_IsSelectedTab implements _IsSelectedTab {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (isSelectedTab != null) {
@@ -1488,6 +1576,9 @@ class _$_Reschedule implements _Reschedule {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return reschedule(rescheduleParams, context);
   }
@@ -1537,6 +1628,9 @@ class _$_Reschedule implements _Reschedule {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return reschedule?.call(rescheduleParams, context);
   }
@@ -1585,6 +1679,9 @@ class _$_Reschedule implements _Reschedule {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (reschedule != null) {
@@ -1630,6 +1727,11 @@ class _$_Reschedule implements _Reschedule {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return reschedule(this);
   }
@@ -1668,6 +1770,10 @@ class _$_Reschedule implements _Reschedule {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return reschedule?.call(this);
   }
@@ -1705,6 +1811,10 @@ class _$_Reschedule implements _Reschedule {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (reschedule != null) {
@@ -1846,6 +1956,9 @@ class _$_AssignCaregiver implements _AssignCaregiver {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return assignCaregiver(assignCareGiverParams, context);
   }
@@ -1895,6 +2008,9 @@ class _$_AssignCaregiver implements _AssignCaregiver {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return assignCaregiver?.call(assignCareGiverParams, context);
   }
@@ -1943,6 +2059,9 @@ class _$_AssignCaregiver implements _AssignCaregiver {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (assignCaregiver != null) {
@@ -1988,6 +2107,11 @@ class _$_AssignCaregiver implements _AssignCaregiver {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return assignCaregiver(this);
   }
@@ -2026,6 +2150,10 @@ class _$_AssignCaregiver implements _AssignCaregiver {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return assignCaregiver?.call(this);
   }
@@ -2063,6 +2191,10 @@ class _$_AssignCaregiver implements _AssignCaregiver {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (assignCaregiver != null) {
@@ -2211,6 +2343,9 @@ class _$_StartService implements _StartService {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return startService(userId, serviceId, context);
   }
@@ -2260,6 +2395,9 @@ class _$_StartService implements _StartService {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return startService?.call(userId, serviceId, context);
   }
@@ -2308,6 +2446,9 @@ class _$_StartService implements _StartService {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (startService != null) {
@@ -2353,6 +2494,11 @@ class _$_StartService implements _StartService {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return startService(this);
   }
@@ -2391,6 +2537,10 @@ class _$_StartService implements _StartService {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return startService?.call(this);
   }
@@ -2428,6 +2578,10 @@ class _$_StartService implements _StartService {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (startService != null) {
@@ -2595,6 +2749,9 @@ class _$_CancelService implements _CancelService {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return cancelService(userId, serviceId, description, context);
   }
@@ -2644,6 +2801,9 @@ class _$_CancelService implements _CancelService {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return cancelService?.call(userId, serviceId, description, context);
   }
@@ -2692,6 +2852,9 @@ class _$_CancelService implements _CancelService {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (cancelService != null) {
@@ -2737,6 +2900,11 @@ class _$_CancelService implements _CancelService {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return cancelService(this);
   }
@@ -2775,6 +2943,10 @@ class _$_CancelService implements _CancelService {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return cancelService?.call(this);
   }
@@ -2812,6 +2984,10 @@ class _$_CancelService implements _CancelService {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (cancelService != null) {
@@ -2946,6 +3122,9 @@ class _$_SetDate implements _SetDate {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return setDate(selectedDate);
   }
@@ -2995,6 +3174,9 @@ class _$_SetDate implements _SetDate {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return setDate?.call(selectedDate);
   }
@@ -3043,6 +3225,9 @@ class _$_SetDate implements _SetDate {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (setDate != null) {
@@ -3088,6 +3273,11 @@ class _$_SetDate implements _SetDate {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return setDate(this);
   }
@@ -3126,6 +3316,10 @@ class _$_SetDate implements _SetDate {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return setDate?.call(this);
   }
@@ -3163,6 +3357,10 @@ class _$_SetDate implements _SetDate {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (setDate != null) {
@@ -3290,6 +3488,9 @@ class _$_SetFromTime implements _SetFromTime {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return setFromTime(time);
   }
@@ -3339,6 +3540,9 @@ class _$_SetFromTime implements _SetFromTime {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return setFromTime?.call(time);
   }
@@ -3387,6 +3591,9 @@ class _$_SetFromTime implements _SetFromTime {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (setFromTime != null) {
@@ -3432,6 +3639,11 @@ class _$_SetFromTime implements _SetFromTime {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return setFromTime(this);
   }
@@ -3470,6 +3682,10 @@ class _$_SetFromTime implements _SetFromTime {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return setFromTime?.call(this);
   }
@@ -3507,6 +3723,10 @@ class _$_SetFromTime implements _SetFromTime {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (setFromTime != null) {
@@ -3634,6 +3854,9 @@ class _$_SetToTime implements _SetToTime {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return setToTime(time);
   }
@@ -3683,6 +3906,9 @@ class _$_SetToTime implements _SetToTime {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return setToTime?.call(time);
   }
@@ -3731,6 +3957,9 @@ class _$_SetToTime implements _SetToTime {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (setToTime != null) {
@@ -3776,6 +4005,11 @@ class _$_SetToTime implements _SetToTime {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return setToTime(this);
   }
@@ -3814,6 +4048,10 @@ class _$_SetToTime implements _SetToTime {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return setToTime?.call(this);
   }
@@ -3851,6 +4089,10 @@ class _$_SetToTime implements _SetToTime {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (setToTime != null) {
@@ -3954,6 +4196,9 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return isRescheduleInitialView();
   }
@@ -4003,6 +4248,9 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return isRescheduleInitialView?.call();
   }
@@ -4051,6 +4299,9 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (isRescheduleInitialView != null) {
@@ -4096,6 +4347,11 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return isRescheduleInitialView(this);
   }
@@ -4134,6 +4390,10 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return isRescheduleInitialView?.call(this);
   }
@@ -4171,6 +4431,10 @@ class _$_IsRescheduleInitialView implements _IsRescheduleInitialView {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (isRescheduleInitialView != null) {
@@ -4270,6 +4534,9 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return isRescheduleLoaderView();
   }
@@ -4319,6 +4586,9 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return isRescheduleLoaderView?.call();
   }
@@ -4367,6 +4637,9 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (isRescheduleLoaderView != null) {
@@ -4412,6 +4685,11 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return isRescheduleLoaderView(this);
   }
@@ -4450,6 +4728,10 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return isRescheduleLoaderView?.call(this);
   }
@@ -4487,6 +4769,10 @@ class _$_IsRescheduleLoaderView implements _IsRescheduleLoaderView {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (isRescheduleLoaderView != null) {
@@ -4588,6 +4874,9 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return isRescheduleAvailableView();
   }
@@ -4637,6 +4926,9 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return isRescheduleAvailableView?.call();
   }
@@ -4685,6 +4977,9 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (isRescheduleAvailableView != null) {
@@ -4730,6 +5025,11 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return isRescheduleAvailableView(this);
   }
@@ -4768,6 +5068,10 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return isRescheduleAvailableView?.call(this);
   }
@@ -4805,6 +5109,10 @@ class _$_IsRescheduleAvailableView implements _IsRescheduleAvailableView {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (isRescheduleAvailableView != null) {
@@ -4906,6 +5214,9 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return isRescheduleNotAvailableView();
   }
@@ -4955,6 +5266,9 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return isRescheduleNotAvailableView?.call();
   }
@@ -5003,6 +5317,9 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (isRescheduleNotAvailableView != null) {
@@ -5048,6 +5365,11 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return isRescheduleNotAvailableView(this);
   }
@@ -5086,6 +5408,10 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return isRescheduleNotAvailableView?.call(this);
   }
@@ -5123,6 +5449,10 @@ class _$_IsRescheduleNotAvailableView implements _IsRescheduleNotAvailableView {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (isRescheduleNotAvailableView != null) {
@@ -5226,6 +5556,9 @@ class _$_IsRescheduleOtherMatchingViewView
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return isRescheduleOtherMatchingView();
   }
@@ -5275,6 +5608,9 @@ class _$_IsRescheduleOtherMatchingViewView
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return isRescheduleOtherMatchingView?.call();
   }
@@ -5323,6 +5659,9 @@ class _$_IsRescheduleOtherMatchingViewView
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (isRescheduleOtherMatchingView != null) {
@@ -5368,6 +5707,11 @@ class _$_IsRescheduleOtherMatchingViewView
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return isRescheduleOtherMatchingView(this);
   }
@@ -5406,6 +5750,10 @@ class _$_IsRescheduleOtherMatchingViewView
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return isRescheduleOtherMatchingView?.call(this);
   }
@@ -5443,6 +5791,10 @@ class _$_IsRescheduleOtherMatchingViewView
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (isRescheduleOtherMatchingView != null) {
@@ -5541,6 +5893,9 @@ class _$_GetFilters implements _GetFilters {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return getFilters();
   }
@@ -5590,6 +5945,9 @@ class _$_GetFilters implements _GetFilters {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return getFilters?.call();
   }
@@ -5638,6 +5996,9 @@ class _$_GetFilters implements _GetFilters {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (getFilters != null) {
@@ -5683,6 +6044,11 @@ class _$_GetFilters implements _GetFilters {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return getFilters(this);
   }
@@ -5721,6 +6087,10 @@ class _$_GetFilters implements _GetFilters {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return getFilters?.call(this);
   }
@@ -5758,6 +6128,10 @@ class _$_GetFilters implements _GetFilters {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (getFilters != null) {
@@ -5854,6 +6228,9 @@ class _$_GetServiceStatus implements _GetServiceStatus {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return getServiceStatus();
   }
@@ -5903,6 +6280,9 @@ class _$_GetServiceStatus implements _GetServiceStatus {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return getServiceStatus?.call();
   }
@@ -5951,6 +6331,9 @@ class _$_GetServiceStatus implements _GetServiceStatus {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (getServiceStatus != null) {
@@ -5996,6 +6379,11 @@ class _$_GetServiceStatus implements _GetServiceStatus {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return getServiceStatus(this);
   }
@@ -6034,6 +6422,10 @@ class _$_GetServiceStatus implements _GetServiceStatus {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return getServiceStatus?.call(this);
   }
@@ -6071,6 +6463,10 @@ class _$_GetServiceStatus implements _GetServiceStatus {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (getServiceStatus != null) {
@@ -6271,6 +6667,9 @@ class _$_GetServiceRequests implements _GetServiceRequests {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return getServiceRequests(context, page, limit, statusFilterId,
         dateFilterId, searchTerm, fromDate, toDate);
@@ -6321,6 +6720,9 @@ class _$_GetServiceRequests implements _GetServiceRequests {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return getServiceRequests?.call(context, page, limit, statusFilterId,
         dateFilterId, searchTerm, fromDate, toDate);
@@ -6370,6 +6772,9 @@ class _$_GetServiceRequests implements _GetServiceRequests {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (getServiceRequests != null) {
@@ -6416,6 +6821,11 @@ class _$_GetServiceRequests implements _GetServiceRequests {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return getServiceRequests(this);
   }
@@ -6454,6 +6864,10 @@ class _$_GetServiceRequests implements _GetServiceRequests {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return getServiceRequests?.call(this);
   }
@@ -6491,6 +6905,10 @@ class _$_GetServiceRequests implements _GetServiceRequests {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (getServiceRequests != null) {
@@ -6643,6 +7061,9 @@ class _$_GetServiceDetails implements _GetServiceDetails {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return getServiceDetails(context, serviceId);
   }
@@ -6692,6 +7113,9 @@ class _$_GetServiceDetails implements _GetServiceDetails {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return getServiceDetails?.call(context, serviceId);
   }
@@ -6740,6 +7164,9 @@ class _$_GetServiceDetails implements _GetServiceDetails {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (getServiceDetails != null) {
@@ -6785,6 +7212,11 @@ class _$_GetServiceDetails implements _GetServiceDetails {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return getServiceDetails(this);
   }
@@ -6823,6 +7255,10 @@ class _$_GetServiceDetails implements _GetServiceDetails {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return getServiceDetails?.call(this);
   }
@@ -6860,6 +7296,10 @@ class _$_GetServiceDetails implements _GetServiceDetails {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (getServiceDetails != null) {
@@ -6995,6 +7435,9 @@ class _$_ShowOrHideTransactionDetails implements _ShowOrHideTransactionDetails {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return showOrHideTransactionDetails(isShowing);
   }
@@ -7044,6 +7487,9 @@ class _$_ShowOrHideTransactionDetails implements _ShowOrHideTransactionDetails {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return showOrHideTransactionDetails?.call(isShowing);
   }
@@ -7092,6 +7538,9 @@ class _$_ShowOrHideTransactionDetails implements _ShowOrHideTransactionDetails {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (showOrHideTransactionDetails != null) {
@@ -7137,6 +7586,11 @@ class _$_ShowOrHideTransactionDetails implements _ShowOrHideTransactionDetails {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return showOrHideTransactionDetails(this);
   }
@@ -7175,6 +7629,10 @@ class _$_ShowOrHideTransactionDetails implements _ShowOrHideTransactionDetails {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return showOrHideTransactionDetails?.call(this);
   }
@@ -7212,6 +7670,10 @@ class _$_ShowOrHideTransactionDetails implements _ShowOrHideTransactionDetails {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (showOrHideTransactionDetails != null) {
@@ -7345,6 +7807,9 @@ class _$_ShowOrHideNeededServices implements _ShowOrHideNeededServices {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return showOrHideNeededServices(isShowing);
   }
@@ -7394,6 +7859,9 @@ class _$_ShowOrHideNeededServices implements _ShowOrHideNeededServices {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return showOrHideNeededServices?.call(isShowing);
   }
@@ -7442,6 +7910,9 @@ class _$_ShowOrHideNeededServices implements _ShowOrHideNeededServices {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (showOrHideNeededServices != null) {
@@ -7487,6 +7958,11 @@ class _$_ShowOrHideNeededServices implements _ShowOrHideNeededServices {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return showOrHideNeededServices(this);
   }
@@ -7525,6 +8001,10 @@ class _$_ShowOrHideNeededServices implements _ShowOrHideNeededServices {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return showOrHideNeededServices?.call(this);
   }
@@ -7562,6 +8042,10 @@ class _$_ShowOrHideNeededServices implements _ShowOrHideNeededServices {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (showOrHideNeededServices != null) {
@@ -7696,6 +8180,9 @@ class _$_ShowOrHideCompletedServices implements _ShowOrHideCompletedServices {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return showOrHideCompletedServices(isShowing);
   }
@@ -7745,6 +8232,9 @@ class _$_ShowOrHideCompletedServices implements _ShowOrHideCompletedServices {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return showOrHideCompletedServices?.call(isShowing);
   }
@@ -7793,6 +8283,9 @@ class _$_ShowOrHideCompletedServices implements _ShowOrHideCompletedServices {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (showOrHideCompletedServices != null) {
@@ -7838,6 +8331,11 @@ class _$_ShowOrHideCompletedServices implements _ShowOrHideCompletedServices {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return showOrHideCompletedServices(this);
   }
@@ -7876,6 +8374,10 @@ class _$_ShowOrHideCompletedServices implements _ShowOrHideCompletedServices {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return showOrHideCompletedServices?.call(this);
   }
@@ -7913,6 +8415,10 @@ class _$_ShowOrHideCompletedServices implements _ShowOrHideCompletedServices {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (showOrHideCompletedServices != null) {
@@ -8047,6 +8553,9 @@ class _$_ShowOrHideIncompleteServices implements _ShowOrHideIncompleteServices {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return showOrHideIncompleteServices(isShowing);
   }
@@ -8096,6 +8605,9 @@ class _$_ShowOrHideIncompleteServices implements _ShowOrHideIncompleteServices {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return showOrHideIncompleteServices?.call(isShowing);
   }
@@ -8144,6 +8656,9 @@ class _$_ShowOrHideIncompleteServices implements _ShowOrHideIncompleteServices {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (showOrHideIncompleteServices != null) {
@@ -8189,6 +8704,11 @@ class _$_ShowOrHideIncompleteServices implements _ShowOrHideIncompleteServices {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return showOrHideIncompleteServices(this);
   }
@@ -8227,6 +8747,10 @@ class _$_ShowOrHideIncompleteServices implements _ShowOrHideIncompleteServices {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return showOrHideIncompleteServices?.call(this);
   }
@@ -8264,6 +8788,10 @@ class _$_ShowOrHideIncompleteServices implements _ShowOrHideIncompleteServices {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (showOrHideIncompleteServices != null) {
@@ -8397,6 +8925,9 @@ class _$_ShowOrHideExtraServices implements _ShowOrHideExtraServices {
     required TResult Function(bool isShowing) showOrHideCompletedServices,
     required TResult Function(bool isShowing) showOrHideIncompleteServices,
     required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
   }) {
     return showOrHideExtraServices(isShowing);
   }
@@ -8446,6 +8977,9 @@ class _$_ShowOrHideExtraServices implements _ShowOrHideExtraServices {
     TResult? Function(bool isShowing)? showOrHideCompletedServices,
     TResult? Function(bool isShowing)? showOrHideIncompleteServices,
     TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
   }) {
     return showOrHideExtraServices?.call(isShowing);
   }
@@ -8494,6 +9028,9 @@ class _$_ShowOrHideExtraServices implements _ShowOrHideExtraServices {
     TResult Function(bool isShowing)? showOrHideCompletedServices,
     TResult Function(bool isShowing)? showOrHideIncompleteServices,
     TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (showOrHideExtraServices != null) {
@@ -8539,6 +9076,11 @@ class _$_ShowOrHideExtraServices implements _ShowOrHideExtraServices {
         showOrHideIncompleteServices,
     required TResult Function(_ShowOrHideExtraServices value)
         showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
   }) {
     return showOrHideExtraServices(this);
   }
@@ -8577,6 +9119,10 @@ class _$_ShowOrHideExtraServices implements _ShowOrHideExtraServices {
     TResult? Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
   }) {
     return showOrHideExtraServices?.call(this);
   }
@@ -8614,6 +9160,10 @@ class _$_ShowOrHideExtraServices implements _ShowOrHideExtraServices {
     TResult Function(_ShowOrHideIncompleteServices value)?
         showOrHideIncompleteServices,
     TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
     required TResult orElse(),
   }) {
     if (showOrHideExtraServices != null) {
@@ -8635,6 +9185,1121 @@ abstract class _ShowOrHideExtraServices
 }
 
 /// @nodoc
+abstract class _$$_ShowOrHideRefundDetailsCopyWith<$Res> {
+  factory _$$_ShowOrHideRefundDetailsCopyWith(_$_ShowOrHideRefundDetails value,
+          $Res Function(_$_ShowOrHideRefundDetails) then) =
+      __$$_ShowOrHideRefundDetailsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isShowing});
+}
+
+/// @nodoc
+class __$$_ShowOrHideRefundDetailsCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res,
+        _$_ShowOrHideRefundDetails>
+    implements _$$_ShowOrHideRefundDetailsCopyWith<$Res> {
+  __$$_ShowOrHideRefundDetailsCopyWithImpl(_$_ShowOrHideRefundDetails _value,
+      $Res Function(_$_ShowOrHideRefundDetails) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isShowing = null,
+  }) {
+    return _then(_$_ShowOrHideRefundDetails(
+      isShowing: null == isShowing
+          ? _value.isShowing
+          : isShowing // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ShowOrHideRefundDetails implements _ShowOrHideRefundDetails {
+  const _$_ShowOrHideRefundDetails({required this.isShowing});
+
+  @override
+  final bool isShowing;
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.showOrHideRefundDetails(isShowing: $isShowing)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ShowOrHideRefundDetails &&
+            (identical(other.isShowing, isShowing) ||
+                other.isShowing == isShowing));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isShowing);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ShowOrHideRefundDetailsCopyWith<_$_ShowOrHideRefundDetails>
+      get copyWith =>
+          __$$_ShowOrHideRefundDetailsCopyWithImpl<_$_ShowOrHideRefundDetails>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
+    required TResult Function() started,
+    required TResult Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)
+        isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
+    required TResult Function() getFilters,
+    required TResult Function() getServiceStatus,
+    required TResult Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)
+        getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
+  }) {
+    return showOrHideRefundDetails(isShowing);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
+    TResult? Function()? started,
+    TResult? Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)?
+        isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
+    TResult? Function()? getFilters,
+    TResult? Function()? getServiceStatus,
+    TResult? Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)?
+        getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
+  }) {
+    return showOrHideRefundDetails?.call(isShowing);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
+    TResult Function()? started,
+    TResult Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)?
+        isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
+    TResult Function()? getFilters,
+    TResult Function()? getServiceStatus,
+    TResult Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)?
+        getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
+    required TResult orElse(),
+  }) {
+    if (showOrHideRefundDetails != null) {
+      return showOrHideRefundDetails(isShowing);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
+    required TResult Function(_GetFilters value) getFilters,
+    required TResult Function(_GetServiceStatus value) getServiceStatus,
+    required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
+  }) {
+    return showOrHideRefundDetails(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    TResult? Function(_GetFilters value)? getFilters,
+    TResult? Function(_GetServiceStatus value)? getServiceStatus,
+    TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
+  }) {
+    return showOrHideRefundDetails?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    TResult Function(_GetFilters value)? getFilters,
+    TResult Function(_GetServiceStatus value)? getServiceStatus,
+    TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
+    required TResult orElse(),
+  }) {
+    if (showOrHideRefundDetails != null) {
+      return showOrHideRefundDetails(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShowOrHideRefundDetails
+    implements ServiceRequestManagementEvent {
+  const factory _ShowOrHideRefundDetails({required final bool isShowing}) =
+      _$_ShowOrHideRefundDetails;
+
+  bool get isShowing;
+  @JsonKey(ignore: true)
+  _$$_ShowOrHideRefundDetailsCopyWith<_$_ShowOrHideRefundDetails>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_WhoRequestedCancelRadioButtonCopyWith<$Res> {
+  factory _$$_WhoRequestedCancelRadioButtonCopyWith(
+          _$_WhoRequestedCancelRadioButton value,
+          $Res Function(_$_WhoRequestedCancelRadioButton) then) =
+      __$$_WhoRequestedCancelRadioButtonCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int whoRequested});
+}
+
+/// @nodoc
+class __$$_WhoRequestedCancelRadioButtonCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res,
+        _$_WhoRequestedCancelRadioButton>
+    implements _$$_WhoRequestedCancelRadioButtonCopyWith<$Res> {
+  __$$_WhoRequestedCancelRadioButtonCopyWithImpl(
+      _$_WhoRequestedCancelRadioButton _value,
+      $Res Function(_$_WhoRequestedCancelRadioButton) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? whoRequested = null,
+  }) {
+    return _then(_$_WhoRequestedCancelRadioButton(
+      whoRequested: null == whoRequested
+          ? _value.whoRequested
+          : whoRequested // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_WhoRequestedCancelRadioButton
+    implements _WhoRequestedCancelRadioButton {
+  const _$_WhoRequestedCancelRadioButton({required this.whoRequested});
+
+  @override
+  final int whoRequested;
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.whoRequestedCancelRadioButton(whoRequested: $whoRequested)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_WhoRequestedCancelRadioButton &&
+            (identical(other.whoRequested, whoRequested) ||
+                other.whoRequested == whoRequested));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, whoRequested);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_WhoRequestedCancelRadioButtonCopyWith<_$_WhoRequestedCancelRadioButton>
+      get copyWith => __$$_WhoRequestedCancelRadioButtonCopyWithImpl<
+          _$_WhoRequestedCancelRadioButton>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
+    required TResult Function() started,
+    required TResult Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)
+        isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
+    required TResult Function() getFilters,
+    required TResult Function() getServiceStatus,
+    required TResult Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)
+        getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
+  }) {
+    return whoRequestedCancelRadioButton(whoRequested);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
+    TResult? Function()? started,
+    TResult? Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)?
+        isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
+    TResult? Function()? getFilters,
+    TResult? Function()? getServiceStatus,
+    TResult? Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)?
+        getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
+  }) {
+    return whoRequestedCancelRadioButton?.call(whoRequested);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
+    TResult Function()? started,
+    TResult Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)?
+        isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
+    TResult Function()? getFilters,
+    TResult Function()? getServiceStatus,
+    TResult Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)?
+        getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
+    required TResult orElse(),
+  }) {
+    if (whoRequestedCancelRadioButton != null) {
+      return whoRequestedCancelRadioButton(whoRequested);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
+    required TResult Function(_GetFilters value) getFilters,
+    required TResult Function(_GetServiceStatus value) getServiceStatus,
+    required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
+  }) {
+    return whoRequestedCancelRadioButton(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    TResult? Function(_GetFilters value)? getFilters,
+    TResult? Function(_GetServiceStatus value)? getServiceStatus,
+    TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
+  }) {
+    return whoRequestedCancelRadioButton?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    TResult Function(_GetFilters value)? getFilters,
+    TResult Function(_GetServiceStatus value)? getServiceStatus,
+    TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
+    required TResult orElse(),
+  }) {
+    if (whoRequestedCancelRadioButton != null) {
+      return whoRequestedCancelRadioButton(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _WhoRequestedCancelRadioButton
+    implements ServiceRequestManagementEvent {
+  const factory _WhoRequestedCancelRadioButton(
+      {required final int whoRequested}) = _$_WhoRequestedCancelRadioButton;
+
+  int get whoRequested;
+  @JsonKey(ignore: true)
+  _$$_WhoRequestedCancelRadioButtonCopyWith<_$_WhoRequestedCancelRadioButton>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ShowOrHideTimelineCopyWith<$Res> {
+  factory _$$_ShowOrHideTimelineCopyWith(_$_ShowOrHideTimeline value,
+          $Res Function(_$_ShowOrHideTimeline) then) =
+      __$$_ShowOrHideTimelineCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isShowing});
+}
+
+/// @nodoc
+class __$$_ShowOrHideTimelineCopyWithImpl<$Res>
+    extends _$ServiceRequestManagementEventCopyWithImpl<$Res,
+        _$_ShowOrHideTimeline> implements _$$_ShowOrHideTimelineCopyWith<$Res> {
+  __$$_ShowOrHideTimelineCopyWithImpl(
+      _$_ShowOrHideTimeline _value, $Res Function(_$_ShowOrHideTimeline) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isShowing = null,
+  }) {
+    return _then(_$_ShowOrHideTimeline(
+      isShowing: null == isShowing
+          ? _value.isShowing
+          : isShowing // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ShowOrHideTimeline implements _ShowOrHideTimeline {
+  const _$_ShowOrHideTimeline({required this.isShowing});
+
+  @override
+  final bool isShowing;
+
+  @override
+  String toString() {
+    return 'ServiceRequestManagementEvent.showOrHideTimeline(isShowing: $isShowing)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ShowOrHideTimeline &&
+            (identical(other.isShowing, isShowing) ||
+                other.isShowing == isShowing));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isShowing);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ShowOrHideTimelineCopyWith<_$_ShowOrHideTimeline> get copyWith =>
+      __$$_ShowOrHideTimelineCopyWithImpl<_$_ShowOrHideTimeline>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String adminId)
+        getCareGiverProfile,
+    required TResult Function() started,
+    required TResult Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)
+        isSelectedTab,
+    required TResult Function(
+            RescheduleParams rescheduleParams, BuildContext context)
+        reschedule,
+    required TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)
+        assignCaregiver,
+    required TResult Function(
+            String userId, String serviceId, BuildContext context)
+        startService,
+    required TResult Function(String userId, String serviceId,
+            String description, BuildContext context)
+        cancelService,
+    required TResult Function(DateTime selectedDate) setDate,
+    required TResult Function(TimeOfDay time) setFromTime,
+    required TResult Function(TimeOfDay time) setToTime,
+    required TResult Function() isRescheduleInitialView,
+    required TResult Function() isRescheduleLoaderView,
+    required TResult Function() isRescheduleAvailableView,
+    required TResult Function() isRescheduleNotAvailableView,
+    required TResult Function() isRescheduleOtherMatchingView,
+    required TResult Function() getFilters,
+    required TResult Function() getServiceStatus,
+    required TResult Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)
+        getServiceRequests,
+    required TResult Function(BuildContext context, String serviceId)
+        getServiceDetails,
+    required TResult Function(bool isShowing) showOrHideTransactionDetails,
+    required TResult Function(bool isShowing) showOrHideNeededServices,
+    required TResult Function(bool isShowing) showOrHideCompletedServices,
+    required TResult Function(bool isShowing) showOrHideIncompleteServices,
+    required TResult Function(bool isShowing) showOrHideExtraServices,
+    required TResult Function(bool isShowing) showOrHideRefundDetails,
+    required TResult Function(int whoRequested) whoRequestedCancelRadioButton,
+    required TResult Function(bool isShowing) showOrHideTimeline,
+  }) {
+    return showOrHideTimeline(isShowing);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String adminId)? getCareGiverProfile,
+    TResult? Function()? started,
+    TResult? Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)?
+        isSelectedTab,
+    TResult? Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult? Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult? Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult? Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult? Function(DateTime selectedDate)? setDate,
+    TResult? Function(TimeOfDay time)? setFromTime,
+    TResult? Function(TimeOfDay time)? setToTime,
+    TResult? Function()? isRescheduleInitialView,
+    TResult? Function()? isRescheduleLoaderView,
+    TResult? Function()? isRescheduleAvailableView,
+    TResult? Function()? isRescheduleNotAvailableView,
+    TResult? Function()? isRescheduleOtherMatchingView,
+    TResult? Function()? getFilters,
+    TResult? Function()? getServiceStatus,
+    TResult? Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)?
+        getServiceRequests,
+    TResult? Function(BuildContext context, String serviceId)?
+        getServiceDetails,
+    TResult? Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult? Function(bool isShowing)? showOrHideNeededServices,
+    TResult? Function(bool isShowing)? showOrHideCompletedServices,
+    TResult? Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult? Function(bool isShowing)? showOrHideExtraServices,
+    TResult? Function(bool isShowing)? showOrHideRefundDetails,
+    TResult? Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult? Function(bool isShowing)? showOrHideTimeline,
+  }) {
+    return showOrHideTimeline?.call(isShowing);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String adminId)? getCareGiverProfile,
+    TResult Function()? started,
+    TResult Function(Types type, int? filterId, String? searchQuery,
+            String? dateFilterId, String? fromDate, String? toDate)?
+        isSelectedTab,
+    TResult Function(RescheduleParams rescheduleParams, BuildContext context)?
+        reschedule,
+    TResult Function(
+            AssignCareGiverParams assignCareGiverParams, BuildContext context)?
+        assignCaregiver,
+    TResult Function(String userId, String serviceId, BuildContext context)?
+        startService,
+    TResult Function(String userId, String serviceId, String description,
+            BuildContext context)?
+        cancelService,
+    TResult Function(DateTime selectedDate)? setDate,
+    TResult Function(TimeOfDay time)? setFromTime,
+    TResult Function(TimeOfDay time)? setToTime,
+    TResult Function()? isRescheduleInitialView,
+    TResult Function()? isRescheduleLoaderView,
+    TResult Function()? isRescheduleAvailableView,
+    TResult Function()? isRescheduleNotAvailableView,
+    TResult Function()? isRescheduleOtherMatchingView,
+    TResult Function()? getFilters,
+    TResult Function()? getServiceStatus,
+    TResult Function(
+            BuildContext context,
+            int page,
+            int limit,
+            int? statusFilterId,
+            int? dateFilterId,
+            String? searchTerm,
+            String? fromDate,
+            String? toDate)?
+        getServiceRequests,
+    TResult Function(BuildContext context, String serviceId)? getServiceDetails,
+    TResult Function(bool isShowing)? showOrHideTransactionDetails,
+    TResult Function(bool isShowing)? showOrHideNeededServices,
+    TResult Function(bool isShowing)? showOrHideCompletedServices,
+    TResult Function(bool isShowing)? showOrHideIncompleteServices,
+    TResult Function(bool isShowing)? showOrHideExtraServices,
+    TResult Function(bool isShowing)? showOrHideRefundDetails,
+    TResult Function(int whoRequested)? whoRequestedCancelRadioButton,
+    TResult Function(bool isShowing)? showOrHideTimeline,
+    required TResult orElse(),
+  }) {
+    if (showOrHideTimeline != null) {
+      return showOrHideTimeline(isShowing);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetCareGiverProfile value) getCareGiverProfile,
+    required TResult Function(_Started value) started,
+    required TResult Function(_IsSelectedTab value) isSelectedTab,
+    required TResult Function(_Reschedule value) reschedule,
+    required TResult Function(_AssignCaregiver value) assignCaregiver,
+    required TResult Function(_StartService value) startService,
+    required TResult Function(_CancelService value) cancelService,
+    required TResult Function(_SetDate value) setDate,
+    required TResult Function(_SetFromTime value) setFromTime,
+    required TResult Function(_SetToTime value) setToTime,
+    required TResult Function(_IsRescheduleInitialView value)
+        isRescheduleInitialView,
+    required TResult Function(_IsRescheduleLoaderView value)
+        isRescheduleLoaderView,
+    required TResult Function(_IsRescheduleAvailableView value)
+        isRescheduleAvailableView,
+    required TResult Function(_IsRescheduleNotAvailableView value)
+        isRescheduleNotAvailableView,
+    required TResult Function(_IsRescheduleOtherMatchingViewView value)
+        isRescheduleOtherMatchingView,
+    required TResult Function(_GetFilters value) getFilters,
+    required TResult Function(_GetServiceStatus value) getServiceStatus,
+    required TResult Function(_GetServiceRequests value) getServiceRequests,
+    required TResult Function(_GetServiceDetails value) getServiceDetails,
+    required TResult Function(_ShowOrHideTransactionDetails value)
+        showOrHideTransactionDetails,
+    required TResult Function(_ShowOrHideNeededServices value)
+        showOrHideNeededServices,
+    required TResult Function(_ShowOrHideCompletedServices value)
+        showOrHideCompletedServices,
+    required TResult Function(_ShowOrHideIncompleteServices value)
+        showOrHideIncompleteServices,
+    required TResult Function(_ShowOrHideExtraServices value)
+        showOrHideExtraServices,
+    required TResult Function(_ShowOrHideRefundDetails value)
+        showOrHideRefundDetails,
+    required TResult Function(_WhoRequestedCancelRadioButton value)
+        whoRequestedCancelRadioButton,
+    required TResult Function(_ShowOrHideTimeline value) showOrHideTimeline,
+  }) {
+    return showOrHideTimeline(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult? Function(_Started value)? started,
+    TResult? Function(_IsSelectedTab value)? isSelectedTab,
+    TResult? Function(_Reschedule value)? reschedule,
+    TResult? Function(_AssignCaregiver value)? assignCaregiver,
+    TResult? Function(_StartService value)? startService,
+    TResult? Function(_CancelService value)? cancelService,
+    TResult? Function(_SetDate value)? setDate,
+    TResult? Function(_SetFromTime value)? setFromTime,
+    TResult? Function(_SetToTime value)? setToTime,
+    TResult? Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult? Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult? Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult? Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult? Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    TResult? Function(_GetFilters value)? getFilters,
+    TResult? Function(_GetServiceStatus value)? getServiceStatus,
+    TResult? Function(_GetServiceRequests value)? getServiceRequests,
+    TResult? Function(_GetServiceDetails value)? getServiceDetails,
+    TResult? Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult? Function(_ShowOrHideNeededServices value)?
+        showOrHideNeededServices,
+    TResult? Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult? Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult? Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult? Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult? Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult? Function(_ShowOrHideTimeline value)? showOrHideTimeline,
+  }) {
+    return showOrHideTimeline?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetCareGiverProfile value)? getCareGiverProfile,
+    TResult Function(_Started value)? started,
+    TResult Function(_IsSelectedTab value)? isSelectedTab,
+    TResult Function(_Reschedule value)? reschedule,
+    TResult Function(_AssignCaregiver value)? assignCaregiver,
+    TResult Function(_StartService value)? startService,
+    TResult Function(_CancelService value)? cancelService,
+    TResult Function(_SetDate value)? setDate,
+    TResult Function(_SetFromTime value)? setFromTime,
+    TResult Function(_SetToTime value)? setToTime,
+    TResult Function(_IsRescheduleInitialView value)? isRescheduleInitialView,
+    TResult Function(_IsRescheduleLoaderView value)? isRescheduleLoaderView,
+    TResult Function(_IsRescheduleAvailableView value)?
+        isRescheduleAvailableView,
+    TResult Function(_IsRescheduleNotAvailableView value)?
+        isRescheduleNotAvailableView,
+    TResult Function(_IsRescheduleOtherMatchingViewView value)?
+        isRescheduleOtherMatchingView,
+    TResult Function(_GetFilters value)? getFilters,
+    TResult Function(_GetServiceStatus value)? getServiceStatus,
+    TResult Function(_GetServiceRequests value)? getServiceRequests,
+    TResult Function(_GetServiceDetails value)? getServiceDetails,
+    TResult Function(_ShowOrHideTransactionDetails value)?
+        showOrHideTransactionDetails,
+    TResult Function(_ShowOrHideNeededServices value)? showOrHideNeededServices,
+    TResult Function(_ShowOrHideCompletedServices value)?
+        showOrHideCompletedServices,
+    TResult Function(_ShowOrHideIncompleteServices value)?
+        showOrHideIncompleteServices,
+    TResult Function(_ShowOrHideExtraServices value)? showOrHideExtraServices,
+    TResult Function(_ShowOrHideRefundDetails value)? showOrHideRefundDetails,
+    TResult Function(_WhoRequestedCancelRadioButton value)?
+        whoRequestedCancelRadioButton,
+    TResult Function(_ShowOrHideTimeline value)? showOrHideTimeline,
+    required TResult orElse(),
+  }) {
+    if (showOrHideTimeline != null) {
+      return showOrHideTimeline(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShowOrHideTimeline implements ServiceRequestManagementEvent {
+  const factory _ShowOrHideTimeline({required final bool isShowing}) =
+      _$_ShowOrHideTimeline;
+
+  bool get isShowing;
+  @JsonKey(ignore: true)
+  _$$_ShowOrHideTimelineCopyWith<_$_ShowOrHideTimeline> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ServiceRequestManagementState {
   List<Types> get types => throw _privateConstructorUsedError;
   bool? get isLoading => throw _privateConstructorUsedError;
@@ -8645,6 +10310,9 @@ mixin _$ServiceRequestManagementState {
   bool get isShowingCompletedServices => throw _privateConstructorUsedError;
   bool get isShowingIncompleteServices => throw _privateConstructorUsedError;
   bool get isShowingExtraServices => throw _privateConstructorUsedError;
+  bool get isShowingRefundDetails => throw _privateConstructorUsedError;
+  bool get isShowingTimeline => throw _privateConstructorUsedError;
+  int get whoRequestedCancel => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   DateTime get selectedDate => throw _privateConstructorUsedError;
   String get fromDate => throw _privateConstructorUsedError;
@@ -8708,6 +10376,9 @@ abstract class $ServiceRequestManagementStateCopyWith<$Res> {
       bool isShowingCompletedServices,
       bool isShowingIncompleteServices,
       bool isShowingExtraServices,
+      bool isShowingRefundDetails,
+      bool isShowingTimeline,
+      int whoRequestedCancel,
       String? error,
       DateTime selectedDate,
       String fromDate,
@@ -8763,6 +10434,9 @@ class _$ServiceRequestManagementStateCopyWithImpl<$Res,
     Object? isShowingCompletedServices = null,
     Object? isShowingIncompleteServices = null,
     Object? isShowingExtraServices = null,
+    Object? isShowingRefundDetails = null,
+    Object? isShowingTimeline = null,
+    Object? whoRequestedCancel = null,
     Object? error = freezed,
     Object? selectedDate = null,
     Object? fromDate = null,
@@ -8828,6 +10502,18 @@ class _$ServiceRequestManagementStateCopyWithImpl<$Res,
           ? _value.isShowingExtraServices
           : isShowingExtraServices // ignore: cast_nullable_to_non_nullable
               as bool,
+      isShowingRefundDetails: null == isShowingRefundDetails
+          ? _value.isShowingRefundDetails
+          : isShowingRefundDetails // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowingTimeline: null == isShowingTimeline
+          ? _value.isShowingTimeline
+          : isShowingTimeline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      whoRequestedCancel: null == whoRequestedCancel
+          ? _value.whoRequestedCancel
+          : whoRequestedCancel // ignore: cast_nullable_to_non_nullable
+              as int,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -8963,6 +10649,9 @@ abstract class _$$_ServiceRequestManagementStateCopyWith<$Res>
       bool isShowingCompletedServices,
       bool isShowingIncompleteServices,
       bool isShowingExtraServices,
+      bool isShowingRefundDetails,
+      bool isShowingTimeline,
+      int whoRequestedCancel,
       String? error,
       DateTime selectedDate,
       String fromDate,
@@ -9017,6 +10706,9 @@ class __$$_ServiceRequestManagementStateCopyWithImpl<$Res>
     Object? isShowingCompletedServices = null,
     Object? isShowingIncompleteServices = null,
     Object? isShowingExtraServices = null,
+    Object? isShowingRefundDetails = null,
+    Object? isShowingTimeline = null,
+    Object? whoRequestedCancel = null,
     Object? error = freezed,
     Object? selectedDate = null,
     Object? fromDate = null,
@@ -9082,6 +10774,18 @@ class __$$_ServiceRequestManagementStateCopyWithImpl<$Res>
           ? _value.isShowingExtraServices
           : isShowingExtraServices // ignore: cast_nullable_to_non_nullable
               as bool,
+      isShowingRefundDetails: null == isShowingRefundDetails
+          ? _value.isShowingRefundDetails
+          : isShowingRefundDetails // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isShowingTimeline: null == isShowingTimeline
+          ? _value.isShowingTimeline
+          : isShowingTimeline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      whoRequestedCancel: null == whoRequestedCancel
+          ? _value.whoRequestedCancel
+          : whoRequestedCancel // ignore: cast_nullable_to_non_nullable
+              as int,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -9212,6 +10916,9 @@ class _$_ServiceRequestManagementState
       required this.isShowingCompletedServices,
       required this.isShowingIncompleteServices,
       required this.isShowingExtraServices,
+      required this.isShowingRefundDetails,
+      required this.isShowingTimeline,
+      required this.whoRequestedCancel,
       required this.error,
       required this.selectedDate,
       required this.fromDate,
@@ -9266,6 +10973,12 @@ class _$_ServiceRequestManagementState
   final bool isShowingIncompleteServices;
   @override
   final bool isShowingExtraServices;
+  @override
+  final bool isShowingRefundDetails;
+  @override
+  final bool isShowingTimeline;
+  @override
+  final int whoRequestedCancel;
   @override
   final String? error;
   @override
@@ -9341,7 +11054,7 @@ class _$_ServiceRequestManagementState
 
   @override
   String toString() {
-    return 'ServiceRequestManagementState(types: $types, isLoading: $isLoading, isListLoading: $isListLoading, isDetailsLoading: $isDetailsLoading, isShowingTransactionDetails: $isShowingTransactionDetails, isShowingNeededServices: $isShowingNeededServices, isShowingCompletedServices: $isShowingCompletedServices, isShowingIncompleteServices: $isShowingIncompleteServices, isShowingExtraServices: $isShowingExtraServices, error: $error, selectedDate: $selectedDate, fromDate: $fromDate, toDate: $toDate, searchQuery: $searchQuery, fromTime: $fromTime, toTime: $toTime, rescheduleResponse: $rescheduleResponse, caregiverAssignResponse: $caregiverAssignResponse, startServiceResponse: $startServiceResponse, cancelServiceResponse: $cancelServiceResponse, caregiverProfileResponse: $caregiverProfileResponse, filterOption: $filterOption, serviceDetailsOption: $serviceDetailsOption, serviceOption: $serviceOption, serviceStatusOption: $serviceStatusOption, isError: $isError, isCancelLoading: $isCancelLoading, isStartServiceLoading: $isStartServiceLoading, isReScheduleError: $isReScheduleError, isClientError: $isClientError, isRescheduleInitialView: $isRescheduleInitialView, isRescheduleLoaderView: $isRescheduleLoaderView, isRescheduleAvailableCaregiverView: $isRescheduleAvailableCaregiverView, isRescheduleNotAvailableCaregiverView: $isRescheduleNotAvailableCaregiverView, isRescheduleOtherMatchingListView: $isRescheduleOtherMatchingListView, services: $services)';
+    return 'ServiceRequestManagementState(types: $types, isLoading: $isLoading, isListLoading: $isListLoading, isDetailsLoading: $isDetailsLoading, isShowingTransactionDetails: $isShowingTransactionDetails, isShowingNeededServices: $isShowingNeededServices, isShowingCompletedServices: $isShowingCompletedServices, isShowingIncompleteServices: $isShowingIncompleteServices, isShowingExtraServices: $isShowingExtraServices, isShowingRefundDetails: $isShowingRefundDetails, isShowingTimeline: $isShowingTimeline, whoRequestedCancel: $whoRequestedCancel, error: $error, selectedDate: $selectedDate, fromDate: $fromDate, toDate: $toDate, searchQuery: $searchQuery, fromTime: $fromTime, toTime: $toTime, rescheduleResponse: $rescheduleResponse, caregiverAssignResponse: $caregiverAssignResponse, startServiceResponse: $startServiceResponse, cancelServiceResponse: $cancelServiceResponse, caregiverProfileResponse: $caregiverProfileResponse, filterOption: $filterOption, serviceDetailsOption: $serviceDetailsOption, serviceOption: $serviceOption, serviceStatusOption: $serviceStatusOption, isError: $isError, isCancelLoading: $isCancelLoading, isStartServiceLoading: $isStartServiceLoading, isReScheduleError: $isReScheduleError, isClientError: $isClientError, isRescheduleInitialView: $isRescheduleInitialView, isRescheduleLoaderView: $isRescheduleLoaderView, isRescheduleAvailableCaregiverView: $isRescheduleAvailableCaregiverView, isRescheduleNotAvailableCaregiverView: $isRescheduleNotAvailableCaregiverView, isRescheduleOtherMatchingListView: $isRescheduleOtherMatchingListView, services: $services)';
   }
 
   @override
@@ -9369,6 +11082,12 @@ class _$_ServiceRequestManagementState
                     isShowingIncompleteServices) &&
             (identical(other.isShowingExtraServices, isShowingExtraServices) ||
                 other.isShowingExtraServices == isShowingExtraServices) &&
+            (identical(other.isShowingRefundDetails, isShowingRefundDetails) ||
+                other.isShowingRefundDetails == isShowingRefundDetails) &&
+            (identical(other.isShowingTimeline, isShowingTimeline) ||
+                other.isShowingTimeline == isShowingTimeline) &&
+            (identical(other.whoRequestedCancel, whoRequestedCancel) ||
+                other.whoRequestedCancel == whoRequestedCancel) &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.selectedDate, selectedDate) ||
                 other.selectedDate == selectedDate) &&
@@ -9392,12 +11111,9 @@ class _$_ServiceRequestManagementState
                 other.caregiverProfileResponse == caregiverProfileResponse) &&
             (identical(other.filterOption, filterOption) ||
                 other.filterOption == filterOption) &&
-            (identical(other.serviceDetailsOption, serviceDetailsOption) ||
-                other.serviceDetailsOption == serviceDetailsOption) &&
-            (identical(other.serviceOption, serviceOption) ||
-                other.serviceOption == serviceOption) &&
-            (identical(other.serviceStatusOption, serviceStatusOption) ||
-                other.serviceStatusOption == serviceStatusOption) &&
+            (identical(other.serviceDetailsOption, serviceDetailsOption) || other.serviceDetailsOption == serviceDetailsOption) &&
+            (identical(other.serviceOption, serviceOption) || other.serviceOption == serviceOption) &&
+            (identical(other.serviceStatusOption, serviceStatusOption) || other.serviceStatusOption == serviceStatusOption) &&
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.isCancelLoading, isCancelLoading) || other.isCancelLoading == isCancelLoading) &&
             (identical(other.isStartServiceLoading, isStartServiceLoading) || other.isStartServiceLoading == isStartServiceLoading) &&
@@ -9423,6 +11139,9 @@ class _$_ServiceRequestManagementState
         isShowingCompletedServices,
         isShowingIncompleteServices,
         isShowingExtraServices,
+        isShowingRefundDetails,
+        isShowingTimeline,
+        whoRequestedCancel,
         error,
         selectedDate,
         fromDate,
@@ -9472,6 +11191,9 @@ abstract class _ServiceRequestManagementState
       required final bool isShowingCompletedServices,
       required final bool isShowingIncompleteServices,
       required final bool isShowingExtraServices,
+      required final bool isShowingRefundDetails,
+      required final bool isShowingTimeline,
+      required final int whoRequestedCancel,
       required final String? error,
       required final DateTime selectedDate,
       required final String fromDate,
@@ -9525,6 +11247,12 @@ abstract class _ServiceRequestManagementState
   bool get isShowingIncompleteServices;
   @override
   bool get isShowingExtraServices;
+  @override
+  bool get isShowingRefundDetails;
+  @override
+  bool get isShowingTimeline;
+  @override
+  int get whoRequestedCancel;
   @override
   String? get error;
   @override
