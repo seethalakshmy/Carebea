@@ -63,10 +63,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
       //   pageController: controller,
       // ),
       //const OtpVerificationView(),
-      /*PersonalDetailsView(
+      PersonalDetailsView(
         onboardingBloc: _onboardingBloc,
         pageController: controller,
-      ),*/
+      ),
       QualificationView(
           state: _onboardingBloc.state,
           onboardingBloc: _onboardingBloc,
