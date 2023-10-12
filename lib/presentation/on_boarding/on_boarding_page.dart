@@ -81,10 +81,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
         pageController: controller,
         onboardingBloc: _onboardingBloc,
       ),
-      ServicesView(
-        pageController: controller,
-        onboardingBloc: _onboardingBloc,
-      ),
+      // ServicesView(
+      //   pageController: controller,
+      //   onboardingBloc: _onboardingBloc,
+      // ),
       /*ReferenceView(
         onboardingBloc: _onboardingBloc,
         pageController: controller,

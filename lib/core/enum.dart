@@ -227,7 +227,7 @@ enum AppString {
   tellAboutYou("Tell about you"),
   addBankAccountDetails("Add your banck account details"),
   aboutYou("About You"),
-  tourHobbies("Tour Hobbies"),
+  yourHobbies("your Hobbies"),
   setupCompensation("Setup Compensation Method"),
   loveBeingCaregiver("Why you love being a care ambassador"),
   provideDigitalSign("Provide your digital signature"),

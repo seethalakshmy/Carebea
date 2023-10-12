@@ -1,5 +1,3 @@
-import 'package:admin_580_tech/presentation/on_boarding/widgets/common_padding_widget.dart';
-import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,9 +11,11 @@ import '../../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../../caregiver_creation/widgets/details_text_field_with_label.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
+import '../../../widget/custom_container.dart';
 import '../../../widget/custom_form.dart';
 import '../../../widget/custom_sizedbox.dart';
 import '../../../widget/custom_text.dart';
+import '../../widgets/common_padding_widget.dart';
 
 class BuildProfileView extends StatefulWidget {
   const BuildProfileView(
@@ -66,8 +66,8 @@ class _BuildProfileViewState extends State<BuildProfileView> {
             some.fold((l) {
               CSnackBar.showError(context, msg: l.error);
             }, (r) {
-              widget.pageController
-                  .jumpToPage(widget.pageController.page!.toInt() + 1);
+              // widget.pageController
+              //     .jumpToPage(widget.pageController.page!.toInt() + 1);
             });
           });
         },
@@ -101,7 +101,7 @@ class _BuildProfileViewState extends State<BuildProfileView> {
                         // widget.onboardingBloc.nextButtonClicked = false;
                       },
                       onRightButtonPressed: () {
-                        //checkInputData();
+                        checkInputData();
                         widget.onboardingBloc.add(
                             OnboardingEvent.submitBuildProfile(
                                 userId:
@@ -178,6 +178,7 @@ class _BuildProfileViewState extends State<BuildProfileView> {
                   child: DetailsTextFieldWithLabel(
                     textAlignVertical: TextAlignVertical.center,
                     maxLines: 4,
+                    maxLength: 500,
                     width: DBL.threeFifty.val,
                     height: DBL.oneTwenty.val,
                     labelName: AppString.aboutYou.val,
@@ -201,9 +202,10 @@ class _BuildProfileViewState extends State<BuildProfileView> {
                   child: DetailsTextFieldWithLabel(
                     textAlignVertical: TextAlignVertical.center,
                     maxLines: 4,
+                    maxLength: 500,
                     width: DBL.threeFifty.val,
                     height: DBL.oneTwenty.val,
-                    labelName: AppString.tourHobbies.val,
+                    labelName: AppString.yourHobbies.val,
                     controller: hobbiesController,
                     focusNode: hobbiesFocusNode,
                     textInputAction: TextInputAction.next,
@@ -224,6 +226,7 @@ class _BuildProfileViewState extends State<BuildProfileView> {
                   child: DetailsTextFieldWithLabel(
                     textAlignVertical: TextAlignVertical.center,
                     maxLines: 4,
+                    maxLength: 500,
                     width: DBL.threeFifty.val,
                     height: DBL.oneTwenty.val,
                     labelName: AppString.loveBeingCaregiver.val,
@@ -254,10 +257,10 @@ class _BuildProfileViewState extends State<BuildProfileView> {
       formValidationBloc.add(const FormValidationEvent.submit());
     }
     if (_formKey.currentState!.validate()) {
-      /*setState(() {
+      setState(() {
         widget.pageController
             .jumpToPage(widget.pageController.page!.toInt() + 1);
-      });*/
+      });
     }
   }
 }

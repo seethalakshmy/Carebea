@@ -207,7 +207,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
               _dateWidget(state),
               _genderWidget(state),
               _addressLineWidget(state),
-              //_locationWidget(state),
+              _locationWidget(state),
               _streetWidget(state),
               _stateWidget(state),
               _cityWidget(state),
