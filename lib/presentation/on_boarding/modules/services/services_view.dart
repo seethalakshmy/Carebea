@@ -78,8 +78,7 @@ class _ServicesViewState extends State<ServicesView> {
                               .isEmpty) {
                         CSnackBar.showError(context,
                             msg: AppString.pleaseSelectOneService.val);
-                      }
-                      else {
+                      } else {
                         widget.onboardingBloc.add(
                             OnboardingEvent.submitServices(
                                 userId:
