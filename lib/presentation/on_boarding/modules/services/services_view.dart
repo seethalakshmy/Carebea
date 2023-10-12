@@ -1,4 +1,5 @@
 import 'package:admin_580_tech/core/custom_snackbar.dart';
+import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/on_boarding/widgets/common_padding_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import '../../../../application/bloc/onboarding/onboarding_bloc.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/responsive.dart';
 import '../../../../core/text_styles.dart';
+import '../../../../domain/on_boarding/models/services/service_request_model.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
 import '../../../widget/custom_button.dart';
 import '../../../widget/custom_shimmer.dart';
@@ -77,7 +79,7 @@ class _ServicesViewState extends State<ServicesView> {
                         CSnackBar.showError(context,
                             msg: AppString.pleaseSelectOneService.val);
                       }
-                      /*else {
+                      else {
                         widget.onboardingBloc.add(
                             OnboardingEvent.submitServices(
                                 userId:
@@ -90,7 +92,7 @@ class _ServicesViewState extends State<ServicesView> {
                                   tier2: widget
                                       .onboardingBloc.selectedTier2ServiceList,
                                 ).toJson()));
-                      }*/
+                      }
                       print(
                           "selected list in button : ${widget.onboardingBloc.selectedTier1ServiceList}");
                       widget.onboardingBloc.nextButtonClicked = true;

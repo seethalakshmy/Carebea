@@ -13,6 +13,9 @@ import '../widget/custom_card.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_text.dart';
 import '../widget/header_view.dart';
+import 'modules/personal_details/personal_details_view.dart';
+import 'modules/preference/preference_view.dart';
+import 'modules/qualification_details/qialification_view.dart';
 import 'modules/services/services_view.dart';
 
 @RoutePage()
@@ -62,7 +65,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       //   pageController: controller,
       // ),
       //const OtpVerificationView(),
-      /*PersonalDetailsView(
+      PersonalDetailsView(
         onboardingBloc: _onboardingBloc,
         pageController: controller,
       ),
@@ -73,11 +76,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
       PreferenceView(
         pageController: controller,
         onboardingBloc: _onboardingBloc,
-      ),*/
-      ServicesView(
+      ),
+      /*ServicesView(
         pageController: controller,
         onboardingBloc: _onboardingBloc,
-      ),
+      ),*/
+
       /*ReferenceView(
         onboardingBloc: _onboardingBloc,
         pageController: controller,
