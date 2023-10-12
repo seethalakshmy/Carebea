@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 /// App Strings
 enum AppString {
+  hhaUrl(
+      "https://www.ccld.dss.ca.gov/hcsregistry/registration.aspx?Action=New"),
+  blsUrl("https://www.nationalcprfoundation.com/"),
+
   userId("USER ID"),
   subProfileDetails('SubProfile Details'),
   noTransactions("No Transactions"),
@@ -82,7 +86,7 @@ enum AppString {
   backToDashBoard("Back to Dashboard"),
   emailAddress("Email Address"),
   category("Category"),
-  createdDate("Created Date"),
+  createdDateTime("Created Date & Time"),
   repliedOn('Replied On'),
   title('Title'),
   description('Description'),
@@ -327,6 +331,10 @@ enum AppString {
   dob("Date of Birth"),
   gender("Gender"),
   alternativeMobileNumber("Alternative Mobile Number"),
+  caReplacementStatus("Care Ambassador Replacement Status"),
+  replacedCaName("Replaced Care Ambassador Name"),
+  whoRequestedToCancel("Who requested to cancel service"),
+  serviceTimeline("Service Timeline"),
   covid19Vaccination("COVID - 19 Vaccination"),
   takenDate("Taken Date"),
   result("Result"),

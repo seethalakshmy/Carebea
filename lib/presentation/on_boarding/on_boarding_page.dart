@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +13,6 @@ import '../widget/custom_card.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_text.dart';
 import '../widget/header_view.dart';
-import 'modules/build_profile/build_profile_view.dart';
-import 'modules/health_aid_agreement/home_health_agreement_view.dart';
-import 'modules/personal_details/personal_details_view.dart';
 import 'modules/preference/preference_view.dart';
 import 'modules/qualification_details/qialification_view.dart';
 
@@ -68,10 +63,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
       //   pageController: controller,
       // ),
       //const OtpVerificationView(),
-      PersonalDetailsView(
+      /*PersonalDetailsView(
         onboardingBloc: _onboardingBloc,
         pageController: controller,
-      ),
+      ),*/
       QualificationView(
           state: _onboardingBloc.state,
           onboardingBloc: _onboardingBloc,

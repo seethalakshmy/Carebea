@@ -450,6 +450,9 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
           setIndex(e.key);
           var item = e.value;
           return DataRow2(
+            onTap: (){
+              _transactionDetails(item);
+            },
             cells: [
               DataCell(_rowsView(
                 text: _transactionBloc.pageIndex.toString(),

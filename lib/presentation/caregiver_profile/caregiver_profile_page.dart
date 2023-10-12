@@ -253,10 +253,11 @@ class _CareGiverProfilePageState extends State<CareGiverProfilePage>
                   userId: _userId,
                   verificationStatus: state.status ?? 0,
                   isStatusChangeWidget: true,
+                  isLoading: state.isLoadingStatusChangeApi,
                   onStatusChange: () {
                     context.read<CareGiverProfileBloc>().add(
                         CareGiverProfileEvent.onTappedStatusDropDown(
-                            state.isShowStatusDropDown ? false : true));
+                            !state.isShowStatusDropDown));
                   }),
             ),
             state.isShowStatusDropDown

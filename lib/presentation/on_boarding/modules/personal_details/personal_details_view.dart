@@ -558,7 +558,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return AppString.emptyZip.val;
-                    } else if (value.length != 9 && value.length != 5) {
+                    } else if (value.length != 10 && value.length != 5) {
                       return AppString.invalidZip.val;
                     }
                     return null;

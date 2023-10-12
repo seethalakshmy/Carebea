@@ -21,9 +21,7 @@ import '../../../domain/transaction_management/model/get_filters_response.dart';
 import '../../../infrastructure/service_request_management/service_request_management_repository.dart';
 
 part 'service_request_management_bloc.freezed.dart';
-
 part 'service_request_management_event.dart';
-
 part 'service_request_management_state.dart';
 
 class ServiceRequestManagementBloc
@@ -66,6 +64,9 @@ class ServiceRequestManagementBloc
     on<_ShowOrHideCompletedServices>(_showOrHideCompletedServices);
     on<_ShowOrHideIncompleteServices>(_showOrHideIncompleteServices);
     on<_ShowOrHideExtraServices>(_showOrHideExtraServices);
+    on<_ShowOrHideRefundDetails>(_showOrHideRefundDetails);
+    on<_WhoRequestedCancelRadioButton>(_whoRequestedCancelRadioButton);
+    on<_ShowOrHideTimeline>(_showOrHideTimeline);
   }
 
   _setDate(_SetDate event, Emitter<ServiceRequestManagementState> emit) async {
@@ -270,16 +271,22 @@ class ServiceRequestManagementBloc
 
   String generateDaysLeft(String date) {
     DateTime inputDate = DateTime.parse(date);
-    String days="";
-    if (inputDate.month > DateTime.now().month) {
-     if(inputDate.day>DateTime.now().day){
-       days = "${inputDate.month - DateTime.now().month} month(s) and ${inputDate.day - DateTime.now().day} day(s) left";
-     }else{
-       days = "${inputDate.month - DateTime.now().month} month(s) left";
-     }
-    }else{
-      if(inputDate.day>DateTime.now().day){
-        days = "${inputDate.day - DateTime.now().day} day(s) left";
+    String days = "";
+    if (inputDate.day > DateTime.now().day) {
+      days = "${inputDate.day - DateTime.now().day} day(s) left";
+    } else if (DateTime.now().day > inputDate.day) {
+      days = "${30 - (DateTime.now().day - inputDate.day)} day(s) left";
+    } else {
+      if ((inputDate.hour - DateTime.now().hour) > 1) {
+        days = "${inputDate.hour - DateTime.now().hour} hour(s) left";
+      } else {
+        if ((inputDate.minute - DateTime.now().minute) >= 1) {
+          days = "${(inputDate.minute - DateTime.now().minute)} minute(s) left";
+        } else if ((DateTime.now().minute - inputDate.minute) >= 1) {
+          days = "${(DateTime.now().minute - inputDate.minute)} minute(s) left";
+        } else {
+          days = "";
+        }
       }
     }
     print("upcoming days left : $days");
@@ -383,5 +390,19 @@ class ServiceRequestManagementBloc
   _showOrHideExtraServices(_ShowOrHideExtraServices event,
       Emitter<ServiceRequestManagementState> emit) {
     emit(state.copyWith(isShowingExtraServices: event.isShowing));
+  }
+
+  _showOrHideRefundDetails(_ShowOrHideRefundDetails event,
+      Emitter<ServiceRequestManagementState> emit) {
+    emit(state.copyWith(isShowingRefundDetails: event.isShowing));
+  }
+  _whoRequestedCancelRadioButton(_WhoRequestedCancelRadioButton event,
+      Emitter<ServiceRequestManagementState> emit) {
+    emit(state.copyWith(whoRequestedCancel: event.whoRequested));
+  }
+
+  _showOrHideTimeline(_ShowOrHideTimeline event,
+      Emitter<ServiceRequestManagementState> emit) {
+    emit(state.copyWith(isShowingTimeline: event.isShowing));
   }
 }

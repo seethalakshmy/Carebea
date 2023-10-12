@@ -94,28 +94,38 @@ class CareGiverProfileBloc
 
   _careGiverSendTrainingRequest(_CareGiverSendTrainingRequest event,
       Emitter<CareGiverProfileState> emit) async {
-    emit(state.copyWith(status: Verification.trainingStarted.val));
+    emit(state.copyWith(
+        status: Verification.trainingStarted.val,
+        isLoadingStatusChangeApi: true));
     final Either<ApiErrorHandler, VerifyResponse> result =
         await careGiverProfileRepository.careGiverSendTrainingRequest(
             userID: event.userId, adminId: event.adminId);
     CareGiverProfileState caregiverVerificationState = result.fold((l) {
       CSnackBar.showError(event.context, msg: l.error);
       emit(state.copyWith(
-          status: state.response?.data?.verificationStatus ?? 0));
-      return state.copyWith(error: l.error, isLoading: false, isError: true);
+          status: state.response?.data?.verificationStatus ?? 0,
+          isLoadingStatusChangeApi: false));
+      return state.copyWith(
+          error: l.error,
+          isLoading: false,
+          isError: true,
+          isLoadingStatusChangeApi: false);
     }, (r) {
+      emit(state.copyWith(isLoadingStatusChangeApi: false));
       if (r.status ?? false) {
-        // CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        add(CareGiverProfileEvent.onTappedStatusDropDown(
+            !state.isShowStatusDropDown));
       } else {
         emit(state.copyWith(
             status: state.response?.data?.verificationStatus ?? 0));
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
       return state.copyWith(
-        isLoading: false,
-        sendTrainingResponse: r,
-        isError: false,
-      );
+          isLoading: false,
+          sendTrainingResponse: r,
+          isError: false,
+          isLoadingStatusChangeApi: false);
     });
     emit(
       caregiverVerificationState,
@@ -124,7 +134,9 @@ class CareGiverProfileBloc
 
   _careGiverTrainingVerify(_CareGiverTrainingVerify event,
       Emitter<CareGiverProfileState> emit) async {
-    emit(state.copyWith(status: Verification.trainingCompleted.val));
+    emit(state.copyWith(
+        status: Verification.trainingCompleted.val,
+        isLoadingStatusChangeApi: true));
 
     final Either<ApiErrorHandler, VerifyResponse> homeResult =
         await careGiverProfileRepository.careGiverTrainingVerify(
@@ -132,11 +144,19 @@ class CareGiverProfileBloc
     CareGiverProfileState stateResult = homeResult.fold((l) {
       // CSnackBar.showError(event.context, msg: l.error);
       emit(state.copyWith(
-          status: state.response?.data?.verificationStatus ?? 0));
-      return state.copyWith(error: l.error, isLoading: false, isError: true);
+          status: state.response?.data?.verificationStatus ?? 0,
+          isLoadingStatusChangeApi: false));
+      return state.copyWith(
+          error: l.error,
+          isLoading: false,
+          isError: true,
+          isLoadingStatusChangeApi: false);
     }, (r) {
+      emit(state.copyWith(isLoadingStatusChangeApi: false));
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        add(CareGiverProfileEvent.onTappedStatusDropDown(
+            !state.isShowStatusDropDown));
       } else {
         emit(state.copyWith(
             status: state.response?.data?.verificationStatus ?? 0));
@@ -144,9 +164,9 @@ class CareGiverProfileBloc
       }
 
       return state.copyWith(
-        trainingVerifyResponse: r,
-        isLoading: false,
-      );
+          trainingVerifyResponse: r,
+          isLoading: false,
+          isLoadingStatusChangeApi: false);
     });
     emit(
       stateResult,
@@ -155,6 +175,7 @@ class CareGiverProfileBloc
 
   _careGiverInterViewVerify(_CareGiverInterViewVerify event,
       Emitter<CareGiverProfileState> emit) async {
+    emit(state.copyWith(isLoadingStatusChangeApi: true));
     if (event.status == Interview.started.val) {
       emit(state.copyWith(status: Verification.interViewStarted.val));
     } else if (event.status == Interview.failed.val) {
@@ -168,11 +189,19 @@ class CareGiverProfileBloc
     CareGiverProfileState stateResult = homeResult.fold((l) {
       CSnackBar.showError(event.context, msg: l.error);
       emit(state.copyWith(
-          status: state.response?.data?.verificationStatus ?? 0));
-      return state.copyWith(error: l.error, isLoading: false, isError: true);
+          status: state.response?.data?.verificationStatus ?? 0,
+          isLoadingStatusChangeApi: false));
+      return state.copyWith(
+          error: l.error,
+          isLoading: false,
+          isError: true,
+          isLoadingStatusChangeApi: false);
     }, (r) {
+      emit(state.copyWith(isLoadingStatusChangeApi: false));
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        add(CareGiverProfileEvent.onTappedStatusDropDown(
+            !state.isShowStatusDropDown));
         if (event.status == Interview.completed.val) {
           autoTabRouter?.navigate(CareGiverDetailRoute(id: event.userId));
         }
@@ -187,9 +216,7 @@ class CareGiverProfileBloc
         isLoading: false,
       );
     });
-    emit(
-      stateResult,
-    );
+    emit(stateResult);
   }
 
   _onTapDropDown(_OnTappedStatusDropDown event,

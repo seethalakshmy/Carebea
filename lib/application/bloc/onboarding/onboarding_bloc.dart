@@ -10,15 +10,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../../core/custom_snackbar.dart';
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
 import '../../../domain/on_boarding/models/preferences/pet_list_response.dart';
 import '../../../domain/on_boarding/models/preferences/pets_model.dart';
 import '../../../domain/on_boarding/models/preferences/preference_language_model.dart';
-import '../../../domain/on_boarding/models/preferences/preference_request_model.dart';
 import '../../../domain/on_boarding/models/preferences/years_of_experience_response.dart';
 import '../../../domain/on_boarding/models/services/get_services_response.dart';
-import '../../../domain/on_boarding/models/services/service_request_model.dart';
 import '../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/city_list_response.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/gender_list_response.dart';
@@ -54,6 +54,12 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   List<String> uploadedBlsDocList = [];
   List<String> uploadedTbDocList = [];
   List<String> uploadedCovidDocList = [];
+
+  List<PlatformFile> hhaBytesList = [];
+  List<PlatformFile> blsBytesList = [];
+  List<PlatformFile> tbBytesList = [];
+  List<PlatformFile> covidBytesList = [];
+
   bool nextButtonClicked = false;
   String stateId = "";
   String relationId = "";
@@ -621,10 +627,20 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     });
     emit(accountState);
   }
+
   String formatDate(String date) {
     DateTime originalDate = DateFormat('MM/dd/yyyy').parse(date);
     String formattedDate = DateFormat('dd/MM/yyyy').format(originalDate);
     print("date before format : $date\nafter format : $formattedDate");
     return formattedDate;
+  }
+
+  void launchURL({required String url,required BuildContext context}) async {
+    Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      CSnackBar.showError(context, msg: "Could not launch this URL");
+    }
   }
 }
