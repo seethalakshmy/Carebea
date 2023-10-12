@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 
+import '../../../core/custom_snackbar.dart';
 import '../../../core/enum.dart';
 import '../../../domain/complaint_details/models/complaint_details_response_model.dart';
 import '../../../domain/complaint_details/models/get_service_response_model.dart';
@@ -68,12 +69,15 @@ class ComplaintDetailBloc
             status: event.status,
             comment: event.comment);
     var userState = result.fold((l) {
+      CSnackBar.showError(event.context!, msg: l.error);
+
       return state.copyWith(
           error: l.error,
           updateComplaintOption: Some(Left(l)),
           isLoading: false);
     }, (r) {
       add(ComplaintDetailEvent.getComplaintDetails(complaintId: compId));
+      CSnackBar.showSuccess(event.context!, msg: r.message ?? 'Success');
       return state.copyWith(
           updateComplaintOption: Some(Right(r)), isLoading: false);
     });

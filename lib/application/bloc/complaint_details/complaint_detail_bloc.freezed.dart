@@ -19,7 +19,8 @@ mixin _$ComplaintDetailEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String complaintId) getComplaintDetails,
-    required TResult Function(String complaintId, int status, String comment)
+    required TResult Function(BuildContext context, String complaintId,
+            int status, String comment)
         updateComplaint,
     required TResult Function(String serviceId, BuildContext context)
         getService,
@@ -30,7 +31,8 @@ mixin _$ComplaintDetailEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String complaintId)? getComplaintDetails,
-    TResult? Function(String complaintId, int status, String comment)?
+    TResult? Function(BuildContext context, String complaintId, int status,
+            String comment)?
         updateComplaint,
     TResult? Function(String serviceId, BuildContext context)? getService,
     TResult? Function(String transactionId, String serviceId)?
@@ -40,7 +42,8 @@ mixin _$ComplaintDetailEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String complaintId)? getComplaintDetails,
-    TResult Function(String complaintId, int status, String comment)?
+    TResult Function(BuildContext context, String complaintId, int status,
+            String comment)?
         updateComplaint,
     TResult Function(String serviceId, BuildContext context)? getService,
     TResult Function(String transactionId, String serviceId)?
@@ -162,7 +165,8 @@ class _$_GetComplaintDetails implements _GetComplaintDetails {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String complaintId) getComplaintDetails,
-    required TResult Function(String complaintId, int status, String comment)
+    required TResult Function(BuildContext context, String complaintId,
+            int status, String comment)
         updateComplaint,
     required TResult Function(String serviceId, BuildContext context)
         getService,
@@ -176,7 +180,8 @@ class _$_GetComplaintDetails implements _GetComplaintDetails {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String complaintId)? getComplaintDetails,
-    TResult? Function(String complaintId, int status, String comment)?
+    TResult? Function(BuildContext context, String complaintId, int status,
+            String comment)?
         updateComplaint,
     TResult? Function(String serviceId, BuildContext context)? getService,
     TResult? Function(String transactionId, String serviceId)?
@@ -189,7 +194,8 @@ class _$_GetComplaintDetails implements _GetComplaintDetails {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String complaintId)? getComplaintDetails,
-    TResult Function(String complaintId, int status, String comment)?
+    TResult Function(BuildContext context, String complaintId, int status,
+            String comment)?
         updateComplaint,
     TResult Function(String serviceId, BuildContext context)? getService,
     TResult Function(String transactionId, String serviceId)?
@@ -257,7 +263,8 @@ abstract class _$$_UpdateComplaintCopyWith<$Res> {
           _$_UpdateComplaint value, $Res Function(_$_UpdateComplaint) then) =
       __$$_UpdateComplaintCopyWithImpl<$Res>;
   @useResult
-  $Res call({String complaintId, int status, String comment});
+  $Res call(
+      {BuildContext context, String complaintId, int status, String comment});
 }
 
 /// @nodoc
@@ -271,11 +278,16 @@ class __$$_UpdateComplaintCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? context = null,
     Object? complaintId = null,
     Object? status = null,
     Object? comment = null,
   }) {
     return _then(_$_UpdateComplaint(
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
       complaintId: null == complaintId
           ? _value.complaintId
           : complaintId // ignore: cast_nullable_to_non_nullable
@@ -296,8 +308,13 @@ class __$$_UpdateComplaintCopyWithImpl<$Res>
 
 class _$_UpdateComplaint implements _UpdateComplaint {
   const _$_UpdateComplaint(
-      {required this.complaintId, required this.status, required this.comment});
+      {required this.context,
+      required this.complaintId,
+      required this.status,
+      required this.comment});
 
+  @override
+  final BuildContext context;
   @override
   final String complaintId;
   @override
@@ -307,7 +324,7 @@ class _$_UpdateComplaint implements _UpdateComplaint {
 
   @override
   String toString() {
-    return 'ComplaintDetailEvent.updateComplaint(complaintId: $complaintId, status: $status, comment: $comment)';
+    return 'ComplaintDetailEvent.updateComplaint(context: $context, complaintId: $complaintId, status: $status, comment: $comment)';
   }
 
   @override
@@ -315,6 +332,7 @@ class _$_UpdateComplaint implements _UpdateComplaint {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UpdateComplaint &&
+            (identical(other.context, context) || other.context == context) &&
             (identical(other.complaintId, complaintId) ||
                 other.complaintId == complaintId) &&
             (identical(other.status, status) || other.status == status) &&
@@ -322,7 +340,8 @@ class _$_UpdateComplaint implements _UpdateComplaint {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, complaintId, status, comment);
+  int get hashCode =>
+      Object.hash(runtimeType, context, complaintId, status, comment);
 
   @JsonKey(ignore: true)
   @override
@@ -334,34 +353,37 @@ class _$_UpdateComplaint implements _UpdateComplaint {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String complaintId) getComplaintDetails,
-    required TResult Function(String complaintId, int status, String comment)
+    required TResult Function(BuildContext context, String complaintId,
+            int status, String comment)
         updateComplaint,
     required TResult Function(String serviceId, BuildContext context)
         getService,
     required TResult Function(String transactionId, String serviceId)
         getTransactionDetails,
   }) {
-    return updateComplaint(complaintId, status, comment);
+    return updateComplaint(context, complaintId, status, comment);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String complaintId)? getComplaintDetails,
-    TResult? Function(String complaintId, int status, String comment)?
+    TResult? Function(BuildContext context, String complaintId, int status,
+            String comment)?
         updateComplaint,
     TResult? Function(String serviceId, BuildContext context)? getService,
     TResult? Function(String transactionId, String serviceId)?
         getTransactionDetails,
   }) {
-    return updateComplaint?.call(complaintId, status, comment);
+    return updateComplaint?.call(context, complaintId, status, comment);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String complaintId)? getComplaintDetails,
-    TResult Function(String complaintId, int status, String comment)?
+    TResult Function(BuildContext context, String complaintId, int status,
+            String comment)?
         updateComplaint,
     TResult Function(String serviceId, BuildContext context)? getService,
     TResult Function(String transactionId, String serviceId)?
@@ -369,7 +391,7 @@ class _$_UpdateComplaint implements _UpdateComplaint {
     required TResult orElse(),
   }) {
     if (updateComplaint != null) {
-      return updateComplaint(complaintId, status, comment);
+      return updateComplaint(context, complaintId, status, comment);
     }
     return orElse();
   }
@@ -415,10 +437,12 @@ class _$_UpdateComplaint implements _UpdateComplaint {
 
 abstract class _UpdateComplaint implements ComplaintDetailEvent {
   const factory _UpdateComplaint(
-      {required final String complaintId,
+      {required final BuildContext context,
+      required final String complaintId,
       required final int status,
       required final String comment}) = _$_UpdateComplaint;
 
+  BuildContext get context;
   String get complaintId;
   int get status;
   String get comment;
@@ -501,7 +525,8 @@ class _$_GetService implements _GetService {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String complaintId) getComplaintDetails,
-    required TResult Function(String complaintId, int status, String comment)
+    required TResult Function(BuildContext context, String complaintId,
+            int status, String comment)
         updateComplaint,
     required TResult Function(String serviceId, BuildContext context)
         getService,
@@ -515,7 +540,8 @@ class _$_GetService implements _GetService {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String complaintId)? getComplaintDetails,
-    TResult? Function(String complaintId, int status, String comment)?
+    TResult? Function(BuildContext context, String complaintId, int status,
+            String comment)?
         updateComplaint,
     TResult? Function(String serviceId, BuildContext context)? getService,
     TResult? Function(String transactionId, String serviceId)?
@@ -528,7 +554,8 @@ class _$_GetService implements _GetService {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String complaintId)? getComplaintDetails,
-    TResult Function(String complaintId, int status, String comment)?
+    TResult Function(BuildContext context, String complaintId, int status,
+            String comment)?
         updateComplaint,
     TResult Function(String serviceId, BuildContext context)? getService,
     TResult Function(String transactionId, String serviceId)?
@@ -669,7 +696,8 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String complaintId) getComplaintDetails,
-    required TResult Function(String complaintId, int status, String comment)
+    required TResult Function(BuildContext context, String complaintId,
+            int status, String comment)
         updateComplaint,
     required TResult Function(String serviceId, BuildContext context)
         getService,
@@ -683,7 +711,8 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String complaintId)? getComplaintDetails,
-    TResult? Function(String complaintId, int status, String comment)?
+    TResult? Function(BuildContext context, String complaintId, int status,
+            String comment)?
         updateComplaint,
     TResult? Function(String serviceId, BuildContext context)? getService,
     TResult? Function(String transactionId, String serviceId)?
@@ -696,7 +725,8 @@ class _$_GetTransactionDetails implements _GetTransactionDetails {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String complaintId)? getComplaintDetails,
-    TResult Function(String complaintId, int status, String comment)?
+    TResult Function(BuildContext context, String complaintId, int status,
+            String comment)?
         updateComplaint,
     TResult Function(String serviceId, BuildContext context)? getService,
     TResult Function(String transactionId, String serviceId)?

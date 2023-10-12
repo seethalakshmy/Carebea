@@ -6,6 +6,7 @@ class ComplaintDetailEvent with _$ComplaintDetailEvent {
       {required String complaintId}) = _GetComplaintDetails;
 
   const factory ComplaintDetailEvent.updateComplaint({
+    required BuildContext context,
     required String complaintId,
     required int status,
     required String comment,

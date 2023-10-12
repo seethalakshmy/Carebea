@@ -6,10 +6,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pdf_render/pdf_render_widgets.dart';
 
 import '../../application/bloc/complaint_details/complaint_detail_bloc.dart';
+import '../../application/bloc/transaction_management/transaction_management_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
 import '../../domain/transaction_management/model/transactions.dart';
+import '../../infrastructure/transaction_management/transactions_repository.dart';
 import '../caregiver_detail/widgets/svg_text.dart';
 import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';
@@ -39,6 +41,7 @@ class SupportTicketsDetailPage extends StatefulWidget {
 
 class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
   late ComplaintDetailBloc _complaintDetailBloc;
+  final TransactionManagementBloc _transactionManagementBloc = TransactionManagementBloc(TransactionsRepository());
   late TextEditingController _commentController;
   final pdfController = PdfViewerController();
 
@@ -230,9 +233,6 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
   }
 
   CustomSizedBox _topLeftView(BuildContext context) {
-    print(
-        "image url : ${_complaintDetailBloc.complaintDetailsList[0]
-            .userPicture}");
     return CustomSizedBox(
       width: isXs(context) ? DBL.oneFifty.val : DBL.twoHundred.val,
       child: Column(
@@ -316,7 +316,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
                           complaintId: _complaintDetailBloc.compId,
                           status: _complaintDetailBloc
                               .selectedStatusFromDropdown,
-                          comment: _commentController.text.trim()));
+                          comment: _commentController.text.trim(), context: context));
                   _commentController.clear();
                 },
                 text: AppString.submit.val,
@@ -416,6 +416,15 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
         fontSize: FS.font13PointFive.val);
   }
 
+  _serviceIdWidget() {
+    return RowColonCombo.twoHundred(
+        customWidthLg1: 180,
+        label: AppString.serviceId.val,
+        value: _complaintDetailBloc.complaintDetailsList[0]
+            .serviceBookingId ?? "",
+        fontSize: FS.font13PointFive.val);
+  }
+
   _complaintCategoryWidget() {
     return RowColonCombo.twoHundred(
         customWidthLg1: 180,
@@ -495,6 +504,8 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
                 .uniqueTransactionId == null
             ? null
             : () {
+          print('testing data ${Transactions.fromJson(
+              _complaintDetailBloc.detailsList[0].toJson())}');
           _transactionDetails(Transactions.fromJson(
               _complaintDetailBloc.detailsList[0].toJson()));
         } : null,
@@ -698,7 +709,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
       items: [
         AppString.neww.val,
         AppString.onGoing.val,
-        AppString.completed.val,
+        AppString.closed.val,
         AppString.canceled.val
       ]
           .asMap()
