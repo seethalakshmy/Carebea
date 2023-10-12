@@ -58,7 +58,7 @@ class _ServicesViewState extends State<ServicesView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _topArea(context),
+                  _topArea(context, state),
                   CustomSizedBox(height: DBL.twenty.val),
                   _listView(state),
                   CommonNextOrCancelButtons(
@@ -104,7 +104,7 @@ class _ServicesViewState extends State<ServicesView> {
     );
   }
 
-  _topArea(BuildContext context) {
+  _topArea(BuildContext context, OnboardingState state) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

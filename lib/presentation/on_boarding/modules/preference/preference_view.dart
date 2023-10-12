@@ -38,7 +38,11 @@ class PreferenceView extends StatelessWidget {
           some.fold((l) {
             CSnackBar.showError(context, msg: l.error);
           }, (r) {
-            context.router.navigate(const CaregiverCreationRoute());
+            if (SharedPreffUtil().getIsFromWebsite == false) {
+              context.router.navigate(const CaregiverCreationRoute());
+            } else {
+              pageController.jumpToPage(pageController.page!.toInt() + 1);
+            }
           });
         });
       },
