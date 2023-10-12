@@ -161,6 +161,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     on<_SubmitBuildProfile>(_submitBuildProfile);
     on<_SubmitAccountDetails>(_submitAccountDetails);
     on<_SubmitReference>(_submitReference);
+    on<_SelectAllServices>(_selectAllServices);
     print("inside bloc ${SharedPreffUtil().getIsFromWebsite}");
 
     on<_AddReference>((event, emit) {
@@ -628,6 +629,10 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     emit(accountState);
   }
 
+  _selectAllServices(_SelectAllServices event, Emitter<OnboardingState> emit) {
+    emit(state.copyWith(isAllServicesSelected: event.isAllSelected));
+  }
+
   String formatDate(String date) {
     DateTime originalDate = DateFormat('MM/dd/yyyy').parse(date);
     String formattedDate = DateFormat('dd/MM/yyyy').format(originalDate);
@@ -635,7 +640,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     return formattedDate;
   }
 
-  void launchURL({required String url,required BuildContext context}) async {
+  void launchURL({required String url, required BuildContext context}) async {
     Uri uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);

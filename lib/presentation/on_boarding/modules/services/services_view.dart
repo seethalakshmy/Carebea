@@ -59,7 +59,7 @@ class _ServicesViewState extends State<ServicesView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _topArea(context, state),
-                  CustomSizedBox(height: DBL.twenty.val),
+                  CustomSizedBox(height: DBL.ten.val),
                   _listView(state),
                   CommonNextOrCancelButtons(
                     isLoading: state.isLoading,
@@ -92,6 +92,8 @@ class _ServicesViewState extends State<ServicesView> {
                                       .onboardingBloc.selectedTier2ServiceList,
                                 ).toJson()));
                       }
+                      print(
+                          "selected list in button : ${widget.onboardingBloc.selectedTier1ServiceList}");
                       widget.onboardingBloc.nextButtonClicked = true;
                     },
                   )
@@ -127,24 +129,16 @@ class _ServicesViewState extends State<ServicesView> {
           color: AppColor.lightGrey.val,
         ),
         CustomSizedBox(height: DBL.ten.val),
-        Wrap(
-          children: [
-            CustomText(
-              AppString.selectAllServices.val,
-              softWrap: true,
-              style: TS().gRoboto(
-                  fontSize: Responsive.isWeb(context)
-                      ? DBL.sixteen.val
-                      : DBL.fourteen.val,
-                  fontWeight: FW.w400.val,
-                  color: AppColor.black.val),
-              textAlign: TextAlign.start,
-            ),
-            CustomButton(
-              onPressed: () {},
-              text: AppString.select.val,
-            )
-          ],
+        CustomText(
+          AppString.selectAllServices.val,
+          softWrap: true,
+          style: TS().gRoboto(
+              fontSize: Responsive.isWeb(context)
+                  ? DBL.sixteen.val
+                  : DBL.fourteen.val,
+              fontWeight: FW.w400.val,
+              color: AppColor.black.val),
+          textAlign: TextAlign.start,
         ),
         CustomSizedBox(height: DBL.ten.val),
         CustomContainer(
@@ -164,8 +158,51 @@ class _ServicesViewState extends State<ServicesView> {
                 color: AppColor.white.val),
             textAlign: TextAlign.start,
           ),
-        )
+        ),
+        CustomSizedBox(height: DBL.twenty.val),
+        _selectAllButtonWidget(state)
       ],
+    );
+  }
+
+  Align _selectAllButtonWidget(OnboardingState state) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: CustomButton(
+        onPressed: () {
+          widget.onboardingBloc.selectedTier1ServiceList.clear();
+          widget.onboardingBloc.selectedTier2ServiceList.clear();
+          widget.onboardingBloc.add(OnboardingEvent.selectAllServices(
+              isAllSelected: !state.isAllServicesSelected));
+          for (int i = 0; i < state.serviceList.length; i++) {
+            state.serviceList[i].selected = !state.isAllServicesSelected;
+            if (!state.isAllServicesSelected) {
+              if (state.serviceList[i].type == 1) {
+                widget.onboardingBloc.selectedTier1ServiceList
+                    .add(state.serviceList[i].id);
+              } else {
+                widget.onboardingBloc.selectedTier2ServiceList
+                    .add(state.serviceList[i].id);
+              }
+            } else {
+              if (state.serviceList[i].type == 1) {
+                widget.onboardingBloc.selectedTier1ServiceList
+                    .remove(state.serviceList[i].id);
+              } else {
+                widget.onboardingBloc.selectedTier2ServiceList
+                    .remove(state.serviceList[i].id);
+              }
+            }
+            print(
+                "list length :: ${(widget.onboardingBloc.selectedTier1ServiceList.length) + (widget.onboardingBloc.selectedTier2ServiceList.length)}");
+          }
+        },
+        text: !state.isAllServicesSelected
+            ? AppString.selectAll.val
+            : AppString.deselectAll.val,
+        textStyle:
+            TS().gRoboto(fontSize: FS.font11.val, fontWeight: FW.w400.val),
+      ),
     );
   }
 
@@ -203,9 +240,21 @@ class _ServicesViewState extends State<ServicesView> {
                       onChanged: (value) {
                         //state.serviceList[index].selected = value!;
 
+                        if (index + 1 != state.serviceList.length) {
+                          widget.onboardingBloc.add(
+                              OnboardingEvent.selectAllServices(
+                                  isAllSelected: false));
+                        } else {
+                          widget.onboardingBloc.add(
+                              OnboardingEvent.selectAllServices(
+                                  isAllSelected: true));
+                        }
                         widget.onboardingBloc.add(
                             OnboardingEvent.serviceSelected(index, value!));
-                        if (!state.serviceList[index].selected) {
+
+                        if (!state.serviceList[index].selected ||
+                            !widget
+                                .onboardingBloc.state.isAllServicesSelected) {
                           if (state.serviceList[index].type == 1) {
                             widget.onboardingBloc.selectedTier1ServiceList
                                 .add(state.serviceList[index].id);
@@ -222,6 +271,8 @@ class _ServicesViewState extends State<ServicesView> {
                                 .remove(state.serviceList[index].id);
                           }
                         }
+                        print(
+                            "selected services list1 : ${widget.onboardingBloc.state.serviceList[index].selected}");
                       },
                     ),
                   ],

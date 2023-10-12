@@ -104,6 +104,7 @@ mixin _$OnboardingEvent {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -193,6 +194,7 @@ mixin _$OnboardingEvent {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -282,6 +284,7 @@ mixin _$OnboardingEvent {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -331,6 +334,7 @@ mixin _$OnboardingEvent {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -374,6 +378,7 @@ mixin _$OnboardingEvent {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -417,6 +422,7 @@ mixin _$OnboardingEvent {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -776,6 +782,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return personalDetails(
         userId,
@@ -884,6 +891,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return personalDetails?.call(
         userId,
@@ -992,6 +1000,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (personalDetails != null) {
@@ -1063,6 +1072,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return personalDetails(this);
   }
@@ -1109,6 +1119,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return personalDetails?.call(this);
   }
@@ -1155,6 +1166,7 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (personalDetails != null) {
@@ -1456,6 +1468,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return qualificationDetails(
         userId,
@@ -1557,6 +1570,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return qualificationDetails?.call(
         userId,
@@ -1658,6 +1672,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (qualificationDetails != null) {
@@ -1722,6 +1737,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return qualificationDetails(this);
   }
@@ -1768,6 +1784,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return qualificationDetails?.call(this);
   }
@@ -1814,6 +1831,7 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (qualificationDetails != null) {
@@ -2091,6 +2109,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return preferenceDetails(
         userId,
@@ -2190,6 +2209,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return preferenceDetails?.call(
         userId,
@@ -2289,6 +2309,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (preferenceDetails != null) {
@@ -2351,6 +2372,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return preferenceDetails(this);
   }
@@ -2397,6 +2419,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return preferenceDetails?.call(this);
   }
@@ -2443,6 +2466,7 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (preferenceDetails != null) {
@@ -2598,6 +2622,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return commonData();
   }
@@ -2690,6 +2715,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return commonData?.call();
   }
@@ -2782,6 +2808,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (commonData != null) {
@@ -2837,6 +2864,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return commonData(this);
   }
@@ -2883,6 +2911,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return commonData?.call(this);
   }
@@ -2929,6 +2958,7 @@ class _$_CommonDataLists implements _CommonDataLists {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (commonData != null) {
@@ -3102,6 +3132,7 @@ class _$_CityLists implements _CityLists {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return cityList(searchQuery, wantLoading);
   }
@@ -3194,6 +3225,7 @@ class _$_CityLists implements _CityLists {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return cityList?.call(searchQuery, wantLoading);
   }
@@ -3286,6 +3318,7 @@ class _$_CityLists implements _CityLists {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (cityList != null) {
@@ -3341,6 +3374,7 @@ class _$_CityLists implements _CityLists {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return cityList(this);
   }
@@ -3387,6 +3421,7 @@ class _$_CityLists implements _CityLists {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return cityList?.call(this);
   }
@@ -3433,6 +3468,7 @@ class _$_CityLists implements _CityLists {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (cityList != null) {
@@ -3615,6 +3651,7 @@ class _$_StateLists implements _StateLists {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return stateList(stateSearchQuery, wantLoading);
   }
@@ -3707,6 +3744,7 @@ class _$_StateLists implements _StateLists {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return stateList?.call(stateSearchQuery, wantLoading);
   }
@@ -3799,6 +3837,7 @@ class _$_StateLists implements _StateLists {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (stateList != null) {
@@ -3854,6 +3893,7 @@ class _$_StateLists implements _StateLists {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return stateList(this);
   }
@@ -3900,6 +3940,7 @@ class _$_StateLists implements _StateLists {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return stateList?.call(this);
   }
@@ -3946,6 +3987,7 @@ class _$_StateLists implements _StateLists {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (stateList != null) {
@@ -4091,6 +4133,7 @@ class _$_RelationList implements _RelationList {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return relationList();
   }
@@ -4183,6 +4226,7 @@ class _$_RelationList implements _RelationList {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return relationList?.call();
   }
@@ -4275,6 +4319,7 @@ class _$_RelationList implements _RelationList {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (relationList != null) {
@@ -4330,6 +4375,7 @@ class _$_RelationList implements _RelationList {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return relationList(this);
   }
@@ -4376,6 +4422,7 @@ class _$_RelationList implements _RelationList {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return relationList?.call(this);
   }
@@ -4422,6 +4469,7 @@ class _$_RelationList implements _RelationList {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (relationList != null) {
@@ -4585,6 +4633,7 @@ class _$_SubmitReference implements _SubmitReference {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return submitReference(userId);
   }
@@ -4677,6 +4726,7 @@ class _$_SubmitReference implements _SubmitReference {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return submitReference?.call(userId);
   }
@@ -4769,6 +4819,7 @@ class _$_SubmitReference implements _SubmitReference {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (submitReference != null) {
@@ -4824,6 +4875,7 @@ class _$_SubmitReference implements _SubmitReference {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return submitReference(this);
   }
@@ -4870,6 +4922,7 @@ class _$_SubmitReference implements _SubmitReference {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return submitReference?.call(this);
   }
@@ -4916,6 +4969,7 @@ class _$_SubmitReference implements _SubmitReference {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (submitReference != null) {
@@ -5059,6 +5113,7 @@ class _$_AddReference implements _AddReference {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return addReference();
   }
@@ -5151,6 +5206,7 @@ class _$_AddReference implements _AddReference {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return addReference?.call();
   }
@@ -5243,6 +5299,7 @@ class _$_AddReference implements _AddReference {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (addReference != null) {
@@ -5298,6 +5355,7 @@ class _$_AddReference implements _AddReference {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return addReference(this);
   }
@@ -5344,6 +5402,7 @@ class _$_AddReference implements _AddReference {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return addReference?.call(this);
   }
@@ -5390,6 +5449,7 @@ class _$_AddReference implements _AddReference {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (addReference != null) {
@@ -5553,6 +5613,7 @@ class _$DeleteReference implements DeleteReference {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return deleteReference(index);
   }
@@ -5645,6 +5706,7 @@ class _$DeleteReference implements DeleteReference {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return deleteReference?.call(index);
   }
@@ -5737,6 +5799,7 @@ class _$DeleteReference implements DeleteReference {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (deleteReference != null) {
@@ -5792,6 +5855,7 @@ class _$DeleteReference implements DeleteReference {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return deleteReference(this);
   }
@@ -5838,6 +5902,7 @@ class _$DeleteReference implements DeleteReference {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return deleteReference?.call(this);
   }
@@ -5884,6 +5949,7 @@ class _$DeleteReference implements DeleteReference {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (deleteReference != null) {
@@ -6052,6 +6118,7 @@ class _$UpdateReference implements UpdateReference {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return updateReference(index);
   }
@@ -6144,6 +6211,7 @@ class _$UpdateReference implements UpdateReference {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return updateReference?.call(index);
   }
@@ -6236,6 +6304,7 @@ class _$UpdateReference implements UpdateReference {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (updateReference != null) {
@@ -6291,6 +6360,7 @@ class _$UpdateReference implements UpdateReference {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return updateReference(this);
   }
@@ -6337,6 +6407,7 @@ class _$UpdateReference implements UpdateReference {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return updateReference?.call(this);
   }
@@ -6383,6 +6454,7 @@ class _$UpdateReference implements UpdateReference {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (updateReference != null) {
@@ -6560,6 +6632,7 @@ class _$EditReference implements EditReference {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return editReference(index, reference);
   }
@@ -6652,6 +6725,7 @@ class _$EditReference implements EditReference {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return editReference?.call(index, reference);
   }
@@ -6744,6 +6818,7 @@ class _$EditReference implements EditReference {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (editReference != null) {
@@ -6799,6 +6874,7 @@ class _$EditReference implements EditReference {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return editReference(this);
   }
@@ -6845,6 +6921,7 @@ class _$EditReference implements EditReference {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return editReference?.call(this);
   }
@@ -6891,6 +6968,7 @@ class _$EditReference implements EditReference {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (editReference != null) {
@@ -7036,6 +7114,7 @@ class _$_YearsOfExp implements _YearsOfExp {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return yearsOfExpList();
   }
@@ -7128,6 +7207,7 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return yearsOfExpList?.call();
   }
@@ -7220,6 +7300,7 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (yearsOfExpList != null) {
@@ -7275,6 +7356,7 @@ class _$_YearsOfExp implements _YearsOfExp {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return yearsOfExpList(this);
   }
@@ -7321,6 +7403,7 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return yearsOfExpList?.call(this);
   }
@@ -7367,6 +7450,7 @@ class _$_YearsOfExp implements _YearsOfExp {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (yearsOfExpList != null) {
@@ -7531,6 +7615,7 @@ class _$_GetPetList implements _GetPetList {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return petsList(petSearchKey);
   }
@@ -7623,6 +7708,7 @@ class _$_GetPetList implements _GetPetList {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return petsList?.call(petSearchKey);
   }
@@ -7715,6 +7801,7 @@ class _$_GetPetList implements _GetPetList {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (petsList != null) {
@@ -7770,6 +7857,7 @@ class _$_GetPetList implements _GetPetList {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return petsList(this);
   }
@@ -7816,6 +7904,7 @@ class _$_GetPetList implements _GetPetList {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return petsList?.call(this);
   }
@@ -7862,6 +7951,7 @@ class _$_GetPetList implements _GetPetList {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (petsList != null) {
@@ -8049,6 +8139,7 @@ class _$_GetLanguageList implements _GetLanguageList {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return languageList(languageSearchKey, this.languageList);
   }
@@ -8141,6 +8232,7 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return languageList?.call(languageSearchKey, this.languageList);
   }
@@ -8233,6 +8325,7 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (languageList != null) {
@@ -8288,6 +8381,7 @@ class _$_GetLanguageList implements _GetLanguageList {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return languageList(this);
   }
@@ -8334,6 +8428,7 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return languageList?.call(this);
   }
@@ -8380,6 +8475,7 @@ class _$_GetLanguageList implements _GetLanguageList {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (languageList != null) {
@@ -8551,6 +8647,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return radioHHA(isSelected);
   }
@@ -8643,6 +8740,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return radioHHA?.call(isSelected);
   }
@@ -8735,6 +8833,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (radioHHA != null) {
@@ -8790,6 +8889,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return radioHHA(this);
   }
@@ -8836,6 +8936,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return radioHHA?.call(this);
   }
@@ -8882,6 +8983,7 @@ class _$_RadioHHASelected implements _RadioHHASelected {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (radioHHA != null) {
@@ -9051,6 +9153,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return radioBLS(isSelected);
   }
@@ -9143,6 +9246,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return radioBLS?.call(isSelected);
   }
@@ -9235,6 +9339,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (radioBLS != null) {
@@ -9290,6 +9395,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return radioBLS(this);
   }
@@ -9336,6 +9442,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return radioBLS?.call(this);
   }
@@ -9382,6 +9489,7 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (radioBLS != null) {
@@ -9551,6 +9659,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return radioTB(isSelected);
   }
@@ -9643,6 +9752,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return radioTB?.call(isSelected);
   }
@@ -9735,6 +9845,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (radioTB != null) {
@@ -9790,6 +9901,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return radioTB(this);
   }
@@ -9836,6 +9948,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return radioTB?.call(this);
   }
@@ -9882,6 +9995,7 @@ class _$_RadioTBSelected implements _RadioTBSelected {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (radioTB != null) {
@@ -10052,6 +10166,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return radioCovid(isSelected);
   }
@@ -10144,6 +10259,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return radioCovid?.call(isSelected);
   }
@@ -10236,6 +10352,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (radioCovid != null) {
@@ -10291,6 +10408,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return radioCovid(this);
   }
@@ -10337,6 +10455,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return radioCovid?.call(this);
   }
@@ -10383,6 +10502,7 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (radioCovid != null) {
@@ -10555,6 +10675,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return radioExperience(isSelected);
   }
@@ -10647,6 +10768,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return radioExperience?.call(isSelected);
   }
@@ -10739,6 +10861,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (radioExperience != null) {
@@ -10794,6 +10917,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return radioExperience(this);
   }
@@ -10840,6 +10964,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return radioExperience?.call(this);
   }
@@ -10886,6 +11011,7 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (radioExperience != null) {
@@ -11057,6 +11183,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return radioSmoker(isSelected);
   }
@@ -11149,6 +11276,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return radioSmoker?.call(isSelected);
   }
@@ -11241,6 +11369,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (radioSmoker != null) {
@@ -11296,6 +11425,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return radioSmoker(this);
   }
@@ -11342,6 +11472,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return radioSmoker?.call(this);
   }
@@ -11388,6 +11519,7 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (radioSmoker != null) {
@@ -11561,6 +11693,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return radioTransportation(isSelected);
   }
@@ -11653,6 +11786,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return radioTransportation?.call(isSelected);
   }
@@ -11745,6 +11879,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (radioTransportation != null) {
@@ -11800,6 +11935,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return radioTransportation(this);
   }
@@ -11846,6 +11982,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return radioTransportation?.call(this);
   }
@@ -11892,6 +12029,7 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (radioTransportation != null) {
@@ -12062,6 +12200,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return radioPet(isSelected);
   }
@@ -12154,6 +12293,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return radioPet?.call(isSelected);
   }
@@ -12246,6 +12386,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (radioPet != null) {
@@ -12301,6 +12442,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return radioPet(this);
   }
@@ -12347,6 +12489,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return radioPet?.call(this);
   }
@@ -12393,6 +12536,7 @@ class _$_RadioPetSelected implements _RadioPetSelected {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (radioPet != null) {
@@ -12563,6 +12707,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return radioLanguage(isSelected);
   }
@@ -12655,6 +12800,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return radioLanguage?.call(isSelected);
   }
@@ -12747,6 +12893,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (radioLanguage != null) {
@@ -12802,6 +12949,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return radioLanguage(this);
   }
@@ -12848,6 +12996,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return radioLanguage?.call(this);
   }
@@ -12894,6 +13043,7 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (radioLanguage != null) {
@@ -13064,6 +13214,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return profilePicSelection(bytes);
   }
@@ -13156,6 +13307,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return profilePicSelection?.call(bytes);
   }
@@ -13248,6 +13400,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (profilePicSelection != null) {
@@ -13303,6 +13456,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return profilePicSelection(this);
   }
@@ -13349,6 +13503,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return profilePicSelection?.call(this);
   }
@@ -13395,6 +13550,7 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (profilePicSelection != null) {
@@ -13588,6 +13744,7 @@ class _$_SecurityDocumentUploadSelected
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return securityDocumentUpload(bytesList, listUpdated);
   }
@@ -13680,6 +13837,7 @@ class _$_SecurityDocumentUploadSelected
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return securityDocumentUpload?.call(bytesList, listUpdated);
   }
@@ -13772,6 +13930,7 @@ class _$_SecurityDocumentUploadSelected
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (securityDocumentUpload != null) {
@@ -13827,6 +13986,7 @@ class _$_SecurityDocumentUploadSelected
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return securityDocumentUpload(this);
   }
@@ -13873,6 +14033,7 @@ class _$_SecurityDocumentUploadSelected
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return securityDocumentUpload?.call(this);
   }
@@ -13919,6 +14080,7 @@ class _$_SecurityDocumentUploadSelected
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (securityDocumentUpload != null) {
@@ -14112,6 +14274,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return hhaDocumentUpload(bytesList, listUpdated);
   }
@@ -14204,6 +14367,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return hhaDocumentUpload?.call(bytesList, listUpdated);
   }
@@ -14296,6 +14460,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (hhaDocumentUpload != null) {
@@ -14351,6 +14516,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return hhaDocumentUpload(this);
   }
@@ -14397,6 +14563,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return hhaDocumentUpload?.call(this);
   }
@@ -14443,6 +14610,7 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (hhaDocumentUpload != null) {
@@ -14636,6 +14804,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return blsDocumentUpload(bytesList, listUpdated);
   }
@@ -14728,6 +14897,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return blsDocumentUpload?.call(bytesList, listUpdated);
   }
@@ -14820,6 +14990,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (blsDocumentUpload != null) {
@@ -14875,6 +15046,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return blsDocumentUpload(this);
   }
@@ -14921,6 +15093,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return blsDocumentUpload?.call(this);
   }
@@ -14967,6 +15140,7 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (blsDocumentUpload != null) {
@@ -15159,6 +15333,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return tbDocumentUpload(bytesList, listUpdated);
   }
@@ -15251,6 +15426,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return tbDocumentUpload?.call(bytesList, listUpdated);
   }
@@ -15343,6 +15519,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (tbDocumentUpload != null) {
@@ -15398,6 +15575,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return tbDocumentUpload(this);
   }
@@ -15444,6 +15622,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return tbDocumentUpload?.call(this);
   }
@@ -15490,6 +15669,7 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (tbDocumentUpload != null) {
@@ -15683,6 +15863,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return covidDocumentUpload(bytesList, listUpdated);
   }
@@ -15775,6 +15956,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return covidDocumentUpload?.call(bytesList, listUpdated);
   }
@@ -15867,6 +16049,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (covidDocumentUpload != null) {
@@ -15922,6 +16105,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return covidDocumentUpload(this);
   }
@@ -15968,6 +16152,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return covidDocumentUpload?.call(this);
   }
@@ -16014,6 +16199,7 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (covidDocumentUpload != null) {
@@ -16159,6 +16345,7 @@ class _$_LanguagePagination implements _LanguagePagination {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return languagePagination();
   }
@@ -16251,6 +16438,7 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return languagePagination?.call();
   }
@@ -16343,6 +16531,7 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (languagePagination != null) {
@@ -16398,6 +16587,7 @@ class _$_LanguagePagination implements _LanguagePagination {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return languagePagination(this);
   }
@@ -16444,6 +16634,7 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return languagePagination?.call(this);
   }
@@ -16490,6 +16681,7 @@ class _$_LanguagePagination implements _LanguagePagination {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (languagePagination != null) {
@@ -16627,6 +16819,7 @@ class _$_StatePagination implements _StatePagination {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return statePagination();
   }
@@ -16719,6 +16912,7 @@ class _$_StatePagination implements _StatePagination {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return statePagination?.call();
   }
@@ -16811,6 +17005,7 @@ class _$_StatePagination implements _StatePagination {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (statePagination != null) {
@@ -16866,6 +17061,7 @@ class _$_StatePagination implements _StatePagination {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return statePagination(this);
   }
@@ -16912,6 +17108,7 @@ class _$_StatePagination implements _StatePagination {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return statePagination?.call(this);
   }
@@ -16958,6 +17155,7 @@ class _$_StatePagination implements _StatePagination {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (statePagination != null) {
@@ -17095,6 +17293,7 @@ class _$_CityPagination implements _CityPagination {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return cityPagination();
   }
@@ -17187,6 +17386,7 @@ class _$_CityPagination implements _CityPagination {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return cityPagination?.call();
   }
@@ -17279,6 +17479,7 @@ class _$_CityPagination implements _CityPagination {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (cityPagination != null) {
@@ -17334,6 +17535,7 @@ class _$_CityPagination implements _CityPagination {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return cityPagination(this);
   }
@@ -17380,6 +17582,7 @@ class _$_CityPagination implements _CityPagination {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return cityPagination?.call(this);
   }
@@ -17426,6 +17629,7 @@ class _$_CityPagination implements _CityPagination {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (cityPagination != null) {
@@ -17563,6 +17767,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return getServices();
   }
@@ -17655,6 +17860,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return getServices?.call();
   }
@@ -17747,6 +17953,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (getServices != null) {
@@ -17802,6 +18009,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return getServices(this);
   }
@@ -17848,6 +18056,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return getServices?.call(this);
   }
@@ -17894,6 +18103,7 @@ class _$_GetCaregiverService implements _GetCaregiverService {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (getServices != null) {
@@ -18074,6 +18284,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return submitServices(userId, services);
   }
@@ -18166,6 +18377,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return submitServices?.call(userId, services);
   }
@@ -18258,6 +18470,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (submitServices != null) {
@@ -18313,6 +18526,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return submitServices(this);
   }
@@ -18359,6 +18573,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return submitServices?.call(this);
   }
@@ -18405,6 +18620,7 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (submitServices != null) {
@@ -18587,6 +18803,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return serviceSelected(index, value);
   }
@@ -18679,6 +18896,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return serviceSelected?.call(index, value);
   }
@@ -18771,6 +18989,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (serviceSelected != null) {
@@ -18826,6 +19045,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return serviceSelected(this);
   }
@@ -18872,6 +19092,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return serviceSelected?.call(this);
   }
@@ -18918,6 +19139,7 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (serviceSelected != null) {
@@ -19124,6 +19346,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return submitBuildProfile(userId, aboutYou, hobbies, whyLoveBeingCaregiver);
   }
@@ -19216,6 +19439,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return submitBuildProfile?.call(
         userId, aboutYou, hobbies, whyLoveBeingCaregiver);
@@ -19309,6 +19533,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (submitBuildProfile != null) {
@@ -19365,6 +19590,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return submitBuildProfile(this);
   }
@@ -19411,6 +19637,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return submitBuildProfile?.call(this);
   }
@@ -19457,6 +19684,7 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (submitBuildProfile != null) {
@@ -19669,6 +19897,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     required TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)
         submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
   }) {
     return submitAccountDetais(
         userId, accountHolderName, routingNumber, accountNumber);
@@ -19762,6 +19991,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     TResult? Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
   }) {
     return submitAccountDetais?.call(
         userId, accountHolderName, routingNumber, accountNumber);
@@ -19855,6 +20085,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     TResult Function(String userId, String accountHolderName,
             String routingNumber, String accountNumber)?
         submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
     required TResult orElse(),
   }) {
     if (submitAccountDetais != null) {
@@ -19911,6 +20142,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     required TResult Function(_CaregiverServiceSelected value) serviceSelected,
     required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
     required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
   }) {
     return submitAccountDetais(this);
   }
@@ -19957,6 +20189,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
   }) {
     return submitAccountDetais?.call(this);
   }
@@ -20003,6 +20236,7 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
     TResult Function(_CaregiverServiceSelected value)? serviceSelected,
     TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
     TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
     required TResult orElse(),
   }) {
     if (submitAccountDetais != null) {
@@ -20025,6 +20259,514 @@ abstract class _SubmitAccountDetails implements OnboardingEvent {
   String get accountNumber;
   @JsonKey(ignore: true)
   _$$_SubmitAccountDetailsCopyWith<_$_SubmitAccountDetails> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SelectAllServicesCopyWith<$Res> {
+  factory _$$_SelectAllServicesCopyWith(_$_SelectAllServices value,
+          $Res Function(_$_SelectAllServices) then) =
+      __$$_SelectAllServicesCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isAllSelected});
+}
+
+/// @nodoc
+class __$$_SelectAllServicesCopyWithImpl<$Res>
+    extends _$OnboardingEventCopyWithImpl<$Res, _$_SelectAllServices>
+    implements _$$_SelectAllServicesCopyWith<$Res> {
+  __$$_SelectAllServicesCopyWithImpl(
+      _$_SelectAllServices _value, $Res Function(_$_SelectAllServices) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isAllSelected = null,
+  }) {
+    return _then(_$_SelectAllServices(
+      isAllSelected: null == isAllSelected
+          ? _value.isAllSelected
+          : isAllSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SelectAllServices implements _SelectAllServices {
+  const _$_SelectAllServices({required this.isAllSelected});
+
+  @override
+  final bool isAllSelected;
+
+  @override
+  String toString() {
+    return 'OnboardingEvent.selectAllServices(isAllSelected: $isAllSelected)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SelectAllServices &&
+            (identical(other.isAllSelected, isAllSelected) ||
+                other.isAllSelected == isAllSelected));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isAllSelected);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SelectAllServicesCopyWith<_$_SelectAllServices> get copyWith =>
+      __$$_SelectAllServicesCopyWithImpl<_$_SelectAllServices>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)
+        personalDetails,
+    required TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)
+        qualificationDetails,
+    required TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<Map<String, dynamic>> petsList,
+            List<String> knownLanguages)
+        preferenceDetails,
+    required TResult Function() commonData,
+    required TResult Function(String searchQuery, bool wantLoading) cityList,
+    required TResult Function(String stateSearchQuery, bool wantLoading)
+        stateList,
+    required TResult Function() relationList,
+    required TResult Function(String userId) submitReference,
+    required TResult Function() addReference,
+    required TResult Function(int index) deleteReference,
+    required TResult Function(int index) updateReference,
+    required TResult Function(int index, GetReferences reference) editReference,
+    required TResult Function() yearsOfExpList,
+    required TResult Function(String petSearchKey) petsList,
+    required TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)
+        languageList,
+    required TResult Function(int isSelected) radioHHA,
+    required TResult Function(int isSelected) radioBLS,
+    required TResult Function(int isSelected) radioTB,
+    required TResult Function(int isSelected) radioCovid,
+    required TResult Function(int isSelected) radioExperience,
+    required TResult Function(int isSelected) radioSmoker,
+    required TResult Function(int isSelected) radioTransportation,
+    required TResult Function(int isSelected) radioPet,
+    required TResult Function(int isSelected) radioLanguage,
+    required TResult Function(PlatformFile bytes) profilePicSelection,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        securityDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        hhaDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        blsDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        tbDocumentUpload,
+    required TResult Function(List<PlatformFile> bytesList, bool listUpdated)
+        covidDocumentUpload,
+    required TResult Function() languagePagination,
+    required TResult Function() statePagination,
+    required TResult Function() cityPagination,
+    required TResult Function() getServices,
+    required TResult Function(String userId, Map<String, dynamic> services)
+        submitServices,
+    required TResult Function(int index, bool value) serviceSelected,
+    required TResult Function(String userId, String aboutYou, String hobbies,
+            String whyLoveBeingCaregiver)
+        submitBuildProfile,
+    required TResult Function(String userId, String accountHolderName,
+            String routingNumber, String accountNumber)
+        submitAccountDetais,
+    required TResult Function(bool isAllSelected) selectAllServices,
+  }) {
+    return selectAllServices(isAllSelected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult? Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult? Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<Map<String, dynamic>> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult? Function()? commonData,
+    TResult? Function(String searchQuery, bool wantLoading)? cityList,
+    TResult? Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult? Function()? relationList,
+    TResult? Function(String userId)? submitReference,
+    TResult? Function()? addReference,
+    TResult? Function(int index)? deleteReference,
+    TResult? Function(int index)? updateReference,
+    TResult? Function(int index, GetReferences reference)? editReference,
+    TResult? Function()? yearsOfExpList,
+    TResult? Function(String petSearchKey)? petsList,
+    TResult? Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult? Function(int isSelected)? radioHHA,
+    TResult? Function(int isSelected)? radioBLS,
+    TResult? Function(int isSelected)? radioTB,
+    TResult? Function(int isSelected)? radioCovid,
+    TResult? Function(int isSelected)? radioExperience,
+    TResult? Function(int isSelected)? radioSmoker,
+    TResult? Function(int isSelected)? radioTransportation,
+    TResult? Function(int isSelected)? radioPet,
+    TResult? Function(int isSelected)? radioLanguage,
+    TResult? Function(PlatformFile bytes)? profilePicSelection,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult? Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult? Function()? languagePagination,
+    TResult? Function()? statePagination,
+    TResult? Function()? cityPagination,
+    TResult? Function()? getServices,
+    TResult? Function(String userId, Map<String, dynamic> services)?
+        submitServices,
+    TResult? Function(int index, bool value)? serviceSelected,
+    TResult? Function(String userId, String aboutYou, String hobbies,
+            String whyLoveBeingCaregiver)?
+        submitBuildProfile,
+    TResult? Function(String userId, String accountHolderName,
+            String routingNumber, String accountNumber)?
+        submitAccountDetais,
+    TResult? Function(bool isAllSelected)? selectAllServices,
+  }) {
+    return selectAllServices?.call(isAllSelected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String userId,
+            String dob,
+            int genderId,
+            String street,
+            String cityId,
+            String stateId,
+            double latitude,
+            double longitude,
+            String zip,
+            String address,
+            String socialSecurityNo,
+            String documentId,
+            String documentNo,
+            String expiryDate,
+            List<String> documentList,
+            String profilePic)?
+        personalDetails,
+    TResult Function(
+            String userId,
+            bool haveHhaRegistration,
+            HhaDetails hhaDetails,
+            bool haveBlsCertificate,
+            BlsOrFirstAidCertificateDetails blsDetails,
+            bool haveTbTest,
+            TbOrPpdTestDetails tbDetails,
+            bool haveCovidVaccination,
+            CovidVaccinationDetails covidDetails)?
+        qualificationDetails,
+    TResult Function(
+            String userId,
+            String yearsOfExp,
+            bool serveWithSmoker,
+            bool willingToTransportation,
+            bool willingToServeWithPets,
+            List<Map<String, dynamic>> petsList,
+            List<String> knownLanguages)?
+        preferenceDetails,
+    TResult Function()? commonData,
+    TResult Function(String searchQuery, bool wantLoading)? cityList,
+    TResult Function(String stateSearchQuery, bool wantLoading)? stateList,
+    TResult Function()? relationList,
+    TResult Function(String userId)? submitReference,
+    TResult Function()? addReference,
+    TResult Function(int index)? deleteReference,
+    TResult Function(int index)? updateReference,
+    TResult Function(int index, GetReferences reference)? editReference,
+    TResult Function()? yearsOfExpList,
+    TResult Function(String petSearchKey)? petsList,
+    TResult Function(String languageSearchKey,
+            List<PreferenceLanguageModel> languageList)?
+        languageList,
+    TResult Function(int isSelected)? radioHHA,
+    TResult Function(int isSelected)? radioBLS,
+    TResult Function(int isSelected)? radioTB,
+    TResult Function(int isSelected)? radioCovid,
+    TResult Function(int isSelected)? radioExperience,
+    TResult Function(int isSelected)? radioSmoker,
+    TResult Function(int isSelected)? radioTransportation,
+    TResult Function(int isSelected)? radioPet,
+    TResult Function(int isSelected)? radioLanguage,
+    TResult Function(PlatformFile bytes)? profilePicSelection,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        securityDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        hhaDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        blsDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        tbDocumentUpload,
+    TResult Function(List<PlatformFile> bytesList, bool listUpdated)?
+        covidDocumentUpload,
+    TResult Function()? languagePagination,
+    TResult Function()? statePagination,
+    TResult Function()? cityPagination,
+    TResult Function()? getServices,
+    TResult Function(String userId, Map<String, dynamic> services)?
+        submitServices,
+    TResult Function(int index, bool value)? serviceSelected,
+    TResult Function(String userId, String aboutYou, String hobbies,
+            String whyLoveBeingCaregiver)?
+        submitBuildProfile,
+    TResult Function(String userId, String accountHolderName,
+            String routingNumber, String accountNumber)?
+        submitAccountDetais,
+    TResult Function(bool isAllSelected)? selectAllServices,
+    required TResult orElse(),
+  }) {
+    if (selectAllServices != null) {
+      return selectAllServices(isAllSelected);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetPersonalDetails value) personalDetails,
+    required TResult Function(_GetQualificationDetails value)
+        qualificationDetails,
+    required TResult Function(_SubmitPreferenceDetails value) preferenceDetails,
+    required TResult Function(_CommonDataLists value) commonData,
+    required TResult Function(_CityLists value) cityList,
+    required TResult Function(_StateLists value) stateList,
+    required TResult Function(_RelationList value) relationList,
+    required TResult Function(_SubmitReference value) submitReference,
+    required TResult Function(_AddReference value) addReference,
+    required TResult Function(DeleteReference value) deleteReference,
+    required TResult Function(UpdateReference value) updateReference,
+    required TResult Function(EditReference value) editReference,
+    required TResult Function(_YearsOfExp value) yearsOfExpList,
+    required TResult Function(_GetPetList value) petsList,
+    required TResult Function(_GetLanguageList value) languageList,
+    required TResult Function(_RadioHHASelected value) radioHHA,
+    required TResult Function(_RadioBLSSelected value) radioBLS,
+    required TResult Function(_RadioTBSelected value) radioTB,
+    required TResult Function(_RadioCovidSelected value) radioCovid,
+    required TResult Function(_RadioExperienceSelected value) radioExperience,
+    required TResult Function(_RadioSmokerSelected value) radioSmoker,
+    required TResult Function(_RadioTransportationSelected value)
+        radioTransportation,
+    required TResult Function(_RadioPetSelected value) radioPet,
+    required TResult Function(_RadioLanguageSelected value) radioLanguage,
+    required TResult Function(_ProfilePicSelected value) profilePicSelection,
+    required TResult Function(_SecurityDocumentUploadSelected value)
+        securityDocumentUpload,
+    required TResult Function(_HHADocumentUploadSelected value)
+        hhaDocumentUpload,
+    required TResult Function(_BLSDocumentUploadSelected value)
+        blsDocumentUpload,
+    required TResult Function(_TBDocumentUploadSelected value) tbDocumentUpload,
+    required TResult Function(_CovidDocumentUploadSelected value)
+        covidDocumentUpload,
+    required TResult Function(_LanguagePagination value) languagePagination,
+    required TResult Function(_StatePagination value) statePagination,
+    required TResult Function(_CityPagination value) cityPagination,
+    required TResult Function(_GetCaregiverService value) getServices,
+    required TResult Function(_SubmitCaregiverService value) submitServices,
+    required TResult Function(_CaregiverServiceSelected value) serviceSelected,
+    required TResult Function(_SubmitBuildProfile value) submitBuildProfile,
+    required TResult Function(_SubmitAccountDetails value) submitAccountDetais,
+    required TResult Function(_SelectAllServices value) selectAllServices,
+  }) {
+    return selectAllServices(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetPersonalDetails value)? personalDetails,
+    TResult? Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult? Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult? Function(_CommonDataLists value)? commonData,
+    TResult? Function(_CityLists value)? cityList,
+    TResult? Function(_StateLists value)? stateList,
+    TResult? Function(_RelationList value)? relationList,
+    TResult? Function(_SubmitReference value)? submitReference,
+    TResult? Function(_AddReference value)? addReference,
+    TResult? Function(DeleteReference value)? deleteReference,
+    TResult? Function(UpdateReference value)? updateReference,
+    TResult? Function(EditReference value)? editReference,
+    TResult? Function(_YearsOfExp value)? yearsOfExpList,
+    TResult? Function(_GetPetList value)? petsList,
+    TResult? Function(_GetLanguageList value)? languageList,
+    TResult? Function(_RadioHHASelected value)? radioHHA,
+    TResult? Function(_RadioBLSSelected value)? radioBLS,
+    TResult? Function(_RadioTBSelected value)? radioTB,
+    TResult? Function(_RadioCovidSelected value)? radioCovid,
+    TResult? Function(_RadioExperienceSelected value)? radioExperience,
+    TResult? Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult? Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult? Function(_RadioPetSelected value)? radioPet,
+    TResult? Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult? Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult? Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult? Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult? Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult? Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult? Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult? Function(_LanguagePagination value)? languagePagination,
+    TResult? Function(_StatePagination value)? statePagination,
+    TResult? Function(_CityPagination value)? cityPagination,
+    TResult? Function(_GetCaregiverService value)? getServices,
+    TResult? Function(_SubmitCaregiverService value)? submitServices,
+    TResult? Function(_CaregiverServiceSelected value)? serviceSelected,
+    TResult? Function(_SubmitBuildProfile value)? submitBuildProfile,
+    TResult? Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult? Function(_SelectAllServices value)? selectAllServices,
+  }) {
+    return selectAllServices?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetPersonalDetails value)? personalDetails,
+    TResult Function(_GetQualificationDetails value)? qualificationDetails,
+    TResult Function(_SubmitPreferenceDetails value)? preferenceDetails,
+    TResult Function(_CommonDataLists value)? commonData,
+    TResult Function(_CityLists value)? cityList,
+    TResult Function(_StateLists value)? stateList,
+    TResult Function(_RelationList value)? relationList,
+    TResult Function(_SubmitReference value)? submitReference,
+    TResult Function(_AddReference value)? addReference,
+    TResult Function(DeleteReference value)? deleteReference,
+    TResult Function(UpdateReference value)? updateReference,
+    TResult Function(EditReference value)? editReference,
+    TResult Function(_YearsOfExp value)? yearsOfExpList,
+    TResult Function(_GetPetList value)? petsList,
+    TResult Function(_GetLanguageList value)? languageList,
+    TResult Function(_RadioHHASelected value)? radioHHA,
+    TResult Function(_RadioBLSSelected value)? radioBLS,
+    TResult Function(_RadioTBSelected value)? radioTB,
+    TResult Function(_RadioCovidSelected value)? radioCovid,
+    TResult Function(_RadioExperienceSelected value)? radioExperience,
+    TResult Function(_RadioSmokerSelected value)? radioSmoker,
+    TResult Function(_RadioTransportationSelected value)? radioTransportation,
+    TResult Function(_RadioPetSelected value)? radioPet,
+    TResult Function(_RadioLanguageSelected value)? radioLanguage,
+    TResult Function(_ProfilePicSelected value)? profilePicSelection,
+    TResult Function(_SecurityDocumentUploadSelected value)?
+        securityDocumentUpload,
+    TResult Function(_HHADocumentUploadSelected value)? hhaDocumentUpload,
+    TResult Function(_BLSDocumentUploadSelected value)? blsDocumentUpload,
+    TResult Function(_TBDocumentUploadSelected value)? tbDocumentUpload,
+    TResult Function(_CovidDocumentUploadSelected value)? covidDocumentUpload,
+    TResult Function(_LanguagePagination value)? languagePagination,
+    TResult Function(_StatePagination value)? statePagination,
+    TResult Function(_CityPagination value)? cityPagination,
+    TResult Function(_GetCaregiverService value)? getServices,
+    TResult Function(_SubmitCaregiverService value)? submitServices,
+    TResult Function(_CaregiverServiceSelected value)? serviceSelected,
+    TResult Function(_SubmitBuildProfile value)? submitBuildProfile,
+    TResult Function(_SubmitAccountDetails value)? submitAccountDetais,
+    TResult Function(_SelectAllServices value)? selectAllServices,
+    required TResult orElse(),
+  }) {
+    if (selectAllServices != null) {
+      return selectAllServices(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SelectAllServices implements OnboardingEvent {
+  const factory _SelectAllServices({required final bool isAllSelected}) =
+      _$_SelectAllServices;
+
+  bool get isAllSelected;
+  @JsonKey(ignore: true)
+  _$$_SelectAllServicesCopyWith<_$_SelectAllServices> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -20058,6 +20800,7 @@ mixin _$OnboardingState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isInitialLoading => throw _privateConstructorUsedError;
   bool get isCityApiCalling => throw _privateConstructorUsedError;
+  bool get isAllServicesSelected => throw _privateConstructorUsedError;
   int get selectedGenderId => throw _privateConstructorUsedError;
   int get languagePaginationPage => throw _privateConstructorUsedError;
   int get statePaginationPage => throw _privateConstructorUsedError;
@@ -20133,6 +20876,7 @@ abstract class $OnboardingStateCopyWith<$Res> {
       bool isLoading,
       bool isInitialLoading,
       bool isCityApiCalling,
+      bool isAllServicesSelected,
       int selectedGenderId,
       int languagePaginationPage,
       int statePaginationPage,
@@ -20197,6 +20941,7 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
     Object? isLoading = null,
     Object? isInitialLoading = null,
     Object? isCityApiCalling = null,
+    Object? isAllServicesSelected = null,
     Object? selectedGenderId = null,
     Object? languagePaginationPage = null,
     Object? statePaginationPage = null,
@@ -20320,6 +21065,10 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
           ? _value.isCityApiCalling
           : isCityApiCalling // ignore: cast_nullable_to_non_nullable
               as bool,
+      isAllServicesSelected: null == isAllServicesSelected
+          ? _value.isAllServicesSelected
+          : isAllServicesSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
       selectedGenderId: null == selectedGenderId
           ? _value.selectedGenderId
           : selectedGenderId // ignore: cast_nullable_to_non_nullable
@@ -20442,6 +21191,7 @@ abstract class _$$_OnboardingStateCopyWith<$Res>
       bool isLoading,
       bool isInitialLoading,
       bool isCityApiCalling,
+      bool isAllServicesSelected,
       int selectedGenderId,
       int languagePaginationPage,
       int statePaginationPage,
@@ -20504,6 +21254,7 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? isInitialLoading = null,
     Object? isCityApiCalling = null,
+    Object? isAllServicesSelected = null,
     Object? selectedGenderId = null,
     Object? languagePaginationPage = null,
     Object? statePaginationPage = null,
@@ -20627,6 +21378,10 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
           ? _value.isCityApiCalling
           : isCityApiCalling // ignore: cast_nullable_to_non_nullable
               as bool,
+      isAllServicesSelected: null == isAllServicesSelected
+          ? _value.isAllServicesSelected
+          : isAllServicesSelected // ignore: cast_nullable_to_non_nullable
+              as bool,
       selectedGenderId: null == selectedGenderId
           ? _value.selectedGenderId
           : selectedGenderId // ignore: cast_nullable_to_non_nullable
@@ -20744,6 +21499,7 @@ class _$_OnboardingState implements _OnboardingState {
       required this.isLoading,
       required this.isInitialLoading,
       required this.isCityApiCalling,
+      required this.isAllServicesSelected,
       required this.selectedGenderId,
       required this.languagePaginationPage,
       required this.statePaginationPage,
@@ -20882,6 +21638,8 @@ class _$_OnboardingState implements _OnboardingState {
   @override
   final bool isCityApiCalling;
   @override
+  final bool isAllServicesSelected;
+  @override
   final int selectedGenderId;
   @override
   final int languagePaginationPage;
@@ -20931,7 +21689,7 @@ class _$_OnboardingState implements _OnboardingState {
 
   @override
   String toString() {
-    return 'OnboardingState(pickedProfilePic: $pickedProfilePic, securityDocumentList: $securityDocumentList, hhaDocumentList: $hhaDocumentList, blsDocumentList: $blsDocumentList, tbDocumentList: $tbDocumentList, covidDocumentList: $covidDocumentList, referenceList: $referenceList, petsList: $petsList, languageList: $languageList, serviceList: $serviceList, isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected, isFormSubmitSuccess: $isFormSubmitSuccess, nextClicked: $nextClicked, listUpdated: $listUpdated, isExperianceSelected: $isExperianceSelected, isSmokerSelected: $isSmokerSelected, isTransportationSelected: $isTransportationSelected, isPetsSelected: $isPetsSelected, isLanguagesSelected: $isLanguagesSelected, isLoading: $isLoading, isInitialLoading: $isInitialLoading, isCityApiCalling: $isCityApiCalling, selectedGenderId: $selectedGenderId, languagePaginationPage: $languagePaginationPage, statePaginationPage: $statePaginationPage, cityPaginationPage: $cityPaginationPage, caregiverServiceListIndex: $caregiverServiceListIndex, personalDetailsOption: $personalDetailsOption, genderOption: $genderOption, documentOption: $documentOption, stateOption: $stateOption, cityOption: $cityOption, petListOption: $petListOption, yearsOption: $yearsOption, languageListOption: $languageListOption, getServiceOption: $getServiceOption, relationOption: $relationOption, qualificationDetailsOption: $qualificationDetailsOption, preferenceDetailsOption: $preferenceDetailsOption, referenceOption: $referenceOption, submitServiceOption: $submitServiceOption, submitBuildProfileOption: $submitBuildProfileOption, submitAccountDetailsOption: $submitAccountDetailsOption)';
+    return 'OnboardingState(pickedProfilePic: $pickedProfilePic, securityDocumentList: $securityDocumentList, hhaDocumentList: $hhaDocumentList, blsDocumentList: $blsDocumentList, tbDocumentList: $tbDocumentList, covidDocumentList: $covidDocumentList, referenceList: $referenceList, petsList: $petsList, languageList: $languageList, serviceList: $serviceList, isHHASelected: $isHHASelected, isBLSSelected: $isBLSSelected, isTBSelected: $isTBSelected, isCovidSelected: $isCovidSelected, isFormSubmitSuccess: $isFormSubmitSuccess, nextClicked: $nextClicked, listUpdated: $listUpdated, isExperianceSelected: $isExperianceSelected, isSmokerSelected: $isSmokerSelected, isTransportationSelected: $isTransportationSelected, isPetsSelected: $isPetsSelected, isLanguagesSelected: $isLanguagesSelected, isLoading: $isLoading, isInitialLoading: $isInitialLoading, isCityApiCalling: $isCityApiCalling, isAllServicesSelected: $isAllServicesSelected, selectedGenderId: $selectedGenderId, languagePaginationPage: $languagePaginationPage, statePaginationPage: $statePaginationPage, cityPaginationPage: $cityPaginationPage, caregiverServiceListIndex: $caregiverServiceListIndex, personalDetailsOption: $personalDetailsOption, genderOption: $genderOption, documentOption: $documentOption, stateOption: $stateOption, cityOption: $cityOption, petListOption: $petListOption, yearsOption: $yearsOption, languageListOption: $languageListOption, getServiceOption: $getServiceOption, relationOption: $relationOption, qualificationDetailsOption: $qualificationDetailsOption, preferenceDetailsOption: $preferenceDetailsOption, referenceOption: $referenceOption, submitServiceOption: $submitServiceOption, submitBuildProfileOption: $submitBuildProfileOption, submitAccountDetailsOption: $submitAccountDetailsOption)';
   }
 
   @override
@@ -20988,6 +21746,8 @@ class _$_OnboardingState implements _OnboardingState {
                 other.isInitialLoading == isInitialLoading) &&
             (identical(other.isCityApiCalling, isCityApiCalling) ||
                 other.isCityApiCalling == isCityApiCalling) &&
+            (identical(other.isAllServicesSelected, isAllServicesSelected) ||
+                other.isAllServicesSelected == isAllServicesSelected) &&
             (identical(other.selectedGenderId, selectedGenderId) ||
                 other.selectedGenderId == selectedGenderId) &&
             (identical(other.languagePaginationPage, languagePaginationPage) ||
@@ -21014,8 +21774,7 @@ class _$_OnboardingState implements _OnboardingState {
                 other.yearsOption == yearsOption) &&
             (identical(other.languageListOption, languageListOption) ||
                 other.languageListOption == languageListOption) &&
-            (identical(other.getServiceOption, getServiceOption) ||
-                other.getServiceOption == getServiceOption) &&
+            (identical(other.getServiceOption, getServiceOption) || other.getServiceOption == getServiceOption) &&
             (identical(other.relationOption, relationOption) || other.relationOption == relationOption) &&
             (identical(other.qualificationDetailsOption, qualificationDetailsOption) || other.qualificationDetailsOption == qualificationDetailsOption) &&
             (identical(other.preferenceDetailsOption, preferenceDetailsOption) || other.preferenceDetailsOption == preferenceDetailsOption) &&
@@ -21053,6 +21812,7 @@ class _$_OnboardingState implements _OnboardingState {
         isLoading,
         isInitialLoading,
         isCityApiCalling,
+        isAllServicesSelected,
         selectedGenderId,
         languagePaginationPage,
         statePaginationPage,
@@ -21110,6 +21870,7 @@ abstract class _OnboardingState implements OnboardingState {
       required final bool isLoading,
       required final bool isInitialLoading,
       required final bool isCityApiCalling,
+      required final bool isAllServicesSelected,
       required final int selectedGenderId,
       required final int languagePaginationPage,
       required final int statePaginationPage,
@@ -21198,6 +21959,8 @@ abstract class _OnboardingState implements OnboardingState {
   bool get isInitialLoading;
   @override
   bool get isCityApiCalling;
+  @override
+  bool get isAllServicesSelected;
   @override
   int get selectedGenderId;
   @override

@@ -16,7 +16,6 @@ import '../widget/header_view.dart';
 import 'modules/personal_details/personal_details_view.dart';
 import 'modules/preference/preference_view.dart';
 import 'modules/qualification_details/qialification_view.dart';
-import 'modules/services/services_view.dart';
 
 @RoutePage()
 class OnboardingPage extends StatefulWidget {

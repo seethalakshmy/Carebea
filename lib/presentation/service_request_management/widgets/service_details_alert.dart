@@ -433,7 +433,7 @@ class ServiceDetailsAlert extends StatelessWidget {
                 onNameTap: () {
                   Navigator.pop(context);
                   autoTabRouter
-                      ?.navigate(CareGiverDetailRoute(id: service.profileId));
+                      ?.navigate(CareGiverProfileRoute(id: service.profileId));
                 },
               ),
         if (title == AppString.completed.val && (service.services != null))
