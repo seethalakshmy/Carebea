@@ -67,6 +67,26 @@ class _SampleDropdownState extends State<SampleDropdown> {
         children: [
           Row(
             children: [
+              widget.isFromLangauge
+                  ? Container(
+                      width: 100,
+                      height: 30,
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: AppColor.amber2.val),
+                          color: AppColor.white.val),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            'English',
+                            style: TextStyle(fontSize: 13),
+                          ),
+                        ],
+                      ),
+                    )
+                  : const SizedBox.shrink(),
               Expanded(
                 child: Wrap(
                     runSpacing: 5.0,

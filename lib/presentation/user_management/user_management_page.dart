@@ -16,7 +16,6 @@ import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
-import '../../domain/admins/model/admin_get_response.dart';
 import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';
@@ -405,6 +404,31 @@ class _UserManagementPageState extends State<UserManagementPage> {
     );
   }
 
+  Widget _tableRowImage(String text, String imgUrl) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(DBL.ten.val),
+          child: CachedImage(
+              height: DBL.thirty.val, width: DBL.thirty.val, imgUrl: imgUrl),
+        ),
+        CustomSizedBox(width: DBL.twelve.val),
+        Expanded(
+          child: CustomText(
+            text,
+            style: TS().gRoboto(
+                fontSize: Responsive.isWeb(context)
+                    ? DBL.fourteen.val
+                    : DBL.twelve.val,
+                fontWeight: FW.w400.val,
+                color: AppColor.rowColor.val),
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _rowsView({
     String? text,
   }) {
@@ -432,31 +456,6 @@ class _UserManagementPageState extends State<UserManagementPage> {
           fontWeight: fontWeight,
           color: AppColor.columColor.val),
       textAlign: TextAlign.center,
-    );
-  }
-
-  Widget _tableRowImage(String text, String imgUrl) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(DBL.ten.val),
-          child: CachedImage(
-              height: DBL.thirty.val, width: DBL.thirty.val, imgUrl: imgUrl),
-        ),
-        CustomSizedBox(width: DBL.twelve.val),
-        Expanded(
-          child: CustomText(
-            text,
-            style: TS().gRoboto(
-                fontSize: Responsive.isWeb(context)
-                    ? DBL.fourteen.val
-                    : DBL.twelve.val,
-                fontWeight: FW.w400.val,
-                color: AppColor.rowColor.val),
-          ),
-        ),
-      ],
     );
   }
 

@@ -1,5 +1,5 @@
 import 'package:admin_580_tech/presentation/on_boarding/modules/preference/widgets/sample_dropdown.dart';
-import 'package:admin_580_tech/presentation/on_boarding/widgets/common_padding_widget.dart';
+import '../../widgets/common_padding_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -86,10 +86,12 @@ class PreferenceView extends StatelessWidget {
                         onboardingBloc.selectedPetsList.isEmpty) {
                       CSnackBar.showError(context,
                           msg: AppString.pleaseSelectPets.val);
-                    } else if (onboardingBloc.selectedLanguageList.isEmpty) {
-                      CSnackBar.showError(context,
-                          msg: AppString.pleaseSelectLanguages.val);
-                    } else {
+                    }
+                    // else if (onboardingBloc.selectedLanguageList.isEmpty) {
+                    //   CSnackBar.showError(context,
+                    //       msg: AppString.pleaseSelectLanguages.val);
+                    // }
+                    else {
                       onboardingBloc.nextButtonClicked = true;
                       onboardingBloc.add(OnboardingEvent.preferenceDetails(
                           userId: SharedPreffUtil().getIsFromWebsite == true
@@ -111,9 +113,12 @@ class PreferenceView extends StatelessWidget {
                                           .toJson())
                                   .toList()
                               : [],
-                          knownLanguages: onboardingBloc.selectedLanguageList
-                              .map((e) => e.id)
-                              .toList()));
+                          knownLanguages:
+                              onboardingBloc.selectedLanguageList.isEmpty
+                                  ? ['643ceb686cba31e037a0db16']
+                                  : onboardingBloc.selectedLanguageList
+                                      .map((e) => e.id)
+                                      .toList()));
                     }
                   },
                 )
@@ -233,6 +238,8 @@ class PreferenceView extends StatelessWidget {
           onboardingBloc: onboardingBloc,
           onSearchChanged: (val) {
             onboardingBloc.languagePage = 1;
+            onboardingBloc.languageList.removeWhere(
+                (element) => element.id == '643ceb686cba31e037a0db16');
             onboardingBloc.add(
                 OnboardingEvent.languageList(val, onboardingBloc.languageList));
           },
