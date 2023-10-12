@@ -72,6 +72,8 @@ enum AppString {
   weight('weight'),
   mandatorySymbol("*"),
   select("Select"),
+  selectAll("Select All"),
+  deselectAll("Deselect All"),
   selectHint("--Select--"),
   selectDate("Select Date"),
   startTime("Start Time"),
