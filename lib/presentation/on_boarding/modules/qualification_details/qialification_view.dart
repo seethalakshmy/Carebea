@@ -182,7 +182,6 @@ class _QualificationViewState extends State<QualificationView> {
                     CustomSizedBox(height: DBL.twenty.val),
                     ItemRowWidget(
                       inputFormatter: [
-                        FilteringTextInputFormatter.allow(RegExp("[0-9]")),
                         LengthLimitingTextInputFormatter(30),
                       ],
                       whichDocument: 2,

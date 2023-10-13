@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../application/bloc/complaint_details/complaint_detail_bloc.dart';
 import '../../../domain/transaction_management/model/transaction_details_response.dart';
 import '../../widget/custom_shimmer.dart';
+import '../../widget/error_view.dart';
 
 class TransactionDetailsAlertWidget extends StatelessWidget {
   const TransactionDetailsAlertWidget(
@@ -25,35 +26,41 @@ class TransactionDetailsAlertWidget extends StatelessWidget {
       child: BlocBuilder<ComplaintDetailBloc, ComplaintDetailState>(
         bloc: complaintDetailBloc,
         builder: (context, state) {
-          return SizedBox(
-            height: 480,
-            child: complaintDetailBloc.state.isLoading
-                ? const CustomShimmerWidget.rectangular(height: double.infinity)
-                : Wrap(
-                    children: [
-                      Responsive.isWeb(context)
-                          ? Row(
-                              children: [
-                                _detailsWidget(context),
-                                _refundWidget(complaintDetailBloc.state)
-                              ],
-                            )
-                          : SizedBox(
-                              height: 480,
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    _detailsWidget(context),
-                                    _refundWidget(complaintDetailBloc.state)
-                                  ],
-                                ),
-                              ),
-                            ),
-                    ],
-                  ),
-          );
+          return state.error != null || state.error != ""
+              ? ErrorView(isClientError: true, errorMessage: state.error)
+              : _bodyView(context);
         },
       ),
+    );
+  }
+
+  SizedBox _bodyView(BuildContext context) {
+    return SizedBox(
+      height: 480,
+      child: complaintDetailBloc.state.isLoading
+          ? const CustomShimmerWidget.rectangular(height: double.infinity)
+          : Wrap(
+              children: [
+                Responsive.isWeb(context)
+                    ? Row(
+                        children: [
+                          _detailsWidget(context),
+                          _refundWidget(complaintDetailBloc.state)
+                        ],
+                      )
+                    : SizedBox(
+                        height: 480,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              _detailsWidget(context),
+                              _refundWidget(complaintDetailBloc.state)
+                            ],
+                          ),
+                        ),
+                      ),
+              ],
+            ),
     );
   }
 
