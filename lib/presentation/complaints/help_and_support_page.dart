@@ -94,18 +94,32 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
         CustomCard(
           shape: PR().roundedRectangleBorder(DBL.eighteen.val),
           elevation: DBL.seven.val,
-          child: CustomContainer(
-            padding: EdgeInsets.all(DBL.twenty.val),
-            child: BlocBuilder<ComplaintsBloc, ComplaintsState>(
-              builder: (context, state) {
-                return state.isLoading
-                    ? const TableLoaderView()
-                    : state.isError
-                        ? ErrorView(
-                            isClientError: false, errorMessage: state.error)
-                        : _usersView(context);
-              },
-            ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _statusDropDown(context),
+                    _searchField(),
+                  ],
+                ),
+              ),
+              CustomContainer(
+                padding: EdgeInsets.all(DBL.twenty.val),
+                child: BlocBuilder<ComplaintsBloc, ComplaintsState>(
+                  builder: (context, state) {
+                    return state.isLoading
+                        ? const TableLoaderView()
+                        : state.isError
+                            ? ErrorView(
+                                isClientError: false, errorMessage: state.error)
+                            : _complaintsView(context);
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       ],
@@ -194,17 +208,10 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
     );
   }
 
-  _usersView(BuildContext context) {
+  _complaintsView(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _statusDropDown(context),
-            _searchField(),
-          ],
-        ),
         _supportTicketsBloc.complaintList.isNotEmpty
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -212,13 +219,13 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
                   CustomSizedBox(height: DBL.fifteen.val),
                   CustomSizedBox(
                     height: (_limit + 1) * 48,
-                    child: _usersTable(),
+                    child: _complaintsTable(),
                   ),
                   CustomSizedBox(height: DBL.twenty.val),
                   _paginationView()
                 ],
               )
-            : EmptyView(title: AppString.noUsersFound.val),
+            : EmptyView(title: AppString.noComplaintsFound.val),
       ],
     );
   }
@@ -281,16 +288,17 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
         padding: EdgeInsets.all(DBL.five.val),
       ),
       items: [
+        AppString.all.val,
         AppString.neww.val,
         AppString.onGoing.val,
-        AppString.completed.val,
+        AppString.closed.val,
         AppString.canceled.val
       ]
           .asMap()
           .entries
           .map(
             (item) => DropdownItem<int>(
-              value: item.key + 1,
+              value: item.key,
               child: Padding(
                 padding: EdgeInsets.all(DBL.eight.val),
                 child: Text(
@@ -344,7 +352,7 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
         });
   }
 
-  _usersTable() {
+  _complaintsTable() {
     return CSelectionArea(
       child: CDataTable2(
         minWidth: 1200,
@@ -370,16 +378,16 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
                 ? MediaQuery.of(context).size.width / 8
                 : DBL.hundred.val,*/
             label: _columnsView(
-                text: AppString.clientName.val, fontWeight: FontWeight.bold),
+                text: AppString.createdBy.val, fontWeight: FontWeight.bold),
           ),
-          DataColumn2(
-            //size: ColumnSize.L,
-            /* fixedWidth: Responsive.isWeb(context)
-                ? MediaQuery.of(context).size.width / 8
-                : DBL.hundred.val,*/
-            label: _columnsView(
-                text: AppString.caName.val, fontWeight: FontWeight.bold),
-          ),
+          // DataColumn2(
+          //   //size: ColumnSize.L,
+          //   /* fixedWidth: Responsive.isWeb(context)
+          //       ? MediaQuery.of(context).size.width / 8
+          //       : DBL.hundred.val,*/
+          //   label: _columnsView(
+          //       text: AppString.caName.val, fontWeight: FontWeight.bold),
+          // ),
           DataColumn2(
             //size: ColumnSize.L,
             // fixedWidth: DBL.hundred.val,
@@ -388,9 +396,16 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
           ),
           DataColumn2(
             //size: ColumnSize.L,
+            // fixedWidth: DBL.hundred.val,
+            label: _columnsView(
+                text: AppString.complaint.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            //size: ColumnSize.L,
             //fixedWidth: DBL.hundred.val,
             label: _columnsView(
-                text: AppString.createdDateTime.val, fontWeight: FontWeight.bold),
+                text: AppString.createdDateTime.val,
+                fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             //size: ColumnSize.L,
@@ -398,12 +413,7 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
             label: _columnsView(
                 text: AppString.repliedOn.val, fontWeight: FontWeight.bold),
           ),
-          DataColumn2(
-            //size: ColumnSize.L,
-            // fixedWidth: DBL.hundred.val,
-            label: _columnsView(
-                text: AppString.title.val, fontWeight: FontWeight.bold),
-          ),
+
           DataColumn2(
             //size: ColumnSize.L,
             //fixedWidth: DBL.hundred.val,
@@ -446,17 +456,17 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
                   text:
                       "${item.clientName?.firstName} ${item.clientName?.lastName}")),
               //_tableRowImage("${item.clientName?.firstName} ${item.clientName?.lastName}","")
-              DataCell(_rowsView(
-                  text:
-                      "${item.caregiverName?.firstName} ${item.caregiverName?.lastName}")),
+              // DataCell(_rowsView(
+              //     text:
+              //         "${item.caregiverName?.firstName} ${item.caregiverName?.lastName}")),
               DataCell(_rowsView(text: item.category ?? "")),
+              DataCell(_rowsView(text: item.title)),
               DataCell(_rowsView(
                   text: _supportTicketsBloc
                       .generateFormattedDate(item.createdDate ?? ""))),
               DataCell(_rowsView(
                   text: _supportTicketsBloc
                       .generateFormattedDate(item.repliedOn ?? ""))),
-              DataCell(_rowsView(text: item.title)),
               DataCell(_rowsView(text: item.role)),
               DataCell(_rowsView(text: item.status)),
               // DataCell(_statusBox(item.status)),
