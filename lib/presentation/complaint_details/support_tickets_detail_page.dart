@@ -10,7 +10,6 @@ import '../../application/bloc/transaction_management/transaction_management_blo
 import '../../core/enum.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
-import '../../domain/transaction_management/model/transactions.dart';
 import '../../infrastructure/transaction_management/transactions_repository.dart';
 import '../caregiver_detail/widgets/svg_text.dart';
 import '../routes/app_router.gr.dart';
@@ -41,7 +40,8 @@ class SupportTicketsDetailPage extends StatefulWidget {
 
 class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
   late ComplaintDetailBloc _complaintDetailBloc;
-  final TransactionManagementBloc _transactionManagementBloc = TransactionManagementBloc(TransactionsRepository());
+  final TransactionManagementBloc _transactionManagementBloc = TransactionManagementBloc(
+      TransactionsRepository());
   late TextEditingController _commentController;
   final pdfController = PdfViewerController();
 
@@ -98,7 +98,10 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
   }
 
   _bodyView() {
-    return CustomSizedBox(height: MediaQuery.of(context).size.height,
+    return CustomSizedBox(height: MediaQuery
+        .of(context)
+        .size
+        .height,
       child: Scaffold(
         body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -316,7 +319,8 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
                           complaintId: _complaintDetailBloc.compId,
                           status: _complaintDetailBloc
                               .selectedStatusFromDropdown,
-                          comment: _commentController.text.trim(), context: context));
+                          comment: _commentController.text.trim(),
+                          context: context));
                   _commentController.clear();
                 },
                 text: AppString.submit.val,
@@ -447,7 +451,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
     return Wrap(
       children: [
         RowColonCombo.twoHundred(
-          valueFlex: 15,
+            valueFlex: 15,
             customWidthLg1: 180,
             label: AppString.complaint.val,
             value: _complaintDetailBloc.complaintDetailsList[0].title ?? "",
@@ -504,10 +508,10 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
                 .uniqueTransactionId == null
             ? null
             : () {
-          print('testing data ${Transactions.fromJson(
-              _complaintDetailBloc.detailsList[0].toJson())}');
-          _transactionDetails(Transactions.fromJson(
-              _complaintDetailBloc.detailsList[0].toJson()));
+          _transactionDetails(
+              _complaintDetailBloc.complaintDetailsList[0].transactionId ?? "",
+              _complaintDetailBloc.complaintDetailsList[0].serviceBookingId ??
+                  "");
         } : null,
         needUnderLine: _complaintDetailBloc.complaintDetailsList[0]
             .isServiceRelated ?? false
@@ -629,19 +633,42 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
         fontSize: FS.font13PointFive.val);
   }
 
-  _transactionDetails(Transactions item) {
-    _complaintDetailBloc.add(ComplaintDetailEvent.getTransactionDetails(
-        transactionId: item.transactionId ?? "",
-        serviceId: item.serviceId ?? ''));
+  _transactionDetails(String transactionId, String serviceId) {
+    if (serviceId != "") {
+      _complaintDetailBloc.add(ComplaintDetailEvent.getTransactionDetails(
+          transactionId: transactionId,
+          serviceId: serviceId));
+    }
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return CustomAlertDialogWidget(
           heading: AppString.transactionManagement.val,
-          child: TransactionDetailsAlertWidget(
-              complaintDetailBloc: _complaintDetailBloc),
+          child: serviceId != ""
+              ? TransactionDetailsAlertWidget(
+              complaintDetailBloc: _complaintDetailBloc)
+              : _notServiceTransactionWidget(),
         );
       },
+    );
+  }
+
+  _notServiceTransactionWidget() {
+    return Container(
+      width: Responsive.isWeb(context)
+          ? MediaQuery
+          .of(context)
+          .size
+          .width * .35
+          : double.infinity,
+      height: 500,
+      color: AppColor.white.val,
+      padding: const EdgeInsets.all(20),
+      alignment: Alignment.center,
+      child: CustomText("This transaction is not against any service.",
+        style: TS().gRoboto(fontSize: FS.font18.val,
+            color: AppColor.black.val,
+            fontWeight: FW.w600.val),),
     );
   }
 
