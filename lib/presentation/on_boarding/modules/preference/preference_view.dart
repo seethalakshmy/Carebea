@@ -1,5 +1,4 @@
 import 'package:admin_580_tech/presentation/on_boarding/modules/preference/widgets/sample_dropdown.dart';
-import '../../widgets/common_padding_widget.dart';
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +13,11 @@ import '../../../../domain/on_boarding/models/preferences/preference_request_mod
 import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../../routes/app_router.gr.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
+import '../../../widget/custom_alert_dialog_widget.dart';
 import '../../../widget/custom_sizedbox.dart';
 import '../../../widget/custom_text.dart';
+import '../../widgets/common_padding_widget.dart';
+import '../../widgets/onboarding_success_alert.dart';
 
 class PreferenceView extends StatelessWidget {
   PreferenceView(
@@ -39,7 +41,24 @@ class PreferenceView extends StatelessWidget {
             CSnackBar.showError(context, msg: l.error);
           }, (r) {
             if (SharedPreffUtil().getIsFromWebsite == false) {
-              context.router.navigate(const CaregiverCreationRoute());
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return CustomAlertDialogWidget(
+                    onCloseTap: () {
+                      Navigator.pop(context);
+                      context.router.navigate(CareGiversRoute());
+                    },
+                    heading: AppString.onBoarding.val,
+                    child: OnboardingSuccessAlert(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        context.router.navigate(CareGiversRoute());
+                      },
+                    ),
+                  );
+                },
+              );
             } else {
               pageController.jumpToPage(pageController.page!.toInt() + 1);
             }

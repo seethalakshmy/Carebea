@@ -3,11 +3,14 @@ import 'package:admin_580_tech/presentation/on_boarding/modules/qualification_de
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pdf_render/pdf_render_widgets.dart';
 
 import '../../../../../application/bloc/onboarding/onboarding_bloc.dart';
 import '../../../../../core/enum.dart';
 import '../../../../../core/text_styles.dart';
+import '../../../../widget/commonImageview.dart';
 import '../../../../widget/common_date_picker_widget.dart';
+import '../../../../widget/custom_alert_dialog_widget.dart';
 import '../../../../widget/custom_container.dart';
 import '../../../../widget/custom_sizedbox.dart';
 import '../../../../widget/custom_text.dart';
@@ -17,7 +20,7 @@ import '../../../widgets/image_preview_widget.dart';
 import '../../../widgets/upload_document_widget.dart';
 
 class ItemRowWidget extends StatelessWidget {
-  const ItemRowWidget(
+  ItemRowWidget(
       {Key? key,
       required this.radioGroup,
       required this.textController,
@@ -35,6 +38,7 @@ class ItemRowWidget extends StatelessWidget {
       required this.validator,
       required this.documentList,
       required this.whichDocument,
+      required this.listUpdated,
       this.inputFormatter})
       : super(key: key);
   final String question;
@@ -54,6 +58,8 @@ class ItemRowWidget extends StatelessWidget {
   final List<PlatformFile> documentList;
   final int whichDocument;
   final List<TextInputFormatter>? inputFormatter;
+  bool listUpdated;
+  final pdfController = PdfViewerController();
 
   @override
   Widget build(BuildContext context) {
@@ -197,17 +203,69 @@ class ItemRowWidget extends StatelessWidget {
               child: documentList[index].name.endsWith(".png") ||
                       documentList[index].name.endsWith(".jpg") ||
                       documentList[index].name.endsWith(".jpeg")
-                  ? ImagePreviewWidget(
-                      bytes: documentList[index].bytes!,
-                      onRemoveTap: () {
-                        _removeSelectedFiles(index, state);
+                  ? InkWell(
+                      onTap: () {
+                        showGeneralDialog(
+                          barrierDismissible: true,
+                          barrierLabel: "",
+                          context: context,
+                          pageBuilder: (BuildContext buildContext,
+                              Animation animation,
+                              Animation secondaryAnimation) {
+                            return CustomAlertDialogWidget(
+                                showHeading: false,
+                                width: 700,
+                                heading: "",
+                                child: CommonImageView(
+                                  bytes: documentList[index].bytes!,
+                                ));
+                          },
+                        );
                       },
+                      child: ImagePreviewWidget(
+                        bytes: documentList[index].bytes!,
+                        onRemoveTap: () {
+                          _removeSelectedFiles(index, state);
+                        },
+                      ),
                     )
-                  : FilePreviewWidget(
-                      fileName: documentList[index].name,
-                      onRemoveTap: () {
-                        _removeSelectedFiles(index, state);
+                  : InkWell(
+                      onTap: () {
+                        showGeneralDialog(
+                          barrierLabel: "",
+                          barrierDismissible: true,
+                          context: context,
+                          pageBuilder: (BuildContext buildContext,
+                              Animation animation,
+                              Animation secondaryAnimation) {
+                            return CustomAlertDialogWidget(
+                                width: 800,
+                                height: 550,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                heading: AppString.verificationProcess.val,
+                                child: CustomSizedBox(
+                                  width: 780,
+                                  height: 540,
+                                  child: PdfViewer.openData(
+                                    documentList[index].bytes!,
+                                    viewerController: pdfController,
+                                    onError: (err) => print(err),
+                                    params: const PdfViewerParams(
+                                        minScale: 0.2,
+                                        scrollDirection: Axis.vertical,
+                                        padding: 10),
+                                  ),
+                                ));
+                          },
+                        );
                       },
+                      child: FilePreviewWidget(
+                        fileName: documentList[index].name,
+                        onRemoveTap: () {
+                          _removeSelectedFiles(index, state);
+                        },
+                      ),
                     ),
             );
           }),
@@ -216,20 +274,19 @@ class ItemRowWidget extends StatelessWidget {
 
   _removeSelectedFiles(int index, OnboardingState state) {
     documentList.removeAt(index);
-
+    listUpdated = !state.listUpdated;
     if (whichDocument == 1) {
-      //onboardingBloc.hhaBytesList.addAll(documentList);
-      onboardingBloc.add(
-          OnboardingEvent.hhaDocumentUpload(documentList, state.listUpdated));
+      onboardingBloc
+          .add(OnboardingEvent.hhaDocumentUpload(documentList, listUpdated));
     } else if (whichDocument == 2) {
-      onboardingBloc.add(
-          OnboardingEvent.blsDocumentUpload(documentList, state.listUpdated));
+      onboardingBloc
+          .add(OnboardingEvent.blsDocumentUpload(documentList, listUpdated));
     } else if (whichDocument == 3) {
-      onboardingBloc.add(
-          OnboardingEvent.tbDocumentUpload(documentList, state.listUpdated));
+      onboardingBloc
+          .add(OnboardingEvent.tbDocumentUpload(documentList, listUpdated));
     } else {
-      onboardingBloc.add(
-          OnboardingEvent.covidDocumentUpload(documentList, state.listUpdated));
+      onboardingBloc
+          .add(OnboardingEvent.covidDocumentUpload(documentList, listUpdated));
     }
   }
 
