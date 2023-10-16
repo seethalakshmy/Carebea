@@ -147,4 +147,7 @@ class OnboardingEvent with _$OnboardingEvent {
     required String routingNumber,
     required String accountNumber,
   }) = _SubmitAccountDetails;
+
+  const factory OnboardingEvent.selectAllServices({required bool isAllSelected}) =
+  _SelectAllServices;
 }

@@ -115,12 +115,18 @@ class ComplaintDetailBloc
             transactionId: event.transactionId,
             serviceId: event.serviceId);
     ComplaintDetailState filterState = result.fold((l) {
-      return state.copyWith(isLoading: false, trDetailsOption: Some(Left(l)));
+      return state.copyWith(
+          isLoading: false, trDetailsOption: Some(Left(l)), error: l.error);
     }, (r) {
-      detailsList.clear();
-      detailsList.add(r.data!);
-      transactionDetailsData = r.data!;
-      return state.copyWith(isLoading: false, trDetailsOption: Some(Right(r)));
+      if (r.status ?? false) {
+        detailsList.clear();
+        detailsList.add(r.data!);
+        transactionDetailsData = r.data!;
+        return state.copyWith(
+            isLoading: false, trDetailsOption: Some(Right(r)));
+      } else {
+        return state.copyWith(isLoading: false, error: r.message);
+      }
     });
     emit(filterState);
   }
