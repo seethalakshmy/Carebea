@@ -126,12 +126,7 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
     );
   }
 
-  List name = [
-    'Care Ambassador issue',
-    "Service Related",
-    'Payment',
-    'Customer Care\nAnd Operations'
-  ];
+  List name = ['Care Ambassador', "Service Related", 'Payment', 'General'];
 
   _detailsCardView() {
     return BlocBuilder<ComplaintsBloc, ComplaintsState>(
@@ -237,6 +232,9 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
       controller: _searchController,
       hintText: AppString.search.val,
       hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
+      onChanged: (String value) {
+        _getCompliantsEvent();
+      },
       onSubmitted: (String val) {
         _getCompliantsEvent();
       },
@@ -528,6 +526,7 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
     String? text,
   }) {
     return CustomText(
+      overflow: TextOverflow.ellipsis,
       text ?? "",
       softWrap: true,
       style: TS().gRoboto(
