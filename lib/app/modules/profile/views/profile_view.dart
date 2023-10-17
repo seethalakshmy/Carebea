@@ -46,8 +46,7 @@ class ProfileView extends GetView<ProfileController> {
                     children: [
                       Center(
                         child: CircleAvatar(
-                          foregroundImage:
-                              NetworkImage(controller.profileResponse?.profileResponseResult?.imgUrl ?? ""),
+                          foregroundImage: NetworkImage(controller.profileResponse?.profileResponseResult?.imgUrl ?? ""),
                           backgroundColor: Colors.grey,
                           radius: 50,
                           child: const Icon(
@@ -65,7 +64,7 @@ class ProfileView extends GetView<ProfileController> {
                         style: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.grey),
                       ),
                       Text(
-                        controller.profileResponse!.profileResponseResult!.name!,
+                        controller.profileResponse?.profileResponseResult?.name ?? "",
                         style: customTheme(context).regular.copyWith(fontSize: 14),
                       ),
                       const SizedBox(
@@ -87,7 +86,7 @@ class ProfileView extends GetView<ProfileController> {
                         style: customTheme(context).regular.copyWith(fontSize: 12, color: Colors.grey),
                       ),
                       Text(
-                        controller.profileResponse!.profileResponseResult!.phone!,
+                        controller.profileResponse?.profileResponseResult?.phone ?? "",
                         style: customTheme(context).regular.copyWith(fontSize: 14),
                       ),
                       const Spacer(),

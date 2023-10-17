@@ -10,15 +10,13 @@ import '../../../model/access_token.dart';
 import '../../utils/shared_prefs.dart';
 
 class ApiService extends GetxService {
-  // var baseUrl = "https://ba7d-62-61-160-244.ngrok-free.app/api/v1/"; //test
-  // var baseUrl = "https://3a80-62-61-160-244.ngrok-free.app/api/v1/";//test server
-  var baseUrl = "http://15.206.14.111/api/v1/"; //live
-  // var baseUrl = "http://3.6.152.83/api/v1/"; //test
+  var baseUrl = "https://108c-2409-4073-4e02-62b6-7869-6a93-c468-21fb.ngrok-free.app/api/v2/"; //test
+  // var baseUrl = "http://15.206.14.111/api/v1/"; //live
 
-  // var xAuthClient = "12345";
-  // var xAuthToken = '12345';
-  var xAuthClient = "Xjfgnf35*\$&dfgkgb\$AViwqALG";
-  var xAuthToken = 'Xjfgnf35*\$&dfgkgb\$AViwqALG';
+  var xAuthClient = "12345";
+  var xAuthToken = '12345';
+  // var xAuthClient = "Xjfgnf35*\$&dfgkgb\$AViwqALG";
+  // var xAuthToken = 'Xjfgnf35*\$&dfgkgb\$AViwqALG';
 
   var auth = '';
   var token = '';
@@ -46,7 +44,7 @@ class ApiService extends GetxService {
           "grant_type": "client_credentials",
           "Content-Type": "application/json",
         },
-        body: json.encode({}));
+        body: json.encode({"device_id": SharedPrefs.getDeviceId()}));
     developer.log(response.body, name: "getAccessToken response");
 
     if (response.statusCode == 200) {
@@ -113,7 +111,7 @@ class ApiService extends GetxService {
       );
     }
     developer.log('status code : ${res.statusCode}');
-    // developer.log('response body : ${res.body}');
+    developer.log('response body : ${res.body}');
     developer.log('**** post request end : $path ****');
     if (res.statusCode == 401) {
       var val = await refreshToken();

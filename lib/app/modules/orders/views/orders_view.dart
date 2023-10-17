@@ -31,7 +31,6 @@ class _OrdersViewState extends State<OrdersView> with SingleTickerProviderStateM
   void initState() {
     ordersController.tabController1 = TabController(length: 2, vsync: this);
     ordersController.tabController1.addListener(() {
-      debugPrint("tab index${ordersController.tabController1.index}");
     });
     super.initState();
   }

@@ -11,7 +11,6 @@ class DeliveryHomePageDataSource {
       "get-homepage-data-delivery",
       {"sales_person_id": salesPeronId},
     );
-    print('inside datasource');
 
     if (response.statusCode == 200) {
       return DeliveryHomePageResponse.fromJson(json.decode(response.body));

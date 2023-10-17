@@ -4,13 +4,9 @@ import 'dart:convert';
 import 'package:carebea/app/modules/add_shop/models/add_shop_model.dart';
 import 'package:carebea/app/modules/add_shop/models/list_routes_model.dart';
 import 'package:carebea/app/modules/add_shop/models/list_state_model.dart';
-import 'package:carebea/app/modules/shops/models/shop_model.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:http/http.dart' as http;
 
 import '../../../core/services/api_service.dart';
-import 'dart:developer' as developer;
 
 import '../models/list_zone_model.dart';
 
@@ -57,11 +53,8 @@ class AddShopDataSource {
       "opening_balance": openingBalance
     });
 
-    developer.log(" url----${(Uri.parse('${apiService.baseUrl}create-shop'))}");
 
-    print("createShops response statusCode ${response.statusCode} ");
-    print("createShops response body  ${response.body}");
-    print("createShops response header ${apiService.getHeaders()}");
+
     if (response.statusCode == 200) {
       return AddShopResponse.fromJson(json.decode(response.body));
     } else {
@@ -112,17 +105,10 @@ class AddShopDataSource {
         'phone': phone,
       });
     }
-    // var response = await http.post(
-    //     Uri.parse('${apiService.baseUrl}update-shop'),
-    //     body: json.encode(body),
-    //     headers: apiService.getHeaders());
-    // developer.log(" url----${(Uri.parse('${apiService.baseUrl}update-shop'))}");
 
     var response = await apiService.post('update-shop', body);
 
-    print("updateShops response statusCode ${response.statusCode} ");
-    print("updateShops response body  ${response.body}");
-    print("updateShops response header ${apiService.getHeaders()}");
+
     if (response.statusCode == 200) {
       return AddShopResponse.fromJson(json.decode(response.body));
     } else {

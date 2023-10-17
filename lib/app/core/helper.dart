@@ -60,8 +60,7 @@ onPageChanged(
       scrollNotification.metrics.pixels == scrollNotification.metrics.maxScrollExtent &&
       !stopLoading.value) {
     pageNumber += 1;
-    debugPrint('isScrollLoading : $isScrollLoading, $pageNumber');
-    debugPrint('stoploading : $stopLoading, $pageNumber');
+
     function();
   }
 }
@@ -114,7 +113,6 @@ callPhone(String phone) async {
   if (await canLaunchUrl(url)) {
     await launchUrl(url);
   } else {
-    print('Could not launch $url');
     throw 'Could not launch $url';
   }
 }
@@ -131,7 +129,6 @@ Future<String?> getDownloadPath() async {
       if (!await directory.exists()) directory = await getExternalStorageDirectory();
     }
   } catch (err, stack) {
-    print("Cannot get download folder path");
   }
   return directory?.path;
 }

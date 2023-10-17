@@ -31,11 +31,7 @@ class PaymentDataSource {
     }
 
     var response = await apiService.post('credit-payment', body);
-    // developer.log(" url----${(Uri.parse('${apiService.baseUrl}list-orders'))}");
-    //
-    // print("listOrders response statusCode ${response.statusCode} ");
-    // print("listOrders response body  ${response.body}");
-    // print("listOrders response header ${apiService.getHeaders()}");
+
     if (response.statusCode == 200) {
       return PaymentResponse.fromJson(json.decode(response.body));
     } else {

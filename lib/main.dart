@@ -15,7 +15,6 @@ final CloudMessaging cloudMessaging = CloudMessaging();
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   await cloudMessaging.initMessaging();
-  print("background message called");
   cloudMessaging.backgroundMessageHandler(message);
 }
 

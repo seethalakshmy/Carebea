@@ -3,11 +3,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedPrefs {
   static late SharedPreferences shared;
   SharedPrefs() {
-    print("SharedPrefs called");
     init();
   }
   Future init() async {
-    print("SharedPrefs --- init called");
 
     shared = await SharedPreferences.getInstance();
   }
@@ -173,7 +171,6 @@ class SharedPrefs {
   }
 
   static void setDeviceId(String deveiceId) {
-    print("\n\n setDeveiceId deveiceId : $deveiceId");
     shared.setString('deveice_Id', deveiceId);
   }
 

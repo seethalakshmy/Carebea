@@ -181,7 +181,6 @@ class CheckoutView extends StatelessWidget {
               ...List.generate(
                 createOrderController.selectedProducts.length,
                 (index) {
-                  print(createOrderController.selectedProducts.length.toString() + "hai");
                   var product = createOrderController.selectedProducts[index];
                   return TableRow(children: [
                     Text(

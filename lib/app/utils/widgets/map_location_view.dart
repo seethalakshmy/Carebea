@@ -11,7 +11,6 @@ class MapLocationView extends StatefulWidget {
     BitmapDescriptor.fromAssetImage(ImageConfiguration(devicePixelRatio: 10), 'assets/images/location_filled.png')
         .then((onValue) {
       mapPin = onValue;
-      print('got nbitmap $onValue');
     });
   }
 

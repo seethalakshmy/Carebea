@@ -23,9 +23,7 @@ class AuthenticationRemoteDataSource {
         body: json.encode({'email': email, 'password': password}), headers: apiService.getHeaders());
     developer.log(" url----${(Uri.parse('${apiService.baseUrl}user-login-username'))}");
 
-    print("emailLogin response statusCode ${response.statusCode} ");
-    print("emailLogin response body  ${response.body}");
-    print("emailLogin response header ${apiService.getHeaders()}");
+   
     if (response.statusCode == 200) {
       return EmailLoginResponse.fromJson(json.decode(response.body));
     } else {

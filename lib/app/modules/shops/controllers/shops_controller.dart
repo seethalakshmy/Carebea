@@ -52,7 +52,6 @@ class ShopsController extends GetxController {
 
   @override
   void onInit() {
-    print("startt");
 
     scrollController.addListener(() {
       if (((scrollController.position.maxScrollExtent * .7) <= scrollController.position.pixels) && !isPaginating.value) {
@@ -63,18 +62,9 @@ class ShopsController extends GetxController {
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
+ 
 
   fetchAllShops() async {
-    print("iuor");
     searchEditingController.text = "";
     shopList.clear();
     filterSelected("");
@@ -92,9 +82,7 @@ class ShopsController extends GetxController {
       filterVals = null;
     }
 
-    debugPrint("fetchAllShops $shopListResponse");
 
-    debugPrint('fetch shops status ${shopListResponse.shopListResult!.status!}');
 
     isLoading(false);
   }
@@ -114,9 +102,7 @@ class ShopsController extends GetxController {
     } else {
       upcomingOrderCount(orderHistory?.length ?? 0);
     }
-    debugPrint("fetchAllOrders $orderListResponse");
 
-    debugPrint('fetch order status ${orderListResponse!.orderListResult!.status}');
 
     isOrdersLoading(false);
   }

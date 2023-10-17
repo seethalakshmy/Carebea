@@ -54,11 +54,7 @@ class OrderDataSource {
     }
 
     var response = await apiService.post('list-orders', body);
-    developer.log(" url----${(Uri.parse('${apiService.baseUrl}list-orders'))}");
-
-    print("listOrders response statusCode ${response.statusCode} ");
-    print("listOrders response body  ${response.body}");
-    print("listOrders response header ${apiService.getHeaders()}");
+  
     if (response.statusCode == 200) {
       return OrderListResponse.fromJson(json.decode(response.body));
     } else {

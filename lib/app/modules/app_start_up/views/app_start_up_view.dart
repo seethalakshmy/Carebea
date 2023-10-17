@@ -42,8 +42,7 @@ class _AppStartUpViewState extends State<AppStartUpView> {
     validTokenPresent = await apiService.getAccessToken();
     // validTokenPresent = true;
     if (validTokenPresent == true) {
-      print("validTokenPresent ${validTokenPresent}");
-      print("userid ${SharedPrefs.getUserId()}");
+    
       if (SharedPrefs.getUserId() != null) {
         if (SharedPrefs.getUserType() == 2) {
           Get.offNamed(Routes.DELIVERY_HOME);

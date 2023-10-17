@@ -160,17 +160,7 @@ class LoginView extends GetView<LoginController> {
                           const SizedBox(
                             height: 10,
                           ),
-                          // Align(
-                          //   alignment: Alignment.centerRight,
-                          //   child: TextButton(
-                          //     onPressed: onForgotPasswordClicked,
-                          //     child: Text('Forgot Password?',
-                          //         style: customTheme(context)
-                          //             .medium
-                          //             .copyWith(fontSize: 12,
-                          //             color: customTheme(context).primary)),
-                          //   ),
-                          // ),
+                          
                           const SizedBox(
                             height: 15,
                           ),
@@ -182,33 +172,10 @@ class LoginView extends GetView<LoginController> {
                                   controller.loginWithEmail(
                                       username: controller.username ?? '',
                                       password: controller.password ?? '');
-                                  print(
-                                      'username ${controller.username ?? ''}');
-                                  print(
-                                      'password ${controller.password ?? ''}');
-                                  // FirebaseCrashlytics.instance.crash();
-                                  // if(userController.text=='1'){
-                                  //   Get.toNamed(Routes.DASHBOARD);
-                                  //
-                                  //
-                                  // }
-                                  // else{
-                                  //   Get.toNamed(Routes.DELIVERY_HOME);
-                                  // }
+                               
                                 });
                           })
-                          // SizedBox(
-                          //   width: MediaQuery.of(context).size.width,
-                          //   height: 50,
-                          //   child: ElevatedButton(
-                          //       style: ButtonStyle(
-                          //           backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)
-                          //       ),
-                          //       onPressed: () {
-                          //         controller.mobileLogin();
-                          //       },
-                          //       child: const Text('LOGIN')),
-                          // )
+                       
                         ],
                       ),
                     ),

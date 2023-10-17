@@ -102,7 +102,6 @@ class ListShops extends StatelessWidget {
                               scale: 3.5,
                             ),
                             onSelected: (element) {
-                              print("datas ${controller.searchEditingController.text}");
                               controller.searchEditingController.text == "";
                             },
                             itemBuilder: (BuildContext context) {
@@ -199,7 +198,6 @@ class ListShops extends StatelessWidget {
           name: e.name!,
           isSelected: value == "Category-${e.id}",
           onTap: () {
-            print("search ${controller.searchEditingController.value}");
             controller.searchEditingController.text = "";
             controller.filterShops('Category', e.id!);
           },

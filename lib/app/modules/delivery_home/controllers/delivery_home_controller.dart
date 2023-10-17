@@ -23,25 +23,15 @@ class DeliveryHomeController extends GetxController {
   List<History> orders = [];
   List<List<History>> orderHistoryList = [];
 
-  //TODO: Implement DeliveryHomeController
 
   final count = 0.obs;
   @override
   void onInit() {
-    print("onit");
     fetchDeliveryHomePageData();
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
 
   void increment() => count.value++;
 

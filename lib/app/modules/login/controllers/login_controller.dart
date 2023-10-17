@@ -36,18 +36,11 @@ class LoginController extends GetxController {
   RxBool isLoading = RxBool(false);
   loginWithEmail({required String username, required String password}) async {
     isLoading(true);
-    debugPrint("in login controller -- loginWithEmail\n\n");
     if (loginFormKey.currentState!.validate()) {
-      debugPrint(" email id validated \n\n");
 
-      debugPrint("calling loginWithEmail api");
-      print('username controller${username}');
-      print('password controller${password}');
       EmailLoginResponse response = await authenticationRepo.loginWithEmail(username, password);
 
-      debugPrint("EmailLoginResponse $response");
-      debugPrint("email login  ${response.toJson()}");
-      debugPrint("email login status  ${response.emailLogin?.status}");
+    
 
       if (response.emailLogin?.status ?? false) {
         SharedPrefs.setUserId(response.emailLogin!.userId!);
@@ -55,15 +48,11 @@ class LoginController extends GetxController {
         SharedPrefs.setLoggedInStatus(true);
         SharedPrefs.setUserType(response.emailLogin!.userType);
 
-        print("userid ${SharedPrefs.getUserId()}");
 
         if (response.emailLogin!.userType == 2) {
           Get.offNamed(Routes.DELIVERY_HOME);
         } else {
-          print("branchid ${SharedPrefs.getBranchId()}");
-          print("branchName ${SharedPrefs.getBranchName()}");
-          print("ZoneName ${SharedPrefs.getZoneName()}");
-          print("Zoneid ${SharedPrefs.getZoneId()}");
+
           SharedPrefs.setBranchId(response.emailLogin!.branch!.first.id!);
           SharedPrefs.setZoneId(response.emailLogin!.zone!.first.id!);
           SharedPrefs.setBranchName(response.emailLogin!.branch!.first.name!);
@@ -86,8 +75,7 @@ class LoginController extends GetxController {
     }
     var response = await authenticationRepo.resetUserPassword(email: username!);
     if (response.result!.status ?? false) {
-      Get.toNamed(Routes.FORGOT_PASSWORD,
-          arguments: {"userId": response.result!.userId, "email": response.result!.email});
+      Get.toNamed(Routes.FORGOT_PASSWORD, arguments: {"userId": response.result!.userId, "email": response.result!.email});
     } else {
       showSnackBar(response.result?.message ?? "Something happpend, Please try again!!!");
     }

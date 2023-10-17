@@ -30,8 +30,6 @@ class CloudMessaging {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   Future initMessaging() async {
-    String? token = await FirebaseMessaging.instance.getToken();
-    print("\n\n Token $token");
     var initializationSettingsAndroid = const AndroidInitializationSettings("launch_background");
     var initializationSettingsIOS = const IOSInitializationSettings();
 
@@ -39,7 +37,6 @@ class CloudMessaging {
         InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
 
     await flutterLocalNotificationsPlugin.initialize(initializationSettings, onSelectNotification: (message) async {
-      print("on tap $message");
       if ((message ?? "").isEmpty) return;
       var msg = json.decode(message!);
       if (msg["type"] == "invoice") {
@@ -50,25 +47,10 @@ class CloudMessaging {
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
-    print(await FirebaseMessaging.instance.getToken());
   }
 
   Future<void> backgroundMessageHandler(RemoteMessage message) async {
-    // await Firebase.initializeApp();
-    print('Handling a background message ${message.messageId}');
-    print(message.data);
-    // flutterLocalNotificationsPlugin.show(
-    //     0,
-    //     message.data["name"],
-    //     message.data["body"],
-    //     NotificationDetails(
-    //       android: AndroidNotificationDetails(
-    //         channel.id,
-    //         channel.name,
-    //         channel.description,
-    //         icon: 'launch_background',
-    //       ),
-    //     ));
+ 
   }
 
   Future<void> showDownloadNotification(String path) async {
@@ -89,7 +71,6 @@ class CloudMessaging {
   Future<void> foregroundMessageHandler(RemoteMessage message) async {
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = message.notification?.android;
-    debugPrint("message data + ${message.data}");
 
     if (notification != null && android != null) {
       flutterLocalNotificationsPlugin.show(

@@ -101,7 +101,6 @@ class AddShopController extends GetxController {
     required int routeId,
   }) async {
     isAddShopButtonPressed(true);
-    print("hi");
 
     if (currentLocation?.latitude == null) {
       showSnackBar("Please update your location");
@@ -307,7 +306,6 @@ class AddShopController extends GetxController {
       selectedCategory = category.singleWhere(
           (element) => element.name?.toLowerCase() == (Get.arguments["shop"] as ShopList).category?.toLowerCase());
     }
-    debugPrint(selectedCategory?.toJson().toString());
   }
 
   LocationData? currentLocation;
@@ -323,8 +321,7 @@ class AddShopController extends GetxController {
     searchingLocation(true);
     try {
       currentLocation = await _location.getLocation();
-      debugPrint("lat ${currentLocation?.latitude}");
-      debugPrint("long ${currentLocation?.longitude}");
+
     } catch (e, s) {
       log("location error", error: e, stackTrace: s);
       currentLocation = null;
