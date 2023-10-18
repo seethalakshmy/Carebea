@@ -46,7 +46,7 @@ class ApiService extends GetxService {
           "grant_type": "client_credentials",
           "Content-Type": "application/json",
         },
-        body: json.encode({"device_id": SharedPrefs.getDeviceId()}));
+        body: json.encode({"device_id": ""}));
     developer.log(response.body, name: "getAccessToken response");
 
     if (response.statusCode == 200) {
@@ -270,7 +270,7 @@ class ApiService extends GetxService {
   Future<bool> _handleInvalidAccessToken(String body) async {
     try {
       var _body = json.decode(body);
-      if (![498, 403].contains(_body["result"]["status_code"])) {
+      if (![498, 403, 401, 499].contains(_body["result"]["status_code"])) {
         return false;
       }
     } catch (e) {}
