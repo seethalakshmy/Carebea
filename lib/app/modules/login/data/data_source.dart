@@ -19,11 +19,9 @@ class AuthenticationRemoteDataSource {
   /// Email login
 
   Future<EmailLoginResponse> emailLogin(String email, String password) async {
-    var response = await http.post(Uri.parse('${apiService.baseUrl}user-login-username'),
-        body: json.encode({'email': email, 'password': password}), headers: apiService.getHeaders());
+    var response = await http.post(Uri.parse('${apiService.baseUrl}user-login-username'), body: json.encode({'email': email, 'password': password}), headers: apiService.getHeaders());
     developer.log(" url----${(Uri.parse('${apiService.baseUrl}user-login-username'))}");
 
-   
     if (response.statusCode == 200) {
       return EmailLoginResponse.fromJson(json.decode(response.body));
     } else {

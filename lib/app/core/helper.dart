@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:carebea/app/modules/shops/models/shop_model.dart';
+import 'package:carebea/app/utils/shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:restart_app/restart_app.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 ///validate email with regex
@@ -141,4 +143,24 @@ void navigateTo(double lat, double lng) async {
   } else {
     throw 'Could not launch ${uri.toString()}';
   }
+}
+
+
+void performLogout() {
+  var deviceId = SharedPrefs.getDeviceId();
+  var deviceType = SharedPrefs.getDeviceType();
+  var appVersion = SharedPrefs.getAppVersion();
+  var accessToken = SharedPrefs.getAccessToken();
+  var refreshToken = SharedPrefs.getAccessToken();
+
+  SharedPrefs.shared.clear();
+
+  SharedPrefs.setDeviceId(deviceId);
+  SharedPrefs.setDeviceType(deviceType);
+  SharedPrefs.setAppVersion(appVersion);
+  SharedPrefs.setAccessToken(accessToken!);
+  SharedPrefs.setRefreshToken(refreshToken!);
+
+  // Get.offNamedUntil(Routes.LOGIN, (route) => route.isFirst);
+  Restart.restartApp();
 }

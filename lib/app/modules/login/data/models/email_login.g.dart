@@ -35,6 +35,9 @@ EmailLogin _$EmailLoginFromJson(Map<String, dynamic> json) => EmailLogin(
       zone: (json['zone'] as List<dynamic>?)
           ?.map((e) => Branch.fromJson(e as Map<String, dynamic>))
           .toList(),
+      data: json['data'] == null
+          ? null
+          : Data.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$EmailLoginToJson(EmailLogin instance) =>
@@ -47,6 +50,7 @@ Map<String, dynamic> _$EmailLoginToJson(EmailLogin instance) =>
       'name': instance.name,
       'branch': instance.branch,
       'zone': instance.zone,
+      'data': instance.data,
     };
 
 Branch _$BranchFromJson(Map<String, dynamic> json) => Branch(
@@ -67,4 +71,22 @@ Zone _$ZoneFromJson(Map<String, dynamic> json) => Zone(
 Map<String, dynamic> _$ZoneToJson(Zone instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+    };
+
+Data _$DataFromJson(Map<String, dynamic> json) => Data(
+      token: json['token'] as String?,
+      userId: json['user_id'] as int?,
+      userEmailId: json['user_email_id'] as String?,
+      profileName: json['profile_id'] as String?,
+      isActive: json['is_active'] as bool?,
+      refreshToken: json['refresh_token'] as String?,
+    );
+
+Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
+      'token': instance.token,
+      'user_id': instance.userId,
+      'refresh_token': instance.refreshToken,
+      'user_email_id': instance.userEmailId,
+      'profile_id': instance.profileName,
+      'is_active': instance.isActive,
     };

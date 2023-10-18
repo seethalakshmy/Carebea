@@ -1,24 +1,17 @@
+import 'package:carebea/app/core/helper.dart';
 import 'package:carebea/app/utils/widgets/appbar.dart';
-import 'package:carebea/app/modules/login/views/login_view.dart';
-import 'package:carebea/app/modules/profile/widgets/logout_button.dart';
-import 'package:carebea/app/routes/app_pages.dart';
-import 'package:carebea/app/utils/shared_prefs.dart';
 import 'package:carebea/app/utils/widgets/circular_progress_indicator.dart';
 import 'package:carebea/app/utils/widgets/custom_alertbox.dart';
 import 'package:carebea/app/utils/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:http/http.dart';
-import 'package:restart_app/restart_app.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../utils/assets.dart';
 import '../../../utils/theme.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
-  ProfileView({Key? key}) : super(key: key);
+  const ProfileView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -126,22 +119,7 @@ class ProfileView extends GetView<ProfileController> {
       ),
     ).then((value) {
       if (value ?? false) {
-        var DeveiceId = SharedPrefs.getDeviceId();
-        var DeveiceType = SharedPrefs.getDeviceType();
-        var appVersion = SharedPrefs.getAppVersion();
-        var accessToken = SharedPrefs.getAccessToken();
-        var refreshToken = SharedPrefs.getAccessToken();
-
-        SharedPrefs.shared.clear();
-
-        SharedPrefs.setDeviceId(DeveiceId);
-        SharedPrefs.setDeviceType(DeveiceType);
-        SharedPrefs.setAppVersion(appVersion);
-        SharedPrefs.setAccessToken(accessToken!);
-        SharedPrefs.setRefreshToken(refreshToken!);
-
-        // Get.offNamedUntil(Routes.LOGIN, (route) => route.isFirst);
-        Restart.restartApp();
+        performLogout();
       }
     });
   }

@@ -6,13 +6,18 @@ part of 'create_order.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-CreateOrderResponse _$CreateOrderResponseFromJson(Map<String, dynamic> json) => CreateOrderResponse(
+CreateOrderResponse _$CreateOrderResponseFromJson(Map<String, dynamic> json) =>
+    CreateOrderResponse(
       jsonrpc: json['jsonrpc'] as String?,
       id: json['id'],
-      result: json['result'] == null ? null : Result.fromJson(json['result'] as Map<String, dynamic>),
+      result: json['result'] == null
+          ? null
+          : Result.fromJson(json['result'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$CreateOrderResponseToJson(CreateOrderResponse instance) => <String, dynamic>{
+Map<String, dynamic> _$CreateOrderResponseToJson(
+        CreateOrderResponse instance) =>
+    <String, dynamic>{
       'jsonrpc': instance.jsonrpc,
       'id': instance.id,
       'result': instance.result,
@@ -50,13 +55,15 @@ Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
       'product_total': instance.productTotal,
     };
 
-PaymentMethod _$PaymentMethodFromJson(Map<String, dynamic> json) => PaymentMethod(
+PaymentMethod _$PaymentMethodFromJson(Map<String, dynamic> json) =>
+    PaymentMethod(
       id: json['id'] as int?,
       name: json['name'] as String?,
       code: json['code'] as String?,
     );
 
-Map<String, dynamic> _$PaymentMethodToJson(PaymentMethod instance) => <String, dynamic>{
+Map<String, dynamic> _$PaymentMethodToJson(PaymentMethod instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'code': instance.code,
@@ -65,14 +72,15 @@ Map<String, dynamic> _$PaymentMethodToJson(PaymentMethod instance) => <String, d
 OfferProduct _$OfferProductFromJson(Map<String, dynamic> json) => OfferProduct(
       productId: json['product_id'] as int?,
       productName: json['product_name'] as String?,
-      productUomQty: (json['product_uom_qty'] as num?)?.toInt(),
+      productUomQty: json['product_uom_qty'] as int?,
       discount: json['discount'] as int?,
       giftProduct: json['gift_product'] as bool?,
       offerName: json['offer_name'] as String?,
-      offerQuantity: (json['offer_quantity'] as num?)?.toInt(),
+      offerQuantity: json['offer_quantity'] as int?,
     );
 
-Map<String, dynamic> _$OfferProductToJson(OfferProduct instance) => <String, dynamic>{
+Map<String, dynamic> _$OfferProductToJson(OfferProduct instance) =>
+    <String, dynamic>{
       'product_id': instance.productId,
       'product_name': instance.productName,
       'product_uom_qty': instance.productUomQty,
@@ -88,7 +96,8 @@ PaymentTerms _$PaymentTermsFromJson(Map<String, dynamic> json) => PaymentTerms(
       note: json['note'] as String?,
     );
 
-Map<String, dynamic> _$PaymentTermsToJson(PaymentTerms instance) => <String, dynamic>{
+Map<String, dynamic> _$PaymentTermsToJson(PaymentTerms instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'note': instance.note,

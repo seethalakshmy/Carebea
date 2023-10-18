@@ -64,8 +64,7 @@ class EmailLoginResponse {
   @JsonKey(name: 'result')
   EmailLogin? emailLogin;
 
-  factory EmailLoginResponse.fromJson(Map<String, dynamic> json) =>
-      _$EmailLoginResponseFromJson(json);
+  factory EmailLoginResponse.fromJson(Map<String, dynamic> json) => _$EmailLoginResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$EmailLoginResponseToJson(this);
 }
@@ -81,6 +80,7 @@ class EmailLogin {
     this.name,
     this.branch,
     this.zone,
+    this.data,
   });
 
   bool? status;
@@ -93,9 +93,9 @@ class EmailLogin {
   String? name;
   List<Branch>? branch;
   List<Branch>? zone;
+  Data? data;
 
-  factory EmailLogin.fromJson(Map<String, dynamic> json) =>
-      _$EmailLoginFromJson(json);
+  factory EmailLogin.fromJson(Map<String, dynamic> json) => _$EmailLoginFromJson(json);
 
   Map<String, dynamic> toJson() => _$EmailLoginToJson(this);
 }
@@ -128,4 +128,32 @@ class Zone {
   factory Zone.fromJson(Map<String, dynamic> json) => _$ZoneFromJson(json);
 
   Map<String, dynamic> toJson() => _$ZoneToJson(this);
+}
+
+@JsonSerializable()
+class Data {
+  final String? token;
+  @JsonKey(name: "user_id")
+  final int? userId;
+  @JsonKey(name: "refresh_token")
+  final String? refreshToken;
+  @JsonKey(name: "user_email_id")
+  final String? userEmailId;
+  @JsonKey(name: "profile_id")
+  final String? profileName;
+  @JsonKey(name: "is_active")
+  final bool? isActive;
+
+  Data({
+    this.token,
+    this.userId,
+    this.userEmailId,
+    this.profileName,
+    this.isActive,
+    this.refreshToken,
+  });
+
+  factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DataToJson(this);
 }

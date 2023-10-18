@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:carebea/app/core/helper.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'dart:developer' as developer;
@@ -10,14 +12,14 @@ import '../../../model/access_token.dart';
 import '../../utils/shared_prefs.dart';
 
 class ApiService extends GetxService {
-  var baseUrl = "https://108c-2409-4073-4e02-62b6-7869-6a93-c468-21fb.ngrok-free.app/api/v2/"; //test
-  // var baseUrl = "http://15.206.14.111/api/v1/"; //live
+  // final _baseUrl = "https://fa5f-2409-4073-4e02-62b6-e95-40d6-2ed0-746e.ngrok-free.app"; //test
+  final _baseUrl = "http://15.206.14.111"; //live
 
-  var xAuthClient = "12345";
-  var xAuthToken = '12345';
-  // var xAuthClient = "Xjfgnf35*\$&dfgkgb\$AViwqALG";
-  // var xAuthToken = 'Xjfgnf35*\$&dfgkgb\$AViwqALG';
-
+  // var xAuthClient = "12345";
+  // var xAuthToken = '12345';
+  var xAuthClient = "Xjfgnf35*\$&dfgkgb\$AViwqALG";
+  var xAuthToken = 'Xjfgnf35*\$&dfgkgb\$AViwqALG';
+  String get baseUrl => "$_baseUrl/api/v2/";
   var auth = '';
   var token = '';
 
@@ -113,9 +115,15 @@ class ApiService extends GetxService {
     developer.log('status code : ${res.statusCode}');
     developer.log('response body : ${res.body}');
     developer.log('**** post request end : $path ****');
-    if (res.statusCode == 401) {
-      var val = await refreshToken();
-      if (val) return await post(path, body);
+    if (await _handleInvalidAccessToken(res.body)) {
+      return http.Response(
+        json.encode({
+          'status': false,
+          'detail': 'Connection timeout',
+          "body": {"status": false, "message": 'Connection timeout'}
+        }),
+        408,
+      );
     }
     return res;
   }
@@ -156,9 +164,15 @@ class ApiService extends GetxService {
     developer.log('status code : ${res.statusCode}');
     developer.log('response body : ${res.body}');
     developer.log('**** put request end : $path ****');
-    if (res.statusCode == 401) {
-      var val = await refreshToken();
-      if (val) return await put(path, body);
+    if (await _handleInvalidAccessToken(res.body)) {
+      return http.Response(
+        json.encode({
+          'status': false,
+          'detail': 'Connection timeout',
+          "body": {"status": false, "message": 'Connection timeout'}
+        }),
+        408,
+      );
     }
     return res;
   }
@@ -195,9 +209,15 @@ class ApiService extends GetxService {
     developer.log('status code : ${res.statusCode}');
     developer.log('response body : ${res.body}');
     developer.log('**** get request end : $path ****');
-    if (res.statusCode == 401) {
-      var val = await refreshToken();
-      if (val) return await get(path);
+    if (await _handleInvalidAccessToken(res.body)) {
+      return http.Response(
+        json.encode({
+          'status': false,
+          'detail': 'Connection timeout',
+          "body": {"status": false, "message": 'Connection timeout'}
+        }),
+        408,
+      );
     }
     return res;
   }
@@ -234,10 +254,30 @@ class ApiService extends GetxService {
     developer.log('status code : ${res.statusCode}');
     developer.log('response body : ${res.body}');
     developer.log('**** delete request end : $path ****');
-    if (res.statusCode == 401) {
-      var val = await refreshToken();
-      if (val) return await delete(path, body);
+    if (await _handleInvalidAccessToken(res.body)) {
+      return http.Response(
+        json.encode({
+          'status': false,
+          'detail': 'Connection timeout',
+          "body": {"status": false, "message": 'Connection timeout'}
+        }),
+        408,
+      );
     }
     return res;
+  }
+
+  Future<bool> _handleInvalidAccessToken(String body) async {
+    try {
+      var _body = json.decode(body);
+      if (![498, 403].contains(_body["result"]["status_code"])) {
+        return false;
+      }
+    } catch (e) {}
+    ScaffoldMessenger.of(Get.context!).showSnackBar(const SnackBar(content: Text("Session Expired Loging out")));
+    await Future.delayed(const Duration(seconds: 1));
+    performLogout();
+
+    return true;
   }
 }

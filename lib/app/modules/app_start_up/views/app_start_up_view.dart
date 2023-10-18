@@ -17,7 +17,6 @@ class AppStartUpView extends StatefulWidget {
 }
 
 class _AppStartUpViewState extends State<AppStartUpView> {
-  bool validTokenPresent = false;
   ApiService apiService = Get.put(ApiService());
 
   @override
@@ -34,15 +33,16 @@ class _AppStartUpViewState extends State<AppStartUpView> {
     ));
   }
 
-  // generateAccessToken() async {
-  //   validTokenPresent = await apiService.getAccessToken();
-  // }
-
   generateAccessToken() async {
-    validTokenPresent = await apiService.getAccessToken();
-    // validTokenPresent = true;
-    if (validTokenPresent == true) {
-    
+    bool validTokenPresent = false;
+    if (SharedPrefs.isloggedIn()) {
+      await Future.delayed(Duration.zero);
+      validTokenPresent = true;
+    } else {
+      validTokenPresent = await apiService.getAccessToken();
+    }
+
+    if (validTokenPresent) {
       if (SharedPrefs.getUserId() != null) {
         if (SharedPrefs.getUserType() == 2) {
           Get.offNamed(Routes.DELIVERY_HOME);

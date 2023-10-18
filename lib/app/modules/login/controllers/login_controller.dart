@@ -37,22 +37,19 @@ class LoginController extends GetxController {
   loginWithEmail({required String username, required String password}) async {
     isLoading(true);
     if (loginFormKey.currentState!.validate()) {
-
       EmailLoginResponse response = await authenticationRepo.loginWithEmail(username, password);
-
-    
 
       if (response.emailLogin?.status ?? false) {
         SharedPrefs.setUserId(response.emailLogin!.userId!);
 
         SharedPrefs.setLoggedInStatus(true);
         SharedPrefs.setUserType(response.emailLogin!.userType);
-
+        SharedPrefs.setAccessToken(response.emailLogin!.data!.token!);
+        SharedPrefs.setRefreshToken(response.emailLogin!.data!.refreshToken!);
 
         if (response.emailLogin!.userType == 2) {
           Get.offNamed(Routes.DELIVERY_HOME);
         } else {
-
           SharedPrefs.setBranchId(response.emailLogin!.branch!.first.id!);
           SharedPrefs.setZoneId(response.emailLogin!.zone!.first.id!);
           SharedPrefs.setBranchName(response.emailLogin!.branch!.first.name!);
