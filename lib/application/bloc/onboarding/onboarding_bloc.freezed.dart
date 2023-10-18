@@ -20812,7 +20812,7 @@ mixin _$OnboardingState {
       throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, DocumentListResponse>> get documentOption =>
       throw _privateConstructorUsedError;
-  Option<Either<ApiErrorHandler, StateListReponse>> get stateOption =>
+  Option<Either<ApiErrorHandler, StateListResponse>> get stateOption =>
       throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, CityListResponse>> get cityOption =>
       throw _privateConstructorUsedError;
@@ -20886,7 +20886,7 @@ abstract class $OnboardingStateCopyWith<$Res> {
           personalDetailsOption,
       Option<Either<ApiErrorHandler, GenderListResponse>> genderOption,
       Option<Either<ApiErrorHandler, DocumentListResponse>> documentOption,
-      Option<Either<ApiErrorHandler, StateListReponse>> stateOption,
+      Option<Either<ApiErrorHandler, StateListResponse>> stateOption,
       Option<Either<ApiErrorHandler, CityListResponse>> cityOption,
       Option<Either<ApiErrorHandler, PetListResponse>> petListOption,
       Option<Either<ApiErrorHandler, YearsOfExperienceResponse>> yearsOption,
@@ -21104,7 +21104,7 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
       stateOption: null == stateOption
           ? _value.stateOption
           : stateOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<ApiErrorHandler, StateListReponse>>,
+              as Option<Either<ApiErrorHandler, StateListResponse>>,
       cityOption: null == cityOption
           ? _value.cityOption
           : cityOption // ignore: cast_nullable_to_non_nullable
@@ -21201,7 +21201,7 @@ abstract class _$$_OnboardingStateCopyWith<$Res>
           personalDetailsOption,
       Option<Either<ApiErrorHandler, GenderListResponse>> genderOption,
       Option<Either<ApiErrorHandler, DocumentListResponse>> documentOption,
-      Option<Either<ApiErrorHandler, StateListReponse>> stateOption,
+      Option<Either<ApiErrorHandler, StateListResponse>> stateOption,
       Option<Either<ApiErrorHandler, CityListResponse>> cityOption,
       Option<Either<ApiErrorHandler, PetListResponse>> petListOption,
       Option<Either<ApiErrorHandler, YearsOfExperienceResponse>> yearsOption,
@@ -21417,7 +21417,7 @@ class __$$_OnboardingStateCopyWithImpl<$Res>
       stateOption: null == stateOption
           ? _value.stateOption
           : stateOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<ApiErrorHandler, StateListReponse>>,
+              as Option<Either<ApiErrorHandler, StateListResponse>>,
       cityOption: null == cityOption
           ? _value.cityOption
           : cityOption // ignore: cast_nullable_to_non_nullable
@@ -21657,7 +21657,7 @@ class _$_OnboardingState implements _OnboardingState {
   @override
   final Option<Either<ApiErrorHandler, DocumentListResponse>> documentOption;
   @override
-  final Option<Either<ApiErrorHandler, StateListReponse>> stateOption;
+  final Option<Either<ApiErrorHandler, StateListResponse>> stateOption;
   @override
   final Option<Either<ApiErrorHandler, CityListResponse>> cityOption;
   @override
@@ -21882,7 +21882,7 @@ abstract class _OnboardingState implements OnboardingState {
           genderOption,
       required final Option<Either<ApiErrorHandler, DocumentListResponse>>
           documentOption,
-      required final Option<Either<ApiErrorHandler, StateListReponse>>
+      required final Option<Either<ApiErrorHandler, StateListResponse>>
           stateOption,
       required final Option<Either<ApiErrorHandler, CityListResponse>>
           cityOption,
@@ -21979,7 +21979,7 @@ abstract class _OnboardingState implements OnboardingState {
   @override
   Option<Either<ApiErrorHandler, DocumentListResponse>> get documentOption;
   @override
-  Option<Either<ApiErrorHandler, StateListReponse>> get stateOption;
+  Option<Either<ApiErrorHandler, StateListResponse>> get stateOption;
   @override
   Option<Either<ApiErrorHandler, CityListResponse>> get cityOption;
   @override

@@ -23,6 +23,7 @@ import '../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/city_list_response.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/gender_list_response.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/personal_details_response.dart';
+import '../../../presentation/on_boarding/modules/personal_details/models/state_item.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/state_list_reponse.dart';
 import '../../../presentation/on_boarding/modules/preference/models/language_list_response.dart';
 import '../../../presentation/on_boarding/modules/qualification_details/models/qualification_and_test_result_request_model.dart';
@@ -355,7 +356,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   Future<void> getStateResult(
       _StateLists? event, Emitter<OnboardingState> emit) async {
     emit(state.copyWith(isInitialLoading: event!.wantLoading));
-    final Either<ApiErrorHandler, StateListReponse> stateResult =
+    final Either<ApiErrorHandler, StateListResponse> stateResult =
         await onboardingRepository.getStateList(
             page: statePage.toString(), searchKey: event.stateSearchQuery);
     OnboardingState stateState = stateResult.fold((l) {

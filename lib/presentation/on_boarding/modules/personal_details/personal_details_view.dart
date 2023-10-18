@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,6 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pdf_render/pdf_render_widgets.dart';
 
 import '../../../../application/bloc/form_validation/form_validation_bloc.dart';
+import '../../../../application/bloc/get_cities_bloc/get_cities_bloc.dart';
+import '../../../../application/bloc/get_states_bloc/get_states_bloc.dart';
 import '../../../../application/bloc/onboarding/onboarding_bloc.dart';
 import '../../../../core/custom_snackbar.dart';
 import '../../../../core/enum.dart';
@@ -32,6 +36,7 @@ import '../../widgets/gender_drop_down.dart';
 import '../../widgets/image_preview_widget.dart';
 import '../../widgets/on_boarding_title_divider_widget.dart';
 import '../../widgets/upload_document_widget.dart';
+import 'models/city_list_response.dart';
 import 'widgets/address_selection_widget.dart';
 import 'widgets/document_details_view.dart';
 import 'widgets/profile_picture_widget.dart';
@@ -82,7 +87,6 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
 
   @override
   void initState() {
-    print('inside page ${SharedPreffUtil().getIsFromWebsite}');
     widget.onboardingBloc.add(const OnboardingEvent.commonData());
     widget.onboardingBloc.add(const OnboardingEvent.stateList(
         stateSearchQuery: "", wantLoading: true));
@@ -107,74 +111,137 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         BlocProvider(
             create: (context) => OnboardingBloc(OnBoardingRepository()))
       ],
-      child: BlocConsumer<OnboardingBloc, OnboardingState>(
-        buildWhen: (previous, current) => previous != current,
-        listener: (context, listenerState) {
-          return listenerState.personalDetailsOption.fold(() {}, (some) {
-            some.fold((l) {
-              CSnackBar.showError(context, msg: l.error);
-            }, (r) {
-              if (widget.onboardingBloc.nextButtonClicked) {
-                widget.pageController
-                    .jumpToPage(widget.pageController.page!.toInt() + 1);
-              }
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<GetStatesBloc, GetStatesState>(
+            listener: (context, state) {
+              state.when(
+                  initial: () {},
+                  loading: (_) {},
+                  failed: (_) {},
+                  success: (data) {
+                    bool stateExists = false;
+
+                    for (var element in data) {
+                      log("elementName ${element.name} == ${widget.onboardingBloc.selectedStateName} =${element.name?.trim().toLowerCase() == widget.onboardingBloc.selectedStateName.trim().toLowerCase()}");
+                      if (element.name?.trim().toLowerCase() ==
+                              widget.onboardingBloc.selectedStateName
+                                  .trim()
+                                  .toLowerCase() &&
+                          element.id != null) {
+                        stateExists = true;
+                        widget.onboardingBloc.stateId = element.id!;
+                      }
+                    }
+                    if (stateExists) {
+                      context.read<GetCitiesBloc>().add(GetCitiesEvent.fetch(
+                          stateId: widget.onboardingBloc.stateId,
+                          page: "1",
+                          searchKey: widget.onboardingBloc.selectedCity
+                              .toLowerCase()));
+                      widget.onboardingBloc.add(OnboardingEvent.cityList(
+                          searchQuery:
+                              widget.onboardingBloc.selectedCity.toLowerCase(),
+                          wantLoading: true));
+                    }
+                  });
+            },
+          ),
+          BlocListener<GetCitiesBloc, GetCitiesState>(
+            listener: (context, state) {
+              state.when(
+                  initial: () {},
+                  loading: () {},
+                  failed: (error) {},
+                  success: (data) {
+                    bool stateExists = false;
+                    List<City> data1 = data.data ?? [];
+                    for (var element in data1) {
+                      if (element.cityName?.trim().toLowerCase() ==
+                              widget.onboardingBloc.selectedCityName
+                                  .trim()
+                                  .toLowerCase() &&
+                          element.id != null) {
+                        stateExists = true;
+                        widget.onboardingBloc.selectedCityId = element.id!;
+                        widget.onboardingBloc.selectedCity =
+                            widget.onboardingBloc.selectedCityName;
+                        selectedCity = element.id!;
+                      }
+                    }
+                  });
+            },
+          ),
+        ],
+        child: BlocConsumer<OnboardingBloc, OnboardingState>(
+          buildWhen: (previous, current) => previous != current,
+          listener: (context, listenerState) {
+            return listenerState.personalDetailsOption.fold(() {}, (some) {
+              some.fold((l) {
+                CSnackBar.showError(context, msg: l.error);
+              }, (r) {
+                if (widget.onboardingBloc.nextButtonClicked) {
+                  widget.pageController
+                      .jumpToPage(widget.pageController.page!.toInt() + 1);
+                }
+              });
             });
-          });
-        },
-        bloc: widget.onboardingBloc,
-        builder: (context, state) {
-          return CommonPaddingWidget(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  OnBoardingTitleDividerWidget(
-                      title: AppString.personalDetails.val),
-                  Responsive.isWeb(context)
-                      ? Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _profilePicWidget(state),
-                            CustomSizedBox(width: DBL.twenty.val),
-                            _personalDetailsWidget(
-                                state,
-                                addressLineController,
-                                streetController,
-                                zipController,
-                                socialSecurityNumberController,
-                                context,
-                                _dateFocusNode,
-                                dobController,
-                                isLargeWeb,
-                                isWeb),
-                          ],
-                        )
-                      : Column(
-                          crossAxisAlignment: Responsive.isWeb(context)
-                              ? CrossAxisAlignment.start
-                              : CrossAxisAlignment.center,
-                          children: [
-                            _profilePicWidget(state),
-                            CustomSizedBox(height: DBL.twentyFive.val),
-                            _personalDetailsWidget(
-                                state,
-                                addressLineController,
-                                streetController,
-                                zipController,
-                                socialSecurityNumberController,
-                                context,
-                                _dateFocusNode,
-                                dobController,
-                                isLargeWeb,
-                                isWeb),
-                          ],
-                        ),
-                  _nextPrevButtonWidget(),
-                ],
+          },
+          bloc: widget.onboardingBloc,
+          builder: (context, state) {
+            return CommonPaddingWidget(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    OnBoardingTitleDividerWidget(
+                        title: AppString.personalDetails.val),
+                    Responsive.isWeb(context)
+                        ? Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _profilePicWidget(state),
+                              CustomSizedBox(width: DBL.twenty.val),
+                              _personalDetailsWidget(
+                                  state,
+                                  addressLineController,
+                                  streetController,
+                                  zipController,
+                                  socialSecurityNumberController,
+                                  context,
+                                  _dateFocusNode,
+                                  dobController,
+                                  isLargeWeb,
+                                  isWeb),
+                            ],
+                          )
+                        : Column(
+                            crossAxisAlignment: Responsive.isWeb(context)
+                                ? CrossAxisAlignment.start
+                                : CrossAxisAlignment.center,
+                            children: [
+                              _profilePicWidget(state),
+                              CustomSizedBox(height: DBL.twentyFive.val),
+                              _personalDetailsWidget(
+                                  state,
+                                  addressLineController,
+                                  streetController,
+                                  zipController,
+                                  socialSecurityNumberController,
+                                  context,
+                                  _dateFocusNode,
+                                  dobController,
+                                  isLargeWeb,
+                                  isWeb),
+                            ],
+                          ),
+                    _nextPrevButtonWidget(),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
@@ -487,8 +554,25 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                     streetController.text = selectedAddress.streetNumber ?? "";
                     zipController.text = selectedAddress.zipCode ?? "";
                     citySearchController.text = selectedAddress.locality ?? "";
+                    widget.onboardingBloc.selectedCityName =
+                        citySearchController.text;
+                    widget.onboardingBloc.selectedCity =
+                        citySearchController.text;
                     stateSearchController.text =
                         selectedAddress.stateName ?? "";
+                    widget.onboardingBloc.selectedStateName =
+                        selectedAddress.stateName ?? "";
+
+                    widget.onboardingBloc.add(const OnboardingEvent.stateList(
+                        stateSearchQuery: "", wantLoading: true));
+                    widget.onboardingBloc.add(const OnboardingEvent.cityList(
+                        searchQuery: "", wantLoading: true));
+                    BlocProvider.of<GetStatesBloc>(context).add(
+                        GetStatesEvent.fetch(
+                            previousData: [],
+                            page: "1",
+                            searchKey:
+                                "${selectedAddress.stateName?.trim().toLowerCase()}"));
                   },
                   address: "",
                 ),
@@ -541,28 +625,145 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         state.isInitialLoading
             ? CustomShimmerWidget.rectangular(
                 height: DBL.fifty.val, width: DBL.twoEighty.val)
-            : StateDropDown(
-                onboardingBloc: widget.onboardingBloc,
-                onSearchChanged: (val) {
-                  widget.onboardingBloc.statePage = 1;
-                  widget.onboardingBloc.add(OnboardingEvent.stateList(
-                      stateSearchQuery: val.toString().toLowerCase(),
-                      wantLoading: false));
+            : BlocBuilder<GetStatesBloc, GetStatesState>(
+                builder: (context, state) {
+                  return state.when(initial: () {
+                    return StateDropDown(
+                      onboardingBloc: widget.onboardingBloc,
+                      onSearchChanged: (val) {
+                        widget.onboardingBloc.statePage = 1;
+                        // widget.onboardingBloc.add(OnboardingEvent.stateList(
+                        //     stateSearchQuery: val.toString().toLowerCase(),
+                        //     wantLoading: false));
+                        BlocProvider.of<GetStatesBloc>(context).add(
+                            GetStatesEvent.fetch(
+                                previousData: [],
+                                page: "1",
+                                searchKey: "${val?.trim().toLowerCase()}"));
+                      },
+                      searchController: stateSearchController,
+                      errorText: widget.onboardingBloc.state.nextClicked
+                          ? selectedState.isEmpty
+                              ? AppString.emptyState.val
+                              : ""
+                          : "",
+                      items: widget.onboardingBloc.stateList,
+                      onChange: (value) {
+                        selectedState = value.toString();
+                        // widget.onboardingBloc.add(OnboardingEvent.cityList(
+                        //     searchQuery: widget.onboardingBloc.selectedCity,
+                        //     wantLoading: true));
+                        BlocProvider.of<GetStatesBloc>(context).add(
+                            GetStatesEvent.fetch(
+                                previousData: [],
+                                page: "1",
+                                searchKey: "${value?.trim().toLowerCase()}"));
+                        // widget.onboardingBloc.selectedCityName = "";
+                      },
+                      selectedValue: widget.onboardingBloc.selectedStateName,
+                    );
+                  }, loading: (data) {
+                    // return CustomShimmerWidget.rectangular(
+                    //     height: DBL.fifty.val, width: DBL.twoEighty.val);
+                    return StateDropDown(
+                      onboardingBloc: widget.onboardingBloc,
+                      onSearchChanged: (val) {
+                        widget.onboardingBloc.statePage = 1;
+                        BlocProvider.of<GetStatesBloc>(context).add(
+                            GetStatesEvent.fetch(
+                                previousData: data,
+                                page: "1",
+                                searchKey: "${val?.trim().toLowerCase()}"));
+                        // widget.onboardingBloc.add(OnboardingEvent.stateList(
+                        //     stateSearchQuery: val.toString().toLowerCase(),
+                        //     wantLoading: false));
+                        // BlocProvider.of<GetStatesBloc>(context).add(
+                        //     GetStatesEvent.fetch(
+                        //         page: "1",
+                        //         searchKey: "${val?.trim().toLowerCase()}"));
+                      },
+                      searchController: stateSearchController,
+                      errorText: widget.onboardingBloc.state.nextClicked
+                          ? selectedState.isEmpty
+                              ? AppString.emptyState.val
+                              : ""
+                          : "",
+                      items: data,
+                      onChange: (value) {
+                        selectedState = value.toString();
+                        widget.onboardingBloc.add(OnboardingEvent.cityList(
+                            searchQuery: widget.onboardingBloc.selectedCity,
+                            wantLoading: true));
+                        // widget.onboardingBloc.selectedCityName = "";
+                      },
+                      selectedValue: widget.onboardingBloc.selectedStateName,
+                    );
+                  }, failed: (error) {
+                    return StateDropDown(
+                      onboardingBloc: widget.onboardingBloc,
+                      onSearchChanged: (val) {
+                        widget.onboardingBloc.statePage = 1;
+                        BlocProvider.of<GetStatesBloc>(context).add(
+                            GetStatesEvent.fetch(
+                                previousData: [],
+                                page: "1",
+                                searchKey: "${val?.trim().toLowerCase()}"));
+                        // widget.onboardingBloc.add(OnboardingEvent.stateList(
+                        //     stateSearchQuery: val.toString().toLowerCase(),
+                        //     wantLoading: false));
+                        // BlocProvider.of<GetStatesBloc>(context).add(
+                        //     GetStatesEvent.fetch(
+                        //         page: "1",
+                        //         searchKey: "${val?.trim().toLowerCase()}"));
+                      },
+                      searchController: stateSearchController,
+                      errorText: error,
+                      items: widget.onboardingBloc.stateList,
+                      onChange: (value) {
+                        selectedState = value.toString();
+                        widget.onboardingBloc.add(OnboardingEvent.cityList(
+                            searchQuery: widget.onboardingBloc.selectedCity,
+                            wantLoading: true));
+                        // widget.onboardingBloc.selectedCityName = "";
+                      },
+                      selectedValue: widget.onboardingBloc.selectedStateName,
+                    );
+                  }, success: (data) {
+                    return StateDropDown(
+                      onboardingBloc: widget.onboardingBloc,
+                      onSearchChanged: (val) {
+                        widget.onboardingBloc.statePage = 1;
+                        BlocProvider.of<GetStatesBloc>(context).add(
+                            GetStatesEvent.fetch(
+                                previousData: data,
+                                page: "1",
+                                searchKey: "${val?.trim().toLowerCase()}"));
+                        // widget.onboardingBloc.add(OnboardingEvent.stateList(
+                        //     stateSearchQuery: val.toString().toLowerCase(),
+                        //     wantLoading: false));
+                        // BlocProvider.of<GetStatesBloc>(context).add(
+                        //     GetStatesEvent.fetch(
+                        //         page: "1",
+                        //         searchKey: "${val?.trim().toLowerCase()}"));
+                      },
+                      searchController: stateSearchController,
+                      errorText: widget.onboardingBloc.state.nextClicked
+                          ? selectedState.isEmpty
+                              ? AppString.emptyState.val
+                              : ""
+                          : "",
+                      items: data,
+                      onChange: (value) {
+                        selectedState = value.toString();
+                        widget.onboardingBloc.add(OnboardingEvent.cityList(
+                            searchQuery: widget.onboardingBloc.selectedCity,
+                            wantLoading: true));
+                        // widget.onboardingBloc.selectedCityName = "";
+                      },
+                      selectedValue: widget.onboardingBloc.selectedStateName,
+                    );
+                  });
                 },
-                searchController: stateSearchController,
-                errorText: widget.onboardingBloc.state.nextClicked
-                    ? selectedState.isEmpty
-                        ? AppString.emptyState.val
-                        : ""
-                    : "",
-                items: widget.onboardingBloc.stateList,
-                onChange: (value) {
-                  selectedState = value.toString();
-                  widget.onboardingBloc.add(const OnboardingEvent.cityList(
-                      searchQuery: "", wantLoading: true));
-                  widget.onboardingBloc.selectedCityName = "";
-                },
-                selectedValue: widget.onboardingBloc.selectedStateName,
               ),
       ],
     );
@@ -580,6 +781,23 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         state.isCityApiCalling || state.isInitialLoading
             ? CustomShimmerWidget.rectangular(
                 height: DBL.fifty.val, width: DBL.twoEighty.val)
+            // : CustomSizedBox(
+            //     width: DBL.twoEighty.val,
+            //     child: CTextField(
+            //       controller: citySearchController,
+            //       validator: (value) {
+            //         if (value == null || value.isEmpty || value.trim() == "") {
+            //           return AppString.emptyState.val;
+            //         } else {
+            //           return null;
+            //         }
+            //       },
+            //       isReadOnly: true,
+            //       onChanged: (val) {
+            //         selectedState = val.toString();
+            //       },
+            //     ),
+            //   ),
             : CityDropDown(
                 onboardingBloc: widget.onboardingBloc,
                 searchController: citySearchController,

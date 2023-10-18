@@ -1037,7 +1037,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<StateListReponse> getStateList(
+  Future<StateListResponse> getStateList(
     pageNo,
     limit,
     searchQuery,
@@ -1051,7 +1051,7 @@ class _ApiClient implements ApiClient {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<StateListReponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<StateListResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -1063,7 +1063,7 @@ class _ApiClient implements ApiClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StateListReponse.fromJson(_result.data!);
+    final value = StateListResponse.fromJson(_result.data!);
     return value;
   }
 

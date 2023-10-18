@@ -9,8 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/custom_snackbar.dart';
-import '../../../domain/caregivers/model/Data.dart';
 import '../../../domain/caregivers/model/care_givers.dart';
+import '../../../domain/caregivers/model/data.dart';
 import '../../../domain/caregivers/model/types.dart';
 import '../../../infrastructure/caregivers/caregivers_repository.dart';
 
