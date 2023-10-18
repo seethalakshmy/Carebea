@@ -19,6 +19,7 @@ import 'package:admin_580_tech/domain/subscription/model/subscription_model.dart
 import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:retrofit/http.dart';
 
@@ -35,12 +36,14 @@ import '../../presentation/on_boarding/modules/reference/models/relation_respons
 import '../admins/model/admin_get_response.dart';
 import '../caregiver_verification/model/reject_params.dart';
 import '../caregivers/model/caregiver_response.dart';
+import '../client_report/model/client_report_response.dart';
 import '../complaint_details/models/complaint_details_response_model.dart';
 import '../complaint_details/models/get_service_response_model.dart';
 import '../complaints/model/complaints_list_response_model.dart';
 import '../email_otp_verification/models/verify_otp_response.dart';
 import '../faq/models/faq_list_response_model.dart';
 import '../faq_creation/models/faq_details_response_model.dart';
+import '../master/model/region_list_response.dart';
 import '../on_boarding/models/common_response.dart';
 import '../on_boarding/models/preferences/pet_list_response.dart';
 import '../on_boarding/models/preferences/years_of_experience_response.dart';
@@ -65,7 +68,8 @@ import '../video_management/models/video_management_response.dart';
 
 part 'api_client.g.dart';
 
-@RestApi()
+@RestApi(parser: Parser.JsonSerializable)
+@JsonSerializable(includeIfNull: true)
 abstract class ApiClient {
   factory ApiClient() {
     Dio dio = Dio();
@@ -223,52 +227,33 @@ abstract class ApiClient {
 
   @POST("/admin/admin-cg-qualification")
   Future<CommonResponse> getQualifications(
-    @Field('user_id')
-        String userId,
-    @Field('have_hha_registration')
-        bool haveHHARegistration,
-    @Field('hha_details')
-        HhaDetails hhaDetails,
-    @Field('bls_or_first_aid_certificate')
-        bool haveBLSCertificate,
+    @Field('user_id') String userId,
+    @Field('have_hha_registration') bool haveHHARegistration,
+    @Field('hha_details') HhaDetails hhaDetails,
+    @Field('bls_or_first_aid_certificate') bool haveBLSCertificate,
     @Field('bls_or_first_aid_certificate_details')
-        BlsOrFirstAidCertificateDetails blsDetails,
-    @Field('tb_or_ppd_test')
-        bool haveTBTest,
-    @Field('tb_or_ppd_test_details')
-        TbOrPpdTestDetails tbDetails,
-    @Field('covid_vaccination')
-        bool haveCovidVaccination,
-    @Field('covid_vaccination_details')
-        CovidVaccinationDetails covidDetails,
-    @Field('is_reupload')
-        bool isReUpload,
+    BlsOrFirstAidCertificateDetails blsDetails,
+    @Field('tb_or_ppd_test') bool haveTBTest,
+    @Field('tb_or_ppd_test_details') TbOrPpdTestDetails tbDetails,
+    @Field('covid_vaccination') bool haveCovidVaccination,
+    @Field('covid_vaccination_details') CovidVaccinationDetails covidDetails,
+    @Field('is_reupload') bool isReUpload,
   );
 
   @POST("/care-giver/qualification")
   Future<CommonResponse> getQualificationsWebsite(
-    @Header("Authorization")
-        String token,
-    @Field('user_id')
-        String userId,
-    @Field('have_hha_registration')
-        bool haveHHARegistration,
-    @Field('hha_details')
-        HhaDetails hhaDetails,
-    @Field('bls_or_first_aid_certificate')
-        bool haveBLSCertificate,
+    @Header("Authorization") String token,
+    @Field('user_id') String userId,
+    @Field('have_hha_registration') bool haveHHARegistration,
+    @Field('hha_details') HhaDetails hhaDetails,
+    @Field('bls_or_first_aid_certificate') bool haveBLSCertificate,
     @Field('bls_or_first_aid_certificate_details')
-        BlsOrFirstAidCertificateDetails blsDetails,
-    @Field('tb_or_ppd_test')
-        bool haveTBTest,
-    @Field('tb_or_ppd_test_details')
-        TbOrPpdTestDetails tbDetails,
-    @Field('covid_vaccination')
-        bool haveCovidVaccination,
-    @Field('covid_vaccination_details')
-        CovidVaccinationDetails covidDetails,
-    @Field('is_reupload')
-        bool isReUpload,
+    BlsOrFirstAidCertificateDetails blsDetails,
+    @Field('tb_or_ppd_test') bool haveTBTest,
+    @Field('tb_or_ppd_test_details') TbOrPpdTestDetails tbDetails,
+    @Field('covid_vaccination') bool haveCovidVaccination,
+    @Field('covid_vaccination_details') CovidVaccinationDetails covidDetails,
+    @Field('is_reupload') bool isReUpload,
   );
 
   @POST("/admin/admin-cg-preferences")
@@ -785,4 +770,19 @@ abstract class ApiClient {
     @Field('admin_id') String adminId,
     @Field('settings_id') String? settingsId,
   );
+
+  @POST('/admin/get-churn-rate')
+  Future<ClientReportResponse> getClientReport(
+    @Field('user_id') String userId,
+    @Field('role_id') String roleId,
+    @Field('filter_id') String filterId,
+    @Field('year') String year,
+    @Field('month') String month,
+    @Field('from_date') String fromDate,
+    @Field('to_date') String toDate,
+    @Field('region') String region,
+  );
+
+  @GET("/common-data/get-regions")
+  Future<RegionListResponse> getRegions();
 }

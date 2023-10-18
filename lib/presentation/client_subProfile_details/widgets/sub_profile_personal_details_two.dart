@@ -25,7 +25,8 @@ class SubProfilePersonalDetailsTwoView extends StatelessWidget {
           horizontal: DBL.twentyFive.val, vertical: DBL.twentyFive.val),
       color: AppColor.white.val,
       child: SingleChildScrollView(
-        child: _rightView(personalDetails, languages, pets, petList ?? []),
+        child:
+            _rightView(personalDetails, languages ?? [], pets, petList ?? []),
       ),
     );
   }
@@ -56,7 +57,7 @@ class SubProfilePersonalDetailsTwoView extends StatelessWidget {
     return RowColonCombo.threeSeventy(
         label: AppString.languagesKnown.val,
         value: '',
-        list: languages!,
+        list: languages ?? [],
         fontSize: FS.font13PointFive.val);
   }
 
@@ -86,7 +87,7 @@ class SubProfilePersonalDetailsTwoView extends StatelessWidget {
         CustomSizedBox(
           height: DBL.six.val,
         ),
-        _languageView(languages),
+        _languageView(languages ?? []),
         CustomSizedBox(
           height: DBL.six.val,
         ),

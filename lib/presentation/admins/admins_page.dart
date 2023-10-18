@@ -437,7 +437,7 @@ class _AdminsPageState extends State<AdminsPage> {
           DataColumn2(
             size: ColumnSize.S,
             fixedWidth: DBL.eighty.val,
-            label: _tableColumnView(AppString.id.val),
+            label: _tableColumnView(AppString.slNo.val),
           ),
           DataColumn2(
             size: ColumnSize.L,
@@ -563,7 +563,8 @@ class _AdminsPageState extends State<AdminsPage> {
     BuildContext context,
     String adminID,
   ) {
-    showGeneralDialog(barrierLabel: "",
+    showGeneralDialog(
+      barrierLabel: "",
       barrierDismissible: true,
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
@@ -614,14 +615,14 @@ class _AdminsPageState extends State<AdminsPage> {
   }
 
   _setIndex(int index) {
-    if (_adminsBloc.page == 1 ||
-        (_totalItems / _adminsBloc.limit).ceil() == 1) {
-      if (_adminsBloc.page == 1) {
-        _pageIndex = index + 1;
-      } else {
-        _pageIndex = ((_adminsBloc.page * _adminsBloc.limit) - 10) + index + 1;
-      }
+    // if (_adminsBloc.page == 1 ||
+    //     (_totalItems / _adminsBloc.limit).ceil() == 1) {
+    if (_adminsBloc.page == 1) {
+      _pageIndex = index + 1;
+    } else {
+      _pageIndex = ((_adminsBloc.page * _adminsBloc.limit) - 10) + index + 1;
     }
+    // }
   }
 
   bool _isXs(context) => MediaQuery.of(context).size.width <= 544;

@@ -65,10 +65,10 @@ class CareAmbassadorAnalysisPage extends StatelessWidget {
             child: Responsive.isWeb(context)
                 ? Row(
                     children: [
-                      Expanded(
-                          child: SingleBarChart(
-                        indicatorTitle: AppString.qualityOfServices.val,
-                      )),
+                      // Expanded(
+                      //     child: SingleBarChart(
+                      //   indicatorTitle: AppString.qualityOfServices.val,
+                      // )),
                       SizedBox(
                         width: 20,
                       ),
@@ -81,9 +81,9 @@ class CareAmbassadorAnalysisPage extends StatelessWidget {
                   )
                 : Column(
                     children: [
-                      SingleBarChart(
-                        indicatorTitle: AppString.qualityOfServices.val,
-                      ),
+                      // SingleBarChart(
+                      //   indicatorTitle: AppString.qualityOfServices.val,
+                      // ),
                       SizedBox(
                         height: 20,
                       ),

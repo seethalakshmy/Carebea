@@ -23,32 +23,32 @@ class RegionAnalyticsPage extends StatelessWidget {
             child: Responsive.isWeb(context)
                 ? Row(
                     children: [
-                      Expanded(
-                          child: SingleBarChart(
-                        indicatorTitle:
-                            AppString.numberOfCommunitiesServiced.val,
-                      )),
+                      // Expanded(
+                      //     child: SingleBarChart(
+                      //   indicatorTitle:
+                      //       AppString.numberOfCommunitiesServiced.val,
+                      // )),
                       const SizedBox(
                         width: 20,
                       ),
-                      Expanded(
-                          child: SingleBarChart(
-                        indicatorTitle: AppString.numberOfCitiesServiced.val,
-                      )),
+                      // Expanded(
+                      //     child: SingleBarChart(
+                      //   indicatorTitle: AppString.numberOfCitiesServiced.val,
+                      // )),
                     ],
                   )
                 : Column(
                     children: [
-                      SingleBarChart(
-                        indicatorTitle:
-                            AppString.numberOfCommunitiesServiced.val,
-                      ),
+                      // SingleBarChart(
+                      //   indicatorTitle:
+                      //       AppString.numberOfCommunitiesServiced.val,
+                      // ),
                       SizedBox(
                         height: 20,
                       ),
-                      SingleBarChart(
-                        indicatorTitle: AppString.numberOfCitiesServiced.val,
-                      ),
+                      // SingleBarChart(
+                      //   indicatorTitle: AppString.numberOfCitiesServiced.val,
+                      // ),
                     ],
                   )),
         SizedBox(
@@ -59,10 +59,10 @@ class RegionAnalyticsPage extends StatelessWidget {
             child: Responsive.isWeb(context)
                 ? Row(
                     children: [
-                      Expanded(
-                          child: SingleBarChart(
-                        indicatorTitle: AppString.numberOfStatesServiced.val,
-                      )),
+                      // Expanded(
+                      //     child: SingleBarChart(
+                      //   indicatorTitle: AppString.numberOfStatesServiced.val,
+                      // )),
                       SizedBox(
                         width: 20,
                       ),
@@ -71,9 +71,9 @@ class RegionAnalyticsPage extends StatelessWidget {
                   )
                 : Column(
                     children: [
-                      SingleBarChart(
-                        indicatorTitle: AppString.numberOfStatesServiced.val,
-                      ),
+                      // SingleBarChart(
+                      //   indicatorTitle: AppString.numberOfStatesServiced.val,
+                      // ),
                       SizedBox(
                         width: 20,
                       ),

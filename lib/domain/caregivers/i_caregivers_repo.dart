@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 
 import '../caregiver_verification/model/verify_response.dart';
 
-abstract class ICareGiversRepo {
+abstract class ICareGiverRepo {
   Future<Either<ApiErrorHandler, CareGiverResponse>> getCareGivers(
       {required String userID,
       required String adminId,
@@ -14,5 +14,5 @@ abstract class ICareGiversRepo {
       String? searchTerm,
       int filterId});
   Future<Either<ApiErrorHandler, VerifyResponse>> careGiverActiveOrInactive(
-      {required String userID, required bool status,required String adminId});
+      {required String userID, required bool status, required String adminId});
 }

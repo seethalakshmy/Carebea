@@ -3,6 +3,15 @@
 part of 'api_client.dart';
 
 // **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+ApiClient _$ApiClientFromJson(Map<String, dynamic> json) => ApiClient();
+
+Map<String, dynamic> _$ApiClientToJson(ApiClient instance) =>
+    <String, dynamic>{};
+
+// **************************************************************************
 // RetrofitGenerator
 // **************************************************************************
 
@@ -3023,6 +3032,70 @@ class _ApiClient implements ApiClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = CommonResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ClientReportResponse> getClientReport(
+    userId,
+    roleId,
+    filterId,
+    year,
+    month,
+    fromDate,
+    toDate,
+    region,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'role_id': roleId,
+      'filter_id': filterId,
+      'year': year,
+      'month': month,
+      'from_date': fromDate,
+      'to_date': toDate,
+      'region': region,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ClientReportResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-churn-rate',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ClientReportResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<RegionListResponse> getRegions() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<RegionListResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/common-data/get-regions',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = RegionListResponse.fromJson(_result.data!);
     return value;
   }
 

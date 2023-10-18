@@ -76,7 +76,6 @@ import 'package:admin_580_tech/presentation/video_management/video_management_vi
 import 'package:admin_580_tech/presentation/video_management_creation/video_management_creation_screen.dart'
     as _i36;
 import 'package:auto_route/auto_route.dart' as _i37;
-import 'package:flutter/cupertino.dart' as _i39;
 import 'package:flutter/material.dart' as _i38;
 
 abstract class $AppRouter extends _i37.RootStackRouter {
@@ -678,7 +677,7 @@ class CareAmbassadorRegistrationRoute extends _i37.PageRouteInfo<void> {
 class ClientAnalyticsRoute
     extends _i37.PageRouteInfo<ClientAnalyticsRouteArgs> {
   ClientAnalyticsRoute({
-    _i39.Key? key,
+    _i38.Key? key,
     List<_i37.PageRouteInfo>? children,
   }) : super(
           ClientAnalyticsRoute.name,
@@ -695,7 +694,7 @@ class ClientAnalyticsRoute
 class ClientAnalyticsRouteArgs {
   const ClientAnalyticsRouteArgs({this.key});
 
-  final _i39.Key? key;
+  final _i38.Key? key;
 
   @override
   String toString() {
