@@ -502,7 +502,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
       onToggle: () {
         _careGiversBloc.add(CareGiversEvent.isUserActive(
             caregiver: item,
-            status: item.isActive ?? false,
+            status: item.isActive == true ? false : true,
             userId: item.userId ?? "",
             context: context,
             adminId: item.userId ?? ""));

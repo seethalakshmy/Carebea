@@ -3099,6 +3099,90 @@ class _ApiClient implements ApiClient {
     return value;
   }
 
+  @override
+  Future<InactiveCountResponse> getInactiveCountReport(
+    userId,
+    roleId,
+    filterId,
+    year,
+    month,
+    fromDate,
+    toDate,
+    region,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'role_id': roleId,
+      'filter_id': filterId,
+      'year': year,
+      'month': month,
+      'from_date': fromDate,
+      'to_date': toDate,
+      'region': region,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<InactiveCountResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-inactive-count',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = InactiveCountResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ClientReportUserListResponse> getUserListResponse(
+    userId,
+    roleId,
+    year,
+    month,
+    fromDate,
+    toDate,
+    region,
+    page,
+    limit,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'user_id': userId,
+      'role_id': roleId,
+      'year': year,
+      'month': month,
+      'from_date': fromDate,
+      'to_date': toDate,
+      'region': region,
+      'page': page,
+      'limit': limit,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ClientReportUserListResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/get-user-list',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ClientReportUserListResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

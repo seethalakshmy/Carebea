@@ -177,11 +177,9 @@ abstract class $AppRouter extends _i37.RootStackRouter {
       );
     },
     ClientAnalyticsRoute.name: (routeData) {
-      final args = routeData.argsAs<ClientAnalyticsRouteArgs>(
-          orElse: () => const ClientAnalyticsRouteArgs());
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i10.ClientAnalyticsPage(key: args.key),
+        child: const _i10.ClientAnalyticsPage(),
       );
     },
     ClientSubProfileDetailsRoute.name: (routeData) {
@@ -674,32 +672,16 @@ class CareAmbassadorRegistrationRoute extends _i37.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i10.ClientAnalyticsPage]
-class ClientAnalyticsRoute
-    extends _i37.PageRouteInfo<ClientAnalyticsRouteArgs> {
-  ClientAnalyticsRoute({
-    _i38.Key? key,
-    List<_i37.PageRouteInfo>? children,
-  }) : super(
+class ClientAnalyticsRoute extends _i37.PageRouteInfo<void> {
+  const ClientAnalyticsRoute({List<_i37.PageRouteInfo>? children})
+      : super(
           ClientAnalyticsRoute.name,
-          args: ClientAnalyticsRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'ClientAnalyticsRoute';
 
-  static const _i37.PageInfo<ClientAnalyticsRouteArgs> page =
-      _i37.PageInfo<ClientAnalyticsRouteArgs>(name);
-}
-
-class ClientAnalyticsRouteArgs {
-  const ClientAnalyticsRouteArgs({this.key});
-
-  final _i38.Key? key;
-
-  @override
-  String toString() {
-    return 'ClientAnalyticsRouteArgs{key: $key}';
-  }
+  static const _i37.PageInfo<void> page = _i37.PageInfo<void>(name);
 }
 
 /// generated route for

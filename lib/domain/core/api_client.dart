@@ -37,6 +37,8 @@ import '../admins/model/admin_get_response.dart';
 import '../caregiver_verification/model/reject_params.dart';
 import '../caregivers/model/caregiver_response.dart';
 import '../client_report/model/client_report_response.dart';
+import '../client_report/model/client_report_user_list_response.dart';
+import '../client_report/model/inactive_count_response.dart';
 import '../complaint_details/models/complaint_details_response_model.dart';
 import '../complaint_details/models/get_service_response_model.dart';
 import '../complaints/model/complaints_list_response_model.dart';
@@ -785,4 +787,29 @@ abstract class ApiClient {
 
   @GET("/common-data/get-regions")
   Future<RegionListResponse> getRegions();
+
+  @POST('/admin/get-inactive-count')
+  Future<InactiveCountResponse> getInactiveCountReport(
+    @Field('user_id') String userId,
+    @Field('role_id') String roleId,
+    @Field('filter_id') String filterId,
+    @Field('year') String year,
+    @Field('month') String month,
+    @Field('from_date') String fromDate,
+    @Field('to_date') String toDate,
+    @Field('region') String region,
+  );
+
+  @POST('/admin/get-user-list')
+  Future<ClientReportUserListResponse> getUserListResponse(
+    @Field('user_id') String userId,
+    @Field('role_id') String roleId,
+    @Field('year') String year,
+    @Field('month') String month,
+    @Field('from_date') String fromDate,
+    @Field('to_date') String toDate,
+    @Field('region') String region,
+    @Field('page') String page,
+    @Field('limit') String limit,
+  );
 }

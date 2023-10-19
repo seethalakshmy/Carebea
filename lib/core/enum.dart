@@ -25,6 +25,7 @@ enum AppString {
   uploadVideo("Upload Video"),
   getReport("Get Report"),
   totalChurnRate("Total Churn Rate"),
+  totalInactiveRate("Total Inactive Rate"),
   churnRate("Churn Rate"),
   drugName("Drug Name"),
   videoFor("Video For"),

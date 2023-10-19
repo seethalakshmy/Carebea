@@ -167,6 +167,7 @@ abstract class _GetRegionList implements MasterEvent {
 /// @nodoc
 mixin _$MasterState {
   bool get isRegionLoading => throw _privateConstructorUsedError;
+  bool get isFilterLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
   RegionListResponse? get regionListResponse =>
       throw _privateConstructorUsedError;
@@ -185,6 +186,7 @@ abstract class $MasterStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isRegionLoading,
+      bool isFilterLoading,
       bool isError,
       RegionListResponse? regionListResponse,
       String? error});
@@ -204,6 +206,7 @@ class _$MasterStateCopyWithImpl<$Res, $Val extends MasterState>
   @override
   $Res call({
     Object? isRegionLoading = null,
+    Object? isFilterLoading = null,
     Object? isError = null,
     Object? regionListResponse = freezed,
     Object? error = freezed,
@@ -212,6 +215,10 @@ class _$MasterStateCopyWithImpl<$Res, $Val extends MasterState>
       isRegionLoading: null == isRegionLoading
           ? _value.isRegionLoading
           : isRegionLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFilterLoading: null == isFilterLoading
+          ? _value.isFilterLoading
+          : isFilterLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       isError: null == isError
           ? _value.isError
@@ -239,6 +246,7 @@ abstract class _$$_MasterStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isRegionLoading,
+      bool isFilterLoading,
       bool isError,
       RegionListResponse? regionListResponse,
       String? error});
@@ -256,6 +264,7 @@ class __$$_MasterStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isRegionLoading = null,
+    Object? isFilterLoading = null,
     Object? isError = null,
     Object? regionListResponse = freezed,
     Object? error = freezed,
@@ -264,6 +273,10 @@ class __$$_MasterStateCopyWithImpl<$Res>
       isRegionLoading: null == isRegionLoading
           ? _value.isRegionLoading
           : isRegionLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFilterLoading: null == isFilterLoading
+          ? _value.isFilterLoading
+          : isFilterLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       isError: null == isError
           ? _value.isError
@@ -286,12 +299,15 @@ class __$$_MasterStateCopyWithImpl<$Res>
 class _$_MasterState implements _MasterState {
   const _$_MasterState(
       {required this.isRegionLoading,
+      required this.isFilterLoading,
       required this.isError,
       required this.regionListResponse,
       required this.error});
 
   @override
   final bool isRegionLoading;
+  @override
+  final bool isFilterLoading;
   @override
   final bool isError;
   @override
@@ -301,7 +317,7 @@ class _$_MasterState implements _MasterState {
 
   @override
   String toString() {
-    return 'MasterState(isRegionLoading: $isRegionLoading, isError: $isError, regionListResponse: $regionListResponse, error: $error)';
+    return 'MasterState(isRegionLoading: $isRegionLoading, isFilterLoading: $isFilterLoading, isError: $isError, regionListResponse: $regionListResponse, error: $error)';
   }
 
   @override
@@ -311,6 +327,8 @@ class _$_MasterState implements _MasterState {
             other is _$_MasterState &&
             (identical(other.isRegionLoading, isRegionLoading) ||
                 other.isRegionLoading == isRegionLoading) &&
+            (identical(other.isFilterLoading, isFilterLoading) ||
+                other.isFilterLoading == isFilterLoading) &&
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.regionListResponse, regionListResponse) ||
                 other.regionListResponse == regionListResponse) &&
@@ -318,8 +336,8 @@ class _$_MasterState implements _MasterState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isRegionLoading, isError, regionListResponse, error);
+  int get hashCode => Object.hash(runtimeType, isRegionLoading, isFilterLoading,
+      isError, regionListResponse, error);
 
   @JsonKey(ignore: true)
   @override
@@ -331,12 +349,15 @@ class _$_MasterState implements _MasterState {
 abstract class _MasterState implements MasterState {
   const factory _MasterState(
       {required final bool isRegionLoading,
+      required final bool isFilterLoading,
       required final bool isError,
       required final RegionListResponse? regionListResponse,
       required final String? error}) = _$_MasterState;
 
   @override
   bool get isRegionLoading;
+  @override
+  bool get isFilterLoading;
   @override
   bool get isError;
   @override
