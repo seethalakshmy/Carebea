@@ -812,4 +812,11 @@ abstract class ApiClient {
     @Field('page') String page,
     @Field('limit') String limit,
   );
+
+  @POST('/admin/create-page')
+  Future<CommonResponse> createPage(
+    @Field('title') String title,
+    @Field('description') String description,
+    @Field('page_for') String pageFor,
+  );
 }

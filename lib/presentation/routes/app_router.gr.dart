@@ -47,34 +47,33 @@ import 'package:admin_580_tech/presentation/on_boarding/modules/email_otp_varifi
     as _i20;
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart'
     as _i21;
-import 'package:admin_580_tech/presentation/privacy_policy/privacy_policy.dart'
-    as _i22;
-import 'package:admin_580_tech/presentation/region_analytics/region_analytics_page.dart'
-    as _i23;
-import 'package:admin_580_tech/presentation/reset_password/reset_password_page.dart'
-    as _i24;
-import 'package:admin_580_tech/presentation/role_creation/role_creation_page.dart'
-    as _i26;
-import 'package:admin_580_tech/presentation/roles/role_page.dart' as _i25;
-import 'package:admin_580_tech/presentation/service_request_management/service_request_management_page.dart'
-    as _i27;
-import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart'
-    as _i28;
-import 'package:admin_580_tech/presentation/signup/sign_up.dart' as _i29;
-import 'package:admin_580_tech/presentation/subscription/subscription_view.dart'
-    as _i30;
-import 'package:admin_580_tech/presentation/terms_and_conditions/terms_and_conditions_view.dart'
-    as _i31;
-import 'package:admin_580_tech/presentation/transaction_management/transaction_management_page.dart'
-    as _i32;
-import 'package:admin_580_tech/presentation/user_management/user_management_page.dart'
-    as _i33;
-import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet_detail_page.dart'
-    as _i34;
-import 'package:admin_580_tech/presentation/video_management/video_management_view.dart'
-    as _i35;
-import 'package:admin_580_tech/presentation/video_management_creation/video_management_creation_screen.dart'
+import 'package:admin_580_tech/presentation/page/page_view.dart' as _i35;
+import 'package:admin_580_tech/presentation/page_creation/page_creation_view.dart'
     as _i36;
+import 'package:admin_580_tech/presentation/region_analytics/region_analytics_page.dart'
+    as _i22;
+import 'package:admin_580_tech/presentation/reset_password/reset_password_page.dart'
+    as _i23;
+import 'package:admin_580_tech/presentation/role_creation/role_creation_page.dart'
+    as _i25;
+import 'package:admin_580_tech/presentation/roles/role_page.dart' as _i24;
+import 'package:admin_580_tech/presentation/service_request_management/service_request_management_page.dart'
+    as _i26;
+import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart'
+    as _i27;
+import 'package:admin_580_tech/presentation/signup/sign_up.dart' as _i28;
+import 'package:admin_580_tech/presentation/subscription/subscription_view.dart'
+    as _i29;
+import 'package:admin_580_tech/presentation/transaction_management/transaction_management_page.dart'
+    as _i30;
+import 'package:admin_580_tech/presentation/user_management/user_management_page.dart'
+    as _i31;
+import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet_detail_page.dart'
+    as _i32;
+import 'package:admin_580_tech/presentation/video_management/video_management_view.dart'
+    as _i33;
+import 'package:admin_580_tech/presentation/video_management_creation/video_management_creation_screen.dart'
+    as _i34;
 import 'package:auto_route/auto_route.dart' as _i37;
 import 'package:flutter/material.dart' as _i38;
 
@@ -274,28 +273,22 @@ abstract class $AppRouter extends _i37.RootStackRouter {
         child: const _i21.OnboardingPage(),
       );
     },
-    PrivacyPolicyRoute.name: (routeData) {
-      return _i37.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i22.PrivacyPolicyPage(),
-      );
-    },
     RegionAnalyticsRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i23.RegionAnalyticsPage(),
+        child: const _i22.RegionAnalyticsPage(),
       );
     },
     ResetPasswordRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i24.ResetPasswordPage(),
+        child: const _i23.ResetPasswordPage(),
       );
     },
     RolesRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i25.RolesPage(),
+        child: const _i24.RolesPage(),
       );
     },
     RoleCreationRoute.name: (routeData) {
@@ -308,7 +301,7 @@ abstract class $AppRouter extends _i37.RootStackRouter {
               ));
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i26.RoleCreationPage(
+        child: _i25.RoleCreationPage(
           key: args.key,
           isView: args.isView,
           isEdit: args.isEdit,
@@ -319,43 +312,37 @@ abstract class $AppRouter extends _i37.RootStackRouter {
     ServiceRequestManagementRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i27.ServiceRequestManagementPage(),
+        child: const _i26.ServiceRequestManagementPage(),
       );
     },
     SideMenuRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i28.SideMenuPage(),
+        child: const _i27.SideMenuPage(),
       );
     },
     SignUpRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i29.SignUpPage(),
+        child: const _i28.SignUpPage(),
       );
     },
     SubscriptionRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i30.SubscriptionPage(),
-      );
-    },
-    TermsAndConditionsRoute.name: (routeData) {
-      return _i37.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i31.TermsAndConditionsPage(),
+        child: const _i29.SubscriptionPage(),
       );
     },
     TransactionManagementRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i32.TransactionManagementPage(),
+        child: const _i30.TransactionManagementPage(),
       );
     },
     UserManagementRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i33.UserManagementPage(),
+        child: const _i31.UserManagementPage(),
       );
     },
     UserManagementDetailRoute.name: (routeData) {
@@ -365,7 +352,7 @@ abstract class $AppRouter extends _i37.RootStackRouter {
               UserManagementDetailRouteArgs(id: queryParams.optString('id')));
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i34.UserManagementDetailPage(
+        child: _i32.UserManagementDetailPage(
           key: args.key,
           id: args.id,
         ),
@@ -374,7 +361,7 @@ abstract class $AppRouter extends _i37.RootStackRouter {
     VideoManagementRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i35.VideoManagementPage(),
+        child: const _i33.VideoManagementPage(),
       );
     },
     VideoUploadRoute.name: (routeData) {
@@ -389,7 +376,7 @@ abstract class $AppRouter extends _i37.RootStackRouter {
               ));
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i36.VideoUploadPage(
+        child: _i34.VideoUploadPage(
           key: args.key,
           isEdit: args.isEdit,
           title: args.title,
@@ -397,6 +384,18 @@ abstract class $AppRouter extends _i37.RootStackRouter {
           attachment: args.attachment,
           id: args.id,
         ),
+      );
+    },
+    RouteListRoute.name: (routeData) {
+      return _i37.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i35.PageListPage(),
+      );
+    },
+    RouteCreationRoute.name: (routeData) {
+      return _i37.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i36.PageCreationPage(),
       );
     },
   };
@@ -930,21 +929,7 @@ class OnboardingRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i22.PrivacyPolicyPage]
-class PrivacyPolicyRoute extends _i37.PageRouteInfo<void> {
-  const PrivacyPolicyRoute({List<_i37.PageRouteInfo>? children})
-      : super(
-          PrivacyPolicyRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'PrivacyPolicyRoute';
-
-  static const _i37.PageInfo<void> page = _i37.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i23.RegionAnalyticsPage]
+/// [_i22.RegionAnalyticsPage]
 class RegionAnalyticsRoute extends _i37.PageRouteInfo<void> {
   const RegionAnalyticsRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -958,7 +943,7 @@ class RegionAnalyticsRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i24.ResetPasswordPage]
+/// [_i23.ResetPasswordPage]
 class ResetPasswordRoute extends _i37.PageRouteInfo<void> {
   const ResetPasswordRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -972,7 +957,7 @@ class ResetPasswordRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i25.RolesPage]
+/// [_i24.RolesPage]
 class RolesRoute extends _i37.PageRouteInfo<void> {
   const RolesRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -986,7 +971,7 @@ class RolesRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i26.RoleCreationPage]
+/// [_i25.RoleCreationPage]
 class RoleCreationRoute extends _i37.PageRouteInfo<RoleCreationRouteArgs> {
   RoleCreationRoute({
     _i38.Key? key,
@@ -1039,7 +1024,7 @@ class RoleCreationRouteArgs {
 }
 
 /// generated route for
-/// [_i27.ServiceRequestManagementPage]
+/// [_i26.ServiceRequestManagementPage]
 class ServiceRequestManagementRoute extends _i37.PageRouteInfo<void> {
   const ServiceRequestManagementRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -1053,7 +1038,7 @@ class ServiceRequestManagementRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i28.SideMenuPage]
+/// [_i27.SideMenuPage]
 class SideMenuRoute extends _i37.PageRouteInfo<void> {
   const SideMenuRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -1067,7 +1052,7 @@ class SideMenuRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i29.SignUpPage]
+/// [_i28.SignUpPage]
 class SignUpRoute extends _i37.PageRouteInfo<void> {
   const SignUpRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -1081,7 +1066,7 @@ class SignUpRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i30.SubscriptionPage]
+/// [_i29.SubscriptionPage]
 class SubscriptionRoute extends _i37.PageRouteInfo<void> {
   const SubscriptionRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -1095,21 +1080,7 @@ class SubscriptionRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i31.TermsAndConditionsPage]
-class TermsAndConditionsRoute extends _i37.PageRouteInfo<void> {
-  const TermsAndConditionsRoute({List<_i37.PageRouteInfo>? children})
-      : super(
-          TermsAndConditionsRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'TermsAndConditionsRoute';
-
-  static const _i37.PageInfo<void> page = _i37.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i32.TransactionManagementPage]
+/// [_i30.TransactionManagementPage]
 class TransactionManagementRoute extends _i37.PageRouteInfo<void> {
   const TransactionManagementRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -1123,7 +1094,7 @@ class TransactionManagementRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i33.UserManagementPage]
+/// [_i31.UserManagementPage]
 class UserManagementRoute extends _i37.PageRouteInfo<void> {
   const UserManagementRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -1137,7 +1108,7 @@ class UserManagementRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i34.UserManagementDetailPage]
+/// [_i32.UserManagementDetailPage]
 class UserManagementDetailRoute
     extends _i37.PageRouteInfo<UserManagementDetailRouteArgs> {
   UserManagementDetailRoute({
@@ -1177,7 +1148,7 @@ class UserManagementDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i35.VideoManagementPage]
+/// [_i33.VideoManagementPage]
 class VideoManagementRoute extends _i37.PageRouteInfo<void> {
   const VideoManagementRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -1191,7 +1162,7 @@ class VideoManagementRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i36.VideoUploadPage]
+/// [_i34.VideoUploadPage]
 class VideoUploadRoute extends _i37.PageRouteInfo<VideoUploadRouteArgs> {
   VideoUploadRoute({
     _i38.Key? key,
@@ -1253,4 +1224,32 @@ class VideoUploadRouteArgs {
   String toString() {
     return 'VideoUploadRouteArgs{key: $key, isEdit: $isEdit, title: $title, type: $type, attachment: $attachment, id: $id}';
   }
+}
+
+/// generated route for
+/// [_i35.PageListPage]
+class RouteListRoute extends _i37.PageRouteInfo<void> {
+  const RouteListRoute({List<_i37.PageRouteInfo>? children})
+      : super(
+          RouteListRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RouteListRoute';
+
+  static const _i37.PageInfo<void> page = _i37.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i36.PageCreationPage]
+class RouteCreationRoute extends _i37.PageRouteInfo<void> {
+  const RouteCreationRoute({List<_i37.PageRouteInfo>? children})
+      : super(
+          RouteCreationRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RouteCreationRoute';
+
+  static const _i37.PageInfo<void> page = _i37.PageInfo<void>(name);
 }

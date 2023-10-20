@@ -5,6 +5,7 @@ enum AppString {
   hhaUrl(
       "https://www.ccld.dss.ca.gov/hcsregistry/registration.aspx?Action=New"),
   blsUrl("https://www.nationalcprfoundation.com/"),
+  pageCreation("Page Creation"),
 
   userId("USER ID"),
   subProfileDetails('SubProfile Details'),
@@ -502,6 +503,7 @@ enum AppString {
   serviceRequestManagement("Service Request Management"),
   supportTickets("Complaints"),
   faq("Faq"),
+  page("Page"),
   supportTicketsDetails("Complaints Details"),
   pleaseSelectPets("Please select the pets"),
   pleaseSelectLanguages("Please select the languages"),

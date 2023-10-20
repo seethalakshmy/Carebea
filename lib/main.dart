@@ -26,12 +26,14 @@ import 'application/bloc/caregiver_submit_agreement/caregiver_submit_agreement_b
 import 'application/bloc/client_report/client_report_bloc.dart';
 import 'application/bloc/form_validation/form_validation_bloc.dart';
 import 'application/bloc/master/master_bloc.dart';
+import 'application/bloc/page/page_bloc.dart';
 import 'application/bloc/resend_otp_bloc/resend_otp_bloc.dart';
 import 'application/bloc/service_request_management/service_request_management_bloc.dart';
 import 'core/config/environment.dart';
 import 'infrastructure/caregiver_submit_agreement_repo/caregiver_submit_agreement_repo_impl.dart';
 import 'infrastructure/client_report/client_report_repository.dart';
 import 'infrastructure/master/master_repository.dart';
+import 'infrastructure/page/page_repository.dart';
 import 'infrastructure/resend_otp/resend_otp_repo_impl.dart';
 import 'infrastructure/shared_preference/shared_preff_util.dart';
 
@@ -84,6 +86,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (_) => SignupBloc(SignupRepository())),
         BlocProvider(create: (_) => ClientReportBloc(ClientReportRepository())),
         BlocProvider(create: (_) => MasterBloc(MasterRepository())),
+        BlocProvider(create: (_) => PageBloc(PageRepo())),
         BlocProvider<ServiceRequestManagementBloc>(
             create: (context) => ServiceRequestManagementBloc(
                 ServiceRequestManagementRepository())),

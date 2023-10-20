@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../application/bloc/client_report/client_report_bloc.dart';
 import '../../application/bloc/master/master_bloc.dart';
 import '../../core/enum.dart';
-import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/string_extension.dart';
 import '../../core/text_styles.dart';
@@ -127,8 +126,6 @@ class _ClientAnalyticsPageState extends State<ClientAnalyticsPage> {
                 builder: (context, cState) {
                   return BlocBuilder<MasterBloc, MasterState>(
                     builder: (context, state) {
-                      print('isPressed ${cState.isCancelButtonPressed}');
-
                       return Wrap(
                         crossAxisAlignment: WrapCrossAlignment.start,
                         alignment: WrapAlignment.start,
@@ -159,7 +156,7 @@ class _ClientAnalyticsPageState extends State<ClientAnalyticsPage> {
                                   : _regionDropDown(context)
                               : _regionDropDown(context),
                           _cancelButtonWidget(),
-                          _getReportWidget(cState.clientReportUserListResponse)
+                          _getReportWidget()
                         ],
                       );
                     },
@@ -235,7 +232,7 @@ class _ClientAnalyticsPageState extends State<ClientAnalyticsPage> {
           height: 20,
         ),
         CustomCard(
-          shape: PR().roundedRectangleBorder(DBL.eighteen.val),
+          // shape: PR().roundedRectangleBorder(DBL.eighteen.val),
           elevation: DBL.seven.val,
           child: CustomContainer(
             padding: EdgeInsets.all(DBL.twenty.val),
@@ -268,8 +265,6 @@ class _ClientAnalyticsPageState extends State<ClientAnalyticsPage> {
                     const ClientReportEvent.getGraphType(isGraphChurn: false))
                 : _clientReportBloc.add(
                     const ClientReportEvent.getGraphType(isGraphChurn: true));
-            print("type inside dropdown ${state.isGraphTypeChurn}");
-            print("index inside dropdown $index");
           },
           dropdownButtonStyle: DropdownButtonStyle(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -373,7 +368,6 @@ class _ClientAnalyticsPageState extends State<ClientAnalyticsPage> {
   _regionDropDown(BuildContext context) {
     return CustomDropdown<String>(
       onChange: (String value, int index) {
-        print('selected region $value');
         _masterBloc.selectedRegionId = value;
       },
       dropdownButtonStyle: DropdownButtonStyle(
@@ -503,7 +497,7 @@ class _ClientAnalyticsPageState extends State<ClientAnalyticsPage> {
     );
   }
 
-  _getReportWidget(ClientReportUserListResponse? value) {
+  _getReportWidget() {
     return Padding(
       padding: const EdgeInsets.only(right: 20.0),
       child: CustomSizedBox(
@@ -515,7 +509,6 @@ class _ClientAnalyticsPageState extends State<ClientAnalyticsPage> {
                 _clientReportBloc.add(
                     const ClientReportEvent.getCancelButtonPress(
                         isCancelButtonPressed: false));
-                print("graph type inside report ${state.isGraphTypeChurn}");
                 state.isGraphTypeChurn
                     ? _clientReportBloc.add(ClientReportEvent.getClientReport(
                         userId: SharedPreffUtil().getAdminId,
@@ -546,19 +539,17 @@ class _ClientAnalyticsPageState extends State<ClientAnalyticsPage> {
                     region: _masterBloc.selectedRegionId,
                     page: _clientReportBloc.page.toString(),
                     limit: _clientReportBloc.limit.toString()));
-                List<ClientReportList>? data =
-                    state.clientReportUserListResponse?.data;
-                if (state.clientReportUserListResponse?.status ?? false) {
-                  if (state.clientReportUserListResponse?.data != null &&
-                      state.clientReportUserListResponse!.data!.isNotEmpty) {
-                    ///todo change later
-                    // _totalItems = value.data?.pagination?.totals ?? 5000;
-                    mUserList.clear();
-                    mUserList
-                        .addAll(state.clientReportUserListResponse?.data ?? []);
-                    print("user list $mUserList");
-                  }
-                }
+                //
+                // if (state.clientReportUserListResponse?.status ?? false) {
+                //   if (state.clientReportUserListResponse?.data != null &&
+                //       state.clientReportUserListResponse!.data!.isNotEmpty) {
+
+                //     // mUserList.clear();
+                //     // mUserList
+                //     //     .addAll(state.clientReportUserListResponse?.data ?? []);
+                //     // print("user list $mUserList");
+                //   }
+                // }
               },
               text: AppString.getReport.val,
             );
@@ -607,13 +598,14 @@ class _ClientAnalyticsPageState extends State<ClientAnalyticsPage> {
   _usersView(BuildContext context, ClientReportUserListResponse? value,
       ClientReportState state) {
     if (value?.status ?? false) {
-      if (value?.data != null && value!.data!.isNotEmpty) {
-        ///todo change later
-        // _totalItems = value.data?.pagination?.totals ?? 5000;
-        mUserList.clear();
-        mUserList.addAll(value.data ?? []);
-        print("user list $mUserList");
-      }
+      // if (value?.data != null && value!.data!.isNotEmpty) {
+      ///todo change later
+      ///pagination
+      _totalItems = value?.data?.length ?? 5000;
+      mUserList.clear();
+      mUserList.addAll(value?.data ?? []);
+      debugPrint('count ${value?.data?.length}');
+      // }
     }
     return mUserList.isNotEmpty
         ? Column(
