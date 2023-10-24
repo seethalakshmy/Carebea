@@ -6,10 +6,12 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../application/bloc/page/page_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
 import '../../domain/admins/model/admin_get_response.dart';
+import '../../infrastructure/page/page_repository.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/custom_button.dart';
@@ -40,7 +42,6 @@ class PageListPage extends StatefulWidget {
 }
 
 class _PageListPage extends State<PageListPage> {
-  List<ResData> faqs = [];
   int _totalItems = 1;
   final int _limit = 10;
   int _page = 1;
@@ -50,13 +51,12 @@ class _PageListPage extends State<PageListPage> {
   final TextEditingController _searchController = TextEditingController();
   final _searchNode = FocusNode();
   String _adminUserId = "";
-  final FaqBloc _faqBloc = FaqBloc(FaqRepository());
+  final PageBloc _pageBloc = PageBloc(PageRepo());
   SharedPreffUtil sharedPrefUtil = SharedPreffUtil();
   String? filterId;
 
   @override
   Widget build(BuildContext context) {
-    _faqBloc.add(const FaqEvent.getFaqList());
     return FutureBuilder(
       future: SharedPreffUtil().init(),
       builder: (context, snapshot) {
@@ -66,7 +66,7 @@ class _PageListPage extends State<PageListPage> {
         return Column(
           children: [
             HeaderView(
-              title: AppString.faq.val,
+              title: AppString.page.val,
             ),
             CustomSizedBox(
               height: DBL.twenty.val,
@@ -78,27 +78,22 @@ class _PageListPage extends State<PageListPage> {
     );
   }
 
-  BlocProvider<FaqBloc> _rebuildView() {
+  BlocProvider<PageBloc> _rebuildView() {
     return BlocProvider(
-      create: (context) => _faqBloc
-        ..add(FaqEvent.getFaq(
-          userId: _adminUserId,
-          page: _page,
-          limit: _limit,
-        )),
+      create: (context) => _pageBloc..add(const PageEvent.getPages()),
       child: _bodyView(),
     );
   }
 
   _bodyView() {
-    return BlocBuilder<FaqBloc, FaqState>(
+    return BlocBuilder<PageBloc, PageState>(
       builder: (_, state) {
         return _cardView(state, context);
       },
     );
   }
 
-  CustomCard _cardView(FaqState state, BuildContext context) {
+  CustomCard _cardView(PageState state, BuildContext context) {
     return CustomCard(
       shape: PR().roundedRectangleBorder(DBL.five.val),
       elevation: DBL.seven.val,
@@ -108,13 +103,13 @@ class _PageListPage extends State<PageListPage> {
               ? const TableLoaderView()
               : state.isError
                   ? ErrorView(
-                      isClientError: state.isClientError,
-                      errorMessage: state.error)
-                  : _faqView(context, state)),
+                      isClientError: true,
+                      errorMessage: AppString.somethingWentWrong.val)
+                  : _pagesView(context, state)),
     );
   }
 
-  _faqView(BuildContext context, FaqState state) {
+  _pagesView(BuildContext context, PageState state) {
     // AdminGetResponse? value = state.getAdminsResponse;
     // if (value?.status ?? false) {
     //   mAdmins.clear();
@@ -137,10 +132,10 @@ class _PageListPage extends State<PageListPage> {
             CustomSizedBox(height: DBL.fifteen.val),
             CustomSizedBox(
               height: (_limit + 1) * 48,
-              child: _faqTable(state, context),
+              child: _pagesTable(state, context),
             ),
             CustomSizedBox(height: DBL.twenty.val),
-            if (_totalItems > 10) _paginationView()
+            // if (_totalItems > 10) _paginationView()
           ],
         )
         // : EmptyView(title: AppString.emptyadmin.val),
@@ -148,7 +143,7 @@ class _PageListPage extends State<PageListPage> {
     );
   }
 
-  _faqTable(FaqState state, BuildContext context) {
+  _pagesTable(PageState state, BuildContext context) {
     return CSelectionArea(
       child: CDataTable2(
           minWidth: DBL.nineFifty.val,
@@ -164,7 +159,7 @@ class _PageListPage extends State<PageListPage> {
             DataColumn2(
               size: ColumnSize.L,
               label: _tableColumnView(
-                AppString.question.val,
+                AppString.title.val,
               ),
             ),
             DataColumn2(
@@ -180,30 +175,43 @@ class _PageListPage extends State<PageListPage> {
               ),
             ),
           ],
-          rows: _faqBloc.faqList.asMap().entries.map((e) {
+          rows: _pageBloc.pageList.asMap().entries.map((e) {
             var item = e.value;
             _pageIndex = e.key + 1;
             return DataRow2(
-              onTap: () {
-                autoTabRouter
-                    ?.navigate(FaqCreationRoute(isEdit: "edit", id: item.id));
-              },
+              // onTap: () {
+              //   autoTabRouter?.navigate(RouteCreationRoute(
+              //       id: item.id,
+              //       title: item.title,
+              //       description: item.description,
+              //       forWhom: item.pageFor));
+              // },
               cells: [
                 DataCell(_tableRowView("", _pageIndex.toString())),
-                DataCell(_tableRowView(item.question ?? "", item.answer ?? "")),
+                DataCell(_tableRowView("", item.title ?? "")),
                 DataCell(_tableRowView(
                     "",
-                    item.forClient ?? false
+                    item.pageFor == 1
                         ? AppString.forClient.val
-                        : AppString.forCa.val)),
+                        : item.pageFor == 2
+                            ? AppString.forCa.val
+                            : AppString.forWebsite.val)),
 
                 // DataCell(_statusBox(item.status ?? false)),
                 DataCell(TableActions(
+                  isDelete: true,
+                  onDeleteTap: () {
+                    _pageBloc.add(
+                        PageEvent.deletePage(id: item.id!, context: context));
+                  },
                   isEdit: sharedPrefUtil.getEditAdmin,
                   onEditTap: sharedPrefUtil.getEditAdmin
                       ? () {
-                          autoTabRouter?.navigate(
-                              FaqCreationRoute(isEdit: "edit", id: item.id));
+                          autoTabRouter?.navigate(RouteCreationRoute(
+                              id: item.id,
+                              title: item.title,
+                              description: item.description,
+                              forWhom: item.pageFor));
                         }
                       : null,
                 )),
@@ -241,7 +249,7 @@ class _PageListPage extends State<PageListPage> {
   }
 
   SingleChildScrollView _actionView(
-      BoxConstraints constraints, BuildContext context, FaqState state) {
+      BoxConstraints constraints, BuildContext context, PageState state) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: ConstrainedBox(
@@ -255,11 +263,11 @@ class _PageListPage extends State<PageListPage> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _searchField(),
+                // _searchField(),
                 CustomSizedBox(
                   width: DBL.ten.val,
                 ),
-                _faqCreate()
+                _pageCreate()
               ],
             ),
           ],
@@ -268,10 +276,10 @@ class _PageListPage extends State<PageListPage> {
     );
   }
 
-  _faqCreate() {
+  _pageCreate() {
     return CustomButton(
         onPressed: () {
-          autoTabRouter?.navigate(FaqCreationRoute());
+          autoTabRouter?.navigate(RouteCreationRoute());
         },
         text: AppString.create.val,
         color: AppColor.primaryColor.val,
@@ -290,67 +298,67 @@ class _PageListPage extends State<PageListPage> {
         ));
   }
 
-  _searchField() {
-    return CTextField(
-      focusNode: _searchNode,
-      width: _isXs(context) ? DBL.threeFifteen.val : DBL.threeHundred.val,
-      height: DBL.forty.val,
-      controller: _searchController,
-      hintText: AppString.search.val,
-      hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
-      onSubmitted: (String value) {
-        _searchNode.requestFocus();
-        _getFaqEvent();
-      },
-      suffixIcon: InkWell(
-        onTap: () {
-          _getFaqEvent();
-        },
-        child: CustomSvg(
-          path: IMG.search.val,
-          height: DBL.sixteen.val,
-          width: DBL.sixteen.val,
-        ),
-      ),
-    );
-  }
+  // _searchField() {
+  //   return CTextField(
+  //     focusNode: _searchNode,
+  //     width: _isXs(context) ? DBL.threeFifteen.val : DBL.threeHundred.val,
+  //     height: DBL.forty.val,
+  //     controller: _searchController,
+  //     hintText: AppString.search.val,
+  //     hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
+  //     onSubmitted: (String value) {
+  //       _searchNode.requestFocus();
+  //       _getFaqEvent();
+  //     },
+  //     suffixIcon: InkWell(
+  //       onTap: () {
+  //         _getFaqEvent();
+  //       },
+  //       child: CustomSvg(
+  //         path: IMG.search.val,
+  //         height: DBL.sixteen.val,
+  //         width: DBL.sixteen.val,
+  //       ),
+  //     ),
+  //   );
+  // }
 
-  _getFaqEvent() {
-    _faqBloc.add(FaqEvent.getFaq(
-      userId: _adminUserId,
-      page: _page,
-      limit: _limit,
-      // searchTerm: _searchController.text.trim().isNotEmpty
-      //     ? _searchController.text.trim()
-      //     : null
-    ));
-  }
+  // _getFaqEvent() {
+  //   _faqBloc.add(FaqEvent.getFaq(
+  //     userId: _adminUserId,
+  //     page: _page,
+  //     limit: _limit,
+  //     // searchTerm: _searchController.text.trim().isNotEmpty
+  //     //     ? _searchController.text.trim()
+  //     //     : null
+  //   ));
+  // }
 
-  _paginationView() {
-    final int totalPages = (_totalItems / _limit).ceil();
-    return PaginationView(
-        page: _page,
-        start: _start,
-        end: _end,
-        totalItems: _totalItems,
-        totalPages: totalPages,
-        onNextPressed: () {
-          if (_page < totalPages) {
-            _page = _page + 1;
-            _getFaqEvent();
-          }
-        },
-        onItemPressed: (i) {
-          _page = i;
-          _getFaqEvent();
-        },
-        onPreviousPressed: () {
-          if (_page > 1) {
-            _page = _page - 1;
-            _getFaqEvent();
-          }
-        });
-  }
+  // _paginationView() {
+  //   final int totalPages = (_totalItems / _limit).ceil();
+  //   return PaginationView(
+  //       page: _page,
+  //       start: _start,
+  //       end: _end,
+  //       totalItems: _totalItems,
+  //       totalPages: totalPages,
+  //       onNextPressed: () {
+  //         if (_page < totalPages) {
+  //           _page = _page + 1;
+  //           _getFaqEvent();
+  //         }
+  //       },
+  //       onItemPressed: (i) {
+  //         _page = i;
+  //         _getFaqEvent();
+  //       },
+  //       onPreviousPressed: () {
+  //         if (_page > 1) {
+  //           _page = _page - 1;
+  //           _getFaqEvent();
+  //         }
+  //       });
+  // }
 
   bool _isXs(context) => MediaQuery.of(context).size.width <= 544;
 

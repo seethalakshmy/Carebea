@@ -393,9 +393,23 @@ abstract class $AppRouter extends _i37.RootStackRouter {
       );
     },
     RouteCreationRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<RouteCreationRouteArgs>(
+          orElse: () => RouteCreationRouteArgs(
+                title: queryParams.optString('title'),
+                id: queryParams.optString('id'),
+                description: queryParams.optString('description'),
+                forWhom: queryParams.optNum('forWhom'),
+              ));
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i36.PageCreationPage(),
+        child: _i36.PageCreationPage(
+          key: args.key,
+          title: args.title,
+          id: args.id,
+          description: args.description,
+          forWhom: args.forWhom,
+        ),
       );
     },
   };
@@ -1242,14 +1256,59 @@ class RouteListRoute extends _i37.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i36.PageCreationPage]
-class RouteCreationRoute extends _i37.PageRouteInfo<void> {
-  const RouteCreationRoute({List<_i37.PageRouteInfo>? children})
-      : super(
+class RouteCreationRoute extends _i37.PageRouteInfo<RouteCreationRouteArgs> {
+  RouteCreationRoute({
+    _i38.Key? key,
+    String? title,
+    String? id,
+    String? description,
+    num? forWhom,
+    List<_i37.PageRouteInfo>? children,
+  }) : super(
           RouteCreationRoute.name,
+          args: RouteCreationRouteArgs(
+            key: key,
+            title: title,
+            id: id,
+            description: description,
+            forWhom: forWhom,
+          ),
+          rawQueryParams: {
+            'title': title,
+            'id': id,
+            'description': description,
+            'forWhom': forWhom,
+          },
           initialChildren: children,
         );
 
   static const String name = 'RouteCreationRoute';
 
-  static const _i37.PageInfo<void> page = _i37.PageInfo<void>(name);
+  static const _i37.PageInfo<RouteCreationRouteArgs> page =
+      _i37.PageInfo<RouteCreationRouteArgs>(name);
+}
+
+class RouteCreationRouteArgs {
+  const RouteCreationRouteArgs({
+    this.key,
+    this.title,
+    this.id,
+    this.description,
+    this.forWhom,
+  });
+
+  final _i38.Key? key;
+
+  final String? title;
+
+  final String? id;
+
+  final String? description;
+
+  final num? forWhom;
+
+  @override
+  String toString() {
+    return 'RouteCreationRouteArgs{key: $key, title: $title, id: $id, description: $description, forWhom: $forWhom}';
+  }
 }

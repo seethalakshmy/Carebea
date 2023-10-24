@@ -11,11 +11,13 @@ class YesNoRadioButtonWidget extends StatelessWidget {
     required this.groupValue,
     required this.yesLabel,
     required this.noLabel,
+    this.thirdLabel,
     required this.onChanged,
   }) : super(key: key);
   final int groupValue;
   final String yesLabel;
   final String noLabel;
+  final String? thirdLabel;
   final Function(int?) onChanged;
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,20 @@ class YesNoRadioButtonWidget extends StatelessWidget {
         ),
         CustomText(
           noLabel,
+          style: TS().gRoboto(
+            fontSize: FS.font13.val,
+            fontWeight: FW.w400.val,
+            color: AppColor.matBlack2.val,
+          ),
+        ),
+        CustomSizedBox(width: DBL.twelve.val),
+        Radio<int>(
+          value: 2,
+          groupValue: groupValue,
+          onChanged: onChanged,
+        ),
+        CustomText(
+          thirdLabel ?? '',
           style: TS().gRoboto(
             fontSize: FS.font13.val,
             fontWeight: FW.w400.val,

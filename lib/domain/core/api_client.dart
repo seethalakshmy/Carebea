@@ -51,6 +51,7 @@ import '../on_boarding/models/preferences/pet_list_response.dart';
 import '../on_boarding/models/preferences/years_of_experience_response.dart';
 import '../on_boarding/models/resend_otp_response.dart';
 import '../on_boarding/models/services/get_services_response.dart';
+import '../page/model/get_pages_response.dart';
 import '../role_creation/model/module_response.dart';
 import '../role_creation/model/view_role_response.dart';
 import '../service_request_management/model/assign_caregiver_params.dart';
@@ -818,5 +819,22 @@ abstract class ApiClient {
     @Field('title') String title,
     @Field('description') String description,
     @Field('page_for') String pageFor,
+  );
+
+  @GET("/admin/get-pages")
+  Future<GetPagesResponse> getPages();
+
+  @POST('/admin/update-page')
+  Future<CommonResponse> updatePage(
+    @Field('user_id') String userId,
+    @Field("id") String id,
+    @Field('title') String title,
+    @Field('description') String description,
+    @Field('page_for') String pageFor,
+  );
+
+  @POST('/admin/delete-page')
+  Future<CommonResponse> deletePage(
+    @Field("id") String id,
   );
 }

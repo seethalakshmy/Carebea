@@ -8,4 +8,14 @@ abstract class IPageRepo {
       {required String title,
       required String description,
       required String pageFor});
+
+  Future<Either<ApiErrorHandler, CommonResponse>> updatePage(
+      {required String userId,
+      required String id,
+      required String title,
+      required String description,
+      required String pageFor});
+
+  Future<Either<ApiErrorHandler, CommonResponse>> deletePage(
+      {required String id});
 }

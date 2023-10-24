@@ -1,5 +1,4 @@
 import 'package:auto_route/annotations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quill_html_editor/quill_html_editor.dart';
@@ -8,15 +7,30 @@ import '../../application/bloc/page/page_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/text_styles.dart';
 import '../../infrastructure/page/page_repository.dart';
+import '../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../caregiver_creation/widgets/details_text_field_with_label.dart';
 import '../on_boarding/modules/qualification_details/widgets/yes_no_radio_button_widget.dart';
+import '../side_menu/side_menu_page.dart';
 import '../widget/custom_button.dart';
+import '../widget/custom_container.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_text.dart';
 import '../widget/header_view.dart';
 
 @RoutePage()
 class PageCreationPage extends StatefulWidget {
-  const PageCreationPage({Key? key}) : super(key: key);
+  PageCreationPage(
+      {Key? key,
+      @QueryParam('title') this.title,
+      @QueryParam('id') this.id,
+      @QueryParam('description') this.description,
+      @QueryParam('forWhom') this.forWhom})
+      : super(key: key);
+
+  final String? title;
+  final String? id;
+  final String? description;
+  final num? forWhom;
 
   @override
   State<PageCreationPage> createState() => _PageCreationPageState();
@@ -26,6 +40,11 @@ class _PageCreationPageState extends State<PageCreationPage> {
   final QuillEditorController controller = QuillEditorController();
 
   PageBloc pageBloc = PageBloc(PageRepo());
+  String? id;
+  String? description;
+  num? forWhom;
+  String? adminUserID;
+  final FocusNode titleFocusNode = FocusNode();
 
   String? htmlText;
   final customToolBarList = [
@@ -55,15 +74,53 @@ class _PageCreationPageState extends State<PageCreationPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    // _faqCreationBloc = FaqCreationBloc(FaqCreationRepository());
+    adminUserID = SharedPreffUtil().getAdminId;
+    id = autoTabRouter?.currentChild?.queryParams.getString("id", "") ?? "";
+
+    description =
+        autoTabRouter?.currentChild?.queryParams.getString("description", "") ??
+            '';
+    forWhom =
+        autoTabRouter?.currentChild?.queryParams.getNum("forWhom", 0) ?? 0;
+    debugPrint("forwhom $forWhom");
+    pageBloc.titleController.text =
+        autoTabRouter?.currentChild?.queryParams.getString("title", "") ?? '';
+    // _faqCreationBloc.add(FaqCreationEvent.getFaq(id: adminId));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             HeaderView(title: AppString.termsAndConditions.val),
             CustomSizedBox(height: DBL.twenty.val),
             _forWhoWidget(),
+            CustomSizedBox(
+              width: DBL.twoEighty.val,
+              child: DetailsTextFieldWithLabel(
+                isMandatory: true,
+                maxLines: 20,
+                labelName: AppString.title.val,
+                focusNode: titleFocusNode,
+                controller: pageBloc.titleController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return AppString.questionError.val;
+                  }
+                  return null;
+                },
+                textInputAction: TextInputAction.next,
+                textInputType: TextInputType.text,
+                suffixIcon: const CustomContainer(width: 0),
+              ),
+            ),
 
             ToolBar(
               controller: controller,
@@ -83,24 +140,13 @@ class _PageCreationPageState extends State<PageCreationPage> {
             BlocBuilder<PageBloc, PageState>(
               builder: (context, state) {
                 return QuillHtmlEditor(
-                  // text: "<h1>Hello</h1>This is a quill html editor example 😊",
-                  // hintText: 'Hint text goes here',
+                  text: description ?? '',
                   controller: controller,
                   isEnabled: true,
                   minHeight: 300,
-                  // textStyle: _editorTextStyle,
-                  // hintTextStyle: _hintTextStyle,
                   hintTextAlign: TextAlign.start,
                   padding: const EdgeInsets.only(left: 10, top: 5),
                   hintTextPadding: EdgeInsets.zero,
-                  // backgroundColor: _backgroundColor,
-                  // onFocusChanged: (hasFocus) => debugPrint('has focus $hasFocus'),
-                  // onTextChanged: (text) => debugPrint('widget text change $text'),
-                  // onEditorCreated: () => debugPrint('Editor has been loaded'),
-                  // onEditingComplete: (s) => debugPrint('Editing completed $s'),
-                  // onEditorResized: (height) => debugPrint('Editor resized $height'),
-                  // onSelectionChanged: (sel) =>
-                  //     debugPrint('${sel.index},${sel.length}'),
                   loadingBuilder: (context) {
                     return const Center(
                         child: CircularProgressIndicator(
@@ -115,18 +161,42 @@ class _PageCreationPageState extends State<PageCreationPage> {
             ),
             BlocBuilder<PageBloc, PageState>(
               builder: (context, state) {
-                return CustomButton(
-                  isLoading: !state.isLoading,
-                  text: AppString.submit.val,
-                  onPressed: () async {
-                    await getText(controller);
-                    debugPrint("content $htmlText");
-                    pageBloc.add(PageEvent.createPage(
-                        title: 'Terms And Conditions',
-                        description: htmlText ?? '',
-                        pageFor: '2',
-                        context: context));
-                  },
+                return Row(
+                  children: [
+                    Spacer(),
+                    CustomButton(
+                      isLoading: state.isLoading,
+                      text: id == ''
+                          ? AppString.submit.val
+                          : AppString.update.val,
+                      onPressed: () async {
+                        await getText(controller);
+                        debugPrint("content $htmlText");
+                        debugPrint("for $forWhom");
+                        id == ''
+                            ? pageBloc.add(PageEvent.createPage(
+                                title: pageBloc.titleController.text.trim(),
+                                description: htmlText ?? '',
+                                pageFor: state.isForClient == 0
+                                    ? '1'
+                                    : state.isForClient == 1
+                                        ? '2'
+                                        : '3',
+                                context: context))
+                            : pageBloc.add(PageEvent.updatePage(
+                                userId: adminUserID ?? '',
+                                id: id ?? '',
+                                title: pageBloc.titleController.text.trim(),
+                                description: htmlText ?? '',
+                                pageFor: state.isForClient == 0
+                                    ? '1'
+                                    : state.isForClient == 1
+                                        ? '2'
+                                        : '3',
+                                context: context));
+                      },
+                    ),
+                  ],
                 );
               },
             )
@@ -139,26 +209,33 @@ class _PageCreationPageState extends State<PageCreationPage> {
   _forWhoWidget() {
     return Row(
       children: [
-        CustomText(AppString.faqFor.val,
+        CustomText(AppString.pageFor.val,
             style: TS().gRoboto(
                 fontWeight: FW.w400.val,
                 color: AppColor.label8.val,
                 fontSize: FS.font14.val)),
         const CustomSizedBox(width: 20),
-        // BlocBuilder<FaqCreationBloc, FaqCreationState>(
-        // builder: (context, state) {
-        //   return
-        YesNoRadioButtonWidget(
-            yesLabel: AppString.forClient.val,
-            noLabel: AppString.forCa.val,
-            onChanged: (val) {
-              // BlocProvider.of<FaqCreationBloc>(context)
-              //     .add(FaqCreationEvent.radioForClient(isSelected: val ?? 0));
-            },
-            groupValue: 1
-            // state.isForClient;
-            // },
-            )
+        BlocBuilder<PageBloc, PageState>(
+          builder: (context, state) {
+            return YesNoRadioButtonWidget(
+              yesLabel: AppString.forClient.val,
+              noLabel: AppString.forCa.val,
+              onChanged: (val) {
+                debugPrint("selected value $val");
+                BlocProvider.of<PageBloc>(context)
+                    .add(PageEvent.radioForClient(isSelected: val));
+              },
+              groupValue: forWhom == 0
+                  ? (forWhom == 1
+                      ? 0
+                      : forWhom == 2
+                          ? 1
+                          : 2)
+                  : state.isForClient,
+              thirdLabel: AppString.forWebsite.val,
+            );
+          },
+        )
       ],
     );
   }

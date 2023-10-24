@@ -8,6 +8,8 @@ enum AppString {
   pageCreation("Page Creation"),
 
   userId("USER ID"),
+  pageFor("Page For"),
+  forWebsite("For Website"),
   subProfileDetails('SubProfile Details'),
   noTransactions("No Transactions"),
   primaryEmergencyContact("Primary Emergency Contact"),

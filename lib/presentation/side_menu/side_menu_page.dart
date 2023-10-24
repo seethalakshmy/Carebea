@@ -31,6 +31,7 @@ import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../care_ambassador_analytics/care_ambassador_analysis.dart';
 import '../caregiver_creation/caregiver_creation_page.dart';
 import '../caregiver_detail/caregiver_detail_page.dart';
 import '../caregivers/caregivers_page.dart';
@@ -75,6 +76,7 @@ class _MenuBarState extends State<SideMenuPage> {
       AppString.transactionManagement.val: "",
       AppString.serviceRequestManagement.val: "",
       AppString.clientAnalytics.val: "",
+      AppString.careAmbassadorAnalytics.val: "",
       AppString.subscription.val: "",
       AppString.videoManagement.val: "",
       AppString.supportTickets.val: "",
@@ -538,7 +540,8 @@ class _MenuBarState extends State<SideMenuPage> {
     VideoUploadRoute(),
     ClientAnalyticsRoute(),
     RouteListRoute(),
-    RouteCreationRoute()
+    RouteCreationRoute(),
+    CareAmbassadorAnalysisRoute()
   ];
 
   int getRouteIndex(String route) {
@@ -593,6 +596,8 @@ class _MenuBarState extends State<SideMenuPage> {
       return 24;
     } else if (route == AppString.pageCreation.val) {
       return 25;
+    } else if (route == AppString.careAmbassadorAnalytics.val) {
+      return 26;
     } else {
       return 0;
     }
@@ -645,11 +650,13 @@ class _MenuBarState extends State<SideMenuPage> {
     } else if (index == 22) {
       return const VideoUploadPage();
     } else if (index == 23) {
-      return ClientAnalyticsPage();
+      return const ClientAnalyticsPage();
+    } else if (index == 26) {
+      return const CareAmbassadorAnalysisPage();
     } else if (index == 24) {
       return const PageListPage();
     } else if (index == 25) {
-      return const PageCreationPage();
+      return PageCreationPage();
     } else {
       return const DashboardPage();
     }
