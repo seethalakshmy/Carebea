@@ -1,14 +1,14 @@
-import 'package:admin_580_tech/core/custom_debugger.dart';
-import 'package:admin_580_tech/core/enum.dart';
-import 'package:admin_580_tech/core/hive/hive_utils.dart';
-import 'package:admin_580_tech/core/hover.dart';
-import 'package:admin_580_tech/core/responsive.dart';
-import 'package:admin_580_tech/core/string_extension.dart';
-import 'package:admin_580_tech/core/text_styles.dart';
-import 'package:admin_580_tech/core/text_utils.dart';
-import 'package:admin_580_tech/core/theme.dart';
-import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
-import 'package:admin_580_tech/presentation/admin_creation/admin_creation_page.dart';
+import '../../core/custom_debugger.dart';
+import '../../core/enum.dart';
+import '../../core/hive/hive_utils.dart';
+import '../../core/hover.dart';
+import '../../core/responsive.dart';
+import '../../core/string_extension.dart';
+import '../../core/text_styles.dart';
+import '../../core/text_utils.dart';
+import '../../core/theme.dart';
+import '../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../admin_creation/admin_creation_page.dart';
 import 'package:admin_580_tech/presentation/admins/admins_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_profile/caregiver_profile_page.dart';
 import 'package:admin_580_tech/presentation/caregiver_verification/caregiver_verification_page.dart';
@@ -31,16 +31,17 @@ import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../care_ambassador_analytics/care_ambassador_analysis.dart';
 import '../caregiver_creation/caregiver_creation_page.dart';
 import '../caregiver_detail/caregiver_detail_page.dart';
 import '../caregivers/caregivers_page.dart';
 import '../complaint_details/support_tickets_detail_page.dart';
 import '../complaints/help_and_support_page.dart';
 import '../faq/faq_screen.dart';
-import '../privacy_policy/privacy_policy.dart';
+import '../page/page_view.dart';
+import '../page_creation/page_creation_view.dart';
 import '../role_creation/role_creation_page.dart';
 import '../service_request_management/service_request_management_page.dart';
-import '../terms_and_conditions/terms_and_conditions_view.dart';
 import '../transaction_management/transaction_management_page.dart';
 import '../user_management/user_management_page.dart';
 import '../user_mangement_detail/user_managemet_detail_page.dart';
@@ -75,12 +76,12 @@ class _MenuBarState extends State<SideMenuPage> {
       AppString.transactionManagement.val: "",
       AppString.serviceRequestManagement.val: "",
       AppString.clientAnalytics.val: "",
+      AppString.careAmbassadorAnalytics.val: "",
       AppString.subscription.val: "",
       AppString.videoManagement.val: "",
       AppString.supportTickets.val: "",
       AppString.faq.val: "",
-      AppString.termsAndConditions.val: "",
-      AppString.privacyPolicy.val: ""
+      AppString.page.val: "",
     };
 
     CustomLog.log("Side menu:::Called initial Api Call");
@@ -538,8 +539,9 @@ class _MenuBarState extends State<SideMenuPage> {
     VideoManagementRoute(),
     VideoUploadRoute(),
     ClientAnalyticsRoute(),
-    TermsAndConditionsRoute(),
-    PrivacyPolicyRoute()
+    RouteListRoute(),
+    RouteCreationRoute(),
+    CareAmbassadorAnalysisRoute()
   ];
 
   int getRouteIndex(String route) {
@@ -590,10 +592,12 @@ class _MenuBarState extends State<SideMenuPage> {
       return 22;
     } else if (route == AppString.clientAnalytics.val) {
       return 23;
-    } else if (route == AppString.termsAndConditions.val) {
+    } else if (route == AppString.page.val) {
       return 24;
-    } else if (route == AppString.privacyPolicy.val) {
+    } else if (route == AppString.pageCreation.val) {
       return 25;
+    } else if (route == AppString.careAmbassadorAnalytics.val) {
+      return 26;
     } else {
       return 0;
     }
@@ -646,11 +650,13 @@ class _MenuBarState extends State<SideMenuPage> {
     } else if (index == 22) {
       return const VideoUploadPage();
     } else if (index == 23) {
-      return ClientAnalyticsPage();
+      return const ClientAnalyticsPage();
+    } else if (index == 26) {
+      return const CareAmbassadorAnalysisPage();
     } else if (index == 24) {
-      return const TermsAndConditionsPage();
+      return const PageListPage();
     } else if (index == 25) {
-      return const PrivacyPolicyPage();
+      return PageCreationPage();
     } else {
       return const DashboardPage();
     }

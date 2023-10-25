@@ -1,20 +1,20 @@
-import 'package:admin_580_tech/core/string_extension.dart';
-import 'package:admin_580_tech/infrastructure/user_management_detail/user_management_detail_repository.dart';
-import 'package:admin_580_tech/presentation/widget/multiple_barchart.dart';
+import 'dart:developer';
+
 import 'package:auto_route/annotations.dart';
 import 'package:data_table_2/data_table_2.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../application/bloc/service_request_management/service_request_management_bloc.dart';
-import '../../application/bloc/user_managment/user_management_bloc.dart';
+import '../../application/bloc/client_report/client_report_bloc.dart';
+import '../../application/bloc/master/master_bloc.dart';
 import '../../core/enum.dart';
-import '../../core/properties.dart';
 import '../../core/responsive.dart';
+import '../../core/string_extension.dart';
 import '../../core/text_styles.dart';
-import '../../domain/user_management/model/user_list_response.dart';
-import '../../infrastructure/user_management/users_repository.dart';
+import '../../domain/client_report/model/client_report_user_list_response.dart';
+import '../../infrastructure/client_report/client_report_repository.dart';
+import '../../infrastructure/master/master_repository.dart';
+import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';
@@ -24,6 +24,7 @@ import '../widget/custom_container.dart';
 import '../widget/custom_data_table_2.dart';
 import '../widget/custom_dropdown.dart';
 import '../widget/custom_selection_area.dart';
+import '../widget/custom_shimmer.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_svg.dart';
 import '../widget/custom_text.dart';
@@ -36,191 +37,289 @@ import '../widget/single_barchart.dart';
 import '../widget/table_loader_view.dart';
 
 @RoutePage()
-class ClientAnalyticsPage extends StatelessWidget {
-  ClientAnalyticsPage({Key? key}) : super(key: key);
+class ClientAnalyticsPage extends StatefulWidget {
+  const ClientAnalyticsPage({
+    Key? key,
+  }) : super(key: key);
 
+  @override
+  State<ClientAnalyticsPage> createState() => _ClientAnalyticsPageState();
+}
+
+class _ClientAnalyticsPageState extends State<ClientAnalyticsPage> {
   TextEditingController fromDateController = TextEditingController();
+
   TextEditingController toDateController = TextEditingController();
 
-  List<dynamic> mUserList = [];
+  List<ClientReportList> mUserList = [];
+
   List<int> shimmerList = List.generate(10, (index) => (index));
+
   int _totalItems = 1;
 
   int pageIndex = 0;
-  int _start = 0;
-  int _end = 10;
-  final TextEditingController _searchController = TextEditingController();
 
-  String? adminId;
-  UserManagementBloc _userBloc = UserManagementBloc(UsersRepository());
-  // UserManagementBloc? _userBloc;
+  int _start = 0;
+
+  int _end = 10;
+
+  int count = 1;
+
+  DateTime? startDate;
+  DateTime? endDate;
+
+  @override
+  void initState() {
+    super.initState();
+    _masterBloc.add(const MasterEvent.getRegionList());
+    _clientReportBloc.add(ClientReportEvent.getInactiveCountReport(
+        userId: _sharedPreffUtil.getAdminId,
+        roleId: '64409b7d63e7736ada368149',
+        filterId: '1',
+        year: '',
+        month: '',
+        startDate: '',
+        toDate: '',
+        region: ''));
+    _clientReportBloc.add(ClientReportEvent.getUserList(
+        userId: _sharedPreffUtil.getAdminId,
+        roleId: '64409b7d63e7736ada368149',
+        year: '',
+        month: '',
+        startDate: '',
+        toDate: '',
+        region: '',
+        page: _clientReportBloc.page.toString(),
+        limit: _clientReportBloc.limit.toString()));
+    count = 1;
+    log("initstate called $count");
+  }
+
+  final _clientReportBloc = ClientReportBloc(ClientReportRepository());
+  final _masterBloc = MasterBloc(MasterRepository());
+  final SharedPreffUtil _sharedPreffUtil = SharedPreffUtil();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        HeaderView(title: AppString.clientAnalytics.val),
-        CustomSizedBox(height: DBL.twenty.val),
-        Wrap(
-          crossAxisAlignment: WrapCrossAlignment.start,
-          alignment: WrapAlignment.start,
-          runAlignment: WrapAlignment.center,
-          spacing: 20,
-          runSpacing: 10,
-          children: [
-            // state.isLoading ?? false
-            //     ? _shimmerForFilterWidgets()
-            //     :
-            _graphTypeDropDown(context),
-            _durationDropDown(context),
-            // state.isLoading ?? false
-            //     ? _shimmerForFilterWidgets()
-            //     :
-            _buildDatePicker(
-                // state,
-                fromDateController,
-                AppString.startDate.val, () {
-              _selectFromDate(context
-                  // state
+    return Builder(builder: (context) {
+      return BlocProvider<ClientReportBloc>(
+        create: (context) => _clientReportBloc,
+        child: Builder(builder: (context) {
+          if (count == 1) {
+            _clientReportBloc.add(ClientReportEvent.getClientReport(
+                userId: _sharedPreffUtil.getAdminId,
+                roleId: '64409b7d63e7736ada368149',
+                filterId: '1',
+                year: '',
+                month: '',
+                startDate: '',
+                toDate: '',
+                region: ''));
+            count++;
+          }
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              HeaderView(title: AppString.clientAnalytics.val),
+              CustomSizedBox(height: DBL.twenty.val),
+              BlocBuilder<ClientReportBloc, ClientReportState>(
+                builder: (context, cState) {
+                  return BlocBuilder<MasterBloc, MasterState>(
+                    builder: (context, state) {
+                      return Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.start,
+                        alignment: WrapAlignment.start,
+                        runAlignment: WrapAlignment.center,
+                        spacing: 20,
+                        runSpacing: 10,
+                        children: [
+                          cState.isCancelButtonPressed
+                              ? cState.isLoading
+                                  ? _shimmerForFilterWidgets()
+                                  : _graphTypeDropDown(context)
+                              : _graphTypeDropDown(context),
+                          _durationDropDown(context),
+                          _buildDatePicker(
+                              fromDateController, AppString.startDate.val, () {
+                            _selectFromDate(context);
+                          }),
+                          _buildDatePicker(
+                              toDateController, AppString.endDate.val, () {
+                            _selectToDate(
+                              context,
+                            );
+                          }),
+                          cState.isCancelButtonPressed
+                              ? (!state.isRegionLoading || cState.isLoading)
+                                  ? _shimmerForFilterWidgets(
+                                      width: DBL.oneTwenty.val)
+                                  : _regionDropDown(context)
+                              : _regionDropDown(context),
+                          _cancelButtonWidget(),
+                          _getReportWidget()
+                        ],
+                      );
+                    },
                   );
-            }),
-            // state.isLoading ?? false
-            //     ? _shimmerForFilterWidgets()
-            //     :
-            _buildDatePicker(
-                // state,
-                toDateController,
-                AppString.endDate.val, () {
-              _selectToDate(
-                context,
-                // state
-              );
-            }),
-            _regionDropDown(context),
-            // state.isLoading ?? false
-            //     ? _shimmerForFilterWidgets(width: DBL.oneTwenty.val)
-            //     :
-            _cancelButtonWidget(),
-            _getReportWidget()
-          ],
+                },
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              BlocBuilder<ClientReportBloc, ClientReportState>(
+                builder: (context, state) {
+                  return state.isLoading
+                      ? const TableLoaderView()
+                      : _bodyView(context);
+                },
+              )
+            ],
+          );
+        }),
+      );
+    });
+  }
+
+  CustomShimmerWidget _shimmerForFilterWidgets({double? width}) {
+    return CustomShimmerWidget.rectangular(
+      height: DBL.fortySeven.val,
+      width: width ?? DBL.twoTen.val,
+      baseColor: AppColor.rowBackgroundColor.val,
+      highlightColor: AppColor.lightGrey.val,
+    );
+  }
+
+  Column _bodyView(BuildContext context) {
+    return Column(
+      children: [
+        BlocBuilder<ClientReportBloc, ClientReportState>(
+          builder: (context, state) {
+            if (state.isGraphTypeChurn) {
+              if (state.clientReportResponse?.data?.churnRate?.isNotEmpty ??
+                  false) {
+                return SingleBarChart(
+                    indicatorTitle: AppString.churnRate.val,
+                    totalCountText: AppString.totalChurnRate.val,
+                    xAxis: state.xAxis,
+                    yAxis: state.yAxis,
+                    totalCount: state.clientReportResponse?.data?.totalChurnRate
+                            .toString() ??
+                        '');
+              } else {
+                return EmptyView(
+                  title: AppString.noDataFound.val,
+                );
+              }
+            } else {
+              if (state.inactiveCountResponse!.data!.countByMonth!.isNotEmpty) {
+                return SingleBarChart(
+                    indicatorTitle: AppString.inactiveRate.val,
+                    totalCountText: AppString.totalInactiveRate.val,
+                    xAxis: state.inactiveXAxis,
+                    yAxis: state.inactiveYAxis,
+                    totalCount: state.inactiveCountResponse?.data?.totalCount
+                            .toString() ??
+                        '');
+              } else {
+                return EmptyView(
+                  title: AppString.noDataFound.val,
+                );
+              }
+            }
+          },
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
-        SingleBarChart(
-          indicatorTitle: AppString.qualityOfServices.val,
-          totalCountText: AppString.totalChurnRate.val,
+        CustomCard(
+          // shape: PR().roundedRectangleBorder(DBL.eighteen.val),
+          elevation: DBL.seven.val,
+          child: CustomContainer(
+            padding: EdgeInsets.all(DBL.twenty.val),
+            child: BlocBuilder<ClientReportBloc, ClientReportState>(
+              builder: (context, state) {
+                return !state.isUserTableLoading
+                    ? const TableLoaderView()
+                    : state.isError
+                        ? ErrorView(
+                            isClientError: false, errorMessage: state.error)
+                        : _usersView(
+                            context, state.clientReportUserListResponse, state);
+              },
+            ),
+          ),
         ),
-        _reBuildView()
       ],
     );
   }
 
-  BlocProvider<UserManagementBloc> _reBuildView() {
-    return BlocProvider(
-      create: (context) => _userBloc
-        ..add(UserManagementEvent.getUsers(
-            userId: adminId ?? '',
-            page: _userBloc.page.toString(),
-            limit: _userBloc.limit.toString(),
-            searchTerm: _searchController.text.trim(),
-            filterId: null)),
-      child: _bodyView(),
-    );
-  }
-
-  CustomCard _bodyView() {
-    return CustomCard(
-      shape: PR().roundedRectangleBorder(DBL.eighteen.val),
-      elevation: DBL.seven.val,
-      child: CustomContainer(
-        padding: EdgeInsets.all(DBL.twenty.val),
-        child: BlocBuilder<UserManagementBloc, UserManagementState>(
-          builder: (context, state) {
-            return state.isLoading
-                ? const TableLoaderView()
-                : state.isError
-                    ? ErrorView(isClientError: false, errorMessage: state.error)
-                    : _usersView(context, state.response, state);
-          },
-        ),
-      ),
-    );
-  }
-
+  ///client role id '64409b7d63e7736ada368149'
+  ///caregiver role id '64409b7d63e7736ada36814a'
   _graphTypeDropDown(BuildContext context) {
-    return CustomDropdown<int>(
-      onChange: (int value, int index) {
-        // _serviceRequestBloc.statusFilterId = value;
-        // _serviceRequestBloc.add(
-        //     ServiceRequestManagementEvent.getServiceRequests(
-        //         context: context,
-        //         page: 1,
-        //         limit: _limit,
-        //         statusFilterId: _serviceRequestBloc.statusFilterId == 0
-        //             ? null
-        //             : _serviceRequestBloc.statusFilterId));
-      },
-      dropdownButtonStyle: DropdownButtonStyle(
-        mainAxisAlignment: MainAxisAlignment.start,
-        width: DBL.twoTen.val,
-        height: DBL.fortySeven.val,
-        elevation: DBL.zero.val,
-        padding: EdgeInsets.only(left: DBL.fifteen.val),
-        backgroundColor: Colors.white,
-        primaryColor: AppColor.white.val,
-      ),
-      dropdownStyle: DropdownStyle(
-        borderRadius: BorderRadius.circular(DBL.zero.val),
-        elevation: 2,
-        color: AppColor.white.val,
-        padding: EdgeInsets.all(DBL.five.val),
-      ),
-      items: ['test1', 'test2']
-          // _serviceRequestBloc.serviceStatusList
-          .asMap()
-          .entries
-          .map(
-            (item) => DropdownItem<int>(
-              value: item.key,
-              // item.value.id!.toInt(),
-              child: Padding(
-                padding: EdgeInsets.all(DBL.eight.val),
-                child: Text(
-                  item.value,
-                  // item.value.name ?? "",
-                  style: TS().gRoboto(
-                      fontWeight: FW.w400.val,
-                      fontSize: FS.font14.val,
-                      color: AppColor.columColor2.val),
+    return BlocBuilder<ClientReportBloc, ClientReportState>(
+      builder: (context, state) {
+        return CustomDropdown<int>(
+          onChange: (int value, int index) {
+            index == 1
+                ? _clientReportBloc.add(
+                    const ClientReportEvent.getGraphType(isGraphChurn: false))
+                : _clientReportBloc.add(
+                    const ClientReportEvent.getGraphType(isGraphChurn: true));
+          },
+          dropdownButtonStyle: DropdownButtonStyle(
+            mainAxisAlignment: MainAxisAlignment.start,
+            width: DBL.twoTen.val,
+            height: DBL.fortySeven.val,
+            elevation: DBL.zero.val,
+            padding: EdgeInsets.only(left: DBL.fifteen.val),
+            backgroundColor: Colors.white,
+            primaryColor: AppColor.white.val,
+          ),
+          dropdownStyle: DropdownStyle(
+            borderRadius: BorderRadius.circular(DBL.zero.val),
+            elevation: 2,
+            color: AppColor.white.val,
+            padding: EdgeInsets.all(DBL.five.val),
+          ),
+          items: [AppString.churnRate, AppString.inactiveRate]
+              .asMap()
+              .entries
+              .map(
+                (item) => DropdownItem<int>(
+                  value: item.key,
+                  child: Padding(
+                    padding: EdgeInsets.all(DBL.eight.val),
+                    child: Text(
+                      item.value.val,
+                      style: TS().gRoboto(
+                          fontWeight: FW.w400.val,
+                          fontSize: FS.font14.val,
+                          color: AppColor.columColor2.val),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          )
-          .toList(),
-      child: CustomText(
-        AppString.churnRate.val,
-        style: TS().gRoboto(
-            fontWeight: FW.w400.val,
-            fontSize: FS.font14.val,
-            color: AppColor.columColor2.val),
-      ),
+              )
+              .toList(),
+          child: CustomText(
+            AppString.churnRate.val,
+            style: TS().gRoboto(
+                fontWeight: FW.w400.val,
+                fontSize: FS.font14.val,
+                color: AppColor.columColor2.val),
+          ),
+        );
+      },
     );
   }
 
   _durationDropDown(BuildContext context) {
     return CustomDropdown<int>(
       onChange: (int value, int index) {
-        // _serviceRequestBloc.statusFilterId = value;
-        // _serviceRequestBloc.add(
-        //     ServiceRequestManagementEvent.getServiceRequests(
-        //         context: context,
-        //         page: 1,
-        //         limit: _limit,
-        //         statusFilterId: _serviceRequestBloc.statusFilterId == 0
-        //             ? null
-        //             : _serviceRequestBloc.statusFilterId));
+        _clientReportBloc.filterId = (index == 0)
+            ? '1'
+            : (index == 1)
+                ? '2'
+                : '3';
       },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -237,19 +336,16 @@ class ClientAnalyticsPage extends StatelessWidget {
         color: AppColor.white.val,
         padding: EdgeInsets.all(DBL.five.val),
       ),
-      items: ['test1', 'test2']
-          // _serviceRequestBloc.serviceStatusList
+      items: [AppString.yearly, AppString.monthly, AppString.days]
           .asMap()
           .entries
           .map(
             (item) => DropdownItem<int>(
               value: item.key,
-              // item.value.id!.toInt(),
               child: Padding(
                 padding: EdgeInsets.all(DBL.eight.val),
                 child: Text(
-                  item.value,
-                  // item.value.name ?? "",
+                  item.value.val,
                   style: TS().gRoboto(
                       fontWeight: FW.w400.val,
                       fontSize: FS.font14.val,
@@ -260,7 +356,7 @@ class ClientAnalyticsPage extends StatelessWidget {
           )
           .toList(),
       child: CustomText(
-        AppString.monthly.val,
+        AppString.yearly.val,
         style: TS().gRoboto(
             fontWeight: FW.w400.val,
             fontSize: FS.font14.val,
@@ -270,17 +366,9 @@ class ClientAnalyticsPage extends StatelessWidget {
   }
 
   _regionDropDown(BuildContext context) {
-    return CustomDropdown<int>(
-      onChange: (int value, int index) {
-        // _serviceRequestBloc.statusFilterId = value;
-        // _serviceRequestBloc.add(
-        //     ServiceRequestManagementEvent.getServiceRequests(
-        //         context: context,
-        //         page: 1,
-        //         limit: _limit,
-        //         statusFilterId: _serviceRequestBloc.statusFilterId == 0
-        //             ? null
-        //             : _serviceRequestBloc.statusFilterId));
+    return CustomDropdown<String>(
+      onChange: (String value, int index) {
+        _masterBloc.selectedRegionId = value;
       },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -297,19 +385,16 @@ class ClientAnalyticsPage extends StatelessWidget {
         color: AppColor.white.val,
         padding: EdgeInsets.all(DBL.five.val),
       ),
-      items: ['test1', 'test2']
-          // _serviceRequestBloc.serviceStatusList
+      items: _masterBloc.regionLIst
           .asMap()
           .entries
           .map(
-            (item) => DropdownItem<int>(
-              value: item.key,
-              // item.value.id!.toInt(),
+            (item) => DropdownItem<String>(
+              value: item.value.id,
               child: Padding(
                 padding: EdgeInsets.all(DBL.eight.val),
                 child: Text(
-                  item.value,
-                  // item.value.name ?? "",
+                  item.value.name ?? '',
                   style: TS().gRoboto(
                       fontWeight: FW.w400.val,
                       fontSize: FS.font14.val,
@@ -330,10 +415,7 @@ class ClientAnalyticsPage extends StatelessWidget {
   }
 
   CTextField _buildDatePicker(
-      // ServiceRequestManagementState state,
-      TextEditingController controller,
-      String hintText,
-      Function() onTap) {
+      TextEditingController controller, String hintText, Function() onTap) {
     return CTextField(
       width: DBL.twoTen.val,
       height: DBL.fortySeven.val,
@@ -368,20 +450,48 @@ class ClientAnalyticsPage extends StatelessWidget {
       padding: const EdgeInsets.only(right: 20.0),
       child: CustomSizedBox(
         height: 46,
-        child: CustomButton(
-          color: AppColor.white.val,
-          textColor: AppColor.primaryColor.val,
-          onPressed: () {
-            fromDateController.clear();
-            toDateController.clear();
-            // _serviceRequestBloc.statusFilterId = 0;
-            // _serviceRequestBloc
-            //     .add(const ServiceRequestManagementEvent.getServiceStatus());
-            // _serviceRequestBloc.add(
-            //     ServiceRequestManagementEvent.getServiceRequests(
-            //         context: context, page: 1, limit: _limit));
+        child: BlocBuilder<ClientReportBloc, ClientReportState>(
+          builder: (context, cState) {
+            return BlocBuilder<MasterBloc, MasterState>(
+              builder: (context, state) {
+                return CustomButton(
+                  color: AppColor.white.val,
+                  textColor: AppColor.primaryColor.val,
+                  onPressed: () {
+                    _clientReportBloc.add(
+                        const ClientReportEvent.getCancelButtonPress(
+                            isCancelButtonPressed: true));
+                    fromDateController.clear();
+                    toDateController.clear();
+
+                    cState.isGraphTypeChurn
+                        ? _clientReportBloc.add(
+                            ClientReportEvent.getClientReport(
+                                userId: SharedPreffUtil().getAdminId,
+                                roleId: '64409b7d63e7736ada368149',
+                                filterId: '1',
+                                year: '',
+                                month: '',
+                                startDate: '',
+                                toDate: '',
+                                region: ''))
+                        : _clientReportBloc.add(
+                            ClientReportEvent.getInactiveCountReport(
+                                userId: SharedPreffUtil().getAdminId,
+                                roleId: '64409b7d63e7736ada368149',
+                                filterId: '1',
+                                year: '',
+                                month: '',
+                                startDate: '',
+                                toDate: '',
+                                region: ''));
+                    _clientReportBloc.filterId = '1';
+                  },
+                  text: AppString.cancel.val,
+                );
+              },
+            );
           },
-          text: AppString.cancel.val,
         ),
       ),
     );
@@ -392,18 +502,58 @@ class ClientAnalyticsPage extends StatelessWidget {
       padding: const EdgeInsets.only(right: 20.0),
       child: CustomSizedBox(
         height: 46,
-        child: CustomButton(
-          onPressed: () {
-            fromDateController.clear();
-            toDateController.clear();
-            // _serviceRequestBloc.statusFilterId = 0;
-            // _serviceRequestBloc
-            //     .add(const ServiceRequestManagementEvent.getServiceStatus());
-            // _serviceRequestBloc.add(
-            //     ServiceRequestManagementEvent.getServiceRequests(
-            //         context: context, page: 1, limit: _limit));
+        child: BlocBuilder<ClientReportBloc, ClientReportState>(
+          builder: (context, state) {
+            return CustomButton(
+              onPressed: () {
+                _clientReportBloc.add(
+                    const ClientReportEvent.getCancelButtonPress(
+                        isCancelButtonPressed: false));
+                state.isGraphTypeChurn
+                    ? _clientReportBloc.add(ClientReportEvent.getClientReport(
+                        userId: SharedPreffUtil().getAdminId,
+                        roleId: '64409b7d63e7736ada368149',
+                        filterId: _clientReportBloc.filterId ?? '',
+                        year: '',
+                        month: '',
+                        startDate: fromDateController.text,
+                        toDate: toDateController.text,
+                        region: _masterBloc.selectedRegionId))
+                    : _clientReportBloc.add(
+                        ClientReportEvent.getInactiveCountReport(
+                            userId: SharedPreffUtil().getAdminId,
+                            roleId: '64409b7d63e7736ada368149',
+                            filterId: _clientReportBloc.filterId ?? '',
+                            year: '',
+                            month: '',
+                            startDate: fromDateController.text,
+                            toDate: toDateController.text,
+                            region: _masterBloc.selectedRegionId));
+                _clientReportBloc.add(ClientReportEvent.getUserList(
+                    userId: SharedPreffUtil().getAdminId,
+                    roleId: '64409b7d63e7736ada368149',
+                    year: '',
+                    month: '',
+                    startDate: fromDateController.text,
+                    toDate: toDateController.text,
+                    region: _masterBloc.selectedRegionId,
+                    page: _clientReportBloc.page.toString(),
+                    limit: _clientReportBloc.limit.toString()));
+                //
+                // if (state.clientReportUserListResponse?.status ?? false) {
+                //   if (state.clientReportUserListResponse?.data != null &&
+                //       state.clientReportUserListResponse!.data!.isNotEmpty) {
+
+                //     // mUserList.clear();
+                //     // mUserList
+                //     //     .addAll(state.clientReportUserListResponse?.data ?? []);
+                //     // print("user list $mUserList");
+                //   }
+                // }
+              },
+              text: AppString.getReport.val,
+            );
           },
-          text: AppString.getReport.val,
         ),
       ),
     );
@@ -411,35 +561,17 @@ class ClientAnalyticsPage extends StatelessWidget {
 
   Future<void> _selectFromDate(
     BuildContext context,
-    // ServiceRequestManagementState state
   ) async {
     final DateTime now = DateTime.now();
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      // _serviceRequestBloc.selectedToDateTime ?? state.selectedDate,
       firstDate: now.subtract(const Duration(days: 365)),
       lastDate: DateTime.now(),
-      // _serviceRequestBloc.selectedToDateTime ??
-      //     now.add(const Duration(days: 365)),
     ).then((value) {
       if (value != null) {
-        // _serviceRequestBloc.selectedFromDate =
-        //     value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
-        // print("selecteddd from date : ${_serviceRequestBloc.selectedFromDate}");
-        // _serviceRequestBloc.selectedFromDateTime = value;
-        // if (_serviceRequestBloc.selectedFromDate.isNotEmpty &&
-        //     _serviceRequestBloc.selectedToDate.isNotEmpty) {
-        //   _serviceRequestBloc.add(
-        //       ServiceRequestManagementEvent.getServiceRequests(
-        //           context: context,
-        //           page: 1,
-        //           limit: _limit,
-        //           fromDate: _serviceRequestBloc.selectedFromDate,
-        //           toDate: _serviceRequestBloc.selectedToDate));
-        // }
         fromDateController.text =
-            value.toString().parseWithFormat(dateFormat: AppString.mmDDYYY.val);
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
         FocusScope.of(context).unfocus();
       }
     });
@@ -447,56 +579,40 @@ class ClientAnalyticsPage extends StatelessWidget {
 
   Future<void> _selectToDate(
     BuildContext context,
-    // ServiceRequestManagementState state
   ) async {
     final DateTime now = DateTime.now();
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      // state.selectedDate,
       firstDate: DateTime.now(),
-      // _serviceRequestBloc.selectedFromDateTime,
       lastDate: now.add(const Duration(days: 365)),
     ).then((value) {
       if (value != null) {
-        // _serviceRequestBloc.selectedToDateTime = value;
-        // _serviceRequestBloc.selectedToDate =
-        //     value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
-        // print("selecteddd to date : ${_serviceRequestBloc.selectedToDate}");
-        // if (_serviceRequestBloc.selectedFromDate.isNotEmpty &&
-        //     _serviceRequestBloc.selectedToDate.isNotEmpty) {
-        //   _serviceRequestBloc.add(
-        //       ServiceRequestManagementEvent.getServiceRequests(
-        //           context: context,
-        //           page: 1,
-        //           limit: _limit,
-        //           fromDate: _serviceRequestBloc.selectedFromDate,
-        //           toDate: _serviceRequestBloc.selectedToDate));
-        // }
         toDateController.text =
-            value.toString().parseWithFormat(dateFormat: AppString.mmDDYYY.val);
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
         FocusScope.of(context).unfocus();
       }
     });
   }
 
-  _usersView(BuildContext context, UserListResponse? value,
-      UserManagementState state) {
+  _usersView(BuildContext context, ClientReportUserListResponse? value,
+      ClientReportState state) {
     if (value?.status ?? false) {
-      if (value?.data?.finalResult != null &&
-          value!.data!.finalResult!.isNotEmpty) {
-        ///todo change later
-        _totalItems = value.data?.pagination?.totals ?? 5000;
-        mUserList.clear();
-        mUserList.addAll(value.data?.finalResult ?? []);
-      }
+      // if (value?.data != null && value!.data!.isNotEmpty) {
+      ///todo change later
+      ///pagination
+      _totalItems = value?.data?.length ?? 5000;
+      mUserList.clear();
+      mUserList.addAll(value?.data ?? []);
+      debugPrint('count ${value?.data?.length}');
+      // }
     }
     return mUserList.isNotEmpty
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               CustomSizedBox(
-                height: (_userBloc.limit + 1) * 48,
+                height: (_clientReportBloc.limit + 1) * 48,
                 child: _usersTable(state, context),
               ),
               CustomSizedBox(height: DBL.twenty.val),
@@ -506,7 +622,7 @@ class ClientAnalyticsPage extends StatelessWidget {
         : EmptyView(title: AppString.noUsersFound.val);
   }
 
-  _usersTable(UserManagementState state, BuildContext context) {
+  _usersTable(ClientReportState state, BuildContext context) {
     return CSelectionArea(
       child: CDataTable2(
         minWidth: DBL.nineFifty.val,
@@ -520,12 +636,6 @@ class ClientAnalyticsPage extends StatelessWidget {
             label: _columnsView(
                 text: AppString.slNo.val, fontWeight: FontWeight.bold),
           ),
-          // DataColumn2(
-          //   size: ColumnSize.S,
-          //   fixedWidth: DBL.eighty.val,
-          //   label: _columnsView(
-          //       text: AppString.id.val, fontWeight: FontWeight.bold),
-          // ),
           DataColumn2(
             fixedWidth: Responsive.isWeb(context)
                 ? MediaQuery.of(context).size.width * .17
@@ -539,22 +649,6 @@ class ClientAnalyticsPage extends StatelessWidget {
                 text: AppString.emailAddress.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.L,
-            label: _columnsView(
-                text: AppString.phoneNumber.val, fontWeight: FontWeight.bold),
-          ),
-          DataColumn2(
-            size: ColumnSize.L,
-            label: _columnsView(
-                text: AppString.role.val, fontWeight: FontWeight.bold),
-          ),
-          DataColumn2(
-            size: ColumnSize.L,
-            label: _columnsView(
-                text: AppString.status.val, fontWeight: FontWeight.bold),
-          ),
-          DataColumn2(
-            // size: ColumnSize.L,
             fixedWidth: Responsive.isWeb(context)
                 ? MediaQuery.of(context).size.width * .1
                 : DBL.oneSeventy.val,
@@ -569,17 +663,10 @@ class ClientAnalyticsPage extends StatelessWidget {
               DataCell(_rowsView(
                 text: pageIndex.toString(),
               )),
-              // DataCell(_rowsView(
-              //   text: item.userId.toString(),
-              // )),
               DataCell(_tableRowImage(
                   "${item.name?.firstName} ${item.name?.lastName}",
-                  item.profile ?? "")),
+                  item.profilePic ?? "")),
               DataCell(_rowsView(text: item.email ?? "")),
-              DataCell(_rowsView(text: item.mobile)),
-              DataCell(_rowsView(text: item.role)),
-
-              // DataCell(_statusBox(item.isActive ?? false)),
               DataCell(Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -587,7 +674,6 @@ class ClientAnalyticsPage extends StatelessWidget {
                       onTap: () {
                         autoTabRouter
                             ?.navigate(UserManagementDetailRoute(id: item.id));
-                        // autoTabRouter!.setActiveIndex(4,);
                       },
                       child: CustomSvg(
                         path: IMG.eye.val,
@@ -601,31 +687,9 @@ class ClientAnalyticsPage extends StatelessWidget {
                   CustomSizedBox(
                     width: DBL.twentyThree.val,
                   ),
-                  // InkWell(
-                  //     onTap: () {},
-                  //     child: CustomSvg(
-                  //       path: IMG.refresh.val,
-                  //       height: Responsive.isWeb(context)
-                  //           ? DBL.fifteen.val
-                  //           : DBL.twelve.val,
-                  //       width: Responsive.isWeb(context)
-                  //           ? DBL.twenty.val
-                  //           : DBL.eighteen.val,
-                  //     )),
                   CustomSizedBox(
                     width: DBL.twentyThree.val,
                   ),
-                  // InkWell(
-                  //     onTap: () {},
-                  //     child: CustomSvg(
-                  //       path: IMG.edit.val,
-                  //       height: Responsive.isWeb(context)
-                  //           ? DBL.fifteen.val
-                  //           : DBL.twelve.val,
-                  //       width: Responsive.isWeb(context)
-                  //           ? DBL.fifteen.val
-                  //           : DBL.twelve.val,
-                  //     )),
                 ],
               )),
             ],
@@ -659,44 +723,56 @@ class ClientAnalyticsPage extends StatelessWidget {
   }
 
   _paginationView() {
-    final int totalPages = (_totalItems / _userBloc.limit).ceil();
+    final int totalPages = (_totalItems / _clientReportBloc.limit).ceil();
     return PaginationView(
-        page: _userBloc.page,
+        page: _clientReportBloc.page,
         totalPages: totalPages,
         end: _end,
         totalItems: _totalItems,
         start: _start,
         onNextPressed: () {
-          if (_userBloc.page < totalPages) {
-            _userBloc.page = _userBloc.page + 1;
-            _userBloc.add(UserManagementEvent.getUsers(
-                userId: adminId ?? '',
-                page: _userBloc.page.toString(),
-                limit: _userBloc.limit.toString(),
-                searchTerm: _searchController.text.trim(),
-                filterId: null));
+          if (_clientReportBloc.page < totalPages) {
+            _clientReportBloc.page = _clientReportBloc.page + 1;
+            _clientReportBloc.add(ClientReportEvent.getUserList(
+                userId: _sharedPreffUtil.getAdminId,
+                roleId: "64409b7d63e7736ada368149",
+                year: "",
+                month: "",
+                startDate: "",
+                toDate: "",
+                region: "",
+                page: _clientReportBloc.page.toString(),
+                limit: _clientReportBloc.limit.toString()));
             updateData();
           }
         },
         onItemPressed: (i) {
-          _userBloc.page = i;
-          _userBloc.add(UserManagementEvent.getUsers(
-              userId: adminId ?? '',
-              page: _userBloc.page.toString(),
-              limit: _userBloc.limit.toString(),
-              searchTerm: _searchController.text.trim(),
-              filterId: null));
+          _clientReportBloc.page = i;
+          _clientReportBloc.add(ClientReportEvent.getUserList(
+              userId: _sharedPreffUtil.getAdminId,
+              roleId: "64409b7d63e7736ada368149",
+              year: "",
+              month: "",
+              startDate: "",
+              toDate: "",
+              region: "",
+              page: _clientReportBloc.page.toString(),
+              limit: _clientReportBloc.limit.toString()));
           updateData();
         },
         onPreviousPressed: () {
-          if (_userBloc.page > 1) {
-            _userBloc.page = _userBloc.page - 1;
-            _userBloc.add(UserManagementEvent.getUsers(
-                userId: adminId ?? '',
-                page: _userBloc.page.toString(),
-                limit: _userBloc.limit.toString(),
-                searchTerm: _searchController.text.trim(),
-                filterId: null));
+          if (_clientReportBloc.page > 1) {
+            _clientReportBloc.page = _clientReportBloc.page - 1;
+            _clientReportBloc.add(ClientReportEvent.getUserList(
+                userId: _sharedPreffUtil.getAdminId,
+                roleId: "64409b7d63e7736ada368149",
+                year: "",
+                month: "",
+                startDate: "",
+                toDate: "",
+                region: "",
+                page: _clientReportBloc.page.toString(),
+                limit: _clientReportBloc.limit.toString()));
             updateData();
           }
         });
@@ -730,21 +806,22 @@ class ClientAnalyticsPage extends StatelessWidget {
   }
 
   setIndex(int index) {
-    if (_userBloc.page == 1) {
+    if (_clientReportBloc.page == 1) {
       pageIndex = index + 1;
     } else {
-      pageIndex = ((_userBloc.page * _userBloc.limit) - 10) + index + 1;
+      pageIndex =
+          ((_clientReportBloc.page * _clientReportBloc.limit) - 10) + index + 1;
     }
   }
 
   void updateData() {
-    if (_userBloc.page == 1) {
+    if (_clientReportBloc.page == 1) {
       _start = 0;
-      _end = mUserList.length < _userBloc.limit
+      _end = mUserList.length < _clientReportBloc.limit
           ? mUserList.length
-          : _userBloc.limit;
+          : _clientReportBloc.limit;
     } else {
-      _start = (_userBloc.page * _userBloc.limit) - 10;
+      _start = (_clientReportBloc.page * _clientReportBloc.limit) - 10;
       _end = _start + mUserList.length;
     }
   }

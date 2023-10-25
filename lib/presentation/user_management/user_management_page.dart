@@ -1,27 +1,25 @@
 import 'dart:developer';
 
-import 'package:admin_580_tech/application/bloc/user_managment/user_management_bloc.dart';
-import 'package:admin_580_tech/domain/user_management/model/user_list_response.dart';
-import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
-import 'package:admin_580_tech/infrastructure/user_management/users_repository.dart';
-import 'package:admin_580_tech/presentation/widget/custom_dropdown.dart';
-import 'package:admin_580_tech/presentation/widget/pagination_view.dart';
-import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../application/bloc/user_managment/user_management_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
+import '../../domain/user_management/model/user_list_response.dart';
+import '../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../../infrastructure/user_management/users_repository.dart';
 import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_data_table_2.dart';
+import '../widget/custom_dropdown.dart';
 import '../widget/custom_selection_area.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_svg.dart';
@@ -31,6 +29,8 @@ import '../widget/empty_view.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
 import '../widget/loader_view.dart';
+import '../widget/pagination_view.dart';
+import '../widget/table_loader_view.dart';
 import '../widget/table_switch_box.dart';
 
 @RoutePage()
