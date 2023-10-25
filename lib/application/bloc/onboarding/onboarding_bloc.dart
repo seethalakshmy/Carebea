@@ -117,20 +117,20 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
       } else if (event is _SecurityDocumentUploadSelected) {
         emit(state.copyWith(
             securityDocumentList: event.bytesList,
-            listUpdated: !event.listUpdated));
+            listUpdated: event.listUpdated));
       } else if (event is _HHADocumentUploadSelected) {
         emit(state.copyWith(
-            hhaDocumentList: event.bytesList, listUpdated: !event.listUpdated));
+            hhaDocumentList: event.bytesList, listUpdated: event.listUpdated));
       } else if (event is _BLSDocumentUploadSelected) {
         emit(state.copyWith(
-            blsDocumentList: event.bytesList, listUpdated: !event.listUpdated));
+            blsDocumentList: event.bytesList, listUpdated: event.listUpdated));
       } else if (event is _TBDocumentUploadSelected) {
         emit(state.copyWith(
-            tbDocumentList: event.bytesList, listUpdated: !event.listUpdated));
+            tbDocumentList: event.bytesList, listUpdated: event.listUpdated));
       } else if (event is _CovidDocumentUploadSelected) {
         emit(state.copyWith(
             covidDocumentList: event.bytesList,
-            listUpdated: !event.listUpdated));
+            listUpdated: event.listUpdated));
       } else if (event is _LanguagePagination) {
         emit(state.copyWith(languagePaginationPage: languagePage));
       } else if (event is _StatePagination) {
