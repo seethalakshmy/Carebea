@@ -19,12 +19,12 @@ mixin _$PageEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String title, String description, String? pageFor,
-            BuildContext context)
+            BuildContext? context)
         createPage,
     required TResult Function() getPages,
     required TResult Function(int? isSelected) radioForClient,
     required TResult Function(String userId, String id, String title,
-            String description, String? pageFor, BuildContext context)
+            String description, String? pageFor, BuildContext? context)
         updatePage,
     required TResult Function(String id, BuildContext context) deletePage,
   }) =>
@@ -32,12 +32,12 @@ mixin _$PageEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String title, String description, String? pageFor,
-            BuildContext context)?
+            BuildContext? context)?
         createPage,
     TResult? Function()? getPages,
     TResult? Function(int? isSelected)? radioForClient,
     TResult? Function(String userId, String id, String title,
-            String description, String? pageFor, BuildContext context)?
+            String description, String? pageFor, BuildContext? context)?
         updatePage,
     TResult? Function(String id, BuildContext context)? deletePage,
   }) =>
@@ -45,12 +45,12 @@ mixin _$PageEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String title, String description, String? pageFor,
-            BuildContext context)?
+            BuildContext? context)?
         createPage,
     TResult Function()? getPages,
     TResult Function(int? isSelected)? radioForClient,
     TResult Function(String userId, String id, String title, String description,
-            String? pageFor, BuildContext context)?
+            String? pageFor, BuildContext? context)?
         updatePage,
     TResult Function(String id, BuildContext context)? deletePage,
     required TResult orElse(),
@@ -113,7 +113,7 @@ abstract class _$$_CreatePageCopyWith<$Res> {
       {String title,
       String description,
       String? pageFor,
-      BuildContext context});
+      BuildContext? context});
 }
 
 /// @nodoc
@@ -130,7 +130,7 @@ class __$$_CreatePageCopyWithImpl<$Res>
     Object? title = null,
     Object? description = null,
     Object? pageFor = freezed,
-    Object? context = null,
+    Object? context = freezed,
   }) {
     return _then(_$_CreatePage(
       title: null == title
@@ -145,10 +145,10 @@ class __$$_CreatePageCopyWithImpl<$Res>
           ? _value.pageFor
           : pageFor // ignore: cast_nullable_to_non_nullable
               as String?,
-      context: null == context
+      context: freezed == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
-              as BuildContext,
+              as BuildContext?,
     ));
   }
 }
@@ -160,7 +160,7 @@ class _$_CreatePage implements _CreatePage {
       {required this.title,
       required this.description,
       required this.pageFor,
-      required this.context});
+      this.context});
 
   @override
   final String title;
@@ -169,7 +169,7 @@ class _$_CreatePage implements _CreatePage {
   @override
   final String? pageFor;
   @override
-  final BuildContext context;
+  final BuildContext? context;
 
   @override
   String toString() {
@@ -202,12 +202,12 @@ class _$_CreatePage implements _CreatePage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String title, String description, String? pageFor,
-            BuildContext context)
+            BuildContext? context)
         createPage,
     required TResult Function() getPages,
     required TResult Function(int? isSelected) radioForClient,
     required TResult Function(String userId, String id, String title,
-            String description, String? pageFor, BuildContext context)
+            String description, String? pageFor, BuildContext? context)
         updatePage,
     required TResult Function(String id, BuildContext context) deletePage,
   }) {
@@ -218,12 +218,12 @@ class _$_CreatePage implements _CreatePage {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String title, String description, String? pageFor,
-            BuildContext context)?
+            BuildContext? context)?
         createPage,
     TResult? Function()? getPages,
     TResult? Function(int? isSelected)? radioForClient,
     TResult? Function(String userId, String id, String title,
-            String description, String? pageFor, BuildContext context)?
+            String description, String? pageFor, BuildContext? context)?
         updatePage,
     TResult? Function(String id, BuildContext context)? deletePage,
   }) {
@@ -234,12 +234,12 @@ class _$_CreatePage implements _CreatePage {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String title, String description, String? pageFor,
-            BuildContext context)?
+            BuildContext? context)?
         createPage,
     TResult Function()? getPages,
     TResult Function(int? isSelected)? radioForClient,
     TResult Function(String userId, String id, String title, String description,
-            String? pageFor, BuildContext context)?
+            String? pageFor, BuildContext? context)?
         updatePage,
     TResult Function(String id, BuildContext context)? deletePage,
     required TResult orElse(),
@@ -296,12 +296,12 @@ abstract class _CreatePage implements PageEvent {
       {required final String title,
       required final String description,
       required final String? pageFor,
-      required final BuildContext context}) = _$_CreatePage;
+      final BuildContext? context}) = _$_CreatePage;
 
   String get title;
   String get description;
   String? get pageFor;
-  BuildContext get context;
+  BuildContext? get context;
   @JsonKey(ignore: true)
   _$$_CreatePageCopyWith<_$_CreatePage> get copyWith =>
       throw _privateConstructorUsedError;
@@ -346,12 +346,12 @@ class _$_GetPages implements _GetPages {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String title, String description, String? pageFor,
-            BuildContext context)
+            BuildContext? context)
         createPage,
     required TResult Function() getPages,
     required TResult Function(int? isSelected) radioForClient,
     required TResult Function(String userId, String id, String title,
-            String description, String? pageFor, BuildContext context)
+            String description, String? pageFor, BuildContext? context)
         updatePage,
     required TResult Function(String id, BuildContext context) deletePage,
   }) {
@@ -362,12 +362,12 @@ class _$_GetPages implements _GetPages {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String title, String description, String? pageFor,
-            BuildContext context)?
+            BuildContext? context)?
         createPage,
     TResult? Function()? getPages,
     TResult? Function(int? isSelected)? radioForClient,
     TResult? Function(String userId, String id, String title,
-            String description, String? pageFor, BuildContext context)?
+            String description, String? pageFor, BuildContext? context)?
         updatePage,
     TResult? Function(String id, BuildContext context)? deletePage,
   }) {
@@ -378,12 +378,12 @@ class _$_GetPages implements _GetPages {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String title, String description, String? pageFor,
-            BuildContext context)?
+            BuildContext? context)?
         createPage,
     TResult Function()? getPages,
     TResult Function(int? isSelected)? radioForClient,
     TResult Function(String userId, String id, String title, String description,
-            String? pageFor, BuildContext context)?
+            String? pageFor, BuildContext? context)?
         updatePage,
     TResult Function(String id, BuildContext context)? deletePage,
     required TResult orElse(),
@@ -505,12 +505,12 @@ class _$_RadioForClient implements _RadioForClient {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String title, String description, String? pageFor,
-            BuildContext context)
+            BuildContext? context)
         createPage,
     required TResult Function() getPages,
     required TResult Function(int? isSelected) radioForClient,
     required TResult Function(String userId, String id, String title,
-            String description, String? pageFor, BuildContext context)
+            String description, String? pageFor, BuildContext? context)
         updatePage,
     required TResult Function(String id, BuildContext context) deletePage,
   }) {
@@ -521,12 +521,12 @@ class _$_RadioForClient implements _RadioForClient {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String title, String description, String? pageFor,
-            BuildContext context)?
+            BuildContext? context)?
         createPage,
     TResult? Function()? getPages,
     TResult? Function(int? isSelected)? radioForClient,
     TResult? Function(String userId, String id, String title,
-            String description, String? pageFor, BuildContext context)?
+            String description, String? pageFor, BuildContext? context)?
         updatePage,
     TResult? Function(String id, BuildContext context)? deletePage,
   }) {
@@ -537,12 +537,12 @@ class _$_RadioForClient implements _RadioForClient {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String title, String description, String? pageFor,
-            BuildContext context)?
+            BuildContext? context)?
         createPage,
     TResult Function()? getPages,
     TResult Function(int? isSelected)? radioForClient,
     TResult Function(String userId, String id, String title, String description,
-            String? pageFor, BuildContext context)?
+            String? pageFor, BuildContext? context)?
         updatePage,
     TResult Function(String id, BuildContext context)? deletePage,
     required TResult orElse(),
@@ -615,7 +615,7 @@ abstract class _$$_UpdatePageCopyWith<$Res> {
       String title,
       String description,
       String? pageFor,
-      BuildContext context});
+      BuildContext? context});
 }
 
 /// @nodoc
@@ -634,7 +634,7 @@ class __$$_UpdatePageCopyWithImpl<$Res>
     Object? title = null,
     Object? description = null,
     Object? pageFor = freezed,
-    Object? context = null,
+    Object? context = freezed,
   }) {
     return _then(_$_UpdatePage(
       userId: null == userId
@@ -657,10 +657,10 @@ class __$$_UpdatePageCopyWithImpl<$Res>
           ? _value.pageFor
           : pageFor // ignore: cast_nullable_to_non_nullable
               as String?,
-      context: null == context
+      context: freezed == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
-              as BuildContext,
+              as BuildContext?,
     ));
   }
 }
@@ -674,7 +674,7 @@ class _$_UpdatePage implements _UpdatePage {
       required this.title,
       required this.description,
       required this.pageFor,
-      required this.context});
+      this.context});
 
   @override
   final String userId;
@@ -687,7 +687,7 @@ class _$_UpdatePage implements _UpdatePage {
   @override
   final String? pageFor;
   @override
-  final BuildContext context;
+  final BuildContext? context;
 
   @override
   String toString() {
@@ -722,12 +722,12 @@ class _$_UpdatePage implements _UpdatePage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String title, String description, String? pageFor,
-            BuildContext context)
+            BuildContext? context)
         createPage,
     required TResult Function() getPages,
     required TResult Function(int? isSelected) radioForClient,
     required TResult Function(String userId, String id, String title,
-            String description, String? pageFor, BuildContext context)
+            String description, String? pageFor, BuildContext? context)
         updatePage,
     required TResult Function(String id, BuildContext context) deletePage,
   }) {
@@ -738,12 +738,12 @@ class _$_UpdatePage implements _UpdatePage {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String title, String description, String? pageFor,
-            BuildContext context)?
+            BuildContext? context)?
         createPage,
     TResult? Function()? getPages,
     TResult? Function(int? isSelected)? radioForClient,
     TResult? Function(String userId, String id, String title,
-            String description, String? pageFor, BuildContext context)?
+            String description, String? pageFor, BuildContext? context)?
         updatePage,
     TResult? Function(String id, BuildContext context)? deletePage,
   }) {
@@ -754,12 +754,12 @@ class _$_UpdatePage implements _UpdatePage {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String title, String description, String? pageFor,
-            BuildContext context)?
+            BuildContext? context)?
         createPage,
     TResult Function()? getPages,
     TResult Function(int? isSelected)? radioForClient,
     TResult Function(String userId, String id, String title, String description,
-            String? pageFor, BuildContext context)?
+            String? pageFor, BuildContext? context)?
         updatePage,
     TResult Function(String id, BuildContext context)? deletePage,
     required TResult orElse(),
@@ -818,14 +818,14 @@ abstract class _UpdatePage implements PageEvent {
       required final String title,
       required final String description,
       required final String? pageFor,
-      required final BuildContext context}) = _$_UpdatePage;
+      final BuildContext? context}) = _$_UpdatePage;
 
   String get userId;
   String get id;
   String get title;
   String get description;
   String? get pageFor;
-  BuildContext get context;
+  BuildContext? get context;
   @JsonKey(ignore: true)
   _$$_UpdatePageCopyWith<_$_UpdatePage> get copyWith =>
       throw _privateConstructorUsedError;
@@ -904,12 +904,12 @@ class _$_DeletePage implements _DeletePage {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String title, String description, String? pageFor,
-            BuildContext context)
+            BuildContext? context)
         createPage,
     required TResult Function() getPages,
     required TResult Function(int? isSelected) radioForClient,
     required TResult Function(String userId, String id, String title,
-            String description, String? pageFor, BuildContext context)
+            String description, String? pageFor, BuildContext? context)
         updatePage,
     required TResult Function(String id, BuildContext context) deletePage,
   }) {
@@ -920,12 +920,12 @@ class _$_DeletePage implements _DeletePage {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String title, String description, String? pageFor,
-            BuildContext context)?
+            BuildContext? context)?
         createPage,
     TResult? Function()? getPages,
     TResult? Function(int? isSelected)? radioForClient,
     TResult? Function(String userId, String id, String title,
-            String description, String? pageFor, BuildContext context)?
+            String description, String? pageFor, BuildContext? context)?
         updatePage,
     TResult? Function(String id, BuildContext context)? deletePage,
   }) {
@@ -936,12 +936,12 @@ class _$_DeletePage implements _DeletePage {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String title, String description, String? pageFor,
-            BuildContext context)?
+            BuildContext? context)?
         createPage,
     TResult Function()? getPages,
     TResult Function(int? isSelected)? radioForClient,
     TResult Function(String userId, String id, String title, String description,
-            String? pageFor, BuildContext context)?
+            String? pageFor, BuildContext? context)?
         updatePage,
     TResult Function(String id, BuildContext context)? deletePage,
     required TResult orElse(),
