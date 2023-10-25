@@ -112,6 +112,7 @@ class _QualificationViewState extends State<QualificationView> {
                     OnBoardingTitleDividerWidget(
                         title: AppString.qualificationAndTestResult.val),
                     ItemRowWidget(
+                      listUpdated: hhaListUpdated,
                       inputFormatter: [
                         FilteringTextInputFormatter.allow(RegExp("[0-9]")),
                         HHAFormatter(),
@@ -150,15 +151,12 @@ class _QualificationViewState extends State<QualificationView> {
                             'pdf',
                             'doc'
                           ],
+                          withData: true,
                         );
                         if (result != null) {
-                          if (widget.onboardingBloc.hhaBytesList.isEmpty) {
-                            hhaListUpdated = !hhaListUpdated;
-                          }
+                          hhaListUpdated = !onboardingState.listUpdated;
                           for (PlatformFile file in result.files) {
                             widget.onboardingBloc.hhaBytesList.add(file);
-                            hhaListUpdated = !hhaListUpdated;
-                            // Break the loop after adding 2 items
                             if (widget.onboardingBloc.hhaBytesList.length ==
                                 2) {
                               break;
@@ -181,6 +179,7 @@ class _QualificationViewState extends State<QualificationView> {
                     ),
                     CustomSizedBox(height: DBL.twenty.val),
                     ItemRowWidget(
+                      listUpdated: blsListUpdated,
                       inputFormatter: [
                         LengthLimitingTextInputFormatter(30),
                       ],
@@ -219,12 +218,10 @@ class _QualificationViewState extends State<QualificationView> {
                           ],
                         );
                         if (result != null) {
-                          if (widget.onboardingBloc.blsBytesList.isEmpty) {
-                            blsListUpdated = !blsListUpdated;
-                          }
+                          blsListUpdated = !onboardingState.listUpdated;
+
                           for (PlatformFile file in result.files) {
                             widget.onboardingBloc.blsBytesList.add(file);
-                            blsListUpdated = !blsListUpdated;
                             if (widget.onboardingBloc.blsBytesList.length ==
                                 2) {
                               break;
@@ -244,6 +241,7 @@ class _QualificationViewState extends State<QualificationView> {
                     ),
                     CustomSizedBox(height: DBL.twenty.val),
                     ItemRowWidget(
+                      listUpdated: tbListUpdated,
                       whichDocument: 3,
                       documentList: widget.onboardingBloc.tbBytesList,
                       onboardingBloc: widget.onboardingBloc,
@@ -276,14 +274,9 @@ class _QualificationViewState extends State<QualificationView> {
                           ],
                         );
                         if (result != null) {
-                          if (widget.onboardingBloc.tbBytesList.isEmpty) {
-                            tbListUpdated = !tbListUpdated;
-                          }
+                          tbListUpdated = !onboardingState.listUpdated;
                           for (PlatformFile file in result.files) {
                             widget.onboardingBloc.tbBytesList.add(file);
-                            tbListUpdated = !tbListUpdated;
-
-                            // Break the loop after adding 2 items
                             if (widget.onboardingBloc.tbBytesList.length == 2) {
                               break;
                             }
@@ -305,6 +298,7 @@ class _QualificationViewState extends State<QualificationView> {
                     ),
                     CustomSizedBox(height: DBL.twenty.val),
                     ItemRowWidget(
+                      listUpdated: covidListUpdated,
                       whichDocument: 4,
                       documentList: widget.onboardingBloc.covidBytesList,
                       onboardingBloc: widget.onboardingBloc,
@@ -334,12 +328,9 @@ class _QualificationViewState extends State<QualificationView> {
                           ],
                         );
                         if (result != null) {
-                          if (widget.onboardingBloc.covidBytesList.isEmpty) {
-                            covidListUpdated = !covidListUpdated;
-                          }
+                          covidListUpdated = !onboardingState.listUpdated;
                           for (PlatformFile file in result.files) {
                             widget.onboardingBloc.covidBytesList.add(file);
-                            covidListUpdated = !covidListUpdated;
                             if (widget.onboardingBloc.covidBytesList.length ==
                                 2) {
                               break;

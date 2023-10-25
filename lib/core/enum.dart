@@ -164,6 +164,8 @@ enum AppString {
   emailOtp("OTP For Email Verification"),
   mobileOtp("OTP For Mobile Number Verification"),
   onBoarding("On-boarding"),
+  onBoardingSuccessful("On-boarding Successful"),
+  gotoCaListingScreen("Goto Care Ambassador Listing Screen"),
   id("ID"),
   slNo("SL No"),
   firstName("First Name"),

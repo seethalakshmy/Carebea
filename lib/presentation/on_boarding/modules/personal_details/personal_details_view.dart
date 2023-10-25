@@ -2,6 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pdf_render/pdf_render_widgets.dart';
 
 import '../../../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../../../application/bloc/onboarding/onboarding_bloc.dart';
@@ -13,8 +14,10 @@ import '../../../../core/time_utils.dart';
 import '../../../../infrastructure/api_service_s3.dart';
 import '../../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../../../widget/commonImageview.dart';
 import '../../../widget/common_date_picker_widget.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
+import '../../../widget/custom_alert_dialog_widget.dart';
 import '../../../widget/custom_container.dart';
 import '../../../widget/custom_form.dart';
 import '../../../widget/custom_shimmer.dart';
@@ -60,6 +63,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   final TextEditingController stateSearchController = TextEditingController();
   PlatformFile? file;
   SharedPreffUtil sharedPreffUtil = SharedPreffUtil();
+  final pdfController = PdfViewerController();
 
   final FocusNode _dateFocusNode = FocusNode();
   String selectedDate = "";
@@ -83,6 +87,12 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
     widget.onboardingBloc.add(const OnboardingEvent.stateList(
         stateSearchQuery: "", wantLoading: true));
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    pdfController.dispose();
+    super.dispose();
   }
 
   @override
@@ -243,8 +253,9 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
 
   _removeSelectedFiles(int index, OnboardingState state) {
     bytesList.removeAt(index);
-    widget.onboardingBloc.add(
-        OnboardingEvent.securityDocumentUpload(bytesList, state.listUpdated));
+    listUpdated = !listUpdated;
+    widget.onboardingBloc
+        .add(OnboardingEvent.securityDocumentUpload(bytesList, listUpdated));
   }
 
   _previewShowingWidget(OnboardingState state) {
@@ -259,17 +270,70 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
               margin: EdgeInsets.all(DBL.ten.val),
               child: state.securityDocumentList[index].name.endsWith(".png") ||
                       state.securityDocumentList[index].name.endsWith(".jpg")
-                  ? ImagePreviewWidget(
-                      bytes: state.securityDocumentList[index].bytes!,
-                      onRemoveTap: () {
-                        _removeSelectedFiles(index, state);
+                  ? InkWell(
+                      onTap: () {
+                        showGeneralDialog(
+                          barrierDismissible: true,
+                          barrierLabel: "",
+                          context: context,
+                          pageBuilder: (BuildContext buildContext,
+                              Animation animation,
+                              Animation secondaryAnimation) {
+                            return CustomAlertDialogWidget(
+                                showHeading: false,
+                                width: 700,
+                                heading: "",
+                                child: CommonImageView(
+                                  bytes:
+                                      state.securityDocumentList[index].bytes!,
+                                ));
+                          },
+                        );
                       },
+                      child: ImagePreviewWidget(
+                        bytes: state.securityDocumentList[index].bytes!,
+                        onRemoveTap: () {
+                          _removeSelectedFiles(index, state);
+                        },
+                      ),
                     )
-                  : FilePreviewWidget(
-                      fileName: state.securityDocumentList[index].name,
-                      onRemoveTap: () {
-                        _removeSelectedFiles(index, state);
+                  : InkWell(
+                      onTap: () {
+                        showGeneralDialog(
+                          barrierLabel: "",
+                          barrierDismissible: true,
+                          context: context,
+                          pageBuilder: (BuildContext buildContext,
+                              Animation animation,
+                              Animation secondaryAnimation) {
+                            return CustomAlertDialogWidget(
+                                width: 800,
+                                height: 550,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                heading: AppString.verificationProcess.val,
+                                child: CustomSizedBox(
+                                  width: 780,
+                                  height: 540,
+                                  child: PdfViewer.openData(
+                                    state.securityDocumentList[index].bytes!,
+                                    viewerController: pdfController,
+                                    onError: (err) => print(err),
+                                    params: const PdfViewerParams(
+                                        minScale: 0.2,
+                                        scrollDirection: Axis.vertical,
+                                        padding: 10),
+                                  ),
+                                ));
+                          },
+                        );
                       },
+                      child: FilePreviewWidget(
+                        fileName: state.securityDocumentList[index].name,
+                        onRemoveTap: () {
+                          _removeSelectedFiles(index, state);
+                        },
+                      ),
                     ),
             );
           }),
@@ -625,11 +689,10 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           withData: true,
         );
         if (result != null) {
-          bytesList.clear();
+          listUpdated = !listUpdated;
           file = result.files.single;
           for (PlatformFile file in result.files) {
             bytesList.add(file);
-            listUpdated = !listUpdated;
             if (bytesList.length == 2) {
               break;
             }
