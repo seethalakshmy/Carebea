@@ -364,6 +364,10 @@ class _QualificationViewState extends State<QualificationView> {
                                 widget.pageController.page!.toInt() - 1);
                           },
                           onRightButtonPressed: () async {
+                            // if (widget.onboardingBloc.state.covidDocumentList
+                            //     .isEmpty) {
+                            //   CSnackBar.showError(context, msg: AppString..val);
+                            // }
                             widget.onboardingBloc.nextButtonClicked = true;
                             if (widget.onboardingBloc.hhaBytesList.isNotEmpty) {
                               for (int i = 0;
@@ -438,7 +442,11 @@ class _QualificationViewState extends State<QualificationView> {
     }
     final userId = SharedPreffUtil().getCareGiverUserId;
 
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate() &&
+        widget.onboardingBloc.covidBytesList.isNotEmpty &&
+        widget.onboardingBloc.hhaBytesList.isNotEmpty &&
+        widget.onboardingBloc.blsBytesList.isNotEmpty &&
+        widget.onboardingBloc.tbBytesList.isNotEmpty) {
       widget.onboardingBloc.add(
         OnboardingEvent.qualificationDetails(
             userId: sharedPreffUtil.getIsFromWebsite == true

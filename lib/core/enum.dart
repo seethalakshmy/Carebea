@@ -8,6 +8,8 @@ enum AppString {
   pageCreation("Page Creation"),
 
   userId("USER ID"),
+  emptyDocument("Please upload  documents"),
+  selectGender("Select Gender"),
   pageFor("Page For"),
   forWebsite("For Website"),
   subProfileDetails('SubProfile Details'),
@@ -505,6 +507,7 @@ enum AppString {
       "You Should Select at least one module with at least one privilege"),
   emptyProfilePic("Please select your profile picture"),
   errorUploadingFile("Error uploading file, Please try again"),
+  fileSizeError("File size must be less than 20Mb"),
   serviceRequestManagement("Service Request Management"),
   supportTickets("Complaints"),
   faq("Faq"),
