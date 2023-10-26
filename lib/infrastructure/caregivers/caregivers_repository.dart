@@ -9,13 +9,13 @@ import 'package:dio/dio.dart';
 import '../../domain/caregivers/i_caregivers_repo.dart';
 import '../../domain/caregivers/model/caregiver_response.dart';
 
-class CareGiversRepository implements ICareGiversRepo {
+class CareGiversRepository implements ICareGiverRepo {
   final ApiClient _apiClient = ApiClient();
 
   @override
   Future<Either<ApiErrorHandler, CareGiverResponse>> getCareGivers(
       {required String userID,
-        required String adminId,
+      required String adminId,
       required int page,
       required int limit,
       required int type,

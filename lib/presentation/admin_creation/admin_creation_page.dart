@@ -438,7 +438,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
             context: context,
             firstName: _fNameController.text.trim(),
             lastName: _lNameController.text.trim(),
-            email: _emailController.text.trim(),
+            email: _emailController.text.trim().toLowerCase(),
             mobile: _mobileController.text.trim(),
             profilePic: _adminCreationBloc.profileUrl));
       } else {
@@ -448,7 +448,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
             context: context,
             firstName: _fNameController.text.trim(),
             lastName: _lNameController.text.trim(),
-            email: _emailController.text.trim(),
+            email: _emailController.text.trim().toLowerCase(),
             mobile: _mobileController.text.trim(),
             profilePic: _adminCreationBloc.profileUrl));
       }

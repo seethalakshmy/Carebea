@@ -8,18 +8,21 @@ import '../../../core/responsive.dart';
 import '../dashboard/indicator_widget.dart';
 
 class SingleBarChart extends StatefulWidget {
-  SingleBarChart({
-    required this.indicatorTitle,
-    this.totalCountText,
-    super.key,
-    // required this.mapValues,
-    // required this.bloc,
-  });
+  SingleBarChart(
+      {required this.indicatorTitle,
+      this.totalCountText,
+      super.key,
+      // required this.mapValues,
+      required this.xAxis,
+      required this.yAxis,
+      required this.totalCount});
   final String indicatorTitle;
 
   // final Map<String, double> mapValues;
-  // final DashboardBloc bloc;
   final String? totalCountText;
+  final List<String> xAxis;
+  final List<String> yAxis;
+  final String totalCount;
 
   final Color normal = AppColor.pieChartColor.val;
 
@@ -29,13 +32,13 @@ class SingleBarChart extends StatefulWidget {
 
 class SingleBarChartState extends State<SingleBarChart> {
   Widget bottomTitles(double value, TitleMeta meta) {
-    const style = TextStyle(fontSize: 10);
-    // String text = widget.mapValues.keys.elementAt(value.toInt());
-    String text = 'Jan';
+    const style = TextStyle(fontSize: 5);
+    String text = widget.xAxis.elementAt(value.toInt());
+    // String text = 'Jan';
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
-      child: Text(text, style: style),
+      child: RotatedBox(quarterTurns: 3, child: Text(text, style: style)),
     );
   }
 
@@ -57,15 +60,13 @@ class SingleBarChartState extends State<SingleBarChart> {
 
   @override
   Widget build(BuildContext context) {
-    // double barWidth = Responsive.isWeb(context) ? 20 : 10;
-    // double barSpace = Responsive.isWeb(context) ? 10 : 5;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 25),
       height: MediaQuery.of(context).size.height * 0.53,
       width: MediaQuery.of(context).size.width,
       color: AppColor.white.val,
       child: AspectRatio(
-        aspectRatio: 1,
+        aspectRatio: 16 / 9,
         child: Padding(
             padding: const EdgeInsets.only(top: 16),
             child: Column(
@@ -76,22 +77,22 @@ class SingleBarChartState extends State<SingleBarChart> {
                   // runSpacing: 10,
                   children: [
                     CustomText(widget.totalCountText ?? ''),
+                    SizedBox(
+                      width: 2,
+                    ),
+                    CustomText(widget.totalCount),
                     Spacer(),
-                    // MonthlyDropDown(context: context),
-                    // RegionDropDown(context: context),
                     ExportAsDropDown(context: context)
-                    // _monthlyDropDown(),
-                    // _regionDropDown(),
-                    // _exportAsDropDown()
                   ],
                 ),
                 Expanded(
                   child: LayoutBuilder(builder: (context, constraints) {
-                    final barsSpace = 4.0 * constraints.maxWidth / 100;
-                    final barsWidth = 8.0 * constraints.maxWidth / 200;
+                    print('width ${constraints.maxWidth}');
+                    final barsSpace = 30.0 * constraints.maxWidth / 50;
+                    final barsWidth = 3.0 * constraints.maxWidth / 200;
                     return BarChart(
                       BarChartData(
-                        alignment: BarChartAlignment.center,
+                        alignment: BarChartAlignment.start,
                         barTouchData: BarTouchData(
                           enabled: false,
                         ),
@@ -106,6 +107,7 @@ class SingleBarChartState extends State<SingleBarChart> {
                           ),
                           leftTitles: AxisTitles(
                             sideTitles: SideTitles(
+                              interval: 2,
                               showTitles: true,
                               reservedSize: 40,
                               getTitlesWidget: leftTitles,
@@ -154,13 +156,14 @@ class SingleBarChartState extends State<SingleBarChart> {
   }
 
   List<BarChartGroupData> getData(double barsWidth, double barsSpace) {
-    return List.generate(12, (index) {
+    return List.generate(widget.yAxis.length, (index) {
+      print('lenght ${widget.yAxis.length}');
       return BarChartGroupData(
         x: index,
         barsSpace: barsSpace,
         barRods: [
           BarChartRodData(
-            toY: 50,
+            toY: double.parse(widget.yAxis.elementAt(index)),
             color: widget.normal,
             borderRadius: BorderRadius.zero,
             width: barsWidth,
@@ -169,4 +172,21 @@ class SingleBarChartState extends State<SingleBarChart> {
       );
     });
   }
+
+  // List<BarChartGroupData> getData(double barsWidth, double barsSpace) {
+  //   return List.generate(12, (index) {
+  //     return BarChartGroupData(
+  //       x: index,
+  //       barsSpace: barsSpace,
+  //       barRods: [
+  //         BarChartRodData(
+  //           toY: 50,
+  //           color: widget.normal,
+  //           borderRadius: BorderRadius.zero,
+  //           width: barsWidth,
+  //         ),
+  //       ],
+  //     );
+  //   });
+  // }
 }

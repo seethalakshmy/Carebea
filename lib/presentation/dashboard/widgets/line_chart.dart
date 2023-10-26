@@ -27,7 +27,7 @@ class BarChartWidget extends StatefulWidget {
       required this.endDate});
 
   final Map<String, double> mapValues;
-  final DashboardBloc bloc;
+  final dynamic bloc;
   final TextEditingController startDate;
   final TextEditingController endDate;
 
