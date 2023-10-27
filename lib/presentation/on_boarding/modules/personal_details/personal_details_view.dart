@@ -752,9 +752,14 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
             if (widget.onboardingBloc.state.pickedProfilePic!.name.isEmpty) {
               CSnackBar.showError(context, msg: AppString.emptyProfilePic.val);
             }
+
             if (widget.onboardingBloc.state.pickedProfilePic!.size > 0) {
               await uploadProfilePicToAwsS3(AppString.profilePicture.val,
                   SharedPreffUtil().getCareGiverUserId);
+            }
+
+            if (bytesList.isEmpty) {
+              CSnackBar.showError(context, msg: AppString.emptyDocument.val);
             }
 
             if (bytesList.length <= 1) {
