@@ -629,6 +629,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                 height: DBL.fifty.val, width: DBL.twoEighty.val)
             : BlocBuilder<GetStatesBloc, GetStatesState>(
                 builder: (context, state) {
+                  debugPrint('testing $state');
                   return state.when(initial: () {
                     return StateDropDown(
                       onboardingBloc: widget.onboardingBloc,
@@ -766,10 +767,6 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                     );
                   });
                 },
-                selectedValue: selectedState.isEmpty
-                    ? AppString.selectState.val
-                    : widget.onboardingBloc.selectedStateName,
-
               ),
       ],
     );

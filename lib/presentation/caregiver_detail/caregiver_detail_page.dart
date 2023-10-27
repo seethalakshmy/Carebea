@@ -35,9 +35,11 @@ class CareGiverDetailPage extends StatefulWidget {
   const CareGiverDetailPage({
     Key? key,
     @QueryParam('id') this.id,
+    @QueryParam('onBoardingStatus') this.onBoardingStatus,
   }) : super(key: key);
 
   final String? id;
+  final bool? onBoardingStatus;
 
   @override
   State<CareGiverDetailPage> createState() => _CareGiverDetailPageState();
@@ -48,10 +50,14 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
   late TabController tabController;
   late CaregiverDetailBloc _caregiverDetailBloc;
   String userId = "";
+  bool onBoardingStatus = false;
 
   @override
   void initState() {
     userId = autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
+    onBoardingStatus = autoTabRouter?.currentChild?.queryParams
+            .getBool('onBoardingStatus', false) ??
+        false;
     tabController = TabController(vsync: this, length: 5);
     _caregiverDetailBloc = CaregiverDetailBloc(CareGiverDetailRepository());
     super.initState();

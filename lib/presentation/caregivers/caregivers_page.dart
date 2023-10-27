@@ -453,7 +453,8 @@ class _CareGiversPageState extends State<CareGiversPage> {
               DataCell(_tableRowView(item.email ?? "")),
               DataCell(_tableRowView(item.mobile ?? "")),
               _tabType == 1
-                  ? DataCell(sharedPrefUtil.getEditCareGiver
+                  ? DataCell(sharedPrefUtil.getEditCareGiver &&
+                          item.onBoardingStatus == true
                       ? _tableVerificationButton(item)
                       : _tableRowView(""))
                   : DataCell(sharedPrefUtil.getEditCareGiver
@@ -466,8 +467,8 @@ class _CareGiversPageState extends State<CareGiversPage> {
                           isView: true,
                           onViewTap: () {
                             autoTabRouter?.navigate(CareGiverDetailRoute(
-                              id: item.userId,
-                            ));
+                                id: item.userId,
+                                onBoardingStatus: item.onBoardingStatus));
                           })
                       : _tableRowView("")),
             ],

@@ -47,33 +47,33 @@ import 'package:admin_580_tech/presentation/on_boarding/modules/email_otp_varifi
     as _i20;
 import 'package:admin_580_tech/presentation/on_boarding/on_boarding_page.dart'
     as _i21;
-import 'package:admin_580_tech/presentation/page/page_view.dart' as _i35;
+import 'package:admin_580_tech/presentation/page/page_view.dart' as _i22;
 import 'package:admin_580_tech/presentation/page_creation/page_creation_view.dart'
-    as _i36;
-import 'package:admin_580_tech/presentation/region_analytics/region_analytics_page.dart'
-    as _i22;
-import 'package:admin_580_tech/presentation/reset_password/reset_password_page.dart'
     as _i23;
-import 'package:admin_580_tech/presentation/role_creation/role_creation_page.dart'
+import 'package:admin_580_tech/presentation/region_analytics/region_analytics_page.dart'
+    as _i24;
+import 'package:admin_580_tech/presentation/reset_password/reset_password_page.dart'
     as _i25;
-import 'package:admin_580_tech/presentation/roles/role_page.dart' as _i24;
-import 'package:admin_580_tech/presentation/service_request_management/service_request_management_page.dart'
-    as _i26;
-import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart'
+import 'package:admin_580_tech/presentation/role_creation/role_creation_page.dart'
     as _i27;
-import 'package:admin_580_tech/presentation/signup/sign_up.dart' as _i28;
-import 'package:admin_580_tech/presentation/subscription/subscription_view.dart'
+import 'package:admin_580_tech/presentation/roles/role_page.dart' as _i26;
+import 'package:admin_580_tech/presentation/service_request_management/service_request_management_page.dart'
+    as _i28;
+import 'package:admin_580_tech/presentation/side_menu/side_menu_page.dart'
     as _i29;
-import 'package:admin_580_tech/presentation/transaction_management/transaction_management_page.dart'
-    as _i30;
-import 'package:admin_580_tech/presentation/user_management/user_management_page.dart'
+import 'package:admin_580_tech/presentation/signup/sign_up.dart' as _i30;
+import 'package:admin_580_tech/presentation/subscription/subscription_view.dart'
     as _i31;
-import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet_detail_page.dart'
+import 'package:admin_580_tech/presentation/transaction_management/transaction_management_page.dart'
     as _i32;
-import 'package:admin_580_tech/presentation/video_management/video_management_view.dart'
+import 'package:admin_580_tech/presentation/user_management/user_management_page.dart'
     as _i33;
-import 'package:admin_580_tech/presentation/video_management_creation/video_management_creation_screen.dart'
+import 'package:admin_580_tech/presentation/user_mangement_detail/user_managemet_detail_page.dart'
     as _i34;
+import 'package:admin_580_tech/presentation/video_management/video_management_view.dart'
+    as _i35;
+import 'package:admin_580_tech/presentation/video_management_creation/video_management_creation_screen.dart'
+    as _i36;
 import 'package:auto_route/auto_route.dart' as _i37;
 import 'package:flutter/material.dart' as _i38;
 
@@ -127,13 +127,16 @@ abstract class $AppRouter extends _i37.RootStackRouter {
     CareGiverDetailRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<CareGiverDetailRouteArgs>(
-          orElse: () =>
-              CareGiverDetailRouteArgs(id: queryParams.optString('id')));
+          orElse: () => CareGiverDetailRouteArgs(
+                id: queryParams.optString('id'),
+                onBoardingStatus: queryParams.optBool('onBoardingStatus'),
+              ));
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i5.CareGiverDetailPage(
           key: args.key,
           id: args.id,
+          onBoardingStatus: args.onBoardingStatus,
         ),
       );
     },
@@ -273,22 +276,48 @@ abstract class $AppRouter extends _i37.RootStackRouter {
         child: const _i21.OnboardingPage(),
       );
     },
+    RouteListRoute.name: (routeData) {
+      return _i37.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i22.PageListPage(),
+      );
+    },
+    RouteCreationRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<RouteCreationRouteArgs>(
+          orElse: () => RouteCreationRouteArgs(
+                title: queryParams.optString('title'),
+                id: queryParams.optString('id'),
+                description: queryParams.optString('description'),
+                forWhom: queryParams.optNum('forWhom'),
+              ));
+      return _i37.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i23.PageCreationPage(
+          key: args.key,
+          title: args.title,
+          id: args.id,
+          description: args.description,
+          forWhom: args.forWhom,
+        ),
+      );
+    },
     RegionAnalyticsRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i22.RegionAnalyticsPage(),
+        child: const _i24.RegionAnalyticsPage(),
       );
     },
     ResetPasswordRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i23.ResetPasswordPage(),
+        child: const _i25.ResetPasswordPage(),
       );
     },
     RolesRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i24.RolesPage(),
+        child: const _i26.RolesPage(),
       );
     },
     RoleCreationRoute.name: (routeData) {
@@ -301,7 +330,7 @@ abstract class $AppRouter extends _i37.RootStackRouter {
               ));
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i25.RoleCreationPage(
+        child: _i27.RoleCreationPage(
           key: args.key,
           isView: args.isView,
           isEdit: args.isEdit,
@@ -312,37 +341,37 @@ abstract class $AppRouter extends _i37.RootStackRouter {
     ServiceRequestManagementRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i26.ServiceRequestManagementPage(),
+        child: const _i28.ServiceRequestManagementPage(),
       );
     },
     SideMenuRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i27.SideMenuPage(),
+        child: const _i29.SideMenuPage(),
       );
     },
     SignUpRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i28.SignUpPage(),
+        child: const _i30.SignUpPage(),
       );
     },
     SubscriptionRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i29.SubscriptionPage(),
+        child: const _i31.SubscriptionPage(),
       );
     },
     TransactionManagementRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i30.TransactionManagementPage(),
+        child: const _i32.TransactionManagementPage(),
       );
     },
     UserManagementRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i31.UserManagementPage(),
+        child: const _i33.UserManagementPage(),
       );
     },
     UserManagementDetailRoute.name: (routeData) {
@@ -352,7 +381,7 @@ abstract class $AppRouter extends _i37.RootStackRouter {
               UserManagementDetailRouteArgs(id: queryParams.optString('id')));
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i32.UserManagementDetailPage(
+        child: _i34.UserManagementDetailPage(
           key: args.key,
           id: args.id,
         ),
@@ -361,7 +390,7 @@ abstract class $AppRouter extends _i37.RootStackRouter {
     VideoManagementRoute.name: (routeData) {
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i33.VideoManagementPage(),
+        child: const _i35.VideoManagementPage(),
       );
     },
     VideoUploadRoute.name: (routeData) {
@@ -376,39 +405,13 @@ abstract class $AppRouter extends _i37.RootStackRouter {
               ));
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i34.VideoUploadPage(
+        child: _i36.VideoUploadPage(
           key: args.key,
           isEdit: args.isEdit,
           title: args.title,
           type: args.type,
           attachment: args.attachment,
           id: args.id,
-        ),
-      );
-    },
-    RouteListRoute.name: (routeData) {
-      return _i37.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i35.PageListPage(),
-      );
-    },
-    RouteCreationRoute.name: (routeData) {
-      final queryParams = routeData.queryParams;
-      final args = routeData.argsAs<RouteCreationRouteArgs>(
-          orElse: () => RouteCreationRouteArgs(
-                title: queryParams.optString('title'),
-                id: queryParams.optString('id'),
-                description: queryParams.optString('description'),
-                forWhom: queryParams.optNum('forWhom'),
-              ));
-      return _i37.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: _i36.PageCreationPage(
-          key: args.key,
-          title: args.title,
-          id: args.id,
-          description: args.description,
-          forWhom: args.forWhom,
         ),
       );
     },
@@ -542,14 +545,19 @@ class CareGiverDetailRoute
   CareGiverDetailRoute({
     _i38.Key? key,
     String? id,
+    bool? onBoardingStatus,
     List<_i37.PageRouteInfo>? children,
   }) : super(
           CareGiverDetailRoute.name,
           args: CareGiverDetailRouteArgs(
             key: key,
             id: id,
+            onBoardingStatus: onBoardingStatus,
           ),
-          rawQueryParams: {'id': id},
+          rawQueryParams: {
+            'id': id,
+            'onBoardingStatus': onBoardingStatus,
+          },
           initialChildren: children,
         );
 
@@ -563,15 +571,18 @@ class CareGiverDetailRouteArgs {
   const CareGiverDetailRouteArgs({
     this.key,
     this.id,
+    this.onBoardingStatus,
   });
 
   final _i38.Key? key;
 
   final String? id;
 
+  final bool? onBoardingStatus;
+
   @override
   String toString() {
-    return 'CareGiverDetailRouteArgs{key: $key, id: $id}';
+    return 'CareGiverDetailRouteArgs{key: $key, id: $id, onBoardingStatus: $onBoardingStatus}';
   }
 }
 
@@ -943,7 +954,80 @@ class OnboardingRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i22.RegionAnalyticsPage]
+/// [_i22.PageListPage]
+class RouteListRoute extends _i37.PageRouteInfo<void> {
+  const RouteListRoute({List<_i37.PageRouteInfo>? children})
+      : super(
+          RouteListRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RouteListRoute';
+
+  static const _i37.PageInfo<void> page = _i37.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i23.PageCreationPage]
+class RouteCreationRoute extends _i37.PageRouteInfo<RouteCreationRouteArgs> {
+  RouteCreationRoute({
+    _i38.Key? key,
+    String? title,
+    String? id,
+    String? description,
+    num? forWhom,
+    List<_i37.PageRouteInfo>? children,
+  }) : super(
+          RouteCreationRoute.name,
+          args: RouteCreationRouteArgs(
+            key: key,
+            title: title,
+            id: id,
+            description: description,
+            forWhom: forWhom,
+          ),
+          rawQueryParams: {
+            'title': title,
+            'id': id,
+            'description': description,
+            'forWhom': forWhom,
+          },
+          initialChildren: children,
+        );
+
+  static const String name = 'RouteCreationRoute';
+
+  static const _i37.PageInfo<RouteCreationRouteArgs> page =
+      _i37.PageInfo<RouteCreationRouteArgs>(name);
+}
+
+class RouteCreationRouteArgs {
+  const RouteCreationRouteArgs({
+    this.key,
+    this.title,
+    this.id,
+    this.description,
+    this.forWhom,
+  });
+
+  final _i38.Key? key;
+
+  final String? title;
+
+  final String? id;
+
+  final String? description;
+
+  final num? forWhom;
+
+  @override
+  String toString() {
+    return 'RouteCreationRouteArgs{key: $key, title: $title, id: $id, description: $description, forWhom: $forWhom}';
+  }
+}
+
+/// generated route for
+/// [_i24.RegionAnalyticsPage]
 class RegionAnalyticsRoute extends _i37.PageRouteInfo<void> {
   const RegionAnalyticsRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -957,7 +1041,7 @@ class RegionAnalyticsRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i23.ResetPasswordPage]
+/// [_i25.ResetPasswordPage]
 class ResetPasswordRoute extends _i37.PageRouteInfo<void> {
   const ResetPasswordRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -971,7 +1055,7 @@ class ResetPasswordRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i24.RolesPage]
+/// [_i26.RolesPage]
 class RolesRoute extends _i37.PageRouteInfo<void> {
   const RolesRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -985,7 +1069,7 @@ class RolesRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i25.RoleCreationPage]
+/// [_i27.RoleCreationPage]
 class RoleCreationRoute extends _i37.PageRouteInfo<RoleCreationRouteArgs> {
   RoleCreationRoute({
     _i38.Key? key,
@@ -1038,7 +1122,7 @@ class RoleCreationRouteArgs {
 }
 
 /// generated route for
-/// [_i26.ServiceRequestManagementPage]
+/// [_i28.ServiceRequestManagementPage]
 class ServiceRequestManagementRoute extends _i37.PageRouteInfo<void> {
   const ServiceRequestManagementRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -1052,7 +1136,7 @@ class ServiceRequestManagementRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i27.SideMenuPage]
+/// [_i29.SideMenuPage]
 class SideMenuRoute extends _i37.PageRouteInfo<void> {
   const SideMenuRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -1066,7 +1150,7 @@ class SideMenuRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i28.SignUpPage]
+/// [_i30.SignUpPage]
 class SignUpRoute extends _i37.PageRouteInfo<void> {
   const SignUpRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -1080,7 +1164,7 @@ class SignUpRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i29.SubscriptionPage]
+/// [_i31.SubscriptionPage]
 class SubscriptionRoute extends _i37.PageRouteInfo<void> {
   const SubscriptionRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -1094,7 +1178,7 @@ class SubscriptionRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i30.TransactionManagementPage]
+/// [_i32.TransactionManagementPage]
 class TransactionManagementRoute extends _i37.PageRouteInfo<void> {
   const TransactionManagementRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -1108,7 +1192,7 @@ class TransactionManagementRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i31.UserManagementPage]
+/// [_i33.UserManagementPage]
 class UserManagementRoute extends _i37.PageRouteInfo<void> {
   const UserManagementRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -1122,7 +1206,7 @@ class UserManagementRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i32.UserManagementDetailPage]
+/// [_i34.UserManagementDetailPage]
 class UserManagementDetailRoute
     extends _i37.PageRouteInfo<UserManagementDetailRouteArgs> {
   UserManagementDetailRoute({
@@ -1162,7 +1246,7 @@ class UserManagementDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i33.VideoManagementPage]
+/// [_i35.VideoManagementPage]
 class VideoManagementRoute extends _i37.PageRouteInfo<void> {
   const VideoManagementRoute({List<_i37.PageRouteInfo>? children})
       : super(
@@ -1176,7 +1260,7 @@ class VideoManagementRoute extends _i37.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i34.VideoUploadPage]
+/// [_i36.VideoUploadPage]
 class VideoUploadRoute extends _i37.PageRouteInfo<VideoUploadRouteArgs> {
   VideoUploadRoute({
     _i38.Key? key,
@@ -1237,78 +1321,5 @@ class VideoUploadRouteArgs {
   @override
   String toString() {
     return 'VideoUploadRouteArgs{key: $key, isEdit: $isEdit, title: $title, type: $type, attachment: $attachment, id: $id}';
-  }
-}
-
-/// generated route for
-/// [_i35.PageListPage]
-class RouteListRoute extends _i37.PageRouteInfo<void> {
-  const RouteListRoute({List<_i37.PageRouteInfo>? children})
-      : super(
-          RouteListRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'RouteListRoute';
-
-  static const _i37.PageInfo<void> page = _i37.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i36.PageCreationPage]
-class RouteCreationRoute extends _i37.PageRouteInfo<RouteCreationRouteArgs> {
-  RouteCreationRoute({
-    _i38.Key? key,
-    String? title,
-    String? id,
-    String? description,
-    num? forWhom,
-    List<_i37.PageRouteInfo>? children,
-  }) : super(
-          RouteCreationRoute.name,
-          args: RouteCreationRouteArgs(
-            key: key,
-            title: title,
-            id: id,
-            description: description,
-            forWhom: forWhom,
-          ),
-          rawQueryParams: {
-            'title': title,
-            'id': id,
-            'description': description,
-            'forWhom': forWhom,
-          },
-          initialChildren: children,
-        );
-
-  static const String name = 'RouteCreationRoute';
-
-  static const _i37.PageInfo<RouteCreationRouteArgs> page =
-      _i37.PageInfo<RouteCreationRouteArgs>(name);
-}
-
-class RouteCreationRouteArgs {
-  const RouteCreationRouteArgs({
-    this.key,
-    this.title,
-    this.id,
-    this.description,
-    this.forWhom,
-  });
-
-  final _i38.Key? key;
-
-  final String? title;
-
-  final String? id;
-
-  final String? description;
-
-  final num? forWhom;
-
-  @override
-  String toString() {
-    return 'RouteCreationRouteArgs{key: $key, title: $title, id: $id, description: $description, forWhom: $forWhom}';
   }
 }
