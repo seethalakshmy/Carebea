@@ -193,7 +193,8 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
                   inputFormatter: [
-                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Z0-9@.]"))
+                    FilteringTextInputFormatter.allow(
+                        RegExp("[(a-zA-Z0-9).@.]"))
                   ],
                   labelName: AppString.emailAddress.val,
                   focusNode: _emailFocusNode,
@@ -202,7 +203,7 @@ class _CaregiverCreationPageState extends State<CaregiverCreationPage> {
                     if (value?.trim() == null || value!.trim().isEmpty) {
                       return AppString.emptyEmail.val;
                     } else if (!RegExp(
-                            r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
+                            r'^.+\w@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
                         .hasMatch(value)) {
                       return AppString.validEmail.val;
                     }

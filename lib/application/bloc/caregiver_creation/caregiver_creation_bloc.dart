@@ -31,6 +31,8 @@ class CaregiverCreationBloc
             email: event.email,
             mobileNo: event.mobileNo);
     CaregiverCreationState creationState = result.fold((l) {
+      CSnackBar.showError(event.context, msg: l.error ?? "");
+
       return state.copyWith(
           isLoading: false, failureOrSuccessOption: Some(Left(l)));
     }, (r) {

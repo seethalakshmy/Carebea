@@ -481,7 +481,9 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
               )
             : GenderDropDown(
                 onboardingBloc: widget.onboardingBloc,
-                selectedValue: widget.onboardingBloc.selectedGenderName,
+                selectedValue: selectedGender.isEmpty
+                    ? AppString.selectGender.val
+                    : widget.onboardingBloc.selectedGenderName,
                 onChange: (value) {
                   selectedGender = value.toString();
                   state.copyWith(selectedGenderId: value);
@@ -764,6 +766,10 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                     );
                   });
                 },
+                selectedValue: selectedState.isEmpty
+                    ? AppString.selectState.val
+                    : widget.onboardingBloc.selectedStateName,
+
               ),
       ],
     );
@@ -815,7 +821,9 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                 onChange: (value) {
                   selectedCity = value;
                 },
-                selectedValue: widget.onboardingBloc.selectedCityName,
+                selectedValue: selectedCity.isEmpty
+                    ? AppString.selectCity.val
+                    : widget.onboardingBloc.selectedCityName,
               ),
       ],
     );
@@ -846,6 +854,9 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                     return null;
                   },
                   inputFormatter: [
+                    FilteringTextInputFormatter.deny(
+                      RegExp(r'^0+'), //users can't type 0 at 1st position
+                    ),
                     FilteringTextInputFormatter.digitsOnly,
                     LengthLimitingTextInputFormatter(9),
                     ZipCodeFormatter(),
@@ -878,7 +889,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return AppString.emptySSN.val;
-                    } else if (value.length < 10) {
+                    } else if (value.length < 11) {
                       return AppString.invalidSSN.val;
                     }
                     return null;
@@ -909,17 +920,24 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
         if (result != null) {
           listUpdated = !listUpdated;
           file = result.files.single;
-          for (PlatformFile file in result.files) {
-            bytesList.add(file);
-            if (bytesList.length == 2) {
-              break;
+          int? sizeInBytes = file?.size;
+          double sizeInMb = sizeInBytes! / (1024 * 1024);
+          debugPrint("size $sizeInMb");
+          if (sizeInMb < 20) {
+            // This file is Longer the
+
+            for (PlatformFile file in result.files) {
+              bytesList.add(file);
+              if (bytesList.length == 2) {
+                break;
+              }
             }
+            widget.onboardingBloc.add(
+              OnboardingEvent.securityDocumentUpload(bytesList, listUpdated),
+            );
+          } else {
+            CSnackBar.showError(context, msg: AppString.fileSizeError.val);
           }
-          widget.onboardingBloc.add(
-            OnboardingEvent.securityDocumentUpload(bytesList, listUpdated),
-          );
-        } else {
-          // User canceled the picker
         }
       },
       isSignature: false,
@@ -954,10 +972,16 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
             if (widget.onboardingBloc.state.pickedProfilePic!.name.isEmpty) {
               CSnackBar.showError(context, msg: AppString.emptyProfilePic.val);
             }
+
             if (widget.onboardingBloc.state.pickedProfilePic!.size > 0) {
               await uploadProfilePicToAwsS3(AppString.profilePicture.val,
                   SharedPreffUtil().getCareGiverUserId);
             }
+
+            if (bytesList.isEmpty) {
+              CSnackBar.showError(context, msg: AppString.emptyDocument.val);
+            }
+
             if (bytesList.length <= 1) {
               for (int i = 0; i < bytesList.length; i++) {
                 await uploadDocumentsToAwsS3(AppString.documents.val,

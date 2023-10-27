@@ -51,11 +51,13 @@ class YesNoRadioButtonWidget extends StatelessWidget {
           ),
         ),
         CustomSizedBox(width: DBL.twelve.val),
-        Radio<int>(
-          value: 2,
-          groupValue: groupValue,
-          onChanged: onChanged,
-        ),
+        thirdLabel != null
+            ? Radio<int>(
+                value: 2,
+                groupValue: groupValue,
+                onChanged: onChanged,
+              )
+            : SizedBox.shrink(),
         CustomText(
           thirdLabel ?? '',
           style: TS().gRoboto(

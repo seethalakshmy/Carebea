@@ -37,17 +37,17 @@ class PageBloc extends Bloc<PageEvent, PageState> {
             description: event.description,
             pageFor: event.pageFor ?? '');
     PageState pageState = result.fold((l) {
-      CSnackBar.showError(event.context, msg: l.error ?? "");
+      CSnackBar.showError(event.context!, msg: l.error ?? "");
       return state.copyWith(
         isLoading: false,
         isError: true,
       );
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context!, msg: r.message ?? "");
         autoTabRouter?.setActiveIndex(24);
       } else {
-        CSnackBar.showError(event.context, msg: r.message ?? "");
+        CSnackBar.showError(event.context!, msg: r.message ?? "");
       }
       return state.copyWith(
         response: r,
@@ -94,17 +94,17 @@ class PageBloc extends Bloc<PageEvent, PageState> {
             description: event.description,
             pageFor: event.pageFor ?? ' ');
     PageState pageState = result.fold((l) {
-      CSnackBar.showError(event.context, msg: l.error ?? "");
+      CSnackBar.showError(event.context!, msg: l.error ?? "");
       return state.copyWith(
         isLoading: false,
         isError: true,
       );
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context!, msg: r.message ?? "");
         autoTabRouter?.setActiveIndex(24);
       } else {
-        CSnackBar.showError(event.context, msg: r.message ?? "");
+        CSnackBar.showError(event.context!, msg: r.message ?? "");
       }
       return state.copyWith(
         response: r,

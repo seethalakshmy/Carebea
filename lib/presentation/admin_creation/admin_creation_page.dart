@@ -62,6 +62,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
   final _formKey = GlobalKey<FormState>();
   String adminUserID = "";
   String adminId = "";
+  String selectedRole = '';
 
   bool? _isView;
 
@@ -132,6 +133,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
       _lNameController.text = state.viewResponse?.data?.lastName ?? "";
       _emailController.text = state.viewResponse?.data?.email ?? "";
       _mobileController.text = state.viewResponse?.data?.phoneNumber ?? "";
+      selectedRole = state.viewResponse?.data?.roleId ?? '';
       _adminCreationBloc.profileUrl = state.viewResponse?.data?.profile ?? '';
     }
     return CustomPadding.symmetric(
@@ -217,7 +219,9 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
             child: CustomText(
               state.selectedRole != null
                   ? state.selectedRole!.role.toString()
-                  : AppString.selectHint.val,
+                  : _isView!
+                      ? selectedRole
+                      : AppString.selectHint.val,
               style: TS().gRoboto(
                   fontWeight: FW.w500.val,
                   fontSize: FS.font15.val,

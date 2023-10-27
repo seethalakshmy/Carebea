@@ -31,8 +31,8 @@ class CommonAlertWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomAlertDialogWidget(
       heading: heading,
-      height: 280,
-      width: 500,
+      height: MediaQuery.of(context).size.height * .3,
+      width: MediaQuery.of(context).size.width * .5,
       child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: DBL.twentyFive.val,

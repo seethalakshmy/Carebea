@@ -63,6 +63,11 @@ class _QualificationViewState extends State<QualificationView> {
   bool tbListUpdated = false;
   bool covidListUpdated = false;
 
+  PlatformFile? hhaFile;
+  PlatformFile? blsFile;
+  PlatformFile? tbFile;
+  PlatformFile? covidFile;
+
   @override
   void dispose() {
     hhaController.dispose();
@@ -141,7 +146,7 @@ class _QualificationViewState extends State<QualificationView> {
                       dateController: hhaDateController,
                       datePickerValidation: AppString.emptyExpiry.val,
                       onUpoladTap: () async {
-                        FilePickerResult? result =
+                        FilePickerResult? hhaResult =
                             await FilePicker.platform.pickFiles(
                           type: FileType.custom,
                           allowedExtensions: [
@@ -153,21 +158,31 @@ class _QualificationViewState extends State<QualificationView> {
                           ],
                           withData: true,
                         );
-                        if (result != null) {
+                        if (hhaResult != null) {
                           hhaListUpdated = !onboardingState.listUpdated;
-                          for (PlatformFile file in result.files) {
-                            widget.onboardingBloc.hhaBytesList.add(file);
-                            if (widget.onboardingBloc.hhaBytesList.length ==
-                                2) {
-                              break;
-                            }
-                          }
+                          hhaFile = hhaResult.files.single;
 
-                          widget.onboardingBloc.add(
-                            OnboardingEvent.hhaDocumentUpload(
-                                widget.onboardingBloc.hhaBytesList,
-                                hhaListUpdated),
-                          );
+                          int? sizeInBytes = hhaFile?.size;
+                          double sizeInMb = sizeInBytes! / (1024 * 1024);
+                          debugPrint("size $sizeInMb");
+                          if (sizeInMb < 20) {
+                            for (PlatformFile file in hhaResult.files) {
+                              widget.onboardingBloc.hhaBytesList.add(file);
+                              if (widget.onboardingBloc.hhaBytesList.length ==
+                                  2) {
+                                break;
+                              }
+                            }
+
+                            widget.onboardingBloc.add(
+                              OnboardingEvent.hhaDocumentUpload(
+                                  widget.onboardingBloc.hhaBytesList,
+                                  hhaListUpdated),
+                            );
+                          } else {
+                            CSnackBar.showError(context,
+                                msg: AppString.fileSizeError.val);
+                          }
                         } else {
                           // User canceled the picker
                         }
@@ -182,6 +197,8 @@ class _QualificationViewState extends State<QualificationView> {
                       listUpdated: blsListUpdated,
                       inputFormatter: [
                         LengthLimitingTextInputFormatter(30),
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'^[a-zA-Z0-9\-]+$'))
                       ],
                       whichDocument: 2,
                       documentList: widget.onboardingBloc.blsBytesList,
@@ -206,7 +223,7 @@ class _QualificationViewState extends State<QualificationView> {
                       dateController: blsDateController,
                       datePickerValidation: AppString.emptyExpiry.val,
                       onUpoladTap: () async {
-                        FilePickerResult? result =
+                        FilePickerResult? blsResult =
                             await FilePicker.platform.pickFiles(
                           type: FileType.custom,
                           allowedExtensions: [
@@ -217,21 +234,31 @@ class _QualificationViewState extends State<QualificationView> {
                             'doc'
                           ],
                         );
-                        if (result != null) {
-                          blsListUpdated = !onboardingState.listUpdated;
 
-                          for (PlatformFile file in result.files) {
-                            widget.onboardingBloc.blsBytesList.add(file);
-                            if (widget.onboardingBloc.blsBytesList.length ==
-                                2) {
-                              break;
+                        if (blsResult != null) {
+                          blsListUpdated = !onboardingState.listUpdated;
+                          blsFile = blsResult.files.single;
+
+                          int? sizeInBytes = blsFile?.size;
+                          double sizeInMb = sizeInBytes! / (1024 * 1024);
+                          debugPrint("size $sizeInMb");
+                          if (sizeInMb < 20) {
+                            for (PlatformFile file in blsResult.files) {
+                              widget.onboardingBloc.blsBytesList.add(file);
+                              if (widget.onboardingBloc.blsBytesList.length ==
+                                  2) {
+                                break;
+                              }
                             }
+                            widget.onboardingBloc.add(
+                              OnboardingEvent.blsDocumentUpload(
+                                  widget.onboardingBloc.blsBytesList,
+                                  blsListUpdated),
+                            );
+                          } else {
+                            CSnackBar.showError(context,
+                                msg: AppString.fileSizeError.val);
                           }
-                          widget.onboardingBloc.add(
-                            OnboardingEvent.blsDocumentUpload(
-                                widget.onboardingBloc.blsBytesList,
-                                blsListUpdated),
-                          );
                         } else {}
                       },
                       onChanged: (val) {
@@ -262,7 +289,7 @@ class _QualificationViewState extends State<QualificationView> {
                       dateController: tbPpdDateController,
                       datePickerValidation: AppString.emptyDate.val,
                       onUpoladTap: () async {
-                        FilePickerResult? result =
+                        FilePickerResult? tbResult =
                             await FilePicker.platform.pickFiles(
                           type: FileType.custom,
                           allowedExtensions: [
@@ -273,20 +300,30 @@ class _QualificationViewState extends State<QualificationView> {
                             'doc'
                           ],
                         );
-                        if (result != null) {
+                        if (tbResult != null) {
                           tbListUpdated = !onboardingState.listUpdated;
-                          for (PlatformFile file in result.files) {
-                            widget.onboardingBloc.tbBytesList.add(file);
-                            if (widget.onboardingBloc.tbBytesList.length == 2) {
-                              break;
-                            }
-                          }
+                          tbFile = tbResult.files.single;
 
-                          widget.onboardingBloc.add(
-                            OnboardingEvent.tbDocumentUpload(
-                                widget.onboardingBloc.tbBytesList,
-                                tbListUpdated),
-                          );
+                          int? sizeInBytes = tbFile?.size;
+                          double sizeInMb = sizeInBytes! / (1024 * 1024);
+                          if (sizeInMb < 20) {
+                            for (PlatformFile file in tbResult.files) {
+                              widget.onboardingBloc.tbBytesList.add(file);
+                              if (widget.onboardingBloc.tbBytesList.length ==
+                                  2) {
+                                break;
+                              }
+                            }
+
+                            widget.onboardingBloc.add(
+                              OnboardingEvent.tbDocumentUpload(
+                                  widget.onboardingBloc.tbBytesList,
+                                  tbListUpdated),
+                            );
+                          } else {
+                            CSnackBar.showError(context,
+                                msg: AppString.fileSizeError.val);
+                          }
                         } else {
                           // User canceled the picker
                         }
@@ -316,7 +353,7 @@ class _QualificationViewState extends State<QualificationView> {
                       dateController: covidDateController,
                       datePickerValidation: AppString.emptyDate.val,
                       onUpoladTap: () async {
-                        FilePickerResult? result =
+                        FilePickerResult? covidResult =
                             await FilePicker.platform.pickFiles(
                           type: FileType.custom,
                           allowedExtensions: [
@@ -327,21 +364,30 @@ class _QualificationViewState extends State<QualificationView> {
                             'doc'
                           ],
                         );
-                        if (result != null) {
+                        if (covidResult != null) {
                           covidListUpdated = !onboardingState.listUpdated;
-                          for (PlatformFile file in result.files) {
-                            widget.onboardingBloc.covidBytesList.add(file);
-                            if (widget.onboardingBloc.covidBytesList.length ==
-                                2) {
-                              break;
-                            }
-                          }
+                          covidFile = covidResult.files.single;
 
-                          widget.onboardingBloc.add(
-                            OnboardingEvent.covidDocumentUpload(
-                                widget.onboardingBloc.covidBytesList,
-                                covidListUpdated),
-                          );
+                          int? sizeInBytes = tbFile?.size;
+                          double sizeInMb = sizeInBytes! / (1024 * 1024);
+                          if (sizeInMb < 20) {
+                            for (PlatformFile file in covidResult.files) {
+                              widget.onboardingBloc.covidBytesList.add(file);
+                              if (widget.onboardingBloc.covidBytesList.length ==
+                                  2) {
+                                break;
+                              }
+                            }
+
+                            widget.onboardingBloc.add(
+                              OnboardingEvent.covidDocumentUpload(
+                                  widget.onboardingBloc.covidBytesList,
+                                  covidListUpdated),
+                            );
+                          } else {
+                            CSnackBar.showError(context,
+                                msg: AppString.fileSizeError.val);
+                          }
                         } else {
                           // User canceled the picker
                         }
@@ -364,6 +410,21 @@ class _QualificationViewState extends State<QualificationView> {
                                 widget.pageController.page!.toInt() - 1);
                           },
                           onRightButtonPressed: () async {
+                            if ((onboardingState.isCovidSelected == 0 &&
+                                    widget.onboardingBloc.state
+                                        .covidDocumentList.isEmpty) ||
+                                (onboardingState.isTBSelected == 0 &&
+                                    widget.onboardingBloc.state.tbDocumentList
+                                        .isEmpty) ||
+                                (onboardingState.isBLSSelected == 0 &&
+                                    widget.onboardingBloc.state.blsDocumentList
+                                        .isEmpty) ||
+                                (onboardingState.isHHASelected == 0 &&
+                                    widget.onboardingBloc.state.hhaDocumentList
+                                        .isEmpty)) {
+                              CSnackBar.showError(context,
+                                  msg: AppString.emptyDocument.val);
+                            }
                             widget.onboardingBloc.nextButtonClicked = true;
                             if (widget.onboardingBloc.hhaBytesList.isNotEmpty) {
                               for (int i = 0;
@@ -417,7 +478,7 @@ class _QualificationViewState extends State<QualificationView> {
                               }
                               widget.onboardingBloc.covidBytesList.clear();
                             }
-                            checkInputData();
+                            checkInputData(onboardingState);
                           },
                         );
                       },
@@ -432,13 +493,29 @@ class _QualificationViewState extends State<QualificationView> {
     );
   }
 
-  checkInputData() {
+  checkInputData(OnboardingState onboardingState) {
     if (_validateMode != AutovalidateMode.always) {
       _validationBloc.add(const FormValidationEvent.submit());
     }
     final userId = SharedPreffUtil().getCareGiverUserId;
+    debugPrint(
+        'upload ${widget.onboardingBloc.covidBytesList.isEmpty} ${widget.onboardingBloc.uploadedCovidDocList} ${widget.onboardingBloc.state.covidDocumentList}');
+    debugPrint('${onboardingState.isCovidSelected}');
 
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate() &&
+            (onboardingState.isCovidSelected == 0 &&
+                widget.onboardingBloc.uploadedCovidDocList.isNotEmpty) ||
+        (onboardingState.isTBSelected == 0 &&
+            widget.onboardingBloc.uploadedTbDocList.isNotEmpty) ||
+        (onboardingState.isBLSSelected == 0 &&
+            widget.onboardingBloc.uploadedBlsDocList.isNotEmpty) ||
+        (onboardingState.isHHASelected == 0 &&
+            widget.onboardingBloc.uploadedHhaDocList.isNotEmpty) ||
+        true) {
+      debugPrint(
+          'status ${onboardingState.isCovidSelected}+ ${onboardingState.isHHASelected}+ ${onboardingState.isTBSelected} + ${onboardingState.isBLSSelected}');
+      debugPrint('data check ${widget.onboardingBloc.covidBytesList}');
+      debugPrint('data check ${widget.onboardingBloc.state.hhaDocumentList}');
       widget.onboardingBloc.add(
         OnboardingEvent.qualificationDetails(
             userId: sharedPreffUtil.getIsFromWebsite == true

@@ -120,12 +120,16 @@ class ItemRowWidget extends StatelessWidget {
             ? const CustomSizedBox()
             : CustomSizedBox(width: DBL.ten.val),
         CommonDatePickerWidget(
-          initialDate: DateTime.now(),
+          initialDate: question == AppString.TBPPDTest.val
+              ? DateTime(2000)
+              : question == AppString.covid19Vaccination.val
+                  ? DateTime(2020)
+                  : DateTime.now().add(const Duration(days: 30)),
           firstDate: question == AppString.TBPPDTest.val
               ? DateTime(2000)
               : question == AppString.covid19Vaccination.val
                   ? DateTime(2020)
-                  : DateTime.now(),
+                  : DateTime.now().add(const Duration(days: 30)),
           lastDate: question == AppString.TBPPDTest.val ||
                   question == AppString.covid19Vaccination.val
               ? DateTime.now()

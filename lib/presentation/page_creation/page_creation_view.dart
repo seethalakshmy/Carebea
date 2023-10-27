@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quill_html_editor/quill_html_editor.dart';
 
 import '../../application/bloc/page/page_bloc.dart';
+import '../../core/custom_snackbar.dart';
 import '../../core/enum.dart';
 import '../../core/text_styles.dart';
 import '../../infrastructure/page/page_repository.dart';
@@ -13,6 +14,7 @@ import '../on_boarding/modules/qualification_details/widgets/yes_no_radio_button
 import '../side_menu/side_menu_page.dart';
 import '../widget/custom_button.dart';
 import '../widget/custom_container.dart';
+import '../widget/custom_form.dart';
 import '../widget/custom_sizedbox.dart';
 import '../widget/custom_text.dart';
 import '../widget/header_view.dart';
@@ -45,6 +47,8 @@ class _PageCreationPageState extends State<PageCreationPage> {
   num? forWhom;
   String? adminUserID;
   final FocusNode titleFocusNode = FocusNode();
+  final _pageFormKey = GlobalKey<FormState>();
+  final AutovalidateMode _validateMode = AutovalidateMode.disabled;
 
   String? htmlText;
   final customToolBarList = [
@@ -102,59 +106,67 @@ class _PageCreationPageState extends State<PageCreationPage> {
             HeaderView(title: AppString.termsAndConditions.val),
             CustomSizedBox(height: DBL.twenty.val),
             _forWhoWidget(),
-            CustomSizedBox(
-              width: DBL.twoEighty.val,
-              child: DetailsTextFieldWithLabel(
-                isMandatory: true,
-                maxLines: 20,
-                labelName: AppString.title.val,
-                focusNode: titleFocusNode,
-                controller: pageBloc.titleController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return AppString.questionError.val;
-                  }
-                  return null;
-                },
-                textInputAction: TextInputAction.next,
-                textInputType: TextInputType.text,
-                suffixIcon: const CustomContainer(width: 0),
+            CForm(
+              formKey: _pageFormKey,
+              autoValidateMode: _validateMode,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomSizedBox(
+                    width: DBL.twoEighty.val,
+                    child: DetailsTextFieldWithLabel(
+                      isMandatory: true,
+                      maxLines: 20,
+                      labelName: AppString.title.val,
+                      focusNode: titleFocusNode,
+                      controller: pageBloc.titleController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return AppString.titleError.val;
+                        }
+                        return null;
+                      },
+                      textInputAction: TextInputAction.next,
+                      textInputType: TextInputType.text,
+                      suffixIcon: const CustomContainer(width: 0),
+                    ),
+                  ),
+                  ToolBar(
+                    controller: controller,
+                    toolBarConfig: customToolBarList,
+                    toolBarColor: AppColor.lightGrey.val,
+                    activeIconColor: Colors.green,
+                    padding: const EdgeInsets.all(8),
+                    iconSize: 20,
+                  ),
+                  // ToolBar(
+                  //   toolBarColor: AppColor.lightGrey.val,
+                  //   activeIconColor: Colors.green,
+                  //   padding: const EdgeInsets.all(8),
+                  //   iconSize: 20,
+                  //   controller: controller,
+                  // ),
+                  BlocBuilder<PageBloc, PageState>(
+                    builder: (context, state) {
+                      return QuillHtmlEditor(
+                        text: description ?? '',
+                        controller: controller,
+                        isEnabled: true,
+                        minHeight: 300,
+                        hintTextAlign: TextAlign.start,
+                        padding: const EdgeInsets.only(left: 10, top: 5),
+                        hintTextPadding: EdgeInsets.zero,
+                        loadingBuilder: (context) {
+                          return const Center(
+                              child: CircularProgressIndicator(
+                            strokeWidth: 0.4,
+                          ));
+                        },
+                      );
+                    },
+                  ),
+                ],
               ),
-            ),
-
-            ToolBar(
-              controller: controller,
-              toolBarConfig: customToolBarList,
-              toolBarColor: AppColor.lightGrey.val,
-              activeIconColor: Colors.green,
-              padding: const EdgeInsets.all(8),
-              iconSize: 20,
-            ),
-            // ToolBar(
-            //   toolBarColor: AppColor.lightGrey.val,
-            //   activeIconColor: Colors.green,
-            //   padding: const EdgeInsets.all(8),
-            //   iconSize: 20,
-            //   controller: controller,
-            // ),
-            BlocBuilder<PageBloc, PageState>(
-              builder: (context, state) {
-                return QuillHtmlEditor(
-                  text: description ?? '',
-                  controller: controller,
-                  isEnabled: true,
-                  minHeight: 300,
-                  hintTextAlign: TextAlign.start,
-                  padding: const EdgeInsets.only(left: 10, top: 5),
-                  hintTextPadding: EdgeInsets.zero,
-                  loadingBuilder: (context) {
-                    return const Center(
-                        child: CircularProgressIndicator(
-                      strokeWidth: 0.4,
-                    ));
-                  },
-                );
-              },
             ),
             SizedBox(
               height: 100,
@@ -165,37 +177,44 @@ class _PageCreationPageState extends State<PageCreationPage> {
                   children: [
                     Spacer(),
                     CustomButton(
-                      isLoading: state.isLoading,
-                      text: id == ''
-                          ? AppString.submit.val
-                          : AppString.update.val,
-                      onPressed: () async {
-                        await getText(controller);
-                        debugPrint("content $htmlText");
-                        debugPrint("for $forWhom");
-                        id == ''
-                            ? pageBloc.add(PageEvent.createPage(
-                                title: pageBloc.titleController.text.trim(),
-                                description: htmlText ?? '',
-                                pageFor: state.isForClient == 0
-                                    ? '1'
-                                    : state.isForClient == 1
-                                        ? '2'
-                                        : '3',
-                                context: context))
-                            : pageBloc.add(PageEvent.updatePage(
-                                userId: adminUserID ?? '',
-                                id: id ?? '',
-                                title: pageBloc.titleController.text.trim(),
-                                description: htmlText ?? '',
-                                pageFor: state.isForClient == 0
-                                    ? '1'
-                                    : state.isForClient == 1
-                                        ? '2'
-                                        : '3',
-                                context: context));
-                      },
-                    ),
+                        isLoading: state.isLoading,
+                        text: id == ''
+                            ? AppString.submit.val
+                            : AppString.update.val,
+                        onPressed: () async {
+                          await getText(controller);
+                          if (htmlText!.isEmpty || htmlText == '') {
+                            CSnackBar.showError(context!,
+                                msg: AppString.descriptionError.val);
+                          }
+                          debugPrint("content $htmlText");
+                          debugPrint("for $forWhom");
+                          if (_pageFormKey.currentState!.validate() &&
+                              htmlText!.isNotEmpty &&
+                              htmlText != '') {
+                            (id == ''
+                                ? pageBloc.add(PageEvent.createPage(
+                                    title: pageBloc.titleController.text.trim(),
+                                    description: htmlText ?? '',
+                                    pageFor: state.isForClient == 0
+                                        ? '1'
+                                        : state.isForClient == 1
+                                            ? '2'
+                                            : '3',
+                                  ))
+                                : pageBloc.add(PageEvent.updatePage(
+                                    userId: adminUserID ?? '',
+                                    id: id ?? '',
+                                    title: pageBloc.titleController.text.trim(),
+                                    description: htmlText ?? '',
+                                    pageFor: state.isForClient == 0
+                                        ? '1'
+                                        : state.isForClient == 1
+                                            ? '2'
+                                            : '3',
+                                  )));
+                          }
+                        }),
                   ],
                 );
               },
