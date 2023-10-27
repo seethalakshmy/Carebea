@@ -39,7 +39,7 @@ class OnboardingState with _$OnboardingState {
     required Option<Either<ApiErrorHandler, GenderListResponse>> genderOption,
     required Option<Either<ApiErrorHandler, DocumentListResponse>>
         documentOption,
-    required Option<Either<ApiErrorHandler, StateListReponse>> stateOption,
+    required Option<Either<ApiErrorHandler, StateListResponse>> stateOption,
     required Option<Either<ApiErrorHandler, CityListResponse>> cityOption,
     required Option<Either<ApiErrorHandler, PetListResponse>> petListOption,
     required Option<Either<ApiErrorHandler, YearsOfExperienceResponse>>

@@ -29,6 +29,7 @@ class DropdownWidget<T> extends StatefulWidget {
 
   /// if true the dropdown icon will as a leading icon, default to false
   final bool leadingIcon;
+  final bool showDropDown;
 
   final double? width;
   final String? hint;
@@ -57,6 +58,7 @@ class DropdownWidget<T> extends StatefulWidget {
     this.searchController,
     required this.showSearchBox,
     this.scrollController,
+    this.showDropDown = true,
   }) : super(key: key);
 
   @override
@@ -124,7 +126,7 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
                     height: DBL.fortyEight.val,
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       textDirection: widget.leadingIcon
                           ? TextDirection.rtl
@@ -145,14 +147,15 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
                           )
                         ],
                         if (!widget.hideIcon) const Spacer(),
-                        RotationTransition(
-                          turns: _rotateAnimation!,
-                          child: widget.icon ??
-                              Icon(
-                                Icons.keyboard_arrow_down,
-                                color: AppColor.darkBlue.val,
-                              ),
-                        ),
+                        if (!widget.hideIcon)
+                          RotationTransition(
+                            turns: _rotateAnimation!,
+                            child: widget.icon ??
+                                Icon(
+                                  Icons.keyboard_arrow_down,
+                                  color: AppColor.darkBlue.val,
+                                ),
+                          ),
                       ],
                     ),
                   ),
@@ -272,21 +275,23 @@ class _DropdownWidgetState<T> extends State<DropdownWidget<T>>
   }
 
   void _toggleDropdown({bool close = false}) async {
-    if (_isOpen || close) {
-      await _animationController!.reverse();
-      this._overlayEntry!.remove();
-      setState(() {
-        _isOpen = false;
-        // borderColor = AppColor.textGray4;
-      });
-    } else {
-      this._overlayEntry = this._createOverlayEntry();
-      Overlay.of(context).insert(this._overlayEntry!);
-      setState(() {
-        _isOpen = true;
-        // borderColor = AppColor.primaryColor;
-      });
-      _animationController!.forward();
+    if (widget.showDropDown) {
+      if (_isOpen || close) {
+        await _animationController!.reverse();
+        this._overlayEntry!.remove();
+        setState(() {
+          _isOpen = false;
+          // borderColor = AppColor.textGray4;
+        });
+      } else {
+        this._overlayEntry = this._createOverlayEntry();
+        Overlay.of(context).insert(this._overlayEntry!);
+        setState(() {
+          _isOpen = true;
+          // borderColor = AppColor.primaryColor;
+        });
+        _animationController!.forward();
+      }
     }
   }
 }

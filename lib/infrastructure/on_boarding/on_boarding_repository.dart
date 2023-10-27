@@ -66,7 +66,7 @@ class OnBoardingRepository implements IOnBoardingRepo {
   }
 
   @override
-  Future<Either<ApiErrorHandler, StateListReponse>> getStateList({
+  Future<Either<ApiErrorHandler, StateListResponse>> getStateList({
     required String page,
     required String searchKey,
   }) async {

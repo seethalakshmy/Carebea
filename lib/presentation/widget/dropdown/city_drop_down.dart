@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:flutter/material.dart';
 
@@ -30,18 +32,18 @@ class CityDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    scrollController.addListener(() {
-      if (scrollController.position.atEdge) {
-        if (scrollController.position.pixels == 0) {
-          print("scrolled to the top");
-          // Scrolled to the top
-        } else {
-          onboardingBloc.cityPage++;
-          onboardingBloc.add(const OnboardingEvent.cityList(
-              searchQuery: '', wantLoading: false));
-        }
-      }
-    });
+    // scrollController.addListener(() {
+    //   if (scrollController.position.atEdge) {
+    //     if (scrollController.position.pixels == 0) {
+    //       print("scrolled to the top");
+    //       // Scrolled to the top
+    //     } else {
+    //       onboardingBloc.cityPage++;
+    //       onboardingBloc.add(const OnboardingEvent.cityList(
+    //           searchQuery: '', wantLoading: false));
+    //     }
+    //   }
+    // });
     return CustomSizedBox(
       width: DBL.twoEighty.val,
       child: onboardingBloc.stateId.isEmpty
@@ -85,6 +87,7 @@ class CityDropDown extends StatelessWidget {
               onChange: (value, index) {
                 onChange(items[index].id);
                 onboardingBloc.selectedCityName = items[index].cityName ?? "";
+                log("cityName  ${onboardingBloc.selectedCityName}");
               },
               child: CustomText(selectedValue ?? "")),
     );

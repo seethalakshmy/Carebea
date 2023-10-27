@@ -351,7 +351,7 @@ abstract class ApiClient {
   );
 
   @GET("/common-data/get-states?")
-  Future<StateListReponse> getStateList(
+  Future<StateListResponse> getStateList(
     @Query("page") String pageNo,
     @Query("limit") String limit,
     @Query("search_term") String searchQuery,
