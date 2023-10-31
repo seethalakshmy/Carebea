@@ -424,7 +424,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
                 longitude: event.longitude,
                 zip: event.zip,
                 address: event.address,
-                locationTag: "",
+                locationTag: event.locationTag,
                 socialSecurityNo: event.socialSecurityNo,
                 documentId: event.documentId,
                 documentNo: event.documentNo,

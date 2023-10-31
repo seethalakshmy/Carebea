@@ -127,16 +127,13 @@ abstract class $AppRouter extends _i37.RootStackRouter {
     CareGiverDetailRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<CareGiverDetailRouteArgs>(
-          orElse: () => CareGiverDetailRouteArgs(
-                id: queryParams.optString('id'),
-                onBoardingStatus: queryParams.optBool('onBoardingStatus'),
-              ));
+          orElse: () =>
+              CareGiverDetailRouteArgs(id: queryParams.optString('id')));
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i5.CareGiverDetailPage(
           key: args.key,
           id: args.id,
-          onBoardingStatus: args.onBoardingStatus,
         ),
       );
     },
@@ -156,13 +153,17 @@ abstract class $AppRouter extends _i37.RootStackRouter {
     CaregiverVerificationRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<CaregiverVerificationRouteArgs>(
-          orElse: () =>
-              CaregiverVerificationRouteArgs(id: queryParams.optString('id')));
+          orElse: () => CaregiverVerificationRouteArgs(
+                id: queryParams.optString('id'),
+                isOnboardingCompleted:
+                    queryParams.optBool('isOnboardingCompleted'),
+              ));
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i7.CaregiverVerificationPage(
           key: args.key,
           id: args.id,
+          isOnboardingCompleted: args.isOnboardingCompleted,
         ),
       );
     },
@@ -545,19 +546,14 @@ class CareGiverDetailRoute
   CareGiverDetailRoute({
     _i38.Key? key,
     String? id,
-    bool? onBoardingStatus,
     List<_i37.PageRouteInfo>? children,
   }) : super(
           CareGiverDetailRoute.name,
           args: CareGiverDetailRouteArgs(
             key: key,
             id: id,
-            onBoardingStatus: onBoardingStatus,
           ),
-          rawQueryParams: {
-            'id': id,
-            'onBoardingStatus': onBoardingStatus,
-          },
+          rawQueryParams: {'id': id},
           initialChildren: children,
         );
 
@@ -571,18 +567,15 @@ class CareGiverDetailRouteArgs {
   const CareGiverDetailRouteArgs({
     this.key,
     this.id,
-    this.onBoardingStatus,
   });
 
   final _i38.Key? key;
 
   final String? id;
 
-  final bool? onBoardingStatus;
-
   @override
   String toString() {
-    return 'CareGiverDetailRouteArgs{key: $key, id: $id, onBoardingStatus: $onBoardingStatus}';
+    return 'CareGiverDetailRouteArgs{key: $key, id: $id}';
   }
 }
 
@@ -633,14 +626,19 @@ class CaregiverVerificationRoute
   CaregiverVerificationRoute({
     _i38.Key? key,
     String? id,
+    bool? isOnboardingCompleted,
     List<_i37.PageRouteInfo>? children,
   }) : super(
           CaregiverVerificationRoute.name,
           args: CaregiverVerificationRouteArgs(
             key: key,
             id: id,
+            isOnboardingCompleted: isOnboardingCompleted,
           ),
-          rawQueryParams: {'id': id},
+          rawQueryParams: {
+            'id': id,
+            'isOnboardingCompleted': isOnboardingCompleted,
+          },
           initialChildren: children,
         );
 
@@ -654,15 +652,18 @@ class CaregiverVerificationRouteArgs {
   const CaregiverVerificationRouteArgs({
     this.key,
     this.id,
+    this.isOnboardingCompleted,
   });
 
   final _i38.Key? key;
 
   final String? id;
 
+  final bool? isOnboardingCompleted;
+
   @override
   String toString() {
-    return 'CaregiverVerificationRouteArgs{key: $key, id: $id}';
+    return 'CaregiverVerificationRouteArgs{key: $key, id: $id, isOnboardingCompleted: $isOnboardingCompleted}';
   }
 }
 

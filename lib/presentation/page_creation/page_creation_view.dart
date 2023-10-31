@@ -1,3 +1,4 @@
+import 'package:admin_580_tech/presentation/page_creation/widget/radio_button_widget.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -201,6 +202,7 @@ class _PageCreationPageState extends State<PageCreationPage> {
                                         : state.isForClient == 1
                                             ? '2'
                                             : '3',
+                                    context: context,
                                   ))
                                 : pageBloc.add(PageEvent.updatePage(
                                     userId: adminUserID ?? '',
@@ -212,6 +214,7 @@ class _PageCreationPageState extends State<PageCreationPage> {
                                         : state.isForClient == 1
                                             ? '2'
                                             : '3',
+                                    context: context,
                                   )));
                           }
                         }),
@@ -236,23 +239,35 @@ class _PageCreationPageState extends State<PageCreationPage> {
         const CustomSizedBox(width: 20),
         BlocBuilder<PageBloc, PageState>(
           builder: (context, state) {
-            return YesNoRadioButtonWidget(
-              yesLabel: AppString.forClient.val,
-              noLabel: AppString.forCa.val,
+            return RadioButtonWidget(
+              groupValue: state.isForClient,
+              firstLabel: AppString.forClient.val,
+              secondLabel: AppString.forCa.val,
+              thirdLabel: AppString.forWebsite.val,
               onChanged: (val) {
-                debugPrint("selected value $val");
+                debugPrint("selected radio $val");
+                debugPrint("selected value ${state.isForClient + 2}");
                 BlocProvider.of<PageBloc>(context)
                     .add(PageEvent.radioForClient(isSelected: val));
               },
-              groupValue: forWhom == 0
-                  ? (forWhom == 1
-                      ? 0
-                      : forWhom == 2
-                          ? 1
-                          : 2)
-                  : state.isForClient,
-              thirdLabel: AppString.forWebsite.val,
             );
+            // return YesNoRadioButtonWidget(
+            //   yesLabel: AppString.forClient.val,
+            //   noLabel: AppString.forCa.val,
+            //   onChanged: (val) {
+            //     debugPrint("selected value $val");
+            //     BlocProvider.of<PageBloc>(context)
+            //         .add(PageEvent.radioForClient(isSelected: val));
+            //   },
+            //   groupValue: forWhom == 0
+            //       ? (forWhom == 1
+            //           ? 0
+            //           : forWhom == 2
+            //               ? 1
+            //               : 2)
+            //       : state.isForClient,
+            //   thirdLabel: AppString.forWebsite.val,
+            // );
           },
         )
       ],

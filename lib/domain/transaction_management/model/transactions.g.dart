@@ -13,7 +13,7 @@ _$_Transactions _$$_TransactionsFromJson(Map<String, dynamic> json) =>
       transactionId: json['transaction_id'] as String?,
       transactionIdPublic: json['transactionId'] as String?,
       transactionType: json['transaction_type'] as String?,
-      dateTime: json['dateTime'] as String?,
+      dateTime: json['date_time'] as String?,
       paidTo: json['paid_to'] as String?,
       receivedFrom: json['recieved_from'] as String?,
       paidFor: json['paid_for'] as String?,
@@ -43,7 +43,7 @@ Map<String, dynamic> _$$_TransactionsToJson(_$_Transactions instance) {
   writeNotNull('transaction_id', instance.transactionId);
   writeNotNull('transactionId', instance.transactionIdPublic);
   writeNotNull('transaction_type', instance.transactionType);
-  writeNotNull('dateTime', instance.dateTime);
+  writeNotNull('date_time', instance.dateTime);
   writeNotNull('paid_to', instance.paidTo);
   writeNotNull('recieved_from', instance.receivedFrom);
   writeNotNull('paid_for', instance.paidFor);

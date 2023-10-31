@@ -511,7 +511,9 @@ class ServiceDetailsAlert extends StatelessWidget {
               isShowing: serviceBloc.state.isShowingExtraServices,
               title: AppString.extraService.val,
               servicesList: extraServices),
-        _replacementDetailsWidget(context, service),
+        title == "Canceled"
+            ? _replacementDetailsWidget(context, service)
+            : SizedBox.shrink(),
         CustomSizedBox(height: DBL.ten.val),
         _serviceTimelineWidget(
             isShowing: serviceBloc.state.isShowingTimeline, service: service)

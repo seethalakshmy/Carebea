@@ -24,7 +24,7 @@ class Transactions with _$Transactions {
     @JsonKey(name: "transaction_id") String? transactionId,
     @JsonKey(name: "transactionId") String? transactionIdPublic,
     @JsonKey(name: "transaction_type") String? transactionType,
-    String? dateTime,
+    @JsonKey(name: 'date_time') String? dateTime,
     @JsonKey(name: "paid_to") String? paidTo,
     @JsonKey(name: "recieved_from") String? receivedFrom,
     @JsonKey(name: "paid_for") String? paidFor,

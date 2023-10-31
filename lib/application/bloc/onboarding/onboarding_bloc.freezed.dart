@@ -34,7 +34,8 @@ mixin _$OnboardingEvent {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -125,7 +126,8 @@ mixin _$OnboardingEvent {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -215,7 +217,8 @@ mixin _$OnboardingEvent {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -468,7 +471,8 @@ abstract class _$$_GetPersonalDetailsCopyWith<$Res> {
       String documentNo,
       String expiryDate,
       List<String> documentList,
-      String profilePic});
+      String profilePic,
+      String locationTag});
 }
 
 /// @nodoc
@@ -498,6 +502,7 @@ class __$$_GetPersonalDetailsCopyWithImpl<$Res>
     Object? expiryDate = null,
     Object? documentList = null,
     Object? profilePic = null,
+    Object? locationTag = null,
   }) {
     return _then(_$_GetPersonalDetails(
       userId: null == userId
@@ -564,6 +569,10 @@ class __$$_GetPersonalDetailsCopyWithImpl<$Res>
           ? _value.profilePic
           : profilePic // ignore: cast_nullable_to_non_nullable
               as String,
+      locationTag: null == locationTag
+          ? _value.locationTag
+          : locationTag // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -587,7 +596,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
       required this.documentNo,
       required this.expiryDate,
       required final List<String> documentList,
-      required this.profilePic})
+      required this.profilePic,
+      required this.locationTag})
       : _documentList = documentList;
 
   @override
@@ -628,10 +638,12 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
 
   @override
   final String profilePic;
+  @override
+  final String locationTag;
 
   @override
   String toString() {
-    return 'OnboardingEvent.personalDetails(userId: $userId, dob: $dob, genderId: $genderId, street: $street, cityId: $cityId, stateId: $stateId, latitude: $latitude, longitude: $longitude, zip: $zip, address: $address, socialSecurityNo: $socialSecurityNo, documentId: $documentId, documentNo: $documentNo, expiryDate: $expiryDate, documentList: $documentList, profilePic: $profilePic)';
+    return 'OnboardingEvent.personalDetails(userId: $userId, dob: $dob, genderId: $genderId, street: $street, cityId: $cityId, stateId: $stateId, latitude: $latitude, longitude: $longitude, zip: $zip, address: $address, socialSecurityNo: $socialSecurityNo, documentId: $documentId, documentNo: $documentNo, expiryDate: $expiryDate, documentList: $documentList, profilePic: $profilePic, locationTag: $locationTag)';
   }
 
   @override
@@ -663,7 +675,9 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
             const DeepCollectionEquality()
                 .equals(other._documentList, _documentList) &&
             (identical(other.profilePic, profilePic) ||
-                other.profilePic == profilePic));
+                other.profilePic == profilePic) &&
+            (identical(other.locationTag, locationTag) ||
+                other.locationTag == locationTag));
   }
 
   @override
@@ -684,7 +698,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
       documentNo,
       expiryDate,
       const DeepCollectionEquality().hash(_documentList),
-      profilePic);
+      profilePic,
+      locationTag);
 
   @JsonKey(ignore: true)
   @override
@@ -712,7 +727,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -800,7 +816,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
         documentNo,
         expiryDate,
         documentList,
-        profilePic);
+        profilePic,
+        locationTag);
   }
 
   @override
@@ -822,7 +839,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -909,7 +927,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
         documentNo,
         expiryDate,
         documentList,
-        profilePic);
+        profilePic,
+        locationTag);
   }
 
   @override
@@ -931,7 +950,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -1020,7 +1040,8 @@ class _$_GetPersonalDetails implements _GetPersonalDetails {
           documentNo,
           expiryDate,
           documentList,
-          profilePic);
+          profilePic,
+          locationTag);
     }
     return orElse();
   }
@@ -1193,7 +1214,8 @@ abstract class _GetPersonalDetails implements OnboardingEvent {
       required final String documentNo,
       required final String expiryDate,
       required final List<String> documentList,
-      required final String profilePic}) = _$_GetPersonalDetails;
+      required final String profilePic,
+      required final String locationTag}) = _$_GetPersonalDetails;
 
   String get userId;
   String get dob;
@@ -1211,6 +1233,7 @@ abstract class _GetPersonalDetails implements OnboardingEvent {
   String get expiryDate;
   List<String> get documentList;
   String get profilePic;
+  String get locationTag;
   @JsonKey(ignore: true)
   _$$_GetPersonalDetailsCopyWith<_$_GetPersonalDetails> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1398,7 +1421,8 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -1501,7 +1525,8 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -1603,7 +1628,8 @@ class _$_GetQualificationDetails implements _GetQualificationDetails {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -2039,7 +2065,8 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -2140,7 +2167,8 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -2240,7 +2268,8 @@ class _$_SubmitPreferenceDetails implements _SubmitPreferenceDetails {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -2552,7 +2581,8 @@ class _$_CommonDataLists implements _CommonDataLists {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -2646,7 +2676,8 @@ class _$_CommonDataLists implements _CommonDataLists {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -2739,7 +2770,8 @@ class _$_CommonDataLists implements _CommonDataLists {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -3062,7 +3094,8 @@ class _$_CityLists implements _CityLists {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -3156,7 +3189,8 @@ class _$_CityLists implements _CityLists {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -3249,7 +3283,8 @@ class _$_CityLists implements _CityLists {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -3581,7 +3616,8 @@ class _$_StateLists implements _StateLists {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -3675,7 +3711,8 @@ class _$_StateLists implements _StateLists {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -3768,7 +3805,8 @@ class _$_StateLists implements _StateLists {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -4063,7 +4101,8 @@ class _$_RelationList implements _RelationList {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -4157,7 +4196,8 @@ class _$_RelationList implements _RelationList {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -4250,7 +4290,8 @@ class _$_RelationList implements _RelationList {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -4563,7 +4604,8 @@ class _$_SubmitReference implements _SubmitReference {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -4657,7 +4699,8 @@ class _$_SubmitReference implements _SubmitReference {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -4750,7 +4793,8 @@ class _$_SubmitReference implements _SubmitReference {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -5043,7 +5087,8 @@ class _$_AddReference implements _AddReference {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -5137,7 +5182,8 @@ class _$_AddReference implements _AddReference {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -5230,7 +5276,8 @@ class _$_AddReference implements _AddReference {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -5543,7 +5590,8 @@ class _$DeleteReference implements DeleteReference {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -5637,7 +5685,8 @@ class _$DeleteReference implements DeleteReference {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -5730,7 +5779,8 @@ class _$DeleteReference implements DeleteReference {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -6048,7 +6098,8 @@ class _$UpdateReference implements UpdateReference {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -6142,7 +6193,8 @@ class _$UpdateReference implements UpdateReference {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -6235,7 +6287,8 @@ class _$UpdateReference implements UpdateReference {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -6562,7 +6615,8 @@ class _$EditReference implements EditReference {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -6656,7 +6710,8 @@ class _$EditReference implements EditReference {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -6749,7 +6804,8 @@ class _$EditReference implements EditReference {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -7044,7 +7100,8 @@ class _$_YearsOfExp implements _YearsOfExp {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -7138,7 +7195,8 @@ class _$_YearsOfExp implements _YearsOfExp {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -7231,7 +7289,8 @@ class _$_YearsOfExp implements _YearsOfExp {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -7545,7 +7604,8 @@ class _$_GetPetList implements _GetPetList {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -7639,7 +7699,8 @@ class _$_GetPetList implements _GetPetList {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -7732,7 +7793,8 @@ class _$_GetPetList implements _GetPetList {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -8069,7 +8131,8 @@ class _$_GetLanguageList implements _GetLanguageList {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -8163,7 +8226,8 @@ class _$_GetLanguageList implements _GetLanguageList {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -8256,7 +8320,8 @@ class _$_GetLanguageList implements _GetLanguageList {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -8577,7 +8642,8 @@ class _$_RadioHHASelected implements _RadioHHASelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -8671,7 +8737,8 @@ class _$_RadioHHASelected implements _RadioHHASelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -8764,7 +8831,8 @@ class _$_RadioHHASelected implements _RadioHHASelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -9083,7 +9151,8 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -9177,7 +9246,8 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -9270,7 +9340,8 @@ class _$_RadioBLSSelected implements _RadioBLSSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -9589,7 +9660,8 @@ class _$_RadioTBSelected implements _RadioTBSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -9683,7 +9755,8 @@ class _$_RadioTBSelected implements _RadioTBSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -9776,7 +9849,8 @@ class _$_RadioTBSelected implements _RadioTBSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -10096,7 +10170,8 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -10190,7 +10265,8 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -10283,7 +10359,8 @@ class _$_RadioCovidSelected implements _RadioCovidSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -10605,7 +10682,8 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -10699,7 +10777,8 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -10792,7 +10871,8 @@ class _$_RadioExperienceSelected implements _RadioExperienceSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -11113,7 +11193,8 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -11207,7 +11288,8 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -11300,7 +11382,8 @@ class _$_RadioSmokerSelected implements _RadioSmokerSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -11623,7 +11706,8 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -11717,7 +11801,8 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -11810,7 +11895,8 @@ class _$_RadioTransportationSelected implements _RadioTransportationSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -12130,7 +12216,8 @@ class _$_RadioPetSelected implements _RadioPetSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -12224,7 +12311,8 @@ class _$_RadioPetSelected implements _RadioPetSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -12317,7 +12405,8 @@ class _$_RadioPetSelected implements _RadioPetSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -12637,7 +12726,8 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -12731,7 +12821,8 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -12824,7 +12915,8 @@ class _$_RadioLanguageSelected implements _RadioLanguageSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -13144,7 +13236,8 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -13238,7 +13331,8 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -13331,7 +13425,8 @@ class _$_ProfilePicSelected implements _ProfilePicSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -13674,7 +13769,8 @@ class _$_SecurityDocumentUploadSelected
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -13768,7 +13864,8 @@ class _$_SecurityDocumentUploadSelected
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -13861,7 +13958,8 @@ class _$_SecurityDocumentUploadSelected
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -14204,7 +14302,8 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -14298,7 +14397,8 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -14391,7 +14491,8 @@ class _$_HHADocumentUploadSelected implements _HHADocumentUploadSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -14734,7 +14835,8 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -14828,7 +14930,8 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -14921,7 +15024,8 @@ class _$_BLSDocumentUploadSelected implements _BLSDocumentUploadSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -15263,7 +15367,8 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -15357,7 +15462,8 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -15450,7 +15556,8 @@ class _$_TBDocumentUploadSelected implements _TBDocumentUploadSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -15793,7 +15900,8 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -15887,7 +15995,8 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -15980,7 +16089,8 @@ class _$_CovidDocumentUploadSelected implements _CovidDocumentUploadSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -16275,7 +16385,8 @@ class _$_LanguagePagination implements _LanguagePagination {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -16369,7 +16480,8 @@ class _$_LanguagePagination implements _LanguagePagination {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -16462,7 +16574,8 @@ class _$_LanguagePagination implements _LanguagePagination {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -16749,7 +16862,8 @@ class _$_StatePagination implements _StatePagination {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -16843,7 +16957,8 @@ class _$_StatePagination implements _StatePagination {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -16936,7 +17051,8 @@ class _$_StatePagination implements _StatePagination {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -17223,7 +17339,8 @@ class _$_CityPagination implements _CityPagination {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -17317,7 +17434,8 @@ class _$_CityPagination implements _CityPagination {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -17410,7 +17528,8 @@ class _$_CityPagination implements _CityPagination {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -17697,7 +17816,8 @@ class _$_GetCaregiverService implements _GetCaregiverService {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -17791,7 +17911,8 @@ class _$_GetCaregiverService implements _GetCaregiverService {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -17884,7 +18005,8 @@ class _$_GetCaregiverService implements _GetCaregiverService {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -18214,7 +18336,8 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -18308,7 +18431,8 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -18401,7 +18525,8 @@ class _$_SubmitCaregiverService implements _SubmitCaregiverService {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -18733,7 +18858,8 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -18827,7 +18953,8 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -18920,7 +19047,8 @@ class _$_CaregiverServiceSelected implements _CaregiverServiceSelected {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -19276,7 +19404,8 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -19370,7 +19499,8 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -19464,7 +19594,8 @@ class _$_SubmitBuildProfile implements _SubmitBuildProfile {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -19827,7 +19958,8 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -19922,7 +20054,8 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -20016,7 +20149,8 @@ class _$_SubmitAccountDetails implements _SubmitAccountDetails {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,
@@ -20344,7 +20478,8 @@ class _$_SelectAllServices implements _SelectAllServices {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)
+            String profilePic,
+            String locationTag)
         personalDetails,
     required TResult Function(
             String userId,
@@ -20438,7 +20573,8 @@ class _$_SelectAllServices implements _SelectAllServices {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult? Function(
             String userId,
@@ -20531,7 +20667,8 @@ class _$_SelectAllServices implements _SelectAllServices {
             String documentNo,
             String expiryDate,
             List<String> documentList,
-            String profilePic)?
+            String profilePic,
+            String locationTag)?
         personalDetails,
     TResult Function(
             String userId,

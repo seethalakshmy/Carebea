@@ -197,6 +197,7 @@ enum AppString {
   client("Client"),
   clientProfiles("Client Profiles"),
   clientName("Client Name"),
+  careRecipientName("Care Recipient Name"),
   caName("Care Ambassador Name"),
   nameAndAge("Name & Age"),
   totalServiceCompleted("Total Service Completed"),

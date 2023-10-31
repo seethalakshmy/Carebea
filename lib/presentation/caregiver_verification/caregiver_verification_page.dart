@@ -39,13 +39,16 @@ class CaregiverVerificationPage extends StatefulWidget {
   const CaregiverVerificationPage({
     Key? key,
     @QueryParam('id') this.id,
+    @QueryParam('isOnboardingCompleted') this.isOnboardingCompleted,
   }) : super(key: key);
 
   final String? id;
+  final bool? isOnboardingCompleted;
 
   @override
-  State<CaregiverVerificationPage> createState() =>
-      _CaregiverVerificationPageState();
+  State<CaregiverVerificationPage> createState() {
+    return _CaregiverVerificationPageState();
+  }
 }
 
 class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
@@ -65,6 +68,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
 
   final AutovalidateMode _validateMode = AutovalidateMode.disabled;
   String userId = "";
+  bool onBoardingStatus = false;
+
   String adminId = "";
   int? _page;
   int? _tab;
@@ -72,7 +77,21 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
 
   @override
   void initState() {
+    debugPrint('inside init');
+    debugPrint('${widget.isOnboardingCompleted}');
+    debugPrint('${widget.id}');
     userId = autoTabRouter?.currentChild?.queryParams.getString('id', '') ?? "";
+    // onBoardingStatus = autoTabRouter?.currentChild?.queryParams
+    //     .getBool('isOnboardingCompleted', false);
+
+    debugPrint(
+        'onboarding status ${autoTabRouter?.currentChild?.queryParams.rawMap["isOnboardingCompleted"]}');
+    try {
+      onBoardingStatus = autoTabRouter
+              ?.currentChild?.queryParams.rawMap["isOnboardingCompleted"] ??
+          false;
+    } catch (e) {}
+
     adminId = SharedPreffUtil().getAdminId;
     _page = autoTabRouter?.currentChild?.queryParams.getInt('page', 0);
     _tab = autoTabRouter?.currentChild?.queryParams.getInt('tab', 0);
@@ -81,6 +100,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         CareGiverVerificationEvent.getVerificationData(
             userId: userId, context: context, adminId: adminId));
     print("verification screen\nUser ID : $userId\nAdmin ID : $adminId");
+    debugPrint("sss $onBoardingStatus");
   }
 
   @override
@@ -100,6 +120,7 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('checking status value ${widget.isOnboardingCompleted}');
     CustomLog.log("width == ${MediaQuery.of(context).size.width}");
     return WillPopScope(
       onWillPop: () async {
@@ -854,30 +875,32 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         CustomSizedBox(
           height: DBL.three.val,
         ),
-        Row(
-          children: [
-            CustomSizedBox(
-              width: DBL.twoThirty.val,
-              child: HeaderView(
-                title: AppString.backgroundCheckStatus.val,
-                color: AppColor.matBlack3.val,
-                fontSize: FS.font18.val,
-                topPadding: DBL.zero.val,
-                sidePadding: DBL.zero.val,
-              ),
-            ),
-            CustomSizedBox(
-              width: DBL.ten.val,
-            ),
-            status != 0
-                ? _backgroundVerifyApprovalStatusBox(state, status)
-                : CustomSizedBox.shrink()
-          ],
-        ),
+        onBoardingStatus == true
+            ? Row(
+                children: [
+                  CustomSizedBox(
+                    width: DBL.twoThirty.val,
+                    child: HeaderView(
+                      title: AppString.backgroundCheckStatus.val,
+                      color: AppColor.matBlack3.val,
+                      fontSize: FS.font18.val,
+                      topPadding: DBL.zero.val,
+                      sidePadding: DBL.zero.val,
+                    ),
+                  ),
+                  CustomSizedBox(
+                    width: DBL.ten.val,
+                  ),
+                  status != 0
+                      ? _backgroundVerifyApprovalStatusBox(state, status)
+                      : CustomSizedBox.shrink()
+                ],
+              )
+            : SizedBox.shrink(),
         CustomSizedBox(
           height: DBL.twenty.val,
         ),
-        status == 0
+        status == 0 && onBoardingStatus == true
             ? _backgroundVerifyApprovalStatusBox(state, status)
             : CustomSizedBox.shrink(),
       ],
@@ -993,63 +1016,65 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
   _verificationTabView() {
     return BlocBuilder<CareGiverVerificationBloc, CareGiverVerificationState>(
       builder: (context, state) {
-        return CustomContainer(
-            height: DBL.fiftyFive.val,
-            width: 450,
-            color: AppColor.backgroundColor.val,
-            child: CustomListViewBuilder(
-                itemCount: state.verificationTypes.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  VerificationTypes item = state.verificationTypes[index];
-                  return InkWell(
-                    onTap: () {
-                      int backgroundVerificationStatus = state
-                              .response
-                              ?.data
-                              ?.backgroundVerification
-                              ?.personalDetails
-                              ?.approvalStatus ??
-                          0;
-                      if (backgroundVerificationStatus ==
-                          Approve.approved.val) {
-                        context.read<CareGiverVerificationBloc>().add(
-                            CareGiverVerificationEvent
-                                .isSelectedVerificationTab(item));
-                      }
-                    },
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          left: DBL.thirty.val, top: DBL.thirteen.val),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          CustomText(
-                            item.title ?? "",
-                            style: TS().gRoboto(
-                                fontSize: FS.font15.val,
-                                color: item.isSelected
-                                    ? AppColor.primaryColor.val
-                                    : AppColor.lightGrey11.val,
-                                fontWeight: FW.bold.val),
+        return onBoardingStatus == true
+            ? CustomContainer(
+                height: DBL.fiftyFive.val,
+                width: 450,
+                color: AppColor.backgroundColor.val,
+                child: CustomListViewBuilder(
+                    itemCount: state.verificationTypes.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      VerificationTypes item = state.verificationTypes[index];
+                      return InkWell(
+                        onTap: () {
+                          int backgroundVerificationStatus = state
+                                  .response
+                                  ?.data
+                                  ?.backgroundVerification
+                                  ?.personalDetails
+                                  ?.approvalStatus ??
+                              0;
+                          if (backgroundVerificationStatus ==
+                              Approve.approved.val) {
+                            context.read<CareGiverVerificationBloc>().add(
+                                CareGiverVerificationEvent
+                                    .isSelectedVerificationTab(item));
+                          }
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              left: DBL.thirty.val, top: DBL.thirteen.val),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              CustomText(
+                                item.title ?? "",
+                                style: TS().gRoboto(
+                                    fontSize: FS.font15.val,
+                                    color: item.isSelected
+                                        ? AppColor.primaryColor.val
+                                        : AppColor.lightGrey11.val,
+                                    fontWeight: FW.bold.val),
+                              ),
+                              CustomSizedBox(
+                                height: DBL.fifteen.val,
+                              ),
+                              item.isSelected
+                                  ? CustomContainer.decoration(
+                                      width: 190,
+                                      height: 3,
+                                      decoration: BoxDecoration(
+                                        color: AppColor.primaryColor.val,
+                                      ),
+                                    )
+                                  : CustomSizedBox.shrink()
+                            ],
                           ),
-                          CustomSizedBox(
-                            height: DBL.fifteen.val,
-                          ),
-                          item.isSelected
-                              ? CustomContainer.decoration(
-                                  width: 190,
-                                  height: 3,
-                                  decoration: BoxDecoration(
-                                    color: AppColor.primaryColor.val,
-                                  ),
-                                )
-                              : CustomSizedBox.shrink()
-                        ],
-                      ),
-                    ),
-                  );
-                }));
+                        ),
+                      );
+                    }))
+            : SizedBox.shrink();
       },
     );
   }

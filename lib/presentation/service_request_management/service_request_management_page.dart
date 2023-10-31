@@ -30,6 +30,7 @@ import '../widget/custom_text.dart';
 import '../widget/custom_text_field.dart';
 import '../widget/empty_view.dart';
 import '../widget/error_view.dart';
+import '../widget/loader_view.dart';
 import '../widget/pagination_view.dart';
 import '../widget/table_loader_view.dart';
 
@@ -407,14 +408,14 @@ class _ServiceRequestManagementPageState
                 DataColumn2(
                   fixedWidth: DBL.twoHundred.val,
                   label: _columnsView(
-                      text: AppString.decisionMakerName.val,
+                      text: AppString.clientName.val,
                       fontWeight: FontWeight.bold),
                 ),
                 DataColumn2(
                   size: ColumnSize.L,
                   fixedWidth: DBL.twoHundred.val,
                   label: _columnsView(
-                      text: AppString.clientName.val,
+                      text: AppString.careRecipientName.val,
                       fontWeight: FontWeight.bold),
                 ),
                 DataColumn2(
@@ -483,7 +484,7 @@ class _ServiceRequestManagementPageState
                 var item = e.value;
                 return DataRow2(
                   onTap: () {
-                    _getServiceDetails(item);
+                    _getServiceDetails(item, state);
                   },
                   cells: [
                     DataCell(_rowsView(
@@ -531,7 +532,7 @@ class _ServiceRequestManagementPageState
                     DataCell(InkWell(
                         onTap: () {
                           //autoTabRouter?.navigate(ServiceDetailsRoute(id: item.id));
-                          _getServiceDetails(item);
+                          _getServiceDetails(item, state);
                         },
                         child: CustomSvg(
                           path: IMG.eye.val,
@@ -545,9 +546,12 @@ class _ServiceRequestManagementPageState
           );
   }
 
-  void _getServiceDetails(ServiceRequests item) {
+  void _getServiceDetails(
+      ServiceRequests item, ServiceRequestManagementState state) {
     _serviceRequestBloc.add(ServiceRequestManagementEvent.getServiceDetails(
         context: context, serviceId: item.id ?? ""));
+    debugPrint('hell${state.isDetailsLoading}');
+
     showDialog(
         context: context,
         builder: (BuildContext context) {

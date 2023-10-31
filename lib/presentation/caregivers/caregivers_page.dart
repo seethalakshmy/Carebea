@@ -421,6 +421,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
           CustomLog.log("${item.profile}");
           int? verificationStatus = item.verificationStatus;
           String? userId = item.userId;
+          debugPrint('onboarding ${item.onBoardingStatus}');
           return DataRow2(
             onTap: () {
               print("userId passing from CA list page : ${item.userId}");
@@ -437,8 +438,8 @@ class _CareGiversPageState extends State<CareGiversPage> {
                     ));
                   } else {
                     autoTabRouter?.navigate(CaregiverVerificationRoute(
-                      id: userId,
-                    ));
+                        id: userId,
+                        isOnboardingCompleted: item.onBoardingStatus ?? false));
                   }
                 }
               }
@@ -467,8 +468,8 @@ class _CareGiversPageState extends State<CareGiversPage> {
                           isView: true,
                           onViewTap: () {
                             autoTabRouter?.navigate(CareGiverDetailRoute(
-                                id: item.userId,
-                                onBoardingStatus: item.onBoardingStatus));
+                              id: item.userId,
+                            ));
                           })
                       : _tableRowView("")),
             ],
@@ -517,6 +518,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
       userId: item.userId,
       page: _page,
       tab: _tabType,
+      onBoardingStatus: item.onBoardingStatus,
     );
   }
 

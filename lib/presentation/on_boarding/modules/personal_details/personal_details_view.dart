@@ -77,6 +77,9 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
   String selectedState = "";
   String selectedCity = "";
   String selectedDocument = "";
+  String selectedLocation = "";
+  num selectedLatitude = 0;
+  num selectedLongitude = 0;
   List<PlatformFile> bytesList = [];
   List<String> docPathList = [];
   bool listUpdated = false;
@@ -550,7 +553,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                 height: DBL.fifty.val, width: DBL.twoEighty.val)
             : CustomContainer(
                 width: DBL.twoEighty.val,
-                height: DBL.fifty.val,
+                // height: DBL.fifty.val,
                 child: AddressSelectionWidget(
                   onAddressSelect: (selectedAddress) {
                     streetController.text = selectedAddress.streetNumber ?? "";
@@ -564,6 +567,10 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                         selectedAddress.stateName ?? "";
                     widget.onboardingBloc.selectedStateName =
                         selectedAddress.stateName ?? "";
+                    selectedLatitude = selectedAddress.latitude ?? 0;
+                    selectedLongitude = selectedAddress.longitude ?? 0;
+                    selectedLocation = selectedAddress.locationTag ?? '';
+                    debugPrint('location $selectedLocation');
 
                     widget.onboardingBloc.add(const OnboardingEvent.stateList(
                         stateSearchQuery: "", wantLoading: true));
@@ -576,7 +583,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                             searchKey:
                                 "${selectedAddress.stateName?.trim().toLowerCase()}"));
                   },
-                  address: "",
+                  address: selectedLocation,
                 ),
               ),
         CustomSizedBox(height: DBL.twenty.val),
@@ -599,6 +606,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
               ? CustomShimmerWidget.rectangular(
                   height: DBL.fifty.val, width: DBL.twoEighty.val)
               : CTextField(
+                  maxLength: 50,
                   controller: streetController,
                   validator: (val) {
                     if (val?.trim() == null || val!.trim().isEmpty) {
@@ -1026,8 +1034,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           street: streetController.text.trim(),
           cityId: selectedCity,
           stateId: widget.onboardingBloc.stateId,
-          latitude: 80.0,
-          longitude: 80.0,
+          latitude: selectedLatitude.toDouble(),
+          longitude: selectedLongitude.toDouble(),
           zip: zipController.text.trim(),
           address: addressLineController.text.trim(),
           socialSecurityNo: socialSecurityNumberController.text.trim(),
@@ -1035,7 +1043,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
           documentNo: documentNumberController.text.trim(),
           expiryDate: expiryDateInDDMMYY,
           documentList: [widget.onboardingBloc.uploadedDocumentList.first],
-          profilePic: widget.onboardingBloc.profileUrl));
+          profilePic: widget.onboardingBloc.profileUrl,
+          locationTag: selectedLocation));
     }
   }
 
