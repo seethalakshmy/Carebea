@@ -481,6 +481,8 @@ class _ServiceRequestManagementPageState
                   .asMap()
                   .entries
                   .map((e) {
+                setIndex(e.key);
+
                 var item = e.value;
                 return DataRow2(
                   onTap: () {
@@ -488,7 +490,7 @@ class _ServiceRequestManagementPageState
                   },
                   cells: [
                     DataCell(_rowsView(
-                      text: (e.key + 1).toString(),
+                      text: pageIndex.toString(),
                     )),
                     DataCell(_rowsView(
                       text: item.serviceId.toString(),
@@ -546,6 +548,14 @@ class _ServiceRequestManagementPageState
           );
   }
 
+  setIndex(int index) {
+    if (_page == 1) {
+      pageIndex = index + 1;
+    } else {
+      pageIndex = ((_page * _limit) - 10) + index + 1;
+    }
+  }
+
   void _getServiceDetails(
       ServiceRequests item, ServiceRequestManagementState state) {
     _serviceRequestBloc.add(ServiceRequestManagementEvent.getServiceDetails(
@@ -555,6 +565,7 @@ class _ServiceRequestManagementPageState
     showDialog(
         context: context,
         builder: (BuildContext context) {
+          debugPrint('checking service status ${item.serviceStatus}');
           return CustomAlertDialogWidget(
             heading: "${item.serviceStatus} Service Request",
             child: ServiceDetailsAlert(

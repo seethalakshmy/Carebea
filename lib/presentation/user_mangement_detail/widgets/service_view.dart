@@ -10,9 +10,13 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../application/bloc/service_request_management/service_request_management_bloc.dart';
 import '../../../core/enum.dart';
 import '../../../core/responsive.dart';
 import '../../../core/text_styles.dart';
+import '../../../infrastructure/service_request_management/service_request_management_repository.dart';
+import '../../../main.dart';
+import '../../service_request_management/widgets/service_details_alert.dart';
 import '../../widget/cached_image.dart';
 import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_card.dart';
@@ -27,12 +31,24 @@ import '../../widget/custom_text.dart';
 import '../../widget/empty_view.dart';
 import '../../widget/error_view.dart';
 
-class ServiceView extends StatelessWidget {
-  ServiceView({Key? key, required this.state, required this.userId})
-      : super(key: key);
+class ServiceView extends StatefulWidget {
+  ServiceView({
+    Key? key,
+    required this.state,
+    required this.userId,
+  }) : super(key: key);
   final UserManagementDetailState state;
-  late UserManagementDetailBloc userDetailBloc;
   String userId;
+
+  @override
+  State<ServiceView> createState() => _ServiceViewState();
+}
+
+class _ServiceViewState extends State<ServiceView> {
+  late UserManagementDetailBloc userDetailBloc;
+
+  @override
+  void initState() {}
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +57,12 @@ class ServiceView extends StatelessWidget {
     return BlocProvider(
       create: (context) => userDetailBloc
         ..add(UserManagementDetailEvent.getClientService(
-            userId: userId, adminId: SharedPreffUtil().getAdminId)),
+            userId: widget.userId, adminId: SharedPreffUtil().getAdminId)),
       child: BlocBuilder<UserManagementDetailBloc, UserManagementDetailState>(
         builder: (context, state) {
           final services = state.clientServiceResponse?.data?.services ?? [];
+          // context.read<ServiceRequestManagementBloc>().add(ServiceRequestManagementEvent.getServiceDetails(context: context, serviceId: ));
+
           print('service $services');
 
           return CustomCard(
@@ -182,9 +200,22 @@ class ServiceView extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
+                        context.read<ServiceRequestManagementBloc>().add(
+                            ServiceRequestManagementEvent.getServiceDetails(
+                                context: context, serviceId: item.id ?? ''));
+                        debugPrint('item status ${item.status}');
                         return CustomAlertDialogWidget(
                           heading: AppString.services.val,
-                          child: ServiceDetailsPopUp(services: item),
+                          child: ServiceDetailsAlert(
+                            title: item.status == 2
+                                ? 'Upcoming'
+                                : item.status == 3
+                                    ? 'Ongoing'
+                                    : item.status == 5
+                                        ? 'Completed'
+                                        : 'Cancelled',
+                            serviceBloc: serviceRequestManagementBloc,
+                          ),
                         );
                       },
                     );

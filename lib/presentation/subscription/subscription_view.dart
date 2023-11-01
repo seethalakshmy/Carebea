@@ -100,15 +100,27 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
           elevation: DBL.seven.val,
           child: CustomContainer(
             padding: EdgeInsets.all(DBL.twenty.val),
-            child: BlocBuilder<SubscriptionBloc, SubscriptionState>(
-              builder: (context, state) {
-                return state.isLoading
-                    ? const TableLoaderView()
-                    : state.isError
-                        ? ErrorView(
-                            isClientError: false, errorMessage: state.error)
-                        : _usersView(context);
-              },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    _statusDropDown(context),
+                    Spacer(),
+                    _searchField(),
+                  ],
+                ),
+                BlocBuilder<SubscriptionBloc, SubscriptionState>(
+                  builder: (context, state) {
+                    return state.isLoading
+                        ? const TableLoaderView()
+                        : state.isError
+                            ? ErrorView(
+                                isClientError: false, errorMessage: state.error)
+                            : _usersView(context);
+                  },
+                ),
+              ],
             ),
           ),
         ),
@@ -123,10 +135,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _statusDropDown(context),
-                  _searchField(),
-                ],
+                children: [],
               ),
               CustomSizedBox(height: DBL.fifteen.val),
               CustomSizedBox(

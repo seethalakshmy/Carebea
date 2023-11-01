@@ -131,7 +131,7 @@ class ServiceDetailsAlert extends StatelessWidget {
   ProfileWidget _profileWidget(
       ServiceDetailsData service, BuildContext context) {
     return ProfileWidget(
-      width: DBL.threeFifty.val,
+      // width: DBL.threeFifty.val,
       imageUrl: service.parentProPic ?? "",
       name:
           "${service.parentName!.firstName ?? ""} ${service.parentName!.lastName ?? ""}",
@@ -194,7 +194,7 @@ class ServiceDetailsAlert extends StatelessWidget {
   Container _rateNowButton(
       {required String title, required Function() onPressed}) {
     return Container(
-      width: DBL.fiveFifty.val,
+      // width: DBL.fiveFifty.val,
       padding: EdgeInsets.symmetric(
           vertical: DBL.ten.val, horizontal: DBL.oneThirty.val),
       decoration: BoxDecoration(
@@ -219,7 +219,7 @@ class ServiceDetailsAlert extends StatelessWidget {
             ClientSubProfileDetailsRoute(id: service.profileId ?? ""));
       },
       child: Container(
-        width: DBL.fiveFifty.val,
+        // width: DBL.fiveFifty.val,
         padding: EdgeInsets.only(
             left: DBL.ten.val, right: DBL.ten.val, bottom: DBL.ten.val),
         decoration: BoxDecoration(
@@ -237,7 +237,7 @@ class ServiceDetailsAlert extends StatelessWidget {
 
   _statusShowingWidget(BuildContext context, ServiceDetailsData service) {
     return Container(
-      width: DBL.fiveFifty.val,
+      // width: DBL.fiveFifty.val,
       padding: EdgeInsets.all(DBL.ten.val),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(DBL.eight.val),
@@ -306,7 +306,7 @@ class ServiceDetailsAlert extends StatelessWidget {
   Container _clientDetailsWidget(
       BuildContext context, ServiceDetailsData service) {
     return Container(
-      width: DBL.fiveFifty.val,
+      // width: DBL.fiveFifty.val,
       padding: EdgeInsets.all(DBL.ten.val),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(DBL.eight.val),
@@ -350,7 +350,7 @@ class ServiceDetailsAlert extends StatelessWidget {
       print("cg report list : $reportIssueByCg");
     }
     return Container(
-      width: DBL.fiveFifty.val,
+      // width: DBL.fiveFifty.val,
       margin: EdgeInsets.only(bottom: DBL.ten.val),
       padding: EdgeInsets.all(DBL.ten.val),
       decoration: BoxDecoration(
@@ -425,7 +425,7 @@ class ServiceDetailsAlert extends StatelessWidget {
         title == AppString.pending.val
             ? const SizedBox()
             : ProfileWidget(
-                width: DBL.threeFifty.val,
+                // width: DBL.threeFifty.val,
                 imageUrl: service.caregiverProPic ?? "",
                 name:
                     "${service.caregiverInfo!.name!.firstName ?? ""} ${service.caregiverInfo!.name!.firstName ?? ""}",
@@ -524,7 +524,7 @@ class ServiceDetailsAlert extends StatelessWidget {
   Container _replacementDetailsWidget(
       BuildContext context, ServiceDetailsData service) {
     return Container(
-      width: DBL.fiveFifty.val,
+      // width: DBL.fiveFifty.val,
       padding: EdgeInsets.only(
           left: DBL.ten.val, right: DBL.ten.val, bottom: DBL.ten.val),
       decoration: BoxDecoration(
@@ -597,7 +597,7 @@ class ServiceDetailsAlert extends StatelessWidget {
                     isShowing: !serviceBloc.state.isShowingTransactionDetails));
           },
           child: Container(
-            width: DBL.fiveFifty.val,
+            // width: DBL.fiveFifty.val,
             padding: EdgeInsets.all(DBL.ten.val),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -643,7 +643,7 @@ class ServiceDetailsAlert extends StatelessWidget {
 
   _transactionDetailsData(ServiceDetailsData service, BuildContext context) {
     return Container(
-      width: DBL.fiveFifty.val,
+      // width: DBL.fiveFifty.val,
       padding: EdgeInsets.all(DBL.ten.val),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -689,7 +689,7 @@ class ServiceDetailsAlert extends StatelessWidget {
 
   _refundDetailsData(ServiceDetailsData service, BuildContext context) {
     return Container(
-      width: DBL.fiveFifty.val,
+      // width: DBL.fiveFifty.val,
       padding: EdgeInsets.all(DBL.ten.val),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -725,7 +725,7 @@ class ServiceDetailsAlert extends StatelessWidget {
   _refundStatusWidget(BuildContext context, ServiceDetailsData service) {
     return Container(
       padding: EdgeInsets.all(DBL.two.val),
-      width: DBL.threeFifty.val,
+      // width: DBL.threeFifty.val,
       decoration: BoxDecoration(
           color: AppColor.lightGrey.val.withOpacity(0.5),
           borderRadius: BorderRadius.circular(DBL.eight.val)),
@@ -849,7 +849,7 @@ class ServiceDetailsAlert extends StatelessWidget {
       InkWell(
         onTap: onTap,
         child: Container(
-          width: DBL.fiveFifty.val,
+          // width: DBL.fiveFifty.val,
           padding: EdgeInsets.all(DBL.ten.val),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
@@ -885,7 +885,7 @@ class ServiceDetailsAlert extends StatelessWidget {
 
   _serviceDetails({required List<String> servicesList}) {
     return Container(
-      width: DBL.fiveFifty.val,
+      // width: DBL.fiveFifty.val,
       padding: EdgeInsets.all(DBL.ten.val),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -963,7 +963,7 @@ class ServiceDetailsAlert extends StatelessWidget {
                 isShowing: !serviceBloc.state.isShowingTimeline));
           },
           child: Container(
-            width: DBL.fiveFifty.val,
+            // width: DBL.fiveFifty.val,
             height: DBL.fifty.val,
             padding: EdgeInsets.only(left: DBL.ten.val, right: DBL.ten.val),
             decoration: BoxDecoration(
@@ -992,7 +992,7 @@ class ServiceDetailsAlert extends StatelessWidget {
         ),
         isShowing
             ? Container(
-                width: DBL.fiveFifty.val,
+                // width: DBL.fiveFifty.val,
                 padding: EdgeInsets.all(DBL.ten.val),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(

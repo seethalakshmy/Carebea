@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:admin_580_tech/presentation/page_creation/widget/radio_button_widget.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
@@ -82,6 +84,7 @@ class _PageCreationPageState extends State<PageCreationPage> {
   void initState() {
     super.initState();
     // _faqCreationBloc = FaqCreationBloc(FaqCreationRepository());
+    log("initState called");
     adminUserID = SharedPreffUtil().getAdminId;
     id = autoTabRouter?.currentChild?.queryParams.getString("id", "") ?? "";
 
@@ -93,7 +96,9 @@ class _PageCreationPageState extends State<PageCreationPage> {
     debugPrint("forwhom $forWhom");
     pageBloc.titleController.text =
         autoTabRouter?.currentChild?.queryParams.getString("title", "") ?? '';
+    pageBloc.radioValue = forWhom!.toInt() - 1;
     // _faqCreationBloc.add(FaqCreationEvent.getFaq(id: adminId));
+    log("radioValue ${pageBloc.radioValue}");
   }
 
   @override
@@ -177,47 +182,60 @@ class _PageCreationPageState extends State<PageCreationPage> {
                 return Row(
                   children: [
                     Spacer(),
-                    CustomButton(
-                        isLoading: state.isLoading,
-                        text: id == ''
-                            ? AppString.submit.val
-                            : AppString.update.val,
-                        onPressed: () async {
-                          await getText(controller);
-                          if (htmlText!.isEmpty || htmlText == '') {
-                            CSnackBar.showError(context!,
-                                msg: AppString.descriptionError.val);
-                          }
-                          debugPrint("content $htmlText");
-                          debugPrint("for $forWhom");
-                          if (_pageFormKey.currentState!.validate() &&
-                              htmlText!.isNotEmpty &&
-                              htmlText != '') {
-                            (id == ''
-                                ? pageBloc.add(PageEvent.createPage(
-                                    title: pageBloc.titleController.text.trim(),
-                                    description: htmlText ?? '',
-                                    pageFor: state.isForClient == 0
-                                        ? '1'
-                                        : state.isForClient == 1
-                                            ? '2'
-                                            : '3',
-                                    context: context,
-                                  ))
-                                : pageBloc.add(PageEvent.updatePage(
-                                    userId: adminUserID ?? '',
-                                    id: id ?? '',
-                                    title: pageBloc.titleController.text.trim(),
-                                    description: htmlText ?? '',
-                                    pageFor: state.isForClient == 0
-                                        ? '1'
-                                        : state.isForClient == 1
-                                            ? '2'
-                                            : '3',
-                                    context: context,
-                                  )));
-                          }
-                        }),
+                    state.when(initial: (isLoading, isError, isForClient,
+                        response, getPagesResponse, radioValue) {
+                      return CustomButton(
+                          isLoading: false,
+                          text: id == ''
+                              ? AppString.submit.val
+                              : AppString.update.val,
+                          onPressed: () async {
+                            await getText(controller);
+                            if (htmlText!.isEmpty || htmlText == '') {
+                              CSnackBar.showError(context!,
+                                  msg: AppString.descriptionError.val);
+                            }
+                            debugPrint("content $htmlText");
+                            debugPrint("for $forWhom");
+                            if (!mounted) return;
+                            if (_pageFormKey.currentState!.validate() &&
+                                htmlText!.isNotEmpty &&
+                                htmlText != '') {
+                              (id == ''
+                                  ? pageBloc.add(PageEvent.createPage(
+                                      title:
+                                          pageBloc.titleController.text.trim(),
+                                      description: htmlText ?? '',
+                                      pageFor: radioValue == 0
+                                          ? '1'
+                                          : radioValue == 1
+                                              ? '2'
+                                              : '3',
+                                      context: context,
+                                    ))
+                                  : pageBloc.add(PageEvent.updatePage(
+                                      userId: adminUserID ?? '',
+                                      id: id ?? '',
+                                      title:
+                                          pageBloc.titleController.text.trim(),
+                                      description: htmlText ?? '',
+                                      pageFor: radioValue == 0
+                                          ? '1'
+                                          : radioValue == 1
+                                              ? '2'
+                                              : '3',
+                                      context: context,
+                                    )));
+                            }
+                          });
+                    }, loading: () {
+                      return CustomButton(
+                          isLoading: true,
+                          text: id == ''
+                              ? AppString.submit.val
+                              : AppString.update.val,
+                          onPressed: () {});
+                    })
                   ],
                 );
               },
@@ -239,18 +257,50 @@ class _PageCreationPageState extends State<PageCreationPage> {
         const CustomSizedBox(width: 20),
         BlocBuilder<PageBloc, PageState>(
           builder: (context, state) {
-            return RadioButtonWidget(
-              groupValue: state.isForClient,
-              firstLabel: AppString.forClient.val,
-              secondLabel: AppString.forCa.val,
-              thirdLabel: AppString.forWebsite.val,
-              onChanged: (val) {
-                debugPrint("selected radio $val");
-                debugPrint("selected value ${state.isForClient + 2}");
-                BlocProvider.of<PageBloc>(context)
-                    .add(PageEvent.radioForClient(isSelected: val));
-              },
-            );
+            log("state is $state");
+
+            return state.when(initial: (isLoading, isError, isForClient,
+                response, getPagesResponse, radioValue) {
+              log(("called initial"));
+              return RadioButtonWidget(
+                groupValue: radioValue,
+                firstLabel: AppString.forClient.val,
+                secondLabel: AppString.forCa.val,
+                thirdLabel: AppString.forWebsite.val,
+                onChanged: (val) {
+                  debugPrint("selected radio $val");
+                  debugPrint("selected value $isForClient");
+                  BlocProvider.of<PageBloc>(context)
+                      .add(PageEvent.radioForClient(isSelected: val));
+                },
+              );
+            }, loading: () {
+              return RadioButtonWidget(
+                groupValue: pageBloc.radioValue,
+                firstLabel: AppString.forClient.val,
+                secondLabel: AppString.forCa.val,
+                thirdLabel: AppString.forWebsite.val,
+                onChanged: (val) {
+                  debugPrint("selected radio $val");
+                  BlocProvider.of<PageBloc>(context)
+                      .add(PageEvent.radioForClient(isSelected: val));
+                },
+              );
+            });
+
+            // return RadioButtonWidget(
+            //   groupValue: pageBloc.radioValue,
+            //   firstLabel: AppString.forClient.val,
+            //   secondLabel: AppString.forCa.val,
+            //   thirdLabel: AppString.forWebsite.val,
+            //   onChanged: (val) {
+            //     debugPrint("selected radio $val");
+            //     debugPrint("selected value ${state.isForClient}");
+            //     BlocProvider.of<PageBloc>(context)
+            //         .add(PageEvent.radioForClient(isSelected: val));
+            //   },
+            // );
+
             // return YesNoRadioButtonWidget(
             //   yesLabel: AppString.forClient.val,
             //   noLabel: AppString.forCa.val,

@@ -1007,14 +1007,64 @@ abstract class _DeletePage implements PageEvent {
 
 /// @nodoc
 mixin _$PageState {
-  bool get isLoading => throw _privateConstructorUsedError;
-  bool get isError => throw _privateConstructorUsedError;
-  int get isForClient => throw _privateConstructorUsedError;
-  CommonResponse? get response => throw _privateConstructorUsedError;
-  GetPagesResponse? get getPagesResponse => throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $PageStateCopyWith<PageState> get copyWith =>
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            bool isLoading,
+            bool isError,
+            int isForClient,
+            CommonResponse? response,
+            GetPagesResponse? getPagesResponse,
+            int radioValue)
+        initial,
+    required TResult Function() loading,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            bool isLoading,
+            bool isError,
+            int isForClient,
+            CommonResponse? response,
+            GetPagesResponse? getPagesResponse,
+            int radioValue)?
+        initial,
+    TResult? Function()? loading,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            bool isLoading,
+            bool isError,
+            int isForClient,
+            CommonResponse? response,
+            GetPagesResponse? getPagesResponse,
+            int radioValue)?
+        initial,
+    TResult Function()? loading,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    required TResult orElse(),
+  }) =>
       throw _privateConstructorUsedError;
 }
 
@@ -1022,13 +1072,6 @@ mixin _$PageState {
 abstract class $PageStateCopyWith<$Res> {
   factory $PageStateCopyWith(PageState value, $Res Function(PageState) then) =
       _$PageStateCopyWithImpl<$Res, PageState>;
-  @useResult
-  $Res call(
-      {bool isLoading,
-      bool isError,
-      int isForClient,
-      CommonResponse? response,
-      GetPagesResponse? getPagesResponse});
 }
 
 /// @nodoc
@@ -1040,62 +1083,28 @@ class _$PageStateCopyWithImpl<$Res, $Val extends PageState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isLoading = null,
-    Object? isError = null,
-    Object? isForClient = null,
-    Object? response = freezed,
-    Object? getPagesResponse = freezed,
-  }) {
-    return _then(_value.copyWith(
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isError: null == isError
-          ? _value.isError
-          : isError // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isForClient: null == isForClient
-          ? _value.isForClient
-          : isForClient // ignore: cast_nullable_to_non_nullable
-              as int,
-      response: freezed == response
-          ? _value.response
-          : response // ignore: cast_nullable_to_non_nullable
-              as CommonResponse?,
-      getPagesResponse: freezed == getPagesResponse
-          ? _value.getPagesResponse
-          : getPagesResponse // ignore: cast_nullable_to_non_nullable
-              as GetPagesResponse?,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_PageStateCopyWith<$Res> implements $PageStateCopyWith<$Res> {
-  factory _$$_PageStateCopyWith(
-          _$_PageState value, $Res Function(_$_PageState) then) =
-      __$$_PageStateCopyWithImpl<$Res>;
-  @override
+abstract class _$$_InitialCopyWith<$Res> {
+  factory _$$_InitialCopyWith(
+          _$_Initial value, $Res Function(_$_Initial) then) =
+      __$$_InitialCopyWithImpl<$Res>;
   @useResult
   $Res call(
       {bool isLoading,
       bool isError,
       int isForClient,
       CommonResponse? response,
-      GetPagesResponse? getPagesResponse});
+      GetPagesResponse? getPagesResponse,
+      int radioValue});
 }
 
 /// @nodoc
-class __$$_PageStateCopyWithImpl<$Res>
-    extends _$PageStateCopyWithImpl<$Res, _$_PageState>
-    implements _$$_PageStateCopyWith<$Res> {
-  __$$_PageStateCopyWithImpl(
-      _$_PageState _value, $Res Function(_$_PageState) _then)
+class __$$_InitialCopyWithImpl<$Res>
+    extends _$PageStateCopyWithImpl<$Res, _$_Initial>
+    implements _$$_InitialCopyWith<$Res> {
+  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1106,8 +1115,9 @@ class __$$_PageStateCopyWithImpl<$Res>
     Object? isForClient = null,
     Object? response = freezed,
     Object? getPagesResponse = freezed,
+    Object? radioValue = null,
   }) {
-    return _then(_$_PageState(
+    return _then(_$_Initial(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -1128,19 +1138,24 @@ class __$$_PageStateCopyWithImpl<$Res>
           ? _value.getPagesResponse
           : getPagesResponse // ignore: cast_nullable_to_non_nullable
               as GetPagesResponse?,
+      radioValue: null == radioValue
+          ? _value.radioValue
+          : radioValue // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_PageState implements _PageState {
-  const _$_PageState(
+class _$_Initial implements _Initial {
+  _$_Initial(
       {required this.isLoading,
       required this.isError,
       required this.isForClient,
       required this.response,
-      required this.getPagesResponse});
+      required this.getPagesResponse,
+      required this.radioValue});
 
   @override
   final bool isLoading;
@@ -1152,17 +1167,19 @@ class _$_PageState implements _PageState {
   final CommonResponse? response;
   @override
   final GetPagesResponse? getPagesResponse;
+  @override
+  final int radioValue;
 
   @override
   String toString() {
-    return 'PageState(isLoading: $isLoading, isError: $isError, isForClient: $isForClient, response: $response, getPagesResponse: $getPagesResponse)';
+    return 'PageState.initial(isLoading: $isLoading, isError: $isError, isForClient: $isForClient, response: $response, getPagesResponse: $getPagesResponse, radioValue: $radioValue)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PageState &&
+            other is _$_Initial &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isError, isError) || other.isError == isError) &&
@@ -1171,40 +1188,246 @@ class _$_PageState implements _PageState {
             (identical(other.response, response) ||
                 other.response == response) &&
             (identical(other.getPagesResponse, getPagesResponse) ||
-                other.getPagesResponse == getPagesResponse));
+                other.getPagesResponse == getPagesResponse) &&
+            (identical(other.radioValue, radioValue) ||
+                other.radioValue == radioValue));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, isLoading, isError, isForClient, response, getPagesResponse);
+  int get hashCode => Object.hash(runtimeType, isLoading, isError, isForClient,
+      response, getPagesResponse, radioValue);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PageStateCopyWith<_$_PageState> get copyWith =>
-      __$$_PageStateCopyWithImpl<_$_PageState>(this, _$identity);
+  _$$_InitialCopyWith<_$_Initial> get copyWith =>
+      __$$_InitialCopyWithImpl<_$_Initial>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            bool isLoading,
+            bool isError,
+            int isForClient,
+            CommonResponse? response,
+            GetPagesResponse? getPagesResponse,
+            int radioValue)
+        initial,
+    required TResult Function() loading,
+  }) {
+    return initial(isLoading, isError, isForClient, response, getPagesResponse,
+        radioValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            bool isLoading,
+            bool isError,
+            int isForClient,
+            CommonResponse? response,
+            GetPagesResponse? getPagesResponse,
+            int radioValue)?
+        initial,
+    TResult? Function()? loading,
+  }) {
+    return initial?.call(isLoading, isError, isForClient, response,
+        getPagesResponse, radioValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            bool isLoading,
+            bool isError,
+            int isForClient,
+            CommonResponse? response,
+            GetPagesResponse? getPagesResponse,
+            int radioValue)?
+        initial,
+    TResult Function()? loading,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(isLoading, isError, isForClient, response,
+          getPagesResponse, radioValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+  }) {
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+  }) {
+    return initial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
+  }
 }
 
-abstract class _PageState implements PageState {
-  const factory _PageState(
+abstract class _Initial implements PageState {
+  factory _Initial(
       {required final bool isLoading,
       required final bool isError,
       required final int isForClient,
       required final CommonResponse? response,
-      required final GetPagesResponse? getPagesResponse}) = _$_PageState;
+      required final GetPagesResponse? getPagesResponse,
+      required final int radioValue}) = _$_Initial;
+
+  bool get isLoading;
+  bool get isError;
+  int get isForClient;
+  CommonResponse? get response;
+  GetPagesResponse? get getPagesResponse;
+  int get radioValue;
+  @JsonKey(ignore: true)
+  _$$_InitialCopyWith<_$_Initial> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_LoadingCopyWith<$Res> {
+  factory _$$_LoadingCopyWith(
+          _$_Loading value, $Res Function(_$_Loading) then) =
+      __$$_LoadingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_LoadingCopyWithImpl<$Res>
+    extends _$PageStateCopyWithImpl<$Res, _$_Loading>
+    implements _$$_LoadingCopyWith<$Res> {
+  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Loading implements _Loading {
+  _$_Loading();
 
   @override
-  bool get isLoading;
+  String toString() {
+    return 'PageState.loading()';
+  }
+
   @override
-  bool get isError;
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Loading);
+  }
+
   @override
-  int get isForClient;
+  int get hashCode => runtimeType.hashCode;
+
   @override
-  CommonResponse? get response;
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            bool isLoading,
+            bool isError,
+            int isForClient,
+            CommonResponse? response,
+            GetPagesResponse? getPagesResponse,
+            int radioValue)
+        initial,
+    required TResult Function() loading,
+  }) {
+    return loading();
+  }
+
   @override
-  GetPagesResponse? get getPagesResponse;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            bool isLoading,
+            bool isError,
+            int isForClient,
+            CommonResponse? response,
+            GetPagesResponse? getPagesResponse,
+            int radioValue)?
+        initial,
+    TResult? Function()? loading,
+  }) {
+    return loading?.call();
+  }
+
   @override
-  @JsonKey(ignore: true)
-  _$$_PageStateCopyWith<_$_PageState> get copyWith =>
-      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            bool isLoading,
+            bool isError,
+            int isForClient,
+            CommonResponse? response,
+            GetPagesResponse? getPagesResponse,
+            int radioValue)?
+        initial,
+    TResult Function()? loading,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Loading implements PageState {
+  factory _Loading() = _$_Loading;
 }

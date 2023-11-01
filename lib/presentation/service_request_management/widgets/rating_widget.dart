@@ -20,7 +20,7 @@ class RatingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: DBL.fiveFifty.val,
+      // width: DBL.fiveFifty.val,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../../../../../core/enum.dart';
@@ -21,12 +23,13 @@ class RadioButtonWidget extends StatelessWidget {
   final Function(int?) onChanged;
   @override
   Widget build(BuildContext context) {
+    log("log groupvalue $groupValue");
     return Row(
       children: [
         Radio<int>(
           value: 0,
           groupValue: groupValue,
-          onChanged: onChanged,
+          onChanged: (val) => onChanged(val),
         ),
         CustomText(
           firstLabel,
@@ -40,7 +43,7 @@ class RadioButtonWidget extends StatelessWidget {
         Radio<int>(
           value: 1,
           groupValue: groupValue,
-          onChanged: onChanged,
+          onChanged: (val) => onChanged(val),
         ),
         CustomText(
           secondLabel,
@@ -53,7 +56,7 @@ class RadioButtonWidget extends StatelessWidget {
         Radio<int>(
           value: 2,
           groupValue: groupValue,
-          onChanged: onChanged,
+          onChanged: (val) => onChanged(val),
         ),
         CustomText(
           thirdLabel,
