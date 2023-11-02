@@ -40,6 +40,7 @@ class SubProfileView extends StatelessWidget {
                           left: DBL.twenty.val,
                           right: DBL.nineteen.val,
                           child: SingleChildScrollView(
+                            physics: const NeverScrollableScrollPhysics(),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
@@ -104,6 +105,10 @@ class SubProfileView extends StatelessWidget {
           getIndex(e.key);
           var item = e.value;
           return DataRow2(
+            onTap: () {
+              autoTabRouter
+                  ?.navigate(ClientSubProfileDetailsRoute(id: item.id));
+            },
             cells: [
               DataCell(_rowsView(
                 context,

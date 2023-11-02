@@ -601,6 +601,7 @@ class _ServiceRequestManagementPageState
       child: CustomText(
         '$text',
         softWrap: true,
+        overflow: TextOverflow.ellipsis,
         style: TS().gRoboto(
             fontSize: Responsive.isWeb(context)
                 ? DBL.thirteenPointFive.val

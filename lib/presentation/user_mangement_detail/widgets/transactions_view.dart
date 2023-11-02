@@ -2,7 +2,6 @@ import 'package:admin_580_tech/application/bloc/transaction_management/transacti
 import 'package:admin_580_tech/application/bloc/user_management_detail/user_management_detail_bloc.dart';
 import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
 import 'package:admin_580_tech/infrastructure/transaction_management/transactions_repository.dart';
-import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_status.dart';
 import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,6 @@ import '../../../core/enum.dart';
 import '../../../core/responsive.dart';
 import '../../../core/text_styles.dart';
 import '../../../core/utility.dart';
-import '../../service_request_management/widgets/status_widget.dart';
 import '../../transaction_management/widgets/custom_status_widget.dart';
 import '../../transaction_management/widgets/transaction_details_alert.dart';
 import '../../widget/cached_image.dart';
@@ -140,6 +138,12 @@ class TransactionView extends StatelessWidget {
           getIndex(e.key);
           var item = e.value;
           return DataRow2(
+            onTap: () {
+              _transactionDetails(
+                  serviceId: item.serviceId ?? '',
+                  transactionId: item.transactionId ?? '',
+                  context: context);
+            },
             cells: [
               DataCell(_rowsView(
                 context,

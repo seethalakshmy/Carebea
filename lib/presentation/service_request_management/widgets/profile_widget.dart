@@ -26,7 +26,7 @@ class ProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
+        Wrap(
           children: [
             _buildImage(context),
             const SizedBox(
@@ -38,10 +38,12 @@ class ProfileWidget extends StatelessWidget {
                 InkWell(
                   onTap: onNameTap,
                   child: CustomSizedBox(
-                    child: CustomText(name,
-                        width: width,
-                        style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold)),
+                    child: Flexible(
+                      child: CustomText(name,
+                          width: width,
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
+                    ),
                   ),
                 ),
                 const SizedBox(

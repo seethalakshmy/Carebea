@@ -333,6 +333,9 @@ class _UserManagementPageState extends State<UserManagementPage> {
           setIndex(e.key);
           var item = e.value;
           return DataRow2(
+            onTap: () {
+              autoTabRouter?.navigate(UserManagementDetailRoute(id: item.id));
+            },
             cells: [
               DataCell(_rowsView(
                 text: pageIndex.toString(),

@@ -66,53 +66,61 @@ class PetListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          width: MediaQuery.of(context).size.width * .51,
-        ),
-        Wrap(
-          children: petList
-                  ?.map(
-                    (e) => Container(
-                      // height: 20,
-                      width: 100,
-                      decoration: BoxDecoration(
-                          color: e.area == 1
-                              ? AppColor.indoor.val
-                              : e.area == 2
-                                  ? AppColor.outdoor.val
-                                  : AppColor.both.val,
-                          borderRadius: BorderRadius.all(Radius.circular(5))),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: Row(
-                          children: [
-                            AlertTextLabel(
-                              e.name ?? '',
-                              color: color,
-                              fontWeight: fontWeight,
-                              fontSize: fontSize,
+    return Padding(
+      padding: const EdgeInsets.only(left: 370),
+      child: Wrap(
+        children: petList
+                ?.map(
+                  (e) => Wrap(
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * .01,
+                      ),
+                      Container(
+                        // height: 20,
+                        width: MediaQuery.of(context).size.width * .1,
+                        decoration: BoxDecoration(
+                            color: e.area == 1
+                                ? AppColor.indoor.val
+                                : e.area == 2
+                                    ? AppColor.outdoor.val
+                                    : AppColor.both.val,
+                            borderRadius: BorderRadius.all(Radius.circular(5))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: Flexible(
+                            child: Wrap(
+                              children: [
+                                AlertTextLabel(
+                                  e.name ?? '',
+                                  color: color,
+                                  fontWeight: fontWeight,
+                                  fontSize: fontSize,
+                                ),
+                                AlertTextLabel(
+                                  e.area == 1
+                                      ? "(Indoor)"
+                                      : e.area == 2
+                                          ? "(Outdoor)"
+                                          : "(Both)",
+                                  color: color,
+                                  fontWeight: fontWeight,
+                                  fontSize: fontSize,
+                                ),
+                              ],
                             ),
-                            AlertTextLabel(
-                              e.area == 1
-                                  ? "(Indoor)"
-                                  : e.area == 2
-                                      ? "(Outdoor)"
-                                      : "(Both)",
-                              color: color,
-                              fontWeight: fontWeight,
-                              fontSize: fontSize,
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
-                  )
-                  .toList() ??
-              [],
-        )
-      ],
+                      // SizedBox(
+                      //   width: 20,
+                      // )
+                    ],
+                  ),
+                )
+                .toList() ??
+            [],
+      ),
     );
   }
 }

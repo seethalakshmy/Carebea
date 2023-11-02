@@ -428,12 +428,12 @@ class ServiceDetailsAlert extends StatelessWidget {
                 // width: DBL.threeFifty.val,
                 imageUrl: service.caregiverProPic ?? "",
                 name:
-                    "${service.caregiverInfo!.name!.firstName ?? ""} ${service.caregiverInfo!.name!.firstName ?? ""}",
+                    "${service.caregiverInfo!.name!.firstName ?? ""} ${service.caregiverInfo!.name!.lastName ?? ""}",
                 subText: AppString.careAmbassador.val,
                 onNameTap: () {
                   Navigator.pop(context);
-                  autoTabRouter
-                      ?.navigate(CareGiverProfileRoute(id: service.profileId));
+                  autoTabRouter?.navigate(
+                      CareGiverProfileRoute(id: service.caregiverId));
                 },
               ),
         if (title == AppString.completed.val && (service.services != null))
