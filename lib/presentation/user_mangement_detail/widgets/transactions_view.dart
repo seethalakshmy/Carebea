@@ -82,21 +82,20 @@ class TransactionView extends StatelessWidget {
             label: _columnsView(context,
                 text: AppString.slNo.val, fontWeight: FontWeight.bold),
           ),
-          // DataColumn2(
-          //   size: ColumnSize.S,
-          //   fixedWidth: 80,
-          //   label: _columnsView(context,
-          //       text: AppString.id.val, fontWeight: FontWeight.bold),
-          // ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
-                text: AppString.client.val, fontWeight: FontWeight.bold),
+                text: AppString.transactionId.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
                 text: AppString.serviceId.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.client.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.L,
@@ -107,7 +106,7 @@ class TransactionView extends StatelessWidget {
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
-                text: AppString.dateTime.val, fontWeight: FontWeight.bold),
+                text: AppString.paidFor.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.L,
@@ -117,12 +116,12 @@ class TransactionView extends StatelessWidget {
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
-                text: AppString.paidFor.val, fontWeight: FontWeight.bold),
+                text: AppString.paidTo.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
-                text: AppString.transactionId.val, fontWeight: FontWeight.bold),
+                text: AppString.dateTime.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.L,
@@ -153,18 +152,21 @@ class TransactionView extends StatelessWidget {
               //   context,
               //   text: item.id.toString(),
               // )),
+              DataCell(_rowsView(context, text: item.uniqueTransactionId)),
+              DataCell(_rowsView(context, text: item.uniqueServiceId)),
+
               DataCell(_rowsView(context, text: item.client)),
-              DataCell(_rowsView(context, text: item.serviceId)),
               DataCell(_rowsView(context, text: item.transactionType)),
+              DataCell(_rowsView(context, text: '')),
+              DataCell(_rowsView(context, text: item.amount)),
+              DataCell(_rowsView(context, text: item.paidFor)),
+
               DataCell(_rowsView(
                 context,
                 text: Utility.serviceDate(
                     DateTime.tryParse(item.dateTime ?? "")?.toLocal() ??
                         DateTime.now().toLocal()),
               )),
-              DataCell(_rowsView(context, text: item.amount)),
-              DataCell(_rowsView(context, text: item.paidFor)),
-              DataCell(_rowsView(context, text: item.transactionId)),
               DataCell(_statusBox(item.status)),
               DataCell(InkWell(
                   onTap: () {

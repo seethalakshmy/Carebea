@@ -6,6 +6,14 @@ enum AppString {
       "https://www.ccld.dss.ca.gov/hcsregistry/registration.aspx?Action=New"),
   blsUrl("https://www.nationalcprfoundation.com/"),
   pageCreation("Page Creation"),
+  notAttempted("Missed"),
+  achDetails('ACH details'),
+  cardNumber("Card Number"),
+  totalUpcomingServices("Total Upcoming Services"),
+  totalAwaitingServices("Total Awaiting Services"),
+  totalMissedServices("Total Missed Services"),
+  totalPendingReviews("Total Pending Reviews"),
+  averageReviewByCareAmbassador("Average Review By Care Ambassadors"),
 
   userId("USER ID"),
   emptyDocument("Please upload  documents"),
@@ -41,7 +49,7 @@ enum AppString {
   theSuspectThingsDuringTheShift("The suspect things during the shift"),
   otherIssues("Other issues "),
   theReportedIssueByTheCg("The reported issue by the  care ambassador"),
-  serviceCompleted("Service Completed"),
+  serviceCompleted("Total Service Completed"),
   serviceIncomplete("Service Incomplete"),
   extraService("Extra Services"),
   extraServiceCharge("Extra Service Charge"),
@@ -197,7 +205,7 @@ enum AppString {
   client("Client"),
   clientProfiles("Client Profiles"),
   clientName("Client Name"),
-  careRecipientName("Care Recipient Name"),
+  careRecipientName("Care Recipient"),
   caName("Care Ambassador Name"),
   nameAndAge("Name & Age"),
   totalServiceCompleted("Total Service Completed"),
@@ -216,7 +224,7 @@ enum AppString {
   serviceInComplete("Services Incomplete"),
   serviceNeeded("Services Needed"),
   serviceNeededCount("Services Needed Count"),
-  canceledRequest("Canceled Request"),
+  canceledRequest("Total Services Canceled By Client"),
   reviewGiven("Review Given"),
   serviceList("Service List"),
   location("Location"),
@@ -276,7 +284,7 @@ enum AppString {
       "Is the Care ambassadors  Completed the training process?"),
   isCompletedInterView(
       "Is the Care ambassadors  Completed the interview process?"),
-  transaction("Transaction"),
+  transaction("Transactions"),
   role("Role"),
   assignModule("Assign Module"),
   assignedModule("Assigned Module"),
@@ -986,6 +994,18 @@ enum Status {
   final int val;
 
   const Status(this.val);
+}
+
+enum ServiceStatus {
+  awaiting(1),
+  upcoming(2),
+  ongoing(3),
+  completed(5),
+  canceled(6);
+
+  final int val;
+
+  const ServiceStatus(this.val);
 }
 
 enum Week {

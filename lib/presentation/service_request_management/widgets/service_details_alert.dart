@@ -10,14 +10,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/bloc/service_request_management/service_request_management_bloc.dart';
+import '../../../application/bloc/transaction_management/transaction_management_bloc.dart';
 import '../../../core/responsive.dart';
 import '../../../core/text_styles.dart';
 import '../../../generated/assets.dart';
 import '../../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../../../infrastructure/transaction_management/transactions_repository.dart';
 import '../../routes/app_router.gr.dart';
 import '../../side_menu/side_menu_page.dart';
+import '../../transaction_management/widgets/transaction_details_alert.dart';
 import '../../widget/commonImageview.dart';
 import '../../widget/common_alert_widget.dart';
+import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_shimmer.dart';
 import '../../widget/empty_view.dart';
@@ -677,11 +681,26 @@ class ServiceDetailsAlert extends StatelessWidget {
                   text: AppString.extraServiceCharge.val,
                   subText: service.extraServiceFee ?? "")
               : const CustomSizedBox(),
-          _textAndSubText(
-              context: context,
-              height: DBL.eight.val,
-              text: AppString.transactionId.val,
-              subText: service.serviceFeeTransactionId ?? ""),
+          InkWell(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return CustomAlertDialogWidget(
+                    heading: AppString.transactionManagement.val,
+                    child: TransactionDetailsAlert(
+                        transactionBloc: TransactionManagementBloc(
+                            TransactionsRepository())),
+                  );
+                },
+              );
+            },
+            child: _textAndSubText(
+                context: context,
+                height: DBL.eight.val,
+                text: AppString.transactionId.val,
+                subText: service.serviceFeeTransactionId ?? ""),
+          ),
         ],
       ),
     );

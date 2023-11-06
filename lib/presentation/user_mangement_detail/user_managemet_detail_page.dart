@@ -1,13 +1,13 @@
-import 'package:admin_580_tech/application/bloc/user_management_detail/user_management_detail_bloc.dart';
-import 'package:admin_580_tech/core/custom_debugger.dart';
-import 'package:admin_580_tech/core/enum.dart';
-import 'package:admin_580_tech/core/properties.dart';
-import 'package:admin_580_tech/core/text_styles.dart';
-import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
-import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
-import 'package:admin_580_tech/infrastructure/user_management_detail/user_management_detail_repository.dart';
-import 'package:admin_580_tech/presentation/user_mangement_detail/views/payment_method_view.dart';
-import 'package:admin_580_tech/presentation/user_mangement_detail/views/sub_profile_view.dart';
+import '../../application/bloc/user_management_detail/user_management_detail_bloc.dart';
+import '../../core/custom_debugger.dart';
+import '../../core/enum.dart';
+import '../../core/properties.dart';
+import '../../core/text_styles.dart';
+import '../../domain/user_management_detail/model/user_detail_response.dart';
+import '../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../../infrastructure/user_management_detail/user_management_detail_repository.dart';
+import 'views/payment_method_view.dart';
+import 'views/sub_profile_view.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_view.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/transactions_view.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
@@ -283,7 +283,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                                       CustomSizedBox(
                                                         width: DBL.fifteen.val,
                                                       ),
-                                                      reviewsView(
+                                                      averageReviewsView(
                                                           response: response),
                                                     ],
                                                   )
@@ -303,7 +303,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                                       CustomSizedBox(
                                                         height: DBL.fifteen.val,
                                                       ),
-                                                      reviewsView(
+                                                      averageReviewsView(
                                                           height: DBL.sixty.val,
                                                           response: response),
                                                     ],
@@ -337,7 +337,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                         CustomSizedBox(
                                           width: DBL.fifteen.val,
                                         ),
-                                        reviewsView(
+                                        averageReviewsView(
                                             height: DBL.fifty.val,
                                             response: response),
                                       ],
@@ -392,12 +392,39 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
     );
   }
 
-  ServiceRewardAndCompletion reviewsView(
+  ServiceRewardAndCompletion averageReviewsView(
       {double? height, required UserDetailResponse? response}) {
     return ServiceRewardAndCompletion(
       height: height,
       title: response?.data?.totalReviewsGiven.toString() ?? "",
-      subTitle: AppString.reviewGiven.val,
+      subTitle: AppString.averageReviewByCareAmbassador.val,
+    );
+  }
+
+  ServiceRewardAndCompletion pendingReviewsView(
+      {double? height, required UserDetailResponse? response}) {
+    return ServiceRewardAndCompletion(
+      height: height,
+      title: "",
+      subTitle: AppString.totalPendingReviews.val,
+    );
+  }
+
+  ServiceRewardAndCompletion upcomingView(
+      {double? height, required UserDetailResponse? response}) {
+    return ServiceRewardAndCompletion(
+      height: height,
+      title: "",
+      subTitle: AppString.totalUpcomingServices.val,
+    );
+  }
+
+  ServiceRewardAndCompletion awaitingView(
+      {double? height, required UserDetailResponse? response}) {
+    return ServiceRewardAndCompletion(
+      height: height,
+      title: "",
+      subTitle: AppString.totalAwaitingServices.val,
     );
   }
 

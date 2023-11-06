@@ -195,6 +195,8 @@ String transactionsToJson(Transactions data) => json.encode(data.toJson());
 class Transactions {
   Transactions({
     String? client,
+    String? uniqueServiceId,
+    String? uniqueTransactionId,
     String? serviceId,
     String? transactionType,
     String? dateTime,
@@ -204,6 +206,8 @@ class Transactions {
     num? status,
   }) {
     _client = client;
+    _uniqueServiceId = uniqueServiceId;
+    _uniqueTransactionId = uniqueTransactionId;
     _serviceId = serviceId;
     _transactionType = transactionType;
     _dateTime = dateTime;
@@ -215,6 +219,8 @@ class Transactions {
 
   Transactions.fromJson(dynamic json) {
     _client = json['client'];
+    _uniqueServiceId = json['unique_service_id'];
+    _uniqueTransactionId = json['transaction_uniqueID'];
     _serviceId = json['service_id'];
     _transactionType = json['transaction_type'];
     _dateTime = json['date_time'];
@@ -224,6 +230,8 @@ class Transactions {
     _status = json['status'];
   }
   String? _client;
+  String? _uniqueServiceId;
+  String? _uniqueTransactionId;
   String? _serviceId;
   String? _transactionType;
   String? _dateTime;
@@ -233,6 +241,8 @@ class Transactions {
   num? _status;
   Transactions copyWith({
     String? client,
+    String? uniqueTransactionId,
+    String? uniqueServiceId,
     String? serviceId,
     String? transactionType,
     String? dateTime,
@@ -243,6 +253,8 @@ class Transactions {
   }) =>
       Transactions(
         client: client ?? _client,
+        uniqueServiceId: uniqueServiceId ?? _uniqueServiceId,
+        uniqueTransactionId: uniqueTransactionId ?? _uniqueTransactionId,
         serviceId: serviceId ?? _serviceId,
         transactionType: transactionType ?? _transactionType,
         dateTime: dateTime ?? _dateTime,
@@ -252,6 +264,8 @@ class Transactions {
         status: status ?? _status,
       );
   String? get client => _client;
+  String? get uniqueServiceId => _uniqueServiceId;
+  String? get uniqueTransactionId => _uniqueTransactionId;
   String? get serviceId => _serviceId;
   String? get transactionType => _transactionType;
   String? get dateTime => _dateTime;
@@ -263,6 +277,8 @@ class Transactions {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['client'] = _client;
+    map['unique_service_id'] = _uniqueServiceId;
+    map['transaction_uniqueID'] = _uniqueTransactionId;
     map['service_id'] = _serviceId;
     map['transaction_type'] = _transactionType;
     map['date_time'] = _dateTime;
@@ -1439,6 +1455,8 @@ class PaymentMethod {
   PaymentMethod({
     String? name,
     String? cardNumber,
+    String? accountNumber,
+    String? routingNumber,
     dynamic expiry,
     dynamic securityNumber,
     String? paymentMethodId,
@@ -1449,6 +1467,8 @@ class PaymentMethod {
   }) {
     _name = name;
     _cardNumber = cardNumber;
+    _accountNumber = accountNumber;
+    _routingNumber = routingNumber;
     _expiry = expiry;
     _securityNumber = securityNumber;
     _paymentMethodId = paymentMethodId;
@@ -1461,6 +1481,8 @@ class PaymentMethod {
   PaymentMethod.fromJson(dynamic json) {
     _name = json['name'];
     _cardNumber = json['cardNumber'];
+    _accountNumber = json['accountNumber'];
+    _routingNumber = json['routingNumber'];
     _expiry = json['expiry'];
     _securityNumber = json['securityNumber'];
     _paymentMethodId = json['paymentMethodId'];
@@ -1471,6 +1493,8 @@ class PaymentMethod {
   }
   String? _name;
   String? _cardNumber;
+  String? _accountNumber;
+  String? _routingNumber;
   dynamic _expiry;
   dynamic _securityNumber;
   String? _paymentMethodId;
@@ -1481,6 +1505,8 @@ class PaymentMethod {
   PaymentMethod copyWith({
     String? name,
     String? cardNumber,
+    String? accountNumber,
+    String? routingNumber,
     dynamic expiry,
     dynamic securityNumber,
     String? paymentMethodId,
@@ -1492,6 +1518,8 @@ class PaymentMethod {
       PaymentMethod(
         name: name ?? _name,
         cardNumber: cardNumber ?? _cardNumber,
+        accountNumber: accountNumber ?? _accountNumber,
+        routingNumber: routingNumber ?? _routingNumber,
         expiry: expiry ?? _expiry,
         securityNumber: securityNumber ?? _securityNumber,
         paymentMethodId: paymentMethodId ?? _paymentMethodId,
@@ -1502,6 +1530,8 @@ class PaymentMethod {
       );
   String? get name => _name;
   String? get cardNumber => _cardNumber;
+  String? get accountNumber => _accountNumber;
+  String? get routingNumber => _routingNumber;
   dynamic get expiry => _expiry;
   dynamic get securityNumber => _securityNumber;
   String? get paymentMethodId => _paymentMethodId;
@@ -1514,6 +1544,8 @@ class PaymentMethod {
     final map = <String, dynamic>{};
     map['name'] = _name;
     map['cardNumber'] = _cardNumber;
+    map['accountNumber'] = _accountNumber;
+    map['routingNumber'] = _routingNumber;
     map['expiry'] = _expiry;
     map['securityNumber'] = _securityNumber;
     map['paymentMethodId'] = _paymentMethodId;

@@ -33,8 +33,8 @@ class PaymentMethodView extends StatelessWidget {
                     height: DBL.thirty.val,
                   ),
                   UserAccountDetails(
-                      label: AppString.accountNumber.val,
-                      value: value?.cardNumber ?? ""),
+                      label: AppString.cardNumber.val,
+                      value: formatCardNumber(value?.cardNumber ?? '')),
                   CustomSizedBox(
                     height: DBL.thirty.val,
                   ),
@@ -44,14 +44,44 @@ class PaymentMethodView extends StatelessWidget {
                   CustomSizedBox(
                     height: DBL.thirty.val,
                   ),
-                  UserAccountDetails(
-                      label: AppString.securityNo.val,
-                      value: value?.securityNumber ?? ""),
+                  // UserAccountDetails(
+                  //     label: AppString.securityNo.val,
+                  //     value: value?.securityNumber ?? ""),
                 ],
               )
-            : const EmptyView(
-                title: "No Card details found!",
-                isUnderTab: true,
+            : Column(
+                children: [
+                  HeaderView(title: AppString.achDetails.val),
+                  CustomSizedBox(
+                    height: DBL.eighteen.val,
+                  ),
+                  // UserAccountDetails(
+                  //     label: AppString.accountHolderName.val,
+                  //     value: value?.name ?? ""),
+                  // CustomSizedBox(
+                  //   height: DBL.thirty.val,
+                  // ),
+                  UserAccountDetails(
+                      label: AppString.accountNumber.val,
+                      value: value?.accountNumber ?? ""),
+                  CustomSizedBox(
+                    height: DBL.thirty.val,
+                  ),
+                  UserAccountDetails(
+                      label: AppString.routingNo.val,
+                      value: value?.routingNumber ?? ""),
+                  // CustomSizedBox(
+                  //   height: DBL.thirty.val,
+                  // ),
+                  // UserAccountDetails(
+                  //     label: AppString.securityNo.val,
+                  //     value: value?.securityNumber ?? ""),
+                ],
               ));
+  }
+
+  formatCardNumber(String cardNumber) {
+    var formattedCardNumber = cardNumber.replaceRange(0, 11, '************');
+    return formattedCardNumber;
   }
 }

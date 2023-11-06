@@ -28,7 +28,7 @@ class _CareGiverReferenceViewState extends State<CareGiverReferenceView> {
   @override
   void initState() {
     super.initState();
-    // _mReference = widget.state.response?.data?.reference ?? [];
+    _mReference = widget.state.response?.data?.reference ?? [];
   }
 
   @override

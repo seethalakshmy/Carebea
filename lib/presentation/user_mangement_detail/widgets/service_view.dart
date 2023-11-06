@@ -118,7 +118,13 @@ class _ServiceViewState extends State<ServiceView> {
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
-                text: AppString.client.val, fontWeight: FontWeight.bold),
+                text: AppString.serviceId.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.careRecipientName.val,
+                fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.L,
@@ -173,6 +179,7 @@ class _ServiceViewState extends State<ServiceView> {
                 context,
                 text: getIndex(e.key).toString(),
               )),
+              DataCell(_rowsView(context, text: item.uniqueId)),
               DataCell(_tableRowImage(
                 context,
                 name: "${item.client?.firstName} ${item.client?.lastName}",
@@ -213,7 +220,9 @@ class _ServiceViewState extends State<ServiceView> {
                                     ? 'Ongoing'
                                     : item.status == 5
                                         ? 'Completed'
-                                        : 'Cancelled',
+                                        : item.status == 6
+                                            ? 'Canceled'
+                                            : 'Missed',
                             serviceBloc: serviceRequestManagementBloc,
                           ),
                         );
@@ -291,7 +300,7 @@ class _ServiceViewState extends State<ServiceView> {
                 flex: 1,
                 child: CustomText(
                   name,
-                  overflow: TextOverflow.visible,
+                  overflow: TextOverflow.ellipsis,
                   softWrap: true,
                   style: TS().gRoboto(
                       fontSize: Responsive.isWeb(context)
