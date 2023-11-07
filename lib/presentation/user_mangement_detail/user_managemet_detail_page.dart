@@ -6,6 +6,7 @@ import '../../core/text_styles.dart';
 import '../../domain/user_management_detail/model/user_detail_response.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../infrastructure/user_management_detail/user_management_detail_repository.dart';
+import '../service_request_management/widgets/profile_widget.dart';
 import 'views/payment_method_view.dart';
 import 'views/sub_profile_view.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_view.dart';
@@ -121,12 +122,19 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            CachedImage(
-                                              width: isXs(context) ? 150 : 200,
-                                              height: isXs(context) ? 125 : 175,
-                                              imgUrl: state
-                                                  .response?.data?.profilePic,
-                                            ),
+                                            ProfileWidget(
+                                              imageUrl: state.response?.data!
+                                                      .profilePic ??
+                                                  "",
+                                              name: '',
+                                              subText: '',
+                                            )
+                                            // CachedImage(
+                                            //   width: isXs(context) ? 150 : 200,
+                                            //   height: isXs(context) ? 125 : 175,
+                                            //   imgUrl: state
+                                            //       .response?.data?.profilePic,
+                                            // ),
                                           ],
                                         ),
                                       ),
@@ -201,12 +209,11 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                             CustomSizedBox(
                                               height: DBL.fourteen.val,
                                             ),
-                                            Flexible(
-                                              child: SVGText(
-                                                path: IMG.ssn.val,
-                                                name: response?.data?.ssn ?? "",
-                                                widthGap: DBL.twelve.val,
-                                              ),
+                                            SVGText(
+                                              path: IMG.location.val,
+                                              name: "",
+                                              // response?.data?.ssn ?? "",
+                                              widthGap: DBL.twelve.val,
                                             ),
                                             // CustomSizedBox(
                                             //   height: isXs2(context)
@@ -360,7 +367,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
             unselectedLabelColor: AppColor.lightGrey5.val,
             tabs: [
               Tab(icon: Text(AppString.clientProfiles.val)),
-              Tab(icon: Text(AppString.paymentMethod.val)),
+              // Tab(icon: Text(AppString.paymentMethod.val)),
               Tab(icon: Text(AppString.services.val)),
               Tab(icon: Text(AppString.transaction.val)),
             ],
@@ -374,9 +381,9 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                 controller: tabController,
                 children: [
                   SubProfileView(state: state),
-                  PaymentMethodView(
-                    state: state,
-                  ),
+                  // PaymentMethodView(
+                  //   state: state,
+                  // ),
                   ServiceView(
                     state: state,
                     userId: state.response?.data?.id ?? '',

@@ -38,12 +38,10 @@ class ProfileWidget extends StatelessWidget {
                 InkWell(
                   onTap: onNameTap,
                   child: CustomSizedBox(
-                    child: Flexible(
-                      child: CustomText(name,
-                          width: width,
-                          style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold)),
-                    ),
+                    child: CustomText(name,
+                        width: width,
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
                   ),
                 ),
                 const SizedBox(

@@ -58,7 +58,7 @@ class MedicationWidget extends StatelessWidget {
                               child: _medicationDetailsView(
                                   data: medication?[index]))),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     )
                   ],
