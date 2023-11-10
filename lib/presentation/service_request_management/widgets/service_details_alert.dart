@@ -25,6 +25,7 @@ import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_shimmer.dart';
 import '../../widget/empty_view.dart';
+import '../../widget/table_loader_view.dart';
 import 'cancel_request_alert_widget.dart';
 import 'cancellation_widget.dart';
 
@@ -50,7 +51,7 @@ class ServiceDetailsAlert extends StatelessWidget {
                 ? MediaQuery.of(context).size.height
                 : MediaQuery.of(context).size.height * 1.5,
             child: serviceBloc.state.isDetailsLoading ?? false
-                ? const CustomShimmerWidget.rectangular(height: double.infinity)
+                ? const TableLoaderView()
                 : serviceBloc.serviceDetailsList.isEmpty
                     ? EmptyView(
                         title: AppString.noDataFound.val,
@@ -389,6 +390,7 @@ class ServiceDetailsAlert extends StatelessWidget {
     List<String> completedServices = [];
     List<String> neededServices = [];
     List<String> extraServices = [];
+    List<String> notCompletedServices = [];
     var service = serviceBloc.serviceDetailsList[0];
     if (service.completedServices != null) {
       for (int i = 0;
@@ -411,6 +413,36 @@ class ServiceDetailsAlert extends StatelessWidget {
         } else {
           extraServices
               .add(service.completedServices!.completedTier2![i].service ?? "");
+        }
+      }
+    }
+    if (service.notCompletedServices != null) {
+      for (int i = 0;
+          i < service.notCompletedServices!.notCompletedTier1!.length;
+          i++) {
+        if (service.notCompletedServices!.notCompletedTier1![i].isExtra ==
+            false) {
+          notCompletedServices.add(
+              service.notCompletedServices!.notCompletedTier1![i].service ??
+                  "");
+        } else {
+          extraServices.add(
+              service.notCompletedServices!.notCompletedTier1![i].service ??
+                  "");
+        }
+      }
+      for (int i = 0;
+          i < service.notCompletedServices!.notCompletedTier2!.length;
+          i++) {
+        if (service.notCompletedServices!.notCompletedTier2![i].isExtra ==
+            false) {
+          notCompletedServices.add(
+              service.notCompletedServices!.notCompletedTier2![i].service ??
+                  "");
+        } else {
+          extraServices.add(
+              service.notCompletedServices!.notCompletedTier2![i].service ??
+                  "");
         }
       }
     }
@@ -496,7 +528,7 @@ class ServiceDetailsAlert extends StatelessWidget {
               },
               isShowing: serviceBloc.state.isShowingIncompleteServices,
               title: AppString.serviceInComplete.val,
-              servicesList: neededServices),
+              servicesList: notCompletedServices),
         if (title == AppString.completed.val &&
             (service.completedServices != null) &&
             extraServices.isNotEmpty)
@@ -661,25 +693,25 @@ class ServiceDetailsAlert extends StatelessWidget {
               context: context,
               height: DBL.eight.val,
               text: AppString.serviceFee.val,
-              subText: service.serviceFee.toString()),
+              subText: '\$ ${service.serviceFee.toString()}'),
           _textAndSubText(
               context: context,
               height: DBL.eight.val,
               text: AppString.transportationFee.val,
-              subText: service.travelingCharge ?? ""),
+              subText: '\$ ${service.travelingCharge ?? ""}'),
           title == AppString.completed.val
               ? _textAndSubText(
                   context: context,
                   height: DBL.eight.val,
                   text: AppString.tip.val,
-                  subText: service.tip.toString())
+                  subText: '\$ ${service.tip.toString()}')
               : const CustomSizedBox(),
           title == AppString.completed.val
               ? _textAndSubText(
                   context: context,
                   height: DBL.eight.val,
                   text: AppString.extraServiceCharge.val,
-                  subText: service.extraServiceFee ?? "")
+                  subText: '\$ ${service.extraServiceFee ?? ""}')
               : const CustomSizedBox(),
           InkWell(
             onTap: () {
@@ -729,6 +761,11 @@ class ServiceDetailsAlert extends StatelessWidget {
               height: DBL.eight.val,
               text: AppString.refundEligibility.val,
               subText: service.refundDetails!.isNotEmpty ? "Yes" : "No"),
+          _textAndSubText(
+              context: context,
+              height: DBL.eight.val,
+              text: AppString.amount.val,
+              subText: '\$ ${service.refundDetails?.first.price ?? ''}'),
           CustomSizedBox(height: DBL.ten.val),
           _refundStatusWidget(context, service),
           _textAndSubText(

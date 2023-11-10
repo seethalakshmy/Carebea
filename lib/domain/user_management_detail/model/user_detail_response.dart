@@ -57,6 +57,7 @@ class Data {
     String? id,
     Name? name,
     String? phone,
+    String? locationTag,
     String? email,
     String? profilePic,
     dynamic ssn,
@@ -69,6 +70,7 @@ class Data {
   }) {
     _id = id;
     _name = name;
+    _locationTag = locationTag;
     _phone = phone;
     _email = email;
     _profilePic = profilePic;
@@ -85,6 +87,7 @@ class Data {
     _id = json['id'];
     _name = json['name'] != null ? Name.fromJson(json['name']) : null;
     _phone = json['phone'];
+    _locationTag = json['location_tag'];
     _email = json['email'];
     _profilePic = json['parent_profile_pic'];
     _ssn = json['ssn'];
@@ -111,6 +114,7 @@ class Data {
   String? _id;
   Name? _name;
   String? _phone;
+  String? _locationTag;
   String? _email;
   String? _profilePic;
   dynamic _ssn;
@@ -123,6 +127,7 @@ class Data {
   Data copyWith({
     String? id,
     Name? name,
+    String? locationTag,
     String? phone,
     String? email,
     String? profilePic,
@@ -137,6 +142,7 @@ class Data {
       Data(
         id: id ?? _id,
         name: name ?? _name,
+        locationTag: locationTag ?? _locationTag,
         phone: phone ?? _phone,
         email: email ?? _email,
         profilePic: profilePic ?? _profilePic,
@@ -151,6 +157,7 @@ class Data {
   String? get id => _id;
   Name? get name => _name;
   String? get phone => _phone;
+  String? get locationTag => _locationTag;
   String? get email => _email;
   String? get profilePic => _profilePic;
   dynamic get ssn => _ssn;
@@ -169,6 +176,7 @@ class Data {
     }
     map['phone'] = _phone;
     map['email'] = _email;
+    map['location_tag'] = _locationTag;
     map['parent_profile_pic'] = _profilePic;
     map['ssn'] = _ssn;
     map['service_completed'] = _serviceCompleted;

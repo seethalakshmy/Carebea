@@ -211,8 +211,9 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
                                             ),
                                             SVGText(
                                               path: IMG.location.val,
-                                              name: "",
-                                              // response?.data?.ssn ?? "",
+                                              name:
+                                                  response?.data?.locationTag ??
+                                                      "",
                                               widthGap: DBL.twelve.val,
                                             ),
                                             // CustomSizedBox(
@@ -366,7 +367,7 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
             labelColor: AppColor.white.val,
             unselectedLabelColor: AppColor.lightGrey5.val,
             tabs: [
-              Tab(icon: Text(AppString.clientProfiles.val)),
+              Tab(icon: Text(AppString.careRecipients.val)),
               // Tab(icon: Text(AppString.paymentMethod.val)),
               Tab(icon: Text(AppString.services.val)),
               Tab(icon: Text(AppString.transaction.val)),

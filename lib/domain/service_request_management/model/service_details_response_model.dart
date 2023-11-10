@@ -2616,16 +2616,16 @@ RefundDetails refundDetailsFromJson(String str) =>
 String refundDetailsToJson(RefundDetails data) => json.encode(data.toJson());
 
 class RefundDetails {
-  RefundDetails({
-    String? uniqueId,
-    List<StatusHistory>? statusHistory,
-  }) {
+  RefundDetails(
+      {String? uniqueId, List<StatusHistory>? statusHistory, String? price}) {
     _uniqueId = uniqueId;
     _statusHistory = statusHistory;
+    _price = price;
   }
 
   RefundDetails.fromJson(dynamic json) {
     _uniqueId = json['uniqueId'];
+    _price = json['price'];
     if (json['statusHistory'] != null) {
       _statusHistory = [];
       json['statusHistory'].forEach((v) {
@@ -2634,6 +2634,7 @@ class RefundDetails {
     }
   }
   String? _uniqueId;
+  String? _price;
   List<StatusHistory>? _statusHistory;
   RefundDetails copyWith({
     String? uniqueId,
@@ -2641,14 +2642,17 @@ class RefundDetails {
   }) =>
       RefundDetails(
         uniqueId: uniqueId ?? _uniqueId,
+        price: price ?? _price,
         statusHistory: statusHistory ?? _statusHistory,
       );
   String? get uniqueId => _uniqueId;
+  String? get price => _price;
   List<StatusHistory>? get statusHistory => _statusHistory;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['uniqueId'] = _uniqueId;
+    map['price'] = _price;
     if (_statusHistory != null) {
       map['statusHistory'] = _statusHistory?.map((v) => v.toJson()).toList();
     }

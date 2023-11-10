@@ -513,13 +513,13 @@ class _ServiceRequestManagementPageState
                           .generateFormattedDate(item.endDate ?? ""),
                     )),
                     DataCell(_rowsView(
-                      text: item.serviceFee.toString(),
+                      text: '\$ ${item.serviceFee}',
                     )),
                     if (_serviceRequestBloc.statusFilterId == 0 ||
                         _serviceRequestBloc.statusFilterId == 6)
                       DataCell(_rowsView(
                         text: item.refundStatus != null
-                            ? item.refundStatus.toString()
+                            ? '\$ ${item.refundStatus}'
                             : "-",
                       )),
                     if (_serviceRequestBloc.statusFilterId == 0 ||

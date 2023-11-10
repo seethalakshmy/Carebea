@@ -9,6 +9,7 @@ import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/he
 import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/service_details.dart';
 import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/sub_profile_personal_details_one.dart';
 import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/sub_profile_personal_details_two.dart';
+import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/subscription_details.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
@@ -51,7 +52,7 @@ class _ClientSubProfileDetailsPageState
     print('inside sub profile screen');
     adminId = SharedPreffUtil().getAdminId;
     userId = autoTabRouter?.currentChild?.queryParams.getString("id", "") ?? "";
-    tabController = TabController(vsync: this, length: 6);
+    tabController = TabController(vsync: this, length: 7);
     _subProfileDetailBloc = SubProfileDetailBloc(SubProfileDetailRepository());
     super.initState();
   }
@@ -392,6 +393,7 @@ class _ClientSubProfileDetailsPageState
               Tab(icon: Text(AppString.healthProfile.val)),
               Tab(icon: Text(AppString.service.val)),
               Tab(icon: Text(AppString.serviceAgreement.val)),
+              Tab(icon: Text(AppString.subscriptionDetails.val)),
             ],
             controller: tabController,
           ),
@@ -409,7 +411,8 @@ class _ClientSubProfileDetailsPageState
                   SubProfileContactDetails(state: state),
                   SubProfileHealthProfile(state: state),
                   ServiceDetails(state: state),
-                  Container()
+                  Container(),
+                  SubscriptionDetailsView(state: state)
                 ],
               ),
             ),

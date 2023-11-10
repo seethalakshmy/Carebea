@@ -14,6 +14,10 @@ enum AppString {
   totalMissedServices("Total Missed Services"),
   totalPendingReviews("Total Pending Reviews"),
   averageReviewByCareAmbassador("Average Review By Care Ambassadors"),
+  medicalCondition("Medical Condition"),
+  planName("Plan Name"),
+  recurringTime("Recurring Time"),
+  careRecipients("Care Recipients"),
 
   userId("USER ID"),
   emptyDocument("Please upload  documents"),

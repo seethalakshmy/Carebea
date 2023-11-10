@@ -1,3 +1,5 @@
+import 'package:package_info_plus/package_info_plus.dart';
+
 import '../../core/custom_debugger.dart';
 import '../../core/enum.dart';
 import '../../core/hive/hive_utils.dart';
@@ -62,11 +64,17 @@ class _MenuBarState extends State<SideMenuPage> {
   final GlobalKey<ScaffoldState> _scaffoldDrawerKey =
       GlobalKey<ScaffoldState>();
   Map<String, String> mainData = {};
+  var version;
   SharedPreffUtil sharedPreffUtil = SharedPreffUtil();
+  Future getVersionNumber() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    version = packageInfo.version;
+  }
 
   @override
   void initState() {
     super.initState();
+    getVersionNumber();
     mainData = {
       AppString.dashboard.val: "",
       AppString.roleManagement.val: "",
@@ -400,6 +408,14 @@ class _MenuBarState extends State<SideMenuPage> {
                       tabsRouter: tabsRouter,
                       items: mainData,
                       isOpened: value,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 20),
+                      child: CustomText(
+                        'V $version',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
                     CustomSizedBox(
                       height: DBL.twenty.val,

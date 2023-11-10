@@ -172,7 +172,7 @@ class TransactionDetailsAlert extends StatelessWidget {
 
   Widget _refundDetailsWidget(BuildContext context) {
     return CustomContainer(
-      width: 300,
+      // width: 300,
       padding: const EdgeInsets.all(20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

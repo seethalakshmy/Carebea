@@ -21,7 +21,7 @@ class ApiServiceS3 {
           pickedFile,
           contentType: "*/*",
         ),
-        key: '$folderName/$userId/$timestamp.$format',
+        key: '$folderName/$timestamp.$format',
         onProgress: (progress) {
           print('Fraction completed: ${progress.fractionCompleted}');
         },
