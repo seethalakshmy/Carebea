@@ -9,6 +9,7 @@ enum AppString {
   notAttempted("Missed"),
   achDetails('ACH details'),
   cardNumber("Card Number"),
+  deleted("Deleted"),
   totalUpcomingServices("Total Upcoming Services"),
   totalAwaitingServices("Total Awaiting Services"),
   totalMissedServices("Total Missed Services"),

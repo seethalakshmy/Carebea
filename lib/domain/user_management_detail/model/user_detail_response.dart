@@ -1572,6 +1572,7 @@ String subProfilesToJson(SubProfiles data) => json.encode(data.toJson());
 class SubProfiles {
   SubProfiles({
     String? id,
+    bool? isDelete,
     Name? name,
     Location? location,
     String? locationTag,
@@ -1586,6 +1587,7 @@ class SubProfiles {
     num? completedServices,
   }) {
     _id = id;
+    _isDelete = isDelete;
     _name = name;
     _location = location;
     _locationTag = locationTag;
@@ -1602,6 +1604,7 @@ class SubProfiles {
 
   SubProfiles.fromJson(dynamic json) {
     _id = json['id'];
+    _isDelete = json['is_deleted'];
     _name = json['name'] != null ? Name.fromJson(json['name']) : null;
     _location =
         json['location'] != null ? Location.fromJson(json['location']) : null;
@@ -1619,6 +1622,7 @@ class SubProfiles {
         : null;
   }
   String? _id;
+  bool? _isDelete;
   Name? _name;
   Location? _location;
   String? _locationTag;
@@ -1633,6 +1637,7 @@ class SubProfiles {
   num? _completedServices;
   SubProfiles copyWith({
     String? id,
+    bool? isDelete,
     Name? name,
     Location? location,
     String? locationTag,
@@ -1648,6 +1653,7 @@ class SubProfiles {
   }) =>
       SubProfiles(
         id: id ?? _id,
+        isDelete: isDelete ?? _isDelete,
         name: name ?? _name,
         location: location ?? _location,
         locationTag: locationTag ?? _locationTag,
@@ -1664,6 +1670,7 @@ class SubProfiles {
       );
   String? get id => _id;
   Name? get name => _name;
+  bool? get isDelete => _isDelete;
   Location? get location => _location;
   String? get locationTag => _locationTag;
   String? get profilePic => _profilePic;
@@ -1679,6 +1686,7 @@ class SubProfiles {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = _id;
+    map['is_deleted'] = _isDelete;
     if (_name != null) {
       map['name'] = _name?.toJson();
     }
