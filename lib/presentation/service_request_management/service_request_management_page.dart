@@ -13,6 +13,7 @@ import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
+import '../../core/utility.dart';
 import '../../domain/caregivers/model/types.dart';
 import '../../domain/service_request_management/model/service_request_response.dart';
 import '../../infrastructure/service_request_management/service_request_management_repository.dart';
@@ -30,7 +31,6 @@ import '../widget/custom_text.dart';
 import '../widget/custom_text_field.dart';
 import '../widget/empty_view.dart';
 import '../widget/error_view.dart';
-import '../widget/loader_view.dart';
 import '../widget/pagination_view.dart';
 import '../widget/table_loader_view.dart';
 
@@ -513,7 +513,8 @@ class _ServiceRequestManagementPageState
                           .generateFormattedDate(item.endDate ?? ""),
                     )),
                     DataCell(_rowsView(
-                      text: '\$ ${item.serviceFee}',
+                      text:
+                          '\$ ${Utility.formatAmount(double.tryParse(item.serviceFee.toString() ?? "0.0") ?? 0.0)}',
                     )),
                     if (_serviceRequestBloc.statusFilterId == 0 ||
                         _serviceRequestBloc.statusFilterId == 6)

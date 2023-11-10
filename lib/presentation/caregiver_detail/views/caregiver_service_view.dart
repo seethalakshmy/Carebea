@@ -17,8 +17,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../application/bloc/service_request_management/service_request_management_bloc.dart';
 import '../../../core/enum.dart';
 import '../../../core/string_extension.dart';
+import '../../../core/utility.dart';
 import '../../../domain/caregiver_detail/model/caregiver_service_list_response.dart';
-import '../../../infrastructure/service_request_management/service_request_management_repository.dart';
 import '../../../main.dart';
 import '../../service_request_management/widgets/service_details_alert.dart';
 import '../../user_mangement_detail/widgets/service_status.dart';
@@ -225,7 +225,8 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
                   _tableRowView(item.startDateTime?.parseWithFormat() ?? "")),
               DataCell(
                   _tableRowView(item.endDateTime?.parseWithFormat() ?? "")),
-              DataCell(_tableRowView(item.totalServiceFee.toString() ?? "")),
+              DataCell(_tableRowView(
+                  '\$${Utility.formatAmount(double.tryParse(item.totalServiceFee?.replaceAll('\$', "") ?? "0.0") ?? 0.0)}')),
               DataCell(ClientStatusWidget(
                 serviceStatus: item.status,
               )

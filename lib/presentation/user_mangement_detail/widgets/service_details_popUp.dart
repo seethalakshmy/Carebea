@@ -356,7 +356,8 @@ class ServiceDetailsPopUp extends StatelessWidget {
               Expanded(
                 child: RowColonCombo.twoHundred(
                     label: AppString.serviceFee.val,
-                    value: '\$ ${services.totalServiceFee}',
+                    value:
+                        '\$ ${Utility.formatAmount(double.tryParse(services.totalServiceFee.toString() ?? "0.0") ?? 0.0)}',
                     fontSize: FS.font13PointFive.val),
               ),
               !isLg(context)

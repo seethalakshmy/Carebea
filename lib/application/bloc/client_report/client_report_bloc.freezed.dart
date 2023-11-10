@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'client_report_bloc.dart';
 
@@ -301,7 +301,6 @@ class _$_ClientReportState implements _ClientReportState {
   final List<String> _xAxis;
   @override
   List<String> get xAxis {
-    if (_xAxis is EqualUnmodifiableListView) return _xAxis;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_xAxis);
   }
@@ -309,7 +308,6 @@ class _$_ClientReportState implements _ClientReportState {
   final List<String> _yAxis;
   @override
   List<String> get yAxis {
-    if (_yAxis is EqualUnmodifiableListView) return _yAxis;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_yAxis);
   }
@@ -317,7 +315,6 @@ class _$_ClientReportState implements _ClientReportState {
   final List<String> _inactiveXAxis;
   @override
   List<String> get inactiveXAxis {
-    if (_inactiveXAxis is EqualUnmodifiableListView) return _inactiveXAxis;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_inactiveXAxis);
   }
@@ -325,7 +322,6 @@ class _$_ClientReportState implements _ClientReportState {
   final List<String> _inactiveYAxis;
   @override
   List<String> get inactiveYAxis {
-    if (_inactiveYAxis is EqualUnmodifiableListView) return _inactiveYAxis;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_inactiveYAxis);
   }

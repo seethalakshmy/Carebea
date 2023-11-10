@@ -288,7 +288,7 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
       items: [
         AppString.all.val,
         AppString.neww.val,
-        AppString.onGoing.val,
+        AppString.processing.val,
         AppString.closed.val,
         AppString.canceled.val
       ]
