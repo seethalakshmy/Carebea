@@ -30,6 +30,7 @@ import '../widget/custom_text.dart';
 import '../widget/custom_text_field.dart';
 import '../widget/empty_view.dart';
 import '../widget/error_view.dart';
+import '../widget/loader_view.dart';
 import '../widget/pagination_view.dart';
 import '../widget/table_loader_view.dart';
 
@@ -407,14 +408,14 @@ class _ServiceRequestManagementPageState
                 DataColumn2(
                   fixedWidth: DBL.twoHundred.val,
                   label: _columnsView(
-                      text: AppString.decisionMakerName.val,
+                      text: AppString.clientName.val,
                       fontWeight: FontWeight.bold),
                 ),
                 DataColumn2(
                   size: ColumnSize.L,
                   fixedWidth: DBL.twoHundred.val,
                   label: _columnsView(
-                      text: AppString.clientName.val,
+                      text: AppString.careRecipientName.val,
                       fontWeight: FontWeight.bold),
                 ),
                 DataColumn2(
@@ -480,14 +481,16 @@ class _ServiceRequestManagementPageState
                   .asMap()
                   .entries
                   .map((e) {
+                setIndex(e.key);
+
                 var item = e.value;
                 return DataRow2(
                   onTap: () {
-                    _getServiceDetails(item);
+                    _getServiceDetails(item, state);
                   },
                   cells: [
                     DataCell(_rowsView(
-                      text: (e.key + 1).toString(),
+                      text: pageIndex.toString(),
                     )),
                     DataCell(_rowsView(
                       text: item.serviceId.toString(),
@@ -510,13 +513,13 @@ class _ServiceRequestManagementPageState
                           .generateFormattedDate(item.endDate ?? ""),
                     )),
                     DataCell(_rowsView(
-                      text: item.serviceFee.toString(),
+                      text: '\$ ${item.serviceFee}',
                     )),
                     if (_serviceRequestBloc.statusFilterId == 0 ||
                         _serviceRequestBloc.statusFilterId == 6)
                       DataCell(_rowsView(
                         text: item.refundStatus != null
-                            ? item.refundStatus.toString()
+                            ? '\$ ${item.refundStatus}'
                             : "-",
                       )),
                     if (_serviceRequestBloc.statusFilterId == 0 ||
@@ -531,7 +534,7 @@ class _ServiceRequestManagementPageState
                     DataCell(InkWell(
                         onTap: () {
                           //autoTabRouter?.navigate(ServiceDetailsRoute(id: item.id));
-                          _getServiceDetails(item);
+                          _getServiceDetails(item, state);
                         },
                         child: CustomSvg(
                           path: IMG.eye.val,
@@ -545,12 +548,24 @@ class _ServiceRequestManagementPageState
           );
   }
 
-  void _getServiceDetails(ServiceRequests item) {
+  setIndex(int index) {
+    if (_page == 1) {
+      pageIndex = index + 1;
+    } else {
+      pageIndex = ((_page * _limit) - 10) + index + 1;
+    }
+  }
+
+  void _getServiceDetails(
+      ServiceRequests item, ServiceRequestManagementState state) {
     _serviceRequestBloc.add(ServiceRequestManagementEvent.getServiceDetails(
         context: context, serviceId: item.id ?? ""));
+    debugPrint('hell${state.isDetailsLoading}');
+
     showDialog(
         context: context,
         builder: (BuildContext context) {
+          debugPrint('checking service status ${item.serviceStatus}');
           return CustomAlertDialogWidget(
             heading: "${item.serviceStatus} Service Request",
             child: ServiceDetailsAlert(
@@ -586,6 +601,7 @@ class _ServiceRequestManagementPageState
       child: CustomText(
         '$text',
         softWrap: true,
+        overflow: TextOverflow.ellipsis,
         style: TS().gRoboto(
             fontSize: Responsive.isWeb(context)
                 ? DBL.thirteenPointFive.val

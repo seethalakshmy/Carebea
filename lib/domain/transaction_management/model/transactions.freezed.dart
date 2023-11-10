@@ -30,6 +30,7 @@ mixin _$Transactions {
   String? get transactionIdPublic => throw _privateConstructorUsedError;
   @JsonKey(name: "transaction_type")
   String? get transactionType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'date_time')
   String? get dateTime => throw _privateConstructorUsedError;
   @JsonKey(name: "paid_to")
   String? get paidTo => throw _privateConstructorUsedError;
@@ -62,7 +63,7 @@ abstract class $TransactionsCopyWith<$Res> {
       @JsonKey(name: "transaction_id") String? transactionId,
       @JsonKey(name: "transactionId") String? transactionIdPublic,
       @JsonKey(name: "transaction_type") String? transactionType,
-      String? dateTime,
+      @JsonKey(name: 'date_time') String? dateTime,
       @JsonKey(name: "paid_to") String? paidTo,
       @JsonKey(name: "recieved_from") String? receivedFrom,
       @JsonKey(name: "paid_for") String? paidFor,
@@ -209,7 +210,7 @@ abstract class _$$_TransactionsCopyWith<$Res>
       @JsonKey(name: "transaction_id") String? transactionId,
       @JsonKey(name: "transactionId") String? transactionIdPublic,
       @JsonKey(name: "transaction_type") String? transactionType,
-      String? dateTime,
+      @JsonKey(name: 'date_time') String? dateTime,
       @JsonKey(name: "paid_to") String? paidTo,
       @JsonKey(name: "recieved_from") String? receivedFrom,
       @JsonKey(name: "paid_for") String? paidFor,
@@ -328,7 +329,7 @@ class _$_Transactions implements _Transactions {
       @JsonKey(name: "transaction_id") this.transactionId,
       @JsonKey(name: "transactionId") this.transactionIdPublic,
       @JsonKey(name: "transaction_type") this.transactionType,
-      this.dateTime,
+      @JsonKey(name: 'date_time') this.dateTime,
       @JsonKey(name: "paid_to") this.paidTo,
       @JsonKey(name: "recieved_from") this.receivedFrom,
       @JsonKey(name: "paid_for") this.paidFor,
@@ -358,6 +359,7 @@ class _$_Transactions implements _Transactions {
   @JsonKey(name: "transaction_type")
   final String? transactionType;
   @override
+  @JsonKey(name: 'date_time')
   final String? dateTime;
   @override
   @JsonKey(name: "paid_to")
@@ -457,7 +459,7 @@ abstract class _Transactions implements Transactions {
       @JsonKey(name: "transaction_id") final String? transactionId,
       @JsonKey(name: "transactionId") final String? transactionIdPublic,
       @JsonKey(name: "transaction_type") final String? transactionType,
-      final String? dateTime,
+      @JsonKey(name: 'date_time') final String? dateTime,
       @JsonKey(name: "paid_to") final String? paidTo,
       @JsonKey(name: "recieved_from") final String? receivedFrom,
       @JsonKey(name: "paid_for") final String? paidFor,
@@ -487,6 +489,7 @@ abstract class _Transactions implements Transactions {
   @JsonKey(name: "transaction_type")
   String? get transactionType;
   @override
+  @JsonKey(name: 'date_time')
   String? get dateTime;
   @override
   @JsonKey(name: "paid_to")

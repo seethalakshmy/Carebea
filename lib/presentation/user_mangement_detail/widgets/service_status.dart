@@ -16,22 +16,29 @@ class ClientStatusWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return serviceStatus == 3
+    return serviceStatus == 3 || serviceStatus == 10
         ? Row(
             children: [
-              Container(
-                height: 10,
-                width: 10,
-                decoration: BoxDecoration(
-                    color: AppColor.darkGreen.val,
-                    borderRadius: BorderRadius.circular(5)),
-              ),
-              SizedBox(
+              serviceStatus == 3
+                  ? Container(
+                      height: 10,
+                      width: 10,
+                      decoration: BoxDecoration(
+                          color: AppColor.darkGreen.val,
+                          borderRadius: BorderRadius.circular(5)),
+                    )
+                  : const SizedBox.shrink(),
+              const SizedBox(
                 width: 5,
               ),
-              Text(
-                'Ongoing',
-                style: TextStyle(color: AppColor.darkGreen.val),
+              Flexible(
+                child: Text(
+                  serviceStatus == 3 ? 'Ongoing' : AppString.notAttempted.val,
+                  style: TextStyle(
+                      color: serviceStatus == 3
+                          ? AppColor.darkGreen.val
+                          : AppColor.red.val),
+                ),
               ),
             ],
           )
@@ -56,7 +63,7 @@ class ClientStatusWidget extends StatelessWidget {
                     serviceStatus == 5
                         ? 'Completed'
                         : serviceStatus == 6
-                            ? 'Cancelled'
+                            ? 'Canceled'
                             : serviceStatus == 2
                                 ? 'Upcoming'
                                 : '',

@@ -19,7 +19,9 @@ import '../../core/text_styles.dart';
 import '../../infrastructure/api_service_s3.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../on_boarding/modules/personal_details/widgets/mobile_number_formatter.dart';
+import '../on_boarding/modules/personal_details/widgets/profile_picture_widget.dart';
 import '../side_menu/side_menu_page.dart';
+import '../widget/cached_image.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_dropdown.dart';
@@ -238,23 +240,29 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
       children: [
         _adminCreationBloc.state.isLoading
             ? const CustomShimmerWidget.circular(height: 150, width: 150)
-            : AdminProfilePictureWidget(
-                adminCreationBloc: _adminCreationBloc,
-                size: Responsive.isWeb(context) ? 180 : 140,
-              ),
+            : !_isView!
+                ? AdminProfilePictureWidget(
+                    adminCreationBloc: _adminCreationBloc,
+                    size: Responsive.isWeb(context) ? 180 : 140,
+                  )
+                : CachedImage(
+                    imgUrl: state.viewResponse?.data?.profile,
+                  ),
         CustomSizedBox(height: DBL.six.val),
         state.isLoading
             ? CustomShimmerWidget.rectangular(
                 height: DBL.twenty.val, width: DBL.twoHundred.val)
-            : Center(
-                child: CustomText(
-                  AppString.uploadYourProfilePhoto.val,
-                  style: TS().gRoboto(
-                      fontSize: FS.font14.val,
-                      fontWeight: FW.w400.val,
-                      color: AppColor.darkGrey.val),
-                ),
-              ),
+            : !_isView!
+                ? Center(
+                    child: CustomText(
+                      AppString.uploadYourProfilePhoto.val,
+                      style: TS().gRoboto(
+                          fontSize: FS.font14.val,
+                          fontWeight: FW.w400.val,
+                          color: AppColor.darkGrey.val),
+                    ),
+                  )
+                : const SizedBox.shrink(),
       ],
     );
   }
@@ -266,6 +274,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
         folderName: folderName,
         userId: userId,
         context: context);
+    debugPrint('path${_adminCreationBloc.profileUrl + folderName}');
   }
 
   _createAdminView(AdminCreationState state) {

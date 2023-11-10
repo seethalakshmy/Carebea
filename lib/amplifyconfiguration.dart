@@ -47,7 +47,7 @@ const amplifyconfig = ''' {
                 },
                 "S3TransferUtility": {
                     "Default": {
-                        "Bucket": "amagicareambassabor185017-dev",
+                        "Bucket": "webadmin",
                         "Region": "us-east-1"
                     }
                 }
@@ -57,7 +57,7 @@ const amplifyconfig = ''' {
     "storage": {
         "plugins": {
             "awsS3StoragePlugin": {
-                "bucket": "amagicareambassabor185017-dev",
+                "bucket": "webadmin",
                 "region": "us-east-1",
                 "defaultAccessLevel": "guest"
             }

@@ -20,8 +20,16 @@ class PageBloc extends Bloc<PageEvent, PageState> {
   PageRepo pageRepo;
   List<PageData> pageList = [];
   final TextEditingController titleController = TextEditingController();
+  int radioValue = 0;
 
-  PageBloc(this.pageRepo) : super(PageState.initial()) {
+  PageBloc(this.pageRepo)
+      : super(PageState.initial(
+            radioValue: 0,
+            isLoading: false,
+            getPagesResponse: null,
+            isError: false,
+            isForClient: 0,
+            response: null)) {
     on<_CreatePage>(_createPage);
     on<_GetPages>(_getPages);
     on<_RadioForClient>(_radioForClient);
@@ -30,7 +38,13 @@ class PageBloc extends Bloc<PageEvent, PageState> {
   }
 
   _createPage(_CreatePage event, Emitter<PageState> emit) async {
-    emit(state.copyWith(isLoading: true));
+    emit(PageState.initial(
+        radioValue: 0,
+        isLoading: true,
+        getPagesResponse: null,
+        isError: false,
+        isForClient: 0,
+        response: null));
     final Either<ApiErrorHandler, CommonResponse> result =
         await pageRepo.createPage(
             title: event.title,
@@ -38,10 +52,13 @@ class PageBloc extends Bloc<PageEvent, PageState> {
             pageFor: event.pageFor ?? '');
     PageState pageState = result.fold((l) {
       CSnackBar.showError(event.context!, msg: l.error ?? "");
-      return state.copyWith(
-        isLoading: false,
-        isError: true,
-      );
+      return PageState.initial(
+          radioValue: radioValue,
+          isLoading: false,
+          getPagesResponse: null,
+          isError: true,
+          isForClient: 0,
+          response: null);
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context!, msg: r.message ?? "");
@@ -49,10 +66,13 @@ class PageBloc extends Bloc<PageEvent, PageState> {
       } else {
         CSnackBar.showError(event.context!, msg: r.message ?? "");
       }
-      return state.copyWith(
-        response: r,
-        isLoading: false,
-      );
+      return PageState.initial(
+          radioValue: radioValue,
+          isLoading: false,
+          getPagesResponse: null,
+          isError: true,
+          isForClient: 0,
+          response: r);
     });
     emit(
       pageState,
@@ -63,17 +83,24 @@ class PageBloc extends Bloc<PageEvent, PageState> {
     final Either<ApiErrorHandler, GetPagesResponse> homeResult =
         await pageRepo.getPages();
     PageState homeState = homeResult.fold((l) {
-      return state.copyWith(
-        isLoading: false,
-        isError: true,
-      );
+      return PageState.initial(
+          radioValue: radioValue,
+          isLoading: false,
+          getPagesResponse: null,
+          isError: true,
+          isForClient: 0,
+          response: null);
     }, (r) {
       pageList.clear();
       pageList.addAll(r.data!);
-      return state.copyWith(
-        getPagesResponse: r,
-        isLoading: false,
-      );
+
+      return PageState.initial(
+          radioValue: radioValue,
+          isLoading: false,
+          getPagesResponse: r,
+          isError: false,
+          isForClient: 0,
+          response: null);
     });
     emit(
       homeState,
@@ -81,11 +108,21 @@ class PageBloc extends Bloc<PageEvent, PageState> {
   }
 
   _radioForClient(_RadioForClient event, Emitter<PageState> emit) {
-    emit(state.copyWith(isForClient: event.isSelected!));
+    emit(PageState.loading());
+    radioValue = event.isSelected != null ? event.isSelected! : radioValue;
+
+    emit(PageState.initial(
+        radioValue: radioValue,
+        isLoading: false,
+        getPagesResponse: null,
+        isError: false,
+        isForClient: 0,
+        response: null));
   }
 
   _updatePage(_UpdatePage event, Emitter<PageState> emit) async {
-    emit(state.copyWith(isLoading: true));
+    emit(PageState.loading());
+
     final Either<ApiErrorHandler, CommonResponse> result =
         await pageRepo.updatePage(
             userId: event.userId,
@@ -94,22 +131,33 @@ class PageBloc extends Bloc<PageEvent, PageState> {
             description: event.description,
             pageFor: event.pageFor ?? ' ');
     PageState pageState = result.fold((l) {
-      CSnackBar.showError(event.context!, msg: l.error ?? "");
-      return state.copyWith(
-        isLoading: false,
-        isError: true,
-      );
+      CSnackBar.showError(event.context, msg: l.error ?? "");
+      return PageState.initial(
+          radioValue: radioValue,
+          isLoading: false,
+          getPagesResponse: null,
+          isError: true,
+          isForClient: 0,
+          response: null);
+
+      // return state.copyWith(
+      //     isLoading: false, isError: true, radioValue: radioValue);
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context!, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
         autoTabRouter?.setActiveIndex(24);
       } else {
-        CSnackBar.showError(event.context!, msg: r.message ?? "");
+        CSnackBar.showError(event.context, msg: r.message ?? "");
       }
-      return state.copyWith(
-        response: r,
-        isLoading: false,
-      );
+      // return state.copyWith(
+      //     response: r, isLoading: false, radioValue: radioValue);
+      return PageState.initial(
+          radioValue: radioValue,
+          isLoading: false,
+          getPagesResponse: null,
+          isError: true,
+          isForClient: 0,
+          response: r);
     });
     emit(
       pageState,
@@ -117,17 +165,25 @@ class PageBloc extends Bloc<PageEvent, PageState> {
   }
 
   _deletePage(_DeletePage event, Emitter<PageState> emit) async {
-    emit(state.copyWith(isLoading: true));
+    emit(PageState.loading());
+
+    // emit(state.copyWith(isLoading: true));
     final Either<ApiErrorHandler, CommonResponse> result =
         await pageRepo.deletePage(
       id: event.id,
     );
     PageState pageState = result.fold((l) {
       CSnackBar.showError(event.context, msg: l.error ?? "");
-      return state.copyWith(
-        isLoading: false,
-        isError: true,
-      );
+      return PageState.initial(
+          radioValue: radioValue,
+          isLoading: false,
+          getPagesResponse: null,
+          isError: true,
+          isForClient: 0,
+          response: null);
+
+      // return state.copyWith(
+      //     isLoading: false, isError: true, radioValue: radioValue);
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
@@ -135,10 +191,15 @@ class PageBloc extends Bloc<PageEvent, PageState> {
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
-      return state.copyWith(
-        response: r,
-        isLoading: false,
-      );
+      // return state.copyWith(
+      //     response: r, isLoading: false, radioValue: radioValue);
+      return PageState.initial(
+          radioValue: radioValue,
+          isLoading: false,
+          getPagesResponse: null,
+          isError: true,
+          isForClient: 0,
+          response: r);
     });
     emit(
       pageState,

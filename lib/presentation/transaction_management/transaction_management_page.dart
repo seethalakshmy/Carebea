@@ -1,6 +1,3 @@
-import 'package:admin_580_tech/infrastructure/transaction_management/transactions_repository.dart';
-import 'package:admin_580_tech/presentation/transaction_management/widgets/custom_status_widget.dart';
-import 'package:admin_580_tech/presentation/transaction_management/widgets/transaction_details_alert.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +13,7 @@ import '../../core/text_styles.dart';
 import '../../domain/transaction_management/model/transaction_list_response.dart';
 import '../../domain/transaction_management/model/transactions.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../../infrastructure/transaction_management/transactions_repository.dart';
 import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/custom_button.dart';
 import '../widget/custom_card.dart';
@@ -33,6 +31,8 @@ import '../widget/header_view.dart';
 import '../widget/loader_view.dart';
 import '../widget/pagination_view.dart';
 import '../widget/table_actions_view.dart';
+import 'widgets/custom_status_widget.dart';
+import 'widgets/transaction_details_alert.dart';
 
 @RoutePage()
 class TransactionManagementPage extends StatefulWidget {
@@ -166,12 +166,12 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                             text: AppString.transactionId.val,
                           ),
                         ),
-                        DataColumn2(
-                          size: ColumnSize.L,
-                          label: _columnsView(
-                            text: AppString.serviceId.val,
-                          ),
-                        ),
+                        // DataColumn2(
+                        //   size: ColumnSize.L,
+                        //   label: _columnsView(
+                        //     text: AppString.serviceId.val,
+                        //   ),
+                        // ),
                         DataColumn2(
                           size: ColumnSize.L,
                           // fixedWidth: 500,
@@ -291,30 +291,36 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                       _clearAllFiltersButtonWidget(),
                     ],
                   ),
-                  CTextField(
-                    onChanged: (val) {
-                      print("searched value : $val");
-                      _transactionBloc.searchQuery = val;
-                      _transactionBloc.add(
-                          TransactionManagementEvent.getTransactions(
-                              page: "1",
-                              limit: _transactionBloc.limit,
-                              filterId: _transactionBloc.filterId,
-                              searchTerm: val,
-                              userId: adminId ?? ''));
-                    },
-                    width: Responsive.isWeb(context)
-                        ? DBL.threeFifteen.val
-                        : DBL.twoForty.val,
-                    height: DBL.forty.val,
-                    controller: _searchController,
-                    hintText: AppString.search.val,
-                    hintStyle: TS().gRoboto(
-                        fontSize: FS.font15.val, fontWeight: FW.w500.val),
-                    suffixIcon: CustomSvg(
-                      path: IMG.search.val,
-                      height: 16,
-                      width: 16,
+                  Flexible(
+                    flex: 2,
+                    child: CTextField(
+                      onSubmitted: (val) {
+                        _transactionBloc.searchQuery = val;
+
+                        _transactionBloc.add(
+                            TransactionManagementEvent.getTransactions(
+                                page: "1",
+                                limit: _transactionBloc.limit,
+                                filterId: _transactionBloc.filterId,
+                                searchTerm: val,
+                                userId: adminId ?? ''));
+                      },
+                      onChanged: (val) {
+                        print("searched value : $val");
+                      },
+                      width: Responsive.isWeb(context)
+                          ? DBL.threeFifteen.val
+                          : DBL.twoForty.val,
+                      height: DBL.forty.val,
+                      controller: _searchController,
+                      hintText: AppString.search.val,
+                      hintStyle: TS().gRoboto(
+                          fontSize: FS.font15.val, fontWeight: FW.w500.val),
+                      suffixIcon: CustomSvg(
+                        path: IMG.search.val,
+                        height: 16,
+                        width: 16,
+                      ),
                     ),
                   ),
                 ],
@@ -393,13 +399,13 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
             label: _columnsView(
                 text: AppString.transactionId.val, fontWeight: FontWeight.bold),
           ),
-          DataColumn2(
-            fixedWidth: Responsive.isWeb(context)
-                ? MediaQuery.of(context).size.width * .08
-                : 130,
-            label: _columnsView(
-                text: AppString.serviceId.val, fontWeight: FontWeight.bold),
-          ),
+          // DataColumn2(
+          //   fixedWidth: Responsive.isWeb(context)
+          //       ? MediaQuery.of(context).size.width * .08
+          //       : 130,
+          //   label: _columnsView(
+          //       text: AppString.serviceId.val, fontWeight: FontWeight.bold),
+          // ),
           DataColumn2(
             fixedWidth: Responsive.isWeb(context)
                 ? MediaQuery.of(context).size.width * .08
@@ -450,7 +456,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
           setIndex(e.key);
           var item = e.value;
           return DataRow2(
-            onTap: (){
+            onTap: () {
               _transactionDetails(item);
             },
             cells: [
@@ -460,14 +466,14 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
               DataCell(_rowsView(
                 text: item.transactionIdPublic.toString(),
               )),
-              DataCell(_rowsView(text: item.serviceIdPublic.toString())),
+              // DataCell(_rowsView(text: item.serviceIdPublic.toString())),
               DataCell(_rowsView(text: item.transactionType)),
               DataCell(_rowsView(text: item.paidFor)),
               DataCell(_rowsView(text: item.paidTo)),
               DataCell(_rowsView(text: item.receivedFrom)),
               DataCell(_rowsView(text: item.amount)),
               DataCell(_rowsView(
-                  text: _transactionBloc.formatDate(
+                  text: _transactionBloc.formatDateToMonthName(
                       item.dateTime ?? "0000-00-00T00:00:00.000Z"))),
               DataCell(_statusBox(item)),
               DataCell(TableActions(
@@ -562,6 +568,8 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
   }
 
   _transactionDetails(Transactions item) {
+    debugPrint('service id on demand ${item.serviceId}');
+    debugPrint('transaction id on demand ${item.transactionId}');
     _transactionBloc.add(TransactionManagementEvent.getTransactionDetails(
         transactionId: item.transactionId ?? "",
         serviceId: item.serviceId ?? ''));

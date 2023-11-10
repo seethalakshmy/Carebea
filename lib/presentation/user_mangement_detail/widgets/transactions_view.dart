@@ -2,7 +2,6 @@ import 'package:admin_580_tech/application/bloc/transaction_management/transacti
 import 'package:admin_580_tech/application/bloc/user_management_detail/user_management_detail_bloc.dart';
 import 'package:admin_580_tech/domain/user_management_detail/model/user_detail_response.dart';
 import 'package:admin_580_tech/infrastructure/transaction_management/transactions_repository.dart';
-import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_status.dart';
 import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,6 @@ import '../../../core/enum.dart';
 import '../../../core/responsive.dart';
 import '../../../core/text_styles.dart';
 import '../../../core/utility.dart';
-import '../../service_request_management/widgets/status_widget.dart';
 import '../../transaction_management/widgets/custom_status_widget.dart';
 import '../../transaction_management/widgets/transaction_details_alert.dart';
 import '../../widget/cached_image.dart';
@@ -84,21 +82,20 @@ class TransactionView extends StatelessWidget {
             label: _columnsView(context,
                 text: AppString.slNo.val, fontWeight: FontWeight.bold),
           ),
-          // DataColumn2(
-          //   size: ColumnSize.S,
-          //   fixedWidth: 80,
-          //   label: _columnsView(context,
-          //       text: AppString.id.val, fontWeight: FontWeight.bold),
-          // ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
-                text: AppString.client.val, fontWeight: FontWeight.bold),
+                text: AppString.transactionId.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
                 text: AppString.serviceId.val, fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.client.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.L,
@@ -109,7 +106,7 @@ class TransactionView extends StatelessWidget {
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
-                text: AppString.dateTime.val, fontWeight: FontWeight.bold),
+                text: AppString.paidFor.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.L,
@@ -119,12 +116,12 @@ class TransactionView extends StatelessWidget {
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
-                text: AppString.paidFor.val, fontWeight: FontWeight.bold),
+                text: AppString.paidTo.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
-                text: AppString.transactionId.val, fontWeight: FontWeight.bold),
+                text: AppString.dateTime.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.L,
@@ -140,6 +137,12 @@ class TransactionView extends StatelessWidget {
           getIndex(e.key);
           var item = e.value;
           return DataRow2(
+            onTap: () {
+              _transactionDetails(
+                  serviceId: item.serviceId ?? '',
+                  transactionId: item.transactionId ?? '',
+                  context: context);
+            },
             cells: [
               DataCell(_rowsView(
                 context,
@@ -149,18 +152,21 @@ class TransactionView extends StatelessWidget {
               //   context,
               //   text: item.id.toString(),
               // )),
+              DataCell(_rowsView(context, text: item.uniqueTransactionId)),
+              DataCell(_rowsView(context, text: item.uniqueServiceId)),
+
               DataCell(_rowsView(context, text: item.client)),
-              DataCell(_rowsView(context, text: item.serviceId)),
               DataCell(_rowsView(context, text: item.transactionType)),
+              DataCell(_rowsView(context, text: '')),
+              DataCell(_rowsView(context, text: item.amount)),
+              DataCell(_rowsView(context, text: item.paidFor)),
+
               DataCell(_rowsView(
                 context,
                 text: Utility.serviceDate(
                     DateTime.tryParse(item.dateTime ?? "")?.toLocal() ??
                         DateTime.now().toLocal()),
               )),
-              DataCell(_rowsView(context, text: item.amount)),
-              DataCell(_rowsView(context, text: item.paidFor)),
-              DataCell(_rowsView(context, text: item.transactionId)),
               DataCell(_statusBox(item.status)),
               DataCell(InkWell(
                   onTap: () {

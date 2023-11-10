@@ -27,6 +27,9 @@ mixin _$SelectedAddress {
   String? get stateIso => throw _privateConstructorUsedError;
   String? get route => throw _privateConstructorUsedError;
   String? get country => throw _privateConstructorUsedError;
+  num? get latitude => throw _privateConstructorUsedError;
+  num? get longitude => throw _privateConstructorUsedError;
+  String? get locationTag => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,7 +50,10 @@ abstract class $SelectedAddressCopyWith<$Res> {
       String? stateName,
       String? stateIso,
       String? route,
-      String? country});
+      String? country,
+      num? latitude,
+      num? longitude,
+      String? locationTag});
 }
 
 /// @nodoc
@@ -70,6 +76,9 @@ class _$SelectedAddressCopyWithImpl<$Res, $Val extends SelectedAddress>
     Object? stateIso = freezed,
     Object? route = freezed,
     Object? country = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
+    Object? locationTag = freezed,
   }) {
     return _then(_value.copyWith(
       zipCode: freezed == zipCode
@@ -100,6 +109,18 @@ class _$SelectedAddressCopyWithImpl<$Res, $Val extends SelectedAddress>
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String?,
+      latitude: freezed == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as num?,
+      longitude: freezed == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as num?,
+      locationTag: freezed == locationTag
+          ? _value.locationTag
+          : locationTag // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -119,7 +140,10 @@ abstract class _$$_SelectedAddressCopyWith<$Res>
       String? stateName,
       String? stateIso,
       String? route,
-      String? country});
+      String? country,
+      num? latitude,
+      num? longitude,
+      String? locationTag});
 }
 
 /// @nodoc
@@ -140,6 +164,9 @@ class __$$_SelectedAddressCopyWithImpl<$Res>
     Object? stateIso = freezed,
     Object? route = freezed,
     Object? country = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
+    Object? locationTag = freezed,
   }) {
     return _then(_$_SelectedAddress(
       zipCode: freezed == zipCode
@@ -170,6 +197,18 @@ class __$$_SelectedAddressCopyWithImpl<$Res>
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String?,
+      latitude: freezed == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as num?,
+      longitude: freezed == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as num?,
+      locationTag: freezed == locationTag
+          ? _value.locationTag
+          : locationTag // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -185,7 +224,10 @@ class _$_SelectedAddress implements _SelectedAddress {
       this.stateName,
       this.stateIso,
       this.route,
-      this.country});
+      this.country,
+      this.latitude,
+      this.longitude,
+      this.locationTag});
 
   factory _$_SelectedAddress.fromJson(Map<String, dynamic> json) =>
       _$$_SelectedAddressFromJson(json);
@@ -204,10 +246,16 @@ class _$_SelectedAddress implements _SelectedAddress {
   final String? route;
   @override
   final String? country;
+  @override
+  final num? latitude;
+  @override
+  final num? longitude;
+  @override
+  final String? locationTag;
 
   @override
   String toString() {
-    return 'SelectedAddress(zipCode: $zipCode, locality: $locality, streetNumber: $streetNumber, stateName: $stateName, stateIso: $stateIso, route: $route, country: $country)';
+    return 'SelectedAddress(zipCode: $zipCode, locality: $locality, streetNumber: $streetNumber, stateName: $stateName, stateIso: $stateIso, route: $route, country: $country, latitude: $latitude, longitude: $longitude, locationTag: $locationTag)';
   }
 
   @override
@@ -225,13 +273,19 @@ class _$_SelectedAddress implements _SelectedAddress {
             (identical(other.stateIso, stateIso) ||
                 other.stateIso == stateIso) &&
             (identical(other.route, route) || other.route == route) &&
-            (identical(other.country, country) || other.country == country));
+            (identical(other.country, country) || other.country == country) &&
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude) &&
+            (identical(other.locationTag, locationTag) ||
+                other.locationTag == locationTag));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, zipCode, locality, streetNumber,
-      stateName, stateIso, route, country);
+      stateName, stateIso, route, country, latitude, longitude, locationTag);
 
   @JsonKey(ignore: true)
   @override
@@ -255,7 +309,10 @@ abstract class _SelectedAddress implements SelectedAddress {
       final String? stateName,
       final String? stateIso,
       final String? route,
-      final String? country}) = _$_SelectedAddress;
+      final String? country,
+      final num? latitude,
+      final num? longitude,
+      final String? locationTag}) = _$_SelectedAddress;
 
   factory _SelectedAddress.fromJson(Map<String, dynamic> json) =
       _$_SelectedAddress.fromJson;
@@ -274,6 +331,12 @@ abstract class _SelectedAddress implements SelectedAddress {
   String? get route;
   @override
   String? get country;
+  @override
+  num? get latitude;
+  @override
+  num? get longitude;
+  @override
+  String? get locationTag;
   @override
   @JsonKey(ignore: true)
   _$$_SelectedAddressCopyWith<_$_SelectedAddress> get copyWith =>

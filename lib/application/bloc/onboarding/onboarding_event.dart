@@ -18,7 +18,8 @@ class OnboardingEvent with _$OnboardingEvent {
       required String documentNo,
       required String expiryDate,
       required List<String> documentList,
-      required String profilePic}) = _GetPersonalDetails;
+      required String profilePic,
+      required String locationTag}) = _GetPersonalDetails;
 
   const factory OnboardingEvent.qualificationDetails({
     required String userId,
@@ -148,6 +149,6 @@ class OnboardingEvent with _$OnboardingEvent {
     required String accountNumber,
   }) = _SubmitAccountDetails;
 
-  const factory OnboardingEvent.selectAllServices({required bool isAllSelected}) =
-  _SelectAllServices;
+  const factory OnboardingEvent.selectAllServices(
+      {required bool isAllSelected}) = _SelectAllServices;
 }

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -55,6 +56,7 @@ class AddressSelectionWidget extends StatelessWidget {
             String? stateIsoCode;
             String? route;
             String? country;
+            print(result.address);
 
             for (var i in result.components) {
               if (i.types.first == "postal_code") {
@@ -95,7 +97,10 @@ class AddressSelectionWidget extends StatelessWidget {
                 stateIso: stateIsoCode,
                 stateName: stateName,
                 streetNumber: streetNumber,
-                zipCode: zipCode);
+                zipCode: zipCode,
+                latitude: result.latlng.latitude,
+                longitude: result.latlng.longitude,
+                locationTag: result.address);
             onAddressSelect(selectedAddress);
           },
           child: Container(
@@ -108,7 +113,7 @@ class AddressSelectionWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4)),
             child: Row(
               children: [
-                Expanded(child: CustomText(address)),
+                Flexible(flex: 1, child: CustomText(address)),
                 CommonImageView(
                   svgPath: IMG.addressSelectionIcon.val,
                 )

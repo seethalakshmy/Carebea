@@ -40,6 +40,9 @@ import 'infrastructure/signup/signup_repository.dart';
 import 'presentation/routes/app_router.dart';
 import 'presentation/widget/loader_view.dart';
 
+final serviceRequestManagementBloc =
+    ServiceRequestManagementBloc(ServiceRequestManagementRepository());
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //usePathUrlStrategy();
@@ -91,8 +94,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (_) => MasterBloc(MasterRepository())),
         BlocProvider(create: (_) => PageBloc(PageRepo())),
         BlocProvider<ServiceRequestManagementBloc>(
-            create: (context) => ServiceRequestManagementBloc(
-                ServiceRequestManagementRepository())),
+            create: (context) => serviceRequestManagementBloc),
         BlocProvider<CareGiverProfileBloc>(
             create: (context) =>
                 CareGiverProfileBloc(CareGiverProfileRepository())),

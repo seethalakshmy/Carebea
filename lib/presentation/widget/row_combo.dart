@@ -78,7 +78,7 @@ class RowColonCombo extends StatelessWidget {
       this.needUnderLine = false,
       this.hasColon = true,
       this.tierOneServiceList,
-        this.valueFlex,
+      this.valueFlex,
       this.tierTwoServiceList})
       : width = DBL.threeEighty.val;
 
@@ -97,13 +97,14 @@ class RowColonCombo extends StatelessWidget {
       this.needUnderLine = false,
       this.hasColon = true,
       this.tierOneServiceList,
-        this.valueFlex,
+      this.valueFlex,
       this.tierTwoServiceList})
       : width = DBL.threeSeventeen.val;
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AlertTextLabel(
@@ -125,7 +126,7 @@ class RowColonCombo extends StatelessWidget {
               )
             : const SizedBox.shrink(),
         Flexible(
-          flex: valueFlex??2,
+          flex: valueFlex ?? 2,
           child: InkWell(
             onTap: onValueTap,
             child: AlertTextLabel(
@@ -141,11 +142,18 @@ class RowColonCombo extends StatelessWidget {
           child: Wrap(
             children: list
                     ?.map(
-                      (e) => AlertTextLabel(
-                        e,
-                        color: color,
-                        fontWeight: fontWeight,
-                        fontSize: fontSize,
+                      (e) => Wrap(
+                        children: [
+                          AlertTextLabel(
+                            e,
+                            color: color,
+                            fontWeight: fontWeight,
+                            fontSize: fontSize,
+                          ),
+                          SizedBox(
+                            width: 20,
+                          )
+                        ],
                       ),
                     )
                     .toList() ??

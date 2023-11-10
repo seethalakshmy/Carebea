@@ -92,6 +92,7 @@ class TransactionDetailsData {
     Status? status,
   }) {
     _serviceId = serviceId;
+
     _transactionType = transactionType;
     _dateTime = dateTime;
     _paidTo = paidTo;
@@ -108,6 +109,7 @@ class TransactionDetailsData {
 
   TransactionDetailsData.fromJson(dynamic json) {
     _serviceId = json['serviceId'];
+
     _transactionType = json['transaction_type'];
     _dateTime = json['date_time'];
     _paidTo = json['paid_to'];
@@ -122,6 +124,7 @@ class TransactionDetailsData {
     _status = json['status'] != null ? Status.fromJson(json['status']) : null;
   }
   String? _serviceId;
+
   String? _transactionType;
   String? _dateTime;
   String? _paidTo;
@@ -165,6 +168,7 @@ class TransactionDetailsData {
         status: status ?? _status,
       );
   String? get serviceId => _serviceId;
+
   String? get transactionType => _transactionType;
   String? get dateTime => _dateTime;
   String? get paidTo => _paidTo;
@@ -181,6 +185,7 @@ class TransactionDetailsData {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['serviceId'] = _serviceId;
+
     map['transaction_type'] = _transactionType;
     map['date_time'] = _dateTime;
     map['paid_to'] = _paidTo;

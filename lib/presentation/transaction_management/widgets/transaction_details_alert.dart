@@ -105,7 +105,7 @@ class TransactionDetailsAlert extends StatelessWidget {
 
   Widget _detailsWidget(BuildContext context) {
     return Container(
-      width: 400,
+      // width: 400,
       color: AppColor.white.val,
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -172,7 +172,7 @@ class TransactionDetailsAlert extends StatelessWidget {
 
   Widget _refundDetailsWidget(BuildContext context) {
     return CustomContainer(
-      width: 300,
+      // width: 300,
       padding: const EdgeInsets.all(20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

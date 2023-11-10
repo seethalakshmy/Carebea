@@ -53,6 +53,7 @@ class ServiceRewardAndCompletion extends StatelessWidget {
         ),
         CustomText(
           subTitle,
+          textAlign: TextAlign.center,
           style: TS().gInter(
               fontWeight: FW.w400.val,
               fontSize: getFontSize(context, fontSize: FS.font14.val),
@@ -86,7 +87,7 @@ class ServiceRewardAndCompletion extends StatelessWidget {
               width: DBL.five.val,
             ),
             CustomText(
-             "($subTitle)",
+              "($subTitle)",
               style: TS().gInter(
                   fontWeight: FW.w400.val,
                   fontSize: getFontSize(context, fontSize: FS.font14.val),

@@ -1,7 +1,6 @@
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/presentation/widget/commonImageview.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../application/bloc/sub_profile_details/sub_profile_details_bloc.dart';
@@ -22,7 +21,7 @@ class SubProfileHealthProfile extends StatelessWidget {
         children: [
           ExpansionTile(
             title: AlertTextLabel(
-              AppString.diagnosis.val,
+              AppString.medicalCondition.val,
               fontSize: 14,
             ),
             leading: CommonImageView(
@@ -32,32 +31,56 @@ class SubProfileHealthProfile extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: SizedBox(
-                    height: 50,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: state.response?.data?.healthProfile
-                          ?.length, // Replace with your desired item count
-                      itemBuilder: (context, index) {
-                        return Row(
-                          children: [
-                            CustomText(
-                              state.response?.data!.healthProfile?[index] ?? '',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            index <
-                                    ((state.response?.data?.healthProfile
-                                                ?.length ??
-                                            1) -
-                                        1)
-                                ? Text(
-                                    ' | ',
-                                    style: TextStyle(color: Colors.grey),
-                                  )
-                                : SizedBox.shrink()
-                          ],
-                        );
-                      },
-                    )),
+                  height: 50,
+                  child: Wrap(
+                      children: List.generate(
+                    state.response?.data?.healthProfile?.length ?? 0,
+                    (index) => Wrap(
+                      children: [
+                        CustomText(
+                          state.response?.data!.healthProfile?[index] ??
+                              '' ??
+                              '',
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        index <
+                                (state.response?.data?.healthProfile?.length ??
+                                        1) -
+                                    1
+                            ? const Text(
+                                ' | ',
+                                style: TextStyle(color: Colors.grey),
+                              )
+                            : SizedBox.shrink()
+                      ],
+                    ),
+                  )),
+                  // ListView.builder(
+                  //   scrollDirection: Axis.horizontal,
+                  //   itemCount: state.response?.data?.healthProfile
+                  //       ?.length, // Replace with your desired item count
+                  //   itemBuilder: (context, index) {
+                  //     return Row(
+                  //       children: [
+                  //         CustomText(
+                  //           state.response?.data!.healthProfile?[index] ?? '',
+                  //           style: TextStyle(fontSize: 16),
+                  //         ),
+                  //         index <
+                  //                 ((state.response?.data?.healthProfile
+                  //                             ?.length ??
+                  //                         1) -
+                  //                     1)
+                  //             ? Text(
+                  //                 ' | ',
+                  //                 style: TextStyle(color: Colors.grey),
+                  //               )
+                  //             : SizedBox.shrink()
+                  //       ],
+                  //     );
+                  //   },
+                  // )
+                ),
               ),
             ],
           ),
@@ -73,30 +96,50 @@ class SubProfileHealthProfile extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: SizedBox(
-                    height: 50,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: state.response?.data?.diet
-                          ?.length, // Replace with your desired item count
-                      itemBuilder: (context, index) {
-                        return Row(
-                          children: [
-                            CustomText(
-                              state.response?.data?.diet?[index] ?? '',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            index <
-                                    (state.response?.data?.diet?.length ?? 1) -
-                                        1
-                                ? Text(
-                                    ' | ',
-                                    style: TextStyle(color: Colors.grey),
-                                  )
-                                : SizedBox.shrink()
-                          ],
-                        );
-                      },
-                    )),
+                  height: 50,
+                  child: Wrap(
+                      children: List.generate(
+                    state.response?.data?.diet?.length ?? 0,
+                    (index) => Wrap(
+                      children: [
+                        CustomText(
+                          state.response?.data?.diet?[index] ?? '',
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        index < (state.response?.data?.diet?.length ?? 1) - 1
+                            ? const Text(
+                                ' | ',
+                                style: TextStyle(color: Colors.grey),
+                              )
+                            : SizedBox.shrink()
+                      ],
+                    ),
+                  )),
+
+                  // ListView.builder(
+                  //   scrollDirection: Axis.horizontal,
+                  //   itemCount: state.response?.data?.diet
+                  //       ?.length, // Replace with your desired item count
+                  //   itemBuilder: (context, index) {
+                  //     return Row(
+                  //       children: [
+                  //         CustomText(
+                  //           state.response?.data?.diet?[index] ?? '',
+                  //           style: TextStyle(fontSize: 16),
+                  //         ),
+                  //         index <
+                  //                 (state.response?.data?.diet?.length ?? 1) -
+                  //                     1
+                  //             ? Text(
+                  //                 ' | ',
+                  //                 style: TextStyle(color: Colors.grey),
+                  //               )
+                  //             : SizedBox.shrink()
+                  //       ],
+                  //     );
+                  //   },
+                  // )
+                ),
               ),
             ],
           ),

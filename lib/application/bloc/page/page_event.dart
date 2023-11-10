@@ -6,7 +6,7 @@ class PageEvent with _$PageEvent {
     required String title,
     required String description,
     required String? pageFor,
-    BuildContext? context,
+    required BuildContext context,
   }) = _CreatePage;
 
   const factory PageEvent.getPages() = _GetPages;
@@ -19,7 +19,7 @@ class PageEvent with _$PageEvent {
     required String title,
     required String description,
     required String? pageFor,
-    BuildContext? context,
+    required BuildContext context,
   }) = _UpdatePage;
 
   const factory PageEvent.deletePage({

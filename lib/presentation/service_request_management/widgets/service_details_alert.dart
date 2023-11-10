@@ -10,17 +10,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/bloc/service_request_management/service_request_management_bloc.dart';
+import '../../../application/bloc/transaction_management/transaction_management_bloc.dart';
 import '../../../core/responsive.dart';
 import '../../../core/text_styles.dart';
 import '../../../generated/assets.dart';
 import '../../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../../../infrastructure/transaction_management/transactions_repository.dart';
 import '../../routes/app_router.gr.dart';
 import '../../side_menu/side_menu_page.dart';
+import '../../transaction_management/widgets/transaction_details_alert.dart';
 import '../../widget/commonImageview.dart';
 import '../../widget/common_alert_widget.dart';
+import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_shimmer.dart';
 import '../../widget/empty_view.dart';
+import '../../widget/table_loader_view.dart';
 import 'cancel_request_alert_widget.dart';
 import 'cancellation_widget.dart';
 
@@ -46,7 +51,7 @@ class ServiceDetailsAlert extends StatelessWidget {
                 ? MediaQuery.of(context).size.height
                 : MediaQuery.of(context).size.height * 1.5,
             child: serviceBloc.state.isDetailsLoading ?? false
-                ? const CustomShimmerWidget.rectangular(height: double.infinity)
+                ? const TableLoaderView()
                 : serviceBloc.serviceDetailsList.isEmpty
                     ? EmptyView(
                         title: AppString.noDataFound.val,
@@ -131,7 +136,7 @@ class ServiceDetailsAlert extends StatelessWidget {
   ProfileWidget _profileWidget(
       ServiceDetailsData service, BuildContext context) {
     return ProfileWidget(
-      width: DBL.threeFifty.val,
+      // width: DBL.threeFifty.val,
       imageUrl: service.parentProPic ?? "",
       name:
           "${service.parentName!.firstName ?? ""} ${service.parentName!.lastName ?? ""}",
@@ -194,7 +199,7 @@ class ServiceDetailsAlert extends StatelessWidget {
   Container _rateNowButton(
       {required String title, required Function() onPressed}) {
     return Container(
-      width: DBL.fiveFifty.val,
+      // width: DBL.fiveFifty.val,
       padding: EdgeInsets.symmetric(
           vertical: DBL.ten.val, horizontal: DBL.oneThirty.val),
       decoration: BoxDecoration(
@@ -219,7 +224,7 @@ class ServiceDetailsAlert extends StatelessWidget {
             ClientSubProfileDetailsRoute(id: service.profileId ?? ""));
       },
       child: Container(
-        width: DBL.fiveFifty.val,
+        // width: DBL.fiveFifty.val,
         padding: EdgeInsets.only(
             left: DBL.ten.val, right: DBL.ten.val, bottom: DBL.ten.val),
         decoration: BoxDecoration(
@@ -237,7 +242,7 @@ class ServiceDetailsAlert extends StatelessWidget {
 
   _statusShowingWidget(BuildContext context, ServiceDetailsData service) {
     return Container(
-      width: DBL.fiveFifty.val,
+      // width: DBL.fiveFifty.val,
       padding: EdgeInsets.all(DBL.ten.val),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(DBL.eight.val),
@@ -306,7 +311,7 @@ class ServiceDetailsAlert extends StatelessWidget {
   Container _clientDetailsWidget(
       BuildContext context, ServiceDetailsData service) {
     return Container(
-      width: DBL.fiveFifty.val,
+      // width: DBL.fiveFifty.val,
       padding: EdgeInsets.all(DBL.ten.val),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(DBL.eight.val),
@@ -350,7 +355,7 @@ class ServiceDetailsAlert extends StatelessWidget {
       print("cg report list : $reportIssueByCg");
     }
     return Container(
-      width: DBL.fiveFifty.val,
+      // width: DBL.fiveFifty.val,
       margin: EdgeInsets.only(bottom: DBL.ten.val),
       padding: EdgeInsets.all(DBL.ten.val),
       decoration: BoxDecoration(
@@ -385,6 +390,7 @@ class ServiceDetailsAlert extends StatelessWidget {
     List<String> completedServices = [];
     List<String> neededServices = [];
     List<String> extraServices = [];
+    List<String> notCompletedServices = [];
     var service = serviceBloc.serviceDetailsList[0];
     if (service.completedServices != null) {
       for (int i = 0;
@@ -410,6 +416,36 @@ class ServiceDetailsAlert extends StatelessWidget {
         }
       }
     }
+    if (service.notCompletedServices != null) {
+      for (int i = 0;
+          i < service.notCompletedServices!.notCompletedTier1!.length;
+          i++) {
+        if (service.notCompletedServices!.notCompletedTier1![i].isExtra ==
+            false) {
+          notCompletedServices.add(
+              service.notCompletedServices!.notCompletedTier1![i].service ??
+                  "");
+        } else {
+          extraServices.add(
+              service.notCompletedServices!.notCompletedTier1![i].service ??
+                  "");
+        }
+      }
+      for (int i = 0;
+          i < service.notCompletedServices!.notCompletedTier2!.length;
+          i++) {
+        if (service.notCompletedServices!.notCompletedTier2![i].isExtra ==
+            false) {
+          notCompletedServices.add(
+              service.notCompletedServices!.notCompletedTier2![i].service ??
+                  "");
+        } else {
+          extraServices.add(
+              service.notCompletedServices!.notCompletedTier2![i].service ??
+                  "");
+        }
+      }
+    }
     if (service.services != null) {
       for (int i = 0; i < service.services!.servicesTier1!.length; i++) {
         neededServices.add(service.services!.servicesTier1![i].service ?? "");
@@ -425,15 +461,15 @@ class ServiceDetailsAlert extends StatelessWidget {
         title == AppString.pending.val
             ? const SizedBox()
             : ProfileWidget(
-                width: DBL.threeFifty.val,
+                // width: DBL.threeFifty.val,
                 imageUrl: service.caregiverProPic ?? "",
                 name:
-                    "${service.caregiverInfo!.name!.firstName ?? ""} ${service.caregiverInfo!.name!.firstName ?? ""}",
+                    "${service.caregiverInfo!.name!.firstName ?? ""} ${service.caregiverInfo!.name!.lastName ?? ""}",
                 subText: AppString.careAmbassador.val,
                 onNameTap: () {
                   Navigator.pop(context);
-                  autoTabRouter
-                      ?.navigate(CareGiverProfileRoute(id: service.profileId));
+                  autoTabRouter?.navigate(
+                      CareGiverProfileRoute(id: service.caregiverId));
                 },
               ),
         if (title == AppString.completed.val && (service.services != null))
@@ -492,7 +528,7 @@ class ServiceDetailsAlert extends StatelessWidget {
               },
               isShowing: serviceBloc.state.isShowingIncompleteServices,
               title: AppString.serviceInComplete.val,
-              servicesList: neededServices),
+              servicesList: notCompletedServices),
         if (title == AppString.completed.val &&
             (service.completedServices != null) &&
             extraServices.isNotEmpty)
@@ -511,7 +547,9 @@ class ServiceDetailsAlert extends StatelessWidget {
               isShowing: serviceBloc.state.isShowingExtraServices,
               title: AppString.extraService.val,
               servicesList: extraServices),
-        _replacementDetailsWidget(context, service),
+        title == "Canceled"
+            ? _replacementDetailsWidget(context, service)
+            : SizedBox.shrink(),
         CustomSizedBox(height: DBL.ten.val),
         _serviceTimelineWidget(
             isShowing: serviceBloc.state.isShowingTimeline, service: service)
@@ -522,7 +560,7 @@ class ServiceDetailsAlert extends StatelessWidget {
   Container _replacementDetailsWidget(
       BuildContext context, ServiceDetailsData service) {
     return Container(
-      width: DBL.fiveFifty.val,
+      // width: DBL.fiveFifty.val,
       padding: EdgeInsets.only(
           left: DBL.ten.val, right: DBL.ten.val, bottom: DBL.ten.val),
       decoration: BoxDecoration(
@@ -595,7 +633,7 @@ class ServiceDetailsAlert extends StatelessWidget {
                     isShowing: !serviceBloc.state.isShowingTransactionDetails));
           },
           child: Container(
-            width: DBL.fiveFifty.val,
+            // width: DBL.fiveFifty.val,
             padding: EdgeInsets.all(DBL.ten.val),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -641,7 +679,7 @@ class ServiceDetailsAlert extends StatelessWidget {
 
   _transactionDetailsData(ServiceDetailsData service, BuildContext context) {
     return Container(
-      width: DBL.fiveFifty.val,
+      // width: DBL.fiveFifty.val,
       padding: EdgeInsets.all(DBL.ten.val),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -655,31 +693,46 @@ class ServiceDetailsAlert extends StatelessWidget {
               context: context,
               height: DBL.eight.val,
               text: AppString.serviceFee.val,
-              subText: service.serviceFee.toString()),
+              subText: '\$ ${service.serviceFee.toString()}'),
           _textAndSubText(
               context: context,
               height: DBL.eight.val,
               text: AppString.transportationFee.val,
-              subText: service.travelingCharge ?? ""),
+              subText: '\$ ${service.travelingCharge ?? ""}'),
           title == AppString.completed.val
               ? _textAndSubText(
                   context: context,
                   height: DBL.eight.val,
                   text: AppString.tip.val,
-                  subText: service.tip.toString())
+                  subText: '\$ ${service.tip.toString()}')
               : const CustomSizedBox(),
           title == AppString.completed.val
               ? _textAndSubText(
                   context: context,
                   height: DBL.eight.val,
                   text: AppString.extraServiceCharge.val,
-                  subText: service.extraServiceFee ?? "")
+                  subText: '\$ ${service.extraServiceFee ?? ""}')
               : const CustomSizedBox(),
-          _textAndSubText(
-              context: context,
-              height: DBL.eight.val,
-              text: AppString.transactionId.val,
-              subText: service.serviceFeeTransactionId ?? ""),
+          InkWell(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return CustomAlertDialogWidget(
+                    heading: AppString.transactionManagement.val,
+                    child: TransactionDetailsAlert(
+                        transactionBloc: TransactionManagementBloc(
+                            TransactionsRepository())),
+                  );
+                },
+              );
+            },
+            child: _textAndSubText(
+                context: context,
+                height: DBL.eight.val,
+                text: AppString.transactionId.val,
+                subText: service.serviceFeeTransactionId ?? ""),
+          ),
         ],
       ),
     );
@@ -687,7 +740,7 @@ class ServiceDetailsAlert extends StatelessWidget {
 
   _refundDetailsData(ServiceDetailsData service, BuildContext context) {
     return Container(
-      width: DBL.fiveFifty.val,
+      // width: DBL.fiveFifty.val,
       padding: EdgeInsets.all(DBL.ten.val),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -708,6 +761,11 @@ class ServiceDetailsAlert extends StatelessWidget {
               height: DBL.eight.val,
               text: AppString.refundEligibility.val,
               subText: service.refundDetails!.isNotEmpty ? "Yes" : "No"),
+          _textAndSubText(
+              context: context,
+              height: DBL.eight.val,
+              text: AppString.amount.val,
+              subText: '\$ ${service.refundDetails?.first.price ?? ''}'),
           CustomSizedBox(height: DBL.ten.val),
           _refundStatusWidget(context, service),
           _textAndSubText(
@@ -723,7 +781,7 @@ class ServiceDetailsAlert extends StatelessWidget {
   _refundStatusWidget(BuildContext context, ServiceDetailsData service) {
     return Container(
       padding: EdgeInsets.all(DBL.two.val),
-      width: DBL.threeFifty.val,
+      // width: DBL.threeFifty.val,
       decoration: BoxDecoration(
           color: AppColor.lightGrey.val.withOpacity(0.5),
           borderRadius: BorderRadius.circular(DBL.eight.val)),
@@ -847,7 +905,7 @@ class ServiceDetailsAlert extends StatelessWidget {
       InkWell(
         onTap: onTap,
         child: Container(
-          width: DBL.fiveFifty.val,
+          // width: DBL.fiveFifty.val,
           padding: EdgeInsets.all(DBL.ten.val),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
@@ -883,7 +941,7 @@ class ServiceDetailsAlert extends StatelessWidget {
 
   _serviceDetails({required List<String> servicesList}) {
     return Container(
-      width: DBL.fiveFifty.val,
+      // width: DBL.fiveFifty.val,
       padding: EdgeInsets.all(DBL.ten.val),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -961,7 +1019,7 @@ class ServiceDetailsAlert extends StatelessWidget {
                 isShowing: !serviceBloc.state.isShowingTimeline));
           },
           child: Container(
-            width: DBL.fiveFifty.val,
+            // width: DBL.fiveFifty.val,
             height: DBL.fifty.val,
             padding: EdgeInsets.only(left: DBL.ten.val, right: DBL.ten.val),
             decoration: BoxDecoration(
@@ -990,7 +1048,7 @@ class ServiceDetailsAlert extends StatelessWidget {
         ),
         isShowing
             ? Container(
-                width: DBL.fiveFifty.val,
+                // width: DBL.fiveFifty.val,
                 padding: EdgeInsets.all(DBL.ten.val),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(

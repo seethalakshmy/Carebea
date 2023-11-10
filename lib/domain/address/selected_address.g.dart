@@ -15,6 +15,9 @@ _$_SelectedAddress _$$_SelectedAddressFromJson(Map<String, dynamic> json) =>
       stateIso: json['stateIso'] as String?,
       route: json['route'] as String?,
       country: json['country'] as String?,
+      latitude: json['latitude'] as num?,
+      longitude: json['longitude'] as num?,
+      locationTag: json['locationTag'] as String?,
     );
 
 Map<String, dynamic> _$$_SelectedAddressToJson(_$_SelectedAddress instance) {
@@ -33,5 +36,8 @@ Map<String, dynamic> _$$_SelectedAddressToJson(_$_SelectedAddress instance) {
   writeNotNull('stateIso', instance.stateIso);
   writeNotNull('route', instance.route);
   writeNotNull('country', instance.country);
+  writeNotNull('latitude', instance.latitude);
+  writeNotNull('longitude', instance.longitude);
+  writeNotNull('locationTag', instance.locationTag);
   return val;
 }

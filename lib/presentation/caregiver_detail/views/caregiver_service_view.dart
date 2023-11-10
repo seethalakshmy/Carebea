@@ -14,9 +14,14 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../application/bloc/service_request_management/service_request_management_bloc.dart';
 import '../../../core/enum.dart';
 import '../../../core/string_extension.dart';
 import '../../../domain/caregiver_detail/model/caregiver_service_list_response.dart';
+import '../../../infrastructure/service_request_management/service_request_management_repository.dart';
+import '../../../main.dart';
+import '../../service_request_management/widgets/service_details_alert.dart';
+import '../../user_mangement_detail/widgets/service_status.dart';
 import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_card.dart';
 import '../../widget/custom_container.dart';
@@ -30,7 +35,6 @@ import '../../widget/pagination_view.dart';
 import '../../widget/service_detail_transaction_view.dart';
 import '../../widget/service_details_service_list_view.dart';
 import '../../widget/table_actions_view.dart';
-import '../../widget/table_status_box.dart';
 
 class CareGiverServiceView extends StatefulWidget {
   const CareGiverServiceView(
@@ -222,14 +226,41 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
               DataCell(
                   _tableRowView(item.endDateTime?.parseWithFormat() ?? "")),
               DataCell(_tableRowView(item.totalServiceFee.toString() ?? "")),
-              DataCell(TableStatusBox(
-                status: item.status ?? 0,
-              )),
+              DataCell(ClientStatusWidget(
+                serviceStatus: item.status,
+              )
+                  //     TableStatusBox(
+                  //   status: item.status ?? 0,
+                  // )
+                  ),
               DataCell(TableActions(
                 isEdit: false,
                 isView: true,
                 onViewTap: () {
-                  _serviceDetailPopUp(context, item.status ?? 0);
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      context.read<ServiceRequestManagementBloc>().add(
+                          ServiceRequestManagementEvent.getServiceDetails(
+                              context: context, serviceId: item.id ?? ''));
+                      debugPrint('item status ${item.status}');
+                      return CustomAlertDialogWidget(
+                        heading: AppString.services.val,
+                        child: ServiceDetailsAlert(
+                          title: item.status == 2
+                              ? 'Upcoming'
+                              : item.status == 3
+                                  ? 'Ongoing'
+                                  : item.status == 5
+                                      ? 'Completed'
+                                      : 'Cancelled',
+                          serviceBloc: serviceRequestManagementBloc,
+                        ),
+                      );
+                    },
+                  );
+                  // _getServiceDetails();
+                  // _serviceDetailPopUp(context, item.status ?? 0);
                 },
               )),
             ],

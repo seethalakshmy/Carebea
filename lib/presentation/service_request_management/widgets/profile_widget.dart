@@ -26,7 +26,7 @@ class ProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
+        Wrap(
           children: [
             _buildImage(context),
             const SizedBox(

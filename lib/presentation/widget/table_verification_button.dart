@@ -10,18 +10,19 @@ import 'custom_sizedbox.dart';
 import 'custom_text.dart';
 
 class TableVerificationButton extends StatelessWidget {
-  const TableVerificationButton({
-    Key? key,
-    this.height,
-    required this.verificationStatus,
-    this.isHover = true,
-    this.page,
-    this.tab,
-    this.userId,
-    this.onStatusChange,
-    this.isStatusChangeWidget = false,
-    this.isLoading = false,
-  }) : super(key: key);
+  const TableVerificationButton(
+      {Key? key,
+      this.height,
+      required this.verificationStatus,
+      this.isHover = true,
+      this.page,
+      this.tab,
+      this.userId,
+      this.onStatusChange,
+      this.isStatusChangeWidget = false,
+      this.isLoading = false,
+      this.onBoardingStatus})
+      : super(key: key);
   final int verificationStatus;
   final double? height;
   final bool isHover;
@@ -31,6 +32,7 @@ class TableVerificationButton extends StatelessWidget {
   final bool isStatusChangeWidget;
   final bool isLoading;
   final Function? onStatusChange;
+  final bool? onBoardingStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +50,7 @@ class TableVerificationButton extends StatelessWidget {
                   ));
                 } else {
                   autoTabRouter?.navigate(CaregiverVerificationRoute(
-                    id: userId!,
-                  ));
+                      id: userId!, isOnboardingCompleted: true));
                 }
               }
             },

@@ -99,13 +99,27 @@ class _PageListPage extends State<PageListPage> {
       elevation: DBL.seven.val,
       child: CustomContainer(
           padding: EdgeInsets.all(DBL.twenty.val),
-          child: state.isLoading
-              ? const TableLoaderView()
-              : state.isError
-                  ? ErrorView(
+          child: state.when(
+              initial: (isLoading, isError, isForClient, response,
+                  getPagesResponse, radioValue) {
+                if (isError) {
+                  return ErrorView(
                       isClientError: true,
-                      errorMessage: AppString.somethingWentWrong.val)
-                  : _pagesView(context, state)),
+                      errorMessage: AppString.somethingWentWrong.val);
+                } else {
+                  return _pagesView(context, state);
+                }
+              },
+              loading: () => const TableLoaderView())
+
+          // (state)
+          //     ? const TableLoaderView()
+          //     : state.isError
+          //         ? ErrorView(
+          //             isClientError: true,
+          //             errorMessage: AppString.somethingWentWrong.val)
+          //         : _pagesView(context, state)
+          ),
     );
   }
 
