@@ -96,6 +96,11 @@ class SubProfileView extends StatelessWidget {
             label: _columnsView(context,
                 text: AppString.subscription.val, fontWeight: FontWeight.bold),
           ),
+          DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(context,
+                text: AppString.status.val, fontWeight: FontWeight.bold),
+          ),
           const DataColumn2(
             size: ColumnSize.L,
             label: CustomText(""),
@@ -126,6 +131,15 @@ class SubProfileView extends StatelessWidget {
                   _rowsView(context, text: item.completedServices?.toString())),
               DataCell(_rowsView(context,
                   icon: item.isSubscribed == true ? Icons.check : Icons.close)),
+              DataCell(InkWell(
+                onTap: () {
+                  debugPrint('isDelete ${item.isDelete}');
+                },
+                child: _rowsView(context,
+                    text: item.isDelete == true
+                        ? AppString.deleted.val
+                        : AppString.active.val),
+              )),
               DataCell(InkWell(
                   onTap: () {
                     autoTabRouter
