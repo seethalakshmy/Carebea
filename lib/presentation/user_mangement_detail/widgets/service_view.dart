@@ -196,8 +196,8 @@ class _ServiceViewState extends State<ServiceView> {
                   text: Utility.serviceDate(
                       DateTime.parse(item.endDateTime ?? '')))),
               DataCell(_rowsView(context,
-                  text: '\$ ${item.totalServiceFee.toString()}')),
-              DataCell(_rowsView(context, text: '\$ ${item.tip}')),
+                  text: '\$ ${Utility.formatAmount(double.tryParse(item.totalServiceFee.toString() ?? "0.0") ?? 0.0)}')),
+              DataCell(_rowsView(context, text: '\$ ${Utility.formatAmount(double.tryParse(item.tip.toString() ?? "0.0") ?? 0.0)}')),
               DataCell(CustomRatingBar(
                 rating: item.serviceRating ?? 0,
               )),

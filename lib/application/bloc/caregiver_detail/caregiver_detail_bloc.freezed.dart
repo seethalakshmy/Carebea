@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'caregiver_detail_bloc.dart';
 
@@ -1163,7 +1163,6 @@ class _$_GetSelectedScheduleServices implements _GetSelectedScheduleServices {
   final List<ServiceDates> _services;
   @override
   List<ServiceDates> get services {
-    if (_services is EqualUnmodifiableListView) return _services;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_services);
   }
@@ -1371,8 +1370,8 @@ class _$CareGiverDetailStateCopyWithImpl<$Res,
   $Res call({
     Object? isLoading = null,
     Object? isLoadingServices = null,
-    Object? isLoadingEarnings = freezed,
-    Object? isLoadingServiceRequest = freezed,
+    Object? isLoadingEarnings = null,
+    Object? isLoadingServiceRequest = null,
     Object? isError = null,
     Object? response = freezed,
     Object? serviceListResponse = freezed,
@@ -1391,11 +1390,11 @@ class _$CareGiverDetailStateCopyWithImpl<$Res,
           ? _value.isLoadingServices
           : isLoadingServices // ignore: cast_nullable_to_non_nullable
               as bool,
-      isLoadingEarnings: freezed == isLoadingEarnings
+      isLoadingEarnings: null == isLoadingEarnings
           ? _value.isLoadingEarnings
           : isLoadingEarnings // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      isLoadingServiceRequest: freezed == isLoadingServiceRequest
+      isLoadingServiceRequest: null == isLoadingServiceRequest
           ? _value.isLoadingServiceRequest
           : isLoadingServiceRequest // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -1471,8 +1470,8 @@ class __$$_CareGiversDetailStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? isLoadingServices = null,
-    Object? isLoadingEarnings = freezed,
-    Object? isLoadingServiceRequest = freezed,
+    Object? isLoadingEarnings = null,
+    Object? isLoadingServiceRequest = null,
     Object? isError = null,
     Object? response = freezed,
     Object? serviceListResponse = freezed,
@@ -1491,11 +1490,11 @@ class __$$_CareGiversDetailStateCopyWithImpl<$Res>
           ? _value.isLoadingServices
           : isLoadingServices // ignore: cast_nullable_to_non_nullable
               as bool,
-      isLoadingEarnings: freezed == isLoadingEarnings
-          ? _value.isLoadingEarnings!
+      isLoadingEarnings: null == isLoadingEarnings
+          ? _value.isLoadingEarnings
           : isLoadingEarnings,
-      isLoadingServiceRequest: freezed == isLoadingServiceRequest
-          ? _value.isLoadingServiceRequest!
+      isLoadingServiceRequest: null == isLoadingServiceRequest
+          ? _value.isLoadingServiceRequest
           : isLoadingServiceRequest,
       isError: null == isError
           ? _value.isError
@@ -1579,8 +1578,6 @@ class _$_CareGiversDetailState implements _CareGiversDetailState {
   final List<ServiceDates> _selectedScheduleServices;
   @override
   List<ServiceDates> get selectedScheduleServices {
-    if (_selectedScheduleServices is EqualUnmodifiableListView)
-      return _selectedScheduleServices;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_selectedScheduleServices);
   }

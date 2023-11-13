@@ -69,7 +69,7 @@ class ComplaintDetailBloc
             status: event.status,
             comment: event.comment);
     var userState = result.fold((l) {
-      CSnackBar.showError(event.context!, msg: l.error);
+      CSnackBar.showError(event.context, msg: l.error);
 
       return state.copyWith(
           error: l.error,
@@ -77,7 +77,7 @@ class ComplaintDetailBloc
           isLoading: false);
     }, (r) {
       add(ComplaintDetailEvent.getComplaintDetails(complaintId: compId));
-      CSnackBar.showSuccess(event.context!, msg: r.message ?? 'Success');
+      CSnackBar.showSuccess(event.context, msg: AppString.complaintStatusChangedSuccessfully.val);
       return state.copyWith(
           updateComplaintOption: Some(Right(r)), isLoading: false);
     });
@@ -141,7 +141,7 @@ class ComplaintDetailBloc
     } else if (tabType == 4) {
       return AppString.upcoming.val;
     } else {
-      return AppString.onGoing.val;
+      return AppString.processing.val;
     }
   }
 

@@ -13,6 +13,7 @@ import '../../../application/bloc/service_request_management/service_request_man
 import '../../../application/bloc/transaction_management/transaction_management_bloc.dart';
 import '../../../core/responsive.dart';
 import '../../../core/text_styles.dart';
+import '../../../core/utility.dart';
 import '../../../generated/assets.dart';
 import '../../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../../infrastructure/transaction_management/transactions_repository.dart';
@@ -693,25 +694,25 @@ class ServiceDetailsAlert extends StatelessWidget {
               context: context,
               height: DBL.eight.val,
               text: AppString.serviceFee.val,
-              subText: '\$ ${service.serviceFee.toString()}'),
+              subText: '\$ ${Utility.formatAmount(double.tryParse(service.serviceFee.toString() ?? "0.0") ?? 0.0)}'),
           _textAndSubText(
               context: context,
               height: DBL.eight.val,
               text: AppString.transportationFee.val,
-              subText: '\$ ${service.travelingCharge ?? ""}'),
+              subText: '\$ ${Utility.formatAmount(double.tryParse(service.travelingCharge.toString() ?? "0.0") ?? 0.0)}'),
           title == AppString.completed.val
               ? _textAndSubText(
                   context: context,
                   height: DBL.eight.val,
                   text: AppString.tip.val,
-                  subText: '\$ ${service.tip.toString()}')
+                  subText: '\$ ${Utility.formatAmount(double.tryParse(service.tip.toString() ?? "0.0") ?? 0.0)}')
               : const CustomSizedBox(),
           title == AppString.completed.val
               ? _textAndSubText(
                   context: context,
                   height: DBL.eight.val,
                   text: AppString.extraServiceCharge.val,
-                  subText: '\$ ${service.extraServiceFee ?? ""}')
+                  subText: '\$ ${Utility.formatAmount(double.tryParse(service.extraServiceFee.toString() ?? "0.0") ?? 0.0)}')
               : const CustomSizedBox(),
           InkWell(
             onTap: () {
@@ -765,7 +766,7 @@ class ServiceDetailsAlert extends StatelessWidget {
               context: context,
               height: DBL.eight.val,
               text: AppString.amount.val,
-              subText: '\$ ${service.refundDetails?.first.price ?? ''}'),
+              subText: '\$ ${Utility.formatAmount(double.tryParse(service.refundDetails?.first.price ?? "0.0") ?? 0.0)}'),
           CustomSizedBox(height: DBL.ten.val),
           _refundStatusWidget(context, service),
           _textAndSubText(

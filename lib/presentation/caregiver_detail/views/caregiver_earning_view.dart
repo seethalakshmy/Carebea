@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/bloc/caregiver_detail/caregiver_detail_bloc.dart';
 import '../../../core/enum.dart';
+import '../../../core/utility.dart';
 import '../../../domain/caregiver_detail/model/caregiver_earning_list_response.dart';
 import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_card.dart';
@@ -173,7 +174,8 @@ class _CareGiverEarningViewState extends State<CareGiverEarningView> {
               )),
               DataCell(_tableRowView(item.transactionType.toString())),
               DataCell(_tableRowView(item.dateTime?.parseWithFormat() ?? "")),
-              DataCell(_tableRowView(item.amount ?? "")),
+              DataCell(_tableRowView(
+                  '\$${Utility.formatAmount(double.tryParse(item.amount?.replaceAll('\$', "") ?? "0.0") ?? 0.0)}')),
               DataCell(_tableRowView(item.recievedFrom ?? "")),
               DataCell(_tableRowView(item.paidFor ?? "")),
               DataCell(_tableRowView(item.transactionId ?? "")),

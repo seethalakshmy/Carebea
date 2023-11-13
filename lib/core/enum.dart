@@ -135,8 +135,8 @@ enum AppString {
   forgotPassword("Forgot Password ?"),
   rememberMe("Remember Me"),
   resetPassword("Reset Password"),
-  resentOTP("Resend OTP"),
-  optVerification("OTP Verification"),
+  resentOTP("Resend Verification Code"),
+  optVerification("Verification Page"),
   clientAnalytics("Client Analytics"),
   analytics("Analytics"),
   resetPasswordDescription(
@@ -176,8 +176,8 @@ enum AppString {
   caregiverCreation("Care Ambassador Creation"),
   selectYourStateFirst("Please select your state first"),
   pleaseSelectOneService("Please select at least one service"),
-  emailOtp("OTP For Email Verification"),
-  mobileOtp("OTP For Mobile Number Verification"),
+  emailOtp("Enter Email Verification Code"),
+  mobileOtp("Enter Phone Number Verification Code"),
   onBoarding("On-boarding"),
   onBoardingSuccessful("On-boarding Successful"),
   gotoCaListingScreen("Goto Care Ambassador Listing Screen"),
@@ -278,6 +278,7 @@ enum AppString {
   canceled("Canceled"),
   onGoing("Ongoing"),
   upcoming("Upcoming"),
+  processing("Processing"),
   clearFilters("Clear Filters"),
   active("Active"),
   inActive("Inactive"),
@@ -462,6 +463,7 @@ enum AppString {
   profilePicture("ProfilePictures"),
   documents("Documents"),
   matchingList("Matching List"),
+  complaintStatusChangedSuccessfully("Complaint status changed successfully"),
 
   ///paths
   careAmbassadorVerificationPath("care-ambassador-verification"),
@@ -471,7 +473,7 @@ enum AppString {
 
   ///validations
   emptyEmail("Email address shouldn't be empty"),
-  emptyOtp("OTP shouldn't be empty"),
+  emptyOtp("Verification Code shouldn't be empty"),
   emptyReason("Reason shouldn't be empty"),
   validEmail("Enter valid email address"),
   emptyPassword("Password shouldn't be empty"),
@@ -494,7 +496,7 @@ enum AppString {
   emptyLoveCaregiver("Please write the reason"),
   emptyMobile("Mobile number shouldn't be empty"),
   validMobile("Mobile number should be 10 digits"),
-  validOtp("OTP should be 4 digits"),
+  validOtp("Verification Code should be 4 digits"),
   uploadDocument("Upload the document"),
   emptyDOB("Date of birth shouldn't be empty"),
   emptyStartTime("Start time shouldn't be empty"),

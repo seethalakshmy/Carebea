@@ -58,6 +58,11 @@ class Utility {
     return selectedDate;
   }
 
+  static String formatAmount(double amount) {
+    final formatter = NumberFormat("#,##0.00", "en_US");
+    return formatter.format(amount);
+  }
+
   static bool validatePassword(String value) {
     String pattern =
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,32}$';

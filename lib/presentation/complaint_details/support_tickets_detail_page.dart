@@ -735,7 +735,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
       ),
       items: [
         AppString.neww.val,
-        AppString.onGoing.val,
+        AppString.processing.val,
         AppString.closed.val,
         AppString.canceled.val
       ]
