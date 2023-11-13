@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/custom_snackbar.dart';
+import '../../../core/enum.dart';
 
 part 'roles_bloc.freezed.dart';
 part 'roles_event.dart';
@@ -62,7 +63,7 @@ class RolesBloc extends Bloc<RolesEvent, RolesState> {
       );
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context, msg: AppString.successfullyDeleteRole.val);
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }

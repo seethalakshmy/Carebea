@@ -12,7 +12,6 @@ import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/su
 import 'package:admin_580_tech/presentation/client_subProfile_details/widgets/subscription_details.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
-import 'package:admin_580_tech/presentation/widget/custom_svg.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:admin_580_tech/presentation/widget/loader_view.dart';
 import 'package:auto_route/auto_route.dart';
@@ -27,6 +26,7 @@ import '../caregiver_detail/widgets/service_completion_and_rewards.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';
 import '../widget/custom_card.dart';
+import '../widget/header_view.dart';
 
 @RoutePage()
 class ClientSubProfileDetailsPage extends StatefulWidget {
@@ -59,7 +59,13 @@ class _ClientSubProfileDetailsPageState
 
   @override
   Widget build(BuildContext context) {
-    return _rebuildView();
+    return Column(
+      children: [
+        HeaderView(title: AppString.userManagement.val),
+        CustomSizedBox(height: DBL.twenty.val),
+        _rebuildView(),
+      ],
+    );
   }
 
   BlocProvider<SubProfileDetailBloc> _rebuildView() {

@@ -220,7 +220,7 @@ class SubProfileView extends StatelessWidget {
                 height: DBL.ten.val,
               ),
               Expanded(
-                flex: 1,
+                flex: 2,
                 child: CustomText(
                   name,
                   style: TS().gRoboto(

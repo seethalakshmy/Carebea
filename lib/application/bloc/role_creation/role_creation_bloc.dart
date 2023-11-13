@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/custom_snackbar.dart';
+import '../../../core/enum.dart';
 
 part 'role_creation_bloc.freezed.dart';
 part 'role_creation_event.dart';
@@ -28,6 +29,7 @@ class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
     on<_IsCheckedView>(_isCheckedView);
     on<_IsCheckedDelete>(_isCheckedDelete);
     on<_IsCheckedCreate>(_isCheckedCreate);
+    on<_IsEdit>(_isEdit);
   }
 
   _viewRole(_ViewRole event, Emitter<RoleCreationState> emit) async {
@@ -116,7 +118,10 @@ class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
       );
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context,
+            msg: state.isEdit == true
+                ? AppString.successfullyUpdateRole.val
+                : AppString.successfullyAddedRole.val);
         autoTabRouter?.setActiveIndex(10);
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
@@ -237,5 +242,9 @@ class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
     final updatedResponse = moduleResponse.copyWith(module: moduleList);
 
     emit(state.copyWith(moduleResponse: updatedResponse));
+  }
+
+  _isEdit(_IsEdit event, Emitter<RoleCreationState> emit) {
+    emit(state.copyWith(isEdit: event.isEdit));
   }
 }

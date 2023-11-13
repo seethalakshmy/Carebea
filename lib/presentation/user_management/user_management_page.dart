@@ -78,7 +78,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
 
           return Column(
             children: [
-              HeaderView(title: AppString.clientsCustomer.val),
+              HeaderView(title: AppString.userManagement.val),
               CustomSizedBox(height: DBL.twenty.val),
               _reBuildView(),
             ],
@@ -299,7 +299,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
                 ? MediaQuery.of(context).size.width * .17
                 : DBL.twoHundred.val,
             label: _columnsView(
-                text: AppString.name.val, fontWeight: FontWeight.bold),
+                text: AppString.clientName.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.L,
@@ -311,11 +311,16 @@ class _UserManagementPageState extends State<UserManagementPage> {
             label: _columnsView(
                 text: AppString.phoneNumber.val, fontWeight: FontWeight.bold),
           ),
-          DataColumn2(
+          /*  DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(
-                text: AppString.role.val, fontWeight: FontWeight.bold),
-          ),
+                text: AppString.clientId.val, fontWeight: FontWeight.bold),
+          ),*/
+          /* DataColumn2(
+            size: ColumnSize.L,
+            label: _columnsView(
+                text: AppString.createdDate.val, fontWeight: FontWeight.bold),
+          ),*/
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(
@@ -348,7 +353,8 @@ class _UserManagementPageState extends State<UserManagementPage> {
                   item.profile ?? "")),
               DataCell(_rowsView(text: item.email ?? "")),
               DataCell(_rowsView(text: item.mobile)),
-              DataCell(_rowsView(text: item.role)),
+              //     DataCell(_rowsView(text: item.clientID)),
+              //   DataCell(_rowsView(text: item.date)),
               DataCell(_tableSwitchBox(item)),
 
               // DataCell(_statusBox(item.isActive ?? false)),

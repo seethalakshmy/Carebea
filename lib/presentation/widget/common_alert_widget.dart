@@ -18,12 +18,15 @@ class CommonAlertWidget extends StatelessWidget {
     this.isLoading = false,
     this.controller,
     this.validator,
+    this.height,
   });
+
   final String heading;
   final String label;
   final Function onTapYes;
   final bool isTextField;
   final bool isLoading;
+  final double? height;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
 
@@ -31,45 +34,51 @@ class CommonAlertWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomAlertDialogWidget(
       heading: heading,
-      height: MediaQuery.of(context).size.height * .3,
+      height: height ?? MediaQuery.of(context).size.height * .3,
       width: MediaQuery.of(context).size.width * .5,
       child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: DBL.twentyFive.val,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CustomSizedBox(
-                height: DBL.fifteen.val,
-              ),
-              CustomText(
-                label,
-                style: TS().gRoboto(
-                    fontSize: FS.font17.val,
-                    color: AppColor.black.val,
-                    fontWeight: FW.w400.val),
-              ),
-              CustomSizedBox(
-                height: isTextField ? DBL.twenty.val : DBL.zero.val,
-              ),
-              isTextField ? reasonField() : CustomSizedBox.shrink(),
-              CustomSizedBox(
-                height: isTextField ? DBL.thirty.val : DBL.hundred.val,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  _noButton(context),
-                  CustomSizedBox(
-                    width: DBL.ten.val,
-                  ),
-                  _yesButton(context),
-                ],
-              )
-            ],
-          )),
+        padding: EdgeInsets.symmetric(
+          horizontal: DBL.twentyFive.val,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CustomSizedBox(
+              height: DBL.fifteen.val,
+            ),
+            CustomText(
+              label,
+              style: TS().gRoboto(
+                  fontSize: FS.font17.val,
+                  color: AppColor.black.val,
+                  fontWeight: FW.w400.val),
+            ),
+            CustomSizedBox(
+              height: isTextField ? DBL.twenty.val : height == 150
+                  ? 20 : DBL.zero.val,
+            ),
+            isTextField ? reasonField() : CustomSizedBox.shrink(),
+            CustomSizedBox(
+              height: isTextField
+                  ? DBL.thirty.val
+                  : height == 150
+                      ? 0
+                      : DBL.hundred.val,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                _noButton(context),
+                CustomSizedBox(
+                  width: DBL.ten.val,
+                ),
+                _yesButton(context),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 

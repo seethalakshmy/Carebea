@@ -7,6 +7,7 @@ import '../../domain/user_management_detail/model/user_detail_response.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../infrastructure/user_management_detail/user_management_detail_repository.dart';
 import '../service_request_management/widgets/profile_widget.dart';
+import '../widget/header_view.dart';
 import 'views/payment_method_view.dart';
 import 'views/sub_profile_view.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_view.dart';
@@ -56,7 +57,13 @@ class _UserManagementDetailPageState extends State<UserManagementDetailPage>
 
   @override
   Widget build(BuildContext context) {
-    return _rebuildView();
+    return Column(
+      children: [
+        HeaderView(title: AppString.userManagement.val),
+        CustomSizedBox(height: DBL.twenty.val),
+        _rebuildView(),
+      ],
+    );
   }
 
   BlocProvider<UserManagementDetailBloc> _rebuildView() {

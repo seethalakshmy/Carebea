@@ -26,6 +26,7 @@ mixin _$RoleCreationEvent {
     required TResult Function(Module module) isSelected,
     required TResult Function(Module module) isCheckedView,
     required TResult Function(Module module) isCheckedEdit,
+    required TResult Function(bool isEdit) isEdit,
     required TResult Function(Module module) isCheckedDelete,
     required TResult Function(Module module) isCheckedCreate,
   }) =>
@@ -40,6 +41,7 @@ mixin _$RoleCreationEvent {
     TResult? Function(Module module)? isSelected,
     TResult? Function(Module module)? isCheckedView,
     TResult? Function(Module module)? isCheckedEdit,
+    TResult? Function(bool isEdit)? isEdit,
     TResult? Function(Module module)? isCheckedDelete,
     TResult? Function(Module module)? isCheckedCreate,
   }) =>
@@ -54,6 +56,7 @@ mixin _$RoleCreationEvent {
     TResult Function(Module module)? isSelected,
     TResult Function(Module module)? isCheckedView,
     TResult Function(Module module)? isCheckedEdit,
+    TResult Function(bool isEdit)? isEdit,
     TResult Function(Module module)? isCheckedDelete,
     TResult Function(Module module)? isCheckedCreate,
     required TResult orElse(),
@@ -67,6 +70,7 @@ mixin _$RoleCreationEvent {
     required TResult Function(_IsSelected value) isSelected,
     required TResult Function(_IsCheckedView value) isCheckedView,
     required TResult Function(_IsCheckedEdit value) isCheckedEdit,
+    required TResult Function(_IsEdit value) isEdit,
     required TResult Function(_IsCheckedDelete value) isCheckedDelete,
     required TResult Function(_IsCheckedCreate value) isCheckedCreate,
   }) =>
@@ -79,6 +83,7 @@ mixin _$RoleCreationEvent {
     TResult? Function(_IsSelected value)? isSelected,
     TResult? Function(_IsCheckedView value)? isCheckedView,
     TResult? Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult? Function(_IsEdit value)? isEdit,
     TResult? Function(_IsCheckedDelete value)? isCheckedDelete,
     TResult? Function(_IsCheckedCreate value)? isCheckedCreate,
   }) =>
@@ -91,6 +96,7 @@ mixin _$RoleCreationEvent {
     TResult Function(_IsSelected value)? isSelected,
     TResult Function(_IsCheckedView value)? isCheckedView,
     TResult Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult Function(_IsEdit value)? isEdit,
     TResult Function(_IsCheckedDelete value)? isCheckedDelete,
     TResult Function(_IsCheckedCreate value)? isCheckedCreate,
     required TResult orElse(),
@@ -237,6 +243,7 @@ class _$_AddUpdateRole implements _AddUpdateRole {
     required TResult Function(Module module) isSelected,
     required TResult Function(Module module) isCheckedView,
     required TResult Function(Module module) isCheckedEdit,
+    required TResult Function(bool isEdit) isEdit,
     required TResult Function(Module module) isCheckedDelete,
     required TResult Function(Module module) isCheckedCreate,
   }) {
@@ -254,6 +261,7 @@ class _$_AddUpdateRole implements _AddUpdateRole {
     TResult? Function(Module module)? isSelected,
     TResult? Function(Module module)? isCheckedView,
     TResult? Function(Module module)? isCheckedEdit,
+    TResult? Function(bool isEdit)? isEdit,
     TResult? Function(Module module)? isCheckedDelete,
     TResult? Function(Module module)? isCheckedCreate,
   }) {
@@ -271,6 +279,7 @@ class _$_AddUpdateRole implements _AddUpdateRole {
     TResult Function(Module module)? isSelected,
     TResult Function(Module module)? isCheckedView,
     TResult Function(Module module)? isCheckedEdit,
+    TResult Function(bool isEdit)? isEdit,
     TResult Function(Module module)? isCheckedDelete,
     TResult Function(Module module)? isCheckedCreate,
     required TResult orElse(),
@@ -290,6 +299,7 @@ class _$_AddUpdateRole implements _AddUpdateRole {
     required TResult Function(_IsSelected value) isSelected,
     required TResult Function(_IsCheckedView value) isCheckedView,
     required TResult Function(_IsCheckedEdit value) isCheckedEdit,
+    required TResult Function(_IsEdit value) isEdit,
     required TResult Function(_IsCheckedDelete value) isCheckedDelete,
     required TResult Function(_IsCheckedCreate value) isCheckedCreate,
   }) {
@@ -305,6 +315,7 @@ class _$_AddUpdateRole implements _AddUpdateRole {
     TResult? Function(_IsSelected value)? isSelected,
     TResult? Function(_IsCheckedView value)? isCheckedView,
     TResult? Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult? Function(_IsEdit value)? isEdit,
     TResult? Function(_IsCheckedDelete value)? isCheckedDelete,
     TResult? Function(_IsCheckedCreate value)? isCheckedCreate,
   }) {
@@ -320,6 +331,7 @@ class _$_AddUpdateRole implements _AddUpdateRole {
     TResult Function(_IsSelected value)? isSelected,
     TResult Function(_IsCheckedView value)? isCheckedView,
     TResult Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult Function(_IsEdit value)? isEdit,
     TResult Function(_IsCheckedDelete value)? isCheckedDelete,
     TResult Function(_IsCheckedCreate value)? isCheckedCreate,
     required TResult orElse(),
@@ -421,6 +433,7 @@ class _$_GetModules implements _GetModules {
     required TResult Function(Module module) isSelected,
     required TResult Function(Module module) isCheckedView,
     required TResult Function(Module module) isCheckedEdit,
+    required TResult Function(bool isEdit) isEdit,
     required TResult Function(Module module) isCheckedDelete,
     required TResult Function(Module module) isCheckedCreate,
   }) {
@@ -438,6 +451,7 @@ class _$_GetModules implements _GetModules {
     TResult? Function(Module module)? isSelected,
     TResult? Function(Module module)? isCheckedView,
     TResult? Function(Module module)? isCheckedEdit,
+    TResult? Function(bool isEdit)? isEdit,
     TResult? Function(Module module)? isCheckedDelete,
     TResult? Function(Module module)? isCheckedCreate,
   }) {
@@ -455,6 +469,7 @@ class _$_GetModules implements _GetModules {
     TResult Function(Module module)? isSelected,
     TResult Function(Module module)? isCheckedView,
     TResult Function(Module module)? isCheckedEdit,
+    TResult Function(bool isEdit)? isEdit,
     TResult Function(Module module)? isCheckedDelete,
     TResult Function(Module module)? isCheckedCreate,
     required TResult orElse(),
@@ -474,6 +489,7 @@ class _$_GetModules implements _GetModules {
     required TResult Function(_IsSelected value) isSelected,
     required TResult Function(_IsCheckedView value) isCheckedView,
     required TResult Function(_IsCheckedEdit value) isCheckedEdit,
+    required TResult Function(_IsEdit value) isEdit,
     required TResult Function(_IsCheckedDelete value) isCheckedDelete,
     required TResult Function(_IsCheckedCreate value) isCheckedCreate,
   }) {
@@ -489,6 +505,7 @@ class _$_GetModules implements _GetModules {
     TResult? Function(_IsSelected value)? isSelected,
     TResult? Function(_IsCheckedView value)? isCheckedView,
     TResult? Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult? Function(_IsEdit value)? isEdit,
     TResult? Function(_IsCheckedDelete value)? isCheckedDelete,
     TResult? Function(_IsCheckedCreate value)? isCheckedCreate,
   }) {
@@ -504,6 +521,7 @@ class _$_GetModules implements _GetModules {
     TResult Function(_IsSelected value)? isSelected,
     TResult Function(_IsCheckedView value)? isCheckedView,
     TResult Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult Function(_IsEdit value)? isEdit,
     TResult Function(_IsCheckedDelete value)? isCheckedDelete,
     TResult Function(_IsCheckedCreate value)? isCheckedCreate,
     required TResult orElse(),
@@ -604,6 +622,7 @@ class _$_ViewRole implements _ViewRole {
     required TResult Function(Module module) isSelected,
     required TResult Function(Module module) isCheckedView,
     required TResult Function(Module module) isCheckedEdit,
+    required TResult Function(bool isEdit) isEdit,
     required TResult Function(Module module) isCheckedDelete,
     required TResult Function(Module module) isCheckedCreate,
   }) {
@@ -621,6 +640,7 @@ class _$_ViewRole implements _ViewRole {
     TResult? Function(Module module)? isSelected,
     TResult? Function(Module module)? isCheckedView,
     TResult? Function(Module module)? isCheckedEdit,
+    TResult? Function(bool isEdit)? isEdit,
     TResult? Function(Module module)? isCheckedDelete,
     TResult? Function(Module module)? isCheckedCreate,
   }) {
@@ -638,6 +658,7 @@ class _$_ViewRole implements _ViewRole {
     TResult Function(Module module)? isSelected,
     TResult Function(Module module)? isCheckedView,
     TResult Function(Module module)? isCheckedEdit,
+    TResult Function(bool isEdit)? isEdit,
     TResult Function(Module module)? isCheckedDelete,
     TResult Function(Module module)? isCheckedCreate,
     required TResult orElse(),
@@ -657,6 +678,7 @@ class _$_ViewRole implements _ViewRole {
     required TResult Function(_IsSelected value) isSelected,
     required TResult Function(_IsCheckedView value) isCheckedView,
     required TResult Function(_IsCheckedEdit value) isCheckedEdit,
+    required TResult Function(_IsEdit value) isEdit,
     required TResult Function(_IsCheckedDelete value) isCheckedDelete,
     required TResult Function(_IsCheckedCreate value) isCheckedCreate,
   }) {
@@ -672,6 +694,7 @@ class _$_ViewRole implements _ViewRole {
     TResult? Function(_IsSelected value)? isSelected,
     TResult? Function(_IsCheckedView value)? isCheckedView,
     TResult? Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult? Function(_IsEdit value)? isEdit,
     TResult? Function(_IsCheckedDelete value)? isCheckedDelete,
     TResult? Function(_IsCheckedCreate value)? isCheckedCreate,
   }) {
@@ -687,6 +710,7 @@ class _$_ViewRole implements _ViewRole {
     TResult Function(_IsSelected value)? isSelected,
     TResult Function(_IsCheckedView value)? isCheckedView,
     TResult Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult Function(_IsEdit value)? isEdit,
     TResult Function(_IsCheckedDelete value)? isCheckedDelete,
     TResult Function(_IsCheckedCreate value)? isCheckedCreate,
     required TResult orElse(),
@@ -782,6 +806,7 @@ class _$_IsSelected implements _IsSelected {
     required TResult Function(Module module) isSelected,
     required TResult Function(Module module) isCheckedView,
     required TResult Function(Module module) isCheckedEdit,
+    required TResult Function(bool isEdit) isEdit,
     required TResult Function(Module module) isCheckedDelete,
     required TResult Function(Module module) isCheckedCreate,
   }) {
@@ -799,6 +824,7 @@ class _$_IsSelected implements _IsSelected {
     TResult? Function(Module module)? isSelected,
     TResult? Function(Module module)? isCheckedView,
     TResult? Function(Module module)? isCheckedEdit,
+    TResult? Function(bool isEdit)? isEdit,
     TResult? Function(Module module)? isCheckedDelete,
     TResult? Function(Module module)? isCheckedCreate,
   }) {
@@ -816,6 +842,7 @@ class _$_IsSelected implements _IsSelected {
     TResult Function(Module module)? isSelected,
     TResult Function(Module module)? isCheckedView,
     TResult Function(Module module)? isCheckedEdit,
+    TResult Function(bool isEdit)? isEdit,
     TResult Function(Module module)? isCheckedDelete,
     TResult Function(Module module)? isCheckedCreate,
     required TResult orElse(),
@@ -835,6 +862,7 @@ class _$_IsSelected implements _IsSelected {
     required TResult Function(_IsSelected value) isSelected,
     required TResult Function(_IsCheckedView value) isCheckedView,
     required TResult Function(_IsCheckedEdit value) isCheckedEdit,
+    required TResult Function(_IsEdit value) isEdit,
     required TResult Function(_IsCheckedDelete value) isCheckedDelete,
     required TResult Function(_IsCheckedCreate value) isCheckedCreate,
   }) {
@@ -850,6 +878,7 @@ class _$_IsSelected implements _IsSelected {
     TResult? Function(_IsSelected value)? isSelected,
     TResult? Function(_IsCheckedView value)? isCheckedView,
     TResult? Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult? Function(_IsEdit value)? isEdit,
     TResult? Function(_IsCheckedDelete value)? isCheckedDelete,
     TResult? Function(_IsCheckedCreate value)? isCheckedCreate,
   }) {
@@ -865,6 +894,7 @@ class _$_IsSelected implements _IsSelected {
     TResult Function(_IsSelected value)? isSelected,
     TResult Function(_IsCheckedView value)? isCheckedView,
     TResult Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult Function(_IsEdit value)? isEdit,
     TResult Function(_IsCheckedDelete value)? isCheckedDelete,
     TResult Function(_IsCheckedCreate value)? isCheckedCreate,
     required TResult orElse(),
@@ -957,6 +987,7 @@ class _$_IsCheckedView implements _IsCheckedView {
     required TResult Function(Module module) isSelected,
     required TResult Function(Module module) isCheckedView,
     required TResult Function(Module module) isCheckedEdit,
+    required TResult Function(bool isEdit) isEdit,
     required TResult Function(Module module) isCheckedDelete,
     required TResult Function(Module module) isCheckedCreate,
   }) {
@@ -974,6 +1005,7 @@ class _$_IsCheckedView implements _IsCheckedView {
     TResult? Function(Module module)? isSelected,
     TResult? Function(Module module)? isCheckedView,
     TResult? Function(Module module)? isCheckedEdit,
+    TResult? Function(bool isEdit)? isEdit,
     TResult? Function(Module module)? isCheckedDelete,
     TResult? Function(Module module)? isCheckedCreate,
   }) {
@@ -991,6 +1023,7 @@ class _$_IsCheckedView implements _IsCheckedView {
     TResult Function(Module module)? isSelected,
     TResult Function(Module module)? isCheckedView,
     TResult Function(Module module)? isCheckedEdit,
+    TResult Function(bool isEdit)? isEdit,
     TResult Function(Module module)? isCheckedDelete,
     TResult Function(Module module)? isCheckedCreate,
     required TResult orElse(),
@@ -1010,6 +1043,7 @@ class _$_IsCheckedView implements _IsCheckedView {
     required TResult Function(_IsSelected value) isSelected,
     required TResult Function(_IsCheckedView value) isCheckedView,
     required TResult Function(_IsCheckedEdit value) isCheckedEdit,
+    required TResult Function(_IsEdit value) isEdit,
     required TResult Function(_IsCheckedDelete value) isCheckedDelete,
     required TResult Function(_IsCheckedCreate value) isCheckedCreate,
   }) {
@@ -1025,6 +1059,7 @@ class _$_IsCheckedView implements _IsCheckedView {
     TResult? Function(_IsSelected value)? isSelected,
     TResult? Function(_IsCheckedView value)? isCheckedView,
     TResult? Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult? Function(_IsEdit value)? isEdit,
     TResult? Function(_IsCheckedDelete value)? isCheckedDelete,
     TResult? Function(_IsCheckedCreate value)? isCheckedCreate,
   }) {
@@ -1040,6 +1075,7 @@ class _$_IsCheckedView implements _IsCheckedView {
     TResult Function(_IsSelected value)? isSelected,
     TResult Function(_IsCheckedView value)? isCheckedView,
     TResult Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult Function(_IsEdit value)? isEdit,
     TResult Function(_IsCheckedDelete value)? isCheckedDelete,
     TResult Function(_IsCheckedCreate value)? isCheckedCreate,
     required TResult orElse(),
@@ -1132,6 +1168,7 @@ class _$_IsCheckedEdit implements _IsCheckedEdit {
     required TResult Function(Module module) isSelected,
     required TResult Function(Module module) isCheckedView,
     required TResult Function(Module module) isCheckedEdit,
+    required TResult Function(bool isEdit) isEdit,
     required TResult Function(Module module) isCheckedDelete,
     required TResult Function(Module module) isCheckedCreate,
   }) {
@@ -1149,6 +1186,7 @@ class _$_IsCheckedEdit implements _IsCheckedEdit {
     TResult? Function(Module module)? isSelected,
     TResult? Function(Module module)? isCheckedView,
     TResult? Function(Module module)? isCheckedEdit,
+    TResult? Function(bool isEdit)? isEdit,
     TResult? Function(Module module)? isCheckedDelete,
     TResult? Function(Module module)? isCheckedCreate,
   }) {
@@ -1166,6 +1204,7 @@ class _$_IsCheckedEdit implements _IsCheckedEdit {
     TResult Function(Module module)? isSelected,
     TResult Function(Module module)? isCheckedView,
     TResult Function(Module module)? isCheckedEdit,
+    TResult Function(bool isEdit)? isEdit,
     TResult Function(Module module)? isCheckedDelete,
     TResult Function(Module module)? isCheckedCreate,
     required TResult orElse(),
@@ -1185,6 +1224,7 @@ class _$_IsCheckedEdit implements _IsCheckedEdit {
     required TResult Function(_IsSelected value) isSelected,
     required TResult Function(_IsCheckedView value) isCheckedView,
     required TResult Function(_IsCheckedEdit value) isCheckedEdit,
+    required TResult Function(_IsEdit value) isEdit,
     required TResult Function(_IsCheckedDelete value) isCheckedDelete,
     required TResult Function(_IsCheckedCreate value) isCheckedCreate,
   }) {
@@ -1200,6 +1240,7 @@ class _$_IsCheckedEdit implements _IsCheckedEdit {
     TResult? Function(_IsSelected value)? isSelected,
     TResult? Function(_IsCheckedView value)? isCheckedView,
     TResult? Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult? Function(_IsEdit value)? isEdit,
     TResult? Function(_IsCheckedDelete value)? isCheckedDelete,
     TResult? Function(_IsCheckedCreate value)? isCheckedCreate,
   }) {
@@ -1215,6 +1256,7 @@ class _$_IsCheckedEdit implements _IsCheckedEdit {
     TResult Function(_IsSelected value)? isSelected,
     TResult Function(_IsCheckedView value)? isCheckedView,
     TResult Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult Function(_IsEdit value)? isEdit,
     TResult Function(_IsCheckedDelete value)? isCheckedDelete,
     TResult Function(_IsCheckedCreate value)? isCheckedCreate,
     required TResult orElse(),
@@ -1232,6 +1274,185 @@ abstract class _IsCheckedEdit implements RoleCreationEvent {
   Module get module;
   @JsonKey(ignore: true)
   _$$_IsCheckedEditCopyWith<_$_IsCheckedEdit> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_IsEditCopyWith<$Res> {
+  factory _$$_IsEditCopyWith(_$_IsEdit value, $Res Function(_$_IsEdit) then) =
+      __$$_IsEditCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isEdit});
+}
+
+/// @nodoc
+class __$$_IsEditCopyWithImpl<$Res>
+    extends _$RoleCreationEventCopyWithImpl<$Res, _$_IsEdit>
+    implements _$$_IsEditCopyWith<$Res> {
+  __$$_IsEditCopyWithImpl(_$_IsEdit _value, $Res Function(_$_IsEdit) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isEdit = null,
+  }) {
+    return _then(_$_IsEdit(
+      null == isEdit
+          ? _value.isEdit
+          : isEdit // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_IsEdit implements _IsEdit {
+  const _$_IsEdit(this.isEdit);
+
+  @override
+  final bool isEdit;
+
+  @override
+  String toString() {
+    return 'RoleCreationEvent.isEdit(isEdit: $isEdit)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_IsEdit &&
+            (identical(other.isEdit, isEdit) || other.isEdit == isEdit));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isEdit);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_IsEditCopyWith<_$_IsEdit> get copyWith =>
+      __$$_IsEditCopyWithImpl<_$_IsEdit>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)
+        addUpdateRole,
+    required TResult Function(String userId) getModules,
+    required TResult Function(String userId, String roleId) viewRole,
+    required TResult Function(Module module) isSelected,
+    required TResult Function(Module module) isCheckedView,
+    required TResult Function(Module module) isCheckedEdit,
+    required TResult Function(bool isEdit) isEdit,
+    required TResult Function(Module module) isCheckedDelete,
+    required TResult Function(Module module) isCheckedCreate,
+  }) {
+    return isEdit(this.isEdit);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)?
+        addUpdateRole,
+    TResult? Function(String userId)? getModules,
+    TResult? Function(String userId, String roleId)? viewRole,
+    TResult? Function(Module module)? isSelected,
+    TResult? Function(Module module)? isCheckedView,
+    TResult? Function(Module module)? isCheckedEdit,
+    TResult? Function(bool isEdit)? isEdit,
+    TResult? Function(Module module)? isCheckedDelete,
+    TResult? Function(Module module)? isCheckedCreate,
+  }) {
+    return isEdit?.call(this.isEdit);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, String role, String? roleId,
+            List<Module> moduleId, BuildContext context)?
+        addUpdateRole,
+    TResult Function(String userId)? getModules,
+    TResult Function(String userId, String roleId)? viewRole,
+    TResult Function(Module module)? isSelected,
+    TResult Function(Module module)? isCheckedView,
+    TResult Function(Module module)? isCheckedEdit,
+    TResult Function(bool isEdit)? isEdit,
+    TResult Function(Module module)? isCheckedDelete,
+    TResult Function(Module module)? isCheckedCreate,
+    required TResult orElse(),
+  }) {
+    if (isEdit != null) {
+      return isEdit(this.isEdit);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AddUpdateRole value) addUpdateRole,
+    required TResult Function(_GetModules value) getModules,
+    required TResult Function(_ViewRole value) viewRole,
+    required TResult Function(_IsSelected value) isSelected,
+    required TResult Function(_IsCheckedView value) isCheckedView,
+    required TResult Function(_IsCheckedEdit value) isCheckedEdit,
+    required TResult Function(_IsEdit value) isEdit,
+    required TResult Function(_IsCheckedDelete value) isCheckedDelete,
+    required TResult Function(_IsCheckedCreate value) isCheckedCreate,
+  }) {
+    return isEdit(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AddUpdateRole value)? addUpdateRole,
+    TResult? Function(_GetModules value)? getModules,
+    TResult? Function(_ViewRole value)? viewRole,
+    TResult? Function(_IsSelected value)? isSelected,
+    TResult? Function(_IsCheckedView value)? isCheckedView,
+    TResult? Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult? Function(_IsEdit value)? isEdit,
+    TResult? Function(_IsCheckedDelete value)? isCheckedDelete,
+    TResult? Function(_IsCheckedCreate value)? isCheckedCreate,
+  }) {
+    return isEdit?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AddUpdateRole value)? addUpdateRole,
+    TResult Function(_GetModules value)? getModules,
+    TResult Function(_ViewRole value)? viewRole,
+    TResult Function(_IsSelected value)? isSelected,
+    TResult Function(_IsCheckedView value)? isCheckedView,
+    TResult Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult Function(_IsEdit value)? isEdit,
+    TResult Function(_IsCheckedDelete value)? isCheckedDelete,
+    TResult Function(_IsCheckedCreate value)? isCheckedCreate,
+    required TResult orElse(),
+  }) {
+    if (isEdit != null) {
+      return isEdit(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _IsEdit implements RoleCreationEvent {
+  const factory _IsEdit(final bool isEdit) = _$_IsEdit;
+
+  bool get isEdit;
+  @JsonKey(ignore: true)
+  _$$_IsEditCopyWith<_$_IsEdit> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1307,6 +1528,7 @@ class _$_IsCheckedDelete implements _IsCheckedDelete {
     required TResult Function(Module module) isSelected,
     required TResult Function(Module module) isCheckedView,
     required TResult Function(Module module) isCheckedEdit,
+    required TResult Function(bool isEdit) isEdit,
     required TResult Function(Module module) isCheckedDelete,
     required TResult Function(Module module) isCheckedCreate,
   }) {
@@ -1324,6 +1546,7 @@ class _$_IsCheckedDelete implements _IsCheckedDelete {
     TResult? Function(Module module)? isSelected,
     TResult? Function(Module module)? isCheckedView,
     TResult? Function(Module module)? isCheckedEdit,
+    TResult? Function(bool isEdit)? isEdit,
     TResult? Function(Module module)? isCheckedDelete,
     TResult? Function(Module module)? isCheckedCreate,
   }) {
@@ -1341,6 +1564,7 @@ class _$_IsCheckedDelete implements _IsCheckedDelete {
     TResult Function(Module module)? isSelected,
     TResult Function(Module module)? isCheckedView,
     TResult Function(Module module)? isCheckedEdit,
+    TResult Function(bool isEdit)? isEdit,
     TResult Function(Module module)? isCheckedDelete,
     TResult Function(Module module)? isCheckedCreate,
     required TResult orElse(),
@@ -1360,6 +1584,7 @@ class _$_IsCheckedDelete implements _IsCheckedDelete {
     required TResult Function(_IsSelected value) isSelected,
     required TResult Function(_IsCheckedView value) isCheckedView,
     required TResult Function(_IsCheckedEdit value) isCheckedEdit,
+    required TResult Function(_IsEdit value) isEdit,
     required TResult Function(_IsCheckedDelete value) isCheckedDelete,
     required TResult Function(_IsCheckedCreate value) isCheckedCreate,
   }) {
@@ -1375,6 +1600,7 @@ class _$_IsCheckedDelete implements _IsCheckedDelete {
     TResult? Function(_IsSelected value)? isSelected,
     TResult? Function(_IsCheckedView value)? isCheckedView,
     TResult? Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult? Function(_IsEdit value)? isEdit,
     TResult? Function(_IsCheckedDelete value)? isCheckedDelete,
     TResult? Function(_IsCheckedCreate value)? isCheckedCreate,
   }) {
@@ -1390,6 +1616,7 @@ class _$_IsCheckedDelete implements _IsCheckedDelete {
     TResult Function(_IsSelected value)? isSelected,
     TResult Function(_IsCheckedView value)? isCheckedView,
     TResult Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult Function(_IsEdit value)? isEdit,
     TResult Function(_IsCheckedDelete value)? isCheckedDelete,
     TResult Function(_IsCheckedCreate value)? isCheckedCreate,
     required TResult orElse(),
@@ -1482,6 +1709,7 @@ class _$_IsCheckedCreate implements _IsCheckedCreate {
     required TResult Function(Module module) isSelected,
     required TResult Function(Module module) isCheckedView,
     required TResult Function(Module module) isCheckedEdit,
+    required TResult Function(bool isEdit) isEdit,
     required TResult Function(Module module) isCheckedDelete,
     required TResult Function(Module module) isCheckedCreate,
   }) {
@@ -1499,6 +1727,7 @@ class _$_IsCheckedCreate implements _IsCheckedCreate {
     TResult? Function(Module module)? isSelected,
     TResult? Function(Module module)? isCheckedView,
     TResult? Function(Module module)? isCheckedEdit,
+    TResult? Function(bool isEdit)? isEdit,
     TResult? Function(Module module)? isCheckedDelete,
     TResult? Function(Module module)? isCheckedCreate,
   }) {
@@ -1516,6 +1745,7 @@ class _$_IsCheckedCreate implements _IsCheckedCreate {
     TResult Function(Module module)? isSelected,
     TResult Function(Module module)? isCheckedView,
     TResult Function(Module module)? isCheckedEdit,
+    TResult Function(bool isEdit)? isEdit,
     TResult Function(Module module)? isCheckedDelete,
     TResult Function(Module module)? isCheckedCreate,
     required TResult orElse(),
@@ -1535,6 +1765,7 @@ class _$_IsCheckedCreate implements _IsCheckedCreate {
     required TResult Function(_IsSelected value) isSelected,
     required TResult Function(_IsCheckedView value) isCheckedView,
     required TResult Function(_IsCheckedEdit value) isCheckedEdit,
+    required TResult Function(_IsEdit value) isEdit,
     required TResult Function(_IsCheckedDelete value) isCheckedDelete,
     required TResult Function(_IsCheckedCreate value) isCheckedCreate,
   }) {
@@ -1550,6 +1781,7 @@ class _$_IsCheckedCreate implements _IsCheckedCreate {
     TResult? Function(_IsSelected value)? isSelected,
     TResult? Function(_IsCheckedView value)? isCheckedView,
     TResult? Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult? Function(_IsEdit value)? isEdit,
     TResult? Function(_IsCheckedDelete value)? isCheckedDelete,
     TResult? Function(_IsCheckedCreate value)? isCheckedCreate,
   }) {
@@ -1565,6 +1797,7 @@ class _$_IsCheckedCreate implements _IsCheckedCreate {
     TResult Function(_IsSelected value)? isSelected,
     TResult Function(_IsCheckedView value)? isCheckedView,
     TResult Function(_IsCheckedEdit value)? isCheckedEdit,
+    TResult Function(_IsEdit value)? isEdit,
     TResult Function(_IsCheckedDelete value)? isCheckedDelete,
     TResult Function(_IsCheckedCreate value)? isCheckedCreate,
     required TResult orElse(),
@@ -1589,6 +1822,7 @@ abstract class _IsCheckedCreate implements RoleCreationEvent {
 mixin _$RoleCreationState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
+  bool get isEdit => throw _privateConstructorUsedError;
   CommonResponseUse? get response => throw _privateConstructorUsedError;
   ModuleResponse? get moduleResponse => throw _privateConstructorUsedError;
   ViewRoleResponse? get viewRoleResponse => throw _privateConstructorUsedError;
@@ -1610,6 +1844,7 @@ abstract class $RoleCreationStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       bool isError,
+      bool isEdit,
       CommonResponseUse? response,
       ModuleResponse? moduleResponse,
       ViewRoleResponse? viewRoleResponse,
@@ -1633,6 +1868,7 @@ class _$RoleCreationStateCopyWithImpl<$Res, $Val extends RoleCreationState>
   $Res call({
     Object? isLoading = null,
     Object? isError = null,
+    Object? isEdit = null,
     Object? response = freezed,
     Object? moduleResponse = freezed,
     Object? viewRoleResponse = freezed,
@@ -1648,6 +1884,10 @@ class _$RoleCreationStateCopyWithImpl<$Res, $Val extends RoleCreationState>
       isError: null == isError
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isEdit: null == isEdit
+          ? _value.isEdit
+          : isEdit // ignore: cast_nullable_to_non_nullable
               as bool,
       response: freezed == response
           ? _value.response
@@ -1688,6 +1928,7 @@ abstract class _$$_RoleCreationStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       bool isError,
+      bool isEdit,
       CommonResponseUse? response,
       ModuleResponse? moduleResponse,
       ViewRoleResponse? viewRoleResponse,
@@ -1709,6 +1950,7 @@ class __$$_RoleCreationStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? isError = null,
+    Object? isEdit = null,
     Object? response = freezed,
     Object? moduleResponse = freezed,
     Object? viewRoleResponse = freezed,
@@ -1724,6 +1966,10 @@ class __$$_RoleCreationStateCopyWithImpl<$Res>
       isError: null == isError
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isEdit: null == isEdit
+          ? _value.isEdit
+          : isEdit // ignore: cast_nullable_to_non_nullable
               as bool,
       response: freezed == response
           ? _value.response
@@ -1759,6 +2005,7 @@ class _$_RoleCreationState implements _RoleCreationState {
   const _$_RoleCreationState(
       {required this.isLoading,
       required this.isError,
+      required this.isEdit,
       required this.response,
       required this.moduleResponse,
       required this.viewRoleResponse,
@@ -1770,6 +2017,8 @@ class _$_RoleCreationState implements _RoleCreationState {
   final bool isLoading;
   @override
   final bool isError;
+  @override
+  final bool isEdit;
   @override
   final CommonResponseUse? response;
   @override
@@ -1787,7 +2036,7 @@ class _$_RoleCreationState implements _RoleCreationState {
 
   @override
   String toString() {
-    return 'RoleCreationState(isLoading: $isLoading, isError: $isError, response: $response, moduleResponse: $moduleResponse, viewRoleResponse: $viewRoleResponse, error: $error, isClientError: $isClientError, isLoadingButton: $isLoadingButton)';
+    return 'RoleCreationState(isLoading: $isLoading, isError: $isError, isEdit: $isEdit, response: $response, moduleResponse: $moduleResponse, viewRoleResponse: $viewRoleResponse, error: $error, isClientError: $isClientError, isLoadingButton: $isLoadingButton)';
   }
 
   @override
@@ -1798,6 +2047,7 @@ class _$_RoleCreationState implements _RoleCreationState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isError, isError) || other.isError == isError) &&
+            (identical(other.isEdit, isEdit) || other.isEdit == isEdit) &&
             (identical(other.response, response) ||
                 other.response == response) &&
             (identical(other.moduleResponse, moduleResponse) ||
@@ -1812,8 +2062,17 @@ class _$_RoleCreationState implements _RoleCreationState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isError, response,
-      moduleResponse, viewRoleResponse, error, isClientError, isLoadingButton);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      isError,
+      isEdit,
+      response,
+      moduleResponse,
+      viewRoleResponse,
+      error,
+      isClientError,
+      isLoadingButton);
 
   @JsonKey(ignore: true)
   @override
@@ -1827,6 +2086,7 @@ abstract class _RoleCreationState implements RoleCreationState {
   const factory _RoleCreationState(
       {required final bool isLoading,
       required final bool isError,
+      required final bool isEdit,
       required final CommonResponseUse? response,
       required final ModuleResponse? moduleResponse,
       required final ViewRoleResponse? viewRoleResponse,
@@ -1838,6 +2098,8 @@ abstract class _RoleCreationState implements RoleCreationState {
   bool get isLoading;
   @override
   bool get isError;
+  @override
+  bool get isEdit;
   @override
   CommonResponseUse? get response;
   @override

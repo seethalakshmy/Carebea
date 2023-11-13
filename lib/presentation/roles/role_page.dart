@@ -396,6 +396,7 @@ class _RolesPageState extends State<RolesPage> {
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {
         return CommonAlertWidget(
+          height: 150,
             heading: AppString.delete.val,
             label: AppString.deleteRole.val,
             onTapYes: () {
