@@ -98,7 +98,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
     return Column(
       children: [
         HeaderView(
-          title: AppString.adminManagement.val,
+          title: AppString.createNewAdmin.val,
         ),
         CustomSizedBox(height: DBL.ten.val),
         _rebuildView(),

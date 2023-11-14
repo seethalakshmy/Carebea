@@ -425,7 +425,7 @@ class _ServiceRequestManagementPageState
                   size: ColumnSize.L,
                   fixedWidth: DBL.twoHundred.val,
                   label: _columnsView(
-                      text: AppString.careRecipientName.val,
+                      text: AppString.careRecipient.val,
                       fontWeight: FontWeight.bold),
                 ),
                 DataColumn2(

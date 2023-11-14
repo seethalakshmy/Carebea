@@ -176,7 +176,7 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
           DataColumn2(
             size: ColumnSize.S,
             label: _tableColumnView(
-              AppString.service.val,
+              AppString.serviceId.val,
             ),
           ),
           DataColumn2(
