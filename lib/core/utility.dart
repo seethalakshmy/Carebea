@@ -28,6 +28,24 @@ class Utility {
     return formattedDate;
   }
 
+  static String dateConverter(
+      {required String date,
+      required String currentFormat,
+      String? convertToFormat}) {
+    // Input date Format
+    // final format = DateFormat("yyyy-MM-dd");
+    try {
+      final format = DateFormat(currentFormat);
+      DateTime gettingDate = format.parse(date).toLocal();
+      final DateFormat formatter = DateFormat(convertToFormat ?? 'dd-MM-yyyy');
+      // Output Date Format
+      final String formatted = formatter.format(gettingDate);
+      return formatted;
+    } catch (e, stack) {
+      return "mm/dd/yyyy";
+    }
+  }
+
   static String serviceDate(DateTime date) {
     final String formattedDate = DateFormat('MMM dd yyyy hh:mm a').format(date);
     return formattedDate;

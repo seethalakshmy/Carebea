@@ -73,8 +73,9 @@ class _MenuBarState extends State<SideMenuPage> {
 
   @override
   void initState() {
-    super.initState();
     getVersionNumber();
+
+    super.initState();
     mainData = {
       AppString.dashboard.val: "",
       AppString.roleManagement.val: "",
