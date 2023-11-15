@@ -53,6 +53,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
   int _end = 10;
   final TextEditingController _searchController = TextEditingController();
   String? adminId;
+  bool? filterId;
 
   @override
   void initState() {
@@ -63,7 +64,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
   @override
   void dispose() {
     super.dispose();
-    _searchController.dispose();
+    // _searchController.dispose();
   }
 
   @override
@@ -94,7 +95,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
             page: _userBloc.page.toString(),
             limit: _userBloc.limit.toString(),
             searchTerm: _searchController.text.trim(),
-            filterId: null)),
+            filterId: filterId)),
       child: _bodyView(),
     );
   }
@@ -120,6 +121,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
 
   _usersView(BuildContext context, UserListResponse? value,
       UserManagementState state) {
+    debugPrint('user list length ${mUserList.isEmpty}');
     if (value?.status ?? false) {
       if (value?.data?.finalResult != null &&
           value!.data!.finalResult!.isNotEmpty) {
@@ -129,27 +131,29 @@ class _UserManagementPageState extends State<UserManagementPage> {
         mUserList.addAll(value.data?.finalResult ?? []);
       }
     }
-    return mUserList.isNotEmpty
-        ? Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _statusDropDown(context),
-                  _searchField(),
-                ],
-              ),
-              CustomSizedBox(height: DBL.fifteen.val),
-              CustomSizedBox(
-                height: (_userBloc.limit + 1) * 48,
-                child: _usersTable(state, context),
-              ),
-              CustomSizedBox(height: DBL.twenty.val),
-              _paginationView()
-            ],
-          )
-        : EmptyView(title: AppString.noUsersFound.val);
+    // return mUserList.isNotEmpty
+    //     ? \
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _statusDropDown(context),
+            _searchField(),
+          ],
+        ),
+        CustomSizedBox(height: DBL.fifteen.val),
+        CustomSizedBox(
+          height: (_userBloc.limit + 1) * 48,
+          child: mUserList.isNotEmpty
+              ? _usersTable(state, context)
+              : EmptyView(title: AppString.noUsersFound.val),
+        ),
+        CustomSizedBox(height: DBL.twenty.val),
+        _paginationView()
+      ],
+    );
   }
 
   CTextField _searchField() {
@@ -165,7 +169,8 @@ class _UserManagementPageState extends State<UserManagementPage> {
             page: _userBloc.page.toString(),
             limit: _userBloc.limit.toString(),
             searchTerm: _searchController.text.trim(),
-            filterId: null));
+            filterId: filterId));
+        debugPrint('user list length ${mUserList.isEmpty}');
       },
       suffixIcon: CustomSvg(
         path: IMG.search.val,
@@ -178,12 +183,14 @@ class _UserManagementPageState extends State<UserManagementPage> {
   CustomDropdown<int> _statusDropDown(BuildContext context) {
     return CustomDropdown<int>(
       onChange: (int value, int index) {
+        filterId = value == 1 ? true : false;
+
         _userBloc.add(UserManagementEvent.getUsers(
             userId: adminId ?? '',
             page: _userBloc.page.toString(),
             limit: _userBloc.limit.toString(),
             searchTerm: _searchController.text.trim(),
-            filterId: value == 1 ? true : false));
+            filterId: filterId));
       },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -246,7 +253,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
                 page: _userBloc.page.toString(),
                 limit: _userBloc.limit.toString(),
                 searchTerm: _searchController.text.trim(),
-                filterId: null));
+                filterId: filterId));
             updateData();
           }
         },
@@ -257,7 +264,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
               page: _userBloc.page.toString(),
               limit: _userBloc.limit.toString(),
               searchTerm: _searchController.text.trim(),
-              filterId: null));
+              filterId: filterId));
           updateData();
         },
         onPreviousPressed: () {
@@ -268,7 +275,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
                 page: _userBloc.page.toString(),
                 limit: _userBloc.limit.toString(),
                 searchTerm: _searchController.text.trim(),
-                filterId: null));
+                filterId: filterId));
             updateData();
           }
         });

@@ -808,9 +808,17 @@ class _ServiceRequestManagementPageState
       _end = _serviceRequestBloc.serviceRequestsList.length < _limit
           ? _serviceRequestBloc.serviceRequestsList.length
           : _limit;
+      debugPrint("end $_end");
+      debugPrint("length ${_serviceRequestBloc.serviceRequestsList.length}");
+      debugPrint("limit $_limit");
     } else {
       _start = (_page * _limit) - 10;
-      _end = _start + _serviceRequestBloc.serviceRequestsList.length;
+      _end = _serviceRequestBloc.serviceDetailsList.length < 10
+          ? _start + _serviceRequestBloc.serviceRequestsList.length
+          : (_page * _limit);
+      debugPrint("end $_end");
+      debugPrint("length ${_serviceRequestBloc.serviceRequestsList.length}");
+      debugPrint("limit $_limit");
     }
   }
 }

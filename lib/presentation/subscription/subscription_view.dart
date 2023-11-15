@@ -3,7 +3,6 @@ import 'package:admin_580_tech/infrastructure/subscription/subscription_reposito
 import 'package:admin_580_tech/presentation/subscription/subscription_details_view.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:data_table_2/data_table_2.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,7 +12,6 @@ import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
 import '../../core/utility.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
-import '../side_menu/side_menu_page.dart';
 import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
@@ -149,13 +147,13 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _statusDropDown(context),
-                  _searchField(),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     _statusDropDown(context),
+              //     _searchField(),
+              //   ],
+              // ),
               EmptyView(title: AppString.noUsersFound.val),
             ],
           );
@@ -190,19 +188,23 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
         page: _page.toString(),
         limit: _limit.toString(),
         searchTerm: _searchController.text.trim(),
-        subscriptionType: null));
+        subscriptionType: _subscriptionBloc.filterId.toString()));
   }
 
   CustomDropdown<int> _statusDropDown(BuildContext context) {
     return CustomDropdown<int>(
       onChange: (int value, int index) {
-        _subscriptionBloc.filterId = value;
+        debugPrint('value $value');
+        debugPrint('index $index');
+        _subscriptionBloc.filterId = index;
         _subscriptionBloc.add(SubscriptionEvent.getSubscription(
             userId: userId,
             page: _page.toString(),
             limit: _limit.toString(),
-            searchTerm: '',
-            subscriptionType: _subscriptionBloc.filterId.toString()));
+            searchTerm: _searchController.text.trim(),
+            subscriptionType: _subscriptionBloc.filterId == 0
+                ? Null
+                : _subscriptionBloc.filterId.toString()));
       },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -221,6 +223,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
         padding: EdgeInsets.all(DBL.five.val),
       ),
       items: [
+        AppString.all.val,
         AppString.monthly.val,
         AppString.semiAnnually.val,
         AppString.annually.val,
@@ -475,9 +478,15 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
       _end = _subscriptionBloc.subscriptionList.length < _limit
           ? _subscriptionBloc.subscriptionList.length
           : _limit;
+      debugPrint("end $_end");
+      debugPrint("length ${_subscriptionBloc.subscriptionList.length}");
+      debugPrint("limit $_limit");
     } else {
       _start = (_page * _limit) - 10;
       _end = _start + _subscriptionBloc.subscriptionList.length;
+      debugPrint("end $_end");
+      debugPrint("length ${_subscriptionBloc.subscriptionList.length}");
+      debugPrint("limit $_limit");
     }
   }
 

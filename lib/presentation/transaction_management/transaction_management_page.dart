@@ -92,7 +92,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
         ..add(TransactionManagementEvent.getTransactions(
             page: _transactionBloc.paginationPage.toString(),
             limit: _transactionBloc.limit,
-            searchTerm: "",
+            searchTerm: _transactionBloc.searchQuery,
             filterId: 0,
             userId: adminId ?? '')),
       child: BlocBuilder<TransactionManagementBloc, TransactionManagementState>(
@@ -263,14 +263,13 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
         _transactionBloc.totalItems = value.data?.totalCount!.toInt() ?? 500;
       }
     }
-    return _transactionBloc.mUserList.isNotEmpty
-        ? Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  /*CustomText(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            /*CustomText(
                     AppString.allTransactions.val,
                     softWrap: true,
                     style: TS().gRoboto(
@@ -281,60 +280,61 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                         color: AppColor.black.val),
                     textAlign: TextAlign.start,
                   ),*/
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      _transactionBloc.state.isInitialLoading
-                          ? _filterLoader()
-                          : _statusDropDown(context),
-                      CustomSizedBox(width: DBL.fifteen.val),
-                      _clearAllFiltersButtonWidget(),
-                    ],
-                  ),
-                  Flexible(
-                    flex: 2,
-                    child: CTextField(
-                      onSubmitted: (val) {
-                        _transactionBloc.searchQuery = val;
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _transactionBloc.state.isInitialLoading
+                    ? _filterLoader()
+                    : _statusDropDown(context),
+                CustomSizedBox(width: DBL.fifteen.val),
+                _clearAllFiltersButtonWidget(),
+              ],
+            ),
+            Flexible(
+              flex: 2,
+              child: CTextField(
+                onSubmitted: (val) {
+                  _transactionBloc.searchQuery = val;
 
-                        _transactionBloc.add(
-                            TransactionManagementEvent.getTransactions(
-                                page: "1",
-                                limit: _transactionBloc.limit,
-                                filterId: _transactionBloc.filterId,
-                                searchTerm: val,
-                                userId: adminId ?? ''));
-                      },
-                      onChanged: (val) {
-                        print("searched value : $val");
-                      },
-                      width: Responsive.isWeb(context)
-                          ? DBL.threeFifteen.val
-                          : DBL.twoForty.val,
-                      height: DBL.forty.val,
-                      controller: _searchController,
-                      hintText: AppString.search.val,
-                      hintStyle: TS().gRoboto(
-                          fontSize: FS.font15.val, fontWeight: FW.w500.val),
-                      suffixIcon: CustomSvg(
-                        path: IMG.search.val,
-                        height: 16,
-                        width: 16,
-                      ),
-                    ),
-                  ),
-                ],
+                  _transactionBloc.add(
+                      TransactionManagementEvent.getTransactions(
+                          page: _transactionBloc.paginationPage.toString(),
+                          limit: _transactionBloc.limit,
+                          filterId: _transactionBloc.filterId,
+                          searchTerm: _transactionBloc.searchQuery,
+                          userId: adminId ?? ''));
+                },
+                onChanged: (val) {
+                  print("searched value : $val");
+                },
+                width: Responsive.isWeb(context)
+                    ? DBL.threeFifteen.val
+                    : DBL.twoForty.val,
+                height: DBL.forty.val,
+                controller: _searchController,
+                hintText: AppString.search.val,
+                hintStyle: TS()
+                    .gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
+                suffixIcon: CustomSvg(
+                  path: IMG.search.val,
+                  height: 16,
+                  width: 16,
+                ),
               ),
-              CustomSizedBox(height: DBL.fifteen.val),
-              CustomSizedBox(
-                height: (_transactionBloc.limit + 1) * 48,
-                child: _usersTable(),
-              ),
-              CustomSizedBox(height: DBL.twenty.val),
-              _paginationView()
-            ],
-          )
-        : const EmptyView(title: "No Transactions found!");
+            ),
+          ],
+        ),
+        CustomSizedBox(height: DBL.fifteen.val),
+        CustomSizedBox(
+          height: (_transactionBloc.limit + 1) * 48,
+          child: _transactionBloc.mUserList.isNotEmpty
+              ? _usersTable()
+              : const EmptyView(title: "No Transactions found!"),
+        ),
+        CustomSizedBox(height: DBL.twenty.val),
+        _paginationView()
+      ],
+    );
   }
 
   Widget _rowsView({
@@ -516,24 +516,24 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
         onItemPressed: (i) {
           _transactionBloc.paginationPage = i;
           updateData();
-          _transactionBloc.add(TransactionManagementEvent.getTransactions(
-              page: _transactionBloc.paginationPage.toString(),
-              limit: _transactionBloc.limit,
-              filterId: _transactionBloc.filterId,
-              searchTerm: _transactionBloc.searchQuery,
-              userId: adminId ?? ''));
+          // _transactionBloc.add(TransactionManagementEvent.getTransactions(
+          //     page: _transactionBloc.paginationPage.toString(),
+          //     limit: _transactionBloc.limit,
+          //     filterId: _transactionBloc.filterId,
+          //     searchTerm: _transactionBloc.searchQuery,
+          //     userId: adminId ?? ''));
         },
         onPreviousPressed: () {
           if (_transactionBloc.paginationPage > 1) {
             _transactionBloc.paginationPage =
                 _transactionBloc.paginationPage - 1;
             updateData();
-            _transactionBloc.add(TransactionManagementEvent.getTransactions(
-                page: _transactionBloc.paginationPage.toString(),
-                limit: _transactionBloc.limit,
-                filterId: _transactionBloc.filterId,
-                searchTerm: _transactionBloc.searchQuery,
-                userId: adminId ?? ''));
+            // _transactionBloc.add(TransactionManagementEvent.getTransactions(
+            //     page: _transactionBloc.paginationPage.toString(),
+            //     limit: _transactionBloc.limit,
+            //     filterId: _transactionBloc.filterId,
+            //     searchTerm: _transactionBloc.searchQuery,
+            //     userId: adminId ?? ''));
           }
         });
   }
@@ -609,7 +609,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
         CustomLog.log(value.toString());
         _transactionBloc.filterId = value;
         _transactionBloc.add(TransactionManagementEvent.getTransactions(
-            page: "1",
+            page: _transactionBloc.paginationPage.toString(),
             limit: _transactionBloc.limit,
             searchTerm: _transactionBloc.searchQuery,
             filterId: _transactionBloc.filterId,

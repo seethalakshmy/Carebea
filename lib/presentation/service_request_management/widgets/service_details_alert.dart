@@ -694,25 +694,29 @@ class ServiceDetailsAlert extends StatelessWidget {
               context: context,
               height: DBL.eight.val,
               text: AppString.serviceFee.val,
-              subText: '\$ ${Utility.formatAmount(double.tryParse(service.serviceFee.toString() ?? "0.0") ?? 0.0)}'),
+              subText:
+                  '\$ ${Utility.formatAmount(double.tryParse(service.serviceFee.toString() ?? "0.0") ?? 0.0)}'),
           _textAndSubText(
               context: context,
               height: DBL.eight.val,
               text: AppString.transportationFee.val,
-              subText: '\$ ${Utility.formatAmount(double.tryParse(service.travelingCharge.toString() ?? "0.0") ?? 0.0)}'),
+              subText:
+                  '\$ ${Utility.formatAmount(double.tryParse(service.travelingCharge.toString() ?? "0.0") ?? 0.0)}'),
           title == AppString.completed.val
               ? _textAndSubText(
                   context: context,
                   height: DBL.eight.val,
                   text: AppString.tip.val,
-                  subText: '\$ ${Utility.formatAmount(double.tryParse(service.tip.toString() ?? "0.0") ?? 0.0)}')
+                  subText:
+                      '\$ ${Utility.formatAmount(double.tryParse(service.tip.toString() ?? "0.0") ?? 0.0)}')
               : const CustomSizedBox(),
           title == AppString.completed.val
               ? _textAndSubText(
                   context: context,
                   height: DBL.eight.val,
                   text: AppString.extraServiceCharge.val,
-                  subText: '\$ ${Utility.formatAmount(double.tryParse(service.extraServiceFee.toString() ?? "0.0") ?? 0.0)}')
+                  subText:
+                      '\$ ${Utility.formatAmount(double.tryParse(service.extraServiceFee.toString() ?? "0.0") ?? 0.0)}')
               : const CustomSizedBox(),
           InkWell(
             onTap: () {
@@ -766,7 +770,8 @@ class ServiceDetailsAlert extends StatelessWidget {
               context: context,
               height: DBL.eight.val,
               text: AppString.amount.val,
-              subText: '\$ ${Utility.formatAmount(double.tryParse(service.refundDetails?.first.price ?? "0.0") ?? 0.0)}'),
+              subText:
+                  '\$ ${Utility.formatAmount(double.tryParse(service.refundDetails?.first.price ?? "0.0") ?? 0.0)}'),
           CustomSizedBox(height: DBL.ten.val),
           _refundStatusWidget(context, service),
           _textAndSubText(
