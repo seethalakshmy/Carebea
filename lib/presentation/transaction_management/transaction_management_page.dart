@@ -516,24 +516,24 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
         onItemPressed: (i) {
           _transactionBloc.paginationPage = i;
           updateData();
-          // _transactionBloc.add(TransactionManagementEvent.getTransactions(
-          //     page: _transactionBloc.paginationPage.toString(),
-          //     limit: _transactionBloc.limit,
-          //     filterId: _transactionBloc.filterId,
-          //     searchTerm: _transactionBloc.searchQuery,
-          //     userId: adminId ?? ''));
+          _transactionBloc.add(TransactionManagementEvent.getTransactions(
+              page: _transactionBloc.paginationPage.toString(),
+              limit: _transactionBloc.limit,
+              filterId: _transactionBloc.filterId,
+              searchTerm: _transactionBloc.searchQuery,
+              userId: adminId ?? ''));
         },
         onPreviousPressed: () {
           if (_transactionBloc.paginationPage > 1) {
             _transactionBloc.paginationPage =
                 _transactionBloc.paginationPage - 1;
             updateData();
-            // _transactionBloc.add(TransactionManagementEvent.getTransactions(
-            //     page: _transactionBloc.paginationPage.toString(),
-            //     limit: _transactionBloc.limit,
-            //     filterId: _transactionBloc.filterId,
-            //     searchTerm: _transactionBloc.searchQuery,
-            //     userId: adminId ?? ''));
+            _transactionBloc.add(TransactionManagementEvent.getTransactions(
+                page: _transactionBloc.paginationPage.toString(),
+                limit: _transactionBloc.limit,
+                filterId: _transactionBloc.filterId,
+                searchTerm: _transactionBloc.searchQuery,
+                userId: adminId ?? ''));
           }
         });
   }

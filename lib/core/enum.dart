@@ -338,7 +338,7 @@ enum AppString {
   schedules("Schedules"),
   accountDetails("Account Details"),
   earnings("Earnings"),
-  refundStatus("Refund Status"),
+  transactionHistory("Transaction History"),
   refundDetails("Refund Details"),
   refundEligibility("Refund Eligibility"),
   canceledBy("Canceled by"),

@@ -23,7 +23,7 @@ class ServiceDetailCanceledView extends StatelessWidget {
           height: DBL.ten.val,
         ),
         RowColonCombo.twoHundred(
-            label: AppString.refundStatus.val, value: refundStatus),
+            label: AppString.transactionHistory.val, value: refundStatus),
       ],
     ));
   }

@@ -807,7 +807,7 @@ class ServiceDetailsAlert extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomText(AppString.refundStatus.val),
+                  CustomText(AppString.transactionHistory.val),
                   serviceBloc.state.isShowingRefundDetails
                       ? const Icon(Icons.keyboard_arrow_down_rounded)
                       : const Icon(Icons.keyboard_arrow_right_rounded)

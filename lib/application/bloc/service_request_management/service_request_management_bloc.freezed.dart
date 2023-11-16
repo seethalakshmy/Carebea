@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'service_request_management_bloc.dart';
 
@@ -10305,6 +10305,8 @@ mixin _$ServiceRequestManagementState {
   bool? get isLoading => throw _privateConstructorUsedError;
   bool? get isListLoading => throw _privateConstructorUsedError;
   bool? get isDetailsLoading => throw _privateConstructorUsedError;
+  List<ServiceRequests> get serviceRequestsList =>
+      throw _privateConstructorUsedError;
   bool get isShowingTransactionDetails => throw _privateConstructorUsedError;
   bool get isShowingNeededServices => throw _privateConstructorUsedError;
   bool get isShowingCompletedServices => throw _privateConstructorUsedError;
@@ -10371,6 +10373,7 @@ abstract class $ServiceRequestManagementStateCopyWith<$Res> {
       bool? isLoading,
       bool? isListLoading,
       bool? isDetailsLoading,
+      List<ServiceRequests> serviceRequestsList,
       bool isShowingTransactionDetails,
       bool isShowingNeededServices,
       bool isShowingCompletedServices,
@@ -10429,6 +10432,7 @@ class _$ServiceRequestManagementStateCopyWithImpl<$Res,
     Object? isLoading = freezed,
     Object? isListLoading = freezed,
     Object? isDetailsLoading = freezed,
+    Object? serviceRequestsList = null,
     Object? isShowingTransactionDetails = null,
     Object? isShowingNeededServices = null,
     Object? isShowingCompletedServices = null,
@@ -10482,6 +10486,10 @@ class _$ServiceRequestManagementStateCopyWithImpl<$Res,
           ? _value.isDetailsLoading
           : isDetailsLoading // ignore: cast_nullable_to_non_nullable
               as bool?,
+      serviceRequestsList: null == serviceRequestsList
+          ? _value.serviceRequestsList
+          : serviceRequestsList // ignore: cast_nullable_to_non_nullable
+              as List<ServiceRequests>,
       isShowingTransactionDetails: null == isShowingTransactionDetails
           ? _value.isShowingTransactionDetails
           : isShowingTransactionDetails // ignore: cast_nullable_to_non_nullable
@@ -10644,6 +10652,7 @@ abstract class _$$_ServiceRequestManagementStateCopyWith<$Res>
       bool? isLoading,
       bool? isListLoading,
       bool? isDetailsLoading,
+      List<ServiceRequests> serviceRequestsList,
       bool isShowingTransactionDetails,
       bool isShowingNeededServices,
       bool isShowingCompletedServices,
@@ -10701,6 +10710,7 @@ class __$$_ServiceRequestManagementStateCopyWithImpl<$Res>
     Object? isLoading = freezed,
     Object? isListLoading = freezed,
     Object? isDetailsLoading = freezed,
+    Object? serviceRequestsList = null,
     Object? isShowingTransactionDetails = null,
     Object? isShowingNeededServices = null,
     Object? isShowingCompletedServices = null,
@@ -10754,6 +10764,10 @@ class __$$_ServiceRequestManagementStateCopyWithImpl<$Res>
           ? _value.isDetailsLoading
           : isDetailsLoading // ignore: cast_nullable_to_non_nullable
               as bool?,
+      serviceRequestsList: null == serviceRequestsList
+          ? _value._serviceRequestsList
+          : serviceRequestsList // ignore: cast_nullable_to_non_nullable
+              as List<ServiceRequests>,
       isShowingTransactionDetails: null == isShowingTransactionDetails
           ? _value.isShowingTransactionDetails
           : isShowingTransactionDetails // ignore: cast_nullable_to_non_nullable
@@ -10911,6 +10925,7 @@ class _$_ServiceRequestManagementState
       this.isLoading,
       this.isListLoading,
       this.isDetailsLoading,
+      required final List<ServiceRequests> serviceRequestsList,
       required this.isShowingTransactionDetails,
       required this.isShowingNeededServices,
       required this.isShowingCompletedServices,
@@ -10947,11 +10962,13 @@ class _$_ServiceRequestManagementState
       this.isRescheduleOtherMatchingListView = false,
       required final List<ServiceList> services})
       : _types = types,
+        _serviceRequestsList = serviceRequestsList,
         _services = services;
 
   final List<Types> _types;
   @override
   List<Types> get types {
+    if (_types is EqualUnmodifiableListView) return _types;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_types);
   }
@@ -10962,6 +10979,15 @@ class _$_ServiceRequestManagementState
   final bool? isListLoading;
   @override
   final bool? isDetailsLoading;
+  final List<ServiceRequests> _serviceRequestsList;
+  @override
+  List<ServiceRequests> get serviceRequestsList {
+    if (_serviceRequestsList is EqualUnmodifiableListView)
+      return _serviceRequestsList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_serviceRequestsList);
+  }
+
   @override
   final bool isShowingTransactionDetails;
   @override
@@ -11046,13 +11072,14 @@ class _$_ServiceRequestManagementState
   final List<ServiceList> _services;
   @override
   List<ServiceList> get services {
+    if (_services is EqualUnmodifiableListView) return _services;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_services);
   }
 
   @override
   String toString() {
-    return 'ServiceRequestManagementState(types: $types, isLoading: $isLoading, isListLoading: $isListLoading, isDetailsLoading: $isDetailsLoading, isShowingTransactionDetails: $isShowingTransactionDetails, isShowingNeededServices: $isShowingNeededServices, isShowingCompletedServices: $isShowingCompletedServices, isShowingIncompleteServices: $isShowingIncompleteServices, isShowingExtraServices: $isShowingExtraServices, isShowingRefundDetails: $isShowingRefundDetails, isShowingTimeline: $isShowingTimeline, whoRequestedCancel: $whoRequestedCancel, error: $error, selectedDate: $selectedDate, fromDate: $fromDate, toDate: $toDate, searchQuery: $searchQuery, fromTime: $fromTime, toTime: $toTime, rescheduleResponse: $rescheduleResponse, caregiverAssignResponse: $caregiverAssignResponse, startServiceResponse: $startServiceResponse, cancelServiceResponse: $cancelServiceResponse, caregiverProfileResponse: $caregiverProfileResponse, filterOption: $filterOption, serviceDetailsOption: $serviceDetailsOption, serviceOption: $serviceOption, serviceStatusOption: $serviceStatusOption, isError: $isError, isCancelLoading: $isCancelLoading, isStartServiceLoading: $isStartServiceLoading, isReScheduleError: $isReScheduleError, isClientError: $isClientError, isRescheduleInitialView: $isRescheduleInitialView, isRescheduleLoaderView: $isRescheduleLoaderView, isRescheduleAvailableCaregiverView: $isRescheduleAvailableCaregiverView, isRescheduleNotAvailableCaregiverView: $isRescheduleNotAvailableCaregiverView, isRescheduleOtherMatchingListView: $isRescheduleOtherMatchingListView, services: $services)';
+    return 'ServiceRequestManagementState(types: $types, isLoading: $isLoading, isListLoading: $isListLoading, isDetailsLoading: $isDetailsLoading, serviceRequestsList: $serviceRequestsList, isShowingTransactionDetails: $isShowingTransactionDetails, isShowingNeededServices: $isShowingNeededServices, isShowingCompletedServices: $isShowingCompletedServices, isShowingIncompleteServices: $isShowingIncompleteServices, isShowingExtraServices: $isShowingExtraServices, isShowingRefundDetails: $isShowingRefundDetails, isShowingTimeline: $isShowingTimeline, whoRequestedCancel: $whoRequestedCancel, error: $error, selectedDate: $selectedDate, fromDate: $fromDate, toDate: $toDate, searchQuery: $searchQuery, fromTime: $fromTime, toTime: $toTime, rescheduleResponse: $rescheduleResponse, caregiverAssignResponse: $caregiverAssignResponse, startServiceResponse: $startServiceResponse, cancelServiceResponse: $cancelServiceResponse, caregiverProfileResponse: $caregiverProfileResponse, filterOption: $filterOption, serviceDetailsOption: $serviceDetailsOption, serviceOption: $serviceOption, serviceStatusOption: $serviceStatusOption, isError: $isError, isCancelLoading: $isCancelLoading, isStartServiceLoading: $isStartServiceLoading, isReScheduleError: $isReScheduleError, isClientError: $isClientError, isRescheduleInitialView: $isRescheduleInitialView, isRescheduleLoaderView: $isRescheduleLoaderView, isRescheduleAvailableCaregiverView: $isRescheduleAvailableCaregiverView, isRescheduleNotAvailableCaregiverView: $isRescheduleNotAvailableCaregiverView, isRescheduleOtherMatchingListView: $isRescheduleOtherMatchingListView, services: $services)';
   }
 
   @override
@@ -11067,6 +11094,8 @@ class _$_ServiceRequestManagementState
                 other.isListLoading == isListLoading) &&
             (identical(other.isDetailsLoading, isDetailsLoading) ||
                 other.isDetailsLoading == isDetailsLoading) &&
+            const DeepCollectionEquality()
+                .equals(other._serviceRequestsList, _serviceRequestsList) &&
             (identical(other.isShowingTransactionDetails, isShowingTransactionDetails) ||
                 other.isShowingTransactionDetails ==
                     isShowingTransactionDetails) &&
@@ -11107,8 +11136,7 @@ class _$_ServiceRequestManagementState
                 other.cancelServiceResponse == cancelServiceResponse) &&
             (identical(other.caregiverProfileResponse, caregiverProfileResponse) ||
                 other.caregiverProfileResponse == caregiverProfileResponse) &&
-            (identical(other.filterOption, filterOption) ||
-                other.filterOption == filterOption) &&
+            (identical(other.filterOption, filterOption) || other.filterOption == filterOption) &&
             (identical(other.serviceDetailsOption, serviceDetailsOption) || other.serviceDetailsOption == serviceDetailsOption) &&
             (identical(other.serviceOption, serviceOption) || other.serviceOption == serviceOption) &&
             (identical(other.serviceStatusOption, serviceStatusOption) || other.serviceStatusOption == serviceStatusOption) &&
@@ -11132,6 +11160,7 @@ class _$_ServiceRequestManagementState
         isLoading,
         isListLoading,
         isDetailsLoading,
+        const DeepCollectionEquality().hash(_serviceRequestsList),
         isShowingTransactionDetails,
         isShowingNeededServices,
         isShowingCompletedServices,
@@ -11184,6 +11213,7 @@ abstract class _ServiceRequestManagementState
       final bool? isLoading,
       final bool? isListLoading,
       final bool? isDetailsLoading,
+      required final List<ServiceRequests> serviceRequestsList,
       required final bool isShowingTransactionDetails,
       required final bool isShowingNeededServices,
       required final bool isShowingCompletedServices,
@@ -11235,6 +11265,8 @@ abstract class _ServiceRequestManagementState
   bool? get isListLoading;
   @override
   bool? get isDetailsLoading;
+  @override
+  List<ServiceRequests> get serviceRequestsList;
   @override
   bool get isShowingTransactionDetails;
   @override

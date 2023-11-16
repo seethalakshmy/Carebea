@@ -174,6 +174,32 @@ class _ServiceViewState extends State<ServiceView> {
           getIndex(e.key);
           var item = e.value;
           return DataRow2(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  context.read<ServiceRequestManagementBloc>().add(
+                      ServiceRequestManagementEvent.getServiceDetails(
+                          context: context, serviceId: item.id ?? ''));
+                  debugPrint('item status ${item.status}');
+                  return CustomAlertDialogWidget(
+                    heading: AppString.services.val,
+                    child: ServiceDetailsAlert(
+                      title: item.status == 2
+                          ? 'Upcoming'
+                          : item.status == 3
+                              ? 'Ongoing'
+                              : item.status == 5
+                                  ? 'Completed'
+                                  : item.status == 6
+                                      ? 'Canceled'
+                                      : 'Missed',
+                      serviceBloc: serviceRequestManagementBloc,
+                    ),
+                  );
+                },
+              );
+            },
             cells: [
               DataCell(_rowsView(
                 context,
@@ -196,8 +222,11 @@ class _ServiceViewState extends State<ServiceView> {
                   text: Utility.serviceDate(
                       DateTime.parse(item.endDateTime ?? '')))),
               DataCell(_rowsView(context,
-                  text: '\$ ${Utility.formatAmount(double.tryParse(item.totalServiceFee.toString() ?? "0.0") ?? 0.0)}')),
-              DataCell(_rowsView(context, text: '\$ ${Utility.formatAmount(double.tryParse(item.tip.toString() ?? "0.0") ?? 0.0)}')),
+                  text:
+                      '\$ ${Utility.formatAmount(double.tryParse(item.totalServiceFee.toString() ?? "0.0") ?? 0.0)}')),
+              DataCell(_rowsView(context,
+                  text:
+                      '\$ ${Utility.formatAmount(double.tryParse(item.tip.toString() ?? "0.0") ?? 0.0)}')),
               DataCell(CustomRatingBar(
                 rating: item.serviceRating ?? 0,
               )),

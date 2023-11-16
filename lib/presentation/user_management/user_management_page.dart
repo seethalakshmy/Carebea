@@ -172,10 +172,20 @@ class _UserManagementPageState extends State<UserManagementPage> {
             filterId: filterId));
         debugPrint('user list length ${mUserList.isEmpty}');
       },
-      suffixIcon: CustomSvg(
-        path: IMG.search.val,
-        height: DBL.sixteen.val,
-        width: DBL.sixteen.val,
+      suffixIcon: InkWell(
+        onTap: () {
+          _userBloc.add(UserManagementEvent.getUsers(
+              userId: adminId ?? '',
+              page: _userBloc.page.toString(),
+              limit: _userBloc.limit.toString(),
+              searchTerm: _searchController.text.trim(),
+              filterId: filterId));
+        },
+        child: CustomSvg(
+          path: IMG.search.val,
+          height: DBL.sixteen.val,
+          width: DBL.sixteen.val,
+        ),
       ),
     );
   }
@@ -183,7 +193,11 @@ class _UserManagementPageState extends State<UserManagementPage> {
   CustomDropdown<int> _statusDropDown(BuildContext context) {
     return CustomDropdown<int>(
       onChange: (int value, int index) {
-        filterId = value == 1 ? true : false;
+        filterId = index == 1
+            ? true
+            : index == 2
+                ? false
+                : null;
 
         _userBloc.add(UserManagementEvent.getUsers(
             userId: adminId ?? '',
@@ -208,7 +222,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
         color: AppColor.white.val,
         padding: EdgeInsets.all(DBL.five.val),
       ),
-      items: [AppString.active.val, AppString.inActive.val]
+      items: [AppString.all.val, AppString.active.val, AppString.inActive.val]
           .asMap()
           .entries
           .map(

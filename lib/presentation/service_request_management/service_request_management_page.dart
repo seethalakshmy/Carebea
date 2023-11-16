@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:admin_580_tech/domain/service_request_management/model/service_request_list_response_model.dart';
 import 'package:admin_580_tech/presentation/service_request_management/widgets/service_details_alert.dart';
@@ -91,6 +93,7 @@ class _ServiceRequestManagementPageState
           child: BlocBuilder<ServiceRequestManagementBloc,
               ServiceRequestManagementState>(
             builder: (context, state) {
+              log("serviceRequest is ${state.serviceRequestsList.length}");
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -393,7 +396,7 @@ class _ServiceRequestManagementPageState
   }
 
   _requestsTable(ServiceRequestManagementState state) {
-    return _serviceRequestBloc.serviceRequestsList.isEmpty
+    return _serviceRequestBloc.state.serviceRequestsList.isEmpty
         ? EmptyView(title: AppString.noServiceRequestsFound.val)
         : CSelectionArea(
             child: CDataTable2(
@@ -487,7 +490,7 @@ class _ServiceRequestManagementPageState
                   label: const CustomText(""),
                 ),
               ],
-              rows: _serviceRequestBloc.serviceRequestsList
+              rows: _serviceRequestBloc.state.serviceRequestsList
                   .asMap()
                   .entries
                   .map((e) {
@@ -751,73 +754,99 @@ class _ServiceRequestManagementPageState
 
   _paginationView() {
     final int totalPages = (_serviceRequestBloc.totalItems / _limit).ceil();
-    return PaginationView(
-        page: _page,
-        totalPages: totalPages,
-        end: _end,
-        totalItems: _serviceRequestBloc.totalItems,
-        start: _start,
-        onNextPressed: () {
-          if (_page < totalPages) {
-            _page = _page + 1;
-            _serviceRequestBloc.add(
-                ServiceRequestManagementEvent.getServiceRequests(
-                    context: context,
-                    page: _page,
-                    limit: _limit,
-                    searchTerm: _serviceRequestBloc.searchQuery,
-                    statusFilterId: _serviceRequestBloc.statusFilterId,
-                    fromDate: _serviceRequestBloc.selectedFromDate,
-                    toDate: _serviceRequestBloc.selectedToDate));
-            updateData();
-          }
-        },
-        onItemPressed: (i) {
-          _page = i;
-          _serviceRequestBloc.add(
-              ServiceRequestManagementEvent.getServiceRequests(
-                  context: context,
-                  page: _page,
-                  limit: _limit,
-                  searchTerm: _serviceRequestBloc.searchQuery,
-                  statusFilterId: _serviceRequestBloc.statusFilterId,
-                  fromDate: _serviceRequestBloc.selectedFromDate,
-                  toDate: _serviceRequestBloc.selectedToDate));
-          updateData();
-        },
-        onPreviousPressed: () {
-          if (_page > 1) {
-            _page = _page - 1;
-            _serviceRequestBloc.add(
-                ServiceRequestManagementEvent.getServiceRequests(
-                    context: context,
-                    page: _page,
-                    limit: _limit,
-                    searchTerm: _serviceRequestBloc.searchQuery,
-                    statusFilterId: _serviceRequestBloc.statusFilterId,
-                    fromDate: _serviceRequestBloc.selectedFromDate,
-                    toDate: _serviceRequestBloc.selectedToDate));
-            updateData();
-          }
-        });
+    return BlocBuilder<ServiceRequestManagementBloc,
+        ServiceRequestManagementState>(
+      builder: (context, state) {
+        if (_page == 1) {
+          _start = 0;
+          _end = _serviceRequestBloc.state.serviceRequestsList.length < _limit
+              ? _serviceRequestBloc.state.serviceRequestsList.length
+              : _limit;
+          debugPrint("end $_end");
+          debugPrint(
+              "length ${_serviceRequestBloc.state.serviceRequestsList.length}");
+          debugPrint("limit $_limit");
+        } else {
+          _start = (_page * _limit) - 10;
+          _end = _start + _serviceRequestBloc.state.serviceRequestsList.length;
+
+          debugPrint("end $_end");
+          debugPrint(
+              "length ${_serviceRequestBloc.state.serviceRequestsList.length}");
+          debugPrint("limit $_limit");
+        }
+        log("state is ${state.serviceRequestsList.length}");
+        // log("state is ${st}");
+        return PaginationView(
+            page: _page,
+            totalPages: totalPages,
+            end: _end,
+            totalItems: _serviceRequestBloc.totalItems,
+            start: _start,
+            onNextPressed: () {
+              if (_page < totalPages) {
+                _page = _page + 1;
+                _serviceRequestBloc.add(
+                    ServiceRequestManagementEvent.getServiceRequests(
+                        context: context,
+                        page: _page,
+                        limit: _limit,
+                        searchTerm: _serviceRequestBloc.searchQuery,
+                        statusFilterId: _serviceRequestBloc.statusFilterId,
+                        fromDate: _serviceRequestBloc.selectedFromDate,
+                        toDate: _serviceRequestBloc.selectedToDate));
+                updateData();
+              }
+            },
+            onItemPressed: (i) {
+              _page = i;
+              _serviceRequestBloc.add(
+                  ServiceRequestManagementEvent.getServiceRequests(
+                      context: context,
+                      page: _page,
+                      limit: _limit,
+                      searchTerm: _serviceRequestBloc.searchQuery,
+                      statusFilterId: _serviceRequestBloc.statusFilterId,
+                      fromDate: _serviceRequestBloc.selectedFromDate,
+                      toDate: _serviceRequestBloc.selectedToDate));
+              updateData();
+            },
+            onPreviousPressed: () {
+              if (_page > 1) {
+                _page = _page - 1;
+                _serviceRequestBloc.add(
+                    ServiceRequestManagementEvent.getServiceRequests(
+                        context: context,
+                        page: _page,
+                        limit: _limit,
+                        searchTerm: _serviceRequestBloc.searchQuery,
+                        statusFilterId: _serviceRequestBloc.statusFilterId,
+                        fromDate: _serviceRequestBloc.selectedFromDate,
+                        toDate: _serviceRequestBloc.selectedToDate));
+                updateData();
+              }
+            });
+      },
+    );
   }
 
   void updateData() {
     if (_page == 1) {
       _start = 0;
-      _end = _serviceRequestBloc.serviceRequestsList.length < _limit
-          ? _serviceRequestBloc.serviceRequestsList.length
+      _end = _serviceRequestBloc.state.serviceRequestsList.length < _limit
+          ? _serviceRequestBloc.state.serviceRequestsList.length
           : _limit;
       debugPrint("end $_end");
-      debugPrint("length ${_serviceRequestBloc.serviceRequestsList.length}");
+      debugPrint(
+          "length ${_serviceRequestBloc.state.serviceRequestsList.length}");
       debugPrint("limit $_limit");
     } else {
       _start = (_page * _limit) - 10;
-      _end = _serviceRequestBloc.serviceDetailsList.length < 10
-          ? _start + _serviceRequestBloc.serviceRequestsList.length
-          : (_page * _limit);
+      _end = _start + _serviceRequestBloc.state.serviceRequestsList.length;
+
       debugPrint("end $_end");
-      debugPrint("length ${_serviceRequestBloc.serviceRequestsList.length}");
+      debugPrint(
+          "length ${_serviceRequestBloc.state.serviceRequestsList.length}");
       debugPrint("limit $_limit");
     }
   }

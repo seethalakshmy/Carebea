@@ -8,8 +8,14 @@ import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../application/bloc/service_request_management/service_request_management_bloc.dart';
 import '../../../application/bloc/transaction_management/transaction_management_bloc.dart';
 import '../../../domain/transaction_management/model/transaction_details_response.dart';
+import '../../../main.dart';
+import '../../routes/app_router.gr.dart';
+import '../../service_request_management/widgets/service_details_alert.dart';
+import '../../side_menu/side_menu_page.dart';
+import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_shimmer.dart';
 import '../../widget/error_view.dart';
 
@@ -112,15 +118,38 @@ class TransactionDetailsAlert extends StatelessWidget {
         children: [
           _detailRow(
               "Transaction ID",
-              transactionBloc.transactionDetailsData.transactionId ?? "",
+              transactionBloc.transactionDetailsData.uniqueTransactionId ?? "",
               null,
               context),
           const CustomSizedBox(height: 7),
-          _detailRow(
-              "Service ID",
-              transactionBloc.transactionDetailsData.serviceId ?? "",
-              null,
-              context),
+          InkWell(
+            onTap: () {
+              Navigator.pop(context);
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  context.read<ServiceRequestManagementBloc>().add(
+                      ServiceRequestManagementEvent.getServiceDetails(
+                          context: context,
+                          serviceId:
+                              transactionBloc.transactionDetailsData.user ??
+                                  ''));
+                  return CustomAlertDialogWidget(
+                    heading: AppString.services.val,
+                    child: ServiceDetailsAlert(
+                      title: AppString.serviceDetails.val,
+                      serviceBloc: serviceRequestManagementBloc,
+                    ),
+                  );
+                },
+              );
+            },
+            child: _detailRow(
+                "Service ID",
+                transactionBloc.transactionDetailsData.uniqueServiceId ?? "",
+                null,
+                context),
+          ),
           const CustomSizedBox(height: 7),
           _detailRow(
               "Transaction Type",
@@ -140,11 +169,18 @@ class TransactionDetailsAlert extends StatelessWidget {
               null,
               context),
           const CustomSizedBox(height: 7),
-          _detailRow(
-              "Received From",
-              transactionBloc.transactionDetailsData.recievedFrom ?? "",
-              null,
-              context),
+          InkWell(
+            onTap: () {
+              Navigator.pop(context);
+              autoTabRouter?.navigate(UserManagementDetailRoute(
+                  id: transactionBloc.transactionDetailsData.user));
+            },
+            child: _detailRow(
+                "Received From",
+                transactionBloc.transactionDetailsData.recievedFrom ?? "",
+                null,
+                context),
+          ),
           const CustomSizedBox(height: 7),
           _detailRow(
               "Amount",
@@ -179,7 +215,7 @@ class TransactionDetailsAlert extends StatelessWidget {
         children: [
           transactionBloc.detailsList.isNotEmpty
               ? CustomText(
-                  AppString.refundStatus.val,
+                  AppString.transactionHistory.val,
                   style: TS().gRoboto(
                       fontSize: FS.font16.val,
                       fontWeight: FW.w500.val,

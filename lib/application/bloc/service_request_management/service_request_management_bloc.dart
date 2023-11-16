@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:admin_580_tech/domain/service_request_management/model/assign_caregiver_params.dart';
 import 'package:admin_580_tech/domain/service_request_management/model/reschedule_params.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
@@ -327,16 +329,21 @@ class ServiceRequestManagementBloc
       statusFilterId: event.statusFilterId,
     );
     ServiceRequestManagementState serviceState = result.fold((l) {
-      serviceRequestsList.clear();
       return state.copyWith(
           isListLoading: false, error: l.error, serviceOption: Some(Left(l)));
     }, (r) {
       if (r.status == true) {
         serviceRequestsList.clear();
+        // state.serviceRequestsList.addAll(r.data!.services!);
+
         serviceRequestsList.addAll(r.data!.services!);
+        log("serviceList from bloc,${serviceRequestsList.length}");
         totalItems = r.data!.totalCount!.toInt();
         return state.copyWith(
-            isListLoading: false, error: "", serviceOption: Some(Right(r)));
+            serviceRequestsList: serviceRequestsList,
+            isListLoading: false,
+            error: "",
+            serviceOption: Some(Right(r)));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
         return state.copyWith(isListLoading: false, error: "");
@@ -396,13 +403,14 @@ class ServiceRequestManagementBloc
       Emitter<ServiceRequestManagementState> emit) {
     emit(state.copyWith(isShowingRefundDetails: event.isShowing));
   }
+
   _whoRequestedCancelRadioButton(_WhoRequestedCancelRadioButton event,
       Emitter<ServiceRequestManagementState> emit) {
     emit(state.copyWith(whoRequestedCancel: event.whoRequested));
   }
 
-  _showOrHideTimeline(_ShowOrHideTimeline event,
-      Emitter<ServiceRequestManagementState> emit) {
+  _showOrHideTimeline(
+      _ShowOrHideTimeline event, Emitter<ServiceRequestManagementState> emit) {
     emit(state.copyWith(isShowingTimeline: event.isShowing));
   }
 }
