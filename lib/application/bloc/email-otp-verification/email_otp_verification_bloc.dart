@@ -143,21 +143,15 @@ class EmailOtpVerificationBloc
       stateResult,
     );
   }
-  _count( _Count event, Emitter<EmailOtpVerificationState> emit) {
+  _count(_Count event, Emitter<EmailOtpVerificationState> emit) async {
     const oneSec = Duration(seconds: 1);
-    add(const EmailOtpVerificationEvent.count());
-    Timer.periodic(
-      oneSec,
-          (Timer timer) {
-        if (start == 0) {
-          timer.cancel();
-          timerStopped = true;
-          //     resendClicked = false;
-        } else {
-          start--;
-        }
-      },
-    );
-    emit(state.copyWith(count: start.toString().padLeft(2, '0')));
+    start = 60; // Reset the timer to 60 seconds
+
+    for (int i = start; i >= 0; i--) {
+      await Future.delayed(oneSec);
+      emit(state.copyWith(count: i.toString().padLeft(2, '0')));
+    }
   }
+
+
 }

@@ -41,10 +41,11 @@ class _EmailOtpVerificationPageState extends State<EmailOtpVerificationPage> {
     emailOtpController.dispose();
     super.dispose();
   }
-
-  void onInit() {
-    _emailOtpVerificationBloc.add(const EmailOtpVerificationEvent.count());
+  @override
+  void initState() {
     super.initState();
+    print("rdgtfdgtfyyhfyyyytytug");
+    _emailOtpVerificationBloc.add(const EmailOtpVerificationEvent.count());
   }
 
   @override
@@ -79,7 +80,7 @@ class _EmailOtpVerificationPageState extends State<EmailOtpVerificationPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                 /*     BlocBuilder<EmailOtpVerificationBloc,
+                      BlocBuilder<EmailOtpVerificationBloc,
                           EmailOtpVerificationState>(
                         builder: (context, state) {
                           return Text(
@@ -91,14 +92,15 @@ class _EmailOtpVerificationPageState extends State<EmailOtpVerificationPage> {
                                 decoration: TextDecoration.none),
                           );
                         },
-                      ),*/
+                      ),
                       const Spacer(),
                       TextButton(
                           onPressed: () {
-                            context.read<ResendOtpBloc>().add(ResendOtpEvent.resend(
+                         /*   context.read<ResendOtpBloc>().add(ResendOtpEvent.resend(
                                 userId: sharedPreffUtil.getAdminId,
                                 type:
-                                    0)); // Type 0=>registration, 1=>forgotPassword, 2=> verify phone number
+                                    0)); // Type 0=>registration, 1=>forgotPassword, 2=> verify phone number*/
+                            _emailOtpVerificationBloc.add(const EmailOtpVerificationEvent.count());
                           },
                           child: Text(
                             AppString.resentOTP.val,
