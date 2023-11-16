@@ -213,8 +213,7 @@ class _ServiceRequestManagementPageState
       context: context,
       initialDate: _serviceRequestBloc.selectedToDateTime ?? state.selectedDate,
       firstDate: now.subtract(const Duration(days: 365)),
-      lastDate: _serviceRequestBloc.selectedToDateTime ??
-          now.add(const Duration(days: 365)),
+      lastDate: now.add(const Duration(days: 365)),
     ).then((value) {
       if (value != null) {
         _serviceRequestBloc.selectedFromDate =
@@ -226,6 +225,8 @@ class _ServiceRequestManagementPageState
           _page = 1;
           _serviceRequestBloc.add(
               ServiceRequestManagementEvent.getServiceRequests(
+                  searchTerm: _serviceRequestBloc.searchQuery,
+                  statusFilterId: _serviceRequestBloc.statusFilterId,
                   context: context,
                   page: _page,
                   limit: _limit,
@@ -245,7 +246,7 @@ class _ServiceRequestManagementPageState
     showDatePicker(
       context: context,
       initialDate: state.selectedDate,
-      firstDate: _serviceRequestBloc.selectedFromDateTime,
+      firstDate: state.selectedDate,
       lastDate: now.add(const Duration(days: 365)),
     ).then((value) {
       if (value != null) {
@@ -259,6 +260,10 @@ class _ServiceRequestManagementPageState
           _serviceRequestBloc.add(
               ServiceRequestManagementEvent.getServiceRequests(
                   context: context,
+                  statusFilterId: _serviceRequestBloc.statusFilterId == 0
+                      ? null
+                      : _serviceRequestBloc.statusFilterId,
+                  searchTerm: _serviceRequestBloc.searchQuery,
                   page: _page,
                   limit: _limit,
                   fromDate: _serviceRequestBloc.selectedFromDate,
@@ -279,6 +284,11 @@ class _ServiceRequestManagementPageState
         _page = 1;
         _serviceRequestBloc.add(
             ServiceRequestManagementEvent.getServiceRequests(
+                statusFilterId: _serviceRequestBloc.statusFilterId == 0
+                    ? null
+                    : _serviceRequestBloc.statusFilterId,
+                fromDate: _serviceRequestBloc.selectedFromDate,
+                toDate: _serviceRequestBloc.selectedToDate,
                 context: context,
                 page: _page,
                 limit: _limit,
@@ -688,6 +698,9 @@ class _ServiceRequestManagementPageState
             ServiceRequestManagementEvent.getServiceRequests(
                 context: context,
                 page: _page,
+                fromDate: _serviceRequestBloc.selectedFromDate,
+                toDate: _serviceRequestBloc.selectedToDate,
+                searchTerm: _serviceRequestBloc.searchQuery,
                 limit: _limit,
                 statusFilterId: _serviceRequestBloc.statusFilterId == 0
                     ? null

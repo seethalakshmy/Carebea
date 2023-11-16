@@ -463,7 +463,10 @@ class _CareGiversPageState extends State<CareGiversPage> {
                   ? DataCell(sharedPrefUtil.getEditCareGiver &&
                           item.onBoardingStatus == true
                       ? _tableVerificationButton(item)
-                      : _tableRowView(""))
+                      : CustomText(AppString.profileIncomplete.val,
+                          style: TextStyle(
+                            color: Colors.red,
+                          )))
                   : DataCell(sharedPrefUtil.getEditCareGiver
                       ? _tableSwitchBox(item)
                       : _tableRowView("")),

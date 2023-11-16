@@ -7,6 +7,7 @@ enum AppString {
   blsUrl("https://www.nationalcprfoundation.com/"),
   pageCreation("Page Creation"),
   notAttempted("Missed"),
+  profileIncomplete("Profile Incomplete"),
   achDetails('ACH details'),
   cardNumber("Card Number"),
   deleted("Deleted"),
@@ -155,7 +156,8 @@ enum AppString {
   from("From"),
   to("to"),
   of("of"),
-  pendingDocumentsReminder("Documents are pending to upload."),
+  pendingDocumentsReminder(
+      "Qualification Test & Result Documents are pending to upload."),
   careAmbassador("Care Ambassador"),
   userManagement("Client Management"),
   roleManagement("Role Management"),
