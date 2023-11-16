@@ -438,14 +438,14 @@ class _ServiceRequestManagementPageState
                       text: AppString.endDateAndTime.val,
                       fontWeight: FontWeight.bold),
                 ),
-                DataColumn2(
+              /*  DataColumn2(
                   size: ColumnSize.L,
                   fixedWidth: 150,
                   label: _columnsView(
                       text: AppString.serviceFee.val,
                       fontWeight: FontWeight.bold),
-                ),
-                if (_serviceRequestBloc.statusFilterId == 0 ||
+                ),*/
+                /*if (_serviceRequestBloc.statusFilterId == 0 ||
                     _serviceRequestBloc.statusFilterId == 6)
                   DataColumn2(
                     size: ColumnSize.L,
@@ -462,7 +462,8 @@ class _ServiceRequestManagementPageState
                     label: _columnsView(
                         text: AppString.canceledBy.val,
                         fontWeight: FontWeight.bold),
-                  ),
+                  ),*/
+                //bug num 67494
                 DataColumn2(
                   size: ColumnSize.L,
                   fixedWidth: 150,
@@ -512,7 +513,7 @@ class _ServiceRequestManagementPageState
                       text: _serviceRequestBloc
                           .generateFormattedDate(item.endDate ?? ""),
                     )),
-                    DataCell(_rowsView(
+                    /*DataCell(_rowsView(
                       text:
                           '\$ ${Utility.formatAmount(double.tryParse(item.serviceFee.toString() ?? "0.0") ?? 0.0)}',
                     )),
@@ -529,7 +530,7 @@ class _ServiceRequestManagementPageState
                         text: item.cancelledBy == "" || item.cancelledBy == null
                             ? "-"
                             : item.cancelledBy ?? "",
-                      )),
+                      )),*/
                     DataCell(
                         _rowsView(text: item.serviceStatus, isStatus: true)),
                     DataCell(InkWell(

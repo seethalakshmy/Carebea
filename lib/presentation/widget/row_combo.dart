@@ -24,6 +24,7 @@ class RowColonCombo extends StatelessWidget {
     this.hasColon = true,
     this.fontWeight,
     this.valueFlex,
+    this.needComma,
   });
 
   final String value;
@@ -40,6 +41,7 @@ class RowColonCombo extends StatelessWidget {
   final double? customWidthLg1;
   final Function()? onValueTap;
   final bool? needUnderLine;
+  final bool? needComma;
   final int? valueFlex;
 
   final FontWeight? fontWeight;
@@ -61,6 +63,7 @@ class RowColonCombo extends StatelessWidget {
     this.tierOneServiceList,
     this.tierTwoServiceList,
     this.valueFlex,
+    this.needComma,
   }) : width = DBL.twoHundred.val;
 
   RowColonCombo.threeEighty(
@@ -79,7 +82,8 @@ class RowColonCombo extends StatelessWidget {
       this.hasColon = true,
       this.tierOneServiceList,
       this.valueFlex,
-      this.tierTwoServiceList})
+      this.tierTwoServiceList,
+      this.needComma})
       : width = DBL.threeEighty.val;
 
   RowColonCombo.threeSeventy(
@@ -98,7 +102,8 @@ class RowColonCombo extends StatelessWidget {
       this.hasColon = true,
       this.tierOneServiceList,
       this.valueFlex,
-      this.tierTwoServiceList})
+      this.tierTwoServiceList,
+      this.needComma})
       : width = DBL.threeSeventeen.val;
 
   @override
@@ -144,12 +149,19 @@ class RowColonCombo extends StatelessWidget {
                     ?.map(
                       (e) => Wrap(
                         children: [
-                          AlertTextLabel(
-                            e,
-                            color: color,
-                            fontWeight: fontWeight,
-                            fontSize: fontSize,
-                          ),
+                          needComma ?? false
+                              ? AlertTextLabel(
+                                  "$e,",
+                                  color: color,
+                                  fontWeight: fontWeight,
+                                  fontSize: fontSize,
+                                )
+                              : AlertTextLabel(
+                                  e,
+                                  color: color,
+                                  fontWeight: fontWeight,
+                                  fontSize: fontSize,
+                                ),
                           SizedBox(
                             width: 20,
                           )

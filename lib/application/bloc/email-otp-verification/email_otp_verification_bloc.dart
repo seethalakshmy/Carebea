@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:admin_580_tech/domain/email_otp_verification/models/generate_otp_response.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
@@ -20,12 +22,16 @@ class EmailOtpVerificationBloc
     extends Bloc<EmailOtpVerificationEvent, EmailOtpVerificationState> {
   EmailOtpVerificationRepository emailOtpVerificationRepository;
   SharedPreffUtil sharedPreffUtil = SharedPreffUtil();
+  int timerText = 1;
+  int start = 60;
+  bool timerStopped = false;
 
   EmailOtpVerificationBloc(this.emailOtpVerificationRepository)
       : super(EmailOtpVerificationState.initial()) {
     on<_VerifyOtp>(_verifyOtp);
     on<_VerifyMobileOtp>(_verifyMobileOtp);
     on<_GenerateOtp>(_generateOtp);
+    on<_Count>(_count);
   }
 
   _verifyOtp(_VerifyOtp event, Emitter<EmailOtpVerificationState> emit) async {
@@ -136,5 +142,22 @@ class EmailOtpVerificationBloc
     emit(
       stateResult,
     );
+  }
+  _count( _Count event, Emitter<EmailOtpVerificationState> emit) {
+    const oneSec = Duration(seconds: 1);
+    add(const EmailOtpVerificationEvent.count());
+    Timer.periodic(
+      oneSec,
+          (Timer timer) {
+        if (start == 0) {
+          timer.cancel();
+          timerStopped = true;
+          //     resendClicked = false;
+        } else {
+          start--;
+        }
+      },
+    );
+    emit(state.copyWith(count: start.toString().padLeft(2, '0')));
   }
 }

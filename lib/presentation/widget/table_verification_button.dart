@@ -36,7 +36,6 @@ class TableVerificationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('verification Status ... $verificationStatus');
     return isHover
         ? InkWell(
             onTap: () {

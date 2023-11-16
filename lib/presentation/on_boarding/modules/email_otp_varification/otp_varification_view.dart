@@ -12,6 +12,7 @@ import '../../../../application/bloc/resend_otp_bloc/resend_otp_bloc.dart';
 import '../../../../core/custom_snackbar.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/text_styles.dart';
+import '../../../../infrastructure/email_otp_verification/email_otp_verification_repository.dart';
 import '../../../widget/custom_material_button.dart';
 import '../../../widget/custom_text.dart';
 import '../../../widget/custom_text_field.dart';
@@ -31,12 +32,19 @@ class _EmailOtpVerificationPageState extends State<EmailOtpVerificationPage> {
   AppRouter router = AppRouter();
   final AutovalidateMode _validateMode = AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
+  final EmailOtpVerificationBloc _emailOtpVerificationBloc =
+      EmailOtpVerificationBloc(EmailOtpVerificationRepository());
   SharedPreffUtil sharedPreffUtil = SharedPreffUtil();
 
   @override
   void dispose() {
     emailOtpController.dispose();
     super.dispose();
+  }
+
+  void onInit() {
+    _emailOtpVerificationBloc.add(const EmailOtpVerificationEvent.count());
+    super.initState();
   }
 
   @override
@@ -71,6 +79,20 @@ class _EmailOtpVerificationPageState extends State<EmailOtpVerificationPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                 /*     BlocBuilder<EmailOtpVerificationBloc,
+                          EmailOtpVerificationState>(
+                        builder: (context, state) {
+                          return Text(
+                            '${state.count}${"s"}',
+                            style: const TextStyle(
+                                color: Colors.red,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                decoration: TextDecoration.none),
+                          );
+                        },
+                      ),*/
+                      const Spacer(),
                       TextButton(
                           onPressed: () {
                             context.read<ResendOtpBloc>().add(ResendOtpEvent.resend(

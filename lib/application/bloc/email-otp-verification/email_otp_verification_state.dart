@@ -5,6 +5,7 @@ class EmailOtpVerificationState with _$EmailOtpVerificationState {
   const factory EmailOtpVerificationState({
     required bool isLoading,
     required bool isError,
+    required String? count,
     required VerifyOtpResponse? verifyOtpResponse,
     required GenerateOtpResponse? generateOtpResponse,
     required String? error,
@@ -18,6 +19,7 @@ class EmailOtpVerificationState with _$EmailOtpVerificationState {
       isError: false,
       verifyOtpResponse: null,
       error: null,
+      count: "60",
       generateOtpResponse: null,
       isMobileOtpVerified: false,
     );

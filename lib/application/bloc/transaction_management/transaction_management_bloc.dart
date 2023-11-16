@@ -78,7 +78,7 @@ class TransactionManagementBloc
   }
 
   String formatDate(String givenDate) {
-    DateTime dateTime = DateTime.parse(givenDate);
+    DateTime dateTime = DateTime.parse(givenDate).toLocal();
 
     String dateString = DateFormat('MM/dd/yyyy').format(dateTime);
     String timeString = DateFormat('HH:mm a').format(dateTime);
@@ -87,7 +87,7 @@ class TransactionManagementBloc
   }
 
   String formatDateToMonthName(String givenDate) {
-    DateTime dateTime = DateTime.parse(givenDate);
+    DateTime dateTime = DateTime.parse(givenDate).toLocal();
 
     String dateString = DateFormat('MMM d yyyy').format(dateTime);
     String timeString = DateFormat('HH:mm a').format(dateTime);
