@@ -502,6 +502,7 @@ mixin _$UserManagementState {
   UserListResponse? get response => throw _privateConstructorUsedError;
   CommonResponse? get changeStatusResponse =>
       throw _privateConstructorUsedError;
+  List<dynamic> get mUserList => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -520,6 +521,7 @@ abstract class $UserManagementStateCopyWith<$Res> {
       bool isError,
       UserListResponse? response,
       CommonResponse? changeStatusResponse,
+      List<dynamic> mUserList,
       String? error});
 }
 
@@ -540,6 +542,7 @@ class _$UserManagementStateCopyWithImpl<$Res, $Val extends UserManagementState>
     Object? isError = null,
     Object? response = freezed,
     Object? changeStatusResponse = freezed,
+    Object? mUserList = null,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
@@ -559,6 +562,10 @@ class _$UserManagementStateCopyWithImpl<$Res, $Val extends UserManagementState>
           ? _value.changeStatusResponse
           : changeStatusResponse // ignore: cast_nullable_to_non_nullable
               as CommonResponse?,
+      mUserList: null == mUserList
+          ? _value.mUserList
+          : mUserList // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -580,6 +587,7 @@ abstract class _$$_UsersStateCopyWith<$Res>
       bool isError,
       UserListResponse? response,
       CommonResponse? changeStatusResponse,
+      List<dynamic> mUserList,
       String? error});
 }
 
@@ -598,6 +606,7 @@ class __$$_UsersStateCopyWithImpl<$Res>
     Object? isError = null,
     Object? response = freezed,
     Object? changeStatusResponse = freezed,
+    Object? mUserList = null,
     Object? error = freezed,
   }) {
     return _then(_$_UsersState(
@@ -617,6 +626,10 @@ class __$$_UsersStateCopyWithImpl<$Res>
           ? _value.changeStatusResponse
           : changeStatusResponse // ignore: cast_nullable_to_non_nullable
               as CommonResponse?,
+      mUserList: null == mUserList
+          ? _value._mUserList
+          : mUserList // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -633,7 +646,9 @@ class _$_UsersState implements _UsersState {
       required this.isError,
       required this.response,
       required this.changeStatusResponse,
-      required this.error});
+      required final List<dynamic> mUserList,
+      required this.error})
+      : _mUserList = mUserList;
 
   @override
   final bool isLoading;
@@ -643,12 +658,20 @@ class _$_UsersState implements _UsersState {
   final UserListResponse? response;
   @override
   final CommonResponse? changeStatusResponse;
+  final List<dynamic> _mUserList;
+  @override
+  List<dynamic> get mUserList {
+    if (_mUserList is EqualUnmodifiableListView) return _mUserList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_mUserList);
+  }
+
   @override
   final String? error;
 
   @override
   String toString() {
-    return 'UserManagementState(isLoading: $isLoading, isError: $isError, response: $response, changeStatusResponse: $changeStatusResponse, error: $error)';
+    return 'UserManagementState(isLoading: $isLoading, isError: $isError, response: $response, changeStatusResponse: $changeStatusResponse, mUserList: $mUserList, error: $error)';
   }
 
   @override
@@ -663,12 +686,20 @@ class _$_UsersState implements _UsersState {
                 other.response == response) &&
             (identical(other.changeStatusResponse, changeStatusResponse) ||
                 other.changeStatusResponse == changeStatusResponse) &&
+            const DeepCollectionEquality()
+                .equals(other._mUserList, _mUserList) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, isLoading, isError, response, changeStatusResponse, error);
+      runtimeType,
+      isLoading,
+      isError,
+      response,
+      changeStatusResponse,
+      const DeepCollectionEquality().hash(_mUserList),
+      error);
 
   @JsonKey(ignore: true)
   @override
@@ -683,6 +714,7 @@ abstract class _UsersState implements UserManagementState {
       required final bool isError,
       required final UserListResponse? response,
       required final CommonResponse? changeStatusResponse,
+      required final List<dynamic> mUserList,
       required final String? error}) = _$_UsersState;
 
   @override
@@ -693,6 +725,8 @@ abstract class _UsersState implements UserManagementState {
   UserListResponse? get response;
   @override
   CommonResponse? get changeStatusResponse;
+  @override
+  List<dynamic> get mUserList;
   @override
   String? get error;
   @override

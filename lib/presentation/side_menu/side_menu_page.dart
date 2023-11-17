@@ -124,6 +124,7 @@ class _MenuBarState extends State<SideMenuPage> {
   Widget build(BuildContext context) {
     return AutoTabsRouter(
       routes: _routes,
+      duration: Duration(seconds: 2),
       builder: (
         context,
         child,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
@@ -329,7 +331,7 @@ class _LoginPageState extends State<LoginPage> {
     if (_formKey.currentState!.validate()) {
       context.read<LoginBloc>().add(LoginEvent.login(
           context: context,
-          email: _usernameController.text.trim(),
+          email: _usernameController.text.trim().toLowerCase(),
           password: _passwordController.text.trim()));
     }
   }

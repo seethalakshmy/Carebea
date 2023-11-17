@@ -44,7 +44,6 @@ class UserManagementPage extends StatefulWidget {
 class _UserManagementPageState extends State<UserManagementPage> {
   late UserManagementBloc _userBloc;
 
-  List<dynamic> mUserList = [];
   List<int> shimmerList = List.generate(10, (index) => (index));
   int _totalItems = 1;
 
@@ -121,14 +120,14 @@ class _UserManagementPageState extends State<UserManagementPage> {
 
   _usersView(BuildContext context, UserListResponse? value,
       UserManagementState state) {
-    debugPrint('user list length ${mUserList.isEmpty}');
+    debugPrint('user list length ${_userBloc.mUserList.length}');
     if (value?.status ?? false) {
       if (value?.data?.finalResult != null &&
           value!.data!.finalResult!.isNotEmpty) {
         ///todo change later
         _totalItems = value.data?.pagination?.totals ?? 5000;
-        mUserList.clear();
-        mUserList.addAll(value.data?.finalResult ?? []);
+        _userBloc.mUserList.clear();
+        _userBloc.mUserList.addAll(value.data?.finalResult ?? []);
       }
     }
     // return mUserList.isNotEmpty
@@ -146,7 +145,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
         CustomSizedBox(height: DBL.fifteen.val),
         CustomSizedBox(
           height: (_userBloc.limit + 1) * 48,
-          child: mUserList.isNotEmpty
+          child: _userBloc.mUserList.isNotEmpty
               ? _usersTable(state, context)
               : EmptyView(title: AppString.noUsersFound.val),
         ),
@@ -170,7 +169,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
             limit: _userBloc.limit.toString(),
             searchTerm: _searchController.text.trim(),
             filterId: filterId));
-        debugPrint('user list length ${mUserList.isEmpty}');
+        debugPrint('user list length ${_userBloc.mUserList.isEmpty}');
       },
       suffixIcon: InkWell(
         onTap: () {
@@ -253,46 +252,60 @@ class _UserManagementPageState extends State<UserManagementPage> {
 
   _paginationView() {
     final int totalPages = (_totalItems / _userBloc.limit).ceil();
-    return PaginationView(
-        page: _userBloc.page,
-        totalPages: totalPages,
-        end: _end,
-        totalItems: _totalItems,
-        start: _start,
-        onNextPressed: () {
-          if (_userBloc.page < totalPages) {
-            _userBloc.page = _userBloc.page + 1;
-            _userBloc.add(UserManagementEvent.getUsers(
-                userId: adminId ?? '',
-                page: _userBloc.page.toString(),
-                limit: _userBloc.limit.toString(),
-                searchTerm: _searchController.text.trim(),
-                filterId: filterId));
-            updateData();
-          }
-        },
-        onItemPressed: (i) {
-          _userBloc.page = i;
-          _userBloc.add(UserManagementEvent.getUsers(
-              userId: adminId ?? '',
-              page: _userBloc.page.toString(),
-              limit: _userBloc.limit.toString(),
-              searchTerm: _searchController.text.trim(),
-              filterId: filterId));
-          updateData();
-        },
-        onPreviousPressed: () {
-          if (_userBloc.page > 1) {
-            _userBloc.page = _userBloc.page - 1;
-            _userBloc.add(UserManagementEvent.getUsers(
-                userId: adminId ?? '',
-                page: _userBloc.page.toString(),
-                limit: _userBloc.limit.toString(),
-                searchTerm: _searchController.text.trim(),
-                filterId: filterId));
-            updateData();
-          }
-        });
+    return BlocBuilder<UserManagementBloc, UserManagementState>(
+      builder: (context, state) {
+        if (_userBloc.page == 1) {
+          _start = 0;
+          _end = _userBloc.mUserList.length < _userBloc.limit
+              ? _userBloc.mUserList.length
+              : _userBloc.limit;
+        } else {
+          _start = (_userBloc.page * _userBloc.limit) - 10;
+          _end = _start + _userBloc.mUserList.length;
+        }
+
+        return PaginationView(
+            page: _userBloc.page,
+            totalPages: totalPages,
+            end: _end,
+            totalItems: _totalItems,
+            start: _start,
+            onNextPressed: () {
+              if (_userBloc.page < totalPages) {
+                _userBloc.page = _userBloc.page + 1;
+                _userBloc.add(UserManagementEvent.getUsers(
+                    userId: adminId ?? '',
+                    page: _userBloc.page.toString(),
+                    limit: _userBloc.limit.toString(),
+                    searchTerm: _searchController.text.trim(),
+                    filterId: filterId));
+                updateData();
+              }
+            },
+            onItemPressed: (i) {
+              _userBloc.page = i;
+              _userBloc.add(UserManagementEvent.getUsers(
+                  userId: adminId ?? '',
+                  page: _userBloc.page.toString(),
+                  limit: _userBloc.limit.toString(),
+                  searchTerm: _searchController.text.trim(),
+                  filterId: filterId));
+              updateData();
+            },
+            onPreviousPressed: () {
+              if (_userBloc.page > 1) {
+                _userBloc.page = _userBloc.page - 1;
+                _userBloc.add(UserManagementEvent.getUsers(
+                    userId: adminId ?? '',
+                    page: _userBloc.page.toString(),
+                    limit: _userBloc.limit.toString(),
+                    searchTerm: _searchController.text.trim(),
+                    filterId: filterId));
+                updateData();
+              }
+            });
+      },
+    );
   }
 
   _usersTable(UserManagementState state, BuildContext context) {
@@ -355,7 +368,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
             label: const CustomText(""),
           ),
         ],
-        rows: mUserList.asMap().entries.map((e) {
+        rows: _userBloc.mUserList.asMap().entries.map((e) {
           setIndex(e.key);
           var item = e.value;
           return DataRow2(
@@ -521,12 +534,12 @@ class _UserManagementPageState extends State<UserManagementPage> {
   void updateData() {
     if (_userBloc.page == 1) {
       _start = 0;
-      _end = mUserList.length < _userBloc.limit
-          ? mUserList.length
+      _end = _userBloc.mUserList.length < _userBloc.limit
+          ? _userBloc.mUserList.length
           : _userBloc.limit;
     } else {
       _start = (_userBloc.page * _userBloc.limit) - 10;
-      _end = _start + mUserList.length;
+      _end = _start + _userBloc.mUserList.length;
     }
   }
 

@@ -6,6 +6,8 @@ import '../../../core/utility.dart';
 import '../../../domain/subProfile_details/model/sub_profile_detail_response.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_sizedbox.dart';
+import '../../widget/empty_view.dart';
+import '../../widget/error_view.dart';
 import '../../widget/row_combo.dart';
 
 class SubscriptionDetailsView extends StatelessWidget {
@@ -16,7 +18,9 @@ class SubscriptionDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SubscriptionDetails? subscriptionDetails =
-        state.response?.data?.subscriptionDetails?.first;
+        state.response!.data!.isSubscriptionActive!
+            ? state.response?.data?.subscriptionDetails?.first
+            : null;
     return CustomContainer(
       padding: EdgeInsets.symmetric(
           horizontal: DBL.twentyFive.val, vertical: DBL.twentyFive.val),
@@ -59,25 +63,29 @@ class SubscriptionDetailsView extends StatelessWidget {
         fontSize: FS.font13PointFive.val);
   }
 
-  Column _rightView(SubscriptionDetails? subscriptionDetails) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _planeName(subscriptionDetails),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-        _startDateView(subscriptionDetails),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-        _recurringDateView(subscriptionDetails),
-        CustomSizedBox(
-          height: DBL.six.val,
-        ),
-        _endDateView(subscriptionDetails),
-      ],
-    );
+  Widget _rightView(SubscriptionDetails? subscriptionDetails) {
+    return state.response!.data!.isSubscriptionActive!
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _planeName(subscriptionDetails),
+              CustomSizedBox(
+                height: DBL.six.val,
+              ),
+              _startDateView(subscriptionDetails),
+              CustomSizedBox(
+                height: DBL.six.val,
+              ),
+              _recurringDateView(subscriptionDetails),
+              CustomSizedBox(
+                height: DBL.six.val,
+              ),
+              _endDateView(subscriptionDetails),
+            ],
+          )
+        : EmptyView(
+            title: AppString.noDataFound.val,
+          );
   }
 
   bool isLg(BuildContext context) => MediaQuery.of(context).size.width <= 1236;

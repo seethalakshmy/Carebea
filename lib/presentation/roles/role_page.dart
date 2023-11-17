@@ -226,6 +226,11 @@ class _RolesPageState extends State<RolesPage> {
         _searchNode.requestFocus();
         _getCareGiverEvent();
       },
+      onChanged: (String value) {
+        if (_searchController.text == "" || _searchController.text.isEmpty) {
+          _getCareGiverEvent();
+        }
+      },
       suffixIcon: InkWell(
         onTap: () {
           _getCareGiverEvent();
@@ -396,7 +401,7 @@ class _RolesPageState extends State<RolesPage> {
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {
         return CommonAlertWidget(
-          height: 150,
+            height: 150,
             heading: AppString.delete.val,
             label: AppString.deleteRole.val,
             onTapYes: () {

@@ -10,6 +10,8 @@ enum AppString {
   profileIncomplete("Profile Incomplete"),
   achDetails('ACH details'),
   cardNumber("Card Number"),
+  viewAdmin("View Admin"),
+  updateAdmin("Update Admin"),
   deleted("Deleted"),
   totalUpcomingServices("Total Upcoming Services"),
   totalAwaitingServices("Total Awaiting Services"),
@@ -157,7 +159,7 @@ enum AppString {
   to("to"),
   of("of"),
   pendingDocumentsReminder(
-      "Qualification Test & Result Documents are pending to upload."),
+      "Qualification & Test Result documents are pending to upload"),
   careAmbassador("Care Ambassador"),
   userManagement("Client Management"),
   roleManagement("Role Management"),
