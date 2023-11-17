@@ -32,8 +32,6 @@ class _EmailOtpVerificationPageState extends State<EmailOtpVerificationPage> {
   AppRouter router = AppRouter();
   final AutovalidateMode _validateMode = AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
-  final EmailOtpVerificationBloc _emailOtpVerificationBloc =
-      EmailOtpVerificationBloc(EmailOtpVerificationRepository());
   SharedPreffUtil sharedPreffUtil = SharedPreffUtil();
 
   @override
@@ -44,8 +42,7 @@ class _EmailOtpVerificationPageState extends State<EmailOtpVerificationPage> {
   @override
   void initState() {
     super.initState();
-    print("rdgtfdgtfyyhfyyyytytug");
-    _emailOtpVerificationBloc.add(const EmailOtpVerificationEvent.count());
+    BlocProvider.of<EmailOtpVerificationBloc>(context).add(const EmailOtpVerificationEvent.count());
   }
 
   @override
@@ -82,6 +79,7 @@ class _EmailOtpVerificationPageState extends State<EmailOtpVerificationPage> {
                     children: [
                       BlocBuilder<EmailOtpVerificationBloc,
                           EmailOtpVerificationState>(
+                        // bloc: _emailOtpVerificationBloc,
                         builder: (context, state) {
                           return Text(
                             '${state.count}${"s"}',
@@ -96,11 +94,11 @@ class _EmailOtpVerificationPageState extends State<EmailOtpVerificationPage> {
                       const Spacer(),
                       TextButton(
                           onPressed: () {
-                         /*   context.read<ResendOtpBloc>().add(ResendOtpEvent.resend(
+                            BlocProvider.of<EmailOtpVerificationBloc>(context).add(const EmailOtpVerificationEvent.count());
+                            context.read<ResendOtpBloc>().add(ResendOtpEvent.resend(
                                 userId: sharedPreffUtil.getAdminId,
                                 type:
-                                    0)); // Type 0=>registration, 1=>forgotPassword, 2=> verify phone number*/
-                            _emailOtpVerificationBloc.add(const EmailOtpVerificationEvent.count());
+                                    0)); // Type 0=>registration, 1=>forgotPassword, 2=> verify phone number
                           },
                           child: Text(
                             AppString.resentOTP.val,

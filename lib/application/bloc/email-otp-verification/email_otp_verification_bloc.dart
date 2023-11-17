@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:admin_580_tech/domain/email_otp_verification/models/generate_otp_response.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
@@ -15,16 +16,17 @@ import '../../../domain/email_otp_verification/models/verify_otp_response.dart';
 import '../../../infrastructure/email_otp_verification/email_otp_verification_repository.dart';
 
 part 'email_otp_verification_bloc.freezed.dart';
+
 part 'email_otp_verification_event.dart';
+
 part 'email_otp_verification_state.dart';
 
 class EmailOtpVerificationBloc
     extends Bloc<EmailOtpVerificationEvent, EmailOtpVerificationState> {
   EmailOtpVerificationRepository emailOtpVerificationRepository;
   SharedPreffUtil sharedPreffUtil = SharedPreffUtil();
-  int timerText = 1;
   int start = 60;
-  bool timerStopped = false;
+  Timer? timer;
 
   EmailOtpVerificationBloc(this.emailOtpVerificationRepository)
       : super(EmailOtpVerificationState.initial()) {
@@ -143,15 +145,25 @@ class EmailOtpVerificationBloc
       stateResult,
     );
   }
-  _count(_Count event, Emitter<EmailOtpVerificationState> emit) async {
-    const oneSec = Duration(seconds: 1);
-    start = 60; // Reset the timer to 60 seconds
 
-    for (int i = start; i >= 0; i--) {
-      await Future.delayed(oneSec);
-      emit(state.copyWith(count: i.toString().padLeft(2, '0')));
+  Future<void> _count(
+      _Count event, Emitter<EmailOtpVerificationState> emit) async {
+    const oneSec = Duration(seconds: 1);
+    if (timer?.isActive == true) {
+      timer?.cancel();
     }
+    start = 60;
+    timer = Timer.periodic(oneSec, (timer) async {
+      start--;
+      if (start <= 0) {
+        timer.cancel();
+      }
+      log("start is $start");
+      await emitTime(start.toString());
+    });
   }
 
-
+  Future<void> emitTime(String start) async {
+    emit(state.copyWith(count: start.padLeft(2, '0')));
+  }
 }
