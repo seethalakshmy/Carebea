@@ -9,18 +9,36 @@ class StatusWidget extends StatelessWidget {
       {Key? key,
       required this.status,
       required this.isOngoing,
-      this.onStartPressed})
+      this.onStartPressed,
+      this.startTime,
+      this.endTime})
       : super(key: key);
 
   final String status;
+  final String? startTime, endTime;
   final bool isOngoing;
   final Function? onStartPressed;
 
   @override
   Widget build(BuildContext context) {
-    return isOngoing
+    bool isWithinInterval = false;
+    if (startTime != "" && endTime != "") {
+// Replace these with your actual start and end DateTime values
+      String startDateTimeString = startTime ?? "";
+      String endDateTimeString = endTime ?? "";
+// Parse start DateTime
+      DateTime startDateTime = DateTime.tryParse(startDateTimeString) ?? DateTime.now();
+// Parse end DateTime
+      DateTime endDateTime = DateTime.tryParse(endDateTimeString) ?? DateTime.now();
+// Get the current time
+      DateTime currentTime = DateTime.now();
+// Check if the current time is within the interval
+      isWithinInterval = currentTime.isAfter(startDateTime) &&
+          currentTime.isBefore(endDateTime);
+    }
+    return (isOngoing && !isWithinInterval)
         ? _onGoingWidget()
-        : status == AppString.onGoing.val
+        : (status == AppString.onGoing.val && isWithinInterval)
             ? CustomButton(
                 onPressed: () {
                   onStartPressed!();

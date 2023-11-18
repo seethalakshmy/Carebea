@@ -24,7 +24,6 @@ import '../../widget/commonImageview.dart';
 import '../../widget/common_alert_widget.dart';
 import '../../widget/custom_alert_dialog_widget.dart';
 import '../../widget/custom_container.dart';
-import '../../widget/custom_shimmer.dart';
 import '../../widget/empty_view.dart';
 import '../../widget/table_loader_view.dart';
 import 'cancel_request_alert_widget.dart';
@@ -233,6 +232,7 @@ class ServiceDetailsAlert extends StatelessWidget {
             border:
                 Border.all(color: AppColor.lightGrey.val, width: DBL.one.val)),
         child: _textAndSubText(
+            needUnderLine: true,
             text: AppString.clientName.val,
             subText:
                 "${service.clientName!.firstName ?? ""} ${service.clientName!.lastName ?? ""}",
@@ -259,7 +259,9 @@ class ServiceDetailsAlert extends StatelessWidget {
               SizedBox(width: DBL.oneForty.val),
               StatusWidget(
                 status: title,
-                isOngoing: false,
+                endTime: service.endTime,
+                startTime: service.startTime,
+                isOngoing: service.status == 3 ? true : false,
                 onStartPressed: () {
                   showDialog(
                     context: context,
@@ -464,6 +466,7 @@ class ServiceDetailsAlert extends StatelessWidget {
             : ProfileWidget(
                 // width: DBL.threeFifty.val,
                 imageUrl: service.caregiverProPic ?? "",
+                needUnderLine: true,
                 name:
                     "${service.caregiverInfo!.name!.firstName ?? ""} ${service.caregiverInfo!.name!.lastName ?? ""}",
                 subText: AppString.careAmbassador.val,
@@ -598,7 +601,8 @@ class ServiceDetailsAlert extends StatelessWidget {
       {required String text,
       required String subText,
       double? height,
-      required BuildContext context}) {
+      required BuildContext context,
+      bool? needUnderLine}) {
     return Column(
       children: [
         SizedBox(height: height ?? DBL.sixteen.val),
@@ -606,7 +610,15 @@ class ServiceDetailsAlert extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(width: DBL.oneEighty.val, child: CustomText(text)),
+            SizedBox(
+                width: DBL.oneEighty.val,
+                child: CustomText(
+                  text,
+                  style: TextStyle(
+                      decoration: (needUnderLine ?? false)
+                          ? TextDecoration.underline
+                          : null),
+                )),
             const CustomText(':'),
             SizedBox(width: DBL.eight.val),
             CustomText(
@@ -733,6 +745,7 @@ class ServiceDetailsAlert extends StatelessWidget {
               );
             },
             child: _textAndSubText(
+              needUnderLine: true,
                 context: context,
                 height: DBL.eight.val,
                 text: AppString.transactionId.val,

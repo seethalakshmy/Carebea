@@ -131,9 +131,59 @@ class _ClientSubProfileDetailsPageState
                                           children: [
                                             CachedImage(
                                               width: isXs(context) ? 150 : 200,
-                                              height: isXs(context) ? 125 : 175,
+                                              height: isXs(context) ? 125 : 135,
                                               imgUrl: state
                                                   .response?.data?.profilePic,
+                                            ),
+                                            CustomSizedBox(
+                                              height: DBL.seventeen.val,
+                                            ),
+                                            Row(children: [
+                                              CustomText(
+                                                AppString.profileCompletion.val,
+                                                style: TS().gRoboto(
+                                                    fontWeight: FW.w500.val,
+                                                    fontSize: getFontSize(
+                                                      context,
+                                                      fontSize: FS.font14.val,
+                                                    ),
+                                                    color: AppColor
+                                                        .lightGrey4.val),
+                                              ),
+                                              CustomSizedBox(
+                                                width: DBL.five.val,
+                                              ),
+                                              CustomText(
+                                                state.response?.data
+                                                    ?.profileCompletionPercentage
+                                                    .toString() ??
+                                                    '',
+                                                style: TS().gRoboto(
+                                                    fontWeight: FW.w500.val,
+                                                    fontSize: getFontSize(
+                                                      context,
+                                                      fontSize: FS.font14.val,
+                                                    ),
+                                                    color: AppColor
+                                                        .primaryColor.val),
+                                              )
+                                            ]),
+                                            // CustomSizedBox(
+                                            //   height: DBL.thirteen.val,
+                                            // ),
+                                            LinearPercentIndicator(
+                                              padding: const EdgeInsets.all(0),
+                                              barRadius:
+                                              const Radius.circular(10),
+                                              width:
+                                              isXs(context) ? 150.0 : 200.0,
+                                              lineHeight: 6.0,
+                                              percent: (response?.data
+                                                  ?.profileCompletionPercentage ??
+                                                  0) /
+                                                  100,
+                                              progressColor:
+                                              AppColor.green2.val,
                                             ),
                                           ],
                                         ),
@@ -180,56 +230,6 @@ class _ClientSubProfileDetailsPageState
                                                   fontSize: FS.font19.val,
                                                 ),
                                               ),
-                                            ),
-                                            CustomSizedBox(
-                                              height: DBL.seventeen.val,
-                                            ),
-                                            Row(children: [
-                                              CustomText(
-                                                AppString.profileCompletion.val,
-                                                style: TS().gRoboto(
-                                                    fontWeight: FW.w500.val,
-                                                    fontSize: getFontSize(
-                                                      context,
-                                                      fontSize: FS.font14.val,
-                                                    ),
-                                                    color: AppColor
-                                                        .lightGrey4.val),
-                                              ),
-                                              CustomSizedBox(
-                                                width: DBL.five.val,
-                                              ),
-                                              CustomText(
-                                                state.response?.data
-                                                        ?.profileCompletionPercentage
-                                                        .toString() ??
-                                                    '',
-                                                style: TS().gRoboto(
-                                                    fontWeight: FW.w500.val,
-                                                    fontSize: getFontSize(
-                                                      context,
-                                                      fontSize: FS.font14.val,
-                                                    ),
-                                                    color: AppColor
-                                                        .primaryColor.val),
-                                              )
-                                            ]),
-                                            // CustomSizedBox(
-                                            //   height: DBL.thirteen.val,
-                                            // ),
-                                            LinearPercentIndicator(
-                                              padding: const EdgeInsets.all(0),
-                                              barRadius:
-                                                  const Radius.circular(10),
-                                              width:
-                                                  isXs(context) ? 150.0 : 200.0,
-                                              lineHeight: 6.0,
-                                              percent: (response?.data
-                                                          ?.profileCompletionPercentage ??
-                                                      0) /
-                                                  100,
-                                              progressColor:
-                                                  AppColor.green2.val,
                                             ),
                                             // SVGText(
                                             //   path: IMG.location.val,

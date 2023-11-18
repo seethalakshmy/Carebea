@@ -556,6 +556,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
           status: status,
           context: context,
         ));
+        _searchController.clear();
       },
     );
   }

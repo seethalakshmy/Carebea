@@ -12,6 +12,7 @@ import '../../../../application/bloc/resend_otp_bloc/resend_otp_bloc.dart';
 import '../../../../core/custom_snackbar.dart';
 import '../../../../core/enum.dart';
 import '../../../../core/text_styles.dart';
+import '../../../../infrastructure/email_otp_verification/email_otp_verification_repository.dart';
 import '../../../widget/custom_material_button.dart';
 import '../../../widget/custom_text.dart';
 import '../../../widget/custom_text_field.dart';
@@ -37,6 +38,11 @@ class _EmailOtpVerificationPageState extends State<EmailOtpVerificationPage> {
   void dispose() {
     emailOtpController.dispose();
     super.dispose();
+  }
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<EmailOtpVerificationBloc>(context).add(const EmailOtpVerificationEvent.count());
   }
 
   @override
@@ -71,8 +77,24 @@ class _EmailOtpVerificationPageState extends State<EmailOtpVerificationPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      BlocBuilder<EmailOtpVerificationBloc,
+                          EmailOtpVerificationState>(
+                        // bloc: _emailOtpVerificationBloc,
+                        builder: (context, state) {
+                          return Text(
+                            '${state.count}${"s"}',
+                            style: const TextStyle(
+                                color: Colors.red,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                decoration: TextDecoration.none),
+                          );
+                        },
+                      ),
+                      const Spacer(),
                       TextButton(
                           onPressed: () {
+                            BlocProvider.of<EmailOtpVerificationBloc>(context).add(const EmailOtpVerificationEvent.count());
                             context.read<ResendOtpBloc>().add(ResendOtpEvent.resend(
                                 userId: sharedPreffUtil.getAdminId,
                                 type:

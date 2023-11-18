@@ -16,8 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$EmailOtpVerificationEvent {
-  BuildContext get context => throw _privateConstructorUsedError;
-  String get userId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
@@ -29,6 +27,7 @@ mixin _$EmailOtpVerificationEvent {
     required TResult Function(
             BuildContext context, String userId, String mobileNumber)
         generateOtp,
+    required TResult Function() count,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +40,7 @@ mixin _$EmailOtpVerificationEvent {
         verifyMobileOtp,
     TResult? Function(BuildContext context, String userId, String mobileNumber)?
         generateOtp,
+    TResult? Function()? count,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,6 +51,7 @@ mixin _$EmailOtpVerificationEvent {
         verifyMobileOtp,
     TResult Function(BuildContext context, String userId, String mobileNumber)?
         generateOtp,
+    TResult Function()? count,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -59,6 +60,7 @@ mixin _$EmailOtpVerificationEvent {
     required TResult Function(_VerifyOtp value) verifyOtp,
     required TResult Function(_VerifyMobileOtp value) verifyMobileOtp,
     required TResult Function(_GenerateOtp value) generateOtp,
+    required TResult Function(_Count value) count,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,6 +68,7 @@ mixin _$EmailOtpVerificationEvent {
     TResult? Function(_VerifyOtp value)? verifyOtp,
     TResult? Function(_VerifyMobileOtp value)? verifyMobileOtp,
     TResult? Function(_GenerateOtp value)? generateOtp,
+    TResult? Function(_Count value)? count,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -73,12 +76,9 @@ mixin _$EmailOtpVerificationEvent {
     TResult Function(_VerifyOtp value)? verifyOtp,
     TResult Function(_VerifyMobileOtp value)? verifyMobileOtp,
     TResult Function(_GenerateOtp value)? generateOtp,
+    TResult Function(_Count value)? count,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $EmailOtpVerificationEventCopyWith<EmailOtpVerificationEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -87,8 +87,6 @@ abstract class $EmailOtpVerificationEventCopyWith<$Res> {
   factory $EmailOtpVerificationEventCopyWith(EmailOtpVerificationEvent value,
           $Res Function(EmailOtpVerificationEvent) then) =
       _$EmailOtpVerificationEventCopyWithImpl<$Res, EmailOtpVerificationEvent>;
-  @useResult
-  $Res call({BuildContext context, String userId});
 }
 
 /// @nodoc
@@ -101,33 +99,13 @@ class _$EmailOtpVerificationEventCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? context = null,
-    Object? userId = null,
-  }) {
-    return _then(_value.copyWith(
-      context: null == context
-          ? _value.context
-          : context // ignore: cast_nullable_to_non_nullable
-              as BuildContext,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_VerifyOtpCopyWith<$Res>
-    implements $EmailOtpVerificationEventCopyWith<$Res> {
+abstract class _$$_VerifyOtpCopyWith<$Res> {
   factory _$$_VerifyOtpCopyWith(
           _$_VerifyOtp value, $Res Function(_$_VerifyOtp) then) =
       __$$_VerifyOtpCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({BuildContext context, String userId, int type, String otp});
 }
@@ -224,6 +202,7 @@ class _$_VerifyOtp implements _VerifyOtp {
     required TResult Function(
             BuildContext context, String userId, String mobileNumber)
         generateOtp,
+    required TResult Function() count,
   }) {
     return verifyOtp(context, userId, type, otp);
   }
@@ -239,6 +218,7 @@ class _$_VerifyOtp implements _VerifyOtp {
         verifyMobileOtp,
     TResult? Function(BuildContext context, String userId, String mobileNumber)?
         generateOtp,
+    TResult? Function()? count,
   }) {
     return verifyOtp?.call(context, userId, type, otp);
   }
@@ -252,6 +232,7 @@ class _$_VerifyOtp implements _VerifyOtp {
         verifyMobileOtp,
     TResult Function(BuildContext context, String userId, String mobileNumber)?
         generateOtp,
+    TResult Function()? count,
     required TResult orElse(),
   }) {
     if (verifyOtp != null) {
@@ -266,6 +247,7 @@ class _$_VerifyOtp implements _VerifyOtp {
     required TResult Function(_VerifyOtp value) verifyOtp,
     required TResult Function(_VerifyMobileOtp value) verifyMobileOtp,
     required TResult Function(_GenerateOtp value) generateOtp,
+    required TResult Function(_Count value) count,
   }) {
     return verifyOtp(this);
   }
@@ -276,6 +258,7 @@ class _$_VerifyOtp implements _VerifyOtp {
     TResult? Function(_VerifyOtp value)? verifyOtp,
     TResult? Function(_VerifyMobileOtp value)? verifyMobileOtp,
     TResult? Function(_GenerateOtp value)? generateOtp,
+    TResult? Function(_Count value)? count,
   }) {
     return verifyOtp?.call(this);
   }
@@ -286,6 +269,7 @@ class _$_VerifyOtp implements _VerifyOtp {
     TResult Function(_VerifyOtp value)? verifyOtp,
     TResult Function(_VerifyMobileOtp value)? verifyMobileOtp,
     TResult Function(_GenerateOtp value)? generateOtp,
+    TResult Function(_Count value)? count,
     required TResult orElse(),
   }) {
     if (verifyOtp != null) {
@@ -302,25 +286,20 @@ abstract class _VerifyOtp implements EmailOtpVerificationEvent {
       required final int type,
       required final String otp}) = _$_VerifyOtp;
 
-  @override
   BuildContext get context;
-  @override
   String get userId;
   int get type;
   String get otp;
-  @override
   @JsonKey(ignore: true)
   _$$_VerifyOtpCopyWith<_$_VerifyOtp> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_VerifyMobileOtpCopyWith<$Res>
-    implements $EmailOtpVerificationEventCopyWith<$Res> {
+abstract class _$$_VerifyMobileOtpCopyWith<$Res> {
   factory _$$_VerifyMobileOtpCopyWith(
           _$_VerifyMobileOtp value, $Res Function(_$_VerifyMobileOtp) then) =
       __$$_VerifyMobileOtpCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({BuildContext context, String userId, int type, String otp});
 }
@@ -417,6 +396,7 @@ class _$_VerifyMobileOtp implements _VerifyMobileOtp {
     required TResult Function(
             BuildContext context, String userId, String mobileNumber)
         generateOtp,
+    required TResult Function() count,
   }) {
     return verifyMobileOtp(context, userId, type, otp);
   }
@@ -432,6 +412,7 @@ class _$_VerifyMobileOtp implements _VerifyMobileOtp {
         verifyMobileOtp,
     TResult? Function(BuildContext context, String userId, String mobileNumber)?
         generateOtp,
+    TResult? Function()? count,
   }) {
     return verifyMobileOtp?.call(context, userId, type, otp);
   }
@@ -445,6 +426,7 @@ class _$_VerifyMobileOtp implements _VerifyMobileOtp {
         verifyMobileOtp,
     TResult Function(BuildContext context, String userId, String mobileNumber)?
         generateOtp,
+    TResult Function()? count,
     required TResult orElse(),
   }) {
     if (verifyMobileOtp != null) {
@@ -459,6 +441,7 @@ class _$_VerifyMobileOtp implements _VerifyMobileOtp {
     required TResult Function(_VerifyOtp value) verifyOtp,
     required TResult Function(_VerifyMobileOtp value) verifyMobileOtp,
     required TResult Function(_GenerateOtp value) generateOtp,
+    required TResult Function(_Count value) count,
   }) {
     return verifyMobileOtp(this);
   }
@@ -469,6 +452,7 @@ class _$_VerifyMobileOtp implements _VerifyMobileOtp {
     TResult? Function(_VerifyOtp value)? verifyOtp,
     TResult? Function(_VerifyMobileOtp value)? verifyMobileOtp,
     TResult? Function(_GenerateOtp value)? generateOtp,
+    TResult? Function(_Count value)? count,
   }) {
     return verifyMobileOtp?.call(this);
   }
@@ -479,6 +463,7 @@ class _$_VerifyMobileOtp implements _VerifyMobileOtp {
     TResult Function(_VerifyOtp value)? verifyOtp,
     TResult Function(_VerifyMobileOtp value)? verifyMobileOtp,
     TResult Function(_GenerateOtp value)? generateOtp,
+    TResult Function(_Count value)? count,
     required TResult orElse(),
   }) {
     if (verifyMobileOtp != null) {
@@ -495,25 +480,20 @@ abstract class _VerifyMobileOtp implements EmailOtpVerificationEvent {
       required final int type,
       required final String otp}) = _$_VerifyMobileOtp;
 
-  @override
   BuildContext get context;
-  @override
   String get userId;
   int get type;
   String get otp;
-  @override
   @JsonKey(ignore: true)
   _$$_VerifyMobileOtpCopyWith<_$_VerifyMobileOtp> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_GenerateOtpCopyWith<$Res>
-    implements $EmailOtpVerificationEventCopyWith<$Res> {
+abstract class _$$_GenerateOtpCopyWith<$Res> {
   factory _$$_GenerateOtpCopyWith(
           _$_GenerateOtp value, $Res Function(_$_GenerateOtp) then) =
       __$$_GenerateOtpCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({BuildContext context, String userId, String mobileNumber});
 }
@@ -602,6 +582,7 @@ class _$_GenerateOtp implements _GenerateOtp {
     required TResult Function(
             BuildContext context, String userId, String mobileNumber)
         generateOtp,
+    required TResult Function() count,
   }) {
     return generateOtp(context, userId, mobileNumber);
   }
@@ -617,6 +598,7 @@ class _$_GenerateOtp implements _GenerateOtp {
         verifyMobileOtp,
     TResult? Function(BuildContext context, String userId, String mobileNumber)?
         generateOtp,
+    TResult? Function()? count,
   }) {
     return generateOtp?.call(context, userId, mobileNumber);
   }
@@ -630,6 +612,7 @@ class _$_GenerateOtp implements _GenerateOtp {
         verifyMobileOtp,
     TResult Function(BuildContext context, String userId, String mobileNumber)?
         generateOtp,
+    TResult Function()? count,
     required TResult orElse(),
   }) {
     if (generateOtp != null) {
@@ -644,6 +627,7 @@ class _$_GenerateOtp implements _GenerateOtp {
     required TResult Function(_VerifyOtp value) verifyOtp,
     required TResult Function(_VerifyMobileOtp value) verifyMobileOtp,
     required TResult Function(_GenerateOtp value) generateOtp,
+    required TResult Function(_Count value) count,
   }) {
     return generateOtp(this);
   }
@@ -654,6 +638,7 @@ class _$_GenerateOtp implements _GenerateOtp {
     TResult? Function(_VerifyOtp value)? verifyOtp,
     TResult? Function(_VerifyMobileOtp value)? verifyMobileOtp,
     TResult? Function(_GenerateOtp value)? generateOtp,
+    TResult? Function(_Count value)? count,
   }) {
     return generateOtp?.call(this);
   }
@@ -664,6 +649,7 @@ class _$_GenerateOtp implements _GenerateOtp {
     TResult Function(_VerifyOtp value)? verifyOtp,
     TResult Function(_VerifyMobileOtp value)? verifyMobileOtp,
     TResult Function(_GenerateOtp value)? generateOtp,
+    TResult Function(_Count value)? count,
     required TResult orElse(),
   }) {
     if (generateOtp != null) {
@@ -679,21 +665,145 @@ abstract class _GenerateOtp implements EmailOtpVerificationEvent {
       required final String userId,
       required final String mobileNumber}) = _$_GenerateOtp;
 
-  @override
   BuildContext get context;
-  @override
   String get userId;
   String get mobileNumber;
-  @override
   @JsonKey(ignore: true)
   _$$_GenerateOtpCopyWith<_$_GenerateOtp> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
+abstract class _$$_CountCopyWith<$Res> {
+  factory _$$_CountCopyWith(_$_Count value, $Res Function(_$_Count) then) =
+      __$$_CountCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_CountCopyWithImpl<$Res>
+    extends _$EmailOtpVerificationEventCopyWithImpl<$Res, _$_Count>
+    implements _$$_CountCopyWith<$Res> {
+  __$$_CountCopyWithImpl(_$_Count _value, $Res Function(_$_Count) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Count implements _Count {
+  const _$_Count();
+
+  @override
+  String toString() {
+    return 'EmailOtpVerificationEvent.count()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Count);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            BuildContext context, String userId, int type, String otp)
+        verifyOtp,
+    required TResult Function(
+            BuildContext context, String userId, int type, String otp)
+        verifyMobileOtp,
+    required TResult Function(
+            BuildContext context, String userId, String mobileNumber)
+        generateOtp,
+    required TResult Function() count,
+  }) {
+    return count();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            BuildContext context, String userId, int type, String otp)?
+        verifyOtp,
+    TResult? Function(
+            BuildContext context, String userId, int type, String otp)?
+        verifyMobileOtp,
+    TResult? Function(BuildContext context, String userId, String mobileNumber)?
+        generateOtp,
+    TResult? Function()? count,
+  }) {
+    return count?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BuildContext context, String userId, int type, String otp)?
+        verifyOtp,
+    TResult Function(BuildContext context, String userId, int type, String otp)?
+        verifyMobileOtp,
+    TResult Function(BuildContext context, String userId, String mobileNumber)?
+        generateOtp,
+    TResult Function()? count,
+    required TResult orElse(),
+  }) {
+    if (count != null) {
+      return count();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_VerifyOtp value) verifyOtp,
+    required TResult Function(_VerifyMobileOtp value) verifyMobileOtp,
+    required TResult Function(_GenerateOtp value) generateOtp,
+    required TResult Function(_Count value) count,
+  }) {
+    return count(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_VerifyOtp value)? verifyOtp,
+    TResult? Function(_VerifyMobileOtp value)? verifyMobileOtp,
+    TResult? Function(_GenerateOtp value)? generateOtp,
+    TResult? Function(_Count value)? count,
+  }) {
+    return count?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_VerifyOtp value)? verifyOtp,
+    TResult Function(_VerifyMobileOtp value)? verifyMobileOtp,
+    TResult Function(_GenerateOtp value)? generateOtp,
+    TResult Function(_Count value)? count,
+    required TResult orElse(),
+  }) {
+    if (count != null) {
+      return count(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Count implements EmailOtpVerificationEvent {
+  const factory _Count() = _$_Count;
+}
+
+/// @nodoc
 mixin _$EmailOtpVerificationState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
+  String? get count => throw _privateConstructorUsedError;
   VerifyOtpResponse? get verifyOtpResponse =>
       throw _privateConstructorUsedError;
   GenerateOtpResponse? get generateOtpResponse =>
@@ -716,6 +826,7 @@ abstract class $EmailOtpVerificationStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       bool isError,
+      String? count,
       VerifyOtpResponse? verifyOtpResponse,
       GenerateOtpResponse? generateOtpResponse,
       String? error,
@@ -739,6 +850,7 @@ class _$EmailOtpVerificationStateCopyWithImpl<$Res,
   $Res call({
     Object? isLoading = null,
     Object? isError = null,
+    Object? count = freezed,
     Object? verifyOtpResponse = freezed,
     Object? generateOtpResponse = freezed,
     Object? error = freezed,
@@ -754,6 +866,10 @@ class _$EmailOtpVerificationStateCopyWithImpl<$Res,
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
               as bool,
+      count: freezed == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as String?,
       verifyOtpResponse: freezed == verifyOtpResponse
           ? _value.verifyOtpResponse
           : verifyOtpResponse // ignore: cast_nullable_to_non_nullable
@@ -790,6 +906,7 @@ abstract class _$$_EmailOtpVerificationStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       bool isError,
+      String? count,
       VerifyOtpResponse? verifyOtpResponse,
       GenerateOtpResponse? generateOtpResponse,
       String? error,
@@ -812,6 +929,7 @@ class __$$_EmailOtpVerificationStateCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? isError = null,
+    Object? count = freezed,
     Object? verifyOtpResponse = freezed,
     Object? generateOtpResponse = freezed,
     Object? error = freezed,
@@ -827,6 +945,10 @@ class __$$_EmailOtpVerificationStateCopyWithImpl<$Res>
           ? _value.isError
           : isError // ignore: cast_nullable_to_non_nullable
               as bool,
+      count: freezed == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as String?,
       verifyOtpResponse: freezed == verifyOtpResponse
           ? _value.verifyOtpResponse
           : verifyOtpResponse // ignore: cast_nullable_to_non_nullable
@@ -857,6 +979,7 @@ class _$_EmailOtpVerificationState implements _EmailOtpVerificationState {
   const _$_EmailOtpVerificationState(
       {required this.isLoading,
       required this.isError,
+      required this.count,
       required this.verifyOtpResponse,
       required this.generateOtpResponse,
       required this.error,
@@ -867,6 +990,8 @@ class _$_EmailOtpVerificationState implements _EmailOtpVerificationState {
   final bool isLoading;
   @override
   final bool isError;
+  @override
+  final String? count;
   @override
   final VerifyOtpResponse? verifyOtpResponse;
   @override
@@ -881,7 +1006,7 @@ class _$_EmailOtpVerificationState implements _EmailOtpVerificationState {
 
   @override
   String toString() {
-    return 'EmailOtpVerificationState(isLoading: $isLoading, isError: $isError, verifyOtpResponse: $verifyOtpResponse, generateOtpResponse: $generateOtpResponse, error: $error, isMobileOtpVerified: $isMobileOtpVerified, isClientError: $isClientError)';
+    return 'EmailOtpVerificationState(isLoading: $isLoading, isError: $isError, count: $count, verifyOtpResponse: $verifyOtpResponse, generateOtpResponse: $generateOtpResponse, error: $error, isMobileOtpVerified: $isMobileOtpVerified, isClientError: $isClientError)';
   }
 
   @override
@@ -892,6 +1017,7 @@ class _$_EmailOtpVerificationState implements _EmailOtpVerificationState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isError, isError) || other.isError == isError) &&
+            (identical(other.count, count) || other.count == count) &&
             (identical(other.verifyOtpResponse, verifyOtpResponse) ||
                 other.verifyOtpResponse == verifyOtpResponse) &&
             (identical(other.generateOtpResponse, generateOtpResponse) ||
@@ -908,6 +1034,7 @@ class _$_EmailOtpVerificationState implements _EmailOtpVerificationState {
       runtimeType,
       isLoading,
       isError,
+      count,
       verifyOtpResponse,
       generateOtpResponse,
       error,
@@ -926,6 +1053,7 @@ abstract class _EmailOtpVerificationState implements EmailOtpVerificationState {
   const factory _EmailOtpVerificationState(
       {required final bool isLoading,
       required final bool isError,
+      required final String? count,
       required final VerifyOtpResponse? verifyOtpResponse,
       required final GenerateOtpResponse? generateOtpResponse,
       required final String? error,
@@ -936,6 +1064,8 @@ abstract class _EmailOtpVerificationState implements EmailOtpVerificationState {
   bool get isLoading;
   @override
   bool get isError;
+  @override
+  String? get count;
   @override
   VerifyOtpResponse? get verifyOtpResponse;
   @override
