@@ -130,120 +130,49 @@ class RowColonCombo extends StatelessWidget {
                 fontSize: fontSize,
               )
             : const SizedBox.shrink(),
-        Flexible(
-          flex: valueFlex ?? 2,
-          child: InkWell(
-            onTap: onValueTap,
-            child: AlertTextLabel(
-              value,
-              color: color ?? valueColor,
-              needUnderLine: needUnderLine,
-              fontWeight: fontWeight,
-              fontSize: fontSize,
-            ),
+        InkWell(
+          onTap: onValueTap,
+          child: AlertTextLabel(
+            value,
+            color: color ?? valueColor,
+            needUnderLine: needUnderLine,
+            fontWeight: fontWeight,
+            fontSize: fontSize,
           ),
         ),
-        Flexible(
-          child: Wrap(
-            children: list
-                    ?.map(
-                      (e) => Wrap(
-                        children: [
-                          needComma ?? false
-                              ? AlertTextLabel(
-                                  "$e,",
-                                  color: color,
-                                  fontWeight: fontWeight,
-                                  fontSize: fontSize,
-                                )
-                              : AlertTextLabel(
-                                  e,
-                                  color: color,
-                                  fontWeight: fontWeight,
-                                  fontSize: fontSize,
-                                ),
-                          SizedBox(
-                            width: 20,
-                          )
-                        ],
-                      ),
-                    )
-                    .toList() ??
-                [],
-          ),
-        ),
-        Flexible(
-          flex: 2,
-          child: RichText(
-            text: TextSpan(style: const TextStyle(fontSize: 12), children: [
-              ...List.generate(
-                  tierOneServiceList?.length ?? 0,
-                  (index) => TextSpan(
-                      text: '${tierOneServiceList![index].serviceName},')),
-              ...List.generate(
-                  tierTwoServiceList?.length ?? 0,
-                  (index) => TextSpan(
-                      text: '${tierTwoServiceList![index].serviceName},'))
-            ]),
-          ),
-        ),
-        // Flexible(
-        //   flex: 2,
-        //   child: RichText(
-        //     text: TextSpan(
-        //         style: const TextStyle(fontSize: 12),
-        //         children: ),
-        //   ),
-        // ),
-        // Flexible(
-        //   flex: 3,
-        //   child: RichText(
-        //     text: TextSpan(
-        //         style: const TextStyle(fontSize: 12),
-        //         children: List.generate(
-        //             tierOneServiceList?.length ?? 0,
-        //             (index) => TextSpan(
-        //                 text: '${tierOneServiceList![index].serviceName}  '))),
-        //   ),
-        // ),
+        Wrap(
+          children: list
+                  ?.map(
+                    (e) => Wrap(
+                      children: [
+                        AlertTextLabel(
+                          e,
+                          color: color,
+                          fontWeight: fontWeight,
+                          fontSize: fontSize,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        )
+                      ],
+                    ),
+                  )
+                  .toList() ??
+              [],
 
-        // Flexible(
-        //   child: Column(
-        //     mainAxisSize: MainAxisSize.min,
-        //     children: [
-        //       Flexible(
-        //         child: Wrap(
-        //           children: tierOneServiceList
-        //                   ?.map(
-        //                     (e) => AlertTextLabel(
-        //                       e.serviceName ?? '',
-        //                       color: color,
-        //                       fontWeight: fontWeight,
-        //                       fontSize: fontSize,
-        //                     ),
-        //                   )
-        //                   .toList() ??
-        //               [],
-        //         ),
-        //       ),
-        //       Flexible(
-        //         child: Wrap(
-        //           children: tierTwoServiceList
-        //                   ?.map(
-        //                     (e) => AlertTextLabel(
-        //                       e.serviceName ?? '',
-        //                       color: color,
-        //                       fontWeight: fontWeight,
-        //                       fontSize: fontSize,
-        //                     ),
-        //                   )
-        //                   .toList() ??
-        //               [],
-        //         ),
-        //       )
-        //     ],
-        //   ),
-        // ),
+        ),
+        RichText(
+          text: TextSpan(style: const TextStyle(fontSize: 12), children: [
+            ...List.generate(
+                tierOneServiceList?.length ?? 0,
+                (index) => TextSpan(
+                    text: '${tierOneServiceList![index].serviceName},')),
+            ...List.generate(
+                tierTwoServiceList?.length ?? 0,
+                (index) => TextSpan(
+                    text: '${tierTwoServiceList![index].serviceName},'))
+          ]),
+        ),
       ],
     );
   }

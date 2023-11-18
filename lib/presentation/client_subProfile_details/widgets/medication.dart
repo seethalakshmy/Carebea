@@ -4,6 +4,7 @@ import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/utility.dart';
 import '../../widget/alert_text_label.dart';
 import '../../widget/custom_sizedbox.dart';
 import '../../widget/row_combo.dart';
@@ -17,7 +18,7 @@ class MedicationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('medication ${medication?.length}');
-    print('drug ${healthMedicalConditions?.drugs?.length}');
+    print('drug ${healthMedicalConditions?.toJson()}');
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +47,7 @@ class MedicationWidget extends StatelessWidget {
             child: ListView.builder(
               shrinkWrap: true,
               itemBuilder: (BuildContext context, index) {
-                return Row(
+                return Wrap(
                   children: [
                     Container(
                       decoration: BoxDecoration(
@@ -91,6 +92,7 @@ class MedicationWidget extends StatelessWidget {
             children: healthMedicalConditions?.drugs
                     ?.map(
                       (e) => Container(
+                        color: Colors.red,
                         // height: 20,
                         width: 100,
 
@@ -165,7 +167,10 @@ class MedicationWidget extends StatelessWidget {
   RowColonCombo _expirationDate(Medication? data) {
     return RowColonCombo.twoHundred(
         label: AppString.expirationDate.val,
-        value: data?.expirationDate ?? '',
+        value: Utility.dateConverter(
+            date: data?.expirationDate ?? '',
+            currentFormat: 'dd/mm/yyyy',
+            convertToFormat: 'mm/dd/yyyy'),
         fontSize: FS.font13PointFive.val);
   }
 

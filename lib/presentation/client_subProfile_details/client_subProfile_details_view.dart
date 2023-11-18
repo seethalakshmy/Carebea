@@ -241,54 +241,6 @@ class _ClientSubProfileDetailsPageState
                                             CustomSizedBox(
                                               height: DBL.fourteen.val,
                                             ),
-
-                                            // CustomSizedBox(
-                                            //   height: isXs2(context)
-                                            //       ? DBL.ten.val
-                                            //       : DBL.fourteen.val,
-                                            // ),
-                                            // Row(children: [
-                                            //   CustomSvg(path: IMG.warning.val),
-                                            //   CustomSizedBox(
-                                            //     width: DBL.five.val,
-                                            //   ),
-                                            //   Expanded(
-                                            //     child: CustomText3(
-                                            //       AppString.pendingDocuments.val,
-                                            //       style: TS().gRoboto(
-                                            //           fontWeight: FW.w500.val,
-                                            //           fontSize: getFontSize(
-                                            //               context,
-                                            //               fontSize:
-                                            //                   FS.font14.val),
-                                            //           color: AppColor.red.val),
-                                            //     ),
-                                            //   )
-                                            // ]),
-                                            // CustomSizedBox(
-                                            //   height: isXs2(context)
-                                            //       ? DBL.five.val
-                                            //       : DBL.thirteen.val,
-                                            // ),
-                                            // Row(children: [
-                                            //   CustomSizedBox(
-                                            //     width: DBL.twentyEight.val,
-                                            //   ),
-                                            //   Expanded(
-                                            //     child: CustomText3(
-                                            //       "COVID - 19 Vaccination  |  BLS CPR/First Aid Certification",
-                                            //       style: TS().gRoboto(
-                                            //           fontSize: getFontSize(
-                                            //             context,
-                                            //             fontSize: FS.font14.val,
-                                            //           ),
-                                            //           fontWeight: FW.w400.val,
-                                            //           color: AppColor
-                                            //               .matBlack2.val),
-                                            //     ),
-                                            //   ),
-                                            // ]
-                                            // ),
                                           ],
                                         ),
                                       ),

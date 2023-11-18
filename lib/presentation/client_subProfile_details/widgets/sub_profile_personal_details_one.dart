@@ -1,8 +1,8 @@
-import 'package:admin_580_tech/application/bloc/sub_profile_details/sub_profile_details_bloc.dart';
-import 'package:admin_580_tech/core/string_extension.dart';
 import 'package:flutter/material.dart';
 
+import '../../../application/bloc/sub_profile_details/sub_profile_details_bloc.dart';
 import '../../../core/enum.dart';
+import '../../../core/string_extension.dart';
 import '../../../domain/subProfile_details/model/sub_profile_detail_response.dart';
 import '../../widget/custom_container.dart';
 import '../../widget/custom_sizedbox.dart';

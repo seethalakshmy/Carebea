@@ -7,6 +7,7 @@ class ServiceRequestManagementState with _$ServiceRequestManagementState {
       bool? isLoading,
       bool? isListLoading,
       bool? isDetailsLoading,
+      required List<ServiceRequests> serviceRequestsList,
       required bool isShowingTransactionDetails,
       required bool isShowingNeededServices,
       required bool isShowingCompletedServices,
@@ -48,6 +49,7 @@ class ServiceRequestManagementState with _$ServiceRequestManagementState {
 
   factory ServiceRequestManagementState.initial() {
     return ServiceRequestManagementState(
+        serviceRequestsList: [],
         isLoading: true,
         isListLoading: false,
         isDetailsLoading: true,

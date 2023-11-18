@@ -109,6 +109,8 @@ class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
             roleId: event.roleId);
     RoleCreationState homeState = homeResult.fold((l) {
       CSnackBar.showError(event.context, msg: l.error ?? "");
+      emit(state.copyWith(isLoadingButton: false));
+
       return state.copyWith(
         error: l.error,
         isLoading: false,
@@ -118,6 +120,8 @@ class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
       );
     }, (r) {
       if (r.status ?? false) {
+        emit(state.copyWith(isLoadingButton: false));
+
         CSnackBar.showSuccess(event.context,
             msg: state.isEdit == true
                 ? AppString.successfullyUpdateRole.val

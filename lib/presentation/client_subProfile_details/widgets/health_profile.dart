@@ -238,10 +238,8 @@ class SubProfileHealthProfile extends StatelessWidget {
     return RowColonCombo.twoHundred(
         label: AppString.mentalHealthCondition.val,
         value: state.response?.data?.healthMedicalConditions?.healthCondition
-                    ?.mentalHealthCondiditon ==
-                true
-            ? 'Yes'
-            : "No",
+                ?.mentalHealthName ??
+            '',
         fontSize: FS.font13PointFive.val);
   }
 
@@ -249,10 +247,8 @@ class SubProfileHealthProfile extends StatelessWidget {
     return RowColonCombo.twoHundred(
         label: AppString.mobility.val,
         value: state.response?.data?.healthMedicalConditions?.healthCondition
-                    ?.mobility ==
-                true
-            ? 'Yes'
-            : 'No',
+                ?.mobilityName ??
+            '',
         fontSize: FS.font13PointFive.val);
   }
 
@@ -279,6 +275,16 @@ class SubProfileHealthProfile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _foodAllergy(),
+        CustomSizedBox(
+          height: DBL.six.val,
+        ),
+        AlertTextLabel(
+          state.response?.data?.healthMedicalConditions?.healthCondition
+                  ?.foodAllergiDesc ??
+              '',
+          fontWeight: FontWeight.bold,
+          fontSize: 14,
+        ),
         CustomSizedBox(
           height: DBL.six.val,
         ),
@@ -310,10 +316,19 @@ class SubProfileHealthProfile extends StatelessWidget {
         CustomSizedBox(
           height: DBL.six.val,
         ),
-        _otherAllergies(),
+        AlertTextLabel(
+            state.response?.data?.healthMedicalConditions?.healthCondition
+                    ?.allergiProblemDesc ??
+                '',
+            fontSize: 14,
+            fontWeight: FontWeight.bold),
         CustomSizedBox(
           height: DBL.six.val,
         ),
+        // _otherAllergies(),
+        // CustomSizedBox(
+        //   height: DBL.six.val,
+        // ),
       ],
     );
   }

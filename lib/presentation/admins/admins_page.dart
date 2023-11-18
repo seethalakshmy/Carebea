@@ -103,14 +103,15 @@ class _AdminsPageState extends State<AdminsPage> {
   }
 
   BlocProvider<AdminsBloc> _rebuildView() {
+    debugPrint("search term ${_adminsBloc.searchController.text.trim()}");
     return BlocProvider(
       create: (context) => _adminsBloc
         ..add(AdminEvent.getAdmins(
-          userId: _adminUserId,
-          page: _adminsBloc.page,
-          limit: _adminsBloc.limit,
-          searchTerm: _adminsBloc.searchController.text.trim(),
-        )),
+            userId: _adminUserId,
+            page: _adminsBloc.page,
+            limit: _adminsBloc.limit,
+            searchTerm: _adminsBloc.searchController.text.trim(),
+            roleId: roleId)),
       child: _bodyView(),
     );
   }
@@ -119,6 +120,8 @@ class _AdminsPageState extends State<AdminsPage> {
     return BlocBuilder<AdminsBloc, AdminsState>(
       builder: (_, state) {
         print('update called');
+        debugPrint("search term ${_adminsBloc.searchController.text.trim()}");
+
         return _cardView(state, context);
       },
     );
@@ -610,9 +613,7 @@ class _AdminsPageState extends State<AdminsPage> {
         limit: _adminsBloc.limit,
         status: filterId,
         roleId: roleId,
-        searchTerm: _adminsBloc.searchController.text.trim().isNotEmpty
-            ? _adminsBloc.searchController.text.trim()
-            : ''));
+        searchTerm: _adminsBloc.searchController.text.trim()));
   }
 
   _setIndex(int index) {

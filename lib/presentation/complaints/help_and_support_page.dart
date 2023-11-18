@@ -47,6 +47,7 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
   int pageIndex = 0;
   int _start = 0;
   int _end = 10;
+  int _filterId = 0;
   final TextEditingController _searchController = TextEditingController();
   String userId = SharedPreffUtil().getAdminId;
 
@@ -204,6 +205,7 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
   }
 
   _complaintsView(BuildContext context) {
+    debugPrint('total length ${_supportTicketsBloc.complaintList.length}');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -257,18 +259,20 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
         page: _page.toString(),
         limit: _limit.toString(),
         searchTerm: _searchController.text.trim(),
-        status: 0));
+        status: _filterId));
   }
 
   CustomDropdown<int> _statusDropDown(BuildContext context) {
     return CustomDropdown<int>(
-      onChange: (int value, int index) => _supportTicketsBloc.add(
-          ComplaintsEvent.getComplaints(
-              userId: userId,
-              page: _page.toString(),
-              limit: _limit.toString(),
-              searchTerm: "",
-              status: value)),
+      onChange: (int value, int index) {
+        _filterId = value;
+        _supportTicketsBloc.add(ComplaintsEvent.getComplaints(
+            userId: userId,
+            page: _page.toString(),
+            limit: _limit.toString(),
+            searchTerm: _searchController.text.trim(),
+            status: value));
+      },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
         width: DBL.oneForty.val,
@@ -321,6 +325,7 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
   }
 
   _paginationView() {
+    debugPrint('inside pagination');
     _totalItems = _supportTicketsBloc.paginationList[0].totals!.toInt();
     final int totalPages = (_totalItems / _limit).ceil();
     return PaginationView(
@@ -337,6 +342,8 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
           }
         },
         onItemPressed: (i) {
+          debugPrint('inside pagination');
+
           _page = i;
           _getCompliantsEvent();
           updateData();
@@ -613,9 +620,15 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
       _end = _supportTicketsBloc.complaintList.length < _limit
           ? _supportTicketsBloc.complaintList.length
           : _limit;
+      debugPrint("end $_end");
+      debugPrint("length ${_supportTicketsBloc.complaintList.length}");
+      debugPrint("limit $_limit");
     } else {
       _start = (_page * _limit) - 10;
       _end = _start + _supportTicketsBloc.complaintList.length;
+      debugPrint("end $_end");
+      debugPrint("length ${_supportTicketsBloc.complaintList.length}");
+      debugPrint("limit $_limit");
     }
   }
 

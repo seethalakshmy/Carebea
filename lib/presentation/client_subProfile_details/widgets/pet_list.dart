@@ -87,28 +87,27 @@ class PetListView extends StatelessWidget {
                                     : AppColor.both.val,
                             borderRadius: BorderRadius.all(Radius.circular(5))),
                         child: Padding(
-                          padding: const EdgeInsets.all(5),
-                          child: Flexible(
-                            child: Wrap(
-                              children: [
-                                AlertTextLabel(
-                                  e.name ?? '',
-                                  color: color,
-                                  fontWeight: fontWeight,
-                                  fontSize: fontSize,
-                                ),
-                                AlertTextLabel(
-                                  e.area == 1
-                                      ? "(Indoor)"
-                                      : e.area == 2
-                                          ? "(Outdoor)"
-                                          : "(Both)",
-                                  color: color,
-                                  fontWeight: fontWeight,
-                                  fontSize: fontSize,
-                                ),
-                              ],
-                            ),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
+                          child: Wrap(
+                            children: [
+                              AlertTextLabel(
+                                e.name ?? '',
+                                color: color,
+                                fontWeight: fontWeight,
+                                fontSize: fontSize,
+                              ),
+                              AlertTextLabel(
+                                e.area == 1
+                                    ? "(Indoor)"
+                                    : e.area == 2
+                                        ? "(Outdoor)"
+                                        : "(Both)",
+                                color: color,
+                                fontWeight: fontWeight,
+                                fontSize: fontSize,
+                              ),
+                            ],
                           ),
                         ),
                       ),

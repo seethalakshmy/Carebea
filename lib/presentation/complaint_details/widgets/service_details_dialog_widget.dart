@@ -257,7 +257,7 @@ class _ServiceDetailsDialogState extends State<ServiceDetailsDialogWidget> {
                                               widget.service.cancelledBy ?? ""),
                                   if (widget.title == AppString.canceled.val)
                                     _textAndSubText(
-                                        text: AppString.refundStatus.val,
+                                        text: AppString.transactionHistory.val,
                                         subText:
                                             widget.service.refundStatus ?? ""),
                                 ],

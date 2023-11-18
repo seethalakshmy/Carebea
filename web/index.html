@@ -87,14 +87,14 @@
     });
     <!-- Removes the loading indicator after 1 seconds -->
 
-    // window.onload = function () {
-    //   setTimeout(function () {
-    //     var loadingIndicator = document.getElementById("loading_container");
-    //     if (loadingIndicator) {
-    //       loadingIndicator.remove();
-    //     }
-    //   }, 2000)
-    // }
+   window.onload = function () {
+     setTimeout(function () {
+       var loadingIndicator = document.getElementById("loading_container");
+       if (loadingIndicator) {
+         loadingIndicator.remove();
+       }
+     }, 1000)
+   }
   </script>
   <script>
   document.addEventListener('wheel', function(e) {

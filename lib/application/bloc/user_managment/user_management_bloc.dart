@@ -26,6 +26,7 @@ class UserManagementBloc
   UsersRepository usersRepository;
   int page = 1;
   int limit = 10;
+  List<dynamic> mUserList = [];
 
   UserManagementBloc(this.usersRepository)
       : super(UserManagementState.initial()) {
@@ -43,14 +44,23 @@ class UserManagementBloc
             searchTerm: event.searchTerm,
             filterId: event.filterId);
     var userState = result.fold((l) {
-      return state.copyWith(error: l.error, isLoading: false);
+      return state.copyWith(
+          error: l.error, isLoading: false, mUserList: mUserList);
     }, (r) {
+      if (r.status == true) {
+        mUserList.clear();
+        // state.serviceRequestsList.addAll(r.data!.services!);
+
+        mUserList.addAll(r.data!.finalResult!);
+        log("userList from bloc,${mUserList.length}");
+      }
       r.data?.finalResult?.forEach((element) {
         if (element.mobile == "959-898-9797") {
           log("status is ${element.status}");
         }
       });
-      return state.copyWith(response: r, isLoading: false);
+      return state.copyWith(
+          response: r, isLoading: false, mUserList: mUserList);
     });
     emit(userState);
   }

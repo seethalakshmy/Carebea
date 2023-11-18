@@ -510,7 +510,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
             : () {
           _transactionDetails(
               _complaintDetailBloc.complaintDetailsList[0].transactionId ?? "",
-              _complaintDetailBloc.complaintDetailsList[0].serviceBookingId ??
+              _complaintDetailBloc.complaintDetailsList[0].serviceId ??
                   "");
         } : null,
         needUnderLine: _complaintDetailBloc.complaintDetailsList[0]

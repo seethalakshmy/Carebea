@@ -22,6 +22,7 @@ import '../on_boarding/modules/personal_details/widgets/mobile_number_formatter.
 import '../on_boarding/modules/personal_details/widgets/profile_picture_widget.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';
+import '../widget/custom_alert_dialog_widget.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_dropdown.dart';
@@ -98,7 +99,11 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
     return Column(
       children: [
         HeaderView(
-          title: AppString.createNewAdmin.val,
+          title: _isView!
+              ? AppString.viewAdmin.val
+              : _isEdit!
+                  ? AppString.updateAdmin.val
+                  : AppString.createNewAdmin.val,
         ),
         CustomSizedBox(height: DBL.ten.val),
         _rebuildView(),
@@ -235,6 +240,33 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
     );
   }
 
+  _profileImageView(BuildContext context, String url) {
+    return CachedImage(
+      onTap: () {
+        showGeneralDialog(
+          barrierDismissible: true,
+          barrierLabel: "",
+          context: context,
+          pageBuilder: (BuildContext buildContext, Animation animation,
+              Animation secondaryAnimation) {
+            return CustomAlertDialogWidget(
+                showHeading: false,
+                width: 700,
+                heading: "",
+                child: CachedImage(
+                  fit: BoxFit.contain,
+                  imgUrl: url,
+                ));
+          },
+        );
+      },
+      imgUrl: url,
+      height: DBL.oneSeventyFive.val,
+      width: DBL.twoHundred.val,
+      isDetailPage: true,
+    );
+  }
+
   _profilePicWidget(AdminCreationState state) {
     return Column(
       children: [
@@ -245,9 +277,8 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                     adminCreationBloc: _adminCreationBloc,
                     size: Responsive.isWeb(context) ? 180 : 140,
                   )
-                : CachedImage(
-                    imgUrl: state.viewResponse?.data?.profile,
-                  ),
+                : _profileImageView(
+                    context, state.viewResponse?.data?.profile ?? ""),
         CustomSizedBox(height: DBL.six.val),
         state.isLoading
             ? CustomShimmerWidget.rectangular(
