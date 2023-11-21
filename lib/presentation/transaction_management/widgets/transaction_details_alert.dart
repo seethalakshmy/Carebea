@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/bloc/service_request_management/service_request_management_bloc.dart';
 import '../../../application/bloc/transaction_management/transaction_management_bloc.dart';
+import '../../../core/utility.dart';
 import '../../../domain/transaction_management/model/transaction_details_response.dart';
 import '../../../main.dart';
 import '../../routes/app_router.gr.dart';
@@ -184,7 +185,7 @@ class TransactionDetailsAlert extends StatelessWidget {
           const CustomSizedBox(height: 7),
           _detailRow(
               "Amount",
-              transactionBloc.transactionDetailsData.amount ?? "",
+              '\$${Utility.formatAmount(double.tryParse(transactionBloc.transactionDetailsData.amount?.replaceAll('\$', "") ?? "0.0") ?? 0.0)}',
               null,
               context),
           const CustomSizedBox(height: 7),

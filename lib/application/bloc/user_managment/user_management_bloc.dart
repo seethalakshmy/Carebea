@@ -27,6 +27,8 @@ class UserManagementBloc
   int page = 1;
   int limit = 10;
   List<dynamic> mUserList = [];
+  final TextEditingController searchController = TextEditingController();
+  bool? filterId;
 
   UserManagementBloc(this.usersRepository)
       : super(UserManagementState.initial()) {
@@ -79,7 +81,8 @@ class UserManagementBloc
             userId: event.userId,
             page: page.toString(),
             limit: limit.toString(),
-            searchTerm: ''));
+            searchTerm: searchController.text.trim(),
+            filterId: filterId));
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
