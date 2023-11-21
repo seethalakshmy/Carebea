@@ -50,9 +50,9 @@ class _UserManagementPageState extends State<UserManagementPage> {
   int pageIndex = 0;
   int _start = 0;
   int _end = 10;
-  final TextEditingController _searchController = TextEditingController();
+  // final TextEditingController _searchController = TextEditingController();
   String? adminId;
-  bool? filterId;
+  // bool? filterId;
 
   @override
   void initState() {
@@ -93,8 +93,8 @@ class _UserManagementPageState extends State<UserManagementPage> {
             userId: adminId ?? '',
             page: _userBloc.page.toString(),
             limit: _userBloc.limit.toString(),
-            searchTerm: _searchController.text.trim(),
-            filterId: filterId)),
+            searchTerm: _userBloc.searchController.text.trim(),
+            filterId: _userBloc.filterId)),
       child: _bodyView(),
     );
   }
@@ -159,16 +159,27 @@ class _UserManagementPageState extends State<UserManagementPage> {
     return CTextField(
       width: DBL.threeFifteen.val,
       height: DBL.forty.val,
-      controller: _searchController,
+      controller: _userBloc.searchController,
       hintText: AppString.search.val,
       hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
+      onChanged: (String value) {
+        _userBloc.searchController.text.isEmpty ||
+                _userBloc.searchController.text == ''
+            ? _userBloc.add(UserManagementEvent.getUsers(
+                userId: adminId ?? '',
+                page: _userBloc.page.toString(),
+                limit: _userBloc.limit.toString(),
+                searchTerm: _userBloc.searchController.text.trim(),
+                filterId: _userBloc.filterId))
+            : null;
+      },
       onSubmitted: (String value) {
         _userBloc.add(UserManagementEvent.getUsers(
             userId: adminId ?? '',
             page: _userBloc.page.toString(),
             limit: _userBloc.limit.toString(),
-            searchTerm: _searchController.text.trim(),
-            filterId: filterId));
+            searchTerm: _userBloc.searchController.text.trim(),
+            filterId: _userBloc.filterId));
         debugPrint('user list length ${_userBloc.mUserList.isEmpty}');
       },
       suffixIcon: InkWell(
@@ -177,8 +188,8 @@ class _UserManagementPageState extends State<UserManagementPage> {
               userId: adminId ?? '',
               page: _userBloc.page.toString(),
               limit: _userBloc.limit.toString(),
-              searchTerm: _searchController.text.trim(),
-              filterId: filterId));
+              searchTerm: _userBloc.searchController.text.trim(),
+              filterId: _userBloc.filterId));
         },
         child: CustomSvg(
           path: IMG.search.val,
@@ -192,7 +203,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
   CustomDropdown<int> _statusDropDown(BuildContext context) {
     return CustomDropdown<int>(
       onChange: (int value, int index) {
-        filterId = index == 1
+        _userBloc.filterId = index == 1
             ? true
             : index == 2
                 ? false
@@ -202,8 +213,8 @@ class _UserManagementPageState extends State<UserManagementPage> {
             userId: adminId ?? '',
             page: _userBloc.page.toString(),
             limit: _userBloc.limit.toString(),
-            searchTerm: _searchController.text.trim(),
-            filterId: filterId));
+            searchTerm: _userBloc.searchController.text.trim(),
+            filterId: _userBloc.filterId));
       },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -226,7 +237,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
           .entries
           .map(
             (item) => DropdownItem<int>(
-              value: item.key + 1,
+              value: item.key,
               child: Padding(
                 padding: EdgeInsets.all(DBL.eight.val),
                 child: Text(
@@ -277,8 +288,8 @@ class _UserManagementPageState extends State<UserManagementPage> {
                     userId: adminId ?? '',
                     page: _userBloc.page.toString(),
                     limit: _userBloc.limit.toString(),
-                    searchTerm: _searchController.text.trim(),
-                    filterId: filterId));
+                    searchTerm: _userBloc.searchController.text.trim(),
+                    filterId: _userBloc.filterId));
                 updateData();
               }
             },
@@ -288,8 +299,8 @@ class _UserManagementPageState extends State<UserManagementPage> {
                   userId: adminId ?? '',
                   page: _userBloc.page.toString(),
                   limit: _userBloc.limit.toString(),
-                  searchTerm: _searchController.text.trim(),
-                  filterId: filterId));
+                  searchTerm: _userBloc.searchController.text.trim(),
+                  filterId: _userBloc.filterId));
               updateData();
             },
             onPreviousPressed: () {
@@ -299,8 +310,8 @@ class _UserManagementPageState extends State<UserManagementPage> {
                     userId: adminId ?? '',
                     page: _userBloc.page.toString(),
                     limit: _userBloc.limit.toString(),
-                    searchTerm: _searchController.text.trim(),
-                    filterId: filterId));
+                    searchTerm: _userBloc.searchController.text.trim(),
+                    filterId: _userBloc.filterId));
                 updateData();
               }
             });

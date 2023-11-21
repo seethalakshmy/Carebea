@@ -10,6 +10,7 @@ import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
+import '../../core/utility.dart';
 import '../../domain/transaction_management/model/transaction_list_response.dart';
 import '../../domain/transaction_management/model/transactions.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
@@ -471,7 +472,10 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
               DataCell(_rowsView(text: item.paidFor)),
               DataCell(_rowsView(text: item.paidTo)),
               DataCell(_rowsView(text: item.receivedFrom)),
-              DataCell(_rowsView(text: item.amount)),
+
+              DataCell(_rowsView(
+                  text:
+                      '\$${Utility.formatAmount(double.tryParse(item.amount?.replaceAll('\$', "") ?? "0.0") ?? 0.0)}')),
               DataCell(_rowsView(
                   text: _transactionBloc.formatDateToMonthName(
                       item.dateTime ?? "0000-00-00T00:00:00.000Z"))),

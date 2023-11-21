@@ -232,8 +232,9 @@ class ServiceDetailsAlert extends StatelessWidget {
             border:
                 Border.all(color: AppColor.lightGrey.val, width: DBL.one.val)),
         child: _textAndSubText(
+            text: AppString.careRecipientName.val,
             needUnderLine: true,
-            text: AppString.clientName.val,
+
             subText:
                 "${service.clientName!.firstName ?? ""} ${service.clientName!.lastName ?? ""}",
             context: context),
