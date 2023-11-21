@@ -234,36 +234,38 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
                   //   status: item.status ?? 0,
                   // )
                   ),
-              DataCell(TableActions(
-                isEdit: false,
-                isView: true,
-                onViewTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      context.read<ServiceRequestManagementBloc>().add(
-                          ServiceRequestManagementEvent.getServiceDetails(
-                              context: context, serviceId: item.id ?? ''));
-                      debugPrint('item status ${item.status}');
-                      return CustomAlertDialogWidget(
-                        heading: AppString.services.val,
-                        child: ServiceDetailsAlert(
-                          title: item.status == 2
-                              ? 'Upcoming'
-                              : item.status == 3
-                                  ? 'Ongoing'
-                                  : item.status == 5
-                                      ? 'Completed'
-                                      : 'Cancelled',
-                          serviceBloc: serviceRequestManagementBloc,
-                        ),
-                      );
-                    },
-                  );
-                  // _getServiceDetails();
-                  // _serviceDetailPopUp(context, item.status ?? 0);
-                },
-              )),
+              DataCell(
+                TableActions(
+                  isEdit: false,
+                  isView: true,
+                  onViewTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        context.read<ServiceRequestManagementBloc>().add(
+                            ServiceRequestManagementEvent.getServiceDetails(
+                                context: context, serviceId: item.id ?? ''));
+                        debugPrint('item status ${item.status}');
+                        return CustomAlertDialogWidget(
+                          heading: AppString.services.val,
+                          child: ServiceDetailsAlert(
+                            title: item.status == 2
+                                ? 'Upcoming'
+                                : item.status == 3
+                                    ? 'Ongoing'
+                                    : item.status == 5
+                                        ? 'Completed'
+                                        : 'Cancelled',
+                            serviceBloc: serviceRequestManagementBloc,
+                          ),
+                        );
+                      },
+                    );
+                    // _getServiceDetails();
+                    // _serviceDetailPopUp(context, item.status ?? 0);
+                  },
+                ),
+              ),
             ],
           );
         }).toList(),

@@ -14,6 +14,7 @@ class ProfileWidget extends StatelessWidget {
     this.width,
     required this.subText,
     this.onNameTap,
+    this.needUnderLine = false,
   }) : super(key: key);
 
   final String imageUrl;
@@ -21,6 +22,7 @@ class ProfileWidget extends StatelessWidget {
   final String subText;
   final double? width;
   final Function()? onNameTap;
+  final bool needUnderLine;
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +40,16 @@ class ProfileWidget extends StatelessWidget {
                 InkWell(
                   onTap: onNameTap,
                   child: CustomSizedBox(
-                    child: CustomText(name,
-                        width: width,
-                        style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold)),
+                    child: CustomText(
+                      name,
+                      width: width,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        decoration:
+                            needUnderLine ? TextDecoration.underline : null,
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(

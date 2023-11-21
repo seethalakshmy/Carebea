@@ -57,6 +57,7 @@ class SubProfilePersonalDetailsTwoView extends StatelessWidget {
         label: AppString.languagesKnown.val,
         value: '',
         list: languages ?? [],
+        needComma: true,
         fontSize: FS.font13PointFive.val);
   }
 
@@ -83,7 +84,9 @@ class SubProfilePersonalDetailsTwoView extends StatelessWidget {
       children: [
         _petsView(pets, petList),
         _petListView(petList),
-        CustomSizedBox(
+        petList.isNotEmpty ? CustomSizedBox(
+          height: DBL.ten.val,
+        ) :  CustomSizedBox(
           height: DBL.six.val,
         ),
         _languageView(languages ?? []),

@@ -46,7 +46,8 @@ class TransactionDetailsAlert extends StatelessWidget {
                       )
                     : Wrap(
                         crossAxisAlignment: WrapCrossAlignment.start,
-                        alignment: WrapAlignment.start,
+                        alignment: WrapAlignment.spaceBetween,
+                        direction: Axis.horizontal,
                         children: [
                           _detailsWidget(context),
                           _refundDetailsWidget(context)
@@ -112,7 +113,7 @@ class TransactionDetailsAlert extends StatelessWidget {
 
   Widget _detailsWidget(BuildContext context) {
     return Container(
-      // width: 400,
+      width: 700,
       color: AppColor.white.val,
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -209,7 +210,7 @@ class TransactionDetailsAlert extends StatelessWidget {
 
   Widget _refundDetailsWidget(BuildContext context) {
     return CustomContainer(
-      // width: 300,
+      width: 400,
       padding: const EdgeInsets.all(20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

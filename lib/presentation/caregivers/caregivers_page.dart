@@ -424,22 +424,28 @@ class _CareGiversPageState extends State<CareGiversPage> {
           debugPrint('onboarding ${item.onBoardingStatus}');
           return DataRow2(
             onTap: () {
-              print("userId passing from CA list page : ${item.userId}");
-              if (_tabType == 2 && sharedPrefUtil.getViewCareGiver) {
-                autoTabRouter?.navigate(CareGiverDetailRoute(
-                  id: item.userId,
-                ));
-              } else {
-                if (sharedPrefUtil.getEditCareGiver) {
-                  if (verificationStatus == Verification.trainingStarted.val ||
-                      verificationStatus == Verification.interViewStarted.val) {
-                    autoTabRouter?.navigate(CareGiverProfileRoute(
-                      id: item.userId,
-                    ));
-                  } else {
-                    autoTabRouter?.navigate(CaregiverVerificationRoute(
-                        id: userId,
-                        isOnboardingCompleted: item.onBoardingStatus ?? false));
+              if (sharedPrefUtil.getEditCareGiver &&
+                  item.onBoardingStatus == true) {
+                print("userId passing from CA list page : ${item.userId}");
+                if (_tabType == 2 && sharedPrefUtil.getViewCareGiver) {
+                  autoTabRouter?.navigate(CareGiverDetailRoute(
+                    id: item.userId,
+                  ));
+                } else {
+                  if (sharedPrefUtil.getEditCareGiver) {
+                    if (verificationStatus ==
+                            Verification.trainingStarted.val ||
+                        verificationStatus ==
+                            Verification.interViewStarted.val) {
+                      autoTabRouter?.navigate(CareGiverProfileRoute(
+                        id: item.userId,
+                      ));
+                    } else {
+                      autoTabRouter?.navigate(CaregiverVerificationRoute(
+                          id: userId,
+                          isOnboardingCompleted:
+                              item.onBoardingStatus ?? false));
+                    }
                   }
                 }
               }

@@ -18,4 +18,6 @@ class EmailOtpVerificationEvent with _$EmailOtpVerificationEvent {
       {required BuildContext context,
       required String userId,
       required String mobileNumber}) = _GenerateOtp;
+
+  const factory EmailOtpVerificationEvent.count() =_Count;
 }
