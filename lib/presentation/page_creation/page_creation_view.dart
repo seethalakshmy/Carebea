@@ -94,6 +94,7 @@ class _PageCreationPageState extends State<PageCreationPage> {
     forWhom =
         autoTabRouter?.currentChild?.queryParams.getNum("forWhom", 0) ?? 0;
     debugPrint("forwhom $forWhom");
+    debugPrint("description passed $description");
     pageBloc.titleController.text =
         autoTabRouter?.currentChild?.queryParams.getString("title", "") ?? '';
     pageBloc.radioValue = forWhom!.toInt() - 1;

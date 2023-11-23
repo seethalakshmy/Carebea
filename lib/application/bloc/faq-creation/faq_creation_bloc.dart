@@ -7,6 +7,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../core/custom_snackbar.dart';
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
 import '../../../domain/faq_creation/models/faq_details_response_model.dart';
 
@@ -20,6 +21,7 @@ class FaqCreationBloc extends Bloc<FaqCreationEvent, FaqCreationState> {
   List<FaqDetailsData> faqListData = [];
   final TextEditingController questionController = TextEditingController();
   final TextEditingController answerController = TextEditingController();
+  int radioValue = 0;
 
   FaqCreationBloc(this.faqCreationRepository)
       : super(FaqCreationState.initial()) {
@@ -50,8 +52,12 @@ class FaqCreationBloc extends Bloc<FaqCreationEvent, FaqCreationState> {
         await faqCreationRepository.createFaqDetails(
             event.question, event.answer, event.status, event.forClient);
     FaqCreationState faqState = faqDetailsResult.fold((l) {
+      CSnackBar.showError(event.context, msg: l.error ?? "");
+
       return state.copyWith(isLoadingButton: false);
     }, (r) {
+      CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+
       event.context.router.navigate(const FaqRoute());
       return state.copyWith(isLoadingButton: false);
     });
@@ -64,8 +70,12 @@ class FaqCreationBloc extends Bloc<FaqCreationEvent, FaqCreationState> {
         await faqCreationRepository.updateFaqDetails(event.id, event.question,
             event.answer, event.status, event.forClient);
     FaqCreationState faqState = faqDetailsResult.fold((l) {
+      CSnackBar.showError(event.context, msg: l.error ?? "");
+
       return state.copyWith(isLoadingButton: false);
     }, (r) {
+      CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+
       event.context.router.navigate(const FaqRoute());
       return state.copyWith(isLoadingButton: false);
     });

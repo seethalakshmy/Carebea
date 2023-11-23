@@ -8,6 +8,8 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:admin_580_tech/domain/faq/models/faq_list_response_model.dart'
+    as _i39;
 import 'package:admin_580_tech/presentation/admin_creation/admin_creation_page.dart'
     as _i2;
 import 'package:admin_580_tech/presentation/admins/admins_page.dart' as _i1;
@@ -236,6 +238,7 @@ abstract class $AppRouter extends _i37.RootStackRouter {
                 isView: queryParams.optString('view'),
                 isEdit: queryParams.optString('edit'),
                 id: queryParams.optString('id'),
+                item: queryParams.get('item'),
               ));
       return _i37.AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -244,6 +247,7 @@ abstract class $AppRouter extends _i37.RootStackRouter {
           isView: args.isView,
           isEdit: args.isEdit,
           id: args.id,
+          item: args.item,
         ),
       );
     },
@@ -839,6 +843,7 @@ class FaqCreationRoute extends _i37.PageRouteInfo<FaqCreationRouteArgs> {
     String? isView,
     String? isEdit,
     String? id,
+    _i39.FaqListData? item,
     List<_i37.PageRouteInfo>? children,
   }) : super(
           FaqCreationRoute.name,
@@ -847,11 +852,13 @@ class FaqCreationRoute extends _i37.PageRouteInfo<FaqCreationRouteArgs> {
             isView: isView,
             isEdit: isEdit,
             id: id,
+            item: item,
           ),
           rawQueryParams: {
             'view': isView,
             'edit': isEdit,
             'id': id,
+            'item': item,
           },
           initialChildren: children,
         );
@@ -868,6 +875,7 @@ class FaqCreationRouteArgs {
     this.isView,
     this.isEdit,
     this.id,
+    this.item,
   });
 
   final _i38.Key? key;
@@ -878,9 +886,11 @@ class FaqCreationRouteArgs {
 
   final String? id;
 
+  final _i39.FaqListData? item;
+
   @override
   String toString() {
-    return 'FaqCreationRouteArgs{key: $key, isView: $isView, isEdit: $isEdit, id: $id}';
+    return 'FaqCreationRouteArgs{key: $key, isView: $isView, isEdit: $isEdit, id: $id, item: $item}';
   }
 }
 

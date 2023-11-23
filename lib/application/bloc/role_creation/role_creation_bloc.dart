@@ -108,8 +108,9 @@ class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
             moduleId: event.moduleId,
             roleId: event.roleId);
     RoleCreationState homeState = homeResult.fold((l) {
-      CSnackBar.showError(event.context, msg: l.error ?? "");
       emit(state.copyWith(isLoadingButton: false));
+
+      CSnackBar.showError(event.context, msg: l.error ?? "");
 
       return state.copyWith(
         error: l.error,
@@ -128,6 +129,8 @@ class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
                 : AppString.successfullyAddedRole.val);
         autoTabRouter?.setActiveIndex(10);
       } else {
+        emit(state.copyWith(isLoadingButton: false));
+
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
       return state.copyWith(

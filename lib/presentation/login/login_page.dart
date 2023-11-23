@@ -20,6 +20,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import '../../application/bloc/form_validation/form_validation_bloc.dart';
 import '../../application/bloc/login/login_bloc.dart';
 import '../routes/app_router.gr.dart';
+import '../widget/custom_button.dart';
 import '../widget/custom_text_field.dart';
 
 @RoutePage()
@@ -305,19 +306,31 @@ class _LoginPageState extends State<LoginPage> {
   Widget _loginButton() {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
-        return CustomMaterialButton(
-          text: AppString.login.val.toUpperCase(),
-          borderRadius: DBL.eight.val,
-          height: DBL.sixty.val,
-          minWidth: DBL.fourFifty.val,
-          isLoading: state.isLoading,
-          color: AppColor.primaryColor.val,
-          onPressed: () {
-            print(
-                "checked val in login button click: ${state.isCheckedRemember}");
-            checkInputData();
-          },
-        );
+        return CustomButton(
+            text: AppString.login.val.toUpperCase(),
+            borderRadius: DBL.eight.val,
+            height: DBL.sixty.val,
+            minWidth: DBL.fourFifty.val,
+            isLoading: state.isLoading,
+            color: AppColor.primaryColor.val,
+            onPressed: () {
+              print(
+                  "checked val in login button click: ${state.isCheckedRemember}");
+              checkInputData();
+            });
+        // return CustomMaterialButton(
+        //   text: AppString.login.val.toUpperCase(),
+        //   borderRadius: DBL.eight.val,
+        //   height: DBL.sixty.val,
+        //   minWidth: DBL.fourFifty.val,
+        //   isLoading: state.isLoading,
+        //   color: AppColor.primaryColor.val,
+        //   onPressed: () {
+        //     print(
+        //         "checked val in login button click: ${state.isCheckedRemember}");
+        //     checkInputData();
+        //   },
+        // );
       },
     );
   }

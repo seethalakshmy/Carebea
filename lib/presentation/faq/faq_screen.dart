@@ -185,8 +185,8 @@ class _FaqPageState extends State<FaqPage> {
             _pageIndex = e.key + 1;
             return DataRow2(
               onTap: () {
-                autoTabRouter
-                    ?.navigate(FaqCreationRoute(isEdit: "edit", id: item.id));
+                autoTabRouter?.navigate(
+                    FaqCreationRoute(isEdit: "edit", id: item.id, item: item));
               },
               cells: [
                 DataCell(_tableRowView("", _pageIndex.toString())),
@@ -227,6 +227,7 @@ class _FaqPageState extends State<FaqPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CustomText(question,
+            overflow: TextOverflow.ellipsis,
             maxLines: 2,
             style: TS().gRoboto(
                 fontSize: FS.font13.val,

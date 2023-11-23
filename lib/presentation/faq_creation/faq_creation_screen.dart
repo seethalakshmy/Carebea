@@ -10,6 +10,7 @@ import '../../application/bloc/faq-creation/faq_creation_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
+import '../../domain/faq/models/faq_list_response_model.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../on_boarding/modules/qualification_details/widgets/yes_no_radio_button_widget.dart';
 import '../routes/app_router.gr.dart';
@@ -28,13 +29,15 @@ class FaqCreationPage extends StatefulWidget {
       {Key? key,
       @QueryParam('view') this.isView,
       @QueryParam('edit') this.isEdit,
-      @QueryParam('id') this.id})
+      @QueryParam('id') this.id,
+      @QueryParam('item') this.item})
       : super(key: key);
 
   /// To do change :- change these two variables to bool for now getting error like " NoSuchMethodError: 'toLowerCase"  when extracting using auto-route
   final String? isView;
   final String? isEdit;
   final String? id;
+  final FaqListData? item;
 
   @override
   State<FaqCreationPage> createState() => _faqCreationPageState();
@@ -50,6 +53,7 @@ class _faqCreationPageState extends State<FaqCreationPage> {
   final _formKey = GlobalKey<FormState>();
   String adminUserID = "";
   String adminId = "";
+  FaqListData? item;
 
   bool? _isView;
 
@@ -62,7 +66,12 @@ class _faqCreationPageState extends State<FaqCreationPage> {
     adminUserID = SharedPreffUtil().getAdminId;
     adminId =
         autoTabRouter?.currentChild?.queryParams.getString("id", "") ?? "";
-    _faqCreationBloc.add(FaqCreationEvent.getFaq(id: adminId));
+    item = autoTabRouter?.currentChild?.queryParams.get(
+      'item',
+    );
+    _faqCreationBloc.questionController.text = item?.question ?? '';
+    _faqCreationBloc.answerController.text = item?.answer ?? '';
+    // _faqCreationBloc.add(FaqCreationEvent.getFaq(id: adminId));
     if (autoTabRouter!.currentChild!.queryParams
         .getString('view', "")
         .isNotEmpty) {
@@ -104,6 +113,7 @@ class _faqCreationPageState extends State<FaqCreationPage> {
       create: (context) => FaqCreationBloc(FaqCreationRepository()),
       child: BlocBuilder<FaqCreationBloc, FaqCreationState>(
         builder: (context, state) {
+          debugPrint("loading ${state.isLoading}");
           // return _bodyView(context, state);
           return !state.isLoading
               ? _bodyView(context, state)
@@ -114,6 +124,8 @@ class _faqCreationPageState extends State<FaqCreationPage> {
   }
 
   _bodyView(BuildContext context, FaqCreationState state) {
+    debugPrint("loading ${state.isLoading}");
+
     // if (state.viewResponse != null) {
     //   _questionController.text = state.viewResponse?.data?.firstName ?? "";
     //   _answerController.text = state.viewResponse?.data?.lastName ?? "";
@@ -184,41 +196,46 @@ class _faqCreationPageState extends State<FaqCreationPage> {
                 ),
               ),
               _forClientCheckBoxWidget(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  CustomButton(
-                    height: DBL.fortyFive.val,
-                    minWidth: DBL.oneTwenty.val,
-                    onPressed: () {
-                      context.router.navigate(const FaqRoute());
-                    },
-                    text: AppString.cancel.val,
-                    color: AppColor.white.val,
-                    textColor: AppColor.primaryColor.val,
-                    borderWidth: 1,
-                  ),
-                  CustomSizedBox(width: DBL.twenty.val),
-                  !_isView!
-                      ? BlocBuilder<FaqCreationBloc, FaqCreationState>(
-                          builder: (context, state) {
-                            return CustomButton(
-                              isLoading: state.isLoadingButton,
-                              height: DBL.fortyFive.val,
-                              minWidth: DBL.oneTwenty.val,
-                              onPressed: () async {
-                                checkInputData(state);
+              BlocBuilder<FaqCreationBloc, FaqCreationState>(
+                builder: (context, state) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      CustomButton(
+                        height: DBL.fortyFive.val,
+                        minWidth: DBL.oneTwenty.val,
+                        isLoading: state.isLoadingButton,
+                        onPressed: () {
+                          context.router.navigate(const FaqRoute());
+                        },
+                        text: AppString.cancel.val,
+                        color: AppColor.white.val,
+                        textColor: AppColor.primaryColor.val,
+                        borderWidth: 1,
+                      ),
+                      CustomSizedBox(width: DBL.twenty.val),
+                      !_isView!
+                          ? BlocBuilder<FaqCreationBloc, FaqCreationState>(
+                              builder: (context, state) {
+                                return CustomButton(
+                                  isLoading: state.isLoadingButton,
+                                  height: DBL.fortyFive.val,
+                                  minWidth: DBL.oneTwenty.val,
+                                  onPressed: () async {
+                                    checkInputData(state);
+                                  },
+                                  text: _isEdit!
+                                      ? AppString.update.val
+                                      : AppString.save.val,
+                                  color: AppColor.primaryColor.val,
+                                  textColor: AppColor.white.val,
+                                );
                               },
-                              text: _isEdit!
-                                  ? AppString.update.val
-                                  : AppString.save.val,
-                              color: AppColor.primaryColor.val,
-                              textColor: AppColor.white.val,
-                            );
-                          },
-                        )
-                      : CustomSizedBox.shrink(),
-                ],
+                            )
+                          : CustomSizedBox.shrink(),
+                    ],
+                  );
+                },
               ),
             ],
           ),
@@ -242,8 +259,10 @@ class _faqCreationPageState extends State<FaqCreationPage> {
               yesLabel: AppString.forClient.val,
               noLabel: AppString.forCa.val,
               onChanged: (val) {
-                BlocProvider.of<FaqCreationBloc>(context)
-                    .add(FaqCreationEvent.radioForClient(isSelected: val ?? 0));
+                _faqCreationBloc.radioValue = item?.forClient == true ? 0 : 1;
+                // BlocProvider.of<FaqCreationBloc>(context).add(
+                //     FaqCreationEvent.radioForClient(
+                //         isSelected:  item?.forClient == true ? 0:1));
               },
               groupValue: state.isForClient,
             );
