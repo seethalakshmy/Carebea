@@ -451,7 +451,7 @@ class _ServiceRequestManagementPageState
                       text: AppString.endDateAndTime.val,
                       fontWeight: FontWeight.bold),
                 ),
-              /*  DataColumn2(
+                /*  DataColumn2(
                   size: ColumnSize.L,
                   fixedWidth: 150,
                   label: _columnsView(
@@ -586,6 +586,7 @@ class _ServiceRequestManagementPageState
             child: ServiceDetailsAlert(
               title: item.serviceStatus ?? "",
               serviceBloc: _serviceRequestBloc,
+              canceledBy: item.cancelledBy ?? "",
             ),
           );
         });

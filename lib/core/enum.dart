@@ -7,6 +7,7 @@ enum AppString {
   blsUrl("https://www.nationalcprfoundation.com/"),
   pageCreation("Page Creation"),
   notAttempted("Missed"),
+  pageManagement("Page Management"),
   profileIncomplete("Profile Incomplete"),
   achDetails('ACH details'),
   cardNumber("Card Number"),

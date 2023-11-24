@@ -34,7 +34,7 @@ class RadioButtonWidget extends StatelessWidget {
         CustomText(
           firstLabel,
           style: TS().gRoboto(
-            fontSize: FS.font13.val,
+            fontSize: FS.font18.val,
             fontWeight: FW.w400.val,
             color: AppColor.matBlack2.val,
           ),
@@ -48,7 +48,7 @@ class RadioButtonWidget extends StatelessWidget {
         CustomText(
           secondLabel,
           style: TS().gRoboto(
-            fontSize: FS.font13.val,
+            fontSize: FS.font18.val,
             fontWeight: FW.w400.val,
             color: AppColor.matBlack2.val,
           ),
@@ -61,7 +61,7 @@ class RadioButtonWidget extends StatelessWidget {
         CustomText(
           thirdLabel,
           style: TS().gRoboto(
-            fontSize: FS.font13.val,
+            fontSize: FS.font18.val,
             fontWeight: FW.w400.val,
             color: AppColor.matBlack2.val,
           ),

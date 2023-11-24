@@ -110,7 +110,7 @@ class _PageCreationPageState extends State<PageCreationPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            HeaderView(title: AppString.termsAndConditions.val),
+            HeaderView(title: AppString.pageManagement.val),
             CustomSizedBox(height: DBL.twenty.val),
             _forWhoWidget(),
             CForm(
@@ -186,15 +186,20 @@ class _PageCreationPageState extends State<PageCreationPage> {
                     state.when(initial: (isLoading, isError, isForClient,
                         response, getPagesResponse, radioValue) {
                       return CustomButton(
+                          minWidth: 100,
+                          height: 50,
                           isLoading: false,
                           text: id == ''
                               ? AppString.submit.val
                               : AppString.update.val,
                           onPressed: () async {
                             await getText(controller);
-                            if (htmlText!.isEmpty || htmlText == '') {
-                              CSnackBar.showError(context!,
-                                  msg: AppString.descriptionError.val);
+                            if (pageBloc.titleController.text.isNotEmpty ||
+                                pageBloc.titleController.text.trim() != "") {
+                              if (htmlText!.isEmpty || htmlText == '') {
+                                CSnackBar.showError(context!,
+                                    msg: AppString.descriptionError.val);
+                              }
                             }
                             debugPrint("content $htmlText");
                             debugPrint("for $forWhom");
@@ -254,8 +259,8 @@ class _PageCreationPageState extends State<PageCreationPage> {
             style: TS().gRoboto(
                 fontWeight: FW.w400.val,
                 color: AppColor.label8.val,
-                fontSize: FS.font14.val)),
-        const CustomSizedBox(width: 20),
+                fontSize: FS.font18.val)),
+        const CustomSizedBox(width: 30),
         BlocBuilder<PageBloc, PageState>(
           builder: (context, state) {
             log("state is $state");

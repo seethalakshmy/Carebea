@@ -175,7 +175,6 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                         // ),
                         DataColumn2(
                           size: ColumnSize.L,
-                          // fixedWidth: 500,
                           label: _columnsView(
                             text: AppString.transactionType.val,
                           ),

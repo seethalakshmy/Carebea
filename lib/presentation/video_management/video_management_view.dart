@@ -182,7 +182,7 @@ class _VideoManagementPageState extends State<VideoManagementPage> {
             return DataRow2(
               cells: [
                 DataCell(_tableRowView("", _pageIndex.toString())),
-                DataCell(_tableRowView(item.title ?? "", '')),
+                DataCell(_tableRowView("", item.title ?? '')),
                 DataCell(_tableRowView(
                     "",
                     item.userType == 2

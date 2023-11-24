@@ -202,8 +202,8 @@ class _FaqPageState extends State<FaqPage> {
                   isEdit: sharedPrefUtil.getEditAdmin,
                   onEditTap: sharedPrefUtil.getEditAdmin
                       ? () {
-                          autoTabRouter?.navigate(
-                              FaqCreationRoute(isEdit: "edit", id: item.id));
+                          autoTabRouter?.navigate(FaqCreationRoute(
+                              isEdit: "edit", id: item.id, item: item));
                         }
                       : null,
                 )),
