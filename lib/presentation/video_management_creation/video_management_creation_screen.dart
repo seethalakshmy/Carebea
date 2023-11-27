@@ -1,27 +1,20 @@
 import 'dart:developer';
-import 'dart:io';
 
-import 'package:admin_580_tech/infrastructure/faq_creation/faq_creation_repository.dart';
 import 'package:admin_580_tech/infrastructure/upload_video/upload_video_repository.dart';
 import 'package:admin_580_tech/presentation/widget/custom_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:admin_580_tech/presentation/widget/custom_padding.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:chewie/chewie.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:video_player/video_player.dart';
 
-import '../../application/bloc/faq-creation/faq_creation_bloc.dart';
 import '../../application/bloc/upload_video/upload_video_bloc.dart';
 import '../../core/custom_snackbar.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
-import '../../domain/admin_creation/model/admin_view_response.dart';
-import '../../generated/assets.dart';
 import '../../infrastructure/api_service_s3.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../on_boarding/modules/qualification_details/widgets/yes_no_radio_button_widget.dart';
@@ -36,7 +29,6 @@ import '../widget/custom_text.dart';
 import '../widget/details_text_field_with_label.dart';
 import '../widget/header_view.dart';
 import '../widget/loader_view.dart';
-import 'dart:html' as html;
 
 @RoutePage()
 class VideoUploadPage extends StatefulWidget {
@@ -97,7 +89,7 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
         autoTabRouter?.currentChild?.queryParams.getString("attachment", '') ??
             '';
 
-    // _faqCreationBloc.add(FaqCreationEvent.getFaq(id: adminId));
+    debugPrint("attachment $attachment");
 
     if (autoTabRouter!.currentChild!.queryParams
         .getString('edit', "")
@@ -169,117 +161,112 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
           children: [
             StatefulBuilder(builder: (context, rebuild) {
               log("rebuilded ${bytesList.length}");
-              return bytesList.isNotEmpty || attachment != ''
-                  ?
-                  // Chewie(
-                  //         controller: ChewieController(
-                  //           overlay: Container(
-                  //             color: Colors.transparent,
-                  //           ),
-                  //           videoPlayerController:
-                  //               VideoPlayerController.file(convertedFile as File),
-                  //           autoPlay: false,
-                  //           looping: false,
-                  //           allowFullScreen: true,
-                  //           showOptions: false,
-                  //           aspectRatio: 16 /
-                  //               9, // Adjust this as per your video's aspect ratio
-                  //           // Placeholder image for the thumbnail
-                  //           placeholder: AspectRatio(
-                  //             aspectRatio: 16 / 9,
-                  //             // child: Container(
-                  //             //   alignment: Alignment.center,
-                  //             //   // color: Colors.black,
-                  //             //   child: Image.asset(
-                  //             //     fit: BoxFit.fill,
-                  //             //   ),
-                  //             // ),
-                  //           ),
-                  //         ),
-                  //       )
-                  Wrap(
-                      children: [
-                        CachedImage(
-                          imgUrl: attachment,
-                        ),
-                        CustomText('Uploaded'),
-                        IconButton(
-                            onPressed: () {
-                              bytesList.clear();
-                              log('bytlist ${bytesList.length}');
-                            },
-                            icon: Icon(
-                              Icons.close,
-                              size: 10,
-                            ))
-                      ],
-                    )
-                  : _uploadDocumentWidget(rebuild);
-            }),
-            // : Wrap(
-            //     children: [
-            //       CustomText(AppString.done.val),
-            //       IconButton(
-            //           onPressed: () {
-            //             _videoBloc.uploadedVideo = '';
-            //           },
-            //           icon: Icon(Icons.close))
-            //     ],
-            //   ),
-            CForm(
-              formKey: _formKey,
-              autoValidateMode: _validateMode,
-              child: Wrap(
-                alignment: WrapAlignment.start,
-                spacing: 20,
-                runSpacing: 20,
+              return Column(
                 children: [
-                  CustomSizedBox(
-                    width: DBL.twoEighty.val,
-                    child: DetailsTextFieldWithLabel(
-                      isMandatory: true,
-                      maxLines: 20,
-                      labelName: AppString.title.val,
-                      focusNode: titleFocusNode,
-                      controller: _videoBloc.title,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppString.titleError.val;
-                        }
-                        return null;
-                      },
-                      textInputAction: TextInputAction.next,
-                      textInputType: TextInputType.text,
-                      suffixIcon: const CustomContainer(width: 0),
+                  _forClientCheckBoxWidget(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  CForm(
+                    formKey: _formKey,
+                    autoValidateMode: _validateMode,
+                    child: Row(
+                      children: [
+                        CustomSizedBox(
+                          width: DBL.twoEighty.val,
+                          child: DetailsTextFieldWithLabel(
+                            isMandatory: true,
+                            maxLines: 20,
+                            labelName: AppString.title.val,
+                            focusNode: titleFocusNode,
+                            controller: _videoBloc.title,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return AppString.titleError.val;
+                              }
+                              return null;
+                            },
+                            textInputAction: TextInputAction.next,
+                            textInputType: TextInputType.text,
+                            suffixIcon: const CustomContainer(width: 0),
+                          ),
+                        ),
+                        // CustomSizedBox(
+                        //   width: DBL.twoEighty.val,
+                        //   child: DetailsTextFieldWithLabel(
+                        //     maxLines: 10,
+                        //     isIgnore: _isView!,
+                        //     isMandatory: true,
+                        //     labelName: AppString.answer.val,
+                        //     focusNode: answerFocusNode,
+                        //     controller: _faqCreationBloc.answerController,
+                        //     validator: (value) {
+                        //       if (value == null || value.isEmpty) {
+                        //         return AppString.answerError.val;
+                        //       }
+                        //       return null;
+                        //     },
+                        //     textInputAction: TextInputAction.next,
+                        //     textInputType: TextInputType.text,
+                        //     suffixIcon: const CustomContainer(width: 0),
+                        //   ),
+                        // ),
+                      ],
                     ),
                   ),
-                  // CustomSizedBox(
-                  //   width: DBL.twoEighty.val,
-                  //   child: DetailsTextFieldWithLabel(
-                  //     maxLines: 10,
-                  //     isIgnore: _isView!,
-                  //     isMandatory: true,
-                  //     labelName: AppString.answer.val,
-                  //     focusNode: answerFocusNode,
-                  //     controller: _faqCreationBloc.answerController,
-                  //     validator: (value) {
-                  //       if (value == null || value.isEmpty) {
-                  //         return AppString.answerError.val;
-                  //       }
-                  //       return null;
-                  //     },
-                  //     textInputAction: TextInputAction.next,
-                  //     textInputType: TextInputType.text,
-                  //     suffixIcon: const CustomContainer(width: 0),
-                  //   ),
-                  // ),
-                  _forClientCheckBoxWidget(),
+                  bytesList.isNotEmpty || attachment != ''
+                      ?
+                      // Chewie(
+                      //         controller: ChewieController(
+                      //           overlay: Container(
+                      //             color: Colors.transparent,
+                      //           ),
+                      //           videoPlayerController:
+                      //               VideoPlayerController.file(convertedFile as File),
+                      //           autoPlay: false,
+                      //           looping: false,
+                      //           allowFullScreen: true,
+                      //           showOptions: false,
+                      //           aspectRatio: 16 /
+                      //               9, // Adjust this as per your video's aspect ratio
+                      //           // Placeholder image for the thumbnail
+                      //           placeholder: AspectRatio(
+                      //             aspectRatio: 16 / 9,
+                      //             // child: Container(
+                      //             //   alignment: Alignment.center,
+                      //             //   // color: Colors.black,
+                      //             //   child: Image.asset(
+                      //             //     fit: BoxFit.fill,
+                      //             //   ),
+                      //             // ),
+                      //           ),
+                      //         ),
+                      //       )
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            CachedImage(
+                              imgUrl: attachment,
+                            ),
+                            CustomText('Uploaded'),
+                            IconButton(
+                                onPressed: () {
+                                  bytesList.clear();
+                                  log('bytlist ${bytesList.length}');
+                                },
+                                icon: Icon(
+                                  Icons.close,
+                                  size: 10,
+                                ))
+                          ],
+                        )
+                      : _uploadDocumentWidget(rebuild),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       CustomButton(
-                        height: DBL.fortyFive.val,
-                        minWidth: DBL.oneTwenty.val,
+                        height: DBL.fortyEight.val,
+                        minWidth: DBL.oneForty.val,
                         onPressed: () {
                           context.router.navigate(const VideoManagementRoute());
                         },
@@ -293,11 +280,12 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
                         builder: (context, state) {
                           return CustomButton(
                             isLoading: state.isLoadingButton,
-                            height: DBL.fortyFive.val,
-                            minWidth: DBL.oneTwenty.val,
+                            height: DBL.fortyEight.val,
+                            minWidth: DBL.oneForty.val,
                             onPressed: () async {
-                              // checkInputData(state);
-                              uploadVideo(state);
+                              await uploadVideo(state);
+
+                              checkInputData(state);
                             },
                             text: _isEdit!
                                 ? AppString.update.val
@@ -310,8 +298,18 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
                     ],
                   ),
                 ],
-              ),
-            )
+              );
+            }),
+            // : Wrap(
+            //     children: [
+            //       CustomText(AppString.done.val),
+            //       IconButton(
+            //           onPressed: () {
+            //             _videoBloc.uploadedVideo = '';
+            //           },
+            //           icon: Icon(Icons.close))
+            //     ],
+            //   ),
           ],
         );
       },
@@ -393,31 +391,33 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
 
   checkInputData(VideoUploadState state) {
     if (_formKey.currentState!.validate()) {
-      if (_isEdit!) {
-        if (_videoBloc.uploadedVideo == '') {
-          CSnackBar.showError(context, msg: 'Please attach video');
-        } else {
-          print('inside api call $settingsId');
-          _videoBloc.add(VideoUploadEvent.addSettings(
-              adminId: adminUserID,
-              title: _videoBloc.title.text,
-              settingsId: settingsId,
-              attachment: _videoBloc.uploadedVideo,
-              userType: state.isForClient == 0 ? 2 : 1,
-              context: context));
-        }
+      debugPrint("vido uploaded ${_videoBloc.uploadedVideo}");
+      // if (_isEdit!) {
+      //   if (_videoBloc.uploadedVideo == '') {
+      //     CSnackBar.showError(context, msg: 'Please attach video');
+      //   } else {
+      //     print('inside api call $settingsId');
+      //     _videoBloc.add(VideoUploadEvent.addSettings(
+      //         adminId: adminUserID,
+      //         title: _videoBloc.title.text,
+      //         settingsId: settingsId,
+      //         attachment: _videoBloc.uploadedVideo,
+      //         userType: state.isForClient == 0 ? 2 : 1,
+      //         context: context));
+      //   }
+      // }
+      // else {
+      if (_videoBloc.uploadedVideo == '') {
+        CSnackBar.showError(context, msg: 'Please attach video');
       } else {
-        if (_videoBloc.uploadedVideo == '') {
-          CSnackBar.showError(context, msg: 'Please attach video');
-        } else {
-          _videoBloc.add(VideoUploadEvent.addSettings(
-              adminId: adminUserID,
-              title: _videoBloc.title.text,
-              attachment: _videoBloc.uploadedVideo,
-              userType: state.isForClient == 0 ? 2 : 1,
-              context: context));
-        }
+        _videoBloc.add(VideoUploadEvent.addSettings(
+            adminId: adminUserID,
+            title: _videoBloc.title.text,
+            attachment: _videoBloc.uploadedVideo,
+            userType: state.isForClient == 0 ? 2 : 1,
+            context: context));
       }
+      // }
     }
   }
 
@@ -434,6 +434,7 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
   @override
   void dispose() {
     _videoBloc.title.dispose();
+    titleFocusNode.dispose();
 
     super.dispose();
   }

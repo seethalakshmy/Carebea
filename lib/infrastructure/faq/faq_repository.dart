@@ -7,6 +7,7 @@ import '../../core/custom_debugger.dart';
 import '../../core/enum.dart';
 import '../../domain/core/api_client.dart';
 import '../../domain/faq/i_faq_repo.dart';
+import '../../domain/on_boarding/models/common_response.dart';
 
 class FaqRepository implements IFaqRepo {
   ApiClient apiClient = ApiClient();
@@ -17,7 +18,24 @@ class FaqRepository implements IFaqRepo {
       final response = await apiClient.getFaqList();
       return Right(response);
     } on DioError catch (e) {
-      CustomLog.log("CareGiverListRepository: ${e.message}");
+      if (e.message.contains("SocketException")) {
+        CustomLog.log("reached here..");
+        return Left(ClientFailure(
+            error: AppString.noInternetConnection.val, isClientError: true));
+      } else {
+        return Left(ServerFailure(
+            error: AppString.somethingWentWrong.val, isClientError: false));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorHandler, CommonResponse>> deleteFaq(
+      {required String faqId}) async {
+    try {
+      final response = await apiClient.deleteFaq(faqId);
+      return Right(response);
+    } on DioError catch (e) {
       if (e.message.contains("SocketException")) {
         CustomLog.log("reached here..");
         return Left(ClientFailure(

@@ -202,6 +202,7 @@ class _ServiceRequestManagementPageState
             _serviceRequestBloc.add(
                 ServiceRequestManagementEvent.getServiceRequests(
                     context: context, page: _page, limit: _limit));
+            debugPrint("date test ${fromDateController.text}");
           },
           text: AppString.clearFilters.val,
         ),
@@ -228,16 +229,16 @@ class _ServiceRequestManagementPageState
           _page = 1;
           _serviceRequestBloc.add(
               ServiceRequestManagementEvent.getServiceRequests(
-                  searchTerm: _serviceRequestBloc.searchQuery,
+                  searchTerm: _searchController.text,
                   statusFilterId: _serviceRequestBloc.statusFilterId,
                   context: context,
                   page: _page,
                   limit: _limit,
-                  fromDate: _serviceRequestBloc.selectedFromDate,
-                  toDate: _serviceRequestBloc.selectedToDate));
+                  fromDate: fromDateController.text,
+                  toDate: toDateController.text));
         }
         fromDateController.text =
-            value.toString().parseWithFormat(dateFormat: AppString.mmDDYYY.val);
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
         FocusScope.of(context).unfocus();
       }
     });
@@ -266,15 +267,16 @@ class _ServiceRequestManagementPageState
                   statusFilterId: _serviceRequestBloc.statusFilterId == 0
                       ? null
                       : _serviceRequestBloc.statusFilterId,
-                  searchTerm: _serviceRequestBloc.searchQuery,
+                  searchTerm: _searchController.text,
                   page: _page,
                   limit: _limit,
-                  fromDate: _serviceRequestBloc.selectedFromDate,
-                  toDate: _serviceRequestBloc.selectedToDate));
+                  fromDate: fromDateController.text,
+                  toDate: toDateController.text));
         }
         toDateController.text =
-            value.toString().parseWithFormat(dateFormat: AppString.mmDDYYY.val);
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
         FocusScope.of(context).unfocus();
+        debugPrint("toDatesss ${toDateController.text}");
       }
     });
   }
@@ -290,12 +292,12 @@ class _ServiceRequestManagementPageState
                 statusFilterId: _serviceRequestBloc.statusFilterId == 0
                     ? null
                     : _serviceRequestBloc.statusFilterId,
-                fromDate: _serviceRequestBloc.selectedFromDate,
-                toDate: _serviceRequestBloc.selectedToDate,
+                fromDate: fromDateController.text,
+                toDate: toDateController.text,
                 context: context,
                 page: _page,
                 limit: _limit,
-                searchTerm: _serviceRequestBloc.searchQuery));
+                searchTerm: _searchController.text));
       },
       width: DBL.twoTen.val,
       height: DBL.fortySeven.val,
@@ -702,9 +704,9 @@ class _ServiceRequestManagementPageState
             ServiceRequestManagementEvent.getServiceRequests(
                 context: context,
                 page: _page,
-                fromDate: _serviceRequestBloc.selectedFromDate,
-                toDate: _serviceRequestBloc.selectedToDate,
-                searchTerm: _serviceRequestBloc.searchQuery,
+                fromDate: fromDateController.text,
+                toDate: toDateController.text,
+                searchTerm: _searchController.text,
                 limit: _limit,
                 statusFilterId: _serviceRequestBloc.statusFilterId == 0
                     ? null
@@ -793,10 +795,10 @@ class _ServiceRequestManagementPageState
                         context: context,
                         page: _page,
                         limit: _limit,
-                        searchTerm: _serviceRequestBloc.searchQuery,
+                        searchTerm: _searchController.text,
                         statusFilterId: _serviceRequestBloc.statusFilterId,
-                        fromDate: _serviceRequestBloc.selectedFromDate,
-                        toDate: _serviceRequestBloc.selectedToDate));
+                        fromDate: fromDateController.text,
+                        toDate: toDateController.text));
                 updateData();
               }
             },
@@ -807,10 +809,10 @@ class _ServiceRequestManagementPageState
                       context: context,
                       page: _page,
                       limit: _limit,
-                      searchTerm: _serviceRequestBloc.searchQuery,
+                      searchTerm: _searchController.text,
                       statusFilterId: _serviceRequestBloc.statusFilterId,
-                      fromDate: _serviceRequestBloc.selectedFromDate,
-                      toDate: _serviceRequestBloc.selectedToDate));
+                      fromDate: fromDateController.text,
+                      toDate: toDateController.text));
               updateData();
             },
             onPreviousPressed: () {
@@ -821,10 +823,10 @@ class _ServiceRequestManagementPageState
                         context: context,
                         page: _page,
                         limit: _limit,
-                        searchTerm: _serviceRequestBloc.searchQuery,
+                        searchTerm: _searchController.text,
                         statusFilterId: _serviceRequestBloc.statusFilterId,
-                        fromDate: _serviceRequestBloc.selectedFromDate,
-                        toDate: _serviceRequestBloc.selectedToDate));
+                        fromDate: fromDateController.text,
+                        toDate: toDateController.text));
                 updateData();
               }
             });

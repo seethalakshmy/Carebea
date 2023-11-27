@@ -199,6 +199,7 @@ class _FaqPageState extends State<FaqPage> {
 
                 // DataCell(_statusBox(item.status ?? false)),
                 DataCell(TableActions(
+                  isDelete: true,
                   isEdit: sharedPrefUtil.getEditAdmin,
                   onEditTap: sharedPrefUtil.getEditAdmin
                       ? () {
@@ -206,6 +207,10 @@ class _FaqPageState extends State<FaqPage> {
                               isEdit: "edit", id: item.id, item: item));
                         }
                       : null,
+                  onDeleteTap: () {
+                    _faqBloc.add(FaqEvent.deleteFaq(
+                        faqId: item.id ?? '', context: context));
+                  },
                 )),
               ],
             );

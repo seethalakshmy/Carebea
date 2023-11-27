@@ -861,18 +861,14 @@ abstract class _RadioForClient implements FaqCreationEvent {
 /// @nodoc
 mixin _$FaqCreationState {
   bool get isLoading => throw _privateConstructorUsedError;
+  bool get isLoadingButton => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
-  int get isForClient =>
-      throw _privateConstructorUsedError; // required CommonResponseUse? addResponse,
-// required CommonResponseUse? updateResponse,
-// required AdminViewResponse? viewResponse,
-// required GetRoleResponse? rolesResponse,
+  int get isForClient => throw _privateConstructorUsedError;
   Option<Either<ApiErrorHandler, FaqDetailsResponseModel>>
       get faqDetailOption => throw _privateConstructorUsedError;
   bool get isClientError => throw _privateConstructorUsedError;
   bool get isDropDownError => throw _privateConstructorUsedError;
-  bool get isLoadingButton => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FaqCreationStateCopyWith<FaqCreationState> get copyWith =>
@@ -887,13 +883,13 @@ abstract class $FaqCreationStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
+      bool isLoadingButton,
       bool isError,
       String? error,
       int isForClient,
       Option<Either<ApiErrorHandler, FaqDetailsResponseModel>> faqDetailOption,
       bool isClientError,
-      bool isDropDownError,
-      bool isLoadingButton});
+      bool isDropDownError});
 }
 
 /// @nodoc
@@ -910,18 +906,22 @@ class _$FaqCreationStateCopyWithImpl<$Res, $Val extends FaqCreationState>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isLoadingButton = null,
     Object? isError = null,
     Object? error = freezed,
     Object? isForClient = null,
     Object? faqDetailOption = null,
     Object? isClientError = null,
     Object? isDropDownError = null,
-    Object? isLoadingButton = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingButton: null == isLoadingButton
+          ? _value.isLoadingButton
+          : isLoadingButton // ignore: cast_nullable_to_non_nullable
               as bool,
       isError: null == isError
           ? _value.isError
@@ -946,10 +946,6 @@ class _$FaqCreationStateCopyWithImpl<$Res, $Val extends FaqCreationState>
       isDropDownError: null == isDropDownError
           ? _value.isDropDownError
           : isDropDownError // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isLoadingButton: null == isLoadingButton
-          ? _value.isLoadingButton
-          : isLoadingButton // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -965,13 +961,13 @@ abstract class _$$_FaqCreationStateCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
+      bool isLoadingButton,
       bool isError,
       String? error,
       int isForClient,
       Option<Either<ApiErrorHandler, FaqDetailsResponseModel>> faqDetailOption,
       bool isClientError,
-      bool isDropDownError,
-      bool isLoadingButton});
+      bool isDropDownError});
 }
 
 /// @nodoc
@@ -986,18 +982,22 @@ class __$$_FaqCreationStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = null,
+    Object? isLoadingButton = null,
     Object? isError = null,
     Object? error = freezed,
     Object? isForClient = null,
     Object? faqDetailOption = null,
     Object? isClientError = null,
     Object? isDropDownError = null,
-    Object? isLoadingButton = null,
   }) {
     return _then(_$_FaqCreationState(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoadingButton: null == isLoadingButton
+          ? _value.isLoadingButton
+          : isLoadingButton // ignore: cast_nullable_to_non_nullable
               as bool,
       isError: null == isError
           ? _value.isError
@@ -1023,10 +1023,6 @@ class __$$_FaqCreationStateCopyWithImpl<$Res>
           ? _value.isDropDownError
           : isDropDownError // ignore: cast_nullable_to_non_nullable
               as bool,
-      isLoadingButton: null == isLoadingButton
-          ? _value.isLoadingButton
-          : isLoadingButton // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -1036,26 +1032,24 @@ class __$$_FaqCreationStateCopyWithImpl<$Res>
 class _$_FaqCreationState implements _FaqCreationState {
   const _$_FaqCreationState(
       {required this.isLoading,
+      required this.isLoadingButton,
       required this.isError,
       required this.error,
       required this.isForClient,
       required this.faqDetailOption,
       this.isClientError = false,
-      this.isDropDownError = false,
-      this.isLoadingButton = false});
+      this.isDropDownError = false});
 
   @override
   final bool isLoading;
+  @override
+  final bool isLoadingButton;
   @override
   final bool isError;
   @override
   final String? error;
   @override
   final int isForClient;
-// required CommonResponseUse? addResponse,
-// required CommonResponseUse? updateResponse,
-// required AdminViewResponse? viewResponse,
-// required GetRoleResponse? rolesResponse,
   @override
   final Option<Either<ApiErrorHandler, FaqDetailsResponseModel>>
       faqDetailOption;
@@ -1065,13 +1059,10 @@ class _$_FaqCreationState implements _FaqCreationState {
   @override
   @JsonKey()
   final bool isDropDownError;
-  @override
-  @JsonKey()
-  final bool isLoadingButton;
 
   @override
   String toString() {
-    return 'FaqCreationState(isLoading: $isLoading, isError: $isError, error: $error, isForClient: $isForClient, faqDetailOption: $faqDetailOption, isClientError: $isClientError, isDropDownError: $isDropDownError, isLoadingButton: $isLoadingButton)';
+    return 'FaqCreationState(isLoading: $isLoading, isLoadingButton: $isLoadingButton, isError: $isError, error: $error, isForClient: $isForClient, faqDetailOption: $faqDetailOption, isClientError: $isClientError, isDropDownError: $isDropDownError)';
   }
 
   @override
@@ -1081,6 +1072,8 @@ class _$_FaqCreationState implements _FaqCreationState {
             other is _$_FaqCreationState &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.isLoadingButton, isLoadingButton) ||
+                other.isLoadingButton == isLoadingButton) &&
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.isForClient, isForClient) ||
@@ -1090,22 +1083,20 @@ class _$_FaqCreationState implements _FaqCreationState {
             (identical(other.isClientError, isClientError) ||
                 other.isClientError == isClientError) &&
             (identical(other.isDropDownError, isDropDownError) ||
-                other.isDropDownError == isDropDownError) &&
-            (identical(other.isLoadingButton, isLoadingButton) ||
-                other.isLoadingButton == isLoadingButton));
+                other.isDropDownError == isDropDownError));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
+      isLoadingButton,
       isError,
       error,
       isForClient,
       faqDetailOption,
       isClientError,
-      isDropDownError,
-      isLoadingButton);
+      isDropDownError);
 
   @JsonKey(ignore: true)
   @override
@@ -1117,34 +1108,31 @@ class _$_FaqCreationState implements _FaqCreationState {
 abstract class _FaqCreationState implements FaqCreationState {
   const factory _FaqCreationState(
       {required final bool isLoading,
+      required final bool isLoadingButton,
       required final bool isError,
       required final String? error,
       required final int isForClient,
       required final Option<Either<ApiErrorHandler, FaqDetailsResponseModel>>
           faqDetailOption,
       final bool isClientError,
-      final bool isDropDownError,
-      final bool isLoadingButton}) = _$_FaqCreationState;
+      final bool isDropDownError}) = _$_FaqCreationState;
 
   @override
   bool get isLoading;
+  @override
+  bool get isLoadingButton;
   @override
   bool get isError;
   @override
   String? get error;
   @override
   int get isForClient;
-  @override // required CommonResponseUse? addResponse,
-// required CommonResponseUse? updateResponse,
-// required AdminViewResponse? viewResponse,
-// required GetRoleResponse? rolesResponse,
+  @override
   Option<Either<ApiErrorHandler, FaqDetailsResponseModel>> get faqDetailOption;
   @override
   bool get isClientError;
   @override
   bool get isDropDownError;
-  @override
-  bool get isLoadingButton;
   @override
   @JsonKey(ignore: true)
   _$$_FaqCreationStateCopyWith<_$_FaqCreationState> get copyWith =>

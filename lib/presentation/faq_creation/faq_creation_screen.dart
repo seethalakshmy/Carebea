@@ -99,7 +99,9 @@ class _faqCreationPageState extends State<FaqCreationPage> {
           return Column(
             children: [
               HeaderView(
-                title: AppString.faqCreation.val,
+                title: _isEdit == false
+                    ? AppString.faqCreation.val
+                    : AppString.faq.val,
               ),
               CustomSizedBox(height: DBL.ten.val),
               _rebuildView(),
@@ -147,13 +149,15 @@ class _faqCreationPageState extends State<FaqCreationPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _forClientCheckBoxWidget(),
+        const SizedBox(
+          height: 20,
+        ),
         CForm(
           formKey: _formKey,
           autoValidateMode: _validateMode,
-          child: Wrap(
-            alignment: WrapAlignment.start,
-            spacing: 20,
-            runSpacing: 20,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomSizedBox(
                 width: DBL.twoEighty.val,
@@ -195,7 +199,6 @@ class _faqCreationPageState extends State<FaqCreationPage> {
                   suffixIcon: const CustomContainer(width: 0),
                 ),
               ),
-              _forClientCheckBoxWidget(),
               BlocBuilder<FaqCreationBloc, FaqCreationState>(
                 builder: (context, state) {
                   return Row(
@@ -222,7 +225,11 @@ class _faqCreationPageState extends State<FaqCreationPage> {
                                   height: DBL.fortyFive.val,
                                   minWidth: DBL.oneTwenty.val,
                                   onPressed: () async {
-                                    checkInputData(state);
+                                    debugPrint(
+                                        "loading test ${state.isLoadingButton}");
+                                    await checkInputData(state);
+                                    debugPrint(
+                                        "loading test after function ${state.isLoadingButton}");
                                   },
                                   text: _isEdit!
                                       ? AppString.update.val

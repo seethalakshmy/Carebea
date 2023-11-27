@@ -208,7 +208,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
       },
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
-        width: DBL.oneForty.val,
+        width: DBL.oneEighty.val,
         height:
             Responsive.isMobile(context) ? DBL.fortyFive.val : DBL.forty.val,
         elevation: DBL.zero.val,
@@ -304,7 +304,8 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
             //size: ColumnSize.L,
             // fixedWidth: DBL.hundred.val,
             label: _columnsView(
-                text: AppString.name.val, fontWeight: FontWeight.bold),
+                text: AppString.careRecipientName.val,
+                fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             //size: ColumnSize.L,
@@ -323,12 +324,12 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                 text: AppString.endDateAndTime.val,
                 fontWeight: FontWeight.bold),
           ),
-          DataColumn2(
-            //size: ColumnSize.L,
-            // fixedWidth: DBL.hundred.val,
-            label: _columnsView(
-                text: AppString.email.val, fontWeight: FontWeight.bold),
-          ),
+          // DataColumn2(
+          //   //size: ColumnSize.L,
+          //   // fixedWidth: DBL.hundred.val,
+          //   label: _columnsView(
+          //       text: AppString.email.val, fontWeight: FontWeight.bold),
+          // ),
           DataColumn2(
             //size: ColumnSize.L,
             //fixedWidth: DBL.hundred.val,
@@ -359,7 +360,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                   DateTime.parse(item.subscriptionDetails?.expiry ?? ""),
                 ),
               )),
-              DataCell(_rowsView(text: item.email ?? "")),
+              // DataCell(_rowsView(text: item.email ?? "")),
               DataCell(_rowsView(
                   text: item.subscriptionDetails?.type == '1'
                       ? 'Monthly'

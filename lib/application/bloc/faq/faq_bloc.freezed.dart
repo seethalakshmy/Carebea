@@ -20,18 +20,21 @@ mixin _$FaqEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, int page, int limit) getFaq,
     required TResult Function() getFaqList,
+    required TResult Function(String faqId, BuildContext context) deleteFaq,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId, int page, int limit)? getFaq,
     TResult? Function()? getFaqList,
+    TResult? Function(String faqId, BuildContext context)? deleteFaq,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, int page, int limit)? getFaq,
     TResult Function()? getFaqList,
+    TResult Function(String faqId, BuildContext context)? deleteFaq,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$FaqEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetFaq value) getFaq,
     required TResult Function(_GetFaqList value) getFaqList,
+    required TResult Function(_DeleteFaq value) deleteFaq,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetFaq value)? getFaq,
     TResult? Function(_GetFaqList value)? getFaqList,
+    TResult? Function(_DeleteFaq value)? deleteFaq,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetFaq value)? getFaq,
     TResult Function(_GetFaqList value)? getFaqList,
+    TResult Function(_DeleteFaq value)? deleteFaq,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -154,6 +160,7 @@ class _$_GetFaq implements _GetFaq {
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, int page, int limit) getFaq,
     required TResult Function() getFaqList,
+    required TResult Function(String faqId, BuildContext context) deleteFaq,
   }) {
     return getFaq(userId, page, limit);
   }
@@ -163,6 +170,7 @@ class _$_GetFaq implements _GetFaq {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId, int page, int limit)? getFaq,
     TResult? Function()? getFaqList,
+    TResult? Function(String faqId, BuildContext context)? deleteFaq,
   }) {
     return getFaq?.call(userId, page, limit);
   }
@@ -172,6 +180,7 @@ class _$_GetFaq implements _GetFaq {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, int page, int limit)? getFaq,
     TResult Function()? getFaqList,
+    TResult Function(String faqId, BuildContext context)? deleteFaq,
     required TResult orElse(),
   }) {
     if (getFaq != null) {
@@ -185,6 +194,7 @@ class _$_GetFaq implements _GetFaq {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetFaq value) getFaq,
     required TResult Function(_GetFaqList value) getFaqList,
+    required TResult Function(_DeleteFaq value) deleteFaq,
   }) {
     return getFaq(this);
   }
@@ -194,6 +204,7 @@ class _$_GetFaq implements _GetFaq {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetFaq value)? getFaq,
     TResult? Function(_GetFaqList value)? getFaqList,
+    TResult? Function(_DeleteFaq value)? deleteFaq,
   }) {
     return getFaq?.call(this);
   }
@@ -203,6 +214,7 @@ class _$_GetFaq implements _GetFaq {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetFaq value)? getFaq,
     TResult Function(_GetFaqList value)? getFaqList,
+    TResult Function(_DeleteFaq value)? deleteFaq,
     required TResult orElse(),
   }) {
     if (getFaq != null) {
@@ -266,6 +278,7 @@ class _$_GetFaqList implements _GetFaqList {
   TResult when<TResult extends Object?>({
     required TResult Function(String userId, int page, int limit) getFaq,
     required TResult Function() getFaqList,
+    required TResult Function(String faqId, BuildContext context) deleteFaq,
   }) {
     return getFaqList();
   }
@@ -275,6 +288,7 @@ class _$_GetFaqList implements _GetFaqList {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId, int page, int limit)? getFaq,
     TResult? Function()? getFaqList,
+    TResult? Function(String faqId, BuildContext context)? deleteFaq,
   }) {
     return getFaqList?.call();
   }
@@ -284,6 +298,7 @@ class _$_GetFaqList implements _GetFaqList {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId, int page, int limit)? getFaq,
     TResult Function()? getFaqList,
+    TResult Function(String faqId, BuildContext context)? deleteFaq,
     required TResult orElse(),
   }) {
     if (getFaqList != null) {
@@ -297,6 +312,7 @@ class _$_GetFaqList implements _GetFaqList {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetFaq value) getFaq,
     required TResult Function(_GetFaqList value) getFaqList,
+    required TResult Function(_DeleteFaq value) deleteFaq,
   }) {
     return getFaqList(this);
   }
@@ -306,6 +322,7 @@ class _$_GetFaqList implements _GetFaqList {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetFaq value)? getFaq,
     TResult? Function(_GetFaqList value)? getFaqList,
+    TResult? Function(_DeleteFaq value)? deleteFaq,
   }) {
     return getFaqList?.call(this);
   }
@@ -315,6 +332,7 @@ class _$_GetFaqList implements _GetFaqList {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetFaq value)? getFaq,
     TResult Function(_GetFaqList value)? getFaqList,
+    TResult Function(_DeleteFaq value)? deleteFaq,
     required TResult orElse(),
   }) {
     if (getFaqList != null) {
@@ -326,6 +344,156 @@ class _$_GetFaqList implements _GetFaqList {
 
 abstract class _GetFaqList implements FaqEvent {
   const factory _GetFaqList() = _$_GetFaqList;
+}
+
+/// @nodoc
+abstract class _$$_DeleteFaqCopyWith<$Res> {
+  factory _$$_DeleteFaqCopyWith(
+          _$_DeleteFaq value, $Res Function(_$_DeleteFaq) then) =
+      __$$_DeleteFaqCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String faqId, BuildContext context});
+}
+
+/// @nodoc
+class __$$_DeleteFaqCopyWithImpl<$Res>
+    extends _$FaqEventCopyWithImpl<$Res, _$_DeleteFaq>
+    implements _$$_DeleteFaqCopyWith<$Res> {
+  __$$_DeleteFaqCopyWithImpl(
+      _$_DeleteFaq _value, $Res Function(_$_DeleteFaq) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? faqId = null,
+    Object? context = null,
+  }) {
+    return _then(_$_DeleteFaq(
+      faqId: null == faqId
+          ? _value.faqId
+          : faqId // ignore: cast_nullable_to_non_nullable
+              as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_DeleteFaq implements _DeleteFaq {
+  const _$_DeleteFaq({required this.faqId, required this.context});
+
+  @override
+  final String faqId;
+  @override
+  final BuildContext context;
+
+  @override
+  String toString() {
+    return 'FaqEvent.deleteFaq(faqId: $faqId, context: $context)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeleteFaq &&
+            (identical(other.faqId, faqId) || other.faqId == faqId) &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, faqId, context);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DeleteFaqCopyWith<_$_DeleteFaq> get copyWith =>
+      __$$_DeleteFaqCopyWithImpl<_$_DeleteFaq>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String userId, int page, int limit) getFaq,
+    required TResult Function() getFaqList,
+    required TResult Function(String faqId, BuildContext context) deleteFaq,
+  }) {
+    return deleteFaq(faqId, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String userId, int page, int limit)? getFaq,
+    TResult? Function()? getFaqList,
+    TResult? Function(String faqId, BuildContext context)? deleteFaq,
+  }) {
+    return deleteFaq?.call(faqId, context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String userId, int page, int limit)? getFaq,
+    TResult Function()? getFaqList,
+    TResult Function(String faqId, BuildContext context)? deleteFaq,
+    required TResult orElse(),
+  }) {
+    if (deleteFaq != null) {
+      return deleteFaq(faqId, context);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetFaq value) getFaq,
+    required TResult Function(_GetFaqList value) getFaqList,
+    required TResult Function(_DeleteFaq value) deleteFaq,
+  }) {
+    return deleteFaq(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetFaq value)? getFaq,
+    TResult? Function(_GetFaqList value)? getFaqList,
+    TResult? Function(_DeleteFaq value)? deleteFaq,
+  }) {
+    return deleteFaq?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetFaq value)? getFaq,
+    TResult Function(_GetFaqList value)? getFaqList,
+    TResult Function(_DeleteFaq value)? deleteFaq,
+    required TResult orElse(),
+  }) {
+    if (deleteFaq != null) {
+      return deleteFaq(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteFaq implements FaqEvent {
+  const factory _DeleteFaq(
+      {required final String faqId,
+      required final BuildContext context}) = _$_DeleteFaq;
+
+  String get faqId;
+  BuildContext get context;
+  @JsonKey(ignore: true)
+  _$$_DeleteFaqCopyWith<_$_DeleteFaq> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

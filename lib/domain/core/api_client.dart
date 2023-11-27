@@ -689,6 +689,11 @@ abstract class ApiClient {
     @Field('_id') String itemId,
   );
 
+  @POST('/common-data/delete-faq')
+  Future<CommonResponse> deleteFaq(
+    @Field('_id') String faqId,
+  );
+
   @POST('/common-data/update-faq')
   Future<CommonResponse> updateFaqDetails(
     @Field('_id') String itemId,

@@ -777,7 +777,9 @@ class ServiceDetailsAlert extends StatelessWidget {
               context: context,
               height: DBL.eight.val,
               text: AppString.canceledBy.val,
-              subText: service.canceledBy ?? ""),
+              subText: service.canceledBy == 'By Caregiver'
+                  ? AppString.careAmbassador.val
+                  : AppString.client.val ?? ""),
           _textAndSubText(
               context: context,
               height: DBL.eight.val,
