@@ -247,7 +247,13 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
                                 context: context, serviceId: item.id ?? ''));
                         debugPrint('item status ${item.status}');
                         return CustomAlertDialogWidget(
-                          heading: AppString.services.val,
+                          heading: item.status == 2
+                              ? 'Upcoming'
+                              : item.status == 3
+                                  ? 'Ongoing'
+                                  : item.status == 5
+                                      ? 'Completed'
+                                      : 'Canceled',
                           child: ServiceDetailsAlert(
                             title: item.status == 2
                                 ? 'Upcoming'
@@ -255,7 +261,7 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
                                     ? 'Ongoing'
                                     : item.status == 5
                                         ? 'Completed'
-                                        : 'Cancelled',
+                                        : 'Canceled',
                             serviceBloc: serviceRequestManagementBloc,
                           ),
                         );

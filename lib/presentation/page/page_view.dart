@@ -36,15 +36,8 @@ class PageListPage extends StatefulWidget {
 }
 
 class _PageListPage extends State<PageListPage> {
-  int _totalItems = 1;
   final int _limit = 10;
-  int _page = 1;
   int _pageIndex = 1;
-  int _start = 0;
-  int _end = 10;
-  final TextEditingController _searchController = TextEditingController();
-  final _searchNode = FocusNode();
-  String _adminUserId = "";
   final PageBloc _pageBloc = PageBloc(PageRepo());
   SharedPreffUtil sharedPrefUtil = SharedPreffUtil();
   String? filterId;
@@ -98,8 +91,9 @@ class _PageListPage extends State<PageListPage> {
                   getPagesResponse, radioValue) {
                 if (isError) {
                   return ErrorView(
-                      isClientError: true,
-                      errorMessage: AppString.somethingWentWrong.val);
+                    errorMessage: AppString.somethingWentWrong.val,
+                    isClientError: false,
+                  );
                 } else {
                   return _pagesView(context, state);
                 }
@@ -118,15 +112,6 @@ class _PageListPage extends State<PageListPage> {
   }
 
   _pagesView(BuildContext context, PageState state) {
-    // AdminGetResponse? value = state.getAdminsResponse;
-    // if (value?.status ?? false) {
-    //   mAdmins.clear();
-    //   if (value?.data?.resData != null && value!.data!.resData!.isNotEmpty) {
-    //     _totalItems = value.data?.totalCount?.floor() ?? 1;
-    //     mAdmins.addAll(value.data?.resData ?? []);
-    //     _updateData();
-    //   }
-    // }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -187,13 +172,13 @@ class _PageListPage extends State<PageListPage> {
             var item = e.value;
             _pageIndex = e.key + 1;
             return DataRow2(
-              // onTap: () {
-              //   autoTabRouter?.navigate(RouteCreationRoute(
-              //       id: item.id,
-              //       title: item.title,
-              //       description: item.description,
-              //       forWhom: item.pageFor));
-              // },
+              onTap: () {
+                autoTabRouter?.navigate(RouteCreationRoute(
+                    id: item.id,
+                    title: item.title,
+                    description: item.description,
+                    forWhom: item.pageFor));
+              },
               cells: [
                 DataCell(_tableRowView("", _pageIndex.toString())),
                 DataCell(_tableRowView("", item.title ?? "")),
@@ -215,6 +200,9 @@ class _PageListPage extends State<PageListPage> {
                   isEdit: sharedPrefUtil.getEditAdmin,
                   onEditTap: sharedPrefUtil.getEditAdmin
                       ? () {
+                          debugPrint("title inside view ${item.title}");
+                          debugPrint(
+                              "description inside view ${item.description}");
                           autoTabRouter?.navigate(RouteCreationRoute(
                               id: item.id,
                               title: item.title,
@@ -305,70 +293,6 @@ class _PageListPage extends State<PageListPage> {
           color: AppColor.white.val,
         ));
   }
-
-  // _searchField() {
-  //   return CTextField(
-  //     focusNode: _searchNode,
-  //     width: _isXs(context) ? DBL.threeFifteen.val : DBL.threeHundred.val,
-  //     height: DBL.forty.val,
-  //     controller: _searchController,
-  //     hintText: AppString.search.val,
-  //     hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
-  //     onSubmitted: (String value) {
-  //       _searchNode.requestFocus();
-  //       _getFaqEvent();
-  //     },
-  //     suffixIcon: InkWell(
-  //       onTap: () {
-  //         _getFaqEvent();
-  //       },
-  //       child: CustomSvg(
-  //         path: IMG.search.val,
-  //         height: DBL.sixteen.val,
-  //         width: DBL.sixteen.val,
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // _getFaqEvent() {
-  //   _faqBloc.add(FaqEvent.getFaq(
-  //     userId: _adminUserId,
-  //     page: _page,
-  //     limit: _limit,
-  //     // searchTerm: _searchController.text.trim().isNotEmpty
-  //     //     ? _searchController.text.trim()
-  //     //     : null
-  //   ));
-  // }
-
-  // _paginationView() {
-  //   final int totalPages = (_totalItems / _limit).ceil();
-  //   return PaginationView(
-  //       page: _page,
-  //       start: _start,
-  //       end: _end,
-  //       totalItems: _totalItems,
-  //       totalPages: totalPages,
-  //       onNextPressed: () {
-  //         if (_page < totalPages) {
-  //           _page = _page + 1;
-  //           _getFaqEvent();
-  //         }
-  //       },
-  //       onItemPressed: (i) {
-  //         _page = i;
-  //         _getFaqEvent();
-  //       },
-  //       onPreviousPressed: () {
-  //         if (_page > 1) {
-  //           _page = _page - 1;
-  //           _getFaqEvent();
-  //         }
-  //       });
-  // }
-
-  bool _isXs(context) => MediaQuery.of(context).size.width <= 544;
 
   bool isLarge(BuildContext context) =>
       MediaQuery.of(context).size.width <= 1236;

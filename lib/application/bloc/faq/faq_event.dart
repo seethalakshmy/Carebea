@@ -8,4 +8,7 @@ class FaqEvent with _$FaqEvent {
     required int limit,
   }) = _GetFaq;
   const factory FaqEvent.getFaqList() = _GetFaqList;
+
+  const factory FaqEvent.deleteFaq(
+      {required String faqId, required BuildContext context}) = _DeleteFaq;
 }

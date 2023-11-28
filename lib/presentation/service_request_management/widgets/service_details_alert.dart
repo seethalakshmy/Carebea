@@ -31,10 +31,14 @@ import 'cancellation_widget.dart';
 
 class ServiceDetailsAlert extends StatelessWidget {
   ServiceDetailsAlert(
-      {super.key, required this.serviceBloc, required this.title});
+      {super.key,
+      required this.serviceBloc,
+      required this.title,
+      this.canceledBy});
 
   final ServiceRequestManagementBloc serviceBloc;
   final String title;
+  final String? canceledBy;
   final TextEditingController controller = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -234,7 +238,6 @@ class ServiceDetailsAlert extends StatelessWidget {
         child: _textAndSubText(
             text: AppString.careRecipientName.val,
             needUnderLine: true,
-
             subText:
                 "${service.clientName!.firstName ?? ""} ${service.clientName!.lastName ?? ""}",
             context: context),
@@ -338,8 +341,8 @@ class ServiceDetailsAlert extends StatelessWidget {
               context: context,
               text: AppString.location.val,
               subText: service.address != null
-                  ? service.address!.locationTag!.replaceAll(",", ",\n")
-                  : ""),
+                  ? service.address!.locationTag!.replaceAll(", ", ",\n")
+                  : ''),
         ],
       ),
     );
@@ -552,7 +555,7 @@ class ServiceDetailsAlert extends StatelessWidget {
               isShowing: serviceBloc.state.isShowingExtraServices,
               title: AppString.extraService.val,
               servicesList: extraServices),
-        title == "Canceled"
+        title == "Canceled" && canceledBy != "By User"
             ? _replacementDetailsWidget(context, service)
             : SizedBox.shrink(),
         CustomSizedBox(height: DBL.ten.val),
@@ -746,7 +749,7 @@ class ServiceDetailsAlert extends StatelessWidget {
               );
             },
             child: _textAndSubText(
-              needUnderLine: true,
+                needUnderLine: true,
                 context: context,
                 height: DBL.eight.val,
                 text: AppString.transactionId.val,
@@ -774,7 +777,9 @@ class ServiceDetailsAlert extends StatelessWidget {
               context: context,
               height: DBL.eight.val,
               text: AppString.canceledBy.val,
-              subText: service.canceledBy ?? ""),
+              subText: service.canceledBy == 'By Caregiver'
+                  ? AppString.careAmbassador.val
+                  : AppString.client.val ?? ""),
           _textAndSubText(
               context: context,
               height: DBL.eight.val,

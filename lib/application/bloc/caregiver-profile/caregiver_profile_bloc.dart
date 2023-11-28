@@ -9,9 +9,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../core/text_styles.dart';
 import '../../../infrastructure/caregiver_profile/caregiver_profile_repository.dart';
 import '../../../presentation/routes/app_router.gr.dart';
 import '../../../presentation/side_menu/side_menu_page.dart';
+import '../../../presentation/widget/custom_alert_dialog_widget.dart';
+import '../../../presentation/widget/custom_button.dart';
+import '../../../presentation/widget/custom_sizedbox.dart';
+import '../../../presentation/widget/custom_text.dart';
 
 part 'caregiver_profile_bloc.freezed.dart';
 part 'caregiver_profile_event.dart';
@@ -154,7 +159,51 @@ class CareGiverProfileBloc
     }, (r) {
       emit(state.copyWith(isLoadingStatusChangeApi: false));
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        // CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        _completedPopUp(event.context,
+            msg:
+                'Training process completed successfully continue to interview process');
+
+        // showGeneralDialog(
+        //   barrierDismissible: true,
+        //   barrierLabel: "",
+        //   context: event.context,
+        //   pageBuilder: (BuildContext buildContext, Animation animation,
+        //       Animation secondaryAnimation) {
+        //     return CustomAlertDialogWidget(
+        //         width: 800,
+        //         height: 200,
+        //         heading: AppString.completed.val,
+        //         child: Padding(
+        //           padding: const EdgeInsets.all(8.0),
+        //           child: Column(
+        //             children: [
+        //               const SizedBox(
+        //                 height: 50,
+        //               ),
+        //               const CustomText(
+        //                 'Training process completed successfully continue to interview process',
+        //                 textAlign: TextAlign.center,
+        //                 style: TextStyle(
+        //                     fontSize: 18, fontWeight: FontWeight.bold),
+        //               ),
+        //               const SizedBox(
+        //                 height: 50,
+        //               ),
+        //               CustomButton(
+        //                 minWidth: 100,
+        //                 height: 50,
+        //                 onPressed: () {
+        //                   Navigator.of(event.context).pop();
+        //                 },
+        //                 text: AppString.ok.val,
+        //               )
+        //             ],
+        //           ),
+        //         ));
+        //   },
+        // );
+
         add(CareGiverProfileEvent.onTappedStatusDropDown(
             !state.isShowStatusDropDown));
       } else {
@@ -199,7 +248,47 @@ class CareGiverProfileBloc
     }, (r) {
       emit(state.copyWith(isLoadingStatusChangeApi: false));
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        // CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        _completedPopUp(event.context, msg: 'Interview process completed');
+        // showGeneralDialog(
+        //   barrierDismissible: true,
+        //   barrierLabel: "",
+        //   context: event.context,
+        //   pageBuilder: (BuildContext buildContext, Animation animation,
+        //       Animation secondaryAnimation) {
+        //     return CustomAlertDialogWidget(
+        //         width: 800,
+        //         height: 200,
+        //         heading: AppString.completed.val,
+        //         child: Padding(
+        //           padding: const EdgeInsets.all(8.0),
+        //           child: Column(
+        //             children: [
+        //               const SizedBox(
+        //                 height: 50,
+        //               ),
+        //               const CustomText(
+        //                 'Interview  completed successfully ',
+        //                 textAlign: TextAlign.center,
+        //                 style: TextStyle(
+        //                     fontSize: 18, fontWeight: FontWeight.bold),
+        //               ),
+        //               const SizedBox(
+        //                 height: 50,
+        //               ),
+        //               CustomButton(
+        //                 minWidth: 100,
+        //                 height: 50,
+        //                 onPressed: () {
+        //                   Navigator.of(event.context).pop();
+        //                 },
+        //                 text: AppString.ok.val,
+        //               )
+        //             ],
+        //           ),
+        //         ));
+        //   },
+        // );
         add(CareGiverProfileEvent.onTappedStatusDropDown(
             !state.isShowStatusDropDown));
         if (event.status == Interview.completed.val) {
@@ -222,5 +311,63 @@ class CareGiverProfileBloc
   _onTapDropDown(_OnTappedStatusDropDown event,
       Emitter<CareGiverProfileState> emit) async {
     emit(state.copyWith(isShowStatusDropDown: event.val));
+  }
+
+  _completedPopUp(
+    BuildContext context, {
+    required String msg,
+  }) {
+    showGeneralDialog(
+      barrierLabel: "",
+      barrierDismissible: true,
+      context: context,
+      pageBuilder: (BuildContext buildContext, Animation animation,
+          Animation secondaryAnimation) {
+        return CustomAlertDialogWidget(
+            width: 800,
+            height: 200,
+            heading: AppString.completed.val,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              child: Column(
+                children: [
+                  CustomText(
+                    msg,
+                    style: TS().gRoboto(
+                      color: AppColor.black5.val,
+                      fontWeight: FW.w500.val,
+                      fontSize: FS.font21.val,
+                    ),
+                  ),
+                  CustomSizedBox(
+                    height: DBL.fifteen.val,
+                  ),
+                  _confirmButton(
+                    context: buildContext,
+                  ),
+                ],
+              ),
+            ));
+      },
+    );
+  }
+
+  CustomButton _confirmButton({required BuildContext context}) {
+    return CustomButton(
+      text: AppString.ok.val,
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+      color: AppColor.white.val,
+      borderRadius: DBL.five.val,
+      borderColor: AppColor.primaryColor.val,
+      hoverColor: AppColor.offWhite.val.withOpacity(0.2),
+      textStyle: TS().gRoboto(
+          fontWeight: FW.w500.val,
+          color: AppColor.primaryColor.val,
+          fontSize: FS.font16.val),
+      padding: EdgeInsets.symmetric(
+          horizontal: DBL.thirtyFive.val, vertical: DBL.eighteen.val),
+    );
   }
 }

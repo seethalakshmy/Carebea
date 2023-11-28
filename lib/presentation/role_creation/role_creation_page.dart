@@ -70,14 +70,10 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
         .getString('edit', "")
         .isNotEmpty) {
       _isEdit = true;
-      roleCreationBloc.add(
-          const RoleCreationEvent.isEdit(
-              true));
+      roleCreationBloc.add(const RoleCreationEvent.isEdit(true));
     } else {
       _isEdit = false;
-      roleCreationBloc.add(
-          const RoleCreationEvent.isEdit(
-              false));
+      roleCreationBloc.add(const RoleCreationEvent.isEdit(false));
     }
   }
 
@@ -165,7 +161,7 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
                 controller: _roleController,
                 width: DBL.fourHundred.val,
                 inputFormatter: [
-                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
+                  FilteringTextInputFormatter.allow(RegExp(r'[ a-zA-Z]')),
                 ])
           ],
         ),
@@ -334,6 +330,11 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
                             ),
                             selected: item.isSelected,
                             onSelected: (bool selected) {
+                              if (selected == false) {
+                                item.isView = false;
+                                item.isDelete = false;
+                                item.isEdit = false;
+                              }
                               roleCreationBloc.add(RoleCreationEvent.isSelected(
                                 module: item,
                               ));

@@ -98,7 +98,9 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
             userId: adminId ?? '')),
       child: BlocBuilder<TransactionManagementBloc, TransactionManagementState>(
         builder: (context, state) {
-          return state.isLoading ? LoaderView() : _bodyView(context, state);
+          return state.isLoading
+              ? const LoaderView()
+              : _bodyView(context, state);
         },
       ),
     );
@@ -175,7 +177,6 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                         // ),
                         DataColumn2(
                           size: ColumnSize.L,
-                          // fixedWidth: 500,
                           label: _columnsView(
                             text: AppString.transactionType.val,
                           ),
@@ -379,6 +380,58 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
     }
   }
 
+  _paginationView() {
+    final int totalPages =
+        (_transactionBloc.totalItems / _transactionBloc.limit).ceil();
+    return BlocBuilder<TransactionManagementBloc, TransactionManagementState>(
+      builder: (context, state) {
+        updateData();
+        return PaginationView(
+            page: _transactionBloc.paginationPage,
+            totalPages: totalPages,
+            end: _transactionBloc.end,
+            totalItems: _transactionBloc.totalItems,
+            start: _transactionBloc.start,
+            onNextPressed: () {
+              if (_transactionBloc.paginationPage < totalPages) {
+                _transactionBloc.paginationPage =
+                    _transactionBloc.paginationPage + 1;
+                _transactionBloc.add(TransactionManagementEvent.getTransactions(
+                    page: _transactionBloc.paginationPage.toString(),
+                    limit: _transactionBloc.limit,
+                    filterId: _transactionBloc.filterId,
+                    searchTerm: _transactionBloc.searchQuery,
+                    userId: adminId ?? ''));
+                updateData();
+              }
+            },
+            onItemPressed: (i) {
+              _transactionBloc.paginationPage = i;
+              _transactionBloc.add(TransactionManagementEvent.getTransactions(
+                  page: _transactionBloc.paginationPage.toString(),
+                  limit: _transactionBloc.limit,
+                  filterId: _transactionBloc.filterId,
+                  searchTerm: _transactionBloc.searchQuery,
+                  userId: adminId ?? ''));
+              updateData();
+            },
+            onPreviousPressed: () {
+              if (_transactionBloc.paginationPage > 1) {
+                _transactionBloc.paginationPage =
+                    _transactionBloc.paginationPage - 1;
+                _transactionBloc.add(TransactionManagementEvent.getTransactions(
+                    page: _transactionBloc.paginationPage.toString(),
+                    limit: _transactionBloc.limit,
+                    filterId: _transactionBloc.filterId,
+                    searchTerm: _transactionBloc.searchQuery,
+                    userId: adminId ?? ''));
+                updateData();
+              }
+            });
+      },
+    );
+  }
+
   _usersTable() {
     return CSelectionArea(
       child: CDataTable2(
@@ -494,53 +547,6 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
   }
 
   bool isXs(context) => MediaQuery.of(context).size.width <= 820;
-
-  _paginationView() {
-    final int totalPages =
-        (_transactionBloc.totalItems / _transactionBloc.limit).ceil();
-    return PaginationView(
-        page: _transactionBloc.paginationPage,
-        totalPages: totalPages,
-        end: _transactionBloc.end,
-        totalItems: _transactionBloc.totalItems,
-        start: _transactionBloc.start,
-        onNextPressed: () {
-          if (_transactionBloc.paginationPage < totalPages) {
-            _transactionBloc.paginationPage =
-                _transactionBloc.paginationPage + 1;
-            updateData();
-            _transactionBloc.add(TransactionManagementEvent.getTransactions(
-                page: _transactionBloc.paginationPage.toString(),
-                limit: _transactionBloc.limit,
-                filterId: _transactionBloc.filterId,
-                searchTerm: _transactionBloc.searchQuery,
-                userId: adminId ?? ''));
-          }
-        },
-        onItemPressed: (i) {
-          _transactionBloc.paginationPage = i;
-          updateData();
-          _transactionBloc.add(TransactionManagementEvent.getTransactions(
-              page: _transactionBloc.paginationPage.toString(),
-              limit: _transactionBloc.limit,
-              filterId: _transactionBloc.filterId,
-              searchTerm: _transactionBloc.searchQuery,
-              userId: adminId ?? ''));
-        },
-        onPreviousPressed: () {
-          if (_transactionBloc.paginationPage > 1) {
-            _transactionBloc.paginationPage =
-                _transactionBloc.paginationPage - 1;
-            updateData();
-            _transactionBloc.add(TransactionManagementEvent.getTransactions(
-                page: _transactionBloc.paginationPage.toString(),
-                limit: _transactionBloc.limit,
-                filterId: _transactionBloc.filterId,
-                searchTerm: _transactionBloc.searchQuery,
-                userId: adminId ?? ''));
-          }
-        });
-  }
 
   void updateData() {
     if (_transactionBloc.paginationPage == 1) {

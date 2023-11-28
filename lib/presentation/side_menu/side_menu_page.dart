@@ -124,7 +124,7 @@ class _MenuBarState extends State<SideMenuPage> {
   Widget build(BuildContext context) {
     return AutoTabsRouter(
       routes: _routes,
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
       builder: (
         context,
         child,
@@ -350,7 +350,7 @@ class _MenuBarState extends State<SideMenuPage> {
           child: InkWell(
             onTap: () {
               SharedPreffUtil().logoutClear();
-              context.router.replace(LoginRoute());
+              context.router.replace(const LoginRoute());
             },
             child: Text(
               AppString.logout.val,
@@ -458,8 +458,9 @@ class _MenuBarState extends State<SideMenuPage> {
                   : CustomSizedBox(
                       width: DBL.ten.val,
                     ),
-              title:
-                  isOpened ? buildText(items, index, tabsRouter, color) : null,
+              title: isOpened || isSelected(items, index, tabsRouter)
+                  ? buildText(items, index, tabsRouter, color)
+                  : null,
               contentPadding: const EdgeInsets.symmetric(horizontal: 0),
               mouseCursor: SystemMouseCursors.click,
               horizontalTitleGap: DBL.zero.val,

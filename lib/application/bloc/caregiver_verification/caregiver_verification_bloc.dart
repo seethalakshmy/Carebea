@@ -120,7 +120,51 @@ class CareGiverVerificationBloc
       return state.copyWith(error: l.error, isLoading: false, isError: true);
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.data?.message ?? "");
+        // CSnackBar.showSuccess(event.context, msg: r.data?.message ?? "");
+        showGeneralDialog(
+          barrierDismissible: true,
+          barrierLabel: "",
+          context: event.context,
+          pageBuilder: (BuildContext buildContext, Animation animation,
+              Animation secondaryAnimation) {
+            return CustomAlertDialogWidget(
+                width: 800,
+                height: 200,
+                heading: AppString.backGroundVerification.val,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                    ),
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        const CustomText(
+                          'Background verification completed successfully continue to document verification',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        CustomButton(
+                          minWidth: 100,
+                          height: 50,
+                          onPressed: () {
+                            Navigator.of(buildContext).pop();
+                          },
+                          text: AppString.ok.val,
+                        )
+                      ],
+                    ),
+                  ),
+                ));
+          },
+        );
       } else {
         CSnackBar.showError(event.context, msg: r.data?.message ?? "");
       }

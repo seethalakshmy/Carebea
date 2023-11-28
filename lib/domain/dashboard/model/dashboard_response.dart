@@ -54,16 +54,16 @@ String dataToJson(Data data) => json.encode(data.toJson());
 
 class Data {
   Data({
-    int? clientCount,
-    int? careGiverCount,
-    int? totalNewCareGiver,
-    int? totalNewClient,
-    int? totalRepeatedCareGiver,
-    int? totalRepeatedClient,
+    num? clientCount,
+    num? careGiverCount,
+    num? totalNewCareGiver,
+    num? totalNewClient,
+    num? totalRepeatedCareGiver,
+    num? totalRepeatedClient,
     double? totalHours,
     double? percentageChangeInNewClient,
-    int? totalServiceCompleted,
-    int? totalSales,
+    num? totalServiceCompleted,
+    num? totalSales,
     String? monthlyIncome,
     MonthlyServiceCounts? monthlyServiceCounts,
     List<DailyCounts>? dailyCounts,
@@ -105,30 +105,30 @@ class Data {
       });
     }
   }
-  int? _clientCount;
-  int? _careGiverCount;
-  int? _totalNewCareGiver;
-  int? _totalNewClient;
-  int? _totalRepeatedCareGiver;
-  int? _totalRepeatedClient;
+  num? _clientCount;
+  num? _careGiverCount;
+  num? _totalNewCareGiver;
+  num? _totalNewClient;
+  num? _totalRepeatedCareGiver;
+  num? _totalRepeatedClient;
   double? _totalHours;
   double? _percentageChangeInNewClient;
-  int? _totalServiceCompleted;
-  int? _totalSales;
+  num? _totalServiceCompleted;
+  num? _totalSales;
   String? _monthlyIncome;
   MonthlyServiceCounts? _monthlyServiceCounts;
   List<DailyCounts>? _dailyCounts;
   Data copyWith({
-    int? clientCount,
-    int? careGiverCount,
-    int? totalNewCareGiver,
-    int? totalNewClient,
-    int? totalRepeatedCareGiver,
-    int? totalRepeatedClient,
+    num? clientCount,
+    num? careGiverCount,
+    num? totalNewCareGiver,
+    num? totalNewClient,
+    num? totalRepeatedCareGiver,
+    num? totalRepeatedClient,
     double? totalHours,
     double? percentageChangeInNewClient,
-    int? totalServiceCompleted,
-    int? totalSales,
+    num? totalServiceCompleted,
+    num? totalSales,
     String? monthlyIncome,
     MonthlyServiceCounts? monthlyServiceCounts,
     List<DailyCounts>? dailyCounts,
@@ -150,16 +150,16 @@ class Data {
         monthlyServiceCounts: monthlyServiceCounts ?? _monthlyServiceCounts,
         dailyCounts: dailyCounts ?? _dailyCounts,
       );
-  int? get clientCount => _clientCount;
-  int? get careGiverCount => _careGiverCount;
-  int? get totalNewCareGiver => _totalNewCareGiver;
-  int? get totalNewClient => _totalNewClient;
-  int? get totalRepeatedCareGiver => _totalRepeatedCareGiver;
-  int? get totalRepeatedClient => _totalRepeatedClient;
+  num? get clientCount => _clientCount;
+  num? get careGiverCount => _careGiverCount;
+  num? get totalNewCareGiver => _totalNewCareGiver;
+  num? get totalNewClient => _totalNewClient;
+  num? get totalRepeatedCareGiver => _totalRepeatedCareGiver;
+  num? get totalRepeatedClient => _totalRepeatedClient;
   double? get totalHours => _totalHours;
   double? get percentageChangeInNewClient => _percentageChangeInNewClient;
-  int? get totalServiceCompleted => _totalServiceCompleted;
-  int? get totalSales => _totalSales;
+  num? get totalServiceCompleted => _totalServiceCompleted;
+  num? get totalSales => _totalSales;
   String? get monthlyIncome => _monthlyIncome;
   MonthlyServiceCounts? get monthlyServiceCounts => _monthlyServiceCounts;
   List<DailyCounts>? get dailyCounts => _dailyCounts;
@@ -194,7 +194,7 @@ String dailyCountsToJson(DailyCounts data) => json.encode(data.toJson());
 class DailyCounts {
   DailyCounts({
     String? date,
-    int? count,
+    num? count,
   }) {
     _date = date;
     _count = count;
@@ -205,17 +205,17 @@ class DailyCounts {
     _count = json['count'];
   }
   String? _date;
-  int? _count;
+  num? _count;
   DailyCounts copyWith({
     String? date,
-    int? count,
+    num? count,
   }) =>
       DailyCounts(
         date: date ?? _date,
         count: count ?? _count,
       );
   String? get date => _date;
-  int? get count => _count;
+  num? get count => _count;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -232,18 +232,18 @@ String monthlyServiceCountsToJson(MonthlyServiceCounts data) =>
 
 class MonthlyServiceCounts {
   MonthlyServiceCounts({
-    int? jan,
-    int? feb,
-    int? mar,
-    int? apr,
-    int? may,
-    int? jun,
-    int? jul,
-    int? aug,
-    int? sept,
-    int? oct,
-    int? nov,
-    int? dec,
+    num? jan,
+    num? feb,
+    num? mar,
+    num? apr,
+    num? may,
+    num? jun,
+    num? jul,
+    num? aug,
+    num? sept,
+    num? oct,
+    num? nov,
+    num? dec,
   }) {
     _jan = jan;
     _feb = feb;
@@ -273,31 +273,31 @@ class MonthlyServiceCounts {
     _nov = json['Nov'];
     _dec = json['Dec'];
   }
-  int? _jan;
-  int? _feb;
-  int? _mar;
-  int? _apr;
-  int? _may;
-  int? _jun;
-  int? _jul;
-  int? _aug;
-  int? _sept;
-  int? _oct;
-  int? _nov;
-  int? _dec;
+  num? _jan;
+  num? _feb;
+  num? _mar;
+  num? _apr;
+  num? _may;
+  num? _jun;
+  num? _jul;
+  num? _aug;
+  num? _sept;
+  num? _oct;
+  num? _nov;
+  num? _dec;
   MonthlyServiceCounts copyWith({
-    int? jan,
-    int? feb,
-    int? mar,
-    int? apr,
-    int? may,
-    int? jun,
-    int? jul,
-    int? aug,
-    int? sept,
-    int? oct,
-    int? nov,
-    int? dec,
+    num? jan,
+    num? feb,
+    num? mar,
+    num? apr,
+    num? may,
+    num? jun,
+    num? jul,
+    num? aug,
+    num? sept,
+    num? oct,
+    num? nov,
+    num? dec,
   }) =>
       MonthlyServiceCounts(
         jan: jan ?? _jan,
@@ -313,18 +313,18 @@ class MonthlyServiceCounts {
         nov: nov ?? _nov,
         dec: dec ?? _dec,
       );
-  int? get jan => _jan;
-  int? get feb => _feb;
-  int? get mar => _mar;
-  int? get apr => _apr;
-  int? get may => _may;
-  int? get jun => _jun;
-  int? get jul => _jul;
-  int? get aug => _aug;
-  int? get sept => _sept;
-  int? get oct => _oct;
-  int? get nov => _nov;
-  int? get dec => _dec;
+  num? get jan => _jan;
+  num? get feb => _feb;
+  num? get mar => _mar;
+  num? get apr => _apr;
+  num? get may => _may;
+  num? get jun => _jun;
+  num? get jul => _jul;
+  num? get aug => _aug;
+  num? get sept => _sept;
+  num? get oct => _oct;
+  num? get nov => _nov;
+  num? get dec => _dec;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

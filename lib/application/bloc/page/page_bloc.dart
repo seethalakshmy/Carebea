@@ -80,6 +80,7 @@ class PageBloc extends Bloc<PageEvent, PageState> {
   }
 
   _getPages(_GetPages event, Emitter<PageState> emit) async {
+    PageState.loading();
     final Either<ApiErrorHandler, GetPagesResponse> homeResult =
         await pageRepo.getPages();
     PageState homeState = homeResult.fold((l) {
@@ -176,7 +177,7 @@ class PageBloc extends Bloc<PageEvent, PageState> {
       CSnackBar.showError(event.context, msg: l.error ?? "");
       return PageState.initial(
           radioValue: radioValue,
-          isLoading: false,
+          isLoading: true,
           getPagesResponse: null,
           isError: true,
           isForClient: 0,
@@ -187,7 +188,7 @@ class PageBloc extends Bloc<PageEvent, PageState> {
     }, (r) {
       if (r.status ?? false) {
         CSnackBar.showSuccess(event.context, msg: r.message ?? "");
-        add(PageEvent.getPages());
+        add(const PageEvent.getPages());
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
       }
@@ -195,7 +196,7 @@ class PageBloc extends Bloc<PageEvent, PageState> {
       //     response: r, isLoading: false, radioValue: radioValue);
       return PageState.initial(
           radioValue: radioValue,
-          isLoading: false,
+          isLoading: true,
           getPagesResponse: null,
           isError: true,
           isForClient: 0,

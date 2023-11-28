@@ -19,6 +19,7 @@ class TableRowView extends StatelessWidget {
   CustomText _buildText(BuildContext context) {
     return CustomText(
       text,
+      overflow: TextOverflow.ellipsis,
       maxLines: maxLines,
       softWrap: true,
       style: _buildStyle(context),

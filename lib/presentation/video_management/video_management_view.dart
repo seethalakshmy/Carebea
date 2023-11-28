@@ -180,9 +180,17 @@ class _VideoManagementPageState extends State<VideoManagementPage> {
             var item = e.value;
             _pageIndex = e.key + 1;
             return DataRow2(
+              onTap: () {
+                autoTabRouter?.navigate(VideoUploadRoute(
+                    isEdit: "edit",
+                    id: item.id,
+                    title: item.title,
+                    type: item.userType,
+                    attachment: item.attachment));
+              },
               cells: [
                 DataCell(_tableRowView("", _pageIndex.toString())),
-                DataCell(_tableRowView(item.title ?? "", '')),
+                DataCell(_tableRowView("", item.title ?? '')),
                 DataCell(_tableRowView(
                     "",
                     item.userType == 2

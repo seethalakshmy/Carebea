@@ -112,7 +112,8 @@ class _DashboardPageState extends State<DashboardPage> {
                                                     ?.totalHours
                                                     ?.toStringAsFixed(2),
                                                 state.dashboardResponse?.data
-                                                    ?.totalSales,
+                                                    ?.totalSales
+                                                    ?.toStringAsFixed(2),
                                                 state.dashboardResponse?.data
                                                     ?.clientCount,
                                                 state.dashboardResponse?.data
@@ -179,7 +180,8 @@ class _DashboardPageState extends State<DashboardPage> {
                                                   ?.totalHours
                                                   ?.toStringAsFixed(2),
                                               state.dashboardResponse?.data
-                                                  ?.totalSales,
+                                                  ?.totalSales
+                                                  ?.toStringAsFixed(2),
                                               state.dashboardResponse?.data
                                                   ?.clientCount,
                                               state.dashboardResponse?.data
@@ -294,15 +296,18 @@ class _DashboardPageState extends State<DashboardPage> {
                                               height: DBL.twenty.val),
                                       PieChartPage(
                                           totalClient: state.dashboardResponse
-                                                  ?.data?.clientCount ??
+                                                  ?.data?.clientCount
+                                                  ?.toInt() ??
                                               0,
                                           newClients: state.dashboardResponse
-                                                  ?.data?.totalNewClient ??
+                                                  ?.data?.totalNewClient
+                                                  ?.toInt() ??
                                               0,
                                           repeatedClients: state
                                                   .dashboardResponse
                                                   ?.data
-                                                  ?.totalRepeatedClient ??
+                                                  ?.totalRepeatedClient
+                                                  ?.toInt() ??
                                               0,
                                           percentage: state
                                                   .dashboardResponse
