@@ -10,6 +10,7 @@ enum AppString {
   pageManagement("Page Management"),
   profileIncomplete("Profile Incomplete"),
   achDetails('ACH details'),
+  clear("Clear"),
   cardNumber("Card Number"),
   viewAdmin("View Admin"),
   updateAdmin("Update Admin"),

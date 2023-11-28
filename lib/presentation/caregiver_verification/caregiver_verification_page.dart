@@ -892,7 +892,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
                     width: DBL.ten.val,
                   ),
                   status != 0
-                      ? _backgroundVerifyApprovalStatusBox(state, status)
+                      ? _backgroundVerifyApprovalStatusBox(
+                          state, status, context)
                       : CustomSizedBox.shrink()
                 ],
               )
@@ -901,14 +902,14 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
           height: DBL.twenty.val,
         ),
         status == 0 && onBoardingStatus == true
-            ? _backgroundVerifyApprovalStatusBox(state, status)
+            ? _backgroundVerifyApprovalStatusBox(state, status, context)
             : CustomSizedBox.shrink(),
       ],
     );
   }
 
   _backgroundVerifyApprovalStatusBox(
-      CareGiverVerificationState state, int status) {
+      CareGiverVerificationState state, int status, BuildContext context) {
     bool? isPendingDoc = state.response?.data?.pendingDocs ?? false;
     return !isPendingDoc
         ? ApprovalStatusBox(

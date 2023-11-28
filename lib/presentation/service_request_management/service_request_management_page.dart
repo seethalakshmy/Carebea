@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/service_request_management/service_request_management_bloc.dart';
 import '../../core/custom_debugger.dart';
+import '../../core/custom_snackbar.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
@@ -124,7 +125,11 @@ class _ServiceRequestManagementPageState
                           : _buildDatePicker(
                               state, toDateController, AppString.endDate.val,
                               () {
-                              _selectToDate(context, state);
+                              _serviceRequestBloc.selectedFromDate != "" ||
+                                      fromDateController.text.isNotEmpty
+                                  ? _selectToDate(context, state)
+                                  : CSnackBar.showError(context,
+                                      msg: 'Please select a startDate');
                             }),
                       state.isLoading ?? false
                           ? _shimmerForFilterWidgets()
@@ -196,6 +201,8 @@ class _ServiceRequestManagementPageState
             _searchController.clear();
             fromDateController.clear();
             toDateController.clear();
+            _serviceRequestBloc.selectedFromDate = '';
+            _serviceRequestBloc.selectedToDate = '';
             _serviceRequestBloc.statusFilterId = 0;
             _serviceRequestBloc
                 .add(const ServiceRequestManagementEvent.getServiceStatus());
@@ -204,7 +211,7 @@ class _ServiceRequestManagementPageState
                     context: context, page: _page, limit: _limit));
             debugPrint("date test ${fromDateController.text}");
           },
-          text: AppString.clearFilters.val,
+          text: AppString.clear.val,
         ),
       ),
     );
@@ -212,13 +219,17 @@ class _ServiceRequestManagementPageState
 
   Future<void> _selectFromDate(
       BuildContext context, ServiceRequestManagementState state) async {
+    debugPrint("date check ${_serviceRequestBloc.selectedToDateTime}");
     final DateTime now = DateTime.now();
     showDatePicker(
-      context: context,
-      initialDate: _serviceRequestBloc.selectedToDateTime ?? state.selectedDate,
-      firstDate: now.subtract(const Duration(days: 365)),
-      lastDate: now.add(const Duration(days: 365)),
-    ).then((value) {
+            context: context,
+            initialDate: _serviceRequestBloc.selectedToDateTime ?? now,
+            firstDate: _serviceRequestBloc.selectedToDateTime
+                    ?.subtract(const Duration(days: 1825)) ??
+                DateTime(DateTime.now().year - 5),
+            lastDate: _serviceRequestBloc.selectedToDateTime ??
+                DateTime(DateTime.now().year + 5))
+        .then((value) {
       if (value != null) {
         _serviceRequestBloc.selectedFromDate =
             value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
@@ -234,8 +245,8 @@ class _ServiceRequestManagementPageState
                   context: context,
                   page: _page,
                   limit: _limit,
-                  fromDate: fromDateController.text,
-                  toDate: toDateController.text));
+                  fromDate: _serviceRequestBloc.selectedFromDate,
+                  toDate: _serviceRequestBloc.selectedToDate));
         }
         fromDateController.text =
             value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
@@ -248,11 +259,12 @@ class _ServiceRequestManagementPageState
       BuildContext context, ServiceRequestManagementState state) async {
     final DateTime now = DateTime.now();
     showDatePicker(
-      context: context,
-      initialDate: state.selectedDate,
-      firstDate: state.selectedDate,
-      lastDate: now.add(const Duration(days: 365)),
-    ).then((value) {
+            context: context,
+            initialDate:
+                _serviceRequestBloc.selectedToDateTime ?? state.selectedDate,
+            firstDate: _serviceRequestBloc.selectedFromDateTime,
+            lastDate: DateTime(DateTime.now().year + 5))
+        .then((value) {
       if (value != null) {
         _serviceRequestBloc.selectedToDateTime = value;
         _serviceRequestBloc.selectedToDate =
@@ -270,13 +282,14 @@ class _ServiceRequestManagementPageState
                   searchTerm: _searchController.text,
                   page: _page,
                   limit: _limit,
-                  fromDate: fromDateController.text,
-                  toDate: toDateController.text));
+                  fromDate: _serviceRequestBloc.selectedFromDate,
+                  toDate: _serviceRequestBloc.selectedToDate));
         }
         toDateController.text =
             value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
         FocusScope.of(context).unfocus();
         debugPrint("toDatesss ${toDateController.text}");
+        debugPrint("date check ${_serviceRequestBloc.selectedToDateTime}");
       }
     });
   }
@@ -292,8 +305,8 @@ class _ServiceRequestManagementPageState
                 statusFilterId: _serviceRequestBloc.statusFilterId == 0
                     ? null
                     : _serviceRequestBloc.statusFilterId,
-                fromDate: fromDateController.text,
-                toDate: toDateController.text,
+                fromDate: _serviceRequestBloc.selectedFromDate,
+                toDate: _serviceRequestBloc.selectedToDate,
                 context: context,
                 page: _page,
                 limit: _limit,
@@ -704,8 +717,8 @@ class _ServiceRequestManagementPageState
             ServiceRequestManagementEvent.getServiceRequests(
                 context: context,
                 page: _page,
-                fromDate: fromDateController.text,
-                toDate: toDateController.text,
+                fromDate: _serviceRequestBloc.selectedFromDate,
+                toDate: _serviceRequestBloc.selectedToDate,
                 searchTerm: _searchController.text,
                 limit: _limit,
                 statusFilterId: _serviceRequestBloc.statusFilterId == 0
@@ -797,8 +810,8 @@ class _ServiceRequestManagementPageState
                         limit: _limit,
                         searchTerm: _searchController.text,
                         statusFilterId: _serviceRequestBloc.statusFilterId,
-                        fromDate: fromDateController.text,
-                        toDate: toDateController.text));
+                        fromDate: _serviceRequestBloc.selectedFromDate,
+                        toDate: _serviceRequestBloc.selectedToDate));
                 updateData();
               }
             },
@@ -811,8 +824,8 @@ class _ServiceRequestManagementPageState
                       limit: _limit,
                       searchTerm: _searchController.text,
                       statusFilterId: _serviceRequestBloc.statusFilterId,
-                      fromDate: fromDateController.text,
-                      toDate: toDateController.text));
+                      fromDate: _serviceRequestBloc.selectedFromDate,
+                      toDate: _serviceRequestBloc.selectedToDate));
               updateData();
             },
             onPreviousPressed: () {
@@ -825,8 +838,8 @@ class _ServiceRequestManagementPageState
                         limit: _limit,
                         searchTerm: _searchController.text,
                         statusFilterId: _serviceRequestBloc.statusFilterId,
-                        fromDate: fromDateController.text,
-                        toDate: toDateController.text));
+                        fromDate: _serviceRequestBloc.selectedFromDate,
+                        toDate: _serviceRequestBloc.selectedToDate));
                 updateData();
               }
             });

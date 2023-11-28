@@ -180,7 +180,8 @@ class _DashboardPageState extends State<DashboardPage> {
                                                   ?.totalHours
                                                   ?.toStringAsFixed(2),
                                               state.dashboardResponse?.data
-                                                  ?.totalSales,
+                                                  ?.totalSales
+                                                  ?.toStringAsFixed(2),
                                               state.dashboardResponse?.data
                                                   ?.clientCount,
                                               state.dashboardResponse?.data
