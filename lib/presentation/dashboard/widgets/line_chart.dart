@@ -1,21 +1,18 @@
-import 'package:admin_580_tech/application/bloc/dashboard/dashboard_bloc.dart';
-import 'package:admin_580_tech/domain/dashboard/model/dashboard_response.dart';
-import 'package:admin_580_tech/infrastructure/dashboard/dashboard_repository.dart';
-import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
-import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
-import 'package:admin_580_tech/presentation/widget/custom_text.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
+import '../../../application/bloc/dashboard/dashboard_bloc.dart';
 import '../../../core/custom_debugger.dart';
 import '../../../core/enum.dart';
 import '../../../core/responsive.dart';
 import '../../../core/text_styles.dart';
 import '../../../core/utility.dart';
-import '../../widget/common_date_picker_widget.dart';
+import '../../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../../widget/custom_dropdown.dart';
+import '../../widget/custom_sizedbox.dart';
+import '../../widget/custom_text.dart';
 import '../../widget/dashboard_date_picker.dart';
 
 class BarChartWidget extends StatefulWidget {
@@ -90,19 +87,19 @@ class BarChartWidgetState extends State<BarChartWidget> {
                         color: AppColor.primaryColor.val,
                       ),
                     ),
-                    CustomSizedBox(
+                    const CustomSizedBox(
                       width: 50,
                     ),
                     BlocBuilder<DashboardBloc, DashboardState>(
                       builder: (context, state) {
-                        return _FilterDropDown(context, widget.bloc);
+                        return _filterDropDown(context, widget.bloc);
                       },
                     ),
                     Responsive.isWeb(context)
-                        ? CustomSizedBox(
+                        ? const CustomSizedBox(
                             width: 10,
                           )
-                        : CustomSizedBox(
+                        : const CustomSizedBox(
                             height: 50,
                           ),
                     DashBoardDatePickerWidget(
@@ -115,6 +112,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
                       dateController: widget.startDate,
                       dropDownValue: state.filterId,
                       onChanged: () {
+                        debugPrint("filter value ${state.filterId}");
                         widget.bloc.add(DashboardEvent.getDashboard(
                             userId: SharedPreffUtil().getAdminId,
                             year: state.filterId == 1
@@ -125,7 +123,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
                             isCallAlertApiCall: false));
                       },
                     ),
-                    CustomSizedBox(
+                    const CustomSizedBox(
                       width: 10,
                     ),
                     DashBoardDatePickerWidget(
@@ -152,75 +150,94 @@ class BarChartWidgetState extends State<BarChartWidget> {
                 ),
               ),
             ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.53,
-              width: Responsive.isWeb(context)
-                  ? MediaQuery.of(context).size.width * .5
-                  : MediaQuery.of(context).size.width,
-              color: AppColor.white.val,
-              child: AspectRatio(
-                aspectRatio: 10,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      final barsSpace = 4.0 * constraints.maxWidth / 100;
-                      final barsWidth = 8.0 * constraints.maxWidth / 200;
-                      return BlocBuilder<DashboardBloc, DashboardState>(
-                        builder: (context, state) {
-                          return BarChart(
-                            BarChartData(
-                              alignment: BarChartAlignment.center,
-                              barTouchData: BarTouchData(
-                                enabled: false,
-                              ),
-                              titlesData: FlTitlesData(
-                                show: true,
-                                bottomTitles: AxisTitles(
-                                  sideTitles: SideTitles(
-                                    showTitles: true,
-                                    reservedSize: 28,
-                                    getTitlesWidget: bottomTitles,
+            widget.mapValues.values.every((element) => element == 0)
+                ? Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * .2,
+                        vertical: MediaQuery.of(context).size.height * .2),
+                    child: const CustomText(
+                      'No Records Found',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  )
+                : Container(
+                    height: MediaQuery.of(context).size.height * 0.53,
+                    width: Responsive.isWeb(context)
+                        ? MediaQuery.of(context).size.width * .5
+                        : MediaQuery.of(context).size.width,
+                    color: AppColor.white.val,
+                    child: AspectRatio(
+                      aspectRatio: 10,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            final barsSpace = 4.0 * constraints.maxWidth / 100;
+                            final barsWidth = 8.0 * constraints.maxWidth / 200;
+                            return BlocBuilder<DashboardBloc, DashboardState>(
+                              builder: (context, state) {
+                                return BarChart(
+                                  BarChartData(
+                                    alignment: BarChartAlignment.center,
+                                    barTouchData: BarTouchData(
+                                      touchTooltipData: BarTouchTooltipData(
+                                        fitInsideVertically: true,
+                                      ),
+                                      enabled: true,
+                                    ),
+                                    titlesData: FlTitlesData(
+                                      show: true,
+                                      bottomTitles: AxisTitles(
+                                        sideTitles: SideTitles(
+                                          showTitles: true,
+                                          reservedSize: 28,
+                                          getTitlesWidget: bottomTitles,
+                                        ),
+                                      ),
+                                      leftTitles: AxisTitles(
+                                        sideTitles: SideTitles(
+                                          showTitles: true,
+                                          reservedSize: 40,
+                                          getTitlesWidget: leftTitles,
+                                        ),
+                                      ),
+                                      topTitles: AxisTitles(
+                                        sideTitles:
+                                            SideTitles(showTitles: false),
+                                      ),
+                                      rightTitles: AxisTitles(
+                                        sideTitles:
+                                            SideTitles(showTitles: false),
+                                      ),
+                                    ),
+                                    gridData: FlGridData(
+                                      drawHorizontalLine: true,
+                                      show: true,
+                                      checkToShowHorizontalLine: (value) =>
+                                          value % 10 == 0,
+                                      getDrawingHorizontalLine: (value) =>
+                                          FlLine(
+                                        color: AppColor.borderColor.val,
+                                        strokeWidth: 1,
+                                      ),
+                                      drawVerticalLine: false,
+                                    ),
+                                    borderData: FlBorderData(
+                                      show: false,
+                                    ),
+                                    groupsSpace: barsSpace,
+                                    barGroups:
+                                        getData(barsWidth, barsSpace, state),
                                   ),
-                                ),
-                                leftTitles: AxisTitles(
-                                  sideTitles: SideTitles(
-                                    showTitles: true,
-                                    reservedSize: 40,
-                                    getTitlesWidget: leftTitles,
-                                  ),
-                                ),
-                                topTitles: AxisTitles(
-                                  sideTitles: SideTitles(showTitles: false),
-                                ),
-                                rightTitles: AxisTitles(
-                                  sideTitles: SideTitles(showTitles: false),
-                                ),
-                              ),
-                              gridData: FlGridData(
-                                show: true,
-                                checkToShowHorizontalLine: (value) =>
-                                    value % 10 == 0,
-                                getDrawingHorizontalLine: (value) => FlLine(
-                                  color: AppColor.borderColor.val,
-                                  strokeWidth: 1,
-                                ),
-                                drawVerticalLine: false,
-                              ),
-                              borderData: FlBorderData(
-                                show: false,
-                              ),
-                              groupsSpace: barsSpace,
-                              barGroups: getData(barsWidth, barsSpace, state),
-                            ),
-                          );
-                        },
-                      );
-                    },
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
           ],
         );
       },
@@ -231,6 +248,7 @@ class BarChartWidgetState extends State<BarChartWidget> {
       double barsWidth, double barsSpace, DashboardState state) {
     return List.generate(widget.mapValues.length, (index) {
       return BarChartGroupData(
+        // showingTooltipIndicators: [0],
         x: index,
         barsSpace: barsSpace,
         barRods: [
@@ -245,34 +263,28 @@ class BarChartWidgetState extends State<BarChartWidget> {
     });
   }
 
-  CustomDropdown<int> _FilterDropDown(
+  CustomDropdown<int> _filterDropDown(
       BuildContext context, DashboardBloc bloc) {
     return CustomDropdown<int>(
       onChange: (int value, int index) {
-        // widget.dropDownValue = value;
         bloc.add(DashboardEvent.changeAxis(filterId: value));
 
-        // print('fff${widget.dropDownValue}');
-
-        print('drop down value ${value}');
-        print('drop down value from sate ${bloc.state.filterId}');
         var now = DateTime.now();
         if (value == 0) {
           widget.startDate.text = Utility.detailDate(DateTime(now.year, 1, 1));
           widget.endDate.text = Utility.detailDate(DateTime(now.year, 12, 31));
         } else if (value == 1) {
-          var pastYear = DateTime(now.year, 1, 1).subtract(Duration(days: 1));
+          var pastYear =
+              DateTime(now.year, 1, 1).subtract(const Duration(days: 1));
           widget.startDate.text =
               Utility.detailDate(DateTime(pastYear.year, 1, 1));
           widget.endDate.text =
               Utility.detailDate(DateTime(pastYear.year, 12, 31));
         } else if (value == 2) {
           widget.endDate.text = Utility.detailDate(DateTime.now());
-          var startDate = DateTime.now().subtract(Duration(days: 7));
+          var startDate = DateTime.now().subtract(const Duration(days: 7));
           widget.startDate.text = Utility.detailDate(startDate);
         }
-
-        print("inside dropdown ${bloc.state.filterId}");
 
         bloc.add(DashboardEvent.getDashboard(
             userId: SharedPreffUtil().getAdminId,

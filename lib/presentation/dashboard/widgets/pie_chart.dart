@@ -30,7 +30,6 @@ class PieChartPageState extends State<PieChartPage> {
 
   @override
   Widget build(BuildContext context) {
-    var tot;
     return Container(
       color: AppColor.white.val,
       height: MediaQuery.of(context).size.height * .4,
@@ -49,7 +48,7 @@ class PieChartPageState extends State<PieChartPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CustomText(
-                  AppString.client.val,
+                  AppString.clients.val,
                   style: TS().gRoboto(
                     fontSize: FS.font20.val,
                     fontWeight: FW.w500.val,
@@ -120,15 +119,8 @@ class PieChartPageState extends State<PieChartPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  widget.percentage! > 0.0
-                      ? Icons.arrow_upward
-                      : Icons.arrow_downward,
-                  size: 12,
-                  color: AppColor.green.val,
-                ),
                 CustomText(
-                  widget.percentage?.abs().toStringAsFixed(2) ?? '',
+                  '${widget.percentage?.toStringAsFixed(2)}%' ?? '',
                   style: TS().gRoboto(
                     fontSize: FS.font12.val,
                     fontWeight: FW.w400.val,
@@ -163,8 +155,8 @@ class PieChartPageState extends State<PieChartPage> {
                   size:
                       Responsive.isWeb(context) ? FS.font12.val : FS.font10.val,
                 ),
-                SizedBox(
-                  width: 5,
+                const SizedBox(
+                  width: 24,
                 ),
                 Indicator(
                   color: AppColor.lightGrey.val,

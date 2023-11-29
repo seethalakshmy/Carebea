@@ -19,11 +19,11 @@ class AlertList extends StatefulWidget {
 class _AlertListState extends State<AlertList> {
   DashboardBloc bloc = DashboardBloc(DashboardRepository());
   List alertList = [
-    'Client\n Compliant',
+    'Client\n Complaints',
     "Care Ambassador\n Complaints",
     "Missed Scheduled\n Shifts",
-    "Client Cancelled\n Shifts",
-    "Care Ambassador\n Cancelled Shifts",
+    "Client Canceled\n Shifts",
+    "Care Ambassador\n Canceled Shifts",
     ""
   ];
 
@@ -59,7 +59,7 @@ class _AlertListState extends State<AlertList> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CustomText(
-                      "Alert",
+                      "Alerts",
                       style: TS().gRoboto(
                         fontSize: Responsive.isWeb(context)
                             ? FS.font16.val

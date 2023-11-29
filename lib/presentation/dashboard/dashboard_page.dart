@@ -6,6 +6,7 @@ import 'package:admin_580_tech/presentation/dashboard/widgets/line_chart.dart';
 import 'package:admin_580_tech/presentation/dashboard/widgets/pie_chart.dart';
 import 'package:admin_580_tech/presentation/widget/loader_view.dart';
 import 'package:auto_route/annotations.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -33,7 +34,7 @@ class _DashboardPageState extends State<DashboardPage> {
   List<String> nameList = [
     "Hours",
     "Sales",
-    "Clients",
+    "Care Recipient",
     "Care Ambassadors",
   ];
 
@@ -83,10 +84,6 @@ class _DashboardPageState extends State<DashboardPage> {
                   toDate: '')),
             child: BlocBuilder<DashboardBloc, DashboardState>(
               builder: (context, state) {
-                print(
-                    'hello testing ${state.alertResponse?.data?.cgQueryCount}');
-                print(
-                    'hello testing22 ${state.dashboardResponse?.data?.dailyCounts}');
                 return state.isLoading
                     ? const LoaderView()
                     : (state.isError)
@@ -111,9 +108,12 @@ class _DashboardPageState extends State<DashboardPage> {
                                                 state.dashboardResponse?.data
                                                     ?.totalHours
                                                     ?.toStringAsFixed(2),
-                                                state.dashboardResponse?.data
-                                                    ?.totalSales
-                                                    ?.toStringAsFixed(2),
+                                                Utility.formatAmount(state
+                                                        .dashboardResponse
+                                                        ?.data
+                                                        ?.totalSales
+                                                        ?.toDouble() ??
+                                                    0.0),
                                                 state.dashboardResponse?.data
                                                     ?.clientCount,
                                                 state.dashboardResponse?.data
@@ -179,9 +179,12 @@ class _DashboardPageState extends State<DashboardPage> {
                                               state.dashboardResponse?.data
                                                   ?.totalHours
                                                   ?.toStringAsFixed(2),
-                                              state.dashboardResponse?.data
-                                                  ?.totalSales
-                                                  ?.toStringAsFixed(2),
+                                              Utility.formatAmount(state
+                                                      .dashboardResponse
+                                                      ?.data
+                                                      ?.totalSales
+                                                      ?.toDouble() ??
+                                                  0.0),
                                               state.dashboardResponse?.data
                                                   ?.clientCount,
                                               state.dashboardResponse?.data
@@ -332,7 +335,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                           CustomSizedBox(
                                               height: DBL.twenty.val),
                                           _newCareAmbassadorOnboarded(
-                                              "Service Completed",
+                                              "Services Completed",
                                               state.dashboardResponse?.data
                                                       ?.totalServiceCompleted
                                                       .toString() ??
@@ -354,10 +357,12 @@ class _DashboardPageState extends State<DashboardPage> {
 
   _detailsCardView({required List list}) {
     return CustomSizedBox(
-      height: 250,
-      width: 500,
+      height: MediaQuery.of(context).size.height * .36,
+      width: MediaQuery.of(context).size.width * .5,
       child: GridView.builder(
-        physics: NeverScrollableScrollPhysics(),
+        dragStartBehavior: DragStartBehavior.start,
+        primary: true,
+        physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio: 2.5,
           mainAxisSpacing: 10,

@@ -140,10 +140,12 @@ class RowColonCombo extends StatelessWidget {
             fontSize: fontSize,
           ),
         ),
-        Wrap(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: list
                   ?.map(
-                    (e) => Wrap(
+                    (e) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AlertTextLabel(
                           e,
@@ -151,15 +153,14 @@ class RowColonCombo extends StatelessWidget {
                           fontWeight: fontWeight,
                           fontSize: fontSize,
                         ),
-                        SizedBox(
-                          width: 20,
+                        const SizedBox(
+                          height: 10,
                         )
                       ],
                     ),
                   )
                   .toList() ??
               [],
-
         ),
         RichText(
           text: TextSpan(style: const TextStyle(fontSize: 12), children: [

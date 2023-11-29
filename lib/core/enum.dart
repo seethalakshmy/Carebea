@@ -215,6 +215,7 @@ enum AppString {
   time("Time"),
   search("Search"),
   client("Client"),
+  clients("Clients"),
   clientProfiles("Client Profiles"),
   clientName("Client Name"),
   careRecipientName("Care Recipient"),

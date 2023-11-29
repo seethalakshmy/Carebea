@@ -347,6 +347,11 @@ class _CareGiversPageState extends State<CareGiversPage> {
         _searchNode.requestFocus();
         _getCareGiverEvent();
       },
+      onChanged: (String value) {
+        if (_searchController.text.isEmpty || _searchController.text == '') {
+          _getCareGiverEvent();
+        }
+      },
       suffixIcon: InkWell(
         onTap: () {
           _getCareGiverEvent();
