@@ -132,7 +132,7 @@ class ServiceDetailsData {
     String? clientAlternativeMobile,
     String? decisionMakerMobile,
     String? decisionMakerAlternativeMobile,
-    String? parentProPic,
+    dynamic? parentProPic,
     String? clientProPic,
     String? parentProfileThumbnail,
     String? clientProfileThumbnail,
@@ -390,7 +390,7 @@ class ServiceDetailsData {
   String? _clientAlternativeMobile;
   String? _decisionMakerMobile;
   String? _decisionMakerAlternativeMobile;
-  String? _parentProPic;
+  dynamic? _parentProPic;
   String? _clientProPic;
   String? _parentProfileThumbnail;
   String? _clientProfileThumbnail;
@@ -449,7 +449,7 @@ class ServiceDetailsData {
     String? clientAlternativeMobile,
     String? decisionMakerMobile,
     String? decisionMakerAlternativeMobile,
-    String? parentProPic,
+    dynamic? parentProPic,
     String? clientProPic,
     String? parentProfileThumbnail,
     String? clientProfileThumbnail,
@@ -617,7 +617,7 @@ class ServiceDetailsData {
   String? get clientAlternativeMobile => _clientAlternativeMobile;
   String? get decisionMakerMobile => _decisionMakerMobile;
   String? get decisionMakerAlternativeMobile => _decisionMakerAlternativeMobile;
-  String? get parentProPic => _parentProPic;
+  dynamic? get parentProPic => _parentProPic;
   String? get clientProPic => _clientProPic;
   String? get parentProfileThumbnail => _parentProfileThumbnail;
   String? get clientProfileThumbnail => _clientProfileThumbnail;

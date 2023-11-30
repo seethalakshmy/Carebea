@@ -127,6 +127,21 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
   }
 
   _usersView(BuildContext context) {
+    if (_page == 1) {
+      _start = 0;
+      _end = _subscriptionBloc.subscriptionList.length < _limit
+          ? _subscriptionBloc.subscriptionList.length
+          : _limit;
+      debugPrint("end $_end");
+      debugPrint("length ${_subscriptionBloc.subscriptionList.length}");
+      debugPrint("limit $_limit");
+    } else {
+      _start = (_page * _limit) - 10;
+      _end = _start + _subscriptionBloc.subscriptionList.length;
+      debugPrint("end $_end");
+      debugPrint("length ${_subscriptionBloc.subscriptionList.length}");
+      debugPrint("limit $_limit");
+    }
     return _subscriptionBloc.subscriptionList.isNotEmpty
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,6 +184,11 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
       onSubmitted: (String val) {
         _getSubscriptionEvent();
       },
+      onChanged: (String value) {
+        if (_searchController.text == '') {
+          _getSubscriptionEvent();
+        }
+      },
       suffixIcon: InkWell(
         onTap: () {
           _getSubscriptionEvent();
@@ -183,12 +203,19 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
   }
 
   void _getSubscriptionEvent() {
+    if (_searchController.text != '' && _subscriptionBloc.filterId != 0) {
+      updateData();
+    }
     _subscriptionBloc.add(SubscriptionEvent.getSubscription(
         userId: userId,
-        page: _page.toString(),
+        page: (_searchController.text == '' && _subscriptionBloc.filterId == 0)
+            ? _page.toString()
+            : '1',
         limit: _limit.toString(),
         searchTerm: _searchController.text.trim(),
-        subscriptionType: _subscriptionBloc.filterId.toString()));
+        subscriptionType: _subscriptionBloc.filterId == 0
+            ? null
+            : _subscriptionBloc.filterId.toString()));
   }
 
   CustomDropdown<int> _statusDropDown(BuildContext context) {
@@ -199,11 +226,11 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
         _subscriptionBloc.filterId = index;
         _subscriptionBloc.add(SubscriptionEvent.getSubscription(
             userId: userId,
-            page: _page.toString(),
+            page: '1',
             limit: _limit.toString(),
             searchTerm: _searchController.text.trim(),
             subscriptionType: _subscriptionBloc.filterId == 0
-                ? Null
+                ? null
                 : _subscriptionBloc.filterId.toString()));
       },
       dropdownButtonStyle: DropdownButtonStyle(
@@ -247,7 +274,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
           )
           .toList(),
       child: CustomText(
-        AppString.subscription.val,
+        AppString.subscriptionType.val,
         style: TS().gRoboto(
             fontWeight: FW.w500.val,
             fontSize: FS.font15.val,

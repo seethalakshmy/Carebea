@@ -263,8 +263,7 @@ class _AdminsPageState extends State<AdminsPage> {
     return sharedPrefUtil.getEditAdmin
         ? CustomButton(
             onPressed: () {
-              autoTabRouter?.setActiveIndex(12);
-              // autoTabRouter?.navigate(AdminCreationRoute());
+              autoTabRouter?.navigate(AdminCreationRoute());
             },
             text: AppString.create.val,
             color: AppColor.primaryColor.val,
