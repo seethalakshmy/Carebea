@@ -174,6 +174,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
             : null;
       },
       onSubmitted: (String value) {
+        _userBloc.page = 1;
         _userBloc.add(UserManagementEvent.getUsers(
             userId: adminId ?? '',
             page: _userBloc.page.toString(),
@@ -203,6 +204,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
   CustomDropdown<int> _statusDropDown(BuildContext context) {
     return CustomDropdown<int>(
       onChange: (int value, int index) {
+        _userBloc.page = 1;
         _userBloc.filterId = index == 1
             ? true
             : index == 2

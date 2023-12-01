@@ -43,7 +43,10 @@ class TableVerificationButton extends StatelessWidget {
                 onStatusChange!();
               } else {
                 if (verificationStatus == Verification.trainingStarted.val ||
-                    verificationStatus == Verification.interViewStarted.val) {
+                    verificationStatus == Verification.interViewStarted.val ||
+                    verificationStatus == Verification.trainingCompleted.val ||
+                    verificationStatus == Verification.interViewCompleted.val ||
+                    verificationStatus == Verification.interViewFailed.val) {
                   autoTabRouter?.navigate(CareGiverProfileRoute(
                     id: userId!,
                   ));

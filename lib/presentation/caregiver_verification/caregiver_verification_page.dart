@@ -1341,9 +1341,14 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
         state.response?.data?.backgroundVerification?.personalDetails;
     CertificateVerification? certificateVerification =
         state.response?.data?.certificateVerification;
-    return (personalDetails?.approvalStatus == Approve.approved.val &&
-            certificateVerification?.approvalStatus == Approve.approved.val) ||
-        (verificationStatus == Verification.trainingStarted.val);
+    if (personalDetails?.approvalStatus == Approve.approved.val &&
+        certificateVerification?.approvalStatus == Approve.approved.val &&
+        (verificationStatus == Verification.trainingStarted.val ||
+            verificationStatus == Verification.trainingCompleted.val)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   bool isLarge(BuildContext context) =>

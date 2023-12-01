@@ -132,7 +132,7 @@ class ServiceDetailsData {
     String? clientAlternativeMobile,
     String? decisionMakerMobile,
     String? decisionMakerAlternativeMobile,
-    String? parentProPic,
+    dynamic? parentProPic,
     String? clientProPic,
     String? parentProfileThumbnail,
     String? clientProfileThumbnail,
@@ -390,7 +390,7 @@ class ServiceDetailsData {
   String? _clientAlternativeMobile;
   String? _decisionMakerMobile;
   String? _decisionMakerAlternativeMobile;
-  String? _parentProPic;
+  dynamic? _parentProPic;
   String? _clientProPic;
   String? _parentProfileThumbnail;
   String? _clientProfileThumbnail;
@@ -449,7 +449,7 @@ class ServiceDetailsData {
     String? clientAlternativeMobile,
     String? decisionMakerMobile,
     String? decisionMakerAlternativeMobile,
-    String? parentProPic,
+    dynamic? parentProPic,
     String? clientProPic,
     String? parentProfileThumbnail,
     String? clientProfileThumbnail,
@@ -617,7 +617,7 @@ class ServiceDetailsData {
   String? get clientAlternativeMobile => _clientAlternativeMobile;
   String? get decisionMakerMobile => _decisionMakerMobile;
   String? get decisionMakerAlternativeMobile => _decisionMakerAlternativeMobile;
-  String? get parentProPic => _parentProPic;
+  dynamic? get parentProPic => _parentProPic;
   String? get clientProPic => _clientProPic;
   String? get parentProfileThumbnail => _parentProfileThumbnail;
   String? get clientProfileThumbnail => _clientProfileThumbnail;
@@ -1687,7 +1687,7 @@ class NotCompletedTier1 {
 
   NotCompletedTier1.fromJson(dynamic json) {
     _id = json['id'];
-    _service = json['service'];
+    _service = json['serviceName'];
     _isExtra = json['is_extra'];
   }
   String? _id;
@@ -1710,7 +1710,7 @@ class NotCompletedTier1 {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = _id;
-    map['service'] = _service;
+    map['serviceName'] = _service;
     map['is_extra'] = _isExtra;
     return map;
   }
@@ -1738,7 +1738,7 @@ class NotCompletedTier2 {
 
   NotCompletedTier2.fromJson(dynamic json) {
     _id = json['id'];
-    _service = json['service'];
+    _service = json['serviceName'];
     _isExtra = json['is_extra'];
   }
   String? _id;
@@ -1761,7 +1761,7 @@ class NotCompletedTier2 {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = _id;
-    map['service'] = _service;
+    map['serviceName'] = _service;
     map['is_extra'] = _isExtra;
     return map;
   }

@@ -127,6 +127,26 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
   }
 
   _usersView(BuildContext context) {
+    // if (_searchController.text != '' || _subscriptionBloc.filterId != 0) {
+    //   debugPrint('builddddd');
+    //
+    //   _page = 1;
+    // }
+    if (_page == 1) {
+      _start = 0;
+      _end = _subscriptionBloc.subscriptionList.length < _limit
+          ? _subscriptionBloc.subscriptionList.length
+          : _limit;
+      debugPrint("end $_end");
+      debugPrint("length ${_subscriptionBloc.subscriptionList.length}");
+      debugPrint("limit $_limit");
+    } else {
+      _start = (_page * _limit) - 10;
+      _end = _start + _subscriptionBloc.subscriptionList.length;
+      debugPrint("end $_end");
+      debugPrint("length ${_subscriptionBloc.subscriptionList.length}");
+      debugPrint("limit $_limit");
+    }
     return _subscriptionBloc.subscriptionList.isNotEmpty
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -167,7 +187,13 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
       hintText: AppString.search.val,
       hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
       onSubmitted: (String val) {
+        _page = 1;
         _getSubscriptionEvent();
+      },
+      onChanged: (String value) {
+        if (_searchController.text == '') {
+          _getSubscriptionEvent();
+        }
       },
       suffixIcon: InkWell(
         onTap: () {
@@ -188,7 +214,9 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
         page: _page.toString(),
         limit: _limit.toString(),
         searchTerm: _searchController.text.trim(),
-        subscriptionType: _subscriptionBloc.filterId.toString()));
+        subscriptionType: _subscriptionBloc.filterId == 0
+            ? null
+            : _subscriptionBloc.filterId.toString()));
   }
 
   CustomDropdown<int> _statusDropDown(BuildContext context) {
@@ -196,6 +224,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
       onChange: (int value, int index) {
         debugPrint('value $value');
         debugPrint('index $index');
+        _page = 1;
         _subscriptionBloc.filterId = index;
         _subscriptionBloc.add(SubscriptionEvent.getSubscription(
             userId: userId,
@@ -203,7 +232,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
             limit: _limit.toString(),
             searchTerm: _searchController.text.trim(),
             subscriptionType: _subscriptionBloc.filterId == 0
-                ? Null
+                ? null
                 : _subscriptionBloc.filterId.toString()));
       },
       dropdownButtonStyle: DropdownButtonStyle(
@@ -247,7 +276,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
           )
           .toList(),
       child: CustomText(
-        AppString.subscription.val,
+        AppString.subscriptionType.val,
         style: TS().gRoboto(
             fontWeight: FW.w500.val,
             fontSize: FS.font15.val,

@@ -1,9 +1,5 @@
 import 'dart:developer';
 
-import 'package:admin_580_tech/core/string_extension.dart';
-import 'package:admin_580_tech/domain/service_request_management/model/service_request_list_response_model.dart';
-import 'package:admin_580_tech/presentation/service_request_management/widgets/service_details_alert.dart';
-import 'package:admin_580_tech/presentation/widget/header_view.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +11,10 @@ import '../../core/custom_snackbar.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
+import '../../core/string_extension.dart';
 import '../../core/text_styles.dart';
-import '../../core/utility.dart';
 import '../../domain/caregivers/model/types.dart';
+import '../../domain/service_request_management/model/service_request_list_response_model.dart';
 import '../../domain/service_request_management/model/service_request_response.dart';
 import '../../infrastructure/service_request_management/service_request_management_repository.dart';
 import '../widget/custom_alert_dialog_widget.dart';
@@ -34,8 +31,10 @@ import '../widget/custom_text.dart';
 import '../widget/custom_text_field.dart';
 import '../widget/empty_view.dart';
 import '../widget/error_view.dart';
+import '../widget/header_view.dart';
 import '../widget/pagination_view.dart';
 import '../widget/table_loader_view.dart';
+import 'widgets/service_details_alert.dart';
 
 @RoutePage()
 class ServiceRequestManagementPage extends StatefulWidget {
@@ -312,6 +311,21 @@ class _ServiceRequestManagementPageState
                 limit: _limit,
                 searchTerm: _searchController.text));
       },
+      onChanged: (String value) {
+        if (_searchController.text == '') {
+          _serviceRequestBloc.add(
+              ServiceRequestManagementEvent.getServiceRequests(
+                  statusFilterId: _serviceRequestBloc.statusFilterId == 0
+                      ? null
+                      : _serviceRequestBloc.statusFilterId,
+                  fromDate: _serviceRequestBloc.selectedFromDate,
+                  toDate: _serviceRequestBloc.selectedToDate,
+                  context: context,
+                  page: _page,
+                  limit: _limit,
+                  searchTerm: _searchController.text));
+        }
+      },
       width: DBL.twoTen.val,
       height: DBL.fortySeven.val,
       controller: _searchController,
@@ -325,56 +339,6 @@ class _ServiceRequestManagementPageState
         path: IMG.search.val,
         height: 16,
         width: 16,
-      ),
-    );
-  }
-
-  CustomDropdown<int> _dateFilterDropDown(BuildContext context) {
-    return CustomDropdown<int>(
-      onChange: (int value, int index) {
-        CustomLog.log(value.toString());
-        _serviceRequestBloc.filterId = value;
-      },
-      dropdownButtonStyle: DropdownButtonStyle(
-        mainAxisAlignment: MainAxisAlignment.start,
-        width: DBL.twoTen.val,
-        height: DBL.fortySeven.val,
-        elevation: DBL.zero.val,
-        padding: EdgeInsets.only(left: DBL.fifteen.val),
-        backgroundColor: Colors.white,
-        primaryColor: AppColor.white.val,
-      ),
-      dropdownStyle: DropdownStyle(
-        borderRadius: BorderRadius.circular(DBL.zero.val),
-        elevation: 2,
-        color: AppColor.white.val,
-        padding: EdgeInsets.all(DBL.five.val),
-      ),
-      items: _serviceRequestBloc.filterList
-          .asMap()
-          .entries
-          .map(
-            (item) => DropdownItem<int>(
-              value: int.parse(item.value.filterId!),
-              child: Padding(
-                padding: EdgeInsets.all(DBL.eight.val),
-                child: Text(
-                  item.value.title ?? "",
-                  style: TS().gRoboto(
-                      fontWeight: FW.w400.val,
-                      fontSize: FS.font14.val,
-                      color: AppColor.columColor2.val),
-                ),
-              ),
-            ),
-          )
-          .toList(),
-      child: CustomText(
-        AppString.dateFilter.val,
-        style: TS().gRoboto(
-            fontWeight: FW.w400.val,
-            fontSize: FS.font14.val,
-            color: AppColor.columColor2.val),
       ),
     );
   }

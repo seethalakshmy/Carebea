@@ -123,7 +123,8 @@ class AdminsBloc extends Bloc<AdminEvent, AdminsState> {
       );
     }, (r) {
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context,
+            msg: "Status changed successfully");
         add(AdminEvent.getAdmins(
             userId: event.userId,
             page: page,

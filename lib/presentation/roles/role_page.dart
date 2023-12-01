@@ -223,6 +223,7 @@ class _RolesPageState extends State<RolesPage> {
       hintText: AppString.search.val,
       hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
       onSubmitted: (String value) {
+        _page = 1;
         _searchNode.requestFocus();
         _getCareGiverEvent();
       },
@@ -245,6 +246,13 @@ class _RolesPageState extends State<RolesPage> {
   }
 
   _rolesTable(RolesState state, BuildContext context) {
+    if (_page == 1) {
+      _start = 0;
+      _end = mRoles.length < _limit ? mRoles.length : _limit;
+    } else {
+      _start = (_page * _limit) - 10;
+      _end = _start + mRoles.length;
+    }
     return CSelectionArea(
       child: CDataTable2(
         minWidth: DBL.nineFifty.val,
@@ -381,9 +389,10 @@ class _RolesPageState extends State<RolesPage> {
   }
 
   _getCareGiverEvent() {
+    _updateData();
     _roleBloc.add(RolesEvent.getRoles(
         userId: _adminUserId,
-        page: _page,
+        page: _searchController.text == '' ? _page : 1,
         limit: _limit,
         searchTerm: _searchController.text.trim().isNotEmpty
             ? _searchController.text.trim()

@@ -1,8 +1,3 @@
-import 'package:admin_580_tech/infrastructure/complaints/complaints_repository.dart';
-import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
-import 'package:admin_580_tech/presentation/widget/custom_dropdown.dart';
-import 'package:admin_580_tech/presentation/widget/pagination_view.dart';
-import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -13,12 +8,14 @@ import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/text_styles.dart';
+import '../../infrastructure/complaints/complaints_repository.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';
-import '../widget/cached_image.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_data_table_2.dart';
+import '../widget/custom_dropdown.dart';
 import '../widget/custom_selection_area.dart';
 import '../widget/custom_shimmer.dart';
 import '../widget/custom_sizedbox.dart';
@@ -28,6 +25,8 @@ import '../widget/custom_text_field.dart';
 import '../widget/empty_view.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
+import '../widget/pagination_view.dart';
+import '../widget/table_loader_view.dart';
 
 @RoutePage()
 class HelpAndSupportPage extends StatefulWidget {
@@ -143,13 +142,6 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
                 height: 100,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  // physics: NeverScrollableScrollPhysics(),
-                  // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  //   childAspectRatio: 2,
-                  //   mainAxisSpacing: 10,
-                  //   crossAxisSpacing: 10,
-                  //   crossAxisCount: 2,
-                  // ),
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(5.0),
@@ -206,6 +198,21 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
 
   _complaintsView(BuildContext context) {
     debugPrint('total length ${_supportTicketsBloc.complaintList.length}');
+    if (_page == 1) {
+      _start = 0;
+      _end = _supportTicketsBloc.complaintList.length < _limit
+          ? _supportTicketsBloc.complaintList.length
+          : _limit;
+      debugPrint("end $_end");
+      debugPrint("length ${_supportTicketsBloc.complaintList.length}");
+      debugPrint("limit $_limit");
+    } else {
+      _start = (_page * _limit) - 10;
+      _end = _start + _supportTicketsBloc.complaintList.length;
+      debugPrint("end $_end");
+      debugPrint("length ${_supportTicketsBloc.complaintList.length}");
+      debugPrint("limit $_limit");
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -235,9 +242,11 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
       hintText: AppString.search.val,
       hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
       onChanged: (String value) {
+        _page = 1;
         _getCompliantsEvent();
       },
       onSubmitted: (String val) {
+        _page = 1;
         _getCompliantsEvent();
       },
       suffixIcon: InkWell(
@@ -263,12 +272,16 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
   }
 
   CustomDropdown<int> _statusDropDown(BuildContext context) {
+    var pages = (_totalItems / _limit).ceil();
+
     return CustomDropdown<int>(
       onChange: (int value, int index) {
+        _page = 1;
+
         _filterId = value;
         _supportTicketsBloc.add(ComplaintsEvent.getComplaints(
             userId: userId,
-            page: _page.toString(),
+            page: pages.toString(),
             limit: _limit.toString(),
             searchTerm: _searchController.text.trim(),
             status: value));
@@ -336,23 +349,26 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
         start: _start,
         onNextPressed: () {
           if (_page < totalPages) {
+            updateData();
+
             _page = _page + 1;
             _getCompliantsEvent();
-            updateData();
           }
         },
         onItemPressed: (i) {
+          updateData();
+
           debugPrint('inside pagination');
 
           _page = i;
           _getCompliantsEvent();
-          updateData();
         },
         onPreviousPressed: () {
           if (_page > 1) {
+            updateData();
+
             _page = _page - 1;
             _getCompliantsEvent();
-            updateData();
           }
         });
   }
@@ -366,68 +382,48 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
         dataRowHeight: DBL.sixty.val,
         columns: [
           DataColumn2(
-            //size: ColumnSize.S,
+            size: ColumnSize.S,
             fixedWidth: DBL.fifty.val,
             label: _columnsView(
                 text: AppString.slNo.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            //size: ColumnSize.L,
-            // fixedWidth: DBL.hundred.val,
+            size: ColumnSize.L,
             label: _columnsView(
-                text: AppString.id.val, fontWeight: FontWeight.bold),
+                text: AppString.complaintId.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            //size: ColumnSize.L,
-            /* fixedWidth: Responsive.isWeb(context)
-                ? MediaQuery.of(context).size.width / 8
-                : DBL.hundred.val,*/
+            size: ColumnSize.L,
             label: _columnsView(
                 text: AppString.createdBy.val, fontWeight: FontWeight.bold),
           ),
-          // DataColumn2(
-          //   //size: ColumnSize.L,
-          //   /* fixedWidth: Responsive.isWeb(context)
-          //       ? MediaQuery.of(context).size.width / 8
-          //       : DBL.hundred.val,*/
-          //   label: _columnsView(
-          //       text: AppString.caName.val, fontWeight: FontWeight.bold),
-          // ),
           DataColumn2(
-            //size: ColumnSize.L,
-            // fixedWidth: DBL.hundred.val,
+            size: ColumnSize.L,
             label: _columnsView(
                 text: AppString.category.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            //size: ColumnSize.L,
-            // fixedWidth: DBL.hundred.val,
+            size: ColumnSize.L,
             label: _columnsView(
                 text: AppString.complaint.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            //size: ColumnSize.L,
-            //fixedWidth: DBL.hundred.val,
+            size: ColumnSize.L,
             label: _columnsView(
                 text: AppString.createdDateTime.val,
                 fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            //size: ColumnSize.L,
-            // fixedWidth: DBL.hundred.val,
+            size: ColumnSize.L,
             label: _columnsView(
                 text: AppString.repliedOn.val, fontWeight: FontWeight.bold),
           ),
-
           DataColumn2(
-            //size: ColumnSize.L,
-            //fixedWidth: DBL.hundred.val,
+            size: ColumnSize.L,
             label: _columnsView(
                 text: AppString.role.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            //size: ColumnSize.L,
-            // fixedWidth: DBL.hundred.val,
             label: _columnsView(
                 text: AppString.status.val, fontWeight: FontWeight.bold),
           ),
@@ -450,20 +446,9 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
               DataCell(_rowsView(
                 text: item.complaintId.toString(),
               )),
-              // DataCell(_rowsView(
-              //     text:
-              //         "${item.clientName?.firstName ?? ""} ${item.clientName?.lastName ?? ""}")),
-              // //_tableRowImage("${item.clientName?.firstName} ${item.clientName?.lastName}","")
-              // DataCell(_rowsView(
-              //     text:
-              //         "${item.caregiverName?.firstName ?? ""} ${item.caregiverName?.lastName ?? ""}")),
               DataCell(_rowsView(
                   text:
                       "${item.clientName?.firstName} ${item.clientName?.lastName}")),
-              //_tableRowImage("${item.clientName?.firstName} ${item.clientName?.lastName}","")
-              // DataCell(_rowsView(
-              //     text:
-              //         "${item.caregiverName?.firstName} ${item.caregiverName?.lastName}")),
               DataCell(_rowsView(text: item.category ?? "")),
               DataCell(_rowsView(text: item.title)),
               DataCell(_rowsView(
@@ -473,8 +458,9 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
                   text: _supportTicketsBloc
                       .generateFormattedDate(item.repliedOn ?? ""))),
               DataCell(_rowsView(text: item.role)),
-              DataCell(_rowsView(text: item.status)),
-              // DataCell(_statusBox(item.status)),
+              DataCell(_rowsView(
+                  text:
+                      item.status == 'On-Going' ? 'Processing' : item.status)),
               DataCell(Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -495,31 +481,9 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
                   CustomSizedBox(
                     width: DBL.twentyThree.val,
                   ),
-                  // InkWell(
-                  //     onTap: () {},
-                  //     child: CustomSvg(
-                  //       path: IMG.refresh.val,
-                  //       height: Responsive.isWeb(context)
-                  //           ? DBL.fifteen.val
-                  //           : DBL.twelve.val,
-                  //       width: Responsive.isWeb(context)
-                  //           ? DBL.twenty.val
-                  //           : DBL.eighteen.val,
-                  //     )),
                   CustomSizedBox(
                     width: DBL.twentyThree.val,
                   ),
-                  // InkWell(
-                  //     onTap: () {},
-                  //     child: CustomSvg(
-                  //       path: IMG.edit.val,
-                  //       height: Responsive.isWeb(context)
-                  //           ? DBL.fifteen.val
-                  //           : DBL.twelve.val,
-                  //       width: Responsive.isWeb(context)
-                  //           ? DBL.fifteen.val
-                  //           : DBL.twelve.val,
-                  //     )),
                 ],
               )),
             ],
@@ -533,7 +497,7 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
     String? text,
   }) {
     return CustomText(
-      overflow: TextOverflow.ellipsis,
+      // overflow: TextOverflow.visible,
       text ?? "",
       softWrap: true,
       style: TS().gRoboto(
@@ -557,52 +521,6 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
           fontWeight: fontWeight,
           color: AppColor.columColor.val),
       textAlign: TextAlign.start,
-    );
-  }
-
-  Widget _tableRowImage(String text, String imgUrl) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(DBL.ten.val),
-          child: CachedImage(
-              height: DBL.thirty.val, width: DBL.thirty.val, imgUrl: imgUrl),
-        ),
-        CustomSizedBox(width: DBL.twelve.val),
-        Expanded(
-          child: CustomText(
-            text,
-            style: TS().gRoboto(
-                fontSize: Responsive.isWeb(context)
-                    ? DBL.fourteen.val
-                    : DBL.twelve.val,
-                fontWeight: FW.w400.val,
-                color: AppColor.rowColor.val),
-          ),
-        ),
-      ],
-    );
-  }
-
-  _statusBox(bool isActive) {
-    return CustomContainer.decoration(
-      width: DBL.seventy.val,
-      height: DBL.thirty.val,
-      padding:
-          EdgeInsets.symmetric(vertical: DBL.five.val, horizontal: DBL.ten.val),
-      decoration: BoxDecoration(
-          color: isActive ? AppColor.green3.val : AppColor.offWhite.val,
-          borderRadius: PR().circularRadius(DBL.eight.val)),
-      child: CustomText(
-        textAlign: TextAlign.center,
-        isActive ? AppString.active.val : AppString.inActive.val,
-        style: TS().gRoboto(
-          fontWeight: FW.w500.val,
-          fontSize: FS.font12.val,
-          color: isActive ? AppColor.green.val : AppColor.lightGrey6.val,
-        ),
-      ),
     );
   }
 

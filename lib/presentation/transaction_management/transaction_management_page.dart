@@ -93,7 +93,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
         ..add(TransactionManagementEvent.getTransactions(
             page: _transactionBloc.paginationPage.toString(),
             limit: _transactionBloc.limit,
-            searchTerm: _transactionBloc.searchQuery,
+            searchTerm: _searchController.text,
             filterId: 0,
             userId: adminId ?? '')),
       child: BlocBuilder<TransactionManagementBloc, TransactionManagementState>(
@@ -248,7 +248,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
             _transactionBloc.add(TransactionManagementEvent.getTransactions(
                 page: _transactionBloc.paginationPage.toString(),
                 limit: _transactionBloc.limit,
-                searchTerm: "",
+                searchTerm: _searchController.text,
                 filterId: 0,
                 userId: adminId ?? ''));
           },
@@ -297,17 +297,25 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
               child: CTextField(
                 onSubmitted: (val) {
                   _transactionBloc.searchQuery = val;
-
+                  _transactionBloc.paginationPage = 1;
                   _transactionBloc.add(
                       TransactionManagementEvent.getTransactions(
                           page: _transactionBloc.paginationPage.toString(),
                           limit: _transactionBloc.limit,
                           filterId: _transactionBloc.filterId,
-                          searchTerm: _transactionBloc.searchQuery,
+                          searchTerm: _searchController.text,
                           userId: adminId ?? ''));
                 },
                 onChanged: (val) {
-                  print("searched value : $val");
+                  if (_searchController.text == '') {
+                    _transactionBloc.add(
+                        TransactionManagementEvent.getTransactions(
+                            page: _transactionBloc.paginationPage.toString(),
+                            limit: _transactionBloc.limit,
+                            filterId: _transactionBloc.filterId,
+                            searchTerm: _searchController.text,
+                            userId: adminId ?? ''));
+                  }
                 },
                 width: Responsive.isWeb(context)
                     ? DBL.threeFifteen.val
@@ -317,10 +325,21 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                 hintText: AppString.search.val,
                 hintStyle: TS()
                     .gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
-                suffixIcon: CustomSvg(
-                  path: IMG.search.val,
-                  height: 16,
-                  width: 16,
+                suffixIcon: InkWell(
+                  onTap: () {
+                    _transactionBloc.add(
+                        TransactionManagementEvent.getTransactions(
+                            page: _transactionBloc.paginationPage.toString(),
+                            limit: _transactionBloc.limit,
+                            filterId: _transactionBloc.filterId,
+                            searchTerm: _transactionBloc.searchQuery,
+                            userId: adminId ?? ''));
+                  },
+                  child: CustomSvg(
+                    path: IMG.search.val,
+                    height: 16,
+                    width: 16,
+                  ),
                 ),
               ),
             ),
@@ -400,7 +419,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                     page: _transactionBloc.paginationPage.toString(),
                     limit: _transactionBloc.limit,
                     filterId: _transactionBloc.filterId,
-                    searchTerm: _transactionBloc.searchQuery,
+                    searchTerm: _searchController.text,
                     userId: adminId ?? ''));
                 updateData();
               }
@@ -411,7 +430,7 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
                   page: _transactionBloc.paginationPage.toString(),
                   limit: _transactionBloc.limit,
                   filterId: _transactionBloc.filterId,
-                  searchTerm: _transactionBloc.searchQuery,
+                  searchTerm: _searchController.text,
                   userId: adminId ?? ''));
               updateData();
             },
@@ -618,10 +637,11 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
       onChange: (int value, int index) {
         CustomLog.log(value.toString());
         _transactionBloc.filterId = value;
+        _transactionBloc.paginationPage = 1;
         _transactionBloc.add(TransactionManagementEvent.getTransactions(
             page: _transactionBloc.paginationPage.toString(),
             limit: _transactionBloc.limit,
-            searchTerm: _transactionBloc.searchQuery,
+            searchTerm: _searchController.text,
             filterId: _transactionBloc.filterId,
             userId: adminId ?? ''));
       },

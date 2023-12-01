@@ -90,7 +90,7 @@ class GetServiceData {
     num? serviceFee,
     String? transactionId,
     String? cancelledBy,
-    String? refundStatus,
+    dynamic? refundStatus,
     String? upcomingDays,
     String? suspectedOtherIssues,
     ServiceNeeded? serviceNeeded,
@@ -157,7 +157,7 @@ class GetServiceData {
   num? _serviceFee;
   String? _transactionId;
   String? _cancelledBy;
-  String? _refundStatus;
+  dynamic? _refundStatus;
   String? _upcomingDays;
   String? _suspectedOtherIssues;
   ServiceNeeded? _serviceNeeded;
@@ -176,7 +176,7 @@ class GetServiceData {
     num? serviceFee,
     String? transactionId,
     String? cancelledBy,
-    String? refundStatus,
+    dynamic? refundStatus,
     String? upcomingDays,
     String? suspectedOtherIssues,
     ServiceNeeded? serviceNeeded,
@@ -215,7 +215,7 @@ class GetServiceData {
   num? get serviceFee => _serviceFee;
   String? get transactionId => _transactionId;
   String? get cancelledBy => _cancelledBy;
-  String? get refundStatus => _refundStatus;
+  dynamic? get refundStatus => _refundStatus;
   String? get upcomingDays => _upcomingDays;
   String? get suspectedOtherIssues => _suspectedOtherIssues;
   ServiceNeeded? get serviceNeeded => _serviceNeeded;
