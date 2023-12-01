@@ -163,6 +163,7 @@ enum AppString {
   pendingDocumentsReminder(
       "Qualification & Test Result documents are pending to upload"),
   careAmbassador("Care Ambassador Management"),
+  careAmbassadors("Care Ambassador"),
   userManagement("Client Management"),
   roleManagement("Role Management"),
   adminManagement("Admin Management"),

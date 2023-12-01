@@ -282,6 +282,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
           onChange: (int value, int index) {
             CustomLog.log("val:::${value.toString()}");
             _filterId = value;
+            _page = 1;
             _getCareGiverEvent();
           },
           dropdownButtonStyle: DropdownButtonStyle(
@@ -344,6 +345,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
       hintText: AppString.search.val,
       hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
       onSubmitted: (String value) {
+        _page = 1;
         _searchNode.requestFocus();
         _getCareGiverEvent();
       },
@@ -441,7 +443,13 @@ class _CareGiversPageState extends State<CareGiversPage> {
                     if (verificationStatus ==
                             Verification.trainingStarted.val ||
                         verificationStatus ==
-                            Verification.interViewStarted.val) {
+                            Verification.interViewStarted.val ||
+                        verificationStatus ==
+                            Verification.trainingCompleted.val ||
+                        verificationStatus ==
+                            Verification.interViewCompleted.val ||
+                        verificationStatus ==
+                            Verification.interViewFailed.val) {
                       autoTabRouter?.navigate(CareGiverProfileRoute(
                         id: item.userId,
                       ));

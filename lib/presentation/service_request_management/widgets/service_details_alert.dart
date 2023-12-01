@@ -116,8 +116,11 @@ class ServiceDetailsAlert extends StatelessWidget {
     );
   }
 
+  var service;
   _clientViewWidget(BuildContext context) {
-    var service = serviceBloc.serviceDetailsList[0];
+    if (serviceBloc.serviceDetailsList.isNotEmpty) {
+      service = serviceBloc.serviceDetailsList[0];
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -461,6 +464,7 @@ class ServiceDetailsAlert extends StatelessWidget {
         neededServices.add(service.services!.servicesTier2![i].service ?? "");
       }
     }
+    debugPrint("incompleted services $notCompletedServices");
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -519,7 +523,7 @@ class ServiceDetailsAlert extends StatelessWidget {
               title: AppString.serviceCompleted.val,
               servicesList: completedServices),
         if (title == AppString.completed.val &&
-            (service.completedServices != null))
+            (service.notCompletedServices != null))
           _serviceShowingWidget(
               onTap: () {
                 serviceBloc.add(
@@ -686,7 +690,18 @@ class ServiceDetailsAlert extends StatelessWidget {
         ),
         serviceBloc.state.isShowingTransactionDetails
             ? title == AppString.canceled.val
-                ? _refundDetailsData(service, context)
+                ? service.refundDetails!.isNotEmpty
+                    ? _refundDetailsData(service, context)
+                    : Center(
+                        child: CustomText(
+                          'No data found',
+                          style: TS().gRoboto(
+                            color: AppColor.black2.val,
+                            fontWeight: FW.w600.val,
+                            fontSize: FS.font16.val,
+                          ),
+                        ),
+                      )
                 : _transactionDetailsData(service, context)
             : const CustomSizedBox(),
         CustomSizedBox(height: DBL.thirty.val)
@@ -777,8 +792,8 @@ class ServiceDetailsAlert extends StatelessWidget {
               context: context,
               height: DBL.eight.val,
               text: AppString.canceledBy.val,
-              subText: service.canceledBy == 'By Caregiver'
-                  ? AppString.careAmbassador.val
+              subText: service.canceledBy == 'By Care Ambassador'
+                  ? AppString.careAmbassadors.val
                   : AppString.client.val ?? ""),
           _textAndSubText(
               context: context,
@@ -792,7 +807,9 @@ class ServiceDetailsAlert extends StatelessWidget {
               subText:
                   '\$ ${Utility.formatAmount(double.tryParse(service.refundDetails?.first.price ?? "0.0") ?? 0.0)}'),
           CustomSizedBox(height: DBL.ten.val),
-          _refundStatusWidget(context, service),
+          service.refundDetails?.length == 0
+              ? _refundStatusWidget(context, service)
+              : Container(),
           _textAndSubText(
               context: context,
               height: DBL.eight.val,
@@ -861,7 +878,7 @@ class ServiceDetailsAlert extends StatelessWidget {
                                 radius: DBL.five.val,
                                 backgroundColor: AppColor.darkGrey.val,
                               ),
-                              service.refundDetails!.first.statusHistory!
+                              service.refundDetails?.first.statusHistory!
                                           .length ==
                                       index + 1
                                   ? const CustomSizedBox()
@@ -877,14 +894,14 @@ class ServiceDetailsAlert extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CustomText(
-                                service.refundDetails!.first
-                                        .statusHistory![index].title ??
+                                service.refundDetails?.first
+                                        .statusHistory?[index].title ??
                                     "",
                                 style: TS().gRoboto(
                                     fontSize: FS.font14.val,
                                     fontWeight: FW.w500.val,
-                                    color: service.refundDetails!.first
-                                                .statusHistory![index].status ==
+                                    color: service.refundDetails?.first
+                                                .statusHistory?[index].status ==
                                             1
                                         ? AppColor.amber.val
                                         : service
@@ -958,7 +975,18 @@ class ServiceDetailsAlert extends StatelessWidget {
         ),
       ),
       isShowing
-          ? _serviceDetails(servicesList: servicesList)
+          ? servicesList.isEmpty
+              ? Center(
+                  child: CustomText(
+                    'No data found',
+                    style: TS().gRoboto(
+                      color: AppColor.black2.val,
+                      fontWeight: FW.w600.val,
+                      fontSize: FS.font16.val,
+                    ),
+                  ),
+                )
+              : _serviceDetails(servicesList: servicesList)
           : const CustomSizedBox(),
       CustomSizedBox(height: DBL.ten.val)
     ]);

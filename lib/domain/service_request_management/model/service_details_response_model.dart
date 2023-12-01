@@ -1687,7 +1687,7 @@ class NotCompletedTier1 {
 
   NotCompletedTier1.fromJson(dynamic json) {
     _id = json['id'];
-    _service = json['service'];
+    _service = json['serviceName'];
     _isExtra = json['is_extra'];
   }
   String? _id;
@@ -1710,7 +1710,7 @@ class NotCompletedTier1 {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = _id;
-    map['service'] = _service;
+    map['serviceName'] = _service;
     map['is_extra'] = _isExtra;
     return map;
   }
@@ -1738,7 +1738,7 @@ class NotCompletedTier2 {
 
   NotCompletedTier2.fromJson(dynamic json) {
     _id = json['id'];
-    _service = json['service'];
+    _service = json['serviceName'];
     _isExtra = json['is_extra'];
   }
   String? _id;
@@ -1761,7 +1761,7 @@ class NotCompletedTier2 {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = _id;
-    map['service'] = _service;
+    map['serviceName'] = _service;
     map['is_extra'] = _isExtra;
     return map;
   }

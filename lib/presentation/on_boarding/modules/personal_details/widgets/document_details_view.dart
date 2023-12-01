@@ -69,8 +69,8 @@ class DocumentDetailsView extends StatelessWidget {
             _documentDetailsWidget(),
             _documentNoWidget(),
             CommonDatePickerWidget(
-              initialDate: DateTime.now().add(Duration(days: 30)),
-              firstDate: DateTime.now().add(Duration(days: 30)),
+              initialDate: DateTime.now(),
+              firstDate: DateTime.now(),
               lastDate: DateTime(3000),
               dateController: dateController,
               validator: (value) {
@@ -145,7 +145,7 @@ class DocumentDetailsView extends StatelessWidget {
             obscureText: false,
             keyBoardType: TextInputType.number,
             textInputAction: TextInputAction.done,
-            maxLength: 50,
+            maxLength: 30,
             onChanged: (value) {},
             onTap: () {},
           ),

@@ -223,6 +223,7 @@ class _RolesPageState extends State<RolesPage> {
       hintText: AppString.search.val,
       hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
       onSubmitted: (String value) {
+        _page = 1;
         _searchNode.requestFocus();
         _getCareGiverEvent();
       },

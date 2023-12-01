@@ -357,7 +357,8 @@ class CareGiverVerificationBloc
     }, (r) {
       if (r.status ?? false) {
         print(" ################## ${r.message}");
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context,
+            msg: "The Training Request has been successfully sent");
         autoTabRouter?.navigate(CareGiverProfileRoute(id: event.userId));
       } else {
         CSnackBar.showError(event.context, msg: r.message ?? "");
@@ -444,7 +445,7 @@ class CareGiverVerificationBloc
   }) {
     showGeneralDialog(
       barrierLabel: "",
-      barrierDismissible: true,
+      barrierDismissible: false,
       context: context,
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {

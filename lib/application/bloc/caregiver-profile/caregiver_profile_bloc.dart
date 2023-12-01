@@ -118,7 +118,8 @@ class CareGiverProfileBloc
     }, (r) {
       emit(state.copyWith(isLoadingStatusChangeApi: false));
       if (r.status ?? false) {
-        CSnackBar.showSuccess(event.context, msg: r.message ?? "");
+        CSnackBar.showSuccess(event.context,
+            msg: "Training started status changed successfully");
         add(CareGiverProfileEvent.onTappedStatusDropDown(
             !state.isShowStatusDropDown));
       } else {
@@ -147,7 +148,7 @@ class CareGiverProfileBloc
         await careGiverProfileRepository.careGiverTrainingVerify(
             userID: event.userId, status: event.status, adminId: event.adminId);
     CareGiverProfileState stateResult = homeResult.fold((l) {
-      // CSnackBar.showError(event.context, msg: l.error);
+      CSnackBar.showError(event.context, msg: l.error);
       emit(state.copyWith(
           status: state.response?.data?.verificationStatus ?? 0,
           isLoadingStatusChangeApi: false));
@@ -248,8 +249,12 @@ class CareGiverProfileBloc
     }, (r) {
       emit(state.copyWith(isLoadingStatusChangeApi: false));
       if (r.status ?? false) {
-        // CSnackBar.showSuccess(event.context, msg: r.message ?? "");
-        _completedPopUp(event.context, msg: 'Interview process completed');
+        if (event.status != Interview.started.val) {
+          _completedPopUp(event.context, msg: 'Interview process completed');
+        } else {
+          CSnackBar.showSuccess(event.context,
+              msg: "Interview started status changed successfully");
+        }
         // showGeneralDialog(
         //   barrierDismissible: true,
         //   barrierLabel: "",

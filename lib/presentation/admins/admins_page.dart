@@ -1,8 +1,8 @@
-import 'package:admin_580_tech/application/bloc/admins/admins_bloc.dart';
-import 'package:admin_580_tech/core/custom_debugger.dart';
-import 'package:admin_580_tech/core/enum.dart';
-import 'package:admin_580_tech/core/properties.dart';
-import 'package:admin_580_tech/core/responsive.dart';
+import '../../application/bloc/admins/admins_bloc.dart';
+import '../../core/custom_debugger.dart';
+import '../../core/enum.dart';
+import '../../core/properties.dart';
+import '../../core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
 import 'package:admin_580_tech/domain/admins/model/admin_get_response.dart';
 import 'package:admin_580_tech/domain/roles/model/get_role_response.dart';
@@ -298,6 +298,7 @@ class _AdminsPageState extends State<AdminsPage> {
           onChange: (int value, int index) {
             CustomLog.log("val:::${value.toString()}");
             filterId = value.toString();
+            _adminsBloc.page = 1;
             _getAdminEvent();
           },
           dropdownButtonStyle: DropdownButtonStyle(
@@ -357,6 +358,7 @@ class _AdminsPageState extends State<AdminsPage> {
       onChange: (Result value, int index) {
         CustomLog.log("val:::${value.toString()}");
         roleId = value.id.toString();
+        _adminsBloc.page = 1;
         _getAdminEvent();
       },
       dropdownButtonStyle: DropdownButtonStyle(
@@ -413,8 +415,14 @@ class _AdminsPageState extends State<AdminsPage> {
       hintText: AppString.search.val,
       hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
       onSubmitted: (String value) {
+        _adminsBloc.page = 1;
         _searchNode.requestFocus();
         _getAdminEvent();
+      },
+      onChanged: (String value) {
+        if (_adminsBloc.searchController.text == '') {
+          _getAdminEvent();
+        }
       },
       suffixIcon: InkWell(
         onTap: () {

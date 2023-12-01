@@ -127,6 +127,11 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
   }
 
   _usersView(BuildContext context) {
+    // if (_searchController.text != '' || _subscriptionBloc.filterId != 0) {
+    //   debugPrint('builddddd');
+    //
+    //   _page = 1;
+    // }
     if (_page == 1) {
       _start = 0;
       _end = _subscriptionBloc.subscriptionList.length < _limit
@@ -182,6 +187,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
       hintText: AppString.search.val,
       hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
       onSubmitted: (String val) {
+        _page = 1;
         _getSubscriptionEvent();
       },
       onChanged: (String value) {
@@ -203,14 +209,9 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
   }
 
   void _getSubscriptionEvent() {
-    if (_searchController.text != '' && _subscriptionBloc.filterId != 0) {
-      updateData();
-    }
     _subscriptionBloc.add(SubscriptionEvent.getSubscription(
         userId: userId,
-        page: (_searchController.text == '' && _subscriptionBloc.filterId == 0)
-            ? _page.toString()
-            : '1',
+        page: _page.toString(),
         limit: _limit.toString(),
         searchTerm: _searchController.text.trim(),
         subscriptionType: _subscriptionBloc.filterId == 0
@@ -223,10 +224,11 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
       onChange: (int value, int index) {
         debugPrint('value $value');
         debugPrint('index $index');
+        _page = 1;
         _subscriptionBloc.filterId = index;
         _subscriptionBloc.add(SubscriptionEvent.getSubscription(
             userId: userId,
-            page: '1',
+            page: _page.toString(),
             limit: _limit.toString(),
             searchTerm: _searchController.text.trim(),
             subscriptionType: _subscriptionBloc.filterId == 0

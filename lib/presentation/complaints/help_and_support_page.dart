@@ -242,9 +242,11 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
       hintText: AppString.search.val,
       hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
       onChanged: (String value) {
+        _page = 1;
         _getCompliantsEvent();
       },
       onSubmitted: (String val) {
+        _page = 1;
         _getCompliantsEvent();
       },
       suffixIcon: InkWell(
@@ -274,7 +276,7 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
 
     return CustomDropdown<int>(
       onChange: (int value, int index) {
-        updateData();
+        _page = 1;
 
         _filterId = value;
         _supportTicketsBloc.add(ComplaintsEvent.getComplaints(
