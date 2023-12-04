@@ -385,7 +385,6 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
     if (bytesList.isNotEmpty) {
       await uploadVideoToAwsS3(AppString.documents.val,
           SharedPreffUtil().getCareGiverUserId, bytesList.first, state);
-      checkInputData(state);
     }
   }
 

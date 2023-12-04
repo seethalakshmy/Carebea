@@ -420,9 +420,9 @@ class _AdminsPageState extends State<AdminsPage> {
         _getAdminEvent();
       },
       onChanged: (String value) {
-        if (_adminsBloc.searchController.text == '') {
-          _getAdminEvent();
-        }
+        _adminsBloc.page = 1;
+
+        _getAdminEvent();
       },
       suffixIcon: InkWell(
         onTap: () {
@@ -469,26 +469,26 @@ class _AdminsPageState extends State<AdminsPage> {
             ),
           ),
           DataColumn2(
-            size: ColumnSize.L,
+            size: ColumnSize.S,
             label: _tableColumnView(
               AppString.phoneNumber.val,
             ),
           ),
           DataColumn2(
-            size: ColumnSize.L,
+            size: ColumnSize.S,
             label: _tableColumnView(
               AppString.role.val,
             ),
           ),
           sharedPrefUtil.getEditAdmin
               ? DataColumn2(
-                  size: ColumnSize.L,
+                  size: ColumnSize.S,
                   label: _tableColumnView(AppString.status.val),
                 )
               : emptyColumn(),
           sharedPrefUtil.getEditAdmin || sharedPrefUtil.getViewAdmin
               ? const DataColumn2(
-                  size: ColumnSize.L,
+                  size: ColumnSize.S,
                   label: CustomText(""),
                 )
               : emptyColumn(),
@@ -583,7 +583,7 @@ class _AdminsPageState extends State<AdminsPage> {
         return CommonAlertWidget(
             height: 150,
             heading: AppString.delete.val,
-            label: AppString.deleteRole.val,
+            label: AppString.deleteAdmin.val,
             onTapYes: () {
               _adminsBloc.add(AdminEvent.adminDelete(
                   adminID: adminID, userID: _adminUserId, context: context));

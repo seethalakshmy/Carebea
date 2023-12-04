@@ -1,6 +1,4 @@
-import 'package:admin_580_tech/application/bloc/faq/faq_bloc.dart';
 import 'package:admin_580_tech/application/bloc/video_managemnet/video_management_bloc.dart';
-import 'package:admin_580_tech/infrastructure/faq/faq_repository.dart';
 import 'package:admin_580_tech/infrastructure/video_management/video_management_repository.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:auto_route/annotations.dart';
@@ -21,13 +19,10 @@ import '../widget/custom_data_table_2.dart';
 import '../widget/custom_icon.dart';
 import '../widget/custom_selection_area.dart';
 import '../widget/custom_sizedbox.dart';
-import '../widget/custom_svg.dart';
 import '../widget/custom_text.dart';
-import '../widget/custom_text_field.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
 import '../widget/loader_view.dart';
-import '../widget/pagination_view.dart';
 import '../widget/table_actions_view.dart';
 import '../widget/table_column_view.dart';
 import '../widget/table_loader_view.dart';
@@ -216,7 +211,8 @@ class _VideoManagementPageState extends State<VideoManagementPage> {
                     _videoManagementBloc.add(
                         VideoManagementEvent.deleteGeneralSettings(
                             userId: SharedPreffUtil().getAdminId,
-                            settingsId: item.id ?? ''));
+                            settingsId: item.id ?? '',
+                            context: context));
                     // _videoManagementBloc.add(
                     //     VideoManagementEvent.
                   },

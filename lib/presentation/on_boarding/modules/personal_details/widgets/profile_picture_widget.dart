@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/custom_snackbar.dart';
 import '../../../../../core/enum.dart';
 import '../../../../widget/commonImageview.dart';
 
@@ -53,11 +54,17 @@ class ProfilePictureWidget extends StatelessWidget {
                 allowedExtensions: ['jpg', 'png', 'jpeg'],
                 withData: true,
               );
-              if (result != null) {
+              file = result!.files.single;
+              int? sizeInBytes = file.size;
+              double sizeInMb = sizeInBytes / (1024 * 1024);
+              debugPrint("size $sizeInMb");
+              if (sizeInMb < 20) {
                 file = result.files.single;
-              } else {}
 
-              onboardingBloc.add(OnboardingEvent.profilePicSelection(file));
+                onboardingBloc.add(OnboardingEvent.profilePicSelection(file));
+              } else {
+                CSnackBar.showError(context, msg: AppString.fileSizeError.val);
+              }
             },
             child: Container(
               width: 31,

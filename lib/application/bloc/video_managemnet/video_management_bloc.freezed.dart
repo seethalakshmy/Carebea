@@ -20,20 +20,23 @@ mixin _$VideoManagementEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) getSettings,
-    required TResult Function(String userId, String settingsId)
+    required TResult Function(
+            String userId, String settingsId, BuildContext context)
         deleteGeneralSettings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? getSettings,
-    TResult? Function(String userId, String settingsId)? deleteGeneralSettings,
+    TResult? Function(String userId, String settingsId, BuildContext context)?
+        deleteGeneralSettings,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? getSettings,
-    TResult Function(String userId, String settingsId)? deleteGeneralSettings,
+    TResult Function(String userId, String settingsId, BuildContext context)?
+        deleteGeneralSettings,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -164,7 +167,8 @@ class _$_GetSettings implements _GetSettings {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) getSettings,
-    required TResult Function(String userId, String settingsId)
+    required TResult Function(
+            String userId, String settingsId, BuildContext context)
         deleteGeneralSettings,
   }) {
     return getSettings(userId);
@@ -174,7 +178,8 @@ class _$_GetSettings implements _GetSettings {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? getSettings,
-    TResult? Function(String userId, String settingsId)? deleteGeneralSettings,
+    TResult? Function(String userId, String settingsId, BuildContext context)?
+        deleteGeneralSettings,
   }) {
     return getSettings?.call(userId);
   }
@@ -183,7 +188,8 @@ class _$_GetSettings implements _GetSettings {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? getSettings,
-    TResult Function(String userId, String settingsId)? deleteGeneralSettings,
+    TResult Function(String userId, String settingsId, BuildContext context)?
+        deleteGeneralSettings,
     required TResult orElse(),
   }) {
     if (getSettings != null) {
@@ -244,7 +250,7 @@ abstract class _$$_DeleteGeneralSettingsCopyWith<$Res>
       __$$_DeleteGeneralSettingsCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String userId, String settingsId});
+  $Res call({String userId, String settingsId, BuildContext context});
 }
 
 /// @nodoc
@@ -260,6 +266,7 @@ class __$$_DeleteGeneralSettingsCopyWithImpl<$Res>
   $Res call({
     Object? userId = null,
     Object? settingsId = null,
+    Object? context = null,
   }) {
     return _then(_$_DeleteGeneralSettings(
       userId: null == userId
@@ -270,6 +277,10 @@ class __$$_DeleteGeneralSettingsCopyWithImpl<$Res>
           ? _value.settingsId
           : settingsId // ignore: cast_nullable_to_non_nullable
               as String,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ));
   }
 }
@@ -278,16 +289,18 @@ class __$$_DeleteGeneralSettingsCopyWithImpl<$Res>
 
 class _$_DeleteGeneralSettings implements _DeleteGeneralSettings {
   const _$_DeleteGeneralSettings(
-      {required this.userId, required this.settingsId});
+      {required this.userId, required this.settingsId, required this.context});
 
   @override
   final String userId;
   @override
   final String settingsId;
+  @override
+  final BuildContext context;
 
   @override
   String toString() {
-    return 'VideoManagementEvent.deleteGeneralSettings(userId: $userId, settingsId: $settingsId)';
+    return 'VideoManagementEvent.deleteGeneralSettings(userId: $userId, settingsId: $settingsId, context: $context)';
   }
 
   @override
@@ -297,11 +310,12 @@ class _$_DeleteGeneralSettings implements _DeleteGeneralSettings {
             other is _$_DeleteGeneralSettings &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.settingsId, settingsId) ||
-                other.settingsId == settingsId));
+                other.settingsId == settingsId) &&
+            (identical(other.context, context) || other.context == context));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId, settingsId);
+  int get hashCode => Object.hash(runtimeType, userId, settingsId, context);
 
   @JsonKey(ignore: true)
   @override
@@ -314,30 +328,33 @@ class _$_DeleteGeneralSettings implements _DeleteGeneralSettings {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String userId) getSettings,
-    required TResult Function(String userId, String settingsId)
+    required TResult Function(
+            String userId, String settingsId, BuildContext context)
         deleteGeneralSettings,
   }) {
-    return deleteGeneralSettings(userId, settingsId);
+    return deleteGeneralSettings(userId, settingsId, context);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String userId)? getSettings,
-    TResult? Function(String userId, String settingsId)? deleteGeneralSettings,
+    TResult? Function(String userId, String settingsId, BuildContext context)?
+        deleteGeneralSettings,
   }) {
-    return deleteGeneralSettings?.call(userId, settingsId);
+    return deleteGeneralSettings?.call(userId, settingsId, context);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String userId)? getSettings,
-    TResult Function(String userId, String settingsId)? deleteGeneralSettings,
+    TResult Function(String userId, String settingsId, BuildContext context)?
+        deleteGeneralSettings,
     required TResult orElse(),
   }) {
     if (deleteGeneralSettings != null) {
-      return deleteGeneralSettings(userId, settingsId);
+      return deleteGeneralSettings(userId, settingsId, context);
     }
     return orElse();
   }
@@ -378,11 +395,13 @@ class _$_DeleteGeneralSettings implements _DeleteGeneralSettings {
 abstract class _DeleteGeneralSettings implements VideoManagementEvent {
   const factory _DeleteGeneralSettings(
       {required final String userId,
-      required final String settingsId}) = _$_DeleteGeneralSettings;
+      required final String settingsId,
+      required final BuildContext context}) = _$_DeleteGeneralSettings;
 
   @override
   String get userId;
   String get settingsId;
+  BuildContext get context;
   @override
   @JsonKey(ignore: true)
   _$$_DeleteGeneralSettingsCopyWith<_$_DeleteGeneralSettings> get copyWith =>

@@ -7,5 +7,6 @@ class VideoManagementEvent with _$VideoManagementEvent {
 
   const factory VideoManagementEvent.deleteGeneralSettings(
       {required String userId,
-      required String settingsId}) = _DeleteGeneralSettings;
+      required String settingsId,
+      required BuildContext context}) = _DeleteGeneralSettings;
 }

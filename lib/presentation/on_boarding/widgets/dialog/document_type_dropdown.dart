@@ -29,13 +29,12 @@ class DocumentTypeDropDown extends StatelessWidget {
           showSearchBox: false,
           hint: AppString.selectDocumentType.val,
           errorText: errorText,
-          child: CustomText(selectedValue ?? ""),
           items: items
               .map((e) => DropdownItem(
                     value: e.name ?? "",
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
+                          horizontal: 20, vertical: 20),
                       child: CustomText(
                         e.name ?? "",
                         style: TS().gRoboto(
@@ -47,7 +46,8 @@ class DocumentTypeDropDown extends StatelessWidget {
               .toList(),
           onChange: (value, index) {
             onChange(items[index].id);
-          }),
+          },
+          child: CustomText(selectedValue ?? "")),
     );
   }
 }

@@ -323,6 +323,7 @@ enum AppString {
   yes("Yes"),
   no("No"),
   deleteRole("Are you sure want to delete this role?"),
+  deleteAdmin("Are you sure want to delete this admin user?"),
   areYouSureCancelServiceRequest(
       "Are you sure want to cancel this service request?"),
   areYouSureStartServiceRequest("Are you sure want to start this service?"),

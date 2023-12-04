@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 
+import '../../../core/custom_snackbar.dart';
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
 
 part 'video_management_event.dart';
@@ -53,9 +54,13 @@ class VideoManagementBloc
       return state.copyWith(error: l.error, isLoading: false);
     }, (r) {
       if (r.status!) {
+        CSnackBar.showSuccess(event.context, msg: 'Video deleted successfully');
         add(VideoManagementEvent.getSettings(userId: event.userId));
         return state.copyWith(deleteResponse: r, isLoading: false);
       }
+      (l) {
+        CSnackBar.showError(event.context, msg: r.message ?? '');
+      };
     });
     emit(userState!);
   }

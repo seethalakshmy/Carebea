@@ -68,18 +68,18 @@ class _QualificationViewState extends State<QualificationView> {
   PlatformFile? tbFile;
   PlatformFile? covidFile;
 
-  @override
-  void dispose() {
-    hhaController.dispose();
-    blsController.dispose();
-    tbPpdController.dispose();
-    covidController.dispose();
-    hhaDateController.dispose();
-    blsDateController.dispose();
-    tbPpdDateController.dispose();
-    covidDateController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   hhaController.dispose();
+  //   blsController.dispose();
+  //   tbPpdController.dispose();
+  //   covidController.dispose();
+  //   hhaDateController.dispose();
+  //   blsDateController.dispose();
+  //   tbPpdDateController.dispose();
+  //   covidDateController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +121,7 @@ class _QualificationViewState extends State<QualificationView> {
                       inputFormatter: [
                         FilteringTextInputFormatter.allow(RegExp("[0-9]")),
                         HHAFormatter(),
-                        LengthLimitingTextInputFormatter(6),
+                        LengthLimitingTextInputFormatter(7),
                       ],
                       whichDocument: 1,
                       documentList: widget.onboardingBloc.hhaBytesList,
@@ -154,7 +154,6 @@ class _QualificationViewState extends State<QualificationView> {
                             'png',
                             'jpeg',
                             'pdf',
-                            'doc'
                           ],
                           withData: true,
                         );

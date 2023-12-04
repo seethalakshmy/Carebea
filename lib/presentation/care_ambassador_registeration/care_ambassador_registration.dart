@@ -71,6 +71,7 @@ class _CareAmbassadorRegistrationPageState
       PersonalDetailsView(
         onboardingBloc: _onboardingBloc,
         pageController: controller,
+        isFromSignUp: true,
       ),
       QualificationView(
           state: _onboardingBloc.state,
