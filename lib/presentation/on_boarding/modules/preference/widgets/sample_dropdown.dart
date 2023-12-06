@@ -109,7 +109,9 @@ class _SampleDropdownState extends State<SampleDropdown> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomText(
-                      AppString.select.val,
+                      widget.isFromLangauge
+                          ? AppString.selectLanguage.val
+                          : AppString.selectPets.val,
                       style: TS().gRoboto(
                           fontSize: FS.font16.val,
                           fontWeight: FW.w400.val,

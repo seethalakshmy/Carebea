@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
+import '../../core/utility.dart';
 import '../../domain/admins/model/admin_get_response.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../side_menu/side_menu_page.dart';
@@ -122,7 +123,7 @@ class _VideoManagementPageState extends State<VideoManagementPage> {
             CustomSizedBox(height: DBL.fifteen.val),
             CustomSizedBox(
               height: (_limit + 1) * 48,
-              child: _faqTable(state, context),
+              child: _videoManagementTable(state, context),
             ),
             CustomSizedBox(height: DBL.twenty.val),
             // if (_totalItems > 10) _paginationView()
@@ -133,7 +134,7 @@ class _VideoManagementPageState extends State<VideoManagementPage> {
     );
   }
 
-  _faqTable(VideoManagementState state, BuildContext context) {
+  _videoManagementTable(VideoManagementState state, BuildContext context) {
     return CSelectionArea(
       child: CDataTable2(
           minWidth: DBL.nineFifty.val,
@@ -161,11 +162,17 @@ class _VideoManagementPageState extends State<VideoManagementPage> {
             DataColumn2(
               size: ColumnSize.M,
               label: _tableColumnView(
+                AppString.lastUpdateDate.val,
+              ),
+            ),
+            DataColumn2(
+              size: ColumnSize.S,
+              label: _tableColumnView(
                 "",
               ),
             ),
             DataColumn2(
-              size: ColumnSize.M,
+              size: ColumnSize.S,
               label: _tableColumnView(
                 "",
               ),
@@ -191,6 +198,8 @@ class _VideoManagementPageState extends State<VideoManagementPage> {
                     item.userType == 2
                         ? AppString.forClient.val
                         : AppString.forCa.val)),
+                DataCell(_tableRowView(
+                    '', Utility.generateFormattedDate((item.updatedAt ?? '')))),
 
                 // DataCell(_statusBox(item.status ?? false)),
                 DataCell(TableActions(

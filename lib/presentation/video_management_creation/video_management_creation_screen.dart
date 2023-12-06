@@ -113,7 +113,9 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
             return Column(
               children: [
                 HeaderView(
-                  title: AppString.videoUpload.val,
+                  title: _isEdit!
+                      ? AppString.updateVideo.val
+                      : AppString.videoUpload.val,
                 ),
                 CustomSizedBox(height: DBL.ten.val),
                 _rebuildView(),

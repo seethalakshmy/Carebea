@@ -253,7 +253,9 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
                                   ? 'Ongoing'
                                   : item.status == 5
                                       ? 'Completed'
-                                      : 'Canceled',
+                                      : item.status == 6
+                                          ? 'Canceled'
+                                          : 'Missed',
                           child: ServiceDetailsAlert(
                             title: item.status == 2
                                 ? 'Upcoming'
@@ -261,7 +263,9 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
                                     ? 'Ongoing'
                                     : item.status == 5
                                         ? 'Completed'
-                                        : 'Canceled',
+                                        : item.status == 6
+                                            ? 'Canceled'
+                                            : 'Missed',
                             serviceBloc: serviceRequestManagementBloc,
                           ),
                         );

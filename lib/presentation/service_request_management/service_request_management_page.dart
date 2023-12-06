@@ -13,6 +13,7 @@ import '../../core/properties.dart';
 import '../../core/responsive.dart';
 import '../../core/string_extension.dart';
 import '../../core/text_styles.dart';
+import '../../core/utility.dart';
 import '../../domain/caregivers/model/types.dart';
 import '../../domain/service_request_management/model/service_request_list_response_model.dart';
 import '../../domain/service_request_management/model/service_request_response.dart';
@@ -368,7 +369,9 @@ class _ServiceRequestManagementPageState
                   right: DBL.twenty.val,
                   top: DBL.ten.val,
                   bottom: DBL.twenty.val),
-              child: _paginationView(),
+              child: _serviceRequestBloc.state.serviceRequestsList.isNotEmpty
+                  ? _paginationView()
+                  : const SizedBox.shrink(),
             )
           ],
         ));
@@ -498,12 +501,10 @@ class _ServiceRequestManagementPageState
                       text: item.caregiverName ?? "",
                     )),
                     DataCell(_rowsView(
-                      text: _serviceRequestBloc
-                          .generateFormattedDate(item.startDate ?? ""),
+                      text: Utility.generateFormattedDate(item.startDate ?? ""),
                     )),
                     DataCell(_rowsView(
-                      text: _serviceRequestBloc
-                          .generateFormattedDate(item.endDate ?? ""),
+                      text: Utility.generateFormattedDate(item.endDate ?? ""),
                     )),
                     /*DataCell(_rowsView(
                       text:

@@ -28,6 +28,7 @@ import '../../core/responsive.dart';
 import '../routes/app_router.gr.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/custom_alert_dialog_widget.dart';
+import '../widget/header_view.dart';
 import '../widget/svg_text.dart';
 
 @RoutePage()
@@ -65,14 +66,25 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
       create: (context) => _caregiverDetailBloc
         ..add(CareGiverDetailEvent.getCareGiverDetail(
             userId: userId, adminId: SharedPreffUtil().getAdminId)),
-      child: BlocBuilder<CaregiverDetailBloc, CareGiverDetailState>(
-        builder: (context, state) {
-          return state.isLoading
-              ? const LoaderView()
-              : state.isError
-                  ? ErrorView(isClientError: false, errorMessage: state.error)
-                  : _bodyView(context, state);
-        },
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: HeaderView(
+              title: AppString.careAmbassador.val,
+            ),
+          ),
+          BlocBuilder<CaregiverDetailBloc, CareGiverDetailState>(
+            builder: (context, state) {
+              return state.isLoading
+                  ? const LoaderView()
+                  : state.isError
+                      ? ErrorView(
+                          isClientError: false, errorMessage: state.error)
+                      : _bodyView(context, state);
+            },
+          ),
+        ],
       ),
     );
   }

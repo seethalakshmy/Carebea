@@ -101,7 +101,7 @@ class _faqCreationPageState extends State<FaqCreationPage> {
               HeaderView(
                 title: _isEdit == false
                     ? AppString.faqCreation.val
-                    : AppString.faq.val,
+                    : AppString.updateFaq.val,
               ),
               CustomSizedBox(height: DBL.ten.val),
               _rebuildView(),

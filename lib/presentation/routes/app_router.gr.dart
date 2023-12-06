@@ -294,6 +294,7 @@ abstract class $AppRouter extends _i37.RootStackRouter {
                 title: queryParams.optString('title'),
                 id: queryParams.optString('id'),
                 description: queryParams.optString('description'),
+                isEdit: queryParams.optBool('isEdit'),
                 forWhom: queryParams.optNum('forWhom'),
               ));
       return _i37.AutoRoutePage<dynamic>(
@@ -303,6 +304,7 @@ abstract class $AppRouter extends _i37.RootStackRouter {
           title: args.title,
           id: args.id,
           description: args.description,
+          isEdit: args.isEdit,
           forWhom: args.forWhom,
         ),
       );
@@ -986,6 +988,7 @@ class RouteCreationRoute extends _i37.PageRouteInfo<RouteCreationRouteArgs> {
     String? title,
     String? id,
     String? description,
+    bool? isEdit,
     num? forWhom,
     List<_i37.PageRouteInfo>? children,
   }) : super(
@@ -995,12 +998,14 @@ class RouteCreationRoute extends _i37.PageRouteInfo<RouteCreationRouteArgs> {
             title: title,
             id: id,
             description: description,
+            isEdit: isEdit,
             forWhom: forWhom,
           ),
           rawQueryParams: {
             'title': title,
             'id': id,
             'description': description,
+            'isEdit': isEdit,
             'forWhom': forWhom,
           },
           initialChildren: children,
@@ -1018,6 +1023,7 @@ class RouteCreationRouteArgs {
     this.title,
     this.id,
     this.description,
+    this.isEdit,
     this.forWhom,
   });
 
@@ -1029,11 +1035,13 @@ class RouteCreationRouteArgs {
 
   final String? description;
 
+  final bool? isEdit;
+
   final num? forWhom;
 
   @override
   String toString() {
-    return 'RouteCreationRouteArgs{key: $key, title: $title, id: $id, description: $description, forWhom: $forWhom}';
+    return 'RouteCreationRouteArgs{key: $key, title: $title, id: $id, description: $description, isEdit: $isEdit, forWhom: $forWhom}';
   }
 }
 

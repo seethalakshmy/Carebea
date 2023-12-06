@@ -113,7 +113,12 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
       child: Column(
         children: [
           HeaderView(
-              title: AppString.roleManagement.val, sidePadding: DBL.zero.val),
+              title: _isView!
+                  ? AppString.viewRole.val
+                  : _isEdit!
+                      ? AppString.updateRole.val
+                      : AppString.createRole.val,
+              sidePadding: DBL.zero.val),
           CustomSizedBox(
             height: DBL.ten.val,
           ),

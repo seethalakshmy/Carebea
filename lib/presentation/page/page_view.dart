@@ -177,6 +177,7 @@ class _PageListPage extends State<PageListPage> {
                     id: item.id,
                     title: item.title,
                     description: item.description,
+                    isEdit: true,
                     forWhom: item.pageFor));
               },
               cells: [
@@ -207,6 +208,7 @@ class _PageListPage extends State<PageListPage> {
                               id: item.id,
                               title: item.title,
                               description: item.description,
+                              isEdit: true,
                               forWhom: item.pageFor));
                         }
                       : null,

@@ -37,22 +37,22 @@ class TransactionDetailsAlert extends StatelessWidget {
             height: 480,
             child: transactionBloc.state.isDetailsLoading
                 ? const CustomShimmerWidget.rectangular(height: double.infinity)
-                : transactionBloc.state.error != null
-                    ? ErrorView(
-                        isClientError: true,
-                        errorMessage: transactionBloc.state.error,
-                        isUnderTab: false,
-                        isFromDashboard: false,
-                      )
-                    : Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.start,
-                        alignment: WrapAlignment.spaceBetween,
-                        direction: Axis.horizontal,
-                        children: [
-                          _detailsWidget(context),
-                          _refundDetailsWidget(context)
-                        ],
-                      ),
+                // : transactionBloc.state.error == null
+                //     ? ErrorView(
+                //         isClientError: true,
+                //         errorMessage: transactionBloc.state.error,
+                //         isUnderTab: false,
+                //         isFromDashboard: false,
+                //       )
+                : Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.start,
+                    alignment: WrapAlignment.spaceBetween,
+                    direction: Axis.horizontal,
+                    children: [
+                      _detailsWidget(context),
+                      _refundDetailsWidget(context)
+                    ],
+                  ),
           );
         },
       ),
@@ -60,7 +60,7 @@ class TransactionDetailsAlert extends StatelessWidget {
   }
 
   Row _detailRow(String detailName, String detail, TransactionDetailsData? item,
-      BuildContext context) {
+      BuildContext context, bool hasRedirection) {
     return Row(
       children: [
         SizedBox(
@@ -102,6 +102,9 @@ class TransactionDetailsAlert extends StatelessWidget {
                 ":  $detail",
                 softWrap: true,
                 style: TS().gRoboto(
+                  needUnderLine: hasRedirection ? true : false,
+                  color:
+                      hasRedirection ? AppColor.blue.val : AppColor.black.val,
                   fontSize:
                       Responsive.isWeb(context) ? FS.font14.val : FS.font13.val,
                   fontWeight: FW.w400.val,
@@ -122,7 +125,8 @@ class TransactionDetailsAlert extends StatelessWidget {
               "Transaction ID",
               transactionBloc.transactionDetailsData.uniqueTransactionId ?? "",
               null,
-              context),
+              context,
+              false),
           const CustomSizedBox(height: 7),
           InkWell(
             onTap: () {
@@ -133,9 +137,9 @@ class TransactionDetailsAlert extends StatelessWidget {
                   context.read<ServiceRequestManagementBloc>().add(
                       ServiceRequestManagementEvent.getServiceDetails(
                           context: context,
-                          serviceId:
-                              transactionBloc.transactionDetailsData.user ??
-                                  ''));
+                          serviceId: transactionBloc
+                                  .transactionDetailsData.serviceId ??
+                              ''));
                   return CustomAlertDialogWidget(
                     heading: AppString.services.val,
                     child: ServiceDetailsAlert(
@@ -150,26 +154,30 @@ class TransactionDetailsAlert extends StatelessWidget {
                 "Service ID",
                 transactionBloc.transactionDetailsData.uniqueServiceId ?? "",
                 null,
-                context),
+                context,
+                true),
           ),
           const CustomSizedBox(height: 7),
           _detailRow(
               "Transaction Type",
               transactionBloc.transactionDetailsData.transactionType ?? "",
               null,
-              context),
+              context,
+              false),
           const CustomSizedBox(height: 7),
           _detailRow(
               "Paid For",
               transactionBloc.transactionDetailsData.paidFor ?? "",
               null,
-              context),
+              context,
+              false),
           const CustomSizedBox(height: 7),
           _detailRow(
               "Paid To",
               transactionBloc.transactionDetailsData.paidTo ?? "",
               null,
-              context),
+              context,
+              false),
           const CustomSizedBox(height: 7),
           InkWell(
             onTap: () {
@@ -181,14 +189,16 @@ class TransactionDetailsAlert extends StatelessWidget {
                 "Received From",
                 transactionBloc.transactionDetailsData.recievedFrom ?? "",
                 null,
-                context),
+                context,
+                true),
           ),
           const CustomSizedBox(height: 7),
           _detailRow(
               "Amount",
               '\$${Utility.formatAmount(double.tryParse(transactionBloc.transactionDetailsData.amount?.replaceAll('\$', "") ?? "0.0") ?? 0.0)}',
               null,
-              context),
+              context,
+              false),
           const CustomSizedBox(height: 7),
           _detailRow(
               "Date & Time",
@@ -196,13 +206,15 @@ class TransactionDetailsAlert extends StatelessWidget {
                   transactionBloc.transactionDetailsData.dateTime ??
                       "0000-00-00T00:00:00.000Z"),
               null,
-              context),
+              context,
+              false),
           const CustomSizedBox(height: 7),
           _detailRow(
               "Status",
               transactionBloc.transactionDetailsData.status?.name ?? "",
               transactionBloc.transactionDetailsData,
-              context),
+              context,
+              false),
         ],
       ),
     );
