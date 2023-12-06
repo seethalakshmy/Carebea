@@ -113,7 +113,9 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
             return Column(
               children: [
                 HeaderView(
-                  title: AppString.videoUpload.val,
+                  title: _isEdit!
+                      ? AppString.updateVideo.val
+                      : AppString.videoUpload.val,
                 ),
                 CustomSizedBox(height: DBL.ten.val),
                 _rebuildView(),
@@ -385,7 +387,6 @@ class _VideoUploadPageState extends State<VideoUploadPage> {
     if (bytesList.isNotEmpty) {
       await uploadVideoToAwsS3(AppString.documents.val,
           SharedPreffUtil().getCareGiverUserId, bytesList.first, state);
-      checkInputData(state);
     }
   }
 

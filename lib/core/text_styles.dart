@@ -14,13 +14,15 @@ class TS {
           FontWeight? fontWeight,
           Color? color,
           double? letterSpacing,
-          double? wordSpacing}) =>
+          double? wordSpacing,
+          TextDecoration? decoration}) =>
       TextStyle(
           color: color,
           fontSize: fontSize,
           fontWeight: fontWeight,
           letterSpacing: letterSpacing,
-          wordSpacing: wordSpacing);
+          wordSpacing: wordSpacing,
+          decoration: decoration);
 
   gPoppins({
     double? fontSize,

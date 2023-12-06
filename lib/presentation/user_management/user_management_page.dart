@@ -105,14 +105,26 @@ class _UserManagementPageState extends State<UserManagementPage> {
       elevation: DBL.seven.val,
       child: CustomContainer(
         padding: EdgeInsets.all(DBL.twenty.val),
-        child: BlocBuilder<UserManagementBloc, UserManagementState>(
-          builder: (context, state) {
-            return state.isLoading
-                ? const TableLoaderView()
-                : state.isError
-                    ? ErrorView(isClientError: false, errorMessage: state.error)
-                    : _usersView(context, state.response, state);
-          },
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _statusDropDown(context),
+                _searchField(),
+              ],
+            ),
+            BlocBuilder<UserManagementBloc, UserManagementState>(
+              builder: (context, state) {
+                return state.isLoading
+                    ? const TableLoaderView()
+                    : state.isError
+                        ? ErrorView(
+                            isClientError: false, errorMessage: state.error)
+                        : _usersView(context, state.response, state);
+              },
+            ),
+          ],
         ),
       ),
     );
@@ -135,13 +147,6 @@ class _UserManagementPageState extends State<UserManagementPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _statusDropDown(context),
-            _searchField(),
-          ],
-        ),
         CustomSizedBox(height: DBL.fifteen.val),
         CustomSizedBox(
           height: (_userBloc.limit + 1) * 48,
@@ -150,7 +155,9 @@ class _UserManagementPageState extends State<UserManagementPage> {
               : EmptyView(title: AppString.noUsersFound.val),
         ),
         CustomSizedBox(height: DBL.twenty.val),
-        _paginationView()
+        _userBloc.mUserList.isNotEmpty
+            ? _paginationView()
+            : const SizedBox.shrink()
       ],
     );
   }
@@ -163,15 +170,16 @@ class _UserManagementPageState extends State<UserManagementPage> {
       hintText: AppString.search.val,
       hintStyle: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w500.val),
       onChanged: (String value) {
-        _userBloc.searchController.text.isEmpty ||
-                _userBloc.searchController.text == ''
-            ? _userBloc.add(UserManagementEvent.getUsers(
-                userId: adminId ?? '',
-                page: _userBloc.page.toString(),
-                limit: _userBloc.limit.toString(),
-                searchTerm: _userBloc.searchController.text.trim(),
-                filterId: _userBloc.filterId))
-            : null;
+        // _userBloc.searchController.text.isEmpty ||
+        //         _userBloc.searchController.text == ''
+        //     ?
+        _userBloc.add(UserManagementEvent.getUsers(
+            userId: adminId ?? '',
+            page: _userBloc.page.toString(),
+            limit: _userBloc.limit.toString(),
+            searchTerm: _userBloc.searchController.text.trim(),
+            filterId: _userBloc.filterId));
+        // : null;
       },
       onSubmitted: (String value) {
         _userBloc.page = 1;
@@ -342,6 +350,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
           //       text: AppString.id.val, fontWeight: FontWeight.bold),
           // ),
           DataColumn2(
+            size: ColumnSize.L,
             fixedWidth: Responsive.isWeb(context)
                 ? MediaQuery.of(context).size.width * .17
                 : DBL.twoHundred.val,
@@ -354,7 +363,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
                 text: AppString.emailAddress.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.L,
+            size: ColumnSize.M,
             label: _columnsView(
                 text: AppString.phoneNumber.val, fontWeight: FontWeight.bold),
           ),
@@ -369,12 +378,12 @@ class _UserManagementPageState extends State<UserManagementPage> {
                 text: AppString.createdDate.val, fontWeight: FontWeight.bold),
           ),*/
           DataColumn2(
-            size: ColumnSize.L,
+            size: ColumnSize.S,
             label: _columnsView(
                 text: AppString.status.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            // size: ColumnSize.L,
+            size: ColumnSize.S,
             fixedWidth: Responsive.isWeb(context)
                 ? MediaQuery.of(context).size.width * .1
                 : DBL.oneSeventy.val,
@@ -471,14 +480,17 @@ class _UserManagementPageState extends State<UserManagementPage> {
         ),
         CustomSizedBox(width: DBL.twelve.val),
         Expanded(
-          child: CustomText(
-            text,
-            style: TS().gRoboto(
-                fontSize: Responsive.isWeb(context)
-                    ? DBL.fourteen.val
-                    : DBL.twelve.val,
-                fontWeight: FW.w400.val,
-                color: AppColor.rowColor.val),
+          child: Tooltip(
+            message: text,
+            child: CustomText(
+              text,
+              style: TS().gRoboto(
+                  fontSize: Responsive.isWeb(context)
+                      ? DBL.fourteen.val
+                      : DBL.twelve.val,
+                  fontWeight: FW.w400.val,
+                  color: AppColor.rowColor.val),
+            ),
           ),
         ),
       ],
@@ -488,16 +500,20 @@ class _UserManagementPageState extends State<UserManagementPage> {
   Widget _rowsView({
     String? text,
   }) {
-    return CustomText(
-      '$text',
-      softWrap: true,
-      style: TS().gRoboto(
-          fontSize: Responsive.isWeb(context)
-              ? DBL.thirteenPointFive.val
-              : DBL.twelve.val,
-          fontWeight: FW.w400.val,
-          color: AppColor.rowColor.val),
-      textAlign: TextAlign.start,
+    return Tooltip(
+      message: text,
+      child: CustomText(
+        '$text',
+        softWrap: true,
+        style: TS().gRoboto(
+            fontSize: Responsive.isWeb(context)
+                ? DBL.thirteenPointFive.val
+                : DBL.twelve.val,
+            fontWeight: FW.w400.val,
+            color: AppColor.rowColor.val),
+        textAlign: TextAlign.start,
+        overflow: TextOverflow.ellipsis,
+      ),
     );
   }
 

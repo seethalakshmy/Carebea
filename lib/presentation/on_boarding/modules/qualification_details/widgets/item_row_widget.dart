@@ -124,12 +124,12 @@ class ItemRowWidget extends StatelessWidget {
               ? DateTime(2000)
               : question == AppString.covid19Vaccination.val
                   ? DateTime(2020)
-                  : DateTime.now().add(const Duration(days: 30)),
+                  : DateTime.now(),
           firstDate: question == AppString.TBPPDTest.val
               ? DateTime(2000)
               : question == AppString.covid19Vaccination.val
                   ? DateTime(2020)
-                  : DateTime.now().add(const Duration(days: 30)),
+                  : DateTime.now(),
           lastDate: question == AppString.TBPPDTest.val ||
                   question == AppString.covid19Vaccination.val
               ? DateTime.now()

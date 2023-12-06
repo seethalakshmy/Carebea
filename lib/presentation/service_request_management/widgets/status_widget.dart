@@ -27,9 +27,11 @@ class StatusWidget extends StatelessWidget {
       String startDateTimeString = startTime ?? "";
       String endDateTimeString = endTime ?? "";
 // Parse start DateTime
-      DateTime startDateTime = DateTime.tryParse(startDateTimeString) ?? DateTime.now();
+      DateTime startDateTime =
+          DateTime.tryParse(startDateTimeString) ?? DateTime.now();
 // Parse end DateTime
-      DateTime endDateTime = DateTime.tryParse(endDateTimeString) ?? DateTime.now();
+      DateTime endDateTime =
+          DateTime.tryParse(endDateTimeString) ?? DateTime.now();
 // Get the current time
       DateTime currentTime = DateTime.now();
 // Check if the current time is within the interval
@@ -66,6 +68,8 @@ class StatusWidget extends StatelessWidget {
       return AppColor.red.val;
     } else if (status == AppString.upcoming.val) {
       return AppColor.amber.val;
+    } else if (status == AppString.missed.val) {
+      return AppColor.red.val;
     } else if (status == AppString.onGoing.val) {
       return AppColor.primaryColor.val;
     } else {

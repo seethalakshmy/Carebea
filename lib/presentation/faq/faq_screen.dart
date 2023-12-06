@@ -238,9 +238,15 @@ class _FaqPageState extends State<FaqPage> {
                 fontSize: FS.font13.val,
                 fontWeight: FW.w500.val,
                 color: AppColor.black5.val)),
-        TableRowView(
-          text: name,
-          maxLines: 1,
+        Tooltip(
+          verticalOffset: 20,
+          margin: const EdgeInsets.only(
+              left: 550, right: 550), //here you change the margin
+          message: name,
+          child: TableRowView(
+            text: name,
+            maxLines: 1,
+          ),
         ),
       ],
     );
@@ -261,7 +267,7 @@ class _FaqPageState extends State<FaqPage> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _searchField(),
+                // _searchField(),
                 CustomSizedBox(
                   width: DBL.ten.val,
                 ),

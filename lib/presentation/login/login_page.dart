@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:admin_580_tech/core/enum.dart';
 import 'package:admin_580_tech/core/responsive.dart';
 import 'package:admin_580_tech/core/text_styles.dart';
@@ -7,7 +5,6 @@ import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_uti
 import 'package:admin_580_tech/presentation/widget/custom_container.dart';
 import 'package:admin_580_tech/presentation/widget/custom_form.dart';
 import 'package:admin_580_tech/presentation/widget/custom_image.dart';
-import 'package:admin_580_tech/presentation/widget/custom_material_button.dart';
 import 'package:admin_580_tech/presentation/widget/custom_selection_area.dart';
 import 'package:admin_580_tech/presentation/widget/custom_sizedbox.dart';
 import 'package:admin_580_tech/presentation/widget/custom_text.dart';
@@ -221,13 +218,16 @@ class _LoginPageState extends State<LoginPage> {
       width: DBL.fourFifty.val,
       child: Align(
         alignment: Alignment.centerRight,
-        child: CTextButton(
-            text: AppString.forgotPassword.val,
-            fontWeight: FW.w400.val,
-            onPressed: () {
-              context.router.navigate(const ForgotPasswordRoute());
-            },
-            color: AppColor.primaryColor.val),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.text,
+          child: CTextButton(
+              text: AppString.forgotPassword.val,
+              fontWeight: FW.w400.val,
+              onPressed: () {
+                context.router.navigate(const ForgotPasswordRoute());
+              },
+              color: AppColor.primaryColor.val),
+        ),
       ),
     );
   }

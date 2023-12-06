@@ -94,7 +94,8 @@ class SubProfileView extends StatelessWidget {
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
-                text: AppString.subscription.val, fontWeight: FontWeight.bold),
+                text: AppString.subscriptionLabel.val,
+                fontWeight: FontWeight.bold),
           ),
           DataColumn2(
             size: ColumnSize.L,

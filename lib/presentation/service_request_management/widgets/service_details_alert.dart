@@ -333,18 +333,20 @@ class ServiceDetailsAlert extends StatelessWidget {
           _textAndSubText(
               context: context,
               text: AppString.startDateAndTime.val,
-              subText: serviceBloc
-                  .generateFormattedDate(service.startDateTime ?? "")),
+              subText:
+                  Utility.generateFormattedDate(service.startDateTime ?? "")),
           _textAndSubText(
               context: context,
               text: AppString.endDateAndTime.val,
               subText:
-                  serviceBloc.generateFormattedDate(service.endDateTime ?? "")),
+                  Utility.generateFormattedDate(service.endDateTime ?? "")),
           _textAndSubText(
               context: context,
               text: AppString.location.val,
               subText: service.address != null
-                  ? service.address!.locationTag!.replaceAll(", ", ",\n")
+                  ? (service.address!.streetName ?? '') +
+                      (' ') +
+                      service.address!.locationTag!.replaceAll(", ", ",\n")
                   : ''),
         ],
       ),
@@ -914,7 +916,7 @@ class ServiceDetailsAlert extends StatelessWidget {
                                             : AppColor.red.val),
                               ),
                               CustomText(
-                                  serviceBloc.generateFormattedDate(
+                                  Utility.generateFormattedDate(
                                     service.refundDetails!.first
                                             .statusHistory![index].date ??
                                         "",
@@ -1151,9 +1153,15 @@ class ServiceDetailsAlert extends StatelessWidget {
                                           fontSize: FS.font15.val,
                                           fontWeight: FW.w500.val)),
                                   CustomText(
-                                      serviceBloc.generateFormattedDate(
-                                          service.serviceHistory![index].time ??
-                                              ""),
+                                      Utility.generateFormattedDate(
+                                              DateTime.parse(service
+                                                          .serviceHistory![
+                                                              index]
+                                                          .time ??
+                                                      '')
+                                                  .toLocal()
+                                                  .toString()) ??
+                                          '',
                                       style: TS().gRoboto(
                                           color: AppColor.lightGrey5.val,
                                           fontSize: FS.font13.val,

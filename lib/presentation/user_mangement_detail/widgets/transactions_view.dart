@@ -98,13 +98,13 @@ class TransactionView extends StatelessWidget {
                 text: AppString.client.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.L,
+            size: ColumnSize.M,
             label: _columnsView(context,
                 text: AppString.transactionType.val,
                 fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.L,
+            size: ColumnSize.M,
             label: _columnsView(context,
                 text: AppString.paidFor.val, fontWeight: FontWeight.bold),
           ),
@@ -124,12 +124,12 @@ class TransactionView extends StatelessWidget {
                 text: AppString.dateTime.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.L,
+            size: ColumnSize.M,
             label: _columnsView(context,
                 text: AppString.status.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.L,
+            size: ColumnSize.S,
             label: _columnsView(context, text: '', fontWeight: FontWeight.bold),
           ),
         ],
@@ -157,9 +157,9 @@ class TransactionView extends StatelessWidget {
 
               DataCell(_rowsView(context, text: item.client)),
               DataCell(_rowsView(context, text: item.transactionType)),
-              DataCell(_rowsView(context, text: '')),
-              DataCell(_rowsView(context, text: item.amount)),
               DataCell(_rowsView(context, text: item.paidFor)),
+              DataCell(_rowsView(context, text: item.amount)),
+              DataCell(_rowsView(context, text: '')),
 
               DataCell(_rowsView(
                 context,

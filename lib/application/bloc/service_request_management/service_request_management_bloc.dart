@@ -264,13 +264,6 @@ class ServiceRequestManagementBloc
     emit(filterState);
   }
 
-  String generateFormattedDate(String date) {
-    DateTime inputDate = DateTime.parse(date);
-    DateFormat dateFormat = DateFormat('MM-dd-yyyy , hh:mm a');
-    String formattedDate = dateFormat.format(inputDate);
-    return formattedDate;
-  }
-
   String generateDaysLeft(String date) {
     DateTime inputDate = DateTime.parse(date);
     String days = "";

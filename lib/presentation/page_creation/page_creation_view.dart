@@ -13,7 +13,6 @@ import '../../core/text_styles.dart';
 import '../../infrastructure/page/page_repository.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../caregiver_creation/widgets/details_text_field_with_label.dart';
-import '../on_boarding/modules/qualification_details/widgets/yes_no_radio_button_widget.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/custom_button.dart';
 import '../widget/custom_container.dart';
@@ -29,6 +28,7 @@ class PageCreationPage extends StatefulWidget {
       @QueryParam('title') this.title,
       @QueryParam('id') this.id,
       @QueryParam('description') this.description,
+      @QueryParam('isEdit') this.isEdit,
       @QueryParam('forWhom') this.forWhom})
       : super(key: key);
 
@@ -36,6 +36,7 @@ class PageCreationPage extends StatefulWidget {
   final String? id;
   final String? description;
   final num? forWhom;
+  final bool? isEdit;
 
   @override
   State<PageCreationPage> createState() => _PageCreationPageState();

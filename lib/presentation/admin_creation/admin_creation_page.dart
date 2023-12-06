@@ -19,7 +19,6 @@ import '../../core/text_styles.dart';
 import '../../infrastructure/api_service_s3.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../on_boarding/modules/personal_details/widgets/mobile_number_formatter.dart';
-import '../on_boarding/modules/personal_details/widgets/profile_picture_widget.dart';
 import '../side_menu/side_menu_page.dart';
 import '../widget/cached_image.dart';
 import '../widget/custom_alert_dialog_widget.dart';
@@ -70,6 +69,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
   bool? _isView;
 
   bool? _isEdit;
+  int count = 0;
 
   @override
   void initState() {
@@ -372,7 +372,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
               CustomSizedBox(
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
-                  isIgnore: _isView!,
+                  isIgnore: _isView! || _isEdit!,
                   isMandatory: true,
                   labelName: AppString.emailAddress.val,
                   focusNode: _emailFocusNode,
@@ -395,7 +395,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
               CustomSizedBox(
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
-                  isIgnore: _isView!,
+                  isIgnore: _isView! || _isEdit!,
                   inputFormatter: [
                     FilteringTextInputFormatter.digitsOnly,
                     LengthLimitingTextInputFormatter(10),

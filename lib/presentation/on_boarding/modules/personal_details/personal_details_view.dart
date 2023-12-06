@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,6 +19,7 @@ import '../../../../core/time_utils.dart';
 import '../../../../infrastructure/api_service_s3.dart';
 import '../../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../../../routes/app_router.gr.dart';
 import '../../../widget/commonImageview.dart';
 import '../../../widget/common_date_picker_widget.dart';
 import '../../../widget/common_next_or_cancel_buttons.dart';
@@ -45,10 +47,14 @@ import 'widgets/zip_code_formatter.dart';
 
 class PersonalDetailsView extends StatefulWidget {
   const PersonalDetailsView(
-      {Key? key, required this.onboardingBloc, required this.pageController})
+      {Key? key,
+      required this.onboardingBloc,
+      required this.pageController,
+      required this.isFromSignUp})
       : super(key: key);
   final OnboardingBloc onboardingBloc;
   final PageController pageController;
+  final bool isFromSignUp;
 
   @override
   State<PersonalDetailsView> createState() => _PersonalDetailsViewState();
@@ -452,7 +458,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                 height: DBL.fifty.val, width: DBL.twoEighty.val)
             : CommonDatePickerWidget(
                 initialDate: DateTime(DateTime.now().year - 18),
-                lastDate: DateTime(DateTime.now().year - 18),
+                lastDate: DateTime(DateTime.now().year - 18,
+                    DateTime.now().month, DateTime.now().day),
                 firstDate: DateTime(1950),
                 dateController: dobController,
                 validator: (value) {
@@ -919,7 +926,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
       onTap: () async {
         FilePickerResult? result = await FilePicker.platform.pickFiles(
           type: FileType.custom,
-          allowedExtensions: ['jpg', 'png', 'pdf', 'doc'],
+          allowedExtensions: ['jpg', 'png', 'pdf', 'jpeg'],
           withData: true,
         );
         if (result != null) {
@@ -954,13 +961,16 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
       bloc: formValidationBloc,
       builder: (context, state) {
         return CommonNextOrCancelButtons(
+          showLeftButton: false,
           isLoading: widget.onboardingBloc.state.isLoading,
           leftButtonName: AppString.back.val,
           rightButtonName: AppString.next.val,
           onLeftButtonPressed: () {
-            // context.router.navigate(const CaregiverCreationRoute());
-            widget.pageController
-                .jumpToPage(widget.pageController.page!.toInt() - 1);
+            widget.isFromSignUp
+                ? context.router.navigate(const SignUpRoute())
+                : context.router.navigate(const CaregiverCreationRoute());
+            // widget.pageController
+            //     .jumpToPage(widget.pageController.page!.toInt() - 1);
           },
           onRightButtonPressed: () async {
             widget.onboardingBloc.nextButtonClicked = true;

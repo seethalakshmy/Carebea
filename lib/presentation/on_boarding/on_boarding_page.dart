@@ -59,14 +59,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   Widget _bodyView() {
     List<Widget> pages = [
-      // Agreement(
-      //   onboardingBloc: _onboardingBloc,
-      //   pageController: controller,
-      // ),
-      //const OtpVerificationView(),
       PersonalDetailsView(
         onboardingBloc: _onboardingBloc,
         pageController: controller,
+        isFromSignUp: false,
       ),
       QualificationView(
           state: _onboardingBloc.state,
@@ -76,20 +72,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
         pageController: controller,
         onboardingBloc: _onboardingBloc,
       ),
-      /*ServicesView(
-        pageController: controller,
-        onboardingBloc: _onboardingBloc,
-      ),*/
-
-      /*ReferenceView(
-        onboardingBloc: _onboardingBloc,
-        pageController: controller,
-      ),
-      BuildProfileView(
-          pageController: controller, onboardingBloc: _onboardingBloc),
-      //HomeHealthAidAgreementView(pageController: controller),
-      SetupCompensationView(
-          pageController: controller, onboardingBloc: _onboardingBloc),*/
     ];
     setState(() {
       totalPages = pages.length;

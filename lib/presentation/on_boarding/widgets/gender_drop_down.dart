@@ -37,7 +37,7 @@ class GenderDropDown extends StatelessWidget {
                     value: e.name,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
+                          horizontal: 20, vertical: 12),
                       child: CustomText(
                         e.name ?? "",
                         style: TS().gRoboto(color: AppColor.black.val),

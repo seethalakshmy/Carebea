@@ -1,6 +1,4 @@
-import 'package:admin_580_tech/application/bloc/faq/faq_bloc.dart';
 import 'package:admin_580_tech/application/bloc/video_managemnet/video_management_bloc.dart';
-import 'package:admin_580_tech/infrastructure/faq/faq_repository.dart';
 import 'package:admin_580_tech/infrastructure/video_management/video_management_repository.dart';
 import 'package:admin_580_tech/presentation/routes/app_router.gr.dart';
 import 'package:auto_route/annotations.dart';
@@ -11,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
+import '../../core/utility.dart';
 import '../../domain/admins/model/admin_get_response.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../side_menu/side_menu_page.dart';
@@ -21,13 +20,10 @@ import '../widget/custom_data_table_2.dart';
 import '../widget/custom_icon.dart';
 import '../widget/custom_selection_area.dart';
 import '../widget/custom_sizedbox.dart';
-import '../widget/custom_svg.dart';
 import '../widget/custom_text.dart';
-import '../widget/custom_text_field.dart';
 import '../widget/error_view.dart';
 import '../widget/header_view.dart';
 import '../widget/loader_view.dart';
-import '../widget/pagination_view.dart';
 import '../widget/table_actions_view.dart';
 import '../widget/table_column_view.dart';
 import '../widget/table_loader_view.dart';
@@ -127,7 +123,7 @@ class _VideoManagementPageState extends State<VideoManagementPage> {
             CustomSizedBox(height: DBL.fifteen.val),
             CustomSizedBox(
               height: (_limit + 1) * 48,
-              child: _faqTable(state, context),
+              child: _videoManagementTable(state, context),
             ),
             CustomSizedBox(height: DBL.twenty.val),
             // if (_totalItems > 10) _paginationView()
@@ -138,7 +134,7 @@ class _VideoManagementPageState extends State<VideoManagementPage> {
     );
   }
 
-  _faqTable(VideoManagementState state, BuildContext context) {
+  _videoManagementTable(VideoManagementState state, BuildContext context) {
     return CSelectionArea(
       child: CDataTable2(
           minWidth: DBL.nineFifty.val,
@@ -166,11 +162,17 @@ class _VideoManagementPageState extends State<VideoManagementPage> {
             DataColumn2(
               size: ColumnSize.M,
               label: _tableColumnView(
+                AppString.lastUpdateDate.val,
+              ),
+            ),
+            DataColumn2(
+              size: ColumnSize.S,
+              label: _tableColumnView(
                 "",
               ),
             ),
             DataColumn2(
-              size: ColumnSize.M,
+              size: ColumnSize.S,
               label: _tableColumnView(
                 "",
               ),
@@ -196,6 +198,8 @@ class _VideoManagementPageState extends State<VideoManagementPage> {
                     item.userType == 2
                         ? AppString.forClient.val
                         : AppString.forCa.val)),
+                DataCell(_tableRowView(
+                    '', Utility.generateFormattedDate((item.updatedAt ?? '')))),
 
                 // DataCell(_statusBox(item.status ?? false)),
                 DataCell(TableActions(
@@ -216,7 +220,8 @@ class _VideoManagementPageState extends State<VideoManagementPage> {
                     _videoManagementBloc.add(
                         VideoManagementEvent.deleteGeneralSettings(
                             userId: SharedPreffUtil().getAdminId,
-                            settingsId: item.id ?? ''));
+                            settingsId: item.id ?? '',
+                            context: context));
                     // _videoManagementBloc.add(
                     //     VideoManagementEvent.
                   },

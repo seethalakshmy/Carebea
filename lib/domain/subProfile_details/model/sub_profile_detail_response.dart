@@ -58,9 +58,8 @@ class Data {
     int? profileCompletionPercentage,
     ProfileCompletion? profileCompletion,
     List<SubscriptionDetails>? subscriptionDetails,
+    List<Address>? address,
     bool? isSubscriptionActive,
-
-
     dynamic agreement,
     int? serviceCompleted,
     int? cancelledRequests,
@@ -93,6 +92,7 @@ class Data {
     _averageReview = averageReview;
     _reviewCount = reviewCount;
     _name = name;
+    _address = address;
     _location = location;
     _profilePicReferrence = profilePicReferrence;
     _profilePic = profilePic;
@@ -156,6 +156,12 @@ class Data {
     _diet = json['diet'] != null ? json['diet'].cast<String>() : [];
     _services =
         json['services'] != null ? Services.fromJson(json['services']) : null;
+    if (json['address'] != null) {
+      _address = [];
+      json['address'].forEach((v) {
+        _address?.add(Address.fromJson(v));
+      });
+    }
   }
   String? _id;
   int? _profileCompletionPercentage;
@@ -168,6 +174,8 @@ class Data {
   double? _averageReview;
   int? _reviewCount;
   Name? _name;
+  List<Address>? _address;
+
   Location? _location;
   String? _profilePicReferrence;
   String? _profilePic;
@@ -189,6 +197,7 @@ class Data {
     List<SubscriptionDetails>? subscriptionDetails,
     ProfileCompletion? profileCompletion,
     dynamic agreement,
+    List<Address>? address,
     int? serviceCompleted,
     int? cancelledRequests,
     double? averageReview,
@@ -223,6 +232,7 @@ class Data {
         reviewCount: reviewCount ?? _reviewCount,
         name: name ?? _name,
         location: location ?? _location,
+        address: address ?? _address,
         profilePicReferrence: profilePicReferrence ?? _profilePicReferrence,
         profilePic: profilePic ?? _profilePic,
         locationTag: locationTag ?? _locationTag,
@@ -246,6 +256,8 @@ class Data {
   dynamic get agreement => _agreement;
   int? get serviceCompleted => _serviceCompleted;
   int? get cancelledRequests => _cancelledRequests;
+  List<Address>? get address => _address;
+
   double? get averageReview => _averageReview;
   int? get reviewCount => _reviewCount;
   Name? get name => _name;
@@ -276,6 +288,9 @@ class Data {
     if (_subscriptionDetails != null) {
       map['subscription_details'] =
           _subscriptionDetails?.map((v) => v.toJson()).toList();
+    }
+    if (_address != null) {
+      map['address'] = _address?.map((v) => v.toJson()).toList();
     }
     map['agreement'] = _agreement;
     map['service_completed'] = _serviceCompleted;
@@ -318,6 +333,135 @@ class Data {
     return map;
   }
 }
+
+Address addressFromJson(String str) => Address.fromJson(json.decode(str));
+String addressToJson(Address data) => json.encode(data.toJson());
+
+class Address {
+  Address({
+    Location? location,
+    dynamic locationTag,
+    String? streetName,
+    String? lattitude,
+    String? longitude,
+    String? city,
+    String? state,
+    String? address,
+    String? zipCode,
+    bool? isDelete,
+    bool? isDefault,
+    String? id,
+    String? region,
+  }) {
+    _location = location;
+    _locationTag = locationTag;
+    _streetName = streetName;
+    _lattitude = lattitude;
+    _longitude = longitude;
+    _city = city;
+    _state = state;
+    _address = address;
+    _zipCode = zipCode;
+    _isDelete = isDelete;
+    _isDefault = isDefault;
+    _id = id;
+    _region = region;
+  }
+
+  Address.fromJson(dynamic json) {
+    _location =
+        json['location'] != null ? Location.fromJson(json['location']) : null;
+    _locationTag = json['locationTag'];
+    _streetName = json['streetName'];
+    _lattitude = json['lattitude'];
+    _longitude = json['longitude'];
+    _city = json['city'];
+    _state = json['state'];
+    _address = json['address'];
+    _zipCode = json['zipCode'];
+    _isDelete = json['is_delete'];
+    _isDefault = json['is_default'];
+    _id = json['_id'];
+    _region = json['region'];
+  }
+  Location? _location;
+  dynamic _locationTag;
+  String? _streetName;
+  String? _lattitude;
+  String? _longitude;
+  String? _city;
+  String? _state;
+  String? _address;
+  String? _zipCode;
+  bool? _isDelete;
+  bool? _isDefault;
+  String? _id;
+  String? _region;
+  Address copyWith({
+    Location? location,
+    dynamic locationTag,
+    String? streetName,
+    String? lattitude,
+    String? longitude,
+    String? city,
+    String? state,
+    String? address,
+    String? zipCode,
+    bool? isDelete,
+    bool? isDefault,
+    String? id,
+    String? region,
+  }) =>
+      Address(
+        location: location ?? _location,
+        locationTag: locationTag ?? _locationTag,
+        streetName: streetName ?? _streetName,
+        lattitude: lattitude ?? _lattitude,
+        longitude: longitude ?? _longitude,
+        city: city ?? _city,
+        state: state ?? _state,
+        address: address ?? _address,
+        zipCode: zipCode ?? _zipCode,
+        isDelete: isDelete ?? _isDelete,
+        isDefault: isDefault ?? _isDefault,
+        id: id ?? _id,
+        region: region ?? _region,
+      );
+  Location? get location => _location;
+  dynamic get locationTag => _locationTag;
+  String? get streetName => _streetName;
+  String? get lattitude => _lattitude;
+  String? get longitude => _longitude;
+  String? get city => _city;
+  String? get state => _state;
+  String? get address => _address;
+  String? get zipCode => _zipCode;
+  bool? get isDelete => _isDelete;
+  bool? get isDefault => _isDefault;
+  String? get id => _id;
+  String? get region => _region;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    if (_location != null) {
+      map['location'] = _location?.toJson();
+    }
+    map['locationTag'] = _locationTag;
+    map['streetName'] = _streetName;
+    map['lattitude'] = _lattitude;
+    map['longitude'] = _longitude;
+    map['city'] = _city;
+    map['state'] = _state;
+    map['address'] = _address;
+    map['zipCode'] = _zipCode;
+    map['is_delete'] = _isDelete;
+    map['is_default'] = _isDefault;
+    map['_id'] = _id;
+    map['region'] = _region;
+    return map;
+  }
+}
+
 SubscriptionDetails subscriptionDetailsFromJson(String str) =>
     SubscriptionDetails.fromJson(json.decode(str));
 String subscriptionDetailsToJson(SubscriptionDetails data) =>
@@ -368,7 +512,7 @@ class SubscriptionDetails {
     _monthlyFee = json['monthlyFee'];
     _isPaidMontly = json['isPaidMontly'];
     _subscriptionCancelChargePerMonth =
-    json['subscriptionCancelChargePerMonth'];
+        json['subscriptionCancelChargePerMonth'];
     _subscriptionId = json['subscriptionId'];
     _expiry = json['expiry'];
     _type = json['type'];

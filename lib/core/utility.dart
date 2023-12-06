@@ -23,6 +23,13 @@ class Utility {
     }
   }
 
+  static String generateFormattedDate(String date) {
+    DateTime inputDate = DateTime.parse(date);
+    DateFormat dateFormat = DateFormat('MM-dd-yyyy , hh:mm a');
+    String formattedDate = dateFormat.format(inputDate);
+    return formattedDate;
+  }
+
   static String detailDate(DateTime date) {
     final String formattedDate = DateFormat('MMM dd yyyy').format(date);
     return formattedDate;

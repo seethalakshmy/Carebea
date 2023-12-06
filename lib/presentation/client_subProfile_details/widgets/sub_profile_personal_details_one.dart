@@ -58,7 +58,7 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
             Expanded(
               child: RowColonCombo.twoHundred(
                   label: AppString.addressLine1.val,
-                  value: personalDetails?.addressline1 ?? '',
+                  value: state.response?.data?.address?.first.address ?? '',
                   // personalDetails?.addressLine ?? "",
                   fontSize: FS.font13PointFive.val),
             ),
@@ -77,7 +77,7 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
             Expanded(
               child: RowColonCombo.twoHundred(
                   label: AppString.street.val,
-                  value: personalDetails?.street ?? '',
+                  value: state.response?.data?.address?.first.streetName ?? '',
                   fontSize: FS.font13PointFive.val),
             ),
             !isLg(context)
@@ -95,7 +95,7 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
             Expanded(
               child: RowColonCombo.twoHundred(
                   label: AppString.city.val,
-                  value: personalDetails?.city ?? "",
+                  value: state.response?.data?.address?.first.city ?? "",
                   // personalDetails?.street ?? "",
                   fontSize: FS.font13PointFive.val),
             ),
@@ -114,7 +114,7 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
             Expanded(
               child: RowColonCombo.twoHundred(
                   label: AppString.state.val,
-                  value: personalDetails?.state ?? "",
+                  value: state.response?.data?.address?.first.state ?? "",
                   // personalDetails?.zip ?? "",
                   fontSize: FS.font13PointFive.val),
             ),
@@ -133,7 +133,7 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
             Expanded(
               child: RowColonCombo.twoHundred(
                   label: AppString.zip.val,
-                  value: personalDetails?.zip ?? '',
+                  value: state.response?.data?.address?.first.zipCode ?? '',
                   fontSize: FS.font13PointFive.val),
             ),
             !isLg(context)
