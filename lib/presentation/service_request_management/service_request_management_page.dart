@@ -501,10 +501,16 @@ class _ServiceRequestManagementPageState
                       text: item.caregiverName ?? "",
                     )),
                     DataCell(_rowsView(
-                      text: Utility.generateFormattedDate(item.startDate ?? ""),
+                      text: Utility.generateFormattedDate(
+                          DateTime.parse(item.startDate ?? "")
+                              .toLocal()
+                              .toString()),
                     )),
                     DataCell(_rowsView(
-                      text: Utility.generateFormattedDate(item.endDate ?? ""),
+                      text: Utility.generateFormattedDate(
+                          DateTime.parse(item.endDate ?? "")
+                              .toLocal()
+                              .toString()),
                     )),
                     /*DataCell(_rowsView(
                       text:

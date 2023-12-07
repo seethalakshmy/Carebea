@@ -431,7 +431,7 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                 height: DBL.twenty.val, width: DBL.twoHundred.val)
             : Center(
                 child: CustomText(
-                  AppString.uploadYourProfilePhoto.val,
+                  AppString.uploadProfilePhoto.val,
                   style: TS().gRoboto(
                       fontSize: FS.font14.val,
                       fontWeight: FW.w400.val,
@@ -985,7 +985,8 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
                   widget.onboardingBloc.state.copyWith(nextClicked: false));
             }
             if (widget.onboardingBloc.state.pickedProfilePic!.name.isEmpty) {
-              CSnackBar.showError(context, msg: AppString.emptyProfilePic.val);
+              CSnackBar.showError(context,
+                  msg: AppString.pleaseSelectProfilePicture.val);
             }
 
             if (widget.onboardingBloc.state.pickedProfilePic!.size > 0) {

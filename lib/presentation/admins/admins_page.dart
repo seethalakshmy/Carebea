@@ -593,27 +593,6 @@ class _AdminsPageState extends State<AdminsPage> {
     );
   }
 
-  _statusBox(bool isActive) {
-    return CustomContainer.decoration(
-      width: DBL.seventy.val,
-      height: DBL.thirty.val,
-      padding:
-          EdgeInsets.symmetric(vertical: DBL.five.val, horizontal: DBL.ten.val),
-      decoration: BoxDecoration(
-          color: isActive ? AppColor.green3.val : AppColor.offWhite.val,
-          borderRadius: PR().circularRadius(DBL.eight.val)),
-      child: CustomText(
-        textAlign: TextAlign.center,
-        isActive ? AppString.active.val : AppString.inActive.val,
-        style: TS().gRoboto(
-          fontWeight: FW.w500.val,
-          fontSize: FS.font12.val,
-          color: isActive ? AppColor.green.val : AppColor.lightGrey6.val,
-        ),
-      ),
-    );
-  }
-
   _getAdminEvent() {
     _adminsBloc.add(AdminEvent.getAdmins(
         userId: _adminUserId,

@@ -168,7 +168,8 @@ class MedicationWidget extends StatelessWidget {
     return RowColonCombo.twoHundred(
         label: AppString.expirationDate.val,
         value: Utility.dateConverter(
-            date: data?.expirationDate ?? '',
+            date:
+                DateTime.parse(data?.expirationDate ?? '').toLocal().toString(),
             currentFormat: 'dd/mm/yyyy',
             convertToFormat: 'mm/dd/yyyy'),
         fontSize: FS.font13PointFive.val);

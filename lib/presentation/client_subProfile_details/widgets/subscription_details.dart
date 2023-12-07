@@ -42,8 +42,9 @@ class SubscriptionDetailsView extends StatelessWidget {
     return RowColonCombo.threeSeventy(
         label: AppString.startDate.val,
         value: Utility.serviceDate(
-            DateTime.tryParse(subscriptionDetails?.startedAt ?? '') ??
-                DateTime.now()),
+            (DateTime.tryParse(subscriptionDetails?.startedAt ?? '') ??
+                    DateTime.now())
+                .toLocal()),
         fontSize: FS.font13PointFive.val);
   }
 
@@ -59,7 +60,7 @@ class SubscriptionDetailsView extends StatelessWidget {
         label: AppString.endDate.val,
         value: Utility.serviceDate(
             DateTime.tryParse(subscriptionDetails?.expiry ?? '') ??
-                DateTime.now()),
+                DateTime.now().toLocal()),
         fontSize: FS.font13PointFive.val);
   }
 

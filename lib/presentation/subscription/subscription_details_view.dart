@@ -198,7 +198,8 @@ class SubscriptionDetailScreen extends StatelessWidget {
           RowColonCombo.twoHundred(
               label: AppString.startDateAndTime.val,
               value: Utility.serviceDate(
-                DateTime.parse(item.subscriptionDetails?.startedAt ?? ""),
+                DateTime.parse(item.subscriptionDetails?.startedAt ?? "")
+                    .toLocal(),
               ),
               fontSize: FS.font13PointFive.val),
           CustomSizedBox(
@@ -224,7 +225,8 @@ class SubscriptionDetailScreen extends StatelessWidget {
           RowColonCombo.twoHundred(
               label: AppString.endDateAndTime.val,
               value: Utility.serviceDate(
-                  DateTime.parse(item.subscriptionDetails?.expiry ?? "")),
+                  DateTime.parse(item.subscriptionDetails?.expiry ?? "")
+                      .toLocal()),
               fontSize: FS.font13PointFive.val),
 
           // isLg(context) ? _rightView() : CustomSizedBox.shrink(),

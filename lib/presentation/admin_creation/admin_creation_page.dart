@@ -184,6 +184,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
           ),
           CustomSizedBox(height: DBL.ten.val),
           CustomDropdown<Result>(
+            hideIcon: _isView! ? true : false,
             isError: state.isDropDownError,
             errorMsg: AppString.emptyRole.val,
             onChange: (Result value, int index) {
@@ -235,7 +236,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                   fontSize: FS.font15.val,
                   color: AppColor.columColor2.val),
             ),
-          ),
+          )
         ],
       ),
     );

@@ -382,11 +382,13 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
               )),
               DataCell(_rowsView(
                   text: Utility.serviceDate(
-                DateTime.parse(item.subscriptionDetails?.startedAt ?? ""),
+                DateTime.parse(item.subscriptionDetails?.startedAt ?? "")
+                    .toLocal(),
               ))),
               DataCell(_rowsView(
                 text: Utility.serviceDate(
-                  DateTime.parse(item.subscriptionDetails?.expiry ?? ""),
+                  DateTime.parse(item.subscriptionDetails?.expiry ?? "")
+                      .toLocal(),
                 ),
               )),
               // DataCell(_rowsView(text: item.email ?? "")),

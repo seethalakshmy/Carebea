@@ -70,6 +70,7 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
         .getString('edit', "")
         .isNotEmpty) {
       _isEdit = true;
+      roleCreationBloc.isEdit = _isEdit;
       roleCreationBloc.add(const RoleCreationEvent.isEdit(true));
     } else {
       _isEdit = false;

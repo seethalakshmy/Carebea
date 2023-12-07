@@ -199,7 +199,7 @@ class _VideoManagementPageState extends State<VideoManagementPage> {
                         ? AppString.forClient.val
                         : AppString.forCa.val)),
                 DataCell(_tableRowView(
-                    '', Utility.generateFormattedDate((item.updatedAt ?? '')))),
+                    '', Utility.generateFormattedDate((DateTime.parse(item.updatedAt ?? '').toLocal().toString())))),
 
                 // DataCell(_statusBox(item.status ?? false)),
                 DataCell(TableActions(

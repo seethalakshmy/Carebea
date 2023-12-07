@@ -281,7 +281,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
         CustomDropdown<int>(
           onChange: (int value, int index) {
             CustomLog.log("val:::${value.toString()}");
-            _filterId = value;
+            _filterId = value == 2 ? null : value;
             _page = 1;
             _getCareGiverEvent();
           },
@@ -302,7 +302,11 @@ class _CareGiversPageState extends State<CareGiversPage> {
             color: AppColor.white.val,
             padding: EdgeInsets.all(DBL.five.val),
           ),
-          items: [AppString.active.val, AppString.inActive.val]
+          items: [
+            AppString.active.val,
+            AppString.inActive.val,
+            AppString.all.val,
+          ]
               .asMap()
               .entries
               .map(

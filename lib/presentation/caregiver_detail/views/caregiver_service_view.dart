@@ -220,7 +220,7 @@ class _CareGiverServiceViewState extends State<CareGiverServiceView> {
               DataCell(TableRowImageView(
                   name: "${item.client?.firstName} ${item.client?.lastName}",
                   imageUrl: item.client?.profile ?? "")),
-              DataCell(_tableRowView(item.service ?? "")),
+              DataCell(_tableRowView(item.id ?? "")),
               DataCell(
                   _tableRowView(item.startDateTime?.parseWithFormat() ?? "")),
               DataCell(

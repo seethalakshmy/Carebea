@@ -231,7 +231,7 @@ class ServiceDetailsPopUp extends StatelessWidget {
                   child: RowColonCombo.twoHundred(
                       label: AppString.startDateAndTime.val,
                       value: Utility.serviceDate(
-                        DateTime.parse(services.startDateTime ?? ""),
+                        DateTime.parse(services.startDateTime ?? "").toLocal(),
                       ),
                       fontSize: FS.font13PointFive.val)),
               !isLg(context)
@@ -248,7 +248,7 @@ class ServiceDetailsPopUp extends StatelessWidget {
                 child: RowColonCombo.twoHundred(
                     label: AppString.endDateAndTime.val,
                     value: Utility.serviceDate(
-                        DateTime.parse(services.endDateTime ?? "")),
+                        DateTime.parse(services.endDateTime ?? "").toLocal()),
                     fontSize: FS.font13PointFive.val),
               ),
               !isLg(context)

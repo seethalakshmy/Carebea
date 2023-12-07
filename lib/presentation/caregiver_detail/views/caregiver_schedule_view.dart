@@ -137,7 +137,6 @@ class CareGiverScheduleView extends StatelessWidget {
 
   CustomSizedBox _appointmentListView(BuildContext context) {
     return CustomSizedBox(
-      height: DBL.oneSeventy.val,
       width: isXS3(context)
           ? DBL.threeFifty.val
           : isXS2(context)
@@ -148,7 +147,7 @@ class CareGiverScheduleView extends StatelessWidget {
                       ? DBL.fourEighty.val
                       : DBL.sevenFifty.val,
       child: CustomListViewBuilder(
-        scrollDirection: Axis.horizontal,
+        scrollDirection: Axis.vertical,
         shrinkWrap: true,
         itemCount: state.selectedScheduleServices.length,
         itemBuilder: (BuildContext context, int index) {
@@ -208,7 +207,7 @@ class CareGiverScheduleView extends StatelessWidget {
           width: DBL.ten.val,
         ),
         CustomText(
-          DateFormat("dd MMM y").format(state.selectedDate),
+          DateFormat("MM - dd - yyyy").format(state.selectedDate),
           style: TS().gRoboto(
               fontSize: isXS2(context) ? FS.font14.val : FS.font18.val,
               fontWeight: FW.w500.val,

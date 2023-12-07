@@ -67,18 +67,19 @@ FaqListData dataFromJson(String str) => FaqListData.fromJson(json.decode(str));
 String dataToJson(FaqListData data) => json.encode(data.toJson());
 
 class FaqListData {
-  FaqListData({
-    String? id,
-    String? question,
-    String? answer,
-    bool? status,
-    bool? forClient,
-  }) {
+  FaqListData(
+      {String? id,
+      String? question,
+      String? answer,
+      bool? status,
+      bool? forClient,
+      String? updatedAt}) {
     _id = id;
     _question = question;
     _answer = answer;
     _status = status;
     _forClient = forClient;
+    _updatedAt = updatedAt;
   }
 
   FaqListData.fromJson(dynamic json) {
@@ -87,31 +88,34 @@ class FaqListData {
     _answer = json['answer'];
     _status = json['status'];
     _forClient = json['for_client'];
+    _updatedAt = json['updated_at'];
   }
   String? _id;
   String? _question;
   String? _answer;
   bool? _status;
   bool? _forClient;
-  FaqListData copyWith({
-    String? id,
-    String? question,
-    String? answer,
-    bool? status,
-    bool? forClient,
-  }) =>
+  String? _updatedAt;
+  FaqListData copyWith(
+          {String? id,
+          String? question,
+          String? answer,
+          bool? status,
+          bool? forClient,
+          String? updatedAt}) =>
       FaqListData(
-        id: id ?? _id,
-        question: question ?? _question,
-        answer: answer ?? _answer,
-        status: status ?? _status,
-        forClient: forClient ?? _forClient,
-      );
+          id: id ?? _id,
+          question: question ?? _question,
+          answer: answer ?? _answer,
+          status: status ?? _status,
+          forClient: forClient ?? _forClient,
+          updatedAt: updatedAt ?? _updatedAt);
   String? get id => _id;
   String? get question => _question;
   String? get answer => _answer;
   bool? get status => _status;
   bool? get forClient => _forClient;
+  String? get updatedAt => _updatedAt;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -120,6 +124,7 @@ class FaqListData {
     map['answer'] = _answer;
     map['status'] = _status;
     map['for_client'] = _forClient;
+    map['updated_at'] = _updatedAt;
     return map;
   }
 }

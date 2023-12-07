@@ -300,7 +300,10 @@ class ServiceDetailsAlert extends StatelessWidget {
                   : const CustomSizedBox(),
               title == AppString.upcoming.val
                   ? CustomText(
-                      serviceBloc.generateDaysLeft(service.serviceDate ?? ""),
+                      serviceBloc.generateDaysLeft(
+                          DateTime.parse(service.serviceDate ?? "")
+                              .toLocal()
+                              .toString()),
                       style: TS().gRoboto(
                           color: AppColor.red2.val, fontWeight: FW.w500.val),
                     )
@@ -333,21 +336,33 @@ class ServiceDetailsAlert extends StatelessWidget {
           _textAndSubText(
               context: context,
               text: AppString.startDateAndTime.val,
-              subText:
-                  Utility.generateFormattedDate(service.startDateTime ?? "")),
+              subText: Utility.generateFormattedDate(
+                  DateTime.parse(service.startDateTime ?? "")
+                      .toLocal()
+                      .toString())),
           _textAndSubText(
               context: context,
               text: AppString.endDateAndTime.val,
-              subText:
-                  Utility.generateFormattedDate(service.endDateTime ?? "")),
+              subText: Utility.generateFormattedDate(
+                  DateTime.parse(service.endDateTime ?? "")
+                      .toLocal()
+                      .toString())),
           _textAndSubText(
               context: context,
               text: AppString.location.val,
               subText: service.address != null
-                  ? (service.address!.streetName ?? '') +
+                  ? (service.address?.address ?? '') +
+                      ('\n') +
+                      (service.address?.streetName ?? '') +
+                      ('\n') +
+                      (service.address?.city ?? '') +
+                      (',') +
+                      (service.address?.state ?? '') +
                       (' ') +
-                      service.address!.locationTag!.replaceAll(", ", ",\n")
-                  : ''),
+                      (service.address?.zipCode ?? '') +
+                      ('\n') +
+                      ('USA')
+                  : '')
         ],
       ),
     );
@@ -916,11 +931,11 @@ class ServiceDetailsAlert extends StatelessWidget {
                                             : AppColor.red.val),
                               ),
                               CustomText(
-                                  Utility.generateFormattedDate(
+                                  Utility.generateFormattedDate(DateTime.parse(
                                     service.refundDetails!.first
                                             .statusHistory![index].date ??
                                         "",
-                                  ),
+                                  ).toLocal().toString()),
                                   style: TS().gRoboto(
                                       fontSize: FS.font13.val,
                                       fontWeight: FW.w400.val,
@@ -1117,65 +1132,87 @@ class ServiceDetailsAlert extends StatelessWidget {
                             : Radius.circular(DBL.eight.val)),
                     border: Border.all(
                         color: AppColor.lightGrey.val, width: DBL.one.val)),
-                child: ListView.builder(
-                    itemCount: service.serviceHistory!.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: DBL.twenty.val),
-                              child: Column(
-                                children: [
-                                  CircleAvatar(
-                                      backgroundColor: AppColor.green2.val,
-                                      maxRadius: DBL.seven.val),
-                                  CustomContainer(
-                                      width: DBL.one.val,
-                                      height: DBL.eighty.val,
-                                      color: AppColor.lightGrey.val)
-                                ],
-                              ),
-                            ),
-                            CustomSizedBox(height: DBL.twenty.val),
-                            Padding(
-                              padding: EdgeInsets.only(left: DBL.twenty.val),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomText(
-                                      service.serviceHistory![index].title ??
-                                          "",
-                                      style: TS().gRoboto(
-                                          color: AppColor.darkGrey.val,
-                                          fontSize: FS.font15.val,
-                                          fontWeight: FW.w500.val)),
-                                  CustomText(
-                                      Utility.generateFormattedDate(
-                                              DateTime.parse(service
-                                                          .serviceHistory![
-                                                              index]
-                                                          .time ??
-                                                      '')
-                                                  .toLocal()
-                                                  .toString()) ??
-                                          '',
-                                      style: TS().gRoboto(
-                                          color: AppColor.lightGrey5.val,
-                                          fontSize: FS.font13.val,
-                                          fontWeight: FW.w400.val)),
-                                  /*CustomText("completed date : 10/09/2023",
-                                      style: TS().gRoboto(
-                                          color: AppColor.lightGrey5.val,
-                                          fontSize: FS.font13.val,
-                                          fontWeight: FW.w400.val)),*/
-                                ],
-                              ),
-                            )
-                          ]);
-                    }),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: CustomText(
+                          service.isRescheduled == true
+                              ? AppString.rescheduledService.val
+                              : service.isRebook == true
+                                  ? AppString.rebookedService.val
+                                  : '',
+                          style: TS().gRoboto(
+                              color: AppColor.darkGrey.val,
+                              fontSize: FS.font15.val,
+                              fontWeight: FW.w500.val)),
+                    ),
+                    ListView.builder(
+                        itemCount: service.serviceHistory!.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(left: DBL.twenty.val),
+                                  child: Column(
+                                    children: [
+                                      CircleAvatar(
+                                          backgroundColor: AppColor.green2.val,
+                                          maxRadius: DBL.seven.val),
+                                      CustomContainer(
+                                          width: DBL.one.val,
+                                          height: DBL.eighty.val,
+                                          color: AppColor.lightGrey.val)
+                                    ],
+                                  ),
+                                ),
+                                CustomSizedBox(height: DBL.twenty.val),
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(left: DBL.twenty.val),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomText(
+                                          service.serviceHistory![index]
+                                                  .title ??
+                                              "",
+                                          style: TS().gRoboto(
+                                              color: AppColor.darkGrey.val,
+                                              fontSize: FS.font15.val,
+                                              fontWeight: FW.w500.val)),
+                                      CustomText(
+                                          Utility.generateFormattedDate(
+                                                  DateTime.parse(service
+                                                              .serviceHistory![
+                                                                  index]
+                                                              .time ??
+                                                          '')
+                                                      .toLocal()
+                                                      .toString()) ??
+                                              '',
+                                          style: TS().gRoboto(
+                                              color: AppColor.lightGrey5.val,
+                                              fontSize: FS.font13.val,
+                                              fontWeight: FW.w400.val)),
+                                      /*CustomText("completed date : 10/09/2023",
+                                          style: TS().gRoboto(
+                                              color: AppColor.lightGrey5.val,
+                                              fontSize: FS.font13.val,
+                                              fontWeight: FW.w400.val)),*/
+                                    ],
+                                  ),
+                                )
+                              ]);
+                        }),
+                  ],
+                ),
               )
             : const CustomSizedBox()
       ],

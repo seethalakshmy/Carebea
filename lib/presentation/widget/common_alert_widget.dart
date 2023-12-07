@@ -9,17 +9,17 @@ import 'custom_text.dart';
 import 'custom_text_field.dart';
 
 class CommonAlertWidget extends StatelessWidget {
-  const CommonAlertWidget({
-    super.key,
-    required this.label,
-    required this.onTapYes,
-    required this.heading,
-    this.isTextField = false,
-    this.isLoading = false,
-    this.controller,
-    this.validator,
-    this.height,
-  });
+  const CommonAlertWidget(
+      {super.key,
+      required this.label,
+      required this.onTapYes,
+      required this.heading,
+      this.isTextField = false,
+      this.isLoading = false,
+      this.controller,
+      this.validator,
+      this.height,
+      this.width});
 
   final String heading;
   final String label;
@@ -27,6 +27,7 @@ class CommonAlertWidget extends StatelessWidget {
   final bool isTextField;
   final bool isLoading;
   final double? height;
+  final double? width;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
 
@@ -35,7 +36,7 @@ class CommonAlertWidget extends StatelessWidget {
     return CustomAlertDialogWidget(
       heading: heading,
       height: height ?? MediaQuery.of(context).size.height * .3,
-      width: MediaQuery.of(context).size.width * .5,
+      width: width ?? MediaQuery.of(context).size.width * .5,
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: DBL.twentyFive.val,
@@ -55,8 +56,11 @@ class CommonAlertWidget extends StatelessWidget {
                   fontWeight: FW.w400.val),
             ),
             CustomSizedBox(
-              height: isTextField ? DBL.twenty.val : height == 150
-                  ? 20 : DBL.zero.val,
+              height: isTextField
+                  ? DBL.twenty.val
+                  : height == 150
+                      ? 20
+                      : DBL.zero.val,
             ),
             isTextField ? reasonField() : CustomSizedBox.shrink(),
             CustomSizedBox(
