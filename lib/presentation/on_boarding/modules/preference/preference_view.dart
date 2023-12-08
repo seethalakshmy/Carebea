@@ -185,7 +185,7 @@ class PreferenceView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(
-          AppString.howManyExperience.val,
+          AppString.yearOfExperience.val + ('?'),
           style: TS().gRoboto(fontSize: FS.font15.val, fontWeight: FW.w400.val),
         ),
         CustomSizedBox(height: DBL.ten.val),
@@ -227,7 +227,8 @@ class PreferenceView extends StatelessWidget {
 
   _smokerWidget(OnboardingState state) {
     return _yesOrNoWidgetWithTitle(
-        AppString.serveHomeWithSmoker.val, state.isSmokerSelected, (val) {
+        AppString.willingToServeWithSmoker.val + ('?'), state.isSmokerSelected,
+        (val) {
       onboardingBloc.add(OnboardingEvent.radioSmoker(val!));
     });
   }
@@ -242,7 +243,8 @@ class PreferenceView extends StatelessWidget {
 
   _petsWidget(OnboardingState state) {
     return _yesOrNoWidgetWithTitle(
-        AppString.serveClientsWithPets.val, state.isPetsSelected, (val) {
+        AppString.willingToWorkWithPets.val + ("?"), state.isPetsSelected,
+        (val) {
       onboardingBloc.add(OnboardingEvent.radioPet(val!));
     });
   }

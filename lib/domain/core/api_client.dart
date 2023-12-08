@@ -757,6 +757,9 @@ abstract class ApiClient {
       @Field('page') String page,
       @Field('limit') String limit,
       @Field('search_term') String searchTerm,
+      @Field('start_date') String startDate,
+      @Field('end_date') String endDate,
+      @Field('status') dynamic status,
       @Field('subscription_type') dynamic subscriptionType);
 
   @GET("/admin/get-general-settings?")

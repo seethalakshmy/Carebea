@@ -18,6 +18,11 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
   List<SubscriptionResult> subscriptionList = [];
   List<Pagination> paginationList = [];
   int filterId = 0;
+  int statusId = -1;
+  DateTime? selectedToDateTime;
+  DateTime? selectedFromDateTime;
+  String selectedFromDate = "";
+  String selectedToDate = "";
 
   SubscriptionBloc(this.subscriptionRepository)
       : super(SubscriptionState.initial()) {
@@ -33,6 +38,9 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
             page: event.page,
             limit: event.limit,
             searchTerm: event.searchTerm,
+            status: event.status,
+            startDate: event.startDate,
+            endDate: event.endDate,
             subscriptionType: event.subscriptionType);
     var homeState = result.fold((l) {
       return state.copyWith(error: l.error, isLoading: false);

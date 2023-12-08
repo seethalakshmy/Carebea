@@ -251,10 +251,10 @@ class _CareGiversPageState extends State<CareGiversPage> {
             },
             text: AppString.create.val,
             color: AppColor.primaryColor.val,
-            height: DBL.fifty.val,
+            height: DBL.fiftyFive.val,
             borderRadius: DBL.five.val,
-            padding: EdgeInsets.symmetric(
-                horizontal: DBL.twentyTwo.val, vertical: DBL.ten.val),
+            // padding: EdgeInsets.symmetric(
+            //     horizontal: DBL.twentyTwo.val, vertical: DBL.ten.val),
             textStyle: TS().gRoboto(
                 color: AppColor.white.val,
                 fontWeight: FW.w600.val,
@@ -281,7 +281,7 @@ class _CareGiversPageState extends State<CareGiversPage> {
         CustomDropdown<int>(
           onChange: (int value, int index) {
             CustomLog.log("val:::${value.toString()}");
-            _filterId = value;
+            _filterId = value == 2 ? null : value;
             _page = 1;
             _getCareGiverEvent();
           },
@@ -302,7 +302,11 @@ class _CareGiversPageState extends State<CareGiversPage> {
             color: AppColor.white.val,
             padding: EdgeInsets.all(DBL.five.val),
           ),
-          items: [AppString.active.val, AppString.inActive.val]
+          items: [
+            AppString.active.val,
+            AppString.inActive.val,
+            AppString.all.val,
+          ]
               .asMap()
               .entries
               .map(

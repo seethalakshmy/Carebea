@@ -185,6 +185,7 @@ class ServiceDetailsData {
     int? replacementStatus,
     String? replacedServiceId,
     bool? isRebook,
+    bool? isRescheduled,
     num? status,
     CaregiverInfo? caregiverInfo,
   }) {
@@ -256,6 +257,7 @@ class ServiceDetailsData {
     _replacementStatus = replacementStatus;
     _replacedServiceId = replacedServiceId;
     _isRebook = isRebook;
+    _isRescheduled = isRescheduled;
     _status = status;
     _caregiverInfo = caregiverInfo;
     _serviceHistory = serviceHistory;
@@ -369,6 +371,7 @@ class ServiceDetailsData {
     _replacementStatus = json['ca_replacement_status'];
     _replacedServiceId = json['new_service_id'];
     _isRebook = json['is_rebook'];
+    _isRescheduled = json['is_reschedule_service'];
     _status = json['status'];
     _caregiverInfo = json['caregiver_info'] != null
         ? CaregiverInfo.fromJson(json['caregiver_info'])
@@ -502,6 +505,7 @@ class ServiceDetailsData {
     int? replacementStatus,
     String? replacedServiceId,
     bool? isRebook,
+    bool? isRescheduled,
     num? status,
     CaregiverInfo? caregiverInfo,
   }) =>
@@ -585,6 +589,7 @@ class ServiceDetailsData {
         replacementStatus: replacementStatus ?? _replacementStatus,
         replacedServiceId: replacedServiceId ?? _replacedServiceId,
         isRebook: isRebook ?? _isRebook,
+        isRescheduled: isRescheduled ?? _isRescheduled,
         status: status ?? _status,
         caregiverInfo: caregiverInfo ?? _caregiverInfo,
       );
@@ -599,6 +604,7 @@ class ServiceDetailsData {
   String? _reportIssueByCgDesc;
   String? _canceledBy;
   bool? _isRebook;
+  bool? _isRescheduled;
   num? _status;
   CaregiverInfo? _caregiverInfo;
   String? get profileId => _profileId;
@@ -671,6 +677,7 @@ class ServiceDetailsData {
   int? get replacementStatus => _replacementStatus;
   String? get replacedServiceId => _replacedServiceId;
   bool? get isRebook => _isRebook;
+  bool? get isRescheduled => _isRescheduled;
   num? get status => _status;
   CaregiverInfo? get caregiverInfo => _caregiverInfo;
 
@@ -778,6 +785,7 @@ class ServiceDetailsData {
     map['ca_replacement_status'] = _replacementStatus;
     map['new_service_id'] = _replacedServiceId;
     map['is_rebook'] = _isRebook;
+    map['is_reschedule_service'] = _isRescheduled;
     map['status'] = _status;
     if (_caregiverInfo != null) {
       map['caregiver_info'] = _caregiverInfo?.toJson();
@@ -1444,8 +1452,8 @@ class Address {
     _streetName = json['streetName'];
     _lattitude = json['lattitude'];
     _longitude = json['longitude'];
-    _city = json['city'];
-    _state = json['state'];
+    _city = json['cityName'];
+    _state = json['stateName'];
     _address = json['address'];
     _locationTag = json['locationTag'];
     _zipCode = json['zipCode'];

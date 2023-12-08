@@ -348,6 +348,14 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
           ),
           RowColonCombo.twoHundred(
               customWidthLg1: DBL.twoHundred.val,
+              label: AppString.addressLine2.val,
+              value: personalDetails?.street ?? "",
+              fontSize: FS.font13PointFive.val),
+          CustomSizedBox(
+            height: DBL.six.val,
+          ),
+          RowColonCombo.twoHundred(
+              customWidthLg1: DBL.twoHundred.val,
               label: AppString.city.val,
               value: personalDetails?.city ?? "",
               fontSize: FS.font13PointFive.val),
@@ -356,8 +364,8 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
           ),
           RowColonCombo.twoHundred(
               customWidthLg1: DBL.twoHundred.val,
-              label: AppString.street.val,
-              value: personalDetails?.street ?? "",
+              label: AppString.state.val,
+              value: personalDetails?.state ?? "",
               fontSize: FS.font13PointFive.val),
           CustomSizedBox(
             height: DBL.six.val,
@@ -370,11 +378,6 @@ class _CaregiverVerificationPageState extends State<CaregiverVerificationPage> {
           CustomSizedBox(
             height: DBL.six.val,
           ),
-          RowColonCombo.twoHundred(
-              customWidthLg1: DBL.twoHundred.val,
-              label: AppString.state.val,
-              value: personalDetails?.state ?? "",
-              fontSize: FS.font13PointFive.val),
           isLarge(context)
               ? CustomSizedBox(
                   height: DBL.six.val,

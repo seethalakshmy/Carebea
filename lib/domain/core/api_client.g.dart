@@ -2936,6 +2936,9 @@ class _ApiClient implements ApiClient {
     page,
     limit,
     searchTerm,
+    startDate,
+    endDate,
+    status,
     subscriptionType,
   ) async {
     const _extra = <String, dynamic>{};
@@ -2946,6 +2949,9 @@ class _ApiClient implements ApiClient {
       'page': page,
       'limit': limit,
       'search_term': searchTerm,
+      'start_date': startDate,
+      'end_date': endDate,
+      'status': status,
       'subscription_type': subscriptionType,
     };
     final _result = await _dio

@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
+import '../../core/utility.dart';
 import '../../domain/admins/model/admin_get_response.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../side_menu/side_menu_page.dart';
@@ -168,11 +169,16 @@ class _FaqPageState extends State<FaqPage> {
               ),
             ),
             DataColumn2(
-              size: ColumnSize.L,
+              size: ColumnSize.M,
               label: _tableColumnView(
                 AppString.category.val,
               ),
             ),
+            DataColumn2(
+                size: ColumnSize.M,
+                label: _tableColumnView(
+                  AppString.lastUpdateDate.val,
+                )),
             DataColumn2(
               size: ColumnSize.M,
               label: _tableColumnView(
@@ -196,6 +202,12 @@ class _FaqPageState extends State<FaqPage> {
                     item.forClient ?? false
                         ? AppString.forClient.val
                         : AppString.forCa.val)),
+                DataCell(_tableRowView(
+                    "",
+                    Utility.generateFormattedDate(
+                        DateTime.parse(item.updatedAt ?? '')
+                            .toLocal()
+                            .toString()))),
 
                 // DataCell(_statusBox(item.status ?? false)),
                 DataCell(TableActions(

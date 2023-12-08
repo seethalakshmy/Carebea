@@ -20,25 +20,49 @@ mixin _$SubscriptionEvent {
   String get page => throw _privateConstructorUsedError;
   String get limit => throw _privateConstructorUsedError;
   String get searchTerm => throw _privateConstructorUsedError;
+  String get startDate => throw _privateConstructorUsedError;
+  String get endDate => throw _privateConstructorUsedError;
+  dynamic get status => throw _privateConstructorUsedError;
   dynamic get subscriptionType => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, String page, String limit,
-            String searchTerm, dynamic subscriptionType)
+    required TResult Function(
+            String userId,
+            String page,
+            String limit,
+            String searchTerm,
+            String startDate,
+            String endDate,
+            dynamic status,
+            dynamic subscriptionType)
         getSubscription,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, String page, String limit,
-            String searchTerm, dynamic subscriptionType)?
+    TResult? Function(
+            String userId,
+            String page,
+            String limit,
+            String searchTerm,
+            String startDate,
+            String endDate,
+            dynamic status,
+            dynamic subscriptionType)?
         getSubscription,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, String page, String limit,
-            String searchTerm, dynamic subscriptionType)?
+    TResult Function(
+            String userId,
+            String page,
+            String limit,
+            String searchTerm,
+            String startDate,
+            String endDate,
+            dynamic status,
+            dynamic subscriptionType)?
         getSubscription,
     required TResult orElse(),
   }) =>
@@ -76,6 +100,9 @@ abstract class $SubscriptionEventCopyWith<$Res> {
       String page,
       String limit,
       String searchTerm,
+      String startDate,
+      String endDate,
+      dynamic status,
       dynamic subscriptionType});
 }
 
@@ -96,6 +123,9 @@ class _$SubscriptionEventCopyWithImpl<$Res, $Val extends SubscriptionEvent>
     Object? page = null,
     Object? limit = null,
     Object? searchTerm = null,
+    Object? startDate = null,
+    Object? endDate = null,
+    Object? status = freezed,
     Object? subscriptionType = freezed,
   }) {
     return _then(_value.copyWith(
@@ -115,6 +145,18 @@ class _$SubscriptionEventCopyWithImpl<$Res, $Val extends SubscriptionEvent>
           ? _value.searchTerm
           : searchTerm // ignore: cast_nullable_to_non_nullable
               as String,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      endDate: null == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       subscriptionType: freezed == subscriptionType
           ? _value.subscriptionType
           : subscriptionType // ignore: cast_nullable_to_non_nullable
@@ -136,6 +178,9 @@ abstract class _$$_GetSubscriptionCopyWith<$Res>
       String page,
       String limit,
       String searchTerm,
+      String startDate,
+      String endDate,
+      dynamic status,
       dynamic subscriptionType});
 }
 
@@ -154,6 +199,9 @@ class __$$_GetSubscriptionCopyWithImpl<$Res>
     Object? page = null,
     Object? limit = null,
     Object? searchTerm = null,
+    Object? startDate = null,
+    Object? endDate = null,
+    Object? status = freezed,
     Object? subscriptionType = freezed,
   }) {
     return _then(_$_GetSubscription(
@@ -173,6 +221,18 @@ class __$$_GetSubscriptionCopyWithImpl<$Res>
           ? _value.searchTerm
           : searchTerm // ignore: cast_nullable_to_non_nullable
               as String,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      endDate: null == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       subscriptionType: freezed == subscriptionType
           ? _value.subscriptionType
           : subscriptionType // ignore: cast_nullable_to_non_nullable
@@ -189,6 +249,9 @@ class _$_GetSubscription implements _GetSubscription {
       required this.page,
       required this.limit,
       required this.searchTerm,
+      required this.startDate,
+      required this.endDate,
+      this.status,
       this.subscriptionType});
 
   @override
@@ -200,11 +263,17 @@ class _$_GetSubscription implements _GetSubscription {
   @override
   final String searchTerm;
   @override
+  final String startDate;
+  @override
+  final String endDate;
+  @override
+  final dynamic status;
+  @override
   final dynamic subscriptionType;
 
   @override
   String toString() {
-    return 'SubscriptionEvent.getSubscription(userId: $userId, page: $page, limit: $limit, searchTerm: $searchTerm, subscriptionType: $subscriptionType)';
+    return 'SubscriptionEvent.getSubscription(userId: $userId, page: $page, limit: $limit, searchTerm: $searchTerm, startDate: $startDate, endDate: $endDate, status: $status, subscriptionType: $subscriptionType)';
   }
 
   @override
@@ -217,12 +286,24 @@ class _$_GetSubscription implements _GetSubscription {
             (identical(other.limit, limit) || other.limit == limit) &&
             (identical(other.searchTerm, searchTerm) ||
                 other.searchTerm == searchTerm) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate) &&
+            const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality()
                 .equals(other.subscriptionType, subscriptionType));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId, page, limit, searchTerm,
+  int get hashCode => Object.hash(
+      runtimeType,
+      userId,
+      page,
+      limit,
+      searchTerm,
+      startDate,
+      endDate,
+      const DeepCollectionEquality().hash(status),
       const DeepCollectionEquality().hash(subscriptionType));
 
   @JsonKey(ignore: true)
@@ -234,34 +315,57 @@ class _$_GetSubscription implements _GetSubscription {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String userId, String page, String limit,
-            String searchTerm, dynamic subscriptionType)
+    required TResult Function(
+            String userId,
+            String page,
+            String limit,
+            String searchTerm,
+            String startDate,
+            String endDate,
+            dynamic status,
+            dynamic subscriptionType)
         getSubscription,
   }) {
-    return getSubscription(userId, page, limit, searchTerm, subscriptionType);
+    return getSubscription(userId, page, limit, searchTerm, startDate, endDate,
+        status, subscriptionType);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String userId, String page, String limit,
-            String searchTerm, dynamic subscriptionType)?
+    TResult? Function(
+            String userId,
+            String page,
+            String limit,
+            String searchTerm,
+            String startDate,
+            String endDate,
+            dynamic status,
+            dynamic subscriptionType)?
         getSubscription,
   }) {
-    return getSubscription?.call(
-        userId, page, limit, searchTerm, subscriptionType);
+    return getSubscription?.call(userId, page, limit, searchTerm, startDate,
+        endDate, status, subscriptionType);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String userId, String page, String limit,
-            String searchTerm, dynamic subscriptionType)?
+    TResult Function(
+            String userId,
+            String page,
+            String limit,
+            String searchTerm,
+            String startDate,
+            String endDate,
+            dynamic status,
+            dynamic subscriptionType)?
         getSubscription,
     required TResult orElse(),
   }) {
     if (getSubscription != null) {
-      return getSubscription(userId, page, limit, searchTerm, subscriptionType);
+      return getSubscription(userId, page, limit, searchTerm, startDate,
+          endDate, status, subscriptionType);
     }
     return orElse();
   }
@@ -301,6 +405,9 @@ abstract class _GetSubscription implements SubscriptionEvent {
       required final String page,
       required final String limit,
       required final String searchTerm,
+      required final String startDate,
+      required final String endDate,
+      final dynamic status,
       final dynamic subscriptionType}) = _$_GetSubscription;
 
   @override
@@ -311,6 +418,12 @@ abstract class _GetSubscription implements SubscriptionEvent {
   String get limit;
   @override
   String get searchTerm;
+  @override
+  String get startDate;
+  @override
+  String get endDate;
+  @override
+  dynamic get status;
   @override
   dynamic get subscriptionType;
   @override

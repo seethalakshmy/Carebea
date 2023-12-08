@@ -18,6 +18,7 @@ part 'role_creation_state.dart';
 
 class RoleCreationBloc extends Bloc<RoleCreationEvent, RoleCreationState> {
   RoleCreationRepository roleCreationRepository;
+  bool? isEdit;
 
   RoleCreationBloc(this.roleCreationRepository)
       : super(RoleCreationState.initial()) {

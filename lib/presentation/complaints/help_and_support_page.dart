@@ -452,11 +452,15 @@ class _HelpAndSupportPageState extends State<HelpAndSupportPage> {
               DataCell(_rowsView(text: item.category ?? "")),
               DataCell(_rowsView(text: item.title)),
               DataCell(_rowsView(
-                  text: _supportTicketsBloc
-                      .generateFormattedDate(item.createdDate ?? ""))),
+                  text: _supportTicketsBloc.generateFormattedDate(
+                      DateTime.parse(item.createdDate ?? "")
+                          .toLocal()
+                          .toString()))),
               DataCell(_rowsView(
-                  text: _supportTicketsBloc
-                      .generateFormattedDate(item.repliedOn ?? ""))),
+                  text: _supportTicketsBloc.generateFormattedDate(
+                      DateTime.parse(item.repliedOn ?? "")
+                          .toLocal()
+                          .toString()))),
               DataCell(_rowsView(text: item.role)),
               DataCell(_rowsView(
                   text:

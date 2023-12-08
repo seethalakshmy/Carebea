@@ -101,78 +101,84 @@ class _TransactionManagementPageState extends State<TransactionManagementPage> {
         elevation: DBL.seven.val,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+          child: BlocBuilder<TransactionManagementBloc,
+              TransactionManagementState>(
+            builder: (context, state) {
+              return Column(
                 children: [
-                  _transactionBloc.state.isInitialLoading
-                      ? _filterLoader()
-                      : _statusDropDown(context),
-                  CustomSizedBox(width: DBL.fifteen.val),
-                  _clearAllFiltersButtonWidget(),
-                  Spacer(),
-                  CTextField(
-                    onSubmitted: (val) {
-                      _transactionBloc.searchQuery = val;
-                      _transactionBloc.paginationPage = 1;
-                      _transactionBloc.add(
-                          TransactionManagementEvent.getTransactions(
-                              page: _transactionBloc.paginationPage.toString(),
-                              limit: _transactionBloc.limit,
-                              filterId: _transactionBloc.filterId,
-                              searchTerm: _searchController.text,
-                              userId: adminId ?? ''));
-                    },
-                    onChanged: (val) {
-                      if (_searchController.text == '') {
-                        _transactionBloc.add(
-                            TransactionManagementEvent.getTransactions(
-                                page:
-                                    _transactionBloc.paginationPage.toString(),
-                                limit: _transactionBloc.limit,
-                                filterId: _transactionBloc.filterId,
-                                searchTerm: _searchController.text,
-                                userId: adminId ?? ''));
-                      }
-                    },
-                    width: Responsive.isWeb(context)
-                        ? DBL.threeFifteen.val
-                        : DBL.twoForty.val,
-                    height: DBL.forty.val,
-                    controller: _searchController,
-                    hintText: AppString.search.val,
-                    hintStyle: TS().gRoboto(
-                        fontSize: FS.font15.val, fontWeight: FW.w500.val),
-                    suffixIcon: InkWell(
-                      onTap: () {
-                        _transactionBloc.add(
-                            TransactionManagementEvent.getTransactions(
-                                page:
-                                    _transactionBloc.paginationPage.toString(),
-                                limit: _transactionBloc.limit,
-                                filterId: _transactionBloc.filterId,
-                                searchTerm: _transactionBloc.searchQuery,
-                                userId: adminId ?? ''));
-                      },
-                      child: CustomSvg(
-                        path: IMG.search.val,
-                        height: 16,
-                        width: 16,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      _transactionBloc.state.isInitialLoading
+                          ? _filterLoader()
+                          : _statusDropDown(context),
+                      CustomSizedBox(width: DBL.fifteen.val),
+                      _clearAllFiltersButtonWidget(),
+                      Spacer(),
+                      CTextField(
+                        onSubmitted: (val) {
+                          _transactionBloc.searchQuery = val;
+                          _transactionBloc.paginationPage = 1;
+                          _transactionBloc.add(
+                              TransactionManagementEvent.getTransactions(
+                                  page: _transactionBloc.paginationPage
+                                      .toString(),
+                                  limit: _transactionBloc.limit,
+                                  filterId: _transactionBloc.filterId,
+                                  searchTerm: _searchController.text,
+                                  userId: adminId ?? ''));
+                        },
+                        onChanged: (val) {
+                          if (_searchController.text == '') {
+                            _transactionBloc.add(
+                                TransactionManagementEvent.getTransactions(
+                                    page: _transactionBloc.paginationPage
+                                        .toString(),
+                                    limit: _transactionBloc.limit,
+                                    filterId: _transactionBloc.filterId,
+                                    searchTerm: _searchController.text,
+                                    userId: adminId ?? ''));
+                          }
+                        },
+                        width: Responsive.isWeb(context)
+                            ? DBL.threeFifteen.val
+                            : DBL.twoForty.val,
+                        height: DBL.forty.val,
+                        controller: _searchController,
+                        hintText: AppString.search.val,
+                        hintStyle: TS().gRoboto(
+                            fontSize: FS.font15.val, fontWeight: FW.w500.val),
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            _transactionBloc.add(
+                                TransactionManagementEvent.getTransactions(
+                                    page: _transactionBloc.paginationPage
+                                        .toString(),
+                                    limit: _transactionBloc.limit,
+                                    filterId: _transactionBloc.filterId,
+                                    searchTerm: _transactionBloc.searchQuery,
+                                    userId: adminId ?? ''));
+                          },
+                          child: CustomSvg(
+                            path: IMG.search.val,
+                            height: 16,
+                            width: 16,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
+                  ),
+                  BlocBuilder<TransactionManagementBloc,
+                      TransactionManagementState>(
+                    builder: (context, state) {
+                      return state.isLoading
+                          ? const LoaderView()
+                          : _bodyView(context, state);
+                    },
                   ),
                 ],
-              ),
-              BlocBuilder<TransactionManagementBloc,
-                  TransactionManagementState>(
-                builder: (context, state) {
-                  return state.isLoading
-                      ? const LoaderView()
-                      : _bodyView(context, state);
-                },
-              ),
-            ],
+              );
+            },
           ),
         ),
       ),

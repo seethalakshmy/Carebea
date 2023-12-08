@@ -453,7 +453,7 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
         customWidthLg1: 180,
         label: AppString.createdDateTime.val,
         value: _complaintDetailBloc.generateFormattedDate(
-            _complaintDetailBloc.complaintDetailsList[0].createdDate ?? ""),
+            DateTime.parse(_complaintDetailBloc.complaintDetailsList[0].createdDate ?? "").toLocal().toString()),
         fontSize: FS.font13PointFive.val);
   }
 
@@ -834,9 +834,9 @@ class _SupportTicketsDetailPageState extends State<SupportTicketsDetailPage> {
                             children: [
                               CustomText(
                                 _complaintDetailBloc.generateFormattedDate(
-                                    _complaintDetailBloc.complaintDetailsList[0]
+                                   DateTime.parse( _complaintDetailBloc.complaintDetailsList[0]
                                         .statusHistory![index].date ??
-                                        ""),
+                                        "").toLocal().toString()),
                                 style: TS().gRoboto(
                                     fontSize: FS.font12.val,
                                     fontWeight: FW.w400.val,

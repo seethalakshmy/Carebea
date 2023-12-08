@@ -7,5 +7,8 @@ class SubscriptionEvent with _$SubscriptionEvent {
       required String page,
       required String limit,
       required String searchTerm,
+      required String startDate,
+      required String endDate,
+      dynamic status,
       dynamic subscriptionType}) = _GetSubscription;
 }

@@ -9,5 +9,8 @@ abstract class ISubscriptionRepo {
       required String page,
       required String limit,
       required String searchTerm,
+      dynamic status,
+      required String startDate,
+      required String endDate,
       dynamic subscriptionType});
 }

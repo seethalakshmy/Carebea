@@ -225,10 +225,10 @@ class _ServiceViewState extends State<ServiceView> {
                   imgUrl: item.caregiver?.profilePic ?? "")),
               DataCell(_rowsView(context,
                   text: Utility.serviceDate(
-                      DateTime.parse(item.startDateTime ?? '')))),
+                      DateTime.parse(item.startDateTime ?? '').toLocal()))),
               DataCell(_rowsView(context,
                   text: Utility.serviceDate(
-                      DateTime.parse(item.endDateTime ?? '')))),
+                      DateTime.parse(item.endDateTime ?? '').toLocal()))),
               DataCell(_rowsView(context,
                   text:
                       '\$ ${Utility.formatAmount(double.tryParse(item.totalServiceFee.toString() ?? "0.0") ?? 0.0)}')),
