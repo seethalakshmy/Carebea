@@ -1,3 +1,5 @@
+import 'dart:js_util';
+
 import 'package:admin_580_tech/application/bloc/subscription/subscription_bloc.dart';
 import 'package:admin_580_tech/infrastructure/subscription/subscription_repository.dart';
 import 'package:admin_580_tech/presentation/subscription/subscription_details_view.dart';
@@ -6,13 +8,16 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../core/custom_snackbar.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/responsive.dart';
+import '../../core/string_extension.dart';
 import '../../core/text_styles.dart';
 import '../../core/utility.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../widget/custom_alert_dialog_widget.dart';
+import '../widget/custom_button.dart';
 import '../widget/custom_card.dart';
 import '../widget/custom_container.dart';
 import '../widget/custom_data_table_2.dart';
@@ -46,6 +51,9 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
   int pageIndex = 0;
   int _start = 0;
   int _end = 10;
+  TextEditingController fromDateController = TextEditingController();
+  TextEditingController toDateController = TextEditingController();
+
   final TextEditingController _searchController = TextEditingController();
   String userId = SharedPreffUtil().getAdminId;
 
@@ -83,6 +91,9 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
             userId: userId,
             page: _page.toString(),
             limit: _limit.toString(),
+            status: null,
+            startDate: "",
+            endDate: "",
             searchTerm: _searchController.text.trim(),
             subscriptionType: null)),
       child: _bodyView(),
@@ -98,27 +109,51 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
           elevation: DBL.seven.val,
           child: CustomContainer(
             padding: EdgeInsets.all(DBL.twenty.val),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+            child: BlocBuilder<SubscriptionBloc, SubscriptionState>(
+              builder: (context, state) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _statusDropDown(context),
-                    Spacer(),
-                    _searchField(),
+                    Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.start,
+                      alignment: WrapAlignment.start,
+                      runAlignment: WrapAlignment.center,
+                      spacing: 20,
+                      runSpacing: 10,
+                      children: [
+                        _statusDropDown(context),
+                        _subscriptionStatusDropDown(context),
+                        _buildDatePicker(
+                            state, fromDateController, AppString.startDate.val,
+                            () {
+                          _selectFromDate(context, state);
+                        }),
+                        _buildDatePicker(
+                            state, toDateController, AppString.endDate.val, () {
+                          _subscriptionBloc.selectedFromDate != "" ||
+                                  fromDateController.text.isNotEmpty
+                              ? _selectToDate(context, state)
+                              : CSnackBar.showError(context,
+                                  msg: 'Please select a startDate');
+                        }),
+                        _searchField(),
+                        _clearAllFiltersButtonWidget()
+                      ],
+                    ),
+                    BlocBuilder<SubscriptionBloc, SubscriptionState>(
+                      builder: (context, state) {
+                        return state.isLoading
+                            ? const TableLoaderView()
+                            : state.isError
+                                ? ErrorView(
+                                    isClientError: false,
+                                    errorMessage: state.error)
+                                : _usersView(context);
+                      },
+                    ),
                   ],
-                ),
-                BlocBuilder<SubscriptionBloc, SubscriptionState>(
-                  builder: (context, state) {
-                    return state.isLoading
-                        ? const TableLoaderView()
-                        : state.isError
-                            ? ErrorView(
-                                isClientError: false, errorMessage: state.error)
-                            : _usersView(context);
-                  },
-                ),
-              ],
+                );
+              },
             ),
           ),
         ),
@@ -127,11 +162,6 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
   }
 
   _usersView(BuildContext context) {
-    // if (_searchController.text != '' || _subscriptionBloc.filterId != 0) {
-    //   debugPrint('builddddd');
-    //
-    //   _page = 1;
-    // }
     if (_page == 1) {
       _start = 0;
       _end = _subscriptionBloc.subscriptionList.length < _limit
@@ -151,10 +181,6 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [],
-              ),
               CustomSizedBox(height: DBL.fifteen.val),
               CustomSizedBox(
                 height: (_limit + 1) * 48,
@@ -167,13 +193,6 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     _statusDropDown(context),
-              //     _searchField(),
-              //   ],
-              // ),
               EmptyView(title: AppString.noUsersFound.val),
             ],
           );
@@ -214,6 +233,11 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
         page: _page.toString(),
         limit: _limit.toString(),
         searchTerm: _searchController.text.trim(),
+        status: _subscriptionBloc.statusId == -1
+            ? null
+            : _subscriptionBloc.statusId,
+        startDate: _subscriptionBloc.selectedFromDate,
+        endDate: _subscriptionBloc.selectedToDate,
         subscriptionType: _subscriptionBloc.filterId == 0
             ? null
             : _subscriptionBloc.filterId.toString()));
@@ -231,6 +255,11 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
             page: _page.toString(),
             limit: _limit.toString(),
             searchTerm: _searchController.text.trim(),
+            status: _subscriptionBloc.statusId == -1
+                ? null
+                : _subscriptionBloc.statusId,
+            startDate: _subscriptionBloc.selectedFromDate,
+            endDate: _subscriptionBloc.selectedToDate,
             subscriptionType: _subscriptionBloc.filterId == 0
                 ? null
                 : _subscriptionBloc.filterId.toString()));
@@ -238,8 +267,9 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
       dropdownButtonStyle: DropdownButtonStyle(
         mainAxisAlignment: MainAxisAlignment.start,
         width: DBL.oneEighty.val,
-        height:
-            Responsive.isMobile(context) ? DBL.fortyFive.val : DBL.forty.val,
+        height: Responsive.isMobile(context)
+            ? DBL.fortyFive.val
+            : DBL.fortySeven.val,
         elevation: DBL.zero.val,
         padding: EdgeInsets.only(left: DBL.fifteen.val),
         backgroundColor: Colors.white,
@@ -277,6 +307,77 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
           .toList(),
       child: CustomText(
         AppString.subscriptionType.val,
+        style: TS().gRoboto(
+            fontWeight: FW.w500.val,
+            fontSize: FS.font15.val,
+            color: AppColor.columColor2.val),
+      ),
+    );
+  }
+
+  CustomDropdown<int> _subscriptionStatusDropDown(BuildContext context) {
+    return CustomDropdown<int>(
+      onChange: (int value, int index) {
+        debugPrint('value $value');
+        debugPrint('index $index');
+        _page = 1;
+        _subscriptionBloc.statusId = value;
+        _subscriptionBloc.add(SubscriptionEvent.getSubscription(
+            userId: userId,
+            page: _page.toString(),
+            limit: _limit.toString(),
+            searchTerm: _searchController.text.trim(),
+            status: _subscriptionBloc.statusId == -1
+                ? null
+                : _subscriptionBloc.statusId,
+            startDate: _subscriptionBloc.selectedFromDate,
+            endDate: _subscriptionBloc.selectedToDate,
+            subscriptionType: _subscriptionBloc.filterId == 0
+                ? null
+                : _subscriptionBloc.filterId.toString()));
+      },
+      dropdownButtonStyle: DropdownButtonStyle(
+        mainAxisAlignment: MainAxisAlignment.start,
+        width: DBL.oneEighty.val,
+        height: Responsive.isMobile(context)
+            ? DBL.fortyFive.val
+            : DBL.fortySeven.val,
+        elevation: DBL.zero.val,
+        padding: EdgeInsets.only(left: DBL.fifteen.val),
+        backgroundColor: Colors.white,
+        primaryColor: AppColor.white.val,
+      ),
+      dropdownStyle: DropdownStyle(
+        borderRadius: BorderRadius.circular(DBL.zero.val),
+        elevation: 2,
+        color: AppColor.white.val,
+        padding: EdgeInsets.all(DBL.five.val),
+      ),
+      items: [
+        AppString.all.val,
+        AppString.inActive.val,
+        AppString.active.val,
+      ]
+          .asMap()
+          .entries
+          .map(
+            (item) => DropdownItem<int>(
+              value: item.key - 1,
+              child: Padding(
+                padding: EdgeInsets.all(DBL.eight.val),
+                child: Text(
+                  item.value,
+                  style: TS().gRoboto(
+                      fontWeight: FW.w500.val,
+                      fontSize: FS.font15.val,
+                      color: AppColor.columColor2.val),
+                ),
+              ),
+            ),
+          )
+          .toList(),
+      child: CustomText(
+        AppString.status.val,
         style: TS().gRoboto(
             fontWeight: FW.w500.val,
             fontSize: FS.font15.val,
@@ -324,49 +425,48 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
         dataRowHeight: DBL.sixty.val,
         columns: [
           DataColumn2(
-            //size: ColumnSize.S,
+            size: ColumnSize.S,
             fixedWidth: DBL.fifty.val,
             label: _columnsView(
                 text: AppString.slNo.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            //size: ColumnSize.L,
-            // fixedWidth: DBL.hundred.val,
+            size: ColumnSize.L,
             label: _columnsView(
                 text: AppString.careRecipientName.val,
                 fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            //size: ColumnSize.L,
-            /* fixedWidth: Responsive.isWeb(context)
-                ? MediaQuery.of(context).size.width / 8
-                : DBL.hundred.val,*/
+            size: ColumnSize.L,
+            label: _columnsView(
+                text: AppString.subscriptionId.val,
+                fontWeight: FontWeight.bold),
+          ),
+          DataColumn2(
+            size: ColumnSize.L,
             label: _columnsView(
                 text: AppString.startDateTime.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            //size: ColumnSize.L,
-            /* fixedWidth: Responsive.isWeb(context)
-                ? MediaQuery.of(context).size.width / 8
-                : DBL.hundred.val,*/
+            size: ColumnSize.L,
             label: _columnsView(
                 text: AppString.endDateAndTime.val,
                 fontWeight: FontWeight.bold),
           ),
-          // DataColumn2(
-          //   //size: ColumnSize.L,
-          //   // fixedWidth: DBL.hundred.val,
-          //   label: _columnsView(
-          //       text: AppString.email.val, fontWeight: FontWeight.bold),
-          // ),
           DataColumn2(
-            //size: ColumnSize.L,
-            //fixedWidth: DBL.hundred.val,
+            size: ColumnSize.M,
             label: _columnsView(
-                text: AppString.subscription.val, fontWeight: FontWeight.bold),
+                text: AppString.subscriptionType.val,
+                fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            label: const CustomText(""),
+            size: ColumnSize.M,
+            label: _columnsView(
+                text: AppString.subscriptionStatus.val,
+                fontWeight: FontWeight.bold),
+          ),
+          const DataColumn2(
+            label: CustomText(""),
           ),
         ],
         rows: _subscriptionBloc.subscriptionList.asMap().entries.map((e) {
@@ -381,6 +481,9 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                 text: '${item.name?.firstName} ${item.name?.lastName}',
               )),
               DataCell(_rowsView(
+                text: item.subscriptionDetails?.subscriptionId,
+              )),
+              DataCell(_rowsView(
                   text: Utility.serviceDate(
                 DateTime.parse(item.subscriptionDetails?.startedAt ?? "")
                     .toLocal(),
@@ -391,15 +494,16 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                       .toLocal(),
                 ),
               )),
-              // DataCell(_rowsView(text: item.email ?? "")),
               DataCell(_rowsView(
                   text: item.subscriptionDetails?.type == '1'
                       ? 'Monthly'
                       : item.subscriptionDetails?.type == '2'
                           ? 'Semi Annual'
                           : "Annually")),
-
-              // DataCell(_statusBox(item.status)),
+              DataCell(_rowsView(
+                  text: item.subscriptionDetails?.isActive == true
+                      ? AppString.active.val
+                      : AppString.inActive.val)),
               DataCell(Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -520,6 +624,147 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
       debugPrint("length ${_subscriptionBloc.subscriptionList.length}");
       debugPrint("limit $_limit");
     }
+  }
+
+  Future<void> _selectFromDate(
+      BuildContext context, SubscriptionState state) async {
+    final DateTime now = DateTime.now();
+    showDatePicker(
+            context: context,
+            initialDate: _subscriptionBloc.selectedToDateTime ?? now,
+            firstDate: _subscriptionBloc.selectedToDateTime
+                    ?.subtract(const Duration(days: 1825)) ??
+                DateTime(DateTime.now().year - 5),
+            lastDate: _subscriptionBloc.selectedToDateTime ??
+                DateTime(DateTime.now().year + 5))
+        .then((value) {
+      if (value != null) {
+        _subscriptionBloc.selectedFromDate =
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+        _subscriptionBloc.selectedFromDateTime = value;
+        if (_subscriptionBloc.selectedFromDate.isNotEmpty &&
+            _subscriptionBloc.selectedToDate.isNotEmpty) {
+          _page = 1;
+          _subscriptionBloc.add(SubscriptionEvent.getSubscription(
+              userId: userId,
+              page: _page.toString(),
+              limit: _limit.toString(),
+              status: _subscriptionBloc.statusId == -1
+                  ? null
+                  : _subscriptionBloc.statusId,
+              startDate: _subscriptionBloc.selectedFromDate,
+              endDate: _subscriptionBloc.selectedToDate,
+              searchTerm: _searchController.text.trim(),
+              subscriptionType: _subscriptionBloc.filterId == 0
+                  ? null
+                  : _subscriptionBloc.filterId));
+        }
+        fromDateController.text =
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+        FocusScope.of(context).unfocus();
+      }
+    });
+  }
+
+  Future<void> _selectToDate(
+      BuildContext context, SubscriptionState state) async {
+    final DateTime now = DateTime.now();
+    showDatePicker(
+            context: context,
+            initialDate: _subscriptionBloc.selectedToDateTime ?? DateTime.now(),
+            firstDate: _subscriptionBloc.selectedFromDateTime ?? DateTime.now(),
+            lastDate: DateTime(DateTime.now().year + 5))
+        .then((value) {
+      if (value != null) {
+        _subscriptionBloc.selectedToDateTime = value;
+        _subscriptionBloc.selectedToDate =
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+        if (_subscriptionBloc.selectedFromDate.isNotEmpty &&
+            _subscriptionBloc.selectedToDate.isNotEmpty) {
+          _page = 1;
+          _subscriptionBloc.add(SubscriptionEvent.getSubscription(
+              userId: userId,
+              page: _page.toString(),
+              limit: _limit.toString(),
+              status: _subscriptionBloc.statusId == -1
+                  ? null
+                  : _subscriptionBloc.statusId,
+              startDate: _subscriptionBloc.selectedFromDate,
+              endDate: _subscriptionBloc.selectedToDate,
+              searchTerm: _searchController.text.trim(),
+              subscriptionType: _subscriptionBloc.filterId == 0
+                  ? null
+                  : _subscriptionBloc.filterId));
+        }
+        toDateController.text =
+            value.toString().parseWithFormat(dateFormat: AppString.ddMMYYY.val);
+        FocusScope.of(context).unfocus();
+        debugPrint("toDatesss ${toDateController.text}");
+      }
+    });
+  }
+
+  CTextField _buildDatePicker(SubscriptionState state,
+      TextEditingController controller, String hintText, Function() onTap) {
+    return CTextField(
+      width: DBL.twoTen.val,
+      height: DBL.fortySeven.val,
+      hintStyle: TS().gRoboto(
+          fontWeight: FW.w400.val,
+          fontSize: FS.font14.val,
+          color: AppColor.columColor2.val),
+      textColor: AppColor.columColor2.val,
+      hintText: hintText,
+      isReadOnly: true,
+      controller: controller,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return AppString.emptyDate.val;
+        }
+        return null;
+      },
+      onTap: onTap,
+      onChanged: (val) {},
+      textInputAction: TextInputAction.next,
+      keyBoardType: TextInputType.text,
+      suffixIcon: CustomSvg(
+        width: DBL.twentyFive.val,
+        height: DBL.twentyFive.val,
+        path: IMG.calenderOutLine.val,
+      ),
+    );
+  }
+
+  _clearAllFiltersButtonWidget() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 20.0),
+      child: CustomSizedBox(
+        height: 46,
+        child: CustomButton(
+          onPressed: () {
+            _page = 1;
+            _searchController.clear();
+            fromDateController.clear();
+            toDateController.clear();
+            _subscriptionBloc.selectedFromDate = '';
+            _subscriptionBloc.selectedToDate = '';
+            _subscriptionBloc.filterId = 0;
+            _subscriptionBloc.statusId = -1;
+            _subscriptionBloc.add(SubscriptionEvent.getSubscription(
+                userId: userId,
+                page: _page.toString(),
+                limit: _limit.toString(),
+                status: null,
+                startDate: "",
+                endDate: "",
+                searchTerm: "",
+                subscriptionType: null));
+            debugPrint("date test ${fromDateController.text}");
+          },
+          text: AppString.clear.val,
+        ),
+      ),
+    );
   }
 
   bool isXs(context) => MediaQuery.of(context).size.width <= 560;

@@ -17,10 +17,13 @@ class SubscriptionRepository implements ISubscriptionRepo {
       required String page,
       required String limit,
       required String searchTerm,
+      required String startDate,
+      required String endDate,
+      dynamic status,
       dynamic subscriptionType}) async {
     try {
-      final response = await _apiClient.getSubscribedClients(
-          userId, page, limit, searchTerm, subscriptionType);
+      final response = await _apiClient.getSubscribedClients(userId, page,
+          limit, searchTerm, startDate, endDate, status, subscriptionType);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log(": ${e.message}");

@@ -58,7 +58,11 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
             Expanded(
               child: RowColonCombo.twoHundred(
                   label: AppString.addressLine1.val,
-                  value: state.response?.data?.address?.first.address ?? '',
+                  value: state.response?.data?.address
+                          ?.where((element) => element.isDefault == true)
+                          .first
+                          .address ??
+                      '',
                   // personalDetails?.addressLine ?? "",
                   fontSize: FS.font13PointFive.val),
             ),
@@ -77,7 +81,11 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
             Expanded(
               child: RowColonCombo.twoHundred(
                   label: AppString.street.val,
-                  value: state.response?.data?.address?.first.streetName ?? '',
+                  value: state.response?.data?.address
+                          ?.where((element) => element.isDefault == true)
+                          .first
+                          .streetName ??
+                      '',
                   fontSize: FS.font13PointFive.val),
             ),
             !isLg(context)
@@ -95,7 +103,11 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
             Expanded(
               child: RowColonCombo.twoHundred(
                   label: AppString.city.val,
-                  value: state.response?.data?.address?.first.city ?? "",
+                  value: state.response?.data?.address
+                          ?.where((element) => element.isDefault == true)
+                          .first
+                          .city ??
+                      '',
                   // personalDetails?.street ?? "",
                   fontSize: FS.font13PointFive.val),
             ),
@@ -114,7 +126,11 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
             Expanded(
               child: RowColonCombo.twoHundred(
                   label: AppString.state.val,
-                  value: state.response?.data?.address?.first.state ?? "",
+                  value: state.response?.data?.address
+                          ?.where((element) => element.isDefault == true)
+                          .first
+                          .state ??
+                      '',
                   // personalDetails?.zip ?? "",
                   fontSize: FS.font13PointFive.val),
             ),
@@ -133,7 +149,11 @@ class SubProfilePersonalDetailsOneView extends StatelessWidget {
             Expanded(
               child: RowColonCombo.twoHundred(
                   label: AppString.zip.val,
-                  value: state.response?.data?.address?.first.zipCode ?? '',
+                  value: state.response?.data?.address
+                          ?.where((element) => element.isDefault == true)
+                          .first
+                          .zipCode ??
+                      '',
                   fontSize: FS.font13PointFive.val),
             ),
             !isLg(context)
