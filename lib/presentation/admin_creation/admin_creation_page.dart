@@ -13,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/admin_creation/admin_creation_bloc.dart';
+import '../../core/custom_snackbar.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
@@ -336,12 +337,15 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
                   isIgnore: _isView!,
+                  inputFormatter: [
+                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Z., ]"))
+                  ],
                   isMandatory: true,
                   labelName: AppString.firstName.val,
                   focusNode: _fNameFocusNode,
                   controller: _fNameController,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value?.trim() == null || value!.trim().isEmpty) {
                       return AppString.emptyFName.val;
                     }
                     return null;
@@ -354,13 +358,16 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
               CustomSizedBox(
                 width: DBL.twoEighty.val,
                 child: DetailsTextFieldWithLabel(
+                  inputFormatter: [
+                    FilteringTextInputFormatter.allow(RegExp("[a-zA-Z., ]"))
+                  ],
                   isIgnore: _isView!,
                   isMandatory: true,
                   labelName: AppString.lastName.val,
                   focusNode: _lNameFocusNode,
                   controller: _lNameController,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value?.trim() == null || value!.trim().isEmpty) {
                       return AppString.emptyLName.val;
                     }
                     return null;
@@ -475,10 +482,10 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
     _adminCreationBloc.add(AdminCreationEvent.dropDownErrorDisplay(
         value: state.selectedRole == null));
     if (_formKey.currentState!.validate() && !state.isDropDownError) {
-      print('id:: ${adminUserID}');
-      if (_isEdit!) {
-        _adminCreationBloc.add(AdminCreationEvent.updateAdmin(
-            adminId: adminId,
+      if (!_isEdit! && _adminCreationBloc.state.pickedProfilePic?.size == 0) {
+        CSnackBar.showError(context, msg: 'Please select a profile picture');
+      } else {
+        _adminCreationBloc.add(AdminCreationEvent.addAdmin(
             userId: adminUserID,
             roleId: state.selectedRole?.id ?? "",
             context: context,
@@ -487,8 +494,10 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
             email: _emailController.text.trim().toLowerCase(),
             mobile: _mobileController.text.trim(),
             profilePic: _adminCreationBloc.profileUrl));
-      } else {
-        _adminCreationBloc.add(AdminCreationEvent.addAdmin(
+      }
+      if (_isEdit!) {
+        _adminCreationBloc.add(AdminCreationEvent.updateAdmin(
+            adminId: adminId,
             userId: adminUserID,
             roleId: state.selectedRole?.id ?? "",
             context: context,

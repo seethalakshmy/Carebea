@@ -17,8 +17,11 @@ class OnboardingSuccessAlert extends StatelessWidget {
       height: DBL.fiveFifty.val,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          const SizedBox(
+            height: 50,
+          ),
           CustomText(
             AppString.onBoardingSuccessful.val,
             style: TS().gRoboto(

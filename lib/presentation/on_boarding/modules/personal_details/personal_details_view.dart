@@ -961,7 +961,6 @@ class _PersonalDetailsViewState extends State<PersonalDetailsView> {
       bloc: formValidationBloc,
       builder: (context, state) {
         return CommonNextOrCancelButtons(
-          showLeftButton: false,
           isLoading: widget.onboardingBloc.state.isLoading,
           leftButtonName: AppString.back.val,
           rightButtonName: AppString.next.val,

@@ -128,7 +128,7 @@ class OnBoardingRepository implements IOnBoardingRepo {
   Future<Either<ApiErrorHandler, LanguageListResponse>> getLanguageList(
       {required String page, required String searchKey}) async {
     try {
-      final response = await apiClient.getLanguageList(page, "15", searchKey);
+      final response = await apiClient.getLanguageList(page, "7100", searchKey);
       return Right(response);
     } on DioError catch (e) {
       CustomLog.log("CareGiverListRepository: ${e.message}");

@@ -400,6 +400,7 @@ class _QualificationViewState extends State<QualificationView> {
                       bloc: _validationBloc,
                       builder: (context, validationState) {
                         return CommonNextOrCancelButtons(
+                          showLeftButton: true,
                           isLoading: widget.onboardingBloc.state.isLoading,
                           rightButtonName: AppString.next.val,
                           leftButtonName: AppString.back.val,

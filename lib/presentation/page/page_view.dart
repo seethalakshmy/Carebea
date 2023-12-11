@@ -174,6 +174,7 @@ class _PageListPage extends State<PageListPage> {
             return DataRow2(
               onTap: () {
                 autoTabRouter?.navigate(RouteCreationRoute(
+                    heading: AppString.updatePolicy.val,
                     id: item.id,
                     title: item.title,
                     description: item.description,
@@ -205,6 +206,7 @@ class _PageListPage extends State<PageListPage> {
                           debugPrint(
                               "description inside view ${item.description}");
                           autoTabRouter?.navigate(RouteCreationRoute(
+                              heading: AppString.updatePolicy.val,
                               id: item.id,
                               title: item.title,
                               description: item.description,
@@ -277,7 +279,8 @@ class _PageListPage extends State<PageListPage> {
   _pageCreate() {
     return CustomButton(
         onPressed: () {
-          autoTabRouter?.navigate(RouteCreationRoute());
+          autoTabRouter
+              ?.navigate(RouteCreationRoute(heading: AppString.createNew.val));
         },
         text: AppString.create.val,
         color: AppColor.primaryColor.val,

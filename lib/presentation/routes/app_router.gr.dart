@@ -291,6 +291,7 @@ abstract class $AppRouter extends _i37.RootStackRouter {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<RouteCreationRouteArgs>(
           orElse: () => RouteCreationRouteArgs(
+                heading: queryParams.optString('heading'),
                 title: queryParams.optString('title'),
                 id: queryParams.optString('id'),
                 description: queryParams.optString('description'),
@@ -301,6 +302,7 @@ abstract class $AppRouter extends _i37.RootStackRouter {
         routeData: routeData,
         child: _i23.PageCreationPage(
           key: args.key,
+          heading: args.heading,
           title: args.title,
           id: args.id,
           description: args.description,
@@ -985,6 +987,7 @@ class RouteListRoute extends _i37.PageRouteInfo<void> {
 class RouteCreationRoute extends _i37.PageRouteInfo<RouteCreationRouteArgs> {
   RouteCreationRoute({
     _i38.Key? key,
+    String? heading,
     String? title,
     String? id,
     String? description,
@@ -995,6 +998,7 @@ class RouteCreationRoute extends _i37.PageRouteInfo<RouteCreationRouteArgs> {
           RouteCreationRoute.name,
           args: RouteCreationRouteArgs(
             key: key,
+            heading: heading,
             title: title,
             id: id,
             description: description,
@@ -1002,6 +1006,7 @@ class RouteCreationRoute extends _i37.PageRouteInfo<RouteCreationRouteArgs> {
             forWhom: forWhom,
           ),
           rawQueryParams: {
+            'heading': heading,
             'title': title,
             'id': id,
             'description': description,
@@ -1020,6 +1025,7 @@ class RouteCreationRoute extends _i37.PageRouteInfo<RouteCreationRouteArgs> {
 class RouteCreationRouteArgs {
   const RouteCreationRouteArgs({
     this.key,
+    this.heading,
     this.title,
     this.id,
     this.description,
@@ -1028,6 +1034,8 @@ class RouteCreationRouteArgs {
   });
 
   final _i38.Key? key;
+
+  final String? heading;
 
   final String? title;
 
@@ -1041,7 +1049,7 @@ class RouteCreationRouteArgs {
 
   @override
   String toString() {
-    return 'RouteCreationRouteArgs{key: $key, title: $title, id: $id, description: $description, isEdit: $isEdit, forWhom: $forWhom}';
+    return 'RouteCreationRouteArgs{key: $key, heading: $heading, title: $title, id: $id, description: $description, isEdit: $isEdit, forWhom: $forWhom}';
   }
 }
 

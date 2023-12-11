@@ -45,6 +45,8 @@ class PreferenceView extends StatelessWidget {
                 context: context,
                 builder: (context) {
                   return CustomAlertDialogWidget(
+                    width: 800,
+                    height: 300,
                     onCloseTap: () {
                       Navigator.pop(context);
                       context.router.navigate(CareGiversRoute());
@@ -94,6 +96,7 @@ class PreferenceView extends StatelessWidget {
                 CustomSizedBox(height: DBL.twenty.val),
                 _knownLanguagesWidget(),
                 CommonNextOrCancelButtons(
+                  showLeftButton: true,
                   isLoading: state.isLoading,
                   leftButtonName: AppString.back.val,
                   rightButtonName: AppString.next.val,

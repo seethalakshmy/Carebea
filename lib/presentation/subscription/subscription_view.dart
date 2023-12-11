@@ -235,7 +235,9 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
         searchTerm: _searchController.text.trim(),
         status: _subscriptionBloc.statusId == -1
             ? null
-            : _subscriptionBloc.statusId,
+            : _subscriptionBloc.statusId == 0
+                ? false
+                : true,
         startDate: _subscriptionBloc.selectedFromDate,
         endDate: _subscriptionBloc.selectedToDate,
         subscriptionType: _subscriptionBloc.filterId == 0
@@ -257,7 +259,9 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
             searchTerm: _searchController.text.trim(),
             status: _subscriptionBloc.statusId == -1
                 ? null
-                : _subscriptionBloc.statusId,
+                : _subscriptionBloc.statusId == 0
+                    ? false
+                    : true,
             startDate: _subscriptionBloc.selectedFromDate,
             endDate: _subscriptionBloc.selectedToDate,
             subscriptionType: _subscriptionBloc.filterId == 0
@@ -329,7 +333,9 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
             searchTerm: _searchController.text.trim(),
             status: _subscriptionBloc.statusId == -1
                 ? null
-                : _subscriptionBloc.statusId,
+                : _subscriptionBloc.statusId == 0
+                    ? false
+                    : true,
             startDate: _subscriptionBloc.selectedFromDate,
             endDate: _subscriptionBloc.selectedToDate,
             subscriptionType: _subscriptionBloc.filterId == 0
@@ -651,7 +657,9 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
               limit: _limit.toString(),
               status: _subscriptionBloc.statusId == -1
                   ? null
-                  : _subscriptionBloc.statusId,
+                  : _subscriptionBloc.statusId == 0
+                      ? false
+                      : true,
               startDate: _subscriptionBloc.selectedFromDate,
               endDate: _subscriptionBloc.selectedToDate,
               searchTerm: _searchController.text.trim(),
@@ -688,7 +696,9 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
               limit: _limit.toString(),
               status: _subscriptionBloc.statusId == -1
                   ? null
-                  : _subscriptionBloc.statusId,
+                  : _subscriptionBloc.statusId == 0
+                      ? false
+                      : true,
               startDate: _subscriptionBloc.selectedFromDate,
               endDate: _subscriptionBloc.selectedToDate,
               searchTerm: _searchController.text.trim(),
