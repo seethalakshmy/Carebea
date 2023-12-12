@@ -3,7 +3,6 @@ import 'package:admin_580_tech/core/utility.dart';
 import 'package:admin_580_tech/domain/user_management_detail/model/client_service_response.dart';
 import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_util.dart';
 import 'package:admin_580_tech/infrastructure/user_management_detail/user_management_detail_repository.dart';
-import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_details_popUp.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_status.dart';
 import 'package:admin_580_tech/presentation/widget/table_loader_view.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -14,7 +13,6 @@ import '../../../application/bloc/service_request_management/service_request_man
 import '../../../core/enum.dart';
 import '../../../core/responsive.dart';
 import '../../../core/text_styles.dart';
-import '../../../infrastructure/service_request_management/service_request_management_repository.dart';
 import '../../../main.dart';
 import '../../service_request_management/widgets/service_details_alert.dart';
 import '../../widget/cached_image.dart';
@@ -104,14 +102,13 @@ class _ServiceViewState extends State<ServiceView> {
   _serviceTable(List<ClientServices> services, BuildContext context) {
     return CSelectionArea(
       child: CDataTable2(
-        minWidth: 950,
-        dividerThickness: .3,
-        headingRowHeight: 48,
-        dataRowHeight: 60,
+        minWidth: DBL.nineFifty.val,
+        dividerThickness: DBL.pointThree.val,
+        headingRowHeight: DBL.fortyEight.val,
+        dataRowHeight: DBL.sixty.val,
         columns: [
           DataColumn2(
             size: ColumnSize.S,
-            fixedWidth: 80,
             label: _columnsView(context,
                 text: AppString.slNo.val, fontWeight: FontWeight.bold),
           ),
@@ -129,7 +126,7 @@ class _ServiceViewState extends State<ServiceView> {
           DataColumn2(
             size: ColumnSize.L,
             label: _columnsView(context,
-                text: AppString.careAmbassador.val,
+                text: AppString.careAmbassadors.val,
                 fontWeight: FontWeight.bold),
           ),
           DataColumn2(
@@ -145,12 +142,12 @@ class _ServiceViewState extends State<ServiceView> {
                 fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.L,
+            size: ColumnSize.S,
             label: _columnsView(context,
                 text: AppString.serviceFee.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.L,
+            size: ColumnSize.S,
             label: _columnsView(context,
                 text: AppString.tip.val, fontWeight: FontWeight.bold),
           ),
@@ -161,12 +158,12 @@ class _ServiceViewState extends State<ServiceView> {
                 fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.L,
+            size: ColumnSize.M,
             label: _columnsView(context,
                 text: AppString.status.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.L,
+            size: ColumnSize.S,
             label: _columnsView(context, text: '', fontWeight: FontWeight.bold),
           ),
         ],
@@ -224,17 +221,23 @@ class _ServiceViewState extends State<ServiceView> {
                       "${item.caregiver?.firstName} ${item.caregiver?.lastName}",
                   imgUrl: item.caregiver?.profilePic ?? "")),
               DataCell(_rowsView(context,
-                  text: Utility.serviceDate(
-                      DateTime.parse(item.startDateTime ?? '').toLocal()))),
+                  text: Utility.generateFormattedDate(
+                      (DateTime.parse(item.startDateTime ?? '')
+                          .toLocal()
+                          .toString())))),
+              // Utility.serviceDate(
+              //     DateTime.parse(item.startDateTime ?? '').toLocal()))),
               DataCell(_rowsView(context,
-                  text: Utility.serviceDate(
-                      DateTime.parse(item.endDateTime ?? '').toLocal()))),
+                  text: Utility.generateFormattedDate(
+                      (DateTime.parse(item.endDateTime ?? '')
+                          .toLocal()
+                          .toString())))),
               DataCell(_rowsView(context,
                   text:
-                      '\$ ${Utility.formatAmount(double.tryParse(item.totalServiceFee.toString() ?? "0.0") ?? 0.0)}')),
+                      '\$ ${Utility.formatAmount(double.tryParse(item.totalServiceFee.toString()) ?? 0.0)}')),
               DataCell(_rowsView(context,
                   text:
-                      '\$ ${Utility.formatAmount(double.tryParse(item.tip.toString() ?? "0.0") ?? 0.0)}')),
+                      '\$ ${Utility.formatAmount(double.tryParse(item.tip.toString()) ?? 0.0)}')),
               DataCell(CustomRatingBar(
                 rating: item.serviceRating ?? 0,
               )),

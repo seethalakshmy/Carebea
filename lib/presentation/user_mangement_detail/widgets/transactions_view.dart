@@ -98,7 +98,8 @@ class TransactionView extends StatelessWidget {
                 text: AppString.client.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.M,
+            fixedWidth: 100,
+            size: ColumnSize.L,
             label: _columnsView(context,
                 text: AppString.transactionType.val,
                 fontWeight: FontWeight.bold),
@@ -109,7 +110,7 @@ class TransactionView extends StatelessWidget {
                 text: AppString.paidFor.val, fontWeight: FontWeight.bold),
           ),
           DataColumn2(
-            size: ColumnSize.L,
+            size: ColumnSize.S,
             label: _columnsView(context,
                 text: AppString.amount.val, fontWeight: FontWeight.bold),
           ),

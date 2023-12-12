@@ -8,6 +8,7 @@ import '../../application/bloc/page/page_bloc.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
 import '../../core/text_styles.dart';
+import '../../core/utility.dart';
 import '../../infrastructure/page/page_repository.dart';
 import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../side_menu/side_menu_page.dart';
@@ -115,22 +116,17 @@ class _PageListPage extends State<PageListPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        LayoutBuilder(builder: (context, constraints) {
-          return _actionView(constraints, context, state);
-        }),
+        // LayoutBuilder(builder: (context, constraints) {
+        //   return _actionView(constraints, context, state);
+        // }),
         // mAdmins.isNotEmpty
         //     ?
-        Column(
-          children: [
-            CustomSizedBox(height: DBL.fifteen.val),
-            CustomSizedBox(
-              height: (_limit + 1) * 48,
-              child: _pagesTable(state, context),
-            ),
-            CustomSizedBox(height: DBL.twenty.val),
-            // if (_totalItems > 10) _paginationView()
-          ],
-        )
+        CustomSizedBox(height: DBL.fifteen.val),
+        CustomSizedBox(
+          height: (_limit + 1) * 48,
+          child: _pagesTable(state, context),
+        ),
+        CustomSizedBox(height: DBL.twenty.val)
         // : EmptyView(title: AppString.emptyadmin.val),
       ],
     );
@@ -159,6 +155,12 @@ class _PageListPage extends State<PageListPage> {
               size: ColumnSize.L,
               label: _tableColumnView(
                 AppString.category.val,
+              ),
+            ),
+            DataColumn2(
+              size: ColumnSize.L,
+              label: _tableColumnView(
+                AppString.lastUpdateDate.val,
               ),
             ),
             DataColumn2(
@@ -191,6 +193,12 @@ class _PageListPage extends State<PageListPage> {
                         : item.pageFor == 2
                             ? AppString.forCa.val
                             : AppString.forWebsite.val)),
+                DataCell(_tableRowView(
+                    "",
+                    Utility.generateFormattedDate(
+                        (DateTime.parse(item.updatedAt ?? '')
+                            .toLocal()
+                            .toString())))),
 
                 // DataCell(_statusBox(item.status ?? false)),
                 DataCell(TableActions(
@@ -248,33 +256,33 @@ class _PageListPage extends State<PageListPage> {
     );
   }
 
-  SingleChildScrollView _actionView(
-      BoxConstraints constraints, BuildContext context, PageState state) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(minWidth: constraints.maxWidth),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CustomSizedBox(
-              width: DBL.ten.val,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // _searchField(),
-                CustomSizedBox(
-                  width: DBL.ten.val,
-                ),
-                _pageCreate()
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  // SingleChildScrollView _actionView(
+  //     BoxConstraints constraints, BuildContext context, PageState state) {
+  //   return SingleChildScrollView(
+  //     scrollDirection: Axis.horizontal,
+  //     child: ConstrainedBox(
+  //       constraints: BoxConstraints(minWidth: constraints.maxWidth),
+  //       child: Row(
+  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //         children: [
+  //           CustomSizedBox(
+  //             width: DBL.ten.val,
+  //           ),
+  //           Row(
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               // _searchField(),
+  //               CustomSizedBox(
+  //                 width: DBL.ten.val,
+  //               ),
+  //               _pageCreate()
+  //             ],
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   _pageCreate() {
     return CustomButton(

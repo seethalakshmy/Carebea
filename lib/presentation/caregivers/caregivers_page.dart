@@ -354,9 +354,11 @@ class _CareGiversPageState extends State<CareGiversPage> {
         _getCareGiverEvent();
       },
       onChanged: (String value) {
-        if (_searchController.text.isEmpty || _searchController.text == '') {
-          _getCareGiverEvent();
-        }
+        _page = 1;
+
+        // if (_searchController.text.isEmpty || _searchController.text == '') {
+        _getCareGiverEvent();
+        // }
       },
       suffixIcon: InkWell(
         onTap: () {

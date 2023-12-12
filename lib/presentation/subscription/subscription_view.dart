@@ -210,9 +210,11 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
         _getSubscriptionEvent();
       },
       onChanged: (String value) {
-        if (_searchController.text == '') {
-          _getSubscriptionEvent();
-        }
+        _page = 1;
+
+        // if (_searchController.text == '') {
+        _getSubscriptionEvent();
+        // }
       },
       suffixIcon: InkWell(
         onTap: () {

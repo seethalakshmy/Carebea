@@ -7,7 +7,6 @@ import '../../../domain/subProfile_details/model/sub_profile_detail_response.dar
 import '../../widget/custom_container.dart';
 import '../../widget/custom_sizedbox.dart';
 import '../../widget/empty_view.dart';
-import '../../widget/error_view.dart';
 import '../../widget/row_combo.dart';
 
 class SubscriptionDetailsView extends StatelessWidget {
@@ -34,7 +33,14 @@ class SubscriptionDetailsView extends StatelessWidget {
   RowColonCombo _planeName(SubscriptionDetails? subscriptionDetails) {
     return RowColonCombo.threeSeventy(
         label: AppString.planName.val,
-        value: subscriptionDetails?.subscriptionPlanFee ?? '',
+        value: '',
+        fontSize: FS.font13PointFive.val);
+  }
+
+  RowColonCombo _planeAmount(SubscriptionDetails? subscriptionDetails) {
+    return RowColonCombo.threeSeventy(
+        label: AppString.planAmount.val,
+        value: '\$ ${subscriptionDetails?.subscriptionPlanFee}' ?? '',
         fontSize: FS.font13PointFive.val);
   }
 
@@ -50,8 +56,20 @@ class SubscriptionDetailsView extends StatelessWidget {
 
   RowColonCombo _recurringDateView(SubscriptionDetails? subscriptionDetails) {
     return RowColonCombo.threeSeventy(
-        label: AppString.recurringTime.val,
+        label: AppString.renewalDate.val,
         value: '',
+        fontSize: FS.font13PointFive.val);
+  }
+
+  RowColonCombo _subscriptionStatus(SubscriptionDetails? subscriptionDetails) {
+    return RowColonCombo.threeSeventy(
+        valueColor: subscriptionDetails?.isActive == false
+            ? AppColor.red.val
+            : AppColor.green.val,
+        label: AppString.subscriptionStatus.val,
+        value: subscriptionDetails?.isActive == true
+            ? AppString.active.val
+            : AppString.inActive.val,
         fontSize: FS.font13PointFive.val);
   }
 
@@ -73,7 +91,15 @@ class SubscriptionDetailsView extends StatelessWidget {
               CustomSizedBox(
                 height: DBL.six.val,
               ),
+              _planeAmount(subscriptionDetails),
+              CustomSizedBox(
+                height: DBL.six.val,
+              ),
               _startDateView(subscriptionDetails),
+              CustomSizedBox(
+                height: DBL.six.val,
+              ),
+              _endDateView(subscriptionDetails),
               CustomSizedBox(
                 height: DBL.six.val,
               ),
@@ -81,7 +107,7 @@ class SubscriptionDetailsView extends StatelessWidget {
               CustomSizedBox(
                 height: DBL.six.val,
               ),
-              _endDateView(subscriptionDetails),
+              _subscriptionStatus(subscriptionDetails),
             ],
           )
         : EmptyView(

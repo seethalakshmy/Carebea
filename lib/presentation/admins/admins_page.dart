@@ -558,9 +558,12 @@ class _AdminsPageState extends State<AdminsPage> {
     );
   }
 
-  TableRowView _tableRowView(String name) {
-    return TableRowView(
-      text: name,
+  Tooltip _tableRowView(String name) {
+    return Tooltip(
+      message: name,
+      child: TableRowView(
+        text: name,
+      ),
     );
   }
 
