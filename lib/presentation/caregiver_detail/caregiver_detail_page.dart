@@ -285,14 +285,12 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
   Column _aboutServiceCompletionColumn(CareGiverDetailResponse response) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Wrap(
+          spacing: DBL.fifteen.val,
           children: [
             serviceCount(response: response),
-            CustomSizedBox(
-              width: DBL.fifteen.val,
-            ),
             cancelledCount(response: response),
+            missedServiceCount(response: response)
           ],
         ),
         SizedBox(
@@ -545,7 +543,7 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
     return ServiceRewardAndCompletion(
       height: height,
       title: response.data?.cancelledRequests.toString() ?? "",
-      subTitle: AppString.canceledRequest.val,
+      subTitle: AppString.totalServicesCanceledByTheCareAmbassador.val,
     );
   }
 
@@ -555,6 +553,15 @@ class _CareGiverDetailPageState extends State<CareGiverDetailPage>
       height: height,
       title: response.data?.serviceCompleted.toString() ?? "",
       subTitle: AppString.serviceCompleted.val,
+    );
+  }
+
+  ServiceRewardAndCompletion missedServiceCount(
+      {double? height, required CareGiverDetailResponse response}) {
+    return ServiceRewardAndCompletion(
+      height: height,
+      title: "",
+      subTitle: AppString.totalMissedServices.val,
     );
   }
 

@@ -367,12 +367,12 @@ class CareGiverScheduleView extends StatelessWidget {
         lastDay: DateTime.utc(2050, 3, 14),
         focusedDay: state.selectedDate,
         calendarBuilders: CalendarBuilders(
-          outsideBuilder: (context, day, focusedDay) {
-            return DateView(
-              color: AppColor.notAvailable.val,
-              value: day.day.toString(),
-            );
-          },
+          // outsideBuilder: (context, day, focusedDay) {
+          //   return DateView(
+          //     color: AppColor.notAvailable.val,
+          //     value: day.day.toString(),
+          //   );
+          // },
           todayBuilder: (context, day, focusedDay) {
             return DateView(
               color: AppColor.primaryColor.val.withOpacity(0.5),

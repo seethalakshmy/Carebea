@@ -104,7 +104,7 @@ class _CareGiverReferenceViewState extends State<CareGiverReferenceView> {
         ),
         RowColonCombo.twoHundred(
             label: AppString.relationship.val,
-            value: e.relationship ?? "",
+            value: e.relationshipDescription ?? e.relationship ?? '',
             fontSize: FS.font13PointFive.val),
         CustomSizedBox(
           height: DBL.eight.val,

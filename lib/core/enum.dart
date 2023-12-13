@@ -254,6 +254,8 @@ enum AppString {
   serviceNeeded("Services Needed"),
   serviceNeededCount("Services Needed Count"),
   canceledRequest("Total Services Canceled By Client"),
+  totalServicesCanceledByTheCareAmbassador(
+      "Total Services Canceled by the Care Ambassador"),
   reviewGiven("Review Given"),
   serviceList("Service List"),
   location("Location"),

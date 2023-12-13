@@ -374,6 +374,7 @@ class Services {
 class Reference {
   String? name;
   String? relationship;
+  String? relationshipDescription;
   String? address;
   String? street;
   String? zip;
@@ -385,6 +386,7 @@ class Reference {
   Reference(
       {this.name,
       this.relationship,
+      this.relationshipDescription,
       this.address,
       this.street,
       this.zip,
@@ -395,6 +397,7 @@ class Reference {
   Reference.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     relationship = json['relationship'];
+    relationshipDescription = json['relationshipDescription'];
     address = json['address'];
     street = json['street'];
     zip = json['zip'];
@@ -407,6 +410,7 @@ class Reference {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
     data['relationship'] = relationship;
+    data['relationshipDescription'] = relationshipDescription;
     data['address'] = address;
     data['street'] = street;
     data['zip'] = zip;

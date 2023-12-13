@@ -84,6 +84,12 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
     return _rebuildView();
   }
 
+  @override
+  void dispose() {
+    _roleController.clear();
+    super.dispose();
+  }
+
   BlocProvider<RoleCreationBloc> _rebuildView() {
     return BlocProvider(
       create: (context) {
@@ -224,30 +230,37 @@ class _RoleCreationPageState extends State<RoleCreationPage> {
             : CustomSizedBox.shrink(),
         CustomSizedBox(width: DBL.twenty.val),
         !_isView!
-            ? CustomButton(
-                isLoading: state.isLoadingButton,
-                text: !_isEdit! ? AppString.save.val : AppString.update.val,
-                borderRadius: DBL.five.val,
-                padding: EdgeInsets.symmetric(
-                    horizontal: DBL.fortyFive.val, vertical: DBL.eighteen.val),
-                onPressed: () {
-                  addSelectedModules(state);
-                  if (_roleController.text.trim().isEmpty) {
-                    CSnackBar.showError(context, msg: AppString.emptyRole.val);
-                  } else if (selectedModules.isEmpty) {
-                    CSnackBar.showError(context,
-                        msg: AppString.emptyModule.val);
-                  } else {
-                    CustomLog.log(
-                        "addSelectedModules:: add ${json.encode(selectedModules)}");
+            ? BlocBuilder<RoleCreationBloc, RoleCreationState>(
+                builder: (context, state) {
+                  return CustomButton(
+                    isLoading: state.isLoadingButton,
+                    text: !_isEdit! ? AppString.save.val : AppString.update.val,
+                    borderRadius: DBL.five.val,
+                    padding: EdgeInsets.symmetric(
+                        horizontal: DBL.fortyFive.val,
+                        vertical: DBL.eighteen.val),
+                    onPressed: () {
+                      state.viewRoleResponse?.data?.name = _roleController.text;
+                      addSelectedModules(state);
+                      if (_roleController.text.trim().isEmpty) {
+                        CSnackBar.showError(context,
+                            msg: AppString.emptyRole.val);
+                      } else if (selectedModules.isEmpty) {
+                        CSnackBar.showError(context,
+                            msg: AppString.emptyModule.val);
+                      } else {
+                        CustomLog.log(
+                            "addSelectedModules:: add ${json.encode(selectedModules)}");
 
-                    roleCreationBloc.add(RoleCreationEvent.addUpdateRole(
-                        roleId: roleId.isEmpty ? "" : roleId,
-                        userId: adminUserID,
-                        role: _roleController.text.trim(),
-                        moduleId: selectedModules,
-                        context: context));
-                  }
+                        roleCreationBloc.add(RoleCreationEvent.addUpdateRole(
+                            roleId: roleId.isEmpty ? "" : roleId,
+                            userId: adminUserID,
+                            role: _roleController.text.trim(),
+                            moduleId: selectedModules,
+                            context: context));
+                      }
+                    },
+                  );
                 },
               )
             : CustomSizedBox.shrink()

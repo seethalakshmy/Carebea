@@ -1,15 +1,3 @@
-import '../../application/bloc/user_management_detail/user_management_detail_bloc.dart';
-import '../../core/custom_debugger.dart';
-import '../../core/enum.dart';
-import '../../core/properties.dart';
-import '../../core/text_styles.dart';
-import '../../domain/user_management_detail/model/user_detail_response.dart';
-import '../../infrastructure/shared_preference/shared_preff_util.dart';
-import '../../infrastructure/user_management_detail/user_management_detail_repository.dart';
-import '../service_request_management/widgets/profile_widget.dart';
-import '../widget/header_view.dart';
-import 'views/payment_method_view.dart';
-import 'views/sub_profile_view.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/service_view.dart';
 import 'package:admin_580_tech/presentation/user_mangement_detail/widgets/transactions_view.dart';
 import 'package:admin_580_tech/presentation/widget/custom_card.dart';
@@ -21,11 +9,21 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../application/bloc/user_management_detail/user_management_detail_bloc.dart';
+import '../../core/custom_debugger.dart';
+import '../../core/enum.dart';
+import '../../core/properties.dart';
 import '../../core/responsive.dart';
+import '../../core/text_styles.dart';
+import '../../domain/user_management_detail/model/user_detail_response.dart';
+import '../../infrastructure/shared_preference/shared_preff_util.dart';
+import '../../infrastructure/user_management_detail/user_management_detail_repository.dart';
 import '../caregiver_detail/widgets/service_completion_and_rewards.dart';
 import '../caregiver_detail/widgets/svg_text.dart';
+import '../service_request_management/widgets/profile_widget.dart';
 import '../side_menu/side_menu_page.dart';
-import '../widget/cached_image.dart';
+import '../widget/header_view.dart';
+import 'views/sub_profile_view.dart';
 
 @RoutePage()
 class UserManagementDetailPage extends StatefulWidget {
