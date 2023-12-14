@@ -203,7 +203,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<VerifyResponse> careGiverCertificateReject(
+  Future<CommonResponse> careGiverCertificateReject(
     token,
     rejectionParams,
   ) async {
@@ -214,7 +214,7 @@ class _ApiClient implements ApiClient {
     final _data = <String, dynamic>{};
     _data.addAll(rejectionParams.toJson());
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<VerifyResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -226,7 +226,7 @@ class _ApiClient implements ApiClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = VerifyResponse.fromJson(_result.data!);
+    final value = CommonResponse.fromJson(_result.data!);
     return value;
   }
 

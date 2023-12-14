@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import '../../widget/alert_text_label.dart';
 import '../../widget/cached_image.dart';
 import '../../widget/custom_rating_bar.dart';
-import '../../widget/custom_svg.dart';
 import '../../widget/row_combo.dart';
 
 class ServiceDetailsPopUp extends StatelessWidget {

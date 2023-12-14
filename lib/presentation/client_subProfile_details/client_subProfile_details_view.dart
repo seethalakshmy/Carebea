@@ -52,6 +52,7 @@ class _ClientSubProfileDetailsPageState
     print('inside sub profile screen');
     adminId = SharedPreffUtil().getAdminId;
     userId = autoTabRouter?.currentChild?.queryParams.getString("id", "") ?? "";
+
     tabController = TabController(vsync: this, length: 7);
     _subProfileDetailBloc = SubProfileDetailBloc(SubProfileDetailRepository());
     super.initState();
@@ -155,8 +156,8 @@ class _ClientSubProfileDetailsPageState
                                               ),
                                               CustomText(
                                                 state.response?.data
-                                                    ?.profileCompletionPercentage
-                                                    .toString() ??
+                                                        ?.profileCompletionPercentage
+                                                        .toString() ??
                                                     '',
                                                 style: TS().gRoboto(
                                                     fontWeight: FW.w500.val,
@@ -174,16 +175,16 @@ class _ClientSubProfileDetailsPageState
                                             LinearPercentIndicator(
                                               padding: const EdgeInsets.all(0),
                                               barRadius:
-                                              const Radius.circular(10),
+                                                  const Radius.circular(10),
                                               width:
-                                              isXs(context) ? 150.0 : 200.0,
+                                                  isXs(context) ? 150.0 : 200.0,
                                               lineHeight: 6.0,
                                               percent: (response?.data
-                                                  ?.profileCompletionPercentage ??
-                                                  0) /
+                                                          ?.profileCompletionPercentage ??
+                                                      0) /
                                                   100,
                                               progressColor:
-                                              AppColor.green2.val,
+                                                  AppColor.green2.val,
                                             ),
                                           ],
                                         ),
@@ -231,6 +232,10 @@ class _ClientSubProfileDetailsPageState
                                                 ),
                                               ),
                                             ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+
                                             // SVGText(
                                             //   path: IMG.location.val,
                                             //   name: response?.data?.location ??

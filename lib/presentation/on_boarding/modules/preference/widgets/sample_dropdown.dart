@@ -161,6 +161,11 @@ class _SampleDropdownState extends State<SampleDropdown> {
                                   widget.onSearchChanged(val);
                                 });
                               },
+                              onFieldSubmitted: (val) {
+                                setState(() {
+                                  widget.onSearchChanged(val);
+                                });
+                              },
                               decoration: const InputDecoration(
                                   hintText: 'Search...',
                                   prefixIcon: Icon(Icons.search),

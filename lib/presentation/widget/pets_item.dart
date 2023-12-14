@@ -23,10 +23,12 @@ class PetItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(DBL.five.val),
               color: inOutStatus == InOut.indoor.val
                   ? AppColor.indoor.val
-                  : AppColor.outdoor.val),
+                  : inOutStatus == InOut.outdoor.val
+                      ? AppColor.outdoor.val
+                      : AppColor.both.val),
           child: Center(
             child: CustomText(
-              "$name(${inOutStatus == InOut.indoor.val ? AppString.inDoor.val : AppString.outDoor.val})",
+              "$name(${inOutStatus == InOut.indoor.val ? AppString.inDoor.val : inOutStatus == InOut.outdoor.val ? AppString.outDoor.val : AppString.both.val})",
               style: TS().gRoboto(
                   fontWeight: FW.w400.val,
                   fontSize: FS.font12.val,

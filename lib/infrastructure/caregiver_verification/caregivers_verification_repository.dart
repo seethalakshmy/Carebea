@@ -11,6 +11,8 @@ import 'package:admin_580_tech/infrastructure/shared_preference/shared_preff_uti
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
+import '../../domain/on_boarding/models/common_response.dart';
+
 class CareGiverVerificationRepository implements ICareGiverVerificationRepo {
   final ApiClient _apiClient = ApiClient();
 
@@ -94,7 +96,7 @@ class CareGiverVerificationRepository implements ICareGiverVerificationRepo {
   }
 
   @override
-  Future<Either<ApiErrorHandler, VerifyResponse>> careGiverCertificateReject(
+  Future<Either<ApiErrorHandler, CommonResponse>> careGiverCertificateReject(
       {required RejectionParams params}) async {
     try {
       final response = await _apiClient.careGiverCertificateReject("", params);

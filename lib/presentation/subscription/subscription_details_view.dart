@@ -97,23 +97,43 @@ class SubscriptionDetailScreen extends StatelessWidget {
                                 ),
                                 InkWell(
                                   onTap: () {
+                                    debugPrint('statusssss ${item.status}');
                                     Navigator.pop(context);
                                     autoTabRouter?.navigate(
                                         ClientSubProfileDetailsRoute(
                                             id: item.id));
                                   },
-                                  child: CustomText(
-                                    (item.name?.firstName ?? '') +
-                                        (item.name?.lastName ?? ''),
-                                    style: TS().gRoboto(
-                                      color: AppColor.rowColor.val,
-                                      fontWeight: FW.w600.val,
-                                      needUnderLine: true,
-                                      fontSize: getFontSize(
-                                        context,
-                                        fontSize: FS.font19.val,
+                                  child: Row(
+                                    children: [
+                                      CustomText(
+                                        (item.name?.firstName ?? '') +
+                                            (item.name?.lastName ?? ''),
+                                        style: TS().gRoboto(
+                                          color: AppColor.rowColor.val,
+                                          fontWeight: FW.w600.val,
+                                          needUnderLine: true,
+                                          fontSize: getFontSize(
+                                            context,
+                                            fontSize: FS.font19.val,
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      CustomText(
+                                          item.status == false
+                                              ? AppString
+                                                  .deletedCareRecipient.val
+                                              : '',
+                                          style: TS().gRoboto(
+                                              color: AppColor.red.val,
+                                              fontWeight: FW.w600.val,
+                                              fontSize: getFontSize(
+                                                context,
+                                                fontSize: FS.font19.val,
+                                              ))),
+                                    ],
                                   ),
                                 ),
                                 CustomText(

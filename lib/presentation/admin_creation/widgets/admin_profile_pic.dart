@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/enum.dart';
+import '../../../core/custom_snackbar.dart';
 import '../../widget/cached_image.dart';
 import '../../widget/commonImageview.dart';
 import '../../widget/custom_alert_dialog_widget.dart';
@@ -80,12 +81,31 @@ class AdminProfilePictureWidget extends StatelessWidget {
                 allowedExtensions: ['jpg', 'png', 'jpeg'],
                 withData: true,
               );
+
               if (result != null) {
                 file = result.files.single;
-              } else {}
+                int? sizeInBytes = file.size;
+                double sizeInMb = sizeInBytes / (1024 * 1024);
+                if (file.extension == 'jpg' ||
+                    file.extension == 'png' ||
+                    file.extension == 'jpeg' ||
+                    file.extension == 'JPG' ||
+                    file.extension == 'PNG' ||
+                    file.extension == 'JPEG') {
+                  if (sizeInMb < 20) {
+                    file = result.files.single;
 
-              adminCreationBloc
-                  .add(AdminCreationEvent.profilePicSelection(file));
+                    adminCreationBloc
+                        .add(AdminCreationEvent.profilePicSelection(file));
+                  } else {
+                    CSnackBar.showError(context,
+                        msg: AppString.fileSizeError.val);
+                  }
+                } else {
+                  CSnackBar.showError(context,
+                      msg: AppString.fileTypeNotSupport.val);
+                }
+              } else {}
             },
             child: Container(
               width: 31,

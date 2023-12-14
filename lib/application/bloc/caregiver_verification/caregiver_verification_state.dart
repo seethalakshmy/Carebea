@@ -11,7 +11,7 @@ class CareGiverVerificationState with _$CareGiverVerificationState {
     required CaregiverVerificationResponse? response,
     required VerifyResponse? backgroundVerifyResponse,
     required VerifyResponse? certificateVerifyApproveResponse,
-    required VerifyResponse? certificateVerifyRejectResponse,
+    required CommonResponse? certificateVerifyRejectResponse,
     required VerifyResponse? sendTrainingResponse,
     required CommonResponseUse? notifyPendingDocumentResponse,
     @Default(false) bool isBackGroundVerificationReasonFieldTapped,

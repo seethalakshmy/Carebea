@@ -58,12 +58,23 @@ class ProfilePictureWidget extends StatelessWidget {
               int? sizeInBytes = file.size;
               double sizeInMb = sizeInBytes / (1024 * 1024);
               debugPrint("size $sizeInMb");
-              if (sizeInMb < 20) {
-                file = result.files.single;
+              if (file.extension == 'jpg' ||
+                  file.extension == 'png' ||
+                  file.extension == 'jpeg' ||
+                  file.extension == 'JPG' ||
+                  file.extension == 'PNG' ||
+                  file.extension == 'JPEG') {
+                if (sizeInMb < 20) {
+                  file = result.files.single;
 
-                onboardingBloc.add(OnboardingEvent.profilePicSelection(file));
+                  onboardingBloc.add(OnboardingEvent.profilePicSelection(file));
+                } else {
+                  CSnackBar.showError(context,
+                      msg: AppString.fileSizeError.val);
+                }
               } else {
-                CSnackBar.showError(context, msg: AppString.fileSizeError.val);
+                CSnackBar.showError(context,
+                    msg: AppString.fileTypeNotSupport.val);
               }
             },
             child: Container(

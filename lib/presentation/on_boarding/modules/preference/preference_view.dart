@@ -32,7 +32,7 @@ class PreferenceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     onboardingBloc.add(const OnboardingEvent.yearsOfExpList());
-    onboardingBloc.add(const OnboardingEvent.petsList(""));
+    onboardingBloc.add(const OnboardingEvent.petsList("", []));
     onboardingBloc.add(const OnboardingEvent.languageList("", []));
     return BlocConsumer<OnboardingBloc, OnboardingState>(
       listener: (context, listenerState) {
@@ -86,7 +86,8 @@ class PreferenceView extends StatelessWidget {
                     ? SampleDropdown(
                         onboardingBloc: onboardingBloc,
                         onSearchChanged: (val) {
-                          onboardingBloc.add(OnboardingEvent.petsList(val));
+                          onboardingBloc.add(OnboardingEvent.petsList(
+                              val, onboardingBloc.petsList));
                         },
                         searchController: petSearchController,
                         petList: onboardingBloc.petsList,

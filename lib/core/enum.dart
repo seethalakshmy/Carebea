@@ -8,6 +8,9 @@ enum AppString {
   pageCreation("Page Creation"),
   notAttempted("Missed"),
   pageManagement("Page Management"),
+  deletedClient("Deleted Client"),
+  deletedCareRecipient("Deleted Care Recipient"),
+  deletedCareAmbassador("Deleted Care Ambassador"),
   createNew("Create New"),
   updatePolicy("Update Policy"),
   profileIncomplete("Profile Incomplete"),
@@ -560,6 +563,7 @@ enum AppString {
   pleaseSelectProfilePicture("please select a profile picture"),
   errorUploadingFile("Error uploading file, Please try again"),
   fileSizeError("File size must be less than 20Mb"),
+  fileTypeNotSupport("File type not support"),
   serviceRequestManagement("Service Request Management"),
   supportTickets("Complaints Management"),
   faq("Faq Management"),
@@ -1083,7 +1087,8 @@ enum Day {
 
 enum InOut {
   indoor(1),
-  outdoor(2);
+  outdoor(2),
+  both(3);
 
   final int val;
 

@@ -13,12 +13,14 @@ import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/custom_snackbar.dart';
+import '../../../domain/caregiver_profile/model/caregiver_profile_response.dart';
 import '../../../domain/core/api_error_handler/api_error_handler.dart';
 import '../../../domain/on_boarding/models/preferences/pet_list_response.dart';
 import '../../../domain/on_boarding/models/preferences/pets_model.dart';
 import '../../../domain/on_boarding/models/preferences/preference_language_model.dart';
 import '../../../domain/on_boarding/models/preferences/years_of_experience_response.dart';
 import '../../../domain/on_boarding/models/services/get_services_response.dart';
+import '../../../domain/subProfile_details/model/sub_profile_detail_response.dart';
 import '../../../infrastructure/on_boarding/on_boarding_repository.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/city_list_response.dart';
 import '../../../presentation/on_boarding/modules/personal_details/models/gender_list_response.dart';
@@ -291,8 +293,9 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
       return state.copyWith(isLoading: false, petListOption: Some(Left(l)));
     }, (r) {
       petsList.clear();
-      petsList
-          .addAll(r.data!.map((e) => PetsModel(e.name ?? "", e.id)).toList());
+      petsList.addAll(r.data!
+          .map((e) => PetsModel(e.name ?? "", e.id))
+          .toList(growable: true));
       return state.copyWith(
           isLoading: false,
           // petsList: r.data!.map((e) => PetsModel(e.name ?? "", e.id)).toList(),

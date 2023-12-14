@@ -69,7 +69,8 @@ class OnboardingEvent with _$OnboardingEvent {
 
   const factory OnboardingEvent.yearsOfExpList() = _YearsOfExp;
 
-  const factory OnboardingEvent.petsList(String petSearchKey) = _GetPetList;
+  const factory OnboardingEvent.petsList(
+      String petSearchKey, List<PetsModel> petList) = _GetPetList;
 
   const factory OnboardingEvent.languageList(String languageSearchKey,
       List<PreferenceLanguageModel> languageList) = _GetLanguageList;

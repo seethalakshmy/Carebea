@@ -495,7 +495,7 @@ class ServiceDetailsAlert extends StatelessWidget {
                 needUnderLine: true,
                 name:
                     "${service.caregiverInfo!.name!.firstName ?? ""} ${service.caregiverInfo!.name!.lastName ?? ""}",
-                subText: AppString.careAmbassador.val,
+                subText: AppString.careAmbassadors.val,
                 onNameTap: () {
                   Navigator.pop(context);
                   autoTabRouter?.navigate(

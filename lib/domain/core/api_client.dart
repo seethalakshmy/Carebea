@@ -135,7 +135,7 @@ abstract class ApiClient {
       @Field('status') bool status);
 
   @POST("/admin/reject-qualification-document")
-  Future<VerifyResponse> careGiverCertificateReject(
+  Future<CommonResponse> careGiverCertificateReject(
       @Header("Authorization") String token,
       @Body() RejectionParams rejectionParams);
 

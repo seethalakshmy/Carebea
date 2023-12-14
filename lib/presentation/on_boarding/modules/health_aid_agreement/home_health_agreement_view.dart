@@ -237,21 +237,33 @@ class _HomeHealthAidAgreementViewState
                   FilePickerResult? result =
                       await FilePicker.platform.pickFiles(
                     type: FileType.custom,
-                    allowedExtensions: [
-                      'jpg',
-                      'png',
-                    ],
+                    allowedExtensions: ['jpg', 'png', 'pdf', 'jpeg'],
                     withData: true,
                   );
                   if (result != null) {
                     setState(() {
                       file = result.files.single;
-                      for (PlatformFile file in result.files) {
-                        bytesList.add(file);
-                        listUpdated = !listUpdated;
-                        if (bytesList.length == 2) {
-                          break;
+                      int? sizeInBytes = file?.size;
+                      double sizeInMb = sizeInBytes! / (1024 * 1024);
+                      if (file?.extension == 'jpg' ||
+                          file?.extension == 'png' ||
+                          file?.extension == 'pdf' ||
+                          file?.extension == 'jpeg') {
+                        if (sizeInMb < 20) {
+                          for (PlatformFile file in result.files) {
+                            bytesList.add(file);
+                            listUpdated = !listUpdated;
+                            if (bytesList.length == 2) {
+                              break;
+                            }
+                          }
+                        } else {
+                          CSnackBar.showError(context,
+                              msg: AppString.fileSizeError.val);
                         }
+                      } else {
+                        CSnackBar.showError(context,
+                            msg: AppString.fileTypeNotSupport.val);
                       }
                     });
                   } else {
