@@ -45,6 +45,7 @@ import '../complaints/model/complaints_list_response_model.dart';
 import '../email_otp_verification/models/verify_otp_response.dart';
 import '../faq/models/faq_list_response_model.dart';
 import '../faq_creation/models/faq_details_response_model.dart';
+import '../forgot_password/model/forgot_password.dart';
 import '../master/model/region_list_response.dart';
 import '../on_boarding/models/common_response.dart';
 import '../on_boarding/models/preferences/pet_list_response.dart';
@@ -844,5 +845,23 @@ abstract class ApiClient {
   @POST('/admin/delete-page')
   Future<CommonResponse> deletePage(
     @Field("id") String id,
+  );
+
+  @POST('/admin/forgotpassword')
+  Future<ForgotPassword> forgotPassword(
+    @Field("email") String email,
+  );
+
+  @POST('/admin/update-password')
+  Future<CommonResponse> resetPassword(
+    @Field("password") String password,
+    @Field("user_id") String userId,
+  );
+
+  @POST('/admin/forgotpassword/verify-Otp')
+  Future<CommonResponse> verifyEmail(
+    @Field("otp") String otp,
+    @Field("user_id") String userId,
+    @Field("type") int type,
   );
 }

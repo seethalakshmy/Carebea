@@ -3324,6 +3324,89 @@ class _ApiClient implements ApiClient {
     return value;
   }
 
+  @override
+  Future<ForgotPassword> forgotPassword(email) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'email': email};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ForgotPassword>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/forgotpassword',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ForgotPassword.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponse> resetPassword(
+    password,
+    userId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'password': password,
+      'user_id': userId,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/update-password',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CommonResponse> verifyEmail(
+    otp,
+    userId,
+    type,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'otp': otp,
+      'user_id': userId,
+      'type': type,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CommonResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/admin/forgotpassword/verify-Otp',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CommonResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

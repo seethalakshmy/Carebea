@@ -57,6 +57,10 @@ class AppRouter extends $AppRouter {
         page: ResetPasswordRoute.page,
         maintainState: false,
         path: '/admin/reset-password'),
+    AutoRoute(
+        page: VerifyEmailRoute.page,
+        maintainState: false,
+        path: '/admin/verify_email'),
     AutoRoute(page: SideMenuRoute.page, path: "/admin/main", children: [
       AutoRoute(
         path: 'dashboard',

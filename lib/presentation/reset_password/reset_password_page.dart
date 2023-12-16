@@ -14,7 +14,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/form_validation/form_validation_bloc.dart';
+import '../../application/bloc/reset_password/reset_password_bloc.dart';
 import '../../core/custom_debugger.dart';
+import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../widget/custom_text_field.dart';
 
 @RoutePage()
@@ -32,6 +34,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   final FormValidationBloc _validationBloc = FormValidationBloc();
   AutovalidateMode _validateMode = AutovalidateMode.disabled;
   final _formKey = GlobalKey<FormState>();
+  bool passwordVisibility = true;
+  bool confirmPasswordVisibility = true;
 
   @override
   void dispose() {
@@ -183,60 +187,95 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
             fontSize: FS.font23.val));
   }
 
-  CTextField _newPasswordFormView() {
-    return CTextField(
-      obscureText: true,
-      width: DBL.fourFifty.val,
-      onChanged: (String value) {},
-      textCapitalization: TextCapitalization.none,
-      textInputAction: TextInputAction.done,
-      controller: _passwordController,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return AppString.emptyPassword.val;
-        } else if (value.length < INT.eight.val) {
-          return AppString.passwordLengthError.val;
-        }
-        return null;
-      },
+  _newPasswordFormView() {
+    return Visibility(
+      child: CTextField(
+        suffixIcon: IconButton(
+          onPressed: () {
+            setState(() {
+              passwordVisibility = !passwordVisibility!;
+            });
+          },
+          icon: Icon(passwordVisibility == false
+              ? Icons.visibility
+              : Icons.visibility_off),
+        ),
+        obscureText: passwordVisibility ? true : false,
+        width: DBL.fourFifty.val,
+        onChanged: (String value) {},
+        textCapitalization: TextCapitalization.none,
+        textInputAction: TextInputAction.done,
+        controller: _passwordController,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return AppString.emptyPassword.val;
+          } else if (value.length < INT.eight.val) {
+            return AppString.passwordLengthError.val;
+          }
+          return null;
+        },
+      ),
     );
   }
 
-  CTextField _confirmPasswordFormView() {
-    return CTextField(
-      obscureText: true,
-      width: DBL.fourFifty.val,
-      onChanged: (String value) {},
-      textCapitalization: TextCapitalization.none,
-      textInputAction: TextInputAction.done,
-      controller: _confirmPasswordController,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return AppString.emptyConfirmPassword.val;
-        } else if (value.trim() != _passwordController.text.trim()) {
-          return AppString.notMatchConfirmPassword.val;
-        }
-        return null;
-      },
+  _confirmPasswordFormView() {
+    return Visibility(
+      child: CTextField(
+        suffixIcon: IconButton(
+          onPressed: () {
+            setState(() {
+              confirmPasswordVisibility = !confirmPasswordVisibility;
+            });
+          },
+          icon: Icon(confirmPasswordVisibility
+              ? Icons.visibility_off
+              : Icons.visibility),
+        ),
+        obscureText: confirmPasswordVisibility ? true : false,
+        width: DBL.fourFifty.val,
+        onChanged: (String value) {},
+        textCapitalization: TextCapitalization.none,
+        textInputAction: TextInputAction.done,
+        controller: _confirmPasswordController,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return AppString.emptyConfirmPassword.val;
+          } else if (value.trim() != _passwordController.text.trim()) {
+            return AppString.notMatchConfirmPassword.val;
+          }
+          return null;
+        },
+      ),
     );
   }
 
   Widget _confirmButton() {
-    return CustomMaterialButton(
-      text: AppString.confirmResetPassword.val,
-      borderRadius: DBL.eight.val,
-      height: DBL.sixty.val,
-      minWidth: DBL.fourFifty.val,
-      color: AppColor.primaryColor.val,
-      onPressed: () {
-        if (_validateMode != AutovalidateMode.always) {
-          _validationBloc.add(const FormValidationEvent.submit());
-        }
-        if (_formKey.currentState!.validate()) {
-          context.router.navigate(const LoginRoute());
-        } else {
-          CustomLog.log("not validated");
-        }
+    return BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
+      builder: (context, state) {
+        return CustomMaterialButton(
+          isLoading: state.isLoading,
+          text: AppString.confirmResetPassword.val,
+          borderRadius: DBL.eight.val,
+          height: DBL.sixty.val,
+          minWidth: DBL.fourFifty.val,
+          color: AppColor.primaryColor.val,
+          onPressed: () {
+            if (_validateMode != AutovalidateMode.always) {
+              _validationBloc.add(const FormValidationEvent.submit());
+            }
+            if (_formKey.currentState!.validate()) {
+              context
+                  .read<ResetPasswordBloc>()
+                  .add(ResetPasswordEvent.resetPassword(
+                    context: context,
+                    password: _passwordController.text,
+                    userId: SharedPreffUtil().getAdminId,
+                  ));
+            } else {
+              CustomLog.log("not validated");
+            }
+          },
+        );
       },
     );
   }

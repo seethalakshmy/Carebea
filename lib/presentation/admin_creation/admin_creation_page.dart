@@ -13,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/admin_creation/admin_creation_bloc.dart';
+import '../../application/bloc/admins/admins_bloc.dart';
 import '../../core/custom_snackbar.dart';
 import '../../core/enum.dart';
 import '../../core/properties.dart';
@@ -33,12 +34,12 @@ import '../widget/header_view.dart';
 
 @RoutePage()
 class AdminCreationPage extends StatefulWidget {
-  const AdminCreationPage(
-      {Key? key,
-      @QueryParam('view') this.isView,
-      @QueryParam('edit') this.isEdit,
-      @QueryParam('id') this.id})
-      : super(key: key);
+  const AdminCreationPage({
+    Key? key,
+    @QueryParam('view') this.isView,
+    @QueryParam('edit') this.isEdit,
+    @QueryParam('id') this.id,
+  }) : super(key: key);
 
   /// To do change :- change these two variables to bool for now getting error like " NoSuchMethodError: 'toLowerCase"  when extracting using auto-route
   final String? isView;
@@ -66,6 +67,7 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
   String adminUserID = "";
   String adminId = "";
   String selectedRole = '';
+  String? firstName;
 
   bool? _isView;
 
@@ -138,7 +140,8 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
 
   _bodyView(BuildContext context, AdminCreationState state) {
     if (state.viewResponse != null) {
-      _fNameController.text = state.viewResponse?.data?.firstName ?? "";
+      firstName = state.viewResponse?.data?.firstName ?? "";
+      _fNameController.text = firstName ?? '';
       _lNameController.text = state.viewResponse?.data?.lastName ?? "";
       _emailController.text = state.viewResponse?.data?.email ?? "";
       _mobileController.text = state.viewResponse?.data?.phoneNumber ?? "";
@@ -453,6 +456,15 @@ class _AdminCreationPageState extends State<AdminCreationPage> {
                           height: DBL.fortyFive.val,
                           minWidth: DBL.oneTwenty.val,
                           onPressed: () async {
+                            firstName = _fNameController.text;
+                            _emailController.text =
+                                state.viewResponse?.data?.email ?? "";
+                            _mobileController.text =
+                                state.viewResponse?.data?.phoneNumber ?? "";
+                            selectedRole =
+                                state.viewResponse?.data?.roleId ?? '';
+                            _adminCreationBloc.profileUrl =
+                                state.viewResponse?.data?.profile ?? '';
                             if (_adminCreationBloc
                                     .state.pickedProfilePic!.size >
                                 0) {

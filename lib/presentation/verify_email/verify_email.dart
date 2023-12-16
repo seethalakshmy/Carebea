@@ -15,26 +15,29 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/forgot_password/forgot_password_bloc.dart';
 import '../../application/bloc/form_validation/form_validation_bloc.dart';
+import '../../application/bloc/verify_email/verify_email_bloc.dart';
+import '../../infrastructure/shared_preference/shared_preff_util.dart';
 import '../routes/app_router.gr.dart';
 import '../widget/custom_text_field.dart';
 
 @RoutePage()
-class ForgotPasswordPage extends StatefulWidget {
-  const ForgotPasswordPage({Key? key}) : super(key: key);
+class VerifyEmailPage extends StatefulWidget {
+  const VerifyEmailPage({Key? key}) : super(key: key);
 
   @override
-  State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
+  State<VerifyEmailPage> createState() => _VerifyEmailPageState();
 }
 
-class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
-  final TextEditingController _usernameController = TextEditingController();
+class _VerifyEmailPageState extends State<VerifyEmailPage> {
+  final TextEditingController _verificationCodeController =
+      TextEditingController();
   final FormValidationBloc _validationBloc = FormValidationBloc();
   AutovalidateMode _validateMode = AutovalidateMode.disabled;
-  final _formKey = GlobalKey<FormState>();
+  final _verificationformKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _verificationCodeController.dispose();
     super.dispose();
   }
 
@@ -54,8 +57,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           );
           return Responsive(
             web: webView(context, size),
-            mobile: _forgotPasswordView(size),
-            tablet: _forgotPasswordView(size),
+            mobile: _verifyEmailView(size),
+            tablet: _verifyEmailView(size),
           );
         },
       ),
@@ -75,7 +78,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   CustomSizedBox _part2View(Size size) {
     return CustomSizedBox(
       width: _getWidth(size),
-      child: _forgotPasswordView(size),
+      child: _verifyEmailView(size),
     );
   }
 
@@ -96,12 +99,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     );
   }
 
-  Center _forgotPasswordView(Size size) {
+  Center _verifyEmailView(Size size) {
     return Center(
       child: SingleChildScrollView(
         child: CSelectionArea(
           child: CForm(
-            formKey: _formKey,
+            formKey: _verificationformKey,
             autoValidateMode: _validateMode,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -109,23 +112,23 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               children: [
                 _logoView(),
                 CustomSizedBox(height: DBL.ten.val),
-                _resetTitle(),
+                _verifyEmailTitle(),
                 CustomSizedBox(
                   height: DBL.five.val,
                 ),
-                _resetDescription(),
+                _description(),
                 CustomSizedBox(
                   height: DBL.twentySeven.val,
                 ),
-                _emailLabel(),
+                _emailVerificationLabel(),
                 CustomSizedBox(
                   height: DBL.eleven.val,
                 ),
-                _emailTextFormView(),
+                _emailVerifyTextFormView(),
                 CustomSizedBox(
                   height: DBL.fifty.val,
                 ),
-                _sendInstructionButton(),
+                _verifyButton(),
               ],
             ),
           ),
@@ -134,8 +137,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     );
   }
 
-  CustomText _resetDescription() {
-    return CustomText(AppString.resetPasswordDescription.val,
+  CustomText _description() {
+    return CustomText(AppString.enterTheCode.val,
         style: TS().gPoppins(
             color: AppColor.subTitleColor.val,
             fontWeight: FW.w400.val,
@@ -149,47 +152,44 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     );
   }
 
-  CustomText _emailLabel() {
-    return CustomText(AppString.emailAddress.val,
+  CustomText _emailVerificationLabel() {
+    return CustomText(AppString.verificationCode.val,
         style: TS().style(
             fontWeight: FW.w400.val,
             color: AppColor.label.val,
             fontSize: DBL.seventeen.val));
   }
 
-  CustomText _resetTitle() {
-    return CustomText(AppString.resetPassword.val,
+  CustomText _verifyEmailTitle() {
+    return CustomText(AppString.verifyEmail.val,
         style: TS().style(
             fontWeight: FW.w400.val,
             color: AppColor.black.val,
             fontSize: FS.font23.val));
   }
 
-  CTextField _emailTextFormView() {
+  CTextField _emailVerifyTextFormView() {
     return CTextField(
       width: DBL.fourFifty.val,
       onChanged: (String value) {},
       textCapitalization: TextCapitalization.none,
       textInputAction: TextInputAction.done,
-      controller: _usernameController,
+      controller: _verificationCodeController,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return AppString.emptyEmail.val;
-        } else if (!RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
-            .hasMatch(value)) {
-          return AppString.validEmail.val;
+          return AppString.emptyOtp.val;
         }
         return null;
       },
     );
   }
 
-  Widget _sendInstructionButton() {
-    return BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+  Widget _verifyButton() {
+    return BlocBuilder<VerifyEmailBloc, VerifyEmailState>(
       builder: (context, state) {
         return CustomMaterialButton(
           isLoading: state.isLoading,
-          text: AppString.sendRestInstructions.val,
+          text: AppString.verifyEmail.val,
           borderRadius: DBL.eight.val,
           height: DBL.sixty.val,
           minWidth: DBL.fourFifty.val,
@@ -199,14 +199,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               _validationBloc.add(const FormValidationEvent.submit());
             }
 
-            CustomLog.log("${_formKey.currentState!.validate()}");
-            if (_formKey.currentState!.validate()) {
-              context
-                  .read<ForgotPasswordBloc>()
-                  .add(ForgotPasswordEvent.forgotPassword(
-                    context: context,
-                    email: _usernameController.text.trim().toLowerCase(),
-                  ));
+            if (_verificationformKey.currentState!.validate()) {
+              context.read<VerifyEmailBloc>().add(VerifyEmailEvent.verifyEmail(
+                  context: context,
+                  otp: _verificationCodeController.text,
+                  userId: SharedPreffUtil().getAdminId,
+                  type: 0));
             } else {
               CustomLog.log("not validated");
             }
